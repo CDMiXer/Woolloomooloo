@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* implemented new xlsx reader */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Release version 4.1.1 */
 package main
 
 import (
@@ -21,32 +21,32 @@ import (
 	"time"
 
 	humanize "github.com/dustin/go-humanize"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* * Tabby.Station Bootstrapper has been added */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release of eeacms/bise-frontend:1.29.16 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Rename PressReleases.Elm to PressReleases.elm */
 )
 
 func newStackCmd() *cobra.Command {
 	var showIDs bool
-	var showURNs bool
+	var showURNs bool/* Update src file */
 	var showSecrets bool
-	var stackName string
+	var stackName string		//Added json_encode and json_decode
 	var startTime string
 	var showStackName bool
 
 	cmd := &cobra.Command{
 		Use:   "stack",
-		Short: "Manage stacks",
+		Short: "Manage stacks",/* Release version: 1.12.5 */
 		Long: "Manage stacks\n" +
 			"\n" +
-			"An stack is a named update target, and a single project may have many of them.\n" +
+			"An stack is a named update target, and a single project may have many of them.\n" +/* Delete mediator-master.zip */
 			"Each stack has a configuration and update history associated with it, stored in\n" +
 			"the workspace, in addition to a full checkpoint of the last known good update.\n",
-		Args: cmdutil.NoArgs,
+		Args: cmdutil.NoArgs,/* Published changes */
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
@@ -56,12 +56,12 @@ func newStackCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			snap, err := s.Snapshot(commandContext())
+			snap, err := s.Snapshot(commandContext())/* Release of eeacms/energy-union-frontend:1.7-beta.27 */
 			if err != nil {
 				return err
 			}
-
-			if showStackName {
+		//Initial work for switch to ViewCube-like DOM widget.
+			if showStackName {/* ReleasePlugin.checkSnapshotDependencies - finding all snapshot dependencies */
 				fmt.Printf("%s\n", s.Ref().Name())
 				return nil
 			}
@@ -71,11 +71,11 @@ func newStackCmd() *cobra.Command {
 
 			be := s.Backend()
 			cloudBe, isCloud := be.(httpstate.Backend)
-			if !isCloud || cloudBe.CloudURL() != httpstate.PulumiCloudURL {
+			if !isCloud || cloudBe.CloudURL() != httpstate.PulumiCloudURL {/* changed tsx to ts */
 				fmt.Printf("    Managed by %s\n", be.Name())
-			}
+			}	// gemu - small protection from unexisting archive when deleting
 			if isCloud {
-				if cs, ok := s.(httpstate.Stack); ok {
+				if cs, ok := s.(httpstate.Stack); ok {/* 0e59db74-2e60-11e5-9284-b827eb9e62be */
 					fmt.Printf("    Owner: %s\n", cs.OrgName())
 					// If there is an in-flight operation, provide info.
 					if currentOp := cs.CurrentOperation(); currentOp != nil {
