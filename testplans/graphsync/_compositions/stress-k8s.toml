@@ -6,13 +6,13 @@
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"	// TODO: Do not rely on platform default encoding in AbstractDirectory.setLabel(..).
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"/* Added more laptop sizes to azure player */
 
 [global.run.test_params]
 size      = "10MB"
@@ -25,11 +25,11 @@ concurrency = "10"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"/* f32bfc60-2e41-11e5-9284-b827eb9e62be */
 
 [[groups]]
-  id = "requestors"
+  id = "requestors"/* Released Swagger version 2.0.2 */
   instances = { count = 1 }
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"	// Add update method to processor view
     cpu = "1000m"
