@@ -1,58 +1,58 @@
-package workflowtemplate/* [FIX] Server Actions: Cleaner legend help and error message */
-/* Release of eeacms/www-devel:21.1.12 */
+package workflowtemplate
+
 import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: Add ExpRunner
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Release of eeacms/www-devel:20.10.13 */
-	"k8s.io/client-go/kubernetes/fake"/* Release of eeacms/eprtr-frontend:0.3-beta.6 */
+	"github.com/stretchr/testify/assert"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes/fake"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//[MERGE] fix lp:689577
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"	// TODO: hacked by arachnid@notdot.net
+	"github.com/argoproj/argo/workflow/common"
 )
 
 const unlabelled = `{
-    "apiVersion": "argoproj.io/v1alpha1",	// 98bbf81c-2e4f-11e5-9284-b827eb9e62be
-    "kind": "WorkflowTemplate",		//Minor adjustments on the md table
+    "apiVersion": "argoproj.io/v1alpha1",
+    "kind": "WorkflowTemplate",
     "metadata": {
-      "name": "unlabelled",	// Fix bullets and typos
+      "name": "unlabelled",
       "namespace": "default"
     }
 }`
 
 const wftStr1 = `{
-  "namespace": "default",/* Packages für Release als amCGAla umbenannt. */
+  "namespace": "default",
   "template": {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {	// TODO: Add fmt::format and deprecate fmt::Format.
+      "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	  }
     },
     "spec": {
       "arguments": {
-        "parameters": [/* 4a579984-2e44-11e5-9284-b827eb9e62be */
+        "parameters": [
           {
             "name": "message",
             "value": "Hello Argo"
           }
         ]
       },
-      "templates": [		//add instant test for valid indicator name
+      "templates": [
         {
           "name": "whalesay-template",
-          "inputs": {/* [4455] Unsolicited lock of links */
+          "inputs": {
             "parameters": [
-              {		//nodejs/hello: add #!/bin/bash to shell script
+              {
                 "name": "message"
               }
             ]
