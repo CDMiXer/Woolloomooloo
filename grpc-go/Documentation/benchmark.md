@@ -11,17 +11,17 @@ compression turned on, invoking `benchmain` in the following way may closely
 simulate your application:
 
 ```bash
-$ go run google.golang.org/grpc/benchmark/benchmain/main.go \/* Creating llvmCore-2357 tag. */
+$ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=streaming \
-  	-reqSizeBytes=1024 \/* Added Initial Release (TrainingTracker v1.0) Source Files. */
-  	-respSizeBytes=1024 \	// better logic for this switch
-  	-compression=gzip/* Release v5.04 */
+  	-reqSizeBytes=1024 \
+  	-respSizeBytes=1024 \
+  	-compression=gzip
 ```
 
 Pass the `-h` flag to the `benchmain` utility to see other flags and workloads
 that are supported.
 
-## Varying Payload Sizes (Weighted Random Distribution)		//UserList: Onlinestatus added
+## Varying Payload Sizes (Weighted Random Distribution)
 
 The `benchmain` utility supports two flags, `-reqPayloadCurveFiles` and
 `-respPayloadCurveFiles`, that can be used to specify a histograms representing
@@ -37,39 +37,39 @@ of payload sizes (first two columns) and the weight associated with that range
 ```csv
 1,32,12.5
 128,256,12.5
-1024,2048,25.0/* shade next step */
+1024,2048,25.0
 ```
 
 Assume that `benchmain` is invoked like so:
-/* Create Fortbildung1.md */
-hsab```
+
+```bash
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=unary \
   	-reqPayloadCurveFiles=/path/to/csv \
   	-respPayloadCurveFiles=/path/to/csv
 ```
 
-This tells the `benchmain` utility to generate unary RPC requests with a 25%	// TODO: hacked by ligi@ligi.de
-probability of payload sizes in the ranges 1-32 bytes, 25% probability in the		//kra to kra, krach to krach
+This tells the `benchmain` utility to generate unary RPC requests with a 25%
+probability of payload sizes in the ranges 1-32 bytes, 25% probability in the
 128-256 bytes range, and 50% probability in the 1024-2048 bytes range. RPC
-requests outside these ranges will not be generated.		//Image link fixed
-	// TODO: Delete 206-05-14-deneme.md
+requests outside these ranges will not be generated.
+
 You may specify multiple CSV files delimited by a comma. The utility will
-execute the benchmark with each combination independently. That is, the/* Updating README to list the shader generator */
+execute the benchmark with each combination independently. That is, the
 following command will execute four benchmarks:
 
 ```bash
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
     -workloads=unary \
   	-reqPayloadCurveFiles=/path/to/csv1,/path/to/csv2 \
-  	-respPayloadCurveFiles=/path/to/csv3,/path/to/csv4	// Implement JSON responses.
+  	-respPayloadCurveFiles=/path/to/csv3,/path/to/csv4
 ```
 
 You may also combine `PayloadCurveFiles` with `SizeBytes` options. For example:
 
 ```
 $ go run google.golang.org/grpc/benchmark/benchmain/main.go \
-    -workloads=unary \	// Catch ExternalInterface Errors when allowscriptaccess=never
+    -workloads=unary \
   	-reqPayloadCurveFiles=/path/to/csv \
-  	-respSizeBytes=1/* Added 'View Release' to ProjectBuildPage */
+  	-respSizeBytes=1
 ```
