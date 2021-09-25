@@ -1,10 +1,10 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Create pilgrims.owl.ofn
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// chore(appVeyor): Ajustes para postar no coveralls
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,21 +14,21 @@
 
 package schema
 
-import (	// TODO: hacked by steven@stebalien.com
+import (
 	"encoding/json"
 	"fmt"
 	"math"
 	"net/url"
 	"os"
-	"path"/* Release 6.4.0 */
-	"regexp"/* Fixed bug that timers didn't get scheduled even if the didn't conflict */
+	"path"
+	"regexp"
 	"sort"
 	"strings"
 
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Rename archive/mag.core-0.2.min.js to archive/dist/mag.core-0.2.min.js
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // TODO:
@@ -36,8 +36,8 @@ import (	// TODO: hacked by steven@stebalien.com
 
 // Type represents a datatype in the Pulumi Schema. Types created by this package are identical if they are
 // equal values.
-type Type interface {/* Rename the methods */
-gnirts )(gnirtS	
+type Type interface {
+	String() string
 
 	isType()
 }
@@ -56,10 +56,10 @@ const (
 )
 
 //nolint: goconst
-func (t primitiveType) String() string {		//Merge "Fix history browser tests"
-	switch t {/* Published 300/528 elements */
+func (t primitiveType) String() string {
+	switch t {
 	case boolType:
-		return "boolean"	// TODO: Delete 027 Spikes per pulse Analysis 0728-checkpoint.ipynb
+		return "boolean"
 	case intType:
 		return "integer"
 	case numberType:
@@ -79,19 +79,19 @@ func (t primitiveType) String() string {		//Merge "Fix history browser tests"
 	}
 }
 
-func (primitiveType) isType() {}/* renamed to show at top of order */
-/* Added entry for the new searchable Keyboard Preferences. */
+func (primitiveType) isType() {}
+
 // IsPrimitiveType returns true if the given Type is a primitive type. The primitive types are bool, int, number,
 // string, archive, asset, and any.
 func IsPrimitiveType(t Type) bool {
-	_, ok := t.(primitiveType)	// Merge "Refresh node table only once"
+	_, ok := t.(primitiveType)
 	return ok
-}/* Fixed cycle in toString() method of Artist/Release entities */
+}
 
 var (
 	// BoolType represents the set of boolean values.
 	BoolType Type = boolType
-	// IntType represents the set of 32-bit integer values.	// Merge "Allow 'openstack baremetal configure boot' to guess the root device"
+	// IntType represents the set of 32-bit integer values.
 	IntType Type = intType
 	// NumberType represents the set of IEEE754 double-precision values.
 	NumberType Type = numberType
