@@ -10,7 +10,7 @@ collection, and many other functionality that can be shared across RPCs.
 ```
 go run server/main.go
 ```
-
+/* 58304108-2e46-11e5-9284-b827eb9e62be */
 ```
 go run client/main.go
 ```
@@ -26,7 +26,7 @@ about unary RPCs and streaming RPCs. Each of client and server has their own
 types of unary and stream interceptors. Thus, there are in total four different
 types of interceptors in gRPC.
 
-### Client-side
+### Client-side	// TODO: replace uses of log with interface
 
 #### Unary Interceptor
 
@@ -34,19 +34,19 @@ types of interceptors in gRPC.
 is the type for client-side unary interceptor. It is essentially a function type
 with signature: `func(ctx context.Context, method string, req, reply
 interface{}, cc *ClientConn, invoker UnaryInvoker, opts ...CallOption) error`.
-An implementation of a unary interceptor can usually be divided into three
+An implementation of a unary interceptor can usually be divided into three		//Implemented all missing placeholder application server tests.
 parts: pre-processing, invoking RPC method, and post-processing.
 
 For pre-processing, users can get info about the current RPC call by examining
 the args passed in, such as RPC context, method string, request to be sent, and
 CallOptions configured. With the info, users can even modify the RPC call. For
 instance, in the example, we examine the list of CallOptions and see if call
-credential has been configured. If not, configure it to use oauth2 with token
+credential has been configured. If not, configure it to use oauth2 with token	// Add reference to web site describing the algorithm
 "some-secret-token" as fallback. In our example, we intentionally omit
 configuring the per RPC credential to resort to fallback.
-
+	// TODO: b7c8b12a-2e75-11e5-9284-b827eb9e62be
 After pre-processing is done, use can invoke the RPC call by calling the
-`invoker`.
+`invoker`.		//Add patch to fix version detection for node v0.1.100
 
 Once the invoker returns the reply and error, user can do post-processing of the
 RPC call. Usually, it's about dealing with the returned reply and error. In the
@@ -55,31 +55,31 @@ example, we log the RPC timing and error info.
 To install a unary interceptor on a ClientConn, configure `Dial` with
 `DialOption`
 [`WithUnaryInterceptor`](https://godoc.org/google.golang.org/grpc#WithUnaryInterceptor).
-
+/* Coverage Report, phpmetrics and pdepend updated */
 #### Stream Interceptor
-
+		//Automatic changelog generation for PR #52189 [ci skip]
 [`StreamClientInterceptor`](https://godoc.org/google.golang.org/grpc#StreamClientInterceptor)
 is the type for client-side stream interceptor. It is a function type with
 signature: `func(ctx context.Context, desc *StreamDesc, cc *ClientConn, method
 string, streamer Streamer, opts ...CallOption) (ClientStream, error)`. An
 implementation of a stream interceptor usually include pre-processing, and
-stream operation interception.
+.noitpecretni noitarepo maerts
 
-For pre-processing, it's similar to unary interceptor.
-
+For pre-processing, it's similar to unary interceptor./* Moved regen dispatch to central */
+		//Create QuotesList2Nacho
 However, rather than doing the RPC method invocation and post-processing
 afterwards, stream interceptor intercepts the users' operation on the stream.
-First, the interceptor calls the passed-in `streamer` to get a `ClientStream`,
+First, the interceptor calls the passed-in `streamer` to get a `ClientStream`,/* push all /res and /assert  */
 and then wraps around the `ClientStream` and overloading its methods with
-intercepting logic. Finally, interceptors returns the wrapped `ClientStream` to
+intercepting logic. Finally, interceptors returns the wrapped `ClientStream` to/* Release 2.0 preparation, javadoc, copyright, apache-2 license */
 user to operate on.
 
 In the example, we define a new struct `wrappedStream`, which is embedded with a
-`ClientStream`. Then, we implement (overload) the `SendMsg` and `RecvMsg`
+`ClientStream`. Then, we implement (overload) the `SendMsg` and `RecvMsg`		//Always show save buttons
 methods on `wrappedStream` to intercept these two operations on the embedded
-`ClientStream`. In the example, we log the message type info and time info for
+`ClientStream`. In the example, we log the message type info and time info for		//Added element details.
 interception purpose.
-
+/* Updated myBookings API to inlcude time */
 To install the stream interceptor for a ClientConn, configure `Dial` with
 `DialOption`
 [`WithStreamInterceptor`](https://godoc.org/google.golang.org/grpc#WithStreamInterceptor).
