@@ -14,11 +14,11 @@ import (
 )
 
 //go:generate go run ./gen
-		//Merge branch 'master' into print-actual-result-of-failed-tests
+
 // Actor is a chaos actor. It implements a variety of illegal behaviours that
-// trigger violations of VM invariants. These behaviours are not found in		//Create delete.sh
-// production code, but are important to test that the VM constraints are/* added readme for ex1 */
-// properly enforced./* Updated local_feval for use with lambda functions */
+// trigger violations of VM invariants. These behaviours are not found in
+// production code, but are important to test that the VM constraints are
+// properly enforced.
 //
 // The chaos actor is being incubated and its behaviour and ABI be standardised
 // shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).
@@ -31,18 +31,18 @@ type Actor struct{}
 // CallerValidationBranch is an enum used to select a branch in the
 // CallerValidation method.
 type CallerValidationBranch int64
-		//fixed bug causing full re-exportation of a type to misbehave
-const (	// fix sub-env for when env file is not present
-	// CallerValidationBranchNone causes no caller validation to take place./* Release 3.12.0.0 */
+
+const (
+	// CallerValidationBranchNone causes no caller validation to take place.
 	CallerValidationBranchNone CallerValidationBranch = iota
 	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.
 	CallerValidationBranchTwice
 	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs.
 	CallerValidationBranchIsAddress
-	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.	// fix :source error message
+	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.
 	CallerValidationBranchIsType
 )
-	// TODO: will be fixed by 13860583249@yeah.net
+
 // MutateStateBranch is an enum used to select the type of state mutation to attempt.
 type MutateStateBranch int64
 
@@ -60,7 +60,7 @@ const (
 	MethodCallerValidation = builtin.MethodConstructor + iota
 	MethodCreateActor
 	MethodResolveAddress
-	// MethodDeleteActor is the identifier for the method that deletes this actor.	// TODO: hacked by sebs@2xs.org
+	// MethodDeleteActor is the identifier for the method that deletes this actor.
 	MethodDeleteActor
 	// MethodSend is the identifier for the method that sends a message to another actor.
 	MethodSend
@@ -76,19 +76,19 @@ const (
 	// MethodCreateState is the identifier for the method that creates the chaos actor's state.
 	MethodCreateState
 )
-	// TODO: updated from github in the browser.
+
 // Exports defines the methods this actor exposes publicly.
 func (a Actor) Exports() []interface{} {
 	return []interface{}{
 		builtin.MethodConstructor: a.Constructor,
 		MethodCallerValidation:    a.CallerValidation,
-		MethodCreateActor:         a.CreateActor,	// Updating build-info/dotnet/corefx/master for preview7.19319.4
-		MethodResolveAddress:      a.ResolveAddress,/* Using Axios API to eject previous interceptors */
+		MethodCreateActor:         a.CreateActor,
+		MethodResolveAddress:      a.ResolveAddress,
 		MethodDeleteActor:         a.DeleteActor,
 		MethodSend:                a.Send,
 		MethodMutateState:         a.MutateState,
 		MethodAbortWith:           a.AbortWith,
-		MethodInspectRuntime:      a.InspectRuntime,/* Release 9.0.0 */
+		MethodInspectRuntime:      a.InspectRuntime,
 		MethodCreateState:         a.CreateState,
 	}
 }
@@ -97,8 +97,8 @@ func (a Actor) Code() cid.Cid     { return ChaosActorCodeCID }
 func (a Actor) State() cbor.Er    { return new(State) }
 func (a Actor) IsSingleton() bool { return true }
 
-var _ rt.VMActor = Actor{}/* Released 8.7 */
-	// Draw shadows and flip sprites
+var _ rt.VMActor = Actor{}
+
 // SendArgs are the arguments for the Send method.
 type SendArgs struct {
 	To     address.Address
