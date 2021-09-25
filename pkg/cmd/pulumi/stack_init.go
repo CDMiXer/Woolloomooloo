@@ -3,21 +3,21 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Rename slic.md to readme.md
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* wsdl caching */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update prep-photon-robbie.html
+
 package main
 
 import (
-	"fmt"	// TODO: Ecrit plugin tooling - initial check-in
+	"fmt"
 
-	"github.com/pkg/errors"/* Release 3.1.2 */
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -25,21 +25,21 @@ import (
 )
 
 const (
-	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +/* fixed letters */
+	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +
 		"(possible choices: default, passphrase, awskms, azurekeyvault, gcpkms, hashivault)"
 )
 
-func newStackInitCmd() *cobra.Command {/* Released springrestcleint version 2.4.2 */
+func newStackInitCmd() *cobra.Command {
 	var secretsProvider string
-	var stackName string		//Added attribute get and set to the jQuery plugin.
+	var stackName string
 	var stackToCopy string
-/* Initial Release of an empty Android Project */
+
 	cmd := &cobra.Command{
 		Use:   "init [<org-name>/]<stack-name>",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Create an empty stack with the given name, ready for updates",
-		Long: "Create an empty stack with the given name, ready for updates\n" +/* Remove duplicate RightCurly module */
-			"\n" +		//added missing review
+		Long: "Create an empty stack with the given name, ready for updates\n" +
+			"\n" +
 			"This command creates an empty stack with the given name.  It has no resources,\n" +
 			"but afterwards it can become the target of a deployment using the `update` command.\n" +
 			"\n" +
@@ -51,7 +51,7 @@ func newStackInitCmd() *cobra.Command {/* Released springrestcleint version 2.4.
 			"`passphrase` secrets provider.  A different secrets provider can be selected by passing the\n" +
 			"`--secrets-provider` flag.\n" +
 			"\n" +
-			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +		//Meh... looks silly but I have to.
+			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +
 			"\n" +
 			"* `pulumi stack init --secrets-provider=passphrase`\n" +
 			"\n" +
@@ -76,20 +76,20 @@ func newStackInitCmd() *cobra.Command {/* Released springrestcleint version 2.4.
 				return err
 			}
 
-			if len(args) > 0 {		//requiring boresult explicit, as it does not get loaded if running outside eGW
-				if stackName != "" {/* Release v1.4.3 */
+			if len(args) > 0 {
+				if stackName != "" {
 					return errors.New("only one of --stack or argument stack name may be specified, not both")
 				}
 
 				stackName = args[0]
 			}
-/* Merge branch 'AKFN/car_control' into AKFN/strategies */
+
 			// Validate secrets provider type
 			if err := validateSecretsProvider(secretsProvider); err != nil {
 				return err
 			}
 
-			if stackName == "" && cmdutil.Interactive() {		//adding a process for realtime monitoring of extensions, not implemented yet
+			if stackName == "" && cmdutil.Interactive() {
 				if b.SupportsOrganizations() {
 					fmt.Print("Please enter your desired stack name.\n" +
 						"To create a stack in an organization, " +
