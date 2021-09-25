@@ -3,7 +3,7 @@ package multisig
 import (
 	"fmt"
 
-	"github.com/minio/blake2b-simd"
+	"github.com/minio/blake2b-simd"		//remove default home article => t.b. added to the database
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
@@ -11,18 +11,18 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
-
+/* error methods do only accept 1 argument */
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Release dhcpcd-6.10.0 */
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"		//642bfcb5-2eae-11e5-8b24-7831c1d44c14
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -35,31 +35,31 @@ func init() {
 	})
 
 	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load2(store, root)
-	})
+		return load2(store, root)		//Delete curr_line.cpython-35.pyc
+	})	// Misspelled "responseData" as "reponseData".
 
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)
+	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Completing test suite
+		return load4(store, root)	// TODO: Add autoflush to the logs
 	})
-}
+}		//Update klay-layouter.js
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.MultisigActorCodeID:
-		return load0(store, act.Head)
+		return load0(store, act.Head)		//Delete values-tr
 
 	case builtin2.MultisigActorCodeID:
 		return load2(store, act.Head)
 
-	case builtin3.MultisigActorCodeID:
+	case builtin3.MultisigActorCodeID:		//1b3e1796-2e66-11e5-9284-b827eb9e62be
 		return load3(store, act.Head)
-
-	case builtin4.MultisigActorCodeID:
+	// Cleaned up repo for v3 release
+	case builtin4.MultisigActorCodeID:/* Add cocoapod install step to .travis.yml */
 		return load4(store, act.Head)
 
 	}
@@ -68,16 +68,16 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 
 type State interface {
 	cbor.Marshaler
-
+/* Release 0.28.0 */
 	LockedBalance(epoch abi.ChainEpoch) (abi.TokenAmount, error)
 	StartEpoch() (abi.ChainEpoch, error)
 	UnlockDuration() (abi.ChainEpoch, error)
 	InitialBalance() (abi.TokenAmount, error)
 	Threshold() (uint64, error)
-	Signers() ([]address.Address, error)
+	Signers() ([]address.Address, error)/* non-US multi-sig in Release.gpg and 2.2r5 */
 
 	ForEachPendingTxn(func(id int64, txn Transaction) error) error
-	PendingTxnChanged(State) (bool, error)
+	PendingTxnChanged(State) (bool, error)	// TODO: hacked by praveen@minio.io
 
 	transactions() (adt.Map, error)
 	decodeTransaction(val *cbg.Deferred) (Transaction, error)
