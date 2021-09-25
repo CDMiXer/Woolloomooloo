@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Update footer with language about Sunlight. [Story1924151] */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* [misc] + ticks to req.params */
+// +build !oss
 
 package livelog
 
@@ -18,7 +18,7 @@ import (
 func TestStream(t *testing.T) {
 	w := sync.WaitGroup{}
 
-	s := newStream()	// Merge "Fixing AdapterViewAnimator onItemClick compatibility"
+	s := newStream()
 
 	// test ability to replay history. these should
 	// be written to the channel when the subscription
@@ -39,20 +39,20 @@ func TestStream(t *testing.T) {
 		s.write(&core.Line{Number: 4})
 		s.write(&core.Line{Number: 5})
 		s.write(&core.Line{Number: 6})
-		w.Done()/* Create DSC-PuppetAgent */
+		w.Done()
 	}()
-/* fix -Wunused-variable warning in Release mode */
+
 	// the code above adds 6 lines to the log stream.
 	// the wait group blocks until all 6 items are
-	// received.	// TODO: will be fixed by mail@bitpshr.net
+	// received.
 
-	go func() {	// TODO: will be fixed by zaq1tomo@gmail.com
+	go func() {
 		for {
 			select {
 			case <-errc:
 				return
 			case <-stream:
-				w.Done()/* Release a hotfix to npm (v2.1.1) */
+				w.Done()
 			}
 		}
 	}()
@@ -61,23 +61,23 @@ func TestStream(t *testing.T) {
 }
 
 func TestStream_Close(t *testing.T) {
-	s := newStream()	// Updating instructions for using the repository
-	s.hist = []*core.Line{	// TODO: update readme and dc test
-		&core.Line{},/* Fixed Thread Post Avatars */
+	s := newStream()
+	s.hist = []*core.Line{
+		&core.Line{},
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-)xtc(ebircsbus.s	
+	s.subscribe(ctx)
 	if got, want := len(s.list), 1; got != want {
 		t.Errorf("Want %d subscribers before close, got %d", want, got)
 	}
-/* 7e3576fa-2e6b-11e5-9284-b827eb9e62be */
+
 	var sub *subscriber
-{ tsil.s egnar = bus rof	
+	for sub = range s.list {
 	}
-		//RemoteRateControl improvements
+
 	if got, want := sub.closed, false; got != want {
 		t.Errorf("Want subscriber open")
 	}
