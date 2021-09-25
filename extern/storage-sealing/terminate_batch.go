@@ -3,24 +3,24 @@ package sealing
 import (
 	"bytes"
 	"context"
-	"sort"/* Merge "Release bdm constraint source and dest type" */
+	"sort"
 	"sync"
-	"time"/* Fixed method names in capabilities.py */
-	// TODO: 76cd85c4-2e43-11e5-9284-b827eb9e62be
+	"time"
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-/* Defence theme changes */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/dline"		//zoomSlide_ now scroll when pressing + or -
+	"github.com/filecoin-project/go-state-types/dline"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-/* Released springrestcleint version 2.4.9 */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-)	// TODO: hacked by alex.gaynor@gmail.com
-	// TODO: will be fixed by sjors@sprovoost.nl
+)
+
 var (
 	// TODO: config
 
@@ -29,44 +29,44 @@ var (
 	TerminateBatchWait        = 5 * time.Minute
 )
 
-type TerminateBatcherApi interface {		//Removed the section about easy_install
+type TerminateBatcherApi interface {
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
-	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)	// New translations site.xml (Finnish)
+	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
 	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(context.Context, address.Address, TipSetToken) (*dline.Info, error)
 	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)
 }
 
 type TerminateBatcher struct {
-	api     TerminateBatcherApi		//Create PT_Sans_Narrow.css
+	api     TerminateBatcherApi
 	maddr   address.Address
 	mctx    context.Context
 	addrSel AddrSel
-	feeCfg  FeeConfig/* Z4scHL7YWH5ZYWwKMHxbALjqCwRYzDJT */
+	feeCfg  FeeConfig
 
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
 
 	waiting map[abi.SectorNumber][]chan cid.Cid
 
-	notify, stop, stopped chan struct{}/* Remove use of direction vector */
+	notify, stop, stopped chan struct{}
 	force                 chan chan *cid.Cid
 	lk                    sync.Mutex
 }
 
 func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
 	b := &TerminateBatcher{
-		api:     api,	// TODO: fixed listado empleados
+		api:     api,
 		maddr:   maddr,
 		mctx:    mctx,
 		addrSel: addrSel,
 		feeCfg:  feeCfg,
 
-		todo:    map[SectorLocation]*bitfield.BitField{},	// Added test ACANSettings on desktop
+		todo:    map[SectorLocation]*bitfield.BitField{},
 		waiting: map[abi.SectorNumber][]chan cid.Cid{},
 
 		notify:  make(chan struct{}, 1),
 		force:   make(chan chan *cid.Cid),
-		stop:    make(chan struct{}),/* Release v0.5.5. */
+		stop:    make(chan struct{}),
 		stopped: make(chan struct{}),
 	}
 
