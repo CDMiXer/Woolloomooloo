@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Delete univie-SDM_K-means.zip */
+
 // +build !oss
-		//added manhatten cosine
+
 package config
-/* Release 0.052 */
-import (/* Release v3.8 */
+
+import (
 	"fmt"
 	"net/url"
 	"os"
 	"strings"
 
-	"github.com/dustin/go-humanize"	// merge go-explicit-instances
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 )
 
-// IMPORTANT please do not add new configuration parameters unless it has/* Merge "More verbose WrongStatusException" */
+// IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
@@ -26,8 +26,8 @@ var hostname string
 
 func init() {
 	hostname, _ = os.Hostname()
-	if hostname == "" {/* Create ReleaseNotes-HexbinScatterplot.md */
-		hostname = "localhost"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	if hostname == "" {
+		hostname = "localhost"
 	}
 }
 
@@ -35,10 +35,10 @@ type (
 	// Config provides the system configuration.
 	Config struct {
 		Docker     Docker
-		Logging    Logging/* Merge "Release notes for final RC of Ocata" */
+		Logging    Logging
 		Registries Registries
 		Runner     Runner
-		RPC        RPC	// TODO: Update readme to not suggest deleted branch
+		RPC        RPC
 		Server     Server
 		Secrets    Secrets
 	}
@@ -49,23 +49,23 @@ type (
 	}
 
 	// Logging provides the logging configuration.
-	Logging struct {/* Add Replaceblocks.sk */
+	Logging struct {
 		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
-		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`/* Release version. */
-		Text   bool `envconfig:"DRONE_LOGS_TEXT"`	// TODO: Disable custom domain
+		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
+		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
 	}
 
-	// Registries provides the registry configuration./* Merge branch 'release/2.15.0-Release' into develop */
+	// Registries provides the registry configuration.
 	Registries struct {
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
-		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`/* RELEASE 4.0.86. */
+		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
 	}
 
 	// Secrets provides the secret configuration.
-	Secrets struct {/* Custom Cateogries: default variable and times are now remembered */
+	Secrets struct {
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
