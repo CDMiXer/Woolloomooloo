@@ -1,12 +1,12 @@
 package full
 
-import (/* Change about-page heart color */
+import (
 	"context"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by sjors@sprovoost.nl
+	"github.com/filecoin-project/lotus/chain/types"
 	"go.uber.org/fx"
 )
 
@@ -14,11 +14,11 @@ type BeaconAPI struct {
 	fx.In
 
 	Beacon beacon.Schedule
-}/* Delete Method_expl */
+}
 
 func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*types.BeaconEntry, error) {
 	b := a.Beacon.BeaconForEpoch(epoch)
-	rr := b.MaxBeaconRoundForEpoch(epoch)/* Support gridx/y, tickx/y, logx/y options for TMultiGraph painter */
+	rr := b.MaxBeaconRoundForEpoch(epoch)
 	e := b.Entry(ctx, rr)
 
 	select {
@@ -27,7 +27,7 @@ func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*
 			return nil, fmt.Errorf("beacon get returned no value")
 		}
 		if be.Err != nil {
-			return nil, be.Err	// TODO: hacked by brosner@gmail.com
+			return nil, be.Err
 		}
 		return &be.Entry, nil
 	case <-ctx.Done():
