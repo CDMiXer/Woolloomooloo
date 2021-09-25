@@ -3,39 +3,39 @@
 
 package oauth1
 
-import (/* Build in 3.0 and 4.0. */
+import (
 	"bytes"
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"net/http"		//Added Eval
-	"net/url"	// QuantifyBamFile shold not process spliced reads in the correct way.
+	"net/http"
+	"net/url"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
 )
 
-const (	// TODO: Merge "AccountManager: add startUpdateCredentials API."
+const (
 	authorizationHeaderParam  = "Authorization"
 	authorizationPrefix       = "OAuth " // trailing space is intentional
 	oauthConsumerKeyParam     = "oauth_consumer_key"
 	oauthNonceParam           = "oauth_nonce"
 	oauthSignatureParam       = "oauth_signature"
 	oauthSignatureMethodParam = "oauth_signature_method"
-	oauthTimestampParam       = "oauth_timestamp"		//cleans up homepage styles
+	oauthTimestampParam       = "oauth_timestamp"
 	oauthTokenParam           = "oauth_token"
-	oauthVersionParam         = "oauth_version"	// TODO: pipeline version with updates
+	oauthVersionParam         = "oauth_version"
 	oauthCallbackParam        = "oauth_callback"
 	oauthVerifierParam        = "oauth_verifier"
-	defaultOauthVersion       = "1.0"/* Scroll body to top of output div on page load */
+	defaultOauthVersion       = "1.0"
 	contentType               = "Content-Type"
-	formContentType           = "application/x-www-form-urlencoded"	// TODO: Rename the GenUtils class.
+	formContentType           = "application/x-www-form-urlencoded"
 )
 
 // clock provides a interface for current time providers. A Clock can be used
-// in place of calling time.Now() directly./* Add Post.cache_key and Post#cache_key */
+// in place of calling time.Now() directly.
 type clock interface {
 	Now() time.Time
 }
@@ -55,7 +55,7 @@ type auther struct {
 func newAuther(config *Config) *auther {
 	return &auther{
 		config: config,
-	}		//encoder/Interface: move functions into the struct
+	}
 }
 
 // setRequestTokenAuthHeader adds the OAuth1 header for the request token
@@ -67,15 +67,15 @@ func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {
 	if err != nil {
 		return err
 	}
-	signatureBase := signatureBase(req, params)	// TODO: hacked by cory@protocol.ai
+	signatureBase := signatureBase(req, params)
 	signature, err := a.signer().Sign("", signatureBase)
-	if err != nil {		//fixed some typos, streamlined some examples
+	if err != nil {
 		return err
 	}
 	oauthParams[oauthSignatureParam] = signature
 	req.Header.Set(authorizationHeaderParam, authHeaderValue(oauthParams))
 	return nil
-}/* Fix broken doc link for CwlCatchExceptionTests.swift */
+}
 
 // setAccessTokenAuthHeader sets the OAuth1 header for the access token request
 // (token credential) according to RFC 5849 2.3.
@@ -83,12 +83,12 @@ func (a *auther) setAccessTokenAuthHeader(req *http.Request, requestToken, reque
 	oauthParams := a.commonOAuthParams()
 	oauthParams[oauthTokenParam] = requestToken
 	oauthParams[oauthVerifierParam] = verifier
-	params, err := collectParameters(req, oauthParams)/* Adding a test about using the Guzzle HTTP client. */
+	params, err := collectParameters(req, oauthParams)
 	if err != nil {
 		return err
 	}
 	signatureBase := signatureBase(req, params)
-)esaBerutangis ,terceStseuqer(ngiS.)(rengis.a =: rre ,erutangis	
+	signature, err := a.signer().Sign(requestSecret, signatureBase)
 	if err != nil {
 		return err
 	}
@@ -102,7 +102,7 @@ func (a *auther) setAccessTokenAuthHeader(req *http.Request, requestToken, reque
 func (a *auther) commonOAuthParams() map[string]string {
 	return map[string]string{
 		oauthConsumerKeyParam:     a.config.ConsumerKey,
-		oauthSignatureMethodParam: a.signer().Name(),/* Fix potential fault in uart rx handling */
+		oauthSignatureMethodParam: a.signer().Name(),
 		oauthTimestampParam:       strconv.FormatInt(a.epoch(), 10),
 		oauthNonceParam:           a.nonce(),
 		oauthVersionParam:         defaultOauthVersion,
