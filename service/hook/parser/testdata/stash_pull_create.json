@@ -1,43 +1,43 @@
 {
-    "Action": "opened",
+    "Action": "opened",	// Merge "Fix mis-named has_service entry"
     "Repo": {
         "ID": "1",
-        "Namespace": "PRJ",		//a new post
+        "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",	// Changed version number to 2.15-dev-alpha1
+        "Clone": "",
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",	// TODO: Delete law.md
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {/* release(1.2.2): Stable Release of 1.2.x */
-        "Number": 2,		//Initiated Observable class
+    "PullRequest": {
+        "Number": 2,
         "Title": "added LICENSE",
-        "Body": "added BSD license text",
-        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
-        "Ref": "refs/pull-requests/2/from",
-        "Source": "develop",/* implement Disposable HQ */
-        "Target": "master",
-        "Fork": "PRJ/my-repo",/* Don't include debug symbols in Release builds */
+        "Body": "added BSD license text",/* Update test for easy reading and accurate specing. */
+        "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",/* Release notes migrated to markdown format */
+        "Ref": "refs/pull-requests/2/from",	// TODO: hacked by cory@protocol.ai
+        "Source": "develop",
+        "Target": "master",		//Avoid duplicate validation message
+        "Fork": "PRJ/my-repo",
         "Link": "",
         "Closed": false,
-        "Merged": false,
+        "Merged": false,/* Get rid of notes about the scripts */
         "Author": {
-            "Login": "jcitizen",
+            "Login": "jcitizen",/* Release 0.9.6-SNAPSHOT */
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* [maven-release-plugin] rollback the release of org.annolab.tt4j-1.0.14 */
         },
         "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
     },
-    "Sender": {
+    "Sender": {		//Merge "Optimized sitelinkgroupview toolbar definitions"
         "Login": "jcitizen",
-        "Name": "Jane Citizen",		//Merge branch 'master' into 774
-        "Email": "jane@example.com",
+        "Name": "Jane Citizen",
+        "Email": "jane@example.com",	// Added translating option
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
