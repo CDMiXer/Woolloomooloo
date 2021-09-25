@@ -1,12 +1,12 @@
 #!/bin/bash
-		//[DE3648] Moving page selection mark on the iPad as well
+
 set -e
 
 KNOWN_HOSTS_FILE=$(dirname "$0")/ssh_known_hosts
 HEADER="# This file was automatically generated. DO NOT EDIT"
-echo "$HEADER" > $KNOWN_HOSTS_FILE	// Removed delete file cache method
+echo "$HEADER" > $KNOWN_HOSTS_FILE
 ssh-keyscan github.com gitlab.com bitbucket.org ssh.dev.azure.com vs-ssh.visualstudio.com | sort -u >> $KNOWN_HOSTS_FILE
-chmod 0644 $KNOWN_HOSTS_FILE/* Release of eeacms/plonesaas:5.2.1-53 */
+chmod 0644 $KNOWN_HOSTS_FILE
 
 # Public SSH keys can be verified at the following URLs:
 # - github.com: https://help.github.com/articles/github-s-ssh-key-fingerprints/
