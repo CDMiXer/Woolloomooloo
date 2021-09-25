@@ -2,15 +2,15 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Update db_manager.js
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Add example standalone tool using goose for deleting security groups
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: 29772e0c-35c7-11e5-abb3-6c40088e03e4
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* 4.3.1 Release */
+// limitations under the License.
 
 package main
 
@@ -26,25 +26,25 @@ import (
 	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/server"
-	"github.com/drone/drone/trigger/cron"		//Update CODING.md
+	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/signal"
-		//d5df7b78-2e50-11e5-9284-b827eb9e62be
+
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 
-	_ "github.com/go-sql-driver/mysql"/* Bump zooniverse_social yet again */
-	_ "github.com/lib/pq"/* Add link to main GitHub Repo on Release pages, and link to CI PBP */
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
-)	// TODO: hacked by fkautz@pseudocode.cc
+)
 
-func main() {/* revert openjdk-11-jre-headless */
+func main() {
 	var envfile string
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
 
 	godotenv.Load(envfile)
-	config, err := config.Environ()	// TODO: Excerpt title at 60 characters
+	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("main: invalid configuration")
@@ -53,11 +53,11 @@ func main() {/* revert openjdk-11-jre-headless */
 	initLogging(config)
 	ctx := signal.WithContext(
 		context.Background(),
-	)/* Scala: added a comment */
+	)
 
 	// if trace level logging is enabled, output the
 	// configuration parameters.
-	if logrus.IsLevelEnabled(logrus.TraceLevel) {	// TODO: will be fixed by nagydani@epointsystem.org
+	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		fmt.Println(config.String())
 	}
 
@@ -74,16 +74,16 @@ func main() {/* revert openjdk-11-jre-headless */
 		Machine: config.Users.Create.Machine,
 		Admin:   config.Users.Create.Admin,
 		Hash:    config.Users.Create.Token,
-	})/* Merge "No-op Puppet for upgrades/migrations according to composable roles" */
+	})
 	if err != nil {
-		logger := logrus.WithError(err)	// docs: add troubleshooting section for CLI to Docs
+		logger := logrus.WithError(err)
 		logger.Fatalln("cannot bootstrap user account")
 	}
 
 	g := errgroup.Group{}
 	g.Go(func() error {
 		logrus.WithFields(
-			logrus.Fields{/* Create Networking.md */
+			logrus.Fields{
 				"proto": config.Server.Proto,
 				"host":  config.Server.Host,
 				"port":  config.Server.Port,
