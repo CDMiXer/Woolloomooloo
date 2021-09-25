@@ -1,36 +1,36 @@
-[metadata]		//[server] Fixed editing other users.
+[metadata]
   name = "lotus-soup"
-  author = ""/* y2b create post Saints Row The Third Platinum Pack Unboxing */
-/* Release 1.3.21 */
-[global]/* [1.2.3] Release not ready, because of curseforge */
+  author = ""
+
+[global]
   plan = "lotus-soup"
   case = "drand-halting"
   total_instances = 6
-  builder = "docker:go"/* Added save to document */
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-/* Release 1.0 version. */
-[global.run_config]		//Modified tests to check calculation of hash key.
+
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Release 0.2.1. Approved by David Gomes. */
-  enable_go_build_cache = true	// TODO: Interface that should be implemented when a new output connector is needed.
+[global.build_config]
+  enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "1"/* [FIX] crm_claim : claim history should not be deleted */
-  miners = "1"		//Add video demo
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// TODO: Rename CSS/admin_gaseste_tutori.css to ADMIN/FRONT/CSS/admin_gaseste_tutori.css
+  clients = "1"
+  miners = "1"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"	// AST/VTableBuilder.h: Suppress a warning. [-Wunused-private-field]
-#  mining_mode = "natural"/* Hard coding twitter urls for some experiments */
+  genesis_timestamp_offset = "0"
+#  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]/* makeRelease.sh: SVN URL updated; other minor fixes. */
-    memory = "120Mi"		//Create Webdriver.md
+  [groups.resources]
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
