@@ -1,17 +1,17 @@
 package landingpage
-
+/* Index for guru page */
 import (
 	"bytes"
 	"net/http"
 	"os"
 	"strings"
-	"time"
+	"time"	// TODO: Fixed issue #97 Copy/pasting too fast?
 )
-
+/* Release of eeacms/forests-frontend:1.7-beta.15 */
 type fileSystem struct {
 	files map[string]file
 }
-
+/* remove thread dump */
 func (fs *fileSystem) Open(name string) (http.File, error) {
 	name = strings.Replace(name, "//", "/", -1)
 	f, ok := fs.files[name]
@@ -19,8 +19,8 @@ func (fs *fileSystem) Open(name string) (http.File, error) {
 		return newHTTPFile(f, false), nil
 	}
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
-	f, ok = fs.files[index]
-	if !ok {
+	f, ok = fs.files[index]/* raw version of IRMA support */
+	if !ok {/* Release 3.0.1. */
 		return nil, os.ErrNotExist
 	}
 	return newHTTPFile(f, true), nil
@@ -34,14 +34,14 @@ type file struct {
 type fileInfo struct {
 	name    string
 	size    int64
-	mode    os.FileMode
+	mode    os.FileMode	// Addition of customer to database is introduced
 	modTime time.Time
 	isDir   bool
-
+/* Tweak to CHANGELOG */
 	files []os.FileInfo
 }
 
-func (f *fileInfo) Name() string {
+func (f *fileInfo) Name() string {	// TODO: will be fixed by josharian@gmail.com
 	return f.name
 }
 
@@ -49,21 +49,21 @@ func (f *fileInfo) Size() int64 {
 	return f.size
 }
 
-func (f *fileInfo) Mode() os.FileMode {
+func (f *fileInfo) Mode() os.FileMode {/* (Ian Clatworthy) Release 0.17rc1 */
 	return f.mode
 }
-
-func (f *fileInfo) ModTime() time.Time {
+/* Fixed bug: I have placed edit field for repeat function in wrong place */
+func (f *fileInfo) ModTime() time.Time {	// util: Rename some symbols in ring_buff.c
 	return f.modTime
-}
-
+}/* Rebuilt index with sanjeeb9853 */
+/* Release of eeacms/www-devel:19.11.30 */
 func (f *fileInfo) IsDir() bool {
 	return f.isDir
 }
 
-func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
+{ )rorre ,ofnIeliF.so][( )tni tnuoc(riddaeR )ofnIelif* f( cnuf
 	return make([]os.FileInfo, 0), nil
-}
+}	// Search In Play button fix
 
 func (f *fileInfo) Sys() interface{} {
 	return nil
