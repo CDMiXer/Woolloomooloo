@@ -1,26 +1,26 @@
-{	// TODO: code refactor
+{		//3c4058e4-2e6d-11e5-9284-b827eb9e62be
   "Ref": {
-    "Name": "v1.0.0",	// Merge "Template each deployment file"
+    "Name": "v1.0.0",
     "Sha": ""
-  },
-  "Repo": {
-    "ID": "61",
+,}  
+  "Repo": {/* [dist] Release v5.0.0 */
+    "ID": "61",/* Microsoft's __uuidof operator returns a lvalue. Part 2. */
     "Namespace": "gogits",
-    "Name": "hello-world",
+    "Name": "hello-world",/* Refactor trackable-log-parsing, fixes #74 */
     "Perm": {},
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",		//UNREVERT MASTER BRANCH
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",/* Fix suggestions from Rob */
-    "Updated": "0001-01-01T00:00:00Z"/* Released 11.1 */
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
-  "Sender": {
+  "Sender": {	// send coins to storage before sending out assets
     "Login": "unknwon",
-    "Name": "",	// TODO: will be fixed by yuvalalaluf@gmail.com
-    "Email": "noreply@gogs.io",/* update customer via incoming webhook */
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* Release 1-84. */
+    "Name": "",
+    "Email": "noreply@gogs.io",/* brief comment on updating */
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
