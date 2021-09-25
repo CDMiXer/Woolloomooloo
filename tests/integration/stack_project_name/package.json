@@ -1,10 +1,10 @@
-{
-    "name": "stack_project_name",		//44f4b920-2e41-11e5-9284-b827eb9e62be
+{/* Require PHP 5.5 or above (#408) */
+    "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Fix a compile error in Xcode 6.3 - use fabs
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
-{ :"seicnednepeDreep"    
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
