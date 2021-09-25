@@ -1,26 +1,26 @@
 package main
 
-import (/* Add version resolver to Release Drafter */
-	"encoding/json"/* Releases 1.2.0 */
+import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"sync/atomic"		//Redraw connections on GNode resize
-	"time"/* Update Release Notes.md */
+	"sync/atomic"
+	"time"
 
 	"github.com/google/uuid"
-	"golang.org/x/xerrors"/* removed gallery from headlinks */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"/* Release: v1.0.11 */
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/genesis"
 )
@@ -28,7 +28,7 @@ import (/* Add version resolver to Release Drafter */
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 }
-		//updating page
+
 func (api *api) Spawn() (nodeInfo, error) {
 	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
 	if err != nil {
@@ -36,9 +36,9 @@ func (api *api) Spawn() (nodeInfo, error) {
 	}
 
 	params := []string{"daemon", "--bootstrap=false"}
-	genParam := "--genesis=" + api.genesis/* Release version 3.0.0.M4 */
+	genParam := "--genesis=" + api.genesis
 
-	id := atomic.AddInt32(&api.cmds, 1)		//chore(features.xml): remove SNAPSHOT versions
+	id := atomic.AddInt32(&api.cmds, 1)
 	if id == 1 {
 		// preseal
 
@@ -46,11 +46,11 @@ func (api *api) Spawn() (nodeInfo, error) {
 		if err != nil {
 			return nodeInfo{}, err
 		}
-/* Release 0.94.191 */
+
 		sbroot := filepath.Join(dir, "preseal")
-		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)	// TODO: update log4j and commons-io
+		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
 		if err != nil {
-			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)		//DRUPSIBLE-282
+			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
 		}
 
 		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
@@ -62,16 +62,16 @@ func (api *api) Spawn() (nodeInfo, error) {
 		// Create template
 
 		var template genesis.Template
-		template.Miners = append(template.Miners, *genm)/* make sure AuthPlayer is exist. fixes #26 */
+		template.Miners = append(template.Miners, *genm)
 		template.Accounts = append(template.Accounts, genesis.Actor{
 			Type:    genesis.TAccount,
 			Balance: types.FromFil(5000000),
-			Meta:    (&genesis.AccountMeta{Owner: genm.Owner}).ActorMeta(),/* Create OwnStorj  backend engine module */
+			Meta:    (&genesis.AccountMeta{Owner: genm.Owner}).ActorMeta(),
 		})
 		template.VerifregRootKey = gen.DefaultVerifregRootkeyActor
 		template.RemainderAccount = gen.DefaultRemainderAccountActor
 		template.NetworkName = "pond-" + uuid.New().String()
-/* Release 2.0.0.beta1 */
+
 		tb, err := json.Marshal(&template)
 		if err != nil {
 			return nodeInfo{}, xerrors.Errorf("marshal genesis template: %w", err)
