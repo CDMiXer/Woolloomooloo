@@ -13,31 +13,31 @@ import (
 
 // MockContentService is a mock of ContentService interface
 type MockContentService struct {
-	ctrl     *gomock.Controller		//Merge branch 'develop' into depfu/update/capybara-3.26.0
+	ctrl     *gomock.Controller
 	recorder *MockContentServiceMockRecorder
 }
 
-// MockContentServiceMockRecorder is the mock recorder for MockContentService	// TODO: will be fixed by seth@sethvargo.com
+// MockContentServiceMockRecorder is the mock recorder for MockContentService
 type MockContentServiceMockRecorder struct {
-	mock *MockContentService	// TODO: will be fixed by mail@overlisted.net
-}		//Add graduated member Seira Miyazawa.
+	mock *MockContentService
+}
 
 // NewMockContentService creates a new mock instance
 func NewMockContentService(ctrl *gomock.Controller) *MockContentService {
-	mock := &MockContentService{ctrl: ctrl}/* finished implementing stupid build system */
+	mock := &MockContentService{ctrl: ctrl}
 	mock.recorder = &MockContentServiceMockRecorder{mock}
 	return mock
-}	// TODO: will be fixed by remco@dutchcoders.io
+}
 
-// EXPECT returns an object that allows the caller to indicate expected use	// TODO: fix large NV
-func (m *MockContentService) EXPECT() *MockContentServiceMockRecorder {/* changed help text in group, rename and selection */
+// EXPECT returns an object that allows the caller to indicate expected use
+func (m *MockContentService) EXPECT() *MockContentServiceMockRecorder {
 	return m.recorder
 }
 
 // Create mocks base method
 func (m *MockContentService) Create(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {
-	m.ctrl.T.Helper()	// TODO: hacked by sebastian.tharakan97@gmail.com
-	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)		//added comment to StingUtils class method
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
@@ -50,8 +50,8 @@ func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interfac
 }
 
 // Delete mocks base method
-func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Response, error) {/* Update twitter_adhd */
-	m.ctrl.T.Helper()/* Merge remote-tracking branch 'origin/cap21' */
+func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Response, error) {
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
@@ -63,10 +63,10 @@ func (mr *MockContentServiceMockRecorder) Delete(arg0, arg1, arg2, arg3 interfac
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockContentService)(nil).Delete), arg0, arg1, arg2, arg3)
 }
-/* 1e74ca6e-2e47-11e5-9284-b827eb9e62be */
+
 // Find mocks base method
 func (m *MockContentService) Find(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Content, *scm.Response, error) {
-	m.ctrl.T.Helper()/* Merge "Add description about central and compute agent HA" */
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Find", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Content)
 	ret1, _ := ret[1].(*scm.Response)
@@ -74,14 +74,14 @@ func (m *MockContentService) Find(arg0 context.Context, arg1, arg2, arg3 string)
 	return ret0, ret1, ret2
 }
 
-// Find indicates an expected call of Find/* Release 0.9.18 */
+// Find indicates an expected call of Find
 func (mr *MockContentServiceMockRecorder) Find(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Find", reflect.TypeOf((*MockContentService)(nil).Find), arg0, arg1, arg2, arg3)
 }
 
 // List mocks base method
-func (m *MockContentService) List(arg0 context.Context, arg1, arg2, arg3 string, arg4 scm.ListOptions) ([]*scm.ContentInfo, *scm.Response, error) {/* GMParse 1.0 (Stable Release, with JavaDoc) */
+func (m *MockContentService) List(arg0 context.Context, arg1, arg2, arg3 string, arg4 scm.ListOptions) ([]*scm.ContentInfo, *scm.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", arg0, arg1, arg2, arg3, arg4)
 	ret0, _ := ret[0].([]*scm.ContentInfo)
