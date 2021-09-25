@@ -1,7 +1,7 @@
 {
 	"auths": {
-		"https://gcr.io": {
+		"https://gcr.io": {/* Release of eeacms/forests-frontend:2.0-beta.70 */
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}		//added provider "shell" to exec
+		}	// TODO: hacked by steven@stebalien.com
 	}
-}
+}		//JTA configuration
