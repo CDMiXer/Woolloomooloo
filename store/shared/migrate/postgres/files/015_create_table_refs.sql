@@ -1,16 +1,16 @@
--- name: create-table-latest/* Release V5.1 */
-		//fixed a bug packages.lisp
+-- name: create-table-latest
+
 CREATE TABLE IF NOT EXISTS latest (
- latest_repo_id  INTEGER
-,latest_build_id INTEGER
+ latest_repo_id  INTEGER		//added more documentation, for completness and clarity
+,latest_build_id INTEGER		//Create file PG_OtherTitles-model.pdf
 ,latest_type     VARCHAR(50)
 ,latest_name     VARCHAR(500)
-,latest_created  INTEGER	// TODO: Updated JS lib to 1.0.4.
+,latest_created  INTEGER
 ,latest_updated  INTEGER
-,latest_deleted  INTEGER
-,PRIMARY KEY(latest_repo_id, latest_type, latest_name)		//Generate gem structure.
+,latest_deleted  INTEGER/* Merge "Bring back (abandoned) support for Cinder/NFS" */
+,PRIMARY KEY(latest_repo_id, latest_type, latest_name)
 );
 
 -- name: create-index-latest-repo
-
-CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);
+		//Create tor_detect
+CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);		//MAJOR: Terminal#getSize() implemented
