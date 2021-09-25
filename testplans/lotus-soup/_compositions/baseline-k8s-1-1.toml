@@ -1,17 +1,17 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Livro fundiario - pesquisa por titulo na tela de processo */
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"		//Delete dbload.php
+  case = "deals-e2e"
   total_instances = 3
   builder = "docker:go"
-"s8k:retsulc" = rennur  
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
-		//Updating Environment Group Changes
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -21,7 +21,7 @@
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]/* Release Name := Nautilus */
+[global.run.test_params]
   clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
@@ -37,26 +37,26 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Add Recorder.php */
-  [groups.run]	// TODO: Update _.src.css
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.resources]	// TODO: correct carrierwave dependency
-    memory = "4096Mi"/* Working on implementing the atom model and the parsing funcionality */
+  [groups.resources]
+    memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Create housing.php */
+      role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.resources]		//update IMatrix interface.
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
