@@ -1,12 +1,12 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Release jedipus-2.6.10 */
-from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
-/* Order include directories consistently for Debug and Release configurations. */
+
+from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE	// TODO: Shelluser will now be displayed in the fimap shell. Thanks to Eschweiler again!
+	// TODO: added screencast link to Readme.md
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
 # Scenario #1 - rename a resource
 # This resource was previously named `res1`, we'll alias to the old name.
-res1 = Resource1("newres1", ResourceOptions(/* Released springjdbcdao version 1.8.13 */
+res1 = Resource1("newres1", ResourceOptions(
     aliases=[Alias(name="res1")]))
