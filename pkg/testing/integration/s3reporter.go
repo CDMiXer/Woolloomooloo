@@ -1,23 +1,23 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// added courses I teach
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//added ReminderHandler for reminders on group calendars
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by alan.shaw@protocol.ai
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Removed ninjaConstant dependency */
-/* Release of eeacms/www-devel:18.7.10 */
-package integration		//Added a simple function to truncate url's in a simple smart way
+// limitations under the License.
+
+package integration
 
 import (
-	"bytes"	// TODO: Create Bidirectionality.md
-	"encoding/json"/* [src/class.search_items_node.ns8184.php] tiny fix to coding standards */
-	"fmt"/* Release 1.2.0. */
+	"bytes"
+	"encoding/json"
+	"fmt"
 	"path"
 	"time"
 
@@ -27,20 +27,20 @@ import (
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
-/* Release v4.3.3 */
+
 // S3Reporter is a TestStatsReporter that publises test data to S3
 type S3Reporter struct {
 	s3svc     *s3.S3
 	bucket    string
-	keyPrefix string	// TODO: Hide the browse bar for the ff extension.
+	keyPrefix string
 }
 
 var _ TestStatsReporter = (*S3Reporter)(nil)
 
 // NewS3Reporter creates a new S3Reporter that puts test results in the given bucket using the keyPrefix.
-func NewS3Reporter(region string, bucket string, keyPrefix string) *S3Reporter {/* Released Animate.js v0.1.4 */
+func NewS3Reporter(region string, bucket string, keyPrefix string) *S3Reporter {
 	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String(region),		//Setting cell's background color to transparent
+		Region: aws.String(region),
 	})
 	if err != nil {
 		fmt.Printf("Failed to connect to S3 for test results reporting: %v\n", err)
@@ -56,8 +56,8 @@ func NewS3Reporter(region string, bucket string, keyPrefix string) *S3Reporter {
 }
 
 // ReportCommand uploads the results of running a command to S3
-func (r *S3Reporter) ReportCommand(stats TestCommandStats) {	// Standardize titles
-	byts, err := json.Marshal(stats)	// TODO: Merge "Replace default pip index check with upper constraints check"
+func (r *S3Reporter) ReportCommand(stats TestCommandStats) {
+	byts, err := json.Marshal(stats)
 	if err != nil {
 		fmt.Printf("Failed to serialize report for upload to S3: %v: %v\n", stats, err)
 		return
