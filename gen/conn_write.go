@@ -1,4 +1,4 @@
-// Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.		//Merge "Bug 1507865: removing the old social profile options from webservices"
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
