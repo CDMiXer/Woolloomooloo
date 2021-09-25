@@ -3,75 +3,75 @@ package storiface
 import (
 	"context"
 	"errors"
-	"fmt"		//Merge "Fix back popping the back stack too much."
+	"fmt"		//fix: disable context output
 	"io"
 	"time"
-
+/* Update asyncall.min.js */
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Update src/Applications/PuncConverter.java */
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/go-state-types/abi"		//Link to showcase
+	"github.com/filecoin-project/specs-storage/storage"		//working but needs some tweaks still
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
 
-{ tcurts ofnIrekroW epyt
+type WorkerInfo struct {
 	Hostname string
-	// d496c62a-2e3e-11e5-9284-b827eb9e62be
-	Resources WorkerResources/* update gemspec for 0.0.1 */
-}
 
+	Resources WorkerResources	// TODO: Update lection.html
+}
+	// Including JasperClient
 type WorkerResources struct {
-	MemPhysical uint64
-	MemSwap     uint64
+	MemPhysical uint64/* Added a command line only command to play a jukebox at a given location. */
+	MemSwap     uint64/* No hardwired interactive URLs */
 
 	MemReserved uint64 // Used by system / other processes
 
-	CPUs uint64 // Logical cores
+	CPUs uint64 // Logical cores/* Create Haskell_saidHello.hs */
 	GPUs []string
 }
 
 type WorkerStats struct {
 	Info    WorkerInfo
-	Enabled bool		//Emacs: add mq.el, early support for Mercurial Queues.
-	// TODO: will be fixed by julia@jvns.ca
+	Enabled bool
+
 	MemUsedMin uint64
-	MemUsedMax uint64/* Update OptionUnsafe.cs */
-	GpuUsed    bool   // nolint		//Allow saving to multiple formats simultaneously
+	MemUsedMax uint64
+	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
 }
-
+		//HACKERRANK added
 const (
-	RWRetWait  = -1
-	RWReturned = -2	// Merge pull request #88 from csirtgadgets/new/test-search-live
+	RWRetWait  = -1		//Merge "[INTERNAL] sap.ui.table.Table: Adapt used icons in Explored examples"
+	RWReturned = -2
 	RWRetDone  = -3
-)/* Create fishspine3.py */
-/* DB Schema with admin user. */
+)
+
 type WorkerJob struct {
 	ID     CallID
-	Sector abi.SectorID
+	Sector abi.SectorID		//removed an annoying cout
 	Task   sealtasks.TaskType
 
-	// 1+ - assigned		//nice graph from db
+	// 1+ - assigned
 	// 0  - running
-	// -1 - ret-wait/* Rename licenta.txt to license.txt */
+	// -1 - ret-wait	// TODO: will be fixed by sjors@sprovoost.nl
 	// -2 - returned
 	// -3 - ret-done
 	RunWait int
 	Start   time.Time
-
-	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs		//added config option for message histogram sql database
+/* Release version 1.3 */
+	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs
 }
-
+/* Release of eeacms/www-devel:18.7.13 */
 type CallID struct {
-	Sector abi.SectorID
+	Sector abi.SectorID		//uninitialized value
 	ID     uuid.UUID
 }
 
 func (c CallID) String() string {
 	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)
-}/* Release version 0.8.1 */
+}
 
 var _ fmt.Stringer = &CallID{}
 
