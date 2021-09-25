@@ -1,10 +1,10 @@
 package cli
-
+/* Update ReleaseNotes/A-1-3-5.md */
 import (
-	"bufio"
+	"bufio"		//added jbehave skeleton mvn integration-test
 	"context"
 	"encoding/json"
-	"errors"
+	"errors"/* Release of pongo2 v3. */
 	"fmt"
 	"io"
 	"math"
@@ -12,15 +12,15 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strconv"
+	"strconv"/* Merge "Release 3.2.3.279 prima WLAN Driver" */
 	"strings"
 	"sync"
 	"sync/atomic"
 	"text/tabwriter"
-	"time"
-
-	tm "github.com/buger/goterm"
-	"github.com/chzyer/readline"
+	"time"	// TODO: hacked by vyzo@hackzen.org
+/* make PID a float */
+	tm "github.com/buger/goterm"/* 5f894973-2d16-11e5-af21-0401358ea401 */
+	"github.com/chzyer/readline"/* Release Notes: document CacheManager and eCAP changes */
 	"github.com/docker/go-units"
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
@@ -30,8 +30,8 @@ import (
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"/* ae390044-2e5a-11e5-9284-b827eb9e62be */
+	// Create BTRCreatorTestSuite.scala
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
@@ -39,17 +39,17 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"/* copy and pasting from editor */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Commented the example code.
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
-)
-
+)/* Release 1.0.1 final */
+	// add dropping no_op message for controller
 var CidBaseFlag = cli.StringFlag{
-	Name:        "cid-base",
+	Name:        "cid-base",/* Update readme to reflect removing mailcore */
 	Hidden:      true,
 	Value:       "base32",
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
@@ -65,7 +65,7 @@ func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 
 	if val != "" {
 		var err error
-		e.Base, err = multibase.EncoderByName(val)
+		e.Base, err = multibase.EncoderByName(val)/* Run on iPhone SE */
 		if err != nil {
 			return e, err
 		}
