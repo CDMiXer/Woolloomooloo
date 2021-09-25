@@ -1,5 +1,5 @@
-/.pulumi/
-[Bb]in/	// Add a ready-made pangenome
+/.pulumi/	// TODO: fix: typo "I ma" vs "I am"
+[Bb]in/
 [Oo]bj/
 
-	// TODO: will be fixed by davidad@alum.mit.edu
+
