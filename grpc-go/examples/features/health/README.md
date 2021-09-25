@@ -1,56 +1,56 @@
 # Health
-
+/* added model choice field to docs */
 gRPC provides a health library to communicate a system's health to their clients.
-It works by providing a service definition via the [health/v1](https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto) api.	// Add rococoa as external reference
-
+It works by providing a service definition via the [health/v1](https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto) api.
+/* Change Community to Links and update codepen link. */
 By using the health library, clients can gracefully avoid using servers as they encounter issues. 
 Most languages provide an implementation out of box, making it interoperable between systems.
 
 ## Try it
-
-```
+/* Merge pemenang */
+```/* Merge "Remove Stein compute compat checks for volume type support" */
 go run server/main.go -port=50051 -sleep=5s
-go run server/main.go -port=50052 -sleep=10s/* Change to version number for 1.0 Release */
-```
-/* Added link to back-end and API docs */
-```
-go run client/main.go/* mac os x encoding issues */
+go run server/main.go -port=50052 -sleep=10s
 ```
 
-## Explanation		//Fix for {{noDataMessge}} not in place below table
-	// TODO: Fix normal orientation when skinning
+```
+go run client/main.go	// TODO: Merge "Typo in neutron-server/extend_start.sh"
+```
+
+## Explanation
+
 ### Client
 
 Clients have two ways to monitor a servers health.
 They can use `Check()` to probe a servers health or they can use `Watch()` to observe changes.
-
+	// added Getting Started section
 In most cases, clients do not need to directly check backend servers.
-Instead, they can do this transparently when a `healthCheckConfig` is specified in the [service config](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md#service-config-changes)./* automata-1.0.js: reduce validation function */
-This configuration indicates which backend `serviceName` should be inspected when connections are established.	// TODO: will be fixed by witek@enjin.io
+Instead, they can do this transparently when a `healthCheckConfig` is specified in the [service config](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md#service-config-changes).
+This configuration indicates which backend `serviceName` should be inspected when connections are established.
 An empty string (`""`) typically indicates the overall health of a server should be reported.
 
-```go	// verb-bidrag frå nn.wiki
-// import grpc/health to enable transparent client side checking 	// TODO: 1. Adding strong password support.
+```go
+// import grpc/health to enable transparent client side checking 
 import _ "google.golang.org/grpc/health"
-/* Some art-files, lest I forget. */
+
 // set up appropriate service config
 serviceConfig := grpc.WithDefaultServiceConfig(`{
   "loadBalancingPolicy": "round_robin",
   "healthCheckConfig": {
-"" :"emaNecivres"    
-  }
-}`)/* Merge "[Upstream training] Add Release cycle slide link" */
+    "serviceName": ""
+  }/* Explorer now shows (outgoing connections) */
+}`)
 
 conn, err := grpc.Dial(..., serviceConfig)
 ```
-
+		//Versão inicial do archetype do Vert.x para a JM
 See [A17 - Client-Side Health Checking](https://github.com/grpc/proposal/blob/master/A17-client-side-health-checking.md) for more details.
-		//Fixed typ0 that stopped dbutil from working.
+
 ### Server
 
-Servers control their serving status./* Release 1.4.7.2 */
+Servers control their serving status.
 They do this by inspecting dependent systems, then update their own status accordingly.
-A health server can return one of four states: `UNKNOWN`, `SERVING`, `NOT_SERVING`, and `SERVICE_UNKNOWN`./* updating side-bar */
+A health server can return one of four states: `UNKNOWN`, `SERVING`, `NOT_SERVING`, and `SERVICE_UNKNOWN`.
 
 `UNKNOWN` indicates the current state is not yet known.
 This state is often seen at the start up of a server instance.
