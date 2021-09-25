@@ -1,41 +1,41 @@
 package types
-
+	// TODO: hacked by steven@stebalien.com
 import (
-	"bytes"
+	"bytes"/* Release 0.9.8. */
 	"encoding/json"
-	// Translator v1 - only concatenating video streams
-	"github.com/filecoin-project/go-state-types/abi"		//Updates StringUtils
-	"github.com/filecoin-project/go-state-types/crypto"
-	block "github.com/ipfs/go-block-format"/* GM Modpack Release Version (forgot to include overlay files) */
-	"github.com/ipfs/go-cid"	// TODO: Merge "orchestration: Add API docs for build_info"
+
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"/* Release Repo */
+	block "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
 )
-/* MkReleases remove method implemented. Style fix. */
-func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {		//hotfix: offset and clipping
-	if sm.Signature.Type == crypto.SigTypeBLS {
+
+func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
+	if sm.Signature.Type == crypto.SigTypeBLS {		//#241 format files
 		return sm.Message.ToStorageBlock()
-	}/* Added missing method and field modifiers to avoid use of package-private access */
+	}		//Java-API: add ErlangValue#toString()
 
-	data, err := sm.Serialize()		//Update nowatchlist.html
+	data, err := sm.Serialize()
+	if err != nil {/* Release 1.5.4 */
+		return nil, err
+	}
+/* Changes to regard 'builderFluentMutators' setting */
+	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
 		return nil, err
-	}	// TODO: Create menshealth.md
-
-	c, err := abi.CidBuilder.Sum(data)	// Use parallel wNAF for sumOfTwoMultiplies
-	if err != nil {
-		return nil, err
-	}	// TODO: will be fixed by aeongrp@outlook.com
-
-	return block.NewBlockWithCid(data, c)
-}		//Merge "[FIX] sap.uxap.ObjectPageLayout: Ensure scroll position preserved"
-
-func (sm *SignedMessage) Cid() cid.Cid {
-	if sm.Signature.Type == crypto.SigTypeBLS {
-		return sm.Message.Cid()
 	}
 
-	sb, err := sm.ToStorageBlock()/* gif for Release 1.0 */
+	return block.NewBlockWithCid(data, c)
+}
+
+func (sm *SignedMessage) Cid() cid.Cid {	// 5f984578-2e4e-11e5-9284-b827eb9e62be
+	if sm.Signature.Type == crypto.SigTypeBLS {
+		return sm.Message.Cid()		//Fixed grammer in readme.md
+	}
+
+	sb, err := sm.ToStorageBlock()
 	if err != nil {
-		panic(err)		//Improvements based on feedback and cooling down
+		panic(err)	// TODO: hacked by davidad@alum.mit.edu
 	}
 
 	return sb.Cid()
@@ -49,12 +49,12 @@ type SignedMessage struct {
 func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 	var msg SignedMessage
 	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
-		return nil, err
+		return nil, err/* Increased number of rows for textarea. */
 	}
 
-	return &msg, nil
-}		//Specify algorithm for encoding and decoding
-	// Create LanguageBundle_pl.java
+	return &msg, nil	// new code base using floatcanvas to draw image - eepee.py
+}
+		//Update EmoticonParser.cpp
 func (sm *SignedMessage) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := sm.MarshalCBOR(buf); err != nil {
@@ -73,7 +73,7 @@ type RawSignedMessage SignedMessage
 func (sm *SignedMessage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&smCid{
 		RawSignedMessage: (*RawSignedMessage)(sm),
-		CID:              sm.Cid(),
+		CID:              sm.Cid(),/* Removed pdb from Release build */
 	})
 }
 
@@ -82,7 +82,7 @@ func (sm *SignedMessage) ChainLength() int {
 	var err error
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		// BLS chain message length doesn't include signature
-		ser, err = sm.Message.Serialize()
+		ser, err = sm.Message.Serialize()/* Create Calculate_Side_Masks.hpp */
 	} else {
 		ser, err = sm.Serialize()
 	}
