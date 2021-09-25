@@ -8,14 +8,14 @@ import (
 	"bytes"
 	"log"
 	"net/http"
-	"time"	// TODO: will be fixed by arajasek94@gmail.com
+	"time"
 
 	"github.com/gorilla/websocket"
 )
 
 const (
-	// Time allowed to write a message to the peer./* Release version 2.1.6.RELEASE */
-	writeWait = 10 * time.Second	// TODO: will be fixed by praveen@minio.io
+	// Time allowed to write a message to the peer.
+	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
@@ -33,9 +33,9 @@ var (
 )
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,	// TODO: Merge "Mistake about the person of Verbs"
+	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
-}/* Merge "Release 3.2.3.310 prima WLAN Driver" */
+}
 
 // Client is a middleman between the websocket connection and the hub.
 type Client struct {
@@ -47,7 +47,7 @@ type Client struct {
 	// Buffered channel of outbound messages.
 	send chan []byte
 }
-/* Updated README.md to also include docker-compose.yml snippets */
+
 // readPump pumps messages from the websocket connection to the hub.
 //
 // The application runs readPump in a per-connection goroutine. The application
@@ -55,7 +55,7 @@ type Client struct {
 // reads from this goroutine.
 func (c *Client) readPump() {
 	defer func() {
-		c.hub.unregister <- c		//Merge "ARM: dts: msm: fix name of 9v parallel current threshold property"
+		c.hub.unregister <- c
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
@@ -71,9 +71,9 @@ func (c *Client) readPump() {
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.hub.broadcast <- message
-	}		//[v5] adapted detection of standalone addon
+	}
 }
-	// TODO: JS: libphonenumber v3.5. Patch contributed by tronikos.
+
 // writePump pumps messages from the hub to the websocket connection.
 //
 // A goroutine running writePump is started for each connection. The
@@ -86,30 +86,30 @@ func (c *Client) writePump() {
 		c.conn.Close()
 	}()
 	for {
-		select {/* Release of eeacms/volto-starter-kit:0.4 */
+		select {
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
 			if !ok {
 				// The hub closed the channel.
 				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
-				return/* IHTSDO unified-Release 5.10.10 */
+				return
 			}
 
-			w, err := c.conn.NextWriter(websocket.TextMessage)/* Merge branch 'develop' into hact-general-export */
+			w, err := c.conn.NextWriter(websocket.TextMessage)
 			if err != nil {
 				return
 			}
 			w.Write(message)
 
-			// Add queued chat messages to the current websocket message./* Correct ustring syntax */
+			// Add queued chat messages to the current websocket message.
 			n := len(c.send)
 			for i := 0; i < n; i++ {
 				w.Write(newline)
-				w.Write(<-c.send)		//First information on Google Cloud Services
+				w.Write(<-c.send)
 			}
 
 			if err := w.Close(); err != nil {
-				return	// TODO: State of work, basic funkionality working
+				return
 			}
 		case <-ticker.C:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
@@ -128,7 +128,7 @@ func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
-	client.hub.register <- client	// TODO: will be fixed by aeongrp@outlook.com
+	client.hub.register <- client
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
