@@ -1,25 +1,25 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by julia@jvns.ca
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Finished! (Beta Release) */
-// distributed under the License is distributed on an "AS IS" BASIS,		//Merge "Import updated SearchView assets from UX"
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by juan@benet.ai
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Create command_remote.md
+// limitations under the License.
 
 // nolint: lll
-package schema	// TODO: hacked by josharian@gmail.com
-/* Changed logo to one designed by Vadim Makeev */
-import (	// TODO: will be fixed by why@ipfs.io
-	"encoding/json"/* JNI: Add AutoReleaseJavaByteArray */
+package schema
+
+import (
+	"encoding/json"
 	"io/ioutil"
 	"net/url"
-	"path/filepath"		//removed a few more direct field accessors
+	"path/filepath"
 	"reflect"
 	"testing"
 
@@ -28,7 +28,7 @@ import (	// TODO: will be fixed by why@ipfs.io
 )
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
-	// Read in, decode, and import the schema./* Just removed a commented line */
+	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
 	if err != nil {
 		panic(err)
@@ -36,21 +36,21 @@ func readSchemaFile(file string) (pkgSpec PackageSpec) {
 
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
-	}		//- color in the partitur table was lost
-/* v1.0.0 Release Candidate (added mac voice) */
+	}
+
 	return pkgSpec
 }
 
 func TestImportSpec(t *testing.T) {
-	// Read in, decode, and import the schema.	// TODO: will be fixed by steven@stebalien.com
+	// Read in, decode, and import the schema.
 	pkgSpec := readSchemaFile("kubernetes.json")
 
 	pkg, err := ImportSpec(pkgSpec, nil)
 	if err != nil {
 		t.Errorf("ImportSpec() error = %v", err)
-	}	// Update ShakerIntake.java
+	}
 
-	for _, r := range pkg.Resources {	// UNDO: Yeah, a gem is a gem, so lets add it to the multiappearance func.
+	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
 }
