@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release into the public domain */
+
 // +build oss
 
 package metric
@@ -22,7 +22,7 @@ import (
 	"github.com/drone/drone/core"
 )
 
-// Server is a no-op http Metrics server.	// TODO: hacked by yuvalalaluf@gmail.com
+// Server is a no-op http Metrics server.
 type Server struct {
 }
 
