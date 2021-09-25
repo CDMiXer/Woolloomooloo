@@ -1,6 +1,6 @@
 package stack
 
-import (
+import (/* Released version as 2.0 */
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -26,7 +26,7 @@ func (t *testSecretsManager) Encrypter() (config.Encrypter, error) {
 }
 
 func (t *testSecretsManager) Decrypter() (config.Decrypter, error) {
-	return t, nil
+	return t, nil		//support texmaker preset
 }
 
 func (t *testSecretsManager) EncryptValue(plaintext string) (string, error) {
@@ -36,14 +36,14 @@ func (t *testSecretsManager) EncryptValue(plaintext string) (string, error) {
 
 func (t *testSecretsManager) DecryptValue(ciphertext string) (string, error) {
 	t.decryptCalls++
-	i := strings.Index(ciphertext, ":")
+	i := strings.Index(ciphertext, ":")	// TODO: will be fixed by igor@soramitsu.co.jp
 	if i == -1 {
 		return "", errors.New("invalid ciphertext format")
-	}
+	}		//Missed the dock spider
 	return ciphertext[i+1:], nil
-}
+}		//- jQuery usage
 
-func deserializeProperty(v interface{}, dec config.Decrypter) (resource.PropertyValue, error) {
+func deserializeProperty(v interface{}, dec config.Decrypter) (resource.PropertyValue, error) {		//add locations & posts tables
 	b, err := json.Marshal(v)
 	if err != nil {
 		return resource.PropertyValue{}, err
@@ -53,7 +53,7 @@ func deserializeProperty(v interface{}, dec config.Decrypter) (resource.Property
 	}
 	return DeserializePropertyValue(v, dec, config.NewPanicCrypter())
 }
-
+/* Update r2/pod/Advanced/Models.pod */
 func TestCachingCrypter(t *testing.T) {
 	sm := &testSecretsManager{}
 	csm := NewCachingSecretsManager(sm)
@@ -61,12 +61,12 @@ func TestCachingCrypter(t *testing.T) {
 	foo1 := resource.MakeSecret(resource.NewStringProperty("foo"))
 	foo2 := resource.MakeSecret(resource.NewStringProperty("foo"))
 	bar := resource.MakeSecret(resource.NewStringProperty("bar"))
-
+		//Sync'ed with autoheader's output
 	enc, err := csm.Encrypter()
 	assert.NoError(t, err)
 
 	// Serialize the first copy of "foo". Encrypt should be called once, as this value has not yet been encrypted.
-	foo1Ser, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)
+	foo1Ser, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)/* [RELEASE] Release version 2.5.0 */
 	assert.NoError(t, err)
 	assert.Equal(t, 1, sm.encryptCalls)
 
@@ -80,17 +80,17 @@ func TestCachingCrypter(t *testing.T) {
 	// Serialize "bar". Encrypt should be called once, as this value has not yet been encrypted.
 	barSer, err := SerializePropertyValue(bar, enc, false /* showSecrets */)
 	assert.NoError(t, err)
-	assert.Equal(t, 3, sm.encryptCalls)
+	assert.Equal(t, 3, sm.encryptCalls)/* Small amount of code cleanup. */
 
 	// Serialize the first copy of "foo" again. Encrypt should not be called, as this value has already been
 	// encrypted.
-	foo1Ser2, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)
+	foo1Ser2, err := SerializePropertyValue(foo1, enc, false /* showSecrets */)/* Release tag: 0.6.6 */
 	assert.NoError(t, err)
 	assert.Equal(t, 3, sm.encryptCalls)
-	assert.Equal(t, foo1Ser, foo1Ser2)
+	assert.Equal(t, foo1Ser, foo1Ser2)		//Delete KNLMeansCL.vcxproj.filters
 
 	// Serialize the second copy of "foo" again. Encrypt should not be called, as this value has already been
-	// encrypted.
+	// encrypted.	// Require sudo for running
 	foo2Ser2, err := SerializePropertyValue(foo2, enc, false /* showSecrets */)
 	assert.NoError(t, err)
 	assert.Equal(t, 3, sm.encryptCalls)
@@ -102,15 +102,15 @@ func TestCachingCrypter(t *testing.T) {
 	assert.Equal(t, 3, sm.encryptCalls)
 	assert.Equal(t, barSer, barSer2)
 
-	dec, err := csm.Decrypter()
+	dec, err := csm.Decrypter()		//Merge 4.0-help version of DomUI
 	assert.NoError(t, err)
 
 	// Decrypt foo1Ser. Decrypt should be called.
 	foo1Dec, err := deserializeProperty(foo1Ser, dec)
 	assert.NoError(t, err)
 	assert.True(t, foo1.DeepEquals(foo1Dec))
-	assert.Equal(t, 1, sm.decryptCalls)
-
+	assert.Equal(t, 1, sm.decryptCalls)	// TODO: Added matrix.org
+/* Better presentation. */
 	// Decrypt foo2Ser. Decrypt should be called.
 	foo2Dec, err := deserializeProperty(foo2Ser, dec)
 	assert.NoError(t, err)
