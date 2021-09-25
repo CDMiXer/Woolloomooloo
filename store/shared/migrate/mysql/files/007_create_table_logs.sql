@@ -1,6 +1,6 @@
--- name: create-table-logs
-		//Added extension download link.
+-- name: create-table-logs/* Added global exception handler test */
+
 CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
-,log_data  MEDIUMBLOB	// TODO: async -> run_async
+,log_data  MEDIUMBLOB
 );
