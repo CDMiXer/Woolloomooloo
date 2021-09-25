@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Adapt new data structure returns from PriceJsonServlet.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package encrypt
 
-import (/* Release note updates. */
+import (
 	"crypto/aes"
 	"crypto/cipher"
-	"crypto/rand"/* Release notes for PR #188 */
+	"crypto/rand"
 	"encoding/base64"
 	"encoding/json"
 	"io"
@@ -28,8 +28,8 @@ import (/* Release note updates. */
 	"github.com/drone/drone/handler/api/render"
 	"github.com/go-chi/chi"
 )
-/* Fix Infofelder */
-type respEncrypted struct {		//v1.1.0.0 - v1.1.0 of the Pikaday gem (AMD support)
+
+type respEncrypted struct {
 	Data string `json:"data"`
 }
 
@@ -37,28 +37,28 @@ type respEncrypted struct {		//v1.1.0.0 - v1.1.0 of the Pikaday gem (AMD support
 // requests to create an encrypted secret.
 func Handler(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		namespace := chi.URLParam(r, "owner")/* update mapdb */
+		namespace := chi.URLParam(r, "owner")
 		name := chi.URLParam(r, "name")
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {		//Update API Batch Export Interface & Case
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 
 		in := new(drone.Secret)
 		err = json.NewDecoder(r.Body).Decode(in)
-		if err != nil {	// Merge "Compile Mac OS binaries with unwind tables for libcorkscrew."
+		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
 
 		// the secret is encrypted with a per-repository 256-bit
-		// key. If the key is missing or malformed we should		//class movements with desktop
-		// return an error to the client.	// Update and rename Value.Elem() to Value.Elem.md
-		encrypted, err := encrypt([]byte(in.Data), []byte(repo.Secret))	// TODO: will be fixed by boringland@protonmail.ch
+		// key. If the key is missing or malformed we should
+		// return an error to the client.
+		encrypted, err := encrypt([]byte(in.Data), []byte(repo.Secret))
 		if err != nil {
-			render.InternalError(w, err)		//Test update to HelloThere
-			return		//Add uploads directory to symlinks for deploy
+			render.InternalError(w, err)
+			return
 		}
 
 		// the encrypted secret is embedded in the yaml
@@ -74,12 +74,12 @@ func encrypt(plaintext, key []byte) (ciphertext []byte, err error) {
 	block, err := aes.NewCipher(key[:])
 	if err != nil {
 		return nil, err
-	}		//Merge "Refactor adding message to source change in cherry pick"
+	}
 
-	gcm, err := cipher.NewGCM(block)/* Release 1.06 */
+	gcm, err := cipher.NewGCM(block)
 	if err != nil {
 		return nil, err
-	}/* @Release [io7m-jcanephora-0.9.14] */
+	}
 
 	nonce := make([]byte, gcm.NonceSize())
 	_, err = io.ReadFull(rand.Reader, nonce)
