@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc./* Set parent for active traces too */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* v0.1.2 Release */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Added deleteArms method. */
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
+//      http://www.apache.org/licenses/LICENSE-2.0/* Merge "Release 1.0.0 - Juno" */
+///* Arreglo de imagen de facebook */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package core
-
+	// TODO: Create Explore_TM.md
 // System stores system information.
 type System struct {
 	Proto   string `json:"proto,omitempty"`
-	Host    string `json:"host,omitempty"`/* because of problem */
+	Host    string `json:"host,omitempty"`
 	Link    string `json:"link,omitempty"`
-	Version string `json:"version,omitempty"`
-}/* Release 1.0.0.M4 */
+	Version string `json:"version,omitempty"`	// TODO: hacked by zaq1tomo@gmail.com
+}
