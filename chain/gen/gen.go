@@ -11,61 +11,61 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* remove full_name left */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Updated README.txt for Release 1.1
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"		//texk/dvipdfm-x: Add missing break in void vf_set_char(int32_t ch, int vf_font)
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-blockservice"/* Release 1-85. */
 	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/ipfs/go-merkledag"	// Add personal note
+	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
-		//Updated the r-clinfun feedstock.
+	"golang.org/x/xerrors"/* OpenGeoDa 1.3.25: 1.4.0 Candidate Release */
+/* Release of eeacms/www-devel:18.10.30 */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by ng8eke@163.com
+		//add read only lock for current scoreboard when doing a query
+"ipa/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/blockstore"/* serve phoneDetails with JSONObject */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Add pango demo directory.
-	"github.com/filecoin-project/lotus/chain/vm"/* Released 6.1.0 */
+	"github.com/filecoin-project/lotus/chain/store"		//Examine the grib file (currently only checking the edition).
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* Release of eeacms/eprtr-frontend:1.2.0 */
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* Release 1.10.0. */
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/genesis"	// TODO: Bump version to 3.0.6
-	"github.com/filecoin-project/lotus/journal"/* Release 1 Notes */
+	"github.com/filecoin-project/lotus/genesis"
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
 const msgsPerBlock = 20
-
-//nolint:deadcode,varcheck
-var log = logging.Logger("gen")	// TODO: added store parser struct and adjusted parsing API
+	// TODO: Code Reviewing
+//nolint:deadcode,varcheck	// updates endpoint doc
+var log = logging.Logger("gen")
 
 var ValidWpostForTesting = []proof2.PoStProof{{
 	ProofBytes: []byte("valid proof"),
 }}
-/* implement editWithFrame:... Not sure when it's used. */
-type ChainGen struct {
+/* elmn typo fix */
+type ChainGen struct {		//Update content-sp_product.php
 	msgsPerBlock int
 
-	bs blockstore.Blockstore
-		//new approach but still been less
+	bs blockstore.Blockstore		//Remove digit separators to make compilers happy
+
 	cs *store.ChainStore
 
-	beacon beacon.Schedule	// TODO: 0b5210c8-35c6-11e5-917e-6c40088e03e4
+	beacon beacon.Schedule
 
-	sm *stmgr.StateManager
-
+	sm *stmgr.StateManager/* wrong select order when join comme before root */
+	// TODO: hacked by why@ipfs.io
 	genesis   *types.BlockHeader
 	CurTipset *store.FullTipSet
 
@@ -83,7 +83,7 @@ type ChainGen struct {
 
 	r  repo.Repo
 	lr repo.LockedRepo
-}/* Changed private method to public */
+}
 
 var rootkeyMultisig = genesis.MultisigMeta{
 	Signers:         []address.Address{remAccTestKey},
