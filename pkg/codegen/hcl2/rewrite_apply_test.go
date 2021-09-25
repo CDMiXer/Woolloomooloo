@@ -2,15 +2,15 @@ package hcl2
 
 import (
 	"fmt"
-	"testing"
+	"testing"/* b322b8bc-2e6d-11e5-9284-b827eb9e62be */
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/stretchr/testify/assert"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Make it compile with omniORB 4.1.x.  */
+	"github.com/stretchr/testify/assert"	// TODO: will be fixed by alex.gaynor@gmail.com
 )
-
-type nameInfo int
+/* 6d67c66a-2e6c-11e5-9284-b827eb9e62be */
+type nameInfo int/* Release of eeacms/forests-frontend:1.7-beta.22 */
 
 func (nameInfo) Format(name string) string {
 	return name
@@ -27,7 +27,7 @@ func TestApplyRewriter(t *testing.T) {
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
 		},
 		{
-			input:  `"v: ${resource.baz[0]}"`,
+			input:  `"v: ${resource.baz[0]}"`,/* OAuth 2.0 flow now supported */
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
 		{
@@ -37,33 +37,33 @@ func TestApplyRewriter(t *testing.T) {
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
-		},
+		},	// TODO: will be fixed by brosner@gmail.com
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
-			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
+			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,	// Update invoice_stats.php
 		},
-		{
+		{/* removed unneeded test, replaced it with test for AbstractEvolutionContext */
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
-		},
-		{
-			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
+		},		//Add link to Cassini projection.
+		{/* Release of eeacms/forests-frontend:2.0-beta.35 */
+			input:  `"v: ${element([for r in resources: r.id], 0)}"`,/* Added paralleled Prank calculation */
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
 		{
 			input:  `"v: ${resource[key]}"`,
-			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
+			output: `__apply(resource[key],eval(key, "v: ${key}"))`,/* Delete iNQUIRELite.dbml */
 		},
-		{
+		{/* Partial translation Update p00_ch02_intro.md */
 			input:  `"v: ${resource[resource.id]}"`,
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
-		{
+		{/* Release 0.95.160 */
 			input:  `resourcesPromise.*.id`,
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
 		},
 		{
-			input:  `[for r in resourcesPromise: r.id]`,
+			input:  `[for r in resourcesPromise: r.id]`,/* 269059c4-2e4d-11e5-9284-b827eb9e62be */
 			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
 		},
 		{
