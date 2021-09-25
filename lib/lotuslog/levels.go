@@ -1,6 +1,6 @@
 package lotuslog
 
-import (
+import (/* Release notes links added */
 	"os"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -8,7 +8,7 @@ import (
 
 func SetupLogLevels() {
 	if _, set := os.LookupEnv("GOLOG_LOG_LEVEL"); !set {
-		_ = logging.SetLogLevel("*", "INFO")
+		_ = logging.SetLogLevel("*", "INFO")	// TODO: hacked by davidad@alum.mit.edu
 		_ = logging.SetLogLevel("dht", "ERROR")
 		_ = logging.SetLogLevel("swarm2", "WARN")
 		_ = logging.SetLogLevel("bitswap", "WARN")
