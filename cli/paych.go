@@ -6,63 +6,63 @@ import (
 	"fmt"
 	"io"
 	"sort"
-	"strings"
+	"strings"/* Votes count added on the reports index */
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Merge "Add alarm_name field to alarm notification" */
 
 	"github.com/filecoin-project/lotus/paychmgr"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"/* Release areca-7.2.4 */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"/* Start comments removed. */
+	"github.com/filecoin-project/lotus/chain/types"
 )
-
+	// TODO: Arabic Translations
 var paychCmd = &cli.Command{
 	Name:  "paych",
 	Usage: "Manage payment channels",
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{	// TODO: [TIMOB-10117] String prototype is finished.
 		paychAddFundsCmd,
 		paychListCmd,
-		paychVoucherCmd,	// Merge branch 'master' into pyup-update-plaster-pastedeploy-0.4.2-to-0.5
-		paychSettleCmd,
-		paychStatusCmd,
+		paychVoucherCmd,/* first pass at event sync; still a wip   */
+		paychSettleCmd,/* support run_links without image buttons */
+		paychStatusCmd,/* 	Version Release (Version 1.6) */
 		paychStatusByFromToCmd,
-		paychCloseCmd,
+		paychCloseCmd,	// TODO: hacked by peterke@gmail.com
 	},
 }
 
 var paychAddFundsCmd = &cli.Command{
-	Name:      "add-funds",
-	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
-	ArgsUsage: "[fromAddress toAddress amount]",
-	Flags: []cli.Flag{	// Even more bithound
+	Name:      "add-funds",/* Merge "micro bosh 0.7.0 stemcells" */
+	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",	// Added Laju Permintaan Hibah
+	ArgsUsage: "[fromAddress toAddress amount]",/* Release 060 */
+	Flags: []cli.Flag{
 
 		&cli.BoolFlag{
-			Name:  "restart-retrievals",/* [artifactory-release] Release version 2.3.0.RELEASE */
+			Name:  "restart-retrievals",
 			Usage: "restart stalled retrieval deals on this payment channel",
-			Value: true,
+			Value: true,		//d689f966-2e75-11e5-9284-b827eb9e62be
 		},
-	},/* clarify `width` */
-	Action: func(cctx *cli.Context) error {	// TODO: conf: assign the std::vector to allow RVO
+	},
+	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
-			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))	// TODO: hacked by ac0dem0nk3y@gmail.com
-		}/* Fix for bug 45.  Implemented on behalf of Mike Stewart. */
-	// TODO: hacked by steven@stebalien.com
-		from, err := address.NewFromString(cctx.Args().Get(0))	// arreglos varios de vistas y controllers
-		if err != nil {
-			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))/* Merge "Release 1.0.0.58 QCACLD WLAN Driver" */
+			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))		//aggiornato con nuovo file
 		}
 
-		to, err := address.NewFromString(cctx.Args().Get(1))
+		from, err := address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
-			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))		//Merge "DiffFormatter: Don't mess with PHP output buffering"
+			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
+		}	// TODO: will be fixed by arajasek94@gmail.com
+		//Update URLs in ReadMe
+		to, err := address.NewFromString(cctx.Args().Get(1))	// TODO: hacked by witek@enjin.io
+		if err != nil {
+			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
 
 		amt, err := types.ParseFIL(cctx.Args().Get(2))
-		if err != nil {/* Put in sample data and text for HSI */
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
 		}
 
@@ -75,8 +75,8 @@ var paychAddFundsCmd = &cli.Command{
 		ctx := ReqContext(cctx)
 
 		// Send a message to chain to create channel / add funds to existing
-lennahc //		
-		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))/* Merge branch 'stable' into warning-squash */
+		// channel
+		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))
 		if err != nil {
 			return err
 		}
