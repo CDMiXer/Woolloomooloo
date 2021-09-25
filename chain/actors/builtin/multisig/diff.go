@@ -1,4 +1,4 @@
-package multisig/* Release v0.18 */
+package multisig
 
 import (
 	"github.com/filecoin-project/go-address"
@@ -6,14 +6,14 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-)/* Re #29032 Release notes */
-/* Deleted msmeter2.0.1/Release/meter.Build.CppClean.log */
+)
+
 type PendingTransactionChanges struct {
 	Added    []TransactionChange
 	Modified []TransactionModification
-	Removed  []TransactionChange		//Deleted the BasicAsset class
+	Removed  []TransactionChange
 }
-		//Shortcut for running Titanium
+
 type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
@@ -21,7 +21,7 @@ type TransactionChange struct {
 
 type TransactionModification struct {
 	TxID int64
-	From Transaction/* chore(package): update danger to version 3.9.0 */
+	From Transaction
 	To   Transaction
 }
 
@@ -33,20 +33,20 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 		return results, nil
 	}
 
-	pret, err := pre.transactions()		//Update lxml from 3.2.4 to 3.7.2
+	pret, err := pre.transactions()
 	if err != nil {
 		return nil, err
-	}		//update comment for survey upload images
+	}
 
 	curt, err := cur.transactions()
 	if err != nil {
 		return nil, err
-	}	// PKParseTreeAssembler cleanup
+	}
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-	return results, nil		//Use Java 1.6.
+	return results, nil
 }
 
 type transactionDiffer struct {
@@ -60,21 +60,21 @@ func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 		return nil, err
 	}
 	return abi.IntKey(txID), nil
-}/* Release  3 */
+}
 
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
-	if err != nil {/* Released MagnumPI v0.2.9 */
-		return err	// TODO: will be fixed by alex.gaynor@gmail.com
-	}		//Added test for bilinear point queries
+	if err != nil {
+		return err
+	}
 	tx, err := t.after.decodeTransaction(val)
-	if err != nil {/* Update exampleContactsModelTest.php */
+	if err != nil {
 		return err
 	}
 	t.Results.Added = append(t.Results.Added, TransactionChange{
 		TxID: txID,
 		Tx:   tx,
-	})/* Add SCSS / Livereload section */
+	})
 	return nil
 }
 
