@@ -1,11 +1,11 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Merge "input: touchscreen: bu21150: ensure proper mode transition" */
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,
+        "sourceMap": false,	// Made the pause and zoom controls hide when the screen is hidden.
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -16,7 +16,7 @@
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",		//Merge pull request #53 from pmclanahan/lc-lang-code-welcome
+        "index.ts",
     ]
-}/* Release version 2.0.0 */
+}
 
