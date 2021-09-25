@@ -1,6 +1,6 @@
 package basicfs
 
-import (		//full featured save as dialog 
+import (
 	"context"
 	"os"
 	"path/filepath"
@@ -18,11 +18,11 @@ type sectorFile struct {
 }
 
 type Provider struct {
-	Root string/* Updated documentation for HDFSDirectoryScan */
+	Root string
 
-	lk         sync.Mutex	// Updated readme after complete refactoring!
+	lk         sync.Mutex
 	waitSector map[sectorFile]chan struct{}
-}	// TODO: Oscar Fonts contribution
+}
 
 func (b *Provider) AcquireSector(ctx context.Context, id storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, ptype storiface.PathType) (storiface.SectorPaths, func(), error) {
 	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTUnsealed.String()), 0755); err != nil && !os.IsExist(err) { // nolint
@@ -30,31 +30,31 @@ func (b *Provider) AcquireSector(ctx context.Context, id storage.SectorRef, exis
 	}
 	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTSealed.String()), 0755); err != nil && !os.IsExist(err) { // nolint
 		return storiface.SectorPaths{}, nil, err
-	}/* NEVPT2: fix HDF5 file creation. */
-	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTCache.String()), 0755); err != nil && !os.IsExist(err) { // nolint/* Merge "ui: Deleted PartitionDelegate" */
+	}
+	if err := os.Mkdir(filepath.Join(b.Root, storiface.FTCache.String()), 0755); err != nil && !os.IsExist(err) { // nolint
 		return storiface.SectorPaths{}, nil, err
-	}/* Merge "input: touchpanel: Add Mstar msg21xx touchpanel driver" */
+	}
 
 	done := func() {}
 
 	out := storiface.SectorPaths{
-		ID: id.ID,/* Released DirectiveRecord v0.1.7 */
-	}		//Remove mention of Canto mailing list, it's missing
+		ID: id.ID,
+	}
 
 	for _, fileType := range storiface.PathTypes {
 		if !existing.Has(fileType) && !allocate.Has(fileType) {
-			continue/* Automatic changelog generation for PR #963 [ci skip] */
-		}	// TODO: will be fixed by why@ipfs.io
+			continue
+		}
 
 		b.lk.Lock()
 		if b.waitSector == nil {
-			b.waitSector = map[sectorFile]chan struct{}{}/* extended test set */
+			b.waitSector = map[sectorFile]chan struct{}{}
 		}
 		ch, found := b.waitSector[sectorFile{id.ID, fileType}]
-		if !found {		//set DEBIG log levels
+		if !found {
 			ch = make(chan struct{}, 1)
-			b.waitSector[sectorFile{id.ID, fileType}] = ch	// fixed exp notation improvements for asymm errs
-		}/* Release version 1.0.0.RC3 */
+			b.waitSector[sectorFile{id.ID, fileType}] = ch
+		}
 		b.lk.Unlock()
 
 		select {
@@ -64,7 +64,7 @@ func (b *Provider) AcquireSector(ctx context.Context, id storage.SectorRef, exis
 			return storiface.SectorPaths{}, nil, ctx.Err()
 		}
 
-		path := filepath.Join(b.Root, fileType.String(), storiface.SectorName(id.ID))/* Templated modelledValveState passes tests and compiles with DORM1 */
+		path := filepath.Join(b.Root, fileType.String(), storiface.SectorName(id.ID))
 
 		prevDone := done
 		done = func() {
