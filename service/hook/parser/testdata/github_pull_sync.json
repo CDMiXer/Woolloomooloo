@@ -2,13 +2,13 @@
   "Action": "synchronized",
   "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",		//Pitt clean up + add simple view pub element
-    "Name": "drone-test-go",
+    "Namespace": "bradrydzewski",
+    "Name": "drone-test-go",	// TODO: added links to institutional affiliations
     "Perm": null,
     "Branch": "master",
-    "Private": true,
+    "Private": true,		//790b6f5e-2d53-11e5-baeb-247703a38240
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",	// TODO: hacked by jon@atack.com
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
@@ -18,26 +18,26 @@
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
-    "Ref": "refs/pull/1/head",/* Prepare samples module */
-    "Source": "master",
-    "Target": "bradrydzewski-patch-1",/* #2 Update text */
-    "Fork": "bradrydzewski/drone-test-go",
+    "Ref": "refs/pull/1/head",/* Release and analytics components to create the release notes */
+    "Source": "master",	// TODO: addd an icetaggerApertium shell
+    "Target": "bradrydzewski-patch-1",
+    "Fork": "bradrydzewski/drone-test-go",/* remove configure checks for gapi2-fixup */
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
-    "Closed": false,
+    "Closed": false,	// TODO: will be fixed by hi@antfu.me
     "Merged": false,
     "Author": {
       "Login": "bradrydzewski",
-      "Name": "",
+      "Name": "",		//07daa694-4b1a-11e5-b3c5-6c40088e03e4
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-25T19:21:45Z"
   },
-  "Sender": {
-    "Login": "bradrydzewski",/* Bumps version to 6.0.36 Official Release */
+  "Sender": {	// TODO: Update D.xshd
+    "Login": "bradrydzewski",
     "Name": "",
-    "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
+    "Email": "",/* Release v1.0.3 */
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* Create Release Model.md */
   }
 }
