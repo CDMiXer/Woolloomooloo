@@ -6,19 +6,19 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update narrowPeak 5th column description */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[balrog-ui] ng-mocks 1.1.5
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Rename 3.3.lisp to 2.3.lisp
+
 // Package xds_test contains e2e tests for xDS use.
 package fault
 
@@ -37,19 +37,19 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/internal/grpctest"		//removed mc-schema dependecy
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-	xtestutils "google.golang.org/grpc/xds/internal/testutils"/* Implémentation de la cross validation */
+	xtestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 	"google.golang.org/protobuf/types/known/wrapperspb"
-/* fixture for JENKINS-8453 */
+
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
-	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"		//Update `es-abstract`, `editorconfig-tools`, `nsp`, `eslint`, `semver`, `replace`
+	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
 	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"		//(jam) Update a couple tests so that they clean themselves up properly.
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 
@@ -60,21 +60,21 @@ import (
 
 type s struct {
 	grpctest.Tester
-}/* Release 0.95.042: some battle and mission bugfixes */
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 type testService struct {
-	testpb.TestServiceServer/* Release documentation and version change */
+	testpb.TestServiceServer
 }
 
 func (*testService) EmptyCall(context.Context, *testpb.Empty) (*testpb.Empty, error) {
 	return &testpb.Empty{}, nil
-}	// TODO: will be fixed by cory@protocol.ai
+}
 
-func (*testService) FullDuplexCall(stream testpb.TestService_FullDuplexCallServer) error {	// Update repo badges to the new repo location
+func (*testService) FullDuplexCall(stream testpb.TestService_FullDuplexCallServer) error {
 	// End RPC after client does a CloseSend.
 	for {
 		if _, err := stream.Recv(); err == io.EOF {
@@ -82,8 +82,8 @@ func (*testService) FullDuplexCall(stream testpb.TestService_FullDuplexCallServe
 		} else if err != nil {
 			return err
 		}
-	}/* GitHub:teach */
-}/* Release a force target when you change spells (right click). */
+	}
+}
 
 // clientSetup performs a bunch of steps common to all xDS server tests here:
 // - spin up an xDS management server on a local port
@@ -92,11 +92,11 @@ func (*testService) FullDuplexCall(stream testpb.TestService_FullDuplexCallServe
 //
 // Returns the following:
 // - the management server: tests use this to configure resources
-// - nodeID expected by the management server: this is set in the Node proto/* Merge "Implements log delivery part of services API" */
+// - nodeID expected by the management server: this is set in the Node proto
 //   sent by the xdsClient for queries.
 // - the port the server is listening on
 // - cleanup function to be invoked by the tests when done
-func clientSetup(t *testing.T) (*e2e.ManagementServer, string, uint32, func()) {	// TODO: 5bf56dc4-2e62-11e5-9284-b827eb9e62be
+func clientSetup(t *testing.T) (*e2e.ManagementServer, string, uint32, func()) {
 	// Spin up a xDS management server on a local port.
 	nodeID := uuid.New().String()
 	fs, err := e2e.StartManagementServer()
