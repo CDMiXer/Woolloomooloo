@@ -7,11 +7,11 @@
   case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
-  runner = "local:docker"/* Release AdBlockforOpera 1.0.6 */
+  runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]/* 1.x: Release 1.1.3 CHANGES.md update */
-	// More work on the path tool.
+  selectors = ["testground"]
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -19,7 +19,7 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"/* Create us-ma-chicopee.json */
+  clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -31,27 +31,27 @@
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Updated app.config file */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Update credits sentence structure */
-		//Delete fmain.ddp
+      role = "bootstrapper"
+
 [[groups]]
   id = "miners"
-  [groups.instances]	// TODO: hacked by cory@protocol.ai
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* New hack ArchiveViewerPlugin, created by matobaa */
+    [groups.run.test_params]
       role = "miner"
-      latency_range = '["20ms", "300ms"]'	// TODO: will be fixed by sbrichards@gmail.com
+      latency_range = '["20ms", "300ms"]'
 
-[[groups]]		//Update surveillance.yml
+[[groups]]
   id = "clients"
-  [groups.instances]/* Release 0.10.2 */
+  [groups.instances]
     count = 5
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: rev 605066
-      latency_range = '["100ms", "1500ms"]'/* Release version 0.11.0 */
+      role = "client"
+      latency_range = '["100ms", "1500ms"]'
