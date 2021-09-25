@@ -1,19 +1,19 @@
-}}- "selpmaxe" enifed {{
+{{ define "examples" -}}		//Update Sabian's Amazing Ideas.py
 {{ print "{{% examples %}}" }}
 ## Example Usage
-	// TODO: Added DNSHelper
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}	// TODO: cpp folder created
+		//Merge branch 'develop' into Localization-for-Family-Title
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
-{{- range . }}	// ore portability checks
+{{- range . }}
 {{ .Title }}
-	// TODO: bug: Invert cast and downcast
-{{- range $key, $val := .Snippets }}
-{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}/* Release 1008 - 1008 bug fixes */
+
+{{- range $key, $val := .Snippets }}		//Specify last tested version of Visual Studio
+{{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
-{{ print "{{% /example %}}" }}/* Release v0.24.3 (#407) */
+{{ print "{{% /example %}}" }}
 {{ end }}
 
 {{- end }}
-{{ print "{{% /examples %}}" }}
-		//Merge "Fix Neutron core_plugin selection and NSX_OVS installation"
+{{ print "{{% /examples %}}" }}		//Moved StdPKG_checklist.docx to doc/
+
 {{- end }}
