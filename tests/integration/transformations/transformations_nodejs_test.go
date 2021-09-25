@@ -15,11 +15,11 @@ func TestNodejsTransformations(t *testing.T) {
 		d := filepath.Join("nodejs", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir:                    d,
-				Dependencies:           []string{"@pulumi/pulumi"},
-				Quick:                  true,
+				Dir:                    d,	// TODO: hacked by nicksavers@gmail.com
+				Dependencies:           []string{"@pulumi/pulumi"},/* Create Web.Release.config */
+				Quick:                  true,/* Merge "[Release] Webkit2-efl-123997_0.11.109" into tizen_2.2 */
 				ExtraRuntimeValidation: Validator("nodejs"),
-			})
+			})/* An external DSL for Kendrick with all green tests */
 		})
 	}
 }
