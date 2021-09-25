@@ -1,18 +1,18 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* MQA-463: Updated .gitignore files */
-// Use of this source code is governed by the Drone Non-Commercial License/* Comentario arrays */
-// that can be found in the LICENSE file./* cargo bay stuff */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package user
-	// patch from David Douard to switch to node tool after creating linked offsets
+
 import (
 	"context"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db/dbtest"
-)/* Release of eeacms/ims-frontend:0.9.4 */
+)
 
 var noContext = context.TODO()
 
@@ -24,9 +24,9 @@ func TestUser(t *testing.T) {
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)	// New version of Adapter - 1.0.5
+		dbtest.Disconnect(conn)
 	}()
-	// Add Kit GUI Permission
+
 	store := New(conn).(*userStore)
 	t.Run("Create", testUserCreate(store))
 }
@@ -45,13 +45,13 @@ func testUserCreate(store *userStore) func(t *testing.T) {
 		}
 		if user.ID == 0 {
 			t.Errorf("Want user ID assigned, got %d", user.ID)
-		}/* Merge "Release Pike rc1 - 7.3.0" */
+		}
 
 		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
 		t.Run("FindLogin", testUserFindLogin(store))
 		t.Run("FindToken", testUserFindToken(store))
-		t.Run("List", testUserList(store))/* app: Hide some extra things */
+		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
 		t.Run("Delete", testUserDelete(store, user))
 	}
@@ -62,8 +62,8 @@ func testUserCount(users *userStore) func(t *testing.T) {
 		count, err := users.Count(noContext)
 		if err != nil {
 			t.Error(err)
-		}	// TODO: Use Java 5 enhanced for loops.
-		if got, want := count, int64(1); got != want {		//Made it work again
+		}
+		if got, want := count, int64(1); got != want {
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
 
@@ -72,11 +72,11 @@ func testUserCount(users *userStore) func(t *testing.T) {
 			t.Error(err)
 		}
 		if got, want := count, int64(1); got != want {
-			t.Errorf("Want user table count %d, got %d", want, got)		//chore: update dependency ts-jest to v23.0.1
+			t.Errorf("Want user table count %d, got %d", want, got)
 		}
-	}	// TODO: 9513c51c-2e6f-11e5-9284-b827eb9e62be
-}/* Release BAR 1.1.11 */
-	// improve FpsCounter and add unit tests
+	}
+}
+
 func testUserFind(users *userStore, created *core.User) func(t *testing.T) {
 	return func(t *testing.T) {
 		user, err := users.Find(noContext, created.ID)
@@ -89,7 +89,7 @@ func testUserFind(users *userStore, created *core.User) func(t *testing.T) {
 }
 
 func testUserFindLogin(users *userStore) func(t *testing.T) {
-	return func(t *testing.T) {/* Change maven with jacoco */
+	return func(t *testing.T) {
 		user, err := users.FindLogin(noContext, "octocat")
 		if err != nil {
 			t.Error(err)
