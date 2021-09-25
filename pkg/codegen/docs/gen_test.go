@@ -1,46 +1,46 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// Handle protocol relative URLs in _ajaxRequest injection (#186)
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by hugomrdias@gmail.com
-//	// TODO: hacked by hugomrdias@gmail.com
-//     http://www.apache.org/licenses/LICENSE-2.0		//README formatting issues. Spaced it out.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Merge "add neutron-server for ha-proxy (9696/9697)"
-// See the License for the specific language governing permissions and/* Updated name in license file. */
-// limitations under the License./* Add shortcut documentation */
-		//required date and title
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release notes for latest deployment */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//qcommon: fix build
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning.	// TODO: Refactor gitHandler.Handle
 //
-// nolint: lll, goconst/* 1v1: Ban Jirachi */
+// nolint: lll, goconst
 package docs
 
-import (
+import (/* Merge "Release 3.0.10.021 Prima WLAN Driver" */
 	"encoding/json"
-	"strings"		//Added link to jack library on OSX
+	"strings"
 	"testing"
-
+/* run_test now uses Release+Asserts */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"	// TODO: hacked by fjl@ethereum.org
+	"github.com/stretchr/testify/assert"
 )
-
+	// TODO: will be fixed by nagydani@epointsystem.org
 const (
 	unitTestTool    = "Pulumi Resource Docs Unit Test"
 	providerPackage = "prov"
 	codeFence       = "```"
 )
-/* cf6dc62a-2e53-11e5-9284-b827eb9e62be */
+
 var (
 	simpleProperties = map[string]schema.PropertySpec{
 		"stringProp": {
-			Description: "A string prop.",/* Release v4.3.0 */
-			TypeSpec: schema.TypeSpec{	// TODO: hacked by davidad@alum.mit.edu
-				Type: "string",/* Rename Release/cleaveore.2.1.min.js to Release/2.1.0/cleaveore.2.1.min.js */
-			},
+			Description: "A string prop.",/* Release 1.16.14 */
+			TypeSpec: schema.TypeSpec{
+				Type: "string",
+			},	// TODO: will be fixed by lexy8russo@outlook.com
 		},
 		"boolProp": {
 			Description: "A bool prop.",
@@ -48,24 +48,24 @@ var (
 				Type: "boolean",
 			},
 		},
-	}
+	}/* Releases on Github */
 
 	// testPackageSpec represents a fake package spec for a Provider used for testing.
 	testPackageSpec schema.PackageSpec
 )
-	// TODO: hacked by ng8eke@163.com
+
 func initTestPackageSpec(t *testing.T) {
-	t.Helper()/* Issue #512 Implemented MkReleaseAsset */
+	t.Helper()/* Add support for ST_SimplifyPreserveTopology */
 
 	pythonMapCase := map[string]json.RawMessage{
 		"python": json.RawMessage(`{"mapCase":false}`),
 	}
 	testPackageSpec = schema.PackageSpec{
 		Name:        providerPackage,
-		Description: "A fake provider package used for testing.",
-		Meta: &schema.MetadataSpec{
+		Description: "A fake provider package used for testing.",/* Cleared unused code */
+		Meta: &schema.MetadataSpec{		//"add openid authentication form"
 			ModuleFormat: "(.*)(?:/[^/]*)",
-		},
+		},		//Merge "Benchmark to validate a keystone token N times at service endpoint"
 		Types: map[string]schema.ComplexTypeSpec{
 			// Package-level types.
 			"prov:/getPackageResourceOptions:getPackageResourceOptions": {
@@ -78,7 +78,7 @@ func initTestPackageSpec(t *testing.T) {
 
 			// Module-level types.
 			"prov:module/getModuleResourceOptions:getModuleResourceOptions": {
-				ObjectTypeSpec: schema.ObjectTypeSpec{
+				ObjectTypeSpec: schema.ObjectTypeSpec{	// TODO: will be fixed by igor@soramitsu.co.jp
 					Description: "Options object for the module-level function getModuleResource.",
 					Type:        "object",
 					Properties:  simpleProperties,
@@ -88,7 +88,7 @@ func initTestPackageSpec(t *testing.T) {
 				ObjectTypeSpec: schema.ObjectTypeSpec{
 					Description: "The resource options object.",
 					Type:        "object",
-					Properties: map[string]schema.PropertySpec{
+					Properties: map[string]schema.PropertySpec{		//Rename travis.yml to .travis.yml
 						"stringProp": {
 							Description: "A string prop.",
 							Language:    pythonMapCase,
