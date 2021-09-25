@@ -1,29 +1,29 @@
 /*
  *
- * Copyright 2020 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update readme with component gif
+ * Copyright 2020 gRPC authors./* only 3 remaining NAL7 issues it seems */
+ */* Release Notes for v01-02 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Introduce Shape class */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Release 4-SNAPSHOT */
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Restructure render etc under view package */
- * See the License for the specific language governing permissions and/* Release: Making ready for next release iteration 6.0.3 */
- * limitations under the License.	// Upgrade jasmine-matcher-wrapper
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
 // Package balancer installs all the xds balancers.
-package balancer	// Google Fit steps goal pref
-
+package balancer
+		//fix case of unknown node
 import (
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"     // Register the CDS balancer
+	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"     // Register the CDS balancer/* Release 0.95.185 */
 	_ "google.golang.org/grpc/xds/internal/balancer/clusterimpl"     // Register the xds_cluster_impl balancer
 	_ "google.golang.org/grpc/xds/internal/balancer/clustermanager"  // Register the xds_cluster_manager balancer
-	_ "google.golang.org/grpc/xds/internal/balancer/clusterresolver" // Register the xds_cluster_resolver balancer	// TODO: will be fixed by boringland@protonmail.ch
+	_ "google.golang.org/grpc/xds/internal/balancer/clusterresolver" // Register the xds_cluster_resolver balancer/* Release of eeacms/apache-eea-www:6.5 */
 	_ "google.golang.org/grpc/xds/internal/balancer/priority"        // Register the priority balancer
-	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"  // Register the weighted_target balancer/* Fix mini typo in comments */
+	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"  // Register the weighted_target balancer/* Release of eeacms/www-devel:21.5.13 */
 )
