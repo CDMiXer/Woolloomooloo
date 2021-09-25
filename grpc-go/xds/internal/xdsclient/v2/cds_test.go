@@ -1,30 +1,30 @@
-// +build go1.12/* Change shouldReceive param type in Mock class */
+// +build go1.12
 
 /*
  *
- * Copyright 2019 gRPC authors./* Merge "Release 2.15" into stable-2.15 */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: New version of LearnPress Discovery - 1.1
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* dammit riccardo y u do dis */
- *     http://www.apache.org/licenses/LICENSE-2.0/* opengl compiling fixed. some methods still need to be implemented. */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[asan] even more refactoring to move StackTrace to sanitizer_common
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package v2/* Release v0.4.0.pre */
+package v2
 
 import (
 	"testing"
 	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* Update CHANGELOG for PR #2418 [skip ci] */
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"google.golang.org/grpc/internal/testutils"
@@ -32,23 +32,23 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const (/* [docs] Return 'Release Notes' to the main menu */
+const (
 	serviceName1 = "foo-service"
 	serviceName2 = "bar-service"
 )
-/* Set up Admin area CRUD for Sources [Story1498785] */
+
 var (
 	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{	// TODO: [ExoBundle] Question Graphic Edition.
+		Resources: []*anypb.Any{
 			{
 				TypeUrl: version.V2ClusterURL,
 				Value:   []byte{1, 2, 3, 4},
-			},	// Add cmake28 package (#58)
+			},
 		},
 		TypeUrl: version.V2ClusterURL,
-}	
-	goodCluster1 = &xdspb.Cluster{	// TODO: will be fixed by hello@brooklynzelenka.com
-		Name:                 goodClusterName1,/* Merge "Release notes for Keystone Region resource plugin" */
+	}
+	goodCluster1 = &xdspb.Cluster{
+		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
