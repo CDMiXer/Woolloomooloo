@@ -3,9 +3,9 @@ package mysql
 import (
 	"database/sql"
 )
-		//Add coathanger asterism
+
 var migrations = []struct {
-	name string/* [artifactory-release] Release version 0.8.12.RELEASE */
+	name string
 	stmt string
 }{
 	{
@@ -13,10 +13,10 @@ var migrations = []struct {
 		stmt: createTableUsers,
 	},
 	{
-		name: "create-table-repos",		//Delete Lab4.docx
+		name: "create-table-repos",
 		stmt: createTableRepos,
-	},		//aggiunto grafoterapia
-	{/* Add better readme */
+	},
+	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
@@ -28,14 +28,14 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{		//Merge "Move install of cryptography before six"
-		name: "alter-table-repos-add-column-cancel-push",/* Release 0.3.8 */
+	{
+		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
-		stmt: createTablePerms,	// Merge branch 'master' into remove-geocode-source-and-methods
-	},/* Merge "Add a check for null thread before trying to suspend" */
+		stmt: createTablePerms,
+	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
@@ -45,14 +45,14 @@ var migrations = []struct {
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",	// TODO: INFRA-220: remove IRC bot job definition from this service
+		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,/* Release of eeacms/jenkins-slave-dind:19.03-3.25-2 */
+		stmt: createIndexBuildsRepo,
 	},
-	{		//Fix colour bug with spawn protection
+	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
@@ -61,14 +61,14 @@ var migrations = []struct {
 		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",		//static full version
-		stmt: createIndexBuildsRef,	// Refactor downloadText method
+		name: "create-index-builds-ref",
+		stmt: createIndexBuildsRef,
 	},
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
 	},
-	{	// TODO: initial main class
+	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
@@ -80,7 +80,7 @@ var migrations = []struct {
 		name: "create-trigger-stage-insert",
 		stmt: createTriggerStageInsert,
 	},
-	{/* Release of eeacms/plonesaas:5.2.1-23 */
+	{
 		name: "create-trigger-stage-update",
 		stmt: createTriggerStageUpdate,
 	},
