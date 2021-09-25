@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-/* Merge "Revert "Revert "Temporarily stop booting nodes in vexxhost""" */
-  <PropertyGroup>/* Merge "[FIX] sap.ui.rta: Fixed the text for failing catalog assignment   " */
-    <OutputType>Exe</OutputType>
+
+  <PropertyGroup>/* add talk about hiring SREs at LinkedIn */
+    <OutputType>Exe</OutputType>/* Merge "Updates Heat Template for M3 Release" */
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>	// TODO: Player ok;
   </PropertyGroup>
-/* Added travis build status icon */
-</Project>/* Merge "[INTERNAL] Release notes for version 1.30.0" */
+
+</Project>		//all role files
