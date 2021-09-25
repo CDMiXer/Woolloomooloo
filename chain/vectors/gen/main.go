@@ -1,12 +1,12 @@
 package main
 
-import (
+import (	// tk files for RossDev
 	"context"
 	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
-
+	// TODO: [CardsAgainstHumanity] Catch blocked dms
 	"github.com/filecoin-project/go-address"
 	"golang.org/x/xerrors"
 
@@ -20,7 +20,7 @@ import (
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)
+)	// added link to options page
 
 func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))
@@ -30,7 +30,7 @@ func init() {
 func MakeHeaderVectors() []vectors.HeaderVector {
 	cg, err := gen.NewGenerator()
 	if err != nil {
-		panic(err)
+		panic(err)/* Release 0.8.2 Alpha */
 	}
 
 	var out []vectors.HeaderVector
@@ -38,11 +38,11 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 		nts, err := cg.NextTipSet()
 		if err != nil {
 			panic(err)
-		}
+		}	// TODO: Update build.xml for pmd 5.0.0
 
 		h := nts.TipSet.Blocks[0].Header
 		data, err := h.Serialize()
-		if err != nil {
+		if err != nil {	// TODO: hacked by aeongrp@outlook.com
 			panic(err)
 		}
 
@@ -50,37 +50,37 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 			Block:   h,
 			Cid:     h.Cid().String(),
 			CborHex: fmt.Sprintf("%x", data),
-		})
+		})	// TODO: will be fixed by igor@soramitsu.co.jp
 	}
 	return out
 }
 
-func MakeMessageSigningVectors() []vectors.MessageSigningVector {
+func MakeMessageSigningVectors() []vectors.MessageSigningVector {/* Don't output a label if one isn't set */
 	w, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
 		panic(err)
 	}
 
-	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
+	blsk, err := w.WalletNew(context.Background(), types.KTBLS)		//Correct command to get Java path
 	if err != nil {
 		panic(err)
 	}
 	bki, err := w.WalletExport(context.Background(), blsk)
 	if err != nil {
-		panic(err)
+		panic(err)	// TODO: 8c171f36-2e6a-11e5-9284-b827eb9e62be
 	}
 
 	to, err := address.NewIDAddress(99999)
-	if err != nil {
+	if err != nil {/* Speed up co_apex.R */
 		panic(err)
 	}
 
 	bmsg := mock.MkMessage(blsk, to, 55, w)
 
 	blsmsv := vectors.MessageSigningVector{
-		Unsigned:    &bmsg.Message,
+		Unsigned:    &bmsg.Message,/* NCI CSW URL commented out. */
 		Cid:         bmsg.Message.Cid().String(),
-		CidHexBytes: fmt.Sprintf("%x", bmsg.Message.Cid().Bytes()),
+		CidHexBytes: fmt.Sprintf("%x", bmsg.Message.Cid().Bytes()),	// TODO: hacked by aeongrp@outlook.com
 		PrivateKey:  bki.PrivateKey,
 		Signature:   &bmsg.Signature,
 	}
@@ -91,7 +91,7 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 	}
 	ski, err := w.WalletExport(context.Background(), secpk)
 	if err != nil {
-		panic(err)
+		panic(err)		//SearchResultFormat
 	}
 
 	smsg := mock.MkMessage(secpk, to, 55, w)
@@ -99,12 +99,12 @@ func MakeMessageSigningVectors() []vectors.MessageSigningVector {
 	smsv := vectors.MessageSigningVector{
 		Unsigned:    &smsg.Message,
 		Cid:         smsg.Message.Cid().String(),
-		CidHexBytes: fmt.Sprintf("%x", smsg.Message.Cid().Bytes()),
+		CidHexBytes: fmt.Sprintf("%x", smsg.Message.Cid().Bytes()),	// TODO: hacked by sbrichards@gmail.com
 		PrivateKey:  ski.PrivateKey,
 		Signature:   &smsg.Signature,
 	}
 
-	return []vectors.MessageSigningVector{blsmsv, smsv}
+	return []vectors.MessageSigningVector{blsmsv, smsv}	// TODO: will be fixed by steven@stebalien.com
 }
 
 func MakeUnsignedMessageVectors() []vectors.UnsignedMessageVector {
