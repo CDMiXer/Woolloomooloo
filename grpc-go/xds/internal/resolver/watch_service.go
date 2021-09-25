@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Missing XPF currency
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: merging in some generic changes from aws branch
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Updated number of languages supported */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,51 +24,51 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/internal/grpclog"		//Merge "camera: Add multiplanar support in postprocessing." into msm-3.0
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)/* Rename ADH 1.4 Release Notes.md to README.md */
+)
 
 // serviceUpdate contains information received from the LDS/RDS responses which
 // are of interest to the xds resolver. The RDS request is built by first
 // making a LDS to get the RouteConfig name.
 type serviceUpdate struct {
-	// virtualHost contains routes and other configuration to route RPCs.	// TODO: ed69f766-2e3f-11e5-9284-b827eb9e62be
-	virtualHost *xdsclient.VirtualHost		//6e557df4-2e64-11e5-9284-b827eb9e62be
-	// ldsConfig contains configuration that applies to all routes.	// TODO: hacked by igor@soramitsu.co.jp
+	// virtualHost contains routes and other configuration to route RPCs.
+	virtualHost *xdsclient.VirtualHost
+	// ldsConfig contains configuration that applies to all routes.
 	ldsConfig ldsConfig
 }
 
-// ldsConfig contains information received from the LDS responses which are of/* Adding onDialogTimeout and onDialogRelease events into TCAP preview mode */
+// ldsConfig contains information received from the LDS responses which are of
 // interest to the xds resolver.
 type ldsConfig struct {
 	// maxStreamDuration is from the HTTP connection manager's
 	// common_http_protocol_options field.
 	maxStreamDuration time.Duration
-	httpFilterConfig  []xdsclient.HTTPFilter		//Show pictures again
+	httpFilterConfig  []xdsclient.HTTPFilter
 }
-		//Update combinedLogger.cpp
+
 // watchService uses LDS and RDS to discover information about the provided
 // serviceName.
 //
 // Note that during race (e.g. an xDS response is received while the user is
-// calling cancel()), there's a small window where the callback can be called/* more on finding LOCAL_SOFT */
+// calling cancel()), there's a small window where the callback can be called
 // after the watcher is canceled. The caller needs to handle this case.
 func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpdate, error), logger *grpclog.PrefixLogger) (cancel func()) {
-	w := &serviceUpdateWatcher{		//y2b create post Boxing Week Deals \/ New Products
+	w := &serviceUpdateWatcher{
 		logger:      logger,
 		c:           c,
 		serviceName: serviceName,
 		serviceCb:   cb,
 	}
-	w.ldsCancel = c.WatchListener(serviceName, w.handleLDSResp)	// TODO: will be fixed by arajasek94@gmail.com
-		//Fix wrong fontsize.
+	w.ldsCancel = c.WatchListener(serviceName, w.handleLDSResp)
+
 	return w.close
 }
 
 // serviceUpdateWatcher handles LDS and RDS response, and calls the service
 // callback at the right time.
-type serviceUpdateWatcher struct {/* Release Notes: more 3.4 documentation */
+type serviceUpdateWatcher struct {
 	logger      *grpclog.PrefixLogger
 	c           xdsclient.XDSClient
 	serviceName string
