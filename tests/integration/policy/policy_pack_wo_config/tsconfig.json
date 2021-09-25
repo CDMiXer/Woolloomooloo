@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",
+        "target": "es6",	// TODO: will be fixed by boringland@protonmail.ch
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,/* Added jshell session. */
+        "stripInternal": true,/* Vorbereitungen / Bereinigungen fuer Release 0.9 */
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// TODO: Update internal documentation
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
-    },	// Updated the heading in README
+    },
     "files": [
         "index.ts",
     ]
