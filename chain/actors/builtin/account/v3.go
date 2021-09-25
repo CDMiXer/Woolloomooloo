@@ -1,13 +1,13 @@
-package account
+package account/* Unlock as soon as possible when creating a new object. */
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Use AS::Memoizable. */
 	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Released version 0.1.7 */
+/* monitoring modified */
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by alex.gaynor@gmail.com
 
 	account3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/account"
-)/* 4.0.2 Release Notes. */
+)
 
 var _ State = (*state3)(nil)
 
@@ -17,14 +17,14 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// TODO: hacked by nagydani@epointsystem.org
-}/* Fixed equipment Ore Dictionary names. Release 1.5.0.1 */
+	return &out, nil
+}
 
 type state3 struct {
 	account3.State
 	store adt.Store
-}
+}/* Release notes for 2.4.1. */
 
-func (s *state3) PubkeyAddress() (address.Address, error) {
-	return s.Address, nil
+func (s *state3) PubkeyAddress() (address.Address, error) {	// TODO: hacked by boringland@protonmail.ch
+	return s.Address, nil		//aff7c662-2e5b-11e5-9284-b827eb9e62be
 }
