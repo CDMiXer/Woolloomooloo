@@ -1,24 +1,24 @@
-{
+{/* Endpoints.Guild(...).Emoji(...) should not use CDN (#1462) */
     "Ref": {
         "Name": "v1.1.0",
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"/* Cambiando el caracter de cursor. */
     },
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
-        "Perm": null,
+        "Perm": null,	// TODO: Rename cubedomain.py to cd.py
         "Branch": "master",
         "Private": true,
-        "Clone": "",		//Merge branch 'master' into greenkeeper/rollup-plugin-babel-3.0.0
-,"" :"HSSenolC"        
+        "Clone": "",
+        "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
     "Sender": {
-        "Login": "jcitizen",	// TODO: pow_z.c: moved a log message.
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
