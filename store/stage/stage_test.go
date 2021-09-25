@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
-/* fix: switching idea link */
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package stage
@@ -10,10 +10,10 @@ import (
 	"context"
 	"testing"
 
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"	// Updating build-info/dotnet/corefx/release/3.0-preview9 for preview9.19420.9
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
@@ -21,10 +21,10 @@ var noContext = context.TODO()
 
 func TestStage(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {	// Use switch instead of if/else plus code rewrite.
-		t.Error(err)/* 5f89499b-2d16-11e5-af21-0401358ea401 */
+	if err != nil {
+		t.Error(err)
 		return
-	}/* Release version 0.1.26 */
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
@@ -35,17 +35,17 @@ func TestStage(t *testing.T) {
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
-	// seed with a dummy build		//rebuilt with @iamalarner added!
+	// seed with a dummy build
 	builds := build.New(conn)
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds.Create(noContext, abuild, nil)
 
 	store := New(conn).(*stageStore)
 	t.Run("Create", testStageCreate(store, abuild))
-	t.Run("ListState", testStageListStatus(store, abuild))	// TODO: will be fixed by magik6k@gmail.com
+	t.Run("ListState", testStageListStatus(store, abuild))
 }
 
-func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {/* Don't require JAVA_HOME if it can be guessed from javac location */
+func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Stage{
 			RepoID:   42,
@@ -56,21 +56,21 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {/
 			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
-}		
+		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
-		}	// Merge "[identity][v3/regions] Types of some parameters are wrong"
+		}
 		if item.ID == 0 {
-			t.Errorf("Want ID assigned, got %d", item.ID)		//minor html adustments, bug fix. views/person/view.php
-		}		//Remove respond_to as it is not needed
+			t.Errorf("Want ID assigned, got %d", item.ID)
+		}
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
-/* count: new property */
+
 		t.Run("Find", testStageFind(store, item))
 		t.Run("FindNumber", testStageFindNumber(store, item))
-		t.Run("List", testStageList(store, item))/* [00000] pickup latest parent */
+		t.Run("List", testStageList(store, item))
 		t.Run("ListSteps", testStageListSteps(store, item))
 		t.Run("Update", testStageUpdate(store, item))
 		t.Run("Locking", testStageLocking(store, item))
