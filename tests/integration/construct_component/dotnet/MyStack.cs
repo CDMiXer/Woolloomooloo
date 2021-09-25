@@ -4,7 +4,7 @@ using Pulumi;
 
 class MyStack : Stack
 {
-    public MyStack()/* Release 2.0.0 README */
+    public MyStack()
     {
         var componentA = new Component("a", new ComponentArgs { Echo = 42 });
         var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });
