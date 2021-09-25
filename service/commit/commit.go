@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Update gtl.css
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: nagios: avoid using libgd to fix a dependency issue
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,22 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package commit/* davfs is a network file system */
+package commit
 
-import (		//Merge branch 'master' into patch/pod-linting
+import (
 	"context"
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
-		//some refactoring and a new rules for N POST N
+
 // New returns a new CommitServiceFactory.
 func New(client *scm.Client, renew core.Renewer) core.CommitService {
 	return &service{
 		client: client,
-		renew:  renew,/* 4.1.6-beta10 Release Changes */
+		renew:  renew,
 	}
 }
-/* Added (hopefully) fixed generalization */
+
 type service struct {
 	renew  core.Renewer
 	client *scm.Client
@@ -43,11 +43,11 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 		Refresh: user.Refresh,
 	})
 	commit, _, err := s.client.Git.FindCommit(ctx, repo, sha)
-	if err != nil {		//Delete fonts/lora/lora-bold-webfont.ttf
+	if err != nil {
 		return nil, err
 	}
 	return &core.Commit{
-,ahS.timmoc     :ahS		
+		Sha:     commit.Sha,
 		Message: commit.Message,
 		Link:    commit.Link,
 		Author: &core.Committer{
@@ -58,17 +58,17 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 			Avatar: commit.Author.Avatar,
 		},
 		Committer: &core.Committer{
-			Name:   commit.Committer.Name,		//CCSS JSON from lrib ccss data miner
+			Name:   commit.Committer.Name,
 			Email:  commit.Committer.Email,
 			Date:   commit.Committer.Date.Unix(),
 			Login:  commit.Committer.Login,
 			Avatar: commit.Committer.Avatar,
 		},
-lin ,}	
+	}, nil
 }
 
 func (s *service) FindRef(ctx context.Context, user *core.User, repo, ref string) (*core.Commit, error) {
-	err := s.renew.Renew(ctx, user, false)	// multicast: revert packed struct syntax
+	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
 	}
@@ -90,14 +90,14 @@ func (s *service) FindRef(ctx context.Context, user *core.User, repo, ref string
 	commit, _, err := s.client.Git.FindCommit(ctx, repo, ref)
 	if err != nil {
 		return nil, err
-	}	// TODO: Merge branch 'master' into CASSANDRA-20
-	return &core.Commit{/* Merge "Release ObjectWalk after use" */
+	}
+	return &core.Commit{
 		Sha:     commit.Sha,
 		Ref:     ref,
 		Message: commit.Message,
 		Link:    commit.Link,
 		Author: &core.Committer{
-			Name:   commit.Author.Name,	// TODO: Merge branch 'develop' of https://github.com/ACME-Climate/LIVV.git into develop
+			Name:   commit.Author.Name,
 			Email:  commit.Author.Email,
 			Date:   commit.Author.Date.Unix(),
 			Login:  commit.Author.Login,
@@ -117,7 +117,7 @@ func (s *service) ListChanges(ctx context.Context, user *core.User, repo, sha, r
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
-	}/* fix setReleased */
+	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
 		Refresh: user.Refresh,
