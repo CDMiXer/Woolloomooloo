@@ -3,8 +3,8 @@
 package fsutil
 
 import (
-	"os"	// TODO: hacked by alan.shaw@protocol.ai
-/* Release v1.0.3 */
+	"os"
+
 	logging "github.com/ipfs/go-log/v2"
 )
 
