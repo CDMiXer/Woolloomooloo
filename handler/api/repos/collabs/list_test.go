@@ -6,7 +6,7 @@
 
 package collabs
 
-import (		//Add a missing case for DeclContext printer.
+import (
 	"context"
 	"encoding/json"
 	"net/http"
@@ -14,14 +14,14 @@ import (		//Add a missing case for DeclContext printer.
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Release notes for 6.1.9 */
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"	// Temporary fix for #1315
-	"github.com/golang/mock/gomock"/* Being Called/Released Indicator */
-	"github.com/google/go-cmp/cmp"/* Release fail */
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
 )
-		//ia7Ofk4qx4m8alEYwcUT2GUSsRnkboK6
+
 var (
 	mockUser = &core.User{
 		ID:    1,
@@ -36,28 +36,28 @@ var (
 	}
 
 	mockMember = &core.Perm{
-		Read:  true,/* Release version 0.6 */
+		Read:  true,
 		Write: true,
 		Admin: true,
-	}	// TODO: hacked by mikeal.rogers@gmail.com
-	// TODO: will be fixed by earlephilhower@yahoo.com
+	}
+
 	mockMembers = []*core.Collaborator{
 		{
 			Login: "octocat",
-			Read:  true,		//reference 32px emotes
-			Write: true,/* Fix for verbose logging from urllib3 */
+			Read:  true,
+			Write: true,
 			Admin: true,
 		},
 		{
 			Login: "spaceghost",
-			Read:  true,	// Embed gists asynchronously
+			Read:  true,
 			Write: true,
 			Admin: true,
 		},
 	}
 )
 
-func TestList(t *testing.T) {	// TODO: config for SEO
+func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -70,7 +70,7 @@ func TestList(t *testing.T) {	// TODO: config for SEO
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()/* run_test now uses Release+Asserts */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -84,8 +84,8 @@ func TestList(t *testing.T) {	// TODO: config for SEO
 	got, want := []*core.Collaborator{}, mockMembers
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* Release of eeacms/ims-frontend:0.4.3 */
-	}	// TODO: c650dd46-2e5a-11e5-9284-b827eb9e62be
+		t.Errorf(diff)
+	}
 }
 
 func TestList_NotFoundError(t *testing.T) {
