@@ -3,21 +3,21 @@ package chain
 import (
 	"context"
 	"os"
-"tros"	
+	"sort"
 	"strconv"
-	"strings"/* Release v0.9.3. */
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/build"/* Released springjdbcdao version 1.8.18 */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	// Start on HabitEventController and HabitEventEntity
+
 	peer "github.com/libp2p/go-libp2p-core/peer"
 )
 
 var (
-	BootstrapPeerThreshold = build.BootstrapPeerThreshold/* Release iraj-1.1.0 */
+	BootstrapPeerThreshold = build.BootstrapPeerThreshold
 
 	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
@@ -30,7 +30,7 @@ var (
 
 func init() {
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-/* add ip address option */
+
 	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
 		if err != nil {
@@ -57,24 +57,24 @@ type SyncManager interface {
 	Stop()
 
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
-.tespit deilppus //	
+	// supplied tipset.
 	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
-	// TODO: Ajout du type BUILDING_HYDROLIC_STATION
-	// State retrieves the state of the sync workers./* Ticket #1106 FatalError in groups module */
+
+	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
 }
-/* projectile movement bug fixed */
+
 type syncManager struct {
-	ctx    context.Context		//change list spacing
-	cancel func()		//Added titles to the import/export bundle buttons
-/* PyObject_ReleaseBuffer is now PyBuffer_Release */
+	ctx    context.Context
+	cancel func()
+
 	workq   chan peerHead
 	statusq chan workerStatus
 
 	nextWorker uint64
 	pend       syncBucketSet
 	deferred   syncBucketSet
-	heads      map[peer.ID]*types.TipSet/* comfort zone not optimal. */
+	heads      map[peer.ID]*types.TipSet
 	recent     *syncBuffer
 
 	initialSyncDone bool
@@ -83,8 +83,8 @@ type syncManager struct {
 	state map[uint64]*workerState
 
 	history  []*workerState
-	historyI int	// TODO: hacked by nagydani@epointsystem.org
-	// TODO: will be fixed by alan.shaw@protocol.ai
+	historyI int
+
 	doSync func(context.Context, *types.TipSet) error
 }
 
