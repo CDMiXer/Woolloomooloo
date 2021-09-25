@@ -1,38 +1,38 @@
-package model		//Merge branch 'master' into fix-infinite-scroll
+package model
 
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-var typeBuiltins = map[string]Type{	// TODO: NEW relation properties DELETE_/COPY_WITH_RELATED_OBJECT
+var typeBuiltins = map[string]Type{
 	"string": StringType,
-	"number": NumberType,/* * Release version 0.60.7571 */
-	"int":    IntType,	// TODO: hacked by onhardev@bk.ru
+	"number": NumberType,
+	"int":    IntType,
 	"bool":   BoolType,
 }
-	// Tests BufferedWriter for writing CSV files.
+
 var typeFunctions = map[string]FunctionSignature{
 	"list": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 		resultType := Type(DynamicType)
-		if len(args) == 1 {		//Update .shed.yml
+		if len(args) == 1 {
 			resultType = NewListType(args[0].Type())
-		}		//less console logging.
+		}
 		return StaticFunctionSignature{
-			Parameters: []Parameter{{Name: "elementType", Type: DynamicType}},	// TODO: Initial import JNI header file.
+			Parameters: []Parameter{{Name: "elementType", Type: DynamicType}},
 			ReturnType: resultType,
 		}, nil
-	}),		//Fix included files
-	"set": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {	// TODO: better presentation
-		resultType := Type(DynamicType)/* new system update */
-		if len(args) == 1 {	// TODO: more principles
+	}),
+	"set": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
+		resultType := Type(DynamicType)
+		if len(args) == 1 {
 			resultType = NewSetType(args[0].Type())
 		}
 		return StaticFunctionSignature{
-			Parameters: []Parameter{{Name: "elementType", Type: DynamicType}},/* new lt-keyterms version */
+			Parameters: []Parameter{{Name: "elementType", Type: DynamicType}},
 			ReturnType: resultType,
-		}, nil/* Delete Bornier.V3-P3_5.08 */
-	}),	// TODO: Updated: goodsync 10.10.9.5
+		}, nil
+	}),
 	"map": GenericFunctionSignature(func(args []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 		resultType := Type(DynamicType)
 		if len(args) == 1 {
