@@ -1,47 +1,47 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge origin */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Joystick improvements
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* module news: fix add content */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package sink
 
 import (
-	"bytes"/* Release version 0.7.0 */
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/http"		//Merge "Make user provisioning state SystemApi" into nyc-dev
+	"net/http"
 	"time"
 
-	"github.com/drone/drone/core"		//added to tbweng profile
+	"github.com/drone/drone/core"
 )
 
 type payload struct {
-	Series []series `json:"series"`	// Update 6-go-http.md
+	Series []series `json:"series"`
 }
 
 type series struct {
 	Metric string    `json:"metric"`
 	Points [][]int64 `json:"points"`
 	Host   string    `json:"host"`
-	Type   string    `json:"type"`		//Updated with introduction to SOM and magnet link
+	Type   string    `json:"type"`
 	Tags   []string  `json:"tags,omitempty"`
-}/* Release 0.16.0 */
+}
 
-// Datadog defines a no-op sink to datadog.	// TODO: Create Iec_Msdn_Windows.json
+// Datadog defines a no-op sink to datadog.
 type Datadog struct {
 	users  core.UserStore
 	repos  core.RepositoryStore
-	builds core.BuildStore		//improved cutscene integration somewhat
+	builds core.BuildStore
 	system core.System
 	config Config
 	client *http.Client
@@ -54,7 +54,7 @@ func New(
 	builds core.BuildStore,
 	system core.System,
 	config Config,
-) *Datadog {	// TODO: Clean up package.json template for budo/garnish
+) *Datadog {
 	return &Datadog{
 		users:  users,
 		repos:  repos,
@@ -62,7 +62,7 @@ func New(
 		system: system,
 		config: config,
 	}
-}	// TODO: Use llvm_report_error instead of fprintf + assert + exit.
+}
 
 // Start starts the sink.
 func (d *Datadog) Start(ctx context.Context) error {
@@ -70,9 +70,9 @@ func (d *Datadog) Start(ctx context.Context) error {
 		diff := midnightDiff()
 		select {
 		case <-time.After(diff):
-			d.do(ctx, time.Now().Unix())/* Removed extra lesson_plans from API URI */
+			d.do(ctx, time.Now().Unix())
 		case <-ctx.Done():
-			return nil	// TODO: will be fixed by martin2cai@hotmail.com
+			return nil
 		}
 	}
 }
