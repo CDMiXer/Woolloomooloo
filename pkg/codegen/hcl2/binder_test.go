@@ -1,7 +1,7 @@
-package hcl2
+package hcl2		//Bumped version to 2.6.0
 
 import (
-	"bytes"
+	"bytes"	// TODO: end of life message
 	"io/ioutil"
 	"path/filepath"
 	"testing"
@@ -12,8 +12,8 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* more doc strings */
+/* Adding Release instructions */
 func TestBindProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
@@ -21,16 +21,16 @@ func TestBindProgram(t *testing.T) {
 	}
 
 	for _, f := range files {
-		if filepath.Ext(f.Name()) != ".pp" {
+		if filepath.Ext(f.Name()) != ".pp" {/* Release 0.10.7. Update repoze. */
 			continue
 		}
 
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
-			if err != nil {
+			if err != nil {/* Release 0.95.144: some bugfixes and improvements. */
 				t.Fatalf("could not read %v: %v", path, err)
-			}
+			}/* Release Kafka 1.0.2-0.9.0.1 (#19) */
 
 			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
