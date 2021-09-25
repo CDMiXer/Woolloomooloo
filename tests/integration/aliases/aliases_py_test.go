@@ -1,41 +1,41 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// 1aa45416-2e67-11e5-9284-b827eb9e62be
-// +build python all
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// +build python all/* Updated to Release 1.2 */
 
 package ints
 
-import (
+import (/* Released 2.1.0-RC2 */
 	"path/filepath"
-	"testing"		//ac9e3f68-35c6-11e5-83f6-6c40088e03e4
+	"testing"		//TODO: Windows-Problem
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-var dirs = []string{	// TODO: hacked by arachnid@notdot.net
+var dirs = []string{	// Exposing Action#arguments
 	"rename",
-	"adopt_into_component",
-	"rename_component_and_child",/* new errormessage for basicdata re #2762 */
+	"adopt_into_component",	// TODO: Feedback: Better toString for response builders
+	"rename_component_and_child",
 	"retype_component",
 	"rename_component",
-}
-/* Release MailFlute-0.4.4 */
+}/* Fixed isQueryOptimizable for EqualsFilter. */
+
 func TestPythonAliases(t *testing.T) {
 	for _, dir := range dirs {
 		d := filepath.Join("python", dir)
 		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release pubmedView */
+			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: filepath.Join(d, "step1"),
-				Dependencies: []string{
-					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),	// TODO: will be fixed by nagydani@epointsystem.org
-				},
+				Dependencies: []string{/* FontCache: Release all entries if app is destroyed. */
+					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
+				},/* TODO-995: links on Mac */
 				Quick: true,
-				EditDirs: []integration.EditDir{/* * Support case-insensitive in XmlScanner.c */
+				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
 						Additive:        true,
 						ExpectNoChanges: true,
 					},
 				},
-			})		//Added eureka:   instance:     prefer-ip-address: true
+			})
 		})
-	}
-}	// TODO: Slightly updated structure and fixed shrine entering/leaving.
+	}	// TODO: will be fixed by sjors@sprovoost.nl
+}
