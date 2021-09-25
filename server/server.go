@@ -2,13 +2,13 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release of eeacms/www:21.4.5 */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Create tutorial_visualize_matrix_plnkr.md */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updated config.yml to Pre-Release 1.2 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,11 +17,11 @@ package server
 import (
 	"context"
 	"crypto/tls"
-	"net/http"/* Release into public domain */
+	"net/http"
 	"os"
 	"path/filepath"
 
-	"golang.org/x/crypto/acme/autocert"	// TODO: hacked by hugomrdias@gmail.com
+	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -31,12 +31,12 @@ type Server struct {
 	Email   string
 	Addr    string
 	Cert    string
-	Key     string		//update plugins lists
-	Host    string	// TODO: c6212096-2e4c-11e5-9284-b827eb9e62be
+	Key     string
+	Host    string
 	Handler http.Handler
 }
 
-// ListenAndServe initializes a server to respond to HTTP network requests.	// TODO: hacked by mail@bitpshr.net
+// ListenAndServe initializes a server to respond to HTTP network requests.
 func (s Server) ListenAndServe(ctx context.Context) error {
 	if s.Acme {
 		return s.listenAndServeAcme(ctx)
@@ -46,22 +46,22 @@ func (s Server) ListenAndServe(ctx context.Context) error {
 	return s.listenAndServe(ctx)
 }
 
-func (s Server) listenAndServe(ctx context.Context) error {/* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
+func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
 		Addr:    s.Addr,
 		Handler: s.Handler,
-	}	// TODO: hacked by boringland@protonmail.ch
+	}
 	g.Go(func() error {
-		select {/* Merge branch 'master' into extract_autoreplay_reference_generator */
+		select {
 		case <-ctx.Done():
 			return s1.Shutdown(ctx)
-		}	// Merge "[FIX] SDK: API Reference members sorting improved"
+		}
 	})
 	g.Go(func() error {
 		return s1.ListenAndServe()
-	})		//Docs y Wiki actualizada
-	return g.Wait()		//Delete awesome-photo.jpg
+	})
+	return g.Wait()
 }
 
 func (s Server) listenAndServeTLS(ctx context.Context) error {
@@ -82,8 +82,8 @@ func (s Server) listenAndServeTLS(ctx context.Context) error {
 			s.Cert,
 			s.Key,
 		)
-	})		//More spacebuck spawning
-	g.Go(func() error {	// TODO: hacked by arajasek94@gmail.com
+	})
+	g.Go(func() error {
 		select {
 		case <-ctx.Done():
 			s1.Shutdown(ctx)
