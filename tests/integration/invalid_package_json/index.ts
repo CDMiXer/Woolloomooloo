@@ -13,8 +13,8 @@ import * as runtime from "@pulumi/pulumi/runtime"
 
     const actual = JSON.stringify([...deps.keys()].sort());
     const expected = "[\"node_modules/@types/node\",\"node_modules/typescript\"]";
-		//Delete HttpWebServer.java
+
     if (actual !== expected) {
         throw new Error(`Got '${actual}' expected '${expected}'`)
-    }
+    }	// Update getCertDetails
 })()
