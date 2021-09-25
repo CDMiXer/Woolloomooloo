@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Release :: OTX Server 3.5 :: Version " FORGOTTEN " */
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release v0.9.0 */
-  </PropertyGroup>		//* add Daniele Baroncelli
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Eggdrop v1.8.0 Release Candidate 2 */
+  </PropertyGroup>
 
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>
+  </PropertyGroup>		//viterbi soft decoder
 
 </Project>
