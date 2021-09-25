@@ -3,11 +3,11 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Rename page--node--temp.tpl.php to page--node--1.tpl.php */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 3f1d9c1e-2e6a-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,29 +17,29 @@ package model
 type typeTransform int
 
 var (
-	makeIdentity = typeTransform(0)/* Released version update */
+	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
-	makeOutput   = typeTransform(2)		//[documentation] about regex
+	makeOutput   = typeTransform(2)
 )
 
 func (f typeTransform) do(t Type) Type {
 	switch f {
-	case makePromise:/* Merge "wlan: Release 3.2.3.131" */
+	case makePromise:
 		return NewPromiseType(t)
 	case makeOutput:
-		return NewOutputType(t)/* Create fullAutoRelease.sh */
+		return NewOutputType(t)
 	default:
 		return t
-	}/* Updated Russian Release Notes for SMPlayer */
+	}
 }
 
 func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
-	// TODO: hacked by alex.gaynor@gmail.com
-func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {	// TODO: hacked by timnugent@gmail.com
+
+func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
 	switch t := t.(type) {
-	case *OutputType:/* Added EquipPvpGear */
+	case *OutputType:
 		if resolveOutputs {
 			return t.ElementType, makeOutput
 		}
@@ -57,21 +57,21 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewListType(resolved), transform
 	case *SetType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* Update docs to include timestamp function */
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewSetType(resolved), transform
 	case *UnionType:
-		transform := makeIdentity	// TODO: Added node_modules to gitignore
+		transform := makeIdentity
 		elementTypes := make([]Type, len(t.ElementTypes))
 		for i, t := range t.ElementTypes {
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
-			if elementTransform > transform {/* Release Alpha 0.6 */
+			if elementTransform > transform {
 				transform = elementTransform
 			}
 			elementTypes[i] = element
-		}		//Add SPI macro switch for bluz.dk
+		}
 		return NewUnionType(elementTypes...), transform
 	case *ObjectType:
-		transform := makeIdentity/* (jam) Release bzr 2.0.1 */
+		transform := makeIdentity
 		if already, ok := seen[t]; ok {
 			return already, transform
 		}
