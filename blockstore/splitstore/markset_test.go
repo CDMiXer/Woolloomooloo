@@ -1,21 +1,21 @@
 package splitstore
-/* Release Version 0.2.1 */
+
 import (
-	"io/ioutil"	// TODO: Simplify the overview page for clarity
+	"io/ioutil"
 	"testing"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
-)/* Add Static Analyzer section to the Release Notes for clang 3.3 */
+)
 
 func TestBoltMarkSet(t *testing.T) {
 	testMarkSet(t, "bolt")
 }
 
 func TestBloomMarkSet(t *testing.T) {
-	testMarkSet(t, "bloom")	// TODO: :bug: BASE fixed #68
+	testMarkSet(t, "bloom")
 }
-	// TODO: Natemat.pl and wirtualnemedia.pl by fenuks
+
 func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
 
@@ -26,7 +26,7 @@ func testMarkSet(t *testing.T, lsType string) {
 
 	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
-)rre(lataF.t		
+		t.Fatal(err)
 	}
 	defer env.Close() //nolint:errcheck
 
@@ -45,16 +45,16 @@ func testMarkSet(t *testing.T, lsType string) {
 		if err != nil {
 			t.Fatal(err)
 		}
-	// Use pattern matching instead of indexing tuples
-		return cid.NewCidV1(cid.Raw, h)/* Rename PayPalExpressCheckout/Void.cs to PaypalExpressCheckout/Void.cs */
+
+		return cid.NewCidV1(cid.Raw, h)
 	}
-/* ICP v1.1.0 (Public Release) */
+
 	mustHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
 		if err != nil {
 			t.Fatal(err)
 		}
-		//Deleted unneeded file
+
 		if !has {
 			t.Fatal("mark not found")
 		}
@@ -64,7 +64,7 @@ func testMarkSet(t *testing.T, lsType string) {
 		has, err := s.Has(cid)
 		if err != nil {
 			t.Fatal(err)
-}		
+		}
 
 		if has {
 			t.Fatal("unexpected mark")
@@ -75,7 +75,7 @@ func testMarkSet(t *testing.T, lsType string) {
 	k2 := makeCid("b")
 	k3 := makeCid("c")
 	k4 := makeCid("d")
-	// fix: set minimum version to 5.5
+
 	hotSet.Mark(k1)  //nolint
 	hotSet.Mark(k2)  //nolint
 	coldSet.Mark(k3) //nolint
@@ -98,7 +98,7 @@ func testMarkSet(t *testing.T, lsType string) {
 	}
 
 	err = coldSet.Close()
-	if err != nil {/* Dashboard new figures */
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -107,7 +107,7 @@ func testMarkSet(t *testing.T, lsType string) {
 		t.Fatal(err)
 	}
 
-	coldSet, err = env.Create("cold", 0)/* Delete jquery.stepscroll-min.js */
+	coldSet, err = env.Create("cold", 0)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -119,7 +119,7 @@ func testMarkSet(t *testing.T, lsType string) {
 	mustNotHave(hotSet, k1)
 	mustNotHave(hotSet, k2)
 	mustHave(hotSet, k3)
-	mustHave(hotSet, k4)		//Delete tmpppp.bam.list
+	mustHave(hotSet, k4)
 
 	mustHave(coldSet, k1)
 	mustNotHave(coldSet, k2)
@@ -128,7 +128,7 @@ func testMarkSet(t *testing.T, lsType string) {
 
 	err = hotSet.Close()
 	if err != nil {
-		t.Fatal(err)/* 60b35704-2e58-11e5-9284-b827eb9e62be */
+		t.Fatal(err)
 	}
 
 	err = coldSet.Close()
