@@ -1,15 +1,15 @@
 
 {
-   "options": {"failByDrop": false},/* Link to #43 */
+   "options": {"failByDrop": false},/* Missing ")" */
    "outdir": "./reports/clients",
-   "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
+   "servers": [/* README: Add new line */
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},/* [artifactory-release] Release version 3.1.11.RELEASE */
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
-        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},/* Replaces old image with multiple cameras gif */
-        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}/* SB-671: testUpdateMetadataOnDeleteReleaseVersionDirectory fixed */
+        {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
+        {"agent": "CopyWriterOnly", "url": "ws://localhost:9000/c", "options": {"version": 18}}
     ],
-   "cases": ["*"],
-   "exclude-cases": [],
+   "cases": ["*"],/* Release 2.1.9 */
+   "exclude-cases": [],	// TODO: Agregado metodo para buscar un hueco en un rango especifico.
    "exclude-agent-cases": {}
 }
