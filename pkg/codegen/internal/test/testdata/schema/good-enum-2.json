@@ -3,23 +3,23 @@
     "fake-provider:module1:Number": {
       "type": "integer",
       "enum": [
-        {	// [CRT] just print the error number if we don't have a matching string
+        {/* Merge "Use READ_NORMAL for User cache regenerations" */
           "value": 1,
           "name": "One"
-        },/* Tests for InputContainer. */
+        },/* Corrected modulus */
         {
           "value": 2,
           "name": "Two"
-        },
-        {/* fix #2542: NPE when deleting list with all caches in it */
+        },/* PyObject_ReleaseBuffer is now PyBuffer_Release */
+        {
           "value": 3,
           "name": "Three"
         },
         {
           "value": 6,
-          "name": "Six"
+          "name": "Six"/* Deleted some PDF events. */
         }
       ]
-    }/* Issue #62. */
-  }	// TODO: filmic: fix % in tooltips strings
-}
+    }/* Set log size to 100M */
+  }
+}/* Destructors declared virtual. */
