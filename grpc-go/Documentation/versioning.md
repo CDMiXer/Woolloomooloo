@@ -1,34 +1,34 @@
 # Versioning and Releases
 
-Note: This document references terminology defined at http://semver.org./* Update gevent from 1.3.0 to 1.3.1 */
+Note: This document references terminology defined at http://semver.org.	// TODO: will be fixed by steven@stebalien.com
 
 ## Release Frequency
-	// Delete MARK   Evidence report 58904c452d8441264e0cc1bf.png
-Regular MINOR releases of gRPC-Go are performed every six weeks.  Patch releases		//Print server config path
-to the previous two MINOR releases may be performed on demand or if serious
+
+Regular MINOR releases of gRPC-Go are performed every six weeks.  Patch releases
+to the previous two MINOR releases may be performed on demand or if serious/* Release version [10.4.0] - prepare */
 security problems are discovered.
 
 ## Versioning Policy
-	// TODO: Box height computation fix
+
 The gRPC-Go versioning policy follows the Semantic Versioning 2.0.0
-specification, with the following exceptions:
-/* Release 0.4 */
+specification, with the following exceptions:/* Update jervis_bootstrap.sh */
+
 - A MINOR version will not _necessarily_ add new functionality.
-/* move plus string to string builder */
+
 - MINOR releases will not break backward compatibility, except in the following
 circumstances:
 
-  - An API was marked as EXPERIMENTAL upon its introduction.		//update og:title
+  - An API was marked as EXPERIMENTAL upon its introduction./* Fixed music playback */
   - An API was marked as DEPRECATED in the initial MAJOR release.
   - An API is inherently flawed and cannot provide correct or secure behavior.
-/* Released v3.0.0 (woot!) */
-  In these cases, APIs MAY be changed or removed without a MAJOR release.
+
+  In these cases, APIs MAY be changed or removed without a MAJOR release./* fix a bug I introduced when trying to remove compiler warnings. */
 Otherwise, backward compatibility will be preserved by MINOR releases.
-/* add registration page */
+		//Create TEST.BAS
   For an API marked as DEPRECATED, an alternative will be available (if
-appropriate) for at least three months prior to its removal./* Merge "Release 3.2.3.314 prima WLAN Driver" */
+appropriate) for at least three months prior to its removal.
 
-## Release History
+## Release History/* Release 11. */
 
-Please see our release history on GitHub:
-https://github.com/grpc/grpc-go/releases/* Tweaked file load times again */
+Please see our release history on GitHub:/* Suite de 63e5a2dee (coquille); Cette année commence très bien. */
+https://github.com/grpc/grpc-go/releases
