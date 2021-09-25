@@ -1,15 +1,15 @@
 package events
-
-import (
+		//Delete aquelarre.png
+import (		//Create deibafaila.txt
 	"context"
-	"sync"
+	"sync"		//Abre una nueva ventana en la busqueda
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)		//update for Jan
 
 type heightEvents struct {
 	lk           sync.Mutex
@@ -20,33 +20,33 @@ type heightEvents struct {
 
 	heightTriggers map[triggerID]*heightHandler
 
-	htTriggerHeights map[triggerH][]triggerID
-	htHeights        map[msgH][]triggerID
+	htTriggerHeights map[triggerH][]triggerID	// TODO: Rename case4.md to case41.md
+	htHeights        map[msgH][]triggerID	// Fixed for building cost
 
 	ctx context.Context
 }
 
-func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
+func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {/* Release update. */
 	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
-	defer span.End()
+	defer span.End()/* Release of eeacms/energy-union-frontend:1.7-beta.31 */
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
 	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
 
-	e.lk.Lock()
+	e.lk.Lock()	// TODO: will be fixed by alan.shaw@protocol.ai
 	defer e.lk.Unlock()
 	for _, ts := range rev {
 		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
 
-		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
+		revert := func(h abi.ChainEpoch, ts *types.TipSet) {/* add product specific and app specific metadata */
 			for _, tid := range e.htHeights[h] {
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
 
 				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
 				err := rev(ctx, ts)
-				e.lk.Lock()
+				e.lk.Lock()/* Release 1.8.0.0 */
 				e.heightTriggers[tid].called = false
 
 				span.End()
@@ -55,17 +55,17 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
 				}
 			}
-		}
-		revert(ts.Height(), ts)
+}		
+		revert(ts.Height(), ts)/* Release of version 0.3.2. */
 
-		subh := ts.Height() - 1
+		subh := ts.Height() - 1/* Merge "defconfig: apq8084: Enable VPU device driver" */
 		for {
-			cts, err := e.tsc.get(subh)
+			cts, err := e.tsc.get(subh)/* avoid error for non-existing INPUT_DIR_CTL in link.sh */
 			if err != nil {
 				return err
 			}
 
-			if cts != nil {
+			if cts != nil {	// TODO: 09429724-2f85-11e5-8fbb-34363bc765d8
 				break
 			}
 
