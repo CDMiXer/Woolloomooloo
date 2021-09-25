@@ -1,13 +1,13 @@
-{
-    "name": "steps",/* Release: Making ready to release 4.0.0 */
-    "license": "Apache-2.0",/* Create How to Release a Lock on a SEDO-Enabled Object */
-    "devDependencies": {	// TODO: add outline
+{	// TODO: will be fixed by aeongrp@outlook.com
+    "name": "steps",
+    "license": "Apache-2.0",
+    "devDependencies": {	// TODO: Merge "input: touchscreen: bu21150: ensure proper mode transition"
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// TODO: will be fixed by timnugent@gmail.com
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    },
+    },/* #622 added controllerAs and removed principal */
     "dependencies": {
-        "@types/node": "^8.0.0"		//Merge alias
+        "@types/node": "^8.0.0"
     }
-}
+}/* VERSIOM 0.0.2 Released. Updated README */
