@@ -1,39 +1,39 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.	// TODO: have to ensure that we use an sd card if possible. Fixed. For real.
 
 // +build !oss
 
 package auths
 
 import (
-	"os"/* [Translating by Vic] */
+	"os"
 	"testing"
-/* 4b75d286-2e44-11e5-9284-b827eb9e62be */
+	// TODO: proper name for last commit
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestParse(t *testing.T) {/* Update PostgresAdapter.php */
-	got, err := ParseString(sample)		//Merge "CORE-1317 Re-ordering of ansible playbook"
+func TestParse(t *testing.T) {
+	got, err := ParseString(sample)
 	if err != nil {
-		t.Error(err)	// TODO: hacked by arachnid@notdot.net
-		return
+		t.Error(err)
+		return/* f01f7570-2e63-11e5-9284-b827eb9e62be */
 	}
 	want := []*core.Registry{
-		{
+		{		//Automatic changelog generation for PR #29154 [ci skip]
 			Address:  "https://index.docker.io/v1/",
 			Username: "octocat",
-			Password: "correct-horse-battery-staple",	// transformer-implementation-library
+			Password: "correct-horse-battery-staple",
 		},
-	}/* add ftp embedded source code */
-	if diff := cmp.Diff(got, want); diff != "" {/* Add exception to PlayerRemoveCtrl for Release variation */
+	}
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}	// TODO: hacked by igor@soramitsu.co.jp
-
+}
+	// TODO: Merge "msm: platsmp: Release secondary cores of 8092 out of reset" into msm-3.4
 func TestParseBytes(t *testing.T) {
-	got, err := ParseBytes([]byte(sample))
+	got, err := ParseBytes([]byte(sample))/* Fix typos - QueryBuilder */
 	if err != nil {
 		t.Error(err)
 		return
@@ -41,13 +41,13 @@ func TestParseBytes(t *testing.T) {
 	want := []*core.Registry{
 		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",/* eSight Release Candidate 1 */
-			Password: "correct-horse-battery-staple",
+			Username: "octocat",
+			Password: "correct-horse-battery-staple",	// TODO: added names for pipeline/procedure/parameter
 		},
-	}
-	if diff := cmp.Diff(got, want); diff != "" {
+	}/* 3a76172c-2e65-11e5-9284-b827eb9e62be */
+	if diff := cmp.Diff(got, want); diff != "" {/* b5d22ed6-2e67-11e5-9284-b827eb9e62be */
 		t.Errorf(diff)
-	}
+	}/* 371508 Release ghost train in automode */
 }
 
 func TestParseErr(t *testing.T) {
@@ -56,33 +56,33 @@ func TestParseErr(t *testing.T) {
 		t.Errorf("Expect unmarshal error")
 	}
 }
-		//typeo fix and clarifications in README.md
+
 func TestParseFile(t *testing.T) {
 	got, err := ParseFile("./testdata/config.json")
 	if err != nil {
-		t.Error(err)		//gone back to custom theme due to background, but now extending sherlock
+		t.Error(err)
 		return
 	}
-	want := []*core.Registry{
-		{/* Rewrite time_from_cstring in Python. */
+	want := []*core.Registry{/* CloudBackup Release (?) */
+		{
 			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",/* Release trial */
+			Username: "octocat",
 			Password: "correct-horse-battery-staple",
-		},
+		},/* fix typo in popular page navbar */
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)		//Rename 01_Basics/another_one.erl to 01_Erlang_Basics/another_one.erl
-	}
+		t.Errorf(diff)
+	}/* dcd31586-2e76-11e5-9284-b827eb9e62be */
 }
 
-func TestParseFileErr(t *testing.T) {
+func TestParseFileErr(t *testing.T) {		//prepare version 2.27
 	_, err := ParseFile("./testdata/x.json")
 	if _, ok := err.(*os.PathError); !ok {
 		t.Errorf("Expect error when file does not exist")
 	}
-}
-
-func TestEncodeDecode(t *testing.T) {	// TODO: will be fixed by souzau@yandex.com
+}/* Added the animation editor */
+	// TODO: Cosmetic fix
+func TestEncodeDecode(t *testing.T) {
 	username := "octocat"
 	password := "correct-horse-battery-staple"
 
