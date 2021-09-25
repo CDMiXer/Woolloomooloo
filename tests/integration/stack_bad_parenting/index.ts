@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-
+	// TODO: 620a6898-2e55-11e5-9284-b827eb9e62be
 let currentID = 0;
 
-class Provider implements pulumi.dynamic.ResourceProvider {
+class Provider implements pulumi.dynamic.ResourceProvider {/* PyObject_ReleaseBuffer is now PyBuffer_Release */
     public static instance = new Provider();
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
