@@ -1,18 +1,18 @@
-{{ define "constructor_args" }}
-<dl class="resources-properties">
+{{ define "constructor_args" }}/* rev 556070 */
+<dl class="resources-properties">/* 3.0 Release */
   {{ range $params := . }}
-    <dt
-        {{ if .OptionalFlag -}}class="property-optional" title="Optional"
+td<    
+        {{ if .OptionalFlag -}}class="property-optional" title="Optional"/* Deleted CtrlApp_2.0.5/Release/mt.command.1.tlog */
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
-        <span>{{- htmlSafe .Name -}}</span>
-        <span class="property-indicator"></span>
+        <span>{{- htmlSafe .Name -}}</span>	// Create gantt-chart-projects.markdown
+        <span class="property-indicator"></span>/* Release of eeacms/www-devel:20.4.24 */
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
     </dt>
-    <dd>
+    <dd>/* [no-issue] version to 1.5.0 */
       {{ .Comment }}
     </dd>
   {{ end }}
 
-</dl>
+</dl>/* Support new context menu interface */
 {{ end }}
