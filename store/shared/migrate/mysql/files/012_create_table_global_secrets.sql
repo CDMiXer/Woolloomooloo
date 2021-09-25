@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS orgsecrets (
 ,secret_namespace         VARCHAR(50)
 ,secret_name              VARCHAR(200)
 ,secret_type              VARCHAR(50)
-,secret_data              BLOB
-,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN	// Move tests for TestResult model into a dedicated module
+,secret_data              BLOB	// Delete Image Orig Size.png
+,secret_pull_request      BOOLEAN/* Make liblightdm-qt use the new protocol */
+,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_namespace, secret_name)
 );
