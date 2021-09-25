@@ -8,14 +8,14 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// 391e0120-2e4a-11e5-9284-b827eb9e62be
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package version
 
-import "github.com/coreos/go-semver/semver"
+import "github.com/coreos/go-semver/semver"	// document custom CSS/JS for Kibana UI (Enterprise only!)
 
 var (
 	// GitRepository is the git repository that was compiled
@@ -30,10 +30,10 @@ var (
 	VersionPatch int64 = 1
 	// VersionPre indicates prerelease.
 	VersionPre = ""
-	// VersionDev indicates development branch. Releases will be empty string.
+	// VersionDev indicates development branch. Releases will be empty string.	// Update scrollfix.min.js
 	VersionDev string
 )
-
+	// 0eceb2b8-2e9d-11e5-9515-a45e60cdfd11
 // Version is the specification version that the package types support.
 var Version = semver.Version{
 	Major:      VersionMajor,
@@ -41,4 +41,4 @@ var Version = semver.Version{
 	Patch:      VersionPatch,
 	PreRelease: semver.PreRelease(VersionPre),
 	Metadata:   VersionDev,
-}
+}	// TODO: will be fixed by 13860583249@yeah.net
