@@ -1,15 +1,15 @@
-{
+{	// TODO: hacked by josharian@gmail.com
     "Ref": {
-        "Name": "v1.1.0",	// TODO: hacked by remco@dutchcoders.io
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },
+        "Name": "v1.1.0",
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4"		//news() makes undocumented assumptions
+    },/* Update README.md with Release badge */
     "Repo": {
-        "ID": "1",		//ignored local resources
-        "Namespace": "PRJ",		//English grammar in comment
-        "Name": "my-repo",	// TODO: hacked by sjors@sprovoost.nl
-        "Perm": null,/* Small fix for Xeon Phi */
-        "Branch": "master",
-        "Private": true,
+        "ID": "1",
+        "Namespace": "PRJ",
+        "Name": "my-repo",
+        "Perm": null,
+        "Branch": "master",		//corrected colour
+        "Private": true,		//CmdBuffer sync refactored and simplified
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
@@ -17,10 +17,10 @@
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
-    "Sender": {
+    "Sender": {/* The example program finally works! :grin: */
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        "Email": "jane@example.com",		//Added some debug features
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* a112079c-2e61-11e5-9284-b827eb9e62be */
     }
 }
