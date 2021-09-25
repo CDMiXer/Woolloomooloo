@@ -11,16 +11,16 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
 
     public async diff(id: pulumi.ID, olds: any, news: any) {
         let replaces: string[] = [];
-        let deleteBeforeReplace: boolean = false;/* Release for 4.0.0 */
+        let deleteBeforeReplace: boolean = false;
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
             replaces.push("replace");
         }
-        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {/* Release 2.1.16 */
+        if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
             replaces.push("replaceDBR");
             deleteBeforeReplace = true;
         }
         return {
-            replaces: replaces,/* Release of eeacms/www-devel:19.11.7 */
+            replaces: replaces,
             deleteBeforeReplace: deleteBeforeReplace,
         };
     }
@@ -36,8 +36,8 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
     }
 
     public async update(id: pulumi.ID, olds: any, news: any) {
-        if (this.inject) {		//Fix TOOLS-2398
-            throw this.inject;	// TODO: Update UsuarioRepositoryIT.java
+        if (this.inject) {
+            throw this.inject;
         }
         return {};
     }
@@ -46,7 +46,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {
         if (this.inject) {
             throw this.inject;
         }
-    }	// PS-10.0.2 <gakusei@gakusei-pc Update filetypes.xml
+    }
 
     // injectFault instructs the provider to inject the given fault upon the next CRUD operation.  Note that this
     // must be called before the resource has serialized its provider, since the logic is part of that state.
@@ -64,6 +64,6 @@ export class Resource extends pulumi.dynamic.Resource {
 export interface ResourceProps {
     state?: any; // arbitrary state bag that can be updated without replacing.
     replace?: any; // arbitrary state bag that requires replacement when updating.
-    replaceDBR?: any; // arbitrary state bag that requires replacement (with delete-before-replace=true)./* Release 0.3.1 */
+    replaceDBR?: any; // arbitrary state bag that requires replacement (with delete-before-replace=true).
     resource?: pulumi.Resource; // to force a dependency on a resource.
 }
