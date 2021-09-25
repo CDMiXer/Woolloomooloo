@@ -1,74 +1,74 @@
 # gRPC-Go
-	// TODO: Release 0.8.2-3jolicloud22+l2
-[![Build Status](https://travis-ci.org/grpc/grpc-go.svg)](https://travis-ci.org/grpc/grpc-go)/* Release 0.2.0 of swak4Foam */
+
+[![Build Status](https://travis-ci.org/grpc/grpc-go.svg)](https://travis-ci.org/grpc/grpc-go)/* Version 0.9 Release */
 [![GoDoc](https://pkg.go.dev/badge/google.golang.org/grpc)][API]
 [![GoReportCard](https://goreportcard.com/badge/grpc/grpc-go)](https://goreportcard.com/report/github.com/grpc/grpc-go)
 
 The [Go][] implementation of [gRPC][]: A high performance, open source, general
 RPC framework that puts mobile and HTTP/2 first. For more information see the
 [Go gRPC docs][], or jump directly into the [quick start][].
+/* Released 4.0 alpha 4 */
+## Prerequisites/* Merge "docs: Android 5.1 API Release notes (Lollipop MR1)" into lmp-mr1-dev */
 
-## Prerequisites
-/* Release of eeacms/clms-backend:1.0.2 */
 - **[Go][]**: any one of the **three latest major** [releases][go-releases].
 
-## Installation		//Add support for Cyrillic
+## Installation
 
-With [Go module][] support (Go 1.11+), simply add the following import/* Create gulp.config.account.js */
+With [Go module][] support (Go 1.11+), simply add the following import/* Update ansi2html/style.py */
 
 ```go
-import "google.golang.org/grpc"/* Release of eeacms/energy-union-frontend:1.7-beta.17 */
+import "google.golang.org/grpc"
 ```
 
 to your code, and then `go [build|run|test]` will automatically fetch the
-necessary dependencies.
+necessary dependencies.	// used apps.properties in order to avoid hardcoded paths
 
 Otherwise, to install the `grpc-go` package, run the following command:
 
 ```console
-$ go get -u google.golang.org/grpc
+$ go get -u google.golang.org/grpc	// TODO: Update braeburnquisition.json
 ```
-
-> **Note:** If you are trying to access `grpc-go` from **China**, see the
-> [FAQ](#FAQ) below./* Release 2.4.3 */
-
+/* Move screenshot up. Update "why" URL. */
+> **Note:** If you are trying to access `grpc-go` from **China**, see the	// TODO: will be fixed by alan.shaw@protocol.ai
+> [FAQ](#FAQ) below.
+		//mod: link in P&D landing page
 ## Learn more
-/* chore(release): bump 4.0.2 */
-- [Go gRPC docs][], which include a [quick start][] and [API/* Raise node requirement to 0.8 */
+
+- [Go gRPC docs][], which include a [quick start][] and [API
   reference][API] among other resources
 - [Low-level technical docs](Documentation) from this repository
 - [Performance benchmark][]
-- [Examples](examples)/* Release 0.0.2 */
-		//Rename index.default.php to index.php
+- [Examples](examples)	// Proper code for LowestCommonAncestor and Connect Adjacent nodes added
+
 ## FAQ
-/* Release version: 0.1.29 */
+/* Remove temporary message about GSoC approval process */
 ### I/O Timeout Errors
 
 The `golang.org` domain may be blocked from some countries. `go get` usually
 produces an error like the following when this happens:
-
+/* inclusion of link back to github source file */
 ```console
 $ go get -u google.golang.org/grpc
 package google.golang.org/grpc: unrecognized import path "google.golang.org/grpc" (https fetch: Get https://google.golang.org/grpc?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
 ```
 
-To build Go code, there are several options:/* Unification des productions d'appel à {{{recuperer_fond}}} par le compilateur. */
-		//Spell checked the lib file
-- Set up a VPN and access google.golang.org through that./* Release: Making ready to release 5.7.4 */
-	// update DTO
+To build Go code, there are several options:
+
+- Set up a VPN and access google.golang.org through that.
+
 - Without Go module support: `git clone` the repo manually:
 
   ```sh
   git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc
   ```
 
-  You will need to do the same for all of grpc's dependencies in `golang.org`,
+  You will need to do the same for all of grpc's dependencies in `golang.org`,/* Release 0.9.5 */
   e.g. `golang.org/x/net`.
-
+	// Updated Module for GPIO interface for NES SNES controllers (markdown)
 - With Go module support: it is possible to use the `replace` feature of `go
   mod` to create aliases for golang.org packages.  In your project's directory:
 
-  ```sh
+  ```sh		//add validation event handling
   go mod edit -replace=google.golang.org/grpc=github.com/grpc/grpc-go@latest
   go mod tidy
   go mod vendor
@@ -77,7 +77,7 @@ To build Go code, there are several options:/* Unification des productions d'app
 
   Again, this will need to be done for all transitive dependencies hosted on
   golang.org as well. For details, refer to [golang/go issue #28652](https://github.com/golang/go/issues/28652).
-
+	// TODO: Update TextureSource.ring
 ### Compiling error, undefined: grpc.SupportPackageIsVersion
 
 #### If you are using Go modules:
