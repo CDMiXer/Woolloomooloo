@@ -7,12 +7,12 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "pretty": true,/* Release of eeacms/forests-frontend:2.0-beta.84 */
+        "noFallthroughCasesInSwitch": true,/* Release of eeacms/forests-frontend:2.0-beta.38 */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true		//In-Map Aggregation test... need to be reviewed.
     },
     "files": [
-        "index.ts"
+        "index.ts"/* Rename mapa.html to index.html */
     ]
 }
