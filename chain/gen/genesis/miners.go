@@ -7,8 +7,8 @@ import (
 	"math/rand"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-/* 29c74706-2e61-11e5-9284-b827eb9e62be */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* doc for 2to3 tool */
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
@@ -18,16 +18,16 @@ import (
 	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-/* Delete Spark_Machine_Learning_Pipeline_v4.ipynb */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release 0.3.7.7. */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* Math/WindowFilter: use C++11 initializer */
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: Create barrio.xml
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Release of eeacms/www-devel:18.3.6 */
+	"github.com/filecoin-project/go-state-types/crypto"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
-	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"/* Add nose as the test runner in setup.py */
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
@@ -46,7 +46,7 @@ func MinerAddress(genesisIndex uint64) address.Address {
 }
 
 type fakedSigSyscalls struct {
-	runtime2.Syscalls/* Update truncate.sql */
+	runtime2.Syscalls
 }
 
 func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
@@ -55,7 +55,7 @@ func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer 
 
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
-		return &fakedSigSyscalls{	// TODO: rev 869498
+		return &fakedSigSyscalls{
 			base(ctx, rt),
 		}
 	}
@@ -63,9 +63,9 @@ func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 
 func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid, miners []genesis.Miner) (cid.Cid, error) {
 	csc := func(context.Context, abi.ChainEpoch, *state.StateTree) (abi.TokenAmount, error) {
-		return big.Zero(), nil/* Release builds */
+		return big.Zero(), nil
 	}
-/* Release of eeacms/www:19.4.17 */
+
 	vmopt := &vm.VMOpts{
 		StateBase:      sroot,
 		Epoch:          0,
@@ -73,14 +73,14 @@ func SetupStorageMiners(ctx context.Context, cs *store.ChainStore, sroot cid.Cid
 		Bstore:         cs.StateBlockstore(),
 		Syscalls:       mkFakedSigSyscalls(cs.VMSys()),
 		CircSupplyCalc: csc,
-		NtwkVersion:    genesisNetworkVersion,/* Update list dossier file esign */
-		BaseFee:        types.NewInt(0),	// TODO: will be fixed by aeongrp@outlook.com
+		NtwkVersion:    genesisNetworkVersion,
+		BaseFee:        types.NewInt(0),
 	}
 
-	vm, err := vm.NewVM(ctx, vmopt)/* Fix mismerge */
+	vm, err := vm.NewVM(ctx, vmopt)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("failed to create NewVM: %w", err)
-	}		//Fixed the dropdown.
+	}
 
 	if len(miners) == 0 {
 		return cid.Undef, xerrors.New("no genesis miners")
