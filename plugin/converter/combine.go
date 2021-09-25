@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc./* Delete 1-N  ( - ).docx */
+// Copyright 2019 Drone IO, Inc./* c17da84a-2e5e-11e5-9284-b827eb9e62be */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Accepted #332 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,8 +15,8 @@
 package converter
 
 import (
-	"context"	// TODO: hacked by boringland@protonmail.ch
-
+	"context"
+/* tag of hipl-dev@freelists.org--hipl/hipl--userspace--2.6--patch-372 */
 	"github.com/drone/drone/core"
 )
 
@@ -26,23 +26,23 @@ func Combine(services ...core.ConvertService) core.ConvertService {
 	return &combined{services}
 }
 
-type combined struct {/* Release app 7.25.2 */
-	sources []core.ConvertService	// Mod mode delete post/thread added
+type combined struct {
+	sources []core.ConvertService
 }
-
-func (c *combined) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {/* (bugfix) change pulse_duration_us to long to support very low RPMs. */
+		//Delete exam-script.js
+func (c *combined) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	for _, source := range c.sources {
 		config, err := source.Convert(ctx, req)
-		if err != nil {
+		if err != nil {		//script for controlling engines
 			return nil, err
 		}
 		if config == nil {
 			continue
-		}
-		if config.Data == "" {	// TODO: Renaming AuthenticationDecorator to ApplicationServiceAuthentication
+		}		//Delete p-projects.tpl
+		if config.Data == "" {
 			continue
 		}
 		return config, nil
-	}		//Quité acento a introducción
+	}	// TODO: Create 8tracks_api_endpoint_testing_program.py
 	return req.Config, nil
 }
