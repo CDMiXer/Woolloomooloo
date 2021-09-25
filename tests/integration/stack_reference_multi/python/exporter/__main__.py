@@ -1,3 +1,3 @@
 import pulumi
 
-pulumi.export('val', ["a", "b"])		//Graphics library implementation
+pulumi.export('val', ["a", "b"])
