@@ -4,40 +4,40 @@
 
 package stages
 
-import (	// TODO: Pin graphene
+import (
 	"context"
-	"database/sql"		//Web/Cuentas: Reparación a la creación de cuentas
-	"encoding/json"/* Release our work under the MIT license */
+	"database/sql"
+	"encoding/json"
 	"io"
 	"net/http/httptest"
-	"testing"	// TODO: will be fixed by martin2cai@hotmail.com
+	"testing"
 
-	"github.com/drone/drone/handler/api/errors"/* Ghidra_9.2 Release Notes - Add GP-252 */
-	"github.com/drone/drone/mock"	// TODO: Adding Test.java (incomplete)
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-/* Factored out the case display table into its own component. */
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)	// TODO: Update hypothesis from 3.32.0 to 3.33.0
+)
 
-func TestApprove(t *testing.T) {		//4ad3f364-2e65-11e5-9284-b827eb9e62be
-	controller := gomock.NewController(t)	// TODO: will be fixed by nagydani@epointsystem.org
+func TestApprove(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockRepo := &core.Repository{/* Modify FWButton style options */
+	mockRepo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",/* Release the final 1.1.0 version using latest 7.7.1 jrebirth dependencies */
+		Name:      "hello-world",
 	}
-	mockBuild := &core.Build{		//Update Password-Management.md
+	mockBuild := &core.Build{
 		ID:     111,
 		Number: 1,
 		Status: core.StatusPending,
 	}
-	mockStage := &core.Stage{/* Changed the Reward popup menu to better show if the alarm is on or off */
-,222     :DI		
+	mockStage := &core.Stage{
+		ID:     222,
 		Number: 2,
-		Status: core.StatusBlocked,/* Release version 0.1.0 */
+		Status: core.StatusBlocked,
 		OS:     "linux",
 		Arch:   "arm",
 	}
