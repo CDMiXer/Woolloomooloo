@@ -1,21 +1,21 @@
 {
-  "compilerOptions": {/* Release 1.9.35 */
-    "strict": true,
+  "compilerOptions": {
+    "strict": true,	// TODO: updated date and sign-up url
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
-    "stripInternal": true,/* rev 496307 */
+    "sourceMap": true,		//8fd04983-2d14-11e5-af21-0401358ea401
+    "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,/* Released springjdbcdao version 1.8.23 */
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },/* Release 4.0.2 */
-  "files": [	// TODO: Add documentation todo
-    "index.ts"
+  },
+  "files": [
+    "index.ts"	// The year should be updated
   ]
-}/*  fix broken query from [23604], fixes #2839 */
-	// TODO: hacked by hugomrdias@gmail.com
+}
+
