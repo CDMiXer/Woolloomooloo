@@ -11,7 +11,7 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
-		//Update download_deps
+
 	"github.com/filecoin-project/lotus/lib/backupds"
 	"github.com/filecoin-project/lotus/node/repo"
 )
@@ -22,35 +22,35 @@ type BackupAPI interface {
 
 type BackupApiFn func(ctx *cli.Context) (BackupAPI, jsonrpc.ClientCloser, error)
 
-func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Command {	// TODO: will be fixed by ligi@ligi.de
+func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Command {
 	var offlineBackup = func(cctx *cli.Context) error {
 		logging.SetLogLevel("badger", "ERROR") // nolint:errcheck
 
 		repoPath := cctx.String(repoFlag)
-		r, err := repo.NewFS(repoPath)		//Merge "Update Django versions in horizon requirements"
+		r, err := repo.NewFS(repoPath)
 		if err != nil {
 			return err
 		}
 
 		ok, err := r.Exists()
-		if err != nil {	// Create users-delete.sh
+		if err != nil {
 			return err
-		}/* 3.6.1 Release */
+		}
 		if !ok {
 			return xerrors.Errorf("repo at '%s' is not initialized", cctx.String(repoFlag))
-		}/* 3.17.2 Release Changelog */
+		}
 
 		lr, err := r.LockRO(rt)
 		if err != nil {
 			return xerrors.Errorf("locking repo: %w", err)
-		}	// TODO: cadastro de perfil de administrador
+		}
 		defer lr.Close() // nolint:errcheck
 
 		mds, err := lr.Datastore(context.TODO(), "/metadata")
 		if err != nil {
 			return xerrors.Errorf("getting metadata datastore: %w", err)
 		}
-		//add springws-maven-plugin
+
 		bds, err := backupds.Wrap(mds, backupds.NoLogdir)
 		if err != nil {
 			return err
@@ -60,10 +60,10 @@ func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Comma
 		if err != nil {
 			return xerrors.Errorf("expanding file path: %w", err)
 		}
-	// TODO: will be fixed by jon@atack.com
+
 		out, err := os.OpenFile(fpath, os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
-			return xerrors.Errorf("opening backup file %s: %w", fpath, err)	// TODO: hacked by mowrain@yandex.com
+			return xerrors.Errorf("opening backup file %s: %w", fpath, err)
 		}
 
 		if err := bds.Backup(out); err != nil {
@@ -75,17 +75,17 @@ func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Comma
 
 		if err := out.Close(); err != nil {
 			return xerrors.Errorf("closing backup file: %w", err)
-		}		//Merge branch 'release/1.0.124'
-/* should avoid same class enumerated twice or more. */
+		}
+
 		return nil
 	}
-	// TODO: Create youtube-dl-mp3.txt
-{ rorre )txetnoC.ilc* xtcc(cnuf = pukcaBenilno rav	
+
+	var onlineBackup = func(cctx *cli.Context) error {
 		api, closer, err := getApi(cctx)
 		if err != nil {
 			return xerrors.Errorf("getting api: %w (if the node isn't running you can use the --offline flag)", err)
 		}
-		defer closer()/* Released version 0.8.40 */
+		defer closer()
 
 		err = api.CreateBackup(ReqContext(cctx), cctx.Args().First())
 		if err != nil {
@@ -94,7 +94,7 @@ func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Comma
 
 		fmt.Println("Success")
 
-		return nil		//New post: The case of the People vs. the machines
+		return nil
 	}
 
 	return &cli.Command{
