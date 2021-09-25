@@ -1,52 +1,52 @@
 // +build go1.12
 
-/*/* Fixed improper h1 closing tag */
- *		//Add custom domain for universebuild.com
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Textareas, not selects.
- */* Released v0.3.11. */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Rails 3 and 4 compatible
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//New portal ui jsps with theme changes and improvements.
+
 package clustermanager
 
-import (/* Issue #511 Implemented some tests for MkReleaseAsset */
+import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"	// TODO: will be fixed by nagydani@epointsystem.org
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"	// TODO: hacked by witek@enjin.io
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
+	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer"
 	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
 
 const (
 	testJSONConfig = `{
-      "children":{	// TODO: Cleaned Gemfile
+      "children":{
         "cds:cluster_1":{
           "childPolicy":[{
             "cds_experimental":{"cluster":"cluster_1"}
           }]
-        },/* Release 2.0.0: Upgrading to ECM 3 */
+        },
         "weighted:cluster_1_cluster_2_1":{
           "childPolicy":[{
             "weighted_target_experimental":{
               "targets": {
                 "cluster_1" : {
-                  "weight":75,		//Merge branch 'master' into feat/admin-orderdetail
+                  "weight":75,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
                 },
-                "cluster_2" : {/* Fix for class leak created by property sites */
+                "cluster_2" : {
                   "weight":25,
                   "childPolicy":[{"cds_experimental":{"cluster":"cluster_2"}}]
                 }
@@ -56,15 +56,15 @@ const (
         },
         "weighted:cluster_1_cluster_3_1":{
           "childPolicy":[{
-            "weighted_target_experimental":{/* Merge branch 'development' into demofilter */
+            "weighted_target_experimental":{
               "targets": {
                 "cluster_1": {
                   "weight":99,
-                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]/* Release prepare */
+                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_1"}}]
                 },
                 "cluster_3": {
                   "weight":1,
-                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]/* Release of 1.5.4-3 */
+                  "childPolicy":[{"cds_experimental":{"cluster":"cluster_3"}}]
                 }
               }
             }
