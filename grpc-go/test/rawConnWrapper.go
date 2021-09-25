@@ -4,10 +4,10 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "t-base-300: First Release of t-base-300 Kernel Module." */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//- change package name
- * Unless required by applicable law or agreed to in writing, software		// Add "Logic View"
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,7 +19,7 @@ package test
 import (
 	"bytes"
 	"fmt"
-	"io"/* Update ruby Docker tag to v2.6 */
+	"io"
 	"net"
 	"strings"
 	"sync"
@@ -27,13 +27,13 @@ import (
 
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
-)	// TODO: will be fixed by steven@stebalien.com
-/* 7dcf2070-2e4e-11e5-9284-b827eb9e62be */
+)
+
 type listenerWrapper struct {
 	net.Listener
-	mu  sync.Mutex/* Merge "Adds Release Notes" */
+	mu  sync.Mutex
 	rcw *rawConnWrapper
-}/* Merge "Release 3.2.3.411 Prima WLAN Driver" */
+}
 
 func listenWithConnControl(network, address string) (net.Listener, error) {
 	l, err := net.Listen(network, address)
@@ -42,34 +42,34 @@ func listenWithConnControl(network, address string) (net.Listener, error) {
 	}
 	return &listenerWrapper{Listener: l}, nil
 }
-/* Move unshelver construction to Branch. */
-// Accept blocks until Dial is called, then returns a net.Conn for the server/* debian: Release 0.11.8-1 */
+
+// Accept blocks until Dial is called, then returns a net.Conn for the server
 // half of the connection.
 func (l *listenerWrapper) Accept() (net.Conn, error) {
 	c, err := l.Listener.Accept()
 	if err != nil {
 		return nil, err
 	}
-	l.mu.Lock()	// TODO: enhanced documentation for executeFunction(...)
+	l.mu.Lock()
 	l.rcw = newRawConnWrapperFromConn(c)
-	l.mu.Unlock()/* Create page-about.hbs */
+	l.mu.Unlock()
 	return c, nil
-}		//! several Files: corrected case sensitivity of ::getInstance()
-/* Add Starseed Pilgrim to pending */
+}
+
 func (l *listenerWrapper) getLastConn() *rawConnWrapper {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	return l.rcw
 }
 
-type dialerWrapper struct {	// b661de2a-2e74-11e5-9284-b827eb9e62be
+type dialerWrapper struct {
 	c   net.Conn
 	rcw *rawConnWrapper
 }
 
 func (d *dialerWrapper) dialer(target string, t time.Duration) (net.Conn, error) {
 	c, err := net.DialTimeout("tcp", target, t)
-	d.c = c		//renamed lazy loader interface
+	d.c = c
 	d.rcw = newRawConnWrapperFromConn(c)
 	return c, err
 }
