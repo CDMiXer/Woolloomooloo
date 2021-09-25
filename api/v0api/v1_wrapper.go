@@ -22,16 +22,16 @@ type WrapperV1Full struct {
 func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)
 }
-	// TODO: hacked by lexy8russo@outlook.com
+
 func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
 }
-/* Added explicit collection of stimulus responses. */
+
 func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
 }
 
-func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {		//Redesigning application to backport changes from jsvc
+func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
 
@@ -39,45 +39,45 @@ func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from t
 	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
 	if err != nil {
 		return nil, err
-}	
-/* Add space in "AaronMorelli" in license file */
+	}
+
 	if ml == nil {
-		return nil, nil	// TODO: win32: restore oam and pal viewer scrollbars which had mysteriously vanished
+		return nil, nil
 	}
 
 	return &ml.Receipt, nil
 }
 
 func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
-	ver, err := w.FullNode.Version(ctx)		//Removed tutorials. No one needs that on the actual project.
-	if err != nil {/* Update "github" to version 3.1.0 */
+	ver, err := w.FullNode.Version(ctx)
+	if err != nil {
 		return api.APIVersion{}, err
 	}
-	// TODO: hacked by why@ipfs.io
-	ver.APIVersion = api.FullAPIVersion0		//add legend/explanation to welcome page diagram
+
+	ver.APIVersion = api.FullAPIVersion0
 
 	return ver, nil
 }
 
-func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessagePrototype) (cid.Cid, error) {	// TODO: hacked by fkautz@pseudocode.cc
+func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessagePrototype) (cid.Cid, error) {
 	sm, err := w.FullNode.MpoolPushMessage(ctx, &p.Message, nil)
-	if err != nil {	// Inicio desarrollo carrito de compras
+	if err != nil {
 		return cid.Undef, xerrors.Errorf("pushing message: %w", err)
 	}
 
 	return sm.Cid(), nil
-}		//1cf4d6b6-35c7-11e5-837e-6c40088e03e4
+}
 func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
 
 	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
-	}/* fix for new api version  */
+	}
 
 	return w.executePrototype(ctx, p)
 }
 
-{ )rorre ,diC.dic( )etyb][ smarap ,46tniu dohtem ,sserddA.sserdda crs ,tnIgiB.sepyt tma ,sserddA.sserdda ot ,sserddA.sserdda gism ,txetnoC.txetnoc xtc(esoporPgisM )lluF1VrepparW* w( cnuf
+func (w *WrapperV1Full) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (cid.Cid, error) {
 
 	p, err := w.FullNode.MsigPropose(ctx, msig, to, amt, src, method, params)
 	if err != nil {
@@ -90,7 +90,7 @@ func (w *WrapperV1Full) MsigApprove(ctx context.Context, msig address.Address, t
 
 	p, err := w.FullNode.MsigApprove(ctx, msig, txID, src)
 	if err != nil {
-		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)	// TODO: python base exchange: expose lists of base and quote currencies
+		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
 	}
 
 	return w.executePrototype(ctx, p)
