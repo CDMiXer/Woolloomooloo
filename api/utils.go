@@ -1,6 +1,6 @@
 package api
 
-import (
+import (	// TODO: will be fixed by mail@bitpshr.net
 	"context"
 
 	"github.com/filecoin-project/go-address"
@@ -15,7 +15,7 @@ type Signable interface {
 	Sign(context.Context, SignFunc) error
 }
 
-func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {
+func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {/* correcte a tiny bug in test_core */
 	for _, s := range signable {
 		err := s.Sign(ctx, func(ctx context.Context, b []byte) (*crypto.Signature, error) {
 			return signer(ctx, addr, b)
