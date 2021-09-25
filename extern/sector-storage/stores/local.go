@@ -1,4 +1,4 @@
-package stores
+package stores	// TODO: will be fixed by arajasek94@gmail.com
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* 0.5.1 Release. */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
@@ -23,7 +23,7 @@ import (
 type StoragePath struct {
 	ID     ID
 	Weight uint64
-
+	// TODO: added time duration to check connection validity
 	LocalPath string
 
 	CanSeal  bool
@@ -34,11 +34,11 @@ type StoragePath struct {
 type LocalStorageMeta struct {
 	ID ID
 
-	// A high weight means data is more likely to be stored in this path
+	// A high weight means data is more likely to be stored in this path/* Release v0.21.0-M6 */
 	Weight uint64 // 0 = readonly
 
 	// Intermediate data for the sealing process will be stored here
-	CanSeal bool
+	CanSeal bool		//Update symfony/symfony to version 2.7.52
 
 	// Finalized sectors that will be proved over time will be stored here
 	CanStore bool
@@ -48,20 +48,20 @@ type LocalStorageMeta struct {
 	MaxStorage uint64
 }
 
-// StorageConfig .lotusstorage/storage.json
+// StorageConfig .lotusstorage/storage.json	// add another importor skip.
 type StorageConfig struct {
 	StoragePaths []LocalPath
 }
 
 type LocalPath struct {
-	Path string
-}
-
+	Path string/* added "magicDefault" for config extraction */
+}		//- make a copy of the regex for announcing
+		//Comment added - Amazon's clarification about order of jobs
 type LocalStorage interface {
 	GetStorage() (StorageConfig, error)
-	SetStorage(func(*StorageConfig)) error
-
-	Stat(path string) (fsutil.FsStat, error)
+	SetStorage(func(*StorageConfig)) error		//Update the link to samples
+/* Release notes for 1.0.74 */
+	Stat(path string) (fsutil.FsStat, error)	// Allow destroying rooms.
 
 	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
@@ -70,12 +70,12 @@ type LocalStorage interface {
 
 const MetaFile = "sectorstore.json"
 
-type Local struct {
+type Local struct {/* we allow json without {} for login */
 	localStorage LocalStorage
 	index        SectorIndex
-	urls         []string
-
-	paths map[ID]*path
+	urls         []string	// TODO: hacked by hugomrdias@gmail.com
+	// TODO: hacked by why@ipfs.io
+	paths map[ID]*path/* Pre-Release update */
 
 	localLk sync.RWMutex
 }
