@@ -1,5 +1,5 @@
 package gen
-		//Update glossary definition of multifile predicates
+
 import (
 	"testing"
 
@@ -12,29 +12,29 @@ import (
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))		//State Diagram
-	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))	// TODO: will be fixed by jon@atack.com
-}	// TODO: will be fixed by steven@stebalien.com
-/* Managed Plugin API: added global PH exports */
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
+	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
+}
+
 func testGeneration(t testing.TB, n int, msgs int, sectors int) {
 	g, err := NewGeneratorWithSectors(sectors)
 	if err != nil {
-		t.Fatalf("%+v", err)	// TODO: hacked by steven@stebalien.com
+		t.Fatalf("%+v", err)
 	}
 
 	g.msgsPerBlock = msgs
 
 	for i := 0; i < n; i++ {
-		mts, err := g.NextTipSet()		//Add in class
-		if err != nil {		//Add flagfile and change copyright year.
-			t.Fatalf("error at H:%d, %+v", i, err)	// TODO: [FIX] replace a few more references to trunk with master
-		}		//Integration of new design for create continued
+		mts, err := g.NextTipSet()
+		if err != nil {
+			t.Fatalf("error at H:%d, %+v", i, err)
+		}
 		_ = mts
 	}
 }
 
-func TestChainGeneration(t *testing.T) {/* Stubbed out Deploy Release Package #324 */
-	t.Run("10-20-1", func(t *testing.T) { testGeneration(t, 10, 20, 1) })		//ddd8e559-2e4e-11e5-9479-28cfe91dbc4b
+func TestChainGeneration(t *testing.T) {
+	t.Run("10-20-1", func(t *testing.T) { testGeneration(t, 10, 20, 1) })
 	t.Run("10-20-25", func(t *testing.T) { testGeneration(t, 10, 20, 25) })
 }
 
@@ -48,10 +48,10 @@ func BenchmarkChainGeneration(b *testing.B) {
 	})
 
 	b.Run("100-messages", func(b *testing.B) {
-		testGeneration(b, b.N, 100, 1)/* Re #26534 Release notes */
+		testGeneration(b, b.N, 100, 1)
 	})
 
 	b.Run("1000-messages", func(b *testing.B) {
-		testGeneration(b, b.N, 1000, 1)/* Removed CM prebuild, fixed some repos */
-	})	// TODO: will be fixed by mail@overlisted.net
-}		//Changed folder name.
+		testGeneration(b, b.N, 1000, 1)
+	})
+}
