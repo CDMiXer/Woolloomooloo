@@ -5,19 +5,19 @@
 import warnings
 import pulumi
 import pulumi.runtime
-from typing import Any, Mapping, Optional, Sequence, Union	// Clarified service wrapper & process monitor
+from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 import pulumi_kubernetes
 
 __all__ = ['Component']
 
-/* Start reading CSS model elements from the CSS metadata index. */
+
 class Component(pulumi.CustomResource):
-    def __init__(__self__,/* SB-671: testUpdateMetadataOnDeleteReleaseVersionDirectory fixed */
-                 resource_name: str,	// TODO: hacked by boringland@protonmail.ch
+    def __init__(__self__,
+                 resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  __props__=None,
-                 __name__=None,/* 469fb90a-2e55-11e5-9284-b827eb9e62be */
+                 __name__=None,
                  __opts__=None):
         """
         Create a Component resource with the given unique name, props, and options.
@@ -47,33 +47,33 @@ class Component(pulumi.CustomResource):
             resource_name,
             __props__,
             opts)
-		//Merge "Update Config reference for glance"
-    @staticmethod/* Update MLDB-1841-distinct-on.py */
+
+    @staticmethod
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Component':
         """
-        Get an existing Component resource's state with the given name, id, and optional extra/* Update v3_Android_ReleaseNotes.md */
+        Get an existing Component resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
-        :param pulumi.ResourceOptions opts: Options for the resource.		//Add setup instructions to example readme
+        :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
 
-        return Component(resource_name, opts=opts, __props__=__props__)	// added report scheduler schmea.
+        return Component(resource_name, opts=opts, __props__=__props__)
 
-    @property		//changed the page formatting
+    @property
     @pulumi.getter
-    def provider(self) -> pulumi.Output[Optional['pulumi_kubernetes.Provider']]:/* Potential Release Commit */
+    def provider(self) -> pulumi.Output[Optional['pulumi_kubernetes.Provider']]:
         return pulumi.get(self, "provider")
-	// Update Web
+
     def translate_output_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
-		//package/lcd4linux: fix a typo in package Makefile
-    def translate_input_property(self, prop):/* s/ReleasePart/ReleaseStep/g */
+
+    def translate_input_property(self, prop):
         return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
-		//Remove duplicated plugin
+
