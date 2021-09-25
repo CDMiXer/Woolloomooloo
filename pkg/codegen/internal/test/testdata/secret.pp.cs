@@ -9,6 +9,6 @@ class MyStack : Stack
         {
             MasterPassword = Output.CreateSecret("foobar"),
         });
-    }/* Various string fixes. */
+    }
 
 }
