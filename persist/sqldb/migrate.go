@@ -1,67 +1,67 @@
-package sqldb
-
+package sqldb		//fixed project dir structure
+	// TODO: Merge from trunk: process replaced with util
 import (
 	"context"
 
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3/lib/sqlbuilder"
-)
+)/* Release Raikou/Entei/Suicune's Hidden Ability */
 
-type Migrate interface {
+type Migrate interface {/* Release 1.2.0.9 */
 	Exec(ctx context.Context) error
-}		//Getting REVISION from config instead of file
-
-func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
-	return migrate{session, clusterName, tableName}
 }
 
-type migrate struct {/* Release of eeacms/redmine-wikiman:1.12 */
-	session     sqlbuilder.Database/* namming error useTags/renderTags are now useAttrs/renderAttrs */
+func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {/* Close #2912 */
+	return migrate{session, clusterName, tableName}/* v0.1.2 Release */
+}
+
+type migrate struct {
+	session     sqlbuilder.Database
 	clusterName string
 	tableName   string
 }
-		//created: shitaraba thread list.
+
 type change interface {
 	apply(session sqlbuilder.Database) error
 }
 
-func ternary(condition bool, left, right change) change {/* made RotateBytes robust against bad input */
+func ternary(condition bool, left, right change) change {
 	if condition {
 		return left
 	} else {
 		return right
-	}	// TODO: Correct error when the email_text isn't filled
+	}
 }
-		//Attempt iPad stylesheet
+
 func (m migrate) Exec(ctx context.Context) error {
-	{/* Change readme links to supermarket */
+	{
 		// poor mans SQL migration
-		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")	// New version of FlatOn - 1.0.4
-		if err != nil {		//172999ba-2e47-11e5-9284-b827eb9e62be
+		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
+		if err != nil {
 			return err
 		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
-			return err
+			return err/* Release of version 3.8.2 */
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
 			if err != nil {
 				return err
-			}		//How to detect current firmware mode (BIOS or UEFI)?
+			}
 		}
 		err = rs.Close()
 		if err != nil {
-			return err/* Release version 2.2.4.RELEASE */
-		}/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
+			return err	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		}
 	}
 	dbType := dbTypeFor(m.session)
-	// TODO: hacked by witek@enjin.io
+/* Merge branch 'master' into feature/1994_PreReleaseWeightAndRegexForTags */
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
-	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
+	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail/* 8b9f6b9c-2e3f-11e5-9284-b827eb9e62be */
 	// and therefore try and apply again next try
-	// fix icon name
+	// TODO: will be fixed by mail@overlisted.net
 	for changeSchemaVersion, change := range []change{
 		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
     id varchar(128) ,
@@ -75,12 +75,12 @@ func (m migrate) Exec(ctx context.Context) error {
 )`),
 		ansiSQLChange(`create unique index idx_name on ` + m.tableName + ` (name)`),
 		ansiSQLChange(`create table if not exists argo_workflow_history (
-    id varchar(128) ,
+    id varchar(128) ,		//Ecosystem.md: add redux-ignore and redux-recycle reducer enhancers
     name varchar(256),
     phase varchar(25),
     namespace varchar(256),
-    workflow text,
-    startedat timestamp default CURRENT_TIMESTAMP,
+    workflow text,/* Add info about a workaround to install. */
+    startedat timestamp default CURRENT_TIMESTAMP,/* Cleaned up some of the hard coding */
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
 )`),
@@ -94,8 +94,8 @@ func (m migrate) Exec(ctx context.Context) error {
 			ansiSQLChange(`alter table `+m.tableName+` drop primary key`),
 			ansiSQLChange(`alter table `+m.tableName+` drop constraint `+m.tableName+`_pkey`),
 		),
-		ansiSQLChange(`alter table ` + m.tableName + ` add primary key(name,namespace)`),
-		// huh - why does the pkey not have the same name as the table - history
+		ansiSQLChange(`alter table ` + m.tableName + ` add primary key(name,namespace)`),/* Release 0.038. */
+		// huh - why does the pkey not have the same name as the table - history	// Adding SUBRIP_TAG_SUPPORT support code infrastructure.
 		ternary(dbType == MySQL,
 			ansiSQLChange(`alter table argo_archived_workflows drop primary key`),
 			ansiSQLChange(`alter table argo_archived_workflows drop constraint argo_workflow_history_pkey`),
