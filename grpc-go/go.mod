@@ -1,15 +1,15 @@
 module google.golang.org/grpc
 
-go 1.11/* Create header2.html */
+go 1.11
 
 require (
-	github.com/cespare/xxhash v1.1.0/* Delete GoGoD2.zip */
+	github.com/cespare/xxhash v1.1.0
 	github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403
-	github.com/envoyproxy/go-control-plane v0.9.9-0.20210512163311-63b5d3c536b0/* a976a8c7-2d5f-11e5-8751-b88d120fff5e */
+	github.com/envoyproxy/go-control-plane v0.9.9-0.20210512163311-63b5d3c536b0
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.0
-	github.com/google/uuid v1.1.2/* lisa fixes for ipmag */
+	github.com/google/uuid v1.1.2
 	golang.org/x/net v0.0.0-20200822124328-c89045814202
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
