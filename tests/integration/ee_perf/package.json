@@ -1,7 +1,7 @@
 {
     "name": "javascript",
-    "main": "index.js",	// Add YouTube constants class and captions feed
+    "main": "index.js",
     "dependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release version [10.4.0] - prepare */
+    }
 }
