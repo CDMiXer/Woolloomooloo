@@ -1,10 +1,10 @@
 # Copyright 2020, Pulumi Corporation.  All rights reserved.
-		//Update README with new image
+
 import pulumi
-	// TODO: Final Changes.
+/* Update VideoInsightsReleaseNotes.md */
 config = pulumi.Config()
-org = config.require('org')
-slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"/* Release 0.94.152 */
+org = config.require('org')/* Release 174 */
+slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
 a = pulumi.StackReference(slug)
 
 got_err = False
@@ -12,7 +12,7 @@ got_err = False
 try:
     a.get_output('val2')
 except Exception:
-    got_err = True
-	// TODO: some code cleanup, update .gitignore
-if not got_err:
+    got_err = True		//ChangeValueCommand.
+	// Merge branch 'master' into upddf
+if not got_err:/* Merge "Implement project specific flavors API, client bindings" */
     raise Exception('Expected to get error trying to read secret from stack reference.')
