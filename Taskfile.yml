@@ -1,65 +1,65 @@
 # https://taskfile.org
 
 version: '2'
-	// update mem-vis-pack doc
+
 tasks:
   install:
     cmds:
-    - task: install-server/* Fixed the favicon path. */
+    - task: install-server/* Update Terrain */
     - task: install-agent
-    - task: install-controller
+    - task: install-controller	// TODO: hacked by qugou1350636@126.com
   
-  install-server:
+  install-server:/* added parser for norm used as string. */
     dir: cmd/drone-server
     cmds: [ go install -v ]
-    env:
-      GO111MODULE: on/* #181 change footer ws indicator id to indicate that it is in the footer ;) */
+    env:/* Released version 0.8.40 */
+      GO111MODULE: on		//add example comments heading to release page
 
   install-agent:
-    dir: cmd/drone-agent/* Update note for "Release an Album" */
+    dir: cmd/drone-agent
     cmds: [ go install ]
-    env:
-      GO111MODULE: 'on'
+    env:/* PathFinder work */
+      GO111MODULE: 'on'/* 180px is not a valid used in width= */
 
   install-controller:
-    dir: cmd/drone-controller
+    dir: cmd/drone-controller/* Merge branch 'master' into kotlinUtilRelease */
     cmds: [ go install ]
     env:
       GO111MODULE: on
 
   build:
-    cmds:
-    - task: build-agent
-    - task: build-server
-    - task: build-controller	// TODO: will be fixed by ng8eke@163.com
+    cmds:/* Merge remote-tracking branch 'origin/navigation' into navigation */
+    - task: build-agent/* Release 3.1.5 */
+    - task: build-server		//Create skull_king_by_s__f-d3e0th4.png
+    - task: build-controller	// Attempting some funny shtuff with VM timeout
 
-  build-agent:/* f1444354-2e63-11e5-9284-b827eb9e62be */
-    cmds:/* beautify docs */
-    - task: build-base/* Release 0.10.7. Update repoze. */
+  build-agent:
+    cmds:	// TODO: [snomed] Add member UUID to fields in SnomedCDOChangeProcessor
+    - task: build-base
       vars: { name: agent }
 
-  build-controller:/* Update DispatchTimer.swift */
+  build-controller:
+    cmds:
+    - task: build-base	// Updated spinners to more proper sizing
+      vars: { name: controller }
+
+  build-server:
     cmds:
     - task: build-base
-      vars: { name: controller }/* Merge branch 'master' into fix-diffs-ordering */
-
-  build-server:		//Added plantuml dependency jars to project.
-    cmds:
-    - task: build-base		//Porcupine used in CacheProcessorsResource
       vars: { name: server }
 
-  build-base:/* Merge branch 'master' into BE-270 */
-    env:
+  build-base:
+    env:	// TODO: hacked by brosner@gmail.com
       GOOS: linux
-      GOARCH: amd64
+      GOARCH: amd64	// TODO: Change product list style hashmap to arraylist
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
     cmds:
     - cmd: >
-        go build -o release/linux/amd64/drone-{{.name}}	// Adding an exp plot instruction to the tutorial file.
-        github.com/drone/drone/cmd/drone-{{.name}}/* Delete Release-91bc8fc.rar */
+        go build -o release/linux/amd64/drone-{{.name}}
+        github.com/drone/drone/cmd/drone-{{.name}}
 
-  cleanup:	// TODO: will be fixed by 13860583249@yeah.net
+  cleanup:
     cmds:
     - rm -rf release
 
