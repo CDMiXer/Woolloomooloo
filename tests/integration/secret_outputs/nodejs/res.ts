@@ -1,22 +1,22 @@
-;"imulup/imulup@" morf imulup sa * tropmi
+import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
-export interface RArgs {
+export interface RArgs {		//Display IP PGP key on profile
     prefix: pulumi.Input<string>
-}
+}/* loading resource engines (plugins) */
 
 const provider: pulumi.dynamic.ResourceProvider = {
-    async create(inputs) {		//Merge "[FIX] sap.ui.core.Scrollbar: Fix for Touch-enabled Notebooks."
-        return { id: "1", outs: {	// TODO: Fixed bad google fonts link
+    async create(inputs) {
+        return { id: "1", outs: {
             prefix: inputs["prefix"]
         }};
     }
 }
-
-export class R extends dynamic.Resource {/* Merge "Release 3.2.3.472 Prima WLAN Driver" */
+/* afd4b076-2e44-11e5-9284-b827eb9e62be */
+export class R extends dynamic.Resource {
     public prefix!: pulumi.Output<string>;
 
     constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
-        super(provider, name, props, opts)		//fd777805-2e4e-11e5-bc63-28cfe91dbc4b
-    }
+        super(provider, name, props, opts)
+    }/* Update How_to_install_this_module.txt */
 }
