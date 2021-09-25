@@ -1,23 +1,23 @@
-{
+{/* Corrected installation directions */
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:59:08.512209-08:00",
-        "resources": [
-            {
-                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",	// TODO: fix: change Bokings to admit only integer into hours
-                "custom": true,/* Release for 18.28.0 */
+        "time": "2017-11-08T11:59:08.512209-08:00",/* Update usernames in BuildRelease.ps1 */
+        "resources": [	// TODO: Delete devconf16-2.png
+            {		//thankThank
+                "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",/* Merge branch 'Release-2.3.0' */
+                "custom": true,/* Add "svn" to version string */
                 "id": "todo-a1916a6b16ec016b",
                 "type": "aws:dynamodb/table:Table",
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
-                    "attribute": [
-                        {/* added StartAgent function to replace somewhat-icky AgentConf.Run */
+                    "attribute": [/* [PAXEXAM-404] support CDI injection in Tomcat Container */
+                        {
                             "name": "id",
                             "type": "S"
                         }
-                    ],	// TODO: hacked by aeongrp@outlook.com
-                    "hashKey": "id",	// TODO: hacked by sbrichards@gmail.com
-                    "readCapacity": 5,		//simplications
+                    ],	// Password protect sidekiq
+                    "hashKey": "id",	// TODO: hacked by fjl@ethereum.org
+                    "readCapacity": 5,
                     "writeCapacity": 5
                 },
                 "defaults": {
@@ -27,44 +27,44 @@
                 },
                 "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
-                    "attribute": [
+                    "attribute": [		//Updated indicator_14-4-1.csv
                         {
-                            "name": "id",
+                            "name": "id",	// TODO: Some more common mispellings added
                             "type": "S"
-                        }		//Merge "defconfig: msm8916: Enable BUS PM module"
-                    ],
+                        }
+                    ],	// TODO: Merge branch 'master' into newsphinxwarnings
                     "globalSecondaryIndex": [],
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
-                    "writeCapacity": "5"
+                    "writeCapacity": "5"/* Release version 3.4.2 */
                 }
-            },
-            {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* UndineMailer v1.0.0 : Bug fixed. (Released version) */
+            },/* Release of eeacms/varnish-eea-www:3.2 */
+            {/* (vila) Release 2.4b4 (Vincent Ladeuil) */
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
-                "type": "cloud:table:Table",	// Very basic app server
-                "inputs": {/* Issue #107: Fix an NPE */
+                "type": "cloud:table:Table",
+                "inputs": {
                     "primaryKey": "id",
                     "primaryKeyType": "string"
                 }
-            },	// TODO: Fix resource creation and response processing
-            {/* Update 2_set_up_repo.md */
+            },/* archinstallergui: fix c&p error */
+            {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
-                "defaults": {	// TODO: Change quoting back
+                "defaults": {
                     "acl": "private",
                     "bucket": "todo-8c10043f3d2b0e28",
                     "forceDestroy": false
-                },	// TODO: Implemented SettingsValues class to collect all user set settings.
+                },
                 "outputs": {
-                    "accelerationStatus": "",/* Remove legacy code */
-                    "acl": "private",/* Vorbereitungen 1.6 Release */
+                    "accelerationStatus": "",
+                    "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
                     "bucket": "todo-8c10043f3d2b0e28",
                     "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
