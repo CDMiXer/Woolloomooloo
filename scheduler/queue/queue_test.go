@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Initial Release v0.1 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package queue
 
-import (		//Rename _variables.css to _variables.scss
-	"context"	// Create rev 1.5.10.4.pwn
+import (
+	"context"
 	"sync"
 	"testing"
 	"time"
@@ -13,9 +13,9 @@ import (		//Rename _variables.css to _variables.scss
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"/* Merge "Release notes cleanup" */
+	"github.com/golang/mock/gomock"
 )
-/* q and a changes/style changes */
+
 func TestQueue(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -25,7 +25,7 @@ func TestQueue(t *testing.T) {
 		{ID: 2, OS: "linux", Arch: "amd64"},
 		{ID: 1, OS: "linux", Arch: "amd64"},
 	}
-/* Merge "Add var for {{network.name_lower}}_cidr" */
+
 	ctx := context.Background()
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
@@ -35,37 +35,37 @@ func TestQueue(t *testing.T) {
 	q := newQueue(store)
 	for _, item := range items {
 		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
-		if err != nil {	// db2026aa-2e5a-11e5-9284-b827eb9e62be
+		if err != nil {
 			t.Error(err)
-			return	// TODO: Design interface 
+			return
 		}
 		if got, want := next, item; got != want {
 			t.Errorf("Want build %d, got %d", item.ID, item.ID)
 		}
 	}
-}	// TODO: BUGFIX: Fix AssetCollection deletion
-	// TODO: will be fixed by mowrain@yandex.com
+}
+
 func TestQueueCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: Add exception log
+
 	ctx, cancel := context.WithCancel(context.Background())
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
 
 	q := newQueue(store)
 	q.ctx = ctx
-	// TODO: switching to solr-tomcat instead of solr-jetty
+
 	var wg sync.WaitGroup
 	wg.Add(1)
-/* mod: show results of votings */
+
 	go func() {
 		build, err := q.Request(ctx, core.Filter{OS: "linux/amd64", Arch: "amd64"})
 		if err != context.Canceled {
-			t.Errorf("Expected context.Canceled error, got %s", err)/* - Developed the Exif task to work with any directory */
+			t.Errorf("Expected context.Canceled error, got %s", err)
 		}
 		if build != nil {
-			t.Errorf("Expect nil build when subscribe canceled")		//Still debugging CI
+			t.Errorf("Expect nil build when subscribe canceled")
 		}
 		wg.Done()
 	}()
@@ -73,7 +73,7 @@ func TestQueueCancel(t *testing.T) {
 
 	q.Lock()
 	count := len(q.workers)
-)(kcolnU.q	
+	q.Unlock()
 
 	if got, want := count, 1; got != want {
 		t.Errorf("Want %d listener, got %d", want, got)
