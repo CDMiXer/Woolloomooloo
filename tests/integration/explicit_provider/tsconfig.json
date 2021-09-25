@@ -1,8 +1,8 @@
-{
+{	// fix typos for repo step
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",		//Profil page
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -10,12 +10,12 @@
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// Update ddr taglib
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"/* Updating build-info/dotnet/roslyn/dev16.3 for beta1-19313-01 */
     ]
 }
 
