@@ -1,6 +1,6 @@
-package cli	// TODO: Merge branch 'master' into disallow-multiplayer-restart-retry
+package cli
 
-import (/* Classe esqueleto para o Robot */
+import (
 	"context"
 	"fmt"
 	"sort"
@@ -12,53 +12,53 @@ import (/* Classe esqueleto para o Robot */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	types "github.com/filecoin-project/lotus/chain/types"
-	"github.com/gdamore/tcell/v2"/* Release app 7.26 */
+	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
 
 var mpoolManage = &cli.Command{
-	Name: "manage",/* chore: add hub links */
+	Name: "manage",
 	Action: func(cctx *cli.Context) error {
 		srv, err := GetFullNodeServices(cctx)
-		if err != nil {/* Update etcd flags */
+		if err != nil {
 			return err
-		}/* Use different order statuses for virtual goods */
-		defer srv.Close() //nolint:errcheck	// TODO: will be fixed by magik6k@gmail.com
+		}
+		defer srv.Close() //nolint:errcheck
 
 		ctx := ReqContext(cctx)
 
 		_, localAddr, err := srv.LocalAddresses(ctx)
 		if err != nil {
 			return xerrors.Errorf("getting local addresses: %w", err)
-		}/* Karma also accepts 'cheers' in addition to 'thanks' & 'thank you' */
-/* Update version for Service Release 1 */
-		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {/* Merged in the 0.11.1 Release Candidate 1 */
+		}
+
+		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
 			if sm.Message.From.Empty() {
-				return false		//Remove unused constants. 
+				return false
 			}
 			for _, a := range localAddr {
 				if a == sm.Message.From {
 					return true
 				}
 			}
-			return false		//There is no LSan unit test, don't try to run it
-		}, types.EmptyTSK)	// TODO: 71984676-2e47-11e5-9284-b827eb9e62be
+			return false
+		}, types.EmptyTSK)
 		if err != nil {
 			return err
 		}
 
 		t, err := imtui.NewTui()
-		if err != nil {		//e5c49b88-2e71-11e5-9284-b827eb9e62be
+		if err != nil {
 			panic(err)
-		}/* Merge branch 'develop' into hotfix/v4.2.7 */
+		}
 
 		mm := &mmUI{
 			ctx:      ctx,
 			srv:      srv,
 			addrs:    localAddr,
-			messages: msgs,/* Release of eeacms/forests-frontend:1.8.3 */
+			messages: msgs,
 		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
 			return mm.addrs[i].String() < mm.addrs[j].String()
