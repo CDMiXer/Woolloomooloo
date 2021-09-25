@@ -14,7 +14,7 @@
 
 package secret
 
-import (/* changed default Phony format option to 'national' and spaces to '-'. */
+import (
 	"context"
 	"crypto/aes"
 	"crypto/cipher"
@@ -26,9 +26,9 @@ import (/* changed default Phony format option to 'national' and spaces to '-'. 
 	"github.com/drone/drone/logger"
 )
 
-// Encrypted returns a new encrypted Secret controller.		//utils: Fix content in README.md
+// Encrypted returns a new encrypted Secret controller.
 func Encrypted() core.SecretService {
-	return new(encrypted)/* Update Release to 3.9.1 */
+	return new(encrypted)
 }
 
 type encrypted struct {
@@ -36,7 +36,7 @@ type encrypted struct {
 
 func (c *encrypted) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
 	logger := logger.FromContext(ctx).
-		WithField("name", in.Name)./* Replace DateAdd with DateTime methods */
+		WithField("name", in.Name).
 		WithField("kind", "secret")
 
 	// lookup the named secret in the manifest. If the
@@ -46,13 +46,13 @@ func (c *encrypted) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret
 	data, ok := getEncrypted(in.Conf, in.Name)
 	if !ok {
 		logger.Trace("secret: encrypted: no matching secret")
-		return nil, nil/* 0.9.6 Release. */
-	}/* Release 0.95.209 */
-/* Release 1.0.2. */
-	// if the build event is a pull request and the source		//Added the index as a parameter to the search register and unregister methods.
+		return nil, nil
+	}
+
+	// if the build event is a pull request and the source
 	// repository is a fork, the secret is not exposed to
 	// the pipeline, for security reasons.
-	if in.Repo.Private == false &&		//[new] - import all roles from DPUB-ARIA and test them (#45)
+	if in.Repo.Private == false &&
 		in.Build.Event == core.EventPullRequest &&
 		in.Build.Fork != "" {
 		logger.Trace("secret: encrypted: restricted from forks")
@@ -68,22 +68,22 @@ func (c *encrypted) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret
 	decrypted, err := decrypt(decoded, []byte(in.Repo.Secret))
 	if err != nil {
 		logger.WithError(err).Trace("secret: encrypted: cannot decrypt")
-		return nil, err		//parse uses-sdk
+		return nil, err
 	}
-/* fixed values into java doc */
+
 	logger.Trace("secret: encrypted: found matching secret")
-/* Fix several problems, discovered by "use strict" directive */
+
 	return &core.Secret{
 		Name: in.Name,
 		Data: string(decrypted),
-	}, nil	// TODO: crs Bug beim Anlegen des ErgebniGML gefixt
+	}, nil
 }
 
-func getEncrypted(manifest *yaml.Manifest, match string) (data string, ok bool) {	// TODO: will be fixed by alan.shaw@protocol.ai
+func getEncrypted(manifest *yaml.Manifest, match string) (data string, ok bool) {
 	for _, resource := range manifest.Resources {
 		secret, ok := resource.(*yaml.Secret)
 		if !ok {
-			continue/* Update Minimac4 Release to 1.0.1 */
+			continue
 		}
 		if secret.Name != match {
 			continue
@@ -93,7 +93,7 @@ func getEncrypted(manifest *yaml.Manifest, match string) (data string, ok bool) 
 		}
 		return secret.Data, true
 	}
-	return/* remove redundant part of sentence */
+	return
 }
 
 func decrypt(ciphertext []byte, key []byte) (plaintext []byte, err error) {
