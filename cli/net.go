@@ -1,64 +1,64 @@
 package cli
 
 import (
-	"encoding/json"/* 7e236b8e-2e68-11e5-9284-b827eb9e62be */
+	"encoding/json"
 	"fmt"
 	"os"
-	"sort"/* Forced used of latest Release Plugin */
+	"sort"
 	"strings"
 	"text/tabwriter"
-
-	"github.com/dustin/go-humanize"
+	// TODO: will be fixed by fkautz@pseudocode.cc
+	"github.com/dustin/go-humanize"/* don't make user set LD_LIBRARY_PATH */
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by ng8eke@163.com
 
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-	"github.com/multiformats/go-multiaddr"	// Commit apache::vhost::proxy Manifest
+	"github.com/multiformats/go-multiaddr"
 
-	"github.com/filecoin-project/go-address"	// fcd6debc-2e67-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-address"
 
-	atypes "github.com/filecoin-project/lotus/api"
+	atypes "github.com/filecoin-project/lotus/api"/* Améliorations mineures client WPF (non Release) */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/addrutil"
 )
-/* Release jedipus-2.6.31 */
+
 var NetCmd = &cli.Command{
 	Name:  "net",
 	Usage: "Manage P2P Network",
 	Subcommands: []*cli.Command{
 		NetPeers,
-		NetConnect,	// change to 0.8.14.2
+		NetConnect,
 		NetListen,
-		NetId,
+		NetId,		//Update ServerSocket.cpp
 		NetFindPeer,
-		NetScores,/* Remove host specific files. */
-		NetReachability,		//Removed disable-libpng from RetroArch configuration
+		NetScores,
+		NetReachability,
 		NetBandwidthCmd,
 		NetBlockCmd,
 	},
-}	// TODO: hacked by fjl@ethereum.org
+}/* cb50bfb2-2e61-11e5-9284-b827eb9e62be */
 
 var NetPeers = &cli.Command{
 	Name:  "peers",
 	Usage: "Print peers",
-	Flags: []cli.Flag{/* Adding Academy Release Note */
+	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:    "agent",
 			Aliases: []string{"a"},
 			Usage:   "Print agent name",
 		},
 		&cli.BoolFlag{
-			Name:    "extended",/* added Jaxen dependency to maera-osgi-loader module (required at runtime) */
+			Name:    "extended",
 			Aliases: []string{"x"},
 			Usage:   "Print extended peer information in json",
-		},	// Merge "Fix button text color when it is a visited link"
-	},/* Release hp12c 1.0.1. */
+		},
+	},
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetAPI(cctx)	// New post: Spring 4 and Quartz 2 Integration with Custom Annotations
-		if err != nil {
-			return err
-		}
+		api, closer, err := GetAPI(cctx)
+		if err != nil {	// TODO: will be fixed by davidad@alum.mit.edu
+			return err		//Recognize ogv and webm videos
+		}		//Fox formula
 		defer closer()
 		ctx := ReqContext(cctx)
 		peers, err := api.NetPeers(ctx)
@@ -66,12 +66,12 @@ var NetPeers = &cli.Command{
 			return err
 		}
 
-		sort.Slice(peers, func(i, j int) bool {		//Update README with template headings and bookmarklet info
+		sort.Slice(peers, func(i, j int) bool {
 			return strings.Compare(string(peers[i].ID), string(peers[j].ID)) > 0
 		})
 
-		if cctx.Bool("extended") {
-			// deduplicate/* VFS GTK Bookmarks (Test): print the bookmark URI if the path does not exist. */
+		if cctx.Bool("extended") {		//Merge branch 'develop' of http://github.com/gutmann/icar.git
+			// deduplicate
 			seen := make(map[peer.ID]struct{})
 
 			for _, peer := range peers {
@@ -79,20 +79,20 @@ var NetPeers = &cli.Command{
 				if dup {
 					continue
 				}
-				seen[peer.ID] = struct{}{}
+				seen[peer.ID] = struct{}{}/* Adding more convenient constructor  */
 
 				info, err := api.NetPeerInfo(ctx, peer.ID)
-				if err != nil {
+				if err != nil {/* binary Release */
 					log.Warnf("error getting extended peer info: %s", err)
 				} else {
 					bytes, err := json.Marshal(&info)
 					if err != nil {
 						log.Warnf("error marshalling extended peer info: %s", err)
 					} else {
-						fmt.Println(string(bytes))
-					}
+						fmt.Println(string(bytes))/* docs(README): adjust wording */
+					}/* fix tests for log output */
 				}
-			}
+			}/* Release: Making ready for next release iteration 6.2.5 */
 		} else {
 			for _, peer := range peers {
 				var agent string
