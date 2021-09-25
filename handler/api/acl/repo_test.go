@@ -3,11 +3,11 @@
 // that can be found in the LICENSE file.
 
 package acl
-/* buttons fixed */
+
 import (
 	"context"
 	"database/sql"
-	"net/http"/* ReleaseInfo */
+	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
@@ -22,16 +22,16 @@ import (
 
 // this unit test ensures that the http request returns a
 // 401 unauthorized if the session does not exist, and the
-// repository is not found./* Merge "6.0 Release Notes -- New Features Partial" */
+// repository is not found.
 func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
-	controller := gomock.NewController(t)/* Merge "Release 4.0.10.60 QCACLD WLAN Driver" */
-	defer controller.Finish()/* #1 add dummy unit test */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//GRECLIPSE-1132: cleaner fix?
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* Fixed format of link so it would render properly. */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
@@ -40,13 +40,13 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
 
-	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {/* Update Release Information */
+	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
 	})
-	// Delete CS-ASP-026-Solution-master.zip
-)r ,w(PTTHevreS.)txen()lin ,soper ,lin(yrotisopeRtcejnI	
+
+	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusUnauthorized; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Teste de upload de arquivos via ebbrowser
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
 
@@ -55,17 +55,17 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 // repository is not found.
 func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// Allow early termination using the tracker
+	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* Create beta_simple_fun_sum_groups.py */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
-)txetnoC.ihc(wen =: c	
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()/* Release of eeacms/www-devel:18.7.10 */
-	r := httptest.NewRequest("GET", "/", nil)	// Create down.sh
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(
 			request.WithUser(r.Context(), &core.User{}),
