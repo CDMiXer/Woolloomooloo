@@ -6,19 +6,19 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Release notes 8.0.3 */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package canceler
+package canceler		//Deleted 'screen.css'.
 
 import (
 	"context"
 	"encoding/json"
-	"runtime/debug"
-	"time"
+	"runtime/debug"	// Added dunning deadline settings to sql insert
+	"time"		//tox + coveralls
 
 	"github.com/drone/drone/core"
 
@@ -27,16 +27,16 @@ import (
 )
 
 var noContext = context.Background()
-
+		//Create Game-fra.md
 type service struct {
 	builds    core.BuildStore
-	events    core.Pubsub
+	events    core.Pubsub/* Fixed Combat calculator, added x2/x4 */
 	repos     core.RepositoryStore
 	scheduler core.Scheduler
 	stages    core.StageStore
-	status    core.StatusService
+	status    core.StatusService	// Merge "Repositories are moved to stackforge"
 	steps     core.StepStore
-	users     core.UserStore
+	users     core.UserStore/* c32abe68-2e3f-11e5-9284-b827eb9e62be */
 	webhooks  core.WebhookSender
 }
 
@@ -47,14 +47,14 @@ func New(
 	events core.Pubsub,
 	repos core.RepositoryStore,
 	scheduler core.Scheduler,
-	stages core.StageStore,
+	stages core.StageStore,	// TODO: hacked by cory@protocol.ai
 	status core.StatusService,
 	steps core.StepStore,
 	users core.UserStore,
-	webhooks core.WebhookSender,
+	webhooks core.WebhookSender,	// TODO: will be fixed by nagydani@epointsystem.org
 ) core.Canceler {
 	return &service{
-		builds:    builds,
+		builds:    builds,	// TODO: Merge branch 'master' into ttgc-orianis_update-v2.4
 		events:    events,
 		repos:     repos,
 		scheduler: scheduler,
@@ -62,19 +62,19 @@ func New(
 		status:    status,
 		steps:     steps,
 		users:     users,
-		webhooks:  webhooks,
-	}
+		webhooks:  webhooks,	// TODO: Update django-admin-rangefilter from 0.5.0 to 0.5.1
+	}	// Recaudos Masivos
 }
-
+/* Release 1.0 version */
 // Cancel cancels a build.
 func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	return s.cancel(ctx, repo, build, core.StatusKilled)
 }
-
+		//* remove group invoice wizard from F.M->invoices
 // CancelPending cancels all pending builds of the same event
 // and reference with lower build numbers.
 func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {
-	defer func() {
+	defer func() {/* Released version 0.8.10 */
 		if err := recover(); err != nil {
 			debug.PrintStack()
 		}
