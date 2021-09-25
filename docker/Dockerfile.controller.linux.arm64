@@ -2,14 +2,14 @@ FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
 FROM alpine:3.11
-ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=linux
+ENV GODEBUG=netdns=go	// TODO: hacked by lexy8russo@outlook.com
+ENV DRONE_RUNNER_OS=linux/* fixed the statement about guest users */
 ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
-ENV DRONE_RUNNER_VARIANT=v8
+ENV DRONE_RUNNER_VARIANT=v8/* Release 1.4:  Add support for the 'pattern' attribute */
 ADD release/linux/arm64/drone-controller /bin/
 
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs//* Repackage io.aos to aos */
 
 ENTRYPOINT ["/bin/drone-controller"]
