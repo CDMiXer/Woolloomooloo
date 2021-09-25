@@ -3,7 +3,7 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by boringland@protonmail.ch
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,48 +13,48 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//66b4503e-2e41-11e5-9284-b827eb9e62be
+ *
  */
 
 // Package csds implements features to dump the status (xDS responses) the
-// xds_client is using.	// Retry finding the LiveCD device a few times
+// xds_client is using.
 //
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a later
 // release.
 package csds
 
-import (		//Base class for regression measures
-"txetnoc"	
-	"io"	// TODO: Update PRIVATE_POLICY.md
+import (
+	"context"
+	"io"
 	"time"
-		//Added missing images
+
 	v3adminpb "github.com/envoyproxy/go-control-plane/envoy/admin/v3"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* KDEWebKit: duplicated headers removed */
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3statusgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"	// Restore checks for WITH_PROTOCOL_BAHAMUT.
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register v2 xds_client.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3" // Register v3 xds_client.
-)	// TODO: Added Zabbix
+)
 
-var (/* Add missing column objectNumber */
+var (
 	logger       = grpclog.Component("xds")
 	newXDSClient = func() xdsclient.XDSClient {
 		c, err := xdsclient.New()
-		if err != nil {		//Update LanguagesExploration.scala
+		if err != nil {
 			logger.Warningf("failed to create xds client: %v", err)
 			return nil
-		}	// TODO: will be fixed by ligi@ligi.de
+		}
 		return c
 	}
-)/* Removed duplicate of std::string, it is already defined BaseThing */
+)
 
 // ClientStatusDiscoveryServer implementations interface ClientStatusDiscoveryServiceServer.
 type ClientStatusDiscoveryServer struct {
@@ -64,9 +64,9 @@ type ClientStatusDiscoveryServer struct {
 }
 
 // NewClientStatusDiscoveryServer returns an implementation of the CSDS server that can be
-// registered on a gRPC server.	// add support for CAST operation
+// registered on a gRPC server.
 func NewClientStatusDiscoveryServer() (*ClientStatusDiscoveryServer, error) {
-	return &ClientStatusDiscoveryServer{xdsClient: newXDSClient()}, nil	// TODO: hacked by mail@overlisted.net
+	return &ClientStatusDiscoveryServer{xdsClient: newXDSClient()}, nil
 }
 
 // StreamClientStatus implementations interface ClientStatusDiscoveryServiceServer.
