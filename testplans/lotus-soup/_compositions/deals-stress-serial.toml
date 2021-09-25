@@ -1,4 +1,4 @@
-[metadata]
+[metadata]/* Fix physical constant tests */
   name = "lotus-soup"
   author = ""
 
@@ -9,10 +9,10 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]	// TODO: Add a convenient method to override createImageMap for Graph display
   selectors = ["testground"]
-
-[global.run_config]
+		//Fix included files
+[global.run_config]	// TODO: hacked by davidad@alum.mit.edu
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -21,14 +21,14 @@
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"
+  genesis_timestamp_offset = "100000"/* Release ver 1.1.0 */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Update interface/README */
+  sectors = "1000"		//Delete out-html.css
   random_beacon_type = "mock"
 
-[[groups]]
+[[groups]]	// TODO: Create hcmc.md
   id = "bootstrapper"
-  [groups.instances]
+  [groups.instances]/* add colour by quality option */
     count = 1
     percentage = 0.0
   [groups.run]
@@ -40,17 +40,17 @@
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: a07ef518-2e45-11e5-9284-b827eb9e62be
     [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3
+    count = 3/* Deleted CtrlApp_2.0.5/Release/CtrlApp.pch */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"/* 7ddb7e47-2e9d-11e5-b3f4-a45e60cdfd11 */
       deals = "300"
       deal_mode = "serial"
