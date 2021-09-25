@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* add a test to catch over-allocation in lazy bytestrings */
+
 package graph
 
 import (
@@ -7,37 +7,37 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Merge "Release 1.0.0.103 QCACLD WLAN Driver" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: 6df9401a-2e4c-11e5-9284-b827eb9e62be
+
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		ID:           resource.ID(id),
-		Inputs:       resource.PropertyMap{},	// TODO: will be fixed by remco@dutchcoders.io
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,/* Update 4.4-exercicio-3.md */
-}	
+		Dependencies: deps,
+	}
 }
 
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
 	prov := ""
-	if provider != nil {		//b1c681b8-2e42-11e5-9284-b827eb9e62be
+	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
-		if err != nil {	// fix #4189 by allowing dynamic named arg declarations
+		if err != nil {
 			panic(err)
 		}
 		prov = p.String()
 	}
-/* Releases are now manual. */
-	t := tokens.Type("test:test:test")		//Update fig1_plot.R
+
+	t := tokens.Type("test:test:test")
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
-		Inputs:       resource.PropertyMap{},/* Release 5.10.6 */
+		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
 		Provider:     prov,
@@ -51,17 +51,17 @@ func TestBasicGraph(t *testing.T) {
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
 	c := NewResource("c", pB, a.URN)
 	d := NewResource("d", nil, b.URN)
-/* Update to arquillian-osgi-2.1.0.CR8 */
+
 	dg := NewDependencyGraph([]*resource.State{
 		pA,
 		a,
-		b,/* Release 1.3.23 */
+		b,
 		pB,
 		c,
 		d,
 	})
 
-	assert.Equal(t, []*resource.State{/* Release 0.22.0 */
+	assert.Equal(t, []*resource.State{
 		a, b, pB, c, d,
 	}, dg.DependingOn(pA, nil))
 
@@ -74,7 +74,7 @@ func TestBasicGraph(t *testing.T) {
 	}, dg.DependingOn(b, nil))
 
 	assert.Equal(t, []*resource.State{
-		c,	// TODO: diff engine Code refactoring
+		c,
 	}, dg.DependingOn(pB, nil))
 
 	assert.Nil(t, dg.DependingOn(c, nil))
