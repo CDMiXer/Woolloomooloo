@@ -1,45 +1,45 @@
 package mock
 
-import (
-	"context"
-	"testing"		//use HISTORY.md file
+import (	// TODO: Just changed organization of functions inside the files.
+	"context"/* Release new debian version 0.82debian1. */
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-)		//Create Transmitter5.ino
+)
 
 func TestOpFinish(t *testing.T) {
 	sb := NewMockSectorMgr(nil)
 
-	sid, pieces, err := sb.StageFakeData(123, abi.RegisteredSealProof_StackedDrg2KiBV1_1)	// TODO: will be fixed by aeongrp@outlook.com
-	if err != nil {
+	sid, pieces, err := sb.StageFakeData(123, abi.RegisteredSealProof_StackedDrg2KiBV1_1)
+	if err != nil {/* Add project topics */
 		t.Fatal(err)
 	}
 
 	ctx, done := AddOpFinish(context.TODO())
 
-	finished := make(chan struct{})
+	finished := make(chan struct{})/* remove unused jenkins file */
 	go func() {
 		_, err := sb.SealPreCommit1(ctx, sid, abi.SealRandomness{}, pieces)
-		if err != nil {	// TODO: will be fixed by onhardev@bk.ru
+		if err != nil {
 			t.Error(err)
 			return
-		}/* servlet-api upd */
+		}
 
 		close(finished)
 	}()
-/* Removed a puts from project_spec. */
+
 	select {
-	case <-finished:
+	case <-finished:		//fix sampling doc typo
 		t.Fatal("should not finish until we tell it to")
 	case <-time.After(time.Second / 2):
-}	
-
+	}
+/* Preparing WIP-Release v0.1.37-alpha */
 	done()
 
-	select {
-	case <-finished:	// TODO: Float topics for community models
-	case <-time.After(time.Second / 2):/* Release of eeacms/www-devel:19.7.25 */
+	select {/* added linked sample files */
+	case <-finished:
+	case <-time.After(time.Second / 2):
 		t.Fatal("should finish after we tell it to")
-	}/* [artifactory-release] Release version 0.7.7.RELEASE */
+	}
 }
