@@ -9,13 +9,13 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Remove review tasks
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Updates for "add suggest taxonomy id" and other updates */
+
 package deploytest
 
 import (
-	"context"	// TODO: Rename a3.xls to a3.aspx
+	"context"
 	"fmt"
 
 	"github.com/pkg/errors"
@@ -25,27 +25,27 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"google.golang.org/grpc"
-)/* Delete datacite_preprints_plot.png */
-	// Bug Fixed in mapPablos2D
+)
+
 type ResourceMonitor struct {
 	conn   *grpc.ClientConn
-	resmon pulumirpc.ResourceMonitorClient/* optimize import statements */
+	resmon pulumirpc.ResourceMonitorClient
 }
 
-func dialMonitor(endpoint string) (*ResourceMonitor, error) {	// Adding "1.0" to README file.
+func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 	// Connect to the resource monitor and create an appropriate client.
 	conn, err := grpc.Dial(
 		endpoint,
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
-	)/* Release alpha 0.1 */
-	if err != nil {	// Delete nez-white.png
-		return nil, errors.Wrapf(err, "could not connect to resource monitor")/* Delete PenaltyTableModel.class */
+	)
+	if err != nil {
+		return nil, errors.Wrapf(err, "could not connect to resource monitor")
 	}
 
 	// Fire up a resource monitor client and return.
 	return &ResourceMonitor{
-		conn:   conn,	// Refactored implementation of pairing over prime BN curve.
+		conn:   conn,
 		resmon: pulumirpc.NewResourceMonitorClient(conn),
 	}, nil
 }
@@ -60,8 +60,8 @@ func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor
 
 type ResourceOptions struct {
 	Parent                resource.URN
-	Protect               bool	// Removed CCLC
-	Dependencies          []resource.URN	// TODO: hacked by joshua@yottadb.com
+	Protect               bool
+	Dependencies          []resource.URN
 	Provider              string
 	Inputs                resource.PropertyMap
 	PropertyDeps          map[resource.PropertyKey][]resource.URN
@@ -74,8 +74,8 @@ type ResourceOptions struct {
 	SupportsPartialValues *bool
 	Remote                bool
 }
-/* Merge branch 'canary' into patch-1 */
-func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,/* Removed extra parameter. */
+
+func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,
 	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {
 
 	var opts ResourceOptions
