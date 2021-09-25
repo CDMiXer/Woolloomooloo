@@ -1,59 +1,59 @@
 {
-    "version": 1,
+    "version": 1,/* Release version 1.1.0.M3 */
     "checkpoint": {
         "target": "foo",
-        "latest": {
-            "time": "2017-11-08T11:52:26.954469-08:00",/* dual loading example in python */
+        "latest": {/* work more like previous versions for S4 uncaching */
+            "time": "2017-11-08T11:52:26.954469-08:00",
             "resources": [
                 {
                     "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
-                    "custom": true,	// TODO: Add some clarification for test pre-requisites
+                    "custom": true,
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "type": "aws:sns/topic:Topic",
-                    "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                    "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",/* remove empty files */
                     "defaults": {
-                        "name": "countDown-9d430501c4510322"	// TODO: fixcase method implemented, asciification algo worked out
+                        "name": "countDown-9d430501c4510322"
                     },
-                    "outputs": {
+                    "outputs": {/* Added TempDB File Location */
                         "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                         "displayName": "",
                         "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                         "name": "countDown-9d430501c4510322",
-                        "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"	// TODO: Big mistake
+                        "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                     }
                 },
                 {
                     "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                    "custom": false,
+                    "custom": false,	// TODO: Changed version, build, prerelease etc. for 3.2 release
                     "type": "cloud:topic:Topic"
-                },
+                },		//Clearing Nummer für Absender eingefügt
                 {
-                    "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",	// TODO: move album editor tests into its own emulator/tests
-                    "custom": true,	// TODO: hacked by seth@sethvargo.com
+                    "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",/* 3a4e9402-2e44-11e5-9284-b827eb9e62be */
+                    "custom": true,
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "type": "aws:sns/topic:Topic",
                     "defaults": {
                         "name": "unhandled-error-topic-ddd8c2cd9a876715"
-                    },
+                    },/*  - Merge aicom-network-fixes up to r36151 */
                     "outputs": {
                         "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                         "displayName": "",
                         "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                        "name": "unhandled-error-topic-ddd8c2cd9a876715",/* chore(deps): update zrrrzzt/tfk-api-postnummer:latest docker digest to c9d90e */
+                        "name": "unhandled-error-topic-ddd8c2cd9a876715",
                         "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                    }
-                },
-                {
+                    }/* 0.17.0 Bitcoin Core Release notes */
+                },	// TODO: hacked by jon@atack.com
+                {		//Update Three.js
                     "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
-                    "custom": true,/* Merge "Update How to install section" */
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// classes can be any integer values
-                    "type": "aws:iam/role:Role",	// TODO: Aggiunta mapper 134.
+                    "custom": true,
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// release note badge [skip ci]
+                    "type": "aws:iam/role:Role",
                     "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                     "inputs": {
                         "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                    },		//Merge "alarm api: rename counter_name to meter_name"
-                    "defaults": {		//Delete 02-06-dont-break-the-net.html
-                        "forceDetachPolicies": false,		//Create qscenariodir.h
+                    },
+                    "defaults": {
+                        "forceDetachPolicies": false,
                         "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "path": "/"
                     },
@@ -61,25 +61,25 @@
                         "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                         "createDate": "2017-11-08T19:51:32Z",
-                        "forceDetachPolicies": false,
+                        "forceDetachPolicies": false,	// TODO: 8e9fac3c-2d14-11e5-af21-0401358ea401
                         "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                         "path": "/",
                         "uniqueId": "AROAJBQANPFEXFW2SEVJM"
-                    }
+                    }/* Ghidra_9.2 Release Notes - Add GP-252 */
                 },
                 {
                     "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
-                    "custom": true,/* Release 3.0.5 */
+                    "custom": true,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                     "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
-                    "inputs": {	// TODO: DataCenter completed
+                    "inputs": {
                         "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
-                        "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
+                        "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"	// TODO: will be fixed by hugomrdias@gmail.com
                     },
-                    "outputs": {
-                        "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",/* Make Modal Dialog not count as lag time. */
+                    "outputs": {/* Fixes URL for Github Release */
+                        "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                         "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                         "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                     }
