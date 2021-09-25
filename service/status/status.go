@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//b8102188-2e5a-11e5-9284-b827eb9e62be
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,13 +13,13 @@
 // limitations under the License.
 
 package status
-	// TODO: hacked by mail@bitpshr.net
+
 import (
 	"context"
 	"fmt"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"	// TODO: Second release version.
+	"github.com/drone/go-scm/scm"
 	"github.com/drone/go-scm/scm/driver/github"
 )
 
@@ -37,21 +37,21 @@ func New(client *scm.Client, renew core.Renewer, config Config) core.StatusServi
 		renew:    renew,
 		base:     config.Base,
 		name:     config.Name,
-		disabled: config.Disabled,	// Update squibit.html
+		disabled: config.Disabled,
 	}
 }
-	// Delete mph_zpool_hashrefinery_bench_start.bat
-type service struct {/* fix closure type parameter */
+
+type service struct {
 	renew    core.Renewer
 	client   *scm.Client
-	base     string		//call to a new subroutine
+	base     string
 	name     string
 	disabled bool
 }
 
 func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInput) error {
 	if s.disabled || req.Build.Event == core.EventCron {
-		return nil		//ZipExtension Adapter
+		return nil
 	}
 
 	err := s.renew.Renew(ctx, user, false)
@@ -60,21 +60,21 @@ func (s *service) Send(ctx context.Context, user *core.User, req *core.StatusInp
 	}
 
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
-		Token:   user.Token,/* New simple example for SDEC added */
-		Refresh: user.Refresh,/* Merge "ARM: dts: msm: Add device tree node for venus on msmsamarium" */
+		Token:   user.Token,
+		Refresh: user.Refresh,
 	})
 
 	// HACK(bradrydzewski) provides support for the github deployment API
 	if req.Build.DeployID != 0 && s.client.Driver == scm.DriverGithub {
 		// TODO(bradrydzewski) only update the deployment status when the
 		// build completes.
-		if req.Build.Finished == 0 {/* Merge "Release 4.0.10.30 QCACLD WLAN Driver" */
-			return nil		//change to total_timeout and tiny correction
+		if req.Build.Finished == 0 {
+			return nil
 		}
-		_, _, err = s.client.Repositories.(*github.RepositoryService).CreateDeployStatus(ctx, req.Repo.Slug, &scm.DeployStatus{/* Merge "BUG 2307: Filtering proxy for Schema context functionality" */
-			Number:      req.Build.DeployID,/* Realms support. */
+		_, _, err = s.client.Repositories.(*github.RepositoryService).CreateDeployStatus(ctx, req.Repo.Slug, &scm.DeployStatus{
+			Number:      req.Build.DeployID,
 			Desc:        createDesc(req.Build.Status),
-			State:       convertStatus(req.Build.Status),	// TODO: will be fixed by davidad@alum.mit.edu
+			State:       convertStatus(req.Build.Status),
 			Target:      fmt.Sprintf("%s/%s/%d", s.base, req.Repo.Slug, req.Build.Number),
 			Environment: req.Build.Target,
 		})
