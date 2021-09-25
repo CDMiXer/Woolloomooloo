@@ -1,9 +1,9 @@
 {
     "all": {
-        "enforcementLevel": "advisory"
-    },/* Correção da exibição do label lateral */
+        "enforcementLevel": "advisory"/* New post: pollooo */
+    },
     "test-policy-w-config": {
-        "enforcementLevel": "mandatory",	// Create contract specific report header.
+        "enforcementLevel": "mandatory",
         "message": "test msg"
     }
-}
+}		//Fixed issues with passing res.end into functions
