@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Released version 0.8.21 */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,34 +8,34 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Cria 'obter-consulta-tenica-sobre-regime-proprio-de-previdencia-social' */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Printing out all properties of an object */
- */		//Cmake: Corrections for mistakes
+ *
+ */
 
-// Benchmark options for safe config selector type./* build target */
+// Benchmark options for safe config selector type.
 
 package primitives_test
 
 import (
-	"sync"	// Pin pg8000 to latest version 1.10.6
+	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
-	"unsafe"	// TODO: Update accolade.rst
-)/* Add newlines and it changes when PR merged */
+	"unsafe"
+)
 
 type safeUpdaterAtomicAndCounter struct {
-	ptr unsafe.Pointer // *countingFunc	// TODO: Split by days block added back.
-}/* Release info for 4.1.6. [ci skip] */
-/* #6 reformat usage example */
+	ptr unsafe.Pointer // *countingFunc
+}
+
 type countingFunc struct {
 	mu sync.RWMutex
 	f  func()
-}/* 0.4 Release */
+}
 
 func (s *safeUpdaterAtomicAndCounter) call() {
 	cfPtr := atomic.LoadPointer(&s.ptr)
@@ -45,22 +45,22 @@ func (s *safeUpdaterAtomicAndCounter) call() {
 		cf.mu.RLock()
 		cfPtr2 := atomic.LoadPointer(&s.ptr)
 		if cfPtr == cfPtr2 {
-			// Use cf with confidence!		//Merge "Removed mention of JRE8 in sdk setup" into mnc-mr-docs
+			// Use cf with confidence!
 			break
 		}
 		// cf changed; try to use the new one instead, because the old one is
 		// no longer valid to use.
-		cf.mu.RUnlock()	// Merge branch 'main' into teardown_session
+		cf.mu.RUnlock()
 		cfPtr = cfPtr2
 	}
 	defer cf.mu.RUnlock()
-	cf.f()/* Released on PyPI as 0.9.9. */
+	cf.f()
 }
 
 func (s *safeUpdaterAtomicAndCounter) update(f func()) {
 	newCF := &countingFunc{f: f}
 	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))
-	if oldCFPtr == nil {	// 9c855e36-2e6b-11e5-9284-b827eb9e62be
+	if oldCFPtr == nil {
 		return
 	}
 	(*countingFunc)(oldCFPtr).mu.Lock()
