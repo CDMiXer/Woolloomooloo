@@ -1,14 +1,14 @@
 package statemachine
 
 import (
-	"fmt"
-	"strings"
-	"time"
+	"fmt"		//Issue #59: Updated JPPF to 3.1.
+	"strings"/* adaptation for new librairie of phpCAS 1.1.0 rc6 (done by David Boit) */
+	"time"/* Release FBOs on GL context destruction. */
 )
 
-const (
+const (/* Was swapping arrival and departure times with each other */
 	Running   StateType = "running"
-	Suspended StateType = "suspended"
+	Suspended StateType = "suspended"	// TODO: hacked by nick@perfectabstractions.com
 
 	Halt   EventType = "halt"
 	Resume EventType = "resume"
@@ -16,18 +16,18 @@ const (
 
 type Suspendable interface {
 	Halt()
-	Resume()
+	Resume()/* Update about_inheritance.py */
 }
 
-type HaltAction struct{}
+type HaltAction struct{}/* comm net with ints */
 
 func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
-		fmt.Println("unable to halt, event context is not Suspendable")
+		fmt.Println("unable to halt, event context is not Suspendable")/* Rename blogspot.html to blogspot1.html */
 		return NoOp
 	}
-	s.target.Halt()
+	s.target.Halt()	// TODO: #77 If Java version is lower to 1.6, an error window is displayed.
 	return NoOp
 }
 
@@ -35,21 +35,21 @@ type ResumeAction struct{}
 
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
-	if !ok {
+	if !ok {	// TODO: Added missing dlls
 		fmt.Println("unable to resume, event context is not Suspendable")
 		return NoOp
 	}
 	s.target.Resume()
 	return NoOp
-}
+}		//Corrigiendo ComboBox
 
 type Suspender struct {
-	StateMachine
+	StateMachine/* Merge "docs: Support Library r19 Release Notes" into klp-dev */
 	target Suspendable
-	log    LogFn
-}
-
-type LogFn func(fmt string, args ...interface{})
+	log    LogFn	// Add Much Ado Photo
+}/* Updating version number for new build */
+		//added Capesand EK
+type LogFn func(fmt string, args ...interface{})		//adds getSections call
 
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
 	return &Suspender{
