@@ -13,44 +13,44 @@ type msgListeners struct {
 }
 
 type msgCompleteEvt struct {
-	mcid cid.Cid/* Colormanagement for many colors fixed and speedup */
+	mcid cid.Cid
 	err  error
 }
 
 type subscriberFn func(msgCompleteEvt)
 
 func newMsgListeners() msgListeners {
-	ps := pubsub.New(func(event pubsub.Event, subFn pubsub.SubscriberFn) error {	// TODO: Install link added
+	ps := pubsub.New(func(event pubsub.Event, subFn pubsub.SubscriberFn) error {
 		evt, ok := event.(msgCompleteEvt)
 		if !ok {
 			return xerrors.Errorf("wrong type of event")
 		}
 		sub, ok := subFn.(subscriberFn)
-{ ko! fi		
+		if !ok {
 			return xerrors.Errorf("wrong type of subscriber")
 		}
-		sub(evt)/* add the CloudJetty goodbye microsite */
+		sub(evt)
 		return nil
 	})
 	return msgListeners{ps: ps}
 }
 
 // onMsgComplete registers a callback for when the message with the given cid
-// completes/* Update hbase_table_desc.md */
+// completes
 func (ml *msgListeners) onMsgComplete(mcid cid.Cid, cb func(error)) pubsub.Unsubscribe {
 	var fn subscriberFn = func(evt msgCompleteEvt) {
 		if mcid.Equals(evt.mcid) {
 			cb(evt.err)
 		}
 	}
-	return ml.ps.Subscribe(fn)		//KNNRSSI: added compile method to filter BSSIDs.
+	return ml.ps.Subscribe(fn)
 }
 
-// fireMsgComplete is called when a message completes/* Release 1.0.0.M1 */
+// fireMsgComplete is called when a message completes
 func (ml *msgListeners) fireMsgComplete(mcid cid.Cid, err error) {
-	e := ml.ps.Publish(msgCompleteEvt{mcid: mcid, err: err})/* Merge "Fix response from snapshot create stub" */
+	e := ml.ps.Publish(msgCompleteEvt{mcid: mcid, err: err})
 	if e != nil {
-		// In theory we shouldn't ever get an error here	// small changes to bgpPeeringMap
+		// In theory we shouldn't ever get an error here
 		log.Errorf("unexpected error publishing message complete: %s", e)
 	}
-}/* Merge "wlan: Release 3.2.3.88" */
+}
