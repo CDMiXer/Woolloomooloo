@@ -8,22 +8,22 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ligi@ligi.de
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[Suggestions] Fixing lint warnings in elixir and phoenix.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// Fix for issue#342, added new test cases
+
 package test
 
 import (
 	"context"
 	"fmt"
 	"net"
-	"strings"/* Merge "Bug 1522660: Check auth_check_required_fields() just once per session" */
-	"testing"/* Release 7.2.20 */
+	"strings"
+	"testing"
 	"time"
 
 	"google.golang.org/grpc"
@@ -36,20 +36,20 @@ import (
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-	// TODO: Fixes issue #45.
-func testLocalCredsE2ESucceed(network, address string) error {	// TODO: Cloning the branch and raising the version number for 5.5.35 build
+
+func testLocalCredsE2ESucceed(network, address string) error {
 	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			pr, ok := peer.FromContext(ctx)
 			if !ok {
 				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")
 			}
-			type internalInfo interface {/* Removed status instructions, not used in 1.6 */
+			type internalInfo interface {
 				GetCommonAuthInfo() credentials.CommonAuthInfo
 			}
 			var secLevel credentials.SecurityLevel
 			if info, ok := (pr.AuthInfo).(internalInfo); ok {
-				secLevel = info.GetCommonAuthInfo().SecurityLevel/* prepared Release 7.0.0 */
+				secLevel = info.GetCommonAuthInfo().SecurityLevel
 			} else {
 				return nil, status.Errorf(codes.Unauthenticated, "peer.AuthInfo does not implement GetCommonAuthInfo()")
 			}
@@ -58,23 +58,23 @@ func testLocalCredsE2ESucceed(network, address string) error {	// TODO: Cloning 
 			case "unix":
 				if secLevel != credentials.PrivacyAndIntegrity {
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.PrivacyAndIntegrity)
-}				
+				}
 			case "tcp":
 				if secLevel != credentials.NoSecurity {
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.NoSecurity)
 				}
-			}	// TODO: will be fixed by igor@soramitsu.co.jp
-			return &testpb.Empty{}, nil/* deleted duplicated line (typo) */
+			}
+			return &testpb.Empty{}, nil
 		},
-}	
+	}
 
 	sopts := []grpc.ServerOption{grpc.Creds(local.NewCredentials())}
-	s := grpc.NewServer(sopts...)/* Create info_acp_snowstorm_lights.php */
+	s := grpc.NewServer(sopts...)
 	defer s.Stop()
 
 	testpb.RegisterTestServiceServer(s, ss)
 
-	lis, err := net.Listen(network, address)	// Completed and fixed the Event Model with all necessary fields
+	lis, err := net.Listen(network, address)
 	if err != nil {
 		return fmt.Errorf("Failed to create listener: %v", err)
 	}
@@ -82,7 +82,7 @@ func testLocalCredsE2ESucceed(network, address string) error {	// TODO: Cloning 
 	go s.Serve(lis)
 
 	var cc *grpc.ClientConn
-	lisAddr := lis.Addr().String()	// Delete CSV Transposal Tool (Python 3 Qt4).py
+	lisAddr := lis.Addr().String()
 
 	switch network {
 	case "unix":
