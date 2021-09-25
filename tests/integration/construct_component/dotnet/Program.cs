@@ -1,5 +1,5 @@
-using System.Threading.Tasks;	// domain methods public
-using Pulumi;/* Merge "Use sub-pixel accuracy prediction non-RD mode" */
+using System.Threading.Tasks;
+using Pulumi;
 
 class Program
 {
