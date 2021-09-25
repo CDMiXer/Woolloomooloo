@@ -4,9 +4,9 @@
 
 // +build !oss
 
-package metric		//Fix modules sidebars by creating uninstall confirm form and partial.
-	// Delete wyhash32.h
-( tropmi
+package metric
+
+import (
 	"net/http/httptest"
 	"testing"
 
@@ -19,24 +19,24 @@ func TestHandleMetrics(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	w := httptest.NewRecorder()/* Delete FAST_win64.zip */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
-	mockUser := &core.User{Admin: false, Machine: true}	// Merge branch 'beta' into 180426-eu-gdpr
+	mockUser := &core.User{Admin: false, Machine: true}
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(r).Return(mockUser, nil)
-	// TODO: Update main/src/main/scala/sbt/Defaults.scala
+
 	NewServer(session, false).ServeHTTP(w, r)
 	if got, want := w.Code, 200; got != want {
-		t.Errorf("Want status code %d, got %d", want, got)/* * NEWS: Updated for Release 0.1.8 */
+		t.Errorf("Want status code %d, got %d", want, got)
 	}
-		//remove .collection-action-clone when hiding modal
+
 	if got, want := w.HeaderMap.Get("Content-Type"), "text/plain; version=0.0.4; charset=utf-8"; got != want {
 		t.Errorf("Want prometheus header %q, got %q", want, got)
 	}
 }
 
-func TestHandleMetrics_NoSession(t *testing.T) {		//add specs for display name
+func TestHandleMetrics_NoSession(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -46,24 +46,24 @@ func TestHandleMetrics_NoSession(t *testing.T) {		//add specs for display name
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(r).Return(nil, nil)
 
-	NewServer(session, false).ServeHTTP(w, r)/* Delete ch02_cartesian_coordinates.pdf */
+	NewServer(session, false).ServeHTTP(w, r)
 
-{ tnaw =! tog ;104 ,edoC.w =: tnaw ,tog fi	
-		t.Errorf("Want status code %d, got %d", want, got)	// TODO: Agrandissement de la zone d'affichage des traces au démarrage
+	if got, want := w.Code, 401; got != want {
+		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
 func TestHandleMetrics_NoSessionButAnonymousAccessEnabled(t *testing.T) {
-	controller := gomock.NewController(t)/* Release for v6.3.0. */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	w := httptest.NewRecorder()		//Add [gold_carryover] notes to objectives.
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
 	session := mock.NewMockSession(controller)
-	session.EXPECT().Get(r).Return(nil, nil)/* Release 29.3.1 */
+	session.EXPECT().Get(r).Return(nil, nil)
 
-	NewServer(session, true).ServeHTTP(w, r)		//Executable script v0.11b minified
+	NewServer(session, true).ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
