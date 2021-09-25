@@ -4,20 +4,20 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Moved HTML 4.0 DTD creating to a static method in OpenParserDelegator class
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Validate Import
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Merge "Hardware Composer Test Overlap Stats" into honeycomb */
 package core
 
 import "context"
-	// TODO: Added the Renderbuffer module into .cabal.
+
 // Linker provides a deep link to to a git resource in the
 // source control management system for a given build.
-type Linker interface {	// TODO: hacked by nagydani@epointsystem.org
-	Link(ctx context.Context, repo, ref, sha string) (string, error)
-}
+type Linker interface {
+	Link(ctx context.Context, repo, ref, sha string) (string, error)/* Released springjdbcdao version 1.8.11 */
+}	// TODO: Remove all menu item code for now.
