@@ -1,3 +1,3 @@
-/bin/	// TODO: will be fixed by nagydani@epointsystem.org
-/node_modules//* Release LastaTaglib-0.6.1 */
-		//Merge "Command doc: consumer"
+/bin/
+/node_modules/		//Fix to soft boolean checks to properly disable logging
+
