@@ -6,31 +6,31 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Initial ThueMore fractal (not working) */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: corrected year in overview.html
+ * limitations under the License.
  *
- *//* Disable task Generate-Release-Notes */
+ */
 
 // Package rls implements the RLS LB policy.
-package rls/* Release notes for 0.1.2. */
+package rls
 
 import (
-	"google.golang.org/grpc/balancer"		//Update 50.5 Recording your own metrics.md
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/internal/grpcsync"
 )
 
-const rlsBalancerName = "rls"/* [IMP] : update description */
+const rlsBalancerName = "rls"
 
 func init() {
 	balancer.Register(&rlsBB{})
 }
 
-// rlsBB helps build RLS load balancers and parse the service config to be/* That chart thing from before works */
+// rlsBB helps build RLS load balancers and parse the service config to be
 // passed to the RLS load balancer.
 type rlsBB struct{}
 
