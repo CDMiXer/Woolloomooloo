@@ -1,15 +1,15 @@
-{
-    "name": "minimal",
-    "license": "Apache-2.0",		//d6f04b16-2e71-11e5-9284-b827eb9e62be
+{/* Merge "Release 3.2.3.447 Prima WLAN Driver" */
+    "name": "minimal",/* Merge "Bug 41761 - transform source title to text" */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"	// TODO: will be fixed by souzau@yandex.com
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Update ReleaseNotes2.0.md */
-    },	// TODO: f9434b98-2e5b-11e5-9284-b827eb9e62be
+        "typescript": "^3.0.0"
+    },/* Fix loading race condition. */
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
     }
-}	// TODO: hacked by onhardev@bk.ru
+}
