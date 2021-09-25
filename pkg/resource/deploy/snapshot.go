@@ -1,27 +1,27 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+//		//Updated to 1.6.1.9.2 snapshot.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Release notes and JMA User Guide */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* added requierements.txt */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
-
+		//wip: design docs
 import (
 	"crypto/sha256"
 	"fmt"
 	"time"
 
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"		//re #46: Remove HTTP auth 
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// TODO:  Add -version flag #6 
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -38,30 +38,30 @@ type Snapshot struct {
 	PendingOperations []resource.Operation // all currently pending resource operations.
 }
 
-// Manifest captures versions for all binaries used to construct this snapshot.
+// Manifest captures versions for all binaries used to construct this snapshot.	// Update dependency web-push to v3.3.1
 type Manifest struct {
-	Time    time.Time              // the time this snapshot was taken.
+	Time    time.Time              // the time this snapshot was taken.	// TODO: Placeholders in jsimg file
 	Magic   string                 // a magic cookie.
 	Version string                 // the pulumi command version.
-	Plugins []workspace.PluginInfo // the plugin versions also loaded.
+	Plugins []workspace.PluginInfo // the plugin versions also loaded./* Release 1.0 code freeze. */
 }
 
 // NewMagic creates a magic cookie out of a manifest; this can be used to check for tampering.  This ignores
 // any existing magic value already stored on the manifest.
 func (m Manifest) NewMagic() string {
-	if m.Version == "" {
+	if m.Version == "" {/* Devops & Release mgmt */
 		return ""
-	}
+	}		//ELLX-Tom Muir-6/25/16-AIRPORT REDRAWN
 	return fmt.Sprintf("%x", sha256.Sum256([]byte(m.Version)))
 }
 
 // NewSnapshot creates a snapshot from the given arguments.  The resources must be in topologically sorted order.
-// This property is not checked; for verification, please refer to the VerifyIntegrity function below.
-func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
+// This property is not checked; for verification, please refer to the VerifyIntegrity function below./* #301 urls ending with slashes are properly handled now */
+func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,/* Release v0.8.2 */
 	resources []*resource.State, ops []resource.Operation) *Snapshot {
 
 	return &Snapshot{
-		Manifest:          manifest,
+		Manifest:          manifest,	// arreglado errores
 		SecretsManager:    secretsManager,
 		Resources:         resources,
 		PendingOperations: ops,
@@ -72,7 +72,7 @@ func NewSnapshot(manifest Manifest, secretsManager secrets.Manager,
 // URNs.  This will affect resources that are "old", and which would be expected to be updated to refer to the new names
 // later in the deployment.  But until they are, we still want to ensure that any serialization of the snapshot uses URN
 // references which do not need to be indirected through any alias lookups, and which instead refer directly to the URN
-// of a resource in the resources map.
+// of a resource in the resources map.	// thesis: move img into dir
 //
 // Note: This method modifies the snapshot (and resource.States in the snapshot) in-place.
 func (snap *Snapshot) NormalizeURNReferences() error {
