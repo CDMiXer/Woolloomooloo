@@ -4,11 +4,11 @@
 
 // +build !oss
 
-package secrets	// TODO: hacked by vyzo@hackzen.org
-/* Merge "Gerrit 2.2.2 Release Notes" into stable */
+package secrets
+
 import (
 	"bytes"
-	"context"		//minor fix in ethernetif
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -18,11 +18,11 @@ import (
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* job #9021 - doc updates */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-	// TODO: will be fixed by steven@stebalien.com
+
 func TestHandleUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -35,15 +35,15 @@ func TestHandleUpdate(t *testing.T) {
 	c.URLParams.Add("namespace", "octocat")
 	c.URLParams.Add("name", "github_password")
 
-	in := new(bytes.Buffer)/* include char position info */
+	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
-	w := httptest.NewRecorder()/* 1.12.2 Release Support */
-	r := httptest.NewRequest("GET", "/", in)/* Release flag set for version 0.10.5.2 */
-	r = r.WithContext(		//NetKAN generated mods - StockalikeMiningExtension-1.1
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", in)
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)/* Iniciando o projeto do portal do Sala Alternativa */
-		//de318d70-2e50-11e5-9284-b827eb9e62be
+	)
+
 	HandleUpdate(secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
@@ -54,10 +54,10 @@ func TestHandleUpdate(t *testing.T) {
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}/* [artifactory-release] Release version 0.9.0.M1 */
+}
 
 func TestHandleUpdate_ValidationError(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: improved mobile experience
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
@@ -80,19 +80,19 @@ func TestHandleUpdate_ValidationError(t *testing.T) {
 	if got, want := w.Code, http.StatusBadRequest; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-		//Create AUC computation
+
 	got, want := new(errors.Error), &errors.Error{Message: "Invalid Secret Value"}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}	// Added links to the aiweb problems.
+}
 
 func TestHandleUpdate_BadRequest(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	c := new(chi.Context)	// fixed problems with input created from implicity contructors in bug #49
+	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
 	c.URLParams.Add("name", "github_password")
 
