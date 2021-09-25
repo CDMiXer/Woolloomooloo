@@ -1,10 +1,10 @@
 {
-    "name": "test-policy-wo-config",	// TODO: npower14miscfixes: #i109706#
+    "name": "test-policy-wo-config",		//2f031c16-2e5e-11e5-9284-b827eb9e62be
     "version": "0.0.1",
     "dependencies": {
-        "@pulumi/policy": "^0.4.0"
+        "@pulumi/policy": "^0.4.0"	// TODO: ensure digital state is bool
     },
     "devDependencies": {
         "@types/node": "^10.12.7"
-    }/* SCMReleaser -> ActionTreeBuilder */
+    }
 }
