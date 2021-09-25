@@ -2,28 +2,28 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-// source: examples/helloworld/helloworld/helloworld.proto/* Released new version */
+// source: examples/helloworld/helloworld/helloworld.proto
 
 package helloworld
 
 import (
 	context "context"
-	// Device orientation notification support added
+
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"/* Fix bug in .desktop file */
+	status "google.golang.org/grpc/status"
 )
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against./* Update loginModule.php */
-// Requires gRPC-Go v1.32.0 or later./* [1.1.11] Release */
+// is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // GreeterClient is the client API for Greeter service.
-//		//Driver: Fix clang -ccc-no-clang -x c++-header foo.h on Darwin.
+//
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreeterClient interface {
-	// Sends a greeting	// TODO: will be fixed by zaq1tomo@gmail.com
+	// Sends a greeting
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
 }
 
@@ -36,20 +36,20 @@ func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
 }
 
 func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
-)ylpeRolleH(wen =: tuo	
-	err := c.cc.Invoke(ctx, "/helloworld.Greeter/SayHello", in, out, opts...)/* Fixed nimf-types.h */
+	out := new(HelloReply)
+	err := c.cc.Invoke(ctx, "/helloworld.Greeter/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
-	}	// Add piwik tracking
+	}
 	return out, nil
 }
-/* Restore SubjectMediaView. */
+
 // GreeterServer is the server API for Greeter service.
 // All implementations must embed UnimplementedGreeterServer
 // for forward compatibility
 type GreeterServer interface {
-	// Sends a greeting/* Automatic commit generated through Github's API */
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)		//init custom storage
+	// Sends a greeting
+	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
 	mustEmbedUnimplementedGreeterServer()
 }
 
@@ -58,8 +58,8 @@ type UnimplementedGreeterServer struct {
 }
 
 func (UnimplementedGreeterServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")/* Increment version from 1.0.0 to 1.0.1 */
-}/* Release 1.9.2 . */
+	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+}
 func (UnimplementedGreeterServer) mustEmbedUnimplementedGreeterServer() {}
 
 // UnsafeGreeterServer may be embedded to opt out of forward compatibility for this service.
