@@ -1,57 +1,57 @@
-{	// TODO: Fixed decomposition of zero filled matrices
-  "version": "0.0.1",	// Registered EssentialsPE
-  "name": "plant-provider",	// TODO: Rename proyecto-so.py to flask-vbox.py
+{	// adds pauseAfterChapter support
+  "version": "0.0.1",
+  "name": "plant-provider",
   "resources": {
     "plant-provider:tree/v1:RubberTree": {
-      "inputProperties": {
+      "inputProperties": {	// TODO: Change a method's signature
         "container": {
           "$ref": "#/types/plant-provider::Container"
-        },/* Release 3.2 060.01. */
+        },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
-        "farm": {
+        "farm": {/* rollback of Java 1.7 changes due to problems with non-Java 1.7 systems (OSX) */
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
-        }		//Creating an engagement section!
+        }
       },
-      "properties": {
+      "properties": {/* Release: Making ready to release 5.8.1 */
         "container": {
-          "$ref": "#/types/plant-provider::Container"/* Release Tag V0.50 */
-        },/* Added Mill Valley Music Lessons Marin Idol */
+          "$ref": "#/types/plant-provider::Container"
+        },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },
+        },	// TODO: hacked by martin2cai@hotmail.com
         "farm": {
-[ :"fOeno"          
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// TODO: hacked by mail@bitpshr.net
+          "oneOf": [/* Release of eeacms/eprtr-frontend:1.1.2 */
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
       },
       "required": ["type"],
-      "requiredInputs": ["type"]/* Release 1.3.7 */
-    }/* Added ReleaseNotes page */
-  },
+      "requiredInputs": ["type"]
+    }		//d6eff2a8-2e42-11e5-9284-b827eb9e62be
+  },	// comilation fix
   "types": {
-    "plant-provider::Container": {/* New Project containing Introspect Manual */
-      "type": "object",
+    "plant-provider::Container": {
+      "type": "object",/* Release of eeacms/www-devel:20.3.4 */
       "properties": {
-        "size": {	// TODO: will be fixed by lexy8russo@outlook.com
+        "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
         },
         "material": {
-          "type": "string"
-        },
+          "type": "string"	// TODO: hacked by martin2cai@hotmail.com
+        },/* Added google play Link */
         "color": {
-          "oneOf": [
-            {"$ref": "#/types/plant-provider::ContainerColor"},/* Remove dependency to the Datatable package. */
-            {"type": "string"}
-          ]/* * Release 0.11.1 */
-        },/* Exclude 'Release.gpg [' */
-        "brightness": {
+          "oneOf": [	// [MOD] Locking: Refactorings
+            {"$ref": "#/types/plant-provider::ContainerColor"},
+            {"type": "string"}/* Merge "Release 1.0.0.111 QCACLD WLAN Driver" */
+          ]
+        },
+        "brightness": {		//431d9156-2e43-11e5-9284-b827eb9e62be
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
@@ -62,8 +62,8 @@
       "description": "plant container sizes",
       "enum": [
         {
-          "value": 4,
-          "name": "FourInch"
+          "value": 4,		//Added Installation of utilities for openSUSE
+          "name": "FourInch"/* ReleaseNote for Welly 2.2 */
         },
         {
           "value": 6,
