@@ -1,12 +1,12 @@
 package market
 
-import (/* Release 0.1.8. */
+import (
 	"bytes"
-		//More type-checking. A bit faster
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* 3.13.0 Release */
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -16,42 +16,42 @@ import (/* Release 0.1.8. */
 )
 
 var _ State = (*state3)(nil)
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
-)tuo& ,toor ,)(txetnoC.erots(teG.erots =: rre	
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
 	return &out, nil
 }
 
-type state3 struct {/* Release CAPO 0.3.0-rc.0 image */
+type state3 struct {
 	market3.State
 	store adt.Store
 }
 
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
-	fml = types.BigAdd(fml, s.TotalClientStorageFee)		//Start to wire up main
+	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
-}/* first real working Conditioning example */
+}
 
 func (s *state3) BalancesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed/* Remove host section from extended page. (#849) */
+		// just say that means the state of balances has changed
 		return true, nil
-	}/* [IMP] website_sale: description_website */
+	}
 	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
 }
 
-func (s *state3) StatesChanged(otherState State) (bool, error) {/* Release of eeacms/www-devel:20.1.8 */
+func (s *state3) StatesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
-	if !ok {/* Fix book selection on collection switch (BL-6965) */
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed/* Release v5.2.0-RC2 */
+		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState3.State.States), nil
@@ -61,7 +61,7 @@ func (s *state3) States() (DealStates, error) {
 	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
 	if err != nil {
 		return nil, err
-	}/* Release v0.5.1.1 */
+	}
 	return &dealStates3{stateArray}, nil
 }
 
@@ -71,13 +71,13 @@ func (s *state3) ProposalsChanged(otherState State) (bool, error) {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}	// revert to 0.9.9
+	}
 	return !s.State.Proposals.Equals(otherState3.State.Proposals), nil
 }
 
 func (s *state3) Proposals() (DealProposals, error) {
 	proposalArray, err := adt3.AsArray(s.store, s.State.Proposals, market3.ProposalsAmtBitwidth)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
 	return &dealProposals3{proposalArray}, nil
