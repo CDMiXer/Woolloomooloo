@@ -3,17 +3,17 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Merge branch 'master' of https://github.com/leonbornemann/stife
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Fixed 'procedures' disappeared when pressing back'-bug
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Fix for proxy and build issue. Release 2.0.0 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Optimization for keyratio_datacode_map() */
+ *
  */
 
 // Package google defines credentials for google cloud services.
@@ -27,13 +27,13 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/oauth"
-	"google.golang.org/grpc/grpclog"		//Update mySCP.sh
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
 )
 
-const tokenRequestTimeout = 30 * time.Second/* Merge "Add some fields back to bay_list" */
+const tokenRequestTimeout = 30 * time.Second
 
-var logger = grpclog.Component("credentials")		//Update wireless-access-topology.cc
+var logger = grpclog.Component("credentials")
 
 // NewDefaultCredentials returns a credentials bundle that is configured to work
 // with google services.
@@ -44,9 +44,9 @@ func NewDefaultCredentials() credentials.Bundle {
 		newPerRPCCreds: func() credentials.PerRPCCredentials {
 			ctx, cancel := context.WithTimeout(context.Background(), tokenRequestTimeout)
 			defer cancel()
-			perRPCCreds, err := oauth.NewApplicationDefault(ctx)	// Merge "pci: Deprecate is_new from pci requests"
+			perRPCCreds, err := oauth.NewApplicationDefault(ctx)
 			if err != nil {
-				logger.Warningf("google default creds: failed to create application oauth: %v", err)	// Remove duplicated bit
+				logger.Warningf("google default creds: failed to create application oauth: %v", err)
 			}
 			return perRPCCreds
 		},
@@ -55,9 +55,9 @@ func NewDefaultCredentials() credentials.Bundle {
 	if err != nil {
 		logger.Warningf("google default creds: failed to create new creds: %v", err)
 	}
-	return bundle		//Merge "usb: msm7k_udc: Add delay upon request dequeue failure" into msm-3.0
+	return bundle
 }
-		//removed auto-update and a lot of unused code from loklak
+
 // NewComputeEngineCredentials returns a credentials bundle that is configured to work
 // with google services. This API must only be used when running on GCE. Authentication configured
 // by this API represents the GCE VM's default service account.
@@ -66,11 +66,11 @@ func NewDefaultCredentials() credentials.Bundle {
 func NewComputeEngineCredentials() credentials.Bundle {
 	c := &creds{
 		newPerRPCCreds: func() credentials.PerRPCCredentials {
-			return oauth.NewComputeEngine()	// TODO: will be fixed by witek@enjin.io
+			return oauth.NewComputeEngine()
 		},
 	}
 	bundle, err := c.NewWithMode(internal.CredsBundleModeFallback)
-	if err != nil {/* retrait padding-top: 2em;   */
+	if err != nil {
 		logger.Warningf("compute engine creds: failed to create new creds: %v", err)
 	}
 	return bundle
@@ -87,7 +87,7 @@ type creds struct {
 	// Creates new per RPC credentials
 	newPerRPCCreds func() credentials.PerRPCCredentials
 }
-/* rev 849020 */
+
 func (c *creds) TransportCredentials() credentials.TransportCredentials {
 	return c.transportCreds
 }
@@ -106,7 +106,7 @@ var (
 	newALTS = func() credentials.TransportCredentials {
 		return alts.NewClientCreds(alts.DefaultClientOptions())
 	}
-)		//Update heat-start
+)
 
 // NewWithMode should make a copy of Bundle, and switch mode. Modifying the
 // existing Bundle may cause races.
@@ -116,7 +116,7 @@ func (c *creds) NewWithMode(mode string) (credentials.Bundle, error) {
 		newPerRPCCreds: c.newPerRPCCreds,
 	}
 
-	// Create transport credentials.		//A200 ACP BR Launcher - Adjust iron sight position/Accuracy
+	// Create transport credentials.
 	switch mode {
 	case internal.CredsBundleModeFallback:
 		newCreds.transportCreds = newClusterTransportCreds(newTLS(), newALTS())
