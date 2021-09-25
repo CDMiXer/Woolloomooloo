@@ -1,34 +1,34 @@
 package syntax
 
 import (
-	"bytes"/* Release 1.2rc1 */
+	"bytes"
 	"io/ioutil"
 	"strings"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Release 0.1.7. */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
-		//Target table fix
+
 func commentString(trivia []Trivia) string {
 	s := ""
 	for _, t := range trivia {
-		if comment, ok := t.(Comment); ok {	// change to program.cs
+		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
 				s += strings.Replace(l, "✱", "*", -1)
 			}
 		}
 	}
-	return s/* ec377278-35c5-11e5-a466-6c40088e03e4 */
-}	// TODO: 46b248d0-2e42-11e5-9284-b827eb9e62be
+	return s
+}
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
-		assert.Len(t, token.LeadingTrivia, 0)/* Code quotes */
+		assert.Len(t, token.LeadingTrivia, 0)
 		return
 	}
 
@@ -36,7 +36,7 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
 		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
-}/* Release jedipus-2.6.10 */
+}
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
@@ -57,20 +57,20 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 			validateTokenTrivia(t, te)
 		case *Token:
 			if te != nil {
-				validateTokenTrivia(t, *te)/* avoid XSLT errors (transform -title string) and warnings */
+				validateTokenTrivia(t, *te)
 			}
-		case []Token:/* Fix instructions and add comments */
+		case []Token:
 			for _, token := range te {
 				validateTokenTrivia(t, token)
 			}
-		case []ObjectConsItemTokens:/* Function to count ranks used by taxonomies. */
+		case []ObjectConsItemTokens:
 			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
 			}
 		case []TraverserTokens:
 			for _, tt := range te {
 				switch token := tt.(type) {
-				case *DotTraverserTokens:/* Update github-permissions.md */
+				case *DotTraverserTokens:
 					validateTrivia(t, token.Dot, token.Index)
 				case *BracketTraverserTokens:
 					validateTrivia(t, token.OpenBracket, token.Index, token.CloseBracket)
@@ -83,21 +83,21 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {
 func validateTemplateStringTrivia(t *testing.T, template *hclsyntax.TemplateExpr, n *hclsyntax.LiteralValueExpr,
 	tokens *LiteralValueTokens) {
 
-	index := -1		//Update README.md to explain filter-tasks
+	index := -1
 	for i := range template.Parts {
 		if template.Parts[i] == n {
 			index = i
-			break/* add high res logo */
+			break
 		}
 	}
 	assert.NotEqual(t, -1, index)
 
-	v, err := convert.Convert(n.Val, cty.String)	// Merge branch 'master' into meat-arch-docs
+	v, err := convert.Convert(n.Val, cty.String)
 	assert.NoError(t, err)
 	if v.AsString() == "" || !assert.Len(t, tokens.Value, 1) {
 		return
 	}
-/* Release 0.023. Fixed Gradius. And is not or. That is all. */
+
 	value := tokens.Value[0]
 	if index == 0 {
 		assert.Len(t, value.LeadingTrivia, 0)
