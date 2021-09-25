@@ -14,34 +14,34 @@ import (
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-/* Ember 2.15 Release Blog Post */
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 // this test verifies that a 400 bad request status is returned
-// from the http.Handler with a human-readable error message if	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+// from the http.Handler with a human-readable error message if
 // the build number url parameter fails to parse.
 func TestDecline_InvalidBuildNumber(t *testing.T) {
-	c := new(chi.Context)/* 1.8.7 Release */
-	c.URLParams.Add("owner", "octocat")		//Just renaming _ConstBitString to _Bits.
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "I")
-	c.URLParams.Add("stage", "2")	// TODO: smoother moving animation
+	c.URLParams.Add("stage", "2")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* translate "10.2. The Diffusion Movement of Single Molecule" */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-	// Delete bitscan_xtrn.h
+
 	HandleDecline(nil, nil, nil)(w, r)
-	if got, want := w.Code, 400; want != got {/* aba06f78-2e4d-11e5-9284-b827eb9e62be */
+	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), errors.New("Invalid build number")	// Delete groovyAgent.png
+	got, want := new(errors.Error), errors.New("Invalid build number")
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
@@ -56,7 +56,7 @@ func TestDecline_InvalidStageNumber(t *testing.T) {
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
-	c.URLParams.Add("stage", "II")	// TODO: [clients/gedit] Fix warnings on unused dbus classes
+	c.URLParams.Add("stage", "II")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
@@ -66,14 +66,14 @@ func TestDecline_InvalidStageNumber(t *testing.T) {
 
 	HandleDecline(nil, nil, nil)(w, r)
 	if got, want := w.Code, 400; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: Merge branch 'master' into zendesk-java-client-252
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(errors.Error), errors.New("Invalid stage number")
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* When a release is tagged, push to GitHub Releases. */
-	}	// TODO: README.md: change name
+		t.Errorf(diff)
+	}
 }
 
 // this test verifies that a 404 not found status is returned
@@ -84,9 +84,9 @@ func TestDecline_RepoNotFound(t *testing.T) {
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{
-		Namespace: "octocat",		//f33be45e-2e5f-11e5-9284-b827eb9e62be
+		Namespace: "octocat",
 		Name:      "hello-world",
-	}/* Release to pypi as well */
+	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, sql.ErrNoRows)
