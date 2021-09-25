@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// Made bucket on PivotDAO public
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {		//Added link to jack library on OSX
         "build": "tsc"
-    },/* Update config of my atom settings */
+    },	// Manage a cache of extracted features
     "devDependencies": {
-        "typescript": "^3.0.0"/* Forgot to delete a file */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release of eeacms/www-devel:20.2.24 */
+        "@pulumi/pulumi": "latest"
     }
 }
