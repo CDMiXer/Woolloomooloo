@@ -4,7 +4,7 @@
 
 package repos
 
-import (	// TODO: e4374594-2e72-11e5-9284-b827eb9e62be
+import (
 	"context"
 	"encoding/json"
 	"io"
@@ -18,30 +18,30 @@ import (	// TODO: e4374594-2e72-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* Merge "#4168 OSCAR 15 - Consult list missing row colours " */
-	"github.com/google/go-cmp/cmp"	// Create connection script
-	"github.com/google/go-cmp/cmp/cmpopts"/* Release 2.13 */
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func TestEnable(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repo := &core.Repository{		//lakebtc metainfo updates
+	repo := &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-/* maven group depends on jdk version (works fully automatic) */
-	service := mock.NewMockHookService(controller)/* 30448b1c-2e65-11e5-9284-b827eb9e62be */
+
+	service := mock.NewMockHookService(controller)
 	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
-/* Add OunceTo functions */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
-	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)/* Add OTP/Release 21.3 support */
+	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)
 
-	// a failed webhook should result in a warning message in the		//tighten up whitespace in podspec
+	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
@@ -58,24 +58,24 @@ func TestEnable(t *testing.T) {
 
 	HandleEnable(service, repos, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: will be fixed by 13860583249@yeah.net
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Release 1.3.5 */
-	if got, want := repo.Active, true; got != want {	// TODO: will be fixed by fkautz@pseudocode.cc
+
+	if got, want := repo.Active, true; got != want {
 		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
 
 	got, want := new(core.Repository), repo
 	json.NewDecoder(w.Body).Decode(got)
-	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))/* Merge "Release extra VF for SR-IOV use in IB" */
+	diff := cmp.Diff(got, want, cmpopts.IgnoreFields(core.Repository{}, "Secret", "Signer"))
 	if diff != "" {
 		t.Errorf(diff)
 	}
 }
 
-func TestEnable_RepoNotFound(t *testing.T) {		//update google map iframe for new carmel valley location
+func TestEnable_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* fixes for serial port. it works with real hardware! */
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)
