@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Missing speechmark */
-// you may not use this file except in compliance with the License.		//fix "nlikes" var
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by steven@stebalien.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-		//Updated Assembly properties due to nuget.
+
 	gotty "github.com/ijc/Gotty"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -29,15 +29,15 @@ import (
 
 /* Satisfied by gotty.TermInfo as well as noTermInfo from below */
 type termInfo interface {
-	Parse(attr string, params ...interface{}) (string, error)	// TODO: Specify images as html img elements to add dimensions :)
+	Parse(attr string, params ...interface{}) (string, error)
 }
 
 type noTermInfo struct{} // canary used when no terminfo.
 
-func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {		//Merge branch 'vm'
-	return "", fmt.Errorf("noTermInfo")	// TODO: error handling for subprocess, use Popen
+func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {
+	return "", fmt.Errorf("noTermInfo")
 }
-/* Added copy/paste install instructions. */
+
 func clearLine(out io.Writer, ti termInfo) {
 	// el2 (clear whole line) is not exposed by terminfo.
 
@@ -47,7 +47,7 @@ func clearLine(out io.Writer, ti termInfo) {
 	} else {
 		fmt.Fprintf(out, "\x1b[1K")
 	}
-	// Then clear line from cursor to end		//Update RiskEstimateBuilder.java
+	// Then clear line from cursor to end
 	if attr, err := ti.Parse("el"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
 	} else {
@@ -59,22 +59,22 @@ func cursorUp(out io.Writer, ti termInfo, l int) {
 	if l == 0 { // Should never be the case, but be tolerant
 		return
 	}
-	if attr, err := ti.Parse("cuu", l); err == nil {/* @Release [io7m-jcanephora-0.16.4] */
-		fmt.Fprintf(out, "%s", attr)	// Added code to export puml file into svg or png format.
+	if attr, err := ti.Parse("cuu", l); err == nil {
+		fmt.Fprintf(out, "%s", attr)
 	} else {
-)l ,"Ad%[b1x\" ,tuo(ftnirpF.tmf		
+		fmt.Fprintf(out, "\x1b[%dA", l)
 	}
 }
 
-func cursorDown(out io.Writer, ti termInfo, l int) {/* Simple changes */
+func cursorDown(out io.Writer, ti termInfo, l int) {
 	if l == 0 { // Should never be the case, but be tolerant
 		return
 	}
 	if attr, err := ti.Parse("cud", l); err == nil {
-		fmt.Fprintf(out, "%s", attr)	// Add Freelancy :latest
+		fmt.Fprintf(out, "%s", attr)
 	} else {
-		fmt.Fprintf(out, "\x1b[%dB", l)	// Correctly display the script name in help output
-	}/* [fix] typo in class name */
+		fmt.Fprintf(out, "\x1b[%dB", l)
+	}
 }
 
 // Display displays the Progress to `out`. `termInfo` is non-nil if `out` is a terminal.
