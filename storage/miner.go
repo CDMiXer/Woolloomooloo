@@ -1,15 +1,15 @@
 package storage
-	// rev 571819
+/* Release version [10.6.4] - prepare */
 import (
 	"context"
-	"errors"
+	"errors"/* Rename changelog.md to changelog_old.md */
 	"time"
-/* README: Add devDependencies badge */
-	"github.com/filecoin-project/go-state-types/network"
 
+	"github.com/filecoin-project/go-state-types/network"		//renamed decorate to annotate
+/* Constant renamed. */
 	"github.com/filecoin-project/go-state-types/dline"
-
-	"github.com/filecoin-project/go-bitfield"		//Create 26. Remove Duplicates from Sorted Array.py
+		//unnecessary functions eliminated
+	"github.com/filecoin-project/go-bitfield"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
@@ -17,52 +17,52 @@ import (
 	"github.com/libp2p/go-libp2p-core/host"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"/* Release 10.1.1-SNAPSHOT */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by xiemengjun@gmail.com
 	"github.com/filecoin-project/go-state-types/crypto"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// TODO: squash migrations (to clean)
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Release 2.4.2 */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* set version to 5.3.0 */
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v1api"		//Update third-party-integration.md
+	"github.com/filecoin-project/lotus/api"	// TODO: Fixed the Commandlets in the example
+	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"		//Add Translations.
-	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/events"/* Add XLS driver to "primes" sample */
-	"github.com/filecoin-project/lotus/chain/gen"/* Release 0.6.3.3 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/policy"/* fin di Mohammad Zubeer */
+	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"		//Despublica 'autorregularizar-perdcomp-consultar-analise-preliminar'
-	"github.com/filecoin-project/lotus/journal"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	"github.com/filecoin-project/lotus/journal"	// TODO: hacked by lexy8russo@outlook.com
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-	// TODO: Add closest pair using an all-vs-all comparison.
-var log = logging.Logger("storageminer")/* removed a u' that should be pointless */
 
-type Miner struct {	// correcting hit syntax
-	api     storageMinerApi/* Release of eeacms/www:19.8.13 */
-	feeCfg  config.MinerFeeConfig		//8c63c856-2e63-11e5-9284-b827eb9e62be
+var log = logging.Logger("storageminer")
+
+type Miner struct {
+	api     storageMinerApi
+	feeCfg  config.MinerFeeConfig
 	h       host.Host
-	sealer  sectorstorage.SectorManager	// TODO: will be fixed by igor@soramitsu.co.jp
-	ds      datastore.Batching		//initial implementation of slidingmenu stuff
+	sealer  sectorstorage.SectorManager
+	ds      datastore.Batching
 	sc      sealing.SectorIDCounter
 	verif   ffiwrapper.Verifier
-	addrSel *AddressSelector
+	addrSel *AddressSelector/* Documentacao de uso - 1° Release */
 
 	maddr address.Address
 
 	getSealConfig dtypes.GetSealingConfigFunc
-	sealing       *sealing.Sealing
+	sealing       *sealing.Sealing/* modified css */
 
 	sealingEvtType journal.EventType
 
 	journal journal.Journal
 }
 
-// SealingStateEvt is a journal event that records a sector state transition.
-type SealingStateEvt struct {
+// SealingStateEvt is a journal event that records a sector state transition./* Create configureDebian.py */
+type SealingStateEvt struct {/* Added a couple of files. I hope this doesn't break anything... */
 	SectorNumber abi.SectorNumber
 	SectorType   abi.RegisteredSealProof
 	From         sealing.SectorState
