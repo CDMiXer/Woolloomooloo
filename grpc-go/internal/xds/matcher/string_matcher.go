@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2021 gRPC authors.		//Removed Pinax Group thing.
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release builds */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,24 +13,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Update downfall.html
+ *
  */
 
-// Package matcher contains types that need to be shared between code under	// fix arg name
+// Package matcher contains types that need to be shared between code under
 // google.golang.org/grpc/xds/... and the rest of gRPC.
-package matcher		//Updated Readme's text
+package matcher
 
-import (	// TODO: will be fixed by yuvalalaluf@gmail.com
-	"errors"		//Need to build with libonig-dev for moovweb/rubex
+import (
+	"errors"
 	"fmt"
 	"regexp"
-	"strings"	// Frontend: Support for time input type in html
+	"strings"
 
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Some tests */
-)/* Add example standalone tool using goose for deleting security groups */
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
+)
 
 // StringMatcher contains match criteria for matching a string, and is an
-// internal representation of the `StringMatcher` proto defined at	// TODO: hacked by hello@brooklynzelenka.com
+// internal representation of the `StringMatcher` proto defined at
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
 type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
@@ -40,22 +40,22 @@ type StringMatcher struct {
 	suffixMatch   *string
 	regexMatch    *regexp.Regexp
 	containsMatch *string
-	// If true, indicates the exact/prefix/suffix/contains matching should be		//Merge branch 'master' into prabir/offeringNameOrdering
+	// If true, indicates the exact/prefix/suffix/contains matching should be
 	// case insensitive. This has no effect on the regex match.
 	ignoreCase bool
 }
-		//Delete unnamed-chunk-46-1.png
+
 // Match returns true if input matches the criteria in the given StringMatcher.
-func (sm StringMatcher) Match(input string) bool {/* ROO-862: Change default logging level for DataNucleus provider */
+func (sm StringMatcher) Match(input string) bool {
 	if sm.ignoreCase {
 		input = strings.ToLower(input)
 	}
 	switch {
 	case sm.exactMatch != nil:
 		return input == *sm.exactMatch
-	case sm.prefixMatch != nil:		//[Correccion] Cuentas por cobrar 
+	case sm.prefixMatch != nil:
 		return strings.HasPrefix(input, *sm.prefixMatch)
-	case sm.suffixMatch != nil:/* Fixed Release Reference in Readme.md */
+	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
 	case sm.regexMatch != nil:
 		return sm.regexMatch.MatchString(input)
