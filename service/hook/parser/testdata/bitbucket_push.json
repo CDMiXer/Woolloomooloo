@@ -4,16 +4,16 @@
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,
+        "Perm": null,	// TODO: Changes BLB section to enum, fixes manual sort not working with autosort
         "Branch": "",
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",	// TODO: hacked by fjl@ethereum.org
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {
+    "Commit": {/* Icon ok com 60px */
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
         "Author": {
@@ -21,15 +21,15 @@
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Release for v48.0.0. */
         },
-        "Committer": {
+        "Committer": {	// TODO: will be fixed by nagydani@epointsystem.org
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },
+        },/* Release 3.3.0. */
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
     "Sender": {
