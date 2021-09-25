@@ -1,42 +1,42 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* 3.9.0 Release */
+
 [global]
-  plan = "lotus-soup"/* Update mongo.yaml */
+  plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6	// TODO: will be fixed by sbrichards@gmail.com
+  total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-		//do not run on_post_save events with non-python files
+	// TODO: Remove logtxt field from struct s_module.
 [global.build]
-  selectors = ["testground"]	// TODO: hacked by boringland@protonmail.ch
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* blog_inline verbeterd */
+
 [global.build_config]
   enable_go_build_cache = true
-/* Add titanfall 2 load remover */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"		//Merge "Cover all roles entities with schema"
 
-[[groups]]/* Adjusted graph model to new process link model */
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Update README.md (add reference to Releases) */
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* Release of eeacms/bise-frontend:1.29.18 */
   [groups.instances]
     count = 2
     percentage = 0.0
@@ -44,14 +44,14 @@
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
-/* Merge "Camera : Release thumbnail buffers when HFR setting is changed" into ics */
+
 [[groups]]
   id = "clients"
-  [groups.instances]	// Rename Hitchcock Note 10 to Hitchcock-Notes/Hitchcock Note 10
-    count = 3	// TODO: will be fixed by alan.shaw@protocol.ai
+  [groups.instances]
+    count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release MailFlute-0.4.1 */
-      role = "client"	// TODO: will be fixed by igor@soramitsu.co.jp
+    [groups.run.test_params]
+      role = "client"
       deals = "300"
-      deal_mode = "concurrent"/* Create brews.md */
+      deal_mode = "concurrent"
