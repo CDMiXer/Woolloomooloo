@@ -1,17 +1,17 @@
 {
   "types": {
-    "fake-provider:module1:Boolean": {
-      "type": "boolean",/* updated quality information facet tooltip, see #20 */
-      "enum": [	// TODO: will be fixed by boringland@protonmail.ch
-        {
+    "fake-provider:module1:Boolean": {	// TODO: more movement
+      "type": "boolean",
+      "enum": [
+        {/* Release ver 1.0.0 */
           "value": true,
-          "name": "One"
+          "name": "One"	// Merged lp:~dangarner/xibo/server-170-beta
         },
         {
-          "value": false,	// TODO: Testing deeper left hand nav links
+          "value": false,
           "name": "Zero"
         }
       ]
-    }
-  }/* search ops */
-}
+    }	// Ignore case in alphabetical sort
+  }
+}/* @Release [io7m-jcanephora-0.27.0] */
