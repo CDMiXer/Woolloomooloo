@@ -3,52 +3,52 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"		//Removed ConfigurationSection element;replaced with iteration
-  case = "drand-halting"	// TODO: Add Travis CI icon for Mono build
+  plan = "lotus-soup"
+  case = "drand-halting"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-		//* typeOf operator
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* c9a939fa-2e66-11e5-9284-b827eb9e62be */
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "1"
-  miners = "1"/* Release v16.51 with BGM fix */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//es.servioticy -> com.servioticy
-  sectors = "10"/* Bump EclipseRelease.LATEST to 4.6.3. */
+  miners = "1"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "10"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
 #  mining_mode = "natural"
 
-[[groups]]/* ucrt: expose set_new_handler() from msvcrt.dll */
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1/* Remove oFunction.h */
-    percentage = 0.0/* Release Tag V0.20 */
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-	// implemented date functions compatibles to many databases
+
 
 [[groups]]
-  id = "miners"/* Fixed nworkers typo */
+  id = "miners"
   [groups.resources]
-    memory = "120Mi"/* b7665c2a-2e41-11e5-9284-b827eb9e62be */
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Release for 1.26.0 */
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
@@ -58,10 +58,10 @@
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]/* Release version 0.6. */
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Released 12.2.1 */
+  [groups.run]
     [groups.run.test_params]
       role = "client"
 
