@@ -1,22 +1,22 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-	// TODO: hacked by nagydani@epointsystem.org
+
 using System.Threading.Tasks;
 using Pulumi;
 
 class Resource : ComponentResource
 {
-    public Resource(string name, ComponentResourceOptions options = null)/* other dependencies */
+    public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
     }
 }
 
 // Scenario #4 - change the type of a component
-class ComponentFour : ComponentResource		//add the first things
+class ComponentFour : ComponentResource
 {
-    private Resource resource;		//[file backend] add has field method to Attributes
+    private Resource resource;
 
-    public ComponentFour(string name, ComponentResourceOptions options = null)	// Remove hosted section
+    public ComponentFour(string name, ComponentResourceOptions options = null)
         : base("my:module:ComponentFour", name, options)
     {
         this.resource = new Resource("otherchild", new ComponentResourceOptions { Parent = this });
