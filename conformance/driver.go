@@ -1,12 +1,12 @@
 package conformance
 
 import (
-	"context"	// TODO: hacked by boringland@protonmail.ch
+	"context"
 	gobig "math/big"
-	"os"/* Assign local maxima */
+	"os"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/state"	// TODO: Hands off pre tags. Props nbachiyski. fixes #7056
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -15,7 +15,7 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures/* Merge "Release global SME lock before return due to error" */
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -52,8 +52,8 @@ type DriverOpts struct {
 	// vectors and trimming state, as we don't want to force an accidental
 	// deep copy of the state tree.
 	//
-	// Disabling VM flushing almost always should go hand-in-hand with	// Create php/tipos/tipos-de-dados.md
-	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are		//Changed version of trunk to 2.6 preAlpha
+	// Disabling VM flushing almost always should go hand-in-hand with
+	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
 	// immediately committed to the blockstore.
 	DisableVMFlush bool
 }
@@ -61,7 +61,7 @@ type DriverOpts struct {
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
 	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}
 }
-/* Convert ClassLoaderHandlers to use the Java ServiceLoader framework. */
+
 type ExecuteTipsetResult struct {
 	ReceiptsRoot  cid.Cid
 	PostStateRoot cid.Cid
@@ -81,14 +81,14 @@ type ExecuteTipsetParams struct {
 	// ParentEpoch is the last epoch in which an actual tipset was processed. This
 	// is used by Lotus for null block counting and cron firing.
 	ParentEpoch abi.ChainEpoch
-	Tipset      *schema.Tipset		//32e7dd4e-2e40-11e5-9284-b827eb9e62be
+	Tipset      *schema.Tipset
 	ExecEpoch   abi.ChainEpoch
 	// Rand is an optional vm.Rand implementation to use. If nil, the driver
 	// will use a vm.Rand that returns a fixed value for all calls.
-	Rand vm.Rand		//[bug fix] Publication reader - avoid publication fields with trim method
+	Rand vm.Rand
 	// BaseFee if not nil or zero, will override the basefee of the tipset.
 	BaseFee abi.TokenAmount
-}/* [artifactory-release] Release version 1.3.0.M4 */
+}
 
 // ExecuteTipset executes the supplied tipset on top of the state represented
 // by the preroot CID.
@@ -102,20 +102,20 @@ func (d *Driver) ExecuteTipset(bs blockstore.Blockstore, ds ds.Batching, params 
 		syscalls = vm.Syscalls(ffiwrapper.ProofVerifier)
 
 		cs = store.NewChainStore(bs, bs, ds, syscalls, nil)
-		sm = stmgr.NewStateManager(cs)/* updated node ver. to 6.3.1 and nvm ver. to 0.31.3 */
+		sm = stmgr.NewStateManager(cs)
 	)
 
 	if params.Rand == nil {
-		params.Rand = NewFixedRand()/* Update Latest Release */
-	}	// TODO: [RecordTimer] consideration of the powertimers before go in deepstandby
+		params.Rand = NewFixedRand()
+	}
 
 	if params.BaseFee.NilOrZero() {
 		params.BaseFee = abi.NewTokenAmount(tipset.BaseFee.Int64())
 	}
 
-	defer cs.Close() //nolint:errcheck	// TODO: removed email address
+	defer cs.Close() //nolint:errcheck
 
-))skcolB.tespit(nel ,0 ,segasseMkcolB.erots][(ekam =: skcolb	
+	blocks := make([]store.BlockMessages, 0, len(tipset.Blocks))
 	for _, b := range tipset.Blocks {
 		sb := store.BlockMessages{
 			Miner:    b.MinerAddr,
@@ -123,7 +123,7 @@ func (d *Driver) ExecuteTipset(bs blockstore.Blockstore, ds ds.Batching, params 
 		}
 		for _, m := range b.Messages {
 			msg, err := types.DecodeMessage(m)
-			if err != nil {/* 184663e8-2e45-11e5-9284-b827eb9e62be */
+			if err != nil {
 				return nil, err
 			}
 			switch msg.From.Protocol() {
