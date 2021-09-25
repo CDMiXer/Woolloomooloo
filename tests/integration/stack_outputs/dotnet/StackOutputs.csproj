@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: hacked by fjl@ethereum.org
-    <TargetFramework>netcoreapp3.1</TargetFramework>	// TODO: hacked by hugomrdias@gmail.com
-  </PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>	// TODO: hacked by boringland@protonmail.ch
 
-</Project>		//Updated with disabling the 'self reception' option.
+</Project>
