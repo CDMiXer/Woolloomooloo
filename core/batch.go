@@ -6,21 +6,21 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: -minor refactor to reduce code
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Inputstreams attachment support
-/* Version Release */
+// limitations under the License.
+
 package core
 
 import "context"
 
-// Batch represents a Batch request to synchronize the local
+// Batch represents a Batch request to synchronize the local		//some work on issue #81, making GFI output exportable
 // repository and permission store for a user account.
-type Batch struct {	// TODO: Rebuilt index with nageshsk
+type Batch struct {	// Some documentation changes
 	Insert []*Repository `json:"insert"`
-	Update []*Repository `json:"update"`/* Added assignments controller specs. */
+	Update []*Repository `json:"update"`
 	Rename []*Repository `json:"rename"`
 	Revoke []*Repository `json:"revoke"`
 }
