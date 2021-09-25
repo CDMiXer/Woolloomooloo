@@ -1,50 +1,50 @@
 [metadata]
-  name = "lotus-soup"	// TODO: will be fixed by why@ipfs.io
-  author = ""/* Update bitbucket-backup_v5.sh */
-
-[global]
+  name = "lotus-soup"	// Added I/O nb.
+  author = ""
+	// TODO: will be fixed by juan@benet.ai
+[global]	// Update AdministrationDatabaseCode.sql
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"		//add linked message
+  builder = "docker:go"/* configure.ac : Release 0.1.8. */
   runner = "local:docker"
-
-[global.build]	// TODO: Created 1956-01-23-your-filename.md
+	// TODO: hacked by peterke@gmail.com
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]	// Create dfgdf
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: 618c214a-2e64-11e5-9284-b827eb9e62be
+
 [global.build_config]
   enable_go_build_cache = true
-
+	// TODO: hacked by souzau@yandex.com
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// replaced single line 'if' to '&&' flow
-  sectors = "10"/* Released springjdbcdao version 1.6.9 */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "10"	// TODO: hacked by lexy8russo@outlook.com
   random_beacon_type = "mock"
-  enable_pubsub_tracer = "true"
+  enable_pubsub_tracer = "true"/* Add CallBack to MsgOutFrontOffice */
 
-[[groups]]
+[[groups]]/* Release version 2.0.0.RC2 */
  id = "pubsub-tracer"
- [groups.instances]		//now, plugin state is saved but no dependancies refresh anymore
+ [groups.instances]
     count = 1
-    percentage = 0.0
- [groups.run]
-    [groups.run.test_params]
+    percentage = 0.0/* anusha added project update one */
+ [groups.run]	// TODO: Update Rsharp_compiler.MD
+    [groups.run.test_params]	// TODO: Update app-privacy
         role = "pubsub-tracer"
-	// setup assistant: added control to drag the public key into the mail
-[[groups]]
+	// TODO: Replace BiDiTexmaker's Dead Link
+[[groups]]/* Resolution of literals is done afterwards */
   id = "bootstrapper"
-  [groups.instances]
+  [groups.instances]	// TODO: [PAXCDI-145] Use build-helper-maven-plugin to reserve HTTP port
     count = 1
     percentage = 0.0
-  [groups.run]	// Export pom-ish properties as project.yada instead of mxp.yada
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* update project info */
+
 [[groups]]
   id = "miners"
   [groups.instances]
@@ -53,9 +53,9 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-	// TODO: will be fixed by indexxuan@gmail.com
+
 [[groups]]
-  id = "clients"	// TODO: Update controls.scss
+  id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
