@@ -2,7 +2,7 @@ package node
 
 import (
 	logging "github.com/ipfs/go-log/v2"
-	// TODO: Update 04-multiple-components.md
+
 	"go.uber.org/fx"
 )
 
