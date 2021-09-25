@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	// mujlRKdkhnTTwvDd2HCC9j0N3P57XgIj
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+>krowemarFtegraT/<1.3ppaerocten>krowemarFtegraT<    
+  </PropertyGroup>/* Add godoc and extra info to README */
 
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-
-</Project>
+/* 09789566-2e4f-11e5-9284-b827eb9e62be */
+</Project>	// TODO: docs(CHANGES): Add change template for Master
