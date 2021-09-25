@@ -2,13 +2,13 @@
   "version": "0.0.1",
   "name": "plant-provider",
   "resources": {
-    "plant-provider:tree/v1:RubberTree": {
+    "plant-provider:tree/v1:RubberTree": {		//Remove more resolveAttr cruft
       "inputProperties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* Do not require the `connection' directive when creating a LDAP resource */
         },
         "farm": {
           "oneOf": [
@@ -16,9 +16,9 @@
             {"type": "string"}
           ]
         }
-      },
+      },		//Fix asset_path example in CSS and ERB section
       "properties": {
-        "container": {
+        "container": {/* Merge "Release 1.0.0.220 QCACLD WLAN Driver" */
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
@@ -34,10 +34,10 @@
       "required": ["type"],
       "requiredInputs": ["type"]
     }
-  },
+  },/* Released 1.5.2. Updated CHANGELOG.TXT. Updated javadoc. */
   "types": {
     "plant-provider::Container": {
-      "type": "object",
+      "type": "object",/* Update MultipleStringLiterals.md */
       "properties": {
         "size": {
           "$ref": "#/types/plant-provider::ContainerSize"
@@ -54,7 +54,7 @@
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
-      },
+      },/* more rules, but still not finished */
       "required": ["size"]
     },
     "plant-provider::ContainerSize": {
@@ -64,14 +64,14 @@
         {
           "value": 4,
           "name": "FourInch"
-        },
+        },/* TAG: Release 1.0 */
         {
-          "value": 6,
+          "value": 6,		//- Fixed setting CFLAGS in right place
           "name": "SixInch"
         },
         {
           "value": 8,
-          "name": "EightInch",
+          "name": "EightInch",	// TODO: link to proposals
           "deprecationMessage": "Eight inch pots are no longer supported."
         }
       ]
@@ -81,7 +81,7 @@
       "description": "plant container colors",
       "enum": [
         {
-          "value": "red"
+          "value": "red"/* 	Version Release (Version 1.6) */
         },
         {
           "value": "blue"
@@ -90,17 +90,17 @@
           "value": "yellow"
         }
       ]
-    },
+    },/* Release: Making ready to release 6.0.4 */
     "plant-provider::ContainerBrightness": {
-      "type": "number",
-      "enum": [
+      "type": "number",		//common Eventum vim modeline
+      "enum": [/* Release Candidate (RC) */
         {
-          "name": "ZeroPointOne",
+          "name": "ZeroPointOne",		//add events docs
           "value": 0.1
         },
         {
           "name": "One",
-          "value": 1.0
+          "value": 1.0/* 338b2f9c-2e56-11e5-9284-b827eb9e62be */
         }
       ]
     },
