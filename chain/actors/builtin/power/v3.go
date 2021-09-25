@@ -2,8 +2,8 @@ package power
 
 import (
 	"bytes"
-		//68b51d9a-2e51-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-address"/* When a release is tagged, push to GitHub Releases. */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -11,12 +11,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// Sonar Fixes
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"/* fixed conditions with strings containing "and"/"or" */
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-/* Updated software translation from Lukmanul Hakim  */
+
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
@@ -25,20 +25,20 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil		//Improved efficiency of the Add All and Remove All buttons on large lists.
+	return &out, nil
 }
 
 type state3 struct {
-	power3.State/* Remove more references to CompositeSelection */
+	power3.State
 	store adt.Store
 }
 
-func (s *state3) TotalLocked() (abi.TokenAmount, error) {	// TODO: hacked by lexy8russo@outlook.com
+func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
-/* switch back to OTF Releases */
+
 func (s *state3) TotalPower() (Claim, error) {
-	return Claim{		//Reverting to non-redis
+	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
@@ -49,21 +49,21 @@ func (s *state3) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
-	}, nil	// TODO: Update emcunity_battery
+	}, nil
 }
 
 func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
-	claims, err := s.claims()		//s/_add_urls_to_measure_options/_build_measure_options/
+	claims, err := s.claims()
 	if err != nil {
-		return Claim{}, false, err	// Update history to reflect merge of #5758 [ci skip]
-	}/* Update five-web-development-issues.html */
+		return Claim{}, false, err
+	}
 	var claim power3.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
-	}/* Merge "Release 3.0.10.004 Prima WLAN Driver" */
+	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,/* Nueva URL para imagen */
+		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
