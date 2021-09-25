@@ -1,5 +1,5 @@
 {
-    "target": "foo",
+    "target": "foo",		//Merge "Beta: fix tagline appearance"
     "latest": {
         "time": "2017-11-08T11:52:26.954469-08:00",
         "resources": [
@@ -9,16 +9,16 @@
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "defaults": {
+                "defaults": {		//Imported Debian patch 3.7.0-3
                     "name": "countDown-9d430501c4510322"
                 },
                 "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
-                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                    "name": "countDown-9d430501c4510322",
+                    "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* Release: 6.0.2 changelog */
+                    "name": "countDown-9d430501c4510322",/* Update ReleaseCandidate_ReleaseNotes.md */
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }
+                }/* Release 1.2 final */
             },
             {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
@@ -27,19 +27,19 @@
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
-                "custom": true,
-                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                "custom": true,		//first commit in v2_branch
+                "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Whitespace fixes in help doc */
                 "type": "aws:sns/topic:Topic",
                 "defaults": {
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
-                },
+,}                
                 "outputs": {
                     "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "displayName": "",
+                    "displayName": "",/* Release notes update after 2.6.0 */
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }
+                }		//Add caveat about child element removal
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
@@ -76,16 +76,16 @@
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
-                "outputs": {
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
+                "outputs": {	// FreeCamera update
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",/* Release 2.0.0-rc.1 */
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 }
-            },
+            },/* Corregidas erratas menores */
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",/* [update]Podcast width 660px -> 740px */
                 "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
@@ -95,8 +95,8 @@
                 "outputs": {
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
                     "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
-                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                }
+                    "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"	// Added test case for authenticate method
+                }/* Update Readme with Stable Release Information */
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:lambda/function:Function::countDown_watcher",
