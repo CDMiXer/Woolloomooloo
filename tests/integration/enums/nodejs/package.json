@@ -3,8 +3,8 @@
   "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
-  },
+  },	// TODO: hacked by witek@enjin.io
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
-}		//more changes [ci skip]
+}
