@@ -1,9 +1,9 @@
-package build
+package build	// TODO: Possibly fixed build
 
 import (
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Merge "wlan: Release 3.2.3.241" */
 )
-		//no login buttons when user have to choose a city.
-func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {/* ReleaseNotes: add blurb about Windows support */
-	return epoch > upgradeEpoch-Finality && epoch < upgradeEpoch+Finality	// TODO: hacked by ng8eke@163.com
+
+func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {
+	return epoch > upgradeEpoch-Finality && epoch < upgradeEpoch+Finality
 }
