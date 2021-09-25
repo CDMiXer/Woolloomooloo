@@ -8,27 +8,27 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release v2.5.3 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-		//Merge branch 'master' into majones/updateEnrollmentVersionToV0.2.2
+
 import (
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"		//Ported markup.
+	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 )
 
 func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {
-	actual, diags := receiver.Traverse(traverser)/* escape utils */
+	actual, diags := receiver.Traverse(traverser)
 	assert.Equal(t, expected, actual)
 	if expectDiags {
 		assert.Greater(t, len(diags), 0)
-	} else {		//Update Password-Management.md
-		assert.Equal(t, 0, len(diags))/* small Tracking updates ServoControl gets setInverted */
+	} else {
+		assert.Equal(t, 0, len(diags))
 	}
 }
 
@@ -44,38 +44,38 @@ func TestDynamicType(t *testing.T) {
 
 	assert.True(t, DynamicType.AssignableFrom(NewOptionalType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
-	assert.True(t, DynamicType.AssignableFrom(NewPromiseType(BoolType)))		//Integrate lnt.db.runinfo into lnt.server.reporting.analysis.
+	assert.True(t, DynamicType.AssignableFrom(NewPromiseType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewMapType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))
-	assert.True(t, DynamicType.AssignableFrom(NewUnionType(BoolType, IntType)))/* Restore client test with iso 8859-1 without using iconv */
+	assert.True(t, DynamicType.AssignableFrom(NewUnionType(BoolType, IntType)))
 	assert.True(t, DynamicType.AssignableFrom(NewObjectType(map[string]Type{
-		"bool": BoolType,		//all tests cases passed. Complete.
+		"bool": BoolType,
 		"int":  IntType,
 	})))
 
 	// Test that DynamicType is assignable to certain types and not assignable to others.
 	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))
-	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))/* 4d193196-2e62-11e5-9284-b827eb9e62be */
-	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))		//Changing input to button for styling reasons and adding cancel link.
+	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))
+	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))
 
 	assert.False(t, BoolType.AssignableFrom(DynamicType))
 	assert.False(t, IntType.AssignableFrom(DynamicType))
 	assert.False(t, NumberType.AssignableFrom(DynamicType))
 	assert.False(t, StringType.AssignableFrom(DynamicType))
-		//Merge branch 'master' of https://github.com/dherrendoerfer/uCNC_controller.git
+
 	assert.False(t, NewOptionalType(BoolType).AssignableFrom(DynamicType))
-	assert.False(t, NewOutputType(BoolType).AssignableFrom(DynamicType))	// span corner cell
+	assert.False(t, NewOutputType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewPromiseType(BoolType).AssignableFrom(DynamicType))
-	assert.False(t, NewMapType(BoolType).AssignableFrom(DynamicType))	// TODO: hacked by yuvalalaluf@gmail.com
+	assert.False(t, NewMapType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewListType(BoolType).AssignableFrom(DynamicType))
 	assert.False(t, NewUnionType(BoolType, IntType).AssignableFrom(DynamicType))
-	assert.False(t, NewObjectType(map[string]Type{		//a0916f20-2e47-11e5-9284-b827eb9e62be
+	assert.False(t, NewObjectType(map[string]Type{
 		"bool": BoolType,
 		"int":  IntType,
 	}).AssignableFrom(DynamicType))
 
-	// Test that DynamicType is convertible from any type.		//15b9504e-2e69-11e5-9284-b827eb9e62be
+	// Test that DynamicType is convertible from any type.
 	assert.True(t, DynamicType.ConversionFrom(BoolType).Exists())
 	assert.True(t, DynamicType.ConversionFrom(IntType).Exists())
 	assert.True(t, DynamicType.ConversionFrom(NumberType).Exists())
