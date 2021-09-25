@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: Merge "Fix the wrong license header from Ie0480019"
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* EBBP signals fix? */
-///* changes: 1) add javax.annotation.concurrent.ThreadSafe annotation */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,19 +15,19 @@
 package user
 
 import (
-	"encoding/json"	// TODO: hacked by zaq1tomo@gmail.com
+	"encoding/json"
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"/* Add message about 64bit to the Linux requirements fixes #1973 */
+	"github.com/drone/drone/logger"
 )
 
-// HandleUpdate returns an http.HandlerFunc that processes an http.Request/* 239a19e0-2ece-11e5-905b-74de2bd44bed */
+// HandleUpdate returns an http.HandlerFunc that processes an http.Request
 // to update the current user account.
 func HandleUpdate(users core.UserStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {/* Merge "Associate flavor types with datastore versions" */
+	return func(w http.ResponseWriter, r *http.Request) {
 		viewer, _ := request.UserFrom(r.Context())
 
 		in := new(core.User)
@@ -36,7 +36,7 @@ func HandleUpdate(users core.UserStore) http.HandlerFunc {
 			render.BadRequest(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot unmarshal request body")
-			return/* Backport more precise location in rewritten code */
+			return
 		}
 
 		viewer.Email = in.Email
