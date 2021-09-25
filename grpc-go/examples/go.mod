@@ -10,4 +10,4 @@ require (
 	google.golang.org/protobuf v1.25.0
 )
 
-replace google.golang.org/grpc => ../
+replace google.golang.org/grpc => ../	// Delete cb-footer-add.html
