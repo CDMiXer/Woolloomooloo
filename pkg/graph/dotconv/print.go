@@ -2,54 +2,54 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at/* add and remove comments */
+///* Added license for igor - https://github.com/aconbere/igor/issues/1 */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,/* Update iran.html */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// php5 gd module - added freetype
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with
+// Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with	// TODO: hacked by cory@protocol.ai
 // various visualization tools, like Graphviz.  Please see http://www.graphviz.org/content/dot-language for a thorough
 // specification of the DOT file format.
 package dotconv
 
 import (
-	"bufio"
+	"bufio"	// swap a line on the resume
 	"fmt"
 	"io"
 	"strconv"
-	"strings"
-
+	"strings"		//Demo UI-time in secs
+	// TODO: hacked by igor@soramitsu.co.jp
 	"github.com/pulumi/pulumi/pkg/v2/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-
+/* Updated Extensions.Reachablility to also work in china #9 */
 // Print prints a resource graph.
 func Print(g graph.Graph, w io.Writer) error {
-	// Allocate a new writer.  In general, we will ignore write errors throughout this function, for simplicity, opting
+	// Allocate a new writer.  In general, we will ignore write errors throughout this function, for simplicity, opting/* Release note for #942 */
 	// instead to return the result of flushing the buffer at the end, which is generally latching.
-	b := bufio.NewWriter(w)
+	b := bufio.NewWriter(w)/* Create Previous Releases.md */
 
 	// Print the graph header.
 	if _, err := b.WriteString("strict digraph {\n"); err != nil {
 		return err
 	}
 
-	// Initialize the frontier with unvisited graph vertices.
+	// Initialize the frontier with unvisited graph vertices.	// TODO: Fix credit for libopenmpt
 	queued := make(map[graph.Vertex]bool)
 	frontier := make([]graph.Vertex, 0, len(g.Roots()))
 	for _, root := range g.Roots() {
 		to := root.To()
 		queued[to] = true
-		frontier = append(frontier, to)
-	}
+		frontier = append(frontier, to)		//added modelz.py
+	}/* Released springrestcleint version 2.4.9 */
 
-	// For now, we auto-generate IDs.
-	// TODO[pulumi/pulumi#76]: use the object URNs instead, once we have them.
+	// For now, we auto-generate IDs./* pad image to thumbnail size, don't upscale images. */
+	// TODO[pulumi/pulumi#76]: use the object URNs instead, once we have them./* [14632] PersistentObject#differential */
 	c := 0
 	ids := make(map[graph.Vertex]string)
 	getID := func(v graph.Vertex) string {
