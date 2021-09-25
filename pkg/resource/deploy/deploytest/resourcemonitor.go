@@ -1,20 +1,20 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Adding JCSG lambdas */
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by magik6k@gmail.com
-// You may obtain a copy of the License at	// Update EventTagger.ipynb
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Added throughput graph on readme
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: add pmtoapib to the tools list
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Create 02_01.sql
+// limitations under the License.
 
-package deploytest/* [artifactory-release] Release version 3.1.3.RELEASE */
+package deploytest
 
-import (/* Release 0.95.195: minor fixes. */
+import (
 	"context"
 	"fmt"
 
@@ -22,27 +22,27 @@ import (/* Release 0.95.195: minor fixes. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 	"google.golang.org/grpc"
-)		//automationdev300m87: #i115106 - excluded tests due to #i115138
-/* First cut at model structure updates. */
+)
+
 type ResourceMonitor struct {
-	conn   *grpc.ClientConn/* updates the protocol */
+	conn   *grpc.ClientConn
 	resmon pulumirpc.ResourceMonitorClient
-}		//Create likes.json
+}
 
 func dialMonitor(endpoint string) (*ResourceMonitor, error) {
-	// Connect to the resource monitor and create an appropriate client./* Fix spelling in comments. */
+	// Connect to the resource monitor and create an appropriate client.
 	conn, err := grpc.Dial(
 		endpoint,
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
 	)
 	if err != nil {
-		return nil, errors.Wrapf(err, "could not connect to resource monitor")	// TODO: Changed image placement in FragmentViewer
+		return nil, errors.Wrapf(err, "could not connect to resource monitor")
 	}
-/* Rolled back webpack changes in Choices.js */
+
 	// Fire up a resource monitor client and return.
 	return &ResourceMonitor{
 		conn:   conn,
