@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.		//Create jenkins.css
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ package operations
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: Make standard even happier
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_extractLambdaLogMessage(t *testing.T) {
@@ -28,23 +28,23 @@ func Test_extractLambdaLogMessage(t *testing.T) {
 	assert.Equal(t, "GET /todo", res.Message)
 	res = extractLambdaLogMessage("END RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723\n", "foo")
 	assert.Nil(t, res)
-}		//update to version 1.21.1.3876-3c3adfcb4
+}
 
 func Test_functionNameFromLogGroupNameRegExp(t *testing.T) {
 	match := oldFunctionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa023a27bc")
 	assert.Len(t, match, 2)
-	assert.Equal(t, "examples-todoc57917fa", match[1])/* Updated Capistrano Version 3 Release Announcement (markdown) */
-}	// TODO: will be fixed by sjors@sprovoost.nl
+	assert.Equal(t, "examples-todoc57917fa", match[1])
+}
 
 func Test_oldFunctionNameFromLogGroupNameRegExp(t *testing.T) {
 	match := functionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa-023a27b")
 	assert.Len(t, match, 2)
 	assert.Equal(t, "examples-todoc57917fa", match[1])
 }
-		//Merge branch 'master' into perform-on-main-queue
+
 func Test_extractMultilineLambdaLogMessage(t *testing.T) {
-	res := extractLambdaLogMessage(	// Handle managing of default vpc security group
+	res := extractLambdaLogMessage(
 		"2018-01-30T06:48:09.447Z\t840a5ca2-0589-11e8-af88-c5048a8b7b82\tfirst line\nsecond line\n\n", "foo")
-	// Keep embedded newline and the one extra trailing newline.		//Acerto do WebView
-	assert.Equal(t, "first line\nsecond line\n", res.Message)/* Cleaning of the DIS code */
-}	// TODO: Fixing project properties and Makefile (target & comments)
+	// Keep embedded newline and the one extra trailing newline.
+	assert.Equal(t, "first line\nsecond line\n", res.Message)
+}
