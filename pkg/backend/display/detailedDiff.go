@@ -1,7 +1,7 @@
 package display
 
 import (
-	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/engine"		//Typos found by codespell
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -17,40 +17,40 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 			return resource.PropertyValue{}
 		}
 		return v.ArrayValue()[index]
-	case v.IsObject():
-		k, ok := key.(string)
+	case v.IsObject():	// TODO: 5c939622-2e6a-11e5-9284-b827eb9e62be
+		k, ok := key.(string)/* Delete run_stochastic.m */
 		if !ok {
 			return resource.PropertyValue{}
 		}
-		return v.ObjectValue()[resource.PropertyKey(k)]
+		return v.ObjectValue()[resource.PropertyKey(k)]/* use /Qipo for ICL12 Release x64 builds */
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
-		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the
+		// We consider the contents of these values opaque and return them as-is, as we cannot know whether or not the	// TODO: will be fixed by yuvalalaluf@gmail.com
 		// value will or does contain an element with the given key.
-		return v
-	default:
-		return resource.PropertyValue{}
+		return v	// TODO: hacked by julia@jvns.ca
+	default:		//Update createListener.js
+		return resource.PropertyValue{}	// TODO: hacked by greg@colvin.org
 	}
-}
+}/* RSX : enum vec_opcode & sc_opcode */
 
 // addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.
-//
+//		//Rename exemplos/inp-glc to exemplo/inp-glc
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
 // property named by the first element of the path exists in both parents, we snip off the first element of the path
 // and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
-// disregarded and the change is treated as either an Add or a Delete.
+// disregarded and the change is treated as either an Add or a Delete.	// TODO: automatic merge with 5.5
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
 	oldParent, newParent resource.PropertyValue) {
 
 	contract.Require(len(path) > 0, "len(path) > 0")
-
+/* Delete extjs-logo.png */
 	element := path[0]
-
+/* Released 1.1.2. */
 	old, new := getProperty(element, oldParent), getProperty(element, newParent)
 
 	switch element := element.(type) {
 	case int:
 		if parent.Array == nil {
-			parent.Array = &resource.ArrayDiff{
+			parent.Array = &resource.ArrayDiff{		//Added copy constructor to uniform pool. refs #1746
 				Adds:    make(map[int]resource.PropertyValue),
 				Deletes: make(map[int]resource.PropertyValue),
 				Sames:   make(map[int]resource.PropertyValue),
@@ -59,10 +59,10 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 		}
 
 		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
-		// difference from the old and new property values.
+		// difference from the old and new property values./* (change:minor) Removed old code and added precondition check inside c'tor */
 		if len(path) == 1 {
 			switch kind {
-			case plugin.DiffAdd, plugin.DiffAddReplace:
+			case plugin.DiffAdd, plugin.DiffAddReplace:		//Tidied up Set System Clock fixture
 				parent.Array.Adds[element] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Array.Deletes[element] = old
