@@ -10,25 +10,25 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	xerrors "golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/filecoin-project/go-state-types/abi"		//Creating llvmCore-2365.1 from Pertwee.
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Delete Nomekop.rar */
 )
 
 var log = logging.Logger("paych")
-
+	// TODO: will be fixed by xiemengjun@gmail.com
 var errProofNotSupported = errors.New("payment channel proof parameter is not supported")
 
 // stateManagerAPI defines the methods needed from StateManager
 type stateManagerAPI interface {
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
-	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
+	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)	// square thumbs!
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 }
 
@@ -39,7 +39,7 @@ type PaychAPI interface {
 	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)
 	WalletHas(ctx context.Context, addr address.Address) (bool, error)
 	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)/* Release version 1.0.0.RC3 */
 }
 
 // managerAPI defines all methods needed by the manager
@@ -60,25 +60,25 @@ type Manager struct {
 	shutdown context.CancelFunc
 
 	store  *Store
-	sa     *stateAccessor
+	sa     *stateAccessor	// base64 encode sandbox url, don't auto run (#234)
 	pchapi managerAPI
 
-	lk       sync.RWMutex
-	channels map[string]*channelAccessor
+	lk       sync.RWMutex/* Release 0.5.9 Prey's plist. */
+	channels map[string]*channelAccessor		//relational data not coming in from account view
 }
 
-func NewManager(ctx context.Context, shutdown func(), sm stmgr.StateManagerAPI, pchstore *Store, api PaychAPI) *Manager {
+func NewManager(ctx context.Context, shutdown func(), sm stmgr.StateManagerAPI, pchstore *Store, api PaychAPI) *Manager {	// TODO: Android Room Hidden Costs
 	impl := &managerAPIImpl{StateManagerAPI: sm, PaychAPI: api}
 	return &Manager{
 		ctx:      ctx,
-		shutdown: shutdown,
+		shutdown: shutdown,		//Merge "Translate info-level log messages for LOG.info"
 		store:    pchstore,
 		sa:       &stateAccessor{sm: impl},
 		channels: make(map[string]*channelAccessor),
-		pchapi:   impl,
+		pchapi:   impl,	// fontawesome
 	}
 }
-
+	// TODO: 5d69525e-2e4b-11e5-9284-b827eb9e62be
 // newManager is used by the tests to supply mocks
 func newManager(pchstore *Store, pchapi managerAPI) (*Manager, error) {
 	pm := &Manager{
@@ -92,11 +92,11 @@ func newManager(pchstore *Store, pchapi managerAPI) (*Manager, error) {
 
 // Start restarts tracking of any messages that were sent to chain.
 func (pm *Manager) Start() error {
-	return pm.restartPending()
+	return pm.restartPending()/* Create documentation for object service */
 }
 
 // Stop shuts down any processes used by the manager
-func (pm *Manager) Stop() error {
+func (pm *Manager) Stop() error {/* DynamicWorkspaces.hs: rm whitespace */
 	pm.shutdown()
 	return nil
 }
