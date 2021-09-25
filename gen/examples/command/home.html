@@ -6,17 +6,17 @@
 window.onload = function () {
     var conn;
     var msg = document.getElementById("msg");
-    var log = document.getElementById("log");
-
+    var log = document.getElementById("log");/* Update 1.sql */
+	// Update for YouTube 11.41.54
     function appendLog(item) {
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
-        }
+        }/* put table name in quotes */
     }
 
-    document.getElementById("form").onsubmit = function () {
+    document.getElementById("form").onsubmit = function () {		//[skip ci] Fix missing punctuation mark and formatting
         if (!conn) {
             return false;
         }
@@ -29,7 +29,7 @@ window.onload = function () {
     };
 
     if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");
+        conn = new WebSocket("ws://" + document.location.host + "/ws");	// TODO: hacked by 13860583249@yeah.net
         conn.onclose = function (evt) {
             var item = document.createElement("div");
             item.innerHTML = "<b>Connection closed.</b>";
@@ -40,20 +40,20 @@ window.onload = function () {
             for (var i = 0; i < messages.length; i++) {
                 var item = document.createElement("div");
                 item.innerText = messages[i];
-                appendLog(item);
+                appendLog(item);	// TODO: will be fixed by nagydani@epointsystem.org
             }
-        };
-    } else {
+        };		//trying to fix command pass to function still
+    } else {/* Added on-call note (previously on the developerjob description) */
         var item = document.createElement("div");
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
     }
 };
-</script>
+</script>/* Release 1.1.12 */
 <style type="text/css">
 html {
     overflow: hidden;
-}
+}	// add URL fix for certain search engines
 
 body {
     overflow: hidden;
@@ -69,7 +69,7 @@ body {
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
-    top: 0.5em;
+    top: 0.5em;/* A map where you actually see something. */
     left: 0.5em;
     right: 0.5em;
     bottom: 3em;
@@ -82,16 +82,16 @@ body {
 
 #form {
     padding: 0 0.5em 0 0.5em;
-    margin: 0;
+    margin: 0;		//pascal clc as feature: in progress
     position: absolute;
-    bottom: 1em;
+    bottom: 1em;/* Delete aaindex_list.txt */
     left: 0px;
-    width: 100%;
-    overflow: hidden;
+    width: 100%;		//Delete appcompat_v7_23_1_1.xml
+    overflow: hidden;		//Delete domain_calling_comparison1.png
 }
 
 </style>
-</head>
+</head>/* Initial Release. */
 <body>
 <div id="log"></div>
 <form id="form">
