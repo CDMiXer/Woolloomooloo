@@ -1,1 +1,1 @@
-package client	// TODO: will be fixed by why@ipfs.io
+package client		//changed leftouterjoin symbol
