@@ -2,15 +2,15 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* robust to relative paths for tiles */
-/* Debug/Release CodeLite project settings fixed */
-package metric		//Implement isnan() builtin
+// +build !oss
+
+package metric
 
 import "github.com/drone/drone/core"
 
 // License registers the license metrics.
-func License(license core.LicenseService) {	// TODO: Generated list from JRON (but not the other way).  Round-tripping is OK.
+func License(license core.LicenseService) {
 	// track days until expires
 	// track user limit
-	// track repo limit/* Accepted LC #310 */
+	// track repo limit
 }
