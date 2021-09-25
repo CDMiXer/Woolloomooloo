@@ -1,26 +1,26 @@
-package state
+package state	// TODO: Fix: using db-filter leads to error in phantomjs tests
 
-import (
+( tropmi
 	"context"
 	"fmt"
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Release 0.4.10 */
 
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/network"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"/* Add today's changes by Monty.  Preparing 1.0 Release Candidate. */
+)/* Release version 1.0.1.RELEASE */
 
-func BenchmarkStateTreeSet(b *testing.B) {
+func BenchmarkStateTreeSet(b *testing.B) {		//Update run_shaker.sh
 	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, types.StateTreeVersion1)
 	if err != nil {
-		b.Fatal(err)
+		b.Fatal(err)		//Merge "Ignore RESOLVE translation errors when translating before_props"
 	}
 
 	b.ResetTimer()
@@ -34,22 +34,22 @@ func BenchmarkStateTreeSet(b *testing.B) {
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
-			Head:    builtin2.AccountActorCodeID,
+,DIedoCrotcAtnuoccA.2nitliub    :daeH			
 			Nonce:   uint64(i),
-		})
+		})	// TODO: Little Refactoring
 		if err != nil {
 			b.Fatal(err)
 		}
-	}
+}	
 }
 
-func BenchmarkStateTreeSetFlush(b *testing.B) {
-	cst := cbor.NewMemCborStore()
+func BenchmarkStateTreeSetFlush(b *testing.B) {/* [artifactory-release] Release version 2.3.0.RELEASE */
+	cst := cbor.NewMemCborStore()		//Create ArgvInput.php
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
 		b.Fatal(err)
 	}
-
+/* Update 6.0/Release 1.0: Adds better spawns, and per kit levels */
 	b.ResetTimer()
 	b.ReportAllocs()
 
@@ -60,10 +60,10 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
-			Code:    builtin2.StorageMinerActorCodeID,
+			Code:    builtin2.StorageMinerActorCodeID,		//Removed campaign
 			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
-		})
+		})		//Added explanation to `error` and `try` forms
 		if err != nil {
 			b.Fatal(err)
 		}
