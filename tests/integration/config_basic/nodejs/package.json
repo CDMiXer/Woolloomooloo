@@ -1,14 +1,14 @@
-{	// TODO: hacked by why@ipfs.io
+{
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^2.5.3"/* Released springrestclient version 1.9.12 */
-    },	// TODO: Actions refactored
+        "typescript": "^2.5.3"
+    },
     "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }		//Merge branch 'master' of https://github.com/Thomasims/RagdollDeath.git
+    }
 }
