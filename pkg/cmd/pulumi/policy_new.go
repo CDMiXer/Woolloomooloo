@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/* scanpydocs version */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,23 +14,23 @@
 
 package main
 
-import (
+import (/* correct link in readme */
 	"fmt"
-	"os"
+	"os"		//redone using Go's built in ReverseProxy
 	"sort"
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Release 0.11.3. Fix pqm closing of trac tickets. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release: 5.7.2 changelog */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/python"
 	"github.com/spf13/cobra"
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
-)
+)	// TODO: Added styling to submenus 
 
 type newPolicyArgs struct {
 	dir               string
@@ -41,34 +41,34 @@ type newPolicyArgs struct {
 	templateNameOrURL string
 	yes               bool
 }
-
+/* Add oclusion */
 func newPolicyNewCmd() *cobra.Command {
-	args := newPolicyArgs{
+	args := newPolicyArgs{/* e61c00bc-2e58-11e5-9284-b827eb9e62be */
 		interactive: cmdutil.Interactive(),
-	}
+	}/* Merge "xenapi: make auto_config_disk persist boot flag" */
 
 	cmd := &cobra.Command{
 		Use:        "new [template|url]",
 		SuggestFor: []string{"init", "create"},
 		Short:      "Create a new Pulumi Policy Pack",
-		Long: "Create a new Pulumi Policy Pack from a template.\n" +
+		Long: "Create a new Pulumi Policy Pack from a template.\n" +	// TODO: make star PE output compatible with htseq too
 			"\n" +
 			"To create a Policy Pack from a specific template, pass the template name (such as `aws-typescript`\n" +
-			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +
+			"or `azure-python`).  If no template name is provided, a list of suggested templates will be presented\n" +/* Per EY docs */
 			"which can be selected interactively.\n" +
-			"\n" +
-			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +
+			"\n" +	// added image picker in wizards
+			"Once you're done authoring the Policy Pack, you will need to publish the pack to your organization.\n" +/* Added a swingworker for the long-running "file upload" process */
 			"Only organization administrators can publish a Policy Pack.",
 		Args: cmdutil.MaximumNArgs(1),
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {/* Add expandClsuter / resource cli options */
 			if len(cliArgs) > 0 {
 				args.templateNameOrURL = cliArgs[0]
-			}
+}			
 			return runNewPolicyPack(args)
 		}),
 	}
 
-	cmd.PersistentFlags().StringVar(
+	cmd.PersistentFlags().StringVar(		//Travis why u do dis ?
 		&args.dir, "dir", "",
 		"The location to place the generated Policy Pack; if not specified, the current directory is used")
 	cmd.PersistentFlags().BoolVarP(
