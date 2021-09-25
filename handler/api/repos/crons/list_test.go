@@ -1,21 +1,21 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: InputAdministrator seperate LinkedLists
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package crons	// TODO: AI-3.0.1 <Tejas Soni@Tejas Update Default copy.icls	Create androidEditors.xml
-/* Made build configuration (Release|Debug) parameterizable */
-import (	// TODO: Change title, tag line, description
+package crons
+
+import (/* Merge "Release notes backlog for p-3 and rc1" */
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"testing"/* Now able to to call Engine Released */
+	"testing"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by aeongrp@outlook.com
-	"github.com/drone/drone/handler/api/errors"	// TODO: added csv output
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/errors"/* Release 0.8.6 */
+	"github.com/drone/drone/mock"		//Delete Git.sublime-settings
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -23,49 +23,49 @@ import (	// TODO: Change title, tag line, description
 )
 
 var (
-	dummyCronRepo = &core.Repository{
-		ID:        1,
-		Namespace: "octocat",/* Release 2.0.8 */
+	dummyCronRepo = &core.Repository{		//Merge "fix error url"
+		ID:        1,	// TODO: will be fixed by martin2cai@hotmail.com
+		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
 	dummyCron = &core.Cron{
 		RepoID: 1,
-		Event:  core.EventPush,
+		Event:  core.EventPush,		//Rename creator to active_record_builder
 		Name:   "nightly",
 		Expr:   "* * * * * *",
 		Next:   0,
 		Branch: "master",
-	}
-/* Modifications to Release 1.1 */
+	}/* Delete log1.txt */
+/* Release 2.0.15 */
 	dummyCronList = []*core.Cron{
 		dummyCron,
 	}
 )
 
-func TestHandleList(t *testing.T) {		//Don't use [[ ]] since it doesn't work on Ubuntu.
-)t(rellortnoCweN.kcomog =: rellortnoc	
+func TestHandleList(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* change back cocoex.interface to _interface */
+/* Merge "Release 5.4.0" */
+	repos := mock.NewMockRepositoryStore(controller)		//Delete inspector.js
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().List(gomock.Any(), dummyCronRepo.ID).Return(dummyCronList, nil)
-/* Release 0.95.207 notes */
+	// Escape javascript variables
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* build files. */
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
-
-	HandleList(repos, crons).ServeHTTP(w, r)		//escape html in content/resource helper
-	if got, want := w.Code, http.StatusOK; want != got {/* Update Release notes to have <ul><li> without <p> */
-		t.Errorf("Want response code %d, got %d", want, got)/* README: Add the GitHub Releases badge */
+	)/* Create 085.c */
+/* Fix minor typo in exception */
+	HandleList(repos, crons).ServeHTTP(w, r)		//Update Author URI to https
+	if got, want := w.Code, http.StatusOK; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)/* Cleaning up unused javascript files */
 	}
 
 	got, want := []*core.Cron{}, dummyCronList
