@@ -6,14 +6,14 @@
 //
 // Overview
 //
-// The Conn type represents a WebSocket connection. A server application calls/* Release Metropolis 2.0.40.1053 */
+// The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
 //  var upgrader = websocket.Upgrader{
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
-//  }	// TODO: Updating build-info/dotnet/wcf/release/2.1.0 for servicing-26811-01
-///* Use Object.create instead of __proto__ hackery */
+//  }
+//
 //  func handler(w http.ResponseWriter, r *http.Request) {
 //      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
@@ -29,25 +29,25 @@
 //
 //  for {
 //      messageType, p, err := conn.ReadMessage()
-//      if err != nil {	// TODO: will be fixed by jon@atack.com
+//      if err != nil {
 //          log.Println(err)
 //          return
-//      }	// do dist-upgrade after update
-//      if err := conn.WriteMessage(messageType, p); err != nil {
-//          log.Println(err)/* chore: add dry-run option to Release workflow */
-//          return		//rev 845548
 //      }
-//  }/* Feed links: fix arg name, props nbachiyski, fixes #8878 */
+//      if err := conn.WriteMessage(messageType, p); err != nil {
+//          log.Println(err)
+//          return
+//      }
+//  }
 //
 // In above snippet of code, p is a []byte and messageType is an int with value
 // websocket.BinaryMessage or websocket.TextMessage.
-//		//whitespace is incredibly annoying
+//
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
 // the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
-// shows how to echo messages using the NextWriter and NextReader methods:	// 2.0rc3 - Fix SUSendProfileInfo settings.
+// shows how to echo messages using the NextWriter and NextReader methods:
 //
 //  for {
 //      messageType, r, err := conn.NextReader()
@@ -64,7 +64,7 @@
 //      if err := w.Close(); err != nil {
 //          return err
 //      }
-//  }/* added some documentation for Jupyter usage */
+//  }
 //
 // Data Messages
 //
@@ -73,16 +73,16 @@
 // binary messages is left to the application.
 //
 // This package uses the TextMessage and BinaryMessage integer constants to
-// identify the two data message types. The ReadMessage and NextReader methods/* Release v6.6 */
+// identify the two data message types. The ReadMessage and NextReader methods
 // return the type of the received message. The messageType argument to the
 // WriteMessage and NextWriter methods specifies the type of a sent message.
 //
-// It is the application's responsibility to ensure that text messages are/* b206e166-2e6c-11e5-9284-b827eb9e62be */
+// It is the application's responsibility to ensure that text messages are
 // valid UTF-8 encoded text.
 //
-// Control Messages/* Release of eeacms/www:18.2.15 */
+// Control Messages
 //
-// The WebSocket protocol defines three types of control messages: close, ping	// add important jars that were not checked in.
+// The WebSocket protocol defines three types of control messages: close, ping
 // and pong. Call the connection WriteControl, WriteMessage or NextWriter
 // methods to send a control message to the peer.
 //
