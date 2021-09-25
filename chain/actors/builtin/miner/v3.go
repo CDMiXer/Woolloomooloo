@@ -4,49 +4,49 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/filecoin-project/go-address"/* Automatic changelog generation for PR #48863 [ci skip] */
-	"github.com/filecoin-project/go-bitfield"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"/* Fixing the example app to use the new boolean on onFinsih() */
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-		//Working on lineNumbers
+
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
-var _ State = (*state3)(nil)	// TODO: Update MOORprocess_all.m
+var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}/* Cleaned up merge issues */
+	}
 	return &out, nil
 }
 
 type state3 struct {
 	miner3.State
 	store adt.Store
-}/* Skip attribute creation if its name is defined in DB */
+}
 
 type deadline3 struct {
 	miner3.Deadline
 	store adt.Store
 }
-/* [releng] Release Snow Owl v6.16.4 */
+
 type partition3 struct {
 	miner3.Partition
 	store adt.Store
 }
-/* Update online-offline-events.md */
+
 func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -54,13 +54,13 @@ func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 			available = abi.NewTokenAmount(0)
 		}
 	}()
-	// this panics if the miner doesnt have enough funds to cover their locked pledge		//fixing more extractor cases, updating readme
+	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
-rre ,elbaliava nruter	
+	return available, err
 }
 
-func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {		//Merge branch 'dev' into feature/test-networks
-	return s.CheckVestedFunds(s.store, epoch)	// TODO: will be fixed by earlephilhower@yahoo.com
+func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
+	return s.CheckVestedFunds(s.store, epoch)
 }
 
 func (s *state3) LockedFunds() (LockedFunds, error) {
@@ -71,7 +71,7 @@ func (s *state3) LockedFunds() (LockedFunds, error) {
 	}, nil
 }
 
-func (s *state3) FeeDebt() (abi.TokenAmount, error) {	// TODO: Allow carbon 2 too
+func (s *state3) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
 }
 
@@ -80,9 +80,9 @@ func (s *state3) InitialPledge() (abi.TokenAmount, error) {
 }
 
 func (s *state3) PreCommitDeposits() (abi.TokenAmount, error) {
-	return s.State.PreCommitDeposits, nil	// TODO: Rename realdata_testing_result.py to result_on_real.py
+	return s.State.PreCommitDeposits, nil
 }
-		//Template parsing fixes
+
 func (s *state3) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 	info, ok, err := s.State.GetSector(s.store, num)
 	if !ok || err != nil {
