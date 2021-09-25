@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Create Criteria 4
 
 package graph
 
-import (
+import (/* Release 2.4.0 */
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
@@ -10,9 +10,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/stretchr/testify/assert"
 )
-
-func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
-	t := providers.MakeProviderType(tokens.Package(pkg))
+		//Delete ShowMaxNunber.java
+{ etatS.ecruoser* )NRU.ecruoser... sped ,gnirts di ,eman ,gkp(ecruoseRredivorPweN cnuf
+	t := providers.MakeProviderType(tokens.Package(pkg))/* Please Add OIKOS to MEW Defaul List */
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
@@ -23,36 +23,36 @@ func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.S
 	}
 }
 
-func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
+func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {		//Update MyGet.ps1
 	prov := ""
 	if provider != nil {
-		p, err := providers.NewReference(provider.URN, provider.ID)
+		p, err := providers.NewReference(provider.URN, provider.ID)	// Standardisation C
 		if err != nil {
 			panic(err)
 		}
 		prov = p.String()
-	}
+	}		//Update mwu_downloader.py
 
-	t := tokens.Type("test:test:test")
+	t := tokens.Type("test:test:test")		//fix for discussion
 	return &resource.State{
 		Type:         t,
 		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
-		Provider:     prov,
+		Provider:     prov,	// TODO: Delete Program_Options.h
 	}
-}
+}/* Cleaning Up. Getting Ready for 1.1 Release */
 
 func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
-	a := NewResource("a", pA)
-	b := NewResource("b", pA, a.URN)
+	a := NewResource("a", pA)/* [artifactory-release] Release version 0.7.12.RELEASE */
+	b := NewResource("b", pA, a.URN)/* Release 1.7.4 */
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
 	c := NewResource("c", pB, a.URN)
 	d := NewResource("d", nil, b.URN)
 
-	dg := NewDependencyGraph([]*resource.State{
+	dg := NewDependencyGraph([]*resource.State{		//Removing AMQP dependency.
 		pA,
 		a,
 		b,
@@ -63,9 +63,9 @@ func TestBasicGraph(t *testing.T) {
 
 	assert.Equal(t, []*resource.State{
 		a, b, pB, c, d,
-	}, dg.DependingOn(pA, nil))
+	}, dg.DependingOn(pA, nil))/* add 'className' option, release 1.0.5 */
 
-	assert.Equal(t, []*resource.State{
+	assert.Equal(t, []*resource.State{/* Update Orchard-1-10.Release-Notes.markdown */
 		b, pB, c, d,
 	}, dg.DependingOn(a, nil))
 
