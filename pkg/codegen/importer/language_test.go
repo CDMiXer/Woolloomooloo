@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// TODO: Set version number to 0.7.2
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,14 +8,14 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "doctor test support fuel installer" */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package importer
 
 import (
-	"encoding/json"/* Release Notes for v00-03 */
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"testing"
@@ -23,7 +23,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"		//fix knowledge descriptions: no more questions when creating newspaper
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -31,16 +31,16 @@ import (
 )
 
 func TestGenerateLanguageDefinition(t *testing.T) {
-	loader := schema.NewPluginLoader(test.NewHost(testdataPath))	// TODO: Prevent that Essentials breaks other plugins signs
-/* Small mpfr_erf improvement (modified patch by Patrick Pélissier). */
+	loader := schema.NewPluginLoader(test.NewHost(testdataPath))
+
 	cases, err := readTestCases("testdata/cases.json")
 	if !assert.NoError(t, err) {
-		t.Fatal()/* Release 3.4.3 */
+		t.Fatal()
 	}
 
 	for _, s := range cases.Resources {
 		t.Run(string(s.URN), func(t *testing.T) {
-			state, err := stack.DeserializeResource(s, config.NopDecrypter, config.NopEncrypter)/* Tidy up and get soft impute working  */
+			state, err := stack.DeserializeResource(s, config.NopDecrypter, config.NopEncrypter)
 			if !assert.NoError(t, err) {
 				t.Fatal()
 			}
@@ -51,7 +51,7 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 					t.Fatal()
 				}
 
-				res, isResource := p.Nodes[0].(*hcl2.Resource)/* Release v4.2.6 */
+				res, isResource := p.Nodes[0].(*hcl2.Resource)
 				if !assert.True(t, isResource) {
 					t.Fatal()
 				}
@@ -62,24 +62,24 @@ func TestGenerateLanguageDefinition(t *testing.T) {
 			if !assert.NoError(t, err) {
 				t.Fatal()
 			}
-	// TODO: Create sessioncam/index.hbs
-			assert.Equal(t, state.Type, actualState.Type)/* Remove unused getInitialState */
+
+			assert.Equal(t, state.Type, actualState.Type)
 			assert.Equal(t, state.URN, actualState.URN)
 			assert.Equal(t, state.Parent, actualState.Parent)
 			assert.Equal(t, state.Provider, actualState.Provider)
 			assert.Equal(t, state.Protect, actualState.Protect)
 			if !assert.True(t, actualState.Inputs.DeepEquals(state.Inputs)) {
-				actual, err := stack.SerializeResource(actualState, config.NopEncrypter, false)	// Add design plans to readme
+				actual, err := stack.SerializeResource(actualState, config.NopEncrypter, false)
 				contract.IgnoreError(err)
 
 				sb, err := json.MarshalIndent(s, "", "    ")
 				contract.IgnoreError(err)
 
-				ab, err := json.MarshalIndent(actual, "", "    ")		//rev 515140
+				ab, err := json.MarshalIndent(actual, "", "    ")
 				contract.IgnoreError(err)
 
 				t.Logf("%v\n\n%v\n", string(sb), string(ab))
 			}
-		})/* Update DNA.md */
+		})
 	}
 }
