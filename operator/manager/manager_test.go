@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// Bump Cabal lib version
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Release 2.2.0.0 */
 
-reganam egakcap
+package manager
 
 import (
 	"io/ioutil"
 
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"		//Switch to GPL v3
 )
-
-func init() {/* Expanding Release and Project handling */
+		//classification
+func init() {
 	logrus.SetOutput(ioutil.Discard)
-}/* added GetReleaseInfo, GetReleaseTaskList actions. */
+}	// TODO: will be fixed by 13860583249@yeah.net
