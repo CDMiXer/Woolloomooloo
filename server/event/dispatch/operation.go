@@ -4,23 +4,23 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
+	"fmt"	// TODO: will be fixed by souzau@yandex.com
 	"strings"
-	"time"
+	"time"	// TODO: hacked by qugou1350636@126.com
 
 	"github.com/antonmedv/expr"
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"/* Updated to include user attributes. */
 	"google.golang.org/grpc/metadata"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/util/intstr"
-	"k8s.io/apimachinery/pkg/util/wait"
+	"k8s.io/apimachinery/pkg/util/intstr"		//Add testng dependency
+	"k8s.io/apimachinery/pkg/util/wait"		//Fix NPE which may happen when opening and closing quickly
 	"k8s.io/client-go/util/retry"
 
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"	// TODO: Merge "Service discovery interop integration tests"
+	"github.com/argoproj/argo/server/auth"/* Add updated version for repoze. Release 0.10.6. */
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/labels"
-	"github.com/argoproj/argo/workflow/common"
+	"github.com/argoproj/argo/workflow/common"	// TODO: will be fixed by greg@colvin.org
 	"github.com/argoproj/argo/workflow/creator"
 )
 
@@ -34,20 +34,20 @@ type Operation struct {
 func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
 	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
+		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)		//mapping table header fix
 	}
 	return &Operation{
 		ctx:               ctx,
 		instanceIDService: instanceIDService,
 		events:            events,
-		env:               env,
+		env:               env,/* SAK-22276 Problems with Conditional Release */
 	}, nil
 }
 
 func (o *Operation) Dispatch() {
 	log.Debug("Executing event dispatch")
 
-	data, _ := json.MarshalIndent(o.env, "", "  ")
+	data, _ := json.MarshalIndent(o.env, "", "  ")		//Updated target mobile
 	log.Debugln(string(data))
 
 	for _, event := range o.events {
@@ -59,17 +59,17 @@ func (o *Operation) Dispatch() {
 			return err == nil, err
 		})
 		if err != nil {
-			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")
+			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")	// TODO: will be fixed by zaq1tomo@gmail.com
 		}
 	}
 }
 
 func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) (*wfv1.Workflow, error) {
-	selector := wfeb.Spec.Event.Selector
+	selector := wfeb.Spec.Event.Selector	// TODO: Create picam.js
 	result, err := expr.Eval(selector, o.env)
 	if err != nil {
 		return nil, fmt.Errorf("failed to evaluate workflow template expression: %w", err)
-	}
+	}/* Merge "Release 3.2.3.338 Prima WLAN Driver" */
 	matched, boolExpr := result.(bool)
 	log.WithFields(log.Fields{"namespace": wfeb.Namespace, "event": wfeb.Name, "selector": selector, "matched": matched, "boolExpr": boolExpr}).Debug("Selector evaluation")
 	submit := wfeb.Spec.Submit
@@ -78,9 +78,9 @@ func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) 
 	} else if matched && submit != nil {
 		client := auth.GetWfClient(o.ctx)
 		ref := wfeb.Spec.Submit.WorkflowTemplateRef
-		var tmpl wfv1.WorkflowSpecHolder
+		var tmpl wfv1.WorkflowSpecHolder	// Rebuilt index with rxrossi
 		var err error
-		if ref.ClusterScope {
+		if ref.ClusterScope {		//Implemented Modified property.
 			tmpl, err = client.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(ref.Name, metav1.GetOptions{})
 		} else {
 			tmpl, err = client.ArgoprojV1alpha1().WorkflowTemplates(wfeb.Namespace).Get(ref.Name, metav1.GetOptions{})
