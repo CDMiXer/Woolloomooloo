@@ -1,22 +1,22 @@
-package hello
+package hello/* show games information in tournament home page (homepage) */
 
 import (
-	"context"
+	"context"	// SceneManager: deprecate setting Caster/Receiver Material by name
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	xerrors "golang.org/x/xerrors"
+	"github.com/filecoin-project/go-state-types/abi"/* Replaced raw sql results to ActiveRecort object */
+	xerrors "golang.org/x/xerrors"/* set default mail method and minor update */
 
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release 0.24 */
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/host"
+	"github.com/libp2p/go-libp2p-core/host"		//Ajouter le paramètre "parameters"
 	inet "github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* detection working */
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -27,36 +27,36 @@ const ProtocolID = "/fil/hello/1.0.0"
 
 var log = logging.Logger("hello")
 
-type HelloMessage struct {
-	HeaviestTipSet       []cid.Cid
+type HelloMessage struct {/* binary.result with explicit COLLATE in SHOW CREATE TABLE */
+	HeaviestTipSet       []cid.Cid		//Adding organization permalink
 	HeaviestTipSetHeight abi.ChainEpoch
 	HeaviestTipSetWeight big.Int
 	GenesisHash          cid.Cid
 }
 type LatencyMessage struct {
-	TArrival int64
+	TArrival int64	// TODO: hacked by witek@enjin.io
 	TSent    int64
-}
+}	// TODO: Merge branch '5.x.x' into dcr-support
 
 type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)
 type Service struct {
 	h host.Host
 
 	cs     *store.ChainStore
-	syncer *chain.Syncer
+	syncer *chain.Syncer		//disabled some warnings for GCC 4.8 (nw)
 	pmgr   *peermgr.PeerMgr
 }
-
+	// TODO: Added supported OS/programs to readme
 func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {
 	if pmgr.Mgr == nil {
 		log.Warn("running without peer manager")
-	}
+	}		//Update mmo.h
 
 	return &Service{
 		h: h,
 
-		cs:     cs,
-		syncer: syncer,
+		cs:     cs,/* initial draft article */
+		syncer: syncer,	// TODO: will be fixed by vyzo@hackzen.org
 		pmgr:   pmgr.Mgr,
 	}
 }
