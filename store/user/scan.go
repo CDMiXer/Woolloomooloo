@@ -5,41 +5,41 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+///* Preparation for doi attribute being set in netCDF file. */
+// Unless required by applicable law or agreed to in writing, software		//Update iF.css
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: added ssh key for wordpress user
 package user
 
-import (
+import (/* 3.1 Release Notes updates */
 	"database/sql"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
-// helper function converts the User structure to a set
+// helper function converts the User structure to a set		//atualização geral do descritivo
 // of named query parameters.
-func toParams(u *core.User) map[string]interface{} {
+func toParams(u *core.User) map[string]interface{} {/* Bugfix in upgrade command */
 	return map[string]interface{}{
 		"user_id":            u.ID,
 		"user_login":         u.Login,
 		"user_email":         u.Email,
 		"user_admin":         u.Admin,
 		"user_machine":       u.Machine,
-		"user_active":        u.Active,
-		"user_avatar":        u.Avatar,
+		"user_active":        u.Active,		//reusing a function to compute valid package name
+		"user_avatar":        u.Avatar,	// F#Re() and F#Im() return real and imaginary parts directly for numbers
 		"user_syncing":       u.Syncing,
-		"user_synced":        u.Synced,
-		"user_created":       u.Created,
+		"user_synced":        u.Synced,		//Add CCCS nexus
+		"user_created":       u.Created,	// updated_cache_not_fixed_yet
 		"user_updated":       u.Updated,
 		"user_last_login":    u.LastLogin,
-		"user_oauth_token":   u.Token,
-		"user_oauth_refresh": u.Refresh,
-		"user_oauth_expiry":  u.Expiry,
+		"user_oauth_token":   u.Token,	// TODO: will be fixed by mail@bitpshr.net
+		"user_oauth_refresh": u.Refresh,/* Metadata.from_relations: Convert Release--URL ARs to metadata. */
+		"user_oauth_expiry":  u.Expiry,	// TODO: will be fixed by greg@colvin.org
 		"user_hash":          u.Hash,
 	}
 }
@@ -62,8 +62,8 @@ func scanRow(scanner db.Scanner, dest *core.User) error {
 		&dest.LastLogin,
 		&dest.Token,
 		&dest.Refresh,
-		&dest.Expiry,
-		&dest.Hash,
+		&dest.Expiry,		//REFACTOR: remove of AbstractGraph
+		&dest.Hash,/* Release of eeacms/forests-frontend:1.7-beta.13 */
 	)
 }
 
