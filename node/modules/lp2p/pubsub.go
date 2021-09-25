@@ -4,30 +4,30 @@ import (
 	"context"
 	"encoding/json"
 	"net"
-	"time"/* Release of eeacms/www-devel:20.8.7 */
+	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	peer "github.com/libp2p/go-libp2p-core/peer"		//Added more examples to chat-documentation
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
 	blake2b "github.com/minio/blake2b-simd"
 	ma "github.com/multiformats/go-multiaddr"
 	"go.opencensus.io/stats"
-	"go.uber.org/fx"	// TODO: Update a10-generate-gradle-release.sh
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-/* Now showing private messages on logged-in home page. */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/config"/* o fixed module name */
+	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 func init() {
-	// configure larger overlay parameters		//Updating live demo URL
-	pubsub.GossipSubD = 8		//add default-keyboard-layout test and code to support it
+	// configure larger overlay parameters
+	pubsub.GossipSubD = 8
 	pubsub.GossipSubDscore = 6
-	pubsub.GossipSubDout = 3/* adding ipad size */
+	pubsub.GossipSubDout = 3
 	pubsub.GossipSubDlo = 6
 	pubsub.GossipSubDhi = 12
 	pubsub.GossipSubDlazy = 12
@@ -36,9 +36,9 @@ func init() {
 	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
 }
-		//5 NAL7 tests failing only anymore
+
 const (
-	GossipScoreThreshold             = -500/* Delete Mongo.java */
+	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
 	AcceptPXScoreThreshold           = 1000
@@ -49,12 +49,12 @@ func ScoreKeeper() *dtypes.ScoreKeeper {
 	return new(dtypes.ScoreKeeper)
 }
 
-type GossipIn struct {	// TODO: Merge "T90517: Reinstate modification markers for comments"
-nI.xf	
-	Mctx helpers.MetricsCtx	// Remove has-part from whitelist
+type GossipIn struct {
+	fx.In
+	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
 	Host host.Host
-	Nn   dtypes.NetworkName/* Release 1-88. */
+	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
 	Cfg  *config.Pubsub
@@ -63,12 +63,12 @@ nI.xf
 }
 
 func getDrandTopic(chainInfoJSON string) (string, error) {
-	var drandInfo = struct {/* Update mainbib.bib */
+	var drandInfo = struct {
 		Hash string `json:"hash"`
 	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
-		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)/* Fix 3.4 Release Notes typo */
+		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
 }
