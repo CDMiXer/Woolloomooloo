@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist//* Renders the actual schedule on the conference schedule page. */
+/dist/
 /*.egg-info
-venv/	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+venv/
