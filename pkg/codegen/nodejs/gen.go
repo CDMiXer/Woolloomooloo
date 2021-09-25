@@ -1,19 +1,19 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//Close cfp on index.md
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Update Marlin/pins.h */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 4.1.1 Release */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Create networks.blade.php
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the		//New translations bobenemies.ini (French)
-// goconst linter's warning./* "Uni of Warwick" is located in "Coventry" */
+
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package nodejs
@@ -21,39 +21,39 @@ package nodejs
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"/* Release for 1.29.0 */
+	"fmt"
 	"io"
-	"path"	// TODO: will be fixed by witek@enjin.io
+	"path"
 	"path/filepath"
 	"reflect"
-	"sort"	// TODO: will be fixed by souzau@yandex.com
-	"strconv"/* TODO list updated (mainly about '/db' resources RPC methods) */
+	"sort"
+	"strconv"
 	"strings"
 	"unicode"
-		//Marcando como pagada la Transacción en el CallBack.
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-		//Update TEAM
+
 type typeDetails struct {
 	outputType   bool
 	inputType    bool
 	functionType bool
 }
 
-func title(s string) string {/* 1bccf8fa-2e64-11e5-9284-b827eb9e62be */
-	if s == "" {		//Added wifi_unlimited.sh script
+func title(s string) string {
+	if s == "" {
 		return ""
 	}
-	runes := []rune(s)/* Merge branch 'develop' into fix/MUWM-4155 */
+	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
 
 func camel(s string) string {
 	if s == "" {
-		return ""	// add base Show.Layout view to blocker Views
+		return ""
 	}
 	runes := []rune(s)
 	res := make([]rune, 0, len(runes))
