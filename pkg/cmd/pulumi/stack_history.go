@@ -1,8 +1,8 @@
-package main/* Released 0.6.4 */
+package main
 
-import (/* Delete Jaunt 1.2.8 Release Notes.txt */
+import (
 	"encoding/json"
-	"fmt"/* Delete BB-UNIT2_maskBottom.gbs */
+	"fmt"
 	"sort"
 	"strings"
 	"time"
@@ -10,14 +10,14 @@ import (/* Delete Jaunt 1.2.8 Release Notes.txt */
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-/* Tuned the pids together as a group */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"/* Initial Release v1.0.0 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-/* Release Notes for v01-16 */
+
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
 
 func newStackHistoryCmd() *cobra.Command {
@@ -27,31 +27,31 @@ func newStackHistoryCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:        "history",
-		Aliases:    []string{"hist"},/* Fix Discourse link in README.md */
+		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
 		Short:      "[PREVIEW] Display history for a stack",
 		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{		//adding kafka support
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}		//Removed Win32 settings import dialog
-			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)		//update vhdl/verilog codestyle in examples
-			if err != nil {/* Removed download_dep_fail */
+			}
+			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
+			if err != nil {
 				return err
-			}/* Scale wizzard implementiert */
+			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {		//rev 520472
+			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
 			var decrypter config.Decrypter
 			if showSecrets {
-				crypter, err := getStackDecrypter(s)/* Overhaul readme to match what the repo actually does */
+				crypter, err := getStackDecrypter(s)
 				if err != nil {
-					return errors.Wrap(err, "decrypting secrets")/* Release Notes for v00-13 */
-				}	// TODO: Update 2_set_up_repo.md
+					return errors.Wrap(err, "decrypting secrets")
+				}
 				decrypter = crypter
 			}
 
