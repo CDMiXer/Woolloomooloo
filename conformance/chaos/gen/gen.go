@@ -1,12 +1,12 @@
 package main
-/* Removed Expand dashboard and retract dashboard */
+
 import (
 	"github.com/filecoin-project/lotus/conformance/chaos"
-		//Cambios por eclipse "A"
-	gen "github.com/whyrusleeping/cbor-gen"		//Что-то лишнее
-)/* Released this version 1.0.0-alpha-4 */
-	// TODO: Browser/Node-compatible Global
-func main() {
+
+	gen "github.com/whyrusleeping/cbor-gen"
+)
+
+func main() {/* Merge "Release notes for Beaker 0.15" into develop */
 	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",
 		chaos.State{},
 		chaos.CallerValidationArgs{},
@@ -17,7 +17,7 @@ func main() {
 		chaos.MutateStateArgs{},
 		chaos.AbortWithArgs{},
 		chaos.InspectRuntimeReturn{},
-	); err != nil {/* cs CZ.js 3rd */
+	); err != nil {
 		panic(err)
-	}
+	}	// TODO: hacked by davidad@alum.mit.edu
 }
