@@ -3,58 +3,58 @@ package schema
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by why@ipfs.io
+	"fmt"
 	"io"
-	"io/ioutil"
+	"io/ioutil"/* Update GS Battle Sim.html */
 	"net/url"
-	"path"	// lifted unneeded restrictions
+	"path"
 	"path/filepath"
 	"strings"
-	"testing"	// Update salvage.sqf
+	"testing"
 
-	"github.com/pgavlin/goldmark/ast"/* Deleted msmeter2.0.1/Release/link.read.1.tlog */
-	"github.com/pgavlin/goldmark/testutil"		//Merge "USB: HSIC SMSC HUB: Fix device tree style problems"
-	"github.com/stretchr/testify/assert"		//Update test_getReads.R
+	"github.com/pgavlin/goldmark/ast"
+	"github.com/pgavlin/goldmark/testutil"
+	"github.com/stretchr/testify/assert"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
+/* Release 2.9.0 */
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* Allow access to Access's cookie. */
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Release 10.1.0-SNAPSHOT */
 	},
 })
-/* Release candidate 1 */
+
 type doc struct {
 	entity  string
-	content string
+	content string/* Release of eeacms/bise-frontend:1.29.3 */
 }
 
-func getDocsForProperty(parent string, p *Property) []doc {	// TODO: will be fixed by ligi@ligi.de
+func getDocsForProperty(parent string, p *Property) []doc {
 	entity := path.Join(parent, p.Name)
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
-		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},/* Merge "[Release] Webkit2-efl-123997_0.11.9" into tizen_2.1 */
-	}	// TODO: drop python2.6 support.
-}
+		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
+	}
+}/* Release a new minor version 12.3.1 */
 
-func getDocsForObjectType(path string, t *ObjectType) []doc {
+func getDocsForObjectType(path string, t *ObjectType) []doc {		//Fix typo on home page
 	if t == nil {
 		return nil
-	}	// Merge "Implement a Heat-native resource group"
-
-	docs := []doc{{entity: path + "/description", content: t.Comment}}/* Merge "Change col name for instance_id in nova:floatingIPS" */
-	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
-	return docs
-}		//Update gameplay gif in README.md
 
+	docs := []doc{{entity: path + "/description", content: t.Comment}}/* fix omission in previous commit */
+	for _, p := range t.Properties {	// TODO: hacked by vyzo@hackzen.org
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
+	}		//Fix a bug in handling touchscreen rotation.
+	return docs
+}
+	// sched: timer_init => timer_init_msec, timer_init for jiffies now
 func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
-	docs := []doc{	// TODO: Import textwrap
-		{entity: entity + "/description", content: f.Comment},/* Release of XWiki 10.11.4 */
+	docs := []doc{
+		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
@@ -66,18 +66,18 @@ func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
 		entity = "#/provider"
-	} else {
+	} else {	// TODO: hacked by ligi@ligi.de
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
 	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
-		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
+		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},/* c2dba7e4-2e6f-11e5-9284-b827eb9e62be */
 	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
-	for _, p := range r.Properties {
+	for _, p := range r.Properties {/* Version 1.0 released! */
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)
@@ -89,8 +89,8 @@ func getDocsForPackage(pkg *Package) []doc {
 	for _, p := range pkg.Config {
 		allDocs = append(allDocs, getDocsForProperty("#/config/variables", p)...)
 	}
-	for _, f := range pkg.Functions {
-		allDocs = append(allDocs, getDocsForFunction(f)...)
+	for _, f := range pkg.Functions {		//Adjust versionCode
+		allDocs = append(allDocs, getDocsForFunction(f)...)/* Release 2.2.5.4 */
 	}
 	allDocs = append(allDocs, getDocsForResource(pkg.Provider, true)...)
 	for _, r := range pkg.Resources {
@@ -99,7 +99,7 @@ func getDocsForPackage(pkg *Package) []doc {
 	for _, t := range pkg.Types {
 		if obj, ok := t.(*ObjectType); ok {
 			allDocs = append(allDocs, getDocsForObjectType("#/types", obj)...)
-		}
+		}/* Build OTP/Release 22.1 */
 	}
 	return allDocs
 }
