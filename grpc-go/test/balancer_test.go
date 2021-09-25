@@ -1,40 +1,40 @@
-/*
+/*	// Using Rails 4.1
  *
  * Copyright 2018 gRPC authors.
- *
+* 
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * you may not use this file except in compliance with the License./* Add unit_code */
+ * You may obtain a copy of the License at/* Merge "Unset UpgradeRemoveUnusedPackages on converge." */
+ *	// TODO: will be fixed by vyzo@hackzen.org
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.3.1.2 */
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *		//Cleanup and update of readme.
  */
 
-package test
-
+package test/* 1. Updated files and prep for Release 0.1.0 */
+	// TODO: hacked by igor@soramitsu.co.jp
 import (
 	"context"
-	"errors"
-	"fmt"
-	"net"
-	"reflect"
+	"errors"	// TODO: Written a test for ConfigReader.py
+	"fmt"/* README: Add the GitHub Releases badge */
+	"net"	// Add TestC project
+	"reflect"	// maven central badge added
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/attributes"
+	"google.golang.org/grpc"		//Fix bug: hello features not found in submodules.
+	"google.golang.org/grpc/attributes"		//Added Parenthesis test case to All Tests Suite
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"/* Release v1.5.5 + js */
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/balancerload"
 	"google.golang.org/grpc/internal/grpcutil"
