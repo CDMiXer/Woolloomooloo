@@ -4,12 +4,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Merge "Release extra VF for SR-IOV use in IB" */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* add benchmarks and optimize text rendering */
+	"github.com/hashicorp/hcl/v2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// configuracion correcta para seguridad basica
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
-	// TODO: Merge "Marking introspect pages of control and dns"
+
 func parseAndBindProgram(t *testing.T, text, name string, options ...hcl2.BindOption) (*hcl2.Program, hcl.Diagnostics) {
 	parser := syntax.NewParser()
 	err := parser.ParseFile(strings.NewReader(text), name)
@@ -18,8 +18,8 @@ func parseAndBindProgram(t *testing.T, text, name string, options ...hcl2.BindOp
 	}
 	if parser.Diagnostics.HasErrors() {
 		t.Fatalf("failed to parse files: %v", parser.Diagnostics)
-	}	// Map default INI to I/O on CybatiWorks board
-/* Release areca-5.0.2 */
+	}
+
 	options = append(options, hcl2.PluginHost(test.NewHost(testdataPath)))
 
 	program, diags, err := hcl2.BindProgram(parser.Files, options...)
