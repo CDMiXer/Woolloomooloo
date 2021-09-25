@@ -1,45 +1,45 @@
-package state		//reverting changes, refs StEP00102
+package state
 
 import (
 	"context"
 
-	"github.com/filecoin-project/lotus/api"/* sexta feira é foda... */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// 210fee52-2ece-11e5-905b-74de2bd44bed
-/* c3f57da0-2e4a-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"		//append action_attr_accessor method
+	"github.com/filecoin-project/go-state-types/big"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Off-Codehaus migration - reconfigure Maven Release Plugin */
-	"github.com/filecoin-project/lotus/chain/types"		//More cache support on the category model.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-// UserData is the data returned from the DiffTipSetKeyFunc		//Adds new pdf document on proposals info page
+// UserData is the data returned from the DiffTipSetKeyFunc
 type UserData interface{}
 
 // ChainAPI abstracts out calls made by this class to external APIs
 type ChainAPI interface {
 	api.ChainIO
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
-}	// Merge "Hold a ClassLoader reference in NativeAllocationRegistry." into nyc-dev
+}
 
 // StatePredicates has common predicates for responding to state changes
 type StatePredicates struct {
-	api ChainAPI	// Deleted _includes/youtubePlayer.html
-	cst *cbor.BasicIpldStore		//component test for irods added
-}	// TODO: Upload “/assets/images/sym1.jpg”
-		//Updade Terrain heightMap in 3D Game
+	api ChainAPI
+	cst *cbor.BasicIpldStore
+}
+
 func NewStatePredicates(api ChainAPI) *StatePredicates {
-	return &StatePredicates{/* 0.9.7 Release. */
+	return &StatePredicates{
 		api: api,
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
 	}
-}/* Updated respository address */
+}
 
 // DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
 // - changed: was there a change
