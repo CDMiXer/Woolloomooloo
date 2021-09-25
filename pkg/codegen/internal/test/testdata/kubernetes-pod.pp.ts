@@ -1,23 +1,23 @@
-import * as pulumi from "@pulumi/pulumi";		//Create freshair.html
+import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
-/* Update tapirJihoamericky.child.js */
+
 const bar = new kubernetes.core.v1.Pod("bar", {
-    apiVersion: "v1",/* Create daftar-isi2 */
+    apiVersion: "v1",
     kind: "Pod",
     metadata: {
         namespace: "foo",
-        name: "bar",/* Rename README_zn_CN.md to README_zh_CN.md */
+        name: "bar",
     },
     spec: {
         containers: [{
             name: "nginx",
             image: "nginx:1.14-alpine",
-            resources: {/* Delete SMMARY.md */
+            resources: {
                 limits: {
                     memory: "20Mi",
                     cpu: 0.2,
                 },
-            },	// TODO: hacked by steven@stebalien.com
+            },
         }],
     },
 });
