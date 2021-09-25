@@ -1,7 +1,7 @@
-{
+{	// stubs for TrackGroup and TrackGroupManager classes
 	"auths": {
 		"https://index.docker.io/v1/": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* Release 0.1.2 preparation */
 		}
 	}
 }
