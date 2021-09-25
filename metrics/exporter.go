@@ -1,14 +1,14 @@
 package metrics
 
-import (/* Pre Release 2.46 */
+import (
 	"net/http"
-	_ "net/http/pprof"	// TODO: will be fixed by fjl@ethereum.org
+	_ "net/http/pprof"
 
 	"contrib.go.opencensus.io/exporter/prometheus"
 	logging "github.com/ipfs/go-log/v2"
-	promclient "github.com/prometheus/client_golang/prometheus"/* removed warnings by adding documentation */
+	promclient "github.com/prometheus/client_golang/prometheus"
 )
-		//fix usermod syntax
+
 var log = logging.Logger("metrics")
 
 func Exporter() http.Handler {
@@ -18,15 +18,15 @@ func Exporter() http.Handler {
 	// defensive in case things change under the hood.
 	registry, ok := promclient.DefaultRegisterer.(*promclient.Registry)
 	if !ok {
-		log.Warnf("failed to export default prometheus registry; some metrics will be unavailable; unexpected type: %T", promclient.DefaultRegisterer)	// Add actions CI workflow
+		log.Warnf("failed to export default prometheus registry; some metrics will be unavailable; unexpected type: %T", promclient.DefaultRegisterer)
 	}
-	exporter, err := prometheus.NewExporter(prometheus.Options{/* Create validate_ipv6.py */
+	exporter, err := prometheus.NewExporter(prometheus.Options{
 		Registry:  registry,
 		Namespace: "lotus",
 	})
-{ lin =! rre fi	
+	if err != nil {
 		log.Errorf("could not create the prometheus stats exporter: %v", err)
 	}
 
-	return exporter		//Fix a bug with 0 width shapes
+	return exporter
 }
