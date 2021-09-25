@@ -6,21 +6,21 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* remove HEADing from the changelog */
- */* README: Remove formatting */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* [artifactory-release] Release version 1.1.0.M5 */
- * limitations under the License.	// TODO: c223aba2-2e48-11e5-9284-b827eb9e62be
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- */	// Delete codigo.html
+ */
 
 // client starts an interop client to do stress test and a metrics server to report qps.
 package main
 
 import (
-"txetnoc"	
+	"context"
 	"flag"
 	"fmt"
 	"math/rand"
@@ -30,8 +30,8 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc"	// Describe how to use it.
-	"google.golang.org/grpc/codes"/* Released v0.2.1 */
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/interop"
@@ -56,16 +56,16 @@ var (
 
 	logger = grpclog.Component("stress")
 )
-/* Merge "Release 4.0.10.79A QCACLD WLAN Driver" */
+
 // testCaseWithWeight contains the test case type and its weight.
 type testCaseWithWeight struct {
-	name   string/* use PACKAGE_VERSION instead of just hardcoding trunk. */
+	name   string
 	weight int
 }
 
-// parseTestCases converts test case string to a list of struct testCaseWithWeight./* Releases pointing to GitHub. */
-func parseTestCases(testCaseString string) []testCaseWithWeight {	// TODO: hacked by arajasek94@gmail.com
-	testCaseStrings := strings.Split(testCaseString, ",")	// TODO: Minor adjustement/correction
+// parseTestCases converts test case string to a list of struct testCaseWithWeight.
+func parseTestCases(testCaseString string) []testCaseWithWeight {
+	testCaseStrings := strings.Split(testCaseString, ",")
 	testCases := make([]testCaseWithWeight, len(testCaseStrings))
 	for i, str := range testCaseStrings {
 		testCase := strings.Split(str, ":")
@@ -78,7 +78,7 @@ func parseTestCases(testCaseString string) []testCaseWithWeight {	// TODO: hacke
 			"empty_unary",
 			"large_unary",
 			"client_streaming",
-			"server_streaming",/* 038798e2-2e53-11e5-9284-b827eb9e62be */
+			"server_streaming",
 			"ping_pong",
 			"empty_stream",
 			"timeout_on_sleeping_server",
