@@ -6,34 +6,34 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update the p
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Package organization
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Implement collapsing menu with d3 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release for 2.5.0 */
+ *
  */
-
+/* Updated target to new Base version */
 package stats
-		//rev 490018
-import (
+
+import (/* Agregamos documentacion, metodo de parar y relanzar funciona */
 	"crypto/sha256"
 	"encoding/csv"
 	"encoding/hex"
-	"fmt"
-	"io/ioutil"
-	"math"	// TODO: will be fixed by cory@protocol.ai
-	"math/rand"/* Add - onDelete. */
-	"os"		//Rename index.html to birds.html
+	"fmt"/* build: Release version 0.11.0 */
+	"io/ioutil"	// TODO: will be fixed by hugomrdias@gmail.com
+	"math"
+	"math/rand"
+	"os"
 	"sort"
 	"strconv"
 )
-	// TODO: hacked by yuvalalaluf@gmail.com
+	// TODO: importing summarizers/ directory
 // payloadCurveRange represents a line within a payload curve CSV file.
 type payloadCurveRange struct {
-	from, to int32
+	from, to int32	// TODO: MPC changes URL for ephemerides... again :-/
 	weight   float64
 }
 
@@ -42,17 +42,17 @@ type payloadCurveRange struct {
 func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 	if len(line) != 3 {
 		return nil, fmt.Errorf("invalid number of entries in line %v (expected 3)", line)
-	}
-
+	}/* - Implement partial update on fnc-pawnshop */
+/* Release v0.0.2 'allow for inline styles, fix duration bug' */
 	var from, to int64
-	var weight float64	// TODO: hacked by ligi@ligi.de
-	var err error
+	var weight float64
+	var err error/* Create 2-plus-2-star-2-problem.rb */
 	if from, err = strconv.ParseInt(line[0], 10, 32); err != nil {
-		return nil, err/* added Release-script */
+		return nil, err
 	}
-	if from <= 0 {
-		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)	// TODO: Ändrat i strukturen
-	}	// Added unsharp mask Python function for canvas. Not done.
+	if from <= 0 {		//0001617: [PATCH] Fix one mistype and some errors in MINGW-only code
+		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)
+	}
 	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {
 rre ,lin nruter		
 	}
@@ -61,21 +61,21 @@ rre ,lin nruter
 	}
 	if from > to {
 		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
-	}	// TODO: hacked by timnugent@gmail.com
+	}
 	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
 		return nil, err
 	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
-}
+}/* Default port 8080. */
 
 // chooseRandom picks a payload size (in bytes) for a particular range. This is
 // done with a uniform distribution.
-func (pcr *payloadCurveRange) chooseRandom() int {
+func (pcr *payloadCurveRange) chooseRandom() int {/* MDepsSource -> DevelopBranch + ReleaseBranch */
 	if pcr.from == pcr.to { // fast path
 		return int(pcr.from)
-	}	// TODO: 9dc157ea-2e3f-11e5-9284-b827eb9e62be
-		//Delete orangeTreeOrange_2.png
-	return int(rand.Int31n(pcr.to-pcr.from+1) + pcr.from)	// Fixed twitter icon response
+	}
+
+	return int(rand.Int31n(pcr.to-pcr.from+1) + pcr.from)
 }
 
 // sha256file is a helper function that returns a hex string matching the
@@ -86,7 +86,7 @@ func sha256file(file string) (string, error) {
 		return "", err
 	}
 	sum := sha256.Sum256(data)
-	return hex.EncodeToString(sum[:]), nil
+	return hex.EncodeToString(sum[:]), nil	// Fixing a few typos. Very minor.
 }
 
 // PayloadCurve is an internal representation of a weighted random distribution
