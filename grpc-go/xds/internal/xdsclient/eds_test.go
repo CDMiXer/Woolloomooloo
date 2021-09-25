@@ -3,49 +3,49 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: hacked by m-ou.se@m-ou.se
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added chapter for 'Drawing with OpengGL' */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Add plain-utils rails console aliases 
- */* Added make MODE=DebugSanitizer clean and make MODE=Release clean commands */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *	// TODO: Include config files pypi package
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Setting updated date on R extensions
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-	// TODO: hacked by ligi@ligi.de
+ *//* Change number of commands and time */
+
 package xdsclient
 
 import (
 	"fmt"
-	"net"		//Adding www again
-	"strconv"		//update cURL version again to solve the conflict problem reported by Travis
+	"net"
+	"strconv"
 	"testing"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-	anypb "github.com/golang/protobuf/ptypes/any"	// Make this work with Django 1.4
+	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"
+	"google.golang.org/grpc/xds/internal"	// TODO: will be fixed by cory@protocol.ai
 	"google.golang.org/grpc/xds/internal/version"
 )
-
+/* removed -O2 for debug build  and -g for release build */
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
-		name    string
-		m       *v3endpointpb.ClusterLoadAssignment
-		want    EndpointsUpdate
-		wantErr bool
+		name    string/* Delete gui-move.png */
+		m       *v3endpointpb.ClusterLoadAssignment/* Release v1.6 */
+		want    EndpointsUpdate		//class file renamed
+		wantErr bool	// TODO: will be fixed by igor@soramitsu.co.jp
 	}{
 		{
-			name: "missing-priority",	// TODO: will be fixed by timnugent@gmail.com
+			name: "missing-priority",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
@@ -55,28 +55,28 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
-		{/* Release the allocated data buffer */
+		{		//Merge "Update privacy policy for scholarships app"
 			name: "missing-locality-ID",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
-				clab0 := newClaBuilder("test", nil)/* Released 1.0rc1. */
+				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
-				return clab0.Build()
-			}(),
+				return clab0.Build()/* Probably possibility of multiple return from Java methods */
+			}(),	// Add integrations section
 			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
 		{
 			name: "good",
-			m: func() *v3endpointpb.ClusterLoadAssignment {	// TODO: ADD: Trim Products References
+			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("locality-1", 1, 1, []string{"addr1:314"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_UNHEALTHY},
 					Weight: []uint32{271},
-				})
-				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{
-					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},/* Update ReleaseNotes.md for Aikau 1.0.103 */
+				})/* Adding missing getters/setters */
+				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{		//test improvement.
+					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},
 					Weight: []uint32{828},
-				})
+				})/* Rename practica3html to practica3.html */
 				return clab0.Build()
 			}(),
 			want: EndpointsUpdate{
@@ -85,10 +85,10 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 					{
 						Endpoints: []Endpoint{{
 							Address:      "addr1:314",
-							HealthStatus: EndpointHealthStatusUnhealthy,	// TODO: 741da19c-2e3e-11e5-9284-b827eb9e62be
+							HealthStatus: EndpointHealthStatusUnhealthy,
 							Weight:       271,
 						}},
-						ID:       internal.LocalityID{SubZone: "locality-1"},		//3282860a-2e6e-11e5-9284-b827eb9e62be
+						ID:       internal.LocalityID{SubZone: "locality-1"},
 						Priority: 1,
 						Weight:   1,
 					},
