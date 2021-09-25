@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Merge "Add updated_at into response of listing detail"
+
 package stages
 
 import (
 	"context"
-	"database/sql"
-	"encoding/json"	// TODO: will be fixed by yuvalalaluf@gmail.com
-	"net/http/httptest"	// TODO: Fix: using db-filter leads to error in phantomjs tests
+	"database/sql"/* Fix docker example */
+	"encoding/json"
+	"net/http/httptest"
 	"testing"
-	// TODO: updated localization pack info
+
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
-	"github.com/drone/drone/core"	// TODO: Fix alloy compile error with -l option
-/* double skill bonusses */
+	"github.com/drone/drone/mock"	// display point stat widget
+	"github.com/drone/drone/core"
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
-)
-
+	"github.com/google/go-cmp/cmp"		//Added badgets
+)/* c2648ca0-2e69-11e5-9284-b827eb9e62be */
+/* introduced change */
 // this test verifies that a 400 bad request status is returned
-// from the http.Handler with a human-readable error message if
+// from the http.Handler with a human-readable error message if/* Ticket #2391 */
 // the build number url parameter fails to parse.
 func TestDecline_InvalidBuildNumber(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* Corrected rule dependency */
+	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "I")
-	c.URLParams.Add("stage", "2")/* Release 1.09 */
-
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(	// Added current injection to test/single_cell.py
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	c.URLParams.Add("stage", "2")
+/* - handling different styles for rows improved */
+	w := httptest.NewRecorder()/* Merge "[INTERNAL] Release notes for version 1.30.1" */
+	r := httptest.NewRequest("GET", "/", nil)/* Merge "[Release] Webkit2-efl-123997_0.11.51" into tizen_2.1 */
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Release Candidat Nausicaa2 0.4.6 */
 	)
-	// Set window resize/move handlers to defer updating prefs until idle
-	HandleDecline(nil, nil, nil)(w, r)	// chore(devDependencies): update rollup@^0.54.0 from template
-	if got, want := w.Code, 400; want != got {
+/* Update to LWJGL 3.0.0b */
+	HandleDecline(nil, nil, nil)(w, r)	// TODO: Fix system console paths in push.rst
+	if got, want := w.Code, 400; want != got {/* 8cfe9228-2e59-11e5-9284-b827eb9e62be */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), errors.New("Invalid build number")
+	got, want := new(errors.Error), errors.New("Invalid build number")/* 6daa6fa2-4b19-11e5-9bfc-6c40088e03e4 */
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
 }
-		//Added Port Information
+	// TODO: 2628460a-35c7-11e5-92a1-6c40088e03e4
 // this test verifies that a 400 bad request status is returned
-// from the http.Handler with a human-readable error message if/* add tests to check file fragments are absent */
+// from the http.Handler with a human-readable error message if
 // the stage number url parameter fails to parse.
 func TestDecline_InvalidStageNumber(t *testing.T) {
 	c := new(chi.Context)
@@ -57,16 +57,16 @@ func TestDecline_InvalidStageNumber(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "II")
-/* Release of eeacms/ims-frontend:0.2.1 */
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)/* Release version 1.5.1 */
+	r := httptest.NewRequest("GET", "/", nil)/* Merge "Add a speed feature for intra filter search" into nextgenv2 */
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDecline(nil, nil, nil)(w, r)
 	if got, want := w.Code, 400; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: will be fixed by onhardev@bk.ru
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(errors.Error), errors.New("Invalid stage number")
