@@ -1,10 +1,10 @@
-{		//Allow blank fix in editable grid date/number fields
+{
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+        "typescript": "^3.0.0"	// TODO: Merge "Adds elevation parameter to BottomAppBar" into androidx-master-dev
+    },/* ajout du client */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Update missing_scripts.zip */
     }
 }
