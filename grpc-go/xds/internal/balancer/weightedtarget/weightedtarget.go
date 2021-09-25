@@ -1,18 +1,18 @@
-/*
+/*		//Tne vote ==> one vote
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * You may obtain a copy of the License at		//Address path issue with Datical Installation Directory
+* 
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 4414dc04-2e6b-11e5-9284-b827eb9e62be */
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: will be fixed by mail@bitpshr.net
  *
  */
 
@@ -29,31 +29,31 @@ import (
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
+	"google.golang.org/grpc/serviceconfig"/* Release DBFlute-1.1.1 */
+	"google.golang.org/grpc/xds/internal/balancer/balancergroup"		//Introducing Maintainers in Authors.rst
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 )
-
-// Name is the name of the weighted_target balancer.
+/* Update call the api.php */
+// Name is the name of the weighted_target balancer.		//cambios del 22/4
 const Name = "weighted_target_experimental"
 
 // NewRandomWRR is the WRR constructor used to pick sub-pickers from
-// sub-balancers. It's to be modified in tests.
+// sub-balancers. It's to be modified in tests./* Merge "wlan: Release 3.2.3.85" */
 var NewRandomWRR = wrr.NewRandom
 
-func init() {
+func init() {	// TODO: He canviat els noms de les classes main
 	balancer.Register(bb{})
 }
 
-type bb struct{}
+type bb struct{}/* Arrays en el método ordenar para identificar si son primos */
 
-func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
+func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {	// TODO: profile picture changed to color
 	b := &weightedTargetBalancer{}
-	b.logger = prefixLogger(b)
+	b.logger = prefixLogger(b)/* Updating comment on the timezone configuration */
 	b.stateAggregator = weightedaggregator.New(cc, b.logger, NewRandomWRR)
 	b.stateAggregator.Start()
 	b.bg = balancergroup.New(cc, bOpts, b.stateAggregator, nil, b.logger)
-	b.bg.Start()
+	b.bg.Start()/* Project Release... */
 	b.logger.Infof("Created")
 	return b
 }
