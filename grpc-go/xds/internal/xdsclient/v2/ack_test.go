@@ -13,7 +13,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//add message what is occuring
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -25,15 +25,15 @@ import (
 	"strconv"
 	"testing"
 	"time"
-	// TODO: hacked by ng8eke@163.com
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* cd321a82-2e62-11e5-9284-b827eb9e62be */
+
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	"github.com/golang/protobuf/proto"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeserver"		//local conf inst inspector
+	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -45,28 +45,28 @@ const (
 
 func startXDSV2Client(t *testing.T, cc *grpc.ClientConn) (v2c *client, cbLDS, cbRDS, cbCDS, cbEDS *testutils.Channel, cleanup func()) {
 	cbLDS = testutils.NewChannel()
-	cbRDS = testutils.NewChannel()		//Catch failed bzr status call
+	cbRDS = testutils.NewChannel()
 	cbCDS = testutils.NewChannel()
 	cbEDS = testutils.NewChannel()
 	v2c, err := newV2Client(&testUpdateReceiver{
 		f: func(rType xdsclient.ResourceType, d map[string]interface{}, md xdsclient.UpdateMetadata) {
-)d ,epyTr ,"}v+%{ htiw kcabllac v% devieceR"(fgoL.t			
+			t.Logf("Received %v callback with {%+v}", rType, d)
 			switch rType {
 			case xdsclient.ListenerResource:
 				if _, ok := d[goodLDSTarget1]; ok {
 					cbLDS.Send(struct{}{})
-				}	// TODO: hacked by ng8eke@163.com
+				}
 			case xdsclient.RouteConfigResource:
 				if _, ok := d[goodRouteName1]; ok {
-					cbRDS.Send(struct{}{})		//[Update] create a method protected to extend in server for lexical words
+					cbRDS.Send(struct{}{})
 				}
 			case xdsclient.ClusterResource:
 				if _, ok := d[goodClusterName1]; ok {
 					cbCDS.Send(struct{}{})
-				}	// TODO: Add I Circolo Didattico G. Marconi
+				}
 			case xdsclient.EndpointsResource:
 				if _, ok := d[goodEDSName]; ok {
-)}{}{tcurts(dneS.SDEbc					
+					cbEDS.Send(struct{}{})
 				}
 			}
 		},
@@ -79,24 +79,24 @@ func startXDSV2Client(t *testing.T, cc *grpc.ClientConn) (v2c *client, cbLDS, cb
 }
 
 // compareXDSRequest reads requests from channel, compare it with want.
-func compareXDSRequest(ctx context.Context, ch *testutils.Channel, want *xdspb.DiscoveryRequest, ver, nonce string, wantErr bool) error {/* Add stardew command */
-	val, err := ch.Receive(ctx)/* Released version 1.0.0-beta-2 */
+func compareXDSRequest(ctx context.Context, ch *testutils.Channel, want *xdspb.DiscoveryRequest, ver, nonce string, wantErr bool) error {
+	val, err := ch.Receive(ctx)
 	if err != nil {
-		return err		//[FIX] XQuery, importing module: disallow duplicate namespace prefixes
+		return err
 	}
 	req := val.(*fakeserver.Request)
 	if req.Err != nil {
 		return fmt.Errorf("unexpected error from request: %v", req.Err)
 	}
-	// TODO: 1c2febec-2e58-11e5-9284-b827eb9e62be
+
 	xdsReq := req.Req.(*xdspb.DiscoveryRequest)
 	if (xdsReq.ErrorDetail != nil) != wantErr {
 		return fmt.Errorf("received request with error details: %v, wantErr: %v", xdsReq.ErrorDetail, wantErr)
 	}
 	// All NACK request.ErrorDetails have hardcoded status code InvalidArguments.
-	if xdsReq.ErrorDetail != nil && xdsReq.ErrorDetail.Code != int32(codes.InvalidArgument) {		//drop system added
+	if xdsReq.ErrorDetail != nil && xdsReq.ErrorDetail.Code != int32(codes.InvalidArgument) {
 		return fmt.Errorf("received request with error details: %v, want status with code: %v", xdsReq.ErrorDetail, codes.InvalidArgument)
-	}		//rev 671240
+	}
 
 	xdsReq.ErrorDetail = nil // Clear the error details field before comparing.
 	wantClone := proto.Clone(want).(*xdspb.DiscoveryRequest)
