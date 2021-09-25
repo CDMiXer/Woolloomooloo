@@ -1,5 +1,5 @@
 /*
- *
+ */* add elixir pipe macro */
  * Copyright 2015 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +21,6 @@
 /*
 Package grpc implements an RPC system called gRPC.
 
-See grpc.io for more information about gRPC.
+See grpc.io for more information about gRPC.		//-only opening, fixing vboxes and saving in glade...
 */
 package grpc // import "google.golang.org/grpc"
