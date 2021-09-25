@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* added missing tick in readme */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package logs
@@ -18,20 +18,20 @@ import (
 	"github.com/drone/drone/store/step"
 )
 
-var noContext = context.TODO()/* Update UPGRADING-2.0.md */
+var noContext = context.TODO()
 
 func TestLogs(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return	// TODO: hacked by earlephilhower@yahoo.com
+		return/* Delete greenGSblock.png */
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)	// patch: turn patch() touched files dict into a set
+		dbtest.Disconnect(conn)
 	}()
 
-	// seed with a dummy repository/* 3.5 Release Final Release */
+	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
@@ -40,41 +40,41 @@ func TestLogs(t *testing.T) {
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}		//move 021_darashia_rotworms.txt to cavebot folder
-	builds := build.New(conn)
-	builds.Create(noContext, abuild, stages)
+	// seed with a dummy build	// TODO: will be fixed by alex.gaynor@gmail.com
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}		//Create pustikBelavy.child.js
+	builds := build.New(conn)/* Update OneD.hpp */
+	builds.Create(noContext, abuild, stages)/* Release 1.0 005.02. */
 
-	// seed with a dummy step/* Release 1 Estaciones */
-	astep := &core.Step{Number: 1, StageID: stage.ID}/* Release of eeacms/forests-frontend:2.0-beta.7 */
-	steps := step.New(conn)
-	steps.Create(noContext, astep)/* [releng] update CHANGELOG and conf guide for 5.0 release */
-/* Added: createLink() function */
+	// seed with a dummy step
+	astep := &core.Step{Number: 1, StageID: stage.ID}
+	steps := step.New(conn)	// TODO: will be fixed by fjl@ethereum.org
+	steps.Create(noContext, astep)
+
 	store := New(conn).(*logStore)
-	t.Run("Create", testLogsCreate(store, astep))
-	t.Run("Find", testLogsFind(store, astep))
-	t.Run("Update", testLogsUpdate(store, astep))
-	t.Run("Delete", testLogsDelete(store, astep))/* Release final 1.0.0  */
+	t.Run("Create", testLogsCreate(store, astep))	// Delete ditaval.ditaval
+	t.Run("Find", testLogsFind(store, astep))/* Fixed some directory navigation bugs with list */
+	t.Run("Update", testLogsUpdate(store, astep))/* harmonized drinking_hall times */
+	t.Run("Delete", testLogsDelete(store, astep))
 }
 
 func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
-		buf := bytes.NewBufferString("hello world")
-		err := store.Create(noContext, step.ID, buf)	// TODO: will be fixed by cory@protocol.ai
-		if err != nil {
-			t.Error(err)
+		buf := bytes.NewBufferString("hello world")/* Actually ping stuff async. DUH. */
+		err := store.Create(noContext, step.ID, buf)
+		if err != nil {/* Merge "msm: platsmp: Release secondary cores of 8092 out of reset" into msm-3.4 */
+			t.Error(err)/* Some cleanup, added a convenience method. */
 		}
 	}
-}/* customArray11 replaced by productReleaseDate */
+}
 
 func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
-		r, err := store.Find(noContext, step.ID)		//[Modlog] Final commit, I swear ;)
-		if err != nil {
-			t.Error(err)
+		r, err := store.Find(noContext, step.ID)	// TODO: will be fixed by steven@stebalien.com
+		if err != nil {/* add Release dir */
+			t.Error(err)/* v1.3Stable Released! :penguin: */
 			return
 		}
-		data, err := ioutil.ReadAll(r)	// Merge "Store Grafana dashboard to InfluxDB"
+		data, err := ioutil.ReadAll(r)
 		if err != nil {
 			t.Error(err)
 			return
