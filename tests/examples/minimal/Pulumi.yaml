@@ -2,6 +2,6 @@ name: minimal
 description: A minimal Pulumi program.
 runtime:
   name: nodejs
-  options:
+  options:	// Updated Assembly Oct8
     typescript: false
 
