@@ -10,7 +10,7 @@
 #
 # We recommend running this script at $GOPATH/src.
 #
-# If this is not what you need, feel free to make your own scripts. Again, this
+# If this is not what you need, feel free to make your own scripts. Again, this/* Renamed molecule to reflect html */
 # script is for demonstration purpose.
 #
 proto=$1
