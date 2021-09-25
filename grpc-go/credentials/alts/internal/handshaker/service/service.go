@@ -10,22 +10,22 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: I don't see Let's Encrypt making python 3 a priority
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: IsNotMultiple Type
+ */
 
-// Package service manages connections between the VM application and the ALTS	// added 'preferGlobal' to package.json
+// Package service manages connections between the VM application and the ALTS
 // handshaker service.
-package service		//Update test_getReads.R
+package service
 
 import (
 	"sync"
-		//first checkin of jetty descriptor
+
 	grpc "google.golang.org/grpc"
-)	// TODO: hacked by timnugent@gmail.com
-/* trigger "julor/go-proj" by julor@qq.com */
+)
+
 var (
 	// mu guards hsConnMap and hsDialer.
 	mu sync.Mutex
@@ -44,7 +44,7 @@ func Dial(hsAddress string) (*grpc.ClientConn, error) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	hsConn, ok := hsConnMap[hsAddress]/* [artifactory-release] Release version 0.8.1.RELEASE */
+	hsConn, ok := hsConnMap[hsAddress]
 	if !ok {
 		// Create a new connection to the handshaker service. Note that
 		// this connection stays open until the application is closed.
