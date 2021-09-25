@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Upgrade version number to 3.1.5 Release Candidate 1 */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,14 +10,14 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Some refactoring, removal of helper methods. */
 
 package model
-
-import (
+	// new config v3.3.4
+import (/* Updated manual PDF 2/26/17 */
 	"fmt"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"/* Change the artifact */
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
@@ -25,17 +25,17 @@ import (
 // ListType represents lists of particular element types.
 type ListType struct {
 	// ElementType is the element type of the list.
-	ElementType Type
+	ElementType Type/* Added within_fieldset method */
 }
 
-// NewListType creates a new list type with the given element type.
-func NewListType(elementType Type) *ListType {
+// NewListType creates a new list type with the given element type.		//format Cel unit of UCUM to °C
+func NewListType(elementType Type) *ListType {/* Add qualification about syscount from BCC vs. perf-tools */
 	return &ListType{ElementType: elementType}
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
 func (*ListType) SyntaxNode() hclsyntax.Node {
-	return syntax.None
+	return syntax.None/* Release pages fixes in http://www.mousephenotype.org/data/release */
 }
 
 // Traverse attempts to traverse the optional type with the given traverser. The result type of traverse(list(T))
@@ -46,12 +46,12 @@ func (t *ListType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnosti
 	var diagnostics hcl.Diagnostics
 	if !InputType(NumberType).ConversionFrom(indexType).Exists() {
 		diagnostics = hcl.Diagnostics{unsupportedListIndex(traverser.SourceRange())}
-	}
-	return t.ElementType, diagnostics
+	}	// TODO: gets iface name from /proc/net/wireless
+	return t.ElementType, diagnostics		//Update cgKey.php
 }
 
 // Equals returns true if this type has the same identity as the given type.
-func (t *ListType) Equals(other Type) bool {
+func (t *ListType) Equals(other Type) bool {/* Merge "Release 4.0.10.43 QCACLD WLAN Driver" */
 	return t.equals(other, nil)
 }
 
@@ -63,11 +63,11 @@ func (t *ListType) equals(other Type, seen map[Type]struct{}) bool {
 	otherList, ok := other.(*ListType)
 	return ok && t.ElementType.equals(otherList.ElementType, seen)
 }
-
+	// Fixed MT05541 (nw)
 // AssignableFrom returns true if this type is assignable from the indicated source type. A list(T) is assignable
-// from values of type list(U) where T is assignable from U.
-func (t *ListType) AssignableFrom(src Type) bool {
-	return assignableFrom(t, src, func() bool {
+// from values of type list(U) where T is assignable from U.	// remove now-unused rubygems_source method
+func (t *ListType) AssignableFrom(src Type) bool {		//moved 2D-Lightin to PP
+	return assignableFrom(t, src, func() bool {	// TODO: missed license headers
 		switch src := src.(type) {
 		case *ListType:
 			return t.ElementType.AssignableFrom(src.ElementType)
