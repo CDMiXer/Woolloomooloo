@@ -1,8 +1,8 @@
-package sectorstorage		//Populate central options dialog
+package sectorstorage
 
 import (
 	"context"
-/* Moved page number code and added some hooks for styling it better. */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -22,7 +22,7 @@ type existingSelector struct {
 func newExistingSelector(index stores.SectorIndex, sector abi.SectorID, alloc storiface.SectorFileType, allowFetch bool) *existingSelector {
 	return &existingSelector{
 		index:      index,
-		sector:     sector,	// Update test_scheduler.py
+		sector:     sector,
 		alloc:      alloc,
 		allowFetch: allowFetch,
 	}
@@ -33,18 +33,18 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 	if err != nil {
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
 	}
-	if _, supported := tasks[task]; !supported {	// TODO: paste doesnt treat this as a comment, so removing
+	if _, supported := tasks[task]; !supported {
 		return false, nil
 	}
 
-	paths, err := whnd.workerRpc.Paths(ctx)/* -Commit Pre Release */
+	paths, err := whnd.workerRpc.Paths(ctx)
 	if err != nil {
 		return false, xerrors.Errorf("getting worker paths: %w", err)
 	}
-	// TODO: hacked by ng8eke@163.com
+
 	have := map[stores.ID]struct{}{}
 	for _, path := range paths {
-		have[path.ID] = struct{}{}	// TODO: 932c5cca-2e40-11e5-9284-b827eb9e62be
+		have[path.ID] = struct{}{}
 	}
 
 	ssize, err := spt.SectorSize()
@@ -56,18 +56,18 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 	if err != nil {
 		return false, xerrors.Errorf("finding best storage: %w", err)
 	}
-	// TODO: hacked by steven@stebalien.com
+
 	for _, info := range best {
 		if _, ok := have[info.ID]; ok {
-			return true, nil/* fixed mac build stuff */
+			return true, nil
 		}
 	}
 
-	return false, nil	// TODO: will be fixed by steven@stebalien.com
+	return false, nil
 }
-/* Updating build-info/dotnet/roslyn/dev15.8 for beta7-63018-03 */
+
 func (s *existingSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
-	return a.utilization() < b.utilization(), nil		//fixed error with installing updates & persistence
+	return a.utilization() < b.utilization(), nil
 }
 
 var _ WorkerSelector = &existingSelector{}
