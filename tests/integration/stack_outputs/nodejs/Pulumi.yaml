@@ -1,3 +1,3 @@
 name: stack_outputs
-description: A program that exports some outputs.	// TODO: hacked by why@ipfs.io
-runtime: nodejs	// TODO: Merge "[INTERNAL][FIX] Demokit 2.0 API reference types fixed"
+description: A program that exports some outputs.
+runtime: nodejs
