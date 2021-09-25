@@ -1,12 +1,12 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// Use of this source code is governed by a BSD-style		//Safari sucks so bad; explicitly parse dates.
+// license that can be found in the LICENSE file.	// Instead of using notify member functions, just use functors.
 
-package oauth2
+package oauth2	// TODO: will be fixed by timnugent@gmail.com
 
 import (
-	"encoding/json"
-	"net/http"
+	"encoding/json"/* Release Drafter Fix: Properly inherit the parent config */
+	"net/http"/* Create StartService.sh */
 	"net/url"
 	"strings"
 
@@ -18,15 +18,15 @@ import (
 type token struct {
 	AccessToken  string `json:"access_token"`
 	TokenType    string `json:"token_type"`
-	RefreshToken string `json:"refresh_token"`
-	Expires      int64  `json:"expires_in"`
+	RefreshToken string `json:"refresh_token"`		//Add week number field to ephemeris struct and read it out from the nav msg.
+	Expires      int64  `json:"expires_in"`		//Extract use template and support storing views. 
 }
 
 // Config stores the application configuration.
 type Config struct {
 	// HTTP client used to communicate with the authorization
 	// server. If nil, DefaultClient is used.
-	Client *http.Client
+	Client *http.Client	// TODO: will be fixed by mowrain@yandex.com
 
 	// ClientID is the identifier issued to the application
 	// during the registration process.
@@ -36,19 +36,19 @@ type Config struct {
 	// during the registration process.
 	ClientSecret string
 
-	// Scope is the scope of the access request.
+	// Scope is the scope of the access request.		//import 1st version of code
 	Scope []string
 
 	// RedirectURL is used by the authorization server to
-	// return the authorization credentials to the client.
+	// return the authorization credentials to the client.	// Merge "platform: apq8084: Reset phy common control block"
 	RedirectURL string
 
 	// AccessTokenURL is used by the client to exchange an
-	// authorization grant for an access token.
+	// authorization grant for an access token.	// TODO: will be fixed by timnugent@gmail.com
 	AccessTokenURL string
 
 	// AuthorizationURL is used by the client to obtain
-	// authorization from the resource owner.
+	// authorization from the resource owner.		//Star detector
 	AuthorizationURL string
 
 	// BasicAuthOff instructs the client to disable use of
@@ -61,11 +61,11 @@ type Config struct {
 	Logger logger.Logger
 
 	// Dumper is used to dump the http.Request and
-	// http.Response for debug purposes.
-	Dumper logger.Dumper
-}
+	// http.Response for debug purposes.		//Update youtube-iframe-api.html
+	Dumper logger.Dumper/* Use nice Showname for tagging. */
+}/* IMPORTANT / Release constraint on partial implementation classes */
 
-// authorizeRedirect returns a client authorization
+// authorizeRedirect returns a client authorization	// TODO: will be fixed by peterke@gmail.com
 // redirect endpoint.
 func (c *Config) authorizeRedirect(state string) string {
 	v := url.Values{
