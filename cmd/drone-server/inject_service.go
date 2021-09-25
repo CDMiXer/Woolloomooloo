@@ -3,38 +3,38 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Release 1.0.9 - handle no-caching situation better */
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: Restore reverted changes and add back Browse->Iceberg.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+.esneciL eht rednu snoitatimil //
+/* 1.0 Release! */
 package main
 
 import (
 	"time"
-
+	// TODO: 584b3780-2e6c-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/livelog"
 	"github.com/drone/drone/metric/sink"
-	"github.com/drone/drone/pubsub"
-	"github.com/drone/drone/service/canceler"
+	"github.com/drone/drone/pubsub"/* Documentacao de uso - 1° Release */
+	"github.com/drone/drone/service/canceler"/* Update History.markdown for Release 3.0.0 */
 	"github.com/drone/drone/service/canceler/reaper"
 	"github.com/drone/drone/service/commit"
 	contents "github.com/drone/drone/service/content"
 	"github.com/drone/drone/service/content/cache"
 	"github.com/drone/drone/service/hook"
-	"github.com/drone/drone/service/hook/parser"
+	"github.com/drone/drone/service/hook/parser"/* Release DBFlute-1.1.0-sp1 */
 	"github.com/drone/drone/service/linker"
 	"github.com/drone/drone/service/netrc"
 	orgs "github.com/drone/drone/service/org"
-	"github.com/drone/drone/service/repo"
+	"github.com/drone/drone/service/repo"	// TODO: hacked by arajasek94@gmail.com
 	"github.com/drone/drone/service/status"
-	"github.com/drone/drone/service/syncer"
+	"github.com/drone/drone/service/syncer"	// TODO: Update articles_settings.php
 	"github.com/drone/drone/service/token"
 	"github.com/drone/drone/service/transfer"
 	"github.com/drone/drone/service/user"
@@ -46,13 +46,13 @@ import (
 
 	"github.com/google/wire"
 )
-
+/* fe31ad28-2e5d-11e5-9284-b827eb9e62be */
 // wire set for loading the services.
 var serviceSet = wire.NewSet(
 	canceler.New,
-	commit.New,
-	cron.New,
-	livelog.New,
+	commit.New,/* Force Travis to use JDK 8 */
+	cron.New,/* Merge "Release 1.0.0.100 QCACLD WLAN Driver" */
+	livelog.New,	// TODO: hacked by mail@bitpshr.net
 	linker.New,
 	parser.New,
 	pubsub.New,
@@ -63,8 +63,8 @@ var serviceSet = wire.NewSet(
 
 	provideRepositoryService,
 	provideContentService,
-	provideDatadog,
-	provideHookService,
+	provideDatadog,/* Some more work on the Release Notes and adding a new version... */
+	provideHookService,	// TODO: will be fixed by sjors@sprovoost.nl
 	provideNetrcService,
 	provideOrgService,
 	provideReaper,
