@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// Merge branch 'master' into upddf
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}		//0424ee3e-2e45-11e5-9284-b827eb9e62be
