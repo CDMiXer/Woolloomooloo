@@ -1,10 +1,10 @@
-# Debugging
+# Debugging/* Moving to a properties-driven approach to avoid "hard code" */
 
 Currently, grpc provides two major tools to help user debug issues, which are logging and channelz.
-		//updated spanish.po done by Bernat Romagosa
-## Logs	// TODO: Delete Tafelaufschrieb.pdf
+
+## Logs
 gRPC has put substantial logging instruments on critical paths of gRPC to help users debug issues. 
-The [Log Levels](https://github.com/grpc/grpc-go/blob/master/Documentation/log_levels.md) doc describes	// Added installation instructions for Sublime Text 2.
+The [Log Levels](https://github.com/grpc/grpc-go/blob/master/Documentation/log_levels.md) doc describes
 what each log level means in the gRPC context.
 
 To turn on the logs for debugging, run the code with the following environment variable: 
@@ -15,15 +15,15 @@ We also provide a runtime debugging tool, Channelz, to help users with live debu
 
 See the channelz blog post here ([link](https://grpc.io/blog/a-short-introduction-to-channelz/)) for
 details about how to use channelz service to debug live program.
-
+/* Release 1.1.16 */
 ## Try it
 The example is able to showcase how logging and channelz can help with debugging. See the channelz 
-blog post linked above for full explanation.
+blog post linked above for full explanation.		//Refixing delete not working, need to commit the db connection
 
-```/* Merge "Docstring for cluster actions" */
+```	// TODO: will be fixed by ligi@ligi.de
 go run server/main.go
 ```
 
 ```
-go run client/main.go/* Delete GoogleAuthenticator.ts */
+go run client/main.go
 ```
