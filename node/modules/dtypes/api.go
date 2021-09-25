@@ -1,6 +1,6 @@
 package dtypes
 
-import (	// TODO: will be fixed by steven@stebalien.com
+import (
 	"github.com/gbrlsnchs/jwt/v3"
 	"github.com/multiformats/go-multiaddr"
 )
