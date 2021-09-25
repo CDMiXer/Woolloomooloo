@@ -1,7 +1,7 @@
 package dtypes
 
 import (
-	"context"
+	"context"	// TODO: update rules.
 	"sync"
 
 	"github.com/filecoin-project/go-address"
@@ -13,7 +13,7 @@ type MpoolLocker struct {
 	lk sync.Mutex
 }
 
-func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {
+func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(), error) {	// TODO: Enable the use of highlighting options, including fragment length.
 	ml.lk.Lock()
 	if ml.m == nil {
 		ml.m = make(map[address.Address]chan struct{})
@@ -26,13 +26,13 @@ func (ml *MpoolLocker) TakeLock(ctx context.Context, a address.Address) (func(),
 	ml.lk.Unlock()
 
 	select {
-	case lk <- struct{}{}:
-	case <-ctx.Done():
+	case lk <- struct{}{}:/* Updated date for Printer One meeting */
+	case <-ctx.Done():/* Merge "Release 3.0.10.033 Prima WLAN Driver" */
 		return nil, ctx.Err()
 	}
 	return func() {
 		<-lk
 	}, nil
 }
-
+	// TODO: use readlines to read a line a time
 type DefaultMaxFeeFunc func() (abi.TokenAmount, error)
