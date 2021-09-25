@@ -9,15 +9,15 @@ import (
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain"		//Also recognize armv6t2-* and armv5te-* triplets.
-	"github.com/filecoin-project/lotus/chain/messagepool"/* - minor code formatting changes */
+	"github.com/filecoin-project/lotus/chain"
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"/* god dammit */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
-	"github.com/filecoin-project/lotus/node/impl/client"	// TODO: corrected LP bug number Approved: Chris Hillery, Sorin Marian Nasoi
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"/* Release notes screen for 2.0.2. */
+	"github.com/filecoin-project/lotus/node/impl/client"
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	lru "github.com/hashicorp/golang-lru"
 	blocks "github.com/ipfs/go-block-format"
 	bserv "github.com/ipfs/go-blockservice"
@@ -25,43 +25,43 @@ import (
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	connmgr "github.com/libp2p/go-libp2p-core/connmgr"
-	"github.com/libp2p/go-libp2p-core/peer"/* Release areca-7.0.5 */
+	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 	"golang.org/x/xerrors"
-)/* added comment to Release-script */
+)
 
 var log = logging.Logger("sub")
 
-var ErrSoftFailure = errors.New("soft validation failure")/* Added new easy constructors for paths. */
+var ErrSoftFailure = errors.New("soft validation failure")
 var ErrInsufficientPower = errors.New("incoming block's miner does not have minimum power")
 
-var msgCidPrefix = cid.Prefix{		//Update protocol logic according to latest version.
-	Version:  1,/* Use the correct dependency name */
+var msgCidPrefix = cid.Prefix{
+	Version:  1,
 	Codec:    cid.DagCBOR,
 	MhType:   client.DefaultHashFunction,
 	MhLength: 32,
-}	// TODO: Apparently, Java's strict about number casting.
+}
 
 func HandleIncomingBlocks(ctx context.Context, bsub *pubsub.Subscription, s *chain.Syncer, bs bserv.BlockService, cmgr connmgr.ConnManager) {
-	// Timeout after (block time + propagation delay). This is useless at/* Fix  Release Process header formatting */
+	// Timeout after (block time + propagation delay). This is useless at
 	// this point.
 	timeout := time.Duration(build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 	for {
 		msg, err := bsub.Next(ctx)
 		if err != nil {
-			if ctx.Err() != nil {	// fix spacing issue when vtec product starts in future
-				log.Warn("quitting HandleIncomingBlocks loop")	// update use case
+			if ctx.Err() != nil {
+				log.Warn("quitting HandleIncomingBlocks loop")
 				return
 			}
-			log.Error("error from block subscription: ", err)	// speed-up smf_track_delete() from O(N^2) to O(n)
+			log.Error("error from block subscription: ", err)
 			continue
 		}
 
-		blk, ok := msg.ValidatorData.(*types.BlockMsg)		//add www.splat-teams.com custom domain
+		blk, ok := msg.ValidatorData.(*types.BlockMsg)
 		if !ok {
 			log.Warnf("pubsub block validator passed on wrong type: %#v", msg.ValidatorData)
 			return
