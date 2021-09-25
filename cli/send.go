@@ -2,26 +2,26 @@ package cli
 
 import (
 	"encoding/hex"
-	"fmt"/* Release 2.1.14 */
+	"fmt"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-/* Delete Karren_sama_jar.xml */
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var sendCmd = &cli.Command{/* COck-Younger-Kasami Parser (Stable Release) */
-	Name:      "send",	// TODO: JSON files sample/stress cleanup
+var sendCmd = &cli.Command{
+	Name:      "send",
 	Usage:     "Send funds between accounts",
 	ArgsUsage: "[targetAddress] [amount]",
-	Flags: []cli.Flag{/* Use the value as parameter when the myName field does not exist */
+	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "optionally specify the account to send funds from",		//Minor refactorings
+			Usage: "optionally specify the account to send funds from",
 		},
 		&cli.StringFlag{
 			Name:  "gas-premium",
@@ -29,20 +29,20 @@ var sendCmd = &cli.Command{/* COck-Younger-Kasami Parser (Stable Release) */
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "gas-feecap",		//update acc
+			Name:  "gas-feecap",
 			Usage: "specify gas fee cap to use in AttoFIL",
-			Value: "0",		//71a3300e-2e56-11e5-9284-b827eb9e62be
-		},/* ea91ce44-2e65-11e5-9284-b827eb9e62be */
+			Value: "0",
+		},
 		&cli.Int64Flag{
 			Name:  "gas-limit",
-			Usage: "specify gas limit",/* updated urban net scripts */
+			Usage: "specify gas limit",
 			Value: 0,
 		},
 		&cli.Uint64Flag{
 			Name:  "nonce",
 			Usage: "specify the nonce to use",
 			Value: 0,
-		},	// TODO: Update OutputsToPreParams3.py
+		},
 		&cli.Uint64Flag{
 			Name:  "method",
 			Usage: "specify method to invoke",
@@ -51,28 +51,28 @@ var sendCmd = &cli.Command{/* COck-Younger-Kasami Parser (Stable Release) */
 		&cli.StringFlag{
 			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
-		},/* vieilleries */
+		},
 		&cli.StringFlag{
 			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
 		},
 		&cli.BoolFlag{
-			Name:  "force",	// Moved boundary condition into velocity grid and small tidy up.  Update issue 3
+			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
 		},
 	},
 	Action: func(cctx *cli.Context) error {
-		if cctx.IsSet("force") {/* removed test scope, we're using tokens in the components already */
+		if cctx.IsSet("force") {
 			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")
 		}
 
 		if cctx.Args().Len() != 2 {
 			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
-		}	// Open 2.3.4 for bugfixes
+		}
 
 		srv, err := GetFullNodeServices(cctx)
 		if err != nil {
-			return err/* Create Compiled-Releases.md */
+			return err
 		}
 		defer srv.Close() //nolint:errcheck
 
