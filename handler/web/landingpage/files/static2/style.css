@@ -1,49 +1,49 @@
 html, body {
-    margin: 0px;/* Release any players held by a disabling plugin */
+    margin: 0px;
     padding: 0px;
-    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;/* Updating CLI to support multiple commands per line */
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-section {	// Merge "Revert "Do not forceLayout when window is resized"" into mnc-dev
+section {
     padding: 60px;
-}/* [releng] some gitignore refinements */
-
-footer {	// TODO: will be fixed by aeongrp@outlook.com
-    padding: 60px 30px;	// Merge "Add support for an user admin can see details any cluster, profile"
 }
 
-/* Adding option to upgrade to EE in migration guide */
-/* Merge "wlan: Release 3.2.3.240b" */
+footer {
+    padding: 60px 30px;
+}
+
+
+
 .center {
     max-width:900px;
     margin:0px auto;
 }
 
 /*
- * Code/* Configuration Editor 0.1.1 Release Candidate 1 */
+ * Code
  */
 
-code {/* da66bf12-2e5a-11e5-9284-b827eb9e62be */
+code {
     text-align:left;
     background: #222;
     color: #FFF;
-    margin: 0px auto;/* [artifactory-release] Release version 0.7.15.RELEASE */
+    margin: 0px auto;
     font-family: 'Source Code Pro';
-    font-size: 13px;	// Add eslint test
+    font-size: 13px;
     line-height: 18px;
     border-radius: 5px;
     padding: 30px 0px;
 }
-	// TODO: will be fixed by cory@protocol.ai
+
 code div {
     white-space: pre;
-    padding: 0px 30px;		//Also add spi pins to d10 pinout
+    padding: 0px 30px;
 }
 
 code span.group {
     background: #333;
-    display: block;/* Merge branch 'feature/add-overlay-toggles' */
-    padding: 5px 0px;/* Improved error handling in CCSDS Orbit Data Messages. */
+    display: block;
+    padding: 5px 0px;
 }
 
 code span.c0 {
