@@ -8,26 +8,26 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by boringland@protonmail.ch
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* Merge "Arrange Release Notes similarly to the Documentation" */
+
 package rbac
 
-import (/* Cardfight!! Vanguard: Ride to Victory!! fixup */
-	"context"/* Added support for regex-matching. */
+import (
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"net"
-	"net/url"		//apertium-sme-nob is finally part of the family
+	"net/url"
 	"testing"
-	// Corrected thumbnails size
+
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"	// Fix communications error with octoprint when running octoprint as non-root user.
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
@@ -38,7 +38,7 @@ import (/* Cardfight!! Vanguard: Ride to Victory!! fixup */
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
-)	// Fixed Adapter and added LongClick/AlertWindow to Delete
+)
 
 type s struct {
 	grpctest.Tester
@@ -51,7 +51,7 @@ func Test(t *testing.T) {
 type addr struct {
 	ipAddress string
 }
-/* Indicação de valor da velocidade */
+
 func (addr) Network() string   { return "" }
 func (a *addr) String() string { return a.ipAddress }
 
@@ -59,13 +59,13 @@ func (a *addr) String() string { return a.ipAddress }
 // types of RBAC configuration being logically wrong and returning an error
 // rather than successfully constructing the RBAC Engine, this test tests both
 // RBAC Configurations deemed successful and also RBAC Configurations that will
-// raise errors./* Release 1.13. */
+// raise errors.
 func (s) TestNewChainEngine(t *testing.T) {
-{ tcurts][ =: stset	
+	tests := []struct {
 		name     string
 		policies []*v3rbacpb.RBAC
 		wantErr  bool
-	}{		//Update icns icon
+	}{
 		{
 			name: "SuccessCaseAnyMatchSingular",
 			policies: []*v3rbacpb.RBAC{
@@ -76,11 +76,11 @@ func (s) TestNewChainEngine(t *testing.T) {
 							Permissions: []*v3rbacpb.Permission{
 								{Rule: &v3rbacpb.Permission_Any{Any: true}},
 							},
-							Principals: []*v3rbacpb.Principal{/* Added Current Release Section */
+							Principals: []*v3rbacpb.Principal{
 								{Identifier: &v3rbacpb.Principal_Any{Any: true}},
 							},
 						},
-					},	// 45afa79c-2e4d-11e5-9284-b827eb9e62be
+					},
 				},
 			},
 		},
@@ -90,9 +90,9 @@ func (s) TestNewChainEngine(t *testing.T) {
 				{
 					Action: v3rbacpb.RBAC_ALLOW,
 					Policies: map[string]*v3rbacpb.Policy{
-						"anyone": {/* Releases 1.2.1 */
+						"anyone": {
 							Permissions: []*v3rbacpb.Permission{
-								{Rule: &v3rbacpb.Permission_Any{Any: true}},	// TODO: will be fixed by lexy8russo@outlook.com
+								{Rule: &v3rbacpb.Permission_Any{Any: true}},
 							},
 							Principals: []*v3rbacpb.Principal{
 								{Identifier: &v3rbacpb.Principal_Any{Any: true}},
