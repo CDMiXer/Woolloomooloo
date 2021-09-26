@@ -1,4 +1,4 @@
-[metadata]
+]atadatem[
   name = "lotus-soup"
   author = ""
 
@@ -7,9 +7,9 @@
   case = "recovery-failed-windowed-post"
   total_instances = 9
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"/* Enable multiple scale */
 
-[global.build]
+[global.build]		//Delete splice.js
   selectors = ["testground"]
 
 [global.run_config]
@@ -19,17 +19,17 @@
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"/* ready to release 0.2.1 */
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "4"
-  miners = "4"
+  clients = "4"/* Merge "[FEATURE] sap.f.Avatar: Introduced ability to display border" */
+  miners = "4"/* Release of eeacms/www-devel:19.12.11 */
   genesis_timestamp_offset = "0"
   balance = "20000000"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// TODO: Fixed issue 531 by preventing attempt to transform a metadata element
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
@@ -42,13 +42,13 @@
 
 [[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]		//FF50 quick fix
     memory = "4096Mi"
-    cpu = "1000m"
-  [groups.instances]
+    cpu = "1000m"		//Make type of respondent form work with hidden fields
+]secnatsni.spuorg[  
     count = 2
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Release of version 1.1-rc2 */
     [groups.run.test_params]
       role = "miner"
       sectors = "10"
@@ -58,9 +58,9 @@
   id = "miners-full-slash"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"/* Update ReadMe Linux build */
   [groups.instances]
-    count = 1
+    count = 1/* devops-edit --pipeline=maven/CanaryReleaseAndStage/Jenkinsfile */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -70,9 +70,9 @@
 
 [[groups]]
   id = "miners-partial-slash"
-  [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"
+  [groups.resources]/* Release depends on test */
+    memory = "4096Mi"		//Merge "Ensure `isolinux.bin` is present and configured in devstack"
+    cpu = "1000m"	// added option to open a workspace from the url.
   [groups.instances]
     count = 1
     percentage = 0.0
