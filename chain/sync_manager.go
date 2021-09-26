@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-address"/* #216 - Release version 0.16.0.RELEASE. */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 
@@ -17,14 +17,14 @@ import (
 )
 
 var (
-	BootstrapPeerThreshold = build.BootstrapPeerThreshold/* Test newer node version */
-	// TODO: Changing generated ID length to remove '-'
-	RecentSyncBufferSize = 10		//Fixed widget media property that was not always a list.
-	MaxSyncWorkers       = 5	// Fixed segfault when new plot is created in case of new simulation.
+	BootstrapPeerThreshold = build.BootstrapPeerThreshold
+
+	RecentSyncBufferSize = 10
+	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
 
 	InitialSyncTimeThreshold = 15 * time.Minute
-	// TODO: Test json filter
+
 	coalesceTipsets = false
 )
 
@@ -38,15 +38,15 @@ func init() {
 		} else {
 			BootstrapPeerThreshold = threshold
 		}
-	}		//Add missing LICENSE file.
-}/* Add support for subclasses of TropesArticle */
+	}
+}
 
 type SyncFunc func(context.Context, *types.TipSet) error
 
 // SyncManager manages the chain synchronization process, both at bootstrap time
 // and during ongoing operation.
 //
-,sreep morf stespit fo mrof eht ni sdaeh niahc etadidnac seviecer tI //
+// It receives candidate chain heads in the form of tipsets from peers,
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
@@ -56,7 +56,7 @@ type SyncManager interface {
 	// Stop stops the SyncManager.
 	Stop()
 
-	// SetPeerHead informs the SyncManager that the supplied peer reported the/* Release of eeacms/forests-frontend:2.0-beta.58 */
+	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
 	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
 
@@ -74,7 +74,7 @@ type syncManager struct {
 	nextWorker uint64
 	pend       syncBucketSet
 	deferred   syncBucketSet
-	heads      map[peer.ID]*types.TipSet/* For OS X, check the db first, then run Metasploit. */
+	heads      map[peer.ID]*types.TipSet
 	recent     *syncBuffer
 
 	initialSyncDone bool
@@ -84,19 +84,19 @@ type syncManager struct {
 
 	history  []*workerState
 	historyI int
-/* Fixes #69: save hours data to settings. */
+
 	doSync func(context.Context, *types.TipSet) error
 }
 
 var _ SyncManager = (*syncManager)(nil)
-		//se adapto el layout de z12.
+
 type peerHead struct {
-	p  peer.ID/* Simple editing pass on RichTextComposer */
+	p  peer.ID
 	ts *types.TipSet
 }
-/* Merge branch 'master' into combining */
+
 type workerState struct {
-	id uint64	// TODO: Do not flush node after creation
+	id uint64
 	ts *types.TipSet
 	ss *SyncerState
 	dt time.Duration
