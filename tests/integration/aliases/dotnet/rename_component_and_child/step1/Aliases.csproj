@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Improve description of the test section 
 
-  <PropertyGroup>	// TODO: Optimisation: tidy solver interface initialisation code.
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Release ver 1.3.0 */
   </PropertyGroup>
 
 </Project>
