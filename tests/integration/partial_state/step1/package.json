@@ -1,10 +1,10 @@
 {
-    "name": "steps",		//5f2af384-2e66-11e5-9284-b827eb9e62be
+    "name": "steps",	// f5234fc6-2e5c-11e5-9284-b827eb9e62be
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: will be fixed by hello@brooklynzelenka.com
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Allow tracking both terms and location */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Mark map as changed after using attribute manager */
+}
