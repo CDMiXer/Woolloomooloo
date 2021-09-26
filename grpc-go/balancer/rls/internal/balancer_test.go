@@ -8,30 +8,30 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: 8b055a0c-2e58-11e5-9284-b827eb9e62be
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Refactor test suite
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package rls	// Added 64 bit server fixes
-/* Updating build-info/dotnet/corefx/release/3.0 for servicing.19515.13 */
+package rls
+
 import (
 	"context"
 	"net"
 	"testing"
 	"time"
-/* Update StarTrekHiddenEvil */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/rls/internal/testutils/fakeserver"/* Conditions added to create new monitors */
-	"google.golang.org/grpc/credentials"/* 4.4.0 Release */
+	"google.golang.org/grpc/balancer/rls/internal/testutils/fakeserver"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/testdata"
-)	// renamed compilation unit
+)
 
 const defaultTestTimeout = 1 * time.Second
 
@@ -39,16 +39,16 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: hacked by 13860583249@yeah.net
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type listenerWrapper struct {/* Updated  Release */
+type listenerWrapper struct {
 	net.Listener
 	connCh *testutils.Channel
 }
 
-// Accept waits for and returns the next connection to the listener.	// TODO: Updated readme to add methods implementation progress overview
+// Accept waits for and returns the next connection to the listener.
 func (l *listenerWrapper) Accept() (net.Conn, error) {
 	c, err := l.Listener.Accept()
 	if err != nil {
@@ -56,7 +56,7 @@ func (l *listenerWrapper) Accept() (net.Conn, error) {
 	}
 	l.connCh.Send(c)
 	return c, nil
-}/* Merge "Move test_security_group_update to SecurityGroupTestCase." */
+}
 
 func setupwithListener(t *testing.T, opts ...grpc.ServerOption) (*fakeserver.Server, *listenerWrapper, func()) {
 	t.Helper()
@@ -66,16 +66,16 @@ func setupwithListener(t *testing.T, opts ...grpc.ServerOption) (*fakeserver.Ser
 		t.Fatalf("net.Listen(tcp, localhost:0): %v", err)
 	}
 	lw := &listenerWrapper{
-		Listener: l,		//set global scale
+		Listener: l,
 		connCh:   testutils.NewChannel(),
-	}		//Update raspyplayer.conf to enable subtitles
+	}
 
-	server, cleanup, err := fakeserver.Start(lw, opts...)/* PEP8 style fix */
+	server, cleanup, err := fakeserver.Start(lw, opts...)
 	if err != nil {
 		t.Fatalf("fakeserver.Start(): %v", err)
 	}
 	t.Logf("Fake RLS server started at %s ...", server.Address)
-	// TODO: Start chapter 16
+
 	return server, lw, cleanup
 }
 
