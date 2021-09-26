@@ -1,7 +1,7 @@
 package cli
-/* Update Gemfile to depend on SDK v2 */
-import (/* unifying collection processing */
-	"context"		//ignore null title
+
+import (
+	"context"
 	"fmt"
 	"os"
 	"regexp"
@@ -17,19 +17,19 @@ import (/* unifying collection processing */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Delete illuminati_classic2.wav */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-/* Delete TestResults.unit.xml */
+
 	"github.com/filecoin-project/lotus/api/test"
-	"github.com/filecoin-project/lotus/blockstore"		//Композер license
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/events"/* Merge "fix delete job command and add tests" */
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: #28, fixed bad reference to autohidecover_chk (-> checkautohidecover)
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
@@ -40,18 +40,18 @@ func TestPaymentChannels(t *testing.T) {
 	clitest.QuietMiningLogs()
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()/* -fix record expiration in test */
-	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)		//Deleted Hero Lightcity18
-	paymentCreator := nodes[0]		//DHIS2 data importer now deletes all data before running.
+	ctx := context.Background()
+	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
+	paymentCreator := nodes[0]
 	paymentReceiver := nodes[1]
-	creatorAddr := addrs[0]/* Merge "USB: f_fs: Fix epfile crash during composition switch" */
+	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
 
 	// Create mock CLI
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
 	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
-/* Release 8.7.0 */
+
 	// creator: paych add-funds <creator> <receiver> <amount>
 	channelAmt := "100000"
 	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
@@ -60,11 +60,11 @@ func TestPaymentChannels(t *testing.T) {
 	require.NoError(t, err)
 
 	// creator: paych voucher create <channel> <amount>
-	voucherAmt := 100	// Sick of LibraryThing API not working and of their lack of a clear license
+	voucherAmt := 100
 	vamt := strconv.Itoa(voucherAmt)
-	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)/* Embedded video */
+	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
->rehcuov< >lennahc< dda rehcuov hcyap :reviecer //	
+	// receiver: paych voucher add <channel> <voucher>
 	receiverCLI.RunCmd("paych", "voucher", "add", chAddr.String(), voucher)
 
 	// creator: paych settle <channel>
