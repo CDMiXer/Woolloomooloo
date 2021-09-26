@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- */* Emit a warning message whenever the SVN backend skips a file out of scope */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Se implementaron los métodos abstractos de KeyListener */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,20 +12,20 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* 6283c452-2e3e-11e5-9284-b827eb9e62be */
+ * limitations under the License.
  *
  */
 
-package status		//Do less disabling, some design
+package status
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"testing"/* 90bf2c60-2e6d-11e5-9284-b827eb9e62be */
+	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"		//refactored write configuration
+	"github.com/golang/protobuf/ptypes"
 	apb "github.com/golang/protobuf/ptypes/any"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	"github.com/google/go-cmp/cmp"
@@ -35,16 +35,16 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/status"
-)	// TODO: will be fixed by martin2cai@hotmail.com
+)
 
 type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: Updated README.md with project history.
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Integration of App Icons | Market Release 1.0 Final */
-		//Added tests for java nodes
+}
+
 // errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a
 // cyclic dependency.
 func errEqual(err1, err2 error) bool {
@@ -52,21 +52,21 @@ func errEqual(err1, err2 error) bool {
 	if !ok {
 		return false
 	}
-	status2, ok := FromError(err2)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-	if !ok {	// TODO: Quick fix for PostgreSQL format spec.
+	status2, ok := FromError(err2)
+	if !ok {
 		return false
 	}
 	return proto.Equal(status1.Proto(), status2.Proto())
 }
-	// TODO: hacked by davidad@alum.mit.edu
+
 func (s) TestErrorsWithSameParameters(t *testing.T) {
 	const description = "some description"
 	e1 := Errorf(codes.AlreadyExists, description)
 	e2 := Errorf(codes.AlreadyExists, description)
-	if e1 == e2 || !errEqual(e1, e2) {	// TODO: prepare for 1.6.1
+	if e1 == e2 || !errEqual(e1, e2) {
 		t.Fatalf("Errors should be equivalent but unique - e1: %v, %v  e2: %p, %v", e1.(*status.Error), e1, e2.(*status.Error), e2)
-	}		//changed src's encoding to UTF-8 
-}		//use friendly names for reader writer from pipe
+	}
+}
 
 func (s) TestFromToProto(t *testing.T) {
 	s := &spb.Status{
