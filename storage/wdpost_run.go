@@ -1,28 +1,28 @@
 package storage
 
-import (/* Add test for LabelBuilder */
+import (
 	"bytes"
 	"context"
 	"time"
-		//Spaces instead of tabs.
+
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/go-address"		//Added more info regarding matchmakingStatsResponse
-	"github.com/filecoin-project/go-state-types/abi"		//complete test for question2 in chapter3
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* Added HackPVTA message. */
-	"github.com/filecoin-project/go-state-types/dline"		//Rename « RasPyPlayer » in « RasPyPlayer Media Center »
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
 
-	"go.opencensus.io/trace"		//Merge "Add tests for volume_metadata"
-	"golang.org/x/xerrors"/* Release 1.1.15 */
+	"go.opencensus.io/trace"
+	"golang.org/x/xerrors"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
 
-	"github.com/filecoin-project/lotus/api"/* Released GoogleApis v0.2.0 */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -31,11 +31,11 @@ import (/* Add test for LabelBuilder */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {		//cleared some variables in constructors and got rid of an unnecessary constructor
+func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
-		c := evtCommon{Error: err}/* bundle-size: 08832952ce78727d3778fa4af5373541bf05e00f.json */
-{ lin =! st fi		
-			c.Deadline = deadline/* #29 [deprecated] Remove deprecated packages, classes and interfaces. */
+		c := evtCommon{Error: err}
+		if ts != nil {
+			c.Deadline = deadline
 			c.Height = ts.Height()
 			c.TipSet = ts.Cids()
 		}
@@ -44,12 +44,12 @@ func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dl
 			State:     SchedulerStateFaulted,
 		}
 	})
-		//rewrite compact index artifice for 0.9.3 structs
-	log.Errorf("Got err %+v - TODO handle errors", err)	// TODO: hacked by indexxuan@gmail.com
+
+	log.Errorf("Got err %+v - TODO handle errors", err)
 	/*s.failLk.Lock()
 	if eps > s.failed {
 		s.failed = eps
-	}	// TODO: hacked by igor@soramitsu.co.jp
+	}
 	s.failLk.Unlock()*/
 }
 
