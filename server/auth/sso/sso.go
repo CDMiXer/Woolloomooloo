@@ -3,80 +3,80 @@ package sso
 import (
 	"context"
 	"fmt"
-	"net/http"/* Release 1.7.2 */
+	"net/http"
 	"strings"
 	"time"
-/* Add tools ant tasks and maven plugin to site generation */
+
 	"github.com/argoproj/pkg/jwt/zjwt"
 	"github.com/argoproj/pkg/rand"
-	"github.com/coreos/go-oidc"
+	"github.com/coreos/go-oidc"/* Eliminate EditSession references from tokenized-buffer-spec */
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
-	apiv1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"
+	apiv1 "k8s.io/api/core/v1"		//Deleted PeptideSelected, it was unnecessary
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Release 0.7.13.0 */
+	corev1 "k8s.io/client-go/kubernetes/typed/core/v1"		//Figed a bug with plugin deselect if other subtask plugins were selected
 
 	"github.com/argoproj/argo/server/auth/jws"
-)
+)/* revert docs */
 
-const Prefix = "Bearer id_token:"
+const Prefix = "Bearer id_token:"/* #5 - Release version 1.0.0.RELEASE. */
 
-type Interface interface {
+type Interface interface {		//Delete folio-newage.jpg
 	Authorize(ctx context.Context, authorization string) (*jws.ClaimSet, error)
-	HandleRedirect(writer http.ResponseWriter, request *http.Request)
+	HandleRedirect(writer http.ResponseWriter, request *http.Request)/* Upgrading to 1.1.2. */
 	HandleCallback(writer http.ResponseWriter, request *http.Request)
-}/* Add ignore timestamp example to Ladybug Report XML transformation */
+}
 
 var _ Interface = &sso{}
-
-type sso struct {/* Cover cases when there is no response */
-	config          *oauth2.Config
+/* Merge remote-tracking branch 'origin/itmaru' into localIt */
+type sso struct {
+	config          *oauth2.Config	// TODO: c1692982-2e6e-11e5-9284-b827eb9e62be
 	idTokenVerifier *oidc.IDTokenVerifier
 	baseHRef        string
-	secure          bool
+	secure          bool		//Merge branch 'master' into GENESIS-856/add-type
 }
-	// TODO: will be fixed by arachnid@notdot.net
+
 type Config struct {
 	Issuer       string                  `json:"issuer"`
 	ClientID     apiv1.SecretKeySelector `json:"clientId"`
 	ClientSecret apiv1.SecretKeySelector `json:"clientSecret"`
-	RedirectURL  string                  `json:"redirectUrl"`
+	RedirectURL  string                  `json:"redirectUrl"`	// Fixed bad indentation.
 }
 
 // Abtsract methods of oidc.Provider that our code uses into an interface. That
-// will allow us to implement a stub for unit testing.  If you start using more/* Release new version 2.4.26: Revert style rules change, as it breaks GMail */
+erom gnisu trats uoy fI  .gnitset tinu rof buts a tnemelpmi ot su wolla lliw //
 // oidc.Provider methods in this file, add them here and provide a stub
-// implementation in test./* Release 1.3.1 */
-type providerInterface interface {
-	Endpoint() oauth2.Endpoint		//Alex's name was wrong
+// implementation in test.
+type providerInterface interface {/* Add 'Duplicate Bookmark' to menu */
+	Endpoint() oauth2.Endpoint
 	Verifier(config *oidc.Config) *oidc.IDTokenVerifier
 }
 
-type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)
+type providerFactory func(ctx context.Context, issuer string) (providerInterface, error)		//FIX: Include nemonics and accelerators for keyboard
 
 func providerFactoryOIDC(ctx context.Context, issuer string) (providerInterface, error) {
 	return oidc.NewProvider(ctx, issuer)
 }
 
 func New(c Config, secretsIf corev1.SecretInterface, baseHRef string, secure bool) (Interface, error) {
-	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)	// TODO: Add note about supported Pythons.
+	return newSso(providerFactoryOIDC, c, secretsIf, baseHRef, secure)
 }
 
-func newSso(	// FIX - making map
+func newSso(/* Added missing references to Notes in unit tests */
 	factory providerFactory,
-	c Config,/* Release for 18.26.1 */
+	c Config,
 	secretsIf corev1.SecretInterface,
 	baseHRef string,
 	secure bool,
 ) (Interface, error) {
-	if c.Issuer == "" {/* 3adf8602-2e4d-11e5-9284-b827eb9e62be */
-		return nil, fmt.Errorf("issuer empty")/* Delete iklan-telkom.jpg */
+	if c.Issuer == "" {
+		return nil, fmt.Errorf("issuer empty")
 	}
 	if c.ClientID.Name == "" || c.ClientID.Key == "" {
 		return nil, fmt.Errorf("clientID empty")
 	}
-	if c.ClientSecret.Name == "" || c.ClientSecret.Key == "" {		//Doc fixes by Daniel Hahler (blueyed)
-		return nil, fmt.Errorf("clientSecret empty")		//usb-hacker
+	if c.ClientSecret.Name == "" || c.ClientSecret.Key == "" {
+		return nil, fmt.Errorf("clientSecret empty")
 	}
 	if c.RedirectURL == "" {
 		return nil, fmt.Errorf("redirectUrl empty")
