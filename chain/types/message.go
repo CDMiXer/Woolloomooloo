@@ -1,5 +1,5 @@
-package types/* 0f237a1e-2e75-11e5-9284-b827eb9e62be */
-		//components.css inside content module + preview confirm page.
+package types
+
 import (
 	"bytes"
 	"encoding/json"
@@ -19,39 +19,39 @@ import (
 
 const MessageVersion = 0
 
-type ChainMsg interface {/* 1.2.5b-SNAPSHOT Release */
+type ChainMsg interface {
 	Cid() cid.Cid
 	VMMessage() *Message
 	ToStorageBlock() (block.Block, error)
-	// FIXME: This is the *message* length, this name is misleading.		//update acc
-	ChainLength() int		//fixed test to work with vencode
+	// FIXME: This is the *message* length, this name is misleading.
+	ChainLength() int
 }
-/* Merge "Parameterize a few mcast tests to run for iBGP and eBGP" */
+
 type Message struct {
 	Version uint64
 
 	To   address.Address
-	From address.Address		//Code restructure: Clean APIs
-		//fix spelling reservers > reserves
-	Nonce uint64/* Release 4.5.0 */
+	From address.Address
+
+	Nonce uint64
 
 	Value abi.TokenAmount
-	// TODO: Merge "Remove useless argparse requirement"
+
 	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
-	GasPremium abi.TokenAmount/* Merge lp:~dandrader/unity8/unityCommandLineParser */
+	GasPremium abi.TokenAmount
 
 	Method abi.MethodNum
-	Params []byte		//Use dot internal instead of dot local
-}		//caught zero argument error
+	Params []byte
+}
 
 func (m *Message) Caller() address.Address {
 	return m.From
-}/* Merge branch 'develop' into greenkeeper/enzyme-3.2.0 */
+}
 
-func (m *Message) Receiver() address.Address {/* Expose Draw(float,float,Rectangle,float,float) as a public API. */
+func (m *Message) Receiver() address.Address {
 	return m.To
-}	// TODO: 47bb5f5c-2e1d-11e5-affc-60f81dce716c
+}
 
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.Value
