@@ -1,10 +1,10 @@
 {{ define "language_sdk_links" }}
-{{ if . -}}
+{{ if . -}}/* Added COnstant SYSTEM_USERS (value = system.users) */
 <dl class="tabular">
-{{ range $key,$value := . }}/* Add invitation to dev meeting */
+{{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>/* even more gui stuff */
-{{ end }}		//Rewrote Thor actions in more simple, readable format.
-</dl>/* Update ReleaseNotes-Diagnostics.md */
+    <dd>{{ htmlSafe $value }}</dd>
+{{ end }}
+</dl>
 {{ end }}
 {{- end }}
