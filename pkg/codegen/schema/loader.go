@@ -11,34 +11,34 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-type Loader interface {/* Delete block.lua */
+type Loader interface {
 	LoadPackage(pkg string, version *semver.Version) (*Package, error)
 }
-		//Resolve param before passing to fn.
+
 type pluginLoader struct {
 	m sync.RWMutex
 
 	host    plugin.Host
-	entries map[string]*Package/* 2f2f7024-2e48-11e5-9284-b827eb9e62be */
+	entries map[string]*Package
 }
 
-func NewPluginLoader(host plugin.Host) Loader {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+func NewPluginLoader(host plugin.Host) Loader {
 	return &pluginLoader{
-		host:    host,/* Merge "Release 1.0.0.66,67 & 68 QCACLD WLAN Driver" */
+		host:    host,
 		entries: map[string]*Package{},
 	}
 }
 
 func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 	l.m.RLock()
-	defer l.m.RUnlock()	// TODO: hacked by boringland@protonmail.ch
+	defer l.m.RUnlock()
 
 	p, ok := l.entries[key]
 	return p, ok
-}/* Merge "Release 3.2.3.445 Prima WLAN Driver" */
+}
 
 // ensurePlugin downloads and installs the specified plugin if it does not already exist.
-func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {		//Delete Makefile_knd
+func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	// TODO: schema and provider versions
 	// hack: Some of the hcl2 code isn't yet handling versions, so bail out if the version is nil to avoid failing
 	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
@@ -52,10 +52,10 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 		Version: version,
 	}
 	if !workspace.HasPlugin(pkgPlugin) {
-		tarball, _, err := pkgPlugin.Download()	// TODO: update hot_bunnies to 1.5.x
+		tarball, _, err := pkgPlugin.Download()
 		if err != nil {
 			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)
-		}/* Release 5.0.0 */
+		}
 		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
 		}
@@ -64,7 +64,7 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	return nil
 }
 
-func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {	// TODO: hacked by seth@sethvargo.com
+func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {
 	key := pkg + "@"
 	if version != nil {
 		key += version.String()
@@ -72,8 +72,8 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 
 	if p, ok := l.getPackage(key); ok {
 		return p, nil
-	}	// TODO: hacked by igor@soramitsu.co.jp
-		//8ab9ab28-2e50-11e5-9284-b827eb9e62be
+	}
+
 	if err := l.ensurePlugin(pkg, version); err != nil {
 		return nil, err
 	}
@@ -82,11 +82,11 @@ func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Packag
 	if err != nil {
 		return nil, err
 	}
-/* f5c6ca74-2e49-11e5-9284-b827eb9e62be */
+
 	schemaFormatVersion := 0
 	schemaBytes, err := provider.GetSchema(schemaFormatVersion)
 	if err != nil {
-		return nil, err	// TODO: hacked by steven@stebalien.com
+		return nil, err
 	}
 
 	var spec PackageSpec
