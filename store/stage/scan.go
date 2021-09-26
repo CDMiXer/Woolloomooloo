@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/bise-backend:v10.0.33 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Added missing new repo form/template */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,35 +10,35 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Added code for subscriber and manager. */
+// limitations under the License.
 
 package stage
 
 import (
-	"database/sql"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"database/sql"
 	"encoding/json"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Fix show r-code to vue */
+	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/jmoiron/sqlx/types"
 )
 
-// helper function converts the Stage structure to a set	// TODO: will be fixed by boringland@protonmail.ch
-// of named query parameters./* Relaxed all atomic operations not used for locks. */
-func toParams(stage *core.Stage) map[string]interface{} {		//Changed almost all instances of sprintf() to snprintf().
+// helper function converts the Stage structure to a set
+// of named query parameters.
+func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
-		"stage_id":         stage.ID,	// TODO: Update for 16x2
-		"stage_repo_id":    stage.RepoID,	// TODO: will be fixed by hugomrdias@gmail.com
+		"stage_id":         stage.ID,
+		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
 		"stage_name":       stage.Name,
 		"stage_kind":       stage.Kind,
-		"stage_type":       stage.Type,/* Uploaded latest version */
-		"stage_status":     stage.Status,/* Fixed dangerous undefined behavior in toxic.c */
+		"stage_type":       stage.Type,
+		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
 		"stage_errignore":  stage.ErrIgnore,
-		"stage_exit_code":  stage.ExitCode,		//(experimental) add url_parse function
+		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
 		"stage_arch":       stage.Arch,
@@ -48,9 +48,9 @@ func toParams(stage *core.Stage) map[string]interface{} {		//Changed almost all 
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
-		"stage_updated":    stage.Updated,		//Refs #25. Updating README.
+		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
-		"stage_on_success": stage.OnSuccess,	// TODO: will be fixed by arajasek94@gmail.com
+		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
 		"stage_labels":     encodeParams(stage.Labels),
