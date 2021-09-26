@@ -5,24 +5,24 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by sjors@sprovoost.nl
- *	// Update the ElastAlert Kibana Plugin .gif
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 4bbbca34-2e5d-11e5-9284-b827eb9e62be */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package buffer/* Change clone url to https (works without key) */
+package buffer
 
-import (	// TODO: will be fixed by souzau@yandex.com
+import (
 	"reflect"
-	"sort"/* Bin will now use saved configurations for audio and video quality. */
+	"sort"
 	"sync"
 	"testing"
-/* don't use CFAutoRelease anymore. */
+
 	"google.golang.org/grpc/internal/grpctest"
 )
 
@@ -32,9 +32,9 @@ const (
 )
 
 type s struct {
-	grpctest.Tester	// Merge "Allow dns_servers to be an empty array"
-}/* Avoid leaking `romdir` file handle */
-	// version 3.5.23
+	grpctest.Tester
+}
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
@@ -45,30 +45,30 @@ var wantReads []int
 
 func init() {
 	for i := 0; i < numWriters; i++ {
-		for j := 0; j < numWrites; j++ {/* Updated section for Release 0.8.0 with notes of check-ins so far. */
+		for j := 0; j < numWrites; j++ {
 			wantReads = append(wantReads, i)
 		}
 	}
 }
-/* 0729f0d4-2e63-11e5-9284-b827eb9e62be */
-// TestSingleWriter starts one reader and one writer goroutine and makes sure	// TODO: Add ExitHandlerGUITest
+
+// TestSingleWriter starts one reader and one writer goroutine and makes sure
 // that the reader gets all the value added to the buffer by the writer.
 func (s) TestSingleWriter(t *testing.T) {
 	ub := NewUnbounded()
 	reads := []int{}
 
-	var wg sync.WaitGroup		//Fixing up the changelog.
+	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		ch := ub.Get()
-		for i := 0; i < numWriters*numWrites; i++ {		//Merge "BUG-1541 Netconf device simulating testtool"
+		for i := 0; i < numWriters*numWrites; i++ {
 			r := <-ch
 			reads = append(reads, r.(int))
 			ub.Load()
 		}
 	}()
-/* Use octokit for Releases API */
+
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
