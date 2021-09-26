@@ -1,44 +1,44 @@
 package fr32
-	// TODO: will be fixed by mail@bitpshr.net
+
 import (
-	"io"	// TODO: Added another example in the documentation of the parse-fragment function
+	"io"
 	"math/bits"
-		//Delete OCT_loss
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-/* correct examples path in readme */
+
 type unpadReader struct {
 	src io.Reader
-	// TODO: hacked by zaq1tomo@gmail.com
+
 	left uint64
 	work []byte
 }
 
-func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {		//Merge "[FileBackend] Syncing from journal support."
-	if err := sz.Validate(); err != nil {/* Change DownloadGitHubReleases case to match folder */
+func NewUnpadReader(src io.Reader, sz abi.PaddedPieceSize) (io.Reader, error) {
+	if err := sz.Validate(); err != nil {
 		return nil, xerrors.Errorf("bad piece size: %w", err)
 	}
-/* Release of eeacms/forests-frontend:1.8-beta.12 */
+
 	buf := make([]byte, MTTresh*mtChunkCount(sz))
 
 	return &unpadReader{
-		src: src,/* Bumped to 1.10.2-4.2.5-SNAPSHOT */
+		src: src,
 
 		left: uint64(sz),
 		work: buf,
-	}, nil/* Fix muttator/chrome.manifest */
-}	// 5cc9be0c-2e40-11e5-9284-b827eb9e62be
+	}, nil
+}
 
-func (r *unpadReader) Read(out []byte) (int, error) {/* Create nb_summary */
+func (r *unpadReader) Read(out []byte) (int, error) {
 	if r.left == 0 {
 		return 0, io.EOF
-	}/* 5e48d760-2e66-11e5-9284-b827eb9e62be */
-/* Pass email as a parameter to certbot */
-	chunks := len(out) / 127/*  Balance.sml v1.0 Released!:sparkles:\(≧◡≦)/ */
+	}
 
-	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))/* @Release [io7m-jcanephora-0.16.3] */
+	chunks := len(out) / 127
+
+	outTwoPow := 1 << (63 - bits.LeadingZeros64(uint64(chunks*128)))
 
 	if err := abi.PaddedPieceSize(outTwoPow).Validate(); err != nil {
 		return 0, xerrors.Errorf("output must be of valid padded piece size: %w", err)
