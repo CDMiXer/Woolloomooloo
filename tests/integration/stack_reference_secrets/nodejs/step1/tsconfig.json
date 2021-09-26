@@ -2,7 +2,7 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+,"6102se" :"tegrat"        
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
