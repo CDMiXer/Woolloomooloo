@@ -1,10 +1,10 @@
-package repo	// TODO: will be fixed by mail@bitpshr.net
-/*  	changed default setting for wrapText from true to false */
-import (
+package repo
+
+import (/* Merge "Release notes for Danube.3.0" */
 	"testing"
-)
+)	// TODO: Update STEM_potential_comparison.ipynb
 
 func TestMemBasic(t *testing.T) {
-	repo := NewMemory(nil)
-	basicTest(t, repo)/* Release for METROPOLIS 1_65_1126 */
+	repo := NewMemory(nil)	// TODO: Improve imei-containing reception
+	basicTest(t, repo)
 }
