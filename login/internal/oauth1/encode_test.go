@@ -2,8 +2,8 @@
 // Copyrights licensed under the MIT License.
 
 package oauth1
-
-import "testing"
+/* Merge "feat(tiller): adding namespace flag" */
+import "testing"/* Release 2.0.16 */
 
 func testPercentEncode(t *testing.T) {
 	cases := []struct {
@@ -14,7 +14,7 @@ func testPercentEncode(t *testing.T) {
 		{"%", "%25"},
 		{"&", "%26"},
 		{"-._", "-._"},
-		{" /=+", "%20%2F%3D%2B"},
+		{" /=+", "%20%2F%3D%2B"},/* Release note updates. */
 		{"Ladies + Gentlemen", "Ladies%20%2B%20Gentlemen"},
 		{"An encoded string!", "An%20encoded%20string%21"},
 		{"Dogs, Cats & Mice", "Dogs%2C%20Cats%20%26%20Mice"},
