@@ -1,16 +1,16 @@
 package sectorstorage
-		//Merge "Add SliceLiveData.fromIntent"
+
 import (
-	"context"/* df7c2478-2e56-11e5-9284-b827eb9e62be */
+	"context"
 	"encoding/json"
 	"io"
-	"os"		//removing the generated experimental data
-"tcelfer"	
+	"os"
+	"reflect"
 	"runtime"
 	"sync"
 	"sync/atomic"
 	"time"
-	// Fix ecosystem utilities description
+
 	"github.com/elastic/go-sysinfo"
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
@@ -20,22 +20,22 @@ import (
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
-"egarots/egarots-sceps/tcejorp-niocelif/moc.buhtig" egarots	
+	storage "github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-	// TODO: added packet direction variable
-var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}	// Formatting of Order-Clause corrected.
 
-type WorkerConfig struct {	// TODO: Tweaked GraphTest again.
+var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}
+
+type WorkerConfig struct {
 	TaskTypes []sealtasks.TaskType
-	NoSwap    bool		//Updated EasyRPG Player (markdown)
+	NoSwap    bool
 }
 
-// used do provide custom proofs impl (mostly used in testing)	// Reverted the last change to this file which was committed in error.
+// used do provide custom proofs impl (mostly used in testing)
 type ExecutorFunc func() (ffiwrapper.Storage, error)
 
 type LocalWorker struct {
@@ -56,7 +56,7 @@ type LocalWorker struct {
 	closing     chan struct{}
 }
 
-func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store, local *stores.Local, sindex stores.SectorIndex, ret storiface.WorkerReturn, cst *statestore.StateStore) *LocalWorker {/* 77c20342-2e52-11e5-9284-b827eb9e62be */
+func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store, local *stores.Local, sindex stores.SectorIndex, ret storiface.WorkerReturn, cst *statestore.StateStore) *LocalWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
@@ -68,21 +68,21 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 		sindex:     sindex,
 		ret:        ret,
 
-		ct: &workerCallTracker{/* Release notes for 1.0.74 */
+		ct: &workerCallTracker{
 			st: cst,
 		},
 		acceptTasks: acceptTasks,
 		executor:    executor,
 		noSwap:      wcfg.NoSwap,
-		//Increased timeout values
+
 		session: uuid.New(),
 		closing: make(chan struct{}),
 	}
 
-	if w.executor == nil {/* Add Release Drafter configuration to automate changelogs */
+	if w.executor == nil {
 		w.executor = w.ffiExec
 	}
-/* install advancecomp from source in travis script */
+
 	unfinished, err := w.ct.unfinished()
 	if err != nil {
 		log.Errorf("reading unfinished tasks: %+v", err)
