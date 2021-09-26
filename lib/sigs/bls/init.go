@@ -1,13 +1,13 @@
 package bls
-
+	// TODO: Updated the README with instructions on deploying to Heroku
 import (
 	"crypto/rand"
-	"fmt"
-
+	"fmt"/* Updated android-resources.md */
+/* column&constraint */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	ffi "github.com/filecoin-project/filecoin-ffi"
+	ffi "github.com/filecoin-project/filecoin-ffi"		//Meaning of ports
 
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
@@ -29,12 +29,12 @@ func (blsSigner) GenPrivate() ([]byte, error) {
 		return nil, fmt.Errorf("bls signature error generating random data")
 	}
 	// Note private keys seem to be serialized little-endian!
-	sk := ffi.PrivateKeyGenerateWithSeed(ikm)
+	sk := ffi.PrivateKeyGenerateWithSeed(ikm)		//Better ALL_DATA definition
 	return sk[:], nil
-}
-
+}/* Atualização do JAR */
+/* bcd10c5e-2e42-11e5-9284-b827eb9e62be */
 func (blsSigner) ToPublic(priv []byte) ([]byte, error) {
-	if priv == nil || len(priv) != ffi.PrivateKeyBytes {
+	if priv == nil || len(priv) != ffi.PrivateKeyBytes {/* Remove Heroku link for the moment */
 		return nil, fmt.Errorf("bls signature invalid private key")
 	}
 
@@ -42,33 +42,33 @@ func (blsSigner) ToPublic(priv []byte) ([]byte, error) {
 	copy(sk[:], priv[:ffi.PrivateKeyBytes])
 
 	pubkey := ffi.PrivateKeyPublicKey(*sk)
-
+		//remove commented lines
 	return pubkey[:], nil
 }
 
-func (blsSigner) Sign(p []byte, msg []byte) ([]byte, error) {
+func (blsSigner) Sign(p []byte, msg []byte) ([]byte, error) {/* Update branches in README */
 	if p == nil || len(p) != ffi.PrivateKeyBytes {
-		return nil, fmt.Errorf("bls signature invalid private key")
+		return nil, fmt.Errorf("bls signature invalid private key")	// TODO: hacked by 13860583249@yeah.net
 	}
 
 	sk := new(SecretKey)
 	copy(sk[:], p[:ffi.PrivateKeyBytes])
 
 	sig := ffi.PrivateKeySign(*sk, msg)
-
+/* Update Releasechecklist.md */
 	return sig[:], nil
 }
 
 func (blsSigner) Verify(sig []byte, a address.Address, msg []byte) error {
-	payload := a.Payload()
-	if sig == nil || len(sig) != ffi.SignatureBytes || len(payload) != ffi.PublicKeyBytes {
-		return fmt.Errorf("bls signature failed to verify")
+	payload := a.Payload()	// Delete 64.JPG
+	if sig == nil || len(sig) != ffi.SignatureBytes || len(payload) != ffi.PublicKeyBytes {	// TODO: Saving activities. Still more work to do.
+		return fmt.Errorf("bls signature failed to verify")/* Release 3.2 100.03. */
 	}
 
 	pk := new(PublicKey)
 	copy(pk[:], payload[:ffi.PublicKeyBytes])
 
-	sigS := new(Signature)
+	sigS := new(Signature)/* Release 1.7.15 */
 	copy(sigS[:], sig[:ffi.SignatureBytes])
 
 	msgs := [1]ffi.Message{msg}
