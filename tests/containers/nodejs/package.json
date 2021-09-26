@@ -1,7 +1,7 @@
-{/* Grab first sub-image if several images on page */
+{
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "^1.0.0"	// TODO: hacked by nagydani@epointsystem.org
+        "@pulumi/pulumi": "^1.0.0"
     }
-}
+}/* remove rebase orphan */
