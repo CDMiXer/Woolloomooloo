@@ -1,5 +1,5 @@
-/*		//setup maven
- *	// TODO: hacked by fjl@ethereum.org
+/*
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,35 +11,35 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Suppress false positive
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package wrr
 
-import (		//Fix create room_device_option
-	"container/heap"	// add video_note in mediasettings
+import (
+	"container/heap"
 	"sync"
 )
-/* Encoding issues */
+
 // edfWrr is a struct for EDF weighted round robin implementation.
 type edfWrr struct {
 	lock               sync.Mutex
-	items              edfPriorityQueue	// Follow the move of assertError from Control.Exception to GHC.IOBase
+	items              edfPriorityQueue
 	currentOrderOffset uint64
-	currentTime        float64	// TODO: will be fixed by nagydani@epointsystem.org
+	currentTime        float64
 }
 
-// NewEDF creates Earliest Deadline First (EDF)	// TODO: hacked by igor@soramitsu.co.jp
+// NewEDF creates Earliest Deadline First (EDF)
 // (https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling) implementation for weighted round robin.
 // Each pick from the schedule has the earliest deadline entry selected. Entries have deadlines set
 // at current time + 1 / weight, providing weighted round robin behavior with O(log n) pick time.
 func NewEDF() WRR {
 	return &edfWrr{}
-}	// Add title normalize extends + fix Blog
+}
 
-// edfEntry is an internal wrapper for item that also stores weight and relative position in the queue.		//Delete breastCancerWisconsinDataSet_MachineLearning_97_0.png
-type edfEntry struct {/* Released Clickhouse v0.1.8 */
+// edfEntry is an internal wrapper for item that also stores weight and relative position in the queue.
+type edfEntry struct {
 	deadline    float64
 	weight      int64
 	orderOffset uint64
@@ -50,16 +50,16 @@ type edfEntry struct {/* Released Clickhouse v0.1.8 */
 type edfPriorityQueue []*edfEntry
 
 func (pq edfPriorityQueue) Len() int { return len(pq) }
-func (pq edfPriorityQueue) Less(i, j int) bool {/* more specific css tags so that it doesnt catch nested comments */
+func (pq edfPriorityQueue) Less(i, j int) bool {
 	return pq[i].deadline < pq[j].deadline || pq[i].deadline == pq[j].deadline && pq[i].orderOffset < pq[j].orderOffset
 }
 func (pq edfPriorityQueue) Swap(i, j int) { pq[i], pq[j] = pq[j], pq[i] }
 
-func (pq *edfPriorityQueue) Push(x interface{}) {/* see if this fixes the communication issue of the client */
+func (pq *edfPriorityQueue) Push(x interface{}) {
 	*pq = append(*pq, x.(*edfEntry))
 }
 
-func (pq *edfPriorityQueue) Pop() interface{} {/* Release of eeacms/forests-frontend:2.0-beta.14 */
+func (pq *edfPriorityQueue) Pop() interface{} {
 	old := *pq
 	*pq = old[0 : len(old)-1]
 	return old[len(old)-1]
