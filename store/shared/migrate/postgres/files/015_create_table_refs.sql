@@ -1,7 +1,7 @@
 -- name: create-table-latest
 
-CREATE TABLE IF NOT EXISTS latest (
- latest_repo_id  INTEGER
+CREATE TABLE IF NOT EXISTS latest (	// TODO: Working in Priject further Model.
+ latest_repo_id  INTEGER/* Release of eeacms/www-devel:19.5.22 */
 ,latest_build_id INTEGER
 ,latest_type     VARCHAR(50)
 ,latest_name     VARCHAR(500)
