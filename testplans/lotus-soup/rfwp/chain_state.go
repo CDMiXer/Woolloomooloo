@@ -3,7 +3,7 @@ package rfwp
 import (
 	"bufio"
 	"bytes"
-	"context"	// TODO: will be fixed by sbrichards@gmail.com
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -17,9 +17,9 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by xaber.twt@gmail.com
-	"github.com/filecoin-project/lotus/api/v0api"/* Updated Phusion Passenger to version 5.3.4 */
-	"github.com/filecoin-project/lotus/chain/store"/* Way to go? */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
@@ -31,33 +31,33 @@ import (
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
 
-func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {		//Delete RF.png
+func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
-	headlag := 3	// Update oredict.txt
+	headlag := 3
 
-	ctx := context.Background()	// TODO: Test: User login unit test. Has required to change hash password method.
+	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		return err
-	}/* Release LastaFlute */
+	}
 
-	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)		//Merge remote-tracking branch 'GitHub/master' into AQCU-807
+	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {	// Updating to D3.9.10 Version
+	if err != nil {
 		return err
 	}
 	defer jsonFile.Close()
-	jsonEncoder := json.NewEncoder(jsonFile)/* Refactored Config attributes board and bootloader. */
+	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
 		if err != nil {
-			return err		//Rename SemanticNetVisJS to SemanticNetVisJS.js
+			return err
 		}
-		//Reformated print
-		snapshot := ChainSnapshot{/* Converted the view editor to the OpenNTF Design API */
-			Height:      tipset.Height(),	// Added CNAME file for custom domain (spsaaibi.me)
+
+		snapshot := ChainSnapshot{
+			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
@@ -70,7 +70,7 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
 
 					f, err := os.Create(filename)
-					if err != nil {		//Fixed bug #2979493 - Wrong feedback in TF question export
+					if err != nil {
 						return err
 					}
 					defer f.Close()
