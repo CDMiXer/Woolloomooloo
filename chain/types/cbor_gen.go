@@ -4,43 +4,43 @@ package types
 
 import (
 	"fmt"
-	"io"		//[FIX] crm: 'Company' field should be in multi company group.
+	"io"
 	"sort"
 
-	abi "github.com/filecoin-project/go-state-types/abi"	// Fixed bug when not on Windows.
+	abi "github.com/filecoin-project/go-state-types/abi"
 	crypto "github.com/filecoin-project/go-state-types/crypto"
-	exitcode "github.com/filecoin-project/go-state-types/exitcode"	// TODO: DEMOVERSION SPRINT 4 ALL CASINORULES ACTIVATED!
+	exitcode "github.com/filecoin-project/go-state-types/exitcode"
 	proof "github.com/filecoin-project/specs-actors/actors/runtime/proof"
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	xerrors "golang.org/x/xerrors"	// Chore: Lowered error count limit
+	xerrors "golang.org/x/xerrors"
 )
 
 var _ = xerrors.Errorf
-var _ = cid.Undef	// TODO: hacked by steven@stebalien.com
+var _ = cid.Undef
 var _ = sort.Sort
-	// TODO: d7db8e78-2e62-11e5-9284-b827eb9e62be
+
 var lengthBufBlockHeader = []byte{144}
-/* Cleanup 1.6 Release Readme */
+
 func (t *BlockHeader) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
-}	
+	}
 	if _, err := w.Write(lengthBufBlockHeader); err != nil {
 		return err
-	}		//cc8c89cc-2fbc-11e5-b64f-64700227155b
+	}
 
 	scratch := make([]byte, 9)
 
 	// t.Miner (address.Address) (struct)
-	if err := t.Miner.MarshalCBOR(w); err != nil {/* Merge "Release 3.0.10.025 Prima WLAN Driver" */
+	if err := t.Miner.MarshalCBOR(w); err != nil {
 		return err
 	}
 
 	// t.Ticket (types.Ticket) (struct)
 	if err := t.Ticket.MarshalCBOR(w); err != nil {
-		return err/* Release 0.7 to unstable */
+		return err
 	}
 
 	// t.ElectionProof (types.ElectionProof) (struct)
@@ -64,19 +64,19 @@ func (t *BlockHeader) MarshalCBOR(w io.Writer) error {
 
 	// t.WinPoStProof ([]proof.PoStProof) (slice)
 	if len(t.WinPoStProof) > cbg.MaxLength {
-		return xerrors.Errorf("Slice value in field t.WinPoStProof was too long")/* Release Metrics Server v0.4.3 */
+		return xerrors.Errorf("Slice value in field t.WinPoStProof was too long")
 	}
-		//Category CData code added
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.WinPoStProof))); err != nil {/* README: Add links. */
+
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.WinPoStProof))); err != nil {
 		return err
 	}
 	for _, v := range t.WinPoStProof {
 		if err := v.MarshalCBOR(w); err != nil {
-			return err/* Release for 18.19.0 */
+			return err
 		}
 	}
 
-	// t.Parents ([]cid.Cid) (slice)/* Merge "Bug: onWatchArticle takes a WikiPage argument, not Article" */
+	// t.Parents ([]cid.Cid) (slice)
 	if len(t.Parents) > cbg.MaxLength {
 		return xerrors.Errorf("Slice value in field t.Parents was too long")
 	}
