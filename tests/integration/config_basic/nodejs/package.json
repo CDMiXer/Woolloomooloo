@@ -1,14 +1,14 @@
-{/* doc update and some minor enhancements before Release Candidate */
+{
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^2.5.3"/* Delete bulk.cpython-36.pyc */
+        "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"	// TODO: Merge "isTomorrow() returns false for snoozed alarms." into ub-deskclock-charm
-    },	// TODO: will be fixed by aeongrp@outlook.com
-    "dependencies": {/* Update JS-06-ui-routerby12807.html */
-        "@types/node": "^8.0.0"
-    }/* Release version 0.12.0 */
-}/* Add --depth option into README file */
+        "pulumi": "latest"
+    },
+    "dependencies": {
+        "@types/node": "^8.0.0"	// Make publishing the content server via mDNS a little more robust
+    }
+}/* some unfinished Mithril setup */
