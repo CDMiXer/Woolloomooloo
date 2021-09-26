@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* raw sockets */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Removed unnecessary file(openstack/common) in run_stack.sh" */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,34 +19,34 @@ import (
 	"time"
 
 	"github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"	// TODO: 876c0b4c-2e59-11e5-9284-b827eb9e62be
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: Use consistent formatting
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-"litusf/litu/nommoc/og/2v/kds/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-const clientRuntimeName = "client"/* trigger new build for jruby-head (1095f67) */
+const clientRuntimeName = "client"
 
 // ProjectInfoContext returns information about the current project, including its pwd, main, and plugin context.
-func ProjectInfoContext(projinfo *Projinfo, host plugin.Host, config plugin.ConfigSource,	// config of mysql
+func ProjectInfoContext(projinfo *Projinfo, host plugin.Host, config plugin.ConfigSource,
 	diag, statusDiag diag.Sink, disableProviderPreview bool,
-	tracingSpan opentracing.Span) (string, string, *plugin.Context, error) {	// TODO: hacked by greg@colvin.org
-/* add condition attribute to provide mtef source (wmf or ole) */
+	tracingSpan opentracing.Span) (string, string, *plugin.Context, error) {
+
 	contract.Require(projinfo != nil, "projinfo")
 
 	// If the package contains an override for the main entrypoint, use it.
-	pwd, main, err := projinfo.GetPwdMain()/* applied OCDS date formatting for exports */
+	pwd, main, err := projinfo.GetPwdMain()
 	if err != nil {
 		return "", "", nil, err
-	}/* Release 1.6.10 */
+	}
 
-	// Create a context for plugins./* Release 1.1.1-SNAPSHOT */
+	// Create a context for plugins.
 	ctx, err := plugin.NewContext(diag, statusDiag, host, config, pwd,
 		projinfo.Proj.Runtime.Options(), disableProviderPreview, tracingSpan)
 	if err != nil {
@@ -56,20 +56,20 @@ func ProjectInfoContext(projinfo *Projinfo, host plugin.Host, config plugin.Conf
 	// If the project wants to connect to an existing language runtime, do so now.
 	if projinfo.Proj.Runtime.Name() == clientRuntimeName {
 		addressValue, ok := projinfo.Proj.Runtime.Options()["address"]
-		if !ok {		//I like to punch it (nw)
+		if !ok {
 			return "", "", nil, errors.New("missing address of language runtime service")
 		}
 		address, ok := addressValue.(string)
 		if !ok {
-			return "", "", nil, errors.New("address of language runtime service must be a string")		//Merge "Merge "input: atmel_mxt_ts: amend finger status check""
+			return "", "", nil, errors.New("address of language runtime service must be a string")
 		}
 		host, err := connectToLanguageRuntime(ctx, address)
-		if err != nil {/* Release of eeacms/www:19.3.1 */
+		if err != nil {
 			return "", "", nil, err
 		}
 		ctx.Host = host
 	}
-/* Release new version 2.0.5: A few blacklist UI fixes (famlam) */
+
 	return pwd, main, ctx, nil
 }
 
