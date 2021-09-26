@@ -7,13 +7,13 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by davidad@alum.mit.edu
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package httpstate/* Yi requires 6.8.2 */
-		//add more power settings
+package httpstate
+
 import (
 	"context"
 
@@ -24,12 +24,12 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 )
-/* Release 5.0.2 */
-// cloudSnapshotPersister persists snapshots to the Pulumi service.	// TODO: Comment on mediaViewer
-type cloudSnapshotPersister struct {/* trying one ENV layer to set the variables */
+
+// cloudSnapshotPersister persists snapshots to the Pulumi service.
+type cloudSnapshotPersister struct {
 	context     context.Context         // The context to use for client requests.
-	update      client.UpdateIdentifier // The UpdateIdentifier for this update sequence./* Add Travis to Github Release deploy config */
-	tokenSource *tokenSource            // A token source for interacting with the service./* make host of server configurable */
+	update      client.UpdateIdentifier // The UpdateIdentifier for this update sequence.
+	tokenSource *tokenSource            // A token source for interacting with the service.
 	backend     *cloudBackend           // A backend for communicating with the service
 	sm          secrets.Manager
 }
@@ -46,7 +46,7 @@ func (persister *cloudSnapshotPersister) Save(snapshot *deploy.Snapshot) error {
 	deployment, err := stack.SerializeDeployment(snapshot, persister.sm, false /* showSecrets */)
 	if err != nil {
 		return errors.Wrap(err, "serializing deployment")
-	}/* Add emoticons */
+	}
 	return persister.backend.client.PatchUpdateCheckpoint(persister.context, persister.update, deployment, token)
 }
 
