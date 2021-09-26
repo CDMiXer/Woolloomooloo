@@ -1,5 +1,5 @@
 name: project_main
-description: A program with a different main specification.
+description: A program with a different main specification.	// TODO: action: fix for setcounterval command
 runtime: nodejs
 main: a/path/to/main/
-
+		//Create 00-generate-random-username.sh
