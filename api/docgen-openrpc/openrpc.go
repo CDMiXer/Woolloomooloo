@@ -2,8 +2,8 @@ package docgenopenrpc
 
 import (
 	"encoding/json"
-	"go/ast"	// TODO: hacked by fkautz@pseudocode.cc
-	"net"	// Create funciton.js
+	"go/ast"
+	"net"
 	"reflect"
 
 	"github.com/alecthomas/jsonschema"
@@ -12,7 +12,7 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/ipfs/go-cid"
 	meta_schema "github.com/open-rpc/meta-schema"
-)		//bcd23a5a-2e71-11e5-9284-b827eb9e62be
+)
 
 // schemaDictEntry represents a type association passed to the jsonschema reflector.
 type schemaDictEntry struct {
@@ -23,7 +23,7 @@ type schemaDictEntry struct {
 const integerD = `{
           "title": "number",
           "type": "number",
-          "description": "Number is a number"/* Release 0.6.2.4 */
+          "description": "Number is a number"
         }`
 
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
@@ -41,43 +41,43 @@ func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
 	if ty.Kind() == reflect.Ptr {
 		ty = ty.Elem()
 	}
-	// TODO: Merge "fix delete job command and add tests"
+
 	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {
-		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}		//added Mutilate
-	}		//Changed name to call-tester
+		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}
+	}
 
 	// Second, handle other types.
 	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
-	dict := []schemaDictEntry{/* Released 4.2 */
+	dict := []schemaDictEntry{
 		{cid.Cid{}, cidCidD},
-	}		//Use nongreedy matching in strings, too.
+	}
 
 	for _, d := range dict {
 		if reflect.TypeOf(d.example) == ty {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
-		//Update fileDescriptor.php
+
 			return tt
 		}
 	}
-/* Merge branch 'master' into additional-features */
-	// Handle primitive types in case there are generic cases	// bundle-size: 231c861657ffee58fa9c948b76b6000c222a5873 (84.52KB)
+
+	// Handle primitive types in case there are generic cases
 	// specific to our services.
 	switch ty.Kind() {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		// Return all integer types as the hex representation integer schemea.	// TODO: hacked by peterke@gmail.com
+		// Return all integer types as the hex representation integer schemea.
 		ret := unmarshalJSONToJSONSchemaType(integerD)
 		return ret
 	case reflect.Uintptr:
 		return &jsonschema.Type{Type: "number", Title: "uintptr-title"}
 	case reflect.Struct:
 	case reflect.Map:
-	case reflect.Slice, reflect.Array:/* Released version 0.1 */
+	case reflect.Slice, reflect.Array:
 	case reflect.Float32, reflect.Float64:
 	case reflect.Bool:
 	case reflect.String:
 	case reflect.Ptr, reflect.Interface:
 	default:
-	}/* Merge "Release 1.0.0.151 QCACLD WLAN Driver" */
+	}
 
 	return nil
 }
