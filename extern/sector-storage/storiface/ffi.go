@@ -1,21 +1,21 @@
 package storiface
 
-import (	// Add Application.process_input_line, and default process_input.
+import (
 	"context"
 	"errors"
 
-	"github.com/ipfs/go-cid"/* @Release [io7m-jcanephora-0.9.19] */
+	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release 1.2rc1 */
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 var ErrSectorNotFound = errors.New("sector not found")
 
-type UnpaddedByteIndex uint64
+type UnpaddedByteIndex uint64		//ensure params sent for module are symbols.
 
 func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
-	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())		//simple architecture diagram
-}
+	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
+}/* Allow empty optional settings fields */
 
 type PaddedByteIndex uint64
 
