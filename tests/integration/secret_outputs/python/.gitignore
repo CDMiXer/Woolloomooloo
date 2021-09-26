@@ -1,5 +1,5 @@
-*.pyc		//Defines tail recursion
-/.pulumi/
+*.pyc
+/.pulumi/		//fix(package): update @sentry/node to version 5.7.0
 /dist/
 /*.egg-info
 venv/
