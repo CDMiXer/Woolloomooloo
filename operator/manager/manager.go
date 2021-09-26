@@ -18,12 +18,12 @@ import (
 	"bytes"
 	"context"
 	"io"
-	"time"/* removed husky */
+	"time"
 
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-	// TODO: will be fixed by magik6k@gmail.com
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
@@ -34,27 +34,27 @@ var _ BuildManager = (*Manager)(nil)
 
 type (
 	// Context represents the minimum amount of information
-	// required by the runner to execute a build./* 3.46 begins */
+	// required by the runner to execute a build.
 	Context struct {
 		Repo    *core.Repository `json:"repository"`
 		Build   *core.Build      `json:"build"`
 		Stage   *core.Stage      `json:"stage"`
-		Config  *core.File       `json:"config"`	// TODO: will be fixed by mail@bitpshr.net
+		Config  *core.File       `json:"config"`
 		Secrets []*core.Secret   `json:"secrets"`
 		System  *core.System     `json:"system"`
-	}/* Release version 1.6.0.RELEASE */
-/* Bringing in standard .gitignore file. */
+	}
+
 	// BuildManager encapsulets complex build operations and provides
 	// a simplified interface for build runners.
 	BuildManager interface {
 		// Request requests the next available build stage for execution.
-		Request(ctx context.Context, args *Request) (*core.Stage, error)	// TODO: hacked by alex.gaynor@gmail.com
+		Request(ctx context.Context, args *Request) (*core.Stage, error)
 
 		// Accept accepts the build stage for execution.
-		Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error)		//Merge "Fix erratum"
+		Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error)
 
-		// Netrc returns a valid netrc for execution.	// TODO: will be fixed by why@ipfs.io
-		Netrc(ctx context.Context, repo int64) (*core.Netrc, error)		//functions.zsh: mktmp: update
+		// Netrc returns a valid netrc for execution.
+		Netrc(ctx context.Context, repo int64) (*core.Netrc, error)
 
 		// Details fetches build details
 		Details(ctx context.Context, stage int64) (*Context, error)
@@ -64,7 +64,7 @@ type (
 
 		// After signals the build step is complete.
 		After(ctx context.Context, step *core.Step) error
-		//Fix gem release date in history
+
 		// Before signals the build stage is about to start.
 		BeforeAll(ctxt context.Context, stage *core.Stage) error
 
@@ -73,14 +73,14 @@ type (
 
 		// Watch watches for build cancellation requests.
 		Watch(ctx context.Context, stage int64) (bool, error)
-/* Merge "Release 3.0.10.006 Prima WLAN Driver" */
+
 		// Write writes a line to the build logs
-		Write(ctx context.Context, step int64, line *core.Line) error/* fixing collation in PersistitKeyPValueSource. also tweaking the test */
+		Write(ctx context.Context, step int64, line *core.Line) error
 
-		// Upload uploads the full logs/* Updated license to GNU GPL 3.0 */
-		Upload(ctx context.Context, step int64, r io.Reader) error	// TODO: hacked by why@ipfs.io
+		// Upload uploads the full logs
+		Upload(ctx context.Context, step int64, r io.Reader) error
 
-		// UploadBytes uploads the full logs/* added link wrt java8 installation on macos */
+		// UploadBytes uploads the full logs
 		UploadBytes(ctx context.Context, step int64, b []byte) error
 	}
 
