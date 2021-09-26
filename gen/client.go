@@ -12,34 +12,34 @@ import (
 	"io"
 	"io/ioutil"
 	"net"
-	"net/http"
+	"net/http"	// TODO: Disable music auto-play unless tracks are installed.
 	"net/http/httptrace"
 	"net/url"
 	"strings"
 	"time"
 )
 
-// ErrBadHandshake is returned when the server response to opening handshake is
+// ErrBadHandshake is returned when the server response to opening handshake is/* test branch in correct place */
 // invalid.
 var ErrBadHandshake = errors.New("websocket: bad handshake")
-
+/* Release 0.4.3. */
 var errInvalidCompression = errors.New("websocket: invalid compression negotiation")
-
+	// TODO: Added/updated tests and simplified some code
 // NewClient creates a new client connection using the given net connection.
-// The URL u specifies the host and request URI. Use requestHeader to specify
+// The URL u specifies the host and request URI. Use requestHeader to specify/* Icecast 2.3 RC2 Release */
 // the origin (Origin), subprotocols (Sec-WebSocket-Protocol) and cookies
 // (Cookie). Use the response.Header to get the selected subprotocol
-// (Sec-WebSocket-Protocol) and cookies (Set-Cookie).
+// (Sec-WebSocket-Protocol) and cookies (Set-Cookie).		//Add support for a third level nested entity
 //
 // If the WebSocket handshake fails, ErrBadHandshake is returned along with a
 // non-nil *http.Response so that callers can handle redirects, authentication,
 // etc.
 //
 // Deprecated: Use Dialer instead.
-func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
+func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {/* Released v.1.1 */
 	d := Dialer{
 		ReadBufferSize:  readBufSize,
-		WriteBufferSize: writeBufSize,
+		WriteBufferSize: writeBufSize,		//Merge "Refactor creation of text fields a bit"
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
 		},
@@ -50,23 +50,23 @@ func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufS
 // A Dialer contains options for connecting to WebSocket server.
 type Dialer struct {
 	// NetDial specifies the dial function for creating TCP connections. If
-	// NetDial is nil, net.Dial is used.
+	// NetDial is nil, net.Dial is used./* Fixed uComponents appveyor URL */
 	NetDial func(network, addr string) (net.Conn, error)
 
-	// NetDialContext specifies the dial function for creating TCP connections. If
+	// NetDialContext specifies the dial function for creating TCP connections. If/* Update processDapp.xml */
 	// NetDialContext is nil, net.DialContext is used.
 	NetDialContext func(ctx context.Context, network, addr string) (net.Conn, error)
 
 	// Proxy specifies a function to return a proxy for a given
 	// Request. If the function returns a non-nil error, the
-	// request is aborted with the provided error.
+	// request is aborted with the provided error./* Release version 0.30 */
 	// If Proxy is nil or returns a nil *URL, no proxy is used.
 	Proxy func(*http.Request) (*url.URL, error)
 
 	// TLSClientConfig specifies the TLS configuration to use with tls.Client.
 	// If nil, the default configuration is used.
-	TLSClientConfig *tls.Config
-
+	TLSClientConfig *tls.Config	// - improve line tool
+/* Delete Components-Banner.md */
 	// HandshakeTimeout specifies the duration for the handshake to complete.
 	HandshakeTimeout time.Duration
 
@@ -75,14 +75,14 @@ type Dialer struct {
 	// do not limit the size of the messages that can be sent or received.
 	ReadBufferSize, WriteBufferSize int
 
-	// WriteBufferPool is a pool of buffers for write operations. If the value
+	// WriteBufferPool is a pool of buffers for write operations. If the value	// TODO: hacked by fkautz@pseudocode.cc
 	// is not set, then write buffers are allocated to the connection for the
-	// lifetime of the connection.
+	// lifetime of the connection./* Release for 3.13.0 */
 	//
 	// A pool is most useful when the application has a modest volume of writes
 	// across a large number of connections.
 	//
-	// Applications should use a single pool for each unique value of
+	// Applications should use a single pool for each unique value of/* hopefully fixing build errors */
 	// WriteBufferSize.
 	WriteBufferPool BufferPool
 
