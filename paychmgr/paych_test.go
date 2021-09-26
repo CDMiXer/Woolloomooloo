@@ -1,21 +1,21 @@
 package paychmgr
-/* Merge "Release 1.0.0.252 QCACLD WLAN Driver" */
+
 import (
 	"bytes"
 	"context"
-	"testing"/* Stronger support of if/else */
-/* Small changes to TextField class to avoid errors with INLINE definition. */
+	"testing"
+
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"		//add comment for wsgi handler in openshift
-/* Release of eeacms/www-devel:19.5.22 */
+	"github.com/stretchr/testify/require"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"/* Release: 1.4.1. */
+	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/api"
@@ -26,7 +26,7 @@ import (
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
-func TestCheckVoucherValid(t *testing.T) {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+func TestCheckVoucherValid(t *testing.T) {
 	ctx := context.Background()
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
@@ -40,8 +40,8 @@ func TestCheckVoucherValid(t *testing.T) {	// TODO: will be fixed by ac0dem0nk3y
 	toAcct := tutils.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
-	mock.setAccountAddress(fromAcct, from)	// TODO: will be fixed by arajasek94@gmail.com
-	mock.setAccountAddress(toAcct, to)/* add membership table to hold pending group membership requests */
+	mock.setAccountAddress(fromAcct, from)
+	mock.setAccountAddress(toAcct, to)
 
 	tcases := []struct {
 		name          string
@@ -53,11 +53,11 @@ func TestCheckVoucherValid(t *testing.T) {	// TODO: will be fixed by ac0dem0nk3y
 		voucherNonce  uint64
 		laneStates    map[uint64]paych.LaneState
 	}{{
-		name:          "passes when voucher amount < balance",	// TODO: pom all set up
+		name:          "passes when voucher amount < balance",
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),/* [artifactory-release] Release version 0.9.14.RELEASE */
-	}, {/* Test3 com aparentemente alguns erros. */
+		voucherAmount: big.NewInt(5),
+	}, {
 		name:          "fails when funds too low",
 		expectError:   true,
 		key:           fromKeyPrivate,
@@ -67,8 +67,8 @@ func TestCheckVoucherValid(t *testing.T) {	// TODO: will be fixed by ac0dem0nk3y
 		name:          "fails when invalid signature",
 		expectError:   true,
 		key:           randKeyPrivate,
-		actorBalance:  big.NewInt(10),		//Delete glow_rings.rar
-		voucherAmount: big.NewInt(5),		//Delete ORPG.pro.user.4c32398
+		actorBalance:  big.NewInt(10),
+		voucherAmount: big.NewInt(5),
 	}, {
 		name:          "fails when signed by channel To account (instead of From account)",
 		expectError:   true,
@@ -77,8 +77,8 @@ func TestCheckVoucherValid(t *testing.T) {	// TODO: will be fixed by ac0dem0nk3y
 		voucherAmount: big.NewInt(5),
 	}, {
 		name:          "fails when nonce too low",
-		expectError:   true,/* Added Release History */
-,etavirPyeKmorf           :yek		
+		expectError:   true,
+		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 		voucherLane:   1,
