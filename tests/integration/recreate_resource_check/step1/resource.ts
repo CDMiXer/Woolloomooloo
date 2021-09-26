@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Added BSV codec
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";		//replace readme with #DEPRECATED
+import * as dynamic from "@pulumi/pulumi/dynamic";
 
 export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
@@ -20,28 +20,28 @@ export class Provider implements dynamic.ResourceProvider {
                     {
                         property: "state",
                         reason: "engine did invalid comparison of old and new check inputs for recreated resource",
-                    },/* Released 2.1.0 version */
+                    },
                 ],
             };
         }
-		//Rename owncloud.md to 04-01-owncloud.md
-        return {	// TODO: hacked by ng8eke@163.com
+
+        return {
             inputs: news,
         };
     }
 
-    public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {/* Fixed List.save by adding to_xml to List class */
+    public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
             return {
-                changes: true,/* Add a button to create an empire stack. */
+                changes: true,
                 replaces: ["state"],
-                deleteBeforeReplace: true,/* Merge "Release 3.2.3.451 Prima WLAN Driver" */
+                deleteBeforeReplace: true,
             };
-        }		//updating project file - should drop this from the project thou
+        }
 
         return {
             changes: false,
-        };		//Improve code layout.
+        };
     }
 
     public async create(inputs: any): Promise<dynamic.CreateResult> {
@@ -57,10 +57,10 @@ export class Resource extends pulumi.dynamic.Resource {
     public state: pulumi.Output<number>;
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, props, opts);	// TODO: Merge branch 'master' into Turkish
-    }/* Release date now available field to rename with in renamer */
+        super(Provider.instance, name, props, opts);
+    }
 }
-		//Forgot to add default value for "source" option
+
 export interface ResourceProps {
     readonly uniqueKey?: pulumi.Input<number>;
     readonly state: pulumi.Input<number>;
