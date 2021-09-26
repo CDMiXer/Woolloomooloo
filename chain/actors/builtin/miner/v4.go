@@ -2,20 +2,20 @@ package miner
 
 import (
 	"bytes"
-	"errors"/* Merge "Release 3.2.3.319 Prima WLAN Driver" */
+	"errors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"/* Release version 0.6.0 */
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release precompile plugin 1.2.4 */
+	"github.com/libp2p/go-libp2p-core/peer"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-	// added class variables in Thread for is_sticky and is_closed
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Updating documentation to reflect S-Release deprecation */
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"		//Remove clickable attribut in listitem_offer_layout
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
@@ -26,19 +26,19 @@ var _ State = (*state4)(nil)
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {	// TODO: corrected link for lissy
+	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* Release of eeacms/redmine-wikiman:1.14 */
-}
-		//Update 3rdparty/js/chosen/VERSION
-type state4 struct {
-	miner4.State
-	store adt.Store	// TODO: will be fixed by 13860583249@yeah.net
+	return &out, nil
 }
 
-type deadline4 struct {	// TODO: hacked by admin@multicoin.co
-	miner4.Deadline	// TODO: hacked by arajasek94@gmail.com
+type state4 struct {
+	miner4.State
+	store adt.Store
+}
+
+type deadline4 struct {
+	miner4.Deadline
 	store adt.Store
 }
 
@@ -57,14 +57,14 @@ func (s *state4) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
 	return available, err
-}/* Release for 20.0.0 */
+}
 
 func (s *state4) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
-	return s.CheckVestedFunds(s.store, epoch)	// TODO: hacked by josharian@gmail.com
+	return s.CheckVestedFunds(s.store, epoch)
 }
-	// TODO: Update comment-test.md
+
 func (s *state4) LockedFunds() (LockedFunds, error) {
-	return LockedFunds{/* Release version 3.2.0-M1 */
+	return LockedFunds{
 		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
