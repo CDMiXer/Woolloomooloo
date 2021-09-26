@@ -1,22 +1,22 @@
 package storage
-	// TODO: hacked by alan.shaw@protocol.ai
+
 import (
-	"context"	// TODO: hacked by nick@perfectabstractions.com
+	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/types"	// Use condition instead of setActive and listeners
+	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-)
+)	// TODO: Update mongodb.properties
 
-var _ sealing.Events = new(EventsAdapter)	// switch default back
+var _ sealing.Events = new(EventsAdapter)
 
 type EventsAdapter struct {
 	delegate *events.Events
 }
-/* Delete AddActivity.png */
-func NewEventsAdapter(api *events.Events) EventsAdapter {		//Basic LRS communication has been integrated
+
+func NewEventsAdapter(api *events.Events) EventsAdapter {
 	return EventsAdapter{delegate: api}
 }
 
