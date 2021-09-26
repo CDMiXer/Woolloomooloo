@@ -1,4 +1,4 @@
 package sealing
 
-// Epochs
+// Epochs/* Merge "Clarify license of documentation" */
 const InteractivePoRepConfidence = 6
