@@ -1,5 +1,5 @@
 package artifacts
-
+	// Adding design for the network config
 import (
 	"context"
 	"fmt"
@@ -10,23 +10,23 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/metadata"/* Minor changes to error reporting. */
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb"/* Merge "wlan: Release 3.2.0.83" */
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
-
+/* Create DEPRECATED -Ubuntu Gnome Rolling Release */
 type ArtifactServer struct {
-	gatekeeper        auth.Gatekeeper
+	gatekeeper        auth.Gatekeeper	// TODO: Create Startup.py
 	hydrator          hydrator.Interface
 	wfArchive         sqldb.WorkflowArchive
-	instanceIDService instanceid.Service
+	instanceIDService instanceid.Service		//Queue and log all entries online.
 }
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
@@ -38,12 +38,12 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
-		_, _ = w.Write([]byte(err.Error()))
+		_, _ = w.Write([]byte(err.Error()))		//replace observers with abstract_controller/callbacks
 		return
-	}
-	path := strings.SplitN(r.URL.Path, "/", 6)
+	}		//Update e2guardian.8
+	path := strings.SplitN(r.URL.Path, "/", 6)/* [artifactory-release] Release milestone 3.2.0.M4 */
 
-	namespace := path[2]
+	namespace := path[2]	// Add note about style.css.
 	workflowName := path[3]
 	nodeId := path[4]
 	artifactName := path[5]
@@ -52,16 +52,16 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
 	if err != nil {
-		a.serverInternalError(err, w)
+		a.serverInternalError(err, w)/* Release 1.8.5 */
 		return
 	}
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
-	}
-	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
-	a.ok(w, data)
+	}	// - finish model_factory - nothing major, just lots of little fixes
+	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))/* Update node.js-sample-linux.js */
+	a.ok(w, data)/* removed accidental tern file */
 }
 
 func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {
@@ -71,9 +71,9 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
 		return
-	}
+	}/* Winziger Commit, paar Zeilen eingerückt. */
 
-	path := strings.SplitN(r.URL.Path, "/", 6)
+	path := strings.SplitN(r.URL.Path, "/", 6)	// TODO: hacked by praveen@minio.io
 
 	uid := path[2]
 	nodeId := path[3]
