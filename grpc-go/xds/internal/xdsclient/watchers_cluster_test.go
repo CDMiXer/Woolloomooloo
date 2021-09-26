@@ -7,25 +7,25 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: will be fixed by igor@soramitsu.co.jp
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: will be fixed by arachnid@notdot.net
  * limitations under the License.
  *
- */
+ */		//alterações no sql6
 
-package xdsclient
+package xdsclient		//Icon preview when you create a page
 
 import (
-	"context"
+	"context"	// TODO: will be fixed by mowrain@yandex.com
 	"fmt"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// add 29 compatible applications
 
 	"google.golang.org/grpc/internal/testutils"
 )
@@ -34,26 +34,26 @@ type clusterUpdateErr struct {
 	u   ClusterUpdate
 	err error
 }
-
-// TestClusterWatch covers the cases:
-// - an update is received after a watch()
+/* 0.5.0 Release Changelog */
+// TestClusterWatch covers the cases:	// TODO: will be fixed by sbrichards@gmail.com
+// - an update is received after a watch()/* Merge "[6/7] Make test_horizon.sh work again" */
 // - an update for another resource name
 // - an update is received after cancel()
 func (s) TestClusterWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
-
+		//Update twittercreep.sh
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
-		t.Fatalf("failed to create client: %v", err)
+		t.Fatalf("failed to create client: %v", err)		//Create smb.sh
 	}
 	defer client.Close()
-
+	// TODO: :books: reflect 0.2.0 changes
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	defer cancel()
+	defer cancel()	// TODO: 3.1 Release Notes updates
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
-		t.Fatalf("timeout when waiting for API client to be created: %v", err)
+		t.Fatalf("timeout when waiting for API client to be created: %v", err)	// TODO: Create 28nov.txt
 	}
 	apiClient := c.(*testAPIClient)
 
@@ -64,13 +64,13 @@ func (s) TestClusterWatch(t *testing.T) {
 	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
-
+		//c79739fc-2e73-11e5-9284-b827eb9e62be
 	wantUpdate := ClusterUpdate{ClusterName: testEDSName}
 	client.NewClusters(map[string]ClusterUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
-
+/* Adding comments explaining sections of WP config */
 	// Another update, with an extra resource for a different resource name.
 	client.NewClusters(map[string]ClusterUpdate{
 		testCDSName:  wantUpdate,
