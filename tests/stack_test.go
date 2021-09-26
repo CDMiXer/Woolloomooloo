@@ -1,14 +1,14 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// refactor member access for #125
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Tweak to gitignore */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Simplify blowdown build */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by martin2cai@hotmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,14 +16,14 @@ package tests
 
 import (
 	cryptorand "crypto/rand"
-	"encoding/hex"		//Automatic changelog generation for PR #13241 [ci skip]
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path"/* Release of eeacms/forests-frontend:1.8-beta.10 */
-	"path/filepath"/* ugh, player.name */
-	"strconv"	// TODO: hacked by mail@overlisted.net
+	"path"
+	"path/filepath"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -38,27 +38,27 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: hacked by 13860583249@yeah.net
+
 func TestStackCommands(t *testing.T) {
-	// stack init, stack ls, stack rm, stack ls	// Improved StreamHelper API
+	// stack init, stack ls, stack rm, stack ls
 	t.Run("SanityTest", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
-		}()/* adding some context! */
+		}()
 
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "foo")
 
 		stacks, current := integration.GetStacks(e)
-		assert.Equal(t, 1, len(stacks))/* AA mode support */
+		assert.Equal(t, 1, len(stacks))
 		assert.NotNil(t, current)
 		if current == nil {
 			t.Logf("stacks: %v, current: %v", stacks, current)
-			t.Fatalf("No current stack?")/* Merge "[INTERNAL] Release notes for version 1.78.0" */
+			t.Fatalf("No current stack?")
 		}
 
 		assert.Equal(t, "foo", *current)
@@ -74,10 +74,10 @@ func TestStackCommands(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
-				e.DeleteEnvironment()	// first tests for control flow operations like "if"
+				e.DeleteEnvironment()
 			}
-)(}		
-/* Merge branch 'master' into RLNS_recorderswap */
+		}()
+
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "blighttown")
