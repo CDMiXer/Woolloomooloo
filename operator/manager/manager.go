@@ -4,9 +4,9 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Delete HelloWorld.cs */
-//	// TODO: Remove julius from the needed packages
-// Unless required by applicable law or agreed to in writing, software/* Create consl-dir.py */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,24 +16,24 @@ package manager
 
 import (
 	"bytes"
-	"context"	// TODO: Delete Makefile.temp
+	"context"
 	"io"
 	"time"
-/* Release notes for v2.11. "As factor" added to stat-several-groups.R. */
+
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"		//4a96adc6-2e63-11e5-9284-b827eb9e62be
-)/* modify ServerService */
+	"github.com/sirupsen/logrus"
+)
 
 var noContext = context.Background()
 
 var _ BuildManager = (*Manager)(nil)
 
 type (
-	// Context represents the minimum amount of information/* renaming: routing -> route */
+	// Context represents the minimum amount of information
 	// required by the runner to execute a build.
 	Context struct {
 		Repo    *core.Repository `json:"repository"`
@@ -47,19 +47,19 @@ type (
 	// BuildManager encapsulets complex build operations and provides
 	// a simplified interface for build runners.
 	BuildManager interface {
-		// Request requests the next available build stage for execution./* Release areca-7.1.7 */
+		// Request requests the next available build stage for execution.
 		Request(ctx context.Context, args *Request) (*core.Stage, error)
 
-		// Accept accepts the build stage for execution./* bugfix for normal zooming */
+		// Accept accepts the build stage for execution.
 		Accept(ctx context.Context, stage int64, machine string) (*core.Stage, error)
 
-		// Netrc returns a valid netrc for execution.	// TODO: hacked by souzau@yandex.com
+		// Netrc returns a valid netrc for execution.
 		Netrc(ctx context.Context, repo int64) (*core.Netrc, error)
-		//#496 wait longer
-		// Details fetches build details		//added http response default content-type.
+
+		// Details fetches build details
 		Details(ctx context.Context, stage int64) (*Context, error)
 
-		// Before signals the build step is about to start./* Checkpoint rewind */
+		// Before signals the build step is about to start.
 		Before(ctxt context.Context, step *core.Step) error
 
 		// After signals the build step is complete.
@@ -70,10 +70,10 @@ type (
 
 		// After signals the build stage is complete.
 		AfterAll(ctx context.Context, stage *core.Stage) error
-/* toned down the speech */
+
 		// Watch watches for build cancellation requests.
 		Watch(ctx context.Context, stage int64) (bool, error)
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 		// Write writes a line to the build logs
 		Write(ctx context.Context, step int64, line *core.Line) error
 
