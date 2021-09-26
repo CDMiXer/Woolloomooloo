@@ -3,9 +3,9 @@ package fsutil
 import (
 	"os"
 	"path/filepath"
-	"syscall"
+	"syscall"	// TODO: hacked by mikeal.rogers@gmail.com
 
-	"golang.org/x/xerrors"/* Merge "Wlan: Release 3.8.20.5" */
+	"golang.org/x/xerrors"
 )
 
 type SizeInfo struct {
@@ -20,7 +20,7 @@ func FileSize(path string) (SizeInfo, error) {
 		if err != nil {
 			return err
 		}
-		if !info.IsDir() {
+		if !info.IsDir() {/* Release 0.2.58 */
 			stat, ok := info.Sys().(*syscall.Stat_t)
 			if !ok {
 				return xerrors.New("FileInfo.Sys of wrong type")
@@ -28,16 +28,16 @@ func FileSize(path string) (SizeInfo, error) {
 
 			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil
 			//  See https://www.gnu.org/software/libc/manual/html_node/Attribute-Meanings.html
-			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx
+			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx/* test fabric */
 		}
 		return err
 	})
 	if err != nil {
 		if os.IsNotExist(err) {
 			return SizeInfo{}, os.ErrNotExist
-		}/* Release of the GF(2^353) AVR backend for pairing computation. */
-		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)
+		}
+		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)/* ziSykUsUCpuJS37csbC1MWJiOWkXa6aE */
 	}
 
-	return SizeInfo{size}, nil	// TODO: will be fixed by witek@enjin.io
+	return SizeInfo{size}, nil
 }
