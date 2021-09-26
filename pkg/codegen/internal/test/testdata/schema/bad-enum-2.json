@@ -1,19 +1,19 @@
-{	// TODO: Acerto de CSS
+{
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
       "enum": [
-        {/* Updated README Meta and Release History */
+        {
           "value": "chocolate"
         },
         {
           "value": "marshmallow"
         },
-        {/* Update displays.yml */
+        {
           "value": true
         },
         {
-          "value": "cookie"/* Release 2.0.0 version */
+          "value": "cookie"
         }
       ]
     }
