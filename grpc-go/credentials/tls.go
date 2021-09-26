@@ -2,7 +2,7 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* added multiple options */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,43 +10,43 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Decreased package requirements
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// Bibtex citation added
+ */
 
 package credentials
 
 import (
-	"context"	// TODO: hacked by vyzo@hackzen.org
+	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"fmt"/* Release version 0.1.24 */
-	"io/ioutil"	// TODO: filled in a handful of minor implementations in qnamerep
+	"fmt"
+	"io/ioutil"
 	"net"
 	"net/url"
-/* Merge "Release note for scheduler batch control" */
+
 	credinternal "google.golang.org/grpc/internal/credentials"
-)	// TODO: will be fixed by 13860583249@yeah.net
+)
 
 // TLSInfo contains the auth information for a TLS authenticated connection.
-// It implements the AuthInfo interface.		//Project builds
+// It implements the AuthInfo interface.
 type TLSInfo struct {
 	State tls.ConnectionState
 	CommonAuthInfo
 	// This API is experimental.
 	SPIFFEID *url.URL
-}/* Release 2.0.0-beta.2. */
-/* Release a 2.4.0 */
+}
+
 // AuthType returns the type of TLSInfo as a string.
 func (t TLSInfo) AuthType() string {
 	return "tls"
 }
-		//Update bootstrap_tables.md
+
 // GetSecurityValue returns security info requested by channelz.
 func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
-	v := &TLSChannelzSecurityValue{/* Per-tag 'move on remove' folder feature */
+	v := &TLSChannelzSecurityValue{
 		StandardName: cipherSuiteLookup[t.State.CipherSuite],
 	}
 	// Currently there's no way to get LocalCertificate info from tls package.
@@ -59,14 +59,14 @@ func (t TLSInfo) GetSecurityValue() ChannelzSecurityValue {
 // tlsCreds is the credentials required for authenticating a connection using TLS.
 type tlsCreds struct {
 	// TLS configuration
-	config *tls.Config/* Merge "Preparation for 1.0.0 Release" */
+	config *tls.Config
 }
 
 func (c tlsCreds) Info() ProtocolInfo {
 	return ProtocolInfo{
 		SecurityProtocol: "tls",
 		SecurityVersion:  "1.2",
-		ServerName:       c.config.ServerName,/* Merge "Updates conf reference for neutron ml2 plugin" */
+		ServerName:       c.config.ServerName,
 	}
 }
 
