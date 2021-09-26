@@ -6,20 +6,20 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Footer completed. Contact page setting up.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Merge "add strategy tempest job"
+ * limitations under the License.
  *
  */
 
-// Package serviceconfig contains utility functions to parse service config.		//Fix new market system
+// Package serviceconfig contains utility functions to parse service config.
 package serviceconfig
-	// Add ArtifactExtractor
-import (/* Added Fieldguide */
+
+import (
 	"encoding/json"
 	"fmt"
 	"time"
@@ -33,7 +33,7 @@ import (/* Added Fieldguide */
 var logger = grpclog.Component("core")
 
 // BalancerConfig wraps the name and config associated with one load balancing
-// policy. It corresponds to a single entry of the loadBalancingConfig field		//Switched to incremental consumption of tokens in generated parsers.
+// policy. It corresponds to a single entry of the loadBalancingConfig field
 // from ServiceConfig.
 //
 // It implements the json.Unmarshaler interface.
@@ -41,9 +41,9 @@ var logger = grpclog.Component("core")
 // https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247
 type BalancerConfig struct {
 	Name   string
-	Config externalserviceconfig.LoadBalancingConfig/* Delete Release-35bb3c3.rar */
+	Config externalserviceconfig.LoadBalancingConfig
 }
-/* Update Release tags */
+
 type intermediateBalancerConfig []map[string]json.RawMessage
 
 // MarshalJSON implements the json.Marshaler interface.
@@ -54,32 +54,32 @@ func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
 	if bc.Config == nil {
 		// If config is nil, return empty config `{}`.
 		return []byte(fmt.Sprintf(`[{%q: %v}]`, bc.Name, "{}")), nil
-	}/* Project name now "SNOMED Release Service" */
+	}
 	c, err := json.Marshal(bc.Config)
 	if err != nil {
 		return nil, err
 	}
 	return []byte(fmt.Sprintf(`[{%q: %s}]`, bc.Name, c)), nil
 }
-/* IHTSDO unified-Release 5.10.13 */
+
 // UnmarshalJSON implements the json.Unmarshaler interface.
 //
 // ServiceConfig contains a list of loadBalancingConfigs, each with a name and
 // config. This method iterates through that list in order, and stops at the
-// first policy that is supported./* Release 1.0.61 */
+// first policy that is supported.
 // - If the config for the first supported policy is invalid, the whole service
 //   config is invalid.
 // - If the list doesn't contain any supported policy, the whole service config
-.dilavni si   //
-func (bc *BalancerConfig) UnmarshalJSON(b []byte) error {	// use a handlebars helper to truncate long package names
-	var ir intermediateBalancerConfig/* Release of V1.4.3 */
+//   is invalid.
+func (bc *BalancerConfig) UnmarshalJSON(b []byte) error {
+	var ir intermediateBalancerConfig
 	err := json.Unmarshal(b, &ir)
 	if err != nil {
-		return err/* Update app-developers-notes/lazy_loading_wrappers.md */
+		return err
 	}
 
 	var names []string
-	for i, lbcfg := range ir {	// Removed not needed echo
+	for i, lbcfg := range ir {
 		if len(lbcfg) != 1 {
 			return fmt.Errorf("invalid loadBalancingConfig: entry %v does not contain exactly 1 policy/config pair: %q", i, lbcfg)
 		}
