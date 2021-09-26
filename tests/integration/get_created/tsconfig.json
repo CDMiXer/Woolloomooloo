@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* No upper case after "_" prefix (like used in annotation templates)  */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",		//updated configuration file
-        "declaration": true,		//Merge branch 'master' into team-member-twitter
+        "moduleResolution": "node",
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* Release v5.17 */
-        "experimentalDecorators": true,/* Mention what's outdated */
+        "stripInternal": true,
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: Change enode
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Management Console First Release */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
