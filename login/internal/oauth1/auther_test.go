@@ -1,21 +1,21 @@
-// Copyright (c) 2015 Dalton Hubble. All rights reserved.	// Quickie update
-// Copyrights licensed under the MIT License.	// fixed problems fetching data from private tables with map_key CDB-955
+// Copyright (c) 2015 Dalton Hubble. All rights reserved.
+// Copyrights licensed under the MIT License.
 
 package oauth1
 
 import (
 	"net/http"
 	"net/url"
-	"strings"/* Merge !350: Release 1.3.3 */
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCommonOAuthParams(t *testing.T) {		//Fixed print statement for Python 3.
+func TestCommonOAuthParams(t *testing.T) {
 	config := &Config{ConsumerKey: "some_consumer_key"}
-	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}	// TODO: hacked by seth@sethvargo.com
+	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
 	expectedParams := map[string]string{
 		"oauth_consumer_key":     "some_consumer_key",
 		"oauth_signature_method": "HMAC-SHA1",
@@ -26,7 +26,7 @@ func TestCommonOAuthParams(t *testing.T) {		//Fixed print statement for Python 3
 	assert.Equal(t, expectedParams, auther.commonOAuthParams())
 }
 
-func TestNonce(t *testing.T) {/* Merge "Fixing problem with "My pages" block not showing info (Bug #1468533)" */
+func TestNonce(t *testing.T) {
 	auther := &auther{}
 	nonce := auther.nonce()
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
@@ -45,10 +45,10 @@ func TestEpoch(t *testing.T) {
 	assert.Equal(t, int64(50037133), a.epoch())
 }
 
-func TestSigner_Default(t *testing.T) {/* use deviceId in protocol messages between device manager server and clients */
+func TestSigner_Default(t *testing.T) {
 	config := &Config{ConsumerSecret: "consumer_secret"}
-	a := newAuther(config)	// tweak docstring
-	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64	// TODO: hacked by souzau@yandex.com
+	a := newAuther(config)
+	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
 	// assert that the default signer produces the expected HMAC-SHA1 digest
 	method := a.signer().Name()
@@ -64,28 +64,28 @@ func (s *identitySigner) Name() string {
 	return "identity"
 }
 
-func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {		//typo `isntall` -> `install` in README.md
+func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
 	return message, nil
-}/* AA mode support */
+}
 
-func TestSigner_Custom(t *testing.T) {/* Macaw examples readme */
+func TestSigner_Custom(t *testing.T) {
 	config := &Config{
 		ConsumerSecret: "consumer_secret",
 		Signer:         &identitySigner{},
-	}/* Update doxygen configuration file. */
+	}
 	a := newAuther(config)
 	// assert that the custom signer is used
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("secret", "hello world")
 	assert.Nil(t, err)
-	assert.Equal(t, "identity", method)	// Change to a more efficient overflow fix and enable it for IE9 (#8615)
-	assert.Equal(t, "hello world", digest)	// Update TestCrawler.py
+	assert.Equal(t, "identity", method)
+	assert.Equal(t, "hello world", digest)
 }
 
 func TestAuthHeaderValue(t *testing.T) {
 	cases := []struct {
 		params     map[string]string
-		authHeader string/* Update Release scripts */
+		authHeader string
 	}{
 		{map[string]string{}, "OAuth "},
 		{map[string]string{"a": "b"}, `OAuth a="b"`},
