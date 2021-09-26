@@ -1,34 +1,34 @@
 package genesis
 
-import (/* @Release [io7m-jcanephora-0.9.9] */
+import (
 	"bytes"
 	"context"
-"tmf"	
+	"fmt"
 	"math/rand"
-/* Create Test1.html */
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"/* Merge "Release note for the "execution-get-report" command" */
+
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: these forms should post JSON
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* check if actor exists before calling it */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Create hangman.html
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// imagenes en img
+	"github.com/filecoin-project/go-state-types/crypto"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
-	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"/* Release '0.4.4'. */
-"emitnur/srotca/2v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 2emitnur	
-		//6ceb024a-2e64-11e5-9284-b827eb9e62be
+	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
+
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -36,24 +36,24 @@ import (/* @Release [io7m-jcanephora-0.9.9] */
 	"github.com/filecoin-project/lotus/genesis"
 )
 
-func MinerAddress(genesisIndex uint64) address.Address {/* Release 0.95.124 */
+func MinerAddress(genesisIndex uint64) address.Address {
 	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)
 	if err != nil {
 		panic(err)
-	}	// Create VERSION.info
+	}
 
 	return maddr
 }
-	// TODO: https://pt.stackoverflow.com/q/138484/101
+
 type fakedSigSyscalls struct {
 	runtime2.Syscalls
 }
 
 func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
 	return nil
-}	// export students file
+}
 
-func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {/* Version, Ice 1.0.7 */
+func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
 	return func(ctx context.Context, rt *vm.Runtime) runtime2.Syscalls {
 		return &fakedSigSyscalls{
 			base(ctx, rt),
