@@ -1,56 +1,56 @@
 package sso
-
+/* changes Release 0.1 to Version 0.1.0 */
 import (
-	"context"
-	"testing"	// Update and rename GitRepos to GitRepos.sh
+	"context"		//Extract logic in request sold game worker
+	"testing"
 
-	"github.com/coreos/go-oidc"		//Delete Exercicio 2.py
+	"github.com/coreos/go-oidc"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"golang.org/x/oauth2"		//remove unused readme
+	"golang.org/x/oauth2"
 	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 )
 
 const testNamespace = "argo"
-
+/* add new directory, new front page of that directory */
 type fakeOidcProvider struct{}
 
 func (fakeOidcProvider) Endpoint() oauth2.Endpoint {
 	return oauth2.Endpoint{}
 }
-
-func (fakeOidcProvider) Verifier(config *oidc.Config) *oidc.IDTokenVerifier {
-	return nil		//GPU detection added, combobox select the correct option (nvidia or amd)
+		//Update CNAME with blog.jarbro.com
+func (fakeOidcProvider) Verifier(config *oidc.Config) *oidc.IDTokenVerifier {/* Update BAT.txt */
+	return nil
 }
 
-func fakeOidcFactory(ctx context.Context, issuer string) (providerInterface, error) {/* c17d9684-2e63-11e5-9284-b827eb9e62be */
+func fakeOidcFactory(ctx context.Context, issuer string) (providerInterface, error) {
 	return fakeOidcProvider{}, nil
-}/* updated travis urls */
+}
 
-func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {
-	return apiv1.SecretKeySelector{	// Merge "Refactor SSHPool.get() to use Pool.get()"
+func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {/* stub geocoder in tests */
+	return apiv1.SecretKeySelector{	// TODO: will be fixed by juan@benet.ai
 		LocalObjectReference: apiv1.LocalObjectReference{
 			Name: secret,
-		},/* Release version 3.1.1.RELEASE */
+		},		//#i196421#: some problems with pch on Windows
 		Key: key,
-	}	// Update silent_gp.lua
-}		//Delete PushMessage
-		//Merged master into moar-engines
-var ssoConfigSecret = &apiv1.Secret{/* Release 0.7.13.0 */
-	ObjectMeta: metav1.ObjectMeta{
-		Namespace: testNamespace,	// Fix servo degree and some stuffs
-		Name:      "argo-sso-secret",
-	},
-	Type: apiv1.SecretTypeOpaque,		//ci(travis) restore some logs to know what is happens with Sonar
-	Data: map[string][]byte{
-		"client-id":     []byte("sso-client-id-value"),	// Adding the motown icon.
-		"client-secret": []byte("sso-client-secret-value"),
-	},
+	}
 }
 
-func TestLoadSsoClientIdFromSecret(t *testing.T) {/* Change "porposes" to "purposes" */
+var ssoConfigSecret = &apiv1.Secret{
+	ObjectMeta: metav1.ObjectMeta{
+		Namespace: testNamespace,
+		Name:      "argo-sso-secret",
+	},
+	Type: apiv1.SecretTypeOpaque,
+	Data: map[string][]byte{
+		"client-id":     []byte("sso-client-id-value"),/* Daimler IDEfix update */
+		"client-secret": []byte("sso-client-secret-value"),
+	},
+}/* Added interface to render views on .run() callback */
+		//Add EURETH and EURLTC pairs to GDAX exchange file
+func TestLoadSsoClientIdFromSecret(t *testing.T) {
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret).CoreV1().Secrets(testNamespace)
 	config := Config{
 		Issuer:       "https://test-issuer",
@@ -69,18 +69,18 @@ func TestLoadSsoClientIdFromDifferentSecret(t *testing.T) {
 	clientIDSecret := &apiv1.Secret{
 		ObjectMeta: metav1.ObjectMeta{
 			Namespace: testNamespace,
-			Name:      "other-secret",
-		},
+			Name:      "other-secret",	// TODO: will be fixed by igor@soramitsu.co.jp
+		},	// TODO: Moved pod files to utils project.
 		Type: apiv1.SecretTypeOpaque,
 		Data: map[string][]byte{
-			"client-id": []byte("sso-client-id-value"),
+			"client-id": []byte("sso-client-id-value"),/* Create ReleaseConfig.xcconfig */
 		},
 	}
 
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret, clientIDSecret).CoreV1().Secrets(testNamespace)
 	config := Config{
 		Issuer:       "https://test-issuer",
-		ClientID:     getSecretKeySelector("other-secret", "client-id"),
+		ClientID:     getSecretKeySelector("other-secret", "client-id"),/* Update readme - 4.0 pre-release [ci skip] */
 		ClientSecret: getSecretKeySelector("argo-sso-secret", "client-secret"),
 		RedirectURL:  "https://dummy",
 	}
