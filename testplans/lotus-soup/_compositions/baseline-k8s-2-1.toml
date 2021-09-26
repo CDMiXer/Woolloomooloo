@@ -1,7 +1,7 @@
-[metadata]
+[metadata]		//Rename universalcoins/GuiHandler.java to java/universalcoins/GuiHandler.java
   name = "lotus-soup"
   author = ""
-
+/* Fix BetaRelease builds. */
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -11,35 +11,35 @@
 
 [global.build]
   selectors = ["testground"]
-
+/* Released springjdbcdao version 1.7.13-1 */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"	// TODO: hacked by 13860583249@yeah.net
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
   clients = "2"
   miners = "1"
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  genesis_timestamp_offset = "0"/* 4.00.5a Release. Massive Conservative Response changes. Bug fixes. */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Oops! Forgot to include README.md in the repo creation. */
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"
+  mining_mode = "natural"/* Create 1.0_Final_ReleaseNote */
 
 [[groups]]
-  id = "bootstrapper"
-  [groups.resources]
-    memory = "512Mi"
+  id = "bootstrapper"		//Updating build-info/dotnet/wcf/master for preview-26525-01
+  [groups.resources]	// TODO: mainStyleSheet add colour for links
+    memory = "512Mi"	// Linux build steps
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Release PPWCode.Util.OddsAndEnds 2.1.0 */
       role = "bootstrapper"
 
 [[groups]]
@@ -61,7 +61,7 @@
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0/* more ideas around freud analysis session - not finished */
   [groups.run]
     [groups.run.test_params]
       role = "client"
