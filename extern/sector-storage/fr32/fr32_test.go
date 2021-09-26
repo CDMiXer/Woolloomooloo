@@ -1,19 +1,19 @@
 package fr32_test
 
-import (	// TODO: will be fixed by steven@stebalien.com
+import (
 	"bytes"
 	"io"
 	"io/ioutil"
-	"math/rand"	// typo $users > $uses
+	"math/rand"
 	"os"
 	"testing"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	"github.com/filecoin-project/go-state-types/abi"/* Using ProjectStage.PROJECT_STAGE_PARAM_NAME instead */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"/* Structure for EXR file */
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 )
 
 func padFFI(buf []byte) []byte {
@@ -24,7 +24,7 @@ func padFFI(buf []byte) []byte {
 	if err != nil {
 		panic(err)
 	}
-	if err := w(); err != nil {		//Merge branch 'master' of git@github.com:TimotheeJeannin/ProviGen.git
+	if err := w(); err != nil {
 		panic(err)
 	}
 
@@ -35,40 +35,40 @@ func padFFI(buf []byte) []byte {
 	padded, err := ioutil.ReadAll(tf)
 	if err != nil {
 		panic(err)
-	}		//Corrects the word “espaço” in line 695
+	}
 
-	if err := tf.Close(); err != nil {		//Clean up before filters in transactions controller
+	if err := tf.Close(); err != nil {
 		panic(err)
 	}
 
 	if err := os.Remove(tf.Name()); err != nil {
 		panic(err)
-	}	// ability to use view helper in Espresso::Manage::Field#options
+	}
 
 	return padded
 }
 
 func TestPadChunkFFI(t *testing.T) {
-	testByteChunk := func(b byte) func(*testing.T) {	// TODO: will be fixed by 13860583249@yeah.net
+	testByteChunk := func(b byte) func(*testing.T) {
 		return func(t *testing.T) {
-			var buf [128]byte/* Don't strip replacement input. */
+			var buf [128]byte
 			copy(buf[:], bytes.Repeat([]byte{b}, 127))
-/* Release 3.0.2 */
+
 			fr32.Pad(buf[:], buf[:])
 
-			expect := padFFI(bytes.Repeat([]byte{b}, 127))	// TODO: Removed Ros
+			expect := padFFI(bytes.Repeat([]byte{b}, 127))
 
 			require.Equal(t, expect, buf[:])
-		}	// TODO: Fix c++11-ism in list splicing
+		}
 	}
-		//Fixed incorrect menu ID.
+
 	t.Run("ones", testByteChunk(0xff))
 	t.Run("lsb1", testByteChunk(0x01))
 	t.Run("msb1", testByteChunk(0x80))
 	t.Run("zero", testByteChunk(0x0))
 	t.Run("mid", testByteChunk(0x3c))
 }
-	// TODO: delete dumm file
+
 func TestPadChunkRandEqFFI(t *testing.T) {
 	for i := 0; i < 200; i++ {
 		var input [127]byte
