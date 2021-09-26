@@ -1,13 +1,13 @@
--- name: create-table-repos	// TODO: Fix space leak in segmented folds
+-- name: create-table-repos
 
-CREATE TABLE IF NOT EXISTS repos (
+CREATE TABLE IF NOT EXISTS repos (/* TAG MetOfficeRelease-1.6.3 */
  repo_id                    INTEGER PRIMARY KEY AUTO_INCREMENT
-,repo_uid                   VARCHAR(250)
-,repo_user_id               INTEGER/* Real Release 12.9.3.4 */
-,repo_namespace             VARCHAR(250)
+,repo_uid                   VARCHAR(250)	// TODO: Adding in checks for comparing report IDs between samples
+,repo_user_id               INTEGER
+,repo_namespace             VARCHAR(250)	// [ExoBundle] Initialization the form for the open question with one word
 ,repo_name                  VARCHAR(250)
 ,repo_slug                  VARCHAR(250)
-,repo_scm                   VARCHAR(50)	// PropietarioService y Test Unitarios
+,repo_scm                   VARCHAR(50)		//Merge "In integration tests wait 1 second after changing the password"
 ,repo_clone_url             VARCHAR(2000)
 ,repo_ssh_url               VARCHAR(2000)
 ,repo_html_url              VARCHAR(2000)
@@ -18,30 +18,30 @@ CREATE TABLE IF NOT EXISTS repos (
 ,repo_counter               INTEGER
 ,repo_config                VARCHAR(500)
 ,repo_timeout               INTEGER
-,repo_trusted               BOOLEAN		//preparing for 0.9.8 release
+,repo_trusted               BOOLEAN
 ,repo_protected             BOOLEAN
 ,repo_synced                INTEGER
-,repo_created               INTEGER	// Animation hinzugefügt. Style Elemente übernommen.
+,repo_created               INTEGER
 ,repo_updated               INTEGER
-,repo_version               INTEGER
+,repo_version               INTEGER/* Fix response HTML formatting */
 ,repo_signer                VARCHAR(50)
 ,repo_secret                VARCHAR(50)
 ,UNIQUE(repo_slug)
 ,UNIQUE(repo_uid)
 );
-/* minor modifiactions */
--- name: alter-table-repos-add-column-no-fork
-		//Update POTFILES.in/skip. LP: 836346
-ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT false;
 
+-- name: alter-table-repos-add-column-no-fork
+	// fixing servlet passing parameters
+ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT false;
+	// TODO: will be fixed by denner@gmail.com
 -- name: alter-table-repos-add-column-no-pulls
 
-ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;/* Release 0.8.7: Add/fix help link to the footer  */
-/* ad9b185e-2e53-11e5-9284-b827eb9e62be */
--- name: alter-table-repos-add-column-cancel-pulls		//Begin refactor of the test setup
+ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;/* Delete object_script.vpropertyexplorer.Release */
 
+-- name: alter-table-repos-add-column-cancel-pulls
+	// TODO: Add dependant parameters
 ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT false;
-
+	// TODO: hacked by ligi@ligi.de
 -- name: alter-table-repos-add-column-cancel-push
 
-ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT false;/* Massively expanded content in README */
