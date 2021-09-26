@@ -1,15 +1,15 @@
 # Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 from typing import Any, Optional
+/* Merge branch 'dev' into update_nexusLatestVersion */
+import pulumi
 
-import pulumi	// Update clickjacking.html
-/* output/Thread: remove obsolete pcm_domain check, this is defunct */
-class Component(pulumi.ComponentResource):/* 5.3.6 Release */
+class Component(pulumi.ComponentResource):
     echo: pulumi.Output[Any]
-    childId: pulumi.Output[str]		//Delete jumpy
+    childId: pulumi.Output[str]
 
-    def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
+    def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):/* fixed SRC_URI for sparse */
         props = dict()
         props["echo"] = echo
         props["childId"] = None
-        super().__init__("testcomponent:index:Component", name, props, opts, True)	// TODO: spam with gamble fixed.. ish
+        super().__init__("testcomponent:index:Component", name, props, opts, True)
