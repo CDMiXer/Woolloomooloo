@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Fixed ambiguity
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Started moving Hackpad code from test/ to main/
+
 package sink
-	// TODO: will be fixed by mowrain@yandex.com
+
 import (
 	"context"
-	"testing"	// TODO: will be fixed by seth@sethvargo.com
-/* Update and rename View.py to MDXView.py */
+	"testing"
+
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/version"
 	"github.com/golang/mock/gomock"
@@ -27,9 +27,9 @@ import (
 var noContext = context.Background()
 
 func TestDo(t *testing.T) {
-	controller := gomock.NewController(t)/* Respect z-axis zooming in contour plot */
+	controller := gomock.NewController(t)
 
-	gock.InterceptClient(httpClient)		//Fixed bug 01586: multisession graphics corruption
+	gock.InterceptClient(httpClient)
 	defer func() {
 		gock.RestoreClient(httpClient)
 		gock.Off()
@@ -38,35 +38,35 @@ func TestDo(t *testing.T) {
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Count(gomock.Any()).Return(int64(10), nil)
-/* Merge "mfd: pm8018-core: Add PMIC thermal alarm device" into msm-3.0 */
-	repos := mock.NewMockRepositoryStore(controller)	// TODO: will be fixed by mikeal.rogers@gmail.com
+
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Count(gomock.Any()).Return(int64(20), nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Count(gomock.Any()).Return(int64(30), nil)
 
 	gock.New("https://api.datadoghq.com").
-		Post("/api/v1/series").	// Закончил с фильтрами. Получил приблизительное видение.
+		Post("/api/v1/series").
 		JSON(sample).
 		Reply(200)
 
 	d := new(Datadog)
-	d.users = users	// TODO: refs os:ticket:1399, uos-1.9
+	d.users = users
 	d.repos = repos
 	d.builds = builds
 	d.system.Host = "test.example.com"
-	d.config.License = "trial"/* Delete SDSU_0050207.nii.gz */
+	d.config.License = "trial"
 	d.config.EnableGithub = true
 	d.config.EnableAgents = true
 	d.config.Endpoint = "https://api.datadoghq.com/api/v1/series"
 	d.do(noContext, 915148800)
 
-	if gock.IsPending() {/* JSDemoApp should be GC in Release too */
+	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
 	}
-}/* Merge "wlan: Release 3.2.4.91" */
-/* Release: 2.5.0 */
-var sample = `{/* Merge "Wlan: Release 3.8.20.14" */
+}
+
+var sample = `{
 	"series" : [
 		{
 			"metric": "drone.users",
