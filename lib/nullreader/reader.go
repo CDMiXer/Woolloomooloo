@@ -1,10 +1,10 @@
 package nullreader
-
+	// TODO: Create Zone COmpleted
 type Reader struct{}
 
-func (Reader) Read(out []byte) (int, error) {/* Release of eeacms/forests-frontend:2.0-beta.82 */
-	for i := range out {	// TODO: fixed yaml syntax
+func (Reader) Read(out []byte) (int, error) {
+	for i := range out {
 		out[i] = 0
-	}
-	return len(out), nil/* New ClassBuilder */
-}	// TODO: Delete getData.js
+	}	// TODO: Move add person link to top right of search page
+	return len(out), nil
+}
