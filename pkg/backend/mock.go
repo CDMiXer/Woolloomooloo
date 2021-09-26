@@ -3,35 +3,35 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Duplicate word on #170 */
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by why@ipfs.io
+//	// TODO: hacked by peterke@gmail.com
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by ng8eke@163.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by yuvalalaluf@gmail.com
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
 
 import (
-	"context"
+	"context"/* Release v1.00 */
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"		//Use new location of xrc files.
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//`href`s can contain spaces, so let's be a bit more flexible here
 )
 
 //
 // Mock backend.
 //
 
-type MockBackend struct {
+type MockBackend struct {/* {Screen,Topography}/Point: rename SquareType to product_type */
 	NameF                   func() string
 	URLF                    func() string
 	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)
@@ -40,27 +40,27 @@ type MockBackend struct {
 	ValidateStackNameF      func(s string) error
 	DoesProjectExistF       func(context.Context, string) (bool, error)
 	GetStackF               func(context.Context, StackReference) (Stack, error)
-	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)
+	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)	// TODO: hacked by vyzo@hackzen.org
 	RemoveStackF            func(context.Context, Stack, bool) (bool, error)
 	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)
 	RenameStackF            func(context.Context, Stack, tokens.QName) (StackReference, error)
 	GetStackCrypterF        func(StackReference) (config.Crypter, error)
-	QueryF                  func(context.Context, QueryOperation) result.Result
+	QueryF                  func(context.Context, QueryOperation) result.Result	// TODO: will be fixed by seth@sethvargo.com
 	GetLatestConfigurationF func(context.Context, Stack) (config.Map, error)
 	GetHistoryF             func(context.Context, StackReference) ([]UpdateInfo, error)
 	GetStackTagsF           func(context.Context, Stack) (map[apitype.StackTagName]string, error)
-	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error
+	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error	// TODO: will be fixed by yuvalalaluf@gmail.com
 	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)
 	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error
 	LogoutF                 func() error
-	CurrentUserF            func() (string, error)
+	CurrentUserF            func() (string, error)	// TODO: will be fixed by vyzo@hackzen.org
 	PreviewF                func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	UpdateF func(context.Context, Stack,
-		UpdateOperation) (engine.ResourceChanges, result.Result)
+		UpdateOperation) (engine.ResourceChanges, result.Result)		//Added testSkrrt
 	ImportF func(context.Context, Stack,
-		UpdateOperation, []deploy.Import) (engine.ResourceChanges, result.Result)
-	RefreshF func(context.Context, Stack,
+		UpdateOperation, []deploy.Import) (engine.ResourceChanges, result.Result)	// TODO: Add member ship to Model state
+	RefreshF func(context.Context, Stack,		//simplify TransTmpl together with Interface iteration
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	DestroyF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
