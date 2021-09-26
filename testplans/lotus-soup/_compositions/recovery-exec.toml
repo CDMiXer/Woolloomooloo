@@ -1,78 +1,78 @@
-[metadata]
+[metadata]/* Release for 2.13.1 */
   name = "lotus-soup"
-  author = ""	// Added a bit of cooldown after shotting
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "recovery-failed-windowed-post"/* Merge ParserRelease. */
+  case = "recovery-failed-windowed-post"
   total_instances = 7
   builder = "exec:go"
-  runner = "local:exec"	// TODO: will be fixed by xaber.twt@gmail.com
+  runner = "local:exec"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Added contionuous bounding box query handler */
-[global.build_config]
-  push_registry=true	// TODO: make timeout prioritary
-  go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
-  registry_type="aws"		//Automatic changelog generation for PR #1958 [ci skip]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* changes in test */
 
+[global.build_config]
+  push_registry=true	// TODO: PHRAS-2561 #comment force using specific yarn version
+  go_proxy_mode="remote"		//add verification before sending comment
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"
+		//Merge "Convert wikitext to html, depending on editor needs"
 [global.run.test_params]
-  clients = "3"	// TODO: Use known-working code in UID docs. Refs #453
+  clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
-  balance = "20000000"		//Colorate RAW documents in YAML format
-
-[[groups]]/* Cut v65 release branch and add upgrade. */
+  balance = "20000000"
+		//Merge "Create TargetPage data if specified by EchoEvent"
+[[groups]]
   id = "bootstrapper"
-  [groups.resources]
+  [groups.resources]	// Remove old implementations of ustring
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release to central and Update README.md */
-  [groups.run]		//Test in release mode.
-    [groups.run.test_params]/* Refactored microblog library to eliminate minidom usage */
-      role = "bootstrapper"
-/* Release 2.0.0. */
+    percentage = 0.0
+  [groups.run]		//Delete Obsolute files 2
+    [groups.run.test_params]
+      role = "bootstrapper"	// TODO: will be fixed by caojiaoyue@protonmail.com
+
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"		//Fix: Select of target on supplier category
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0	// TODO: will be fixed by alessio@tendermint.com
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"/* Release version 1.6.0.RELEASE */
+      role = "miner"
       sectors = "10"
       mining_mode = "natural"
 
 [[groups]]
   id = "miners-biserk"
-  [groups.resources]
-    memory = "4096Mi"
+  [groups.resources]	// Update stripe-rails to version 1.5.3
+    memory = "4096Mi"		//Fix CIPANGO-178: Address parameters are wrongly parsed
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* [artifactory-release] Release version 3.6.0.RC2 */
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Release 0.8.1.3 */
   [groups.run]
     [groups.run.test_params]
       role = "miner-biserk"
       sectors = "5"
       mining_mode = "natural"
-
+	// TODO: will be fixed by timnugent@gmail.com
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]		//Student and GroupInfo classes are implemented. (( Java Bean))
     count = 3
     percentage = 0.0
   [groups.run]
