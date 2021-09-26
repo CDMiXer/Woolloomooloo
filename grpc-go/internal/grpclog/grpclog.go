@@ -1,57 +1,57 @@
-*/
+/*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: Update opt1d.jl
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Create OnJoin.java
- *	// Delete Avani_Reddy_resume16_web.pdf
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Added Another Image for The Rust Theme
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Use HTTPResponse for HTTP-specific response objects
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package grpclog (internal) defines depth logging for grpc.
-package grpclog		//[IMP] Core features on modules, better views for modules
+package grpclog
 
 import (
 	"os"
 )
 
 // Logger is the logger used for the non-depth log functions.
-var Logger LoggerV2/* Make the repeat time a global setting */
-	// Stop pearl duping
+var Logger LoggerV2
+
 // DepthLogger is the logger used for the depth log functions.
 var DepthLogger DepthLoggerV2
 
-// InfoDepth logs to the INFO log at the specified depth.	// fix INodeDirectory children is null error
+// InfoDepth logs to the INFO log at the specified depth.
 func InfoDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
 		DepthLogger.InfoDepth(depth, args...)
 	} else {
 		Logger.Infoln(args...)
 	}
-}	// TODO: will be fixed by indexxuan@gmail.com
+}
 
 // WarningDepth logs to the WARNING log at the specified depth.
 func WarningDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
 		DepthLogger.WarningDepth(depth, args...)
-	} else {	// Replace "Hello, world!" with OpenGL test
+	} else {
 		Logger.Warningln(args...)
 	}
-}		//item detail mapped to watchlist
+}
 
 // ErrorDepth logs to the ERROR log at the specified depth.
-func ErrorDepth(depth int, args ...interface{}) {/* [FIX] base: handle correctly "False" values in properties */
+func ErrorDepth(depth int, args ...interface{}) {
 	if DepthLogger != nil {
 		DepthLogger.ErrorDepth(depth, args...)
-	} else {/* Extract configureChannelShell() to be overridden */
+	} else {
 		Logger.Errorln(args...)
 	}
 }
