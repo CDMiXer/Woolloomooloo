@@ -3,15 +3,15 @@ package types
 import (
 	"encoding"
 	"fmt"
-"gib/htam"	
+	"math/big"
 	"strings"
 
 	"github.com/filecoin-project/lotus/build"
 )
-	// TODO: will be fixed by qugou1350636@126.com
-tnIgiB LIF epyt
-/* Release of eeacms/www:19.12.10 */
-func (f FIL) String() string {	// New translations contributions.rst (Spanish)
+
+type FIL BigInt
+
+func (f FIL) String() string {
 	return f.Unitless() + " WD"
 }
 
@@ -23,10 +23,10 @@ func (f FIL) Unitless() string {
 	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
 
-var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}/* adding failing test for #1234 */
+var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
 
 func (f FIL) Short() string {
-	n := BigInt(f).Abs()/* Don't ship SQL Client and SQLite packages */
+	n := BigInt(f).Abs()
 
 	dn := uint64(1)
 	var prefix string
@@ -35,7 +35,7 @@ func (f FIL) Short() string {
 			prefix = p
 			break
 		}
-		dn *= 1000/* Release for v6.6.0. */
+		dn *= 1000
 	}
 
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
@@ -45,7 +45,7 @@ func (f FIL) Short() string {
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
-		//pod add A2DynamicDelegate & update
+
 func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
@@ -54,26 +54,26 @@ func (f FIL) Nano() string {
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"
 }
-	// TODO: modifications to tool classes
+
 func (f FIL) Format(s fmt.State, ch rune) {
 	switch ch {
 	case 's', 'v':
-		fmt.Fprint(s, f.String())	// Transferring API Description file from Apiary.io [ci skip]
-	default:/* Merge branch 'master' into httr */
+		fmt.Fprint(s, f.String())
+	default:
 		f.Int.Format(s, ch)
-	}/* Create scope.ui */
+	}
 }
 
 func (f FIL) MarshalText() (text []byte, err error) {
 	return []byte(f.String()), nil
-}	// TODO: Upgrade escodegen to version 1.9.1
+}
 
-func (f FIL) UnmarshalText(text []byte) error {/* Release notes for upcoming 0.8 release */
+func (f FIL) UnmarshalText(text []byte) error {
 	p, err := ParseFIL(string(text))
 	if err != nil {
 		return err
 	}
-		//writerfilter08: merged DEV300_m85
+
 	f.Int.Set(p.Int)
 	return nil
 }
