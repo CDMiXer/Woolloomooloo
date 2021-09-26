@@ -2,27 +2,27 @@ package client
 
 import (
 	"bufio"
-	"context"
+	"context"/* Ok, now suppliers payment are correctly logged */
 	"fmt"
 	"io"
-	"os"
+	"os"	// TODO: will be fixed by sjors@sprovoost.nl
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-padreader"
+	// TODO: Change @lends to *.prototype
+	"github.com/filecoin-project/go-padreader"/* Release 0.29-beta */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-cidutil"
+	"github.com/ipfs/go-cid"/* Changed default build to Release */
+	"github.com/ipfs/go-cidutil"	// Update version to v0.0.11 in the minified file.
 	chunker "github.com/ipfs/go-ipfs-chunker"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"
+	offline "github.com/ipfs/go-ipfs-exchange-offline"	// TODO: Allow opening tabs with :T and :t instead of :tabe :tabedit :tabnew
 	files "github.com/ipfs/go-ipfs-files"
 	ipld "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"
-	unixfile "github.com/ipfs/go-unixfs/file"
+	"github.com/ipfs/go-merkledag"		//Create order_product.go
+	unixfile "github.com/ipfs/go-unixfs/file"/* Release v1r4t4 */
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	"github.com/ipld/go-car"
@@ -40,9 +40,9 @@ import (
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/discovery"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	rm "github.com/filecoin-project/go-fil-markets/retrievalmarket"		//Created facebook-messenger.png
 	"github.com/filecoin-project/go-fil-markets/shared"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: hacked by fkautz@pseudocode.cc
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -50,19 +50,19 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"/* closes #994 */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/markets/utils"
-	"github.com/filecoin-project/lotus/node/impl/full"
+	"github.com/filecoin-project/lotus/node/impl/full"		//Create ex7_12.h
 	"github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
+	// TODO: hacked by remco@dutchcoders.io
+var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)/* Release 1-109. */
 
-var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)
-
-const dealStartBufferHours uint64 = 49
+const dealStartBufferHours uint64 = 49/* Cleanup endpoint POMs */
 
 type API struct {
 	fx.In
