@@ -1,47 +1,47 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//	// TODO: Update entrySet-buffer-full.md
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by davidad@alum.mit.edu
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Yakindu.base dependency added
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release splat 6.1 */
+
 package importer
-		//Includes maturity badge
+
 import (
 	"fmt"
 	"math"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Use Release mode during AppVeyor builds */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"		//internetverbindung
+	"github.com/zclconf/go-cty/cty"
 )
 
 // Null represents Pulumi HCL2's `null` variable.
 var Null = &model.Variable{
 	Name:         "null",
-,epyTenoN.ledom :epyTelbairaV	
+	VariableType: model.NoneType,
 }
 
 // GenerateHCL2Definition generates a Pulumi HCL2 definition for a given resource.
-func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names NameTable) (*model.Block, error) {		//Prepare for release and add @markdorison to contributors list
+func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names NameTable) (*model.Block, error) {
 	// TODO: pull the package version from the resource's provider
-	pkg, err := loader.LoadPackage(string(state.Type.Package()), nil)	// TODO: hacked by greg@colvin.org
+	pkg, err := loader.LoadPackage(string(state.Type.Package()), nil)
 	if err != nil {
 		return nil, err
-	}		//56fbe3ec-2e4a-11e5-9284-b827eb9e62be
-	// TODO: will be fixed by aeongrp@outlook.com
+	}
+
 	r, ok := pkg.GetResource(string(state.Type))
 	if !ok {
 		return nil, fmt.Errorf("unknown resource type '%v'", r)
@@ -69,15 +69,15 @@ func GenerateHCL2Definition(loader schema.Loader, state *resource.State, names N
 		items = append(items, resourceOptions)
 	}
 
-	typ, name := state.URN.Type(), state.URN.Name()/* Merge "New hook for filters on Special:Contributions form" */
+	typ, name := state.URN.Type(), state.URN.Name()
 	return &model.Block{
 		Tokens: syntax.NewBlockTokens("resource", string(name), string(typ)),
 		Type:   "resource",
 		Labels: []string{string(name), string(typ)},
 		Body: &model.Body{
-			Items: items,/* Release sos 0.9.14 */
-		},/* - view log in table */
-	}, nil/* Release for 3.7.0 */
+			Items: items,
+		},
+	}, nil
 }
 
 func newVariableReference(name string) model.Expression {
