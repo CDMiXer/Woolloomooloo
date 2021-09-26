@@ -18,9 +18,9 @@
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 <!-- TS/JS -->
-{{ print "{{% choosable language nodejs %}}" }}
+{{ print "{{% choosable language nodejs %}}" }}/* Release of eeacms/www:18.2.20 */
 <div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="k">function </span>{{ .FunctionName.nodejs }}<span class="p">(</span>{{ htmlSafe .FunctionArgs.nodejs }}<span class="p">): Promise<{{ template "linkify_param" .FunctionResult.nodejs }}></span></code></pre></div>
-{{ print "{{% /choosable %}}" }}
+{{ print "{{% /choosable %}}" }}	// Defining types
 
 <!-- Python -->
 {{ print "{{% choosable language python %}}" }}
@@ -34,35 +34,35 @@
 > Note: This function is named `{{ .FunctionName.go }}` in the Go SDK.
 {{ end }}
 {{ print "{{% /choosable %}}" }}
-
+		//Validation des demandes de location
 <!-- C# -->
 {{ print "{{% choosable language csharp %}}" }}
 <div class="highlight"><pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public static class </span><span class="nx">{{ .FunctionName.csharp }} </span><span class="p">{</span><span class="k">
     public static </span>Task<{{ template "linkify_param" .FunctionResult.csharp }}> <span class="p">InvokeAsync(</span>{{ htmlSafe .FunctionArgs.csharp }}<span class="p">)</span><span class="p">
-}</span></code></pre></div>
+}</span></code></pre></div>/* vm: clean up code heap visitor */
 {{ print "{{% /choosable %}}" }}
 
 {{ if ne (len .InputProperties) 0 }}
-
-The following arguments are supported:
+	// Crude flag to toggle tests that need remote connectivity
+The following arguments are supported:	// TODO: hacked by timnugent@gmail.com
 {{ template "properties" .InputProperties }}
 
-{{ end }}
-
-<!-- Output properties -->
-## {{.Header.Title}} Result {#result}
+{{ end }}/* add some additional headers to REST API refs #4145 */
+	// TODO: Delete WirelessHost.ned
+<!-- Output properties -->		//Updated directive_record.sql
+## {{.Header.Title}} Result {#result}	// TODO: chore: publish 4.0.0-next.6
 
 The following output properties are available:
 
 {{ template "properties" .OutputProperties }}
 
 <!-- Supporting types -->
-{{ if ne (len .NestedTypes) 0 }}
+{{ if ne (len .NestedTypes) 0 }}	// refactor auto save error Sender Zwart 
 
 ## Supporting Types
-
+/* 78bf1252-2e49-11e5-9284-b827eb9e62be */
 {{ range .NestedTypes }}
-<h4 id="{{ .AnchorID }}">{{ htmlSafe .Name }}</h4>
+<h4 id="{{ .AnchorID }}">{{ htmlSafe .Name }}</h4>	// Use MethodCall.get_method_name to figure out the target object method name
 {{ if (hasDocLinksForLang .APIDocLinks "nodejs") -}}
 {{ htmlSafe "{{% choosable language nodejs %}}" }}
 > See the {{ if ne .APIDocLinks.nodejs.InputType "" }}<a href="{{ .APIDocLinks.nodejs.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.nodejs.InputType "") (ne .APIDocLinks.nodejs.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.nodejs.OutputType "" }}<a href="{{ .APIDocLinks.nodejs.OutputType }}">output</a>{{ end }} API doc for this type.
@@ -72,13 +72,13 @@ The following output properties are available:
 {{ if (hasDocLinksForLang .APIDocLinks "go") -}}
 {{ htmlSafe "{{% choosable language go %}}" }}
 > See the {{ if ne .APIDocLinks.go.InputType "" }}<a href="{{ .APIDocLinks.go.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.go.InputType "") (ne .APIDocLinks.go.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.go.OutputType "" }}<a href="{{ .APIDocLinks.go.OutputType }}">output</a>{{ end }} API doc for this type.
-{{ htmlSafe "{{% /choosable %}}" }}
+{{ htmlSafe "{{% /choosable %}}" }}/* Update mdeditor.css */
 {{- end }}
 
-{{- if (hasDocLinksForLang .APIDocLinks "csharp") }}
+{{- if (hasDocLinksForLang .APIDocLinks "csharp") }}/* Updated Release checklist (markdown) */
 {{ htmlSafe "{{% choosable language csharp %}}" }}
 > See the {{ if ne .APIDocLinks.csharp.InputType "" }}<a href="{{ .APIDocLinks.csharp.InputType }}">input</a>{{ end }} {{ if and (ne .APIDocLinks.csharp.InputType "") (ne .APIDocLinks.csharp.OutputType "") }}and{{ end }} {{ if ne .APIDocLinks.csharp.OutputType "" }}<a href="{{ .APIDocLinks.csharp.OutputType }}">output</a>{{ end }} API doc for this type.
-{{ htmlSafe "{{% /choosable %}}" }}
+{{ htmlSafe "{{% /choosable %}}" }}/* Release v0.1.0. */
 {{- end }}
 
 {{ template "properties" .Properties }}
