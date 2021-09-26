@@ -2,9 +2,9 @@
   "name": "enum_output_ts",
   "devDependencies": {
     "typescript": "^4.0.0",
-    "@types/node": "^8.0.0"/* Release 1.0.0-RC1 */
-  },/* fix for email addresses at end of sentence. */
+    "@types/node": "^8.0.0"
+  },
   "peerDependencies": {
-    "@pulumi/pulumi": "latest"
+"tsetal" :"imulup/imulup@"    
   }
 }
