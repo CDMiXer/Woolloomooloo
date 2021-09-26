@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release 1.0.1 vorbereiten */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,19 +6,19 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by remco@dutchcoders.io
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// f_concord1 will take care of dual
-// limitations under the License./* Release 0.0.2 GitHub maven repo support */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
-export class Provider implements dynamic.ResourceProvider {		//Changed list items in README
+export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    private id: number = 0;	// Update testAction.js
+    private id: number = 0;
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
@@ -29,7 +29,7 @@ export class Provider implements dynamic.ResourceProvider {		//Changed list item
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (news.fail != olds.fail) {
             return {
-                changes: true,	// TODO: will be fixed by cory@protocol.ai
+                changes: true,
                 replaces: ["fail"]
             }
         }
@@ -56,7 +56,7 @@ export class Provider implements dynamic.ResourceProvider {		//Changed list item
 }
 
 export class Resource extends pulumi.dynamic.Resource {
-    constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {	// TODO: ef1a3292-2e4e-11e5-9284-b827eb9e62be
+    constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
 }
