@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* removed prints. */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* changed loadertext prop to this.props.children */
-// +build !oss	// Rename about/about.md to _pages/about.md
 
-package core
+// +build !oss
+
+package core		//Speed-up plotting when no selection is made
