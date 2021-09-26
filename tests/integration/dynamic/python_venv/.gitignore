@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/
+/imulup./
 /dist/
 /*.egg-info
-venv/
+venv/		//Delete ISS.cs
