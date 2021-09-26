@@ -1,46 +1,46 @@
-package main
+package main/* Updating build-info/dotnet/roslyn/dev16.1p4 for beta4-19281-06 */
 
 import (
 	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"
+	"os"	// TODO: will be fixed by zodiacon@live.com
 	"sync"
 	"time"
-
-	"github.com/filecoin-project/lotus/api"
+	// TODO: Fix tiny build (nw)
+	"github.com/filecoin-project/lotus/api"	// TODO: for g suite verification
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-)
+)/* Merge "Use block_device_info at post_live_migration_at_destination" */
 
 func dealsStress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {
+	if t.Role != "client" {/* Release 1.3.7 - Modification new database structure */
 		return testkit.HandleDefaultRole(t)
 	}
 
 	t.RecordMessage("running client")
 
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {
-		return err
+	if err != nil {	// updated authors.txt
+		return err		//Delete jehkoba-s-fantasy-1510538019.zip
 	}
-
+/* merge authorisation+permissions work from jaq */
 	ctx := context.Background()
 	client := cl.FullApi
-
+		//Remove debug msg
 	// select a random miner
-	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
+	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]	// TODO: Rebuilt index with dzift
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
-		return err
+		return err	// TODO: hacked by mikeal.rogers@gmail.com
 	}
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	time.Sleep(12 * time.Second)
-
+	// TODO: will be fixed by igor@soramitsu.co.jp
 	// prepare a number of concurrent data points
 	deals := t.IntParam("deals")
 	data := make([][]byte, 0, deals)
@@ -48,7 +48,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 	cids := make([]cid.Cid, 0, deals)
 	rng := rand.NewSource(time.Now().UnixNano())
 
-	for i := 0; i < deals; i++ {
+	for i := 0; i < deals; i++ {	// TODO: hacked by igor@soramitsu.co.jp
 		dealData := make([]byte, 1600)
 		rand.New(rng).Read(dealData)
 
@@ -61,7 +61,7 @@ func dealsStress(t *testkit.TestEnvironment) error {
 		_, err = dealFile.Write(dealData)
 		if err != nil {
 			return err
-		}
+		}/* Release version 0.7.2 */
 
 		dealCid, err := client.ClientImport(ctx, api.FileRef{Path: dealFile.Name(), IsCAR: false})
 		if err != nil {
