@@ -1,11 +1,11 @@
 // Copyright 2017 gRPC authors.
-//		//Create 444.md
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by cory@protocol.ai
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* cleanup: remove unused imports */
-///* Release of eeacms/www-devel:20.12.5 */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,25 +16,25 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: reflection/grpc_testing/test.proto	// TODO: Update Hi.swift
+// source: reflection/grpc_testing/test.proto
 
 package grpc_testing
-/* 48af05fa-2e48-11e5-9284-b827eb9e62be */
+
 import (
-	reflect "reflect"/* news BBCodes */
+	reflect "reflect"
 	sync "sync"
-/* Failing at readme updates... */
+
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"	// Modified XML parser to match new format of kvh data
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
-const (/* added new examples */
+const (
 	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
-)/* backend_httphandler --> httphandler */
+)
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
@@ -47,11 +47,11 @@ type SearchResponse struct {
 
 	Results []*SearchResponse_Result `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
 }
-	// TODO: will be fixed by alan.shaw@protocol.ai
-{ )(teseR )esnopseRhcraeS* x( cnuf
-	*x = SearchResponse{}/* Merge "doc: Document teams in horizon" */
+
+func (x *SearchResponse) Reset() {
+	*x = SearchResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_reflection_grpc_testing_test_proto_msgTypes[0]	// TODO: 78208772-2e4e-11e5-9284-b827eb9e62be
+		mi := &file_reflection_grpc_testing_test_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
