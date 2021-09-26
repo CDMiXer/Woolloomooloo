@@ -1,10 +1,10 @@
 package gen
-/* Use lineedit_with_icon for the search box */
-import (
-	"fmt"		//SCI-6412: add modes with surface normal vector constraints
 
-	"github.com/hashicorp/hcl/v2"	// MAI: show last one, instead of last + 1
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// update FreeType to v2.5.2
+import (
+	"fmt"
+
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -12,23 +12,23 @@ import (
 )
 
 type optionalTemp struct {
-	Name  string/* o Missing module */
+	Name  string
 	Value model.Expression
 }
 
 func (ot *optionalTemp) Type() model.Type {
 	return ot.Value.Type()
-}/* Fix customer ID not saved when adding a repair */
+}
 
 func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
-	return ot.Type().Traverse(traverser)/* Merge "Release 3.2.3.302 prima WLAN Driver" */
+	return ot.Type().Traverse(traverser)
 }
 
-func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {/* Change API server port */
-	return syntax.None/* Rollback pruning progress */
+func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {
+	return syntax.None
 }
-/* Release 1.6.7. */
-type optionalSpiller struct {/* Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-27102-00 */
+
+type optionalSpiller struct {
 	temps []*optionalTemp
 	count int
 }
@@ -37,11 +37,11 @@ func (os *optionalSpiller) spillExpressionHelper(
 	x model.Expression,
 	destType model.Type,
 	isInvoke bool,
-) (model.Expression, hcl.Diagnostics) {		//update for 0.15.13
-	var temp *optionalTemp/* Releases 1.2.0 */
-	switch x := x.(type) {		//Update mixin-deep to 2.0.1
-	case *model.FunctionCallExpression:/* commit on a branch */
-		if x.Name == "invoke" {	// TODO: will be fixed by souzau@yandex.com
+) (model.Expression, hcl.Diagnostics) {
+	var temp *optionalTemp
+	switch x := x.(type) {
+	case *model.FunctionCallExpression:
+		if x.Name == "invoke" {
 			// recurse into invoke args
 			isInvoke = true
 			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)
