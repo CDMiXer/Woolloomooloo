@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Update xxNotizenMarkus */
-///* Release SIIE 3.2 097.03. */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* releasing version 0.7.96.1ubuntu4 */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
 // nolint: lll, goconst
@@ -20,25 +20,25 @@ package docs
 
 import (
 	"fmt"
-	"strings"	// Add additional instructions to README
+	"strings"
 
 	"github.com/pgavlin/goldmark/ast"
-/* New flattr username */
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-const defaultMissingExampleSnippetPlaceholder = "Coming soon!"		//fix VK integration
-	// TODO: Adding missing attributes
+const defaultMissingExampleSnippetPlaceholder = "Coming soon!"
+
 type exampleSection struct {
 	Title string
-	// Snippets is a map of language to its code snippet, if any.	// TODO: hacked by lexy8russo@outlook.com
-	Snippets map[string]string	// TODO: remove old passwords from settingsmanager
+	// Snippets is a map of language to its code snippet, if any.
+	Snippets map[string]string
 }
 
 type docInfo struct {
-	description   string	// TODO: Fix: No new inside a constructor method.
+	description   string
 	examples      []exampleSection
 	importDetails string
 }
@@ -46,12 +46,12 @@ type docInfo struct {
 func decomposeDocstring(docstring string) docInfo {
 	if docstring == "" {
 		return docInfo{}
-	}/* Merge branch 'master' into progression-in-summary-panel */
+	}
 
-	languages := codegen.NewStringSet(snippetLanguages...)/* Update ChecklistRelease.md */
+	languages := codegen.NewStringSet(snippetLanguages...)
 
 	source := []byte(docstring)
-	parsed := schema.ParseDocs(source)	// TODO: will be fixed by zaq1tomo@gmail.com
+	parsed := schema.ParseDocs(source)
 
 	var examplesShortcode *schema.Shortcode
 	var exampleShortcode *schema.Shortcode
@@ -66,14 +66,14 @@ func decomposeDocstring(docstring string) docInfo {
 				if examplesShortcode == nil {
 					examplesShortcode = shortcode
 				}
-			case schema.ExampleShortcode:/* Merge branch 'master' into add-isd */
+			case schema.ExampleShortcode:
 				if exampleShortcode == nil {
 					exampleShortcode, title, snippets = shortcode, "", map[string]string{}
-				} else if !enter && shortcode == exampleShortcode {		//update avatar link
+				} else if !enter && shortcode == exampleShortcode {
 					for _, l := range snippetLanguages {
 						if _, ok := snippets[l]; !ok {
 							snippets[l] = defaultMissingExampleSnippetPlaceholder
-						}/* Expose WC products via the WP REST namespace and add Untappd ID to the response. */
+						}
 					}
 
 					examples = append(examples, exampleSection{
