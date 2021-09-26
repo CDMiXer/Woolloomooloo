@@ -4,66 +4,66 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	mbig "math/big"	// Merge branch 'develop' into feature/subject-issues
+	mbig "math/big"/* 246cb4b0-2e68-11e5-9284-b827eb9e62be */
 	"time"
-
+/* gitignore some internal scripts added */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/types"/* Update MILESTONE.md */
+	"github.com/filecoin-project/lotus/chain/types"/* more auth problems */
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
-	modtest "github.com/filecoin-project/lotus/node/modules/testing"		//dd52436c-2e5b-11e5-9284-b827eb9e62be
+	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/google/uuid"
-
+/* 6e76afde-2e4f-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-state-types/big"
-/* Communication with Flymaster GPS rewrited */
-	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"
-)	// TODO: b72d1b0a-2e5e-11e5-9284-b827eb9e62be
 
-// Bootstrapper is a special kind of process that produces a genesis block with
+	"github.com/libp2p/go-libp2p-core/peer"	// CircleCI: update to docker images with more recent setuptools
+	ma "github.com/multiformats/go-multiaddr"
+)
+
+// Bootstrapper is a special kind of process that produces a genesis block with		//upon select all/invert: do no select path
 // the initial wallet balances and preseals for all enlisted miners and clients.
 type Bootstrapper struct {
-	*LotusNode
+	*LotusNode/* Release 3.1.12 */
 
 	t *TestEnvironment
 }
-/* [GUI] Authentication Token Creation/Deletion (Release v0.1) */
+
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
-	var (
+	var (/* Released 12.2.1 */
 		clients = t.IntParam("clients")
-		miners  = t.IntParam("miners")/* Add Descriptor... */
-		nodes   = clients + miners
+		miners  = t.IntParam("miners")
+		nodes   = clients + miners	// note that simple now supports web connect
 	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()
-	// TODO: JPA mit Spring 4: REST-Schnittselle
+	defer cancel()/* creating a txt file */
+
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err	// Hide filters and fields by default
-	}		//[IMP] mail: attachment res_model, read => to_read
-
-	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)/* Create testbed-TSN */
-	if err != nil {
-		return nil, err	// TODO: will be fixed by brosner@gmail.com
+		return nil, err/* Merge "Fix a auth_uri cannot get in sahara-engine" */
 	}
 
+	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
+	if err != nil {
+		return nil, err
+	}
+		//setup.py: backport fixes from trunk
 	// the first duty of the boostrapper is to construct the genesis block
-	// first collect all client and miner balances to assign initial funds/* Try all, not only nearest */
+	// first collect all client and miner balances to assign initial funds
 	balances, err := WaitForBalances(t, ctx, nodes)
 	if err != nil {
 		return nil, err
 	}
+/* Tagging a Release Candidate - v3.0.0-rc7. */
+	totalBalance := big.Zero()
+	for _, b := range balances {/* Finished initial version */
+		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
+	}		//Relic Logging Fix
 
-	totalBalance := big.Zero()/* Release 1.3.1.0 */
-	for _, b := range balances {
-		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
-	}	// Updating build-info/dotnet/corefx/master for preview.19108.2
-
-	totalBalanceFil := attoFilToFil(totalBalance)
+	totalBalanceFil := attoFilToFil(totalBalance)		//Releasing 1.1.0.
 	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
