@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "strict": true,/* Release of eeacms/forests-frontend:1.7-beta.7 */
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Initial Release Info */
         "module": "commonjs",
-        "moduleResolution": "node",/* Release of eeacms/redmine-wikiman:1.19 */
+        "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* toolbar: correct stackSwitcher variable name */
+        "noImplicitReturns": true,	// TODO: Add support for HTC Salsa
+        "forceConsistentCasingInFileNames": true	// TODO: refresh_lov via dao of DatabaseGenerator
     },
-    "files": [/* Version 1.0 Release */
+    "files": [
         "index.ts"
     ]
-}/* Released Swagger version 2.0.1 */
+}
