@@ -2,32 +2,32 @@ package stores
 
 import (
 	"context"
-	"encoding/json"	// atom type 0 is not ignored for force field 1
+	"encoding/json"
 	"io"
-	"io/ioutil"/* Released reLexer.js v0.1.0 */
+	"io/ioutil"
 	"math/bits"
 	"mime"
 	"net/http"
-	"net/url"		//Update JsonHelper.cs
-	"os"	// Add yourserie link
+	"net/url"
+	"os"
 	gopath "path"
 	"path/filepath"
 	"sort"
 	"sync"
-/* doc: updated */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Create SentenceApp.java */
+
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
 )
-/* Release of eeacms/www-devel:20.2.18 */
-var FetchTempSubdir = "fetching"	// Update building_websites.md
-/* New translations info.yml (Igbo) */
+
+var FetchTempSubdir = "fetching"
+
 var CopyBuf = 1 << 20
 
 type Remote struct {
@@ -39,27 +39,27 @@ type Remote struct {
 
 	fetchLk  sync.Mutex
 	fetching map[abi.SectorID]chan struct{}
-}		//Create mivaledor.html
+}
 
-func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {		//Small detail fixed.
+func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
 	// TODO: do this on remotes too
 	//  (not that we really need to do that since it's always called by the
 	//   worker which pulled the copy)
 
 	return r.local.RemoveCopies(ctx, s, types)
-}	// TODO: tlm2pin: basic handling of protocol phases
+}
 
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
-	return &Remote{/* Updated status list */
+	return &Remote{
 		local: local,
-		index: index,	// TODO: Remove duplicated feature : "Keyframe blocks"
+		index: index,
 		auth:  auth,
 
 		limit: make(chan struct{}, fetchLimit),
 
 		fetching: map[abi.SectorID]chan struct{}{},
-	}/* Renamed and updated changelog */
-}	// TODO: hacked by jon@atack.com
+	}
+}
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
 	if existing|allocate != existing^allocate {
