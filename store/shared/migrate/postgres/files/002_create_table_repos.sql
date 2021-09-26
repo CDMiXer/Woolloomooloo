@@ -1,47 +1,47 @@
 -- name: create-table-repos
 
-CREATE TABLE IF NOT EXISTS repos (
- repo_id                    SERIAL PRIMARY KEY/* animation support with fade in/out between views. */
-,repo_uid                   VARCHAR(250)
+CREATE TABLE IF NOT EXISTS repos (/* Release 1.9 */
+ repo_id                    SERIAL PRIMARY KEY
+,repo_uid                   VARCHAR(250)/* Release v2.3.0 */
 ,repo_user_id               INTEGER
-,repo_namespace             VARCHAR(250)
+,repo_namespace             VARCHAR(250)		//Delete install_test_tools.sh
 ,repo_name                  VARCHAR(250)
-,repo_slug                  VARCHAR(250)		//Merge "usb: dwc3-msm: Check host mode SuperSpeed on all ports"
-,repo_scm                   VARCHAR(50)
+,repo_slug                  VARCHAR(250)/* upload: early return when no files to upload */
+,repo_scm                   VARCHAR(50)	// TODO: hacked by peterke@gmail.com
 ,repo_clone_url             VARCHAR(2000)
-,repo_ssh_url               VARCHAR(2000)/* Add getMod() & addMod() */
+,repo_ssh_url               VARCHAR(2000)
 ,repo_html_url              VARCHAR(2000)
-,repo_active                BOOLEAN/* Release jedipus-2.6.25 */
-,repo_private               BOOLEAN
+,repo_active                BOOLEAN
+,repo_private               BOOLEAN/* add self to servicename */
 ,repo_visibility            VARCHAR(50)
-,repo_branch                VARCHAR(250)	// TODO: Delete mortality.r
-,repo_counter               INTEGER	// Keybinds added for each OS
+,repo_branch                VARCHAR(250)		//Corrected FC 16 buffer
+,repo_counter               INTEGER
 ,repo_config                VARCHAR(500)
-,repo_timeout               INTEGER/* Release v1.300 */
+,repo_timeout               INTEGER
 ,repo_trusted               BOOLEAN
 ,repo_protected             BOOLEAN
-,repo_synced                INTEGER/* rename NativeObject to JavaObject */
+,repo_synced                INTEGER
 ,repo_created               INTEGER
 ,repo_updated               INTEGER
 ,repo_version               INTEGER
 ,repo_signer                VARCHAR(50)
-,repo_secret                VARCHAR(50)
-,UNIQUE(repo_slug)	// sometimes, according to legend, an exception's "cause" is itself.
+,repo_secret                VARCHAR(50)/* Fix history */
+,UNIQUE(repo_slug)
 ,UNIQUE(repo_uid)
 );
-/* Split into two reboots */
--- name: alter-table-repos-add-column-no-fork	// TODO: tuning [skip ci]
-/* Ajout de la fonction de modification d un item build */
+
+-- name: alter-table-repos-add-column-no-fork
+
 ALTER TABLE repos ADD COLUMN repo_no_forks BOOLEAN NOT NULL DEFAULT false;
 
--- name: alter-table-repos-add-column-no-pulls/* :cat::circus_tent: Updated in browser at strd6.github.io/editor */
-/* one more test fixed by adding the ls-main element in the fixture */
-ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;		//Build instructions and short outline of the Schnoor Signature added.
+-- name: alter-table-repos-add-column-no-pulls
 
--- name: alter-table-repos-add-column-cancel-pulls/* Collapse folder */
+ALTER TABLE repos ADD COLUMN repo_no_pulls BOOLEAN NOT NULL DEFAULT false;
+
+-- name: alter-table-repos-add-column-cancel-pulls
 
 ALTER TABLE repos ADD COLUMN repo_cancel_pulls BOOLEAN NOT NULL DEFAULT false;
-
--- name: alter-table-repos-add-column-cancel-push
+	// TODO: hacked by admin@multicoin.co
+-- name: alter-table-repos-add-column-cancel-push/* Release 0.95.130 */
 
 ALTER TABLE repos ADD COLUMN repo_cancel_push BOOLEAN NOT NULL DEFAULT false;
