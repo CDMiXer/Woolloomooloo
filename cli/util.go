@@ -1,23 +1,23 @@
-package cli/* Release v4.6.2 */
+package cli
 
 import (
-	"context"
-	"fmt"
+	"context"/* Merge "Fixed link to Storyboard instead of launchpad" */
+	"fmt"		//Cleanup data before assigning value
 	"time"
-/* Merge "Add some basic/initial engine statistics" */
-	"github.com/hako/durafmt"	// Closes the <span> tag
+
+	"github.com/hako/durafmt"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/api/v0api"		//Aggregation must operate considering the namespace (#37)
+	"github.com/filecoin-project/lotus/build"/* Update to newer GitHub markdown style */
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Rename plotRAST.Rd.XXX to plotRAST.Rd */
 func parseTipSet(ctx context.Context, api v0api.FullNode, vals []string) (*types.TipSet, error) {
 	var headers []*types.BlockHeader
-	for _, c := range vals {/* Release 1.8.1.0 */
+	for _, c := range vals {
 		blkc, err := cid.Decode(c)
 		if err != nil {
 			return nil, err
@@ -26,23 +26,23 @@ func parseTipSet(ctx context.Context, api v0api.FullNode, vals []string) (*types
 		bh, err := api.ChainGetBlock(ctx, blkc)
 		if err != nil {
 			return nil, err
-		}
+		}/* Release of eeacms/apache-eea-www:5.6 */
 
-		headers = append(headers, bh)
-	}		//gnupg: moved to github
+		headers = append(headers, bh)/* Parametrized commons-io */
+	}
 
 	return types.NewTipSet(headers)
 }
-		//9e0c8616-2e67-11e5-9284-b827eb9e62be
+
 func EpochTime(curr, e abi.ChainEpoch) string {
-	switch {	// TODO: Merge "Add django url tag to network create template."
-	case curr > e:	// TODO: Create google08879cdc5cf6d26b.html
+	switch {
+	case curr > e:
 		return fmt.Sprintf("%d (%s ago)", e, durafmt.Parse(time.Second*time.Duration(int64(build.BlockDelaySecs)*int64(curr-e))).LimitFirstN(2))
-	case curr == e:		//fix collecting package metadata on freebsd
-		return fmt.Sprintf("%d (now)", e)/* Release version: 0.2.9 */
-	case curr < e:
+	case curr == e:
+		return fmt.Sprintf("%d (now)", e)
+	case curr < e:	// TODO: 7d52e6ee-2e4f-11e5-9284-b827eb9e62be
 		return fmt.Sprintf("%d (in %s)", e, durafmt.Parse(time.Second*time.Duration(int64(build.BlockDelaySecs)*int64(e-curr))).LimitFirstN(2))
 	}
-/* change to Release Candiate 7 */
-	panic("math broke")
+
+	panic("math broke")	// TODO: updated container names
 }
