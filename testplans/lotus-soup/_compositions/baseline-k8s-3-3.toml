@@ -1,15 +1,15 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
-
+  author = ""/* Update DHX-aadressiraamat.md */
+	// TODO: hacked by m-ou.se@m-ou.se
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 7
+  total_instances = 7/* Edited wiki page ReleaseProcess through web user interface. */
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]
+[global.build]/* initial commit of puppet code and hangman app */
   selectors = ["testground"]
 
 [global.run_config]
@@ -18,10 +18,10 @@
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"		//Merge "Fix installing tempest plugins"
   registry_type="aws"
-
-[global.run.test_params]
+		//adjust individual output and comparison
+[global.run.test_params]		//a4d9311c-2e51-11e5-9284-b827eb9e62be
   clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
@@ -31,9 +31,9 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Release: Making ready to release 6.0.1 */
   [groups.resources]
-    memory = "512Mi"
+    memory = "512Mi"/* Create api.init.functions.php */
     cpu = "1000m"
   [groups.instances]
     count = 1
@@ -41,11 +41,11 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]
+/* Release 0.2.0-beta.3 */
+[[groups]]	// Update init.upstart
   id = "miners"
-  [groups.resources]
-    memory = "4096Mi"
+  [groups.resources]	// force layout: add accessors for gravity
+    memory = "4096Mi"	// TODO: Added youtube picture link.
     cpu = "1000m"
   [groups.instances]
     count = 3
@@ -53,14 +53,14 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+/* Release beta2 */
 [[groups]]
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 3
+    count = 3		//Delete homebook.maf
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
