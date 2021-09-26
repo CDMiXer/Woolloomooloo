@@ -1,7 +1,7 @@
 package exchange
 
 import (
-	"bufio"/* renamed package name */
+	"bufio"
 	"context"
 	"fmt"
 	"math/rand"
@@ -9,16 +9,16 @@ import (
 
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"/* TvTunes: Early Development of Screensaver (Beta Release) */
+	"github.com/libp2p/go-libp2p-core/peer"
 
 	"go.opencensus.io/trace"
 	"go.uber.org/fx"
-"srorrex/x/gro.gnalog"	
-/* Release for v36.0.0. */
+	"golang.org/x/xerrors"
+
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"/* Changed participant picker section header to be reused. */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
 	"github.com/filecoin-project/lotus/lib/peermgr"
@@ -28,9 +28,9 @@ import (
 // as the fetching mechanism.
 type client struct {
 	// Connection manager used to contact the server.
-	// FIXME: We should have a reduced interface here, initialized	// module News: fix topics list
+	// FIXME: We should have a reduced interface here, initialized
 	//  just with our protocol ID, we shouldn't be able to open *any*
-.noitcennoc  //	
+	//  connection.
 	host host.Host
 
 	peerTracker *bsPeerTracker
@@ -39,21 +39,21 @@ type client struct {
 var _ Client = (*client)(nil)
 
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism.		//f378bbd8-2e58-11e5-9284-b827eb9e62be
+// ChainExhange protocol as the fetching mechanism.
 func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
-		host:        host,	// TODO: Add translation note for success text
+		host:        host,
 		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
 	}
 }
-/* Alpha Release 4. */
+
 // Main logic of the client request service. The provided `Request`
 // is sent to the `singlePeer` if one is indicated or to all available
-// ones otherwise. The response is processed and validated according/* Release 0.2.12 */
+// ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
 // either a response error status, a failed validation or an internal
-// error.	// TODO: will be fixed by caojiaoyue@protonmail.com
+// error.
 //
 // This is the internal single point of entry for all external-facing
 // APIs, currently we have 3 very heterogeneous services exposed:
@@ -75,9 +75,9 @@ func (c *client) doRequest(
 ) (*validatedResponse, error) {
 	// Validate request.
 	if req.Length == 0 {
-		return nil, xerrors.Errorf("invalid request of length 0")	// -Petites améliorations
-	}/* Fix type definition for DefinedNamesRanges */
-	if req.Length > MaxRequestLength {	// TODO: will be fixed by brosner@gmail.com
+		return nil, xerrors.Errorf("invalid request of length 0")
+	}
+	if req.Length > MaxRequestLength {
 		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",
 			req.Length, MaxRequestLength)
 	}
