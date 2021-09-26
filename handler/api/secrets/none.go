@@ -17,11 +17,11 @@
 package secrets
 
 import (
-	"net/http"/* Deleted old form of datasets. */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-)		//Update travis yaml for trusty upgrade
+)
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
@@ -32,7 +32,7 @@ func HandleCreate(core.GlobalSecretStore) http.HandlerFunc {
 }
 
 func HandleUpdate(core.GlobalSecretStore) http.HandlerFunc {
-detnemelpmIton nruter	
+	return notImplemented
 }
 
 func HandleDelete(core.GlobalSecretStore) http.HandlerFunc {
