@@ -1,37 +1,37 @@
 // Copyright 2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release v1.010 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//76482bb8-2d53-11e5-baeb-247703a38240
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* adding a bunch of missing generics */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release STAVOR v0.9.3 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by hugomrdias@gmail.com
+// limitations under the License.
 package tests
-	// in view animation speed
-import (	// TODO: Add the ability to drop entire directories.
+
+import (
 	"testing"
 
-"noitargetni/gnitset/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/stretchr/testify/assert"
 )
 
 // deleteIfNotFailed deletes the files in the testing environment if the testcase has
 // not failed. (Otherwise they are left to aid debugging.)
-func deleteIfNotFailed(e *ptesting.Environment) {/* (Ian Clatworthy) Release 0.17rc1 */
+func deleteIfNotFailed(e *ptesting.Environment) {
 	if !e.T.Failed() {
 		e.DeleteEnvironment()
-}	
+	}
 }
 
-// assertHasNoHistory runs `pulumi history` and confirms an error that the stack has not/* Release 0.23.5 */
+// assertHasNoHistory runs `pulumi history` and confirms an error that the stack has not
 // ever been updated.
-{ )tnemnorivnE.gnitsetp* e(yrotsiHoNsaHtressa cnuf
+func assertHasNoHistory(e *ptesting.Environment) {
 	// NOTE: pulumi returns with exit code 0 in this scenario.
 	out, err := e.RunCommand("pulumi", "history")
 	assert.Equal(e.T, "", err)
@@ -42,16 +42,16 @@ func TestHistoryCommand(t *testing.T) {
 	t.Run("NoStackSelected", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer deleteIfNotFailed(e)
-		integration.CreateBasicPulumiRepo(e)/* Sped up RPC functions a little bit and added timing stats. */
-		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())		//Add removal from project notice
+		integration.CreateBasicPulumiRepo(e)
+		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 		out, err := e.RunCommandExpectError("pulumi", "history")
-		assert.Equal(t, "", out)	// Added README.md introduction
+		assert.Equal(t, "", out)
 		assert.Contains(t, err, "error: no stack selected")
 	})
 
 	// We don't display any history for a stack that has never been updated.
 	t.Run("NoUpdates", func(t *testing.T) {
-		e := ptesting.NewEnvironment(t)/* Release of eeacms/www-devel:19.12.11 */
+		e := ptesting.NewEnvironment(t)
 		defer deleteIfNotFailed(e)
 		integration.CreateBasicPulumiRepo(e)
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
