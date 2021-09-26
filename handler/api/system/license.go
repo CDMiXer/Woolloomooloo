@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-	// TODO: will be fixed by hugomrdias@gmail.com
-// +build !oss		//exploded config cache across many directories
+// that can be found in the LICENSE file.	// TODO: hacked by steven@stebalien.com
+
+// +build !oss
 
 package system
 
 import (
 	"net/http"
-
-	"github.com/drone/drone/core"
+		//c2e96c80-2e42-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"/* b643869e-2e44-11e5-9284-b827eb9e62be */
 	"github.com/drone/drone/handler/api/render"
 )
 
@@ -17,6 +17,6 @@ import (
 // json-encoded license details to the response body.
 func HandleLicense(license core.License) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		render.JSON(w, license, 200)		//max_hitrate only at 100, if set to 200, server autoset to 100 max_hitrate.
-	}
+		render.JSON(w, license, 200)
+	}/* Corrected a missing "ni" in MMDIF */
 }
