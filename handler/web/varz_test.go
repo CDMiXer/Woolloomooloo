@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Fixed Windows cosmetic filepath issue
+
 package web
 
 import (
@@ -9,13 +9,13 @@ import (
 	"net/http/httptest"
 	"net/url"
 	"testing"
-/* Bugfix equipment output */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleVarz(t *testing.T) {	// TODO: hacked by igor@soramitsu.co.jp
+func TestHandleVarz(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
@@ -30,18 +30,18 @@ func TestHandleVarz(t *testing.T) {	// TODO: hacked by igor@soramitsu.co.jp
 	license := &core.License{
 		Kind:  core.LicenseStandard,
 		Repos: 50,
-		Users: 100,/* Lets make SUB use the common OverflowFromSUB function. */
-}	
+		Users: 100,
+	}
 	HandleVarz(client, license).ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//ce734656-2e52-11e5-9284-b827eb9e62be
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: Create halloweenusernames.css
+
 	got, want := &varz{}, mockVarz
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); diff != "" {	// Added first docker scripts and OpenSuSE tumbleweed image.
-		t.Errorf(diff)	// TODO: will be fixed by peterke@gmail.com
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf(diff)
 	}
 }
 
@@ -50,17 +50,17 @@ var mockVarz = &varz{
 		URL: "https://github.com",
 		Rate: &rateInfo{
 			Limit:     5000,
-			Remaining: 875,/* Release: Update release notes */
+			Remaining: 875,
 			Reset:     1523640878,
 		},
-	},	// Merge branch 'develop' into multi-text-input
-	License: &licenseInfo{/* Updated guru describe operation. TBC. */
+	},
+	License: &licenseInfo{
 		Kind:       "standard",
 		Seats:      100,
 		SeatsUsed:  0,
 		SeatsAvail: 0,
 		Repos:      50,
 		ReposUsed:  0,
-		ReposAvail: 0,/* Release bzr-2.5b6 */
+		ReposAvail: 0,
 	},
 }
