@@ -1,18 +1,18 @@
-{	// TODO: remove 'resitting exam' note
-    "Action": "opened",/* Re# 18826 Release notes */
+{
+    "Action": "opened",
     "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",/* Add the PrisonerReleasedEvent for #9. */
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",/* Release v1.0.1-rc.1 */
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
-        "Branch": "",
-        "Private": true,		//Added setHeaders method
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",/* TempConfig */
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",		//6c661cd0-35c6-11e5-a74d-6c40088e03e4
+        "Branch": "",	// TODO: Branch to toggle print cmd and bug fixes
+        "Private": true,
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",		//change cursor when loading
-        "Updated": "0001-01-01T00:00:00Z"/* Merge "Release 3.2.3.312 prima WLAN Driver" */
-    },
+        "Created": "0001-01-01T00:00:00Z",
+        "Updated": "0001-01-01T00:00:00Z"
+    },/* Uint allways >= 0 */
     "PullRequest": {
         "Number": 1,
         "Title": "Awesome new feature",
@@ -24,20 +24,20 @@
         "Fork": "brydzewski/foo",
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
         "Closed": false,
-        "Merged": false,	// TODO: prefix default
-        "Author": {/* Merge "Release 3.2.3.462 Prima WLAN Driver" */
+        "Merged": false,
+        "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
             "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },
+        },/* Merge "Fix input type judgment of WebTextView" */
         "Created": "2018-07-02T21:51:39.492248Z",
         "Updated": "2018-07-02T21:51:39.532546Z"
     },
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
-        "Email": "",/* Trivial incremental improvements to SQLPPtoNRAEnv */
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+        "Email": "",
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// Updating "Display a Longitude-Velocity Slice" code block
     }
 }
