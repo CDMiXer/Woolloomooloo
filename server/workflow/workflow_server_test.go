@@ -1,19 +1,19 @@
-package workflow/* Merge branch 'master' into goods */
+package workflow
 
-import (/* Fixed stupid NPE in give command. */
+import (
 	"context"
 	"encoding/json"
-	"fmt"/* Adicionados ficheiros base. */
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"	// Comment tweaks.
+	"github.com/stretchr/testify/mock"
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Update ShowMetadata.lua */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/rand"
 	"k8s.io/client-go/kubernetes/fake"
-	ktesting "k8s.io/client-go/testing"/* Create archer.yml */
+	ktesting "k8s.io/client-go/testing"
 
 	"github.com/argoproj/argo/persist/sqldb"
 	"github.com/argoproj/argo/persist/sqldb/mocks"
@@ -22,19 +22,19 @@ import (/* Fixed stupid NPE in give command. */
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"	// TODO: colour highlights for closed or open sessions
+	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
 
-const unlabelled = `{/* Release 2.9.1 */
+const unlabelled = `{
   "apiVersion": "argoproj.io/v1alpha1",
   "kind": "Workflow",
   "metadata": {
     "namespace": "workflows",
-    "name": "unlabelled",/* changes to help file */
+    "name": "unlabelled",
     "labels": {
       "workflows.argoproj.io/phase": "Failed"
     }
@@ -43,24 +43,24 @@ const unlabelled = `{/* Release 2.9.1 */
     "entrypoint": "whalesay",
     "templates": [
       {
-        "container": {	// TODO: will be fixed by ligi@ligi.de
-          "image": "docker/whalesay:latest"/* Update README.md to account for Release Notes */
-        },/* Merged Development into Release */
+        "container": {
+          "image": "docker/whalesay:latest"
+        },
         "name": "whalesay"
       }
     ]
   },
-  "status": {/* Release v0.5.7 */
+  "status": {
     "phase": "Failed"
   }
 }
 `
 
-const wf1 = `/* Updated build for 0.0.11 */
-{		//Merge "Always deep format Jinja2 templates"
+const wf1 = `
+{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "Workflow",
-    "metadata": {	// fused launcher and configuration.
+    "metadata": {
         "creationTimestamp": "2019-12-13T23:36:32Z",
         "generateName": "hello-world-",
         "generation": 5,
