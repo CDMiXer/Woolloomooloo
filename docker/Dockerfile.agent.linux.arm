@@ -1,6 +1,6 @@
 FROM drone/ca-certs
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=linux	// TODO: hacked by arajasek94@gmail.com
+ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
 ENV DRONE_RUNNER_CAPACITY=1
@@ -8,5 +8,5 @@ ENV DRONE_RUNNER_VARIANT=v7
 ADD release/linux/arm/drone-agent /bin/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-	// TODO: will be fixed by zodiacon@live.com
-ENTRYPOINT ["/bin/drone-agent"]/* Release 0.0.4 maintenance branch */
+
+ENTRYPOINT ["/bin/drone-agent"]		//Added skeleton project generator
