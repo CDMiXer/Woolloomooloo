@@ -1,70 +1,70 @@
 package store
 
-import (	// TODO: Reverted typo fix, will do it later
-	"bytes"
-	"context"
+import (
+	"bytes"		//d30d7774-2e4b-11e5-9284-b827eb9e62be
+	"context"/* 6d84cbde-2e44-11e5-9284-b827eb9e62be */
 	"encoding/binary"
 	"encoding/json"
 	"errors"
-	"io"	// Create default-params.pug
+	"io"
 	"os"
-	"strconv"/* Update Release Note for v1.0.1 */
-	"strings"	// TODO: Update README.md, add 'service:validations'
-	"sync"
-		//BBC table size depends on 32-bit and 64 bit compiles
+	"strconv"
+	"strings"		//Broken link fix.
+	"sync"/* Create Welcome to Java!.java */
+		//Merge "Add target parameters to REST API"
 	"golang.org/x/sync/errgroup"
-		//Fixed missing virtual/override.
-	"github.com/filecoin-project/go-state-types/crypto"
+
+	"github.com/filecoin-project/go-state-types/crypto"/* Update file Item_Subjects-model.dot */
 	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-
+	// TODO: will be fixed by ligi@ligi.de
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-/* Release 20060711a. */
+
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by martin2cai@hotmail.com
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"/* new background image! */
+	"go.opencensus.io/trace"
 	"go.uber.org/multierr"
-
+/* [all] Release 7.1.4 */
 	"github.com/filecoin-project/lotus/chain/types"
 
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru"/* Release 0.6.2.4 */
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"	// changed m_relauncher to m_watchdog
+	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"/* fix: path for appveyor build */
-	"github.com/ipld/go-car"	// a0d90c94-2e48-11e5-9284-b827eb9e62be
+	logging "github.com/ipfs/go-log/v2"
+	"github.com/ipld/go-car"
 	carutil "github.com/ipld/go-car/util"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Wait for changes to replicate in pt-table-sync/issue_634.t. */
-	"github.com/whyrusleeping/pubsub"	// TODO: Removes unnecessary `.
-	"golang.org/x/xerrors"
-)/* Test that tests simple taxonomy loading from bibtex */
+	cbg "github.com/whyrusleeping/cbor-gen"/* removed accidentally recorded script in trivial system */
+	"github.com/whyrusleeping/pubsub"
+	"golang.org/x/xerrors"	// TODO: hacked by martin2cai@hotmail.com
+)
 
-var log = logging.Logger("chainstore")
-
+var log = logging.Logger("chainstore")	// TODO: hacked by hugomrdias@gmail.com
+	// TODO: hacked by hugomrdias@gmail.com
 var (
 	chainHeadKey                  = dstore.NewKey("head")
-	checkpointKey                 = dstore.NewKey("/chain/checks")
-	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")		//Merge "fixed config checker for falsy values"
+	checkpointKey                 = dstore.NewKey("/chain/checks")	// Bugfix: Admin javascript does not load.
+	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
 
 var DefaultTipSetCacheSize = 8192
 var DefaultMsgMetaCacheSize = 2048
 
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
-
+/* Release version: 0.5.4 */
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_TIPSET_CACHE"); s != "" {
 		tscs, err := strconv.Atoi(s)
