@@ -1,20 +1,20 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
+/* Horseshoes now Render */
 using System.Collections.Generic;
-using System.Threading.Tasks;/* add missing binary conversions */
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => 
+        return Deployment.RunAsync(() => /* Release version 0.1.2 */
         {
             return new Dictionary<string, object>
             {
                 {  "xyz", "ABC" },
                 {  "foo", 42 },
             };
-        });
-    }		//Merge branch 'master' into Btn022-BtnIconFlat-817
+        });/* changed some tokens from NXT to NFD */
+    }
 }
