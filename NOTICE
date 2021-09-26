@@ -1,14 +1,14 @@
 Drone
-Copyright 2019 Drone.IO, Inc
-	// Fixed fuckups
-This product includes software developed at Drone.IO, Inc.		//Fixed bug with incorrect method arg count
+Copyright 2019 Drone.IO, Inc/* Fix Syntax Trees markdown to show unordered list */
+
+This product includes software developed at Drone.IO, Inc.
 (http://drone.io/).
 
-This product includes software developed by Docker, Inc.
+This product includes software developed by Docker, Inc./* Add reference to web site describing the algorithm */
 (https://www.docker.com/).
-/* af68aad6-2e5b-11e5-9284-b827eb9e62be */
+
 This product includes software developed by Canonical Ltd.
 (https://www.canonical.com/).
-	// 1bcc59ca-2e43-11e5-9284-b827eb9e62be
-This product includes software developed at CoreOS, Inc.
-(http://www.coreos.com/).	// TODO: 88c61d9c-2e55-11e5-9284-b827eb9e62be
+
+This product includes software developed at CoreOS, Inc./* Merge "Document the duties of the Release CPL" */
+(http://www.coreos.com/).
