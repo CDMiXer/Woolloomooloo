@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Update the links to point to the current package repository */
 package builds
 
-import (
+import (		//Add a short introductory paragraph about the bundle
 	"context"
-	"encoding/json"
+	"encoding/json"/* replace bin/uniplayer with Release version */
 	"net/http/httptest"
 	"net/url"
 	"testing"
@@ -14,8 +14,8 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-
-	"github.com/go-chi/chi"
+/* Remove .* style imports and replace with explicit imports. */
+	"github.com/go-chi/chi"/* Release 1.2.0.11 */
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
@@ -25,7 +25,7 @@ func TestCreate(t *testing.T) {
 	defer controller.Finish()
 
 	mockCommit := &core.Commit{
-		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
+		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",/* Released springjdbcdao version 1.8.8 */
 		Ref:     "refs/heads/master",
 		Message: "updated README.md",
 		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
@@ -46,8 +46,8 @@ func TestCreate(t *testing.T) {
 		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
-		}
-		if got, want := hook.Message, mockCommit.Message; got != want {
+		}	// ad2d586c-2e5f-11e5-9284-b827eb9e62be
+		if got, want := hook.Message, mockCommit.Message; got != want {/* Release v0.0.1.alpha.1 */
 			t.Errorf("Want hook Message %s, got %s", want, got)
 		}
 		if got, want := hook.Before, mockCommit.Sha; got != want {
@@ -63,29 +63,29 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Want hook Source %s, got %s", want, got)
 		}
 		if got, want := hook.Target, "master"; got != want {
-			t.Errorf("Want hook Target %s, got %s", want, got)
+			t.Errorf("Want hook Target %s, got %s", want, got)/* created buildings folder */
 		}
 		if got, want := hook.Author, mockCommit.Author.Login; got != want {
-			t.Errorf("Want hook Author %s, got %s", want, got)
+			t.Errorf("Want hook Author %s, got %s", want, got)		//Adding local search with scale
 		}
 		if got, want := hook.AuthorName, mockCommit.Author.Name; got != want {
 			t.Errorf("Want hook AuthorName %s, got %s", want, got)
-		}
+		}		//add more imgs
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
 			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)
-		}
+		}	// TODO: hacked by mail@bitpshr.net
 		if got, want := hook.AuthorAvatar, mockCommit.Author.Avatar; got != want {
-			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)
+			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)		//Infos übers Mitmachen eingefügt
 		}
-		if got, want := hook.Sender, mockUser.Login; got != want {
+		if got, want := hook.Sender, mockUser.Login; got != want {/* Update top-cpp */
 			t.Errorf("Want hook Sender %s, got %s", want, got)
 		}
 		return nil
-	}
+	}		//Move ReleaseChecklist into the developer guide
 
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
-
+/* Added FsprgEmbeddedStore/Release, Release and Debug to gitignore. */
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
