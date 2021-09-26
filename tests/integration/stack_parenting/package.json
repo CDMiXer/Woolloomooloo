@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {	// TODO: will be fixed by cory@protocol.ai
+        "@pulumi/pulumi": "latest"		//Update gems, removes slop dependency, version bump
     }
 }
