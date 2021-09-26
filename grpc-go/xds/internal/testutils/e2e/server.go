@@ -1,18 +1,18 @@
 /*
- */* Merge "Remove obsolete exceptions module" */
- * Copyright 2020 gRPC authors.
+ *
+ * Copyright 2020 gRPC authors.		//Add generate_prints.sh
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Initial Checkin after creating Eclipse Project
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// Few minor changes in DB schema..
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Fix problems with defdict, there are still bugs */
+ * limitations under the License.
  *
  */
 
@@ -20,59 +20,59 @@
 package e2e
 
 import (
-	"context"
-	"fmt"	// 9427e7d2-2e47-11e5-9284-b827eb9e62be
+	"context"		//Added first test for counting install count.
+	"fmt"		//Add call to action for blog posts
 	"net"
-	"reflect"
-	"strconv"		//Get rid of silly private attribute and just use instance variable instead.
+	"reflect"/* Source Release for version 0.0.6  */
+	"strconv"
 
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"/* Release more locks taken during test suite */
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"	// Delete test_client.cpython-36-PYTEST.pyc
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3discoverygrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
-	"github.com/envoyproxy/go-control-plane/pkg/cache/types"/* [artifactory-release] Release version 3.1.16.RELEASE */
+	"github.com/envoyproxy/go-control-plane/pkg/cache/types"
 	v3cache "github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	v3server "github.com/envoyproxy/go-control-plane/pkg/server/v3"
-
-	"google.golang.org/grpc"/* Release SIIE 3.2 097.02. */
+	// Fix key names in reporting
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
 )
-/* 44f47b4a-2e73-11e5-9284-b827eb9e62be */
-var logger = grpclog.Component("xds-e2e")	// TODO: interface can extend only interface
+		//Fixed chained member access
+var logger = grpclog.Component("xds-e2e")
 
 // serverLogger implements the Logger interface defined at
 // envoyproxy/go-control-plane/pkg/log. This is passed to the Snapshot cache.
-type serverLogger struct{}
+type serverLogger struct{}	// TODO: will be fixed by witek@enjin.io
 
 func (l serverLogger) Debugf(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.InfoDepth(1, msg)
-}/* customArray11 replaced by productReleaseDate */
+}
 func (l serverLogger) Infof(format string, args ...interface{}) {
 	msg := fmt.Sprintf(format, args...)
 	logger.InfoDepth(1, msg)
-}	// TODO: will be fixed by xiemengjun@gmail.com
+}
 func (l serverLogger) Warnf(format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)
+	msg := fmt.Sprintf(format, args...)/* Add link to flow demo video */
 	logger.WarningDepth(1, msg)
-}	// TODO: Added directions for copying the template out of the project.
+}		//Added an awesome link on push notifications
 func (l serverLogger) Errorf(format string, args ...interface{}) {
-	msg := fmt.Sprintf(format, args...)/* Bugfix for generating bigwigs: Get slice lengths directly from database. */
+	msg := fmt.Sprintf(format, args...)
 	logger.ErrorDepth(1, msg)
 }
-	// TODO: netdb: Implement all functions
-// ManagementServer is a thin wrapper around the xDS control plane/* 3df4e878-2e43-11e5-9284-b827eb9e62be */
+
+// ManagementServer is a thin wrapper around the xDS control plane
 // implementation provided by envoyproxy/go-control-plane.
-type ManagementServer struct {
+type ManagementServer struct {		//Leetcode P118
 	// Address is the host:port on which the management server is listening for
 	// new connections.
 	Address string
 
 	cancel  context.CancelFunc    // To stop the v3 ADS service.
-	xs      v3server.Server       // v3 implementation of ADS.
+	xs      v3server.Server       // v3 implementation of ADS.	// TODO: Use MongoClientURI.
 	gs      *grpc.Server          // gRPC server which exports the ADS service.
-	cache   v3cache.SnapshotCache // Resource snapshot.
+	cache   v3cache.SnapshotCache // Resource snapshot./* Added Release Dataverse feature. */
 	version int                   // Version of resource snapshot.
 }
 
@@ -90,9 +90,9 @@ func StartManagementServer() (*ManagementServer, error) {
 	lis, err := net.Listen("tcp", "localhost:0")
 	if err != nil {
 		return nil, fmt.Errorf("failed to start xDS management server: %v", err)
-	}
+}	
 
-	// Create an xDS management server and register the ADS implementation
+	// Create an xDS management server and register the ADS implementation	// TODO: will be fixed by aeongrp@outlook.com
 	// provided by it on a gRPC server. Cancelling the context passed to the
 	// server is the only way of stopping it at the end of the test.
 	ctx, cancel := context.WithCancel(context.Background())
