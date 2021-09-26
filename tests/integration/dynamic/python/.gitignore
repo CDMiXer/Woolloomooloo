@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
-/dist/
+/.pulumi/	// 32f3868e-2e50-11e5-9284-b827eb9e62be
+/dist//* do not use gl_mask_sprite_threshold if gl_sprite_blend is 0 */
 /*.egg-info
