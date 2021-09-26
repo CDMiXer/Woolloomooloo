@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by alan.shaw@protocol.ai
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -6,24 +6,24 @@ package commit
 
 import (
 	"context"
-	"testing"/* Release for v3.2.0. */
+	"testing"
 	"time"
-/* Update Value.java */
+
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"/* 1.1 Release */
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"	// improved CoralSimulationwithDelaywithNoise.cpp
+	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-var noContext = context.Background()		//fix seo url (need enable)
-/* Release 0.93.475 */
+var noContext = context.Background()
+
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{}/* Release of eeacms/www:18.6.19 */
+	mockUser := &core.User{}
 	mockCommit := &scm.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
@@ -32,16 +32,16 @@ func TestFind(t *testing.T) {
 			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",/* Preparing WIP-Release v0.1.39.1-alpha */
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
 		Committer: scm.Signature{
 			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
 			Date:   time.Unix(1532303087, 0),
 			Login:  "octocat",
-			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",/* Release of eeacms/plonesaas:5.2.1-17 */
+			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
 		},
-		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",	// Don't run the tests.
+		Link: "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 	}
 
 	mockRenewer := mock.NewMockRenewer(controller)
@@ -51,14 +51,14 @@ func TestFind(t *testing.T) {
 	mockGit.EXPECT().FindCommit(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockCommit, nil, nil)
 
 	client := new(scm.Client)
-	client.Git = mockGit		//4f254b00-2e4e-11e5-9284-b827eb9e62be
+	client.Git = mockGit
 
 	want := &core.Commit{
 		Sha:     "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:     "",
-		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",		//Memory reduce
-		Author: &core.Committer{/* Fix SentimentAnalysisTopology */
-			Name:   "The Octocat",/* MS Release 4.7.6 */
+		Message: "Merge pull request #6 from Spaceghost/patch-1\n\nNew line at end of file.",
+		Author: &core.Committer{
+			Name:   "The Octocat",
 			Email:  "octocat@nowhere.com",
 			Date:   1532303087,
 			Login:  "octocat",
