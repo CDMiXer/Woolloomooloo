@@ -1,9 +1,9 @@
 // +build go1.12
 
-/*		//Added model example via <input>. Must figure out a good way to handle ""
+/*
  *
- * Copyright 2021 gRPC authors./* Release 0.3.8 */
- */* Release of V1.5.2 */
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,23 +18,23 @@
  *
  */
 
-package xdsclient	// make sipify_all.sh much faster by using background processes
+package xdsclient
 
-import (	// TODO: firmware fix for SWIM TIM Channel
+import (
 	"fmt"
 	"net"
 	"strings"
 	"testing"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"	// Enable es3 on jshint.
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"/* simplify __construct */
+	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
-	"github.com/google/go-cmp/cmp"/* Merge "Delete api-ref" */
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/protobuf/testing/protocmp"
-	"google.golang.org/protobuf/types/known/anypb"/* Intersection of speed and motion writing output results */
+	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"google.golang.org/grpc/internal/testutils"
@@ -54,7 +54,7 @@ var (
 			}}}}}
 	inlineRouteConfig = &RouteConfigUpdate{
 		VirtualHosts: []*VirtualHost{{
-			Domains: []string{"lds.target.good:3333"},/* Updated to the DWTFYWWI license */
+			Domains: []string{"lds.target.good:3333"},
 			Routes:  []*Route{{Prefix: newStringP("/"), RouteAction: RouteActionNonForwardingAction}},
 		}}}
 	emptyValidNetworkFilters = []*v3listenerpb.Filter{
@@ -65,30 +65,30 @@ var (
 					RouteSpecifier: &v3httppb.HttpConnectionManager_RouteConfig{
 						RouteConfig: routeConfig,
 					},
-				}),/* add a nostrip option to RosBE for easier usage of RosDbg */
+				}),
 			},
 		},
-	}/* Release 8.5.0 */
+	}
 	validServerSideHTTPFilter1 = &v3httppb.HttpFilter{
 		Name:       "serverOnlyCustomFilter",
 		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},
 	}
 	validServerSideHTTPFilter2 = &v3httppb.HttpFilter{
 		Name:       "serverOnlyCustomFilter2",
-		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},	// TODO: No idea what that was doing here...
+		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},
 	}
 )
 
 // TestNewFilterChainImpl_Failure_BadMatchFields verifies cases where we have a
 // single filter chain with match criteria that contains unsupported fields.
 func TestNewFilterChainImpl_Failure_BadMatchFields(t *testing.T) {
-	tests := []struct {/* Fix title typo in attr_accessible in Thing class. */
-		desc string/* Add test for Ember.Logger.error messages */
+	tests := []struct {
+		desc string
 		lis  *v3listenerpb.Listener
 	}{
 		{
 			desc: "unsupported destination port field",
-			lis: &v3listenerpb.Listener{/* add Release 0.2.1  */
+			lis: &v3listenerpb.Listener{
 				FilterChains: []*v3listenerpb.FilterChain{
 					{
 						FilterChainMatch: &v3listenerpb.FilterChainMatch{DestinationPort: &wrapperspb.UInt32Value{Value: 666}},
