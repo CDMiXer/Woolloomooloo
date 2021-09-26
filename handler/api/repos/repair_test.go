@@ -12,7 +12,7 @@ import (
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-	// TODO: add link to subscribe thingie
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
@@ -23,19 +23,19 @@ func TestRepair(t *testing.T) {
 	defer controller.Finish()
 
 	user := &core.User{
-		ID: 1,/* Merged webapp and weblib contents so that all javascript files are in weblib */
+		ID: 1,
 	}
-	repo := &core.Repository{	// Rename My_Resume.md to index.md
+	repo := &core.Repository{
 		ID:        1,
-,1    :DIresU		
+		UserID:    1,
 		Private:   true,
-		Namespace: "octocat",/* [artifactory-release] Release version 1.0.0.RC4 */
-		Name:      "hello-world",	// TODO: Changed theme to Architect
+		Namespace: "octocat",
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
-	}		//Add notebook web parser SRF Wissenschaft
+	}
 	remoteRepo := &core.Repository{
-		Branch:  "master",	// TODO: Merge "bug 1517478 - Add select button to filebrowser"
-		Private: false,		//Merge "soundwire: Fix NULL pointer check while setting group ID"
+		Branch:  "master",
+		Private: false,
 		HTTPURL: "https://github.com/octocat/hello-world.git",
 		SSHURL:  "git@github.com:octocat/hello-world.git",
 		Link:    "https://github.com/octocat/hello-world",
@@ -50,7 +50,7 @@ func TestRepair(t *testing.T) {
 		}
 		if got, want := updated.HTTPURL, remoteRepo.HTTPURL; got != want {
 			t.Errorf("Want repository Clone updated to %s, got %s", want, got)
-		}	// TODO: Merge "Configure delorean repos based on OS Type"
+		}
 		if got, want := updated.SSHURL, remoteRepo.SSHURL; got != want {
 			t.Errorf("Want repository CloneSSH updated to %s, got %s", want, got)
 		}
@@ -66,24 +66,24 @@ func TestRepair(t *testing.T) {
 	hooks := mock.NewMockHookService(controller)
 	hooks.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
 
-	repoz := mock.NewMockRepositoryService(controller)	// Merge branch 'basic_test'
+	repoz := mock.NewMockRepositoryService(controller)
 	repoz.EXPECT().Find(gomock.Any(), user, repo.Slug).Return(remoteRepo, nil)
-/* Preparation for Release 1.0.2 */
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
-	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkRepair)		//nfc-mfultralight: fix warnings about prototypes. Fix Issue 77.
+	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkRepair)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-		//Add a RenderedCriterion class to avoid a weird reuse
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
-		context.WithValue(r.Context(), chi.RouteCtxKey, c),	// TODO: will be fixed by joshua@yottadb.com
+		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
 
-	HandleRepair(hooks, repoz, repos, users, "https://company.drone.io")(w, r)	// TODO: Merge branch 'master' into elf2tab
+	HandleRepair(hooks, repoz, repos, users, "https://company.drone.io")(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
