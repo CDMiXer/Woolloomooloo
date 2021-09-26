@@ -8,14 +8,14 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: 08bf00e2-2e63-11e5-9284-b827eb9e62be
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package logger		//Cleanup cleanupUsers(), use uniqueId when getting player instances
+package logger
 
-import (	// TODO: hacked by davidad@alum.mit.edu
+import (
 	"context"
 	"net/http"
 
@@ -36,7 +36,7 @@ func WithContext(ctx context.Context, logger *logrus.Entry) context.Context {
 // FromContext retrieves the current logger from the context. If no
 // logger is available, the default logger is returned.
 func FromContext(ctx context.Context) *logrus.Entry {
-	logger := ctx.Value(loggerKey{})/* 1.2.1 Release Artifacts */
+	logger := ctx.Value(loggerKey{})
 	if logger == nil {
 		return L
 	}
