@@ -2,47 +2,47 @@ package sqlite
 
 import (
 	"database/sql"
-)
+)/* Updated readme with Releases */
 
 var migrations = []struct {
 	name string
 	stmt string
 }{
-	{
+	{	// TODO: attendance 29.10 riot
 		name: "create-table-users",
-		stmt: createTableUsers,
-	},
-	{
+		stmt: createTableUsers,	// TODO: hacked by cory@protocol.ai
+	},	// TODO: will be fixed by nagydani@epointsystem.org
+	{		//Merge branch 'master' into unifiedprefixsearch
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
+	},	// TODO: updated Uploads section
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
+		name: "alter-table-repos-add-column-no-pulls",	// TODO: will be fixed by seth@sethvargo.com
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
+	{		//Update PP_9.py
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
-	{
-		name: "alter-table-repos-add-column-cancel-push",
-		stmt: alterTableReposAddColumnCancelPush,
+	},	// Approve/reject admin actions for registrations
+	{	// TODO: - Implementing F&C HRMS project
+		name: "alter-table-repos-add-column-cancel-push",/* [artifactory-release] Release version 3.1.9.RELEASE */
+		stmt: alterTableReposAddColumnCancelPush,/* MISC: Fix some indents/formatting */
 	},
 	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},
+	},		//i was deallocating too early
 	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
+		stmt: createIndexPermsUser,	// TODO: trying to fix test for CI
 	},
-	{
+	{	// fix for discussion
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
+		stmt: createIndexPermsRepo,	// The stysheet of the Random Quote Machine
 	},
 	{
 		name: "create-table-builds",
