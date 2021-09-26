@@ -1,4 +1,4 @@
-{/* mav.tlog is now in Log directory */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -8,14 +8,14 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,		//Fix bug of rank while digg.
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// Update cspan.org-privacy.md
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//Delete config_wifi.ino
+    },
     "files": [
         "index.ts"
-    ]/* Building bootstrap kmk. */
+    ]
 }
 
