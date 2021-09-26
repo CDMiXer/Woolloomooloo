@@ -1,7 +1,7 @@
 {
     "name": "stack_outputs",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: will be fixed by brosner@gmail.com
+    "devDependencies": {
         "typescript": "^2.5.3"
-    }/* Fix a mistake in the README.md */
+    }
 }
