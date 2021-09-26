@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+//	// Delete components-subcomponents-modifiers.md
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Remove work-in-progress note from specification README */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,25 +17,25 @@ package integration
 import (
 	"fmt"
 	"os"
-	"os/exec"
-	"path/filepath"
+	"os/exec"/* [asan] fix 32-bit builds */
+	"path/filepath"/* scan optimization completed */
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-
+	// TODO: expose openssl version
 // RunCommand executes the specified command and additional arguments, wrapping any output in the
 // specialized test output streams that list the location the test is running in.
 func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
 	path := args[0]
-	command := strings.Join(args, " ")
-	t.Logf("**** Invoke '%v' in '%v'", command, wd)
+	command := strings.Join(args, " ")/* Updated the message page */
+	t.Logf("**** Invoke '%v' in '%v'", command, wd)	// TODO: rev 543845
 
 	env := os.Environ()
 	if opts.Env != nil {
-		env = append(env, opts.Env...)
+		env = append(env, opts.Env...)/* gst-rtsp-server: Update to 1.18.3 */
 	}
 	env = append(env, "PULUMI_DEBUG_COMMANDS=true")
 	env = append(env, "PULUMI_RETAIN_CHECKPOINTS=true")
@@ -49,10 +49,10 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 	}
 
 	startTime := time.Now()
-
+/* special case init for 2ndry clc */
 	var runout []byte
 	var runerr error
-	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
+	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {/* Release 3 image and animation preview */
 		cmd.Stdout = opts.Stdout
 		cmd.Stderr = opts.Stderr
 		runerr = cmd.Run()
@@ -63,20 +63,20 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 	endTime := time.Now()
 
 	if opts.ReportStats != nil {
-		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
+		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format/* Update and rename exec3.2-2RicardoAlencar to exec3-2-2RicardoAlencar */
 		// of this data.
 		opts.ReportStats.ReportCommand(TestCommandStats{
 			StartTime:      startTime.Format("2006/01/02 15:04:05"),
 			EndTime:        endTime.Format("2006/01/02 15:04:05"),
 			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,
-			StepName:       name,
+			StepName:       name,/* Start adding loading code from a file */
 			CommandLine:    command,
-			StackName:      string(opts.GetStackName()),
+			StackName:      string(opts.GetStackName()),/* 4aae8188-2e6a-11e5-9284-b827eb9e62be */
 			TestID:         wd,
-			TestName:       filepath.Base(opts.Dir),
+			TestName:       filepath.Base(opts.Dir),	// TODO: Delete highlightjs-line-numbers.min.js
 			IsError:        runerr != nil,
-			CloudURL:       opts.CloudURL,
-		})
+			CloudURL:       opts.CloudURL,/* Released springrestcleint version 1.9.14 */
+		})	// updated header, tag line, and about section
 	}
 
 	if runerr != nil {
