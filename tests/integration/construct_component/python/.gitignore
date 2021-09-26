@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv/
+venv//* Release: 3.1.2 changelog.txt */
