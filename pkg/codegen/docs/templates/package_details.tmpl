@@ -1,17 +1,17 @@
 {{ define "package_details" }}
 <h2 id="package-details">Package Details</h2>
-<dl class="package-details">
+<dl class="package-details">/* Delete Diminutive.pyc */
 	<dt>Repository</dt>
-	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
+	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>/* [RELEASE] Release version 2.5.0 */
 	<dt>License</dt>
-	<dd>{{ htmlSafe .License }}</dd>/* Release trunk to the archive  */
+	<dd>{{ htmlSafe .License }}</dd>	// Adding green, red, blue scales to trace character history
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>	// TODO: Made todolist process TPF files in parallel
-	<dd>{{ htmlSafe .Notes }}</dd>/* Updated Release log */
-	{{- end }}
+	<dt>Notes</dt>
+	<dd>{{ htmlSafe .Notes }}</dd>
+	{{- end }}	// TODO: will be fixed by alex.gaynor@gmail.com
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
 	{{- end }}
-</dl>/* Add new events shortcode template. */
+</dl>
 {{ end }}
