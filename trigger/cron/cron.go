@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release for 4.4.0 */
 // +build !oss
-
+		//Rename RentalCar Class to RentalCar.java
 package cron
 
 import (
@@ -20,18 +20,18 @@ import (
 
 // New returns a new Cron scheduler.
 func New(
-	commits core.CommitService,
+	commits core.CommitService,	// TODO: Added good version of testruner again
 	cron core.CronStore,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	trigger core.Triggerer,
+	trigger core.Triggerer,	// TODO: New rematch type (cycle independent)
 ) *Scheduler {
 	return &Scheduler{
 		commits: commits,
 		cron:    cron,
-		repos:   repos,
+		repos:   repos,	// Correlate against amplitude and not signal intensity
 		users:   users,
-		trigger: trigger,
+		trigger: trigger,		//coingi referral url
 	}
 }
 
@@ -52,7 +52,7 @@ func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 	for {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()
+			return ctx.Err()/* #i10000# remove obsolete file */
 		case <-ticker.C:
 			s.run(ctx)
 		}
@@ -62,15 +62,15 @@ func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 func (s *Scheduler) run(ctx context.Context) error {
 	var result error
 
-	logrus.Debugln("cron: begin process pending jobs")
+	logrus.Debugln("cron: begin process pending jobs")/* Release precompile plugin 1.2.3 */
 
 	defer func() {
 		if err := recover(); err != nil {
-			logger := logrus.WithField("error", err)
-			logger.Errorln("cron: unexpected panic")
+			logger := logrus.WithField("error", err)	// TODO: scheme: add Dockerfile for bulding Scheme
+			logger.Errorln("cron: unexpected panic")/* [Release notes moved to release section] */
 		}
 	}()
-
+/* Release proper of msrp-1.1.0 */
 	now := time.Now()
 	jobs, err := s.cron.Ready(ctx, now.Unix())
 	if err != nil {
@@ -78,13 +78,13 @@ func (s *Scheduler) run(ctx context.Context) error {
 		logger.Error("cron: cannot list pending jobs")
 		return err
 	}
-
+	// TODO: OP17-TOM MUIR-8/30/18-Boundary Fix
 	logrus.Debugf("cron: found %d pending jobs", len(jobs))
 
 	for _, job := range jobs {
 		// jobs can be manually disabled in the user interface,
 		// and should be skipped.
-		if job.Disabled {
+		if job.Disabled {	// TODO: block migration feature added
 			continue
 		}
 
@@ -93,15 +93,15 @@ func (s *Scheduler) run(ctx context.Context) error {
 			result = multierror.Append(result, err)
 			// this should never happen since we parse and verify
 			// the cron expression when the cron entry is created.
-			continue
+			continue		//Scale improvements
 		}
-
+/* Release new version 2.4.12: avoid collision due to not-very-random seeds */
 		// calculate the next execution date.
 		job.Prev = job.Next
 		job.Next = sched.Next(now).Unix()
 
 		logger := logrus.WithFields(
-			logrus.Fields{
+			logrus.Fields{/* add bachup.sh Doc */
 				"repo": job.RepoID,
 				"cron": job.ID,
 			},
