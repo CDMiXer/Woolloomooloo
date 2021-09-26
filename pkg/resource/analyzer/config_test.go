@@ -3,35 +3,35 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by steven@stebalien.com
-//     http://www.apache.org/licenses/LICENSE-2.0		//Merge "new test to edit existing title/post"
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release Candidate 10 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 package analyzer
 
 import (
 	"encoding/json"
 	"fmt"
-	"testing"/* adds gif to readme */
+	"testing"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* adding vitamin biosynthesis */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: will be fixed by jon@atack.com
+
 type JSONTestCaseSuccess struct {
 	JSON     string
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
-		//(BlockLevelBox::layOutInline) : Fix a bug.
+
 var success = []JSONTestCaseSuccess{
 	{
 		JSON:     `{}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},	// TODO: Whoops wrong one
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
 		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,
@@ -40,7 +40,7 @@ var success = []JSONTestCaseSuccess{
 				EnforcementLevel: apitype.Advisory,
 			},
 		},
-	},		//add turboc support
+	},
 	{
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
@@ -48,29 +48,29 @@ var success = []JSONTestCaseSuccess{
 				EnforcementLevel: apitype.Mandatory,
 			},
 		},
-	},	// TODO: will be fixed by igor@soramitsu.co.jp
+	},
 	{
 		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {	// Increase max line length 99 -> 119
+			"foo": {
 				EnforcementLevel: apitype.Advisory,
-				Properties: map[string]interface{}{/* 1729832e-2e49-11e5-9284-b827eb9e62be */
+				Properties: map[string]interface{}{
 					"bar": "blah",
 				},
-			},	// SAML2/SOAPClient: Fix logcall.
+			},
 		},
 	},
-	{	// TODO: hacked by josharian@gmail.com
+	{
 		JSON:     `{"foo":{}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
-		JSON: `{"foo":{"bar":"blah"}}`,	// TODO: Include comment for older apiVersions
+		JSON: `{"foo":{"bar":"blah"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
 				Properties: map[string]interface{}{
 					"bar": "blah",
-				},	// TODO: will be fixed by remco@dutchcoders.io
+				},
 			},
 		},
 	},
