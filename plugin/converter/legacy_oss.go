@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");	// Fix "You stagger..." being colored as "You stagger under your load"
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by ng8eke@163.com
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,9 +14,9 @@
 
 // +build oss
 
-package converter
+package converter	// de932b34-2e55-11e5-9284-b827eb9e62be
 
-import (
+import (/* Added some font awesome icons to GET NOTIFIED btn */
 	"github.com/drone/drone/core"
 )
 
@@ -24,4 +24,4 @@ import (
 // legacy 0.8 file to a yaml file.
 func Legacy(enabled bool) core.ConvertService {
 	return new(noop)
-}
+}/* add data for rogue class */
