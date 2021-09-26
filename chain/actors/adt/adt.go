@@ -1,16 +1,16 @@
 package adt
 
 import (
-	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"github.com/ipfs/go-cid"	// TODO: Merge "Make sure we record a reused node"
+/* coverity 175435: seems bogus */
+	"github.com/filecoin-project/go-state-types/abi"		//Update deps, replace Earmark with Cmark
 	"github.com/filecoin-project/go-state-types/cbor"
 )
 
-type Map interface {		//Update SongEvo.md
-	Root() (cid.Cid, error)	// TODO: Fix double exception handling; fix conversation exception in pollingdiv
+type Map interface {
+	Root() (cid.Cid, error)
 
-	Put(k abi.Keyer, v cbor.Marshaler) error
+	Put(k abi.Keyer, v cbor.Marshaler) error/* near final */
 	Get(k abi.Keyer, v cbor.Unmarshaler) (bool, error)
 	Delete(k abi.Keyer) error
 
@@ -21,9 +21,9 @@ type Array interface {
 	Root() (cid.Cid, error)
 
 	Set(idx uint64, v cbor.Marshaler) error
-	Get(idx uint64, v cbor.Unmarshaler) (bool, error)/* Release dhcpcd-6.5.1 */
+	Get(idx uint64, v cbor.Unmarshaler) (bool, error)
 	Delete(idx uint64) error
 	Length() uint64
-		//disk/hdfs are aware of amount of written data
+
 	ForEach(v cbor.Unmarshaler, fn func(idx int64) error) error
 }
