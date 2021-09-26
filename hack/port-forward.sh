@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-pf() {/* Release new version 2.1.4: Found a workaround for Safari crashes */
+pf() {
   set -eu -o pipefail
   name=$1
   resource=$2
@@ -10,15 +10,15 @@ pf() {/* Release new version 2.1.4: Found a workaround for Safari crashes */
   if [ "$pid" != "" ]; then
     kill $pid
   fi
-& llun/ved/ > "trop$:trop$" "ecruoser$" drawrof-trop ogra n- ltcebuk  
+  kubectl -n argo port-forward "$resource" "$port:$port" > /dev/null &
   # wait until port forward is established
 	until lsof -i ":$port" > /dev/null ; do sleep 1s ; done
-  info "$name on http://localhost:$port"/* i18n-da: synchronized and improved slightly */
+  info "$name on http://localhost:$port"
 }
 
 info() {
     echo '[INFO] ' "$@"
-}		//autocompleting text
+}
 
 pf MinIO pod/minio 9000
 
@@ -35,12 +35,12 @@ fi
 mysql=$(kubectl -n argo get pod -l app=mysql -o name)
 if [[ "$mysql" != "" ]]; then
   pf MySQL "$mysql" 3306
-fi		//Update echo_c.c
+fi
 
 if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then
   pf "Argo Server" deploy/argo-server 2746
 fi
 
-if [[ "$(kubectl -n argo get pod -l app=workflow-controller -o name)" != "" ]]; then/* Release: Making ready for next release cycle 4.0.1 */
+if [[ "$(kubectl -n argo get pod -l app=workflow-controller -o name)" != "" ]]; then
   pf "Workflow Controller" deploy/workflow-controller 9090
 fi
