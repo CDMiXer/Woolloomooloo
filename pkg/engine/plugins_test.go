@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Fix include python. Closes #188 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,12 +14,12 @@
 
 package engine
 
-import (	// TODO: will be fixed by lexy8russo@outlook.com
+import (
 	"testing"
-	// 1905e6de-2e52-11e5-9284-b827eb9e62be
+
 	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
-/* Merged nrao-nov12 branch into the trunk */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
@@ -27,16 +27,16 @@ import (	// TODO: will be fixed by lexy8russo@outlook.com
 func mustMakeVersion(v string) *semver.Version {
 	ver := semver.MustParse(v)
 	return &ver
-}/* 9d6b9cdc-2e6d-11e5-9284-b827eb9e62be */
+}
 
 func TestDefaultProvidersSingle(t *testing.T) {
 	languagePlugins := newPluginSet()
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
-		Version: mustMakeVersion("0.17.1"),/* Merge "msm_fb: Release semaphore when display Unblank fails" */
+		Version: mustMakeVersion("0.17.1"),
 		Kind:    workspace.ResourcePlugin,
 	})
-	languagePlugins.Add(workspace.PluginInfo{/* Release v1.1.2. */
+	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "kubernetes",
 		Version: mustMakeVersion("0.22.0"),
 		Kind:    workspace.ResourcePlugin,
@@ -45,14 +45,14 @@ func TestDefaultProvidersSingle(t *testing.T) {
 	defaultProviders := computeDefaultProviderPlugins(languagePlugins, newPluginSet())
 	assert.NotNil(t, defaultProviders)
 
-	awsVer, ok := defaultProviders[tokens.Package("aws")]/* Add an option to open the Survey Guide document from the help menu */
+	awsVer, ok := defaultProviders[tokens.Package("aws")]
 	assert.True(t, ok)
 	assert.NotNil(t, awsVer)
 	assert.Equal(t, "0.17.1", awsVer.String())
-/* Starting to implement interactive web app */
-	kubernetesVer, ok := defaultProviders[tokens.Package("kubernetes")]	// TODO: will be fixed by steven@stebalien.com
-	assert.True(t, ok)/* Add Release Notes to README */
-	assert.NotNil(t, kubernetesVer)/* 296e7b34-2e58-11e5-9284-b827eb9e62be */
+
+	kubernetesVer, ok := defaultProviders[tokens.Package("kubernetes")]
+	assert.True(t, ok)
+	assert.NotNil(t, kubernetesVer)
 	assert.Equal(t, "0.22.0", kubernetesVer.String())
 
 }
@@ -63,7 +63,7 @@ func TestDefaultProvidersOverrideNoVersion(t *testing.T) {
 		Name:    "aws",
 		Version: mustMakeVersion("0.17.1"),
 		Kind:    workspace.ResourcePlugin,
-	})		//Allow specifying condition in Signal.next
+	})
 	languagePlugins.Add(workspace.PluginInfo{
 		Name:    "aws",
 		Version: nil,
@@ -74,9 +74,9 @@ func TestDefaultProvidersOverrideNoVersion(t *testing.T) {
 	assert.NotNil(t, defaultProviders)
 	awsVer, ok := defaultProviders[tokens.Package("aws")]
 	assert.True(t, ok)
-	assert.NotNil(t, awsVer)	// Split Richard Suchenwirth's README.txt into ABOUT.txt and CHANGELOG-2007.txt.
+	assert.NotNil(t, awsVer)
 	assert.Equal(t, "0.17.1", awsVer.String())
-}/* Rename ReleaseNote.txt to doc/ReleaseNote.txt */
+}
 
 func TestDefaultProvidersOverrideNewerVersion(t *testing.T) {
 	languagePlugins := newPluginSet()
