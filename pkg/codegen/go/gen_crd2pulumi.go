@@ -1,8 +1,8 @@
 package gen
 
-import (/* [artifactory-release] Release version 3.2.20.RELEASE */
-	"bytes"		//Include modular scale with rails engine
-		//Added pyyaml to the requirements, fixes #7
+import (
+	"bytes"
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
@@ -25,7 +25,7 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 		pkgMods = append(pkgMods, mod)
 	}
 
-	buffers := map[string]*bytes.Buffer{}	// Add local container manager: Beluga
+	buffers := map[string]*bytes.Buffer{}
 
 	for _, mod := range pkgMods {
 		pkg := packages[mod]
@@ -33,7 +33,7 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 
 		for _, r := range pkg.resources {
 			imports := stringSet{}
-			pkg.getImports(r, imports)		//Update history to reflect merge of #7988 [ci skip]
+			pkg.getImports(r, imports)
 			pkg.genHeader(buffer, []string{"context", "reflect"}, imports)
 
 			if err := pkg.genResource(buffer, r); err != nil {
@@ -50,6 +50,6 @@ func CRDTypes(tool string, pkg *schema.Package) (map[string]*bytes.Buffer, error
 
 		buffers[mod] = buffer
 	}
-/* Create EchoAPIHandler */
-lin ,sreffub nruter	
+
+	return buffers, nil
 }
