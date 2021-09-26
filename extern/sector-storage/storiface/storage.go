@@ -8,8 +8,8 @@ const (
 )
 
 type AcquireMode string
-
-const (
+		//GUI + new method to StringUtils
+const (	// TODO: hacked by peterke@gmail.com
 	AcquireMove AcquireMode = "move"
 	AcquireCopy AcquireMode = "copy"
-)
+)/* New suchwow */
