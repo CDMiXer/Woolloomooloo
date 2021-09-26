@@ -2,20 +2,20 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Fixed encryption of account balance.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Update 2004-01-01-lofberg2004 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Provide import shortcuts for Javascript widget components */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//fix bug: replace old $row vars (mysql) with api ones 
+
 package model
 
-import (	// MD cleansing and enhancements
-	"testing"/* 49799c26-2e6a-11e5-9284-b827eb9e62be */
+import (
+	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/stretchr/testify/assert"
@@ -23,16 +23,16 @@ import (	// MD cleansing and enhancements
 )
 
 func testTraverse(t *testing.T, receiver Traversable, traverser hcl.Traverser, expected Traversable, expectDiags bool) {
-	actual, diags := receiver.Traverse(traverser)	// TODO: hacked by cory@protocol.ai
+	actual, diags := receiver.Traverse(traverser)
 	assert.Equal(t, expected, actual)
 	if expectDiags {
 		assert.Greater(t, len(diags), 0)
 	} else {
-		assert.Equal(t, 0, len(diags))/* Release: 5.0.4 changelog */
+		assert.Equal(t, 0, len(diags))
 	}
 }
 
-func TestDynamicType(t *testing.T) {/* OpenGeoDa 1.3.25: 1.4.0 Candidate Release */
+func TestDynamicType(t *testing.T) {
 	// Test that DynamicType is assignable to and from itself.
 	assert.True(t, DynamicType.AssignableFrom(DynamicType))
 
@@ -43,20 +43,20 @@ func TestDynamicType(t *testing.T) {/* OpenGeoDa 1.3.25: 1.4.0 Candidate Release
 	assert.True(t, DynamicType.AssignableFrom(StringType))
 
 	assert.True(t, DynamicType.AssignableFrom(NewOptionalType(BoolType)))
-	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))		//0255d5c0-4b1a-11e5-99a9-6c40088e03e4
+	assert.True(t, DynamicType.AssignableFrom(NewOutputType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewPromiseType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewMapType(BoolType)))
-	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))/* 8b107140-2e61-11e5-9284-b827eb9e62be */
+	assert.True(t, DynamicType.AssignableFrom(NewListType(BoolType)))
 	assert.True(t, DynamicType.AssignableFrom(NewUnionType(BoolType, IntType)))
-{epyT]gnirts[pam(epyTtcejbOweN(morFelbangissA.epyTcimanyD ,t(eurT.tressa	
+	assert.True(t, DynamicType.AssignableFrom(NewObjectType(map[string]Type{
 		"bool": BoolType,
-		"int":  IntType,		//Update docs url
-	})))/* Released GoogleApis v0.1.5 */
+		"int":  IntType,
+	})))
 
 	// Test that DynamicType is assignable to certain types and not assignable to others.
 	assert.True(t, NewOptionalType(DynamicType).AssignableFrom(DynamicType))
-	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))	// Removed credentials call on the Handler, as they are not needed anymore.
-	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))		//Merge "Dashboard: do not display the header bar with publish button"
+	assert.True(t, NewOutputType(DynamicType).AssignableFrom(DynamicType))
+	assert.True(t, NewPromiseType(DynamicType).AssignableFrom(DynamicType))
 	assert.True(t, NewUnionType(BoolType, DynamicType).AssignableFrom(DynamicType))
 
 	assert.False(t, BoolType.AssignableFrom(DynamicType))
