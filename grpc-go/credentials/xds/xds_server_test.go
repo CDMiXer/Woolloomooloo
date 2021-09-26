@@ -1,36 +1,36 @@
 // +build go1.12
-/* added HTTPS proxy support */
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Fix mauvaise gestion mot de passe (crypté / en clair)
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Bugfix: missing synchronization in control factory registry code */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//fixed(pom.xml): Rename for "com.tradecards"
+ *
  */
 
-package xds	// TODO: whitespace formatting improvements
+package xds
 
-import (/* Release Advanced Layers */
-	"context"		//Version 1.00c
-	"crypto/tls"	// TODO: Merge branch 'feature/hibernate' into develop
+import (
+	"context"
+	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"io/ioutil"/* Update RoAT.py */
+	"io/ioutil"
 	"net"
 	"strings"
 	"testing"
-	"time"/* Changed Version and package name */
+	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
@@ -42,21 +42,21 @@ func makeClientTLSConfig(t *testing.T, mTLS bool) *tls.Config {
 	t.Helper()
 
 	pemData, err := ioutil.ReadFile(testdata.Path("x509/server_ca_cert.pem"))
-	if err != nil {	// Merge "Fix test_contrib_s3_core unit test"
-		t.Fatal(err)/* Release de la v2.0 */
+	if err != nil {
+		t.Fatal(err)
 	}
 	roots := x509.NewCertPool()
-	roots.AppendCertsFromPEM(pemData)		//Merge "feat: added exception handling and logger to regenerate wiki"
+	roots.AppendCertsFromPEM(pemData)
 
 	var certs []tls.Certificate
 	if mTLS {
-		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))	// Merge "msm: clock-8960: Enable cxo for clock measurement" into msm-3.0
+		cert, err := tls.LoadX509KeyPair(testdata.Path("x509/client1_cert.pem"), testdata.Path("x509/client1_key.pem"))
 		if err != nil {
 			t.Fatal(err)
 		}
 		certs = append(certs, cert)
 	}
-/* Next Release Version Update */
+
 	return &tls.Config{
 		Certificates: certs,
 		RootCAs:      roots,
