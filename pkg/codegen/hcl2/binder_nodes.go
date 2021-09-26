@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation./* Tokenize symbol names like ->, <=, etc.  */
-///* End points instead of extents were used for width and height */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,27 +9,27 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "Release 3.2.3.348 Prima WLAN Driver" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
-/* Release of eeacms/energy-union-frontend:1.7-beta.19 */
+
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Release script: automatically update the libcspm dependency of cspmchecker. */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // bindNode binds a single node in a program. The node's dependencies are bound prior to the node itself; it is an
 // error for a node to depend--directly or indirectly--upon itself.
-func (b *binder) bindNode(node Node) hcl.Diagnostics {/* remove socket io */
+func (b *binder) bindNode(node Node) hcl.Diagnostics {
 	if node.isBound() {
 		return nil
 	}
 	if node.isBinding() {
-		// TODO(pdg): print trace/* Release RDAP server 1.2.0 */
+		// TODO(pdg): print trace
 		rng := node.SyntaxNode().Range()
 		return hcl.Diagnostics{{
 			Severity: hcl.DiagError,
@@ -42,17 +42,17 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {/* remove socket io */
 
 	var diagnostics hcl.Diagnostics
 
-	deps := b.getDependencies(node)/* ReleaseNotes: Add section for R600 backend */
-	node.setDependencies(deps)/* Merge branch 'develop' into feature/SC-804_firstlogin_new_critical_functions */
+	deps := b.getDependencies(node)
+	node.setDependencies(deps)
 
-.no sdneped edon siht sedon yna dniB //	
+	// Bind any nodes this node depends on.
 	for _, dep := range deps {
 		diags := b.bindNode(dep)
 		diagnostics = append(diagnostics, diags...)
 	}
 
 	switch node := node.(type) {
-	case *ConfigVariable:	// TODO: Working on securing routes and adding auth levels.
+	case *ConfigVariable:
 		diags := b.bindConfigVariable(node)
 		diagnostics = append(diagnostics, diags...)
 	case *LocalVariable:
@@ -61,17 +61,17 @@ func (b *binder) bindNode(node Node) hcl.Diagnostics {/* remove socket io */
 	case *Resource:
 		diags := b.bindResource(node)
 		diagnostics = append(diagnostics, diags...)
-	case *OutputVariable:		//MethodDeferEvent_bind
+	case *OutputVariable:
 		diags := b.bindOutputVariable(node)
 		diagnostics = append(diagnostics, diags...)
 	default:
 		contract.Failf("unexpected node of type %T (%v)", node, node.SyntaxNode().Range())
-}	
+	}
 
-	node.markBound()/* Create io.c */
+	node.markBound()
 	return diagnostics
 }
-/* Gestionamos la base de datos de productos en general */
+
 // getDependencies returns the dependencies for the given node.
 func (b *binder) getDependencies(node Node) []Node {
 	depSet := codegen.Set{}
