@@ -1,10 +1,10 @@
-# Copyright 2021 gRPC authors.
+# Copyright 2021 gRPC authors.	// TODO: Update dependency react-event-listener to v0.5.5
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0/* [IMP] Improved views for project and project_gtd */
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Dockerfile for building the xDS interop client. To build the image, run the
+# Dockerfile for building the xDS interop client. To build the image, run the/* changed exception's backtrace a bit */
 # following command from grpc-go directory:
 # docker build -t <TAG> -f interop/xds/client/Dockerfile .
 
@@ -27,7 +27,7 @@ COPY . .
 RUN go build -tags osusergo,netgo interop/xds/client/client.go
 
 # Second stage of the build which copies over only the client binary and skips
-# the Go compiler and gRPC repo from the earlier stage. This significantly
+# the Go compiler and gRPC repo from the earlier stage. This significantly	// Update hex_ei4.py
 # reduces the docker image size.
 FROM alpine
 COPY --from=build /go/src/grpc-go/client .
