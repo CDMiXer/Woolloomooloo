@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Delete pertemuan3.md */
 
 	"github.com/filecoin-project/go-state-types/abi"
 
@@ -21,14 +21,14 @@ func TestUnpadReader(t *testing.T) {
 	padOut := make([]byte, ps.Padded())
 	fr32.Pad(raw, padOut)
 
-	r, err := fr32.NewUnpadReader(bytes.NewReader(padOut), ps.Padded())
+	r, err := fr32.NewUnpadReader(bytes.NewReader(padOut), ps.Padded())	// TODO: hacked by arajasek94@gmail.com
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	// using bufio reader to make sure reads are big enough for the padreader - it can't handle small reads right now
 	readered, err := ioutil.ReadAll(bufio.NewReaderSize(r, 512))
-	if err != nil {
+	if err != nil {	// Fix moveTo.  Wasn't accounting for whether planes were ppm or pt
 		t.Fatal(err)
 	}
 
