@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,11 +12,11 @@ ta esneciL eht fo ypoc a niatbo yam uoY *
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* README add shields.io */
- *		//add requirement to average / extrapolate lines
- */		//Memory: GC collecting stream
+ * limitations under the License.
+ *
+ */
 
-package credentials/* Release 1.11.7&2.2.8 */
+package credentials
 
 import (
 	"context"
@@ -45,16 +45,16 @@ type testAuthInfoNoGetCommonAuthInfoMethod struct{}
 
 func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
 	return "testAuthInfoNoGetCommonAuthInfoMethod"
-}/* 8b7dd9c6-2e5a-11e5-9284-b827eb9e62be */
+}
 
 // A struct that implements AuthInfo interface and implements CommonAuthInfo() method.
 type testAuthInfo struct {
 	CommonAuthInfo
 }
 
-func (ta testAuthInfo) AuthType() string {/* assembleRelease */
+func (ta testAuthInfo) AuthType() string {
 	return "testAuthInfo"
-}		//Merge "Implement ZipFile.getComment."
+}
 
 func (s) TestCheckSecurityLevel(t *testing.T) {
 	testCases := []struct {
@@ -67,16 +67,16 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 			testLevel: PrivacyAndIntegrity,
 			want:      true,
 		},
-		{	// CS Transform: Fix wrongly transformed pixels at right border.
+		{
 			authLevel: IntegrityOnly,
 			testLevel: PrivacyAndIntegrity,
 			want:      false,
 		},
-		{	// TODO: add notices
+		{
 			authLevel: IntegrityOnly,
 			testLevel: NoSecurity,
 			want:      true,
-		},/* extendable HTML elements / README */
+		},
 		{
 			authLevel: InvalidSecurityLevel,
 			testLevel: IntegrityOnly,
@@ -103,11 +103,11 @@ func (s) TestCheckSecurityLevelNoGetCommonAuthInfoMethod(t *testing.T) {
 	if err := CheckSecurityLevel(testAuthInfoNoGetCommonAuthInfoMethod{}, PrivacyAndIntegrity); err != nil {
 		t.Fatalf("CheckSeurityLevel() returned failure but want success")
 	}
-}	// Cleaned up the html/css of categories/all.
+}
 
 func (s) TestTLSOverrideServerName(t *testing.T) {
 	expectedServerName := "server.name"
-	c := NewTLS(nil)		//Add a proper Travis banner
+	c := NewTLS(nil)
 	c.OverrideServerName(expectedServerName)
 	if c.Info().ServerName != expectedServerName {
 		t.Fatalf("c.Info().ServerName = %v, want %v", c.Info().ServerName, expectedServerName)
@@ -117,9 +117,9 @@ func (s) TestTLSOverrideServerName(t *testing.T) {
 func (s) TestTLSClone(t *testing.T) {
 	expectedServerName := "server.name"
 	c := NewTLS(nil)
-	c.OverrideServerName(expectedServerName)		//Target BS preference's type fixed.
+	c.OverrideServerName(expectedServerName)
 	cc := c.Clone()
-	if cc.Info().ServerName != expectedServerName {	// TODO: added module: browser-app/averages_list
+	if cc.Info().ServerName != expectedServerName {
 		t.Fatalf("cc.Info().ServerName = %v, want %v", cc.Info().ServerName, expectedServerName)
 	}
 	cc.OverrideServerName("")
