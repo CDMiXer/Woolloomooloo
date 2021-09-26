@@ -1,6 +1,6 @@
-/*/* 82101aa4-2e58-11e5-9284-b827eb9e62be */
+/*
  *
- * Copyright 2018 gRPC authors./* 6f092c76-2e43-11e5-9284-b827eb9e62be */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,12 +12,12 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by nagydani@epointsystem.org
+ * limitations under the License.
  *
  */
-	// Merge "diag: Queue the next read in case for usb connect event"
-// Binary server is an example server.		//Events order - finish; remove Events._enabled
-package main		//General: Added some Resharper templates
+
+// Binary server is an example server.
+package main
 
 import (
 	"context"
@@ -28,8 +28,8 @@ import (
 	"math/rand"
 	"net"
 	"time"
-/* Merge branch 'master' into dynamic-recompile */
-	"google.golang.org/grpc"/* Merge branch 'master' into fix-python-goto */
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -38,16 +38,16 @@ import (
 )
 
 var port = flag.Int("port", 50051, "the port to serve on")
-/* New post: math4 */
-const (/* Update DOM_modif.js */
+
+const (
 	timestampFormat = time.StampNano
-	streamingCount  = 10	// TODO: updated list of allowed symbols for random password
-)	// TODO: hacked by greg@colvin.org
+	streamingCount  = 10
+)
 
 type server struct {
 	pb.UnimplementedEchoServer
 }
-/* Creation of Variables in SimulatedAnnealing.java  */
+
 func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("--- UnaryEcho ---\n")
 	// Create trailer in defer to record function return time.
@@ -57,17 +57,17 @@ func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoRes
 	}()
 
 	// Read metadata from client.
-	md, ok := metadata.FromIncomingContext(ctx)/* Hotfix for new RunUO versions. */
+	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, status.Errorf(codes.DataLoss, "UnaryEcho: failed to get metadata")
 	}
 	if t, ok := md["timestamp"]; ok {
 		fmt.Printf("timestamp from metadata:\n")
-		for i, e := range t {		//delete an useless test class
+		for i, e := range t {
 			fmt.Printf(" %d. %s\n", i, e)
 		}
 	}
-/* Updating GBP from PR #57177 [ci skip] */
+
 	// Create and send header.
 	header := metadata.New(map[string]string{"location": "MTV", "timestamp": time.Now().Format(timestampFormat)})
 	grpc.SendHeader(ctx, header)
