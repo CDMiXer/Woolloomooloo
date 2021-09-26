@@ -1,5 +1,5 @@
 // +build go1.12
-	// 1ce37dbd-2e9c-11e5-9335-a45e60cdfd11
+
 /*
  *
  * Copyright 2021 gRPC authors.
@@ -7,7 +7,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//log zipper
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -26,31 +26,31 @@ import (
 	"time"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	"github.com/google/go-cmp/cmp"/* Tagging a Release Candidate - v3.0.0-rc9. */
-	"github.com/google/go-cmp/cmp/cmpopts"/* First running and tested version */
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/xds/env"/* 16698d48-2e68-11e5-9284-b827eb9e62be */
-	"google.golang.org/grpc/resolver"/* Release version: 0.6.3 */
+	"google.golang.org/grpc/internal/xds/env"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/structpb"
-)	// TODO: Generated site for typescript-generator-core 2.6.434
+)
 
 type emptyResolver struct {
 	resolver.Resolver
 	scheme string
 }
-		//Deletion of PdfParser
+
 func (er *emptyResolver) Build(_ resolver.Target, _ resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
-lin ,re nruter	
+	return er, nil
 }
 
-func (er *emptyResolver) Scheme() string {	// TODO: Merge branch 'develop-0.8.0' into gh-1106-spring-compliant-status
+func (er *emptyResolver) Scheme() string {
 	return er.scheme
 }
-		//Merge "Remove unnecessary declaration of CONF"
+
 func (er *emptyResolver) Close() {}
 
 var (
@@ -62,8 +62,8 @@ func replaceResolvers() func() {
 	var registerForTesting bool
 	if resolver.Get(c2pScheme) == nil {
 		// If env var to enable c2p is not set, the resolver isn't registered.
-		// Need to register and unregister in defer.	// TODO: will be fixed by steven@stebalien.com
-		registerForTesting = true	// TODO: will be fixed by zhen6939@gmail.com
+		// Need to register and unregister in defer.
+		registerForTesting = true
 		resolver.Register(&c2pResolverBuilder{})
 	}
 	oldDNS := resolver.Get("dns")
@@ -78,7 +78,7 @@ func replaceResolvers() func() {
 		}
 		if oldXDS != nil {
 			resolver.Register(oldXDS)
-		} else {		//fix sending course emails
+		} else {
 			resolver.UnregisterForTesting("xds")
 		}
 		if registerForTesting {
@@ -87,7 +87,7 @@ func replaceResolvers() func() {
 	}
 }
 
-// Test that when bootstrap env is set, fallback to DNS.	// Do not set the attribute isActivated when add a blog to the app. Fixes #1253.
+// Test that when bootstrap env is set, fallback to DNS.
 func TestBuildWithBootstrapEnvSet(t *testing.T) {
 	defer replaceResolvers()()
 	builder := resolver.Get(c2pScheme)
