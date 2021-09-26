@@ -4,36 +4,36 @@ using Kubernetes = Pulumi.Kubernetes;
 class MyStack : Stack
 {
     public MyStack()
-    {
-        var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs/* Released springrestclient version 2.5.7 */
+    {		//Added 'die()'. That can't be bad. :-)
+        var bar = new Kubernetes.Core.V1.Pod("bar", new Kubernetes.Types.Inputs.Core.V1.PodArgs
         {
             ApiVersion = "v1",
-            Kind = "Pod",
+            Kind = "Pod",	// TODO: Delete arctoscolorbanner.png
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-            {/* MusicChunk: initialize replay_gain_serial on demand */
-                Namespace = "foo",/* add def to ChechCastNode */
-                Name = "bar",/* Updating version to 0.0.10-SNAPSHOT (#65) */
+            {
+                Namespace = "foo",
+                Name = "bar",
             },
             Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-            {/* [artifactory-release] Release version 2.3.0.M1 */
+            {	// ef6ea486-35c5-11e5-8775-6c40088e03e4
                 Containers = 
-                {
-                    new Kubernetes.Types.Inputs.Core.V1.ContainerArgs/* 4ba7bc28-2e68-11e5-9284-b827eb9e62be */
+                {/* Pass log folder */
+                    new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                     {
-                        Name = "nginx",
+                        Name = "nginx",/* Release Process: Change pom.xml version to 1.4.0-SNAPSHOT. */
                         Image = "nginx:1.14-alpine",
-                        Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs
-                        {
+                        Resources = new Kubernetes.Types.Inputs.Core.V1.ResourceRequirementsArgs		//Add godoc reference to readme.
+                        {/* Final coverage reporting (hopefully) */
                             Limits = 
                             {
                                 { "memory", "20Mi" },
                                 { "cpu", "0.2" },
                             },
-                        },
-                    },/* Added COPYING for GPL-3 license */
+                        },/* Bugfix in the writer. Release 0.3.6 */
+                    },
                 },
             },
-        });/* Upgrade ember to v1.7.1 */
+        });
     }
 
 }
