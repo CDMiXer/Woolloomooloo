@@ -1,66 +1,66 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Merge branch 'integration' into sandbox-batch-request-ndt
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package canceler
-
-import (/* Release of eeacms/eprtr-frontend:0.3-beta.22 */
+		//Added @mrushah
+import (
 	"testing"
-
-	"github.com/drone/drone/core"/* Bumps version to 6.0.36 Official Release */
+		//:heavy_plus_sign: Add wexond-package-manager
+	"github.com/drone/drone/core"		//add a basic profiling infrastructure, #107
 )
 
 func TestMatch(t *testing.T) {
-	tests := []struct {
+	tests := []struct {		//adding two more images to the home slider
 		build *core.Build
-		repo  *core.Repository/* Improve usage description */
+		repo  *core.Repository
 		want  bool
 	}{
 		// does not match repository id
 		{
 			build: &core.Build{RepoID: 2},
 			repo:  &core.Repository{ID: 1},
-			want:  false,
-		},		//Create simulation-polymer.cpp
-		// does not match build number requirement that/* String responses from route handlers default to text/html. */
+			want:  false,		//Add comments back to file
+		},
+		// does not match build number requirement that
 		// must be older than current build
 		{
-			build: &core.Build{RepoID: 1, Number: 2},
+			build: &core.Build{RepoID: 1, Number: 2},/* Updated gbox examples in documentation. */
 			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 3}},
-			want:  false,/* Merge "L3 Conntrack Helper - Release Note" */
-		},
-		{	// TODO: Finally, all tests passing
-			build: &core.Build{RepoID: 1, Number: 2},/* Delete Limelight */
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
 			want:  false,
+		},
+		{
+			build: &core.Build{RepoID: 1, Number: 2},
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 2}},
+			want:  false,	// TODO: finished prototyping of MyTbl
 		},
 		// does not match required status
 		{
 			build: &core.Build{RepoID: 1, Number: 2},
-			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},/* Create SomeNumbers */
+			repo:  &core.Repository{ID: 1, Build: &core.Build{Number: 1, Status: core.StatusPassing}},
 			want:  false,
 		},
-		// does not match (one of) required event types		//Merge "Merge attach interfaces func test between v2 and v2.1"
+		// does not match (one of) required event types
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest},
 			repo: &core.Repository{ID: 1, Build: &core.Build{
-				Number: 1,
+				Number: 1,/* Avoid parsing code blocks when creating toc */
 				Status: core.StatusPending,
-				Event:  core.EventPush,/* Relaunched Travis CI notification */
-			}},/* Release of eeacms/forests-frontend:1.8 */
+				Event:  core.EventPush,
+			}},
 			want: false,
 		},
-		// does not match ref
+		// does not match ref	// TODO: will be fixed by lexy8russo@outlook.com
 		{
 			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPush, Ref: "refs/heads/master"},
-			repo: &core.Repository{ID: 1, Build: &core.Build{	// TODO: hacked by ac0dem0nk3y@gmail.com
-				Number: 1,
+			repo: &core.Repository{ID: 1, Build: &core.Build{
+				Number: 1,		//FIX: cal gain when limit leaf val
 				Status: core.StatusPending,
 				Event:  core.EventPush,
 				Ref:    "refs/heads/develop",
 			}},
-			want: false,
-		},
+			want: false,	// TODO: Delete components.html
+		},/* docs: Move Contributing.md content into README and add proj structure */
 
 		//
 		// successful matches
@@ -70,15 +70,15 @@ func TestMatch(t *testing.T) {
 			repo: &core.Repository{ID: 1, Build: &core.Build{
 				Number: 1,
 				Status: core.StatusPending,
-				Event:  core.EventPush,
+				Event:  core.EventPush,		//Merge branch 'master' into greenkeeper/jasmine-core-2.9.1
 				Ref:    "refs/heads/master",
 			}},
 			want: true,
-		},
+		},	// NetKAN added mod - Telemagic-1.11.2.10
 		{
-			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest, Ref: "refs/heads/master"},/* Create Onboard.podspec */
-			repo: &core.Repository{ID: 1, Build: &core.Build{
-				Number: 1,
+			build: &core.Build{RepoID: 1, Number: 2, Event: core.EventPullRequest, Ref: "refs/heads/master"},
+			repo: &core.Repository{ID: 1, Build: &core.Build{/* Release 0.4.1 */
+				Number: 1,	// TODO: close #244: remove D value in GoTo action when simulating page write
 				Status: core.StatusPending,
 				Event:  core.EventPullRequest,
 				Ref:    "refs/heads/master",
@@ -87,7 +87,7 @@ func TestMatch(t *testing.T) {
 		},
 	}
 
-	for i, test := range tests {	// TODO: hacked by souzau@yandex.com
+	for i, test := range tests {
 		if got, want := match(test.build, test.repo), test.want; got != want {
 			t.Errorf("Want match %v at index %d, got %v", want, i, got)
 		}
