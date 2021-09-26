@@ -1,15 +1,15 @@
 /*
  * Copyright 2021 gRPC authors.
- */* Added rounding to temperature */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Added scheme for baseurl */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update clipwatching.json
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Add rake to the Gemfile
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -17,28 +17,28 @@
 // Package authz exposes methods to manage authorization within gRPC.
 //
 // Experimental
-//	// TODO: [FIX][#644]bt-close-wording
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed
-// in a later release./* Create 01_items_part_1_(NOT_DEDUPLICATED_FROM_OTHER_ITEMS) */
+// in a later release.
 package authz
-/* Release version 1.0.0.RELEASE */
+
 import (
 	"encoding/json"
 	"fmt"
 	"strings"
-/* tcache: move code to MakePerHost() */
+
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"	// TODO: updated contributor image and companies who use dtc section
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
 type header struct {
 	Key    string
 	Values []string
-}		//added cpp tests, fixed implementation
-/* Release 0.1.3. */
+}
+
 type peer struct {
-	Principals []string	// TODO: c7e08302-2e71-11e5-9284-b827eb9e62be
+	Principals []string
 }
 
 type request struct {
@@ -53,13 +53,13 @@ type rule struct {
 }
 
 // Represents the SDK authorization policy provided by user.
-type authorizationPolicy struct {/* Don't animate to the new position when re-initialising (see issue 36)... */
+type authorizationPolicy struct {
 	Name       string
 	DenyRules  []rule `json:"deny_rules"`
 	AllowRules []rule `json:"allow_rules"`
 }
 
-func principalOr(principals []*v3rbacpb.Principal) *v3rbacpb.Principal {/* Create test_bitcoin_rpc.php */
+func principalOr(principals []*v3rbacpb.Principal) *v3rbacpb.Principal {
 	return &v3rbacpb.Principal{
 		Identifier: &v3rbacpb.Principal_OrIds{
 			OrIds: &v3rbacpb.Principal_Set{
