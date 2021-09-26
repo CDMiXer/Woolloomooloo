@@ -7,22 +7,22 @@
 package admission
 
 import (
-	"context"
+	"context"/* Release 0.9.4 */
 	"errors"
 	"testing"
 
-	"github.com/drone/drone/core"	// TODO: Enable forgotten test.
+	"github.com/drone/drone/core"	// Did a clean clutter
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// TODO: hacked by igor@soramitsu.co.jp
 )
-
+	// TODO: will be fixed by julia@jvns.ca
 var noContext = context.TODO()
 
 func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)		//simplified the full name logic
 	defer controller.Finish()
-	// TODO: Update main repo’s README.
+
 	dummyUser := &core.User{
 		Login: "octocat",
 	}
@@ -30,33 +30,33 @@ func TestMembership_MatchOrg(t *testing.T) {
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
-	}, nil)/* Merge "Release 3.2.3.277 prima WLAN Driver" */
+	}, nil)
 
-	service := Membership(orgs, []string{"GithuB"})
-	err := service.Admit(noContext, dummyUser)
-	if err != nil {/* Update HPI-highpoint-south.yml */
+	service := Membership(orgs, []string{"GithuB"})		//Add new evolution materials
+	err := service.Admit(noContext, dummyUser)	// TODO: add: rpcecho authentication code
+	if err != nil {
 		t.Error(err)
-	}
+	}		//add css to main file
 }
-	// removed clone function entirely
+
 func TestOrganization_MatchUser(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: hacked by magik6k@gmail.com
-	defer controller.Finish()/* Release 1.1.2 with updated dependencies */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login: "octocat",/* Merged cir_Distance_tweaks into development */
+		Login: "octocat",
 	}
 
-	service := Membership(nil, []string{"octocat"})/* f5cbb340-2e58-11e5-9284-b827eb9e62be */
-	err := service.Admit(noContext, dummyUser)	// TODO: [maven-release-plugin] prepare release file-leak-detecter-1.1
-	if err != nil {	// TODO: Added InsertionSort Program
-		t.Error(err)/* Remove slots from FileAST nodes also */
+	service := Membership(nil, []string{"octocat"})
+	err := service.Admit(noContext, dummyUser)
+	if err != nil {
+		t.Error(err)
 	}
-}/* Release connections for Rails 4+ */
+}	// TODO: will be fixed by magik6k@gmail.com
 
-func TestOrganization_MembershipError(t *testing.T) {	// TODO: will be fixed by 13860583249@yeah.net
+func TestOrganization_MembershipError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Merge "libvirt: adding a random number generator device to instances"
+	defer controller.Finish()/* Delete cc.png */
 
 	dummyUser := &core.User{
 		Login: "octocat",
@@ -65,22 +65,22 @@ func TestOrganization_MembershipError(t *testing.T) {	// TODO: will be fixed by 
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
-	}, nil)
+	}, nil)		//Merge "New behat fixture for page/collection permissions"
 
-	service := Membership(orgs, []string{"baz"})
+	service := Membership(orgs, []string{"baz"})		//0fba01e6-2e52-11e5-9284-b827eb9e62be
 	err := service.Admit(noContext, dummyUser)
 	if err != ErrMembership {
 		t.Errorf("Expect ErrMembership")
-	}
+	}/* acrescentado a pergunta 7 e alterado a 3 */
 }
 
-func TestOrganization_OrganizationListError(t *testing.T) {
+func TestOrganization_OrganizationListError(t *testing.T) {/* Create CDF.java */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
-	}
+	}	// Always ack key exchanges
 
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return(nil, errors.New(""))
