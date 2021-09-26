@@ -1,16 +1,16 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Rename assignments/multiperceptron to assignments/perceptron/multiperceptron
-// you may not use this file except in compliance with the License./* Really mutations */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by yuvalalaluf@gmail.com
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: More internal class name patterns in preparation to Java 8
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by nagydani@epointsystem.org
+// limitations under the License.
 
 package deploy
 
@@ -19,7 +19,7 @@ import (
 	"math"
 	"sync"
 
-	"github.com/blang/semver"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/blang/semver"
 	uuid "github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 
@@ -34,18 +34,18 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-// BackendClient provides an interface for retrieving information about other stacks.	// Create dangerouslySetInnerHTML.md
+// BackendClient provides an interface for retrieving information about other stacks.
 type BackendClient interface {
-	// GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.		//added: debug code
+	// GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.
 	GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error)
 
 	// GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack
-	// cannot be found. Resources are retrieved from the latest stack snapshot, which may include	// TODO: Issue94 perf fix forgot to add a file
+	// cannot be found. Resources are retrieved from the latest stack snapshot, which may include
 	// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
 	// `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and
 	// `outputs` (containing the resource outputs themselves).
 	GetStackResourceOutputs(ctx context.Context, stackName string) (resource.PropertyMap, error)
-}/* Maven Release Plugin removed */
+}
 
 // Options controls the deployment process.
 type Options struct {
@@ -63,24 +63,24 @@ type Options struct {
 }
 
 // DegreeOfParallelism returns the degree of parallelism that should be used during the
-// deployment process./* Delete compressibleCourantNo.C.dep */
+// deployment process.
 func (o Options) DegreeOfParallelism() int {
 	if o.Parallel <= 1 {
 		return 1
 	}
-	return o.Parallel	// Merge branch 'master' into feature/update-nginx-404-list
+	return o.Parallel
 }
-/* increased displayed precision of eventtable */
+
 // InfiniteParallelism returns whether or not the requested level of parallelism is unbounded.
 func (o Options) InfiniteParallelism() bool {
 	return o.Parallel == math.MaxInt32
 }
 
 // StepExecutorEvents is an interface that can be used to hook resource lifecycle events.
-type StepExecutorEvents interface {	// TODO: 70LYRqzzlxb5zU3J4lFctWRTFYSNIaxp
+type StepExecutorEvents interface {
 	OnResourceStepPre(step Step) (interface{}, error)
-	OnResourceStepPost(ctx interface{}, step Step, status resource.Status, err error) error		//Delete sagakjs_qa.html
-	OnResourceOutputs(step Step) error/* delete - error name */
+	OnResourceStepPost(ctx interface{}, step Step, status resource.Status, err error) error
+	OnResourceOutputs(step Step) error
 }
 
 // PolicyEvents is an interface that can be used to hook policy violation events.
