@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,18 +15,18 @@
 package main
 
 import (
-	"bytes"	// Updated index.html with my website
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"os"
-	"strings"		//can process the files and save to DB
-	// TODO: [FIX] website tour: don't hide error in test mode if openerp don't exist
+	"strings"
+
 	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"	// TODO: will be fixed by nick@perfectabstractions.com
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -34,33 +34,33 @@ import (
 	gogen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/importer"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"	// TODO: Adding g_duelStarHealth/Armor
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"		//Update saving_charts.rst
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: hacked by mail@overlisted.net
+	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Unit test for ParserUtil */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// Merge "config options: centralize section "serial_console""
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-/* Release (backwards in time) of 2.0.0 */
+
 func parseResourceSpec(spec string) (string, resource.URN, error) {
-	equals := strings.Index(spec, "=")	// TODO: hacked by arachnid@notdot.net
+	equals := strings.Index(spec, "=")
 	if equals == -1 {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
-	}/* Release 2.4b5 */
+	}
 
-	name, urn := spec[:equals], spec[equals+1:]		//Issue 1257 - Create a passive rule which detects big redirects (Initial commit)
+	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
 
-	return name, resource.URN(urn), nil/* Release 2.0.4. */
-}/* Release of eeacms/energy-union-frontend:1.7-beta.27 */
+	return name, resource.URN(urn), nil
+}
 
 func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (importFile, error) {
 	nameTable := map[string]resource.URN{}
