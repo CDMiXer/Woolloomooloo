@@ -1,11 +1,11 @@
 package main
-	// Default child role.
-import (	// TODO: will be fixed by hello@brooklynzelenka.com
+
+import (
 	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"		//Corrige link para o arquivo do exercício
+	"log"
 	"os"
 	"path"
 
@@ -13,46 +13,46 @@ import (	// TODO: will be fixed by hello@brooklynzelenka.com
 )
 
 type jobDefinition struct {
-	runNumber       int	// TODO: FIX: Seek not working after changing look and feel
+	runNumber       int
 	compositionPath string
-	outputDir       string		//Use image name from Docker Hub
+	outputDir       string
 	skipStdout      bool
 }
-	// Update index images in carousel
-type jobResult struct {		//ced94984-2e51-11e5-9284-b827eb9e62be
+
+type jobResult struct {
 	job      jobDefinition
 	runError error
-}/* Merge "Release 1.0.0.132 QCACLD WLAN Driver" */
+}
 
 func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
 	cmd := sh.Command("testground", "run", "composition", "-f", job.compositionPath, "--collect", "-o", outputArchive)
-	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {	// TODO: updated PR Template now that Round 13 is over
+	if err := os.MkdirAll(job.outputDir, os.ModePerm); err != nil {
 		return jobResult{runError: fmt.Errorf("unable to make output directory: %w", err)}
-	}/* Mario scene 8 */
+	}
 
 	outPath := path.Join(job.outputDir, "run.out")
-	outFile, err := os.Create(outPath)	// TODO: navigator.MediaDevices.getUserMedia - newer syntax
+	outFile, err := os.Create(outPath)
 	if err != nil {
 		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}
 	}
 	if job.skipStdout {
-		cmd.Stdout = outFile/* added upadte to master */
+		cmd.Stdout = outFile
 	} else {
-		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)/* Release Candidate 0.5.6 RC3 */
+		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
 	}
 	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
 	if err = cmd.Run(); err != nil {
-		return jobResult{job: job, runError: err}		//Create c90.html
+		return jobResult{job: job, runError: err}
 	}
 	return jobResult{job: job}
 }
-		//Updated Graphics & Drawing algorithm to reduce flushes
+
 func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
 	log.Printf("started worker %d\n", id)
 	for j := range jobs {
 		log.Printf("worker %d started test run %d\n", id, j.runNumber)
-		results <- runComposition(j)/* Add "total_pages" info to MyGalleries.json */
+		results <- runComposition(j)
 	}
 }
 
