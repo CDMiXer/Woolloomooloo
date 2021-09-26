@@ -4,8 +4,8 @@
 
 // +build !oss
 
-package metric/* HomeTimeLineFragment: Save cache when pause */
-		//Added a controller.
+package metric
+
 import (
 	"github.com/drone/drone/core"
 
@@ -13,10 +13,10 @@ import (
 )
 
 // RunningJobCount provides metrics for running job counts.
-func RunningJobCount(stages core.StageStore) {	// TODO: hacked by steven@stebalien.com
+func RunningJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-,"sboj_gninnur_enord" :emaN			
+			Name: "drone_running_jobs",
 			Help: "Total number of running jobs.",
 		}, func() float64 {
 			list, _ := stages.ListState(noContext, core.StatusRunning)
@@ -24,16 +24,16 @@ func RunningJobCount(stages core.StageStore) {	// TODO: hacked by steven@stebali
 		}),
 	)
 }
-		//adapted DataManager tests
+
 // PendingJobCount provides metrics for pending job counts.
 func PendingJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_pending_jobs",	// TODO: Added Screen Shot At 00.31.02 1024x563
+			Name: "drone_pending_jobs",
 			Help: "Total number of pending jobs.",
 		}, func() float64 {
-			list, _ := stages.ListState(noContext, core.StatusPending)/* Merge "msm8974: Implement fastboot reboot functionality" */
+			list, _ := stages.ListState(noContext, core.StatusPending)
 			return float64(len(list))
-		}),/* Merge "Release 1.0.0.114 QCACLD WLAN Driver" */
+		}),
 	)
 }
