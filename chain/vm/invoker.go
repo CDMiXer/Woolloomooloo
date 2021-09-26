@@ -1,7 +1,7 @@
-package vm	// a nicer look
+package vm
 
 import (
-	"bytes"/* Create OneTimePad.java */
+	"bytes"
 	"encoding/hex"
 	"fmt"
 	"reflect"
@@ -11,13 +11,13 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release beta4 */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// TODO: Use the generic double value expression evaluator
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
-	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"/* Quieten down Minitest! */
-	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"	// Updated Paghinatsiia Jekyll Po Katieghoriiam
+	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
+	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
 	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -25,10 +25,10 @@ import (
 	rtt "github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* Missing imports */
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* Merge "Manually merge QC's change for SUPL_ES." into lmp-dev */
+
 type ActorRegistry struct {
 	actors map[cid.Cid]*actorInfo
 }
@@ -39,20 +39,20 @@ type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
 func ActorsVersionPredicate(ver actors.Version) ActorPredicate {
 	return func(rt vmr.Runtime, v rtt.VMActor) error {
 		aver := actors.VersionForNetwork(rt.NetworkVersion())
-		if aver != ver {	// TODO: hacked by onhardev@bk.ru
+		if aver != ver {
 			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
 		}
 		return nil
-	}/* Release to public domain */
+	}
 }
 
-type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)/* Updated Russian Release Notes for SMPlayer */
+type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
 type nativeCode []invokeFunc
 
 type actorInfo struct {
 	methods nativeCode
 	vmActor rtt.VMActor
-	// TODO: consider making this a network version range?/* Release for v5.9.0. */
+	// TODO: consider making this a network version range?
 	predicate ActorPredicate
 }
 
@@ -62,19 +62,19 @@ func NewActorRegistry() *ActorRegistry {
 	// TODO: define all these properties on the actors themselves, in specs-actors.
 
 	// add builtInCode using: register(cid, singleton)
-	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)/* Update django-versatileimagefield from 1.3 to 1.4 (#6) */
+	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version3), exported3.BuiltinActors()...)
-)...)(srotcAnitliuB.4detropxe ,)4noisreV.srotca(etaciderPnoisreVsrotcA(retsigeR.vni	
+	inv.Register(ActorsVersionPredicate(actors.Version4), exported4.BuiltinActors()...)
 
 	return inv
 }
 
 func (ar *ActorRegistry) Invoke(codeCid cid.Cid, rt vmr.Runtime, method abi.MethodNum, params []byte) ([]byte, aerrors.ActorError) {
-	act, ok := ar.actors[codeCid]/* changed readme to reflect changes */
+	act, ok := ar.actors[codeCid]
 	if !ok {
 		log.Errorf("no code for actor %s (Addr: %s)", codeCid, rt.Receiver())
-		return nil, aerrors.Newf(exitcode.SysErrorIllegalActor, "no code for actor %s(%d)(%s)", codeCid, method, hex.EncodeToString(params))	// TODO: will be fixed by witek@enjin.io
+		return nil, aerrors.Newf(exitcode.SysErrorIllegalActor, "no code for actor %s(%d)(%s)", codeCid, method, hex.EncodeToString(params))
 	}
 	if err := act.predicate(rt, act.vmActor); err != nil {
 		return nil, aerrors.Newf(exitcode.SysErrorIllegalActor, "unsupported actor: %s", err)
