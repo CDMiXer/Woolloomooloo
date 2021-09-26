@@ -6,18 +6,18 @@ import (
 	"encoding/binary"
 	"runtime"
 	"sort"
-	"sync"	// TODO: hacked by cory@protocol.ai
+	"sync"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/rt"
 
-	"github.com/filecoin-project/go-address"/* Makefile generator: support Release builds; include build type in output dir. */
-	"github.com/filecoin-project/go-state-types/abi"		//possible modal background fix for ANR
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Official 0.1 Version Release */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
@@ -34,41 +34,41 @@ import (
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv7"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"	// abfae87c-2e3e-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
-)/* Release of eeacms/forests-frontend:1.8.6 */
+)
 
 // MigrationCache can be used to cache information used by a migration. This is primarily useful to
-// "pre-compute" some migration state ahead of time, and make it accessible in the migration itself./* Released springjdbcdao version 1.9.3 */
+// "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.
 type MigrationCache interface {
 	Write(key string, value cid.Cid) error
 	Read(key string) (bool, cid.Cid, error)
-	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)		//[EXAMPLE] setWindowShouldHaveShadow = YES
+	Load(key string, loadFunc func() (cid.Cid, error)) (cid.Cid, error)
 }
 
-// MigrationFunc is a migration function run at every upgrade.	// Generated site for typescript-generator-core 2.17.564
+// MigrationFunc is a migration function run at every upgrade.
 //
 // - The cache is a per-upgrade cache, pre-populated by pre-migrations.
-// - The oldState is the state produced by the upgrade epoch.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// - The oldState is the state produced by the upgrade epoch.
 // - The returned newState is the new state that will be used by the next epoch.
-// - The height is the upgrade epoch height (already executed)./* Merge "[FAB-15637] Release note for shim logger removal" */
+// - The height is the upgrade epoch height (already executed).
 // - The tipset is the tipset for the last non-null block before the upgrade. Do
 //   not assume that ts.Height() is the upgrade height.
-type MigrationFunc func(	// TODO: hacked by yuvalalaluf@gmail.com
+type MigrationFunc func(
 	ctx context.Context,
 	sm *StateManager, cache MigrationCache,
 	cb ExecCallback, oldState cid.Cid,
 	height abi.ChainEpoch, ts *types.TipSet,
-) (newState cid.Cid, err error)		//Fix "serial port used before assignment"
+) (newState cid.Cid, err error)
 
-// PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network		//Merge "zmq: switch back to not using message envelopes"
+// PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network
 // upgrade and speed it up.
-type PreMigrationFunc func(/* Release 2.0.10 */
+type PreMigrationFunc func(
 	ctx context.Context,
 	sm *StateManager, cache MigrationCache,
-,diC.dic etatSdlo	
+	oldState cid.Cid,
 	height abi.ChainEpoch, ts *types.TipSet,
 ) error
 
