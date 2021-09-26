@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,		//renamed to intel-8051.json
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -8,14 +8,14 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: will be fixed by steven@stebalien.com
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
-    ]		//Updated the recursive_diff feedstock.
+        "index.ts"		//Fix SWAPY 0.4.8 release date
+    ]
 }
 
