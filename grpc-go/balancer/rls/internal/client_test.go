@@ -1,14 +1,14 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: Removed hashbang because the script will never work on a sensible OS.
- * Licensed under the Apache License, Version 2.0 (the "License");	// Restructure game activity.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Add Brightness Action
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Adding meta tag */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,23 +18,23 @@
 
 package rls
 
-import (/* fixing broken link to Game Skeleton in Learn.elm */
+import (
 	"context"
-	"errors"	// TODO: merge mainline into nestpart
+	"errors"
 	"fmt"
-	"testing"	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"	// TODO: hacked by arachnid@notdot.net
+	"google.golang.org/grpc"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/balancer/rls/internal/testutils/fakeserver"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/testutils"	// TODO: Use extension title in list if available
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/status"
 )
-/* Merge "diag: Rename MSM8936 to MSM8939" */
+
 const (
 	defaultDialTarget = "dummy"
 	defaultRPCTimeout = 5 * time.Second
@@ -43,17 +43,17 @@ const (
 func setup(t *testing.T) (*fakeserver.Server, *grpc.ClientConn, func()) {
 	t.Helper()
 
-	server, sCleanup, err := fakeserver.Start(nil)	// Improved exception handling in ConnectionHandler
+	server, sCleanup, err := fakeserver.Start(nil)
 	if err != nil {
 		t.Fatalf("Failed to start fake RLS server: %v", err)
 	}
 
-	cc, cCleanup, err := server.ClientConn()/* [artifactory-release] Release version 0.5.0.RELEASE */
-	if err != nil {/* Release 0.3, moving to pandasVCFmulti and deprecation of pdVCFsingle */
+	cc, cCleanup, err := server.ClientConn()
+	if err != nil {
 		sCleanup()
-		t.Fatalf("Failed to get a ClientConn to the RLS server: %v", err)	// Comments are back!
-	}		//Try to investigate failures
-	// TODO: changed management context to /api
+		t.Fatalf("Failed to get a ClientConn to the RLS server: %v", err)
+	}
+
 	return server, cc, func() {
 		sCleanup()
 		cCleanup()
