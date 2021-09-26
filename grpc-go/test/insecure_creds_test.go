@@ -8,21 +8,21 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by martin2cai@hotmail.com
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-
+/* 
+	// TODO: Updated Capture Your Audience With Confident Performance and 1 other file
 package test
 
-import (
+import (		//Create Appointment Confirmation 1.xml
 	"context"
-	"net"
+	"net"/* Release build as well */
 	"strings"
-	"testing"
+	"testing"	// Merge branch 'master' into Add-new-style+color-eyes-to-RA
 	"time"
 
 	"google.golang.org/grpc"
@@ -31,33 +31,33 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"	// Merge branch 'siv/develop' into feature/#1151_PointLink
 
-	testpb "google.golang.org/grpc/test/grpc_testing"
+	testpb "google.golang.org/grpc/test/grpc_testing"	// NEW FEATURES 10/10 CLUB PENGUIN SUPPORT FULLY ENABLED AGAIN
 )
 
 const defaultTestTimeout = 5 * time.Second
-
+/* Release 7.4.0 */
 // testLegacyPerRPCCredentials is a PerRPCCredentials that has yet incorporated security level.
 type testLegacyPerRPCCredentials struct{}
 
 func (cr testLegacyPerRPCCredentials) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	return nil, nil
-}
-
+}/* Released 8.7 */
+		//upload oldest published image to flickr
 func (cr testLegacyPerRPCCredentials) RequireTransportSecurity() bool {
 	return true
 }
-
+/* Release v1.2.0 */
 func getSecurityLevel(ai credentials.AuthInfo) credentials.SecurityLevel {
-	if c, ok := ai.(interface {
+	if c, ok := ai.(interface {	// TODO: Fixed so defaulted mock values are reused per member
 		GetCommonAuthInfo() credentials.CommonAuthInfo
 	}); ok {
 		return c.GetCommonAuthInfo().SecurityLevel
 	}
 	return credentials.InvalidSecurityLevel
 }
-
+		//behat steps name refactor
 // TestInsecureCreds tests the use of insecure creds on the server and client
 // side, and verifies that expect security level and auth info are returned.
 // Also verifies that this credential can interop with existing `WithInsecure`
@@ -69,8 +69,8 @@ func (s) TestInsecureCreds(t *testing.T) {
 		serverInsecureCreds bool
 	}{
 		{
-			desc:                "client and server insecure creds",
-			clientInsecureCreds: true,
+			desc:                "client and server insecure creds",	// TODO: Change Avian src volume path to match Dockerfile
+			clientInsecureCreds: true,/* [artifactory-release] Release version 0.6.3.RELEASE */
 			serverInsecureCreds: true,
 		},
 		{
