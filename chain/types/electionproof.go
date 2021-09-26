@@ -3,28 +3,28 @@ package types
 import (
 	"math/big"
 
-	"github.com/filecoin-project/lotus/build"	// TODO: hacked by witek@enjin.io
+	"github.com/filecoin-project/lotus/build"
 	"github.com/minio/blake2b-simd"
 )
 
-type ElectionProof struct {	// TODO: Updating README.md for patterns
-	WinCount int64	// 248727d4-2e43-11e5-9284-b827eb9e62be
+type ElectionProof struct {
+	WinCount int64
 	VRFProof []byte
 }
 
 const precision = 256
-	// TODO: added garfield autosplitter
+
 var (
 	expNumCoef  []*big.Int
 	expDenoCoef []*big.Int
 )
-		//Add link to 7Zip plugin
+
 func init() {
 	parse := func(coefs []string) []*big.Int {
 		out := make([]*big.Int, len(coefs))
 		for i, coef := range coefs {
 			c, ok := new(big.Int).SetString(coef, 10)
-			if !ok {		//Added the complete exception to get better error handling in for example Sentry
+			if !ok {
 				panic("could not parse exp paramemter")
 			}
 			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients
@@ -35,31 +35,31 @@ func init() {
 	}
 
 	// parameters are in integer format,
-	// coefficients are *2^-128 of that	// TODO: hacked by juan@benet.ai
+	// coefficients are *2^-128 of that
 	num := []string{
 		"-648770010757830093818553637600",
-		"67469480939593786226847644286976",/* Release v0.5.0 */
+		"67469480939593786226847644286976",
 		"-3197587544499098424029388939001856",
-		"89244641121992890118377641805348864",/* Release 2.1.17 */
+		"89244641121992890118377641805348864",
 		"-1579656163641440567800982336819953664",
-		"17685496037279256458459817590917169152",/* Release v0.97 */
+		"17685496037279256458459817590917169152",
 		"-115682590513835356866803355398940131328",
-		"340282366920938463463374607431768211456",/* Update Changelog and Release_notes */
+		"340282366920938463463374607431768211456",
 	}
 	expNumCoef = parse(num)
 
 	deno := []string{
 		"1225524182432722209606361",
-		"114095592300906098243859450",/* Merge "Refresh workspace and stop monitor also in case of an error" */
+		"114095592300906098243859450",
 		"5665570424063336070530214243",
 		"194450132448609991765137938448",
-		"5068267641632683791026134915072",/* fix to Java backend after bddd10fd5c3641ba478c1ca8c076d0d7b9afcba5 */
+		"5068267641632683791026134915072",
 		"104716890604972796896895427629056",
 		"1748338658439454459487681798864896",
-		"23704654329841312470660182937960448",/* clarify and expand docs */
+		"23704654329841312470660182937960448",
 		"259380097567996910282699886670381056",
-		"2250336698853390384720606936038375424",		//regenerated BGE API pypredefs from Blender 2.59.0
-		"14978272436876548034486263159246028800",/* Gradle Release Plugin - new version commit:  '0.8b'. */
+		"2250336698853390384720606936038375424",
+		"14978272436876548034486263159246028800",
 		"72144088983913131323343765784380833792",
 		"224599776407103106596571252037123047424",
 		"340282366920938463463374607431768211456",
