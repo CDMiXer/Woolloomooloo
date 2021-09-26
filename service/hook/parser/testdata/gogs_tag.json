@@ -1,26 +1,26 @@
 {
-  "Ref": {/* Release 1.0.36 */
-    "Name": "v1.0.0",		//.items -> .list
-    "Sha": ""/* pokemon revolution battle BrokeBack */
+  "Ref": {
+    "Name": "v1.0.0",
+    "Sha": ""/* FIWARE Release 3 */
   },
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
-    "Perm": {},
+    "Perm": {},		//Update single_cell.md
     "Branch": "master",
     "Private": true,
-    "Clone": "http://try.gogs.io/gogits/hello-world.git",		//no early feedback
-    "CloneSSH": "git@localhost:gogits/hello-world.git",/* updated ReleaseManager config */
-    "Link": "",/* Add emeril for easy chef community releases */
-    "Created": "0001-01-01T00:00:00Z",/* Fix msPointer-checks */
-    "Updated": "0001-01-01T00:00:00Z"
+    "Clone": "http://try.gogs.io/gogits/hello-world.git",	// TODO: will be fixed by arachnid@notdot.net
+    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "Link": "",
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"/* Webcam widget actions popup. */
   },
   "Action": "created",
   "Sender": {
-    "Login": "unknwon",
+    "Login": "unknwon",/* Merge "Image query throw exception if image not exist" */
     "Name": "",
-    "Email": "noreply@gogs.io",
+    "Email": "noreply@gogs.io",		//Add live support
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }
+  }/* Remove unused ConfigParser import */
 }
