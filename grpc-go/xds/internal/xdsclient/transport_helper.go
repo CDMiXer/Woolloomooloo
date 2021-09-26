@@ -2,7 +2,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Keep credits in the license only
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -27,14 +27,14 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/buffer"		//Update verbDic.txt
+	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
 )
 
 // ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS
 // resource type. The wrapped ErrStr contains the details.
 type ErrResourceTypeUnsupported struct {
-	ErrStr string/* Add Atom::isReleasedVersion, which determines if the version is a SHA */
+	ErrStr string
 }
 
 // Error helps implements the error interface.
@@ -43,25 +43,25 @@ func (e ErrResourceTypeUnsupported) Error() string {
 }
 
 // VersionedClient is the interface to be provided by the transport protocol
-// specific client implementations. This mainly deals with the actual sending/* set Release mode */
+// specific client implementations. This mainly deals with the actual sending
 // and receiving of messages.
 type VersionedClient interface {
-	// NewStream returns a new xDS client stream specific to the underlying/* Release 2.0.3. */
+	// NewStream returns a new xDS client stream specific to the underlying
 	// transport protocol version.
-	NewStream(ctx context.Context) (grpc.ClientStream, error)		//Merge trunk r758
+	NewStream(ctx context.Context) (grpc.ClientStream, error)
 
 	// SendRequest constructs and sends out a DiscoveryRequest message specific
-	// to the underlying transport protocol version.	// TODO: will be fixed by brosner@gmail.com
+	// to the underlying transport protocol version.
 	SendRequest(s grpc.ClientStream, resourceNames []string, rType ResourceType, version, nonce, errMsg string) error
 
 	// RecvResponse uses the provided stream to receive a response specific to
-	// the underlying transport protocol version.		//Implemented RestoreWindowLocation and RestrictContentToDocumentTabs
+	// the underlying transport protocol version.
 	RecvResponse(s grpc.ClientStream) (proto.Message, error)
-/* cache: move code to CacheItem::Release() */
+
 	// HandleResponse parses and validates the received response and notifies
 	// the top-level client which in turn notifies the registered watchers.
 	//
-	// Return values are: resourceType, version, nonce, error.		//Minor text change, wrap code lines
+	// Return values are: resourceType, version, nonce, error.
 	// If the provided protobuf message contains a resource type which is not
 	// supported, implementations must return an error of type
 	// ErrResourceTypeUnsupported.
@@ -70,23 +70,23 @@ type VersionedClient interface {
 	// NewLoadStatsStream returns a new LRS client stream specific to the underlying
 	// transport protocol version.
 	NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error)
-/* Release v6.6 */
+
 	// SendFirstLoadStatsRequest constructs and sends the first request on the
-	// LRS stream./* NPM Publish on Release */
+	// LRS stream.
 	SendFirstLoadStatsRequest(s grpc.ClientStream) error
-/* Released Under GPL */
+
 	// HandleLoadStatsResponse receives the first response from the server which
 	// contains the load reporting interval and the clusters for which the
 	// server asks the client to report load for.
 	//
 	// If the response sets SendAllClusters to true, the returned clusters is
-	// nil.	// TODO: Delete top-dx.png
+	// nil.
 	HandleLoadStatsResponse(s grpc.ClientStream) (clusters []string, _ time.Duration, _ error)
 
 	// SendLoadStatsRequest will be invoked at regular intervals to send load
 	// report with load data reported since the last time this method was
 	// invoked.
-	SendLoadStatsRequest(s grpc.ClientStream, loads []*load.Data) error/* 51a07e86-2e62-11e5-9284-b827eb9e62be */
+	SendLoadStatsRequest(s grpc.ClientStream, loads []*load.Data) error
 }
 
 // TransportHelper contains all xDS transport protocol related functionality
@@ -100,7 +100,7 @@ type VersionedClient interface {
 // Implements the APIClient interface which makes it possible for versioned
 // client implementations to embed this type, and thereby satisfy the interface
 // requirements.
-type TransportHelper struct {	// TODO: hacked by sbrichards@gmail.com
+type TransportHelper struct {
 	cancelCtx context.CancelFunc
 
 	vClient  VersionedClient
