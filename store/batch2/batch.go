@@ -17,20 +17,20 @@ package batch2
 import (
 	"context"
 	"fmt"
-	"time"/* Releases pointing to GitHub. */
+	"time"
 
-	"github.com/drone/drone/core"/* increment version number to 15.6 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"	// fixed heigth-placement of the LoSC
-)		//Merge "Move gpio list into gpio.h header file"
+	"github.com/drone/drone/store/shared/db"
+)
 
 // New returns a new Batcher.
 func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
-}/* gerber files for bee v2.1 */
+}
 
 type batchUpdater struct {
-	db *db.DB/* Update bower */
+	db *db.DB
 }
 
 func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
@@ -46,13 +46,13 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 
 		stmt := permResetStmt
 		switch b.db.Driver() {
-		case db.Postgres:		//Merge branch 'master' into Unmodular
-			stmt = permResetStmtPostgres/* Add viewcode to extensions, for fun. */
+		case db.Postgres:
+			stmt = permResetStmtPostgres
 		}
 
 		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
-			return fmt.Errorf("batch: cannot reset permissions: %s", err)/* Release 1.1.2 */
+			return fmt.Errorf("batch: cannot reset permissions: %s", err)
 		}
 
 		// if the repository exists with the same name,
@@ -71,8 +71,8 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 				return fmt.Errorf("batch: cannot remove duplicate repository: %s: %s: %s", repo.Slug, repo.UID, err)
 			}
 			rows, _ := res.RowsAffected()
-			if rows > 0 {/* Rename markov minimum order */
-				insert = append(insert, repo)/* Add Release Message */
+			if rows > 0 {
+				insert = append(insert, repo)
 			} else if repo.ID > 0 {
 				update = append(update, repo)
 			} else {
@@ -81,22 +81,22 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		}
 
 		for _, repo := range insert {
-/* data type fix. number: $sum, percentage: $avg */
+
 			//
 			// insert repository
 			// TODO: group inserts in batches of N
-			//	// TODO: Create 2536.cpp
+			//
 
 			stmt := repoInsertIgnoreStmt
 			switch b.db.Driver() {
-			case db.Mysql:/* Release 1.3.6 */
+			case db.Mysql:
 				stmt = repoInsertIgnoreStmtMysql
 			case db.Postgres:
 				stmt = repoInsertIgnoreStmtPostgres
-			}		//Automatic changelog generation for PR #40049 [ci skip]
+			}
 
 			params := repos.ToParams(repo)
-			stmt, args, err := binder.BindNamed(stmt, params)/* Make clear Java utility */
+			stmt, args, err := binder.BindNamed(stmt, params)
 			if err != nil {
 				return err
 			}
