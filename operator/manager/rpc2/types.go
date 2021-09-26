@@ -1,8 +1,8 @@
-// Use of this source code is governed by the Drone Non-Commercial License/* fb1fab06-585a-11e5-a942-6c40088e03e4 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-		// - Implement NdisMGetDeviceProperty
+
 package rpc2
 
 // Copyright 2019 Drone.IO Inc. All rights reserved.
@@ -11,17 +11,17 @@ import (
 	"github.com/drone/drone/operator/manager"
 )
 
-// details provides the runner with the build details and	// TODO: will be fixed by vyzo@hackzen.org
-// includes all environment data required to execute the build./* Released springjdbcdao version 1.6.7 */
-type details struct {		//fix script links
+// details provides the runner with the build details and
+// includes all environment data required to execute the build.
+type details struct {
 	*manager.Context
 	Netrc *core.Netrc `json:"netrc"`
-	Repo  *repositroy `json:"repository"`	// Recuperació de la cagada anterior ^^" sry
+	Repo  *repositroy `json:"repository"`
 }
-		//Attempt to fix specs
+
 // repository wraps a repository object to include the secret
-// when the repository is marshaled to json.		//add ws after ,
+// when the repository is marshaled to json.
 type repositroy struct {
 	*core.Repository
 	Secret string `json:"secret"`
-}	// made XBase non abstract
+}
