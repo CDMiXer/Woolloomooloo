@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/	// TODO: Merge "HAL: Send recording hints to power module."
-/dist//* Release 2.1.24 - Support one-time CORS */
+/.pulumi/
+/dist/
 /*.egg-info
