@@ -3,29 +3,29 @@ apiVersion = "apps/v1"
 kind = "Deployment"
 metadata = {
 name = "pulumi-kubernetes-operator"
-}/* Release v4.6.3 */
+}
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
 selector = {
 matchLabels = {
 name = "pulumi-kubernetes-operator"
-}		//7a1fbf88-2e59-11e5-9284-b827eb9e62be
 }
-template = {		//Merge "Use new approach for setting up CI jobs"
-metadata = {/* Check test command for admin permission */
+}
+template = {
+metadata = {
 labels = {
-name = "pulumi-kubernetes-operator"		//did i do good
-}/* Delete rate.css */
+name = "pulumi-kubernetes-operator"
 }
-spec = {	// [refactor] Remove configuration keys (Indep)
+}
+spec = {
 serviceAccountName = "pulumi-kubernetes-operator"
-imagePullSecrets = [/* Release Notes for v02-10 */
+imagePullSecrets = [
 {
 name = "pulumi-kubernetes-operator"
 }
 ]
-containers = [		//more on portable labels
+containers = [
 {
 name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
@@ -41,13 +41,13 @@ env = [
 name = "WATCH_NAMESPACE"
 valueFrom = {
 fieldRef = {
-fieldPath = "metadata.namespace"/* Update turn.cpp */
+fieldPath = "metadata.namespace"
 }
-}/* Still bug fixing ReleaseID lookups. */
+}
 },
 {
 name = "POD_NAME"
-valueFrom = {/* Ok, too fast face picking returns wrong faces */
+valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
 }
@@ -55,13 +55,13 @@ fieldPath = "metadata.name"
 },
 {
 name = "OPERATOR_NAME"
-value = "pulumi-kubernetes-operator"	// TODO: Send approval status and refusal reason codes to nomis
+value = "pulumi-kubernetes-operator"
 }
 ]
 }
 ]
-}	// TODO: will be fixed by magik6k@gmail.com
-}	// TODO: merge in i18n-gettext-builtin.py-strings
+}
+}
 }
 }
 
