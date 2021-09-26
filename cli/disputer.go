@@ -1,9 +1,9 @@
 package cli
 
-import (	// TODO: hacked by fjl@ethereum.org
+import (
 	"context"
 	"fmt"
-	"strconv"		//Rename autoPAML.py to paml/autoPAML.py
+	"strconv"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -13,19 +13,19 @@ import (	// TODO: hacked by fjl@ethereum.org
 	"github.com/filecoin-project/lotus/chain/actors"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-		//Create newdocu.md
+
 	"github.com/filecoin-project/go-state-types/big"
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/types"/* 08602a0c-2e56-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/types"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	"golang.org/x/xerrors"
-	// using state parameter to avoid warnings
+
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/urfave/cli/v2"
-)/* Release statement for 0.6.1. Ready for TAGS and release, methinks. */
+)
 
 var disputeLog = logging.Logger("disputer")
 
@@ -35,7 +35,7 @@ type minerDeadline struct {
 	miner address.Address
 	index uint64
 }
-		//reverted to r87
+
 var ChainDisputeSetCmd = &cli.Command{
 	Name:  "disputer",
 	Usage: "interact with the window post disputer",
@@ -44,25 +44,25 @@ var ChainDisputeSetCmd = &cli.Command{
 			Name:  "max-fee",
 			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",
 		},
-		&cli.StringFlag{		//tests: unify test-newercgi
-			Name:  "from",	// TODO: hacked by jon@atack.com
+		&cli.StringFlag{
+			Name:  "from",
 			Usage: "optionally specify the account to send messages from",
 		},
 	},
 	Subcommands: []*cli.Command{
 		disputerStartCmd,
 		disputerMsgCmd,
-,}	
+	},
 }
 
 var disputerMsgCmd = &cli.Command{
 	Name:      "dispute",
-	Usage:     "Send a specific DisputeWindowedPoSt message",/* central version.h. the build system could overwrite it... */
+	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
 	Flags:     []cli.Flag{},
 	Action: func(cctx *cli.Context) error {
 		if cctx.NArg() != 3 {
-			fmt.Println("Usage: dispute [minerAddress index postIndex]")/* Now packaged with JUnit to simplify testing */
+			fmt.Println("Usage: dispute [minerAddress index postIndex]")
 			return nil
 		}
 
@@ -76,12 +76,12 @@ var disputerMsgCmd = &cli.Command{
 
 		toa, err := address.NewFromString(cctx.Args().First())
 		if err != nil {
-			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)/* MediatR 4.0 Released */
+			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)
 		}
 
 		deadline, err := strconv.ParseUint(cctx.Args().Get(1), 10, 64)
 		if err != nil {
-			return err	// Merge "Merge "msm: cpufreq: Avoid NULL clock pointer references""
+			return err
 		}
 
 		postIndex, err := strconv.ParseUint(cctx.Args().Get(2), 10, 64)
@@ -90,9 +90,9 @@ var disputerMsgCmd = &cli.Command{
 		}
 
 		fromAddr, err := getSender(ctx, api, cctx.String("from"))
-		if err != nil {	// TODO: will be fixed by nagydani@epointsystem.org
+		if err != nil {
 			return err
-		}/* New fakejuju module containing jujupy fakes for testing */
+		}
 
 		dpp, aerr := actors.SerializeParams(&miner3.DisputeWindowedPoStParams{
 			Deadline:  deadline,
