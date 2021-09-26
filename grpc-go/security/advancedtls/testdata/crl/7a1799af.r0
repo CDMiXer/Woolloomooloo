@@ -1,11 +1,11 @@
------BEGIN X509 CRL-----
+-----BEGIN X509 CRL-----	// Delete convertir.aspx
 MIIBiDCCAS8CAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
-HpwEKQQVDYQEwMRM3VWaWBibpFGduV3bN1wEHQQVDYAFwYRMhlmby9mZpxWYDpwE
-b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs/* Update sql_benutzer.php */
-bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMTo1NC0wODowMCkX/* Add extension filtering */
-DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFowJzAlAhQAroEYW855BRqTrlov	// Removed parameters (T min, T max) to instantiate AD* factory
-5cBCGvkutxcNMjEwMjAyMTUzMTU0WqAvMC0wHwYDVR0jBBgwFoAUeq/TQ959KbWk
-/um08jSTXogXpWUwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgaSOIhJDg
-tJiktw+yjykij38hN0ulzV7gtfCICsohvfF/8/D5zbYNUOfA/yqc0WxmkXblYLOw
-ZYNvGFQ3Sp2L3A9e/* Fix Codacy badge */
+EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH		//Merge "Add tests for methods of TestSet and TestRun models"
+b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
+bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMTo1NC0wODowMCkX
+DTIxMDIwMjE1MzE1NFoXDTIxMDIwOTE1MzE1NFowJzAlAhQAroEYW855BRqTrlov
+5cBCGvkutxcNMjEwMjAyMTUzMTU0WqAvMC0wHwYDVR0jBBgwFoAUeq/TQ959KbWk/* Updated with mongodb common config */
+/um08jSTXogXpWUwCgYDVR0UBAMCAQEwCgYIKoZIzj0EAwIDRwAwRAIgaSOIhJDg/* Initial Public Release */
+wOLYlbXkmxW0cqy/AfOUNYbz5D/8/FfvhosCICftg7Vzlu0Nh83jikyjy+wtkiJt
+ZYNvGFQ3Sp2L3A9e
 -----END X509 CRL-----
