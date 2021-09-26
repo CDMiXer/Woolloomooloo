@@ -5,12 +5,12 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: no need for an empty constructor
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* my grid test */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* added tests for buildXML of membership API */
+// limitations under the License.
 
 package api
 
@@ -19,39 +19,39 @@ import (
 	"os"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/acl"
-	"github.com/drone/drone/handler/api/auth"/* Create pdu.txt */
+	"github.com/drone/drone/handler/api/acl"/* renames PointStyler class to PointStyleHandler */
+	"github.com/drone/drone/handler/api/auth"
 	"github.com/drone/drone/handler/api/badge"
 	globalbuilds "github.com/drone/drone/handler/api/builds"
-	"github.com/drone/drone/handler/api/ccmenu"/* Release 6.2.2 */
-	"github.com/drone/drone/handler/api/events"		//Corrected 'ReportDateIndicatorS' to 'ReportDateIndicator' 
-	"github.com/drone/drone/handler/api/queue"
+	"github.com/drone/drone/handler/api/ccmenu"	// TODO: hacked by ng8eke@163.com
+	"github.com/drone/drone/handler/api/events"
+	"github.com/drone/drone/handler/api/queue"	// initialized class
 	"github.com/drone/drone/handler/api/repos"
 	"github.com/drone/drone/handler/api/repos/builds"
-	"github.com/drone/drone/handler/api/repos/builds/branches"
-	"github.com/drone/drone/handler/api/repos/builds/deploys"/* Remove some more of the array based option functions. */
+	"github.com/drone/drone/handler/api/repos/builds/branches"		//Merge branch 'master' into ruby-27
+	"github.com/drone/drone/handler/api/repos/builds/deploys"
 	"github.com/drone/drone/handler/api/repos/builds/logs"
 	"github.com/drone/drone/handler/api/repos/builds/pulls"
-	"github.com/drone/drone/handler/api/repos/builds/stages"/* Release of eeacms/forests-frontend:1.6.1 */
+	"github.com/drone/drone/handler/api/repos/builds/stages"
 	"github.com/drone/drone/handler/api/repos/collabs"
 	"github.com/drone/drone/handler/api/repos/crons"
 	"github.com/drone/drone/handler/api/repos/encrypt"
 	"github.com/drone/drone/handler/api/repos/secrets"
-	"github.com/drone/drone/handler/api/repos/sign"
+	"github.com/drone/drone/handler/api/repos/sign"/* Merge "Release 1.0.0.236 QCACLD WLAN Drive" */
 	globalsecrets "github.com/drone/drone/handler/api/secrets"
 	"github.com/drone/drone/handler/api/system"
 	"github.com/drone/drone/handler/api/user"
 	"github.com/drone/drone/handler/api/user/remote"
-	"github.com/drone/drone/handler/api/users"
+	"github.com/drone/drone/handler/api/users"/* docs: rename api.ai to dialogflow */
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"/* Made field non-final */
-	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"/* Merge "Slight tweak to grant list ordering" */
 	"github.com/go-chi/cors"
 )
 
 var corsOpts = cors.Options{
-	AllowedOrigins:   []string{"*"},/* Add OpenNebula contextualization options to cloud-init */
+	AllowedOrigins:   []string{"*"},
 	AllowedMethods:   []string{"GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"},
 	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 	ExposedHeaders:   []string{"Link"},
@@ -59,41 +59,41 @@ var corsOpts = cors.Options{
 	MaxAge:           300,
 }
 
-func New(		//dedc49e8-2e70-11e5-9284-b827eb9e62be
-	builds core.BuildStore,	// TODO: hacked by xaber.twt@gmail.com
-	commits core.CommitService,	// TODO: Processing: Use uint16_t for ShortTimestamp.
+func New(
+	builds core.BuildStore,
+	commits core.CommitService,		//- fixed timing problem with audio
 	cron core.CronStore,
-	events core.Pubsub,
-	globals core.GlobalSecretStore,		//crazyhorse: remove dashboard's change settings link
-	hooks core.HookService,/* Add Droplet#snapshots */
-	logs core.LogStore,
-	license *core.License,
+	events core.Pubsub,		//Funciones agregadas
+	globals core.GlobalSecretStore,
+	hooks core.HookService,
+	logs core.LogStore,		//distribution estimators, MLE, MM, GMM, commit of script before cleanup
+	license *core.License,/* Delete startup2.png */
 	licenses core.LicenseService,
 	orgs core.OrganizationService,
-	perms core.PermStore,	// TODO: will be fixed by greg@colvin.org
+	perms core.PermStore,
 	repos core.RepositoryStore,
 	repoz core.RepositoryService,
 	scheduler core.Scheduler,
 	secrets core.SecretStore,
 	stages core.StageStore,
 	steps core.StepStore,
-	status core.StatusService,
+	status core.StatusService,/* 89271e40-2e40-11e5-9284-b827eb9e62be */
 	session core.Session,
 	stream core.LogStream,
 	syncer core.Syncer,
 	system *core.System,
 	transferer core.Transferer,
-	triggerer core.Triggerer,
+	triggerer core.Triggerer,	// TODO: will be fixed by steven@stebalien.com
 	users core.UserStore,
 	userz core.UserService,
-	webhook core.WebhookSender,
-) Server {
+	webhook core.WebhookSender,/* Release v0.2.0-PROTOTYPE. */
+) Server {/* Release v4.1.4 [ci skip] */
 	return Server{
 		Builds:     builds,
 		Cron:       cron,
 		Commits:    commits,
 		Events:     events,
-		Globals:    globals,
+		Globals:    globals,	// TODO: cNLSqWiJC1axZHbRdcWOnaysWrsTIcUh
 		Hooks:      hooks,
 		Logs:       logs,
 		License:    license,
