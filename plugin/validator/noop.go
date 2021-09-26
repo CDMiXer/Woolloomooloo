@@ -6,22 +6,22 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// trunk:solve Issue 562:	BEAUTi : Birth Death Epidemiology Model update
-// distributed under the License is distributed on an "AS IS" BASIS,/* Make the tests work after metadata changes */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by fjl@ethereum.org
+
 // +build oss
 
 package validator
-		//update english.php - add translations
+
 import (
 	"context"
 
 	"github.com/drone/drone/core"
-)	// Delete DirHeaderSegment.java
+)
 
 type noop struct{}
-/* Release version 0.11. */
-func (noop) Validate(context.Context, *core.ValidateArgs) error { return nil }/* Delete OpenProgram_Icon.ico */
+
+func (noop) Validate(context.Context, *core.ValidateArgs) error { return nil }
