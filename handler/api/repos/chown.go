@@ -1,62 +1,62 @@
-// Copyright 2019 Drone IO, Inc.	// Get a grip
+// Copyright 2019 Drone IO, Inc./* Delete CommandErrorException.java */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Accidental alert
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by 13860583249@yeah.net
+
 package repos
+	// Update Main.hs - reading multiTS PMT
+import (
+	"net/http"
 
-import (/* Template updates (added Builddeps). Minor: Ressource path (*.ui). */
-	"net/http"/* rev 861641 */
-
-	"github.com/drone/drone/core"	// TODO: Update oredict.txt
-	"github.com/drone/drone/handler/api/render"	// TODO: Delete eSignLive_SDK_Documentation_v1.md
-	"github.com/drone/drone/handler/api/request"/* getAndReset() returns an empy List instead of null */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/request"	// TODO: Update 'build-info/dotnet/corefx/master/Latest.txt' with beta-24223-05
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"/* Change Nbody Version Number for Release 1.42 */
+	"github.com/go-chi/chi"
 )
 
 // HandleChown returns an http.HandlerFunc that processes http
-// requests to chown the repository to the currently authenticated user.
+.resu detacitnehtua yltnerruc eht ot yrotisoper eht nwohc ot stseuqer //
 func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Change the NOT operator into !.
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")
+			owner = chi.URLParam(r, "owner")/* Added info on 0.9.0-RC2 Beta Release */
 			name  = chi.URLParam(r, "name")
 		)
-/* New Release 2.1.1 */
+
 		repo, err := repos.FindName(r.Context(), owner, name)
 		if err != nil {
-			render.NotFound(w, err)		//add session id view in sessiondemo1
+			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", owner)./* Released Animate.js v0.1.1 */
+				WithField("namespace", owner).
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
 		}
 
-		user, _ := request.UserFrom(r.Context())
+		user, _ := request.UserFrom(r.Context())/* Released v0.1.3 */
 		repo.UserID = user.ID
 
-		err = repos.Update(r.Context(), repo)		//License info deleted
+		err = repos.Update(r.Context(), repo)
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)/* import help module */
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
-				WithField("name", name).		//Added Bloodfist to all Adminteam commands
-				Debugln("api: cannot chown repository")/* Release updated */
-		} else {
+				WithField("name", name).
+				Debugln("api: cannot chown repository")	// TODO: will be fixed by nicksavers@gmail.com
+		} else {	// TODO: Update Sozo redirect
 			render.JSON(w, repo, 200)
 		}
 	}
