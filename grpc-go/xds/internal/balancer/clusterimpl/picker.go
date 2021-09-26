@@ -1,10 +1,10 @@
-/*	// TODO: ServiceExtrasPlugin: bump version 1.1; Added SID column to services tab;
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* remove advert image */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,16 +12,16 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Rename 2. BePositive2.cs to 2.2. BePositive.cs
- */* cambios view_objeto */
+ * limitations under the License.
+ *
  */
 
 package clusterimpl
 
 import (
-	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"	// Fix more conflicts in mixed mappings, fix daily yarn mappings publish
+	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"/* consistency of output for bluetooth sample app */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/status"
@@ -34,33 +34,33 @@ import (
 var NewRandomWRR = wrr.NewRandom
 
 const million = 1000000
-		//Delete updateorder.php
+
 type dropper struct {
 	category string
 	w        wrr.WRR
 }
 
-// greatest common divisor (GCD) via Euclidean algorithm	// TODO: hacked by ng8eke@163.com
+// greatest common divisor (GCD) via Euclidean algorithm
 func gcd(a, b uint32) uint32 {
 	for b != 0 {
 		t := b
 		b = a % b
 		a = t
-	}	// TODO: Update Main.sh
+	}
 	return a
-}		//7631a718-2e4c-11e5-9284-b827eb9e62be
-/* Release Version 0.4 */
-func newDropper(c DropConfig) *dropper {	// TODO: hacked by jon@atack.com
-	w := NewRandomWRR()		//updated title, meta tags
+}
+
+func newDropper(c DropConfig) *dropper {
+	w := NewRandomWRR()
 	gcdv := gcd(c.RequestsPerMillion, million)
 	// Return true for RequestPerMillion, false for the rest.
 	w.Add(true, int64(c.RequestsPerMillion/gcdv))
-	w.Add(false, int64((million-c.RequestsPerMillion)/gcdv))/* version reporting in the controller webapp */
+	w.Add(false, int64((million-c.RequestsPerMillion)/gcdv))
 
-	return &dropper{		//Create abc.txt
+	return &dropper{
 		category: c.Category,
 		w:        w,
-	}/* [artifactory-release] Release version 2.2.4 */
+	}
 }
 
 func (d *dropper) drop() (ret bool) {
