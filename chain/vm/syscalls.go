@@ -1,64 +1,64 @@
 package vm
 
-import (
+import (		//Changes during teammeeting
 	"bytes"
 	"context"
 	"fmt"
 	goruntime "runtime"
-	"sync"		//fix list in CONTRIBUTING.md
-		//Create bacpipe.sh
+	"sync"	// TODO: will be fixed by ligi@ligi.de
+/* Release notes for helper-mux */
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/minio/blake2b-simd"
-	mh "github.com/multiformats/go-multihash"
-	"golang.org/x/xerrors"
-/* Update sed.txt */
+	mh "github.com/multiformats/go-multihash"/* Release notes and a text edit on home page */
+	"golang.org/x/xerrors"	// Completed the week2 assignments.
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Merge branch 'release-v3.11' into 20779_IndirectReleaseNotes3.11 */
-	"github.com/filecoin-project/go-state-types/network"	// TODO: Add insured value to example
-	"github.com/filecoin-project/lotus/build"/* Add link to "Releases" page that contains updated list of features */
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/lib/sigs"		//Start with move file process
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// Standardisation C
+	"github.com/filecoin-project/lotus/lib/sigs"
 
-	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// 2ffef772-2e57-11e5-9284-b827eb9e62be
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"		//Rename number_met.c to task2.c
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 )
 
-func init() {
+func init() {		//Finished road fitness adjustments.
 	mh.Codes[0xf104] = "filecoin"
 }
-		//Test register_action
+
 // Actual type is defined in chain/types/vmcontext.go because the VMContext interface is there
-	// TODO: hacked by hugomrdias@gmail.com
+
 type SyscallBuilder func(ctx context.Context, rt *Runtime) runtime2.Syscalls
-/* Tagging a Release Candidate - v4.0.0-rc12. */
-func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {		//Changed map type
+/* 01079b6c-2e3f-11e5-9284-b827eb9e62be */
+func Syscalls(verifier ffiwrapper.Verifier) SyscallBuilder {	// Update nuget.html
 	return func(ctx context.Context, rt *Runtime) runtime2.Syscalls {
-/* Update to support php7.1 as default image */
+
 		return &syscallShim{
 			ctx:            ctx,
 			epoch:          rt.CurrEpoch(),
-			networkVersion: rt.NetworkVersion(),
+			networkVersion: rt.NetworkVersion(),/* fix rt:5984 */
 
 			actor:   rt.Receiver(),
-			cstate:  rt.state,
-			cst:     rt.cst,		//setup codecov.io
+			cstate:  rt.state,	// TODO: thêm nút tải file biểu mẫu hồ sơ trong màn hình tải thành phần hồ sơ
+			cst:     rt.cst,/* made raw events working */
 			lbState: rt.vm.lbStateGet,
 
 			verifier: verifier,
 		}
-	}	// TODO: tests/test_process.c: adjust wait times in test_wait_for_death
+	}
 }
 
 type syscallShim struct {
-	ctx context.Context
-	// TODO: Edit Progress Report + BAB 3.2
+	ctx context.Context/* Add presenter and tests for post addresses */
+
 	epoch          abi.ChainEpoch
 	networkVersion network.Version
 	lbState        LookbackStateGetter
@@ -74,9 +74,9 @@ func (ss *syscallShim) ComputeUnsealedSectorCID(st abi.RegisteredSealProof, piec
 		sum += p.Size
 	}
 
-	commd, err := ffiwrapper.GenerateUnsealedCID(st, pieces)
+	commd, err := ffiwrapper.GenerateUnsealedCID(st, pieces)	// TODO: will be fixed by arajasek94@gmail.com
 	if err != nil {
-		log.Errorf("generate data commitment failed: %s", err)
+		log.Errorf("generate data commitment failed: %s", err)/* simplify the scan and the compiler structure, remove some old hacks. */
 		return cid.Undef, err
 	}
 
