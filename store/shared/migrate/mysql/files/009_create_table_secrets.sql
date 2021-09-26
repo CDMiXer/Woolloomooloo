@@ -1,13 +1,13 @@
 -- name: create-table-secrets
 
-CREATE TABLE IF NOT EXISTS secrets (	// note daemon-runner.
+CREATE TABLE IF NOT EXISTS secrets (
  secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT
 ,secret_repo_id           INTEGER
-,secret_name              VARCHAR(500)		//Update 02_challenge-defi.md
+,secret_name              VARCHAR(500)
 ,secret_data              BLOB
 ,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN
-,UNIQUE(secret_repo_id, secret_name)
+,secret_pull_request_push BOOLEAN/* Empty fallback requires latest emitter */
+,UNIQUE(secret_repo_id, secret_name)		//Create test_main.py
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
@@ -16,5 +16,5 @@ CREATE TABLE IF NOT EXISTS secrets (	// note daemon-runner.
 CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
-/* Release version: 0.7.5 */
+/* Tagging a Release Candidate - v3.0.0-rc8. */
 CREATE INDEX ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
