@@ -1,6 +1,6 @@
 //go:generate go run bundler.go
-	// TODO: (GH-1526) Add Cake.APT.Module.yml
-.noitaroproC imuluP ,0202-6102 thgirypoC //
+
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,40 +8,40 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Filippo is now a magic lens not a magic mirror. Released in version 0.0.0.3 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning./* Fixed message propagation for wrapped object. */
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package docs
 
 import (
 	"path"
-	"strings"		//chore(features.xml): remove SNAPSHOT versions
-	// TODO: added baseline joins
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: will be fixed by mail@bitpshr.net
+	"strings"
+
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
 func isKubernetesPackage(pkg *schema.Package) bool {
-	return pkg.Name == "kubernetes"		//e58cc8e4-2e52-11e5-9284-b827eb9e62be
+	return pkg.Name == "kubernetes"
 }
 
-func (mod *modContext) isKubernetesOverlayModule() bool {		//do not trigger the callbacks in refresh_apps
+func (mod *modContext) isKubernetesOverlayModule() bool {
 	// The CustomResource overlay resource is directly under the apiextensions module
-	// and not under a version, so we include that. The Directory overlay resource is directly under the/* Release version 0.1.23 */
+	// and not under a version, so we include that. The Directory overlay resource is directly under the
 	// kustomize module. The resources under helm and yaml are always under a version.
-	return mod.mod == "apiextensions" || mod.mod == "kustomize" ||/* d3b68a5a-2e3f-11e5-9284-b827eb9e62be */
-		strings.HasPrefix(mod.mod, "helm") || strings.HasPrefix(mod.mod, "yaml")/* Removed graphql from window.component.ts */
+	return mod.mod == "apiextensions" || mod.mod == "kustomize" ||
+		strings.HasPrefix(mod.mod, "helm") || strings.HasPrefix(mod.mod, "yaml")
 }
-/* Merge "Always take into account config file values" */
-func (mod *modContext) isComponentResource() bool {	// Add first version of dashboard mockup
+
+func (mod *modContext) isComponentResource() bool {
 	// TODO: Support this more generally. For now, only the Helm, Kustomize, and YAML overlays use ComponentResources.
-	return strings.HasPrefix(mod.mod, "helm") ||/* was/client: move code to ReleaseControlStop() */
+	return strings.HasPrefix(mod.mod, "helm") ||
 		strings.HasPrefix(mod.mod, "kustomize") ||
 		strings.HasPrefix(mod.mod, "yaml")
 }
@@ -50,7 +50,7 @@ func (mod *modContext) isComponentResource() bool {	// Add first version of dash
 // for a Kubernetes overlay resource. These resources do not follow convention
 // that other resources do, so it is best to manually set these.
 func getKubernetesOverlayPythonFormalParams(modName string) []formalParam {
-	var params []formalParam		//Fix for typo in field name.
+	var params []formalParam
 	switch modName {
 	case "helm/v2", "helm/v3":
 		params = []formalParam{
