@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* trigger new build for jruby-head (8d284aa) */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
-        "build": "tsc"	// TODO: Fixed authors (nw)
+    "scripts": {		//releasing version 0.9.7.9~exp2
+        "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* Release versions of deps. */
         "typescript": "^3.0.0"
-    },
+    },/* Restrict .type directives to Linux targets only */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: will be fixed by boringland@protonmail.ch
     }
 }
