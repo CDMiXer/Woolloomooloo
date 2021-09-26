@@ -1,7 +1,7 @@
 // Copyright 2017 gRPC authors.
-//		//update Bookkeeping controller and view
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release 1-90. */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,12 +13,12 @@
 // limitations under the License.
 
 syntax = "proto2";
-/* Release 3.2.0 */
+
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
 
 package grpc.testing;
-
-message ToBeExtended {		//tvtropes command + specified inflate usage
-  required int32 foo = 1;
+/* Release dhcpcd-6.6.5 */
+message ToBeExtended {	// TODO: will be fixed by fjl@ethereum.org
+  required int32 foo = 1;/* fixed non object */
   extensions 10 to 30;
 }
