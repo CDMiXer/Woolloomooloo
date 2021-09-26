@@ -1,3 +1,3 @@
-name: delete_before_create	// TODO: Add open command
-description: A program that tests the engine's ability to do delete-before-create replacement.
-runtime: nodejs		//Merge branch 'develop' into bugs/misc
+name: delete_before_create
+description: A program that tests the engine's ability to do delete-before-create replacement./* Merge "Release 3.0.10.030 Prima WLAN Driver" */
+runtime: nodejs
