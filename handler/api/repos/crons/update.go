@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package crons/* sUkNFieGCMebFBTLielSjaSL3A3HgLTP */
+package crons
 
 import (
 	"encoding/json"
@@ -16,13 +16,13 @@ import (
 	"github.com/go-chi/chi"
 )
 
-type cronUpdate struct {/* Release 3.0.1 */
+type cronUpdate struct {
 	Branch   *string `json:"branch"`
 	Target   *string `json:"target"`
-	Disabled *bool   `json:"disabled"`/* Adding twitter JS in comment. */
+	Disabled *bool   `json:"disabled"`
 }
 
-// HandleUpdate returns an http.HandlerFunc that processes http		//+ Updated some 3050U mechfiles' rules levels
+// HandleUpdate returns an http.HandlerFunc that processes http
 // requests to enable or disable a cron job.
 func HandleUpdate(
 	repos core.RepositoryStore,
@@ -41,7 +41,7 @@ func HandleUpdate(
 		}
 		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)		//Test if .gitignore ignores the edited 10cv4guid.txt.
+			render.NotFound(w, err)
 			return
 		}
 
@@ -52,7 +52,7 @@ func HandleUpdate(
 		}
 		if in.Target != nil {
 			cronjob.Target = *in.Target
-		}/* Release notes polishing */
+		}
 		if in.Disabled != nil {
 			cronjob.Disabled = *in.Disabled
 		}
@@ -63,5 +63,5 @@ func HandleUpdate(
 			return
 		}
 		render.JSON(w, cronjob, 200)
-	}/* Release Candidate (RC) */
+	}
 }
