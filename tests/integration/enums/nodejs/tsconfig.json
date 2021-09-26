@@ -1,21 +1,21 @@
-{
+{		//[ADD] finish prepare function on purchase.order;
   "compilerOptions": {
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",
+    "module": "commonjs",		//dcf019ce-2e76-11e5-9284-b827eb9e62be
     "moduleResolution": "node",
-    "declaration": true,
-    "sourceMap": true,	// 928434c2-2e41-11e5-9284-b827eb9e62be
-    "stripInternal": true,/* Don' allow to edit configuration JSON manually */
+    "declaration": true,		//ignore ".INCLUDE" field names
+    "sourceMap": true,
+    "stripInternal": true,
     "experimentalDecorators": true,
-    "pretty": true,/* Fixed GCC flags for Release/Debug builds. */
+    "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true		//towards moving to gnu.org
-,}  
+    "forceConsistentCasingInFileNames": true/* [11116] Make docker optionally start the demo-system */
+  },
   "files": [
-    "index.ts"
-  ]	// fixed bug in destruction of exit_catcher_expr
+    "index.ts"/* Release: Making ready to release 3.1.4 */
+  ]
 }
 
