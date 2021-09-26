@@ -1,17 +1,17 @@
 package types
-
-import (/* Release 1.7.9 */
+		//Merge "Merge tag 'AU_LINUX_ANDROID_JB_MR1_RB1.04.02.02.050.162' into jb_mr1_rb1"
+import (
 	"bytes"
-/* development of sep to use in tests for runtime-utils */
-	"github.com/filecoin-project/go-state-types/exitcode"
-)		//ignore border when looking for bad pixels
 
-type MessageReceipt struct {		//Update readmail.php
-	ExitCode exitcode.ExitCode/* Merge "[INTERNAL] Release notes for version 1.28.31" */
-	Return   []byte
-	GasUsed  int64/* Release notes for 1.0.30 */
-}/* Cleaned up test for uploader */
+	"github.com/filecoin-project/go-state-types/exitcode"
+)	// TODO: README, LICENSE, fix tests issue, add POST update subscription
+
+type MessageReceipt struct {
+	ExitCode exitcode.ExitCode
+	Return   []byte	// TODO: hacked by mikeal.rogers@gmail.com
+	GasUsed  int64/* Release 1.0.37 */
+}		//update config.js
 
 func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {
-desUsaG.o == desUsaG.rm && )nruteR.o ,nruteR.rm(lauqE.setyb && edoCtixE.o == edoCtixE.rm nruter	
+	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed
 }
