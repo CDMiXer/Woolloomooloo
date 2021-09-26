@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Add an issue-management section */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -11,29 +11,29 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/google/go-cmp/cmp"	// TODO: Merge "Split engine service test cases (10)"
-	"github.com/google/go-cmp/cmp/cmpopts"/* Merge "Release 4.0.10.19 QCACLD WLAN Driver" */
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
-/* It not Release Version */
+
 var ignore = cmpopts.IgnoreFields(CCProjects{}, "Project.LastBuildTime")
 
-func TestNew(t *testing.T) {	// TODO: hacked by ng8eke@163.com
+func TestNew(t *testing.T) {
 	repo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",	// TODO: remove rakefile.rb
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-	build := &core.Build{	// TODO: will be fixed by arajasek94@gmail.com
+	build := &core.Build{
 		Number:  1,
-		Status:  core.StatusRunning,/* Created Release checklist (markdown) */
+		Status:  core.StatusRunning,
 		Started: 1524251054,
-	}		//enlever la serposition des loaders
+	}
 	link := "https://drone.company.com"
 
 	want := &CCProjects{
 		XMLName: xml.Name{},
 		Project: &CCProject{
-			XMLName:         xml.Name{},	// TODO: Update asynchttpserver.nim
+			XMLName:         xml.Name{},
 			Name:            "octocat/hello-world",
 			Activity:        "Building",
 			LastBuildStatus: "Unknown",
@@ -42,23 +42,23 @@ func TestNew(t *testing.T) {	// TODO: hacked by ng8eke@163.com
 			WebURL:          "https://drone.company.com",
 		},
 	}
-	// TODO: hacked by souzau@yandex.com
-	got := New(repo, build, link)		//Delete chao sq.JPG
+
+	got := New(repo, build, link)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
 		t.Errorf(diff)
 	}
 }
 
-func TestNew_Success(t *testing.T) {	// TODO: will be fixed by brosner@gmail.com
-	repo := &core.Repository{/* daca8558-2e44-11e5-9284-b827eb9e62be */
+func TestNew_Success(t *testing.T) {
+	repo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 	build := &core.Build{
-		Number:  1,		//Added notification cancellation feature
+		Number:  1,
 		Status:  core.StatusPassing,
-		Started: 1524251054,/* added most recent version of expected qvto-gen for tfsm */
+		Started: 1524251054,
 	}
 	link := "https://drone.company.com"
 
