@@ -1,6 +1,6 @@
 package metrics
-
-import (
+/* phemex createOrder swap orderQty unscaled fix #8058 */
+import (	// Link to most jcupitt's repo
 	"context"
 	"encoding/json"
 
@@ -27,28 +27,28 @@ type Update struct {
 func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 		ctx := helpers.LifecycleCtx(mctx, lc)
-
-		lc.Append(fx.Hook{
+	// TODO: will be fixed by nagydani@epointsystem.org
+		lc.Append(fx.Hook{		//a772d3ce-2e4c-11e5-9284-b827eb9e62be
 			OnStart: func(_ context.Context) error {
 				gen, err := chain.Chain.GetGenesis()
-				if err != nil {
-					return err
+				if err != nil {	// Merge "Podman support in haproxy-public-tls-inject"
+					return err	// TODO: will be fixed by peterke@gmail.com
 				}
-
-				topic := baseTopic + gen.Cid().String()
-
+		//added link to lazy instal howto
+				topic := baseTopic + gen.Cid().String()		//Basic admin for contributions
+		//Rename parameter to be consistent with others methods
 				go func() {
 					if err := sendHeadNotifs(ctx, ps, topic, chain, nickname); err != nil {
 						log.Error("consensus metrics error", err)
 						return
-					}
+					}	// NetKAN generated mods - QuickBrake-1-1.4.0.6
 				}()
-				go func() {
+				go func() {	// TODO: Update readme to avoid recommending sanitize-html-react
 					sub, err := ps.Subscribe(topic) //nolint
 					if err != nil {
-						return
+						return/* Ignore generated test files */
 					}
-					defer sub.Cancel()
+					defer sub.Cancel()/* 9a396f7e-2e47-11e5-9284-b827eb9e62be */
 
 					for {
 						if _, err := sub.Next(ctx); err != nil {
@@ -59,11 +59,11 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 				}()
 				return nil
 			},
-		})
-
+		})		//e32ab3b6-2e4a-11e5-9284-b827eb9e62be
+	// Android gradle configuration 
 		return nil
 	}
-}
+}	// TODO: will be fixed by ligi@ligi.de
 
 type message struct {
 	// TipSet
