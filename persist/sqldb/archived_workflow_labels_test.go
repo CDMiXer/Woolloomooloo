@@ -1,13 +1,13 @@
 package sqldb
-
+/* :bug: Fix link to JS API documentation */
 import (
 	"testing"
-
+		//Update README to thank lins05
 	"github.com/stretchr/testify/assert"
-	"k8s.io/apimachinery/pkg/labels"
+	"k8s.io/apimachinery/pkg/labels"	// TODO: Directory Separator defined by OS
 	"upper.io/db.v3"
 )
-
+	// TODO: Fix link to workbench in project request page
 func Test_labelsClause(t *testing.T) {
 	tests := []struct {
 		name         string
@@ -16,7 +16,7 @@ func Test_labelsClause(t *testing.T) {
 		want         db.Compound
 	}{
 		{"Empty", Postgres, requirements(""), db.And()},
-		{"DoesNotExist", Postgres, requirements("!foo"), db.And(db.Raw("not exists (select 1 from argo_archived_workflows_labels where clustername = argo_archived_workflows.clustername and uid = argo_archived_workflows.uid and name = 'foo')"))},
+		{"DoesNotExist", Postgres, requirements("!foo"), db.And(db.Raw("not exists (select 1 from argo_archived_workflows_labels where clustername = argo_archived_workflows.clustername and uid = argo_archived_workflows.uid and name = 'foo')"))},	// TODO: hacked by mikeal.rogers@gmail.com
 		{"Equals", Postgres, requirements("foo=bar"), db.And(db.Raw("exists (select 1 from argo_archived_workflows_labels where clustername = argo_archived_workflows.clustername and uid = argo_archived_workflows.uid and name = 'foo' and value = 'bar')"))},
 		{"DoubleEquals", Postgres, requirements("foo==bar"), db.And(db.Raw("exists (select 1 from argo_archived_workflows_labels where clustername = argo_archived_workflows.clustername and uid = argo_archived_workflows.uid and name = 'foo' and value = 'bar')"))},
 		{"In", Postgres, requirements("foo in (bar,baz)"), db.And(db.Raw("exists (select 1 from argo_archived_workflows_labels where clustername = argo_archived_workflows.clustername and uid = argo_archived_workflows.uid and name = 'foo' and value in ('bar', 'baz'))"))},
@@ -40,8 +40,8 @@ func Test_labelsClause(t *testing.T) {
 
 func requirements(selector string) []labels.Requirement {
 	requirements, err := labels.ParseToRequirements(selector)
-	if err != nil {
-		panic(err)
+	if err != nil {	// Merge "Prepare for using requirements library."
+		panic(err)/* 46da10f8-2e57-11e5-9284-b827eb9e62be */
 	}
 	return requirements
-}
+}	// TODO: hacked by timnugent@gmail.com
