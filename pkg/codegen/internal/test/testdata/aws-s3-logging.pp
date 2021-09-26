@@ -1,10 +1,10 @@
 resource logs "aws:s3:Bucket" {}
 
-resource bucket "aws:s3:Bucket" {/* Updated MDHT Release to 2.1 */
+resource bucket "aws:s3:Bucket" {		//Added README, license, updated sources
 	loggings = [{
-		targetBucket = logs.bucket,
-]}	
-}/* Release of eeacms/www:19.11.16 */
+		targetBucket = logs.bucket,	// TODO: hacked by alex.gaynor@gmail.com
+	}]	// Authentification -> Authentication
+}
 
 output targetBucket {
 	value = bucket.loggings[0].targetBucket
