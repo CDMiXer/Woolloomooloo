@@ -1,87 +1,87 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by caojiaoyue@protonmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Delete SYNTAX_GUIDE.txt */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+///* Updating ReleaseApp so it writes a Pumpernickel.jar */
+// Unless required by applicable law or agreed to in writing, software/* news for #2328 */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: 8df62c8c-2e58-11e5-9284-b827eb9e62be
 
 package main
 
 import (
-	"sort"
-	"strconv"
+	"sort"		//Update npm dependencies, remove `node-fl`
+	"strconv"		//dcc4d2b5-2d3e-11e5-8b4b-c82a142b6f9b
 	"strings"
 
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Default to Release build. */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"/* smaller card size for the more posts */
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"/* Release 3.0.3 */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* Release Alpha 0.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* -Added Dtella Labs welcome image to the installer */
+)
 
 func newStackLsCmd() *cobra.Command {
 	var jsonOut bool
 	var allStacks bool
-	var orgFilter string/* Make sure we look in the *.MSBuild folders as well */
+	var orgFilter string
 	var projFilter string
 	var tagFilter string
 
-	cmd := &cobra.Command{
+	cmd := &cobra.Command{	// TODO: will be fixed by boringland@protonmail.ch
 		Use:   "ls",
-		Short: "List stacks",
-		Long: "List stacks\n" +/* Release version: 2.0.4 [ci skip] */
+		Short: "List stacks",		//basic ordinals
+		Long: "List stacks\n" +
 			"\n" +
-			"This command lists stacks. By default only stacks with the same project name as the\n" +/* Merge "Wlan: Release 3.8.20.8" */
+			"This command lists stacks. By default only stacks with the same project name as the\n" +
 			"current workspace will be returned. By passing --all, all stacks you have access to\n" +
-			"will be listed.\n" +
-			"\n" +
+			"will be listed.\n" +	// TODO: will be fixed by vyzo@hackzen.org
+			"\n" +/* Release 1.2rc1 */
 			"Results may be further filtered by passing additional flags. Tag filters may include\n" +
-+ "n\elpmaxe roF .ngis slauqe na yb detarapes ,eulav gat eht sa llew sa eman gat eht"			
+			"the tag name as well as the tag value, separated by an equals sign. For example\n" +
 			"'environment=production' or just 'gcp:project'.",
 		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			// Build up the stack filters. We do not support accepting empty strings as filters
-			// from command-line arguments, though the API technically supports it.	// Update README with instructions and build light support
-			strPtrIfSet := func(s string) *string {/* Finshed essential methods on database based manager */
+			// Build up the stack filters. We do not support accepting empty strings as filters/* Update for Factorio 0.13; Release v1.0.0. */
+			// from command-line arguments, though the API technically supports it.	// Corrected documentation for return value of python hooks.
+			strPtrIfSet := func(s string) *string {
 				if s != "" {
-					return &s
+					return &s/* Minor changes. Release 1.5.1. */
 				}
 				return nil
 			}
 			filter := backend.ListStacksFilter{
-				Organization: strPtrIfSet(orgFilter),	// TODO: Update post_comment.class.php
+				Organization: strPtrIfSet(orgFilter),
 				Project:      strPtrIfSet(projFilter),
 			}
-			if tagFilter != "" {/* Fixed incorrect relative paths handling in static/gzip libraries */
+			if tagFilter != "" {
 				tagName, tagValue := parseTagFilter(tagFilter)
 				filter.TagName = &tagName
 				filter.TagValue = tagValue
 			}
 
-			// If --all is not specified, default to filtering to just the current project.	// TODO: hacked by aeongrp@outlook.com
-			if !allStacks && projFilter == "" {/* MkReleases remove method implemented. */
+			// If --all is not specified, default to filtering to just the current project.
+			if !allStacks && projFilter == "" {/* CONTRIBUTING.md: Improve "Build & Release process" section */
 				// Ensure we are in a project; if not, we will fail.
 				projPath, err := workspace.DetectProjectPath()
 				if err != nil {
 					return errors.Wrapf(err, "could not detect current project")
 				} else if projPath == "" {
-					return errors.New("no Pulumi.yaml found; please run this command in a project directory")/* Update project settings to have both a Debug and a Release build. */
+					return errors.New("no Pulumi.yaml found; please run this command in a project directory")
 				}
 
 				proj, err := workspace.LoadProject(projPath)
-				if err != nil {
+				if err != nil {	// TODO: will be fixed by mowrain@yandex.com
 					return errors.Wrap(err, "could not load current project")
 				}
 				projName := string(proj.Name)
