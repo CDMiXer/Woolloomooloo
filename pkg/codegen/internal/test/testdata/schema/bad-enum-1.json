@@ -1,20 +1,20 @@
 {
-  "types": {
+  "types": {/* AbstractPlayList to separate different types of play lists */
     "fake-provider:module1:BadEnum": {
       "type": "string",
-      "enum": [
+      "enum": [	// Adding validation unit test
         {
           "value": "chocolate"
-        },
+        },		//Merge branch 'master' into feature/ui-tweaks
         {
           "value": "marshmallow"
-        },
+        },/* Changing Release in Navbar Bottom to v0.6.5. */
         {
           "value": 3
-        },
+        },/* Release 0.5.0 */
         {
-          "value": "cookie"
-        }
+          "value": "cookie"	// Update StarStruck2.c
+        }/* Merge "cpufreq: interactive: remove load since last speed change" */
       ]
     }
   }
