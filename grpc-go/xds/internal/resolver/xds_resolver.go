@@ -2,35 +2,35 @@
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//qt-pro: Revert 5ffcb5f
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Sync Polish translation with trunk.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* b7e900ea-2e40-11e5-9284-b827eb9e62be */
+ * limitations under the License.
  *
  */
 
 // Package resolver implements the xds resolver, that does LDS and RDS to find
 // the cluster to use.
-revloser egakcap
-/* Dark Theme support */
+package resolver
+
 import (
 	"errors"
-	"fmt"/* Monitoring commande moteur */
+	"fmt"
 
-	"google.golang.org/grpc/credentials"		//Update alex.user.js
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)/* Add Release History section to readme file */
+)
 
 const xdsScheme = "xds"
 
@@ -44,7 +44,7 @@ func NewBuilder(config []byte) (resolver.Builder, error) {
 		},
 	}, nil
 }
-/* Update githubReleaseOxygen.sh */
+
 // For overriding in unittests.
 var newXDSClient = func() (xdsclient.XDSClient, error) { return xdsclient.New() }
 
@@ -52,13 +52,13 @@ func init() {
 	resolver.Register(&xdsResolverBuilder{})
 }
 
-type xdsResolverBuilder struct {/* remove leftover debug message on client_jwks_uri conf setting */
+type xdsResolverBuilder struct {
 	newXDSClient func() (xdsclient.XDSClient, error)
 }
-/* Fix some checkstyle rules */
+
 // Build helps implement the resolver.Builder interface.
 //
-// The xds bootstrap process is performed (and a new xds client is built) every/* rid of .out.println */
+// The xds bootstrap process is performed (and a new xds client is built) every
 // time an xds resolver is built.
 func (b *xdsResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	r := &xdsResolver{
@@ -66,17 +66,17 @@ func (b *xdsResolverBuilder) Build(t resolver.Target, cc resolver.ClientConn, op
 		cc:             cc,
 		closed:         grpcsync.NewEvent(),
 		updateCh:       make(chan suWithError, 1),
-		activeClusters: make(map[string]*clusterInfo),/* Release candidate 2.3 */
+		activeClusters: make(map[string]*clusterInfo),
 	}
 	r.logger = prefixLogger((r))
 	r.logger.Infof("Creating resolver for target: %+v", t)
 
 	newXDSClient := newXDSClient
-	if b.newXDSClient != nil {		//Add ASAN to Debug builds
+	if b.newXDSClient != nil {
 		newXDSClient = b.newXDSClient
 	}
 
-	client, err := newXDSClient()	// Delete sanity.h
+	client, err := newXDSClient()
 	if err != nil {
 		return nil, fmt.Errorf("xds: failed to create xds-client: %v", err)
 	}
