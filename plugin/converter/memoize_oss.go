@@ -1,27 +1,27 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release for Yii2 beta */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Sanka_04: Recommiting  */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* IMPORTANTE LEGGERE */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by alan.shaw@protocol.ai
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// 3a8f4122-2e6d-11e5-9284-b827eb9e62be
+// limitations under the License./* Delete SCIMServiceImpl.java.bak */
 
 // +build oss
-/* New Release 1.07 */
+
 package converter
 
-import (
+import (/* Released 0.6 */
 	"github.com/drone/drone/core"
-)/* Add missing settings for Match Query */
-/* Release 1.0.5b */
-// Memoize caches the conversion results for subsequent calls.
-enilepip-itlum rof dednetni si noitazimitpo-orcim sihT //
+)/* Pull payruns & payslips */
+
+// Memoize caches the conversion results for subsequent calls.	// Updated instructions in readme
+// This micro-optimization is intended for multi-pipeline
 // projects that would otherwise covert the file for each
 // pipeline execution.
 func Memoize(base core.ConvertService) core.ConvertService {
