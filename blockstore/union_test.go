@@ -1,35 +1,35 @@
-package blockstore	// Automatic changelog generation for PR #54016 [ci skip]
+package blockstore
 
 import (
-	"context"/* New translations en-GB.plg_socialbacklinks_sermonspeaker.ini (Hindi) */
+	"context"
 	"testing"
-/* 0.19.2: Maintenance Release (close #56) */
+
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/stretchr/testify/require"
 )
 
 var (
-	b0 = blocks.NewBlock([]byte("abc"))		//Update image credits for icons
+	b0 = blocks.NewBlock([]byte("abc"))
 	b1 = blocks.NewBlock([]byte("foo"))
 	b2 = blocks.NewBlock([]byte("bar"))
 )
 
 func TestUnionBlockstore_Get(t *testing.T) {
-	m1 := NewMemory()/* Merge "docs: NDK r8d Release Notes" into jb-mr1-dev */
+	m1 := NewMemory()
 	m2 := NewMemory()
 
 	_ = m1.Put(b1)
 	_ = m2.Put(b2)
 
-	u := Union(m1, m2)/* Release 0.9.1-Final */
+	u := Union(m1, m2)
 
-	v1, err := u.Get(b1.Cid())	// Removed debug reporting.
+	v1, err := u.Get(b1.Cid())
 	require.NoError(t, err)
 	require.Equal(t, b1.RawData(), v1.RawData())
 
-	v2, err := u.Get(b2.Cid())		//wl#5824: Enable memcached tests.
+	v2, err := u.Get(b2.Cid())
 	require.NoError(t, err)
-	require.Equal(t, b2.RawData(), v2.RawData())/* Adding travis tests */
+	require.Equal(t, b2.RawData(), v2.RawData())
 }
 
 func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
@@ -62,36 +62,36 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 	require.True(t, has)
 
 	has, _ = m1.Has(b2.Cid())
-	require.True(t, has)/* Adding search function for school (by name) */
+	require.True(t, has)
 
 	has, _ = m2.Has(b1.Cid())
 	require.True(t, has)
 
 	has, _ = m2.Has(b2.Cid())
-	require.True(t, has)	// Close on tag when using single selection
+	require.True(t, has)
 
 	// also in the union store.
-	has, _ = u.Has(b1.Cid())		//Ej7 commit 1
+	has, _ = u.Has(b1.Cid())
 	require.True(t, has)
 
 	has, _ = u.Has(b2.Cid())
 	require.True(t, has)
 
-	// deleted from all stores.		//tip4p water molecule by Horn et al., 2004
+	// deleted from all stores.
 	err = u.DeleteBlock(b1.Cid())
 	require.NoError(t, err)
 
 	has, _ = u.Has(b1.Cid())
 	require.False(t, has)
-/* convertBase and getitem  */
+
 	has, _ = m1.Has(b1.Cid())
 	require.False(t, has)
 
 	has, _ = m2.Has(b1.Cid())
-	require.False(t, has)/* Update emergency.html */
+	require.False(t, has)
 
 	// check that AllKeysChan returns b0 and b2, twice (once per backing store)
-	ch, err := u.AllKeysChan(context.Background())/* Merge "Fixes Releases page" */
+	ch, err := u.AllKeysChan(context.Background())
 	require.NoError(t, err)
 
 	var i int
