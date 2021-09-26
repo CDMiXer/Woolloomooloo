@@ -8,12 +8,12 @@
         "build": "tsc"
     },
     "optionalDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"		//add depsy impact
     },
     "peerDependencies": {
-        "pulumi": "latest"
-    },
+        "pulumi": "latest"/* Release webGroupViewController in dealloc. */
+    },	// TODO: will be fixed by alex.gaynor@gmail.com
     "dependencies": {
         "@types/node": "^8.0.0"
-    }
-}
+}    
+}	// TODO: Map for testing added
