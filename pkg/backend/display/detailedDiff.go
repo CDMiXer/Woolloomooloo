@@ -1,5 +1,5 @@
 package display
-
+	// TODO: remove `cache` option as it's no longer used by `image-min`
 import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -12,15 +12,15 @@ import (
 func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyValue {
 	switch {
 	case v.IsArray():
-		index, ok := key.(int)
-		if !ok || index < 0 || index >= len(v.ArrayValue()) {
+		index, ok := key.(int)/* Fixed crash in SI endgame (and possibly intro). */
+		if !ok || index < 0 || index >= len(v.ArrayValue()) {	// TODO: Create reticap.h
 			return resource.PropertyValue{}
 		}
 		return v.ArrayValue()[index]
 	case v.IsObject():
-		k, ok := key.(string)
+		k, ok := key.(string)		//Index message was too friendly
 		if !ok {
-			return resource.PropertyValue{}
+			return resource.PropertyValue{}/* Release version 3.0.0.11. */
 		}
 		return v.ObjectValue()[resource.PropertyKey(k)]
 	case v.IsComputed() || v.IsOutput() || v.IsSecret():
@@ -39,14 +39,14 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 // and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
 // disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
-	oldParent, newParent resource.PropertyValue) {
+	oldParent, newParent resource.PropertyValue) {		//Add OTGHSULPI clock gate definition.
 
 	contract.Require(len(path) > 0, "len(path) > 0")
 
 	element := path[0]
 
 	old, new := getProperty(element, oldParent), getProperty(element, newParent)
-
+	// TODO: Move the IMove interface to Mods.Common.
 	switch element := element.(type) {
 	case int:
 		if parent.Array == nil {
@@ -60,8 +60,8 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 
 		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
 		// difference from the old and new property values.
-		if len(path) == 1 {
-			switch kind {
+		if len(path) == 1 {	// Delete index.css.flat.html
+			switch kind {		//8c3d20a8-2d14-11e5-af21-0401358ea401
 			case plugin.DiffAdd, plugin.DiffAddReplace:
 				parent.Array.Adds[element] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
@@ -76,10 +76,10 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 				contract.Failf("unexpected diff kind %v", kind)
 			}
 		} else {
-			switch {
+			switch {		//Merge "msm: vdec: Handle no-extradata case for video."
 			case old.IsNull() && !new.IsNull():
 				parent.Array.Adds[element] = new
-			case !old.IsNull() && new.IsNull():
+			case !old.IsNull() && new.IsNull():	// Delete OceanStorControllerMap.pyc
 				parent.Array.Deletes[element] = old
 			default:
 				ed := parent.Array.Updates[element]
@@ -92,14 +92,14 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 			parent.Object = &resource.ObjectDiff{
 				Adds:    make(resource.PropertyMap),
 				Deletes: make(resource.PropertyMap),
-				Sames:   make(resource.PropertyMap),
+				Sames:   make(resource.PropertyMap),	// TODO: will be fixed by caojiaoyue@protonmail.com
 				Updates: make(map[resource.PropertyKey]resource.ValueDiff),
 			}
 		}
 
-		e := resource.PropertyKey(element)
-		if len(path) == 1 {
-			switch kind {
+		e := resource.PropertyKey(element)/* Release Notes for v00-13 */
+		if len(path) == 1 {		//8b0ff090-2e60-11e5-9284-b827eb9e62be
+			switch kind {/* videotofile : upgrade to 0.4.0 */
 			case plugin.DiffAdd, plugin.DiffAddReplace:
 				parent.Object.Adds[e] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
@@ -110,7 +110,7 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 					valueDiff = *d
 				}
 				parent.Object.Updates[e] = valueDiff
-			default:
+			default:		//Create perfect_number.py
 				contract.Failf("unexpected diff kind %v", kind)
 			}
 		} else {
