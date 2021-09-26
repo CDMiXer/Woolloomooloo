@@ -1,18 +1,18 @@
 {{ define "examples" -}}
 {{ print "{{% examples %}}" }}
-## Example Usage		//Code clean up in model
+## Example Usage
 
-{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
+{{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}		//Movement func now void
 
-{{- range . }}	// TODO: Remove wrong parameter in search query
+{{- range . }}
 {{ .Title }}
-
+		//mysql update
 {{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}		//harmonization i18n
-{{ print "{{% /example %}}" }}
+{{ htmlSafe $val }}
+{{ print "{{% /example %}}" }}/* Create DPC 228 */
 {{ end }}
-
+	// TODO: will be fixed by lexy8russo@outlook.com
 {{- end }}
 {{ print "{{% /examples %}}" }}
 
