@@ -1,10 +1,10 @@
-package cli/* * added Acanda's PMD Eclipse plugin */
+package cli
 
-import (/* Release v1.15 */
+import (
 	"bytes"
-	"context"		//Use eslint default rules
+	"context"
 	"encoding/json"
-	"fmt"		//Started adding optional TLS encryption
+	"fmt"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -13,20 +13,20 @@ import (/* Release v1.15 */
 	"sort"
 	"strconv"
 	"strings"
-	"time"	// TODO: Merge branch 'develop' into 822_form-fields-with-errors-a11y
+	"time"
 
-	"github.com/filecoin-project/lotus/api/v0api"/* Update mispelling */
+	"github.com/filecoin-project/lotus/api/v0api"
 
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-		//Merge "Fixes RST headings for rendering"
-	"github.com/ipfs/go-cid"/* Release 0.6.3.3 */
-	cbor "github.com/ipfs/go-ipld-cbor"/* Update URLInclusionReaderTest.java */
+
+	"github.com/ipfs/go-cid"
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
-	"github.com/urfave/cli/v2"	// TODO: Update object term cache from get_the_category()
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/urfave/cli/v2"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -35,12 +35,12 @@ import (/* Release v1.15 */
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"/* Release Django Evolution 0.6.7. */
-	"github.com/filecoin-project/lotus/blockstore"	// Merge branch 'master' into feature/style-command-bar-trigger
+	lapi "github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-"etats/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/chain/stmgr"		//* Replaced some more Exception with RuntimeException
-	"github.com/filecoin-project/lotus/chain/types"		//1.8.1: updated release notes
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var StateCmd = &cli.Command{
