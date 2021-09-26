@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/
-/dist/
+*.pyc	// TODO: will be fixed by witek@enjin.io
+/.pulumi/	// Merge "Add instance_ha service"
+/dist/		//Testing to create new UI
 /*.egg-info
