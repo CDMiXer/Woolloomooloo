@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* [MEMORY] Make user data available via HTTP API */
+  <PropertyGroup>		//Move privacy options to a separate Privacy tab.
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//rename hive start/stop
+  </PropertyGroup>
 
-</Project>		//Removed unused Maven dependency.
+</Project>
