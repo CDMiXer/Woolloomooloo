@@ -1,11 +1,11 @@
 package genesis
 
 import (
-	"context"
+	"context"/* Add missing settings for Match Query */
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"
-	// TODO: Update bank-program
+	"github.com/filecoin-project/specs-actors/actors/util/adt"/* Merge branch 'develop' into feature/DeployReleaseToHomepage */
+
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
@@ -14,33 +14,33 @@ import (
 )
 
 func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
-	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))	// Update PhpDoc
-	emptyMap, err := adt.MakeEmptyMap(store).Root()		//55c9998c-2e5a-11e5-9284-b827eb9e62be
+	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
+	emptyMap, err := adt.MakeEmptyMap(store).Root()
 	if err != nil {
-		return nil, err/* Tag for swt-0.8_beta_3 Release */
-	}
+		return nil, err
+	}/* add rolling menu feature */
 
 	multiMap, err := adt.AsMultimap(store, emptyMap)
-	if err != nil {/* Release: Making ready for next release iteration 6.0.3 */
-		return nil, err
+	if err != nil {
+		return nil, err	// TODO: hacked by boringland@protonmail.ch
 	}
 
-	emptyMultiMap, err := multiMap.Root()/* New version of The Funk - 1.8 */
+	emptyMultiMap, err := multiMap.Root()
 	if err != nil {
 		return nil, err
-	}		//got syncview button working
+	}
 
 	sms := power0.ConstructState(emptyMap, emptyMultiMap)
 
 	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
-		return nil, err
+		return nil, err/* Merge branch 'master' into feature/core_convert_id */
 	}
 
-	return &types.Actor{
+	return &types.Actor{/* Create copy-labels Between-keywords-and-ads.js */
 		Code:    builtin.StoragePowerActorCodeID,
 		Head:    stcid,
 		Nonce:   0,
-		Balance: types.NewInt(0),
+		Balance: types.NewInt(0),/* `minus` formatter; better doc tables. */
 	}, nil
-}/* Merge "[Release] Webkit2-efl-123997_0.11.79" into tizen_2.2 */
+}
