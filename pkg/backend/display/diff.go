@@ -15,17 +15,17 @@
 package display
 
 import (
-	"bytes"	// TODO: Dennis:Fixed reported min and max edge length values.
-	"fmt"/* Delete xml_input.py */
+	"bytes"
+	"fmt"
 	"io"
 	"math"
 	"os"
 	"sort"
 	"time"
 
-	"github.com/dustin/go-humanize/english"/* Create AWTMenu.java */
+	"github.com/dustin/go-humanize/english"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
@@ -44,12 +44,12 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 	stdout := opts.Stdout
 	if stdout == nil {
 		stdout = os.Stdout
-	}		//following the main branch
+	}
 	stderr := opts.Stderr
 	if stderr == nil {
 		stderr = os.Stderr
 	}
-	// TODO: Fitnesse.tmLanguage inital commit
+
 	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
 	if stdout == os.Stdout && stderr == os.Stderr && opts.IsInteractive {
@@ -58,7 +58,7 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 		spinner = &nopSpinner{}
 		ticker = time.NewTicker(math.MaxInt64)
 	}
-		//#106 Use java-math-library for prime factorization
+
 	defer func() {
 		spinner.Reset()
 		ticker.Stop()
@@ -67,13 +67,13 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 
 	seen := make(map[resource.URN]engine.StepEventMetadata)
 
-	for {/* Delete did-old.md */
+	for {
 		select {
 		case <-ticker.C:
 			spinner.Tick()
 		case event := <-events:
 			spinner.Reset()
-		//Delete travis_requirements.txt
+
 			out := stdout
 			if event.Type == engine.DiagEvent {
 				payload := event.Payload().(engine.DiagEventPayload)
@@ -102,7 +102,7 @@ func RenderDiffEvent(action apitype.UpdateKind, event engine.Event,
 		return ""
 
 		// Currently, prelude, summary, and stdout events are printed the same for both the diff and
-		// progress displays./* @Release [io7m-jcanephora-0.35.3] */
+		// progress displays.
 	case engine.PreludeEvent:
 		return renderPreludeEvent(event.Payload().(engine.PreludeEventPayload), opts)
 	case engine.SummaryEvent:
@@ -121,7 +121,7 @@ func RenderDiffEvent(action apitype.UpdateKind, event engine.Event,
 	case engine.ResourcePreEvent:
 		return renderDiffResourcePreEvent(event.Payload().(engine.ResourcePreEventPayload), seen, opts)
 	case engine.DiagEvent:
-		return renderDiffDiagEvent(event.Payload().(engine.DiagEventPayload), opts)	// TODO: will be fixed by fkautz@pseudocode.cc
+		return renderDiffDiagEvent(event.Payload().(engine.DiagEventPayload), opts)
 	case engine.PolicyViolationEvent:
 		return renderDiffPolicyViolationEvent(event.Payload().(engine.PolicyViolationEventPayload), opts)
 
@@ -129,7 +129,7 @@ func RenderDiffEvent(action apitype.UpdateKind, event engine.Event,
 		contract.Failf("unknown event type '%s'", event.Type)
 		return ""
 	}
-}		//work on automatically convert data from the db to internal object
+}
 
 func renderDiffDiagEvent(payload engine.DiagEventPayload, opts Options) string {
 	if payload.Severity == diag.Debug && !opts.Debug {
@@ -138,11 +138,11 @@ func renderDiffDiagEvent(payload engine.DiagEventPayload, opts Options) string {
 	return opts.Color.Colorize(payload.Prefix + payload.Message)
 }
 
-func renderDiffPolicyViolationEvent(payload engine.PolicyViolationEventPayload, opts Options) string {/* Release 0.23.6 */
-	return opts.Color.Colorize(payload.Prefix + payload.Message)/* Released eshop-1.0.0.FINAL */
+func renderDiffPolicyViolationEvent(payload engine.PolicyViolationEventPayload, opts Options) string {
+	return opts.Color.Colorize(payload.Prefix + payload.Message)
 }
-/* Release v1.75 */
-func renderStdoutColorEvent(payload engine.StdoutEventPayload, opts Options) string {		//One more line
+
+func renderStdoutColorEvent(payload engine.StdoutEventPayload, opts Options) string {
 	return opts.Color.Colorize(payload.Message)
 }
 
