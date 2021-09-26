@@ -5,15 +5,15 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "scripts": {
-        "build": "tsc"		//Fix autobuild process for cases in which the base directory has some spaces.
+        "build": "tsc"
     },
     "optionalDependencies": {
-        "typescript": "^2.5.3"/* Release Notes draft for k/k v1.19.0-alpha.2 */
+        "typescript": "^2.5.3"
     },
-    "peerDependencies": {	// TODO: fix get hashed bug
+    "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-}    
+    }
 }
