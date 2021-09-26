@@ -1,26 +1,26 @@
 package workflow
 
 import (
-	"context"/* Release 3.6.2 */
+	"context"
 	"encoding/json"
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"	// TODO: hacked by vyzo@hackzen.org
+	"github.com/stretchr/testify/mock"
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* defer call r.Release() */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/rand"
-	"k8s.io/client-go/kubernetes/fake"/* Changed Downloads page from `Builds` folder to `Releases`. */
+	"k8s.io/client-go/kubernetes/fake"
 	ktesting "k8s.io/client-go/testing"
-		//Delete ModifierPizzaOptionMenu.class
-	"github.com/argoproj/argo/persist/sqldb"/* Update db.neon */
-	"github.com/argoproj/argo/persist/sqldb/mocks"		//13f209a4-2e55-11e5-9284-b827eb9e62be
+
+	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb/mocks"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
-	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//Update iFSGLFT.m
+	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
@@ -31,19 +31,19 @@ import (
 
 const unlabelled = `{
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "Workflow",	// TODO: Delete env_cube_nx.png
-  "metadata": {/* Release: Making ready for next release cycle 5.0.2 */
-    "namespace": "workflows",/* Release version 3! */
+  "kind": "Workflow",
+  "metadata": {
+    "namespace": "workflows",
     "name": "unlabelled",
     "labels": {
-      "workflows.argoproj.io/phase": "Failed"/* Profil page */
+      "workflows.argoproj.io/phase": "Failed"
     }
-  },		//Rename getRankNameInGroup to getRankNameInGroup.js
+  },
   "spec": {
     "entrypoint": "whalesay",
-    "templates": [/* Release 0.3.1 */
-      {	// Back to 400ppr encoder
-        "container": {/* Enable Release Drafter for the repository */
+    "templates": [
+      {
+        "container": {
           "image": "docker/whalesay:latest"
         },
         "name": "whalesay"
