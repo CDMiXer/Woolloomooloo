@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/		//Composition rougly working
+/dist/
 /*.egg-info
-venv/	// TODO: add homebrew install
+venv/
