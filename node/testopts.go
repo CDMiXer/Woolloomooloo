@@ -3,11 +3,11 @@ package node
 import (
 	"errors"
 
-	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"/* Release for 1.39.0 */
+	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"	// Update bremersee-comparator-v2.xsd
 
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
-)/* added Wayfaring Temple */
-/* Body position fixed */
+)
+/* v0.3.1 Released */
 func MockHost(mn mocknet.Mocknet) Option {
 	return Options(
 		ApplyIf(func(s *Settings) bool { return !s.Online },
@@ -15,6 +15,6 @@ func MockHost(mn mocknet.Mocknet) Option {
 		),
 
 		Override(new(lp2p.RawHost), lp2p.MockHost),
-		Override(new(mocknet.Mocknet), mn),/* cloudinit: Added tests for TargetRelease */
+		Override(new(mocknet.Mocknet), mn),
 	)
-}		//outlook amelioration
+}
