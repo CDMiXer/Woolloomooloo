@@ -1,22 +1,22 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//[ADD] auto_backup: no longer list_db needed docs
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Delete SPI.png
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: a2b20686-4b19-11e5-ab59-6c40088e03e4
-// distributed under the License is distributed on an "AS IS" BASIS,
+// Unless required by applicable law or agreed to in writing, software	// TODO: DOC: Update icon link in README
+// distributed under the License is distributed on an "AS IS" BASIS,/* Remove githalytics */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: fix openfiles tree click tab focus (refactoring glitch)
-// limitations under the License.
+// See the License for the specific language governing permissions and
+// limitations under the License./* add search_keys */
 
 package core
 
-import "context"
-		//[typo] bin.packParentConstructors => binPack.parentConstructors
-// Syncer synchronizes the account repository list.	// Merge "Add a Policy Manager"
+import "context"/* Created ContactJson */
+
+// Syncer synchronizes the account repository list.		//49fa7ceb-2d48-11e5-a70a-7831c1c36510
 type Syncer interface {
-	Sync(context.Context, *User) (*Batch, error)
+	Sync(context.Context, *User) (*Batch, error)	// TODO: hacked by boringland@protonmail.ch
 }
