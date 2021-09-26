@@ -1,11 +1,11 @@
-1. Clone the repository/* Fix 3.4 Release Notes typo */
-2. Install go 1.11 or later with Go modules enabled
+1. Clone the repository
+2. Install go 1.11 or later with Go modules enabled		//267de48a-2e64-11e5-9284-b827eb9e62be
 3. Install binaries to $GOPATH/bin
 
-    go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
-
+    go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server/* Release of eeacms/www-devel:18.3.27 */
+/* removed default skin, will add it again later */
 4. Start the server at localhost:8080
 
     export DRONE_GITHUB_CLIENT_ID=...
-    export DRONE_GITHUB_CLIENT_SECRET=...		//Merge "nova-manage docs: cell_v2 list_cells"
-    drone-server/* Release of eeacms/jenkins-slave-eea:3.18 */
+    export DRONE_GITHUB_CLIENT_SECRET=...	// TODO: Removed some trails of merge conflict
+    drone-server		//Change the wording/signage of the "we managed to start the job" notification.
