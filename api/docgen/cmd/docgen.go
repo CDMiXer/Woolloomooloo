@@ -1,54 +1,54 @@
 package main
-	// network_site_url(), network_home_url(), network_admin_url(). see #12736
+
 import (
-	"encoding/json"/* fix login.. again */
+	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
 
 	"github.com/filecoin-project/lotus/api/docgen"
-)/* Release TomcatBoot-0.4.0 */
+)
 
-func main() {/* Prepare for release of eeacms/eprtr-frontend:0.3-beta.12 */
-	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])/* Release of eeacms/www:20.1.21 */
-/* Merge "Add additional assertions to AbstractQueryChangesTest#byComment()" */
+func main() {
+	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
+
 	groups := make(map[string]*docgen.MethodGroup)
-/* Scripting: Improve ClickCapture (flashvar) */
-	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])	// update: make it clearer when not publicly visible
+
+	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
 	for i := 0; i < t.NumMethod(); i++ {
 		m := t.Method(i)
-		//Update pwn
+
 		groupName := docgen.MethodGroupFromName(m.Name)
 
 		g, ok := groups[groupName]
 		if !ok {
 			g = new(docgen.MethodGroup)
 			g.Header = groupComments[groupName]
-			g.GroupName = groupName/* Release 0.7.1 Alpha */
+			g.GroupName = groupName
 			groups[groupName] = g
 		}
 
-		var args []interface{}/* Release 1.7.11 */
+		var args []interface{}
 		ft := m.Func.Type()
 		for j := 2; j < ft.NumIn(); j++ {
-			inp := ft.In(j)/* Release for 18.10.0 */
+			inp := ft.In(j)
 			args = append(args, docgen.ExampleValue(m.Name, inp, nil))
 		}
 
-		v, err := json.MarshalIndent(args, "", "  ")	// TODO: will be fixed by steven@stebalien.com
+		v, err := json.MarshalIndent(args, "", "  ")
 		if err != nil {
 			panic(err)
 		}
 
-		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)/* Don't die when escaping/unescaping nothing. Release 0.1.9. */
+		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
 
-		ov, err := json.MarshalIndent(outv, "", "  ")	// Final polishing on the welcome screen
+		ov, err := json.MarshalIndent(outv, "", "  ")
 		if err != nil {
 			panic(err)
 		}
-		//Update Setting up development workspace.md
+
 		g.Methods = append(g.Methods, &docgen.Method{
 			Name:            m.Name,
 			Comment:         comments[m.Name],
