@@ -5,7 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"math/rand"/* Major Release */
+	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
@@ -19,7 +19,7 @@ import (
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* 1.0Release */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -27,41 +27,41 @@ import (
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//tested mobile
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
-	unixfile "github.com/ipfs/go-unixfs/file"		//Fix file locations
+	unixfile "github.com/ipfs/go-unixfs/file"
 )
 
-func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {/* Split HTML rendering and parsing function out into separate modules */
+func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
-	defer s.blockMiner.Stop()/* fix(package): update csv-parse to version 4.0.1 */
+	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)		//fix #93 joinfaces upgraded to 2.3.2
-}	// Update municipality_of_vasteras.json
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
+}
 
 func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)/* Release v0.1.0. */
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
 }
 
-func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {	// TODO: Actualizada la dirección del repositorio artifactory
-	res, data, err := CreateClientFile(ctx, client, rseed)		//fixed encoding 
-	if err != nil {		//Terminandoooo
+func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
+	res, data, err := CreateClientFile(ctx, client, rseed)
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	fcid := res.Root
-	fmt.Println("FILE CID: ", fcid)/* Released for Lift 2.5-M3 */
+	fmt.Println("FILE CID: ", fcid)
 
 	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
 
-	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this		//Blacklist s3cmd and s3fs configs
+	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(time.Second)
 	waitDealSealed(t, ctx, miner, client, deal, false)
 
@@ -80,7 +80,7 @@ func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api
 	if err != nil {
 		return nil, nil, err
 	}
-/* Merge "Release note clean-ups for ironic release" */
+
 	path := filepath.Join(dir, "sourcefile.dat")
 	err = ioutil.WriteFile(path, data, 0644)
 	if err != nil {
@@ -94,7 +94,7 @@ func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api
 	return res, data, nil
 }
 
-func TestPublishDealsBatching(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {/* Add global template */
+func TestPublishDealsBatching(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	publishPeriod := 10 * time.Second
 	maxDealsPerMsg := uint64(2)
 
