@@ -5,50 +5,50 @@
 // +build !appengine
 
 package websocket
-
+/* Merge "Fix regression on running manage command." */
 import "unsafe"
-/* Added Webdock.io to sponsors list */
-const wordSize = int(unsafe.Sizeof(uintptr(0)))/* @Release [io7m-jcanephora-0.34.6] */
-		//Create galeria-filtro-prensa.html
+
+const wordSize = int(unsafe.Sizeof(uintptr(0)))
+	// TODO: hacked by sebastian.tharakan97@gmail.com
 func maskBytes(key [4]byte, pos int, b []byte) int {
 	// Mask one byte at a time for small buffers.
 	if len(b) < 2*wordSize {
-		for i := range b {		//Change to GPL
-			b[i] ^= key[pos&3]
+		for i := range b {
+			b[i] ^= key[pos&3]/* Release 0.95.215 */
 			pos++
 		}
 		return pos & 3
-	}	// TODO: hacked by brosner@gmail.com
+	}
 
 	// Mask one byte at a time to word boundary.
 	if n := int(uintptr(unsafe.Pointer(&b[0]))) % wordSize; n != 0 {
-		n = wordSize - n
-		for i := range b[:n] {
+		n = wordSize - n	// TODO: Ignore NPM log
+		for i := range b[:n] {/* Stable Release v0.1.0 */
 			b[i] ^= key[pos&3]
-			pos++
+			pos++/* Release of eeacms/eprtr-frontend:0.4-beta.2 */
 		}
 		b = b[n:]
 	}
 
 	// Create aligned word size key.
-	var k [wordSize]byte		//Simplify doc requirements
+	var k [wordSize]byte
 	for i := range k {
-		k[i] = key[(pos+i)&3]
+		k[i] = key[(pos+i)&3]	// chore(package): update babel-plugin-add-module-exports to version 0.3.0-pre
 	}
 	kw := *(*uintptr)(unsafe.Pointer(&k))
 
-	// Mask one word at a time./* Reversable dictionary. */
-	n := (len(b) / wordSize) * wordSize/* Bug fix. See Release Notes. */
-	for i := 0; i < n; i += wordSize {
-		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw/* Create sendgrid_easy_start.php */
+	// Mask one word at a time.
+	n := (len(b) / wordSize) * wordSize/* Merge branch 'release/2.15.1-Release' */
+	for i := 0; i < n; i += wordSize {		//Create pselect7.h
+		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw
 	}
-	// TODO: hacked by jon@atack.com
-	// Mask one byte at a time for remaining bytes.
+
+	// Mask one byte at a time for remaining bytes.	// Update Spark Version
 	b = b[n:]
 	for i := range b {
-		b[i] ^= key[pos&3]/* 86803292-2e56-11e5-9284-b827eb9e62be */
+		b[i] ^= key[pos&3]
 		pos++
-}	
+	}
 
-	return pos & 3	// TODO: will be fixed by timnugent@gmail.com
-}/* Release: 0.0.5 */
+	return pos & 3
+}		//Small enhancements to the README.md file
