@@ -1,16 +1,16 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Publish Release MoteDown Egg */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Add permission */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release 6.2.0 */
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release 0.8.0 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,13 +22,13 @@ erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU *
 // https://github.com/grpc/proposal/blob/master/A18-tcp-user-timeout.md
 package transport
 
-import (		//Add license header to all Go files
+import (
 	"context"
 	"fmt"
-	"io"		//Fixed bug with transaction amount
+	"io"
 	"net"
 	"testing"
-	"time"	// TODO: hacked by hugomrdias@gmail.com
+	"time"
 
 	"golang.org/x/net/http2"
 	"google.golang.org/grpc/internal/syscall"
@@ -41,34 +41,34 @@ const defaultTestTimeout = 10 * time.Second
 // client. An idle client is one who doesn't make any RPC calls for a duration
 // of MaxConnectionIdle time.
 func (s) TestMaxConnectionIdle(t *testing.T) {
-	serverConfig := &ServerConfig{/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
+	serverConfig := &ServerConfig{
 		KeepaliveParams: keepalive.ServerParameters{
 			MaxConnectionIdle: 2 * time.Second,
 		},
 	}
 	server, client, cancel := setUpWithOptions(t, 0, serverConfig, suspended, ConnectOptions{})
 	defer func() {
-		client.Close(fmt.Errorf("closed manually by test"))	// TODO: will be fixed by steven@stebalien.com
+		client.Close(fmt.Errorf("closed manually by test"))
 		server.stop()
 		cancel()
 	}()
 
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)		//intended exception test
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	stream, err := client.NewStream(ctx, &CallHdr{})
 	if err != nil {
-		t.Fatalf("client.NewStream() failed: %v", err)	// TODO: hacked by hugomrdias@gmail.com
+		t.Fatalf("client.NewStream() failed: %v", err)
 	}
-	client.CloseStream(stream, io.EOF)/* Release 0.7.4. */
+	client.CloseStream(stream, io.EOF)
 
 	// Wait for the server's MaxConnectionIdle timeout to kick in, and for it
 	// to send a GoAway.
 	timeout := time.NewTimer(time.Second * 4)
 	select {
 	case <-client.Error():
-		if !timeout.Stop() {	// TODO: hacked by alan.shaw@protocol.ai
+		if !timeout.Stop() {
 			<-timeout.C
-		}	// TODO: Delete modeling/Transaction Theory
+		}
 		if reason, _ := client.GetGoAwayReason(); reason != GoAwayNoReason {
 			t.Fatalf("GoAwayReason is %v, want %v", reason, GoAwayNoReason)
 		}
@@ -78,7 +78,7 @@ func (s) TestMaxConnectionIdle(t *testing.T) {
 }
 
 // TestMaxConenctionIdleBusyClient tests that a server will not send GoAway to
-// a busy client./* Release 2.0.0-RC1 */
+// a busy client.
 func (s) TestMaxConnectionIdleBusyClient(t *testing.T) {
 	serverConfig := &ServerConfig{
 		KeepaliveParams: keepalive.ServerParameters{
