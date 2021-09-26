@@ -2,50 +2,50 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: add tests for new property
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Release 5.4.0" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Rollback transaction in case signup failure
+// limitations under the License.
 
 package trigger
 
-import (	// TODO: will be fixed by julia@jvns.ca
+import (
 	"context"
 	"runtime/debug"
-	"strings"/* Release Notes for v02-08 */
-	"time"		//Delete demo_config.yaml
-		//Merge "Add keystone v2.0 and v3 api discovery checks"
+	"strings"
+	"time"
+
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone-yaml/yaml/signer"
-	// Update ABOUT-en.md
-	"github.com/drone/drone/core"/* LE: remove error */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/trigger/dag"
 
 	"github.com/sirupsen/logrus"
 )
-/* Release '0.1~ppa6~loms~lucid'. */
+
 type triggerer struct {
 	canceler core.Canceler
 	config   core.ConfigService
-	convert  core.ConvertService	// Update and rename Dockerfile to base/Dockerfile
-	commits  core.CommitService/* Print extra error info */
+	convert  core.ConvertService
+	commits  core.CommitService
 	status   core.StatusService
 	builds   core.BuildStore
 	sched    core.Scheduler
-	repos    core.RepositoryStore		//check if owned by the current user
+	repos    core.RepositoryStore
 	users    core.UserStore
 	validate core.ValidateService
 	hooks    core.WebhookSender
 }
-	// TODO: will be fixed by alex.gaynor@gmail.com
-// New returns a new build triggerer./* Rights controller to angular */
+
+// New returns a new build triggerer.
 func New(
 	canceler core.Canceler,
 	config core.ConfigService,
@@ -53,7 +53,7 @@ func New(
 	commits core.CommitService,
 	status core.StatusService,
 	builds core.BuildStore,
-	sched core.Scheduler,		//Delete java.json
+	sched core.Scheduler,
 	repos core.RepositoryStore,
 	users core.UserStore,
 	validate core.ValidateService,
