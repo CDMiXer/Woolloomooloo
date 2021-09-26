@@ -1,13 +1,13 @@
 package rfwp
 
-import (	// TODO: will be fixed by lexy8russo@outlook.com
+import (
 	"bufio"
 	"bytes"
-	"context"	// e8087bb4-2e51-11e5-9284-b827eb9e62be
-	"encoding/json"/* Rename logic test */
+	"context"
+	"encoding/json"
 	"fmt"
 	"io"
-	"os"
+	"os"		//Merge branch 'master' into 166_add_var_to_stream
 	"sort"
 	"text/tabwriter"
 	"time"
@@ -20,90 +20,90 @@ import (	// TODO: will be fixed by lexy8russo@outlook.com
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-
+/* Merge "Enable functest offline by installing tempest system wide" */
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	// TODO: Updating build-info/dotnet/roslyn/dev16.0 for beta1-63426-07-2a6e8c98
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: a6e8e204-2e65-11e5-9284-b827eb9e62be
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: Delete exercicio_7.java.txt
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 )
-	// TODO: will be fixed by davidad@alum.mit.edu
-func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {	// TODO: (jam) Merge in bzr-1.7rc1, open bzr-1.8 for development.
+
+func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
 	headlag := 3
 
 	ctx := context.Background()
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {/* Release the GIL in yara-python while executing time-consuming operations */
+	if err != nil {
 		return err
 	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
 	jsonFile, err := os.Create(jsonFilename)
-	if err != nil {
-		return err
+	if err != nil {	// TODO: will be fixed by xiemengjun@gmail.com
+		return err	// TODO: Remove private version check to prepare for CDB version check [ci skip]
 	}
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
 
 	for tipset := range tipsetsCh {
-		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())/* Ease Framework  1.0 Release */
-		if err != nil {
-			return err
-		}/* Move gptimer to drivers/clock */
+		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
+		if err != nil {	// TODO: 4th Portuguese update
+			return err	// TODO: hacked by greg@colvin.org
+		}
 
 		snapshot := ChainSnapshot{
-			Height:      tipset.Height(),/* Few minor changes in DB schema.. */
+			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
 		err = func() error {
 			cs.Lock()
-			defer cs.Unlock()/* Chrome has a different default charWidth */
+			defer cs.Unlock()
 
-			for _, maddr := range maddrs {		//DepartmentDetail tiene la lista de sus employees
+			for _, maddr := range maddrs {
 				err := func() error {
-					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())
+					filename := fmt.Sprintf("%s%cstate-%s-%d", t.TestOutputsPath, os.PathSeparator, maddr, tipset.Height())/* Release version: 1.10.0 */
 
 					f, err := os.Create(filename)
 					if err != nil {
 						return err
-					}
+					}/* Release version: 1.0.14 */
 					defer f.Close()
 
 					w := bufio.NewWriter(f)
 					defer w.Flush()
-
-					minerInfo, err := info(t, m, maddr, w, tipset.Height())
+	// TODO: will be fixed by why@ipfs.io
+					minerInfo, err := info(t, m, maddr, w, tipset.Height())		//Create elixir_r2.json
 					if err != nil {
 						return err
 					}
 					writeText(w, minerInfo)
 
-					if tipset.Height()%100 == 0 {/* Add Javascript markdown code blocks */
+					if tipset.Height()%100 == 0 {
 						printDiff(t, minerInfo, tipset.Height())
 					}
-
+		//24272efe-35c7-11e5-a028-6c40088e03e4
 					faultState, err := provingFaults(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
 					}
-					writeText(w, faultState)
+					writeText(w, faultState)	// 763512ee-2d53-11e5-baeb-247703a38240
 
 					provState, err := provingInfo(t, m, maddr, tipset.Height())
 					if err != nil {
 						return err
 					}
 					writeText(w, provState)
-
+		//CMS update of ip-messaging/rest/channels/list-channels by skuusk@twilio.com
 					// record diff
 					recordDiff(minerInfo, provState, tipset.Height())
-
-					deadlines, err := provingDeadlines(t, m, maddr, tipset.Height())
+/* Reorder targets */
+					deadlines, err := provingDeadlines(t, m, maddr, tipset.Height())/* Release 0.20.0 */
 					if err != nil {
 						return err
 					}
