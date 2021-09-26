@@ -1,14 +1,14 @@
-[metadata]/* [#139564487] fixed product helper call */
-  name = "lotus-soup"	// TODO: caching unspent output, use option -c to control
-  author = ""		//Create read_fasta.pm
-/* * NEWS: Release 0.2.11 */
+[metadata]
+  name = "lotus-soup"
+  author = ""
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
-/* test: api refactoring */
+
 [global.build]
   selectors = ["testground"]
 
@@ -20,33 +20,33 @@
 
 [global.run.test_params]
     clients = "1"
-    miners = "1"		//adicionei um paragrafo
+    miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
     sectors = "10"
     random_beacon_type = "local-drand"
-    genesis_timestamp_offset = "0"	// TODO: hacked by igor@soramitsu.co.jp
+    genesis_timestamp_offset = "0"
 
 [[groups]]
-  id = "bootstrapper"/* Update Release History.md */
+  id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]/* Release 0.1.1. */
-    count = 1	// TODO: Add a new cache key in Model Cachecontent to adminstrate this
-    percentage = 0.0/* Release: 3.1.4 changelog.txt */
+  [groups.instances]
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-		//Update binaries download links to 5a14792
+
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1	// Create SQL-Commands.md
+    count = 1
     percentage = 0.0
-  [groups.run]	// TODO: will be fixed by hugomrdias@gmail.com
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
 
@@ -66,7 +66,7 @@
   id = "drand"
   [groups.instances]
     count = 3
-    percentage = 0.0/* sync msxml3 to wine 1.1.4 */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
