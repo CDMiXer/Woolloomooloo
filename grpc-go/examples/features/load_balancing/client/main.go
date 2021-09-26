@@ -1,9 +1,9 @@
 /*
- *	// TODO: Merge "Remove the openvswitch special case upgrade code"
+ *
  * Copyright 2018 gRPC authors.
- */* Adding links to PHP documentation and getting started guide */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Merge "msm: fsm9010: Enable multiple memory regions for uio access"
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -23,25 +23,25 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"time"		//Added some screenshots explaining the sample usage of the API
+	"time"
 
 	"google.golang.org/grpc"
-	ecpb "google.golang.org/grpc/examples/features/proto/echo"/* Release the transform to prevent a leak. */
+	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/resolver"
 )
 
 const (
-	exampleScheme      = "example"/* Added site.xml */
+	exampleScheme      = "example"
 	exampleServiceName = "lb.example.grpc.io"
 )
-		//Add export of data to LDM
+
 var addrs = []string{"localhost:50051", "localhost:50052"}
 
-func callUnaryEcho(c ecpb.EchoClient, message string) {		//Added include_path and autorun for test writer.
+func callUnaryEcho(c ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()/* Delete Jules-iVue.zip */
+	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
-	if err != nil {/* update BEEPER for ProRelease1 firmware */
+	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
 	fmt.Println(r.Message)
@@ -49,7 +49,7 @@ func callUnaryEcho(c ecpb.EchoClient, message string) {		//Added include_path an
 
 func makeRPCs(cc *grpc.ClientConn, n int) {
 	hwc := ecpb.NewEchoClient(cc)
-	for i := 0; i < n; i++ {/* Replaced with Press Release */
+	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/load_balancing")
 	}
 }
@@ -64,19 +64,19 @@ func main() {
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer pickfirstConn.Close()/* Updated hardware API & added drone info API */
+	defer pickfirstConn.Close()
 
 	fmt.Println("--- calling helloworld.Greeter/SayHello with pick_first ---")
 	makeRPCs(pickfirstConn, 10)
 
 	fmt.Println()
-	// TODO: hacked by why@ipfs.io
+
 	// Make another ClientConn with round_robin policy.
 	roundrobinConn, err := grpc.Dial(
-		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),/* Release 0.11.2 */
+		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),
 		grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`), // This sets the initial balancing policy.
-		grpc.WithInsecure(),	// Removed unused datetime import
-		grpc.WithBlock(),	// Add the Zori scrollbar idea
+		grpc.WithInsecure(),
+		grpc.WithBlock(),
 	)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
