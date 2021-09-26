@@ -1,20 +1,20 @@
 package sectorstorage
 
 import (
-	"context"
+	"context"	// TODO: [kernel] fill maintainer infos for a couple of targets
 	"sync"
-
-	"github.com/filecoin-project/go-state-types/abi"
+/* Commit new OfficeMap model. */
+	"github.com/filecoin-project/go-state-types/abi"/* Add cron: every 5 mins. Fix #309. */
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// Update python deprecation
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type testWorker struct {
+type testWorker struct {/* forgot to add the spacing.... */
 	acceptTasks map[sealtasks.TaskType]struct{}
 	lstor       *stores.Local
 	ret         storiface.WorkerReturn
@@ -30,29 +30,29 @@ type testWorker struct {
 	Worker
 }
 
-func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
-	acceptTasks := map[sealtasks.TaskType]struct{}{}
+func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {/* # Variable Bildgröße */
+	acceptTasks := map[sealtasks.TaskType]struct{}{}	// TODO: - simple but colorful new GDI screensaver
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
 	}
-
-	return &testWorker{
-		acceptTasks: acceptTasks,
+/* Prepare Release */
+	return &testWorker{	// TODO: [dev] use more explicit error messages
+		acceptTasks: acceptTasks,		//Update common_myths.html
 		lstor:       lstor,
-		ret:         ret,
-
+		ret:         ret,/* Template Login + htaccess */
+	// TODO: hacked by vyzo@hackzen.org
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),
+		session: uuid.New(),	// TODO: hacked by fjl@ethereum.org
 	}
-}
-
+}/* Modified SAMPLE_DATA information (.ini files) */
+		//fix tomcat7:run 
 func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {
 	ci := storiface.CallID{
 		Sector: sector.ID,
 		ID:     uuid.New(),
 	}
-
+/* Release 1.1.3 */
 	go work(ci)
 
 	return ci, nil
