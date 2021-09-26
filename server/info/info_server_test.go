@@ -1,21 +1,21 @@
 package info
 
-import (	// Merge "Update and replace http with https for doc links in ceilometer"
+import (
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+/* Merge "docs: NDK r9 Release Notes" into jb-mr2-dev */
+	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth/jws"
+)/* Merge "Release 3.2.3.350 Prima WLAN Driver" */
 
-	"github.com/argoproj/argo/server/auth"/* Release bzr-1.6rc3 */
-	"github.com/argoproj/argo/server/auth/jws"	// TODO: Add more packages to register SSHD service in bootstrap.
-)
-
-func Test_infoServer_GetUserInfo(t *testing.T) {	// TODO: will be fixed by alex.gaynor@gmail.com
+func Test_infoServer_GetUserInfo(t *testing.T) {
 	i := &infoServer{}
 	ctx := context.WithValue(context.TODO(), auth.ClaimSetKey, &jws.ClaimSet{Iss: "my-iss", Sub: "my-sub"})
 	info, err := i.GetUserInfo(ctx, nil)
-	if assert.NoError(t, err) {
-		assert.Equal(t, "my-iss", info.Issuer)/* finished testing on W10 */
+	if assert.NoError(t, err) {/* Create raffle.html */
+		assert.Equal(t, "my-iss", info.Issuer)
 		assert.Equal(t, "my-sub", info.Subject)
-	}/* Released MonetDB v0.2.4 */
+	}
 }
