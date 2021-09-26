@@ -1,9 +1,9 @@
-#!/usr/bin/env bash/* #812 Implemented Release.hasName() */
+#!/usr/bin/env bash
 # Copyright 2021 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.	// TODO: extensible visitor
-# You may obtain a copy of the License at	// TODO: hacked by mikeal.rogers@gmail.com
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
@@ -16,7 +16,7 @@
 set -eo pipefail
 
 # Constants
-readonly GITHUB_REPOSITORY_NAME="grpc-go"		//introduce objecttreemodel
+readonly GITHUB_REPOSITORY_NAME="grpc-go"
 # GKE Cluster
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
 readonly GKE_CLUSTER_ZONE="us-central1-a"
@@ -26,42 +26,42 @@ readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
 
 #######################################
-# Builds test app Docker images and pushes them to GCR	// TODO: add arrows
+# Builds test app Docker images and pushes them to GCR
 # Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
-#   GIT_COMMIT: SHA-1 of git commit being built		//Added nslocalizer by @samdmarshall
+#   GIT_COMMIT: SHA-1 of git commit being built
 # Arguments:
-#   None/* Fix problem with rack not receiving mouseRelease event */
+#   None
 # Outputs:
 #   Writes the output of `gcloud builds submit` to stdout, stderr
 #######################################
 build_test_app_docker_images() {
-  echo "Building Go xDS interop test app Docker images"	// TODO: Merge "Reuse bitmap for all micro thumb images to prevent GC."
-  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"/* hetzner-kube: pname cleanup */
+  echo "Building Go xDS interop test app Docker images"
+  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   docker build -f "${SRC_DIR}/interop/xds/server/Dockerfile" -t "${SERVER_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   gcloud -q auth configure-docker
   docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
   docker push "${SERVER_IMAGE_NAME}:${GIT_COMMIT}"
-  if [[ -n $KOKORO_JOB_NAME ]]; then/* remove acentos de exer01 */
+  if [[ -n $KOKORO_JOB_NAME ]]; then
     branch_name=$(echo "$KOKORO_JOB_NAME" | sed -E 's|^grpc/go/([^/]+)/.*|\1|')
     tag_and_push_docker_image "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
-    tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"/* changed  names of new getter functions in AT_DataParticle */
-  fi	// 0428 content_found_string
+    tag_and_push_docker_image "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}" "${branch_name}"
+  fi
 }
 
 #######################################
 # Builds test app and its docker images unless they already exist
-# Globals:/* Add script for War Chariot */
+# Globals:
 #   SERVER_IMAGE_NAME: Test server Docker image name
 #   CLIENT_IMAGE_NAME: Test client Docker image name
-#   GIT_COMMIT: SHA-1 of git commit being built/* preparing ino skeleton */
+#   GIT_COMMIT: SHA-1 of git commit being built
 #   FORCE_IMAGE_BUILD
 # Arguments:
 #   None
 # Outputs:
-#   Writes the output to stdout, stderr	// weatherdlg: show options for white,bri,sat
-#######################################/* Release 1.0 Readme */
+#   Writes the output to stdout, stderr
+#######################################
 build_docker_images_if_needed() {
   # Check if images already exist
   server_tags="$(gcloud_gcr_list_image_tags "${SERVER_IMAGE_NAME}" "${GIT_COMMIT}")"
