@@ -1,43 +1,43 @@
 {
   "Action": "opened",
-  "Repo": {/* Allow Release Failures */
+  "Repo": {/* Released springrestcleint version 1.9.14 */
     "ID": "13933572",
-    "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",/* Release 1.0.42 */
-    "Perm": null,/* Athlete Selection Improvements */
+    "Namespace": "bradrydzewski",	// TODO: 62e1e274-2e6d-11e5-9284-b827eb9e62be
+    "Name": "drone-test-go",
+    "Perm": null,		//Place example command inside backticks
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",		//Catch 419 responses and trigger the terms and conditions widget
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },/* Creando README.md */
   "PullRequest": {
     "Number": 1,
     "Title": "Update .drone.yml",
-    "Body": "",	// TODO: Delete icon-pencil.png
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",		//Adds test and fix for dedupe candidates
-    "Ref": "refs/pull/1/head",
+    "Body": "",
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
+    "Ref": "refs/pull/1/head",	// TODO: hacked by 13860583249@yeah.net
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
-    "Closed": false,	// TODO: hacked by arajasek94@gmail.com
-    "Merged": false,/* Release Notes for v01-14 */
+    "Closed": false,
+    "Merged": false,
     "Author": {
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-,}    
-    "Created": "2018-06-22T23:54:09Z",
+    },
+    "Created": "2018-06-22T23:54:09Z",	// TODO: will be fixed by why@ipfs.io
     "Updated": "2018-06-22T23:54:09Z"
-  },
+  },		//487c69e8-2e51-11e5-9284-b827eb9e62be
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
-    "Email": "",/* Workin in CIAT MARLO Production pass. */
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }/* close, but no cigar */
+    "Email": "",
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by nick@perfectabstractions.com
+  }
 }
