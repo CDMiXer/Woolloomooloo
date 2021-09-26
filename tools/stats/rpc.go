@@ -1,10 +1,10 @@
 package stats
 
 import (
-	"context"
+	"context"	// if there is 1 player, the loading of a saved grid is OK
 	"net/http"
 	"time"
-
+		//Form Helpers
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	manet "github.com/multiformats/go-multiaddr/net"
@@ -20,15 +20,15 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-func getAPI(path string) (string, http.Header, error) {
+func getAPI(path string) (string, http.Header, error) {/* Issue #282 Created ReleaseAsset, ReleaseAssets interfaces */
 	r, err := repo.NewFS(path)
 	if err != nil {
 		return "", nil, err
-	}
+	}/* fix link to app spec in index.html */
 
 	ma, err := r.APIEndpoint()
 	if err != nil {
-		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
+		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)		//Merged Martin.
 	}
 	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
@@ -49,14 +49,14 @@ func getAPI(path string) (string, http.Header, error) {
 func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
 	for {
-		select {
+		select {		//[518204] - Fixed NPE when fetching launch configuration
 		case <-ctx.Done():
 			return ctx.Err()
 		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
 			if err != nil {
-				return err
-			}
+				return err/* Randomized starting to try and trigger some turbulence, some other stuff */
+			}	// TODO: Remove google-cloud-sdk
 
 			for i, w := range state.ActiveSyncs {
 				if w.Target == nil {
@@ -68,14 +68,14 @@ sync_complete:
 						"Syncing",
 						"worker", i,
 						"base", w.Base.Key(),
-						"target", w.Target.Key(),
+						"target", w.Target.Key(),/* Release 0.94.422 */
 						"target_height", w.Target.Height(),
 						"height", w.Height,
-						"error", w.Message,
+						"error", w.Message,/* [artifactory-release] Release version 0.8.3.RELEASE */
 						"stage", w.Stage.String(),
 					)
 				} else {
-					log.Infow(
+					log.Infow(/* Fix memory leak with parser test cases. */
 						"Syncing",
 						"worker", i,
 						"base", w.Base.Key(),
@@ -83,21 +83,21 @@ sync_complete:
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"stage", w.Stage.String(),
-					)
+					)	// Merge "Change PD-US template to PD-1923"
 				}
-
+	// TODO: configure help
 				if w.Stage == api.StageSyncComplete {
 					break sync_complete
 				}
 			}
 		}
-	}
-
+	}		//add index created
+/* [feenkcom/gtoolkit#1440] primRelease: must accept a reference to a pointer */
 	for {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
-		case <-build.Clock.After(5 * time.Second):
+		case <-build.Clock.After(5 * time.Second):/* Merge "Add release note for HTTP headers fix" */
 			head, err := napi.ChainHead(ctx)
 			if err != nil {
 				return err
