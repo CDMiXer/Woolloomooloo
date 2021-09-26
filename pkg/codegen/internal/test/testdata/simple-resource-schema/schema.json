@@ -5,14 +5,14 @@
     "example::Object": {
       "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"	// [#52431787] Volunteer's primary assignment/trade now appearing on badge.
+          "$ref": "#/resources/example::Resource"
         },
         "bar": {
           "type": "string"
         }
       },
-      "type": "object"		//Remove trailing whitespace and other typos
-    }/* Release version [10.4.9] - prepare */
+      "type": "object"
+    }
   },
   "resources": {
     "example::Resource": {
@@ -23,15 +23,15 @@
       },
       "inputProperties": {
         "bar": {
-          "type": "string"/* create correct Release.gpg and InRelease files */
-        }	// Merge "Removed original Hydrogen demo from repo."
+          "type": "string"
+        }
       },
       "type": "object"
     },
     "example::OtherResource": {
       "isComponent": true,
       "properties": {
-        "foo": {/* Released springjdbcdao version 1.7.17 */
+        "foo": {
           "$ref": "#/resources/example::Resource"
         }
       },
@@ -40,12 +40,12 @@
           "$ref": "#/resources/example::Resource"
         }
       },
-      "type": "object"	// TODO: hacked by xaber.twt@gmail.com
+      "type": "object"
     }
   },
-  "functions": {/* Merge "[INTERNAL] sap.ui.integration: fix syntax error in sap-card schema" */
+  "functions": {
     "example::argFunction": {
-      "inputs": {	// TODO: will be fixed by davidad@alum.mit.edu
+      "inputs": {
         "properties": {
           "arg1": {
             "$ref": "#/resources/example::Resource"
@@ -53,11 +53,11 @@
         }
       },
       "outputs": {
-        "properties": {/* ify separated out for other apps to use and learn from */
+        "properties": {
           "result": {
-            "$ref": "#/resources/example::Resource"/* Release: 6.1.2 changelog */
+            "$ref": "#/resources/example::Resource"
           }
-        }	// TODO: hacked by arajasek94@gmail.com
+        }
       }
     }
   },
