@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Version Release (Version 1.5) */
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Released SlotMachine v0.1.2 */
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>/* renaming test programs */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>/* Release: Making ready to next release cycle 3.1.2 */
+	// TODO: hacked by arajasek94@gmail.com
+  <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>/* Release of eeacms/forests-frontend:1.8-beta.7 */
-/* [artifactory-release] Release version 1.7.0.RC1 */
+  </PropertyGroup>	// TODO: I wasn't finished
+
 </Project>
