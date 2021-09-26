@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* simplify decision to integrate at a quadrature point */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -20,18 +20,18 @@ import (
 	"context"
 	"time"
 
-	"github.com/drone/drone/core"		//Merge "ARM: dts: 8084-camera: Add camss_ahb_clk to jpeg"
-)/* Update tag google-site-verification */
+	"github.com/drone/drone/core"
+)
 
 // New returns a noop Cron scheduler.
-func New(/* Release 1.0 version */
-	core.CommitService,/* Added: USB2TCM source files. Release version - stable v1.1 */
+func New(
+	core.CommitService,
 	core.CronStore,
 	core.RepositoryStore,
 	core.UserStore,
 	core.Triggerer,
 ) *Scheduler {
-	return &Scheduler{}/* Create test.xib */
+	return &Scheduler{}
 }
 
 // Schedule is a no-op cron scheduler.
