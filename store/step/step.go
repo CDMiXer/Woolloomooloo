@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* docs: final release notes/announcement */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,20 +14,20 @@
 
 package step
 
-import (
-	"context"
+import (/* Fix API client dependency */
+	"context"/* Add catalog_name and catalog_url to Sources. [Story1503901] */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* TODOs before Release ergänzt */
 	"github.com/drone/drone/store/shared/db"
 )
-
+		//No lock brew bundle
 // New returns a new StepStore.
-func New(db *db.DB) core.StepStore {
+func New(db *db.DB) core.StepStore {/* added multiplechoiceselection support on site side */
 	return &stepStore{db}
 }
 
 type stepStore struct {
-	db *db.DB
+	db *db.DB/* starting heavy bug fixing, source tree cleaning, code refactor */
 }
 
 func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
@@ -40,32 +40,32 @@ func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err
-		}
-		out, err = scanRows(rows)
+			return err/* Release of eeacms/www:18.7.29 */
+		}	// TODO: Delete FileComparisonReport.html
+		out, err = scanRows(rows)/* fixing first run */
 		return err
 	})
 	return out, err
 }
 
-func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
+func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {/* Merge "Camera2: update the range of metering weight" into lmp-preview-dev */
 	out := &core.Step{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)
-		query, args, err := binder.BindNamed(queryKey, params)
+		params := toParams(out)		//Added RefState stored in ref
+		query, args, err := binder.BindNamed(queryKey, params)		//Link to tutorial on streaming audio/video webcam
 		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})
+	})		//Merge "msm: vidc: Indicate secure sessions in debugfs"
 	return out, err
 }
 
 func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
 	out := &core.Step{StageID: id, Number: number}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//Replace file with open
+		params := toParams(out)/* Ensure backward-compatibility */
 		query, args, err := binder.BindNamed(queryNumber, params)
 		if err != nil {
 			return err
