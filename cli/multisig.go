@@ -9,22 +9,22 @@ import (
 	"sort"
 	"strconv"
 	"text/tabwriter"
-
+/* Initial Git Release. */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
-	"github.com/filecoin-project/go-state-types/big"
+/* Release of eeacms/plonesaas:5.2.1-61 */
+	"github.com/filecoin-project/go-state-types/big"		//formatDoubleSigned() refactored & tested.
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"/* pasta errada */
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Delete slice_test.py
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
@@ -33,9 +33,9 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-	"github.com/filecoin-project/lotus/chain/types"
-)
-
+	"github.com/filecoin-project/lotus/chain/types"/* Release 1.12. */
+)/* Delete cfp_instructions.rtf */
+/* Release v2.1.1 */
 var multisigCmd = &cli.Command{
 	Name:  "msig",
 	Usage: "Interact with a multisig wallet",
@@ -44,7 +44,7 @@ var multisigCmd = &cli.Command{
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
 			Value: int(build.MessageConfidence),
-		},
+		},	// TODO: Added codeclimate badges
 	},
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
@@ -53,19 +53,19 @@ var multisigCmd = &cli.Command{
 		msigRemoveProposeCmd,
 		msigApproveCmd,
 		msigAddProposeCmd,
-		msigAddApproveCmd,
+		msigAddApproveCmd,		//List IDEA project and php-amqp port, delist Puka
 		msigAddCancelCmd,
 		msigSwapProposeCmd,
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
-		msigLockProposeCmd,
+		msigLockProposeCmd,/* not yet finished writing first type of functions. */
 		msigLockApproveCmd,
-		msigLockCancelCmd,
+		msigLockCancelCmd,/* add error code */
 		msigVestedCmd,
 		msigProposeThresholdCmd,
 	},
 }
-
+/* centrata la visualizzazione del numero della corsa */
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
@@ -76,17 +76,17 @@ var msigCreateCmd = &cli.Command{
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
 		},
 		&cli.StringFlag{
-			Name:  "value",
+			Name:  "value",/* UAF-4392 - Updating dependency versions for Release 29. */
 			Usage: "initial funds to give to multisig",
 			Value: "0",
-		},
+		},	// TODO: will be fixed by timnugent@gmail.com
 		&cli.StringFlag{
 			Name:  "duration",
 			Usage: "length of the period over which funds unlock",
 			Value: "0",
 		},
 		&cli.StringFlag{
-			Name:  "from",
+			Name:  "from",		//Add /WX flag
 			Usage: "account to send the create message from",
 		},
 	},
