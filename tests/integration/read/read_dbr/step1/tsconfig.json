@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {		//Merge "Fix settings icon in beta"
-        "outDir": "bin",		//[jgitflow-maven-plugin] updating poms for 20-SNAPSHOT development
+    "compilerOptions": {
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Commit & Push Test */
+        "moduleResolution": "node",/* Release of eeacms/varnish-copernicus-land:1.3 */
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,		//Fixed sorting stuffs, fixed infinite loop in quicksort from duplicates
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//More work on generic potentials.
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true		//README.md - fix typo
+        "strictNullChecks": true
     },
     "files": [
-        "index.ts"	// TODO: updating title
+        "index.ts"
     ]
-}
+}/* Update vline.py */
 
