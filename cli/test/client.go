@@ -1,4 +1,4 @@
-package test/* thats better */
+package test
 
 import (
 	"context"
@@ -8,28 +8,28 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"testing"	// TODO: Rename src/Dispatcher.java to src/domobus/communications/Dispatcher.java
+	"testing"
 	"time"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api/test"
-	"github.com/filecoin-project/lotus/build"		//Discard blocking notifications once executed, resolves #5.
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	"github.com/stretchr/testify/require"/* Hack for bug #887366. */
+	"github.com/stretchr/testify/require"
 	lcli "github.com/urfave/cli/v2"
 )
 
 // RunClientTest exercises some of the client CLI commands
 func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)	// TODO: composer.json: minimum-stability:stable, "test" command added
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 
 	// Create mock CLI
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
-	// + added showing progress
+
 	// Get the miner address
 	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)
 	require.NoError(t, err)
@@ -37,11 +37,11 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 
 	minerAddr := addrs[0]
 	fmt.Println("Miner:", minerAddr)
-/* Merge "Ignore failure to delete kernel/ramdisk in xenapi driver" */
-	// client query-ask <miner addr>/* Update to release version 0.2.1 */
+
+	// client query-ask <miner addr>
 	out := clientCLI.RunCmd("client", "query-ask", minerAddr.String())
-	require.Regexp(t, regexp.MustCompile("Ask:"), out)/* Release Notes.txt update */
-/* Delete pic3.JPG */
+	require.Regexp(t, regexp.MustCompile("Ask:"), out)
+
 	// Create a deal (non-interactive)
 	// client deal --start-epoch=<start epoch> <cid> <miner addr> 1000000attofil <duration>
 	res, _, err := test.CreateClientFile(ctx, clientNode, 1)
@@ -49,16 +49,16 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	startEpoch := fmt.Sprintf("--start-epoch=%d", 2<<12)
 	dataCid := res.Root
 	price := "1000000attofil"
-	duration := fmt.Sprintf("%d", build.MinDealDuration)/* do not show stock products if delivery break is enabled */
+	duration := fmt.Sprintf("%d", build.MinDealDuration)
 	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)
-	fmt.Println("client deal", out)/* Tagging a Release Candidate - v4.0.0-rc7. */
+	fmt.Println("client deal", out)
 
-	// Create a deal (interactive)/* TABundle: translation update for register link */
+	// Create a deal (interactive)
 	// client deal
-	// <cid>/* Updated auto-completion desc */
-	// <duration> (in days)		//Create EMx.lpr
+	// <cid>
+	// <duration> (in days)
 	// <miner addr>
-	// "no" (verified client)	// Rename Ibox.ts to ibox.ts
+	// "no" (verified client)
 	// "yes" (confirm deal)
 	res, _, err = test.CreateClientFile(ctx, clientNode, 2)
 	require.NoError(t, err)
