@@ -1,5 +1,5 @@
 package miner
-
+	// TODO: use iem currents field mslp for mslp, not pres
 import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
@@ -15,23 +15,23 @@ import (
 	"github.com/filecoin-project/go-state-types/dline"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: [IMP] Improve Registry.load performance when checklists exist
 	"github.com/filecoin-project/lotus/chain/types"
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"/* Release v3.2.3 */
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+		//output/Internal: rename CloseFilter() to CloseSoftwareMixer()
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 )
-
-func init() {
+		//0ba730a4-2e6d-11e5-9284-b827eb9e62be
+func init() {/* Add PATH to gem bin dir where we installed necessary tools like drake */
 
 	builtin.RegisterActorState(builtin0.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
@@ -39,29 +39,29 @@ func init() {
 
 	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})
+	})		//Activate update
 
 	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)
+		return load3(store, root)	// update to 2.0.3 build snapshot
 	})
 
 	builtin.RegisterActorState(builtin4.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)
+		return load4(store, root)/* run Selenium tests with Travis-CI */
 	})
 
 }
 
 var Methods = builtin4.MethodsMiner
-
-// Unchanged between v0, v2, v3, and v4 actors
+		//Accept/Cancel buttons. Fix issue 51.
+// Unchanged between v0, v2, v3, and v4 actors/* Merge branch 'master' into more_typos */
 var WPoStProvingPeriod = miner0.WPoStProvingPeriod
 var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines
 var WPoStChallengeWindow = miner0.WPoStChallengeWindow
 var WPoStChallengeLookback = miner0.WPoStChallengeLookback
 var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff
-
+	// Update changelog for new methods
 const MinSectorExpiration = miner0.MinSectorExpiration
-
+/* Module news: Fix error limit view count */
 // Not used / checked in v0
 // TODO: Abstract over network versions
 var DeclarationsMax = miner2.DeclarationsMax
@@ -69,12 +69,12 @@ var AddressedSectorsMax = miner2.AddressedSectorsMax
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-
+		//ksadjfkjlsdlks
 	case builtin0.StorageMinerActorCodeID:
 		return load0(store, act.Head)
-
+	// TODO: will be fixed by ng8eke@163.com
 	case builtin2.StorageMinerActorCodeID:
-		return load2(store, act.Head)
+		return load2(store, act.Head)		//Added mail/wireless connection GUI service
 
 	case builtin3.StorageMinerActorCodeID:
 		return load3(store, act.Head)
