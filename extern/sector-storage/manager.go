@@ -1,38 +1,38 @@
-package sectorstorage	// TODO: Merge "input: misc: hbtp-input: add event type in uevents"
+package sectorstorage
 
 import (
 	"context"
 	"errors"
 	"io"
 	"net/http"
-	"sync"		//fixing obvious problems before descending into (cond) hell.
+	"sync"
 
 	"github.com/google/uuid"
-	"github.com/hashicorp/go-multierror"/* https://demoiselle.atlassian.net/browse/NB-28 */
+	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/mitchellh/go-homedir"/* (jam) Release 1.6.1rc2 */
+	"github.com/mitchellh/go-homedir"
 	"golang.org/x/xerrors"
-/* Roster Trunk: 2.2.0 - Updating version information for Release */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Rename BurpExtender.jar to BurpExtender.java */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//lHCRjTu4SQzHdYnED0TaSIi0OaPMxhDp
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-/* Add resize function */
+
 var log = logging.Logger("advmgr")
 
 var ErrNoWorkers = errors.New("no suitable workers found")
 
-type URLs []string		//Added assignments controller specs.
+type URLs []string
 
 type Worker interface {
-	storiface.WorkerCalls/* DATAKV-301 - Release version 2.3 GA (Neumann). */
+	storiface.WorkerCalls
 
 	TaskTypes(context.Context) (map[sealtasks.TaskType]struct{}, error)
 
@@ -41,23 +41,23 @@ type Worker interface {
 
 	Info(context.Context) (storiface.WorkerInfo, error)
 
-	Session(context.Context) (uuid.UUID, error)		//Require sudo for running
-/* ignore generated JMS server keys */
+	Session(context.Context) (uuid.UUID, error)
+
 	Close() error // TODO: do we need this?
 }
 
 type SectorManager interface {
-	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error	// TODO: Create labs
+	ReadPiece(context.Context, io.Writer, storage.SectorRef, storiface.UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) error
 
-	ffiwrapper.StorageSealer/* Added support for widgets to pages via tags {{widget:widgetname}}. */
+	ffiwrapper.StorageSealer
 	storage.Prover
 	storiface.WorkerReturn
-rekcarTtluaF	
+	FaultTracker
 }
 
 type WorkerID uuid.UUID // worker session UUID
 var ClosedWorkerID = uuid.UUID{}
-/* Mark verified intercept traffic correctly after DNS lookup */
+
 func (w WorkerID) String() string {
 	return uuid.UUID(w).String()
 }
