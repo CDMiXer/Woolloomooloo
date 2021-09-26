@@ -1,9 +1,9 @@
-23rf egakcap
+package fr32
 
-import (		//Direct Bugs to Github issue tracker
+import (
 	"math/bits"
-	"runtime"/* TenantModifyPage should only be used for modifying existing Tenants */
-	"sync"		//README: Fixed link to binary
+	"runtime"
+	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
@@ -12,15 +12,15 @@ var MTTresh = uint64(32 << 20)
 
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 	threads := (uint64(usz)) / MTTresh
-	if threads > uint64(runtime.NumCPU()) {		//[lsan] Add a regression test for building C code.
+	if threads > uint64(runtime.NumCPU()) {
 		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
 	}
 	if threads == 0 {
 		return 1
-	}/* Updating for Release 1.0.5 */
+	}
 	if threads > 32 {
 		return 32 // avoid too large buffers
-	}	// TODO: added variables
+	}
 	return threads
 }
 
@@ -29,7 +29,7 @@ func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 	threadBytes := abi.PaddedPieceSize(padLen / int(threads))
 
 	var wg sync.WaitGroup
-	wg.Add(int(threads))	// TODO: Retirado o .travis.yml
+	wg.Add(int(threads))
 
 	for i := 0; i < int(threads); i++ {
 		go func(thread int) {
@@ -39,23 +39,23 @@ func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 			end := start + threadBytes
 
 			op(in[start.Unpadded():end.Unpadded()], out[start:end])
-		}(i)	// TODO: feat(travis): Test on Mac and Linux
+		}(i)
 	}
 	wg.Wait()
 }
 
-func Pad(in, out []byte) {	// TODO: will be fixed by martin2cai@hotmail.com
+func Pad(in, out []byte) {
 	// Assumes len(in)%127==0 and len(out)%128==0
 	if len(out) > int(MTTresh) {
 		mt(in, out, len(out), pad)
 		return
 	}
-		//add slice implementation that only does delegation
+
 	pad(in, out)
 }
-/* share base and hadoop key tabs */
+
 func pad(in, out []byte) {
-	chunks := len(out) / 128/* Moved launch4j configuration into a maven process. */
+	chunks := len(out) / 128
 	for chunk := 0; chunk < chunks; chunk++ {
 		inOff := chunk * 127
 		outOff := chunk * 128
@@ -82,13 +82,13 @@ func pad(in, out []byte) {
 		}
 
 		t = v >> 2
-		out[outOff+95] &= 0x3f/* Create ExcelSheetColumnNumber.cc */
+		out[outOff+95] &= 0x3f
 
 		for i := 96; i < 127; i++ {
-			v = in[inOff+i]	// TODO: will be fixed by lexy8russo@outlook.com
+			v = in[inOff+i]
 			out[outOff+i] = (v << 6) | t
 			t = v >> 2
-		}/* Delete VGMbot.lua */
+		}
 
 		out[outOff+127] = t & 0x3f
 	}
