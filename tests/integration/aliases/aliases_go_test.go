@@ -1,41 +1,41 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build go all
-		//create blog_posts migration and routes
-package ints
 
+package ints
+	// TODO: hacked by nick@perfectabstractions.com
 import (
-	"path/filepath"
+	"path/filepath"	// TODO: updated homepage to front.html
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//Implemented FlightMode_LockedSIM test
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-var dirs = []string{	// TODO: Create !ESIv2core.css
-	"rename",
-	"adopt_into_component",
-	"rename_component_and_child",/* Release Notes for v01-13 */
-	"retype_component",
-	"rename_component",	// Remove external module format as per #19
+var dirs = []string{
+	"rename",/* Fixes #2156 */
+	"adopt_into_component",	// TODO: will be fixed by nagydani@epointsystem.org
+	"rename_component_and_child",
+	"retype_component",/* depdencias */
+	"rename_component",/* Exclude 1 copy of customization.properties to prevent duplicates in jar. */
 }
 
-func TestGoAliases(t *testing.T) {/* Merge "[INTERNAL] added visual tests for sap.m.App" */
-	for _, dir := range dirs {/* Merge "Release 1.0.0.224 QCACLD WLAN Drive" */
+func TestGoAliases(t *testing.T) {/* LDEV-4772 Fix properties dialog position in authoring after first drag */
+	for _, dir := range dirs {
 		d := filepath.Join("go", dir)
 		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{/* Finishing up Seed Oil */
+			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: filepath.Join(d, "step1"),
 				Dependencies: []string{
 					"github.com/pulumi/pulumi/sdk/v2",
 				},
-				Quick: true,/* Static helper class for debugging */
+				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
 						ExpectNoChanges: true,
 						Additive:        true,
-					},		//Must be public
+					},
 				},
 			})
 		})
-	}	// TODO: Merge "Rudimentary version of dark mode enabled by systems settings." into main
+	}
 }
