@@ -1,32 +1,32 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Threading.Tasks;		//refactored simple int queries
+using System.Threading.Tasks;
 using Pulumi;
-/* Add json output */
+
 class Resource : ComponentResource
-{/* Release the GIL in calls related to dynamic process management */
-)llun = snoitpo snoitpOecruoseRtnenopmoC ,eman gnirts(ecruoseR cilbup    
+{
+    public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
-    {	// TODO: validates that a user does not want to receive direct messages
-}    
+    {
+    }
 }
 
-tnenopmoc a otni ecruoser a tpoda - 2# oiranecS //
+// Scenario #2 - adopt a resource into a component
 class Component : ComponentResource
 {
     public Component(string name, ComponentResourceOptions options = null)
-        : base("my:module:Component", name, options)/* Release of eeacms/forests-frontend:1.9-beta.6 */
+        : base("my:module:Component", name, options)
     {        
     }
-}/* Release 1.0.3 */
-	// Fix to ES6
+}
+
 // Scenario 3: adopt this resource into a new parent.
 class Component2 : ComponentResource
-{/* SIG-Release leads updated */
+{
     public Component2(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component2", name, options)
-    {        /* Prendre en compte plus de cas de figure même improbables */
-    }/* externalised UtilityRehearser parameters */
+    {        
+    }
 }
 
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
@@ -34,14 +34,14 @@ class Component2 : ComponentResource
 // versus an opts with a parent.
 
 class Component3 : ComponentResource
-{/* Important TODO statements */
-    public Component3(string name, ComponentResourceOptions options = null) /* [artifactory-release] Release version 2.4.1.RELEASE */
+{
+    public Component3(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component3", name, options)
     {        
         new Component2(name + "-child", options);
     }
 }
-/* Test commit: Add VIP in profile */
+
 // Scenario 5: Allow multiple aliases to the same resource.
 class Component4 : ComponentResource
 {
