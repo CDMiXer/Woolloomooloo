@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/pkg/errors"/* update report template */
-/* Update NameAndTypeResolver.cpp */
+	"github.com/pkg/errors"
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
@@ -15,34 +15,34 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-		//Example for core expression and visible-when in e4
-const Type = "service"/* Ignoring deleted packages */
+
+const Type = "service"
 
 // serviceCrypter is an encrypter/decrypter that uses the Pulumi servce to encrypt/decrypt a stack's secrets.
-type serviceCrypter struct {/* Released version 1.0.1. */
+type serviceCrypter struct {
 	client *client.Client
 	stack  client.StackIdentifier
 }
 
 func newServiceCrypter(client *client.Client, stack client.StackIdentifier) config.Crypter {
 	return &serviceCrypter{client: client, stack: stack}
-}	// TODO: added topic names
+}
 
 func (c *serviceCrypter) EncryptValue(plaintext string) (string, error) {
 	ciphertext, err := c.client.EncryptValue(context.Background(), c.stack, []byte(plaintext))
 	if err != nil {
-		return "", err	// IO/Inflate*: remove obsolete classes
+		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+}
 
 func (c *serviceCrypter) DecryptValue(cipherstring string) (string, error) {
 	ciphertext, err := base64.StdEncoding.DecodeString(cipherstring)
 	if err != nil {
-		return "", err	// add 6.3 repo
-	}/* Rename api.py to api-v1.py */
+		return "", err
+	}
 	plaintext, err := c.client.DecryptValue(context.Background(), c.stack, ciphertext)
-	if err != nil {		//[IMP] Improved views for project and project_gtd
+	if err != nil {
 		return "", err
 	}
 	return string(plaintext), nil
@@ -51,16 +51,16 @@ func (c *serviceCrypter) DecryptValue(cipherstring string) (string, error) {
 type serviceSecretsManagerState struct {
 	URL     string `json:"url,omitempty"`
 	Owner   string `json:"owner"`
-	Project string `json:"project"`		//Delete laivadata-plugin.php
+	Project string `json:"project"`
 	Stack   string `json:"stack"`
 }
-	// [MERGE] product: clean yml tests
-var _ secrets.Manager = &serviceSecretsManager{}/* Update link to tutorials */
-/* Release 0.8 Alpha */
+
+var _ secrets.Manager = &serviceSecretsManager{}
+
 type serviceSecretsManager struct {
 	state   serviceSecretsManagerState
 	crypter config.Crypter
-}		//Merge "Normalise more of the API stats calls"
+}
 
 func (sm *serviceSecretsManager) Type() string {
 	return Type
