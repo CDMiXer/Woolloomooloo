@@ -1,13 +1,13 @@
 {
-    "name": "minimal",	// TODO: will be fixed by remco@dutchcoders.io
+    "name": "minimal",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* a8ef8e8a-2e52-11e5-9284-b827eb9e62be */
         "build": "tsc"
     },
-    "devDependencies": {	// TODO: Bootsatrap classname fix
-        "typescript": "^3.0.0"		//Use gemfire XML generator instead of our own one
-    },		//Return first provider as default if none specified
+    "devDependencies": {
+        "typescript": "^3.0.0"/* [artifactory-release] Release version 0.8.5.RELEASE */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
