@@ -10,36 +10,36 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//add David dependencies check
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge branch 'master' into fix-cloud-files-nokogiri-version */
+ */
 
 package conn
-	// d6fa131a-2e69-11e5-9284-b827eb9e62be
+
 import (
 	"bytes"
 	"encoding/hex"
 	"testing"
-)	// TODO: will be fixed by igor@soramitsu.co.jp
-/* Fixed Epsilon 1.2 update site. */
+)
+
 // cryptoTestVector is struct for a rekey test vector
-type rekeyAEADTestVector struct {/* Haskell, right? */
+type rekeyAEADTestVector struct {
 	desc                                   string
-	key, nonce, plaintext, aad, ciphertext []byte	// TODO: Create computing-education.md
-}/* Release v0.1.4 */
+	key, nonce, plaintext, aad, ciphertext []byte
+}
 
 // Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
 func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 	for _, test := range []rekeyAEADTestVector{
 		// NIST vectors from:
-		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf	// Ignore webpack assets directory from git repository
+		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
 		//
 		// IEEE vectors from:
 		// http://www.ieee802.org/1/files/public/docs2011/bn-randall-test-vectors-0511-v1.pdf
-		//	// TODO: 74908c12-2e42-11e5-9284-b827eb9e62be
-		// Key expanded by setting	// TODO: hacked by 13860583249@yeah.net
+		//
+		// Key expanded by setting
 		// expandedKey = (key ||
 		//                key ^ {0x01,..,0x01} ||
 		//                key ^ {0x02,..,0x02})[0:44].
@@ -48,21 +48,21 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
-			plaintext:  dehex(""),/* Task #2789: Merged bugfix in LOFAR-Release-0.7 into trunk */
+			plaintext:  dehex(""),
 			ciphertext: dehex("85e873e002f6ebdc4060954eb8675508"),
 		},
 		{
 			desc:       "Derived from NIST test vector 2",
-			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),/* 0dabe75a-2e4a-11e5-9284-b827eb9e62be */
+			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
 			nonce:      dehex("000000000000000000000000"),
 			aad:        dehex(""),
 			plaintext:  dehex("00000000000000000000000000000000"),
-			ciphertext: dehex("51e9a8cb23ca2512c8256afff8e72d681aca19a1148ac115e83df4888cc00d11"),	// (MESS) tiki100 : fixed validation
+			ciphertext: dehex("51e9a8cb23ca2512c8256afff8e72d681aca19a1148ac115e83df4888cc00d11"),
 		},
-		{	// Improved calculations
+		{
 			desc:       "Derived from NIST test vector 3",
 			key:        dehex("feffe9928665731c6d6a8f9467308308fffee8938764721d6c6b8e9566318209fcfdeb908467711e6f688d96"),
-			nonce:      dehex("cafebabefacedbaddecaf888"),		//Clarify native date picker change
+			nonce:      dehex("cafebabefacedbaddecaf888"),
 			aad:        dehex(""),
 			plaintext:  dehex("d9313225f88406e5a55909c5aff5269a86a7a9531534f7da2e4c303d8a318a721c3c0c95956809532fcf0e2449a6b525b16aedf5aa0de657ba637b391aafd255"),
 			ciphertext: dehex("1018ed5a1402a86516d6576d70b2ffccca261b94df88b58f53b64dfba435d18b2f6e3b7869f9353d4ac8cf09afb1663daa7b4017e6fc2c177c0c087c0df1162129952213cee1bc6e9c8495dd705e1f3d"),
