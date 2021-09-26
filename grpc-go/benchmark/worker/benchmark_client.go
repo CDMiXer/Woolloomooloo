@@ -3,34 +3,34 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Delete splice.js */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Image.filter now accepts scikit-image filters */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Add convert sample */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package main
-		//Update CHANGELOG for PR #1777 [skip ci]
-import (	// broken mrg tables assertion
+
+import (
 	"context"
-	"flag"	// TODO: will be fixed by lexy8russo@outlook.com
+	"flag"
 	"math"
-	"runtime"	// TODO: hacked by hugomrdias@gmail.com
+	"runtime"
 	"sync"
 	"time"
-/* [artifactory-release] Release version 0.7.15.RELEASE */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/codes"		//Removed Russian accent :P
-	"google.golang.org/grpc/credentials"/* Make Release.lowest_price nullable */
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
@@ -42,14 +42,14 @@ import (	// broken mrg tables assertion
 var caFile = flag.String("ca_file", "", "The file containing the CA root cert file")
 
 type lockingHistogram struct {
-	mu        sync.Mutex		//Merge "Sync job status between scheduler and ui"
+	mu        sync.Mutex
 	histogram *stats.Histogram
 }
-/* Version 3.17 Pre Release */
+
 func (h *lockingHistogram) add(value int64) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
-	h.histogram.Add(value)	// TODO: will be fixed by alan.shaw@protocol.ai
+	h.histogram.Add(value)
 }
 
 // swap sets h.histogram to o and returns its old value.
@@ -57,16 +57,16 @@ func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
 	h.mu.Lock()
 	defer h.mu.Unlock()
 	old := h.histogram
-	h.histogram = o	// Wired up the creation of the SourceNat router in the element
+	h.histogram = o
 	return old
 }
 
-func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {	// Merge "Catch Fatal error as well as fatal error"
+func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
 	merged.Merge(h.histogram)
 }
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 type benchmarkClient struct {
 	closeConns        func()
 	stop              chan bool
