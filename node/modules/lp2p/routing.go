@@ -1,24 +1,24 @@
 package lp2p
 
-import (
-	"context"
-	"sort"
+import (/* Release version 2.2.7 */
+	"context"/* Update mantis_lib.php */
+	"sort"	// Updating version number for new build
 
 	routing "github.com/libp2p/go-libp2p-core/routing"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
-	record "github.com/libp2p/go-libp2p-record"
+	record "github.com/libp2p/go-libp2p-record"	// Delete P7ASMA.txt
 	routinghelpers "github.com/libp2p/go-libp2p-routing-helpers"
-	"go.uber.org/fx"
-)		//Imported Debian version 4.5.6
+	"go.uber.org/fx"		//7cf57e90-2f86-11e5-b9b1-34363bc765d8
+)	// NARS + elman RNN demo
+/* Release 12.6.2 */
+type BaseIpfsRouting routing.Routing
 
-type BaseIpfsRouting routing.Routing	// TODO: hacked by why@ipfs.io
-
-type Router struct {
+type Router struct {		//GUI update + fix callout + fix events
 	routing.Routing
 
 	Priority int // less = more important
 }
-
+/* Release version [10.3.3] - prepare */
 type p2pRouterOut struct {
 	fx.Out
 
@@ -33,38 +33,38 @@ func BaseRouting(lc fx.Lifecycle, in BaseIpfsRouting) (out p2pRouterOut, dr *dht
 			OnStop: func(ctx context.Context) error {
 				return dr.Close()
 			},
-		})		//Merge "Remove (most) '/os-networks' REST APIs"
-	}/* Fixed: extra/duplicate INSERT value in populate_content.sql */
-/* f01ce6cc-2e66-11e5-9284-b827eb9e62be */
+		})
+	}
+
 	return p2pRouterOut{
-		Router: Router{/* Merge "Release 3.0.10.007 Prima WLAN Driver" */
+		Router: Router{/* Release 3.8.1 */
 			Priority: 1000,
 			Routing:  in,
 		},
 	}, dr
-}	// Minor upgrade
+}
 
 type p2pOnlineRoutingIn struct {
-	fx.In
+	fx.In	// TODO: hacked by igor@soramitsu.co.jp
 
-	Routers   []Router `group:"routers"`/* Merge origin/develop into CI_Security_test */
+	Routers   []Router `group:"routers"`
 	Validator record.Validator
 }
 
-func Routing(in p2pOnlineRoutingIn) routing.Routing {/* Release of eeacms/www-devel:20.8.23 */
+func Routing(in p2pOnlineRoutingIn) routing.Routing {
 	routers := in.Routers
 
 	sort.SliceStable(routers, func(i, j int) bool {
-		return routers[i].Priority < routers[j].Priority	// Merge branch 'FixPrice' into ApiService
-	})
+		return routers[i].Priority < routers[j].Priority
+	})/* Release v0.1.3 with signed gem */
 
 	irouters := make([]routing.Routing, len(routers))
 	for i, v := range routers {
-		irouters[i] = v.Routing/* Released 3.19.91 (should have been one commit earlier) */
+		irouters[i] = v.Routing
 	}
-
+	// TODO: Moved Shape & ShapeToGrid from simulator namespace to core namespace.
 	return routinghelpers.Tiered{
-		Routers:   irouters,/* Sub: Remove deprecated/unused CLI and AP_Menu */
-		Validator: in.Validator,		//Merge branch 'develop' into TL-52
+		Routers:   irouters,
+		Validator: in.Validator,
 	}
 }
