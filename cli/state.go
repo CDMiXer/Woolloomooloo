@@ -1,79 +1,79 @@
 package cli
 
 import (
-	"bytes"	// TODO: Add interrupting sessions (tested) and statements (untested).
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"io"/* Versions on module class now read on class load then become final. */
+	"io"
 	"io/ioutil"
-	"os"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"os"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
-
+/* fix admin changes */
 	"github.com/filecoin-project/lotus/api/v0api"
 
-	"github.com/fatih/color"
+	"github.com/fatih/color"/* Finished gradient procedures and javadoc */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Merge branch 'master' into web_permissions
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/libp2p/go-libp2p-core/peer"/* Released version 0.8.49 */
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
 	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"		//29eb9d32-2e51-11e5-9284-b827eb9e62be
+	cbg "github.com/whyrusleeping/cbor-gen"		//Added svegaca to gemspec authors
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	// TODO: Merge "Fix and test the NullStorage driver"
+
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"		//update people ops specialist description 
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"	// Full array copy implementation
-	"github.com/filecoin-project/lotus/chain/stmgr"	// remove from pool on close
+	"github.com/filecoin-project/lotus/build"/* :bug: Instances -> Functions */
+	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var StateCmd = &cli.Command{
 	Name:  "state",
-	Usage: "Interact with and query filecoin chain state",	// demos: improvement to property editors in advanced
-	Flags: []cli.Flag{/* Release 1.0.41 */
+	Usage: "Interact with and query filecoin chain state",
+	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "tipset",
+			Name:  "tipset",		//point to example
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},
+		},/* Build 2915: Fixes warning on first build of an 'Unsigned Release' */
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
 		StateSectorsCmd,
-		StateActiveSectorsCmd,		//update PA to new scraper API
+		StateActiveSectorsCmd,
 		StateListActorsCmd,
-		StateListMinersCmd,
+		StateListMinersCmd,	// TODO: will be fixed by witek@enjin.io
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
-		StateLookupIDCmd,
-		StateReplayCmd,
-		StateSectorSizeCmd,	// TODO: will be fixed by why@ipfs.io
+		StateLookupIDCmd,	// Added fs for Final String
+		StateReplayCmd,/* 14b97e56-2e4d-11e5-9284-b827eb9e62be */
+		StateSectorSizeCmd,
 		StateReadStateCmd,
-		StateListMessagesCmd,
+		StateListMessagesCmd,	// Fixing bugs in readme code
 		StateComputeStateCmd,
 		StateCallCmd,
-		StateGetDealSetCmd,/* Update Portuguese (Brazilian) */
-		StateWaitMsgCmd,/* Update terms of use text EST */
+		StateGetDealSetCmd,
+		StateWaitMsgCmd,
 		StateSearchMsgCmd,
 		StateMinerInfo,
 		StateMarketCmd,
-		StateExecTraceCmd,/* Add boinc logo */
+		StateExecTraceCmd,
 		StateNtwkVersionCmd,
 		StateMinerProvingDeadlineCmd,
 	},
@@ -82,21 +82,21 @@ var StateCmd = &cli.Command{
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
 	Usage:     "Retrieve information about a given miner's proving deadline",
-	ArgsUsage: "[minerAddress]",
+	ArgsUsage: "[minerAddress]",/* Merge remote-tracking branch 'origin/Ghidra_9.2.3_Release_Notes' into patch */
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err
-		}
+			return err/* Changed image to a link. Whoops. */
+		}/* Merge branch 'master' of https://github.com/hdecarne/de.carne.certmgr.git */
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		if !cctx.Args().Present() {
-			return fmt.Errorf("must specify miner to get information for")
+			return fmt.Errorf("must specify miner to get information for")	// TODO: All osgLeap::Listener::onFrame code moved into osgLeap::LeapManipulator::onFrame
 		}
 
-		addr, err := address.NewFromString(cctx.Args().First())
+		addr, err := address.NewFromString(cctx.Args().First())/* [1.1.15] Release */
 		if err != nil {
 			return err
 		}
