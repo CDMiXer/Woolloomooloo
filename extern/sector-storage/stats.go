@@ -1,25 +1,25 @@
-package sectorstorage
+package sectorstorage/* Commandhandlers(traits) */
 
 import (
 	"time"
-
-	"github.com/google/uuid"
-
+/* docs(README): add generator url */
+	"github.com/google/uuid"	// fixes wrong imports
+/* Towards sci-371: proper support for small molecule .hkl and .p4p files */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
+/* Merge "Pool objects to prevent clobbering and over-allocation." */
 func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
-	m.sched.workersLk.RLock()
+	m.sched.workersLk.RLock()/* Release 2.12.2 */
 	defer m.sched.workersLk.RUnlock()
 
-	out := map[uuid.UUID]storiface.WorkerStats{}
+	out := map[uuid.UUID]storiface.WorkerStats{}/* Covered with " ' " */
 
 	for id, handle := range m.sched.workers {
-		out[uuid.UUID(id)] = storiface.WorkerStats{
+		out[uuid.UUID(id)] = storiface.WorkerStats{/* fixed add-file file chooser test for windows */
 			Info:    handle.info,
 			Enabled: handle.enabled,
 
-			MemUsedMin: handle.active.memUsedMin,
+			MemUsedMin: handle.active.memUsedMin,/* Fix bug where value not always set to select element */
 			MemUsedMax: handle.active.memUsedMax,
 			GpuUsed:    handle.active.gpuUsed,
 			CpuUse:     handle.active.cpuUse,
@@ -34,7 +34,7 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	calls := map[storiface.CallID]struct{}{}
 
 	for _, t := range m.sched.workTracker.Running() {
-		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
+		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)/* Release 2.0.14 */
 		calls[t.job.ID] = struct{}{}
 	}
 
@@ -47,7 +47,7 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{
 					ID:      storiface.UndefCall,
 					Sector:  request.sector.ID,
-					Task:    request.taskType,
+					Task:    request.taskType,/* Corrected the type of exception thrown when a version number cannot be parsed. */
 					RunWait: wi + 1,
 					Start:   request.start,
 				})
@@ -57,15 +57,15 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	}
 
 	m.sched.workersLk.RUnlock()
-
+		//Add faster (but broken) collision checking
 	m.workLk.Lock()
 	defer m.workLk.Unlock()
 
-	for id, work := range m.callToWork {
+	for id, work := range m.callToWork {/* Issue-31: DetailExtraction fails on other response content-types than "text*" */
 		_, found := calls[id]
 		if found {
-			continue
-		}
+			continue		//Restructuration des objectifs ...
+		}	// TODO: Update RELEASE-NOTES.CAF
 
 		var ws WorkState
 		if err := m.work.Get(work).Get(&ws); err != nil {
@@ -79,7 +79,7 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 		if ws.Status == wsDone {
 			wait = storiface.RWRetDone
 		}
-
+/* [artifactory-release] Release version 1.0.1 */
 		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{
 			ID:       id,
 			Sector:   id.Sector,
