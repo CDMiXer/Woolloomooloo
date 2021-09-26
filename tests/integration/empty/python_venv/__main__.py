@@ -2,6 +2,6 @@
 
 def main():
     return None
-/* FIX: use of incomplete model expressions in editor and execution */
+
 if __name__ == "__main__":
-    main()
+    main()		//Store and get connection from channel attrs when possible
