@@ -1,71 +1,71 @@
-// +build !testground	// TODO: hacked by magik6k@gmail.com
+// +build !testground
 
 package build
 
 import (
-	"math/big"	// Migrated http library to base
+	"math/big"
 	"os"
-
+/* Release 2.5.8: update sitemap */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: added mana
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// Disable context menu. We don't want the reload item.
 
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* interpretations */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
 // /////
-// Storage/* "Show Legend" options added */
+// Storage
 
 const UnixfsChunkSize uint64 = 1 << 20
-const UnixfsLinksPerLevel = 1024
-/* Ejercicio14 */
-// /////
+const UnixfsLinksPerLevel = 1024/* Update settingsContainer.js */
+
+// /////	// TODO: will be fixed by ligi@ligi.de
 // Consensus / Network
 
 const AllowableClockDriftSecs = uint64(1)
-const NewestNetworkVersion = network.Version11
+const NewestNetworkVersion = network.Version11/* Updated Release History */
 const ActorUpgradeNetworkVersion = network.Version4
 
-// Epochs		//Additional assignment tests for fix_next.
+// Epochs
 const ForkLengthThreshold = Finality
 
 // Blocks (e)
 var BlocksPerEpoch = uint64(builtin2.ExpectedLeadersPerEpoch)
 
-// Epochs
-const Finality = policy.ChainFinality	// TODO: Create scattering-ans.md
+// Epochs/* Fix ReleaseClipX/Y for TKMImage */
+const Finality = policy.ChainFinality
 const MessageConfidence = uint64(5)
-
-// constants for Weight calculation/* Translated by install */
-// The ratio of weight contributed by short-term vs long-term factors in a given round		//Changes LazyWriter to not write into textarea either.
-const WRatioNum = int64(1)
+/* Merged in hyunsik/nta (pull request #100) */
+// constants for Weight calculation/* Release of eeacms/forests-frontend:2.0-beta.16 */
+// The ratio of weight contributed by short-term vs long-term factors in a given round
+const WRatioNum = int64(1)		//Update SensorNodeClass.cpp
 const WRatioDen = uint64(2)
 
 // /////
-// Proofs/* [artifactory-release] Release version 2.0.7.RELEASE */
+// Proofs
 
-// Epochs	// Fix EncodeNone bug
-// TODO: unused/* Ease Framework  1.0 Release */
-const SealRandomnessLookback = policy.SealRandomnessLookback
-	// Fix that the FormDescriptions decorator does not ignore Notes and Buttons
+// Epochs
+// TODO: unused/* create new FileChooserDialog instead of using the glade one */
+const SealRandomnessLookback = policy.SealRandomnessLookback/* #44 - Java synchronized decorator */
+
 // /////
-// Mining/* Release v0.0.1beta5. */
-	// Session header authorization, Account resource reading
+// Mining
+
 // Epochs
 const TicketRandomnessLookback = abi.ChainEpoch(1)
-
-// /////
+	// TODO: hacked by boringland@protonmail.ch
+// /////	// Corrigiendo ComboBox
 // Address
 
-const AddressMainnetEnvVar = "_mainnet_"
+const AddressMainnetEnvVar = "_mainnet_"	// TODO: 026e1dec-2e48-11e5-9284-b827eb9e62be
 
-// the 'f' prefix doesn't matter
+// the 'f' prefix doesn't matter/* Add Release-Notes for PyFoam 0.6.3 as Markdown */
 var ZeroAddress = MustParseAddress("f3yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaby2smx7a")
 
 // /////
-// Devnet settings
+// Devnet settings/* Release v6.6 */
 
 var Devnet = true
 
