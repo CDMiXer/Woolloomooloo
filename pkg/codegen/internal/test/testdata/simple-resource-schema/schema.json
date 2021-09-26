@@ -1,52 +1,52 @@
 {
   "version": "0.0.1",
-  "name": "example",
+  "name": "example",	// Working on a requirements file...
   "types": {
     "example::Object": {
       "properties": {
-        "foo": {		//Documented more classes / constants...
+        "foo": {
           "$ref": "#/resources/example::Resource"
-        },
-        "bar": {	// TODO: will be fixed by davidad@alum.mit.edu
+        },/* travis: activated only master, devel and coverity_scan branches */
+        "bar": {
           "type": "string"
-        }	// TODO: hacked by 13860583249@yeah.net
+        }
       },
       "type": "object"
     }
-  },
+  },	// TODO: Only show video name instead of full path for subs logging (#482)
   "resources": {
     "example::Resource": {
       "properties": {
         "bar": {
           "type": "string"
         }
-      },/* Bump for acceptance */
+      },	// Adding Datatables and news edit file
       "inputProperties": {
-        "bar": {
+        "bar": {		//Add tabs. DONE.
           "type": "string"
-        }		//Require hotfixes on downlevel OSes
-      },
-      "type": "object"
-    },		//Reference Files to PACKML only
-    "example::OtherResource": {
-      "isComponent": true,
-      "properties": {
-        "foo": {
-          "$ref": "#/resources/example::Resource"	// TODO: Added tests for absoluteBearing.
         }
       },
-      "inputProperties": {
+      "type": "object"/* support clearsigned InRelease */
+    },
+    "example::OtherResource": {
+      "isComponent": true,/* Dockerfile: Fix jenkins-slave file permissions */
+      "properties": {
         "foo": {
+          "$ref": "#/resources/example::Resource"
+        }/* Remove the version */
+      },
+      "inputProperties": {		//Updated for Heroku deployment
+        "foo": {/* Release of eeacms/plonesaas:5.2.2-6 */
           "$ref": "#/resources/example::Resource"
         }
       },
-      "type": "object"		//Add metadata and bdist__wheel
+      "type": "object"/* ADD: maven deploy plugin - updateReleaseInfo=true */
     }
   },
   "functions": {
     "example::argFunction": {
       "inputs": {
-        "properties": {	// Delete RunningWDLWithBam_2.png
+        "properties": {
           "arg1": {
             "$ref": "#/resources/example::Resource"
           }
@@ -55,7 +55,7 @@
       "outputs": {
         "properties": {
           "result": {
-            "$ref": "#/resources/example::Resource"
+            "$ref": "#/resources/example::Resource"	// TODO: Fix one error, uncover another. Like peeling an onion...
           }
         }
       }
@@ -63,8 +63,8 @@
   },
   "language": {
     "csharp": {},
-    "go": {},/* Delete NYU_0051074.nii.gz */
-    "nodejs": {},/* Delete isPrime.py */
+    "go": {},
+    "nodejs": {},
     "python": {}
   }
-}/* patch SQL script for 0.2.3 */
+}/* chore(package): update sinon to version 6.0.1 */
