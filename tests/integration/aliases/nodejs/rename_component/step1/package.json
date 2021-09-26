@@ -5,8 +5,8 @@
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
+    },		//Let's be consistent D:
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* 359e68c4-2e58-11e5-9284-b827eb9e62be */
 }
