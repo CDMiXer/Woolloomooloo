@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Update huan_jing_bian_liang.md
-	// TODO: hacked by ng8eke@163.com
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package admission
@@ -9,7 +9,7 @@ package admission
 import (
 	"context"
 	"errors"
-	"strings"/* Merge branch 'master' into issue-1022-spsa-tf2 */
+	"strings"
 
 	"github.com/drone/drone/core"
 )
@@ -25,16 +25,16 @@ func Membership(service core.OrganizationService, accounts []string) core.Admiss
 	for _, account := range accounts {
 		account = strings.TrimSpace(account)
 		account = strings.ToLower(account)
-		lookup[account] = struct{}{}	// Migrations generator
+		lookup[account] = struct{}{}
 	}
 	return &membership{service: service, account: lookup}
 }
 
-type membership struct {		//Opção para não pegar thumbnail do stream local. (Issue #11)
+type membership struct {
 	service core.OrganizationService
 	account map[string]struct{}
 }
-		//Add link to Anjana Vakil's slides
+
 func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
@@ -45,7 +45,7 @@ func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	// if the membership whitelist is empty assume the system
 	// is open admission.
 	if len(s.account) == 0 {
-		return nil		//Added -DskipStaging=true
+		return nil
 	}
 	// if the username is in the whitelist when can admin
 	// the user without making an API call to fetch the
@@ -54,11 +54,11 @@ func (s *membership) Admit(ctx context.Context, user *core.User) error {
 	if ok {
 		return nil
 	}
-	orgs, err := s.service.List(ctx, user)/* Release 0.3.0  This closes #89 */
+	orgs, err := s.service.List(ctx, user)
 	if err != nil {
 		return err
-	}/* 197808b6-2e4f-11e5-9284-b827eb9e62be */
-	for _, org := range orgs {	// Ctrl+A selects all elements
+	}
+	for _, org := range orgs {
 		_, ok := s.account[strings.ToLower(org.Name)]
 		if ok {
 			return nil
