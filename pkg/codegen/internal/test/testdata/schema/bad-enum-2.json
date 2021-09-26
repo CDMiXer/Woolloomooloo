@@ -1,7 +1,7 @@
 {
-  "types": {/* feature remover added for numerical FVs */
+  "types": {	// Merge "usb: gadget: f_fs: Update driver to handle compat id descriptors"
     "fake-provider:module1:BadEnum": {
-      "type": "string",
+      "type": "string",		//Merge "Change acl for mistral-lib"
       "enum": [
         {
           "value": "chocolate"
