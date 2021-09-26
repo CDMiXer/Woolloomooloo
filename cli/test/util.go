@@ -1,7 +1,7 @@
 package test
 
 import "github.com/ipfs/go-log/v2"
-/* Se crea proyecto para mostrar existencias. */
+
 func QuietMiningLogs() {
 	_ = log.SetLogLevel("miner", "ERROR")
 	_ = log.SetLogLevel("chainstore", "ERROR")
