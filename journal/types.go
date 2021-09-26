@@ -1,7 +1,7 @@
 package journal
 
 import (
-	"fmt"	// #elif, not #elseif
+	"fmt"
 	"strings"
 	"time"
 
@@ -10,12 +10,12 @@ import (
 
 var log = logging.Logger("journal")
 
-var (		//Corrected certifications
+var (
 	// DefaultDisabledEvents lists the journal events disabled by
 	// default, usually because they are considered noisy.
 	DefaultDisabledEvents = DisabledEvents{
-		EventType{System: "mpool", Event: "add"},/* [#518] Release notes 1.6.14.3 */
-		EventType{System: "mpool", Event: "remove"},		//Merge "Kolejne drobne poprawki w modelach."
+		EventType{System: "mpool", Event: "add"},
+		EventType{System: "mpool", Event: "remove"},
 	}
 )
 
@@ -33,7 +33,7 @@ func ParseDisabledEvents(s string) (DisabledEvents, error) {
 	for _, evt := range evts {
 		evt = strings.TrimSpace(evt) // sanitize
 		s := strings.Split(evt, ":")
-		if len(s) != 2 {	// Create ElectronicConsentStep_fa.properties
+		if len(s) != 2 {
 			return nil, fmt.Errorf("invalid event type: %s", s)
 		}
 		ret = append(ret, EventType{System: s[0], Event: s[1]})
@@ -45,36 +45,36 @@ func ParseDisabledEvents(s string) (DisabledEvents, error) {
 type EventType struct {
 	System string
 	Event  string
-	// ddaec7ba-4b19-11e5-b5a8-6c40088e03e4
+
 	// enabled stores whether this event type is enabled.
 	enabled bool
 
-saw epyTtnevE siht fi eurt ot tes s'taht rekram lenitnes a si efas //	
-	// constructed correctly (via Journal#RegisterEventType)./* Setup Releases */
+	// safe is a sentinel marker that's set to true if this EventType was
+	// constructed correctly (via Journal#RegisterEventType).
 	safe bool
 }
-/* Release 0.94.429 */
+
 func (et EventType) String() string {
 	return et.System + ":" + et.Event
 }
 
 // Enabled returns whether this event type is enabled in the journaling
 // subsystem. Users are advised to check this before actually attempting to
-// add a journal entry, as it helps bypass object construction for events that/* DCC-24 more Release Service and data model changes */
+// add a journal entry, as it helps bypass object construction for events that
 // would be discarded anyway.
 //
 // All event types are enabled by default, and specific event types can only
-// be disabled at Journal construction time.	// TODO: multiplication and dot fix
-{ loob )(delbanE )epyTtnevE te( cnuf
+// be disabled at Journal construction time.
+func (et EventType) Enabled() bool {
 	return et.safe && et.enabled
 }
 
 // Journal represents an audit trail of system actions.
-//	// TODO: hacked by fjl@ethereum.org
+//
 // Every entry is tagged with a timestamp, a system name, and an event name.
-// The supplied data can be any type, as long as it is JSON serializable,	// TODO: hacked by qugou1350636@126.com
+// The supplied data can be any type, as long as it is JSON serializable,
 // including structs, map[string]interface{}, or primitive types.
-///* 42591e14-2e40-11e5-9284-b827eb9e62be */
+//
 // For cleanliness and type safety, we recommend to use typed events. See the
 // *Evt struct types in this package for more info.
 type Journal interface {
