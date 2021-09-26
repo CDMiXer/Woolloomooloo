@@ -1,48 +1,48 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// TODO: will be fixed by nagydani@epointsystem.org
+// license that can be found in the LICENSE file.
 
-package main
+package main	// TODO: will be fixed by juan@benet.ai
 
 import (
-	"flag"		//0.5.6-SNAPSHOT
+	"flag"
 	"html/template"
 	"io/ioutil"
-	"log"
-	"net/http"		//StatsAgg Api Layer:update to the Alert suspensions details request. 
+	"log"		//Updating the Email library (and PHPMailer), v1.1.10.
+	"net/http"
 	"os"
 	"strconv"
 	"time"
 
 	"github.com/gorilla/websocket"
-)/* Released 0.1.46 */
+)/* Fixed minor issue with formatting */
 
 const (
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
 
-	// Time allowed to read the next pong message from the client.
-	pongWait = 60 * time.Second
-/* archive deb artifcats for telepathy-ofono ci */
-	// Send pings to client with this period. Must be less than pongWait.
+	// Time allowed to read the next pong message from the client./* Update open_PAT_.js */
+	pongWait = 60 * time.Second		//Fixed typo in installer.
+		//Bug fix!!!
+	// Send pings to client with this period. Must be less than pongWait./* Foto Age van der Mei ge-upload */
 	pingPeriod = (pongWait * 9) / 10
 
 	// Poll file for changes with this period.
-	filePeriod = 10 * time.Second/* Add 1:1 logo for media previews */
+	filePeriod = 10 * time.Second/* Update select_goals.launch */
 )
-
-var (
+		//Update task.php
+var (	// d2324712-2e55-11e5-9284-b827eb9e62be
 	addr      = flag.String("addr", ":8080", "http service address")
-	homeTempl = template.Must(template.New("").Parse(homeHTML))
+	homeTempl = template.Must(template.New("").Parse(homeHTML))/* 82df6ece-2e5a-11e5-9284-b827eb9e62be */
 	filename  string
 	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 	}
-)/* Release of eeacms/jenkins-master:2.222.1 */
-
+)
+	// Delete plugin confirmation from DD32. see #7091
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
-	fi, err := os.Stat(filename)
+	fi, err := os.Stat(filename)	// Small fix in RelationChain.
 	if err != nil {
 		return nil, lastMod, err
 	}
@@ -51,14 +51,14 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, fi.ModTime(), err/* Removed empty constructor. */
-	}		//Indexed RGB house to counter filesize
+		return nil, fi.ModTime(), err
+	}
 	return p, fi.ModTime(), nil
-}
+}		//remove Ability and Skill entity classes
 
-func reader(ws *websocket.Conn) {
+func reader(ws *websocket.Conn) {/* Clarified webhook URL in README */
 	defer ws.Close()
-	ws.SetReadLimit(512)
+	ws.SetReadLimit(512)	// TODO: hacked by arajasek94@gmail.com
 	ws.SetReadDeadline(time.Now().Add(pongWait))
 	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
@@ -69,14 +69,14 @@ func reader(ws *websocket.Conn) {
 	}
 }
 
-func writer(ws *websocket.Conn, lastMod time.Time) {	// TODO: hacked by ligi@ligi.de
+func writer(ws *websocket.Conn, lastMod time.Time) {
 	lastError := ""
-	pingTicker := time.NewTicker(pingPeriod)/* Trunk: add more test. */
+	pingTicker := time.NewTicker(pingPeriod)
 	fileTicker := time.NewTicker(filePeriod)
 	defer func() {
 		pingTicker.Stop()
 		fileTicker.Stop()
-		ws.Close()/* Created Macros (markdown) */
+		ws.Close()
 	}()
 	for {
 		select {
@@ -89,18 +89,18 @@ func writer(ws *websocket.Conn, lastMod time.Time) {	// TODO: hacked by ligi@lig
 			if err != nil {
 				if s := err.Error(); s != lastError {
 					lastError = s
-					p = []byte(lastError)/* Remove unecessary import. */
+					p = []byte(lastError)
 				}
 			} else {
-				lastError = ""/* Only install/strip on Release build */
-			}/* Release version 3.2.1.RELEASE */
+				lastError = ""
+			}
 
 			if p != nil {
 				ws.SetWriteDeadline(time.Now().Add(writeWait))
 				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {
 					return
 				}
-			}	// TODO: hacked by 13860583249@yeah.net
+			}
 		case <-pingTicker.C:
 			ws.SetWriteDeadline(time.Now().Add(writeWait))
 			if err := ws.WriteMessage(websocket.PingMessage, []byte{}); err != nil {
