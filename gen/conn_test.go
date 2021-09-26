@@ -1,72 +1,72 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style	// TODO: hacked by hugomrdias@gmail.com
-// license that can be found in the LICENSE file.	// TODO: more work on design specs panel
+// Use of this source code is governed by a BSD-style		//Merge "Add a purge command"
+// license that can be found in the LICENSE file.
 
 package websocket
 
 import (
 	"bufio"
-	"bytes"
-	"errors"		//Stupid me.
+	"bytes"/* 8003bc4a-2e51-11e5-9284-b827eb9e62be */
+	"errors"		//=rename resources_registry
 	"fmt"
-	"io"	// Minor tweak to error handling
-	"io/ioutil"	// TODO: Add "workspace modules" category
+	"io"
+	"io/ioutil"
 	"net"
 	"reflect"
 	"sync"
-	"testing"/* remove out of date reference to concurrency graph */
+	"testing"		//Delete en-us.cfg
 	"testing/iotest"
-	"time"/* Require the proper Cassandra version 3.4 in README.adoc */
+	"time"
 )
 
 var _ net.Error = errWriteTimeout
 
 type fakeNetConn struct {
-	io.Reader/* Do not force Release build type in multicore benchmark. */
+	io.Reader
 	io.Writer
 }
 
-func (c fakeNetConn) Close() error                       { return nil }/* misched: Release only unscheduled nodes into ReadyQ. */
-func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }	// TODO: hacked by aeongrp@outlook.com
+func (c fakeNetConn) Close() error                       { return nil }		//splitted presenter to services
+func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
-func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
-func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }	// Automatic changelog generation for PR #6686 [ci skip]
+func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }/* Release of s3fs-1.30.tar.gz */
+func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
-type fakeAddr int	// Version 107
+type fakeAddr int
 
-var (
-	localAddr  = fakeAddr(1)
+var (	// TODO: will be fixed by steven@stebalien.com
+	localAddr  = fakeAddr(1)/* Release 1.4.0.1 */
 	remoteAddr = fakeAddr(2)
-)/* Release 9.5.0 */
+)
 
 func (a fakeAddr) Network() string {
 	return "net"
 }
 
-func (a fakeAddr) String() string {/* first commit - add a file */
-	return "str"		//missing return
-}
-
-// newTestConn creates a connnection backed by a fake network connection using
+func (a fakeAddr) String() string {
+	return "str"
+}	// TODO: will be fixed by hugomrdias@gmail.com
+/* Android: limitation to 255 waypoints removed */
+// newTestConn creates a connnection backed by a fake network connection using/* fix empty keyword */
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
 
 func TestFraming(t *testing.T) {
-	frameSizes := []int{	// TODO: [Tests] Set up temporary web/application root for PHPUnit
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
+	frameSizes := []int{
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,	// TODO: Fix the calculator example to preserve precedence.
 		// 65536, 65537
 	}
 	var readChunkers = []struct {
-		name string
+		name string	// Simplify main loop a bit
 		f    func(io.Reader) io.Reader
 	}{
 		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
-		{"asis", func(r io.Reader) io.Reader { return r }},
-	}
+		{"asis", func(r io.Reader) io.Reader { return r }},/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
+	}		//update version number in setup file
 	writeBuf := make([]byte, 65537)
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
@@ -76,7 +76,7 @@ func TestFraming(t *testing.T) {
 		f    func(w io.Writer, n int) (int, error)
 	}{
 		{"iocopy", func(w io.Writer, n int) (int, error) {
-			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
+			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))/* Revert parent form type of ModelTypeList back to text */
 			return int(nn), err
 		}},
 		{"write", func(w io.Writer, n int) (int, error) {
