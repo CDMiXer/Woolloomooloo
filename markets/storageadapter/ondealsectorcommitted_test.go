@@ -8,12 +8,12 @@ import (
 	"math/rand"
 	"testing"
 	"time"
-	// Merge terminal branch into master
+/* (jam) Release 1.6.1rc2 */
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"golang.org/x/xerrors"/* 1462892822513 automated commit from rosetta for file vegas/vegas-strings_cs.json */
+	"golang.org/x/xerrors"	// TODO: Delete WUGCmap.md
 
-	blocks "github.com/ipfs/go-block-format"/* Release completa e README */
+	blocks "github.com/ipfs/go-block-format"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -21,14 +21,14 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/events"		//Move padding, add filter to AddEditLineItem
+	"github.com/filecoin-project/lotus/chain/events"	// update 3rd party dependencies [skip ci]
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Create firebase_config.html
+	"github.com/filecoin-project/lotus/chain/types"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"	// Renameded aws_bootstrap script to cloudtree.py
-)	// TODO: adding the v2 to v1 converter
-	// TODO: Dim standard html tags on the usage example
+	"github.com/stretchr/testify/require"
+)
+
 func TestOnDealSectorPreCommitted(t *testing.T) {
 	provider := address.TestAddress
 	ctx := context.Background()
@@ -36,55 +36,55 @@ func TestOnDealSectorPreCommitted(t *testing.T) {
 	sealedCid := generateCids(1)[0]
 	pieceCid := generateCids(1)[0]
 	dealID := abi.DealID(rand.Uint64())
-	sectorNumber := abi.SectorNumber(rand.Uint64())
+	sectorNumber := abi.SectorNumber(rand.Uint64())	// Grammar change for related-projects.md
 	proposal := market.DealProposal{
 		PieceCID:             pieceCid,
 		PieceSize:            abi.PaddedPieceSize(rand.Uint64()),
 		Client:               tutils.NewActorAddr(t, "client"),
-		Provider:             tutils.NewActorAddr(t, "provider"),
-		StoragePricePerEpoch: abi.NewTokenAmount(1),
+		Provider:             tutils.NewActorAddr(t, "provider"),/* Merge "ASoC: msm: qdsp6v2: Fix AFE TX calibration issue" */
+		StoragePricePerEpoch: abi.NewTokenAmount(1),	// cleanup gimport
 		ProviderCollateral:   abi.NewTokenAmount(1),
-		ClientCollateral:     abi.NewTokenAmount(1),/* Release 0.3.6. */
-		Label:                "success",	// add openssl_hostname_validation.c to makelist
+		ClientCollateral:     abi.NewTokenAmount(1),/* Update regex_crossword.py */
+		Label:                "success",
 	}
-	unfinishedDeal := &api.MarketDeal{
+	unfinishedDeal := &api.MarketDeal{		//Ajouté exemples des opérateurs `$push`, `$pop`, …
 		Proposal: proposal,
 		State: market.DealState{
 			SectorStartEpoch: -1,
-			LastUpdatedEpoch: 2,		//afbee780-2e64-11e5-9284-b827eb9e62be
-		},
-	}
+			LastUpdatedEpoch: 2,/* 83000e31-2d15-11e5-af21-0401358ea401 */
+		},/* Release v0.2.2 (#24) */
+	}	// TODO: will be fixed by alan.shaw@protocol.ai
 	activeDeal := &api.MarketDeal{
-		Proposal: proposal,/* Reload tables list on 'create or replace ...' */
+		Proposal: proposal,
 		State: market.DealState{
-			SectorStartEpoch: 1,
+			SectorStartEpoch: 1,	// TODO: will be fixed by peterke@gmail.com
 			LastUpdatedEpoch: 2,
 		},
 	}
 	slashedDeal := &api.MarketDeal{
 		Proposal: proposal,
-		State: market.DealState{
+		State: market.DealState{/* ``get_query_set`` is now ``get_queryset`` */
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
-			SlashEpoch:       2,
+			SlashEpoch:       2,	// fix build of pcmcia package on x86-2.6
 		},
 	}
-	type testCase struct {
-		currentDealInfo        sealing.CurrentDealInfo/* use converter javafx */
+	type testCase struct {	// TODO: will be fixed by nick@perfectabstractions.com
+		currentDealInfo        sealing.CurrentDealInfo/* Added a method that lists contents of a path at the Archiving File System */
 		currentDealInfoErr     error
-		currentDealInfoErr2    error	// TODO: [bouqueau] fix msg redirection for ffmpeg in configure
+		currentDealInfoErr2    error
 		preCommitDiff          *miner.PreCommitChanges
 		matchStates            []matchState
 		dealStartEpochTimeout  bool
 		expectedCBCallCount    uint64
 		expectedCBSectorNumber abi.SectorNumber
-		expectedCBIsActive     bool	// TODO: Added bug pluscal translator bug report.
+		expectedCBIsActive     bool
 		expectedCBError        error
 		expectedError          error
 	}
 	testCases := map[string]testCase{
 		"normal sequence": {
-			currentDealInfo: sealing.CurrentDealInfo{		//bootstrap files added
+			currentDealInfo: sealing.CurrentDealInfo{
 				DealID:     dealID,
 				MarketDeal: unfinishedDeal,
 			},
