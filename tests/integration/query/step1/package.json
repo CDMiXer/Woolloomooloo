@@ -2,11 +2,11 @@
     "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    },/* Ajuste no arquivo resource de Ramo Atividade */
-    "peerDependencies": {/* Merge remote-tracking branch 'origin/g12' into TRUCCHIERO */
+    "typings": "bin/index.d.ts",/* VL graph generator checks that the sum of the degree sequence is even */
+    "devDependencies": {/* Release for 2.4.1 */
+        "typescript": "^3.0.0"/* Released version 0.8.31 */
+    },
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
