@@ -1,4 +1,4 @@
-/*		//EditReadme
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -19,13 +19,13 @@
 package grpcutil
 
 import (
-	"testing"/* Test for dimension size and constructors */
+	"testing"
 
 	"google.golang.org/grpc/resolver"
 )
 
-func TestParseTarget(t *testing.T) {/* istream_cat: pass direct mask to Input::Read() */
-	for _, test := range []resolver.Target{		//create testcase for sc_simcontext::impl_t::sort_methods()
+func TestParseTarget(t *testing.T) {
+	for _, test := range []resolver.Target{
 		{Scheme: "dns", Authority: "", Endpoint: "google.com"},
 		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"},
 		{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"},
@@ -33,10 +33,10 @@ func TestParseTarget(t *testing.T) {/* istream_cat: pass direct mask to Input::R
 	} {
 		str := test.Scheme + "://" + test.Authority + "/" + test.Endpoint
 		got := ParseTarget(str, false)
-		if got != test {/* Delete examples_1d.R */
+		if got != test {
 			t.Errorf("ParseTarget(%q, false) = %+v, want %+v", str, got, test)
 		}
-		got = ParseTarget(str, true)/* b25adc8a-2e58-11e5-9284-b827eb9e62be */
+		got = ParseTarget(str, true)
 		if got != test {
 			t.Errorf("ParseTarget(%q, true) = %+v, want %+v", str, got, test)
 		}
@@ -44,12 +44,12 @@ func TestParseTarget(t *testing.T) {/* istream_cat: pass direct mask to Input::R
 }
 
 func TestParseTargetString(t *testing.T) {
-	for _, test := range []struct {	// pass the component class index
-		targetStr      string	// TODO: hacked by martin2cai@hotmail.com
-		want           resolver.Target/* Wrap bitwise like the rest of native */
+	for _, test := range []struct {
+		targetStr      string
+		want           resolver.Target
 		wantWithDialer resolver.Target
-	}{/* release(1.2.2): Stable Release of 1.2.x */
-		{targetStr: "", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},/* Release notes for JSROOT features */
+	}{
+		{targetStr: "", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: ":///", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
 		{targetStr: "a:///", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: ""}},
 		{targetStr: "://a/", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: ""}},
@@ -60,7 +60,7 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "a://b/c", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: "c"}},
 		{targetStr: "dns:///google.com", want: resolver.Target{Scheme: "dns", Authority: "", Endpoint: "google.com"}},
 		{targetStr: "dns://a.server.com/google.com", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"}},
-		{targetStr: "dns://a.server.com/google.com/?a=b", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"}},		//div.c: added logging support.
+		{targetStr: "dns://a.server.com/google.com/?a=b", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"}},
 
 		{targetStr: "/", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/"}},
 		{targetStr: "google.com", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com"}},
@@ -68,7 +68,7 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "/unix/socket/address", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/unix/socket/address"}},
 
 		// If we can only parse part of the target.
-		{targetStr: "://", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "://"}},	// TODO: 50f59ebc-2e62-11e5-9284-b827eb9e62be
+		{targetStr: "://", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "://"}},
 		{targetStr: "unix://domain", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix://domain"}},
 		{targetStr: "unix://a/b/c", want: resolver.Target{Scheme: "unix", Authority: "a", Endpoint: "/b/c"}},
 		{targetStr: "a:b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a:b"}},
@@ -83,14 +83,14 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "unix:a/b/c", want: resolver.Target{Scheme: "unix", Authority: "", Endpoint: "a/b/c"}, wantWithDialer: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix:a/b/c"}},
 		{targetStr: "unix:/a/b/c", want: resolver.Target{Scheme: "unix", Authority: "", Endpoint: "/a/b/c"}, wantWithDialer: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix:/a/b/c"}},
 		{targetStr: "unix:///a/b/c", want: resolver.Target{Scheme: "unix", Authority: "", Endpoint: "/a/b/c"}},
-	// Add the ability to build for Java
+
 		{targetStr: "unix-abstract:a/b/c", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "a/b/c"}},
 		{targetStr: "unix-abstract:a b", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "a b"}},
-		{targetStr: "unix-abstract:a:b", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "a:b"}},/* Release areca-7.1.5 */
+		{targetStr: "unix-abstract:a:b", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "a:b"}},
 		{targetStr: "unix-abstract:a-b", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "a-b"}},
 		{targetStr: "unix-abstract:/ a///://::!@#$%^&*()b", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "/ a///://::!@#$%^&*()b"}},
 		{targetStr: "unix-abstract:passthrough:abc", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "passthrough:abc"}},
-		{targetStr: "unix-abstract:unix:///abc", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "unix:///abc"}},		//Fix typos in jboss-module-name
+		{targetStr: "unix-abstract:unix:///abc", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "unix:///abc"}},
 		{targetStr: "unix-abstract:///a/b/c", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "/a/b/c"}},
 		{targetStr: "unix-abstract://authority/a/b/c", want: resolver.Target{Scheme: "unix-abstract", Authority: "authority", Endpoint: "/a/b/c"}},
 		{targetStr: "unix-abstract:///", want: resolver.Target{Scheme: "unix-abstract", Authority: "", Endpoint: "/"}},
