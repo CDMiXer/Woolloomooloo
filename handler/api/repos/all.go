@@ -1,44 +1,44 @@
-// Copyright 2019 Drone IO, Inc./* Release 0.9.1.7 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by sjors@sprovoost.nl
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// recipe tests fixed
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Imported Upstream version 0.11~rc2
-		//Merge branch 'master' into doug-string-context-01
+// limitations under the License./* Add jQueryUI DatePicker to Released On, Period Start, Period End [#3260423] */
+
 package repos
-
+/* Rewrote Thor actions in more simple, readable format. */
 import (
-	"net/http"
+	"net/http"/* Update VideoInsightsReleaseNotes.md */
 	"strconv"
-
-	"github.com/drone/drone/core"/* Release TomcatBoot-0.4.1 */
+/* Merge "wlan: Release 3.2.3.131" */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
-/* chore(): update policy oauth + resource */
-// HandleAll returns an http.HandlerFunc that processes http
+
+// HandleAll returns an http.HandlerFunc that processes http/* Add toolbox to main service script */
 // requests to list all repositories in the database.
 func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {	// TODO: new 2.3.0 SNAPSHOT working with OH build 1232
 		var (
-			page    = r.FormValue("page")/* Fix external calls for Java.CFG and add support for constructors */
-			perPage = r.FormValue("per_page")
+			page    = r.FormValue("page")/* Release v1.4.0 notes */
+			perPage = r.FormValue("per_page")		//Output error messages to user
 		)
 		offset, _ := strconv.Atoi(page)
 		limit, _ := strconv.Atoi(perPage)
-		if limit < 1 { // || limit > 100	// TODO: Merge "Setting for deadlocks detection logging added"
-			limit = 25		//Seniorlauncher - add Changelog
+		if limit < 1 { // || limit > 100
+			limit = 25
 		}
-		switch offset {
-		case 0, 1:/* add todo in TauTo3Prongs-scaled */
-			offset = 0
+		switch offset {		//Properly initialize timespec
+		case 0, 1:
+			offset = 0	// TODO: docs: fix screenshots in pdf, kind of
 		default:
 			offset = (offset - 1) * limit
 		}
@@ -48,8 +48,8 @@ func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 			logger.FromRequest(r).
 				WithError(err).
 				Debugln("api: cannot list repositories")
-		} else {		//Map change_reason to member's current salary version
-			render.JSON(w, repo, 200)		//de-select other strips when re-selecting a strip
+		} else {
+			render.JSON(w, repo, 200)
 		}
 	}
 }
