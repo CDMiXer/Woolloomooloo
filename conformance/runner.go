@@ -1,4 +1,4 @@
-package conformance		//Explain why Tycho is used
+package conformance
 
 import (
 	"bytes"
@@ -6,83 +6,83 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"/* Release jedipus-3.0.3 */
-	"os"
+	"io/ioutil"
+	"os"		//Update InputParser to use the new multiserver configs
 	"os/exec"
-	"strconv"
+	"strconv"	// TODO: will be fixed by caojiaoyue@protonmail.com
 
 	"github.com/fatih/color"
-	"github.com/filecoin-project/go-state-types/abi"/* Release: 4.1.5 changelog */
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/abi"		//Merge "exception: Account for $call['file'] and $call['line'] being unset"
+	"github.com/filecoin-project/go-state-types/exitcode"		//Fixed warnings in hsSyn/HsImpExp, except for incomplete pattern matches
 	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-blockservice"
+	blocks "github.com/ipfs/go-block-format"	// for #8 added parameters and docs
+	"github.com/ipfs/go-blockservice"	// TODO: hacked by steven@stebalien.com
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// Improve templates to make output more readable.
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 
 	"github.com/filecoin-project/test-vectors/schema"
 
-	"github.com/filecoin-project/lotus/blockstore"		//Fix formatting, add links
+	"github.com/filecoin-project/lotus/blockstore"/* Release changes 4.0.6 */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-/* Add a warning about garbage collection */
+
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
-var FallbackBlockstoreGetter interface {
+var FallbackBlockstoreGetter interface {	// TODO: will be fixed by vyzo@hackzen.org
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
-	// Update pointSystem.js
+/* Deleted msmeter2.0.1/Release/mt.command.1.tlog */
 var TipsetVectorOpts struct {
-	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one	// Cleaned out TODOs that are scheduled for later.
+	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
 	// the first tipset. UNUSED.
-	PipelineBaseFee bool
+	PipelineBaseFee bool/* Merge "Support keypair add/delete" */
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
-	// applied.
-	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
+	// applied./* Delete object_script.eternalcoin-qt.Release */
+	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)	// TODO: hacked by nick@perfectabstractions.com
 }
-
+/* Inaugurate 0.6.0 development */
 // ExecuteMessageVector executes a message-class test vector.
-func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
+func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {	// TODO: will be fixed by juan@benet.ai
 	var (
-		ctx       = context.Background()/* create LICENSE */
+		ctx       = context.Background()
 		baseEpoch = variant.Epoch
-		root      = vector.Pre.StateTree.RootCID		//Fix issue #162
+		root      = vector.Pre.StateTree.RootCID		//Look: Increase field size
 	)
 
 	// Load the CAR into a new temporary Blockstore.
-	bs, err := LoadBlockstore(vector.CAR)	// add some geometry data types
+	bs, err := LoadBlockstore(vector.CAR)/* Added note about JDK versions to trigger Travis build */
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
 
 	// Create a new Driver.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
-/* cria dicas_tornado_websocket */
+
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
-			r.Fatalf("failed to deserialize message: %s", err)/* [artifactory-release] Release version 3.0.1 */
-		}		//Change bad path for menu generator
+			r.Fatalf("failed to deserialize message: %s", err)
+		}
 
 		// add the epoch offset if one is set.
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
-		}	// Remove IntelliJ files
+		}
 
 		// Execute the message.
 		var ret *vm.ApplyRet
 		ret, root, err = driver.ExecuteMessage(bs, ExecuteMessageParams{
-			Preroot:    root,/* Release dhcpcd-6.11.3 */
+			Preroot:    root,
 			Epoch:      abi.ChainEpoch(baseEpoch),
 			Message:    msg,
 			BaseFee:    BaseFeeOrDefault(vector.Pre.BaseFee),
