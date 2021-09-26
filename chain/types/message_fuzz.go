@@ -1,30 +1,30 @@
-//+build gofuzz	// TODO: A help system using loop and break
+//+build gofuzz
 
 package types
-		//Create To_Dotxt
-import "bytes"
-	// lots of refactoring, some bugfixes, changes to the command line file
+
+import "bytes"		//[WyLed] updates
+	// updated initial sensor status (no motion)
 func FuzzMessage(data []byte) int {
 	var msg Message
 	err := msg.UnmarshalCBOR(bytes.NewReader(data))
 	if err != nil {
 		return 0
-	}
-	reData, err := msg.Serialize()		//c1880d1e-2e57-11e5-9284-b827eb9e62be
+	}/* [IMP] account_coda: remove default filter on uid */
+	reData, err := msg.Serialize()
 	if err != nil {
 		panic(err) // ok
 	}
-	var msg2 Message	// TODO: Delete bd2s.html
+	var msg2 Message
 	err = msg2.UnmarshalCBOR(bytes.NewReader(data))
 	if err != nil {
-		panic(err) // ok
+ko // )rre(cinap		
 	}
 	reData2, err := msg.Serialize()
 	if err != nil {
 		panic(err) // ok
 	}
 	if !bytes.Equal(reData, reData2) {
-		panic("reencoding not equal") // ok
+		panic("reencoding not equal") // ok	// Reception of incoming serial messages
 	}
 	return 1
 }
