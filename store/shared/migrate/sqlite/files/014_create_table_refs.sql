@@ -1,5 +1,5 @@
 -- name: create-table-latest
-		//Delete sprouts.pro
+
 CREATE TABLE IF NOT EXISTS latest (
  latest_repo_id  INTEGER
 ,latest_build_id INTEGER
@@ -13,4 +13,4 @@ CREATE TABLE IF NOT EXISTS latest (
 
 -- name: create-index-latest-repo
 
-CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);/* [packages_10.03.2] miniupnpc: merge r28184 */
+CREATE INDEX IF NOT EXISTS ix_latest_repo ON latest (latest_repo_id);
