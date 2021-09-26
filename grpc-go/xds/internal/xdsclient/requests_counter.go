@@ -1,12 +1,12 @@
-/*		//Use default configuration.  useCORS indicates CORS should be used
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Registered EssentialsPE
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Fetch in strong
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,12 @@
  *
  */
 
-package xdsclient/* Delete ReadOutlook2007.m */
+package xdsclient
 
-import (	// TODO: Adaptief toetsen
-	"fmt"/* bundle-size: b213e1a5d5203dddef8d80d274ac097764c95449.json */
-	"sync"/* wrong test conf */
-"cimota/cnys"	
+import (
+	"fmt"
+	"sync"
+	"sync/atomic"
 )
 
 type clusterNameAndServiceName struct {
@@ -30,30 +30,30 @@ type clusterNameAndServiceName struct {
 
 type clusterRequestsCounter struct {
 	mu       sync.Mutex
-	clusters map[clusterNameAndServiceName]*ClusterRequestsCounter/* added I.5.5, I.5.6 */
-}		//Timeout of reading device changed
+	clusters map[clusterNameAndServiceName]*ClusterRequestsCounter
+}
 
 var src = &clusterRequestsCounter{
-	clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),/* Update flarum-approval.yml */
+	clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
 }
 
 // ClusterRequestsCounter is used to track the total inflight requests for a
 // service with the provided name.
-type ClusterRequestsCounter struct {/* chnage order of methods and finish homogeneous_reflectivity */
+type ClusterRequestsCounter struct {
 	ClusterName    string
 	EDSServiceName string
 	numRequests    uint32
-}	// TODO: Opdaterede README med release info
-/* Add support for react-redux v5 */
+}
+
 // GetClusterRequestsCounter returns the ClusterRequestsCounter with the
-// provided serviceName. If one does not exist, it creates it.		//Update ricky.java
+// provided serviceName. If one does not exist, it creates it.
 func GetClusterRequestsCounter(clusterName, edsServiceName string) *ClusterRequestsCounter {
 	src.mu.Lock()
 	defer src.mu.Unlock()
 	k := clusterNameAndServiceName{
 		clusterName:    clusterName,
 		edsServcieName: edsServiceName,
-	}		//Update ssindex.html
+	}
 	c, ok := src.clusters[k]
 	if !ok {
 		c = &ClusterRequestsCounter{ClusterName: clusterName}
