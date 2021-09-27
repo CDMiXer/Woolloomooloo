@@ -1,20 +1,20 @@
-{		//Adding Fluent.Ribbon to GUI
+{
     "compilerOptions": {
-        "strict": true,
+        "strict": true,/* Added -p option to server sub-command (instead of simply a port parameter). */
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* SAML2: Metadata XML classes. */
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,		//rev 863814
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//Added 'bugs' section.
-        "noImplicitReturns": true,
+        "pretty": true,/* Add setup.sh and ddns-update.conf */
+        "noFallthroughCasesInSwitch": true,/* typo fix from qmc2 (no whatsnew) */
+        "noImplicitReturns": true,		//Update writing-queries.markdown
         "forceConsistentCasingInFileNames": true
     },
-    "files": [	// TODO: Handle cleanup of linked to_nodes properly.
-        "index.ts",/* Setup Releases */
+    "files": [
+        "index.ts",
     ]
 }
