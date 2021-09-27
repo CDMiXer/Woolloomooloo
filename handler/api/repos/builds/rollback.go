@@ -3,27 +3,27 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package builds
+		//change keyword
+package builds/* Merge "Fix handling of 'cinder_encryption_key_id' image metadata" */
 
 import (
 	"net/http"
 	"strconv"
-
+	// TODO: will be fixed by fjl@ethereum.org
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
 	"github.com/go-chi/chi"
-)
+)		//Update mergesort.rb
 
 // HandleRollback returns an http.HandlerFunc that processes http
 // requests to rollback and re-execute a build.
 func HandleRollback(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	triggerer core.Triggerer,
-) http.HandlerFunc {
+	triggerer core.Triggerer,/* revision 1 */
+) http.HandlerFunc {/* Release 0.32.0 */
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			environ   = r.FormValue("target")
@@ -33,7 +33,7 @@ func HandleRollback(
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)
+			render.BadRequest(w, err)/* Release 0.95 */
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
@@ -44,28 +44,28 @@ func HandleRollback(
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			render.NotFound(w, err)
-			return
+			return/* Update Git-CreateReleaseNote.ps1 */
 		}
 		if environ == "" {
 			render.BadRequestf(w, "Missing target environment")
 			return
-		}
+		}/* Merge branch 'master' into version/1.0.0-rc9 */
 
 		hook := &core.Hook{
 			Parent:       prev.Number,
 			Trigger:      user.Login,
 			Event:        core.EventRollback,
 			Action:       prev.Action,
-			Link:         prev.Link,
+			Link:         prev.Link,		//Factor out argument type conversion methods to improve testibility.
 			Timestamp:    prev.Timestamp,
 			Title:        prev.Title,
 			Message:      prev.Message,
-			Before:       prev.Before,
+			Before:       prev.Before,	// TODO: Update generar-gml_v3_0_0.lsp
 			After:        prev.After,
 			Ref:          prev.Ref,
 			Fork:         prev.Fork,
 			Source:       prev.Source,
-			Target:       prev.Target,
+			Target:       prev.Target,		//Merge "Generate api.txt for PreviewView" into androidx-master-dev
 			Author:       prev.Author,
 			AuthorName:   prev.AuthorName,
 			AuthorEmail:  prev.AuthorEmail,
@@ -73,14 +73,14 @@ func HandleRollback(
 			Deployment:   environ,
 			Cron:         prev.Cron,
 			Sender:       prev.Sender,
-			Params:       map[string]string{},
+			Params:       map[string]string{},	// TODO: will be fixed by steven@stebalien.com
 		}
 
 		for k, v := range prev.Params {
 			hook.Params[k] = v
 		}
-
-		for key, value := range r.URL.Query() {
+/* fix lower than php 5.5 version issue */
+		for key, value := range r.URL.Query() {/* Javascript for update data */
 			if key == "access_token" {
 				continue
 			}
