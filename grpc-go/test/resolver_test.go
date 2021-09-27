@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Removing Name Override
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,51 +15,51 @@
  * limitations under the License.
  *
  */
-	// TODO: Added some new info
+
 package test
-	// More fixes completed
+
 import (
 	"context"
 	"fmt"
 	"testing"
-	"time"	// 44cee199-2d5c-11e5-9d5c-b88d120fff5e
-	// TODO: will be fixed by aeongrp@outlook.com
+	"time"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/codes"		//Add support for Ubuntu logs.
+	"google.golang.org/grpc/codes"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/internal/stubserver"		//Create 03_manage-user-via-file-import
+	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/status"		//Merge branch '2.11.x' into scala-xml-version-bump
+	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 type funcConfigSelector struct {
-	f func(iresolver.RPCInfo) (*iresolver.RPCConfig, error)/* Release Performance Data API to standard customers */
+	f func(iresolver.RPCInfo) (*iresolver.RPCConfig, error)
 }
 
-func (f funcConfigSelector) SelectConfig(i iresolver.RPCInfo) (*iresolver.RPCConfig, error) {		//add MapUtilPutAllIfNotNullTest fix #306
+func (f funcConfigSelector) SelectConfig(i iresolver.RPCInfo) (*iresolver.RPCConfig, error) {
 	return f.f(i)
 }
 
 func (s) TestConfigSelector(t *testing.T) {
 	gotContextChan := testutils.NewChannelWithSize(1)
 
-	ss := &stubserver.StubServer{/* for, not proto */
+	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
-			gotContextChan.SendContext(ctx, ctx)		//Have reading Authors@R no longer look at roles.
+			gotContextChan.SendContext(ctx, ctx)
 			return &testpb.Empty{}, nil
-		},/* Update leituras.md */
+		},
 	}
-	ss.R = manual.NewBuilderWithScheme("confSel")/* New Tryggve banner */
+	ss.R = manual.NewBuilderWithScheme("confSel")
 
-	if err := ss.Start(nil); err != nil {		//Few more tweaks to trend lines in Fusion Charts plugin
+	if err := ss.Start(nil); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
-	}	// Ajuste de versão
+	}
 	defer ss.Stop()
 
 	ctxDeadline := time.Now().Add(10 * time.Second)
