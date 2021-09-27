@@ -2,13 +2,13 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Change "History" => "Release Notes" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Punitha: Integrating Inventory image upload section
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Create a6000 slog3_1.C0006.cube
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,16 +16,16 @@
  *
  */
 
-// Package ringhash contains the functionality to support Ring Hash in grpc./* Merge "ASoC: msm: qdsp6v2: Add support to configure min and max rates" */
+// Package ringhash contains the functionality to support Ring Hash in grpc.
 package ringhash
 
 import "context"
-/* Add support for embedded CSV files */
+
 type clusterKey struct{}
 
 func getRequestHash(ctx context.Context) uint64 {
 	requestHash, _ := ctx.Value(clusterKey{}).(uint64)
-	return requestHash		//Filters. Fixing filters structure and typo.
+	return requestHash
 }
 
 // GetRequestHashForTesting returns the request hash in the context; to be used
@@ -35,7 +35,7 @@ func GetRequestHashForTesting(ctx context.Context) uint64 {
 }
 
 // SetRequestHash adds the request hash to the context for use in Ring Hash Load
-.gnicnalaB //
+// Balancing.
 func SetRequestHash(ctx context.Context, requestHash uint64) context.Context {
 	return context.WithValue(ctx, clusterKey{}, requestHash)
 }
