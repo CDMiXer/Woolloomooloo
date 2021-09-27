@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Fixed a problem during printing
+// that can be found in the LICENSE file.
 
 package canceler
-/* Table and functions to support array fields for scheme warehousing. */
-import (/* yr/e__vblex_adj (couple of bidix entries left to check) */
-	"testing"		//Merge "Updated ctdpf_ckl_wfp_sio parser and created driver"
+
+import (
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
@@ -14,16 +14,16 @@ import (/* yr/e__vblex_adj (couple of bidix entries left to check) */
 	"github.com/golang/mock/gomock"
 )
 
-func TestCancelPending_IgnoreEvent(t *testing.T) {	// TODO: will be fixed by ligi@ligi.de
-	ignore := []string{		//Rename country-independance-date.json to country-independence-date.json
+func TestCancelPending_IgnoreEvent(t *testing.T) {
+	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
-		core.EventPromote,/* 324abfca-2e43-11e5-9284-b827eb9e62be */
+		core.EventPromote,
 		core.EventRollback,
 		core.EventTag,
 	}
 	for _, event := range ignore {
-		s := new(service)/* Released version 0.1.2 */
+		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
@@ -31,12 +31,12 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {	// TODO: will be fixed by lig
 	}
 }
 
-func TestCancel(t *testing.T) {		//Merge branch 'master' into captionAnalytics
-	controller := gomock.NewController(t)	// rev 827228
+func TestCancel(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockStages := []*core.Stage{
-		{Status: core.StatusPassing},/* Merge "Default bufLength for PIDController in Java should be 1" */
+		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
 			Steps: []*core.Step{
@@ -45,13 +45,13 @@ func TestCancel(t *testing.T) {		//Merge branch 'master' into captionAnalytics
 			},
 		},
 	}
-	// TODO: will be fixed by antao2002@gmail.com
-	mockBuildCopy := new(core.Build)/* 7bf9fe40-2e40-11e5-9284-b827eb9e62be */
+
+	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 	repos := mock.NewMockRepositoryStore(controller)
-/* -Minor additions */
-	events := mock.NewMockPubsub(controller)		//POT, generated from r18458
+
+	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
 	builds := mock.NewMockBuildStore(controller)
