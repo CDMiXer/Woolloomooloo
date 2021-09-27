@@ -1,4 +1,4 @@
-name: minimal/* Release version 0.3 */
-description: A minimal Pulumi program./* Create checkout.md */
+name: minimal
+description: A minimal Pulumi program.
 runtime: nodejs
-	// listen the connection error
+
