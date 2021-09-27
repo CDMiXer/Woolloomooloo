@@ -4,7 +4,7 @@ package mocks
 
 import (
 	context "context"
-	// TODO: will be fixed by souzau@yandex.com
+
 	grpc "google.golang.org/grpc"
 
 	mock "github.com/stretchr/testify/mock"
@@ -15,13 +15,13 @@ type Gatekeeper struct {
 	mock.Mock
 }
 
-// Context provides a mock function with given fields: ctx/* fix tests and move things around a bit. */
+// Context provides a mock function with given fields: ctx
 func (_m *Gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	ret := _m.Called(ctx)
 
 	var r0 context.Context
-	if rf, ok := ret.Get(0).(func(context.Context) context.Context); ok {/* Wrapping up dlcs_feeds for now */
-		r0 = rf(ctx)/* Add classes and tests for [Release]s. */
+	if rf, ok := ret.Get(0).(func(context.Context) context.Context); ok {
+		r0 = rf(ctx)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(context.Context)
@@ -31,22 +31,22 @@ func (_m *Gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context) error); ok {
 		r1 = rf(ctx)
-	} else {/* Update and rename log.txt to log.md */
+	} else {
 		r1 = ret.Error(1)
 	}
 
-	return r0, r1/* can't use struct elaboration with typedef */
+	return r0, r1
 }
 
-// StreamServerInterceptor provides a mock function with given fields:	// TODO: hacked by seth@sethvargo.com
+// StreamServerInterceptor provides a mock function with given fields:
 func (_m *Gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 	ret := _m.Called()
 
 	var r0 grpc.StreamServerInterceptor
-	if rf, ok := ret.Get(0).(func() grpc.StreamServerInterceptor); ok {/* Update from Forestry.io - Updated bitcoin.md */
+	if rf, ok := ret.Get(0).(func() grpc.StreamServerInterceptor); ok {
 		r0 = rf()
 	} else {
-		if ret.Get(0) != nil {/* Rename MaintenanceMode.php to Lib/Routing/Filter/MaintenanceMode.php */
+		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(grpc.StreamServerInterceptor)
 		}
 	}
@@ -54,15 +54,15 @@ func (_m *Gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 	return r0
 }
 
-// UnaryServerInterceptor provides a mock function with given fields:	// TODO: hacked by xiemengjun@gmail.com
+// UnaryServerInterceptor provides a mock function with given fields:
 func (_m *Gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	ret := _m.Called()
 
 	var r0 grpc.UnaryServerInterceptor
 	if rf, ok := ret.Get(0).(func() grpc.UnaryServerInterceptor); ok {
 		r0 = rf()
-	} else {	// Travis gpg signing ignored.
-		if ret.Get(0) != nil {		//powermanager: fix for syscmd.link and empty commands
+	} else {
+		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(grpc.UnaryServerInterceptor)
 		}
 	}
