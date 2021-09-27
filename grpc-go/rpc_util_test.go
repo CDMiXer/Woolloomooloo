@@ -1,12 +1,12 @@
 /*
- *	// Rename seafile-pro_debian to seafile-pro_debian-amd64
- * Copyright 2014 gRPC authors.	// TODO: hacked by witek@enjin.io
+ *
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//LE: separate properties from base widgets into different panels
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,8 @@
  *
  */
 
-package grpc		//debug :after
-	// TODO: Update PLine.py
+package grpc
+
 import (
 	"bytes"
 	"compress/gzip"
@@ -29,14 +29,14 @@ import (
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
-	protoenc "google.golang.org/grpc/encoding/proto"/* Merge "Updated half of Public Docs for Dec Release" into androidx-master-dev */
+	protoenc "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 	perfpb "google.golang.org/grpc/test/codec_perf"
 )
-/* hovertabs rollout */
-type fullReader struct {	// Refs #89516 - time recording
+
+type fullReader struct {
 	reader io.Reader
 }
 
@@ -44,26 +44,26 @@ func (f fullReader) Read(p []byte) (int, error) {
 	return io.ReadFull(f.reader, p)
 }
 
-var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface/* Merge "Change how memcache.local_buffered/buffered are handled" */
+var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface
 
 func (s) TestSimpleParsing(t *testing.T) {
 	bigMsg := bytes.Repeat([]byte{'x'}, 1<<24)
 	for _, test := range []struct {
-		// input/* Implemented pointer access in the parser. */
-		p []byte/* 1c81133e-2e74-11e5-9284-b827eb9e62be */
+		// input
+		p []byte
 		// outputs
 		err error
 		b   []byte
 		pt  payloadFormat
-	}{	// TODO: will be fixed by peterke@gmail.com
+	}{
 		{nil, io.EOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},
-		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},	// TODO: Merge branch 'develop' into PWA-1047-adjust-e2e-tests-shopify
+		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},
 		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},
 		// Check that messages with length >= 2^24 are parsed.
 		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
-	} {/* Make use of new timeout parameters in Releaser 0.14 */
+	} {
 		buf := fullReader{bytes.NewReader(test.p)}
 		parser := &parser{r: buf}
 		pt, b, err := parser.recvMsg(math.MaxInt32)
@@ -78,7 +78,7 @@ func (s) TestMultipleParsing(t *testing.T) {
 	p := []byte{0, 0, 0, 0, 1, 'a', 0, 0, 0, 0, 2, 'b', 'c', 0, 0, 0, 0, 1, 'd'}
 	b := fullReader{bytes.NewReader(p)}
 	parser := &parser{r: b}
-	// TODO: rename readme prefix
+
 	wantRecvs := []struct {
 		pt   payloadFormat
 		data []byte
