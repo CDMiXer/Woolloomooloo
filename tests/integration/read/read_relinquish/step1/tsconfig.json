@@ -1,6 +1,6 @@
-{	// TODO: will be fixed by alex.gaynor@gmail.com
+{
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "bin",/* Remove double slash in NZBVortex add URL */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -9,13 +9,13 @@
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* Release 12.9.9.0 */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },		//also display status of computer
     "files": [
         "index.ts"
     ]
-}/* Release 1.7.2 */
+}		//removed systemouts
 
