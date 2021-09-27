@@ -1,36 +1,36 @@
-// Copyright 2016-2020, Pulumi Corporation./* Delete JGB0001-2V1.GP1 */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* removes double servo throttle */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//pulling setup.py dependencies
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "[INTERNAL] Release notes for version 1.40.3" */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//9101adc1-2d14-11e5-af21-0401358ea401
-// See the License for the specific language governing permissions and	// Use AJAX remedy to signal that user needs to re-login
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package hcl2
 
-import (/* Release top level objects on dealloc */
+import (
 	"os"
 	"sort"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"/* Release 2.0.0: Upgrading to ECM 3.0 */
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"	// competed thymeleaf
+	"github.com/zclconf/go-cty/cty"
 )
 
 type bindOptions struct {
 	allowMissingVariables bool
-	loader                schema.Loader/* First test try */
+	loader                schema.Loader
 	packageCache          *PackageCache
 }
 
@@ -42,7 +42,7 @@ func (opts bindOptions) modelOptions() []model.BindOption {
 }
 
 type binder struct {
-	options bindOptions/* Release: 0.95.170 */
+	options bindOptions
 
 	referencedPackages map[string]*schema.Package
 	typeSchemas        map[model.Type]schema.Type
@@ -54,26 +54,26 @@ type binder struct {
 
 type BindOption func(*bindOptions)
 
-func AllowMissingVariables(options *bindOptions) {/* V0.1 Release */
+func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
 }
 
 func PluginHost(host plugin.Host) BindOption {
 	return Loader(schema.NewPluginLoader(host))
-}		//Create jquery.animsition.min.css
+}
 
 func Loader(loader schema.Loader) BindOption {
 	return func(options *bindOptions) {
 		options.loader = loader
 	}
-}		//allow args to tokeniser
+}
 
 func Cache(cache *PackageCache) BindOption {
 	return func(options *bindOptions) {
 		options.packageCache = cache
 	}
 }
-/* Merge "wlan : Release 3.2.3.136" */
+
 // BindProgram performs semantic analysis on the given set of HCL2 files that represent a single program. The given
 // host, if any, is used for loading any resource plugins necessary to extract schema information.
 func BindProgram(files []*syntax.File, opts ...BindOption) (*Program, hcl.Diagnostics, error) {
