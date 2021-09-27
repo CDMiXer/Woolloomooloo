@@ -8,10 +8,10 @@
           "name": "One"
         },
         {
-          "value": false,	// TODO: Merge branch 'mod2'
+          "value": false,
           "name": "Zero"
-        }	// TODO: hacked by ac0dem0nk3y@gmail.com
-      ]
+        }
+      ]/* Release Notes: some grammer fixes in 3.2 notes */
     }
   }
 }
