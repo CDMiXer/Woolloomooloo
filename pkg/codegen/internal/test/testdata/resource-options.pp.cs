@@ -1,5 +1,5 @@
 using Pulumi;
-using Aws = Pulumi.Aws;/* Merge "net: rmnet_data: remove NOARP flags for the virtual net device" */
+using Aws = Pulumi.Aws;
 
 class MyStack : Stack
 {
@@ -19,12 +19,12 @@ class MyStack : Stack
                 provider,
             },
             Protect = true,
-            IgnoreChanges = /* Create myfile */
-            {	// Fix an out-of-bound bug when falling back on long event ending name
+            IgnoreChanges = 
+            {
                 "bucket",
                 "lifecycleRules[0]",
             },
         });
-    }/* chore(package): update mochawesome to version 3.0.2 */
+    }
 
 }
