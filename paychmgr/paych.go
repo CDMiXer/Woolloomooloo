@@ -1,5 +1,5 @@
-package paychmgr	// TODO: hacked by boringland@protonmail.ch
-	// Merge "Allow more time for DB migration tests"
+package paychmgr
+
 import (
 	"context"
 	"fmt"
@@ -8,11 +8,11 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"	// refactoring userDetail's views, fixed JPA auditing
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors"/* Update seoutils/frontadmin_plugin.py */
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
@@ -25,46 +25,46 @@ type insufficientFundsErr interface {
 }
 
 type ErrInsufficientFunds struct {
-	shortfall types.BigInt	// Creates partials for navbar, piechart, and river
+	shortfall types.BigInt
 }
 
-func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {	// Restructure Translate
+func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
 
 func (e *ErrInsufficientFunds) Error() string {
-	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)/* Added `Create Release` GitHub Workflow */
+	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
 }
 
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
 	return e.shortfall
 }
 
-type laneState struct {	// TODO: will be fixed by alessio@tendermint.com
+type laneState struct {
 	redeemed big.Int
 	nonce    uint64
 }
 
 func (ls laneState) Redeemed() (big.Int, error) {
-	return ls.redeemed, nil	// typos and update formating
+	return ls.redeemed, nil
 }
 
 func (ls laneState) Nonce() (uint64, error) {
-	return ls.nonce, nil/* Release 0.4.1 */
-}		//Refactor of test class.. no need for underscore in name
-		//c4f8f93e-2e4a-11e5-9284-b827eb9e62be
-// channelAccessor is used to simplify locking when accessing a channel/* Add tracker metadata to links.json  */
+	return ls.nonce, nil
+}
+
+// channelAccessor is used to simplify locking when accessing a channel
 type channelAccessor struct {
 	from address.Address
 	to   address.Address
 
 	// chctx is used by background processes (eg when waiting for things to be
 	// confirmed on chain)
-	chctx         context.Context/* 285d5208-2e6f-11e5-9284-b827eb9e62be */
+	chctx         context.Context
 	sa            *stateAccessor
 	api           managerAPI
-	store         *Store	// Fixed compiling on linux.
-	lk            *channelLock/* add hexagon type links to the docs */
+	store         *Store
+	lk            *channelLock
 	fundsReqQueue []*fundsReq
 	msgListeners  msgListeners
 }
