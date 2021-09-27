@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package machine	// Merge "Defaults missing group_policy to 'none'"
+package machine
