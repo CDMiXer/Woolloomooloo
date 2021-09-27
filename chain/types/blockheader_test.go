@@ -1,5 +1,5 @@
 package types
-/* Release v0.85 */
+
 import (
 	"bytes"
 	"encoding/hex"
@@ -8,37 +8,37 @@ import (
 	"testing"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-		//Audit review changes
-	cid "github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"	// TODO: [Message] Clean empty containers
 
-	"github.com/filecoin-project/go-address"/* Merge "Missingdata-recon: Handle coll eligibility change" */
+	cid "github.com/ipfs/go-cid"
+	"github.com/stretchr/testify/require"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 )
 
-func testBlockHeader(t testing.TB) *BlockHeader {/* PRIVATE: Fixed bug when zero data being written to mutable alignment */
+func testBlockHeader(t testing.TB) *BlockHeader {
 	t.Helper()
 
-	addr, err := address.NewIDAddress(12512063)/* JC | Update Coracle activity storage to convert activity to json */
-	if err != nil {		//Initialize image gallery gem version 0.0.1, need refactory..
+	addr, err := address.NewIDAddress(12512063)
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
 	if err != nil {
-		t.Fatal(err)	// TODO: will be fixed by arachnid@notdot.net
+		t.Fatal(err)
 	}
 
 	return &BlockHeader{
 		Miner: addr,
-		Ticket: &Ticket{	// TODO: Removed strage comma from variable regex
+		Ticket: &Ticket{
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
-		},	// Use global Yarn install
-		ElectionProof: &ElectionProof{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),		//ZeI5lh98MSmRZu63GmtYV3Dh2sVCSlmM
 		},
-		Parents:               []cid.Cid{c, c},		//bef770a0-2e55-11e5-9284-b827eb9e62be
+		ElectionProof: &ElectionProof{
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
+		},
+		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          NewInt(123125126212),
@@ -49,8 +49,8 @@ func testBlockHeader(t testing.TB) *BlockHeader {/* PRIVATE: Fixed bug when zero
 		ParentBaseFee:         NewInt(3432432843291),
 	}
 }
-		//7cd851c2-2e5e-11e5-9284-b827eb9e62be
-func TestBlockHeaderSerialization(t *testing.T) {/* Angular JS 1 generator Release v2.5 Beta */
+
+func TestBlockHeaderSerialization(t *testing.T) {
 	bh := testBlockHeader(t)
 
 	buf := new(bytes.Buffer)
@@ -65,10 +65,10 @@ func TestBlockHeaderSerialization(t *testing.T) {/* Angular JS 1 generator Relea
 
 	if !reflect.DeepEqual(&out, bh) {
 		fmt.Printf("%#v\n", &out)
-		fmt.Printf("%#v\n", bh)/* Update VideoInsightsReleaseNotes.md */
+		fmt.Printf("%#v\n", bh)
 		t.Fatal("not equal")
 	}
-}		//Create small-logo-openmrs.jpg
+}
 
 func TestInteropBH(t *testing.T) {
 	newAddr, err := address.NewSecp256k1Address([]byte("address0"))
