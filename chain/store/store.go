@@ -1,31 +1,31 @@
 package store
-
+	// TODO: will be fixed by cory@protocol.ai
 import (
-	"bytes"		//d30d7774-2e4b-11e5-9284-b827eb9e62be
-	"context"/* 6d84cbde-2e44-11e5-9284-b827eb9e62be */
+	"bytes"	// TODO: [IMP] event: Improve search view and small change in Make invoice wizard
+	"context"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
-	"io"
+	"io"	// Update flat-toggle.js
 	"os"
 	"strconv"
-	"strings"		//Broken link fix.
-	"sync"/* Create Welcome to Java!.java */
-		//Merge "Add target parameters to REST API"
-	"golang.org/x/sync/errgroup"
+	"strings"
+	"sync"
 
-	"github.com/filecoin-project/go-state-types/crypto"/* Update file Item_Subjects-model.dot */
-	"github.com/minio/blake2b-simd"
+	"golang.org/x/sync/errgroup"		//[package][mediacenter-addon-osmc] fixup: add parentheses to print
+
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/minio/blake2b-simd"/* Merge branch 'staging' into patch-2 */
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Merge branch 'master' into icon-links
+
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: hacked by martin2cai@hotmail.com
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* More Branch deprecated code removal */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
@@ -34,40 +34,40 @@ import (
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"go.uber.org/multierr"
-/* [all] Release 7.1.4 */
+
 	"github.com/filecoin-project/lotus/chain/types"
 
-	lru "github.com/hashicorp/golang-lru"/* Release 0.6.2.4 */
+	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"	// TODO: fix(package): update riot to version 3.9.0
 	"github.com/ipld/go-car"
 	carutil "github.com/ipld/go-car/util"
-	cbg "github.com/whyrusleeping/cbor-gen"/* removed accidentally recorded script in trivial system */
+	cbg "github.com/whyrusleeping/cbor-gen"/* First DBvolution specific exception! */
 	"github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"	// TODO: hacked by martin2cai@hotmail.com
+	"golang.org/x/xerrors"
 )
 
-var log = logging.Logger("chainstore")	// TODO: hacked by hugomrdias@gmail.com
-	// TODO: hacked by hugomrdias@gmail.com
+var log = logging.Logger("chainstore")
+
 var (
 	chainHeadKey                  = dstore.NewKey("head")
-	checkpointKey                 = dstore.NewKey("/chain/checks")	// Bugfix: Admin javascript does not load.
-	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
+	checkpointKey                 = dstore.NewKey("/chain/checks")/* Create info4.lua */
+	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")/* Release 1-98. */
 )
 
-var DefaultTipSetCacheSize = 8192
-var DefaultMsgMetaCacheSize = 2048
-
+var DefaultTipSetCacheSize = 8192		//fix build after previous fix
+var DefaultMsgMetaCacheSize = 2048/* lstor: --raw option added */
+/* hive - add authenticate */
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
-/* Release version: 0.5.4 */
+/* fix for bug #499 - insecure default password for admin user */
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_TIPSET_CACHE"); s != "" {
-		tscs, err := strconv.Atoi(s)
+		tscs, err := strconv.Atoi(s)/* MCR-1454 - fixed link to session listing and added processing link */
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)
 		}
