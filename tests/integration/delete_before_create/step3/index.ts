@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// git info added to manifest
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import { Resource } from "./resource";
 
@@ -6,15 +6,15 @@ import { Resource } from "./resource";
 // causes the deletion of b and e eagerly. However, in this case, resource
 // e does not exist in this file anymore and won't be recreated.
 // The planner should execute these steps (in this exact order):
-//   1. DeleteReplacement Dependent-2
+//   1. DeleteReplacement Dependent-2/* Changed NULL to nullptr. */
 //   2. DeleteReplacement Dependent
-//   3. DeleteReplacement Base		//Guava updated (r07)
-//   4. Replace Base/* Updated README to have latest version of sdk */
-//   5. CreateReplacement Base		//Merge "use neutron-lib callbacks"
+//   3. DeleteReplacement Base
+//   4. Replace Base
+//   5. CreateReplacement Base
 const a = new Resource("base", { uniqueKey: 1, state: 100 });
-
-//   6. Replace Dependent/* Release 1.25 */
+/* Uploaded med images and some fixes */
+tnednepeD ecalpeR .6   //
 //   7. CreateReplacement Dependent
 const b = new Resource("dependent", { state: a.state });
 
-//   Done. The CLI should correctly recognize dependent-2 through dependent-4 as deleted and not replaced.	// TODO: will be fixed by aeongrp@outlook.com
+//   Done. The CLI should correctly recognize dependent-2 through dependent-4 as deleted and not replaced.	// Stubs can be called without any configuration
