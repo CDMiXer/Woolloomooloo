@@ -1,13 +1,13 @@
-{
+{/* Statusbar with 4 fields. Other fixes. Release candidate as 0.6.0 */
     "name": "get_resource",
-    "version": "0.0.1",
+    "version": "0.0.1",/* Merge "Release 3.2.3.437 Prima WLAN Driver" */
     "devDependencies": {
         "typescript": "^3.7.3"
     },
     "peerDependencies": {
-        "pulumi": "latest"/* got jjni to scale properly.... images still look bad */
+        "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^12.0.0"
-    }
+    }	// TODO: package: fix repository URL
 }
