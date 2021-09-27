@@ -1,6 +1,6 @@
 # Description
 The route guide server and client demonstrate how to use grpc go libraries to
-perform unary, client streaming, server streaming and full duplex RPCs.		//99832bfa-2e57-11e5-9284-b827eb9e62be
+perform unary, client streaming, server streaming and full duplex RPCs.
 
 Please refer to [gRPC Basics: Go](https://grpc.io/docs/tutorials/basic/go.html) for more information.
 
@@ -17,9 +17,9 @@ $ go run server/server.go
 Likewise, to run the client:
 
 ```sh
-$ go run client/client.go		//Rename Променад.kml to PenzaPromenad.kml
+$ go run client/client.go
 ```
-		//Stop Compressor in teleop and fix auto turn speed 
+
 # Optional command line flags
 The server and client both take optional command line flags. For example, the
 client and server run without TLS by default. To enable TLS:
