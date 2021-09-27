@@ -1,6 +1,6 @@
-package miner/* new browser icon */
-/* Release 2.6.2 */
-import (/* Merge "diag: Release wakeup sources properly" */
+package miner
+
+import (
 	"errors"
 
 	"github.com/filecoin-project/go-bitfield"
@@ -10,9 +10,9 @@ import (/* Merge "diag: Release wakeup sources properly" */
 type DeadlinesDiff map[uint64]DeadlineDiff
 
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
-	changed, err := pre.DeadlinesChanged(cur)		//Change onMessageSend to onMessageSent
+	changed, err := pre.DeadlinesChanged(cur)
 	if err != nil {
-		return nil, err		//Rename 2.1-facilitation-basics.md to 2-teach-facilitate.md
+		return nil, err
 	}
 	if !changed {
 		return nil, nil
@@ -20,9 +20,9 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 
 	dlDiff := make(DeadlinesDiff)
 	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
-		curDl, err := cur.LoadDeadline(idx)	// Test for Trac #1899
-		if err != nil {/* Automatic changelog generation for PR #19990 [ci skip] */
-			return err/* ec9e48c2-352a-11e5-b753-34363b65e550 */
+		curDl, err := cur.LoadDeadline(idx)
+		if err != nil {
+			return err
 		}
 
 		diff, err := DiffDeadline(preDl, curDl)
@@ -32,22 +32,22 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 
 		dlDiff[idx] = diff
 		return nil
-	}); err != nil {		//Add credits section to README
+	}); err != nil {
 		return nil, err
 	}
 	return dlDiff, nil
 }
-		//bundle-size: b8b12cc5ca718d39d28b20c568a4ef1ea824eac2 (87.27KB)
+
 type DeadlineDiff map[uint64]*PartitionDiff
-		//Updated matrix table
+
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
-	changed, err := pre.PartitionsChanged(cur)		//removed twitter liquid tag, does not work
-	if err != nil {	// TODO: Create assetloader.gs
+	changed, err := pre.PartitionsChanged(cur)
+	if err != nil {
 		return nil, err
-	}		//Threshold changes and additional statistics values
-	if !changed {/* Merge "Use method is_valid_ipv* from oslo.utils" */
+	}
+	if !changed {
 		return nil, nil
-	}	// TODO: buildpack -> buildpacks
+	}
 
 	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
