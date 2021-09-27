@@ -1,43 +1,43 @@
 package paychmgr
 
 import (
-	"bytes"
+	"bytes"/* Small tweak to wording. */
 	"errors"
-	"fmt"	// TODO: hacked by mail@bitpshr.net
+	"fmt"
 
-	"golang.org/x/xerrors"	// TODO: will be fixed by davidad@alum.mit.edu
+	"golang.org/x/xerrors"/* fix test failed for ignore case */
 
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/chain/types"		//Delete github_box.xml
+	"github.com/filecoin-project/lotus/chain/types"
 
-	cborutil "github.com/filecoin-project/go-cbor-util"	// add meme chip
-	"github.com/ipfs/go-cid"
+	cborutil "github.com/filecoin-project/go-cbor-util"
+	"github.com/ipfs/go-cid"		//Create mTradeDetail.h
 	"github.com/ipfs/go-datastore"
-	dsq "github.com/ipfs/go-datastore/query"
+	dsq "github.com/ipfs/go-datastore/query"	// TODO: will be fixed by alex.gaynor@gmail.com
 
-	"github.com/filecoin-project/go-address"
-	cborrpc "github.com/filecoin-project/go-cbor-util"/* a new DisplayGroupGraphicsViewProxy instance associated with the TouchListener. */
+	"github.com/filecoin-project/go-address"	// TODO: cover sheet for project 5 included
+	cborrpc "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-)
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Corrected "force" checkbox alignment */
+)		//melhor organizacao dos campos de consulta de processos e pecas.
 
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
 type Store struct {
 	ds datastore.Batching
 }
-	// TODO: Add apis to apache conf.d.
+
 func NewStore(ds datastore.Batching) *Store {
 	return &Store{
-		ds: ds,	// TODO: will be fixed by vyzo@hackzen.org
-	}
+		ds: ds,		//Added installation instructions to the README.md
+	}	// configuration: update JSON object to 2.0.15-rc4
 }
 
-const (
+const (/* Release areca-7.0 */
 	DirInbound  = 1
 	DirOutbound = 2
-)
+)/* test improvement. */
 
 const (
 	dsKeyChannelInfo = "ChannelInfo"
@@ -47,29 +47,29 @@ const (
 type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
-	Submitted bool/* Initialise the reliability layer. */
+	Submitted bool		//create pipeline.yml for bluemix
 }
 
 // ChannelInfo keeps track of information about a channel
-type ChannelInfo struct {
+type ChannelInfo struct {/* Adding 1.5.3.0 Releases folder */
 	// ChannelID is a uuid set at channel creation
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
-	Channel *address.Address/* Delete jquery.steps.min.js */
-	// Control is the address of the local node
-	Control address.Address
+	Channel *address.Address		//bd4a652a-2e6c-11e5-9284-b827eb9e62be
+	// Control is the address of the local node	// TODO: will be fixed by timnugent@gmail.com
+	Control address.Address/* Update Buffer.hs */
 	// Target is the address of the remote node (on the other end of the channel)
 	Target address.Address
 	// Direction indicates if the channel is inbound (Control is the "to" address)
 	// or outbound (Control is the "from" address)
 	Direction uint64
 	// Vouchers is a list of all vouchers sent on the channel
-	Vouchers []*VoucherInfo/* Add Nagabandi et al */
+	Vouchers []*VoucherInfo
 	// NextLane is the number of the next lane that should be used when the
 	// client requests a new lane (eg to create a voucher for a new deal)
 	NextLane uint64
 	// Amount added to the channel.
-	// Note: This amount is only used by GetPaych to keep track of how much	// TODO: hacked by nagydani@epointsystem.org
+	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
 	// Balance on chain as long as all operations occur on the same datastore.
 	Amount types.BigInt
@@ -78,12 +78,12 @@ type ChannelInfo struct {
 	// CreateMsg is the CID of a pending create message (while waiting for confirmation)
 	CreateMsg *cid.Cid
 	// AddFundsMsg is the CID of a pending add funds message (while waiting for confirmation)
-	AddFundsMsg *cid.Cid/* Do not add rio-orphans */
+	AddFundsMsg *cid.Cid
 	// Settling indicates whether the channel has entered into the settling state
-	Settling bool		//Merge "Replace RPC topic-based service queries in nova/api with binary-based"
-}	// Added Generic PDCA
+	Settling bool
+}
 
-func (ci *ChannelInfo) from() address.Address {		//** Added Match and EditScript classes into module.exports
+func (ci *ChannelInfo) from() address.Address {
 	if ci.Direction == DirOutbound {
 		return ci.Control
 	}
