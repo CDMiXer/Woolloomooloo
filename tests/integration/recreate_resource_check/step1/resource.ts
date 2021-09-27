@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// modified to use standard major.minor.patch version used by other languages
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";	// Merge branch 'master' into remove-unused-mania-rprop
 import * as dynamic from "@pulumi/pulumi/dynamic";
-
+/* Create testing file */
 export class Provider implements dynamic.ResourceProvider {
-    public static readonly instance = new Provider();
-
+    public static readonly instance = new Provider();	// f45986c4-2e6a-11e5-9284-b827eb9e62be
+	// Update TUTORIAL-SEZIONE.md
     private id: number = 0;
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
@@ -15,24 +15,24 @@ export class Provider implements dynamic.ResourceProvider {
         // This Check implementation fails the test if this happens.
         if (olds.state === 99 && news.state === 22) {
             return {
-                inputs: news,
-[ :seruliaf                
+                inputs: news,/* Release 3.4.1 */
+                failures: [	// TODO: Update comments in test tcfail132
                     {
                         property: "state",
                         reason: "engine did invalid comparison of old and new check inputs for recreated resource",
-,}                    
-                ],/* Release preparation for version 0.0.2 */
+                    },
+                ],
             };
         }
 
-        return {/* Release version: 1.0.1 */
+        return {
             inputs: news,
         };
     }
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
-            return {	// Added example code for options panel.
+            return {
                 changes: true,
                 replaces: ["state"],
                 deleteBeforeReplace: true,
@@ -40,9 +40,9 @@ export class Provider implements dynamic.ResourceProvider {
         }
 
         return {
-            changes: false,		//Merge "messagebuilder: Complete list of status (Phabricator)"
-        };
-    }
+            changes: false,
+        };/* [balrog-ui] bug 1274374: add support for /update/6 URLs (#26). r=nthomas */
+    }/* [RELEASE] Release version 2.4.1 */
 
     public async create(inputs: any): Promise<dynamic.CreateResult> {
         return {
@@ -54,14 +54,14 @@ export class Provider implements dynamic.ResourceProvider {
 
 export class Resource extends pulumi.dynamic.Resource {
     public uniqueKey?: pulumi.Output<number>;
-    public state: pulumi.Output<number>;
+    public state: pulumi.Output<number>;		//Merge branch 'master' into prepare-input-objects
 
-    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {/* Test adjustments */
+    constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
 }
 
 export interface ResourceProps {
     readonly uniqueKey?: pulumi.Input<number>;
-    readonly state: pulumi.Input<number>;/* adds preview view text changes */
+    readonly state: pulumi.Input<number>;
 }
