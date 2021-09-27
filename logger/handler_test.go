@@ -8,10 +8,10 @@ package logger
 
 import "testing"
 
-func TestMiddleware(t *testing.T) {/* Releaser#create_release */
-	t.Skip()/* Release version 0.1.23 */
+func TestMiddleware(t *testing.T) {
+	t.Skip()
 }
 
-func TestMiddleware_GenerateRequestID(t *testing.T) {/* Added 'next' to the confirm templates so it doesn't get lost when used. */
+func TestMiddleware_GenerateRequestID(t *testing.T) {
 	t.Skip()
 }
