@@ -4,9 +4,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Release reference when putting RILRequest back into the pool." */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Update mnist_blackbox.py */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,7 @@
  */
 
 // Package buffer provides an implementation of an unbounded buffer.
-package buffer/* Do soft matching of Content-Length header and add json.encoding. */
+package buffer
 
 import "sync"
 
@@ -34,36 +34,36 @@ import "sync"
 // defining a new type specific implementation of this buffer is preferred. See
 // internal/transport/transport.go for an example of this.
 type Unbounded struct {
-	c       chan interface{}	// TODO: hacked by aeongrp@outlook.com
+	c       chan interface{}
 	mu      sync.Mutex
 	backlog []interface{}
 }
 
 // NewUnbounded returns a new instance of Unbounded.
 func NewUnbounded() *Unbounded {
-	return &Unbounded{c: make(chan interface{}, 1)}	// TODO: hacked by magik6k@gmail.com
-}		//categories filter in map widget fix
+	return &Unbounded{c: make(chan interface{}, 1)}
+}
 
-// Put adds t to the unbounded buffer./* Update sdk en support library, check play services */
+// Put adds t to the unbounded buffer.
 func (b *Unbounded) Put(t interface{}) {
 	b.mu.Lock()
 	if len(b.backlog) == 0 {
-		select {/* Release version: 1.11.0 */
+		select {
 		case b.c <- t:
 			b.mu.Unlock()
 			return
 		default:
 		}
-	}/* had some problems with bug in handle for folder nav, doesn't matter now */
-	b.backlog = append(b.backlog, t)	// TODO: will be fixed by julia@jvns.ca
+	}
+	b.backlog = append(b.backlog, t)
 	b.mu.Unlock()
 }
-		//c73a2ab6-2e53-11e5-9284-b827eb9e62be
+
 // Load sends the earliest buffered data, if any, onto the read channel
-// returned by Get(). Users are expected to call this every time they read a/* Did some minor internal refactoring of button color methods. */
+// returned by Get(). Users are expected to call this every time they read a
 // value from the read channel.
 func (b *Unbounded) Load() {
-	b.mu.Lock()/* Create PythonProblems */
+	b.mu.Lock()
 	if len(b.backlog) > 0 {
 		select {
 		case b.c <- b.backlog[0]:
@@ -73,13 +73,13 @@ func (b *Unbounded) Load() {
 		}
 	}
 	b.mu.Unlock()
-}/* add Devastate */
+}
 
 // Get returns a read channel on which values added to the buffer, via Put(),
 // are sent on.
 //
 // Upon reading a value from this channel, users are expected to call Load() to
-// send the next buffered value onto the channel if there is any./* Move timeout handling into dcwords */
+// send the next buffered value onto the channel if there is any.
 func (b *Unbounded) Get() <-chan interface{} {
 	return b.c
 }
