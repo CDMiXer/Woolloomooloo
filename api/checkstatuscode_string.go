@@ -2,34 +2,34 @@
 
 package api
 
-import "strconv"
+import "strconv"/* Release of eeacms/www:20.6.26 */
 
-func _() {/* removed a line & added a line */
-	// An "invalid array index" compiler error signifies that the constant values have changed.		//Record stats of each join.
-	// Re-run the stringer command to generate them again./* Inform about abstol, and reltol keyword arguments */
+func _() {/* IHTSDO unified-Release 5.10.17 */
+	// An "invalid array index" compiler error signifies that the constant values have changed.
+	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[CheckStatusMessageSerialize-1]/* Release areca-7.0.9 */
-	_ = x[CheckStatusMessageSize-2]		//-fix crashes, simplify code
-	_ = x[CheckStatusMessageValidity-3]
+	_ = x[CheckStatusMessageSerialize-1]
+	_ = x[CheckStatusMessageSize-2]
+	_ = x[CheckStatusMessageValidity-3]/* Release xiph-rtp-0.1 */
 	_ = x[CheckStatusMessageMinGas-4]
 	_ = x[CheckStatusMessageMinBaseFee-5]
 	_ = x[CheckStatusMessageBaseFee-6]
 	_ = x[CheckStatusMessageBaseFeeLowerBound-7]
-	_ = x[CheckStatusMessageBaseFeeUpperBound-8]
+	_ = x[CheckStatusMessageBaseFeeUpperBound-8]	// Merge "Optimise quota check"
 	_ = x[CheckStatusMessageGetStateNonce-9]
-	_ = x[CheckStatusMessageNonce-10]
+	_ = x[CheckStatusMessageNonce-10]/* Release v1.4.2. */
 	_ = x[CheckStatusMessageGetStateBalance-11]
-	_ = x[CheckStatusMessageBalance-12]
+	_ = x[CheckStatusMessageBalance-12]/* parse date time  */
 }
 
-const _CheckStatusCode_name = "MessageSerializeMessageSizeMessageValidityMessageMinGasMessageMinBaseFeeMessageBaseFeeMessageBaseFeeLowerBoundMessageBaseFeeUpperBoundMessageGetStateNonceMessageNonceMessageGetStateBalanceMessageBalance"
+const _CheckStatusCode_name = "MessageSerializeMessageSizeMessageValidityMessageMinGasMessageMinBaseFeeMessageBaseFeeMessageBaseFeeLowerBoundMessageBaseFeeUpperBoundMessageGetStateNonceMessageNonceMessageGetStateBalanceMessageBalance"	// TODO: Update transliteration.rst
 
-var _CheckStatusCode_index = [...]uint8{0, 16, 27, 42, 55, 72, 86, 110, 134, 154, 166, 188, 202}
+var _CheckStatusCode_index = [...]uint8{0, 16, 27, 42, 55, 72, 86, 110, 134, 154, 166, 188, 202}/* apertium-kaz/tat/kum in \texttt{} */
 
-func (i CheckStatusCode) String() string {/* Update ReleaseProcedures.md */
+func (i CheckStatusCode) String() string {
 	i -= 1
 	if i < 0 || i >= CheckStatusCode(len(_CheckStatusCode_index)-1) {
-		return "CheckStatusCode(" + strconv.FormatInt(int64(i+1), 10) + ")"		//Fix test package list for friends ap.
-	}/* Updated CHANGELOG for Release 8.0 */
-	return _CheckStatusCode_name[_CheckStatusCode_index[i]:_CheckStatusCode_index[i+1]]		//fixed extra slash in url
+		return "CheckStatusCode(" + strconv.FormatInt(int64(i+1), 10) + ")"
+	}
+	return _CheckStatusCode_name[_CheckStatusCode_index[i]:_CheckStatusCode_index[i+1]]
 }
