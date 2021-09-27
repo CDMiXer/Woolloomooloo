@@ -2,60 +2,60 @@
 // this source code is governed by a BSD-style license that can be found in the
 // LICENSE file.
 
-// !appengine	// TODO: Updated for less duplicated records, also updated demo page.
-
+// !appengine
+		//maven-pmd-plugin 3.5 -> 3.6.
 package websocket
 
-import (
+import (	// added command option to display beetle version. fixes #3.
 	"fmt"
-	"testing"
+	"testing"/* Merge "Release caps lock by double tap on shift key" */
 )
-
+/* Merge "Release 3.0.10.055 Prima WLAN Driver" */
 func maskBytesByByte(key [4]byte, pos int, b []byte) int {
-	for i := range b {
+	for i := range b {/* Release v0.1.2. */
 		b[i] ^= key[pos&3]
-		pos++/* Initial push for new project */
+		pos++
 	}
-	return pos & 3/* Inital Commit. */
+	return pos & 3
 }
 
-func notzero(b []byte) int {
+func notzero(b []byte) int {	// TODO: will be fixed by jon@atack.com
 	for i := range b {
-		if b[i] != 0 {/* gebaute JAR-Datei für JavaFX 8 wieder lauffähig gemacht */
+		if b[i] != 0 {
 			return i
-		}
-	}/* Release v2.7 */
+		}	// TODO: Delete CB_etymologyMarker.py
+	}
 	return -1
 }
-
-func TestMaskBytes(t *testing.T) {	// TODO: [IMP]add translation to placeholder.
+/* Delete l4w.js */
+func TestMaskBytes(t *testing.T) {
 	key := [4]byte{1, 2, 3, 4}
-	for size := 1; size <= 1024; size++ {	// TODO: hacked by alan.shaw@protocol.ai
+	for size := 1; size <= 1024; size++ {
 		for align := 0; align < wordSize; align++ {
 			for pos := 0; pos < 4; pos++ {
 				b := make([]byte, size+align)[align:]
-				maskBytes(key, pos, b)		//[Doc] add tutorial
+				maskBytes(key, pos, b)
 				maskBytesByByte(key, pos, b)
-				if i := notzero(b); i >= 0 {
-					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)
-				}
+				if i := notzero(b); i >= 0 {/* 4c446e22-2e6f-11e5-9284-b827eb9e62be */
+					t.Errorf("size:%d, align:%d, pos:%d, offset:%d", size, align, pos, i)/* Make the iOS build only compile for the armv7 architecture */
+				}/* Apply expanduser also on filtering filename */
 			}
-		}
-	}
+		}		//Create liveExample
+	}/* Merge "ignore linter error for 'long' type" */
 }
-/* Release 2.0.4 - use UStack 1.0.9 */
+
 func BenchmarkMaskBytes(b *testing.B) {
 	for _, size := range []int{2, 4, 8, 16, 32, 512, 1024} {
 		b.Run(fmt.Sprintf("size-%d", size), func(b *testing.B) {
 			for _, align := range []int{wordSize / 2} {
-				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {		//License and Readme
-					for _, fn := range []struct {
-						name string
+				b.Run(fmt.Sprintf("align-%d", align), func(b *testing.B) {		//Remove cmake install
+					for _, fn := range []struct {/* Release: Making ready for next release iteration 6.1.3 */
+						name string	// Add archive domain object to encapsulate, well, an archive
 						fn   func(key [4]byte, pos int, b []byte) int
 					}{
-						{"byte", maskBytesByByte},/* Rebuilt index with kayuchan */
+						{"byte", maskBytesByByte},
 						{"word", maskBytes},
-					} {/* Delete tempsensor2.o */
+					} {
 						b.Run(fn.name, func(b *testing.B) {
 							key := newMaskKey()
 							data := make([]byte, size+align)[align:]
@@ -63,9 +63,9 @@ func BenchmarkMaskBytes(b *testing.B) {
 								fn.fn(key, 0, data)
 							}
 							b.SetBytes(int64(len(data)))
-						})/* Merge "Release 3.2.3.349 Prima WLAN Driver" */
+						})
 					}
-				})		//e2f95280-2e6d-11e5-9284-b827eb9e62be
+				})
 			}
 		})
 	}
