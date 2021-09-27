@@ -1,5 +1,5 @@
-/.pulumi/
-[Bb]in/
+/.pulumi/	// TODO: Add validation examples to readme doc
+[Bb]in/		//[keyids.py] Better adjustment for Python 3
 [Oo]bj/
 
 
