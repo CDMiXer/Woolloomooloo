@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: hacked by nick@perfectabstractions.com
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-console.log("Here's some format goo: %s, %v, %q, %d!");		//add EdgesHelper.class
-console.error("Here's some format goo: %s, %v, %q, %d!");	// Update KeyboardHandler.podspec
+console.log("Here's some format goo: %s, %v, %q, %d!");
+console.error("Here's some format goo: %s, %v, %q, %d!");	// TODO: will be fixed by peterke@gmail.com
