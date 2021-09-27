@@ -1,4 +1,4 @@
-import pulumi/* Release 1-104. */
+import pulumi
 
 config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
