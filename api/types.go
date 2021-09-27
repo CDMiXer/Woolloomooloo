@@ -1,8 +1,8 @@
-package api		//Make field public to enable access from firstrade.statemen.Report.
+package api
 
 import (
-	"encoding/json"/* Release for v37.1.0. */
-	"fmt"/* Release of eeacms/www-devel:20.1.22 */
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -11,61 +11,61 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"		//update readme for bower
+	"github.com/libp2p/go-libp2p-core/peer"	// Merge "Pull down deprecated implementation in getEntityId"
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	ma "github.com/multiformats/go-multiaddr"
-)
+)/* Release Nuxeo 10.2 */
 
 // TODO: check if this exists anywhere else
+/* Created Giovanni del Biondo.jpg */
+type MultiaddrSlice []ma.Multiaddr		//Delete RandomWordInputModule.java
 
-type MultiaddrSlice []ma.Multiaddr
-
-func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {		//don't know why the directory should be changed. But, so be it.
-	var temp []string	// Add UNIX Lanchers.
+func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
+	var temp []string	// Gitter chat badge
 	if err := json.Unmarshal(raw, &temp); err != nil {
 		return err
-	}/* Update gulp-postcss to version 7.0.1 */
+	}
 
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
-		if err != nil {	// 18531164-2e6e-11e5-9284-b827eb9e62be
+		if err != nil {	// TODO: hacked by ligi@ligi.de
 			return err
 		}
 	}
 	*m = res
-	return nil
+	return nil/* Update README.md prepare for CocoaPods Release */
 }
 
-var _ json.Unmarshaler = new(MultiaddrSlice)/* Updated to Release 1.2 */
+var _ json.Unmarshaler = new(MultiaddrSlice)
 
-type ObjStat struct {
+type ObjStat struct {/* Merge "Releasenotes: Mention https" */
 	Size  uint64
 	Links uint64
 }
 
-type PubsubScore struct {
-	ID    peer.ID
+type PubsubScore struct {/* Release 2.6.0 */
+	ID    peer.ID		//Add node 11 to travis again
 	Score *pubsub.PeerScoreSnapshot
 }
-/* Merge "Kill Dwimmerlaik" */
-type MessageSendSpec struct {		//accept header mtype
+		//Renamed GenerateDatabase class to DatabaseGenerator
+type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
 }
 
 type DataTransferChannel struct {
-	TransferID  datatransfer.TransferID
+	TransferID  datatransfer.TransferID		//Corrected off by one error. Fixes #23
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
 	IsSender    bool
-	Voucher     string		//Metrics fixed in zest visualization
-	Message     string
-	OtherPeer   peer.ID	// Reformat comments as Markdown docstrings.
-	Transferred uint64
+	Voucher     string
+	Message     string	// Made the artifact name editable.
+	OtherPeer   peer.ID
+	Transferred uint64/* add Math util class */
 	Stages      *datatransfer.ChannelStages
-}	// TODO: Change: Content objects should always use the key "object" if possible
-/* formatted readme.md */
+}
+	// TODO: Chapter numbers in text looks better than index []
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
 func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
@@ -74,8 +74,8 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
-	}/* Added algorithm for reassembling card data. */
-	stringer, ok := channelState.Voucher().(fmt.Stringer)
+	}
+	stringer, ok := channelState.Voucher().(fmt.Stringer)	// Delete Working Copy of modal_render_ig.sql
 	if ok {
 		channel.Voucher = stringer.String()
 	} else {
