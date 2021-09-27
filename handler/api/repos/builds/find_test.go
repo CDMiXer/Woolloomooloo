@@ -3,19 +3,19 @@
 // that can be found in the LICENSE file.
 
 package builds
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 import (
 	"context"
-	"encoding/json"		//fixing Next Button on Review Show page
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
-	// linkify browse listeners
+
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-"pmc/pmc-og/elgoog/moc.buhtig"	
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestFind(t *testing.T) {
@@ -29,17 +29,17 @@ func TestFind(t *testing.T) {
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
 	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)		//8c267eea-2e51-11e5-9284-b827eb9e62be
+	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 
-	c := new(chi.Context)/* added note on struct tags */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "1")		//playing with Eliza (and commiting the right files this time)
+	c.URLParams.Add("number", "1")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Release 7.2.20 */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleFind(repos, builds, stages)(w, r)
@@ -49,7 +49,7 @@ func TestFind(t *testing.T) {
 	}
 
 	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
-	json.NewDecoder(w.Body).Decode(got)/* Fixed single quotes used when double quotes should be used */
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
@@ -61,22 +61,22 @@ func TestFind_BadRequest(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "one")
 
-	w := httptest.NewRecorder()		//setting up some base classes to get things moving
-	r := httptest.NewRequest("GET", "/", nil)/* Release of eeacms/varnish-eea-www:4.1 */
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
-	// TODO: Inevitable typo onslaught
+
 	HandleFind(nil, nil, nil)(w, r)
 
-	if got, want := w.Code, 400; want != got {/* tcp: Fix sendmsg for non block socket in case of a crowded window */
+	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-	// TODO: dpkg-triggers: deal properly with new package states; 0.7.6ubuntu6
-	got, want := new(errors.Error), &errors.Error{Message: "strconv.ParseInt: parsing \"one\": invalid syntax"}		//#192 FIXING merge error
+
+	got, want := new(errors.Error), &errors.Error{Message: "strconv.ParseInt: parsing \"one\": invalid syntax"}
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)		//fix value reading, only real32 was correct.
+		t.Errorf(diff)
 	}
 }
 
