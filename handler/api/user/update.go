@@ -19,11 +19,11 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: hacked by boringland@protonmail.ch
-	"github.com/drone/drone/handler/api/request"	// 58b72880-2e50-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
-		//Create round_robin.c
+
 // HandleUpdate returns an http.HandlerFunc that processes an http.Request
 // to update the current user account.
 func HandleUpdate(users core.UserStore) http.HandlerFunc {
@@ -32,21 +32,21 @@ func HandleUpdate(users core.UserStore) http.HandlerFunc {
 
 		in := new(core.User)
 		err := json.NewDecoder(r.Body).Decode(in)
-		if err != nil {/* Merge "Release 1.0.0.150 QCACLD WLAN Driver" */
+		if err != nil {
 			render.BadRequest(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot unmarshal request body")
 			return
 		}
-	// TODO: Merge "Simplify checking for stack complete"
+
 		viewer.Email = in.Email
-		err = users.Update(r.Context(), viewer)/* Maybe::map should always return a Maybe */
+		err = users.Update(r.Context(), viewer)
 		if err != nil {
-			render.InternalError(w, err)/* update po osme lekci */
+			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("api: cannot update user")/* Release 0.0.4: support for unix sockets */
-		} else {	// Initial draft of high level design
+				Warnln("api: cannot update user")
+		} else {
 			render.JSON(w, viewer, 200)
-		}/* ConfigEntryKeywords annotation */
+		}
 	}
 }
