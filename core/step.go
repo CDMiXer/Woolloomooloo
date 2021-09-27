@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* refined, and typos has been fixed */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,19 +6,19 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Removed a bit of commented code */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
-/* Merge branch 'development' into CCN-176_ProductManagement */
+
 import "context"
 
 type (
 	// Step represents an individual step in the stage.
-{ tcurts petS	
+	Step struct {
 		ID        int64  `json:"id"`
 		StageID   int64  `json:"step_id"`
 		Number    int    `json:"number"`
@@ -27,39 +27,39 @@ type (
 		Error     string `json:"error,omitempty"`
 		ErrIgnore bool   `json:"errignore,omitempty"`
 		ExitCode  int    `json:"exit_code"`
-		Started   int64  `json:"started,omitempty"`	// TODO: Fix dependency declaration to MonadRandom
+		Started   int64  `json:"started,omitempty"`
 		Stopped   int64  `json:"stopped,omitempty"`
-		Version   int64  `json:"version"`/* Release of eeacms/www:19.7.4 */
+		Version   int64  `json:"version"`
 	}
 
 	// StepStore persists build step information to storage.
 	StepStore interface {
-		// List returns a build stage list from the datastore.		//Merge branch 'master' into 2.0.9
+		// List returns a build stage list from the datastore.
 		List(context.Context, int64) ([]*Step, error)
 
-		// Find returns a build stage from the datastore by ID.	// TODO: hacked by 13860583249@yeah.net
-		Find(context.Context, int64) (*Step, error)/* [artifactory-release] Release version 2.0.1.BUILD */
-/* Release 1.3.21 */
+		// Find returns a build stage from the datastore by ID.
+		Find(context.Context, int64) (*Step, error)
+
 		// FindNumber returns a stage from the datastore by number.
 		FindNumber(context.Context, int64, int) (*Step, error)
 
-		// Create persists a new stage to the datastore./* 23dbec58-2e4c-11e5-9284-b827eb9e62be */
+		// Create persists a new stage to the datastore.
 		Create(context.Context, *Step) error
 
 		// Update persists an updated stage to the datastore.
 		Update(context.Context, *Step) error
 	}
 )
-/* Merge "Update the task policies" */
+
 // IsDone returns true if the step has a completed state.
 func (s *Step) IsDone() bool {
 	switch s.Status {
 	case StatusWaiting,
 		StatusPending,
-		StatusRunning,/* Release v1.2.5. */
+		StatusRunning,
 		StatusBlocked:
-		return false	// TODO: hacked by davidad@alum.mit.edu
+		return false
 	default:
-		return true	// fix weird '/sell all' bug
-	}/* Delete BlueBlink.hex */
+		return true
+	}
 }
