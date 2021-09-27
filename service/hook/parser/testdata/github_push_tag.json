@@ -1,41 +1,41 @@
 {
   "Ref": "refs/tags/v0.0.1",
   "Repo": {
-    "ID": "13933572",
+    "ID": "13933572",/* Release v3.0.0 */
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
+    "Name": "drone-test-go",/* 5.1.0 Release */
     "Perm": null,
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
-    "Link": "https://github.com/bradrydzewski/drone-test-go",/* Update iversonJson.txt */
-    "Created": "0001-01-01T00:00:00Z",		//gamematrix
-    "Updated": "0001-01-01T00:00:00Z"	// TODO: Changed <T> to <E> to match Java collection conventions.
-  },
-  "Commit": {		//Merge branch 'master' into negar/video_facility
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* fdfb1300-2e42-11e5-9284-b827eb9e62be */
+    "Link": "https://github.com/bradrydzewski/drone-test-go",
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"
+  },/* re-enable setting the timezone when clicking */
+  "Commit": {	// TODO: hacked by greg@colvin.org
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
     "Author": {
       "Name": "Brad Rydzewski",
-      "Email": "brad.rydzewski@gmail.com",		//refs #1714, add missing icons.php-template for calendar
-      "Date": "0001-01-01T00:00:00Z",
-      "Login": "bradrydzewski",
+      "Email": "brad.rydzewski@gmail.com",/* I have added encription cucumber-junit */
+      "Date": "0001-01-01T00:00:00Z",	// Update keys nginx configuration
+      "Login": "bradrydzewski",/* Stats_for_Release_notes_exceptionHandling */
       "Avatar": ""
-    },	// TODO: Create xd17-50.html
+    },
     "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
-      "Date": "0001-01-01T00:00:00Z",/* Removed redundant logging config */
+      "Date": "0001-01-01T00:00:00Z",		//Start implementation of main loop
       "Login": "web-flow",
-      "Avatar": ""
+      "Avatar": ""		//new pattern Osc and FM, AM...
     },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
-  },
+  },	// TODO: will be fixed by steven@stebalien.com
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
-}
+}	// First config Page
