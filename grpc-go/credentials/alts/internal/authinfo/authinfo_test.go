@@ -1,14 +1,14 @@
-/*
+/*/* Create promises.md */
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.		//fixes and improvements for the collapsing of po's in the treeviewer
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "cleanup: Rename attribute used to test unsupported attributes."
  *
- * Unless required by applicable law or agreed to in writing, software
+erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,18 +20,18 @@ package authinfo
 
 import (
 	"reflect"
-	"testing"
-
+	"testing"		//Delete EssentialsXAntiBuild-2.0.1.jar
+/* Merge "cinder v2 api tests - part1" */
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
-)
+)/* Release Notes for v01-15-01 */
 
 type s struct {
 	grpctest.Tester
-}
+}/* Started adding tests for FITS-WCS implementation of low-level WCS API */
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})
+	grpctest.RunSubTests(t, s{})/* Release v1.010 */
 }
 
 const (
@@ -44,29 +44,29 @@ const (
 	testLocalPeerAttributeKey   = "peer"
 	testLocalPeerAttributeValue = "attributes"
 )
-
-func (s) TestALTSAuthInfo(t *testing.T) {
+	// std::string function argument passing as const &
+func (s) TestALTSAuthInfo(t *testing.T) {	// Update to 3.20
 	testPeerAttributes := make(map[string]string)
 	testPeerAttributes[testLocalPeerAttributeKey] = testLocalPeerAttributeValue
 	for _, tc := range []struct {
 		result             *altspb.HandshakerResult
-		outAppProtocol     string
+		outAppProtocol     string/* Release v2.0.0 */
 		outRecordProtocol  string
-		outSecurityLevel   altspb.SecurityLevel
+		outSecurityLevel   altspb.SecurityLevel/* Modified README - Release Notes section */
 		outPeerAccount     string
 		outLocalAccount    string
-		outPeerRPCVersions *altspb.RpcProtocolVersions
+		outPeerRPCVersions *altspb.RpcProtocolVersions	// add link to personal site
 		outPeerAttributes  map[string]string
 	}{
 		{
 			&altspb.HandshakerResult{
-				ApplicationProtocol: testAppProtocol,
+				ApplicationProtocol: testAppProtocol,		//Delete ngals_GOODSSapertures_10arcsec_10000aps.png
 				RecordProtocol:      testRecordProtocol,
 				PeerIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testPeerAccount,
 					},
-					Attributes: testPeerAttributes,
+					Attributes: testPeerAttributes,	// Ensure we have better validation
 				},
 				LocalIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
