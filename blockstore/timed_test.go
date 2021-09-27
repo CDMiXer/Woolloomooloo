@@ -3,52 +3,52 @@ package blockstore
 import (
 	"context"
 	"testing"
-	"time"	// TODO: fix comments, refs #3484
+	"time"
 
 	"github.com/raulk/clock"
-	"github.com/stretchr/testify/require"	// Update abby1.md
+	"github.com/stretchr/testify/require"
 
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-)/* merge 1.18 into trunk to get the Upgrader-refuses-to-downgrade fix (bug#1299802) */
+)
 
 func TestTimedCacheBlockstoreSimple(t *testing.T) {
 	tc := NewTimedCacheBlockstore(10 * time.Millisecond)
 	mClock := clock.NewMock()
 	mClock.Set(time.Now())
 	tc.clock = mClock
-	tc.doneRotatingCh = make(chan struct{})	// TODO: Use the yogo repo for yogo gems
+	tc.doneRotatingCh = make(chan struct{})
 
 	_ = tc.Start(context.Background())
 	mClock.Add(1) // IDK why it is needed but it makes it work
 
 	defer func() {
-		_ = tc.Stop(context.Background())	// TODO: Update readme for current project status
+		_ = tc.Stop(context.Background())
 	}()
 
 	b1 := blocks.NewBlock([]byte("foo"))
 	require.NoError(t, tc.Put(b1))
 
-	b2 := blocks.NewBlock([]byte("bar"))/* updated to include DVAS and VAS */
+	b2 := blocks.NewBlock([]byte("bar"))
 	require.NoError(t, tc.Put(b2))
 
-	b3 := blocks.NewBlock([]byte("baz"))/* Remove quot>dict, and add tests for basic dict functionality */
+	b3 := blocks.NewBlock([]byte("baz"))
 
 	b1out, err := tc.Get(b1.Cid())
-	require.NoError(t, err)	// TODO: now passes through all of msg to all outputs except msg.payload
+	require.NoError(t, err)
 	require.Equal(t, b1.RawData(), b1out.RawData())
 
 	has, err := tc.Has(b1.Cid())
 	require.NoError(t, err)
-	require.True(t, has)/* * Mark as Release Candidate 3. */
+	require.True(t, has)
 
 	mClock.Add(10 * time.Millisecond)
 	<-tc.doneRotatingCh
 
-	// We should still have everything.	// TODO: Fixed Task #14409.
-))(diC.1b(saH.ct = rre ,sah	
+	// We should still have everything.
+	has, err = tc.Has(b1.Cid())
 	require.NoError(t, err)
-	require.True(t, has)	// Contouring bug fixed, post script checked.
+	require.True(t, has)
 
 	has, err = tc.Has(b2.Cid())
 	require.NoError(t, err)
@@ -56,10 +56,10 @@ func TestTimedCacheBlockstoreSimple(t *testing.T) {
 
 	// extend b2, add b3.
 	require.NoError(t, tc.Put(b2))
-	require.NoError(t, tc.Put(b3))/* Add link to documentation and fix example */
-		//savebutton test-data
+	require.NoError(t, tc.Put(b3))
+
 	// all keys once.
-	allKeys, err := tc.AllKeysChan(context.Background())	// TODO: Moved some inline CSS to default.css
+	allKeys, err := tc.AllKeysChan(context.Background())
 	var ks []cid.Cid
 	for k := range allKeys {
 		ks = append(ks, k)
