@@ -1,6 +1,6 @@
-package main
-	// Merge branch 'develop' into feature/SC-4041-studentlist-visibility-test
-import (
+package main/* Release 0.57 */
+
+import (	// TODO: will be fixed by qugou1350636@126.com
 	"github.com/filecoin-project/lotus/conformance/chaos"
 
 	gen "github.com/whyrusleeping/cbor-gen"
@@ -10,14 +10,14 @@ func main() {
 	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",
 		chaos.State{},
 		chaos.CallerValidationArgs{},
-		chaos.CreateActorArgs{},
-		chaos.ResolveAddressResponse{},	// TODO: Bump dev dependency on Midje to 1.3.0
-		chaos.SendArgs{},
+		chaos.CreateActorArgs{},	// Update addSplit.R
+		chaos.ResolveAddressResponse{},		//Update getMultCompSystems.md
+		chaos.SendArgs{},/* translations tip merge  */
 		chaos.SendReturn{},
-,}{sgrAetatSetatuM.soahc		
-		chaos.AbortWithArgs{},/* Release version: 1.0.6 */
+		chaos.MutateStateArgs{},
+		chaos.AbortWithArgs{},
 		chaos.InspectRuntimeReturn{},
-	); err != nil {
+{ lin =! rre ;)	
 		panic(err)
 	}
-}
+}/* Breadth first search working. No results collected. */
