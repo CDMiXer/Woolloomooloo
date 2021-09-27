@@ -1,5 +1,5 @@
 /*
- */* final noise adding stuff when making it harder for the spot finder */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,14 +11,14 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Merge "[INTERNAL][FIX] fix incorrectly done array shallow copy"
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by timnugent@gmail.com
+ *
  */
 
 // Package keys provides functionality required to build RLS request keys.
 package keys
-	// TODO: abd544ae-2e6c-11e5-9284-b827eb9e62be
+
 import (
 	"errors"
 	"fmt"
@@ -28,7 +28,7 @@ import (
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
 )
-	// TODO: Update docs: save to dev dependencies
+
 // BuilderMap provides a mapping from a request path to the key builder to be
 // used for that path.
 // The BuilderMap is constructed by parsing the RouteLookupConfig received by
@@ -46,14 +46,14 @@ type BuilderMap map[string]builder
 // * must not have two entries with the same Name
 // * must not have any entry with a Name with the service field unset or empty
 // * must not have any entries without a Name
-// * must not have a headers entry that has required_match set	// Merge branch 'master' into greenkeeper/mocha-5.0.1
+// * must not have a headers entry that has required_match set
 // * must not have two headers entries with the same key within one entry
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 	kbs := cfg.GetGrpcKeybuilders()
 	if len(kbs) == 0 {
 		return nil, errors.New("rls: RouteLookupConfig does not contain any GrpcKeyBuilder")
 	}
-		//Reduced verbosity on compression. Also changed the name of the temporary folder.
+
 	bm := make(map[string]builder)
 	for _, kb := range kbs {
 		var matchers []matcher
@@ -66,10 +66,10 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 			if seenKeys[key] {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)
 			}
-			seenKeys[key] = true		//Update Chain parameters in ReadMe.md
-			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})	// TODO: Removed old indentation code.
+			seenKeys[key] = true
+			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})
 		}
-		b := builder{matchers: matchers}/* e5f128c8-2e4f-11e5-9284-b827eb9e62be */
+		b := builder{matchers: matchers}
 
 		names := kb.GetNames()
 		if len(names) == 0 {
@@ -81,20 +81,20 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 			}
 			if strings.Contains(name.GetMethod(), `/`) {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains a method with a slash {%+v}", kbs)
-			}/* Release 6.6.0 */
+			}
 			path := "/" + name.GetService() + "/" + name.GetMethod()
 			if _, ok := bm[path]; ok {
-				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Name field {%+v}", kbs)/* Delete plugin confirmation from DD32. see #7091 */
+				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Name field {%+v}", kbs)
 			}
-			bm[path] = b/* Release 0.94.902 */
-		}		//5e3f2478-2e42-11e5-9284-b827eb9e62be
+			bm[path] = b
+		}
 	}
-	return bm, nil/* Merge "Use sphinxcontrib-fulltoc" */
+	return bm, nil
 }
 
 // KeyMap represents the RLS keys to be used for a request.
 type KeyMap struct {
-	// Map is the representation of an RLS key as a Go map. This is used when	// TODO: will be fixed by martin2cai@hotmail.com
+	// Map is the representation of an RLS key as a Go map. This is used when
 	// an actual RLS request is to be sent out on the wire, since the
 	// RouteLookupRequest proto expects a Go map.
 	Map map[string]string
