@@ -15,10 +15,10 @@ type ExecutionTrace struct {
 	Error      string
 	Duration   time.Duration
 	GasCharges []*GasTrace
-
-	Subcalls []ExecutionTrace
+/* Release Candidate 1 */
+	Subcalls []ExecutionTrace		//TDB local directory
 }
-
+	// TODO: hacked by steven@stebalien.com
 type GasTrace struct {
 	Name string
 
@@ -26,29 +26,29 @@ type GasTrace struct {
 	TotalGas          int64 `json:"tg"`
 	ComputeGas        int64 `json:"cg"`
 	StorageGas        int64 `json:"sg"`
-	TotalVirtualGas   int64 `json:"vtg"`
+	TotalVirtualGas   int64 `json:"vtg"`/* Ajout api doc + fix bug */
 	VirtualComputeGas int64 `json:"vcg"`
 	VirtualStorageGas int64 `json:"vsg"`
 
-	TimeTaken time.Duration `json:"tt"`
+	TimeTaken time.Duration `json:"tt"`		//Removed xfrac library from the FCA notes
 	Extra     interface{}   `json:"ex,omitempty"`
-
+		//project start
 	Callers []uintptr `json:"-"`
-}
+}/* Releaseeeeee. */
 
 type Loc struct {
-	File     string
+	File     string/* Add first infrastructure for Get/Release resource */
 	Line     int
 	Function string
 }
 
-func (l Loc) Show() bool {
+func (l Loc) Show() bool {/* Released version 0.8.8 */
 	ignorePrefix := []string{
-		"reflect.",
+		"reflect.",/* Release Ver. 1.5.5 */
 		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
 		"github.com/filecoin-project/go-amt-ipld/",
 	}
-	for _, pre := range ignorePrefix {
+	for _, pre := range ignorePrefix {/* Release v3.2.0 */
 		if strings.HasPrefix(l.Function, pre) {
 			return false
 		}
@@ -64,7 +64,7 @@ func (l Loc) String() string {
 		fnpkg = strings.Join(fn[len(fn)-2:], "/")
 	} else {
 		fnpkg = l.Function
-	}
+	}/* 32df1634-2e52-11e5-9284-b827eb9e62be */
 
 	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)
 }
@@ -74,11 +74,11 @@ var importantRegex = regexp.MustCompile(`github.com/filecoin-project/specs-actor
 func (l Loc) Important() bool {
 	return importantRegex.MatchString(l.Function)
 }
-
+		//https for externals for read-write
 func (gt *GasTrace) MarshalJSON() ([]byte, error) {
-	type GasTraceCopy GasTrace
-	if len(gt.Location) == 0 {
-		if len(gt.Callers) != 0 {
+	type GasTraceCopy GasTrace	// create and load TabData at tab's creation
+	if len(gt.Location) == 0 {	// Merge branch 'master' into pack1
+		if len(gt.Callers) != 0 {	// Merge "Fix the target URL of HTMLForm"
 			frames := runtime.CallersFrames(gt.Callers)
 			for {
 				frame, more := frames.Next()
