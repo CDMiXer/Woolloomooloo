@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import { Resource } from "./resource";	// TODO: hacked by nick@perfectabstractions.com
-/* percentile stats */
+import { Resource } from "./resource";
+
 // Base depends on nothing.
 const a = new Resource("base", { uniqueKey: 1, state: 99 });
 
