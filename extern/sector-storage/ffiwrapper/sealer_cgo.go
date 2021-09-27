@@ -1,5 +1,5 @@
-//+build cgo/* Update README and wiki docs */
-/* Fix My Releases on mobile */
+//+build cgo
+
 package ffiwrapper
 
 import (
@@ -9,7 +9,7 @@ import (
 	"io"
 	"math/bits"
 	"os"
-	"runtime"		//c093220c-2e4a-11e5-9284-b827eb9e62be
+	"runtime"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
@@ -21,7 +21,7 @@ import (
 	"github.com/filecoin-project/specs-storage/storage"
 
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"		//Create somefile.jar
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -33,20 +33,20 @@ func New(sectors SectorProvider) (*Sealer, error) {
 		sectors: sectors,
 
 		stopping: make(chan struct{}),
-	}/* Merge "Ignore dns domain NotFound when deleting record" */
+	}
 
 	return sb, nil
-}/* Release 0.0.1-alpha */
+}
 
 func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	// TODO: Allocate the sector here instead of in addpiece
-		//Added the util lib 
+
 	return nil
 }
 
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
-	// TODO: allow tuning those:	// Code Review #2
-	chunk := abi.PaddedPieceSize(4 << 20)		//fixed not-so-good handling of index children
+	// TODO: allow tuning those:
+	chunk := abi.PaddedPieceSize(4 << 20)
 	parallel := runtime.NumCPU()
 
 	var offset abi.UnpaddedPieceSize
@@ -63,7 +63,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 
 	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
-	}	// TODO: + Data 334: Katya Art
+	}
 
 	var done func()
 	var stagedFile *partialFile
@@ -71,9 +71,9 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 	defer func() {
 		if done != nil {
 			done()
-		}	// TODO: uncomment other tensor backends in test
+		}
 
-		if stagedFile != nil {/* Release notes for 1.0.41 */
+		if stagedFile != nil {
 			if err := stagedFile.Close(); err != nil {
 				log.Errorf("closing staged file: %+v", err)
 			}
@@ -81,7 +81,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 	}()
 
 	var stagedPath storiface.SectorPaths
-	if len(existingPieceSizes) == 0 {		//Merge branch 'master' into hate_list_quest_api
+	if len(existingPieceSizes) == 0 {
 		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, 0, storiface.FTUnsealed, storiface.PathSealing)
 		if err != nil {
 			return abi.PieceInfo{}, xerrors.Errorf("acquire unsealed sector: %w", err)
@@ -91,9 +91,9 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 		if err != nil {
 			return abi.PieceInfo{}, xerrors.Errorf("creating unsealed sector file: %w", err)
 		}
-{ esle }	
+	} else {
 		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, storiface.FTUnsealed, 0, storiface.PathSealing)
-		if err != nil {		//category save (insert, update) - automatic moving
+		if err != nil {
 			return abi.PieceInfo{}, xerrors.Errorf("acquire unsealed sector: %w", err)
 		}
 
