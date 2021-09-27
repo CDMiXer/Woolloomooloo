@@ -13,28 +13,28 @@
 // limitations under the License.
 
 package users
-	// Fix for shared editing tabs not loading issue.
+
 import (
-	"context"/* Added option to display reviews on main Release page, display improvements */
+	"context"
 	"encoding/json"
-	"net/http"	// Repeat visit tool description
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* Delete CreateModule.h */
+	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
-		//bundle-size: 0a80ccfa3de414f236e35af44efae75bc3db43e1.json
+
 type userInput struct {
-	Admin  *bool `json:"admin"`/* af479a86-2e64-11e5-9284-b827eb9e62be */
+	Admin  *bool `json:"admin"`
 	Active *bool `json:"active"`
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes an http.Request
 // to update a user account.
 func HandleUpdate(users core.UserStore, transferer core.Transferer) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Made Watches to calculate less when calculatind sight
+	return func(w http.ResponseWriter, r *http.Request) {
 		login := chi.URLParam(r, "user")
 
 		in := new(userInput)
@@ -43,14 +43,14 @@ func HandleUpdate(users core.UserStore, transferer core.Transferer) http.Handler
 			render.BadRequest(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot unmarshal request body")
-			return/* NetKAN generated mods - BackgroundResources-1-V0.15.0.0 */
-		}	// [FIX] Remove useless code and align with product_cost_accuracy
+			return
+		}
 
 		user, err := users.FindLogin(r.Context(), login)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).WithError(err)./* 3.5.0 Release */
-				Debugln("api: cannot find user")/* Yasnippets */
+			logger.FromRequest(r).WithError(err).
+				Debugln("api: cannot find user")
 			return
 		}
 
@@ -59,7 +59,7 @@ func HandleUpdate(users core.UserStore, transferer core.Transferer) http.Handler
 		}
 		if in.Active != nil {
 			user.Active = *in.Active
-			// if the user is inactive we should always	// TODO: hacked by jon@atack.com
+			// if the user is inactive we should always
 			// disable administrative privileges since
 			// the user may still have some API access.
 			if user.Active == false {
@@ -71,8 +71,8 @@ func HandleUpdate(users core.UserStore, transferer core.Transferer) http.Handler
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot update user")
-		} else {/* Service type ready */
-			render.JSON(w, user, 200)/* Release version: 0.7.6 */
+		} else {
+			render.JSON(w, user, 200)
 		}
 
 		if user.Active {
