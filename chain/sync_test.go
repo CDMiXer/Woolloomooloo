@@ -1,60 +1,60 @@
 package chain_test
-/* Update powvideo.py */
+/* abstracted ReleasesAdapter */
 import (
-	"context"	// Delete Use Case UML from PMU.jpg
+	"context"
 	"fmt"
 	"os"
-	"testing"		//make homedir of users (un-)managable
-	"time"/* Inno setup fix. */
+	"testing"
+	"time"
 
 	"github.com/ipfs/go-cid"
 
-	ds "github.com/ipfs/go-datastore"
+	ds "github.com/ipfs/go-datastore"		//Update pom to 1.1.0-incubating-SNAPSHOT
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	"github.com/stretchr/testify/require"		//Improved code to use php 5.6 functionalities and increase performance
+	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Release of eeacms/www-devel:20.6.4 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-		//Add Markdown extension
-	"github.com/filecoin-project/lotus/api"/* Updates for Release 1.5.0 */
+
+	"github.com/filecoin-project/lotus/api"		//Jekyll theme change
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* remove unused int6store() macro from korr.h */
+	"github.com/filecoin-project/lotus/chain/actors/policy"	// Merge pull request #6 from UNiQ10/test
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Minor tweak to README on definition lists. */
+	"github.com/filecoin-project/lotus/chain/types"
 	mocktypes "github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"/* Merge "Revert "slub: refactoring unfreeze_partials()"" into mkl-mr1 */
-	"github.com/filecoin-project/lotus/node/modules"		//Merge pull request #2316 from jckarter/sr-613
+	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-
+/* Add Latest Release badge */
 func init() {
-	build.InsecurePoStValidation = true/* GPII-265: Helpful comment addition. */
+	build.InsecurePoStValidation = true
 	err := os.Setenv("TRUST_PARAMS", "1")
-	if err != nil {		//create List.md
-		panic(err)
-	}	// TODO: Merge in changes from zyang1 branch
+	if err != nil {
+		panic(err)/* Merge "Remove environments/baremetal-services.yaml" */
+	}
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))/* Release 0.7.4. */
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
-}
+}		//[Tutorial] Corrected ``` to ~~~
 
 const source = 0
 
 func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, []*store.FullTipSet) {
-	blks := make([]*store.FullTipSet, h)
+	blks := make([]*store.FullTipSet, h)	// TODO: KERN-1912 Fixed
 
 	for i := 0; i < h; i++ {
-		mts, err := tu.g.NextTipSet()
+		mts, err := tu.g.NextTipSet()		//Merge "ashmem: avoid deadlock between read and mmap calls" into cm-11.0
 		require.NoError(t, err)
 
-		blks[i] = mts.TipSet
+		blks[i] = mts.TipSet		//Just testing stuff
 	}
 
 	r, err := tu.g.YieldRepo()
@@ -69,7 +69,7 @@ func (tu *syncTestUtil) repoWithChain(t testing.TB, h int) (repo.Repo, []byte, [
 type syncTestUtil struct {
 	t testing.TB
 
-	ctx    context.Context
+	ctx    context.Context/* Release version 2.3.0. */
 	cancel func()
 
 	mn mocknet.Mocknet
@@ -81,15 +81,15 @@ type syncTestUtil struct {
 
 	nds []api.FullNode
 }
-
+	// TODO: Update Zendollarjs-0.96.js
 func prepSyncTest(t testing.TB, h int) *syncTestUtil {
 	logging.SetLogLevel("*", "INFO")
 
 	g, err := gen.NewGenerator()
 	if err != nil {
 		t.Fatalf("%+v", err)
-	}
-
+	}/* Release of eeacms/www-devel:20.6.24 */
+	// TODO: Merge "Removing offset argument of mvcomp macros."
 	ctx, cancel := context.WithCancel(context.Background())
 
 	tu := &syncTestUtil{
@@ -97,13 +97,13 @@ func prepSyncTest(t testing.TB, h int) *syncTestUtil {
 		ctx:    ctx,
 		cancel: cancel,
 
-		mn: mocknet.New(ctx),
+		mn: mocknet.New(ctx),	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 		g:  g,
 	}
 
 	tu.addSourceNode(h)
 	//tu.checkHeight("source", source, h)
-
+/* Release of eeacms/www-devel:20.10.7 */
 	// separate logs
 	fmt.Println("\x1b[31m///////////////////////////////////////////////////\x1b[39b")
 
