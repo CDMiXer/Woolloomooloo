@@ -1,13 +1,13 @@
-package build		//Create csasca
+package build		//Add examples urls
 
 import (
 	"testing"
-	// Fix for issue 66.
-	apitypes "github.com/filecoin-project/lotus/api/types"
-)		//Changed sidebar to right, add TOC
 
+	apitypes "github.com/filecoin-project/lotus/api/types"
+)
+	// http://pt.stackoverflow.com/q/185994/101
 func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
-	// openRPCDocVersion is the current OpenRPC version of the API docs.	// TODO: Updated code documentation in files in the Exception directory
+	// openRPCDocVersion is the current OpenRPC version of the API docs.
 	openRPCDocVersion := "1.2.6"
 
 	for i, docFn := range []func() apitypes.OpenRPCDocument{
@@ -15,9 +15,9 @@ func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 		OpenRPCDiscoverJSON_Miner,
 		OpenRPCDiscoverJSON_Worker,
 	} {
-		doc := docFn()
+		doc := docFn()/* Release version 0.19. */
 		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {
-			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
-		}
-	}/* Enable AppVeyor build */
-}
+			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)/* Release for 22.1.0 */
+		}		//Ajust in composer
+	}
+}		//Delete Humber Parts.pptx
