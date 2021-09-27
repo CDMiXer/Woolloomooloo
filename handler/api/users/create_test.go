@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-// that can be found in the LICENSE file./* removing dependency on six */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-package users	// TODO: Update AtomTimePicker.js
+package users
 
 import (
-	"bytes"/* Modificadas las urls para buscar nuevos formatos de impresión. */
+	"bytes"
 	"context"
-	"encoding/json"		//Delete cuteOS.bin
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -19,34 +19,34 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-	// TODO: Changing Circuit functions to make Circuit first class.
-func TestCreate(t *testing.T) {		//:bug: Remove dev things
+
+func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Have the greeter listen to AccountsService for its background file
+	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {/* Release 15.1.0 */
+	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
-		if in.Hash == "" {		//add WikipediaReader
+		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
 		}
 		return nil
-	})/* Change default build config to Release for NuGet packages. */
+	})
 
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-/* Fix sitemap */
+
 	service := mock.NewMockUserService(controller)
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
-/* Release 0.20.3 */
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
-	w := httptest.NewRecorder()	// TODO: hacked by magik6k@gmail.com
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 
-	HandleCreate(users, service, webhook)(w, r)	// TODO: Make achievement list more clear.
+	HandleCreate(users, service, webhook)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
@@ -54,7 +54,7 @@ func TestCreate(t *testing.T) {		//:bug: Remove dev things
 	out := new(core.User)
 	json.NewDecoder(w.Body).Decode(out)
 	if got, want := out.Login, "octocat"; got != want {
-		t.Errorf("Want user login %s, got %s", want, got)		//Add DAA, IATO, STIG; Fix SP 800-53
+		t.Errorf("Want user login %s, got %s", want, got)
 	}
 	if got, want := out.Active, true; got != want {
 		t.Errorf("Want user active %v, got %v", want, got)
