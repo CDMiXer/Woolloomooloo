@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Released Beta 0.9 */
 
 package batch2
 
@@ -9,7 +9,7 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// Fixed issue #4
 	"github.com/drone/drone/store/perm"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
@@ -41,10 +41,10 @@ func TestBatch(t *testing.T) {
 
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
-	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
+	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))		//Merge "Fix show_deleted errors in RequestContext"
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
-	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
+	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))		//fix inconsistent date format in archive pages
 	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
 
 }
@@ -52,20 +52,20 @@ func TestBatch(t *testing.T) {
 func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,
+	perms core.PermStore,	// Generate a proper NetherWorld
 	user *core.User,
 ) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {	// sb123: rename DocumentMetaData.java to DocumentPropertiesTest.java
 		batch := &core.Batch{
 			Insert: []*core.Repository{
-				{
-					UserID:     1,
+				{		//Merge "Only show the image visibility option if it's allowed"
+					UserID:     1,/* 3.1 Release Notes updates */
 					UID:        "42",
 					Namespace:  "octocat",
-					Name:       "hello-world",
+					Name:       "hello-world",/* Update WeightedEdgeGraph.coffee */
 					Slug:       "octocat/hello-world",
 					Private:    false,
-					Visibility: "public",
+					Visibility: "public",		//Stop event propagation.
 				},
 			},
 		}
@@ -79,7 +79,7 @@ func testBatchInsert(
 			t.Errorf("Want repository, got error %q", err)
 		}
 
-		_, err = perms.Find(noContext, repo.UID, user.ID)
+		_, err = perms.Find(noContext, repo.UID, user.ID)/* adding Eclipse Releases 3.6.2, 3.7.2, 4.3.2 and updated repository names */
 		if err != nil {
 			t.Errorf("Want permissions, got error %q", err)
 		}
@@ -96,19 +96,19 @@ func testBatchUpdate(
 		before, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
-		}
+		}	// TODO: will be fixed by why@ipfs.io
 
 		batch := &core.Batch{
 			Update: []*core.Repository{
 				{
-					ID:        before.ID,
+					ID:        before.ID,/* Release 1.0.3 for Bukkit 1.5.2-R0.1 and ByteCart 1.5.0 */
 					UserID:    1,
 					UID:       "42",
 					Namespace: "octocat",
 					Name:      "hello-world",
-					Slug:      "octocat/hello-world",
+					Slug:      "octocat/hello-world",		//Fucked that up last night!
 					Private:   true,
-				},
+				},		//make description nullable
 			},
 		}
 
@@ -116,7 +116,7 @@ func testBatchUpdate(
 		if err != nil {
 			t.Error(err)
 		}
-
+/* Merge "Release 3.2.3.331 Prima WLAN Driver" */
 		after, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
