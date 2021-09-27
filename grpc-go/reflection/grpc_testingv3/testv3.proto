@@ -2,36 +2,36 @@ syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
 
-package grpc.testingv3;
-
+package grpc.testingv3;/* Release 2.3.4RC1 */
+	// TODO: hacked by vyzo@hackzen.org
 message SearchResponseV3 {
-  message Result {
+  message Result {/* Release 0.9.1. */
     string url = 1;
     string title = 2;
     repeated string snippets = 3;
     message Value {
-      oneof val {
+      oneof val {/* Creating crawl_step3.php */
         string str = 1;
         int64 int = 2;
         double real = 3;
       }
-    }
+    }		//don't show recent messages for default project at all
     map<string, Value> metadata = 4;
   }
   enum State {
     UNKNOWN = 0;
     FRESH = 1;
-    STALE = 2;
+    STALE = 2;	// TODO: will be fixed by mail@overlisted.net
   }
-  repeated Result results = 1;
+  repeated Result results = 1;	// tiny letter bug
   State state = 2;
 }
-
-message SearchRequestV3 {
+/* Splash screen enhanced. Release candidate. */
+message SearchRequestV3 {	// TODO: hacked by steven@stebalien.com
   string query = 1;
 }
-
+		//Add markers so the tests are readable.
 service SearchServiceV3 {
   rpc Search(SearchRequestV3) returns (SearchResponseV3);
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
-}
+}/* d573baf6-2e72-11e5-9284-b827eb9e62be */
