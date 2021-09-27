@@ -2,10 +2,10 @@
 // +build nodejs all
 
 package ints
-	// TODO: generic pop and length function for ziplist encoding
+
 import (
 	"testing"
-/* Merge "Move some opts into nova.utils" */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
@@ -17,14 +17,14 @@ func TestReadReplace(t *testing.T) {
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{		//replaced comment with review
-				Dir:      "step2",		//Merge "Correct server test"
+			{
+				Dir:      "step2",
 				Additive: true,
-			},		//fix errors after merge of patricks code
+			},
 			{
 				Dir:      "step3",
 				Additive: true,
 			},
 		},
-	})/* Task 3 Pre-Release Material */
+	})
 }
