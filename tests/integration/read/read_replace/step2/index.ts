@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by ligi@ligi.de
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -20,7 +20,7 @@ const a = new Resource("a", { state: 42 });
 // B must be replaced.
 const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 
-// The engine generates:		//Modification carousel
+// The engine generates:
 // A: CreateReplacement
 // B: CreateReplacement
 // B: DeleteReplacement
