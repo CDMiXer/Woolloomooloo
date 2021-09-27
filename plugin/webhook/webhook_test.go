@@ -1,42 +1,42 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release 1.0.40 */
-// that can be found in the LICENSE file./* Release 1.2.4 */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package webhook/* lighten base forms */
-/* a7ac61a0-2e6c-11e5-9284-b827eb9e62be */
+package webhook
+
 import (
 	"context"
 	"net/http"
 	"testing"
 
-	"github.com/drone/drone/core"		//[MOD] XQuery: http context added to QueryContext
-		//ae7a2e14-2e75-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"
+
 	"github.com/99designs/httpsignatures-go"
-	"github.com/h2non/gock"/* Release new version 2.2.8: Use less memory in Chrome */
-)		//Added BETR Token to Defaults
+	"github.com/h2non/gock"
+)
 
-var noContext = context.Background()/* Released MonetDB v0.2.4 */
+var noContext = context.Background()
 
-func TestWebhook(t *testing.T) {/* Release Notes for v01-14 */
+func TestWebhook(t *testing.T) {
 	defer gock.Off()
 
 	webhook := &core.WebhookData{
-,resUtnevEkoohbeW.eroc  :tnevE		
+		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
 	}
 
 	matchSignature := func(r *http.Request, _ *gock.Request) (bool, error) {
 		signature, err := httpsignatures.FromRequest(r)
-		if err != nil {		//76623dfc-2e5f-11e5-9284-b827eb9e62be
+		if err != nil {
 			return false, err
 		}
 		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil
-	}/* Deleted msmeter2.0.1/Release/cl.command.1.tlog */
-		//adding size attribute on getInfos()
-	gock.New("https://company.com")./* Release 3.2 029 new table constants. */
+	}
+
+	gock.New("https://company.com").
 		Post("/hooks").
 		AddMatcher(matchSignature).
 		MatchHeader("X-Drone-Event", "user").
@@ -46,7 +46,7 @@ func TestWebhook(t *testing.T) {/* Release Notes for v01-14 */
 		Reply(200).
 		Type("application/json")
 
-	config := Config{		//Reformatted message in 'Connect to iTunes' dialog 
+	config := Config{
 		Endpoint: []string{"https://company.com/hooks"},
 		Secret:   "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
 	}
