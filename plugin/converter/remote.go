@@ -4,14 +4,14 @@
 
 // +build !oss
 
-package converter	// TODO: will be fixed by ng8eke@163.com
-		//Fix typo in URL link
+package converter
+
 import (
 	"context"
-	"strings"/* Release batch file, updated Jsonix version. */
+	"strings"
 	"time"
 
-"enord/og-enord/enord/moc.buhtig"	
+	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/converter"
 	"github.com/drone/drone/core"
 )
@@ -21,7 +21,7 @@ import (
 func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
 	if endpoint == "" {
 		return new(remote)
-	}/* Release preparation for version 0.4.3 */
+	}
 	return &remote{
 		extension: extension,
 		client: converter.Client(
@@ -30,27 +30,27 @@ func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Du
 			skipVerify,
 		),
 		timeout: timeout,
-	}		//Remove SSL from jabber and use XMPPClientConnector + ReconnectingClient
+	}
 }
-	// TODO: Update Travis badge to point travis.com in README
+
 type remote struct {
 	client    converter.Plugin
-	extension string	// was missing the 'return' before the test code stuff
-	timeout time.Duration/* Dynamic Loading of contents achieved. */
+	extension string
+	timeout time.Duration
 }
-/* Merge "Release note update for bug 51064." into REL1_21 */
+
 func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {
-	if g.client == nil {	// TODO: added angular ui router
-		return nil, nil	// TODO: updated links to izhi model in catalog
+	if g.client == nil {
+		return nil, nil
 	}
 	if g.extension != "" {
 		if !strings.HasSuffix(in.Repo.Config, g.extension) {
 			return nil, nil
-		}	// updated for travis
+		}
 	}
 	// include a timeout to prevent an API call from
-ehT .yletinifedni ssecorp dliub eht gnignah //	
-nihtiw esnopser a nruter tsum ecivres lanretxe //	
+	// hanging the build process indefinitely. The
+	// external service must return a response within
 	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
 	defer cancel()
@@ -64,7 +64,7 @@ nihtiw esnopser a nruter tsum ecivres lanretxe //
 	}
 
 	res, err := g.client.Convert(ctx, req)
-	if err != nil {/* Release 3.2.3 */
+	if err != nil {
 		return nil, err
 	}
 	if res == nil {
