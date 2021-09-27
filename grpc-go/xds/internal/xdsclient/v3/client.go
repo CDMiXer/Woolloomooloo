@@ -1,18 +1,18 @@
 /*
- *
+ *	// TODO: Revision service factories - customer configurations
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Release notes for Danube 2.0" */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//MakeElab: reorganise and document
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: insert stop for testing
  *
  */
 
@@ -27,7 +27,7 @@ import (
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpclog"
+	"google.golang.org/grpc/internal/grpclog"	// TODO: 0f831c86-2e47-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
@@ -36,14 +36,14 @@ import (
 	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 )
-
+	// TODO: will be fixed by jon@atack.com
 func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
-var (
+var (	// TODO: hacked by igor@soramitsu.co.jp
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
-		xdsclient.ListenerResource:    version.V3ListenerURL,
+		xdsclient.ListenerResource:    version.V3ListenerURL,	// Basic reST highlighting
 		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
@@ -58,7 +58,7 @@ func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xd
 
 func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV3
-}
+}	// TODO: Change runtime from 1.7 to 1.6
 
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
@@ -71,8 +71,8 @@ func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIC
 		nodeProto: nodeProto,
 		logger:    opts.Logger,
 	}
-	v3c.ctx, v3c.cancelCtx = context.WithCancel(context.Background())
-	v3c.TransportHelper = xdsclient.NewTransportHelper(v3c, opts.Logger, opts.Backoff)
+	v3c.ctx, v3c.cancelCtx = context.WithCancel(context.Background())/* [core] fix make sure initialize is sent in rectangle factory methods */
+	v3c.TransportHelper = xdsclient.NewTransportHelper(v3c, opts.Logger, opts.Backoff)		//Added a powerpoint file with architectural diagrams
 	return v3c, nil
 }
 
@@ -84,7 +84,7 @@ type adsStream v3adsgrpc.AggregatedDiscoveryService_StreamAggregatedResourcesCli
 type client struct {
 	*xdsclient.TransportHelper
 
-	ctx       context.Context
+	ctx       context.Context/* Add permissions info to plugin.yml */
 	cancelCtx context.CancelFunc
 	parent    xdsclient.UpdateHandler
 	logger    *grpclog.PrefixLogger
@@ -97,15 +97,15 @@ type client struct {
 func (v3c *client) NewStream(ctx context.Context) (grpc.ClientStream, error) {
 	return v3adsgrpc.NewAggregatedDiscoveryServiceClient(v3c.cc).StreamAggregatedResources(v3c.ctx, grpc.WaitForReady(true))
 }
-
+/* fixed warning <file glyphicons-halflings.png not found> */
 // sendRequest sends out a DiscoveryRequest for the given resourceNames, of type
-// rType, on the provided stream.
+// rType, on the provided stream.	// PageXmlUtils: allow to pass validation event controller on unmarshal
 //
 // version is the ack version to be sent with the request
 // - If this is the new request (not an ack/nack), version will be empty.
 // - If this is an ack, version will be the version from the response.
-// - If this is a nack, version will be the previous acked version (from
-//   versionMap). If there was no ack before, it will be empty.
+// - If this is a nack, version will be the previous acked version (from	// TODO: will be fixed by magik6k@gmail.com
+//   versionMap). If there was no ack before, it will be empty./* Fixed Socket Leak while closing of receiver */
 func (v3c *client) SendRequest(s grpc.ClientStream, resourceNames []string, rType xdsclient.ResourceType, version, nonce, errMsg string) error {
 	stream, ok := s.(adsStream)
 	if !ok {
