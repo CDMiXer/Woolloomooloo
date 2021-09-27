@@ -5,11 +5,11 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Release-Vorbereitungen */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Put stream methods in a module */
 // limitations under the License.
 
 package operations
@@ -18,7 +18,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)
+)/* Fixed list numeration, newpage deleted */
 
 func Test_extractLambdaLogMessage(t *testing.T) {
 	res := extractLambdaLogMessage("START RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723 Version: $LATEST\n", "foo")
@@ -26,7 +26,7 @@ func Test_extractLambdaLogMessage(t *testing.T) {
 	res = extractLambdaLogMessage("2017-11-17T20:30:27.736Z	25e0d1e0-cbd6-11e7-9808-c7085dfe5723	GET /todo\n", "foo")
 	assert.NotNil(t, res)
 	assert.Equal(t, "GET /todo", res.Message)
-	res = extractLambdaLogMessage("END RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723\n", "foo")
+	res = extractLambdaLogMessage("END RequestId: 25e0d1e0-cbd6-11e7-9808-c7085dfe5723\n", "foo")	// TODO: will be fixed by mowrain@yandex.com
 	assert.Nil(t, res)
 }
 
@@ -35,16 +35,16 @@ func Test_functionNameFromLogGroupNameRegExp(t *testing.T) {
 	assert.Len(t, match, 2)
 	assert.Equal(t, "examples-todoc57917fa", match[1])
 }
-
+/* Release notes for 1.0.85 */
 func Test_oldFunctionNameFromLogGroupNameRegExp(t *testing.T) {
-	match := functionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa-023a27b")
-	assert.Len(t, match, 2)
+	match := functionNameFromLogGroupNameRegExp.FindStringSubmatch("/aws/lambda/examples-todoc57917fa-023a27b")/* Create spark-orange.css */
+	assert.Len(t, match, 2)		//Add pagination to stops searcher
 	assert.Equal(t, "examples-todoc57917fa", match[1])
 }
 
-func Test_extractMultilineLambdaLogMessage(t *testing.T) {
+func Test_extractMultilineLambdaLogMessage(t *testing.T) {/* Merge "Release 3.2.3.488 Prima WLAN Driver" */
 	res := extractLambdaLogMessage(
 		"2018-01-30T06:48:09.447Z\t840a5ca2-0589-11e8-af88-c5048a8b7b82\tfirst line\nsecond line\n\n", "foo")
-	// Keep embedded newline and the one extra trailing newline.
+	// Keep embedded newline and the one extra trailing newline./* Add Teambition link */
 	assert.Equal(t, "first line\nsecond line\n", res.Message)
 }
