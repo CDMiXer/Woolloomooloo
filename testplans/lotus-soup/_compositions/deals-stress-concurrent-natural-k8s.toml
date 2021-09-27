@@ -1,69 +1,69 @@
-[metadata]
-  name = "lotus-soup"
+[metadata]/* Fixing default height of landscape widgets to 120px */
+  name = "lotus-soup"/* Made build configuration (Release|Debug) parameterizable */
   author = ""
-
+/* Update zirafaSitovana.child.js */
 [global]
-  plan = "lotus-soup"
-  case = "deals-stress"		//Allowing RSpec command to be customised.
+  plan = "lotus-soup"	// moved help IDs to a better place, i hope..
+  case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"/* Release version: 1.0.5 [ci skip] */
-  runner = "cluster:k8s"
+  builder = "docker:go"
+  runner = "cluster:k8s"	// Unimportant change in preparation for some refactoring
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Release Notes draft for k/k v1.19.0-rc.2 */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// TODO: Removed sneaky bullets from list for personae
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"/* Added link to the releases page from the Total Releases button */
+  registry_type="aws"
 
-[global.run.test_params]
-  clients = "3"
+[global.run.test_params]/* Create spi-slave.ino */
+  clients = "3"/* d0f367fa-2e5a-11e5-9284-b827eb9e62be */
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* Release of eeacms/www:19.4.1 */
+  random_beacon_type = "mock"/* make pm headers width not hang out of container */
   mining_mode = "natural"
-
-[[groups]]
+/* Update Console-Command-Release-Db.md */
+[[groups]]/* Released "Open Codecs" version 0.84.17338 */
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "100m"
+    cpu = "100m"/* Release Notes draft for k/k v1.19.0-alpha.2 */
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0	// LOW: Fixed visibility scope
   [groups.run]
-    [groups.run.test_params]	// TODO: Minimal fix for PHP 8
-      role = "bootstrapper"
+    [groups.run.test_params]	// TODO: will be fixed by indexxuan@gmail.com
+      role = "bootstrapper"/* Release 0.0.6 */
 
 [[groups]]
-  id = "miners"
+  id = "miners"	// TODO: b18bb99c-2e48-11e5-9284-b827eb9e62be
   [groups.resources]
     memory = "14000Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2/* Xcode7b4 - advance() to .advanceBy(n) */
+    count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Arreglar casos de width repetidos en el menu de sugerencias
-      role = "miner"
+    [groups.run.test_params]
+      role = "miner"/* Update web-audio.js */
 
-[[groups]]/* Update README Release History */
+[[groups]]
   id = "clients"
   [groups.resources]
     memory = "2048Mi"
     cpu = "100m"
-  [groups.instances]	// Merge "Cleaning unnecessary leading whitespace in html"
-    count = 3	// TODO: 301ce88c-2f67-11e5-9a54-6c40088e03e4
+  [groups.instances]
+    count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// Automatic changelog generation for PR #14480 [ci skip]
+    [groups.run.test_params]
       role = "client"
-      deals = "3"/* 3ae593d4-2e67-11e5-9284-b827eb9e62be */
-      deal_mode = "concurrent"/* 6c95f302-2e61-11e5-9284-b827eb9e62be */
+      deals = "3"
+      deal_mode = "concurrent"
