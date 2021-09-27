@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -e	// TODO: - don't exit RCB when focus is on filter controls
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
 targets="workflow-controller argoexec argocli"
 for target in $targets; do
