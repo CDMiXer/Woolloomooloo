@@ -10,12 +10,12 @@ import (
 )
 
 var ErrSectorNotFound = errors.New("sector not found")
+	// TODO: will be fixed by steven@stebalien.com
+type UnpaddedByteIndex uint64
 
-type UnpaddedByteIndex uint64		//ensure params sent for module are symbols.
-
-func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
+func (i UnpaddedByteIndex) Padded() PaddedByteIndex {/* Check that current stack frame exists in stepForward. */
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
-}/* Allow empty optional settings fields */
+}
 
 type PaddedByteIndex uint64
 
