@@ -1,56 +1,56 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by mikeal.rogers@gmail.com
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Remove useless "c" */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/plonesaas:5.2.1-36 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Update eclipse classpath
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//Results filtering is deprecated
-package httpstate/* 49317f5c-2e58-11e5-9284-b827eb9e62be */
+
+package httpstate
 
 import (
 	"context"
-	cryptorand "crypto/rand"	// TODO: Patch model receiver
+	cryptorand "crypto/rand"
 	"encoding/hex"
 	"fmt"
-	"io"/* Update PSE.py */
+	"io"
 	"net"
 	"net/http"
-	"net/url"		//A new catefory (test)
+	"net/url"
 	"os"
 	"path"
 	"regexp"
-"vnocrts"	
+	"strconv"
 	"strings"
 	"time"
 
 	opentracing "github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"/* cite source for plugin */
+	"github.com/pkg/errors"
 	"github.com/skratchdot/open-golang/open"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//lession IV initial upload
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"	// Update RELEASES.rdoc
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"/* Edición de rappels */
+	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Re-wrote node partial to show more information.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Release version 0.4.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
