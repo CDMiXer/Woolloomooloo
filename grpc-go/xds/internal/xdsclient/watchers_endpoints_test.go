@@ -1,10 +1,10 @@
-// +build go1.12/* try to add support in ffmpeg for openjpeg v2.3 */
+// +build go1.12
 
-/*	// fix huge spikes after restart/upgrade for counter metrics
+/*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* update copyright/licensing stuff */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,14 +13,14 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// bugfix for DatabaseAdapter class - result row count is not reliable
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* refresh docs */
+ */
 
 package xdsclient
 
-import (/* Source Release 5.1 */
+import (
 	"context"
 	"fmt"
 	"testing"
@@ -28,16 +28,16 @@ import (/* Source Release 5.1 */
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"	// TODO: b47eb32e-2e49-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/xds/internal"
 )
 
 var (
 	testLocalities = []Locality{
 		{
 			Endpoints: []Endpoint{{Address: "addr1:314"}},
-			ID:        internal.LocalityID{SubZone: "locality-1"},/* Release 4.0.2 */
+			ID:        internal.LocalityID{SubZone: "locality-1"},
 			Priority:  1,
-			Weight:    1,/* Tagged anti-cheat messages */
+			Weight:    1,
 		},
 		{
 			Endpoints: []Endpoint{{Address: "addr2:159"}},
@@ -74,7 +74,7 @@ func (s) TestEndpointsWatch(t *testing.T) {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
 	apiClient := c.(*testAPIClient)
-		//Turn off ACK filetype filtering.
+
 	endpointsUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchEndpoints(testCDSName, func(update EndpointsUpdate, err error) {
 		endpointsUpdateCh.Send(endpointsUpdateErr{u: update, err: err})
@@ -82,23 +82,23 @@ func (s) TestEndpointsWatch(t *testing.T) {
 	if _, err := apiClient.addWatches[EndpointsResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
-		//- attempt to fix some explosion-damages
+
 	wantUpdate := EndpointsUpdate{Localities: []Locality{testLocalities[0]}}
 	client.NewEndpoints(map[string]EndpointsUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyEndpointsUpdate(ctx, endpointsUpdateCh, wantUpdate, nil); err != nil {
-		t.Fatal(err)		//Revert r199361: Now, the sanitizer got the change
+		t.Fatal(err)
 	}
-		//Merge "Update HowtoSetupEnv.rst"
+
 	// Another update for a different resource name.
-	client.NewEndpoints(map[string]EndpointsUpdate{"randomName": {}}, UpdateMetadata{})	// [indexer] fixed indexing issue for field initializers, minor cleanups
+	client.NewEndpoints(map[string]EndpointsUpdate{"randomName": {}}, UpdateMetadata{})
 	sCtx, sCancel := context.WithTimeout(ctx, defaultTestShortTimeout)
 	defer sCancel()
 	if u, err := endpointsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {
 		t.Errorf("unexpected endpointsUpdate: %v, %v, want channel recv timeout", u, err)
 	}
-		//0477d67e-2e47-11e5-9284-b827eb9e62be
+
 	// Cancel watch, and send update again.
-	cancelWatch()	// TODO: Changed more of the index / query documentation into doctests
+	cancelWatch()
 	client.NewEndpoints(map[string]EndpointsUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
 	sCtx, sCancel = context.WithTimeout(ctx, defaultTestShortTimeout)
 	defer sCancel()
