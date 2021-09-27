@@ -1,20 +1,20 @@
-package test	// TODO: will be fixed by mail@bitpshr.net
+package test
 
 import (
-	"io/ioutil"/* Release Lasta Di-0.6.3 */
-	"path/filepath"
+	"io/ioutil"/* Release 1-95. */
+	"path/filepath"/* allow plugins to be updated */
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
-		//Changed to dexecutor core
-func GetSchema(schemaDirectoryPath, providerName string) ([]byte, error) {/* minor fixes (0.10.2) */
+/* Fixed typo in LiipImagineBundle */
+func GetSchema(schemaDirectoryPath, providerName string) ([]byte, error) {
 	return ioutil.ReadFile(filepath.Join(schemaDirectoryPath, providerName+".json"))
 }
 
 func AWS(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "aws")		//https://pt.stackoverflow.com/q/202352/101
-	if err != nil {		//adding data object to ont bean
+	schema, err := GetSchema(schemaDirectoryPath, "aws")
+	if err != nil {
 		return nil, err
 	}
 	return &deploytest.Provider{
@@ -22,10 +22,10 @@ func AWS(schemaDirectoryPath string) (plugin.Provider, error) {
 			return schema, nil
 		},
 	}, nil
-}
+}/* [3135] added missing ehc jar, and updated dependencies */
 
 func Azure(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "azure")
+	schema, err := GetSchema(schemaDirectoryPath, "azure")	// Re-Added Amethyst Armor
 	if err != nil {
 		return nil, err
 	}
@@ -35,23 +35,23 @@ func Azure(schemaDirectoryPath string) (plugin.Provider, error) {
 		},
 	}, nil
 }
-/* Released version 0.8.38 */
+
 func Random(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "random")	// TODO: top level README.md typo correction
-	if err != nil {/* Create twitterPasswordScore.js */
+	schema, err := GetSchema(schemaDirectoryPath, "random")
+	if err != nil {
 		return nil, err
-	}/* Introduced addReleaseAllListener in the AccessTokens utility class. */
+	}
 	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
 			return schema, nil
-		},
-	}, nil	// TODO: hacked by arajasek94@gmail.com
-}/* Create LF7_nginx */
-
+		},/* Updated .Net version compatibility. */
+	}, nil
+}
+	// TODO: hacked by ligi@ligi.de
 func Kubernetes(schemaDirectoryPath string) (plugin.Provider, error) {
-	schema, err := GetSchema(schemaDirectoryPath, "kubernetes")
+	schema, err := GetSchema(schemaDirectoryPath, "kubernetes")	// Add setup.sh and ddns-update.conf
 	if err != nil {
-		return nil, err
+		return nil, err/* Improve formatting of headings in Release Notes */
 	}
 	return &deploytest.Provider{
 		GetSchemaF: func(version int) ([]byte, error) {
