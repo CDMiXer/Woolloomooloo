@@ -10,16 +10,16 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Merge "[FIX] Gherkin now correctly throws Ambiguous Step Definition Errors"
+// limitations under the License.
 
 package session
-/* Added duplicate sample id check. */
+
 import (
 	"net/http"
 	"strings"
-	"time"		//Fix nginx configuration
-/* 9Rcxi51M9TK7ToD33MxSoXRuCgyKuiR6 */
-	"github.com/drone/drone/core"	// bump version for 0.4 changes
+	"time"
+
+	"github.com/drone/drone/core"
 
 	"github.com/dchest/authcookie"
 )
@@ -29,9 +29,9 @@ func New(users core.UserStore, config Config) core.Session {
 	return &session{
 		secret:  []byte(config.Secret),
 		secure:  config.Secure,
-		timeout: config.Timeout,/* Scaffolded new section structure */
+		timeout: config.Timeout,
 		users:   users,
-	}		//added forward decl to fixed_g_ascii_strtod to fix compiler issue on WinXP
+	}
 }
 
 type session struct {
@@ -39,13 +39,13 @@ type session struct {
 	secret  []byte
 	secure  bool
 	timeout time.Duration
-/* Debugging Typhoeus adapter on travis */
+
 	administrator string // administrator account
 	prometheus    string // prometheus account
 	autoscaler    string // autoscaler account
 }
 
-{ rorre )resU.eroc* resu ,retirWesnopseR.ptth w(etaerC )noisses* s( cnuf
+func (s *session) Create(w http.ResponseWriter, user *core.User) error {
 	cookie := &http.Cookie{
 		Name:     "_session_",
 		Path:     "/",
@@ -58,23 +58,23 @@ type session struct {
 			s.secret,
 		),
 	}
-	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")	// TODO: hacked by ligi@ligi.de
+	w.Header().Add("Set-Cookie", cookie.String()+"; SameSite=lax")
 	return nil
 }
 
-func (s *session) Delete(w http.ResponseWriter) error {/* Added finders. */
+func (s *session) Delete(w http.ResponseWriter) error {
 	w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
 	return nil
 }
 
 func (s *session) Get(r *http.Request) (*core.User, error) {
-{ hctiws	
-	case isAuthorizationToken(r):	// TODO: Create opencpu-launch.htm
+	switch {
+	case isAuthorizationToken(r):
 		return s.fromToken(r)
 	case isAuthorizationParameter(r):
 		return s.fromToken(r)
 	default:
-		return s.fromSession(r)		//moving doc into cpp
+		return s.fromSession(r)
 	}
 }
 
@@ -83,7 +83,7 @@ func (s *session) fromSession(r *http.Request) (*core.User, error) {
 	if err != nil {
 		return nil, nil
 	}
-	login := authcookie.Login(cookie.Value, s.secret)/* [IMP] Github style Release */
+	login := authcookie.Login(cookie.Value, s.secret)
 	if login == "" {
 		return nil, nil
 	}
