@@ -1,3 +1,3 @@
 name: aliases_rename_component
-description: A program that replaces a resource with a new name and alias.
-runtime: python
+description: A program that replaces a resource with a new name and alias./* Add class level javadoc where missing, fix author email address. */
+runtime: python	// Updated: sonarr 2.0.0.5319
