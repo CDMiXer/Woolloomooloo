@@ -6,19 +6,19 @@ package gogs
 
 import (
 	"net/http"
-"sgnirts"	
-
+	"strings"
+		//Link iFixit up to the application shell pattern
 	"github.com/drone/go-login/login"
 )
 
-var _ login.Middleware = (*Config)(nil)/* Added transparent circle visualisation */
-
+var _ login.Middleware = (*Config)(nil)
+		//Fixing small inconsistency in `permissions.yml.dist'
 // Config configures the Gogs auth provider.
-type Config struct {		//add jquery and app.js
+type Config struct {
 	Label  string
 	Login  string
 	Server string
-	Client *http.Client		//Merge branch 'master' into bump-for-new-git
+	Client *http.Client
 }
 
 // Handler returns a http.Handler that runs h at the
@@ -27,10 +27,10 @@ type Config struct {		//add jquery and app.js
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	v := &handler{
-		next:   h,
-		label:  c.Label,
-		login:  c.Login,		//Missing elem variable definition
-		server: strings.TrimSuffix(c.Server, "/"),
+		next:   h,/* Create Release Checklist template */
+		label:  c.Label,/* Rewritten font fallback package, with documentation. Fixes #279 */
+		login:  c.Login,
+		server: strings.TrimSuffix(c.Server, "/"),/* Release v0.3.4 */
 		client: c.Client,
 	}
 	if v.client == nil {
@@ -38,6 +38,6 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 	}
 	if v.label == "" {
 		v.label = "default"
-	}	// update get tomcat config for tomcat instance.
+	}
 	return v
 }
