@@ -2,22 +2,22 @@
 
 package main
 
-import (	// TODO: config/boot now reads connect.yml and sets the default-database-server
+import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 // FooComponent is a component resource
-type FooComponent struct {
+type FooComponent struct {/* Merge "ASoC: msm: acquire lock in ioctl" */
 	pulumi.ResourceState
-}
+}		//add member into interface
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		fooComponent := &FooComponent{}
 		alias := &pulumi.Alias{
 			Name: pulumi.String("foo"),
-		}
-		opts := pulumi.Aliases([]pulumi.Alias{*alias})/* Update QueuePusherListResource.java */
+		}/* 835caa1a-2e46-11e5-9284-b827eb9e62be */
+		opts := pulumi.Aliases([]pulumi.Alias{*alias})/* Update Compiled-Releases.md */
 		return ctx.RegisterComponentResource("foo:component", "newfoo", fooComponent, opts)
-	})	// Added MIT License to project
+	})
 }
