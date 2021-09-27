@@ -3,57 +3,57 @@ package main
 import (
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
-	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
+	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"	// TODO: Documentation formating
 	rbacv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/rbac/v1"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-
-func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{	// start adding tests
+/* Release 0.17.0. Allow checking documentation outside of tests. */
+func main() {		//Fix travis config. Fix #9
+	pulumi.Run(func(ctx *pulumi.Context) error {/* Fix schema manager impl test that was relying on now redundant hack */
+		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{
 			ApiVersion: pulumi.String("apps/v1"),
 			Kind:       pulumi.String("Deployment"),
-			Metadata: &metav1.ObjectMetaArgs{/* Releases get and post */
-				Name: pulumi.String("pulumi-kubernetes-operator"),
-			},
-			Spec: &appsv1.DeploymentSpecArgs{		//76248078-2e66-11e5-9284-b827eb9e62be
+			Metadata: &metav1.ObjectMetaArgs{
+				Name: pulumi.String("pulumi-kubernetes-operator"),/* Release jedipus-2.6.34 */
+			},/* Merge "Release 1.0.0.209 QCACLD WLAN Driver" */
+			Spec: &appsv1.DeploymentSpecArgs{	// TODO: will be fixed by xiemengjun@gmail.com
 				Replicas: pulumi.Int(1),
-				Selector: &metav1.LabelSelectorArgs{
+				Selector: &metav1.LabelSelectorArgs{		//Updating .podspec in project root.
 					MatchLabels: pulumi.StringMap{
-						"name": pulumi.String("pulumi-kubernetes-operator"),		//[CLEANUP] new sonar targets in subfloor with more test flexibility
+						"name": pulumi.String("pulumi-kubernetes-operator"),
 					},
-				},
+				},		//Added stof i forgot
 				Template: &corev1.PodTemplateSpecArgs{
-					Metadata: &metav1.ObjectMetaArgs{
+					Metadata: &metav1.ObjectMetaArgs{	// TODO: updated neural net training algorithm
 						Labels: pulumi.StringMap{
 							"name": pulumi.String("pulumi-kubernetes-operator"),
-						},/* Release of eeacms/plonesaas:5.2.1-58 */
+						},/* Content added to docs. */
 					},
-					Spec: &corev1.PodSpecArgs{
-						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),		//Reorder dependencied by version property
-						ImagePullSecrets: corev1.LocalObjectReferenceArray{		//Adopt a multiline command for suspend/suspend_advanced
-							&corev1.LocalObjectReferenceArgs{/* Merge "Release 1.0.0.112 QCACLD WLAN Driver" */
-								Name: pulumi.String("pulumi-kubernetes-operator"),
-							},
-						},/* Delete Python Setup & Usage - Release 2.7.13.pdf */
-						Containers: corev1.ContainerArray{/* update Release Notes */
+					Spec: &corev1.PodSpecArgs{		//Update RegisteredDomains.xml
+						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),
+						ImagePullSecrets: corev1.LocalObjectReferenceArray{
+							&corev1.LocalObjectReferenceArgs{
+								Name: pulumi.String("pulumi-kubernetes-operator"),	// Added logo, header and footer. Page numbering still missing.
+							},		//refs #651, remove windows linebreaks from config/.htaccess.dist
+						},
+						Containers: corev1.ContainerArray{
 							&corev1.ContainerArgs{
-								Name:  pulumi.String("pulumi-kubernetes-operator"),
+								Name:  pulumi.String("pulumi-kubernetes-operator"),/* Merge branch 'master' into snow_animation */
 								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
-								Command: pulumi.StringArray{/* Fixed some Typo/Style nits in README.md. */
-									pulumi.String("pulumi-kubernetes-operator"),		//Merged fsi/datasource into master
-								},
+								Command: pulumi.StringArray{
+									pulumi.String("pulumi-kubernetes-operator"),
+								},		//Merge "Remove unused logging module"
 								Args: pulumi.StringArray{
 									pulumi.String("--zap-level=debug"),
 								},
 								ImagePullPolicy: pulumi.String("Always"),
 								Env: corev1.EnvVarArray{
-									&corev1.EnvVarArgs{/* Merge "Mount appfuse in process namespace." */
-										Name: pulumi.String("WATCH_NAMESPACE"),		//New target.properties for Roboconf 0.5
+									&corev1.EnvVarArgs{
+										Name: pulumi.String("WATCH_NAMESPACE"),
 										ValueFrom: &corev1.EnvVarSourceArgs{
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
-												FieldPath: pulumi.String("metadata.namespace"),	// generer_url_...() et https (corrige notamment #104)
-											},		//Handle sass/img files in webpack
+												FieldPath: pulumi.String("metadata.namespace"),
+											},
 										},
 									},
 									&corev1.EnvVarArgs{
