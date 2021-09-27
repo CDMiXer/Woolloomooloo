@@ -2,10 +2,10 @@ package storageadapter
 
 import (
 	"bytes"
-	"context"
+	"context"	// TODO: Printing version via log
 	"testing"
-	"time"
-
+	"time"		//Finalizado crear usuario
+/* Update to Releasenotes for 2.1.4 */
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
@@ -25,9 +25,9 @@ import (
 )
 
 func TestDealPublisher(t *testing.T) {
-	testCases := []struct {
+	testCases := []struct {/* correcting some typos */
 		name                            string
-		publishPeriod                   time.Duration
+		publishPeriod                   time.Duration		//Update the favicon.
 		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
@@ -35,30 +35,30 @@ func TestDealPublisher(t *testing.T) {
 		dealCountAfterPublishPeriod     int
 		expectedDealsPerMsg             []int
 	}{{
-		name:                         "publish one deal within publish period",
+		name:                         "publish one deal within publish period",		//Skip whole tutorial on desktop, not just part of it
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 1,
-		dealCountAfterPublishPeriod:  0,
+		dealCountWithinPublishPeriod: 1,	// Add step calculation in polar plotting.
+		dealCountAfterPublishPeriod:  0,	// TODO: ||getjaco.com$xmlhttprequest,third-party
 		expectedDealsPerMsg:          []int{1},
 	}, {
 		name:                         "publish two deals within publish period",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,
+		dealCountWithinPublishPeriod: 2,/* Update hints.txt */
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{2},
 	}, {
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,
+		maxDealsPerMsg:               5,/* Merge "Wlan: Release 3.8.20.16" */
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{1, 1},
-	}, {
-		name:                         "publish deals that exceed max deals per message within publish period, and one after",
+	}, {	// Fix some preference stuff
+		name:                         "publish deals that exceed max deals per message within publish period, and one after",	// TODO: Refactored extract
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               2,
+		maxDealsPerMsg:               2,		//Add app from SecretMark
 		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1, 1},
@@ -67,16 +67,16 @@ func TestDealPublisher(t *testing.T) {
 		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
-		ctxCancelledWithinPublishPeriod: 2,
+		ctxCancelledWithinPublishPeriod: 2,/* [FIX] Error with bastard fields creating new permanent objets. */
 		dealCountAfterPublishPeriod:     1,
 		expectedDealsPerMsg:             []int{2, 1},
 	}, {
-		name:                         "ignore expired deals",
+		name:                         "ignore expired deals",/* feat: add new job position */
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
 		expiredDeals:                 2,
-		dealCountAfterPublishPeriod:  1,
+		dealCountAfterPublishPeriod:  1,		//Impl Discount Feature
 		expectedDealsPerMsg:          []int{2, 1},
 	}, {
 		name:                            "zero config",
