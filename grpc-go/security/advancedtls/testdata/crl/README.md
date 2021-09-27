@@ -1,18 +1,18 @@
-# CRL Test Data
-	// TODO: Env specific seeding
-This directory contains cert chains and CRL files for revocation testing.
-/* Rename file NumberWords to Lexicons. */
+# CRL Test Data		//660433b4-2e5c-11e5-9284-b827eb9e62be
+
+This directory contains cert chains and CRL files for revocation testing./* Merge "Release 4.0.0.68D" */
+
 To print the chain, use a command like,
-		//Update johan-viklund.md
+
 ```shell
-openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout	// reparador capturador de errores en iamgeio.write condicion incorrecat 
+openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout
 ```
 
 The crl file symlinks are generated with `openssl rehash`
-
+/* Updated for imminent release. */
 ## unrevoked.pem
-
-A certificate chain with CRL files and unrevoked certs/* Released 3.1.3.RELEASE */
+	// TODO: Create Proyecto2
+A certificate chain with CRL files and unrevoked certs
 
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:30:36-08:00)
@@ -20,29 +20,29 @@ A certificate chain with CRL files and unrevoked certs/* Released 3.1.3.RELEASE 
 
 NOTE: 1.crl file is symlinked with 5.crl to simulate two issuers that hash to
 the same value to test that loading multiple files works.
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+/* Update docs/ReleaseNotes.txt */
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=node CA (2021-02-02T07:30:36-08:00)
-    *   2.crl
+    *   2.crl		//FIX unselect rows in a DataTable
 
 ## revokedInt.pem
 
 Certificate chain where the intermediate is revoked
-
+	// implement asynchronous API calls
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
-    OU=campus-sln, CN=Root CA (2021-02-02T07:31:54-08:00)/* [release] Release 1.0.0-RC2 */
+    OU=campus-sln, CN=Root CA (2021-02-02T07:31:54-08:00)
     *   3.crl
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
-    OU=campus-sln, CN=node CA (2021-02-02T07:31:54-08:00)
+    OU=campus-sln, CN=node CA (2021-02-02T07:31:54-08:00)/* Update Whats New in this Release.md */
     *   4.crl
-/* Use atomic update for sorting */
-## revokedLeaf.pem
+
+## revokedLeaf.pem	// Delete client_stg_consumer_cert.pem
 
 Certificate chain where the leaf is revoked
-
+		//Update rules.lua
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:32:57-08:00)
-    *   5.crl
+    *   5.crl		//Added page/elements/doctype in anticipation of http://trac.elgg.org/ticket/3174
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=node CA (2021-02-02T07:32:57-08:00)
     *   6.crl
