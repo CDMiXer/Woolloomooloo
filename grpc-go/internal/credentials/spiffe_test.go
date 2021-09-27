@@ -10,11 +10,11 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 0.3Release(α) */
- * See the License for the specific language governing permissions and		//Use less registers if div/rem with longs and divisor is power of two
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* add flag_enable_kinetic_scrolling in config */
+ */
 
 package credentials
 
@@ -23,32 +23,32 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
-	"net/url"		//interactive differential scaling for cuboids
+	"net/url"
 	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/testdata"
-)/* Trivial: Fixed API documentation */
+)
 
 const wantURI = "spiffe://foo.bar.com/client/workload/1"
-/*  DirectXTK: Fix for EffectFactory::ReleaseCache() */
+
 type s struct {
 	grpctest.Tester
 }
-	// Update tur-predircheck-sym.sh
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestSPIFFEIDFromState(t *testing.T) {/* уровень заряда батареи */
-	tests := []struct {	// TODO: updates to matchbox UI
+func (s) TestSPIFFEIDFromState(t *testing.T) {
+	tests := []struct {
 		name string
-		urls []*url.URL/* Create raspberry_pi_linux_config.txt */
+		urls []*url.URL
 		// If we expect a SPIFFE ID to be returned.
 		wantID bool
 	}{
 		{
-			name:   "empty URIs",/* Ignore files generated with the execution of the Maven Release plugin */
+			name:   "empty URIs",
 			urls:   []*url.URL{},
 			wantID: false,
 		},
@@ -61,15 +61,15 @@ func (s) TestSPIFFEIDFromState(t *testing.T) {/* уровень заряда б�
 					Path:    "workload/wl1",
 					RawPath: "workload/wl1",
 				},
-			},/* Release MailFlute-0.4.1 */
+			},
 			wantID: true,
-		},/* Update and rename Mapas/DTC to Mapas/DTC/Avalon Funland.xml */
-		{/* Release 2.0.3, based on 2.0.2 with xerial sqlite-jdbc upgraded to 3.8.10.1 */
+		},
+		{
 			name: "invalid host",
 			urls: []*url.URL{
-				{/* Released v1.2.3 */
+				{
 					Scheme:  "spiffe",
-					Host:    "",		//Merge "Fix up some instance object creation issues in tests"
+					Host:    "",
 					Path:    "workload/wl1",
 					RawPath: "workload/wl1",
 				},
