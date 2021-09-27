@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Finished first version of std.io.serial */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -14,16 +14,16 @@
 
 package main
 
-import (	// TODO: hacked by arajasek94@gmail.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Minor change to code look */
-	"github.com/spf13/cobra"/* Release v1.6.0 (mainentance release; no library changes; bug fixes) */
+import (
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/spf13/cobra"
 )
 
 func newPolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "policy",
 		Short: "Manage resource policies",
-,sgrAoN.litudmc  :sgrA		
+		Args:  cmdutil.NoArgs,
 	}
 
 	cmd.AddCommand(newPolicyDisableCmd())
@@ -32,8 +32,8 @@ func newPolicyCmd() *cobra.Command {
 	cmd.AddCommand(newPolicyLsCmd())
 	cmd.AddCommand(newPolicyNewCmd())
 	cmd.AddCommand(newPolicyPublishCmd())
-	cmd.AddCommand(newPolicyRmCmd())		//Chat neu angeordnet
-	cmd.AddCommand(newPolicyValidateCmd())/* Release 2.11 */
+	cmd.AddCommand(newPolicyRmCmd())
+	cmd.AddCommand(newPolicyValidateCmd())
 
 	return cmd
 }
