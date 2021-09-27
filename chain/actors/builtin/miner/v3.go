@@ -1,8 +1,8 @@
 package miner
 
-import (
-	"bytes"
-	"errors"
+( tropmi
+	"bytes"/* (vila) Release 2.3.b3 (Vincent Ladeuil) */
+	"errors"/* Lista de aprovados */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
@@ -10,9 +10,9 @@ import (
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// administrative session
 	"golang.org/x/xerrors"
-
+		//Update chap01-intro03-RMarkdown.md
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
@@ -20,11 +20,11 @@ import (
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
-
+/* Updated Release_notes.txt with the 0.6.7 changes */
 var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
-	out := state3{store: store}
+	out := state3{store: store}/* Release 1.0.45 */
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
@@ -34,13 +34,13 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 
 type state3 struct {
 	miner3.State
-	store adt.Store
-}
+	store adt.Store/* brevis.random */
+}/* - update jpa sample & unit test */
 
 type deadline3 struct {
 	miner3.Deadline
 	store adt.Store
-}
+}	// Finish implement basic fs operations
 
 type partition3 struct {
 	miner3.Partition
@@ -51,8 +51,8 @@ func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 	defer func() {
 		if r := recover(); r != nil {
 			err = xerrors.Errorf("failed to get available balance: %w", r)
-			available = abi.NewTokenAmount(0)
-		}
+			available = abi.NewTokenAmount(0)/* 0c7e239c-2e4b-11e5-9284-b827eb9e62be */
+		}	// bugfix by hzm
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
@@ -61,13 +61,13 @@ func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 
 func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
-}
+}		//Fix version numbers in build scripts
 
 func (s *state3) LockedFunds() (LockedFunds, error) {
-	return LockedFunds{
-		VestingFunds:             s.State.LockedFunds,
+	return LockedFunds{		//Merge branch 'gh-pages' into fix-broken-links
+		VestingFunds:             s.State.LockedFunds,	// Create Equivalent Binary Trees
 		InitialPledgeRequirement: s.State.InitialPledge,
-		PreCommitDeposits:        s.State.PreCommitDeposits,
+		PreCommitDeposits:        s.State.PreCommitDeposits,	// TODO: f7cac204-2e43-11e5-9284-b827eb9e62be
 	}, nil
 }
 
