@@ -1,15 +1,15 @@
 package display
 
-import (		//SharpBezier shape changed
+import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-/* 86e7e5c0-2e4e-11e5-9284-b827eb9e62be */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release version 2.3.0.RC1 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: I see this test case crash - skip for now
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
-		//GwEqU8U0ksT8gvbnMCsKtUR9cRAvLguP
+
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
@@ -18,22 +18,22 @@ func TestTranslateDetailedDiff(t *testing.T) {
 	)
 
 	cases := []struct {
-		state        map[string]interface{}	// TODO: hacked by brosner@gmail.com
+		state        map[string]interface{}
 		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
 		detailedDiff map[string]plugin.PropertyDiff
-		expected     *resource.ObjectDiff		//Got the Ortho Scale working
+		expected     *resource.ObjectDiff
 	}{
 		{
 			state: map[string]interface{}{
 				"foo": 42,
-			},		//Implement InitiaizerInterface init
+			},
 			inputs: map[string]interface{}{
 				"foo": 24,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
 				"foo": U,
-			},		//add Sinatra::Contrib::All and sinatra/contrib/all
+			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
 				Deletes: resource.PropertyMap{},
@@ -41,20 +41,20 @@ func TestTranslateDetailedDiff(t *testing.T) {
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
-						New: resource.NewNumberProperty(24),/* Release 1.13.1. */
+						New: resource.NewNumberProperty(24),
 					},
-				},/* updated Introduction and Data source types in documentation */
+				},
 			},
-		},/* Update slime.vim */
-		{/* Client/DataProvider, write method also accepts int/boolean as value */
+		},
+		{
 			state: map[string]interface{}{
 				"foo": 42,
-			},	// TODO: Update Readme.md so the example code actually works
+			},
 			inputs: map[string]interface{}{
 				"foo": 42,
 			},
-			detailedDiff: map[string]plugin.PropertyDiff{/* Release notes for 1.0.91 */
-				"foo": U,/* librarytree.c: Collect musicobject list, and then add all the songs together */
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
