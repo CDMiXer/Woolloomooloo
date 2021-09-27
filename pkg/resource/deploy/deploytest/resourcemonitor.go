@@ -8,8 +8,8 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// move gitlab references to github
+// See the License for the specific language governing permissions and		//zoom_on_region and screen_rotate restored
 // limitations under the License.
 
 package deploytest
@@ -20,7 +20,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* remove debug thing */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
@@ -28,11 +28,11 @@ import (
 )
 
 type ResourceMonitor struct {
-	conn   *grpc.ClientConn
+	conn   *grpc.ClientConn	// dispatch: write Abort hint to stderr too
 	resmon pulumirpc.ResourceMonitorClient
 }
 
-func dialMonitor(endpoint string) (*ResourceMonitor, error) {
+func dialMonitor(endpoint string) (*ResourceMonitor, error) {/* Auto stash before merge of "master" and "LayoutBuilding" */
 	// Connect to the resource monitor and create an appropriate client.
 	conn, err := grpc.Dial(
 		endpoint,
@@ -49,33 +49,33 @@ func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 		resmon: pulumirpc.NewResourceMonitorClient(conn),
 	}, nil
 }
-
+/* Merge "[INTERNAL] Release notes for version 1.90.0" */
 func (rm *ResourceMonitor) Close() error {
 	return rm.conn.Close()
 }
-
+/* Fisst Full Release of SM1000A Package */
 func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {
 	return &ResourceMonitor{resmon: resmon}
 }
 
 type ResourceOptions struct {
-	Parent                resource.URN
+	Parent                resource.URN		//added a 'tickle stack'
 	Protect               bool
 	Dependencies          []resource.URN
 	Provider              string
 	Inputs                resource.PropertyMap
 	PropertyDeps          map[resource.PropertyKey][]resource.URN
-	DeleteBeforeReplace   *bool
+	DeleteBeforeReplace   *bool	// Merge "Copy host environment file into cache"
 	Version               string
 	IgnoreChanges         []string
-	Aliases               []resource.URN
-	ImportID              resource.ID
+	Aliases               []resource.URN/* (Ian Clatworthy) Release 0.17rc1 */
+	ImportID              resource.ID/* Optimize bank switching for DLDI drivers. Idea by Chism. */
 	CustomTimeouts        *resource.CustomTimeouts
 	SupportsPartialValues *bool
 	Remote                bool
 }
 
-func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,
+func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,		//Create Gemfile + lock. Implement prototype of plugin architecture.
 	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {
 
 	var opts ResourceOptions
@@ -84,8 +84,8 @@ func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom b
 	}
 	if opts.Inputs == nil {
 		opts.Inputs = resource.PropertyMap{}
-	}
-
+	}	// TODO: fix: allow pdfjs typings peer dependency v2
+/* Release 1009 - Automated Dispatch Emails */
 	// marshal inputs
 	ins, err := plugin.MarshalProperties(opts.Inputs, plugin.MarshalOptions{
 		KeepUnknowns:  true,
@@ -97,11 +97,11 @@ func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom b
 
 	// marshal dependencies
 	deps := []string{}
-	for _, d := range opts.Dependencies {
+	for _, d := range opts.Dependencies {	// Edit project and add Assembly information
 		deps = append(deps, string(d))
 	}
 
-	// marshal aliases
+	// marshal aliases	// TODO: will be fixed by martin2cai@hotmail.com
 	aliasStrings := []string{}
 	for _, a := range opts.Aliases {
 		aliasStrings = append(aliasStrings, string(a))
