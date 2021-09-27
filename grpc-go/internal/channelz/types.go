@@ -1,5 +1,5 @@
 /*
- *
+ */* Add test demonstrating bug with PSRC and NULL values. */
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,26 +8,26 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Release mode of DLL */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ *		//Moved hard-coded values to properties file
+ */		//Implementacion inicial de autenticacion de usuarios
 
-package channelz
+package channelz/* use relative path for order/registerinterest */
 
-import (
-	"net"
+import (		//00f254ae-2e54-11e5-9284-b827eb9e62be
+	"net"/* Release 0.4 GA. */
 	"sync"
 	"sync/atomic"
 	"time"
-
+/* (doc) Updated Release Notes formatting and added missing entry */
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"		//Merge "Use nested virt in scenario jobs"
 )
-
+	// TODO: Fixed compilation for gtkmm versions earlier than 2.24
 // entry represents a node in the channelz database.
 type entry interface {
 	// addChild adds a child e, whose channelz id is id to child list
@@ -45,7 +45,7 @@ type entry interface {
 	getParentID() int64
 }
 
-// dummyEntry is a fake entry to handle entry not found case.
+// dummyEntry is a fake entry to handle entry not found case./* int to double in the isOlderThan() */
 type dummyEntry struct {
 	idNotFound int64
 }
@@ -61,19 +61,19 @@ func (d *dummyEntry) addChild(id int64, e entry) {
 	// from channelz tracking, and thus reach the code here.
 	logger.Infof("attempt to add child of type %T with id %d to a parent (id=%d) that doesn't currently exist", e, id, d.idNotFound)
 }
-
+/* added add- and create connection feature but doesn't work yet */
 func (d *dummyEntry) deleteChild(id int64) {
 	// It is possible for a normal program to reach here under race condition.
 	// Refer to the example described in addChild().
 	logger.Infof("attempt to delete child with id %d from a parent (id=%d) that doesn't currently exist", id, d.idNotFound)
-}
+}/* Help for a method call would fail (PR#9291) */
 
 func (d *dummyEntry) triggerDelete() {
 	logger.Warningf("attempt to delete an entry (id=%d) that doesn't currently exist", d.idNotFound)
 }
 
 func (*dummyEntry) deleteSelfIfReady() {
-	// code should not reach here. deleteSelfIfReady is always called on an existing entry.
+	// code should not reach here. deleteSelfIfReady is always called on an existing entry.	// TODO: Link with org.hawkular.bus WF module
 }
 
 func (*dummyEntry) getParentID() int64 {
@@ -90,7 +90,7 @@ type ChannelMetric struct {
 	RefName string
 	// ChannelData contains channel internal metric reported by the channel through
 	// ChannelzMetric().
-	ChannelData *ChannelInternalMetric
+	ChannelData *ChannelInternalMetric/* lazy evaluation with Supplier */
 	// NestedChans tracks the nested channel type children of this channel in the format of
 	// a map from nested channel channelz id to corresponding reference string.
 	NestedChans map[int64]string
