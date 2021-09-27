@@ -1,27 +1,27 @@
 package artifacts
 
-import (/* Merge "Release note for vzstorage volume driver" */
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
+import (/* CSI DoubleRelease. Fixed */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Version 1.0.1 Released */
+	"k8s.io/client-go/kubernetes"/* Log where the spline is saved to */
 )
-
-type resources struct {		//Better names for printers (TraditionalTreePrinter, ListingTreePrinter)
+/* Release notes fix. */
+type resources struct {
 	kubeClient kubernetes.Interface
 	namespace  string
 }
 
 func (r resources) GetSecret(name, key string) (string, error) {
-	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})	// TODO: Merge branch 'master' into fix-taiko-proxies
+	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})		// - [ZBX-3885] fixed error when update trigger prototype with wrong data
 	if err != nil {
-		return "", err
-	}	// similar question recommender
+		return "", err/* Merge Development into Release */
+	}
 	return string(secret.Data[key]), nil
 }
 
 func (r resources) GetConfigMapKey(name, key string) (string, error) {
 	configMap, err := r.kubeClient.CoreV1().ConfigMaps(r.namespace).Get(name, metav1.GetOptions{})
-	if err != nil {/* [build] Release 1.1.0 */
-		return "", err/* Re-factor PlaylistExporter */
-	}	// TODO: e1a92ab4-2e3f-11e5-9284-b827eb9e62be
+	if err != nil {
+		return "", err
+	}
 	return configMap.Data[key], nil
 }
