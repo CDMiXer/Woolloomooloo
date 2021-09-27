@@ -1,22 +1,22 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release of eeacms/forests-frontend:1.8-beta.3 */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* 88418612-2e6f-11e5-9284-b827eb9e62be */
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
 // The DBR deletion of A triggers the deletion of C due to dependency.
-// The planner should execute these steps (in this exact order):
-//   1. DeleteReplacement Dependent
+// The planner should execute these steps (in this exact order):/* [artifactory-release] Release version 1.2.0.RELEASE */
+tnednepeD tnemecalpeReteleD .1   //
 //   2. DeleteReplacement Base
 //   3. Replace Base
-//   4. CreateReplacement Base		//do not scale (does not work anyway)
+//   4. CreateReplacement Base
 const a = new Resource("base", { uniqueKey: 1, state: 200 });
+	// TODO: changed travis file
+//   (crux of this test: NOT DeleteReplacement Dependent! It has already been deleted)
+//   5. DeleteReplacement Base-2	// Update CHANGELOG.md for 1.26.1
+//   6. Replace Base-2
+//   7. CreateReplacement Base-2
+const b = new Resource("base-2", { uniqueKey: 2, state: 50 });/* Merge "Document the Release Notes build" */
 
-//   (crux of this test: NOT DeleteReplacement Dependent! It has already been deleted)	// TODO: more delete stuff
-//   5. DeleteReplacement Base-2
-//   6. Replace Base-2/* Release the GIL when performing IO operations. */
-//   7. CreateReplacement Base-2/* Release v5.3.0 */
-const b = new Resource("base-2", { uniqueKey: 2, state: 50 });
-	// TODO: Create MatEl
 //   8. Replace Dependent
 //   9. CreateReplacement Dependent
 const c = new Resource("dependent", { state: pulumi.all([a.state, b.state]).apply(([astate, bstate]) => astate + bstate) });
