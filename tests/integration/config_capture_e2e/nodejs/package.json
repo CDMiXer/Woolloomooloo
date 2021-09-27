@@ -1,18 +1,18 @@
 {
-    "name": "config_basic_js",		//Merge branch 'master' into bhig
+    "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "scripts": {
-        "build": "tsc"/* added caller metaheader to Varscan tag */
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Update release code sample to client.Repository.Release */
-    "peerDependencies": {/* Update README to point changelog to Releases page */
+    },
+    "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"/* Release Process: Change pom.xml version to 1.4.0-SNAPSHOT. */
+        "@types/node": "^8.0.0"
     }
 }
