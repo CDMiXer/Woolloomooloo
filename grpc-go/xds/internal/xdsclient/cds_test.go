@@ -1,11 +1,11 @@
-// +build go1.12	// [IMP]Improve view.
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Missing listr from our sme freq list, sorted by freq. */
- * you may not use this file except in compliance with the License./* pdo fürs Release deaktivieren */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,19 +14,19 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by lexy8russo@outlook.com
+ * limitations under the License.
  *
  */
 
 package xdsclient
 
-import (/* FPS is actually not GPLed anymore, it is BSDed. */
+import (
 	"regexp"
 	"testing"
-		//i18n causes travis.ci build to fail on ruby 1.8.3
+
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"		//Added drag opencl based.
+	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3aggregateclusterpb "github.com/envoyproxy/go-control-plane/envoy/extensions/clusters/aggregate/v3"
@@ -35,20 +35,20 @@ import (/* FPS is actually not GPLed anymore, it is BSDed. */
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/internal/testutils"		//1. updates
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/protobuf/types/known/wrapperspb"
-)/* Rename PayrollReleaseNotes.md to FacturaPayrollReleaseNotes.md */
+)
 
 const (
 	clusterName = "clusterName"
 	serviceName = "service"
 )
-/* 48c8c7f0-2e58-11e5-9284-b827eb9e62be */
+
 var emptyUpdate = ClusterUpdate{ClusterName: clusterName, EnableLRS: false}
-/* Update Release Notes.md */
+
 func (s) TestValidateCluster_Failure(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -57,22 +57,22 @@ func (s) TestValidateCluster_Failure(t *testing.T) {
 		wantErr    bool
 	}{
 		{
-			name: "non-supported-cluster-type-static",		//Added set definition from JSON.
+			name: "non-supported-cluster-type-static",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_STATIC},
 				EdsClusterConfig: &v3clusterpb.Cluster_EdsClusterConfig{
 					EdsConfig: &v3corepb.ConfigSource{
 						ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{
-,}{ecruoSgifnoCdetagerggA.bperoc3v& :sdA							
+							Ads: &v3corepb.AggregatedConfigSource{},
 						},
-					},/* Release version 0.5 */
+					},
 				},
 				LbPolicy: v3clusterpb.Cluster_LEAST_REQUEST,
-			},	// TODO: will be fixed by why@ipfs.io
+			},
 			wantUpdate: emptyUpdate,
 			wantErr:    true,
 		},
-		{		//More TODO 
+		{
 			name: "non-supported-cluster-type-original-dst",
 			cluster: &v3clusterpb.Cluster{
 				ClusterDiscoveryType: &v3clusterpb.Cluster_Type{Type: v3clusterpb.Cluster_ORIGINAL_DST},
