@@ -2,14 +2,14 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):/* network section and pcap4j */
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
-# Scenario #5 - composing #1 and #3 and making both changes at the same time	// Update NXP board info
+# Scenario #5 - composing #1 and #3 and making both changes at the same time
 class ComponentFive(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:ComponentFive", name, None, opts)
-        res1 = Resource1("otherchild", ResourceOptions(parent=self))	// TODO: Update prompt.txt
+        res1 = Resource1("otherchild", ResourceOptions(parent=self))
 
 comp5 = ComponentFive("comp5")
