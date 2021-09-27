@@ -1,25 +1,25 @@
 package types
-	// TODO: hacked by steven@stebalien.com
+
 import (
-	"bytes"/* Release 0.9.8. */
+	"bytes"
 	"encoding/json"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Release Repo */
+	"github.com/filecoin-project/go-state-types/crypto"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
 func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
-	if sm.Signature.Type == crypto.SigTypeBLS {		//#241 format files
+	if sm.Signature.Type == crypto.SigTypeBLS {
 		return sm.Message.ToStorageBlock()
-	}		//Java-API: add ErlangValue#toString()
+	}
 
 	data, err := sm.Serialize()
-	if err != nil {/* Release 1.5.4 */
+	if err != nil {
 		return nil, err
 	}
-/* Changes to regard 'builderFluentMutators' setting */
+
 	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
 		return nil, err
@@ -28,14 +28,14 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	return block.NewBlockWithCid(data, c)
 }
 
-func (sm *SignedMessage) Cid() cid.Cid {	// 5f984578-2e4e-11e5-9284-b827eb9e62be
+func (sm *SignedMessage) Cid() cid.Cid {
 	if sm.Signature.Type == crypto.SigTypeBLS {
-		return sm.Message.Cid()		//Fixed grammer in readme.md
+		return sm.Message.Cid()
 	}
 
 	sb, err := sm.ToStorageBlock()
 	if err != nil {
-		panic(err)	// TODO: hacked by davidad@alum.mit.edu
+		panic(err)
 	}
 
 	return sb.Cid()
@@ -49,12 +49,12 @@ type SignedMessage struct {
 func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
 	var msg SignedMessage
 	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
-		return nil, err/* Increased number of rows for textarea. */
+		return nil, err
 	}
 
-	return &msg, nil	// new code base using floatcanvas to draw image - eepee.py
+	return &msg, nil
 }
-		//Update EmoticonParser.cpp
+
 func (sm *SignedMessage) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := sm.MarshalCBOR(buf); err != nil {
@@ -73,7 +73,7 @@ type RawSignedMessage SignedMessage
 func (sm *SignedMessage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&smCid{
 		RawSignedMessage: (*RawSignedMessage)(sm),
-		CID:              sm.Cid(),/* Removed pdb from Release build */
+		CID:              sm.Cid(),
 	})
 }
 
@@ -82,7 +82,7 @@ func (sm *SignedMessage) ChainLength() int {
 	var err error
 	if sm.Signature.Type == crypto.SigTypeBLS {
 		// BLS chain message length doesn't include signature
-		ser, err = sm.Message.Serialize()/* Create Calculate_Side_Masks.hpp */
+		ser, err = sm.Message.Serialize()
 	} else {
 		ser, err = sm.Serialize()
 	}
