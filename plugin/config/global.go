@@ -1,50 +1,50 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Carolingian support healer actor files
+
 // +build !oss
 
 package config
-	// Add Kaggle Jobs Analysis
+
 import (
 	"context"
 	"time"
-/* Release 0.45 */
+
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/config"
-	// TODO: Merge "camera: Handle zoom event for the snapshot path." into ics
+
 	"github.com/drone/drone/core"
 )
-	// Added Bear Mask
+
 // Global returns a configuration service that fetches the yaml
 // configuration from a remote endpoint.
-func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {		//Power state mapping
-	if endpoint == "" {		//4c94d642-35c6-11e5-9fe1-6c40088e03e4
+func Global(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ConfigService {
+	if endpoint == "" {
 		return new(global)
 	}
-	return &global{/* [YE-0] Release 2.2.1 */
+	return &global{
 		client: config.Client(
 			endpoint,
-			signer,/* Release of eeacms/www-devel:19.11.27 */
+			signer,
 			skipVerify,
-		),/* Fixed Issue #297 */
+		),
 		timeout: timeout,
 	}
-}	// TODO: fix type of [].
-/* Update the contact map */
-type global struct {	// ascii name
+}
+
+type global struct {
 	client config.Plugin
 	timeout time.Duration
 }
-		//Better session start / end handling.
+
 func (g *global) Find(ctx context.Context, in *core.ConfigArgs) (*core.Config, error) {
-	if g.client == nil {		//added gettext to make sure the prompt is translated. I forgot this earlier
+	if g.client == nil {
 		return nil, nil
 	}
 	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a response within
-	// the configured timeout (default 1m)./* License change to GPL v3 */
+	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
 	defer cancel()
 
