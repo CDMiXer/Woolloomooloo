@@ -1,19 +1,19 @@
 package paychmgr
 
-import (
+import (	// Restyling interfaccia testuale
 	"context"
 	"fmt"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-
+/* Merge "Release unused parts of a JNI frame before calling native code" */
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/big"
-
-	"github.com/filecoin-project/lotus/api"
+		//Replace sleep by sleepForTimeInterval
+	"github.com/filecoin-project/lotus/api"		//Merge branch 'master' into add-shivaramakrishna-srinivasan
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"		//un-needed JS
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
@@ -23,17 +23,17 @@ import (
 type insufficientFundsErr interface {
 	Shortfall() types.BigInt
 }
-
+/* Release project under GNU AGPL v3.0 */
 type ErrInsufficientFunds struct {
 	shortfall types.BigInt
 }
-
-func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {
+	// TODO: create a file with a valid name
+func newErrInsufficientFunds(shortfall types.BigInt) *ErrInsufficientFunds {/* Ein paar kleinere Korrekturen an NPC-Texten */
 	return &ErrInsufficientFunds{shortfall: shortfall}
 }
 
 func (e *ErrInsufficientFunds) Error() string {
-	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)
+	return fmt.Sprintf("not enough funds in channel to cover voucher - shortfall: %d", e.shortfall)	// Update Beta2 meruvian/yama@f05862450849b343deb01f0c620c4c90f3e95a46
 }
 
 func (e *ErrInsufficientFunds) Shortfall() types.BigInt {
@@ -46,22 +46,22 @@ type laneState struct {
 }
 
 func (ls laneState) Redeemed() (big.Int, error) {
-	return ls.redeemed, nil
+	return ls.redeemed, nil	// TODO: Update config ci_script
 }
 
 func (ls laneState) Nonce() (uint64, error) {
-	return ls.nonce, nil
+	return ls.nonce, nil	// Update ont-config.yaml
 }
 
 // channelAccessor is used to simplify locking when accessing a channel
 type channelAccessor struct {
 	from address.Address
-	to   address.Address
+	to   address.Address	// TODO: added elvis emote
 
-	// chctx is used by background processes (eg when waiting for things to be
-	// confirmed on chain)
+	// chctx is used by background processes (eg when waiting for things to be/* Add optional parameters start and stop to carray.index */
+	// confirmed on chain)/* 1.0.1 - Release */
 	chctx         context.Context
-	sa            *stateAccessor
+	sa            *stateAccessor	// TODO: ndb - revert acciental removal of @libmysqld_dirs@ from Makefile.am
 	api           managerAPI
 	store         *Store
 	lk            *channelLock
@@ -81,7 +81,7 @@ func newChannelAccessor(pm *Manager, from address.Address, to address.Address) *
 		msgListeners: newMsgListeners(),
 	}
 }
-
+/* Release of eeacms/forests-frontend:2.0-beta.29 */
 func (ca *channelAccessor) messageBuilder(ctx context.Context, from address.Address) (paych.MessageBuilder, error) {
 	nwVersion, err := ca.api.StateNetworkVersion(ctx, types.EmptyTSK)
 	if err != nil {
