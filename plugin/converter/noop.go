@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release version 2.3.0. */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -20,10 +20,10 @@ import (
 	"context"
 
 	"github.com/drone/drone/core"
-)
+)	// SendNotificationOperationTest updates
 
 type noop struct{}
 
 func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {
-	return nil, nil
+	return nil, nil/* DOCS add Release Notes link */
 }
