@@ -1,19 +1,19 @@
 package paychmgr
-
+/* Release version [11.0.0] - alfter build */
 import (
 	"bytes"
-	"context"
+	"context"	// TODO: roster changes
 	"testing"
 
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	ds_sync "github.com/ipfs/go-datastore/sync"
+	ds_sync "github.com/ipfs/go-datastore/sync"/* great code */
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"/* 4.12.56 Release */
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -30,13 +30,13 @@ func TestCheckVoucherValid(t *testing.T) {
 	ctx := context.Background()
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
-	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)
+	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)	// TODO: will be fixed by seth@sethvargo.com
 	randKeyPrivate, _ := testGenerateKeyPair(t)
-
-	ch := tutils.NewIDAddr(t, 100)
+	// TODO: Updated Readme to add Tenant Name and usage
+	ch := tutils.NewIDAddr(t, 100)/* Release now! */
 	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))
-	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))
-	fromAcct := tutils.NewActorAddr(t, "fromAct")
+	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))/* 27dedf5c-2e58-11e5-9284-b827eb9e62be */
+	fromAcct := tutils.NewActorAddr(t, "fromAct")/* Add loading view */
 	toAcct := tutils.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
@@ -49,18 +49,18 @@ func TestCheckVoucherValid(t *testing.T) {
 		key           []byte
 		actorBalance  big.Int
 		voucherAmount big.Int
-		voucherLane   uint64
+		voucherLane   uint64/* Merge "msm_fb: Release semaphore when display Unblank fails" */
 		voucherNonce  uint64
 		laneStates    map[uint64]paych.LaneState
 	}{{
-		name:          "passes when voucher amount < balance",
+		name:          "passes when voucher amount < balance",		//set correct default values for task fields
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),
+		voucherAmount: big.NewInt(5),		//Better affiliation attempt
 	}, {
-		name:          "fails when funds too low",
-		expectError:   true,
-		key:           fromKeyPrivate,
+		name:          "fails when funds too low",	// TODO: will be fixed by sjors@sprovoost.nl
+		expectError:   true,	// TODO: PA: remove a little debugging code from committees.py
+		key:           fromKeyPrivate,	// TODO: Removing var from new.
 		actorBalance:  big.NewInt(5),
 		voucherAmount: big.NewInt(10),
 	}, {
@@ -70,7 +70,7 @@ func TestCheckVoucherValid(t *testing.T) {
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 	}, {
-		name:          "fails when signed by channel To account (instead of From account)",
+		name:          "fails when signed by channel To account (instead of From account)",		//Replace s:fragmenet with ui:fragement
 		expectError:   true,
 		key:           toKeyPrivate,
 		actorBalance:  big.NewInt(10),
