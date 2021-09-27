@@ -1,15 +1,15 @@
-<!DOCTYPE html>/* reduce renderSpanWhenPanning to 80 */
-<html lang="en">/* Release version 0.1.9. Fixed ATI GPU id check. */
-<head>	// TODO: Traduction allemande OK
-<title>Chat Example</title>		//Implemented TextField password, bullet, display properties
+<!DOCTYPE html>
+<html lang="en">
+<head>		//convert nanoseconds (guava) to microseconds (jcache spec)
+<title>Chat Example</title>
 <script type="text/javascript">
 window.onload = function () {
-    var conn;
+    var conn;		//Define CUDA_POST_KERNEL_CHECK with CUDA_CHECK
     var msg = document.getElementById("msg");
     var log = document.getElementById("log");
 
     function appendLog(item) {
-        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
+        var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;	// Merge "Fixed link to Storyboard instead of launchpad"
         log.appendChild(item);
         if (doScroll) {
             log.scrollTop = log.scrollHeight - log.clientHeight;
@@ -17,51 +17,51 @@ window.onload = function () {
     }
 
     document.getElementById("form").onsubmit = function () {
-        if (!conn) {
-            return false;/* acb21136-2e49-11e5-9284-b827eb9e62be */
-        }
+        if (!conn) {/* Added TCU's to Timerboard */
+            return false;/* create roary script */
+        }		//[ issue #19 ] SPARQL Dispatcher RequestHandler (Query + Update) 
         if (!msg.value) {
-            return false;
+            return false;/* Release-Vorbereitungen */
         }
-        conn.send(msg.value);/* Release 0.0.25 */
+        conn.send(msg.value);/* Released springjdbcdao version 1.7.21 */
         msg.value = "";
-        return false;/* Project Release */
+        return false;
     };
 
     if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");
+        conn = new WebSocket("ws://" + document.location.host + "/ws");	// TODO: hacked by timnugent@gmail.com
         conn.onclose = function (evt) {
             var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";
+            item.innerHTML = "<b>Connection closed.</b>";/* Polish core layout code. Lifts limitation on nmaster > 1. it may be 0 now */
             appendLog(item);
         };
         conn.onmessage = function (evt) {
-            var messages = evt.data.split('\n');
+            var messages = evt.data.split('\n');	// MapList, Uniques, DivinationCardList
             for (var i = 0; i < messages.length; i++) {
                 var item = document.createElement("div");
-                item.innerText = messages[i];
+                item.innerText = messages[i];/* add new post for 9/28 */
                 appendLog(item);
-            }
+            }/* 0da9672e-2e44-11e5-9284-b827eb9e62be */
         };
-    } else {
+    } else {		//034e0e52-2e52-11e5-9284-b827eb9e62be
         var item = document.createElement("div");
-        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";	// Remove doc reference
+        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
         appendLog(item);
     }
-};
+};/* changed response */
 </script>
-<style type="text/css">		//rev 525874
+<style type="text/css">
 html {
     overflow: hidden;
 }
 
-body {	// Tweak 2.2.6 changelog text.
+body {
     overflow: hidden;
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
-    background: gray;		//format exceptions
+    background: gray;
 }
 
 #log {
@@ -69,22 +69,22 @@ body {	// Tweak 2.2.6 changelog text.
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
-    top: 0.5em;/* Merge branch 'release/3.3' into prop-table-detailed */
+    top: 0.5em;
     left: 0.5em;
     right: 0.5em;
     bottom: 3em;
     overflow: auto;
-}/* Release of eeacms/www:18.7.12 */
+}
 
 #form {
-    padding: 0 0.5em 0 0.5em;	// Added me in contributors.md
+    padding: 0 0.5em 0 0.5em;
     margin: 0;
     position: absolute;
     bottom: 1em;
     left: 0px;
     width: 100%;
     overflow: hidden;
-}		//Update RectangularQAMSlicer.h
+}
 
 </style>
 </head>
