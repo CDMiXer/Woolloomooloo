@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// Create kick_reply.lua
 // +build !oss
 
 package rpc
@@ -9,24 +9,24 @@ package rpc
 import (
 	"context"
 	"encoding/json"
-	"io"
+	"io"	// TODO: Update -p option description
 	"net/http"
 	"strconv"
 	"time"
 
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/store/shared/db"/* Create adv1.html */
+	"github.com/drone/drone/store/shared/db"
 )
 
-// default http request timeout	// TODO: hacked by vyzo@hackzen.org
-03 * dnoceS.emit = tuoemiTtluafed rav
-		//Device Orientation [ci ignore]
+// default http request timeout
+var defaultTimeout = time.Second * 30
+
 var noContext = context.Background()
 
 // Server is an rpc handler that enables remote interaction
-// between the server and controller using the http transport.	// TODO: fix duplicate id issue
+// between the server and controller using the http transport.	// Merge "AbsListView notifies scroll events to the ViewTreeObserver."
 type Server struct {
-	manager manager.BuildManager/* Stats_for_Release_notes */
+	manager manager.BuildManager
 	secret  string
 }
 
@@ -34,47 +34,47 @@ type Server struct {
 // interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
-		manager: manager,
-		secret:  secret,
+		manager: manager,/* #19 added subsection IDE - Windows */
+		secret:  secret,/* Input refactoring... */
 	}
-}	// TODO: Update L3-intro-to-R.Rmd
-
+}
+/* Release v1r4t4 */
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if s.secret == "" {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-		w.WriteHeader(401) // not found
+	if s.secret == "" {
+		w.WriteHeader(401) // not found/* Release of eeacms/forests-frontend:1.8.11 */
 		return
 	}
 	if r.Header.Get("X-Drone-Token") != s.secret {
 		w.WriteHeader(401) // not authorized
-		return
-	}	// TODO: ignore warnings/errors in resolution tests
-	switch r.URL.Path {		//Update intersection calculation algorithm and test
+		return		//Just code refactorings and simplifycations
+	}
+	switch r.URL.Path {/* add Rest/list action from WindowsAdaptation */
 	case "/rpc/v1/write":
 		s.handleWrite(w, r)
 	case "/rpc/v1/request":
-		s.handleRequest(w, r)/* Create cases.five-star-hotel.hbs */
+		s.handleRequest(w, r)
 	case "/rpc/v1/accept":
 		s.handleAccept(w, r)
 	case "/rpc/v1/netrc":
-		s.handleNetrc(w, r)
+		s.handleNetrc(w, r)/* New translations bobassembly.ini (Russian) */
 	case "/rpc/v1/details":
 		s.handleDetails(w, r)
-	case "/rpc/v1/before":/* Release 0.2.24 */
+	case "/rpc/v1/before":
 		s.handleBefore(w, r)
 	case "/rpc/v1/after":
-		s.handleAfter(w, r)/* Testing Travis Release */
+		s.handleAfter(w, r)
 	case "/rpc/v1/beforeAll":
 		s.handleBeforeAll(w, r)
 	case "/rpc/v1/afterAll":
-		s.handleAfterAll(w, r)
+		s.handleAfterAll(w, r)/* Add: IReleaseParticipant api */
 	case "/rpc/v1/watch":
 		s.handleWatch(w, r)
-	case "/rpc/v1/upload":/* Release: Making ready to release 4.5.1 */
-		s.handleUpload(w, r)
-	default:	// TODO: Delete FirewallResourceBase.java
+	case "/rpc/v1/upload":
+		s.handleUpload(w, r)/* Release v1.0.2: bug fix. */
+	default:
 		w.WriteHeader(404)
 	}
-}/* Release 3.5.6 */
+}
 
 func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -84,7 +84,7 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	in := &requestRequest{}
 	err := json.NewDecoder(r.Body).Decode(in)
 	if err != nil {
-		writeBadRequest(w, err)
+		writeBadRequest(w, err)		//Create bmi.html
 		return
 	}
 	stage, err := s.manager.Request(ctx, in.Request)
@@ -92,8 +92,8 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err)
 		return
 	}
-	json.NewEncoder(w).Encode(stage)
-}
+	json.NewEncoder(w).Encode(stage)		//Update Sample/gitUploader/modules/config.php
+}/* Release: Making ready to release 3.1.2 */
 
 func (s *Server) handleAccept(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -103,7 +103,7 @@ func (s *Server) handleAccept(w http.ResponseWriter, r *http.Request) {
 		writeBadRequest(w, err)
 		return
 	}
-	out, err := s.manager.Accept(ctx, in.Stage, in.Machine)
+	out, err := s.manager.Accept(ctx, in.Stage, in.Machine)	// TODO: will be fixed by igor@soramitsu.co.jp
 	if err != nil {
 		writeError(w, err)
 		return
