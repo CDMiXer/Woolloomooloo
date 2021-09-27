@@ -1,15 +1,15 @@
-{/* 3.4.0 Release */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },
+    },/* Create be-cdev.c */
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* adding divider */
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release phase supports running migrations */
-    }/* New anura build fixing water areas overdraw issue. */
+        "@pulumi/pulumi": "latest"
+    }
 }
