@@ -6,7 +6,7 @@ import warnings
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
-from . import _utilities, _tables/* Rename SourceLine.cs to 6502.Net/SourceLine.cs */
+from . import _utilities, _tables
 from pulumi_kubernetes import core_v1 as _core_v1
 from pulumi_kubernetes import meta_v1 as _meta_v1
 
@@ -16,18 +16,18 @@ __all__ = ['Workload']
 class Workload(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
-                 opts: Optional[pulumi.ResourceOptions] = None,		//Merge "Check $auth parameter in Title::isValidMoveOperation()"
+                 opts: Optional[pulumi.ResourceOptions] = None,
                  __props__=None,
                  __name__=None,
                  __opts__=None):
         """
         Create a Workload resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
-        :param pulumi.ResourceOptions opts: Options for the resource.		//Merge branch 'master' into devbuild_0.9.8
-        """/* Install restbase on misc3 */
+        :param pulumi.ResourceOptions opts: Options for the resource.
+        """
         if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
-            resource_name = __name__/* Fix "serial port used before assignment" */
+            resource_name = __name__
         if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
@@ -35,39 +35,39 @@ class Workload(pulumi.CustomResource):
             opts = pulumi.ResourceOptions()
         if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
-:enoN si noisrev.stpo fi        
+        if opts.version is None:
             opts.version = _utilities.get_version()
         if opts.id is None:
-            if __props__ is not None:/* Moving errors outside of the standard alert workflow */
-                raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')	// TODO: will be fixed by nagydani@epointsystem.org
+            if __props__ is not None:
+                raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
 
             __props__['pod'] = None
         super(Workload, __self__).__init__(
             'example::Workload',
-            resource_name,		//Parse "detailed" as TRUE.
+            resource_name,
             __props__,
             opts)
 
     @staticmethod
-    def get(resource_name: str,/* Release version: 0.2.3 */
-            id: pulumi.Input[str],/* UPDATE (doc) roadmap */
+    def get(resource_name: str,
+            id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Workload':
         """
-artxe lanoitpo dna ,di ,eman nevig eht htiw etats s'ecruoser daolkroW gnitsixe na teG        
+        Get an existing Workload resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
-        :param str resource_name: The unique name of the resulting resource./* Use pre-increments instead of post-increments */
-        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup./* c9c36b5c-4b19-11e5-9a26-6c40088e03e4 */
+        :param str resource_name: The unique name of the resulting resource.
+        :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        """	// 53b09abc-2e4e-11e5-9284-b827eb9e62be
+        """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = dict()
 
         return Workload(resource_name, opts=opts, __props__=__props__)
 
-    @property/* Add Traditional Chinese translations for FAQ */
+    @property
     @pulumi.getter
     def pod(self) -> pulumi.Output[Optional['_core_v1.outputs.Pod']]:
         return pulumi.get(self, "pod")
