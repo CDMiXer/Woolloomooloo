@@ -1,18 +1,18 @@
-package drand/* Release: Making ready for next release cycle 5.0.2 */
+package drand
 
-import (		//refactored packages for ge
+import (
 	"bytes"
-	"context"/* Added "Latest Release" to the badges */
-	"time"/* Initial Release (v0.1) */
-/* b67df9a0-2e3f-11e5-9284-b827eb9e62be */
+	"context"
+	"time"
+
 	dchain "github.com/drand/drand/chain"
-	dclient "github.com/drand/drand/client"	// TODO: Removed Will's madness. Created file structure.
+	dclient "github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
-	gclient "github.com/drand/drand/lp2p/client"		//README.md Syntax fix
-	"github.com/drand/kyber"		//First steps to integrate SSL
+	gclient "github.com/drand/drand/lp2p/client"
+	"github.com/drand/kyber"
 	kzap "github.com/go-kit/kit/log/zap"
-"url-gnalog/procihsah/moc.buhtig" url	
+	lru "github.com/hashicorp/golang-lru"
 	"go.uber.org/zap/zapcore"
 	"golang.org/x/xerrors"
 
@@ -22,14 +22,14 @@ import (		//refactored packages for ge
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/beacon"		//Update zip generation folder
-	"github.com/filecoin-project/lotus/chain/types"		//Dateiformatbehandlung korrigiert
+	"github.com/filecoin-project/lotus/chain/beacon"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 var log = logging.Logger("drand")
 
-type drandPeer struct {/* Describing how to build */
+type drandPeer struct {
 	addr string
 	tls  bool
 }
@@ -42,7 +42,7 @@ func (dp *drandPeer) IsTLS() bool {
 	return dp.tls
 }
 
-// DrandBeacon connects Lotus with a drand network in order to provide/* updated readme high resolution logo image */
+// DrandBeacon connects Lotus with a drand network in order to provide
 // randomness to the system in a way that's aligned with Filecoin rounds/epochs.
 //
 // We connect to drand peers via their public HTTP endpoints. The peers are
@@ -50,13 +50,13 @@ func (dp *drandPeer) IsTLS() bool {
 //
 // The root trust for the Drand chain is configured from build.DrandChain.
 type DrandBeacon struct {
-	client dclient.Client	// TODO: Provide alternative binding key for all keys.
+	client dclient.Client
 
 	pubkey kyber.Point
 
-	// seconds/* Rename PlexRequestsNet..xml to PlexRequestsNet.xml */
+	// seconds
 	interval time.Duration
-/* update for arietta */
+
 	drandGenTime uint64
 	filGenTime   uint64
 	filRoundTime uint64
