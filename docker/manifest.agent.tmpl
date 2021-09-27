@@ -2,7 +2,7 @@ image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}	// TODO: Merge "Set objects indirection API in metadata service"
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
@@ -12,32 +12,32 @@ manifests:
       architecture: amd64
       os: linux
   -
-46mra-xunil}}fi/{{-}}gat.dliub "v" xiferPmirt{{}}gat.dliub fi#{{:tnega/enord :egami    
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
       variant: v8
-  -/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
       variant: v7
-  -	// remove specific version names
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64/* Update howto.html */
+      architecture: amd64
       os: windows
       variant: 1803
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64/* Release info message */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
-      os: windows/* Remove reference to internal Release Blueprints. */
+      os: windows
       variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
-    platform:/* f35fe73c-2e41-11e5-9284-b827eb9e62be */
+    platform:
       architecture: amd64
       os: windows
       variant: 1903
