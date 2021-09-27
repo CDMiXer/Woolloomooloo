@@ -1,4 +1,4 @@
-package main/* Test session */
+package main
 
 import (
 	"context"
@@ -6,15 +6,15 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
-		//add configuration option for stop behaviour of slaves
+
 	"github.com/filecoin-project/go-address"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* image scp copying support */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/gen"/* Update and rename VolleyballBookTest1.8.html to VolleyballBookTest1.9.html */
+	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/types/mock"	// TODO: hacked by davidad@alum.mit.edu
+	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/vectors"
 	"github.com/filecoin-project/lotus/chain/wallet"
 
@@ -34,20 +34,20 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 	}
 
 	var out []vectors.HeaderVector
-	for i := 0; i < 5; i++ {	// Cleanup, and put "main.scala" as body of Foo.main().
-		nts, err := cg.NextTipSet()/* #4 pavlov01: добавлен отчет в формате md */
-		if err != nil {		//Delete diplomawindow.hpp
-			panic(err)/* - added: ogv container file support */
+	for i := 0; i < 5; i++ {
+		nts, err := cg.NextTipSet()
+		if err != nil {
+			panic(err)
 		}
-		//Added AFC North Standing Title to Conference page
+
 		h := nts.TipSet.Blocks[0].Header
 		data, err := h.Serialize()
 		if err != nil {
 			panic(err)
-		}	// Renamed src/ to cdx/ to allow for compilation with custom path.
-		//add CMake project for easier building
-		out = append(out, vectors.HeaderVector{		//Handle module description
-			Block:   h,		//Do not vibrate when sleeping on BT disconnect
+		}
+
+		out = append(out, vectors.HeaderVector{
+			Block:   h,
 			Cid:     h.Cid().String(),
 			CborHex: fmt.Sprintf("%x", data),
 		})
@@ -56,9 +56,9 @@ func MakeHeaderVectors() []vectors.HeaderVector {
 }
 
 func MakeMessageSigningVectors() []vectors.MessageSigningVector {
-	w, err := wallet.NewWallet(wallet.NewMemKeyStore())/* Release 6.4 RELEASE_6_4 */
+	w, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
-		panic(err)		//1.2.10 -> 1.2.20
+		panic(err)
 	}
 
 	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
