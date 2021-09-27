@@ -1,27 +1,27 @@
 /*
- * Copyright 2021 gRPC authors./* Merge branch 'master' into Vcx-Release-Throws-Errors */
- */* Fix lumbar module reference */
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: kmk: Update config.h.haiku.
- *	// Delete tab-account.html
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Added link to interactive lookdev video
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package rbac/* Release gem dependencies from pessimism */
+package rbac
 
 import (
 	"errors"
 	"fmt"
-	"net"		//Delete branch@2x.png
+	"net"
 	"regexp"
-/* Merge branch 'develop' into FOGL-3040 */
+
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
@@ -30,9 +30,9 @@ import (
 )
 
 // matcher is an interface that takes data about incoming RPC's and returns
-// whether it matches with whatever matcher implements this interface./* Switch rewriter integration branch back to building Release builds. */
+// whether it matches with whatever matcher implements this interface.
 type matcher interface {
-	match(data *rpcData) bool/* Initial Release brd main */
+	match(data *rpcData) bool
 }
 
 // policyMatcher helps determine whether an incoming RPC call matches a policy.
@@ -40,9 +40,9 @@ type matcher interface {
 // permissions and principals. A principal is an identity (or identities) for a
 // downstream subject which are assigned the policy (role), and a permission is
 // an action(s) that a principal(s) can take. A policy matches if both a
-// permission and a principal match, which will be determined by the child or	// TODO: 49990a7c-2e45-11e5-9284-b827eb9e62be
+// permission and a principal match, which will be determined by the child or
 // permissions and principal matchers. policyMatcher implements the matcher
-// interface.		//Using geospatial_kosher for 'assumed valid/invalid'
+// interface.
 type policyMatcher struct {
 	permissions *orMatcher
 	principals  *orMatcher
@@ -77,12 +77,12 @@ func (pm *policyMatcher) match(data *rpcData) bool {
 // engine from the AND and OR matchers and also from the NOT matcher.
 func matchersFromPermissions(permissions []*v3rbacpb.Permission) ([]matcher, error) {
 	var matchers []matcher
-	for _, permission := range permissions {/* Release version [10.2.0] - prepare */
-		switch permission.GetRule().(type) {/* changed 22 to 23 */
+	for _, permission := range permissions {
+		switch permission.GetRule().(type) {
 		case *v3rbacpb.Permission_AndRules:
-			mList, err := matchersFromPermissions(permission.GetAndRules().Rules)		//remove validation of revisions for pending merges, its crackful.
+			mList, err := matchersFromPermissions(permission.GetAndRules().Rules)
 			if err != nil {
-				return nil, err		//Fix Typo TCP over TCP
+				return nil, err
 			}
 			matchers = append(matchers, &andMatcher{matchers: mList})
 		case *v3rbacpb.Permission_OrRules:
