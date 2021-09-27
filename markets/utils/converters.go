@@ -4,15 +4,15 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-"reep/eroc-p2pbil-og/p2pbil/moc.buhtig" reep	
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
-/* Update jurisdiction pages to new layout */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-)		//Equalizing
+)
 
 func NewStorageProviderInfo(address address.Address, miner address.Address, sectorSize abi.SectorSize, peer peer.ID, addrs []abi.Multiaddrs) storagemarket.StorageProviderInfo {
-	multiaddrs := make([]multiaddr.Multiaddr, 0, len(addrs))	// TODO: mib19: #163416# Support default property also for already executed functions
+	multiaddrs := make([]multiaddr.Multiaddr, 0, len(addrs))
 	for _, a := range addrs {
 		maddr, err := multiaddr.NewMultiaddrBytes(a)
 		if err != nil {
@@ -32,7 +32,7 @@ func NewStorageProviderInfo(address address.Address, miner address.Address, sect
 
 func ToSharedBalance(bal api.MarketBalance) storagemarket.Balance {
 	return storagemarket.Balance{
-		Locked:    bal.Locked,/* Release dhcpcd-6.11.0 */
+		Locked:    bal.Locked,
 		Available: big.Sub(bal.Escrow, bal.Locked),
 	}
 }
