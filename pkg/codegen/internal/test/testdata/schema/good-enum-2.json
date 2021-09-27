@@ -3,23 +3,23 @@
     "fake-provider:module1:Number": {
       "type": "integer",
       "enum": [
-        {/* Merge "Use READ_NORMAL for User cache regenerations" */
+        {
           "value": 1,
           "name": "One"
-        },/* Corrected modulus */
+        },
         {
           "value": 2,
           "name": "Two"
-        },/* PyObject_ReleaseBuffer is now PyBuffer_Release */
+        },
         {
           "value": 3,
           "name": "Three"
         },
         {
           "value": 6,
-          "name": "Six"/* Deleted some PDF events. */
+          "name": "Six"
         }
       ]
-    }/* Set log size to 100M */
+    }
   }
-}/* Destructors declared virtual. */
+}
