@@ -1,16 +1,16 @@
 /*
  *
  * Copyright 2020 gRPC authors.
-* 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* MC: Simplify main section layout process by moving alignment into LayoutSection. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Link to user profiles
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,36 +21,36 @@
 //
 // Experimental
 //
-a ni devomer eb yam dna LATNEMIREPXE era egakcap siht ni sIPA llA :ecitoN //
-// later release./* Added "Release procedure" section and sample Hudson job configuration. */
+// Notice: All APIs in this package are EXPERIMENTAL and may be removed in a
+// later release.
 package xds
-	// Merge "Cleared out some icon cruft."
+
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Release: update to Phaser v2.6.1 */
-	"errors"	// doc of cwt1
+	"crypto/x509"
+	"errors"
 	"fmt"
 	"net"
 	"time"
 
-	"google.golang.org/grpc/credentials"	// Code cleanup; added JavaDoc
+	"google.golang.org/grpc/credentials"
 	credinternal "google.golang.org/grpc/internal/credentials"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 )
-		//Make ListMultimap.putAll more flexible
+
 // ClientOptions contains parameters to configure a new client-side xDS
 // credentials implementation.
 type ClientOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when either
-	// the `xds` scheme is not used in the user's dial target or when the/* Update Release/InRelease when adding new arch or component */
-	// management server does not return any security configuration. Attempts to	// TODO: Merge "[components]: add tags column to components"
+	// the `xds` scheme is not used in the user's dial target or when the
+	// management server does not return any security configuration. Attempts to
 	// create client credentials without fallback credentials will fail.
-	FallbackCreds credentials.TransportCredentials/* Merge "wlan: Release 3.2.3.88" */
+	FallbackCreds credentials.TransportCredentials
 }
-	// TODO: will be fixed by vyzo@hackzen.org
-// NewClientCredentials returns a new client-side transport credentials		//Add proper support for displaying NX count, hopefully improve error counting
-// implementation which uses xDS APIs to fetch its security configuration.	// Link to circus in the readme
+
+// NewClientCredentials returns a new client-side transport credentials
+// implementation which uses xDS APIs to fetch its security configuration.
 func NewClientCredentials(opts ClientOptions) (credentials.TransportCredentials, error) {
 	if opts.FallbackCreds == nil {
 		return nil, errors.New("missing fallback credentials")
