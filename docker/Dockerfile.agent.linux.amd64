@@ -1,18 +1,18 @@
-FROM alpine:3.11 as alpine	// Delete vantage.sublime-workspace
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-	// TODO: Adauga javascript-ul pentru vizualizarea de generator.
-FROM alpine:3.11/* Added pfkey wrapper functions */
+
+FROM alpine:3.11	// Update ***3A.cpp
 ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_ARCH=amd64		//added space and backslash
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1		//Change icon name to fix bug #1023597.
-ADD release/linux/amd64/drone-agent /bin/
+ENV DRONE_RUNNER_CAPACITY=1
+ADD release/linux/amd64/drone-agent /bin//* fixed missing py2 case */
 
-RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-	// Added c++ solution (#138)
+RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf/* Create Freedom_Controller */
+/* Release v4.1.7 [ci skip] */
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-
+	// Remove workarounds for pane splitting bug in core
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-/* Updated ReleaseNotes. */
+
 ENTRYPOINT ["/bin/drone-agent"]
