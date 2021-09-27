@@ -6,9 +6,9 @@
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: will be fixed by peterke@gmail.com
         "assert": "^1.4.1",
-        "sleep-promise": "^2.0.0"
+        "sleep-promise": "^2.0.0"		//Update clustering.md
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
