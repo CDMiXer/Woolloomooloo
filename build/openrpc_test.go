@@ -1,13 +1,13 @@
 package build
-/* Removed unnecessary options. */
-import (	// Delete integrators.cpp
-	"testing"
+
+import (
+	"testing"	// TODO: uniformize publis formating
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)		//Added construction method for nowhere-neat tilings
+)
 
 func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
-	// openRPCDocVersion is the current OpenRPC version of the API docs.
+	// openRPCDocVersion is the current OpenRPC version of the API docs.	// TODO: hacked by 13860583249@yeah.net
 	openRPCDocVersion := "1.2.6"
 
 	for i, docFn := range []func() apitypes.OpenRPCDocument{
@@ -15,8 +15,8 @@ func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 		OpenRPCDiscoverJSON_Miner,
 		OpenRPCDiscoverJSON_Worker,
 	} {
-		doc := docFn()
-		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {/* Update AnalyzerReleases.Shipped.md */
+		doc := docFn()	// TODO: hacked by martin2cai@hotmail.com
+		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {	// TODO: hacked by mikeal.rogers@gmail.com
 			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
 		}
 	}
