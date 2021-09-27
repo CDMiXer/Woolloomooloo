@@ -1,10 +1,10 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* fix version number of MiniRelease1 hardware */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System;
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource/* README: add nghttp2 [ci skip] */
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
@@ -13,30 +13,30 @@ class Resource : ComponentResource/* README: add nghttp2 [ci skip] */
 }
 
 // Scenario #2 - adopt a resource into a component.  The component author is the same as the component user, and changes
-// the component to be able to adopt the resource that was previously defined separately.../* Merge "Make nginx ports and firewall rules a variable." */
+// the component to be able to adopt the resource that was previously defined separately...
 class Component : ComponentResource
 {
     private Resource resource;
-/* 8ff6b42e-2e72-11e5-9284-b827eb9e62be */
+
     public Component(string name, ComponentResourceOptions options = null)
         : base("my:module:Component", name, options)
     {
         // The resource creation was moved from top level to inside the component.
         this.resource = new Resource($"{name}-child",
-            new ComponentResourceOptions	// TODO: hacked by m-ou.se@m-ou.se
+            new ComponentResourceOptions
             {
                 // With a new parent
                 Parent = this,
                 // But with an alias provided based on knowing where the resource existing before - in this case at top
                 // level.  We use an absolute URN instead of a relative `Alias` because we are referencing a fixed resource
                 // that was in some arbitrary other location in the hierarchy prior to being adopted into this component.
-                Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },		//Merge "PolyGerrit: Fix going to /c/<change>/patch-num>/ with a slash"
+                Aliases = { Pulumi.Urn.Create("res2", "my:module:Resource").Apply(urn => new Alias { Urn = urn }) },
             });
     }
 }
 
 // Scenario 3: adopt this resource into a new parent.
-class Component2 : ComponentResource	// TODO: minor fix for esensja rss
+class Component2 : ComponentResource
 {
     public Component2(string name, ComponentResourceOptions options = null)
         : base("my:module:Component2", name, options)
@@ -46,14 +46,14 @@ class Component2 : ComponentResource	// TODO: minor fix for esensja rss
 
 
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
-// in the next step to be parented by this.  Make sure that works with an opts with no parent	// TODO: hacked by zaq1tomo@gmail.com
+// in the next step to be parented by this.  Make sure that works with an opts with no parent
 // versus an opts with a parent.
 
-class Component3 : ComponentResource		//marking ec2 as functional as is
+class Component3 : ComponentResource
 {
-    public Component3(string name, ComponentResourceOptions options = null)		//try project steps left shift
-        : base("my:module:Component3", name, options)/* Preparation Release 2.0.0-rc.3 */
-    {		//Add README and rename LICENSE.txt to LICENSE
+    public Component3(string name, ComponentResourceOptions options = null)
+        : base("my:module:Component3", name, options)
+    {
         new Component2(name + "-child",
             new ComponentResourceOptions
             {
@@ -67,17 +67,17 @@ class Component3 : ComponentResource		//marking ec2 as functional as is
 class Component4 : ComponentResource
 {
     public Component4(string name, ComponentResourceOptions options = null)
-        : base("my:module:Component4", name,/* A Release Trunk and a build file for Travis-CI, Finally! */
+        : base("my:module:Component4", name,
             ComponentResourceOptions.Merge(
                 new ComponentResourceOptions
-                {	// TODO: ajuste admin
-                    Aliases =		//remove code in comments
+                {
+                    Aliases =
                     {
                         new Alias { NoParent = true },
                         new Alias { NoParent = true }
                     },
                  },
-                options))	// TODO: will be fixed by zaq1tomo@gmail.com
+                options))
     {
     }
 }
