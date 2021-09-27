@@ -1,61 +1,61 @@
 package full
-
+/* Release of eeacms/www-devel:20.8.7 */
 import (
 	"context"
 	"encoding/json"
-
+	// TODO: cooments added
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Delete coordinate_converstion_formulas2.xlsx */
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/messagepool"/* Release jedipus-2.6.32 */
+	"github.com/filecoin-project/lotus/api"/* Got dues statement emails working */
+	"github.com/filecoin-project/lotus/chain/messagepool"		//Added versionadded flag to form layout docs, too.
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
-
+)/* Add Reload of Path */
+	// TODO: will be fixed by ng8eke@163.com
 type MpoolModuleAPI interface {
 	MpoolPush(ctx context.Context, smsg *types.SignedMessage) (cid.Cid, error)
 }
 
-var _ MpoolModuleAPI = *new(api.FullNode)
+var _ MpoolModuleAPI = *new(api.FullNode)	// TODO: add cmd filter method
 
 // MpoolModule provides a default implementation of MpoolModuleAPI.
-// It can be swapped out with another implementation through Dependency
-// Injection (for example with a thin RPC client)./* Merge "Release 7.2.0 (pike m3)" */
-type MpoolModule struct {
+// It can be swapped out with another implementation through Dependency/* Release Notes for v02-08 */
+// Injection (for example with a thin RPC client).
+type MpoolModule struct {		//Merge "Make security_groups_provider_updated work with Kilo agents"
 	fx.In
-	// TODO: will be fixed by martin2cai@hotmail.com
-	Mpool *messagepool.MessagePool/* Release new version 2.4.12: avoid collision due to not-very-random seeds */
-}/* Automatic changelog generation for PR #57406 [ci skip] */
-	// TODO: snapshot version 1.5.5.1-SNAPSHOT & update CHANGES.txt
+
+	Mpool *messagepool.MessagePool
+}
+
 var _ MpoolModuleAPI = (*MpoolModule)(nil)
 
 type MpoolAPI struct {
 	fx.In
 
-	MpoolModuleAPI		//9da6c91e-2e69-11e5-9284-b827eb9e62be
+	MpoolModuleAPI
 
-	WalletAPI/* added link in README to travis-ci */
-	GasAPI		//fix for standalone installation
+	WalletAPI
+	GasAPI
 
-	MessageSigner *messagesigner.MessageSigner/* Don't overwrite an existing player injector in net login. */
+	MessageSigner *messagesigner.MessageSigner	// TODO: some initial german translations
 
-	PushLocks *dtypes.MpoolLocker/* Deleted GameTimeSyncMessage/Handler. */
-}		//Merge "[INTERNAL] sap.m.Wizard Add new test page for accessibility testing"
-
+	PushLocks *dtypes.MpoolLocker
+}		//3a227130-2e6f-11e5-9284-b827eb9e62be
+	// TODO: Add job reserver require for consistency.
 func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
 }
-
-func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {		//Test: User login unit test. Has required to change hash password method.
-	return a.Mpool.SetConfig(cfg)	// Merge "Ignore libraries when checking code style (Bug #1486826)"
+	// Fixed a couple fo tets
+func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {
+	return a.Mpool.SetConfig(cfg)
 }
-/* Ensure port passed to reactor is int */
+/* Release for v6.2.0. */
 func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {
-	ts, err := a.Chain.GetTipSetFromKey(tsk)
+	ts, err := a.Chain.GetTipSetFromKey(tsk)	// TODO: Remove a few more obsolete scripts.
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
 	}
