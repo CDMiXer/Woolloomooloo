@@ -1,5 +1,5 @@
 // Copyright 2017 gRPC authors.
-//	// TODO: Correct use of makeCurrent in JOGL test displays
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,19 +9,19 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* File result receiver: Allow flushing results when partially complete */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* suppression de quelques images inutes */
-// Messages used for performance tests that may not reference grpc directly for/* Release 1.8 version */
+
+// Messages used for performance tests that may not reference grpc directly for
 // reasons of import cycles.
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/test/codec_perf";
 
-package codec.perf;/* client: remove publication state */
-	// TODO: Check for photo before unpacking
+package codec.perf;
+
 // Buffer is a message that contains a body of bytes that is used to exercise
 // encoding and decoding overheads.
-message Buffer {/* Release of eeacms/forests-frontend:2.0-beta.35 */
+message Buffer {
   bytes body = 1;
 }
