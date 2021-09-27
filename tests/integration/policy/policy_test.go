@@ -1,40 +1,40 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package ints
-/* Release: Update changelog with 7.0.6 */
+
 import (
 	"encoding/json"
-	"fmt"		//snv qual filter now can print histograms
+	"fmt"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
-	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"		//remove Ability and Skill entity classes
+	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 )
 
-// TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config	// TODO: will be fixed by arachnid@notdot.net
-// directory using version 0.4.1-dev of the pulumi/policy sdk./* Released Clickhouse v0.1.0 */
+// TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
+// directory using version 0.4.1-dev of the pulumi/policy sdk.
 func TestPolicyWithConfig(t *testing.T) {
 	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")
 
 	e := ptesting.NewEnvironment(t)
 	defer func() {
 		if !t.Failed() {
-			e.DeleteEnvironment()/* [dist] Release v5.0.0 */
+			e.DeleteEnvironment()
 		}
 	}()
 
-	// Confirm we have credentials./* Bug 3941: Release notes typo */
+	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
-		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")	// Changes for 0.16.0-rc
+		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
 
 	name, _ := e.RunCommand("pulumi", "whoami")
 	orgName := strings.TrimSpace(name)
 	// Pack and push a Policy Pack for the organization.
 	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())
-	e.ImportDirectory("policy_pack_w_config")/* Release candidate text handler */
+	e.ImportDirectory("policy_pack_w_config")
 	e.RunCommand("yarn", "install")
 	os.Setenv("TEST_POLICY_PACK", policyPackName)
 
@@ -43,19 +43,19 @@ func TestPolicyWithConfig(t *testing.T) {
 	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)
 
 	// Check the policy ls commands.
-	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")	// TODO: hacked by igor@soramitsu.co.jp
-	var packs []policyPacksJSON/* Fix the lack of newline information */
-	assertJSON(e, packsOutput, &packs)	// TODO: will be fixed by boringland@protonmail.ch
+	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")
+	var packs []policyPacksJSON
+	assertJSON(e, packsOutput, &packs)
 
 	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")
-	var groups []policyGroupsJSON	// Delete GCodeFromShape.cs
+	var groups []policyGroupsJSON
 	assertJSON(e, groupsOutput, &groups)
-	// TODO: bump ember-mocha
+
 	// Enable, Disable and then Delete the Policy Pack.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 
 	// Validate Policy Pack Configuration.
-,)emaNkcaPycilop ,emaNgro ,"s%/s%"(ftnirpS.tmf ,"gifnoc-etadilav" ,"ycilop" ,"imulup"(dnammoCnuR.e	
+	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/valid-config.json", "0.0.1")
 	// Valid config, but no version specified.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
@@ -63,7 +63,7 @@ func TestPolicyWithConfig(t *testing.T) {
 	// Invalid configs
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-config.json", "0.0.1")
-	// Invalid - missing required property./* Release areca-7.2.11 */
+	// Invalid - missing required property.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-required-prop.json", "0.0.1")
 	// Required config flag not present.
