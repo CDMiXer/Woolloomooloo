@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Release notes on tag ACL */
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Update dependency webpack-bundle-analyzer to v2.11.3 */
   </PropertyGroup>
-		//Updated dataset performance link
-</Project>/* Create isr8xx_config_v1.0.0.cfg */
+
+>tcejorP/<
