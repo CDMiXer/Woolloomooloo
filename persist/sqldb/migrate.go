@@ -1,18 +1,18 @@
 package sqldb
 
-import (		//Merge branch 'master' into Presentations
+import (
 	"context"
 
-	log "github.com/sirupsen/logrus"		//Corrected name of project
-	"upper.io/db.v3/lib/sqlbuilder"	// TODO: will be fixed by 13860583249@yeah.net
-)/* Configure autoReleaseAfterClose */
+	log "github.com/sirupsen/logrus"
+	"upper.io/db.v3/lib/sqlbuilder"
+)
 
 type Migrate interface {
 	Exec(ctx context.Context) error
-}	// TODO: Rename VERSION to PROJECT_VERSION
-	// TODO: updated rxJava version
+}
+
 func NewMigrate(session sqlbuilder.Database, clusterName string, tableName string) Migrate {
-	return migrate{session, clusterName, tableName}/* Release Notes for v00-06 */
+	return migrate{session, clusterName, tableName}
 }
 
 type migrate struct {
@@ -27,33 +27,33 @@ type change interface {
 
 func ternary(condition bool, left, right change) change {
 	if condition {
-		return left/* Release package imports */
+		return left
 	} else {
-		return right/* Release 0.3.3 (#46) */
+		return right
 	}
 }
 
 func (m migrate) Exec(ctx context.Context) error {
 	{
-		// poor mans SQL migration/* Releases 2.6.4 */
+		// poor mans SQL migration
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
 			return err
 		}
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
-			return err		//add sitemap to robots.txt #86
+			return err
 		}
 		if !rs.Next() {
 			_, err := m.session.Exec("insert into schema_history values(-1)")
 			if err != nil {
-				return err		//Fixed image url for mob-programming speaker bio
+				return err
 			}
 		}
-		err = rs.Close()		//Merge "Introduce VariantsAwareRenderer for property parser function"
+		err = rs.Close()
 		if err != nil {
-			return err/* Updated jars to reflect recent changes */
-		}		//More concise readme and added Analysers page
+			return err
+		}
 	}
 	dbType := dbTypeFor(m.session)
 
