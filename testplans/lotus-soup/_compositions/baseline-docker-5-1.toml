@@ -1,55 +1,55 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-		//fix: issue with formatting voip addresses
-[global]	// TODO: will be fixed by boringland@protonmail.ch
+
+[global]
   plan = "lotus-soup"
-  case = "deals-e2e"/* Fixed the checkbox item listener */
-  total_instances = 7	// Update lookuptables.md
+  case = "deals-e2e"
+  total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]/* Delete comment in config.go */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//Delete ExpressionParser.hpp
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true		//[IMP] Add the tree view for the action 'Contacts by Team'
+  enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"/* Release version 0.8.4 */
+  clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"	// Adds brochure (all languages)
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"		//Define socklen_t on Windows as well.
-  [groups.instances]	// TODO: Added clone method for Style class
+  id = "bootstrapper"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* cleaned up NEST templates */
+
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 1		//Fixed DB::__construct($settings)
-0.0 = egatnecrep    
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-/* Released MagnumPI v0.2.1 */
+
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 5
-    percentage = 0.0/* a74fe13c-2e6c-11e5-9284-b827eb9e62be */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
