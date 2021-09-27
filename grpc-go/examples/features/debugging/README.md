@@ -1,4 +1,4 @@
-# Debugging/* Moving to a properties-driven approach to avoid "hard code" */
+# Debugging
 
 Currently, grpc provides two major tools to help user debug issues, which are logging and channelz.
 
@@ -15,12 +15,12 @@ We also provide a runtime debugging tool, Channelz, to help users with live debu
 
 See the channelz blog post here ([link](https://grpc.io/blog/a-short-introduction-to-channelz/)) for
 details about how to use channelz service to debug live program.
-/* Release 1.1.16 */
+
 ## Try it
 The example is able to showcase how logging and channelz can help with debugging. See the channelz 
-blog post linked above for full explanation.		//Refixing delete not working, need to commit the db connection
+blog post linked above for full explanation.
 
-```	// TODO: will be fixed by ligi@ligi.de
+```
 go run server/main.go
 ```
 
