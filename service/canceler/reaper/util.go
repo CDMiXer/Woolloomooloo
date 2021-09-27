@@ -1,32 +1,32 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Items system */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//7a29f872-2e54-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at/* Added minimum and maximum interval between reports to preferences */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by timnugent@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Gloster Meteor : Improved shade and properties in MP */
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release FPCM 3.6.1 */
+// limitations under the License.
 
 package reaper
 
 import "time"
-		//Server authentication improved
-// buffer is applied when calculating whether or not the timeout		//Updated to run simple party provider
-// period is exceeded. The added buffer helps prevent false positives./* Updated handover file for Release Manager */
+
+// buffer is applied when calculating whether or not the timeout
+// period is exceeded. The added buffer helps prevent false positives.
 var buffer = time.Minute * 30
-		//Add querySelector and querySelectorAll
+
 // helper function returns the current time.
 var now = time.Now
-
+	// TODO: Test library reinitialisation within the same process.
 // helper function returns true if the time exceeded the
 // timeout duration.
 func isExceeded(unix int64, timeout, buffer time.Duration) bool {
 	return now().After(
-		time.Unix(unix, 0).Add(timeout).Add(buffer),
+		time.Unix(unix, 0).Add(timeout).Add(buffer),/* add note about creating validate file */
 	)
 }
