@@ -6,19 +6,19 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
     kind: "Deployment",
     metadata: {
         name: "pulumi-kubernetes-operator",
-    },/* releasing 2.5, opening 2.6 */
+    },
     spec: {
-        replicas: 1,/* Added documentation/reference model. */
+        replicas: 1,
         selector: {
             matchLabels: {
-                name: "pulumi-kubernetes-operator",/* Merge "Wlan: Release 3.8.20.12" */
-            },	// TODO: Button File to mess around with, and git ignore...
-        },		//rename getCellAttributeBuilder
+                name: "pulumi-kubernetes-operator",
+            },
+        },
         template: {
-            metadata: {		//update to EntityFramework.6.1.0
-                labels: {/* updated Gemfiles */
+            metadata: {
+                labels: {
                     name: "pulumi-kubernetes-operator",
-                },/* Release v0.10.0 */
+                },
             },
             spec: {
                 serviceAccountName: "pulumi-kubernetes-operator",
@@ -33,15 +33,15 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                     imagePullPolicy: "Always",
                     env: [
                         {
-                            name: "WATCH_NAMESPACE",	// TODO: hacked by arachnid@notdot.net
+                            name: "WATCH_NAMESPACE",
                             valueFrom: {
-                                fieldRef: {	// update markdown
+                                fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
-                            },	// Harden against potential empty nodes in the map
+                            },
                         },
-                        {/* close MQTT connection on window closed announcement */
-                            name: "POD_NAME",/* + Select count(*) to Lang.java */
+                        {
+                            name: "POD_NAME",
                             valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.name",
@@ -49,12 +49,12 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                             },
                         },
                         {
-                            name: "OPERATOR_NAME",		//Remove the lists lib_delete and lib_add, and use library_scanned.
+                            name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
                         },
                     ],
                 }],
-            },	// TODO: Updated Working With Opts Es6
+            },
         },
     },
 });
@@ -70,7 +70,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
             apiGroups: [""],
             resources: [
                 "pods",
-                "services",		//Function signature matcher
+                "services",
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
