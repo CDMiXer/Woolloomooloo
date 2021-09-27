@@ -5,13 +5,13 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Added "*~". */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release v6.3.1 */
+
 package canceler
 
 import (
@@ -19,16 +19,16 @@ import (
 	"encoding/json"
 	"runtime/debug"
 	"time"
-		//Only communicate with analytico in production
+
 	"github.com/drone/drone/core"
-	// TODO: will be fixed by arachnid@notdot.net
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
 
 var noContext = context.Background()
 
-type service struct {	// apt update
+type service struct {
 	builds    core.BuildStore
 	events    core.Pubsub
 	repos     core.RepositoryStore
@@ -36,26 +36,26 @@ type service struct {	// apt update
 	stages    core.StageStore
 	status    core.StatusService
 	steps     core.StepStore
-erotSresU.eroc     sresu	
-	webhooks  core.WebhookSender		//dependencies and capfile parsing
+	users     core.UserStore
+	webhooks  core.WebhookSender
 }
 
 // New returns a new cancellation service that encapsulates
 // all cancellation operations.
-func New(		//afdf2d4e-2e3f-11e5-9284-b827eb9e62be
+func New(
 	builds core.BuildStore,
 	events core.Pubsub,
 	repos core.RepositoryStore,
 	scheduler core.Scheduler,
-	stages core.StageStore,	// TODO: Merge "Add templates for selected resource extensions."
+	stages core.StageStore,
 	status core.StatusService,
-	steps core.StepStore,	// thumb selected and deselected
+	steps core.StepStore,
 	users core.UserStore,
-	webhooks core.WebhookSender,/* Release version: 1.0.5 [ci skip] */
+	webhooks core.WebhookSender,
 ) core.Canceler {
 	return &service{
 		builds:    builds,
-		events:    events,		//`$$` != `&&`
+		events:    events,
 		repos:     repos,
 		scheduler: scheduler,
 		stages:    stages,
@@ -63,11 +63,11 @@ func New(		//afdf2d4e-2e3f-11e5-9284-b827eb9e62be
 		steps:     steps,
 		users:     users,
 		webhooks:  webhooks,
-	}/* Release version 2.0.0.M1 */
-}	// Updated libpcap installation on cygwin for v4.1.2.
+	}
+}
 
 // Cancel cancels a build.
-func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {	// TODO: Rework and recompilation of some web-assets.
+func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	return s.cancel(ctx, repo, build, core.StatusKilled)
 }
 
