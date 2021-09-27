@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Fix CexIO Trade History */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,14 +16,14 @@
 
 package secret
 
-import (	// TODO: changed formatting of unit goals and submission
+import (
 	"context"
 
 	"github.com/drone/drone/core"
 )
 
 // External returns a no-op registry secret provider.
-func External(string, string, bool) core.SecretService {	// TODO: hacked by brosner@gmail.com
+func External(string, string, bool) core.SecretService {
 	return new(noop)
 }
 
