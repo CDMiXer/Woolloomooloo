@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;/* huge update to fit some of theoricus needs */
+using System.Threading.Tasks;
 using Pulumi;
 using Aws = Pulumi.Aws;
 
@@ -11,8 +11,8 @@ class MyStack : Stack
     {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);		//preferred-e-versions: add PREFERRED_VERSIONs for gnome-vfs-dbus and gcc
-    }/* Bugfix in snippets with block and editable_elements. */
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
+    }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
@@ -21,42 +21,42 @@ class MyStack : Stack
         {
             CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
-            EnableDnsHostnames = true,		//Protect vendor folder
+            EnableDnsHostnames = true,
             EnableDnsSupport = true,
             Tags = 
             {
-                { "Name", "pulumi-eks-vpc" },	// TODO: hacked by ligi@ligi.de
-            },/* Only insert if this is a completely new session from a known user. */
-        });	// TODO: Doorbell.io documentation added with images
+                { "Name", "pulumi-eks-vpc" },
+            },
+        });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
-            VpcId = eksVpc.Id,	// TODO: Refactored tests to a separate working directory.
-            Tags = /* Merge "Cleans up issues across a few modules" into androidx-crane-dev */
+            VpcId = eksVpc.Id,
+            Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
             },
-        });	// TODO: #5598: document DocFileSuite *args argument.
+        });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-        {	// TODO: will be fixed by souzau@yandex.com
+        {
             VpcId = eksVpc.Id,
             Routes = 
-            {/* Fixed a few bugs in Firefox 3.1b3 */
+            {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
                 {
                     CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
-                },		//Fix inch-ci badge
+                },
             },
             Tags = 
-            {	// Testing declarative transaction handling.
+            {
                 { "Name", "pulumi-vpc-rt" },
             },
         });
-        // Subnets, one for each AZ in a region/* Rename kicost/distributors/local/local.py to kicost/distributors/local.py */
+        // Subnets, one for each AZ in a region
         var zones = await Aws.GetAvailabilityZones.InvokeAsync();
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
-        {		//_Forum selected :speech_baloon:
+        {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
             {
                 AssignIpv6AddressOnCreation = false,
