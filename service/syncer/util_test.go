@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// 75cffd4e-2e59-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "wlan: Release 3.2.3.96" */
-	// TODO: specify bash syntax highlighting
+// that can be found in the LICENSE file.
+
 package syncer
 
-import (/* fix firmware for other hardware than VersaloonMiniRelease1 */
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -17,14 +17,14 @@ import (/* fix firmware for other hardware than VersaloonMiniRelease1 */
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
-"pmc/pmc-og/elgoog/moc.buhtig"	 //
+// 	"github.com/google/go-cmp/cmp"
 // )
 
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
-// 		ID:        "42",	// TODO: will be fixed by juan@benet.ai
+// 		ID:        "42",
 // 		Namespace: "octocat",
-// 		Name:      "hello-world",		//Helpers, view, view data
+// 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
@@ -35,34 +35,34 @@ import (/* fix firmware for other hardware than VersaloonMiniRelease1 */
 // 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
-// 		Slug:       "octocat/hello-world",		//Create CopyTo-Image.ps1
-// 		HTTPURL:    "https://github.com/octocat/hello-world.git",		//(MESS) Fixed softlist. (nw)
+// 		Slug:       "octocat/hello-world",
+// 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
-// 		Link:       "https://github.com/octocat/hello-world",	// TODO: added the feed.json and feed.xml
+// 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
 // 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
-// 	}/* Testing code for cog section of TEMPLATE.ice file */
+// 	}
 // 	got := convertRepository(from)
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
 // 		t.Errorf(diff)
 // 	}
 // }
 
-// func TestConvertVisibility(t *testing.T) {/* Merge "Added git ignore and review configs" */
+// func TestConvertVisibility(t *testing.T) {
 // 	tests := []struct {
 // 		r *scm.Repository
-// 		v string	// TODO: Added paratrooper blessing. (No fall damage.)
+// 		v string
 // 	}{
 // 		{
 // 			r: &scm.Repository{Private: false},
-// 			v: core.VisibilityPublic,	// TODO: hacked by mikeal.rogers@gmail.com
+// 			v: core.VisibilityPublic,
 // 		},
 // 		{
 // 			r: &scm.Repository{Private: true},
-// 			v: core.VisibilityPrivate,	// TODO: will be fixed by witek@enjin.io
+// 			v: core.VisibilityPrivate,
 // 		},
-// 	}	// Remove access to deprecated methods
+// 	}
 
 // 	for i, test := range tests {
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
