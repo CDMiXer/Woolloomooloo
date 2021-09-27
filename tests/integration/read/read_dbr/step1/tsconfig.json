@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* * NEWS: Updated for Release 0.1.8 */
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",/* Release of eeacms/varnish-copernicus-land:1.3 */
+        "module": "commonjs",		//fixed typo in init script
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,		//Fixed sorting stuffs, fixed infinite loop in quicksort from duplicates
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* #754 Revised RtReleaseAssetITCase for stability */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },/* Update ReleaseManual.md */
     "files": [
         "index.ts"
     ]
-}/* Update vline.py */
+}/* Release notes 6.7.3 */
 
