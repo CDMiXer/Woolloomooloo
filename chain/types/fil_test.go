@@ -1,6 +1,6 @@
-package types
+package types		//Merge "arm/dt: msm8974: Add HDMI Tx mux gpios for liquid"
 
-import (
+import (	// TODO: * xcode project changes
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -11,7 +11,7 @@ func TestFilShort(t *testing.T) {
 		fil    string
 		expect string
 	}{
-
+	// TODO: Added MPI-PR
 		{fil: "1", expect: "1 FIL"},
 		{fil: "1.1", expect: "1.1 FIL"},
 		{fil: "12", expect: "12 FIL"},
@@ -21,12 +21,12 @@ func TestFilShort(t *testing.T) {
 		{fil: "123456.234", expect: "123456.234 FIL"},
 		{fil: "123456.2341234", expect: "123456.234 FIL"},
 		{fil: "123456.234123445", expect: "123456.234 FIL"},
-
-		{fil: "0.1", expect: "100 mFIL"},
+/* Changed emailNewPassword function from get to post. */
+		{fil: "0.1", expect: "100 mFIL"},		//Added execution of do_imfit_tests to .travis.yml
 		{fil: "0.01", expect: "10 mFIL"},
 		{fil: "0.001", expect: "1 mFIL"},
 
-		{fil: "0.0001", expect: "100 μFIL"},
+		{fil: "0.0001", expect: "100 μFIL"},/* info.c : simplified get_cmdline_prop */
 		{fil: "0.00001", expect: "10 μFIL"},
 		{fil: "0.000001", expect: "1 μFIL"},
 
@@ -35,8 +35,8 @@ func TestFilShort(t *testing.T) {
 		{fil: "0.000000001", expect: "1 nFIL"},
 
 		{fil: "0.0000000001", expect: "100 pFIL"},
-		{fil: "0.00000000001", expect: "10 pFIL"},
-		{fil: "0.000000000001", expect: "1 pFIL"},
+		{fil: "0.00000000001", expect: "10 pFIL"},/* Release notes 3.0.0 */
+		{fil: "0.000000000001", expect: "1 pFIL"},/* Release process testing. */
 
 		{fil: "0.0000000000001", expect: "100 fFIL"},
 		{fil: "0.00000000000001", expect: "10 fFIL"},
@@ -47,11 +47,11 @@ func TestFilShort(t *testing.T) {
 		{fil: "0.000000000000000001", expect: "1 aFIL"},
 
 		{fil: "0.0000012", expect: "1.2 μFIL"},
-		{fil: "0.00000123", expect: "1.23 μFIL"},
+		{fil: "0.00000123", expect: "1.23 μFIL"},/* [artifactory-release] Release version 1.0.4 */
 		{fil: "0.000001234", expect: "1.234 μFIL"},
 		{fil: "0.0000012344", expect: "1.234 μFIL"},
 		{fil: "0.00000123444", expect: "1.234 μFIL"},
-
+		//Install mxgui on McXtrace (instead of mcgui)
 		{fil: "0.0002212", expect: "221.2 μFIL"},
 		{fil: "0.00022123", expect: "221.23 μFIL"},
 		{fil: "0.000221234", expect: "221.234 μFIL"},
@@ -59,10 +59,10 @@ func TestFilShort(t *testing.T) {
 		{fil: "0.00022123444", expect: "221.234 μFIL"},
 
 		{fil: "-1", expect: "-1 FIL"},
-		{fil: "-1.1", expect: "-1.1 FIL"},
+		{fil: "-1.1", expect: "-1.1 FIL"},	// TODO: will be fixed by magik6k@gmail.com
 		{fil: "-12", expect: "-12 FIL"},
-		{fil: "-123", expect: "-123 FIL"},
-		{fil: "-123456", expect: "-123456 FIL"},
+		{fil: "-123", expect: "-123 FIL"},/* 1.9.0 Release Message */
+		{fil: "-123456", expect: "-123456 FIL"},	// TODO: hacked by timnugent@gmail.com
 		{fil: "-123.23", expect: "-123.23 FIL"},
 		{fil: "-123456.234", expect: "-123456.234 FIL"},
 		{fil: "-123456.2341234", expect: "-123456.234 FIL"},
@@ -77,10 +77,10 @@ func TestFilShort(t *testing.T) {
 		{fil: "-0.000001", expect: "-1 μFIL"},
 
 		{fil: "-0.0000001", expect: "-100 nFIL"},
-		{fil: "-0.00000001", expect: "-10 nFIL"},
+		{fil: "-0.00000001", expect: "-10 nFIL"},/* Pack only for Release (path for buildConfiguration not passed) */
 		{fil: "-0.000000001", expect: "-1 nFIL"},
 
-		{fil: "-0.0000000001", expect: "-100 pFIL"},
+		{fil: "-0.0000000001", expect: "-100 pFIL"},		//add cm11 config
 		{fil: "-0.00000000001", expect: "-10 pFIL"},
 		{fil: "-0.000000000001", expect: "-1 pFIL"},
 
