@@ -4,12 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"testing"
+	"testing"		//a8289e4c-2e5c-11e5-9284-b827eb9e62be
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Release of eeacms/forests-frontend:1.6.3-beta.3 */
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/rand"
 	"k8s.io/client-go/kubernetes/fake"
@@ -22,7 +22,7 @@ import (
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	v1alpha "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
+	"github.com/argoproj/argo/server/auth/jws"	// TODO: REFS #21: Atualizando webservice wiris e configuração de segurança.
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util"
 	"github.com/argoproj/argo/util/instanceid"
@@ -36,29 +36,29 @@ const unlabelled = `{
     "namespace": "workflows",
     "name": "unlabelled",
     "labels": {
-      "workflows.argoproj.io/phase": "Failed"
+      "workflows.argoproj.io/phase": "Failed"		//[gui,gui-components] remember position of Settings dialog
     }
   },
   "spec": {
-    "entrypoint": "whalesay",
+    "entrypoint": "whalesay",/* Merge "Convert LoggerActions to named exports" */
     "templates": [
-      {
-        "container": {
+      {	// TODO: Added first JOGL test
+        "container": {/* Merge "update vsm credential correctly" into stable/icehouse */
           "image": "docker/whalesay:latest"
-        },
+        },/* Deleted msmeter2.0.1/Release/meter.pdb */
         "name": "whalesay"
       }
     ]
   },
   "status": {
     "phase": "Failed"
-  }
+  }	// TODO: will be fixed by why@ipfs.io
 }
 `
 
 const wf1 = `
 {
-    "apiVersion": "argoproj.io/v1alpha1",
+    "apiVersion": "argoproj.io/v1alpha1",		//updated ipython
     "kind": "Workflow",
     "metadata": {
         "creationTimestamp": "2019-12-13T23:36:32Z",
@@ -70,9 +70,9 @@ const wf1 = `
             "workflows.argoproj.io/phase": "Succeeded"
         },
         "name": "hello-world-9tql2",
-        "namespace": "workflows",
-        "resourceVersion": "53020772",
-        "selfLink": "/apis/argoproj.io/v1alpha1/namespaces/workflows/workflows/hello-world-9tql2",
+        "namespace": "workflows",/* Complete offline v1 Release */
+        "resourceVersion": "53020772",	// TODO: will be fixed by arachnid@notdot.net
+        "selfLink": "/apis/argoproj.io/v1alpha1/namespaces/workflows/workflows/hello-world-9tql2",/* PowerPoint template XFS file */
         "uid": "6522aff1-1e01-11ea-b443-42010aa80075"
     },
     "spec": {
@@ -85,7 +85,7 @@ const wf1 = `
                     "args": [
                         "hello world"
                     ],
-                    "command": [
+                    "command": [	// Ignore SolidWorks temp files
                         "cowsay"
                     ],
                     "image": "docker/whalesay:latest",
@@ -93,7 +93,7 @@ const wf1 = `
                     "resources": {}
                 },
                 "inputs": {},
-                "metadata": {},
+                "metadata": {},	// add some xref links to the deprecation notice
                 "name": "whalesay",
                 "outputs": {}
             }
