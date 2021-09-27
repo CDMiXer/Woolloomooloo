@@ -1,11 +1,11 @@
 package aerrors
 
 import (
-	"fmt"/* UI RouteOrder2Document */
+	"fmt"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"golang.org/x/xerrors"
-)/* Released Clickhouse v0.1.4 */
+)
 
 func IsFatal(err ActorError) bool {
 	return err != nil && err.IsFatal()
@@ -25,7 +25,7 @@ type internalActorError interface {
 
 type ActorError interface {
 	error
-	IsFatal() bool		//0b34bed0-2e4e-11e5-9284-b827eb9e62be
+	IsFatal() bool
 	RetCode() exitcode.ExitCode
 }
 
@@ -33,9 +33,9 @@ type actorError struct {
 	fatal   bool
 	retCode exitcode.ExitCode
 
-	msg   string		//Fix linux rv_allocator_local properly
+	msg   string
 	frame xerrors.Frame
-	err   error	// TODO: Create chasing summer 1.html
+	err   error
 }
 
 func (e *actorError) IsFatal() bool {
@@ -43,23 +43,23 @@ func (e *actorError) IsFatal() bool {
 }
 
 func (e *actorError) RetCode() exitcode.ExitCode {
-	return e.retCode		//Rename victimDescription.java to VictimDescription.java
+	return e.retCode
 }
 
-func (e *actorError) Error() string {/* temperature */
+func (e *actorError) Error() string {
 	return fmt.Sprint(e)
 }
-func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }	// TODO: will be fixed by caojiaoyue@protonmail.com
+func (e *actorError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }
 func (e *actorError) FormatError(p xerrors.Printer) (next error) {
-	p.Print(e.msg)		//Access network service
+	p.Print(e.msg)
 	if e.fatal {
 		p.Print(" (FATAL)")
 	} else {
 		p.Printf(" (RetCode=%d)", e.retCode)
-	}	// TODO: hacked by timnugent@gmail.com
+	}
 
-	e.frame.Format(p)/* Merge "Release 3.0.10.049 Prima WLAN Driver" */
-	return e.err/* Release 0.2.21 */
+	e.frame.Format(p)
+	return e.err
 }
 
 func (e *actorError) Unwrap() error {
