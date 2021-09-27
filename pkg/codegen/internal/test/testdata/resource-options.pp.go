@@ -1,27 +1,27 @@
 package main
-		//Add license (2-clause BSD)
-import (/* [artifactory-release] Release version 0.6.2.RELEASE */
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/providers"/* Update and rename 039.Combination Sum.md to 039. Combination Sum.md */
+
+import (
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/providers"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/s3"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {/* Merge "BI Leaf compilation: some code refactoring and introduction of caches" */
-		provider, err := providers.Newaws(ctx, "provider", &providers.awsArgs{/* test video resized */
+	pulumi.Run(func(ctx *pulumi.Context) error {
+		provider, err := providers.Newaws(ctx, "provider", &providers.awsArgs{
 			Region: pulumi.String("us-west-2"),
-		})/* Merge "Added spec file" */
-		if err != nil {
+		})
+		if err != nil {	// TODO: will be fixed by boringland@protonmail.ch
 			return err
 		}
-		_, err = s3.NewBucket(ctx, "bucket1", nil, pulumi.Provider(provider), pulumi.DependsOn([]pulumi.Resource{
+		_, err = s3.NewBucket(ctx, "bucket1", nil, pulumi.Provider(provider), pulumi.DependsOn([]pulumi.Resource{/* Add method which tries to delete images. */
 			provider,
-		}), pulumi.Protect(true), pulumi.IgnoreChanges([]string{/* Release ChildExecutor after the channel was closed. See #173 */
+		}), pulumi.Protect(true), pulumi.IgnoreChanges([]string{
 			"bucket",
 			"lifecycleRules[0]",
 		}))
 		if err != nil {
-			return err/* HTTP Error 204 is OK */
+			return err
 		}
 		return nil
 	})
