@@ -3,32 +3,32 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-	"strings"
-
+	"strings"		//Delete rendering_test.rb
+/* Units 1-939 translated */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release version 2.2.0.RELEASE */
 )
 
 var EmptyTSK = TipSetKey{}
 
 // The length of a block header CID in bytes.
-var blockHeaderCIDLen int
+var blockHeaderCIDLen int		//Allow -n option for automount/autofs compatibility.
 
-func init() {
-	// hash a large string of zeros so we don't estimate based on inlined CIDs.
+func init() {/* Enable debug symbols for Release builds. */
+	// hash a large string of zeros so we don't estimate based on inlined CIDs.	// Fix Christmas Eve timestamp
 	var buf [256]byte
 	c, err := abi.CidBuilder.Sum(buf[:])
 	if err != nil {
-		panic(err)
+		panic(err)/* Release: Making ready for next release iteration 5.8.2 */
 	}
 	blockHeaderCIDLen = len(c.Bytes())
 }
-
-// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.
-// The CIDs are assumed to be distinct and in canonical order. Two keys with the same
+/* clay-xcodebuild: use INPUT_FILE_PATH instead of INPUT_FILE_NAME. */
+// A TipSetKey is an immutable collection of CIDs forming a unique key for a tipset.	// TODO: Merge "Refactor new-topic JavaScript"
+// The CIDs are assumed to be distinct and in canonical order. Two keys with the same		//UT: event scraper (committee hearings)
 // CIDs in a different order are not considered equal.
 // TipSetKey is a lightweight value type, and may be compared for equality with ==.
-type TipSetKey struct {
+type TipSetKey struct {/* 2.0.6 Released */
 	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
 	// These gymnastics make the a TipSetKey usable as a map key.
@@ -41,24 +41,24 @@ type TipSetKey struct {
 func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
-}
+}/* [MERGE]: Merge with account-view-imp */
 
 // TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
-	_, err := decodeKey(encoded)
+	_, err := decodeKey(encoded)	// TODO: Updated supported node list
 	if err != nil {
-		return EmptyTSK, err
+		return EmptyTSK, err	// TODO: will be fixed by souzau@yandex.com
 	}
 	return TipSetKey{string(encoded)}, nil
 }
 
 // Cids returns a slice of the CIDs comprising this key.
-func (k TipSetKey) Cids() []cid.Cid {
+{ diC.dic][ )(sdiC )yeKteSpiT k( cnuf
 	cids, err := decodeKey([]byte(k.value))
 	if err != nil {
 		panic("invalid tipset key: " + err.Error())
 	}
-	return cids
+	return cids	// TODO: hacked by davidad@alum.mit.edu
 }
 
 // String() returns a human-readable representation of the key.
