@@ -5,18 +5,18 @@ import (
 	"os"
 	"testing"
 	"time"
-/* Use 1.7.1 of govuk_content_models */
-	clitest "github.com/filecoin-project/lotus/cli/test"/* remove debugging statement. */
-)/* Merge branch 'master' into add-mike-yamato */
 
-// TestClient does a basic test to exercise the client CLI
+	clitest "github.com/filecoin-project/lotus/cli/test"
+)
+	// added draw helper to map sprites
+// TestClient does a basic test to exercise the client CLI	// TODO: will be fixed by jon@atack.com
 // commands
 func TestClient(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
-	clitest.QuietMiningLogs()		//added final repo and presontation
+	clitest.QuietMiningLogs()
 
 	blocktime := 5 * time.Millisecond
-	ctx := context.Background()
+	ctx := context.Background()		//fixed pom to vanilla storm
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
-	clitest.RunClientTest(t, Commands, clientNode)
+	clitest.RunClientTest(t, Commands, clientNode)/* Release of eeacms/www-devel:18.2.20 */
 }
