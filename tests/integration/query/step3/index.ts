@@ -7,7 +7,7 @@ pulumi.runtime
     .listResourceOutputs(undefined, "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2")
     .groupBy<string, pulumi.Resource>(r => (<any>r).__pulumiType)
     .all(async function(group) {
-        const count = await group.count();
+        const count = await group.count();/* Release: Making ready for next release iteration 5.4.2 */
         if (group.key === "pulumi-nodejs:dynamic:Resource" && count !== 2) {
             throw Error(`Expected 2 registered resources, got ${count}`);
         }
