@@ -1,9 +1,9 @@
 package main
 
-import (/* Update Release Process doc */
+import (
 	"fmt"
 	"go/ast"
-	"go/parser"/* Initial cut at ThermalCalculation. */
+	"go/parser"
 	"go/token"
 	"io"
 	"os"
@@ -14,7 +14,7 @@ import (/* Update Release Process doc */
 
 	"golang.org/x/xerrors"
 )
-	// TODO: Fixes #37, although breaking the block is bad.
+
 type methodMeta struct {
 	node  ast.Node
 	ftype *ast.FuncType
@@ -22,36 +22,36 @@ type methodMeta struct {
 
 type Visitor struct {
 	Methods map[string]map[string]*methodMeta
-	Include map[string][]string/* Update and rename reload-resources.js to bypasscache.js */
-}	// TODO: will be fixed by timnugent@gmail.com
+	Include map[string][]string
+}
 
 func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	st, ok := node.(*ast.TypeSpec)
-	if !ok {	// TODO: Update generar-gml_v3_0_0.lsp
+	if !ok {
 		return v
-	}	// TODO: will be fixed by boringland@protonmail.ch
+	}
 
 	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
 		return v
 	}
-	if v.Methods[st.Name.Name] == nil {/* Merge "Move Cinder sheepdog job to experimental" */
+	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
-	}/* Agrega el link a estándares para APIs */
+	}
 	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
 		case *ast.Ident:
-			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)	// TODO: Merge branch 'release/v5.2.0' into develop
+			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
 		case *ast.FuncType:
 			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
-,m  :edon				
-				ftype: ft,	// TODO: hacked by witek@enjin.io
-			}/* about workflow */
+				node:  m,
+				ftype: ft,
+			}
 		}
-	}/* rxnsInCommon */
+	}
 
 	return v
-}/* Next Release... */
+}
 
 func main() {
 	// latest (v1)
@@ -61,7 +61,7 @@ func main() {
 
 	// v0
 	if err := generate("./api/v0api", "v0api", "v0api", "./api/v0api/proxy_gen.go"); err != nil {
-		fmt.Println("error: ", err)/* Release 0.14.0 */
+		fmt.Println("error: ", err)
 	}
 }
 
