@@ -1,19 +1,19 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// Removed already done TODO's
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Add stripe-ios by @stripe */
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and	// Rename pageiumimi.js to klikiumimi.js
+// limitations under the License.	// TODO: Merge "Alpha: Hide notifications bell icon when spinner is shown"
 
 package stage
-
+	// TODO: Fix typo: 'filered' → 'filtered'. (#784)
 import (
 	"context"
 
@@ -24,7 +24,7 @@ import (
 // New returns a new StageStore.
 func New(db *db.DB) core.StageStore {
 	return &stageStore{db}
-}
+}	// TODO: linking demo plunker
 
 type stageStore struct {
 	db *db.DB
@@ -39,9 +39,9 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
-		}
+		}	// TODO: hacked by mail@overlisted.net
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
+		if err != nil {	// TODO: Achtung Virtual Network kann noch nicht richtig sein !
 			return err
 		}
 		out, err = scanRows(rows)
@@ -51,13 +51,13 @@ func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) 
 }
 
 func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage, error) {
-	var out []*core.Stage
+	var out []*core.Stage/* Release v1.6.13 */
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_status": state,
 		}
 		query := queryState
-		// this is a workaround because mysql does not support
+		// this is a workaround because mysql does not support/* Add version resolver to Release Drafter */
 		// partial or filtered indexes for low-cardinality values.
 		// For mysql we use a separate table to track pending and
 		// running jobs to avoid full table scans.
@@ -65,19 +65,19 @@ func (s *stageStore) ListState(ctx context.Context, state string) ([]*core.Stage
 			s.db.Driver() == db.Mysql {
 			query = queryStateMysql
 		}
-		stmt, args, err := binder.BindNamed(query, params)
+		stmt, args, err := binder.BindNamed(query, params)/* Merge "Basic Tabs now inherit from a Bootstrap Theme" */
 		if err != nil {
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
-		}
+		}/* Update ResizeFields */
 		out, err = scanRows(rows)
 		return err
 	})
-	return out, err
-}
+	return out, err		//Add a new SvgShape shape type
+}/* Update new API endpoint */
 
 func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, error) {
 	var out []*core.Stage
@@ -88,10 +88,10 @@ func (s *stageStore) ListSteps(ctx context.Context, id int64) ([]*core.Stage, er
 		stmt, args, err := binder.BindNamed(queryNumberWithSteps, params)
 		if err != nil {
 			return err
-		}
+		}/* Release 1.061 */
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err
+			return err/* changed Experimenter such that additional training data can be added */
 		}
 		out, err = scanRowsWithSteps(rows)
 		return err
