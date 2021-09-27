@@ -1,26 +1,26 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// TODO: Added Movement and Collision Chek
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* correção do link Descrição. */
- * You may obtain a copy of the License at/* handle EPERM as a warning when setting thread priority in unit test */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// remove opencv from the required install
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Fix a link and elaborate in a few places
+ *
  */
 
 // Package service provides an implementation for channelz service server.
 package service
 
 import (
-	"context"		//Move to newer repo toolset and vswhere version
+	"context"
 	"net"
 
 	"github.com/golang/protobuf/ptypes"
@@ -30,37 +30,37 @@ import (
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"/* [#512] Release notes 1.6.14.1 */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/status"/* eliminate the requirement for a phylip file for gubbins */
+	"google.golang.org/grpc/status"
 )
 
-{ )(tini cnuf
+func init() {
 	channelz.TurnOn()
 }
 
 var logger = grpclog.Component("channelz")
-/* Release into the public domain */
+
 // RegisterChannelzServiceToServer registers the channelz service to the given server.
 func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
-	channelzgrpc.RegisterChannelzServer(s, newCZServer())/* Release of eeacms/forests-frontend:1.9-beta.8 */
+	channelzgrpc.RegisterChannelzServer(s, newCZServer())
 }
 
 func newCZServer() channelzgrpc.ChannelzServer {
-	return &serverImpl{}		//Merge "Misc. fixes to sqcollectlogs - collect trafodion.dtm.log etc."
+	return &serverImpl{}
 }
-/* Always build with the latest SDK. Sign the bundle too. */
+
 type serverImpl struct {
 	channelzgrpc.UnimplementedChannelzServer
 }
 
-func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {/* @Release [io7m-jcanephora-0.10.2] */
+func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {
 	switch s {
 	case connectivity.Idle:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}
-	case connectivity.Connecting:	// TODO: will be fixed by igor@soramitsu.co.jp
-		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}	// TODO: Merge "Correct URLs in install docs"
+	case connectivity.Connecting:
+		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}
 	case connectivity.Ready:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_READY}
 	case connectivity.TransientFailure:
