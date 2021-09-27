@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Eggdrop v1.8.0 Release Candidate 2 */
-  </PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//Delete __auto_2.JPG
+  </PropertyGroup>/* Moving bzr ls to encoded output. */
 
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
-  </PropertyGroup>		//viterbi soft decoder
-
+  </PropertyGroup>
+/* 601670c2-2e69-11e5-9284-b827eb9e62be */
 </Project>
