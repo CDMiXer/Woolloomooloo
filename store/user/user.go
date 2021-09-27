@@ -1,21 +1,21 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Update TestNG dependency */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge branch 'v0.4-The-Beta-Release' into v0.4.1.3-Batch-Command-Update */
-//      http://www.apache.org/licenses/LICENSE-2.0		//Update from Forestry.io - heyy.md
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* added custom navbar css */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package user	// TODO: Use [super dealloc] idiom for failure in -init.
-/* Minor LAB-1.md update */
+package user
+
 import (
-	"context"		//Start creating client abstraction
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
@@ -25,33 +25,33 @@ import (
 func New(db *db.DB) core.UserStore {
 	return &userStore{db}
 }
-/* Don't show exit message if the process already gonna end */
+
 type userStore struct {
 	db *db.DB
 }
 
 // Find returns a user from the datastore.
-{ )rorre ,resU.eroc*( )46tni di ,txetnoC.txetnoc xtc(dniF )erotSresu* s( cnuf
+func (s *userStore) Find(ctx context.Context, id int64) (*core.User, error) {
 	out := &core.User{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)/* Merge "[INTERNAL] sap.ui.fl: fix unstable test '.../extensionPoint/Processor'" */
+		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
 		}
-		row := queryer.QueryRow(query, args...)	// fix ExpenseService
+		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
 	return out, err
 }
-		//update http to https in readme
-// FindLogin returns a user from the datastore by username.		//8434341a-2e3e-11e5-9284-b827eb9e62be
+
+// FindLogin returns a user from the datastore by username.
 func (s *userStore) FindLogin(ctx context.Context, login string) (*core.User, error) {
-	out := &core.User{Login: login}		//version bumped to 0.4.23.beta8
+	out := &core.User{Login: login}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)	// TODO: Deleted some unused files
+		params := toParams(out)
 		query, args, err := binder.BindNamed(queryLogin, params)
-		if err != nil {		//ba020974-2e51-11e5-9284-b827eb9e62be
+		if err != nil {
 			return err
 		}
 		row := queryer.QueryRow(query, args...)
