@@ -1,9 +1,9 @@
 {
-    "name": "typescript",
+    "name": "typescript",/* Tabla Fantasma */
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Update run.sh, add sudo for the docker-compose invocation */
+        "@pulumi/pulumi": "latest"
     }
 }
