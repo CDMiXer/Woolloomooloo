@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [FIX] base_gengo: method `get_gengo_key` not aimed at being public */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by remco@dutchcoders.io
-package main	// TODO: hacked by why@ipfs.io
+
+package main
 
 import (
 	spec "github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/plugin/admission"
-	"github.com/drone/drone/plugin/config"	// Created a constant to define STABLE_TIME
+	"github.com/drone/drone/plugin/config"
 	"github.com/drone/drone/plugin/converter"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
@@ -33,13 +33,13 @@ import (
 var pluginSet = wire.NewSet(
 	provideAdmissionPlugin,
 	provideConfigPlugin,
-	provideConvertPlugin,	// TODO: will be fixed by m-ou.se@m-ou.se
-	provideRegistryPlugin,/* Update Release notes to have <ul><li> without <p> */
+	provideConvertPlugin,
+	provideRegistryPlugin,
 	provideSecretPlugin,
-	provideValidatePlugin,	// -new dialogs
+	provideValidatePlugin,
 	provideWebhookPlugin,
 )
-		//92a99500-2e41-11e5-9284-b827eb9e62be
+
 // provideAdmissionPlugin is a Wire provider function that
 // returns an admission plugin based on the environment
 // configuration.
@@ -48,14 +48,14 @@ func provideAdmissionPlugin(client *scm.Client, orgs core.OrganizationService, u
 		admission.Membership(orgs, config.Users.Filter),
 		admission.Open(config.Registration.Closed),
 		admission.Nobot(users, config.Users.MinAge),
-		admission.External(/* fix run collect step  debtCollection. */
+		admission.External(
 			config.Authn.Endpoint,
 			config.Authn.Secret,
-			config.Authn.SkipVerify,/* [artifactory-release] Release version 3.5.0.RELEASE */
+			config.Authn.SkipVerify,
 		),
 	)
 }
-/* Refactor enumerate on min interval */
+
 // provideConfigPlugin is a Wire provider function that returns
 // a yaml configuration plugin based on the environment
 // configuration.
@@ -69,18 +69,18 @@ func provideConfigPlugin(client *scm.Client, contents core.FileService, conf spe
 				conf.Yaml.Timeout,
 			),
 		),
-		config.Repository(contents),/* set debuggable to false */
+		config.Repository(contents),
 	)
 }
 
 // provideConvertPlugin is a Wire provider function that returns
 // a yaml conversion plugin based on the environment
-// configuration.	// TODO: Merge "Do not check all repositories when importing repositories"
+// configuration.
 func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertService {
 	return converter.Combine(
 		converter.Legacy(false),
 		converter.Starlark(false),
-		converter.Jsonnet(/* #116 : Initial commit of build script */
+		converter.Jsonnet(
 			conf.Jsonnet.Enabled,
 		),
 		converter.Memoize(
@@ -100,12 +100,12 @@ func provideConvertPlugin(client *scm.Client, conf spec.Config) core.ConvertServ
 // configuration.
 func provideRegistryPlugin(config spec.Config) core.RegistryService {
 	return registry.Combine(
-		registry.External(/* Merge branch 'master' into newsphinxwarnings */
+		registry.External(
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
 			config.Secrets.SkipVerify,
 		),
-		registry.FileSource(	// Automatic changelog generation for PR #41450 [ci skip]
+		registry.FileSource(
 			config.Docker.Config,
 		),
 		registry.EndpointSource(
