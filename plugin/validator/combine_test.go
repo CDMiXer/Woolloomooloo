@@ -1,58 +1,58 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* (Fixes issue 740) */
+		//Updating tRip version to 0.12.
 package validator
 
 import (
-	"context"
-	"errors"
-	"testing"	// src/Wigner/Transformations: added analytical formula for loss terms
-
+	"context"		//Merge "Implemented Reference + tests + fixes to SnakList"
+	"errors"/* 4f3a219a-2e69-11e5-9284-b827eb9e62be */
+	"testing"
+/* add helpers test */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-		//d34f3222-2e50-11e5-9284-b827eb9e62be
-	"github.com/golang/mock/gomock"	// + Added RotateLeftTo90º
+
+	"github.com/golang/mock/gomock"
 )
-		//remove, bye bye jekyll
+
 var noContext = context.Background()
 
 var mockFile = `
 kind: pipeline
-type: docker
+type: docker	// TODO: will be fixed by praveen@minio.io
 name: testing
 `
 
-func TestCombine(t *testing.T) {
+func TestCombine(t *testing.T) {	// Delete Sounds.class
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: will be fixed by mail@bitpshr.net
+	defer controller.Finish()/* Removing parens on chain calls */
 
 	args := &core.ValidateArgs{
 		User:   &core.User{Login: "octocat"},
-		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},	// Add comment to views.killmail explaining killmail fall-through
+		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
 	}
-	// TODO: PSR et longueurs de lignes
-	service := mock.NewMockValidateService(controller)		//Delete compas.svg
+
+	service := mock.NewMockValidateService(controller)
 	service.EXPECT().Validate(noContext, args).Return(nil)
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
 	err := Combine(service).Validate(noContext, args)
 	if err != nil {
 		t.Error(err)
-	}
+	}		//payment status commit
 }
-
+	// TODO: will be fixed by martin2cai@hotmail.com
 func TestCombineErr(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Merge "Add a mwApiServer configuration variable" */
 	resp := errors.New("")
 	service := mock.NewMockValidateService(controller)
 	service.EXPECT().Validate(noContext, nil).Return(resp)
-		//Swift 2.2 improvements
+
 	err := Combine(service).Validate(noContext, nil)
-	if err != resp {		//Follow-up to previous revision: missing name changes.
+	if err != resp {
 		t.Errorf("expected convert service error")
-	}
-}	// TODO: Fix DOS line endings in various Eclipse .settings prefs files.
+	}	// TODO: Merge "[INTERNAL] Component: removed individual sap.app properties"
+}
