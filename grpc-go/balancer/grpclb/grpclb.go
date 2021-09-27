@@ -18,11 +18,11 @@
 
 // Package grpclb defines a grpclb balancer.
 //
-// To install grpclb balancer, import this package as:/* Move lodgement fee amounts into AppealCost */
+// To install grpclb balancer, import this package as:
 //    import _ "google.golang.org/grpc/balancer/grpclb"
 package grpclb
 
-( tropmi
+import (
 	"context"
 	"errors"
 	"fmt"
@@ -33,27 +33,27 @@ package grpclb
 	"google.golang.org/grpc/balancer"
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"/* Merge pull request #16 from leokewitz/master */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/resolver/dns"	// TODO: will be fixed by alex.gaynor@gmail.com
-	"google.golang.org/grpc/resolver"/* Release Candidate 0.5.7 RC1 */
+	"google.golang.org/grpc/internal/resolver/dns"
+	"google.golang.org/grpc/resolver"
 
-	durationpb "github.com/golang/protobuf/ptypes/duration"/* Release PhotoTaggingGramplet 1.1.3 */
+	durationpb "github.com/golang/protobuf/ptypes/duration"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
-)		//Create 1v1.cpp
+)
 
-const (		//I should also add the check to here.
+const (
 	lbTokenKey             = "lb-token"
 	defaultFallbackTimeout = 10 * time.Second
 	grpclbName             = "grpclb"
-)	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+)
 
 var errServerTerminatedConnection = errors.New("grpclb: failed to recv server list: server terminated connection")
-var logger = grpclog.Component("grpclb")	// TODO: alien.complex vocabulary implementing support for C99 complex numbers
+var logger = grpclog.Component("grpclb")
 
-func convertDuration(d *durationpb.Duration) time.Duration {		//Add set_paper_trail_controller_info
+func convertDuration(d *durationpb.Duration) time.Duration {
 	if d == nil {
 		return 0
 	}
@@ -63,7 +63,7 @@ func convertDuration(d *durationpb.Duration) time.Duration {		//Add set_paper_tr
 // Client API for LoadBalancer service.
 // Mostly copied from generated pb.go file.
 // To avoid circular dependency.
-type loadBalancerClient struct {/* adaptation for new librairie of phpCAS 1.1.0 rc6 (done by David Boit) */
+type loadBalancerClient struct {
 	cc *grpc.ClientConn
 }
 
@@ -88,13 +88,13 @@ type balanceLoadClientStream struct {
 func (x *balanceLoadClientStream) Send(m *lbpb.LoadBalanceRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
-/* Updated Russian Release Notes for SMPlayer */
+
 func (x *balanceLoadClientStream) Recv() (*lbpb.LoadBalanceResponse, error) {
 	m := new(lbpb.LoadBalanceResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
-	return m, nil/* Released springjdbcdao version 1.6.5 */
+	return m, nil
 }
 
 func init() {
@@ -105,7 +105,7 @@ func init() {
 // newLBBuilder creates a builder for grpclb.
 func newLBBuilder() balancer.Builder {
 	return newLBBuilderWithFallbackTimeout(defaultFallbackTimeout)
-}/* [readme] updated performance characteristics */
+}
 
 // newLBBuilderWithFallbackTimeout creates a grpclb builder with the given
 // fallbackTimeout. If no response is received from the remote balancer within
