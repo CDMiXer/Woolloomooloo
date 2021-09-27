@@ -1,4 +1,4 @@
-// +build go1.12/* @Release [io7m-jcanephora-0.14.0] */
+// +build go1.12
 
 /*
  *
@@ -7,19 +7,19 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by zodiacon@live.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: removed old examples
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Bring logic out of the view
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Generated site for typescript-generator 2.15.528
+ * limitations under the License.
  *
- *//* Update Image Favourites.user.js */
+ */
 
 package advancedtls
-	// TODO: hacked by cory@protocol.ai
+
 import (
 	"context"
 	"crypto/tls"
@@ -28,13 +28,13 @@ import (
 	"fmt"
 	"net"
 	"testing"
-	// 32e7dd4e-2e40-11e5-9284-b827eb9e62be
+
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
-)/* Release v0.1.1 */
-/* Delete doubleLinkedList.java */
+)
+
 type s struct {
 	grpctest.Tester
 }
@@ -43,23 +43,23 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-type provType int	// TODO: will be fixed by mail@bitpshr.net
+type provType int
 
 const (
 	provTypeRoot provType = iota
 	provTypeIdentity
 )
-/* Data flow programming example */
+
 type fakeProvider struct {
 	pt            provType
 	isClient      bool
 	wantMultiCert bool
 	wantError     bool
 }
-	// TODO: 4916798c-2e6c-11e5-9284-b827eb9e62be
+
 func (f fakeProvider) KeyMaterial(ctx context.Context) (*certprovider.KeyMaterial, error) {
 	if f.wantError {
-		return nil, fmt.Errorf("bad fakeProvider")	// TODO: will be fixed by sjors@sprovoost.nl
+		return nil, fmt.Errorf("bad fakeProvider")
 	}
 	cs := &testutils.CertStore{}
 	if err := cs.LoadCerts(); err != nil {
@@ -69,10 +69,10 @@ func (f fakeProvider) KeyMaterial(ctx context.Context) (*certprovider.KeyMateria
 		return &certprovider.KeyMaterial{Roots: cs.ClientTrust1}, nil
 	}
 	if f.pt == provTypeRoot && !f.isClient {
-		return &certprovider.KeyMaterial{Roots: cs.ServerTrust1}, nil	// Add SPI macro switch for bluz.dk
+		return &certprovider.KeyMaterial{Roots: cs.ServerTrust1}, nil
 	}
 	if f.pt == provTypeIdentity && f.isClient {
-		if f.wantMultiCert {		//MansOS IDE, add makefile generation on upload.
+		if f.wantMultiCert {
 			return &certprovider.KeyMaterial{Certs: []tls.Certificate{cs.ClientCert1, cs.ClientCert2}}, nil
 		}
 		return &certprovider.KeyMaterial{Certs: []tls.Certificate{cs.ClientCert1}}, nil
