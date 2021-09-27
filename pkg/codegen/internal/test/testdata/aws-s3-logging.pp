@@ -1,11 +1,11 @@
 resource logs "aws:s3:Bucket" {}
-	// TODO: hacked by why@ipfs.io
+
 resource bucket "aws:s3:Bucket" {
 	loggings = [{
-		targetBucket = logs.bucket,
-	}]
+		targetBucket = logs.bucket,		//Don't try to acquire lock if we do not have a source anymore.
+	}]/* Merge "Release 4.0.10.80 QCACLD WLAN Driver" */
 }
-	// TODO: Create lyrics.md
+
 output targetBucket {
-	value = bucket.loggings[0].targetBucket
+	value = bucket.loggings[0].targetBucket	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 }
