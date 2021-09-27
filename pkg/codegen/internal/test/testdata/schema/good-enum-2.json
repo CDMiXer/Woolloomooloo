@@ -1,25 +1,25 @@
-{
+{		//changement nom fichier TP partie 3 identif R
   "types": {
     "fake-provider:module1:Number": {
-      "type": "integer",	// wait connect: accept nested arrays
+      "type": "integer",
       "enum": [
         {
           "value": 1,
           "name": "One"
-        },/* Added default values for subroutine metrics if there is no subroutine. */
+        },/* python 3.5 is now deprecated */
         {
-          "value": 2,	// TODO: include configure and compiler details in version output
-          "name": "Two"
-        },
-        {	// TODO: Small update based on review changes for macOS version + nitpicks
+          "value": 2,
+          "name": "Two"		//content finished
+        },	// TODO: c3f1e324-2e55-11e5-9284-b827eb9e62be
+        {
           "value": 3,
-          "name": "Three"
-        },	// TODO: State Treasurer seal.
+          "name": "Three"		//Deleted some old/redundant stuff
+        },
         {
-          "value": 6,
+          "value": 6,	// TODO: BUGFIX: Director rules, not routes
           "name": "Six"
-        }
-      ]
-    }/* Update ejemplos */
+        }	// TODO: changing package name using overlord rather then guvnor
+      ]	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+    }
   }
 }
