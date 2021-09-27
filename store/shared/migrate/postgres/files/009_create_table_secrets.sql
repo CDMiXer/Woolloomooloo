@@ -1,5 +1,5 @@
 -- name: create-table-secrets
-/* LOW : NPE protection */
+
 CREATE TABLE IF NOT EXISTS secrets (
  secret_id                SERIAL PRIMARY KEY
 ,secret_repo_id           INTEGER
@@ -17,4 +17,4 @@ CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
 -- name: create-index-secrets-repo-name
 
-CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);/* Add glyphicon support */
+CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
