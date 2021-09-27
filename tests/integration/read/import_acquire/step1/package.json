@@ -8,7 +8,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Use the proper constant
         "@pulumi/pulumi": "latest"
     }
 }
