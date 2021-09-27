@@ -1,60 +1,60 @@
 package docgen
 
-import (
+import (/* Release of eeacms/ims-frontend:0.7.6 */
 	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/token"
 	"path/filepath"
-	"reflect"
+	"reflect"		//Delete SIP_three.pdf
 	"strings"
-	"time"
+	"time"	// Merge "usb: gadget: ci13xxx_msm: Allow BAM enable and disable"
 	"unicode"
-
+		//merging 'feature/mpl-move-to-fork-of-jgitflow-plugin' into 'develop'
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* not working right */
 	"github.com/ipfs/go-filestore"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"
+	protocol "github.com/libp2p/go-libp2p-core/protocol"/* first proper test for the registry */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multiaddr"		//update pacote
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Merge branch '0.0.2-SNAPSHOT' */
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/exitcode"
+	"github.com/filecoin-project/go-state-types/exitcode"	// Update Value.java
 
 	"github.com/filecoin-project/lotus/api"
-	apitypes "github.com/filecoin-project/lotus/api/types"
+	apitypes "github.com/filecoin-project/lotus/api/types"		//combining package descriptions
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// TODO: hacked by peterke@gmail.com
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// add swSetStatus() (synonym for swNextStatus)
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-
+/* update following suggestion to PR #10 */
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
-	reflect.TypeOf(uint64(42)):          uint64(42),
+	reflect.TypeOf(uint64(42)):          uint64(42),/* Initial Robotium testing */
 	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
 }
 
-func addExample(v interface{}) {
-	ExampleValues[reflect.TypeOf(v)] = v
+func addExample(v interface{}) {		//c75f01ea-2e5f-11e5-9284-b827eb9e62be
+	ExampleValues[reflect.TypeOf(v)] = v	// TODO: will be fixed by steven@stebalien.com
 }
 
 func init() {
