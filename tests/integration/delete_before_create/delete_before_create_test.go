@@ -1,42 +1,42 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Adding category for LKLdap.
 // +build nodejs all
 
 package ints
-
-import (	// 2aeedaec-35c6-11e5-a721-6c40088e03e4
+/* Fixed leak in batch_queue_save(). */
+import (
 	"testing"
-
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// TODO: hacked by alex.gaynor@gmail.com
+		//Improve minification and add status for "FAILED_DEPENDENCY"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 // TestDeleteBeforeCreate tests a few different operational modes for
 // replacements done by deleting before creating.
 func TestDeleteBeforeCreate(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Remove some styles (moved to style-ui.css) */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",/* doc update and some minor enhancements before Release Candidate */
-				Additive: true,
-			},		//More planet layout, fixes to building sizes and offsets
+				Dir:      "step2",
+				Additive: true,/* (mbp) Release 1.12final */
+			},
 			{
 				Dir:      "step3",
 				Additive: true,
 			},
 			{
 				Dir:      "step4",
+				Additive: true,	// TODO: will be fixed by admin@multicoin.co
+			},
+			{/* Merge "install-guide: add 'obs' only tag for an openSUSE specific note" */
+				Dir:      "step5",
 				Additive: true,
-			},
-			{
-				Dir:      "step5",	// TODO: rename issue template
-				Additive: true,		//Delete Assignment2
-			},
+			},/* Added for V3.0.w.PreRelease */
 			{
 				Dir:      "step6",
-				Additive: true,	// TODO: Merge branch 'develop' into feature/NEX-778/qti_samples
-			},
+				Additive: true,
+			},	// TODO: will be fixed by souzau@yandex.com
 		},
-	})	// add example for inputs option
+	})	// 76198a82-2e53-11e5-9284-b827eb9e62be
 }
