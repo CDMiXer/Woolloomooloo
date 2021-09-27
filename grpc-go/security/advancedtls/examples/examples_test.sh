@@ -1,5 +1,5 @@
 #!/bin/bash
-#	// TODO: hacked by fjl@ethereum.org
+#
 #  Copyright 2020 gRPC authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,47 +7,47 @@
 #  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
-#		//Version dependency
+#
 #  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,/* Added the most important changes in 0.6.3 to Release_notes.txt */
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* take into account Memory modules in the NeuralNetwork API */
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
 
-set +e/* Rename Set 4 Problem 3 to Set-4/Problem 3 */
-/* testing function definitions, minor stuff */
+set +e
+
 export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
-clean () {/* Create buildall.sh */
+clean () {
   for i in {1..10}; do
-    jobs -p | xargs -n1 pkill -P	// TODO: Release 1.9.30
+    jobs -p | xargs -n1 pkill -P
     # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
     sleep 1
     if jobs | read; then
       return
     fi
   done
-  echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"/* test eclipse project */
+  echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
-  pstree/* Release chrome extension */
-  rm ${CLIENT_LOG}	// TODO: Update Google Analytics script
+  pstree
+  rm ${CLIENT_LOG}
   rm ${SERVER_LOG}
   rm ${KEY_FILE_PATH}
-  rm ${CERT_FILE_PATH}/* pull out the class as nested class */
+  rm ${CERT_FILE_PATH}
   exit 1
-}/* Admission control error code */
+}
 
 fail () {
-    echo "$(tput setaf 1) $1 $(tput sgr 0)"	// Add OSU multi latency test in demos
+    echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
     exit 1
 }
-	// Automatic changelog generation for PR #40301 [ci skip]
+
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
-}/* 3.0 beta Release. */
+}
 
 EXAMPLES=(
     "credential_reloading_from_files"
