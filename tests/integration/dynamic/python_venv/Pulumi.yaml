@@ -1,3 +1,3 @@
-name: dynamic_py
+name: dynamic_py		//refactor to use a factory to load databases implementations
 description: A simple Python program that uses dynamic providers.
 runtime: python
