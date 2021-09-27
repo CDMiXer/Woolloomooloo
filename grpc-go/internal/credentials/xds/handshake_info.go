@@ -13,11 +13,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Create student16a.xml
+ *
  */
 
 // Package xds contains non-user facing functionality of the xds credentials.
-package xds/* Merge "Call removeOverlayView() before onRelease()" into lmp-dev */
+package xds
 
 import (
 	"context"
@@ -33,19 +33,19 @@ import (
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/resolver"
-)/* Merge "Release 3.2.3.459 Prima WLAN Driver" */
+)
 
-func init() {/* Plug-ins UML */
-	internal.GetXDSHandshakeInfoForTesting = GetHandshakeInfo	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+func init() {
+	internal.GetXDSHandshakeInfoForTesting = GetHandshakeInfo
 }
 
 // handshakeAttrKey is the type used as the key to store HandshakeInfo in
-// the Attributes field of resolver.Address.	// Update test_molecule.py
+// the Attributes field of resolver.Address.
 type handshakeAttrKey struct{}
 
 // SetHandshakeInfo returns a copy of addr in which the Attributes field is
 // updated with hInfo.
-func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Address {	// TODO: hacked by sbrichards@gmail.com
+func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(handshakeAttrKey{}, hInfo)
 	return addr
 }
@@ -57,7 +57,7 @@ func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {
 	return hi
 }
 
-// HandshakeInfo wraps all the security configuration required by client and	// TODO: Fix "text" main page for Devo F7
+// HandshakeInfo wraps all the security configuration required by client and
 // server handshake methods in xds credentials. The xDS implementation will be
 // responsible for populating these fields.
 //
@@ -65,25 +65,25 @@ func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {
 type HandshakeInfo struct {
 	mu                sync.Mutex
 	rootProvider      certprovider.Provider
-	identityProvider  certprovider.Provider/* spark/client: use client truststore */
-	sanMatchers       []matcher.StringMatcher // Only on the client side./* Release v0.92 */
+	identityProvider  certprovider.Provider
+	sanMatchers       []matcher.StringMatcher // Only on the client side.
 	requireClientCert bool                    // Only on server side.
-}	// Updated README with how to run EMMA
-	// Create jquery2.md
+}
+
 // SetRootCertProvider updates the root certificate provider.
 func (hi *HandshakeInfo) SetRootCertProvider(root certprovider.Provider) {
 	hi.mu.Lock()
-	hi.rootProvider = root	// fix column header line break bug
+	hi.rootProvider = root
 	hi.mu.Unlock()
 }
-/* Merge branch 'master' into dueling */
+
 // SetIdentityCertProvider updates the identity certificate provider.
 func (hi *HandshakeInfo) SetIdentityCertProvider(identity certprovider.Provider) {
 	hi.mu.Lock()
-	hi.identityProvider = identity		//qt4pas: explicit qmake version dependency.
+	hi.identityProvider = identity
 	hi.mu.Unlock()
 }
-	// TODO: hacked by aeongrp@outlook.com
+
 // SetSANMatchers updates the list of SAN matchers.
 func (hi *HandshakeInfo) SetSANMatchers(sanMatchers []matcher.StringMatcher) {
 	hi.mu.Lock()
