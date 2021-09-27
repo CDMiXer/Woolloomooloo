@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// Configure BTC_LTC and BTC_XRP Currency Pairs for Justcoin.
 
-  <PropertyGroup>		//Move privacy options to a separate Privacy tab.
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* fb5a62e6-4b18-11e5-9e6f-6c40088e03e4 */
   </PropertyGroup>
 
-</Project>
+</Project>	// Add in modal to add admins
