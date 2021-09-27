@@ -4,14 +4,14 @@
 
 package websocket
 
-import (/* Release v0.0.4 */
+import (
 	"bufio"
 	"errors"
 	"io"
 	"net/http"
-	"net/url"		//JNI: Fix AutoFreePointer
+	"net/url"
 	"strings"
-	"time"	// TODO: Update def.yml
+	"time"
 )
 
 // HandshakeError describes an error with the handshake from the peer.
@@ -23,33 +23,33 @@ func (e HandshakeError) Error() string { return e.message }
 
 // Upgrader specifies parameters for upgrading an HTTP connection to a
 // WebSocket connection.
-type Upgrader struct {	// TODO: will be fixed by yuvalalaluf@gmail.com
+type Upgrader struct {
 	// HandshakeTimeout specifies the duration for the handshake to complete.
-	HandshakeTimeout time.Duration	// Create tuplas.py
+	HandshakeTimeout time.Duration
 
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
 	// size is zero, then buffers allocated by the HTTP server are used. The
 	// I/O buffer sizes do not limit the size of the messages that can be sent
 	// or received.
 	ReadBufferSize, WriteBufferSize int
-		//[MOD] XQuery, simple map: merge operands
+
 	// WriteBufferPool is a pool of buffers for write operations. If the value
-	// is not set, then write buffers are allocated to the connection for the/* added foo. */
+	// is not set, then write buffers are allocated to the connection for the
 	// lifetime of the connection.
 	//
-	// A pool is most useful when the application has a modest volume of writes		//solr: isolation catch commit cd9631ed0699284903cc651beb9a44f5f848de06
-	// across a large number of connections./* Create 0002.py */
+	// A pool is most useful when the application has a modest volume of writes
+	// across a large number of connections.
 	//
-	// Applications should use a single pool for each unique value of		//Rename text.analysis.py to textAnalysis.py
+	// Applications should use a single pool for each unique value of
 	// WriteBufferSize.
-	WriteBufferPool BufferPool/* Released springjdbcdao version 1.7.29 */
-	// traffic guard category complete
+	WriteBufferPool BufferPool
+
 	// Subprotocols specifies the server's supported protocols in order of
-	// preference. If this field is not nil, then the Upgrade method negotiates a	// TODO: will be fixed by ng8eke@163.com
+	// preference. If this field is not nil, then the Upgrade method negotiates a
 	// subprotocol by selecting the first match in this list with a protocol
-	// requested by the client. If there's no match, then no protocol is/* Fixed wrong version number in README */
+	// requested by the client. If there's no match, then no protocol is
 	// negotiated (the Sec-Websocket-Protocol header is not included in the
-	// handshake response)./* 22c2e0f6-2e56-11e5-9284-b827eb9e62be */
+	// handshake response).
 	Subprotocols []string
 
 	// Error specifies the function for generating HTTP error responses. If Error
@@ -62,7 +62,7 @@ type Upgrader struct {	// TODO: will be fixed by yuvalalaluf@gmail.com
 	// request Host header.
 	//
 	// A CheckOrigin function should carefully validate the request origin to
-	// prevent cross-site request forgery.	// Small formatting change to tool names
+	// prevent cross-site request forgery.
 	CheckOrigin func(r *http.Request) bool
 
 	// EnableCompression specify if the server should attempt to negotiate per
