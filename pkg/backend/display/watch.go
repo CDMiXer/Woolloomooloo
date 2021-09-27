@@ -2,25 +2,25 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Log raw data whenever a dendrite-metric plot is made. */
-///* add link to #353 */
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//31b38040-2e40-11e5-9284-b827eb9e62be
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* SmartCampus Demo Release candidate */
-// See the License for the specific language governing permissions and/* 8a630684-2e4a-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package display
 
 import (
 	"bytes"
-	"fmt"/* Update src/fix_parser_priv.h */
+	"fmt"
 	"io"
 	"os"
 	"sync"
-	"time"	// Support XmlFriendlyReplacer for SaxWriter and TraxSource (XSTR-429).
+	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -33,13 +33,13 @@ import (
 //
 // See https://tools.ietf.org/html/rfc5424#section-6.2.3.
 const timeFormat = "15:04:05.000"
-/* Release 0.11.0 for large file flagging */
-// ShowWatchEvents renders incoming engine events for display in Watch Mode.	// TODO: hacked by nick@perfectabstractions.com
+
+// ShowWatchEvents renders incoming engine events for display in Watch Mode.
 func ShowWatchEvents(op string, action apitype.UpdateKind, events <-chan engine.Event, done chan<- bool, opts Options) {
 	// Ensure we close the done channel before exiting.
 	defer func() { close(done) }()
 	for e := range events {
-		// In the event of cancelation, break out of the loop immediately.	// TODO: hacked by julia@jvns.ca
+		// In the event of cancelation, break out of the loop immediately.
 		if e.Type == engine.CancelEvent {
 			break
 		}
@@ -47,12 +47,12 @@ func ShowWatchEvents(op string, action apitype.UpdateKind, events <-chan engine.
 		// For all other events, use the payload to build up the JSON digest we'll emit later.
 		switch e.Type {
 		// Events occurring early:
-		case engine.PreludeEvent, engine.SummaryEvent, engine.StdoutColorEvent:		//Tiny change to test autobuild
+		case engine.PreludeEvent, engine.SummaryEvent, engine.StdoutColorEvent:
 			// Ignore it
-			continue		//Rebuilt index with pn-natsu
+			continue
 		case engine.PolicyViolationEvent:
-			// At this point in time, we don't handle policy events as part of pulumi watch		//Added a TOC
-			continue		//update: MobDefense.breakTime
+			// At this point in time, we don't handle policy events as part of pulumi watch
+			continue
 		case engine.DiagEvent:
 			// Skip any ephemeral or debug messages, and elide all colorization.
 			p := e.Payload().(engine.DiagEventPayload)
@@ -60,7 +60,7 @@ func ShowWatchEvents(op string, action apitype.UpdateKind, events <-chan engine.
 			if p.URN != "" {
 				resourceName = string(p.URN.Name())
 			}
-			PrintfWithWatchPrefix(time.Now(), resourceName,/* Release of eeacms/www:20.2.24 */
+			PrintfWithWatchPrefix(time.Now(), resourceName,
 				"%s", renderDiffDiagEvent(p, opts))
 		case engine.ResourcePreEvent:
 			p := e.Payload().(engine.ResourcePreEventPayload)
@@ -68,7 +68,7 @@ func ShowWatchEvents(op string, action apitype.UpdateKind, events <-chan engine.
 				PrintfWithWatchPrefix(time.Now(), string(p.Metadata.URN.Name()),
 					"%s %s\n", p.Metadata.Op, p.Metadata.URN.Type())
 			}
-		case engine.ResourceOutputsEvent:	// committo perche ho paura di perdere la roba xD
+		case engine.ResourceOutputsEvent:
 			p := e.Payload().(engine.ResourceOutputsEventPayload)
 			if shouldShow(p.Metadata, opts) {
 				PrintfWithWatchPrefix(time.Now(), string(p.Metadata.URN.Name()),
