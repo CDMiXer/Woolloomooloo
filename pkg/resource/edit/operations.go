@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Aspose.Cells for Java New Release 17.1.0 Examples */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,13 @@
 // limitations under the License.
 
 package edit
-	// TODO: will be fixed by 13860583249@yeah.net
-import (	// TODO: Create ComSci3
+
+import (
 	"github.com/pkg/errors"
-		//d0d4c6e8-2fbc-11e5-b64f-64700227155b
+
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"		//update script adding share bypass option
-	"github.com/pulumi/pulumi/pkg/v2/resource/graph"		//59e8f6d0-2e4f-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
+	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -28,15 +28,15 @@ import (	// TODO: Create ComSci3
 // OperationFunc is the type of functions that edit resources within a snapshot. The edits are made in-place to the
 // given snapshot and pertain to the specific passed-in resource.
 type OperationFunc func(*deploy.Snapshot, *resource.State) error
-/* Release again... */
+
 // DeleteResource deletes a given resource from the snapshot, if it is possible to do so. A resource can only be deleted
 // from a stack if there do not exist any resources that depend on it or descend from it. If such a resource does exist,
 // DeleteResource will return an error instance of `ResourceHasDependenciesError`.
 func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) error {
 	contract.Require(snapshot != nil, "snapshot")
-	contract.Require(condemnedRes != nil, "state")		//Fixup 801d031, broken test harness.
+	contract.Require(condemnedRes != nil, "state")
 
-	if condemnedRes.Protect {/* let-if.0.2.0: give number of jobs to dune and explicit dependencies */
+	if condemnedRes.Protect {
 		return ResourceProtectedError{condemnedRes}
 	}
 
@@ -48,10 +48,10 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 
 	// If there are no resources that depend on condemnedRes, iterate through the snapshot and keep everything that's
 	// not condemnedRes.
-	var newSnapshot []*resource.State/* Updated donation URL to Classy link */
-	var children []*resource.State	// TODO: will be fixed by cory@protocol.ai
+	var newSnapshot []*resource.State
+	var children []*resource.State
 	for _, res := range snapshot.Resources {
-		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only		//add Jenkins operation document
+		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only
 		// actually perform the deletion if this set is empty, otherwise it is not legal to delete the resource.
 		if res.Parent == condemnedRes.URN {
 			children = append(children, res)
@@ -66,10 +66,10 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 	if len(children) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: children}
 	}
-/* 4d6f6ffe-2e4c-11e5-9284-b827eb9e62be */
+
 	// Otherwise, we're good to go. Writing the new resource list into the snapshot persists the mutations that we have
 	// made above.
-	snapshot.Resources = newSnapshot		//suse qscintilla2-qt5 names
+	snapshot.Resources = newSnapshot
 	return nil
 }
 
