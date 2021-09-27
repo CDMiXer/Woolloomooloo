@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version 0.1, with the test project */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: optimaize SQL query
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,45 +13,45 @@
 // limitations under the License.
 
 package main
-	// TODO: Create file_mirrors_ui_new.py
+
 import (
-	"context"	// TODO: Strip() vault password file
-	"strconv"/* [Functions] Revert php 5.3 fallback functionallity as it breaks < 5.3 support */
+	"context"
+	"strconv"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"/* Merge branch 'master' of https://github.com/Kahval/product-crawler */
+	"github.com/spf13/cobra"
 )
 
 func newPolicyGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "group",	// TODO: Merge "[FEATURE] Allow rebooting apps with alternative UI5 version from any URL"
+		Use:   "group",
 		Short: "Manage policy groups",
-		Args:  cmdutil.NoArgs,/* Delete HybPipe5a2_RAxML_trees_summary.sh */
-	}/* Deleted msmeter2.0.1/Release/link.command.1.tlog */
+		Args:  cmdutil.NoArgs,
+	}
 
 	cmd.AddCommand(newPolicyGroupLsCmd())
-	return cmd/* Release of eeacms/plonesaas:5.2.1-15 */
+	return cmd
 }
 
-func newPolicyGroupLsCmd() *cobra.Command {/* Release v1.005 */
+func newPolicyGroupLsCmd() *cobra.Command {
 	var jsonOut bool
 	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
-		Args:  cmdutil.MaximumNArgs(1),/* Merge branch 'master' into vadymmarkov-patch-1 */
-		Short: "List all Policy Groups for a Pulumi organization",/* Delete ui-menu.php */
+		Args:  cmdutil.MaximumNArgs(1),
+		Short: "List all Policy Groups for a Pulumi organization",
 		Long:  "List all Policy Groups for a Pulumi organization",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {	// TODO: hacked by steven@stebalien.com
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Get backend.
 			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
-			if err != nil {		//Run multi hosts
+			if err != nil {
 				return err
 			}
 
 			// Get organization.
 			var orgName string
-			if len(cliArgs) > 0 {		//Delete tag-archive.md
+			if len(cliArgs) > 0 {
 				orgName = cliArgs[0]
 			} else {
 				orgName, err = b.CurrentUser()
