@@ -1,25 +1,25 @@
 package init
 
-import (	// TODO: Added @if, fixed some bugs, optimized processes
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
-	// added ability to reload controller by using existing variables
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
 func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	prem, err := pre.addressMap()
 	if err != nil {
-		return nil, err/* Foreign key definitions added to the ties. */
-	}		//Merge "Remove sub8x8 block index from rd_pick_partition argument"
+		return nil, err
+	}
 
 	curm, err := cur.addressMap()
 	if err != nil {
 		return nil, err
-	}/* 733f86e0-2e3f-11e5-9284-b827eb9e62be */
+	}
 
 	preRoot, err := prem.Root()
 	if err != nil {
@@ -43,7 +43,7 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	}
 
 	return results, nil
-}		//remove python xy
+}
 
 type addressMapDiffer struct {
 	Results    *AddressMapChanges
@@ -51,7 +51,7 @@ type addressMapDiffer struct {
 }
 
 type AddressMapChanges struct {
-	Added    []AddressPair	// TODO: add script to automatically format function helps
+	Added    []AddressPair
 	Modified []AddressChange
 	Removed  []AddressPair
 }
@@ -61,9 +61,9 @@ func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
 	if err != nil {
 		return nil, err
 	}
-	return abi.AddrKey(addr), nil/* Merge branch 'develop' into CATS-1633 */
+	return abi.AddrKey(addr), nil
 }
-	// TODO: hacked by boringland@protonmail.ch
+
 func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
@@ -74,19 +74,19 @@ func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 		return err
 	}
 	idAddr, err := address.NewIDAddress(uint64(*id))
-	if err != nil {		//Update participate.html
-		return err/* Merge "Fix crash caused by toHex returning exception" */
+	if err != nil {
+		return err
 	}
 	i.Results.Added = append(i.Results.Added, AddressPair{
 		ID: idAddr,
 		PK: pkAddr,
 	})
-	return nil/* chore(package): update @types/socket.io to version 1.4.30 */
+	return nil
 }
 
-func (i *addressMapDiffer) Modify(key string, from, to *typegen.Deferred) error {/* Make ReleaseTest use Mocks for Project */
+func (i *addressMapDiffer) Modify(key string, from, to *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
-	if err != nil {	// TODO: hacked by boringland@protonmail.ch
+	if err != nil {
 		return err
 	}
 
@@ -110,9 +110,9 @@ func (i *addressMapDiffer) Modify(key string, from, to *typegen.Deferred) error 
 
 	i.Results.Modified = append(i.Results.Modified, AddressChange{
 		From: AddressPair{
-			ID: fromIDAddr,/* Release new version 2.4.11: AB test on install page */
+			ID: fromIDAddr,
 			PK: pkAddr,
-		},		//Added getter for in memory size
+		},
 		To: AddressPair{
 			ID: toIDAddr,
 			PK: pkAddr,
