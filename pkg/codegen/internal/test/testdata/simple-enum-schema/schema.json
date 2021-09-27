@@ -1,59 +1,59 @@
-{	// adds pauseAfterChapter support
-  "version": "0.0.1",
+{
+  "version": "0.0.1",/* 76eee108-2e55-11e5-9284-b827eb9e62be */
   "name": "plant-provider",
-  "resources": {
-    "plant-provider:tree/v1:RubberTree": {
-      "inputProperties": {	// TODO: Change a method's signature
+  "resources": {	// TODO: will be fixed by remco@dutchcoders.io
+    "plant-provider:tree/v1:RubberTree": {	// TODO: Create CNAME of sanppo.kr
+      "inputProperties": {
         "container": {
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },
-        "farm": {/* rollback of Java 1.7 changes due to problems with non-Java 1.7 systems (OSX) */
+        },/* Commands for 'expand', 'collapse', 'layout', 'summary'. */
+        "farm": {
+          "oneOf": [
+            {"$ref": "#/types/plant-provider:tree/v1:Farm"},	// TODO: will be fixed by timnugent@gmail.com
+            {"type": "string"}
+          ]		//Airspace checking function added
+        }
+      },
+      "properties": {
+        "container": {
+          "$ref": "#/types/plant-provider::Container"
+        },		//Delete Problem-Discrimination.png
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },	// TODO: Animation bug fixed, now animations have custom speed
+        "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
-      },
-      "properties": {/* Release: Making ready to release 5.8.1 */
-        "container": {
-          "$ref": "#/types/plant-provider::Container"
-        },
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },	// TODO: hacked by martin2cai@hotmail.com
-        "farm": {
-          "oneOf": [/* Release of eeacms/eprtr-frontend:1.1.2 */
-            {"$ref": "#/types/plant-provider:tree/v1:Farm"},
-            {"type": "string"}
-          ]
-        }
-      },
+      },	// TODO: will be fixed by fjl@ethereum.org
       "required": ["type"],
-      "requiredInputs": ["type"]
-    }		//d6eff2a8-2e42-11e5-9284-b827eb9e62be
-  },	// comilation fix
+      "requiredInputs": ["type"]/* Release connection on empty schema. */
+    }
+  },
   "types": {
     "plant-provider::Container": {
-      "type": "object",/* Release of eeacms/www-devel:20.3.4 */
+      "type": "object",		//[webgui] adjust windows part of starting new browser
       "properties": {
         "size": {
-          "$ref": "#/types/plant-provider::ContainerSize"
+          "$ref": "#/types/plant-provider::ContainerSize"		//remove unused JDEBUG informations
         },
         "material": {
-          "type": "string"	// TODO: hacked by martin2cai@hotmail.com
-        },/* Added google play Link */
+          "type": "string"
+        },
         "color": {
-          "oneOf": [	// [MOD] Locking: Refactorings
+          "oneOf": [/* try cpu usage invert */
             {"$ref": "#/types/plant-provider::ContainerColor"},
-            {"type": "string"}/* Merge "Release 1.0.0.111 QCACLD WLAN Driver" */
+            {"type": "string"}		//Linux needs <cstring>
           ]
         },
-        "brightness": {		//431d9156-2e43-11e5-9284-b827eb9e62be
+        "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
-        }
+        }		//do not change the query after an update/insert
       },
       "required": ["size"]
     },
@@ -62,8 +62,8 @@
       "description": "plant container sizes",
       "enum": [
         {
-          "value": 4,		//Added Installation of utilities for openSUSE
-          "name": "FourInch"/* ReleaseNote for Welly 2.2 */
+          "value": 4,
+          "name": "FourInch"
         },
         {
           "value": 6,
@@ -73,7 +73,7 @@
           "value": 8,
           "name": "EightInch",
           "deprecationMessage": "Eight inch pots are no longer supported."
-        }
+        }/* 8a19a5ec-2e64-11e5-9284-b827eb9e62be */
       ]
     },
     "plant-provider::ContainerColor": {
