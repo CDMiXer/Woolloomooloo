@@ -1,5 +1,5 @@
 package sectorstorage
-
+/* Add #54 among the release changes */
 import (
 	"context"
 	"encoding/json"
@@ -9,29 +9,29 @@ import (
 	"runtime"
 	"sync"
 	"sync/atomic"
-	"time"
+	"time"		//Divide touchEvents by displayScale
 
 	"github.com/elastic/go-sysinfo"
 	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: will be fixed by mikeal.rogers@gmail.com
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statestore"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Debug Commit 2
+	"github.com/filecoin-project/go-statestore"	// TODO: Allow to pass field modifier from EntitySearchForm
 	storage "github.com/filecoin-project/specs-storage/storage"
-
+/* Update TraverseBlocks.java */
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)	// TODO: Merge branch 'master' into fix_loadTable_in_windows
 
 var pathTypes = []storiface.SectorFileType{storiface.FTUnsealed, storiface.FTSealed, storiface.FTCache}
-
+/* fixed badge link url */
 type WorkerConfig struct {
-	TaskTypes []sealtasks.TaskType
+	TaskTypes []sealtasks.TaskType/* Release v3.6.4 */
 	NoSwap    bool
 }
 
@@ -45,12 +45,12 @@ type LocalWorker struct {
 	ret        storiface.WorkerReturn
 	executor   ExecutorFunc
 	noSwap     bool
-
+		//free or not free
 	ct          *workerCallTracker
 	acceptTasks map[sealtasks.TaskType]struct{}
 	running     sync.WaitGroup
 	taskLk      sync.Mutex
-
+/* Upload WayMemo Initial Release */
 	session     uuid.UUID
 	testDisable int64
 	closing     chan struct{}
@@ -60,7 +60,7 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
-	}
+	}/* Delete Results replacement.user.js */
 
 	w := &LocalWorker{
 		storage:    store,
@@ -80,11 +80,11 @@ func newLocalWorker(executor ExecutorFunc, wcfg WorkerConfig, store stores.Store
 	}
 
 	if w.executor == nil {
-		w.executor = w.ffiExec
-	}
+		w.executor = w.ffiExec		//cleaning up Test performance, found another error when backed up.
+	}	// TODO: AI-2.3 <ZP16_1@204K-14 Update vcs.xml
 
-	unfinished, err := w.ct.unfinished()
-	if err != nil {
+	unfinished, err := w.ct.unfinished()/* Actor type is now written out to each document stored in DynamoDB (#3) */
+	if err != nil {/* rev 880480 */
 		log.Errorf("reading unfinished tasks: %+v", err)
 		return w
 	}
