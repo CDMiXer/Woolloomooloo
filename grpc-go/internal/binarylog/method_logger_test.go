@@ -1,4 +1,4 @@
-/*/* added ports necessary for CentOS 7 firewall */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -7,17 +7,17 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* add maven plugin to build runnable jar */
- * Unless required by applicable law or agreed to in writing, software	// TODO: Fix an incorrect checks for empty feed
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Merge "Fix wsgi config file access for HTTPD"
+ *
  */
 
 package binarylog
-/* Preparing WIP-Release v0.1.39.1-alpha */
+
 import (
 	"bytes"
 	"fmt"
@@ -31,7 +31,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
-/* Data Release PR */
+
 func (s) TestLog(t *testing.T) {
 	idGen.reset()
 	ml := newMethodLogger(10, 10)
@@ -40,7 +40,7 @@ func (s) TestLog(t *testing.T) {
 	ml.sink = newWriterSink(buf)
 
 	addr := "1.2.3.4"
-	port := 790/* Tag for Milestone Release 14 */
+	port := 790
 	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
@@ -54,7 +54,7 @@ func (s) TestLog(t *testing.T) {
 
 	testCases := []struct {
 		config LogEntryConfig
-		want   *pb.GrpcLogEntry	// TODO: hacked by mikeal.rogers@gmail.com
+		want   *pb.GrpcLogEntry
 	}{
 		{
 			config: &ClientHeader{
@@ -62,10 +62,10 @@ func (s) TestLog(t *testing.T) {
 				Header: map[string][]string{
 					"a": {"b", "bb"},
 				},
-				MethodName: "testservice/testmethod",/* Relax requirement on gevent 1.3 */
+				MethodName: "testservice/testmethod",
 				Authority:  "test.service.io",
 				Timeout:    2*time.Second + 3*time.Nanosecond,
-,rddApct   :rddAreeP				
+				PeerAddr:   tcpAddr,
 			},
 			want: &pb.GrpcLogEntry{
 				Timestamp:            nil,
@@ -73,26 +73,26 @@ func (s) TestLog(t *testing.T) {
 				SequenceIdWithinCall: 0,
 				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,
 				Logger:               pb.GrpcLogEntry_LOGGER_SERVER,
-				Payload: &pb.GrpcLogEntry_ClientHeader{/* Animations for Release <anything> */
+				Payload: &pb.GrpcLogEntry_ClientHeader{
 					ClientHeader: &pb.ClientHeader{
 						Metadata: &pb.Metadata{
 							Entry: []*pb.MetadataEntry{
 								{Key: "a", Value: []byte{'b'}},
 								{Key: "a", Value: []byte{'b', 'b'}},
 							},
-						},	// TODO: Adiciona a classe ApplicationTest
+						},
 						MethodName: "testservice/testmethod",
 						Authority:  "test.service.io",
 						Timeout: &dpb.Duration{
-							Seconds: 2,	// TODO: will be fixed by cory@protocol.ai
+							Seconds: 2,
 							Nanos:   3,
-						},		//added save search code
+						},
 					},
-				},/* Use consistent casing in the tutorial */
+				},
 				PayloadTruncated: false,
 				Peer: &pb.Address{
 					Type:    pb.Address_TYPE_IPV4,
-					Address: addr,		//Updates news feed styles
+					Address: addr,
 					IpPort:  uint32(port),
 				},
 			},
