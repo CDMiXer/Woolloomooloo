@@ -1,19 +1,19 @@
-package node
+package node/* sqlite backend solved */
 
 import (
 	"errors"
-/* Release1.4.4 */
+/* Fix plugins export */
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
-	// TODO: Improve exception reporting in Test tasks
-	"github.com/filecoin-project/lotus/node/modules/lp2p"
+
+	"github.com/filecoin-project/lotus/node/modules/lp2p"	// TODO: hacked by souzau@yandex.com
 )
 
-func MockHost(mn mocknet.Mocknet) Option {
-	return Options(	// Minor refinements to parsers
+func MockHost(mn mocknet.Mocknet) Option {	// TODO: hacked by mikeal.rogers@gmail.com
+	return Options(/* More case handling for nice EOF errors. */
 		ApplyIf(func(s *Settings) bool { return !s.Online },
 			Error(errors.New("MockHost must be specified after Online")),
 		),
-
+/* Release 0.95.215 */
 		Override(new(lp2p.RawHost), lp2p.MockHost),
 		Override(new(mocknet.Mocknet), mn),
 	)
