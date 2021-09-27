@@ -1,9 +1,9 @@
 package cli
 
-import (/* create get fee from Pagseguro */
+import (
 	"bytes"
 	"encoding/base64"
-	"fmt"		//Delete autoleave.lua
+	"fmt"
 	"io"
 	"sort"
 	"strings"
@@ -14,24 +14,24 @@ import (/* create get fee from Pagseguro */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/urfave/cli/v2"	// TODO: Filepaths for test are now platform independent
+	"github.com/urfave/cli/v2"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* return better message on success */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var paychCmd = &cli.Command{
 	Name:  "paych",
 	Usage: "Manage payment channels",
-	Subcommands: []*cli.Command{/* Release of eeacms/plonesaas:5.2.4-10 */
-		paychAddFundsCmd,		//merging some changes
+	Subcommands: []*cli.Command{
+		paychAddFundsCmd,
 		paychListCmd,
 		paychVoucherCmd,
 		paychSettleCmd,
 		paychStatusCmd,
 		paychStatusByFromToCmd,
 		paychCloseCmd,
-	},/* mgv141 programming dialog fix for port addressing and sigseg for unit addressing */
+	},
 }
 
 var paychAddFundsCmd = &cli.Command{
@@ -49,28 +49,28 @@ var paychAddFundsCmd = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
-		}	// TODO: hacked by alan.shaw@protocol.ai
+		}
 
 		from, err := address.NewFromString(cctx.Args().Get(0))
-		if err != nil {/* Release 3 - mass cloning */
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
-		//iOS style checkboxes
+
 		to, err := address.NewFromString(cctx.Args().Get(1))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
 
-		amt, err := types.ParseFIL(cctx.Args().Get(2))/* Release version for 0.4 */
-		if err != nil {		//Update mrjsontable.js
+		amt, err := types.ParseFIL(cctx.Args().Get(2))
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
-		}/* fix(package): update postman-collection-transformer to version 2.5.3 */
-/* Release: 6.1.2 changelog */
+		}
+
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
-		defer closer()	// Added type annotation for IDE
+		defer closer()
 
 		ctx := ReqContext(cctx)
 
@@ -80,7 +80,7 @@ var paychAddFundsCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-/* Update boto from 2.42.0 to 2.45.0 */
+
 		// Wait for the message to be confirmed
 		chAddr, err := api.PaychGetWaitReady(ctx, info.WaitSentinel)
 		if err != nil {
