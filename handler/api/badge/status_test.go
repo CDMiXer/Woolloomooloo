@@ -1,33 +1,33 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//updated link metric
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package badge		//(???): Cleverbot.py has some weird updates, trying to fix my code
+package badge
 
 import (
-	"context"		//Updated shortdef to flat name
+	"context"
 	"database/sql"
-	"net/http/httptest"/* Merge "wlan: Release 3.2.3.140" */
+	"net/http/httptest"
 	"testing"
-		//Update PyRhO logo, change width to height and make links open in new page
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-)	// TODO: Simple example of GPSTk usage
-		//[#211] tell the user when not result found
-var (		//Fixes issue 351
+)
+
+var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Branch:    "master",		//Bumped mesos to master 1961e41a61def2b7baca7563c0b7e1855880b55c.
-	}	// TODO: will be fixed by witek@enjin.io
+		Branch:    "master",
+	}
 
-	mockBuild = &core.Build{/* Release version [10.7.0] - alfter build */
+	mockBuild = &core.Build{
 		ID:     1,
 		RepoID: 1,
 		Number: 1,
@@ -35,9 +35,9 @@ var (		//Fixes issue 351
 		Ref:    "refs/heads/develop",
 	}
 
-	mockBuildFailing = &core.Build{	// Merge branch 'master' into hotfix/MUWM-3942
+	mockBuildFailing = &core.Build{
 		ID:     2,
-		RepoID: 1,		//693ff830-2e4b-11e5-9284-b827eb9e62be
+		RepoID: 1,
 		Number: 2,
 		Status: core.StatusFailing,
 		Ref:    "refs/heads/master",
@@ -48,13 +48,13 @@ var (		//Fixes issue 351
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
-		Ref:    "refs/heads/master",		//A test commit to test the website builder
-	}		//.UPDATE IconLib for console-plugin added
+		Ref:    "refs/heads/master",
+	}
 
 	mockBuildError = &core.Build{
 		ID:     4,
 		RepoID: 1,
-		Number: 4,	// TODO: Require zfs service
+		Number: 4,
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
 	}
