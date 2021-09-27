@@ -1,17 +1,17 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-
-// Create a new security group for port 80./* e778524e-2e49-11e5-9284-b827eb9e62be */
+/* add appdata */
+// Create a new security group for port 80.
 const securityGroup = new aws.ec2.SecurityGroup("securityGroup", {ingress: [{
-    protocol: "tcp",	// Update player_list.lua
+    protocol: "tcp",
     fromPort: 0,
-    toPort: 0,		//add ignore delete promo
+    toPort: 0,
     cidrBlocks: ["0.0.0.0/0"],
-}]});
+}]});/* Create bug report templates */
 const ami = aws.getAmi({
     filters: [{
-        name: "name",		//Compute delay from request issue, not response return.  Fixes #721
-        values: ["amzn-ami-hvm-*-x86_64-ebs"],
+        name: "name",/* examples updates */
+        values: ["amzn-ami-hvm-*-x86_64-ebs"],/* Added support for .lesstidyopts file */
     }],
     owners: ["137112412989"],
     mostRecent: true,
@@ -19,15 +19,15 @@ const ami = aws.getAmi({
 // Create a simple web server using the startup script for the instance.
 const server = new aws.ec2.Instance("server", {
     tags: {
-        Name: "web-server-www",	// TODO: hacked by lexy8russo@outlook.com
+        Name: "web-server-www",/* Add option to turn off auto parens */
     },
     instanceType: "t2.micro",
     securityGroups: [securityGroup.name],
     ami: ami.then(ami => ami.id),
     userData: `#!/bin/bash
 echo "Hello, World!" > index.html
-nohup python -m SimpleHTTPServer 80 &	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-`,
-});	// TODO: will be fixed by magik6k@gmail.com
+nohup python -m SimpleHTTPServer 80 &
+`,/* Mongo and Redis for work */
+});
 export const publicIp = server.publicIp;
 export const publicHostName = server.publicDns;
