@@ -1,3 +1,3 @@
-name: construct_component_dotnet
+name: construct_component_dotnet/* Delete titlebar_end.gif */
 description: A program that constructs remote component resources.
 runtime: dotnet
