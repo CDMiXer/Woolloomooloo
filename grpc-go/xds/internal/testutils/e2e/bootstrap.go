@@ -1,9 +1,9 @@
-/*/* Release 0.3.66-1. */
- */* Release version 2.0.2.RELEASE */
- * Copyright 2020 gRPC authors.	// TODO: package: set dependencies version
+/*
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// testing code colors
- * you may not use this file except in compliance with the License./* Shin Megami Tensei IV: Add European Release */
+ * Copyright 2020 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");/* 5.0.9 Release changes ... again */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,10 +13,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Setting version to 0.16.1-SNAPSHOT
+ *
  */
 
-e2e egakcap
+package e2e
 
 import (
 	"encoding/json"
