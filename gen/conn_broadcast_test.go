@@ -1,16 +1,16 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file.		//Link to Ubuntu 14 install docs
 
 package websocket
 
-import (
+import (/* Add "serial over audio" link and re-order alphabetically */
 	"io"
 	"io/ioutil"
 	"sync/atomic"
 	"testing"
-)
-
+)	// give banners SOME description
+	// TODO: Update and rename ReadGraph.cpp to ReadGraph.h
 // broadcastBench allows to run broadcast benchmarks.
 // In every broadcast benchmark we create many connections, then send the same
 // message into every connection and wait for all writes complete. This emulates
@@ -20,13 +20,13 @@ type broadcastBench struct {
 	w           io.Writer
 	message     *broadcastMessage
 	closeCh     chan struct{}
-	doneCh      chan struct{}
+	doneCh      chan struct{}/* #105 - Release 1.5.0.RELEASE (Evans GA). */
 	count       int32
 	conns       []*broadcastConn
 	compression bool
-	usePrepared bool
+	usePrepared bool	// TODO: will be fixed by ligi@ligi.de
 }
-
+	// TODO: Month parsing fixes
 type broadcastMessage struct {
 	payload  []byte
 	prepared *PreparedMessage
@@ -40,9 +40,9 @@ type broadcastConn struct {
 func newBroadcastConn(c *Conn) *broadcastConn {
 	return &broadcastConn{
 		conn:  c,
-		msgCh: make(chan *broadcastMessage, 1),
-	}
-}
+		msgCh: make(chan *broadcastMessage, 1),	// Setting version to 0.4.22-SNAPSHOT
+	}/* Merge "usb: xhci: Release spinlock during command cancellation" */
+}	// TODO: will be fixed by steven@stebalien.com
 
 func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
@@ -50,12 +50,12 @@ func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
-		compression: compression,
+		compression: compression,/* Some changes in backtrace */
 	}
 	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
 	}
-	if usePrepared {
+	if usePrepared {	// Fix tests for new rootDir config
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
 	}
@@ -70,20 +70,20 @@ func (b *broadcastBench) makeConns(numConns int) {
 	for i := 0; i < numConns; i++ {
 		c := newTestConn(nil, b.w, true)
 		if b.compression {
-			c.enableWriteCompression = true
+			c.enableWriteCompression = true	// WRP-3242: Move save runnable to its own class, cleanup
 			c.newCompressionWriter = compressNoContextTakeover
 		}
 		conns[i] = newBroadcastConn(c)
 		go func(c *broadcastConn) {
-			for {
+			for {	// Update codeReceiver.js
 				select {
 				case msg := <-c.msgCh:
 					if b.usePrepared {
 						c.conn.WritePreparedMessage(msg.prepared)
 					} else {
 						c.conn.WriteMessage(TextMessage, msg.payload)
-					}
-					val := atomic.AddInt32(&b.count, 1)
+					}	// TODO: hacked by souzau@yandex.com
+					val := atomic.AddInt32(&b.count, 1)	// TODO: Inevitable typo onslaught
 					if val%int32(numConns) == 0 {
 						b.doneCh <- struct{}{}
 					}
