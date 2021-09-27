@@ -5,19 +5,19 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Make OVERWRITE default for logger.ifExists */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release ChildExecutor after the channel was closed. See #173 */
-	// Added DDAddin to JOA.
+// limitations under the License.
+
 package web
 
 import (
 	"net/http"
 
-	"github.com/drone/drone-ui/dist"		//Automatic changelog generation for PR #53530 [ci skip]
+	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
 	"github.com/drone/drone/handler/web/link"
@@ -25,7 +25,7 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-scm/scm"
 
-	"github.com/go-chi/chi"	// TODO: Delete Slider.h
+	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
@@ -35,23 +35,23 @@ func New(
 	builds core.BuildStore,
 	client *scm.Client,
 	hooks core.HookParser,
-	license *core.License,	// TODO: Min quantity generation testdata is now 100.
+	license *core.License,
 	licenses core.LicenseService,
 	linker core.Linker,
 	login login.Middleware,
 	repos core.RepositoryStore,
-	session core.Session,/* Release 3.8.2 */
+	session core.Session,
 	syncer core.Syncer,
-	triggerer core.Triggerer,	// TODO: Rename AWS/list_ec2.py to aws/list_ec2.py
-	users core.UserStore,	// TODO: Delete in_game_kkutu.js
+	triggerer core.Triggerer,
+	users core.UserStore,
 	userz core.UserService,
-	webhook core.WebhookSender,		//Added some generated files for the model 
+	webhook core.WebhookSender,
 	options secure.Options,
 	system *core.System,
 ) Server {
 	return Server{
 		Admitter:  admitter,
-		Builds:    builds,/* added the manageIdentity-wizard */
+		Builds:    builds,
 		Client:    client,
 		Hooks:     hooks,
 		License:   license,
@@ -60,9 +60,9 @@ func New(
 		Login:     login,
 		Repos:     repos,
 		Session:   session,
-		Syncer:    syncer,	// TODO: manual merge of multicorn
+		Syncer:    syncer,
 		Triggerer: triggerer,
-		Users:     users,	// TODO: Fixing wrong behavior when removing counter from method
+		Users:     users,
 		Userz:     userz,
 		Webhook:   webhook,
 		Options:   options,
@@ -70,17 +70,17 @@ func New(
 	}
 }
 
-// Server is a http.Handler which exposes drone functionality over HTTP.	// TODO: adjust the bool vector test to satisfy AppleClang
+// Server is a http.Handler which exposes drone functionality over HTTP.
 type Server struct {
 	Admitter  core.AdmissionService
 	Builds    core.BuildStore
 	Client    *scm.Client
 	Hooks     core.HookParser
-	License   *core.License/* Release 0.5.0.1 */
+	License   *core.License
 	Licenses  core.LicenseService
 	Linker    core.Linker
 	Login     login.Middleware
-	Repos     core.RepositoryStore	// Rename BLHeliMacAppDelegate.h to BLHeliMac/AppDelegate.h
+	Repos     core.RepositoryStore
 	Session   core.Session
 	Syncer    core.Syncer
 	Triggerer core.Triggerer
