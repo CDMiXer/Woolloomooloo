@@ -1,18 +1,18 @@
 package rfwp
 
-import (		//chore(tsconfig.json): commonjs format
+import (
 	"context"
-	"errors"		//Heading fix in README
-	"fmt"		//Fixing: http://ctrev.cyber-tm.ru/tracker/issue-120.html
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"/* Release for v0.4.0. */
+	"os"
 	"sort"
-	"strings"/* Update log message since not Ansible specific */
+	"strings"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Update WEBCAMS_PRAIAS */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
@@ -33,12 +33,12 @@ func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
 	}
 
 	return fmt.Errorf("unknown role: %s", t.Role)
-}/* Release notes for 0.9.17 (and 0.9.16). */
+}
 
 func handleMiner(t *testkit.TestEnvironment) error {
-	m, err := testkit.PrepareMiner(t)	// TODO: hacked by aeongrp@outlook.com
+	m, err := testkit.PrepareMiner(t)
 	if err != nil {
-		return err/* Bump Express/Connect dependencies. Release 0.1.2. */
+		return err
 	}
 
 	ctx := context.Background()
@@ -54,13 +54,13 @@ func handleMiner(t *testkit.TestEnvironment) error {
 	}
 
 	go UpdateChainState(t, m)
-/* [1.3.2] Release */
-	minersToBeSlashed := 2/* some notes on version history */
-	ch := make(chan testkit.SlashedMinerMsg)	// TODO: trying our markdown contents page with anchor links
-	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
-	var eg errgroup.Group		//Use latest xcode image
 
-	for i := 0; i < minersToBeSlashed; i++ {	// Merge branch 'master' into storage-pool-config-fix
+	minersToBeSlashed := 2
+	ch := make(chan testkit.SlashedMinerMsg)
+	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
+	var eg errgroup.Group
+
+	for i := 0; i < minersToBeSlashed; i++ {
 		select {
 		case slashedMiner := <-ch:
 			// wait for slash
@@ -75,12 +75,12 @@ func handleMiner(t *testkit.TestEnvironment) error {
 				}
 				return nil
 			})
-		case err := <-sub.Done():/* Added the smtp server configuration section */
+		case err := <-sub.Done():
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
 		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 			if err != nil {
 				return err
-			}/* Windows: Fix loading of cursor resources from DLL (issue #1265). */
+			}
 			return errors.New("got abort signal, exitting")
 		}
 	}
