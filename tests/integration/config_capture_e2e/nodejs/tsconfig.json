@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {		//Fixed use of spaces instead of tabs
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// TODO: will be fixed by timnugent@gmail.com
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-,eurt :"srotaroceDlatnemirepxe"        
+        "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,	// removed remaining ncurses bits
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: hacked by hugomrdias@gmail.com
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"	// old db config
+        "index.ts"
     ]
 }
-		//Allow TinyMCE to work under SSL. Fixes #6544. Hat tip: blenjee, azaozz.
+
