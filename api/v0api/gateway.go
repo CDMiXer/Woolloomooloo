@@ -1,43 +1,43 @@
-package v0api
+ipa0v egakcap
 
 import (
 	"context"
-
+		//Create how-to-register-a-new-virgilcard.rst
 	"github.com/ipfs/go-cid"
-/* Fix 1845: Added warning when Javascript not enabled (#1859) */
-	"github.com/filecoin-project/go-address"/* Fixed hyperlink to bug fix */
+/* Release STAVOR v0.9 BETA */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"
-/* Merge 40235 */
+	"github.com/filecoin-project/go-state-types/network"	// TODO: will be fixed by sjors@sprovoost.nl
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Rename EasyBotter_LICENSE.md to EasyBotter_LICENSE.txt */
+)
 
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V0 (Stable) API - when adding methods to this interface,
-// you'll need to make sure they are also present on the V1 (Unstable) API		//Create scotch.coffee
+// you'll need to make sure they are also present on the V1 (Unstable) API
 //
 // This API is implemented in `v1_wrapper.go` as a compatibility layer backed
 // by the V1 api
 //
-// When adding / changing methods in this file:
+// When adding / changing methods in this file:/* Set cache size when we detect a playlist */
 // * Do the change here
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:
-//  * Generate proxy structs/* Create spaceJacket.ino */
+// * Run `make gen` - this will:/* Merge "Backward compatibility for the ramdisk_params change" */
+//  * Generate proxy structs
 //  * Generate mocks
-//  * Generate markdown docs/* Updating version to 1.8.0.9 */
+//  * Generate markdown docs
 //  * Generate openrpc blobs
 
 type Gateway interface {
-	ChainHasObj(context.Context, cid.Cid) (bool, error)/* prepare for 0.2.0 */
+	ChainHasObj(context.Context, cid.Cid) (bool, error)
 	ChainHead(ctx context.Context) (*types.TipSet, error)
-	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)/* Release 1.1.0-RC2 */
-	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
-	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
+	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
+	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)	// TODO: Ignore package.json in Git
+	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)/* Release v0.10.5 */
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
@@ -52,15 +52,15 @@ type Gateway interface {
 	StateGetReceipt(context.Context, cid.Cid, types.TipSetKey) (*types.MessageReceipt, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-)rorre ,ecnalaBtekraM.ipa( )yeKteSpiT.sepyt kst ,sserddA.sserdda rdda ,txetnoC.txetnoc xtc(ecnalaBtekraMetatS	
+	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
 	StateMinerPower(context.Context, address.Address, types.TipSetKey) (*api.MinerPower, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)		//Update faker from 0.7.10 to 0.7.11
-)rorre ,pukooLgsM.ipa*( )diC.dic gsm ,txetnoC.txetnoc xtc(gsMhcraeSetatS	
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
+	StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error)
 	StateSectorGetInfo(ctx context.Context, maddr address.Address, n abi.SectorNumber, tsk types.TipSetKey) (*miner.SectorOnChainInfo, error)
-	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)
+	StateVerifiedClientStatus(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*abi.StoragePower, error)/* Release v0.3.0.1 */
 	StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error)
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
 }
