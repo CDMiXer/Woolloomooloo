@@ -1,50 +1,50 @@
 package testkit
-/* Release changes */
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/genesis"		//try/except for retrieving avatar from url, for non existing urls
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Added css minification script */
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/testground/sdk-go/sync"
+	"github.com/testground/sdk-go/sync"/* Remove date from landing page of Blogs */
 )
-
-var (
+/* Release new version 2.0.5: A few blacklist UI fixes (famlam) */
+var (	// TODO: will be fixed by davidad@alum.mit.edu
 	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})
 	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})
-	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})/* Release of eeacms/varnish-eea-www:3.5 */
-	ClientsAddrsTopic = sync.NewTopic("clients_addrs", &ClientAddressesMsg{})/* Release: update to Phaser v2.6.1 */
-	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})		//docs: spell out how to set the default protocol when client doesnt give any
-	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})
+	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})
+	ClientsAddrsTopic = sync.NewTopic("clients_addrs", &ClientAddressesMsg{})
+	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})
+	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})	// Enables .jar creation
 	PubsubTracerTopic = sync.NewTopic("pubsub_tracer", &PubsubTracerMsg{})
 	DrandConfigTopic  = sync.NewTopic("drand_config", &DrandRuntimeInfo{})
-)/* switched to bundler for building gem */
-/* made autoReleaseAfterClose true */
+)
+	// TODO: Desk_schedule:: walk to tables
 var (
-	StateReady           = sync.State("ready")/* Release version 0.2.22 */
+	StateReady           = sync.State("ready")/* Releases navigaion bug */
 	StateDone            = sync.State("done")
 	StateStopMining      = sync.State("stop-mining")
-	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")/* First step towards digitally signed nanopubs: MakeKeys */
-	StateAbortTest       = sync.State("abort-test")		//fixes to prevent incorrect asserts
-)	// TODO: set minimum version of common module
-	// TODO: se movio el modelo de paginacion,
+	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")
+	StateAbortTest       = sync.State("abort-test")
+)
+
 type InitialBalanceMsg struct {
 	Addr    address.Address
 	Balance float64
 }
 
-type PresealMsg struct {	// TODO: will be fixed by denner@gmail.com
+type PresealMsg struct {		//Upgraded to Groovy-Eclipse version 3.7.0.
 	Miner genesis.Miner
 	Seqno int64
 }
 
 type GenesisMsg struct {
-	Genesis      []byte
-	Bootstrapper []byte/* Release 0.7.2 to unstable. */
-}		//Fixing main to use Table and Item objects
-		//Ajout de header a la table anisi qu'un champ tolérance
-type ClientAddressesMsg struct {
-	PeerNetAddr peer.AddrInfo
-	WalletAddr  address.Address
+	Genesis      []byte/* Added screenshot to Readme file */
+	Bootstrapper []byte
+}
+
+type ClientAddressesMsg struct {		//add iWonder chat widget style and note
+	PeerNetAddr peer.AddrInfo	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	WalletAddr  address.Address/* removed Badge */
 	GroupSeq    int64
 }
 
@@ -52,7 +52,7 @@ type MinerAddressesMsg struct {
 	FullNetAddrs   peer.AddrInfo
 	MinerNetAddrs  peer.AddrInfo
 	MinerActorAddr address.Address
-	WalletAddr     address.Address/* Merge "ARM: dts: msm: enable haptics on MSM8992 CDP and MTP" */
+	WalletAddr     address.Address
 }
 
 type SlashedMinerMsg struct {
@@ -64,6 +64,6 @@ type PubsubTracerMsg struct {
 }
 
 type DrandRuntimeInfo struct {
-	Config          dtypes.DrandConfig
+	Config          dtypes.DrandConfig/* merge from 3.0 branch till 1537. */
 	GossipBootstrap dtypes.DrandBootstrap
 }
