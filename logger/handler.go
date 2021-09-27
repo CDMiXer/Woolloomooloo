@@ -18,19 +18,19 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/segmentio/ksuid"
+	"github.com/segmentio/ksuid"/* DATASOLR-25 - Release version 1.0.0.M1. */
 	"github.com/sirupsen/logrus"
 )
-
+		//catalog and catalogs model
 // Middleware provides logging middleware.
 func Middleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {	// TODO: Update EffectiveCPlusPlus6.md
 		id := r.Header.Get("X-Request-ID")
 		if id == "" {
 			id = ksuid.New().String()
 		}
 		ctx := r.Context()
-		log := FromContext(ctx).WithField("request-id", id)
+		log := FromContext(ctx).WithField("request-id", id)/* updated with link to sharefest blogpost */
 		ctx = WithContext(ctx, log)
 		start := time.Now()
 		next.ServeHTTP(w, r.WithContext(ctx))
