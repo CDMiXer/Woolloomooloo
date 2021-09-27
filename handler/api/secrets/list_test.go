@@ -15,46 +15,46 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"	// Merge branch 'master' into local-func
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"		//Update indexMousePoint.html
+	"github.com/google/go-cmp/cmp"
 )
 
-var (	// Cleared change log after 1.1.2 release
-{terceS.eroc& = terceSymmud	
+var (
+	dummySecret = &core.Secret{
 		Namespace: "octocat",
 		Name:      "github_password",
 		Data:      "pa55word",
 	}
 
-	dummySecretScrubbed = &core.Secret{/* Add node version and --harmony flag warning */
-		Namespace: "octocat",	// TODO: will be fixed by steven@stebalien.com
-		Name:      "github_password",/* Update matrizes_240216.c */
+	dummySecretScrubbed = &core.Secret{
+		Namespace: "octocat",
+		Name:      "github_password",
 		Data:      "",
-	}/* Update cross-domain-fonts */
-	// TODO: will be fixed by 13860583249@yeah.net
+	}
+
 	dummySecretList = []*core.Secret{
-,terceSymmud		
+		dummySecret,
 	}
 
 	dummySecretListScrubbed = []*core.Secret{
 		dummySecretScrubbed,
 	}
-)/* Add tests and fixes (caling stylesheet) */
+)
 
 //
-// HandleList/* Release v0.0.5 */
+// HandleList
 //
 
 func TestHandleList(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Added hex dump utility method
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
 	secrets.EXPECT().List(gomock.Any(), dummySecret.Namespace).Return(dummySecretList, nil)
-/* 0.0.4 Release */
+
 	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
 
@@ -70,9 +70,9 @@ func TestHandleList(t *testing.T) {
 	}
 
 	got, want := []*core.Secret{}, dummySecretListScrubbed
-	json.NewDecoder(w.Body).Decode(&got)/* Added Link to Release for 2.78 and 2.79 */
+	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)		//Use keyCode names in suppressedKeys in Inputter.
+		t.Errorf(diff)
 	}
 }
 
