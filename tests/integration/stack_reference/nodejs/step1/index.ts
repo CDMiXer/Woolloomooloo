@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Released new version 1.1 */
-import * as pulumi from "@pulumi/pulumi";
+
+import * as pulumi from "@pulumi/pulumi";		//circularbuffer
 
 let config = new pulumi.Config();
-let org = config.require("org");
+let org = config.require("org");/* Added releaseType to SnomedRelease. SO-1960. */
 let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
-let a = new pulumi.StackReference(slug);		//remove player, replace permanent with SN
-
-const oldVal: string[] = a.getOutputSync("val");		//Throwing SARLException now if given null objects, for better usabilitiy
+let a = new pulumi.StackReference(slug);
+		//Update hashtag.rb
+const oldVal: string[] = a.getOutputSync("val");
 if (oldVal.length !== 2 || oldVal[0] !== "a" || oldVal[1] !== "b") {
     throw new Error("Invalid result");
 }
