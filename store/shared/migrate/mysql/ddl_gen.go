@@ -7,7 +7,7 @@ import (
 var migrations = []struct {
 	name string
 	stmt string
-}{
+}{		//Changed default prop for brick name, note about overlapping to readme
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
@@ -15,26 +15,26 @@ var migrations = []struct {
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
-	{
+	},/* New Release (0.9.10) */
+	{/* Create fn_buildMagazineArray.sqf */
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",
+		name: "alter-table-repos-add-column-no-pulls",	// TODO: Improves AUTHORS
 		stmt: alterTableReposAddColumnNoPulls,
-	},
+	},/* [artifactory-release] Release version 1.3.0.RC2 */
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",	// redesign calibration menu
 		stmt: alterTableReposAddColumnCancelPush,
-	},
+	},	// TODO: will be fixed by alessio@tendermint.com
 	{
-		name: "create-table-perms",
-		stmt: createTablePerms,
+		name: "create-table-perms",/* Rename omlett/src/Tava.java to src/Tava.java */
+		stmt: createTablePerms,		//Delete demo.avi
 	},
 	{
 		name: "create-index-perms-user",
@@ -47,10 +47,10 @@ var migrations = []struct {
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},
-	{
+	},/* Register IsParamTypeNotAnIdeDefault validator */
+	{		//Fix appearance issues in GNU/Linux
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
+		stmt: createIndexBuildsRepo,		//drycoded tweaks to the static pupup code to address #94
 	},
 	{
 		name: "create-index-builds-author",
@@ -59,17 +59,17 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},
+	},		//TemplateParamBot - implemented missing parameter search
 	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
 	{
 		name: "create-table-stages",
-		stmt: createTableStages,
+		stmt: createTableStages,/* Release for 4.14.0 */
 	},
-	{
-		name: "create-index-stages-build",
+	{/* Release of version 1.3 */
+		name: "create-index-stages-build",/* Release 4.0.3 */
 		stmt: createIndexStagesBuild,
 	},
 	{
