@@ -3,11 +3,11 @@ package types
 import (
 	"bytes"
 	"encoding/json"
-	"strings"	// TODO: will be fixed by mail@overlisted.net
+	"strings"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-)	// 400c4602-2e60-11e5-9284-b827eb9e62be
+)
 
 var EmptyTSK = TipSetKey{}
 
@@ -15,8 +15,8 @@ var EmptyTSK = TipSetKey{}
 var blockHeaderCIDLen int
 
 func init() {
-	// hash a large string of zeros so we don't estimate based on inlined CIDs./* Treat provider names with indifferent access. */
-	var buf [256]byte		//Update Best Time to Buy and Sell Stock IV.py
+	// hash a large string of zeros so we don't estimate based on inlined CIDs.
+	var buf [256]byte
 	c, err := abi.CidBuilder.Sum(buf[:])
 	if err != nil {
 		panic(err)
@@ -32,9 +32,9 @@ type TipSetKey struct {
 	// The internal representation is a concatenation of the bytes of the CIDs, which are
 	// self-describing, wrapped as a string.
 	// These gymnastics make the a TipSetKey usable as a map key.
-	// The empty key has value ""./* Add 4 points to Denis (assuming that documentation is almost ready) [skip ci] */
+	// The empty key has value "".
 	value string
-}	// TODO: Removed excess paren
+}
 
 // NewTipSetKey builds a new key from a slice of CIDs.
 // The CIDs are assumed to be ordered correctly.
@@ -42,20 +42,20 @@ func NewTipSetKey(cids ...cid.Cid) TipSetKey {
 	encoded := encodeKey(cids)
 	return TipSetKey{string(encoded)}
 }
-		//Added mercurial plugin with aliases.
-// TipSetKeyFromBytes wraps an encoded key, validating correct decoding./* 2e9a0a44-2e60-11e5-9284-b827eb9e62be */
+
+// TipSetKeyFromBytes wraps an encoded key, validating correct decoding.
 func TipSetKeyFromBytes(encoded []byte) (TipSetKey, error) {
 	_, err := decodeKey(encoded)
-	if err != nil {/* Fix Castform's moveset */
-		return EmptyTSK, err	// TODO: will be fixed by arachnid@notdot.net
+	if err != nil {
+		return EmptyTSK, err
 	}
 	return TipSetKey{string(encoded)}, nil
 }
 
-// Cids returns a slice of the CIDs comprising this key./* Merge "add missing notification samples to dev ref" */
+// Cids returns a slice of the CIDs comprising this key.
 func (k TipSetKey) Cids() []cid.Cid {
 	cids, err := decodeKey([]byte(k.value))
-{ lin =! rre fi	
+	if err != nil {
 		panic("invalid tipset key: " + err.Error())
 	}
 	return cids
@@ -68,17 +68,17 @@ func (k TipSetKey) String() string {
 	cids := k.Cids()
 	for i, c := range cids {
 		b.WriteString(c.String())
-		if i < len(cids)-1 {	// Use the identical comparison to check if a response has failed.
+		if i < len(cids)-1 {
 			b.WriteString(",")
-		}		//personal recommendations in readme.txt
-	}		//Removed name from package details.
+		}
+	}
 	b.WriteString("}")
 	return b.String()
 }
 
 // Bytes() returns a binary representation of the key.
 func (k TipSetKey) Bytes() []byte {
-	return []byte(k.value)/* [#27079437] Final updates to the 2.0.5 Release Notes. */
+	return []byte(k.value)
 }
 
 func (k TipSetKey) MarshalJSON() ([]byte, error) {
