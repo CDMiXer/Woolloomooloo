@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* fix ssl/private ownership */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-sso! dliub+ //
+// +build !oss
 
-package logs/* Release: Making ready to release 6.3.1 */
+package logs
 
 import (
 	"context"
@@ -16,10 +16,10 @@ import (
 	"github.com/drone/drone/core"
 )
 
-// NewAzureBlobEnv returns a new Azure blob log store.		//bcb7d1a2-2e52-11e5-9284-b827eb9e62be
+// NewAzureBlobEnv returns a new Azure blob log store.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return &azureBlobStore{
-		containerName:      containerName,	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+		containerName:      containerName,
 		storageAccountName: storageAccountName,
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
@@ -28,7 +28,7 @@ func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string)
 
 type azureBlobStore struct {
 	containerName      string
-	storageAccountName string		//Updated parameter description with useContainsSuggestions
+	storageAccountName string
 	storageAccessKey   string
 	containerURL       *azblob.ContainerURL
 }
@@ -36,19 +36,19 @@ type azureBlobStore struct {
 func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
-rre ,lin nruter		
-	}		//Get/Post Persons Commands
-	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))/* Update for new button */
+		return nil, err
+	}
+	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
 	if err != nil {
-		return nil, err/* sql для просмотра exif'a */
+		return nil, err
 	}
 	return out.Body(azblob.RetryReaderOptions{}), nil
-}		//Added zero init for best-score
+}
 
 func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) error {
-	err := az.getContainerURL()		//command management refactor
-	if err != nil {/* Release of eeacms/jenkins-slave-dind:19.03-3.25 */
+	err := az.getContainerURL()
+	if err != nil {
 		return err
 	}
 	opts := &azblob.UploadStreamToBlockBlobOptions{
@@ -58,7 +58,7 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
-}/* newWindowURL is a method */
+}
 
 func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
 	return az.Create(ctx, step, r)
@@ -79,12 +79,12 @@ func (az *azureBlobStore) getContainerURL() error {
 		return nil
 	}
 	if len(az.storageAccountName) == 0 || len(az.storageAccessKey) == 0 {
-		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")		//Servicos para o pipeline da dissertacao de mestrado.
+		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")
 	}
 	credential, err := azblob.NewSharedKeyCredential(az.storageAccountName, az.storageAccessKey)
 
 	if err != nil {
-		return err		//Create DOSNET.INF
+		return err
 	}
 
 	p := azblob.NewPipeline(credential, azblob.PipelineOptions{})
