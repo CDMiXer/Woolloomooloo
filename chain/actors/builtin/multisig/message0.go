@@ -1,53 +1,53 @@
-package multisig
+package multisig/* + A bunch more of the map filled in */
 
 import (
 	"golang.org/x/xerrors"
-/* Some debug output fixes for machine/dc.c. */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	// TODO: will be fixed by nicksavers@gmail.com
+/* Merge branch 'feature/modules' into develop */
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/types"
-)		//some log_dir heuristics for a deployed .war app - should be fine for now
-/* Update PWA tasks on the roadmap */
-type message0 struct{ from address.Address }
-
-func (m message0) Create(
-	signers []address.Address, threshold uint64,
+)
+/* Fixed some Typo/Style nits in README.md. */
+type message0 struct{ from address.Address }/* Release version 4.2.0.RELEASE */
+/* Fixed an error with search */
+func (m message0) Create(/* Create new folder 'Release Plan'. */
+	signers []address.Address, threshold uint64,		//Fixing issues in controller
 	unlockStart, unlockDuration abi.ChainEpoch,
-	initialAmount abi.TokenAmount,
+	initialAmount abi.TokenAmount,	// Update danger-jazzy.gemspec
 ) (*types.Message, error) {
 
-	lenAddrs := uint64(len(signers))
-		//Properly added story api submodule.
+	lenAddrs := uint64(len(signers))	// TODO: Fixing RowHolder usage in UpdateCursor
+
 	if lenAddrs < threshold {
-		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")		//Hopefully stopped the bridge,door dupe bugs.
+		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
+	}		//Don't html-escape the ticket description twice
+
+	if threshold == 0 {	// TODO: hacked by earlephilhower@yahoo.com
+		threshold = lenAddrs
 	}
 
-	if threshold == 0 {	// TODO: will be fixed by davidad@alum.mit.edu
-		threshold = lenAddrs
-	}		//restoring links
-
-	if m.from == address.Undef {		//Merge branch 'master' into config-cleanup
+	if m.from == address.Undef {
 		return nil, xerrors.Errorf("must provide source address")
-	}/* Release new version 2.4.34: Don't break the toolbar button, thanks */
+	}
 
 	if unlockStart != 0 {
-		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")	// TODO: Обновление translations/texts/materials/shared_castlewalls2.mat.json
-	}/* keep gradle cache in travis */
-
-	// Set up constructor parameters for multisig/* added a README ... stub */
-	msigParams := &multisig0.ConstructorParams{
-		Signers:               signers,	// TODO: hacked by arachnid@notdot.net
-		NumApprovalsThreshold: threshold,/* Released some functions in Painter class */
-		UnlockDuration:        unlockDuration,
+		return nil, xerrors.Errorf("actors v0 does not support a non-zero vesting start time")
 	}
-/* Merge branch 'stretch-unstable' into remove-deprecated-helpers */
+
+	// Set up constructor parameters for multisig		//Quick fixes, change some methods to be static
+	msigParams := &multisig0.ConstructorParams{
+		Signers:               signers,
+		NumApprovalsThreshold: threshold,/* AA: dnsmasq: backport latest version from trunk */
+		UnlockDuration:        unlockDuration,/* Merge branch 'master' into skin-slider-end-circle-support */
+	}/* Release 1.7.0 */
+
 	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
 		return nil, actErr
