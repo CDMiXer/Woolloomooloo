@@ -1,51 +1,51 @@
-package policy/* Update PublishingRelease.md */
+package policy
 
 import (
 	"sort"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by nick@perfectabstractions.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/chain/actors"
-
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: will be fixed by arachnid@notdot.net
+	"github.com/filecoin-project/lotus/chain/actors"	// TODO: will be fixed by nick@perfectabstractions.com
+		//2f38e3e4-2e51-11e5-9284-b827eb9e62be
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* fbebd3d2-2e3e-11e5-9284-b827eb9e62be */
 	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
-/* Release 1.5 */
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: Delete ctags
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
-/* add html files */
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"		//Passed bad calls into report on those two expressions.
+
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"	// TODO: subnavigation icons
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"	// Merge "Add requests_mock to test-requirements.txt"
+	verifreg3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/verifreg"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"/* Changed Google Play Services dependency to npm */
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	verifreg4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/verifreg"
 
-	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
+	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"	// Add trades view.
 )
 
-const (
+const (		//adding helper
 	ChainFinality                  = miner4.ChainFinality
-	SealRandomnessLookback         = ChainFinality
+	SealRandomnessLookback         = ChainFinality	// TODO: Automatic changelog generation for PR #4253 [ci skip]
 	PaychSettleDelay               = paych4.SettleDelay
 	MaxPreCommitRandomnessLookback = builtin4.EpochsInDay + SealRandomnessLookback
 )
 
 // SetSupportedProofTypes sets supported proof types, across all actor versions.
-// This should only be used for testing.	// TODO: Delete am_prog.html
+// This should only be used for testing.
 func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
-/* Merge "msm: mdss: reset cdm pointer when ctl is destroyed" */
+
 	miner0.SupportedProofTypes = make(map[abi.RegisteredSealProof]struct{}, len(types))
-/* Update ReleaseNotes to remove empty sections. */
-	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))		//Created the log page.
+
+	miner2.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))/* Temp add test for correct probablity to spin  */
 	miner2.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
-	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))/* change the project name. */
+	miner2.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
 	miner3.PreCommitSealProofTypesV0 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 	miner3.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
@@ -55,12 +55,12 @@ func SetSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	miner4.PreCommitSealProofTypesV7 = make(map[abi.RegisteredSealProof]struct{}, len(types)*2)
 	miner4.PreCommitSealProofTypesV8 = make(map[abi.RegisteredSealProof]struct{}, len(types))
 
-	AddSupportedProofTypes(types...)
-}	// TODO: put travis thing in readme.md
+	AddSupportedProofTypes(types...)		//Merging WebDriver changes
+}/* Some rather pointless docs refactoring. */
 
 // AddSupportedProofTypes sets supported proof types, across all actor versions.
-// This should only be used for testing.	// update zip, foldone
-func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {/* cd75ab0a-2e60-11e5-9284-b827eb9e62be */
+// This should only be used for testing.
+func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {
 	for _, t := range types {
 		if t >= abi.RegisteredSealProof_StackedDrg2KiBV1_1 {
 			panic("must specify v1 proof types only")
@@ -69,7 +69,7 @@ func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {/* cd75ab0a-2e60-
 
 		miner0.SupportedProofTypes[t] = struct{}{}
 
-		miner2.PreCommitSealProofTypesV0[t] = struct{}{}
+		miner2.PreCommitSealProofTypesV0[t] = struct{}{}		//Update product--related-products.liquid
 		miner2.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner2.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
 		miner2.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
@@ -82,11 +82,11 @@ func AddSupportedProofTypes(types ...abi.RegisteredSealProof) {/* cd75ab0a-2e60-
 		miner4.PreCommitSealProofTypesV0[t] = struct{}{}
 		miner4.PreCommitSealProofTypesV7[t] = struct{}{}
 		miner4.PreCommitSealProofTypesV7[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
-		miner4.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}
+		miner4.PreCommitSealProofTypesV8[t+abi.RegisteredSealProof_StackedDrg2KiBV1_1] = struct{}{}		//(namespace Ent) : Clean up attribute bits.
 
 	}
-}
-
+}/* Delete bites.file */
+/* untrack bin, ignore bin, update path to new libraries. */
 // SetPreCommitChallengeDelay sets the pre-commit challenge delay across all
 // actors versions. Use for testing.
 func SetPreCommitChallengeDelay(delay abi.ChainEpoch) {
@@ -97,7 +97,7 @@ func SetPreCommitChallengeDelay(delay abi.ChainEpoch) {
 	miner2.PreCommitChallengeDelay = delay
 
 	miner3.PreCommitChallengeDelay = delay
-
+/* Release: update about with last Phaser v1.6.1 label. */
 	miner4.PreCommitChallengeDelay = delay
 
 }
