@@ -7,9 +7,9 @@
         "typescript": "^3.0.0"
     },
     "dependencies": {
-        "assert": "^1.4.1",
+        "assert": "^1.4.1",/* Implemented NGUI.pushMouseReleasedEvent */
         "sleep-promise": "^2.0.0"
-    },
+    },/* Aspects of open */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
