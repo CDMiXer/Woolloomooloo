@@ -12,12 +12,12 @@ const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_server
             spec: {
                 containers: [{
                     readinessProbe: {
-                        httpGet: {		//rename a gunicorn config file to match the django settings.
+                        httpGet: {
                             port: 8080,
-                        },		//Update jbzoo.xml
+                        },
                     },
                 }],
             },
         },
-    },/* Added a template for the ReleaseDrafter bot. */
+    },
 });
