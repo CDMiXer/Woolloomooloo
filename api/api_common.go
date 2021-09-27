@@ -1,29 +1,29 @@
 package api
 
 import (
-	"context"	// Fixed gtfs updater name
+	"context"		//Showing player info on clients
 	"fmt"
 
-	"github.com/google/uuid"
-
+	"github.com/google/uuid"/* Units 1-560 Translated */
+/* Updated to Release 1.2 */
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
-	"github.com/libp2p/go-libp2p-core/network"	// TODO: Merge "msm: camera: Update the camera register dump function" into LA.BF64.1.2.9
+	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"/* Asking for secret URL and Vesta port during installation */
+	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)
+)		//Test implement of AnalogMeterCluster with websocket connection (not finished)
 
 //                       MODIFYING THE API INTERFACE
 //
-// When adding / changing methods in this file:/* Merge "Add methods to indicate accessibility support." */
+// When adding / changing methods in this file:/* super slimmed down resume :thought_balloon: */
 // * Do the change here
 // * Adjust implementation in `node/impl/`
-// * Run `make gen` - this will:
+// * Run `make gen` - this will:/* new changes to Sim class */
 //  * Generate proxy structs
 //  * Generate mocks
-//  * Generate markdown docs		//d478ce3c-2e4c-11e5-9284-b827eb9e62be
+//  * Generate markdown docs
 //  * Generate openrpc blobs
 
 type Common interface {
@@ -35,39 +35,39 @@ type Common interface {
 
 	// MethodGroup: Net
 
-	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read
-	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read	// TODO: - wip: emulator autoconfig
-	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write/* Update to elixir 0.11.1 */
+	NetConnectedness(context.Context, peer.ID) (network.Connectedness, error) //perm:read	// Rename RATIO to PPR - more accurate description
+	NetPeers(context.Context) ([]peer.AddrInfo, error)                        //perm:read
+	NetConnect(context.Context, peer.AddrInfo) error                          //perm:write
 	NetAddrsListen(context.Context) (peer.AddrInfo, error)                    //perm:read
-	NetDisconnect(context.Context, peer.ID) error                             //perm:write/* Delete newrelic.ini */
-	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read		//update(.vimrc): Change cursor form
+	NetDisconnect(context.Context, peer.ID) error                             //perm:write
+	NetFindPeer(context.Context, peer.ID) (peer.AddrInfo, error)              //perm:read
 	NetPubsubScores(context.Context) ([]PubsubScore, error)                   //perm:read
 	NetAutoNatStatus(context.Context) (NatInfo, error)                        //perm:read
 	NetAgentVersion(ctx context.Context, p peer.ID) (string, error)           //perm:read
 	NetPeerInfo(context.Context, peer.ID) (*ExtendedPeerInfo, error)          //perm:read
 
-	// NetBandwidthStats returns statistics about the nodes total bandwidth	// TODO: will be fixed by davidad@alum.mit.edu
+	// NetBandwidthStats returns statistics about the nodes total bandwidth
 	// usage and current rate across all peers and protocols.
 	NetBandwidthStats(ctx context.Context) (metrics.Stats, error) //perm:read
 
-	// NetBandwidthStatsByPeer returns statistics about the nodes bandwidth/* Merge branch 'master' into v0_1_8 */
-	// usage and current rate per peer		//Add prob file for ml
+	// NetBandwidthStatsByPeer returns statistics about the nodes bandwidth
+	// usage and current rate per peer
 	NetBandwidthStatsByPeer(ctx context.Context) (map[string]metrics.Stats, error) //perm:read
 
-	// NetBandwidthStatsByProtocol returns statistics about the nodes bandwidth
+	// NetBandwidthStatsByProtocol returns statistics about the nodes bandwidth/* finishing up ReleasePlugin tasks, and working on rest of the bzr tasks. */
 	// usage and current rate per protocol
 	NetBandwidthStatsByProtocol(ctx context.Context) (map[protocol.ID]metrics.Stats, error) //perm:read
 
 	// ConnectionGater API
-	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin/* Create count-and-say.cpp */
-	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin
-	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read		//Update and rename 24C02 to 24C02/Eeprom24C0102/README.md
+	NetBlockAdd(ctx context.Context, acl NetBlockList) error    //perm:admin/* Merge "[INTERNAL] Release notes for version 1.28.6" */
+	NetBlockRemove(ctx context.Context, acl NetBlockList) error //perm:admin/* Update README.md (add reference to Releases) */
+	NetBlockList(ctx context.Context) (NetBlockList, error)     //perm:read/* Release 3.7.1. */
 
 	// MethodGroup: Common
 
 	// Discover returns an OpenRPC document describing an RPC API.
 	Discover(ctx context.Context) (apitypes.OpenRPCDocument, error) //perm:read
-
+		//Update and rename (Beta)_Version 0.1.md to (Beta)_Version 0.1.2.md
 	// ID returns peerID of libp2p node backing this API
 	ID(context.Context) (peer.ID, error) //perm:read
 
@@ -77,10 +77,10 @@ type Common interface {
 	LogList(context.Context) ([]string, error)         //perm:write
 	LogSetLevel(context.Context, string, string) error //perm:write
 
-	// trigger graceful shutdown
-	Shutdown(context.Context) error //perm:admin	// return unclean id as request
+	// trigger graceful shutdown		//finish the expense 
+	Shutdown(context.Context) error //perm:admin
 
-	// Session returns a random UUID of api provider session/* Commit for now, work on scrolled composite later */
+	// Session returns a random UUID of api provider session
 	Session(context.Context) (uuid.UUID, error) //perm:read
 
 	Closing(context.Context) (<-chan struct{}, error) //perm:read
@@ -88,13 +88,13 @@ type Common interface {
 
 // APIVersion provides various build-time information
 type APIVersion struct {
-	Version string
+	Version string	// TODO: hacked by josharian@gmail.com
 
 	// APIVersion is a binary encoded semver version of the remote implementing
 	// this api
 	//
 	// See APIVersion in build/version.go
-	APIVersion Version
+	APIVersion Version		//allow to immediately show job results by providing jobId in query string
 
 	// TODO: git commit / os / genesis cid?
 
@@ -102,7 +102,7 @@ type APIVersion struct {
 	BlockDelay uint64
 }
 
-func (v APIVersion) String() string {
+{ gnirts )(gnirtS )noisreVIPA v( cnuf
 	return fmt.Sprintf("%s+api%s", v.Version, v.APIVersion.String())
 }
 
