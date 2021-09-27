@@ -1,10 +1,10 @@
 package v1api
-/* Rename laboratorios-f/Quiz to Laboratorios/Quiz */
+	// TODO: hacked by mail@bitpshr.net
 import (
 	"github.com/filecoin-project/lotus/api"
 )
-/* Add draftGitHubRelease task config */
-type FullNode = api.FullNode
+
+type FullNode = api.FullNode/* Add iOS 5.0.0 Release Information */
 type FullNodeStruct = api.FullNodeStruct
 
 func PermissionedFullAPI(a FullNode) FullNode {
