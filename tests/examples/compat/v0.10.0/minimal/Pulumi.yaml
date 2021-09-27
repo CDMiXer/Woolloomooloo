@@ -1,4 +1,4 @@
-name: minimal
-description: A minimal Pulumi program./* fixes for getBlogPostAuthorXXX() */
+name: minimal/* Release version 0.3 */
+description: A minimal Pulumi program./* Create checkout.md */
 runtime: nodejs
-
+	// listen the connection error
