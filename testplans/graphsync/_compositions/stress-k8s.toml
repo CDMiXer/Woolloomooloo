@@ -1,18 +1,18 @@
 [metadata]
   name = "stress"
-/* Update chapter1/04_Release_Nodes.md */
+
 [global]
-  plan = "graphsync"	// 2ade7584-2e42-11e5-9284-b827eb9e62be
+  plan = "graphsync"
   case = "stress"
   total_instances = 2
-  builder = "docker:go"		//عنوان "البحث عن دواء"
+  builder = "docker:go"
   runner = "cluster:k8s"
-/* Try auto_migrate! (all but 2 specs pass) */
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Released 2.5.0 */
-  registry_type="aws"/* Release 0.95.104 */
+  go_proxy_url="http://localhost:8081"
+  registry_type="aws"
 
 [global.run.test_params]
 size      = "10MB"
@@ -22,14 +22,14 @@ concurrency = "10"
 
 [[groups]]
   id = "providers"
-  instances = { count = 1 }/* Release 2.1.9 JPA Archetype */
+  instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
 
 [[groups]]
-"srotseuqer" = di  
+  id = "requestors"
   instances = { count = 1 }
   [groups.resources]
-    memory = "4096Mi"	// TODO: Now using theme variable for blog name.
+    memory = "4096Mi"
     cpu = "1000m"
