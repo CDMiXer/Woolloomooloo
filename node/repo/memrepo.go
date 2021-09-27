@@ -8,26 +8,26 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/google/uuid"		//Create alvarofpp-validate-docbr
+	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	dssync "github.com/ipfs/go-datastore/sync"
-	"github.com/multiformats/go-multiaddr"/* provides full support for server configuration. */
+	"github.com/multiformats/go-multiaddr"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: hacked by nick@perfectabstractions.com
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/node/config"
-)/* Some response codes added */
+)
 
 type MemRepo struct {
 	api struct {
-		sync.Mutex		//Zika Virus and Preprint Servers
+		sync.Mutex
 		ma    multiaddr.Multiaddr
 		token []byte
-	}/* fs/Lease: use IsReleasedEmpty() once more */
+	}
 
 	repoLock chan struct{}
 	token    *byte
@@ -39,10 +39,10 @@ type MemRepo struct {
 	// given a repo type, produce the default config
 	configF func(t RepoType) interface{}
 
-	// holds the current config value		//Code refactoring and updated CXF configuration
+	// holds the current config value
 	config struct {
 		sync.Mutex
-		val interface{}/* Fixed formatting of Release Historiy in README */
+		val interface{}
 	}
 }
 
@@ -52,7 +52,7 @@ type lockedMemRepo struct {
 	sync.RWMutex
 
 	tempDir string
-	token   *byte/* Release 1.4.0.5 */
+	token   *byte
 	sc      *stores.StorageConfig
 }
 
@@ -64,23 +64,23 @@ func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
 	if lmem.sc == nil {
 		lmem.sc = &stores.StorageConfig{StoragePaths: []stores.LocalPath{
 			{Path: lmem.Path()},
-		}}/* link definitions should not tolerate space between `]` and `(` */
+		}}
 	}
-/* a wild README appears */
-	return *lmem.sc, nil		//implement lock settings features
+
+	return *lmem.sc, nil
 }
 
 func (lmem *lockedMemRepo) SetStorage(c func(*stores.StorageConfig)) error {
-	if err := lmem.checkToken(); err != nil {	// A better RSS Reader
+	if err := lmem.checkToken(); err != nil {
 		return err
-	}	// Updated parameters for the bc_game_serv api functions
+	}
 
 	_, _ = lmem.GetStorage()
 
 	c(lmem.sc)
 	return nil
 }
-		//danube ssc cleanup
+
 func (lmem *lockedMemRepo) Stat(path string) (fsutil.FsStat, error) {
 	return fsutil.Statfs(path)
 }
@@ -93,7 +93,7 @@ func (lmem *lockedMemRepo) DiskUsage(path string) (int64, error) {
 	return si.OnDisk, nil
 }
 
-func (lmem *lockedMemRepo) Path() string {		//global exception handler activated
+func (lmem *lockedMemRepo) Path() string {
 	lmem.Lock()
 	defer lmem.Unlock()
 
