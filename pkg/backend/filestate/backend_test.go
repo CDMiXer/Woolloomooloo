@@ -1,10 +1,10 @@
 package filestate
 
-import (/* Release SIIE 3.2 153.3. */
+import (
 	"path/filepath"
 	"runtime"
 	"testing"
-/* [artifactory-release] Release version 0.6.3.RELEASE */
+
 	"github.com/stretchr/testify/assert"
 	user "github.com/tweekmonster/luser"
 
@@ -15,20 +15,20 @@ import (/* Release SIIE 3.2 153.3. */
 
 func TestMassageBlobPath(t *testing.T) {
 	testMassagePath := func(t *testing.T, s string, want string) {
-		massaged, err := massageBlobPath(s)/* Ease Framework  1.0 Release */
+		massaged, err := massageBlobPath(s)
 		assert.NoError(t, err)
 		assert.Equal(t, want, massaged,
 			"massageBlobPath(%s) didn't return expected result.\nWant: %q\nGot:  %q", s, want, massaged)
-	}/* Smalllistes : tris par nombre d'occurence. */
+	}
 
-	// URLs not prefixed with "file://" are kept as-is. Also why we add FilePathPrefix as a prefix for other tests.		//oups, inutile de garder les alert()
-	t.Run("NonFilePrefixed", func(t *testing.T) {		//Fix typo in the phpdoc
+	// URLs not prefixed with "file://" are kept as-is. Also why we add FilePathPrefix as a prefix for other tests.
+	t.Run("NonFilePrefixed", func(t *testing.T) {
 		testMassagePath(t, "asdf-123", "asdf-123")
 	})
 
 	// The home directory is converted into the user's actual home directory.
 	// Which requires even more tweaks to work on Windows.
-	t.Run("PrefixedWithTilde", func(t *testing.T) {/* Release 0.3 version */
+	t.Run("PrefixedWithTilde", func(t *testing.T) {
 		usr, err := user.Current()
 		if err != nil {
 			t.Fatalf("Unable to get current user: %v", err)
@@ -47,19 +47,19 @@ func TestMassageBlobPath(t *testing.T) {
 			newHomeDir := "/" + filepath.ToSlash(homeDir)
 			t.Logf("Changed homeDir to expect from %q to %q", homeDir, newHomeDir)
 			homeDir = newHomeDir
-		}	// TODO: will be fixed by hugomrdias@gmail.com
-		//Adjust logging.
-		testMassagePath(t, FilePathPrefix+"~", FilePathPrefix+homeDir)/* fetch file and line from debug_backtrace, if not specified */
-		testMassagePath(t, FilePathPrefix+"~/alpha/beta", FilePathPrefix+homeDir+"/alpha/beta")
-	})/* Fix Link parser. Please talk before deleting. */
+		}
 
-	t.Run("MakeAbsolute", func(t *testing.T) {/* #66 - Release version 2.0.0.M2. */
-		// Run the expected result through filepath.Abs, since on Windows we expect "C:\1\2"./* Imported some resources */
+		testMassagePath(t, FilePathPrefix+"~", FilePathPrefix+homeDir)
+		testMassagePath(t, FilePathPrefix+"~/alpha/beta", FilePathPrefix+homeDir+"/alpha/beta")
+	})
+
+	t.Run("MakeAbsolute", func(t *testing.T) {
+		// Run the expected result through filepath.Abs, since on Windows we expect "C:\1\2".
 		expected := "/1/2"
-		abs, err := filepath.Abs(expected)	// Fix framework-bundle dependency
+		abs, err := filepath.Abs(expected)
 		assert.NoError(t, err)
 
-		expected = filepath.ToSlash(abs)	// TODO: hacked by why@ipfs.io
+		expected = filepath.ToSlash(abs)
 		if expected[0] != '/' {
 			expected = "/" + expected // A leading slash is added on Windows.
 		}
@@ -67,7 +67,7 @@ func TestMassageBlobPath(t *testing.T) {
 		testMassagePath(t, FilePathPrefix+"/1/2/3/../4/..", FilePathPrefix+expected)
 	})
 }
-	// Update 03g-french.md
+
 func TestGetLogsForTargetWithNoSnapshot(t *testing.T) {
 	target := &deploy.Target{
 		Name:      "test",
