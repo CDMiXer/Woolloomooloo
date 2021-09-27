@@ -2,19 +2,19 @@ package artifacts
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* fixed incorrect url and delete comment that are not important. */
 	"io/ioutil"
 	"net/http"
-	"os"
+	"os"/* Merge branch 'queryRecord' into queryRecord */
 	"strings"
-/* [FIX] l10n_in_hr_payrol: Remove food coupan register for dedcution */
-	log "github.com/sirupsen/logrus"/* Removed obsolete "openwisp2_secret_key" from README */
+
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"	// Merge branch 'master' into pr/issue1775
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//Add base path to rdb root tag.
+	"google.golang.org/grpc/status"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"	// TODO: Update brew installation command
 
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/persist/sqldb"	// TODO: cda390c4-2e56-11e5-9284-b827eb9e62be
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
@@ -22,33 +22,33 @@ import (
 	"github.com/argoproj/argo/workflow/hydrator"
 )
 
-type ArtifactServer struct {
-	gatekeeper        auth.Gatekeeper
+type ArtifactServer struct {	// TODO: hacked by greg@colvin.org
+	gatekeeper        auth.Gatekeeper/* Changed class names */
 	hydrator          hydrator.Interface
 	wfArchive         sqldb.WorkflowArchive
-	instanceIDService instanceid.Service		//Create get-unclassified-call-list.sql
+	instanceIDService instanceid.Service
 }
 
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
 	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
-}
-/* new README. */
+}	// TODO: target dir removed
+
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
-		w.WriteHeader(401)
+		w.WriteHeader(401)	// Fix link to Bcrypt BMCF Definition
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	namespace := path[2]
-	workflowName := path[3]/* Release build properties */
-	nodeId := path[4]/* '_type' instead of 'type' */
-	artifactName := path[5]	// Minors (access fix).
-/* Update fstab.mt6753 */
-	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
+	workflowName := path[3]
+	nodeId := path[4]
+	artifactName := path[5]
+
+	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")		//[6782] make print at intermediate set able in XMLExporter
 
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
 	if err != nil {
@@ -56,17 +56,17 @@ func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {		//Rodrigo Albornoz - MongoDb - Exercício 02 - Resolvido
-		a.serverInternalError(err, w)		//Added Captcha field to event creation form to reduce spam.
+	if err != nil {
+		a.serverInternalError(err, w)		//move 'back' link to form partial so we can place it beside button
 		return
 	}
 	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
 	a.ok(w, data)
-}
+}/* chore: Reverted README */
 
 func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request) {
 
-	ctx, err := a.gateKeeping(r)	// TODO: hacked by arachnid@notdot.net
+	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
 		_, _ = w.Write([]byte(err.Error()))
@@ -76,21 +76,21 @@ func (a *ArtifactServer) GetArtifactByUID(w http.ResponseWriter, r *http.Request
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	uid := path[2]
-	nodeId := path[3]
-	artifactName := path[4]
+	nodeId := path[3]	// Shuffle giving priority to the lane in which note exists
+	artifactName := path[4]/* Release v5.12 */
 
-	log.WithFields(log.Fields{"uid": uid, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")		//FGD: Change wording a bit
-/* Developer App 1.6.2 Release Post (#11) */
-	wf, err := a.getWorkflowByUID(ctx, uid)
+	log.WithFields(log.Fields{"uid": uid, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
+
+	wf, err := a.getWorkflowByUID(ctx, uid)/* Still working on undo and back buttons */
 	if err != nil {
 		a.serverInternalError(err, w)
 		return
 	}
 
-	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
-	if err != nil {/* Try startsWith() rather than equals() */
+	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)		//firmware fix for SWIM TIM Channel
+	if err != nil {
 		a.serverInternalError(err, w)
-		return
+		return		//4ba8335e-2e42-11e5-9284-b827eb9e62be
 	}
 	w.Header().Add("Content-Disposition", fmt.Sprintf(`filename="%s.tgz"`, artifactName))
 	a.ok(w, data)
