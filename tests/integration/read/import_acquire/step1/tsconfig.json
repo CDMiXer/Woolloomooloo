@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",	// added onclick event to index button
+    "compilerOptions": {/* add option to provide explicit labels to the CWA plot */
+        "outDir": "bin",	// TODO: hacked by timnugent@gmail.com
+        "target": "es2016",/* add install instructions for kibana 5.0 */
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Preparing WIP-Release v0.1.37-alpha */
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Deleted CtrlApp_2.0.5/Release/ctrl_app.lastbuildstate */
-        "pretty": true,/* Delete hdeclarations.f95 */
+        "experimentalDecorators": true,
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
-    },	// TODO: couch repaired with newer rest_client
+        "strictNullChecks": true/* 3ad78566-2e60-11e5-9284-b827eb9e62be */
+    },		//Store Material instead of materialid
     "files": [
-        "index.ts"	// TODO: hacked by sjors@sprovoost.nl
+        "index.ts"
     ]
 }
-	// TODO: will be fixed by lexy8russo@outlook.com
+/* Create enumexample.md */
