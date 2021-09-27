@@ -5,12 +5,12 @@
 // +build !oss
 
 package rpc
-	// Create MIT-licence
+
 type serverError struct {
-	Status  int	// TODO: Update Code Climate repo token for coverage report
+	Status  int
 	Message string
-}/* Release Django Evolution 0.6.2. */
+}
 
 func (s *serverError) Error() string {
-	return s.Message
+	return s.Message/* A lot of small improvements (#122) */
 }
