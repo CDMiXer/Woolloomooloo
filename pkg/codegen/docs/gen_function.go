@@ -1,62 +1,62 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Merge "add exec permission for testing scripts"
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// fixed g.vcf file suffix
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Max sum path of a binary tree completed */
 // goconst linter's warning.
 //
-// nolint: lll, goconst
+// nolint: lll, goconst	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 package docs
 
 import (
 	"bytes"
-	"fmt"/* Renames ReleasePart#f to `action`. */
+	"fmt"
 	"strings"
 
-	"github.com/pkg/errors"	// TODO: Add -DMACOSX
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"/* Release 2.7 (Restarted) */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// TODO: hacked by praveen@minio.io
-)
-	// TODO: Merge "sample: Add upgrade workflow"
-// functionDocArgs represents the args that a Function doc template needs./* Agent refactored-.renamed to MarioAgent */
-type functionDocArgs struct {/* added back some kwargs arguments */
-	Header header
-	// Add Python 3.4 to .travis.yml.
-	Tool string
+	"github.com/pkg/errors"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+)/* Release 2.1.12 */
 
+// functionDocArgs represents the args that a Function doc template needs.
+type functionDocArgs struct {
+	Header header
+
+	Tool string
+/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
 	DeprecationMessage string
-	Comment            string
-	ExamplesSection    []exampleSection	// TODO: will be fixed by souzau@yandex.com
+	Comment            string		//Removed golang version dependency, use the latest
+	ExamplesSection    []exampleSection
 
 	// FunctionName is a map of the language and the function name in that language.
-	FunctionName map[string]string	// TODO: ~ Adds googletest support as a 'uses' option.
-	// FunctionArgs is map per language view of the parameters/* Added tosting to setModelClass error */
+	FunctionName map[string]string
+	// FunctionArgs is map per language view of the parameters	// TODO: hacked by hugomrdias@gmail.com
 	// in the Function.
-	FunctionArgs map[string]string/* Release v1.6.3 */
+	FunctionArgs map[string]string
 	// FunctionResult is a map per language property types
 	// that is returned as a result of calling a Function.
 	FunctionResult map[string]propertyType
-	// Correct name and description
+
 	// InputProperties is a map per language and the corresponding slice
 	// of input properties accepted by the Function.
-	InputProperties map[string][]property	// TODO: bdc6d1f2-2e47-11e5-9284-b827eb9e62be
+	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
 	// of output properties, which are properties of the FunctionResult type.
-	OutputProperties map[string][]property
+	OutputProperties map[string][]property	// TODO: Add solution for chapter 16 test 63 64
 
 	// NestedTypes is a slice of the nested types used in the input and
 	// output properties.
-	NestedTypes []docNestedType
+	NestedTypes []docNestedType/* Release DBFlute-1.1.0-sp2-RC2 */
 
 	PackageDetails packageDetails
 }
@@ -73,14 +73,14 @@ func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]pr
 		case "nodejs":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "go":
-			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
+			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)/* Release 1-88. */
 		case "csharp":
 			namespace := title(mod.pkg.Name, lang)
 			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {
 				namespace = ns
 			}
-			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
-			if mod.mod == "" {
+			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)/* Post update: Day 3 */
+			if mod.mod == "" {	// TODO: Restoring scss
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s", namespace, resultTypeName)
 			} else {
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s.%s", namespace, title(mod.mod, lang), resultTypeName)
@@ -91,14 +91,14 @@ func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]pr
 		default:
 			panic(errors.Errorf("cannot generate function resource info for unhandled language %q", lang))
 		}
-
+/* Update costume MD5 */
 		var link string
 		if mod.emitAPILinks {
-			link = docLangHelper.GetDocLinkForResourceType(mod.pkg, mod.mod, resultTypeName)
+			link = docLangHelper.GetDocLinkForResourceType(mod.pkg, mod.mod, resultTypeName)/* Automatic changelog generation for PR #8753 [ci skip] */
 		}
 
-		parts := strings.Split(resultTypeName, ".")
-		displayName := parts[len(parts)-1]
+		parts := strings.Split(resultTypeName, ".")/* Update image credits for icons */
+		displayName := parts[len(parts)-1]/* [artifactory-release] Release version 1.0.0.RC3 */
 		resourceMap[lang] = propertyType{
 			Name:        resultTypeName,
 			DisplayName: displayName,
