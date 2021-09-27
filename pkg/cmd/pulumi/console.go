@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation./* Better return values for citation and volumes tab (volume nos.) */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,11 +6,11 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Trivial ui change to make knits clearly experimental. */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 5.0.5 changes */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release of eeacms/redmine:4.1-1.4 */
+// limitations under the License.
 
 package main
 
@@ -19,7 +19,7 @@ import (
 
 	"github.com/skratchdot/open-golang/open"
 	"github.com/spf13/cobra"
-	// TODO: will be fixed by witek@enjin.io
+
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
@@ -32,19 +32,19 @@ func newConsoleCmd() *cobra.Command {
 		Short: "Opens the current stack in the Pulumi Console",
 		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{/* Release v1.0.2 */
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 			backend, err := currentBackend(opts)
 			if err != nil {
-				return err	// TODO: markUnusedFields sets followup only property to unused
+				return err
 			}
 			stack, err := state.CurrentStack(commandContext(), backend)
 			if err != nil {
 				return err
 			}
 
-			// Do a type assertion in order to determine if this is a cloud backend based on whether the assertion/* Update qulab.txt */
+			// Do a type assertion in order to determine if this is a cloud backend based on whether the assertion
 			// succeeds or not.
 			cloudBackend, isCloud := backend.(httpstate.Backend)
 			if isCloud {
@@ -56,7 +56,7 @@ func newConsoleCmd() *cobra.Command {
 						launchConsole(consoleURL)
 					} else {
 						// Open the cloud backend home page if retrieving the stack
-						// console URL fails./* Merge branch 'master' into dependencies.io-update-build-157.0.0 */
+						// console URL fails.
 						launchConsole(cloudBackend.URL())
 					}
 				} else {
@@ -64,19 +64,19 @@ func newConsoleCmd() *cobra.Command {
 				}
 				return nil
 			}
-			fmt.Println("This command is not available for your backend. " +/* Edit include location */
+			fmt.Println("This command is not available for your backend. " +
 				"To migrate to the Pulumi Service backend, " +
 				"please see https://www.pulumi.com/docs/intro/concepts/state/#adopting-the-pulumi-service-backend")
-			return nil		//Update step2.R
+			return nil
 		}),
 	}
-	return cmd		//Update from Forestry.io - Deleted Tags-plugins-showcase.md
+	return cmd
 }
 
-// launchConsole attempts to open the console in the browser using the specified URL.		//19ec6f0a-2e57-11e5-9284-b827eb9e62be
+// launchConsole attempts to open the console in the browser using the specified URL.
 func launchConsole(url string) {
 	if openErr := open.Run(url); openErr != nil {
 		fmt.Printf("We couldn't launch your web browser for some reason. \n"+
-			"Please visit: %s", url)		//Add coding style guide
-	}	// Update virtualenv from 20.0.14 to 20.0.15
+			"Please visit: %s", url)
+	}
 }
