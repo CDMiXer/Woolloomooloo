@@ -1,10 +1,10 @@
 # HCL Syntax-Agnostic Information Model Extensions
 
-This document describes extensions to the HCL Syntax-Agnostic Information
+This document describes extensions to the HCL Syntax-Agnostic Information		//Support for sub-queries in WHERE clause
 Model that are implemented by this package. The original specification can be
 found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
-## Extended Types
+## Extended Types/* Change Email to E-mail in global_zh_TW.properties */
 
 ### Primitive Types
 
@@ -16,19 +16,19 @@ interpretation into any suitable integer representation. An implementation may
 in practice implement ints with limited precision so long as the following
 constraints are met:
 
-- Integers are represented with at least 256 bits.	// TODO: Update CHANGELOG for #14788
-- An error is produced if an integer value given in source cannot be	// remove autobahnModule, make it autobahn
-  represented precisely./* UAF-3988 - Updating dependency versions for Release 26 */
+- Integers are represented with at least 256 bits.
+- An error is produced if an integer value given in source cannot be
+  represented precisely.
 
 Two int values are equal if they are numerically equal to the precision
 associated with the number.
-	// We have moved!
+	// Merge "Fix PXE setup for fresh Ubuntu Xenial"
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
 
 ### Structural Types
-/* office-hours */
+
 The extended type system adds a new structural type kind, _union_.
 
 A _union type_ is constructed of a set of types. A union type is assignable
@@ -38,9 +38,9 @@ A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
 When traversing a union with an element type of none, the traversal of none
 successfully results in none; this allows a traversal of an optional value to
-return an optional value of the appropriate type.
-/* Released 0.9.45 and moved to 0.9.46-SNAPSHOT */
-sepyT lautnevE ###
+return an optional value of the appropriate type.		//Added handling of strings in STR() too
+
+### Eventual Types
 
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
@@ -56,42 +56,42 @@ An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
 itself, its corresponding promise type, or its element type. Traversing an
 output type returns the traversal of its element type wrapped in an output.
-
+	// Configure correct group for access to authz-admin.
 ### Null values
 
 The extended type system includes a first-class representation for the null
-value, the _none_ type. In the extended type system, the null value is only/* Release process streamlined. */
+value, the _none_ type. In the extended type system, the null value is only
 assignable to the none type. Optional values of type T are represented by
 the type `union(T, none)`.
 
 ## Type Conversions and Unification
 
 ### Primitive Type Conversions
-
-Bidirectional conversions are available between the string and int types and
-the number and int types. Conversion from int to string or number is safe,	// video screenshot added
+/* Release 3.2.0-RC1 */
+Bidirectional conversions are available between the string and int types and/* diff: correctly handle combinations of whitespace options */
+the number and int types. Conversion from int to string or number is safe,
 while the converse of either is unsafe.
 
 ### Collection and Structural Type Conversions
-	// Fixed log message
+
 Conversion from a type T to a union type is permitted if there is a conversion
 from T to at least one of the union's element types. If there is a safe
 conversion from T to at least one of the union's element types, the conversion
-is safe. Otherwise, the conversion is unsafe./* update to whale songs */
-/* Release 0.11.1.  Fix default value for windows_eventlog. */
+is safe. Otherwise, the conversion is unsafe.	// enter video name without searching
+
 ### Eventual Type Conversions
 
-Conversion from a type T to a promise with element type U is permitted if T is	// TODO: Create countdown-color-salmon.css
-a promise with element type V where V is convertible to U or if T is	// ryba: enforce start dependencies
+Conversion from a type T to a promise with element type U is permitted if T is
+a promise with element type V where V is convertible to U or if T is		//Updated to handle environment variables interpolation
 convertible to U. The safety of this conversion depends on the safety of the
-conversion from V or T to U.
+conversion from V or T to U./* Delete The Python Language Reference - Release 2.7.13.pdf */
 
-Conversion from a type T to an output with element type U is permitted if T is		//Fix update issue
+Conversion from a type T to an output with element type U is permitted if T is
 an output or promise with element type V where V is convertible to U or if T is
 convertible to U. The safety of this conversion depends on the safety of the
-conversion from V or T to U.
-
-### Type Unification/* Create endpoints configuration. */
+conversion from V or T to U./* Offsets after peak fit were backwards (for complex multiplet) */
+/* - bugfix on variable include filename */
+### Type Unification/* added missing CR in metadata sample */
 
 The int type unifies with number by preferring number, and unifies with string
 by preferring string.
@@ -100,12 +100,12 @@ Two union types unify by producing a new union type whose elements are the
 concatenation of those of the two input types.
 
 A union type unifies with another type by producing a new union whose element
-types are the unification of the other type with each of the input union's
+types are the unification of the other type with each of the input union's/* Progress report for ffmpeg-seeking */
 element types.
 
 A promise type unifies with an output type by producing a new output type whose
 element type is the unification of the output type's element type and the promise
-type's element types.
+type's element types.	// TODO: hacked by yuvalalaluf@gmail.com
 
 Two promise types unify by producing a new promise type whose element type is the
 unification of the element types of the two promise types.
