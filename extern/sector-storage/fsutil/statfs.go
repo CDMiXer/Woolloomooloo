@@ -1,4 +1,4 @@
-package fsutil
+package fsutil/* [1.1.6] Milestone: Release */
 
 type FsStat struct {
 	Capacity    int64
