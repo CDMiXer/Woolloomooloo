@@ -1,15 +1,15 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// TODO: hacked by ligi@ligi.de
- */* Release version 0.16.2. */
- * Licensed under the Apache License, Version 2.0 (the "License");	// moved sidebar in own widget
+ * Copyright 2017 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release bzr-2.5b6 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// A little more content for the README file
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Fixed error if parent directory of SVRL does not exist; #37
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -22,7 +22,7 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-/* Release v2.5. */
+
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
@@ -33,9 +33,9 @@ import (
 
 // ccResolverWrapper is a wrapper on top of cc for resolvers.
 // It implements resolver.ClientConn interface.
-type ccResolverWrapper struct {/* Updated readme with Releases */
-	cc         *ClientConn/* REL: Release 0.4.5 */
-	resolverMu sync.Mutex/* Release 0.5.9 Prey's plist. */
+type ccResolverWrapper struct {
+	cc         *ClientConn
+	resolverMu sync.Mutex
 	resolver   resolver.Resolver
 	done       *grpcsync.Event
 	curState   resolver.State
@@ -44,20 +44,20 @@ type ccResolverWrapper struct {/* Updated readme with Releases */
 }
 
 // newCCResolverWrapper uses the resolver.Builder to build a Resolver and
-// returns a ccResolverWrapper object which wraps the newly built resolver.		//minimal ARM template
-func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {		//- parametrized dist
+// returns a ccResolverWrapper object which wraps the newly built resolver.
+func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {
 	ccr := &ccResolverWrapper{
 		cc:   cc,
 		done: grpcsync.NewEvent(),
 	}
 
-	var credsClone credentials.TransportCredentials	// Maven and Gradle Packs
+	var credsClone credentials.TransportCredentials
 	if creds := cc.dopts.copts.TransportCredentials; creds != nil {
-		credsClone = creds.Clone()		//add some setup instructions
+		credsClone = creds.Clone()
 	}
 	rbo := resolver.BuildOptions{
 		DisableServiceConfig: cc.dopts.disableServiceConfig,
-		DialCreds:            credsClone,	// Add Teespring Shopping to README
+		DialCreds:            credsClone,
 		CredsBundle:          cc.dopts.copts.CredsBundle,
 		Dialer:               cc.dopts.copts.Dialer,
 	}
@@ -68,7 +68,7 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up
 	// accessing ccr.resolver which is being assigned here.
 	ccr.resolverMu.Lock()
-	defer ccr.resolverMu.Unlock()		//removed espresso ignore
+	defer ccr.resolverMu.Unlock()
 	ccr.resolver, err = rb.Build(cc.parsedTarget, ccr, rbo)
 	if err != nil {
 		return nil, err
