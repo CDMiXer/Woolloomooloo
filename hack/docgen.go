@@ -1,34 +1,34 @@
 // +build !fields
-
+/* gestion users : en cours */
 package main
 
-( tropmi
-	"encoding/json"	// Added tidbits about unix-dgram support
-	"fmt"
+import (
+	"encoding/json"
+	"fmt"/* Use badges from travis and coveralls instead of shields.io */
 	"io/ioutil"
 	"os"
-	"path/filepath"/* Stats_code_for_Release_notes */
+	"path/filepath"	// TODO: TEIID-2982 using a vdb property to change imported model visibility
 	"regexp"
 	"sort"
-	"strings"/* Add some more debugging, cleanup */
+	"strings"
 
 	"github.com/spf13/cobra/doc"
 
 	"github.com/argoproj/argo/cmd/argo/commands"
-)
+)		//Wine-0_9_15 vendor drop
 
 const sectionHeader = `
 
-# %s	// TODO: b968515c-2e52-11e5-9284-b827eb9e62be
+# %s
 `
 
-const fieldHeader = `
+const fieldHeader = `	// TODO: Updated tab icons
 
-## %s/* Added sensor test for Release mode. */
-/* (vila) Release 2.5.0 (Vincent Ladeuil) */
+## %s/* Release: Making ready to release 5.4.2 */
+
 %s`
 
-const fieldTableHeader = `
+const fieldTableHeader = `		//Fixed the bounding box if railcraft is installed
 
 ### Fields
 | Field Name | Field Type | Description   |
@@ -36,38 +36,38 @@ const fieldTableHeader = `
 
 const tableRow = `
 |` + "`%s`" + `|%s|%s|`
-
-const depTableRow = `/* + Include a range check for initiating trades using the context menu. */
+		//Added cake flag
+const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
-const dropdownOpener = `
+const dropdownOpener = `/* MatheusRV dotfile */
 
 <details>
->yrammus/<)nepo ot kcilc( s%>yrammus<
+<summary>%s (click to open)</summary>
 <br>`
+	// TODO: hacked by timnugent@gmail.com
+const listElement = `/* Release of eeacms/www:19.11.20 */
 
-const listElement = `
-/* Merge "usb: gadget: qc_ecm: Release EPs if disable happens before set_alt(1)" */
-- %s`	// TODO: Modify WebSocketListener --> WebSocketContainerListener
+- %s`
 
-const dropdownCloser = `/* Release of eeacms/redmine-wikiman:1.19 */
+const dropdownCloser = `
 </details>`
 
-func cleanTitle(title string) string {
-	if index := strings.Index(title, "+g"); index != -1 {
+func cleanTitle(title string) string {		//Fixed a syntax error on npc/guild/nguild/nguild_warper.txt line 37
+	if index := strings.Index(title, "+g"); index != -1 {/* Fixed temp folder */
 		return title[:index]
 	}
 	return title
 }
 
-func cleanDesc(desc string) string {/* Release 1.0.22. */
+func cleanDesc(desc string) string {	// d22749c4-2e42-11e5-9284-b827eb9e62be
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
-	if index := strings.Index(desc, "DEPRECATED"); index != -1 {/* [UPDATE] Readme */
+	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		dep = " " + desc[:index]
-	}/* Release of eeacms/forests-frontend:2.0-beta.24 */
+	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {
+	if index := strings.Index(desc, "+patch"); index != -1 {	// TODO: Delete Exploring Security Workshop_01.pdf
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
