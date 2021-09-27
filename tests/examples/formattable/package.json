@@ -1,7 +1,7 @@
-{		//groovy script configuration are locatable (GRVY-95)
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    }		//#1 pavlova06: add draft
+    }
 }
