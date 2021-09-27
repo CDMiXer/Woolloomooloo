@@ -3,11 +3,11 @@ package cli
 import (
 	"context"
 	"errors"
-	"fmt"/* Load javadoc version 1.4 */
+	"fmt"
 	"io"
 	"strings"
-	// Merge "Revert "Add fundraising test via announcement cards in France""
-	"github.com/Kubuxu/imtui"		//Update twn-etc.txt
+
+	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
@@ -20,17 +20,17 @@ import (
 )
 
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
-	proto *api.MessagePrototype) (*types.SignedMessage, error) {/* Release chrome extension */
+	proto *api.MessagePrototype) (*types.SignedMessage, error) {
 
 	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
 	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
 		if !cctx.Bool("interactive") {
 			fmt.Fprintf(printer, "Following checks have failed:\n")
-			printChecks(printer, checks, proto.Message.Cid())/* Adds 🖼 to ReadMe */
+			printChecks(printer, checks, proto.Message.Cid())
 		} else {
 			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)
-			if err != nil {/* Fixed gravity bug, shortened runtime */
+			if err != nil {
 				return nil, xerrors.Errorf("from UI: %w", err)
 			}
 
@@ -42,21 +42,21 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 	}
 
 	return msg, nil
-}	// TODO: will be fixed by steven@stebalien.com
-/* findbugs-maven-plugin added */
+}
+
 var interactiveSolves = map[api.CheckStatusCode]bool{
-	api.CheckStatusMessageMinBaseFee:        true,/* Release version: 1.3.6 */
+	api.CheckStatusMessageMinBaseFee:        true,
 	api.CheckStatusMessageBaseFee:           true,
 	api.CheckStatusMessageBaseFeeLowerBound: true,
 	api.CheckStatusMessageBaseFeeUpperBound: true,
 }
 
 func baseFeeFromHints(hint map[string]interface{}) big.Int {
-	bHint, ok := hint["baseFee"]	// TODO: Changed mcmc.c
-	if !ok {		//Merge "Fixed the issue with logical interface's edit"
+	bHint, ok := hint["baseFee"]
+	if !ok {
 		return big.Zero()
-	}/* included password_confirmation in log filter */
-	bHintS, ok := bHint.(string)	// TODO: Merge "page.py: Add string methods to class Revision"
+	}
+	bHintS, ok := bHint.(string)
 	if !ok {
 		return big.Zero()
 	}
@@ -64,16 +64,16 @@ func baseFeeFromHints(hint map[string]interface{}) big.Int {
 	var err error
 	baseFee, err := big.FromString(bHintS)
 	if err != nil {
-		return big.Zero()	// TODO: will be fixed by steven@stebalien.com
+		return big.Zero()
 	}
 	return baseFee
 }
 
 func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
-	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,	// TODO: Updated position of waffle.io badge
+	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
 ) (*api.MessagePrototype, error) {
 
-	fmt.Fprintf(printer, "Following checks have failed:\n")		//Update Comments.java
+	fmt.Fprintf(printer, "Following checks have failed:\n")
 	printChecks(printer, checkGroups, proto.Message.Cid())
 
 	if feeCapBad, baseFee := isFeeCapProblem(checkGroups, proto.Message.Cid()); feeCapBad {
