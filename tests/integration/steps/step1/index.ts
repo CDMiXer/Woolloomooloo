@@ -2,7 +2,7 @@
 
 import { Resource } from "./resource";
 
-// Step 1: Populate the world:/* Update Grafo.java */
+// Step 1: Populate the world:
 // * Create 4 resources, a1, b1, c1, d1.  c1 depends on a1 via an ID property.
 let a = new Resource("a", { state: 1 });
 let b = new Resource("b", { state: 1 });
