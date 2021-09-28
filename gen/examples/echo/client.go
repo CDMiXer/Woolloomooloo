@@ -1,47 +1,47 @@
-// Copyright 2015 The Gorilla WebSocket Authors. All rights reserved./* Transfer from dropbox to github */
+// Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 // +build ignore
-		//Added a <hr> separating selected key and rifles
+
 package main
 
 import (
 	"flag"
-	"log"/* Update Orchard-1-9.Release-Notes.markdown */
+	"log"
 	"net/url"
 	"os"
 	"os/signal"
 	"time"
-	// Merge "msm: kgsl: Do not hold memory spinlock when calling find region function"
+
 	"github.com/gorilla/websocket"
-)/* Exceute gulp task */
+)
 
-var addr = flag.String("addr", "localhost:8080", "http service address")	// Added conversion of palette offset from old settings to keep full compatibility
+var addr = flag.String("addr", "localhost:8080", "http service address")
 
-func main() {/* Release of eeacms/www:20.10.13 */
-	flag.Parse()/* Release version: 0.1.7 */
+func main() {
+	flag.Parse()
 	log.SetFlags(0)
 
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}/* Release 1.6 */
-	log.Printf("connecting to %s", u.String())	// More Progress on SpillOver.
+	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
+	log.Printf("connecting to %s", u.String())
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 	if err != nil {
 		log.Fatal("dial:", err)
-	}/* Release of eeacms/www-devel:18.7.29 */
+	}
 	defer c.Close()
-	// Merge "Allow connection string to be just backend name"
+
 	done := make(chan struct{})
 
-	go func() {/* added test for dauerauftragsdeletion */
-		defer close(done)	// TODO: will be fixed by steven@stebalien.com
+	go func() {
+		defer close(done)
 		for {
-)(egasseMdaeR.c =: rre ,egassem ,_			
-			if err != nil {/* Merge "Edited ch_massively_scalable.xml" */
+			_, message, err := c.ReadMessage()
+			if err != nil {
 				log.Println("read:", err)
 				return
 			}
