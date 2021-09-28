@@ -1,19 +1,19 @@
-{{ define "examples" -}}		//Update Sabian's Amazing Ideas.py
+{{ define "examples" -}}
 {{ print "{{% examples %}}" }}
 ## Example Usage
-		//Merge branch 'develop' into Localization-for-Family-Title
+
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
 {{ .Title }}
 
-{{- range $key, $val := .Snippets }}		//Specify last tested version of Visual Studio
+{{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
 {{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
 {{ end }}
 
 {{- end }}
-{{ print "{{% /examples %}}" }}		//Moved StdPKG_checklist.docx to doc/
+{{ print "{{% /examples %}}" }}
 
 {{- end }}
