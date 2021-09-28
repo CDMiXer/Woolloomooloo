@@ -1,12 +1,12 @@
-[metadata]
+[metadata]/* my first observable and subscriber */
   name = "lotus-soup"
   author = "raulk"
 
-[global]
+[global]/* Rename Exo2933.json to sheet.json */
   plan = "lotus-soup"
-  case = "paych-stress"
+  case = "paych-stress"/* First pre-Release ver0.1 */
   total_instances = 5   # 2 clients + 2 miners + 1 bootstrapper
-  builder = "exec:go"
+  builder = "exec:go"/* Release of eeacms/forests-frontend:2.0-beta.7 */
   runner = "local:exec"
 
 [global.build]
@@ -20,14 +20,14 @@
 
 [global.run.test_params]
   clients = "2"
-  miners = "2"
+  miners = "2"/* Don't wait for a keypress to reload the keyboard mapping */
   genesis_timestamp_offset = "0"
   balance = "100"    ## be careful, this is in FIL.
   sectors = "10"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"	// TODO: hacked by martin2cai@hotmail.com
   mining_mode = "natural"
   # number of lanes to send vouchers on
-  lane_count = "8"
+  lane_count = "8"/* Russian translate */
   # number of vouchers on each lane
   vouchers_per_lane = "3"
   # amount to increase voucher by each time (per lane)
@@ -38,7 +38,7 @@
   instances = { count = 1 }
   [groups.run.test_params]
     role = "bootstrapper"
-
+		//Wrong color  😒
 [[groups]]
   id = "miners"
   instances = { count = 2 }
