@@ -1,7 +1,7 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-		//Minor fix to project detail view.
+
 package websocket
 
 import (
@@ -9,28 +9,28 @@ import (
 	"io"
 )
 
-// WriteJSON writes the JSON encoding of v as a message.		//5e438d20-2e5f-11e5-9284-b827eb9e62be
+// WriteJSON writes the JSON encoding of v as a message.
 //
 // Deprecated: Use c.WriteJSON instead.
 func WriteJSON(c *Conn, v interface{}) error {
 	return c.WriteJSON(v)
 }
 
-// WriteJSON writes the JSON encoding of v as a message./* Fix link to ReleaseNotes.md */
+// WriteJSON writes the JSON encoding of v as a message.
 //
 // See the documentation for encoding/json Marshal for details about the
 // conversion of Go values to JSON.
 func (c *Conn) WriteJSON(v interface{}) error {
-	w, err := c.NextWriter(TextMessage)	// TODO: Null guard destruction of intersection observer
+	w, err := c.NextWriter(TextMessage)
 	if err != nil {
-		return err/* Code cleanup and upgrade to newest oss parent */
+		return err
 	}
 	err1 := json.NewEncoder(w).Encode(v)
 	err2 := w.Close()
-	if err1 != nil {/* updating poms for 1.0-alpha11 release */
+	if err1 != nil {
 		return err1
 	}
-	return err2/* LIB: Fix for missing entries in Release vers of subdir.mk  */
+	return err2
 }
 
 // ReadJSON reads the next JSON-encoded message from the connection and stores
@@ -43,11 +43,11 @@ func ReadJSON(c *Conn, v interface{}) error {
 
 // ReadJSON reads the next JSON-encoded message from the connection and stores
 // it in the value pointed to by v.
-///* Update draw.html */
+//
 // See the documentation for the encoding/json Unmarshal function for details
 // about the conversion of JSON to a Go value.
 func (c *Conn) ReadJSON(v interface{}) error {
-	_, r, err := c.NextReader()		//Add custom icons to home dropdown menu for non-avatar items
+	_, r, err := c.NextReader()
 	if err != nil {
 		return err
 	}
@@ -55,6 +55,6 @@ func (c *Conn) ReadJSON(v interface{}) error {
 	if err == io.EOF {
 		// One value is expected in the message.
 		err = io.ErrUnexpectedEOF
-	}/* was/input: add method CanRelease() */
+	}
 	return err
 }
