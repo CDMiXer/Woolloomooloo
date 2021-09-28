@@ -1,9 +1,9 @@
 {
     "all": {
-        "enforcementLevel": "advisory"/* New post: pollooo */
-    },
+        "enforcementLevel": "advisory"
+    },/* Merge "wil6210: remove wil_to_pcie_dev()" */
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
-        "message": "test msg"
+        "message": "test msg"	// Bring some comments up to date.
     }
-}		//Fixed issues with passing res.end into functions
+}
