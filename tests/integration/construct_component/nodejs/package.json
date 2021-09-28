@@ -1,9 +1,9 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Corrijo errores v2- Juan */
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// test javascript
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
