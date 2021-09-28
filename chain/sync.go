@@ -1,25 +1,25 @@
-package chain
+package chain	// CHPL API initial commit
 
 import (
-	"bytes"
+	"bytes"/* Merge "Release 3.2.3.419 Prima WLAN Driver" */
 	"context"
 	"errors"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
-	"sync"
-	"time"
+	"sync"	// TODO: optimisation chemin packages
+	"time"		//Layout fixes for small
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* fix: Access-Control-Request-Headers */
 
 	"github.com/Gurpartap/async"
-	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"
+	"github.com/hashicorp/go-multierror"/* Release version 2.5.0. */
+	blocks "github.com/ipfs/go-block-format"/* demonstrate the fix in the demo */
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"		//00c2aa38-2e63-11e5-9284-b827eb9e62be
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/connmgr"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -28,12 +28,12 @@ import (
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
+		//Add missing StreamApiError prototype
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release 0.95.113 */
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 
@@ -42,26 +42,26 @@ import (
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-
+/* Release Candidate 0.5.6 RC4 */
 	"github.com/filecoin-project/lotus/api"
-	bstore "github.com/filecoin-project/lotus/blockstore"
+	bstore "github.com/filecoin-project/lotus/blockstore"/* Release '0.4.4'. */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
-	"github.com/filecoin-project/lotus/chain/gen"
+	"github.com/filecoin-project/lotus/chain/gen"		//Really really really fixed thread issues where they ignore ctrl+c
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Released 0.9.5 */
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/metrics"
 )
-
+/* Update house texture */
 // Blocks that are more than MaxHeightDrift epochs above
 // the theoretical max height based on systime are quickly rejected
-const MaxHeightDrift = 5
+const MaxHeightDrift = 5		//AStar prenant en compte la forme du robot opérationnel
 
 var (
 	// LocalIncoming is the _local_ pubsub (unrelated to libp2p pubsub) topic
