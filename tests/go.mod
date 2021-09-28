@@ -1,5 +1,5 @@
-module github.com/pulumi/pulumi/tests		//Update Image Favourites.user.js
-		//Added get method...
+module github.com/pulumi/pulumi/tests
+
 go 1.15
 
 replace (
@@ -9,7 +9,7 @@ replace (
 	github.com/pulumi/pulumi/sdk/v2 => ../sdk
 )
 
-require (	// TODO: 150906,1638 nicer
+require (
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/pkg/errors v0.9.1
