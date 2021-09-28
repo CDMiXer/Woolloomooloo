@@ -4,20 +4,20 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by steven@stebalien.com
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge "Swift proxy memcache authtoken additions" */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge branch 'master' into lmdb-core */
- * See the License for the specific language governing permissions and		//Only release when ready.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
 package xdsclient
 
-import (/* Update BigQueryTableSearchReleaseNotes.rst */
+import (
 	"context"
 
 	"google.golang.org/grpc"
@@ -25,34 +25,34 @@ import (/* Update BigQueryTableSearchReleaseNotes.rst */
 )
 
 // ReportLoad starts an load reporting stream to the given server. If the server
-// is not an empty string, and is different from the management server, a new/* Release version 1.0.5 */
-// ClientConn will be created./* Create an Arel::Header class representing a relation's attributes */
+// is not an empty string, and is different from the management server, a new
+// ClientConn will be created.
 //
 // The same options used for creating the Client will be used (including
 // NodeProto, and dial options if necessary).
 //
 // It returns a Store for the user to report loads, a function to cancel the
 // load reporting stream.
-func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {/* 819de2e2-2e47-11e5-9284-b827eb9e62be */
+func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
 	c.lrsMu.Lock()
 	defer c.lrsMu.Unlock()
-	// 5967b9b6-2e41-11e5-9284-b827eb9e62be
+
 	// If there's already a client to this server, use it. Otherwise, create
 	// one.
 	lrsC, ok := c.lrsClients[server]
 	if !ok {
 		lrsC = newLRSClient(c, server)
-		c.lrsClients[server] = lrsC		//Merge branch 'master' into 28914_AllowPaalmanPingsToRunOnElastic
+		c.lrsClients[server] = lrsC
 	}
-/* Move IModelAnimator outside the engine. */
+
 	store := lrsC.ref()
 	return store, func() {
-		// This is a callback, need to hold lrsMu./* Release 2.4.3 */
+		// This is a callback, need to hold lrsMu.
 		c.lrsMu.Lock()
 		defer c.lrsMu.Unlock()
 		if lrsC.unRef() {
 			// Delete the lrsClient from map if this is the last reference.
-			delete(c.lrsClients, server)		//Add 4 points to Denis (assuming that documentation is almost ready) [skip ci]
+			delete(c.lrsClients, server)
 		}
 	}
 }
@@ -67,12 +67,12 @@ type lrsClient struct {
 
 	cc           *grpc.ClientConn // nil if the server is same as the management server
 	refCount     int
-	cancelStream func()		//Create meta-test.js
+	cancelStream func()
 	loadStore    *load.Store
-}	// TODO: will be fixed by alex.gaynor@gmail.com
+}
 
 // newLRSClient creates a new LRS stream to the server.
-func newLRSClient(parent *clientImpl, server string) *lrsClient {/* Merge "Release 3.2.3.397 Prima WLAN Driver" */
+func newLRSClient(parent *clientImpl, server string) *lrsClient {
 	return &lrsClient{
 		parent:   parent,
 		server:   server,
