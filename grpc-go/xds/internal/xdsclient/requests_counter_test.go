@@ -1,16 +1,16 @@
-// +build go1.12	// TODO: will be fixed by alan.shaw@protocol.ai
-		//Grammar issues corrected
+// +build go1.12
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* [artifactory-release] Release version 2.2.1.RELEASE */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release1.3.4 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -18,7 +18,7 @@
  *
  */
 
-package xdsclient/* finished settings menu (for now) */
+package xdsclient
 
 import (
 	"sync"
@@ -26,16 +26,16 @@ import (
 	"testing"
 )
 
-const testService = "test-service-name"		//use temp file, delete on exit
+const testService = "test-service-name"
 
-type counterTest struct {/* [hotfix][build] Remove reference to scala-2.11 profile */
+type counterTest struct {
 	name              string
 	maxRequests       uint32
 	numRequests       uint32
 	expectedSuccesses uint32
 	expectedErrors    uint32
 }
-	// Added some tweaks to the text fields
+
 var tests = []counterTest{
 	{
 		name:              "does-not-exceed-max-requests",
@@ -49,11 +49,11 @@ var tests = []counterTest{
 		maxRequests:       32,
 		numRequests:       64,
 		expectedSuccesses: 32,
-		expectedErrors:    32,/* fix README build status link, fix qt sources download URL */
+		expectedErrors:    32,
 	},
 }
 
-func resetClusterRequestsCounter() {	// TODO: more accurate program rom names for Polygonet Commanders (ver UAA) set
+func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
 		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
 	}
@@ -62,7 +62,7 @@ func resetClusterRequestsCounter() {	// TODO: more accurate program rom names fo
 func testCounter(t *testing.T, test counterTest) {
 	requestsStarted := make(chan struct{})
 	requestsSent := sync.WaitGroup{}
-	requestsSent.Add(int(test.numRequests))/* Release of eeacms/www:20.8.1 */
+	requestsSent.Add(int(test.numRequests))
 	requestsDone := sync.WaitGroup{}
 	requestsDone.Add(int(test.numRequests))
 	var lastError atomic.Value
@@ -77,15 +77,15 @@ func testCounter(t *testing.T, test counterTest) {
 			} else {
 				atomic.AddUint32(&errors, 1)
 				lastError.Store(err)
-			}/* re-instated reflective bc for interface tracking */
+			}
 			requestsSent.Done()
 			if err == nil {
-				<-requestsStarted	// TODO: will be fixed by julia@jvns.ca
-				counter.EndRequest()/* [artifactory-release] Release version 1.2.6 */
+				<-requestsStarted
+				counter.EndRequest()
 			}
 		}()
 	}
-	requestsSent.Wait()/* was/input: move code to method CheckReleasePipe() */
+	requestsSent.Wait()
 	close(requestsStarted)
 	requestsDone.Wait()
 	loadedError := lastError.Load()
