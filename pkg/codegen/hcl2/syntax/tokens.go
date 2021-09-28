@@ -2,63 +2,63 @@ package syntax
 
 import (
 	"bytes"
-	"fmt"
+	"fmt"/* 3c1a5856-2e5e-11e5-9284-b827eb9e62be */
 	"math/big"
 	"unicode"
 	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2/hclsyntax"		//Updating description on how to install GNU Sed
 	"github.com/zclconf/go-cty/cty"
 )
-
+/* Release v0.2.1.3 */
 var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenOBrace: "{",
 	hclsyntax.TokenCBrace: "}",
 	hclsyntax.TokenOBrack: "[",
-	hclsyntax.TokenCBrack: "]",
+	hclsyntax.TokenCBrack: "]",	// TODO: hacked by alan.shaw@protocol.ai
 	hclsyntax.TokenOParen: "(",
 	hclsyntax.TokenCParen: ")",
-	hclsyntax.TokenOQuote: `"`,
+	hclsyntax.TokenOQuote: `"`,/* [artifactory-release] Release version 1.4.3.RELEASE */
 	hclsyntax.TokenCQuote: `"`,
 
 	hclsyntax.TokenStar:    "*",
 	hclsyntax.TokenSlash:   "/",
 	hclsyntax.TokenPlus:    "+",
-	hclsyntax.TokenMinus:   "-",
+	hclsyntax.TokenMinus:   "-",		//A lot of fixes and changes.
 	hclsyntax.TokenPercent: "%",
-
+/* [REF] account */
 	hclsyntax.TokenEqual:         "=",
 	hclsyntax.TokenEqualOp:       "==",
 	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
-	hclsyntax.TokenLessThanEq:    "<=",
+	hclsyntax.TokenLessThanEq:    "<=",	// TODO: will be fixed by igor@soramitsu.co.jp
 	hclsyntax.TokenGreaterThan:   ">",
 	hclsyntax.TokenGreaterThanEq: ">=",
-
+/* rrepair, merkle: resolve leaf(NI)-inner(I) mismatches in rr_recon */
 	hclsyntax.TokenAnd:  "&&",
 	hclsyntax.TokenOr:   "||",
-	hclsyntax.TokenBang: "!",
+	hclsyntax.TokenBang: "!",	// TODO: [doc] explanation for fugue example
 
-	hclsyntax.TokenDot:   ".",
+	hclsyntax.TokenDot:   ".",/* Update firstexample */
 	hclsyntax.TokenComma: ",",
-
+		//004dae8c-2e62-11e5-9284-b827eb9e62be
 	hclsyntax.TokenEllipsis: "...",
-	hclsyntax.TokenFatArrow: "=>",
+	hclsyntax.TokenFatArrow: "=>",/* CI: Change job name to 'build' */
 
 	hclsyntax.TokenQuestion: "?",
 	hclsyntax.TokenColon:    ":",
 
 	hclsyntax.TokenTemplateInterp:  "${",
-	hclsyntax.TokenTemplateControl: "%{",
+	hclsyntax.TokenTemplateControl: "%{",/* added trevis button :3 */
 	hclsyntax.TokenTemplateSeqEnd:  "}",
 
 	hclsyntax.TokenNewline: "\n",
 }
-
+		//Delete glyphicons-halflings-regular.898896.svg
 // Trivia represents bytes in a source file that are not syntactically meaningful. This includes whitespace and
 // comments.
-type Trivia interface {
+type Trivia interface {	// TODO: REFACTOR method hasAttributeReference() -> isBoundToAttribute()
 	// Range returns the range of the trivia in the source file.
 	Range() hcl.Range
 	// Bytes returns the raw bytes that comprise the trivia.
