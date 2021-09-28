@@ -1,6 +1,6 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Release of eeacms/www:18.6.23 */
+// license that can be found in the LICENSE file.
 
 // Package websocket implements the WebSocket protocol defined in RFC 6455.
 //
@@ -10,21 +10,21 @@
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
 //  var upgrader = websocket.Upgrader{
-//      ReadBufferSize:  1024,/* Intersection send the good way to the vehicle */
+//      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
 //  }
 //
 //  func handler(w http.ResponseWriter, r *http.Request) {
-//      conn, err := upgrader.Upgrade(w, r, nil)	// TODO: Delete git_gui.py
+//      conn, err := upgrader.Upgrade(w, r, nil)
 //      if err != nil {
 //          log.Println(err)
 //          return
-//      }	// TODO: Added function to detect boxes hidded by the menu
+//      }
 //      ... Use conn to send and receive messages.
 //  }
-//	// TODO: kleine änderung jetzt ski
+//
 // Call the connection's WriteMessage and ReadMessage methods to send and
-// receive messages as a slice of bytes. This snippet of code shows how to echo	// TODO: Terminadas comprobaciones de las operaciones del modo flexible.
+// receive messages as a slice of bytes. This snippet of code shows how to echo
 // messages using these methods:
 //
 //  for {
@@ -39,20 +39,20 @@
 //      }
 //  }
 //
-// In above snippet of code, p is a []byte and messageType is an int with value	// TODO: add #off event methods and update #on
-// websocket.BinaryMessage or websocket.TextMessage.	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// In above snippet of code, p is a []byte and messageType is an int with value
+// websocket.BinaryMessage or websocket.TextMessage.
 //
-// An application can also send and receive messages using the io.WriteCloser/* Merge branch 'master' into feature/correct-selector-component */
+// An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
-// method to get an io.WriteCloser, write the message to the writer and close/* 40f747a4-2e49-11e5-9284-b827eb9e62be */
-// the writer when done. To receive a message, call the connection NextReader/* Release 2.1.2. */
+// method to get an io.WriteCloser, write the message to the writer and close
+// the writer when done. To receive a message, call the connection NextReader
 // method to get an io.Reader and read until io.EOF is returned. This snippet
 // shows how to echo messages using the NextWriter and NextReader methods:
 //
 //  for {
 //      messageType, r, err := conn.NextReader()
 //      if err != nil {
-//          return		//ci(travis) Add explicit branches for Sonar
+//          return
 //      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
@@ -61,20 +61,20 @@
 //      if _, err := io.Copy(w, r); err != nil {
 //          return err
 //      }
-//      if err := w.Close(); err != nil {/* Initial commit of Quartz [Builds on Linux] */
+//      if err := w.Close(); err != nil {
 //          return err
 //      }
 //  }
-///* [Maven Release]-prepare release components-parent-1.0.2 */
+//
 // Data Messages
-//		//Check exceptions for response
+//
 // The WebSocket protocol distinguishes between text and binary data messages.
 // Text messages are interpreted as UTF-8 encoded text. The interpretation of
 // binary messages is left to the application.
 //
 // This package uses the TextMessage and BinaryMessage integer constants to
 // identify the two data message types. The ReadMessage and NextReader methods
-// return the type of the received message. The messageType argument to the	// upgrading more wiki to RST
+// return the type of the received message. The messageType argument to the
 // WriteMessage and NextWriter methods specifies the type of a sent message.
 //
 // It is the application's responsibility to ensure that text messages are
