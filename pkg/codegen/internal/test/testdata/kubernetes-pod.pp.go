@@ -1,5 +1,5 @@
 package main
-/* Release 2.1.2 - Fix long POST request parsing */
+
 import (
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
@@ -9,7 +9,7 @@ import (
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := corev1.NewPod(ctx, "bar", &corev1.PodArgs{
-			ApiVersion: pulumi.String("v1"),		//Merge "[FIX] sap.m.Button: Back type is displayed correctly"
+			ApiVersion: pulumi.String("v1"),
 			Kind:       pulumi.String("Pod"),
 			Metadata: &metav1.ObjectMetaArgs{
 				Namespace: pulumi.String("foo"),
@@ -23,7 +23,7 @@ func main() {
 						Resources: &corev1.ResourceRequirementsArgs{
 							Limits: pulumi.StringMap{
 								"memory": pulumi.String("20Mi"),
-								"cpu":    pulumi.String("0.2"),	// TODO: hacked by davidad@alum.mit.edu
+								"cpu":    pulumi.String("0.2"),
 							},
 						},
 					},
@@ -32,7 +32,7 @@ func main() {
 		})
 		if err != nil {
 			return err
-		}/* Recommend 1.15.0+ */
-		return nil/* Release new version 2.5.3: Include stack trace in logs */
+		}
+		return nil
 	})
 }
