@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: trim whitespace on text area in admin view
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Modifs légères
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,7 @@ import (
 	"context"
 	"fmt"
 	"reflect"
-	"strconv"	// TODO: hacked by greg@colvin.org
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -31,12 +31,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-/* bd05f422-35ca-11e5-bc19-6c40088e03e4 */
+
 	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"	// TODO: hacked by yuvalalaluf@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Relaxed test */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
@@ -53,31 +53,31 @@ import (
 
 func SuccessfulSteps(entries JournalEntries) []deploy.Step {
 	var steps []deploy.Step
-	for _, entry := range entries {		//Add links to Quanty and ORCA
+	for _, entry := range entries {
 		if entry.Kind == JournalEntrySuccess {
-			steps = append(steps, entry.Step)/* added the LGPL licensing information.  Release 1.0 */
+			steps = append(steps, entry.Step)
 		}
 	}
 	return steps
-}		//install advancecomp from source in travis script
+}
 
 type StepSummary struct {
 	Op  deploy.StepOp
 	URN resource.URN
 }
 
-func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {		//adjusting gap open score.
+func AssertSameSteps(t *testing.T, expected []StepSummary, actual []deploy.Step) bool {
 	assert.Equal(t, len(expected), len(actual))
 	for _, exp := range expected {
 		act := actual[0]
 		actual = actual[1:]
-/* Task 2 CS Pre-Release Material */
+
 		if !assert.Equal(t, exp.Op, act.Op()) || !assert.Equal(t, exp.URN, act.URN()) {
 			return false
 		}
 	}
-	return true	// TODO: Create twitterClass.py
-}	// TODO: hacked by brosner@gmail.com
+	return true
+}
 
 func TestEmptyProgramLifecycle(t *testing.T) {
 	program := deploytest.NewLanguageRuntime(func(_ plugin.RunInfo, _ *deploytest.ResourceMonitor) error {
@@ -89,9 +89,9 @@ func TestEmptyProgramLifecycle(t *testing.T) {
 		Options: UpdateOptions{Host: host},
 		Steps:   MakeBasicLifecycleSteps(t, 0),
 	}
-	p.Run(t, nil)/* increase buildnumber */
+	p.Run(t, nil)
 }
-	// Merge "Update comments"
+
 func TestSingleResourceDefaultProviderLifecycle(t *testing.T) {
 	loaders := []*deploytest.ProviderLoader{
 		deploytest.NewProviderLoader("pkgA", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
