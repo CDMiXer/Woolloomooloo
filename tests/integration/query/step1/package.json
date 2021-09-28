@@ -1,12 +1,12 @@
-{
+{		//9784099a-2e71-11e5-9284-b827eb9e62be
     "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* VL graph generator checks that the sum of the degree sequence is even */
-    "devDependencies": {/* Release for 2.4.1 */
-        "typescript": "^3.0.0"/* Released version 0.8.31 */
+    "typings": "bin/index.d.ts",
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Release process streamlined. */
     }
 }
