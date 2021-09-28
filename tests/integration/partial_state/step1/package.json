@@ -2,9 +2,9 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Merge "Adds elevation parameter to BottomAppBar" into androidx-master-dev
-    },/* ajout du client */
+        "typescript": "^3.0.0"	// Ensure git-submodules manager is enabled
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Update missing_scripts.zip */
+        "@pulumi/pulumi": "latest"
     }
 }
