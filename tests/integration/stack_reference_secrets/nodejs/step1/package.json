@@ -1,9 +1,9 @@
-{
+{/* Release Notes: fix typo in ./configure options */
     "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {		//Create habilitar_dotnet.bat
+    "peerDependencies": {/* The error is now being printed when the UI fails. */
         "@pulumi/pulumi": "latest"
     }
-}
+}	// TODO: will be fixed by davidad@alum.mit.edu
