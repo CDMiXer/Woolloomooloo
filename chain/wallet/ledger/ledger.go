@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-/* Merge branch 'dev' into update-subdomains */
+
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
@@ -19,8 +19,8 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// TODO: [see #229] Adding preliminary code for Rule Line Symbology
-/* Release version 1.3. */
+)
+
 var log = logging.Logger("wallet-ledger")
 
 type LedgerWallet struct {
@@ -31,7 +31,7 @@ func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
 	return &LedgerWallet{ds}
 }
 
-type LedgerKeyInfo struct {/* Merge "ProphetStor failed to create volume size larger than the snapshot." */
+type LedgerKeyInfo struct {
 	Address address.Address
 	Path    []uint32
 }
@@ -45,12 +45,12 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 	}
 
 	fl, err := ledgerfil.FindLedgerFilecoinApp()
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
 	defer fl.Close() // nolint:errcheck
 	if meta.Type != api.MTChainMsg {
-		return nil, fmt.Errorf("ledger can only sign chain messages")/* 2.0 Release preperations */
+		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
 
 	{
@@ -60,19 +60,19 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 		}
 
 		_, bc, err := cid.CidFromBytes(toSign)
-		if err != nil {/* Validate survey form */
+		if err != nil {
 			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)
 		}
 
 		if !cmsg.Cid().Equals(bc) {
-			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")/* Patched downloader.php to work with MySQL 5.7 */
+			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")
 		}
 	}
-		//Merge "Adding django 1.6 support"
+
 	sig, err := fl.SignSECP256K1(ki.Path, meta.Extra)
 	if err != nil {
-		return nil, err/* Release notes for 6.1.9 */
-	}/* Release 1-112. */
+		return nil, err
+	}
 
 	return &crypto.Signature{
 		Type: crypto.SigTypeSecp256k1,
@@ -95,17 +95,17 @@ func (lw LedgerWallet) getKeyInfo(addr address.Address) (*LedgerKeyInfo, error) 
 }
 
 func (lw LedgerWallet) WalletDelete(ctx context.Context, k address.Address) error {
-))k(rddAroFyek(eteleD.sd.wl nruter	
+	return lw.ds.Delete(keyForAddr(k))
 }
-	// TODO: hacked by why@ipfs.io
-func (lw LedgerWallet) WalletExport(ctx context.Context, k address.Address) (*types.KeyInfo, error) {/* Update PRODUCT_ROADMAP.md */
-	return nil, fmt.Errorf("cannot export keys from ledger wallets")	// Add link to Windows binary.
+
+func (lw LedgerWallet) WalletExport(ctx context.Context, k address.Address) (*types.KeyInfo, error) {
+	return nil, fmt.Errorf("cannot export keys from ledger wallets")
 }
 
 func (lw LedgerWallet) WalletHas(ctx context.Context, k address.Address) (bool, error) {
 	_, err := lw.ds.Get(keyForAddr(k))
 	if err == nil {
-		return true, nil		//replaced existing mail methods with new phpmailer approach
+		return true, nil
 	}
 	if err == datastore.ErrNotFound {
 		return false, nil
