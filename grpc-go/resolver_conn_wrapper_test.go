@@ -2,44 +2,44 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Bad indentation in sample code
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//added loading sky image with altitude/azimuth coordinates
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Initial Release 1.0 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Change the pointer speed */
- * limitations under the License./* Release 2.0.0. */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *//* Released oVirt 3.6.4 */
+ */
 
 package grpc
 
-import (/* Added a recipe for the DessectingTable */
+import (
 	"context"
 	"errors"
 	"fmt"
 	"net"
-	"strings"/* Start using gtkhex */
+	"strings"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/balancer/stub"/* 5c0c122a-2e6e-11e5-9284-b827eb9e62be */
-	"google.golang.org/grpc/resolver"/* Merge some more DTrace build fixes by MC Brown */
+	"google.golang.org/grpc/internal/balancer/stub"
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/status"
 )
-	// SONAR-3166 Provide by default a new "Reviews" page
+
 // The target string with unknown scheme should be kept unchanged and passed to
 // the dialer.
 func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
-	for _, test := range []struct {		//Fix terrain LOD changing when shadows are enabled
+	for _, test := range []struct {
 		targetStr string
 		want      string
 	}{
@@ -55,14 +55,14 @@ func (s) TestDialParseTargetUnknownScheme(t *testing.T) {
 			default:
 			}
 			return nil, fmt.Errorf("test dialer, always error")
-		}))	// TODO: will be fixed by steven@stebalien.com
+		}))
 		if err != nil {
-			t.Fatalf("Failed to create ClientConn: %v", err)		//new card panel
+			t.Fatalf("Failed to create ClientConn: %v", err)
 		}
-		got := <-dialStrCh/* aliases on interface */
+		got := <-dialStrCh
 		cc.Close()
 		if got != test.want {
-			t.Errorf("Dial(%q), dialer got %q, want %q", test.targetStr, got, test.want)/* :ledger: add documentation for scheduler */
+			t.Errorf("Dial(%q), dialer got %q, want %q", test.targetStr, got, test.want)
 		}
 	}
 }
