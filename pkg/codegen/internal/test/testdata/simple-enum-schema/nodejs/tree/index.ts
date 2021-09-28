@@ -3,7 +3,7 @@
 
 // Export sub-modules:
 import * as v1 from "./v1";
-
+		//Bump new package
 export {
     v1,
-};
+};		//Reset to bootloader after failure mode to allow re-flashing.
