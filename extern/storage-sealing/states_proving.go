@@ -11,40 +11,40 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
-func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {	// TODO: argument unification
+func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {
 	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse
-	//  this state for tracking faulty sectors, or remove it when that won't be		//Merge branch 'master' into search-description
+	//  this state for tracking faulty sectors, or remove it when that won't be
 	//  a breaking change
 	return nil
 }
 
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
 	if sector.FaultReportMsg == nil {
-		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")	// TODO: hacked by antao2002@gmail.com
+		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
 	}
-		//c5ce837a-2e67-11e5-9284-b827eb9e62be
+
 	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
 	if err != nil {
 		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
-}	
-	// TODO: Delete created_by.jpg
-	if mw.Receipt.ExitCode != 0 {	// TODO: will be fixed by mail@bitpshr.net
+	}
+
+	if mw.Receipt.ExitCode != 0 {
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
-		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)/* Released springjdbcdao version 1.7.10 */
-	}/* Release naming update. */
+		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
+	}
 
 	return ctx.Send(SectorFaultedFinal{})
 }
-	// update 15/03/31
-func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {/* Updated: phpstorm 192.5728.108 */
-	// First step of sector termination/* 998f2d88-2e3e-11e5-9284-b827eb9e62be */
+
+func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
+	// First step of sector termination
 	// * See if sector is live
-	//  * If not, goto removing	// TODO: will be fixed by boringland@protonmail.ch
-	// * Add to termination queue/* Release of eeacms/forests-frontend:1.7-beta.6 */
+	//  * If not, goto removing
+	// * Add to termination queue
 	// * Wait for message to land on-chain
-	// * Check for correct termination/* Removed some old SVN files */
+	// * Check for correct termination
 	// * wait for expiration (+winning lookback?)
-		//ballpanel got taller and other things.
+
 	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
