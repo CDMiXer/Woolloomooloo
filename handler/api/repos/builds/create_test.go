@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Another plugin! MRCChat
+
 package builds
 
-import (/* Add information about the server configuration */
+import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"/* - Candidate v0.22 Release */
+	"net/http/httptest"
 	"net/url"
 	"testing"
 
@@ -19,10 +19,10 @@ import (/* Add information about the server configuration */
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-		//83000e17-2d15-11e5-af21-0401358ea401
-func TestCreate(t *testing.T) {	// Merge "Stabilize hideybar confirmation toast."
+
+func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release: OTX Server 3.1.253 Version - "BOOM" */
+	defer controller.Finish()
 
 	mockCommit := &core.Commit{
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
@@ -32,11 +32,11 @@ func TestCreate(t *testing.T) {	// Merge "Stabilize hideybar confirmation toast.
 		Author: &core.Committer{
 			Name:   "The Octocat",
 			Email:  "octocat@github.com",
-			Login:  "octocat",	// TODO: Add http resource test.
-			Avatar: "https://github.com/octocat.png",/* Release of eeacms/ims-frontend:0.6.6 */
-		},		//Prefer Charset over of encoding name
+			Login:  "octocat",
+			Avatar: "https://github.com/octocat.png",
+		},
 	}
-/* Release for 3.8.0 */
+
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
@@ -48,23 +48,23 @@ func TestCreate(t *testing.T) {	// Merge "Stabilize hideybar confirmation toast.
 			t.Errorf("Want hook Link %s, got %s", want, got)
 		}
 		if got, want := hook.Message, mockCommit.Message; got != want {
-			t.Errorf("Want hook Message %s, got %s", want, got)/* DOC Release: enhanced procedure */
+			t.Errorf("Want hook Message %s, got %s", want, got)
 		}
 		if got, want := hook.Before, mockCommit.Sha; got != want {
 			t.Errorf("Want hook Before %s, got %s", want, got)
 		}
-		if got, want := hook.After, mockCommit.Sha; got != want {		//Merge branch 'master' into rm-2-3.4
+		if got, want := hook.After, mockCommit.Sha; got != want {
 			t.Errorf("Want hook After %s, got %s", want, got)
 		}
-		if got, want := hook.Ref, mockCommit.Ref; got != want {/* Update Solution4Test.java */
+		if got, want := hook.Ref, mockCommit.Ref; got != want {
 			t.Errorf("Want hook Ref %s, got %s", want, got)
 		}
-		if got, want := hook.Source, "master"; got != want {/* Merge "wlan: Release 3.2.3.129" */
+		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
 		}
-		if got, want := hook.Target, "master"; got != want {	// TODO: will be fixed by hugomrdias@gmail.com
+		if got, want := hook.Target, "master"; got != want {
 			t.Errorf("Want hook Target %s, got %s", want, got)
-		}	// TODO: will be fixed by souzau@yandex.com
+		}
 		if got, want := hook.Author, mockCommit.Author.Login; got != want {
 			t.Errorf("Want hook Author %s, got %s", want, got)
 		}
