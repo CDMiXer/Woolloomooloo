@@ -1,7 +1,7 @@
-{
+{		//at the swedish media institute
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",
+        "target": "es6",/* öhm map für meine prehistoric crap */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -13,10 +13,10 @@
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true,
+        "strictNullChecks": true,/* Example drawing centering the car. */
     },
     "files": [
-        "index.ts",
+        "index.ts",		//Added all exercises
     ]
 }
-
+/* Release version 0.1.7. Improved report writer. */
