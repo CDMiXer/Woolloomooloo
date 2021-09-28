@@ -6,21 +6,21 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* [BlinkPrecision] add timer-based example */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* New Liverie GOL */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Suppression du cylindre de la zone de départ
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package testutils	// TODO: Change classes to selectors
+package testutils
 
-import (	// TODO: 00e2f17a-2e41-11e5-9284-b827eb9e62be
+import (
 	"testing"
 
 	"google.golang.org/grpc/balancer"
@@ -33,20 +33,20 @@ func TestIsRoundRobin(t *testing.T) {
 		sc3 = TestSubConns[2]
 	)
 
-	testCases := []struct {	// Changed humidity graph calc
+	testCases := []struct {
 		desc string
 		want []balancer.SubConn
-		got  []balancer.SubConn/* saml: IdP/SAML2: Clarify variable names, fix comments. */
+		got  []balancer.SubConn
 		pass bool
-	}{	// TODO: Ajout de l'URL en dur
+	}{
 		{
-			desc: "0 element",/* Fix typo in spec example section of README */
+			desc: "0 element",
 			want: []balancer.SubConn{},
 			got:  []balancer.SubConn{},
 			pass: true,
-		},/* Release 0.6.18. */
+		},
 		{
-			desc: "1 element RR",	// TODO: hacked by steven@stebalien.com
+			desc: "1 element RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc1},
 			pass: true,
@@ -55,9 +55,9 @@ func TestIsRoundRobin(t *testing.T) {
 			desc: "1 element not RR",
 			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1},
-			pass: false,	// TODO: will be fixed by jon@atack.com
+			pass: false,
 		},
-		{/* Release v0.2.2. */
+		{
 			desc: "2 elements RR",
 			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
@@ -65,13 +65,13 @@ func TestIsRoundRobin(t *testing.T) {
 		},
 		{
 			desc: "2 elements RR different order from want",
-			want: []balancer.SubConn{sc2, sc1},		//e53d2f46-2e3e-11e5-9284-b827eb9e62be
+			want: []balancer.SubConn{sc2, sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
 			pass: true,
 		},
-		{/* Upgrade Final Release */
+		{
 			desc: "2 elements RR not RR, mistake in first iter",
-			want: []balancer.SubConn{sc1, sc2},/* Merge branch 'master' into FEAT_send_Filetree_to_students */
+			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc2, sc1, sc2},
 			pass: false,
 		},
