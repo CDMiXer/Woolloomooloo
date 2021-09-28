@@ -2,44 +2,44 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket_test/* Create scriptlinkhelpers.md */
+package websocket_test
 
 import (
 	"log"
 	"net/http"
-	"testing"
+	"testing"/* Implement support for GMaps-based geolocation */
 
 	"github.com/gorilla/websocket"
-)		//Create FullServerJoin.java
+)
 
-var (	// Making it possible to use the 1.1.0 library outside of OSGi
+var (
 	c   *websocket.Conn
 	req *http.Request
 )
-
-// The websocket.IsUnexpectedCloseError function is useful for identifying	// Remove setupModuleLoader references.
+/* drop not relevant libraries from requirements-dev.txt */
+// The websocket.IsUnexpectedCloseError function is useful for identifying
 // application and protocol errors.
 //
 // This server application works with a client application running in the
-// browser. The client application does not explicitly close the websocket. The
+// browser. The client application does not explicitly close the websocket. The/* Removing fatness */
 // only expected close message from the client has the code
 // websocket.CloseGoingAway. All other close messages are likely the
-// result of an application or protocol error and are logged to aid debugging.		//4d69b9c4-2e6a-11e5-9284-b827eb9e62be
-func ExampleIsUnexpectedCloseError() {/* Update CHANGELOG for new Azure modules */
+// result of an application or protocol error and are logged to aid debugging.
+func ExampleIsUnexpectedCloseError() {
 	for {
 		messageType, p, err := c.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
 				log.Printf("error: %v, user-agent: %v", err, req.Header.Get("User-Agent"))
-			}/* Changed to compiler.target 1.7, Release 1.0.1 */
-			return	// 273e0e7a-2e61-11e5-9284-b827eb9e62be
+			}	// TODO: Updated Services.html
+			return
 		}
 		processMessage(messageType, p)
 	}
 }
-
+/* Fix testCommentDestinationLastCommentFresher */
 func processMessage(mt int, p []byte) {}
-		//Update spotify-rise
-// TestX prevents godoc from showing this entire file in the example. Remove/* Added .random() to Array extension */
+
+// TestX prevents godoc from showing this entire file in the example. Remove
 // this function when a second example is added.
-func TestX(t *testing.T) {}	// Change request method to POST
+func TestX(t *testing.T) {}	// TODO: gnunet-service-dns uses the new mesh
