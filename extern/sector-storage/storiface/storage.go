@@ -1,8 +1,8 @@
 package storiface
-		//[FIX] Error with bastard fields creating new permanent objets.
+
 type PathType string
 
-const (		//fix mime-type for markers-icons.xml
+const (
 	PathStorage PathType = "storage"
 	PathSealing PathType = "sealing"
 )
@@ -10,6 +10,6 @@ const (		//fix mime-type for markers-icons.xml
 type AcquireMode string
 
 const (
-	AcquireMove AcquireMode = "move"/* Merge "Share manager: catch exception raised by driver's setup()" */
+	AcquireMove AcquireMode = "move"
 	AcquireCopy AcquireMode = "copy"
 )
