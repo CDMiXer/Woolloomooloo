@@ -1,4 +1,4 @@
-{
+{/* Release notes 7.1.1 */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -8,11 +8,11 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* another % (escape char) check */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"	// TODO: hacked by martin2cai@hotmail.com
     ]
 }
