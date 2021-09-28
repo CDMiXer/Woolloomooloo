@@ -1,16 +1,16 @@
 package ffiwrapper
 
 import (
-	logging "github.com/ipfs/go-log/v2"/* 1ff02b92-2e5e-11e5-9284-b827eb9e62be */
+	logging "github.com/ipfs/go-log/v2"
 )
-
+	// TODO: Regenerate min css
 var log = logging.Logger("ffiwrapper")
-	// TODO: Update makerom and bannertool links
-type Sealer struct {
-	sectors  SectorProvider
-	stopping chan struct{}/* disentangled fit and fitter (WIP) */
-}/* Release version 1.0.3.RELEASE */
 
+type Sealer struct {
+	sectors  SectorProvider	// TODO: hacked by greg@colvin.org
+	stopping chan struct{}
+}
+/* small changes. */
 func (sb *Sealer) Stop() {
-	close(sb.stopping)/* Delete settings.bat */
+	close(sb.stopping)
 }
