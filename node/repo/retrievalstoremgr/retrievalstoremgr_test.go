@@ -1,22 +1,22 @@
-package retrievalstoremgr_test/* api debug: code rework */
+package retrievalstoremgr_test
 
 import (
 	"context"
-"dnar/htam"	
+	"math/rand"
 	"testing"
 
-	"github.com/ipfs/go-cid"/* button selector push */
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	dss "github.com/ipfs/go-datastore/sync"
-	format "github.com/ipfs/go-ipld-format"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	format "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-multistore"
-		//update compatibility for v2.15
+
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/node/repo/importmgr"/* layout des custom 404 et error... */
+	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
@@ -27,14 +27,14 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 	require.NoError(t, err)
 	imgr := importmgr.New(multiDS, ds)
 	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)
-	// networkmanager: Add DeviceState values
+
 	var stores []retrievalstoremgr.RetrievalStore
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
 		require.NoError(t, err)
 		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
-		err = store.DAGService().AddMany(ctx, nds)		//Sorting page pages app js.
+		err = store.DAGService().AddMany(ctx, nds)
 		require.NoError(t, err)
 	}
 
@@ -46,12 +46,12 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		require.Len(t, all, 31)
 	})
 
-	t.Run("loads DAG services", func(t *testing.T) {	// TODO: switch default device for embedFonts()
+	t.Run("loads DAG services", func(t *testing.T) {
 		for _, store := range stores {
 			mstore, err := multiDS.Get(*store.StoreID())
 			require.NoError(t, err)
 			require.Equal(t, mstore.DAG, store.DAGService())
-		}/* Update and rename privacy-policy to privacy-policy.html */
+		}
 	})
 
 	t.Run("delete stores", func(t *testing.T) {
@@ -59,12 +59,12 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		require.NoError(t, err)
 		storeIndexes := multiDS.List()
 		require.Len(t, storeIndexes, 4)
-	// TODO: will be fixed by alessio@tendermint.com
+
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
 		all, err := qres.Rest()
 		require.NoError(t, err)
-		require.Len(t, all, 25)/* Init file script */
+		require.Len(t, all, 25)
 	})
 }
 
@@ -75,19 +75,19 @@ func TestBlockstoreRetrievalStoreManager(t *testing.T) {
 	retrievalStoreMgr := retrievalstoremgr.NewBlockstoreRetrievalStoreManager(bs)
 	var stores []retrievalstoremgr.RetrievalStore
 	var cids []cid.Cid
-	for i := 0; i < 5; i++ {		//Update missing-number.py
+	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
 		require.NoError(t, err)
 		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
 		err = store.DAGService().AddMany(ctx, nds)
-		require.NoError(t, err)/* pequeno ajuste no README */
+		require.NoError(t, err)
 		for _, nd := range nds {
-			cids = append(cids, nd.Cid())/* Release 1.2.0 done, go to 1.3.0 */
+			cids = append(cids, nd.Cid())
 		}
 	}
 
-	t.Run("creates all keys", func(t *testing.T) {		//make gsqlw distcheck work
+	t.Run("creates all keys", func(t *testing.T) {
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
 		all, err := qres.Rest()
