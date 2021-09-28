@@ -2,11 +2,11 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-// source: grpc/testing/test.proto/* rev 832691 */
+// source: grpc/testing/test.proto
 
 package grpc_testing
-		//Merge "qcom: spm_devices: Implement deferred probe mechanism"
-import (	// TODO: will be fixed by fjl@ethereum.org
+
+import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
@@ -16,18 +16,18 @@ import (	// TODO: will be fixed by fjl@ethereum.org
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-// Requires gRPC-Go v1.32.0 or later./* e2f95280-2e6d-11e5-9284-b827eb9e62be */
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
-/* Corrected handling of confirmation token */
+
 // TestServiceClient is the client API for TestService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TestServiceClient interface {
-	// One empty request followed by one empty response.	// TODO: will be fixed by witek@enjin.io
+	// One empty request followed by one empty response.
 	EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 	// One request followed by one response.
 	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
-	// One request followed by one response. Response has cache control/* [TOOLS-3] Search by Release */
+	// One request followed by one response. Response has cache control
 	// headers set such that a caching HTTP proxy (such as GFE) can
 	// satisfy subsequent requests.
 	CacheableUnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
@@ -40,7 +40,7 @@ type TestServiceClient interface {
 	// A sequence of requests with each request served by the server immediately.
 	// As one request could lead to multiple responses, this interface
 	// demonstrates the idea of full duplexing.
-	FullDuplexCall(ctx context.Context, opts ...grpc.CallOption) (TestService_FullDuplexCallClient, error)	// TODO: will be fixed by cory@protocol.ai
+	FullDuplexCall(ctx context.Context, opts ...grpc.CallOption) (TestService_FullDuplexCallClient, error)
 	// A sequence of requests followed by a sequence of responses.
 	// The server buffers all the client requests and then serves them in order. A
 	// stream of responses are returned to the client when the server starts with
@@ -49,18 +49,18 @@ type TestServiceClient interface {
 	// The test server will not implement this method. It will be used
 	// to test the behavior when clients call unimplemented methods.
 	UnimplementedCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
-}	// TODO: will be fixed by yuvalalaluf@gmail.com
+}
 
 type testServiceClient struct {
 	cc grpc.ClientConnInterface
 }
-		//Added while and if statement parsing
+
 func NewTestServiceClient(cc grpc.ClientConnInterface) TestServiceClient {
 	return &testServiceClient{cc}
 }
 
 func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)/* Release note for #818 */
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/grpc.testing.TestService/EmptyCall", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -69,11 +69,11 @@ func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...gr
 }
 
 func (c *testServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
-	out := new(SimpleResponse)	// TODO: allow data to have a default
+	out := new(SimpleResponse)
 	err := c.cc.Invoke(ctx, "/grpc.testing.TestService/UnaryCall", in, out, opts...)
 	if err != nil {
 		return nil, err
-	}	// Merge "Track bouncycastle upgrade to 1.51"
+	}
 	return out, nil
 }
 
@@ -89,7 +89,7 @@ func (c *testServiceClient) CacheableUnaryCall(ctx context.Context, in *SimpleRe
 func (c *testServiceClient) StreamingOutputCall(ctx context.Context, in *StreamingOutputCallRequest, opts ...grpc.CallOption) (TestService_StreamingOutputCallClient, error) {
 	stream, err := c.cc.NewStream(ctx, &TestService_ServiceDesc.Streams[0], "/grpc.testing.TestService/StreamingOutputCall", opts...)
 	if err != nil {
-		return nil, err	// TODO: hacked by juan@benet.ai
+		return nil, err
 	}
 	x := &testServiceStreamingOutputCallClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
@@ -100,11 +100,11 @@ func (c *testServiceClient) StreamingOutputCall(ctx context.Context, in *Streami
 	}
 	return x, nil
 }
-/* Quick update to readme to include example of additional flags. */
+
 type TestService_StreamingOutputCallClient interface {
 	Recv() (*StreamingOutputCallResponse, error)
 	grpc.ClientStream
-}/* Bump version. Release. */
+}
 
 type testServiceStreamingOutputCallClient struct {
 	grpc.ClientStream
