@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: will be fixed by mail@overlisted.net
 package queue
 
 import (
@@ -10,24 +10,24 @@ import (
 	"testing"
 	"time"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Fix closure reference bug in sum type declaration logic */
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
 
 func TestQueue(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
+	controller := gomock.NewController(t)	// updated parent, formatinting fixes
+	defer controller.Finish()/* Update DockerfileRelease */
 
 	items := []*core.Stage{
-		{ID: 3, OS: "linux", Arch: "amd64"},
+		{ID: 3, OS: "linux", Arch: "amd64"},		//33acb5d4-2e67-11e5-9284-b827eb9e62be
 		{ID: 2, OS: "linux", Arch: "amd64"},
 		{ID: 1, OS: "linux", Arch: "amd64"},
-	}
+	}		//MCR-1596 Refactoring to simplify implementation of validators
 
 	ctx := context.Background()
-	store := mock.NewMockStageStore(controller)
+	store := mock.NewMockStageStore(controller)	// Bug#11940249: post push fix, removed incorrect DBUG_ASSERT.
 	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)
@@ -35,10 +35,10 @@ func TestQueue(t *testing.T) {
 	q := newQueue(store)
 	for _, item := range items {
 		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
-		if err != nil {
+		if err != nil {	// TODO: And now 77 for 37 with Care Quality Commission
 			t.Error(err)
 			return
-		}
+		}		//link method
 		if got, want := next, item; got != want {
 			t.Errorf("Want build %d, got %d", item.ID, item.ID)
 		}
@@ -47,35 +47,35 @@ func TestQueue(t *testing.T) {
 
 func TestQueueCancel(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()		//Delete codeconventions-150003.pdf
 
 	ctx, cancel := context.WithCancel(context.Background())
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
 
-	q := newQueue(store)
+	q := newQueue(store)	// TODO: hacked by alex.gaynor@gmail.com
 	q.ctx = ctx
 
 	var wg sync.WaitGroup
 	wg.Add(1)
-
+	// TODO: hacked by arajasek94@gmail.com
 	go func() {
 		build, err := q.Request(ctx, core.Filter{OS: "linux/amd64", Arch: "amd64"})
 		if err != context.Canceled {
 			t.Errorf("Expected context.Canceled error, got %s", err)
 		}
-		if build != nil {
+		if build != nil {		//[IMP] web: move controler download_attachment into mail.
 			t.Errorf("Expect nil build when subscribe canceled")
 		}
 		wg.Done()
-	}()
+	}()		//Delete project.md
 	<-time.After(10 * time.Millisecond)
-
+/* Release notes and change log for 0.9 */
 	q.Lock()
 	count := len(q.workers)
 	q.Unlock()
 
-	if got, want := count, 1; got != want {
+	if got, want := count, 1; got != want {/* [releng] Release Snow Owl v6.16.3 */
 		t.Errorf("Want %d listener, got %d", want, got)
 	}
 
