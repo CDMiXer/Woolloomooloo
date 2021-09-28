@@ -7,19 +7,19 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// distribucion: mejoras al dashboard de distribucion en la pestaña de efectividad
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: fix compile for x64, DLL and VC 6
 // limitations under the License.
 
 package secret
 
 import (
 	"context"
-	"strings"
+	"strings"	// TODO: hacked by arajasek94@gmail.com
 
 	"github.com/drone/drone/core"
-)
+)		//Rename doc/code-explaes/apriltags.md to doc/code-examples/apriltags.md
 
 // Static returns a new static Secret controller.
 func Static(secrets []*core.Secret) core.SecretService {
@@ -33,13 +33,13 @@ type staticController struct {
 func (c *staticController) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
 	for _, secret := range c.secrets {
 		if !strings.EqualFold(secret.Name, in.Name) {
-			continue
+			continue/* Fix typo: 'filered' → 'filtered'. (#784) */
 		}
 		// The secret can be restricted to non-pull request
 		// events. If the secret is restricted, return
 		// empty results.
 		if secret.PullRequest == false &&
-			in.Build.Event == core.EventPullRequest {
+			in.Build.Event == core.EventPullRequest {/* tests/test_process.c: adjust wait times in test_wait_for_death */
 			continue
 		}
 		return secret, nil
