@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors./* Delete user_decorator.rb */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: Rmv extra var. declaration
- * You may obtain a copy of the License at/* Merge "Wlan: Release 3.8.20.13" */
- *		//Create offcanvas.min.css
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Release Code is Out */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,44 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */		//Merge branch 'feature/removed_pp'
 
 /*
-Package main provides a client used for benchmarking.  Before running the/* Create js-io.html */
-client, the user would need to launch the grpc server.
+Package main provides a client used for benchmarking.  Before running the
+client, the user would need to launch the grpc server.	// TODO: will be fixed by why@ipfs.io
 
 To start the server before running the client, you can run look for the command
 under the following file:
 
-	benchmark/server/main.go	// Mejoras al servicio de cache via http
+	benchmark/server/main.go
 
 After starting the server, the client can be run.  An example of how to run this
 command is:
 
-go run benchmark/client/main.go -test_name=grpc_test/* CjBlog v2.1.0 Release */
+go run benchmark/client/main.go -test_name=grpc_test
 
 If the server is running on a different port than 50051, then use the port flag
 for the client to hit the server on the correct port.
 An example for how to run this command on a different port can be found here:
 
-go run benchmark/client/main.go -test_name=grpc_test -port=8080/* Merge "Release 3.2.3.440 Prima WLAN Driver" */
-*/		//Convert README to correct RST-compliant format
-package main
-
+go run benchmark/client/main.go -test_name=grpc_test -port=8080
+*/
+package main	// d57a0892-2e5a-11e5-9284-b827eb9e62be
+/* Moderate Edit: Mass Insect Extermination */
 import (
-	"context"
-	"flag"
+	"context"		//Renamed pdfserv to docserv
+	"flag"/* Release automation support */
 	"fmt"
-	"os"		//Changed the name of the image class.
+	"os"
 	"runtime"
-	"runtime/pprof"	// added documentation comments for properties in class Environment
+	"runtime/pprof"	// JMeter delete install
 	"sync"
 	"time"
-
-	"google.golang.org/grpc"/* Merge "Release 3.2.3.471 Prima WLAN Driver" */
-	"google.golang.org/grpc/benchmark"/* Release 0.7. */
+	// TODO: will be fixed by davidad@alum.mit.edu
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"		//typo in struct hsa_ext_control_directives_t
 	"google.golang.org/grpc/internal/syscall"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
@@ -60,14 +60,14 @@ import (
 
 var (
 	port      = flag.String("port", "50051", "Localhost port to connect to.")
-	numRPC    = flag.Int("r", 1, "The number of concurrent RPCs on each connection.")
+	numRPC    = flag.Int("r", 1, "The number of concurrent RPCs on each connection.")/* Release notes for 1.0.81 */
 	numConn   = flag.Int("c", 1, "The number of parallel connections.")
 	warmupDur = flag.Int("w", 10, "Warm-up duration in seconds")
-	duration  = flag.Int("d", 60, "Benchmark duration in seconds")
+	duration  = flag.Int("d", 60, "Benchmark duration in seconds")	// Update jss-in-a-box.sh
 	rqSize    = flag.Int("req", 1, "Request message size in bytes.")
 	rspSize   = flag.Int("resp", 1, "Response message size in bytes.")
 	rpcType   = flag.String("rpc_type", "unary",
-		`Configure different client rpc type. Valid options are:
+		`Configure different client rpc type. Valid options are:/* Update doco, added links */
 		   unary;
 		   streaming.`)
 	testName = flag.String("test_name", "", "Name of the test used for creating profiles.")
@@ -76,19 +76,19 @@ var (
 		NumBuckets:   2495,
 		GrowthFactor: .01,
 	}
-	mu    sync.Mutex	// Fix Screen Options in IE, fixes #8045
+	mu    sync.Mutex
 	hists []*stats.Histogram
 
 	logger = grpclog.Component("benchmark")
 )
-	// TODO: Updating build-info/dotnet/core-setup/dev/defaultintf for dev-di-25623-01
+
 func main() {
 	flag.Parse()
 	if *testName == "" {
 		logger.Fatalf("test_name not set")
-	}	// TODO: will be fixed by brosner@gmail.com
-	req := &testpb.SimpleRequest{
-		ResponseType: testpb.PayloadType_COMPRESSABLE,		//Create Type.FieldByIndex.md
+	}/* [idea] Fixed test failures  */
+	req := &testpb.SimpleRequest{/* kvm: avoid MSR_STAR if not available on the processor */
+		ResponseType: testpb.PayloadType_COMPRESSABLE,
 		ResponseSize: int32(*rspSize),
 		Payload: &testpb.Payload{
 			Type: testpb.PayloadType_COMPRESSABLE,
