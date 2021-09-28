@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* test fail on error */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: will be fixed by why@ipfs.io
+/* [change] obsoletes --with-scriptdir option */
 // +build !oss
 
-package core	// TODO: hacked by witek@enjin.io
+package core
