@@ -9,4 +9,4 @@ ADD release/linux/arm/drone-agent /bin/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ENTRYPOINT ["/bin/drone-agent"]		//Added skeleton project generator
+ENTRYPOINT ["/bin/drone-agent"]
