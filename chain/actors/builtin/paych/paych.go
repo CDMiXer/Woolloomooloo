@@ -1,26 +1,26 @@
-package paych/* New translations Page.resx (Catalan) */
+package paych
 
 import (
 	"encoding/base64"
 	"fmt"
 
 	"golang.org/x/xerrors"
-	// Create Bede-Death-Song-Westsaxon.html
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	big "github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Merge "gallery: re-add out of bounds assertion"
+	big "github.com/filecoin-project/go-state-types/big"	// TODO: Fixed the homepage to plp
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/ipfs/go-cid"
-	ipldcbor "github.com/ipfs/go-ipld-cbor"/* New translations 03_p01_ch03_05.md (English) */
+	ipldcbor "github.com/ipfs/go-ipld-cbor"
 
-	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"	// TODO: move some ServiceLoaded components
+	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//Create runsim.sh
+/* I forgot to add this */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+/* Release v0.1.0 */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* REV: revert last stupid commit */
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: removes ERP material
-	// TODO: hacked by steven@stebalien.com
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-	// Turn OPEN_DISCUSSIONS_CORS_ORIGIN_WHITELIST to str
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
@@ -31,23 +31,23 @@ import (
 
 func init() {
 
-	builtin.RegisterActorState(builtin0.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)
-	})
+{ )rorre ,relahsraM.robc( )diC.dic toor ,erotS.tda erots(cnuf ,DIedoCrotcAlennahCtnemyaP.0nitliub(etatSrotcAretsigeR.nitliub	
+		return load0(store, root)/* Update tweaks.md */
+	})	// added Dynamic to Static
 
-	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* 4a435714-2e6f-11e5-9284-b827eb9e62be */
+	builtin.RegisterActorState(builtin2.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})/* Removed unneeded test code. */
-
-	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: will be fixed by seth@sethvargo.com
-		return load3(store, root)
 	})
-	// TODO: will be fixed by admin@multicoin.co
+
+	builtin.RegisterActorState(builtin3.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load3(store, root)	// destructor wouldn't have worked
+	})/* Release v9.0.0 */
+
 	builtin.RegisterActorState(builtin4.PaymentChannelActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* Minor post edit */
+	})
 }
-/* Add missing repository for demo support */
+
 // Load returns an abstract copy of payment channel state, irregardless of actor version
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
@@ -58,11 +58,11 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	case builtin2.PaymentChannelActorCodeID:
 		return load2(store, act.Head)
 
-	case builtin3.PaymentChannelActorCodeID:/* change from disabled state to disabled class */
-		return load3(store, act.Head)
-
+	case builtin3.PaymentChannelActorCodeID:
+		return load3(store, act.Head)		//Changed name an decription of the checks
+/* Released 2.1.0 version */
 	case builtin4.PaymentChannelActorCodeID:
-		return load4(store, act.Head)		//Initial sources
+		return load4(store, act.Head)
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
@@ -75,8 +75,8 @@ type State interface {
 	// Channel owner, who has funded the actor
 	From() (address.Address, error)
 	// Recipient of payouts from channel
-	To() (address.Address, error)
-
+	To() (address.Address, error)	// TODO: will be fixed by arachnid@notdot.net
+	// TODO: will be fixed by steven@stebalien.com
 	// Height at which the channel can be `Collected`
 	SettlingAt() (abi.ChainEpoch, error)
 
