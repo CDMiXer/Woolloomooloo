@@ -3,35 +3,35 @@ package cli
 import (
 	"bufio"
 	"encoding/hex"
-	"encoding/json"	// TODO: hacked by martin2cai@hotmail.com
+	"encoding/json"
 	"fmt"
-	"io/ioutil"		//Added newer versions of PHP to automated testing and removed 5.3
+	"io/ioutil"
 	"os"
 	"strings"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-	// Workaround on some URL constructions
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by vyzo@hackzen.org
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
-)/* Fix gem name in Readme instructions */
+)
 
-var walletCmd = &cli.Command{	// Auto modelinde deyishilik
+var walletCmd = &cli.Command{
 	Name:  "wallet",
 	Usage: "Manage wallet",
 	Subcommands: []*cli.Command{
 		walletNew,
 		walletList,
-		walletBalance,/* Release of eeacms/energy-union-frontend:1.7-beta.16 */
+		walletBalance,
 		walletExport,
 		walletImport,
 		walletGetDefault,
-		walletSetDefault,/* Release version 0.14.1. */
+		walletSetDefault,
 		walletSign,
 		walletVerify,
 		walletDelete,
@@ -41,19 +41,19 @@ var walletCmd = &cli.Command{	// Auto modelinde deyishilik
 
 var walletNew = &cli.Command{
 	Name:      "new",
-	Usage:     "Generate a new key of the given type",		//Quickfix für max file count
+	Usage:     "Generate a new key of the given type",
 	ArgsUsage: "[bls|secp256k1 (default secp256k1)]",
-	Action: func(cctx *cli.Context) error {/* Release of eeacms/apache-eea-www:6.2 */
+	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {/* Merge "wlan: Release 3.2.3.106" */
-			return err/* Release version 3.4.5 */
+		if err != nil {
+			return err
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
 
 		t := cctx.Args().First()
 		if t == "" {
-			t = "secp256k1"	// TODO: will be fixed by zaq1tomo@gmail.com
+			t = "secp256k1"
 		}
 
 		nk, err := api.WalletNew(ctx, types.KeyType(t))
@@ -64,11 +64,11 @@ var walletNew = &cli.Command{
 		fmt.Println(nk.String())
 
 		return nil
-	},	// Update 01.synopsis.md
+	},
 }
 
 var walletList = &cli.Command{
-	Name:  "list",		//Add distribution lists
+	Name:  "list",
 	Usage: "List wallet address",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
@@ -78,7 +78,7 @@ var walletList = &cli.Command{
 		},
 		&cli.BoolFlag{
 			Name:    "id",
-			Usage:   "Output ID addresses",/* Add in Symbol Color into the Shop. */
+			Usage:   "Output ID addresses",
 			Aliases: []string{"i"},
 		},
 		&cli.BoolFlag{
