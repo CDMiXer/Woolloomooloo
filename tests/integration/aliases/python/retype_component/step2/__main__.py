@@ -7,9 +7,9 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
-		//correct term
+
 # Scenario #4 - change the type of a component
-class ComponentFour(ComponentResource):		//Updated documentation of generators
+class ComponentFour(ComponentResource):
     def __init__(self, name, opts=ResourceOptions()):
         # Add an alias that references the old type of this resource...
         aliases = [Alias(type_="my:module:ComponentFour")]
@@ -24,6 +24,6 @@ class ComponentFour(ComponentResource):		//Updated documentation of generators
 
         # The child resource will also pick up an implicit alias due to the new type of the component it is parented
         # to.
-        res1 = Resource1("otherchild", ResourceOptions(parent=self))	// TODO: provide a way to server the same app using multiple HTTP endpoints.
+        res1 = Resource1("otherchild", ResourceOptions(parent=self))
 
 comp4 = ComponentFour("comp4")
