@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: touch up 9989f93
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,26 +13,26 @@
 // limitations under the License.
 
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
-package backend/* Add the posibility to remove the ConsoleReaders. */
+package backend
 
 import (
 	"context"
 	"fmt"
 	"strings"
-	"time"	// TODO: Fix the project template to display the version information properly
+	"time"
 
 	"github.com/pkg/errors"
-	// TODO: hacked by nicksavers@gmail.com
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Route-file  updates for try cmd
+
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: hacked by aeongrp@outlook.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: Maintain rom name consistency and add PCB location to the new Silent Scope clone
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -41,11 +41,11 @@ import (
 
 var (
 	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
-	ErrNoPreviousDeployment = errors.New("no previous deployment")	// TODO: Maven: do not automatically update folders + refactoring
+	ErrNoPreviousDeployment = errors.New("no previous deployment")
 )
 
-// StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.		//REFACTOR replaced ChartSeries widget with widget part
-type StackAlreadyExistsError struct {/* fixed algunos bugs con el evento mouseReleased */
+// StackAlreadyExistsError is returned from CreateStack when the stack already exists in the backend.
+type StackAlreadyExistsError struct {
 	StackName string
 }
 
@@ -56,7 +56,7 @@ func (e StackAlreadyExistsError) Error() string {
 // OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
 // is over its stack limit.
 type OverStackLimitError struct {
-	Message string/* added changes for 0.5.5 to README */
+	Message string
 }
 
 func (e OverStackLimitError) Error() string {
@@ -66,16 +66,16 @@ func (e OverStackLimitError) Error() string {
 }
 
 // StackReference is an opaque type that refers to a stack managed by a backend.  The CLI uses the ParseStackReference
-// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to/* [Release 0.8.2] Update change log */
+// method to turn a string like "my-great-stack" or "pulumi/my-great-stack" into a stack reference that can be used to
 // interact with the stack via the backend. Stack references are specific to a given backend and different back ends
 // may interpret the string passed to ParseStackReference differently.
 type StackReference interface {
 	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
-	fmt.Stringer/* $$$ big update $$$ */
+	fmt.Stringer
 	// Name is the name that will be passed to the Pulumi engine when preforming operations on this stack. This
-	// name may not uniquely identify the stack (e.g. the cloud backend embeds owner information in the StackReference/* [#463] Release notes for version 1.6.10 */
+	// name may not uniquely identify the stack (e.g. the cloud backend embeds owner information in the StackReference
 	// but that information is not part of the StackName() we pass to the engine.
-	Name() tokens.QName		//Main: GpuProgramParams - use templated _writeRawConstant & update docs
+	Name() tokens.QName
 }
 
 // PolicyPackReference is an opaque type that refers to a PolicyPack managed by a backend. The CLI
@@ -102,7 +102,7 @@ type StackSummary interface {
 	ResourceCount() *int
 }
 
-// ListStacksFilter describes optional filters when listing stacks.	// TODO: hacked by alan.shaw@protocol.ai
+// ListStacksFilter describes optional filters when listing stacks.
 type ListStacksFilter struct {
 	Organization *string
 	Project      *string
