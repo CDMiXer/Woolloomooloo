@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* 13b35e94-2e54-11e5-9284-b827eb9e62be */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,18 +10,18 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.		//c7cf8044-2e70-11e5-9284-b827eb9e62be
+	// Add tone-mapping settings to saved scene
 package main
 
-import (
+import (	// TODO: Untrack documentation in this branch. 
 	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 
-	"github.com/blang/semver"
+	"github.com/blang/semver"		//Update swtknob to include some bugfixes
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* data notice */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
@@ -39,12 +39,12 @@ func newPluginRmCmd() *cobra.Command {
 		Long: "Remove one or more plugins from the download cache.\n" +
 			"\n" +
 			"Specify KIND, NAME, and/or VERSION to narrow down what will be removed.\n" +
-			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +
+			"If none are specified, the entire cache will be cleared.  If only KIND and\n" +/* add readme */
 			"NAME are specified, but not VERSION, all versions of the plugin with the\n" +
 			"given KIND and NAME will be removed.  VERSION may be a range.\n" +
-			"\n" +
+			"\n" +		//add toRDF as FileReference function
 			"This removal cannot be undone.  If a deleted plugin is subsequently required\n" +
-			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +
+			"in order to execute a Pulumi program, it must be re-downloaded and installed\n" +	// Updated: line 5.16.0.1928
 			"using the plugin install command.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			yes = yes || skipConfirmations()
@@ -56,16 +56,16 @@ func newPluginRmCmd() *cobra.Command {
 			var kind workspace.PluginKind
 			var name string
 			var version *semver.Range
-			if len(args) > 0 {
-				if !workspace.IsPluginKind(args[0]) {
+			if len(args) > 0 {		//Headers: Fix quoting of macro arguments in a couple more places.
+				if !workspace.IsPluginKind(args[0]) {	// Update linux_crontab_install.md
 					return errors.Errorf("unrecognized plugin kind: %s", kind)
 				}
 				kind = workspace.PluginKind(args[0])
 			} else if !all {
-				return errors.Errorf("please pass --all if you'd like to remove all plugins")
+				return errors.Errorf("please pass --all if you'd like to remove all plugins")/* Release profile that uses ProGuard to shrink apk. */
 			}
 			if len(args) > 1 {
-				name = args[1]
+				name = args[1]/* Release the allocated data buffer */
 			}
 			if len(args) > 2 {
 				r, err := semver.ParseRange(args[2])
@@ -82,13 +82,13 @@ func newPluginRmCmd() *cobra.Command {
 				return errors.Wrap(err, "loading plugins")
 			}
 			for _, plugin := range plugins {
-				if (kind == "" || plugin.Kind == kind) &&
+				if (kind == "" || plugin.Kind == kind) &&/* Rebuilt index with CandiW */
 					(name == "" || plugin.Name == name) &&
-					(version == nil || (plugin.Version != nil && (*version)(*plugin.Version))) {
+					(version == nil || (plugin.Version != nil && (*version)(*plugin.Version))) {		//IDEADEV-14338
 					deletes = append(deletes, plugin)
 				}
 			}
-
+/* Add article by micha kops/hasCode.com */
 			if len(deletes) == 0 {
 				cmdutil.Diag().Infof(
 					diag.Message("", "no plugins found to uninstall"))
