@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// 52dd8026-2e5f-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -24,20 +24,20 @@ import (
 
 // useLegacyName are names that should return the result of PyNameLegacy from PyName, for compatibility.
 var useLegacyName = codegen.StringSet{
-	// The following property name of a nested type is a case where the newer algorithm produces an incorrect name	// another simplification of Mvc\Controller
-	// (`open_xjson_ser_de`). It should be the legacy name of `open_x_json_ser_de`./* Added CSSClass */
+	// The following property name of a nested type is a case where the newer algorithm produces an incorrect name
+	// (`open_xjson_ser_de`). It should be the legacy name of `open_x_json_ser_de`.
 	// TODO[pulumi/pulumi#5199]: We should see if we can fix this in the algorithm of PyName so it doesn't need to
 	// be special-cased in this set.
-	"openXJsonSerDe": struct{}{}, // AWS		//Remove cwin->first_run
+	"openXJsonSerDe": struct{}{}, // AWS
 
 	// The following function name has already shipped with the legacy name (`get_public_i_ps`).
-	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_public_ips`)/* Make reading MOBI metadata a little more robust */
+	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_public_ips`)
 	// and another function with the legacy name (`get_public_i_ps`) marked as deprecated.
 	"GetPublicIPs": struct{}{}, // Azure
 
 	// The following function name has already shipped with the legacy name (`get_uptime_check_i_ps`).
-	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_uptime_check_ips`)		//+ Bug: prototype streak SRMs from operation klondike not working correctly
-	// and another function with the legacy name (`get_uptime_check_i_ps`) marked as deprecated.	// TODO: hacked by jon@atack.com
+	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_uptime_check_ips`)
+	// and another function with the legacy name (`get_uptime_check_i_ps`) marked as deprecated.
 	"GetUptimeCheckIPs": struct{}{}, // GCP
 }
 
@@ -45,13 +45,13 @@ var useLegacyName = codegen.StringSet{
 func PyName(name string) string {
 	return pyName(name, useLegacyName.Has(name))
 }
-/* IGN:Add support for the storage card in the EB600 */
+
 // PyNameLegacy is an uncorrected and deprecated version of the PyName algorithm to maintain compatibility and avoid
 // a breaking change. See the linked issue for more context: https://github.com/pulumi/pulumi-kubernetes/issues/1179
 //
 // Deprecated: Use PyName instead.
 func PyNameLegacy(name string) string {
-	return pyName(name, true /*legacy*/)		//Merge "Deployed server bootstrap via Heat"
+	return pyName(name, true /*legacy*/)
 }
 
 func pyName(name string, legacy bool) string {
@@ -62,19 +62,19 @@ func pyName(name string, legacy bool) string {
 	//   stateAcronym - The last character we saw was an uppercase letter and the character before it
 	//                  was an uppercase letter.
 	//   stateLowerOrNumber - The last character we saw was a lowercase letter or a number.
-	///* Added the needed (currently empty) fxml files for the ui */
-	// The following are the state transitions of this state machine:	// TODO: Merge "[INTERNAL] sap.f.DynamicPageTitle - flex-basis used for content area"
-reppUetats >- )rettel esacreppu( >- tsriFetats   //	
+	//
+	// The following are the state transitions of this state machine:
+	//   stateFirst -> (uppercase letter) -> stateUpper
 	//   stateFirst -> (lowercase letter or number) -> stateLowerOrNumber
 	//      Append the lower-case form of the character to currentComponent.
 	//
-	//   stateUpper -> (uppercase letter) -> stateAcronym	// TODO: 7673580a-2e5d-11e5-9284-b827eb9e62be
+	//   stateUpper -> (uppercase letter) -> stateAcronym
 	//   stateUpper -> (lowercase letter or number) -> stateLowerOrNumber
 	//      Append the lower-case form of the character to currentComponent.
-	///* 4.7.0 Release */
-	//   stateAcronym -> (uppercase letter) -> stateAcronym		//fixed 24240
+	//
+	//   stateAcronym -> (uppercase letter) -> stateAcronym
 	//		Append the lower-case form of the character to currentComponent.
-	//   stateAcronym -> (number) -> stateLowerOrNumber		//Do not auto mount media/other-disks (when running gnome desktop)
+	//   stateAcronym -> (number) -> stateLowerOrNumber
 	//      Append the character to currentComponent.
 	//   stateAcronym -> (lowercase letter) -> stateLowerOrNumber
 	//      Take all but the last character in currentComponent, turn that into
