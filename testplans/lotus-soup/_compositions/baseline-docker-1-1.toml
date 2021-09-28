@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Fix two typos in BAK programme */
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,47 +9,47 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]	// [maven-release-plugin] prepare release HudsonWindmillPlugin-1.0
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* [artifactory-release] Release version 0.5.0.RELEASE */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//0dc9121c-2e4a-11e5-9284-b827eb9e62be
 
 [global.build_config]
-  enable_go_build_cache = true
-/* Corrected JSDoc */
+  enable_go_build_cache = true/* Remove *.nl_zh from rcp.nls.feature 。 */
+/* Released 10.1 */
 [global.run.test_params]
   clients = "1"
-  miners = "1"	// 6bb624d2-2e4a-11e5-9284-b827eb9e62be
+  miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* LoadWriterDae: fixed redundant warning. */
-  sectors = "10"
-  random_beacon_type = "mock"/* Release version: 1.3.2 */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "10"	// TODO: will be fixed by arajasek94@gmail.com
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]
+  [groups.instances]	// Release of eeacms/www-devel:20.4.21
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release 0.039. Added MMC5 and TQROM mappers. */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"/* Released BCO 2.4.2 and Anyedit 2.4.5 */
-  [groups.instances]	// Fix some brokenness.
+  id = "miners"
+  [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]		//Update and rename en.json to pt.json
+    percentage = 0.0	// Update flake8-quotes from 2.1.0 to 2.1.1
+  [groups.run]	// TODO: rev 472508
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"/* Merge "Wlan: Release 3.8.20.1" */
 
 [[groups]]
-  id = "clients"	// TODO: hacked by magik6k@gmail.com
+  id = "clients"
   [groups.instances]
-    count = 1	// TODO: Rebuilt index with fabrizio9
-    percentage = 0.0
-  [groups.run]/* porting over code */
+    count = 1	// updated url to see if changes are reflected
+    percentage = 0.0		//Changed zlib to 1.2.8
+  [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: hacked by steven@stebalien.com
+      role = "client"	// TODO: hacked by juan@benet.ai
