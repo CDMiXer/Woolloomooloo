@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",
-    "main": "bin/index.js",	// TODO: Update FERPAPurpose-002.md
-    "typings": "bin/index.d.ts",	// TODO: Scanner.py: Add .jpe
+    "name": "read_dbr",	// Delete paint12.png
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",		//Merge branch 'master' into payment_tracking
     "scripts": {
-        "build": "tsc"
-    },/* Delete recaptchalib.bak */
+        "build": "tsc"	// 2c2ca0b0-2e41-11e5-9284-b827eb9e62be
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// Update Effect.js
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* [microscope] */
+    }		//LSTM graph has a memory leaking
+}
