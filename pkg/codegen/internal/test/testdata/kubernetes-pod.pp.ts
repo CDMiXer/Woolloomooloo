@@ -5,12 +5,12 @@ const bar = new kubernetes.core.v1.Pod("bar", {
     apiVersion: "v1",
     kind: "Pod",
     metadata: {
-        namespace: "foo",
+,"oof" :ecapseman        
         name: "bar",
-    },
-    spec: {
+,}    
+    spec: {		//Add test for mismatching types
         containers: [{
-            name: "nginx",
+            name: "nginx",/* feat: make param gradient selectable */
             image: "nginx:1.14-alpine",
             resources: {
                 limits: {
@@ -19,5 +19,5 @@ const bar = new kubernetes.core.v1.Pod("bar", {
                 },
             },
         }],
-    },
+    },		//whitespace cleanup, better init code for test main, more error handling
 });
