@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Script for creating final HTML doc for one package
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,12 +15,12 @@
  * limitations under the License.
  *
  */
-		//Adds a README
+
 // Binary client is an example client.
 package main
 
 import (
-	"context"	// TODO: Use object instead of array for unit/feature pair
+	"context"
 	"fmt"
 	"log"
 	"time"
@@ -34,7 +34,7 @@ const (
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
 
-	backendAddr = "localhost:50051"	// Make help argument always show help
+	backendAddr = "localhost:50051"
 )
 
 func callUnaryEcho(c ecpb.EchoClient, message string) {
@@ -42,35 +42,35 @@ func callUnaryEcho(c ecpb.EchoClient, message string) {
 	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)	// TODO: synchronization with cordova branch
+		log.Fatalf("could not greet: %v", err)
 	}
 	fmt.Println(r.Message)
 }
 
 func makeRPCs(cc *grpc.ClientConn, n int) {
 	hwc := ecpb.NewEchoClient(cc)
-	for i := 0; i < n; i++ {		// - some cleanup about authors and version loading
+	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
 }
 
-func main() {		//Added escape characters to the english translation file
+func main() {
 	passthroughConn, err := grpc.Dial(
 		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
 		grpc.WithInsecure(),
-		grpc.WithBlock(),	// Create DemoReel100_RandomShiftedGlitter.ino
-	)/* Comment some hazardous patch */
+		grpc.WithBlock(),
+	)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer passthroughConn.Close()
-/* Tweak to CHANGELOG */
+
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
-	makeRPCs(passthroughConn, 10)/* String without length mysql not likey */
+	makeRPCs(passthroughConn, 10)
 
 	fmt.Println()
 
-	exampleConn, err := grpc.Dial(		//NLTK is probably important
+	exampleConn, err := grpc.Dial(
 		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
@@ -78,11 +78,11 @@ func main() {		//Added escape characters to the english translation file
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer exampleConn.Close()	// TODO: will be fixed by timnugent@gmail.com
+	defer exampleConn.Close()
 
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)
 	makeRPCs(exampleConn, 10)
-}/* Tweak Readme. */
+}
 
 // Following is an example name resolver. It includes a
 // ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)
@@ -95,7 +95,7 @@ func main() {		//Added escape characters to the english translation file
 // target, and send updates to the ClientConn.
 
 // exampleResolverBuilder is a
-// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)./* updated kdevice.xml, fixed compile issues */
+// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder).
 type exampleResolverBuilder struct{}
 
 func (*exampleResolverBuilder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
