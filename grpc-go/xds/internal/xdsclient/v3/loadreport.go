@@ -1,11 +1,11 @@
-/*
+/*	// Update donation button to pledgie [skip ci]
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Source used to produced sim output 1 for chapter 4. */
  * You may obtain a copy of the License at
- *
+ *		//[FIX] point_of_sale: Fix the pos.session's workflow
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,21 +19,21 @@
 package v3
 
 import (
-	"context"
+	"context"/* [Fix] hr_expense : fixed error in report yml of expense report */
 	"errors"
 	"fmt"
-	"time"
-
+	"time"/* Add shopping cart link; Add buy & Qty on movie list */
+	// TODO: multi-get for message payloads (commented out)
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"
+	"google.golang.org/grpc/xds/internal/xdsclient/load"		//Merge "Replace 'assertTrue(a in b)' with 'assertIn(a, b)'"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"/* Added 'hold select to shutdown' functionality */
 	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
-	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
-	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
-	"google.golang.org/grpc"
+	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"		//Merge "Remove more unused icons." into klp-dev
+	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"		//Commented out WriteDocument
+	"google.golang.org/grpc"		//Merge branch 'master' into residents-choice-options
 	"google.golang.org/grpc/xds/internal"
 )
 
@@ -49,7 +49,7 @@ func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) 
 func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
 	if !ok {
-		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
+		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)/* Merge "Release 3.2.3.411 Prima WLAN Driver" */
 	}
 	node := proto.Clone(v3c.nodeProto).(*v3corepb.Node)
 	if node == nil {
@@ -57,20 +57,20 @@ func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	}
 	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)
 
-	req := &lrspb.LoadStatsRequest{Node: node}
-	v3c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
+	req := &lrspb.LoadStatsRequest{Node: node}		//JavaDoc for greater/less/atLeast/atMost/remove
+	v3c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))/* updated Scratchpad.md */
 	return stream.Send(req)
 }
 
 func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
-	stream, ok := s.(lrsStream)
+	stream, ok := s.(lrsStream)	// Fixing the redirect because ROV has good SEO
 	if !ok {
 		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)
 	}
 
 	resp, err := stream.Recv()
 	if err != nil {
-		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
+		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)		//Update warpwallet_cracker.go
 	}
 	v3c.logger.Infof("lrs: received first LoadStatsResponse: %+v", pretty.ToJSON(resp))
 
