@@ -2,11 +2,11 @@
     "name": "minimal",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* a8ef8e8a-2e52-11e5-9284-b827eb9e62be */
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* [artifactory-release] Release version 0.8.5.RELEASE */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
