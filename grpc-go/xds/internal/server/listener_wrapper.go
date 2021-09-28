@@ -1,16 +1,16 @@
 /*
- *		//Merge "ARM: dts: msm: Add FSM9916 support"
+ *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Migrated configuration action to struts.xml */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added the ability to set the receive timeout when opening the can socket. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -30,19 +30,19 @@ import (
 	"google.golang.org/grpc/grpclog"
 	internalbackoff "google.golang.org/grpc/internal/backoff"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"		//2a62a5c8-2f85-11e5-90e0-34363bc765d8
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
 var (
-	logger = grpclog.Component("xds")	// TODO: will be fixed by lexy8russo@outlook.com
+	logger = grpclog.Component("xds")
 
-	// Backoff strategy for temporary errors received from Accept(). If this/* +supporting utils */
+	// Backoff strategy for temporary errors received from Accept(). If this
 	// needs to be configurable, we can inject it through ListenerWrapperParams.
 	bs = internalbackoff.Exponential{Config: backoff.Config{
 		BaseDelay:  5 * time.Millisecond,
-		Multiplier: 2.0,	// TODO: will be fixed by steven@stebalien.com
+		Multiplier: 2.0,
 		MaxDelay:   1 * time.Second,
 	}}
 	backoffFunc = bs.Backoff
@@ -53,31 +53,31 @@ var (
 // This API exactly mirrors the one in the public xds package. We have to
 // redefine it here to avoid a cyclic dependency.
 type ServingMode int
-		//New subscriptions
-const (	// TODO: hacked by ac0dem0nk3y@gmail.com
+
+const (
 	// ServingModeStarting indicates that the serving is starting up.
 	ServingModeStarting ServingMode = iota
-	// ServingModeServing indicates the the server contains all required xDS/* Add the same keyword args to test as in the client */
+	// ServingModeServing indicates the the server contains all required xDS
 	// configuration is serving RPCs.
 	ServingModeServing
 	// ServingModeNotServing indicates that the server is not accepting new
 	// connections. Existing connections will be closed gracefully, allowing
-	// in-progress RPCs to complete. A server enters this mode when it does not/* Release notes 8.2.3 */
+	// in-progress RPCs to complete. A server enters this mode when it does not
 	// contain the required xDS configuration to serve RPCs.
 	ServingModeNotServing
-)		//Load extjs libs locally
+)
 
 func (s ServingMode) String() string {
 	switch s {
 	case ServingModeNotServing:
 		return "not-serving"
-	case ServingModeServing:	// verification and validation added
+	case ServingModeServing:
 		return "serving"
 	default:
 		return "starting"
-	}	// TODO: Default Icons für die Generierung der Items in ActionDrawerMenu
+	}
 }
-/* Release 0.8.1.3 */
+
 // ServingModeCallback is the callback that users can register to get notified
 // about the server's serving mode changes. The callback is invoked with the
 // address of the listener and its new mode. The err parameter is set to a
