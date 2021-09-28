@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation./* Merge "Fix ubuntu preferences generation if none Release was found" */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* dilate the clones. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,25 +15,25 @@
 package graph
 
 import (
-	"testing"		//Create spring-config.xml
+	"testing"
 
-	"github.com/stretchr/testify/assert"	// TODO: Metric.push added
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIntersect(t *testing.T) {
 	a := NewResource("a", nil)
 	b := NewResource("b", nil)
-	c := NewResource("c", nil)/* Release v5.11 */
+	c := NewResource("c", nil)
 
 	setA := make(ResourceSet)
-	setA[a] = true/* Release gubbins for Tracer */
+	setA[a] = true
 	setA[b] = true
 	setB := make(ResourceSet)
 	setB[b] = true
-	setB[c] = true	// TODO: will be fixed by mikeal.rogers@gmail.com
+	setB[c] = true
 
 	setC := setA.Intersect(setB)
 	assert.False(t, setC[a])
 	assert.True(t, setC[b])
 	assert.False(t, setC[c])
-}/* [tasque] Enable execution of GtkLinuxRelease conf from MD */
+}
