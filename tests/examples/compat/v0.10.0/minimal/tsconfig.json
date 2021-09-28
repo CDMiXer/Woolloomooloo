@@ -1,20 +1,20 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {		//uploaded fully functional prototype
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",	// Delete Yahtzee Analysis.ipynb
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "module": "commonjs",		//removed region from config.yaml
+        "moduleResolution": "node",	// TODO: hacked by magik6k@gmail.com
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//Update chadu
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+        "noImplicitReturns": true,		//Finished Create and Read of records
+        "forceConsistentCasingInFileNames": true/* Bumped Version for Release */
+    },/* @Release [io7m-jcanephora-0.9.4] */
+    "files": [/* Use hashed passwords for ftp service */
         "index.ts"
     ]
 }
