@@ -11,7 +11,7 @@ import (
 
 func main() {
 	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
-		sealing.Piece{},		//[#43261665] Slight adjust to volunteer show page-added 15px to .media 
+		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
 		sealing.SectorInfo{},
@@ -20,5 +20,5 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
-	}	// update dogemate
-}		//Delete Test3.xml
+	}
+}
