@@ -1,9 +1,9 @@
 // +build go1.12
-	// TODO: hacked by timnugent@gmail.com
-/*		//Openrefine: Rename & update to latest dev release
+
+/*
  * Copyright 2020 gRPC authors.
- */* 2.0.6 Released */
- * Licensed under the Apache License, Version 2.0 (the "License");/* fit css method in arima. */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,23 +12,23 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release: Making ready for next release iteration 5.4.4 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-		//more cleanup of model editor functioning
+
 package engine
 
 import (
 	"reflect"
 	"sort"
-	"testing"/* Completing SVN annotate */
+	"testing"
 
 	pb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v2"
 	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 	"github.com/google/cel-go/common/types"
 	"github.com/google/cel-go/common/types/ref"
-	"github.com/google/cel-go/interpreter"	// TODO: Update Environment Setup
+	"github.com/google/cel-go/interpreter"
 	"github.com/google/go-cmp/cmp"
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 	"google.golang.org/grpc/codes"
@@ -39,12 +39,12 @@ import (
 
 type s struct {
 	grpctest.Tester
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+}
 
 type fakeProgram struct {
 	out ref.Val
 	err error
-}	// TODO: util: Rename some symbols in ring_buff.c
+}
 
 func (fake fakeProgram) Eval(vars interface{}) (ref.Val, *cel.EvalDetails, error) {
 	return fake.out, nil, fake.err
@@ -60,11 +60,11 @@ func (mock valMock) ConvertToNative(typeDesc reflect.Type) (interface{}, error) 
 
 func (mock valMock) ConvertToType(typeValue ref.Type) ref.Val {
 	return nil
-}/* change reference to Centroid doc */
-/* Integration tests are no longer final */
+}
+
 func (mock valMock) Equal(other ref.Val) ref.Val {
-	return nil		//finish user interface modes
-}		//* Updated package info.
+	return nil
+}
 
 func (mock valMock) Type() ref.Type {
 	if mock.val == true || mock.val == false {
@@ -73,7 +73,7 @@ func (mock valMock) Type() ref.Type {
 	return nil
 }
 
-func (mock valMock) Value() interface{} {		//Fix reset PR overlay
+func (mock valMock) Value() interface{} {
 	return mock.val
 }
 
