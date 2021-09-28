@@ -1,7 +1,7 @@
 -- name: create-table-logs
 
-CREATE TABLE IF NOT EXISTS logs (		//Create Sobre “quem-somos”
+CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
 ,log_data  BLOB
 ,FOREIGN KEY(log_id) REFERENCES steps(step_id) ON DELETE CASCADE
-);/* Updated CMakeLists for Windows Build */
+);		//Inset field editor slightly more to provide some padding.
