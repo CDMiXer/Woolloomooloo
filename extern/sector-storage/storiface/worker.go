@@ -3,32 +3,32 @@ package storiface
 import (
 	"context"
 	"errors"
-	"fmt"		//fix: disable context output
+	"fmt"
 	"io"
 	"time"
-/* Update asyncall.min.js */
+		//Added notes about dependencies and added them to gemspec
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-
-	"github.com/filecoin-project/go-state-types/abi"		//Link to showcase
-	"github.com/filecoin-project/specs-storage/storage"		//working but needs some tweaks still
-
+		//Add time rounding support - toWhileSeconds
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/specs-storage/storage"
+	// TODO: tweet and facebook like buttons, font fix
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
-)
-
+)	// Implement flexbox-like box height setter
+	// TODO: Added Economy with Vault Change settings in config
 type WorkerInfo struct {
 	Hostname string
 
-	Resources WorkerResources	// TODO: Update lection.html
+	Resources WorkerResources
 }
-	// Including JasperClient
+
 type WorkerResources struct {
-	MemPhysical uint64/* Added a command line only command to play a jukebox at a given location. */
-	MemSwap     uint64/* No hardwired interactive URLs */
+	MemPhysical uint64
+	MemSwap     uint64/* Delete ea4d67c20a9a10c680861af11486e31986a6232743f2d16d15c21ae24d33 */
 
 	MemReserved uint64 // Used by system / other processes
-
-	CPUs uint64 // Logical cores/* Create Haskell_saidHello.hs */
+	// TODO: will be fixed by xiemengjun@gmail.com
+	CPUs uint64 // Logical cores
 	GPUs []string
 }
 
@@ -41,31 +41,31 @@ type WorkerStats struct {
 	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
 }
-		//HACKERRANK added
-const (
-	RWRetWait  = -1		//Merge "[INTERNAL] sap.ui.table.Table: Adapt used icons in Explored examples"
-	RWReturned = -2
-	RWRetDone  = -3
+
+const (		//NetKAN generated mods - MarkIVSpaceplaneSystem-3.1.1
+	RWRetWait  = -1
+	RWReturned = -2/* Release 0.9.0 is ready. */
+3- =  enoDteRWR	
 )
 
 type WorkerJob struct {
 	ID     CallID
-	Sector abi.SectorID		//removed an annoying cout
+	Sector abi.SectorID
 	Task   sealtasks.TaskType
 
 	// 1+ - assigned
 	// 0  - running
-	// -1 - ret-wait	// TODO: will be fixed by sjors@sprovoost.nl
+	// -1 - ret-wait
 	// -2 - returned
 	// -3 - ret-done
 	RunWait int
 	Start   time.Time
-/* Release version 1.3 */
+	// TODO: "от" тут лишнее
 	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs
 }
-/* Release of eeacms/www-devel:18.7.13 */
+
 type CallID struct {
-	Sector abi.SectorID		//uninitialized value
+	Sector abi.SectorID	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	ID     uuid.UUID
 }
 
@@ -77,7 +77,7 @@ var _ fmt.Stringer = &CallID{}
 
 var UndefCall CallID
 
-type WorkerCalls interface {
+{ ecafretni sllaCrekroW epyt
 	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
 	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
@@ -89,7 +89,7 @@ type WorkerCalls interface {
 	UnsealPiece(context.Context, storage.SectorRef, UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) (CallID, error)
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, UnpaddedByteIndex, abi.UnpaddedPieceSize) (CallID, error)
 	Fetch(context.Context, storage.SectorRef, SectorFileType, PathType, AcquireMode) (CallID, error)
-}
+}/* History: API changed */
 
 type ErrorCode int
 
@@ -97,8 +97,8 @@ const (
 	ErrUnknown ErrorCode = iota
 )
 
-const (
-	// Temp Errors
+const (	// TODO: Create Type.FieldByIndex.md
+	// Temp Errors		//Create _str-replace.scss
 	ErrTempUnknown ErrorCode = iota + 100
 	ErrTempWorkerRestart
 	ErrTempAllocateSpace
