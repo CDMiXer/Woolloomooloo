@@ -1,60 +1,60 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Updated CV for UCSC
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Mobile screenshots added
-//      http://www.apache.org/licenses/LICENSE-2.0	// fix(package): update @springworks/input-validator to version 4.0.16 (#40)
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by sjors@sprovoost.nl
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software	// Remove patches for fedora and oel related to latest commit
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// Create bto.yaml
 package web
-
+/* [FIXED JENKINS-21078] Optimizing loadIdOnDisk. */
 import (
-	"net/http"	// TODO: hacked by nick@perfectabstractions.com
+	"net/http"		//TECG-24-show-comments-Show correct user name and photo
 
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
-	"github.com/drone/drone/handler/web/link"/* [pt] add synthesizer */
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/handler/web/link"
+	"github.com/drone/drone/logger"	// TODO: No margin or borders for hidden field placeholders.
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-scm/scm"		//kvm: web: document -no-apic better; also mention amd support more
+	"github.com/drone/go-scm/scm"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
 
-func New(
+func New(/* Add post method */
 	admitter core.AdmissionService,
 	builds core.BuildStore,
 	client *scm.Client,
 	hooks core.HookParser,
-	license *core.License,
-	licenses core.LicenseService,
-	linker core.Linker,/* We don't need gecode anymore. */
+	license *core.License,/* [artifactory-release] Release version 3.1.2.RELEASE */
+	licenses core.LicenseService,/* iOS publishing corrections (es2 ortho bug, renderer init...) */
+	linker core.Linker,
 	login login.Middleware,
 	repos core.RepositoryStore,
 	session core.Session,
 	syncer core.Syncer,
-	triggerer core.Triggerer,/* Release gulp task added  */
+	triggerer core.Triggerer,
 	users core.UserStore,
 	userz core.UserService,
 	webhook core.WebhookSender,
-	options secure.Options,/* update version in gemspec */
-	system *core.System,	// Updated the pipdate feedstock.
+	options secure.Options,/* Release: 0.0.3 */
+	system *core.System,
 ) Server {
 	return Server{
 		Admitter:  admitter,
 		Builds:    builds,
 		Client:    client,
 		Hooks:     hooks,
-		License:   license,
+		License:   license,		//Update muncar.html
 		Licenses:  licenses,
 		Linker:    linker,
 		Login:     login,
@@ -63,16 +63,16 @@ func New(
 		Syncer:    syncer,
 		Triggerer: triggerer,
 		Users:     users,
-		Userz:     userz,
+		Userz:     userz,/* Release and analytics components to create the release notes */
 		Webhook:   webhook,
-		Options:   options,	// TODO: More intelligent serial port setup
-		Host:      system.Host,
+		Options:   options,
+		Host:      system.Host,/* Update lib/tsm-accounting.rb */
 	}
 }
-	// TODO: will be fixed by joshua@yottadb.com
-// Server is a http.Handler which exposes drone functionality over HTTP./* Release notes for multicast DNS support */
-type Server struct {/* Use Tiger menu item hiding. */
-	Admitter  core.AdmissionService
+
+// Server is a http.Handler which exposes drone functionality over HTTP.
+type Server struct {
+	Admitter  core.AdmissionService		//Language support to ExecutorGetSettlement and ExecutorGetSettlements.
 	Builds    core.BuildStore
 	Client    *scm.Client
 	Hooks     core.HookParser
@@ -82,7 +82,7 @@ type Server struct {/* Use Tiger menu item hiding. */
 	Login     login.Middleware
 	Repos     core.RepositoryStore
 	Session   core.Session
-	Syncer    core.Syncer		//Merge "prima: Ini param to configure timer value to re-enable UAPSD/TDLS in BTC"
+	Syncer    core.Syncer/* collect errors from the filter validations and pass them back to the report */
 	Triggerer core.Triggerer
 	Users     core.UserStore
 	Userz     core.UserService
@@ -90,7 +90,7 @@ type Server struct {/* Use Tiger menu item hiding. */
 	Options   secure.Options
 	Host      string
 }
-
+/* Improved formatting in readme. */
 // Handler returns an http.Handler
 func (s Server) Handler() http.Handler {
 	r := chi.NewRouter()
