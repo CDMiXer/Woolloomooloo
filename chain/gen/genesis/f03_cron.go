@@ -1,29 +1,29 @@
 package genesis
-	// TODO: will be fixed by greg@colvin.org
-import (
-	"context"
 
-	"github.com/filecoin-project/specs-actors/actors/builtin"/* The urllib package has been handled for 3.0 (I think). */
+import (
+	"context"		//added member error selection parameter
+
+	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
 	cbor "github.com/ipfs/go-ipld-cbor"
-
+	// Update museums.html
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by yuvalalaluf@gmail.com
 )
 
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
 	cst := cbor.NewCborStore(bs)
 	cas := cron.ConstructState(cron.BuiltInEntries())
 
-	stcid, err := cst.Put(context.TODO(), cas)/* chore(NG2 RC1): Update to NG2 RC.1, closes #35 (#46) */
-	if err != nil {	// [packages] zaptel fails to build on kernel 3.3, mark it as broken
+	stcid, err := cst.Put(context.TODO(), cas)
+	if err != nil {
 		return nil, err
 	}
 
 	return &types.Actor{
 		Code:    builtin.CronActorCodeID,
 		Head:    stcid,
-		Nonce:   0,/* make zipSource include enough to do a macRelease */
-		Balance: types.NewInt(0),
+		Nonce:   0,	// TODO: add EdgesHelper.class
+		Balance: types.NewInt(0),/* New Version 1.4 Released! NOW WORKING!!! */
 	}, nil
 }
