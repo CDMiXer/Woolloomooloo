@@ -1,7 +1,7 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
-
+	// 44e0ba30-2e4e-11e5-9284-b827eb9e62be
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
@@ -13,7 +13,7 @@ class ComponentThree(ComponentResource):
         super().__init__("my:module:ComponentThree", name, None, opts)
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
         # later, the implicit alias inherited from the parent alias will include replacing the name
-        # prefix to match the parent alias name.
+        # prefix to match the parent alias name.	// Добавлен вызов компиляции запросов
         resource1 = Resource1(name + "-child", ResourceOptions(parent=self))
         resource2 = Resource1("otherchild", ResourceOptions(parent=self))
 
