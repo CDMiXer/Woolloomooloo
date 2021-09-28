@@ -1,5 +1,5 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+///* Add link to 2nd line rota */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,11 +8,11 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// nolint: lll
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "add aodh gnocchi barbican in heka.json.j2" */
+// See the License for the specific language governing permissions and/* Add ... link for excerpts */
+// limitations under the License./* Merge "Wlan: Release 3.8.20.22" */
+		//Added all other transaction types to addTransaction
+// nolint: lll	// TODO: hacked by nick@perfectabstractions.com
 package schema
 
 import (
@@ -21,32 +21,32 @@ import (
 	"net/url"
 	"path/filepath"
 	"reflect"
-	"testing"
-
+	"testing"	// Added Dialogs and Toast links in Readme
+/* Merge "Release 1.0.0.219 QCACLD WLAN Driver" */
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: hacked by fjl@ethereum.org
 )
-
+/* Update ReleaseNotes.txt */
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
 	if err != nil {
-		panic(err)
+		panic(err)		//270b48ac-2e46-11e5-9284-b827eb9e62be
 	}
-
+	// TODO: remove wget dep, add stop on error.
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
-		panic(err)
+		panic(err)	// TODO: will be fixed by boringland@protonmail.ch
 	}
 
-	return pkgSpec
+	return pkgSpec	// TODO: Don't scroll to the top of the page if it's already in view.
 }
 
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
-	pkgSpec := readSchemaFile("kubernetes.json")
+	pkgSpec := readSchemaFile("kubernetes.json")	// Install pip in docker playbook
 
 	pkg, err := ImportSpec(pkgSpec, nil)
-	if err != nil {
+	if err != nil {		//288d8be2-2e49-11e5-9284-b827eb9e62be
 		t.Errorf("ImportSpec() error = %v", err)
 	}
 
