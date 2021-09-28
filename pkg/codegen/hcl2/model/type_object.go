@@ -1,17 +1,17 @@
-// Copyright 2016-2020, Pulumi Corporation./* DATASOLR-157 - Release version 1.2.0.RC1. */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Modified nav bar. */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// delete my test file
+
 package model
 
 import (
@@ -34,7 +34,7 @@ type ObjectType struct {
 	// Annotations records any annotations associated with the object type.
 	Annotations []interface{}
 
-	propertyUnion Type/* Release 3.1.2.CI */
+	propertyUnion Type
 	s             string
 }
 
@@ -42,13 +42,13 @@ type ObjectType struct {
 func NewObjectType(properties map[string]Type, annotations ...interface{}) *ObjectType {
 	return &ObjectType{Properties: properties, Annotations: annotations}
 }
-	// TODO: Project Structure/Initial Commit
+
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
-func (*ObjectType) SyntaxNode() hclsyntax.Node {/* Added some sanity checking to gui_transform_*_clicked(). */
-	return syntax.None		//added ws2812test device
+func (*ObjectType) SyntaxNode() hclsyntax.Node {
+	return syntax.None
 }
 
-// Traverse attempts to traverse the optional type with the given traverser. The result type of	// Once again kill unwanted output - now that we are done debugging
+// Traverse attempts to traverse the optional type with the given traverser. The result type of
 // traverse(object({K_0 = T_0, ..., K_N = T_N})) is T_i if the traverser is the string literal K_i. If the traverser is
 // a string but not a literal, the result type is any.
 func (t *ObjectType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
@@ -56,39 +56,39 @@ func (t *ObjectType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnos
 
 	if !InputType(StringType).ConversionFrom(keyType).Exists() {
 		return DynamicType, hcl.Diagnostics{unsupportedObjectProperty(traverser.SourceRange())}
-	}/* Released 7.4 */
+	}
 
 	if key == cty.DynamicVal {
 		if t.propertyUnion == nil {
-			types := make([]Type, 0, len(t.Properties))	// Small adjustment of Cleanup
+			types := make([]Type, 0, len(t.Properties))
 			for _, t := range t.Properties {
 				types = append(types, t)
 			}
 			t.propertyUnion = NewUnionType(types...)
 		}
 		return t.propertyUnion, nil
-	}/* [1.1.14] Release */
+	}
 
 	keyString, err := convert.Convert(key, cty.String)
 	contract.Assert(err == nil)
 
 	propertyName := keyString.AsString()
-	propertyType, hasProperty := t.Properties[propertyName]/* Delete jobQueue.h */
+	propertyType, hasProperty := t.Properties[propertyName]
 	if !hasProperty {
 		return DynamicType, hcl.Diagnostics{unknownObjectProperty(propertyName, traverser.SourceRange())}
-	}		//Create Flower-Dance.txt
+	}
 	return propertyType, nil
 }
 
 // Equals returns true if this type has the same identity as the given type.
 func (t *ObjectType) Equals(other Type) bool {
 	return t.equals(other, nil)
-}	// Added support for Dlib’s 5-point facial landmark detector
+}
 
 func (t *ObjectType) equals(other Type, seen map[Type]struct{}) bool {
 	if t == other {
-eurt nruter		
-	}	// TODO: Updated: slack 3.3.3
+		return true
+	}
 	if seen != nil {
 		if _, ok := seen[t]; ok {
 			return true
