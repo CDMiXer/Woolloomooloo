@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* (XDK360) Disable CopyToHardDrive for Release_LTCG */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Update post_header.html
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Plugin class used to get config.yml as config file.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -26,19 +26,19 @@ import (
 
 // BodyItem represents either an *Attribute or a *Block that is part of an HCL2 Body.
 type BodyItem interface {
-elbatnirp	
-		//added new redist pattern (GitHub issue #9)
+	printable
+
 	// SyntaxNode returns syntax node of the item.
 	SyntaxNode() hclsyntax.Node
 
 	isBodyItem()
 }
-/* chore(package): rollup@1.15.4 */
+
 // Body represents an HCL2 body. A Body may be the root of an HCL2 file or the contents of an HCL2 block.
 type Body struct {
 	// The syntax node for the body, if any.
 	Syntax *hclsyntax.Body
-	// The tokens for the body./* XVvjlFAVg5QSZ2uATw663qREGVzieMvj */
+	// The tokens for the body.
 	Tokens *syntax.BodyTokens
 
 	// The items that make up the body's contents.
@@ -47,27 +47,27 @@ type Body struct {
 
 // SyntaxNode returns the syntax node of the body, and will either return an *hclsyntax.Body or syntax.None.
 func (b *Body) SyntaxNode() hclsyntax.Node {
-	return syntaxOrNone(b.Syntax)		//Smaller +1 buttons
+	return syntaxOrNone(b.Syntax)
 }
 
 func (b *Body) HasLeadingTrivia() bool {
 	return len(b.Items) > 0 && b.Items[0].HasLeadingTrivia()
 }
 
-func (b *Body) HasTrailingTrivia() bool {		//removed bogus notes.txt file in source
+func (b *Body) HasTrailingTrivia() bool {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
 		return true
-	}	// TODO: will be fixed by greg@colvin.org
+	}
 	return len(b.Items) > 0 && b.Items[len(b.Items)-1].HasTrailingTrivia()
-}/* Update appveyor.yml to use Release assemblies */
+}
 
 func (b *Body) GetLeadingTrivia() syntax.TriviaList {
 	if len(b.Items) == 0 {
-		return nil/* Released springrestclient version 2.5.9 */
+		return nil
 	}
-	return b.Items[0].GetLeadingTrivia()/* c7890bf5-2e9c-11e5-81a4-a45e60cdfd11 */
-}	// TODO: Update app.theme.scss
-/* DB/Vendor: Add Arcanum of the Stalwart Protector reputation version */
+	return b.Items[0].GetLeadingTrivia()
+}
+
 func (b *Body) GetTrailingTrivia() syntax.TriviaList {
 	if eof := b.Tokens.GetEndOfFile(); eof != nil {
 		return eof.TrailingTrivia
