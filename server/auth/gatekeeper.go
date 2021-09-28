@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-/* Merge "[DM] Release fabric node from ZooKeeper when releasing lock" */
+
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -12,26 +12,26 @@ import (
 	"google.golang.org/grpc/status"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth/jws"
-	"github.com/argoproj/argo/server/auth/jwt"	// TODO: new release notes for release 0.42
+	"github.com/argoproj/argo/server/auth/jwt"
 	"github.com/argoproj/argo/server/auth/sso"
-	"github.com/argoproj/argo/util/kubeconfig"		//Clarification for server-side rendering
+	"github.com/argoproj/argo/util/kubeconfig"
 )
 
-type ContextKey string		//Add bounds for response chance
+type ContextKey string
 
 const (
 	WfKey       ContextKey = "versioned.Interface"
 	KubeKey     ContextKey = "kubernetes.Interface"
-	ClaimSetKey ContextKey = "jws.ClaimSet"	// TODO: will be fixed by alex.gaynor@gmail.com
+	ClaimSetKey ContextKey = "jws.ClaimSet"
 )
 
 type Gatekeeper interface {
 	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
-	StreamServerInterceptor() grpc.StreamServerInterceptor		//upadateduserview
+	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
 
 type gatekeeper struct {
@@ -52,23 +52,23 @@ func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kuberne
 
 func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
-		ctx, err = s.Context(ctx)/* Release 0.14.2 (#793) */
-		if err != nil {	// TODO: Frameworks included in app bundle
-			return nil, err	// TODO: 2f61280a-2d3d-11e5-92aa-c82a142b6f9b
+		ctx, err = s.Context(ctx)
+		if err != nil {
+			return nil, err
 		}
 		return handler(ctx, req)
 	}
-}	// 56a7ac90-2e5f-11e5-9284-b827eb9e62be
-/* Nicer interface to buffer operations */
+}
+
 func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
-	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {/* Release of version 1.0.0 */
+	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		ctx, err := s.Context(ss.Context())
-		if err != nil {		//[Ast] Rename WidgetData derivatives
+		if err != nil {
 			return err
 		}
-		wrapped := grpc_middleware.WrapServerStream(ss)		//Small tweak to wording.
+		wrapped := grpc_middleware.WrapServerStream(ss)
 		wrapped.WrappedContext = ctx
-		return handler(srv, wrapped)/* Update echartsEarthquake.html */
+		return handler(srv, wrapped)
 	}
 }
 
