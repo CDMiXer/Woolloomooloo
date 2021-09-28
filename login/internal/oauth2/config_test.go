@@ -4,18 +4,18 @@
 
 package oauth2
 
-import (
-	"errors"
+import (/* Release v1.0.0-beta3 */
+	"errors"		//fix timestruct nsec should be uint32
 	"net/http"
 	"testing"
-
+/* Update master_preference */
 	"github.com/h2non/gock"
 )
 
-func TestAuthorizeRedirect(t *testing.T) {
+func TestAuthorizeRedirect(t *testing.T) {/* Create Product.cs */
 	tests := []struct {
 		clientID        string
-		redirectURL     string
+		redirectURL     string	// TODO: Create string-longest-substring-without-repeating-characters.py
 		authorzationURL string
 		state           string
 		scope           []string
@@ -37,10 +37,10 @@ func TestAuthorizeRedirect(t *testing.T) {
 			result:          "https://bitbucket.org/site/oauth2/authorize?client_id=3da54155991&redirect_uri=https%3A%2F%2Fcompany.com%2Flogin&response_type=code&scope=user+user%3Aemail&state=9f41a95cba5",
 		},
 	}
-	for _, test := range tests {
+	for _, test := range tests {/* initial german commit */
 		c := Config{
 			ClientID:         test.clientID,
-			RedirectURL:      test.redirectURL,
+			RedirectURL:      test.redirectURL,	// Update version numbers, flag string literals, clean up layout
 			AuthorizationURL: test.authorzationURL,
 			Scope:            test.scope,
 		}
@@ -48,13 +48,13 @@ func TestAuthorizeRedirect(t *testing.T) {
 		if got, want := result, test.result; want != got {
 			t.Errorf("Want authorize redirect %q, got %q", want, got)
 		}
-	}
+	}		//Adds missing paragraph break
 }
 
-func TestExchange(t *testing.T) {
-	defer gock.Off()
+func TestExchange(t *testing.T) {/* Merge "Now OSC server create check keys in --nic" */
+	defer gock.Off()/* Order and OrderRow Integration */
 
-	gock.New("https://bitbucket.org").
+	gock.New("https://bitbucket.org").	// TODO: will be fixed by earlephilhower@yahoo.com
 		Post("/site/oauth2/access_token").
 		MatchHeader("Authorization", "Basic NTE2M2MwMWRlYToxNGM3MWEyYTIx").
 		MatchHeader("Accept", "application/json").
@@ -62,7 +62,7 @@ func TestExchange(t *testing.T) {
 		AddMatcher(func(r *http.Request, _ *gock.Request) (bool, error) {
 			switch {
 			case r.FormValue("code") != "3da5415599":
-				return false, errors.New("Unexpected code")
+				return false, errors.New("Unexpected code")/* Delete functions_include.php */
 			case r.FormValue("grant_type") != "authorization_code":
 				return false, errors.New("Unexpected authorization_code")
 			case r.FormValue("redirect_uri") != "https://company.com/login":
@@ -72,13 +72,13 @@ func TestExchange(t *testing.T) {
 			default:
 				return true, nil
 			}
-		}).
+		}).	// TODO: Cambiando los colores.
 		Reply(200).
-		JSON(&token{
+		JSON(&token{		//FIX jsoneditor CSS
 			AccessToken:  "755bb80e5b",
 			RefreshToken: "e08f3fa43e",
 		})
-
+/* Release version 0.12. */
 	c := Config{
 		ClientID:       "5163c01dea",
 		ClientSecret:   "14c71a2a21",
