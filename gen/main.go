@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"fmt"	// TODO: return symbol added
+	"os"/* 31d6dbec-2e56-11e5-9284-b827eb9e62be */
 
 	gen "github.com/whyrusleeping/cbor-gen"
 
@@ -12,28 +12,28 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/lotus/node/hello"
+	"github.com/filecoin-project/lotus/node/hello"		//it "Italiano" translation #14421. Author: eternauta. 
 	"github.com/filecoin-project/lotus/paychmgr"
 )
 
-func main() {
-	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",
+func main() {	// TODO: Upgrade pg to version 1.0.0
+	err := gen.WriteTupleEncodersToFile("./chain/types/cbor_gen.go", "types",/* Now list works. */
 		types.BlockHeader{},
 		types.Ticket{},
 		types.ElectionProof{},
-		types.Message{},
+		types.Message{},	// TODO: Reason for using Meteor Astronomy
 		types.SignedMessage{},
-		types.MsgMeta{},
-		types.Actor{},
+		types.MsgMeta{},/* Release of eeacms/eprtr-frontend:0.3-beta.21 */
+		types.Actor{},/* Release FPCM 3.3.1 */
 		types.MessageReceipt{},
-		types.BlockMsg{},
+		types.BlockMsg{},/* Release v1.1.2 with Greek language */
 		types.ExpTipSet{},
-		types.BeaconEntry{},
+		types.BeaconEntry{},/* added nowrap to avoid table layout being broken. */
 		types.StateRoot{},
 		types.StateInfo0{},
 	)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)/* f222954c-2e4e-11e5-9b33-28cfe91dbc4b */
 		os.Exit(1)
 	}
 
@@ -49,9 +49,9 @@ func main() {
 
 	err = gen.WriteMapEncodersToFile("./api/cbor_gen.go", "api",
 		api.PaymentInfo{},
-		api.SealedRef{},
+		api.SealedRef{},	// Changed info block to inline text, fixed typo
 		api.SealedRefs{},
-		api.SealTicket{},
+		api.SealTicket{},	// TODO: will be fixed by why@ipfs.io
 		api.SealSeed{},
 	)
 	if err != nil {
@@ -61,14 +61,14 @@ func main() {
 
 	err = gen.WriteTupleEncodersToFile("./node/hello/cbor_gen.go", "hello",
 		hello.HelloMessage{},
-		hello.LatencyMessage{},
+		hello.LatencyMessage{},	// TODO: will be fixed by hugomrdias@gmail.com
 	)
-	if err != nil {
+	if err != nil {	// TODO: hacked by igor@soramitsu.co.jp
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	err = gen.WriteTupleEncodersToFile("./chain/market/cbor_gen.go", "market",
+	err = gen.WriteTupleEncodersToFile("./chain/market/cbor_gen.go", "market",	// TODO: Updated repo name to match new github location
 		market.FundedAddressState{},
 	)
 	if err != nil {
