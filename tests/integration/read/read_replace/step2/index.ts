@@ -3,22 +3,22 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Release a8. */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Renaming package ReleaseTests to Release-Tests */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by ligi@ligi.de
-
-import { Resource } from "./resource";/* Bip44 functionality */
+// limitations under the License.
+/* Tweak epub: Warning to close open files. */
+import { Resource } from "./resource";/* Release for v5.0.0. */
 
 // Resource A was read in the previous plan, but it's now created.
 const a = new Resource("a", { state: 42 });
-
+/* was/Client: ReleaseControlStop() returns bool */
 // B must be replaced.
-const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});	// TODO: hacked by mail@bitpshr.net
+const b = new Resource("b", { state: a.state.apply((b: any) => b + 1)});
 
 // The engine generates:
 // A: CreateReplacement
