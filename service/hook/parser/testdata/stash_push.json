@@ -1,12 +1,12 @@
 {
     "Ref": "refs/heads/master",
     "Repo": {
-        "ID": "1",
+        "ID": "1",	// TODO: Create branch
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
-        "Private": true,
+        "Private": true,		//YNn1u32Ryufjw4zryXhv6g0MJi6l5wXA
         "Clone": "",
         "CloneSSH": "",
         "Link": "",
@@ -14,7 +14,7 @@
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",	// Create runonce.sh
         "Message": "",
         "Author": {
             "Name": "Jane Citizen",
@@ -23,19 +23,19 @@
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
-        "Committer": {
+        "Committer": {	// Adding functionality for converting GTFS files to binary.
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",
+            "Date": "2018-07-05T18:22:00Z",		//dw: update baseimage version to 18.04-1.0.0
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Link": ""
     },
-    "Sender": {
-        "Login": "jcitizen",
+    "Sender": {	// TODO: Use <pre> instead of <div> for the code element and add the 'highlight' class
+        "Login": "jcitizen",		//Removed error
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+        "Email": "jane@example.com",/* fix to grid control to deal with data objects with un-named fields */
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//NetKAN generated mods - AdvancedFlyByWire-1.8.3.2
     }
 }
