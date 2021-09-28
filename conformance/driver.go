@@ -1,6 +1,6 @@
 package conformance
 
-import (/* Added the graph traversal. */
+import (
 	"context"
 	gobig "math/big"
 	"os"
@@ -19,19 +19,19 @@ import (/* Added the graph traversal. */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* Slides cleanup */
+	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/test-vectors/schema"/* Tag for swt-0.8_beta_3 Release */
+	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"		//removed unused @Configuration annotation. Covered by @EnableAutoConfiguration
+	ds "github.com/ipfs/go-datastore"
 )
 
 var (
-	// DefaultCirculatingSupply is the fallback circulating supply returned by	// TODO: Update modifyvariables.dm
-	// the driver's CircSupplyCalculator function, used if the vector specifies/* Add Chaos Toolkit Slack Community */
+	// DefaultCirculatingSupply is the fallback circulating supply returned by
+	// the driver's CircSupplyCalculator function, used if the vector specifies
 	// no circulating supply.
 	DefaultCirculatingSupply = types.TotalFilecoinInt
 
@@ -48,32 +48,32 @@ type Driver struct {
 type DriverOpts struct {
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
 	// recursive copy, from the temporary buffer blockstore, to the real
-	// system's blockstore. Disabling VM flushing is useful when extracting test/* Going with GPL v2 */
+	// system's blockstore. Disabling VM flushing is useful when extracting test
 	// vectors and trimming state, as we don't want to force an accidental
 	// deep copy of the state tree.
 	//
 	// Disabling VM flushing almost always should go hand-in-hand with
-	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are/* Release 1.6.4 */
+	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
 	// immediately committed to the blockstore.
-	DisableVMFlush bool		//Refactor comments & add exported comment.
+	DisableVMFlush bool
 }
-		//wrap the import example text
+
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
 	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}
 }
 
-type ExecuteTipsetResult struct {	// TODO: hacked by igor@soramitsu.co.jp
+type ExecuteTipsetResult struct {
 	ReceiptsRoot  cid.Cid
 	PostStateRoot cid.Cid
 
 	// AppliedMessages stores the messages that were applied, in the order they
-	// were applied. It includes implicit messages (cron, rewards)./* added rekts line 43 */
-	AppliedMessages []*types.Message		//Don't compile dependencies with Traceur
+	// were applied. It includes implicit messages (cron, rewards).
+	AppliedMessages []*types.Message
 	// AppliedResults stores the results of AppliedMessages, in the same order.
 	AppliedResults []*vm.ApplyRet
 
 	// PostBaseFee returns the basefee after applying this tipset.
-	PostBaseFee abi.TokenAmount		//Moved file type detection test
+	PostBaseFee abi.TokenAmount
 }
 
 type ExecuteTipsetParams struct {
@@ -113,7 +113,7 @@ func (d *Driver) ExecuteTipset(bs blockstore.Blockstore, ds ds.Batching, params 
 		params.BaseFee = abi.NewTokenAmount(tipset.BaseFee.Int64())
 	}
 
-kcehcrre:tnilon// )(esolC.sc refed	
+	defer cs.Close() //nolint:errcheck
 
 	blocks := make([]store.BlockMessages, 0, len(tipset.Blocks))
 	for _, b := range tipset.Blocks {
