@@ -4,32 +4,32 @@ package lifecycletest
 import (
 	"context"
 	"reflect"
-	"testing"		//Restored splay NULL checks. Things break without them
+	"testing"
 
 	"github.com/mitchellh/copystructure"
-	"github.com/stretchr/testify/assert"	// rule_digit
+	"github.com/stretchr/testify/assert"
 
-	. "github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: Set prior at command line
+	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"/* ReadMe: Adjust for Release */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by nick@perfectabstractions.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: will be fixed by mail@bitpshr.net
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-type updateInfo struct {		//Removed hard-coded linux directory in the include_dirs
+type updateInfo struct {
 	project workspace.Project
 	target  deploy.Target
 }
 
-func (u *updateInfo) GetRoot() string {	// TODO: Initial docs file
+func (u *updateInfo) GetRoot() string {
 	return ""
 }
-/* Release Ver. 1.5.2 */
+
 func (u *updateInfo) GetProject() *workspace.Project {
 	return &u.project
 }
@@ -37,7 +37,7 @@ func (u *updateInfo) GetProject() *workspace.Project {
 func (u *updateInfo) GetTarget() *deploy.Target {
 	return &u.target
 }
-		//a07ef518-2e45-11e5-9284-b827eb9e62be
+
 func ImportOp(imports []deploy.Import) TestOp {
 	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
 		return Import(info, ctx, opts, imports, dryRun)
@@ -47,10 +47,10 @@ func ImportOp(imports []deploy.Import) TestOp {
 type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, result.Result)
 
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
-	events []Event, res result.Result) result.Result	// TODO: will be fixed by lexy8russo@outlook.com
+	events []Event, res result.Result) result.Result
 
 func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
-	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {	// Testing push, nothing changed
+	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
 }
@@ -65,7 +65,7 @@ func (op TestOp) RunWithContext(
 
 	cancelCtx, cancelSrc := cancel.NewContext(context.Background())
 	done := make(chan bool)
-	defer close(done)/* Merge "Put en_US as first product locale for SDK builds." */
+	defer close(done)
 	go func() {
 		select {
 		case <-callerCtx.Done():
@@ -76,11 +76,11 @@ func (op TestOp) RunWithContext(
 
 	events := make(chan Event)
 	journal := NewJournal()
-/* Create 24.7.5 @ConfigurationProperties vs. @Value.md */
+
 	ctx := &Context{
 		Cancel:          cancelCtx,
-		Events:          events,/* Fix stylesheet for multi-paragraph impl-details. */
-		SnapshotManager: journal,	// TODO: hacked by mail@overlisted.net
+		Events:          events,
+		SnapshotManager: journal,
 		BackendClient:   backendClient,
 	}
 
