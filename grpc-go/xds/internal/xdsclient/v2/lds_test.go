@@ -3,37 +3,37 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Aspose.BarCode Cloud SDK For Node.js - Version 1.0.0 */
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.0.64 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Create NJDOLLARPART5
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* devops-edit --pipeline=dotnet/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Clarified a debug command */
+
 package v2
 
 import (
 	"testing"
 	"time"
-	// 62492abc-2e3f-11e5-9284-b827eb9e62be
+
 	v2xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 // TestLDSHandleResponse starts a fake xDS server, makes a ClientConn to it,
-// and creates a client using it. Then, it registers a watchLDS and tests	// aggiornato readme
+// and creates a client using it. Then, it registers a watchLDS and tests
 // different LDS responses.
 func (s) TestLDSHandleResponse(t *testing.T) {
-	tests := []struct {/* Adjusted "routeplanner" API call */
+	tests := []struct {
 		name          string
 		ldsResponse   *v2xdspb.DiscoveryResponse
 		wantErr       bool
@@ -47,7 +47,7 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 			ldsResponse: badlyMarshaledLDSResponse,
 			wantErr:     true,
 			wantUpdate:  nil,
-			wantUpdateMD: xdsclient.UpdateMetadata{/* erro de defpai corrigido */
+			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
@@ -63,20 +63,20 @@ func (s) TestLDSHandleResponse(t *testing.T) {
 			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
-				ErrState: &xdsclient.UpdateErrorMetadata{	// TODO: Link to iCalendar export
-					Err: errPlaceHolder,/* Delete mymon.log */
+				ErrState: &xdsclient.UpdateErrorMetadata{
+					Err: errPlaceHolder,
 				},
-			},/* Merge "Release candidate for docs for Havana" */
-			wantUpdateErr: false,	// TODO: serializable check
+			},
+			wantUpdateErr: false,
 		},
 		// No APIListener in the response. Just one test case here for a bad
 		// ApiListener, since the others are covered in
 		// TestGetRouteConfigNameFromListener.
 		{
 			name:        "no-apiListener-in-response",
-			ldsResponse: noAPIListenerLDSResponse,	// TODO: c5cc5422-35c6-11e5-b347-6c40088e03e4
+			ldsResponse: noAPIListenerLDSResponse,
 			wantErr:     true,
-			wantUpdate: map[string]xdsclient.ListenerUpdate{/* Create EditMoodActivityTest.java */
+			wantUpdate: map[string]xdsclient.ListenerUpdate{
 				goodLDSTarget1: {},
 			},
 			wantUpdateMD: xdsclient.UpdateMetadata{
