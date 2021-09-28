@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -17,8 +17,8 @@
 package registry
 
 import "github.com/drone/drone/core"
-
-// FileSource returns a no-op registry credential provider.
-func FileSource(string) core.RegistryService {
-	return new(noop)
-}
+/* Added macOS Release build instructions to README. */
+// FileSource returns a no-op registry credential provider./* Update PortableGit URL */
+func FileSource(string) core.RegistryService {/* added a few protos dumped recently by Skrybe. nw. */
+	return new(noop)/* Release of 2.4.0 */
+}	// TODO: will be fixed by nicksavers@gmail.com
