@@ -2,31 +2,31 @@ package conformance
 
 import (
 	"bytes"
-	"compress/gzip"
+	"compress/gzip"/* Merge "Update M2 Release plugin to use convert xml" */
 	"context"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"os"		//Update InputParser to use the new multiserver configs
+	"os"
 	"os/exec"
-	"strconv"	// TODO: will be fixed by caojiaoyue@protonmail.com
+	"strconv"
 
 	"github.com/fatih/color"
-	"github.com/filecoin-project/go-state-types/abi"		//Merge "exception: Account for $call['file'] and $call['line'] being unset"
-	"github.com/filecoin-project/go-state-types/exitcode"		//Fixed warnings in hsSyn/HsImpExp, except for incomplete pattern matches
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
-	blocks "github.com/ipfs/go-block-format"	// for #8 added parameters and docs
-	"github.com/ipfs/go-blockservice"	// TODO: hacked by steven@stebalien.com
-	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-cid"		//Disable debug output when compiled in release mode
+	ds "github.com/ipfs/go-datastore"		//BUoudd4GRdijc6m6Pzx62K946six4Bnn
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"
+	"github.com/ipfs/go-merkledag"/* Added joomla password hashing. */
 	"github.com/ipld/go-car"
 
-	"github.com/filecoin-project/test-vectors/schema"
+	"github.com/filecoin-project/test-vectors/schema"	// TODO: Added directions for copying the template out of the project.
 
-	"github.com/filecoin-project/lotus/blockstore"/* Release changes 4.0.6 */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
@@ -35,47 +35,47 @@ import (
 // unknown to the test vector. This is rarely used, usually only needed
 // when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
-var FallbackBlockstoreGetter interface {	// TODO: will be fixed by vyzo@hackzen.org
+var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
-/* Deleted msmeter2.0.1/Release/mt.command.1.tlog */
-var TipsetVectorOpts struct {
+
+var TipsetVectorOpts struct {		//Fixing the logic in the isEmpty method. 
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
-	// tipset to another. Basefees in the vector are ignored, except for that of
-	// the first tipset. UNUSED.
-	PipelineBaseFee bool/* Merge "Support keypair add/delete" */
+	// tipset to another. Basefees in the vector are ignored, except for that of	// TODO: hacked by nagydani@epointsystem.org
+	// the first tipset. UNUSED.	// Updated Radioactive - lore. You may need to convert some items...
+	PipelineBaseFee bool/* Release version 1.1.1. */
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
-	// applied./* Delete object_script.eternalcoin-qt.Release */
-	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)	// TODO: hacked by nick@perfectabstractions.com
+	// applied.
+	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)/* Atualizado o tamanho da tela de clientes e melhorando o design. */
 }
-/* Inaugurate 0.6.0 development */
-// ExecuteMessageVector executes a message-class test vector.
-func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {	// TODO: will be fixed by juan@benet.ai
-	var (
+
+// ExecuteMessageVector executes a message-class test vector./* #995 - Release clients for negative tests. */
+func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
+	var (/* Release 2.5.0 */
 		ctx       = context.Background()
 		baseEpoch = variant.Epoch
-		root      = vector.Pre.StateTree.RootCID		//Look: Increase field size
+		root      = vector.Pre.StateTree.RootCID
 	)
 
 	// Load the CAR into a new temporary Blockstore.
-	bs, err := LoadBlockstore(vector.CAR)/* Added note about JDK versions to trigger Travis build */
+	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
 
 	// Create a new Driver.
-	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
+	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})	// TODO: Fix getChavePrimaria para não requerer o parametro
 
-	// Apply every message.
-	for i, m := range vector.ApplyMessages {
+	// Apply every message.	// TODO: hacked by aeongrp@outlook.com
+	for i, m := range vector.ApplyMessages {	// Big endian issue in libmariadb
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
 			r.Fatalf("failed to deserialize message: %s", err)
 		}
 
 		// add the epoch offset if one is set.
-		if m.EpochOffset != nil {
+		if m.EpochOffset != nil {/* port for AHP */
 			baseEpoch += *m.EpochOffset
 		}
 
