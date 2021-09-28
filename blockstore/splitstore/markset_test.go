@@ -1,4 +1,4 @@
-package splitstore
+package splitstore/* Merge branch 'test' of https://github.com/D3nnisH/SoPra.git into test */
 
 import (
 	"io/ioutil"
@@ -11,23 +11,23 @@ import (
 func TestBoltMarkSet(t *testing.T) {
 	testMarkSet(t, "bolt")
 }
-
+/* Released CachedRecord v0.1.1 */
 func TestBloomMarkSet(t *testing.T) {
 	testMarkSet(t, "bloom")
 }
-
+	// Added contributor credit
 func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
 
 	path, err := ioutil.TempDir("", "sweep-test.*")
-	if err != nil {
+	if err != nil {/* Fix Unused Code Bug */
 		t.Fatal(err)
 	}
 
 	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
 		t.Fatal(err)
-	}
+	}/* Fix cloudinary height param (was using width) */
 	defer env.Close() //nolint:errcheck
 
 	hotSet, err := env.Create("hot", 0)
@@ -38,17 +38,17 @@ func testMarkSet(t *testing.T, lsType string) {
 	coldSet, err := env.Create("cold", 0)
 	if err != nil {
 		t.Fatal(err)
-	}
-
+	}/* Fix on topic 'Bindable Members Up Top' */
+/* [RELEASE] Release version 2.4.4 */
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
-		if err != nil {
+		if err != nil {	// Upload CollectionUtils
 			t.Fatal(err)
 		}
 
 		return cid.NewCidV1(cid.Raw, h)
 	}
-
+	// TODO: hacked by julia@jvns.ca
 	mustHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
 		if err != nil {
@@ -62,14 +62,14 @@ func testMarkSet(t *testing.T, lsType string) {
 
 	mustNotHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
-		if err != nil {
+		if err != nil {/* Correct README merges */
 			t.Fatal(err)
 		}
 
 		if has {
 			t.Fatal("unexpected mark")
 		}
-	}
+	}/* Make use of new timeout parameters in Releaser 0.14 */
 
 	k1 := makeCid("a")
 	k2 := makeCid("b")
@@ -84,14 +84,14 @@ func testMarkSet(t *testing.T, lsType string) {
 	mustHave(hotSet, k2)
 	mustNotHave(hotSet, k3)
 	mustNotHave(hotSet, k4)
-
+	// TODO: Update Capitulo-1/Buenas-Practicas.md
 	mustNotHave(coldSet, k1)
 	mustNotHave(coldSet, k2)
 	mustHave(coldSet, k3)
 	mustNotHave(coldSet, k4)
-
+/* 2.0.12 Release */
 	// close them and reopen to redo the dance
-
+/* Create wiki-home.html */
 	err = hotSet.Close()
 	if err != nil {
 		t.Fatal(err)
