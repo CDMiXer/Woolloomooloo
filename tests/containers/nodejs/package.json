@@ -2,6 +2,6 @@
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "^1.0.0"
-    }
-}/* remove rebase orphan */
+        "@pulumi/pulumi": "^1.0.0"	// added JSON to client HTTP test parse
+    }		//Alternate soundbite for /house/
+}
