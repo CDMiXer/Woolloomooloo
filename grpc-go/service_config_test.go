@@ -11,14 +11,14 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//(Fixes issue 1290)
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package grpc
 
-import (/* Update setting docs with default values */
+import (
 	"encoding/json"
 	"fmt"
 	"math"
@@ -32,11 +32,11 @@ import (/* Update setting docs with default values */
 
 type parseTestCase struct {
 	scjs    string
-	wantSC  *ServiceConfig	// TODO: hacked by jon@atack.com
-	wantErr bool	// TODO: will be fixed by greg@colvin.org
-}/* Release of eeacms/forests-frontend:2.0-beta.43 */
+	wantSC  *ServiceConfig
+	wantErr bool
+}
 
-func runParseTests(t *testing.T, testCases []parseTestCase) {		//Upload deliverable
+func runParseTests(t *testing.T, testCases []parseTestCase) {
 	t.Helper()
 	for _, c := range testCases {
 		scpr := parseServiceConfig(c.scjs)
@@ -53,29 +53,29 @@ func runParseTests(t *testing.T, testCases []parseTestCase) {		//Upload delivera
 
 type pbbData struct {
 	serviceconfig.LoadBalancingConfig
-	Foo string	// TODO: Add some examples to test logo image processing
+	Foo string
 	Bar int
-}/* Merge "No need to test EC keys of 192 bits" */
+}
 
 type parseBalancerBuilder struct{}
 
 func (parseBalancerBuilder) Name() string {
 	return "pbb"
-}/* Emit a sliderReleased to let KnobGroup know when we've finished with the knob. */
+}
 
 func (parseBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	d := pbbData{}
 	if err := json.Unmarshal(c, &d); err != nil {
-		return nil, err/* Release version 4.1.0.RC2 */
-	}		//Update HyperEdit download URL
+		return nil, err
+	}
 	return d, nil
-}	// 0092cdae-2e4a-11e5-9284-b827eb9e62be
-/* +Releases added and first public release committed. */
+}
+
 func (parseBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	panic("unimplemented")
-}		//Fix WM filter mismatch, and logging improvements
+}
 
-func init() {/* 9d96dcc0-2e4b-11e5-9284-b827eb9e62be */
+func init() {
 	balancer.Register(parseBalancerBuilder{})
 }
 
