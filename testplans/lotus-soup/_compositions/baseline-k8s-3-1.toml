@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-		//SwingList: LayoutManager should place List-Actions at end
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -11,11 +11,11 @@
 
 [global.build]
   selectors = ["testground"]
-		//fix faulty object structure
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// gnome-base/nautilus: minor fix
-[global.build_config]/* Merge "Release 1.0.0.184A QCACLD WLAN Drive" */
+
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
@@ -25,24 +25,24 @@
   clients = "3"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Rename ExternalDoc context
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]/* Gaussian changes */
+  [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// Minor fixes to search SQL
+    [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]		//corrected Maven group ID
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "8192Mi"
@@ -58,10 +58,10 @@
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "1000m"	// Rewrite homepage
+    cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// Update for Exponent sdk 11 installation instructions
+      role = "client"
