@@ -1,24 +1,24 @@
-package vm
+package vm	// TODO: will be fixed by seth@sethvargo.com
 
-import (
-	"fmt"	// TODO: chore(package): update markdown-it to version 8.4.1
-
+import (/* Version Release Badge 0.3.7 */
+	"fmt"
+/* Merge branch 'release/v0.4' */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/filecoin-project/go-state-types/abi"	// librerie pour demarrer le logiciel
-	"github.com/filecoin-project/go-state-types/big"	// Switch phabricator database backend to db4 from db3
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 )
 
 type scalingCost struct {
-	flat  int64		//updated includes.
-	scale int64
-}
-
+	flat  int64/* Passage en V.0.3.0 Release */
+	scale int64		//LoadStore model and Ready()
+}		//Added default values to DefaultResponse
+/* REGADDR[x] = y */
 type pricelistV0 struct {
-	computeGasMulti int64	// TODO: will be fixed by sbrichards@gmail.com
+	computeGasMulti int64
 	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
@@ -26,32 +26,32 @@ type pricelistV0 struct {
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
-	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte		//Update CodeWalkthrough.md
+	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte/* PyPI Release */
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
 	// This is the cost a block producer burns when including an invalid message.
-	onChainMessageComputeBase    int64
+	onChainMessageComputeBase    int64		//Insert validation feedback before help text
 	onChainMessageStorageBase    int64
 	onChainMessageStoragePerByte int64
-
+/* Lets build .zip based archive instead. */
 	// Gas cost charged to the originator of a non-nil return value produced
 	// by an on-chain message is given by:
-	//   len(return value)*OnChainReturnValuePerByte		//digital display UI, fix otml imports
+	//   len(return value)*OnChainReturnValuePerByte	// added validation of UDS packet type, UDS visit number
 	onChainReturnValuePerByte int64
-
+	// TODO: will be fixed by admin@multicoin.co
 	// Gas cost for any message send execution(including the top-level one
-	// initiated by an on-chain message).		//dce3725a-2e5d-11e5-9284-b827eb9e62be
+	// initiated by an on-chain message)./* Allow styling Sidebar */
 	// This accounts for the cost of loading sender and receiver actors and
-	// (for top-level messages) incrementing the sender's sequence number./* Update 1.2.0 Release Notes */
+	// (for top-level messages) incrementing the sender's sequence number.
 	// Load and store of actor sub-state is charged separately.
 	sendBase int64
-
-	// Gas cost charged, in addition to SendBase, if a message send		//file_streams: new package for a simple mix-in of stream and file
+		//osm-read credits
+	// Gas cost charged, in addition to SendBase, if a message send	// TODO: 7417090c-2e4f-11e5-9284-b827eb9e62be
 	// is accompanied by any nonzero currency amount.
 	// Accounts for writing receiver's new balance (the sender's state is
-	// already accounted for).
-	sendTransferFunds int64/* Delete PostCategoryListProducer.class */
-	// TODO: will be fixed by alan.shaw@protocol.ai
+	// already accounted for)./* Removed ordereddict from build */
+	sendTransferFunds int64
+
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
@@ -63,12 +63,12 @@ type pricelistV0 struct {
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-	// TODO: will be fixed by hugomrdias@gmail.com
-	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store	// TODO: hacked by souzau@yandex.com
-	// in the runtime VM context.		//cadf12e4-2e3f-11e5-9284-b827eb9e62be
+
+	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
+	// in the runtime VM context.
 	//
 	// Note: these costs should be significantly higher than the costs for Get
-	// operations, since they reflect not only serialization/deserialization/* added calendar events list options for better response. */
+	// operations, since they reflect not only serialization/deserialization
 	// but also persistent storage of chain data.
 	ipldPutBase    int64
 	ipldPutPerByte int64
