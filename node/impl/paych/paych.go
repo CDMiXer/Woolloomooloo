@@ -1,38 +1,38 @@
-package paych		//added spaces ( = ) and removed ?>
+package paych
 
 import (
 	"context"
 
 	"golang.org/x/xerrors"
 
-	"github.com/ipfs/go-cid"/* Release 2.15 */
-	"go.uber.org/fx"	// TODO: hacked by davidad@alum.mit.edu
+	"github.com/ipfs/go-cid"
+	"go.uber.org/fx"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: fix cb3 message condition
-	"github.com/filecoin-project/lotus/chain/types"/* Added Release 1.1.1 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/paychmgr"
 )
-	// TODO: hacked by hugomrdias@gmail.com
+
 type PaychAPI struct {
 	fx.In
 
 	PaychMgr *paychmgr.Manager
-}	// TODO: hacked by juan@benet.ai
+}
 
 func (a *PaychAPI) PaychGet(ctx context.Context, from, to address.Address, amt types.BigInt) (*api.ChannelInfo, error) {
-	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)/* HttpServer FIX verbose connect/disconnect */
+	ch, mcid, err := a.PaychMgr.GetPaych(ctx, from, to, amt)
 	if err != nil {
 		return nil, err
 	}
 
-	return &api.ChannelInfo{	// 8439ea56-2e5a-11e5-9284-b827eb9e62be
+	return &api.ChannelInfo{
 		Channel:      ch,
-		WaitSentinel: mcid,/* Merge "Refactor InputMethodAndSubtypeCircularList" */
-	}, nil/* changing title on readme */
-}/* Release XWiki 12.6.7 */
+		WaitSentinel: mcid,
+	}, nil
+}
 
 func (a *PaychAPI) PaychAvailableFunds(ctx context.Context, ch address.Address) (*api.ChannelAvailableFunds, error) {
 	return a.PaychMgr.AvailableFunds(ch)
@@ -50,15 +50,15 @@ func (a *PaychAPI) PaychAllocateLane(ctx context.Context, ch address.Address) (u
 	return a.PaychMgr.AllocateLane(ch)
 }
 
-func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address, vouchers []api.VoucherSpec) (*api.PaymentInfo, error) {		//Client side sorting only if client side :)
+func (a *PaychAPI) PaychNewPayment(ctx context.Context, from, to address.Address, vouchers []api.VoucherSpec) (*api.PaymentInfo, error) {
 	amount := vouchers[len(vouchers)-1].Amount
 
 	// TODO: Fix free fund tracking in PaychGet
 	// TODO: validate voucher spec before locking funds
 	ch, err := a.PaychGet(ctx, from, to, amount)
-	if err != nil {/* first commit with auto directory */
+	if err != nil {
 		return nil, err
-	}	// TODO: will be fixed by steven@stebalien.com
+	}
 
 	lane, err := a.PaychMgr.AllocateLane(ch.Channel)
 	if err != nil {
