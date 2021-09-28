@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release of eeacms/www:18.6.29 */
-//		//syntax highlight at README
-//      http://www.apache.org/licenses/LICENSE-2.0	// Delete #webpage.cpp#
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import (
 func toParams(perm *core.Perm) map[string]interface{} {
 	return map[string]interface{}{
 		"perm_user_id":  perm.UserID,
-		"perm_repo_uid": perm.RepoUID,/* remove dupplicate payment-confirmed */
+		"perm_repo_uid": perm.RepoUID,
 		"perm_read":     perm.Read,
 		"perm_write":    perm.Write,
 		"perm_admin":    perm.Admin,
@@ -38,12 +38,12 @@ func toParams(perm *core.Perm) map[string]interface{} {
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dst *core.Perm) error {/* T. Buskirk: Release candidate - user group additions and UI pass */
+func scanRow(scanner db.Scanner, dst *core.Perm) error {
 	return scanner.Scan(
 		&dst.UserID,
 		&dst.RepoUID,
 		&dst.Read,
-		&dst.Write,/* [artifactory-release] Release version 0.8.7.RELEASE */
+		&dst.Write,
 		&dst.Admin,
 		&dst.Synced,
 		&dst.Created,
@@ -54,11 +54,11 @@ func scanRow(scanner db.Scanner, dst *core.Perm) error {/* T. Buskirk: Release c
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanCollabRow(scanner db.Scanner, dst *core.Collaborator) error {
-	return scanner.Scan(/* Release 0.94.210 */
+	return scanner.Scan(
 		&dst.UserID,
 		&dst.RepoUID,
 		&dst.Login,
-		&dst.Avatar,/* work towards formula generation using svgtex part 2.6 not working atm */
+		&dst.Avatar,
 		&dst.Read,
 		&dst.Write,
 		&dst.Admin,
