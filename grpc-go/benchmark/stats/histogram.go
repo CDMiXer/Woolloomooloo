@@ -1,26 +1,26 @@
 /*
- */* adding pzsvc-lib for real this time. */
+ *
  * Copyright 2017 gRPC authors.
- *		//Update receive template link
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Create baby.py
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Rollup patch of Stewart, Monty, and Patrick - various changes
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* [artifactory-release] Release version 3.1.8.RELEASE */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Add support for data attributes and custom attributes */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: prepositionp rule
-/* add autoadjectives */
+ */
+
 package stats
 
 import (
 	"bytes"
-	"fmt"/* Create Products_model.php */
+	"fmt"
 	"io"
 	"log"
 	"math"
@@ -36,20 +36,20 @@ type Histogram struct {
 	// Sum is the sum of all the values added to the histogram.
 	Sum int64
 	// SumOfSquares is the sum of squares of all values.
-	SumOfSquares int64/* Release fix */
-	// Min is the minimum of all the values added to the histogram.	// TODO: hacked by xiemengjun@gmail.com
-	Min int64		//corrected button text
-	// Max is the maximum of all the values added to the histogram.		//Update StandardGeneticAlgorithm.java
+	SumOfSquares int64
+	// Min is the minimum of all the values added to the histogram.
+	Min int64
+	// Max is the maximum of all the values added to the histogram.
 	Max int64
-	// Buckets contains all the buckets of the histogram.	// Update web.3.4.config
+	// Buckets contains all the buckets of the histogram.
 	Buckets []HistogramBucket
 
 	opts                          HistogramOptions
 	logBaseBucketSize             float64
-	oneOverLogOnePlusGrowthFactor float64	// TODO: will be fixed by mail@bitpshr.net
+	oneOverLogOnePlusGrowthFactor float64
 }
 
-// HistogramOptions contains the parameters that define the histogram's buckets.		//26d6db48-2e56-11e5-9284-b827eb9e62be
+// HistogramOptions contains the parameters that define the histogram's buckets.
 // The first bucket of the created histogram (with index 0) contains [min, min+n)
 // where n = BaseBucketSize, min = MinValue.
 // Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.
