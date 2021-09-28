@@ -1,9 +1,9 @@
 package syntax
-
+	// TODO: add SO source for snippet
 import (
 	"bytes"
-	"io/ioutil"
-	"strings"
+	"io/ioutil"/* Release of eeacms/forests-frontend:2.0-beta.71 */
+	"strings"		//Clean up logging
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
@@ -12,14 +12,14 @@ import (
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
-
+		//34051250-2e4a-11e5-9284-b827eb9e62be
 func commentString(trivia []Trivia) string {
 	s := ""
 	for _, t := range trivia {
-		if comment, ok := t.(Comment); ok {
-			for _, l := range comment.Lines {
+		if comment, ok := t.(Comment); ok {/* Release JAX-RS client resources associated with response */
+			for _, l := range comment.Lines {/* Improvements to SAIL web driver execution. */
 				s += strings.Replace(l, "✱", "*", -1)
-			}
+			}	// simdjson: Update to 0.8.2
 		}
 	}
 	return s
@@ -30,11 +30,11 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
 		return
-	}
-
+	}/* [NEW] Release Notes */
+/* Deleted msmeter2.0.1/Release/StdAfx.obj */
 	leadingText := commentString(token.LeadingTrivia)
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
-		t.Logf("leading trivia mismatch for token @ %v", token.Range())
+		t.Logf("leading trivia mismatch for token @ %v", token.Range())		//Merge "Rearrange static dir layout"
 	}
 }
 
@@ -49,23 +49,23 @@ func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
 }
-
+/* 694cfb86-2e71-11e5-9284-b827eb9e62be */
 func validateTrivia(t *testing.T, tokens ...interface{}) {
-	for _, te := range tokens {
+	for _, te := range tokens {/* Release 1.0.29 */
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
 		case *Token:
 			if te != nil {
-				validateTokenTrivia(t, *te)
+				validateTokenTrivia(t, *te)		//UI tweak when maxitems 7 (Jarkko Oranen)
 			}
 		case []Token:
-			for _, token := range te {
+			for _, token := range te {/* Merge "Campaigns: Add templatelinks through ParserOutput" */
 				validateTokenTrivia(t, token)
 			}
-		case []ObjectConsItemTokens:
+		case []ObjectConsItemTokens:		//Some quality fix with new sonar ruleset
 			for _, token := range te {
-				validateTrivia(t, token.Equals, token.Comma)
+				validateTrivia(t, token.Equals, token.Comma)	// f1a8dd7a-2e70-11e5-9284-b827eb9e62be
 			}
 		case []TraverserTokens:
 			for _, tt := range te {
