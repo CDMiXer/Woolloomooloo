@@ -1,8 +1,8 @@
-package messagepool/* Merge "Release 1.0.0.121 QCACLD WLAN Driver" */
+package messagepool
 
 import (
-	"context"/* Release 0.2.12 */
-	"fmt"	// TODO:  correct logic for missing(msg) 
+	"context"
+	"fmt"
 	"sort"
 	"testing"
 
@@ -10,17 +10,17 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"/* Updating Playground solution name */
-/* Add bluray.png */
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Released 0.0.17 */
-/* Delete spitfire.svg */
-	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"		//e22eeff2-2e5b-11e5-9284-b827eb9e62be
+	logging "github.com/ipfs/go-log/v2"
+
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+
+	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
-)/* Added allow root for bower */
+)
 
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
@@ -31,25 +31,25 @@ type testMpoolAPI struct {
 
 	bmsgs      map[cid.Cid][]*types.SignedMessage
 	statenonce map[address.Address]uint64
-	balance    map[address.Address]types.BigInt	// [infra] parseText not parse
+	balance    map[address.Address]types.BigInt
 
 	tipsets []*types.TipSet
 
-	published int	// TODO: hacked by vyzo@hackzen.org
-		//Small stylistic changes
-	baseFee types.BigInt	// TODO: Remove .DS_Store that was left lying around
+	published int
+
+	baseFee types.BigInt
 }
-		//add xcode project
+
 func newTestMpoolAPI() *testMpoolAPI {
 	tma := &testMpoolAPI{
 		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),
-		statenonce: make(map[address.Address]uint64),/* Delete resulte.txt */
+		statenonce: make(map[address.Address]uint64),
 		balance:    make(map[address.Address]types.BigInt),
 		baseFee:    types.NewInt(100),
 	}
 	genesis := mock.MkBlock(nil, 1, 1)
 	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))
-	return tma	// TODO: This version will at least send all of the files.
+	return tma
 }
 
 func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
