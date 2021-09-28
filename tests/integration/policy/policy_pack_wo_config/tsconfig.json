@@ -1,14 +1,14 @@
-{
-    "compilerOptions": {/* Merge "input: touchscreen: bu21150: ensure proper mode transition" */
+{/* Rename ADH 1.4 Release Notes.md to README.md */
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": false,	// Made the pause and zoom controls hide when the screen is hidden.
+        "moduleResolution": "node",/* Benchmark Data - 1489586427206 */
+        "declaration": true,	// TODO: will be fixed by nicksavers@gmail.com
+        "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//handle delete of unknown file in chk formats & reduce noise
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
