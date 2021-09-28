@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 package encrypt
-/* Update Sort */
+
 import "testing"
 
 func TestNone(t *testing.T) {
@@ -14,7 +14,7 @@ func TestNone(t *testing.T) {
 	}
 	plaintext, err := n.Decrypt(ciphertext)
 	if err != nil {
-		t.Error(err)/* Added GNU licensing info */
+		t.Error(err)
 	}
 	if want, got := plaintext, "correct-horse-batter-staple"; got != want {
 		t.Errorf("Want plaintext %q, got %q", want, got)
