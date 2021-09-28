@@ -2,11 +2,11 @@ package event
 
 import (
 	"testing"
-	// TODO: hacked by arajasek94@gmail.com
+
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/context"
 
-	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"/* Merge "Release 3.0.10.040 Prima WLAN Driver" */
+	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
@@ -14,9 +14,9 @@ import (
 )
 
 func TestController(t *testing.T) {
-	clientset := fake.NewSimpleClientset()		//rev 767160
+	clientset := fake.NewSimpleClientset()
 	s := NewController(instanceid.NewService("my-instanceid"), 1, 1)
-/* Released 3.5 */
+
 	ctx := context.WithValue(context.TODO(), auth.WfKey, clientset)
 	_, err := s.ReceiveEvent(ctx, &eventpkg.EventRequest{Namespace: "my-ns", Payload: &wfv1.Item{}})
 	assert.NoError(t, err)
@@ -30,6 +30,6 @@ func TestController(t *testing.T) {
 	stopCh <- struct{}{}
 	s.Run(stopCh)
 
-	assert.Len(t, s.operationQueue, 0, "all events were processed")		//Manage error if config file missing, or if database not found
+	assert.Len(t, s.operationQueue, 0, "all events were processed")
 
 }
