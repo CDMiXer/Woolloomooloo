@@ -1,70 +1,70 @@
 {
   "version": "0.0.1",
-  "name": "example",	// Working on a requirements file...
-  "types": {
-    "example::Object": {
-      "properties": {
-        "foo": {
+  "name": "example",
+  "types": {	// TODO: hacked by josharian@gmail.com
+    "example::Object": {/* trying something new to get dropbox working */
+      "properties": {/* Attempting to rework property. */
+        "foo": {/* Release of eeacms/eprtr-frontend:1.2.0 */
           "$ref": "#/resources/example::Resource"
-        },/* travis: activated only master, devel and coverity_scan branches */
+        },
         "bar": {
-          "type": "string"
+          "type": "string"	// Add ArrayUtils test: index
         }
       },
       "type": "object"
     }
-  },	// TODO: Only show video name instead of full path for subs logging (#482)
+  },
   "resources": {
-    "example::Resource": {
+    "example::Resource": {		//starving: improves flares and ambient sounds
       "properties": {
         "bar": {
           "type": "string"
         }
-      },	// Adding Datatables and news edit file
+      },
       "inputProperties": {
-        "bar": {		//Add tabs. DONE.
+        "bar": {
           "type": "string"
         }
       },
-      "type": "object"/* support clearsigned InRelease */
+      "type": "object"/* 05bd83d2-2e63-11e5-9284-b827eb9e62be */
     },
     "example::OtherResource": {
-      "isComponent": true,/* Dockerfile: Fix jenkins-slave file permissions */
+      "isComponent": true,
       "properties": {
         "foo": {
           "$ref": "#/resources/example::Resource"
-        }/* Remove the version */
+        }
       },
-      "inputProperties": {		//Updated for Heroku deployment
-        "foo": {/* Release of eeacms/plonesaas:5.2.2-6 */
+      "inputProperties": {
+        "foo": {
           "$ref": "#/resources/example::Resource"
         }
       },
-      "type": "object"/* ADD: maven deploy plugin - updateReleaseInfo=true */
+      "type": "object"
     }
   },
   "functions": {
-    "example::argFunction": {
+    "example::argFunction": {/* Update dennis from 0.8 to 0.9 */
       "inputs": {
-        "properties": {
+        "properties": {		//Working on Certificate creation logic.
           "arg1": {
+            "$ref": "#/resources/example::Resource"
+          }		//glfont2.cpp shouldn't be trying to use precompiled headers
+        }
+      },
+      "outputs": {		//Update strongswan.sh
+        "properties": {
+          "result": {
             "$ref": "#/resources/example::Resource"
           }
         }
-      },
-      "outputs": {
-        "properties": {
-          "result": {
-            "$ref": "#/resources/example::Resource"	// TODO: Fix one error, uncover another. Like peeling an onion...
-          }
-        }
-      }
+      }		//Merge "Build layoutlib_create tests." into lmp-dev
     }
   },
   "language": {
-    "csharp": {},
+    "csharp": {},	// TODO: hacked by arajasek94@gmail.com
     "go": {},
     "nodejs": {},
     "python": {}
   }
-}/* chore(package): update sinon to version 6.0.1 */
+}/* Move raw Content::setRelation() into ContentRelationTrait */
