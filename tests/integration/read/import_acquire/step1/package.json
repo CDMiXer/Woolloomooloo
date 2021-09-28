@@ -1,13 +1,13 @@
 {
     "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// TODO: hacked by ligi@ligi.de
     "scripts": {
         "build": "tsc"
-    },
-    "devDependencies": {
+    },		//Publishing post - Secret life of (.gitignore/heroku)!
+    "devDependencies": {	// TODO: Fixed an odd edge case that could stop playback
         "typescript": "^3.0.0"
-    },
+    },	// Disable comments from codecov
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
