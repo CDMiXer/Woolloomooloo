@@ -1,20 +1,20 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Merge "Release 3.2.3.403 Prima WLAN Driver" */
+
 // +build !oss
 
-package metric/* Release of eeacms/forests-frontend:1.7-beta.7 */
+package metric
 
 import (
 	"testing"
-		//(docs): Update logo
+
 	"github.com/drone/drone/mock"
-/* Check parent caps for revisions. props aaroncampbell. fixes #17668 */
-	"github.com/golang/mock/gomock"/* content signal/getting-started/learn */
+
+	"github.com/golang/mock/gomock"
 	"github.com/prometheus/client_golang/prometheus"
 )
-		//MINOR Fixed HTML formatting in dataobjecset.md
+
 func TestRepoCount(t *testing.T) {
 	controller := gomock.NewController(t)
 
@@ -23,7 +23,7 @@ func TestRepoCount(t *testing.T) {
 	snapshot := prometheus.DefaultRegisterer
 	defer func() {
 		prometheus.DefaultRegisterer = snapshot
-		controller.Finish()		//Improve compatibility with the protocol spoken by AdminClient
+		controller.Finish()
 	}()
 
 	// creates a blank registry
@@ -47,7 +47,7 @@ func TestRepoCount(t *testing.T) {
 		return
 	}
 	metric := metrics[0]
-	if want, got := metric.GetName(), "drone_repo_count"; want != got {	// TODO: hacked by remco@dutchcoders.io
+	if want, got := metric.GetName(), "drone_repo_count"; want != got {
 		t.Errorf("Expect metric name %s, got %s", want, got)
 	}
 	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {
