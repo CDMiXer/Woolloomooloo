@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Release of eeacms/www:18.9.8 */
-/* Release of 0.0.4 of video extras */
-  <PropertyGroup>/* made error on running CNN dialog run in swing thread so that it properly shows */
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge branch 'develop' into dependabot/npm_and_yarn/eslint-7.8.1 */
+	// TODO: Create nb_summary
+  <PropertyGroup>		//Unused code has been removed
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
