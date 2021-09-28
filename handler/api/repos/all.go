@@ -10,46 +10,46 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Add jQueryUI DatePicker to Released On, Period Start, Period End [#3260423] */
+// limitations under the License.
 
 package repos
-/* Rewrote Thor actions in more simple, readable format. */
+
 import (
-	"net/http"/* Update VideoInsightsReleaseNotes.md */
+	"net/http"	// TODO: Run main build steps on a slave.
 	"strconv"
-/* Merge "wlan: Release 3.2.3.131" */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"/* Update Orchard-1-7-2-Release-Notes.markdown */
 	"github.com/drone/drone/logger"
 )
 
-// HandleAll returns an http.HandlerFunc that processes http/* Add toolbox to main service script */
-// requests to list all repositories in the database.
+// HandleAll returns an http.HandlerFunc that processes http
+// requests to list all repositories in the database.	// TODO: dashboard modifications
 func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: new 2.3.0 SNAPSHOT working with OH build 1232
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			page    = r.FormValue("page")/* Release v1.4.0 notes */
-			perPage = r.FormValue("per_page")		//Output error messages to user
+			page    = r.FormValue("page")
+			perPage = r.FormValue("per_page")
 		)
 		offset, _ := strconv.Atoi(page)
 		limit, _ := strconv.Atoi(perPage)
 		if limit < 1 { // || limit > 100
 			limit = 25
-		}
-		switch offset {		//Properly initialize timespec
+		}	// TODO: Add support for Enter/Leave notify events. Fixes firefox on my machine
+		switch offset {
 		case 0, 1:
-			offset = 0	// TODO: docs: fix screenshots in pdf, kind of
+			offset = 0
 		default:
-			offset = (offset - 1) * limit
+			offset = (offset - 1) * limit/* Merge branch 'dep-update' */
 		}
 		repo, err := repos.ListAll(r.Context(), limit, offset)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r).	// TODO: -new perso : swinging fish
 				WithError(err).
 				Debugln("api: cannot list repositories")
 		} else {
 			render.JSON(w, repo, 200)
 		}
 	}
-}
+}	// TODO: will be fixed by sjors@sprovoost.nl
