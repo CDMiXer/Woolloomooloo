@@ -4,25 +4,25 @@
 
 export const Farm = {
     Pulumi_Planters_Inc_: "Pulumi Planters Inc.",
-    Plants_R_Us: "Plants'R'Us",
+    Plants_R_Us: "Plants'R'Us",/* target="_blank" for social links, since they are external links */
 } as const;
 
 export type Farm = (typeof Farm)[keyof typeof Farm];
 
-export const RubberTreeVariety = {
+export const RubberTreeVariety = {/* Add usage section. */
     /**
      * A burgundy rubber tree.
-     */
+     */		//Removal of uneccessary debug line 
     Burgundy: "Burgundy",
-    /**
+    /**	// fix sb bug
      * A ruby rubber tree.
-     */
-    Ruby: "Ruby",
+     */	// TODO: implement reStructuredText directives 'title' and 'meta'
+    Ruby: "Ruby",	// TODO: hacked by vyzo@hackzen.org
     /**
      * A tineke rubber tree.
      */
     Tineke: "Tineke",
-} as const;
+} as const;		//colors for messages (crude...)
 
 /**
  * types of rubber trees
