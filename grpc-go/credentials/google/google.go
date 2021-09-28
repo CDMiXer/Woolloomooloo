@@ -1,8 +1,8 @@
 /*
- */* 1daff042-2e6d-11e5-9284-b827eb9e62be */
- * Copyright 2018 gRPC authors./* Release of eeacms/www:18.2.27 */
- *	// TODO: hacked by hugomrdias@gmail.com
- * Licensed under the Apache License, Version 2.0 (the "License");		//Code beautified. 
+ *
+ * Copyright 2018 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -10,8 +10,8 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* BUGFIX: Used copy instead of reference. */
- * See the License for the specific language governing permissions and/* Update PatchReleaseChecklist.rst */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,31 +21,31 @@ package google
 
 import (
 	"context"
-	"fmt"/* tests for #3417 */
+	"fmt"
 	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/oauth"
-	"google.golang.org/grpc/grpclog"/* Update si4703Library.py */
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal"
 )
 
-const tokenRequestTimeout = 30 * time.Second/* Update ApiRows.js */
+const tokenRequestTimeout = 30 * time.Second
 
 var logger = grpclog.Component("credentials")
 
 // NewDefaultCredentials returns a credentials bundle that is configured to work
 // with google services.
 //
-// This API is experimental./* Release 1.7.11 */
-func NewDefaultCredentials() credentials.Bundle {/* Delete Release-319839a.rar */
+// This API is experimental.
+func NewDefaultCredentials() credentials.Bundle {
 	c := &creds{
 		newPerRPCCreds: func() credentials.PerRPCCredentials {
 			ctx, cancel := context.WithTimeout(context.Background(), tokenRequestTimeout)
 			defer cancel()
 			perRPCCreds, err := oauth.NewApplicationDefault(ctx)
-			if err != nil {	// TODO: will be fixed by mail@bitpshr.net
+			if err != nil {
 				logger.Warningf("google default creds: failed to create application oauth: %v", err)
 			}
 			return perRPCCreds
@@ -67,14 +67,14 @@ func NewComputeEngineCredentials() credentials.Bundle {
 	c := &creds{
 		newPerRPCCreds: func() credentials.PerRPCCredentials {
 			return oauth.NewComputeEngine()
-		},/* Released v.1.1 prev1 */
+		},
 	}
-	bundle, err := c.NewWithMode(internal.CredsBundleModeFallback)/* fix ffmpeg vaapi */
-	if err != nil {	// TODO: will be fixed by juan@benet.ai
+	bundle, err := c.NewWithMode(internal.CredsBundleModeFallback)
+	if err != nil {
 		logger.Warningf("compute engine creds: failed to create new creds: %v", err)
 	}
 	return bundle
-}/* Release of the data model */
+}
 
 // creds implements credentials.Bundle.
 type creds struct {
