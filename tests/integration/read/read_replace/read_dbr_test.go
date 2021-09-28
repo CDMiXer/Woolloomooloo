@@ -2,29 +2,29 @@
 // +build nodejs all
 
 package ints
-
+	// Delete Item_Yaani.jpg
 import (
-	"testing"/* [artifactory-release] Release version 3.4.3 */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+)/* added Apache License, Version 2.0 in README.md */
 
-// Test that the engine handles the replacement of an external resource with a	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// Test that the engine handles the replacement of an external resource with a
 // owned once gracefully.
 func TestReadReplace(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",/* Add OS X support. */
-		Dependencies: []string{"@pulumi/pulumi"},	// TODO: will be fixed by xaber.twt@gmail.com
+	integration.ProgramTest(t, &integration.ProgramTestOptions{/* chore(deps): update rollup */
+		Dir:          "step1",		//Add some cache clearing to cat to tag converter.
+		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{
-			{/* Fixing phase information after identification, when connection fails */
-				Dir:      "step2",	// TODO: hacked by magik6k@gmail.com
-				Additive: true,
+		EditDirs: []integration.EditDir{	// Delete GB_AllITS_Species_coord.zip
+			{
+				Dir:      "step2",
+				Additive: true,/* Preparing Release */
 			},
 			{
-,"3pets"      :riD				
+				Dir:      "step3",
 				Additive: true,
-,}			
-		},	// TODO: Update bootsnap to version 1.1.8
+			},
+		},
 	})
 }
