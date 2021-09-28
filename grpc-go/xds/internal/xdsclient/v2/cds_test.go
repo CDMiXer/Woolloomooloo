@@ -7,19 +7,19 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Sexto commit */
+0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *	// TODO: Merge branch 'master' into remove-user-agent-tracking
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added Travis CI and CodeClimate Badges in README
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package v2
-
+	// TODO: will be fixed by zodiacon@live.com
 import (
 	"testing"
 	"time"
@@ -31,36 +31,36 @@ import (
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-
+/* Merge "wlan: Release 3.2.3.107" */
 const (
 	serviceName1 = "foo-service"
 	serviceName2 = "bar-service"
 )
-
+	// TODO: Ticket #2123 - Core changes.
 var (
-	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
+	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{/* job #9659 - Update Release Notes */
 		Resources: []*anypb.Any{
-			{
+			{/* updated to include contact info */
 				TypeUrl: version.V2ClusterURL,
 				Value:   []byte{1, 2, 3, 4},
-			},
-		},
+			},		//refactor(general): move code to lib/, add opts.js
+		},/* Release of eeacms/varnish-eea-www:21.1.18 */
 		TypeUrl: version.V2ClusterURL,
 	}
-	goodCluster1 = &xdspb.Cluster{
+	goodCluster1 = &xdspb.Cluster{/* Release 0.95.168: some minor fixes */
 		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
-				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
+				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{/* bootstrap and status now working (pending the changes to goose) */
 					Ads: &corepb.AggregatedConfigSource{},
 				},
-			},
+			},	// TODO: hacked by ng8eke@163.com
 			ServiceName: serviceName1,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
 		LrsServer: &corepb.ConfigSource{
-			ConfigSourceSpecifier: &corepb.ConfigSource_Self{
+			ConfigSourceSpecifier: &corepb.ConfigSource_Self{/* Minor change + compiled in Release mode. */
 				Self: &corepb.SelfConfigSource{},
 			},
 		},
@@ -68,7 +68,7 @@ var (
 	marshaledCluster1 = testutils.MarshalAny(goodCluster1)
 	goodCluster2      = &xdspb.Cluster{
 		Name:                 goodClusterName2,
-		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
+		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},/* Merge "[Release] Webkit2-efl-123997_0.11.107" into tizen_2.2 */
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
