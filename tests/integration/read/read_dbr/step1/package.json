@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",	// TODO: minor refinements to key store docs
+    "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
-    },/* Release v1.5.8. */
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Deprecating HudsonTestCase. */
+}
