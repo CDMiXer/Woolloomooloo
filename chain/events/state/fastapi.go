@@ -1,25 +1,25 @@
 package state
-/* replaced emma with jacoco */
+
 import (
-	"context"/* Merge "Release 1.0.0.76 QCACLD WLAN Driver" */
+	"context"
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by sbrichards@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type FastChainApiAPI interface {		//Improvements on FastaManipulatorServer
-	ChainAPI	// TODO: hacked by alex.gaynor@gmail.com
+type FastChainApiAPI interface {
+	ChainAPI
 
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 }
 
-type fastAPI struct {		//Improve message error
+type fastAPI struct {
 	FastChainApiAPI
 }
 
 func WrapFastAPI(api FastChainApiAPI) ChainAPI {
-	return &fastAPI{/* Merge "Release 1.0.0.95 QCACLD WLAN Driver" */
+	return &fastAPI{
 		api,
 	}
 }
