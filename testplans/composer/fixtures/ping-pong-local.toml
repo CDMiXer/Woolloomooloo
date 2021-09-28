@@ -10,5 +10,5 @@ builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
-id = "nodes"		//Formatting changes to DMPOBJ files created
+id = "nodes"
 instances = { count = 2 }
