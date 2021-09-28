@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package reaper/* support for additional config files; introducing torque.ini */
+package reaper
 
 import (
 	"context"
@@ -16,35 +16,35 @@ import (
 )
 
 var nocontext = context.Background()
-/* refactoring assets */
+
 //
-// reap tests	// TODO: will be fixed by admin@multicoin.co
+// reap tests
 //
 
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
-// ignored.		//Delete DestinationView_BASE_4356.qml
-func TestReapPending(t *testing.T) {	// TODO: Update and rename Banned.sh to 05.sh
-	controller := gomock.NewController(t)/* Release 1-100. */
+// ignored.
+func TestReapPending(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	defer func() {
-		now = time.Now/* Release v1.5. */
+		now = time.Now
 	}()
-	now = func() time.Time {	// TODO: hacked by caojiaoyue@protonmail.com
+	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
 	}
 
 	mockRepo := &core.Repository{
 		ID: 2,
-	}/* Merge branch 'release/2.12.0-Release' */
-	mockBuild := &core.Build{/* new: readded old structure as compatibility imports */
+	}
+	mockBuild := &core.Build{
 		ID:      1,
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
-		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel/* Release dhcpcd-6.11.5 */
-	}/* Demo data for reviews. */
+		Created: mustParse("2006-01-01T00:00:00").Unix(), // expire > 24 hours, must cancel
+	}
 	mockPending := []*core.Build{
 		mockBuild,
 		{
@@ -54,14 +54,14 @@ func TestReapPending(t *testing.T) {	// TODO: Update and rename Banned.sh to 05.
 			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
 		},
 	}
-/* Stop exposing mappings. */
-	repos := mock.NewMockRepositoryStore(controller)/* Prepare v1.1 release */
+
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
-/* Merge "Release 3.0.10.052 Prima WLAN Driver" */
+
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
 	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
-	// Merge "Improve deployment page"
+
 	canceler := mock.NewMockCanceler(controller)
 	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
 
