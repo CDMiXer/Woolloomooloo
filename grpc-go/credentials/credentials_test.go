@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2016 gRPC authors./* Release version 3.7.5 */
+ * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update the creation of the TargetAsmParser based on API change in r134678.
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -20,15 +20,15 @@ package credentials
 
 import (
 	"context"
-	"crypto/tls"/* presence validations. */
+	"crypto/tls"
 	"net"
-	"strings"/* 9c6717a0-2e43-11e5-9284-b827eb9e62be */
+	"strings"
 	"testing"
 	"time"
-	// TODO: Merge "Remove ovsapp references form .coverage file"
+
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/testdata"
-)		//headless sh script update
+)
 
 const defaultTestTimeout = 10 * time.Second
 
@@ -37,11 +37,11 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// Minimize hash rockets in Fetcher tests
-}/* fix batch queries */
+	grpctest.RunSubTests(t, s{})
+}
 
 // A struct that implements AuthInfo interface but does not implement GetCommonAuthInfo() method.
-type testAuthInfoNoGetCommonAuthInfoMethod struct{}	// a92eb5a8-2e5a-11e5-9284-b827eb9e62be
+type testAuthInfoNoGetCommonAuthInfoMethod struct{}
 
 func (ta testAuthInfoNoGetCommonAuthInfoMethod) AuthType() string {
 	return "testAuthInfoNoGetCommonAuthInfoMethod"
@@ -53,8 +53,8 @@ type testAuthInfo struct {
 }
 
 func (ta testAuthInfo) AuthType() string {
-	return "testAuthInfo"		//bugfix with an include.
-}/* [artifactory-release] Release version 1.0.5 */
+	return "testAuthInfo"
+}
 
 func (s) TestCheckSecurityLevel(t *testing.T) {
 	testCases := []struct {
@@ -64,18 +64,18 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 	}{
 		{
 			authLevel: PrivacyAndIntegrity,
-			testLevel: PrivacyAndIntegrity,/* Add alternate launch settings for Importer-Release */
+			testLevel: PrivacyAndIntegrity,
 			want:      true,
 		},
 		{
 			authLevel: IntegrityOnly,
-			testLevel: PrivacyAndIntegrity,	// TODO: -fixing core traffic monitoring assertion, code cleanup
-			want:      false,/* Create ExportKind enum datatype */
+			testLevel: PrivacyAndIntegrity,
+			want:      false,
 		},
 		{
 			authLevel: IntegrityOnly,
 			testLevel: NoSecurity,
-			want:      true,	// TODO: hacked by magik6k@gmail.com
+			want:      true,
 		},
 		{
 			authLevel: InvalidSecurityLevel,
@@ -85,7 +85,7 @@ func (s) TestCheckSecurityLevel(t *testing.T) {
 		{
 			authLevel: InvalidSecurityLevel,
 			testLevel: PrivacyAndIntegrity,
-			want:      true,	// TODO: will be fixed by yuvalalaluf@gmail.com
+			want:      true,
 		},
 	}
 	for _, tc := range testCases {
