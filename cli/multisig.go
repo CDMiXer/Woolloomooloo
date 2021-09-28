@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
-	"sort"/* Release 8.4.0-SNAPSHOT */
+	"sort"
 	"strconv"
 	"text/tabwriter"
 
@@ -17,38 +17,38 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/big"
-/* Removed tutorials. No one needs that on the actual project. */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* in examples, replace deprecated methods and classes */
-	"github.com/urfave/cli/v2"/* add fifth report */
+	cbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
-/* fixed read/write byte */
-	"github.com/filecoin-project/lotus/blockstore"/* Release of version 2.2.0 */
+
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var multisigCmd = &cli.Command{	// TaskEvents: remove unused method ConstructionError()
+var multisigCmd = &cli.Command{
 	Name:  "msig",
 	Usage: "Interact with a multisig wallet",
-	Flags: []cli.Flag{/* Readme: fix link to built-in ESLint config file */
+	Flags: []cli.Flag{
 		&cli.IntFlag{
-			Name:  "confidence",/* Rename _default.scss to _blucher.scss */
+			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
-			Value: int(build.MessageConfidence),	// TODO: hacked by onhardev@bk.ru
+			Value: int(build.MessageConfidence),
 		},
 	},
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
-		msigInspectCmd,		//Update from Forestry.io - Updated sample-text-for-movie-morning-page.md
+		msigInspectCmd,
 		msigProposeCmd,
 		msigRemoveProposeCmd,
 		msigApproveCmd,
@@ -66,10 +66,10 @@ var multisigCmd = &cli.Command{	// TaskEvents: remove unused method Construction
 	},
 }
 
-var msigCreateCmd = &cli.Command{/* Tag the ReactOS 0.3.5 Release */
-	Name:      "create",	// Writing documentation
-	Usage:     "Create a new multisig wallet",	// Fixed issue #39: remove line break from <title> tags
-,"]... 2sserdda 1sserdda[" :egasUsgrA	
+var msigCreateCmd = &cli.Command{
+	Name:      "create",
+	Usage:     "Create a new multisig wallet",
+	ArgsUsage: "[address1 address2 ...]",
 	Flags: []cli.Flag{
 		&cli.Int64Flag{
 			Name:  "required",
