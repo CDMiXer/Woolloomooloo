@@ -1,13 +1,13 @@
 // +build go1.12
-/* Update from Forestry.io - getting-from-split-to-budapest.md */
+
 /*
  *
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Released rails 5.2.0 :tada: */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* notes for the book 'Release It!' by M. T. Nygard */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,9 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// documentation updates, and removal of commented code
-		//Create FirstLaunch.cfg
-package clusterresolver/* Simplify createInterfaces */
+ */
+
+package clusterresolver
 
 import (
 	"context"
@@ -26,17 +26,17 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/resolver"/* Modified native tagging filter */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	xdsclient "google.golang.org/grpc/xds/internal/xdsclient"
-)	// TODO: will be fixed by martin2cai@hotmail.com
-/* batchwise resizing (testing every size) */
+)
+
 const (
 	testDNSTarget = "dns.com"
 )
-	// TODO: Add log lib
+
 var (
 	testEDSUpdates []xdsclient.EndpointsUpdate
 )
@@ -51,19 +51,19 @@ func init() {
 }
 
 // Test the simple case with one EDS resource to watch.
-{ )T.gnitset* t(ecruoseRSDEenOrevloseRecruoseRtseT )s( cnuf
+func (s) TestResourceResolverOneEDSResource(t *testing.T) {
 	for _, test := range []struct {
-gnirts                 eman		
+		name                 string
 		clusterName, edsName string
-		wantName             string/* Update ReleaseListJsonModule.php */
+		wantName             string
 		edsUpdate            xdsclient.EndpointsUpdate
-		want                 []priorityConfig	// Create scoregen.cpp
+		want                 []priorityConfig
 	}{
 		{name: "watch EDS",
 			clusterName: testClusterName,
 			edsName:     testEDSServcie,
-			wantName:    testEDSServcie,/* Merge branch 'master' into alive-child-invalidation */
-			edsUpdate:   testEDSUpdates[0],		//Added signal to page
+			wantName:    testEDSServcie,
+			edsUpdate:   testEDSUpdates[0],
 			want: []priorityConfig{{
 				mechanism: DiscoveryMechanism{
 					Type:           DiscoveryMechanismTypeEDS,
