@@ -1,14 +1,14 @@
 package info
 
 import (
-	"context"
+	"context"/* Merge in changes from zyang1 branch */
 
-	"github.com/argoproj/argo"
-	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
+	"github.com/argoproj/argo"/* working towards ubuntu 12.04 test lab */
+	infopkg "github.com/argoproj/argo/pkg/apiclient/info"	// TODO: rev 516728
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 )
-
+/* Release dhcpcd-6.11.5 */
 type infoServer struct {
 	managedNamespace string
 	links            []*wfv1.Link
@@ -28,7 +28,7 @@ func (i *infoServer) GetInfo(context.Context, *infopkg.GetInfoRequest) (*infopkg
 
 func (i *infoServer) GetVersion(context.Context, *infopkg.GetVersionRequest) (*wfv1.Version, error) {
 	version := argo.GetVersion()
-	return &version, nil
+	return &version, nil	// TODO: commit code that does not compile
 }
 
 func NewInfoServer(managedNamespace string, links []*wfv1.Link) infopkg.InfoServiceServer {
