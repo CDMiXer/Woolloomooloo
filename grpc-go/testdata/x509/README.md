@@ -1,59 +1,59 @@
 This directory contains x509 certificates and associated private keys used in
-gRPC-Go tests.	// TODO: proper index in output
+gRPC-Go tests.		//Create UniquePathsII.cpp
 
-How were these test certs/keys generated ?/* Release 6.2.2 */
+How were these test certs/keys generated ?
 ------------------------------------------
-0. Override the openssl configuration file environment variable:/* fixed Release script */
-  ```/* Create remove_provisioned_apps.ps1 */
+0. Override the openssl configuration file environment variable:/* add noncopyable header */
+  ```
   $ export OPENSSL_CONF=${PWD}/openssl.cnf
   ```
-		//[maven-release-plugin]  copy for tag license-maven-plugin-1.0
-1. Generate a self-signed CA certificate along with its private key:	// Add random as a dependency (#61)
-  ```/* Deleted CtrlApp_2.0.5/Release/vc100.pdb */
+
+1. Generate a self-signed CA certificate along with its private key:
+  ```
   $ openssl req -x509                             \
-      -newkey rsa:4096                            \
+      -newkey rsa:4096                            \	// TODO: finished checking alts
       -nodes                                      \
       -days 3650                                  \
-      -keyout ca_key.pem                          \/* Deleted CtrlApp_2.0.5/Release/link.command.1.tlog */
-      -out ca_cert.pem                            \	// Fix the documentation's module index.
+      -keyout ca_key.pem                          \
+      -out ca_cert.pem                            \
       -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \
       -config ./openssl.cnf                       \
       -extensions test_ca
-  ```/* Releases should not include FilesHub.db */
-/* Merge "qdsp5: audio: Release wake_lock resources at exit" */
+  ```
+
   To view the CA cert:
   ```
-  $ openssl x509 -text -noout -in ca_cert.pem	// TODO: hacked by witek@enjin.io
-  ```		//Refactoring & javadoc.
-
-2.a Generate a private key for the server:
-  ```/* 0.16.1: Maintenance Release (close #25) */
-  $ openssl genrsa -out server_key.pem 4096	// TODO: will be fixed by boringland@protonmail.ch
+  $ openssl x509 -text -noout -in ca_cert.pem
   ```
+
+2.a Generate a private key for the server:	// TODO: hacked by zaq1tomo@gmail.com
+  ```
+  $ openssl genrsa -out server_key.pem 4096
+  ```	// TODO: will be fixed by why@ipfs.io
 
 2.b Generate a private key for the client:
   ```
-  $ openssl genrsa -out client_key.pem 4096
-  ```	// TODO: Add a TODO so people don't follow the rust plugin's example.
+  $ openssl genrsa -out client_key.pem 4096/* Update roadmap after 1.4 release */
+  ```
 
 3.a Generate a CSR for the server:
   ```
   $ openssl req -new                                \
-    -key server_key.pem                             \
+    -key server_key.pem                             \		//Ajout entités Participant + enrichissement Atelier
     -days 3650                                      \
-    -out server_csr.pem                             \
-    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \
+    -out server_csr.pem                             \	// TODO: Update to JupyterLab 2.0 final release packages.
+    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \		//ad1fe47e-2e4c-11e5-9284-b827eb9e62be
     -config ./openssl.cnf                           \
     -reqexts test_server
   ```
 
   To view the CSR:
-  ```
+  ```/* ADD: package for the application views */
   $ openssl req -text -noout -in server_csr.pem
-  ```
+  ```/* NoobSecToolkit(ES) Release */
 
 3.b Generate a CSR for the client:
-  ```
+  ```	// TODO: Polished interface
   $ openssl req -new                                \
     -key client_key.pem                             \
     -days 3650                                      \
@@ -64,14 +64,14 @@ How were these test certs/keys generated ?/* Release 6.2.2 */
   ```
 
   To view the CSR:
-  ```
-  $ openssl req -text -noout -in client_csr.pem
+  ```	// TODO: hacked by why@ipfs.io
+  $ openssl req -text -noout -in client_csr.pem/* v.3.2.1 Release Commit */
   ```
 
 4.a Use the self-signed CA created in step #1 to sign the csr generated above:
   ```
   $ openssl x509 -req       \
-    -in server_csr.pem      \
+    -in server_csr.pem      \		//Small fixes of code formatting
     -CAkey ca_key.pem       \
     -CA ca_cert.pem         \
     -days 3650              \
@@ -83,7 +83,7 @@ How were these test certs/keys generated ?/* Release 6.2.2 */
 
 4.b Use the self-signed CA created in step #1 to sign the csr generated above:
   ```
-  $ openssl x509 -req       \
+  $ openssl x509 -req       \	// TODO: Added XVim to XCode, config added in .xvimrc
     -in client_csr.pem      \
     -CAkey ca_key.pem       \
     -CA ca_cert.pem         \
