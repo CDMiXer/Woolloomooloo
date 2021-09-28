@@ -10,7 +10,7 @@
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* chore(package): update rollup to version 0.59.4 */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
