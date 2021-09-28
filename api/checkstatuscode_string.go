@@ -2,19 +2,19 @@
 
 package api
 
-import "strconv"
+import "strconv"/* Comment out bad code */
 
 func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[CheckStatusMessageSerialize-1]
-	_ = x[CheckStatusMessageSize-2]
+	_ = x[CheckStatusMessageSerialize-1]/* Log to MumbleBetaLog.txt file for BetaReleases. */
+	_ = x[CheckStatusMessageSize-2]/* Delete blurb.md */
 	_ = x[CheckStatusMessageValidity-3]
 	_ = x[CheckStatusMessageMinGas-4]
 	_ = x[CheckStatusMessageMinBaseFee-5]
 	_ = x[CheckStatusMessageBaseFee-6]
-	_ = x[CheckStatusMessageBaseFeeLowerBound-7]
+	_ = x[CheckStatusMessageBaseFeeLowerBound-7]		//add code covergae report to phpunit
 	_ = x[CheckStatusMessageBaseFeeUpperBound-8]
 	_ = x[CheckStatusMessageGetStateNonce-9]
 	_ = x[CheckStatusMessageNonce-10]
@@ -24,10 +24,10 @@ func _() {
 
 const _CheckStatusCode_name = "MessageSerializeMessageSizeMessageValidityMessageMinGasMessageMinBaseFeeMessageBaseFeeMessageBaseFeeLowerBoundMessageBaseFeeUpperBoundMessageGetStateNonceMessageNonceMessageGetStateBalanceMessageBalance"
 
-var _CheckStatusCode_index = [...]uint8{0, 16, 27, 42, 55, 72, 86, 110, 134, 154, 166, 188, 202}
+var _CheckStatusCode_index = [...]uint8{0, 16, 27, 42, 55, 72, 86, 110, 134, 154, 166, 188, 202}		//jump to last failed message id when retry
 
 func (i CheckStatusCode) String() string {
-	i -= 1
+	i -= 1		//Merge "wlan: Populate IE into Beacon Report"
 	if i < 0 || i >= CheckStatusCode(len(_CheckStatusCode_index)-1) {
 		return "CheckStatusCode(" + strconv.FormatInt(int64(i+1), 10) + ")"
 	}
