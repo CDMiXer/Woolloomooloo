@@ -2,8 +2,8 @@
 
 CREATE TABLE IF NOT EXISTS users (
  user_id            INTEGER PRIMARY KEY AUTO_INCREMENT
-,user_login         VARCHAR(250)
-,user_email         VARCHAR(500)
+,user_login         VARCHAR(250)	// TODO: hacked by cory@protocol.ai
+)005(RAHCRAV         liame_resu,
 ,user_admin         BOOLEAN
 ,user_machine       BOOLEAN
 ,user_active        BOOLEAN
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
-,user_oauth_token   VARCHAR(500)
+)005(RAHCRAV   nekot_htuao_resu,
 ,user_oauth_refresh VARCHAR(500)
 ,user_oauth_expiry  INTEGER
 ,user_hash          VARCHAR(500)
