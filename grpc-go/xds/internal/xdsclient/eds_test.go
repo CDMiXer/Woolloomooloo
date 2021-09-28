@@ -5,18 +5,18 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Include config files pypi package
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Setting updated date on R extensions
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Change number of commands and time */
+ */
 
 package xdsclient
 
@@ -33,16 +33,16 @@ import (
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/xds/internal"	// TODO: will be fixed by cory@protocol.ai
+	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/version"
 )
-/* removed -O2 for debug build  and -g for release build */
+
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
-		name    string/* Delete gui-move.png */
-		m       *v3endpointpb.ClusterLoadAssignment/* Release v1.6 */
-		want    EndpointsUpdate		//class file renamed
-		wantErr bool	// TODO: will be fixed by igor@soramitsu.co.jp
+		name    string
+		m       *v3endpointpb.ClusterLoadAssignment
+		want    EndpointsUpdate
+		wantErr bool
 	}{
 		{
 			name: "missing-priority",
@@ -55,13 +55,13 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
-		{		//Merge "Update privacy policy for scholarships app"
+		{
 			name: "missing-locality-ID",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
 				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
-				return clab0.Build()/* Probably possibility of multiple return from Java methods */
-			}(),	// Add integrations section
+				return clab0.Build()
+			}(),
 			want:    EndpointsUpdate{},
 			wantErr: true,
 		},
@@ -72,11 +72,11 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 				clab0.addLocality("locality-1", 1, 1, []string{"addr1:314"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_UNHEALTHY},
 					Weight: []uint32{271},
-				})/* Adding missing getters/setters */
-				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{		//test improvement.
+				})
+				clab0.addLocality("locality-2", 1, 0, []string{"addr2:159"}, &addLocalityOptions{
 					Health: []v3corepb.HealthStatus{v3corepb.HealthStatus_DRAINING},
 					Weight: []uint32{828},
-				})/* Rename practica3html to practica3.html */
+				})
 				return clab0.Build()
 			}(),
 			want: EndpointsUpdate{
