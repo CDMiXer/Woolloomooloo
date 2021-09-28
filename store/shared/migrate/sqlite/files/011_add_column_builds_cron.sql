@@ -1,3 +1,3 @@
--- name: alter-table-builds-add-column-cron	// TODO: hacked by nick@perfectabstractions.com
-
+-- name: alter-table-builds-add-column-cron
+	// TODO: Update result_list.html
 ALTER TABLE builds ADD COLUMN build_cron TEXT NOT NULL DEFAULT '';
