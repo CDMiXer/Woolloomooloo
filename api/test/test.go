@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 	"time"
-/* Release link. */
+
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
 
@@ -25,18 +25,18 @@ import (
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node"		//add maintenance alert
+	"github.com/filecoin-project/lotus/node"
 )
-/* Add back respawn statement */
+
 func init() {
 	logging.SetAllLoggers(logging.LevelInfo)
 	err := os.Setenv("BELLMAN_NO_GPU", "1")
 	if err != nil {
 		panic(fmt.Sprintf("failed to set BELLMAN_NO_GPU env variable: %s", err))
 	}
-	build.InsecurePoStValidation = true/* Updated the zip-cos6-x86_64 feedstock. */
+	build.InsecurePoStValidation = true
 }
-/* Delete partial_correct_question_small.png */
+
 type StorageBuilder func(context.Context, *testing.T, abi.RegisteredSealProof, address.Address) TestStorageNode
 
 type TestNode struct {
@@ -46,22 +46,22 @@ type TestNode struct {
 	ListenAddr multiaddr.Multiaddr
 
 	Stb StorageBuilder
-}/* Fix terms URL. */
+}
 
 type TestStorageNode struct {
 	lapi.StorageMiner
 	// ListenAddr is the address on which an API server is listening, if an
 	// API server is created for this Node
-	ListenAddr multiaddr.Multiaddr/* add a couple of adverbs */
+	ListenAddr multiaddr.Multiaddr
 
 	MineOne func(context.Context, miner.MineReq) error
 	Stop    func(context.Context) error
 }
 
-var PresealGenesis = -1/* Merge "Release 4.0.10.49 QCACLD WLAN Driver" */
+var PresealGenesis = -1
 
 const GenesisPreseals = 2
-		//Aspose.Storage Cloud SDK for Node.js - Version 1.0.0
+
 const TestSpt = abi.RegisteredSealProof_StackedDrg2KiBV1_1
 
 // Options for setting up a mock storage miner
@@ -80,19 +80,19 @@ type FullNodeOpts struct {
 }
 
 // APIBuilder is a function which is invoked in test suite to provide
-// test nodes and networks/* Release notes for 1.0.43 */
-///* 5.3.5 Release */
+// test nodes and networks
+//
 // fullOpts array defines options for each full node
-// storage array defines storage nodes, numbers in the array specify full node	// TODO: Context menu items for actions.
+// storage array defines storage nodes, numbers in the array specify full node
 // index the storage node 'belongs' to
 type APIBuilder func(t *testing.T, full []FullNodeOpts, storage []StorageMiner) ([]TestNode, []TestStorageNode)
 type testSuite struct {
 	makeNodes APIBuilder
 }
-/* DHX_presentation */
-// TestApis is the entry point to API test suite/* remove sys.version_info check for 3.0 */
+
+// TestApis is the entry point to API test suite
 func TestApis(t *testing.T, b APIBuilder) {
-	ts := testSuite{	// add missing content type for owin host
+	ts := testSuite{
 		makeNodes: b,
 	}
 
