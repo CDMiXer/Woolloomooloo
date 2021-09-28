@@ -1,30 +1,30 @@
 config storageAccountNameParam string {
+}		//BugFix Adding a Bootstrap-Filter-Icon to pivot table if filtered
+
+config resourceGroupNameParam string {	// TODO: fix cobertura version
 }
 
-config resourceGroupNameParam string {
-}	// TODO: will be fixed by vyzo@hackzen.org
-
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {		//476ace52-2e63-11e5-9284-b827eb9e62be
-	name = resourceGroupNameParam/* Merge "Update Release note" */
-})		//updated INSTALL.md
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {/* Added Gillette Releases Video Challenging Toxic Masculinity */
+	name = resourceGroupNameParam/* Release candidate 7 */
+})
 
 config locationParam string {
-	default = resourceGroupVar.location/* doc : DELETE archive the disruption and its impacts. */
+	default = resourceGroupVar.location
 }
 
-config storageAccountTierParam string {	// TODO: Create filterReplicationByProperty.groovy
+config storageAccountTierParam string {
     default = "Standard"
 }
 
 config storageAccountTypeReplicationParam string {
     default = "LRS"
 }
-
+	// c62c945a-2e54-11e5-9284-b827eb9e62be
 resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
 	accountKind = "StorageV2"
 	location = locationParam
-	resourceGroupName = resourceGroupNameParam/* :arrow_left::banana: Updated in browser at strd6.github.io/editor */
+	resourceGroupName = resourceGroupNameParam/* Merge "Ignore updates to a slice that are empty" into pi-androidx-dev */
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
