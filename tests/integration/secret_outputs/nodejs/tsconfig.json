@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Initial Release Info */
+,"6102se" :"tegrat"        
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Use no header and footer template for download page. Release 0.6.8. */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: Add support for HTC Salsa
-        "forceConsistentCasingInFileNames": true	// TODO: refresh_lov via dao of DatabaseGenerator
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}
+}		// - Return the actual status not NDIS_STATUS_SUCCESS always
