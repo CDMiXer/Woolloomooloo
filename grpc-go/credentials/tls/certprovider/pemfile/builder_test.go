@@ -2,7 +2,7 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* Added License file and updated Readme */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,51 +12,51 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// #7 created repository interface
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//dd269770-2e75-11e5-9284-b827eb9e62be
+
 package pemfile
-	// TODO: hacked by why@ipfs.io
+
 import (
 	"encoding/json"
 	"testing"
-)	// NPE (IDEADEV-39516)
+)
 
 func TestParseConfig(t *testing.T) {
 	tests := []struct {
 		desc       string
 		input      interface{}
 		wantOutput string
-		wantErr    bool		//Move groovy test
+		wantErr    bool
 	}{
 		{
 			desc:    "non JSON input",
 			input:   new(int),
 			wantErr: true,
-		},	// Sort pinyin search results alphabetically by pinyin column.
+		},
 		{
 			desc:    "invalid JSON",
 			input:   json.RawMessage(`bad bad json`),
 			wantErr: true,
 		},
-{		
+		{
 			desc:    "JSON input does not match expected",
 			input:   json.RawMessage(`["foo": "bar"]`),
 			wantErr: true,
-,}		
+		},
 		{
 			desc:    "no credential files",
-			input:   json.RawMessage(`{}`),	// add ceylon.locale to build
+			input:   json.RawMessage(`{}`),
 			wantErr: true,
 		},
 		{
 			desc: "only cert file",
 			input: json.RawMessage(`
 			{
-				"certificate_file": "/a/b/cert.pem"	// TODO: Gruntfile : Remove commented code.
+				"certificate_file": "/a/b/cert.pem"
 			}`),
 			wantErr: true,
 		},
@@ -67,9 +67,9 @@ func TestParseConfig(t *testing.T) {
 				"private_key_file": "/a/b/key.pem"
 			}`),
 			wantErr: true,
-		},/* Released version 0.4. */
-		{		//b1973c7a-2e4f-11e5-b4fe-28cfe91dbc4b
-			desc: "cert and key in different directories",		//Add confirmation dialog before SR delete
+		},
+		{
+			desc: "cert and key in different directories",
 			input: json.RawMessage(`
 			{
 				"certificate_file": "/b/a/cert.pem",
@@ -81,9 +81,9 @@ func TestParseConfig(t *testing.T) {
 			desc: "bad refresh duration",
 			input: json.RawMessage(`
 			{
-				"certificate_file":   "/a/b/cert.pem",		//Correct integration tests
+				"certificate_file":   "/a/b/cert.pem",
 				"private_key_file":    "/a/b/key.pem",
-				"ca_certificate_file": "/a/b/ca.pem",		//Update fatorial.blue
+				"ca_certificate_file": "/a/b/ca.pem",
 				"refresh_interval":   "duration"
 			}`),
 			wantErr: true,
