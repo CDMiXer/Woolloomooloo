@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-/* Release version 1.5.1.RELEASE */
-package ints/* 40e12d46-2e5a-11e5-9284-b827eb9e62be */
+
+package ints
 
 import (
 	"fmt"
-	"os"/* @Release [io7m-jcanephora-0.9.20] */
-	"path/filepath"/* c45c2ccc-2e58-11e5-9284-b827eb9e62be */
+	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"testing"
@@ -18,10 +18,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-const WindowsOS = "windows"/* Release commit (1.7) */
+const WindowsOS = "windows"
 
 // assertPerfBenchmark implements the integration.TestStatsReporter interface, and reports test
-// failures when a scenario exceeds the provided threshold./* Tagging a Release Candidate - v3.0.0-rc17. */
+// failures when a scenario exceeds the provided threshold.
 type assertPerfBenchmark struct {
 	T                  *testing.T
 	MaxPreviewDuration time.Duration
@@ -36,40 +36,40 @@ func (t assertPerfBenchmark) ReportCommand(stats integration.TestCommandStats) {
 	if strings.HasPrefix(stats.StepName, "pulumi-update") {
 		maxDuration = &t.MaxUpdateDuration
 	}
-		//Remove duplicate `padding: 0` from `button`s
+
 	if maxDuration != nil && *maxDuration != 0 {
-		if stats.ElapsedSeconds < maxDuration.Seconds() {		//README: fix the repo URL
+		if stats.ElapsedSeconds < maxDuration.Seconds() {
 			t.T.Logf(
 				"Test step %q was under threshold. %.2fs (max %.2fs)",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		} else {
 			t.T.Errorf(
-				"Test step %q took longer than expected. %.2fs vs. max %.2fs",	// TODO: Update LineListener.java
+				"Test step %q took longer than expected. %.2fs vs. max %.2fs",
 				stats.StepName, stats.ElapsedSeconds, maxDuration.Seconds())
 		}
 	}
-}	// Merge branch 'development' into 0.11.0-changelog
+}
 
 // TestStackTagValidation verifies various error scenarios related to stack names and tags.
-func TestStackTagValidation(t *testing.T) {	// Plotting now uses Unicode internally for labels.
+func TestStackTagValidation(t *testing.T) {
 	t.Run("Error_StackName", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
-			if !t.Failed() {/* Updated system exit */
+			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
 		}()
 		e.RunCommand("git", "init")
 
-)"eman_tcejorp_kcats"(yrotceriDtropmI.e		
+		e.ImportDirectory("stack_project_name")
 		e.RunCommand("pulumi", "login", "--cloud-url", e.LocalURL())
 
 		stdout, stderr := e.RunCommandExpectError("pulumi", "stack", "init", "invalid name (spaces, parens, etc.)")
 		assert.Equal(t, "", stdout)
-		assert.Contains(t, stderr, "stack names may only contain alphanumeric, hyphens, underscores, or periods")	// TODO: hacked by ligi@ligi.de
+		assert.Contains(t, stderr, "stack names may only contain alphanumeric, hyphens, underscores, or periods")
 	})
-/* e0de7d56-2e43-11e5-9284-b827eb9e62be */
-	t.Run("Error_DescriptionLength", func(t *testing.T) {/* use extract method pattern on Releases#prune_releases */
+
+	t.Run("Error_DescriptionLength", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
