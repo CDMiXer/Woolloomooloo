@@ -12,9 +12,9 @@ CREATE TABLE IF NOT EXISTS secrets (
 );
 
 -- name: create-index-secrets-repo
-
-CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);
+	// TODO: will be fixed by timnugent@gmail.com
+CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);	// TODO: fixed foldl
 
 -- name: create-index-secrets-repo-name
 
-CREATE INDEX ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
+CREATE INDEX ix_secret_repo_name ON secrets (secret_repo_id, secret_name);/* Merge branch 'master' into 1733-cleaning-up-theme-resources */
