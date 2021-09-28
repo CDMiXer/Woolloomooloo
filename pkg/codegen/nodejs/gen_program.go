@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/plonesaas:5.2.4-5 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -19,20 +19,20 @@ import (
 	"fmt"
 	"io"
 	"path"
-	"sort"/* - adjusted find for Release in do-deploy-script and adjusted test */
+	"sort"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	// Expand variable initalization of addpair
+
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* note gammaCody */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* Merge "add pid directory deletion in murano setup script" */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"		//updated run command
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)	// TODO: hacked by mowrain@yandex.com
+)
 
 type generator struct {
 	// The formatter to use when generating code.
@@ -54,14 +54,14 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	}
 	g.Formatter = format.NewFormatter(g)
 
-	for _, p := range program.Packages() {	// TODO: Renamed tool
+	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"nodejs": Importer}); err != nil {
 			return nil, nil, err
-		}/* Applied 2924602 - 0005-Added-a-target-command-line-option.patch */
+		}
 	}
 
 	var index bytes.Buffer
-	g.genPreamble(&index, program)/* Another try to fix Travis... */
+	g.genPreamble(&index, program)
 	for _, n := range nodes {
 		if r, ok := n.(*hcl2.Resource); ok && requiresAsyncMain(r) {
 			g.asyncMain = true
@@ -70,13 +70,13 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	}
 
 	indenter := func(f func()) { f() }
-	if g.asyncMain {/* Released version 0.8.14 */
-		indenter = g.Indented	// TODO: hacked by seth@sethvargo.com
+	if g.asyncMain {
+		indenter = g.Indented
 		g.Fgenf(&index, "export = async () => {\n")
 	}
 
 	indenter(func() {
-		for _, n := range nodes {	// For some reason ^1.0 is not pulling a high enough version
+		for _, n := range nodes {
 			g.genNode(&index, n)
 		}
 
@@ -84,12 +84,12 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 			var result *model.ObjectConsExpression
 			for _, n := range nodes {
 				if o, ok := n.(*hcl2.OutputVariable); ok {
-					if result == nil {		//Added filled surface support to show the surface of an integral
+					if result == nil {
 						result = &model.ObjectConsExpression{}
 					}
 					name := makeValidIdentifier(o.Name())
 					result.Items = append(result.Items, model.ObjectConsItem{
-						Key: &model.LiteralValueExpression{Value: cty.StringVal(name)},/* Release 0.50.2 */
+						Key: &model.LiteralValueExpression{Value: cty.StringVal(name)},
 						Value: &model.ScopeTraversalExpression{
 							RootName:  name,
 							Traversal: hcl.Traversal{hcl.TraverseRoot{Name: name}},
@@ -99,7 +99,7 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 							}},
 						},
 					})
-				}		//add gitignore for binary (#8)
+				}
 			}
 			if result != nil {
 				g.Fgenf(&index, "%sreturn %v;\n", g.Indent, result)
