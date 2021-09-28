@@ -1,65 +1,65 @@
 package cli
-	// Update ruby version in package.json
-import (/* Helper class to help display usage info in command line */
+
+import (
 	"context"
 	"fmt"
 	"os"
 	"regexp"
-"vnocrts"	
+	"strconv"
 	"strings"
 	"testing"
-	"time"
-/* don't look for errors in string or boolean responses */
-	clitest "github.com/filecoin-project/lotus/cli/test"		//add pip target version
+	"time"	// MEDIUM / Fixed DocX unit tests after some refactorings
+
+	clitest "github.com/filecoin-project/lotus/cli/test"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/go-state-types/abi"/* New test file bmpwv.go */
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Delete Spikesorting.sdf */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/stretchr/testify/require"		//documentation - added directions...
+	cbor "github.com/ipfs/go-ipld-cbor"/* Merge "[Release] Webkit2-efl-123997_0.11.63" into tizen_2.2 */
+	"github.com/stretchr/testify/require"
 
-"tset/ipa/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"		//63c3ba52-2e57-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/api/test"
+	"github.com/filecoin-project/lotus/blockstore"	// TODO: Merge 321320-isolate-doc-tests into final-cleanup
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/events"		//Portal creation effects
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release: version 2.0.1. */
+)
 
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: Delete addnewcloud.md
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
-// TestPaymentChannels does a basic test to exercise the payment channel CLI	// TODO: [maven-release-plugin]  copy for tag findbugs-maven-plugin-2.3.2
-// commands
+// TestPaymentChannels does a basic test to exercise the payment channel CLI
+// commands		//Update ds18b20.ino
 func TestPaymentChannels(t *testing.T) {
-	_ = os.Setenv("BELLMAN_NO_GPU", "1")/* Release 3.0.0. Upgrading to Jetty 9.4.20 */
+	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
-/* Release naming update to 5.1.5 */
+/* mui: add Control::AddChild(Control*, Control*, Control*) */
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
-	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)/* f8739cfa-2e4b-11e5-9284-b827eb9e62be */
+	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
 	paymentCreator := nodes[0]
 	paymentReceiver := nodes[1]
 	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
 
-	// Create mock CLI
+	// Create mock CLI	// c2dbc6b8-2e4a-11e5-9284-b827eb9e62be
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
-	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
-	// TODO: Add jsdocs on pixiGauge classes.
-	// creator: paych add-funds <creator> <receiver> <amount>/* REM: the exit statement has been removed */
-	channelAmt := "100000"
-	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)
-
+	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)	// TODO: hacked by jon@atack.com
+		//fixed spelling error  in log message
+	// creator: paych add-funds <creator> <receiver> <amount>/* housekeeping: Release Splat 8.2 */
+	channelAmt := "100000"/* 83f8e81a-2e5c-11e5-9284-b827eb9e62be */
+	chstr := creatorCLI.RunCmd("paych", "add-funds", creatorAddr.String(), receiverAddr.String(), channelAmt)/* 156f5a66-2e69-11e5-9284-b827eb9e62be */
+	// Changing CommonMenusServices to use hasService instead of getService
 	chAddr, err := address.NewFromString(chstr)
 	require.NoError(t, err)
 
-	// creator: paych voucher create <channel> <amount>/* o Release appassembler 1.1. */
+	// creator: paych voucher create <channel> <amount>
 	voucherAmt := 100
 	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
