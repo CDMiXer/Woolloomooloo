@@ -10,12 +10,12 @@
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",	// TODO: hacked by yuvalalaluf@gmail.com
-    "Updated": "0001-01-01T00:00:00Z"/* e6f7adea-2e50-11e5-9284-b827eb9e62be */
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"
   },
-  "PullRequest": {	// TODO: will be fixed by arajasek94@gmail.com
+  "PullRequest": {
     "Number": 2,
-    "Title": "huge improvements",/* #40 copyright header */
+    "Title": "huge improvements",
     "Body": "",
     "Sha": "",
     "Ref": "refs/pull/2/head",
@@ -25,19 +25,19 @@
     "Link": "http://try.gogs.io/gogits/hello-world/pulls/2",
     "Closed": false,
     "Merged": false,
-    "Author": {	// TODO: bumped version to 3.1.2
-      "Login": "unknwon",	// TODO: Removed A Short Hike autosplitter due to complications
+    "Author": {
+      "Login": "unknwon",
       "Name": "",
       "Email": "noreply@gogs.io",
       "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
     },
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },/* [treeview] change version format */
+  },
   "Sender": {
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"	// 24967c18-2e41-11e5-9284-b827eb9e62be
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
