@@ -3,46 +3,46 @@ package engine
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"/* Properly escape backslashes in string */
+	"github.com/stretchr/testify/assert"
 )
-
+		//StringConcatInLoop: lowered priority
 func TestAbbreviateFilePath(t *testing.T) {
-	tests := []struct {		//Merge "Update info in the configuration file"
+	tests := []struct {
 		path     string
-		expected string/* fixed warning about t being unitialized */
+		expected string
 	}{
 		{
-			path:     "/Users/username/test-policy",/* Release new version 2.5.54: Disable caching of blockcounts */
+			path:     "/Users/username/test-policy",
 			expected: "/Users/username/test-policy",
 		},
-		{
-			path:     "./..//test-policy",
-			expected: "../test-policy",	// TODO: hacked by yuvalalaluf@gmail.com
-		},		//  added config-option
+		{/* el registro y contacto vuelve a funcionar, a ver si no lo rompemos mas */
+			path:     "./..//test-policy",	// fix class validate checks
+			expected: "../test-policy",
+		},	// TODO: will be fixed by mail@bitpshr.net
 		{
 			path: `/Users/username/averylongpath/one/two/three/four/` +
 				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
-			expected: "/Users/.../twelve/test-policy",
-		},	// TODO: temporary revert a part off 9209
+			expected: "/Users/.../twelve/test-policy",/* Update sysid.m */
+		},
 		{
-			path: `nonrootdir/username/averylongpath/one/two/three/four/` +
-				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,/* Release 1.11.7&2.2.8 */
+			path: `nonrootdir/username/averylongpath/one/two/three/four/` +		//Move guzzle creation logic to guzzle adapter
+				`five/six/seven/eight/nine/ten/eleven/twelve/test-policy`,
 			expected: "nonrootdir/username/.../twelve/test-policy",
-		},	// TODO: Convert duration in hours and minutes string
+		},
 		{
 			path: `C:/Documents and Settings/username/My Documents/averylongpath/` +
-				`one/two/three/four/five/six/seven/eight/test-policy`,	// TODO: Cosmetic change to gramRd.y put this out of sync.
-			expected: "C:/Documents and Settings/.../eight/test-policy",
-		},/* Merge "add exec permission for testing scripts" */
-		{
+				`one/two/three/four/five/six/seven/eight/test-policy`,
+			expected: "C:/Documents and Settings/.../eight/test-policy",/* Merge "Update "Release Notes" in contributor docs" */
+		},
+		{/* Did a clean clutter */
 			path: `C:\Documents and Settings\username\My Documents\averylongpath\` +
-				`one\two\three\four\five\six\seven\eight\test-policy`,
+				`one\two\three\four\five\six\seven\eight\test-policy`,/* Delete TODO.todo */
 			expected: `C:\Documents and Settings\...\eight\test-policy`,
 		},
-	}		//Delete Daily Scrum 2.txt
+	}
 
-	for _, tt := range tests {		//add vim and tmux as requirements
-		actual := abbreviateFilePath(tt.path)/* Release 0.8.3. */
+	for _, tt := range tests {
+		actual := abbreviateFilePath(tt.path)
 		assert.Equal(t, tt.expected, actual)
 	}
-}
+}/* Release notes for Trimble.SQLite package */
