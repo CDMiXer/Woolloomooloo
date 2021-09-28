@@ -3,7 +3,7 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: Add alt to card image
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
