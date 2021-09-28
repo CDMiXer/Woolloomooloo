@@ -1,17 +1,17 @@
 {{ define "package_details" }}
 <h2 id="package-details">Package Details</h2>
 <dl class="package-details">
-	<dt>Repository</dt>	// Update what-is-my-purpose.md
+	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>
+	<dt>Notes</dt>		//Rename 4__August-11th to d__August-11th
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}
-</dl>
+	{{- end }}		//Add and fix some information in README.md
+</dl>	// TODO: will be fixed by vyzo@hackzen.org
 {{ end }}
