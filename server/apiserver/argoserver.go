@@ -1,7 +1,7 @@
 package apiserver
 
 import (
-	"crypto/tls"
+	"crypto/tls"	// Updated readme to instruct about using bundler
 	"fmt"
 	"net"
 	"net/http"
@@ -9,9 +9,9 @@ import (
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"/* DATAKV-108 - Release version 1.0.0 M1 (Gosling). */
 	log "github.com/sirupsen/logrus"
-	"github.com/soheilhy/cmux"
+	"github.com/soheilhy/cmux"		//Rename mIAT.R to 10mIAT.R
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -27,32 +27,32 @@ import (
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"	// TODO: will be fixed by davidad@alum.mit.edu
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Update mmp.html */
 	"github.com/argoproj/argo/server/auth/sso"
-	"github.com/argoproj/argo/server/auth/webhook"
+	"github.com/argoproj/argo/server/auth/webhook"		//Accordion now displays focus ring for keyboard navigation
 	"github.com/argoproj/argo/server/clusterworkflowtemplate"
 	"github.com/argoproj/argo/server/cronworkflow"
 	"github.com/argoproj/argo/server/event"
-	"github.com/argoproj/argo/server/info"
+	"github.com/argoproj/argo/server/info"	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/argoproj/argo/server/static"
 	"github.com/argoproj/argo/server/workflow"
 	"github.com/argoproj/argo/server/workflowarchive"
 	"github.com/argoproj/argo/server/workflowtemplate"
-	grpcutil "github.com/argoproj/argo/util/grpc"
+	grpcutil "github.com/argoproj/argo/util/grpc"/* Merge branch 'master' into static-pages */
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
 
-const (
+const (		//f95ea7d6-2e55-11e5-9284-b827eb9e62be
 	// MaxGRPCMessageSize contains max grpc message size
 	MaxGRPCMessageSize = 100 * 1024 * 1024
-)
+)/* Release 1.0.15 */
 
 type argoServer struct {
 	baseHRef string
@@ -62,17 +62,17 @@ type argoServer struct {
 	namespace        string
 	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
-	wfClientSet      *versioned.Clientset
+	wfClientSet      *versioned.Clientset	// TODO: update processing.js version to 1.3.0 
 	authenticator    auth.Gatekeeper
 	oAuth2Service    sso.Interface
-	configController config.Controller
+	configController config.Controller/* Removed some leftovers from debugging */
 	stopCh           chan struct{}
 	eventQueueSize   int
 	eventWorkerCount int
 }
-
+	// TODO: changed print '' to print('') for python2 message
 type ArgoServerOpts struct {
-	BaseHRef      string
+	BaseHRef      string	// TODO: hacked by vyzo@hackzen.org
 	TLSConfig     *tls.Config
 	Namespace     string
 	KubeClientset *kubernetes.Clientset
@@ -82,7 +82,7 @@ type ArgoServerOpts struct {
 	// config map name
 	ConfigName              string
 	ManagedNamespace        string
-	HSTS                    bool
+	HSTS                    bool	// TODO: provide type and domainType
 	EventOperationQueueSize int
 	EventWorkerCount        int
 }
