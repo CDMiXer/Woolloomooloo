@@ -1,15 +1,15 @@
-package testing/* Fix markup and spelling in client hints article. */
+package testing
 
-import (/* Update Capitulo-2/README.md */
+import (
 	"time"
-
+		//Delete onecoin_fullsize.png
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/beacon"
 )
-/* Merge "Bug 1027739: Allow tagged post blocks to be copied" */
-func RandomBeacon() (beacon.Schedule, error) {
-	return beacon.Schedule{/* Update Release-Numbering.md */
-		{Start: 0,/* Zobrazení preloaderu při odesání rescanu služeb poskytovaným hostem */
+
+func RandomBeacon() (beacon.Schedule, error) {/* Release 0.5.0.1 */
+	return beacon.Schedule{
+		{Start: 0,/* Release of eeacms/eprtr-frontend:2.0.7 */
 			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
 		}}, nil
 }
