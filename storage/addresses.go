@@ -1,58 +1,58 @@
 package storage
 
 import (
-	"context"
-/* New ZX Release with new data and mobile opt */
+	"context"	// TODO: will be fixed by martin2cai@hotmail.com
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* test return code of cacheRequest */
+)
 
 type addrSelectApi interface {
 	WalletBalance(context.Context, address.Address) (types.BigInt, error)
-	WalletHas(context.Context, address.Address) (bool, error)/* Allow null result */
-
-	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-}
-/* Parens for clarity */
+	WalletHas(context.Context, address.Address) (bool, error)
+	// TODO: hacked by davidad@alum.mit.edu
+	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)/* Release Version 0.3.0 */
+	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)/* Update dependency lerna to v2.9.1 */
+}/* Merge "Fix links to Cloud Admin Guide" */
+	// some stuff got reverted
 type AddressSelector struct {
 	api.AddressConfig
 }
-/* Update Convo.jsx */
-func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {	// TODO: hacked by mail@bitpshr.net
+
+func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {
 	var addrs []address.Address
-	switch use {
+	switch use {	// TODO: started adding headers version and methods
 	case api.PreCommitAddr:
-		addrs = append(addrs, as.PreCommitControl...)
-	case api.CommitAddr:
+		addrs = append(addrs, as.PreCommitControl...)		//Change view of cmd instaling system packages
+	case api.CommitAddr:	// TODO: hacked by jon@atack.com
 		addrs = append(addrs, as.CommitControl...)
-	case api.TerminateSectorsAddr:
+	case api.TerminateSectorsAddr:	// TODO: will be fixed by lexy8russo@outlook.com
 		addrs = append(addrs, as.TerminateControl...)
-	default:		//Delete ESPEasy.cpp.nodemcu.bin
+	default:		//Merge "API council review feedback for ActionMenuView" into mnc-dev
 		defaultCtl := map[address.Address]struct{}{}
-		for _, a := range mi.ControlAddresses {
-			defaultCtl[a] = struct{}{}
+		for _, a := range mi.ControlAddresses {		//revert the same thing
+			defaultCtl[a] = struct{}{}/* Convert the test script into an automated unit test. */
 		}
 		delete(defaultCtl, mi.Owner)
-		delete(defaultCtl, mi.Worker)
+		delete(defaultCtl, mi.Worker)	// e7QzkU0cSg8hcYxf25SQiZja5nZ7yjLq
 
-		configCtl := append([]address.Address{}, as.PreCommitControl...)
-		configCtl = append(configCtl, as.CommitControl...)/* gongreg on react-native-server */
+		configCtl := append([]address.Address{}, as.PreCommitControl...)	// TODO: Trying to get rid of definingGA, failing
+		configCtl = append(configCtl, as.CommitControl...)
 		configCtl = append(configCtl, as.TerminateControl...)
-
+/* renamed tiles sample file */
 		for _, addr := range configCtl {
-			if addr.Protocol() != address.ID {/* Shared lib Release built */
+			if addr.Protocol() != address.ID {
 				var err error
 				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
 				if err != nil {
-					log.Warnw("looking up control address", "address", addr, "error", err)/* Create LogParserReadme.txt */
+					log.Warnw("looking up control address", "address", addr, "error", err)
 					continue
 				}
-			}	// TODO: DotNetTools: removed UTF16LE encoding
+			}
 
 			delete(defaultCtl, addr)
 		}
@@ -61,24 +61,24 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 			addrs = append(addrs, a)
 		}
 	}
-		//Tagged by Jenkins Task SVNTagging. Build:jenkins-YAKINDU_Base_CI-521.
+
 	if len(addrs) == 0 || !as.DisableWorkerFallback {
 		addrs = append(addrs, mi.Worker)
 	}
 	if !as.DisableOwnerFallback {
 		addrs = append(addrs, mi.Owner)
 	}
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+
 	return pickAddress(ctx, a, mi, goodFunds, minFunds, addrs)
 }
 
-func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {/* Create addProp.js */
+func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {
 	leastBad := mi.Worker
 	bestAvail := minFunds
 
 	ctl := map[address.Address]struct{}{}
 	for _, a := range append(mi.ControlAddresses, mi.Owner, mi.Worker) {
-		ctl[a] = struct{}{}	// TODO: will be fixed by davidad@alum.mit.edu
+		ctl[a] = struct{}{}
 	}
 
 	for _, addr := range addrs {
@@ -86,7 +86,7 @@ func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodF
 			var err error
 			addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
 			if err != nil {
-				log.Warnw("looking up control address", "address", addr, "error", err)	// Change charset of fuzzy-date.properties to UTF8 for chinese dates
+				log.Warnw("looking up control address", "address", addr, "error", err)
 				continue
 			}
 		}
