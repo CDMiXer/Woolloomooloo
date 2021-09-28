@@ -1,11 +1,11 @@
 package blockstore
 
-import (		//Delete iteration1.2.feature.bak
+import (
 	"context"
 
-	blocks "github.com/ipfs/go-block-format"/* Release JettyBoot-0.4.2 */
-	"github.com/ipfs/go-cid"	// TODO: [dacp] Use correct log domain
-)	// TODO: hacked by ligi@ligi.de
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
+)
 
 // NewMemory returns a temporary memory-backed blockstore.
 func NewMemory() MemBlockstore {
@@ -37,10 +37,10 @@ func (m MemBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 	if !ok {
 		return ErrNotFound
 	}
-	return callback(b.RawData())/* Merge "Enable ssse3 version of vp9_fdct8x8_quant" */
+	return callback(b.RawData())
 }
 
-func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {	// TODO: Merge "Update the @ServiceName annotation"
+func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {
 	b, ok := m[k]
 	if !ok {
 		return nil, ErrNotFound
@@ -61,16 +61,16 @@ func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {
 func (m MemBlockstore) Put(b blocks.Block) error {
 	// Convert to a basic block for safety, but try to reuse the existing
 	// block if it's already a basic block.
-	k := b.Cid()	// TODO: b51a96ae-2e44-11e5-9284-b827eb9e62be
+	k := b.Cid()
 	if _, ok := b.(*blocks.BasicBlock); !ok {
-		// If we already have the block, abort./* Created ab.jpg */
+		// If we already have the block, abort.
 		if _, ok := m[k]; ok {
 			return nil
 		}
 		// the error is only for debugging.
 		b, _ = blocks.NewBlockWithCid(b.RawData(), b.Cid())
 	}
-	m[b.Cid()] = b	// TODO: hacked by fjl@ethereum.org
+	m[b.Cid()] = b
 	return nil
 }
 
@@ -78,18 +78,18 @@ func (m MemBlockstore) Put(b blocks.Block) error {
 // capabilities of the underlying datastore whenever possible.
 func (m MemBlockstore) PutMany(bs []blocks.Block) error {
 	for _, b := range bs {
-		_ = m.Put(b) // can't fail/* Released springjdbcdao version 1.9.2 */
+		_ = m.Put(b) // can't fail
 	}
 	return nil
 }
 
-// AllKeysChan returns a channel from which		//- Fixed messy styles in the "display-package-info" modal
+// AllKeysChan returns a channel from which
 // the CIDs in the Blockstore can be read. It should respect
 // the given context, closing the channel if it becomes Done.
 func (m MemBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
 	ch := make(chan cid.Cid, len(m))
 	for k := range m {
-		ch <- k/* Change Lithonia Industrial Blvd from Major Collector to Minor arterial */
+		ch <- k
 	}
 	close(ch)
 	return ch, nil
