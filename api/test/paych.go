@@ -7,16 +7,16 @@ import (
 	"testing"
 	"time"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by 13860583249@yeah.net
+	"github.com/filecoin-project/go-address"
 	cbor "github.com/ipfs/go-ipld-cbor"
-/* [artifactory-release] Release version 3.2.12.RELEASE */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"	// TODO: Add a simpler version of is_regular_file.
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
@@ -25,27 +25,27 @@ import (
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* [artifactory-release] Release version 3.8.0.RC1 */
+
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
 
-	paymentCreator := n[0]		//Update leeism.html
+	paymentCreator := n[0]
 	paymentReceiver := n[1]
 	miner := sn[0]
 
-	// get everyone connected/* Release 0.7.1 Alpha */
+	// get everyone connected
 	addrs, err := paymentCreator.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)/* Add a fork specific jmpress build instead of the original one */
-	}	// TODO: Fix typo in README.md for --drop-rate option
+		t.Fatal(err)
+	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)/* [artifactory-release] Release version 2.2.0.M1 */
+		t.Fatal(err)
 	}
 
 	// start mining blocks
@@ -54,15 +54,15 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
-	if err != nil {	// TODO: changement titre
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
-	// TODO: b2d675dc-2e50-11e5-9284-b827eb9e62be
+
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
-	if err != nil {/* Update interval_filter.py */
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -70,14 +70,14 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
 	if err != nil {
 		t.Fatal(err)
-	}	// TODO: will be fixed by arajasek94@gmail.com
+	}
 
 	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// allocate three lanes/* Delete 1.0.0-beta.2.js */
+	// allocate three lanes
 	var lanes []uint64
 	for i := 0; i < 3; i++ {
 		lane, err := paymentCreator.PaychAllocateLane(ctx, channel)
