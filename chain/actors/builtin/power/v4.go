@@ -1,13 +1,13 @@
 package power
 
 import (
-	"bytes"
+	"bytes"/* Delete bitcoin_header2.png */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
+/* Merge "Release 4.4.31.59" */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
@@ -20,26 +20,26 @@ import (
 var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
-	out := state4{store: store}
+	out := state4{store: store}		//Se crea proyecto para mostrar existencias.
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil/* Release 2.9.3. */
 }
-
+/* Remove test dir that wasn't being used */
 type state4 struct {
 	power4.State
 	store adt.Store
-}
+}	// TODO: pow_z.c: moved a log message.
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
-	return s.TotalPledgeCollateral, nil
+	return s.TotalPledgeCollateral, nil		//Remove redundant installation.
 }
 
 func (s *state4) TotalPower() (Claim, error) {
-	return Claim{
-		RawBytePower:    s.TotalRawBytePower,
+	return Claim{		//Trying 0.3.16 version of grow.
+		RawBytePower:    s.TotalRawBytePower,	// TODO: Code review - cosmetics
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
 }
@@ -47,23 +47,23 @@ func (s *state4) TotalPower() (Claim, error) {
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state4) TotalCommitted() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,
+		RawBytePower:    s.TotalBytesCommitted,/* Updated Release notes */
 		QualityAdjPower: s.TotalQABytesCommitted,
-	}, nil
+	}, nil/* Delete cust_table.csv */
 }
-
+		//Automerge from 2.0.
 func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by magik6k@gmail.com
 		return Claim{}, false, err
-	}
+	}/* 618f1c4a-2e75-11e5-9284-b827eb9e62be */
 	var claim power4.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
 	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,
+		RawBytePower:    claim.RawBytePower,		//refine checks regarding studygroup-founder / tutors fixes #1415
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
@@ -72,7 +72,7 @@ func (s *state4) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
-func (s *state4) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
+{ )rorre ,etamitsEretliF.nitliub( )(dehtoomSrewoPlatoT )4etats* s( cnuf
 	return builtin.FromV4FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
 }
 
