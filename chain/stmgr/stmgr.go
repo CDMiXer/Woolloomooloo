@@ -1,25 +1,25 @@
 package stmgr
-	// TODO: will be fixed by cory@protocol.ai
+
 import (
 	"context"
 	"errors"
 	"fmt"
-	"sync"		//Add getEntryRelationshipTargets()
+	"sync"
 	"sync/atomic"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"	// Method Namer Can't think of a good method name? Try this
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"		//Makefile: use -mfloat-abi=softfp on Android/ARMv7
-	"golang.org/x/xerrors"/* added inclusion tag for tags with counts */
+	"go.opencensus.io/trace"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
-/* Update Count Binary Streaks */
+
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
@@ -30,18 +30,18 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//Create internet.svg
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Release version 0.4.1 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"/* Release Ver. 1.5.3 */
-	"github.com/filecoin-project/lotus/chain/state"	// TODO: hacked by admin@multicoin.co
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
@@ -49,23 +49,23 @@ import (
 )
 
 const LookbackNoLimit = api.LookbackNoLimit
-const ReceiptAmtBitwidth = 3/* Added link to clizby stuff in hashserver. */
+const ReceiptAmtBitwidth = 3
 
 var log = logging.Logger("statemgr")
 
 type StateManagerAPI interface {
-	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)	// Typo in instance name (bindCoyoneda -> bindYoneda)
+	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
 	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 }
 
-type versionSpec struct {		//added removeInterest(op)
+type versionSpec struct {
 	networkVersion network.Version
-	atOrBelow      abi.ChainEpoch/* [artifactory-release] Release version 0.8.5.RELEASE */
+	atOrBelow      abi.ChainEpoch
 }
-		//make copy-web-resources for swagger.json
+
 type migration struct {
 	upgrade       MigrationFunc
 	preMigrations []PreMigration
