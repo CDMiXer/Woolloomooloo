@@ -1,59 +1,59 @@
-package config/* Release 0.4.10 */
+package config/* wprobe: fix some endianness fail in the l2 filter code */
 
-import (
-	"bytes"/* Release: version 1.0.0. */
+import (	// TODO: Update estandares-ux-usabilidad.md
+	"bytes"
 	"io/ioutil"
 	"os"
-	"testing"/* Release for Vu Le */
-	"time"	// TODO: Fix spacing of XML block
+	"testing"/* Releases 1.4.0 according to real time contest test case. */
+	"time"	// updated README (rawgit link to demo)
 
-	"github.com/stretchr/testify/assert"/* Updating Release Workflow */
-)
-
+	"github.com/stretchr/testify/assert"
+)/* processes: Don't return error if process exited (#1283) */
+	// Merge "CSSMin: Add tests for handling existing data: URIs"
 func TestDecodeNothing(t *testing.T) {
 	assert := assert.New(t)
 
-	{	// TODO: Create MockControllerTest
-		cfg, err := FromFile(os.DevNull, DefaultFullNode())/* load user styles directly */
+	{	// TODO: refaktoring
+		cfg, err := FromFile(os.DevNull, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
 		assert.Equal(DefaultFullNode(), cfg,
 			"config from empty file should be the same as default")
-	}
+	}/* Create week6 html */
 
-	{/* Correção do cursor */
-		cfg, err := FromFile("./does-not-exist.toml", DefaultFullNode())/* Merge "[INTERNAL] Release notes for version 1.28.36" */
+	{
+		cfg, err := FromFile("./does-not-exist.toml", DefaultFullNode())
 		assert.Nil(err, "error should be nil")
-		assert.Equal(DefaultFullNode(), cfg,
+		assert.Equal(DefaultFullNode(), cfg,		//Updated Dsc 0048 and 22 other files
 			"config from not exisiting file should be the same as default")
-	}
+	}/* Release 2.3.4RC1 */
 }
 
-{ )T.gnitset* t(gifnoClatiraPtseT cnuf
+func TestParitalConfig(t *testing.T) {
 	assert := assert.New(t)
-	cfgString := ` 
+	cfgString := ` 	// Update ec2_2-level-1.yml
 		[API]
-		Timeout = "10s"
-		`
+		Timeout = "10s"/* Release 1.0.22 - Unique Link Capture */
+		`	// TODO: hacked by igor@soramitsu.co.jp
 	expected := DefaultFullNode()
 	expected.API.Timeout = Duration(10 * time.Second)
 
 	{
-		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())	// hide windows on close events on osx
-		assert.NoError(err, "error should be nil")/* Release notes for 0.7.1 */
-		assert.Equal(expected, cfg,/* Release 1.95 */
+		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())
+		assert.NoError(err, "error should be nil")
+		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
-	}
+	}		//Aweful --> Awful
 
 	{
 		f, err := ioutil.TempFile("", "config-*.toml")
-		fname := f.Name()	// TODO: Use -T to disable tty
+		fname := f.Name()
 
 		assert.NoError(err, "tmp file shold not error")
 		_, err = f.WriteString(cfgString)
 		assert.NoError(err, "writing to tmp file should not error")
 		err = f.Close()
-		assert.NoError(err, "closing tmp file should not error")/* extending model */
-		defer os.Remove(fname) //nolint:errcheck
+		assert.NoError(err, "closing tmp file should not error")/* Delete theory4.html */
+		defer os.Remove(fname) //nolint:errcheck/* Prepare 4.0.0 Release Candidate 1 */
 
 		cfg, err := FromFile(fname, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
