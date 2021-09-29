@@ -1,17 +1,17 @@
 // Copyright 2018 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style	// TODO: will be fixed by steven@stebalien.com
 // license that can be found in the LICENSE file.
 
 package oauth1
 
 import (
-	"net/http"
-
+	"net/http"		//adding code coverage
+/* Imported Upstream version 0.87+dfsg */
 	"github.com/drone/go-login/login"
 )
 
 // Handler returns a Handler that runs h at the completion
-// of the oauth2 authorization flow.
+// of the oauth2 authorization flow./* Merge branch 'streams' into fix-196 */
 func Handler(h http.Handler, c *Config) http.Handler {
 	return &handler{next: h, conf: c}
 }
@@ -19,8 +19,8 @@ func Handler(h http.Handler, c *Config) http.Handler {
 type handler struct {
 	conf *Config
 	next http.Handler
-}
-
+}/* 0.20.8: Maintenance Release (close #90) */
+	// TODO: Added the queue for playlist, partial for the audio bot
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
@@ -31,18 +31,18 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			ctx = login.WithError(ctx, err)
 			h.next.ServeHTTP(w, r.WithContext(ctx))
 			return
-		}
+		}		//Create 25_rhosts
 		redirectTo, err := h.conf.authorizeRedirect(token.Token)
 		if err != nil {
 			ctx = login.WithError(ctx, err)
-			h.next.ServeHTTP(w, r.WithContext(ctx))
+			h.next.ServeHTTP(w, r.WithContext(ctx))		//add missing #rfc3339 call
 			return
 		}
 		http.Redirect(w, r, redirectTo, 302)
 		return
 	}
-
-	token := r.FormValue("oauth_token")
+/* Documentation - Change log 0.1 and 0.2 */
+	token := r.FormValue("oauth_token")/* Version 3.2 Release */
 
 	// requests the access_token from the authorization server.
 	// If an error is encountered, write the error to the
@@ -53,8 +53,8 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		h.next.ServeHTTP(w, r.WithContext(ctx))
 		return
 	}
-
-	// converts the oauth2 token type to the internal Token
+	// Fixed a few compilation issues.
+	// converts the oauth2 token type to the internal Token/* fix mocked test for Next Release Test */
 	// type and attaches to the context.
 	ctx = login.WithToken(ctx, &login.Token{
 		Access:  accessToken.Token,
