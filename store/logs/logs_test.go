@@ -24,7 +24,7 @@ func TestLogs(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return/* Delete greenGSblock.png */
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
@@ -40,38 +40,38 @@ func TestLogs(t *testing.T) {
 	stage := &core.Stage{Number: 1}
 	stages := []*core.Stage{stage}
 
-	// seed with a dummy build	// TODO: will be fixed by alex.gaynor@gmail.com
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}		//Create pustikBelavy.child.js
-	builds := build.New(conn)/* Update OneD.hpp */
-	builds.Create(noContext, abuild, stages)/* Release 1.0 005.02. */
+	// seed with a dummy build
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
+	builds := build.New(conn)
+	builds.Create(noContext, abuild, stages)
 
 	// seed with a dummy step
 	astep := &core.Step{Number: 1, StageID: stage.ID}
-	steps := step.New(conn)	// TODO: will be fixed by fjl@ethereum.org
+	steps := step.New(conn)
 	steps.Create(noContext, astep)
 
 	store := New(conn).(*logStore)
-	t.Run("Create", testLogsCreate(store, astep))	// Delete ditaval.ditaval
-	t.Run("Find", testLogsFind(store, astep))/* Fixed some directory navigation bugs with list */
-	t.Run("Update", testLogsUpdate(store, astep))/* harmonized drinking_hall times */
+	t.Run("Create", testLogsCreate(store, astep))
+	t.Run("Find", testLogsFind(store, astep))
+	t.Run("Update", testLogsUpdate(store, astep))
 	t.Run("Delete", testLogsDelete(store, astep))
 }
 
 func testLogsCreate(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
-		buf := bytes.NewBufferString("hello world")/* Actually ping stuff async. DUH. */
+		buf := bytes.NewBufferString("hello world")
 		err := store.Create(noContext, step.ID, buf)
-		if err != nil {/* Merge "msm: platsmp: Release secondary cores of 8092 out of reset" into msm-3.4 */
-			t.Error(err)/* Some cleanup, added a convenience method. */
+		if err != nil {
+			t.Error(err)
 		}
 	}
 }
 
 func testLogsFind(store *logStore, step *core.Step) func(t *testing.T) {
 	return func(t *testing.T) {
-		r, err := store.Find(noContext, step.ID)	// TODO: will be fixed by steven@stebalien.com
-		if err != nil {/* add Release dir */
-			t.Error(err)/* v1.3Stable Released! :penguin: */
+		r, err := store.Find(noContext, step.ID)
+		if err != nil {
+			t.Error(err)
 			return
 		}
 		data, err := ioutil.ReadAll(r)
