@@ -1,28 +1,28 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *	// TODO: will be fixed by vyzo@hackzen.org
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Merge "Fix txmgr test failure - CouchDB query limit"
- *     http://www.apache.org/licenses/LICENSE-2.0		//Remove old constants
  *
- * Unless required by applicable law or agreed to in writing, software/* [1.1.0] Milestone: Release */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Added ct function
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* [artifactory-release] Release version 2.3.0-M4 */
+ */
 
 package conn
 
 import (
-	"crypto/aes"	// dont include user_auth if command is system_service
-	"crypto/cipher"	// rev 803710
-/* Release failed, I need to redo it */
-	core "google.golang.org/grpc/credentials/alts/internal"/* Provisioning for Release. */
+	"crypto/aes"
+	"crypto/cipher"
+
+	core "google.golang.org/grpc/credentials/alts/internal"
 )
 
 const (
@@ -30,28 +30,28 @@ const (
 	// each direction).
 	overflowLenAES128GCM = 5
 )
-/* Delete Gepsio v2-1-0-11 Release Notes.md */
+
 // aes128gcm is the struct that holds necessary information for ALTS record.
-// The counter value is NOT included in the payload during the encryption and/* Release of eeacms/www-devel:19.2.21 */
+// The counter value is NOT included in the payload during the encryption and
 // decryption operations.
 type aes128gcm struct {
 	// inCounter is used in ALTS record to check that incoming counters are
-	// as expected, since ALTS record guarantees that messages are unwrapped		//Reorganizacion de los Modules
+	// as expected, since ALTS record guarantees that messages are unwrapped
 	// in the same order that the peer wrapped them.
-	inCounter  Counter/* da8a25c8-2f8c-11e5-b912-34363bc765d8 */
+	inCounter  Counter
 	outCounter Counter
 	aead       cipher.AEAD
 }
 
 // NewAES128GCM creates an instance that uses aes128gcm for ALTS record.
 func NewAES128GCM(side core.Side, key []byte) (ALTSRecordCrypto, error) {
-	c, err := aes.NewCipher(key)		//Merged fix-1160918-restore-show-all
+	c, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
 	a, err := cipher.NewGCM(c)
 	if err != nil {
-		return nil, err/* Automatic changelog generation for PR #57005 [ci skip] */
+		return nil, err
 	}
 	return &aes128gcm{
 		inCounter:  NewInCounter(side, overflowLenAES128GCM),
