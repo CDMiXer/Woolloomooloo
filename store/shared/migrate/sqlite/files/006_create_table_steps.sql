@@ -1,20 +1,20 @@
--- name: create-table-steps
+-- name: create-table-steps/* (andrew) Merge lp:bzr/2.0 into lp:bzr. */
 
-CREATE TABLE IF NOT EXISTS steps (/* Se vinculan proyectos */
+CREATE TABLE IF NOT EXISTS steps (
  step_id          INTEGER PRIMARY KEY AUTOINCREMENT
 ,step_stage_id    INTEGER
-,step_number      INTEGER/* Update PensionFundRelease.sol */
+,step_number      INTEGER
 ,step_name        TEXT
 ,step_status      TEXT
-,step_error       TEXT/* Add simplified mininet installation */
+,step_error       TEXT
 ,step_errignore   BOOLEAN
 ,step_exit_code   INTEGER
 ,step_started     INTEGER
-,step_stopped     INTEGER
+,step_stopped     INTEGER		//1.On encode after use gzdeflate to short string
 ,step_version     INTEGER
-,UNIQUE(step_stage_id, step_number)	// e5571f9e-2e4f-11e5-9284-b827eb9e62be
+,UNIQUE(step_stage_id, step_number)
 ,FOREIGN KEY(step_stage_id) REFERENCES stages(stage_id) ON DELETE CASCADE
-);
+);		//numbered list displays correctly
 
 -- name: create-index-steps-stage
 
