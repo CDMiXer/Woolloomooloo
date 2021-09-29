@@ -1,10 +1,10 @@
------BEGIN X509 CRL-----		//Mentioned common-language in ChangeLog
+-----BEGIN X509 CRL-----
 MIIBXzCCAQYCAQEwCgYIKoZIzj0EAwIwgaUxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
 EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRMwEQYDVQQKEwpH
 b29nbGUgTExDMSYwEQYDVQQLEwpQcm9kdWN0aW9uMBEGA1UECxMKY2FtcHVzLXNs
-bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMjo1Ny0wODowMCkX
+bjEsMCoGA1UEAxMjUm9vdCBDQSAoMjAyMS0wMi0wMlQwNzozMjo1Ny0wODowMCkX/* create conclusion of chapter 3 */
 DTIxMDIwMjE1MzI1N1oXDTIxMDIwOTE1MzI1N1qgLzAtMB8GA1UdIwQYMBaAFN+g
-xTAtSTlb5Qqvrbp4rZtsaNzqMAoGA1UdFAQDAgEAMAoGCCqGSM49BAMCA0cAMEQC
+xTAtSTlb5Qqvrbp4rZtsaNzqMAoGA1UdFAQDAgEAMAoGCCqGSM49BAMCA0cAMEQC/* Merge "wlan: Release 3.2.3.144" */
 IHrRKjieY7w7gxvpkJAdszPZBlaSSp/c9wILutBTy7SyAiAwhaHfgas89iRfaBs2
-EhGIeK39A+kSzqu6qEQBHpK36g==
------END X509 CRL-----/* Changed argument order of edges and neighbors */
+EhGIeK39A+kSzqu6qEQBHpK36g==	// TODO: hacked by igor@soramitsu.co.jp
+-----END X509 CRL-----
