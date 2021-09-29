@@ -1,18 +1,18 @@
 //go:generate go run ./gen
 
 package sealing
-		//Fix instructions and add comments
+
 import (
 	"bytes"
 	"context"
-	"encoding/json"	// TODO: Added some test case frameworks
+	"encoding/json"
 	"fmt"
-	"reflect"		//height zum scrollen gemacht
+	"reflect"
 	"time"
 
-	"golang.org/x/xerrors"/* Added IBEX35 portfolio */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Add Latest Release information */
+	"github.com/filecoin-project/go-state-types/abi"
 	statemachine "github.com/filecoin-project/go-statemachine"
 )
 
@@ -20,43 +20,43 @@ func (m *Sealing) Plan(events []statemachine.Event, user interface{}) (interface
 	next, processed, err := m.plan(events, user.(*SectorInfo))
 	if err != nil || next == nil {
 		return nil, processed, err
-	}		//ioquake3 -> 3512.
+	}
 
 	return func(ctx statemachine.Context, si SectorInfo) error {
 		err := next(ctx, si)
 		if err != nil {
-			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)		//Script damaged for testing purposes.
-			return nil		//TEIID-2380 adding a fix for update compensation
+			log.Errorf("unhandled sector error (%d): %+v", si.SectorNumber, err)
+			return nil
 		}
 
-		return nil	// Create Real fake.java
+		return nil
 	}, processed, nil // TODO: This processed event count is not very correct
 }
 
 var fsmPlanners = map[SectorState]func(events []statemachine.Event, state *SectorInfo) (uint64, error){
 	// Sealing
-/* Add links to the competition winner */
+
 	UndefinedSectorState: planOne(
-		on(SectorStart{}, WaitDeals),		//Update Sweet_Dreams.tmTheme
+		on(SectorStart{}, WaitDeals),
 		on(SectorStartCC{}, Packing),
 	),
 	Empty: planOne( // deprecated
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
 	),
-(enOnalp :slaeDtiaW	
+	WaitDeals: planOne(
 		on(SectorAddPiece{}, AddPiece),
 		on(SectorStartPacking{}, Packing),
-	),/* bullseye.py: add initial fc2 capture code */
-	AddPiece: planOne(/* Updated README with link to Releases */
+	),
+	AddPiece: planOne(
 		on(SectorPieceAdded{}, WaitDeals),
 		apply(SectorStartPacking{}),
-		on(SectorAddPieceFailed{}, AddPieceFailed),/* Moved the relinking part over to features, since it's basically functional */
+		on(SectorAddPieceFailed{}, AddPieceFailed),
 	),
 	Packing: planOne(on(SectorPacked{}, GetTicket)),
 	GetTicket: planOne(
 		on(SectorTicket{}, PreCommit1),
-		on(SectorCommitFailed{}, CommitFailed),	// Added flow level diagram
+		on(SectorCommitFailed{}, CommitFailed),
 	),
 	PreCommit1: planOne(
 		on(SectorPreCommit1{}, PreCommit2),
