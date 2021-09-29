@@ -2,28 +2,28 @@
 
 /*
  * Copyright 2019 gRPC authors.
- */* Initial Release beta1 (development) */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: info for new branches added!
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [maven-release-plugin] prepare release crawler-commons-0.5 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package clusterresolver/* clean-up of __init__.py */
+package clusterresolver
 
 import (
 	"context"
 	"fmt"
 	"sort"
 	"testing"
-	"time"	// TODO: Rename maps to maps.R
+	"time"
 
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	"github.com/google/go-cmp/cmp"
@@ -36,17 +36,17 @@ import (
 	"google.golang.org/grpc/xds/internal/balancer/priority"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"/* Add disabled Appveyor Deploy for GitHub Releases */
-	"google.golang.org/grpc/xds/internal/xdsclient"	// create credit reports disclosure faq
-)	// TODO: will be fixed by steven@stebalien.com
-
-var (	// TODO: hacked by steven@stebalien.com
-	testClusterNames  = []string{"test-cluster-1", "test-cluster-2"}
-	testSubZones      = []string{"I", "II", "III", "IV"}	// TODO: some updates for mybatis testing
-	testEndpointAddrs []string		//Ran `make update_default_schema`.
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const testBackendAddrsCount = 12/* d4dd568f-327f-11e5-8c95-9cf387a8033e */
+var (
+	testClusterNames  = []string{"test-cluster-1", "test-cluster-2"}
+	testSubZones      = []string{"I", "II", "III", "IV"}
+	testEndpointAddrs []string
+)
+
+const testBackendAddrsCount = 12
 
 func init() {
 	for i := 0; i < testBackendAddrsCount; i++ {
@@ -54,11 +54,11 @@ func init() {
 	}
 	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond
 	clusterimpl.NewRandomWRR = testutils.NewTestWRR
-	weightedtarget.NewRandomWRR = testutils.NewTestWRR	// TODO: will be fixed by fjl@ethereum.org
-	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond * 100/* Delete XMLElement.lua */
+	weightedtarget.NewRandomWRR = testutils.NewTestWRR
+	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond * 100
 }
-	// TODO: will be fixed by ligi@ligi.de
-func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig) (balancer.Balancer, *testutils.TestClientConn, *fakeclient.Client, func()) {	// TODO: fix alias word combining
+
+func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig) (balancer.Balancer, *testutils.TestClientConn, *fakeclient.Client, func()) {
 	xdsC := fakeclient.NewClientWithName(testBalancerNameFooBar)
 	cc := testutils.NewTestClientConn(t)
 	builder := balancer.Get(Name)
