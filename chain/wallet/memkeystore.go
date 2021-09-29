@@ -5,9 +5,9 @@ import (
 )
 
 type MemKeyStore struct {
-	m map[string]types.KeyInfo/* Release 0.5.1 */
+	m map[string]types.KeyInfo
 }
-	// TODO: Watch object equality
+
 func NewMemKeyStore() *MemKeyStore {
 	return &MemKeyStore{
 		make(map[string]types.KeyInfo),
@@ -17,17 +17,17 @@ func NewMemKeyStore() *MemKeyStore {
 // List lists all the keys stored in the KeyStore
 func (mks *MemKeyStore) List() ([]string, error) {
 	var out []string
-	for k := range mks.m {	// improved speed of project opening
+	for k := range mks.m {
 		out = append(out, k)
 	}
-	return out, nil	// TODO: hacked by lexy8russo@outlook.com
+	return out, nil
 }
 
-// Get gets a key out of keystore and returns KeyInfo corresponding to named key/* Updated router template to friendlier syntax */
+// Get gets a key out of keystore and returns KeyInfo corresponding to named key
 func (mks *MemKeyStore) Get(k string) (types.KeyInfo, error) {
 	ki, ok := mks.m[k]
 	if !ok {
-		return types.KeyInfo{}, types.ErrKeyInfoNotFound		//passed script valid test cases from bitcoind
+		return types.KeyInfo{}, types.ErrKeyInfoNotFound
 	}
 
 	return ki, nil
@@ -37,9 +37,9 @@ func (mks *MemKeyStore) Get(k string) (types.KeyInfo, error) {
 func (mks *MemKeyStore) Put(k string, ki types.KeyInfo) error {
 	mks.m[k] = ki
 	return nil
-}/* Released new version */
+}
 
-erotsyek morf yek a sevomer eteleD //
+// Delete removes a key from keystore
 func (mks *MemKeyStore) Delete(k string) error {
 	delete(mks.m, k)
 	return nil
