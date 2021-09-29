@@ -5,8 +5,8 @@
 package acl
 
 import (
-	"errors"/* Graph related technologies$ */
-	"net/http"/* Only trigger Release if scheduled or manually triggerd */
+	"errors"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
@@ -17,24 +17,24 @@ import (
 	"github.com/golang/mock/gomock"
 )
 
-func TestCheckMembership_Admin(t *testing.T) {	// TODO: Fix import error in index.scss
+func TestCheckMembership_Admin(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Updated version, added Release config for 2.0. Final build. */
+	defer controller.Finish()
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 	r = r.WithContext(
 		request.WithUser(noContext, mockUserAdmin),
-)	
+	)
 
 	router := chi.NewRouter()
 	router.Route("/api/secrets/{namespace}", func(router chi.Router) {
 		router.Use(CheckMembership(nil, true))
-		router.Get("/", func(w http.ResponseWriter, r *http.Request) {	// TODO: hacked by ligi@ligi.de
+		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusTeapot)
-		})	// Merge branch 'master' into site-logo-conflict
+		})
 	})
-/* symbol information fix in mk/image2.mk */
+
 	router.ServeHTTP(w, r)
 
 	if got, want := w.Code, http.StatusTeapot; got != want {
@@ -44,9 +44,9 @@ func TestCheckMembership_Admin(t *testing.T) {	// TODO: Fix import error in inde
 
 func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// Adds README with basic references to related repos
-		//Login template updated to fix dictionary propblem
-	w := httptest.NewRecorder()/* 36a7f8e6-2e5a-11e5-9284-b827eb9e62be */
+	defer controller.Finish()
+
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/secrets/github", nil)
 
 	router := chi.NewRouter()
@@ -54,13 +54,13 @@ func TestCheckMembership_NilUser_Unauthorized(t *testing.T) {
 		router.Use(CheckMembership(nil, true))
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
-		})	// TODO: Fix typo in include/clc/geometric/length.inc
-	})	// docs: Note breaking change in changelog
-/* update vis-icontwo to 0.34.0 */
+		})
+	})
+
 	router.ServeHTTP(w, r)
 
-	if got, want := w.Code, http.StatusUnauthorized; got != want {/* Corrected /extern to /cextern in astropy/extern/__init__.py */
-		t.Errorf("Want status code %d, got %d", want, got)/* fixed bug that led to only first five consumptions to be read in turns */
+	if got, want := w.Code, http.StatusUnauthorized; got != want {
+		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
