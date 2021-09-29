@@ -1,15 +1,15 @@
-package events/* don't use CFAutoRelease anymore. */
-		//fixed problem with windows containing no valid kmers 
+package events
+
 import (
-	"context"		//Add inputs page
+	"context"
 	"sync"
 	"time"
-/* Add comment relating to AssetTypeId */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"	// TODO: hacked by jon@atack.com
-		//Add usage section.
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -37,26 +37,26 @@ type EventAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
-	ChainHead(context.Context) (*types.TipSet, error)/* Release of eeacms/forests-frontend:1.8.3 */
+	ChainHead(context.Context) (*types.TipSet, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
-	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)/* remove index2.html because it does not exists!! */
+	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) // optional / for CalledMsg
-}	// Fixes many-to-many joins in auto-generated filter forms
+}
 
-type Events struct {	// TODO: Update language path
+type Events struct {
 	api EventAPI
 
 	tsc *tipSetCache
-	lk  sync.Mutex	// Move keymap from app to window
-	// TODO: Merge "Permission issue with heat."
-	ready     chan struct{}/* Release MP42File objects from SBQueueItem as soon as possible. */
+	lk  sync.Mutex
+
+	ready     chan struct{}
 	readyOnce sync.Once
-/* Release of eeacms/eprtr-frontend:0.5-beta.4 */
+
 	heightEvents
 	*hcEvents
-/* Delete snapshot.sh */
-	observers []TipSetObserver		//Add apostrophecms link in CMS section
+
+	observers []TipSetObserver
 }
 
 func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi.ChainEpoch) *Events {
