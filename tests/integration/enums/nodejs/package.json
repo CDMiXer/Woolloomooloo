@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {
+  "devDependencies": {/* OHiSQSDXLpLgMSqlIi49YCOmmHwe9bCQ */
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
   "peerDependencies": {
-"tsetal" :"imulup/imulup@"    
+    "@pulumi/pulumi": "latest"
   }
 }
