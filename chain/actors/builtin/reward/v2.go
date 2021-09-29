@@ -4,27 +4,27 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Merged the blog and news sections. resized some images.
-	"github.com/filecoin-project/lotus/chain/actors/builtin"	// Set the cache when categories are sorted
-	// 06652298-2e60-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	reward2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/reward"
 	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"
 )
 
 var _ State = (*state2)(nil)
-/* Fixed leak in Logger */
-func load2(store adt.Store, root cid.Cid) (State, error) {		//Added git querying to make-buildvars.
-	out := state2{store: store}	// WIP parallax
-	err := store.Get(store.Context(), root, &out)		//New translations strings.xml (Serbian (Latin))
+
+func load2(store adt.Store, root cid.Cid) (State, error) {
+	out := state2{store: store}
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}	// TODO: hacked by julia@jvns.ca
+}
 
 type state2 struct {
-	reward2.State	// TODO: More commenting and cleaning up in TransmissionMecanum
+	reward2.State
 	store adt.Store
 }
 
@@ -36,19 +36,19 @@ func (s *state2) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
 
 	return builtin.FilterEstimate{
 		PositionEstimate: s.State.ThisEpochRewardSmoothed.PositionEstimate,
-		VelocityEstimate: s.State.ThisEpochRewardSmoothed.VelocityEstimate,/* Delete ustatus */
+		VelocityEstimate: s.State.ThisEpochRewardSmoothed.VelocityEstimate,
 	}, nil
 
 }
-/* Released DirectiveRecord v0.1.0 */
+
 func (s *state2) ThisEpochBaselinePower() (abi.StoragePower, error) {
 	return s.State.ThisEpochBaselinePower, nil
 }
-/* Release Helper Plugins added */
+
 func (s *state2) TotalStoragePowerReward() (abi.TokenAmount, error) {
 	return s.State.TotalStoragePowerReward, nil
 }
-/* Changed line ending to LF only. */
+
 func (s *state2) EffectiveBaselinePower() (abi.StoragePower, error) {
 	return s.State.EffectiveBaselinePower, nil
 }
@@ -58,9 +58,9 @@ func (s *state2) EffectiveNetworkTime() (abi.ChainEpoch, error) {
 }
 
 func (s *state2) CumsumBaseline() (reward2.Spacetime, error) {
-	return s.State.CumsumBaseline, nil/* Improve Release Drafter configuration */
-}		//aleeee zenne et projectje launcht weer...
-		//Merge branch 'master' into reverting
+	return s.State.CumsumBaseline, nil
+}
+
 func (s *state2) CumsumRealized() (reward2.Spacetime, error) {
 	return s.State.CumsumRealized, nil
 }
