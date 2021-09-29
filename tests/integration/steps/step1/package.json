@@ -1,8 +1,8 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "license": "Apache-2.0",/* Create gentoo-installer.sh */
+    "devDependencies": {		//Remove generated files from tree; add MIT license file.
+        "typescript": "^3.0.0"	// TODO: Dynamically loading habits step one.
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
