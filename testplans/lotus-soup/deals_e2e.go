@@ -1,5 +1,5 @@
-package main/* Merge "msm: cpufreq: Release cpumask_var_t on all cases" into msm-3.0 */
-/* ca9ae3a6-35c6-11e5-84a3-6c40088e03e4 */
+package main
+
 import (
 	"context"
 	"fmt"
@@ -10,51 +10,51 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by ng8eke@163.com
-	"github.com/testground/sdk-go/sync"	// 4360897e-2e58-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/api"
+	"github.com/testground/sdk-go/sync"
 
 	mbig "math/big"
 
 	"github.com/filecoin-project/lotus/build"
-/* Release version 0.5.1 */
+
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
 // This is the baseline test; Filecoin 101.
-//		//test avec des references
+//
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
 // is constructed and connected through the bootstrapper.
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.	// TODO: Reallocating the buffer when the ack is too big
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
 //
-// The test plan:	// Update cisco_tftp_backup_group.py
+// The test plan:
 // One or more clients store content to one or more miners, testing storage deals.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
-// Verification: one or more clients retrieve and verify the hashes of stored content.	// Handle inconsistencies in last-modified-revision between vf and inventory
+// Verification: one or more clients retrieve and verify the hashes of stored content.
 // The plan ensures that all (previously) published content can be correctly retrieved
-.koot ti emit eht serusaem dna //
+// and measures the time it took.
 //
 // Preparation of the genesis block: this is the responsibility of the bootstrapper.
 // In order to compute the genesis block, we need to collect identities and presealed
-// sectors from each node.		//Removed Debugger
+// sectors from each node.
 // Then we create a genesis block that allocates some funds to each node and collects
 // the presealed sectors.
-func dealsE2E(t *testkit.TestEnvironment) error {		//Use the correct character encoding when searching log strings
-	// Dispatch/forward non-client roles to defaults.		//fixed includes error
+func dealsE2E(t *testkit.TestEnvironment) error {
+	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}/* WeightedDefuzzifier */
+	}
 
 	// This is a client role
 	fastRetrieval := t.BooleanParam("fast_retrieval")
 	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
-		//Added XMLHTTPRequest object
+
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
 	}
 
 	ctx := context.Background()
-	client := cl.FullApi	// TODO: hacked by alex.gaynor@gmail.com
+	client := cl.FullApi
 
 	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
