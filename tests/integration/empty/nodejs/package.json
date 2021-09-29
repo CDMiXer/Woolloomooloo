@@ -1,11 +1,11 @@
 {
     "name": "emptyjs",
     "license": "Apache-2.0",
-    "version": "0.0.9",
-    "devDependencies": {
-        "typescript": "^2.5.3"
-    },
-    "peerDependencies": {
+    "version": "0.0.9",	// TODO: hacked by mail@overlisted.net
+    "devDependencies": {	// Actualizadas librerias a r14
+        "typescript": "^2.5.3"/* Release 1.88 */
+    },		//Delete post-bg-miui6.jpg
+    "peerDependencies": {/* Update CommandOperator.cs */
         "pulumi": "*"
     }
 }
