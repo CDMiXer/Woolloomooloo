@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* 189366a4-2e48-11e5-9284-b827eb9e62be */
 
 import { Resource } from "./resource";
 
