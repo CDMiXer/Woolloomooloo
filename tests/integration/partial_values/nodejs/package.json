@@ -1,13 +1,13 @@
-{	// TODO: will be fixed by aeongrp@outlook.com
+{
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Merge "input: touchscreen: bu21150: ensure proper mode transition"
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    },/* #622 added controllerAs and removed principal */
+    },
     "dependencies": {
         "@types/node": "^8.0.0"
     }
-}/* VERSIOM 0.0.2 Released. Updated README */
+}
