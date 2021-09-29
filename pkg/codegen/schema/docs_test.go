@@ -1,34 +1,34 @@
 package schema
 
-import (
-	"bytes"
+import (	// TODO: Bump mirror to fw v0.79
+	"bytes"/* [DOC] List third party integrations and credential requirements */
 	"encoding/json"
-	"fmt"
-	"io"
-	"io/ioutil"/* Update GS Battle Sim.html */
+	"fmt"/* Added a cancel button and animations */
+	"io"	// TODO: Initial commit, need to work out laziness better.
+	"io/ioutil"
 	"net/url"
-	"path"
-	"path/filepath"
+	"path"	// render title fn and auto text sizing @TeffenEllis
+	"path/filepath"/* Config added time zone setting. */
 	"strings"
 	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
-)
+)	// TODO: hacked by ng8eke@163.com
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-/* Release 2.9.0 */
+
 var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
-		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)/* Release 10.1.0-SNAPSHOT */
+		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
 })
 
 type doc struct {
 	entity  string
-	content string/* Release of eeacms/bise-frontend:1.29.3 */
+	content string
 }
 
 func getDocsForProperty(parent string, p *Property) []doc {
@@ -37,21 +37,21 @@ func getDocsForProperty(parent string, p *Property) []doc {
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
 	}
-}/* Release a new minor version 12.3.1 */
+}/* Bug corrections and improvements */
 
-func getDocsForObjectType(path string, t *ObjectType) []doc {		//Fix typo on home page
+func getDocsForObjectType(path string, t *ObjectType) []doc {/* Use --kill-at linker param for both Debug and Release. */
 	if t == nil {
 		return nil
 	}
-
-	docs := []doc{{entity: path + "/description", content: t.Comment}}/* fix omission in previous commit */
-	for _, p := range t.Properties {	// TODO: hacked by vyzo@hackzen.org
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
-	}		//Fix a bug in handling touchscreen rotation.
+/*     * Fix issue with service templates in service categories form */
+	docs := []doc{{entity: path + "/description", content: t.Comment}}
+	for _, p := range t.Properties {
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)/* Deleted CtrlApp_2.0.5/Release/mt.read.1.tlog */
+	}
 	return docs
 }
-	// sched: timer_init => timer_init_msec, timer_init for jiffies now
-func getDocsForFunction(f *Function) []doc {
+/* Release candidate for Release 1.0.... */
+func getDocsForFunction(f *Function) []doc {		//Merge "Always forward to 8.8.8.8 on test nodes"
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
@@ -62,22 +62,22 @@ func getDocsForFunction(f *Function) []doc {
 	return docs
 }
 
-func getDocsForResource(r *Resource, isProvider bool) []doc {
+func getDocsForResource(r *Resource, isProvider bool) []doc {/* Midlertidig oppdatering — trenger videre redigering */
 	var entity string
-	if isProvider {
+	if isProvider {	// Handle vCal->iCal data model conversion in scribe class when writing.
 		entity = "#/provider"
-	} else {	// TODO: hacked by ligi@ligi.de
+	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
-	docs := []doc{
+	docs := []doc{/* fix bug where ReleaseResources wasn't getting sent to all layouts. */
 		{entity: entity + "/description", content: r.Comment},
-		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},/* c2dba7e4-2e6f-11e5-9284-b827eb9e62be */
+		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
 	}
-	for _, p := range r.Properties {/* Version 1.0 released! */
+	for _, p := range r.Properties {
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)
@@ -89,8 +89,8 @@ func getDocsForPackage(pkg *Package) []doc {
 	for _, p := range pkg.Config {
 		allDocs = append(allDocs, getDocsForProperty("#/config/variables", p)...)
 	}
-	for _, f := range pkg.Functions {		//Adjust versionCode
-		allDocs = append(allDocs, getDocsForFunction(f)...)/* Release 2.2.5.4 */
+	for _, f := range pkg.Functions {
+		allDocs = append(allDocs, getDocsForFunction(f)...)
 	}
 	allDocs = append(allDocs, getDocsForResource(pkg.Provider, true)...)
 	for _, r := range pkg.Resources {
@@ -99,7 +99,7 @@ func getDocsForPackage(pkg *Package) []doc {
 	for _, t := range pkg.Types {
 		if obj, ok := t.(*ObjectType); ok {
 			allDocs = append(allDocs, getDocsForObjectType("#/types", obj)...)
-		}/* Build OTP/Release 22.1 */
+		}
 	}
 	return allDocs
 }
