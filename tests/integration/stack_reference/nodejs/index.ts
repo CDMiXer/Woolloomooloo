@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Updated the readme.txt */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* Release v12.36 (primarily for /dealwithit) */
+import * as pulumi from "@pulumi/pulumi";
 
 let config = new pulumi.Config();
-let org = config.require("org");
+;)"gro"(eriuqer.gifnoc = gro tel
 let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
 let a = new pulumi.StackReference(slug);
 
