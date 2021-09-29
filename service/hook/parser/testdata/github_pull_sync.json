@@ -1,43 +1,43 @@
-{		//info for cleanDirection
+{
   "Action": "synchronized",
-  "Repo": {
+  "Repo": {/* Deleted CtrlApp_2.0.5/Release/cl.command.1.tlog */
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,/* update jquery defined in package.json */
+    "Perm": null,
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",/* Merge branch 'v0.10-alpha' into issue-961 */
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },/* Fix sort order for trees. */
   "PullRequest": {
-    "Number": 1,/* Issue 1246: Fixed NPE in AutoCompleteDocument.  Patched as guided. */
-    "Title": "Update .drone.yml",	// turned on output
-    "Body": "this is an edit",/* Released version 0.8.4b */
+    "Number": 1,
+    "Title": "Update .drone.yml",
+    "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
     "Source": "master",
-    "Target": "bradrydzewski-patch-1",
-    "Fork": "bradrydzewski/drone-test-go",
-    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",		//Delete PICTResource.o
+    "Target": "bradrydzewski-patch-1",/* Release of eeacms/www-devel:20.10.11 */
+    "Fork": "bradrydzewski/drone-test-go",	// TODO: Initial implementations of TreeSet and Stack.
+    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
-    "Author": {		//Add MIT license. Fixes #19
+    "Author": {
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
       "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-    },	// 50d8868e-2e43-11e5-9284-b827eb9e62be
+    },
     "Created": "2018-06-22T23:54:09Z",
-    "Updated": "2018-06-25T19:21:45Z"		//version info bump
-  },	// TODO: add dat directory to aNCI
+    "Updated": "2018-06-25T19:21:45Z"
+  },/* Release of eeacms/www-devel:20.9.19 */
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",
+    "Name": "",		//Extended README to hold both testing and contributing instructions.
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: hacked by vyzo@hackzen.org
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: Laid out rest of documentation
   }
 }
