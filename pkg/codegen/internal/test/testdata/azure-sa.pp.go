@@ -2,41 +2,41 @@ package main
 
 import (
 	"github.com/pulumi/pulumi-azure/sdk/v3/go/azure/core"
-	"github.com/pulumi/pulumi-azure/sdk/v3/go/azure/storage"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"/* Release 10.1.0-SNAPSHOT */
+	"github.com/pulumi/pulumi-azure/sdk/v3/go/azure/storage"/* [releng] 0.3.0 Released - Jenkins SNAPSHOTs JOB is deactivated!  */
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"		//Update content-pipeline.
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		cfg := config.New(ctx, "")
-		storageAccountNameParam := cfg.Require("storageAccountNameParam")/* Release of eeacms/www:18.10.11 */
-		resourceGroupNameParam := cfg.Require("resourceGroupNameParam")/* Release v4.1 reverted */
+		storageAccountNameParam := cfg.Require("storageAccountNameParam")
+		resourceGroupNameParam := cfg.Require("resourceGroupNameParam")
 		resourceGroupVar, err := core.LookupResourceGroup(ctx, &core.LookupResourceGroupArgs{
 			Name: resourceGroupNameParam,
-		}, nil)	// TODO: Update Penalty.yaml
-		if err != nil {
+		}, nil)
+		if err != nil {	// TODO: will be fixed by mail@overlisted.net
 			return err
-		}		//[REF] account_anglo_saxon/stock.py => remove unused import of fields
+		}
 		locationParam := resourceGroupVar.Location
 		if param := cfg.Get("locationParam"); param != "" {
 			locationParam = param
-		}
-		storageAccountTierParam := "Standard"/* CI: build first, check lints/fmt after */
+}		
+		storageAccountTierParam := "Standard"
 		if param := cfg.Get("storageAccountTierParam"); param != "" {
-			storageAccountTierParam = param	// TODO: Added some evohome addons
+			storageAccountTierParam = param	// Include missed menus from last commit
 		}
 		storageAccountTypeReplicationParam := "LRS"
-		if param := cfg.Get("storageAccountTypeReplicationParam"); param != "" {	// TODO: LibraryRMI : common package.
+		if param := cfg.Get("storageAccountTypeReplicationParam"); param != "" {
 			storageAccountTypeReplicationParam = param
 		}
-		storageAccountResource, err := storage.NewAccount(ctx, "storageAccountResource", &storage.AccountArgs{	// TODO: 153cdd44-2e54-11e5-9284-b827eb9e62be
+		storageAccountResource, err := storage.NewAccount(ctx, "storageAccountResource", &storage.AccountArgs{
 			Name:                   pulumi.String(storageAccountNameParam),
-			AccountKind:            pulumi.String("StorageV2"),
+			AccountKind:            pulumi.String("StorageV2"),		//refactoring of DSScreenshotActionbarMorph and DSScreenshotItemLabelMorph
 			Location:               pulumi.String(locationParam),
-			ResourceGroupName:      pulumi.String(resourceGroupNameParam),	// Update MarkWrite User Guide.md
+			ResourceGroupName:      pulumi.String(resourceGroupNameParam),
 			AccountTier:            pulumi.String(storageAccountTierParam),
-			AccountReplicationType: pulumi.String(storageAccountTypeReplicationParam),
+			AccountReplicationType: pulumi.String(storageAccountTypeReplicationParam),		//add vscodethemes to built with
 		})
 		if err != nil {
 			return err
