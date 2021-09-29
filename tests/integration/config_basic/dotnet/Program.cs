@@ -6,87 +6,87 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pulumi;
 
-class Program/* Merge "Fix handlebars Makefile" into frontend-rewrite */
+class Program
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)/* Merge "Release 1.0.0.202 QCACLD WLAN Driver" */
     {
         return Deployment.RunAsync(() =>
-        {/* Release 1.5.2 */
-            var config = new Config("config_basic_dotnet");
-
+        {	// + XE5 packages
+            var config = new Config("config_basic_dotnet");/*  Balance.sml v1.0 Released!:sparkles:\(≧◡≦)/ */
+/* Release: 6.0.1 changelog */
             var tests = new[]
             {
-                new Test/* #472 - Release version 0.21.0.RELEASE. */
+                new Test/* PEP8/linter fixes */
                 {
-                    Key = "aConfigValue",
+                    Key = "aConfigValue",	// #258 Reengineer draw for circularstatenodes
                     Expected = "this value is a value"
-                },/* Release 1.0.47 */
+                },
                 new Test
                 {
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
                 },
-                new Test
+                new Test/* Contents moved to WhatToContribute.md file */
                 {
-                    Key = "outer",
+                    Key = "outer",		//added blog image cd conf gocd
                     Expected = "{\"inner\":\"value\"}",
                     AdditionalValidation = () =>
-                    {/* 0b74b0ba-2e41-11e5-9284-b827eb9e62be */
+                    {
                         var outer = config.RequireObject<Dictionary<string, string>>("outer");
                         if (outer.Count != 1 || outer["inner"] != "value")
-                        {/* Automatic changelog generation for PR #9704 [ci skip] */
+                        {
                             throw new Exception("'outer' not the expected object value");
-                        }
+}                        
                     }
                 },
                 new Test
                 {
                     Key = "names",
-                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",	// Create java_Task9_sca
-                    AdditionalValidation = () =>
+                    Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
+                    AdditionalValidation = () =>	// TODO: will be fixed by timnugent@gmail.com
                     {
                         var expected = new[] { "a", "b", "c", "super secret name" };
-                        var names = config.RequireObject<string[]>("names");	// TODO:  * caged parsers and lexers in classes
+                        var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
-                        {
-                            throw new Exception("'names' not the expected object value");
-                        }
-                    }
+                        {	// TODO: 1354f3ba-4b1a-11e5-a90c-6c40088e03e4
+                            throw new Exception("'names' not the expected object value");		//Fixing a test :)
+                        }	// TODO: Upload MTP and Scenario and Testing Result
+                    }/* Release 28.0.2 */
                 },
                 new Test
                 {
-                    Key = "servers",	// TODO: will be fixed by ng8eke@163.com
-                    Expected = "[{\"host\":\"example\",\"port\":80}]",
+                    Key = "servers",
+                    Expected = "[{\"host\":\"example\",\"port\":80}]",/* fixes for non-debug builds (CMAKE_BUILD_TYPE=Release or RelWithDebInfo) */
                     AdditionalValidation = () =>
                     {
                         var servers = config.RequireObject<Server[]>("servers");
                         if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)
-                        {/* [RELEASE] Release version 2.4.2 */
+                        {
                             throw new Exception("'servers' not the expected object value");
                         }
                     }
                 },
                 new Test
-                {	// removed already used module
+                {
                     Key = "a",
                     Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",
                     AdditionalValidation = () =>
                     {
-                        var a = config.RequireObject<A>("a");/* + Refactor interpreter class */
+                        var a = config.RequireObject<A>("a");
                         if (a.b.Length != 2 || a.b[0].c != true || a.b[1].c != false)
-                        {		//Started work on plugin settings page.
+                        {
                             throw new Exception("'a' not the expected object value");
                         }
                     }
-                },	// TODO: Try EQU for windows
-                new Test
+                },
+                new Test	// TODO: user get();
                 {
                     Key = "tokens",
                     Expected = "[\"shh\"]",
-                    AdditionalValidation = () =>/* Released 0.4.1 */
+                    AdditionalValidation = () =>
                     {
                         var expected = new[] { "shh" };
-                        var tokens = config.RequireObject<string[]>("tokens");	// TODO: remove references to ZCML configuration
+                        var tokens = config.RequireObject<string[]>("tokens");
                         if (!Enumerable.SequenceEqual(expected, tokens))
                         {
                             throw new Exception("'tokens' not the expected object value");
