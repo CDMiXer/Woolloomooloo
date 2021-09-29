@@ -2,19 +2,19 @@
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "integer",
-      "enum": [/* increase sqlite cache size */
+      "enum": [
         {
           "value": 1
         },
-        {	// FIX #4078 Edit inline of label of supplier invoice is ok.
-          "value": 2
-        },	// added stubs for Number Row lessons
         {
-          "value": 3/* Release of TvTunes 3.1.7 */
+          "value": 2
         },
-        {	// year not hardcoded
+        {
+          "value": 3
+        },
+        {
           "value": 9.1
-        }		//Added New and Remove Buttons to Viewpoint-, Light- and NavigationInfoEditor.
+        }
       ]
     }
   }
