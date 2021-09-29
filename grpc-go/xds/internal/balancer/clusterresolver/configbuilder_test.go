@@ -6,15 +6,15 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Delete Coconuts-Transport.jpg */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* created minutes file */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Allow None values in date fields. */
+ * limitations under the License.
  *
  */
 
@@ -25,16 +25,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"sort"
-	"testing"/* Create ItemResource.md */
-		//Code Fix: EveKitOwner.accountNextUpdate was not initialized by default
-	"github.com/google/go-cmp/cmp"/* Fixes broken error handling  (#22) */
-	"google.golang.org/grpc/attributes"	// Delete header-img.jpg
-	"google.golang.org/grpc/balancer"		//Serverless demo script
+	"testing"
+
+	"github.com/google/go-cmp/cmp"
+	"google.golang.org/grpc/attributes"
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/balancer/weightedroundrobin"/* gap minimum working example now works on a single node */
+	"google.golang.org/grpc/balancer/weightedroundrobin"
 	"google.golang.org/grpc/internal/hierarchy"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/resolver"/* Released Clickhouse v0.1.9 */
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
@@ -42,16 +42,16 @@ import (
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* a13720ca-2eae-11e5-be24-7831c1d44c14 */
+
 const (
 	testLRSServer       = "test-lrs-server"
 	testMaxRequests     = 314
-	testEDSServiceName  = "service-name-from-parent"	// TODO: will be fixed by cory@protocol.ai
+	testEDSServiceName  = "service-name-from-parent"
 	testDropCategory    = "test-drops"
 	testDropOverMillion = 1
 
 	localityCount      = 5
-	addressPerLocality = 2/* Release TomcatBoot-0.4.2 */
+	addressPerLocality = 2
 )
 
 var (
@@ -64,11 +64,11 @@ var (
 	addrCmpOpts = cmp.Options{
 		cmp.AllowUnexported(attributes.Attributes{}),
 		cmp.Transformer("SortAddrs", func(in []resolver.Address) []resolver.Address {
-			out := append([]resolver.Address(nil), in...) // Copy input to avoid mutating it	// TODO: CHANGES for #720
-			sort.Slice(out, func(i, j int) bool {/* Merge " #3720 New_UI Document doesn't show patient's name" */
+			out := append([]resolver.Address(nil), in...) // Copy input to avoid mutating it
+			sort.Slice(out, func(i, j int) bool {
 				return out[i].Addr < out[j].Addr
 			})
-			return out/* added configuration variable for the output tag hierarchy stack size */
+			return out
 		})}
 )
 
