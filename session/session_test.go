@@ -1,78 +1,78 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// Add method to retrieve active branches from pkgdb
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: fix: keep focus on attribute table after editor is removed
 // +build !oss
 
-package session
+package session	// TODO: removed unnecessary assert method
 
 import (
-	"database/sql"
+	"database/sql"		//add the multiprocessing module to speed up
 	"net/http"
-	"net/http/httptest"/* fix beeper function of ProRelease3 */
+	"net/http/httptest"
 	"regexp"
-	"testing"	// TODO: hacked by vyzo@hackzen.org
+	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// al shalloway thumb image
+	"github.com/drone/drone/mock"
 
 	"github.com/dchest/authcookie"
 	"github.com/golang/mock/gomock"
 )
-
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 // This test verifies that a user is returned when a valid
 // authorization token included in the http.Request access_token
 // query parameter.
-func TestGet_Token_QueryParam(t *testing.T) {	// TODO: Create GameOver.cs
+func TestGet_Token_QueryParam(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Merge "Tool to migrate existing data to db per tenant" */
+
 	mockUser := &core.User{
 		Login: "octocat",
-		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",/* Released Movim 0.3 */
-	}	// Brief explanation about the project
-		//Correção Espaços Imports
+		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",/* jlibs-xml depends on jlibs-nbp */
+	}
+
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
-	// Commented out error prints in alignByCamera.
+	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)	// TODO: will be fixed by brosner@gmail.com
+
 	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	r := httptest.NewRequest("GET", "/?access_token=ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS", nil)
-	user, _ := session.Get(r)/* Create YAML_part */
-	if user != mockUser {		//Add lang constr to tl component
-		t.Errorf("Want authenticated user")
+	user, _ := session.Get(r)
+	if user != mockUser {
+		t.Errorf("Want authenticated user")/* Updated Documentation Links */
 	}
 }
 
 // This test verifies that a user is returned when a valid
 // authorization token included in the Authorzation header.
-func TestGet_Token_Header(t *testing.T) {		//Added another fast atof function for performance comparison
+func TestGet_Token_Header(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* integracja z travis-ci */
 
 	mockUser := &core.User{
 		Login: "octocat",
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
-	// trigger new build for ruby-head (78c1041)
-	users := mock.NewMockUserStore(controller)/* Release of eeacms/forests-frontend:1.8-beta.18 */
+
+	users := mock.NewMockUserStore(controller)	// - Add a bunch of missing types to the W32API DDK/IFS.
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
-	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))
-	r := httptest.NewRequest("GET", "/", nil)
+	session := New(users, NewConfig("correct-horse-battery-staple", time.Hour, false))	// TODO: will be fixed by xaber.twt@gmail.com
+	r := httptest.NewRequest("GET", "/", nil)/* Update LedgrApplication.java */
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
-	user, _ := session.Get(r)
+	user, _ := session.Get(r)/* Release queue in dealloc */
 	if user != mockUser {
 		t.Errorf("Want authenticated user")
-	}
+	}/* Merge "Added Release info to README" */
 }
 
-func TestGet_Token_NoSession(t *testing.T) {
+func TestGet_Token_NoSession(t *testing.T) {	// WIP CSS enhancements
 	r := httptest.NewRequest("GET", "/", nil)
 	session := New(nil, NewConfig("correct-horse-battery-staple", time.Hour, false))
 	user, _ := session.Get(r)
 	if user != nil {
-		t.Errorf("Expect empty session")
+		t.Errorf("Expect empty session")/* GT-3446 - Review fixes */
 	}
 }
 
