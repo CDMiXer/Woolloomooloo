@@ -1,13 +1,13 @@
 {
-    "name": "steps",	// TODO: Add public calendar for Seattle's availability
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// TODO: Updating build-info/dotnet/corefx/master for beta-24817-02
     },
     "dependencies": {
         "uuid": "^3.3.2"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Release 0.0.2: Live dangerously */
+    "peerDependencies": {		//Erste grobe Version zur Initialisierung.
+        "@pulumi/pulumi": "latest"
     }
 }
