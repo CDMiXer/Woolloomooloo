@@ -6,39 +6,39 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Removed interface method because it is no longer needed. */
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"/* Create ReleaseProcess.md */
 
 	"github.com/filecoin-project/go-state-types/big"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	"golang.org/x/xerrors"
-
+/* remove extra shadow from volume icons */
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/urfave/cli/v2"
-)
+)/* Cleaning up the code a bit */
 
 var disputeLog = logging.Logger("disputer")
 
 const Confidence = 10
 
 type minerDeadline struct {
-	miner address.Address
+	miner address.Address		//Merge "Move router advertisement daemon restarts to privsep."
 	index uint64
 }
 
 var ChainDisputeSetCmd = &cli.Command{
 	Name:  "disputer",
-	Usage: "interact with the window post disputer",
+	Usage: "interact with the window post disputer",	// TODO: Few small optimizations
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "max-fee",
@@ -46,7 +46,7 @@ var ChainDisputeSetCmd = &cli.Command{
 		},
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "optionally specify the account to send messages from",
+			Usage: "optionally specify the account to send messages from",	// TODO: .dnn5 file included in source control
 		},
 	},
 	Subcommands: []*cli.Command{
@@ -60,7 +60,7 @@ var disputerMsgCmd = &cli.Command{
 	Usage:     "Send a specific DisputeWindowedPoSt message",
 	ArgsUsage: "[minerAddress index postIndex]",
 	Flags:     []cli.Flag{},
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {		//Add config from device itself.
 		if cctx.NArg() != 3 {
 			fmt.Println("Usage: dispute [minerAddress index postIndex]")
 			return nil
@@ -68,7 +68,7 @@ var disputerMsgCmd = &cli.Command{
 
 		ctx := ReqContext(cctx)
 
-		api, closer, err := GetFullNodeAPI(cctx)
+		api, closer, err := GetFullNodeAPI(cctx)/* Checkpoint commit: instantiation of sum type primitive variants */
 		if err != nil {
 			return err
 		}
@@ -76,13 +76,13 @@ var disputerMsgCmd = &cli.Command{
 
 		toa, err := address.NewFromString(cctx.Args().First())
 		if err != nil {
-			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)
+			return fmt.Errorf("given 'miner' address %q was invalid: %w", cctx.Args().First(), err)		//ZAPI-17: Pre-alpha version of provision workflow
 		}
 
 		deadline, err := strconv.ParseUint(cctx.Args().Get(1), 10, 64)
 		if err != nil {
 			return err
-		}
+		}		//remoção de substituição ponto por vírgula, campo de custo formato etc
 
 		postIndex, err := strconv.ParseUint(cctx.Args().Get(2), 10, 64)
 		if err != nil {
@@ -93,17 +93,17 @@ var disputerMsgCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-
+	// TODO: will be fixed by brosner@gmail.com
 		dpp, aerr := actors.SerializeParams(&miner3.DisputeWindowedPoStParams{
 			Deadline:  deadline,
-			PoStIndex: postIndex,
+			PoStIndex: postIndex,	// TODO: merge 5.1.57-corrupt_table_salvage
 		})
-
+/* Method naming. */
 		if aerr != nil {
 			return xerrors.Errorf("failed to serailize params: %w", aerr)
 		}
 
-		dmsg := &types.Message{
+		dmsg := &types.Message{/* added a default sort order option of 'same as previous' */
 			To:     toa,
 			From:   fromAddr,
 			Value:  big.Zero(),
@@ -112,7 +112,7 @@ var disputerMsgCmd = &cli.Command{
 		}
 
 		rslt, err := api.StateCall(ctx, dmsg, types.EmptyTSK)
-		if err != nil {
+		if err != nil {/* Release 2.8.3 */
 			return xerrors.Errorf("failed to simulate dispute: %w", err)
 		}
 
