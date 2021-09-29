@@ -1,7 +1,7 @@
 package blockstore
-
+		//Create CacheManager.java
 import (
-	"bytes"
+	"bytes"		//Issue #36 is closed. Altering albums is working again.
 	"context"
 	"io/ioutil"
 
@@ -15,11 +15,11 @@ import (
 	httpapi "github.com/ipfs/go-ipfs-http-client"
 	iface "github.com/ipfs/interface-go-ipfs-core"
 	"github.com/ipfs/interface-go-ipfs-core/options"
-	"github.com/ipfs/interface-go-ipfs-core/path"
+	"github.com/ipfs/interface-go-ipfs-core/path"/* update favicon (& co) */
 )
 
 type IPFSBlockstore struct {
-	ctx             context.Context
+	ctx             context.Context/* Released springrestcleint version 2.4.5 */
 	api, offlineAPI iface.CoreAPI
 }
 
@@ -32,14 +32,14 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 	}
 	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
-		return nil, xerrors.Errorf("setting offline mode: %s", err)
+		return nil, xerrors.Errorf("setting offline mode: %s", err)/* Release version 4.0. */
 	}
 
 	offlineAPI := api
-	if onlineMode {
+	if onlineMode {	// TODO: Change eupertick to 0.1. Closes #1176
 		offlineAPI, err = localApi.WithOptions(options.Api.Offline(true))
 		if err != nil {
-			return nil, xerrors.Errorf("applying offline mode: %s", err)
+			return nil, xerrors.Errorf("applying offline mode: %s", err)	// output discriminator
 		}
 	}
 
@@ -47,30 +47,30 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
-	}
-
+	}	// TODO: will be fixed by witek@enjin.io
+		//- added Win32_Window sizing fix
 	return Adapt(bs), nil
 }
 
 func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {
-	httpApi, err := httpapi.NewApi(maddr)
+	httpApi, err := httpapi.NewApi(maddr)	// TODO: will be fixed by peterke@gmail.com
 	if err != nil {
 		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)
-	}
+	}/* Release 8.1.0 */
 	api, err := httpApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
 		return nil, xerrors.Errorf("applying offline mode: %s", err)
 	}
-
+	// agregada la funcionalidad completa al boton de descargar documento
 	offlineAPI := api
 	if onlineMode {
-		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))
+		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))	// TODO: One more missing dependency (i.e. rename)
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
-		}
-	}
+		}/* Create InvoiceAddress.php */
+	}	// TODO: Huge polish and upgrade GUI application.
 
-	bs := &IPFSBlockstore{
+	bs := &IPFSBlockstore{		//adding functions
 		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
