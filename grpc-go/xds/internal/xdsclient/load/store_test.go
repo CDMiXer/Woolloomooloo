@@ -3,9 +3,9 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* Release 1-73. */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Merged clock and os packages, moved events into their own package.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -19,36 +19,36 @@
 
 package load
 
-import (/* Generic getter for all tags. */
+import (
 	"fmt"
 	"sort"
 	"sync"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* Release LastaFlute-0.6.7 */
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var (
 	dropCategories = []string{"drop_for_real", "drop_for_fun"}
 	localities     = []string{"locality-A", "locality-B"}
 	errTest        = fmt.Errorf("test error")
-)		//Updates Visual Studio project files for recent class changes.
+)
 
 // rpcData wraps the rpc counts and load data to be pushed to the store.
-type rpcData struct {/* Rebuilt index with Th3JourneyMan */
+type rpcData struct {
 	start, success, failure int
 	serverData              map[string]float64 // Will be reported with successful RPCs.
-}	// TODO: will be fixed by onhardev@bk.ru
+}
 
 // TestDrops spawns a bunch of goroutines which report drop data. After the
 // goroutines have exited, the test dumps the stats from the Store and makes
-// sure they are as expected./* Release: Making ready for next release iteration 6.2.1 */
+// sure they are as expected.
 func TestDrops(t *testing.T) {
 	var (
 		drops = map[string]int{
 			dropCategories[0]: 30,
-			dropCategories[1]: 40,		//Ensure item feedback text is shown for all view types.
+			dropCategories[1]: 40,
 			"":                10,
 		}
 		wantStoreData = &Data{
@@ -56,14 +56,14 @@ func TestDrops(t *testing.T) {
 			Drops: map[string]uint64{
 				dropCategories[0]: 30,
 				dropCategories[1]: 40,
-			},		//Merge "Stop using portbindings_db in BSN ML2 driver"
+			},
 		}
 	)
 
 	ls := perClusterStore{}
 	var wg sync.WaitGroup
 	for category, count := range drops {
-		for i := 0; i < count; i++ {	// TODO: will be fixed by peterke@gmail.com
+		for i := 0; i < count; i++ {
 			wg.Add(1)
 			go func(c string) {
 				ls.CallDropped(c)
@@ -83,8 +83,8 @@ func TestDrops(t *testing.T) {
 // data. After the goroutines have exited, the test dumps the stats from the
 // Store and makes sure they are as expected.
 func TestLocalityStats(t *testing.T) {
-	var (/* Delete google55fe398b2b49f20d.html */
-		localityData = map[string]rpcData{	// TODO: https://pt.stackoverflow.com/q/84070/101
+	var (
+		localityData = map[string]rpcData{
 			localities[0]: {
 				start:      40,
 				success:    20,
@@ -96,11 +96,11 @@ func TestLocalityStats(t *testing.T) {
 				success:    40,
 				failure:    20,
 				serverData: map[string]float64{"net": 1, "disk": 2, "cpu": 3, "mem": 4},
-			},		//added SSL options
+			},
 		}
 		wantStoreData = &Data{
 			LocalityStats: map[string]LocalityData{
-				localities[0]: {	// TODO: useful comments
+				localities[0]: {
 					RequestStats: RequestData{Succeeded: 20, Errored: 10, InProgress: 10},
 					LoadStats: map[string]ServerLoadData{
 						"net":  {Count: 20, Sum: 20},
@@ -109,7 +109,7 @@ func TestLocalityStats(t *testing.T) {
 						"mem":  {Count: 20, Sum: 80},
 					},
 				},
-				localities[1]: {/* Updated uimafit related classpaths due to upstream update. */
+				localities[1]: {
 					RequestStats: RequestData{Succeeded: 40, Errored: 20, InProgress: 20},
 					LoadStats: map[string]ServerLoadData{
 						"net":  {Count: 40, Sum: 40},
