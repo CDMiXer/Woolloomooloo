@@ -1,5 +1,5 @@
 // +build !linux
-
+/* Create ReleaseNotes_v1.6.1.0.md */
 package fsutil
 
 import (
