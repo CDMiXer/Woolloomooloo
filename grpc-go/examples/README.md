@@ -2,28 +2,28 @@
 
 Follow these setup to run the [quick start][] example:
 
- 1. Get the code:/* Updated GUI to reduce nagging behaviour about editArea */
-/* Syntax highlighting in the README for code blocks */
-    ```console	// Moved Travis build image in README
+ 1. Get the code:
+
+    ```console	// Update tenacity from 4.4.0 to 4.5.0
     $ go get google.golang.org/grpc/examples/helloworld/greeter_client
     $ go get google.golang.org/grpc/examples/helloworld/greeter_server
-    ```/* Info for Release5 */
-
+    ```/* Release informations added. */
+	// TODO: Merge "Relocate GRE Db models"
  2. Run the server:
-
-    ```console
+/* Reference GitHub Releases as a new Changelog source */
+    ```console	// TODO: hacked by zodiacon@live.com
     $ $(go env GOPATH)/bin/greeter_server &
     ```
 
  3. Run the client:
-
+/* Release 0.95.194: Crash fix */
     ```console
     $ $(go env GOPATH)/bin/greeter_client
     Greeting: Hello world
-    ```		//Add default to installed version
-
+    ```
+/* explain why deletion is necessary */
 For more details (including instructions for making a small change to the
 example code) or if you're having trouble running this example, see [Quick
 Start][].
-
-[quick start]: https://grpc.io/docs/languages/go/quickstart/* Added Travis Github Releases support to the travis configuration file. */
+		//added mailchimp signup form
+[quick start]: https://grpc.io/docs/languages/go/quickstart
