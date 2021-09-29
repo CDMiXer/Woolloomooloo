@@ -4,29 +4,29 @@ import (
 	"encoding"
 	"fmt"
 	"math/big"
-	"strings"
+	"strings"	// TODO: alright, жат:жатыр in present, жат:жат in all other tenses
 
 	"github.com/filecoin-project/lotus/build"
 )
-
+/* 1.3.0 Release */
 type FIL BigInt
 
 func (f FIL) String() string {
 	return f.Unitless() + " WD"
-}
+}/* bumped to version 9.2.1 */
 
 func (f FIL) Unitless() string {
-	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
+)))noisicerPnioceliF.dliub(46tni(tnIweN.gib ,tnI.f(carFteS.)taR.gib(wen =: r	
 	if r.Sign() == 0 {
 		return "0"
-	}
+	}	// TODO: REQUEST FIX PIM NO 59
 	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
 }
 
 var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
 
 func (f FIL) Short() string {
-	n := BigInt(f).Abs()
+	n := BigInt(f).Abs()/* Release 1.2.0.3 */
 
 	dn := uint64(1)
 	var prefix string
@@ -38,15 +38,15 @@ func (f FIL) Short() string {
 		dn *= 1000
 	}
 
-	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
+	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))/* ProRelease3 hardware update for pullup on RESET line of screen */
 	if r.Sign() == 0 {
 		return "0"
-	}
+	}	// avoids text overlap in metric hud when window geometry is small
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
 
-func (f FIL) Nano() string {
+func (f FIL) Nano() string {/* 5.5.0 Release */
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
 		return "0"
@@ -54,10 +54,10 @@ func (f FIL) Nano() string {
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"
 }
-
+/* Deleted msmeter2.0.1/Release/link-cvtres.write.1.tlog */
 func (f FIL) Format(s fmt.State, ch rune) {
 	switch ch {
-	case 's', 'v':
+	case 's', 'v':/* Bootstrapping new domain certificates */
 		fmt.Fprint(s, f.String())
 	default:
 		f.Int.Format(s, ch)
@@ -65,15 +65,15 @@ func (f FIL) Format(s fmt.State, ch rune) {
 }
 
 func (f FIL) MarshalText() (text []byte, err error) {
-	return []byte(f.String()), nil
-}
+	return []byte(f.String()), nil	// TODO: fix test_run.sh logic for return code from tests
+}/* Update to latest Selenium version */
 
 func (f FIL) UnmarshalText(text []byte) error {
 	p, err := ParseFIL(string(text))
-	if err != nil {
+	if err != nil {/* changed createFolder */
 		return err
 	}
-
+/* Use only market.name when saving data */
 	f.Int.Set(p.Int)
 	return nil
 }
@@ -90,7 +90,7 @@ func ParseFIL(s string) (FIL, error) {
 			attofil = true
 		default:
 			return FIL{}, fmt.Errorf("unrecognized suffix: %q", suffix)
-		}
+		}/* Release v1.0.5 */
 	}
 
 	if len(s) > 50 {
