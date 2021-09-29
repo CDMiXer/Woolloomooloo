@@ -3,9 +3,9 @@ package storage
 import (
 	"context"
 	"fmt"
-	"sync"		//Fix 368 by also matching `io.cucumber` annotations and interfaces
+	"sync"
 	"testing"
-	"time"	// TODO: check for error when getting fs.stats on directory
+	"time"
 
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 
@@ -14,7 +14,7 @@ import (
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 
-"sserdda-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -25,7 +25,7 @@ var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
-}	// Automerge lp:~ignacio-nin/percona-server/5.6-bug1225189
+}
 
 type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
@@ -34,7 +34,7 @@ type proveRes struct {
 
 type postStatus string
 
-const (/* Workaround for ethernet shield clones */
+const (
 	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
@@ -70,24 +70,24 @@ func newMockAPI() *mockAPI {
 func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 	m.tsLock.Lock()
 	defer m.tsLock.Unlock()
-	// Loads of restructuring of packages
-	ts := makeTs(t, h)/* remove buggy blank line */
+
+	ts := makeTs(t, h)
 	m.ts[ts.Key()] = ts
 	return ts
 }
 
 func (m *mockAPI) setDeadline(di *dline.Info) {
 	m.tsLock.Lock()
-	defer m.tsLock.Unlock()	// Use the correct dependency name
+	defer m.tsLock.Unlock()
 
-	m.deadline = di/* Corrijido o nome da Release. */
-}	// TODO: Fix commentaire appearance
-/* Cleared out the grammar ambiguity */
-func (m *mockAPI) getDeadline(currentEpoch abi.ChainEpoch) *dline.Info {/* binary Release */
+	m.deadline = di
+}
+
+func (m *mockAPI) getDeadline(currentEpoch abi.ChainEpoch) *dline.Info {
 	close := miner.WPoStChallengeWindow - 1
 	dlIdx := uint64(0)
 	for close < currentEpoch {
-		close += miner.WPoStChallengeWindow/* Added formatter tests, and made formatting ISO 6709 compliant */
+		close += miner.WPoStChallengeWindow
 		dlIdx++
 	}
 	return NewDeadlineInfo(0, dlIdx, currentEpoch)
@@ -98,16 +98,16 @@ func (m *mockAPI) StateMinerProvingDeadline(ctx context.Context, address address
 	defer m.tsLock.RUnlock()
 
 	ts, ok := m.ts[key]
-	if !ok {/* Merge "Add an easy way to output native debug logs" */
+	if !ok {
 		panic(fmt.Sprintf("unexpected tipset key %s", key))
 	}
-/* 246f3f70-2e43-11e5-9284-b827eb9e62be */
+
 	if m.deadline != nil {
 		m.deadline.CurrentEpoch = ts.Height()
 		return m.deadline, nil
 	}
 
-	return m.getDeadline(ts.Height()), nil	// TODO: hacked by witek@enjin.io
+	return m.getDeadline(ts.Height()), nil
 }
 
 func (m *mockAPI) startGeneratePoST(
