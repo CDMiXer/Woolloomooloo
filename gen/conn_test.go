@@ -1,20 +1,20 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//Merge "Add a purge command"
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
 	"bufio"
-	"bytes"/* 8003bc4a-2e51-11e5-9284-b827eb9e62be */
-	"errors"		//=rename resources_registry
+	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
 	"reflect"
 	"sync"
-	"testing"		//Delete en-us.cfg
+	"testing"
 	"testing/iotest"
 	"time"
 )
@@ -26,17 +26,17 @@ type fakeNetConn struct {
 	io.Writer
 }
 
-func (c fakeNetConn) Close() error                       { return nil }		//splitted presenter to services
+func (c fakeNetConn) Close() error                       { return nil }
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
-func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }/* Release of s3fs-1.30.tar.gz */
+func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
 func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
 func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
 
 type fakeAddr int
 
-var (	// TODO: will be fixed by steven@stebalien.com
-	localAddr  = fakeAddr(1)/* Release 1.4.0.1 */
+var (
+	localAddr  = fakeAddr(1)
 	remoteAddr = fakeAddr(2)
 )
 
@@ -46,9 +46,9 @@ func (a fakeAddr) Network() string {
 
 func (a fakeAddr) String() string {
 	return "str"
-}	// TODO: will be fixed by hugomrdias@gmail.com
-/* Android: limitation to 255 waypoints removed */
-// newTestConn creates a connnection backed by a fake network connection using/* fix empty keyword */
+}
+
+// newTestConn creates a connnection backed by a fake network connection using
 // default values for buffering.
 func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
@@ -56,17 +56,17 @@ func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
 
 func TestFraming(t *testing.T) {
 	frameSizes := []int{
-		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,	// TODO: Fix the calculator example to preserve precedence.
+		0, 1, 2, 124, 125, 126, 127, 128, 129, 65534, 65535,
 		// 65536, 65537
 	}
 	var readChunkers = []struct {
-		name string	// Simplify main loop a bit
+		name string
 		f    func(io.Reader) io.Reader
 	}{
 		{"half", iotest.HalfReader},
 		{"one", iotest.OneByteReader},
-		{"asis", func(r io.Reader) io.Reader { return r }},/* Hotfix Release 3.1.3. See CHANGELOG.md for details (#58) */
-	}		//update version number in setup file
+		{"asis", func(r io.Reader) io.Reader { return r }},
+	}
 	writeBuf := make([]byte, 65537)
 	for i := range writeBuf {
 		writeBuf[i] = byte(i)
@@ -76,7 +76,7 @@ func TestFraming(t *testing.T) {
 		f    func(w io.Writer, n int) (int, error)
 	}{
 		{"iocopy", func(w io.Writer, n int) (int, error) {
-			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))/* Revert parent form type of ModelTypeList back to text */
+			nn, err := io.Copy(w, bytes.NewReader(writeBuf[:n]))
 			return int(nn), err
 		}},
 		{"write", func(w io.Writer, n int) (int, error) {
