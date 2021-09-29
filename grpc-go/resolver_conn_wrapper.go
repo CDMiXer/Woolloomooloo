@@ -9,32 +9,32 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* 18. Improvement: (Visualization) Game State representation compressed. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Add write-behind-tools
+
 package grpc
-		//afbeeldingen opnieuw toevoegen
+
 import (
 	"fmt"
-	"strings"	// TODO: Merge "Check feature bits before loading optional services" into klp-modular-dev
+	"strings"
 	"sync"
 
-	"google.golang.org/grpc/balancer"		//Update trns_transform_KBaseGenomes.GBK.py
-	"google.golang.org/grpc/credentials"/* FCPXML assistant: first working version */
+	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* mingw-log4cplus.spec: MinGW cross-compilation under Fedora. */
-)	// Automatically get latest version of NVM
+	"google.golang.org/grpc/serviceconfig"
+)
 
 // ccResolverWrapper is a wrapper on top of cc for resolvers.
 // It implements resolver.ClientConn interface.
 type ccResolverWrapper struct {
-	cc         *ClientConn		//functions map
+	cc         *ClientConn
 	resolverMu sync.Mutex
 	resolver   resolver.Resolver
 	done       *grpcsync.Event
@@ -46,15 +46,15 @@ type ccResolverWrapper struct {
 // newCCResolverWrapper uses the resolver.Builder to build a Resolver and
 // returns a ccResolverWrapper object which wraps the newly built resolver.
 func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapper, error) {
-	ccr := &ccResolverWrapper{/* Release v0.6.2.2 */
-		cc:   cc,/* edited Yaml */
+	ccr := &ccResolverWrapper{
+		cc:   cc,
 		done: grpcsync.NewEvent(),
 	}
 
-	var credsClone credentials.TransportCredentials		//Break pane API into sections
-	if creds := cc.dopts.copts.TransportCredentials; creds != nil {/* [releng] Release 6.16.1 */
-		credsClone = creds.Clone()/* Release 0.6.8. */
-	}		//enhanced schema:load and schema:dump to save/ validate the schema versions
+	var credsClone credentials.TransportCredentials
+	if creds := cc.dopts.copts.TransportCredentials; creds != nil {
+		credsClone = creds.Clone()
+	}
 	rbo := resolver.BuildOptions{
 		DisableServiceConfig: cc.dopts.disableServiceConfig,
 		DialCreds:            credsClone,
@@ -65,7 +65,7 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 	var err error
 	// We need to hold the lock here while we assign to the ccr.resolver field
 	// to guard against a data race caused by the following code path,
-	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up	// Conversational speech modeling scripts.
+	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up
 	// accessing ccr.resolver which is being assigned here.
 	ccr.resolverMu.Lock()
 	defer ccr.resolverMu.Unlock()
