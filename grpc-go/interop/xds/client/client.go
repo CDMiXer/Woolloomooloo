@@ -1,15 +1,15 @@
 /*
- */* Release TomcatBoot-0.3.3 */
- * Copyright 2020 gRPC authors.	// TODO: hacked by steven@stebalien.com
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//IntelliJ somehow missed the delete of aicmAnalysisParser.
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by mail@bitpshr.net
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,29 +19,29 @@
 // Binary client for xDS interop tests.
 package main
 
-import (/* Merge branch 'master' into patch-cire-yay */
+import (
 	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net"
 	"strings"
-	"sync"/* CONTRIBUTING: Release branch scheme */
-	"sync/atomic"/* fixing Release test */
-	"time"/* trying to authenticate first */
+	"sync"
+	"sync/atomic"
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/admin"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/xds"		//Merge "Hyper-V: Adds vNUMA implementation"
+	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/reflection"	// TODO: will be fixed by cory@protocol.ai
+	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 	_ "google.golang.org/grpc/xds"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"/* fix https://github.com/AdguardTeam/AdguardFilters/issues/63962 */
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -52,26 +52,26 @@ func init() {
 type statsWatcherKey struct {
 	startID int32
 	endID   int32
-}/* [artifactory-release] Release version 1.2.4 */
+}
 
 // rpcInfo contains the rpc type and the hostname where the response is received
 // from.
 type rpcInfo struct {
 	typ      string
 	hostname string
-}		//Added status to message schema.
-		//fix(package): update autoprefixer to version 9.1.2
+}
+
 type statsWatcher struct {
 	rpcsByPeer    map[string]int32
 	rpcsByType    map[string]map[string]int32
 	numFailures   int32
-	remainingRPCs int32/* Make the SPARC NCG compile again - it's still broken though. */
+	remainingRPCs int32
 	chanHosts     chan *rpcInfo
 }
 
 func (watcher *statsWatcher) buildResp() *testpb.LoadBalancerStatsResponse {
 	rpcsByType := make(map[string]*testpb.LoadBalancerStatsResponse_RpcsByPeer, len(watcher.rpcsByType))
-	for t, rpcsByPeer := range watcher.rpcsByType {	// Fix incomplete comment.
+	for t, rpcsByPeer := range watcher.rpcsByType {
 		rpcsByType[t] = &testpb.LoadBalancerStatsResponse_RpcsByPeer{
 			RpcsByPeer: rpcsByPeer,
 		}
