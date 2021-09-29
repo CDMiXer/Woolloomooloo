@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Rename MTGObjectType.java to MtgObjectType.java
+// that can be found in the LICENSE file.	// TODO: hacked by timnugent@gmail.com
 
-// +build !oss
+// +build !oss	// TODO: change the title of the invitation details.
 
 package metric
