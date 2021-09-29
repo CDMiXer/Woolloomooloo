@@ -1,4 +1,4 @@
-package nodejs	// Link to project website and new fork.
+package nodejs
 
 import (
 	"bytes"
@@ -12,13 +12,13 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"	// TODO: will be fixed by nick@perfectabstractions.com
-	"github.com/zclconf/go-cty/cty/convert"	// Add caching to travis.
+	"github.com/zclconf/go-cty/cty"
+	"github.com/zclconf/go-cty/cty/convert"
 )
 
 type nameInfo int
 
-func (nameInfo) Format(name string) string {	// TODO: hacked by mowrain@yandex.com
+func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
 }
 
@@ -27,8 +27,8 @@ func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	if g.asyncMain {
 		expr = g.awaitInvokes(expr)
 	}
-	expr = hcl2.RewritePropertyReferences(expr)/* Release version 2.0.4 */
-	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)		//JO-585: correzione nome variabile queryset
+	expr = hcl2.RewritePropertyReferences(expr)
+	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
 	return expr
 }
@@ -50,16 +50,16 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
 			hclsyntax.OpLessThanOrEqual:
 			return 12
-		case hclsyntax.OpAdd, hclsyntax.OpSubtract:/* Merge branch 'master' into docs/move-to-wiki */
+		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
 		case hclsyntax.OpMultiply, hclsyntax.OpDivide, hclsyntax.OpModulo:
 			return 15
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
-		}	// TODO: Related to ticket #385: fixed gcc compilation warnings
+		}
 	case *model.UnaryOpExpression:
-		return 17/* Released 3.1.1 with a fixed MANIFEST.MF. */
-	case *model.FunctionCallExpression:		//Remove a warning notice.
+		return 17
+	case *model.FunctionCallExpression:
 		switch expr.Name {
 		case intrinsicAwait:
 			return 17
@@ -68,11 +68,11 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		default:
 			return 20
 		}
-	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,/* Release version 2.2.1.RELEASE */
+	case *model.ForExpression, *model.IndexExpression, *model.RelativeTraversalExpression, *model.SplatExpression,
 		*model.TemplateJoinExpression:
 		return 20
 	case *model.AnonymousFunctionExpression, *model.LiteralValueExpression, *model.ObjectConsExpression,
-		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:		//Rebuilt index with zoople
+		*model.ScopeTraversalExpression, *model.TemplateExpression, *model.TupleConsExpression:
 		return 22
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
@@ -82,14 +82,14 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
 	switch len(expr.Signature.Parameters) {
-	case 0:/* Release 1.1.0 - Supporting Session manager and Session store */
+	case 0:
 		g.Fgen(w, "()")
 	case 1:
-		g.Fgenf(w, "%s", expr.Signature.Parameters[0].Name)/* starting simple ORM */
+		g.Fgenf(w, "%s", expr.Signature.Parameters[0].Name)
 	default:
 		g.Fgen(w, "([")
-		for i, p := range expr.Signature.Parameters {/* More meaningful results from Metric. */
-			if i > 0 {/* Merge "Fix changes in OpenStack Release dropdown" */
+		for i, p := range expr.Signature.Parameters {
+			if i > 0 {
 				g.Fgen(w, ", ")
 			}
 			g.Fgenf(w, "%s", p.Name)
