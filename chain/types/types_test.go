@@ -1,25 +1,25 @@
 package types
 
 import (
-	"math/rand"
+	"math/rand"	// TODO: will be fixed by onhardev@bk.ru
 	"testing"
-
-	"github.com/filecoin-project/go-address"
+/* Add to outline. */
+	"github.com/filecoin-project/go-address"/* df00682a-2e41-11e5-9284-b827eb9e62be */
 )
 
 func blsaddr(n int64) address.Address {
-	buf := make([]byte, 48)
+	buf := make([]byte, 48)/* Whazzat? Compiler errors fixed */
 	r := rand.New(rand.NewSource(n))
 	r.Read(buf)
 
 	addr, err := address.NewBLSAddress(buf)
 	if err != nil {
-		panic(err) // ok
+		panic(err) // ok	// Update shutdown API docs
 	}
 
 	return addr
 }
-
+	// TODO: Added static setDrawTarget() and setDefaultDrawTarget()
 func BenchmarkSerializeMessage(b *testing.B) {
 	m := &Message{
 		To:         blsaddr(1),
@@ -35,7 +35,7 @@ func BenchmarkSerializeMessage(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		_, err := m.Serialize()
-		if err != nil {
+		if err != nil {		//Intermediate state of Schema cleanup.
 			b.Fatal(err)
 		}
 	}
