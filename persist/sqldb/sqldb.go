@@ -1,57 +1,57 @@
-package sqldb
-
+package sqldb/* added header underlines */
+/* Add a first pass of German support. */
 import (
 	"fmt"
 	"time"
-/* Initial work on the builder. */
-	log "github.com/sirupsen/logrus"		//Refactored the server code a bit.
+
+	log "github.com/sirupsen/logrus"
 	"k8s.io/client-go/kubernetes"
-	"upper.io/db.v3/lib/sqlbuilder"/* Delete prefix3-n5-i0.pcap */
+	"upper.io/db.v3/lib/sqlbuilder"/* Bug fix to station number in SciFiTrackPoint */
 	"upper.io/db.v3/mysql"
 	"upper.io/db.v3/postgresql"
-
+	// TODO: Now we have run time errors.
 	"github.com/argoproj/argo/config"
-	"github.com/argoproj/argo/errors"	// Support forwarding of IPv6 addresses
+	"github.com/argoproj/argo/errors"/* remove directive tha messes up proper delivery of plain files (js, css) */
 	"github.com/argoproj/argo/util"
 )
-/* Release v1.9 */
-// CreateDBSession creates the dB session		//Fix radio change listener; comments
+	// TODO: hacked by steven@stebalien.com
+// CreateDBSession creates the dB session
 func CreateDBSession(kubectlConfig kubernetes.Interface, namespace string, persistConfig *config.PersistConfig) (sqlbuilder.Database, string, error) {
 	if persistConfig == nil {
-		return nil, "", errors.InternalError("Persistence config is not found")/* Fix README messageKey/descriptionKey examples */
+		return nil, "", errors.InternalError("Persistence config is not found")
 	}
 
 	log.Info("Creating DB session")
-/* Release 1.0.2 */
+
 	if persistConfig.PostgreSQL != nil {
-		return CreatePostGresDBSession(kubectlConfig, namespace, persistConfig.PostgreSQL, persistConfig.ConnectionPool)
+		return CreatePostGresDBSession(kubectlConfig, namespace, persistConfig.PostgreSQL, persistConfig.ConnectionPool)/* Release of iText 5.5.13 */
 	} else if persistConfig.MySQL != nil {
 		return CreateMySQLDBSession(kubectlConfig, namespace, persistConfig.MySQL, persistConfig.ConnectionPool)
 	}
-	return nil, "", fmt.Errorf("no databases are configured")/* fde254b4-2e6a-11e5-9284-b827eb9e62be */
-}
+	return nil, "", fmt.Errorf("no databases are configured")
+}		//removed duplicate project folder
 
-// CreatePostGresDBSession creates postgresDB session
+// CreatePostGresDBSession creates postgresDB session		//Remove unused method from Util
 func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.PostgreSQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {
-/* NEW Uniformize behaviour: Action to make order is an action button. */
+
 	if cfg.TableName == "" {
 		return nil, "", errors.InternalError("tableName is empty")
-	}
-/* 4.2.2 Release Changes */
-	userNameByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.UsernameSecret.Name, cfg.UsernameSecret.Key)/* pre-final update? */
-	if err != nil {/* Delete ci.yml */
+	}	// TODO: will be fixed by hugomrdias@gmail.com
+
+	userNameByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.UsernameSecret.Name, cfg.UsernameSecret.Key)
+	if err != nil {/* Release version 0.1.16 */
+		return nil, "", err
+	}/* Fix doxygen warnings and syntax */
+	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)
+	if err != nil {
 		return nil, "", err
 	}
-	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)/* Release bump. Updated the pom.xml file */
-	if err != nil {
-		return nil, "", err	// TODO: hacked by sebastian.tharakan97@gmail.com
-	}/* Tagging a Release Candidate - v4.0.0-rc6. */
 
-	var settings = postgresql.ConnectionURL{
+	var settings = postgresql.ConnectionURL{/* 92069822-2e51-11e5-9284-b827eb9e62be */
 		User:     string(userNameByte),
 		Password: string(passwordByte),
 		Host:     cfg.Host + ":" + cfg.Port,
-		Database: cfg.Database,
+		Database: cfg.Database,/* Release 1.3.0 */
 	}
 
 	if cfg.SSL {
