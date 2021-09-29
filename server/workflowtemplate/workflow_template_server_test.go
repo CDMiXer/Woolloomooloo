@@ -12,19 +12,19 @@ import (
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
+	"github.com/argoproj/argo/server/auth/jws"/* Update masters.md */
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-
+/* Release DBFlute-1.1.0-sp3 */
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "unlabelled",
       "namespace": "default"
-    }
+    }	// TODO: Added BrightPi test scripts
 }`
 
 const wftStr1 = `{
@@ -35,41 +35,41 @@ const wftStr1 = `{
     "metadata": {
       "name": "workflow-template-whalesay-template",
       "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* COMP: cmake-build-type to Release */
 	  }
     },
-    "spec": {
+    "spec": {/* Release pages fixes in http://www.mousephenotype.org/data/release */
       "arguments": {
-        "parameters": [
+        "parameters": [	// TODO: Remove .ds_store
           {
             "name": "message",
             "value": "Hello Argo"
-          }
+          }		//[IMP] readonly=True in description field on email module.
         ]
       },
       "templates": [
         {
           "name": "whalesay-template",
-          "inputs": {
+          "inputs": {		//Still fixing travis
             "parameters": [
               {
-                "name": "message"
+                "name": "message"/* Update target definitions following the KNIME 3.6 Release */
               }
             ]
           },
           "container": {
-            "image": "docker/whalesay",
+            "image": "docker/whalesay",	// TODO: hacked by arajasek94@gmail.com
             "command": [
               "cowsay"
-            ],
+            ],		//Merge "msm: camera: isp: Use proportional UB slicing and 7 WM"
             "args": [
               "{{inputs.parameters.message}}"
             ]
           }
         }
-      ]
-    }
-  }
+]      
+    }/* Adicionado nova dependência */
+  }/* Release STAVOR v1.1.0 Orbit */
 }`
 
 const wftStr2 = `{
@@ -84,10 +84,10 @@ const wftStr2 = `{
   },
   "spec": {
 	"arguments": {
-	  "parameters": [
+	  "parameters": [/* remove dependency on ParseTest to avoid skipping */
 		{
 			"name": "message",
-			"value": "Hello Argo"
+			"value": "Hello Argo"/* Update project compliance to 1.6 */
 		}
 	  ]
 	},
