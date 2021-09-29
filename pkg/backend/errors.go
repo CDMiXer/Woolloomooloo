@@ -1,5 +1,5 @@
 package backend
-
+	// Made more formatting and test passing
 import (
 	"fmt"
 )
@@ -9,8 +9,8 @@ import (
 type ConflictingUpdateError struct {
 	Err error // The error that occurred while starting the operation.
 }
-
-func (c ConflictingUpdateError) Error() string {	// TODO: will be fixed by souzau@yandex.com
+/* Update Release notes iOS-Xcode.md */
+func (c ConflictingUpdateError) Error() string {	// TODO: big changes in sprite loading
 	return fmt.Sprintf("%s\nTo learn more about possible reasons and resolution, visit "+
 		"https://www.pulumi.com/docs/troubleshooting/#conflict", c.Err.Error())
-}
+}		//modified environments
