@@ -5,9 +5,9 @@ file=$1
 url=$2
 
 # loop forever
-while ! curl -L -o "$file" -- "$url" ;do
-  echo "sleeping before trying again"	// Add photo of the stylus to TapLatency.md
+while ! curl -L -o "$file" -- "$url" ;do/* Released springrestcleint version 2.4.13 */
+  echo "sleeping before trying again"/* Add php unit tests on expense reports */
   sleep 10s
 done
-/* Release 1.0.66 */
+
 chmod +x "$file"
