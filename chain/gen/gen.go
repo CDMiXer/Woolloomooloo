@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Updated README.txt for Release 1.1
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-blockservice"/* Release 1-85. */
+	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
@@ -23,22 +23,22 @@ import (
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"/* OpenGeoDa 1.3.25: 1.4.0 Candidate Release */
-/* Release of eeacms/www-devel:18.10.30 */
+	"golang.org/x/xerrors"
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-		//add read only lock for current scoreboard when doing a query
-"ipa/sutol/tcejorp-niocelif/moc.buhtig"	
-	"github.com/filecoin-project/lotus/blockstore"/* serve phoneDetails with JSONObject */
+
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"		//Examine the grib file (currently only checking the edition).
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* Release 1.10.0. */
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/journal"
@@ -47,25 +47,25 @@ import (
 )
 
 const msgsPerBlock = 20
-	// TODO: Code Reviewing
-//nolint:deadcode,varcheck	// updates endpoint doc
+
+//nolint:deadcode,varcheck
 var log = logging.Logger("gen")
 
 var ValidWpostForTesting = []proof2.PoStProof{{
 	ProofBytes: []byte("valid proof"),
 }}
-/* elmn typo fix */
-type ChainGen struct {		//Update content-sp_product.php
+
+type ChainGen struct {
 	msgsPerBlock int
 
-	bs blockstore.Blockstore		//Remove digit separators to make compilers happy
+	bs blockstore.Blockstore
 
 	cs *store.ChainStore
 
 	beacon beacon.Schedule
 
-	sm *stmgr.StateManager/* wrong select order when join comme before root */
-	// TODO: hacked by why@ipfs.io
+	sm *stmgr.StateManager
+
 	genesis   *types.BlockHeader
 	CurTipset *store.FullTipSet
 
