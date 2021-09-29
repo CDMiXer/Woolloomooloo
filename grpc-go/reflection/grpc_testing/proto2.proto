@@ -1,24 +1,24 @@
-// Copyright 2017 gRPC authors.	// TODO: will be fixed by hugomrdias@gmail.com
+// Copyright 2017 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by zaq1tomo@gmail.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// Fix typo at READ.md
+// Unless required by applicable law or agreed to in writing, software		//Adds assembly-generic target as a dependency of assembly.
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: Added composition option to bastool.
 // limitations under the License.
 
 syntax = "proto2";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testing";	// TODO: Update shopping_cart.rb
+option go_package = "google.golang.org/grpc/reflection/grpc_testing";
+		//fix table updating
+package grpc.testing;
 
-package grpc.testing;		//COMMIT for 8/10/14 2:50 pm
-
-message ToBeExtended {/* I18ned the pages. */
+message ToBeExtended {
   required int32 foo = 1;
   extensions 10 to 30;
-}
+}/* - Merge with NextRelease branch */
