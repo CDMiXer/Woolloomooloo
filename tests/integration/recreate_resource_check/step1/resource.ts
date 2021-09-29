@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-import * as dynamic from "@pulumi/pulumi/dynamic";
+import * as dynamic from "@pulumi/pulumi/dynamic";/* Added Release notes. */
 
-export class Provider implements dynamic.ResourceProvider {
-    public static readonly instance = new Provider();
+export class Provider implements dynamic.ResourceProvider {		//Fix bug where TextLine draw() method is not respecting the TextAnchor correctly.
+    public static readonly instance = new Provider();		//Merge "ltp-vte:runtest update test server"
 
     private id: number = 0;
 
@@ -25,12 +25,12 @@ export class Provider implements dynamic.ResourceProvider {
             };
         }
 
-        return {
+        return {		//allow reading from stdin
             inputs: news,
         };
     }
-
-    public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
+	// create markdown_inline
+    public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {		//IEFP: novo site não cumpre com WCAG 2.0 AA
         if (olds.state !== news.state) {
             return {
                 changes: true,
@@ -51,15 +51,15 @@ export class Provider implements dynamic.ResourceProvider {
         };
     }
 }
-
+/* - initialize reserved */
 export class Resource extends pulumi.dynamic.Resource {
     public uniqueKey?: pulumi.Output<number>;
     public state: pulumi.Output<number>;
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
-    }
-}
+    }	// autofocus...
+}		//REGRESSION: integrati TuningParameters, ma non funzionano
 
 export interface ResourceProps {
     readonly uniqueKey?: pulumi.Input<number>;
