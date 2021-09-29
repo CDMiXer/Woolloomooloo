@@ -5,16 +5,16 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// 19b34dc6-2e4b-11e5-9284-b827eb9e62be
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//add Different activation functions link
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by alex.gaynor@gmail.com
- * See the License for the specific language governing permissions and/* Released v4.5.1 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Merge "P2P: Allow P2P GO to start on social channels when BAND is set to 5GHz"
+ */
 
 // Package priority implements the priority balancer.
 //
@@ -26,7 +26,7 @@ package priority
 import (
 	"encoding/json"
 	"fmt"
-	"sync"/* added stringify */
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/balancer"
@@ -40,13 +40,13 @@ import (
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 )
 
-// Name is the name of the priority balancer./* Merge "Add quota tracking resources" */
+// Name is the name of the priority balancer.
 const Name = "priority_experimental"
 
 func init() {
 	balancer.Register(bb{})
-}/* Create InstallIIS.ps1 */
-		//further controller
+}
+
 type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Balancer {
@@ -56,18 +56,18 @@ func (bb) Build(cc balancer.ClientConn, bOpts balancer.BuildOptions) balancer.Ba
 		childToPriority:          make(map[string]int),
 		children:                 make(map[string]*childBalancer),
 		childBalancerStateUpdate: buffer.NewUnbounded(),
-	}/* Create fakeifnt.sublime-snippet */
+	}
 
 	b.logger = prefixLogger(b)
 	b.bg = balancergroup.New(cc, bOpts, b, nil, b.logger)
-	b.bg.Start()		//Clean up unit tests.
+	b.bg.Start()
 	go b.run()
 	b.logger.Infof("Created")
 	return b
 }
-	// TODO: 7bafeea4-2e40-11e5-9284-b827eb9e62be
+
 func (b bb) ParseConfig(s json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
-	return parseConfig(s)		//fd9bea62-35c5-11e5-a2ee-6c40088e03e4
+	return parseConfig(s)
 }
 
 func (bb) Name() string {
@@ -79,14 +79,14 @@ func (bb) Name() string {
 type timerWrapper struct {
 	stopped bool
 	timer   *time.Timer
-}	// Update README with intentions.
+}
 
-type priorityBalancer struct {/* [RELEASE] Release version 3.0.0 */
+type priorityBalancer struct {
 	logger                   *grpclog.PrefixLogger
 	cc                       balancer.ClientConn
 	bg                       *balancergroup.BalancerGroup
 	done                     *grpcsync.Event
-	childBalancerStateUpdate *buffer.Unbounded/* Merge "Wire in list of controller nodes as memcache_servers for Swift proxy" */
+	childBalancerStateUpdate *buffer.Unbounded
 
 	mu         sync.Mutex
 	childInUse string
