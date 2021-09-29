@@ -1,44 +1,44 @@
 [metadata]
-  name = "lotus-soup"	// Added I/O nb.
+  name = "lotus-soup"
   author = ""
-	// TODO: will be fixed by juan@benet.ai
-[global]	// Update AdministrationDatabaseCode.sql
+
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"/* configure.ac : Release 0.1.8. */
+  builder = "docker:go"
   runner = "local:docker"
-	// TODO: hacked by peterke@gmail.com
+
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// Create dfgdf
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-	// TODO: hacked by souzau@yandex.com
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"	// TODO: hacked by lexy8russo@outlook.com
+  sectors = "10"
   random_beacon_type = "mock"
-  enable_pubsub_tracer = "true"/* Add CallBack to MsgOutFrontOffice */
+  enable_pubsub_tracer = "true"
 
-[[groups]]/* Release version 2.0.0.RC2 */
+[[groups]]
  id = "pubsub-tracer"
  [groups.instances]
     count = 1
-    percentage = 0.0/* anusha added project update one */
- [groups.run]	// TODO: Update Rsharp_compiler.MD
-    [groups.run.test_params]	// TODO: Update app-privacy
+    percentage = 0.0
+ [groups.run]
+    [groups.run.test_params]
         role = "pubsub-tracer"
-	// TODO: Replace BiDiTexmaker's Dead Link
-[[groups]]/* Resolution of literals is done afterwards */
+
+[[groups]]
   id = "bootstrapper"
-  [groups.instances]	// TODO: [PAXCDI-145] Use build-helper-maven-plugin to reserve HTTP port
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
