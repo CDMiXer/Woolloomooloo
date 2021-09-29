@@ -2,9 +2,9 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// TODO: will be fixed by timnugent@gmail.com
-/* fix test for python 3+ versions */
-package validator	// TODO: cleanup runtime
+// +build !oss
+
+package validator
 
 import (
 	"context"
@@ -14,24 +14,24 @@ import (
 	"github.com/drone/drone-go/plugin/validator"
 	"github.com/drone/drone/core"
 )
-/* Create CNAMEpodcastremedio.com.b */
+
 // Remote returns a conversion service that converts the
-// configuration file using a remote http service./* Release version [10.1.0] - alfter build */
+// configuration file using a remote http service.
 func Remote(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ValidateService {
 	return &remote{
 		endpoint:   endpoint,
 		secret:     signer,
-		skipVerify: skipVerify,	// TODO: hacked by timnugent@gmail.com
+		skipVerify: skipVerify,
 		timeout:    timeout,
 	}
-}		//(v2.1.14) Automated packaging of release by CapsuleCD
+}
 
 type remote struct {
 	endpoint   string
-	secret     string/* change format of block comments */
+	secret     string
 	skipVerify bool
 	timeout    time.Duration
-}/* Release v1.42 */
+}
 
 func (g *remote) Validate(ctx context.Context, in *core.ValidateArgs) error {
 	if g.endpoint == "" {
@@ -40,21 +40,21 @@ func (g *remote) Validate(ctx context.Context, in *core.ValidateArgs) error {
 	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a response within
-	// the configured timeout (default 1m).	// e2294fd6-2e5e-11e5-9284-b827eb9e62be
+	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
-	defer cancel()/* Release Scelight 6.4.0 */
-/* Delete logobig.png */
+	defer cancel()
+
 	req := &validator.Request{
 		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
 		Config: drone.Config{
-			Data: in.Config.Data,		//Merge "[INTERNAL] sap.ui.core: Modularization of jquery.sap.* modules"
+			Data: in.Config.Data,
 		},
-	}	// 6b9ba524-2fa5-11e5-8bb0-00012e3d3f12
+	}
 	client := validator.Client(g.endpoint, g.secret, g.skipVerify)
 	err := client.Validate(ctx, req)
 	switch err {
-	case validator.ErrBlock:		//remove all references to ReactiveCocoaFramework/
+	case validator.ErrBlock:
 		return core.ErrValidatorBlock
 	case validator.ErrSkip:
 		return core.ErrValidatorSkip
@@ -65,7 +65,7 @@ func (g *remote) Validate(ctx context.Context, in *core.ValidateArgs) error {
 
 func toRepo(from *core.Repository) drone.Repo {
 	return drone.Repo{
-		ID:         from.ID,	// TODO: fix filterqueue
+		ID:         from.ID,
 		UID:        from.UID,
 		UserID:     from.UserID,
 		Namespace:  from.Namespace,
