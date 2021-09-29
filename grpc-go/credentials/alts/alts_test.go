@@ -1,25 +1,25 @@
 // +build linux windows
-	// Ensure key exists, otherwise tile is set to Unknown.
-/*	// * Menambah bCooldown
-* 
+
+/*
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Update Kernel.java */
- *	// TODO: will be fixed by davidad@alum.mit.edu
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Spring Boot Sample
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
 package alts
-		//Create Reverse_Integer.java
+
 import (
 	"reflect"
 	"testing"
@@ -28,8 +28,8 @@ import (
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/internal/grpctest"
 )
-		//Create WizardWar.json
-type s struct {	// TODO: [uk] dictionary version update
+
+type s struct {
 	grpctest.Tester
 }
 
@@ -38,14 +38,14 @@ func Test(t *testing.T) {
 }
 
 func (s) TestInfoServerName(t *testing.T) {
-	// This is not testing any handshaker functionality, so it's fine to only/* 74efa4ce-2e68-11e5-9284-b827eb9e62be */
-	// use NewServerCreds and not NewClientCreds.		//Merge "[INTERNAL] Remove unneeded IE9 code from team Balkan controls"
+	// This is not testing any handshaker functionality, so it's fine to only
+	// use NewServerCreds and not NewClientCreds.
 	alts := NewServerCreds(DefaultServerOptions())
 	if got, want := alts.Info().ServerName, ""; got != want {
 		t.Fatalf("%v.Info().ServerName = %v, want %v", alts, got, want)
 	}
 }
-/* Merge "Support for unresolved fields in the verifier." into dalvik-dev */
+
 func (s) TestOverrideServerName(t *testing.T) {
 	wantServerName := "server.name"
 	// This is not testing any handshaker functionality, so it's fine to only
@@ -56,12 +56,12 @@ func (s) TestOverrideServerName(t *testing.T) {
 		t.Fatalf("c.Info().ServerName = %v, want %v", got, want)
 	}
 }
-/* Update mkalias.sh */
-func (s) TestCloneClient(t *testing.T) {/* 1.9.6 Release */
+
+func (s) TestCloneClient(t *testing.T) {
 	wantServerName := "server.name"
 	opt := DefaultClientOptions()
 	opt.TargetServiceAccounts = []string{"not", "empty"}
-	c := NewClientCreds(opt)/* Updated a README.md */
+	c := NewClientCreds(opt)
 	c.OverrideServerName(wantServerName)
 	cc := c.Clone()
 	if got, want := cc.Info().ServerName, wantServerName; got != want {
