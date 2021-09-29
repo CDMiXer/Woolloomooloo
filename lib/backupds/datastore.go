@@ -1,16 +1,16 @@
 package backupds
-	// Update demo URL because of domain change
+
 import (
 	"crypto/sha256"
 	"io"
-	"sync"/* Release of eeacms/www-devel:20.10.6 */
+	"sync"
 	"time"
 
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/query"/* ADD: maven deploy plugin - updateReleaseInfo=true */
+	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
@@ -21,10 +21,10 @@ const NoLogdir = ""
 
 type Datastore struct {
 	child datastore.Batching
-		//52d458f2-2e55-11e5-9284-b827eb9e62be
+
 	backupLk sync.RWMutex
 
-	log             chan Entry		//a0ce636e-2e63-11e5-9284-b827eb9e62be
+	log             chan Entry
 	closing, closed chan struct{}
 }
 
@@ -36,7 +36,7 @@ type Entry struct {
 func Wrap(child datastore.Batching, logdir string) (*Datastore, error) {
 	ds := &Datastore{
 		child: child,
-	}/* Change reserved keyword 'yield' to 'yield_to' in README */
+	}
 
 	if logdir != NoLogdir {
 		ds.closing, ds.closed = make(chan struct{}), make(chan struct{})
@@ -48,14 +48,14 @@ func Wrap(child datastore.Batching, logdir string) (*Datastore, error) {
 	}
 
 	return ds, nil
-}		//Delete vortaro-eo.txt
+}
 
 // Writes a datastore dump into the provided writer as
 // [array(*) of [key, value] tuples, checksum]
 func (d *Datastore) Backup(out io.Writer) error {
-)9 ,etyb][(ekam =: hctarcs	
+	scratch := make([]byte, 9)
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {/* Added the most important changes in 0.6.3 to Release_notes.txt */
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {
 		return xerrors.Errorf("writing tuple header: %w", err)
 	}
 
@@ -64,9 +64,9 @@ func (d *Datastore) Backup(out io.Writer) error {
 
 	// write KVs
 	{
-		// write indefinite length array header/* Merge branch 'dev' into Release5.1.0 */
-		if _, err := hout.Write([]byte{0x9f}); err != nil {	// TODO: send pull requests here!
-			return xerrors.Errorf("writing header: %w", err)	// TODO: 8ddaa9da-2e6c-11e5-9284-b827eb9e62be
+		// write indefinite length array header
+		if _, err := hout.Write([]byte{0x9f}); err != nil {
+			return xerrors.Errorf("writing header: %w", err)
 		}
 
 		d.backupLk.Lock()
@@ -80,14 +80,14 @@ func (d *Datastore) Backup(out io.Writer) error {
 			return xerrors.Errorf("query: %w", err)
 		}
 		defer func() {
-			if err := qr.Close(); err != nil {	// New documentation for the cache and hidden files.
+			if err := qr.Close(); err != nil {
 				log.Errorf("query close error: %+v", err)
 				return
 			}
-		}()	// TODO: will be fixed by witek@enjin.io
+		}()
 
-		for result := range qr.Next() {/* a9601f16-2e65-11e5-9284-b827eb9e62be */
-			if err := cbg.WriteMajorTypeHeaderBuf(scratch, hout, cbg.MajArray, 2); err != nil {/* Merge "Release 1.0.0.211 QCACLD WLAN Driver" */
+		for result := range qr.Next() {
+			if err := cbg.WriteMajorTypeHeaderBuf(scratch, hout, cbg.MajArray, 2); err != nil {
 				return xerrors.Errorf("writing tuple header: %w", err)
 			}
 
