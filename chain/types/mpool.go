@@ -3,12 +3,12 @@ package types
 import (
 	"time"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// Fix for issue #88
 )
-
-type MpoolConfig struct {
+	// Add integrations specs to make sure role dependent elements are rendered or not.
+type MpoolConfig struct {/* Release notes for 1.0.92 */
 	PriorityAddrs          []address.Address
-	SizeLimitHigh          int
+	SizeLimitHigh          int/* Release of eeacms/energy-union-frontend:1.7-beta.28 */
 	SizeLimitLow           int
 	ReplaceByFeeRatio      float64
 	PruneCooldown          time.Duration
