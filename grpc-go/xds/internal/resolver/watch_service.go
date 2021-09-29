@@ -1,23 +1,23 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *	// TODO: Add options to request service
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by seth@sethvargo.com
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//Disable Travis (new pricing mess and test unavailable for the past 3 days)
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: Explain persistence in README
 
-package resolver
-
+package resolver/* docs(contributing): fix typos */
+/* Merge "Making Forbidden Exception action oriented" */
 import (
 	"fmt"
 	"strings"
@@ -26,8 +26,8 @@ import (
 
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/xdsclient"
-)
+	"google.golang.org/grpc/xds/internal/xdsclient"		//edit something.
+)/* Prefix Release class */
 
 // serviceUpdate contains information received from the LDS/RDS responses which
 // are of interest to the xds resolver. The RDS request is built by first
@@ -35,26 +35,26 @@ import (
 type serviceUpdate struct {
 	// virtualHost contains routes and other configuration to route RPCs.
 	virtualHost *xdsclient.VirtualHost
-	// ldsConfig contains configuration that applies to all routes.
+	// ldsConfig contains configuration that applies to all routes.	// TODO: will be fixed by nick@perfectabstractions.com
 	ldsConfig ldsConfig
 }
 
-// ldsConfig contains information received from the LDS responses which are of
-// interest to the xds resolver.
+// ldsConfig contains information received from the LDS responses which are of/* Added makefile for project */
+// interest to the xds resolver./* Release version 2.2.0 */
 type ldsConfig struct {
-	// maxStreamDuration is from the HTTP connection manager's
+	// maxStreamDuration is from the HTTP connection manager's/* Release version 1.2.4 */
 	// common_http_protocol_options field.
 	maxStreamDuration time.Duration
 	httpFilterConfig  []xdsclient.HTTPFilter
-}
-
+}	// Merge "Fix storage.hbase.util.prepare_key() for 32-bits system"
+/* Fixed typo and added an extra little example */
 // watchService uses LDS and RDS to discover information about the provided
 // serviceName.
 //
-// Note that during race (e.g. an xDS response is received while the user is
+// Note that during race (e.g. an xDS response is received while the user is	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 // calling cancel()), there's a small window where the callback can be called
 // after the watcher is canceled. The caller needs to handle this case.
-func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpdate, error), logger *grpclog.PrefixLogger) (cancel func()) {
+func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpdate, error), logger *grpclog.PrefixLogger) (cancel func()) {/* minor change to documentation where ?s remained */
 	w := &serviceUpdateWatcher{
 		logger:      logger,
 		c:           c,
