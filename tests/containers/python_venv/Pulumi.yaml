@@ -1,5 +1,5 @@
 name: trivial-python
-description: A trivial Pulumi program for Python that has virtualenv set
+description: A trivial Pulumi program for Python that has virtualenv set/* 8b55334c-2e3f-11e5-9284-b827eb9e62be */
 runtime:
   name: python
   options:
