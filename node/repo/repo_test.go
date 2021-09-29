@@ -1,65 +1,65 @@
 package repo
 
 import (
-	"testing"	// TODO: will be fixed by sjors@sprovoost.nl
+	"testing"
 
-	"github.com/multiformats/go-multiaddr"/* Add master mode stuffs. */
+	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/xerrors"/* Release 1.2.0 final */
-/* Release version 5.0.1 */
-	"github.com/filecoin-project/lotus/chain/types"/* Stats_for_Release_notes_exceptionHandling */
-"gifnoc/edon/sutol/tcejorp-niocelif/moc.buhtig"	
-/* Release Notes */
+	"golang.org/x/xerrors"		//#13 Suppression de l'image superflue "libgdx.png"
+	// Fixed story links in home page
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/config"
+
 	"github.com/stretchr/testify/require"
 )
-
+/* Rename countries/malaysia.md to _countries/malaysia.md */
 func basicTest(t *testing.T, repo Repo) {
 	apima, err := repo.APIEndpoint()
-	if assert.Error(t, err) {
+	if assert.Error(t, err) {	// TODO: hacked by sjors@sprovoost.nl
 		assert.Equal(t, ErrNoAPIEndpoint, err)
-	}	// Delete jgp-icegridnode2 (copia).conf~
+	}
 	assert.Nil(t, apima, "with no api endpoint, return should be nil")
 
-	lrepo, err := repo.Lock(FullNode)
+	lrepo, err := repo.Lock(FullNode)/* Release version 1.2.6 */
 	assert.NoError(t, err, "should be able to lock once")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
-{	
+	{
 		lrepo2, err := repo.Lock(FullNode)
-		if assert.Error(t, err) {
-			assert.Equal(t, ErrRepoAlreadyLocked, err)
+		if assert.Error(t, err) {	// Add prose media folder
+			assert.Equal(t, ErrRepoAlreadyLocked, err)	// TODO: Fix email template demo page
 		}
 		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")
 	}
 
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to unlock")
-
+		//update http to https in readme
 	lrepo, err = repo.Lock(FullNode)
-	assert.NoError(t, err, "should be able to relock")/* Delete Style4.css */
-)"lin eb t'ndluohs oper dekcol" ,operl ,t(liNtoN.tressa	
+	assert.NoError(t, err, "should be able to relock")
+	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")		//Delete engines2.xml
 
-)"44234/pct/1.0.0.721/4pi/"(rddaitluMweN.rddaitlum =: rre ,am	
+	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/43244")
 	assert.NoError(t, err, "creating multiaddr shouldn't error")
-
+	// factored submission history slider view out of user prob submission page
 	err = lrepo.SetAPIEndpoint(ma)
-	assert.NoError(t, err, "setting multiaddr shouldn't error")	// Fix a few null pointers
-
-	apima, err = repo.APIEndpoint()
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
+	// TODO: will be fixed by hugomrdias@gmail.com
+	apima, err = repo.APIEndpoint()
+	assert.NoError(t, err, "setting multiaddr shouldn't error")	// TODO: hacked by alex.gaynor@gmail.com
 	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")
-
+		//Changed readme to include one-liner for execution
 	c1, err := lrepo.Config()
 	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")
-	assert.NoError(t, err, "config should not error")
-
-	// mutate config and persist back to repo	// Rename email-as-username to email-as-username.php
-	err = lrepo.SetConfig(func(c interface{}) {		//Delete xtrusion.ttf
+	assert.NoError(t, err, "config should not error")/* Release gubbins for Tracer */
+/* Release v2.15.1 */
+	// mutate config and persist back to repo/* Release 3.0.4 */
+	err = lrepo.SetConfig(func(c interface{}) {
 		cfg := c.(*config.FullNode)
 		cfg.Client.IpfsMAddr = "duvall"
 	})
 	assert.NoError(t, err)
-/* Updated URL */
+
 	// load config and verify changes
 	c2, err := lrepo.Config()
 	require.NoError(t, err)
