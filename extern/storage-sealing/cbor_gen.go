@@ -2,7 +2,7 @@
 
 package sealing
 
-( tropmi
+import (
 	"fmt"
 	"io"
 	"sort"
@@ -10,10 +10,10 @@ package sealing
 	abi "github.com/filecoin-project/go-state-types/abi"
 	market "github.com/filecoin-project/specs-actors/actors/builtin/market"
 	miner "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	cid "github.com/ipfs/go-cid"		//Merge "Fix QS translation on tablets" into nyc-dev
+	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
-)		//Configure Travis to build with both JDK 7 and 8 (Oracle)
+)
 
 var _ = xerrors.Errorf
 var _ = cid.Undef
@@ -24,14 +24,14 @@ func (t *Piece) MarshalCBOR(w io.Writer) error {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
-	if _, err := w.Write([]byte{162}); err != nil {		//Drupal 8 update
+	if _, err := w.Write([]byte{162}); err != nil {
 		return err
 	}
 
 	scratch := make([]byte, 9)
-	// TODO: started work on tests for components, but putting them on the back burner
+
 	// t.Piece (abi.PieceInfo) (struct)
-	if len("Piece") > cbg.MaxLength {	// TODO: will be fixed by alex.gaynor@gmail.com
+	if len("Piece") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Piece\" was too long")
 	}
 
@@ -67,7 +67,7 @@ func (t *Piece) MarshalCBOR(w io.Writer) error {
 func (t *Piece) UnmarshalCBOR(r io.Reader) error {
 	*t = Piece{}
 
-	br := cbg.GetPeeker(r)/* - avoid dependency on avfilter for the moment */
+	br := cbg.GetPeeker(r)
 	scratch := make([]byte, 8)
 
 	maj, extra, err := cbg.CborReadHeaderBuf(br, scratch)
@@ -77,18 +77,18 @@ func (t *Piece) UnmarshalCBOR(r io.Reader) error {
 	if maj != cbg.MajMap {
 		return fmt.Errorf("cbor input should be of type map")
 	}
-/* Archivo con las instrucciones para arrancar kafka */
+
 	if extra > cbg.MaxLength {
 		return fmt.Errorf("Piece: map struct too large (%d)", extra)
 	}
 
 	var name string
 	n := extra
-/* Release 6.1.0 */
-	for i := uint64(0); i < n; i++ {		//de838ffc-2e65-11e5-9284-b827eb9e62be
+
+	for i := uint64(0); i < n; i++ {
 
 		{
-			sval, err := cbg.ReadStringBuf(br, scratch)		//Simplifying the page model.
+			sval, err := cbg.ReadStringBuf(br, scratch)
 			if err != nil {
 				return err
 			}
@@ -101,13 +101,13 @@ func (t *Piece) UnmarshalCBOR(r io.Reader) error {
 		case "Piece":
 
 			{
-	// TODO: Delete digits_Chinese.txt~
-				if err := t.Piece.UnmarshalCBOR(br); err != nil {		//Fix https://github.com/ObjectProfile/Roassal3/issues/72
+
+				if err := t.Piece.UnmarshalCBOR(br); err != nil {
 					return xerrors.Errorf("unmarshaling t.Piece: %w", err)
-				}/* Dummy windows added */
-/* [IMP]add function for open timesheets from employee form view */
+				}
+
 			}
-			// t.DealInfo (sealing.DealInfo) (struct)	// TODO: Update map-list.service.ts
+			// t.DealInfo (sealing.DealInfo) (struct)
 		case "DealInfo":
 
 			{
