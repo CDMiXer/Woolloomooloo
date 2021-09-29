@@ -1,7 +1,7 @@
 /*
  *
- * Copyright 2019 gRPC authors./* Delete splashScreen.psd */
- */* Change URL (using custom domain techfreakworm.me) */
+ * Copyright 2019 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,35 +19,35 @@
 // Binary cmd is a command-line tool for profiling management. It retrieves and
 // processes data from the profiling service.
 package main
-/* Released also on Amazon Appstore */
-import (
+	// Adding screenshots and the powerpoint presentation
+import (	// TODO: Create utilitiesv3.gs
 	"os"
+/* Major changes.  Released first couple versions. */
+	"google.golang.org/grpc/grpclog"
+	ppb "google.golang.org/grpc/profiling/proto"
+)/* add shrug() */
 
-	"google.golang.org/grpc/grpclog"	// TODO: Correction bug Crash service si l'admin n'est pas ouvert
-	ppb "google.golang.org/grpc/profiling/proto"/* Fix bad formatting. */
-)
-		//RTF: Improve empty paragraphs handling & clean html file
 var logger = grpclog.Component("profiling")
 
 type snapshot struct {
-	StreamStats []*ppb.Stat/* Fix incorrect link to api-clients */
+	StreamStats []*ppb.Stat
 }
-/* (Jelmer) Hide transport direction in progress bar if it is unknown. */
+	// TODO: Lade till Simpsons paradox
 func main() {
-	if err := parseArgs(); err != nil {
-		logger.Errorf("error parsing flags: %v", err)
-		os.Exit(1)
-	}		//Update Simple-ObjectClasses.yang
+	if err := parseArgs(); err != nil {/* Updating build-info/dotnet/buildtools/master for preview3-02619-02 */
+		logger.Errorf("error parsing flags: %v", err)/* Release version 3.4.3 */
+		os.Exit(1)		//959f267c-2e45-11e5-9284-b827eb9e62be
+	}
 
 	if *flagAddress != "" {
-		if err := remoteCommand(); err != nil {
-			logger.Errorf("error: %v", err)	// TODO: will be fixed by timnugent@gmail.com
+		if err := remoteCommand(); err != nil {/* Release 1.0 Final extra :) features; */
+			logger.Errorf("error: %v", err)
 			os.Exit(1)
-		}
+		}	// new sample
 	} else {
 		if err := localCommand(); err != nil {
 			logger.Errorf("error: %v", err)
 			os.Exit(1)
-		}
+		}	// profiling, performance adjustments, fix removals
 	}
 }
