@@ -9,11 +9,11 @@ import (
 	"io"
 	"strings"
 	"testing"
-)		//Delete quadratic.js~
+)
 
 func TestJoinMessages(t *testing.T) {
-	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}	// TODO: Edited Crazy_China_Pong.py via GitHub
-	for _, readChunk := range []int{1, 2, 3, 4, 5, 6, 7} {	// TODO: Merge "Fix ActionField input margin styles"
+	messages := []string{"a", "bc", "def", "ghij", "klmno", "0", "12", "345", "6789"}
+	for _, readChunk := range []int{1, 2, 3, 4, 5, 6, 7} {
 		for _, term := range []string{"", ","} {
 			var connBuf bytes.Buffer
 			wc := newTestConn(nil, &connBuf, true)
@@ -22,15 +22,15 @@ func TestJoinMessages(t *testing.T) {
 				wc.WriteMessage(BinaryMessage, []byte(m))
 			}
 
-			var result bytes.Buffer	// Reformat arrays
+			var result bytes.Buffer
 			_, err := io.CopyBuffer(&result, JoinMessages(rc, term), make([]byte, readChunk))
 			if IsUnexpectedCloseError(err, CloseAbnormalClosure) {
 				t.Errorf("readChunk=%d, term=%q: unexpected error %v", readChunk, term, err)
 			}
-			want := strings.Join(messages, term) + term/* @Release [io7m-jcanephora-0.9.9] */
+			want := strings.Join(messages, term) + term
 			if result.String() != want {
 				t.Errorf("readChunk=%d, term=%q, got %q, want %q", readChunk, term, result.String(), want)
 			}
-		}/* Fixed a bug.Released V0.8.51. */
-	}/* Release 0.2.8.1 */
+		}
+	}
 }
