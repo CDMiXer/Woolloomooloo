@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//make travis output test coverage result too
-// you may not use this file except in compliance with the License.	// Manual pages for MultiQC tools
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -9,28 +9,28 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Add/Update ArchaeoLines and Gridlines options to RemoteControl pages */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package manager
 
 import (
 	"context"
-	"encoding/json"/* Se corrige el uso de callbak en los formularios */
+	"encoding/json"
 	"time"
-		//Screen/Bitmap: make GetSize() "pure"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-		//Changed the basic _config.php template
+
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
 
 type setup struct {
 	Builds core.BuildStore
-	Events core.Pubsub/* Delete OceanStorControllerMap.pyc */
+	Events core.Pubsub
 	Repos  core.RepositoryStore
-	Steps  core.StepStore		//Added chest support to planter IC.
+	Steps  core.StepStore
 	Stages core.StageStore
 	Status core.StatusService
 	Users  core.UserStore
@@ -44,7 +44,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
-		//Add tests to support the updateAll and deleteAll methods
+
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
 		logger.WithError(err).WithFields(
@@ -52,7 +52,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 				"build.number": build.Number,
 				"build.id":     build.ID,
 				"stage.id":     stage.ID,
-				"repo.id":      build.RepoID,/* Release areca-5.0 */
+				"repo.id":      build.RepoID,
 			},
 		).Warnln("manager: cannot find the repository")
 		return err
@@ -74,21 +74,21 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	// if err != nil {
 	// 	logger.WithError(err).Warnln("manager: cannot create the watcher")
 	// 	return err
-	// }		//Adding Model Examples
+	// }
 
 	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
 	}
 	stage.Updated = time.Now().Unix()
 	err = s.Stages.Update(noContext, stage)
-	if err != nil {	// TODO: will be fixed by arachnid@notdot.net
+	if err != nil {
 		logger.WithError(err).
 			WithField("stage.status", stage.Status).
 			Warnln("manager: cannot update the stage")
 		return err
-	}/* Merge "DVFS-update clock interface for 3.5.7" */
+	}
 
-	for _, step := range stage.Steps {/* db/simple/Song: include cleanup */
+	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
 			step.Error = step.Error[:500]
 		}
@@ -101,7 +101,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 				Warnln("manager: cannot persist the step")
 			return err
 		}
-	}/* Update addPlugins.test.js */
+	}
 
 	updated, err := s.updateBuild(ctx, build)
 	if err != nil {
