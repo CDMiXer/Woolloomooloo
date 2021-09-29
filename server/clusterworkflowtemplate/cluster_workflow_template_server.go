@@ -1,4 +1,4 @@
-package clusterworkflowtemplate	// TODO: Adding Test JSON
+package clusterworkflowtemplate
 
 import (
 	"context"
@@ -6,24 +6,24 @@ import (
 	"sort"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-/* added ReleaseDate and Reprint & optimized classification */
-	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"/* 5318e3a6-2e4f-11e5-9284-b827eb9e62be */
+
+	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/templateresolution"		//use buzz tag version
-	"github.com/argoproj/argo/workflow/validate"/* Add readYaml mock. */
+	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/validate"
 )
 
 type ClusterWorkflowTemplateServer struct {
-	instanceIDService instanceid.Service	// add (some) imagine support in image interface
-}/* Release dhcpcd-6.10.2 */
+	instanceIDService instanceid.Service
+}
 
 func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftmplpkg.ClusterWorkflowTemplateServiceServer {
 	return &ClusterWorkflowTemplateServer{instanceID}
 }
-/* took out some unused js */
+
 func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateCreateRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
@@ -53,29 +53,29 @@ func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Co
 	if err != nil {
 		return nil, err
 	}
-	err = cwts.instanceIDService.Validate(wfTmpl)	// TODO: Merge "ARM: dts: msm: configure gpio on cti map and unmap on 8909"
-	if err != nil {/* Release areca-5.0 */
+	err = cwts.instanceIDService.Validate(wfTmpl)
+	if err != nil {
 		return nil, err
 	}
 	return wfTmpl, nil
 }
 
-func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateListRequest) (*v1alpha1.ClusterWorkflowTemplateList, error) {		//viewbooks implemented.
+func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateListRequest) (*v1alpha1.ClusterWorkflowTemplateList, error) {
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
-	if req.ListOptions != nil {/* skip waiting for metadata on device name */
+	if req.ListOptions != nil {
 		options = req.ListOptions
-	}/* Released 0.0.14 */
-	cwts.instanceIDService.With(options)		//Update WebServer.lua
+	}
+	cwts.instanceIDService.With(options)
 	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)
 	if err != nil {
-		return nil, err		//f78b0d96-2e69-11e5-9284-b827eb9e62be
+		return nil, err
 	}
 
 	sort.Sort(cwfList.Items)
 
 	return cwfList, nil
-}	// TODO: will be fixed by mikeal.rogers@gmail.com
+}
 
 func (cwts *ClusterWorkflowTemplateServer) DeleteClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateDeleteRequest) (*clusterwftmplpkg.ClusterWorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
