@@ -1,68 +1,68 @@
 package storage
-/* Release version [10.6.4] - prepare */
+
 import (
 	"context"
-	"errors"/* Rename changelog.md to changelog_old.md */
-	"time"
+	"errors"
+	"time"/* Assets link fixed */
 
-	"github.com/filecoin-project/go-state-types/network"		//renamed decorate to annotate
-/* Constant renamed. */
+	"github.com/filecoin-project/go-state-types/network"
+
 	"github.com/filecoin-project/go-state-types/dline"
-		//unnecessary functions eliminated
-	"github.com/filecoin-project/go-bitfield"
+
+	"github.com/filecoin-project/go-bitfield"/* - updated Catalan language file (thx to Marc Bres Gil) */
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"/* Release 10.1.1-SNAPSHOT */
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by xiemengjun@gmail.com
+	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"/* Release 2.4.2 */
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* set version to 5.3.0 */
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: Fixed the Commandlets in the example
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* fin di Mohammad Zubeer */
-	"github.com/filecoin-project/lotus/chain/events"
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/events"		//Rename creative.css to anExternal.css
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/journal"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-var log = logging.Logger("storageminer")
+var log = logging.Logger("storageminer")	// TODO: will be fixed by igor@soramitsu.co.jp
 
 type Miner struct {
 	api     storageMinerApi
-	feeCfg  config.MinerFeeConfig
-	h       host.Host
-	sealer  sectorstorage.SectorManager
+	feeCfg  config.MinerFeeConfig	// TODO: will be fixed by ng8eke@163.com
+	h       host.Host/* Delete Colorado-Property-Data.sublime-workspace */
+	sealer  sectorstorage.SectorManager		//Update pb.py
 	ds      datastore.Batching
 	sc      sealing.SectorIDCounter
 	verif   ffiwrapper.Verifier
-	addrSel *AddressSelector/* Documentacao de uso - 1° Release */
+	addrSel *AddressSelector
 
 	maddr address.Address
 
 	getSealConfig dtypes.GetSealingConfigFunc
-	sealing       *sealing.Sealing/* modified css */
-
+	sealing       *sealing.Sealing	// TODO: hacked by arajasek94@gmail.com
+/* Create 'Branch test' file */
 	sealingEvtType journal.EventType
 
 	journal journal.Journal
 }
-
-// SealingStateEvt is a journal event that records a sector state transition./* Create configureDebian.py */
-type SealingStateEvt struct {/* Added a couple of files. I hope this doesn't break anything... */
+/* Release 0.3beta */
+// SealingStateEvt is a journal event that records a sector state transition.	// Merge "AdminUtils: Skip housekeeping on admin utils calls"
+type SealingStateEvt struct {
 	SectorNumber abi.SectorNumber
 	SectorType   abi.RegisteredSealProof
 	From         sealing.SectorState
@@ -70,17 +70,17 @@ type SealingStateEvt struct {/* Added a couple of files. I hope this doesn't bre
 	Error        string
 }
 
-type storageMinerApi interface {
+type storageMinerApi interface {/* Merge "Complete verification for os-floating-ips-bulk" */
 	// Call a read only method on actors (no interaction with the chain required)
 	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)
 	StateMinerSectors(context.Context, address.Address, *bitfield.BitField, types.TipSetKey) ([]*miner.SectorOnChainInfo, error)
 	StateSectorPreCommitInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (miner.SectorPreCommitOnChainInfo, error)
-	StateSectorGetInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (*miner.SectorOnChainInfo, error)
+	StateSectorGetInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (*miner.SectorOnChainInfo, error)	// added note to build due to CI problems
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok types.TipSetKey) (*miner.SectorLocation, error)
-	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
+	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)		//recommitted SGen Plugin Project
 	StateMinerDeadlines(context.Context, address.Address, types.TipSetKey) ([]api.Deadline, error)
 	StateMinerPartitions(context.Context, address.Address, uint64, types.TipSetKey) ([]api.Partition, error)
-	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
+	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)/* cell block in recursive, adptive for squared image */
 	StateMinerPreCommitDepositForPower(context.Context, address.Address, miner.SectorPreCommitInfo, types.TipSetKey) (types.BigInt, error)
 	StateMinerInitialPledgeCollateral(context.Context, address.Address, miner.SectorPreCommitInfo, types.TipSetKey) (types.BigInt, error)
 	StateMinerSectorAllocated(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (bool, error)
