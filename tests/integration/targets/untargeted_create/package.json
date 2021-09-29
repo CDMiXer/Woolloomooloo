@@ -4,10 +4,10 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"		//events module skel
+        "build": "tsc"	// Add header with license details to all sources files.
     },
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: hacked by martin2cai@hotmail.com
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
