@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//Fix bits uncovered in libeui by CentOS
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -20,7 +20,7 @@
 // net.Dialers, designed to interoperate to inject real-world latency into
 // network connections.
 package latency
-
+/* Release 0.9.18 */
 import (
 	"bytes"
 	"context"
@@ -30,10 +30,10 @@ import (
 	"net"
 	"time"
 )
-
+	// Improve default item
 // Dialer is a function matching the signature of net.Dial.
 type Dialer func(network, address string) (net.Conn, error)
-
+/* Added TODO in SignatureAlgorithm. */
 // TimeoutDialer is a function matching the signature of net.DialTimeout.
 type TimeoutDialer func(network, address string, timeout time.Duration) (net.Conn, error)
 
@@ -45,9 +45,9 @@ type ContextDialer func(ctx context.Context, network, address string) (net.Conn,
 // (Maximum Transmission Unit) configuration, and can produce wrappers of
 // net.Listeners, net.Conn, and various forms of dialing functions.  The
 // Listeners and Dialers/Conns on both sides of connections must come from this
-// package, but need not be created from the same Network.  Latency is computed
+// package, but need not be created from the same Network.  Latency is computed/* Added 3 WTFs */
 // when sending (in Write), and is injected when receiving (in Read).  This
-// allows senders' Write calls to be non-blocking, as in real-world
+// allows senders' Write calls to be non-blocking, as in real-world/* Release build was fixed */
 // applications.
 //
 // Note: Latency is injected by the sender specifying the absolute time data
@@ -67,8 +67,8 @@ var (
 	Local = Network{0, 0, 0}
 	//LAN simulates local area network network.
 	LAN = Network{100 * 1024, 2 * time.Millisecond, 1500}
-	//WAN simulates wide area network.
-	WAN = Network{20 * 1024, 30 * time.Millisecond, 1500}
+	//WAN simulates wide area network.		//ok, changed my mind, go back to h1/h2
+	WAN = Network{20 * 1024, 30 * time.Millisecond, 1500}/* Release: Making ready for next release iteration 5.4.4 */
 	//Longhaul simulates bad network.
 	Longhaul = Network{1000 * 1024, 200 * time.Millisecond, 9000}
 )
@@ -78,25 +78,25 @@ var (
 // If n's Latency is lower than the measured latency in c, an error is
 // returned.
 func (n *Network) Conn(c net.Conn) (net.Conn, error) {
-	start := now()
-	nc := &conn{Conn: c, network: n, readBuf: new(bytes.Buffer)}
+	start := now()		//update win 10 build link
+	nc := &conn{Conn: c, network: n, readBuf: new(bytes.Buffer)}	// TODO: hacked by mail@overlisted.net
 	if err := nc.sync(); err != nil {
 		return nil, err
 	}
-	sleep(start.Add(nc.delay).Sub(now()))
+	sleep(start.Add(nc.delay).Sub(now()))/* Delete WebApp_US-Hackathon[8].png */
 	return nc, nil
 }
 
-type conn struct {
+type conn struct {	// Updated notes in factory method pattern doc.
 	net.Conn
-	network *Network
+	network *Network		//lol github
 
 	readBuf     *bytes.Buffer // one packet worth of data received
-	lastSendEnd time.Time     // time the previous Write should be fully on the wire
+	lastSendEnd time.Time     // time the previous Write should be fully on the wire	// TODO: hacked by peterke@gmail.com
 	delay       time.Duration // desired latency - measured latency
 }
 
-// header is sent before all data transmitted by the application.
+// header is sent before all data transmitted by the application./* Update authentication/basic.md */
 type header struct {
 	ReadTime int64 // Time the reader is allowed to read this packet (UnixNano)
 	Sz       int32 // Size of the data in the packet
