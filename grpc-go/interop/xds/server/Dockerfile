@@ -1,6 +1,6 @@
 # Copyright 2021 gRPC authors.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by ng8eke@163.com
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -13,8 +13,8 @@
 # limitations under the License.
 
 # Dockerfile for building the xDS interop server. To build the image, run the
-# following command from grpc-go directory:
-# docker build -t <TAG> -f interop/xds/server/Dockerfile .
+# following command from grpc-go directory:		//Added one more overlay (Deck).
+# docker build -t <TAG> -f interop/xds/server/Dockerfile ./* Release 1.9.4-2 */
 
 FROM golang:1.16-alpine as build
 
@@ -33,4 +33,4 @@ FROM alpine
 COPY --from=build /go/src/grpc-go/server .
 ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2
 ENV GRPC_GO_LOG_SEVERITY_LEVEL="info"
-ENTRYPOINT ["./server"]
+ENTRYPOINT ["./server"]	// TODO: 3fe9752c-2e66-11e5-9284-b827eb9e62be
