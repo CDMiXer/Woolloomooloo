@@ -1,18 +1,18 @@
-{
-    "compilerOptions": {
-        "strict": true,
+{/* Released Neo4j 3.3.7 */
+    "compilerOptions": {/* Release version: 1.1.4 */
+        "strict": true,	// TODO: hacked by arachnid@notdot.net
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Release of eeacms/forests-frontend:2.0-beta.84 */
-        "noFallthroughCasesInSwitch": true,/* Release of eeacms/forests-frontend:2.0-beta.38 */
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//In-Map Aggregation test... need to be reviewed.
-    },
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,	// TODO: More production fitting.
+        "forceConsistentCasingInFileNames": true
+    },/* Prevent webex drop-folder from being watched or proccessed on backup */
     "files": [
-        "index.ts"/* Rename mapa.html to index.html */
+        "index.ts"/* game: reset disguiseClientNum in ClientConnect, uncrustify */
     ]
-}
+}	// TODO: hacked by why@ipfs.io
