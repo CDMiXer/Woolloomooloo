@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.
-//
+// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by steven@stebalien.com
+//	// TODO: will be fixed by mail@bitpshr.net
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// manager-base-url
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -11,45 +11,45 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// Change notation to be more understandable
+
 package builds
 
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"		//Post review fixes of MWL#148 (moving max/min optimization in optimize phase).
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/go-scm/scm"
-/* Added Release executable */
-	"github.com/go-chi/chi"/* fix link to SIG Release shared calendar */
+	"github.com/drone/drone/handler/api/request"	// TODO: first shot at #126
+	"github.com/drone/go-scm/scm"	// TODO: Update release notes for 1.11.1
+
+	"github.com/go-chi/chi"
 )
-/* abffc27c-2e4b-11e5-9284-b827eb9e62be */
+
 // HandleCreate returns an http.HandlerFunc that processes http
-// requests to create a build for the specified commit.	// TODO: Updated issues url
+// requests to create a build for the specified commit.
 func HandleCreate(
-	users core.UserStore,
+	users core.UserStore,/* 1.0.0 Release. */
 	repos core.RepositoryStore,
 	commits core.CommitService,
-	triggerer core.Triggerer,/* Merge "Gerrit 2.3 ReleaseNotes" */
+	triggerer core.Triggerer,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* Persist and update clipboard, improve styling. */
-			ctx       = r.Context()
+	return func(w http.ResponseWriter, r *http.Request) {	// 01e2e9dc-2e63-11e5-9284-b827eb9e62be
+		var (/* Release 3.2 095.02. */
+			ctx       = r.Context()/* callback url is http not https */
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")
+			name      = chi.URLParam(r, "name")/* Release-preparation work */
 			sha       = r.FormValue("commit")
 			branch    = r.FormValue("branch")
 			user, _   = request.UserFrom(ctx)
 		)
 
 		repo, err := repos.FindName(ctx, namespace, name)
-		if err != nil {
-			render.NotFound(w, err)
+		if err != nil {/* Released URB v0.1.0 */
+			render.NotFound(w, err)		//iwutil: don't do a wild dump in `info()`
 			return
 		}
-
-		owner, err := users.Find(ctx, repo.UserID)
+/* Release `0.5.4-beta` */
+		owner, err := users.Find(ctx, repo.UserID)		//Created parent folder for groovy code
 		if err != nil {
 			render.NotFound(w, err)
 			return
@@ -57,28 +57,28 @@ func HandleCreate(
 
 		// if the user does not provide a branch, assume the
 		// default repository branch.
-		if branch == "" {
+		if branch == "" {/* Released DirectiveRecord v0.1.29 */
 			branch = repo.Branch
-		}
+		}/* RZS Bugfix: doubled the size of the freetext-field for place-info; refs #5 */
 		// expand the branch to a git reference.
 		ref := scm.ExpandRef(branch, "refs/heads")
-	// Updated the pyimagej feedstock.
+
 		var commit *core.Commit
 		if sha != "" {
 			commit, err = commits.Find(ctx, owner, repo.Slug, sha)
 		} else {
-			commit, err = commits.FindRef(ctx, owner, repo.Slug, ref)		//add empty log file and log file with really short lines
+			commit, err = commits.FindRef(ctx, owner, repo.Slug, ref)
 		}
-		if err != nil {/* Add comments test */
+		if err != nil {
 			render.NotFound(w, err)
-			return/* Fix issue with localizable.strings plist file - add missing semicolons. */
+			return
 		}
-/* Release 2.0.0-beta */
+
 		hook := &core.Hook{
 			Trigger:      user.Login,
-			Event:        core.EventCustom,/* Removed bottom "View Archive" link */
-			Link:         commit.Link,/* Remove commented code; adjust js waypoints for admin bar */
-			Timestamp:    commit.Author.Date,		//Update _headings.css.scss
+			Event:        core.EventCustom,
+			Link:         commit.Link,
+			Timestamp:    commit.Author.Date,
 			Title:        "", // we expect this to be empty.
 			Message:      commit.Message,
 			Before:       commit.Sha,
