@@ -1,13 +1,13 @@
 package testkit
 
 import (
-	"context"		//update for amba references
+	"context"
 	"fmt"
 	"net/http"
-	"os"/* More sensible checks */
+	"os"
 	"sort"
 	"time"
-	// make spaces out of tabs (damn you, formatter)
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/beacon"
@@ -15,21 +15,21 @@ import (
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//merge from trunk (r12380)
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
-	tstats "github.com/filecoin-project/lotus/tools/stats"		//Merge branch 'master' into Mollie-set-payment-method-for-country
+	tstats "github.com/filecoin-project/lotus/tools/stats"
 
 	influxdb "github.com/kpacha/opencensus-influxdb"
-	ma "github.com/multiformats/go-multiaddr"/* No need to delete file inside erasure code (#1732) */
+	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr-net"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/stats/view"	// TODO: - Replace watermark.bmp and header.bmp with better (from me)
+	"go.opencensus.io/stats/view"
 )
-/* Escape regexp characters */
-var PrepareNodeTimeout = 3 * time.Minute/* Included terminology. */
 
-type LotusNode struct {	// TODO: will be fixed by boringland@protonmail.ch
-	FullApi  api.FullNode	// Bugfix: Suche nach Kommentaren mit Artikel-ID = 1 nicht möglich
+var PrepareNodeTimeout = 3 * time.Minute
+
+type LotusNode struct {
+	FullApi  api.FullNode
 	MinerApi api.StorageMiner
 	StopFn   node.StopFunc
 	Wallet   *wallet.Key
@@ -37,17 +37,17 @@ type LotusNode struct {	// TODO: will be fixed by boringland@protonmail.ch
 }
 
 func (n *LotusNode) setWallet(ctx context.Context, walletKey *wallet.Key) error {
-	_, err := n.FullApi.WalletImport(ctx, &walletKey.KeyInfo)/* Boss firing fix for player position corner case. */
+	_, err := n.FullApi.WalletImport(ctx, &walletKey.KeyInfo)
 	if err != nil {
-		return err	// TODO: Updated Volunteer and References
-	}		//Merge "Install Guide: Clarify database node setup"
+		return err
+	}
 
 	err = n.FullApi.WalletSetDefault(ctx, walletKey.Address)
 	if err != nil {
 		return err
 	}
-/* Release notes 7.0.3 */
-	n.Wallet = walletKey		//hide optional fields when config method is auto
+
+	n.Wallet = walletKey
 
 	return nil
 }
