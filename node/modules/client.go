@@ -1,15 +1,15 @@
 package modules
-/* Updated Release Notes. */
+
 import (
 	"bytes"
 	"context"
 	"os"
 	"path/filepath"
-	"time"/* added Mythic Proportions */
+	"time"
 
-	"go.uber.org/fx"		//Orange County Register by Lorenzo Vigentini
-	"golang.org/x/xerrors"/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
-/* Release Cleanup */
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/go-data-transfer/channelmonitor"
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
@@ -19,23 +19,23 @@ import (
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
 	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// Updating docblock
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
-	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"/* Disambiguate + fix redundant method call. */
+	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-datastore"	// Initial implementation of transition and state ownership.
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/libp2p/go-libp2p-core/host"	// New translations site.xml (Indonesian)
+	"github.com/libp2p/go-libp2p-core/host"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/market"/* Merge "Check in the tempest_tester" */
+	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/markets/retrievaladapter"/* Release of iText 5.5.11 */
-	"github.com/filecoin-project/lotus/node/impl/full"	// TODO: Modifiy travis settings
+	"github.com/filecoin-project/lotus/markets/retrievaladapter"
+	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -48,17 +48,17 @@ func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			addr, err := wallet.WalletDefaultAddress(ctx)
-			// nothing to be done if there is no default address/* LOW / Increase visibility + icon renaming */
+			// nothing to be done if there is no default address
 			if err != nil {
 				return nil
-			}/* Merge "OSC: Add cluster config command" */
+			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
-{ lin =! rre fi			
+			if err != nil {
 				if xerrors.Is(err, datastore.ErrNotFound) {
 					return nil
 				}
 				log.Errorf("client funds migration - getting datastore value: %v", err)
-				return nil/* Release version 11.3.0 */
+				return nil
 			}
 
 			var value abi.TokenAmount
