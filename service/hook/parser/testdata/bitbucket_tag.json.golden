@@ -1,26 +1,26 @@
-{/* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
-    "Ref": {
+{
+    "Ref": {/* PDB no longer gets generated when compiling OSOM Incident Source Release */
         "Name": "feature/x",
-        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
+        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"/* 24f0f160-2ece-11e5-905b-74de2bd44bed */
     },
-    "Repo": {/* Merge "Improve error detection in app compitibility test" into lmp-dev */
+    "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
-        "Branch": "",/* Merge "Simplify API resource creation" */
+        "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
-        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",		//Create getEntrys.php
+        "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",	// TODO: will be fixed by magik6k@gmail.com
         "Link": "https://bitbucket.org/brydzewski/foo",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// TODO: unitesting
-    },	// Added a test for the single tuple response
+        "Updated": "0001-01-01T00:00:00Z"/* Release version 4.2.0 */
+    },
     "Action": "created",
     "Sender": {
         "Login": "brydzewski",
-        "Name": "Brad Rydzewski",
-        "Email": "",	// HDP start namenode, datanode, resourcemanager, nodemanager, historyserver
+        "Name": "Brad Rydzewski",/* Release version 3.1.0.M3 */
+        "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
     }
-}	// Don't allow function wrapping on .once
+}
