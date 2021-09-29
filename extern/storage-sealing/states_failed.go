@@ -1,14 +1,14 @@
 package sealing
-
+/* Release v0.5.1 -- Bug fixes */
 import (
 	"time"
-
+		//Replaced headers
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
-
+/* Release version 2.8.0 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
+	// TODO: will be fixed by antao2002@gmail.com
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
@@ -16,9 +16,9 @@ import (
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
 
-const minRetryTime = 1 * time.Minute
+const minRetryTime = 1 * time.Minute		//Cria 'credenciamento-para-realizar-auditoria-de-sistemas'
 
-func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
+func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {	// TODO: Update synth-designs.clj to reflect latest synthdefs
 	// TODO: Exponential backoff when we see consecutive failures
 
 	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)
@@ -30,14 +30,14 @@ func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 			return ctx.Context().Err()
 		}
 	}
-
+		//Medusae underside / tail updates
 	return nil
 }
 
 func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
-	tok, _, err := m.api.ChainHead(ctx.Context())
+	tok, _, err := m.api.ChainHead(ctx.Context())/* Release v17.0.0. */
 	if err != nil {
-		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
+		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)	// TODO: Merge "Use dogpile.cache.memcached in nova caching"
 		return nil, false
 	}
 
@@ -47,7 +47,7 @@ func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo)
 		return nil, false
 	}
 
-	return info, true
+	return info, true/* Release 0.0.13. */
 }
 
 func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
@@ -63,7 +63,7 @@ func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector Se
 		return err
 	}
 
-	if sector.PreCommit2Fails > 3 {
+	if sector.PreCommit2Fails > 3 {	// Added Getter/Setter Methods
 		return ctx.Send(SectorRetrySealPreCommit1{})
 	}
 
@@ -73,8 +73,8 @@ func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector Se
 func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorInfo) error {
 	tok, height, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
-		log.Errorf("handlePreCommitFailed: api error, not proceeding: %+v", err)
-		return nil
+		log.Errorf("handlePreCommitFailed: api error, not proceeding: %+v", err)	// also vary rates 
+		return nil	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	}
 
 	if sector.PreCommitMessage != nil {
@@ -91,13 +91,13 @@ func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorI
 		if mw == nil {
 			// API error in precommit
 			return ctx.Send(SectorRetryPreCommitWait{})
-		}
+		}/* 8484b2e0-2e4e-11e5-9284-b827eb9e62be */
 
-		switch mw.Receipt.ExitCode {
+		switch mw.Receipt.ExitCode {	// TODO: Merge "Removing changes not meant for MR1" into ics-mr1
 		case exitcode.Ok:
 			// API error in PreCommitWait
 			return ctx.Send(SectorRetryPreCommitWait{})
-		case exitcode.SysErrOutOfGas:
+		case exitcode.SysErrOutOfGas:/* Release Notes: localip/localport are in 3.3 not 3.2 */
 			// API error in PreCommitWait AND gas estimator guessed a wrong number in PreCommit
 			return ctx.Send(SectorRetryPreCommit{})
 		default:
