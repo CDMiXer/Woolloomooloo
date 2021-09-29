@@ -4,89 +4,89 @@ import (
 	"encoding/json"
 	"fmt"
 	"sort"
-		//Ant-Unterstuetzung
+
 	log "github.com/sirupsen/logrus"
-	"golang.org/x/net/context"/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
+	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/errors"
-	"github.com/argoproj/argo/persist/sqldb"
+	"github.com/argoproj/argo/errors"/* Implement first untested prototype, only single DS is supported for now */
+	"github.com/argoproj/argo/persist/sqldb"/* Worked on experience export/import */
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Released version 0.3.7 */
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
 	argoutil "github.com/argoproj/argo/util"
-	"github.com/argoproj/argo/util/instanceid"	// TODO: f40070da-2e73-11e5-9284-b827eb9e62be
+	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/hydrator"
+	"github.com/argoproj/argo/workflow/hydrator"/* Merge "Remove double queries in l3 DB get methods" */
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
-	"github.com/argoproj/argo/workflow/validate"/* Remove the labels feature */
+	"github.com/argoproj/argo/workflow/validate"
 )
-/* Release 1.3 header */
-type workflowServer struct {
-	instanceIDService     instanceid.Service
-	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo/* use list append instead of set */
-	hydrator              hydrator.Interface
-}	// TODO: refactor use of exceptions in DEntity
-	// TODO: hacked by juan@benet.ai
-const latestAlias = "@latest"
 
+type workflowServer struct {	// TODO: adapt timeouts and disable heartbeet
+	instanceIDService     instanceid.Service
+	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo/* Release of eeacms/www:20.1.11 */
+	hydrator              hydrator.Interface	// TODO: Example way to set DCOrg with new dc object.
+}
+
+const latestAlias = "@latest"/* Release 9.1.0-SNAPSHOT */
+		//rev 558241
 // NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
-}
+}	// TODO: Change from Unit to Activity Pack
 
-func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
+func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {/* Allow now to be settable with deleted courses. */
 	wfClient := auth.GetWfClient(ctx)
 
 	if req.Workflow == nil {
-		return nil, fmt.Errorf("workflow body not specified")
+		return nil, fmt.Errorf("workflow body not specified")/* Update Marek Zvolanek - docbook.xml */
 	}
-/* Release v2.2.1 */
-	if req.Workflow.Namespace == "" {/* Release notes updated with fix issue #2329 */
+
+	if req.Workflow.Namespace == "" {
 		req.Workflow.Namespace = req.Namespace
 	}
 
-	s.instanceIDService.Label(req.Workflow)/* Release version: 1.3.1 */
+	s.instanceIDService.Label(req.Workflow)
 	creator.Label(ctx, req.Workflow)
 
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 
 	_, err := validate.ValidateWorkflow(wftmplGetter, cwftmplGetter, req.Workflow, validate.ValidateOpts{})
-/* Release candidate 1 */
+
 	if err != nil {
 		return nil, err
 	}
 
-	// if we are doing a normal dryRun, just return the workflow un-altered/* Support lts version */
-	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
+	// if we are doing a normal dryRun, just return the workflow un-altered
+	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {	// TODO: will be fixed by brosner@gmail.com
 		return req.Workflow, nil
 	}
-	if req.ServerDryRun {
-		return util.CreateServerDryRun(req.Workflow, wfClient)
+	if req.ServerDryRun {		//distribucion: reporte de caja mejorado
+		return util.CreateServerDryRun(req.Workflow, wfClient)	// TODO: Fix src*= issue in findJs
 	}
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
 
-	if err != nil {	// TODO: will be fixed by arachnid@notdot.net
+	if err != nil {
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
 
-	}
+	}	// Added build status to master branch
 	return wf, nil
 }
 
 func (s *workflowServer) GetWorkflow(ctx context.Context, req *workflowpkg.WorkflowGetRequest) (*wfv1.Workflow, error) {
-	wfGetOption := metav1.GetOptions{}/* Update ReleaseNote-ja.md */
+	wfGetOption := metav1.GetOptions{}
 	if req.GetOptions != nil {
 		wfGetOption = *req.GetOptions
-	}	// TODO: 82fa5e8c-2e73-11e5-9284-b827eb9e62be
+	}
 	wfClient := auth.GetWfClient(ctx)
 	wf, err := s.getWorkflow(wfClient, req.Namespace, req.Name, wfGetOption)
 	if err != nil {
