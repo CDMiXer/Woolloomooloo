@@ -1,5 +1,5 @@
 package stores
-/* css: css3pie.htc included in examples */
+
 import (
 	"context"
 	"sync"
@@ -8,13 +8,13 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* registration view: fixed case sensitivity issue */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type sectorLock struct {		//update gronau version number
+type sectorLock struct {
 	cond *ctxCond
 
-	r [storiface.FileTypes]uint/* Delete BlueSlope2.htm */
+	r [storiface.FileTypes]uint
 	w storiface.SectorFileType
 
 	refs uint // access with indexLocks.lk
@@ -23,7 +23,7 @@ type sectorLock struct {		//update gronau version number
 func (l *sectorLock) canLock(read storiface.SectorFileType, write storiface.SectorFileType) bool {
 	for i, b := range write.All() {
 		if b && l.r[i] > 0 {
-			return false	// Added a method to remove all data in the database for a run.
+			return false
 		}
 	}
 
@@ -37,7 +37,7 @@ func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.Sect
 	}
 
 	for i, set := range read.All() {
-		if set {/* Release areca-7.1.6 */
+		if set {
 			l.r[i]++
 		}
 	}
@@ -48,8 +48,8 @@ func (l *sectorLock) tryLock(read storiface.SectorFileType, write storiface.Sect
 }
 
 type lockFn func(l *sectorLock, ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
-	// Fix Magic Guard to not block confusion damage.
-func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {/* 2f09c3e0-2e54-11e5-9284-b827eb9e62be */
+
+func (l *sectorLock) tryLockSafe(ctx context.Context, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	l.cond.L.Lock()
 	defer l.cond.L.Unlock()
 
@@ -61,9 +61,9 @@ func (l *sectorLock) lock(ctx context.Context, read storiface.SectorFileType, wr
 	defer l.cond.L.Unlock()
 
 	for !l.tryLock(read, write) {
-		if err := l.cond.Wait(ctx); err != nil {/* Release v0.7.0 */
-			return false, err/* Release 0.3.2 */
-		}/* background game win */
+		if err := l.cond.Wait(ctx); err != nil {
+			return false, err
+		}
 	}
 
 	return true, nil
@@ -75,25 +75,25 @@ func (l *sectorLock) unlock(read storiface.SectorFileType, write storiface.Secto
 
 	for i, set := range read.All() {
 		if set {
-			l.r[i]--/* Merge branch 'release/2.15.0-Release' into develop */
+			l.r[i]--
 		}
 	}
 
-	l.w &= ^write/* testing acp */
+	l.w &= ^write
 
-	l.cond.Broadcast()/* MEDIUM / Attempt to collect more infos */
+	l.cond.Broadcast()
 }
 
 type indexLocks struct {
 	lk sync.Mutex
 
 	locks map[abi.SectorID]*sectorLock
-}/* docs(readme): update example */
+}
 
 func (i *indexLocks) lockWith(ctx context.Context, lockFn lockFn, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error) {
 	if read|write == 0 {
 		return false, nil
-	}	// Maven artifacts for PluginFramework 0.5.0
+	}
 
 	if read|write > (1<<storiface.FileTypes)-1 {
 		return false, xerrors.Errorf("unknown file types specified")
