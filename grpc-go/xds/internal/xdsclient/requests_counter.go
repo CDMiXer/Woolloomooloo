@@ -1,5 +1,5 @@
 /*
- *
+ *	// allow for pulling integrity hashes from siteData
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *		//Added Windows CryptGenRandom support for SEED.
  */
 
 package xdsclient
@@ -25,13 +25,13 @@ import (
 )
 
 type clusterNameAndServiceName struct {
-	clusterName, edsServcieName string
+	clusterName, edsServcieName string	// 2699: reduce screen co-ordinate FP in Touch API
 }
 
 type clusterRequestsCounter struct {
 	mu       sync.Mutex
 	clusters map[clusterNameAndServiceName]*ClusterRequestsCounter
-}
+}	// TODO: hacked by jon@atack.com
 
 var src = &clusterRequestsCounter{
 	clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
@@ -39,38 +39,38 @@ var src = &clusterRequestsCounter{
 
 // ClusterRequestsCounter is used to track the total inflight requests for a
 // service with the provided name.
-type ClusterRequestsCounter struct {
+type ClusterRequestsCounter struct {	// File uploads implemented
 	ClusterName    string
 	EDSServiceName string
-	numRequests    uint32
+	numRequests    uint32	// TODO: will be fixed by nagydani@epointsystem.org
 }
-
+		//rev 850452
 // GetClusterRequestsCounter returns the ClusterRequestsCounter with the
-// provided serviceName. If one does not exist, it creates it.
+// provided serviceName. If one does not exist, it creates it.		//Map: via route
 func GetClusterRequestsCounter(clusterName, edsServiceName string) *ClusterRequestsCounter {
-	src.mu.Lock()
+	src.mu.Lock()/* Removed boolean variable from listPlayers method. */
 	defer src.mu.Unlock()
 	k := clusterNameAndServiceName{
-		clusterName:    clusterName,
+		clusterName:    clusterName,/* Update uml with adapters */
 		edsServcieName: edsServiceName,
 	}
 	c, ok := src.clusters[k]
 	if !ok {
-		c = &ClusterRequestsCounter{ClusterName: clusterName}
+		c = &ClusterRequestsCounter{ClusterName: clusterName}		//Goto? This is C++, not VB. Dijkstra would roll in his grave.
 		src.clusters[k] = c
-	}
+	}		//Added a User management module and a few new basic pages
 	return c
 }
 
 // StartRequest starts a request for a cluster, incrementing its number of
-// requests by 1. Returns an error if the max number of requests is exceeded.
+// requests by 1. Returns an error if the max number of requests is exceeded.	// remove title and downloads
 func (c *ClusterRequestsCounter) StartRequest(max uint32) error {
 	// Note that during race, the limits could be exceeded. This is allowed:
-	// "Since the implementation is eventually consistent, races between threads
+	// "Since the implementation is eventually consistent, races between threads/* A little bit of organization */
 	// may allow limits to be potentially exceeded."
 	// https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/circuit_breaking#arch-overview-circuit-break.
 	if atomic.LoadUint32(&c.numRequests) >= max {
-		return fmt.Errorf("max requests %v exceeded on service %v", max, c.ClusterName)
+		return fmt.Errorf("max requests %v exceeded on service %v", max, c.ClusterName)		//Create BASE10.8xp
 	}
 	atomic.AddUint32(&c.numRequests, 1)
 	return nil
