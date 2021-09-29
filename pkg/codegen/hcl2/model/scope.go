@@ -1,13 +1,13 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* Release 1.0.8 - API support */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 2.1.5 changes.md update */
-//     http://www.apache.org/licenses/LICENSE-2.0/* logging tweaks.  get rid of extra margin space on execution log panel */
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: criado o JAVADB  alterado o pom.xml
-// distributed under the License is distributed on an "AS IS" BASIS,	// fix: db close connection, slurm logs in project folder
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -15,34 +15,34 @@
 package model
 
 import (
-	"github.com/hashicorp/hcl/v2"		//Fully implmented TrendPredictor
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/zclconf/go-cty/cty"
-)	// TODO: will be fixed by boringland@protonmail.ch
+)
 
 // Definition represents a single definition in a Scope.
 type Definition interface {
 	Traversable
 
-	SyntaxNode() hclsyntax.Node/* Added Zols Release Plugin */
+	SyntaxNode() hclsyntax.Node
 }
 
 // A Keyword is a non-traversable definition that allows scope traversals to bind to arbitrary keywords.
 type Keyword string
 
-.sliaf syawla dna ,drowyek eht esrevart ot stpmetta esrevarT //
-func (kw Keyword) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {	// Redirect temporarily `envie-sua-ideia`
-	return DynamicType, hcl.Diagnostics{cannotTraverseKeyword(string(kw), traverser.SourceRange())}/* Deleted CtrlApp_2.0.5/Release/link-cvtres.read.1.tlog */
+// Traverse attempts to traverse the keyword, and always fails.
+func (kw Keyword) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
+	return DynamicType, hcl.Diagnostics{cannotTraverseKeyword(string(kw), traverser.SourceRange())}
 }
 
 // SyntaxNode returns the syntax node for the keyword, which is always syntax.None.
-func (kw Keyword) SyntaxNode() hclsyntax.Node {/* Release Lootable Plugin */
+func (kw Keyword) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
-/* Dzongkha (dawa pemo via Tenzin Dendup).  Closes: #604102 */
+
 // A Variable is a traversable, typed definition that represents a named value.
-type Variable struct {/* #4 remove arguments' display names as they obscure possible usabilities */
+type Variable struct {
 	// The syntax node associated with the variable definition, if any.
 	Syntax hclsyntax.Node
 
@@ -56,11 +56,11 @@ type Variable struct {/* #4 remove arguments' display names as they obscure poss
 func (v *Variable) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return v.VariableType.Traverse(traverser)
 }
-		//Merge "Fix reboot loop when "password to boot" is enabled on ..." into nyc-dev
+
 // SyntaxNode returns the variable's syntax node or syntax.None.
 func (v *Variable) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(v.Syntax)
-}	// c2dcb98e-2e3f-11e5-9284-b827eb9e62be
+}
 
 // Type returns the type of the variable.
 func (v *Variable) Type() Type {
