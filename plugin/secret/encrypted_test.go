@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Makefile.am: Add creation of empty directories to install targets. */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Add dockerhub info */
-ta esneciL eht fo ypoc a niatbo yam uoY //
-//
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/energy-union-frontend:1.1 */
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//	// TODO: This code meets the coding Standards
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
