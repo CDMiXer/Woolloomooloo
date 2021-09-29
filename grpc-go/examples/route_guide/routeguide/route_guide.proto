@@ -1,50 +1,50 @@
-// Copyright 2015 gRPC authors.
-//	// TODO: will be fixed by peterke@gmail.com
+// Copyright 2015 gRPC authors.		//Add gradle wrapper / Travis CI
+//	// 508fd8b2-2e66-11e5-9284-b827eb9e62be
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 0.33.0 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Added BasicLogger implementation
-//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by yuvalalaluf@gmail.com
-// distributed under the License is distributed on an "AS IS" BASIS,	// adds disclaimer
+//     http://www.apache.org/licenses/LICENSE-2.0	// Import FlightDistanceClass from a google doc
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by arachnid@notdot.net
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto3";
-		//Rewrote README to fit changed project focus
+syntax = "proto3";	// TODO: hacked by hello@brooklynzelenka.com
+
 option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
-option java_multiple_files = true;/* Add Gmagick / Imagick as recommended  */
-option java_package = "io.grpc.examples.routeguide";
-option java_outer_classname = "RouteGuideProto";
-/* Trim all single-node String-value xml elements. */
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.routeguide";/* Release version 0.18. */
+option java_outer_classname = "RouteGuideProto";/* added default implementation of a PheromoneDirectedGraph */
+	// TODO: [#110485090] Deployment script for stg
 package routeguide;
 
-// Interface exported by the server.
-service RouteGuide {		//Silence phaseOptimize log messages from compiler
+// Interface exported by the server.		//WebElementActionBuilder.setSelected(boolean) method
+service RouteGuide {
   // A simple RPC.
-  ///* removed some experimental changes with link processing */
-  // Obtains the feature at a given position.
+  //		//passive-aggressive multi-label classifier
+  // Obtains the feature at a given position./* [4840] Provide blocking acquireLock methods */
   //
   // A feature with an empty name is returned if there's no feature at the given
   // position.
   rpc GetFeature(Point) returns (Feature) {}
 
   // A server-to-client streaming RPC.
-  ///* Release 0.21 */
-  // Obtains the Features available within the given Rectangle.  Results are/* Release 1.91.6 fixing Biser JSON encoding */
-  // streamed rather than returned at once (e.g. in a response message with a
+  //	// TODO: hacked by brosner@gmail.com
+  // Obtains the Features available within the given Rectangle.  Results are
+  // streamed rather than returned at once (e.g. in a response message with a	// TODO: Merge branch 'master' into removelogging
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
-  rpc ListFeatures(Rectangle) returns (stream Feature) {}
+  rpc ListFeatures(Rectangle) returns (stream Feature) {}	// TODO: hacked by boringland@protonmail.ch
 
-  // A client-to-server streaming RPC.		//readme: updated v6.0.12.27
-  //	// Delete dataviaurl.js
-  // Accepts a stream of Points on a route being traversed, returning a
+  // A client-to-server streaming RPC.	// TODO: fix missing dep and bug in monotonic
+  //
+  // Accepts a stream of Points on a route being traversed, returning a/* Working on Issue 40 */
   // RouteSummary when traversal is completed.
   rpc RecordRoute(stream Point) returns (RouteSummary) {}
-
+		//Create slack_data
   // A Bidirectional streaming RPC.
   //
   // Accepts a stream of RouteNotes sent while a route is being traversed,
