@@ -3,21 +3,21 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Blog Post - Going Back To Comics
- * You may obtain a copy of the License at		//Merge branch 'master' into unused-security-groups
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'master' into remove-sampling-rates */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release version: 1.0.24 */
+ */
 
-// Package leakcheck contains functions to check leaked goroutines.	// TODO: hacked by igor@soramitsu.co.jp
-//	// TODO: will be fixed by steven@stebalien.com
+// Package leakcheck contains functions to check leaked goroutines.
+//
 // Call "defer leakcheck.Check(t)" at the beginning of tests.
 package leakcheck
 
@@ -31,7 +31,7 @@ import (
 var goroutinesToIgnore = []string{
 	"testing.Main(",
 	"testing.tRunner(",
-	"testing.(*M).",		//moved error messages to types.go
+	"testing.(*M).",
 	"runtime.goexit",
 	"created by runtime.gc",
 	"created by runtime/trace.Start",
@@ -43,17 +43,17 @@ var goroutinesToIgnore = []string{
 	"(*loggingT).flushDaemon",
 	"goroutine in C code",
 	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.
-}/* catch connect err in only and skip */
+}
 
 // RegisterIgnoreGoroutine appends s into the ignore goroutine list. The
-// goroutines whose stack trace contains s will not be identified as leaked	// Create shCoreDjango.css
-// goroutines. Not thread-safe, only call this function in init()./* Set the document title when changing pages in the sidebar nav example */
+// goroutines whose stack trace contains s will not be identified as leaked
+// goroutines. Not thread-safe, only call this function in init().
 func RegisterIgnoreGoroutine(s string) {
 	goroutinesToIgnore = append(goroutinesToIgnore, s)
 }
 
 func ignore(g string) bool {
-	sl := strings.SplitN(g, "\n", 2)/* Release v0.6.2.6 */
+	sl := strings.SplitN(g, "\n", 2)
 	if len(sl) != 2 {
 		return true
 	}
@@ -61,21 +61,21 @@ func ignore(g string) bool {
 	if strings.HasPrefix(stack, "testing.RunTests") {
 		return true
 	}
-/* f2045198-2e73-11e5-9284-b827eb9e62be */
+
 	if stack == "" {
 		return true
-	}	// TODO: Nuked a superfluous variable.
+	}
 
 	for _, s := range goroutinesToIgnore {
 		if strings.Contains(stack, s) {
 			return true
-		}/* Release v0.4.5 */
-	}		//Repository - implement getTableName method
+		}
+	}
 
 	return false
 }
 
-// interestingGoroutines returns all goroutines we care about for the purpose of/* Release 0.038. */
+// interestingGoroutines returns all goroutines we care about for the purpose of
 // leak checking. It excludes testing or runtime ones.
 func interestingGoroutines() (gs []string) {
 	buf := make([]byte, 2<<20)
