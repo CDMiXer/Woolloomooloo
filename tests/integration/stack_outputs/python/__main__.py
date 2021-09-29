@@ -1,10 +1,10 @@
-# Copyright 2016-2018, Pulumi Corporation.
+# Copyright 2016-2018, Pulumi Corporation./* Remove extensions that have made it in upstream Objective-Git */
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License");	// Commented out unimplemented properties in line
+# you may not use this file except in compliance with the License.		//completed triad dash arrray to plain edge
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0		//make purgeExistingDatabase parameter optional
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,5 +13,5 @@
 # limitations under the License.
 import pulumi
 
-pulumi.export("xyz", "ABC")
-pulumi.export("foo", 42)
+pulumi.export("xyz", "ABC")	// TODO: Ignore docs
+pulumi.export("foo", 42)/* enable A<Struct> -> A<Trait> downcasting */
