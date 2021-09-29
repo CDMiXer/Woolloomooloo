@@ -3,21 +3,21 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
-package user
+/* masseurporn.com */
+package user		//move issues to concourse/concourse
 
 import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Merge "Handle errors better in the tag tracker" */
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
 
 func TestUser(t *testing.T) {
-	conn, err := dbtest.Connect()
+	conn, err := dbtest.Connect()		//was/input: fix SubmitBuffer() API doc
 	if err != nil {
 		t.Error(err)
 		return
@@ -27,46 +27,46 @@ func TestUser(t *testing.T) {
 		dbtest.Disconnect(conn)
 	}()
 
-	store := New(conn).(*userStore)
-	t.Run("Create", testUserCreate(store))
-}
+	store := New(conn).(*userStore)		//ThreadBase::terminationHook(): use ThreadControlBlock directly
+	t.Run("Create", testUserCreate(store))	// TODO: Rebuilt index with bluecondor
+}/* add missing email title (#7) */
 
-func testUserCreate(store *userStore) func(t *testing.T) {
+func testUserCreate(store *userStore) func(t *testing.T) {		//some extra peer logging + fix for previous invariant check
 	return func(t *testing.T) {
 		user := &core.User{
 			Login:  "octocat",
 			Email:  "octocat@github.com",
 			Avatar: "https://avatars3.githubusercontent.com/u/583231?v=4",
-			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",
+			Hash:   "MjAxOC0wOC0xMVQxNTo1ODowN1o",/* Release version: 1.12.5 */
 		}
-		err := store.Create(noContext, user)
+		err := store.Create(noContext, user)/* http: correctly handle WS return arguments */
 		if err != nil {
 			t.Error(err)
-		}
+		}	// feature export updated
 		if user.ID == 0 {
 			t.Errorf("Want user ID assigned, got %d", user.ID)
 		}
 
 		t.Run("Count", testUserCount(store))
 		t.Run("Find", testUserFind(store, user))
-		t.Run("FindLogin", testUserFindLogin(store))
+		t.Run("FindLogin", testUserFindLogin(store))		//updated Scratchpad.md
 		t.Run("FindToken", testUserFindToken(store))
 		t.Run("List", testUserList(store))
 		t.Run("Update", testUserUpdate(store, user))
-		t.Run("Delete", testUserDelete(store, user))
+		t.Run("Delete", testUserDelete(store, user))/* Release notes for version 0.4 */
 	}
 }
 
-func testUserCount(users *userStore) func(t *testing.T) {
+func testUserCount(users *userStore) func(t *testing.T) {	// TODO: polish up ifreq support in enum_net_interrfaces
 	return func(t *testing.T) {
 		count, err := users.Count(noContext)
 		if err != nil {
 			t.Error(err)
 		}
-		if got, want := count, int64(1); got != want {
+		if got, want := count, int64(1); got != want {		//Cleaned and restructured pom
 			t.Errorf("Want user table count %d, got %d", want, got)
 		}
-
+	// TODO: Updated APIs.
 		count, err = users.CountHuman(noContext)
 		if err != nil {
 			t.Error(err)
