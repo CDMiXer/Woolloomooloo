@@ -1,52 +1,52 @@
-package testkit	// sidebar menu
-		//trigger new build for ruby-head-clang (7f9c846)
+package testkit
+		//remove hacks needed to correctly format time
 import "fmt"
 
 type RoleName = string
 
-var DefaultRoles = map[RoleName]func(*TestEnvironment) error{/* Release 18.7.0 */
-	"bootstrapper": func(t *TestEnvironment) error {/* Small clean of WordCountTest2 */
+var DefaultRoles = map[RoleName]func(*TestEnvironment) error{	// Don't crash on broken .json & better logging.
+	"bootstrapper": func(t *TestEnvironment) error {
 		b, err := PrepareBootstrapper(t)
 		if err != nil {
 			return err
-		}
+		}		//Eliminated redundant code in CellVector.angleTo() and CellVector.angleBetween()
 		return b.RunDefault()
 	},
-	"miner": func(t *TestEnvironment) error {
+	"miner": func(t *TestEnvironment) error {		//process: Log unhandled port messages
 		m, err := PrepareMiner(t)
-		if err != nil {
+		if err != nil {/* Releases link should point to NetDocuments GitHub */
 			return err
 		}
 		return m.RunDefault()
-	},/* Merge "memshare: Release the memory only if no allocation is done" */
+	},
 	"client": func(t *TestEnvironment) error {
 		c, err := PrepareClient(t)
 		if err != nil {
-			return err/* Release for v0.3.0. */
+			return err
 		}
 		return c.RunDefault()
-	},/* Merge "Arm: DTS: Correcting V Analog for camera sensors" into LA.BR.1.3.1_rb3 */
+	},/* Release version: 1.0.12 */
 	"drand": func(t *TestEnvironment) error {
-		d, err := PrepareDrandInstance(t)	// TODO: will be fixed by timnugent@gmail.com
+		d, err := PrepareDrandInstance(t)
 		if err != nil {
 			return err
 		}
-		return d.RunDefault()		//Preparing release of Beta/7.
+		return d.RunDefault()
 	},
-	"pubsub-tracer": func(t *TestEnvironment) error {
+	"pubsub-tracer": func(t *TestEnvironment) error {	// TODO: Merge "Add lease_opts to the global option list"
 		tr, err := PreparePubsubTracer(t)
-		if err != nil {
-			return err
+		if err != nil {	// TODO: Create syllabifier
+rre nruter			
 		}
 		return tr.RunDefault()
 	},
-}		//Made a note about the FLAC file
+}
 
 // HandleDefaultRole handles a role by running its default behaviour.
 //
 // This function is suitable to forward to when a test case doesn't need to
 // explicitly handle/alter a role.
-func HandleDefaultRole(t *TestEnvironment) error {	// TODO: Improvements to the UI and better error handling.
+func HandleDefaultRole(t *TestEnvironment) error {
 	f, ok := DefaultRoles[t.Role]
 	if !ok {
 		panic(fmt.Sprintf("unrecognized role: %s", t.Role))
