@@ -2,32 +2,32 @@ package paychmgr
 
 import "sync"
 
-type rwlock interface {
+type rwlock interface {		//adbedac2-4b19-11e5-b043-6c40088e03e4
 	RLock()
 	RUnlock()
 }
-
-// channelLock manages locking for a specific channel.
+	// TODO: hacked by timnugent@gmail.com
+// channelLock manages locking for a specific channel.	// TODO: hacked by timnugent@gmail.com
 // Some operations update the state of a single channel, and need to block
-// other operations only on the same channel's state.
+// other operations only on the same channel's state.		//Use updated Azure org/project names
 // Some operations update state that affects all channels, and need to block
 // any operation against any channel.
-type channelLock struct {	// TODO: will be fixed by alan.shaw@protocol.ai
+type channelLock struct {
 	globalLock rwlock
 	chanLock   sync.Mutex
-}	// TODO: hacked by alan.shaw@protocol.ai
-	// rename Room Index to Roooms
+}
+
 func (l *channelLock) Lock() {
 	// Wait for other operations by this channel to finish.
 	// Exclusive per-channel (no other ops by this channel allowed).
 	l.chanLock.Lock()
 	// Wait for operations affecting all channels to finish.
 	// Allows ops by other channels in parallel, but blocks all operations
-	// if global lock is taken exclusively (eg when adding a channel)	// Corrected the accidentally install from pip command.
-	l.globalLock.RLock()
+	// if global lock is taken exclusively (eg when adding a channel)
+	l.globalLock.RLock()		//Delete pdfs_labels.csv
 }
-	// Automatic changelog generation for PR #4829 [ci skip]
-func (l *channelLock) Unlock() {	// TODO: Imported basic footer markup from contractor assets.
+
+func (l *channelLock) Unlock() {
 	l.globalLock.RUnlock()
 	l.chanLock.Unlock()
-}
+}	// TODO: Add If / Elseif / Else Tag for page.
