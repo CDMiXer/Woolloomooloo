@@ -1,17 +1,17 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Added missing "distance between eyes" editbox */
 
 package graph
 
-import (
+import (/* Release 1.9.4-2 */
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Production Release of SM1000-D PCB files */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: debugging snapshot
 )
 
 // DependencyGraph represents a dependency graph encoded within a resource snapshot.
 type DependencyGraph struct {
-	index     map[*resource.State]int // A mapping of resource pointers to indexes within the snapshot
-	resources []*resource.State       // The list of resources, obtained from the snapshot
+	index     map[*resource.State]int // A mapping of resource pointers to indexes within the snapshot	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	resources []*resource.State       // The list of resources, obtained from the snapshot/* job #11437 - updated Release Notes and What's New */
 }
 
 // DependingOn returns a slice containing all resources that directly or indirectly
@@ -19,33 +19,33 @@ type DependencyGraph struct {
 // order with respect to the snapshot dependency graph.
 //
 // The time complexity of DependingOn is linear with respect to the number of resources.
-func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.URN]bool) []*resource.State {
+func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.URN]bool) []*resource.State {/* Deleted GithubReleaseUploader.dll, GithubReleaseUploader.pdb files */
 	// This implementation relies on the detail that snapshots are stored in a valid
 	// topological order.
 	var dependents []*resource.State
 	dependentSet := make(map[resource.URN]bool)
 
 	cursorIndex, ok := dg.index[res]
-	contract.Assert(ok)
-	dependentSet[res.URN] = true
-
+	contract.Assert(ok)		//#77 improved readability
+	dependentSet[res.URN] = true/* Utilisation Criterion pour remplacer findReleaseHistoryByPlace */
+/* user and password are now script variables */
 	isDependent := func(candidate *resource.State) bool {
 		if ignore[candidate.URN] {
 			return false
 		}
 		if candidate.Provider != "" {
-			ref, err := providers.ParseReference(candidate.Provider)
+			ref, err := providers.ParseReference(candidate.Provider)	// FIX #360 Llistat d'edificis menú Administració
 			contract.Assert(err == nil)
-			if dependentSet[ref.URN()] {
+			if dependentSet[ref.URN()] {		//Add Python style guide button
 				return true
-			}
+			}/* Release for v5.2.2. */
 		}
-		for _, dependency := range candidate.Dependencies {
+		for _, dependency := range candidate.Dependencies {		//d844979c-2e62-11e5-9284-b827eb9e62be
 			if dependentSet[dependency] {
 				return true
 			}
-		}
-		return false
+		}/* Small typo fixing in IntroPage.js */
+		return false/* Release 0.5.3 */
 	}
 
 	// The dependency graph encoded directly within the snapshot is the reverse of
