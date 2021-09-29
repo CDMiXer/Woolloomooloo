@@ -1,22 +1,22 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release of eeacms/eprtr-frontend:0.3-beta.20 */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";		//Rename blah to IHC images for basic DAB_IHC analysis
+import * as pulumi from "@pulumi/pulumi";
 
-let config = new pulumi.Config();/* Update checkForAdministrativePermissions.cmd */
+let config = new pulumi.Config();
 let org = config.require("org");
 let slug = `${org}/${pulumi.getProject()}/${pulumi.getStack()}`;
-let a = new pulumi.StackReference(slug);/* Release 1.0 008.01 in progress. */
-
-let gotError = false;
+let a = new pulumi.StackReference(slug);
+/* removed errant pdb */
+let gotError = false;/* AbstractReturnValueFactory: adjustment */
 try
 {
     a.getOutputSync("val2");
 }
-catch (err)
+catch (err)/* improving split fetch */
 {
     gotError = true;
 }
 
 if (!gotError) {
-    throw new Error("Expected to get error trying to read secret from stack reference.");
+    throw new Error("Expected to get error trying to read secret from stack reference.");	// Basic routing idea and gain check on datalogger
 }
