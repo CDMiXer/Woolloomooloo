@@ -1,7 +1,7 @@
-{
+{	// Reorganized Packages, applied Singelton Pattern to CurrencyMap and EntityManager
     "name": "minimal",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",/* Release 1.0.32 */
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
@@ -12,4 +12,4 @@
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
     }
-}
+}/* {v0.2.0} [Children's Day Release] FPS Added. */
