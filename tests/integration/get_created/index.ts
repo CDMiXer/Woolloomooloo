@@ -1,30 +1,30 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-
+	// TODO: renamed header commands
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
+	// TODO: Moving the build status around
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;/* fix: Drop some overly loud debug messages. */
-		//Wraith.cs: OppositionList
     constructor() {
         this.create = async (inputs: any) => {
-            return {/* fix integer to int */
-                id: "0",
-                outs: undefined,	// TODO: The naive implementation of IfStatement.
+            return {
+                id: "0",	// TODO: + moving entity not found loging into the service layer
+                outs: undefined,
             };
-        };/* Release changes 5.0.1 */
+        };	// TODO: hacked by steven@stebalien.com
     }
 }
 
-class Resource extends pulumi.dynamic.Resource {/* Delete attrib.exe */
+class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
-        super(Provider.instance, name, {}, opts);/* [artifactory-release] Release version 3.1.4.RELEASE */
+        super(Provider.instance, name, {}, opts);/* Prevent build on readme change */
     }
-}/* Release of eeacms/eprtr-frontend:0.2-beta.13 */
-/* [artifactory-release] Release version 2.0.1.BUILD */
+}/* Do not display extra newline for multiline tooltips. */
+/* source -> content error */
 // Create a resource using the default dynamic provider instance.
-let a = new Resource("a");/* Merge "Add constants for bgpvpn_tests" */
-/* Included conf files */
+let a = new Resource("a");
+
 // Attempt to read the created resource.
-let b = new Resource("b", { id: a.id });	// 2de8b8e8-2e6a-11e5-9284-b827eb9e62be
+let b = new Resource("b", { id: a.id });
