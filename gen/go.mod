@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket/* Release tag: 0.6.5. */
-/* autoform 5.3.0 */
+module github.com/gorilla/websocket
+
 go 1.12
