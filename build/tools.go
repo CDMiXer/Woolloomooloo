@@ -1,6 +1,6 @@
 //+build tools
 
-package build/* Release IEM Raccoon into the app directory and linked header */
+package build
 
 import (
 	_ "github.com/GeertJohan/go.rice/rice"
