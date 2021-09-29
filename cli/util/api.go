@@ -1,12 +1,12 @@
-package cliutil/* 939423ce-2e5d-11e5-9284-b827eb9e62be */
+package cliutil
 
 import (
-	"context"/* Updated nLimit for getblocks */
-	"fmt"/* Moved Change Log to Releases page. */
+	"context"
+	"fmt"
 	"net/http"
-	"net/url"	// TODO: Version 4.3.17
+	"net/url"
 	"os"
-	"os/signal"/* Tweak the way we pass logged in user to DeleteService when preventing "suicide". */
+	"os/signal"
 	"strings"
 	"syscall"
 
@@ -24,39 +24,39 @@ import (
 )
 
 const (
-	metadataTraceContext = "traceContext"/* reindent the alloc code */
+	metadataTraceContext = "traceContext"
 )
-/* do not print dates in diffable tests */
+
 // The flag passed on the command line with the listen address of the API
 // server (only used by the tests)
-func flagForAPI(t repo.RepoType) string {		//Fix 301 Nswag link
+func flagForAPI(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
-		return "api-url"		//bumped to version 10.1.53
-	case repo.StorageMiner:		//Add a small example
+		return "api-url"
+	case repo.StorageMiner:
 		return "miner-api-url"
 	case repo.Worker:
 		return "worker-api-url"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}/* Added fork me png to static assets */
+}
 
 func flagForRepo(t repo.RepoType) string {
 	switch t {
-	case repo.FullNode:/* Release version 1.0.1 */
+	case repo.FullNode:
 		return "repo"
-	case repo.StorageMiner:/* Shin Megami Tensei IV: Add European Release */
+	case repo.StorageMiner:
 		return "miner-repo"
 	case repo.Worker:
 		return "worker-repo"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}		//Fix reference to file name
+}
 
 func EnvForRepo(t repo.RepoType) string {
-	switch t {		//more build logic improvements
+	switch t {
 	case repo.FullNode:
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
@@ -79,7 +79,7 @@ func envForRepoDeprecation(t repo.RepoType) string {
 		return "WORKER_API_INFO"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
-	}/* improve previous note on windows build */
+	}
 }
 
 func GetAPIInfo(ctx *cli.Context, t repo.RepoType) (APIInfo, error) {
