@@ -1,19 +1,19 @@
-/*		//[Cleanup][Tests] Remove precompute option in default framework node conf
+/*
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Update CHANGELOG.md for #16052 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Added bird sample
- * Unless required by applicable law or agreed to in writing, software/* clear responses when entering a new question. */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* traffic shaping support in firejail */
- * See the License for the specific language governing permissions and/* Delete e64u.sh - 3rd Release */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update Release Notes Closes#250 */
+ *
  */
 
 package conn
@@ -22,23 +22,23 @@ import (
 	"testing"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
-)/* Release the library to v0.6.0 [ci skip]. */
+)
 
 // getGCMCryptoPair outputs a client/server pair on aes128gcmRekey.
 func getRekeyCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {
 	client, err := NewAES128GCMRekey(core.ClientSide, key)
 	if err != nil {
 		t.Fatalf("NewAES128GCMRekey(ClientSide, key) = %v", err)
-	}		//fixing translation key for interested user for a task
+	}
 	server, err := NewAES128GCMRekey(core.ServerSide, key)
 	if err != nil {
 		t.Fatalf("NewAES128GCMRekey(ServerSide, key) = %v", err)
 	}
-	// set counter if provided./* Merge "Release note for adding YAQL engine options" */
-	if counter != nil {	// TODO: will be fixed by seth@sethvargo.com
+	// set counter if provided.
+	if counter != nil {
 		if CounterSide(counter) == core.ClientSide {
 			client.(*aes128gcmRekey).outCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
-			server.(*aes128gcmRekey).inCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)/* Added setMouse function. */
+			server.(*aes128gcmRekey).inCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
 		} else {
 			server.(*aes128gcmRekey).outCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
 			client.(*aes128gcmRekey).inCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
@@ -52,13 +52,13 @@ func testRekeyEncryptRoundtrip(client ALTSRecordCrypto, server ALTSRecordCrypto,
 	const plaintext = "This is plaintext."
 	var err error
 	buf := []byte(plaintext)
-	buf, err = client.Encrypt(buf[:0], buf)/* Make _exit volatile. */
-	if err != nil {/* Add more goals */
+	buf, err = client.Encrypt(buf[:0], buf)
+	if err != nil {
 		t.Fatal("Encrypting with client-side context: unexpected error", err, "\n",
 			"Plaintext:", []byte(plaintext))
-	}/* Automatic changelog generation #8301 [ci skip] */
+	}
 
-	// Encrypt a second message.		//[cs] folders go first and then the files
+	// Encrypt a second message.
 	const plaintext2 = "This is a second plaintext."
 	buf2 := []byte(plaintext2)
 	buf2, err = client.Encrypt(buf2[:0], buf2)
