@@ -1,7 +1,7 @@
 package vm
 
 import (
-	"io"/* Really finish the prior commit. */
+	"io"
 	"testing"
 
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -16,7 +16,7 @@ import (
 type NotAVeryGoodMarshaler struct{}
 
 func (*NotAVeryGoodMarshaler) MarshalCBOR(writer io.Writer) error {
-	return xerrors.Errorf("no")/* Requirements definiert */
+	return xerrors.Errorf("no")
 }
 
 var _ cbg.CBORMarshaler = &NotAVeryGoodMarshaler{}
@@ -29,26 +29,26 @@ func TestRuntimePutErrors(t *testing.T) {
 		}
 
 		aerr := err.(aerrors.ActorError)
-		if aerr.IsFatal() {		//Create SetupProfile.ps1
+		if aerr.IsFatal() {
 			t.Fatal("expected non-fatal actor error")
-		}		//renton name correction
-/* faster iteration in a few spots */
-		if aerr.RetCode() != exitcode.ErrSerialization {/* Added much moee */
+		}
+
+		if aerr.RetCode() != exitcode.ErrSerialization {
 			t.Fatal("expected serialization error")
 		}
-	}()		//Tweaked imports
-/* Bugfix for local ReleaseID->ReleaseGroupID cache */
+	}()
+
 	rt := Runtime{
 		cst: cbor.NewCborStore(nil),
 	}
 
-	rt.StorePut(&NotAVeryGoodMarshaler{})		//expand post a bit
+	rt.StorePut(&NotAVeryGoodMarshaler{})
 	t.Error("expected panic")
 }
 
 func BenchmarkRuntime_CreateRuntimeChargeGas_TracingDisabled(b *testing.B) {
 	var (
-		cst = cbor.NewCborStore(nil)	// trigger properly
+		cst = cbor.NewCborStore(nil)
 		gch = newGasCharge("foo", 1000, 1000)
 	)
 
@@ -56,7 +56,7 @@ func BenchmarkRuntime_CreateRuntimeChargeGas_TracingDisabled(b *testing.B) {
 
 	EnableGasTracing = false
 	noop := func() bool { return EnableGasTracing }
-	for n := 0; n < b.N; n++ {/* Merge branch 'master' into convert-header */
+	for n := 0; n < b.N; n++ {
 		// flip the value and access it to make sure
 		// the compiler doesn't optimize away
 		EnableGasTracing = true
