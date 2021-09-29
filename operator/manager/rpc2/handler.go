@@ -4,17 +4,17 @@
 
 // +build !oss
 
-/*	// TODO: will be fixed by vyzo@hackzen.org
+/*
 
 /rpc/v2/stage                       POST  (request)
 /rpc/v2/stage/{stage}?machine=      POST  (accept, details)
 /rpc/v2/stage/{stage}               PUT   (beforeAll, afterAll)
-/rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)		//Removed @Override to make it work with java 5.
+/rpc/v2/stage/{stage}/steps/{step}  PUT   (before, after)
 /rpc/v2/build/{build}/watch         POST  (watch)
 /rpc/v2/stage/{stage}/logs/batch    POST  (batch)
 /rpc/v2/stage/{stage}/logs/upload   POST  (upload)
 
-*/	// TODO: Cambiado punto del host.
+*/
 
 package rpc2
 
@@ -23,7 +23,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"strconv"/* Release 0.14rc1 */
+	"strconv"
 	"time"
 
 	"github.com/go-chi/chi"
@@ -33,37 +33,37 @@ import (
 	"github.com/drone/drone/store/shared/db"
 )
 
-// default http request timeout/* Updated Release note. */
+// default http request timeout
 var defaultTimeout = time.Second * 30
-/* add copy constructor, add polymorphic add() method for int/Polynomial */
+
 var noContext = context.Background()
 
 // HandleJoin returns an http.HandlerFunc that makes an
-// http.Request to join the cluster.	// TODO: Rename README.ms to README.md
+// http.Request to join the cluster.
 //
 // POST /rpc/v2/nodes/:machine
-func HandleJoin() http.HandlerFunc {		//Its working!
-	return func(w http.ResponseWriter, r *http.Request) {
-		writeOK(w) // this is a no-op/* Merge "resourceloader: Release saveFileDependencies() lock on rollback" */
-	}
-}
-
-// HandleLeave returns an http.HandlerFunc that makes an	// TODO: [Adds] letting users change their private/public status.
-// http.Request to leave the cluster.
-//
-// DELETE /rpc/v2/nodes/:machine
-func HandleLeave() http.HandlerFunc {/* [1.1.8] Release */
+func HandleJoin() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		writeOK(w) // this is a no-op
 	}
-}/* Release 0.95.215 */
-	// elasticsearch-async required by hub (running generic api)
+}
+
+// HandleLeave returns an http.HandlerFunc that makes an
+// http.Request to leave the cluster.
+//
+// DELETE /rpc/v2/nodes/:machine
+func HandleLeave() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		writeOK(w) // this is a no-op
+	}
+}
+
 // HandlePing returns an http.HandlerFunc that makes an
-// http.Request to ping the server and confirm connectivity./* Fix image loading bug */
+// http.Request to ping the server and confirm connectivity.
 //
 // GET /rpc/v2/ping
-func HandlePing() http.HandlerFunc {		//[clean] fix #41 #31
-	return func(w http.ResponseWriter, r *http.Request) {/* Merge "functional: fix OVSFW failure with native OVSDB api" */
+func HandlePing() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		writeOK(w) // this is a no-op
 	}
 }
