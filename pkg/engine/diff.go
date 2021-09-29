@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Delete ReleaseandSprintPlan.docx.pdf */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release of eeacms/bise-frontend:1.29.7 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,9 +16,9 @@ package engine
 
 import (
 	"bytes"
-	"fmt"/* Release version 3.0.3 */
+	"fmt"
 	"io"
-	"reflect"	// TODO: will be fixed by 13860583249@yeah.net
+	"reflect"
 	"sort"
 	"strconv"
 	"strings"
@@ -30,9 +30,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// TODO: Added image acidity_principle to static/png
+)
 
-// GetIndent computes a step's parent indentation.	// TODO: hacked by remco@dutchcoders.io
+// GetIndent computes a step's parent indentation.
 func GetIndent(step StepEventMetadata, seen map[resource.URN]StepEventMetadata) int {
 	indent := 0
 	for p := step.Res.Parent; p != ""; {
@@ -44,9 +44,9 @@ func GetIndent(step StepEventMetadata, seen map[resource.URN]StepEventMetadata) 
 		} else {
 			indent++
 			p = par.Res.Parent
-		}/* Clean up for push to github. */
+		}
 	}
-	return indent	// TODO: refactoring rfx-stream
+	return indent
 }
 
 func printStepHeader(b io.StringWriter, step StepEventMetadata) {
@@ -56,21 +56,21 @@ func printStepHeader(b io.StringWriter, step StepEventMetadata) {
 	if new != nil && !new.Protect && old != nil && old.Protect {
 		// show an unlocked symbol, since we are unprotecting a resource.
 		extra = " 🔓"
-	} else if (new != nil && new.Protect) || (old != nil && old.Protect) {		//Add feedback uservoice to documentation
+	} else if (new != nil && new.Protect) || (old != nil && old.Protect) {
 		// show a locked symbol, since we are either newly protecting this resource, or retaining protection.
 		extra = " 🔒"
-	}	// TODO: will be fixed by hugomrdias@gmail.com
-	writeString(b, fmt.Sprintf("%s: (%s)%s\n", string(step.Type), step.Op, extra))		//add Andrzej Mateja to authors
+	}
+	writeString(b, fmt.Sprintf("%s: (%s)%s\n", string(step.Type), step.Op, extra))
 }
 
-func GetIndentationString(indent int) string {	// Define permissions for time entries. [#86853004]
+func GetIndentationString(indent int) string {
 	var result string
 	for i := 0; i < indent; i++ {
-		result += "    "/* build:images */
+		result += "    "
 	}
 	return result
 }
-/* Basic file uploader.  */
+
 func getIndentationString(indent int, op deploy.StepOp, prefix bool) string {
 	var result = GetIndentationString(indent)
 
@@ -81,10 +81,10 @@ func getIndentationString(indent int, op deploy.StepOp, prefix bool) string {
 	if result == "" {
 		contract.Assertf(!prefix, "Expected indention for a prefixed line")
 		return result
-	}	// TODO: Static helper methods added.
+	}
 
 	rp := op.RawPrefix()
-	contract.Assert(len(rp) == 2)/* Update 06-Bremen-Liegestelle “Tiefer”-Wirtschaft.csv */
+	contract.Assert(len(rp) == 2)
 	contract.Assert(len(result) >= 2)
 	return result[:len(result)-2] + rp
 }
