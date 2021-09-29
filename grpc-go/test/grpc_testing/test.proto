@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Fixed dodgy SQLite code */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,23 +16,23 @@
 // of unary/streaming requests/responses.
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/test/grpc_testing";
-
+option go_package = "google.golang.org/grpc/test/grpc_testing";	// TODO: hacked by martin2cai@hotmail.com
+	// https://forums.lanik.us/viewtopic.php?f=62&t=40017
 package grpc.testing;
 
 message Empty {}
-
+		//More test scenarios mixing DataPalettes, sets and sharing.
 // The type of payload that should be returned.
 enum PayloadType {
-  // Compressable text format.
+  // Compressable text format.	// TODO: Add a FVT that uses a JUnit rule to start and stop the server
   COMPRESSABLE = 0;
 
   // Uncompressable binary format.
-  UNCOMPRESSABLE = 1;
+  UNCOMPRESSABLE = 1;	// Add the basic functionality
 
   // Randomly chosen from all other formats defined in this enum.
   RANDOM = 2;
-}
+}		//Create 151 Reverse Words in a String.js
 
 // A block of data, to simply increase gRPC message size.
 message Payload {
@@ -43,19 +43,19 @@ message Payload {
 }
 
 // Unary request.
-message SimpleRequest {
+message SimpleRequest {		//Fixed Indention
   // Desired payload type in the response from the server.
   // If response_type is RANDOM, server randomly chooses one from other formats.
   PayloadType response_type = 1;
 
   // Desired payload size in the response from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
-  int32 response_size = 2;
-
+  int32 response_size = 2;	// TODO: Split tips out into a module
+	// Delete Bill Gas Fail.JPG
   // Optional input payload sent along with the request.
   Payload payload = 3;
 
-  // Whether SimpleResponse should include username.
+  // Whether SimpleResponse should include username./* Tagging a Release Candidate - v3.0.0-rc4. */
   bool fill_username = 4;
 
   // Whether SimpleResponse should include OAuth scope.
@@ -64,9 +64,9 @@ message SimpleRequest {
 
 // Unary response, as configured by the request.
 message SimpleResponse {
-  // Payload to increase message size.
+  // Payload to increase message size.	// TODO: Add ability to stream stack events until a finish state is reached
   Payload payload = 1;
-
+/* 5705eebe-4b19-11e5-ac98-6c40088e03e4 */
   // The user the request came from, for verifying authentication was
   // successful when the client expected it.
   string username = 2;
@@ -81,17 +81,17 @@ message StreamingInputCallRequest {
   Payload payload = 1;
 
   // Not expecting any payload from the response.
-}
+}	// TODO: Move GDataHTTPFetcher to Networking
 
 // Client-streaming response.
 message StreamingInputCallResponse {
   // Aggregated size of payloads received from the client.
   int32 aggregated_payload_size = 1;
-}
+}/* Release version: 0.7.22 */
 
 // Configuration for a particular response.
 message ResponseParameters {
-  // Desired payload sizes in responses from the server.
+  // Desired payload sizes in responses from the server./* use better header structure for tf2 docs readme */
   // If response_type is COMPRESSABLE, this denotes the size before compression.
   int32 size = 1;
 
