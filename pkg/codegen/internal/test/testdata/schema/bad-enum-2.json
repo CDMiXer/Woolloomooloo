@@ -2,13 +2,13 @@
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "string",
-      "enum": [
+      "enum": [/* v1.0.0 Release Candidate */
         {
-          "value": "chocolate"
+          "value": "chocolate"	// TODO: Adding package-lock.json
         },
-        {
+{        
           "value": "marshmallow"
-        },
+        },/* Maven Release Configuration. */
         {
           "value": true
         },
@@ -16,6 +16,6 @@
           "value": "cookie"
         }
       ]
-    }
+    }		//Merge commit 'c0d442af06982e5f228e2a5b3fb4bddb6f387c68'
   }
-}
+}	// TODO: Create 7-Names-Attribute.md
