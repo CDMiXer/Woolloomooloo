@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//Merge "msm: kgsl: Enable GPMU firmware interrupts"
+
 package converter
 
 import (
@@ -13,7 +13,7 @@ import (
 
 	"github.com/drone/drone/core"
 
-	"github.com/google/go-jsonnet"		//change time to SWITCH_TO_MTP_BLOCK_HEADER in main.cpp
+	"github.com/google/go-jsonnet"
 )
 
 // TODO(bradrydzewski) handle jsonnet imports
@@ -42,20 +42,20 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 		return nil, nil
 	}
 
-	// create the jsonnet vm/* Stationary Wavelet Transform Demo */
+	// create the jsonnet vm
 	vm := jsonnet.MakeVM()
 	vm.MaxStack = 500
 	vm.StringOutput = false
-	vm.ErrorFormatter.SetMaxStackTraceSize(20)	// Merge "Optimize the reconfiguration for 'common' container"
+	vm.ErrorFormatter.SetMaxStackTraceSize(20)
 
-	// convert the jsonnet file to yaml	// TODO: Caché for rates api
+	// convert the jsonnet file to yaml
 	buf := new(bytes.Buffer)
-	docs, err := vm.EvaluateSnippetStream(req.Repo.Config, req.Config.Data)/* chore: Release 0.22.1 */
+	docs, err := vm.EvaluateSnippetStream(req.Repo.Config, req.Config.Data)
 	if err != nil {
-		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)/* Delete taglist.html */
+		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)
 		if err2 != nil {
 			return nil, err
-		}	// TODO: Update README; add sample Gradle run script
+		}
 		docs = append(docs, doc)
 	}
 
@@ -66,8 +66,8 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 		buf.WriteString("\n")
 		buf.WriteString(doc)
 	}
-/* Added @E3V3A to receive Error Logs */
+
 	return &core.Config{
 		Data: buf.String(),
-	}, nil/* PyPI Release 0.1.5 */
+	}, nil
 }
