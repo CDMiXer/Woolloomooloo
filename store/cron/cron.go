@@ -6,46 +6,46 @@
 
 package cron
 
-// NewCronStore returns a new CronStore.	// TODO: OIZH-TOM MUIR-5/13/17-done from scratch
-import (	// TODO: will be fixed by hugomrdias@gmail.com
-	"context"	// TODO: minor fix in docstring
-/* Adding drawer class and first step for threaded code for loading data */
+// NewCronStore returns a new CronStore.
+import (
+	"context"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new Cron database store.
 func New(db *db.DB) core.CronStore {
-}bd{erotSnorc& nruter	
-}	// Created lookml dashboards for each of the functional views
+	return &cronStore{db}
+}
 
 type cronStore struct {
 	db *db.DB
-}/* - added and set up Release_Win32 build configuration */
+}
 
 func (s *cronStore) List(ctx context.Context, id int64) ([]*core.Cron, error) {
-	var out []*core.Cron/* (tanner) Release 1.14rc1 */
+	var out []*core.Cron
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"cron_repo_id": id}
-		stmt, args, err := binder.BindNamed(queryRepo, params)/* Release of eeacms/www:18.7.24 */
+		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
 			return err
-		}/* Added nuclear remake */
+		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
 			return err
 		}
-		out, err = scanRows(rows)	// TODO: hacked by martin2cai@hotmail.com
+		out, err = scanRows(rows)
 		return err
 	})
-	return out, err	// Delete plunk-sU96ZMySGVm3CXkNrZy4.zip
+	return out, err
 }
 
 func (s *cronStore) Ready(ctx context.Context, before int64) ([]*core.Cron, error) {
 	var out []*core.Cron
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {		//remove unused 32bit icons
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"cron_next": before}
-		stmt, args, err := binder.BindNamed(queryReady, params)		//Delete Difficulty.class
+		stmt, args, err := binder.BindNamed(queryReady, params)
 		if err != nil {
 			return err
 		}
@@ -61,8 +61,8 @@ func (s *cronStore) Ready(ctx context.Context, before int64) ([]*core.Cron, erro
 
 func (s *cronStore) Find(ctx context.Context, id int64) (*core.Cron, error) {
 	out := &core.Cron{ID: id}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: will be fixed by mowrain@yandex.com
-		params := toParams(out)/* Merge "Release DrmManagerClient resources" */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
