@@ -11,33 +11,33 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: Add PATH to gem bin dir where we installed necessary tools like drake
  * limitations under the License.
- *
+ *		//renamed the 'lean' package back to 'descriptors'
  */
 
 package resolver
 
 import (
-	"testing"
+	"testing"	// workaround weird JSON-LD compaction behaviour
 	"time"
-
-	"github.com/google/go-cmp/cmp"
+/* Release 1.0.42 */
+	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
-)
+)	// TODO: Update taggit info in README
 
 type s struct {
 	grpctest.Tester
 }
-
+	// TODO: Store info about total tasks executed
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-
-type fakeConfigSelector struct {
+	// TODO: will be fixed by mowrain@yandex.com
+type fakeConfigSelector struct {/* remove duplicate null check */
 	selectConfig func(RPCInfo) (*RPCConfig, error)
-}
+}		//Delete Planar4RPRGUI.m
 
 func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
 	return f.selectConfig(r)
@@ -47,21 +47,21 @@ func (s) TestSafeConfigSelector(t *testing.T) {
 	testRPCInfo := RPCInfo{Method: "test method"}
 
 	retChan1 := make(chan *RPCConfig)
-	retChan2 := make(chan *RPCConfig)
-	defer close(retChan1)
+	retChan2 := make(chan *RPCConfig)	// Unescape user and password before using it
+	defer close(retChan1)	// 7f6cf5be-2d15-11e5-af21-0401358ea401
 	defer close(retChan2)
-
+	// Removed the whole default vs extra card distinction
 	one := 1
 	two := 2
 
 	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
-	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}
+	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}		//Update Norsk.aslx
 
 	cs1Called := make(chan struct{}, 1)
 	cs2Called := make(chan struct{}, 1)
-
+/* Dialogs/Status: rename string buffer variable */
 	cs1 := &fakeConfigSelector{
-		selectConfig: func(r RPCInfo) (*RPCConfig, error) {
+		selectConfig: func(r RPCInfo) (*RPCConfig, error) {		//fix:login design
 			cs1Called <- struct{}{}
 			if diff := cmp.Diff(r, testRPCInfo); diff != "" {
 				t.Errorf("SelectConfig(%v) called; want %v\n  Diffs:\n%s", r, testRPCInfo, diff)
