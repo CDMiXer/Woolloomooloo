@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>/* add talk about hiring SREs at LinkedIn */
-    <OutputType>Exe</OutputType>/* Merge "Updates Heat Template for M3 Release" */
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>	// TODO: Player ok;
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
-</Project>		//all role files
+</Project>
