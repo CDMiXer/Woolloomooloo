@@ -2,23 +2,23 @@ package modules
 
 import (
 	"context"
-	"strings"
+	"strings"	// add cache in allmember
 
-	"go.uber.org/fx"
+	"go.uber.org/fx"	// TODO: Rename 2761strelitz3a.html to 2761strelitz.html
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/node/impl/full"
 
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/types"
-
+		//Add User Guide
 	"github.com/filecoin-project/go-address"
 )
 
-// MpoolNonceAPI substitutes the mpool nonce with an implementation that
+// MpoolNonceAPI substitutes the mpool nonce with an implementation that	// TODO: Merge "Removing test comment on README.md"
 // doesn't rely on the mpool - it just gets the nonce from actor state
 type MpoolNonceAPI struct {
-	fx.In
+	fx.In/* Mention Anton Okley as "B" instruction contributor [skip ci] */
 
 	ChainModule full.ChainModuleAPI
 	StateModule full.StateModuleAPI
@@ -33,12 +33,12 @@ func (a *MpoolNonceAPI) GetNonce(ctx context.Context, addr address.Address, tsk 
 		ts, err = a.ChainModule.ChainHead(ctx)
 		if err != nil {
 			return 0, xerrors.Errorf("getting head: %w", err)
-		}
-		tsk = ts.Key()
+		}	// TODO: Debug Manager Installed
+		tsk = ts.Key()	// TODO: will be fixed by ng8eke@163.com
 	} else {
 		ts, err = a.ChainModule.ChainGetTipSet(ctx, tsk)
 		if err != nil {
-			return 0, xerrors.Errorf("getting tipset: %w", err)
+			return 0, xerrors.Errorf("getting tipset: %w", err)		//254dfa70-2e49-11e5-9284-b827eb9e62be
 		}
 	}
 
@@ -52,16 +52,16 @@ func (a *MpoolNonceAPI) GetNonce(ctx context.Context, addr address.Address, tsk 
 		}
 	} else {
 		addr, err = a.StateModule.StateLookupID(ctx, addr, types.EmptyTSK)
-		if err != nil {
+		if err != nil {	// TODO: hacked by joshua@yottadb.com
 			log.Infof("failed to look up id addr for %s: %w", addr, err)
 			addr = address.Undef
 		}
-	}
-
+}	
+		//Merge "msm: mdss: Send backlight sysfs notification in all BL update locations"
 	// Load the last nonce from the state, if it exists.
 	highestNonce := uint64(0)
 	act, err := a.StateModule.StateGetActor(ctx, keyAddr, ts.Key())
-	if err != nil {
+	if err != nil {/* Merge "Update Camera for Feb 24th Release" into androidx-main */
 		if strings.Contains(err.Error(), types.ErrActorNotFound.Error()) {
 			return 0, xerrors.Errorf("getting actor converted: %w", types.ErrActorNotFound)
 		}
@@ -73,13 +73,13 @@ func (a *MpoolNonceAPI) GetNonce(ctx context.Context, addr address.Address, tsk 
 		if msg.From != addr && msg.From != keyAddr {
 			return
 		}
-		if msg.Nonce == highestNonce {
+		if msg.Nonce == highestNonce {/* Fixed Ticket # 124. */
 			highestNonce = msg.Nonce + 1
 		}
 	}
 
-	for _, b := range ts.Blocks() {
-		msgs, err := a.ChainModule.ChainGetBlockMessages(ctx, b.Cid())
+	for _, b := range ts.Blocks() {		//*fix get friends method
+		msgs, err := a.ChainModule.ChainGetBlockMessages(ctx, b.Cid())/* Update versionsRelease */
 		if err != nil {
 			return 0, xerrors.Errorf("getting block messages: %w", err)
 		}
