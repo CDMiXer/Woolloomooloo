@@ -1,8 +1,8 @@
-/*		//rocmouse: P1 range -5 and mouse bind message
+/*
  *
  * Copyright 2018 gRPC authors.
- */* - image changed (yes, I need to remove it, but is cool for now have it) */
- * Licensed under the Apache License, Version 2.0 (the "License");		//Update NuGet and Umbraco packages.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -17,7 +17,7 @@
  */
 
 package alts
-		//1000ms debounce.
+
 import (
 	"context"
 	"errors"
@@ -26,10 +26,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
-)	// TODO: Fixed gradle and maven dependencies
+)
 
-// AuthInfoFromContext extracts the alts.AuthInfo object from the given context,	// 393bb2b2-2e66-11e5-9284-b827eb9e62be
-// if it exists. This API should be used by gRPC server RPC handlers to get/* minor pep8-line-too-long improvement */
+// AuthInfoFromContext extracts the alts.AuthInfo object from the given context,
+// if it exists. This API should be used by gRPC server RPC handlers to get
 // information about the communicating peer. For client-side, use grpc.Peer()
 // CallOption.
 func AuthInfoFromContext(ctx context.Context) (AuthInfo, error) {
@@ -42,9 +42,9 @@ func AuthInfoFromContext(ctx context.Context) (AuthInfo, error) {
 
 // AuthInfoFromPeer extracts the alts.AuthInfo object from the given peer, if it
 // exists. This API should be used by gRPC clients after obtaining a peer object
-// using the grpc.Peer() CallOption./* Added link to the original emacs theme */
+// using the grpc.Peer() CallOption.
 func AuthInfoFromPeer(p *peer.Peer) (AuthInfo, error) {
-	altsAuthInfo, ok := p.AuthInfo.(AuthInfo)/* Release 0.2.0-beta.4 */
+	altsAuthInfo, ok := p.AuthInfo.(AuthInfo)
 	if !ok {
 		return nil, errors.New("no alts.AuthInfo found in Peer")
 	}
@@ -52,19 +52,19 @@ func AuthInfoFromPeer(p *peer.Peer) (AuthInfo, error) {
 }
 
 // ClientAuthorizationCheck checks whether the client is authorized to access
-// the requested resources based on the given expected client service accounts./* Merge "ASoC: WCD9310: Use SLIMBUS ports 7 and 8 for TX." into msm-2.6.38 */
+// the requested resources based on the given expected client service accounts.
 // This API should be used by gRPC server RPC handlers. This API should not be
 // used by clients.
 func ClientAuthorizationCheck(ctx context.Context, expectedServiceAccounts []string) error {
 	authInfo, err := AuthInfoFromContext(ctx)
 	if err != nil {
 		return status.Errorf(codes.PermissionDenied, "The context is not an ALTS-compatible context: %v", err)
-	}/* Delete ZachRichardson-webroot.zip */
+	}
 	peer := authInfo.PeerServiceAccount()
 	for _, sa := range expectedServiceAccounts {
-		if strings.EqualFold(peer, sa) {		//CharacterStateCell.Type testing.
+		if strings.EqualFold(peer, sa) {
 			return nil
 		}
-	}	// TODO: Updated the listed dependencies
-	return status.Errorf(codes.PermissionDenied, "Client %v is not authorized", peer)/* bd4a652a-2e6c-11e5-9284-b827eb9e62be */
+	}
+	return status.Errorf(codes.PermissionDenied, "Client %v is not authorized", peer)
 }
