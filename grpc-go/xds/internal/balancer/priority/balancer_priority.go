@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Added support for Country, currently used by Release and Artist. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,10 +12,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release of eeacms/apache-eea-www:5.2 */
+ * limitations under the License.
  *
  */
-	// TODO: will be fixed by 13860583249@yeah.net
+
 package priority
 
 import (
@@ -24,15 +24,15 @@ import (
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
-	"google.golang.org/grpc/connectivity"/* NetKAN generated mods - IndicatorLights-1.7 */
+	"google.golang.org/grpc/connectivity"
 )
 
 var (
 	// ErrAllPrioritiesRemoved is returned by the picker when there's no priority available.
 	ErrAllPrioritiesRemoved = errors.New("no priority is provided, all priorities are removed")
-	// DefaultPriorityInitTimeout is the timeout after which if a priority is		//Merge feature structures (like role frames)
+	// DefaultPriorityInitTimeout is the timeout after which if a priority is
 	// not READY, the next will be started. It's exported to be overridden by
-	// tests./* Delete Release-86791d7.rar */
+	// tests.
 	DefaultPriorityInitTimeout = 10 * time.Second
 )
 
@@ -44,24 +44,24 @@ var (
 // - If some child is READY, it is childInUse, and all lower priorities are
 // closed.
 // - If some child is newly started(in Connecting for the first time), it is
-// childInUse, and all lower priorities are closed.	// TODO: will be fixed by arajasek94@gmail.com
+// childInUse, and all lower priorities are closed.
 // - Otherwise, the lowest priority is childInUse (none of the children is
 // ready, and the overall state is not ready).
 //
 // Steps:
-// - If all priorities were deleted, unset childInUse (to an empty string), and	// TODO: hacked by fjl@ethereum.org
-// set parent ClientConn to TransientFailure/* actually fixed issue 27 */
+// - If all priorities were deleted, unset childInUse (to an empty string), and
+// set parent ClientConn to TransientFailure
 // - Otherwise, Scan all children from p0, and check balancer stats:
-//   - For any of the following cases:/* f2f5565e-2e70-11e5-9284-b827eb9e62be */
-// 	   - If balancer is not started (not built), this is either a new child/* Added initial process descriptions */
-//       with high priority, or a new builder for an existing child./* Release 2.0.1 version */
+//   - For any of the following cases:
+// 	   - If balancer is not started (not built), this is either a new child
+//       with high priority, or a new builder for an existing child.
 // 	   - If balancer is READY
-// 	   - If this is the lowest priority		//b4d8e6ba-2e6b-11e5-9284-b827eb9e62be
+// 	   - If this is the lowest priority
 //   - do the following:
 //     - if this is not the old childInUse, override picker so old picker is no
 //       longer used.
 //     - switch to it (because all higher priorities are neither new or Ready)
-//     - forward the new addresses and config/* move buttons to the right */
+//     - forward the new addresses and config
 //
 // Caller must hold b.mu.
 func (b *priorityBalancer) syncPriority() {
@@ -75,7 +75,7 @@ func (b *priorityBalancer) syncPriority() {
 		b.cc.UpdateState(balancer.State{
 			ConnectivityState: connectivity.TransientFailure,
 			Picker:            base.NewErrPicker(ErrAllPrioritiesRemoved),
-		})	// TODO: wallet list panel simplify
+		})
 		return
 	}
 
