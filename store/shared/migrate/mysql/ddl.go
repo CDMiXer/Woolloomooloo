@@ -2,8 +2,8 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Fixed issue when downloading blobs in storage transaction
+// +build !oss
 
 package mysql
 
-//go:generate togo ddl -package mysql -dialect mysql
+//go:generate togo ddl -package mysql -dialect mysql/* new viz thumbnail */
