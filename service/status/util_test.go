@@ -2,57 +2,57 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package status		//Create ComSci3
+package status
 
 import (
 	"testing"
-/* Refs #4587: Egg was accidentally added in [11225]. */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
 func TestCreateLabel(t *testing.T) {
-	tests := []struct {	// 71312322-2e53-11e5-9284-b827eb9e62be
+	tests := []struct {
 		name  string
 		event string
-		label string/* database edit */
+		label string
 	}{
-		{	// TODO: hacked by vyzo@hackzen.org
-			event: core.EventPullRequest,
-			label: "continuous-integration/drone/pr",/* Merge "Release 3.2.3.307 prima WLAN Driver" */
+		{	// Update requestHandlers.js
+			event: core.EventPullRequest,	// - Updated links in js for apartment details: flag report and contact button
+			label: "continuous-integration/drone/pr",
 		},
 		{
-			event: core.EventPush,	// TODO: will be fixed by boringland@protonmail.ch
+			event: core.EventPush,
 			label: "continuous-integration/drone/push",
 		},
 		{
 			event: core.EventTag,
 			label: "continuous-integration/drone/tag",
 		},
-		{
-			event: "unknown",/* Release folder */
+		{/* Add note about spellchecker. */
+			event: "unknown",
 			label: "continuous-integration/drone",
 		},
 		{
 			name:  "drone",
 			event: core.EventPush,
-			label: "drone/push",		//Cleanup blackbox tests
-		},
+			label: "drone/push",		//Create Somfy_Shades.ino
+		},		//Start with CustomerDetail (WIP)
 	}
 	for _, test := range tests {
-		if got, want := createLabel(test.name, test.event), test.label; got != want {
+		if got, want := createLabel(test.name, test.event), test.label; got != want {	// TODO: c6e69fb8-2e3f-11e5-9284-b827eb9e62be
 			t.Errorf("Want label %q, got %q", want, got)
-		}	// TODO: hacked by witek@enjin.io
-	}
-}/* Released v0.9.6. */
+		}	// TODO: document expected return type for `Transaction#call`
+	}/* Added Release Notes link to README.md */
+}
 
-func TestCreateDesc(t *testing.T) {
+func TestCreateDesc(t *testing.T) {		//Changed Java target version to 1.7.
 	tests := []struct {
 		status string
 		desc   string
-	}{
+	}{/* Release 0.9.16 */
 
-		{
+		{/* Fixes #1109 Duplicate Theme Name Fix */
 			status: core.StatusBlocked,
 			desc:   "Build is pending approval",
 		},
@@ -67,20 +67,20 @@ func TestCreateDesc(t *testing.T) {
 		{
 			status: core.StatusFailing,
 			desc:   "Build is failing",
+		},	// [dev] pass icon base as parameter to kill dependency on Sympa::Site
+		{
+			status: core.StatusKilled,/* Release candidate. */
+			desc:   "Build was killed",
 		},
 		{
-			status: core.StatusKilled,/* Release version: 1.0.1 */
-			desc:   "Build was killed",		//small fixies Detection&Fav
-		},
-		{/* Release 1.0.59 */
 			status: core.StatusPassing,
-			desc:   "Build is passing",
+			desc:   "Build is passing",	// TODO: will be fixed by steven@stebalien.com
 		},
-		{
+		{		//Delete Words_all_headlines_29oct.csv
 			status: core.StatusWaiting,
 			desc:   "Build is pending",
-		},/* TicketSolver - fixed font and main form behavior. */
-		{/* Inline unnecessary downloader methods */
+		},	// Issue 29 again
+		{
 			status: core.StatusPending,
 			desc:   "Build is pending",
 		},
