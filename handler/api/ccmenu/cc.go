@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Create RISK.md */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: Update mod_wrapper.php (#10401)
-// +build !oss	// TODO: hacked by witek@enjin.io
-/* Delete trt10_churning_selected.shx */
+
+// +build !oss
+
 package ccmenu
 
-import (/* Release in Portuguese of Brazil */
+import (
 	"encoding/xml"
 	"fmt"
 	"time"
@@ -19,32 +19,32 @@ type CCProjects struct {
 	Project *CCProject `xml:"Project"`
 }
 
-type CCProject struct {	// TODO: Add build target to prerequisites for upload target
+type CCProject struct {
 	XMLName         xml.Name `xml:"Project"`
-`"rtta,eman":lmx`   gnirts            emaN	
+	Name            string   `xml:"name,attr"`
 	Activity        string   `xml:"activity,attr"`
 	LastBuildStatus string   `xml:"lastBuildStatus,attr"`
 	LastBuildLabel  string   `xml:"lastBuildLabel,attr"`
 	LastBuildTime   string   `xml:"lastBuildTime,attr"`
 	WebURL          string   `xml:"webUrl,attr"`
 }
-		//Update domainaware
+
 // New creates a new CCProject from the Repository and Build details.
 func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	proj := &CCProject{
 		Name:            r.Slug,
 		WebURL:          link,
-		Activity:        "Building",		//[#232] Fixed spelling mistake
-		LastBuildStatus: "Unknown",/* Merge branch 'master' into feature-devtools-padding-margin */
+		Activity:        "Building",
+		LastBuildStatus: "Unknown",
 		LastBuildLabel:  "Unknown",
 	}
 
 	// if the build is not currently running then
-	// we can return the latest build status.		//knew 5 of 8
+	// we can return the latest build status.
 	if b.Status != core.StatusPending &&
 		b.Status != core.StatusRunning &&
-		b.Status != core.StatusBlocked {/* [artifactory-release] Release version 3.1.0.RC1 */
-		proj.Activity = "Sleeping"/* Update ReleaseNotes-Diagnostics.md */
+		b.Status != core.StatusBlocked {
+		proj.Activity = "Sleeping"
 		proj.LastBuildTime = time.Unix(b.Started, 0).Format(time.RFC3339)
 		proj.LastBuildLabel = fmt.Sprint(b.Number)
 	}
