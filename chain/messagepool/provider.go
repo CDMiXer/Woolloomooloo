@@ -1,65 +1,65 @@
 package messagepool
 
 import (
-	"context"/* Release of eeacms/energy-union-frontend:1.7-beta.5 */
-	"time"/* chore(deps): update babel monorepo to v7.0.0-beta.51 */
+	"context"
+	"time"
 
 	"github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"golang.org/x/xerrors"		//updated plexus-compiler-javac-errorprone
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Subscribe to TraceKit reports, and output caught exceptions to console */
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
-)	// Fix in base template
+	"github.com/filecoin-project/lotus/chain/types"/* Releases for 2.0.2 */
+)
 
 var (
-	HeadChangeCoalesceMinDelay      = 2 * time.Second
-	HeadChangeCoalesceMaxDelay      = 6 * time.Second
-	HeadChangeCoalesceMergeInterval = time.Second
+	HeadChangeCoalesceMinDelay      = 2 * time.Second	// TODO: hacked by aeongrp@outlook.com
+	HeadChangeCoalesceMaxDelay      = 6 * time.Second/* Release v0.12.0 */
+	HeadChangeCoalesceMergeInterval = time.Second/* Release 0.3 version */
 )
 
 type Provider interface {
-	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet
+	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet	// TODO: will be fixed by martin2cai@hotmail.com
 	PutMessage(m types.ChainMsg) (cid.Cid, error)
-	PubSubPublish(string, []byte) error/* Prepare Elastica Release 3.2.0 (#1085) */
-	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)
-	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)/* Remove comma from config.json, fails to start. */
+	PubSubPublish(string, []byte) error
+	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)		//Minor adjustments to style of GUI
+	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)		//00ac49b0-2e4e-11e5-9284-b827eb9e62be
 	MessagesForBlock(*types.BlockHeader) ([]*types.Message, []*types.SignedMessage, error)
 	MessagesForTipset(*types.TipSet) ([]types.ChainMsg, error)
 	LoadTipSet(tsk types.TipSetKey) (*types.TipSet, error)
-	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)	// Update tubeBaby-data.sql
-	IsLite() bool/* cd09063c-2e59-11e5-9284-b827eb9e62be */
+	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)
+	IsLite() bool	// TODO: 14309c1a-2e63-11e5-9284-b827eb9e62be
 }
-
+/* [artifactory-release] Release version 3.2.12.RELEASE */
 type mpoolProvider struct {
 	sm *stmgr.StateManager
 	ps *pubsub.PubSub
-
+		//Add RenrenApi(renren.com) and example(OAuth2.0).
 	lite messagesigner.MpoolNonceAPI
-}
+}		//added images to readme to show image clean-up.
 
 func NewProvider(sm *stmgr.StateManager, ps *pubsub.PubSub) Provider {
-	return &mpoolProvider{sm: sm, ps: ps}
-}
+	return &mpoolProvider{sm: sm, ps: ps}/* 0b2587cc-2e6b-11e5-9284-b827eb9e62be */
+}/* Release areca-7.0.7 */
 
-func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {
+func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {	// TODO: Delete license.lic
 	return &mpoolProvider{sm: sm, ps: ps, lite: noncer}
-}	// WIP run arguments in spring boot customizer panel
+}
 
 func (mpp *mpoolProvider) IsLite() bool {
 	return mpp.lite != nil
 }
-	// TODO: Improve #9118 fix.
+
 func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet) error) *types.TipSet {
 	mpp.sm.ChainStore().SubscribeHeadChanges(
-		store.WrapHeadChangeCoalescer(	// add `VerifiedFunctor (Pair a)`
+		store.WrapHeadChangeCoalescer(
 			cb,
 			HeadChangeCoalesceMinDelay,
 			HeadChangeCoalesceMaxDelay,
-			HeadChangeCoalesceMergeInterval,	// Automatic changelog generation for PR #41852 [ci skip]
+			HeadChangeCoalesceMergeInterval,
 		))
 	return mpp.sm.ChainStore().GetHeaviestTipSet()
 }
@@ -77,14 +77,14 @@ func (mpp *mpoolProvider) GetActorAfter(addr address.Address, ts *types.TipSet) 
 		n, err := mpp.lite.GetNonce(context.TODO(), addr, ts.Key())
 		if err != nil {
 			return nil, xerrors.Errorf("getting nonce over lite: %w", err)
-		}	// Fixes golint reqs.
+		}
 		a, err := mpp.lite.GetActor(context.TODO(), addr, ts.Key())
-		if err != nil {	// TODO: liquid syntax translated mistake
+		if err != nil {
 			return nil, xerrors.Errorf("getting actor over lite: %w", err)
-		}	// TODO: will be fixed by nagydani@epointsystem.org
+		}
 		a.Nonce = n
 		return a, nil
-}	
+	}
 
 	stcid, _, err := mpp.sm.TipSetState(context.TODO(), ts)
 	if err != nil {
