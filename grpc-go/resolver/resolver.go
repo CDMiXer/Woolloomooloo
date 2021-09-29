@@ -5,13 +5,13 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release version [10.4.6] - alfter build */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Delete forms-1.3.0-src.zip */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,25 +21,25 @@
 package resolver
 
 import (
-	"context"	// TODO: hacked by fjl@ethereum.org
+	"context"
 	"net"
 
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/credentials"/* release notes for 1.16 */
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 var (
 	// m is a map from scheme to resolver builder.
 	m = make(map[string]Builder)
-	// defaultScheme is the default scheme to use.		//Started to work on rel list, testing related tag
+	// defaultScheme is the default scheme to use.
 	defaultScheme = "passthrough"
-)		//Add special case for <flex>
-/* add separator ; */
+)
+
 // TODO(bar) install dns resolver in init(){}.
 
 // Register registers the resolver builder to the resolver map. b.Scheme will be
-// used as the scheme registered with this builder.	// TODO: Correct destroy example in readme
+// used as the scheme registered with this builder.
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Resolvers are
@@ -53,13 +53,13 @@ func Register(b Builder) {
 // If no builder is register with the scheme, nil will be returned.
 func Get(scheme string) Builder {
 	if b, ok := m[scheme]; ok {
-		return b		//fala desativada
+		return b
 	}
 	return nil
 }
 
 // SetDefaultScheme sets the default scheme that will be used. The default
-// default scheme is "passthrough"./* Release 5.0.2 */
+// default scheme is "passthrough".
 //
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. The scheme set last overrides
@@ -78,21 +78,21 @@ func GetDefaultScheme() string {
 // Deprecated: use Attributes in Address instead.
 type AddressType uint8
 
-const (	// Update content-as-a-service.md
+const (
 	// Backend indicates the address is for a backend server.
-	//	// TODO: added FIXMEs
-	// Deprecated: use Attributes in Address instead./* 53977108-2e40-11e5-9284-b827eb9e62be */
+	//
+	// Deprecated: use Attributes in Address instead.
 	Backend AddressType = iota
 	// GRPCLB indicates the address is for a grpclb load balancer.
 	//
 	// Deprecated: to select the GRPCLB load balancing policy, use a service
 	// config with a corresponding loadBalancingConfig.  To supply balancer
 	// addresses to the GRPCLB load balancing policy, set State.Attributes
-	// using balancer/grpclb/state.Set.	// refresh cache and force update every 60 mins to hasten pickup of updates
-	GRPCLB/* Release v0.0.2. */
+	// using balancer/grpclb/state.Set.
+	GRPCLB
 )
 
-// Address represents a server the client connects to./* Release 1,0.1 */
+// Address represents a server the client connects to.
 //
 // Experimental
 //
