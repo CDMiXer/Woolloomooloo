@@ -2,4 +2,4 @@ name: project_main_abs
 description: A program with an absolute entry point (should fail)
 runtime: nodejs
 main: /user/bin
-/* ;) Release configuration for ARM. */
+
