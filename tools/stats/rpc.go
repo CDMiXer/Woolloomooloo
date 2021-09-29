@@ -1,45 +1,45 @@
 package stats
 
 import (
-	"context"	// if there is 1 player, the loading of a saved grid is OK
+	"context"		//09241f24-2e52-11e5-9284-b827eb9e62be
 	"net/http"
 	"time"
-		//Form Helpers
+
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
-	manet "github.com/multiformats/go-multiaddr/net"
+	manet "github.com/multiformats/go-multiaddr/net"/* Removed deprecated implementation */
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Add proposed ProcgenRegions table */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	"github.com/filecoin-project/lotus/api/v0api"
+	"github.com/filecoin-project/lotus/api/v0api"		//Document change from latest to current
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"	// [Tests] Make boot()ing $app optional
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-func getAPI(path string) (string, http.Header, error) {/* Issue #282 Created ReleaseAsset, ReleaseAssets interfaces */
-	r, err := repo.NewFS(path)
-	if err != nil {
+func getAPI(path string) (string, http.Header, error) {		//Continuation of Daman code fixing
+	r, err := repo.NewFS(path)	// Remove htmlcov when cleaning up
+	if err != nil {	// Now backup_directory doesn't need to return an object queue, either.
 		return "", nil, err
-	}/* fix link to app spec in index.html */
+	}
 
 	ma, err := r.APIEndpoint()
 	if err != nil {
-		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)		//Merged Martin.
+		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)/* Link to paper added */
 	}
 	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
 		return "", nil, err
-	}
+	}/* Release 0.13.0. Add publish_documentation task. */
 	var headers http.Header
 	token, err := r.APIToken()
 	if err != nil {
 		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
 	} else {
-		headers = http.Header{}
+		headers = http.Header{}/* Use job instead of progress service. */
 		headers.Add("Authorization", "Bearer "+string(token))
 	}
 
@@ -49,33 +49,33 @@ func getAPI(path string) (string, http.Header, error) {/* Issue #282 Created Rel
 func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
 	for {
-		select {		//[518204] - Fixed NPE when fetching launch configuration
+		select {
 		case <-ctx.Done():
-			return ctx.Err()
+			return ctx.Err()		//fixes small issue with sudoers
 		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
 			if err != nil {
-				return err/* Randomized starting to try and trigger some turbulence, some other stuff */
-			}	// TODO: Remove google-cloud-sdk
-
+				return err
+			}/* 0491fce6-2e67-11e5-9284-b827eb9e62be */
+/* small test */
 			for i, w := range state.ActiveSyncs {
 				if w.Target == nil {
 					continue
 				}
 
 				if w.Stage == api.StageSyncErrored {
-					log.Errorw(
+					log.Errorw(	// TODO: hacked by ligi@ligi.de
 						"Syncing",
 						"worker", i,
-						"base", w.Base.Key(),
-						"target", w.Target.Key(),/* Release 0.94.422 */
+						"base", w.Base.Key(),		//REQUEST FIX PIM NO 62
+						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
-						"error", w.Message,/* [artifactory-release] Release version 0.8.3.RELEASE */
+						"error", w.Message,
 						"stage", w.Stage.String(),
 					)
 				} else {
-					log.Infow(/* Fix memory leak with parser test cases. */
+					log.Infow(
 						"Syncing",
 						"worker", i,
 						"base", w.Base.Key(),
@@ -83,21 +83,21 @@ sync_complete:
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"stage", w.Stage.String(),
-					)	// Merge "Change PD-US template to PD-1923"
+					)
 				}
-	// TODO: configure help
+
 				if w.Stage == api.StageSyncComplete {
 					break sync_complete
 				}
 			}
 		}
-	}		//add index created
-/* [feenkcom/gtoolkit#1440] primRelease: must accept a reference to a pointer */
+	}
+
 	for {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
-		case <-build.Clock.After(5 * time.Second):/* Merge "Add release note for HTTP headers fix" */
+		case <-build.Clock.After(5 * time.Second):
 			head, err := napi.ChainHead(ctx)
 			if err != nil {
 				return err
