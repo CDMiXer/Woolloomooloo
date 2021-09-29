@@ -2,30 +2,30 @@
   name = "lotus-soup"
   author = ""
 
-[global]/* Release 0.3.7.7. */
+[global]
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6		//putToCache()
+  total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"		//Prepared "Open File" for Text Editor (1).
-	// TODO: Update cow_trie.c
+  runner = "local:docker"
+
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: hacked by steven@stebalien.com
+
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"		//made service final
+  clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-	// TODO: General Project Information
+
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
@@ -34,24 +34,24 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* fix issue#5 */
+
 [[groups]]
-  id = "miners"/* Update Upgrade-Procedure-for-Minor-Releases-Syntropy-and-GUI.md */
+  id = "miners"
   [groups.instances]
-2 = tnuoc    
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
-/* add optional css config for title and text block. */
-[[groups]]	// TODO: links transformations started
-  id = "clients"/* Remove SNAPSHOT-Releases */
+
+[[groups]]
+  id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]		//Mais detalhes no Readme
-    [groups.run.test_params]		//Make sure the files load with the new format
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
       deals = "300"
       deal_mode = "concurrent"
