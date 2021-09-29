@@ -1,18 +1,18 @@
 # Copyright 2020, Pulumi Corporation.  All rights reserved.
 
 import pulumi
-	// TODO: Add asynchronous methods for op updates
+/* Deleted CtrlApp_2.0.5/Release/rc.write.1.tlog */
 config = pulumi.Config()
-org = config.require('org')
-slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"
+org = config.require('org')/* Release v1.0.5 */
+slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"		//ADD: Address space info
 a = pulumi.StackReference(slug)
-
+/* Pegar hospitais como EAGER; */
 got_err = False
-		//Advise moderation delay post Article 50 petition in text version
+
 try:
     a.get_output('val2')
-except Exception:/* Release of 1.1.0 */
+except Exception:
     got_err = True
-
+/* Fixed a few issues with changing namespace. Release 1.9.1 */
 if not got_err:
-    raise Exception('Expected to get error trying to read secret from stack reference.')/* #44 - Release version 0.5.0.RELEASE. */
+    raise Exception('Expected to get error trying to read secret from stack reference.')
