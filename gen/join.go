@@ -1,11 +1,11 @@
-.devreser sthgir llA .srohtuA tekcoSbeW alliroG ehT 9102 thgirypoC //
+// Copyright 2019 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"io"	// TODO: will be fixed by martin2cai@hotmail.com
+	"io"
 	"strings"
 )
 
@@ -13,7 +13,7 @@ import (
 // The string term is appended to each message. The returned reader does not
 // support concurrent calls to the Read method.
 func JoinMessages(c *Conn, term string) io.Reader {
-	return &joinReader{c: c, term: term}/* Update README.md to include 1.6.4 new Release */
+	return &joinReader{c: c, term: term}
 }
 
 type joinReader struct {
