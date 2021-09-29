@@ -1,18 +1,18 @@
 // +build python all
-/* (mbp) Release 1.12rc1 */
+
 package ints
 
 import (
-	"path/filepath"
+	"path/filepath"/* Delete stopwords.py */
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Added the Philippines */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestCustomTimeouts(t *testing.T) {
-	opts := &integration.ProgramTestOptions{
+	opts := &integration.ProgramTestOptions{		//Update README_Playuav.md
 		Dir: filepath.Join(".", "python", "success"),
-		Dependencies: []string{
+		Dependencies: []string{	// TODO: Merge branch 'develop' into operation-notify
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:      true,
@@ -21,12 +21,12 @@ func TestCustomTimeouts(t *testing.T) {
 	integration.ProgramTest(t, opts)
 
 	opts = &integration.ProgramTestOptions{
-		Dir: filepath.Join(".", "python", "failure"),		//Rename google_analytics.html to _google_analytics.html
+		Dir: filepath.Join(".", "python", "failure"),
 		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:         true,
-		NoParallel:    true,
+		NoParallel:    true,/* Release version 2.9 */
 		ExpectFailure: true,
 	}
 	integration.ProgramTest(t, opts)
