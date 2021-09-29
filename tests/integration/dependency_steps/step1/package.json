@@ -1,12 +1,12 @@
-{
-    "name": "steps",		//Add ChatScript
+{/* Release webGroupViewController in dealloc. */
+    "name": "steps",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// TODO: Added acknowledgments to the NSF
+    "main": "bin/index.js",/* Merge "Release 3.0.10.023 Prima WLAN Driver" */
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* input rss feed data */
-        "typescript": "^3.0.0"/* e623152c-2e63-11e5-9284-b827eb9e62be */
+    "devDependencies": {
+        "typescript": "^3.0.0"	// TODO: added score type and todo task
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Fix Contact Form #1 */
+        "@pulumi/pulumi": "latest"
     }
-}	// TODO: f9076214-2e5f-11e5-9284-b827eb9e62be
+}
