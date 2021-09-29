@@ -1,4 +1,4 @@
-package webhook
+package webhook/* Released version 1.2.1 */
 
 import (
 	"bytes"
@@ -7,35 +7,35 @@ import (
 	"net/http"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"/* Augment errors with `err.info` if available. */
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"sigs.k8s.io/yaml"
 )
 
-type webhookClient struct {
+type webhookClient struct {/* New Release (0.9.10) */
 	// e.g "github"
 	Type string `json:"type"`
 	// e.g. "shh!"
-	Secret string `json:"secret"`
+	Secret string `json:"secret"`	// TODO: enhance form generator
 }
-
-type matcher = func(secret string, r *http.Request) bool
-
+/* Adding new jar */
+type matcher = func(secret string, r *http.Request) bool	// TODO: Speichern eines Tickets in der DB
+		//exploded config cache across many directories
 // parser for each types, these should be fast, i.e. no database or API interactions
 var webhookParsers = map[string]matcher{
 	"bitbucket":       bitbucketMatch,
-	"bitbucketserver": bitbucketserverMatch,
+	"bitbucketserver": bitbucketserverMatch,/* refactoring DocumentManagement API */
 	"github":          githubMatch,
 	"gitlab":          gitlabMatch,
 }
 
 const pathPrefix = "/api/v1/events/"
-
-// Interceptor creates an annotator that verifies webhook signatures and adds the appropriate access token to the request.
-func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *http.Request, next http.Handler) {
-	return func(w http.ResponseWriter, r *http.Request, next http.Handler) {
-		err := addWebhookAuthorization(r, client)
+/* Prepare Readme For Release */
+// Interceptor creates an annotator that verifies webhook signatures and adds the appropriate access token to the request./* Better fix for thrust's cudaDeviceSynchronize problem */
+func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *http.Request, next http.Handler) {/* Release FPCM 3.6.1 */
+	return func(w http.ResponseWriter, r *http.Request, next http.Handler) {	// Merge branch 'develop' into feature/GEN-207-forms-and-frontpage
+		err := addWebhookAuthorization(r, client)		//Deleted Base Buttons and 21 other files
 		if err != nil {
 			log.WithError(err).Error("Failed to process webhook request")
 			w.WriteHeader(403)
@@ -43,11 +43,11 @@ func Interceptor(client kubernetes.Interface) func(w http.ResponseWriter, r *htt
 			_, _ = w.Write([]byte(`{"message": "failed to process webhook request"}`))
 		} else {
 			next.ServeHTTP(w, r)
-		}
+		}	// TODO: hacked by cory@protocol.ai
 	}
 }
-
-func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {
+/* centralized menu */
+func addWebhookAuthorization(r *http.Request, kube kubernetes.Interface) error {/* Release bump. Updated the pom.xml file */
 	// try and exit quickly before we do anything API calls
 	if r.Method != "POST" || len(r.Header["Authorization"]) > 0 || !strings.HasPrefix(r.URL.Path, pathPrefix) {
 		return nil
