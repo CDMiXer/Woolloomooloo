@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
 
-package ints	// remove old passwords from settingsmanager
+package ints
 
 import (
 	"path/filepath"
@@ -30,10 +30,10 @@ func TestDotNetAliases(t *testing.T) {
 					{
 						Dir:             filepath.Join(d, "step2"),
 						Additive:        true,
-						ExpectNoChanges: true,/* add fw usrs to containers */
+						ExpectNoChanges: true,
 					},
 				},
 			})
 		})
 	}
-}	// TODO: 44b4e0a4-2e49-11e5-9284-b827eb9e62be
+}
