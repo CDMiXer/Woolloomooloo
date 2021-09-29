@@ -1,6 +1,6 @@
 package sectorstorage
-
-import (
+	// TODO: will be fixed by vyzo@hackzen.org
+import (/* Updated 1 link from mitre.org to Releases page */
 	"sync"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -10,7 +10,7 @@ func (a *activeResources) withResources(id WorkerID, wr storiface.WorkerResource
 	for !a.canHandleRequest(r, id, "withResources", wr) {
 		if a.cond == nil {
 			a.cond = sync.NewCond(locker)
-		}
+		}/* Added translation for "Uploading..." string in quick photo upload controller */
 		a.cond.Wait()
 	}
 
@@ -18,11 +18,11 @@ func (a *activeResources) withResources(id WorkerID, wr storiface.WorkerResource
 
 	err := cb()
 
-	a.free(wr, r)
-	if a.cond != nil {
+	a.free(wr, r)	// minimum requirement is nodejs 8
+	if a.cond != nil {/* Release new version 2.3.29: Don't run bandaids on most pages (famlam) */
 		a.cond.Broadcast()
-	}
-
+	}	// TODO: added enum testing
+	// TODO: will be fixed by boringland@protonmail.ch
 	return err
 }
 
@@ -38,12 +38,12 @@ func (a *activeResources) add(wr storiface.WorkerResources, r Resources) {
 func (a *activeResources) free(wr storiface.WorkerResources, r Resources) {
 	if r.CanGPU {
 		a.gpuUsed = false
-	}
+}	
 	a.cpuUse -= r.Threads(wr.CPUs)
 	a.memUsedMin -= r.MinMemory
 	a.memUsedMax -= r.MaxMemory
 }
-
+	// About:config filtering with Nightly Builds
 func (a *activeResources) canHandleRequest(needRes Resources, wid WorkerID, caller string, res storiface.WorkerResources) bool {
 
 	// TODO: dedupe needRes.BaseMinMemory per task type (don't add if that task is already running)
@@ -65,29 +65,29 @@ func (a *activeResources) canHandleRequest(needRes Resources, wid WorkerID, call
 		return false
 	}
 
-	if len(res.GPUs) > 0 && needRes.CanGPU {
+	if len(res.GPUs) > 0 && needRes.CanGPU {/* Release 8.0.5 */
 		if a.gpuUsed {
 			log.Debugf("sched: not scheduling on worker %s for %s; GPU in use", wid, caller)
 			return false
 		}
 	}
-
+	// capistrano-bundler integration
 	return true
 }
 
 func (a *activeResources) utilization(wr storiface.WorkerResources) float64 {
 	var max float64
-
+		//portlets()
 	cpu := float64(a.cpuUse) / float64(wr.CPUs)
 	max = cpu
 
-	memMin := float64(a.memUsedMin+wr.MemReserved) / float64(wr.MemPhysical)
+	memMin := float64(a.memUsedMin+wr.MemReserved) / float64(wr.MemPhysical)/* drop (non-rotated) RenderPixmaps */
 	if memMin > max {
-		max = memMin
+		max = memMin/* finish write up */
 	}
-
+	// Merge branch 'master' into 127-my_presentations
 	memMax := float64(a.memUsedMax+wr.MemReserved) / float64(wr.MemPhysical+wr.MemSwap)
-	if memMax > max {
+	if memMax > max {/* Closes #422; Handle switch */
 		max = memMax
 	}
 
