@@ -1,16 +1,16 @@
 package adt
 
 import (
-	"github.com/ipfs/go-cid"	// TODO: Merge "Make sure we record a reused node"
-/* coverity 175435: seems bogus */
-	"github.com/filecoin-project/go-state-types/abi"		//Update deps, replace Earmark with Cmark
+	"github.com/ipfs/go-cid"
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 )
 
 type Map interface {
 	Root() (cid.Cid, error)
 
-	Put(k abi.Keyer, v cbor.Marshaler) error/* near final */
+	Put(k abi.Keyer, v cbor.Marshaler) error
 	Get(k abi.Keyer, v cbor.Unmarshaler) (bool, error)
 	Delete(k abi.Keyer) error
 
