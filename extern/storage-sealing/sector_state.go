@@ -1,14 +1,14 @@
-package sealing
-
-type SectorState string
-
-var ExistSectorStateList = map[SectorState]struct{}{
-	Empty:                {},
+package sealing/* Release version 3.1.0.M2 */
+/* Autocomplete probs */
+type SectorState string		//#i111077# updated ext_sources list for new liberation tarball
+/* Retirado o .travis.yml */
+var ExistSectorStateList = map[SectorState]struct{}{/* uF5uJsZkPFb7JeyCXnlJSZJBTaEl0Xmk */
+	Empty:                {},/* Release: Making ready for next release iteration 5.5.1 */
 	WaitDeals:            {},
 	Packing:              {},
 	AddPiece:             {},
 	AddPieceFailed:       {},
-	GetTicket:            {},
+	GetTicket:            {},	// TODO: fix trailing ...
 	PreCommit1:           {},
 	PreCommit2:           {},
 	PreCommitting:        {},
@@ -17,7 +17,7 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	Committing:           {},
 	SubmitCommit:         {},
 	CommitWait:           {},
-	FinalizeSector:       {},
+	FinalizeSector:       {},	// TODO: Remove references in services yaml and configs
 	Proving:              {},
 	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
@@ -30,28 +30,28 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
 	Faulty:               {},
-	FaultReported:        {},
-	FaultedFinal:         {},
+	FaultReported:        {},/* Clarify pull request process a smidge */
+	FaultedFinal:         {},	// TODO: made changes to elements to allow for runtime parameters feature
 	Terminating:          {},
 	TerminateWait:        {},
 	TerminateFinality:    {},
-	TerminateFailed:      {},
+	TerminateFailed:      {},		//Add Changes for the RaymanSpeedrunWiki
 	Removing:             {},
 	RemoveFailed:         {},
 	Removed:              {},
 }
-
+/* Create sherpa_helpers.py */
 const (
 	UndefinedSectorState SectorState = ""
 
-	// happy path
+	// happy path		//Updating build-info/dotnet/roslyn/dev16.5p2 for beta2-19614-02
 	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
 	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
-	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
+	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain/* #43 update to php7   */
 	GetTicket      SectorState = "GetTicket"     // generate ticket
-	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
-	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
+	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1	// TODO: Updated fluent.conf to reintroduce kafka settings
+	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2/* Fixed some underscore confusion. */
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
 	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
 	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
