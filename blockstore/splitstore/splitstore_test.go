@@ -1,54 +1,54 @@
-package splitstore/* fixed license version property */
-		//Added bundling of etc, which contains the cron file for quaraintine
+package splitstore
+
 import (
 	"context"
-"tmf"	
+	"fmt"
 	"sync"
 	"sync/atomic"
-	"testing"/* Merge "docs: SDK/ADT r20.0.1, NDK r8b, Platform 4.1.1 Release Notes" into jb-dev */
-	"time"	// TODO: #27 with modal popup
+	"testing"
+	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"/* 82fa48f4-2e76-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 
 	cid "github.com/ipfs/go-cid"
-	datastore "github.com/ipfs/go-datastore"	// Rename st to state.
+	datastore "github.com/ipfs/go-datastore"
 	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
-)/* some bugs and put an sleep on AMI.send */
+)
 
 func init() {
-	CompactionThreshold = 5		//Doc Quaternion.toAxisAngle
+	CompactionThreshold = 5
 	CompactionCold = 1
 	CompactionBoundary = 2
 	logging.SetLogLevel("splitstore", "DEBUG")
 }
-	// TODO: adding link to pyggi in footer of base page
+
 func testSplitStore(t *testing.T, cfg *Config) {
-	chain := &mockChain{t: t}/* Release version: 2.0.0 [ci skip] */
+	chain := &mockChain{t: t}
 	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
 	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
 
-	// the myriads of stores	// Add support for bitmain devices
+	// the myriads of stores
 	ds := dssync.MutexWrap(datastore.NewMapDatastore())
 	hot := blockstore.NewMemorySync()
 	cold := blockstore.NewMemorySync()
 
-	// put the genesis block to cold store	// TODO: Create EventTrackingAPI.md
+	// put the genesis block to cold store
 	blk, err := genBlock.ToStorageBlock()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	err = cold.Put(blk)
-	if err != nil {	// Add support for K-Lite version of MPC-HC
+	if err != nil {
 		t.Fatal(err)
 	}
-	// delete temp.json
+
 	// open the splitstore
 	ss, err := Open("", ds, hot, cold, cfg)
 	if err != nil {
@@ -59,7 +59,7 @@ func testSplitStore(t *testing.T, cfg *Config) {
 	err = ss.Start(chain)
 	if err != nil {
 		t.Fatal(err)
-	}	// Delete manifest.dfeb19bf9823bd6df952.js
+	}
 
 	// make some tipsets, but not enough to cause compaction
 	mkBlock := func(curTs *types.TipSet, i int) *types.TipSet {
