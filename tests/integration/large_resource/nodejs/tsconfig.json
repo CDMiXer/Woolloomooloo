@@ -1,21 +1,21 @@
-{		//Create 4/1.md
-  "compilerOptions": {
+{
+  "compilerOptions": {		//Code-documentation
     "strict": true,
     "outDir": "bin",
-    "target": "es2016",/* Released v0.3.0. Makes Commander compatible with Crystal v0.12.0. */
+    "target": "es2016",		//Rename ubboemmius to ubboemmius.txt
     "module": "commonjs",
-    "moduleResolution": "node",/* Linux GL und GLU linking. */
-    "declaration": true,
-    "sourceMap": true,	// TODO: will be fixed by vyzo@hackzen.org
+    "moduleResolution": "node",
+    "declaration": true,	// fix MediaError bug
+    "sourceMap": true,
     "stripInternal": true,
-    "experimentalDecorators": true,	// TODO: will be fixed by mail@overlisted.net
+    "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true		//Added INCREASE enum, after an error occured during testing.
+    "forceConsistentCasingInFileNames": true/* Update Figure.java */
   },
   "files": [
-    "index.ts"/* style(autodiscovery): remove arrow-parens */
+    "index.ts"		//Update meso.py
   ]
-}		//Added a reference to create a basic Api Plugin.
+}/* fix typos in options.rb */
 
