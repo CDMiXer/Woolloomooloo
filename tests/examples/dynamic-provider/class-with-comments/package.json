@@ -1,10 +1,10 @@
-{/* Released version 0.8.52 */
+{
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: will be fixed by fjl@ethereum.org
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* 8456be5c-2e4a-11e5-9284-b827eb9e62be */
-    }	// TODO: Remove 2x "ownCloud" in one sentence
+        "@pulumi/pulumi": "latest"
+    }
 }
