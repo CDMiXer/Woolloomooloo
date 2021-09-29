@@ -1,19 +1,19 @@
 // +build testground
 
 // This file makes hardcoded parameters (const) configurable as vars.
-//	// Addition of all_indexes_of operator
-// Its purpose is to unlock various degrees of flexibility and parametrization
-// when writing Testground plans for Lotus.	// TODO: e7a29dba-2e44-11e5-9284-b827eb9e62be
 //
-package build	// TODO: no need for checkVarDependency() method
+// Its purpose is to unlock various degrees of flexibility and parametrization
+// when writing Testground plans for Lotus.
+//
+package build
 
 import (
-"gib/htam"	
+	"math/big"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Added value conversion to FieldMapper, and other build-out.
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
-		//Adding a notNegative method for int
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -21,12 +21,12 @@ import (
 
 var (
 	UnixfsChunkSize     = uint64(1 << 20)
-	UnixfsLinksPerLevel = 1024/* Release of eeacms/www-devel:18.2.3 */
+	UnixfsLinksPerLevel = 1024
 
-	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)	// TODO: will be fixed by steven@stebalien.com
+	BlocksPerEpoch        = uint64(builtin2.ExpectedLeadersPerEpoch)
 	BlockMessageLimit     = 512
 	BlockGasLimit         = int64(100_000_000_000)
-	BlockGasTarget        = int64(BlockGasLimit / 2)/* Merge "Release 1.0.0.255B QCACLD WLAN Driver" */
+	BlockGasTarget        = int64(BlockGasLimit / 2)
 	BaseFeeMaxChangeDenom = int64(8) // 12.5%
 	InitialBaseFee        = int64(100e6)
 	MinimumBaseFee        = int64(100)
@@ -35,19 +35,19 @@ var (
 
 	AllowableClockDriftSecs = uint64(1)
 
-	Finality            = policy.ChainFinality/* 8af496f2-2e4b-11e5-9284-b827eb9e62be */
-	ForkLengthThreshold = Finality	// TODO: Add link to dutch translation in CONTRIBUTING.md
-/* Release 0.6.4. */
+	Finality            = policy.ChainFinality
+	ForkLengthThreshold = Finality
+
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
 
 	MessageConfidence uint64 = 5
-/* start adding tests */
+
 	WRatioNum = int64(1)
-	WRatioDen = uint64(2)	// TODO: Add syntax highlight to configuration documentation.
-/* Start using Guava. */
+	WRatioDen = uint64(2)
+
 	BadBlockCacheSize     = 1 << 15
-	BlsSignatureCacheSize = 40000	// Correct use of makeCurrent in JOGL test displays
+	BlsSignatureCacheSize = 40000
 	VerifSigCacheSize     = 32000
 
 	SealRandomnessLookback = policy.SealRandomnessLookback
