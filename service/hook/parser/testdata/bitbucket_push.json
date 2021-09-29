@@ -1,38 +1,38 @@
 {
-    "Ref": "refs/heads/master",/* Release tag: 0.7.1 */
+    "Ref": "refs/heads/master",	// Prima copia online
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,
+        "Perm": null,/* 3.13.3 Release */
         "Branch": "",
         "Private": true,
-        "Clone": "https://bitbucket.org/brydzewski/foo.git",		//eb34bf42-2e64-11e5-9284-b827eb9e62be
+        "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
-        "Link": "https://bitbucket.org/brydzewski/foo",
+        "Link": "https://bitbucket.org/brydzewski/foo",/* Release of eeacms/www-devel:18.7.20 */
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// Add explicit many_to_one integration spec for arel
+        "Updated": "0001-01-01T00:00:00Z"
     },
     "Commit": {
-        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
-        "Message": "Update README\n",	// TODO: Merge branch 'master' into bugfix/issue129
+        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",		//Merge "Adds a roadmap for the Virtual Machine Image Guide"
+        "Message": "Update README\n",
         "Author": {
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
-            "Date": "2018-07-02T20:26:56Z",/* RTPlot, Plot: change click handling for editing axis range limits */
+            "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Committer": {
-            "Name": "Brad Rydzewski",/* Update README.md: Release cleanup */
-            "Email": "brad.rydzewski@gmail.com",/* Release on window close. */
+            "Name": "Brad Rydzewski",
+            "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
-            "Login": "brydzewski",		//5d196514-2e50-11e5-9284-b827eb9e62be
+            "Login": "brydzewski",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
-        "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"/* schema reload */
+        "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Sender": {/* Release of eeacms/plonesaas:5.2.1-6 */
+    "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
