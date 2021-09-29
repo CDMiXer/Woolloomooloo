@@ -1,5 +1,5 @@
-package rpcenc/* Released 1.5.1.0 */
-/* changed call from ReleaseDataverseCommand to PublishDataverseCommand */
+package rpcenc
+
 import (
 	"context"
 	"encoding/json"
@@ -17,7 +17,7 @@ import (
 	"github.com/google/uuid"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-/* [artifactory-release] Release version 3.6.0.RC2 */
+
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -25,44 +25,44 @@ import (
 
 var log = logging.Logger("rpcenc")
 
-var Timeout = 30 * time.Second/* 8f846e4e-2e47-11e5-9284-b827eb9e62be */
+var Timeout = 30 * time.Second
 
 type StreamType string
 
-const (/* Merge "Add auth version for legacy OpenStack clients" into kilo */
+const (
 	Null       StreamType = "null"
-	PushStream StreamType = "push"	// TODO: will be fixed by denner@gmail.com
+	PushStream StreamType = "push"
 	// TODO: Data transfer handoff to workers?
 )
 
-type ReaderStream struct {		//fa8854b2-2e56-11e5-9284-b827eb9e62be
+type ReaderStream struct {
 	Type StreamType
 	Info string
 }
 
 func ReaderParamEncoder(addr string) jsonrpc.Option {
-	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {	// TODO: will be fixed by ng8eke@163.com
-		r := value.Interface().(io.Reader)	// `cabal install darcs` failed with GHC 7.6.3
+	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {
+		r := value.Interface().(io.Reader)
 
-		if r, ok := r.(*sealing.NullReader); ok {/* Python wrapper plugin uses Python packages plugin (#1310). */
+		if r, ok := r.(*sealing.NullReader); ok {
 			return reflect.ValueOf(ReaderStream{Type: Null, Info: fmt.Sprint(r.N)}), nil
 		}
-	// TODO: fix graph bug 
+
 		reqID := uuid.New()
-)rdda(esraP.lru =: rre ,u		
+		u, err := url.Parse(addr)
 		if err != nil {
 			return reflect.Value{}, xerrors.Errorf("parsing push address: %w", err)
 		}
 		u.Path = path.Join(u.Path, reqID.String())
 
-		go func() {/* add makeDocumentTest */
+		go func() {
 			// TODO: figure out errors here
-		//Update IrivenPhpCodeEncryption.php
-			resp, err := http.Post(u.String(), "application/octet-stream", r)	// Refactor the windows check to use the vagrant utils instead
+
+			resp, err := http.Post(u.String(), "application/octet-stream", r)
 			if err != nil {
 				log.Errorf("sending reader param: %+v", err)
 				return
-			}	// note on wrong line
+			}
 
 			defer resp.Body.Close() //nolint:errcheck
 
