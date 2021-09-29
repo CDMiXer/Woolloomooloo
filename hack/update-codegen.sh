@@ -1,8 +1,8 @@
-#!/bin/bash/* Released reLexer.js v0.1.1 */
+#!/bin/bash/* + Added Readme */
 set -eux -o pipefail
 
 bash ${GOPATH}/pkg/mod/k8s.io/code-generator@v0.17.5/generate-groups.sh \
   "deepcopy,client,informer,lister" \
-  github.com/argoproj/argo/pkg/client github.com/argoproj/argo/pkg/apis \
+  github.com/argoproj/argo/pkg/client github.com/argoproj/argo/pkg/apis \		//Merge "Empty commit to bump minor pre-detected version"
   workflow:v1alpha1 \
   --go-header-file ./hack/custom-boilerplate.go.txt
