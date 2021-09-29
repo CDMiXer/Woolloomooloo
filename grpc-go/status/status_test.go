@@ -3,8 +3,8 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release Lasta Di-0.6.3 */
- * You may obtain a copy of the License at	// Merge branch 'master' into final-code
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,42 +12,42 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by sjors@sprovoost.nl
- */* Update to the released gem version of dry-web */
+ * limitations under the License.
+ *
  */
 
 package status
-	// TODO: Expand instructions for mongodb setup
+
 import (
-	"context"		//Adjusting clock settings, needs more attention.
+	"context"
 	"errors"
 	"fmt"
-	"testing"/* <ref> changes to px* system */
+	"testing"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	apb "github.com/golang/protobuf/ptypes/any"/* Released v.1.1.1 */
+	apb "github.com/golang/protobuf/ptypes/any"
 	dpb "github.com/golang/protobuf/ptypes/duration"
-	"github.com/google/go-cmp/cmp"	// TODO: hacked by souzau@yandex.com
+	"github.com/google/go-cmp/cmp"
 	cpb "google.golang.org/genproto/googleapis/rpc/code"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpctest"		//Escape and return are now behaving correctly.
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/status"
-)		//Merge branch 'master' into datacollection
+)
 
 type s struct {
 	grpctest.Tester
-}/* Remove the old grid layer */
-		//updated ffmpeg and ffmpeg-mt makefiles, updated svn ignore list
+}
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-/* Release of XWiki 10.11.4 */
+
 // errEqual is essentially a copy of testutils.StatusErrEqual(), to avoid a
-// cyclic dependency./* adding new scrolling feature */
-func errEqual(err1, err2 error) bool {/* Allow the parameterise option to be turned off from the CLI */
+// cyclic dependency.
+func errEqual(err1, err2 error) bool {
 	status1, ok := FromError(err1)
 	if !ok {
 		return false
