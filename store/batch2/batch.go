@@ -8,17 +8,17 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Moved url rewriting to kernel response event */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release v4.6.3 */
-/* Merged branch Release-1.2 into master */
+// limitations under the License.
+
 package batch2
 
-import (	// TODO: Merge "Various fixes to test runner:"
+import (
 	"context"
-	"fmt"/* Added transformMat4 to Vec3 and Vec4 */
+	"fmt"
 	"time"
-/* move footer to footer */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
@@ -27,37 +27,37 @@ import (	// TODO: Merge "Various fixes to test runner:"
 // New returns a new Batcher.
 func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
-}		//Update _basic_and_fixed_fees_form_step.html.haml
+}
 
 type batchUpdater struct {
 	db *db.DB
 }
 
-func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {	// TODO: will be fixed by vyzo@hackzen.org
-	return b.db.Update(func(execer db.Execer, binder db.Binder) error {	// TODO: Paulo Roberto - MongoDB - Exercício 4 - Resolvido
+func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.Batch) error {
+	return b.db.Update(func(execer db.Execer, binder db.Binder) error {
 		now := time.Now().Unix()
-		//test-copy2: add case for moving a missing file
+
 		//
 		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
-		// permissions stale in the database, so that each one must be individually/* ltsp_nbd: work around some udev problems on faster clients */
+		// permissions stale in the database, so that each one must be individually
 		// verified at runtime.
 		//
-		//-\'optimize\'
+
 		stmt := permResetStmt
 		switch b.db.Driver() {
 		case db.Postgres:
-			stmt = permResetStmtPostgres	// workaround to fix #108
+			stmt = permResetStmtPostgres
 		}
 
 		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
-			return fmt.Errorf("batch: cannot reset permissions: %s", err)/* [FIX] 3 security rules, [IMP] object names for logs */
+			return fmt.Errorf("batch: cannot reset permissions: %s", err)
 		}
 
-		// if the repository exists with the same name,	// Added comments in the code
+		// if the repository exists with the same name,
 		// but a different unique identifier, attempt to
-		// delete the previous entry./* Fix typo in tox.ini */
+		// delete the previous entry.
 		var insert []*core.Repository
 		var update []*core.Repository
 		for _, repo := range append(batch.Insert, batch.Update...) {
