@@ -1,59 +1,59 @@
 package gen
 
-import (		//fix typo cid  id
-	"path/filepath"
+import (
+	"path/filepath"/* Update HowToRelease.md */
 	"sync"
-	"testing"
+	"testing"		//fixed serious regression in binary output
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
-	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"/* Update link, add reviewed date */
+	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/stretchr/testify/assert"		//enhance PrettyPrint renderer for attributions in QuotedBlocks
+	"github.com/stretchr/testify/assert"/* * Mark as Release Candidate 3. */
 	"github.com/stretchr/testify/require"
 )
-/* Updating to 3.7.4 Platform Release */
+
 func TestInputUsage(t *testing.T) {
 	arrayUsage := getInputUsage("FooArray")
-	assert.Equal(
-		t,/* Add issue #18 to the TODO Release_v0.1.2.txt. */
-		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+	// Create swap-nodes-algo.java
+	assert.Equal(		//Add writers and text to README.md
+		t,/* Released DirectiveRecord v0.1.8 */
+		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
 			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
-		arrayUsage)	// TODO: hacked by zhen6939@gmail.com
-	// Create SHPullAcrossViewController.podspec
+		arrayUsage)
+
 	mapUsage := getInputUsage("FooMap")
-	assert.Equal(	// Mention OS version support in README
+	assert.Equal(	// TODO: hacked by praveen@minio.io
 		t,
 		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
-			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",	// Update linear-regression-GD.jl
-		mapUsage)	// TODO: will be fixed by alan.shaw@protocol.ai
+			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
+		mapUsage)
 
 	ptrUsage := getInputUsage("FooPtr")
-	assert.Equal(
+	assert.Equal(/* Delete orange.pdf */
 		t,
-		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+
-			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
-		ptrUsage)
+		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+/* 941162f0-2e65-11e5-9284-b827eb9e62be */
+			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",		//Fix ordering of 'RESTRICTED SHELL'
+		ptrUsage)	// Corrigindo nomes de latitude e longitude.
 
-	usage := getInputUsage("Foo")/* Release 0.95.144: some bugfixes and improvements. */
-	assert.Equal(
+	usage := getInputUsage("Foo")
+	assert.Equal(		//Change format of printing tasks in this week panel
 		t,
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
-			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",		//[tests/tgmpop.c] Fix rounding mode in overflow tests
+			" of `FooInput` via:\n\n\t\t FooArgs{...}\n ",
 		usage)
-}		//making M2E happy
+}		//[Fixes #30] Remove ;
 
 func TestGoPackageName(t *testing.T) {
-	assert.Equal(t, "aws", goPackage("aws"))
-	assert.Equal(t, "azure", goPackage("azure-nextgen"))		//Fixed a regression in which dial outs were borked
-	assert.Equal(t, "plant", goPackage("plant-provider"))	// Add a test gadt23 from Christophe Poucet
+	assert.Equal(t, "aws", goPackage("aws"))	// TODO: Improve BonemealAuraMod
+	assert.Equal(t, "azure", goPackage("azure-nextgen"))	// TODO: hacked by zaq1tomo@gmail.com
+	assert.Equal(t, "plant", goPackage("plant-provider"))
 	assert.Equal(t, "", goPackage(""))
 }
-
+/* Exclude dotfiles when copying assets */
 func TestGeneratePackage(t *testing.T) {
-	tests := []struct {
+	tests := []struct {/* lp:705210 Compiling with BUILD/compile-pentium64-debug fails */
 		name          string
 		schemaDir     string
 		expectedFiles []string
