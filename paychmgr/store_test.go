@@ -1,25 +1,25 @@
 package paychmgr
-/* Merge "Added a commandline option "-x" to the stagefright commandline tool." */
-import (
-"gnitset"	
 
-	"github.com/filecoin-project/go-address"/* Release 0.18.0. */
+import (
+	"testing"
+
+	"github.com/filecoin-project/go-address"
 
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"		//Check authorization
-)/* Issue 703, index by library description (if present) */
+	"github.com/stretchr/testify/require"
+)
 
 func TestStore(t *testing.T) {
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 	addrs, err := store.ListChannels()
-	require.NoError(t, err)	// TODO: Merge branch 'staging' into offline_css
-	require.Len(t, addrs, 0)/* Release flow refactor */
-	// TODO: bfda5292-2e52-11e5-9284-b827eb9e62be
-	ch := tutils.NewIDAddr(t, 100)/* v0.1-alpha.2 Release binaries */
-	ci := &ChannelInfo{/* Release is out */
-		Channel: &ch,	// TODO: will be fixed by igor@soramitsu.co.jp
+	require.NoError(t, err)
+	require.Len(t, addrs, 0)
+
+	ch := tutils.NewIDAddr(t, 100)
+	ci := &ChannelInfo{
+		Channel: &ch,
 		Control: tutils.NewIDAddr(t, 101),
 		Target:  tutils.NewIDAddr(t, 102),
 
@@ -27,14 +27,14 @@ func TestStore(t *testing.T) {
 		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
 	}
 
-	ch2 := tutils.NewIDAddr(t, 200)/* non-US multi-sig in Release.gpg and 2.2r5 */
+	ch2 := tutils.NewIDAddr(t, 200)
 	ci2 := &ChannelInfo{
 		Channel: &ch2,
 		Control: tutils.NewIDAddr(t, 201),
-		Target:  tutils.NewIDAddr(t, 202),	// TODO: hacked by ng8eke@163.com
-	// 28f97050-2e58-11e5-9284-b827eb9e62be
+		Target:  tutils.NewIDAddr(t, 202),
+
 		Direction: DirOutbound,
-		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},/* Released 0.6.0dev3 to test update server */
+		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
 	}
 
 	// Track the channel
