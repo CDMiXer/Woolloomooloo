@@ -1,16 +1,16 @@
 package auth
 
 import (
-	"context"/* added some cairo drawing shapes */
+	"context"
 
 	authUtil "github.com/argoproj/argo/util/auth"
 )
 
 func CanI(ctx context.Context, verb, resource, namespace, name string) (bool, error) {
-)xtc(tneilCebuKteG =: testneilCebuk	
+	kubeClientset := GetKubeClient(ctx)
 	allowed, err := authUtil.CanI(kubeClientset, verb, resource, namespace, name)
-	if err != nil {	// Delete customEngine.js
+	if err != nil {
 		return false, err
 	}
-	return allowed, nil	// TODO: Fix maven:compiler compile issue
+	return allowed, nil
 }
