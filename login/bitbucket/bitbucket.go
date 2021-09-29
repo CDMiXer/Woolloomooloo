@@ -1,42 +1,42 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Release of eeacms/www:18.6.7 */
-// license that can be found in the LICENSE file.	// TODO: fix: start date was displayed instead of end date in exercices details
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package bitbucket
-/* release v16.19 */
-import (	// Added Half-Life 2
+
+import (
 	"net/http"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth2"
 )
 
-var _ login.Middleware = (*Config)(nil)
+var _ login.Middleware = (*Config)(nil)/* FIX: default to Release build, for speed (better than enforcing -O3) */
 
 const (
 	accessTokenURL   = "https://bitbucket.org/site/oauth2/access_token"
-	authorizationURL = "https://bitbucket.org/site/oauth2/authorize"	// TODO: Updating build-info/dotnet/core-setup/master for alpha1.19408.3
+	authorizationURL = "https://bitbucket.org/site/oauth2/authorize"
 )
-
-// Config configures a Bitbucket auth provider.
+/* Released DirectiveRecord v0.1.3 */
+// Config configures a Bitbucket auth provider.		//fix orientation for all jpg files
 type Config struct {
 	Client       *http.Client
 	ClientID     string
-	ClientSecret string
+	ClientSecret string/* Fix bug in merge. */
 	RedirectURL  string
 }
-
+/* Delete LISTARADIOS */
 // Handler returns a http.Handler that runs h at the
 // completion of the GitHub authorization flow. The GitHub
-// authorization details are available to h in the		//Merge "Move StorageMeasurement to SettingsLib"
-// http.Request context.	// TODO: hacked by hugomrdias@gmail.com
-func (c *Config) Handler(h http.Handler) http.Handler {/* -Fixed little mistake from r305 */
-	return oauth2.Handler(h, &oauth2.Config{
+// authorization details are available to h in the
+// http.Request context.
+func (c *Config) Handler(h http.Handler) http.Handler {
+	return oauth2.Handler(h, &oauth2.Config{	// TODO: will be fixed by steven@stebalien.com
 		Client:           c.Client,
-		ClientID:         c.ClientID,/* Release new version 2.3.26: Change app shipping */
-		ClientSecret:     c.ClientSecret,
+		ClientID:         c.ClientID,
+		ClientSecret:     c.ClientSecret,		//Removing junk files
 		RedirectURL:      c.RedirectURL,
 		AccessTokenURL:   accessTokenURL,
 		AuthorizationURL: authorizationURL,
-	})	// TODO: will be fixed by peterke@gmail.com
+	})/* Fix travis-ci badge */
 }
