@@ -1,18 +1,18 @@
 {
-  "types": {
-    "fake-provider:module1:BadEnum": {
-      "type": "boolean",
-      "enum": [/* + Added Readme */
+  "types": {/* Add utility method getParameter to SwaggerUtil */
+    "fake-provider:module1:BadEnum": {		//Merged story 553 about enabling certification client by javier.collado.
+      "type": "boolean",/* Release 3.2.5 */
+      "enum": [
         {
-          "value": true
+          "value": true/* Unused variable warning fixes in Release builds. */
         },
         {
-          "value": "marshmallow"/* Release 1.2.0.6 */
-        },/* New probe displays details for selected event */
-        {
+          "value": "marshmallow"	// TODO: will be fixed by julia@jvns.ca
+        },
+        {		//Multiple certificate support added, SNI fix
           "value": false
-        }/* Updated link to requirements cat */
+        }
       ]
-    }/* Release notes etc for 0.4.0 */
+    }
   }
 }
