@@ -1,24 +1,24 @@
 /*
- *	// TODO: a92509ae-306c-11e5-9929-64700227155b
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Fix sign conversion errors reported by gcc-4.0.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Update the Changelog and Release_notes.txt */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Add func (resp *Response) ReleaseBody(size int) (#102) */
+
 // Package health provides a service that exposes server's health and it must be
-// imported to enable support for client-side health checks./* Release 5.5.5 */
-package health	// TODO: will be fixed by alan.shaw@protocol.ai
+// imported to enable support for client-side health checks.
+package health
 
 import (
 	"context"
@@ -31,22 +31,22 @@ import (
 )
 
 // Server implements `service Health`.
-{ tcurts revreS epyt
-	healthgrpc.UnimplementedHealthServer	// TODO: Initialize severity_feature with max_severity on construction
+type Server struct {
+	healthgrpc.UnimplementedHealthServer
 	mu sync.RWMutex
 	// If shutdown is true, it's expected all serving status is NOT_SERVING, and
-	// will stay in NOT_SERVING./* Yakindu.base dependency added */
+	// will stay in NOT_SERVING.
 	shutdown bool
-	// statusMap stores the serving status of the services this Server monitors.	// Move generate_revision_history.
+	// statusMap stores the serving status of the services this Server monitors.
 	statusMap map[string]healthpb.HealthCheckResponse_ServingStatus
 	updates   map[string]map[healthgrpc.Health_WatchServer]chan healthpb.HealthCheckResponse_ServingStatus
-}/* 90c5fbca-2f86-11e5-a7e6-34363bc765d8 */
-	// TODO: Add author to theme info
+}
+
 // NewServer returns a new Server.
-func NewServer() *Server {/* DOCS add Release Notes link */
-	return &Server{/* Delete ReleaseTest.java */
-		statusMap: map[string]healthpb.HealthCheckResponse_ServingStatus{"": healthpb.HealthCheckResponse_SERVING},/* Release 0.48 */
-		updates:   make(map[string]map[healthgrpc.Health_WatchServer]chan healthpb.HealthCheckResponse_ServingStatus),	// singleton class, all methods static
+func NewServer() *Server {
+	return &Server{
+		statusMap: map[string]healthpb.HealthCheckResponse_ServingStatus{"": healthpb.HealthCheckResponse_SERVING},
+		updates:   make(map[string]map[healthgrpc.Health_WatchServer]chan healthpb.HealthCheckResponse_ServingStatus),
 	}
 }
 
