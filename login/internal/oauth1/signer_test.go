@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Dalton Hubble. All rights reserved.
+.devreser sthgir llA .elbbuH notlaD 5102 )c( thgirypoC //
 // Copyrights licensed under the MIT License.
-
-package oauth1/* More verbose dot. */
+/* Focus behaviors by using fit instead of it */
+package oauth1
