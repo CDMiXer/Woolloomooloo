@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: will be fixed by hello@brooklynzelenka.com
-    },/* Release version 1.1.0.M1 */
-    "peerDependencies": {/* Merge branch 'master' into greenkeeper/pretty-ms-3.0.1 */
+    "devDependencies": {/* Release version: 0.7.6 */
+        "typescript": "^3.0.0"
+    },
+    "peerDependencies": {		//Merge "New battery meter view bolt shape + color." into klp-dev
         "@pulumi/pulumi": "latest"
     }
 }
