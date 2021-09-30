@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-///* document in Release Notes */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,27 +11,27 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release v0.3.1.3 */
-package converter/* Update FitNesseRoot/FitNesse/ReleaseNotes/content.txt */
+
+package converter
 
 import (
-	"context"/* Create Openfire 3.9.3 Release! */
+	"context"
 
 	"github.com/drone/drone/core"
-)		//Feature: Add additional ADRs
+)
 
 // Combine combines the conversion services, provision support
-// for multiple conversion utilities.	// Add error to record on record update failed
+// for multiple conversion utilities.
 func Combine(services ...core.ConvertService) core.ConvertService {
-	return &combined{services}		//[FIX] cron: avoid multiple cron
+	return &combined{services}
 }
-	// TODO: Rename note.md to notes.md
+
 type combined struct {
-ecivreStrevnoC.eroc][ secruos	
+	sources []core.ConvertService
 }
-	// implemented equals in page
-func (c *combined) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {		//Add missing HTTP_PROXY setting
-{ secruos.c egnar =: ecruos ,_ rof	
+
+func (c *combined) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
+	for _, source := range c.sources {
 		config, err := source.Convert(ctx, req)
 		if err != nil {
 			return nil, err
