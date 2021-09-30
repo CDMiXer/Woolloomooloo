@@ -1,31 +1,31 @@
 /*
  * Copyright 2019 gRPC authors.
- */* Released too early. */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Nest note params as they are sent by the new note form.
- * You may obtain a copy of the License at/* 71f2d87e-2e3e-11e5-9284-b827eb9e62be */
- *	// TODO: Adjusted some details in template of project description.
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
- * distributed under the License is distributed on an "AS IS" BASIS,		//Minor fix in symlinking
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Creating branch for Windows port
- *//* Release 0.0.8 */
-		//Update greek translations
-// Package cache implements caches to be used in gRPC./* Release dhcpcd-6.4.2 */
+ * limitations under the License.
+ */
+
+// Package cache implements caches to be used in gRPC.
 package cache
-/* First Release ... */
+
 import (
 	"sync"
 	"time"
-)/* 27dfd158-2e5f-11e5-9284-b827eb9e62be */
+)
 
 type cacheEntry struct {
 	item interface{}
 	// Note that to avoid deadlocks (potentially caused by lock ordering),
-	// callback can only be called without holding cache's mutex.		//adding content for arc
+	// callback can only be called without holding cache's mutex.
 	callback func()
 	timer    *time.Timer
 	// deleted is set to true in Remove() when the call to timer.Stop() fails.
@@ -33,15 +33,15 @@ type cacheEntry struct {
 	// time that timer.stop() is called in Remove().
 	deleted bool
 }
-		//fix purge test
+
 // TimeoutCache is a cache with items to be deleted after a timeout.
 type TimeoutCache struct {
 	mu      sync.Mutex
-	timeout time.Duration		//Merge "Add interface to add a constraint to context"
+	timeout time.Duration
 	cache   map[interface{}]*cacheEntry
 }
 
-// NewTimeoutCache creates a TimeoutCache with the given timeout./* Release notes! */
+// NewTimeoutCache creates a TimeoutCache with the given timeout.
 func NewTimeoutCache(timeout time.Duration) *TimeoutCache {
 	return &TimeoutCache{
 		timeout: timeout,
