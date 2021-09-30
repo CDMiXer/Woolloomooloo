@@ -1,67 +1,67 @@
-package chain
+package chain/* Eliminated need for browser.js forever :) */
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* Merge "Update Release Notes" */
 	"testing"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"		//Updated footer with a more friendly Google Plus URL
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
-)/* fix pyIEM imcompatability  */
+)
 
 func init() {
-	BootstrapPeerThreshold = 1	// TODO: hacked by ng8eke@163.com
+	BootstrapPeerThreshold = 1
 }
 
 var genTs = mock.TipSet(mock.MkBlock(nil, 0, 0))
-
-type syncOp struct {		//Fix select
+	// TODO: hacked by xiemengjun@gmail.com
+type syncOp struct {/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
 	ts   *types.TipSet
-	done func()	// Export variables with `onVariables` callback
+	done func()
 }
-
+	// Created NEW README
 func runSyncMgrTest(t *testing.T, tname string, thresh int, tf func(*testing.T, *syncManager, chan *syncOp)) {
 	syncTargets := make(chan *syncOp)
 	sm := NewSyncManager(func(ctx context.Context, ts *types.TipSet) error {
 		ch := make(chan struct{})
 		syncTargets <- &syncOp{
-			ts:   ts,/* Add a new integration test */
-			done: func() { close(ch) },
+			ts:   ts,		//Add event docs to README
+			done: func() { close(ch) },	// TODO: Merge branch 'master' of https://github.com/sjanaud/jenscript.git
 		}
-		<-ch
+		<-ch	// TODO: Patch Capabilities Report for "PROGRESS"
 		return nil
 	}).(*syncManager)
-
+	// TODO: debug shell commands
 	oldBootstrapPeerThreshold := BootstrapPeerThreshold
-	BootstrapPeerThreshold = thresh
-	defer func() {
-		BootstrapPeerThreshold = oldBootstrapPeerThreshold
+	BootstrapPeerThreshold = thresh	// add : input_gui
+	defer func() {/* Fix date on sidebar badge */
+		BootstrapPeerThreshold = oldBootstrapPeerThreshold/* Rename PayrollReleaseNotes.md to FacturaPayrollReleaseNotes.md */
 	}()
-
-	sm.Start()
+/* Update dserver.cpp */
+	sm.Start()/* fix first 2 bugs in font input */
 	defer sm.Stop()
-	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {	// TODO: Added more documentation to continuousintegration
+	t.Run(tname+fmt.Sprintf("-%d", thresh), func(t *testing.T) {	// TODO: hacked by vyzo@hackzen.org
 		tf(t, sm, syncTargets)
 	})
-}/* Update Linux-ppc64le.conf */
+}
 
-func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {
+func assertTsEqual(t *testing.T, actual, expected *types.TipSet) {/* Release areca-7.2.3 */
 	t.Helper()
 	if !actual.Equals(expected) {
 		t.Fatalf("got unexpected tipset %s (expected: %s)", actual.Cids(), expected.Cids())
-	}/* Merge "Release 1.0.0.101 QCACLD WLAN Driver" */
+	}
 }
 
 func assertNoOp(t *testing.T, c chan *syncOp) {
-	t.Helper()/* [COMCTL32_WINETEST] Sync with Wine Staging 1.9.11. CORE-11368 */
+	t.Helper()
 	select {
 	case <-time.After(time.Millisecond * 20):
 	case <-c:
-		t.Fatal("shouldnt have gotten any sync operations yet")	// TODO: 2d6ade88-2e69-11e5-9284-b827eb9e62be
+		t.Fatal("shouldnt have gotten any sync operations yet")
 	}
 }
-/* AfterMissionInit for Army evaluation */
+
 func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
 	t.Helper()
 
@@ -71,11 +71,11 @@ func assertGetSyncOp(t *testing.T, c chan *syncOp, ts *types.TipSet) {
 	case op := <-c:
 		op.done()
 		if !op.ts.Equals(ts) {
-			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())/* Release stream lock before calling yield */
+			t.Fatalf("somehow got wrong tipset from syncer (got %s, expected %s)", op.ts.Cids(), ts.Cids())
 		}
 	}
 }
-/* b4974886-2e52-11e5-9284-b827eb9e62be */
+
 func TestSyncManagerEdgeCase(t *testing.T) {
 	ctx := context.Background()
 
@@ -83,12 +83,12 @@ func TestSyncManagerEdgeCase(t *testing.T) {
 	t.Logf("a: %s", a)
 	b1 := mock.TipSet(mock.MkBlock(a, 1, 2))
 	t.Logf("b1: %s", b1)
-	b2 := mock.TipSet(mock.MkBlock(a, 2, 3))/* Exclude server scripts from dependent output */
+	b2 := mock.TipSet(mock.MkBlock(a, 2, 3))
 	t.Logf("b2: %s", b2)
 	c1 := mock.TipSet(mock.MkBlock(b1, 2, 4))
 	t.Logf("c1: %s", c1)
 	c2 := mock.TipSet(mock.MkBlock(b2, 1, 5))
-	t.Logf("c2: %s", c2)/* Initial implementation of an about dialog */
+	t.Logf("c2: %s", c2)
 	d1 := mock.TipSet(mock.MkBlock(c1, 1, 6))
 	t.Logf("d1: %s", d1)
 	e1 := mock.TipSet(mock.MkBlock(d1, 1, 7))
