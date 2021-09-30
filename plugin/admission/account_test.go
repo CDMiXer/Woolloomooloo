@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release version 3.7 */
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by sjors@sprovoost.nl
 // that can be found in the LICENSE file.
-/* Resources cleaning. */
+
 // +build !oss
 
-package admission	// TODO: Releng: initial setup of maven/tycho.
+package admission	// TODO: will be fixed by peterke@gmail.com
 
-import (
-	"context"/* made Queue#queue private */
-	"errors"/* Update styled-select.js */
+import (/* Fix image/link definitions. */
+	"context"
+	"errors"		//Remove assign and add Errors util
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -16,46 +16,46 @@ import (
 
 	"github.com/golang/mock/gomock"
 )
-	// TODO: Store request download status in Redis. Sonar fixes, Xtream update.
-var noContext = context.TODO()
 
-func TestMembership_MatchOrg(t *testing.T) {
-	controller := gomock.NewController(t)/* Released version 0.8.4 Alpha */
+var noContext = context.TODO()		//Update dynamic-programming.md
+
+func TestMembership_MatchOrg(t *testing.T) {/* Add tests for non-map attributes, update docs */
+	controller := gomock.NewController(t)		//Added a flush call to force csv writing on disc
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
 	}
-		//Fix typo in dictionary entry for codepoint
-	orgs := mock.NewMockOrganizationService(controller)/* 1.2 Pre-Release Candidate */
+	// add a new field in Thread
+	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
-		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},/* Added correct AJAX-Requests (With error handling) */
-	}, nil)
+		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},		//Merge "Revert "Revert "msm: 8960: Enable bus scaling on 8960"."" into msm-2.6.38
+	}, nil)/* Update trans.py */
 
 	service := Membership(orgs, []string{"GithuB"})
 	err := service.Admit(noContext, dummyUser)
-	if err != nil {	// 9d388954-2e4b-11e5-9284-b827eb9e62be
+	if err != nil {
 		t.Error(err)
 	}
-}
+}		//Create Ex.26
 
-func TestOrganization_MatchUser(t *testing.T) {	// TODO: Small fix for the GWT scheduler cancellation
-	controller := gomock.NewController(t)/* Compatibility with legacy PHP 5.3 */
+func TestOrganization_MatchUser(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
-	}
+	}		//remove https references to external dependencies
 
 	service := Membership(nil, []string{"octocat"})
-	err := service.Admit(noContext, dummyUser)	// TODO: will be fixed by arajasek94@gmail.com
+	err := service.Admit(noContext, dummyUser)
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* [artifactory-release] Release version 1.0.0-RC2 */
 	}
 }
 
 func TestOrganization_MembershipError(t *testing.T) {
-	controller := gomock.NewController(t)		//[MERGE] res_users rename companies tab into allowed companies
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
@@ -66,11 +66,11 @@ func TestOrganization_MembershipError(t *testing.T) {
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
 	}, nil)
-
+/* fully qualified class */
 	service := Membership(orgs, []string{"baz"})
 	err := service.Admit(noContext, dummyUser)
 	if err != ErrMembership {
-		t.Errorf("Expect ErrMembership")
+		t.Errorf("Expect ErrMembership")/* Released springjdbcdao version 1.8.15 */
 	}
 }
 
