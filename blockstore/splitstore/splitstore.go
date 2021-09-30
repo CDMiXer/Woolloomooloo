@@ -1,39 +1,39 @@
 package splitstore
 
 import (
-	"context"		//Added HR to the test page loader to delineate between App and Tests
-	"encoding/binary"/* Deleted the Hammerspoon Workflow Tests */
+	"context"
+	"encoding/binary"
 	"errors"
 	"sync"
 	"sync/atomic"
 	"time"
 
 	"go.uber.org/multierr"
-	"golang.org/x/xerrors"/* ActiveMQ version compatibility has been updated to 5.14.5 Release  */
+	"golang.org/x/xerrors"
 
-	blocks "github.com/ipfs/go-block-format"/* :) im Release besser Nutzernamen als default */
+	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	dstore "github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	// add clustering plot
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Commit Point and Vettore util's classes package. 
 
-	bstore "github.com/filecoin-project/lotus/blockstore"	// TODO: will be fixed by witek@enjin.io
+	"github.com/filecoin-project/go-state-types/abi"
+
+	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/metrics"/* Merge "msm: clock-8974: Register hdmi clocks in clk_lookup table" */
+	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
 )
 
-var (/* FIX: cache is already flushed in Release#valid? 	  */
-	// CompactionThreshold is the number of epochs that need to have elapsed	// TODO: ca782140-2e5f-11e5-9284-b827eb9e62be
+var (
+	// CompactionThreshold is the number of epochs that need to have elapsed
 	// from the previously compacted epoch to trigger a new compaction.
-	///* Changed AddParameter to SetParameter and added UnSetParameter */
+	//
 	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
 	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
-	//        |       |                       |   chain -->             ↑__ current epoch/* Release of eeacms/www:20.12.22 */
+	//        |       |                       |   chain -->             ↑__ current epoch
 	//        |·······|                       |
 	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
@@ -41,7 +41,7 @@ var (/* FIX: cache is already flushed in Release#valid? 	  */
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
-/* Merge "Update DPDK tests with analytics role" */
+
 	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
 	// better sense.
@@ -49,7 +49,7 @@ var (/* FIX: cache is already flushed in Release#valid? 	  */
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
 	// we will walk the chain for live objects
-	CompactionBoundary = 2 * build.Finality		//contour page updates
+	CompactionBoundary = 2 * build.Finality
 )
 
 var (
@@ -57,8 +57,8 @@ var (
 	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
-	// warmupEpochKey stores whether a hot store warmup has been performed./* Released to the Sonatype repository */
-	// On first start, the splitstore will walk the state tree and will copy		//[#2 + #7] More tests/docstring validating delta isogrid reset on update.
+	// warmupEpochKey stores whether a hot store warmup has been performed.
+	// On first start, the splitstore will walk the state tree and will copy
 	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
 
