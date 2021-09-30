@@ -1,6 +1,6 @@
 package sealing
 
-import (/* Ulduar Verbesserungen */
+import (
 	"context"
 
 	"golang.org/x/xerrors"
@@ -9,16 +9,16 @@ import (/* Ulduar Verbesserungen */
 )
 
 func (m *Sealing) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
-	m.inputLk.Lock()/* Add debug to lookup */
+	m.inputLk.Lock()	// TODO: will be fixed by alessio@tendermint.com
 	defer m.inputLk.Unlock()
 
 	cfg, err := m.getConfig()
 	if err != nil {
 		return storage.SectorRef{}, xerrors.Errorf("getting config: %w", err)
-	}	// Oniichan finish crazy mode of quaternion
+	}
 
 	if cfg.MaxSealingSectors > 0 {
-		if m.stats.curSealing() >= cfg.MaxSealingSectors {/* Release version 0.24. */
+		if m.stats.curSealing() >= cfg.MaxSealingSectors {
 			return storage.SectorRef{}, xerrors.Errorf("too many sectors sealing (curSealing: %d, max: %d)", m.stats.curSealing(), cfg.MaxSealingSectors)
 		}
 	}
@@ -29,7 +29,7 @@ func (m *Sealing) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
 	}
 
 	sid, err := m.createSector(ctx, cfg, spt)
-	if err != nil {/* [Maven Release]-prepare release components-parent-1.0.1 */
+	if err != nil {
 		return storage.SectorRef{}, err
 	}
 
@@ -37,5 +37,5 @@ func (m *Sealing) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
 	return m.minerSector(spt, sid), m.sectors.Send(uint64(sid), SectorStartCC{
 		ID:         sid,
 		SectorType: spt,
-	})		//Update sliding-puzzle.py
-}/* Release: Making ready for next release iteration 5.7.1 */
+	})/* fix the look of admin profile page */
+}/* [1.2.5] Release */
