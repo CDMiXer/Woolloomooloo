@@ -1,5 +1,5 @@
-*.pyc	// Create cs_page.c
+*.pyc
 /.pulumi/
 /dist/
-/*.egg-info/* Rename Value.value to Value.name. */
+/*.egg-info
 venv/
