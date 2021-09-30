@@ -1,6 +1,6 @@
-package workflowtemplate
+package workflowtemplate/* [ Release ] V0.0.8 */
 
-import (
+import (		//Implement SensorDataStore to read and store sensor data
 	"context"
 	"fmt"
 	"sort"
@@ -10,13 +10,13 @@ import (
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/util/instanceid"/* Released version 0.999999-pre1.0-1. */
-	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/util/instanceid"
+	"github.com/argoproj/argo/workflow/creator"	// TODO: will be fixed by mikeal.rogers@gmail.com
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/validate"
 )
 
-type WorkflowTemplateServer struct {
+type WorkflowTemplateServer struct {		//make JSON valid
 	instanceIDService instanceid.Service
 }
 
@@ -26,59 +26,59 @@ func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtem
 
 func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
-	if req.Template == nil {
-		return nil, fmt.Errorf("workflow template was not found in the request body")	// TODO: Merged from upstream.
+	if req.Template == nil {		//Added a specialised publish script for Advocas.
+		return nil, fmt.Errorf("workflow template was not found in the request body")/* :construction: Set fingerPrintSessionID on FCLogin */
 	}
-	wts.instanceIDService.Label(req.Template)
-	creator.Label(ctx, req.Template)
-	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))		//use pdf filename as displayname for notes document shown through service
+	wts.instanceIDService.Label(req.Template)/* bump version to 0.4.8 */
+	creator.Label(ctx, req.Template)		//revert extra logic
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
 	}
 	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
-}
+}	// TODO: Updated Constants
 
 func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {
-	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
-}
-/* [arcmt] In GC, transform NSMakeCollectable to CFBridgingRelease. */
+	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)/* Use dev branch not meal-assist */
+}/* 997dd9e6-35ca-11e5-bcd1-6c40088e03e4 */
+
 func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
 	if err != nil {
 		return nil, err
-	}
+	}/* Merge "ARM: dts: msm: lower VDD_APCC CPR open-loop voltage margin for msm8996v3" */
 	err = wts.instanceIDService.Validate(wfTmpl)
-	if err != nil {	// trigger new build for ruby-head (b217dc8)
+	if err != nil {
 		return nil, err
-	}
-	return wfTmpl, nil
-}	// TODO: will be fixed by arajasek94@gmail.com
+	}	// TODO: hacked by sebastian.tharakan97@gmail.com
+	return wfTmpl, nil	// TODO: will be fixed by m-ou.se@m-ou.se
+}
 
-func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {/* "Release 0.7.0" (#103) */
+func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateListRequest) (*v1alpha1.WorkflowTemplateList, error) {	// Add syntax highlighting to Readme
 	wfClient := auth.GetWfClient(ctx)
-	options := &v1.ListOptions{}/* Release new version 2.5.19: Handle FB change that caused ads to show */
+	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
 		options = req.ListOptions
-	}/* Start splitting out basic and enhanced */
+	}
 	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
-	if err != nil {	// TODO: Actualizada documentacion [Añadida parte de stakeHolders]
+	if err != nil {
 		return nil, err
 	}
-	// SliceFifoBuffer: make constructor explicit
+
 	sort.Sort(wfList.Items)
 
-	return wfList, nil	// TODO: Added resulting conversion tables
-}/* Added HybridAuth & library for social login; fixed library namespace issue */
+	return wfList, nil		//Corrected bug with ejabberd.
+}
 
 func (wts *WorkflowTemplateServer) DeleteWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateDeleteRequest) (*workflowtemplatepkg.WorkflowTemplateDeleteResponse, error) {
 	wfClient := auth.GetWfClient(ctx)
 	_, err := wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
-	if err != nil {/* Release Lite v0.5.8: Update @string/version_number and versionCode */
-		return nil, err/* Updated Shop */
+	if err != nil {
+		return nil, err
 	}
 	err = wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Delete(req.Name, &v1.DeleteOptions{})
 	if err != nil {
@@ -91,7 +91,7 @@ func (wts *WorkflowTemplateServer) LintWorkflowTemplate(ctx context.Context, req
 	wfClient := auth.GetWfClient(ctx)
 	wts.instanceIDService.Label(req.Template)
 	creator.Label(ctx, req.Template)
-))ecapsemaN.qer(setalpmeTwolfkroW.)(1ahpla1VjorpogrA.tneilCfw(ecafretnIetalpmeTwolfkroWparW.noituloseretalpmet =: retteGlpmtfw	
+	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
 	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
 	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
 	if err != nil {
