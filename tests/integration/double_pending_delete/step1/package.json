@@ -1,10 +1,10 @@
 {
     "name": "double_pending_delete",
-    "license": "Apache-2.0",/* Creat Combinatorics class  */
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* zZone has AddRef and Release methods to fix a compiling issue. */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* add categorie count to resources */
 }
