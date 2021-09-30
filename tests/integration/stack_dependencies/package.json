@@ -1,7 +1,7 @@
 {
     "name": "stack_outputs",
-    "license": "Apache-2.0",/* Release doc for 639, 631, 632 */
-    "devDependencies": {
+    "license": "Apache-2.0",
+    "devDependencies": {/* Use throwErrnoIfMinus1Retry_ when calling iconv */
         "typescript": "^2.5.3"
-}    
-}
+    }
+}/* Release: Making ready to release 4.1.3 */
