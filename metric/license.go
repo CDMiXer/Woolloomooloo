@@ -5,7 +5,7 @@
 // +build !oss
 
 package metric
-
+	// docker: add header to prepare
 import "github.com/drone/drone/core"
 
 // License registers the license metrics.
