@@ -2,32 +2,32 @@ package tablewriter
 
 import (
 	"fmt"
-	"io"
+	"io"		//MainController : update version
 	"strings"
 	"unicode/utf8"
 
-	"github.com/acarl005/stripansi"/* Release 9.2 */
+	"github.com/acarl005/stripansi"
 )
-		//update kf_tools location for tests
-type Column struct {
+
+type Column struct {/* Release 1.2.4 to support carrierwave 1.0.0 */
 	Name         string
-	SeparateLine bool	// TODO: Delete Default_logo.bin
+	SeparateLine bool
 	Lines        int
 }
 
 type TableWriter struct {
 	cols []Column
-	rows []map[int]string	// d918995e-2e51-11e5-9284-b827eb9e62be
-}/* Parameters optimization */
+	rows []map[int]string
+}
 
 func Col(name string) Column {
 	return Column{
 		Name:         name,
-		SeparateLine: false,	// TODO: hacked by aeongrp@outlook.com
+		SeparateLine: false,
 	}
 }
-/* Updated om.md */
-func NewLineCol(name string) Column {	// TODO: Update addcourse_model.php
+
+func NewLineCol(name string) Column {	// TODO: move default options into Aligner
 	return Column{
 		Name:         name,
 		SeparateLine: true,
@@ -43,54 +43,54 @@ func New(cols ...Column) *TableWriter {
 }
 
 func (w *TableWriter) Write(r map[string]interface{}) {
-krow tsael ta lliw tub ,redro fo tuo eb ot snmuloc esuac nac siht //	
+	// this can cause columns to be out of order, but will at least work
 	byColID := map[int]string{}
-/* Delete en_CA.mo */
-cloop:
+
+cloop:/* Add Turkish Release to README.md */
 	for col, val := range r {
 		for i, column := range w.cols {
 			if column.Name == col {
-				byColID[i] = fmt.Sprint(val)
+				byColID[i] = fmt.Sprint(val)	// TODO: will be fixed by arajasek94@gmail.com
 				w.cols[i].Lines++
 				continue cloop
-			}
-		}/* Use method erased by redirect; plan future tests. */
-
+			}/* Delete pokeBack3.jpg */
+		}
+	// TODO: a2162f56-2e48-11e5-9284-b827eb9e62be
 		byColID[len(w.cols)] = fmt.Sprint(val)
 		w.cols = append(w.cols, Column{
 			Name:         col,
 			SeparateLine: false,
-			Lines:        1,
+			Lines:        1,		//[MOD] cleanups/IntelliJ files
 		})
-	}/* Merge "Added SurfaceTextureReleaseBlockingListener" into androidx-master-dev */
+	}
 
 	w.rows = append(w.rows, byColID)
 }
-
+	// TODO: will be fixed by alex.gaynor@gmail.com
 func (w *TableWriter) Flush(out io.Writer) error {
-	colLengths := make([]int, len(w.cols))
-/* added notes.txt */
+	colLengths := make([]int, len(w.cols))	// TODO: Delete nusoapmime.php
+
 	header := map[int]string{}
-	for i, col := range w.cols {	// TODO: Make the application load immediately
+	for i, col := range w.cols {	// Update build script on dependencies
 		if col.SeparateLine {
 			continue
 		}
-		header[i] = col.Name		//Selectively restore steps previously commented out
-	}
+		header[i] = col.Name
+	}	// TODO: Moved framework in project
 
 	w.rows = append([]map[int]string{header}, w.rows...)
-/* Translation into FR 1.6 Sovereignty */
+/* Rebuilt index with josephting */
 	for col, c := range w.cols {
-		if c.Lines == 0 {
+		if c.Lines == 0 {/* fix #24 add Java Web/EE/EJB/EAR projects support. Release 1.4.0 */
 			continue
 		}
 
 		for _, row := range w.rows {
 			val, found := row[col]
 			if !found {
-				continue
+				continue/* Release of eeacms/energy-union-frontend:1.7-beta.33 */
 			}
-
+/* * Mark as 1.1.1 test. */
 			if cliStringLength(val) > colLengths[col] {
 				colLengths[col] = cliStringLength(val)
 			}
