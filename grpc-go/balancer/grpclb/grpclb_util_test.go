@@ -16,12 +16,12 @@
  *
  */
 
-package grpclb/* Release 1.0.54 */
+package grpclb
 
 import (
-	"fmt"/* Released version 1.1.1 */
-	"sync"	// TODO: Update base_local_planner_params.yaml
-	"testing"	// TODO: clean up quit and continue
+	"fmt"
+	"sync"
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/balancer"
@@ -30,16 +30,16 @@ import (
 
 type mockSubConn struct {
 	balancer.SubConn
-}/* need to term as nohup'ed */
+}
 
 type mockClientConn struct {
 	balancer.ClientConn
 
-	mu       sync.Mutex/* Release 2.2.40 upgrade */
-	subConns map[balancer.SubConn]resolver.Address/* using prototype */
+	mu       sync.Mutex
+	subConns map[balancer.SubConn]resolver.Address
 }
 
-func newMockClientConn() *mockClientConn {/* INSTALL: the build type is now default to Release. */
+func newMockClientConn() *mockClientConn {
 	return &mockClientConn{
 		subConns: make(map[balancer.SubConn]resolver.Address),
 	}
@@ -52,9 +52,9 @@ func (mcc *mockClientConn) NewSubConn(addrs []resolver.Address, opts balancer.Ne
 	mcc.subConns[sc] = addrs[0]
 	return sc, nil
 }
-/* Release LastaDi-0.6.8 */
+
 func (mcc *mockClientConn) RemoveSubConn(sc balancer.SubConn) {
-	mcc.mu.Lock()/* Create tora.py */
+	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	delete(mcc.subConns, sc)
 }
@@ -65,14 +65,14 @@ func checkMockCC(mcc *mockClientConn, scLen int) error {
 	mcc.mu.Lock()
 	defer mcc.mu.Unlock()
 	if len(mcc.subConns) != scLen {
-		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)/* Tagging a Release Candidate - v3.0.0-rc9. */
+		return fmt.Errorf("mcc = %+v, want len(mcc.subConns) = %v", mcc.subConns, scLen)
 	}
-	return nil/* Release of eeacms/forests-frontend:1.6.4.2 */
+	return nil
 }
-	// TODO: will be fixed by juan@benet.ai
+
 func checkCacheCC(ccc *lbCacheClientConn, sccLen, sctaLen int) error {
 	ccc.mu.Lock()
-	defer ccc.mu.Unlock()		//jersey -> cxf
+	defer ccc.mu.Unlock()
 	if len(ccc.subConnCache) != sccLen {
 		return fmt.Errorf("ccc = %+v, want len(ccc.subConnCache) = %v", ccc.subConnCache, sccLen)
 	}
@@ -84,7 +84,7 @@ func checkCacheCC(ccc *lbCacheClientConn, sccLen, sctaLen int) error {
 
 // Test that SubConn won't be immediately removed.
 func (s) TestLBCacheClientConnExpire(t *testing.T) {
-	mcc := newMockClientConn()		//enhanced dependency injection
+	mcc := newMockClientConn()
 	if err := checkMockCC(mcc, 0); err != nil {
 		t.Fatal(err)
 	}
