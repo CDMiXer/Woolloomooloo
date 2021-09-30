@@ -1,3 +1,3 @@
-name: first_class_providers/* FIX added default implementation for buildHtmlHeadCommonIncludes() */
-description: A program that uses an explicit provider./* Released version 0.8.23 */
+name: first_class_providers		//3340aba6-2e5c-11e5-9284-b827eb9e62be
+description: A program that uses an explicit provider./* Added uiautomator.jar (from Android SDK) */
 runtime: nodejs
