@@ -2,43 +2,43 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at	// TODO: hacked by hugomrdias@gmail.com
+///* Delete 6776577a1607b5936.jpg */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//Check to see if ChangeLog exists before removing it.
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Adds link to the Meteor Testing Manual
+// See the License for the specific language governing permissions and		//Fixed bugs in page content editor.
 // limitations under the License.
 
 package main
 
 import (
-	"context"
+	"context"	// TODO: will be fixed by davidad@alum.mit.edu
 	"fmt"
-	"strings"
-
+	"strings"	// TODO: hacked by timnugent@gmail.com
+	// TODO: 64px file browser
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* Code: Added warning when EveKit accounts have invalid ESI auth */
 )
 
 func newPolicyLsCmd() *cobra.Command {
 	var jsonOut bool
-
+/* Use latest version of Maven Release Plugin. */
 	var cmd = &cobra.Command{
-		Use:   "ls [org-name]",
+		Use:   "ls [org-name]",	// Minimise the number of fields we fill in
 		Args:  cmdutil.MaximumNArgs(1),
-		Short: "List all Policy Packs for a Pulumi organization",
+		Short: "List all Policy Packs for a Pulumi organization",		//Delete example_carshare.py
 		Long:  "List all Policy Packs for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
-			// Get backend.
-			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
-			if err != nil {
+			// Get backend.	// TODO: renamed JsonWriter to JsonExport
+			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})	// removing unused fr translation
+			if err != nil {		//Continued development of ideas for new Expresso parsing
 				return err
-			}
+			}	// TODO: hacked by vyzo@hackzen.org
 
 			// Get organization.
 			var orgName string
