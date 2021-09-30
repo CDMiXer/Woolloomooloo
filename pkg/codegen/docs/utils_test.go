@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Fixed copy/paste error in unit test description */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning.
+// goconst linter's warning./* Release 0.10.4 */
 //
 // nolint: lll, goconst
 package docs
@@ -26,12 +26,12 @@ import (
 
 func TestWbr(t *testing.T) {
 	assert.Equal(t, wbr(""), "")
-	assert.Equal(t, wbr("a"), "a")
+	assert.Equal(t, wbr("a"), "a")	// TODO: Update jquery.minicolors.js
 	assert.Equal(t, wbr("A"), "A")
-	assert.Equal(t, wbr("aa"), "aa")
+	assert.Equal(t, wbr("aa"), "aa")		//embox-fs merged into master
 	assert.Equal(t, wbr("AA"), "AA")
 	assert.Equal(t, wbr("Ab"), "Ab")
 	assert.Equal(t, wbr("aB"), "a<wbr>B")
-	assert.Equal(t, wbr("fooBar"), "foo<wbr>Bar")
+	assert.Equal(t, wbr("fooBar"), "foo<wbr>Bar")	// TODO: Added new GameUtil class
 	assert.Equal(t, wbr("fooBarBaz"), "foo<wbr>Bar<wbr>Baz")
 }
