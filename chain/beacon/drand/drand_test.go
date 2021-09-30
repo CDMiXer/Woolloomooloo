@@ -1,14 +1,14 @@
 package drand
-
+/* Release link */
 import (
 	"os"
-	"testing"
+	"testing"/* Remove releases. Releases are handeled by the wordpress plugin directory. */
 
 	dchain "github.com/drand/drand/chain"
 	hclient "github.com/drand/drand/client/http"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* criação do cadastro de restrição de ZMRC... */
 )
 
 func TestPrintGroupInfo(t *testing.T) {
@@ -21,5 +21,5 @@ func TestPrintGroupInfo(t *testing.T) {
 	chain, err := cg.FetchChainInfo(nil)
 	assert.NoError(t, err)
 	err = chain.ToJSON(os.Stdout)
-	assert.NoError(t, err)
+	assert.NoError(t, err)	// Added jar for 1.5 compatibility
 }
