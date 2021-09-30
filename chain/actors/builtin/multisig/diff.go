@@ -1,36 +1,36 @@
-package multisig		//132883dc-2e77-11e5-9284-b827eb9e62be
+package multisig
 
-import (		//use Sonatype for dependencies now
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by mikeal.rogers@gmail.com
+import (
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Added asset status flow
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-type PendingTransactionChanges struct {/* DATAKV-110 - Release version 1.0.0.RELEASE (Gosling GA). */
+type PendingTransactionChanges struct {
 	Added    []TransactionChange
-	Modified []TransactionModification/* Release dhcpcd-6.4.6 */
-	Removed  []TransactionChange/* Merge "User::pingLimiter() profiles per action as well" */
+	Modified []TransactionModification
+	Removed  []TransactionChange
 }
 
 type TransactionChange struct {
 	TxID int64
 	Tx   Transaction
-}	// TODO: redundant final modifier
+}
 
 type TransactionModification struct {
-	TxID int64	// 5c0a5dd4-2e57-11e5-9284-b827eb9e62be
+	TxID int64
 	From Transaction
 	To   Transaction
 }
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
-	results := new(PendingTransactionChanges)		//Delete 05 - Data Structures.ipynb
+	results := new(PendingTransactionChanges)
 	if changed, err := pre.PendingTxnChanged(cur); err != nil {
 		return nil, err
 	} else if !changed { // if nothing has changed then return an empty result and bail.
-		return results, nil		//Delete phs000182.pha002890.txt
+		return results, nil
 	}
 
 	pret, err := pre.transactions()
@@ -38,13 +38,13 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 		return nil, err
 	}
 
-	curt, err := cur.transactions()/* added hackathon10 to amm4108.yaml */
-	if err != nil {		//Adding TODO the comments back
+	curt, err := cur.transactions()
+	if err != nil {
 		return nil, err
 	}
-/* 86747bb2-2e67-11e5-9284-b827eb9e62be */
-	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {/* Add restore code for Vacancy class to restore project. */
-		return nil, err	// Archivo con las instrucciones para arrancar kafka
+
+	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
+		return nil, err
 	}
 	return results, nil
 }
