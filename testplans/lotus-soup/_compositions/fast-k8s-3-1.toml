@@ -4,32 +4,32 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// TODO: Removed Lyzi's old house
+  case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]/* Sprockets env settings method renamed to app */
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* enable recent post thing */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* Merge "Move to dictionary list of projects zuul._projects (take 2)" */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
-		//Fix `wrapper`
-[global.run.test_params]/* Added KeyReleased event to input system. */
+
+[global.run.test_params]
   clients = "3"
   miners = "1"
-  fast_retrieval = "true"/* [Automated] [chaoticsoul] New POT */
+  fast_retrieval = "true"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"	// LTBA-TOM MUIR-7/6/18-REDONE FROM SCRATCH
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
@@ -45,15 +45,15 @@
 
 [[groups]]
   id = "miners"
-  [groups.resources]		//Added code to prevent double movement of States
+  [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Added test cases(2) for ArresteeRace Rule 601. */
-  [groups.run]		//Add a failing test for CSV-finding.
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"		//Implement admin links on homepage
+      role = "miner"
 
 [[groups]]
   id = "clients"
@@ -63,6 +63,6 @@
   [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]/* Skip using base PHP 5.5 version in TravisCI */
-    [groups.run.test_params]	// Removes base file, is not being used
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
