@@ -1,7 +1,7 @@
 {
     "name": "stack_outputs",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Release doc for 639, 631, 632 */
     "devDependencies": {
         "typescript": "^2.5.3"
-    }
+}    
 }
