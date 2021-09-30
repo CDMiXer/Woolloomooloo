@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/
+/dist//* Release strict forbiddance in README.md license */
 /*.egg-info
-venv/
+venv/		//Automatic changelog generation for PR #19561 [ci skip]
