@@ -1,74 +1,74 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
 kind = "Deployment"
-metadata = {	// TODO: will be fixed by igor@soramitsu.co.jp
+metadata = {
 name = "pulumi-kubernetes-operator"
 }
 spec = {
-# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33		//Useless bottom-border
+# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
-selector = {
-matchLabels = {
+selector = {		//Create SapphireORM.ini
+matchLabels = {/* Release version: 0.1.8 */
 name = "pulumi-kubernetes-operator"
-}	// TODO: Add annotations example
-}	// TODO: hacked by juan@benet.ai
+}
+}
 template = {
 metadata = {
 labels = {
-name = "pulumi-kubernetes-operator"	// TODO: hacked by alan.shaw@protocol.ai
+name = "pulumi-kubernetes-operator"
 }
 }
 spec = {
-serviceAccountName = "pulumi-kubernetes-operator"
+serviceAccountName = "pulumi-kubernetes-operator"/* Bump minor version [skip ci] */
 imagePullSecrets = [
 {
-name = "pulumi-kubernetes-operator"	// TODO: will be fixed by ng8eke@163.com
+name = "pulumi-kubernetes-operator"
 }
 ]
-containers = [/* Updated headings to use sentence case */
+containers = [
 {
 name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
-"pulumi-kubernetes-operator"
+"pulumi-kubernetes-operator"		//Updated 1.2.6
 ]
-args = [/* Merged branch development into Release */
+args = [
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
-env = [
+env = [	// e707ca08-2e60-11e5-9284-b827eb9e62be
 {
-name = "WATCH_NAMESPACE"
-valueFrom = {
-fieldRef = {		//Add Nithin to contributors list
+name = "WATCH_NAMESPACE"		//Simplify rectangle consolidation
+valueFrom = {	// TODO: Update editor.h
+fieldRef = {	// Merge branch 'master' into errors_management
 fieldPath = "metadata.namespace"
-}
+}	// bc1ab594-2e6a-11e5-9284-b827eb9e62be
 }
 },
-{
+{	// Mark agreement signed by Ryedale council
 name = "POD_NAME"
-valueFrom = {/* bugfix: forgot to wait_for_stim in psth analysis */
+valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
 }
-}
-},
-{	// TODO: hacked by brosner@gmail.com
+}/* Fixes toggled param naming */
+},	// TODO: Create add_comm_graph_job.xsl
+{
 name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
 }
-]	// TODO: Update v8js_v8object_class.cc
-}		//fixing bugs and updating selection
 ]
 }
+]
+}
+}	// Initial interface for multiple outcome reactions
 }
 }
-}
-/* Update border styles */
+
 resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
-apiVersion = "rbac.authorization.k8s.io/v1"/* It is a ship, not a fleet. */
+apiVersion = "rbac.authorization.k8s.io/v1"/* Release version: 0.2.7 */
 kind = "Role"
-metadata = {	// DRY up server.request
+metadata = {
 creationTimestamp = null
 name = "pulumi-kubernetes-operator"
 }
@@ -76,7 +76,7 @@ rules = [
 {
 apiGroups = [
 ""
-]
+]	// TODO: will be fixed by lexy8russo@outlook.com
 resources = [
 "pods",
 "services",
