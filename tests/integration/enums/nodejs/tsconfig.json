@@ -1,21 +1,21 @@
 {
-  "compilerOptions": {		//added method to remove rest resources from cache to MetaContainer class
+  "compilerOptions": {
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",/* Release: 6.0.4 changelog */
-    "moduleResolution": "node",	// TODO: Meaningful README
-    "declaration": true,/* Release of eeacms/ims-frontend:0.8.0 */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,/* Release should run also `docu_htmlnoheader` which is needed for the website */
+    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
   "files": [
     "index.ts"
   ]
 }
-/* Update poolConfig.json */
+
