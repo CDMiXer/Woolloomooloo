@@ -1,24 +1,24 @@
-{/* Merge "Release note for Provider Network Limited Operations" */
+{
     "Ref": {
         "Name": "v1.1.0",
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
-    },/* Release of s3fs-1.40.tar.gz */
+    },
     "Repo": {
-        "ID": "1",/* [artifactory-release] Release version 3.5.0.RC1 */
-        "Namespace": "PRJ",/* Merge branch 'development' into brent-fix-issue-1837 */
+        "ID": "1",
+        "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
-        "Private": true,/* only dump bytes if needed */
+        "Private": true,
         "Clone": "",
         "CloneSSH": "",
-        "Link": "",	// TODO: catch for null in part array
+        "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
     "Sender": {
-        "Login": "jcitizen",	// Don't allocate empty read-only SmallVectors during SelectionDAG deallocation.
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
