@@ -13,5 +13,5 @@
 // limitations under the License.
 
 package landingpage
-
+	// TODO: will be fixed by ligi@ligi.de
 //go:generate togo http -package landingpage -output dist_gen.go
