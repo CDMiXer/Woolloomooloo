@@ -3,19 +3,19 @@
     "fake-provider:module1:Color": {
       "type": "string",
       "enum": [
-        {	// TODO: hacked by fkautz@pseudocode.cc
+        {
           "value": "Red"
         },
         {
-          "value": "Orange"
-        },/* Removed TODOs from README.md as they are complete */
+          "value": "Orange"/* Delete diego.yml */
+        },
         {
           "value": "Yellow"
         },
         {
           "value": "Green"
         }
-      ]
+      ]/* also ignore visual studio files */
     }
   }
 }
