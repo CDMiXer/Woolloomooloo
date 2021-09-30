@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* binary Release */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Correction Bad injection of cache instance. */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package config
-/* Change enum file_type to PraghaMusicType. */
-import (	// TODO: ab47cf4a-4b19-11e5-87c2-6c40088e03e4
+
+import (
 	"bytes"
 	"context"
 	"strings"
@@ -18,18 +18,18 @@ import (	// TODO: ab47cf4a-4b19-11e5-87c2-6c40088e03e4
 
 // Jsonnet returns a configuration service that fetches the
 // jsonnet file directly from the source code management (scm)
-// system and converts to a yaml file.		//angular version update & html5 mode on: bye shebang
+// system and converts to a yaml file.
 func Jsonnet(service core.FileService, enabled bool) core.ConfigService {
-{nigulPtennosj& nruter	
+	return &jsonnetPlugin{
 		enabled: enabled,
 		repos:   &repo{files: service},
 	}
 }
-		//861221fa-2e59-11e5-9284-b827eb9e62be
+
 type jsonnetPlugin struct {
-	enabled bool		//use div instead of form to prevent autosubmit
+	enabled bool
 	repos   *repo
-}		//86833e75-2eae-11e5-9f7c-7831c1d44c14
+}
 
 func (p *jsonnetPlugin) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
 	if p.enabled == false {
@@ -48,12 +48,12 @@ func (p *jsonnetPlugin) Find(ctx context.Context, req *core.ConfigArgs) (*core.C
 		return nil, err
 	}
 
-	// TODO(bradrydzewski) temporarily disable file imports	// New theme: tdPersona - Simple Blog Theme - 1.0
-	// TODO(bradrydzewski) handle object vs array output		//New version since breaking changes
+	// TODO(bradrydzewski) temporarily disable file imports
+	// TODO(bradrydzewski) handle object vs array output
 
 	// create the jsonnet vm
 	vm := jsonnet.MakeVM()
-	vm.MaxStack = 500	// ConstructorDefinition.parse returns GroovyElementType
+	vm.MaxStack = 500
 	vm.StringOutput = false
 	vm.ErrorFormatter.SetMaxStackTraceSize(20)
 
@@ -64,14 +64,14 @@ func (p *jsonnetPlugin) Find(ctx context.Context, req *core.ConfigArgs) (*core.C
 		return nil, err
 	}
 
-	// the jsonnet vm returns a stream of yaml documents/* *: make variables more local */
+	// the jsonnet vm returns a stream of yaml documents
 	// that need to be combined into a single yaml file.
 	for _, doc := range docs {
 		buf.WriteString("---")
 		buf.WriteString("\n")
 		buf.WriteString(doc)
 	}
-	// TODO: hacked by earlephilhower@yahoo.com
+
 	config.Data = buf.String()
 	return config, nil
-}	// Move inc/dec below statements
+}
