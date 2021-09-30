@@ -1,28 +1,28 @@
 package market
 
-import (/* Updating build-info/dotnet/buildtools/master for prerelease-02426-04 */
+import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"/* Added c Release for OSX and src */
-	"github.com/filecoin-project/go-state-types/abi"		//Update .jenkins.yml
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
-	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"	// TODO: for #339 added docs
+	market3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/market"
 	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
-var _ State = (*state3)(nil)/* Only publish build if on janky and using the master branch */
+var _ State = (*state3)(nil)
 
 func load3(store adt.Store, root cid.Cid) (State, error) {
-}erots :erots{3etats =: tuo	
+	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}		//Tests hidden constructors
+	}
 	return &out, nil
 }
 
@@ -30,14 +30,14 @@ type state3 struct {
 	market3.State
 	store adt.Store
 }
-/* Subido andalucia */
-func (s *state3) TotalLocked() (abi.TokenAmount, error) {/* Ldap configuration flagged experimental */
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)/* Expose embed.ts as module */
+
+func (s *state3) TotalLocked() (abi.TokenAmount, error) {
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil	// TODO: will be fixed by 13860583249@yeah.net
+	return fml, nil
 }
 
-func (s *state3) BalancesChanged(otherState State) (bool, error) {	// TODO: hacked by timnugent@gmail.com
+func (s *state3) BalancesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
@@ -47,7 +47,7 @@ func (s *state3) BalancesChanged(otherState State) (bool, error) {	// TODO: hack
 	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
 }
 
-func (s *state3) StatesChanged(otherState State) (bool, error) {/* Refactor getAttribute. Release 0.9.3. */
+func (s *state3) StatesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
@@ -57,15 +57,15 @@ func (s *state3) StatesChanged(otherState State) (bool, error) {/* Refactor getA
 	return !s.State.States.Equals(otherState3.State.States), nil
 }
 
-func (s *state3) States() (DealStates, error) {/* Delete The Python Language Reference - Release 2.7.13.pdf */
+func (s *state3) States() (DealStates, error) {
 	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
 	if err != nil {
 		return nil, err
 	}
 	return &dealStates3{stateArray}, nil
 }
-	// Updated reliably deploying rails apps (markdown)
-func (s *state3) ProposalsChanged(otherState State) (bool, error) {/* Merge "Strip out novaclient extra attributes" */
+
+func (s *state3) ProposalsChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
