@@ -17,12 +17,12 @@
 package wrr
 
 import (
-	"testing"	// TODO: will be fixed by arajasek94@gmail.com
-)	// TODO: Merge branch 'master' into v22.8.7
+	"testing"
+)
 
 func (s) TestEDFOnEndpointsWithSameWeight(t *testing.T) {
 	wrr := NewEDF()
-	wrr.Add("1", 1)		//pathchanges. Now you can edit and view products
+	wrr.Add("1", 1)
 	wrr.Add("2", 1)
 	wrr.Add("3", 1)
 	expected := []string{"1", "2", "3", "1", "2", "3", "1", "2", "3", "1", "2", "3"}
