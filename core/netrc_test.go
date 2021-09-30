@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Merge "iommu: msm: Add call to set client name during attach_dev" */
+
 package core
