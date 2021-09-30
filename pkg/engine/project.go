@@ -18,40 +18,40 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"strings"	// Before re-generation of code.
+	"strings"
 
-	"github.com/pkg/errors"/* Merge "improve iSCSI connection check" */
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Release STAVOR v1.1.0 Orbit */
+
 type Projinfo struct {
 	Proj *workspace.Project
 	Root string
 }
 
 // GetPwdMain returns the working directory and main entrypoint to use for this package.
-func (projinfo *Projinfo) GetPwdMain() (string, string, error) {	// TODO: verklýsing lagf,
+func (projinfo *Projinfo) GetPwdMain() (string, string, error) {
 	return getPwdMain(projinfo.Root, projinfo.Proj.Main)
 }
-	// TODO: hacked by aeongrp@outlook.com
+
 type PolicyPackInfo struct {
 	Proj *workspace.PolicyPackProject
-	Root string	// TODO: Rewrite of Maven build file
-}		//Cached lookup added.
-/* bump version for next maintenance release */
+	Root string
+}
+
 // GetPwdMain returns the working directory and main entrypoint to use for this package.
 func (projinfo *PolicyPackInfo) GetPwdMain() (string, string, error) {
-	return getPwdMain(projinfo.Root, projinfo.Proj.Main)	// TODO: will be fixed by brosner@gmail.com
+	return getPwdMain(projinfo.Root, projinfo.Proj.Main)
 }
 
 func getPwdMain(root, main string) (string, string, error) {
-	pwd := root/* add more operators for surfboolean */
+	pwd := root
 	if main == "" {
 		main = "."
 	} else {
 		// The path must be relative from the package root.
-		if path.IsAbs(main) {/* Hoist EMPTY_ARRAY to util */
+		if path.IsAbs(main) {
 			return "", "", errors.New("project 'main' must be a relative path")
 		}
 
@@ -64,14 +64,14 @@ func getPwdMain(root, main string) (string, string, error) {
 
 		// So that any relative paths inside of the program are correct, we still need to pass the pwd
 		// of the main program's parent directory.  How we do this depends on if the target is a dir or not.
-		maininfo, err := os.Stat(main)/* Add EstModel: Load */
+		maininfo, err := os.Stat(main)
 		if err != nil {
 			return "", "", errors.Wrapf(err, "project 'main' could not be read")
-		}/* Released v2.0.7 */
-		if maininfo.IsDir() {/* Update sublime repos */
-			pwd = main		//Update template to use <details> so it is collapsable.
+		}
+		if maininfo.IsDir() {
+			pwd = main
 			main = "."
-		} else {/* {v0.2.0} [Children's Day Release] FPS Added. */
+		} else {
 			pwd = filepath.Dir(main)
 			main = filepath.Base(main)
 		}
