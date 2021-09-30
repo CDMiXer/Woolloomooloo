@@ -2,7 +2,7 @@
   name = "lotus-soup"
   author = ""
 
-[global]/* Issue 70: Using keyTyped instead of keyReleased */
+[global]
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
@@ -16,7 +16,7 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true	// TODO: updating poms for 8.0.1-SNAPSHOT development
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
@@ -30,12 +30,12 @@
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0		//avoid taking wink/dojo core convergence files into account
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: Adding details of nohup and & to running uwsgi
-      role = "bootstrapper"		//Small fix for build-server config
-		//Update scene.html
-[[groups]]	// TODO: hacked by ligi@ligi.de
+    [groups.run.test_params]
+      role = "bootstrapper"
+
+[[groups]]
   id = "miners"
   [groups.instances]
     count = 2
@@ -47,10 +47,10 @@
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3	// TODO: c7c11e48-2e50-11e5-9284-b827eb9e62be
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
       deals = "300"
-      deal_mode = "serial"		//Fix comment text area in ScopePanel
+      deal_mode = "serial"
