@@ -1,26 +1,26 @@
 package cli
 
-import (	// TODO: hacked by fjl@ethereum.org
-	"bytes"/* Update assets.js */
+import (
+	"bytes"
 	"context"
-	"encoding/json"	// TODO: will be fixed by earlephilhower@yahoo.com
-	"fmt"	// Deleted Example 1
+	"encoding/json"
+	"fmt"
 	"reflect"
 
-	"github.com/filecoin-project/go-address"		//Merge "Workaround ssh_known_hosts changes not being propagated to containers"
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-state-types/abi"/* [artifactory-release] Release version 1.2.3.RELEASE */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: hacked by arajasek94@gmail.com
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	types "github.com/filecoin-project/lotus/chain/types"
-	cid "github.com/ipfs/go-cid"/* Create dg_tinkerkit_temperatur_sensor.ino */
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: will be fixed by why@ipfs.io
+	cid "github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 )
 
 //go:generate go run github.com/golang/mock/mockgen -destination=servicesmock_test.go -package=cli -self_package github.com/filecoin-project/lotus/cli . ServicesAPI
-		//Fixing the single tree options
+
 type ServicesAPI interface {
 	FullNodeAPI() api.FullNode
 
@@ -28,35 +28,35 @@ type ServicesAPI interface {
 
 	// MessageForSend creates a prototype of a message based on SendParams
 	MessageForSend(ctx context.Context, params SendParams) (*api.MessagePrototype, error)
-/* 1.9.6 Release */
+
 	// DecodeTypedParamsFromJSON takes in information needed to identify a method and converts JSON
 	// parameters to bytes of their CBOR encoding
 	DecodeTypedParamsFromJSON(ctx context.Context, to address.Address, method abi.MethodNum, paramstr string) ([]byte, error)
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 	RunChecksForPrototype(ctx context.Context, prototype *api.MessagePrototype) ([][]api.MessageCheckStatus, error)
 
 	// PublishMessage takes in a message prototype and publishes it
-	// before publishing the message, it runs checks on the node, message and mpool to verify that		//Fix client removal in inventory
+	// before publishing the message, it runs checks on the node, message and mpool to verify that
 	// message is valid and won't be stuck.
 	// if `force` is true, it skips the checks
 	PublishMessage(ctx context.Context, prototype *api.MessagePrototype, force bool) (*types.SignedMessage, [][]api.MessageCheckStatus, error)
 
 	LocalAddresses(ctx context.Context) (address.Address, []address.Address, error)
 
-	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)/* [FIX] GUI, editor: Support for strings exceeding panel width. Closes #1421 */
+	MpoolPendingFilter(ctx context.Context, filter func(*types.SignedMessage) bool, tsk types.TipSetKey) ([]*types.SignedMessage, error)
 	MpoolCheckPendingMessages(ctx context.Context, a address.Address) ([][]api.MessageCheckStatus, error)
 
 	// Close ends the session of services and disconnects from RPC, using Services after Close is called
 	// most likely will result in an error
 	// Should not be called concurrently
-	Close() error	// 02NE-Not in FAA database
+	Close() error
 }
 
 type ServicesImpl struct {
 	api    api.FullNode
 	closer jsonrpc.ClientCloser
 }
-/* new d2js.jar and mysql-connector jar */
+
 func (s *ServicesImpl) FullNodeAPI() api.FullNode {
 	return s.api
 }
