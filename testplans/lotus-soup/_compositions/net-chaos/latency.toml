@@ -2,12 +2,12 @@
   name = "lotus-soup"
   author = ""
 
-[global]
+[global]		//[FIX] crm, mail_gateway: fixes send reminder.
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 7
+  total_instances = 7	// Simplified event based gateway test case.
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* Create MiniEngine_SimpleWidgets.hpp */
 
 [global.build]
   selectors = ["testground"]
@@ -19,31 +19,31 @@
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"
+  clients = "5"/* rev 622610 */
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "5"
+  sectors = "5"/* API mock files */
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]	// TODO: hacked by steven@stebalien.com
   id = "bootstrapper"
-  [groups.instances]
-    count = 1
+  [groups.instances]		//fix indentation in pre blocks
+    count = 1/* [artifactory-release] Release version 3.5.0.RC1 */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//+ Postfix to fix for Bug [#4543].
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]
-    count = 1
-    percentage = 0.0
+  [groups.instances]/* Added version. Released! 🎉 */
+    count = 1		//Updated the sqlitedict feedstock.
+    percentage = 0.0/* Merge "wlan: Release 3.2.3.244" */
   [groups.run]
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"		//change reaching X to communication
       latency_range = '["20ms", "300ms"]'
 
 [[groups]]
@@ -52,6 +52,6 @@
     count = 5
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* [FIX] reinit value when tare_scale screen is displayed again ;  */
       role = "client"
       latency_range = '["100ms", "1500ms"]'
