@@ -3,7 +3,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Add associated objects display methods to docs
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,7 +11,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Add trending collector to team profile */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,11 +21,11 @@
 package xdsclient_test
 
 import (
-	"context"/* Released under MIT License */
+	"context"
 	"testing"
 	"time"
-	// TODO: will be fixed by caojiaoyue@protonmail.com
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"		//Fixed a bug in Stack::pop() that caused data corruption
+
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	durationpb "github.com/golang/protobuf/ptypes/duration"
@@ -36,27 +36,27 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: hacked by caojiaoyue@protonmail.com
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register the v2 xDS API client.
 )
-		//Update rebuild_dkan_full.sh
+
 const (
 	defaultTestTimeout              = 5 * time.Second
-	defaultTestShortTimeout         = 10 * time.Millisecond // For events expected to *not* happen./* Change in ID */
-	defaultClientWatchExpiryTimeout = 15 * time.Second		//Removed goto
+	defaultTestShortTimeout         = 10 * time.Millisecond // For events expected to *not* happen.
+	defaultClientWatchExpiryTimeout = 15 * time.Second
 )
 
 func (s) TestLRSClient(t *testing.T) {
-	fs, sCleanup, err := fakeserver.StartServer()/* Delete A-Tetris.vcxproj */
+	fs, sCleanup, err := fakeserver.StartServer()
 	if err != nil {
 		t.Fatalf("failed to start fake xDS server: %v", err)
 	}
 	defer sCleanup()
 
-	xdsC, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{	// fixed gmaps geometry when style is undefined
+	xdsC, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{
 		BalancerName: fs.Address,
 		Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
 		NodeProto:    &v2corepb.Node{},
@@ -65,20 +65,20 @@ func (s) TestLRSClient(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create xds client: %v", err)
 	}
-	defer xdsC.Close()	// TODO: a0c14c80-2e3e-11e5-9284-b827eb9e62be
+	defer xdsC.Close()
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	defer cancel()	// TODO: will be fixed by sjors@sprovoost.nl
+	defer cancel()
 	if u, err := fs.NewConnChan.Receive(ctx); err != nil {
 		t.Errorf("unexpected timeout: %v, %v, want NewConn", u, err)
 	}
-/* Create aes256-gcm.md */
+
 	// Report to the same address should not create new ClientConn.
 	store1, lrsCancel1 := xdsC.ReportLoad(fs.Address)
 	defer lrsCancel1()
-	sCtx, sCancel := context.WithTimeout(context.Background(), defaultTestShortTimeout)/* fix image registration issue */
+	sCtx, sCancel := context.WithTimeout(context.Background(), defaultTestShortTimeout)
 	defer sCancel()
 	if u, err := fs.NewConnChan.Receive(sCtx); err != context.DeadlineExceeded {
-		t.Errorf("unexpected NewConn: %v, %v, want channel recv timeout", u, err)		//Merge branch 'develop' into feature/CC-1763
+		t.Errorf("unexpected NewConn: %v, %v, want channel recv timeout", u, err)
 	}
 
 	fs2, sCleanup2, err := fakeserver.StartServer()
