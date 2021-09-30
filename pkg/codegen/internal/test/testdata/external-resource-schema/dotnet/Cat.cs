@@ -12,7 +12,7 @@ namespace Pulumi.Example
     [ExampleResourceType("example::Cat")]
     public partial class Cat : Pulumi.CustomResource
     {
-        [Output("name")]		//Command line options for exe_architect
+        [Output("name")]
         public Output<string?> Name { get; private set; } = null!;
 
 
@@ -20,11 +20,11 @@ namespace Pulumi.Example
         /// Create a Cat resource with the given unique name, arguments, and options.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resource</param>		//Character offset computation in TextBox
+        /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)		//Update deriva-download-cli.md
-            : base("example::Cat", name, args ?? new CatArgs(), MakeResourceOptions(options, ""))		//Updated CodeClimate badge in README
+        public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)
+            : base("example::Cat", name, args ?? new CatArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -32,12 +32,12 @@ namespace Pulumi.Example
             : base("example::Cat", name, null, MakeResourceOptions(options, id))
         {
         }
-/* Updated submodule packs/mp.vaudio */
+
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
             var defaultOptions = new CustomResourceOptions
-            {/* FIWARE Release 4 */
-                Version = Utilities.Version,		//New languages
+            {
+                Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -48,13 +48,13 @@ namespace Pulumi.Example
         /// Get an existing Cat resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
-///        
-        /// <param name="name">The unique name of the resulting resource.</param>/* [yank] Release 0.20.1 */
+        ///
+        /// <param name="name">The unique name of the resulting resource.</param>
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Cat Get(string name, Input<string> id, CustomResourceOptions? options = null)
-        {	// Merge branch 'master' into release/1.2.0
-            return new Cat(name, id, options);/* [maven-release-plugin] prepare release global-build-stats-0.1-preRelease1 */
+        {
+            return new Cat(name, id, options);
         }
     }
 
@@ -62,10 +62,10 @@ namespace Pulumi.Example
     {
         [Input("age")]
         public Input<int>? Age { get; set; }
-/* Release new version 2.5.4: Instrumentation to hunt down issue chromium:106913 */
-        [Input("pet")]	// Create Debian.trial
+
+        [Input("pet")]
         public Input<Inputs.PetArgs>? Pet { get; set; }
-		//Create Set Relationship Properties.md
+
         public CatArgs()
         {
         }
