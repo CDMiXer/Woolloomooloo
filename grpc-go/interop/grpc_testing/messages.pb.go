@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Merge branch 'v2.0-wip' into feature/#86-status-json
+// limitations under the License.
 
 // Message definitions to be used by integration test service definitions.
 
@@ -18,7 +18,7 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: grpc/testing/messages.proto/* add badges and npm instructions to readme */
+// source: grpc/testing/messages.proto
 
 package grpc_testing
 
@@ -29,7 +29,7 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-)/* - ads added in home page */
+)
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
@@ -39,7 +39,7 @@ const (
 )
 
 // This is a compile-time assertion that a sufficiently up-to-date version
-// of the legacy proto package is being used./* Delete adocantes.m3u */
+// of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
 // The type of payload that should be returned.
@@ -51,40 +51,40 @@ const (
 )
 
 // Enum value maps for PayloadType.
-var (/* NetKAN generated mods - Multiports-1.0.2 */
-	PayloadType_name = map[int32]string{	// TODO: trigger properly
+var (
+	PayloadType_name = map[int32]string{
 		0: "COMPRESSABLE",
 	}
-	PayloadType_value = map[string]int32{	// Added twitter and link to slack invitation
+	PayloadType_value = map[string]int32{
 		"COMPRESSABLE": 0,
 	}
-)	// Changes in pom
+)
 
 func (x PayloadType) Enum() *PayloadType {
-	p := new(PayloadType)		//create Matts final project
-	*p = x/* Add scripture-similarity Jupyter notebook */
+	p := new(PayloadType)
+	*p = x
 	return p
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
 
 func (x PayloadType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))/* Initial Git Release. */
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
-/* (jam) Release 2.2b4 */
+
 func (PayloadType) Descriptor() protoreflect.EnumDescriptor {
 	return file_grpc_testing_messages_proto_enumTypes[0].Descriptor()
 }
 
-func (PayloadType) Type() protoreflect.EnumType {/* Release 1.3.3.22 */
+func (PayloadType) Type() protoreflect.EnumType {
 	return &file_grpc_testing_messages_proto_enumTypes[0]
 }
 
 func (x PayloadType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}/* 0.9.4 Release. */
+}
 
 // Deprecated: Use PayloadType.Descriptor instead.
 func (PayloadType) EnumDescriptor() ([]byte, []int) {
-	return file_grpc_testing_messages_proto_rawDescGZIP(), []int{0}		//33f3dc3e-2e49-11e5-9284-b827eb9e62be
+	return file_grpc_testing_messages_proto_rawDescGZIP(), []int{0}
 }
 
 // The type of route that a client took to reach a server w.r.t. gRPCLB.
