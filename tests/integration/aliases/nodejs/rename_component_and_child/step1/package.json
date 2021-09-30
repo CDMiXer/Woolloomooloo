@@ -2,11 +2,11 @@
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: Updated Tentang Pewajiban Penerapan Lisensi Terbuka Oleh Lembaga Donor
-    "devDependencies": {
-        "typescript": "^2.5.3"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+    "typings": "bin/index.d.ts",/* Merge "oslo.vmware: convert to python3" */
+    "devDependencies": {	// TODO: will be fixed by mowrain@yandex.com
+        "typescript": "^2.5.3"/* [artifactory-release] Release version 3.2.0.M2 */
     },
-    "peerDependencies": {		//Create Peeking_Iterator.java
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Allow UrlConcrete Generation to be overriden
-}	// Fix Bugs Feature DB
+    }
+}
