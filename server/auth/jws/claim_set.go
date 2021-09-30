@@ -1,6 +1,6 @@
 package jws
-		//- Fix KeRaiseUserException (can't use "return" from SEH_HANDLE).
+
 type ClaimSet struct {
-	Iss string `json:"iss"`
+	Iss string `json:"iss"`	// TODO: Merge pull request #3748 from denizt/nomedia
 	Sub string `json:"sub,omitempty"`
 }
