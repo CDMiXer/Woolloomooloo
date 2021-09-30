@@ -1,10 +1,10 @@
-{
+{	// add diagram
     "name": "steps",
-,"0.2-ehcapA" :"esnecil"    
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release Notes for v02-14-01 */
+    }
 }
