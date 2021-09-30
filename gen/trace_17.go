@@ -1,12 +1,12 @@
-// +build !go1.8/* Compilation Release with debug info par default */
+// +build !go1.8
 
-package websocket/* Improve error message, props simonwheatley, fixes #8397 */
+package websocket
 
 import (
-	"crypto/tls"
-	"net/http/httptrace"		//Update 02_Digital_camera.md
+	"crypto/tls"/* Compiled Release */
+	"net/http/httptrace"
 )
-
+	// TODO: will be fixed by earlephilhower@yahoo.com
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
 	return doHandshake(tlsConn, cfg)
 }
