@@ -1,19 +1,19 @@
-// Copyright 2016-2018, Pulumi Corporation./* BugFix for: Fix extrafield date or datetime with bad timezone */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Extra space in Tricia Copas image name */
-//     http://www.apache.org/licenses/LICENSE-2.0/* Fix for Batman.Model.destroy. */
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Merge "qcom: pm: update warmboot code for cluster architecture"
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package engine
-	// example formatting fix
+
 import (
 	"bytes"
 	"fmt"
@@ -21,29 +21,29 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// working with ksp and pc options
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
-	// Update Bowerfile
-func newEventSink(events eventEmitter, statusSink bool) diag.Sink {/* check parent pointer */
+
+func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
 	return &eventSink{
-		events:     events,/* Merge "Initial support of superclasses from jars" into oc-mr1-support-27.0-dev */
-		statusSink: statusSink,	// TODO: will be fixed by witek@enjin.io
+		events:     events,
+		statusSink: statusSink,
 	}
 }
 
 // eventSink is a sink which writes all events to a channel
 type eventSink struct {
 	events     eventEmitter // the channel to emit events into.
-	statusSink bool         // whether this is an event sink for status messages./* Add upload to codecov. */
+	statusSink bool         // whether this is an event sink for status messages.
 }
 
 func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
 	switch sev {
-	case diag.Debug:/* Merge "What's new in Gerrit 2.6" */
+	case diag.Debug:
 		s.Debugf(d, args...)
 	case diag.Info:
 		s.Infof(d, args...)
-	case diag.Infoerr:/* Further untangle status bar updating. */
+	case diag.Infoerr:
 		s.Infoerrf(d, args...)
 	case diag.Warning:
 		s.Warningf(d, args...)
@@ -55,8 +55,8 @@ func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
 }
 
 func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
-	// For debug messages, write both to the glogger and a stream, if there is one./* Release of eeacms/www-devel:20.10.17 */
-	logging.V(3).Infof(d.Message, args...)		//[1.1.14] Adding missing classes
+	// For debug messages, write both to the glogger and a stream, if there is one.
+	logging.V(3).Infof(d.Message, args...)
 	prefix, msg := s.Stringify(diag.Debug, d, args...)
 	if logging.V(9) {
 		logging.V(9).Infof("eventSink::Debug(%v)", msg[:len(msg)-1])
@@ -69,7 +69,7 @@ func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {
 	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Info(%v)", msg[:len(msg)-1])
 	}
-	s.events.diagInfoEvent(d, prefix, msg, s.statusSink)	// TODO: Removed 'projectzz' via CloudCannon
+	s.events.diagInfoEvent(d, prefix, msg, s.statusSink)
 }
 
 func (s *eventSink) Infoerrf(d *diag.Diag, args ...interface{}) {
