@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* adminpanel 1.0.0 */
-  </PropertyGroup>
-
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>/* Improved code comparison view */
+	// TODO: hacked by hello@brooklynzelenka.com
 </Project>
