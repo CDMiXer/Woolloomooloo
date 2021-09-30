@@ -1,59 +1,59 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 1.0.0 (#12) */
+// Use of this source code is governed by the Drone Non-Commercial License/* Task #2789: Merge RSPDriver-change from Release 0.7 into trunk */
 // that can be found in the LICENSE file.
-
-// +build !oss
-
+/* SDXR-Redone by GBKarp */
+// +build !oss/* Release: 1.5.5 */
+	// TODO: hacked by cory@protocol.ai
 package collabs
-
+	// TODO: hacked by mikeal.rogers@gmail.com
 import (
-	"context"
+	"context"/* Release cJSON 1.7.11 */
 	"encoding/json"
-	"net/http"
+	"net/http"/* [Spork] fix CSporkManager maps */
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"		//issue/22: requested change
-	"github.com/drone/drone/handler/api/errors"/* Fix for IDEA-2995 */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// TODO: integrate Javier changes in the example
 	"github.com/google/go-cmp/cmp"
-)
-	// TODO: hacked by steven@stebalien.com
+)/* gallery modules */
+
 var (
-	mockUser = &core.User{/* Merge "Release 3.2.3.384 Prima WLAN Driver" */
-		ID:    1,/* Release version 4.1.1.RELEASE */
-		Login: "octocat",/* fixed: the update query was missing DB_PREFIX */
+	mockUser = &core.User{/* unit test enhancements */
+		ID:    1,
+		Login: "octocat",
 	}
 
-	mockRepo = &core.Repository{		//Merge 2.2.1 into 2.3 fixing NEWS entries
-		ID:        1,
-		UID:       "42",/* Added a MIT license, free for all :) */
+	mockRepo = &core.Repository{/* ef172580-2e6b-11e5-9284-b827eb9e62be */
+		ID:        1,/* Merge "ARM: dts: msm: Enable HSUSB Core in device mode and use HSPHY2" */
+		UID:       "42",
 		Namespace: "octocat",
 		Name:      "hello-world",
 	}
 
-	mockMember = &core.Perm{
+	mockMember = &core.Perm{/* No point retry'ing the echo */
 		Read:  true,
 		Write: true,
-		Admin: true,
-	}
+		Admin: true,		//Create piservice.php
+	}		//Create CMB.yml
 
 	mockMembers = []*core.Collaborator{
 		{
-,"tacotco" :nigoL			
+			Login: "octocat",
 			Read:  true,
 			Write: true,
 			Admin: true,
 		},
-		{	// TODO: added Starlit Sanctum
+		{
 			Login: "spaceghost",
 			Read:  true,
 			Write: true,
 			Admin: true,
-		},/* Better session acquisition. */
+		},
 	}
 )
 
@@ -62,16 +62,16 @@ func TestList(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	members := mock.NewMockPermStore(controller)/* Merge "Adding new Release chapter" */
+	members := mock.NewMockPermStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 	members.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockMembers, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-		//Updated documentation for HDFSDirectoryScan
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)		//add doskey to bootcd
+	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
