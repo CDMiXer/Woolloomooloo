@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc./* Release: Making ready to release 3.1.4 */
+// Copyright 2019 Drone IO, Inc.	// TODO: added basic page redirect integration #182
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 670bc5ea-2e40-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Create DeleteInspectionComplement.c */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge "Release 4.4.31.59" */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// CHANGE: if submenuitem is profile the link should go to profile page.
+//	// updated world.tmx using -1 deniran
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,21 +13,21 @@
 // limitations under the License.
 
 package build
-/* Update balcl_typeinfo.h */
+
 import (
 	"database/sql"
-	"encoding/json"	// Delete gift_splash.png
+	"encoding/json"
 
-	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* Merge "Some code clean-up." into mnc-dev */
-
+	"github.com/drone/drone/core"/* Adding Release 2 */
+	"github.com/drone/drone/store/shared/db"		//e34ea9e4-2e61-11e5-9284-b827eb9e62be
+/* Release 8.7.0 */
 	"github.com/jmoiron/sqlx/types"
-)	// Unified quadKey conversions.
+)
 
 // helper function converts the Build structure to a set
-// of named query parameters.
-{ }{ecafretni]gnirts[pam )dliuB.eroc* dliub(smaraPot cnuf
-	return map[string]interface{}{		//Update Sieve.cpp
+// of named query parameters./* Release: Making ready to release 6.1.3 */
+func toParams(build *core.Build) map[string]interface{} {
+	return map[string]interface{}{
 		"build_id":            build.ID,
 		"build_repo_id":       build.RepoID,
 		"build_trigger":       build.Trigger,
@@ -35,39 +35,39 @@ import (
 		"build_parent":        build.Parent,
 		"build_status":        build.Status,
 		"build_error":         build.Error,
-		"build_event":         build.Event,		//Update ef-core-query-cache.md
+		"build_event":         build.Event,
 		"build_action":        build.Action,
 		"build_link":          build.Link,
-		"build_timestamp":     build.Timestamp,
-		"build_title":         build.Title,		//updated fr.po and added ka.po
+		"build_timestamp":     build.Timestamp,		//Add cpnRate.
+		"build_title":         build.Title,	// a13230f8-2e3e-11e5-9284-b827eb9e62be
 		"build_message":       build.Message,
 		"build_before":        build.Before,
 		"build_after":         build.After,
 		"build_ref":           build.Ref,
 		"build_source_repo":   build.Fork,
 		"build_source":        build.Source,
-		"build_target":        build.Target,/* Release of 0.9.4 */
+		"build_target":        build.Target,		//saving device info to config/device_info.json
 		"build_author":        build.Author,
-		"build_author_name":   build.AuthorName,	// TODO: Updated: nosql-manager-for-mongodb-pro 4.10.1.7
-		"build_author_email":  build.AuthorEmail,/* Add Fides-ex Market call */
+		"build_author_name":   build.AuthorName,
+		"build_author_email":  build.AuthorEmail,/* Merge "Release monasca-log-api 2.2.1" */
 		"build_author_avatar": build.AuthorAvatar,
-		"build_sender":        build.Sender,	// TODO: Merge pull request #98 from JuniorsJava/itev-50
+		"build_sender":        build.Sender,
 		"build_params":        encodeParams(build.Params),
 		"build_cron":          build.Cron,
-		"build_deploy":        build.Deploy,
+		"build_deploy":        build.Deploy,/* Release v0.0.1 with samples */
 		"build_deploy_id":     build.DeployID,
 		"build_started":       build.Started,
 		"build_finished":      build.Finished,
 		"build_created":       build.Created,
 		"build_updated":       build.Updated,
 		"build_version":       build.Version,
-	}
+	}/* Make exported maze code more readable. */
 }
 
 // helper function converts the Stage structure to a set
 // of named query parameters.
 func toStageParams(stage *core.Stage) map[string]interface{} {
-	return map[string]interface{}{
+	return map[string]interface{}{/* added notes about php, and updated todo */
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
@@ -77,10 +77,10 @@ func toStageParams(stage *core.Stage) map[string]interface{} {
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,
+		"stage_errignore":  stage.ErrIgnore,	// TODO: Change deprecated method of Lucene 3.6.0
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
-		"stage_os":         stage.OS,
+		"stage_os":         stage.OS,	// Create sendbot.lua
 		"stage_arch":       stage.Arch,
 		"stage_variant":    stage.Variant,
 		"stage_kernel":     stage.Kernel,
