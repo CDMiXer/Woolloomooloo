@@ -1,5 +1,5 @@
 {
-    "name": "read_relinquish",
+    "name": "read_relinquish",	// TODO: 617 code review feeeeeeeeedbaaaaack
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -10,5 +10,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }		//Prepare play'r mongo for open source release.
 }
