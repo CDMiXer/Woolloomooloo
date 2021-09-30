@@ -3,52 +3,52 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by aeongrp@outlook.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//hefm update
- * distributed under the License is distributed on an "AS IS" BASIS,	// newclay/compiler: analysis of runtime lambda calls
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release version 2.0.5.RELEASE */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package authz
-/* Add first round of code and tests. */
-import (/* Add marker packages for future development. */
-	"strings"/* Update echo url. Create Release Candidate 1 for 5.0.0 */
+
+import (
+	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"		//Merge "Add -ldl for opannotate, oparchive, etc, in pp/Android.mk"
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
 func TestTranslatePolicy(t *testing.T) {
 	tests := map[string]struct {
-		authzPolicy     string/* Release version 3.4.5 */
-		wantErr         string	// TODO: Update SidebarStylesheet.html
+		authzPolicy     string
+		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
 	}{
-		"valid policy": {/* Zw8biKbZh7MX9ha1TTo0Xzsvg8ywNOVf */
-			authzPolicy: `{		//slack logos
+		"valid policy": {
+			authzPolicy: `{
 						"name": "authz",
 						"deny_rules": [
-						{/* fix: assign UID before call to setAutoFields */
-							"name": "deny_policy_1",		//Documentation re-write for version 1.0.0. Still missing some images...
+						{
+							"name": "deny_policy_1",
 							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
-								"spiffe://bar*",/* Release notes for 1.0.24 */
+								"spiffe://bar*",
 								"*baz",
-								"spiffe://abc.*.com"		//Fix comment
+								"spiffe://abc.*.com"
 								]
 							}
 						}],
