@@ -1,23 +1,23 @@
 {
   "Action": "opened",
   "Repo": {
-    "ID": "13933572",/* Final Release */
+    "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
     "Perm": null,
-    "Branch": "master",/* Release user id char after it's not used anymore */
+    "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
-    "Link": "https://github.com/bradrydzewski/drone-test-go",		//Update pod-lifecycle.md
+    "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,/* 3008fbbe-2f67-11e5-9c09-6c40088e03e4 */
+    "Number": 1,
     "Title": "Update .drone.yml",
     "Body": "",
-    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",		//2b4dce74-2f85-11e5-ab21-34363bc765d8
+    "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Ref": "refs/pull/1/head",
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
@@ -25,7 +25,7 @@
     "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
     "Closed": false,
     "Merged": false,
-    "Author": {	// TODO: will be fixed by peterke@gmail.com
+    "Author": {
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
@@ -33,11 +33,11 @@
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-22T23:54:09Z"
-  },/* Create Process Movies.sh */
-  "Sender": {/* Release jprotobuf-android-1.0.1 */
+  },
+  "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }		//Removing blog posts and portfolio
+  }
 }
