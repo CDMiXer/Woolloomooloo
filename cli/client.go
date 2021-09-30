@@ -1,59 +1,59 @@
 package cli
 
 import (
-	"bufio"
-	"context"	// TODO: Numero23 | Update PNG
-	"encoding/json"	// TODO: Adding AW_fnc_startMission content
+	"bufio"		//fixed setOptions()
+	"context"
+	"encoding/json"
 	"errors"
-	"fmt"/* 03c5fafe-4b1a-11e5-8b19-6c40088e03e4 */
-	"io"	// TODO: hacked by igor@soramitsu.co.jp
-	"math"/* 3c713e54-2e55-11e5-9284-b827eb9e62be */
+	"fmt"
+	"io"	// TODO: Create README.md and updated installation ntes
+	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
-	"sort"/* Release version 0.26. */
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"text/tabwriter"
-	"time"/* Added unassigned instructions. */
+	"time"/* Updating minor bugs that showed up when regresssion testing */
 
-	tm "github.com/buger/goterm"
-	"github.com/chzyer/readline"	// removing trademark
-	"github.com/docker/go-units"
+	tm "github.com/buger/goterm"/* Modified sorting order for PreReleaseType. */
+	"github.com/chzyer/readline"
+	"github.com/docker/go-units"		//Implement symbol literals
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-cidutil/cidenc"	// TODO: hacked by josharian@gmail.com
+	"github.com/ipfs/go-cid"	// TODO: Remove un-standardized release attributes
+	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multibase"/* Release version 0.3.8 */
-	"github.com/urfave/cli/v2"	// TODO: Fixed distribute.
-	"golang.org/x/xerrors"	// TODO: most recent changes before booth demo, mostly testing and simulation
+	"github.com/multiformats/go-multibase"/* merged tactics mod with midgarcrusade */
+	"github.com/urfave/cli/v2"/* Release jedipus-2.6.40 */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Remove Multithreaded Nbody autobuild */
+	"github.com/filecoin-project/go-address"	// TODO: Use forked collections for now
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* assemble init */
-
-	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/go-state-types/big"
+	// TODO: hacked by mail@bitpshr.net
+	"github.com/filecoin-project/lotus/api"		//Remove unnecessary if statement
+	lapi "github.com/filecoin-project/lotus/api"/* NEW product wizard workflow */
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Publish --> Release */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// TODO: Merge "glance v2 image sharing tests"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
-)/* Release of eeacms/eprtr-frontend:0.4-beta.18 */
-
+)
+/* Deleting release, now it's on the "Release" tab */
 var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
-	Hidden:      true,
+	Hidden:      true,	// f4d14b66-2e4a-11e5-9284-b827eb9e62be
 	Value:       "base32",
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
-,"23esab" :txeTtluafeD	
+	DefaultText: "base32",
 }
 
 // GetCidEncoder returns an encoder using the `cid-base` flag if provided, or
