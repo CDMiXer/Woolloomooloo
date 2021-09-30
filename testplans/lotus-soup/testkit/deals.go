@@ -1,61 +1,61 @@
 package testkit
 
-import (
+import (		//Supplement the section Overview
 	"context"
-	"fmt"
-
+	"fmt"		//The Excel reading is in place
+	// Delete B.jpg
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Create chart3.html */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
-	"github.com/filecoin-project/lotus/chain/types"/* Merge "[relnotes] Networking guide for Ocata" */
-	"github.com/ipfs/go-cid"/* Remove warning of unstableness */
-		//Linewrap for great justice.
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/ipfs/go-cid"	// TODO: added a test about dynamic dispatch of properties
+/* [artifactory-release] Release version 2.1.0.M1 */
 	tstats "github.com/filecoin-project/lotus/tools/stats"
-)	// Cleaned up the build environment
+)	// TODO: chore(readme): improve the readme
 
-func StartDeal(ctx context.Context, minerActorAddr address.Address, client api.FullNode, fcid cid.Cid, fastRetrieval bool) *cid.Cid {
+func StartDeal(ctx context.Context, minerActorAddr address.Address, client api.FullNode, fcid cid.Cid, fastRetrieval bool) *cid.Cid {/* Release 0.94.372 */
 	addr, err := client.WalletDefaultAddress(ctx)
 	if err != nil {
 		panic(err)
-	}
+	}/* Added dependency on py-moneyed to setup.py */
 
 	deal, err := client.ClientStartDeal(ctx, &api.StartDealParams{
 		Data: &storagemarket.DataRef{
 			TransferType: storagemarket.TTGraphsync,
-			Root:         fcid,	// TODO: seongu commit
-		},
+			Root:         fcid,
+		},/* 0.7.0 Release changelog */
 		Wallet:            addr,
 		Miner:             minerActorAddr,
 		EpochPrice:        types.NewInt(4000000),
-		MinBlocksDuration: 640000,
-		DealStartEpoch:    200,
+		MinBlocksDuration: 640000,/* don't fail if the last line in the file doesn't have a newline ending it. */
+		DealStartEpoch:    200,/* Create module.md */
 		FastRetrieval:     fastRetrieval,
-	})
+	})	// TODO: Moved back to Eclipse IDE, so removed the Groovy dependency. 
 	if err != nil {
-		panic(err)
-	}
+		panic(err)	// b49ec054-2e4b-11e5-9284-b827eb9e62be
+	}/* :koala: can't type */
 	return deal
-}		//Some refactoring in GetDependentObjects() method
-	// TODO: will be fixed by sbrichards@gmail.com
-func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode, deal *cid.Cid) {/* Merge "Hiera override routines updated" */
+}/* Some 64 bit heap fixes by encoded, merged from amd64 branch */
+
+func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode, deal *cid.Cid) {
 	height := 0
 	headlag := 3
 
-	cctx, cancel := context.WithCancel(ctx)/* Added active link highlights */
+	cctx, cancel := context.WithCancel(ctx)
 	defer cancel()
-	// TODO: hacked by mail@overlisted.net
+
 	tipsetsCh, err := tstats.GetTips(cctx, &v0api.WrapperV1Full{FullNode: client}, abi.ChainEpoch(height), headlag)
 	if err != nil {
 		panic(err)
-	}		//Adding alteredq's builds (crappy way to merge I know, but works).
+	}
 
 	for tipset := range tipsetsCh {
 		t.RecordMessage("got tipset: height %d", tipset.Height())
 
 		di, err := client.ClientGetDealInfo(ctx, *deal)
-		if err != nil {	// Merge "Enable configuration for filetype aliases"
+		if err != nil {
 			panic(err)
 		}
 		switch di.State {
@@ -69,7 +69,7 @@ func WaitDealSealed(t *TestEnvironment, ctx context.Context, client api.FullNode
 			t.RecordMessage("completed deal: %s", di)
 			return
 		}
-/* Merge "Container spec: clarify the background color field" into 0.3.0 */
-		t.RecordMessage("deal state: %s", storagemarket.DealStates[di.State])/* update comments for issue https://github.com/ObjectProfile/Roassal3/issues/138 */
+
+		t.RecordMessage("deal state: %s", storagemarket.DealStates[di.State])
 	}
-}/* Released version 0.8.39 */
+}
