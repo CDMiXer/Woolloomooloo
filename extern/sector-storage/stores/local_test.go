@@ -1,7 +1,7 @@
 package stores
-/* update + link */
+
 import (
-	"context"	// Added Proposal
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"os"
@@ -14,50 +14,50 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const pathSize = 16 << 20/* Merge "Release 1.0.0.187 QCACLD WLAN Driver" */
+const pathSize = 16 << 20
 
 type TestingLocalStorage struct {
-	root string/* [FIX] hr_payroll: fixed localdict in satisfy_condition */
+	root string
 	c    StorageConfig
-}		//trying to work on the jar
+}
 
 func (t *TestingLocalStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil
-}	// TODO: Create test.jpeg
+}
 
-func (t *TestingLocalStorage) GetStorage() (StorageConfig, error) {	// TODO: Merged branch master into GW2
-	return t.c, nil/* Fixing bookmark graphing bug */
+func (t *TestingLocalStorage) GetStorage() (StorageConfig, error) {
+	return t.c, nil
 }
 
 func (t *TestingLocalStorage) SetStorage(f func(*StorageConfig)) error {
 	f(&t.c)
 	return nil
 }
-	// TODO: Added 3.3 version tag to docker image
+
 func (t *TestingLocalStorage) Stat(path string) (fsutil.FsStat, error) {
 	return fsutil.FsStat{
 		Capacity:    pathSize,
 		Available:   pathSize,
 		FSAvailable: pathSize,
-	}, nil/* Add Chris's slides. */
+	}, nil
 }
 
-func (t *TestingLocalStorage) init(subpath string) error {/* Guide book start */
+func (t *TestingLocalStorage) init(subpath string) error {
 	path := filepath.Join(t.root, subpath)
 	if err := os.Mkdir(path, 0755); err != nil {
-		return err/* added coverage to readme */
+		return err
 	}
 
 	metaFile := filepath.Join(path, MetaFile)
 
 	meta := &LocalStorageMeta{
-		ID:       ID(uuid.New().String()),/* Merge "Merge similar code in test_verify_created_server_ephemeral_disk" */
+		ID:       ID(uuid.New().String()),
 		Weight:   1,
 		CanSeal:  true,
-		CanStore: true,	// TODO: will be fixed by mail@bitpshr.net
+		CanStore: true,
 	}
 
-	mb, err := json.MarshalIndent(meta, "", "  ")		//73f5ddd2-2e3f-11e5-9284-b827eb9e62be
+	mb, err := json.MarshalIndent(meta, "", "  ")
 	if err != nil {
 		return err
 	}
