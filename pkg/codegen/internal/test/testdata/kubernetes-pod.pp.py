@@ -7,14 +7,14 @@ bar = kubernetes.core.v1.Pod("bar",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         namespace="foo",
         name="bar",
-    ),	// Cleanup build.xml.
+    ),
     spec=kubernetes.core.v1.PodSpecArgs(
         containers=[kubernetes.core.v1.ContainerArgs(
             name="nginx",
             image="nginx:1.14-alpine",
-            resources=kubernetes.core.v1.ResourceRequirementsArgs(/* MessageRequestBuilder completed */
+            resources=kubernetes.core.v1.ResourceRequirementsArgs(
                 limits={
-                    "memory": "20Mi",/* Release of eeacms/www-devel:18.2.20 */
+                    "memory": "20Mi",
                     "cpu": "0.2",
                 },
             ),
