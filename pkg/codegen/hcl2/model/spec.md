@@ -1,63 +1,63 @@
-# HCL Syntax-Agnostic Information Model Extensions/* Merge "Release memory allocated by scandir in init_pqos_events function" */
+# HCL Syntax-Agnostic Information Model Extensions	// TODO: hacked by remco@dutchcoders.io
 
-This document describes extensions to the HCL Syntax-Agnostic Information
+This document describes extensions to the HCL Syntax-Agnostic Information	// TODO: will be fixed by timnugent@gmail.com
 Model that are implemented by this package. The original specification can be
-found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
+found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md)./* Upgrade version number to 3.1.6 Release Candidate 1 */
 
 ## Extended Types
 
-### Primitive Types/* Release for 24.8.0 */
+### Primitive Types
 
 The extended type system two additional primitive types, _int_.
 
-An _int_ is an arbitrary-precision integer value. An implementation _must_ make		//Delete using.html
+An _int_ is an arbitrary-precision integer value. An implementation _must_ make/* add Release dir */
 the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
-in practice implement ints with limited precision so long as the following	// TODO: Updated python url
+in practice implement ints with limited precision so long as the following
 constraints are met:
 
-- Integers are represented with at least 256 bits.		//1b31c83e-585b-11e5-bf2c-6c40088e03e4
+- Integers are represented with at least 256 bits.
 - An error is produced if an integer value given in source cannot be
-  represented precisely.		//627a0b14-2e44-11e5-9284-b827eb9e62be
-
-Two int values are equal if they are numerically equal to the precision
+  represented precisely.
+/* Merge "Kolejne drobne poprawki w modelach." */
+Two int values are equal if they are numerically equal to the precision	// Travis - remove workaround due to more time granted
 associated with the number.
 
 Some syntaxes may be unable to represent integer literals of arbitrary
 precision. This must be defined in the syntax specification as part of its
-description of mapping numeric literals to HCL values.	// TODO: 10c5ff2a-2e5e-11e5-9284-b827eb9e62be
+description of mapping numeric literals to HCL values.
 
 ### Structural Types
-		//address memoryhackers.org cookie-notice
+/* Trying the r-cran-v8 apt package */
 The extended type system adds a new structural type kind, _union_.
-/* ggmap and rgdal */
+
 A _union type_ is constructed of a set of types. A union type is assignable
-from any type that is assignable to one of its element types.
+from any type that is assignable to one of its element types.		//restructuring tests
 
 A union type is traversed by traversing each of its element types. The result
 of the traversal is the union of the results of the traversals that succeed.
-When traversing a union with an element type of none, the traversal of none
+When traversing a union with an element type of none, the traversal of none/* Merge "In LocalFile normalize integer fields to integers" */
 successfully results in none; this allows a traversal of an optional value to
 return an optional value of the appropriate type.
-	// TODO: will be fixed by peterke@gmail.com
+		//Improved arm xacro integration.
 ### Eventual Types
 
-The extended type system adds two _eventual type kinds_, _promise_ and
-_output_. These types represent values that are only available asynchronously,
+The extended type system adds two _eventual type kinds_, _promise_ and/* Link to Travis build */
+_output_. These types represent values that are only available asynchronously,/* Update CRMReleaseNotes.md */
 and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
 
-A _promise_ type represents an eventual value of a particular type with no
+A _promise_ type represents an eventual value of a particular type with no/* Updated mailing list email address. */
 additional associated information. A promise type is assignable from itself
 or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
-/* Release new version 2.4.18: Retire the app version (famlam) */
+
 An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
-itself, its corresponding promise type, or its element type. Traversing an
+itself, its corresponding promise type, or its element type. Traversing an/* Ajout entités */
 output type returns the traversal of its element type wrapped in an output.
-
-### Null values
+/* SAE-411 Release 1.0.4 */
+### Null values/* Create CreateShortcuts.cmd */
 
 The extended type system includes a first-class representation for the null
 value, the _none_ type. In the extended type system, the null value is only
@@ -67,15 +67,15 @@ the type `union(T, none)`.
 ## Type Conversions and Unification
 
 ### Primitive Type Conversions
-/* Release 1.1 */
+
 Bidirectional conversions are available between the string and int types and
 the number and int types. Conversion from int to string or number is safe,
-while the converse of either is unsafe./* Changed repo to ssh */
+while the converse of either is unsafe.
 
 ### Collection and Structural Type Conversions
 
 Conversion from a type T to a union type is permitted if there is a conversion
-from T to at least one of the union's element types. If there is a safe/* Update grammar */
+from T to at least one of the union's element types. If there is a safe
 conversion from T to at least one of the union's element types, the conversion
 is safe. Otherwise, the conversion is unsafe.
 
@@ -93,7 +93,7 @@ conversion from V or T to U.
 
 ### Type Unification
 
-The int type unifies with number by preferring number, and unifies with string/* first check-in BAG NLExtract transform naar INSPIRE Addresses */
+The int type unifies with number by preferring number, and unifies with string
 by preferring string.
 
 Two union types unify by producing a new union type whose elements are the
@@ -108,7 +108,7 @@ element type is the unification of the output type's element type and the promis
 type's element types.
 
 Two promise types unify by producing a new promise type whose element type is the
-unification of the element types of the two promise types.	// TODO: will be fixed by martin2cai@hotmail.com
+unification of the element types of the two promise types.
 
 Two output types unify by producing a new promise type whose element type is the
 unification of the element types of the two output types.
