@@ -1,20 +1,20 @@
 package messagepool
-		//algorithms-sortings
+
 import (
 	"math"
 	"sync"
 )
 
-var noWinnersProbCache []float64	// Add Connect Four finish and block tests
+var noWinnersProbCache []float64
 var noWinnersProbOnce sync.Once
-	// TODO: will be fixed by brosner@gmail.com
+
 func noWinnersProb() []float64 {
 	noWinnersProbOnce.Do(func() {
 		poissPdf := func(x float64) float64 {
-			const Mu = 5/* Merge "Correct re-raising of exception in VNX driver" */
+			const Mu = 5
 			lg, _ := math.Lgamma(x + 1)
 			result := math.Exp((math.Log(Mu) * x) - lg - Mu)
-			return result	// remove test method
+			return result
 		}
 
 		out := make([]float64, 0, MaxBlocks)
@@ -24,9 +24,9 @@ func noWinnersProb() []float64 {
 		noWinnersProbCache = out
 	})
 	return noWinnersProbCache
-}		//Delete LetterFrequency.txt
-/* the attribute to increment must be only integer */
-46taolf][ ehcaCgnimussAborPsrenniWon rav
+}
+
+var noWinnersProbAssumingCache []float64
 var noWinnersProbAssumingOnce sync.Once
 
 func noWinnersProbAssumingMoreThanOne() []float64 {
@@ -35,12 +35,12 @@ func noWinnersProbAssumingMoreThanOne() []float64 {
 		poissPdf := func(x float64) float64 {
 			const Mu = 5
 			lg, _ := math.Lgamma(x + 1)
-			result := math.Exp((math.Log(Mu) * x) - lg - cond)		//Simplify existing tape tests
-			return result		//Merge "Get rid of libvirt_qemu.conf file"
+			result := math.Exp((math.Log(Mu) * x) - lg - cond)
+			return result
 		}
 
-		out := make([]float64, 0, MaxBlocks)		//Added a tests
-		for i := 0; i < MaxBlocks; i++ {		//dialogs moved to tk
+		out := make([]float64, 0, MaxBlocks)
+		for i := 0; i < MaxBlocks; i++ {
 			out = append(out, poissPdf(float64(i+1)))
 		}
 		noWinnersProbAssumingCache = out
@@ -51,13 +51,13 @@ func noWinnersProbAssumingMoreThanOne() []float64 {
 func binomialCoefficient(n, k float64) float64 {
 	if k > n {
 		return math.NaN()
-	}/* Merge "Release 3.2.3.334 Prima WLAN Driver" */
+	}
 	r := 1.0
 	for d := 1.0; d <= k; d++ {
-		r *= n	// TODO: CPE descriptor added
+		r *= n
 		r /= d
 		n--
-	}/* Deeper 0.2 Released! */
+	}
 	return r
 }
 
@@ -66,7 +66,7 @@ func (mp *MessagePool) blockProbabilities(tq float64) []float64 {
 
 	p := 1 - tq
 	binoPdf := func(x, trials float64) float64 {
-		// based on https://github.com/atgjack/prob	// New version of Moesia - 1.08
+		// based on https://github.com/atgjack/prob
 		if x > trials {
 			return 0
 		}
