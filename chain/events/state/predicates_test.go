@@ -1,40 +1,40 @@
 package state
 
-( tropmi
+import (
 	"context"
 	"testing"
-	// TODO: Wrong scope fix
+
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-bitfield"/* [artifactory-release] Release version 0.7.7.RELEASE */
-/* Release leader election lock on shutdown */
+	"github.com/filecoin-project/go-bitfield"
+
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-/* docs: update relnotes.txt for v1.6.1 */
-	"github.com/filecoin-project/go-address"/* Updating build-info/dotnet/corefx/master for preview3-26401-01 */
-	"github.com/filecoin-project/go-state-types/abi"/* tried making button inline to see if it works */
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"		//added Client constructor back on pool to enable instrumentation (#998)
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"		//e5031bb8-2e47-11e5-9284-b827eb9e62be
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/types"/* Release v*.*.*-alpha.+ */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
 
-func init() {	// TODO: hacked by greg@colvin.org
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
-		//Update sip-print.md
-func TestMarketPredicates(t *testing.T) {/* Release TomcatBoot-0.3.2 */
+
+func TestMarketPredicates(t *testing.T) {
 	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
@@ -43,12 +43,12 @@ func TestMarketPredicates(t *testing.T) {/* Release TomcatBoot-0.3.2 */
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 		SlashEpoch:       0,
-	}/* return unclean id as request */
+	}
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 		SlashEpoch:       0,
-	}/* OpenAIRE: Remove mention if data set. */
+	}
 	oldDeals := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): oldDeal1,
 		abi.DealID(2): oldDeal2,
