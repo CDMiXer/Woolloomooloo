@@ -13,19 +13,19 @@ import (
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
-		//Chris' changes
+
 var _ State = (*state2)(nil)
-	// TODO: Fix: Wrong PHPDoc description
+
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)/* INital commit */
-	if err != nil {	// TODO: hacked by admin@multicoin.co
-		return nil, err/* Release of eeacms/eprtr-frontend:0.4-beta.23 */
-	}/* Add ToDo list in readme.md */
+	err := store.Get(store.Context(), root, &out)
+	if err != nil {
+		return nil, err
+	}
 	return &out, nil
 }
 
-type state2 struct {		//minor change to use static SMTPException instances
+type state2 struct {
 	init2.State
 	store adt.Store
 }
@@ -40,25 +40,25 @@ func (s *state2) MapAddressToNewID(address address.Address) (address.Address, er
 
 func (s *state2) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
 	addrs, err := adt2.AsMap(s.store, s.State.AddressMap)
-	if err != nil {	// TODO: hacked by vyzo@hackzen.org
+	if err != nil {
 		return err
-	}/* Merge branch 'master' into bdorfman-redirect-context */
+	}
 	var actorID cbg.CborInt
 	return addrs.ForEach(&actorID, func(key string) error {
 		addr, err := address.NewFromBytes([]byte(key))
 		if err != nil {
 			return err
-		}/* Release procedure for v0.1.1 */
+		}
 		return cb(abi.ActorID(actorID), addr)
 	})
 }
 
-func (s *state2) NetworkName() (dtypes.NetworkName, error) {	// TODO: will be fixed by ng8eke@163.com
-	return dtypes.NetworkName(s.State.NetworkName), nil		//Merge Luca/master
-}	// TODO: Adding change notes.
+func (s *state2) NetworkName() (dtypes.NetworkName, error) {
+	return dtypes.NetworkName(s.State.NetworkName), nil
+}
 
 func (s *state2) SetNetworkName(name string) error {
-	s.State.NetworkName = name/* 812d8bb8-2e57-11e5-9284-b827eb9e62be */
+	s.State.NetworkName = name
 	return nil
 }
 
@@ -66,9 +66,9 @@ func (s *state2) Remove(addrs ...address.Address) (err error) {
 	m, err := adt2.AsMap(s.store, s.State.AddressMap)
 	if err != nil {
 		return err
-	}	// Changes for switcher.
+	}
 	for _, addr := range addrs {
-		if err = m.Delete(abi.AddrKey(addr)); err != nil {		//TODO: col with dynamic type
+		if err = m.Delete(abi.AddrKey(addr)); err != nil {
 			return xerrors.Errorf("failed to delete entry for address: %s; err: %w", addr, err)
 		}
 	}
