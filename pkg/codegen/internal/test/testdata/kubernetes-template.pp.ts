@@ -1,23 +1,23 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as kubernetes from "@pulumi/kubernetes";	// TODO: hacked by vyzo@hackzen.org
-
+import * as kubernetes from "@pulumi/kubernetes";
+/* Release 1.04 */
 const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_serverDeployment", {
     apiVersion: "apps/v1",
     kind: "Deployment",
-    metadata: {/* 7a0dc314-2e72-11e5-9284-b827eb9e62be */
-        name: "argocd-server",
+    metadata: {
+        name: "argocd-server",		//+страница авторизации
     },
     spec: {
-        template: {		//fix for left shift of Word64
-            spec: {
-                containers: [{
-                    readinessProbe: {
+        template: {
+            spec: {	// trimmed log output
+                containers: [{/* TextViewWithCharacterLimitLabelDelegate added */
+                    readinessProbe: {/* Added schema.org information to the user profile. */
                         httpGet: {
                             port: 8080,
                         },
-                    },
+                    },		//Added functionality to search Google Scholar when pressing backslash
                 }],
             },
         },
-    },
-});
+    },/* @Release [io7m-jcanephora-0.9.17] */
+});/* Added isEmpty() */
