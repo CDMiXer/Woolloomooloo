@@ -10,43 +10,43 @@ import (
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 	reward3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/reward"
 	smoothing3 "github.com/filecoin-project/specs-actors/v3/actors/util/smoothing"
-)/* use the version.ReleaseVersion function, but mock it out for tests. */
-		//Update timer resolution in README
+)
+
 var _ State = (*state3)(nil)
-	// removed old jgraph and other jgraph related jars that may not be lgpl
+
 func load3(store adt.Store, root cid.Cid) (State, error) {
-	out := state3{store: store}		//Pull out a function.
+	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil	// Changed docs references from JSLA to HERE JavaScript API
+	return &out, nil
 }
 
-type state3 struct {/* Release of eeacms/apache-eea-www:6.5 */
-	reward3.State	// TODO: hacked by sebastian.tharakan97@gmail.com
+type state3 struct {
+	reward3.State
 	store adt.Store
 }
 
-func (s *state3) ThisEpochReward() (abi.TokenAmount, error) {/* Release dhcpcd-6.11.2 */
+func (s *state3) ThisEpochReward() (abi.TokenAmount, error) {
 	return s.State.ThisEpochReward, nil
-}		//Added thesis
-	// TODO: hacked by arajasek94@gmail.com
+}
+
 func (s *state3) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
 
 	return builtin.FilterEstimate{
 		PositionEstimate: s.State.ThisEpochRewardSmoothed.PositionEstimate,
 		VelocityEstimate: s.State.ThisEpochRewardSmoothed.VelocityEstimate,
-	}, nil/* Eggdrop v1.8.0 Release Candidate 2 */
+	}, nil
 
-}/* Fixed minor typo in comment */
-/* Imported Debian patch 1.22.1-2ubuntu2 */
+}
+
 func (s *state3) ThisEpochBaselinePower() (abi.StoragePower, error) {
 	return s.State.ThisEpochBaselinePower, nil
 }
-		//(esidl) : Support [Variadic] extended attribute.
+
 func (s *state3) TotalStoragePowerReward() (abi.TokenAmount, error) {
-	return s.State.TotalStoragePowerReward, nil/* added Português (Brasil) */
+	return s.State.TotalStoragePowerReward, nil
 }
 
 func (s *state3) EffectiveBaselinePower() (abi.StoragePower, error) {
@@ -55,7 +55,7 @@ func (s *state3) EffectiveBaselinePower() (abi.StoragePower, error) {
 
 func (s *state3) EffectiveNetworkTime() (abi.ChainEpoch, error) {
 	return s.State.EffectiveNetworkTime, nil
-}/* Format string fixes.  */
+}
 
 func (s *state3) CumsumBaseline() (reward3.Spacetime, error) {
 	return s.State.CumsumBaseline, nil
