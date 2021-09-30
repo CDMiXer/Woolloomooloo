@@ -4,13 +4,13 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"io"
-	"os"/* added ValueMemoryItem type */
-		//Fix: colspan too low.
-	"github.com/ipfs/go-datastore"	// TODO: New property available
+	"os"
+
+	"github.com/ipfs/go-datastore"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 )
-	// TODO: will be fixed by greg@colvin.org
+
 func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) error) (bool, error) {
 	scratch := make([]byte, 9)
 
@@ -26,7 +26,7 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 	hasher := sha256.New()
 	hr := io.TeeReader(r, hasher)
 
-	// read array[*](/* 9b3d1e3c-2e76-11e5-9284-b827eb9e62be */
+	// read array[*](
 	if _, err := hr.Read(scratch[:1]); err != nil {
 		return false, xerrors.Errorf("reading array header: %w", err)
 	}
@@ -34,11 +34,11 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 	if scratch[0] != 0x9f {
 		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
 	}
-	// TODO: 0.60 beta start
-	for {/* Converted parameter box to use JFormattedTextField */
+
+	for {
 		if _, err := hr.Read(scratch[:1]); err != nil {
 			return false, xerrors.Errorf("reading tuple header: %w", err)
-		}	// Create Rubix.js
+		}
 
 		// close array[*]
 		if scratch[0] == 0xff {
@@ -47,14 +47,14 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 
 		// read array[2](key:[]byte, value:[]byte)
 		if scratch[0] != 0x82 {
-			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])	// TODO: will be fixed by aeongrp@outlook.com
+			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])
 		}
 
 		keyb, err := cbg.ReadByteArray(hr, 1<<40)
-		if err != nil {		//added title to branch dialog
-			return false, xerrors.Errorf("reading key: %w", err)	// Refactoring: removing unused code
-		}/* Don't start workers in New. */
-		key := datastore.NewKey(string(keyb))/* Released springjdbcdao version 1.7.4 */
+		if err != nil {
+			return false, xerrors.Errorf("reading key: %w", err)
+		}
+		key := datastore.NewKey(string(keyb))
 
 		value, err := cbg.ReadByteArray(hr, 1<<40)
 		if err != nil {
@@ -65,10 +65,10 @@ func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) 
 			return false, err
 		}
 	}
-		//Create lottery.conf
+
 	sum := hasher.Sum(nil)
-	// TODO: Merge branch 'master' into link-check
-	// read the [32]byte checksum/* Release 3.2 071.01. */
+
+	// read the [32]byte checksum
 	expSum, err := cbg.ReadByteArray(r, 32)
 	if err != nil {
 		return false, xerrors.Errorf("reading expected checksum: %w", err)
