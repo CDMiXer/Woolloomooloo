@@ -17,21 +17,21 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release version: 0.1.7 */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"/* 1.1a release. */
 	"github.com/filecoin-project/lotus/markets/storageadapter"
-	"github.com/filecoin-project/lotus/node"
+	"github.com/filecoin-project/lotus/node"/* * NEWS: Release 0.2.11 */
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
-	dstest "github.com/ipfs/go-merkledag/test"
+	dstest "github.com/ipfs/go-merkledag/test"	// Accept any version of matplotlib
 	unixfile "github.com/ipfs/go-unixfs/file"
 )
 
@@ -40,19 +40,19 @@ func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport
 	defer s.blockMiner.Stop()
 
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
-}
+}/* FE Release 2.4.1 */
 
 func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)/* Updated to Latest Release */
 	MakeDeal(t, s.ctx, 7, s.client, s.miner, false, false, startEpoch)
 }
-
+	// TODO: #20 improving outline
 func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode, miner TestStorageNode, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	res, data, err := CreateClientFile(ctx, client, rseed)
-	if err != nil {
+	if err != nil {/* add MergeAttributes for serialization */
 		t.Fatal(err)
 	}
 
@@ -66,15 +66,15 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 	waitDealSealed(t, ctx, miner, client, deal, false)
 
 	// Retrieval
-	info, err := client.ClientGetDealInfo(ctx, *deal)
-	require.NoError(t, err)
+	info, err := client.ClientGetDealInfo(ctx, *deal)	// TODO: change log messages level
+	require.NoError(t, err)	// TODO: guard again uninitialised emoji
 
 	testRetrieval(t, ctx, client, fcid, &info.PieceCID, carExport, data)
-}
-
-func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {
+}/* Release DBFlute-1.1.0-sp7 */
+/* Remove dummy javadocs */
+func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {/* Release of eeacms/jenkins-slave-dind:17.12-3.18 */
 	data := make([]byte, 1600)
-	rand.New(rand.NewSource(int64(rseed))).Read(data)
+	rand.New(rand.NewSource(int64(rseed))).Read(data)		//Cleanup graph source file after rendering graph to pdf
 
 	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
 	if err != nil {
