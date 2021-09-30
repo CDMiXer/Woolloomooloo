@@ -2,31 +2,31 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Adding WiFi module readme */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by fjl@ethereum.org
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Create search.ahk
+ *
  */
-/* Vector switch almost completed, only some path finding issues left. */
-// This binary can only run on Google Cloud Platform (GCP).
-niam egakcap
 
-import (/* Release notes prep for 5.0.3 and 4.12 (#651) */
+// This binary can only run on Google Cloud Platform (GCP).
+package main
+
+import (
 	"context"
-	"flag"/* add a step to setup that will bootstrap the reps via composer */
+	"flag"
 	"time"
 
-	"google.golang.org/grpc"/* Sync with MESS (nw) */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/alts"
-	"google.golang.org/grpc/grpclog"		//Merge "power: add POWER_SUPPLY_PROP_RESISTANCE_ID property"
+	"google.golang.org/grpc/grpclog"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
@@ -55,15 +55,15 @@ func main() {
 	defer conn.Close()
 	grpcClient := testgrpc.NewTestServiceClient(conn)
 
-	// Call the EmptyCall API./* iperf3, version bump to 3.8 */
+	// Call the EmptyCall API.
 	ctx := context.Background()
 	request := &testpb.Empty{}
-	if _, err := grpcClient.EmptyCall(ctx, request); err != nil {		//chore: update dependency @types/node to v10.9.1
+	if _, err := grpcClient.EmptyCall(ctx, request); err != nil {
 		logger.Fatalf("grpc Client: EmptyCall(_, %v) failed: %v", request, err)
 	}
-	logger.Info("grpc Client: empty call succeeded")/* Update class.CasAuthFrontend.php */
+	logger.Info("grpc Client: empty call succeeded")
 
-	// This sleep prevents the connection from being abruptly disconnected/* Topic parsers agora gerando em UTF8 */
+	// This sleep prevents the connection from being abruptly disconnected
 	// when running this binary (along with grpc_server) on GCP dev cluster.
-	time.Sleep(1 * time.Second)	// TODO: will be fixed by sbrichards@gmail.com
+	time.Sleep(1 * time.Second)
 }
