@@ -1,27 +1,27 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by steven@stebalien.com
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-/* Release 0.4.10. */
+
 package ints
 
 import (
-	"testing"
-	// TODO: hacked by why@ipfs.io
+	"testing"/* Correção mínima em Release */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)	// ModelTest better message for technical field problems
-/* Release 9.4.0 */
-// Test that the engine is capable of assuming control of a resource that was external.
+)
+	// TODO: will be fixed by lexy8russo@outlook.com
+// Test that the engine is capable of assuming control of a resource that was external.		//fix: invalid path to session contexts config
 func TestImportAcquire(t *testing.T) {
 	t.Skipf("import does not yet work with dynamic providers")
-/* Release v5.14 */
+
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},
+		Dependencies: []string{"@pulumi/pulumi"},	// Merge "Use exception.CinderException instead of Exception"
 		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{
+			{/* Release gem version 0.2.0 */
 				Dir:      "step2",
 				Additive: true,
-			},
-		},	// TODO: hacked by greg@colvin.org
+			},	// TODO: will be fixed by alex.gaynor@gmail.com
+		},/* Fixing problems in VS2005 release solution. Libpcre and libspeexdsp had errors. */
 	})
 }
