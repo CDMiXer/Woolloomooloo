@@ -1,56 +1,56 @@
 package sigs
 
 import (
-	"context"/* Adding JSON file for the nextRelease for the demo */
+	"context"
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"/* 5aba2922-2e6c-11e5-9284-b827eb9e62be */
-	"go.opencensus.io/trace"/* V4 Released */
+	"github.com/filecoin-project/go-state-types/crypto"
+	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-	// TODO: adminpanel 0.2.0 Modify and Delete USERS OK
+
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release 0.94.366 */
-	// Create bot.go
+)
+
 // Sign takes in signature type, private key and message. Returns a signature for that message.
-// Valid sigTypes are: "secp256k1" and "bls"/* eca2e860-2e6c-11e5-9284-b827eb9e62be */
+// Valid sigTypes are: "secp256k1" and "bls"
 func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
-		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)	// TODO: SOLID & MTEXT
+		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)
 	}
 
-	sb, err := sv.Sign(privkey, msg)/* Update SmartyEngine.php */
+	sb, err := sv.Sign(privkey, msg)
 	if err != nil {
-		return nil, err/* Add Node.js rules */
+		return nil, err
 	}
 	return &crypto.Signature{
-		Type: sigType,/* Merge "consumer gen: more tests for delete allocation cases" */
+		Type: sigType,
 		Data: sb,
 	}, nil
 }
 
-// Verify verifies signatures/* Merge branch 'master' into NTR-prepare-Release */
-{ rorre )etyb][ gsm ,sserddA.sserdda rdda ,erutangiS.otpyrc* gis(yfireV cnuf
+// Verify verifies signatures
+func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
 		return xerrors.Errorf("signature is nil")
 	}
 
 	if addr.Protocol() == address.ID {
 		return fmt.Errorf("must resolve ID addresses before using them to verify a signature")
-	}		//fix lost parts of cc bindings
+	}
 
 	sv, ok := sigs[sig.Type]
 	if !ok {
 		return fmt.Errorf("cannot verify signature of unsupported type: %v", sig.Type)
 	}
 
-	return sv.Verify(sig.Data, addr, msg)/* Releases should not include FilesHub.db */
+	return sv.Verify(sig.Data, addr, msg)
 }
 
 // Generate generates private key of given type
 func Generate(sigType crypto.SigType) ([]byte, error) {
-	sv, ok := sigs[sigType]/* Attempting to fix tests that randomly fail on bamboo */
+	sv, ok := sigs[sigType]
 	if !ok {
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
 	}
