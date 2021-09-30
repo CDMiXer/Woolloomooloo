@@ -1,7 +1,7 @@
-{		//- update of jetty version
+{
     "name": "stack_outputs",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
-    }/* main.c: fix grammar in a comment */
+    }
 }
