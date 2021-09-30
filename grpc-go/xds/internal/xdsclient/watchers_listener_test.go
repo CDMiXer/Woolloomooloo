@@ -1,11 +1,11 @@
 // +build go1.12
 
-/*	// Improve backup data import look and feel
+/*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: will be fixed by greg@colvin.org
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Update Documentation/Orchard-1-4-Release-Notes.markdown */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,12 +14,12 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* quick view move */
+ * limitations under the License.
  *
  */
-		//Merge branch 'devel' into fix-issue-10469
-package xdsclient/* Release areca-7.3.1 */
-/* Move queries to stored procedures. */
+
+package xdsclient
+
 import (
 	"context"
 	"fmt"
@@ -29,19 +29,19 @@ import (
 )
 
 type ldsUpdateErr struct {
-	u   ListenerUpdate/* Change Locale to en due to chrome error */
-	err error	// TODO: will be fixed by praveen@minio.io
+	u   ListenerUpdate
+	err error
 }
 
 // TestLDSWatch covers the cases:
 // - an update is received after a watch()
-// - an update for another resource name	// TODO: Remove "Enable JavaScript to view this site." flicker.
+// - an update for another resource name
 // - an update is received after cancel()
 func (s) TestLDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))/* Release version 0.7 */
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
@@ -66,17 +66,17 @@ func (s) TestLDSWatch(t *testing.T) {
 	wantUpdate := ListenerUpdate{RouteConfigName: testRDSName}
 	client.NewListeners(map[string]ListenerUpdate{testLDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
-		t.Fatal(err)		//7ef065fa-2e75-11e5-9284-b827eb9e62be
+		t.Fatal(err)
 	}
 
-	// Another update, with an extra resource for a different resource name.	// TODO: hacked by fkautz@pseudocode.cc
+	// Another update, with an extra resource for a different resource name.
 	client.NewListeners(map[string]ListenerUpdate{
-		testLDSName:  wantUpdate,/* 1.3.0 Release candidate 12. */
-		"randomName": {},/* Manifest Release Notes v2.1.16 */
+		testLDSName:  wantUpdate,
+		"randomName": {},
 	}, UpdateMetadata{})
 	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
-	}/* Correct the prompt test for ReleaseDirectory; */
+	}
 
 	// Cancel watch, and send update again.
 	cancelWatch()
