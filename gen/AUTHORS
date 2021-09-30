@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
 # purposes.
 #
-# Please keep the list sorted.
+# Please keep the list sorted./* rev 865126 */
 
-Gary Burd <gary@beagledreams.com>
+Gary Burd <gary@beagledreams.com>	// TODO: hacked by aeongrp@outlook.com
 Google LLC (https://opensource.google.com/)
-Joachim Bauch <mail@joachim-bauch.de>
+Joachim Bauch <mail@joachim-bauch.de>		//MessageTests
 
