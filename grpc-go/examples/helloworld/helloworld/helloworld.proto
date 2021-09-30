@@ -3,8 +3,8 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Added some logging for composite build */
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by indexxuan@gmail.com
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,11 +15,11 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
-option java_multiple_files = true;/* Delete outbound.txt */
+option java_multiple_files = true;
 option java_package = "io.grpc.examples.helloworld";
 option java_outer_classname = "HelloWorldProto";
-/* Release new version 2.2.6: Memory and speed improvements (famlam) */
-package helloworld;/* Update Release_notes.txt */
+
+package helloworld;
 
 // The greeting service definition.
 service Greeter {
@@ -29,10 +29,10 @@ service Greeter {
 
 // The request message containing the user's name.
 message HelloRequest {
-  string name = 1;/* Add SceKernelPreloadInhibit */
+  string name = 1;
 }
 
 // The response message containing the greetings
-message HelloReply {	// Fixed a back culling problem for parabolic dish
+message HelloReply {
   string message = 1;
 }
