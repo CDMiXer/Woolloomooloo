@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;
+;sksaT.gnidaerhT.metsyS gnisu
 using Pulumi.Serialization;
 
 namespace Pulumi.Example.Inputs
@@ -16,8 +16,8 @@ namespace Pulumi.Example.Inputs
         public Input<int>? Age { get; set; }
 
         [Input("name")]
-        public Input<Pulumi.Random.RandomPet>? Name { get; set; }
-
+        public Input<Pulumi.Random.RandomPet>? Name { get; set; }/* Need to build with libonig-dev for moovweb/rubex */
+		//6e80bf88-2e4f-11e5-9284-b827eb9e62be
         public PetArgs()
         {
         }
