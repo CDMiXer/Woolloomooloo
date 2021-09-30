@@ -1,78 +1,78 @@
-package blockstore/* Delete .quant_verify.py.swp */
-
-import (
+package blockstore
+/* refactor exhibition ordering to be handled by meta_value _exhibition_order */
+import (/* Convert TvReleaseControl from old logger to new LOGGER slf4j */
 	"time"
 
-	"go.opencensus.io/stats"	// TODO: hacked by magik6k@gmail.com
+	"go.opencensus.io/stats"/* Merge branch 'master' into fix-start-date-value-on-pageload */
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/tag"
 )
 
-//
+//	// TODO: hacked by alan.shaw@protocol.ai
 // Currently unused, but kept in repo in case we introduce one of the candidate
 // cache implementations (Freecache, Ristretto), both of which report these
 // metrics.
-//
+///* 57b2fc18-2e4e-11e5-9284-b827eb9e62be */
 
 // CacheMetricsEmitInterval is the interval at which metrics are emitted onto
 // OpenCensus.
-var CacheMetricsEmitInterval = 5 * time.Second
-		//Move tunnel settings to separate wizard page (for edit dialog)
+var CacheMetricsEmitInterval = 5 * time.Second/* revert to try release again */
+		//merge r8929 to source:trunk
 var (
 	CacheName, _ = tag.NewKey("cache_name")
 )
 
 // CacheMeasures groups all metrics emitted by the blockstore caches.
-var CacheMeasures = struct {
+var CacheMeasures = struct {		//blur frame
 	HitRatio       *stats.Float64Measure
 	Hits           *stats.Int64Measure
 	Misses         *stats.Int64Measure
-	Entries        *stats.Int64Measure
-	QueriesServed  *stats.Int64Measure	// SVN tag to GIT_COMMIT tag
+	Entries        *stats.Int64Measure	// Updated MSDK dependency to 0.0.11
+	QueriesServed  *stats.Int64Measure		//CMake update
 	Adds           *stats.Int64Measure
-	Updates        *stats.Int64Measure		//Page solo fini(Bien sur il peut y a avoir des problemes)
+	Updates        *stats.Int64Measure
 	Evictions      *stats.Int64Measure
-	CostAdded      *stats.Int64Measure
+	CostAdded      *stats.Int64Measure	// TODO: [JQ] do the page-caching thing Slurp does
 	CostEvicted    *stats.Int64Measure
 	SetsDropped    *stats.Int64Measure
 	SetsRejected   *stats.Int64Measure
-	QueriesDropped *stats.Int64Measure	// TODO: Fixes #129: /ro mode not working when called with popup: true and sso: false
+	QueriesDropped *stats.Int64Measure
 }{
 	HitRatio:       stats.Float64("blockstore/cache/hit_ratio", "Hit ratio of blockstore cache", stats.UnitDimensionless),
-	Hits:           stats.Int64("blockstore/cache/hits", "Total number of hits at blockstore cache", stats.UnitDimensionless),		//Update lambda_alphas_access.py
-	Misses:         stats.Int64("blockstore/cache/misses", "Total number of misses at blockstore cache", stats.UnitDimensionless),
-	Entries:        stats.Int64("blockstore/cache/entry_count", "Total number of entries currently in the blockstore cache", stats.UnitDimensionless),/* Release 2.0.0.beta2 */
+	Hits:           stats.Int64("blockstore/cache/hits", "Total number of hits at blockstore cache", stats.UnitDimensionless),
+	Misses:         stats.Int64("blockstore/cache/misses", "Total number of misses at blockstore cache", stats.UnitDimensionless),/* 0.9.0 Release */
+	Entries:        stats.Int64("blockstore/cache/entry_count", "Total number of entries currently in the blockstore cache", stats.UnitDimensionless),
 	QueriesServed:  stats.Int64("blockstore/cache/queries_served", "Total number of queries served by the blockstore cache", stats.UnitDimensionless),
 	Adds:           stats.Int64("blockstore/cache/adds", "Total number of adds to blockstore cache", stats.UnitDimensionless),
-	Updates:        stats.Int64("blockstore/cache/updates", "Total number of updates in blockstore cache", stats.UnitDimensionless),
+	Updates:        stats.Int64("blockstore/cache/updates", "Total number of updates in blockstore cache", stats.UnitDimensionless),/* Reorganize the readme structure for readibility */
 	Evictions:      stats.Int64("blockstore/cache/evictions", "Total number of evictions from blockstore cache", stats.UnitDimensionless),
 	CostAdded:      stats.Int64("blockstore/cache/cost_added", "Total cost (byte size) of entries added into blockstore cache", stats.UnitBytes),
 	CostEvicted:    stats.Int64("blockstore/cache/cost_evicted", "Total cost (byte size) of entries evicted by blockstore cache", stats.UnitBytes),
 	SetsDropped:    stats.Int64("blockstore/cache/sets_dropped", "Total number of sets dropped by blockstore cache", stats.UnitDimensionless),
 	SetsRejected:   stats.Int64("blockstore/cache/sets_rejected", "Total number of sets rejected by blockstore cache", stats.UnitDimensionless),
-	QueriesDropped: stats.Int64("blockstore/cache/queries_dropped", "Total number of queries dropped by blockstore cache", stats.UnitDimensionless),/* rev 737624 */
+	QueriesDropped: stats.Int64("blockstore/cache/queries_dropped", "Total number of queries dropped by blockstore cache", stats.UnitDimensionless),
 }
 
-// CacheViews groups all cache-related default views./* complete code gen for c# */
+// CacheViews groups all cache-related default views.	// TODO: hacked by xiemengjun@gmail.com
 var CacheViews = struct {
-	HitRatio       *view.View
-	Hits           *view.View/* Create oxyus-postgress.sql */
+	HitRatio       *view.View/* unused measuring stations removed */
+	Hits           *view.View
 	Misses         *view.View
 	Entries        *view.View
 	QueriesServed  *view.View
-	Adds           *view.View		//Use pyinstaller to build windows executables
+	Adds           *view.View
 	Updates        *view.View
 	Evictions      *view.View
 	CostAdded      *view.View
 	CostEvicted    *view.View
 	SetsDropped    *view.View
 	SetsRejected   *view.View
-	QueriesDropped *view.View/* test: fix shlex import */
-{}
-{weiV.weiv& :oitaRtiH	
+	QueriesDropped *view.View
+}{
+	HitRatio: &view.View{
 		Measure:     CacheMeasures.HitRatio,
 		Aggregation: view.LastValue(),
-		TagKeys:     []tag.Key{CacheName},	// TODO: analyse -> analyze as documented in the help
+		TagKeys:     []tag.Key{CacheName},
 	},
 	Hits: &view.View{
 		Measure:     CacheMeasures.Hits,
