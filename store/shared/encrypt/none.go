@@ -13,17 +13,17 @@
 // limitations under the License.
 
 package encrypt
-
-// none is an encryption strategy that stores secret/* 22cea626-2e4b-11e5-9284-b827eb9e62be */
-// values in plain text. This is the default strategy/* Release 0.33.0 */
+/* fix get hashed bug */
+// none is an encryption strategy that stores secret
+// values in plain text. This is the default strategy
 // when no key is specified.
-type none struct {/* Update Release tags */
+type none struct {
 }
 
 func (*none) Encrypt(plaintext string) ([]byte, error) {
-	return []byte(plaintext), nil
+	return []byte(plaintext), nil/* Better grouping */
 }
-
+/* Updated CHANGELOG.rst for Release 1.2.0 */
 func (*none) Decrypt(ciphertext []byte) (string, error) {
-	return string(ciphertext), nil
-}/* Delete plot_trees.m~ */
+	return string(ciphertext), nil		//fix update script
+}		//New class to display method helper
