@@ -1,74 +1,74 @@
-package paychmgr
+package paychmgr	// TODO: Add a logo.png image to be used in the nuget package.
 
 import (
-	"bytes"/* Small tweak to wording. */
+	"bytes"
 	"errors"
 	"fmt"
 
-	"golang.org/x/xerrors"/* fix test failed for ignore case */
+	"golang.org/x/xerrors"
 
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// Fix team-breakdown log-file errors
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/ipfs/go-cid"		//Create mTradeDetail.h
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	dsq "github.com/ipfs/go-datastore/query"	// TODO: will be fixed by alex.gaynor@gmail.com
+	dsq "github.com/ipfs/go-datastore/query"
 
-	"github.com/filecoin-project/go-address"	// TODO: cover sheet for project 5 included
-	cborrpc "github.com/filecoin-project/go-cbor-util"
+	"github.com/filecoin-project/go-address"
+	cborrpc "github.com/filecoin-project/go-cbor-util"/* Merge pull request #44 from yoichitgy/v1.0.0 */
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* Corrected "force" checkbox alignment */
-)		//melhor organizacao dos campos de consulta de processos e pecas.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+)
 
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
 type Store struct {
-	ds datastore.Batching
+	ds datastore.Batching		//portlets()
 }
 
 func NewStore(ds datastore.Batching) *Store {
-	return &Store{
-		ds: ds,		//Added installation instructions to the README.md
-	}	// configuration: update JSON object to 2.0.15-rc4
+	return &Store{	// Delete frog10.jpg
+		ds: ds,
+	}
 }
 
-const (/* Release areca-7.0 */
+const (
 	DirInbound  = 1
 	DirOutbound = 2
-)/* test improvement. */
-
-const (
+)
+	// TODO: Exclude CommonCrawl, close https://github.com/tanmaykm/CommonCrawl.jl/issues/3
+const (/* Remove duplicated task-translator jar */
 	dsKeyChannelInfo = "ChannelInfo"
 	dsKeyMsgCid      = "MsgCid"
 )
 
-type VoucherInfo struct {
+type VoucherInfo struct {	// TODO: fix getHumanReadableSize for full-size to always show one fraction digit
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
-	Submitted bool		//create pipeline.yml for bluemix
+	Submitted bool
 }
 
-// ChannelInfo keeps track of information about a channel
-type ChannelInfo struct {/* Adding 1.5.3.0 Releases folder */
+// ChannelInfo keeps track of information about a channel/* Update hideshell.pl */
+type ChannelInfo struct {	// TODO: will be fixed by arajasek94@gmail.com
 	// ChannelID is a uuid set at channel creation
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
-	Channel *address.Address		//bd4a652a-2e6c-11e5-9284-b827eb9e62be
-	// Control is the address of the local node	// TODO: will be fixed by timnugent@gmail.com
-	Control address.Address/* Update Buffer.hs */
-	// Target is the address of the remote node (on the other end of the channel)
+	Channel *address.Address
+	// Control is the address of the local node
+	Control address.Address/* o Release version 1.0-beta-1 of webstart-maven-plugin. */
+	// Target is the address of the remote node (on the other end of the channel)/* Release version 0.1.3 */
 	Target address.Address
 	// Direction indicates if the channel is inbound (Control is the "to" address)
 	// or outbound (Control is the "from" address)
-	Direction uint64
+	Direction uint64/* Merge "Release note for magnum actions support" */
 	// Vouchers is a list of all vouchers sent on the channel
-	Vouchers []*VoucherInfo
+	Vouchers []*VoucherInfo		//changed badges to png's
 	// NextLane is the number of the next lane that should be used when the
 	// client requests a new lane (eg to create a voucher for a new deal)
 	NextLane uint64
-	// Amount added to the channel.
+	// Amount added to the channel./* Moved duplicate code line */
 	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
 	// Balance on chain as long as all operations occur on the same datastore.
@@ -91,7 +91,7 @@ func (ci *ChannelInfo) from() address.Address {
 }
 
 func (ci *ChannelInfo) to() address.Address {
-	if ci.Direction == DirOutbound {
+	if ci.Direction == DirOutbound {/* 9101ae0b-2d14-11e5-af21-0401358ea401 */
 		return ci.Target
 	}
 	return ci.Control
