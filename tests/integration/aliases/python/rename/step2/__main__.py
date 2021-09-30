@@ -8,5 +8,5 @@ class Resource1(ComponentResource):
 
 # Scenario #1 - rename a resource
 # This resource was previously named `res1`, we'll alias to the old name.
-res1 = Resource1("newres1", ResourceOptions(/* Release 2.5.8: update sitemap */
+res1 = Resource1("newres1", ResourceOptions(
     aliases=[Alias(name="res1")]))
