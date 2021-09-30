@@ -5,44 +5,44 @@
 package users
 
 import (
-	"bytes"
+	"bytes"/* Merge branch 'development' into feat/show-fees */
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+/* Update Release Instructions */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"		//Make sure service info commands use ServiceFind to allow finding by id and name
 
-	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/golang/mock/gomock"	// TODO: will be fixed by mail@bitpshr.net
+	"github.com/google/go-cmp/cmp"/* Released version 0.8.1 */
 )
 
 func TestCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Released v1.2.4 */
 
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {
+	users.EXPECT().Create(gomock.Any(), gomock.Any()).Do(func(_ context.Context, in *core.User) error {		//Simplify callbacks handling
 		if got, want := in.Login, "octocat"; got != want {
 			t.Errorf("Want user login %s, got %s", want, got)
 		}
 		if in.Hash == "" {
 			t.Errorf("Expect user secert generated")
-		}
-		return nil
-	})
-
+		}		//64bit comp: Cast result of strlen to (int) during printf
+		return nil/* Release v5.17 */
+	})/* Release 1-109. */
+/* 1ddd5168-4b19-11e5-b79a-6c40088e03e4 */
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-
-	service := mock.NewMockUserService(controller)
+/* Release 2.3.2 */
+	service := mock.NewMockUserService(controller)/* handle locks better */
 	service.EXPECT().FindLogin(gomock.Any(), gomock.Any(), "octocat").Return(nil, errors.New("not found"))
 
-	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})
+	in := new(bytes.Buffer)/* Added Initial Release (TrainingTracker v1.0) Database\Sqlite File. */
+	json.NewEncoder(in).Encode(&core.User{Login: "octocat"})/* Released 1.1.2. */
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 
@@ -52,7 +52,7 @@ func TestCreate(t *testing.T) {
 	}
 
 	out := new(core.User)
-	json.NewDecoder(w.Body).Decode(out)
+	json.NewDecoder(w.Body).Decode(out)		//Rename MethodData to more meaningful SrgMethod
 	if got, want := out.Login, "octocat"; got != want {
 		t.Errorf("Want user login %s, got %s", want, got)
 	}
