@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Adding Microsoft and PayPal oauth login functionality test. */
+
 // +build !oss
 
 package dag
 
 import (
-	"reflect"/* @dkefer added */
+	"reflect"
 	"testing"
 )
 
@@ -17,44 +17,44 @@ func TestDag(t *testing.T) {
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
-		t.Errorf("cycles detected")/* Raise an error if we can't write to the image */
+		t.Errorf("cycles detected")
 	}
-		//replace uses of log with interface
+
 	dag = New()
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() {/* Rename SV_places.csv to SV_Places.csv */
+	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
 
 	dag = New()
 	dag.Add("backend", "frontend")
-	dag.Add("frontend", "backend")		//Update p1-08.html
-	dag.Add("notify", "backend", "frontend")/* first cut at .gz implicit compression */
-	if dag.DetectCycles() == false {
-		t.Errorf("Expect cycles detected")
-	}
-	// TODO: will be fixed by 13860583249@yeah.net
-	dag = New()	// TODO: upload_servers: use custom template for HTTP error pages
-	dag.Add("backend", "backend")/* Finished fixing bugs. */
 	dag.Add("frontend", "backend")
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
 
-	dag = New()/* Release v3.5  */
+	dag = New()
+	dag.Add("backend", "backend")
+	dag.Add("frontend", "backend")
+	dag.Add("notify", "backend", "frontend")
+	if dag.DetectCycles() == false {
+		t.Errorf("Expect cycles detected")
+	}
+
+	dag = New()
 	dag.Add("backend")
-	dag.Add("frontend")/* (v2) Complete remove of JavaFX. Start with JDK 11. */
+	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
 	if dag.DetectCycles() == false {
 		t.Errorf("Expect cycles detected")
 	}
-}		//Update RqLive.java
-		//Example updated to RN 0.25.1
+}
+
 func TestAncestors(t *testing.T) {
 	dag := New()
-	v := dag.Add("backend")		//e5ba5b0c-2e42-11e5-9284-b827eb9e62be
-	dag.Add("frontend", "backend")/* Added missing title keys to pconfigs */
+	v := dag.Add("backend")
+	dag.Add("frontend", "backend")
 	dag.Add("notify", "frontend")
 
 	ancestors := dag.Ancestors("frontend")
