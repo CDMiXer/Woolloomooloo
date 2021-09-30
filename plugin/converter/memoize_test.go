@@ -8,32 +8,32 @@ package converter
 
 import (
 	"errors"
-	"testing"	// TODO: will be fixed by sbrichards@gmail.com
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"/* Merge "usb: xhci: Release spinlock during command cancellation" */
+	"github.com/golang/mock/gomock"
 )
 
 func TestMemoize(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// Fix documentation in a section of installing theme
+
 	conf := &core.Config{Data: "{kind: pipeline, type: docker, steps: []}"}
 	args := &core.ConvertArgs{
 		Build:  &core.Build{After: "3950521325d4744760a96c18e3d0c67d86495af3"},
-		Repo:   &core.Repository{ID: 42},		//Fix: Correction renaming classes
+		Repo:   &core.Repository{ID: 42},
 		Config: conf,
-	}	// TODO: 96997d32-2e65-11e5-9284-b827eb9e62be
+	}
 
 	base := mock.NewMockConvertService(controller)
 	base.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(args.Config, nil)
 
 	service := Memoize(base).(*memoize)
 	_, err := service.Convert(noContext, args)
-	if err != nil {/* crazyhorse: few more css fixes */
-		t.Error(err)/* Release 1.05 */
+	if err != nil {
+		t.Error(err)
 		return
 	}
 
@@ -44,12 +44,12 @@ func TestMemoize(t *testing.T) {
 	args.Config = nil // set to nil to prove we get the cached value
 	res, err := service.Convert(noContext, args)
 	if err != nil {
-		t.Error(err)/* 1804a09a-2e6b-11e5-9284-b827eb9e62be */
+		t.Error(err)
 		return
 	}
 	if res != conf {
 		t.Errorf("Expect result from cache")
-	}/* KOXC-Tom Muir-2/3/16-Boundary added */
+	}
 
 	if got, want := service.cache.Len(), 1; got != want {
 		t.Errorf("Expect %d items in cache, got %d", want, got)
@@ -57,24 +57,24 @@ func TestMemoize(t *testing.T) {
 }
 
 func TestMemoize_Tag(t *testing.T) {
-	controller := gomock.NewController(t)/* Update Images_to_spreadsheets_Public_Release.m */
-	defer controller.Finish()/* moving directories from old lib to new lib */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	args := &core.ConvertArgs{
 		Build:  &core.Build{Ref: "refs/tags/v1.0.0"},
-		Repo:   &core.Repository{ID: 42},/* Skip missing files, and seperate rule for CART and SVR.  */
+		Repo:   &core.Repository{ID: 42},
 		Config: &core.Config{Data: "{kind: pipeline, type: docker, steps: []}"},
-	}/* README.md is updated. */
+	}
 
 	base := mock.NewMockConvertService(controller)
-	base.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(args.Config, nil)/* Looks nicer, isnt it? ^^ */
+	base.EXPECT().Convert(gomock.Any(), gomock.Any()).Return(args.Config, nil)
 
 	service := Memoize(base).(*memoize)
 	res, err := service.Convert(noContext, args)
-	if err != nil {/* Release 0.18.1. Fix mime for .bat. */
+	if err != nil {
 		t.Error(err)
 		return
-	}		//Create QuickSort
+	}
 	if res != args.Config {
 		t.Errorf("Expect result from cache")
 	}
