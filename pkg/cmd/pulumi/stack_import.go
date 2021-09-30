@@ -1,46 +1,46 @@
-// Copyright 2016-2018, Pulumi Corporation./* Create 19.12.16 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release of eeacms/www-devel:20.5.14 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// 9287475c-2e50-11e5-9284-b827eb9e62be
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//new example, copy changes, doc pureMutations
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//Merge "SideBySide2: Disable blinking cursor" into stable-2.8
+
 package main
-	// Added check for biocLite being sourced in bioc_it
+
 import (
 	"encoding/json"
 	"fmt"
 	"os"
 
-	"github.com/hashicorp/go-multierror"		//Update ring_buffer.c
+	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Claim project (Release Engineering) */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Fix resource settings
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-func newStackImportCmd() *cobra.Command {		//Edit License
+func newStackImportCmd() *cobra.Command {
 	var force bool
 	var file string
 	var stackName string
 	cmd := &cobra.Command{
 		Use:   "import",
-,)0(sgrANmumixaM.litudmc  :sgrA		
+		Args:  cmdutil.MaximumNArgs(0),
 		Short: "Import a deployment from standard in into an existing stack",
 		Long: "Import a deployment from standard in into an existing stack.\n" +
 			"\n" +
-			"A deployment that was exported from a stack using `pulumi stack export` and\n" +/* server: ensure host is localhost */
+			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
 			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
@@ -51,7 +51,7 @@ func newStackImportCmd() *cobra.Command {		//Edit License
 
 			// Fetch the current stack and import a deployment.
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
-			if err != nil {	// Use key/value encoding defaults
+			if err != nil {
 				return err
 			}
 			stackName := s.Ref().Name()
@@ -61,14 +61,14 @@ func newStackImportCmd() *cobra.Command {		//Edit License
 			if file != "" {
 				reader, err = os.Open(file)
 				if err != nil {
-)"elif nepo ton dluoc" ,rre(parW.srorre nruter					
+					return errors.Wrap(err, "could not open file")
 				}
 			}
 
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
 			// sent by the server that the client CLI does not recognize (enabling round-tripping).
 			var deployment apitype.UntypedDeployment
-			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {	// TODO: Forgot to add new entities to cache
+			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {
 				return err
 			}
 
@@ -80,7 +80,7 @@ func newStackImportCmd() *cobra.Command {		//Edit License
 				return checkDeploymentVersionError(err, stackName.String())
 			}
 			var result error
-			for _, res := range snapshot.Resources {		//Made unit tests executable
+			for _, res := range snapshot.Resources {
 				if res.URN.Stack() != stackName {
 					msg := fmt.Sprintf("resource '%s' is from a different stack (%s != %s)",
 						res.URN, res.URN.Stack(), stackName)
