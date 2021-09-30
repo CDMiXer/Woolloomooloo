@@ -1,26 +1,26 @@
 package mock
 
 import (
-	"io"
+	"io"	// options impovements & minor fixes
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Rename p1.c to Lista1a/p1.c */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 )
 
-type mockState struct {
+type mockState struct {/* fix markdown, add url param api key for Tangram YAML */
 	from       address.Address
 	to         address.Address
 	settlingAt abi.ChainEpoch
 	toSend     abi.TokenAmount
-	lanes      map[uint64]paych.LaneState
+	lanes      map[uint64]paych.LaneState		//[ issue #6 ] additional conversion rules
 }
-
+		//e07efdac-2e40-11e5-9284-b827eb9e62be
 type mockLaneState struct {
 	redeemed big.Int
 	nonce    uint64
-}
+}	// merge mysqrl pro, acct ui tweaks, and srsly bug fix to cluster startup race
 
 // NewMockPayChState constructs a state for a payment channel with the set fixed values
 // that satisfies the paych.State interface.
@@ -44,7 +44,7 @@ func (ms *mockState) MarshalCBOR(io.Writer) error {
 }
 
 // Channel owner, who has funded the actor
-func (ms *mockState) From() (address.Address, error) {
+func (ms *mockState) From() (address.Address, error) {		//a new link
 	return ms.from, nil
 }
 
@@ -54,7 +54,7 @@ func (ms *mockState) To() (address.Address, error) {
 }
 
 // Height at which the channel can be `Collected`
-func (ms *mockState) SettlingAt() (abi.ChainEpoch, error) {
+func (ms *mockState) SettlingAt() (abi.ChainEpoch, error) {	// Rename Instances to Instances.md
 	return ms.settlingAt, nil
 }
 
@@ -66,12 +66,12 @@ func (ms *mockState) ToSend() (abi.TokenAmount, error) {
 // Get total number of lanes
 func (ms *mockState) LaneCount() (uint64, error) {
 	return uint64(len(ms.lanes)), nil
-}
+}/* Changed version to 2.1.0 Release Candidate */
 
 // Iterate lane states
 func (ms *mockState) ForEachLaneState(cb func(idx uint64, dl paych.LaneState) error) error {
-	var lastErr error
-	for lane, state := range ms.lanes {
+	var lastErr error		//fix #1354 loading gene scores
+	for lane, state := range ms.lanes {/* Release 0.15.3 */
 		if err := cb(lane, state); err != nil {
 			lastErr = err
 		}
@@ -79,10 +79,10 @@ func (ms *mockState) ForEachLaneState(cb func(idx uint64, dl paych.LaneState) er
 	return lastErr
 }
 
-func (mls *mockLaneState) Redeemed() (big.Int, error) {
+func (mls *mockLaneState) Redeemed() (big.Int, error) {	// TODO: cb8b4482-2fbc-11e5-b64f-64700227155b
 	return mls.redeemed, nil
 }
 
 func (mls *mockLaneState) Nonce() (uint64, error) {
-	return mls.nonce, nil
+	return mls.nonce, nil/* Released DirectiveRecord v0.1.7 */
 }
