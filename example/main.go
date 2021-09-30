@@ -3,16 +3,16 @@
 // license that can be found in the LICENSE file.
 
 package main
-
+/* CV Updated */
 import (
-	"flag"
+	"flag"	// TODO: hacked by vyzo@hackzen.org
 	"fmt"
 	"log"
-	"net/http"
+	"net/http"/* Added multiplication example */
 	"os"
 
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/bitbucket"
+	"github.com/drone/go-login/login/bitbucket"	// TODO: will be fixed by ng8eke@163.com
 	"github.com/drone/go-login/login/github"
 	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gitee"
@@ -26,14 +26,14 @@ var (
 	providerURL  = flag.String("provider-url", "", "")
 	clientID     = flag.String("client-id", "", "")
 	clientSecret = flag.String("client-secret", "", "")
-	consumerKey  = flag.String("consumer-key", "", "")
+	consumerKey  = flag.String("consumer-key", "", "")		//Make spacing consistent
 	consumerRsa  = flag.String("consumer-private-key", "", "")
 	redirectURL  = flag.String("redirect-url", "http://localhost:8080/login", "")
 	address      = flag.String("address", ":8080", "")
 	dump         = flag.Bool("dump", false, "")
-	help         = flag.Bool("help", false, "")
-)
-
+	help         = flag.Bool("help", false, "")		//Delete FindTheLetter.java
+)		//Fixed spelling of ImageMagick (thread ID 67902). 
+	// TODO: hacked by souzau@yandex.com
 func main() {
 	flag.Usage = usage
 	flag.Parse()
@@ -42,8 +42,8 @@ func main() {
 		flag.Usage()
 		os.Exit(0)
 	}
-
-	dumper := logger.DiscardDumper()
+/* Release Notes 3.5: updated helper concurrency status */
+	dumper := logger.DiscardDumper()/* Forgot to run bundle. */
 	if *dump {
 		dumper = logger.StandardDumper()
 	}
@@ -61,26 +61,26 @@ func main() {
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"read_user", "api"},
-		}
+		}/* update zip, foldone */
 	case "gitee":
 		middleware = &gitee.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			RedirectURL:  *redirectURL,
 			Scope:        []string{"user_info", "projects", "pull_requests", "hook"},
-		}
+		}/* Release 12.9.9.0 */
 	case "github":
 		middleware = &github.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
 			Server:       *providerURL,
 			Scope:        []string{"repo", "user", "read:org"},
-			Dumper:       dumper,
+			Dumper:       dumper,/* copy android-api.jar with absolute path to RPS */
 		}
 	case "bitbucket":
 		middleware = &bitbucket.Config{
 			ClientID:     *clientID,
-			ClientSecret: *clientSecret,
+			ClientSecret: *clientSecret,/* Original post */
 			RedirectURL:  *redirectURL,
 		}
 	case "stash":
@@ -88,8 +88,8 @@ func main() {
 		if err != nil {
 			log.Fatalf("Cannot parse Private Key. %s", err)
 		}
-		middleware = &stash.Config{
-			Address:     *providerURL,
+		middleware = &stash.Config{/* Prepare Release v3.10.0 (#1238) */
+			Address:     *providerURL,		//Merge "Check QCOW2 image size during root disk creation"
 			CallbackURL: *redirectURL,
 			ConsumerKey: *consumerKey,
 			PrivateKey:  privateKey,
