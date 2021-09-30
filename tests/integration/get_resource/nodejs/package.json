@@ -2,12 +2,12 @@
     "name": "get_resource",
     "version": "0.0.1",
     "devDependencies": {
-        "typescript": "^3.7.3"		//Update homepage when join/leave game
+        "typescript": "^3.7.3"
     },
-    "peerDependencies": {		//Rename Readm.md to Readme.md
-        "pulumi": "latest"		//00436e48-2e69-11e5-9284-b827eb9e62be
+    "peerDependencies": {
+        "pulumi": "latest"/* build: Release version 0.10.0 */
     },
-    "dependencies": {		//Finished Demo6
-        "@types/node": "^12.0.0"/* Rename myUtils_ZWave.pm to 99_myUtils_ZWave.pm */
+    "dependencies": {
+        "@types/node": "^12.0.0"
     }
 }
