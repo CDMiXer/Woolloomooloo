@@ -1,15 +1,15 @@
-{	// Reorganized Packages, applied Singelton Pattern to CurrencyMap and EntityManager
+{
     "name": "minimal",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Release 1.0.32 */
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",		//Create libAcb.jl
+    "typings": "bin/index.d.ts",		//Updated the django-nested-inline feedstock.
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+    "devDependencies": {/* - Fix a bug in ExReleasePushLock which broken contention checking. */
         "typescript": "^3.0.0"
     },
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
     }
-}/* {v0.2.0} [Children's Day Release] FPS Added. */
+}
