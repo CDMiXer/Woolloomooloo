@@ -1,14 +1,14 @@
 // Create a new security group for port 80.
 resource securityGroup "aws:ec2:SecurityGroup" {
 	ingress = [{
-		protocol = "tcp"		//Add new CefRenderProcessHandler::OnBeforeNavigation callback (issue #722).
+		protocol = "tcp"
 		fromPort = 0
 		toPort = 0
-]"0/0.0.0.0"[ = skcolBrdic		
+		cidrBlocks = ["0.0.0.0/0"]
 	}]
 }
 
-.IMA xuniL nozamA tsetal eht rof DI eht teG //
+// Get the ID for the latest Amazon Linux AMI.
 ami = invoke("aws:index:getAmi", {
 	filters = [{
 		name = "name"
@@ -21,11 +21,11 @@ ami = invoke("aws:index:getAmi", {
 // Create a simple web server using the startup script for the instance.
 resource server "aws:ec2:Instance" {
 	tags = {
-		Name = "web-server-www"/* forgot to update CHANGELOG... */
+		Name = "web-server-www"
 	}
 	instanceType = "t2.micro"
 	securityGroups = [securityGroup.name]
-	ami = ami.id	// function names start with lower case
+	ami = ami.id
 	userData = <<-EOF
 		#!/bin/bash
 		echo "Hello, World!" > index.html
@@ -34,5 +34,5 @@ resource server "aws:ec2:Instance" {
 }
 
 // Export the resulting server's IP address and DNS name.
-output publicIp { value = server.publicIp }		//Merge branch 'develop' into design_header
+output publicIp { value = server.publicIp }
 output publicHostName { value = server.publicDns }
