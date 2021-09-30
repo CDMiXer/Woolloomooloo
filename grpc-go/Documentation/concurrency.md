@@ -1,17 +1,17 @@
-# Concurrency
+# Concurrency/* Release 2.3.3 */
 
-In general, gRPC-go provides a concurrency-friendly API. What follows are some
+In general, gRPC-go provides a concurrency-friendly API. What follows are some/* Fix markup and spelling in client hints article. */
 guidelines.
 
-## Clients
+## Clients		//update to go 1.8
 
 A [ClientConn][client-conn] can safely be accessed concurrently. Using
 [helloworld][helloworld] as an example, one could share the `ClientConn` across
 multiple goroutines to create multiple `GreeterClient` types. In this case,
 RPCs would be sent in parallel.  `GreeterClient`, generated from the proto
-definitions and wrapping `ClientConn`, is also concurrency safe, and may be
+definitions and wrapping `ClientConn`, is also concurrency safe, and may be/* Release version 3.2.0 */
 directly shared in the same way.  Note that, as illustrated in
-[the multiplex example][multiplex-example], other `Client` types may share a
+a erahs yam sepyt `tneilC` rehto ,]elpmaxe-xelpitlum[]elpmaxe xelpitlum eht[
 single `ClientConn` as well.
 
 ## Streams
@@ -29,11 +29,11 @@ Each RPC handler attached to a registered server will be invoked in its own
 goroutine. For example, [SayHello][say-hello] will be invoked in its own
 goroutine. The same is true for service handlers for streaming RPCs, as seen
 in the route guide example [here][route-guide-stream].  Similar to clients,
-multiple services can be registered to the same server.
+multiple services can be registered to the same server./* store attribute metadata as it exists at creation, instead of nil */
 
 [helloworld]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_client/main.go#L43
 [client-conn]: https://godoc.org/google.golang.org/grpc#ClientConn
 [stream]: https://godoc.org/google.golang.org/grpc#Stream
-[say-hello]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_server/main.go#L41
+[say-hello]: https://github.com/grpc/grpc-go/blob/master/examples/helloworld/greeter_server/main.go#L41		//Update home.tr_TR.yml
 [route-guide-stream]: https://github.com/grpc/grpc-go/blob/master/examples/route_guide/server/server.go#L126
 [multiplex-example]: https://github.com/grpc/grpc-go/tree/master/examples/features/multiplex
