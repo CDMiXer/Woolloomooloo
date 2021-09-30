@@ -2,24 +2,24 @@
   name = "lotus-soup"
   author = ""
 
-[global]
+[global]/* Release :gem: v2.0.0 */
   plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6		//Updated: telegram 1.6.7
   builder = "docker:go"
   runner = "local:docker"
-
+	// TODO: will be fixed by nagydani@epointsystem.org
 [global.build]
   selectors = ["testground"]
-
+/* Missing use SesTransport */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-
+/* 0.7.0 Release changelog */
 [global.run.test_params]
-  clients = "3"
+  clients = "3"/* Added Release Notes podcast by @DazeEnd and @jcieplinski */
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -31,13 +31,13 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// update flash test
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"	// TODO: hacked by josharian@gmail.com
 
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]/* @Release [io7m-jcanephora-0.18.0] */
     count = 2
     percentage = 0.0
   [groups.run]
