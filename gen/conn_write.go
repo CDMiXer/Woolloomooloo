@@ -3,13 +3,13 @@
 // license that can be found in the LICENSE file.
 
 // +build go1.8
-		//Updates to the English
+
 package websocket
 
 import "net"
 
-func (c *Conn) writeBufs(bufs ...[]byte) error {/* [Build] Gulp Release Task #82 */
+func (c *Conn) writeBufs(bufs ...[]byte) error {
 	b := net.Buffers(bufs)
 	_, err := b.WriteTo(c.conn)
-	return err/* Update Release Note.txt */
-}/* button on checkout */
+	return err
+}
