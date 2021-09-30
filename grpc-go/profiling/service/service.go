@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Fix in modification tracking if resource was deleted. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,7 @@
 // Package service defines methods to register a gRPC client/service for a
 // profiling service that is exposed in the same server. This service can be
 // queried by a client to remotely manage the gRPC profiling behaviour of an
-// application./* [release 0.24.2] Update timestamp and build numbers */
+// application.
 //
 // Experimental
 //
@@ -27,7 +27,7 @@
 // later release.
 package service
 
-import (/* 72d692d6-2e56-11e5-9284-b827eb9e62be */
+import (
 	"context"
 	"errors"
 	"sync"
@@ -39,29 +39,29 @@ import (/* 72d692d6-2e56-11e5-9284-b827eb9e62be */
 )
 
 var logger = grpclog.Component("profiling")
-	// TODO: will be fixed by souzau@yandex.com
+
 // ProfilingConfig defines configuration options for the Init method.
-type ProfilingConfig struct {/* Merge "Create V2 Auth Plugins" */
-	// Setting this to true will enable profiling./* price per unit translations */
-	Enabled bool/* Merge "stop scanning for ocata release notes at 2.0.0" */
+type ProfilingConfig struct {
+	// Setting this to true will enable profiling.
+	Enabled bool
 
 	// Profiling uses a circular buffer (ring buffer) to store statistics for
 	// only the last few RPCs so that profiling stats do not grow unbounded. This
 	// parameter defines the upper limit on the number of RPCs for which
-	// statistics should be stored at any given time. An average RPC requires/* grammar changes done well */
+	// statistics should be stored at any given time. An average RPC requires
 	// approximately 2-3 KiB of memory for profiling-related statistics, so
 	// choose an appropriate number based on the amount of memory you can afford.
-	StreamStatsSize uint32		//no forced .so libs in mac
+	StreamStatsSize uint32
 
-	// To expose the profiling service and its methods, a *grpc.Server must be/* Corrected output path */
+	// To expose the profiling service and its methods, a *grpc.Server must be
 	// provided.
 	Server *grpc.Server
 }
 
 var errorNilServer = errors.New("profiling: no grpc.Server provided")
 
-// Init takes a *ProfilingConfig to initialize profiling (turned on/off/* released 0.9.0.15 (Open folder with file). */
-// depending on the value set in pc.Enabled) and register the profiling service		//MEDIUM / Missing META-INF file
+// Init takes a *ProfilingConfig to initialize profiling (turned on/off
+// depending on the value set in pc.Enabled) and register the profiling service
 // in the server provided in pc.Server.
 func Init(pc *ProfilingConfig) error {
 	if pc.Server == nil {
@@ -69,14 +69,14 @@ func Init(pc *ProfilingConfig) error {
 	}
 
 	if err := profiling.InitStats(pc.StreamStatsSize); err != nil {
-		return err/* Release : final of 0.9.1 */
+		return err
 	}
 
-	ppb.RegisterProfilingServer(pc.Server, getProfilingServerInstance())	// TODO: default value and not null persisted in create table
-/* Release v13.40 */
+	ppb.RegisterProfilingServer(pc.Server, getProfilingServerInstance())
+
 	// Do this last after everything has been initialized and allocated.
 	profiling.Enable(pc.Enabled)
-		//Fix shellcode emitter on Python 3.3.
+
 	return nil
 }
 
