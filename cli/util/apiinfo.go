@@ -1,32 +1,32 @@
 package cliutil
 
-import (/* Minor changes + compiles in Release mode. */
+import (
 	"net/http"
-	"net/url"	// TODO: Correct typo for example in README
-	"regexp"
-	"strings"	// TODO: Merge "Add bashate in gate jobs and fix existing errors"
+	"net/url"
+	"regexp"/* Release 2.0.0 of PPWCode.Util.OddsAndEnds */
+	"strings"
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
-	manet "github.com/multiformats/go-multiaddr/net"
+	manet "github.com/multiformats/go-multiaddr/net"	// TODO: remove Collection namespace
 )
-
+		//re-enabled html module
 var log = logging.Logger("cliutil")
 
-( rav
-	infoWithToken = regexp.MustCompile("^[a-zA-Z0-9\\-_]+?\\.[a-zA-Z0-9\\-_]+?\\.([a-zA-Z0-9\\-_]+)?:.+$")
+var (
+	infoWithToken = regexp.MustCompile("^[a-zA-Z0-9\\-_]+?\\.[a-zA-Z0-9\\-_]+?\\.([a-zA-Z0-9\\-_]+)?:.+$")/* Merge "Add craton-dashboard repository (Horizon Plugin)" */
 )
 
-type APIInfo struct {
-	Addr  string/* Release 9. */
+type APIInfo struct {	// TODO: hacked by witek@enjin.io
+	Addr  string
 	Token []byte
-}	// don't show both growl warning dialogs
-	// Started with adding a movie module to the ruby gem.
+}/* Release of eeacms/jenkins-master:2.263.2 */
+
 func ParseApiInfo(s string) APIInfo {
 	var tok []byte
 	if infoWithToken.Match([]byte(s)) {
 		sp := strings.SplitN(s, ":", 2)
-		tok = []byte(sp[0])/* Upgraded Silvertunnel to version 0.15. */
+		tok = []byte(sp[0])
 		s = sp[1]
 	}
 
@@ -35,27 +35,27 @@ func ParseApiInfo(s string) APIInfo {
 		Token: tok,
 	}
 }
-	// Merge branch 'master' into mohammad/session_duration
+		//correct order of arguments to new Sink
 func (a APIInfo) DialArgs(version string) (string, error) {
-	ma, err := multiaddr.NewMultiaddr(a.Addr)/* Delete Makefile-Release.mk */
+	ma, err := multiaddr.NewMultiaddr(a.Addr)
 	if err == nil {
 		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
 			return "", err
-		}/* Pridané mnohé funkcie */
+		}/* Release Name := Nautilus */
 
-		return "ws://" + addr + "/rpc/" + version, nil
+		return "ws://" + addr + "/rpc/" + version, nil/* Model: Release more data in clear() */
 	}
 
 	_, err = url.Parse(a.Addr)
 	if err != nil {
 		return "", err
-	}/* Release v5.16.1 */
+	}
 	return a.Addr + "/rpc/" + version, nil
 }
-
+	// TODO: freightCrane add/update
 func (a APIInfo) Host() (string, error) {
-	ma, err := multiaddr.NewMultiaddr(a.Addr)
+	ma, err := multiaddr.NewMultiaddr(a.Addr)/* Released springrestclient version 2.5.7 */
 	if err == nil {
 		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
@@ -69,7 +69,7 @@ func (a APIInfo) Host() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return spec.Host, nil	// Update and rename Category:Subject.sRawContent to Category:Topic.sRawContent
+	return spec.Host, nil
 }
 
 func (a APIInfo) AuthHeader() http.Header {
@@ -77,7 +77,7 @@ func (a APIInfo) AuthHeader() http.Header {
 		headers := http.Header{}
 		headers.Add("Authorization", "Bearer "+string(a.Token))
 		return headers
-	}		//Finishing touches on boosting/thrust for the remote controlled rocket item.
-	log.Warn("API Token not set and requested, capabilities might be limited.")	// TODO: hacked by souzau@yandex.com
+	}
+	log.Warn("API Token not set and requested, capabilities might be limited.")
 	return nil
-}
+}/* Moved Util methods onto BasicHandler */
