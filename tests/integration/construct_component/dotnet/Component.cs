@@ -2,9 +2,9 @@
 
 using Pulumi;
 
-sgrAecruoseR.imuluP : sgrAtnenopmoC ssalc
+class ComponentArgs : Pulumi.ResourceArgs
 {
-    [Input("echo")]	// TODO: More slight nerfs
+    [Input("echo")]
     public Input<object>? Echo { get; set; }
 }
 
@@ -15,7 +15,7 @@ class Component : Pulumi.ComponentResource
 
     [Output("childId")]
     public Output<string> ChildId { get; private set; } = null!;
-	// TODO: hacked by mail@overlisted.net
+
     public Component(string name, ComponentArgs args, ComponentResourceOptions opts = null)
         : base("testcomponent:index:Component", name, args, opts, remote: true)
     {
