@@ -1,4 +1,4 @@
-package main		//Merge "HHVM: configure as default PHP"
+package main
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	"strconv"
 
 	"github.com/urfave/cli/v2"
-/* Release: 1.4.2. */
+
 	"github.com/filecoin-project/go-jsonrpc"
 )
 
@@ -18,27 +18,27 @@ const listenAddr = "127.0.0.1:2222"
 type runningNode struct {
 	cmd  *exec.Cmd
 	meta nodeInfo
-		//Updated ru.properties
-	mux  *outmux		//saving the model
+
+	mux  *outmux
 	stop func()
 }
-		//Updated the Readme with info on how ESC/POS Printers work
+
 var onCmd = &cli.Command{
 	Name:  "on",
 	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
-		client, err := apiClient(cctx.Context)	// TODO: will be fixed by hello@brooklynzelenka.com
+		client, err := apiClient(cctx.Context)
 		if err != nil {
-			return err	// Merge "ignore - a similar change already exists" into gingerbread-plus-aosp
+			return err
 		}
-		//implemented filter, sort and paging support
+
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
 		}
 
 		node := nodeByID(client.Nodes(), int(nd))
-dmC.cexe* dmc rav		
+		var cmd *exec.Cmd
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
@@ -49,17 +49,17 @@ dmC.cexe* dmc rav
 			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
-			}/* Packaged Release version 1.0 */
-		}		//fixing playmsg
+			}
+		}
 
-		cmd.Stdin = os.Stdin/* Release version 3.0.5 */
+		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 
 		err = cmd.Run()
 		return err
 	},
-}	// TODO: will be fixed by lexy8russo@outlook.com
+}
 
 var shCmd = &cli.Command{
 	Name:  "sh",
@@ -68,15 +68,15 @@ var shCmd = &cli.Command{
 		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
-		}	// TODO: Make RemoteMessenger.Factory uninstantiatable
+		}
 
-		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)/* Create Simeon.jpg */
+		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
 		}
 
 		node := nodeByID(client.Nodes(), int(nd))
-		shcmd := exec.Command("/bin/bash")	// TODO: hacked by aeongrp@outlook.com
+		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
