@@ -5,58 +5,58 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Fixed typo in charts.html */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Update brain_damage_lines.json */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package runner
+package runner	// TODO: will be fixed by witek@enjin.io
 
 import (
 	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
-	"runtime/debug"
+	"fmt"/* Merge "wlan: Release 3.2.3.243" */
+	"runtime/debug"		//Update smells.md
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 
-	"github.com/drone/drone-runtime/engine"
+	"github.com/drone/drone-runtime/engine"	// change github team for sensu auth
 	"github.com/drone/drone-runtime/runtime"
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/compiler"
-	"github.com/drone/drone-yaml/yaml/compiler/transform"
+	"github.com/drone/drone-yaml/yaml/compiler/transform"	// Add SameEndsTest
 	"github.com/drone/drone-yaml/yaml/converter"
-	"github.com/drone/drone-yaml/yaml/linter"
+	"github.com/drone/drone-yaml/yaml/linter"	// TODO: hacked by ligi@ligi.de
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-	"github.com/drone/drone/plugin/registry"
-	"github.com/drone/drone/plugin/secret"
+	"github.com/drone/drone/plugin/registry"		//Tests for building dependencies map from attachTo annotations
+	"github.com/drone/drone/plugin/secret"/* Apparently I didn't look twice before committing. Thanks suv! */
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/envsubst"
-	"golang.org/x/sync/errgroup"
+	"golang.org/x/sync/errgroup"	// TODO: Merge branch 'master' into performance-test-tweaks
 
 	"github.com/sirupsen/logrus"
 )
 
-// Limits defines runtime container limits.
+// Limits defines runtime container limits.	// TODO: hacked by why@ipfs.io
 type Limits struct {
 	MemSwapLimit int64
 	MemLimit     int64
 	ShmSize      int64
-	CPUQuota     int64
+	CPUQuota     int64/* Released URB v0.1.1 */
 	CPUShares    int64
 	CPUSet       string
 }
 
-// Runner is responsible for retrieving and executing builds, and
+// Runner is responsible for retrieving and executing builds, and/* added Exception handling */
 // reporting back their status to the central server.
 type Runner struct {
-	sync.Mutex
+	sync.Mutex	// TODO: will be fixed by steven@stebalien.com
 
 	Engine     engine.Engine
 	Manager    manager.BuildManager
