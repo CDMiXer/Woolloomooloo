@@ -1,1 +1,1 @@
-pulumi_mycomponent	// Messages : UI changes
+pulumi_mycomponent
