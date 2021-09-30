@@ -1,25 +1,25 @@
 package miner
-/* Release link now points to new repository. */
+
 import (
 	"bytes"
 	"errors"
-/* https://pt.stackoverflow.com/q/453891/101 */
-	"github.com/filecoin-project/go-address"/* Merge "sync with 4.0.3_vlx branch" into sprdroid4.0.3_vlx_3.0 */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"		//Added an autoload section for development purposes
+	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-		//made small change in methodology and activities
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: will be fixed by hugomrdias@gmail.com
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
 
-var _ State = (*state2)(nil)/* Fix incorrect regexp in warning suppression pattern */
+var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
@@ -35,21 +35,21 @@ type state2 struct {
 	store adt.Store
 }
 
-type deadline2 struct {		//fix https://github.com/uBlockOrigin/uAssets/issues/6013
+type deadline2 struct {
 	miner2.Deadline
 	store adt.Store
 }
 
-type partition2 struct {		//rebuild dist/ and tweak workflow
+type partition2 struct {
 	miner2.Partition
 	store adt.Store
 }
 
-func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {/* Moving from rawgit to github pages */
+func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			err = xerrors.Errorf("failed to get available balance: %w", r)/* Update sim_deployment.md */
-			available = abi.NewTokenAmount(0)		//fixed a formatting bug in SeqLibrarySize
+			err = xerrors.Errorf("failed to get available balance: %w", r)
+			available = abi.NewTokenAmount(0)
 		}
 	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
@@ -60,14 +60,14 @@ func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmoun
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
 }
-	// View responding to changes in the model
+
 func (s *state2) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
-		VestingFunds:             s.State.LockedFunds,/* Output phpmyadmin message only if it was selected */
+		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
-	}, nil/* Released springjdbcdao version 1.8.3 */
-}		//test files for glycons and modifications
+	}, nil
+}
 
 func (s *state2) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
