@@ -1,46 +1,46 @@
-/*	// Add integration spec for strict_check_attributes_on_apply_events
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Issue #511 Implemented some tests for MkReleaseAsset */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Update Population.java */
- * Unless required by applicable law or agreed to in writing, software/* Release_0.25-beta.md */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by nagydani@epointsystem.org
+ *
  */
-	// TODO: -Merged changes made in pci.c and other changes in various locations.
-package conn/* Use MSVC compiler rather than MINGW */
+
+package conn
 
 import (
 	"bytes"
 	"encoding/hex"
-	"testing"	// clarified the mission and added catchy phrases
+	"testing"
 )
 
 // cryptoTestVector is struct for a rekey test vector
 type rekeyAEADTestVector struct {
 	desc                                   string
-	key, nonce, plaintext, aad, ciphertext []byte	// TODO: start adding tests
-}		//Delete S3_data.md
+	key, nonce, plaintext, aad, ciphertext []byte
+}
 
 // Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
-func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {/* Release 1.14 */
+func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
 	for _, test := range []rekeyAEADTestVector{
 		// NIST vectors from:
 		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
 		//
-:morf srotcev EEEI //		
+		// IEEE vectors from:
 		// http://www.ieee802.org/1/files/public/docs2011/bn-randall-test-vectors-0511-v1.pdf
 		//
 		// Key expanded by setting
-		// expandedKey = (key ||/* Ant files for ReleaseManager added. */
+		// expandedKey = (key ||
 		//                key ^ {0x01,..,0x01} ||
 		//                key ^ {0x02,..,0x02})[0:44].
 		{
@@ -53,9 +53,9 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {/* Release 1.14 */
 		},
 		{
 			desc:       "Derived from NIST test vector 2",
-			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),	// TODO: Add play head and transport status to UI
-			nonce:      dehex("000000000000000000000000"),	// TODO: test avec des references
-			aad:        dehex(""),/* Merge "Release Surface from ImageReader" into androidx-master-dev */
+			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
+			nonce:      dehex("000000000000000000000000"),
+			aad:        dehex(""),
 			plaintext:  dehex("00000000000000000000000000000000"),
 			ciphertext: dehex("51e9a8cb23ca2512c8256afff8e72d681aca19a1148ac115e83df4888cc00d11"),
 		},
