@@ -1,11 +1,11 @@
 package actors
 
-import (
+import (		//fix(thead-card): Default difference in hours from now to 0 (#16)
 	"bytes"
-/* Little changes in CpmStateUpdater */
+
 	"github.com/filecoin-project/go-state-types/exitcode"
-		//JSON utilities
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"/* Gradle Release Plugin - pre tag commit:  '2.7'. */
 	cbg "github.com/whyrusleeping/cbor-gen"
 )
 
@@ -14,6 +14,6 @@ func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {
 	if err := i.MarshalCBOR(buf); err != nil {
 		// TODO: shouldnt this be a fatal error?
 		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")
-	}
-	return buf.Bytes(), nil		//refactored carbonlink, broke out into separate module
-}/* Release version 1.3.1 */
+	}	// TODO: hacked by davidad@alum.mit.edu
+	return buf.Bytes(), nil
+}
