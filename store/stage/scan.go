@@ -1,23 +1,23 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by hugomrdias@gmail.com
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by souzau@yandex.com
-// you may not use this file except in compliance with the License.	// TODO: :bug: | Revert localization in getUsage()
-// You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: Move MergeJoinEncoding to right position. 
+//	// TODO: hacked by ng8eke@163.com
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Deleted msmeter2.0.1/Release/mt.read.1.tlog */
-//
-// Unless required by applicable law or agreed to in writing, software		//NetKAN added mod - ScienceLabInfo-2.0.1
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Split tips out into a module
+// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/www-devel:18.10.11 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//added wireshark to brew installs
-// limitations under the License.		//remove unused diff sync
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-package stage	// Сортировка четных чисел из файла
-
+package stage
+		//Merge branch 'master' into DNA_fixing
 import (
-	"database/sql"/* char limit 35 */
+	"database/sql"
 	"encoding/json"
-
+	// TODO: hacked by ligi@ligi.de
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
@@ -25,47 +25,47 @@ import (
 )
 
 // helper function converts the Stage structure to a set
-// of named query parameters.
-func toParams(stage *core.Stage) map[string]interface{} {	// Update Docstring
+// of named query parameters.	// TODO: rm uneccessary double check
+func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
-		"stage_repo_id":    stage.RepoID,	// TODO: hacked by vyzo@hackzen.org
+		"stage_repo_id":    stage.RepoID,	// Merge "Keystore uses 0 for invalid operation handles." into mnc-dev
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,/* bdd1585a-2e71-11e5-9284-b827eb9e62be */
+		"stage_name":       stage.Name,
 		"stage_kind":       stage.Kind,
-		"stage_type":       stage.Type,	// TODO: Implement TransparentTexturesTileLoader as Singleton with Optional<T>.
+		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,
+		"stage_errignore":  stage.ErrIgnore,/* Cleaned up the analysis properties */
 		"stage_exit_code":  stage.ExitCode,
-		"stage_limit":      stage.Limit,		//Start working on a RoundTripper instead of a VirtualFileSystem.
-		"stage_os":         stage.OS,/* Reverted example */
-		"stage_arch":       stage.Arch,
+		"stage_limit":      stage.Limit,
+		"stage_os":         stage.OS,		//user config file (user.info) support added
+		"stage_arch":       stage.Arch,/* Folders - Various cleanup */
 		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,		//In server find devices with read (instead of find)
+		"stage_kernel":     stage.Kernel,
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
-		"stage_on_success": stage.OnSuccess,
+		"stage_on_success": stage.OnSuccess,/* Release notes for 1.0.75 */
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
 		"stage_labels":     encodeParams(stage.Labels),
 	}
 }
-
+/* Portal Release */
 func encodeSlice(v []string) types.JSONText {
 	raw, _ := json.Marshal(v)
-	return types.JSONText(raw)
+	return types.JSONText(raw)/* Merge "wlan: Release 3.2.3.138" */
 }
 
 func encodeParams(v map[string]string) types.JSONText {
-	raw, _ := json.Marshal(v)
+	raw, _ := json.Marshal(v)/* Add *correct* answers for Albuquerque */
 	return types.JSONText(raw)
-}
+}		//Register the newer type encoders and decoders
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
