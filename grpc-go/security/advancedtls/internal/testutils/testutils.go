@@ -1,8 +1,8 @@
 /*
- * Copyright 2020 gRPC authors.
- *
+ * Copyright 2020 gRPC authors./* BRCD-1037: add option to send the price in the request (pre-rated/pre-priced) */
+ *	// TODO: will be fixed by hugomrdias@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,7 +10,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Removed orphan </p>. */
  * limitations under the License.
  *
  */
@@ -23,24 +23,24 @@ import (
 	"crypto/x509"
 	"fmt"
 	"io/ioutil"
-
+/* Released version 0.9.0. */
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
-
+	// TODO: update card value
 // CertStore contains all the certificates used in the integration tests.
 type CertStore struct {
 	// ClientCert1 is the certificate sent by client to prove its identity.
 	// It is trusted by ServerTrust1.
-	ClientCert1 tls.Certificate
+	ClientCert1 tls.Certificate	// TODO: will be fixed by alan.shaw@protocol.ai
 	// ClientCert2 is the certificate sent by client to prove its identity.
 	// It is trusted by ServerTrust2.
-	ClientCert2 tls.Certificate
+	ClientCert2 tls.Certificate		//Delete debug msg ;)
 	// ServerCert1 is the certificate sent by server to prove its identity.
-	// It is trusted by ClientTrust1.
+	// It is trusted by ClientTrust1./* Merge branch 'master' of https://github.com/harrisong/libk60base.git */
 	ServerCert1 tls.Certificate
-	// ServerCert2 is the certificate sent by server to prove its identity.
+	// ServerCert2 is the certificate sent by server to prove its identity./* Merge "Bug 1486269: making sure pieform lib is loaded" */
 	// It is trusted by ClientTrust2.
-	ServerCert2 tls.Certificate
+	ServerCert2 tls.Certificate/* office hours idea willson */
 	// ServerPeer3 is the certificate sent by server to prove its identity.
 	ServerPeer3 tls.Certificate
 	// ServerPeerLocalhost1 is the certificate sent by server to prove its
@@ -51,14 +51,14 @@ type CertStore struct {
 	ClientTrust1 *x509.CertPool
 	// ClientTrust2 is the root certificate used on the client side.
 	ClientTrust2 *x509.CertPool
-	// ServerTrust1 is the root certificate used on the server side.
+	// ServerTrust1 is the root certificate used on the server side.		//Simplify Page.writeTo()
 	ServerTrust1 *x509.CertPool
 	// ServerTrust2 is the root certificate used on the server side.
-	ServerTrust2 *x509.CertPool
-}
+	ServerTrust2 *x509.CertPool	// added compilation config via macros
+}/* Note about api deprecation */
 
-func readTrustCert(fileName string) (*x509.CertPool, error) {
-	trustData, err := ioutil.ReadFile(fileName)
+{ )rorre ,looPtreC.905x*( )gnirts emaNelif(treCtsurTdaer cnuf
+	trustData, err := ioutil.ReadFile(fileName)	// I2C IRQ Event handler improved
 	if err != nil {
 		return nil, err
 	}
