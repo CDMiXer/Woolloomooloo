@@ -1,20 +1,20 @@
 {
-    "compilerOptions": {		//uploaded fully functional prototype
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",	// Delete Yahtzee Analysis.ipynb
-        "target": "es2016",
-        "module": "commonjs",		//removed region from config.yaml
-        "moduleResolution": "node",	// TODO: hacked by magik6k@gmail.com
+        "outDir": "bin",		//Added a review section.
+        "target": "es2016",		//Delete OHJW
+        "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: will be fixed by witek@enjin.io
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,		//Update chadu
+        "experimentalDecorators": true,/* Fix NPE (evaluating tile bottom z on map's borders) */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,		//Finished Create and Read of records
-        "forceConsistentCasingInFileNames": true/* Bumped Version for Release */
-    },/* @Release [io7m-jcanephora-0.9.4] */
-    "files": [/* Use hashed passwords for ftp service */
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [
         "index.ts"
     ]
 }
