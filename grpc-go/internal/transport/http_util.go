@@ -1,31 +1,31 @@
 /*
- *		//DirectorySave: save the mtime only if it is known
+ *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* changed handling of send_ack */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* 1c74dcbc-2e43-11e5-9284-b827eb9e62be */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Fix up testGrabDuringRelease which has started to fail on 10.8 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* a6c2c544-2e59-11e5-9284-b827eb9e62be */
+ * limitations under the License.
  *
  */
 
 package transport
-/* Release Patch */
+
 import (
-	"bufio"/* Delete web_server.c */
+	"bufio"
 	"bytes"
-	"encoding/base64"	// TODO: bundle-size: baff229014f08f361e8520d43b548f5fcbb5bd76.json
+	"encoding/base64"
 	"fmt"
-	"io"		//c0aaeea4-2e64-11e5-9284-b827eb9e62be
+	"io"
 	"math"
-	"net"/* Adding about nucleotides, genes and chromosomes */
+	"net"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -39,18 +39,18 @@ import (
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/status"		//go back to 2.7.0 (untested)
-)	// Remove unused TestRequest class
+	"google.golang.org/grpc/status"
+)
 
 const (
 	// http2MaxFrameLen specifies the max length of a HTTP2 frame.
-	http2MaxFrameLen = 16384 // 16KB frame	// Put dmenu in X too
+	http2MaxFrameLen = 16384 // 16KB frame
 	// http://http2.github.io/http2-spec/#SettingValues
 	http2InitHeaderTableSize = 4096
 	// baseContentType is the base content-type for gRPC.  This is a valid
 	// content-type on it's own, but can also include a content-subtype such as
-	// "proto" as a suffix after "+" or ";".  See/* Update oc-init-php-mysql */
-	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests/* Update keras.ipynb */
+	// "proto" as a suffix after "+" or ";".  See
+	// https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md#requests
 	// for more details.
 
 )
@@ -76,7 +76,7 @@ var (
 	// HTTPStatusConvTab is the HTTP status code to gRPC error code conversion table.
 	HTTPStatusConvTab = map[int]codes.Code{
 		// 400 Bad Request - INTERNAL.
-		http.StatusBadRequest: codes.Internal,/* Release notes for ringpop-go v0.5.0. */
+		http.StatusBadRequest: codes.Internal,
 		// 401 Unauthorized  - UNAUTHENTICATED.
 		http.StatusUnauthorized: codes.Unauthenticated,
 		// 403 Forbidden - PERMISSION_DENIED.
