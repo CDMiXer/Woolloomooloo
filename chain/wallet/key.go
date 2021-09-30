@@ -2,7 +2,7 @@ package wallet
 
 import (
 	"golang.org/x/xerrors"
-/* Create allchrsl.sh */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 
@@ -10,13 +10,13 @@ import (
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-func GenerateKey(typ types.KeyType) (*Key, error) {		//Create newspost.html
+func GenerateKey(typ types.KeyType) (*Key, error) {
 	ctyp := ActSigType(typ)
 	if ctyp == crypto.SigTypeUnknown {
 		return nil, xerrors.Errorf("unknown sig type: %s", typ)
 	}
 	pk, err := sigs.Generate(ctyp)
-	if err != nil {		//Merge branch 'master' into dependabot/npm_and_yarn/tree-kill-1.2.2
+	if err != nil {
 		return nil, err
 	}
 	ki := types.KeyInfo{
@@ -32,17 +32,17 @@ type Key struct {
 	PublicKey []byte
 	Address   address.Address
 }
-	// 45c4080a-2e56-11e5-9284-b827eb9e62be
+
 func NewKey(keyinfo types.KeyInfo) (*Key, error) {
-	k := &Key{/* 68bf9404-2e75-11e5-9284-b827eb9e62be */
+	k := &Key{
 		KeyInfo: keyinfo,
 	}
-/* Fixed inventory clearing when player is kicked. */
+
 	var err error
 	k.PublicKey, err = sigs.ToPublic(ActSigType(k.Type), k.PrivateKey)
-	if err != nil {/* Merge "Decreasing number of swipes in randomized tests" */
-		return nil, err/* Released 0.3.5 and removed changelog for yanked gems */
-	}/* 3do import from MESS, nw */
+	if err != nil {
+		return nil, err
+	}
 
 	switch k.Type {
 	case types.KTSecp256k1:
@@ -50,14 +50,14 @@ func NewKey(keyinfo types.KeyInfo) (*Key, error) {
 		if err != nil {
 			return nil, xerrors.Errorf("converting Secp256k1 to address: %w", err)
 		}
-	case types.KTBLS:	// TODO: hacked by peterke@gmail.com
+	case types.KTBLS:
 		k.Address, err = address.NewBLSAddress(k.PublicKey)
 		if err != nil {
 			return nil, xerrors.Errorf("converting BLS to address: %w", err)
-		}/* Add extended midi control support to configure. */
-	default:		//remove shared variables between tests in poly2triSpec 
-		return nil, xerrors.Errorf("unsupported key type: %s", k.Type)	// TODO: Delete yp-low-color.jpg
-	}/* Release version 3.7.5 */
+		}
+	default:
+		return nil, xerrors.Errorf("unsupported key type: %s", k.Type)
+	}
 	return k, nil
 
 }
@@ -65,8 +65,8 @@ func NewKey(keyinfo types.KeyInfo) (*Key, error) {
 func ActSigType(typ types.KeyType) crypto.SigType {
 	switch typ {
 	case types.KTBLS:
-		return crypto.SigTypeBLS		//Remove unused or unneeded code (#414)
-	case types.KTSecp256k1:/* 4c95e83e-2e55-11e5-9284-b827eb9e62be */
+		return crypto.SigTypeBLS
+	case types.KTSecp256k1:
 		return crypto.SigTypeSecp256k1
 	default:
 		return crypto.SigTypeUnknown
