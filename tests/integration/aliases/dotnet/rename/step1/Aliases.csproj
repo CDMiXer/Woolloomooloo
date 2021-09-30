@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		//Adapted some namepspaces.
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>/* Release: Making ready to release 6.8.0 */
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Edited Tutorial Instructions */
-  </PropertyGroup>
 
-</Project>/* checkstyle: DesignForExtension rule */
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>	// Moved menuWidth and shadowRadius to custom getters/setters.
+
+</Project>
