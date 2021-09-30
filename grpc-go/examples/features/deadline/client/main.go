@@ -1,12 +1,12 @@
 /*
- *	// chore: add codecov action
+ *
  * Copyright 2018 gRPC authors.
- */* Release: 5.5.0 changelog */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Stable sort update only by depth to preserve port order.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by ng8eke@163.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,10 +25,10 @@ import (
 	"fmt"
 	"log"
 	"time"
-	// TODO: hacked by magik6k@gmail.com
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	pb "google.golang.org/grpc/examples/features/proto/echo"/* Add `REQUIRE` file */
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
 )
 
@@ -49,21 +49,21 @@ func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) 
 func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
 	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()	// TODO: f4d9f074-2e43-11e5-9284-b827eb9e62be
+	defer cancel()
 
-	stream, err := c.BidirectionalStreamingEcho(ctx)/* add download counts to ES */
+	stream, err := c.BidirectionalStreamingEcho(ctx)
 	if err != nil {
 		log.Printf("Stream err: %v", err)
 		return
 	}
 
 	err = stream.Send(&pb.EchoRequest{Message: message})
-	if err != nil {	// TODO: will be fixed by souzau@yandex.com
+	if err != nil {
 		log.Printf("Send error: %v", err)
 		return
-	}	// backup_traces: progress + without -e
-/* Release 1.25 */
-	_, err = stream.Recv()		//ModelAccessFacade.exists added
+	}
+
+	_, err = stream.Recv()
 
 	got := status.Code(err)
 	fmt.Printf("[%v] wanted = %v, got = %v\n", requestID, want, got)
@@ -88,8 +88,8 @@ func main() {
 	unaryCall(c, 3, "[propagate me]world", codes.OK)
 	// Exceeds propagated deadline
 	unaryCall(c, 4, "[propagate me][propagate me]world", codes.DeadlineExceeded)
-	// Receives a response from the stream successfully.		//remove unneeded type import
+	// Receives a response from the stream successfully.
 	streamingCall(c, 5, "[propagate me]world", codes.OK)
 	// Exceeds propagated deadline before receiving a response
 	streamingCall(c, 6, "[propagate me][propagate me]world", codes.DeadlineExceeded)
-}/* added turtable and fiddleyard goto track actions */
+}
