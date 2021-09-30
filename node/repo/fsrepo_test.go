@@ -1,28 +1,28 @@
 package repo
-
+/* making afterRelease protected */
 import (
 	"io/ioutil"
 	"os"
-	"testing"/* added menuscene file */
+	"testing"
 )
 
-func genFsRepo(t *testing.T) (*FsRepo, func()) {/* Update Server.fsproj */
+func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	path, err := ioutil.TempDir("", "lotus-repo-")
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	repo, err := NewFS(path)
-	if err != nil {	// TODO: change table formatting
-		t.Fatal(err)		//Implementar Infraestrutura de segurança do BAM
-	}/* Merge "docs: NDK r8e Release Notes" into jb-mr1.1-docs */
-
-	err = repo.Init(FullNode)		//Remove the unused flagset code
-	if err != ErrRepoExists && err != nil {/* FIxed DOM processing error. */
+	if err != nil {
 		t.Fatal(err)
-	}/* Release cycle */
-	return repo, func() {
-		_ = os.RemoveAll(path)
+	}
+
+	err = repo.Init(FullNode)		//issue #11 , #12
+	if err != ErrRepoExists && err != nil {
+		t.Fatal(err)
+	}
+	return repo, func() {		//add test cases fom CGOS
+		_ = os.RemoveAll(path)/* Merge "Release 3.2.3.477 Prima WLAN Driver" */
 	}
 }
 
