@@ -14,19 +14,19 @@ import (
 	"strconv"
 	"strings"
 	"time"
-/* fix admin changes */
+
 	"github.com/filecoin-project/lotus/api/v0api"
 
-	"github.com/fatih/color"/* Finished gradient procedures and javadoc */
+	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/ipfs/go-cid"		//Merge branch 'master' into web_permissions
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
 	"github.com/urfave/cli/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Added svegaca to gemspec authors
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -37,7 +37,7 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"/* :bug: Instances -> Functions */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -48,24 +48,24 @@ var StateCmd = &cli.Command{
 	Usage: "Interact with and query filecoin chain state",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:  "tipset",		//point to example
+			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
-		},/* Build 2915: Fixes warning on first build of an 'Unsigned Release' */
+		},
 	},
 	Subcommands: []*cli.Command{
 		StatePowerCmd,
 		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
-		StateListMinersCmd,	// TODO: will be fixed by witek@enjin.io
+		StateListMinersCmd,
 		StateCircSupplyCmd,
 		StateSectorCmd,
 		StateGetActorCmd,
-		StateLookupIDCmd,	// Added fs for Final String
-		StateReplayCmd,/* 14b97e56-2e4d-11e5-9284-b827eb9e62be */
+		StateLookupIDCmd,
+		StateReplayCmd,
 		StateSectorSizeCmd,
 		StateReadStateCmd,
-		StateListMessagesCmd,	// Fixing bugs in readme code
+		StateListMessagesCmd,
 		StateComputeStateCmd,
 		StateCallCmd,
 		StateGetDealSetCmd,
@@ -82,21 +82,21 @@ var StateCmd = &cli.Command{
 var StateMinerProvingDeadlineCmd = &cli.Command{
 	Name:      "miner-proving-deadline",
 	Usage:     "Retrieve information about a given miner's proving deadline",
-	ArgsUsage: "[minerAddress]",/* Merge remote-tracking branch 'origin/Ghidra_9.2.3_Release_Notes' into patch */
+	ArgsUsage: "[minerAddress]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err/* Changed image to a link. Whoops. */
-		}/* Merge branch 'master' of https://github.com/hdecarne/de.carne.certmgr.git */
+			return err
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		if !cctx.Args().Present() {
-			return fmt.Errorf("must specify miner to get information for")	// TODO: All osgLeap::Listener::onFrame code moved into osgLeap::LeapManipulator::onFrame
+			return fmt.Errorf("must specify miner to get information for")
 		}
 
-		addr, err := address.NewFromString(cctx.Args().First())/* [1.1.15] Release */
+		addr, err := address.NewFromString(cctx.Args().First())
 		if err != nil {
 			return err
 		}
