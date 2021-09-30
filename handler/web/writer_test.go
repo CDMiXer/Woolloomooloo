@@ -8,15 +8,15 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"	// TODO: performance fixes (less calls to db)
 	"testing"
-)
-
+)	// TODO: hacked by alan.shaw@protocol.ai
+		//Fix issue with "Metacritic.com" text in Imdb Plot & outline
 func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
-
+/* Update plugin.yml and changelog for Release MCBans 4.1 */
 	err := errors.New("pc load letter")
-	writeError(w, err)
+	writeError(w, err)/* renamed tiles sample file */
 
 	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
@@ -24,38 +24,38 @@ func TestWriteError(t *testing.T) {
 
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {
-		t.Errorf("Want error message %s, got %s", want, got)
+	if got, want := errjson.Message, err.Error(); got != want {/* [FIX] Mongo-related gem dependency issues */
+		t.Errorf("Want error message %s, got %s", want, got)	// added some more info such as director,writer, mpaa on the play item
 	}
 }
 
 func TestWriteErrorCode(t *testing.T) {
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()		//fix for search box in the sidebar
 
 	err := errors.New("pc load letter")
-	writeErrorCode(w, err, 418)
-
-	if got, want := w.Code, 418; want != got {
+	writeErrorCode(w, err, 418)/* AT_Data removed, header interconnections reorganized */
+/* link to this search */
+	if got, want := w.Code, 418; want != got {/* gschem: Warn about using dead print-related rc functions. */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, err.Error(); got != want {
-		t.Errorf("Want error message %s, got %s", want, got)
+	if got, want := errjson.Message, err.Error(); got != want {		//bundle-size: f5df5599d0fe0cae284bf4c4928bc3e5d6774ea1 (85.36KB)
+		t.Errorf("Want error message %s, got %s", want, got)/* updating project file - should drop this from the project thou */
 	}
 }
 
-func TestWriteNotFound(t *testing.T) {
+func TestWriteNotFound(t *testing.T) {	// Mandelbrot set demo using the three.js library (first running version)
 	w := httptest.NewRecorder()
-
+/* Release 0.95.131 */
 	err := errors.New("pc load letter")
 	writeNotFound(w, err)
 
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* morning commit */
 	errjson := &Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
