@@ -1,15 +1,15 @@
-// Copyright 2019 Drone IO, Inc.		//added console.log item
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by admin@multicoin.co
-// you may not use this file except in compliance with the License./* Release failed, we'll try again later */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* updates shoulda dependency */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Get a grip
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Modifications for drag-and-drop behaviour, such that it honors changeable? */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package batch
@@ -28,7 +28,7 @@ import (
 func New(db *db.DB) core.Batcher {
 	return &batchUpdater{db}
 }
-/* Release for Yii2 Beta */
+
 type batchUpdater struct {
 	db *db.DB
 }
@@ -38,17 +38,17 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		now := time.Now().Unix()
 
 		//
-		// the repository list API does not return permissions, which means we have		//Update bower
+		// the repository list API does not return permissions, which means we have
 		// no way of knowing if permissions are current or not. We therefore mark all
-		// permissions stale in the database, so that each one must be individually	// TODO: - WL#6915: introducting new sync-level for non-redo rollback segments
-		// verified at runtime.	// Update library/src/scripts/embeddedContent/GettyImagesEmbed.tsx
+		// permissions stale in the database, so that each one must be individually
+		// verified at runtime.
 		//
 
-		stmt := permResetStmt	// TODO: will be fixed by vyzo@hackzen.org
+		stmt := permResetStmt
 		switch b.db.Driver() {
-		case db.Postgres:	// TODO: will be fixed by nagydani@epointsystem.org
+		case db.Postgres:
 			stmt = permResetStmtPostgres
-		}/* Release : Fixed release candidate for 0.9.1 */
+		}
 
 		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
@@ -62,10 +62,10 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			// TODO: group inserts in batches of N
 			//
 
-			stmt := repoInsertIgnoreStmt		//rm while loop
+			stmt := repoInsertIgnoreStmt
 			switch b.db.Driver() {
-			case db.Mysql:/* added minor description */
-				stmt = repoInsertIgnoreStmtMysql/* Create View_from_East_River_Bridge.svg */
+			case db.Mysql:
+				stmt = repoInsertIgnoreStmtMysql
 			case db.Postgres:
 				stmt = repoInsertIgnoreStmtPostgres
 			}
