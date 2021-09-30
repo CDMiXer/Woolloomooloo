@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: Update zombiePositions.js
 
-import * as pulumi from "@pulumi/pulumi";
-
+import * as pulumi from "@pulumi/pulumi";	// update to secure version of jackson-databind
+		//Merge "Set initiator id as user_id for auth events"
 const simpleProvider: pulumi.dynamic.ResourceProvider = {
     async create(inputs: any) {
-        return {
+        return {	// removed protocol in cdn js link
             id: "0",
             outs: { output: "a", output2: "b" },
         };
@@ -19,37 +19,37 @@ interface SimpleArgs {
 class SimpleResource extends pulumi.dynamic.Resource {
     output: pulumi.Output<string>;
     output2: pulumi.Output<string>;
-    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
+    constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {		//Added translation to Dutch
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
     }
 }
 
-class MyComponent extends pulumi.ComponentResource {
+class MyComponent extends pulumi.ComponentResource {	// TODO: hacked by julia@jvns.ca
     child: SimpleResource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:component:MyComponent", name, {}, opts);
         this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
             parent: this,
             additionalSecretOutputs: ["output2"],
-        });
+        });	// TODO: will be fixed by admin@multicoin.co
         this.registerOutputs({});
     }
-}
-
-// Scenario #1 - apply a transformation to a CustomResource
-const res1 = new SimpleResource("res1", { input: "hello" }, {
+}	// TODO: Spritesheet frame preview zoom buttons.
+		//chore(package): update @types/node to version 10.3.2
+// Scenario #1 - apply a transformation to a CustomResource/* Release 4.2.0.md */
+const res1 = new SimpleResource("res1", { input: "hello" }, {/* Release 1.0 M1 */
     transformations: [
         ({ props, opts }) => {
             console.log("res1 transformation");
             return {
-                props: props,
-                opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
+                props: props,		//-Removed importjs.org link
+                opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),/* fix bug from r4479 in windows with softrasterizer task freezing */
             };
         },
     ],
-});
+});/* [BIPEDAL]Update readme */
 
-// Scenario #2 - apply a transformation to a Component to transform it's children
+// Scenario #2 - apply a transformation to a Component to transform it's children/* Commit TestProduct.py */
 const res2 = new MyComponent("res2", {
     transformations: [
         ({ type, props, opts }) => {
@@ -58,7 +58,7 @@ const res2 = new MyComponent("res2", {
                 return {
                     props: { optionalInput: "newDefault", ...props },
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
-                };
+                };/* Merge "Fix for RtKey under Windows (MS C++ 19.00.24210)" */
             }
         },
     ],
