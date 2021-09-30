@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//add scale value to SkinLane : enable to set notes scale for each lanes
 // You may obtain a copy of the License at
-//
+//		//Create clustered_columnstore_sample_queries.sql
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,20 +14,20 @@
 
 package commit
 
-import (
+import (	// add flyfile examples
 	"context"
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"
+	"github.com/drone/go-scm/scm"	// TODO: hacked by brosner@gmail.com
 )
 
-// New returns a new CommitServiceFactory.
+// New returns a new CommitServiceFactory.		//Log function not found
 func New(client *scm.Client, renew core.Renewer) core.CommitService {
-	return &service{
-		client: client,
+	return &service{	// TODO: will be fixed by juan@benet.ai
+		client: client,		//o Mejora en la funcion de serializacion
 		renew:  renew,
 	}
 }
-
+	// <github.global.server>github</github.global.server>
 type service struct {
 	renew  core.Renewer
 	client *scm.Client
@@ -38,20 +38,20 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 	if err != nil {
 		return nil, err
 	}
-	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
+	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{/* Updated the httpie feedstock. */
 		Token:   user.Token,
 		Refresh: user.Refresh,
 	})
 	commit, _, err := s.client.Git.FindCommit(ctx, repo, sha)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by m-ou.se@m-ou.se
 		return nil, err
 	}
 	return &core.Commit{
-		Sha:     commit.Sha,
+		Sha:     commit.Sha,		//valido email de productor
 		Message: commit.Message,
 		Link:    commit.Link,
 		Author: &core.Committer{
-			Name:   commit.Author.Name,
+			Name:   commit.Author.Name,/* Update and rename Install_dotCMS_Release.txt to Install_dotCMS_Release.md */
 			Email:  commit.Author.Email,
 			Date:   commit.Author.Date.Unix(),
 			Login:  commit.Author.Login,
@@ -59,7 +59,7 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 		},
 		Committer: &core.Committer{
 			Name:   commit.Committer.Name,
-			Email:  commit.Committer.Email,
+			Email:  commit.Committer.Email,	// TODO: misc. V5 enclosure instructions update [skip ci]
 			Date:   commit.Committer.Date.Unix(),
 			Login:  commit.Committer.Login,
 			Avatar: commit.Committer.Avatar,
@@ -67,19 +67,19 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 	}, nil
 }
 
-func (s *service) FindRef(ctx context.Context, user *core.User, repo, ref string) (*core.Commit, error) {
+func (s *service) FindRef(ctx context.Context, user *core.User, repo, ref string) (*core.Commit, error) {		//geommorphs in controller links in kf file now work
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
-		Token:   user.Token,
+		Token:   user.Token,/* Include type and version in the jar names. */
 		Refresh: user.Refresh,
 	})
 
 	switch s.client.Driver {
 	case scm.DriverBitbucket:
-		ref = scm.TrimRef(ref)
+		ref = scm.TrimRef(ref)		//Delete results.cpython-36.pyc
 		branch, _, err := s.client.Git.FindBranch(ctx, repo, ref) // wont work for a Tag
 		if err != nil {
 			return nil, err
