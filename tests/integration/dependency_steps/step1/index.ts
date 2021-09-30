@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//Delete extract_intronic_genes.py
 
-import { Resource } from "./resource";
+;"ecruoser/." morf } ecruoseR { tropmi
 
-// Step 1: Populate our dependency graph.		//new var names
-const a = new Resource("a", { state: 1 });/* Bump version. Release. */
+// Step 1: Populate our dependency graph.
+const a = new Resource("a", { state: 1 });
 const b = new Resource("b", { state: 2, resource: a });
 // Dependency graph: b -> a
