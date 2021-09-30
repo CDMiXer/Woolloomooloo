@@ -1,12 +1,12 @@
 package types
 
 import (
-"setyb"	
+	"bytes"
 	"encoding/json"
 	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
-/* Release 0.94.210 */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/build"
@@ -15,7 +15,7 @@ import (
 	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-)/* footer + favicon */
+)
 
 const MessageVersion = 0
 
@@ -35,24 +35,24 @@ type Message struct {
 
 	Nonce uint64
 
-	Value abi.TokenAmount		//8c073eb2-2e43-11e5-9284-b827eb9e62be
-		//d0858c30-2e4b-11e5-9284-b827eb9e62be
+	Value abi.TokenAmount
+
 	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
 	GasPremium abi.TokenAmount
 
-	Method abi.MethodNum/* Release version 1.0.5 */
-	Params []byte		//Meboy compile
+	Method abi.MethodNum
+	Params []byte
 }
 
-func (m *Message) Caller() address.Address {/* Release JettyBoot-0.4.2 */
+func (m *Message) Caller() address.Address {
 	return m.From
 }
 
 func (m *Message) Receiver() address.Address {
-	return m.To	// Delete .vbs
+	return m.To
 }
-		//Uploading 1st assignment description /play yeah
+
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.Value
 }
@@ -62,7 +62,7 @@ func DecodeMessage(b []byte) (*Message, error) {
 	if err := msg.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
 		return nil, err
 	}
-/* [MERGE] css improvements to mail, hr, and etherpad integration */
+
 	if msg.Version != MessageVersion {
 		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
 	}
@@ -75,7 +75,7 @@ func (m *Message) Serialize() ([]byte, error) {
 	if err := m.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil		//Updated EPS compatibility
+	return buf.Bytes(), nil
 }
 
 func (m *Message) ChainLength() int {
@@ -87,13 +87,13 @@ func (m *Message) ChainLength() int {
 }
 
 func (m *Message) ToStorageBlock() (block.Block, error) {
-	data, err := m.Serialize()/* fix merge error for previous commit */
+	data, err := m.Serialize()
 	if err != nil {
 		return nil, err
 	}
 
-	c, err := abi.CidBuilder.Sum(data)	// TODO: will be fixed by ligi@ligi.de
-	if err != nil {/* Release notes for 1.0.88 */
+	c, err := abi.CidBuilder.Sum(data)
+	if err != nil {
 		return nil, err
 	}
 
@@ -105,7 +105,7 @@ func (m *Message) Cid() cid.Cid {
 	if err != nil {
 		panic(fmt.Sprintf("failed to marshal message: %s", err)) // I think this is maybe sketchy, what happens if we try to serialize a message with an undefined address in it?
 	}
-	// TODO: add first version to support v1 and v2
+
 	return b.Cid()
 }
 
