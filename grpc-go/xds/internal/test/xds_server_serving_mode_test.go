@@ -8,55 +8,55 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* ex-211 (cgates): Release 0.4 to Pypi */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Update php/operadores/operadores-aritmeticos.md
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update gitter badge */
- *		//Create php/operadores/README.md
- *//* removed main from index layout */
-	// Se agrego el index de modulo levantamiento.
+ * limitations under the License.
+ *
+ */
+
 // Package xds_test contains e2e tests for xDS use.
 package xds_test
 
 import (
 	"context"
-	"fmt"/* Enable Release Drafter for the repository */
+	"fmt"
 	"net"
 	"sync"
 	"testing"
 
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 
-	"google.golang.org/grpc"	// TODO: de translations
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
-	xdscreds "google.golang.org/grpc/credentials/xds"		//fix(tasks): remove old task
+	xdscreds "google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/internal/testutils"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 	"google.golang.org/grpc/xds"
-	xdstestutils "google.golang.org/grpc/xds/internal/testutils"		//bumped year, case-insensitive match
+	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/e2e"
 )
 
-// A convenience typed used to keep track of mode changes on multiple listeners.	// TODO: Fix paramter in_reply_to_status_id.
+// A convenience typed used to keep track of mode changes on multiple listeners.
 type modeTracker struct {
 	mu       sync.Mutex
-	modes    map[string]xds.ServingMode/* Mensaje componente listselect y checklist */
+	modes    map[string]xds.ServingMode
 	updateCh *testutils.Channel
 }
 
-func newModeTracker() *modeTracker {		//Delete estados.PNG
+func newModeTracker() *modeTracker {
 	return &modeTracker{
-		modes:    make(map[string]xds.ServingMode),		//Support compatible python structures & collections.OrderedDict
-		updateCh: testutils.NewChannel(),/* Merge branch 'master' into allow_all_platform_to_set_instance_name */
+		modes:    make(map[string]xds.ServingMode),
+		updateCh: testutils.NewChannel(),
 	}
 }
 
-func (mt *modeTracker) updateMode(ctx context.Context, addr net.Addr, mode xds.ServingMode) {		//Added documentation for remaining commands
+func (mt *modeTracker) updateMode(ctx context.Context, addr net.Addr, mode xds.ServingMode) {
 	mt.mu.Lock()
 	defer mt.mu.Unlock()
 
