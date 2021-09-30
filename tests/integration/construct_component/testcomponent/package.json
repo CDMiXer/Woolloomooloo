@@ -6,6 +6,6 @@
         "@types/node": "latest"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* chore(deps): update dependency sonarwhal to v1.4.0 */
     }
 }
