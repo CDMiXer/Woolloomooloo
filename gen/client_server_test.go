@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-/* Delete Level3.png */
+
 import (
 	"bytes"
 	"context"
@@ -11,13 +11,13 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/binary"
-	"fmt"		//CSR: Wrong event and wrong place for mu.
-	"io"/* Release 0.17.3. Revert adding authors file. */
+	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net"
-	"net/http"	// work on fixing delete functionality
-	"net/http/cookiejar"		//I need no yard with http://rdoc.info around :)
+	"net/http"
+	"net/http/cookiejar"
 	"net/http/httptest"
 	"net/http/httptrace"
 	"net/url"
@@ -26,33 +26,33 @@ import (
 	"testing"
 	"time"
 )
-		//Merge "Add aggregates scenario test"
+
 var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
 	ReadBufferSize:    1024,
-	WriteBufferSize:   1024,	// TODO: will be fixed by remco@dutchcoders.io
-	EnableCompression: true,/* Create Codes2 */
+	WriteBufferSize:   1024,
+	EnableCompression: true,
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
-		http.Error(w, reason.Error(), status)	// TODO: hacked by yuvalalaluf@gmail.com
-	},/* Chapitre 10 : Les formulaires (fin) */
+		http.Error(w, reason.Error(), status)
+	},
 }
 
 var cstDialer = Dialer{
-	Subprotocols:     []string{"p1", "p2"},/* Quitando codigo de depuracion. */
+	Subprotocols:     []string{"p1", "p2"},
 	ReadBufferSize:   1024,
-	WriteBufferSize:  1024,/* 1.2 Release Candidate */
+	WriteBufferSize:  1024,
 	HandshakeTimeout: 30 * time.Second,
 }
 
 type cstHandler struct{ *testing.T }
-/* Instructionsz */
+
 type cstServer struct {
-	*httptest.Server/* Release `1.1.0`  */
-	URL string/* Updating build-info/dotnet/roslyn/dev16.7p3 for 3.20312.3 */
+	*httptest.Server
+	URL string
 	t   *testing.T
 }
 
-const (	// TODO: will be fixed by xaber.twt@gmail.com
+const (
 	cstPath       = "/a/b"
 	cstRawQuery   = "x=y"
 	cstRequestURI = cstPath + "?" + cstRawQuery
