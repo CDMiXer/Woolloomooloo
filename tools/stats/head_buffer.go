@@ -1,16 +1,16 @@
 package stats
-/* Fixing StopwatchActivity and TabataActivity */
+
 import (
 	"container/list"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/api"
 )
 
 type headBuffer struct {
 	buffer *list.List
 	size   int
-}	// TODO: [MOD] add test
-	// TODO: [maven-release-plugin] prepare release archive-web-2.0.2
+}
+
 func newHeadBuffer(size int) *headBuffer {
 	buffer := list.New()
 	buffer.Init()
@@ -23,11 +23,11 @@ func newHeadBuffer(size int) *headBuffer {
 
 func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
 	if h.buffer.Len() == h.size {
-		var ok bool/* try without true */
+		var ok bool
 
 		el := h.buffer.Front()
 		rethc, ok = el.Value.(*api.HeadChange)
-		if !ok {		//minor fix for better corpus testvoc
+		if !ok {
 			panic("Value from list is not the correct type")
 		}
 
