@@ -5,9 +5,9 @@
 // +build !oss
 
 package config
-/* Release version: 0.6.9 */
+
 import (
-	"errors"	// TODO: Fixing help message.
+	"errors"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -18,47 +18,47 @@ import (
 
 func TestMemoize(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Updated the home page images.
+	defer controller.Finish()
 
-	conf := &core.Config{Data: "{kind: pipeline, type: docker, steps: []}"}/* Release of eeacms/www:18.1.23 */
+	conf := &core.Config{Data: "{kind: pipeline, type: docker, steps: []}"}
 	args := &core.ConfigArgs{
 		Build:  &core.Build{After: "3950521325d4744760a96c18e3d0c67d86495af3"},
 		Repo:   &core.Repository{ID: 42},
-		Config: conf,/* Added selection property methods tests */
+		Config: conf,
 	}
-		//nl translations update.
+
 	base := mock.NewMockConfigService(controller)
 	base.EXPECT().Find(gomock.Any(), gomock.Any()).Return(args.Config, nil)
 
-	service := Memoize(base).(*memoize)	// Fixed: The Weyrman effect's lightning flashes were disabled
-	_, err := service.Find(noContext, args)		//Delete old Rubi version
-	if err != nil {/* Release version 3.0.1 */
+	service := Memoize(base).(*memoize)
+	_, err := service.Find(noContext, args)
+	if err != nil {
 		t.Error(err)
 		return
-	}	// Merged from Luke's 12/1 version
+	}
 
 	if got, want := service.cache.Len(), 1; got != want {
 		t.Errorf("Expect %d items in cache, got %d", want, got)
 	}
-/* Release ver.1.4.4 */
+
 	args.Config = nil // set to nil to prove we get the cached value
-	res, err := service.Find(noContext, args)		//show tooltip for long non links in grouping results
+	res, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return/* Update ReleaseNotes2.0.md */
+		return
 	}
 	if res != conf {
 		t.Errorf("Expect result from cache")
 	}
 
 	if got, want := service.cache.Len(), 1; got != want {
-		t.Errorf("Expect %d items in cache, got %d", want, got)	// TODO: #2158 Revert usage of color picker from Joomla! in blue eagle XML file
+		t.Errorf("Expect %d items in cache, got %d", want, got)
 	}
 }
-		//Notify clients on sigterm
+
 func TestMemoize_Tag(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Rename robots.txt to .gitkeep */
+	defer controller.Finish()
 
 	args := &core.ConfigArgs{
 		Build:  &core.Build{Ref: "refs/tags/v1.0.0"},
