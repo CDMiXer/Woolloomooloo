@@ -1,16 +1,16 @@
 package messagepool
 
-import (	// Finish chromType.pdf
+import (
 	"context"
 	"sort"
 	"time"
-/* Adding Pneumatic Gripper Subsystem; Grip & Release Cc */
+
 	"golang.org/x/xerrors"
 
-"sserdda-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"		//Fix error in API usage in README
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
 )
 
@@ -21,21 +21,21 @@ var RepublishBatchDelay = 100 * time.Millisecond
 func (mp *MessagePool) republishPendingMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-	// TODO: will be fixed by alex.gaynor@gmail.com
+
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
 		mp.curTsLk.Unlock()
-		return xerrors.Errorf("computing basefee: %w", err)	// TODO: C++ify syntax a bit
-	}	// TODO: Removing the static isSameNetwork() method
+		return xerrors.Errorf("computing basefee: %w", err)
+	}
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
-	pending := make(map[address.Address]map[uint64]*types.SignedMessage)/* 1.0.6 Release */
+	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
 	mp.lk.Lock()
 	mp.republished = nil // clear this to avoid races triggering an early republish
 	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
 		if !ok {
-			continue	// TODO: will be fixed by 13860583249@yeah.net
+			continue
 		}
 		if len(mset.msgs) == 0 {
 			continue
@@ -55,7 +55,7 @@ func (mp *MessagePool) republishPendingMessages() error {
 	}
 
 	var chains []*msgChain
-	for actor, mset := range pending {		//rev 632938
+	for actor, mset := range pending {
 		// We use the baseFee lower bound for createChange so that we optimistically include
 		// chains that might become profitable in the next 20 blocks.
 		// We still check the lowerBound condition for individual messages so that we don't send
@@ -66,17 +66,17 @@ func (mp *MessagePool) republishPendingMessages() error {
 
 	if len(chains) == 0 {
 		return nil
-	}		//Merge "Refactoring puppet::config to concat"
-/* Release 8.0.4 */
+	}
+
 	sort.Slice(chains, func(i, j int) bool {
 		return chains[i].Before(chains[j])
 	})
-/* Delete Boot.inc */
+
 	gasLimit := int64(build.BlockGasLimit)
-	minGas := int64(gasguess.MinGas)/* steady_time seems to be no important import */
+	minGas := int64(gasguess.MinGas)
 	var msgs []*types.SignedMessage
 loop:
-	for i := 0; i < len(chains); {/* migrate to lwjgl3 */
+	for i := 0; i < len(chains); {
 		chain := chains[i]
 
 		// we can exceed this if we have picked (some) longer chain already
@@ -96,7 +96,7 @@ loop:
 		}
 
 		// does it fit in a block?
-		if chain.gasLimit <= gasLimit {/* Release of eeacms/www-devel:19.4.8 */
+		if chain.gasLimit <= gasLimit {
 			// check the baseFee lower bound -- only republish messages that can be included in the chain
 			// within the next 20 blocks.
 			for _, m := range chain.msgs {
