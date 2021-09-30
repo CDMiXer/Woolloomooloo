@@ -2,20 +2,20 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* Load kanji information on startup.  Release development version 0.3.2. */
         "moduleResolution": "node",
-        "declaration": true,/* Fixed link to forest plot */
-        "sourceMap": true,	// Tagged by Jenkins Task SVNTagging. Build:jenkins-YAKINDU_SCT2_CI-934.
+        "declaration": true,
+        "sourceMap": true,/* Update ReleaseNotes.json */
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,		//Log rotations.
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,/* Don't list the original equation as a solving step */
-        "forceConsistentCasingInFileNames": true,		//added changes for 0.5.5 to README
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },/* Merge branch 'master' of https://github.com/angelozerr/tern-tabris.git */
+    },
     "files": [
-        "index.ts"		//remove redundant modifiers enhancement + checkstyle changes
+        "index.ts"
     ]
 }
 
