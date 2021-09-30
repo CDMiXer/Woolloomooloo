@@ -1,9 +1,9 @@
 {
-  "types": {		//909170c4-2e66-11e5-9284-b827eb9e62be
+  "types": {
     "fake-provider:module1:Number2": {
       "type": "number",
       "description": "what a great description",
-      "enum": [	// TODO: Updated formatting [skip ci]
+      "enum": [
         {
           "value": 1,
           "name": "One",
@@ -11,20 +11,20 @@
         },
         {
           "value": 2,
-          "name": "Two",/* mixed in cmorrell */
-          "description": "two"/* Merge "py34: fix text conversion and urlparse usage in metadata" */
+          "name": "Two",
+          "description": "two"
         },
         {
-          "value": 3.4,/* Release bzr-svn 0.4.11~rc2. */
-          "name": "ThreePointFour",	// TODO: hacked by souzau@yandex.com
+          "value": 3.4,
+          "name": "ThreePointFour",
           "description": "3.4"
         },
         {
           "value": 6,
-          "name": "Six",		//Updated PHPDocs to be friendly with more IDEs
+          "name": "Six",
           "description": "six"
-        }		//Update comptable-modifierForfaitAction.php
+        }
       ]
-    }/* Fix: Correct permissions on files */
+    }
   }
 }
