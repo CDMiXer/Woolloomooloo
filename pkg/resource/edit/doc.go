@@ -10,8 +10,8 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Log to MumbleBetaLog.txt file for BetaReleases. */
-/* Converting Gtk.HBox into Gtk.Box */
+// limitations under the License.
+
 // Package edit contains functions suitable for editing a snapshot in-place. It is designed to be used by higher-level
-// tools that present a means for users to surgically edit their state.	// TODO: Delete LocalPushCenter.m
+// tools that present a means for users to surgically edit their state.
 package edit
