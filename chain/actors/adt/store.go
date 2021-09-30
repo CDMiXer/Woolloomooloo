@@ -1,17 +1,17 @@
 package adt
-	// TODO: hacked by why@ipfs.io
-import (
-	"context"		//Merge "Implement support library API generation and check in Gradle"
 
-	adt "github.com/filecoin-project/specs-actors/actors/util/adt"	// Implementato meccanismo Command, refactor generale e nuovi attr/metodi
+import (
+	"context"
+
+	adt "github.com/filecoin-project/specs-actors/actors/util/adt"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
 
 type Store interface {
-	Context() context.Context
+	Context() context.Context/* Release version: 1.0.5 */
 	cbor.IpldStore
 }
-/* Create discover.py */
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
+
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {		//adding Licence
 	return adt.WrapStore(ctx, store)
 }
