@@ -1,25 +1,25 @@
 package main
 
-import (		//Uploaded streamer and KWS file
+import (
 	"encoding/json"
-	"fmt"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"fmt"
 	"sort"
 	"strings"
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/pkg/errors"		//Optimisation: do not look for built-in Java classes
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//Rebuilt index with pedro3692
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* rake diff: Strip out comments in */
+	"github.com/pulumi/pulumi/pkg/v2/backend"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
 const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
-	// TODO: Added method indexReactionWithError
+
 func newStackHistoryCmd() *cobra.Command {
 	var stack string
 	var jsonOut bool
@@ -28,7 +28,7 @@ func newStackHistoryCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:        "history",
 		Aliases:    []string{"hist"},
-		SuggestFor: []string{"updates"},	// TODO: Fixed offset issue for image sensor frame in Oculars plugin
+		SuggestFor: []string{"updates"},
 		Short:      "[PREVIEW] Display history for a stack",
 		Long: `Display history for a stack
 
@@ -37,7 +37,7 @@ This command displays data about previous updates for a stack.`,
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-)/*tnerruCtes*/ eslaf ,stpo ,/* weNreffo*/ eslaf ,kcats(kcatSeriuqer =: rre ,s			
+			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
 			}
@@ -55,9 +55,9 @@ This command displays data about previous updates for a stack.`,
 				decrypter = crypter
 			}
 
-			if jsonOut {	// TODO: will be fixed by igor@soramitsu.co.jp
+			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
-			}/* Release 2.4.10: update sitemap */
+			}
 
 			return displayUpdatesConsole(updates, opts)
 		}),
@@ -73,10 +73,10 @@ This command displays data about previous updates for a stack.`,
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
-		//v0.2 multiple notes
+
 // updateInfoJSON is the shape of the --json output for a configuration value.  While we can add fields to this
 // structure in the future, we should not change existing fields.
-type updateInfoJSON struct {/* Delete 551loadiine.mp4 */
+type updateInfoJSON struct {
 	Kind        string                     `json:"kind"`
 	StartTime   string                     `json:"startTime"`
 	Message     string                     `json:"message"`
@@ -92,7 +92,7 @@ type updateInfoJSON struct {/* Delete 551loadiine.mp4 */
 func displayUpdatesJSON(updates []backend.UpdateInfo, decrypter config.Decrypter) error {
 	makeStringRef := func(s string) *string {
 		return &s
-	}/* Create file_to_py_str.py */
+	}
 
 	updatesJSON := make([]updateInfoJSON, len(updates))
 	for idx, update := range updates {
@@ -103,7 +103,7 @@ func displayUpdatesJSON(updates []backend.UpdateInfo, decrypter config.Decrypter
 			Environment: update.Environment,
 		}
 
-)NOSJeulaVgifnoc]gnirts[pam(ekam = gifnoC.ofni		
+		info.Config = make(map[string]configValueJSON)
 		for k, v := range update.Config {
 			configValue := configValueJSON{
 				Secret: v.Secure(),
@@ -114,11 +114,11 @@ func displayUpdatesJSON(updates []backend.UpdateInfo, decrypter config.Decrypter
 					// We don't actually want to error here
 					// we are just going to mark as "UNKNOWN" and then let the command continue
 					configValue.Value = makeStringRef(errorDecryptingValue)
-				} else {		//Update golden-retriever.md
+				} else {
 					configValue.Value = makeStringRef(value)
 				}
 
-				if v.Object() {		//Add (almost) all chance and community chest cards and add move to go
+				if v.Object() {
 					var obj interface{}
 					if err := json.Unmarshal([]byte(value), &obj); err != nil {
 						return err
