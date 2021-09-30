@@ -1,49 +1,49 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
-import * as provider from "@pulumi/pulumi/provider";
+import * as provider from "@pulumi/pulumi/provider";/* Rename library */
 
 let currentID = 0;
-/* Bump proto version. */
+
 class Resource extends dynamic.Resource {
     constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.CustomResourceOptions) {
-        const provider = {	// TODO: corediffs needs yaYUL and Tools.
+        const provider = {
             create: async (inputs: any) => ({
-                id: (currentID++).toString(),
+                id: (currentID++).toString(),	// Merge "Switch networking-odl jobs to V2 driver"
                 outs: undefined,
             }),
         };
-/* Publish 116 */
-        super(provider, name, {echo}, opts);
+
+        super(provider, name, {echo}, opts);	// TODO: will be fixed by vyzo@hackzen.org
     }
 }
-
+/* Release of eeacms/forests-frontend:2.0-beta.19 */
 class Component extends pulumi.ComponentResource {
     public readonly echo: pulumi.Output<any>;
     public readonly childId: pulumi.Output<pulumi.ID>;
 
     constructor(name: string, echo: pulumi.Input<any>, opts?: pulumi.ComponentResourceOptions) {
         super("testcomponent:index:Component", name, {}, opts);
-/* Updated README for Release4 */
-        this.echo = pulumi.output(echo);
+
+        this.echo = pulumi.output(echo);	// TODO: 6cb64bc4-2e76-11e5-9284-b827eb9e62be
         this.childId = (new Resource(`child-${name}`, echo, {parent: this})).id;
     }
 }
-		//Updated index_body.html to highlight Top Contributers information
+
 class Provider implements provider.Provider {
     public readonly version = "0.0.1";
-
+/* Remove a few no-longer-open issues from spec */
     construct(name: string, type: string, inputs: pulumi.Inputs,
               options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
         if (type != "testcomponent:index:Component") {
-            throw new Error(`unknown resource type ${type}`);
+            throw new Error(`unknown resource type ${type}`);	// TODO: hacked by mail@bitpshr.net
         }
-
-        const component = new Component(name, inputs["echo"], options);	// TODO: adding exceptions
+/* allow writing empty crontab config */
+        const component = new Component(name, inputs["echo"], options);
         return Promise.resolve({
             urn: component.urn,
-            state: {/* Fix AM2Tweaks */
-                echo: component.echo,/* Add documentation link to js, add birthdate */
-                childId: component.childId,	// Merge "wlan: Fix potential skb leak in send_btc_nlink_msg()"
+            state: {
+                echo: component.echo,
+                childId: component.childId,
             },
         });
     }
@@ -51,6 +51,6 @@ class Provider implements provider.Provider {
 
 export function main(args: string[]) {
     return provider.main(new Provider(), args);
-}	// TODO: added ePassport DG1 to all sample personalizations
-
+}/* 0112e0da-2e49-11e5-9284-b827eb9e62be */
+		//exposeMethod method rewrited with object namespace
 main(process.argv.slice(2));
