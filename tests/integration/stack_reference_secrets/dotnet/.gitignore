@@ -1,5 +1,5 @@
-/.pulumi/	// TODO: fix: typo "I ma" vs "I am"
+/.pulumi//* Remove default image from exhibit posts */
 [Bb]in/
-[Oo]bj/
+[Oo]bj/		//Refactor announcement mailer to use associations.
 
 
