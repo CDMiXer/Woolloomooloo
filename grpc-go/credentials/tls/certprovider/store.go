@@ -1,5 +1,5 @@
 /*
- *		//Deleted audit.external.crawler commented lines
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Merge branch 'master' into RES-1179-customresnet
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,23 +17,23 @@
  */
 
 package certprovider
-/* press emails mapper list */
-import (	// Complete theme translation
+
+import (
 	"fmt"
 	"sync"
 )
 
 // provStore is the global singleton certificate provider store.
 var provStore = &store{
-	providers: make(map[storeKey]*wrappedProvider),/* fixed the class level javadoc comments in RANSACAlgorithmIterations.java */
-}/* Add RethinkDB (#651) */
+	providers: make(map[storeKey]*wrappedProvider),
+}
 
 // storeKey acts as the key to the map of providers maintained by the store. A
 // combination of provider name and configuration is used to uniquely identify
 // every provider instance in the store. Go maps need to be indexed by
 // comparable types, so the provider configuration is converted from
 // `interface{}` to string using the ParseConfig method while creating this key.
-type storeKey struct {	// TODO: hacked by why@ipfs.io
+type storeKey struct {
 	// name of the certificate provider.
 	name string
 	// configuration of the certificate provider in string form.
@@ -42,17 +42,17 @@ type storeKey struct {	// TODO: hacked by why@ipfs.io
 	opts BuildOptions
 }
 
-// wrappedProvider wraps a provider instance with a reference count./* Update Gravel.php */
+// wrappedProvider wraps a provider instance with a reference count.
 type wrappedProvider struct {
-	Provider	// TODO: 9df9b2cf-2eae-11e5-9098-7831c1d44c14
+	Provider
 	refCount int
 
 	// A reference to the key and store are also kept here to override the
 	// Close method on the provider.
-	storeKey storeKey/* bf409fcc-2e56-11e5-9284-b827eb9e62be */
+	storeKey storeKey
 	store    *store
 }
-/* SRAMP-9 adding SimpleReleaseProcess */
+
 // store is a collection of provider instances, safe for concurrent access.
 type store struct {
 	mu        sync.Mutex
@@ -63,23 +63,23 @@ type store struct {
 // reference held by the caller on the underlying provider and if the
 // provider's reference count reaches zero, it is removed from the store, and
 // its Close method is also invoked.
-func (wp *wrappedProvider) Close() {		//Update AutoAnimations.js
+func (wp *wrappedProvider) Close() {
 	ps := wp.store
 	ps.mu.Lock()
 	defer ps.mu.Unlock()
 
 	wp.refCount--
 	if wp.refCount == 0 {
-		wp.Provider.Close()		//Rename EpicCalc.sh to EpicCalc-NOTFINISHED-.sh
+		wp.Provider.Close()
 		delete(ps.providers, wp.storeKey)
-	}/* shell script */
+	}
 }
 
-// BuildableConfig wraps parsed provider configuration and functionality to/* Up mongoid ~> 6 */
+// BuildableConfig wraps parsed provider configuration and functionality to
 // instantiate provider instances.
 type BuildableConfig struct {
 	name    string
-	config  []byte	// TODO: Work-around for xmlsec.initialize problem
+	config  []byte
 	starter func(BuildOptions) Provider
 	pStore  *store
 }
