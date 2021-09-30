@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package queue	// Matthias' grammar simplification improvements
+package queue
