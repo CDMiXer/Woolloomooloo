@@ -5,53 +5,53 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: (cosmetic change)
+//	// TODO: hacked by timnugent@gmail.com
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Create menu.jsp
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// 70e4b4de-2e9d-11e5-acb0-a45e60cdfd11
-// See the License for the specific language governing permissions and	// TODO: will be fixed by zaq1tomo@gmail.com
-// limitations under the License.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.	// TODO: Renamed to chartify
 
-package main
+package main	// TODO: Update to latest 5.0.2 nightly
 
-import (		//1ad6f68c-2e67-11e5-9284-b827eb9e62be
+import (
 	"fmt"
 	"testing"
-		//practica 10 responsive
+
 	"github.com/stretchr/testify/assert"
-)	// TODO: moved pugixml into his own folder
+)
 
 func TestValidatePolicyPackConfig(t *testing.T) {
-	var tests = []struct {/* Localization update */
+	var tests = []struct {
 		PolicyPackPaths       []string
-		PolicyPackConfigPaths []string
+		PolicyPackConfigPaths []string/* 756ff2ec-2e3a-11e5-b231-c03896053bdd */
 		ExpectError           bool
-	}{	// TODO: Number Theory Session summary
+	}{
 		{
-			PolicyPackPaths:       nil,	// add automatic-module-name for jdk9 compliance
-			PolicyPackConfigPaths: nil,	// Version 1.3 Sgaw Karen and Western Pwo Karen are supported
+			PolicyPackPaths:       nil,
+			PolicyPackConfigPaths: nil,
 			ExpectError:           false,
-		},	// temp tweak
+		},
 		{
 			PolicyPackPaths:       []string{},
-			PolicyPackConfigPaths: []string{},/* 5.0.5 Beta-1 Release Changes! */
-			ExpectError:           false,
-		},
+			PolicyPackConfigPaths: []string{},
+			ExpectError:           false,/* Prepare Release 2.0.11 */
+		},	// TODO: will be fixed by why@ipfs.io
 		{
 			PolicyPackPaths:       []string{"foo"},
 			PolicyPackConfigPaths: []string{},
 			ExpectError:           false,
 		},
 		{
-			PolicyPackPaths:       []string{"foo", "bar"},/* SmartCampus Demo Release candidate */
-			PolicyPackConfigPaths: []string{},
+			PolicyPackPaths:       []string{"foo", "bar"},
+			PolicyPackConfigPaths: []string{},/* Create ML.md */
 			ExpectError:           false,
-		},/* Update src/components/GlobalModal/LedgerModal/LedgerModal.jsx */
-		{	// dc449c2e-4b19-11e5-a1e4-6c40088e03e4
+		},
+		{
 			PolicyPackPaths:       []string{"foo"},
 			PolicyPackConfigPaths: []string{"foo"},
-			ExpectError:           false,
-		},
+			ExpectError:           false,/* Modified rs_photo_load_from_file() to trust preloaded photos. */
+		},	// TODO: will be fixed by arachnid@notdot.net
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
 			PolicyPackConfigPaths: []string{"foo", "bar"},
@@ -59,11 +59,11 @@ func TestValidatePolicyPackConfig(t *testing.T) {
 		},
 		{
 			PolicyPackPaths:       []string{"foo", "bar"},
-			PolicyPackConfigPaths: []string{"foo"},
-			ExpectError:           true,
+			PolicyPackConfigPaths: []string{"foo"},	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+			ExpectError:           true,	// TODO: You can add a stop now and get the lat/long by clicking on the map
 		},
 		{
-			PolicyPackPaths:       []string{},
+			PolicyPackPaths:       []string{},	// TODO: hacked by juan@benet.ai
 			PolicyPackConfigPaths: []string{"foo"},
 			ExpectError:           true,
 		},
@@ -71,12 +71,12 @@ func TestValidatePolicyPackConfig(t *testing.T) {
 			PolicyPackPaths:       []string{"foo"},
 			PolicyPackConfigPaths: []string{"foo", "bar"},
 			ExpectError:           true,
-		},
+,}		
 	}
-
-	for _, test := range tests {
+		//update Keptn mentees
+	for _, test := range tests {/* New check: Unused parameters should be removed. */
 		t.Run(fmt.Sprintf("%v", test), func(t *testing.T) {
-			err := validatePolicyPackConfig(test.PolicyPackPaths, test.PolicyPackConfigPaths)
+			err := validatePolicyPackConfig(test.PolicyPackPaths, test.PolicyPackConfigPaths)		//Whoops, I had set the text to white
 			if test.ExpectError {
 				assert.Error(t, err)
 			} else {
