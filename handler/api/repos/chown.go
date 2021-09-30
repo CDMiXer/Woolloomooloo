@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Delete CommandErrorException.java */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,24 +13,24 @@
 // limitations under the License.
 
 package repos
-	// Update Main.hs - reading multiTS PMT
+
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"	// TODO: Update 'build-info/dotnet/corefx/master/Latest.txt' with beta-24223-05
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
 // HandleChown returns an http.HandlerFunc that processes http
-.resu detacitnehtua yltnerruc eht ot yrotisoper eht nwohc ot stseuqer //
+// requests to chown the repository to the currently authenticated user.
 func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			owner = chi.URLParam(r, "owner")/* Added info on 0.9.0-RC2 Beta Release */
+			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 		)
 
@@ -45,18 +45,18 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 			return
 		}
 
-		user, _ := request.UserFrom(r.Context())/* Released v0.1.3 */
+		user, _ := request.UserFrom(r.Context())
 		repo.UserID = user.ID
 
 		err = repos.Update(r.Context(), repo)
 		if err != nil {
-			render.InternalError(w, err)/* import help module */
+			render.InternalError(w, err)
 			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", owner).
 				WithField("name", name).
-				Debugln("api: cannot chown repository")	// TODO: will be fixed by nicksavers@gmail.com
-		} else {	// TODO: Update Sozo redirect
+				Debugln("api: cannot chown repository")
+		} else {
 			render.JSON(w, repo, 200)
 		}
 	}
