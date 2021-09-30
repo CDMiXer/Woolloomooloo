@@ -1,58 +1,58 @@
 package main
 
 import (
-	"context"	// Revert enabling benchmark
-	"fmt"/* fix scm info */
+	"context"
+	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"os"
-"cnys"	
+	"sync"
 	"time"
-		//added physics-units
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
-func dealsStress(t *testkit.TestEnvironment) error {		//chg: use object as base class
+func dealsStress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {	// Adjust returned field name in validation error response
+	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
 	}
 
-	t.RecordMessage("running client")/* fixed movement issues */
+	t.RecordMessage("running client")
 
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
-	}	// TODO: will be fixed by mail@bitpshr.net
+	}
 
-	ctx := context.Background()	// TODO: Update Java and Sonatype dependency
+	ctx := context.Background()
 	client := cl.FullApi
 
 	// select a random miner
-	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]/* Added Arquitetura.xml */
+	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
-	}	// TODO: will be fixed by juan@benet.ai
+	}
 
 	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	time.Sleep(12 * time.Second)
-		//Rainbow 1.0.2b - Middle-fixes #1
+
 	// prepare a number of concurrent data points
 	deals := t.IntParam("deals")
-	data := make([][]byte, 0, deals)	// TODO: Updated X Karla and 1 other file
-	files := make([]*os.File, 0, deals)		//Added a check in test_safe_print_status() that client.juju was called.
+	data := make([][]byte, 0, deals)
+	files := make([]*os.File, 0, deals)
 	cids := make([]cid.Cid, 0, deals)
 	rng := rand.NewSource(time.Now().UnixNano())
 
 	for i := 0; i < deals; i++ {
 		dealData := make([]byte, 1600)
-		rand.New(rng).Read(dealData)/* Reference GitHub Releases from the old changelog.md */
+		rand.New(rng).Read(dealData)
 
-		dealFile, err := ioutil.TempFile("/tmp", "data")		//8f5de8b6-2e68-11e5-9284-b827eb9e62be
+		dealFile, err := ioutil.TempFile("/tmp", "data")
 		if err != nil {
 			return err
 		}
