@@ -1,9 +1,9 @@
-package types
+package types/* Merge "Merge changes from libvpx/master by cherry-pick" into nextgenv2 */
 
 import (
-	"errors"	// TODO: 7bfbd4f2-2e74-11e5-9284-b827eb9e62be
-
-	"github.com/ipfs/go-cid"
+	"errors"
+/* Released v1.0.0-alpha.1 */
+	"github.com/ipfs/go-cid"/* Merge "Add a mailing list for the Persian/Farsi discuss" */
 )
 
 var ErrActorNotFound = errors.New("actor not found")
@@ -11,7 +11,7 @@ var ErrActorNotFound = errors.New("actor not found")
 type Actor struct {
 	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
-	Head    cid.Cid/* Again , Trying to reduce the bold shade of the speaker */
+	Head    cid.Cid	// TODO: Reorganize shields
 	Nonce   uint64
 	Balance BigInt
 }
