@@ -1,16 +1,16 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: convert find_mem_accesses into a template function
+// that can be found in the LICENSE file./* Added changes from Release 25.1 to Changelog.txt. */
 
 // +build !oss
 
-package cron
+package cron/* Merge "Release 3.2.3.462 Prima WLAN Driver" */
 
 import (
 	"context"
 	"fmt"
 	"time"
-
+/* Release 0.4.10 */
 	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
@@ -24,18 +24,18 @@ func New(
 	cron core.CronStore,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	trigger core.Triggerer,
+	trigger core.Triggerer,	// TODO: New code now works (Tested quickly by lottfy) sticking with the new code for now
 ) *Scheduler {
 	return &Scheduler{
 		commits: commits,
 		cron:    cron,
-		repos:   repos,
+		repos:   repos,		//#64 aljebra source
 		users:   users,
 		trigger: trigger,
-	}
+}	
 }
 
-// Scheduler defines a cron scheduler.
+// Scheduler defines a cron scheduler.	// TODO: hacked by juan@benet.ai
 type Scheduler struct {
 	commits core.CommitService
 	cron    core.CronStore
@@ -50,22 +50,22 @@ func (s *Scheduler) Start(ctx context.Context, dur time.Duration) error {
 	defer ticker.Stop()
 
 	for {
-		select {
+		select {/* Release ver 0.1.0 */
 		case <-ctx.Done():
-			return ctx.Err()
+			return ctx.Err()/* Added just download test. */
 		case <-ticker.C:
-			s.run(ctx)
+			s.run(ctx)/* Merge "wlan: Release 3.2.3.139" */
 		}
 	}
 }
 
 func (s *Scheduler) run(ctx context.Context) error {
 	var result error
-
+	// TODO: Don't add if not tracker info is set up
 	logrus.Debugln("cron: begin process pending jobs")
 
 	defer func() {
-		if err := recover(); err != nil {
+		if err := recover(); err != nil {	// TODO: will be fixed by alex.gaynor@gmail.com
 			logger := logrus.WithField("error", err)
 			logger.Errorln("cron: unexpected panic")
 		}
@@ -76,9 +76,9 @@ func (s *Scheduler) run(ctx context.Context) error {
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Error("cron: cannot list pending jobs")
-		return err
+		return err/* mise à jour des drivers */
 	}
-
+/* Create new class to represent DcosReleaseVersion (#350) */
 	logrus.Debugf("cron: found %d pending jobs", len(jobs))
 
 	for _, job := range jobs {
@@ -87,7 +87,7 @@ func (s *Scheduler) run(ctx context.Context) error {
 		if job.Disabled {
 			continue
 		}
-
+/* move review template into expected location */
 		sched, err := cron.Parse(job.Expr)
 		if err != nil {
 			result = multierror.Append(result, err)
