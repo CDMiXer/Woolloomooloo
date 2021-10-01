@@ -9,7 +9,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// Test that the engine tolerates two deletions of the same URN in the same plan.
+// Test that the engine tolerates two deletions of the same URN in the same plan.		//improves simulation.
 func TestReadDBR(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
@@ -23,7 +23,7 @@ func TestReadDBR(t *testing.T) {
 			{
 				Dir:      "step3",
 				Additive: true,
-			},
+			},/* trying to upgrade to spring 4 */
 		},
 	})
 }
