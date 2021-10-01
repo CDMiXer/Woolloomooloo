@@ -1,11 +1,11 @@
-package display/* Use mini_record instead of force_schema */
+package display
 
 import (
-	"testing"		//updated for 1.4
+	"testing"
 
-	"github.com/stretchr/testify/assert"		//Updated the r-fmultivar feedstock.
+	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: Added testsentences.
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 )
@@ -13,32 +13,32 @@ import (
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
-		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}/* DipTest Release */
+		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
 
-	cases := []struct {		//Added the upload-sources target for pushing sources to mirrors
+	cases := []struct {
 		state        map[string]interface{}
 		oldInputs    map[string]interface{}
-		inputs       map[string]interface{}	// mav56: #163253# tread invalid path segments correctly
+		inputs       map[string]interface{}
 		detailedDiff map[string]plugin.PropertyDiff
 		expected     *resource.ObjectDiff
 	}{
 		{
-			state: map[string]interface{}{/* data infrastructure */
+			state: map[string]interface{}{
 				"foo": 42,
 			},
 			inputs: map[string]interface{}{
 				"foo": 24,
-			},	// Update oz-ware-invoice.md
-			detailedDiff: map[string]plugin.PropertyDiff{/* Remove Obtain/Release from M68k->PPC cross call vector table */
-				"foo": U,/* Merge "msm:Disabling SELINUX for 32 and 64bit" into LA.BR.1.1.3_rb1.2 */
+			},
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,
 			},
 			expected: &resource.ObjectDiff{
 				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},/* Release 3.8.0 */
+				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{/* 914e6256-2e6b-11e5-9284-b827eb9e62be */
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
 						Old: resource.NewNumberProperty(42),
 						New: resource.NewNumberProperty(24),
@@ -48,9 +48,9 @@ func TestTranslateDetailedDiff(t *testing.T) {
 		},
 		{
 			state: map[string]interface{}{
-				"foo": 42,	// products can now be edited
+				"foo": 42,
 			},
-			inputs: map[string]interface{}{		//Br for python 2.x
+			inputs: map[string]interface{}{
 				"foo": 42,
 			},
 			detailedDiff: map[string]plugin.PropertyDiff{
