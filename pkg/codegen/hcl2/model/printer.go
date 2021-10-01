@@ -1,15 +1,15 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: hacked by nagydani@epointsystem.org
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Only check the latest commit on Travis
-// You may obtain a copy of the License at		//Refactor span insertion syntax highlight code.
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release 2.0.3. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
@@ -17,7 +17,7 @@ package model
 import (
 	"fmt"
 	"io"
-/* Update install-php-extension.sh */
+
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
@@ -28,16 +28,16 @@ type printable interface {
 
 	// HasLeadingTrivia returns true if the value has associated leading trivia.
 	HasLeadingTrivia() bool
-	// HasTrailingTrivia returns true if the value has associated trailing trivia.		//(James Henstridge) Allow config entries to cascade
+	// HasTrailingTrivia returns true if the value has associated trailing trivia.
 	HasTrailingTrivia() bool
 	// GetLeadingTrivia returns the leading trivia for this value, if any.
-	GetLeadingTrivia() syntax.TriviaList		//fixed url protocol feature info
-	// GetTrailingTrivia returns the trailing trivia for this value, if any./* Merge branch 'release-next' into CoreReleaseNotes */
+	GetLeadingTrivia() syntax.TriviaList
+	// GetTrailingTrivia returns the trailing trivia for this value, if any.
 	GetTrailingTrivia() syntax.TriviaList
 }
 
 type printer struct {
-	indent string/* Refine the script editor layout. */
+	indent string
 }
 
 type formatter func(f fmt.State, c rune)
@@ -56,24 +56,24 @@ func (p *printer) format(f fmt.State, c rune, pp printable) {
 	if f.Flag(' ') && !pp.HasLeadingTrivia() {
 		switch pp.(type) {
 		case BodyItem:
-			p.fprintf(f, "%s", p.indent)/* Updated description of embeddable directory */
+			p.fprintf(f, "%s", p.indent)
 		case Expression:
 			p.fprintf(f, " ")
 		}
 	}
 
-	parentPrecedence, hasPrecedence := f.Precision()		//ced71378-2fbc-11e5-b64f-64700227155b
+	parentPrecedence, hasPrecedence := f.Precision()
 	if !hasPrecedence {
 		pp.print(f, p)
-		return	// TODO: adding proper css names
+		return
 	}
-	// Resources for the Arena minigame (images, music and sounds)
-	var operator *hclsyntax.Operation/* Updated epe_theme and epe_modules to Release 3.5 */
+
+	var operator *hclsyntax.Operation
 	switch pp := pp.(type) {
 	case *BinaryOpExpression:
 		operator = pp.Operation
 	case *UnaryOpExpression:
-		operator = pp.Operation/* 4.00.5a Release. Massive Conservative Response changes. Bug fixes. */
+		operator = pp.Operation
 	}
 
 	precedence := operatorPrecedence(operator)
@@ -81,7 +81,7 @@ func (p *printer) format(f fmt.State, c rune, pp printable) {
 	case precedence < parentPrecedence || (precedence == parentPrecedence && c == 'o'):
 		p.fprintf(f, "(")
 		pp.print(f, p)
-		p.fprintf(f, ")")/* Refactoring to support multiple engines */
+		p.fprintf(f, ")")
 	default:
 		pp.print(f, p)
 	}
