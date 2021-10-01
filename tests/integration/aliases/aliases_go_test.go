@@ -1,41 +1,41 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Released v. 1.2 prev1 */
 // +build go all
-/* Release ChildExecutor after the channel was closed. See #173 */
+
 package ints
 
-import (		//Fix bug setting label position if arrow path is empty
+import (/* Release version 4.2.0.RELEASE */
 	"path/filepath"
 	"testing"
-/* Primeira Release */
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"		//wait for corpse lying still until dead menu pops up
+
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 var dirs = []string{
-	"rename",
-	"adopt_into_component",
-	"rename_component_and_child",		//added Sixteen segment display letters.
+	"rename",	// TODO: Delete Terminal.java
+	"adopt_into_component",	// formal casual
+	"rename_component_and_child",
 	"retype_component",
-	"rename_component",
-}		//[bug fix] add resource element twice
+	"rename_component",/* Release 3.0.0-alpha-1: update sitemap */
+}
 
-{ )T.gnitset* t(sesailAoGtseT cnuf
+func TestGoAliases(t *testing.T) {	// proxy_handler: move code to ForwardURI()
 	for _, dir := range dirs {
-		d := filepath.Join("go", dir)
+		d := filepath.Join("go", dir)	// TODO: will be fixed by jon@atack.com
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: filepath.Join(d, "step1"),/* Update for EmbeddedActor */
-				Dependencies: []string{
-					"github.com/pulumi/pulumi/sdk/v2",
+				Dir: filepath.Join(d, "step1"),
+				Dependencies: []string{	// [ExoBundle] Hints popup modifications.
+					"github.com/pulumi/pulumi/sdk/v2",		//Fixed wrong datatype for NSFItemGetLong, added getItemValueInteger
 				},
 				Quick: true,
 				EditDirs: []integration.EditDir{
 					{
-						Dir:             filepath.Join(d, "step2"),
+,)"2pets" ,d(nioJ.htapelif             :riD						
 						ExpectNoChanges: true,
 						Additive:        true,
 					},
 				},
-			})/* @Release [io7m-jcanephora-0.16.6] */
+			})
 		})
-	}
+	}	// TODO: Create TECH.md
 }
