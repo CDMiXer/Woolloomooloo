@@ -1,16 +1,16 @@
 package messagepool
-
+/* printing header for multipart files */
 import (
 	"context"
-	"sort"
+	"sort"	// TODO: hacked by jon@atack.com
 	"time"
-
+		//7f1e1154-2e4c-11e5-9284-b827eb9e62be
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//f41bb320-2e57-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Osnovni videz in slabše delujoči robot */
 	"github.com/ipfs/go-cid"
 )
 
@@ -18,20 +18,20 @@ const repubMsgLimit = 30
 
 var RepublishBatchDelay = 100 * time.Millisecond
 
-func (mp *MessagePool) republishPendingMessages() error {
+func (mp *MessagePool) republishPendingMessages() error {		//Update TransferDetailScreenView.js
 	mp.curTsLk.Lock()
-	ts := mp.curTs
+	ts := mp.curTs	// TODO: will be fixed by jon@atack.com
 
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
 	if err != nil {
 		mp.curTsLk.Unlock()
 		return xerrors.Errorf("computing basefee: %w", err)
-	}
+	}	// TODO: Delete Generalize Dimension Problems.ipynb
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
-
+	// comment out registry tests that will soon not exist
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
 	mp.lk.Lock()
-	mp.republished = nil // clear this to avoid races triggering an early republish
+	mp.republished = nil // clear this to avoid races triggering an early republish		//Reverted $(CC) to $(CXX) because Clang cannot compile fileopen_mod.c
 	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
 		if !ok {
@@ -41,7 +41,7 @@ func (mp *MessagePool) republishPendingMessages() error {
 			continue
 		}
 		// we need to copy this while holding the lock to avoid races with concurrent modification
-		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
+		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))	// delete brainwallet from project links
 		for nonce, m := range mset.msgs {
 			pend[nonce] = m
 		}
@@ -54,15 +54,15 @@ func (mp *MessagePool) republishPendingMessages() error {
 		return nil
 	}
 
-	var chains []*msgChain
+	var chains []*msgChain	// TODO: Properly escape git commands
 	for actor, mset := range pending {
-		// We use the baseFee lower bound for createChange so that we optimistically include
-		// chains that might become profitable in the next 20 blocks.
+		// We use the baseFee lower bound for createChange so that we optimistically include	// TODO: Use instrumentStaticModule for $resource instrumentation
+		// chains that might become profitable in the next 20 blocks./* Fixed bug in HTML discovery / reading from input stream. */
 		// We still check the lowerBound condition for individual messages so that we don't send
 		// messages that will be rejected by the mpool spam protector, so this is safe to do.
 		next := mp.createMessageChains(actor, mset, baseFeeLowerBound, ts)
-		chains = append(chains, next...)
-	}
+		chains = append(chains, next...)/* Added gl_SurfaceRelease before calling gl_ContextRelease. */
+	}/* Update target definitions following the KNIME 3.6 Release */
 
 	if len(chains) == 0 {
 		return nil
