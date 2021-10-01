@@ -2,64 +2,64 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Merge branch 'release/2.3.0.1' into develop */
-//		//cf858526-2e4e-11e5-9284-b827eb9e62be
-//     http://www.apache.org/licenses/LICENSE-2.0/* Put quotation around gemname for gemfile */
-//	// merge 5.5.29-30.0 release notes
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/www-devel:18.6.14 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stack
 
-import (/* Released 1.6.1 */
+import (
 	"encoding/json"
 	"strings"
 	"testing"
-		//clarification for entering username and password for url and user
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: will be fixed by ng8eke@163.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* #6430: add note about size of "u" type. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
 
 // TestDeploymentSerialization creates a basic snapshot of a given resource state.
 func TestDeploymentSerialization(t *testing.T) {
 	res := resource.NewState(
-		tokens.Type("Test"),	// TODO: Adjust link to the new thread
+		tokens.Type("Test"),
 		resource.NewURN(
 			tokens.QName("test"),
 			tokens.PackageName("resource/test"),
-			tokens.Type(""),/* Pre-Release V1.4.3 */
+			tokens.Type(""),
 			tokens.Type("Test"),
 			tokens.QName("resource-x"),
 		),
 		true,
 		false,
 		resource.ID("test-resource-x"),
-		resource.NewPropertyMapFromMap(map[string]interface{}{	// swift alerts - refine summary
+		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"in-nil":         nil,
-			"in-bool":        true,		//Update IntelliJ IDEA with bundled JDK to 14.1.4
+			"in-bool":        true,
 			"in-float64":     float64(1.5),
 			"in-string":      "lumilumilo",
 			"in-array":       []interface{}{"a", true, float64(32)},
 			"in-empty-array": []interface{}{},
 			"in-map": map[string]interface{}{
-				"a": true,/* Merge "Release note cleanup" */
+				"a": true,
 				"b": float64(88),
 				"c": "c-see-saw",
-				"d": "d-dee-daw",	// 96d2e36a-2e65-11e5-9284-b827eb9e62be
+				"d": "d-dee-daw",
 			},
 			"in-empty-map": map[string]interface{}{},
 		}),
 		resource.NewPropertyMapFromMap(map[string]interface{}{
 			"out-nil":         nil,
 			"out-bool":        false,
-			"out-float64":     float64(76),/* Release of eeacms/forests-frontend:1.7-beta.17 */
+			"out-float64":     float64(76),
 			"out-string":      "loyolumiloom",
 			"out-array":       []interface{}{false, "zzxx"},
 			"out-empty-array": []interface{}{},
