@@ -1,6 +1,6 @@
-{/* Released Neo4j 3.3.7 */
-    "compilerOptions": {/* Release version: 1.1.4 */
-        "strict": true,	// TODO: hacked by arachnid@notdot.net
+{/* added png version of class diagrams */
+    "compilerOptions": {
+        "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
@@ -9,10 +9,10 @@
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: More production fitting.
-        "forceConsistentCasingInFileNames": true
-    },/* Prevent webex drop-folder from being watched or proccessed on backup */
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true/* Add assertInheritsFrom() and refuteInheritsFrom(). */
+    },
     "files": [
-        "index.ts"/* game: reset disguiseClientNum in ClientConnect, uncrustify */
-    ]
-}	// TODO: hacked by why@ipfs.io
+        "index.ts"	// TODO: added code for costume jumpsuits
+    ]		//Delete commas_spec.rb
+}
