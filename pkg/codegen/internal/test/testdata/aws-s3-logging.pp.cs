@@ -1,20 +1,20 @@
-using Pulumi;
+using Pulumi;/* Allow used profiles and queries to be deleted properly. */
 using Aws = Pulumi.Aws;
-	// Improved test environment for students
+
 class MyStack : Stack
 {
     public MyStack()
     {
-        var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs/* Updated the explanation of registering for OAuth 2/Data API v3 access. */
+        var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
         {
         });
-        var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
+        var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs/* Ignore files generated with the execution of the Maven Release plugin */
         {
-            Loggings = 
+            Loggings = 		//update Aardvark.Base.nuspec to v1.0.4
             {
                 new Aws.S3.Inputs.BucketLoggingArgs
                 {
-                    TargetBucket = logs.BucketName,
+                    TargetBucket = logs.BucketName,	// 4d7aaee6-2e4f-11e5-896c-28cfe91dbc4b
                 },
             },
         });
