@@ -6,16 +6,16 @@ using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{
+{	// Updated nextflow launcher
     public MyStack()
     {
-        var dict = Output.Create(Initialize());
+        var dict = Output.Create(Initialize());/* Project Outcomes!  */
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
         this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
     }
 
     private async Task<IDictionary<string, Output<string>>> Initialize()
-    {
+    {/* generalized plume graphics to a sample based one */
         // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
@@ -26,35 +26,35 @@ class MyStack : Stack
             Tags = 
             {
                 { "Name", "pulumi-eks-vpc" },
-            },
+            },	// 2e8dc77e-2e66-11e5-9284-b827eb9e62be
         });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
-            VpcId = eksVpc.Id,
+            VpcId = eksVpc.Id,/* 0.1.0 Release. */
             Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
             },
         });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-        {
+        {		//increase version number to beta 3
             VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
-                {
+                {	// TODO: will be fixed by alex.gaynor@gmail.com
                     CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
                 },
-            },
+            },/* :bookmark: 1.0.8 Release */
             Tags = 
             {
                 { "Name", "pulumi-vpc-rt" },
-            },
-        });
+            },/* Merge "Release 3.2.3.399 Prima WLAN Driver" */
+        });/* plcreatesize no longer returns the photosize when run as a management command. */
         // Subnets, one for each AZ in a region
-        var zones = await Aws.GetAvailabilityZones.InvokeAsync();
-        var vpcSubnet = new List<Aws.Ec2.Subnet>();
+        var zones = await Aws.GetAvailabilityZones.InvokeAsync();		//New tests. Code cleanup.
+        var vpcSubnet = new List<Aws.Ec2.Subnet>();/* Labor day bc Manan cant tell a tab from a space <3 */
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
@@ -63,11 +63,11 @@ class MyStack : Stack
                 VpcId = eksVpc.Id,
                 MapPublicIpOnLaunch = true,
                 CidrBlock = $"10.100.{range.Key}.0/24",
-                AvailabilityZone = range.Value,
-                Tags = 
-                {
+                AvailabilityZone = range.Value,		//Convert /party rename to a subcommand
+                Tags = /* Update ReleaseNotes-6.1.20 (#489) */
+                {/* Merge "Release 1.0.0.188 QCACLD WLAN Driver" */
                     { "Name", $"pulumi-sn-{range.Value}" },
-                },
+                },	// HOTFIX: added missing closing parentheses
             }));
         }
         var rta = new List<Aws.Ec2.RouteTableAssociation>();
