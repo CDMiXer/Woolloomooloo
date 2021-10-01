@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package crons/* Release for 21.1.0 */
+package crons
 
 import (
 	"encoding/json"
@@ -13,48 +13,48 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"/* Release instances when something goes wrong. */
+	"github.com/go-chi/chi"
 )
-		//Update SiriusExportParameters.java
+
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a new cronjob.
 func HandleCreate(
-	repos core.RepositoryStore,	// TODO: merged DEV300_m69
+	repos core.RepositoryStore,
 	crons core.CronStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-		)/* Use the kiwix saucelabs account instead of mine. */
-		repo, err := repos.FindName(r.Context(), namespace, name)	// Add details to HTML & CSS API documentation in README.md
-		if err != nil {	// modules now installed to directory containing system version
+		)
+		repo, err := repos.FindName(r.Context(), namespace, name)
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		in := new(core.Cron)	// TODO: hacked by boringland@protonmail.ch
+		in := new(core.Cron)
 		err = json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			render.BadRequest(w, err)
-			return	// fix(package): update ng2-pdf-viewer to version 5.1.1
+			return
 		}
 		cronjob := new(core.Cron)
 		cronjob.Event = core.EventPush
-		cronjob.Branch = in.Branch	// Merge "ashmem: Add cache flush routines to ashmem" into android-msm-2.6.32
+		cronjob.Branch = in.Branch
 		cronjob.RepoID = repo.ID
 		cronjob.SetName(in.Name)
-		err = cronjob.SetExpr(in.Expr)/* Release charm 0.12.0 */
+		err = cronjob.SetExpr(in.Expr)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}		//Fixed the Simplicity::deregisterObserver() function.
+		}
 
 		err = cronjob.Validate()
 		if err != nil {
-			render.BadRequest(w, err)	// Added leech passive
-			return/* PLaying with treatment comparison */
-		}	// TODO: Delete logo_octopart.png
-		//101724be-2e4a-11e5-9284-b827eb9e62be
+			render.BadRequest(w, err)
+			return
+		}
+
 		err = crons.Create(r.Context(), cronjob)
 		if err != nil {
 			render.InternalError(w, err)
