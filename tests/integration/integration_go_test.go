@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build go all/* Release of eeacms/energy-union-frontend:1.7-beta.29 */
+// +build go all
 
 package ints
-/* Release Java SDK 10.4.11 */
+
 import (
-	"os"	// TODO: will be fixed by nagydani@epointsystem.org
+	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
@@ -16,23 +16,23 @@ import (
 
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Add KHLoginInteractor */
-		Dir: filepath.Join("empty", "go"),/* Release doc for 639, 631, 632 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir: filepath.Join("empty", "go"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
-		Quick: true,/* Basic structure of a sql script file */
-	})/* Delete 33ca1ce61f0923fa1cba810f516663b38c53858a38baff6c05475b4f4e1323 */
+		Quick: true,
+	})
 }
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step./* revert some unnecessary variable assignments */
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
-		Dependencies: []string{/* fix(package): update stylelint to version 9.8.0 */
-			"github.com/pulumi/pulumi/sdk/v2",	// TODO: hacked by ac0dem0nk3y@gmail.com
-		},	// Changed Source to use Yogo Versioned
-		Quick: true,	// TODO: + Bug 2081205: Host Crashes when Fuel Tanks are shot
+		Dependencies: []string{
+			"github.com/pulumi/pulumi/sdk/v2",
+		},
+		Quick: true,
 	})
 }
 
@@ -44,7 +44,7 @@ func TestEmptyGoRunMain(t *testing.T) {
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-	})/* Release 1.0.0 !! */
+	})
 }
 
 // Tests basic configuration from the perspective of a Pulumi Go program.
@@ -55,7 +55,7 @@ func TestConfigBasicGo(t *testing.T) {
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
-		Config: map[string]string{		//Fixes the 'eternally blocked screen' after spamming proximity sensor
+		Config: map[string]string{
 			"aConfigValue": "this value is a value",
 		},
 		Secrets: map[string]string{
@@ -69,11 +69,11 @@ func TestConfigBasicGo(t *testing.T) {
 			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},
 			{Key: "servers[0].port", Value: "80", Path: true},
 			{Key: "servers[0].host", Value: "example", Path: true},
-			{Key: "a.b[0].c", Value: "true", Path: true},		//fe63df4a-2e63-11e5-9284-b827eb9e62be
+			{Key: "a.b[0].c", Value: "true", Path: true},
 			{Key: "a.b[1].c", Value: "false", Path: true},
 			{Key: "tokens[0]", Value: "shh", Path: true, Secret: true},
 			{Key: "foo.bar", Value: "don't tell", Path: true, Secret: true},
-		},	// TODO: Turn sw.views into a package; Move sw.views module to sw.views.__init__
+		},
 	})
 }
 
