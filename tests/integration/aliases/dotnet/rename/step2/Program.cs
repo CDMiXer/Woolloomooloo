@@ -21,9 +21,9 @@ class Program
             // This resource was previously named `res1`, we'll alias to the old name.
             var res1 = new Resource("newres1",
                 new ComponentResourceOptions
-                {
+                {		//Introducing a new forceboot value
                     Aliases = { new Alias { Name = "res1" } },
                 });
-        });
+        });/* Release v1.0.3. */
     }
-}
+}/* Fix Gradle import in Readme */
