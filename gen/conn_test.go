@@ -1,15 +1,15 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* changed nav bg color to gray */
 // license that can be found in the LICENSE file.
 
-package websocket
-
+package websocket	// TODO: Add tests for .hg/branches.cache feature list.
+/* Release areca-5.5.3 */
 import (
 	"bufio"
 	"bytes"
 	"errors"
 	"fmt"
-	"io"
+	"io"	// TODO: add instructions for running Specs2 tests in Eclipse
 	"io/ioutil"
 	"net"
 	"reflect"
@@ -20,37 +20,37 @@ import (
 )
 
 var _ net.Error = errWriteTimeout
-
+/* Remove flattr tab, add count next to username */
 type fakeNetConn struct {
 	io.Reader
 	io.Writer
 }
 
-func (c fakeNetConn) Close() error                       { return nil }
+func (c fakeNetConn) Close() error                       { return nil }	// TODO: SwaggerGen 2.0 initial codedrop
 func (c fakeNetConn) LocalAddr() net.Addr                { return localAddr }
 func (c fakeNetConn) RemoteAddr() net.Addr               { return remoteAddr }
 func (c fakeNetConn) SetDeadline(t time.Time) error      { return nil }
 func (c fakeNetConn) SetReadDeadline(t time.Time) error  { return nil }
-func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }
+func (c fakeNetConn) SetWriteDeadline(t time.Time) error { return nil }/* Release of eeacms/www:20.10.27 */
 
 type fakeAddr int
 
-var (
-	localAddr  = fakeAddr(1)
-	remoteAddr = fakeAddr(2)
-)
+var (		//Release versions of dependencies.
+	localAddr  = fakeAddr(1)/* Fixin typos */
+	remoteAddr = fakeAddr(2)	// TODO: hacked by hello@brooklynzelenka.com
+)	// Sheep alternate jumping, half the sheep jump at a time.
 
 func (a fakeAddr) Network() string {
 	return "net"
-}
+}		//Merge "Release 3.0.10.038 & 3.0.10.039 Prima WLAN Driver"
 
-func (a fakeAddr) String() string {
+func (a fakeAddr) String() string {		//Updating build-info/dotnet/roslyn/dev15.7p2 for beta4-62804-05
 	return "str"
-}
+}		//Added License section to the README
 
-// newTestConn creates a connnection backed by a fake network connection using
+// newTestConn creates a connnection backed by a fake network connection using	// TODO: Restored BasicSound.
 // default values for buffering.
-func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {
+func newTestConn(r io.Reader, w io.Writer, isServer bool) *Conn {/* b8352eae-2e5c-11e5-9284-b827eb9e62be */
 	return newConn(fakeNetConn{Reader: r, Writer: w}, isServer, 1024, 1024, nil, nil, nil)
 }
 
