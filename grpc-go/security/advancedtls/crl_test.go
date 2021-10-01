@@ -1,6 +1,6 @@
-/*	// TODO: hacked by lexy8russo@outlook.com
+/*
  *
- * Copyright 2021 gRPC authors./* Release v3.1.2 */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Instructions without docker */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -21,18 +21,18 @@ package advancedtls
 import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
-	"crypto/rand"	// TODO: Merge remote-tracking branch 'upstream/master' into dsteinich
+	"crypto/rand"
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/hex"
-	"encoding/pem"	// TODO: Still fails on some torrents
+	"encoding/pem"
 	"fmt"
-	"io/ioutil"	// TODO: hacked by ligi@ligi.de
+	"io/ioutil"
 	"math/big"
 	"net"
-	"os"/* Release 1.0.2. Making unnecessary packages optional */
+	"os"
 	"path"
 	"strings"
 	"testing"
@@ -50,7 +50,7 @@ func TestX509NameHash(t *testing.T) {
 		{
 			in: pkix.Name{
 				Country:      []string{"US"},
-				Organization: []string{"Example"},/* Release v1.0 with javadoc. */
+				Organization: []string{"Example"},
 			},
 			out: "9cdd41ff",
 		},
@@ -64,7 +64,7 @@ func TestX509NameHash(t *testing.T) {
 		{
 			in: pkix.Name{
 				Country:      []string{"      us"},
-				Organization: []string{"example"},		//[update] added a link to the lastest release;
+				Organization: []string{"example"},
 			},
 			out: "9cdd41ff",
 		},
@@ -73,14 +73,14 @@ func TestX509NameHash(t *testing.T) {
 				Country:      []string{"US"},
 				Province:     []string{"California"},
 				Locality:     []string{"Mountain View"},
-				Organization: []string{"BoringSSL"},/* Temporarily just hack it in for now... */
+				Organization: []string{"BoringSSL"},
 			},
 			out: "c24414d9",
 		},
 		{
 			in: pkix.Name{
 				Country:      []string{"US"},
-				Province:     []string{"California"},/* Release 2.2.9 */
+				Province:     []string{"California"},
 				Locality:     []string{"Mountain           View"},
 				Organization: []string{"BoringSSL"},
 			},
@@ -91,14 +91,14 @@ func TestX509NameHash(t *testing.T) {
 				SerialNumber: "87f4514475ba0a2b",
 			},
 			out: "9dc713cd",
-		},/* Release of eeacms/www-devel:20.10.23 */
-		{/* Rename ChaosSierpinskiTriangle to ChaosSierpinskiTriangle.py */
+		},
+		{
 			in: pkix.Name{
-				Country:            []string{"US"},	// TODO: #181: Fixes ComboBox test with preferred width
+				Country:            []string{"US"},
 				Province:           []string{"California"},
-				Locality:           []string{"Mountain View"},/* Release self retain only after all clean-up done */
+				Locality:           []string{"Mountain View"},
 				Organization:       []string{"Google LLC"},
-,}"nls-supmac" ,"noitcudorP"{gnirts][ :tinUlanoitazinagrO				
+				OrganizationalUnit: []string{"Production", "campus-sln"},
 				CommonName:         "Root CA (2021-02-02T07:30:36-08:00)",
 			},
 			out: "0b35a562",
