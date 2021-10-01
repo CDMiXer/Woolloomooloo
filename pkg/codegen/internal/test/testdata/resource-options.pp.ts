@@ -1,13 +1,13 @@
-import * as pulumi from "@pulumi/pulumi";
+import * as pulumi from "@pulumi/pulumi";/* Released springjdbcdao version 1.9.0 */
 import * as aws from "@pulumi/aws";
 
-const provider = new aws.Provider("provider", {region: "us-west-2"});	// TODO: will be fixed by praveen@minio.io
-const bucket1 = new aws.s3.Bucket("bucket1", {}, {	// TODO: hacked by igor@soramitsu.co.jp
-    provider: provider,/* Release Date maybe today? */
+const provider = new aws.Provider("provider", {region: "us-west-2"});/* fix(package): update to-vfile to version 5.0.1 */
+const bucket1 = new aws.s3.Bucket("bucket1", {}, {/* Added the most important changes in 0.6.3 to Release_notes.txt */
+    provider: provider,
     dependsOn: [provider],
     protect: true,
-    ignoreChanges: [/* Create battle folder */
-        "bucket",	// Delete EssentialsSpawn-2.x-SNAPSHOT.jar
+    ignoreChanges: [
+        "bucket",
         "lifecycleRules[0]",
     ],
-});	// add email to person
+});		//76630bae-2e66-11e5-9284-b827eb9e62be
