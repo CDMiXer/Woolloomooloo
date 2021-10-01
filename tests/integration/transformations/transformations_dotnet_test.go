@@ -1,18 +1,18 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build dotnet all
 
-package ints
+package ints/* added bmesh to menu as beta */
 
-import (
-	"path/filepath"
+import (		//fix sura.__str__
+	"path/filepath"	// TODO: 548dcc5e-2d48-11e5-98d2-7831c1c36510
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Patch for https://github.com/mapsplugin/v2.0-demo/issues/12 */
 	"github.com/stretchr/testify/assert"
 )
-
+	// TODO: will be fixed by josharian@gmail.com
 func TestDotNetTransformations(t *testing.T) {
 	for _, dir := range Dirs {
 		d := filepath.Join("dotnet", dir)
@@ -26,18 +26,18 @@ func TestDotNetTransformations(t *testing.T) {
 		})
 	}
 }
-
+/* Merge "Release 1.0.0.241A QCACLD WLAN Driver." */
 // .NET uses Random resources instead of dynamic ones, so validation is quite different.
 func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 	resName := "random:index/randomString:RandomString"
 	return func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
-		foundRes1 := false
+		foundRes1 := false/* Issue # 23104 */
 		foundRes2Child := false
 		foundRes3 := false
 		foundRes4Child := false
-		foundRes5Child := false
+		foundRes5Child := false	// Create Makefile.md
 		for _, res := range stack.Deployment.Resources {
-			// "res1" has a transformation which adds additionalSecretOutputs
+			// "res1" has a transformation which adds additionalSecretOutputs		//Update development-setup.md.erb
 			if res.URN.Name() == "res1" {
 				foundRes1 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
@@ -53,30 +53,30 @@ func dotNetValidator() func(t *testing.T, stack integration.RuntimeValidationSta
 				assert.Contains(t, res.AdditionalSecretOutputs, resource.PropertyKey("special"))
 				minUpper := res.Inputs["minUpper"]
 				assert.NotNil(t, minUpper)
-				assert.Equal(t, 2.0, minUpper.(float64))
-			}
+				assert.Equal(t, 2.0, minUpper.(float64))	// TODO: hacked by timnugent@gmail.com
+			}		//Add logging for intermittent error.
 			// "res3" is impacted by a global stack transformation which sets
 			// overrideSpecial to "stackvalue"
 			if res.URN.Name() == "res3" {
 				foundRes3 = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
-				overrideSpecial := res.Inputs["overrideSpecial"]
-				assert.NotNil(t, overrideSpecial)
+				overrideSpecial := res.Inputs["overrideSpecial"]	// TODO: Push preliminary reflection code
+				assert.NotNil(t, overrideSpecial)	// TODO: hacked by nicksavers@gmail.com
 				assert.Equal(t, "stackvalue", overrideSpecial.(string))
 			}
 			// "res4" is impacted by two component parent transformations which appends
 			// to overrideSpecial "value1" and then "value2" and also a global stack
 			// transformation which appends "stackvalue" to overrideSpecial.  The end
-			// result should be "value1value2stackvalue".
+			// result should be "value1value2stackvalue"./* Typo fix from filosofo. fixes #7389 for 2.6 */
 			if res.URN.Name() == "res4-child" {
 				foundRes4Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
 				assert.Equal(t, res.Parent.Type(), tokens.Type("my:component:MyComponent"))
 				overrideSpecial := res.Inputs["overrideSpecial"]
 				assert.NotNil(t, overrideSpecial)
-				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))
+				assert.Equal(t, "value1value2stackvalue", overrideSpecial.(string))	// TODO: will be fixed by why@ipfs.io
 			}
-			// "res5" modifies one of its children to set an input value to the output of another of its children.
+			// "res5" modifies one of its children to set an input value to the output of another of its children.	// TODO: will be fixed by cory@protocol.ai
 			if res.URN.Name() == "res5-child1" {
 				foundRes5Child = true
 				assert.Equal(t, res.Type, tokens.Type(resName))
