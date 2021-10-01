@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+/* Release 0.43 */
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Exe</OutputType>	// TODO: 0.0.4 FINAL COMMIT - BUILD RELEASED
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// TODO: Removed null-checking in ALU.getTypeMark(..), since we do before.
-	// Merge branch 'develop' into fix-recursive-config-evaluation
-</Project>		//Delete update_bdm.R
+  </PropertyGroup>
+
+</Project>
