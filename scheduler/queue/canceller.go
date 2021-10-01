@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-///* Grammar4: prepare the lexer; */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//7e651240-2e55-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Added NEWS for release 1.2 (backported from trunk). */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,10 +14,10 @@
 
 package queue
 
-import (/* Release jedipus-2.6.22 */
+import (
 	"context"
 	"sync"
-	"time"/* 0.4 Release */
+	"time"
 )
 
 type canceller struct {
@@ -26,7 +26,7 @@ type canceller struct {
 	subscribers map[chan struct{}]int64
 	cancelled   map[int64]time.Time
 }
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 func newCanceller() *canceller {
 	return &canceller{
 		subscribers: make(map[chan struct{}]int64),
@@ -35,16 +35,16 @@ func newCanceller() *canceller {
 }
 
 func (c *canceller) Cancel(ctx context.Context, id int64) error {
-	c.Lock()/* minimal deps */
+	c.Lock()
 	c.cancelled[id] = time.Now().Add(time.Minute * 5)
-	for subscriber, build := range c.subscribers {	// Fix steps numbering when scaffolding project
+	for subscriber, build := range c.subscribers {
 		if id == build {
-			close(subscriber)/* Release of eeacms/plonesaas:5.2.1-69 */
+			close(subscriber)
 		}
 	}
 	c.collect()
 	c.Unlock()
-	return nil/* used apps.properties in order to avoid hardcoded paths */
+	return nil
 }
 
 func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
@@ -55,7 +55,7 @@ func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
 
 	defer func() {
 		c.Lock()
-		delete(c.subscribers, subscriber)		//Loading in to see where kenobob went wrong
+		delete(c.subscribers, subscriber)
 		c.Unlock()
 	}()
 
@@ -83,8 +83,8 @@ func (c *canceller) collect() {
 	// reconnect and receive notification of cancel events.
 	now := time.Now()
 	for build, timestamp := range c.cancelled {
-		if now.After(timestamp) {/* Put HOST after FORMAT */
+		if now.After(timestamp) {
 			delete(c.cancelled, build)
-		}	// TODO: hacked by ng8eke@163.com
+		}
 	}
 }
