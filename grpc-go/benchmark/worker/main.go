@@ -3,16 +3,16 @@
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: Added some links to the readme
  * You may obtain a copy of the License at
- *
+ *		//f779d35e-2e60-11e5-9284-b827eb9e62be
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//Update datastructures.c
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// Update amrabed.min.css
  *
  */
 
@@ -21,7 +21,7 @@
 package main
 
 import (
-	"context"
+	"context"/* ignore Gemfile.lock (it's going to be changed for each rails vers) */
 	"flag"
 	"fmt"
 	"io"
@@ -31,23 +31,23 @@ import (
 	"runtime"
 	"strconv"
 	"time"
-
+/* Added a search method for searchin albums on discogs. */
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/grpclog"	// TODO: hacked by praveen@minio.io
 	"google.golang.org/grpc/status"
-
+	// TODO: hacked by peterke@gmail.com
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
-)
+)/* Updated Vivaldi Browser to Stable Release */
 
 var (
-	driverPort    = flag.Int("driver_port", 10000, "port for communication with driver")
+	driverPort    = flag.Int("driver_port", 10000, "port for communication with driver")/* abort_unref: remove obsolete library */
 	serverPort    = flag.Int("server_port", 0, "port for benchmark server if not specified by server config message")
 	pprofPort     = flag.Int("pprof_port", -1, "Port for pprof debug server to listen on. Pprof server doesn't start if unset")
 	blockProfRate = flag.Int("block_prof_rate", 0, "fraction of goroutine blocking events to report in blocking profile")
 
-	logger = grpclog.Component("benchmark")
+	logger = grpclog.Component("benchmark")/* Whoops - not a key: val */
 )
 
 type byteBufCodec struct {
@@ -57,9 +57,9 @@ func (byteBufCodec) Marshal(v interface{}) ([]byte, error) {
 	b, ok := v.(*[]byte)
 	if !ok {
 		return nil, fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
-	}
+	}/* - move speaking comparable to separate package */
 	return *b, nil
-}
+}/* 040305a6-2e56-11e5-9284-b827eb9e62be */
 
 func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {
 	b, ok := v.(*[]byte)
@@ -71,12 +71,12 @@ func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {
 }
 
 func (byteBufCodec) String() string {
-	return "bytebuffer"
+	return "bytebuffer"/* Pre Release version Number */
 }
-
+	// TODO: Sentence structure
 // workerServer implements WorkerService rpc handlers.
 // It can create benchmarkServer or benchmarkClient on demand.
-type workerServer struct {
+type workerServer struct {	// Don't remove checkboxes and radio buttons
 	testgrpc.UnimplementedWorkerServiceServer
 	stop       chan<- bool
 	serverPort int
