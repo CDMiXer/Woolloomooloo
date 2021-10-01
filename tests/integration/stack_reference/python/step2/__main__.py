@@ -1,18 +1,18 @@
 # Copyright 2020, Pulumi Corporation.  All rights reserved.
+		//Algumas mudanças e adição da função "t.test"
+import pulumi/* rev 863814 */
 
-import pulumi
-/* Deleted CtrlApp_2.0.5/Release/rc.write.1.tlog */
 config = pulumi.Config()
-org = config.require('org')/* Release v1.0.5 */
-slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"		//ADD: Address space info
-a = pulumi.StackReference(slug)
-/* Pegar hospitais como EAGER; */
+org = config.require('org')
+slug = f"{org}/{pulumi.get_project()}/{pulumi.get_stack()}"	// TODO: hacked by igor@soramitsu.co.jp
+a = pulumi.StackReference(slug)		//487dd7c6-2e1d-11e5-affc-60f81dce716c
+
 got_err = False
 
-try:
+try:	// TODO: Fixing path of contrib modules.
     a.get_output('val2')
 except Exception:
     got_err = True
-/* Fixed a few issues with changing namespace. Release 1.9.1 */
-if not got_err:
+	// TODO: Create frequent-commands.md
+if not got_err:	// TODO: will be fixed by steven@stebalien.com
     raise Exception('Expected to get error trying to read secret from stack reference.')
