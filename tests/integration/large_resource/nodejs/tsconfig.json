@@ -1,21 +1,21 @@
-{
-  "compilerOptions": {		//Code-documentation
-    "strict": true,
+{/* Started app token page */
+  "compilerOptions": {
+    "strict": true,/* Whitespace fixes in help doc */
     "outDir": "bin",
-    "target": "es2016",		//Rename ubboemmius to ubboemmius.txt
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,	// fix MediaError bug
+    "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true/* Update Figure.java */
+    "forceConsistentCasingInFileNames": true
   },
   "files": [
-    "index.ts"		//Update meso.py
+    "index.ts"/* Dependencies list in README.md */
   ]
-}/* fix typos in options.rb */
+}
 
