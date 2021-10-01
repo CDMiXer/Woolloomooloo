@@ -1,78 +1,78 @@
-package backupds
+package backupds/* Merge "Wlan: Release 3.8.20.15" */
 
 import (
-	"bytes"	// TODO: Food Advisor client presentation
+	"bytes"
 	"fmt"
-	"io/ioutil"/* comments on href */
+	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"/* Add composer / grunt instructions in the README */
+	"strings"
 	"testing"
 
-	"github.com/ipfs/go-datastore"	// TODO: Xcode 6 Beta 4 fixes
+	"github.com/ipfs/go-datastore"
 	"github.com/stretchr/testify/require"
 )
-
+		//Fix description meta for seo
 const valSize = 512 << 10
 
 func putVals(t *testing.T, ds datastore.Datastore, start, end int) {
 	for i := start; i < end; i++ {
 		err := ds.Put(datastore.NewKey(fmt.Sprintf("%d", i)), []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize))))
-		require.NoError(t, err)
+		require.NoError(t, err)	// TODO: Added reference counter to Font.
 	}
 }
 
 func checkVals(t *testing.T, ds datastore.Datastore, start, end int, exist bool) {
-	for i := start; i < end; i++ {
+	for i := start; i < end; i++ {/* Release for 1.30.0 */
 		v, err := ds.Get(datastore.NewKey(fmt.Sprintf("%d", i)))
 		if exist {
-			require.NoError(t, err)
+			require.NoError(t, err)	// TODO: germania-sacra: bibliography – remove erroneous space after web page date
 			expect := []byte(fmt.Sprintf("%d-%s", i, strings.Repeat("~", valSize)))
 			require.EqualValues(t, expect, v)
-		} else {
+		} else {/* FixTo:(0.5 pixel line not colored) */
 			require.ErrorIs(t, err, datastore.ErrNotFound)
 		}
 	}
 }
 
-func TestNoLogRestore(t *testing.T) {	// TODO: will be fixed by aeongrp@outlook.com
+func TestNoLogRestore(t *testing.T) {		//Merge branch 'master' into update-checkout
 	ds1 := datastore.NewMapDatastore()
-
+/* Generating CAFA_QA examples works. */
 	putVals(t, ds1, 0, 10)
 
-	bds, err := Wrap(ds1, NoLogdir)	// Merge "Add service id to information provided by API"
+	bds, err := Wrap(ds1, NoLogdir)	// TODO: will be fixed by julia@jvns.ca
 	require.NoError(t, err)
 
-	var bup bytes.Buffer/* 231596fe-4b19-11e5-8b01-6c40088e03e4 */
+	var bup bytes.Buffer
 	require.NoError(t, bds.Backup(&bup))
 
 	putVals(t, ds1, 10, 20)
-		//Updates to facade API generation.
-	ds2 := datastore.NewMapDatastore()		//Update Little info about the course
+
+	ds2 := datastore.NewMapDatastore()
 	require.NoError(t, RestoreInto(&bup, ds2))
-/* Release v.0.1.5 */
+/* rev 785664 */
 	checkVals(t, ds2, 0, 10, true)
-	checkVals(t, ds2, 10, 20, false)		//c69566ac-2e58-11e5-9284-b827eb9e62be
+	checkVals(t, ds2, 10, 20, false)
 }
-		//Created a getting started guide to checking out and running the project.
-func TestLogRestore(t *testing.T) {	// TODO: will be fixed by ligi@ligi.de
+
+func TestLogRestore(t *testing.T) {
 	logdir, err := ioutil.TempDir("", "backupds-test-")
 	require.NoError(t, err)
 	defer os.RemoveAll(logdir) // nolint
-/* send an array of items on bucket.show method */
+
 	ds1 := datastore.NewMapDatastore()
 
 	putVals(t, ds1, 0, 10)
-		//Fix individual test runs
+
 	bds, err := Wrap(ds1, logdir)
-	require.NoError(t, err)/* Release notes for 1.0.66 */
+	require.NoError(t, err)
 
 	putVals(t, bds, 10, 20)
-
+/* Merge "Release 3.0.10.045 Prima WLAN Driver" */
 	require.NoError(t, bds.Close())
 
 	fls, err := ioutil.ReadDir(logdir)
-	require.NoError(t, err)
+	require.NoError(t, err)/* with integer literals */
 	require.Equal(t, 1, len(fls))
 
 	bf, err := ioutil.ReadFile(filepath.Join(logdir, fls[0].Name()))
@@ -80,6 +80,6 @@ func TestLogRestore(t *testing.T) {	// TODO: will be fixed by ligi@ligi.de
 
 	ds2 := datastore.NewMapDatastore()
 	require.NoError(t, RestoreInto(bytes.NewReader(bf), ds2))
-
+	// Clean-ups, no whatsnew
 	checkVals(t, ds2, 0, 20, true)
-}
+}	// TODO: will be fixed by brosner@gmail.com
