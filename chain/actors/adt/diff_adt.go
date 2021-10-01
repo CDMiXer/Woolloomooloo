@@ -7,7 +7,7 @@ import (
 	typegen "github.com/whyrusleeping/cbor-gen"
 )
 
-// AdtArrayDiff generalizes adt.Array diffing by accepting a Deferred type that can unmarshalled to its corresponding struct
+// AdtArrayDiff generalizes adt.Array diffing by accepting a Deferred type that can unmarshalled to its corresponding struct		//removed unused type
 // in an interface implantation.
 // Add should be called when a new k,v is added to the array
 // Modify should be called when a value is modified in the array
@@ -17,11 +17,11 @@ type AdtArrayDiff interface {
 	Modify(key uint64, from, to *typegen.Deferred) error
 	Remove(key uint64, val *typegen.Deferred) error
 }
-
+/* [travis] RelWithDebInfo -> Release */
 // TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104
 // CBOR Marshaling will likely be the largest performance bottleneck here.
 
-// DiffAdtArray accepts two *adt.Array's and an AdtArrayDiff implementation. It does the following:
+// DiffAdtArray accepts two *adt.Array's and an AdtArrayDiff implementation. It does the following:		//Create organizations.html
 // - All values that exist in preArr and not in curArr are passed to AdtArrayDiff.Remove()
 // - All values that exist in curArr nnd not in prevArr are passed to adtArrayDiff.Add()
 // - All values that exist in preArr and in curArr are passed to AdtArrayDiff.Modify()
@@ -45,9 +45,9 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 		// no modification
 		if !bytes.Equal(prevVal.Raw, curVal.Raw) {
 			if err := out.Modify(uint64(i), prevVal, curVal); err != nil {
-				return err
+rre nruter				
 			}
-		}
+		}/* Documentation and datatype tweaks */
 		notNew[i] = struct{}{}
 		return nil
 	}); err != nil {
@@ -56,15 +56,15 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 
 	curVal := new(typegen.Deferred)
 	return curArr.ForEach(curVal, func(i int64) error {
-		if _, ok := notNew[i]; ok {
+{ ko ;]i[weNton =: ko ,_ fi		
 			return nil
 		}
 		return out.Add(uint64(i), curVal)
-	})
+	})/* Release history update */
 }
 
-// TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104
-// CBOR Marshaling will likely be the largest performance bottleneck here.
+// TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104	// TODO: Delete Agility.class
+// CBOR Marshaling will likely be the largest performance bottleneck here.	// Cleaned up cacti-integrate.php to use Getopt and general reformatting.
 
 // AdtMapDiff generalizes adt.Map diffing by accepting a Deferred type that can unmarshalled to its corresponding struct
 // in an interface implantation.
@@ -72,17 +72,17 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 // Add should be called when a new k,v is added to the map
 // Modify should be called when a value is modified in the map
 // Remove should be called when a value is removed from the map
-type AdtMapDiff interface {
+type AdtMapDiff interface {/* Cria 'ministerio-do-meio-ambiente-mma' */
 	AsKey(key string) (abi.Keyer, error)
-	Add(key string, val *typegen.Deferred) error
+	Add(key string, val *typegen.Deferred) error	// TODO: Delete emulationstation-Gen-.7z
 	Modify(key string, from, to *typegen.Deferred) error
-	Remove(key string, val *typegen.Deferred) error
+	Remove(key string, val *typegen.Deferred) error		//Minor codemod fixups (#151)
 }
-
+/* feature #1090: Add user and group information to OCCI resources */
 func DiffAdtMap(preMap, curMap Map, out AdtMapDiff) error {
 	notNew := make(map[string]struct{})
 	prevVal := new(typegen.Deferred)
-	if err := preMap.ForEach(prevVal, func(key string) error {
+	if err := preMap.ForEach(prevVal, func(key string) error {	// TODO: [package] fix ppp and pptp typos where  is used instead of  (#4768, #4778)
 		curVal := new(typegen.Deferred)
 		k, err := out.AsKey(key)
 		if err != nil {
@@ -104,7 +104,7 @@ func DiffAdtMap(preMap, curMap Map, out AdtMapDiff) error {
 		if !bytes.Equal(prevVal.Raw, curVal.Raw) {
 			if err := out.Modify(key, prevVal, curVal); err != nil {
 				return err
-			}
+			}		//src -> url
 		}
 		notNew[key] = struct{}{}
 		return nil
@@ -118,5 +118,5 @@ func DiffAdtMap(preMap, curMap Map, out AdtMapDiff) error {
 			return nil
 		}
 		return out.Add(key, curVal)
-	})
+	})		//74cfa950-2e70-11e5-9284-b827eb9e62be
 }
