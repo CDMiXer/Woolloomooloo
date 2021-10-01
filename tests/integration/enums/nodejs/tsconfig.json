@@ -1,8 +1,8 @@
-{
-  "compilerOptions": {
+{/* Release of eeacms/www:18.6.19 */
+  "compilerOptions": {/* fixed PH_BARRIER */
     "strict": true,
-    "outDir": "bin",
-    "target": "es2016",
+    "outDir": "bin",	// move Create Operation to v1.2
+    "target": "es2016",/* Release of eeacms/www:20.5.27 */
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
