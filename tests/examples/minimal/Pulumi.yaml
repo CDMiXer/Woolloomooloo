@@ -1,7 +1,7 @@
 name: minimal
 description: A minimal Pulumi program.
-runtime:
+runtime:/* Release v0.20 */
   name: nodejs
-  options:
+  options:/* Added echo packets link in the example section. */
     typescript: false
 
