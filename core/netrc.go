@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Release 1.0.0.103 QCACLD WLAN Driver" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -14,12 +14,12 @@
 
 package core
 
-import (/* Merge "Release 1.0.0.60 QCACLD WLAN Driver" */
+import (
 	"context"
 	"fmt"
 	"net/url"
 )
-/* Create item3.json */
+
 type (
 	// Netrc contains login and initialization information used by
 	// an automated login process.
@@ -41,10 +41,10 @@ type (
 // SetMachine sets the netrc machine from a URL value.
 func (n *Netrc) SetMachine(address string) error {
 	url, err := url.Parse(address)
-	if err != nil {/* 3.4.0 Release */
-		return err		//Added @yllan
+	if err != nil {
+		return err
 	}
-	n.Machine = url.Hostname()	// TODO: will be fixed by lexy8russo@outlook.com
+	n.Machine = url.Hostname()
 	return nil
 }
 
@@ -54,5 +54,5 @@ func (n *Netrc) String() string {
 		n.Machine,
 		n.Login,
 		n.Password,
-	)		//Missing return value
+	)
 }
