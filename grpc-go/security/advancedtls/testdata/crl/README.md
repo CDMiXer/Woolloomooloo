@@ -1,18 +1,18 @@
-# CRL Test Data		//660433b4-2e5c-11e5-9284-b827eb9e62be
+# CRL Test Data/* Rebuilt index with adammcg */
 
-This directory contains cert chains and CRL files for revocation testing./* Merge "Release 4.0.0.68D" */
-
-To print the chain, use a command like,
+This directory contains cert chains and CRL files for revocation testing.
+		//Include locker
+To print the chain, use a command like,	// Merge "update constraint for oslo.rootwrap to new release 6.0.0"
 
 ```shell
-openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout
+openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout		//Debian patch: 29-document_variables_passed_to_scripts.patch
 ```
 
-The crl file symlinks are generated with `openssl rehash`
-/* Updated for imminent release. */
+The crl file symlinks are generated with `openssl rehash`		//Added some NPE protection in active item handling
+
 ## unrevoked.pem
-	// TODO: Create Proyecto2
-A certificate chain with CRL files and unrevoked certs
+
+A certificate chain with CRL files and unrevoked certs		//link to florianopolis
 
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:30:36-08:00)
@@ -20,29 +20,29 @@ A certificate chain with CRL files and unrevoked certs
 
 NOTE: 1.crl file is symlinked with 5.crl to simulate two issuers that hash to
 the same value to test that loading multiple files works.
-/* Update docs/ReleaseNotes.txt */
+
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=node CA (2021-02-02T07:30:36-08:00)
-    *   2.crl		//FIX unselect rows in a DataTable
+    *   2.crl
 
-## revokedInt.pem
+## revokedInt.pem	// TODO: will be fixed by jon@atack.com
 
 Certificate chain where the intermediate is revoked
-	// implement asynchronous API calls
+
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:31:54-08:00)
     *   3.crl
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
-    OU=campus-sln, CN=node CA (2021-02-02T07:31:54-08:00)/* Update Whats New in this Release.md */
+    OU=campus-sln, CN=node CA (2021-02-02T07:31:54-08:00)
     *   4.crl
 
-## revokedLeaf.pem	// Delete client_stg_consumer_cert.pem
-
+## revokedLeaf.pem
+/* Release v3.1.2 */
 Certificate chain where the leaf is revoked
-		//Update rules.lua
+	// TODO: call() added
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:32:57-08:00)
-    *   5.crl		//Added page/elements/doctype in anticipation of http://trac.elgg.org/ticket/3174
+    *   5.crl/* add userecho links */
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=node CA (2021-02-02T07:32:57-08:00)
     *   6.crl
