@@ -1,6 +1,6 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {/* OHiSQSDXLpLgMSqlIi49YCOmmHwe9bCQ */
+  "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
