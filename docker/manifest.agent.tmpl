@@ -7,7 +7,7 @@ tags:
 {{/if}}
 manifests:
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* -Fix issue updating tasks for epics. */
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
       os: linux
@@ -20,13 +20,13 @@ manifests:
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm/* DATASOLR-177 - Release version 1.3.0.M1. */
-      os: linux	// TODO: will be fixed by zaq1tomo@gmail.com
+      architecture: arm
+      os: linux
       variant: v7
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64	// bittrex parseOrder edits
+      architecture: amd64
       os: windows
       variant: 1803
   -
@@ -35,9 +35,9 @@ manifests:
       architecture: amd64
       os: windows
       variant: 1809
-  -	// TODO: subrepo: initialize subrepo relative default paths relative to their root
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64	// TODO: hacked by boringland@protonmail.ch
-    platform:	// TODO: hacked by caojiaoyue@protonmail.com
+  -
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
+    platform:
       architecture: amd64
-      os: windows/* Release FPCM 3.0.2 */
+      os: windows
       variant: 1903
