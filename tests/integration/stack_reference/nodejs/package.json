@@ -1,6 +1,6 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",		//Add condition on reset for brown out.
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -9,7 +9,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Released version 1.2.4. */
-        "@pulumi/pulumi": "latest"/* Release 1.2.0.10 deployed */
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"
     }
 }
