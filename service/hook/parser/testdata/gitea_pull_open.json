@@ -2,30 +2,30 @@
   "Action": "opened",
   "Repo": {
     "ID": "6589",
-    "Namespace": "jcitizen",	// TODO: Ivy configuration
+    "Namespace": "jcitizen",
     "Name": "my-repo",
     "Perm": {
-      "Pull": false,/* Release Notes update for 2.5 */
+      "Pull": false,
       "Push": false,
       "Admin": false
     },
     "Branch": "master",
-    "Private": false,	// TODO: A few more edits to README.md
+    "Private": false,
     "Clone": "https://try.gitea.io/jcitizen/my-repo.git",
     "CloneSSH": "git@try.gitea.io:jcitizen/my-repo.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
-"Z00:00:00T10-10-1000" :"detadpU"    
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
     "Number": 1,
-    "Title": "Add License File",		//added various colour loaders
+    "Title": "Add License File",
     "Body": "Using a BSD License",
     "Sha": "2eba238e33607c1fa49253182e9fff42baafa1eb",
-    "Ref": "refs/pull/1/head",/* Release of eeacms/redmine:4.0-1.3 */
-,"erutaef" :"ecruoS"    
-    "Target": "master",		//Update sencha-touch
-    "Fork": "jcitizen/my-repo",/* [Tests] Boot the application in getApp() */
+    "Ref": "refs/pull/1/head",
+    "Source": "feature",
+    "Target": "master",
+    "Fork": "jcitizen/my-repo",
     "Link": "https://try.gitea.io/jcitizen/my-repo/pulls/1",
     "Closed": false,
     "Merged": false,
@@ -38,9 +38,9 @@
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Sender": {/* Merge "wlan: Release 3.2.3.127" */
+  "Sender": {
     "Login": "jcitizen",
-    "Name": "",	// TODO: Adding German Canonical and Metadata
+    "Name": "",
     "Email": "jane@example.com",
     "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
   }
