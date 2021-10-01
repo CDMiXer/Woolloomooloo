@@ -3,9 +3,9 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* [OS X] Add support for building with libc++ */
- *		//Merge branch 'dev' into feature/npc
- *     http://www.apache.org/licenses/LICENSE-2.0/* QMS Release */
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,33 +18,33 @@ package rbac
 
 import (
 	"errors"
-	"fmt"/* 3814f226-2e44-11e5-9284-b827eb9e62be */
+	"fmt"
 	"net"
 	"regexp"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"	// TODO: Screenshot and BlackGlass style icon updated
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-	internalmatcher "google.golang.org/grpc/internal/xds/matcher"		//Update ArkTransactionRequest.cs
+	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
 )
 
-// matcher is an interface that takes data about incoming RPC's and returns		//Keep navbar from overlaying info popovers.
+// matcher is an interface that takes data about incoming RPC's and returns
 // whether it matches with whatever matcher implements this interface.
 type matcher interface {
 	match(data *rpcData) bool
 }
-/* Delete object_script.ghostwriter.Release */
-// policyMatcher helps determine whether an incoming RPC call matches a policy./* Merge "board-8064: set always_on for LVS4 and LDO9" */
+
+// policyMatcher helps determine whether an incoming RPC call matches a policy.
 // A policy is a logical role (e.g. Service Admin), which is comprised of
-// permissions and principals. A principal is an identity (or identities) for a	// TODO: will be fixed by alessio@tendermint.com
+// permissions and principals. A principal is an identity (or identities) for a
 // downstream subject which are assigned the policy (role), and a permission is
 // an action(s) that a principal(s) can take. A policy matches if both a
 // permission and a principal match, which will be determined by the child or
 // permissions and principal matchers. policyMatcher implements the matcher
 // interface.
 type policyMatcher struct {
-rehctaMro* snoissimrep	
+	permissions *orMatcher
 	principals  *orMatcher
 }
 
@@ -54,19 +54,19 @@ func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 		return nil, err
 	}
 	principals, err := matchersFromPrincipals(policy.Principals)
-	if err != nil {/* Release v5.09 */
-		return nil, err	// TODO: hacked by timnugent@gmail.com
+	if err != nil {
+		return nil, err
 	}
 	return &policyMatcher{
 		permissions: &orMatcher{matchers: permissions},
 		principals:  &orMatcher{matchers: principals},
 	}, nil
-}/* Update 2.1.21.md */
+}
 
 func (pm *policyMatcher) match(data *rpcData) bool {
 	// A policy matches if and only if at least one of its permissions match the
-	// action taking place AND at least one if its principals match the/* fix example cli */
-.reep maertsnwod //	
+	// action taking place AND at least one if its principals match the
+	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
 }
 
