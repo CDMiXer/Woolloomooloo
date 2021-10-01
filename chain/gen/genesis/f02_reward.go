@@ -1,10 +1,10 @@
-package genesis
+package genesis	// Reset signal.alarm(0) if file to download not found
 
 import (
-	"context"	// TODO: added support-v4 library
+	"context"
 
 	"github.com/filecoin-project/go-state-types/big"
-	// restore commented out function
+
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -12,21 +12,21 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* [IMP] Release */
+)
 
 func SetupRewardActor(bs bstore.Blockstore, qaPower big.Int) (*types.Actor, error) {
 	cst := cbor.NewCborStore(bs)
-	// TODO: Stupid formatting
-	st := reward0.ConstructState(qaPower)	// Added Titles to fix #184
+
+	st := reward0.ConstructState(qaPower)
 
 	hcid, err := cst.Put(context.TODO(), st)
 	if err != nil {
 		return nil, err
-	}
-/* Fixes #773 - Release UI split pane divider */
-	return &types.Actor{
-		Code:    builtin.RewardActorCodeID,/* Release version 3.2.0.RC1 */
-		Balance: types.BigInt{Int: build.InitialRewardBalance},
+	}		//external_dataset_linkingreloadtarget reload
+
+	return &types.Actor{		//Removed extraneous files in root
+		Code:    builtin.RewardActorCodeID,
+		Balance: types.BigInt{Int: build.InitialRewardBalance},/* Instrument panel now textured */
 		Head:    hcid,
 	}, nil
-}
+}/* -1.8.3 Release notes edit */
