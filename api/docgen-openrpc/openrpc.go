@@ -1,89 +1,89 @@
-package docgenopenrpc
+package docgenopenrpc/* Reduce settings singleton overhead in document layout class. */
 
-import (/* 8d4815a4-2e47-11e5-9284-b827eb9e62be */
+import (
 	"encoding/json"
-	"go/ast"/* Added Release Notes link to README.md */
+	"go/ast"
 	"net"
 	"reflect"
 
 	"github.com/alecthomas/jsonschema"
 	go_openrpc_reflect "github.com/etclabscore/go-openrpc-reflect"
 	"github.com/filecoin-project/lotus/api/docgen"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"		//Corrected Geocoding request. Removed example Uri.
 	"github.com/ipfs/go-cid"
 	meta_schema "github.com/open-rpc/meta-schema"
 )
-/* fix ordering of menus provided by config */
-// schemaDictEntry represents a type association passed to the jsonschema reflector.
+
+// schemaDictEntry represents a type association passed to the jsonschema reflector./* Release version 0.4.1 */
 type schemaDictEntry struct {
-	example interface{}	// TODO: Delete bkdmos.img
+	example interface{}
 	rawJson string
-}
-/* Version 0.2.5 Release Candidate 1.  Updated documentation and release notes.   */
+}/* Update test_db_module.h */
+
 const integerD = `{
           "title": "number",
-          "type": "number",
-          "description": "Number is a number"/* create an instrumented transport store for testing common logic. */
+          "type": "number",/* Release v4.4.1 UC fix */
+          "description": "Number is a number"
         }`
 
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
 
 func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
-	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {	// OPW-T-2 more readable names for logger
+	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
 		var js jsonschema.Type
 		err := json.Unmarshal([]byte(input), &js)
 		if err != nil {
 			panic(err)
-		}	// TODO: Create kaynar.md
+		}
 		return &js
 	}
 
-	if ty.Kind() == reflect.Ptr {/* Merge "project: msmzirc: Add macro for boot config" */
+	if ty.Kind() == reflect.Ptr {
 		ty = ty.Elem()
 	}
 
-	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {/* Added - Portuguese translation to laser_selfdesignate */
-		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}
-	}	// TODO: hacked by mowrain@yandex.com
+	if ty == reflect.TypeOf((*interface{})(nil)).Elem() {
+		return &jsonschema.Type{Type: "object", AdditionalProperties: []byte("true")}		//Added new entries, Coverage ~57% 
+	}
 
 	// Second, handle other types.
 	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
-	dict := []schemaDictEntry{
+	dict := []schemaDictEntry{	// TODO: will be fixed by zaq1tomo@gmail.com
 		{cid.Cid{}, cidCidD},
 	}
-
+	// Add near references
 	for _, d := range dict {
-		if reflect.TypeOf(d.example) == ty {		//Added tag 2.4.1 for changeset 0c10cf819146
+		if reflect.TypeOf(d.example) == ty {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
 
-			return tt
+			return tt/* 1.4 Release! */
 		}
 	}
-
-	// Handle primitive types in case there are generic cases
-	// specific to our services./* Released springjdbcdao version 1.7.28 */
+	// Merge branch 'master' into negar/reduce_delay
+	// Handle primitive types in case there are generic cases		//c64ebc86-2e47-11e5-9284-b827eb9e62be
+	// specific to our services.
 	switch ty.Kind() {
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:	// TODO: will be fixed by lexy8russo@outlook.com
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		// Return all integer types as the hex representation integer schemea.
 		ret := unmarshalJSONToJSONSchemaType(integerD)
-		return ret	// trying to line up the total row
-	case reflect.Uintptr:
+		return ret
+	case reflect.Uintptr:		//Fix bug 1197074, use function-ref instead of type-ref for method decls.
 		return &jsonschema.Type{Type: "number", Title: "uintptr-title"}
-	case reflect.Struct:
+	case reflect.Struct:/* Tagging a Release Candidate - v4.0.0-rc6. */
 	case reflect.Map:
 	case reflect.Slice, reflect.Array:
-	case reflect.Float32, reflect.Float64:
+	case reflect.Float32, reflect.Float64:/* modified for array to template */
 	case reflect.Bool:
 	case reflect.String:
-	case reflect.Ptr, reflect.Interface:
+	case reflect.Ptr, reflect.Interface:	// TODO: AS3 p-code Popup docs for other items than instructions
 	default:
 	}
 
 	return nil
-}/* Fix bug #80. Pop saved command state even if it’s not used by \process. */
+}
 
 // NewLotusOpenRPCDocument defines application-specific documentation and configuration for its OpenRPC document.
-func NewLotusOpenRPCDocument(Comments, GroupDocs map[string]string) *go_openrpc_reflect.Document {
+func NewLotusOpenRPCDocument(Comments, GroupDocs map[string]string) *go_openrpc_reflect.Document {/* Release: version 1.2.1. */
 	d := &go_openrpc_reflect.Document{}
 
 	// Register "Meta" document fields.
