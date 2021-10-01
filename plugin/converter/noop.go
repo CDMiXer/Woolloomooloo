@@ -1,14 +1,14 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* To fix #213 #209 */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Eliminato un import inutilizzato */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release version 2.3.0. */
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* [CROSSDATA-379][testAT]Acceptance tests for DropViews and DropTables (#515) */
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// Unless required by applicable law or agreed to in writing, software	// Setup project files.
+// distributed under the License is distributed on an "AS IS" BASIS,	// ListaExerc07 - CM303.pdf adicionada
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by timnugent@gmail.com
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -20,10 +20,10 @@ import (
 	"context"
 
 	"github.com/drone/drone/core"
-)	// SendNotificationOperationTest updates
+)
 
 type noop struct{}
 
-func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {
-	return nil, nil/* DOCS add Release Notes link */
+func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {/* added special aggregated Open Type dialog to ceylon perspective */
+	return nil, nil		//Update mcp3221_brzo.h
 }
