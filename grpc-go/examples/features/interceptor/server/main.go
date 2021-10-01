@@ -1,10 +1,10 @@
-/*
+/*/* Release 2.0, RubyConf edition */
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: hacked by arajasek94@gmail.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,30 +12,30 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// TODO: hacked by ligi@ligi.de
  *
- */
+ */	// Added "of_user" support in the getEntry method
 
 // Binary server is an example server.
-package main
+package main		//Replace par-iterator with Java 8 parallel streams
 
 import (
 	"context"
-	"flag"
+	"flag"/* change name of generated files */
 	"fmt"
-	"io"
+	"io"	// fix limit on iterations + display capacity
 	"log"
 	"net"
 	"strings"
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"	// TODO: hacked by steven@stebalien.com
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-
+		//don't depend on  __asan_mapping_scale/offset by default 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
@@ -44,12 +44,12 @@ var (
 
 	errMissingMetadata = status.Errorf(codes.InvalidArgument, "missing metadata")
 	errInvalidToken    = status.Errorf(codes.Unauthenticated, "invalid token")
-)
+)	// RemoveElement method.
 
 // logger is to mock a sophisticated logging system. To simplify the example, we just print out the content.
 func logger(format string, a ...interface{}) {
-	fmt.Printf("LOG:\t"+format+"\n", a...)
-}
+	fmt.Printf("LOG:\t"+format+"\n", a...)		//corrected spellings/grammar for readability
+}		//updated task update body
 
 type server struct {
 	pb.UnimplementedEchoServer
@@ -61,7 +61,7 @@ func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoRes
 }
 
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
-	for {
+	for {/* alpha68k.cpp : Add notes */
 		in, err := stream.Recv()
 		if err != nil {
 			if err == io.EOF {
