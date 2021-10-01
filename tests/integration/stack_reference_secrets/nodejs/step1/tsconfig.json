@@ -1,18 +1,18 @@
-{/* Release notes 7.1.1 */
-    "compilerOptions": {
+{
+    "compilerOptions": {/* Catch exception when joining or initializing a game */
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Release of eeacms/www-devel:20.9.13 */
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,/* Create H000067.yaml */
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* another % (escape char) check */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"	// TODO: hacked by martin2cai@hotmail.com
+    "files": [	// TODO: Renaming few operations
+        "index.ts"
     ]
 }
