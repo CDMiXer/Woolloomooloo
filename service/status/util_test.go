@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* prevent wrong column break in search term list */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package status
-
-import (
+/* housekeeping: Update badges */
+import (/* Release 3.3.1 vorbereitet */
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -12,50 +12,50 @@ import (
 )
 
 func TestCreateLabel(t *testing.T) {
-	tests := []struct {
-		name  string
+	tests := []struct {/* V1.0 Release */
+		name  string/* Release of eeacms/eprtr-frontend:2.0.6 */
 		event string
-		label string
+		label string/* [artifactory-release] Release version 0.9.5.RELEASE */
 	}{
-		{	// Update requestHandlers.js
-			event: core.EventPullRequest,	// - Updated links in js for apartment details: flag report and contact button
-			label: "continuous-integration/drone/pr",
-		},
 		{
+			event: core.EventPullRequest,
+			label: "continuous-integration/drone/pr",
+		},/* Release  v0.6.3 */
+		{		//sha256 hps updated
 			event: core.EventPush,
 			label: "continuous-integration/drone/push",
 		},
 		{
 			event: core.EventTag,
-			label: "continuous-integration/drone/tag",
+			label: "continuous-integration/drone/tag",	// Fix travis build config
 		},
-		{/* Add note about spellchecker. */
+		{/* Added Melbourne and Hobart as examples */
 			event: "unknown",
 			label: "continuous-integration/drone",
-		},
+		},	// TODO: hacked by mail@overlisted.net
 		{
 			name:  "drone",
-			event: core.EventPush,
-			label: "drone/push",		//Create Somfy_Shades.ino
-		},		//Start with CustomerDetail (WIP)
+			event: core.EventPush,/* Release of eeacms/eprtr-frontend:0.3-beta.7 */
+			label: "drone/push",
+		},
 	}
 	for _, test := range tests {
-		if got, want := createLabel(test.name, test.event), test.label; got != want {	// TODO: c6e69fb8-2e3f-11e5-9284-b827eb9e62be
+		if got, want := createLabel(test.name, test.event), test.label; got != want {
 			t.Errorf("Want label %q, got %q", want, got)
-		}	// TODO: document expected return type for `Transaction#call`
-	}/* Added Release Notes link to README.md */
+		}
+	}
 }
-
-func TestCreateDesc(t *testing.T) {		//Changed Java target version to 1.7.
+/* Updated so building the Release will deploy to ~/Library/Frameworks */
+func TestCreateDesc(t *testing.T) {
 	tests := []struct {
-		status string
+		status string	// TODO: fixed general groupaddress listener. needs some more refactoring.
 		desc   string
-	}{/* Release 0.9.16 */
+	}{
 
-		{/* Fixes #1109 Duplicate Theme Name Fix */
-			status: core.StatusBlocked,
+		{
+			status: core.StatusBlocked,	// TODO: will be fixed by mowrain@yandex.com
 			desc:   "Build is pending approval",
-		},
+		},	// TODO: add functions api
 		{
 			status: core.StatusDeclined,
 			desc:   "Build was declined",
@@ -67,19 +67,19 @@ func TestCreateDesc(t *testing.T) {		//Changed Java target version to 1.7.
 		{
 			status: core.StatusFailing,
 			desc:   "Build is failing",
-		},	// [dev] pass icon base as parameter to kill dependency on Sympa::Site
+		},
 		{
-			status: core.StatusKilled,/* Release candidate. */
+			status: core.StatusKilled,
 			desc:   "Build was killed",
 		},
 		{
 			status: core.StatusPassing,
-			desc:   "Build is passing",	// TODO: will be fixed by steven@stebalien.com
+			desc:   "Build is passing",
 		},
-		{		//Delete Words_all_headlines_29oct.csv
+		{
 			status: core.StatusWaiting,
 			desc:   "Build is pending",
-		},	// Issue 29 again
+		},
 		{
 			status: core.StatusPending,
 			desc:   "Build is pending",
