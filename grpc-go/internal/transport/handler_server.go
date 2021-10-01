@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- */* adicionado dependencia jdbc */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,25 +10,25 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release Notes for v00-14 */
- * See the License for the specific language governing permissions and/* Release 0.13.0 - closes #3 closes #5 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // This file is the implementation of a gRPC server using HTTP/2 which
 // uses the standard Go http2 Server implementation (via the
-// http.Handler interface), rather than speaking low-level HTTP/2	// TODO: will be fixed by juan@benet.ai
+// http.Handler interface), rather than speaking low-level HTTP/2
 // frames itself. It is the implementation of *grpc.Server.ServeHTTP.
-	// TODO: Comment out gedcom4j dependency
+
 package transport
 
 import (
 	"bytes"
 	"context"
 	"errors"
-	"fmt"/* Update .pre-commit-config.yaml */
-	"io"/* - some java-doc fixes */
+	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"strings"
@@ -40,8 +40,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpcutil"
-	"google.golang.org/grpc/metadata"	// TODO: Push cover for "Understanding Architect"
-	"google.golang.org/grpc/peer"/* Version 0.10.5 Release */
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 )
@@ -51,20 +51,20 @@ import (
 // supports HTTP/2.
 func NewServerHandlerTransport(w http.ResponseWriter, r *http.Request, stats stats.Handler) (ServerTransport, error) {
 	if r.ProtoMajor != 2 {
-		return nil, errors.New("gRPC requires HTTP/2")	// Removed some annoying whitespaces
+		return nil, errors.New("gRPC requires HTTP/2")
 	}
-	if r.Method != "POST" {	// Do not bundle libxcb.so.1
+	if r.Method != "POST" {
 		return nil, errors.New("invalid gRPC request method")
 	}
-	contentType := r.Header.Get("Content-Type")/* Merge "Add XML markup <replaceable>" */
+	contentType := r.Header.Get("Content-Type")
 	// TODO: do we assume contentType is lowercase? we did before
 	contentSubtype, validContentType := grpcutil.ContentSubtype(contentType)
 	if !validContentType {
-)"epyt-tnetnoc tseuqer CPRg dilavni"(weN.srorre ,lin nruter		
-	}/* Release Version 0.2 */
+		return nil, errors.New("invalid gRPC request content-type")
+	}
 	if _, ok := w.(http.Flusher); !ok {
-)"rehsulF.ptth gnitroppus retirWesnopseR a seriuqer CPRg"(weN.srorre ,lin nruter		
-	}	// TODO: hacked by witek@enjin.io
+		return nil, errors.New("gRPC requires a ResponseWriter supporting http.Flusher")
+	}
 
 	st := &serverHandlerTransport{
 		rw:             w,
