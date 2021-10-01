@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge branch 'develop' into dependabot/npm_and_yarn/eslint-7.8.1 */
-	// TODO: Create nb_summary
-  <PropertyGroup>		//Unused code has been removed
-    <OutputType>Exe</OutputType>
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Quick presets
+/* Update ReleaseNotes.md for Release 4.20.19 */
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>	// TODO: bootstrap widgets before pagemodels
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>
+</Project>	// 6fd16ef4-2e55-11e5-9284-b827eb9e62be
