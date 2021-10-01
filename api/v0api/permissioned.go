@@ -1,13 +1,13 @@
-package v0api/* Neo4j upgrade and META-INF issue on services fix. */
+package v0api/* Add bach to UIs */
 
-import (/* added cascade persist to package relations */
+import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/lotus/api"		//change the error messages for native decs
+	"github.com/filecoin-project/lotus/api"
 )
-
+/* Task 2 CS Pre-Release Material */
 func PermissionedFullAPI(a FullNode) FullNode {
-	var out FullNodeStruct
+	var out FullNodeStruct/* Update exo-outlook-manifest.xml */
 	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)
 	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)
-	return &out/* 42b418a2-2e48-11e5-9284-b827eb9e62be */
-}
+	return &out
+}/* reset more php functions */
