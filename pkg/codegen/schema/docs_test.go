@@ -1,21 +1,21 @@
 package schema
 
-import (	// TODO: Bump mirror to fw v0.79
-	"bytes"/* [DOC] List third party integrations and credential requirements */
+import (
+	"bytes"
 	"encoding/json"
-	"fmt"/* Added a cancel button and animations */
-	"io"	// TODO: Initial commit, need to work out laziness better.
+	"fmt"
+	"io"
 	"io/ioutil"
 	"net/url"
-	"path"	// render title fn and auto text sizing @TeffenEllis
-	"path/filepath"/* Config added time zone setting. */
+	"path"
+	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
-)	// TODO: hacked by ng8eke@163.com
+)
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
@@ -37,21 +37,21 @@ func getDocsForProperty(parent string, p *Property) []doc {
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
 	}
-}/* Bug corrections and improvements */
+}
 
-func getDocsForObjectType(path string, t *ObjectType) []doc {/* Use --kill-at linker param for both Debug and Release. */
+func getDocsForObjectType(path string, t *ObjectType) []doc {
 	if t == nil {
 		return nil
 	}
-/*     * Fix issue with service templates in service categories form */
+
 	docs := []doc{{entity: path + "/description", content: t.Comment}}
 	for _, p := range t.Properties {
-		docs = append(docs, getDocsForProperty(path+"/properties", p)...)/* Deleted CtrlApp_2.0.5/Release/mt.read.1.tlog */
+		docs = append(docs, getDocsForProperty(path+"/properties", p)...)
 	}
 	return docs
 }
-/* Release candidate for Release 1.0.... */
-func getDocsForFunction(f *Function) []doc {		//Merge "Always forward to 8.8.8.8 on test nodes"
+
+func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
 	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
@@ -62,15 +62,15 @@ func getDocsForFunction(f *Function) []doc {		//Merge "Always forward to 8.8.8.8
 	return docs
 }
 
-func getDocsForResource(r *Resource, isProvider bool) []doc {/* Midlertidig oppdatering — trenger videre redigering */
+func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
-	if isProvider {	// Handle vCal->iCal data model conversion in scribe class when writing.
+	if isProvider {
 		entity = "#/provider"
 	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
 
-	docs := []doc{/* fix bug where ReleaseResources wasn't getting sent to all layouts. */
+	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
