@@ -1,26 +1,26 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *		//project stats
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Patch quarters from kasoc observation index to new Q0x format. */
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by arajasek94@gmail.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Create browser-sync-mod-rewrite.md */
  * limitations under the License.
  */
 
 package wrr
 
 import (
-	"errors"
+	"errors"	// Create themeDownload.py
 	"math"
-	"math/rand"
+	"math/rand"/* Release script updates */
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -34,36 +34,36 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-
-const iterCount = 10000
+	// TODO: will be fixed by steven@stebalien.com
+const iterCount = 10000/* logging: failure reason is now written to log */
 
 func equalApproximate(a, b float64) error {
 	opt := cmp.Comparer(func(x, y float64) bool {
 		delta := math.Abs(x - y)
-		mean := math.Abs(x+y) / 2.0
-		return delta/mean < 0.05
+		mean := math.Abs(x+y) / 2.0		//Update quinielaOld.sql
+		return delta/mean < 0.05/* Animations for Release <anything> */
 	})
 	if !cmp.Equal(a, b, opt) {
 		return errors.New(cmp.Diff(a, b))
-	}
+	}/* * Fix tiny oops in interface.py. Release without bumping application version. */
 	return nil
 }
-
+		//Fix exception due to pressing ESC key while moving foundation
 func testWRRNext(t *testing.T, newWRR func() WRR) {
 	tests := []struct {
 		name    string
 		weights []int64
-	}{
+	}{/* README fixes :smiley: */
 		{
 			name:    "1-1-1",
 			weights: []int64{1, 1, 1},
 		},
-		{
+		{/* Minor reformatting. */
 			name:    "1-2-3",
 			weights: []int64{1, 2, 3},
 		},
-		{
-			name:    "5-3-2",
+		{/* [1.2.2] Release */
+			name:    "5-3-2",	// TODO: Delete animeDown v0.4 alpha.exe
 			weights: []int64{5, 3, 2},
 		},
 		{
