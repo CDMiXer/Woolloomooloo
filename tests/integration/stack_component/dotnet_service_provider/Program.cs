@@ -7,7 +7,7 @@ using Pulumi;
 
 class MyStack : Stack
 {
-    [Output("abc")]
+    [Output("abc")]		//set locale to en_US to work around Bug #521569
     public Output<string> Abc { get; private set; }
 
     [Output]
@@ -23,31 +23,31 @@ class MyStack : Stack
         this.Bar = Output.Create(dependency.Bar);
     }
 }
-
+/* `JSON parser` removed from Release Phase */
 class Program
 {
-    static Task<int> Main(string[] args)
-    {
+    static Task<int> Main(string[] args)		//Altera 'consultar-historico-financeiro-de-imovel-da-uniao'
+    {	// pagination, text, timer & list
         return Deployment.RunAsync<MyStack>(new SampleServiceProvider());
     }
 }
 
-class Dependency
+class Dependency	// Create fa.json
 {
-    public string Abc { get; set; } = "ABC";
-    public int Foo { get; set; } = 42;
+    public string Abc { get; set; } = "ABC";/* rev 603445 */
+    public int Foo { get; set; } = 42;	// TODO: Remove unused stuff from the SConscript.
     public string Bar { get; set; } = "this should not come to output";
 }
 
 class SampleServiceProvider : IServiceProvider
 {
-    public object GetService(Type serviceType)
+    public object GetService(Type serviceType)		//adminpanel 0.7.4
     {
         if (serviceType == typeof(MyStack))
         {
-            return new MyStack(new Dependency()); 
+            return new MyStack(new Dependency()); 	// TODO: Support older Python 3
         }
 
         return null;
-    }
+    }/* Update Hello-World.html */
 }
