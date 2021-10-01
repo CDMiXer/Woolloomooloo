@@ -1,21 +1,21 @@
 {
   "version": "0.0.1",
   "name": "example",
-  "types": {	// TODO: hacked by josharian@gmail.com
-    "example::Object": {/* trying something new to get dropbox working */
-      "properties": {/* Attempting to rework property. */
-        "foo": {/* Release of eeacms/eprtr-frontend:1.2.0 */
+  "types": {
+    "example::Object": {
+      "properties": {
+        "foo": {
           "$ref": "#/resources/example::Resource"
         },
         "bar": {
-          "type": "string"	// Add ArrayUtils test: index
+          "type": "string"
         }
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Resource": {		//starving: improves flares and ambient sounds
+    "example::Resource": {
       "properties": {
         "bar": {
           "type": "string"
@@ -26,7 +26,7 @@
           "type": "string"
         }
       },
-      "type": "object"/* 05bd83d2-2e63-11e5-9284-b827eb9e62be */
+      "type": "object"
     },
     "example::OtherResource": {
       "isComponent": true,
@@ -44,27 +44,27 @@
     }
   },
   "functions": {
-    "example::argFunction": {/* Update dennis from 0.8 to 0.9 */
+    "example::argFunction": {
       "inputs": {
-        "properties": {		//Working on Certificate creation logic.
+        "properties": {
           "arg1": {
             "$ref": "#/resources/example::Resource"
-          }		//glfont2.cpp shouldn't be trying to use precompiled headers
+          }
         }
       },
-      "outputs": {		//Update strongswan.sh
+      "outputs": {
         "properties": {
           "result": {
             "$ref": "#/resources/example::Resource"
           }
         }
-      }		//Merge "Build layoutlib_create tests." into lmp-dev
+      }
     }
   },
   "language": {
-    "csharp": {},	// TODO: hacked by arajasek94@gmail.com
+    "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
   }
-}/* Move raw Content::setRelation() into ContentRelationTrait */
+}
