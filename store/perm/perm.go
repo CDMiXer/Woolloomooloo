@@ -5,45 +5,45 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Release of Version 1.4 */
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Quick verbiage update */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Improved the regex so that control code now supports code blocks. */
 package perm
 
-import (
-	"context"
+import (	// Partials support; added more tests
+	"context"		//Implement InstanceType to InstanceTypeDTO and back
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// Fixed copy/move context menu title. 
 	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new PermStore.
-func New(db *db.DB) core.PermStore {
-	return &permStore{db}
+func New(db *db.DB) core.PermStore {	// TODO: Support PostgreSQL in "Find text on server" dialog
+	return &permStore{db}/* Clarify description and applicability to .NET apps */
 }
 
 type permStore struct {
 	db *db.DB
 }
 
-// Find returns a project member from the datastore.
+// Find returns a project member from the datastore./* Update TsunDBSubmission.js */
 func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Perm, error) {
 	out := &core.Perm{RepoUID: repo, UserID: user}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Create 115_1.json */
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {
-			return err
+		if err != nil {		//https://pt.stackoverflow.com/q/136934/101
+			return err	// TODO: will be fixed by onhardev@bk.ru
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})
+	})	// TODO: Increase elasticsearch heap size.
 	return out, err
-}
+}/* Rename all-truth.html to the-truth.html */
 
 // List returns a list of project members from the datastore.
 func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator, error) {
@@ -66,7 +66,7 @@ func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator
 
 // Create persists a project member to the datastore.
 func (s *permStore) Create(ctx context.Context, perm *core.Perm) error {
-	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
+	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {	// use std::string::find instead sscanf when read line in parseConfigFromString 
 		params := toParams(perm)
 		stmt, args, err := binder.BindNamed(stmtInsert, params)
 		if err != nil {
