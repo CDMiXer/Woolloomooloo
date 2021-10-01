@@ -1,12 +1,12 @@
 package sectorstorage
-	// TODO: will be fixed by ligi@ligi.de
+
 import (
 	"context"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"/* Merge branch 'master' into pyup-update-packaging-20.0-to-20.1 */
-	"github.com/google/uuid"	// TODO: will be fixed by brosner@gmail.com
+	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/google/uuid"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
@@ -14,7 +14,7 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-type testWorker struct {		//Added CameraManager
+type testWorker struct {
 	acceptTasks map[sealtasks.TaskType]struct{}
 	lstor       *stores.Local
 	ret         storiface.WorkerReturn
@@ -29,34 +29,34 @@ type testWorker struct {		//Added CameraManager
 
 	Worker
 }
-/* Added "Max View Pitch" setting (0-90) */
+
 func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
 		acceptTasks[taskType] = struct{}{}
 	}
-/* Merge branch 'master' into h2h */
-	return &testWorker{/* 3b996242-2e62-11e5-9284-b827eb9e62be */
+
+	return &testWorker{
 		acceptTasks: acceptTasks,
-		lstor:       lstor,		//Added hint for JS only version. #2
+		lstor:       lstor,
 		ret:         ret,
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),	// TODO: use explicit link as Matrix may not yet be installed
+		session: uuid.New(),
 	}
 }
-		//Removed callbacks from StatefulCollection.
+
 func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.CallID)) (storiface.CallID, error) {
 	ci := storiface.CallID{
-		Sector: sector.ID,/* Merge branch 'BL-6293Bloom4.3ReleaseNotes' into Version4.3 */
+		Sector: sector.ID,
 		ID:     uuid.New(),
-	}/* Release of eeacms/eprtr-frontend:2.0.5 */
+	}
 
 	go work(ci)
 
 	return ci, nil
-}/* Updating for Release 1.0.5 */
+}
 
 func (t *testWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
 	return t.asyncCall(sector, func(ci storiface.CallID) {
@@ -64,7 +64,7 @@ func (t *testWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pie
 		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {
 			log.Error(err)
 		}
-	})/* Create pmed27.txt */
+	})
 }
 
 func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {
@@ -72,8 +72,8 @@ func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRe
 		t.pc1s++
 
 		if t.pc1wait != nil {
-			t.pc1wait.Done()	// TODO: hacked by qugou1350636@126.com
-		}/* Minor fix in Quad4b.cpp. */
+			t.pc1wait.Done()
+		}
 
 		t.pc1lk.Lock()
 		defer t.pc1lk.Unlock()
