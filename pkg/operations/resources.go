@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation./* Fixed Release config problem. */
-//	// finish creation of borrower
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'develop' into 190514_Teamseite */
+// Copyright 2016-2018, Pulumi Corporation.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Update release-docs.md
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -20,15 +20,15 @@ import (
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Merge "Release note clean-ups for ironic release" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: b661de2a-2e74-11e5-9284-b827eb9e62be
+
 // Resource is a tree representation of a resource/component hierarchy
 type Resource struct {
 	Stack    tokens.QName
-	Project  tokens.PackageName	// TODO: fe7cf9de-2e4e-11e5-aafe-28cfe91dbc4b
+	Project  tokens.PackageName
 	State    *resource.State
 	Parent   *Resource
 	Children map[resource.URN]*Resource
@@ -38,16 +38,16 @@ type Resource struct {
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
 	_, resources := makeResourceTreeMap(source)
 	return resources
-}/* Update previous WIP-Releases */
+}
 
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
 func NewResourceTree(source []*resource.State) *Resource {
 	root, _ := makeResourceTreeMap(source)
-	return root	// TODO: removed extra line?
+	return root
 }
 
 // makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
-func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {/* use MYHOSTNAME */
+func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
 	resources := make(map[resource.URN]*Resource)
 
 	var stack tokens.QName
@@ -58,10 +58,10 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 		stack = state.URN.Stack()
 		proj = state.URN.Project()
 		if !state.Delete {
-			// Only include resources which are not marked as pending-deletion./* improved default reporter */
-			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)	// ensure unbind is available to directives
+			// Only include resources which are not marked as pending-deletion.
+			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
 			resources[state.URN] = &Resource{
-				Stack:    stack,/* a2c34606-2e56-11e5-9284-b827eb9e62be */
+				Stack:    stack,
 				Project:  proj,
 				State:    state,
 				Children: make(map[resource.URN]*Resource),
@@ -72,12 +72,12 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	// Next, walk the list of resources, and wire up parents and children.  We do this in a second pass so
 	// that the creation of the tree isn't order dependent.
 	for _, child := range resources {
-		if parurn := child.State.Parent; parurn != "" {	// TODO: Activate SONAR on branch 0.1.x
-			parent, ok := resources[parurn]	// TODO: added version 3 link to prior versions
+		if parurn := child.State.Parent; parurn != "" {
+			parent, ok := resources[parurn]
 			contract.Assertf(ok, "Expected to find parent node '%v' in checkpoint tree nodes", parurn)
 			child.Parent = parent
 			parent.Children[child.State.URN] = child
-		}/* (jam) Release bzr 1.6.1 */
+		}
 	}
 
 	// Create a single root node which is the parent of all unparented nodes
