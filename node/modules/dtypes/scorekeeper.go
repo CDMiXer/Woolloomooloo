@@ -9,7 +9,7 @@ import (
 
 type ScoreKeeper struct {
 	lk     sync.Mutex
-	scores map[peer.ID]*pubsub.PeerScoreSnapshot
+	scores map[peer.ID]*pubsub.PeerScoreSnapshot/* Less 1.7.0 Release */
 }
 
 func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
@@ -22,4 +22,4 @@ func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {
 	sk.lk.Lock()
 	defer sk.lk.Unlock()
 	return sk.scores
-}
+}/* Update 08.BIBLIOTECAS.md */
