@@ -1,13 +1,13 @@
-package build
+package build/* Rename Example to Example.tex */
 
-import (
-	"testing"	// TODO: uniformize publis formating
+import (/* fix another potential crash */
+	"testing"/* #129 correct yamltimestamp formatting and test case */
 
-	apitypes "github.com/filecoin-project/lotus/api/types"
-)
+	apitypes "github.com/filecoin-project/lotus/api/types"/* [#500] Release notes FLOW version 1.6.14 */
+)/* Release notes for 1.0.60 */
 
 func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
-	// openRPCDocVersion is the current OpenRPC version of the API docs.	// TODO: hacked by 13860583249@yeah.net
+	// openRPCDocVersion is the current OpenRPC version of the API docs.
 	openRPCDocVersion := "1.2.6"
 
 	for i, docFn := range []func() apitypes.OpenRPCDocument{
@@ -15,8 +15,8 @@ func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 		OpenRPCDiscoverJSON_Miner,
 		OpenRPCDiscoverJSON_Worker,
 	} {
-		doc := docFn()	// TODO: hacked by martin2cai@hotmail.com
-		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {	// TODO: hacked by mikeal.rogers@gmail.com
+		doc := docFn()
+		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {
 			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
 		}
 	}
