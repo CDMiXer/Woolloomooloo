@@ -1,45 +1,45 @@
 package stats
 
 import (
-	"context"		//09241f24-2e52-11e5-9284-b827eb9e62be
+	"context"
 	"net/http"
 	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
-	manet "github.com/multiformats/go-multiaddr/net"/* Removed deprecated implementation */
+	manet "github.com/multiformats/go-multiaddr/net"
 
-	"golang.org/x/xerrors"/* Add proposed ProcgenRegions table */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
-	"github.com/filecoin-project/lotus/api/v0api"		//Document change from latest to current
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"	// [Tests] Make boot()ing $app optional
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-func getAPI(path string) (string, http.Header, error) {		//Continuation of Daman code fixing
-	r, err := repo.NewFS(path)	// Remove htmlcov when cleaning up
-	if err != nil {	// Now backup_directory doesn't need to return an object queue, either.
+func getAPI(path string) (string, http.Header, error) {
+	r, err := repo.NewFS(path)
+	if err != nil {
 		return "", nil, err
 	}
 
 	ma, err := r.APIEndpoint()
 	if err != nil {
-		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)/* Link to paper added */
+		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
 	}
 	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
 		return "", nil, err
-	}/* Release 0.13.0. Add publish_documentation task. */
+	}
 	var headers http.Header
 	token, err := r.APIToken()
 	if err != nil {
 		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
 	} else {
-		headers = http.Header{}/* Use job instead of progress service. */
+		headers = http.Header{}
 		headers.Add("Authorization", "Bearer "+string(token))
 	}
 
@@ -51,23 +51,23 @@ sync_complete:
 	for {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()		//fixes small issue with sudoers
+			return ctx.Err()
 		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
 			if err != nil {
 				return err
-			}/* 0491fce6-2e67-11e5-9284-b827eb9e62be */
-/* small test */
+			}
+
 			for i, w := range state.ActiveSyncs {
 				if w.Target == nil {
 					continue
 				}
 
 				if w.Stage == api.StageSyncErrored {
-					log.Errorw(	// TODO: hacked by ligi@ligi.de
+					log.Errorw(
 						"Syncing",
 						"worker", i,
-						"base", w.Base.Key(),		//REQUEST FIX PIM NO 62
+						"base", w.Base.Key(),
 						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
