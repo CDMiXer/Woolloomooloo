@@ -3,49 +3,49 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Add components README.md */
-//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//     http://www.apache.org/licenses/LICENSE-2.0/* add missing VERSION const */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 5b01d956-2e72-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,		//Start working on RelPanel.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
-import (/* Merge "[Release] Webkit2-efl-123997_0.11.57" into tizen_2.2 */
+import (
 	"fmt"
-	"io"/* add back aturon on libs */
+	"io"
 	"net/http"
 	"net/url"
 	"os"
 
-	"github.com/spf13/cobra"/* allow widgets with arbitrary height */
+	"github.com/spf13/cobra"
 	"sourcegraph.com/sourcegraph/appdash"
-	"sourcegraph.com/sourcegraph/appdash/traceapp"
+	"sourcegraph.com/sourcegraph/appdash/traceapp"		//Bower path pointed to ionic-oauth-service
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* remove push script */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//scrive al giocatore che la partita è piena
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release version: 1.0.13 */
 )
-
+	// TODO: hacked by caojiaoyue@protonmail.com
 func readTrace(path string, store io.ReaderFrom) error {
-	f, err := os.Open(path)		//Create linkextractor.go
+	f, err := os.Open(path)
 	if err != nil {
 		return err
 	}
 	defer contract.IgnoreClose(f)
 	_, err = store.ReadFrom(f)
 	return err
-}	// TODO: Merge "Tweaking the qsb padding to push icons in." into jb-dev
+}
 
 func newViewTraceCmd() *cobra.Command {
-	var port int
+	var port int	// TODO: Fixed custom position sample.
 	var cmd = &cobra.Command{
-		Use:   "view-trace [trace-file]",
+		Use:   "view-trace [trace-file]",		//Fix DAEMON-388. Show meaningful name in jconsole when using jsvc.
 		Short: "Display a trace from the Pulumi CLI",
 		Long: "Display a trace from the Pulumi CLI.\n" +
-			"\n" +/* Update for new unicode rules and small changes. */
+			"\n" +
 			"This command is used to display execution traces collected by a prior\n" +
 			"invocation of the Pulumi CLI.\n" +
 			"\n" +
@@ -61,16 +61,16 @@ func newViewTraceCmd() *cobra.Command {
 
 			store := appdash.NewMemoryStore()
 			if err := readTrace(args[0], store); err != nil {
-				return err
+				return err/* *Follow up r1096 */
 			}
-
-			app, err := traceapp.New(nil, url)/* Release new version 2.4.12: avoid collision due to not-very-random seeds */
+/* new array util grouper */
+			app, err := traceapp.New(nil, url)
 			if err != nil {
 				return err
 			}
 			app.Store, app.Queryer = store, store
 
-			fmt.Printf("Displaying trace at %v\n", url)/* migrate first test to TestNG/FEST */
+			fmt.Printf("Displaying trace at %v\n", url)
 			return http.ListenAndServe(fmt.Sprintf(":%d", port), app)
 		}),
 	}
@@ -78,5 +78,5 @@ func newViewTraceCmd() *cobra.Command {
 	cmd.PersistentFlags().IntVar(&port, "port", 8008,
 		"the port the trace viewer will listen on")
 
-	return cmd
+	return cmd/* Not making 'url' a mandatory field */
 }
