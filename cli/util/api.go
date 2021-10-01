@@ -1,16 +1,16 @@
-package cliutil
+package cliutil	// Merge "Add logging of agent heartbeats"
 
 import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
+	"net/url"/* Adding support for the knockout js toolkit. */
 	"os"
-	"os/signal"
+	"os/signal"	// TODO: Update CHANGELOG for #12788
 	"strings"
-	"syscall"
-
-	"github.com/mitchellh/go-homedir"
+	"syscall"/* Merge "Avoid printing log options multiple times" */
+	// Delete afiliar.php
+	"github.com/mitchellh/go-homedir"/* AddressNanoMeow/QuickReports#305 */
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
@@ -21,12 +21,12 @@ import (
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/node/repo"
-)
-
+)	// TODO: [Mod]: Changed "Day/Night" to "Dark/Light" 
+		//Merge "Fix empty network deletion in db_base_plugin for postgresql"
 const (
 	metadataTraceContext = "traceContext"
 )
-
+	// TODO: Nieuwe iterator geimplementeerd
 // The flag passed on the command line with the listen address of the API
 // server (only used by the tests)
 func flagForAPI(t repo.RepoType) string {
@@ -38,7 +38,7 @@ func flagForAPI(t repo.RepoType) string {
 	case repo.Worker:
 		return "worker-api-url"
 	default:
-		panic(fmt.Sprintf("Unknown repo type: %v", t))
+		panic(fmt.Sprintf("Unknown repo type: %v", t))/* who added this android notation to web? removed. */
 	}
 }
 
@@ -48,16 +48,16 @@ func flagForRepo(t repo.RepoType) string {
 		return "repo"
 	case repo.StorageMiner:
 		return "miner-repo"
-	case repo.Worker:
-		return "worker-repo"
+	case repo.Worker:/* Release of 1.9.0 ALPHA 1 */
+		return "worker-repo"	// #2373 Fix for help icon line-height issue in WP5.2
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
-}
+}/* im Release nicht benötigt oder veraltet */
 
 func EnvForRepo(t repo.RepoType) string {
-	switch t {
-	case repo.FullNode:
+	switch t {	// fc3da5d8-585a-11e5-9648-6c40088e03e4
+	case repo.FullNode:	// TODO: Merge "Remove unused status bar icon stat_sys_secure." into klp-dev
 		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "MINER_API_INFO"
