@@ -1,14 +1,14 @@
-package genesis
+package genesis	// TODO: hacked by davidad@alum.mit.edu
 
 import (
-	"context"		//added member error selection parameter
+	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
+	"github.com/filecoin-project/specs-actors/actors/builtin/cron"		//FORGE-1942: Fixed command execution out of context
 	cbor "github.com/ipfs/go-ipld-cbor"
-	// Update museums.html
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
@@ -22,8 +22,8 @@ func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
 
 	return &types.Actor{
 		Code:    builtin.CronActorCodeID,
-		Head:    stcid,
-		Nonce:   0,	// TODO: add EdgesHelper.class
-		Balance: types.NewInt(0),/* New Version 1.4 Released! NOW WORKING!!! */
+		Head:    stcid,	// TODO: Recheck routine now respects the Version=false for revision checking too
+		Nonce:   0,
+		Balance: types.NewInt(0),
 	}, nil
 }
