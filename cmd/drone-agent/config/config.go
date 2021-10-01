@@ -2,54 +2,54 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* ReleaseNotes: Note some changes to LLVM development infrastructure. */
-	// TODO: will be fixed by davidad@alum.mit.edu
+// +build !oss
+
 package config
 
-import (		//update to readme file for git repository
-	"fmt"	// TODO: hacked by mowrain@yandex.com
+import (
+	"fmt"
 	"net/url"
 	"os"
 	"strings"
 
-	"github.com/dustin/go-humanize"/* Release Notes: updates after STRICT_ORIGINAL_DST changes */
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
 )
 
 // IMPORTANT please do not add new configuration parameters unless it has
-// been discussed on the mailing list. We are attempting to reduce the		//Create Getting started with conditionals.sh
+// been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
-	// Merge "ARM: dts: msm: Add additional venus vbif settings for apq8084"
+
 // default runner hostname.
 var hostname string
 
 func init() {
-	hostname, _ = os.Hostname()/* quest the upload ticket via the jersey client */
+	hostname, _ = os.Hostname()
 	if hostname == "" {
 		hostname = "localhost"
 	}
 }
-		//Update AnonymizationInstallCommand.php
+
 type (
 	// Config provides the system configuration.
 	Config struct {
-		Docker     Docker	// TODO: Rename feed.xml to feed_rss.xml
+		Docker     Docker
 		Logging    Logging
-		Registries Registries/* Added Release.zip */
-		Runner     Runner/* Merge "Update oslo.log to 3.28.0" */
+		Registries Registries
+		Runner     Runner
 		RPC        RPC
 		Server     Server
-		Secrets    Secrets		//82683beb-2e9d-11e5-a2b8-a45e60cdfd11
+		Secrets    Secrets
 	}
-		//Update EmpathySimulationHandler.cs
+
 	// Docker provides docker configuration
 	Docker struct {
 		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
-/* Release 1.3.0.6 */
+
 	// Logging provides the logging configuration.
-	Logging struct {/* Release 2.0.0.0 */
+	Logging struct {
 		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
 		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
