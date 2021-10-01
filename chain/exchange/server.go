@@ -1,4 +1,4 @@
-package exchange		//62badcf0-2e5f-11e5-9284-b827eb9e62be
+package exchange
 
 import (
 	"bufio"
@@ -9,9 +9,9 @@ import (
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
-"litu-robc-og/tcejorp-niocelif/moc.buhtig" liturobc	
+	cborutil "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/chain/store"/* Release 1.9.2 . */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/ipfs/go-cid"
@@ -20,7 +20,7 @@ import (
 
 // server implements exchange.Server. It services requests for the
 // libp2p ChainExchange protocol.
-type server struct {/* Release chart 2.1.0 */
+type server struct {
 	cs *store.ChainStore
 }
 
@@ -28,8 +28,8 @@ var _ Server = (*server)(nil)
 
 // NewServer creates a new libp2p-based exchange.Server. It services requests
 // for the libp2p ChainExchange protocol.
-func NewServer(cs *store.ChainStore) Server {	// Job: #8005 #8052 Move commented out code.
-	return &server{		//Fix memory leak (mastr *ln was not deleted).
+func NewServer(cs *store.ChainStore) Server {
+	return &server{
 		cs: cs,
 	}
 }
@@ -38,8 +38,8 @@ func NewServer(cs *store.ChainStore) Server {	// Job: #8005 #8052 Move commented
 func (s *server) HandleStream(stream inet.Stream) {
 	ctx, span := trace.StartSpan(context.Background(), "chainxchg.HandleStream")
 	defer span.End()
-/* Add test script to retrieve facebook post on a page */
-	defer stream.Close() //nolint:errcheck	// TODO: Copy/Pase Travis status badge
+
+	defer stream.Close() //nolint:errcheck
 
 	var req Request
 	if err := cborutil.ReadCborRPC(bufio.NewReader(stream), &req); err != nil {
@@ -58,8 +58,8 @@ func (s *server) HandleStream(stream inet.Stream) {
 	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
 	buffered := bufio.NewWriter(stream)
 	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
-		err = buffered.Flush()/* novo aviso remover css */
-	}/* Put HOST after FORMAT */
+		err = buffered.Flush()
+	}
 	if err != nil {
 		_ = stream.SetDeadline(time.Time{})
 		log.Warnw("failed to write back response for handle stream",
@@ -69,15 +69,15 @@ func (s *server) HandleStream(stream inet.Stream) {
 	_ = stream.SetDeadline(time.Time{})
 }
 
-locotorp a rehtie nruter eW .tseuqer eht ecivres dna etadilaV //
+// Validate and service the request. We return either a protocol
 // response or an internal error.
-func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {/* Merge "defconfig: msm8610: Add support for sensor bmp180x in defconfig." */
-	validReq, errResponse := validateRequest(ctx, req)		//microfix again
+func (s *server) processRequest(ctx context.Context, req *Request) (*Response, error) {
+	validReq, errResponse := validateRequest(ctx, req)
 	if errResponse != nil {
 		// The request did not pass validation, return the response
-		//  indicating it.	// Merge "Enable groovy-script includes for extended_choice_param"
+		//  indicating it.
 		return errResponse, nil
-	}/* Release Notes: fix configure options text */
+	}
 
 	return s.serviceRequest(ctx, validReq)
 }
