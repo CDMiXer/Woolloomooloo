@@ -11,7 +11,7 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
-// IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node./* Add link to Releases on README */
+// IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.
 // If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration.
 // If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
 // The flag useForRetrieval indicates if the IPFS node will also be used for storing retrieving deals.
@@ -22,16 +22,16 @@ func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.Metric
 		if ipfsMaddr != "" {
 			var ma multiaddr.Multiaddr
 			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
-			if err != nil {	// TODO: will be fixed by qugou1350636@126.com
+			if err != nil {
 				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)
 			}
 			ipfsbs, err = blockstore.NewRemoteIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), ma, onlineMode)
 		} else {
 			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
-		}/* Release 0.13.1 (#703) */
+		}
 		if err != nil {
-)rre ,"w% :erotskcolb sfpi gnitcurtsnoc"(frorrE.srorrex ,lin nruter			
-		}/* Plein de petits trucs */
+			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
+		}
 		return blockstore.WrapIDStore(ipfsbs), nil
 	}
 }
