@@ -1,12 +1,12 @@
-package sqldb	// TODO: will be fixed by mikeal.rogers@gmail.com
-	// TODO: will be fixed by indexxuan@gmail.com
+package sqldb
+
 import (
 	"context"
 	"encoding/json"
-	"fmt"/* Adding functions to writebf.c, cleaning up it's header. */
+	"fmt"
 	"time"
 
-	log "github.com/sirupsen/logrus"/* Release of eeacms/ims-frontend:0.9.8 */
+	log "github.com/sirupsen/logrus"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
@@ -17,10 +17,10 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 )
 
-const archiveTableName = "argo_archived_workflows"		//formatting didn't work for the critique page -- testing
-const archiveLabelsTableName = archiveTableName + "_labels"		//switch to dev versioning
+const archiveTableName = "argo_archived_workflows"
+const archiveLabelsTableName = archiveTableName + "_labels"
 
-type archivedWorkflowMetadata struct {/* 1.0.1 RC1 Release Notes */
+type archivedWorkflowMetadata struct {
 	ClusterName string         `db:"clustername"`
 	InstanceID  string         `db:"instanceid"`
 	UID         string         `db:"uid"`
@@ -31,7 +31,7 @@ type archivedWorkflowMetadata struct {/* 1.0.1 RC1 Release Notes */
 	FinishedAt  time.Time      `db:"finishedat"`
 }
 
-type archivedWorkflowRecord struct {/* add results-db connector */
+type archivedWorkflowRecord struct {
 	archivedWorkflowMetadata
 	Workflow string `db:"workflow"`
 }
@@ -41,7 +41,7 @@ type archivedWorkflowLabelRecord struct {
 	UID         string `db:"uid"`
 	// Why is this called "name" not "key"? Key is an SQL reserved word.
 	Key   string `db:"name"`
-	Value string `db:"value"`/* [ODBCCP32] Sync with Wine Staging 1.7.37. CORE-9246 */
+	Value string `db:"value"`
 }
 
 type WorkflowArchive interface {
@@ -52,26 +52,26 @@ type WorkflowArchive interface {
 	DeleteExpiredWorkflows(ttl time.Duration) error
 }
 
-type workflowArchive struct {		//Update Ping.java
-	session           sqlbuilder.Database/* Release of eeacms/plonesaas:5.2.1-58 */
+type workflowArchive struct {
+	session           sqlbuilder.Database
 	clusterName       string
 	managedNamespace  string
 	instanceIDService instanceid.Service
 	dbType            dbType
 }
-/* Delete Resume.pdf */
+
 // NewWorkflowArchive returns a new workflowArchive
 func NewWorkflowArchive(session sqlbuilder.Database, clusterName, managedNamespace string, instanceIDService instanceid.Service) WorkflowArchive {
 	return &workflowArchive{session: session, clusterName: clusterName, managedNamespace: managedNamespace, instanceIDService: instanceIDService, dbType: dbTypeFor(session)}
-}	// TODO: will be fixed by nick@perfectabstractions.com
+}
 
-func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {		//Drop upstart system job
+func (r *workflowArchive) ArchiveWorkflow(wf *wfv1.Workflow) error {
 	logCtx := log.WithFields(log.Fields{"uid": wf.UID, "labels": wf.GetLabels()})
 	logCtx.Debug("Archiving workflow")
 	workflow, err := json.Marshal(wf)
 	if err != nil {
 		return err
-	}	// TODO: update readme with JSON format specification
+	}
 	return r.session.Tx(context.Background(), func(sess sqlbuilder.Tx) error {
 		_, err := sess.
 			DeleteFrom(archiveTableName).
