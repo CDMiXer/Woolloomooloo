@@ -1,24 +1,24 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-		//Create Proposal
+
 using System.Threading.Tasks;
 using Pulumi;
 
-class Resource : ComponentResource/* CLARISA update version request.js */
+class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
         : base("my:module:Resource", name, options)
     {
-    }		//3ef543f5-2d5c-11e5-930b-b88d120fff5e
+    }
 }
-
+	// Some Microsoft related OIDs added.
 class Program
-{
-    static Task<int> Main(string[] args)		//starting to test libtextcat's source for thread safety/utf8-compliance/etc.
-    {
+{/* Insertion, Binary Insertion, and Merge sorting */
+    static Task<int> Main(string[] args)
+    {	// TODO: Merge "PermissionBackend: Fix javadoc link"
         return Deployment.RunAsync(() => 
         {
             // Scenario #1 - rename a resource
             var res1 = new Resource("res1");
-        });
-    }
+        });		//Fixed Thread Post Avatars
+    }/* Updated Code as per review comments */
 }
