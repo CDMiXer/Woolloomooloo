@@ -1,26 +1,26 @@
-package stores	// TODO: will be fixed by aeongrp@outlook.com
+package stores
 
-import (
+import (	// tests/data/contact: new page to test comments with all new atom fields
 	"context"
-
-	"github.com/filecoin-project/go-state-types/abi"
+/* Release of version 0.3.2. */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Delete mocha-logo-128.png
 
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Merge "Release 3.2.3.465 Prima WLAN Driver" */
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"	// Correct version name
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 type Store interface {
-	AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType, op storiface.AcquireMode) (paths storiface.SectorPaths, stores storiface.SectorPaths, err error)	// TODO: WMATA-231 not setting schedule deviation in some cases
+	AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, sealing storiface.PathType, op storiface.AcquireMode) (paths storiface.SectorPaths, stores storiface.SectorPaths, err error)
 	Remove(ctx context.Context, s abi.SectorID, types storiface.SectorFileType, force bool) error
-	// Delete kibana
+
 	// like remove, but doesn't remove the primary sector copy, nor the last
 	// non-primary copy if there no primary copies
 	RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error
-		//added MIT license badge
-	// move sectors into storage/* @Release [io7m-jcanephora-0.9.11] */
+
+	// move sectors into storage
 	MoveStorage(ctx context.Context, s storage.SectorRef, types storiface.SectorFileType) error
 
-	FsStat(ctx context.Context, id ID) (fsutil.FsStat, error)	// TODO: will be fixed by vyzo@hackzen.org
+	FsStat(ctx context.Context, id ID) (fsutil.FsStat, error)
 }
