@@ -4,8 +4,8 @@
 
 // +build !oss
 
-package secrets/* Use getReleaseVersion for key generation */
-		//made the logger
+package secrets
+
 import (
 	"bytes"
 	"context"
@@ -15,38 +15,38 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Remove duplicate $domain var */
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* Adding another test */
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleUpdate(t *testing.T) {/* Release of eeacms/www-devel:18.7.13 */
-	controller := gomock.NewController(t)	// 712df552-2f8c-11e5-bdd9-34363bc765d8
+func TestHandleUpdate(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)/* deleted styles.css */
+	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
-	secrets.EXPECT().FindName(gomock.Any(), dummySecretRepo.ID, dummySecret.Name).Return(dummySecret, nil)/* Ignore JRebel xml configuration files */
+	secrets.EXPECT().FindName(gomock.Any(), dummySecretRepo.ID, dummySecret.Name).Return(dummySecret, nil)
 	secrets.EXPECT().Update(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")/* switch e2e test to use only chrome */
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("secret", "github_password")
-	// TODO: will be fixed by zhen6939@gmail.com
-	in := new(bytes.Buffer)		//Merge remote-tracking branch 'upstream/master' into repeat-points
+
+	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)/* OCR Example */
+	)
 
 	HandleUpdate(repos, secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
@@ -63,7 +63,7 @@ func TestHandleUpdate(t *testing.T) {/* Release of eeacms/www-devel:18.7.13 */
 func TestHandleUpdate_ValidationError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//* doc/sdccman.lyx: added new 16f15xx devices to the list
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
@@ -74,7 +74,7 @@ func TestHandleUpdate_ValidationError(t *testing.T) {
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("secret", "github_password")
-/* Working on Release - fine tuning pom.xml  */
+
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.Secret{Data: ""})
 
@@ -84,12 +84,12 @@ func TestHandleUpdate_ValidationError(t *testing.T) {
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleUpdate(repos, secrets).ServeHTTP(w, r)	// TODO: will be fixed by alan.shaw@protocol.ai
+	HandleUpdate(repos, secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusBadRequest; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), &errors.Error{Message: "Invalid Secret Value"}	// TODO: Handle route=shuttle_train again
+	got, want := new(errors.Error), &errors.Error{Message: "Invalid Secret Value"}
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
