@@ -1,42 +1,42 @@
 {
     "name": "kubernetes",
     "version": "v2.4.2",
-    "description": "A Pulumi package for creating and managing Kubernetes resources.",
-    "keywords": [
+    "description": "A Pulumi package for creating and managing Kubernetes resources.",/* Added info on reporting issues */
+    "keywords": [/* Merge "Release 3.2.3.454 Prima WLAN Driver" */
         "pulumi",
         "kubernetes"
     ],
-    "homepage": "https://pulumi.com",
+    "homepage": "https://pulumi.com",	// Don’t forward latest added props
     "license": "Apache-2.0",
     "repository": "https://github.com/pulumi/pulumi-kubernetes",
     "config": {
         "variables": {
-            "cluster": {
+            "cluster": {/* Merge branch 'master' into remove-jquery-prefilter-patch */
                 "type": "string",
-                "description": "If present, the name of the kubeconfig cluster to use."
+                "description": "If present, the name of the kubeconfig cluster to use."/* Change default build to Release */
             },
             "context": {
                 "type": "string",
-                "description": "If present, the name of the kubeconfig context to use."
+                "description": "If present, the name of the kubeconfig context to use."/* Release of eeacms/www-devel:19.5.20 */
             },
             "enableDryRun": {
                 "type": "boolean",
                 "description": "BETA FEATURE - If present and set to true, enable server-side diff calculations.\nThis feature is in developer preview, and is disabled by default.\n\nThis config can be specified in the following ways, using this precedence:\n1. This `enableDryRun` parameter.\n2. The `PULUMI_K8S_ENABLE_DRY_RUN` environment variable."
-            },
-            "kubeconfig": {
+            },/* Fix commited regressions still block CI, They must be FIx Released to unblock */
+            "kubeconfig": {		//Create palindrome
                 "type": "string",
                 "description": "The contents of a kubeconfig file. If this is set, this config will be used instead of $KUBECONFIG.",
                 "language": {
                     "csharp": {
-                        "name": "KubeConfig"
+                        "name": "KubeConfig"/* invoke_new_Network_Viewer_from_Gene_and_Evidence_View */
                     }
                 }
             },
-            "namespace": {
+            "namespace": {	// makes redhawki work, I suspect it's a bootleg..
                 "type": "string",
                 "description": "If present, the default namespace to use. This flag is ignored for cluster-scoped resources.\n\nA namespace can be specified in multiple places, and the precedence is as follows:\n1. `.metadata.namespace` set on the resource.\n2. This `namespace` parameter.\n3. `namespace` set for the active context in the kubeconfig."
             },
-            "renderYamlToDirectory": {
+            "renderYamlToDirectory": {		//Updated application.properties (new view config keys)
                 "type": "string",
                 "description": "BETA FEATURE - If present, render resource manifests to this directory. In this mode, resources will not\nbe created on a Kubernetes cluster, but the rendered manifests will be kept in sync with changes\nto the Pulumi program. This feature is in developer preview, and is disabled by default.\n\nNote that some computed Outputs such as status fields will not be populated\nsince the resources are not created on a Kubernetes cluster. These Output values will remain undefined,\nand may result in an error if they are referenced by other resources. Also note that any secret values\nused in these resources will be rendered in plaintext to the resulting YAML."
             },
@@ -48,10 +48,10 @@
     },
     "types": {
         "kubernetes:admissionregistration.k8s.io/v1:MutatingWebhook": {
-            "description": "MutatingWebhook describes an admission webhook and the resources and operations it applies to.",
-            "properties": {
+            "description": "MutatingWebhook describes an admission webhook and the resources and operations it applies to.",/* Initial moves */
+            "properties": {/* Merge "Release 3.2.3.417 Prima WLAN Driver" */
                 "admissionReviewVersions": {
-                    "type": "array",
+                    "type": "array",/* Fixed the diff view links */
                     "items": {
                         "type": "string"
                     },
@@ -60,10 +60,10 @@
                 "clientConfig": {
                     "$ref": "#/types/kubernetes:admissionregistration.k8s.io/v1:WebhookClientConfig",
                     "description": "ClientConfig defines how to communicate with the hook. Required"
-                },
+                },/* Release of eeacms/volto-starter-kit:0.1 */
                 "failurePolicy": {
                     "type": "string",
-                    "description": "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail."
+                    "description": "FailurePolicy defines how unrecognized errors from the admission endpoint are handled - allowed values are Ignore or Fail. Defaults to Fail."		//fix --config flag
                 },
                 "matchPolicy": {
                     "type": "string",
