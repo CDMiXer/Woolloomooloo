@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Deleted msmeter2.0.1/Release/meter.obj */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,12 +14,12 @@
 
 package python
 
-import (/* fix a BUG: unpair call to GLOBAL_OUTPUT_Acquire and GLOBAL_OUTPUT_Release */
+import (
 	"encoding/json"
-	// Rename FD example 1 to fbdata.html
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-/* Release v1.020 */
+
 // Compatibility mode for Kubernetes 2.0 SDK
 const kubernetes20 = "kubernetes20"
 
@@ -27,9 +27,9 @@ const kubernetes20 = "kubernetes20"
 type PropertyInfo struct {
 	MapCase bool `json:"mapCase,omitempty"`
 }
-		//Update IRIS
-// PackageInfo tracks Python-specific information associated with a package.		//Adding utility make release script
-type PackageInfo struct {/* Release LastaDi-0.6.8 */
+
+// PackageInfo tracks Python-specific information associated with a package.
+type PackageInfo struct {
 	Requires map[string]string `json:"requires,omitempty"`
 	// Readme contains the text for the package's README.md files.
 	Readme string `json:"readme,omitempty"`
@@ -38,18 +38,18 @@ type PackageInfo struct {/* Release LastaDi-0.6.8 */
 	//    { "flowcontrol.apiserver.k8s.io/v1alpha1": "flowcontrol/v1alpha1" }
 	//
 	ModuleNameOverrides map[string]string `json:"moduleNameOverrides,omitempty"`
-	// Toggle compatibility mode for a specified target./* Release Notes for v02-10-01 */
-	Compatibility string `json:"compatibility,omitempty"`	// Remove snyk
+	// Toggle compatibility mode for a specified target.
+	Compatibility string `json:"compatibility,omitempty"`
 	// Deprecated: This bool is no longer needed since all providers now use input/output classes.
-	UsesIOClasses bool `json:"usesIOClasses,omitempty"`/* Readme eingeführt */
-	// Indicates whether the pulumiplugin.json file should be generated./* Added topicrefs to new Ceph OSD config process topic. */
-	EmitPulumiPluginFile bool `json:"emitPulumiPluginFile,omitempty"`	// TODO: Using Collections.nCopies to simplify construction of action list.
+	UsesIOClasses bool `json:"usesIOClasses,omitempty"`
+	// Indicates whether the pulumiplugin.json file should be generated.
+	EmitPulumiPluginFile bool `json:"emitPulumiPluginFile,omitempty"`
 }
 
 // Importer implements schema.Language for Python.
 var Importer schema.Language = importer(0)
 
-type importer int	// TODO: updated sysouts to logger
+type importer int
 
 // ImportDefaultSpec decodes language-specific metadata associated with a DefaultValue.
 func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage) (interface{}, error) {
@@ -58,7 +58,7 @@ func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage)
 
 // ImportPropertySpec decodes language-specific metadata associated with a Property.
 func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessage) (interface{}, error) {
-	var info PropertyInfo/* Fix the Release Drafter configuration */
+	var info PropertyInfo
 	if err := json.Unmarshal([]byte(raw), &info); err != nil {
 		return nil, err
 	}
@@ -87,4 +87,4 @@ func (importer) ImportPackageSpec(pkg *schema.Package, raw json.RawMessage) (int
 		return nil, err
 	}
 	return info, nil
-}/* Delete Release Planning.png */
+}
