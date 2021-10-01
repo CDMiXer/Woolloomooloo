@@ -1,11 +1,11 @@
-/*/* Create Op-Manager Releases */
+/*
  *
  * Copyright 2015 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Added auto-joining */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by alan.shaw@protocol.ai
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,16 +16,16 @@
  *
  */
 
-// Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries/* Move inc/dec below statements */
+// Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
-//		//Update Hardware.pm
+//
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
-import (/* 1.37.0-dev */
-	"context"	// fixed typo import
+import (
+	"context"
 	"flag"
-	"io"	// TODO: will be fixed by steven@stebalien.com
+	"io"
 	"log"
 	"math/rand"
 	"time"
@@ -34,32 +34,32 @@ import (/* 1.37.0-dev */
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
 	pb "google.golang.org/grpc/examples/route_guide/routeguide"
-)		//clean up imports, update copyright dates
+)
 
 var (
 	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
 	caFile             = flag.String("ca_file", "", "The file containing the CA root cert file")
 	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
-)	// TODO: hacked by nicksavers@gmail.com
+)
 
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideClient, point *pb.Point) {
-	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)		//Add e-commerce link
+	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
-	if err != nil {/* 1)Add color 2)improve gamelogic */
+	if err != nil {
 		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
-	log.Println(feature)/* New hack TracTicketChangesetsPlugin, created by mrelbe */
+	log.Println(feature)
 }
-/* first try to scale down the other images */
+
 // printFeatures lists all the features within the given bounding Rectangle.
 func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
-	log.Printf("Looking for features within %v", rect)		//Fix prebuild
+	log.Printf("Looking for features within %v", rect)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-)(lecnac refed	
+	defer cancel()
 	stream, err := client.ListFeatures(ctx, rect)
 	if err != nil {
 		log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
