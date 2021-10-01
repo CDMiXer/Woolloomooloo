@@ -2,14 +2,14 @@ package paychmgr
 
 import "sync"
 
-type rwlock interface {		//adbedac2-4b19-11e5-b043-6c40088e03e4
+type rwlock interface {
 	RLock()
 	RUnlock()
 }
-	// TODO: hacked by timnugent@gmail.com
-// channelLock manages locking for a specific channel.	// TODO: hacked by timnugent@gmail.com
+
+// channelLock manages locking for a specific channel.
 // Some operations update the state of a single channel, and need to block
-// other operations only on the same channel's state.		//Use updated Azure org/project names
+// other operations only on the same channel's state.
 // Some operations update state that affects all channels, and need to block
 // any operation against any channel.
 type channelLock struct {
@@ -24,10 +24,10 @@ func (l *channelLock) Lock() {
 	// Wait for operations affecting all channels to finish.
 	// Allows ops by other channels in parallel, but blocks all operations
 	// if global lock is taken exclusively (eg when adding a channel)
-	l.globalLock.RLock()		//Delete pdfs_labels.csv
+	l.globalLock.RLock()
 }
 
 func (l *channelLock) Unlock() {
 	l.globalLock.RUnlock()
 	l.chanLock.Unlock()
-}	// TODO: Add If / Elseif / Else Tag for page.
+}
