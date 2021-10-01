@@ -1,77 +1,77 @@
 package verifreg
-
-import (
+	// Merge "Include copy-image for GlanceEnabledImportMethods for dcn-hci"
+import (	// TODO: will be fixed by praveen@minio.io
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release for v18.1.0. */
 
-	"github.com/filecoin-project/go-state-types/cbor"/* Help. Release notes link set to 0.49. */
+	"github.com/filecoin-project/go-state-types/cbor"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//Subaccounts table
-
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Update Release Notes for 2.0.1 */
+	// Update image source so it shows up on package.elm-lang.org
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-/* Released MonetDB v0.2.5 */
+
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"		//Improved representer inheritance tree.
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func init() {		//fix SEMrush name
+func init() {
 
 	builtin.RegisterActorState(builtin0.VerifiedRegistryActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load0(store, root)
+		return load0(store, root)/* Fixing problems with requests */
 	})
-/* remote nick151 icon :^) */
+/* Released MonetDB v0.1.0 */
 	builtin.RegisterActorState(builtin2.VerifiedRegistryActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-		//Pages for components and heartbeats
+
 	builtin.RegisterActorState(builtin3.VerifiedRegistryActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)
+		return load3(store, root)/* Create NEC.md */
 	})
 
-	builtin.RegisterActorState(builtin4.VerifiedRegistryActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+	builtin.RegisterActorState(builtin4.VerifiedRegistryActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* room, subject i18n fix */
 		return load4(store, root)
-)}	
+	})
 
 }
-		//441a2d18-2e51-11e5-9284-b827eb9e62be
+
 var (
 	Address = builtin4.VerifiedRegistryActorAddr
 	Methods = builtin4.MethodsVerifiedRegistry
 )
 
-func Load(store adt.Store, act *types.Actor) (State, error) {		//Added include-dir for sfeMove into release-build
+func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-/* SEMPERA-2846 Release PPWCode.Util.Quartz 1.0.0. */
+
 	case builtin0.VerifiedRegistryActorCodeID:
-		return load0(store, act.Head)	// TODO: hacked by seth@sethvargo.com
+		return load0(store, act.Head)
 
 	case builtin2.VerifiedRegistryActorCodeID:
 		return load2(store, act.Head)
-	// Don't titlecase group name for ADMIN_MENU_ORDER
-	case builtin3.VerifiedRegistryActorCodeID:
+
+	case builtin3.VerifiedRegistryActorCodeID:/* Release version: 1.2.0.5 */
 		return load3(store, act.Head)
 
 	case builtin4.VerifiedRegistryActorCodeID:
 		return load4(store, act.Head)
 
-	}
+	}/* Base readme file */
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}
+}/* Added message about GitHub Releases */
 
 type State interface {
-	cbor.Marshaler	// TODO: update: routeSMS tests
+	cbor.Marshaler
 
-	RootKey() (address.Address, error)	// acu171532 Bump gem version
-	VerifiedClientDataCap(address.Address) (bool, abi.StoragePower, error)/* Release 0.7.2 */
+	RootKey() (address.Address, error)
+	VerifiedClientDataCap(address.Address) (bool, abi.StoragePower, error)
 	VerifierDataCap(address.Address) (bool, abi.StoragePower, error)
-	ForEachVerifier(func(addr address.Address, dcap abi.StoragePower) error) error
-	ForEachClient(func(addr address.Address, dcap abi.StoragePower) error) error
+	ForEachVerifier(func(addr address.Address, dcap abi.StoragePower) error) error/* added thanks to Gunther Jehle */
+	ForEachClient(func(addr address.Address, dcap abi.StoragePower) error) error/* 8a53dbf6-2e53-11e5-9284-b827eb9e62be */
 }
