@@ -1,17 +1,17 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// Use of this source code is governed by the Drone Non-Commercial License/* coingi referral url */
+// that can be found in the LICENSE file./* TICTOCK - DEBUG */
+	// TODO: Fixes email addresses in the footer.
 // +build !oss
-
-package queue/* Edited wiki page ReleaseProcess through web user interface. */
+/* Added getBingApi() per request */
+package queue		//Change fields in tables csv EstatisticControl
 
 import (
 	"io/ioutil"
-	// TODO: this looks wrong, is my edit correct?
+
 	"github.com/sirupsen/logrus"
 )
 
-func init() {/* Release RED DOG v1.2.0 */
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
