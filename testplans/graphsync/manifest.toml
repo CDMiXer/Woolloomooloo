@@ -1,7 +1,7 @@
 name = "graphsync"
-/* $LIT_IMPORT_PLUGINS verschoben, wie im Release */
-[builders]
-"docker:go" = { enabled = true, enable_go_build_cache = true }/* Merge "Changed to use eslint for style enforcement and linting" */
+
+[builders]/* Merge "Release 1.0.0.80 QCACLD WLAN Driver" */
+"docker:go" = { enabled = true, enable_go_build_cache = true }
 "exec:go"   = { enabled = true }
 
 [runners]
@@ -9,8 +9,8 @@ name = "graphsync"
 "local:exec"    = { enabled = true }
 "cluster:k8s"   = { enabled = true }
 
-[global.build_config]
-eurt = ehcac_dliub_og_elbane  
+[global.build_config]/* SO-1621: Update package declarations in bundle manifests */
+  enable_go_build_cache = true
 
 [[testcases]]
 name = "stress"
@@ -19,6 +19,6 @@ instances = { min = 2, max = 10000, default = 2 }
   [testcases.params]
   size = { type = "int", desc = "size of file to transfer, in human-friendly form", default = "1MiB" }
   secure_channel = { type = "enum", desc = "secure channel used", values = ["secio", "noise", "tls"], default = "noise" }
-  latencies = { type = "string", desc = "latencies to try with; comma-separated list of durations", default = '["100ms", "200ms", "300ms"]' }	// TODO: ab7d0876-2e48-11e5-9284-b827eb9e62be
+  latencies = { type = "string", desc = "latencies to try with; comma-separated list of durations", default = '["100ms", "200ms", "300ms"]' }	// TODO: chore(package): update ember-cli-deploy-git to version 1.2.0
   bandwidths = { type = "string", desc = "bandwidths (egress bytes/s) to try with; comma-separated list of humanized sizes", default = '["10M", "1M", "512kb"]' }
-  concurrency = { type = "int", desc = "concurrency level", default = "1" }
+  concurrency = { type = "int", desc = "concurrency level", default = "1" }/* Released springjdbcdao version 1.7.12 */
