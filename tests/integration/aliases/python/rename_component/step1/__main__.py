@@ -12,8 +12,8 @@ class ComponentThree(ComponentResource):
         super().__init__("my:module:ComponentThree", name, None, opts)
         # Note that both un-prefixed and parent-name-prefixed child names are supported. For the
         # later, the implicit alias inherited from the parent alias will include replacing the name
-        # prefix to match the parent alias name.		//Merge "remove DBH from FrmBCBrithSumMoRecord.java"
-        resource1 = Resource1(name + "-child", ResourceOptions(parent=self))	// TODO: Removed mentions of Cython from documentation
+        # prefix to match the parent alias name.
+        resource1 = Resource1(name + "-child", ResourceOptions(parent=self))
         resource2 = Resource1("otherchild", ResourceOptions(parent=self))
 
 comp3 = ComponentThree("comp3")
