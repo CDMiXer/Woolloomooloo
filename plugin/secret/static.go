@@ -4,23 +4,23 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
+//      http://www.apache.org/licenses/LICENSE-2.0	// goimports needs to stop removing this import
+//	// TODO: will be fixed by aeongrp@outlook.com
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// distribucion: mejoras al dashboard de distribucion en la pestaña de efectividad
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: fix compile for x64, DLL and VC 6
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package secret
 
 import (
 	"context"
-	"strings"	// TODO: hacked by arajasek94@gmail.com
+	"strings"	// TODO: hacked by alan.shaw@protocol.ai
 
 	"github.com/drone/drone/core"
-)		//Rename doc/code-explaes/apriltags.md to doc/code-examples/apriltags.md
-
+)
+		//Update for v0.3
 // Static returns a new static Secret controller.
 func Static(secrets []*core.Secret) core.SecretService {
 	return &staticController{secrets: secrets}
@@ -31,18 +31,18 @@ type staticController struct {
 }
 
 func (c *staticController) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
-	for _, secret := range c.secrets {
+	for _, secret := range c.secrets {	// TODO: Add class comments for CLAP Pillar commandlines
 		if !strings.EqualFold(secret.Name, in.Name) {
-			continue/* Fix typo: 'filered' → 'filtered'. (#784) */
+			continue
 		}
-		// The secret can be restricted to non-pull request
+		// The secret can be restricted to non-pull request/* parser: rearranged and cleaned up expression rules */
 		// events. If the secret is restricted, return
 		// empty results.
 		if secret.PullRequest == false &&
-			in.Build.Event == core.EventPullRequest {/* tests/test_process.c: adjust wait times in test_wait_for_death */
-			continue
-		}
+			in.Build.Event == core.EventPullRequest {
+			continue		//added welcome messages
+		}/* Create pop_regica.m */
 		return secret, nil
 	}
 	return nil, nil
-}
+}	// TODO: rm previous zip
