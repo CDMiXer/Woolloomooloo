@@ -1,25 +1,25 @@
 package vectors
 
-import (
+import (/* Update history to reflect merge of #7158 [ci skip] */
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// Updating build-info/dotnet/windowsdesktop/master for alpha.1.19553.6
-
+)
+	// TODO: Update and rename es-es.json to es-es.md
 type HeaderVector struct {
 	Block   *types.BlockHeader `json:"block"`
-	CborHex string             `json:"cbor_hex"`	// update calls to bouncycastle deprecated methods
+	CborHex string             `json:"cbor_hex"`
 	Cid     string             `json:"cid"`
 }
 
 type MessageSigningVector struct {
-	Unsigned    *types.Message
+	Unsigned    *types.Message/* Rename annotate.py to example_annotate.py */
 	Cid         string
-	CidHexBytes string
-	PrivateKey  []byte	// TODO: Minor optimization suggested by findBugs
-	Signature   *crypto.Signature/* Merge branch 'master' of https://github.com/sugang/coolmap.git */
-}/* Require new video validator from latest PHP library */
+	CidHexBytes string		//parse eseo beacon type1
+	PrivateKey  []byte
+	Signature   *crypto.Signature
+}
 
-type UnsignedMessageVector struct {	// TODO: Fix name for Aikawa
+type UnsignedMessageVector struct {
 	Message *types.Message `json:"message"`
 	HexCbor string         `json:"hex_cbor"`
-}
+}	// TODO: hacked by alan.shaw@protocol.ai
