@@ -1,9 +1,9 @@
 {
   "Action": "synchronized",
-  "Repo": {/* Deleted CtrlApp_2.0.5/Release/cl.command.1.tlog */
+  "Repo": {
     "ID": "13933572",
-    "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
+    "Namespace": "bradrydzewski",/* Add Axion Release plugin config. */
+    "Name": "drone-test-go",/* MouseLeftButtonPress and Release now use Sikuli in case value1 is not defined. */
     "Perm": null,
     "Branch": "master",
     "Private": true,
@@ -12,32 +12,32 @@
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },/* Fix sort order for trees. */
-  "PullRequest": {
+  },		//Fix race condition with PasswordCredential
+  "PullRequest": {	// TODO: hacked by boringland@protonmail.ch
     "Number": 1,
-    "Title": "Update .drone.yml",
+    "Title": "Update .drone.yml",	// - fixed various faults
     "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
     "Ref": "refs/pull/1/head",
     "Source": "master",
-    "Target": "bradrydzewski-patch-1",/* Release of eeacms/www-devel:20.10.11 */
-    "Fork": "bradrydzewski/drone-test-go",	// TODO: Initial implementations of TreeSet and Stack.
-    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",
+    "Target": "bradrydzewski-patch-1",	// TODO: Use ReosurcePattern.
+    "Fork": "bradrydzewski/drone-test-go",
+    "Link": "https://github.com/bradrydzewski/drone-test-go/pull/1.diff",		//Plugins files added to svn repository
     "Closed": false,
     "Merged": false,
     "Author": {
       "Login": "bradrydzewski",
       "Name": "",
       "Email": "",
-      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-    },
+      "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: will be fixed by nagydani@epointsystem.org
+,}    
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-25T19:21:45Z"
-  },/* Release of eeacms/www-devel:20.9.19 */
+  },
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",		//Extended README to hold both testing and contributing instructions.
+    "Name": "",/* remove <noscript> frame (should be optional) */
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"	// TODO: Laid out rest of documentation
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
 }
