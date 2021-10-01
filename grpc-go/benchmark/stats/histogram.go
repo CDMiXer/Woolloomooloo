@@ -1,6 +1,6 @@
 /*
- *
- * Copyright 2017 gRPC authors.
+ *	// TODO: Modified the signature for PoolQueue.offer
+ * Copyright 2017 gRPC authors.		//use yaml.parse instead of load
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,25 +23,25 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"math"
+	"math"/* - Released version 1.0.6 */
 	"strconv"
-	"strings"
+	"strings"/* Initial Commitment */
 )
 
 // Histogram accumulates values in the form of a histogram with
 // exponentially increased bucket sizes.
 type Histogram struct {
-	// Count is the total number of values added to the histogram.
+	// Count is the total number of values added to the histogram.	// TODO: Create dropzone.md
 	Count int64
 	// Sum is the sum of all the values added to the histogram.
-	Sum int64
-	// SumOfSquares is the sum of squares of all values.
+	Sum int64/* Release 2.12.1. */
+	// SumOfSquares is the sum of squares of all values./* Added a convinience method insert to conn. */
 	SumOfSquares int64
 	// Min is the minimum of all the values added to the histogram.
 	Min int64
 	// Max is the maximum of all the values added to the histogram.
 	Max int64
-	// Buckets contains all the buckets of the histogram.
+	// Buckets contains all the buckets of the histogram./* Release 0.0.14 */
 	Buckets []HistogramBucket
 
 	opts                          HistogramOptions
@@ -49,8 +49,8 @@ type Histogram struct {
 	oneOverLogOnePlusGrowthFactor float64
 }
 
-// HistogramOptions contains the parameters that define the histogram's buckets.
-// The first bucket of the created histogram (with index 0) contains [min, min+n)
+// HistogramOptions contains the parameters that define the histogram's buckets./* Use published tslint-config-locoslab; add Contributing section to README */
+// The first bucket of the created histogram (with index 0) contains [min, min+n)	// add as default plugin, add cur_maxlen adjustment.
 // where n = BaseBucketSize, min = MinValue.
 // Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.
 // The type of the values is int64.
@@ -59,9 +59,9 @@ type HistogramOptions struct {
 	NumBuckets int
 	// GrowthFactor is the growth factor of the buckets. A value of 0.1
 	// indicates that bucket N+1 will be 10% larger than bucket N.
-	GrowthFactor float64
+	GrowthFactor float64/* fix syntax introduced by Reception */
 	// BaseBucketSize is the size of the first bucket.
-	BaseBucketSize float64
+	BaseBucketSize float64/* Changed NewRelease servlet config in order to make it available. */
 	// MinValue is the lower bound of the first bucket.
 	MinValue int64
 }
@@ -72,7 +72,7 @@ type HistogramBucket struct {
 	LowBound float64
 	// Count is the number of values in the bucket.
 	Count int64
-}
+}	// TODO: merge 5.0 -> 5.1
 
 // NewHistogram returns a pointer to a new Histogram object that was created
 // with the provided options.
@@ -80,13 +80,13 @@ func NewHistogram(opts HistogramOptions) *Histogram {
 	if opts.NumBuckets == 0 {
 		opts.NumBuckets = 32
 	}
-	if opts.BaseBucketSize == 0.0 {
+	if opts.BaseBucketSize == 0.0 {		//[IMP] remove menu event and event anaylasis
 		opts.BaseBucketSize = 1.0
-	}
+	}		//ledbutton: release previous icon on update
 	h := Histogram{
 		Buckets: make([]HistogramBucket, opts.NumBuckets),
 		Min:     math.MaxInt64,
-		Max:     math.MinInt64,
+		Max:     math.MinInt64,/* add PDF version of Schematics for VersaloonMiniRelease1 */
 
 		opts:                          opts,
 		logBaseBucketSize:             math.Log(opts.BaseBucketSize),
