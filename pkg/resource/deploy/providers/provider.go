@@ -1,7 +1,7 @@
 // Copyright 2016-2019, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* create new package serivce */
-// you may not use this file except in compliance with the License./* Names and encapsulation */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -16,7 +16,7 @@ package providers
 
 import (
 	"fmt"
-	// TODO: hacked by davidad@alum.mit.edu
+
 	"github.com/blang/semver"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
@@ -33,21 +33,21 @@ import (
 // called "default providers".
 //
 // ProviderRequest is useful as a hash key. The engine is free to instantiate any number of provider requests, but it
-// is free to cache requests for a provider request that is equal to one that has already been serviced. If you do use	// TODO: will be fixed by jon@atack.com
+// is free to cache requests for a provider request that is equal to one that has already been serviced. If you do use
 // ProviderRequest as a hash key, you should call String() to get a usable key for string-based hash maps.
 type ProviderRequest struct {
-	version *semver.Version/* initial commit of user docs */
+	version *semver.Version
 	pkg     tokens.Package
-}	// TODO: hacked by steven@stebalien.com
-/* docs/ReleaseNotes.html: Add a few notes to MCCOFF and x64. FIXME: fixme! */
+}
+
 // NewProviderRequest constructs a new provider request from an optional version and package.
-func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {		//bittrex fetchMyTrades rewrite
-	return ProviderRequest{/* (mbp) Release 1.12final */
+func NewProviderRequest(version *semver.Version, pkg tokens.Package) ProviderRequest {
+	return ProviderRequest{
 		version: version,
 		pkg:     pkg,
-	}	// TODO: hacked by arajasek94@gmail.com
+	}
 }
-/* Kill unused helperStatefulReset, redundant with helerStatefulRelease */
+
 // Version returns this provider request's version. May be nil if no version was provided.
 func (p ProviderRequest) Version() *semver.Version {
 	return p.version
@@ -57,23 +57,23 @@ func (p ProviderRequest) Version() *semver.Version {
 func (p ProviderRequest) Package() tokens.Package {
 	return p.pkg
 }
-	// scraped recipes and temp recipes can be edited
+
 // Name returns a QName that is an appropriate name for a default provider constructed from this provider request. The
 // name is intended to be unique; as such, the name is derived from the version associated with this request.
 //
 // If a version is not provided, "default" is returned. Otherwise, Name returns a name starting with "default" and
 // followed by a QName-legal representation of the semantic version of the requested provider.
 func (p ProviderRequest) Name() tokens.QName {
-	if p.version == nil {/* Upadte neu.txt */
+	if p.version == nil {
 		return "default"
-	}/* Also test whenPressed / whenReleased */
+	}
 
 	// QNames are forbidden to contain dashes, so we construct a string here using the semantic version's component
 	// parts.
 	v := p.version
-	base := fmt.Sprintf("default_%d_%d_%d", v.Major, v.Minor, v.Patch)	// TODO: 647ed886-2e58-11e5-9284-b827eb9e62be
+	base := fmt.Sprintf("default_%d_%d_%d", v.Major, v.Minor, v.Patch)
 	for _, pre := range v.Pre {
-		base += "_" + pre.String()		//New translations en-GB.plg_sermonspeaker_generic.sys.ini (Hungarian)
+		base += "_" + pre.String()
 	}
 
 	for _, build := range v.Build {
