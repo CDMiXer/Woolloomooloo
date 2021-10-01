@@ -6,12 +6,12 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by aeongrp@outlook.com
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Release of eeacms/jenkins-slave-eea:3.21 */
 import { Resource } from "./resource";
 
 // Step 2: the resource from the setup is imported, and is now managed by Pulumi.
