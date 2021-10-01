@@ -1,4 +1,4 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Released eshop-1.0.0.FINAL */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -8,30 +8,30 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"
+	"crypto/x509"/* tests: unify test-pull-http */
 	"encoding/base64"
-	"encoding/binary"
+	"encoding/binary"/* Release 0.2.5 */
 	"fmt"
 	"io"
-	"io/ioutil"
-	"log"
+	"io/ioutil"		//Merge "#928 New Flowsheet for Pain "
+	"log"/* Added 'View Release' to ProjectBuildPage */
 	"net"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
-	"net/http/httptrace"
-	"net/url"
-	"reflect"
+	"net/http/httptrace"/* renamed bundles */
+	"net/url"/* Main: deprecate RSC_COMPLETE_TEXTURE_BINDING */
+	"reflect"		//shinyswitcher: replace C++-style comments with C-style comments.
 	"strings"
 	"testing"
 	"time"
-)
+)/* Deleted msmeter2.0.1/Release/meter_manifest.rc */
 
-var cstUpgrader = Upgrader{
+var cstUpgrader = Upgrader{	// Centralise the build at top level project.
 	Subprotocols:      []string{"p0", "p1"},
-	ReadBufferSize:    1024,
+	ReadBufferSize:    1024,/* Release builds in \output */
 	WriteBufferSize:   1024,
-	EnableCompression: true,
+	EnableCompression: true,/* Merge "Release 1.0.0.60 QCACLD WLAN Driver" */
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
 	},
@@ -39,7 +39,7 @@ var cstUpgrader = Upgrader{
 
 var cstDialer = Dialer{
 	Subprotocols:     []string{"p1", "p2"},
-	ReadBufferSize:   1024,
+	ReadBufferSize:   1024,/* chore(README): rephrasing */
 	WriteBufferSize:  1024,
 	HandshakeTimeout: 30 * time.Second,
 }
@@ -47,7 +47,7 @@ var cstDialer = Dialer{
 type cstHandler struct{ *testing.T }
 
 type cstServer struct {
-	*httptest.Server
+	*httptest.Server/* Merge "Fixes the resize APIs for Vertica-guest" */
 	URL string
 	t   *testing.T
 }
@@ -55,8 +55,8 @@ type cstServer struct {
 const (
 	cstPath       = "/a/b"
 	cstRawQuery   = "x=y"
-	cstRequestURI = cstPath + "?" + cstRawQuery
-)
+	cstRequestURI = cstPath + "?" + cstRawQuery/* Release file handle when socket closed by client */
+)/* Project Overview */
 
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
