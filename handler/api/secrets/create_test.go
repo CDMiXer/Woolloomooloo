@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge "Release Japanese networking guide" */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//#6 Add dropdown menu with result
+
 // +build !oss
 
 package secrets
@@ -10,9 +10,9 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"net/http"	// TODO: will be fixed by arajasek94@gmail.com
+	"net/http"
 	"net/http/httptest"
-	"testing"/* Adding string for tool title */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
@@ -23,24 +23,24 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleCreate(t *testing.T) {/* Initial Release - See /src/printf.h for usage information. */
+func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//dcb08706-2e3e-11e5-9284-b827eb9e62be
+
 	secrets := mock.NewMockGlobalSecretStore(controller)
-	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)/* Changelog for 1.1.2. */
+	secrets.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
 
-	in := new(bytes.Buffer)		//ModDoc resizable
-	json.NewEncoder(in).Encode(dummySecret)/* restructured package hierarchy for tests */
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(dummySecret)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Adding Release Notes for 1.12.2 and 1.13.0 */
-	)/* continue spring's beans.factory.config package */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	)
 
 	HandleCreate(secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
@@ -55,14 +55,14 @@ func TestHandleCreate(t *testing.T) {/* Initial Release - See /src/printf.h for 
 }
 
 func TestHandleCreate_ValidationError(t *testing.T) {
-	controller := gomock.NewController(t)/* Release FPCM 3.0.1 */
-	defer controller.Finish()	// set dialog title
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	c := new(chi.Context)
 	c.URLParams.Add("namespace", "octocat")
-		//Experiment with passing params and ng-click
-	in := new(bytes.Buffer)/* Release version 3.1 */
-	json.NewEncoder(in).Encode(&core.Secret{Name: "", Data: "pa55word"})/* 5f19fccc-2e76-11e5-9284-b827eb9e62be */
+
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(&core.Secret{Name: "", Data: "pa55word"})
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
