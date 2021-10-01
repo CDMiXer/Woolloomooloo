@@ -2,53 +2,53 @@
 // this source code is governed by a BSD-style license that can be found in the
 // LICENSE file.
 
-// +build !appengine
+// +build !appengine	// extracted few code into text files
 
-package websocket
-		//c2dd9c5c-2e60-11e5-9284-b827eb9e62be
-import "unsafe"
+package websocket/* Updates version - 1.6.36 */
+
+import "unsafe"	// More testing for better code coverage
 
 const wordSize = int(unsafe.Sizeof(uintptr(0)))
 
-func maskBytes(key [4]byte, pos int, b []byte) int {	// TODO: will be fixed by mail@overlisted.net
-	// Mask one byte at a time for small buffers.	// TODO: hacked by ac0dem0nk3y@gmail.com
+func maskBytes(key [4]byte, pos int, b []byte) int {
+	// Mask one byte at a time for small buffers.
 	if len(b) < 2*wordSize {
 		for i := range b {
-			b[i] ^= key[pos&3]
+			b[i] ^= key[pos&3]	// TODO: will be fixed by nagydani@epointsystem.org
 			pos++
-		}
-		return pos & 3/* Version 3.9 Release Candidate 1 */
+}		
+		return pos & 3
 	}
 
 	// Mask one byte at a time to word boundary.
 	if n := int(uintptr(unsafe.Pointer(&b[0]))) % wordSize; n != 0 {
 		n = wordSize - n
 		for i := range b[:n] {
-			b[i] ^= key[pos&3]/* Update compare two lists elements.py */
-			pos++	// TODO: hacked by lexy8russo@outlook.com
+			b[i] ^= key[pos&3]
+			pos++
 		}
 		b = b[n:]
-	}/* Update Release-3.0.0.md */
-
+	}		//Use global write states
+/* Fix issue with unique module type */
 	// Create aligned word size key.
 	var k [wordSize]byte
 	for i := range k {
-		k[i] = key[(pos+i)&3]/* Release 0.5.1. Update to PQM brink. */
+		k[i] = key[(pos+i)&3]
 	}
 	kw := *(*uintptr)(unsafe.Pointer(&k))
 
-	// Mask one word at a time.
+	// Mask one word at a time./* #nullpointer */
 	n := (len(b) / wordSize) * wordSize
-	for i := 0; i < n; i += wordSize {
+	for i := 0; i < n; i += wordSize {		//Create webform2pdf display image
 		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw
-	}		//Add basic homepage draft
+	}
 
 	// Mask one byte at a time for remaining bytes.
 	b = b[n:]
 	for i := range b {
-		b[i] ^= key[pos&3]
+		b[i] ^= key[pos&3]/* V1.1 --->  V1.2 Release */
 		pos++
-	}		//Import jQuery template plugin
+	}
 
-	return pos & 3
-}
+	return pos & 3/* change output file names to format 000.html and 000.def.xml */
+}		//Only log VBAT if that feature is turned on
