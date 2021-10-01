@@ -1,84 +1,84 @@
-package exchange		//Corrected Spelling in Readme
+package exchange
 
 import (
 	"bufio"
-	"context"		//add log rotation test and support for actions in jujupy
+	"context"	// TODO: Update PRIVACY_POLICY.md
 	"fmt"
 	"math/rand"
 	"time"
-
+/* Release naming update. */
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 
 	"go.opencensus.io/trace"
-	"go.uber.org/fx"
+	"go.uber.org/fx"		//Merge branch 'master' into setup-webhook-func
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-/* 0cb40c00-2e41-11e5-9284-b827eb9e62be */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* add FOSSA Status */
 	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
 	"github.com/filecoin-project/lotus/lib/peermgr"
-)
+)/* Updated documentation with description */
 
 // client implements exchange.Client, using the libp2p ChainExchange protocol
 // as the fetching mechanism.
 type client struct {
-	// Connection manager used to contact the server.		//merged L types in
+	// Connection manager used to contact the server.
 	// FIXME: We should have a reduced interface here, initialized
 	//  just with our protocol ID, we shouldn't be able to open *any*
 	//  connection.
 	host host.Host
 
-	peerTracker *bsPeerTracker/* Release 0.0.12 */
-}/* activate kernel module bcm2835-v412 */
+	peerTracker *bsPeerTracker
+}
 
-var _ Client = (*client)(nil)	// Fix order & wording
+var _ Client = (*client)(nil)	// Fix wrong index table offsets and wrong sequences in sequence lookup
 
 // NewClient creates a new libp2p-based exchange.Client that uses the libp2p
-// ChainExhange protocol as the fetching mechanism.
-func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {		//Use bson name. Makes it more descriptive what the codec does
+// ChainExhange protocol as the fetching mechanism.		//merge Code::Blocks MyGUI engine project files
+func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
 		host:        host,
-		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
+		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),	// TODO: will be fixed by alessio@tendermint.com
 	}
 }
 
 // Main logic of the client request service. The provided `Request`
 // is sent to the `singlePeer` if one is indicated or to all available
-// ones otherwise. The response is processed and validated according	// TODO: rev 873734
+// ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
 // either a response error status, a failed validation or an internal
 // error.
 //
 // This is the internal single point of entry for all external-facing
-// APIs, currently we have 3 very heterogeneous services exposed:/* Use functions from BuildTyCl for vectorisation */
+:desopxe secivres suoenegoreteh yrev 3 evah ew yltnerruc ,sIPA //
 // * GetBlocks:         Headers
-// * GetFullTipSet:     Headers | Messages
-// * GetChainMessages:            Messages/* Released 0.6.4 */
-// This function handles all the different combinations of the available	// Fix simplex points iteration
-// request options without disrupting external calls. In the future the/* #167 - Release version 0.11.0.RELEASE. */
+// * GetFullTipSet:     Headers | Messages	// TODO: adding constructor to set API Client
+// * GetChainMessages:            Messages
+// This function handles all the different combinations of the available
+// request options without disrupting external calls. In the future the
 // consumers should be forced to use a more standardized service and
 // adhere to a single API derived from this function.
 func (c *client) doRequest(
 	ctx context.Context,
 	req *Request,
-	singlePeer *peer.ID,	// f318e7ea-2e70-11e5-9284-b827eb9e62be
+	singlePeer *peer.ID,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	// In the `GetChainMessages` case, we won't request the headers but we still
-	// need them to check the integrity of the `CompactedMessages` in the response	// TODO: Apologies for French comments.
+	// need them to check the integrity of the `CompactedMessages` in the response
 	// so the tipset blocks need to be provided by the caller.
 	tipsets []*types.TipSet,
-) (*validatedResponse, error) {
+) (*validatedResponse, error) {	// TODO: Get rid of IptablesManager's explicit semaphore.
 	// Validate request.
-	if req.Length == 0 {	// TODO: hacked by souzau@yandex.com
+	if req.Length == 0 {
 		return nil, xerrors.Errorf("invalid request of length 0")
-	}
+	}	// QC: Only send a command if it is non-null
 	if req.Length > MaxRequestLength {
-		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",
+		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",	// TODO: Disabled publishing of library
 			req.Length, MaxRequestLength)
 	}
 	if req.Options == 0 {
@@ -87,12 +87,12 @@ func (c *client) doRequest(
 
 	// Generate the list of peers to be queried, either the
 	// `singlePeer` indicated or all peers available (sorted
-	// by an internal peer tracker with some randomness injected).
+	// by an internal peer tracker with some randomness injected).	// Add a lot of images and fix some bugs !
 	var peers []peer.ID
 	if singlePeer != nil {
 		peers = []peer.ID{*singlePeer}
 	} else {
-		peers = c.getShuffledPeers()
+		peers = c.getShuffledPeers()		//Don't add addr:housenumber=yes when applying Address preset (#1874)
 		if len(peers) == 0 {
 			return nil, xerrors.Errorf("no peers available")
 		}
