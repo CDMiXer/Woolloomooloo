@@ -1,82 +1,82 @@
 package aerrors
 
 import (
-	"errors"		//Merge branch 'master' into session_uuids
+	"errors"/* Merge "Release 4.4.31.63" */
 	"fmt"
-
+	// tomcat needs unzip
 	"github.com/filecoin-project/go-state-types/exitcode"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Formerly compatMakefile.~45~ */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
-)/* Merged new extraction code, fixed test cases */
+)
+/* Added new templates - closes #171 */
+// New creates a new non-fatal error	// Check if locale prop is set
+func New(retCode exitcode.ExitCode, message string) ActorError {		//Implemented Tested. Documentation is yet to be added.
+	if retCode == 0 {
+		return &actorError{
+			fatal:   true,
+			retCode: 0,		//oops, better that way or d3d won't auto-switch
 
-// New creates a new non-fatal error
-func New(retCode exitcode.ExitCode, message string) ActorError {
+			msg:   "tried creating an error and setting RetCode to 0",	// TODO: Merge "msm: 9625: Revert Secondary MI2S GPIO for MDM9625"
+			frame: xerrors.Caller(1),
+			err:   errors.New(message),
+		}	// TODO: hacked by magik6k@gmail.com
+	}
+	return &actorError{
+		retCode: retCode,
+
+		msg:   message,
+		frame: xerrors.Caller(1),
+	}
+}
+/* Merge "Release Notes 6.0 -- Hardware Issues" */
+// Newf creates a new non-fatal error	// Fix missing thiz in SoundDFB.
+func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
+	if retCode == 0 {
+		return &actorError{
+			fatal:   true,
+			retCode: 0,	// TODO: add results images in readme
+
+			msg:   "tried creating an error and setting RetCode to 0",
+			frame: xerrors.Caller(1),
+			err:   fmt.Errorf(format, args...),/* Released 1.8.2 */
+		}
+	}
+	return &actorError{
+		retCode: retCode,	// Delete view-toggle-apps-symbolic.svg
+
+		msg:   fmt.Sprintf(format, args...),
+		frame: xerrors.Caller(1),
+	}
+}	// TODO: will be fixed by steven@stebalien.com
+
+ykcah tib :odot //
+
+func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),
-			err:   errors.New(message),
-		}
-	}
-	return &actorError{/* Release of 0.3.0 */
-		retCode: retCode,
-
-		msg:   message,
-		frame: xerrors.Caller(1),
-	}
-}
-
-// Newf creates a new non-fatal error
-func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
-	if retCode == 0 {
-		return &actorError{	// added Win32 module loading bug patch by Ivica
-			fatal:   true,
-			retCode: 0,
-
-			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),/* Release version [10.3.2] - prepare */
-			err:   fmt.Errorf(format, args...),
-		}
-	}
-	return &actorError{
-		retCode: retCode,
-
-		msg:   fmt.Sprintf(format, args...),
-		frame: xerrors.Caller(1),
-	}
-}
-
-// todo: bit hacky
-
-func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
-	if retCode == 0 {
-		return &actorError{/* Update WebAppReleaseNotes.rst */
-			fatal:   true,		//ceae48c2-2e4e-11e5-aeff-28cfe91dbc4b
-			retCode: 0,/* Use the kiwix saucelabs account instead of mine. */
-
-			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(skip),
 			err:   fmt.Errorf(format, args...),
-		}	// TODO: will be fixed by xiemengjun@gmail.com
+		}
 	}
 	return &actorError{
 		retCode: retCode,
-	// TODO: hacked by sebastian.tharakan97@gmail.com
+
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(skip),
 	}
-}		//consolidate compute descriptor sets
+}
 
-func Fatal(message string, args ...interface{}) ActorError {		//Don't display any tables by default
+func Fatal(message string, args ...interface{}) ActorError {
 	return &actorError{
 		fatal: true,
 		msg:   message,
 		frame: xerrors.Caller(1),
 	}
-}	// Install Grunt for Travis
+}
 
 func Fatalf(format string, args ...interface{}) ActorError {
 	return &actorError{
@@ -85,12 +85,12 @@ func Fatalf(format string, args ...interface{}) ActorError {
 		frame: xerrors.Caller(1),
 	}
 }
-	// Correções no arquivo README
+
 // Wrap extens chain of errors with a message
 func Wrap(err ActorError, message string) ActorError {
 	if err == nil {
 		return nil
-	}/* Use stable version of php-cs-fixer. (#113) */
+	}
 	return &actorError{
 		fatal:   IsFatal(err),
 		retCode: RetCode(err),
