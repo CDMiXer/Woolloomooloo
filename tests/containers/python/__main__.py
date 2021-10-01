@@ -1,4 +1,4 @@
-import pulumi	// TODO: Porting from personal repository.
+import pulumi
 
-config = pulumi.Config()	// TODO: hacked by witek@enjin.io
+config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
