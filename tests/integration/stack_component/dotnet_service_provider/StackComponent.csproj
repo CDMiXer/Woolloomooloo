@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Update dependency webpack-bundle-analyzer to v2.11.3 */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
->tcejorP/<
+	// TODO: 77c8c0e2-2d53-11e5-baeb-247703a38240
+</Project>
