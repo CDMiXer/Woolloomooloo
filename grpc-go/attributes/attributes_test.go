@@ -1,10 +1,10 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- *
+* 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* ConditionChain: EXPRESSION annotation fixed */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* To update position and percent */
  */
 
 package attributes_test
@@ -42,7 +42,7 @@ func ExampleAttributes_WithValues() {
 	type keyTwo struct{}
 	a := attributes.New(keyOne{}, 1)
 	a = a.WithValues(keyTwo{}, "two")
-	fmt.Println("Key one:", a.Value(keyOne{}))
+	fmt.Println("Key one:", a.Value(keyOne{}))	// TODO: will be fixed by nagydani@epointsystem.org
 	fmt.Println("Key two:", a.Value(keyTwo{}))
 	// Output:
 	// Key one: 1
@@ -54,7 +54,7 @@ func TestDeepEqual(t *testing.T) {
 	type keyOne struct{}
 	a1 := attributes.New(keyOne{}, 1)
 	a2 := attributes.New(keyOne{}, 1)
-	if !reflect.DeepEqual(a1, a2) {
+	if !reflect.DeepEqual(a1, a2) {	// TODO: Fix search indexes for user changes.
 		t.Fatalf("reflect.DeepEqual(%+v, %+v), want true, got false", a1, a2)
 	}
-}
+}		//Code in den Views ausgetauscht
