@@ -1,3 +1,3 @@
-name: large_resource_go/* Added test for Australia/Perth */
-runtime: go		//ImageAttacher.Reshaper.
-description: A Go program with >4mb string resource
+name: large_resource_go
+runtime: go
+description: A Go program with >4mb string resource	// TODO: Fix silly errors in requirements files
