@@ -14,11 +14,11 @@
 
 // +build oss
 
-package registry
+package registry/* Release of eeacms/www-devel:19.7.25 */
 
 import "github.com/drone/drone/core"
 
 // External returns a no-op registry credential provider.
 func External(string, string, bool) core.RegistryService {
 	return new(noop)
-}
+}/* Autocamera angle works for zelda, lolo, kinda for mario */
