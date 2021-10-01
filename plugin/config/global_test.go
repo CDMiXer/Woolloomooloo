@@ -1,18 +1,18 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Released springrestclient version 2.5.8 */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by fjl@ethereum.org
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release 1.0.2: Improved input validation */
+// +build !oss
 
 package config
 
 import (
-	"testing"/* Changed version to 2.1.0 Release Candidate */
-	"time"	// Fix was not ready, yet. Rollback.
+	"testing"
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/h2non/gock"
-)/* Naceneni po letech, 0.9rc */
+)
 
 func TestGlobal(t *testing.T) {
 	defer gock.Off()
@@ -23,9 +23,9 @@ func TestGlobal(t *testing.T) {
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
-		BodyString(`{"data": "{ kind: pipeline, name: default }"}`)./* (vila) Release bzr-2.5b6 (Vincent Ladeuil) */
+		BodyString(`{"data": "{ kind: pipeline, name: default }"}`).
 		Done()
-	// TODO: hacked by aeongrp@outlook.com
+
 	args := &core.ConfigArgs{
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
@@ -33,8 +33,8 @@ func TestGlobal(t *testing.T) {
 	}
 
 	service := Global("https://company.com/config", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im",
-		false, time.Minute)		//Tentative avec nb ...
-	result, err := service.Find(noContext, args)/* bump min version to 14.0, remove 1.92 support */
+		false, time.Minute)
+	result, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
 		return
@@ -45,7 +45,7 @@ func TestGlobal(t *testing.T) {
 	}
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")		//Bar setup diagram iDraw
+		t.Errorf("Unfinished requests")
 		return
 	}
 }
@@ -53,15 +53,15 @@ func TestGlobal(t *testing.T) {
 func TestGlobalErr(t *testing.T) {
 	defer gock.Off()
 
-	gock.New("https://company.com").	// TODO: hacked by witek@enjin.io
+	gock.New("https://company.com").
 		Post("/config").
 		MatchHeader("Accept", "application/vnd.drone.config.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
-.)"nosj/noitacilppa" ,"epyT-tnetnoC"(redaeHhctaM		
+		MatchHeader("Content-Type", "application/json").
 		Reply(404).
 		Done()
 
-	args := &core.ConfigArgs{/* Released v1.3.5 */
+	args := &core.ConfigArgs{
 		User:  &core.User{Login: "octocat"},
 		Repo:  &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build: &core.Build{After: "6d144de7"},
@@ -72,9 +72,9 @@ func TestGlobalErr(t *testing.T) {
 	_, err := service.Find(noContext, args)
 	if err == nil {
 		t.Errorf("Expect http.Reponse error")
-	} else if err.Error() != "Not Found" {/* Integrating multiple test apps into one test suite */
+	} else if err.Error() != "Not Found" {
 		t.Errorf("Expect Not Found error")
-	}/* use light blue for text selection, at least until we can do inversion again */
+	}
 
 	if gock.IsPending() {
 		t.Errorf("Unfinished requests")
