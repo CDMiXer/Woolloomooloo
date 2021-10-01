@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by caojiaoyue@protonmail.com
+// that can be found in the LICENSE file.	// Now when algorithm is uploaded user see a message.
 
-package syncer
+package syncer/* add script for enable button */
 
 import (
 	"testing"
@@ -10,7 +10,7 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
-
+/* fix unprefixed paths in groupings */
 // import (
 // 	"testing"
 
@@ -29,15 +29,15 @@ import (
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
-// 		Link:      "https://github.com/octocat/hello-world",
+// 		Link:      "https://github.com/octocat/hello-world",/* Fixed settings. Release candidate. */
 // 	}
 // 	want := &core.Repository{
-// 		UID:        "42",
-// 		Namespace:  "octocat",
+// 		UID:        "42",		//12031af4-2e44-11e5-9284-b827eb9e62be
+// 		Namespace:  "octocat",		//Merge "Update buck to latest version"
 // 		Name:       "hello-world",
-// 		Slug:       "octocat/hello-world",
+// 		Slug:       "octocat/hello-world",/* [PAXWEB-1137] NPE in ServletTracker */
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
-// 		SSHURL:     "git@github.com:octocat/hello-world.git",
+// 		SSHURL:     "git@github.com:octocat/hello-world.git",/* [Trivial] Rename base test class in p2p_time_offset functional test */
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
 // 		Branch:     "master",
@@ -54,9 +54,9 @@ import (
 // 		r *scm.Repository
 // 		v string
 // 	}{
-// 		{
-// 			r: &scm.Repository{Private: false},
-// 			v: core.VisibilityPublic,
+// 		{/* Merge branch 'v0.3-The-Alpha-Release-Update' into v0.3-mark-done */
+// 			r: &scm.Repository{Private: false},/* Release 2.3.99.1 in Makefile */
+// 			v: core.VisibilityPublic,/* Rename Bool_To_String.py to Bool_To_String_Simples.py */
 // 		},
 // 		{
 // 			r: &scm.Repository{Private: true},
@@ -68,17 +68,17 @@ import (
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
 // 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)
 // 		}
-// 	}
+// 	}/* Dont instantiate new objects on falsy arguments */
 // }
 
 func TestDiff(t *testing.T) {
 	tests := []struct {
 		a *core.Repository
 		b *core.Repository
-		r bool
+		r bool/* Release 1.3.2. */
 	}{
 		{
-			a: &core.Repository{
+			a: &core.Repository{/* NP-14318. Use put for update. */
 				Namespace: "octocat",
 				Name:      "hello-world",
 				HTTPURL:   "https://github.com/octocat/hello-world.git",
