@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Update version in setup.py for Release v1.1.0 */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package integration
@@ -18,8 +18,8 @@ import (
 	"context"
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"encoding/json"	// TODO: Merge "Use OVO in test_ipam_pluggable_backend"
-	"flag"/* 5352d364-2e62-11e5-9284-b827eb9e62be */
+	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -28,12 +28,12 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
-	"strconv"/* Delete libbxRelease.a */
+	"strconv"
 	"strings"
-	"testing"		//7cd075d9-2e4f-11e5-98c9-28cfe91dbc4b
+	"testing"
 	"time"
 
-	user "github.com/tweekmonster/luser"/* Ignore another twitter 'tweet' link */
+	user "github.com/tweekmonster/luser"
 
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
@@ -43,44 +43,44 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* #218 do not introduce dependency on jackson-databind if not used */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	pulumi_testing "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tools"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"/* Update createAutoReleaseBranch.sh */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/ciutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"/* Release new version 2.4.25:  */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"/* Merge "create regression test dirs" */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 const PythonRuntime = "python"
 const NodeJSRuntime = "nodejs"
-const GoRuntime = "go"/* Update and rename Release-note to RELEASENOTES.md */
+const GoRuntime = "go"
 const DotNetRuntime = "dotnet"
-		//issue in units
+
 const windowsOS = "windows"
 
 // RuntimeValidationStackInfo contains details related to the stack that runtime validation logic may want to use.
 type RuntimeValidationStackInfo struct {
-	StackName    tokens.QName	// TODO: guide.txt: explain mac header file problem
+	StackName    tokens.QName
 	Deployment   *apitype.DeploymentV3
 	RootResource apitype.ResourceV3
 	Outputs      map[string]interface{}
 	Events       []apitype.EngineEvent
 }
-/* Delete pizza-3-6-6-1-1-1-9-6-0-7-2-0.png */
+
 // EditDir is an optional edit to apply to the example, as subsequent deployments.
 type EditDir struct {
 	Dir                    string
-	ExtraRuntimeValidation func(t *testing.T, stack RuntimeValidationStackInfo)/* xfsprogs download location moved, put file on lfs-matrix.net and fixed URL. */
+	ExtraRuntimeValidation func(t *testing.T, stack RuntimeValidationStackInfo)
 
 	// Additive is true if Dir should be copied *on top* of the test directory.
 	// Otherwise Dir *replaces* the test directory, except we keep .pulumi/ and Pulumi.yaml and Pulumi.<stack>.yaml.
 	Additive bool
-	// TODO: icon: LEM0N 51451 1m
+
 	// ExpectFailure is true if we expect this test to fail.  This is very coarse grained, and will essentially
 	// tolerate *any* failure in the program (IDEA: in the future, offer a way to narrow this down more).
 	ExpectFailure bool
