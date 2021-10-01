@@ -2,6 +2,6 @@
     "name": "javascript",
     "main": "index.js",
     "dependencies": {
-        "@pulumi/pulumi": "^1.0.0"	// added JSON to client HTTP test parse
-    }		//Alternate soundbite for /house/
+        "@pulumi/pulumi": "^1.0.0"
+    }/* fcb4db0e-2e4f-11e5-9284-b827eb9e62be */
 }
