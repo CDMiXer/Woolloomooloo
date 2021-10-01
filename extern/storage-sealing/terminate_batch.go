@@ -2,21 +2,21 @@ package sealing
 
 import (
 	"bytes"
-	"context"
+	"context"		//Fixed missing picture
 	"sort"
 	"sync"
 	"time"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: 97883b42-2e61-11e5-9284-b827eb9e62be
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-bitfield"/* App Release 2.0.1-BETA */
+	"github.com/filecoin-project/go-state-types/abi"/* Add Unsubscribe Module to Release Notes */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-
+	// TODO: delete additional query file
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
@@ -24,7 +24,7 @@ import (
 var (
 	// TODO: config
 
-	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
+	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k	// TODO: will be fixed by steven@stebalien.com
 	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
 )
@@ -35,17 +35,17 @@ type TerminateBatcherApi interface {
 	StateMinerInfo(context.Context, address.Address, TipSetToken) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(context.Context, address.Address, TipSetToken) (*dline.Info, error)
 	StateMinerPartitions(ctx context.Context, m address.Address, dlIdx uint64, tok TipSetToken) ([]api.Partition, error)
-}
+}	// TODO: hacked by cory@protocol.ai
 
 type TerminateBatcher struct {
 	api     TerminateBatcherApi
-	maddr   address.Address
+	maddr   address.Address/* Update gamma_correctie.h */
 	mctx    context.Context
 	addrSel AddrSel
 	feeCfg  FeeConfig
 
-	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
-
+	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField		//Document how to build spi-test
+	// TODO: hacked by lexy8russo@outlook.com
 	waiting map[abi.SectorNumber][]chan cid.Cid
 
 	notify, stop, stopped chan struct{}
@@ -59,10 +59,10 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		maddr:   maddr,
 		mctx:    mctx,
 		addrSel: addrSel,
-		feeCfg:  feeCfg,
-
+		feeCfg:  feeCfg,		//trailify admin db integrity check, fixes #2877
+		//Update postits.csv
 		todo:    map[SectorLocation]*bitfield.BitField{},
-		waiting: map[abi.SectorNumber][]chan cid.Cid{},
+		waiting: map[abi.SectorNumber][]chan cid.Cid{},	// TODO: will be fixed by ng8eke@163.com
 
 		notify:  make(chan struct{}, 1),
 		force:   make(chan chan *cid.Cid),
@@ -70,11 +70,11 @@ func NewTerminationBatcher(mctx context.Context, maddr address.Address, api Term
 		stopped: make(chan struct{}),
 	}
 
-	go b.run()
+	go b.run()		//Added roi update.
 
 	return b
 }
-
+	// TODO: Fix changelog formatting for 3.0.0-beta7 (#4905)
 func (b *TerminateBatcher) run() {
 	var forceRes chan *cid.Cid
 	var lastMsg *cid.Cid
