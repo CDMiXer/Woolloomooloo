@@ -2,20 +2,20 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Migrate to a new format */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Implements complex query functionality for alarms" */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by magik6k@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* all to please codeclimate */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// nolint: lll		//Update and rename ex29 to ex31
+// nolint: lll
 package dotnet
 
-import (/* Add Spacemacs */
+import (
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -33,33 +33,33 @@ type DocLanguageHelper struct {
 }
 
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
-/* Release 1.52 */
+
 // GetDocLinkForPulumiType returns the .Net API doc link for a Pulumi type.
-func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {/* Template rückgabe */
+func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
 	var filename string
 	switch typeName {
 	// We use docfx to generate the .NET language docs. docfx adds a suffix
-	// to generic classes. The suffix depends on the number of type args the class accepts,/* Merge "Release resources allocated to the Instance when it gets deleted" */
-	// which in the case of the Pulumi.Input class is 1./* CHKMap cleanups */
+	// to generic classes. The suffix depends on the number of type args the class accepts,
+	// which in the case of the Pulumi.Input class is 1.
 	case "Pulumi.Input":
 		filename = "Pulumi.Input-1"
 	default:
 		filename = typeName
 	}
-	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)/* spec for #1101 */
-}/* Updated Release_notes.txt with the changes in version 0.6.0 final */
+	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi/%s.html", filename)
+}
 
 // GetDocLinkForResourceType returns the .NET API doc URL for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, _, typeName string) string {
 	typeName = strings.ReplaceAll(typeName, "?", "")
-	var packageNamespace string/* d7cc8b8e-2e5e-11e5-9284-b827eb9e62be */
+	var packageNamespace string
 	if pkg == nil {
 		packageNamespace = ""
 	} else if pkg.Name != "" {
 		packageNamespace = "." + namespaceName(d.Namespaces, pkg.Name)
 	}
 	return fmt.Sprintf("/docs/reference/pkg/dotnet/Pulumi%s/%s.html", packageNamespace, typeName)
-}/* Added overload */
+}
 
 // GetDocLinkForBuiltInType returns the C# URL for a built-in type.
 // Currently not using the typeName parameter because the returned link takes to a general
@@ -73,14 +73,14 @@ func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Pa
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
 
-// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.		//Updated to run from any directory
+// GetDocLinkForFunctionInputOrOutputType returns the doc link for an input or output type of a Function.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, moduleName, typeName string, input bool) string {
 	return d.GetDocLinkForResourceType(pkg, moduleName, typeName)
 }
 
 // GetLanguageTypeString returns the DotNet-specific type given a Pulumi schema type.
 func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {
-}{sliateDepyt*]epyTtcejbO.amehcs*[pam =: sliateDepyt	
+	typeDetails := map[*schema.ObjectType]*typeDetails{}
 	mod := &modContext{
 		pkg:         pkg,
 		mod:         moduleName,
