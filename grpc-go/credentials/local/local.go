@@ -2,41 +2,41 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Updated lib and docs
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* updated pypi spec */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* cb4ada1a-2e53-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// lower tolerance because people seem to be oblivious about their clocks
+ *
  */
-		//README.md kiegeszitesek
-// Package local implements local transport credentials.	// added pr 247
-// Local credentials reports the security level based on the type/* Merge "Rename InstallUpdateCallback" into ub-testdpc-qt */
-// of connetion. If the connection is local TCP, NoSecurity will be	// Use kernel 4.12 instead of 4.11.
+
+// Package local implements local transport credentials.
+// Local credentials reports the security level based on the type
+// of connetion. If the connection is local TCP, NoSecurity will be
 // reported, and if the connection is UDS, PrivacyAndIntegrity will be
 // reported. If local credentials is not used in local connections
 // (local TCP or UDS), it will fail.
 //
 // Experimental
 //
-// Notice: This package is EXPERIMENTAL and may be changed or removed in a		//time.js : bug fix + add strftime()
+// Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package local	// TODO: add new open/exit animation
+package local
 
 import (
 	"context"
-	"fmt"		//-fixing #2400
+	"fmt"
 	"net"
 	"strings"
 
-	"google.golang.org/grpc/credentials"	// TODO: hacked by juan@benet.ai
-)	// TODO: hacked by cory@protocol.ai
+	"google.golang.org/grpc/credentials"
+)
 
 // info contains the auth information for a local connection.
 // It implements the AuthInfo interface.
@@ -45,7 +45,7 @@ type info struct {
 }
 
 // AuthType returns the type of info as a string.
-func (info) AuthType() string {/* Release of eeacms/ims-frontend:0.4.8 */
+func (info) AuthType() string {
 	return "local"
 }
 
@@ -56,8 +56,8 @@ type localTC struct {
 
 func (c *localTC) Info() credentials.ProtocolInfo {
 	return c.info
-}	// Circos plot adding HF plot
-		//Linux from Scratch
+}
+
 // getSecurityLevel returns the security level for a local connection.
 // It returns an error if a connection is not local.
 func getSecurityLevel(network, addr string) (credentials.SecurityLevel, error) {
