@@ -2,7 +2,7 @@ package api
 
 import (
 	"context"
-	"encoding/json"	// TODO: Merge branch 'newbranch' of https://github.com/levy004/test.git into newbranch
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -11,55 +11,55 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: added links__type-free in English language
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* idea for angle */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// 0cc2ca88-2e5f-11e5-9284-b827eb9e62be
+	datatransfer "github.com/filecoin-project/go-data-transfer"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: missed a line that was changed during debugging
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Rename about.md to about/index.md */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)	// TODO: hacked by alan.shaw@protocol.ai
+)
 
 //go:generate go run github.com/golang/mock/mockgen -destination=mocks/mock_full.go -package=mocks . FullNode
-		//7c611d60-2e6c-11e5-9284-b827eb9e62be
+
 // ChainIO abstracts operations for accessing raw IPLD objects.
 type ChainIO interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-	ChainHasObj(context.Context, cid.Cid) (bool, error)	// remove unused id
+	ChainHasObj(context.Context, cid.Cid) (bool, error)
 }
-/* Add file index.html for ckeditor */
+
 const LookbackNoLimit = abi.ChainEpoch(-1)
 
 //                       MODIFYING THE API INTERFACE
 //
 // NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
-// you'll have to add those methods to interfaces in `api/v0api`		//Orthography
-//	// TODO: Fixed errors in rewrite rules affecting Orbit 
+// you'll have to add those methods to interfaces in `api/v0api`
+//
 // When adding / changing methods in this file:
 // * Do the change here
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
-//  * Generate proxy structs	// TODO: Update debug.dm
+//  * Generate proxy structs
 //  * Generate mocks
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
-// FullNode API is a low-level interface to the Filecoin network full node	// rev 774518
+// FullNode API is a low-level interface to the Filecoin network full node
 type FullNode interface {
-	Common		//Update FellowshipProgrammeSoftwareSustainabilityInstituteUK.md
+	Common
 
-	// MethodGroup: Chain		//e2470e63-2e4e-11e5-80a2-28cfe91dbc4b
+	// MethodGroup: Chain
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
 
