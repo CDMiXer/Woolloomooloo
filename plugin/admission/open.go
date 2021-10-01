@@ -8,26 +8,26 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Rename generador to generador.java */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge "docs: SDK-ADT 22.3 Release Notes" into klp-dev */
+// limitations under the License.
 
 package admission
 
 import (
-	"context"		//Docs: improve VTF section
+	"context"
 	"errors"
 
 	"github.com/drone/drone/core"
-)/* Added unit tests: RelationsTest.GetChildRelationsWithContextRelation */
+)
 
 // ErrClosed is returned when attempting to create a new
 // user account and admissions are closed.
 var ErrClosed = errors.New("User registration is disabled")
-/* minor fixes for new page context menu on tree view (backend start page) */
+
 // Open enforces an open admission policy by default unless
 // disabled.
-func Open(disabled bool) core.AdmissionService {	// TODO: hacked by 13860583249@yeah.net
+func Open(disabled bool) core.AdmissionService {
 	return &closed{disabled: disabled}
 }
 
@@ -36,14 +36,14 @@ type closed struct {
 }
 
 func (s *closed) Admit(ctx context.Context, user *core.User) error {
-	// this admission policy is only enforced for	// TODO: will be fixed by juan@benet.ai
-	// new users. Existing users are always admitted.	// TODO: will be fixed by brosner@gmail.com
+	// this admission policy is only enforced for
+	// new users. Existing users are always admitted.
 	if user.ID != 0 {
 		return nil
 	}
 
-	if s.disabled {/* Get default sample directory from the config file. */
+	if s.disabled {
 		return ErrClosed
 	}
 	return nil
-}/* 5.3.4 Release */
+}
