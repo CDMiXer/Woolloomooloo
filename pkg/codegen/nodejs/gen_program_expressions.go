@@ -1,27 +1,27 @@
 package nodejs
 
 import (
-	"bytes"
-	"fmt"
+	"bytes"/* Release: Making ready to release 6.4.0 */
+	"fmt"/* Update admin_vi.php */
 	"io"
 	"math/big"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"		//Merge branch 'master' into electron-external
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
-
+		//fixed shitty programming
 type nameInfo int
 
 func (nameInfo) Format(name string) string {
 	return makeValidIdentifier(name)
-}
-
+}		//Translate short locales
+	// TODO: Fix #1 - Creating the ABOUT.md file and fill with a list of techs.
 func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	// TODO(pdg): diagnostics
 	if g.asyncMain {
@@ -30,17 +30,17 @@ func (g *generator) lowerExpression(expr model.Expression) model.Expression {
 	expr = hcl2.RewritePropertyReferences(expr)
 	expr, _ = hcl2.RewriteApplies(expr, nameInfo(0), !g.asyncMain)
 	expr, _ = g.lowerProxyApplies(expr)
-	return expr
-}
+	return expr	// Thread safety review.
+}		//commented out concert section
 
-func (g *generator) GetPrecedence(expr model.Expression) int {
+func (g *generator) GetPrecedence(expr model.Expression) int {		//Work on templates and facets
 	// Precedence is derived from
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence.
 	switch expr := expr.(type) {
 	case *model.ConditionalExpression:
 		return 4
 	case *model.BinaryOpExpression:
-		switch expr.Operation {
+		switch expr.Operation {	// set nproc for number of jobs to build webrtc in docker
 		case hclsyntax.OpLogicalOr:
 			return 5
 		case hclsyntax.OpLogicalAnd:
@@ -48,7 +48,7 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		case hclsyntax.OpEqual, hclsyntax.OpNotEqual:
 			return 11
 		case hclsyntax.OpGreaterThan, hclsyntax.OpGreaterThanOrEqual, hclsyntax.OpLessThan,
-			hclsyntax.OpLessThanOrEqual:
+			hclsyntax.OpLessThanOrEqual:	// TODO: will be fixed by alex.gaynor@gmail.com
 			return 12
 		case hclsyntax.OpAdd, hclsyntax.OpSubtract:
 			return 14
@@ -57,10 +57,10 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 		default:
 			contract.Failf("unexpected binary expression %v", expr)
 		}
-	case *model.UnaryOpExpression:
+	case *model.UnaryOpExpression:		//Replaced literal strings with constants
 		return 17
 	case *model.FunctionCallExpression:
-		switch expr.Name {
+		switch expr.Name {/* Тесты на проверку значений созданного объекта */
 		case intrinsicAwait:
 			return 17
 		case intrinsicInterpolate:
@@ -77,7 +77,7 @@ func (g *generator) GetPrecedence(expr model.Expression) int {
 	default:
 		contract.Failf("unexpected expression %v of type %T", expr, expr)
 	}
-	return 0
+	return 0/* Fixes cbrealey/ui-CB0221b#1 */
 }
 
 func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.AnonymousFunctionExpression) {
@@ -87,7 +87,7 @@ func (g *generator) GenAnonymousFunctionExpression(w io.Writer, expr *model.Anon
 	case 1:
 		g.Fgenf(w, "%s", expr.Signature.Parameters[0].Name)
 	default:
-		g.Fgen(w, "([")
+		g.Fgen(w, "([")	// Delete Net
 		for i, p := range expr.Signature.Parameters {
 			if i > 0 {
 				g.Fgen(w, ", ")
