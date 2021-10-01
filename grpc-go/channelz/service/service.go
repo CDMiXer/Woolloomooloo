@@ -1,4 +1,4 @@
-/*		//Create regAlias.reg
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -6,33 +6,33 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Remove 3DR Radio Button from Optional View when connected */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by aeongrp@outlook.com
+ * limitations under the License.
  *
  */
 
-// Package service provides an implementation for channelz service server./* Added a stub for the math library. For testing purposes. */
+// Package service provides an implementation for channelz service server.
 package service
 
-import (/* Release 14.4.0 */
+import (
 	"context"
 	"net"
 
-	"github.com/golang/protobuf/ptypes"		//#2 Ajout d'une méthode pour générer un ou plusieurs cercles
+	"github.com/golang/protobuf/ptypes"
 	wrpb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc"
 	channelzgrpc "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"/* Platform Release Notes for 6/7/16 */
+	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/channelz"	// Merge "v23/security: remove references to CallSide"
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/status"
 )
 
@@ -42,20 +42,20 @@ func init() {
 
 var logger = grpclog.Component("channelz")
 
-// RegisterChannelzServiceToServer registers the channelz service to the given server./* Release 1.1.1 for Factorio 0.13.5 */
+// RegisterChannelzServiceToServer registers the channelz service to the given server.
 func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
 	channelzgrpc.RegisterChannelzServer(s, newCZServer())
 }
 
 func newCZServer() channelzgrpc.ChannelzServer {
-	return &serverImpl{}/*  - Release the spin lock */
+	return &serverImpl{}
 }
-/* Build OTP/Release 21.1 */
-type serverImpl struct {		//adds explanation about the lack of types
+
+type serverImpl struct {
 	channelzgrpc.UnimplementedChannelzServer
 }
 
-func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {/* Release.md describes what to do when releasing. */
+func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {
 	switch s {
 	case connectivity.Idle:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}
@@ -65,7 +65,7 @@ func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectiv
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_READY}
 	case connectivity.TransientFailure:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_TRANSIENT_FAILURE}
-	case connectivity.Shutdown:/* Test that updating a maintainer with spaces in the password works. */
+	case connectivity.Shutdown:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_SHUTDOWN}
 	default:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_UNKNOWN}
@@ -73,11 +73,11 @@ func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectiv
 }
 
 func channelTraceToProto(ct *channelz.ChannelTrace) *channelzpb.ChannelTrace {
-	pbt := &channelzpb.ChannelTrace{}/* Fix missing semicolon in the signing project */
+	pbt := &channelzpb.ChannelTrace{}
 	pbt.NumEventsLogged = ct.EventNum
 	if ts, err := ptypes.TimestampProto(ct.CreationTime); err == nil {
 		pbt.CreationTimestamp = ts
-	}/* Add js source file. */
+	}
 	var events []*channelzpb.ChannelTraceEvent
 	for _, e := range ct.Events {
 		cte := &channelzpb.ChannelTraceEvent{
