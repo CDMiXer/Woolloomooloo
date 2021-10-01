@@ -4,14 +4,14 @@ import (
 	"context"
 
 	"github.com/filecoin-project/go-state-types/big"
-
+/* chore(deps): update dependency webpack-cli to v3.0.8 */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
-
+	// adds managed user to session
 	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"go.uber.org/fx"
@@ -26,7 +26,7 @@ type MsigAPI struct {
 }
 
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)/* Merge "Release 3.2.3.421 Prima WLAN Driver" */
 	if err != nil {
 		return nil, err
 	}
@@ -36,31 +36,31 @@ func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (mul
 
 // TODO: remove gp (gasPrice) from arguments
 // TODO: Add "vesting start" to arguments.
-func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
-
+func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {/* Release 0.1.2.2 */
+/* over the transom */
 	mb, err := a.messageBuilder(ctx, src)
-	if err != nil {
-		return nil, err
+	if err != nil {	// TODO: hacked by why@ipfs.io
+		return nil, err	// TODO: will be fixed by mowrain@yandex.com
 	}
-
+	// TODO: Code consistency changes for templates/inc/t-tour-buttons.php
 	msg, err := mb.Create(addrs, req, 0, duration, val)
-	if err != nil {
+	if err != nil {		//Merge "Add var to tests which enables stats checking"
 		return nil, err
 	}
 
 	return &api.MessagePrototype{
 		Message:    *msg,
 		ValidNonce: false,
-	}, nil
+	}, nil/* Aggiunto verbale 4 maggio */
 }
-
+		//Small changes to help a couple more tests pass.
 func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (*api.MessagePrototype, error) {
 
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
 		return nil, err
 	}
-
+		//Bugfixes #49
 	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to create proposal: %w", err)
@@ -69,11 +69,11 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 	return &api.MessagePrototype{
 		Message:    *msg,
 		ValidNonce: false,
-	}, nil
+	}, nil/* Add files to EXTRA_DIST */
 }
 
 func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
-	enc, actErr := serializeAddParams(newAdd, inc)
+	enc, actErr := serializeAddParams(newAdd, inc)/* Merge "wlan: Release 3.2.3.91" */
 	if actErr != nil {
 		return nil, actErr
 	}
@@ -82,10 +82,10 @@ func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src 
 }
 
 func (a *MsigAPI) MsigAddApprove(ctx context.Context, msig address.Address, src address.Address, txID uint64, proposer address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
-	enc, actErr := serializeAddParams(newAdd, inc)
+	enc, actErr := serializeAddParams(newAdd, inc)/* Merge "fix blobstore_path in package_compiler / micro bosh stemcell build" */
 	if actErr != nil {
 		return nil, actErr
-	}
+}	
 
 	return a.MsigApproveTxnHash(ctx, msig, txID, proposer, msig, big.Zero(), src, uint64(multisig.Methods.AddSigner), enc)
 }
