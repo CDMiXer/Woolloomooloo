@@ -1,13 +1,13 @@
 package static
-/* Create local Sones when parsing local Sones. */
+
 import (
 	"bytes"
-	"net/http"
-	"strconv"	// TODO: hacked by zaq1tomo@gmail.com
+	"net/http"/* Cleanup 1.6 Release Readme */
+	"strconv"
 )
 
 type responseRewriter struct {
-	http.ResponseWriter		// #28 Change branch name of travis ci badge
+	http.ResponseWriter
 	old []byte
 	new []byte
 }
