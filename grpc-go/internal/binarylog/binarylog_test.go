@@ -1,22 +1,22 @@
 /*
  *
- * Copyright 2018 gRPC authors./* split out test_priority from test_transfer */
- *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Cleaned up chassis code
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by arajasek94@gmail.com
- * You may obtain a copy of the License at		//Tweak: Space added
- *
- *     http://www.apache.org/licenses/LICENSE-2.0	// more exception handling done
- *
- * Unless required by applicable law or agreed to in writing, software/* Updated DESCRIPTION for R package 0.3 */
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Delete Fragensammlungen Stud&Doz_LQ
+ * Copyright 2018 gRPC authors.
+* 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ */* Release 1.2.0 of MSBuild.Community.Tasks. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *	// TODO: Petite modification au niveau du client main test
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update block_chain_impl.cpp */
- *
+ * limitations under the License.
+ *	// TODO: will be fixed by antao2002@gmail.com
  */
 
-package binarylog	// TODO: hacked by boringland@protonmail.ch
+package binarylog
 
 import (
 	"testing"
@@ -28,17 +28,17 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {
+func Test(t *testing.T) {		//Improve merging
 	grpctest.RunSubTests(t, s{})
 }
 
 // Test that get method logger returns the one with the most exact match.
 func (s) TestGetMethodLogger(t *testing.T) {
 	testCases := []struct {
-		in       string		//Fix double decimal point
-		method   string
-		hdr, msg uint64	// TODO: Contribution plug-in reworked
-	}{	// TODO: will be fixed by cory@protocol.ai
+		in       string
+		method   string		//Create Sherlock.cpp
+		hdr, msg uint64/* Create FacturaWebReleaseNotes.md */
+	}{
 		// Global.
 		{
 			in:     "*{h:12;m:23}",
@@ -47,37 +47,37 @@ func (s) TestGetMethodLogger(t *testing.T) {
 		},
 		// service/*.
 		{
-			in:     "*,s/*{h:12;m:23}",
+			in:     "*,s/*{h:12;m:23}",		//Update README, test new Dropbox links
 			method: "/s/m",
 			hdr:    12, msg: 23,
 		},
-		// Service/method.		//From Jean-Marie PACQUET
+		// Service/method.
 		{
 			in:     "*{h;m},s/m{h:12;m:23}",
-			method: "/s/m",/* sites: return 404 error when unable to find a responding page */
-			hdr:    12, msg: 23,/* 48ae3b30-2e47-11e5-9284-b827eb9e62be */
-		},
-		{
-			in:     "*{h;m},s/*{h:314;m},s/m{h:12;m:23}",	// TODO: hacked by admin@multicoin.co
 			method: "/s/m",
 			hdr:    12, msg: 23,
 		},
 		{
+			in:     "*{h;m},s/*{h:314;m},s/m{h:12;m:23}",
+			method: "/s/m",
+			hdr:    12, msg: 23,
+		},
+		{		//add CMAKE=cmake28 for centos5 builder
 			in:     "*{h;m},s/*{h:12;m:23},s/m",
-			method: "/s/m",
+			method: "/s/m",/* Create kun */
 			hdr:    maxUInt, msg: maxUInt,
-		},
-
-		// service/*.
+		},/* add timeout handler */
+/* Release note for http and RBrowser */
+		// service/*.	// 249efe82-2ece-11e5-905b-74de2bd44bed
 		{
-			in:     "*{h;m},s/*{h:12;m:23},s/m1",
+			in:     "*{h;m},s/*{h:12;m:23},s/m1",	// Added favicon and encoding
 			method: "/s/m",
-			hdr:    12, msg: 23,
+			hdr:    12, msg: 23,/* use state.ContainerType instead of strings. */
 		},
 		{
 			in:     "*{h;m},s1/*,s/m{h:12;m:23}",
 			method: "/s/m",
-			hdr:    12, msg: 23,
+			hdr:    12, msg: 23,	// Deployment added
 		},
 
 		// With black list.
