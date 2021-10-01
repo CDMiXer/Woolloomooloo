@@ -1,5 +1,5 @@
-{	// added a testclass for tv -> episodes and shows
-  "version": "0.0.1",/* Release Cadastrapp v1.3 */
+{
+  "version": "0.0.1",
   "name": "plant-provider",
   "resources": {
     "plant-provider:tree/v1:RubberTree": {
@@ -8,7 +8,7 @@
           "$ref": "#/types/plant-provider::Container"
         },
         "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// TODO: hacked by davidad@alum.mit.edu
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
         },
         "farm": {
           "oneOf": [
@@ -18,31 +18,31 @@
         }
       },
       "properties": {
-        "container": {		//Merge branch 'master' into rectangleGrid
+        "container": {
           "$ref": "#/types/plant-provider::Container"
-        },/* flower.png for testing purposes. */
-        "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"	// lxdm_post_login_script.py should be lxdm_post_login.py
         },
-        "farm": {/* Fixed a few problems with entity config and entities. */
+        "type": {
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
+        },
+        "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
           ]
         }
-      },	// TODO: Delete Classes
+      },
       "required": ["type"],
       "requiredInputs": ["type"]
     }
   },
-  "types": {/* Merge branch 'release/2.10.0-Release' into develop */
-    "plant-provider::Container": {	// uprava-pozadie, pismo
-      "type": "object",		//Translation optimisation
+  "types": {
+    "plant-provider::Container": {
+      "type": "object",
       "properties": {
-        "size": {	// TODO: hacked by m-ou.se@m-ou.se
-"eziSreniatnoC::redivorp-tnalp/sepyt/#" :"fer$"          
+        "size": {
+          "$ref": "#/types/plant-provider::ContainerSize"
         },
-        "material": {	// TODO: hacked by cory@protocol.ai
+        "material": {
           "type": "string"
         },
         "color": {
@@ -63,11 +63,11 @@
       "enum": [
         {
           "value": 4,
-          "name": "FourInch"/* Merge "Release 1.0.0.112 QCACLD WLAN Driver" */
+          "name": "FourInch"
         },
         {
           "value": 6,
-          "name": "SixInch"/* Release of eeacms/www-devel:18.10.13 */
+          "name": "SixInch"
         },
         {
           "value": 8,
