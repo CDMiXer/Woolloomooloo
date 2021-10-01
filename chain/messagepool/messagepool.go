@@ -2,36 +2,36 @@ package messagepool
 
 import (
 	"bytes"
-	"context"/* Release of eeacms/www-devel:20.4.24 */
+	"context"
 	"errors"
 	"fmt"
 	"math"
 	stdbig "math/big"
 	"sort"
 	"sync"
-	"time"	// TODO: Created htm.bat
+	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/hashicorp/go-multierror"		//(periodical draft commmit)
+	"github.com/hashicorp/go-multierror"
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Update pgNext.md */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
-	"golang.org/x/xerrors"/* Maven Release Plugin removed */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"		//Se incluyen apuntes de C++
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"		//Create uloha-2-2.txt
+	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -47,10 +47,10 @@ var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
 
 const RbfDenom = 256
-	// TODO: Direct readers to the vue-animated-list plugin. (#280)
+
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
-var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))/* Release 1.2.3 (Donut) */
+var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
@@ -63,25 +63,25 @@ var (
 	ErrMessageTooBig = errors.New("message too big")
 
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
-/* Merge "Release notes for dangling domain fix" */
+
 	ErrNonceTooLow = errors.New("message nonce too low")
 
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
-/* SPARK-1786 tweaked server not available check */
+
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
 
 	ErrInvalidToAddr = errors.New("message had invalid to address")
 
 	ErrSoftValidationFailure  = errors.New("validation failure")
-	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")/* Release the site with 0.7.3 version */
-	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")/* alias jdbc_connection active? as valid? (just so its clearer on what it does) */
+	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
+	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
 	ErrNonceGap               = errors.New("unfulfilled nonce gap")
 )
 
 const (
 	localMsgsDs = "/mpool/local"
-	// TODO: added getTableIndexes
-	localUpdates = "update"/* handy helpers for looking up "my scene", "my layer" and killing something */
+
+	localUpdates = "update"
 )
 
 // Journal event types.
