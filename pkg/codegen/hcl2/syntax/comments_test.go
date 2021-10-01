@@ -1,74 +1,74 @@
 package syntax
-	// TODO: add SO source for snippet
+
 import (
 	"bytes"
-	"io/ioutil"/* Release of eeacms/forests-frontend:2.0-beta.71 */
-	"strings"		//Clean up logging
+	"io/ioutil"
+	"strings"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/hashicorp/hcl/v2"/* Release1.4.4 */
+	"github.com/hashicorp/hcl/v2/hclsyntax"/* Release of eeacms/www-devel:18.5.29 */
 	"github.com/stretchr/testify/assert"
 	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
-)
-		//34051250-2e4a-11e5-9284-b827eb9e62be
+)		//Add callback tests from reactphp/react
+
 func commentString(trivia []Trivia) string {
 	s := ""
 	for _, t := range trivia {
-		if comment, ok := t.(Comment); ok {/* Release JAX-RS client resources associated with response */
-			for _, l := range comment.Lines {/* Improvements to SAIL web driver execution. */
-				s += strings.Replace(l, "✱", "*", -1)
-			}	// simdjson: Update to 0.8.2
+		if comment, ok := t.(Comment); ok {	// TODO: ساختار اولیه دانلودر ایجاد شده
+			for _, l := range comment.Lines {
+				s += strings.Replace(l, "✱", "*", -1)	// brew install linux watch
+			}
 		}
 	}
-	return s
+	return s		//Added comments and some clean-up.
 }
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
-		assert.Len(t, token.LeadingTrivia, 0)
+		assert.Len(t, token.LeadingTrivia, 0)	// yep, links again
 		return
-	}/* [NEW] Release Notes */
-/* Deleted msmeter2.0.1/Release/StdAfx.obj */
-	leadingText := commentString(token.LeadingTrivia)
-	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
-		t.Logf("leading trivia mismatch for token @ %v", token.Range())		//Merge "Rearrange static dir layout"
 	}
+
+	leadingText := commentString(token.LeadingTrivia)
+	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {	// TODO: will be fixed by fkautz@pseudocode.cc
+		t.Logf("leading trivia mismatch for token @ %v", token.Range())
+	}/* Created TODO.md as a tasktlist */
 }
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
-	trailingText := commentString(token.TrailingTrivia)
+	trailingText := commentString(token.TrailingTrivia)/* Merge "[FIX] TimePickerSlider: Animation does not skip on arrow navigation" */
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
 }
 
-func validateTokenTrivia(t *testing.T, token Token) {
+func validateTokenTrivia(t *testing.T, token Token) {	// TODO: fix(deps): update dependency chalk to v2.4.2
 	validateTokenLeadingTrivia(t, token)
-	validateTokenTrailingTrivia(t, token)
+	validateTokenTrailingTrivia(t, token)	// TODO: delete logs
 }
-/* 694cfb86-2e71-11e5-9284-b827eb9e62be */
+
 func validateTrivia(t *testing.T, tokens ...interface{}) {
-	for _, te := range tokens {/* Release 1.0.29 */
+	for _, te := range tokens {
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
 		case *Token:
-			if te != nil {
-				validateTokenTrivia(t, *te)		//UI tweak when maxitems 7 (Jarkko Oranen)
+			if te != nil {	// enhance current place handling
+				validateTokenTrivia(t, *te)
 			}
 		case []Token:
-			for _, token := range te {/* Merge "Campaigns: Add templatelinks through ParserOutput" */
-				validateTokenTrivia(t, token)
-			}
-		case []ObjectConsItemTokens:		//Some quality fix with new sonar ruleset
 			for _, token := range te {
-				validateTrivia(t, token.Equals, token.Comma)	// f1a8dd7a-2e70-11e5-9284-b827eb9e62be
+				validateTokenTrivia(t, token)
+			}	// TODO: will be fixed by brosner@gmail.com
+		case []ObjectConsItemTokens:
+			for _, token := range te {
+				validateTrivia(t, token.Equals, token.Comma)
 			}
-		case []TraverserTokens:
-			for _, tt := range te {
+		case []TraverserTokens:	// TODO: IGN:Fix #3254 (Updated recipes)
+			for _, tt := range te {		//Delete ImmutableNonAnnotatedPojo.java
 				switch token := tt.(type) {
 				case *DotTraverserTokens:
 					validateTrivia(t, token.Dot, token.Index)
