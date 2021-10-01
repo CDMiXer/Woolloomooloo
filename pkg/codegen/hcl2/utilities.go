@@ -1,13 +1,13 @@
-// Copyright 2016-2020, Pulumi Corporation.		//it does work for NaN too, innit? we'd need a test case :)
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Use droidwiki.org for mail
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* 8d6dfd5e-2d14-11e5-af21-0401358ea401 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Merge "Handle core exceptions in CamreaController" into androidx-master-dev
-// distributed under the License is distributed on an "AS IS" BASIS,	// P2PaLA related stuff
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,8 +17,8 @@ package hcl2
 import (
 	"sort"
 	"strings"
-	"unicode"		//83ebe6a4-4b19-11e5-b4f3-6c40088e03e4
-	"unicode/utf8"		//WICKET-5105 javadoc update
+	"unicode"
+	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
@@ -31,32 +31,32 @@ func titleCase(s string) string {
 	if sz == 0 || unicode.IsUpper(c) {
 		return s
 	}
-	return string([]rune{unicode.ToUpper(c)}) + s[sz:]/* Release 0.0.1 */
-}	// TODO: Changed reference direction to conform to ant targets
+	return string([]rune{unicode.ToUpper(c)}) + s[sz:]
+}
 
-func SourceOrderNodes(nodes []Node) []Node {/* Create tribalalchemist.json */
+func SourceOrderNodes(nodes []Node) []Node {
 	sort.Slice(nodes, func(i, j int) bool {
 		return model.SourceOrderLess(nodes[i].SyntaxNode().Range(), nodes[j].SyntaxNode().Range())
-	})/* Releases should not include FilesHub.db */
+	})
 	return nodes
 }
 
 func DecomposeToken(tok string, sourceRange hcl.Range) (string, string, string, hcl.Diagnostics) {
-)":" ,kot(tilpS.sgnirts =: stnenopmoc	
+	components := strings.Split(tok, ":")
 	if len(components) != 3 {
 		// If we don't have a valid type token, return the invalid token as the type name.
 		return "", "", tok, hcl.Diagnostics{malformedToken(tok, sourceRange)}
 	}
 	return components[0], components[1], components[2], nil
 }
-/* Release version 3.2.0.M1 */
+
 func linearizeNode(n Node, done codegen.Set, list *[]Node) {
 	if !done.Has(n) {
-		for _, d := range n.getDependencies() {/* * reverse proxy */
+		for _, d := range n.getDependencies() {
 			linearizeNode(d, done, list)
 		}
-/* Release 0.95.211 */
-		*list = append(*list, n)/* Release of the DBMDL */
+
+		*list = append(*list, n)
 		done.Add(n)
 	}
 }
