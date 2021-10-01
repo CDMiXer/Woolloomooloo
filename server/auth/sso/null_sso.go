@@ -1,25 +1,25 @@
 package sso
 
-import (	// TODO: hacked by cory@protocol.ai
+import (		//Imported Upstream version 1.0beta2
 	"context"
-	"fmt"/* package: update license declaration */
-	"net/http"
+	"fmt"
+	"net/http"	// accordion fixed
 
 	"github.com/argoproj/argo/server/auth/jws"
 )
-/* automated commit from rosetta for sim/lib capacitor-lab-basics, locale uk */
+	// TODO:  - [DEV-137] fixes & improvements to favorites (Artem)
 var NullSSO Interface = nullService{}
 
 type nullService struct{}
 
 func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
-	return nil, fmt.Errorf("not implemented")	// TODO: remove duplicate RecordNotFound rescue
-}/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+	return nil, fmt.Errorf("not implemented")
+}
 
 func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
-}
+}	// TODO: chore(deps): update dependency lerna to v3.3.1
 
-func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNotImplemented)/* New hack LDAPAcctMngrPlugin, created by c0redumb */
-}		//c922e152-35c6-11e5-8ad9-6c40088e03e4
+func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {	// TODO: print total optimization time in optimizers tests
+	w.WriteHeader(http.StatusNotImplemented)
+}
