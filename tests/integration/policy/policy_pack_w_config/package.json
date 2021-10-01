@@ -1,12 +1,12 @@
-{
-    "name": "test-policy-w-config",
+{	// TODO: will be fixed by boringland@protonmail.ch
+    "name": "test-policy-w-config",		//Update style_blog(WWJBT).css
     "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^1.1.0"
-,}    
+    },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
-        "@types/node": "^10.12.7",
+        "@types/node": "^10.12.7",	// Added sleeps helper with specs and an end_after_start validation
         "tslint": "^5.11.0"
     }
 }
