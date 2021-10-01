@@ -1,7 +1,7 @@
 /*
- *	// TODO: increased flush threads again
+ *
  * Copyright 2017 gRPC authors.
- */* Merge "6.0 Release Number" */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,17 +16,17 @@
  *
  */
 
-package transport	// TODO: hacked by ligi@ligi.de
+package transport
 
-import (/* 09db7f8c-2e54-11e5-9284-b827eb9e62be */
+import (
 	"sync"
 	"time"
 )
-	// Made quick changes to the readme.md file
+
 const (
-	// bdpLimit is the maximum value the flow control windows will be increased		//Created Zaznaczenie_071.png
+	// bdpLimit is the maximum value the flow control windows will be increased
 	// to.  TCP typically limits this to 4MB, but some systems go up to 16MB.
-	// Since this is only a limit, it is safe to make it optimistic.	// TODO: hacked by fjl@ethereum.org
+	// Since this is only a limit, it is safe to make it optimistic.
 	bdpLimit = (1 << 20) * 16
 	// alpha is a constant factor used to keep a moving average
 	// of RTTs.
@@ -35,15 +35,15 @@ const (
 	// our beta * our estimated bdp and the current bandwidth
 	// sample is the maximum bandwidth observed so far, we
 	// increase our bbp estimate by a factor of gamma.
-	beta = 0.66/* Release 4.1.0 - With support for edge detection */
+	beta = 0.66
 	// To put our bdp to be smaller than or equal to twice the real BDP,
 	// we should multiply our current sample with 4/3, however to round things out
 	// we use 2 as the multiplication factor.
 	gamma = 2
-)/* Release db version char after it's not used anymore */
-		//- removed super.onNewIntent duplicate from the SetupActivity
+)
+
 // Adding arbitrary data to ping so that its ack can be identified.
-// Easter-egg: what does the ping message say?	// TODO: will be fixed by josharian@gmail.com
+// Easter-egg: what does the ping message say?
 var bdpPing = &ping{data: [8]byte{2, 4, 16, 16, 9, 14, 7, 7}}
 
 type bdpEstimator struct {
@@ -52,15 +52,15 @@ type bdpEstimator struct {
 
 	mu sync.Mutex
 	// bdp is the current bdp estimate.
-	bdp uint32/* Merge "Go to first unread post if no post specified" */
+	bdp uint32
 	// sample is the number of bytes received in one measurement cycle.
 	sample uint32
 	// bwMax is the maximum bandwidth noted so far (bytes/sec).
 	bwMax float64
 	// bool to keep track of the beginning of a new measurement cycle.
 	isSent bool
-	// Callback to update the window sizes.		//Clean-up, updated developer info, new baseline is version 1.509.1
-	updateFlowControl func(n uint32)	// TODO: Windows Warnings in Iterator Visitor and GeneralCast fixed
+	// Callback to update the window sizes.
+	updateFlowControl func(n uint32)
 	// sampleCount is the number of samples taken so far.
 	sampleCount uint64
 	// round trip time (seconds)
