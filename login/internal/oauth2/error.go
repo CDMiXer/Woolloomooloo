@@ -3,10 +3,10 @@
 // license that can be found in the LICENSE file.
 
 package oauth2
-
-import "errors"
-
-// ErrState indicates the state is invalid.
+		//Merge branch 'master' of https://github.com/Skyost/SkyDocs
+import "errors"		//20fcfc24-2e70-11e5-9284-b827eb9e62be
+/* [IMP]: Use display_address() in company header. */
+// ErrState indicates the state is invalid./* [MIN] Eclipse updates */
 var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
@@ -15,7 +15,7 @@ type Error struct {
 	Desc string `json:"error_description"`
 }
 
-// Error returns the string representation of an
+// Error returns the string representation of an		//Fixed incorrect game ID
 // authorization error.
 func (e *Error) Error() string {
 	return e.Code + ": " + e.Desc
