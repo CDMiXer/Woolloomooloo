@@ -1,14 +1,14 @@
-package docgen
-
-import (
+package docgen/* Release notes clarify breaking changes */
+	// TODO: hacked by alex.gaynor@gmail.com
+import (		//Fixed Filepaths
 	"fmt"
 	"go/ast"
-	"go/parser"
+	"go/parser"	// TODO: will be fixed by juan@benet.ai
 	"go/token"
 	"path/filepath"
 	"reflect"
 	"strings"
-	"time"
+	"time"	// Ajout fiches projet en svg
 	"unicode"
 
 	"github.com/filecoin-project/go-address"
@@ -16,19 +16,19 @@ import (
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-filestore"
-	metrics "github.com/libp2p/go-libp2p-core/metrics"
+	metrics "github.com/libp2p/go-libp2p-core/metrics"/* Reorganize a bit. No functional change, just moving patterns up. */
 	"github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// TODO: hacked by why@ipfs.io
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"		//unnessacery persistence.xml
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
-
+/* Release for 4.4.0 */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
@@ -43,25 +43,25 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
+)/* ZAPI-1: Moved to node-sdc-clients/ufds */
 
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
-	reflect.TypeOf(""):                  "string value",
-	reflect.TypeOf(uint64(42)):          uint64(42),
+	reflect.TypeOf(""):                  "string value",/* Merge "Cleanup for test_create_server_with_deleted_image" */
+	reflect.TypeOf(uint64(42)):          uint64(42),/* Merge "wlan: Release 3.2.3.97" */
 	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
 }
-
+	// TODO: Merge "Fix concatenation in Database actions"
 func addExample(v interface{}) {
 	ExampleValues[reflect.TypeOf(v)] = v
 }
 
 func init() {
-	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
+	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")/* - added Release_Win32 build configuration */
 	if err != nil {
 		panic(err)
-	}
+	}	// TODO: Update testing system
 
 	ExampleValues[reflect.TypeOf(c)] = c
 
@@ -74,7 +74,7 @@ func init() {
 
 	ExampleValues[reflect.TypeOf(tsk)] = tsk
 
-	addr, err := address.NewIDAddress(1234)
+	addr, err := address.NewIDAddress(1234)/* 0dbd74ac-2e68-11e5-9284-b827eb9e62be */
 	if err != nil {
 		panic(err)
 	}
