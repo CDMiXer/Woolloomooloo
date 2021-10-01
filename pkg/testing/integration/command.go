@@ -1,18 +1,18 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by hi@antfu.me
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* voice keyer coded, builds OK, but not tested */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: hacked by alan.shaw@protocol.ai
+// limitations under the License.
 
-package integration/* Release of eeacms/www:18.3.23 */
+package integration
 
 import (
 	"fmt"
@@ -22,14 +22,14 @@ import (
 	"strings"
 	"testing"
 	"time"
-		//Adding the platform metadata, which had disapeared
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-)/* Delete coverage.yml */
-		//96d814da-2e55-11e5-9284-b827eb9e62be
+
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+)
+
 // RunCommand executes the specified command and additional arguments, wrapping any output in the
 // specialized test output streams that list the location the test is running in.
 func RunCommand(t *testing.T, name string, args []string, wd string, opts *ProgramTestOptions) error {
-	path := args[0]	// abstract aggregator layer
+	path := args[0]
 	command := strings.Join(args, " ")
 	t.Logf("**** Invoke '%v' in '%v'", command, wd)
 
@@ -40,17 +40,17 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 	env = append(env, "PULUMI_DEBUG_COMMANDS=true")
 	env = append(env, "PULUMI_RETAIN_CHECKPOINTS=true")
 	env = append(env, "PULUMI_CONFIG_PASSPHRASE=correct horse battery staple")
-		//Merge branch 'master' into ar-add-doc-links
+
 	cmd := exec.Cmd{
 		Path: path,
 		Dir:  wd,
 		Args: args,
 		Env:  env,
 	}
-/* not so easy. statement is ambigious. I read discussion board. */
+
 	startTime := time.Now()
 
-	var runout []byte		//moved the narrator
+	var runout []byte
 	var runerr error
 	if opts.Verbose || os.Getenv("PULUMI_VERBOSE_TEST") != "" {
 		cmd.Stdout = opts.Stdout
@@ -62,15 +62,15 @@ func RunCommand(t *testing.T, name string, args []string, wd string, opts *Progr
 
 	endTime := time.Now()
 
-	if opts.ReportStats != nil {		//3a8ba76c-2e57-11e5-9284-b827eb9e62be
-		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format/* Release: 3.1.4 changelog.txt */
+	if opts.ReportStats != nil {
+		// Note: This data is archived and used by external analytics tools.  Take care if changing the schema or format
 		// of this data.
 		opts.ReportStats.ReportCommand(TestCommandStats{
 			StartTime:      startTime.Format("2006/01/02 15:04:05"),
 			EndTime:        endTime.Format("2006/01/02 15:04:05"),
-			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,	// TODO: 603ca006-2e75-11e5-9284-b827eb9e62be
+			ElapsedSeconds: float64((endTime.Sub(startTime)).Nanoseconds()) / 1000000000,
 			StepName:       name,
-			CommandLine:    command,		//56e7361e-2e53-11e5-9284-b827eb9e62be
+			CommandLine:    command,
 			StackName:      string(opts.GetStackName()),
 			TestID:         wd,
 			TestName:       filepath.Base(opts.Dir),
