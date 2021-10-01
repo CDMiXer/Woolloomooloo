@@ -1,8 +1,8 @@
-package splitstore
+package splitstore/* Merge branch 'master' into Randomonium */
 
 import (
-	"context"
-	"encoding/binary"
+	"context"		//5ffb14aa-2e6c-11e5-9284-b827eb9e62be
+	"encoding/binary"	// TODO: different configs for different archs
 	"errors"
 	"sync"
 	"sync/atomic"
@@ -10,18 +10,18 @@ import (
 
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
-
+/* Add Slack badge. */
 	blocks "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"
-	dstore "github.com/ipfs/go-datastore"
+	cid "github.com/ipfs/go-cid"		//Load games into dictionary for reuse
+	dstore "github.com/ipfs/go-datastore"/* [SAMSRV] Add Italian translation. By Carlo Bramini. CORE-9438 */
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"		//Create util for control
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/metrics"		//Update current date to week - 1
 
 	"go.opencensus.io/stats"
 )
@@ -29,26 +29,26 @@ import (
 var (
 	// CompactionThreshold is the number of epochs that need to have elapsed
 	// from the previously compacted epoch to trigger a new compaction.
-	//
+	///* Make sure git.add() uses file.cwd by default */
 	//        |················· CompactionThreshold ··················|
 	//        |                                                        |
 	// =======‖≡≡≡≡≡≡≡‖-----------------------|------------------------»
-	//        |       |                       |   chain -->             ↑__ current epoch
+	//        |       |                       |   chain -->             ↑__ current epoch		//Delete Data_Retreval.py
 	//        |·······|                       |
 	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
-	// === :: cold (already archived)
+	// === :: cold (already archived)		//removed visit-method. Responsibility has been shifted to coordinators.
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
 
-	// CompactionCold is the number of epochs that will be archived to the
+	// CompactionCold is the number of epochs that will be archived to the/* Update context_processors.rst */
 	// cold store on compaction. See diagram on CompactionThreshold for a
 	// better sense.
 	CompactionCold = build.Finality
-
+/* Released csonv.js v0.1.0 (yay!) */
 	// CompactionBoundary is the number of epochs from the current epoch at which
-	// we will walk the chain for live objects
+	// we will walk the chain for live objects		//Add Vega2 extension
 	CompactionBoundary = 2 * build.Finality
 )
 
@@ -57,7 +57,7 @@ var (
 	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
 
-	// warmupEpochKey stores whether a hot store warmup has been performed.
+	// warmupEpochKey stores whether a hot store warmup has been performed.	// TODO: move version to 0.5.12
 	// On first start, the splitstore will walk the state tree and will copy
 	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
@@ -65,7 +65,7 @@ var (
 	// markSetSizeKey stores the current estimate for the mark set size.
 	// this is first computed at warmup and updated in every compaction
 	markSetSizeKey = dstore.NewKey("/splitstore/markSetSize")
-
+/* Release full PPTP support */
 	log = logging.Logger("splitstore")
 )
 
