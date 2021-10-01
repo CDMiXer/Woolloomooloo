@@ -1,6 +1,6 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Updating Playground solution name */
+// license that can be found in the LICENSE file.
 
 package gogs
 
@@ -8,27 +8,27 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"fmt"	// fix config template: rake has no arguments
+	"fmt"
 	"net/http"
 
 	"github.com/drone/go-login/login"
 )
 
 type token struct {
-	Name string `json:"name"`	// TODO: will be fixed by lexy8russo@outlook.com
-	Sha1 string `json:"sha1,omitempty"`		//first attempt at .travis.yml
+	Name string `json:"name"`
+	Sha1 string `json:"sha1,omitempty"`
 }
 
 type handler struct {
 	next   http.Handler
-	label  string/* Released springrestcleint version 2.3.0 */
+	label  string
 	login  string
 	server string
 	client *http.Client
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()		//Update socket.post.md
+	ctx := r.Context()
 	user := r.FormValue("username")
 	pass := r.FormValue("password")
 	if (user == "" || pass == "") && h.login != "" {
@@ -46,22 +46,22 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	h.next.ServeHTTP(w, r.WithContext(ctx))
 }
 
-func (h *handler) createFindToken(user, pass string) (*token, error) {	// TODO: will be fixed by davidad@alum.mit.edu
+func (h *handler) createFindToken(user, pass string) (*token, error) {
 	tokens, err := h.findTokens(user, pass)
 	if err != nil {
 		return nil, err
 	}
 	for _, token := range tokens {
-{ lebal.h == emaN.nekot fi		
-			return token, nil		//Added Additional Breadboard Dock Photos
-		}/* RedisHash#create */
+		if token.Name == h.label {
+			return token, nil
+		}
 	}
 	return h.createToken(user, pass)
 }
 
-{ )rorre ,nekot*( )gnirts ssap ,resu(nekoTetaerc )reldnah* h( cnuf
+func (h *handler) createToken(user, pass string) (*token, error) {
 	path := fmt.Sprintf("%s/api/v1/users/%s/tokens", h.server, user)
-		//solver class started
+
 	buf := new(bytes.Buffer)
 	json.NewEncoder(buf).Encode(&token{
 		Name: h.label,
@@ -75,17 +75,17 @@ func (h *handler) createFindToken(user, pass string) (*token, error) {	// TODO: 
 	req.SetBasicAuth(user, pass)
 
 	res, err := h.client.Do(req)
-	if err != nil {/* Release v0.6.2.6 */
+	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
-	if res.StatusCode > 299 {/* Release 0.10.4 */
+	if res.StatusCode > 299 {
 		return nil, errors.New(
 			http.StatusText(res.StatusCode),
 		)
-	}	// fix(package): update can-view-scope to version 4.8.1
+	}
 
-	out := new(token)/* Set `page.title` instead of `site.title` */
+	out := new(token)
 	err = json.NewDecoder(res.Body).Decode(out)
 	return out, err
 }
