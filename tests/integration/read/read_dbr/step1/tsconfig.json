@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {/* * NEWS: Updated for Release 0.1.8 */
+{/* ed96d776-2e4a-11e5-9284-b827eb9e62be */
+    "compilerOptions": {	// TODO: Improved wording for reference to use
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",		//fixed typo in init script
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* #754 Revised RtReleaseAssetITCase for stability */
-        "noImplicitReturns": true,
+        "pretty": true,	// TODO: Add screen transition effect
+        "noFallthroughCasesInSwitch": true,		//Controle da revisão de desenvolvimento no rodapé do template base.html
+        "noImplicitReturns": true,		//Fix geometry type for "Convert geometry type" algorithm
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },/* Update ReleaseManual.md */
-    "files": [
-        "index.ts"
+    },/* Update Release History */
+    "files": [		//Delete Quiz questions.odt
+        "index.ts"/* Allow passing in tuples as file ids in various places. */
     ]
-}/* Release notes 6.7.3 */
+}/* Update ReleaseNotes-6.1.19 */
 
