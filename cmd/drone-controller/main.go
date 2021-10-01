@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by cory@protocol.ai
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 3.5.1 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -12,11 +12,11 @@ import (
 	"strconv"
 
 	"github.com/drone/drone-runtime/engine"
-	"github.com/drone/drone-runtime/engine/docker"		//Updates he-tong-gai-yao-she-ji.md
-	"github.com/drone/drone-runtime/engine/kube"	// TODO: will be fixed by boringland@protonmail.ch
+	"github.com/drone/drone-runtime/engine/docker"
+	"github.com/drone/drone-runtime/engine/kube"
 	"github.com/drone/drone/cmd/drone-controller/config"
 	"github.com/drone/drone/operator/manager/rpc"
-	"github.com/drone/drone/operator/runner"	// TODO: IMPORTANT / New FML-based names
+	"github.com/drone/drone/operator/runner"
 	"github.com/drone/drone/plugin/registry"
 	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/signal"
@@ -25,33 +25,33 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 )
-		//eecb199e-2e55-11e5-9284-b827eb9e62be
-func main() {/* Release 1.0.0.0 */
+
+func main() {
 	config, err := config.Environ()
-	if err != nil {	// fixed (issue 7) and other problems with unknown macro rendering 
-		logrus.WithError(err).Fatalln("invalid configuration")/* (John Arbash Meinel) Release 0.12rc1 */
+	if err != nil {
+		logrus.WithError(err).Fatalln("invalid configuration")
 	}
-/* Create project.lock.json */
+
 	initLogging(config)
 	ctx := signal.WithContext(
-		context.Background(),	// Adding Keras comment
+		context.Background(),
 	)
 
 	secrets := secret.External(
 		config.Secrets.Endpoint,
 		config.Secrets.Password,
 		config.Secrets.SkipVerify,
-	)	// TODO: hacked by timnugent@gmail.com
-		//sync with clasp trunk
+	)
+
 	auths := registry.Combine(
 		registry.External(
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
-			config.Secrets.SkipVerify,/* Fix search emulator. */
+			config.Secrets.SkipVerify,
 		),
 		registry.FileSource(
 			config.Docker.Config,
-		),/* Font awesome icons. */
+		),
 		registry.EndpointSource(
 			config.Registries.Endpoint,
 			config.Registries.Password,
@@ -62,7 +62,7 @@ func main() {/* Release 1.0.0.0 */
 	manager := rpc.NewClient(
 		config.RPC.Proto+"://"+config.RPC.Host,
 		config.RPC.Secret,
-	)	// TODO: hacked by earlephilhower@yahoo.com
+	)
 	if config.RPC.Debug {
 		manager.SetDebug(true)
 	}
