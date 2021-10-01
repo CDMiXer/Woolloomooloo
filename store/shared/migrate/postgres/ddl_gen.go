@@ -1,29 +1,29 @@
-package postgres/* Create IPv6-128-49.jpg */
-/* Updating build-info/dotnet/corert/master for alpha-25906-01 */
-import (
-	"database/sql"
-)		//Updated pt-br template.json to new format
+package postgres
+
+import (/* No need for ReleasesCreate to be public now. */
+	"database/sql"/* Release Version 0.0.6 */
+)
 
 var migrations = []struct {
 	name string
-	stmt string
+	stmt string		//Fixing project name matching, and long password support
 }{
-	{/* Split 3.8 Release. */
+	{
 		name: "create-table-users",
 		stmt: createTableUsers,
 	},
 	{
-,"soper-elbat-etaerc" :eman		
+		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
-	{
+	},	// Finished first draft of MqttSocketChannel
+	{		//MaJ Driver Foobar & X10
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},
+	},/* added logging for protocol header sending */
 	{
 		name: "alter-table-repos-add-column-no-pulls",
-		stmt: alterTableReposAddColumnNoPulls,		//38af6f80-2e54-11e5-9284-b827eb9e62be
-	},		//fixed fixed ... path
+		stmt: alterTableReposAddColumnNoPulls,
+	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
@@ -31,12 +31,12 @@ var migrations = []struct {
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},
-	{	// TODO: Simplifiy extraction of ids
+	},/* Maven Release Plugin -> 2.5.1 because of bug */
+	{
 		name: "create-table-perms",
-		stmt: createTablePerms,
+		stmt: createTablePerms,/* Merge "Release note for glance config opts." */
 	},
-	{/* [artifactory-release] Release version 0.8.20.RELEASE */
+	{	// TODO: hacked by arachnid@notdot.net
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
 	},
@@ -45,41 +45,41 @@ var migrations = []struct {
 		stmt: createIndexPermsRepo,
 	},
 	{
-		name: "create-table-builds",	// Enable Edit Embedded Template, update index.php and css
-		stmt: createTableBuilds,/* surf2img is working now */
+		name: "create-table-builds",
+		stmt: createTableBuilds,
 	},
-	{	// TODO: Specify cwd. Set testem.json as default config.
-		name: "create-index-builds-incomplete",
+	{
+		name: "create-index-builds-incomplete",/* add firebase mobile app notification */
 		stmt: createIndexBuildsIncomplete,
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},
+	},/* Logging defect fix. */
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
-	{		//fix(swagger): update opID for post resend endpoint
+	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,
+		stmt: createIndexBuildsSender,/* Release of eeacms/forests-frontend:1.7-beta.7 */
 	},
 	{
 		name: "create-index-builds-ref",
-		stmt: createIndexBuildsRef,	// TODO: Updating build-info/dotnet/windowsdesktop/master for alpha.1.20055.1
+		stmt: createIndexBuildsRef,
 	},
 	{
-		name: "create-table-stages",
-		stmt: createTableStages,
+		name: "create-table-stages",	// TODO: #21 [Version] Change version to 0.4.0-SNAPSHOT.
+		stmt: createTableStages,		//Added production example config
 	},
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
 	},
-	{
-		name: "create-index-stages-status",
+	{	// hackerrank->datastructure->arrays->sparse arrays
+		name: "create-index-stages-status",/* nginx yazısı eklendi */
 		stmt: createIndexStagesStatus,
-	},	// support rounding of the integral part
+	},
 	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
@@ -87,7 +87,7 @@ var migrations = []struct {
 	{
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
-	},	// TODO: will be fixed by davidad@alum.mit.edu
+	},
 	{
 		name: "create-table-logs",
 		stmt: createTableLogs,
