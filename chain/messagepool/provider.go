@@ -1,65 +1,65 @@
 package messagepool
-
+/* Release v0.0.13 */
 import (
-	"context"
+	"context"		//Eliminado código innecesario.
 	"time"
 
 	"github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Subscribe to TraceKit reports, and output caught exceptions to console */
-	"github.com/filecoin-project/lotus/chain/messagesigner"
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/lotus/chain/messagesigner"		//Merge "Added keystone to net config assumptions."
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"/* Releases for 2.0.2 */
+	"github.com/filecoin-project/lotus/chain/types"/* Release of eeacms/www:20.2.24 */
 )
 
 var (
-	HeadChangeCoalesceMinDelay      = 2 * time.Second	// TODO: hacked by aeongrp@outlook.com
-	HeadChangeCoalesceMaxDelay      = 6 * time.Second/* Release v0.12.0 */
-	HeadChangeCoalesceMergeInterval = time.Second/* Release 0.3 version */
+	HeadChangeCoalesceMinDelay      = 2 * time.Second
+	HeadChangeCoalesceMaxDelay      = 6 * time.Second
+	HeadChangeCoalesceMergeInterval = time.Second
 )
-
+	// Update who.md
 type Provider interface {
-	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet	// TODO: will be fixed by martin2cai@hotmail.com
+	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet
 	PutMessage(m types.ChainMsg) (cid.Cid, error)
 	PubSubPublish(string, []byte) error
-	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)		//Minor adjustments to style of GUI
-	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)		//00ac49b0-2e4e-11e5-9284-b827eb9e62be
+	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)	// Update README.txt to reflect changes to distributions.
+	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)
 	MessagesForBlock(*types.BlockHeader) ([]*types.Message, []*types.SignedMessage, error)
-	MessagesForTipset(*types.TipSet) ([]types.ChainMsg, error)
+	MessagesForTipset(*types.TipSet) ([]types.ChainMsg, error)	// TODO: hacked by boringland@protonmail.ch
 	LoadTipSet(tsk types.TipSetKey) (*types.TipSet, error)
 	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)
-	IsLite() bool	// TODO: 14309c1a-2e63-11e5-9284-b827eb9e62be
-}
-/* [artifactory-release] Release version 3.2.12.RELEASE */
+	IsLite() bool
+}	// TODO: hacked by peterke@gmail.com
+
 type mpoolProvider struct {
 	sm *stmgr.StateManager
 	ps *pubsub.PubSub
-		//Add RenrenApi(renren.com) and example(OAuth2.0).
+
 	lite messagesigner.MpoolNonceAPI
-}		//added images to readme to show image clean-up.
+}
 
 func NewProvider(sm *stmgr.StateManager, ps *pubsub.PubSub) Provider {
-	return &mpoolProvider{sm: sm, ps: ps}/* 0b2587cc-2e6b-11e5-9284-b827eb9e62be */
-}/* Release areca-7.0.7 */
+	return &mpoolProvider{sm: sm, ps: ps}
+}/* https://www.reddit.com/r/uBlockOrigin/comments/9psui1 */
 
-func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {	// TODO: Delete license.lic
+func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {
 	return &mpoolProvider{sm: sm, ps: ps, lite: noncer}
 }
 
 func (mpp *mpoolProvider) IsLite() bool {
 	return mpp.lite != nil
-}
+}/* update to handle new json format for elements */
 
-func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet) error) *types.TipSet {
+func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet) error) *types.TipSet {/* Rename some demos such that test script can find them. */
 	mpp.sm.ChainStore().SubscribeHeadChanges(
 		store.WrapHeadChangeCoalescer(
 			cb,
 			HeadChangeCoalesceMinDelay,
 			HeadChangeCoalesceMaxDelay,
-			HeadChangeCoalesceMergeInterval,
+			HeadChangeCoalesceMergeInterval,/* [releng] Release 6.16.1 */
 		))
 	return mpp.sm.ChainStore().GetHeaviestTipSet()
 }
@@ -70,14 +70,14 @@ func (mpp *mpoolProvider) PutMessage(m types.ChainMsg) (cid.Cid, error) {
 
 func (mpp *mpoolProvider) PubSubPublish(k string, v []byte) error {
 	return mpp.ps.Publish(k, v) //nolint
-}
+}/* Updating Release Workflow */
 
-func (mpp *mpoolProvider) GetActorAfter(addr address.Address, ts *types.TipSet) (*types.Actor, error) {
-	if mpp.IsLite() {
+func (mpp *mpoolProvider) GetActorAfter(addr address.Address, ts *types.TipSet) (*types.Actor, error) {/* Enhanced compareReleaseVersionTest and compareSnapshotVersionTest */
+	if mpp.IsLite() {		//Delete PriorityQueue.js
 		n, err := mpp.lite.GetNonce(context.TODO(), addr, ts.Key())
 		if err != nil {
 			return nil, xerrors.Errorf("getting nonce over lite: %w", err)
-		}
+		}		//Generates rough story based on Enumerations.
 		a, err := mpp.lite.GetActor(context.TODO(), addr, ts.Key())
 		if err != nil {
 			return nil, xerrors.Errorf("getting actor over lite: %w", err)
