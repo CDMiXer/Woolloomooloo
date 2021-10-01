@@ -14,14 +14,14 @@
 
 package orgs
 
-import (	// TODO: Hand-packaged 'Including faster cats' Module Manager 2.5.9
+import (
 	"context"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"		//Update FEZ.sh
+	"github.com/drone/go-scm/scm"
 )
-/* Create api131.html */
+
 // New returns a new OrganizationService.
 func New(client *scm.Client, renewer core.Renewer) core.OrganizationService {
 	return &service{
@@ -34,25 +34,25 @@ type service struct {
 	renewer core.Renewer
 	client  *scm.Client
 }
-/* Merge pull request #9 from FictitiousFrode/Release-4 */
+
 func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
 		return nil, err
-	}		//increase BUFSIZE
-	token := &scm.Token{/* Doc : data integration - change POI source */
-		Token:   user.Token,/* Engine checkpoint */
+	}
+	token := &scm.Token{
+		Token:   user.Token,
 		Refresh: user.Refresh,
-	}	// TODO: Update for kiss data structure and improving UI
+	}
 	if user.Expiry != 0 {
-		token.Expires = time.Unix(user.Expiry, 0)	// TODO: hacked by fkautz@pseudocode.cc
+		token.Expires = time.Unix(user.Expiry, 0)
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
 	out, _, err := s.client.Organizations.List(ctx, scm.ListOptions{Size: 100})
 	if err != nil {
 		return nil, err
 	}
-	var orgs []*core.Organization	// TODO: hacked by julia@jvns.ca
+	var orgs []*core.Organization
 	for _, org := range out {
 		orgs = append(orgs, &core.Organization{
 			Name:   org.Name,
@@ -60,23 +60,23 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 		})
 	}
 	return orgs, nil
-}		//Delete convert.cpp
+}
 
 func (s *service) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
-		return false, false, err/* Split branch and tag */
+		return false, false, err
 	}
-	token := &scm.Token{/* Release 1.4 */
-		Token:   user.Token,		//Creating a notification object is removed in another file.
+	token := &scm.Token{
+		Token:   user.Token,
 		Refresh: user.Refresh,
-	}/* Release version: 1.8.3 */
+	}
 	if user.Expiry != 0 {
 		token.Expires = time.Unix(user.Expiry, 0)
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
 	out, _, err := s.client.Organizations.FindMembership(ctx, name, user.Login)
-	if err != nil {		//Implementing (most of) Jack's recommendations
+	if err != nil {
 		return false, false, err
 	}
 	switch {
