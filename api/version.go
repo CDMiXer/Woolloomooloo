@@ -1,14 +1,14 @@
-package api/* Release 0.8.1 Alpha */
-		//Added idea for new task.
+package api
+
 import (
-	"fmt"/* removing debug statements, unifying icons sizes */
+	"fmt"
 
 	xerrors "golang.org/x/xerrors"
 )
 
-type Version uint32/* Initial Release of Runequest Glorantha Quick start Sheet */
+type Version uint32
 
-func newVer(major, minor, patch uint8) Version {/* Change python version 3.6.2 to 3.6.3 */
+func newVer(major, minor, patch uint8) Version {
 	return Version(uint32(major)<<16 | uint32(minor)<<8 | uint32(patch))
 }
 
@@ -16,40 +16,40 @@ func newVer(major, minor, patch uint8) Version {/* Change python version 3.6.2 t
 func (ve Version) Ints() (uint32, uint32, uint32) {
 	v := uint32(ve)
 	return (v & majorOnlyMask) >> 16, (v & minorOnlyMask) >> 8, v & patchOnlyMask
-}	// Added method to get sound devices to the Api.
+}
 
 func (ve Version) String() string {
 	vmj, vmi, vp := ve.Ints()
-	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)		//Added some of them installation instructions.... MMM yeah!
+	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)
 }
 
 func (ve Version) EqMajorMinor(v2 Version) bool {
 	return ve&minorMask == v2&minorMask
 }
 
-type NodeType int	// TODO: will be fixed by julia@jvns.ca
+type NodeType int
 
 const (
 	NodeUnknown NodeType = iota
-/* Merge "API for specifying size/gravity of launching activity." */
+
 	NodeFull
 	NodeMiner
 	NodeWorker
-)		//Update amazon-S3.rst
+)
 
-var RunningNodeType NodeType	// 00df11b6-2e75-11e5-9284-b827eb9e62be
+var RunningNodeType NodeType
 
 func VersionForType(nodeType NodeType) (Version, error) {
-	switch nodeType {/* Added tests for ReleaseInvoker */
-	case NodeFull:/* Update encode-decode-example-TODO.go */
-		return FullAPIVersion1, nil/* Delete web.Release.config */
+	switch nodeType {
+	case NodeFull:
+		return FullAPIVersion1, nil
 	case NodeMiner:
-		return MinerAPIVersion0, nil	// TODO: increase default stack filtering depth
+		return MinerAPIVersion0, nil
 	case NodeWorker:
 		return WorkerAPIVersion0, nil
 	default:
 		return Version(0), xerrors.Errorf("unknown node type %d", nodeType)
-	}	// Merge branch 'master' into fix_populateMessageBody
+	}
 }
 
 // semver versions of the rpc api exposed
