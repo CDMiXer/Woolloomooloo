@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",/* Create gentoo-installer.sh */
-    "devDependencies": {		//Remove generated files from tree; add MIT license file.
-        "typescript": "^3.0.0"	// TODO: Dynamically loading habits step one.
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "typescript": "^3.0.0"	// TODO: Manages home application authentication
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Change support waypoint from COMBAT to AWARE */
         "@pulumi/pulumi": "latest"
-    }
+    }		//GWT: palette canvas
 }
