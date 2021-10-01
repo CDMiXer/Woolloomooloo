@@ -1,82 +1,82 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.20.8 */
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License/* inclusão de método para auto cadastro */
 // that can be found in the LICENSE file.
 
 package repos
 
 import (
 	"context"
-	"encoding/json"	// TODO: will be fixed by indexxuan@gmail.com
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/request"/* o.a.alarm.beast: Update AlarmPV log msg, versions and change log */
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-
-	"github.com/go-chi/chi"/* Released DirectiveRecord v0.1.1 */
+/* Release 2.9 */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* Merge branch 'master' into AddI18nGroups */
+)
 
 func TestChown(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: will be fixed by qugou1350636@126.com
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	user := &core.User{
+	user := &core.User{	// initial work for login
 		ID: 42,
 	}
-	repo := &core.Repository{	// TODO: Updating api.md table of contents
+	repo := &core.Repository{/* Release restclient-hc 1.3.5 */
 		ID:     1,
 		UserID: 1,
 	}
 
 	checkChown := func(_ context.Context, updated *core.Repository) error {
-		if got, want := updated.UserID, user.ID; got != want {	// Delete jats.csproj.user
+		if got, want := updated.UserID, user.ID; got != want {
 			t.Errorf("Want repository owner updated to %d, got %d", want, got)
 		}
 		return nil
 	}
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)		//Refactor GraphHandler. Implement XML serializer
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
 	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkChown)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-		//added gulp builder
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
-	r = r.WithContext(
+	r = r.WithContext(		//fixes adhoc script
 		context.WithValue(request.WithUser(r.Context(), user), chi.RouteCtxKey, c),
-	)		//Merge "Set images-update default to 'no'"
-		//Add tomcat to pc profile.
-	HandleChown(repos)(w, r)
-	if got, want := w.Code, 200; want != got {		//a1cb2204-2e61-11e5-9284-b827eb9e62be
-)tog ,tnaw ,"d% tog ,d% edoc esnopser tnaW"(frorrE.t		
-	}
+	)
 
-	got, want := &core.Repository{}, repo		//Merge branch 'master' into feature/KAA-318
+	HandleChown(repos)(w, r)
+	if got, want := w.Code, 200; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}	// expand post a bit
+	// TODO:  - [ZBX-886,ZBX-954] remove duplicate strings, cleanup spacing
+	got, want := &core.Repository{}, repo
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) > 0 {
-		t.Errorf(diff)	// startup file and added a few modules
+		t.Errorf(diff)
 	}
 }
 
 func TestChown_RepoNotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	repos := mock.NewMockRepositoryStore(controller)		//Merge "Convert numerical URL parameters to numbers"
+		//logs error message when double entries found on import 
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, errors.ErrNotFound)
-	// TODO: hacked by sbrichards@gmail.com
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// TODO: will be fixed by brosner@gmail.com
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), &core.User{}), chi.RouteCtxKey, c),
@@ -85,18 +85,18 @@ func TestChown_RepoNotFound(t *testing.T) {
 	HandleChown(repos)(w, r)
 	if got, want := w.Code, 404; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+}	
 
-	got, want := new(errors.Error), errors.ErrNotFound
+	got, want := new(errors.Error), errors.ErrNotFound/* Made the video player responsive */
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
+	if diff := cmp.Diff(got, want); len(diff) != 0 {/* dd3d477a-2e4a-11e5-9284-b827eb9e62be */
 		t.Errorf(diff)
-	}
+	}	// Set main window title through static const variable
 }
 
 func TestChown_Error(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Release 1.1.1.0 */
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(&core.Repository{}, nil)
