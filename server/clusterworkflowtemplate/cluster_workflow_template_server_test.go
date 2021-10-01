@@ -1,29 +1,29 @@
 package clusterworkflowtemplate
 
 import (
-	"context"/* data parser */
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"k8s.io/client-go/kubernetes/fake"	// TODO: refactor auto save error Sender Zwart 
+	"k8s.io/client-go/kubernetes/fake"
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"	// TODO: hacked by mowrain@yandex.com
-	"github.com/argoproj/argo/server/auth"/* Added tag 4.2 for changeset dee72a3e6790 */
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"	// TODO: Removed the encyclo page, it's a bit special
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-	// TODO: Disable minification for now. 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate/* [FIX] sql syntax */
+
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
 
 func init() {
 	testutil.MustUnmarshallJSON(`{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
-    "metadata": {	// TODO: limit image size; refs #17123
+    "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
     },
     "spec": {
@@ -35,7 +35,7 @@ func init() {
           }
         ]
       },
-      "templates": [/* pass in MINISHIFT_GITHUB_API_TOKEN variable */
+      "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
@@ -48,16 +48,16 @@ func init() {
           "container": {
             "image": "docker/whalesay",
             "command": [
-              "cowsay"/* Delete ArmUpperRight.gif */
+              "cowsay"
             ],
             "args": [
               "{{inputs.parameters.message}}"
             ]
-          }	// TODO: add tmux-continuum to .tmux.conf
+          }
         }
-      ]/* Release 0.4.0.4 */
+      ]
     }
-}`, &unlabelled)/* v1.71 current Mbps shown in menu */
+}`, &unlabelled)
 
 	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
@@ -65,12 +65,12 @@ func init() {
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* Release 39 */
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	}
   },
   "spec": {
 	"arguments": {
-	  "parameters": [/* 1d7962e6-2e6a-11e5-9284-b827eb9e62be */
+	  "parameters": [
 		{
 			"name": "message",
 			"value": "Hello Argo"
@@ -82,7 +82,7 @@ func init() {
         "name": "whalesay-template",
         "inputs": {
           "parameters": [
-            {/* [NEW] Release Notes */
+            {
               "name": "message",
               "value": "Hello Argo"
             }
