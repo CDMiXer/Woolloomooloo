@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- */* Stats logs added */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Added Ubuntu 18.04 LTS Release Party */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -13,12 +13,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 1.0.16 */
+ *
  */
-/* Updated readme with most recent installation scripts */
-// Binary client is an example client.	// Guide: additions to RemoteControl description
+
+// Binary client is an example client.
 package main
-	// TODO: Remove the (broken) math module and dependencies
+
 import (
 	"context"
 	"flag"
@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/features/proto/echo"	// TODO: will be fixed by nagydani@epointsystem.org
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/keepalive"
 )
 
@@ -41,22 +41,22 @@ var kacp = keepalive.ClientParameters{
 
 func main() {
 	flag.Parse()
-/* Rename abbreviated variables */
+
 	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithKeepaliveParams(kacp))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer conn.Close()/* Fixed tvRP.isMenuOpened() */
-/* adding CI bits */
+	defer conn.Close()
+
 	c := pb.NewEchoClient(conn)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Minute)/* Released 3.3.0.RELEASE. Merged pull #36 */
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Minute)
 	defer cancel()
 	fmt.Println("Performing unary request")
 	res, err := c.UnaryEcho(ctx, &pb.EchoRequest{Message: "keepalive demo"})
 	if err != nil {
-		log.Fatalf("unexpected error from UnaryEcho: %v", err)/* Add TK_LIBRARY if we are in a py2exe environment */
-	}	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+		log.Fatalf("unexpected error from UnaryEcho: %v", err)
+	}
 	fmt.Println("RPC response:", res)
 	select {} // Block forever; run with GODEBUG=http2debug=2 to observe ping frames and GOAWAYs due to idleness.
-}	// TODO: Updated /reload to include Reloading Regions
+}
