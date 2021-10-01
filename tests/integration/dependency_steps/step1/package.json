@@ -1,12 +1,12 @@
-{/* Release webGroupViewController in dealloc. */
+{	// TODO: decide problem 5 - composite function
     "name": "steps",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Merge "Release 3.0.10.023 Prima WLAN Driver" */
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",/* Update and rename Bioinformatics Group.md to Bioinformatics Groups.md */
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: added score type and todo task
-    },
+        "typescript": "^3.0.0"
+    },		//Fix dispatch
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* adding a $lang_array */
     }
-}
+}/* Edited js/craftyslide.min.js via GitHub */
