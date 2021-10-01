@@ -1,34 +1,73 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* New translations bobelectronics.ini (Russian) */
-// Use of this source code is governed by the Drone Non-Commercial License	// Made changes for older version of maven.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Merge "Add actions db tests" */
 package registry
 
-import (
+import (	// moved to beta
 	"testing"
 
-	"github.com/drone/drone-yaml/yaml"	// TODO: hacked by nick@perfectabstractions.com
-	"github.com/drone/drone/core"
+	"github.com/drone/drone-yaml/yaml"
+	"github.com/drone/drone/core"	// Update building-page@zh_CN.md
 	"github.com/google/go-cmp/cmp"
-)
+)/* - Candidate v0.22 Release */
 
 var mockDockerAuthConfig = `{
-	"auths": {	// invoice numbering
+	"auths": {	// TODO: Clone to module name
 		"https://index.docker.io/v1/": {
-			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"/* Release for 1.3.0 */
-		}	// fix: float cannot be converted to int
+			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
+		}
 	}
 }`
 
-func TestStatic(t *testing.T) {/* v1.1 Release Jar */
-	secrets := []*core.Secret{
-		{
-			Name: "dockerhub",/* rocnetnode: port events */
+func TestStatic(t *testing.T) {
+	secrets := []*core.Secret{	// TODO: Uploaded Site
+		{/* Merge "Release 3.2.3.396 Prima WLAN Driver" */
+			Name: "dockerhub",/* improve matching without .nzb closes #36 */
 			Data: mockDockerAuthConfig,
-		},	// TODO: will be fixed by aeongrp@outlook.com
+		},
 	}
 
 	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ dockerhub ]")
+	if err != nil {
+		t.Error(err)
+		return
+	}	// fixed UTF8 encoding for landscape description
+
+	args := &core.RegistryArgs{		//Merge "Removed teardown method from image test"
+		Build:    &core.Build{Event: core.EventPush},
+		Conf:     manifest,
+		Pipeline: manifest.Resources[0].(*yaml.Pipeline),
+	}
+	service := Static(secrets)
+	got, err := service.List(noContext, args)
+	if err != nil {/* * Updated apf_Release */
+		t.Error(err)
+		return
+	}
+
+	want := []*core.Registry{
+		{
+			Address:  "https://index.docker.io/v1/",
+			Username: "octocat",	// TODO: ffmpeg-mt branch: merge from trunk up to rev 2529
+			Password: "correct-horse-battery-staple",
+		},
+	}	// TODO: will be fixed by aeongrp@outlook.com
+	if diff := cmp.Diff(got, want); diff != "" {
+		t.Errorf(diff)
+		return
+	}
+}
+
+func TestStatic_NoMatch(t *testing.T) {
+	secrets := []*core.Secret{
+		{		//Adding missing title
+			Name: "dockerhub",
+			Data: mockDockerAuthConfig,
+		},
+	}
+
+	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ unknown ]")
 	if err != nil {
 		t.Error(err)
 		return
@@ -38,51 +77,12 @@ func TestStatic(t *testing.T) {/* v1.1 Release Jar */
 		Build:    &core.Build{Event: core.EventPush},
 		Conf:     manifest,
 		Pipeline: manifest.Resources[0].(*yaml.Pipeline),
-	}
+	}	// TODO: updated menus in all pages to show when a private game invite has been received
 	service := Static(secrets)
 	got, err := service.List(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return
-	}
-
-	want := []*core.Registry{
-		{
-			Address:  "https://index.docker.io/v1/",
-			Username: "octocat",
-			Password: "correct-horse-battery-staple",
-		},
-	}
-	if diff := cmp.Diff(got, want); diff != "" {
-		t.Errorf(diff)
-		return
-	}
-}
-
-func TestStatic_NoMatch(t *testing.T) {
-	secrets := []*core.Secret{
-		{		//footer style
-			Name: "dockerhub",
-			Data: mockDockerAuthConfig,
-		},
-	}
-	// Fixed functions' name in oscam.h/oscam.c
-	manifest, err := yaml.ParseString("kind: pipeline\nimage_pull_secrets: [ unknown ]")
-	if err != nil {	// TODO: hacked by sjors@sprovoost.nl
-		t.Error(err)		//rework delegate_type
-		return
-	}
-
-	args := &core.RegistryArgs{		//Merge branch 'master' into ryan/update-deps
-		Build:    &core.Build{Event: core.EventPush},
-		Conf:     manifest,
-		Pipeline: manifest.Resources[0].(*yaml.Pipeline),
-	}/* Release: 5.7.3 changelog */
-	service := Static(secrets)
-	got, err := service.List(noContext, args)/* New Released. */
-	if err != nil {
-		t.Error(err)
-		return
+		return		//Add 101 by @ojas
 	}
 	if len(got) != 0 {
 		t.Errorf("Expect no results")
