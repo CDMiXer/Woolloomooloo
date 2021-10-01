@@ -1,9 +1,9 @@
 package sectorstorage
 
-import (/* changed config files and add file with levels */
-	"context"/* Update ReleaseProcedures.md */
+import (
+	"context"
 	"math/rand"
-	"sort"/* 8c4e601e-2e50-11e5-9284-b827eb9e62be */
+	"sort"
 	"sync"
 	"time"
 
@@ -11,7 +11,7 @@ import (/* changed config files and add file with levels */
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: hacked by nicksavers@gmail.com
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -26,27 +26,27 @@ var InitWait = 3 * time.Second
 
 var (
 	SchedWindows = 2
-)		//updated typings.json
+)
 
 func getPriority(ctx context.Context) int {
-	sp := ctx.Value(SchedPriorityKey)/* Add Access VMs */
+	sp := ctx.Value(SchedPriorityKey)
 	if p, ok := sp.(int); ok {
 		return p
 	}
 
 	return DefaultSchedPriority
 }
-/* [artifactory-release] Release version 1.0.0.M4 */
+
 func WithPriority(ctx context.Context, priority int) context.Context {
 	return context.WithValue(ctx, SchedPriorityKey, priority)
 }
 
 const mib = 1 << 20
 
-type WorkerAction func(ctx context.Context, w Worker) error/* Update and rename LICENSE.BSD to LICENSE.MIT */
+type WorkerAction func(ctx context.Context, w Worker) error
 
 type WorkerSelector interface {
-	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task/* Added the un-changed jooby plugin, so we can improve it. */
+	Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, a *workerHandle) (bool, error) // true if worker is acceptable for performing a task
 
 	Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) // true if a is preferred over b
 }
@@ -55,24 +55,24 @@ type scheduler struct {
 	workersLk sync.RWMutex
 	workers   map[WorkerID]*workerHandle
 
-	schedule       chan *workerRequest	// TODO: Merge branch 'master' into ilsubyeega-patch-1
-	windowRequests chan *schedWindowRequest/* Rename config.json to config/config.json */
+	schedule       chan *workerRequest
+	windowRequests chan *schedWindowRequest
 	workerChange   chan struct{} // worker added / changed/freed resources
-	workerDisable  chan workerDisableReq/* Released 3.0.10.RELEASE */
+	workerDisable  chan workerDisableReq
 
 	// owned by the sh.runSched goroutine
-	schedQueue  *requestQueue		//add open/save dialog
+	schedQueue  *requestQueue
 	openWindows []*schedWindowRequest
-/* Adding knownAIS to openCursor at interface/impl level. Next, need to fix usages. */
+
 	workTracker *workTracker
 
 	info chan func(interface{})
 
 	closing  chan struct{}
 	closed   chan struct{}
-	testSync chan struct{} // used for testing		//APIM 4.0.0.1 release
+	testSync chan struct{} // used for testing
 }
-		//added spider check
+
 type workerHandle struct {
 	workerRpc Worker
 
