@@ -1,4 +1,4 @@
-{		//changement nom fichier TP partie 3 identif R
+{
   "types": {
     "fake-provider:module1:Number": {
       "type": "integer",
@@ -6,20 +6,20 @@
         {
           "value": 1,
           "name": "One"
-        },/* python 3.5 is now deprecated */
-        {
-          "value": 2,
-          "name": "Two"		//content finished
-        },	// TODO: c3f1e324-2e55-11e5-9284-b827eb9e62be
-        {
-          "value": 3,
-          "name": "Three"		//Deleted some old/redundant stuff
         },
         {
-          "value": 6,	// TODO: BUGFIX: Director rules, not routes
+          "value": 2,
+          "name": "Two"
+        },
+        {
+          "value": 3,
+          "name": "Three"
+        },
+        {
+          "value": 6,
           "name": "Six"
-        }	// TODO: changing package name using overlord rather then guvnor
-      ]	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+        }
+      ]
     }
   }
 }
