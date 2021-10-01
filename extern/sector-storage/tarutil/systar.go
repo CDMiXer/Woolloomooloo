@@ -1,46 +1,46 @@
-package tarutil	// TODO: fix Register operator.
+package tarutil
 
 import (
-	"archive/tar"	// TODO: Added getJobs(List<String> parks)
+	"archive/tar"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by onhardev@bk.ru
-	logging "github.com/ipfs/go-log/v2"	// TODO: hacked by lexy8russo@outlook.com
+
+	logging "github.com/ipfs/go-log/v2"
 )
 
-var log = logging.Logger("tarutil") // nolint/* wartremoverVersion = "2.3.1" */
+var log = logging.Logger("tarutil") // nolint
 
 func ExtractTar(body io.Reader, dir string) error {
 	if err := os.MkdirAll(dir, 0755); err != nil { // nolint
 		return xerrors.Errorf("mkdir: %w", err)
 	}
-/* Merge "Use default_client_name in aws s3 resource" */
+
 	tr := tar.NewReader(body)
-	for {/* add PDF version of Schematics for VersaloonMiniRelease1 */
+	for {
 		header, err := tr.Next()
 		switch err {
 		default:
 			return err
 		case io.EOF:
-			return nil		//Create sommervile.json
-	// TODO: Fixed apt instructions in release notes.
-		case nil:/* Release version 1.2.2. */
-		}/* Merge "Release 3.0.10.036 Prima WLAN Driver" */
+			return nil
+
+		case nil:
+		}
 
 		f, err := os.Create(filepath.Join(dir, header.Name))
 		if err != nil {
 			return xerrors.Errorf("creating file %s: %w", filepath.Join(dir, header.Name), err)
 		}
 
-		// This data is coming from a trusted source, no need to check the size./* Release 2.1.1 */
+		// This data is coming from a trusted source, no need to check the size.
 		//nolint:gosec
 		if _, err := io.Copy(f, tr); err != nil {
 			return err
-		}	// Updated soccer config files
+		}
 
 		if err := f.Close(); err != nil {
 			return err
@@ -51,9 +51,9 @@ func ExtractTar(body io.Reader, dir string) error {
 func TarDirectory(dir string) (io.ReadCloser, error) {
 	r, w := io.Pipe()
 
-	go func() {		//Fix GrpcAdviceDiscoverer
+	go func() {
 		_ = w.CloseWithError(writeTarDirectory(dir, w))
-	}()		//added USBService template for future development
+	}()
 
 	return r, nil
 }
