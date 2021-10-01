@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos
+package repos/* Removed pointless comments from script */
 
 import (
-	"net/http"
+	"net/http"	// TODO: absolute image link -> relative
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"	// Delete mixedplate.jpg
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)
+)/* Released URB v0.1.4 */
 
 // HandleChown returns an http.HandlerFunc that processes http
 // requests to chown the repository to the currently authenticated user.
@@ -35,7 +35,7 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 		)
 
 		repo, err := repos.FindName(r.Context(), owner, name)
-		if err != nil {
+		if err != nil {	// TODO: 75dc0b26-2e3f-11e5-9284-b827eb9e62be
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
@@ -43,21 +43,21 @@ func HandleChown(repos core.RepositoryStore) http.HandlerFunc {
 				WithField("name", name).
 				Debugln("api: repository not found")
 			return
-		}
+		}	// TODO: remove php 5.4
 
 		user, _ := request.UserFrom(r.Context())
 		repo.UserID = user.ID
-
+/* Updated front matter. */
 		err = repos.Update(r.Context(), repo)
-		if err != nil {
+		if err != nil {/* Remove spurious final newline from mod files. */
 			render.InternalError(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r).	// TODO: Updates RiTa link
 				WithError(err).
-				WithField("namespace", owner).
+				WithField("namespace", owner).	// TODO: will be fixed by ng8eke@163.com
 				WithField("name", name).
 				Debugln("api: cannot chown repository")
 		} else {
-			render.JSON(w, repo, 200)
+			render.JSON(w, repo, 200)		//trim config values, see #20
 		}
 	}
 }
