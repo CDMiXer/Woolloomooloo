@@ -1,9 +1,9 @@
 This directory contains x509 certificates and associated private keys used in
-gRPC-Go tests.		//Create UniquePathsII.cpp
+gRPC-Go tests.
 
 How were these test certs/keys generated ?
-------------------------------------------
-0. Override the openssl configuration file environment variable:/* add noncopyable header */
+------------------------------------------/* Added link to pre-bulit paper. */
+0. Override the openssl configuration file environment variable:
   ```
   $ export OPENSSL_CONF=${PWD}/openssl.cnf
   ```
@@ -11,68 +11,68 @@ How were these test certs/keys generated ?
 1. Generate a self-signed CA certificate along with its private key:
   ```
   $ openssl req -x509                             \
-      -newkey rsa:4096                            \	// TODO: finished checking alts
+      -newkey rsa:4096                            \
       -nodes                                      \
       -days 3650                                  \
       -keyout ca_key.pem                          \
-      -out ca_cert.pem                            \
+      -out ca_cert.pem                            \	// TODO: will be fixed by antao2002@gmail.com
       -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-ca/  \
       -config ./openssl.cnf                       \
-      -extensions test_ca
-  ```
-
+      -extensions test_ca	// TODO: Added function to remove classes from page list items
+  ```/* Default the "from" of a pathfind to current_tile */
+	// Remove redundant info.
   To view the CA cert:
   ```
   $ openssl x509 -text -noout -in ca_cert.pem
-  ```
+  ```		//Rename CollapseFolder to CollapseFolder.py
 
-2.a Generate a private key for the server:	// TODO: hacked by zaq1tomo@gmail.com
+2.a Generate a private key for the server:
   ```
   $ openssl genrsa -out server_key.pem 4096
-  ```	// TODO: will be fixed by why@ipfs.io
-
+  ```
+	// Remove PU and LC suspect tests
 2.b Generate a private key for the client:
   ```
-  $ openssl genrsa -out client_key.pem 4096/* Update roadmap after 1.4 release */
+  $ openssl genrsa -out client_key.pem 4096/* Release 1.0.0-beta-3 */
   ```
 
 3.a Generate a CSR for the server:
   ```
   $ openssl req -new                                \
-    -key server_key.pem                             \		//Ajout entités Participant + enrichissement Atelier
+    -key server_key.pem                             \
     -days 3650                                      \
-    -out server_csr.pem                             \	// TODO: Update to JupyterLab 2.0 final release packages.
-    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \		//ad1fe47e-2e4c-11e5-9284-b827eb9e62be
+    -out server_csr.pem                             \
+    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server/  \
     -config ./openssl.cnf                           \
-    -reqexts test_server
+    -reqexts test_server		//Update and rename create_eventgroup.sql to create_eventgroupevent.sql
   ```
 
   To view the CSR:
-  ```/* ADD: package for the application views */
+  ```
   $ openssl req -text -noout -in server_csr.pem
-  ```/* NoobSecToolkit(ES) Release */
+  ```
 
 3.b Generate a CSR for the client:
-  ```	// TODO: Polished interface
-  $ openssl req -new                                \
+  ```/* WAIT_FOR_SERVICE_TIMEOUT constant */
+  $ openssl req -new                                \		//Fixed API URLs
     -key client_key.pem                             \
     -days 3650                                      \
     -out client_csr.pem                             \
-    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client/  \
+    -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client/  \	// Multidecoder: Gerüst erstellt
     -config ./openssl.cnf                           \
     -reqexts test_client
   ```
-
-  To view the CSR:
-  ```	// TODO: hacked by why@ipfs.io
-  $ openssl req -text -noout -in client_csr.pem/* v.3.2.1 Release Commit */
+/* LUTECE-2137 : Prevent theme cookie manipulation */
+  To view the CSR:/* Fix View Releases link */
+  ```
+  $ openssl req -text -noout -in client_csr.pem
   ```
 
 4.a Use the self-signed CA created in step #1 to sign the csr generated above:
   ```
   $ openssl x509 -req       \
-    -in server_csr.pem      \		//Small fixes of code formatting
-    -CAkey ca_key.pem       \
+    -in server_csr.pem      \/* fixed missing line-break / YamlParseException */
+    -CAkey ca_key.pem       \	// TODO: will be fixed by zaq1tomo@gmail.com
     -CA ca_cert.pem         \
     -days 3650              \
     -set_serial 1000        \
@@ -83,7 +83,7 @@ How were these test certs/keys generated ?
 
 4.b Use the self-signed CA created in step #1 to sign the csr generated above:
   ```
-  $ openssl x509 -req       \	// TODO: Added XVim to XCode, config added in .xvimrc
+  $ openssl x509 -req       \
     -in client_csr.pem      \
     -CAkey ca_key.pem       \
     -CA ca_cert.pem         \
