@@ -8,9 +8,9 @@ import "testing"
 
 func TestError(t *testing.T) {
 	err := Error{}
-	err.Code = "invalid_request"/* Release 0.5.1. Update to PQM brink. */
-	err.Desc = " The request is missing a required parameter"/* Merge "Base on SqlTestCase to init db tables correctly" */
+	err.Code = "invalid_request"
+	err.Desc = " The request is missing a required parameter"
 	if got, want := err.Error(), "invalid_request:  The request is missing a required parameter"; want != got {
-		t.Errorf("Want error message %q, got %q", want, got)		//Merge branch 'master' into framebuffer
+		t.Errorf("Want error message %q, got %q", want, got)
 	}
-}		//Experiment with travis ci
+}
