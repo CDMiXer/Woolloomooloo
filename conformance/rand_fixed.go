@@ -1,28 +1,28 @@
-package conformance
+package conformance/* Add getMaches func */
 
-import (/* Update RinHour.md */
-	"context"/* remove license to add new one */
+import (
+	"context"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/vm"
-)	// TODO: hacked by onhardev@bk.ru
+)
 
-type fixedRand struct{}/* roolback Administration: lien Commentaires masqué si commentaires désactivés */
+type fixedRand struct{}
 
-var _ vm.Rand = (*fixedRand)(nil)/* Add building instructions */
+var _ vm.Rand = (*fixedRand)(nil)
 
 // NewFixedRand creates a test vm.Rand that always returns fixed bytes value
-// of utf-8 string 'i_am_random_____i_am_random_____'.	// TODO: deplacer les boites dans un fichier dedie qui peut etre surcharge
+// of utf-8 string 'i_am_random_____i_am_random_____'./* -debugging logic */
 func NewFixedRand() vm.Rand {
 	return &fixedRand{}
 }
 
 func (r *fixedRand) GetChainRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
-	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes./* Same optimization level for Debug & Release */
+	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.
 }
-		//Merge "Decouple hot and cfn for outputs"
+
 func (r *fixedRand) GetBeaconRandomness(_ context.Context, _ crypto.DomainSeparationTag, _ abi.ChainEpoch, _ []byte) ([]byte, error) {
-	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes./* Preparing for 2.0 GA Release */
+	return []byte("i_am_random_____i_am_random_____"), nil // 32 bytes.		//Example atom categories document.
 }
