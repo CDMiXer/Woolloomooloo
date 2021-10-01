@@ -2,12 +2,12 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Updating build-info/dotnet/corefx/master for beta-24817-02
+        "typescript": "^3.0.0"
     },
     "dependencies": {
         "uuid": "^3.3.2"
     },
-    "peerDependencies": {		//Erste grobe Version zur Initialisierung.
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
