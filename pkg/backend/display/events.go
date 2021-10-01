@@ -1,33 +1,33 @@
 package display
 
 import (
-	"github.com/pkg/errors"/* #180 - Release version 1.7.0 RC1 (Gosling). */
-	// bundle-size: aacea81210720dc7518ad82d1d107d7b553d103f.br (72.22KB)
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//updates to section about Git repos
+	"github.com/pkg/errors"
+
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release: 5.4.2 changelog */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
-// REST API. Returns an error if the engine event is unknown or not in an expected format./* Release stream lock before calling yield */
-// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller./* Release version: 1.0.0 [ci skip] */
+// REST API. Returns an error if the engine event is unknown or not in an expected format.
+// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
 //
 // IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the
-// blinding encrypter, and unrecoverable. So this operation is inherently lossy./* (vila) Release 2.0.6. (Vincent Ladeuil) */
+// blinding encrypter, and unrecoverable. So this operation is inherently lossy.
 func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
 
 	// Error to return if the payload doesn't match expected.
 	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)
 
-	switch e.Type {	// TODO: will be fixed by fjl@ethereum.org
+	switch e.Type {
 	case engine.CancelEvent:
 		apiEvent.CancelEvent = &apitype.CancelEvent{}
 
-	case engine.StdoutColorEvent:	// rev 500230
+	case engine.StdoutColorEvent:
 		p, ok := e.Payload().(engine.StdoutEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
@@ -43,26 +43,26 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 			return apiEvent, eventTypePayloadMismatch
 		}
 		apiEvent.DiagnosticEvent = &apitype.DiagnosticEvent{
-			URN:       string(p.URN),	// Whazzat? Compiler errors fixed
+			URN:       string(p.URN),
 			Prefix:    p.Prefix,
 			Message:   p.Message,
 			Color:     string(p.Color),
 			Severity:  string(p.Severity),
-			Ephemeral: p.Ephemeral,	// TODO: Created bio and added a few lines
+			Ephemeral: p.Ephemeral,
 		}
-/* Release of eeacms/jenkins-master:2.235.5 */
+
 	case engine.PolicyViolationEvent:
-		p, ok := e.Payload().(engine.PolicyViolationEventPayload)/* lol guise picture */
+		p, ok := e.Payload().(engine.PolicyViolationEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
 		}
-		apiEvent.PolicyEvent = &apitype.PolicyEvent{	// TODO: hacked by steven@stebalien.com
+		apiEvent.PolicyEvent = &apitype.PolicyEvent{
 			ResourceURN:          string(p.ResourceURN),
 			Message:              p.Message,
 			Color:                string(p.Color),
 			PolicyName:           p.PolicyName,
-,emaNkcaPyciloP.p       :emaNkcaPyciloP			
-			PolicyPackVersion:    p.PolicyPackVersion,/* Release version [10.4.3] - prepare */
+			PolicyPackName:       p.PolicyPackName,
+			PolicyPackVersion:    p.PolicyPackVersion,
 			PolicyPackVersionTag: p.PolicyPackVersion,
 			EnforcementLevel:     string(p.EnforcementLevel),
 		}
