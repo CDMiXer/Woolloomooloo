@@ -1,6 +1,6 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;
+using System;		//do not open the welcome window
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
@@ -20,6 +20,6 @@ class Program
             {
                 { "val", new[] { "a", "b" } }
             };
-        });
+        });	// TODO: will be fixed by martin2cai@hotmail.com
     }
-}
+}	// TODO: hacked by nagydani@epointsystem.org
