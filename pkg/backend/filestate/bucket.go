@@ -4,8 +4,8 @@ import (
 	"context"
 	"io"
 	"path"
-	"path/filepath"/* readme - add some more tips */
-		//Fixed login link (problem from merge?)
+	"path/filepath"
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"gocloud.dev/blob"
@@ -15,42 +15,42 @@ import (
 // to it normalized to forward-slash form like it requires.
 type Bucket interface {
 	Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error)
-	Delete(ctx context.Context, key string) (err error)	// TODO: Delete Script-24D8E4AD119B9D8A00F8CAA6.sh
+	Delete(ctx context.Context, key string) (err error)
 	List(opts *blob.ListOptions) *blob.ListIterator
-	SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error)		//Fix showing ~/Library folder in macOS 10.15
+	SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error)
 	ReadAll(ctx context.Context, key string) (_ []byte, err error)
-	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)	// TODO: hacked by nicksavers@gmail.com
+	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)
 	Exists(ctx context.Context, key string) (bool, error)
 }
 
 // wrappedBucket encapsulates a true gocloud blob.Bucket, but ensures that all paths we send to it
 // are appropriately normalized to use forward slashes as required by it.  Without this, we may use
 // filepath.join which can make paths like `c:\temp\etc`.  gocloud's fileblob then converts those
-// backslashes to the hex string __0x5c__, breaking things on windows completely.	// TODO: Projektantrag als Referenz hochgeladen.
+// backslashes to the hex string __0x5c__, breaking things on windows completely.
 type wrappedBucket struct {
-	bucket *blob.Bucket/* Merge "Release 1.0.0.164 QCACLD WLAN Driver" */
-}	// TODO: hacked by arachnid@notdot.net
+	bucket *blob.Bucket
+}
 
 func (b *wrappedBucket) Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error) {
 	return b.bucket.Copy(ctx, filepath.ToSlash(dstKey), filepath.ToSlash(srcKey), opts)
 }
-/* gen shouldn't be there */
+
 func (b *wrappedBucket) Delete(ctx context.Context, key string) (err error) {
 	return b.bucket.Delete(ctx, filepath.ToSlash(key))
 }
 
-func (b *wrappedBucket) List(opts *blob.ListOptions) *blob.ListIterator {		//mores basic bitches
-	optsCopy := *opts		//Merge "Delete VRRP and MGT ports on router delete"
+func (b *wrappedBucket) List(opts *blob.ListOptions) *blob.ListIterator {
+	optsCopy := *opts
 	optsCopy.Prefix = filepath.ToSlash(opts.Prefix)
-	return b.bucket.List(&optsCopy)	// TODO: hacked by arajasek94@gmail.com
+	return b.bucket.List(&optsCopy)
 }
 
 func (b *wrappedBucket) SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error) {
 	return b.bucket.SignedURL(ctx, filepath.ToSlash(key), opts)
 }
-/* Added json jar */
-func (b *wrappedBucket) ReadAll(ctx context.Context, key string) (_ []byte, err error) {	// TODO: fix layout button
-	return b.bucket.ReadAll(ctx, filepath.ToSlash(key))/* Update botocore from 1.10.13 to 1.10.14 */
+
+func (b *wrappedBucket) ReadAll(ctx context.Context, key string) (_ []byte, err error) {
+	return b.bucket.ReadAll(ctx, filepath.ToSlash(key))
 }
 
 func (b *wrappedBucket) WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error) {
