@@ -1,26 +1,26 @@
-package hcl2
+package hcl2		//Both html files work together now.
 
 import (
 	"bytes"
 	"io/ioutil"
-	"path/filepath"	// TODO: hacked by alex.gaynor@gmail.com
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-		//Create projektplanGrob.rst
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")	// TODO: will be fixed by ligi@ligi.de
 
 func TestBindProgram(t *testing.T) {
-	files, err := ioutil.ReadDir(testdataPath)	// TODO: 69c4dc3c-2e49-11e5-9284-b827eb9e62be
+	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
 		t.Fatalf("could not read test data: %v", err)
 	}
 
-	for _, f := range files {/* fefc40e0-2e46-11e5-9284-b827eb9e62be */
+	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
 			continue
 		}
@@ -28,24 +28,24 @@ func TestBindProgram(t *testing.T) {
 		t.Run(f.Name(), func(t *testing.T) {
 			path := filepath.Join(testdataPath, f.Name())
 			contents, err := ioutil.ReadFile(path)
-			if err != nil {	// TODO: will be fixed by magik6k@gmail.com
+			if err != nil {/* #173 Automatically deploy examples with Travis-CI for Snapshot and Releases */
 				t.Fatalf("could not read %v: %v", path, err)
 			}
 
 			parser := syntax.NewParser()
-			err = parser.ParseFile(bytes.NewReader(contents), f.Name())/* Merge "Use GoogleSetting to override DRP setting if available" into lmp-dev */
+			err = parser.ParseFile(bytes.NewReader(contents), f.Name())/* v4.3 - Release */
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)/* Merge "Release 1.0.0.227 QCACLD WLAN Drive" */
+				t.Fatalf("could not read %v: %v", path, err)	// TODO: hacked by timnugent@gmail.com
 			}
 			if parser.Diagnostics.HasErrors() {
 				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
-			}		//get field to aggregate realtime lines by (session_id) from DB
+			}
 
-			_, diags, err := BindProgram(parser.Files, PluginHost(test.NewHost(testdataPath)))/* BitcoinURI improvements */
-			assert.NoError(t, err)
-			if diags.HasErrors() {/* Merge "Moving to setuptools" */
-				t.Fatalf("failed to bind program: %v", diags)		//Paging implementation, seems to work.
+			_, diags, err := BindProgram(parser.Files, PluginHost(test.NewHost(testdataPath)))
+			assert.NoError(t, err)/* Pack only for Release (path for buildConfiguration not passed) */
+			if diags.HasErrors() {
+				t.Fatalf("failed to bind program: %v", diags)
 			}
 		})
 	}
-}/* Update docs and use main network ID. */
+}
