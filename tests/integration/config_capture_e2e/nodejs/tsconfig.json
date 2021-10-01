@@ -1,16 +1,16 @@
-{
+{/* name 64->128 */
     "compilerOptions": {
-        "strict": true,
+        "strict": true,		//Use correct var. Props charismabiz. fixes #4246 for 2.3
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",	// Rename doomsday to orgclone
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: will be fixed by alex.gaynor@gmail.com
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// removed remaining ncurses bits
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
