@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Correct lock wording
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release new version 2.5.49:  */
-package build	// Add disappeared config warnings
-		//Jobs: reset errors on start, Selenium: fix poll interval
+
+package build
+
 import (
 	"context"
 	"database/sql"
@@ -13,7 +13,7 @@ import (
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
-)		//Revved docker version.
+)
 
 var noContext = context.TODO()
 
@@ -24,13 +24,13 @@ func TestBuild(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)	// e2da2cc8-2e6a-11e5-9284-b827eb9e62be
-		dbtest.Disconnect(conn)	// TODO: hacked by witek@enjin.io
+		dbtest.Reset(conn)
+		dbtest.Disconnect(conn)
 	}()
 
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
-	t.Run("Purge", testBuildPurge(store))/* The ender hopper will not pick up items when powered.  */
+	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
@@ -41,11 +41,11 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
-			Number: 99,/* Fixed formatting in users guide. Updated credits with recent history. */
+			Number: 99,
 			Event:  core.EventPush,
 			Ref:    "refs/heads/master",
 			Target: "master",
-		}/* Sprint 9 Release notes */
+		}
 		stage := &core.Stage{
 			RepoID: 42,
 			Number: 1,
@@ -53,12 +53,12 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		err := store.Create(noContext, build, []*core.Stage{stage})
 		if err != nil {
 			t.Error(err)
-		}/* Merge "Return 400 in get_console_output for bad length." */
+		}
 		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
-		}		//All view updated, links to map added, minor changes
+		}
 		if got, want := build.Version, int64(1); got != want {
-			t.Errorf("Want build Version %d, got %d", want, got)/* Merge "Release stack lock when successfully acquire" */
+			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
 		t.Run("FindNumber", testBuildFindNumber(store, build))
@@ -78,17 +78,17 @@ func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testBuild(result))
-		}/* [artifactory-release] Release version 0.8.14.RELEASE */
+		}
 	}
 }
 
 func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.FindNumber(noContext, build.RepoID, build.Number)	// debc8af8-2e53-11e5-9284-b827eb9e62be
+		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Run("Fields", testBuild(item))	// TODO: hacked by yuvalalaluf@gmail.com
+			t.Run("Fields", testBuild(item))
 		}
 	}
 }
