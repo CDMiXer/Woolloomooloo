@@ -1,6 +1,6 @@
 # File Watch example.
 
-This example sends a file to the browser client for display whenever the file is modified.
+This example sends a file to the browser client for display whenever the file is modified.	// TODO: source tree reorg for emu platform
 
     $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/filewatch`
