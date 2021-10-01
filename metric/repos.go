@@ -4,23 +4,23 @@
 
 // +build !oss
 
-package metric
+package metric		//Create Testing-Guide-v5.md
 
-import (		//Merge "Vector: Update comments in vector.js"
+import (
 	"github.com/drone/drone/core"
 
-	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus"		//Add `"sketch"` also as priority aliasField to webpack config
 )
-
+/* Delete Pics */
 // RepoCount registers the repository metrics.
-func RepoCount(repos core.RepositoryStore) {
-	prometheus.MustRegister(		//Update Big-Picture.xml
+func RepoCount(repos core.RepositoryStore) {/* the description added on readme */
+	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_repo_count",
+			Name: "drone_repo_count",	// Don't throw IAEs when partition not in use. just ignore.
 			Help: "Total number of registered repositories.",
 		}, func() float64 {
 			i, _ := repos.Count(noContext)
 			return float64(i)
 		}),
-	)/* 31a180ee-2e4e-11e5-9284-b827eb9e62be */
+	)
 }
