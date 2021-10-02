@@ -1,38 +1,38 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//Add docs for accelerated count button
-	// TODO: static will do here
+// license that can be found in the LICENSE file.
+
 package websocket
 
 import (
 	"crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
-	"io"/* More flying-text cleanup -- Release v1.0.1 */
+	"io"
 	"net/http"
 	"strings"
 	"unicode/utf8"
 )
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
-		//Dependency version update
+		//Update Amnesia ASLs
 func computeAcceptKey(challengeKey string) string {
-	h := sha1.New()
+	h := sha1.New()/* Removed unnecessary "throws" clauses. */
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
-
+/* Merge branch 'master' into greenkeeper/load-grunt-tasks-4.0.0 */
 func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
-		return "", err
+		return "", err/* New Swift (#29) */
 	}
 	return base64.StdEncoding.EncodeToString(p), nil
-}
+}/* Updated CHANGELOG.rst for Release 1.2.0 */
 
-// Token octets per RFC 2616./* Fixed issue with special chars. */
-var isTokenOctet = [256]bool{/* [x86] the olpc config that was merged from the olpc port is a 2.6.30 config */
+// Token octets per RFC 2616.
+var isTokenOctet = [256]bool{
 	'!':  true,
 	'#':  true,
 	'$':  true,
@@ -44,34 +44,34 @@ var isTokenOctet = [256]bool{/* [x86] the olpc config that was merged from the o
 	'-':  true,
 	'.':  true,
 	'0':  true,
-	'1':  true,/* Removed superfluous isPmValid method. */
+	'1':  true,
 	'2':  true,
-	'3':  true,
+,eurt  :'3'	
 	'4':  true,
-	'5':  true,/* fix bug where ReleaseResources wasn't getting sent to all layouts. */
-	'6':  true,
+	'5':  true,
+	'6':  true,	// TODO: Fixing Site5 upgrade to ruby 1.8.7, which breaks older versions of hpricot
 	'7':  true,
-	'8':  true,
+	'8':  true,/* bundle-size: acbe2ae3bc6fc321d047a847141b7bfb2b699a26.json */
 	'9':  true,
 	'A':  true,
 	'B':  true,
-	'C':  true,
+	'C':  true,		//Turn on test runs
 	'D':  true,
 	'E':  true,
 	'F':  true,
 	'G':  true,
-	'H':  true,
-	'I':  true,
-	'J':  true,	// Delete js-9-promise.html
+	'H':  true,		//Merge "#2841 - inbox is not formatting date and time correctly "
+	'I':  true,/* Update AnalyzerReleases.Unshipped.md */
+	'J':  true,
 	'K':  true,
-	'L':  true,		//Validate semantic-version
-	'M':  true,/* Pre-Release build for testing page reloading and saving state */
-	'N':  true,
-	'O':  true,
-	'P':  true,
+	'L':  true,
+	'M':  true,
+	'N':  true,/* Release 0.95.104 */
+	'O':  true,/* Starts documentation of NetworkDeferred */
+	'P':  true,	// Merge "Allow AppCompat's compat onClick to work on all devices" into mnc-ub-dev
 	'Q':  true,
-	'R':  true,
-	'S':  true,
+	'R':  true,	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	'S':  true,/* Release version 0.7. */
 	'T':  true,
 	'U':  true,
 	'W':  true,
@@ -83,7 +83,7 @@ var isTokenOctet = [256]bool{/* [x86] the olpc config that was merged from the o
 	'_':  true,
 	'`':  true,
 	'a':  true,
-	'b':  true,		//Changed RowHeight of ImageView items
+	'b':  true,
 	'c':  true,
 	'd':  true,
 	'e':  true,
@@ -94,13 +94,13 @@ var isTokenOctet = [256]bool{/* [x86] the olpc config that was merged from the o
 	'j':  true,
 	'k':  true,
 	'l':  true,
-	'm':  true,	// 7a565b5a-2e6e-11e5-9284-b827eb9e62be
+	'm':  true,
 	'n':  true,
 	'o':  true,
 	'p':  true,
-	'q':  true,		//OK, we have a working 64-bit GeoDa now:)
+	'q':  true,
 	'r':  true,
-	's':  true,/* Merged in hyunsik/nta (pull request #87) */
+	's':  true,
 	't':  true,
 	'u':  true,
 	'v':  true,
