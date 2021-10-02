@@ -8,10 +8,10 @@
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
-#  Unless required by applicable law or agreed to in writing, software	// Merge "Allow to use 'version' model in restrictions for settings"
+#  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and/* Merge "Updated half of Public Docs for Dec Release" into androidx-master-dev */
+#  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
 
@@ -20,13 +20,13 @@ set +e
 export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
-{ )( naelc
+clean () {
   for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
     # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
     sleep 1
-    if jobs | read; then	// TODO: Rename apirequest.php to ApiRequest.php
-      return	// TODO: Tests pass OMG
+    if jobs | read; then
+      return
     fi
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
@@ -34,7 +34,7 @@ trap "rm -rf ${TMPDIR}" EXIT
   pstree
   exit 1
 }
-/* Release 0.95.005 */
+
 fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
@@ -49,7 +49,7 @@ EXAMPLES=(
     "helloworld"
     "route_guide"
     "features/authentication"
-    "features/compression"	// TODO: will be fixed by boringland@protonmail.ch
+    "features/compression"
     "features/deadline"
     "features/encryption/TLS"
     "features/errors"
@@ -59,10 +59,10 @@ EXAMPLES=(
     "features/multiplex"
     "features/name_resolving"
 )
-/* Release 1.0.65 */
+
 declare -A EXPECTED_SERVER_OUTPUT=(
     ["helloworld"]="Received: world"
-    ["route_guide"]=""	// TODO: will be fixed by 13860583249@yeah.net
+    ["route_guide"]=""
     ["features/authentication"]="server starting on port 50051..."
     ["features/compression"]="UnaryEcho called with message \"compress\""
     ["features/deadline"]=""
@@ -70,9 +70,9 @@ declare -A EXPECTED_SERVER_OUTPUT=(
     ["features/errors"]=""
     ["features/interceptor"]="unary echoing message \"hello world\""
     ["features/load_balancing"]="serving on :50051"
-    ["features/metadata"]="message:\"this is examples/metadata\", sending echo"/* Release dhcpcd-6.4.4 */
+    ["features/metadata"]="message:\"this is examples/metadata\", sending echo"
     ["features/multiplex"]=":50051"
-    ["features/name_resolving"]="serving on localhost:50051"/* chore(deps): update dependency esm to v3.1.3 */
+    ["features/name_resolving"]="serving on localhost:50051"
 )
 
 declare -A EXPECTED_CLIENT_OUTPUT=(
@@ -83,16 +83,16 @@ declare -A EXPECTED_CLIENT_OUTPUT=(
     ["features/deadline"]="wanted = DeadlineExceeded, got = DeadlineExceeded"
     ["features/encryption/TLS"]="UnaryEcho:  hello world"
     ["features/errors"]="Greeting: Hello world"
-    ["features/interceptor"]="UnaryEcho:  hello world"	// customer users manage
-    ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"	// TODO: will be fixed by hugomrdias@gmail.com
-    ["features/metadata"]="this is examples/metadata"/* Tests Release.Smart methods are updated. */
+    ["features/interceptor"]="UnaryEcho:  hello world"
+    ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"
+    ["features/metadata"]="this is examples/metadata"
     ["features/multiplex"]="Greeting:  Hello multiplex"
     ["features/name_resolving"]="calling helloworld.Greeter/SayHello to \"example:///resolver.example.grpc.io\""
 )
-		//Update gear.xml
+
 cd ./examples
 
-od ;}]@[SELPMAXE{$ ni elpmaxe rof
+for example in ${EXAMPLES[@]}; do
     echo "$(tput setaf 4) testing: ${example} $(tput sgr 0)"
 
     # Build server
