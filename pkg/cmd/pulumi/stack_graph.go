@@ -2,48 +2,48 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Also mention a char-rnn implementation using Blocks
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Fixed loading wave files, Version 9 Release */
-///* Updated readme with license information */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Port buildGeometry method. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge branch 'master' into patch1 */
+// limitations under the License.
 
 package main
 
-import (		//Added atomicity to the memory subsystem
-	"github.com/pkg/errors"/* #113 - Release version 1.6.0.M1. */
+import (
+	"github.com/pkg/errors"
 	"os"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/graph"
 	"github.com/pulumi/pulumi/pkg/v2/graph/dotconv"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* GMParse 1.0 (Stable Release, with JavaDoc) */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/spf13/cobra"
-)/* Release 0.9.1. */
+)
 
-// Whether or not we should ignore parent edges when building up our graph./* Release of eeacms/ims-frontend:0.4.0-beta.2 */
+// Whether or not we should ignore parent edges when building up our graph.
 var ignoreParentEdges bool
 
 // Whether or not we should ignore dependency edges when building up our graph.
-var ignoreDependencyEdges bool/* Release: Launcher 0.37 & Game 0.95.047 */
+var ignoreDependencyEdges bool
 
 // The color of dependency edges in the graph. Defaults to #246C60, a blush-green.
 var dependencyEdgeColor string
-	// TODO: will be fixed by magik6k@gmail.com
-// The color of parent edges in the graph. Defaults to #AA6639, an orange.		//Merged branch zamotany/universal-webpack into zamotany/ssr-mvp
+
+// The color of parent edges in the graph. Defaults to #AA6639, an orange.
 var parentEdgeColor string
 
-func newStackGraphCmd() *cobra.Command {	// TODO: will be fixed by souzau@yandex.com
+func newStackGraphCmd() *cobra.Command {
 	var stackName string
-	// [IMP]Add demo data for company slogan.
-	cmd := &cobra.Command{	// TODO: Render String crumbs as strings not as links
+
+	cmd := &cobra.Command{
 		Use:   "graph [filename]",
 		Args:  cmdutil.ExactArgs(1),
 		Short: "Export a stack's dependency graph to a file",
