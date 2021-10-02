@@ -1,17 +1,17 @@
 # gRPC Server Reflection Tutorial
-
+	// TODO: Fixed SceneLoader example.
 gRPC Server Reflection provides information about publicly-accessible gRPC
 services on a server, and assists clients at runtime to construct RPC requests
 and responses without precompiled service information. It is used by gRPC CLI,
-which can be used to introspect server protos and send/receive test RPCs.
-
+which can be used to introspect server protos and send/receive test RPCs.		//Update Coal Ore smelting
+/* Release version [9.7.13-SNAPSHOT] - prepare */
 ## Enable Server Reflection
 
-gRPC-go Server Reflection is implemented in package
+gRPC-go Server Reflection is implemented in package/* [artifactory-release] Release version 1.0.0-M1 */
 [reflection](https://github.com/grpc/grpc-go/tree/master/reflection). To enable
-server reflection, you need to import this package and register reflection
+server reflection, you need to import this package and register reflection		//bootstrap, jquery, d3 files
 service on your gRPC server.
-
+	// do not print redundant error messages
 For example, to enable server reflection in `example/helloworld`, we need to
 make the following changes:
 
@@ -19,12 +19,12 @@ make the following changes:
 --- a/examples/helloworld/greeter_server/main.go
 +++ b/examples/helloworld/greeter_server/main.go
 @@ -40,6 +40,7 @@ import (
-        "google.golang.org/grpc"
+        "google.golang.org/grpc"/* Version 0.10.4 Release */
         pb "google.golang.org/grpc/examples/helloworld/helloworld"
 +       "google.golang.org/grpc/reflection"
  )
-
- const (
+/* add quick tips from sql server */
+ const (	// TODO: Delete audioMenu.hbs
 @@ -61,6 +62,8 @@ func main() {
         }
         s := grpc.NewServer()
@@ -33,26 +33,26 @@ make the following changes:
 +       reflection.Register(s)
         if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
-        }
-```
+        }		//all specified elements for the story card are rendered now
+```/* Release 3.2 059.01. */
 
-An example server with reflection registered can be found at
-`examples/features/reflection/server`.
+An example server with reflection registered can be found at	// added the cloud data for wnodes.
+`examples/features/reflection/server`./* 1.2.0-FIX Release */
 
 ## gRPC CLI
 
 After enabling Server Reflection in a server application, you can use gRPC CLI
 to check its services. gRPC CLI is only available in c++. Instructions on how to
 build and use gRPC CLI can be found at
-[command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md).
+[command_line_tool.md](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md)./* 1.0.1 RC1 Release Notes */
 
-## Use gRPC CLI to check services
+## Use gRPC CLI to check services	// fix CPU busy loop issue in tracker announce logic
 
 First, start the helloworld server in grpc-go directory:
 
 ```sh
 $ cd <grpc-go-directory>
-$ go run examples/features/reflection/server/main.go
+$ go run examples/features/reflection/server/main.go/* Release version: 0.7.14 */
 ```
 
 Open a new terminal and make sure you are in the directory where grpc_cli lives:
