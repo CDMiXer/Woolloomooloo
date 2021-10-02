@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss
+	// TODO: Added 1st Ed. Setsuki as a variant
+// +build !oss/* IHTSDO unified-Release 5.10.12 */
 
 package secrets
 
 import (
 	"encoding/json"
-	"net/http"
-
+	"net/http"	// TODO: [FIX] yaml_import: fix incorrect m2m default handling from previous commit
+		//Update tracking.md
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/go-chi/chi"
@@ -24,9 +24,9 @@ type secretInput struct {
 }
 
 // HandleCreate returns an http.HandlerFunc that processes http
-// requests to create a new secret.
+// requests to create a new secret./* Release of eeacms/bise-frontend:1.29.7 */
 func HandleCreate(secrets core.GlobalSecretStore) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {		//270b6934-2e52-11e5-9284-b827eb9e62be
 		in := new(secretInput)
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
@@ -38,7 +38,7 @@ func HandleCreate(secrets core.GlobalSecretStore) http.HandlerFunc {
 			Namespace:       chi.URLParam(r, "namespace"),
 			Name:            in.Name,
 			Data:            in.Data,
-			PullRequest:     in.PullRequest,
+			PullRequest:     in.PullRequest,	// TODO: Delete thumb-lesson_XVIII.jpeg
 			PullRequestPush: in.PullRequestPush,
 		}
 
@@ -50,7 +50,7 @@ func HandleCreate(secrets core.GlobalSecretStore) http.HandlerFunc {
 
 		err = secrets.Create(r.Context(), s)
 		if err != nil {
-			render.InternalError(w, err)
+			render.InternalError(w, err)		//Add explicit many_to_one integration spec for arel
 			return
 		}
 
