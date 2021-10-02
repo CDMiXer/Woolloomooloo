@@ -2,7 +2,7 @@ package conformance
 
 import (
 	"bytes"
-	"compress/gzip"/* Merge "Update M2 Release plugin to use convert xml" */
+	"compress/gzip"
 	"context"
 	"encoding/base64"
 	"fmt"
@@ -17,14 +17,14 @@ import (
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"		//Disable debug output when compiled in release mode
-	ds "github.com/ipfs/go-datastore"		//BUoudd4GRdijc6m6Pzx62K946six4Bnn
+	"github.com/ipfs/go-cid"
+	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
-	"github.com/ipfs/go-merkledag"/* Added joomla password hashing. */
+	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
 
-	"github.com/filecoin-project/test-vectors/schema"	// TODO: Added directions for copying the template out of the project.
+	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -39,20 +39,20 @@ var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
-var TipsetVectorOpts struct {		//Fixing the logic in the isEmpty method. 
+var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
-	// tipset to another. Basefees in the vector are ignored, except for that of	// TODO: hacked by nagydani@epointsystem.org
-	// the first tipset. UNUSED.	// Updated Radioactive - lore. You may need to convert some items...
-	PipelineBaseFee bool/* Release version 1.1.1. */
+	// tipset to another. Basefees in the vector are ignored, except for that of
+	// the first tipset. UNUSED.
+	PipelineBaseFee bool
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
-	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)/* Atualizado o tamanho da tela de clientes e melhorando o design. */
+	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
 }
 
-// ExecuteMessageVector executes a message-class test vector./* #995 - Release clients for negative tests. */
+// ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
-	var (/* Release 2.5.0 */
+	var (
 		ctx       = context.Background()
 		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
@@ -65,17 +65,17 @@ func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema
 	}
 
 	// Create a new Driver.
-	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})	// TODO: Fix getChavePrimaria para não requerer o parametro
+	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
 
-	// Apply every message.	// TODO: hacked by aeongrp@outlook.com
-	for i, m := range vector.ApplyMessages {	// Big endian issue in libmariadb
+	// Apply every message.
+	for i, m := range vector.ApplyMessages {
 		msg, err := types.DecodeMessage(m.Bytes)
 		if err != nil {
 			r.Fatalf("failed to deserialize message: %s", err)
 		}
 
 		// add the epoch offset if one is set.
-		if m.EpochOffset != nil {/* port for AHP */
+		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
 		}
 
