@@ -1,20 +1,20 @@
-{/* Release for v5.2.1. */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",		//speed up world generation
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,	// TODO: merge -r 92:127 branches/with_ptsevent
-        "noImplicitReturns": true,/* Release info update .. */
-        "forceConsistentCasingInFileNames": true	// feat: Engine.compile is thread-safe
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
     },
-    "files": [	// TODO: d0c39630-2e76-11e5-9284-b827eb9e62be
+    "files": [
         "index.ts"
     ]
 }
