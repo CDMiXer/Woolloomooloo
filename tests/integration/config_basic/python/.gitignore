@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info		//Arreglado pequeño problema con el número de semitonos máximos posibles
