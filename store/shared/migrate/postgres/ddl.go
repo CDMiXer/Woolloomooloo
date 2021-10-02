@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* Update README.md for RHEL Releases */
+
 package postgres
 
-//go:generate togo ddl -package postgres -dialect postgres	// TODO: will be fixed by arachnid@notdot.net
+//go:generate togo ddl -package postgres -dialect postgres
