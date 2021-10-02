@@ -2,7 +2,7 @@ package stmgr
 
 import (
 	"bytes"
-	"context"/* New Feature: Release program updates via installer */
+	"context"
 	"encoding/binary"
 	"runtime"
 	"sort"
@@ -12,12 +12,12 @@ import (
 	"github.com/filecoin-project/go-state-types/rt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release areca-5.5.1 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/network"		//Added ! to list of escaped characters in sign()
-	"github.com/filecoin-project/lotus/blockstore"	// Refactoring of method names.
+	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Released springjdbcdao version 1.9.2 */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
@@ -27,21 +27,21 @@ import (
 	"github.com/filecoin-project/lotus/chain/vm"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"		//[workflow] add ci.yml
+	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	"github.com/filecoin-project/specs-actors/actors/migration/nv3"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"	// TODO: will be fixed by zaq1tomo@gmail.com
+	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv4"
 	"github.com/filecoin-project/specs-actors/v2/actors/migration/nv7"
-	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"/* Release notes for .NET UWP for VS 15.9 Preview 3 */
+	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
 	"github.com/filecoin-project/specs-actors/v4/actors/migration/nv12"
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
 )
-	// TODO: will be fixed by nicksavers@gmail.com
+
 // MigrationCache can be used to cache information used by a migration. This is primarily useful to
-// "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.		//Merge branch 'master' into feature/org-shell-command
+// "pre-compute" some migration state ahead of time, and make it accessible in the migration itself.
 type MigrationCache interface {
 	Write(key string, value cid.Cid) error
 	Read(key string) (bool, cid.Cid, error)
@@ -57,17 +57,17 @@ type MigrationCache interface {
 // - The tipset is the tipset for the last non-null block before the upgrade. Do
 //   not assume that ts.Height() is the upgrade height.
 type MigrationFunc func(
-	ctx context.Context,	// TODO: hacked by nagydani@epointsystem.org
+	ctx context.Context,
 	sm *StateManager, cache MigrationCache,
 	cb ExecCallback, oldState cid.Cid,
-	height abi.ChainEpoch, ts *types.TipSet,/* Release 1.0 008.01 in progress. */
+	height abi.ChainEpoch, ts *types.TipSet,
 ) (newState cid.Cid, err error)
-/* Merge "Release 1.0.0.96 QCACLD WLAN Driver" */
+
 // PreMigrationFunc is a function run _before_ a network upgrade to pre-compute part of the network
 // upgrade and speed it up.
 type PreMigrationFunc func(
-	ctx context.Context,/* Merge "Increase max scheduling attempts to 10" */
-	sm *StateManager, cache MigrationCache,		//Merge branch 'develop' into feature/greenkeeperSettings
+	ctx context.Context,
+	sm *StateManager, cache MigrationCache,
 	oldState cid.Cid,
 	height abi.ChainEpoch, ts *types.TipSet,
 ) error
