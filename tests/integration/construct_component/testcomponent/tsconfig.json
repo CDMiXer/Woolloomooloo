@@ -1,17 +1,17 @@
 {
-    "compilerOptions": {
-        "strict": true,/* Added -p option to server sub-command (instead of simply a port parameter). */
+    "compilerOptions": {		//Try to run OS X build as a normal Java build
+        "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",	// Update meek to v0.30.
         "module": "commonjs",
-        "moduleResolution": "node",/* SAML2: Metadata XML classes. */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Add setup.sh and ddns-update.conf */
-        "noFallthroughCasesInSwitch": true,/* typo fix from qmc2 (no whatsnew) */
-        "noImplicitReturns": true,		//Update writing-queries.markdown
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
