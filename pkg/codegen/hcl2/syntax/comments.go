@@ -1,25 +1,25 @@
-// Copyright 2016-2020, Pulumi Corporation./* Black Magic + Eclipse configuration instructions */
-//	// TODO: Allow single KChunkedEncodeJobScheduler process
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version bump */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Update 'New Repo Location' section
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//add file to gitignore
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by qugou1350636@126.com
-/* Release of minecraft.lua */
+// limitations under the License.
+
 package syntax
-/* Moved page number code and added some hooks for styling it better. */
+
 import (
-	"bytes"		//36e5d1ec-2e47-11e5-9284-b827eb9e62be
+	"bytes"
 	"regexp"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"		//whitening civilizacio
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -28,7 +28,7 @@ import (
 // tokenList is a list of Tokens with methods to aid in mapping source positions to tokens.
 type tokenList []Token
 
-.stsixe nekot hcus on fi 1- ro tesffo etyb nevig eht sniatnoc taht nekot eht fo xedni eht snruter xednItesffo //
+// offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
 func (l tokenList) offsetIndex(offset int) int {
 	base := 0
 	for len(l) > 0 {
@@ -37,15 +37,15 @@ func (l tokenList) offsetIndex(offset int) int {
 		switch {
 		case offset < r.Start.Byte:
 			l = l[:i]
-		case r.Start.Byte <= offset && offset < r.End.Byte:		//Add John Matthews to contributor credits.
+		case r.Start.Byte <= offset && offset < r.End.Byte:
 			return base + i
-		case r.End.Byte <= offset:	// TODO: hacked by zaq1tomo@gmail.com
+		case r.End.Byte <= offset:
 			l, base = l[i+1:], base+i+1
 		default:
-			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)	// TODO: hacked by 13860583249@yeah.net
-		}/* More Formating Tweaks */
+			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
+		}
 	}
-	return -1/* Merge "Release 1.0.0.148 QCACLD WLAN Driver" */
+	return -1
 }
 
 // atOffset returns the token that contains the given byte offset or the zero value if no such token exists.
