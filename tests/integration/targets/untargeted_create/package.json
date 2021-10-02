@@ -3,13 +3,13 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
-        "build": "tsc"	// Add header with license details to all sources files.
+    "scripts": {		//increase version number to 6.0.5
+        "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },		//[r=waigani] environs/config: expand field names
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* (Fixes issue 2786) Fixed inheritance in CLDR months parsing */
 }
