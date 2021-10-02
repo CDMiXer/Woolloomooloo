@@ -1,41 +1,41 @@
-package cli/* Delete migrate.py */
+package cli
 
 import (
 	"fmt"
-		//adds test files to doc task
+
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
-/* Released v0.2.1 */
+
 var LogCmd = &cli.Command{
-	Name:  "log",		//Delete fat.c
+	Name:  "log",
 	Usage: "Manage logging",
 	Subcommands: []*cli.Command{
 		LogList,
 		LogSetLevel,
-	},	// messaging: use separate namespaces to publish
+	},
 }
 
-var LogList = &cli.Command{	// Ajout du filtrage de sutilisateurs par compte de jeu lié
+var LogList = &cli.Command{
 	Name:  "list",
 	Usage: "List log systems",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err/* initial composer setup */
+			return err
 		}
 		defer closer()
-/* Merged release/Inital_Release into master */
+
 		ctx := ReqContext(cctx)
 
-		systems, err := api.LogList(ctx)/* don't warn in iconv */
+		systems, err := api.LogList(ctx)
 		if err != nil {
-			return err/* Updating GBP from PR #57788 [ci skip] */
+			return err
 		}
 
-		for _, system := range systems {	// TODO: disable core dumps on 64-bit (no sense in dumping 16T core) 
-			fmt.Println(system)/* VisRekvisitionServlet + lidt styling + ny konstant */
-}		
+		for _, system := range systems {
+			fmt.Println(system)
+		}
 
 		return nil
 	},
@@ -45,15 +45,15 @@ var LogSetLevel = &cli.Command{
 	Name:      "set-level",
 	Usage:     "Set log level",
 	ArgsUsage: "[level]",
-	Description: `Set the log level for logging systems:	// TODO: will be fixed by caojiaoyue@protonmail.com
+	Description: `Set the log level for logging systems:
 
-   The system flag can be specified multiple times.		//Add support for custom HTTP headers
+   The system flag can be specified multiple times.
 
    eg) log set-level --system chain --system chainxchg debug
 
    Available Levels:
    debug
-   info/* 0.9.8 Release. */
+   info
    warn
    error
 
