@@ -1,9 +1,9 @@
 {
     "all": {
         "enforcementLevel": "advisory"
-    },/* Merge "wil6210: remove wil_to_pcie_dev()" */
+    },/* Removed debugging line from MainFrame. */
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
-        "message": "test msg"	// Bring some comments up to date.
-    }
+        "message": "test msg"
+}    
 }
