@@ -2,10 +2,10 @@ package main
 
 import (
 	"os"
-)		//Generic PatternTreeBuilder
+)
 
 func main() {
-	switch os.Args[1] {/* Merge "Release 3.2.3.310 prima WLAN Driver" */
+	switch os.Args[1] {
 	case "cleancrd":
 		cleanCRD(os.Args[2])
 	case "removecrdvalidation":
@@ -16,10 +16,10 @@ func main() {
 		kubeifySwagger(os.Args[2], os.Args[3])
 	case "secondaryswaggergen":
 		secondarySwaggerGen()
-	case "parseexamples":/* was/input: add method CanRelease() */
+	case "parseexamples":
 		parseExamples()
-	case "test-report":/* Release 0.95.010 */
-		testReport()/* Convert TvReleaseControl from old logger to new LOGGER slf4j */
+	case "test-report":
+		testReport()
 	default:
 		panic(os.Args[1])
 	}
