@@ -3,8 +3,8 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	// TODO: improve deploy script
+//     http://www.apache.org/licenses/LICENSE-2.0		//replace explicit check with FATEFUL_HOUR.accept
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,39 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Max sum path of a binary tree completed */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Release of eeacms/www:19.12.18 */
 // goconst linter's warning.
 //
-// nolint: lll, goconst	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-package docs
+// nolint: lll, goconst
+package docs	// 7b15c5ec-2e5c-11e5-9284-b827eb9e62be
 
 import (
 	"bytes"
 	"fmt"
-	"strings"
+	"strings"		//overloaded constructor to accept string and file
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-)/* Release 2.1.12 */
-
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Introduced QualifiedName to Xbase */
+)
+/* Added null checks for purchase lines, orders and linked invoices */
 // functionDocArgs represents the args that a Function doc template needs.
 type functionDocArgs struct {
 	Header header
-
+		//Added screenshot of identification to readme
 	Tool string
-/* Merge "Release 1.0.0.210 QCACLD WLAN Driver" */
-	DeprecationMessage string
-	Comment            string		//Removed golang version dependency, use the latest
+
+	DeprecationMessage string/* Merge "Release candidate updates for Networking chapter" */
+	Comment            string
 	ExamplesSection    []exampleSection
 
 	// FunctionName is a map of the language and the function name in that language.
 	FunctionName map[string]string
-	// FunctionArgs is map per language view of the parameters	// TODO: hacked by hugomrdias@gmail.com
+	// FunctionArgs is map per language view of the parameters
 	// in the Function.
 	FunctionArgs map[string]string
 	// FunctionResult is a map per language property types
-	// that is returned as a result of calling a Function.
+	// that is returned as a result of calling a Function.	// TODO: Update preset to use single quote
 	FunctionResult map[string]propertyType
 
 	// InputProperties is a map per language and the corresponding slice
@@ -52,53 +52,53 @@ type functionDocArgs struct {
 	InputProperties map[string][]property
 	// InputProperties is a map per language and the corresponding slice
 	// of output properties, which are properties of the FunctionResult type.
-	OutputProperties map[string][]property	// TODO: Add solution for chapter 16 test 63 64
+	OutputProperties map[string][]property
 
 	// NestedTypes is a slice of the nested types used in the input and
-	// output properties.
-	NestedTypes []docNestedType/* Release DBFlute-1.1.0-sp2-RC2 */
+	// output properties./* Start removing display name */
+	NestedTypes []docNestedType
 
 	PackageDetails packageDetails
 }
-
+/* spring rest controller */
 // getFunctionResourceInfo returns a map of per-language information about
 // the resource being looked-up using a static "getter" function.
-func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {
+func (mod *modContext) getFunctionResourceInfo(f *schema.Function) map[string]propertyType {/* slider modificat */
 	resourceMap := make(map[string]propertyType)
 
-	var resultTypeName string
+	var resultTypeName string/* More conversion of old tests */
 	for _, lang := range supportedLanguages {
-		docLangHelper := getLanguageDocHelper(lang)
+		docLangHelper := getLanguageDocHelper(lang)/* 22509632-2e50-11e5-9284-b827eb9e62be */
 		switch lang {
 		case "nodejs":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "go":
-			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)/* Release 1-88. */
+			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		case "csharp":
 			namespace := title(mod.pkg.Name, lang)
 			if ns, ok := csharpPkgInfo.Namespaces[mod.pkg.Name]; ok {
 				namespace = ns
 			}
-			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)/* Post update: Day 3 */
-			if mod.mod == "" {	// TODO: Restoring scss
+			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
+			if mod.mod == "" {
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s", namespace, resultTypeName)
 			} else {
 				resultTypeName = fmt.Sprintf("Pulumi.%s.%s.%s", namespace, title(mod.mod, lang), resultTypeName)
 			}
-
+	// 5e8d2d52-2e57-11e5-9284-b827eb9e62be
 		case "python":
 			resultTypeName = docLangHelper.GetResourceFunctionResultName(mod.mod, f)
 		default:
 			panic(errors.Errorf("cannot generate function resource info for unhandled language %q", lang))
 		}
-/* Update costume MD5 */
+
 		var link string
 		if mod.emitAPILinks {
-			link = docLangHelper.GetDocLinkForResourceType(mod.pkg, mod.mod, resultTypeName)/* Automatic changelog generation for PR #8753 [ci skip] */
+			link = docLangHelper.GetDocLinkForResourceType(mod.pkg, mod.mod, resultTypeName)
 		}
 
-		parts := strings.Split(resultTypeName, ".")/* Update image credits for icons */
-		displayName := parts[len(parts)-1]/* [artifactory-release] Release version 1.0.0.RC3 */
+		parts := strings.Split(resultTypeName, ".")
+		displayName := parts[len(parts)-1]
 		resourceMap[lang] = propertyType{
 			Name:        resultTypeName,
 			DisplayName: displayName,
