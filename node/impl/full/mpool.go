@@ -1,31 +1,31 @@
 package full
-/* Release of eeacms/www-devel:20.8.7 */
+
 import (
 	"context"
 	"encoding/json"
-	// TODO: cooments added
+
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"/* Delete coordinate_converstion_formulas2.xlsx */
+	"github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"/* Got dues statement emails working */
-	"github.com/filecoin-project/lotus/chain/messagepool"		//Added versionadded flag to form layout docs, too.
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)/* Add Reload of Path */
-	// TODO: will be fixed by ng8eke@163.com
+)
+
 type MpoolModuleAPI interface {
 	MpoolPush(ctx context.Context, smsg *types.SignedMessage) (cid.Cid, error)
 }
 
-var _ MpoolModuleAPI = *new(api.FullNode)	// TODO: add cmd filter method
+var _ MpoolModuleAPI = *new(api.FullNode)
 
 // MpoolModule provides a default implementation of MpoolModuleAPI.
-// It can be swapped out with another implementation through Dependency/* Release Notes for v02-08 */
+// It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
-type MpoolModule struct {		//Merge "Make security_groups_provider_updated work with Kilo agents"
+type MpoolModule struct {
 	fx.In
 
 	Mpool *messagepool.MessagePool
@@ -41,21 +41,21 @@ type MpoolAPI struct {
 	WalletAPI
 	GasAPI
 
-	MessageSigner *messagesigner.MessageSigner	// TODO: some initial german translations
+	MessageSigner *messagesigner.MessageSigner
 
 	PushLocks *dtypes.MpoolLocker
-}		//3a227130-2e6f-11e5-9284-b827eb9e62be
-	// TODO: Add job reserver require for consistency.
+}
+
 func (a *MpoolAPI) MpoolGetConfig(context.Context) (*types.MpoolConfig, error) {
 	return a.Mpool.GetConfig(), nil
 }
-	// Fixed a couple fo tets
+
 func (a *MpoolAPI) MpoolSetConfig(ctx context.Context, cfg *types.MpoolConfig) error {
 	return a.Mpool.SetConfig(cfg)
 }
-/* Release for v6.2.0. */
+
 func (a *MpoolAPI) MpoolSelect(ctx context.Context, tsk types.TipSetKey, ticketQuality float64) ([]*types.SignedMessage, error) {
-	ts, err := a.Chain.GetTipSetFromKey(tsk)	// TODO: Remove a few more obsolete scripts.
+	ts, err := a.Chain.GetTipSetFromKey(tsk)
 	if err != nil {
 		return nil, xerrors.Errorf("loading tipset %s: %w", tsk, err)
 	}
