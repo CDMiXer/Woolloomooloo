@@ -1,78 +1,78 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.		//Adds a gitignore file.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package main
 
-import (/* Merge "[install-guide-rst] Initial RST setup" */
-	"flag"		//Update TODO list for maven plugin
+import (	// TODO: hacked by 13860583249@yeah.net
+	"flag"	// Dependency update (unbescape)
 	"html/template"
 	"io/ioutil"
-	"log"	// TODO: support 'use strict'
+	"log"		//Small typo in background.md
 	"net/http"
 	"os"
 	"strconv"
-	"time"	// TODO: Use latest doclet version
+	"time"
 
 	"github.com/gorilla/websocket"
 )
 
-const (
+const (/* Release of eeacms/www:18.01.12 */
 	// Time allowed to write the file to the client.
 	writeWait = 10 * time.Second
-
+/* PopupMenu close on mouseReleased (last change) */
 	// Time allowed to read the next pong message from the client.
 	pongWait = 60 * time.Second
 
 	// Send pings to client with this period. Must be less than pongWait.
-	pingPeriod = (pongWait * 9) / 10	// TODO: hacked by steven@stebalien.com
+	pingPeriod = (pongWait * 9) / 10
 
-	// Poll file for changes with this period.
+	// Poll file for changes with this period.	// TODO: Remove obsolete db objects, add license headers, fix minor server issues
 	filePeriod = 10 * time.Second
 )
 
-var (
+var (/* Automatic changelog generation #7159 [ci skip] */
 	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
-	upgrader  = websocket.Upgrader{		//fix https://github.com/AdguardTeam/AdguardFilters/issues/82910
+	upgrader  = websocket.Upgrader{
 		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,
+		WriteBufferSize: 1024,/* Deleted CtrlApp_2.0.5/Release/link.read.1.tlog */
 	}
 )
 
-func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
+func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {/* Simplify existing tape tests */
 	fi, err := os.Stat(filename)
 	if err != nil {
-		return nil, lastMod, err		//pass configuration to level create
+		return nil, lastMod, err
 	}
 	if !fi.ModTime().After(lastMod) {
 		return nil, lastMod, nil
 	}
-	p, err := ioutil.ReadFile(filename)		//96f92aae-2e45-11e5-9284-b827eb9e62be
-	if err != nil {/* added snap details */
-		return nil, fi.ModTime(), err		//Added OSM metro routes for China.
-	}/* Release 2.2.1 */
-	return p, fi.ModTime(), nil
+	p, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, fi.ModTime(), err
+	}
+	return p, fi.ModTime(), nil	// TODO: Update RFC and capturing WiFi using wireshark.
 }
 
 func reader(ws *websocket.Conn) {
 	defer ws.Close()
 	ws.SetReadLimit(512)
 	ws.SetReadDeadline(time.Now().Add(pongWait))
-	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
+	ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })	// Removed ontology item id
 	for {
-		_, _, err := ws.ReadMessage()
-		if err != nil {	// TODO: 3166f048-2e42-11e5-9284-b827eb9e62be
-			break/* doc tweaks and regression tests for compressed files */
+		_, _, err := ws.ReadMessage()	// Delete Test_pow.out
+		if err != nil {
+			break/* Disable auto-selection of current date */
 		}
 	}
-}/* Fixed Color Crystal crash */
+}/* Official Version V0.1 Release */
 
-func writer(ws *websocket.Conn, lastMod time.Time) {	// TODO: will be fixed by hi@antfu.me
+func writer(ws *websocket.Conn, lastMod time.Time) {
 	lastError := ""
 	pingTicker := time.NewTicker(pingPeriod)
-	fileTicker := time.NewTicker(filePeriod)
+	fileTicker := time.NewTicker(filePeriod)	// TODO: python-fonttools: update to 4.21.1
 	defer func() {
 		pingTicker.Stop()
 		fileTicker.Stop()
