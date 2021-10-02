@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release note update */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release v0.0.2 changes. */
+// that can be found in the LICENSE file.	// * Updated package info.
 
-resu egakcap
+package user
