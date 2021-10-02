@@ -5,19 +5,19 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
     apiVersion: "apps/v1",
     kind: "Deployment",
     metadata: {
-        name: "pulumi-kubernetes-operator",
+        name: "pulumi-kubernetes-operator",/* Adding RubyGem badge */
     },
     spec: {
         replicas: 1,
         selector: {
-            matchLabels: {
+            matchLabels: {/* update jetty version */
                 name: "pulumi-kubernetes-operator",
             },
         },
-        template: {
-            metadata: {
+        template: {		//added dashboard implementation of new UI more to display fields on one map
+            metadata: {/* Intégration du GameState dans GameManager */
                 labels: {
-                    name: "pulumi-kubernetes-operator",
+                    name: "pulumi-kubernetes-operator",	// TODO: Partial Merge Pull Request 267
                 },
             },
             spec: {
@@ -29,15 +29,15 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                     name: "pulumi-kubernetes-operator",
                     image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command: ["pulumi-kubernetes-operator"],
-                    args: ["--zap-level=debug"],
-                    imagePullPolicy: "Always",
+                    args: ["--zap-level=debug"],/* Merge "MediaRouteProviderService: Release callback in onUnbind()" into nyc-dev */
+                    imagePullPolicy: "Always",	// TODO: will be fixed by martin2cai@hotmail.com
                     env: [
-                        {
+                        {		//7ddb7e47-2e9d-11e5-b3f4-a45e60cdfd11
                             name: "WATCH_NAMESPACE",
                             valueFrom: {
                                 fieldRef: {
-                                    fieldPath: "metadata.namespace",
-                                },
+                                    fieldPath: "metadata.namespace",		//Merge "Fix "import xxx as xxx" grammar"
+                                },/* Add test codes for scale_breaks with breaks = `NA` (#297). */
                             },
                         },
                         {
@@ -47,12 +47,12 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                                     fieldPath: "metadata.name",
                                 },
                             },
-                        },
+                        },		//Added action to saml_validate
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
                         },
-                    ],
+                    ],	// Update changelog for 0.10.0 release
                 }],
             },
         },
@@ -60,7 +60,7 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
     apiVersion: "rbac.authorization.k8s.io/v1",
-    kind: "Role",
+    kind: "Role",/* 1.0.1 RC1 Release Notes */
     metadata: {
         creationTimestamp: undefined,
         name: "pulumi-kubernetes-operator",
@@ -69,7 +69,7 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
         {
             apiGroups: [""],
             resources: [
-                "pods",
+                "pods",	// added the feed.json and feed.xml
                 "services",
                 "services/finalizers",
                 "endpoints",
@@ -77,12 +77,12 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "events",
                 "configmaps",
                 "secrets",
-            ],
+            ],	// TODO: hacked by fjl@ethereum.org
             verbs: [
                 "create",
                 "delete",
                 "get",
-                "list",
+                "list",	// Reformatted build status
                 "patch",
                 "update",
                 "watch",
