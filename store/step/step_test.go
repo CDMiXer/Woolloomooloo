@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* 0.111 : added a comment in TRTest>>readme to export Trachel to Amber */
 
 // +build !oss
 
-package step	// Merge "Added a screen to configure wireless scanning"
+package step
 
-import (/* Merge "Deprecate httpd/keystone.py" */
+import (
 	"context"
 	"testing"
-
-	"github.com/drone/drone/core"/* Release notes for .NET UWP for VS 15.9 Preview 3 */
-"dliub/erots/enord/enord/moc.buhtig"	
+		//merged with changes from Tor
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
 var noContext = context.TODO()
-		//Fix for convert
+
 func TestStep(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {
-		t.Error(err)/* Added a new reporter: CDash Reporter */
-		return	// TODO: Still working on the directive's inheritance of parent scope.
-	}
-	defer func() {/* Release of the 13.0.3 */
-		dbtest.Reset(conn)	// Merge "use longs instead of ints to store pointers in NativeDecimalFormat"
-		dbtest.Disconnect(conn)
+	if err != nil {	// TODO: will be fixed by boringland@protonmail.ch
+		t.Error(err)
+		return
+	}	// TODO: b7eae62c-2e3f-11e5-9284-b827eb9e62be
+	defer func() {
+		dbtest.Reset(conn)
+		dbtest.Disconnect(conn)	// TODO: will be fixed by ng8eke@163.com
 	}()
-		//Change uuid tag parser, to make it use `UUID` type if available at runtime.
+/* fix reference to JS build files in gitignore */
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
-
+		//Drop unnecessary properties in CardCarousel
 	// seed with a dummy stage
-	stage := &core.Stage{Number: 1}
+	stage := &core.Stage{Number: 1}/* Dejankify tagline style */
 	stages := []*core.Stage{stage}
 
 	// seed with a dummy build
-	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Added some logging for composite build */
+	abuild := &core.Build{Number: 1, RepoID: arepo.ID}/* Updated version to reflect breaking change */
 	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
-		//[owl axioms] Uncomment junit test annotations
-	store := New(conn).(*stepStore)	// TODO: Fixed basic rectangle trees at least
+
+	store := New(conn).(*stepStore)/* Released v. 1.2-prev4 */
 	t.Run("Create", testStepCreate(store, stage))
 }
 
 func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {		//Update docs/api/site.class.md
 		item := &core.Step{
 			StageID:  stage.ID,
 			Number:   2,
@@ -59,21 +59,21 @@ func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
 			Started:  1522878684,
 			Stopped:  0,
 		}
-		err := store.Create(noContext, item)/* Delete US-CA_PROVINCES.js */
-		if err != nil {/* Rename A4988.py to experiments/A4988.py */
+		err := store.Create(noContext, item)
+		if err != nil {
 			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want ID assigned, got %d", item.ID)
 		}
-		if item.Version == 0 {
-			t.Errorf("Want Version assigned, got %d", item.Version)
-		}
+		if item.Version == 0 {	// TODO: hacked by hi@antfu.me
+			t.Errorf("Want Version assigned, got %d", item.Version)/* Added database schema PDFs */
+		}		//Merge "Enabled HttpModule"
 
-		t.Run("Find", testStepFind(store, item))
+		t.Run("Find", testStepFind(store, item))/* Add Release Drafter to the repository */
 		t.Run("FindNumber", testStepFindNumber(store, item))
 		t.Run("List", testStepList(store, stage))
-		t.Run("Update", testStepUpdate(store, item))
+		t.Run("Update", testStepUpdate(store, item))/* edit notices full */
 		t.Run("Locking", testStepLocking(store, item))
 	}
 }
