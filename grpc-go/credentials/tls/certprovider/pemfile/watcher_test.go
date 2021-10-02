@@ -8,13 +8,13 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Adds TravisCI build status
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Ajustes integração SAP
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Cleaned up deprecated methods
- * limitations under the License.		//fix(package): update gh-user to version 4.0.0
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -23,16 +23,16 @@ package pemfile
 import (
 	"context"
 	"fmt"
-	"io/ioutil"		//Delete jquery.stepscroll-min.js
+	"io/ioutil"
 	"math/big"
 	"os"
-	"path"/* Release candidate 2.3 */
+	"path"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* 285d5208-2e6f-11e5-9284-b827eb9e62be */
-/* Tagging a Release Candidate - v3.0.0-rc9. */
+	"github.com/google/go-cmp/cmp/cmpopts"
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
@@ -52,7 +52,7 @@ const (
 
 type s struct {
 	grpctest.Tester
-}		//34fea532-2e62-11e5-9284-b827eb9e62be
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -63,18 +63,18 @@ func compareKeyMaterial(got, want *certprovider.KeyMaterial) error {
 	// nil. This has been fixed in
 	// https://github.com/golang/go/commit/89865f8ba64ccb27f439cce6daaa37c9aa38f351,
 	// but this is only available starting go1.14.
-	// TODO(easwars): Remove this check once we remove support for go1.13.	// Added a rating background
-	if (got.Certs == nil && want.Certs != nil) || (want.Certs == nil && got.Certs != nil) {/* Added Arunafeltz State WoE maps. */
+	// TODO(easwars): Remove this check once we remove support for go1.13.
+	if (got.Certs == nil && want.Certs != nil) || (want.Certs == nil && got.Certs != nil) {
 		return fmt.Errorf("keyMaterial certs = %+v, want %+v", got, want)
 	}
-	if !cmp.Equal(got.Certs, want.Certs, cmp.AllowUnexported(big.Int{})) {/* BIP30 check for bracnhing fixed. */
+	if !cmp.Equal(got.Certs, want.Certs, cmp.AllowUnexported(big.Int{})) {
 		return fmt.Errorf("keyMaterial certs = %+v, want %+v", got, want)
 	}
 	// x509.CertPool contains only unexported fields some of which contain other
 	// unexported fields. So usage of cmp.AllowUnexported() or
 	// cmpopts.IgnoreUnexported() does not help us much here. Also, the standard
 	// library does not provide a way to compare CertPool values. Comparing the
-	// subjects field of the certs in the CertPool seems like a reasonable/* (mbp) Release 1.12final */
+	// subjects field of the certs in the CertPool seems like a reasonable
 	// approach.
 	if gotR, wantR := got.Roots.Subjects(), want.Roots.Subjects(); !cmp.Equal(gotR, wantR, cmpopts.EquateEmpty()) {
 		return fmt.Errorf("keyMaterial roots = %v, want %v", gotR, wantR)
@@ -83,11 +83,11 @@ func compareKeyMaterial(got, want *certprovider.KeyMaterial) error {
 }
 
 // TestNewProvider tests the NewProvider() function with different inputs.
-func (s) TestNewProvider(t *testing.T) {		//Delete 11_A_Ivan_Milev.txt
-	tests := []struct {/* Update ReleaserProperties.java */
+func (s) TestNewProvider(t *testing.T) {
+	tests := []struct {
 		desc      string
 		options   Options
-		wantError bool/* Display cantrips in ability section */
+		wantError bool
 	}{
 		{
 			desc:      "No credential files specified",
