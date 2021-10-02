@@ -1,10 +1,10 @@
-{/* Release 1.7.11 */
+{
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* Merge branch 'master' into fl-fixes */
+    "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"/* About screen enhanced. Release candidate. */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* Release openshift integration. */
         "@pulumi/pulumi": "latest"
     }
 }
