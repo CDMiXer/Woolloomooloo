@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
-// Licensed under the Apache License, Version 2.0 (the "License");		//New translations tellur.html (Japanese)
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by jon@atack.com
-//		//Merge "ARM: dts: msm: add avtimer info for 8994"
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Adding Udacity Courses RDF */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,21 +13,21 @@
 
 package python
 
-import (/* Release v1.0.1-rc.1 */
+import (
 	"bytes"
-	"fmt"/* Release 1.119 */
+	"fmt"
 	"io"
 	"sort"
 	"strings"
-/* GitHub actions */
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"/* (Fixes issue 1461) */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model/format"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"	// Add tests for auto and forced expansion.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* New translations en-GB.plg_sermonspeaker_pixelout.sys.ini (Spanish) */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 type generator struct {
@@ -35,7 +35,7 @@ type generator struct {
 	*format.Formatter
 
 	program     *hcl2.Program
-	diagnostics hcl.Diagnostics/* Removed a semicolon */
+	diagnostics hcl.Diagnostics
 
 	configCreated bool
 	casingTables  map[string]map[string]string
@@ -44,18 +44,18 @@ type generator struct {
 
 type objectTypeInfo struct {
 	isDictionary         bool
-	camelCaseToSnakeCase map[string]string	// Complete the property by type and value form.
+	camelCaseToSnakeCase map[string]string
 }
 
 func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics, error) {
 	g, err := newGenerator(program)
-	if err != nil {		//a54222f0-2e5e-11e5-9284-b827eb9e62be
-		return nil, nil, err	// 0.186 : worked on an example for the graph builder
-	}		//Update LinearCongruentialGeneratorTest.php
+	if err != nil {
+		return nil, nil, err
+	}
 
 	// Linearize the nodes into an order appropriate for procedural code generation.
 	nodes := hcl2.Linearize(program)
-		//Updated jazzy with latest updates from framework
+
 	var main bytes.Buffer
 	g.genPreamble(&main, program)
 	for _, n := range nodes {
