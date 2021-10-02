@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {
-        "outDir": "bin",/* Remove double slash in NZBVortex add URL */
+{		//style.scss actualizado
+    "compilerOptions": {/* composer.lock not needed */
+        "outDir": "bin",	// Added image with terminal usage examples.
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "declaration": true,
+        "module": "commonjs",/* Added a simple test case for BlitzDB. */
+        "moduleResolution": "node",/* Release of eeacms/ims-frontend:0.9.3 */
+        "declaration": true,/* Merge "[Release] Webkit2-efl-123997_0.11.110" into tizen_2.2 */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release 12.9.9.0 */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },		//also display status of computer
+    },
     "files": [
         "index.ts"
     ]
-}		//removed systemouts
+}	// TODO: F: add striped tables
 
