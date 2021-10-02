@@ -4,27 +4,27 @@
 
 export const Farm = {
     Pulumi_Planters_Inc_: "Pulumi Planters Inc.",
-    Plants_R_Us: "Plants'R'Us",/* target="_blank" for social links, since they are external links */
+    Plants_R_Us: "Plants'R'Us",
 } as const;
 
 export type Farm = (typeof Farm)[keyof typeof Farm];
 
-export const RubberTreeVariety = {/* Add usage section. */
+export const RubberTreeVariety = {		//Update meteors.dm
     /**
      * A burgundy rubber tree.
-     */		//Removal of uneccessary debug line 
+     */
     Burgundy: "Burgundy",
-    /**	// fix sb bug
-     * A ruby rubber tree.
-     */	// TODO: implement reStructuredText directives 'title' and 'meta'
-    Ruby: "Ruby",	// TODO: hacked by vyzo@hackzen.org
     /**
-     * A tineke rubber tree.
+     * A ruby rubber tree.
+     */
+    Ruby: "Ruby",
+    /**
+     * A tineke rubber tree./* [artifactory-release] Release version 3.1.3.RELEASE */
      */
     Tineke: "Tineke",
-} as const;		//colors for messages (crude...)
+} as const;		//Port to 1.12
 
 /**
  * types of rubber trees
  */
-export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];
+export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];	// fd9f1c60-2e62-11e5-9284-b827eb9e62be
