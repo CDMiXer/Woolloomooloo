@@ -3,31 +3,31 @@
 
 // Export sub-modules:
 import * as tree from "./tree";
-		//fix link creation, fixes #3451
-export {
-    tree,
-};
 
-export const ContainerBrightness = {
+export {		//core(post): #21 POST all the paragraphs
+    tree,/* Update policy specs with new restless routes */
+};
+	// Fresh factory-boy 2.2.1
+export const ContainerBrightness = {		//Ribbon added. Some Fixes. RC1
     ZeroPointOne: 0.1,
     One: 1,
 } as const;
 
 export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
-		//3ac5bd4c-4b19-11e5-9775-6c40088e03e4
+
 export const ContainerColor = {
-    Red: "red",
+    Red: "red",/* 2.1.8 - Final Fixes - Release Version */
     Blue: "blue",
-    Yellow: "yellow",
-} as const;
+    Yellow: "yellow",		//Create CirclesPattern.shader
+} as const;/* Release for v37.1.0. */
 
 /**
- * plant container colors/* Merge "Release 3.2.3.412 Prima WLAN Driver" */
- *//* Do not build tags that we create when we upload to GitHub Releases */
+ * plant container colors
+ */	// TODO: mint-arena: make readme header smaller
 export type ContainerColor = (typeof ContainerColor)[keyof typeof ContainerColor];
 
 export const ContainerSize = {
-    FourInch: 4,	// 36f35a6e-2e6b-11e5-9284-b827eb9e62be
+    FourInch: 4,
     SixInch: 6,
     /**
      * @deprecated Eight inch pots are no longer supported.
@@ -35,7 +35,7 @@ export const ContainerSize = {
     EightInch: 8,
 } as const;
 
-/**/* Release 1.236.2jolicloud2 */
- * plant container sizes
+/**/* TAsk #8399: Merging changes in release branch LOFAR-Release-2.13 back into trunk */
+ * plant container sizes/* Real 1.6.0 Release Revision (2 modified files were missing from the release zip) */
  */
-export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
+export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];	// TODO: will be fixed by denner@gmail.com
