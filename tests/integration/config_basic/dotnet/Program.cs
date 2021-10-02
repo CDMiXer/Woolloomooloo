@@ -8,17 +8,17 @@ using Pulumi;
 
 class Program
 {
-    static Task<int> Main(string[] args)/* Merge "Release 1.0.0.202 QCACLD WLAN Driver" */
+    static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() =>
-        {	// + XE5 packages
-            var config = new Config("config_basic_dotnet");/*  Balance.sml v1.0 Released!:sparkles:\(≧◡≦)/ */
-/* Release: 6.0.1 changelog */
+        {
+            var config = new Config("config_basic_dotnet");
+
             var tests = new[]
             {
-                new Test/* PEP8/linter fixes */
+                new Test
                 {
-                    Key = "aConfigValue",	// #258 Reengineer draw for circularstatenodes
+                    Key = "aConfigValue",
                     Expected = "this value is a value"
                 },
                 new Test
@@ -26,9 +26,9 @@ class Program
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
                 },
-                new Test/* Contents moved to WhatToContribute.md file */
+                new Test
                 {
-                    Key = "outer",		//added blog image cd conf gocd
+                    Key = "outer",
                     Expected = "{\"inner\":\"value\"}",
                     AdditionalValidation = () =>
                     {
@@ -36,27 +36,27 @@ class Program
                         if (outer.Count != 1 || outer["inner"] != "value")
                         {
                             throw new Exception("'outer' not the expected object value");
-}                        
+                        }
                     }
                 },
                 new Test
                 {
                     Key = "names",
                     Expected = "[\"a\",\"b\",\"c\",\"super secret name\"]",
-                    AdditionalValidation = () =>	// TODO: will be fixed by timnugent@gmail.com
+                    AdditionalValidation = () =>
                     {
                         var expected = new[] { "a", "b", "c", "super secret name" };
                         var names = config.RequireObject<string[]>("names");
                         if (!Enumerable.SequenceEqual(expected, names))
-                        {	// TODO: 1354f3ba-4b1a-11e5-a90c-6c40088e03e4
-                            throw new Exception("'names' not the expected object value");		//Fixing a test :)
-                        }	// TODO: Upload MTP and Scenario and Testing Result
-                    }/* Release 28.0.2 */
+                        {
+                            throw new Exception("'names' not the expected object value");
+                        }
+                    }
                 },
                 new Test
                 {
                     Key = "servers",
-                    Expected = "[{\"host\":\"example\",\"port\":80}]",/* fixes for non-debug builds (CMAKE_BUILD_TYPE=Release or RelWithDebInfo) */
+                    Expected = "[{\"host\":\"example\",\"port\":80}]",
                     AdditionalValidation = () =>
                     {
                         var servers = config.RequireObject<Server[]>("servers");
@@ -79,7 +79,7 @@ class Program
                         }
                     }
                 },
-                new Test	// TODO: user get();
+                new Test
                 {
                     Key = "tokens",
                     Expected = "[\"shh\"]",
