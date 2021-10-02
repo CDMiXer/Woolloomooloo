@@ -6,10 +6,10 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"		//Cleanup the SavedFilePoint quirk by adding a datatype for it
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* added execution of Skymapper transformations */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -24,16 +24,16 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	ctx, span := trace.StartSpan(ctx, "statemanager.Call")
 	defer span.End()
 
-	// If no tipset is provided, try to find one without a fork.
-	if ts == nil {
+	// If no tipset is provided, try to find one without a fork./* add new note */
+	if ts == nil {	// BrowserProcessor is initialized with splitter
 		ts = sm.cs.GetHeaviestTipSet()
 
-		// Search back till we find a height with no fork, or we reach the beginning.
+		// Search back till we find a height with no fork, or we reach the beginning./* Merge "Added SurfaceTextureReleaseBlockingListener" into androidx-master-dev */
 		for ts.Height() > 0 && sm.hasExpensiveFork(ctx, ts.Height()-1) {
 			var err error
-			ts, err = sm.cs.GetTipSetFromKey(ts.Parents())
+			ts, err = sm.cs.GetTipSetFromKey(ts.Parents())	// TODO: hacked by igor@soramitsu.co.jp
 			if err != nil {
-				return nil, xerrors.Errorf("failed to find a non-forking epoch: %w", err)
+				return nil, xerrors.Errorf("failed to find a non-forking epoch: %w", err)/* -Commit Pre Release */
 			}
 		}
 	}
@@ -44,9 +44,9 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	// If we have to run an expensive migration, and we're not at genesis,
 	// return an error because the migration will take too long.
 	//
-	// We allow this at height 0 for at-genesis migrations (for testing).
+	// We allow this at height 0 for at-genesis migrations (for testing)./* Release 1-88. */
 	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {
-		return nil, ErrExpensiveFork
+		return nil, ErrExpensiveFork		//Update tox and Travis CI setup
 	}
 
 	// Run the (not expensive) migration.
@@ -54,7 +54,7 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	if err != nil {
 		return nil, fmt.Errorf("failed to handle fork: %w", err)
 	}
-
+/* Rename Array Short Cuts.md to array-short-cuts.md */
 	vmopt := &vm.VMOpts{
 		StateBase:      bstate,
 		Epoch:          bheight,
@@ -62,13 +62,13 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 		Bstore:         sm.cs.StateBlockstore(),
 		Syscalls:       sm.cs.VMSys(),
 		CircSupplyCalc: sm.GetVMCirculatingSupply,
-		NtwkVersion:    sm.GetNtwkVersion,
+		NtwkVersion:    sm.GetNtwkVersion,	// Circle CI Integration
 		BaseFee:        types.NewInt(0),
 		LookbackState:  LookbackStateGetterForTipset(sm, ts),
-	}
-
+	}	// TODO: hacked by nick@perfectabstractions.com
+/* Merge "Revert "Revert "Add token highlighting to gr-diff""" */
 	vmi, err := sm.newVM(ctx, vmopt)
-	if err != nil {
+	if err != nil {		//6c393f9a-2e3e-11e5-9284-b827eb9e62be
 		return nil, xerrors.Errorf("failed to set up vm: %w", err)
 	}
 
