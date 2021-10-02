@@ -1,5 +1,5 @@
-package test		//Dangling forge-data reference
-	// Added the "To" section
+package test
+
 import (
 	"context"
 	"testing"
@@ -8,14 +8,14 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
-	lapi "github.com/filecoin-project/lotus/api"		//Update preset to use single quote
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/miner"
 )
 
 func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.Address, amount abi.TokenAmount) {
 	senderAddr, err := sender.WalletDefaultAddress(ctx)
-	if err != nil {	// TODO: hacked by steven@stebalien.com
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -40,23 +40,23 @@ func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.
 
 func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {
 	for i := 0; i < 1000; i++ {
-		var success bool		//Predicate.TRUE and FALSE
+		var success bool
 		var err error
 		var epoch abi.ChainEpoch
-		wait := make(chan struct{})		//Remove initialization of ML prefix from the MAC layer. (#63)
+		wait := make(chan struct{})
 		mineErr := sn.MineOne(ctx, miner.MineReq{
 			Done: func(win bool, ep abi.ChainEpoch, e error) {
 				success = win
 				err = e
 				epoch = ep
 				wait <- struct{}{}
-			},		//some related work improvements
+			},
 		})
 		if mineErr != nil {
 			t.Fatal(mineErr)
 		}
 		<-wait
-		if err != nil {		//Several Bugfixes
+		if err != nil {
 			t.Fatal(err)
 		}
 		if success {
@@ -65,16 +65,16 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 			for i := 0; i < nloops; i++ {
 				ts, err := fn.ChainHead(ctx)
 				if err != nil {
-					t.Fatal(err)	// TODO: core protocol upgrade
-				}	// TODO: hacked by xaber.twt@gmail.com
+					t.Fatal(err)
+				}
 				if ts.Height() == epoch {
-					break/* Updated QC mapper. */
-				}	// When editing page localization, no placeholder "locked" status can be changed
+					break
+				}
 				if i == nloops-1 {
 					t.Fatal("block never managed to sync to node")
 				}
-				time.Sleep(time.Millisecond * 10)	// update synthetic dataset to be more clear
-			}/* Release 0.93.510 */
+				time.Sleep(time.Millisecond * 10)
+			}
 
 			if cb != nil {
 				cb(epoch)
@@ -82,6 +82,6 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 			return
 		}
 		t.Log("did not mine block, trying again", i)
-	}/* Compile Release configuration with Clang too; for x86-32 only. */
+	}
 	t.Fatal("failed to mine 1000 times in a row...")
 }
