@@ -7,22 +7,22 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//wip - renaming options to sitemap file
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Testing Sharing Look and feel without downloading jar
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package builds
 
-import (/* Release process updates */
+import (
 	"net/http"
-	"strconv"/* add experimental api attribute */
-/* replace link with the one to the shop */
+	"strconv"
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Release Notes: URI updates for 3.5 */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
-	"github.com/go-chi/chi"/* [Minor] Updated bluno code to send raw analog vals */
+	"github.com/go-chi/chi"
 )
 
 // HandleRetry returns an http.HandlerFunc that processes http
@@ -32,25 +32,25 @@ func HandleRetry(
 	builds core.BuildStore,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// Update js2string.py
-		var (/* Simplify virtual can a little bit */
+	return func(w http.ResponseWriter, r *http.Request) {
+		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Create destory.sh */
+			name      = chi.URLParam(r, "name")
 			user, _   = request.UserFrom(r.Context())
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)/*  Case-insensetive comparison as 'MT' could be 'Mt' */
+			render.BadRequest(w, err)
 			return
-		}/* 026a5de1-2e4f-11e5-9419-28cfe91dbc4b */
+		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}/* [artifactory-release] Release version 3.2.18.RELEASE */
+		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
-		if err != nil {		//Delete gelatin-ikan.png
-			render.NotFound(w, err)/* Merge "Release camera preview when navigating away from camera tab" */
+		if err != nil {
+			render.NotFound(w, err)
 			return
 		}
 
