@@ -1,23 +1,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as kubernetes from "@pulumi/kubernetes";
-/* Release 1.04 */
+
 const argocd_serverDeployment = new kubernetes.apps.v1.Deployment("argocd_serverDeployment", {
     apiVersion: "apps/v1",
-    kind: "Deployment",
+    kind: "Deployment",/* Release 1.16.9 */
     metadata: {
-        name: "argocd-server",		//+страница авторизации
+        name: "argocd-server",
     },
-    spec: {
+    spec: {/* Delete nt17-flyer-sponsorship.pdf */
         template: {
-            spec: {	// trimmed log output
-                containers: [{/* TextViewWithCharacterLimitLabelDelegate added */
-                    readinessProbe: {/* Added schema.org information to the user profile. */
+            spec: {
+                containers: [{
+                    readinessProbe: {
                         httpGet: {
-                            port: 8080,
-                        },
-                    },		//Added functionality to search Google Scholar when pressing backslash
-                }],
+                            port: 8080,	// Improve skin tab layout
+                        },	// TODO: Update binding.md
+                    },
+                }],/* ReleaseNotes.txt created */
             },
         },
-    },/* @Release [io7m-jcanephora-0.9.17] */
-});/* Added isEmpty() */
+    },
+});
