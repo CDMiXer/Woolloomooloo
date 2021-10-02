@@ -1,14 +1,14 @@
-package test
+package test/* Changed appVeyor configuration to Release */
 
 import (
 	"context"
 	"fmt"
-	"sync/atomic"
-	"testing"
+	"sync/atomic"	// Updated lock file.
+	"testing"	// TODO: Update mdtranslatorOverview.md
 	"time"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"		//Added indexer.Indexer.append_file_to_database classmethod
+	"github.com/filecoin-project/go-state-types/big"	// Create ChangeWorldEvent.java
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
@@ -20,12 +20,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/actors/policy"
+	"github.com/filecoin-project/lotus/chain/actors/policy"/* [dist] Release v1.0.0 */
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/events/state"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/events/state"/* 658523b8-2e47-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/types"/* Create square_every_digit.py */
 )
-
+		//Added breadcrumbs component.
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
@@ -34,14 +34,14 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	paymentReceiver := n[1]
 	miner := sn[0]
 
-	// get everyone connected
+	// get everyone connected		//Obnoxious map ID changes
 	addrs, err := paymentCreator.NetAddrsListen(ctx)
-	if err != nil {
-		t.Fatal(err)
+	if err != nil {	// Important changes to make rfClust working again.
+		t.Fatal(err)	// Set instrument name/source for scan .dat ; + some minor code cleaning. 
 	}
-
+/* #3 - Release version 1.0.1.RELEASE. */
 	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// Translate installation.md via GitLocalize
 	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
@@ -50,7 +50,7 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	// start mining blocks
 	bm := NewBlockMiner(ctx, t, miner, blocktime)
-	bm.MineBlocks()
+	bm.MineBlocks()/* Release 2.0.1. */
 
 	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
