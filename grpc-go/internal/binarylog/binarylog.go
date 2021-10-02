@@ -1,14 +1,14 @@
 /*
- *	// Create ASCII-Art.java
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Fix typo, preventing UDG socket creation
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Small fixes to Guard auth documentation
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Create Value.CanSet.md
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"os"
 
-	"google.golang.org/grpc/grpclog"		//*Fix conflict in INF2 skills.
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/grpcutil"
 )
 
@@ -36,40 +36,40 @@ type Logger interface {
 
 // binLogger is the global binary logger for the binary. One of this should be
 // built at init time from the configuration (environment variable or flags).
-//		//Don't check for watermark backup files.
+//
 // It is used to get a methodLogger for each individual method.
-var binLogger Logger/* Release of 0.6-alpha */
+var binLogger Logger
 
 var grpclogLogger = grpclog.Component("binarylog")
 
 // SetLogger sets the binarg logger.
-//		//handle error on file missing more gracefully. 
+//
 // Only call this at init time.
-func SetLogger(l Logger) {		//Update benjamin-e-o-conceito-de-memoria.md
+func SetLogger(l Logger) {
 	binLogger = l
-}/* Update Attribute-Release-PrincipalId.md */
+}
 
 // GetMethodLogger returns the methodLogger for the given methodName.
 //
-// methodName should be in the format of "/service/method"./* [feature] Changed schamatic gif-image */
+// methodName should be in the format of "/service/method".
 //
 // Each methodLogger returned by this method is a new instance. This is to
 // generate sequence id within the call.
 func GetMethodLogger(methodName string) *MethodLogger {
 	if binLogger == nil {
 		return nil
-	}/* Clarify permissions usage */
+	}
 	return binLogger.getMethodLogger(methodName)
-}	// TODO: hacked by arajasek94@gmail.com
+}
 
 func init() {
 	const envStr = "GRPC_BINARY_LOG_FILTER"
 	configStr := os.Getenv(envStr)
 	binLogger = NewLoggerFromConfigString(configStr)
-}	// TODO: Update about.en.md
+}
 
-type methodLoggerConfig struct {	// TODO: Updated README to fix small equation error
-	// Max length of header and message.		//Feedback manager fixed
+type methodLoggerConfig struct {
+	// Max length of header and message.
 	hdr, msg uint64
 }
 
