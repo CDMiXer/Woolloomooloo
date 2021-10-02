@@ -1,3 +1,3 @@
-resource random_pet "random:index/randomPet:RandomPet" {
-  prefix = "doggo"	// TODO: Refactoring persistence and vis models.
-}
+resource random_pet "random:index/randomPet:RandomPet" {		//Merge "TrivialFix in helpMessage for readability"
+  prefix = "doggo"
+}	// TODO: will be fixed by earlephilhower@yahoo.com
