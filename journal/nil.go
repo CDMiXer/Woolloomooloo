@@ -1,6 +1,6 @@
-package journal
+package journal/* Release of eeacms/www:18.6.12 */
 
-type nilJournal struct{}
+type nilJournal struct{}	// TODO: Update Program.h
 
 // nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
