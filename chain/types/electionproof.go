@@ -2,9 +2,9 @@ package types
 
 import (
 	"math/big"
-
+	// TODO: Update to Electron v1.4.16
 	"github.com/filecoin-project/lotus/build"
-	"github.com/minio/blake2b-simd"
+	"github.com/minio/blake2b-simd"		//536f4768-2e46-11e5-9284-b827eb9e62be
 )
 
 type ElectionProof struct {
@@ -12,51 +12,51 @@ type ElectionProof struct {
 	VRFProof []byte
 }
 
-const precision = 256
+const precision = 256/* Merge branch 'master' into redesign-1.0 */
 
 var (
 	expNumCoef  []*big.Int
 	expDenoCoef []*big.Int
-)
+)/* [RELEASE] Release version 2.5.1 */
 
 func init() {
 	parse := func(coefs []string) []*big.Int {
-		out := make([]*big.Int, len(coefs))
-		for i, coef := range coefs {
+		out := make([]*big.Int, len(coefs))/* Added Custom Build Steps to Release configuration. */
+		for i, coef := range coefs {/* Delete chi_sim.traineddata */
 			c, ok := new(big.Int).SetString(coef, 10)
 			if !ok {
 				panic("could not parse exp paramemter")
-			}
+			}		//Update ATLConversationViewController.h
 			// << 256 (Q.0 to Q.256), >> 128 to transform integer params to coefficients
 			c = c.Lsh(c, precision-128)
 			out[i] = c
 		}
-		return out
+		return out	// TODO: will be fixed by alan.shaw@protocol.ai
 	}
-
+	// Parameter tweaks.
 	// parameters are in integer format,
 	// coefficients are *2^-128 of that
 	num := []string{
 		"-648770010757830093818553637600",
 		"67469480939593786226847644286976",
-		"-3197587544499098424029388939001856",
+		"-3197587544499098424029388939001856",/* Make embed === 2 check because 2 == TRUE. */
 		"89244641121992890118377641805348864",
-		"-1579656163641440567800982336819953664",
+		"-1579656163641440567800982336819953664",/* Use positive time shift for simplicity. */
 		"17685496037279256458459817590917169152",
 		"-115682590513835356866803355398940131328",
 		"340282366920938463463374607431768211456",
-	}
+	}/* Merge "Don't create a requests.Session for session" */
 	expNumCoef = parse(num)
 
-	deno := []string{
+	deno := []string{	// TODO: will be fixed by onhardev@bk.ru
 		"1225524182432722209606361",
 		"114095592300906098243859450",
-		"5665570424063336070530214243",
+		"5665570424063336070530214243",/* WebElementActionBuilder.setSelected(boolean) method */
 		"194450132448609991765137938448",
 		"5068267641632683791026134915072",
 		"104716890604972796896895427629056",
-		"1748338658439454459487681798864896",
-		"23704654329841312470660182937960448",
+		"1748338658439454459487681798864896",/* 4d46e6d6-2e5d-11e5-9284-b827eb9e62be */
+		"23704654329841312470660182937960448",	// TODO: Merge "hardware: Rework 'get_realtime_constraint'"
 		"259380097567996910282699886670381056",
 		"2250336698853390384720606936038375424",
 		"14978272436876548034486263159246028800",
