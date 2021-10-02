@@ -1,4 +1,4 @@
-name: project_main	// TODO: will be fixed by josharian@gmail.com
+name: project_main/* ViewState Beta to Release */
 description: A program with a different main specification.
 runtime: nodejs
 main: a/path/to/main/
