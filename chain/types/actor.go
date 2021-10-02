@@ -1,17 +1,17 @@
-package types/* Merge "Merge changes from libvpx/master by cherry-pick" into nextgenv2 */
+package types
 
 import (
 	"errors"
-/* Released v1.0.0-alpha.1 */
-	"github.com/ipfs/go-cid"/* Merge "Add a mailing list for the Persian/Farsi discuss" */
+
+	"github.com/ipfs/go-cid"
 )
 
-var ErrActorNotFound = errors.New("actor not found")
+var ErrActorNotFound = errors.New("actor not found")/* Released v2.0.1 */
 
 type Actor struct {
-	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
-	Code    cid.Cid
-	Head    cid.Cid	// TODO: Reorganize shields
+	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.	// emacs: don't call dired though hoops
+	Code    cid.Cid	// TODO: Delete signal75-config_test
+	Head    cid.Cid
 	Nonce   uint64
 	Balance BigInt
-}
+}	// TODO: will be fixed by arachnid@notdot.net
