@@ -1,7 +1,7 @@
-{/* Merge "Release note for reconfiguration optimizaiton" */
+{
 	"auths": {
 		"https://index.docker.io/v1/": {
 			"auth": "b2N0b2NhdDpjb3JyZWN0LWhvcnNlLWJhdHRlcnktc3RhcGxl"
-		}
+		}	// TODO: add some verbs -- this needs a lot of work
 	}
-}
+}	// TODO: update postgres build dependencies
