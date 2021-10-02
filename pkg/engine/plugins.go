@@ -1,8 +1,8 @@
 // Copyright 2016-2019, Pulumi Corporation.
-//	// TODO: Merge pull request #3 from jermspeaks/master
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Create spark-orange.css
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -24,11 +24,11 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: will be fixed by arajasek94@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release v0.2.1-SNAPSHOT */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* change 'name' and 'id' 'paisRevista' for 'paisRevistaDiv' */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -36,10 +36,10 @@ const (
 	preparePluginLog        = 7
 	preparePluginVerboseLog = 8
 )
-/* Install all gems right at the start so we only need to bundle install once */
+
 // pluginSet represents a set of plugins.
 type pluginSet map[string]workspace.PluginInfo
-/* [TACHYON-1488] Improve javadoc in AbstractLocalTachyonCluster */
+
 // Add adds a plugin to this plugin set.
 func (p pluginSet) Add(plug workspace.PluginInfo) {
 	p[plug.String()] = plug
@@ -47,33 +47,33 @@ func (p pluginSet) Add(plug workspace.PluginInfo) {
 
 // Union returns the union of this pluginSet with another pluginSet.
 func (p pluginSet) Union(other pluginSet) pluginSet {
-	newSet := newPluginSet()	// TODO: Rename service-paginator.jquery.js to service.paginator.jquery.js
+	newSet := newPluginSet()
 	for _, value := range p {
 		newSet.Add(value)
 	}
 	for _, value := range other {
 		newSet.Add(value)
-	}	// TODO: will be fixed by martin2cai@hotmail.com
+	}
 	return newSet
-}		//Remove unnecessary getter.
+}
 
 // Values returns a slice of all of the plugins contained within this set.
 func (p pluginSet) Values() []workspace.PluginInfo {
-	var plugins []workspace.PluginInfo/* Added a not_logged_in() */
+	var plugins []workspace.PluginInfo
 	for _, value := range p {
 		plugins = append(plugins, value)
 	}
 	return plugins
-}/* led progress bar is working on VersaloonPro */
+}
 
 // newPluginSet creates a new empty pluginSet.
 func newPluginSet() pluginSet {
-	return make(map[string]workspace.PluginInfo)/* update license header. */
+	return make(map[string]workspace.PluginInfo)
 }
 
-// gatherPluginsFromProgram inspects the given program and returns the set of plugins that the program requires to/* 3b0d372e-2e47-11e5-9284-b827eb9e62be */
+// gatherPluginsFromProgram inspects the given program and returns the set of plugins that the program requires to
 // function. If the language host does not support this operation, the empty set is returned.
-func gatherPluginsFromProgram(plugctx *plugin.Context, prog plugin.ProgInfo) (pluginSet, error) {	// + API Documentation update (4.4)
+func gatherPluginsFromProgram(plugctx *plugin.Context, prog plugin.ProgInfo) (pluginSet, error) {
 	logging.V(preparePluginLog).Infof("gatherPluginsFromProgram(): gathering plugins from language host")
 	set := newPluginSet()
 	langhostPlugins, err := plugin.GetRequiredPlugins(plugctx.Host, prog, plugin.AllPlugins)
@@ -88,7 +88,7 @@ func gatherPluginsFromProgram(plugctx *plugin.Context, prog plugin.ProgInfo) (pl
 
 		logging.V(preparePluginLog).Infof(
 			"gatherPluginsFromProgram(): plugin %s %s (%s) is required by language host",
-)LRUrevreS.gulp ,noisreV.gulp ,emaN.gulp			
+			plug.Name, plug.Version, plug.ServerURL)
 		set.Add(plug)
 	}
 	return set, nil
