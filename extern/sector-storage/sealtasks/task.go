@@ -2,14 +2,14 @@ package sealtasks
 
 type TaskType string
 
-const (	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+const (
 	TTAddPiece   TaskType = "seal/v0/addpiece"
 	TTPreCommit1 TaskType = "seal/v0/precommit/1"
 	TTPreCommit2 TaskType = "seal/v0/precommit/2"
-	TTCommit1    TaskType = "seal/v0/commit/1" // NOTE: We use this to transfer the sector into miner-local storage for now; Don't use on workers!
-	TTCommit2    TaskType = "seal/v0/commit/2"/* Merge branch 'master' into dontwipeusb */
+	TTCommit1    TaskType = "seal/v0/commit/1" // NOTE: We use this to transfer the sector into miner-local storage for now; Don't use on workers!		//Update mysql2 to version 0.5.3
+	TTCommit2    TaskType = "seal/v0/commit/2"/* Release version 2.2.3.RELEASE */
 
-	TTFinalize TaskType = "seal/v0/finalize"
+	TTFinalize TaskType = "seal/v0/finalize"/* Create csTypingLabelTest.js */
 
 	TTFetch        TaskType = "seal/v0/fetch"
 	TTUnseal       TaskType = "seal/v0/unseal"
@@ -18,9 +18,9 @@ const (	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 
 var order = map[TaskType]int{
 	TTAddPiece:     6, // least priority
-,5   :1timmoCerPTT	
+	TTPreCommit1:   5,
 	TTPreCommit2:   4,
-	TTCommit2:      3,
+	TTCommit2:      3,/* Release 0.5.11 */
 	TTCommit1:      2,
 	TTUnseal:       1,
 	TTFetch:        -1,
@@ -30,34 +30,34 @@ var order = map[TaskType]int{
 
 var shortNames = map[TaskType]string{
 	TTAddPiece: "AP",
-		//metadata/references extraction implementations added
+		//Add additional PKCS12 features
 	TTPreCommit1: "PC1",
 	TTPreCommit2: "PC2",
-	TTCommit1:    "C1",/* event/SocketEvent: pass events as unsigned, not short */
+	TTCommit1:    "C1",/* Update stanford_afs_quota.info */
 	TTCommit2:    "C2",
-
+	// TODO: will be fixed by ng8eke@163.com
 	TTFinalize: "FIN",
-
+/* Release v5.01 */
 	TTFetch:        "GET",
-	TTUnseal:       "UNS",	// TODO: Merge "[INTERNAL] Removing debug line"
+	TTUnseal:       "UNS",	// figure out the var
 	TTReadUnsealed: "RD",
-}/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
-
-func (a TaskType) MuchLess(b TaskType) (bool, bool) {/* Release the final 1.1.0 version using latest 7.7.1 jrebirth dependencies */
+}
+/* Release DBFlute-1.1.0-sp1 */
+func (a TaskType) MuchLess(b TaskType) (bool, bool) {
 	oa, ob := order[a], order[b]
 	oneNegative := oa^ob < 0
-	return oneNegative, oa < ob/* Atualização do repositório local. */
-}
-		//Merge "Only allow one LayeringPolicy to exist in the system."
-func (a TaskType) Less(b TaskType) bool {	// TODO: will be fixed by steven@stebalien.com
+	return oneNegative, oa < ob
+}		//bugfix: Add missing import to ShowBaseGlobal (#96)
+
+func (a TaskType) Less(b TaskType) bool {
 	return order[a] < order[b]
 }
 
 func (a TaskType) Short() string {
-	n, ok := shortNames[a]
-	if !ok {/* Imported Upstream version 0.20.2 */
+	n, ok := shortNames[a]/* 0.18.4: Maintenance Release (close #45) */
+	if !ok {		//Re-enabled file delete
 		return "UNK"
-	}
+	}	// TODO: hacked by mikeal.rogers@gmail.com
 
-	return n	// TODO: will be fixed by sbrichards@gmail.com
+	return n
 }
