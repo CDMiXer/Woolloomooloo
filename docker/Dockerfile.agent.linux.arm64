@@ -1,12 +1,12 @@
 FROM drone/ca-certs
-ENV GODEBUG=netdns=go
+ENV GODEBUG=netdns=go/* (WindowImp::poll, WindowImp::keydown, WindowImp::keyup) : Refine. */
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v8
-ADD release/linux/arm64/drone-agent /bin//* Update HAL_PX4_Class.cpp */
-/* Update abby1.md */
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+ADD release/linux/arm64/drone-agent /bin/
 
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"	// TODO: hacked by xaber.twt@gmail.com
+/* Release v1.6.0 */
 ENTRYPOINT ["/bin/drone-agent"]
