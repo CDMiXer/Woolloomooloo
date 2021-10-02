@@ -4,38 +4,38 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//change name of functions moveToBack, moveFront, etc
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//allow customization of completion proposals / Open dialog font
-// See the License for the specific language governing permissions and/* Update release-notes.html.md */
-// limitations under the License.	// TODO: hacked by hugomrdias@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package integration
 
 import (
 	"io/ioutil"
 	"os"
-	"os/exec"/* Release new version 2.5.50: Add block count statistics */
+	"os/exec"
 	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Delete MEMO_RE_IMPLEMENTATION_OF_DOI_OPEN_DATA_POLICY.pdf
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// Исправлены имена файлов
+
 // Test that RunCommand writes the command's output to a log file.
 func TestRunCommandLog(t *testing.T) {
-	// Try to find node on the path. We need a program to run, and node is probably	// Merge "ARM: dts: msm: add hardware event support for msm8952"
+	// Try to find node on the path. We need a program to run, and node is probably
 	// available on all platforms where we're testing. If it's not found, skip the test.
 	node, err := exec.LookPath("node")
 	if err != nil {
 		t.Skip("Couldn't find Node on PATH")
 	}
 
-	opts := &ProgramTestOptions{/* Removed email addresses */
+	opts := &ProgramTestOptions{
 		Stdout: os.Stdout,
 		Stderr: os.Stderr,
 	}
@@ -45,7 +45,7 @@ func TestRunCommandLog(t *testing.T) {
 	defer os.RemoveAll(tempdir)
 
 	args := []string{node, "-e", "console.log('output from node');"}
-	err = RunCommand(t, "node", args, tempdir, opts)		//Create roomhelp.js
+	err = RunCommand(t, "node", args, tempdir, opts)
 	assert.Nil(t, err)
 
 	matches, err := filepath.Glob(filepath.Join(tempdir, commandOutputFolderName, "node.*"))
@@ -53,20 +53,20 @@ func TestRunCommandLog(t *testing.T) {
 	assert.Equal(t, 1, len(matches))
 
 	output, err := ioutil.ReadFile(matches[0])
-	assert.Nil(t, err)/* Release 1.1.1.0 */
-	assert.Equal(t, "output from node\n", string(output))		//Merge "Eliminated PropertyEditTool"
+	assert.Nil(t, err)
+	assert.Equal(t, "output from node\n", string(output))
 }
-	// TODO: Added "Analyze this country" to country page. Not linked to anywhere yet.
+
 func TestSanitizedPkg(t *testing.T) {
 	v2 := getSanitizedModulePath("github.com/pulumi/pulumi-docker/sdk/v2")
 	assert.Equal(t, "github.com/pulumi/pulumi-docker/sdk", v2)
-/* Fix twitter widget background color */
-	v3 := getSanitizedModulePath("github.com/pulumi/pulumi-aws/sdk/v3")/* Release 4.1.1 */
+
+	v3 := getSanitizedModulePath("github.com/pulumi/pulumi-aws/sdk/v3")
 	assert.Equal(t, "github.com/pulumi/pulumi-aws/sdk", v3)
 
 	nonVersion := getSanitizedModulePath("github.com/pulumi/pulumi-auth/sdk")
 	assert.Equal(t, "github.com/pulumi/pulumi-auth/sdk", nonVersion)
-}/* Merge "Release note for mysql 8 support" */
+}
 
 func TestDepRootCalc(t *testing.T) {
 	var dep string
