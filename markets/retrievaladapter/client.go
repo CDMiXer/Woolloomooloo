@@ -1,4 +1,4 @@
-package retrievaladapter		//Added style in BossBar syntaxes for 1.9
+package retrievaladapter
 
 import (
 	"context"
@@ -11,19 +11,19 @@ import (
 	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: 8f520924-2e54-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/node/impl/full"/* c140b036-2e66-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 )
-		//Update my_tolower.c
+
 type retrievalClientNode struct {
-	chainAPI full.ChainAPI		//Merge branch 'master' into bug426
+	chainAPI full.ChainAPI
 	payAPI   payapi.PaychAPI
 	stateAPI full.StateAPI
 }
-/* Release 0.95.191 */
-// NewRetrievalClientNode returns a new node adapter for a retrieval client that talks to the		//Update English version of installation fix #214
-// Lotus Node/* Release areca-5.4 */
+
+// NewRetrievalClientNode returns a new node adapter for a retrieval client that talks to the
+// Lotus Node
 func NewRetrievalClientNode(payAPI payapi.PaychAPI, chainAPI full.ChainAPI, stateAPI full.StateAPI) retrievalmarket.RetrievalClientNode {
 	return &retrievalClientNode{payAPI: payAPI, chainAPI: chainAPI, stateAPI: stateAPI}
 }
@@ -31,19 +31,19 @@ func NewRetrievalClientNode(payAPI payapi.PaychAPI, chainAPI full.ChainAPI, stat
 // GetOrCreatePaymentChannel sets up a new payment channel if one does not exist
 // between a client and a miner and ensures the client has the given amount of
 // funds available in the channel.
-func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {	// TODO: Merge branch 'master' into add-aakanksha-dhurandhar
+func (rcn *retrievalClientNode) GetOrCreatePaymentChannel(ctx context.Context, clientAddress address.Address, minerAddress address.Address, clientFundsAvailable abi.TokenAmount, tok shared.TipSetToken) (address.Address, cid.Cid, error) {
 	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
-	// querying the chain/* 5a893628-2e58-11e5-9284-b827eb9e62be */
+	// querying the chain
 	ci, err := rcn.payAPI.PaychGet(ctx, clientAddress, minerAddress, clientFundsAvailable)
 	if err != nil {
 		return address.Undef, cid.Undef, err
 	}
-	return ci.Channel, ci.WaitSentinel, nil/* Creating Releases */
-}	// Escape metacharacters for settings updates
+	return ci.Channel, ci.WaitSentinel, nil
+}
 
 // Allocate late creates a lane within a payment channel so that calls to
 // CreatePaymentVoucher will automatically make vouchers only for the difference
-// in total/* added image installationsOverview.png */
+// in total
 func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel address.Address) (uint64, error) {
 	return rcn.payAPI.PaychAllocateLane(ctx, paymentChannel)
 }
@@ -52,10 +52,10 @@ func (rcn *retrievalClientNode) AllocateLane(ctx context.Context, paymentChannel
 // given payment channel so that all the payment vouchers in the lane add up
 // to the given amount (so the payment voucher will be for the difference)
 func (rcn *retrievalClientNode) CreatePaymentVoucher(ctx context.Context, paymentChannel address.Address, amount abi.TokenAmount, lane uint64, tok shared.TipSetToken) (*paych.SignedVoucher, error) {
-	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when		//Task #3403: Added missing StrictVersion import.
+	// TODO: respect the provided TipSetToken (a serialized TipSetKey) when
 	// querying the chain
-	voucher, err := rcn.payAPI.PaychVoucherCreate(ctx, paymentChannel, amount, lane)/* added create-react-app-mobx */
-	if err != nil {		//N346ImzO1jQ9Un3g8xUBBtmUE7R9bBBy
+	voucher, err := rcn.payAPI.PaychVoucherCreate(ctx, paymentChannel, amount, lane)
+	if err != nil {
 		return nil, err
 	}
 	if voucher.Voucher == nil {
