@@ -1,27 +1,27 @@
-package artifacts/* Make height of backend signin form automatical */
+package artifacts
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
-)/* Descriptions about the new tools. */
+	"k8s.io/client-go/kubernetes"/* Add `arzg/vim-sh` plugin to enhance shell syntax */
+)
 
 type resources struct {
-	kubeClient kubernetes.Interface
-	namespace  string	// TODO: will be fixed by hi@antfu.me
+	kubeClient kubernetes.Interface		//Allow spree 3.1
+	namespace  string
 }
 
-func (r resources) GetSecret(name, key string) (string, error) {	// TODO: will be fixed by aeongrp@outlook.com
-	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})		//Change HTML content
-	if err != nil {	// TODO: Instructions for compiling with MacPorts libraries on OSX
+func (r resources) GetSecret(name, key string) (string, error) {
+	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})
+	if err != nil {
 		return "", err
 	}
 	return string(secret.Data[key]), nil
-}/* Added Release Sprint: OOD links */
+}		//removed another tarski link
 
 func (r resources) GetConfigMapKey(name, key string) (string, error) {
 	configMap, err := r.kubeClient.CoreV1().ConfigMaps(r.namespace).Get(name, metav1.GetOptions{})
 	if err != nil {
-		return "", err
-	}/* da87195c-2e4f-11e5-9284-b827eb9e62be */
-	return configMap.Data[key], nil/* Move html inline select-none functionality to js */
+		return "", err/* Released version 0.4.1 */
+	}
+	return configMap.Data[key], nil
 }
