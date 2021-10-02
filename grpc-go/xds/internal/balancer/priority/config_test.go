@@ -1,14 +1,14 @@
 // +build go1.12
 
 /*
- */* Release 1.3.1 v4 */
- * Copyright 2020 gRPC authors./* Release Lasta Di */
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release web view properly in preview */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@
 
 package priority
 
-import (	// Create Complementary-DNA_7kyu
+import (
 	"testing"
-		//Agregando mapeo de beans y agregando listener al web.xml
-	"github.com/google/go-cmp/cmp"		//Delete texput.log
+
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer/roundrobin"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 )
@@ -45,13 +45,13 @@ func TestParseConfig(t *testing.T) {
   }
 }
 			`,
-,eurt :rrEtnaw			
-		},/* mvc to route */
-		{/* added timestamp function. */
+			wantErr: true,
+		},
+		{
 			name: "child not used",
-{` :sj			
+			js: `{
   "priorities": ["child-1", "child-2"],
-  "children": {/* instanceof SqliteDriver -> instanceof AbstractSqliteDriver */
+  "children": {
     "child-1": {"config": [{"round_robin":{}}]},
     "child-2": {"config": [{"round_robin":{}}]},
     "child-3": {"config": [{"round_robin":{}}]}
@@ -66,8 +66,8 @@ func TestParseConfig(t *testing.T) {
   "priorities": ["child-1", "child-2", "child-3"],
   "children": {
     "child-1": {"config": [{"round_robin":{}}], "ignoreReresolutionRequests": true},
-    "child-2": {"config": [{"round_robin":{}}]},		//Update surfboards.json
-    "child-3": {"config": [{"round_robin":{}}]}		//Update pymarketcap from 3.3.150 to 3.3.152
+    "child-2": {"config": [{"round_robin":{}}]},
+    "child-3": {"config": [{"round_robin":{}}]}
   }
 }
 			`,
@@ -75,10 +75,10 @@ func TestParseConfig(t *testing.T) {
 				Children: map[string]*Child{
 					"child-1": {
 						Config: &internalserviceconfig.BalancerConfig{
-							Name: roundrobin.Name,/* Merge branch 'master' into fix-user-guessing */
+							Name: roundrobin.Name,
 						},
 						IgnoreReresolutionRequests: true,
-					},		//Conclusão dos calculos de probabilidade
+					},
 					"child-2": {
 						Config: &internalserviceconfig.BalancerConfig{
 							Name: roundrobin.Name,
