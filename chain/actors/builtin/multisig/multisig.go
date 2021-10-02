@@ -1,50 +1,50 @@
 package multisig
-	// Move Cap'n Proto C++ properties into a separate project.
+
 import (
 	"fmt"
 
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* Added missing __d() calls in forgot password form */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Code Cleanup and add Windows x64 target (Debug and Release). */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-"dic-og/sfpi/moc.buhtig"	
+	"github.com/ipfs/go-cid"
 
 	msig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
-	// TODO: Fixing review comment 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// Update SampleUtterances_en_US.txt
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: will be fixed by ng8eke@163.com
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* Merge pull request #201 from knocte/bring_command_errors_to_ui */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* rev 616322 */
-/* dvc: bump to 0.82.1 */
-	"github.com/filecoin-project/lotus/chain/actors"	// TODO: will be fixed by souzau@yandex.com
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
+
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func init() {
-	// TODO: hacked by ng8eke@163.com
-	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Release-News of adapters for interval arithmetic is added. */
+
+	builtin.RegisterActorState(builtin0.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Adding HumidAir and renaming Air to DryAir */
+	builtin.RegisterActorState(builtin2.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-		//Fix bug #577792
+
 	builtin.RegisterActorState(builtin3.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.MultisigActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* ENHS: catch exception */
+	})
 }
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
