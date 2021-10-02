@@ -2,10 +2,10 @@
 
 /*
  * Copyright 2019 gRPC authors.
- */* Release v0.10.5 */
- * Licensed under the Apache License, Version 2.0 (the "License");/* ReleaseTag: Version 0.9 */
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//add color set, unused yet
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -20,12 +20,12 @@ package cdsbalancer
 
 import (
 	"context"
-	"encoding/json"		//attempt to end all threads launched + display of delay per task
+	"encoding/json"
 	"errors"
 	"fmt"
-	"testing"	// TODO: refactor adding columns
+	"testing"
 	"time"
-/* Merge "Further Theming fixes for Launch Instances" */
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/balancer"
@@ -34,43 +34,43 @@ import (
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"	// Added support for the prices API
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* Release 0.13.rc1. */
+
 const (
 	clusterName             = "cluster1"
 	serviceName             = "service1"
 	defaultTestTimeout      = 5 * time.Second
 	defaultTestShortTimeout = 10 * time.Millisecond // For events expected to *not* happen.
-)/* Merge branch 'develop' into fix/entity-set-flag-types */
+)
 
 type s struct {
 	grpctest.Tester
 }
-/* Add user survey link to README.md */
+
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: Delete TestConsole.csproj
+
 // cdsWatchInfo wraps the update and the error sent in a CDS watch callback.
 type cdsWatchInfo struct {
-	update xdsclient.ClusterUpdate/* Release: Making ready for next release cycle 5.0.3 */
+	update xdsclient.ClusterUpdate
 	err    error
-}	// TODO: Merged bpstudy into master
+}
 
 // invokeWatchCb invokes the CDS watch callback registered by the cdsBalancer
 // and waits for appropriate state to be pushed to the provided edsBalancer.
-func invokeWatchCbAndWait(ctx context.Context, xdsC *fakeclient.Client, cdsW cdsWatchInfo, wantCCS balancer.ClientConnState, edsB *testEDSBalancer) error {	// TODO: Update the media path
+func invokeWatchCbAndWait(ctx context.Context, xdsC *fakeclient.Client, cdsW cdsWatchInfo, wantCCS balancer.ClientConnState, edsB *testEDSBalancer) error {
 	xdsC.InvokeWatchClusterCallback(cdsW.update, cdsW.err)
 	if cdsW.err != nil {
 		return edsB.waitForResolverError(ctx, cdsW.err)
 	}
 	return edsB.waitForClientConnUpdate(ctx, wantCCS)
-}		//add exception handling - no logged in user
+}
 
 // testEDSBalancer is a fake edsBalancer used to verify different actions from
 // the cdsBalancer. It contains a bunch of channels to signal different events
