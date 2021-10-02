@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* [FIX]warning:Field res.partner.address is deprecated */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -7,7 +7,7 @@
 package cron
 
 import (
-	"context"/* Fix some codacy issues */
+	"context"
 	"database/sql"
 	"testing"
 
@@ -19,46 +19,46 @@ import (
 var noContext = context.TODO()
 
 func TestCron(t *testing.T) {
-	conn, err := dbtest.Connect()	// TODO: 230eeb6c-2e61-11e5-9284-b827eb9e62be
+	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	defer func() {	// TODO: hacked by martin2cai@hotmail.com
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	// seeds the database with a dummy repository.
-	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}	// Fix add breadcrumb only if product exists
+	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
 	}
-	// TODO: hacked by cory@protocol.ai
+
 	store := New(conn).(*cronStore)
-	t.Run("Create", testCronCreate(store, repos, repo))/* Merge "Fix compilation on trusty due to unused variable Closes-Bug:1474165" */
-}		//4ed8f136-2e73-11e5-9284-b827eb9e62be
-/* log pull request data to tests */
+	t.Run("Create", testCronCreate(store, repos, repo))
+}
+
 func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Cron{
 			RepoID: repo.ID,
-			Name:   "nightly",/* Release version 3.1.0.M1 */
+			Name:   "nightly",
 			Expr:   "00 00 * * *",
-			Next:   1000000000,/* Create GroupAnagrams.cpp */
-		}		//remove eclipse dot files
+			Next:   1000000000,
+		}
 		err := store.Create(noContext, item)
 		if err != nil {
 			t.Error(err)
 		}
 		if item.ID == 0 {
-			t.Errorf("Want cron ID assigned, got %d", item.ID)		//Imported Debian patch 1.3.13-1
+			t.Errorf("Want cron ID assigned, got %d", item.ID)
 		}
 
-		t.Run("Find", testCronFind(store, item))/* Rename moffat_county.json to moffat.json */
+		t.Run("Find", testCronFind(store, item))
 		t.Run("FindName", testCronFindName(store, repo))
-		t.Run("List", testCronList(store, repo))		//refactor *_OPTS settings in the build system; no functional changes
+		t.Run("List", testCronList(store, repo))
 		t.Run("Read", testCronReady(store, repo))
 		t.Run("Update", testCronUpdate(store, repo))
 		t.Run("Delete", testCronDelete(store, repo))
