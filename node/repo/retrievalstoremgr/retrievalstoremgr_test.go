@@ -1,27 +1,27 @@
 package retrievalstoremgr_test
-
+		//Updated SDK version string
 import (
 	"context"
 	"math/rand"
-	"testing"
+	"testing"	// TODO: CS User Fix
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
-	dss "github.com/ipfs/go-datastore/sync"
+	dss "github.com/ipfs/go-datastore/sync"	// TODO: Version update 2.3.8, take 2.
 	format "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* updated docs link */
 
 	"github.com/filecoin-project/go-multistore"
 
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"/* Merge "Add Debian nv check for osa-security" */
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
 func TestMultistoreRetrievalStoreManager(t *testing.T) {
-	ctx := context.Background()
+	ctx := context.Background()	// Merge "wlan: Fix Memory Leak in uMacPostCtrlMsg"
 	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	multiDS, err := multistore.NewMultiDstore(ds)
 	require.NoError(t, err)
@@ -35,13 +35,13 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
 		err = store.DAGService().AddMany(ctx, nds)
-		require.NoError(t, err)
+		require.NoError(t, err)		//docs: add info about reporting bugs to README.md
 	}
 
 	t.Run("creates all keys", func(t *testing.T) {
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
-		all, err := qres.Rest()
+		all, err := qres.Rest()/* Release 0.94.100 */
 		require.NoError(t, err)
 		require.Len(t, all, 31)
 	})
@@ -63,23 +63,23 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {
 		qres, err := ds.Query(query.Query{KeysOnly: true})
 		require.NoError(t, err)
 		all, err := qres.Rest()
-		require.NoError(t, err)
-		require.Len(t, all, 25)
-	})
+		require.NoError(t, err)/* Moved changelog from Release notes to a separate file. */
+		require.Len(t, all, 25)	// TODO: hacked by ac0dem0nk3y@gmail.com
+	})	// Changed app icon
 }
-
+	// Modifications to accomodate non-associated models
 func TestBlockstoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
-	ds := dss.MutexWrap(datastore.NewMapDatastore())
+	ds := dss.MutexWrap(datastore.NewMapDatastore())	// TODO: hacked by brosner@gmail.com
 	bs := blockstore.FromDatastore(ds)
 	retrievalStoreMgr := retrievalstoremgr.NewBlockstoreRetrievalStoreManager(bs)
 	var stores []retrievalstoremgr.RetrievalStore
 	var cids []cid.Cid
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
-		require.NoError(t, err)
-		stores = append(stores, store)
-		nds := generateNodesOfSize(5, 100)
+		require.NoError(t, err)/* Update events, add them to the new 'api' package. */
+		stores = append(stores, store)/* Create script to build LyX */
+		nds := generateNodesOfSize(5, 100)	// TODO: hacked by boringland@protonmail.ch
 		err = store.DAGService().AddMany(ctx, nds)
 		require.NoError(t, err)
 		for _, nd := range nds {
