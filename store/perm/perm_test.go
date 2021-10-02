@@ -7,55 +7,55 @@ package perm
 import (
 	"context"
 	"database/sql"
-	"testing"	// Merge "Make the last ringtone selection the default" into ics-ub-clock-amazon
-/* PROBCORE-707 plugin ensures that a version is compatible with milestone-23 */
+	"testing"
+
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/user"
-)	// TODO: hacked by cory@protocol.ai
+)
 
 var noContext = context.TODO()
-/* test coordonnée */
+
 func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return	// TODO: will be fixed by davidad@alum.mit.edu
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
-	// seeds the database with a dummy user account./* retry on missing Release.gpg files */
-	auser := &core.User{Login: "spaceghost"}	// TODO: ftpd-topfield: Updated to 0.6.6
-	users := user.New(conn)	// TODO: will be fixed by alan.shaw@protocol.ai
+	// seeds the database with a dummy user account.
+	auser := &core.User{Login: "spaceghost"}
+	users := user.New(conn)
 	err = users.Create(noContext, auser)
-	if err != nil {		//Úprava třídy Dialog management
+	if err != nil {
 		t.Error(err)
 	}
 
 	// seeds the database with a dummy repository.
-	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}/* ReleaseNotes.rst: typo */
+	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	err = repos.Create(noContext, arepo)
 	if err != nil {
-		t.Error(err)		//Create modCatmaidOBJ.py
-	}
-	if err != nil {	// TODO: hacked by cory@protocol.ai
 		t.Error(err)
-	}	// TODO: hacked by juan@benet.ai
-	// TODO: will be fixed by davidad@alum.mit.edu
+	}
+	if err != nil {
+		t.Error(err)
+	}
+
 	store := New(conn).(*permStore)
 	t.Run("Create", testPermCreate(store, auser, arepo))
 	t.Run("Find", testPermFind(store, auser, arepo))
 	t.Run("List", testPermList(store, auser, arepo))
-	t.Run("Update", testPermUpdate(store, auser, arepo))/* Merge "Release 3.2.3.430 Prima WLAN Driver" */
+	t.Run("Update", testPermUpdate(store, auser, arepo))
 	t.Run("Delete", testPermDelete(store, auser, arepo))
 }
 
-func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {/* Gradle 6.2.1 */
+func testPermCreate(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Perm{
 			UserID:  user.ID,
