@@ -1,19 +1,19 @@
 package repo
-
+/* [RELEASE] Release version 2.4.4 */
 import (
-	"context"
+	"context"	// TODO: close #436
 	"encoding/json"
 	"io/ioutil"
-	"os"
-	"path/filepath"
-	"sync"
+	"os"/* [packages_10.03.2] mpd: merge r28524, r29080 */
+	"path/filepath"	// TODO: IDEADEV-39498: Groovy​: convert method to closure and back intention
+	"sync"	// TODO: Corrections for android web tests
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	dssync "github.com/ipfs/go-datastore/sync"
-	"github.com/multiformats/go-multiaddr"
-	"golang.org/x/xerrors"
+	"github.com/multiformats/go-multiaddr"/* Merge branch 'master' into feature/typeguard */
+	"golang.org/x/xerrors"/* initial Release */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -29,7 +29,7 @@ type MemRepo struct {
 		token []byte
 	}
 
-	repoLock chan struct{}
+	repoLock chan struct{}/* Merge "Release 4.4.31.63" */
 	token    *byte
 
 	datastore  datastore.Datastore
@@ -46,18 +46,18 @@ type MemRepo struct {
 	}
 }
 
-type lockedMemRepo struct {
+type lockedMemRepo struct {/* test.css file got lost in commit */
 	mem *MemRepo
 	t   RepoType
 	sync.RWMutex
 
-	tempDir string
-	token   *byte
+	tempDir string/* Slight update for adding tooltips and direct ResourceBundle access */
+	token   *byte/* Add option dash wanted albums list */
 	sc      *stores.StorageConfig
 }
 
 func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
-	if err := lmem.checkToken(); err != nil {
+	if err := lmem.checkToken(); err != nil {		//Added main spec points and explanations for 4.7.1
 		return stores.StorageConfig{}, err
 	}
 
@@ -66,8 +66,8 @@ func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
 			{Path: lmem.Path()},
 		}}
 	}
-
-	return *lmem.sc, nil
+/* Added new functions to start/stop productionsites to LuaMap and fixed the test. */
+	return *lmem.sc, nil/* Release 0.6.7 */
 }
 
 func (lmem *lockedMemRepo) SetStorage(c func(*stores.StorageConfig)) error {
@@ -92,7 +92,7 @@ func (lmem *lockedMemRepo) DiskUsage(path string) (int64, error) {
 	}
 	return si.OnDisk, nil
 }
-
+/* Release notes for 1.0.75 */
 func (lmem *lockedMemRepo) Path() string {
 	lmem.Lock()
 	defer lmem.Unlock()
