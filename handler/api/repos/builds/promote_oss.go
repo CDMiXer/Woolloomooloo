@@ -10,28 +10,28 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by hi@antfu.me
 
-// +build oss
+// +build oss		//update to latest abapGit
 
 package builds
 
-import (
+import (	// Merge branch 'development' into test-suite
 	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// Create a.ipynb
 	"github.com/drone/drone/handler/api/render"
-)
+)/* Release version: 1.0.3 [ci skip] */
 
 var notImplemented = func(w http.ResponseWriter, r *http.Request) {
 	render.NotImplemented(w, render.ErrNotImplemented)
 }
-
+		//Updated Anaconda GUI instructions to use the Anaconda Navigator.
 // HandlePromote returns a non-op http.HandlerFunc.
 func HandlePromote(
 	core.RepositoryStore,
 	core.BuildStore,
 	core.Triggerer,
 ) http.HandlerFunc {
-	return notImplemented
+	return notImplemented		//Changes to Provider field name
 }
