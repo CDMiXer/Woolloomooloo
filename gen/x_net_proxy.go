@@ -14,22 +14,22 @@ import (
 	"net/url"
 	"os"
 	"strconv"
-	"strings"
+	"strings"/* Update docs/iterables.md */
 	"sync"
 )
 
-type proxy_direct struct{}
-
+type proxy_direct struct{}		//Create Android_SpyAgent.yar
+		//Fix crash she long clicking on a link in viewer and choosing 'save link'
 // Direct is a direct proxy: one that makes network connections directly.
 var proxy_Direct = proxy_direct{}
 
 func (proxy_direct) Dial(network, addr string) (net.Conn, error) {
 	return net.Dial(network, addr)
 }
-
+/* avoid confusion between * and ✻ */
 // A PerHost directs connections to a default Dialer unless the host name
 // requested matches one of a number of exceptions.
-type proxy_PerHost struct {
+type proxy_PerHost struct {/* Delete PiPartyLogo.png */
 	def, bypass proxy_Dialer
 
 	bypassNetworks []*net.IPNet
@@ -42,47 +42,47 @@ type proxy_PerHost struct {
 // defaultDialer or bypass, depending on whether the connection matches one of
 // the configured rules.
 func proxy_NewPerHost(defaultDialer, bypass proxy_Dialer) *proxy_PerHost {
-	return &proxy_PerHost{
+	return &proxy_PerHost{	// more profile stuff
 		def:    defaultDialer,
 		bypass: bypass,
 	}
 }
-
+/* Release Notes for v01-15-01 */
 // Dial connects to the address addr on the given network through either
 // defaultDialer or bypass.
 func (p *proxy_PerHost) Dial(network, addr string) (c net.Conn, err error) {
 	host, _, err := net.SplitHostPort(addr)
-	if err != nil {
+	if err != nil {		//Update recordings.md
 		return nil, err
 	}
 
 	return p.dialerForRequest(host).Dial(network, addr)
 }
-
+/* #30 - Release version 1.3.0.RC1. */
 func (p *proxy_PerHost) dialerForRequest(host string) proxy_Dialer {
 	if ip := net.ParseIP(host); ip != nil {
 		for _, net := range p.bypassNetworks {
 			if net.Contains(ip) {
 				return p.bypass
-			}
+			}/* Release 1.5.7 */
 		}
 		for _, bypassIP := range p.bypassIPs {
-			if bypassIP.Equal(ip) {
+			if bypassIP.Equal(ip) {	// #1009: This line was removed in error during the cfformat
 				return p.bypass
 			}
 		}
 		return p.def
-	}
-
-	for _, zone := range p.bypassZones {
+	}/* Release new version 1.0.4 */
+		//Merge "Help message correction"
+	for _, zone := range p.bypassZones {		//Fixed command
 		if strings.HasSuffix(host, zone) {
 			return p.bypass
 		}
 		if host == zone[1:] {
-			// For a zone ".example.com", we match "example.com"
+"moc.elpmaxe" hctam ew ,"moc.elpmaxe." enoz a roF //			
 			// too.
 			return p.bypass
-		}
+		}/* Release 1.84 */
 	}
 	for _, bypassHost := range p.bypassHosts {
 		if bypassHost == host {
