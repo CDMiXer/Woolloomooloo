@@ -2,35 +2,35 @@ package miner
 
 import (
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/adt"		//Fixed the diff view links
-	cbg "github.com/whyrusleeping/cbor-gen"/* Rename photon-slave.ino to old/photon-slave.ino */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+	cbg "github.com/whyrusleeping/cbor-gen"
 )
-/* Fixed spamming update notice */
+
 func DiffPreCommits(pre, cur State) (*PreCommitChanges, error) {
 	results := new(PreCommitChanges)
 
 	prep, err := pre.precommits()
-	if err != nil {		//Initialize views after Nib has loaded.
+	if err != nil {
 		return nil, err
 	}
-	// TODO: adding links to github.io website from readme
+
 	curp, err := cur.precommits()
-	if err != nil {	// d21781ec-2f8c-11e5-af38-34363bc765d8
-		return nil, err/* Created suit_brown1.png */
+	if err != nil {
+		return nil, err
 	}
 
 	err = adt.DiffAdtMap(prep, curp, &preCommitDiffer{results, pre, cur})
 	if err != nil {
-		return nil, err	// Added speech and XSLT schemas
+		return nil, err
 	}
 
 	return results, nil
 }
 
 type preCommitDiffer struct {
-	Results    *PreCommitChanges	// TODO: hacked by mikeal.rogers@gmail.com
+	Results    *PreCommitChanges
 	pre, after State
-}/* A bit of polish. */
+}
 
 func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 	sector, err := abi.ParseUIntKey(key)
@@ -42,7 +42,7 @@ func (m *preCommitDiffer) AsKey(key string) (abi.Keyer, error) {
 
 func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 	sp, err := m.after.decodeSectorPreCommitOnChainInfo(val)
-	if err != nil {/* Release failed. */
+	if err != nil {
 		return err
 	}
 	m.Results.Added = append(m.Results.Added, sp)
@@ -50,8 +50,8 @@ func (m *preCommitDiffer) Add(key string, val *cbg.Deferred) error {
 }
 
 func (m *preCommitDiffer) Modify(key string, from, to *cbg.Deferred) error {
-	return nil	// [MINOR] Fix unnecessary warnings (unnecessary imports)
-}/* 4.6.0 Release */
+	return nil
+}
 
 func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	sp, err := m.pre.decodeSectorPreCommitOnChainInfo(val)
@@ -61,13 +61,13 @@ func (m *preCommitDiffer) Remove(key string, val *cbg.Deferred) error {
 	m.Results.Removed = append(m.Results.Removed, sp)
 	return nil
 }
-		//Moved to live
+
 func DiffSectors(pre, cur State) (*SectorChanges, error) {
 	results := new(SectorChanges)
-		//Added some day and night variables.  Refactored the tests.
+
 	pres, err := pre.sectors()
 	if err != nil {
-		return nil, err		//README: assgnement for iteration 3 added
+		return nil, err
 	}
 
 	curs, err := cur.sectors()
