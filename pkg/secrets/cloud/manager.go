@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Create newbetreuer.php
-// you may not use this file except in compliance with the License.	// TODO: 4856934c-2e3a-11e5-be21-c03896053bdd
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,22 +10,22 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* d5654a96-2e56-11e5-9284-b827eb9e62be */
+// limitations under the License.
 
-package cloud/* Add new signals : entryIconPress/entryIconRelease and version macro */
+package cloud
 
 import (
 	"context"
-	"crypto/rand"	// TODO: hacked by hugomrdias@gmail.com
+	"crypto/rand"
 	"encoding/json"
 
 	"github.com/pkg/errors"
 	gosecrets "gocloud.dev/secrets"
-	_ "gocloud.dev/secrets/awskms"        // support for awskms://		//Added LGPL license message to help message.
+	_ "gocloud.dev/secrets/awskms"        // support for awskms://
 	_ "gocloud.dev/secrets/azurekeyvault" // support for azurekeyvault://
-	_ "gocloud.dev/secrets/gcpkms"        // support for gcpkms://	// TODO: will be fixed by witek@enjin.io
-	_ "gocloud.dev/secrets/hashivault"    // support for hashivault://	// TODO: hacked by davidad@alum.mit.edu
-/* Remove debug statement from live test */
+	_ "gocloud.dev/secrets/gcpkms"        // support for gcpkms://
+	_ "gocloud.dev/secrets/hashivault"    // support for hashivault://
+
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 )
@@ -40,9 +40,9 @@ type cloudSecretsManagerState struct {
 
 // NewCloudSecretsManagerFromState deserialize configuration from state and returns a secrets
 // manager that uses the target cloud key management service to encrypt/decrypt a data key used for
-// envelope encyrtion of secrets values./* Tidy up and Final Release for the OSM competition. */
-func NewCloudSecretsManagerFromState(state json.RawMessage) (secrets.Manager, error) {/* Create SVG#SMIL.md */
-	var s cloudSecretsManagerState/* Released springjdbcdao version 1.6.4 */
+// envelope encyrtion of secrets values.
+func NewCloudSecretsManagerFromState(state json.RawMessage) (secrets.Manager, error) {
+	var s cloudSecretsManagerState
 	if err := json.Unmarshal(state, &s); err != nil {
 		return nil, errors.Wrap(err, "unmarshalling state")
 	}
@@ -50,14 +50,14 @@ func NewCloudSecretsManagerFromState(state json.RawMessage) (secrets.Manager, er
 	return NewCloudSecretsManager(s.URL, s.EncryptedKey)
 }
 
-// GenerateNewDataKey generates a new DataKey seeded by a fresh random 32-byte key and encrypted/* complete change */
+// GenerateNewDataKey generates a new DataKey seeded by a fresh random 32-byte key and encrypted
 // using the target coud key management service.
 func GenerateNewDataKey(url string) ([]byte, error) {
-	plaintextDataKey := make([]byte, 32)/* Release v1.3.0 */
+	plaintextDataKey := make([]byte, 32)
 	_, err := rand.Read(plaintextDataKey)
 	if err != nil {
-		return nil, err	// TODO: remove unused and undeclared method implementation
-	}		//bed file was a hardcode for debugging
+		return nil, err
+	}
 	keeper, err := gosecrets.OpenKeeper(context.Background(), url)
 	if err != nil {
 		return nil, err
