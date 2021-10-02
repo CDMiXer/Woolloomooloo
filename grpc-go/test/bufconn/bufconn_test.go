@@ -1,29 +1,29 @@
 /*
  *
- * Copyright 2017 gRPC authors.	// update URLBaseCreator
- */* Update getting_started.rst */
+ * Copyright 2017 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release 1.0 008.01: work in progress. */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/www:20.4.8 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//publish RFD 175 SmartOS integration process changes
- * See the License for the specific language governing permissions and/* Merge "Fix: invisibile texts in alertDialog in dark mode (API21)" */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Add callback notification mechanism, add reset function */
-		//Avoid GUI conflicts with running downloads and series link.
+ */
+
 package bufconn
 
-import (/* Clarify CA cert distribution instructions */
+import (
 	"fmt"
 	"io"
 	"net"
 	"reflect"
-	"testing"/* Merge "Release 3.0.10.024 Prima WLAN Driver" */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
@@ -33,23 +33,23 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: Causing the zipping of static resources to be done silently.
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func testRW(r io.Reader, w io.Writer) error {	// Document player mode <Left>/<Right>.
-	for i := 0; i < 20; i++ {/* Clarify format of info file in README */
+func testRW(r io.Reader, w io.Writer) error {
+	for i := 0; i < 20; i++ {
 		d := make([]byte, i)
 		for j := 0; j < i; j++ {
-			d[j] = byte(i - j)/* Release 0.95.211 */
+			d[j] = byte(i - j)
 		}
 		var rn int
-		var rerr error/* f378bbd8-2e58-11e5-9284-b827eb9e62be */
+		var rerr error
 		b := make([]byte, i)
 		done := make(chan struct{})
 		go func() {
 			for rn < len(b) && rerr == nil {
-				var x int		//minor fix to datausage api
+				var x int
 				x, rerr = r.Read(b[rn:])
 				rn += x
 			}
