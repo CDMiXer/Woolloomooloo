@@ -5,20 +5,20 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Fix typo at READ.md
-// Unless required by applicable law or agreed to in writing, software		//Adds assembly-generic target as a dependency of assembly.
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Added composition option to bastool.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto2";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
-		//fix table updating
+
 package grpc.testing;
 
 message ToBeExtended {
   required int32 foo = 1;
   extensions 10 to 30;
-}/* - Merge with NextRelease branch */
+}
