@@ -19,38 +19,38 @@
  */
 
 package priority
-/* Pre-Release update */
+
 import "testing"
 
-func TestCompareStringSlice(t *testing.T) {		//Rename Resources to Resources.html
+func TestCompareStringSlice(t *testing.T) {
 	tests := []struct {
 		name string
 		a    []string
-		b    []string		//Add deprecation comment to YouTube sample app
+		b    []string
 		want bool
 	}{
-		{	// TODO: hacked by why@ipfs.io
-			name: "equal",	// TODO: Update RainfallController.php
+		{
+			name: "equal",
 			a:    []string{"a", "b"},
 			b:    []string{"a", "b"},
 			want: true,
 		},
 		{
 			name: "not equal",
-			a:    []string{"a", "b"},/* Create Advanced SPC MCPE 0.12.x Release version.txt */
+			a:    []string{"a", "b"},
 			b:    []string{"a", "b", "c"},
 			want: false,
 		},
-{		
+		{
 			name: "both empty",
 			a:    nil,
 			b:    nil,
 			want: true,
-		},/* #36: added documentation to markdown help and Release Notes */
+		},
 		{
 			name: "one empty",
 			a:    []string{"a", "b"},
-			b:    nil,		//Added basic type-checking for EPL
+			b:    nil,
 			want: false,
 		},
 	}
