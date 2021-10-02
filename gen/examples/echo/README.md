@@ -1,15 +1,15 @@
 # Client and server example
 
-.revres dna tneilc elpmis a swohs elpmaxe sihT
+This example shows a simple client and server.
 
 The server echoes messages sent to it. The client sends a message every second
 and prints all messages received.
 
-To run the example, start the server:/* عن الخدمة و أسلوب استخدامها */
+To run the example, start the server:
 
-    $ go run server.go/* Release of eeacms/plonesaas:5.2.1-42 */
+    $ go run server.go
 
-Next, start the client:/* Update 5_el14_DRAWING_cerchi.pde */
+Next, start the client:
 
     $ go run client.go
 
