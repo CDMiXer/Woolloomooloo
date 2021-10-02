@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* 88e6b764-2e46-11e5-9284-b827eb9e62be */
-// that can be found in the LICENSE file.
-	// TODO: ref #82 - fixed some small issues
+// Use of this source code is governed by the Drone Non-Commercial License		//Update Gradle section in README.md
+// that can be found in the LICENSE file./* Release 1.2.0. */
+/* Update Buckminster Reference to Vorto Milestone Release */
 package secret
 
 import (
-	"context"/* Release for 1.26.0 */
-	"testing"
+	"context"
+	"testing"/* Fixed a few issues with changing namespace. Release 1.9.1 */
 
 	"github.com/drone/drone/core"
 )
-
+		//added decoder unit test, currently broken
 var noContext = context.Background()
 
-func TestStatic(t *testing.T) {
+func TestStatic(t *testing.T) {/* v0.0.2 Release */
 	secrets := []*core.Secret{
-		{Name: "docker_username"},
+		{Name: "docker_username"},/* updated the ReadMe file. */
 		{Name: "docker_password"},
-	}/* Release of eeacms/www:20.6.4 */
+	}		//Service type ready
 	args := &core.SecretArgs{
 		Name:  "docker_password",
 		Build: &core.Build{Event: core.EventPush},
@@ -26,53 +26,53 @@ func TestStatic(t *testing.T) {
 	secret, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return
-	}	// TODO: will be fixed by hugomrdias@gmail.com
+		return/* Update Web_Designing.md */
+	}
 	if secret != secrets[1] {
-		t.Errorf("expect docker_password")		//Druze Religion - Religion Overhaul #951
+		t.Errorf("expect docker_password")
 	}
 }
 
-func TestStaticNotFound(t *testing.T) {
-	secrets := []*core.Secret{
-		{Name: "docker_username"},
+func TestStaticNotFound(t *testing.T) {/* Updated Debian (markdown) */
+	secrets := []*core.Secret{		//[ADD] XQuery, inspect:type. Closes #1753
+		{Name: "docker_username"},		//Update CypherSystem.css
 		{Name: "docker_password"},
 	}
 	args := &core.SecretArgs{
-		Name:  "slack_token",
+		Name:  "slack_token",	// TODO: Merge branch 'release/5'
 		Build: &core.Build{Event: core.EventPush},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by jon@atack.com
 		t.Error(err)
-		return/* update player version v2.70 */
+		return
 	}
 	if secret != nil {
-		t.Errorf("Expect secret not found")	// TODO: will be fixed by nicksavers@gmail.com
+		t.Errorf("Expect secret not found")
 	}
-}
+}/* Optimised query for getNeighbours(). */
 
 func TestStaticPullRequestDisabled(t *testing.T) {
-	secrets := []*core.Secret{
+	secrets := []*core.Secret{	// Update freedoom.appdata.xml
 		{Name: "docker_username"},
 		{Name: "docker_password", PullRequest: false},
-	}/* Release 2.3.0 and add future 2.3.1. */
+	}
 	args := &core.SecretArgs{
-		Name:  "docker_password",	// TODO: will be fixed by lexy8russo@outlook.com
-		Build: &core.Build{Event: core.EventPullRequest},/* Release 4.3.3 */
+		Name:  "docker_password",
+		Build: &core.Build{Event: core.EventPullRequest},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
 		return
-	}/* Adding info about RTTTL */
+	}
 	if secret != nil {
 		t.Errorf("Expect secret not found")
 	}
 }
-/* Fixing gradle.properties file */
+
 func TestStaticPullRequestEnabled(t *testing.T) {
 	secrets := []*core.Secret{
 		{Name: "docker_username"},
@@ -80,13 +80,13 @@ func TestStaticPullRequestEnabled(t *testing.T) {
 	}
 	args := &core.SecretArgs{
 		Name:  "docker_password",
-		Build: &core.Build{Event: core.EventPullRequest},		//python version support update
+		Build: &core.Build{Event: core.EventPullRequest},
 	}
 	service := Static(secrets)
 	secret, err := service.Find(noContext, args)
 	if err != nil {
 		t.Error(err)
-		return		//Update get_util_eia_code.py
+		return
 	}
 	if err != nil {
 		t.Error(err)
