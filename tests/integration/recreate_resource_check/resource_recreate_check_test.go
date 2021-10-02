@@ -1,26 +1,26 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release 1.16.6 */
-// +build nodejs all/* Merge "Release 4.0.10.002  QCACLD WLAN Driver" */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// +build nodejs all
 
 package ints
 
-import (	// TODO: will be fixed by mail@bitpshr.net
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// Test that the engine does not consider old inputs when calling Check during re-creation of/* Released Chronicler v0.1.2 */
-// a resource that was deleted due to a dependency on a DBR-replaced resource.		//Hive dependencies
+// Test that the engine does not consider old inputs when calling Check during re-creation of
+// a resource that was deleted due to a dependency on a DBR-replaced resource.
 func TestResourceRecreateCheck(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// Delete dblpAcmProfiles
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{/* Update and rename bash_exec.py to shell_exec.py */
+		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
 		},
-	})/* A fix in Release_notes.txt */
-}/* Release version: 2.0.0 [ci skip] */
+	})
+}
