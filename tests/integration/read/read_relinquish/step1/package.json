@@ -1,5 +1,5 @@
 {
-    "name": "read_relinquish",	// TODO: 617 code review feeeeeeeeedbaaaaack
+    "name": "read_relinquish",/* Additional assignment tests for fix_next. */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -9,6 +9,6 @@
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }		//Prepare play'r mongo for open source release.
+        "@pulumi/pulumi": "latest"/* Version 0.10.5 Release */
+    }
 }
