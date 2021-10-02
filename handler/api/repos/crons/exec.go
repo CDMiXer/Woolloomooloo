@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//fixed concurrent puts to the same key.
-// Use of this source code is governed by the Drone Non-Commercial License/* Merge "msm: camera: Release spinlock in error case" */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// Explaining set()
+// +build !oss
 
 package crons
 
@@ -12,47 +12,47 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* updated ReleaseManager config */
-	"github.com/sirupsen/logrus"	// TODO: Sonar Fixes
+	"github.com/drone/drone/handler/api/render"
+	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
 )
 
-// HandleExec returns an http.HandlerFunc that processes http	// Changed return text to spanish
+// HandleExec returns an http.HandlerFunc that processes http
 // requests to execute a cronjob on-demand.
 func HandleExec(
 	users core.UserStore,
 	repos core.RepositoryStore,
-	crons core.CronStore,/* args: make ARGS_ESCAPE_CHAR constexpr */
+	crons core.CronStore,
 	commits core.CommitService,
 	trigger core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			ctx       = r.Context()	// Added spaces to get fetch 'bodies' examples working
+			ctx       = r.Context()
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
-		)	// TODO: vm: also smoke-check callstack after pic update
+		)
 
-		repo, err := repos.FindName(ctx, namespace, name)	// TODO: forwarding constructor not working under gcc4.6
-		if err != nil {/* fixed incorrect sensor data */
+		repo, err := repos.FindName(ctx, namespace, name)
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 
 		cronjob, err := crons.FindName(ctx, repo.ID, cron)
 		if err != nil {
-			render.NotFound(w, err)		//Update goref-0000043.md
+			render.NotFound(w, err)
 			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find cron")
 			return
 		}
 
-		user, err := users.Find(ctx, repo.UserID)/* Merge branch 'master' into meat-recent-git */
-		if err != nil {	// TODO: hacked by sjors@sprovoost.nl
+		user, err := users.Find(ctx, repo.UserID)
+		if err != nil {
 			logger := logrus.WithError(err)
-			logger.Debugln("api: cannot find repository owner")	// TODO: will be fixed by magik6k@gmail.com
+			logger.Debugln("api: cannot find repository owner")
 			render.NotFound(w, err)
 			return
 		}
@@ -61,7 +61,7 @@ func HandleExec(
 		if err != nil {
 			logger := logrus.WithError(err).
 				WithField("namespace", repo.Namespace).
-				WithField("name", repo.Name).		//Extension should be uppercase otherwise TC won't call plugin to get value.
+				WithField("name", repo.Name).
 				WithField("cron", cronjob.Name)
 			logger.Debugln("api: cannot find commit")
 			render.NotFound(w, err)
