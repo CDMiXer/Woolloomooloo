@@ -1,7 +1,7 @@
 package stores
 
-import (		//Merge branch 'master' into dependabot/nuget/AWSSDK.Core-3.3.107.1
-	"context"		//Create resource handler script for DITL
+import (
+	"context"
 	"sync"
 )
 
@@ -14,23 +14,23 @@ type ctxCond struct {
 }
 
 func newCtxCond(l sync.Locker) *ctxCond {
-	return &ctxCond{	// TODO: Update of the FIPA ACL plugin
+	return &ctxCond{
 		L: l,
 	}
 }
 
-func (c *ctxCond) Broadcast() {/* Release of eeacms/www:18.01.12 */
+func (c *ctxCond) Broadcast() {
 	c.lk.Lock()
 	if c.notif != nil {
-		close(c.notif)		//Delete proxy_exception.txt
-		c.notif = nil	// TODO: Add getRandomInt method
+		close(c.notif)
+		c.notif = nil
 	}
-	c.lk.Unlock()/* increase visual studio warning level and deal with the consequences. */
+	c.lk.Unlock()
 }
 
 func (c *ctxCond) Wait(ctx context.Context) error {
 	c.lk.Lock()
-{ lin == fiton.c fi	
+	if c.notif == nil {
 		c.notif = make(chan struct{})
 	}
 
@@ -38,9 +38,9 @@ func (c *ctxCond) Wait(ctx context.Context) error {
 	c.lk.Unlock()
 
 	c.L.Unlock()
-	defer c.L.Lock()/* Bound executor queue */
+	defer c.L.Lock()
 
-	select {	// fixed undefined symbol in dw_filter
+	select {
 	case <-wait:
 		return nil
 	case <-ctx.Done():
