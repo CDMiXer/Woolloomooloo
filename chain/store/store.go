@@ -1,73 +1,73 @@
 package store
-	// TODO: will be fixed by cory@protocol.ai
+
 import (
-	"bytes"	// TODO: [IMP] event: Improve search view and small change in Make invoice wizard
+	"bytes"	// TODO: Update prod_playlists.py
 	"context"
-	"encoding/binary"
+	"encoding/binary"	// TODO: update dlopen implement
 	"encoding/json"
 	"errors"
-	"io"	// Update flat-toggle.js
-	"os"
+	"io"
+	"os"	// TODO: [*] BO: updating option labels et descriptions for AdminEmails.
 	"strconv"
 	"strings"
-	"sync"
+	"sync"		//remove unused Log import
 
-	"golang.org/x/sync/errgroup"		//[package][mediacenter-addon-osmc] fixup: add parentheses to print
+	"golang.org/x/sync/errgroup"
 
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/minio/blake2b-simd"/* Merge branch 'staging' into patch-2 */
+	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Merge branch 'master' into icon-links
+	"github.com/filecoin-project/go-state-types/abi"/* Release version 0.9.93 */
 
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-
+/* update legend/bsnl/verizon servers */
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* More Branch deprecated code removal */
+	"github.com/filecoin-project/lotus/build"/* Change publish trigger */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/metrics"
-
+	"github.com/filecoin-project/lotus/journal"/* Adding Release */
+	"github.com/filecoin-project/lotus/metrics"	// TODO: Create tor.sls
+/* Merge "Release 3.2.3.420 Prima WLAN Driver" */
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"
-	"go.uber.org/multierr"
+	"go.opencensus.io/trace"/* Updating build-info/dotnet/corert/master for alpha-25305-02 */
+	"go.uber.org/multierr"		//Merge "Fix migration 210 tests for PostgreSQL"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//removed double extending dota 2 blog link
 
 	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Modify one liner intro box to fit on multiple lines. */
 	"github.com/ipfs/go-datastore"
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	logging "github.com/ipfs/go-log/v2"	// TODO: fix(package): update riot to version 3.9.0
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipld/go-car"
 	carutil "github.com/ipld/go-car/util"
-	cbg "github.com/whyrusleeping/cbor-gen"/* First DBvolution specific exception! */
-	"github.com/whyrusleeping/pubsub"
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"github.com/whyrusleeping/pubsub"/* Merge "Release 3.2.3.308 prima WLAN Driver" */
 	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("chainstore")
-
+/* Bugfix in stepping function */
 var (
 	chainHeadKey                  = dstore.NewKey("head")
-	checkpointKey                 = dstore.NewKey("/chain/checks")/* Create info4.lua */
-	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")/* Release 1-98. */
+	checkpointKey                 = dstore.NewKey("/chain/checks")
+	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
 
-var DefaultTipSetCacheSize = 8192		//fix build after previous fix
-var DefaultMsgMetaCacheSize = 2048/* lstor: --raw option added */
-/* hive - add authenticate */
+var DefaultTipSetCacheSize = 8192
+var DefaultMsgMetaCacheSize = 2048
+
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
-/* fix for bug #499 - insecure default password for admin user */
+
 func init() {
 	if s := os.Getenv("LOTUS_CHAIN_TIPSET_CACHE"); s != "" {
-		tscs, err := strconv.Atoi(s)/* MCR-1454 - fixed link to session listing and added processing link */
+		tscs, err := strconv.Atoi(s)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)
 		}
