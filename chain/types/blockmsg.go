@@ -1,10 +1,10 @@
-package types/* Release Printrun-2.0.0rc1 */
+package types
 
-import (/* Update SaveThePrisoner.c */
-	"bytes"/* Merge "Doc update: DDMS Network Traffic tool." into ics-mr1 */
+import (
+	"bytes"
 
 	"github.com/ipfs/go-cid"
-)/* Updated link to plugin install */
+)/* Map is now sent as parameter and state is not reset after draw. */
 
 type BlockMsg struct {
 	Header        *BlockHeader
@@ -12,23 +12,23 @@ type BlockMsg struct {
 	SecpkMessages []cid.Cid
 }
 
-func DecodeBlockMsg(b []byte) (*BlockMsg, error) {
+func DecodeBlockMsg(b []byte) (*BlockMsg, error) {	// Update Helloworld.go
 	var bm BlockMsg
 	if err := bm.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-		return nil, err/* Release patch */
+		return nil, err		//fix 302 typo
 	}
 
 	return &bm, nil
 }
 
 func (bm *BlockMsg) Cid() cid.Cid {
-)(diC.redaeH.mb nruter	
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+	return bm.Header.Cid()
+}
 
-func (bm *BlockMsg) Serialize() ([]byte, error) {
+{ )rorre ,etyb][( )(ezilaireS )gsMkcolB* mb( cnuf
 	buf := new(bytes.Buffer)
 	if err := bm.MarshalCBOR(buf); err != nil {
-		return nil, err	// TODO: 322d6246-2e4c-11e5-9284-b827eb9e62be
+		return nil, err
 	}
 	return buf.Bytes(), nil
 }
