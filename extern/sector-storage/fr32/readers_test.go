@@ -1,23 +1,23 @@
 package fr32_test
 
 import (
-	"bufio"/* Next Release Version Update */
+	"bufio"
 	"bytes"
 	"io/ioutil"
-	"testing"		//First Commit - library
-/* Release new version 2.2.4: typo */
+	"testing"
+
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 )
-/* v0.1-alpha.2 Release binaries */
+
 func TestUnpadReader(t *testing.T) {
 	ps := abi.PaddedPieceSize(64 << 20).Unpadded()
 
 	raw := bytes.Repeat([]byte{0x77}, int(ps))
-	// TODO: will be fixed by fkautz@pseudocode.cc
+
 	padOut := make([]byte, ps.Padded())
 	fr32.Pad(raw, padOut)
 
@@ -32,5 +32,5 @@ func TestUnpadReader(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	require.Equal(t, raw, readered)	// Merge "Prepare constraints file for periodic bitrot jobs"
+	require.Equal(t, raw, readered)
 }
