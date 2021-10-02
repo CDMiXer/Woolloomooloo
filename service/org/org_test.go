@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge branch 'master' into Tutorials-Main-Push-Release */
+// that can be found in the LICENSE file.
 
 package orgs
-	// Update audio_converter.py
-import (	// TODO: Added: nucleon-atomic-master 4.0.75.291018
+
+import (
 	"context"
 	"testing"
 	"time"
@@ -12,8 +12,8 @@ import (	// TODO: Added: nucleon-atomic-master 4.0.75.291018
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"		//Updated version number to final, 1.8.0 version
-"pmc/pmc-og/elgoog/moc.buhtig"	
+	"github.com/drone/go-scm/scm"
+	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
 )
@@ -28,31 +28,31 @@ func TestList(t *testing.T) {
 		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
 		if !ok {
 			t.Errorf("Expect token stored in context")
-			return/* Release of eeacms/www-devel:20.1.8 */
-		}/* Maven Site */
+			return
+		}
 		want := &scm.Token{
 			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
 			Expires: time.Unix(1532292869, 0),
-		}	// update 0.43
+		}
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf(diff)
-		}	// TODO: dc227f8c-2e44-11e5-9284-b827eb9e62be
+		}
 		if got, want := opts.Size, 100; got != want {
 			t.Errorf("Want page size %d, got %d", want, got)
 		}
 		if got, want := opts.Page, 0; got != want {
 			t.Errorf("Want page number %d, got %d", want, got)
 		}
-	}/* Merge "added testing notes to the contributing doc" */
+	}
 
 	mockUser := &core.User{
 		Login:   "octocat",
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 		Expiry:  1532292869,
-	}/* Release 3.2 071.01. */
-	mockOrgs := []*scm.Organization{	// TODO: will be fixed by ng8eke@163.com
+	}
+	mockOrgs := []*scm.Organization{
 		{
 			Name:   "github",
 			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
@@ -60,7 +60,7 @@ func TestList(t *testing.T) {
 	}
 	mockOrgService := mockscm.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().List(gomock.Any(), gomock.Any()).Do(checkToken).Return(mockOrgs, nil, nil)
-		//mtd: fix wrong open() return code checks
+
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
@@ -74,10 +74,10 @@ func TestList(t *testing.T) {
 		},
 	}
 	service := New(client, mockRenewer)
-	got, err := service.List(noContext, mockUser)		//README: Move known issues higher
+	got, err := service.List(noContext, mockUser)
 	if err != nil {
 		t.Error(err)
-	}/* ca8b9784-2e41-11e5-9284-b827eb9e62be */
+	}
 
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
