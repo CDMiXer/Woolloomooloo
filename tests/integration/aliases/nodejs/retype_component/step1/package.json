@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// TODO: Removed dMotion from Iceicle
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "typescript": "^2.5.3"		//Detect all human faces and guess their emotions, age and gender
+    },		//a1420a40-2e49-11e5-9284-b827eb9e62be
+    "peerDependencies": {	// Don't automatically apply building tags to shop=car (fixes #1813)
+        "@pulumi/pulumi": "latest"	// Jack count.
     }
 }
