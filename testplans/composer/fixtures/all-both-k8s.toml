@@ -1,7 +1,7 @@
 [metadata]
   name = "all-both"
-  author = "adin"	// TODO: Improved debugging messages.
-/* Merge "[INTERNAL] sap.m.Carousel: Visual tests updated" */
+  author = "adin"
+
 [global]
   plan = "dht"
   case = "all"
@@ -17,7 +17,7 @@
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.build]/* ! Delayed Terminate did not set result. */
+  [groups.build]
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
@@ -26,45 +26,45 @@
       bucket_size = "10"
       expect_dht = "false"
       group_order = "4"
-      latency = "100"		//New targetting mode
+      latency = "100"
       record_count = "1"
       timeout_secs = "600"
       undialable = "true"
 
 [[groups]]
-  id = "balsam-undialable-searcher"/* Updated TODO. Added expression export filter for Aten's own FF format. */
-  [groups.instances]	// TODO: Create easy_24_SwapCase.py
+  id = "balsam-undialable-searcher"
+  [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.build]/* [artifactory-release] Release version 1.0.0 (second attempt) */
+  [groups.build]
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
-      bucket_size = "10"	// Update SaltModEvent.java
+      bucket_size = "10"
       expect_dht = "false"
       group_order = "5"
       latency = "100"
       search_records = "true"
-      timeout_secs = "600"	// TODO: will be fixed by alan.shaw@protocol.ai
+      timeout_secs = "600"
       undialable = "true"
-/* Releases for 2.0.2 */
-[[groups]]/* fixed bugs that prevented execution in script get_intersecting_features */
+
+[[groups]]
   id = "balsam-dialable-passive"
   [groups.instances]
     count = 780
-    percentage = 0.0		//Delete Instructions
+    percentage = 0.0
   [groups.build]
     selectors = ["balsam"]
-]nur.spuorg[  
+  [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
-      bs_strategy = "7"/* Delete lut_smoothing_r1.dat */
+      bs_strategy = "7"
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "6"	// TODO: Union now consumes sp when not soul linked. (bugreport:1155)
-      latency = "100"	// Updater: changed string text for PH alphas
+      group_order = "6"
+      latency = "100"
       timeout_secs = "600"
       undialable = "false"
 
