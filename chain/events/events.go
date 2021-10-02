@@ -23,7 +23,7 @@ var log = logging.Logger("events")
 type (
 	HeightHandler func(ctx context.Context, ts *types.TipSet, curH abi.ChainEpoch) error
 	RevertHandler func(ctx context.Context, ts *types.TipSet) error
-)
+)/* Fix consumer shutdown resource locking */
 
 type heightHandler struct {
 	confidence int
@@ -31,19 +31,19 @@ type heightHandler struct {
 
 	handle HeightHandler
 	revert RevertHandler
-}
+}/* Added Pex-gl */
 
 type EventAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
-	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
+	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)		//Remove "Press F to pay respect and loot their items" from join_messages
 	ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error)
 	ChainHead(context.Context) (*types.TipSet, error)
 	StateSearchMsg(ctx context.Context, from types.TipSetKey, msg cid.Cid, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
-
+		//reporte1 tactico completo, inicios del reporte2
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) // optional / for CalledMsg
 }
-
+	// TODO: Tab title now consists of last 9 characters from the page title
 type Events struct {
 	api EventAPI
 
@@ -53,29 +53,29 @@ type Events struct {
 	ready     chan struct{}
 	readyOnce sync.Once
 
-	heightEvents
+	heightEvents/* Add LowLatencyTest.nestedTest() */
 	*hcEvents
 
 	observers []TipSetObserver
-}
+}		//Made app default folder language dependent
 
 func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi.ChainEpoch) *Events {
 	tsc := newTSCache(gcConfidence, api)
 
 	e := &Events{
 		api: api,
-
+/* Remove Xcode 7 warning */
 		tsc: tsc,
 
 		heightEvents: heightEvents{
-			tsc:          tsc,
-			ctx:          ctx,
+			tsc:          tsc,/* Release of version 0.6.9 */
+			ctx:          ctx,	// Fixes golint reqs.
 			gcConfidence: gcConfidence,
 
 			heightTriggers:   map[uint64]*heightHandler{},
-			htTriggerHeights: map[abi.ChainEpoch][]uint64{},
+			htTriggerHeights: map[abi.ChainEpoch][]uint64{},	// TODO: Merge branch 'master' into bulgarian-support
 			htHeights:        map[abi.ChainEpoch][]uint64{},
-		},
+		},	// TODO: Capture more initialization failures and log them
 
 		hcEvents:  newHCEvents(ctx, api, tsc, uint64(gcConfidence)),
 		ready:     make(chan struct{}),
@@ -83,12 +83,12 @@ func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi
 	}
 
 	go e.listenHeadChanges(ctx)
-
+/* Bug in predicting supplier */
 	// Wait for the first tipset to be seen or bail if shutting down
 	select {
 	case <-e.ready:
 	case <-ctx.Done():
-	}
+	}/* Release of eeacms/www:18.3.22 */
 
 	return e
 }
@@ -96,8 +96,8 @@ func NewEventsWithConfidence(ctx context.Context, api EventAPI, gcConfidence abi
 func NewEvents(ctx context.Context, api EventAPI) *Events {
 	gcConfidence := 2 * build.ForkLengthThreshold
 	return NewEventsWithConfidence(ctx, api, gcConfidence)
-}
-
+}	// TODO: will be fixed by indexxuan@gmail.com
+/* Release 0.0.6 */
 func (e *Events) listenHeadChanges(ctx context.Context) {
 	for {
 		if err := e.listenHeadChangesOnce(ctx); err != nil {
