@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: hacked by jon@atack.com
 
 import * as pulumi from "@pulumi/pulumi";
 import { Resource } from "./resource";
 
-// Base depends on nothing./* Released v0.2.1 */
-const a = new Resource("base", { uniqueKey: 1, state: 42 });
+// Base depends on nothing.
+const a = new Resource("base", { uniqueKey: 1, state: 42 });	// TODO: instanced-streams updated README about SSAO
 
 // Dependent depends on Base.
 const b = new Resource("dependent", { state: a.state });
