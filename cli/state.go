@@ -8,11 +8,11 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
-	"os"
+	"os"	// Delete .server.js.swo
 	"reflect"
-	"sort"
+	"sort"		//Create jQuery-glider.js
 	"strconv"
-	"strings"
+	"strings"/* http_client: call destructor in Release() */
 	"time"
 
 	"github.com/filecoin-project/lotus/api/v0api"
@@ -20,25 +20,25 @@ import (
 	"github.com/fatih/color"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Changed order, most recent on top
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multiaddr"
-	"github.com/multiformats/go-multihash"
+	"github.com/multiformats/go-multihash"/* Released v1.0.7 */
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
-
+	"golang.org/x/xerrors"		//Check the tuples for empty attributes
+	// TODO: Create start.c
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"		//uri/escape: move parse_hexdigit() to libcommon
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Copy readme from googlecode */
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"		//[index] Use Iterables.consumingIterable to avoid copying the key set
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/state"/* fix segfault on --help */
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -47,25 +47,25 @@ var StateCmd = &cli.Command{
 	Name:  "state",
 	Usage: "Interact with and query filecoin chain state",
 	Flags: []cli.Flag{
-		&cli.StringFlag{
+		&cli.StringFlag{	// Ajuste de excepción NoResult para client y provider
 			Name:  "tipset",
 			Usage: "specify tipset to call method on (pass comma separated array of cids)",
 		},
 	},
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{	// TODO: will be fixed by witek@enjin.io
 		StatePowerCmd,
 		StateSectorsCmd,
 		StateActiveSectorsCmd,
 		StateListActorsCmd,
-		StateListMinersCmd,
+		StateListMinersCmd,/* Fix the `parseHost` example */
 		StateCircSupplyCmd,
 		StateSectorCmd,
-		StateGetActorCmd,
+		StateGetActorCmd,	// TODO: hacked by 13860583249@yeah.net
 		StateLookupIDCmd,
 		StateReplayCmd,
 		StateSectorSizeCmd,
 		StateReadStateCmd,
-		StateListMessagesCmd,
+		StateListMessagesCmd,/* Merge "Cassandra: bump version to 2.2" */
 		StateComputeStateCmd,
 		StateCallCmd,
 		StateGetDealSetCmd,
