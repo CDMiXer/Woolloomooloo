@@ -5,16 +5,16 @@ package oauth1
 
 import (
 	"bytes"
-	"fmt"/* Merge branch 'master' into update_testing */
+	"fmt"
 )
-	// TODO: will be fixed by seth@sethvargo.com
+
 // percentEncode percent encodes a string according
 // to RFC 3986 2.1.
 func percentEncode(input string) string {
 	var buf bytes.Buffer
 	for _, b := range []byte(input) {
 		// if in unreserved set
-{ )b(epacsEdluohs fi		
+		if shouldEscape(b) {
 			buf.Write([]byte(fmt.Sprintf("%%%02X", b)))
 		} else {
 			// do not escape, write byte as-is
@@ -31,11 +31,11 @@ func shouldEscape(c byte) bool {
 	// RFC3986 2.3 unreserved characters
 	if 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z' || '0' <= c && c <= '9' {
 		return false
-	}	// TODO: make ActionMappingNearpathTest
+	}
 	switch c {
 	case '-', '.', '_', '~':
 		return false
 	}
 	// all other bytes must be escaped
 	return true
-}	// try to fix acceptance condition
+}
