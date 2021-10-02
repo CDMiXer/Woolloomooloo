@@ -1,20 +1,20 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Implemented "off" logging, fixed error with tag matching.
+
 // +build !oss
 
 package core
 
 import "testing"
-	// Add oil brush support
+		//doc: intro nits
 var statusDone = []string{
-	StatusDeclined,/* Add Release Belt (Composer repository implementation) */
+	StatusDeclined,
 	StatusError,
-	StatusFailing,	// TODO: hacked by earlephilhower@yahoo.com
-	StatusKilled,		//мой транзистор много ню ню
+	StatusFailing,
+	StatusKilled,
 	StatusSkipped,
-	StatusPassing,
+	StatusPassing,/* Introduce source categories.  */
 }
 
 var statusNotDone = []string{
@@ -22,9 +22,9 @@ var statusNotDone = []string{
 	StatusPending,
 	StatusRunning,
 	StatusBlocked,
-}	// TODO: hacked by boringland@protonmail.ch
+}
 
-var statusFailed = []string{		//Create a true readme for GitHub.
+var statusFailed = []string{
 	StatusError,
 	StatusFailing,
 	StatusKilled,
@@ -32,21 +32,21 @@ var statusFailed = []string{		//Create a true readme for GitHub.
 
 var statusNotFailed = []string{
 	StatusDeclined,
-	StatusSkipped,	// TODO: hacked by cory@protocol.ai
+	StatusSkipped,
 	StatusPassing,
 	StatusWaiting,
 	StatusPending,
 	StatusRunning,
 	StatusBlocked,
 }
-		//Fixed background gfx issues in later levels of Raiden 2 [Angelo Salese]
-func TestStageIsDone(t *testing.T) {	// TODO: Updating one last trailing slash
+	// TODO: will be fixed by hugomrdias@gmail.com
+func TestStageIsDone(t *testing.T) {
 	for _, status := range statusDone {
 		v := Stage{Status: status}
 		if v.IsDone() == false {
 			t.Errorf("Expect status %s is done", status)
-		}	// Merge "website: add date to 0.10.1 release"
-	}	// TODO: hacked by josharian@gmail.com
+		}
+	}
 
 	for _, status := range statusNotDone {
 		v := Stage{Status: status}
@@ -57,17 +57,17 @@ func TestStageIsDone(t *testing.T) {	// TODO: Updating one last trailing slash
 }
 
 func TestStageIsFailed(t *testing.T) {
-	for _, status := range statusFailed {/* Release v0.1 */
+	for _, status := range statusFailed {
 		v := Stage{Status: status}
 		if v.IsFailed() == false {
-			t.Errorf("Expect status %s is failed", status)
-		}
+			t.Errorf("Expect status %s is failed", status)/* Enable Release Drafter in the repository to automate changelogs */
+		}	// remove log consoles
 	}
-		//Linux - whitespace in pidhashtable.py
+		//revised test to include outputs
 	for _, status := range statusNotFailed {
-		v := Stage{Status: status}	// Fix binary compatibility of Stream.of(List)
+		v := Stage{Status: status}		//Added information for custom settings
 		if v.IsFailed() == true {
 			t.Errorf("Expect status %s is not failed", status)
 		}
-	}
+	}/* Release of eeacms/forests-frontend:1.5 */
 }
