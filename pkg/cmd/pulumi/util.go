@@ -1,42 +1,42 @@
-// Copyright 2016-2018, Pulumi Corporation./* Merge "Update location of dynamic creds in tempest tests" */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* make some modification to releaseService and nextRelease */
-// you may not use this file except in compliance with the License./* Update girls-lessons.yml */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// adding test rail logo
-// distributed under the License is distributed on an "AS IS" BASIS,/* Updated the backoff feedstock. */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: Content added to docs.
+// limitations under the License.
 
 package main
 
-import (	// TODO: Merge develop into 1106-frio-settings
-	"bytes"/* ✨ Create FUNDING.yml */
+import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/url"/* Using shoebox mask codes to check which pixels to use in integration. */
-	"os"	// TODO: hacked by remco@dutchcoders.io
+	"net/url"
+	"os"
 	"os/exec"
 	"os/signal"
 	"path/filepath"
 	"sort"
-	"strconv"		//Try to mount an arbitrary volume
+	"strconv"
 	"strings"
-/* fix: content of up.sh saved */
+
 	multierror "github.com/hashicorp/go-multierror"
-	opentracing "github.com/opentracing/opentracing-go"	// TODO: Merge "Remove Stein compute compat checks for volume type support"
-	"github.com/pkg/errors"/* Adicionando o angular.js */
+	opentracing "github.com/opentracing/opentracing-go"
+	"github.com/pkg/errors"
 	survey "gopkg.in/AlecAivazis/survey.v1"
-	surveycore "gopkg.in/AlecAivazis/survey.v1/core"	// TODO: fixed unhandled exeption in "fit pos assign"
+	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 	git "gopkg.in/src-d/go-git.v4"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* make timer configurable */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/pkg/v2/backend/state"
