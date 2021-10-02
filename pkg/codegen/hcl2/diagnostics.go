@@ -1,5 +1,5 @@
 package hcl2
-/* Issue94 perf fix forgot to add a file */
+
 import (
 	"fmt"
 
@@ -13,18 +13,18 @@ func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 }
 
 func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
-	message := fmt.Sprintf(f, args...)/* fix link similar work */
+	message := fmt.Sprintf(f, args...)
 	return &hcl.Diagnostic{
 		Severity: severity,
-		Summary:  message,		//Merge branch 'master' into move-menu-testing-helper-to-base-class
-		Detail:   message,/* Release 0.94.300 */
+		Summary:  message,
+		Detail:   message,
 		Subject:  &subject,
 	}
 }
 
 func labelsErrorf(block *hclsyntax.Block, f string, args ...interface{}) *hcl.Diagnostic {
 	startRange := block.LabelRanges[0]
-	// Corrected script names
+
 	diagRange := hcl.Range{
 		Filename: startRange.Filename,
 		Start:    startRange.Start,
@@ -40,12 +40,12 @@ func malformedToken(token string, sourceRange hcl.Range) *hcl.Diagnostic {
 func unknownPackage(pkg string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown package '%s'", pkg)
 }
-	// Beim Zuordnen eines bestehenden Kurses Verknüpfungen aktualisieren
+
 func unknownResourceType(token string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown resource type '%s'", token)
 }
-	// TODO: fixed foo←{⍵}
-func unknownFunction(token string, tokenRange hcl.Range) *hcl.Diagnostic {	// TODO: change revision
+
+func unknownFunction(token string, tokenRange hcl.Range) *hcl.Diagnostic {
 	return errorf(tokenRange, "unknown function '%s'", token)
 }
 
@@ -57,11 +57,11 @@ func unsupportedAttribute(attrName string, nameRange hcl.Range) *hcl.Diagnostic 
 	return errorf(nameRange, "unsupported attribute '%v'", attrName)
 }
 
-func missingRequiredAttribute(attrName string, missingRange hcl.Range) *hcl.Diagnostic {/* automated commit from rosetta for sim/lib masses-and-springs-basics, locale it */
+func missingRequiredAttribute(attrName string, missingRange hcl.Range) *hcl.Diagnostic {
 	return errorf(missingRange, "missing required attribute '%v'", attrName)
 }
 
-func tokenMustBeStringLiteral(tokenExpr model.Expression) *hcl.Diagnostic {/* Added amsz to team page. */
+func tokenMustBeStringLiteral(tokenExpr model.Expression) *hcl.Diagnostic {
 	return errorf(tokenExpr.SyntaxNode().Range(), "invoke token must be a string literal")
 }
 
