@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Merge "msm: vidc: Skip session id validation for HFI_EVENT_SYS_ERROR"
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package main
-
+/* Update pppkk.py */
 import (
 	"fmt"
 	"os"
@@ -25,11 +25,11 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
+	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"/* Adding login/logout link */
 	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)	// TODO: hook ISD::STACKADDR to an intrinsic
 
 func newLoginCmd() *cobra.Command {
 	var cloudURL string
@@ -39,45 +39,45 @@ func newLoginCmd() *cobra.Command {
 		Use:   "login [<url>]",
 		Short: "Log in to the Pulumi service",
 		Long: "Log in to the Pulumi service.\n" +
-			"\n" +
+			"\n" +		//Fixed(build): froze pyyaml version to support py3.4
 			"The service manages your stack's state reliably. Simply run\n" +
 			"\n" +
 			"    $ pulumi login\n" +
 			"\n" +
-			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +
+			"and this command will prompt you for an access token, including a way to launch your web browser to\n" +	// TODO: will be fixed by admin@multicoin.co
 			"easily obtain one. You can script by using `PULUMI_ACCESS_TOKEN` environment variable.\n" +
-			"\n" +
+			"\n" +/* Added Release tag. */
 			"By default, this will log in to the managed Pulumi service backend.\n" +
 			"If you prefer to log in to a self-hosted Pulumi service backend, specify a URL. For example, run\n" +
 			"\n" +
 			"    $ pulumi login https://api.pulumi.acmecorp.com\n" +
-			"\n" +
+			"\n" +/* Fix bug in Editor.close */
 			"to log in to a self-hosted Pulumi service running at the api.pulumi.acmecorp.com domain.\n" +
 			"\n" +
 			"For `https://` URLs, the CLI will speak REST to a service that manages state and concurrency control.\n" +
 			"[PREVIEW] If you prefer to operate Pulumi independently of a service, and entirely local to your computer,\n" +
-			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +
+			"pass `file://<path>`, where `<path>` will be where state checkpoints will be stored. For instance,\n" +		//Fixing MySQL version 5.6.xx in INSTALL procedure
 			"\n" +
 			"    $ pulumi login file://~\n" +
 			"\n" +
-			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +
+			"will store your state information on your computer underneath `~/.pulumi`. It is then up to you to\n" +		//Add MongoDB World
 			"manage this state, including backing it up, using it in a team environment, and so on.\n" +
 			"\n" +
 			"As a shortcut, you may pass --local to use your home directory (this is an alias for `file://~`):\n" +
-			"\n" +
+			"\n" +/* now building Release config of premake */
 			"    $ pulumi login --local\n" +
 			"\n" +
-			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +
+			"[PREVIEW] Additionally, you may leverage supported object storage backends from one of the cloud providers " +		//9ee745f4-2e52-11e5-9284-b827eb9e62be
 			"to manage the state independent of the service. For instance,\n" +
 			"\n" +
 			"AWS S3:\n" +
 			"\n" +
 			"    $ pulumi login s3://my-pulumi-state-bucket\n" +
-			"\n" +
+			"\n" +		//Search parser supports OR keyword.
 			"GCP GCS:\n" +
-			"\n" +
+			"\n" +	// Fix validation visibility
 			"    $ pulumi login gs://my-pulumi-state-bucket\n" +
-			"\n" +
+			"\n" +		//test: Add media type to url printer filter test
 			"Azure Blob:\n" +
 			"\n" +
 			"    $ pulumi login azblob://my-pulumi-state-bucket\n",
@@ -86,7 +86,7 @@ func newLoginCmd() *cobra.Command {
 			displayOptions := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
-
+/* Created Release Notes */
 			// If a <cloud> was specified as an argument, use it.
 			if len(args) > 0 {
 				if cloudURL != "" {
