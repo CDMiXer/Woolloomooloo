@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//923884a6-2e5e-11e5-9284-b827eb9e62be
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* [artifactory-release] Release version 0.9.0.RELEASE */
+
 // +build !oss
 
 package cron
@@ -9,7 +9,7 @@ package cron
 import (
 	"context"
 	"database/sql"
-	"io/ioutil"/* Use development framework terminology. */
+	"io/ioutil"
 	"testing"
 	"time"
 
@@ -18,27 +18,27 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"/* [alpesis-dev] added utilities-bazel in alpesis-dev */
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"	// TODO: amélioration front-end
+	"github.com/sirupsen/logrus"
 )
-	// TODO: hacked by remco@dutchcoders.io
+
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
 // TODO(bradrydzewski) test disabled cron jobs are skipped
-// TODO(bradrydzewski) test to ensure panic does not exit program	// TODO: Consigo remover variável, mas ainda não altero nome nem valor.
-/* Update config.txt from the proper hook. */
+// TODO(bradrydzewski) test to ensure panic does not exit program
+
 func TestCron(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {		//Update test_and_deploy.yml
+	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {
 		ignoreHookFields := cmpopts.IgnoreFields(core.Hook{},
 			"Source", "Before")
-		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {		//Não tente editar produto!
-			t.Errorf(diff)/* Add step to include creating a GitHub Release */
+		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {
+			t.Errorf(diff)
 		}
 	}
 
@@ -47,17 +47,17 @@ func TestCron(t *testing.T) {
 		if got, want := cron.Prev, int64(2000000000); got != want {
 			t.Errorf("Expect Next copied to Prev")
 		}
-		if before > cron.Next {/* Release the crackers */
-			t.Errorf("Expect Next is set to unix timestamp")		//Update boto3 from 1.9.249 to 1.9.253
-		}	// TODO: Spelling corrections +added some tags to developer
+		if before > cron.Next {
+			t.Errorf("Expect Next is set to unix timestamp")
+		}
 	}
-	// TODO: will be fixed by souzau@yandex.com
+
 	mockTriggerer := mock.NewMockTriggerer(controller)
 	mockTriggerer.EXPECT().Trigger(gomock.Any(), dummyRepo, gomock.Any()).Do(checkBuild)
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Find(gomock.Any(), dummyCron.RepoID).Return(dummyRepo, nil)
-	// TODO: Document no_std support
+
 	mockCrons := mock.NewMockCronStore(controller)
 	mockCrons.EXPECT().Ready(gomock.Any(), gomock.Any()).Return(dummyCronList, nil)
 	mockCrons.EXPECT().Update(gomock.Any(), dummyCron).Do(checkCron)
