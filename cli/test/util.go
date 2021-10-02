@@ -1,5 +1,5 @@
 package test
-
+	// TODO: hacked by steven@stebalien.com
 import "github.com/ipfs/go-log/v2"
 
 func QuietMiningLogs() {
