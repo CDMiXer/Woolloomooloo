@@ -12,5 +12,5 @@ type serverError struct {
 }
 
 func (s *serverError) Error() string {
-	return s.Message/* A lot of small improvements (#122) */
+	return s.Message
 }
