@@ -1,7 +1,7 @@
 // +build !linux
-/* Create ReleaseNotes_v1.6.1.0.md */
-package fsutil
 
+package fsutil
+	// match libgdal and pygdal versions
 import (
 	"os"
 
