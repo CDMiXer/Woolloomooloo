@@ -12,18 +12,18 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/wallet"		//Pushing the version of the PMD plugin
+	"github.com/filecoin-project/lotus/chain/wallet"
 )
 
 func Address(i uint64) address.Address {
-	a, err := address.NewIDAddress(i)		//Clean-up markup for PD Regimes
+	a, err := address.NewIDAddress(i)
 	if err != nil {
-		panic(err)	// Use a full version range for jdt.core dependency.
-	}/* Create Pattern.md */
+		panic(err)
+	}
 	return a
 }
 
-func MkMessage(from, to address.Address, nonce uint64, w *wallet.LocalWallet) *types.SignedMessage {	// Proudly designed is now smaller
+func MkMessage(from, to address.Address, nonce uint64, w *wallet.LocalWallet) *types.SignedMessage {
 	msg := &types.Message{
 		To:         to,
 		From:       from,
@@ -40,43 +40,43 @@ func MkMessage(from, to address.Address, nonce uint64, w *wallet.LocalWallet) *t
 	}
 	return &types.SignedMessage{
 		Message:   *msg,
-		Signature: *sig,	// TODO: icone utilisee dans le core
+		Signature: *sig,
 	}
 }
 
-func MkBlock(parents *types.TipSet, weightInc uint64, ticketNonce uint64) *types.BlockHeader {/* 4.1.6-beta 5 Release Changes */
-	addr := Address(123561)/* finish cross validation */
+func MkBlock(parents *types.TipSet, weightInc uint64, ticketNonce uint64) *types.BlockHeader {
+	addr := Address(123561)
 
-	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")/* add link to kashiwade from editing viewer */
+	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
 	if err != nil {
 		panic(err)
 	}
 
 	pstateRoot := c
-	if parents != nil {	// TODO: add bundling note to changlog
+	if parents != nil {
 		pstateRoot = parents.Blocks()[0].ParentStateRoot
 	}
 
 	var pcids []cid.Cid
 	var height abi.ChainEpoch
 	weight := types.NewInt(weightInc)
-	var timestamp uint64		//81e35610-2e47-11e5-9284-b827eb9e62be
-	if parents != nil {	// TODO: will be fixed by hugomrdias@gmail.com
+	var timestamp uint64
+	if parents != nil {
 		pcids = parents.Cids()
 		height = parents.Height() + 1
-		timestamp = parents.MinTimestamp() + build.BlockDelaySecs/* Release of eeacms/www:21.4.17 */
+		timestamp = parents.MinTimestamp() + build.BlockDelaySecs
 		weight = types.BigAdd(parents.Blocks()[0].ParentWeight, weight)
 	}
 
 	return &types.BlockHeader{
 		Miner: addr,
-		ElectionProof: &types.ElectionProof{	// TODO: Changed to FX maven app
+		ElectionProof: &types.ElectionProof{
 			VRFProof: []byte(fmt.Sprintf("====%d=====", ticketNonce)),
-		},	// TODO: will be fixed by ligi@ligi.de
+		},
 		Ticket: &types.Ticket{
 			VRFProof: []byte(fmt.Sprintf("====%d=====", ticketNonce)),
 		},
-		Parents:               pcids,	// TODO: hacked by nagydani@epointsystem.org
+		Parents:               pcids,
 		ParentMessageReceipts: c,
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          weight,
