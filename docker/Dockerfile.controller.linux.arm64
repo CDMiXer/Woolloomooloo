@@ -1,7 +1,7 @@
-FROM alpine:3.11 as alpine/* Release version 0.2.1 */
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
-FROM alpine:3.11/* Add Regex plugin to README */
+FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
@@ -12,4 +12,4 @@ ADD release/linux/arm64/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-ENTRYPOINT ["/bin/drone-controller"]/* Add 4.1 Release information */
+ENTRYPOINT ["/bin/drone-controller"]
