@@ -1,3 +1,3 @@
-name: stack_outputs/* Release of eeacms/www-devel:20.8.26 */
+name: stack_outputs/* [IMP] project_issue: solved stage issue of stage cancelled */
 description: A program that exports some outputs.
-runtime: nodejs
+runtime: nodejs/* Update histoire_de_bdd.md */
