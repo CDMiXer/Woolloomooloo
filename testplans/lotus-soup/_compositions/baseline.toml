@@ -4,52 +4,52 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"/* Readme reference to new UserStyle repo */
+  case = "deals-e2e"
   total_instances = 6
   builder = "exec:go"
   runner = "local:exec"
-
-[global.build]		//Start to revised upload process
+		//Merged from branch
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]		//License updates
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//updating plan.png location
+[global.run_config]/* Released v2.1-alpha-2 of rpm-maven-plugin. */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"		//Added WIP Gui for minion control
   miners = "2"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"		//Merge "django2: is_authenticated/is_anonymous is now property only"
   balance = "20000000.5" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"		//Spelling, cause English.
+  random_beacon_type = "mock"		//up lần cuối tài liệu cho nhà phát triển
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* Release of eeacms/www:20.4.7 */
-  [groups.instances]
+  id = "bootstrapper"		//Updating build-info/dotnet/cli/master for preview1-007935
+  [groups.instances]	// JQMPage.centerContent() is public now.
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* ReleaseTag: Version 0.9 */
+      role = "bootstrapper"	// TODO: Made it work with http://raphnet.net/ Gamecube gamepad adapter.
 
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
+    count = 2/* Release of eeacms/www:18.4.10 */
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Release of eeacms/eprtr-frontend:0.2-beta.26 */
+    [groups.run.test_params]	// TODO: work on getting section eligibility to work correctly.
       role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3/* Removed unused ns */
-    percentage = 0.0	// TODO: will be fixed by alex.gaynor@gmail.com
+    count = 3
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//Update topusers.lua
