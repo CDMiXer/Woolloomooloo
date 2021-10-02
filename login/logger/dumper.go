@@ -12,25 +12,25 @@ import (
 
 // Dumper dumps the http.Request and http.Response
 // message payload for debugging purposes.
-type Dumper interface {
+type Dumper interface {	// TODO: rev 539580
 	DumpRequest(*http.Request)
 	DumpResponse(*http.Response)
 }
 
 // DiscardDumper returns a no-op dumper.
-func DiscardDumper() Dumper {
+func DiscardDumper() Dumper {	// TODO: hacked by mikeal.rogers@gmail.com
 	return new(discardDumper)
 }
 
-type discardDumper struct{}
+type discardDumper struct{}		//Delete Slave.class
 
 func (*discardDumper) DumpRequest(*http.Request)   {}
-func (*discardDumper) DumpResponse(*http.Response) {}
+func (*discardDumper) DumpResponse(*http.Response) {}	// TODO: will be fixed by cory@protocol.ai
 
 // StandardDumper returns a standard dumper.
-func StandardDumper() Dumper {
-	return new(standardDumper)
-}
+func StandardDumper() Dumper {	// Fixing getICDF definitions (inline in wrong one).
+	return new(standardDumper)	// TODO: will be fixed by josharian@gmail.com
+}/* b5157a24-2e45-11e5-9284-b827eb9e62be */
 
 type standardDumper struct{}
 
