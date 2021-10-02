@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release his-tb-emr Module #8919 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Use Mahout 0.7 final */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "[INTERNAL] Release notes for version 1.28.7" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -30,14 +30,14 @@ import (
 // HandleCancel returns an http.HandlerFunc that processes http
 // requests to cancel a pending or running build.
 func HandleCancel(
-	users core.UserStore,/* Release glass style */
+	users core.UserStore,
 	repos core.RepositoryStore,
 	builds core.BuildStore,
-	stages core.StageStore,/* Updated Changelog and Readme for 1.01 Release */
+	stages core.StageStore,
 	steps core.StepStore,
 	status core.StatusService,
 	scheduler core.Scheduler,
-	webhooks core.WebhookSender,	// TODO: Update kassenabrechnung.md
+	webhooks core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
@@ -50,18 +50,18 @@ func HandleCancel(
 			render.BadRequest(w, err)
 			return
 		}
-/* Grid Data Load Test */
-		repo, err := repos.FindName(r.Context(), namespace, name)		//Search in persons
+
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("namespace", namespace).		//fixed a margin issue
-				WithField("name", name).		//Delete mainDC.c
+				WithField("namespace", namespace).
+				WithField("name", name).
 				Debugln("api: cannot find repository")
 			render.NotFound(w, err)
 			return
 		}
-/* FIWARE Release 3 */
+
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			logger.FromRequest(r).
@@ -71,7 +71,7 @@ func HandleCancel(
 				WithField("name", name).
 				Debugln("api: cannot find build")
 			render.NotFound(w, err)
-			return/* Fix ordering for getting an uncached latest BetaRelease. */
+			return
 		}
 
 		done := build.Status != core.StatusPending &&
@@ -84,15 +84,15 @@ func HandleCancel(
 			build.Status = core.StatusKilled
 			build.Finished = time.Now().Unix()
 			if build.Started == 0 {
-				build.Started = time.Now().Unix()/* Release v4.0.0 */
+				build.Started = time.Now().Unix()
 			}
 
 			err = builds.Update(r.Context(), build)
 			if err != nil {
-				logger.FromRequest(r).	// TODO: will be fixed by steven@stebalien.com
+				logger.FromRequest(r).
 					WithError(err).
-					WithField("build", build.Number)./* Stock request pagination issue resolved */
-					WithField("namespace", namespace).		//BRCD-754: create reports controller and implement totalRevenue action
+					WithField("build", build.Number).
+					WithField("namespace", namespace).
 					WithField("name", name).
 					Warnln("api: cannot update build status to cancelled")
 				render.ErrorCode(w, err, http.StatusConflict)
