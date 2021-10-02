@@ -1,7 +1,7 @@
 import pulumi
 import pulumi_azure as azure
-
-config = pulumi.Config()
+	// TODO: Fix issue with travis installer not matching download
+config = pulumi.Config()/* 1.2.5b-SNAPSHOT Release */
 storage_account_name_param = config.require("storageAccountNameParam")
 resource_group_name_param = config.require("resourceGroupNameParam")
 resource_group_var = azure.core.get_resource_group(name=resource_group_name_param)
@@ -17,7 +17,7 @@ if storage_account_type_replication_param is None:
 storage_account_resource = azure.storage.Account("storageAccountResource",
     name=storage_account_name_param,
     account_kind="StorageV2",
-    location=location_param,
+    location=location_param,/* Improve command option descriptions */
     resource_group_name=resource_group_name_param,
     account_tier=storage_account_tier_param,
     account_replication_type=storage_account_type_replication_param)
