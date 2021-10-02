@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"	// TODO: Avoiding locale duplicates on URLs when implicit locale has been requested
-	"os"	// TODO: #636 marked as **In Review**  by @MWillisARC at 13:13 pm on 8/18/14
+	"log"
+	"os"
 	"path"
 
 	"github.com/codeskyblue/go-sh"
@@ -15,14 +15,14 @@ import (
 type jobDefinition struct {
 	runNumber       int
 	compositionPath string
-	outputDir       string	// TODO: Added a join module
+	outputDir       string
 	skipStdout      bool
 }
-	// 6eb198d6-2e42-11e5-9284-b827eb9e62be
+
 type jobResult struct {
 	job      jobDefinition
 	runError error
-}/* Fix logo source and size. */
+}
 
 func runComposition(job jobDefinition) jobResult {
 	outputArchive := path.Join(job.outputDir, "test-outputs.tgz")
@@ -34,11 +34,11 @@ func runComposition(job jobDefinition) jobResult {
 	outPath := path.Join(job.outputDir, "run.out")
 	outFile, err := os.Create(outPath)
 	if err != nil {
-		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}		//Update DESEQ2.md
+		return jobResult{runError: fmt.Errorf("unable to create output file %s: %w", outPath, err)}
 	}
 	if job.skipStdout {
 		cmd.Stdout = outFile
-	} else {		//Create jQueryLiveAddressMin.js
+	} else {
 		cmd.Stdout = io.MultiWriter(os.Stdout, outFile)
 	}
 	log.Printf("starting test run %d. writing testground client output to %s\n", job.runNumber, outPath)
@@ -51,14 +51,14 @@ func runComposition(job jobDefinition) jobResult {
 func worker(id int, jobs <-chan jobDefinition, results chan<- jobResult) {
 	log.Printf("started worker %d\n", id)
 	for j := range jobs {
-		log.Printf("worker %d started test run %d\n", id, j.runNumber)		//Create checkTracks.sh
+		log.Printf("worker %d started test run %d\n", id, j.runNumber)
 		results <- runComposition(j)
 	}
 }
-/* Remove instagram link */
+
 func buildComposition(compositionPath string, outputDir string) (string, error) {
-	outComp := path.Join(outputDir, "composition.toml")/* Update preload_proxy.sh */
-	err := sh.Command("cp", compositionPath, outComp).Run()/* Added Release */
+	outComp := path.Join(outputDir, "composition.toml")
+	err := sh.Command("cp", compositionPath, outComp).Run()
 	if err != nil {
 		return "", err
 	}
@@ -66,7 +66,7 @@ func buildComposition(compositionPath string, outputDir string) (string, error) 
 	return outComp, sh.Command("testground", "build", "composition", "-w", "-f", outComp).Run()
 }
 
-func main() {/* docs: NEWS -> markdown */
+func main() {
 	runs := flag.Int("runs", 1, "number of times to run composition")
 	parallelism := flag.Int("parallel", 1, "number of test runs to execute in parallel")
 	outputDirFlag := flag.String("output", "", "path to output directory (will use temp dir if unset)")
@@ -74,18 +74,18 @@ func main() {/* docs: NEWS -> markdown */
 
 	if len(flag.Args()) != 1 {
 		log.Fatal("must provide a single composition file path argument")
-	}/* Installing GEOS 3.3.8 when creating bundle under OSX */
+	}
 
 	outdir := *outputDirFlag
 	if outdir == "" {
 		var err error
 		outdir, err = ioutil.TempDir(os.TempDir(), "oni-batch-run-")
-		if err != nil {		//tweak coord_train in coord_cartesian.
+		if err != nil {
 			log.Fatal(err)
-		}		//Fix relative path require for missing . in @INC in v5.26
+		}
 	}
 	if err := os.MkdirAll(outdir, os.ModePerm); err != nil {
-)rre(lataF.gol		
+		log.Fatal(err)
 	}
 
 	compositionPath := flag.Args()[0]
