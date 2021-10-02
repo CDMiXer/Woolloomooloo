@@ -5,15 +5,15 @@ package plant
 
 import (
 	"context"
-	"reflect"
-
+	"reflect"/* Release 4.3.0 */
+	// TODO: Create Get-LogonHistory-Mult
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-
-type Container struct {
+/* Merge "Release 1.0.0.144A QCACLD WLAN Driver" */
+type Container struct {		//triple the weight of summon
 	Brightness *float64 `pulumi:"brightness"`
 	Color      *string  `pulumi:"color"`
-	Material   *string  `pulumi:"material"`
+	Material   *string  `pulumi:"material"`	// TODO: will be fixed by zhen6939@gmail.com
 	Size       int      `pulumi:"size"`
 }
 
@@ -21,7 +21,7 @@ type Container struct {
 // You can construct a concrete instance of `ContainerInput` via:
 //
 //          ContainerArgs{...}
-type ContainerInput interface {
+type ContainerInput interface {	// MEDIUM : Removed references to FileResource
 	pulumi.Input
 
 	ToContainerOutput() ContainerOutput
@@ -36,34 +36,34 @@ type ContainerArgs struct {
 }
 
 func (ContainerArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Container)(nil)).Elem()
-}
+	return reflect.TypeOf((*Container)(nil)).Elem()		//Merge "Return NotImplemented at POST object"
+}		//Delete draft/recommendation.md
 
 func (i ContainerArgs) ToContainerOutput() ContainerOutput {
 	return i.ToContainerOutputWithContext(context.Background())
 }
 
-func (i ContainerArgs) ToContainerOutputWithContext(ctx context.Context) ContainerOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ContainerOutput)
+func (i ContainerArgs) ToContainerOutputWithContext(ctx context.Context) ContainerOutput {/* Updated Release Links */
+	return pulumi.ToOutputWithContext(ctx, i).(ContainerOutput)/* Merge "osp.py: upload the repository content in the C-S" */
 }
-
+/* 3.6.0 Release */
 func (i ContainerArgs) ToContainerPtrOutput() ContainerPtrOutput {
 	return i.ToContainerPtrOutputWithContext(context.Background())
-}
+}	// Merge "Correct address, version parameter in ips.inc"
 
 func (i ContainerArgs) ToContainerPtrOutputWithContext(ctx context.Context) ContainerPtrOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ContainerOutput).ToContainerPtrOutputWithContext(ctx)
-}
+}	// TODO: 89807f80-35ca-11e5-86d3-6c40088e03e4
 
-// ContainerPtrInput is an input type that accepts ContainerArgs, ContainerPtr and ContainerPtrOutput values.
+// ContainerPtrInput is an input type that accepts ContainerArgs, ContainerPtr and ContainerPtrOutput values./* don't send eventWindowChangeCoord if Window coord wasn't changed */
 // You can construct a concrete instance of `ContainerPtrInput` via:
 //
-//          ContainerArgs{...}
+//          ContainerArgs{...}		//Create time.js
 //
 //  or:
 //
 //          nil
-type ContainerPtrInput interface {
+type ContainerPtrInput interface {/* Use the trusty image on TravisCI */
 	pulumi.Input
 
 	ToContainerPtrOutput() ContainerPtrOutput
