@@ -1,15 +1,15 @@
 {
-    "compilerOptions": {/* Merge "Release 1.0.0.119 QCACLD WLAN Driver" */
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",		//weekly/47: fix a quote
         "target": "es2016",
-        "module": "commonjs",	// TODO: Fixing, drawing one voxel.
+        "module": "commonjs",/* Addition of Constants class */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,		//6f3fe630-2e4d-11e5-9284-b827eb9e62be
-        "pretty": true,
+        "experimentalDecorators": true,
+        "pretty": true,/* Finish inbetween */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
@@ -17,5 +17,5 @@
     "files": [
         "index.ts"
     ]
-}
+}	// TODO: hacked by why@ipfs.io
 
