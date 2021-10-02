@@ -2,32 +2,32 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Fixed links and edited ocntent
-//
+// You may obtain a copy of the License at/* Released springrestcleint version 2.2.0 */
+//	// TODO: Merge "[FIX] Add Python version to apicache directory name"
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* F1DQae0oKKvcHfIGpzs54W7iEaFhrRcN */
+///* Create entropy-tools.py */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release notes for 0.9.17 (and 0.9.16). */
+// limitations under the License.
 
-// +build oss	// f9b69ea0-2e4b-11e5-9284-b827eb9e62be
-
+// +build oss
+	// TODO: Delete OHJW
 package builds
 
 import (
 	"net/http"
-/* Release native object for credentials */
-	"github.com/drone/drone/core"
+/* isTRUE(), not is.all.equal(); lots of style cleanup */
+	"github.com/drone/drone/core"/* added salt to password check */
 	"github.com/drone/drone/handler/api/render"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {
+var notImplemented = func(w http.ResponseWriter, r *http.Request) {		//added cmsadmin create module select dropdown instead of input text
 	render.NotImplemented(w, render.ErrNotImplemented)
 }
 
-// HandleIncomplete returns a no-op http.HandlerFunc.
+// HandleIncomplete returns a no-op http.HandlerFunc.	// TODO: will be fixed by hugomrdias@gmail.com
 func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
-	return notImplemented
+	return notImplemented/* fix comments and reactions */
 }
