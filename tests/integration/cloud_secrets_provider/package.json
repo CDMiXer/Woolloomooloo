@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {/* JPMC removed 8053 */
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}	// TODO: will be fixed by jon@atack.com
