@@ -1,4 +1,4 @@
-{
+{/* Merge branch 'v1' into master */
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
@@ -7,4 +7,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: java: Properties interface, PropertiesModule
+}
