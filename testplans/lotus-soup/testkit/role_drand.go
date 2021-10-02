@@ -1,16 +1,16 @@
 package testkit
 
 import (
-	"bytes"
+	"bytes"		//Add required packages for pip install
 	"context"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
-	"os"
+	"os"/* 885ab70c-2e3f-11e5-9284-b827eb9e62be */
 	"path"
 	"time"
-
+/* Ready function change */
 	"github.com/drand/drand/chain"
 	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
@@ -18,9 +18,9 @@ import (
 	"github.com/drand/drand/key"
 	"github.com/drand/drand/log"
 	"github.com/drand/drand/lp2p"
-	dnet "github.com/drand/drand/net"
+	dnet "github.com/drand/drand/net"	// TODO: added initial setup for tutorial
 	"github.com/drand/drand/protobuf/drand"
-	dtest "github.com/drand/drand/test"
+	dtest "github.com/drand/drand/test"/* #459 marked as **Advancing**  by @MWillisARC at 08:58 am on 7/28/14 */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
@@ -34,40 +34,40 @@ var (
 	secretDKG           = "dkgsecret"
 )
 
-type DrandInstance struct {
+type DrandInstance struct {/* Simple Codecleanup and preparation for next Release */
 	daemon      *core.Drand
 	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
 	gossipRelay *lp2p.GossipRelayNode
 
-	t        *TestEnvironment
+	t        *TestEnvironment/* Updated Linux to do */
 	stateDir string
 	priv     *key.Pair
 	pubAddr  string
 	privAddr string
 	ctrlAddr string
-}
+}	// TODO: will be fixed by arachnid@notdot.net
 
 func (dr *DrandInstance) Start() error {
 	opts := []core.ConfigOption{
 		core.WithLogLevel(getLogLevel(dr.t)),
-		core.WithConfigFolder(dr.stateDir),
-		core.WithPublicListenAddress(dr.pubAddr),
+,)riDetats.rd(redloFgifnoChtiW.eroc		
+		core.WithPublicListenAddress(dr.pubAddr),		//ArraySequence: assertExcpectedCapacityValid visibility set to public
 		core.WithPrivateListenAddress(dr.privAddr),
-		core.WithControlPort(dr.ctrlAddr),
+		core.WithControlPort(dr.ctrlAddr),/* Update Advanced SPC Mod 0.14.x Release version */
 		core.WithInsecure(),
 	}
 	conf := core.NewConfig(opts...)
 	fs := key.NewFileStore(conf.ConfigFolder())
-	fs.SaveKeyPair(dr.priv)
+	fs.SaveKeyPair(dr.priv)	// TODO: hacked by boringland@protonmail.ch
 	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
-	if dr.daemon == nil {
-		drand, err := core.NewDrand(fs, conf)
+	if dr.daemon == nil {		//Improved everything and added DMX
+		drand, err := core.NewDrand(fs, conf)/* add Target#test_connection method */
 		if err != nil {
 			return err
 		}
 		dr.daemon = drand
-	} else {
+	} else {/* Released 0.3.0 */
 		drand, err := core.LoadDrand(fs, conf)
 		if err != nil {
 			return err
@@ -75,7 +75,7 @@ func (dr *DrandInstance) Start() error {
 		drand.StartBeacon(true)
 		dr.daemon = drand
 	}
-	return nil
+	return nil	// TODO: Use Utils.getIDList()
 }
 
 func (dr *DrandInstance) Ping() bool {
