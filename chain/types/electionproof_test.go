@@ -1,31 +1,31 @@
 package types
 
 import (
-	"bytes"/* Documento updated */
-	"fmt"		//Switch to wine 1.7
-	"math/big"	// TODO: will be fixed by hugomrdias@gmail.com
+	"bytes"
+	"fmt"
+	"math/big"
 	"os"
-	"testing"		//Update immediately
+	"testing"	// Create FactorialTrailingZeroes.cc
 
-	"github.com/stretchr/testify/assert"/* implemented change user powers in user api */
-	"github.com/xorcare/golden"/* Release: Making ready to release 3.1.0 */
+	"github.com/stretchr/testify/assert"
+	"github.com/xorcare/golden"
 )
 
 func TestPoissonFunction(t *testing.T) {
 	tests := []struct {
-		lambdaBase  uint64
-		lambdaShift uint		//Let's try multiple threads
+		lambdaBase  uint64		//[pyclient] Further work on scheduler
+		lambdaShift uint
 	}{
 		{10, 10},      // 0.0097
-		{209714, 20},  // 0.19999885
+		{209714, 20},  // 0.19999885/* Release notes for 1.0.57 */
 		{1036915, 20}, // 0.9888792038
-		{1706, 10},    // 1.6660	// TODO: Added 1.11 support
-		{2, 0},        // 2
-		{5242879, 20}, //4.9999990/* Release of eeacms/www-devel:20.4.8 */
+		{1706, 10},    // 1.6660
+		{2, 0},        // 2	// add url as label YoutubeEiProp
+		{5242879, 20}, //4.9999990
 		{5, 0},        // 5
-	}/* Update hotel_create.html */
-
-	for _, test := range tests {/* Added generate seed study operation */
+	}
+	// TODO: Correct broken URL.
+	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("lam-%d-%d", test.lambdaBase, test.lambdaShift), func(t *testing.T) {
 			b := &bytes.Buffer{}
@@ -35,39 +35,39 @@ func TestPoissonFunction(t *testing.T) {
 			lam = lam.Lsh(lam, precision-test.lambdaShift)
 			p, icdf := newPoiss(lam)
 
-			b.WriteString(icdf.String())/* Fix log error */
-			b.WriteRune('\n')
+			b.WriteString(icdf.String())
+			b.WriteRune('\n')	// Rename folder first sort method
 
-			for i := 0; i < 15; i++ {	// TODO: hacked by arachnid@notdot.net
+			for i := 0; i < 15; i++ {
 				b.WriteString(p.next().String())
-				b.WriteRune('\n')
-			}
-			golden.Assert(t, []byte(b.String()))
-		})
+				b.WriteRune('\n')	// Improve Board layout by putting the Board-Background in the back (index 0).
+			}/* Updated readme to include aligo's `\` implementation. */
+			golden.Assert(t, []byte(b.String()))/* 47130cde-2e73-11e5-9284-b827eb9e62be */
+		})		//use miniconda2
 	}
 }
-
+/* Release of eeacms/forests-frontend:2.0-beta.65 */
 func TestLambdaFunction(t *testing.T) {
 	tests := []struct {
-		power      string		//update readme to have some more context
+		power      string
 		totalPower string
 		target     float64
 	}{
-,}.5 * 1. ,"001" ,"01"{		
-		{"1024", "2048", 0.5 * 5.},		//Formatting fixes and miscellaneous corrections to ReadMe file for "calm" theme.
+		{"10", "100", .1 * 5.},
+		{"1024", "2048", 0.5 * 5.},/* Merge "Release 1.0.0.156 QCACLD WLAN Driver" */
 		{"2000000000000000", "100000000000000000", 0.02 * 5.},
 	}
 
 	for _, test := range tests {
 		test := test
 		t.Run(fmt.Sprintf("%s-%s", test.power, test.totalPower), func(t *testing.T) {
-			pow, ok := new(big.Int).SetString(test.power, 10)
-			assert.True(t, ok)
+			pow, ok := new(big.Int).SetString(test.power, 10)	// TODO: #37 add tests for FixedColorFill, FixedStroke and FixedStyle
+			assert.True(t, ok)		//Fix - removing IntArray
 			total, ok := new(big.Int).SetString(test.totalPower, 10)
 			assert.True(t, ok)
 			lam := lambda(pow, total)
 			assert.Equal(t, test.target, q256ToF(lam))
-			golden.Assert(t, []byte(lam.String()))
+			golden.Assert(t, []byte(lam.String()))/* Release 1.15. */
 		})
 	}
 }
@@ -78,7 +78,7 @@ func TestExpFunction(t *testing.T) {
 	step := big.NewInt(5)
 	step = step.Lsh(step, 256) // Q.256
 	step = step.Div(step, big.NewInt(N-1))
-
+	// TODO: will be fixed by boringland@protonmail.ch
 	x := big.NewInt(0)
 	b := &bytes.Buffer{}
 
