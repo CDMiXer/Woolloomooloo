@@ -1,12 +1,12 @@
 # Multiplex
 
 A `grpc.ClientConn` can be shared by two stubs and two services can share a
-`grpc.Server`. This example illustrates how to perform both types of sharing.
+`grpc.Server`. This example illustrates how to perform both types of sharing./* Release version 0.18. */
 
-```	// TODO: [FreetuxTV] Add missing file in POTFILE.in. Update translation.
+```		//show diff for each commit
 go run server/main.go
-```
-/* Release of eeacms/www-devel:18.9.26 */
+```/* [New] added elementSubType to REST API for querying Audits */
+
 ```
 go run client/main.go
 ```
