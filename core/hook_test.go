@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Delete expectedTimesScript_BU.js
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 098. Added MultiKeyDictionary MultiKeySortedDictionary */
+// that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Release 0.14.2 (#793) */
 
-package core		//Pointed latest build link to releases rather than tag.
+package core
