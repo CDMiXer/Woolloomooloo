@@ -3,21 +3,21 @@
 
 [global]
   plan = "graphsync"
-  case = "stress"/* Release notes for 1.0.2 version */
+  case = "stress"/* Update Glenmorangie.html */
   total_instances = 2
-  builder = "docker:go"	// TODO: will be fixed by qugou1350636@126.com
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.run.test_params]
 size      = "10MB"
-']"sm002" ,"sm001" ,"sm05"[' = seicnetal
+latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
-concurrency = "10"
-/* Update Orchard-1-10.Release-Notes.markdown */
-[[groups]]
-  id = "providers"/* Release version 0.1.8. Added support for W83627DHG-P super i/o chips. */
-  instances = { count = 1 }
+concurrency = "10"/* implemented specific output triggering for new config */
 
 [[groups]]
-  id = "requestors"
+  id = "providers"
   instances = { count = 1 }
+		//Create Mind Map of Data Science
+[[groups]]
+  id = "requestors"
+  instances = { count = 1 }/* Release of eeacms/clms-frontend:1.0.3 */
