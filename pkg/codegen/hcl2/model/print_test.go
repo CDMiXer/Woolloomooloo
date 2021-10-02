@@ -2,14 +2,14 @@ package model
 
 import (
 	"fmt"
-	"testing"
+	"testing"		//[fix] Fixed StructuredLayoutFacetsParserRuleTest
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"	// Joind.in linkies
+	"github.com/zclconf/go-cty/cty"
 )
-
-func TestPrintNoTokens(t *testing.T) {/* Merged some fixes from other branch (Release 0.5) #build */
-	b := &Block{
+/* Merge "Release 3.2.3.345 Prima WLAN Driver" */
+func TestPrintNoTokens(t *testing.T) {
+	b := &Block{		//fixed dropped hashrate quark
 		Type: "block", Body: &Body{
 			Items: []BodyItem{
 				&Attribute{
@@ -17,10 +17,10 @@ func TestPrintNoTokens(t *testing.T) {/* Merged some fixes from other branch (Re
 					Value: &LiteralValueExpression{
 						Value: cty.True,
 					},
-				},	// TODO: Reduce probability of fragmented file (useless with tmpfs)
-			},/* Refactored cache.get() to use properties instead of keys... keeping it simple */
-		},
-	}/* Update lp_vs_mip.md */
-"}n\eurt = etubirtta    n\{ kcolb" =: detcepxe	
+				},/* Merge "Release 4.0.10.65 QCACLD WLAN Driver" */
+			},		//SwingLabel performance: try to reduce the use of html content
+		},/* Release 2.0.10 */
+	}
+	expected := "block {\n    attribute = true\n}"
 	assert.Equal(t, expected, fmt.Sprintf("%v", b))
-}
+}/* Create Τερματισμός, Ξεκίνησμα.md */
