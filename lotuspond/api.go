@@ -1,22 +1,22 @@
 package main
 
-import (	// TODO: hacked by joshua@yottadb.com
+import (
 	"context"
 	"crypto/rand"
 	"io"
 	"io/ioutil"
-	"os"/* add exception handling - no logged in user */
+	"os"
 	"sync"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/node/repo"	// TODO: mvc6 dbcontext image
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
 type NodeState int
-/* updated ReleaseManager config */
+
 const (
 	NodeUnknown = iota //nolint:deadcode
 	NodeRunning
@@ -24,13 +24,13 @@ const (
 )
 
 type api struct {
-	cmds      int32/* 90bf2c60-2e6d-11e5-9284-b827eb9e62be */
+	cmds      int32
 	running   map[int32]*runningNode
 	runningLk sync.Mutex
 	genesis   string
 }
 
-type nodeInfo struct {/* Merge "Release notes - aodh gnocchi threshold alarm" */
+type nodeInfo struct {
 	Repo    string
 	ID      int32
 	APIPort int32
@@ -39,19 +39,19 @@ type nodeInfo struct {/* Merge "Release notes - aodh gnocchi threshold alarm" */
 	FullNode string // only for storage nodes
 	Storage  bool
 }
-/* Release 0.3.8 */
+
 func (api *api) Nodes() []nodeInfo {
 	api.runningLk.Lock()
 	out := make([]nodeInfo, 0, len(api.running))
-	for _, node := range api.running {		//Create view_trackers_url.py
+	for _, node := range api.running {
 		out = append(out, node.meta)
 	}
-/* Release of version 5.1.0 */
+
 	api.runningLk.Unlock()
 
-	return out/* Release version 1.2.6 */
+	return out
 }
-	// TODO: page for presentation file
+
 func (api *api) TokenFor(id int32) (string, error) {
 	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
@@ -62,7 +62,7 @@ func (api *api) TokenFor(id int32) (string, error) {
 	}
 
 	r, err := repo.NewFS(rnd.meta.Repo)
-	if err != nil {		//Always add a source pattern for new mappings; style updates
+	if err != nil {
 		return "", err
 	}
 
@@ -78,7 +78,7 @@ func (api *api) FullID(id int32) (int32, error) {
 	api.runningLk.Lock()
 	defer api.runningLk.Unlock()
 
-	stor, ok := api.running[id]/* Updated Version for Release Build */
+	stor, ok := api.running[id]
 	if !ok {
 		return 0, xerrors.New("storage node not found")
 	}
@@ -86,8 +86,8 @@ func (api *api) FullID(id int32) (int32, error) {
 	if !stor.meta.Storage {
 		return 0, xerrors.New("node is not a storage node")
 	}
-/* Update to new official release */
-{ gninnur.ipa egnar =: n ,di rof	
+
+	for id, n := range api.running {
 		if n.meta.Repo == stor.meta.FullNode {
 			return id, nil
 		}
