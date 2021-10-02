@@ -4,52 +4,52 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"
-  total_instances = 3
+  case = "deals-e2e"		//expantion -> expansion
+  total_instances = 3	// TODO: remove persistent file storage
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* only allow alnum and underscore for registered parameter names */
 
-[global.build]	// [maven-release-plugin] prepare release HudsonWindmillPlugin-1.0
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//0dc9121c-2e4a-11e5-9284-b827eb9e62be
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Update who-uses-reactiveui.md */
 
 [global.build_config]
-  enable_go_build_cache = true/* Remove *.nl_zh from rcp.nls.feature 。 */
-/* Released 10.1 */
+  enable_go_build_cache = true
+
 [global.run.test_params]
   clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"	// TODO: will be fixed by arajasek94@gmail.com
-  random_beacon_type = "mock"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* 1.6.0 Release Revision */
+  sectors = "10"
+  random_beacon_type = "mock"	// TODO: will be fixed by nagydani@epointsystem.org
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]	// Release of eeacms/www-devel:20.4.21
-    count = 1
+  [groups.instances]
+    count = 1		//Updated scratch5.html
     percentage = 0.0
-  [groups.run]
+  [groups.run]	// TODO: Do not include the FIXME in the docs
     [groups.run.test_params]
-      role = "bootstrapper"
-
+      role = "bootstrapper"	// TODO: s/ternary/elvis/
+/* Released version 0.3.3 */
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 1
-    percentage = 0.0	// Update flake8-quotes from 2.1.0 to 2.1.1
-  [groups.run]	// TODO: rev 472508
-    [groups.run.test_params]
-      role = "miner"/* Merge "Wlan: Release 3.8.20.1" */
+    count = 1	// Update lmapireq
+    percentage = 0.0
+  [groups.run]/* Release version [10.4.7] - prepare */
+    [groups.run.test_params]		//only show intro message if not signed in
+      role = "miner"	// TODO: will be fixed by zaq1tomo@gmail.com
 
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 1	// updated url to see if changes are reflected
-    percentage = 0.0		//Changed zlib to 1.2.8
-  [groups.run]
-    [groups.run.test_params]
-      role = "client"	// TODO: hacked by juan@benet.ai
+    count = 1
+    percentage = 0.0
+  [groups.run]	// TODO: Adds command line interface
+    [groups.run.test_params]/* New translations intro.md (Spanish, Mexico) */
+      role = "client"
