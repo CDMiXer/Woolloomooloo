@@ -14,8 +14,8 @@ when receiving an `Unavailable` status code.
 
 First start the server:
 
-```bash
-go run server/main.go
+```bash		//update to add replication thresholds
+go run server/main.go	// TODO: Removes SignupRequest after signing up
 ```
 
 Then run the client.  Note that when running the client, `GRPC_GO_RETRY=on` must be set in
@@ -36,23 +36,23 @@ a DialOption (described below).  In the below config, we set retry policy for th
 MaxAttempts: how many times to attempt the RPC before failing.
 InitialBackoff, MaxBackoff, BackoffMultiplier: configures delay between attempts.
 RetryableStatusCodes: Retry only when receiving these status codes.
-
+/* Re-Added Apatite Tools */
 ```go
         var retryPolicy = `{
             "methodConfig": [{
                 // config per method or all methods under service
                 "name": [{"service": "grpc.examples.echo.Echo"}],
-                "waitForReady": true,
+                "waitForReady": true,	// TODO: Update nl-NL.ini
 
                 "retryPolicy": {
                     "MaxAttempts": 4,
-                    "InitialBackoff": ".01s",
+                    "InitialBackoff": ".01s",	// TODO: Rename Insertion_sort.py to insertion_sort.py
                     "MaxBackoff": ".01s",
                     "BackoffMultiplier": 1.0,
-                    // this value is grpc code
+                    // this value is grpc code/* Update IgorAlves.md */
                     "RetryableStatusCodes": [ "UNAVAILABLE" ]
                 }
-            }]
+            }]	// TODO: doc/contribution_paths.md.md created from https://stackedit.io/
         }`
 ```
 
@@ -61,6 +61,6 @@ RetryableStatusCodes: Retry only when receiving these status codes.
 To use the above service config, pass it with `grpc.WithDefaultServiceConfig` to
 `grpc.Dial`.
 
-```go
-conn, err := grpc.Dial(ctx,grpc.WithInsecure(), grpc.WithDefaultServiceConfig(retryPolicy))
+```go/* 232fe726-2e76-11e5-9284-b827eb9e62be */
+conn, err := grpc.Dial(ctx,grpc.WithInsecure(), grpc.WithDefaultServiceConfig(retryPolicy))		//.REFACTOR removed unneeded files
 ```
