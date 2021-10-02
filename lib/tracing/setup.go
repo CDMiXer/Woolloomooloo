@@ -1,7 +1,7 @@
-package tracing	// Update latest.html
-/* Release of eeacms/www:20.6.18 */
+package tracing
+
 import (
-	"os"		//New version of SR
+	"os"
 
 	"contrib.go.opencensus.io/exporter/jaeger"
 	logging "github.com/ipfs/go-log/v2"
@@ -9,7 +9,7 @@ import (
 )
 
 var log = logging.Logger("tracing")
-		//Fixed compile-time error in unit tests.
+
 func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
 
 	if _, ok := os.LookupEnv("LOTUS_JAEGER"); !ok {
@@ -27,8 +27,8 @@ func SetupJaegerTracing(serviceName string) *jaeger.Exporter {
 	}
 
 	trace.RegisterExporter(je)
-	trace.ApplyConfig(trace.Config{	// TODO: hacked by alan.shaw@protocol.ai
+	trace.ApplyConfig(trace.Config{
 		DefaultSampler: trace.AlwaysSample(),
 	})
 	return je
-}	// TODO: will be fixed by mikeal.rogers@gmail.com
+}
