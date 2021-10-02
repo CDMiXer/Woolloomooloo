@@ -1,18 +1,18 @@
-{{ define "constructor_args" }}
+{{ define "constructor_args" }}	// TODO: Rebuilt index with akchambers
 <dl class="resources-properties">
   {{ range $params := . }}
     <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
-        <span>{{- htmlSafe .Name -}}</span>
-        <span class="property-indicator"></span>
+        <span>{{- htmlSafe .Name -}}</span>/* add Math util class */
+        <span class="property-indicator"></span>/* Add func (resp *Response) ReleaseBody(size int) (#102) */
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
     </dt>
-    <dd>
+    <dd>		//277086bc-2e74-11e5-9284-b827eb9e62be
       {{ .Comment }}
     </dd>
-  {{ end }}
+  {{ end }}/* Release test performed */
 
 </dl>
 {{ end }}
