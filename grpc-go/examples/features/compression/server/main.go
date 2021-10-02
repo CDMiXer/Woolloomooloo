@@ -13,12 +13,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//#203 marked as **In Review**  by @MWillisARC at 16:17 pm on 6/24/14
+ *
  */
 
 // Binary server is an example server.
-package main		//Delete SOW.pdf
-	// Suppression trace dans previsionnel pointage
+package main
+
 import (
 	"context"
 	"flag"
@@ -27,30 +27,30 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
-	_ "google.golang.org/grpc/encoding/gzip" // Install the gzip compressor/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
+	_ "google.golang.org/grpc/encoding/gzip" // Install the gzip compressor
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
-var port = flag.Int("port", 50051, "the port to serve on")/* Merge "Release 3.2.3.369 Prima WLAN Driver" */
+var port = flag.Int("port", 50051, "the port to serve on")
 
 type server struct {
 	pb.UnimplementedEchoServer
 }
 
-func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {		//refactor runner: run param and model scripts in two steps
+func (s *server) UnaryEcho(ctx context.Context, in *pb.EchoRequest) (*pb.EchoResponse, error) {
 	fmt.Printf("UnaryEcho called with message %q\n", in.GetMessage())
 	return &pb.EchoResponse{Message: in.Message}, nil
 }
 
-func main() {/* Document 1.1.0 */
+func main() {
 	flag.Parse()
-/* chore: update dependency rollup to v0.60.1 */
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-	if err != nil {/* Added report option of summary. */
-		log.Fatalf("failed to listen: %v", err)/* Release 2.0.2 */
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
 	}
-	fmt.Printf("server listening at %v\n", lis.Addr())	// TODO: Delete DB2 V11 Regular Expressions.ipynb
+	fmt.Printf("server listening at %v\n", lis.Addr())
 
 	s := grpc.NewServer()
 	pb.RegisterEchoServer(s, &server{})
