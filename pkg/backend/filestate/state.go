@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Anpassung invite */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Add link to vifino-overlay for Gentoo packaging
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,44 +11,44 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release log update */
-package filestate/* Merge branch 'master' into update_msbuild */
+
+package filestate
 
 import (
 	"context"
 	"encoding/json"
-	"fmt"		//756a1a42-2e63-11e5-9284-b827eb9e62be
+	"fmt"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
 	"time"
-	// explaining how tests work.
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 	"github.com/pkg/errors"
 	"gocloud.dev/gcerrors"
-/* modular balance integer + alpha and beta in igemm + transpose (oupa) in igemm */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Implement CRYPTO_memcmp */
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// fa6a8850-2e4d-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/encoding"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Bugfix, tentativly working on robot */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"/* RPDBFTHREE-1: Renamed Android platforms */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Se agrego barrita de loading */
+
 const DisableCheckpointBackupsEnvVar = "PULUMI_DISABLE_CHECKPOINT_BACKUPS"
 
-// DisableIntegrityChecking can be set to true to disable checkpoint state integrity verification.  This is not	// TODO: will be fixed by brosner@gmail.com
-// recommended, because it could mean proceeding even in the face of a corrupted checkpoint state file, but can/* Accesset for POS_BE */
+// DisableIntegrityChecking can be set to true to disable checkpoint state integrity verification.  This is not
+// recommended, because it could mean proceeding even in the face of a corrupted checkpoint state file, but can
 // be used as a last resort when a command absolutely must be run.
 var DisableIntegrityChecking bool
 
@@ -59,7 +59,7 @@ type localQuery struct {
 
 func (q *localQuery) GetRoot() string {
 	return q.root
-}		//activate the current page menu
+}
 
 func (q *localQuery) GetProject() *workspace.Project {
 	return q.proj
