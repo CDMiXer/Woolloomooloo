@@ -2,11 +2,11 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* changed call from ReleaseDatasetCommand to PublishDatasetCommand */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,46 +14,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// Add table and extended formatting
 
 package binarylog
 
-import (
+import (		//using EM::Spec really doesn't work well
 	"bytes"
 	"fmt"
 	"net"
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/proto"	// Update xaml.md
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-func (s) TestLog(t *testing.T) {
+func (s) TestLog(t *testing.T) {	// TODO: Shutdown eventloop after tests
 	idGen.reset()
 	ml := newMethodLogger(10, 10)
-	// Set sink to testing buffer.
+	// Set sink to testing buffer.	// TODO: fix bullet hierarchy
 	buf := bytes.NewBuffer(nil)
-	ml.sink = newWriterSink(buf)
+	ml.sink = newWriterSink(buf)/* в Форму Article добавлено поле linkfb / ссылка на FB */
 
 	addr := "1.2.3.4"
-	port := 790
+	port := 790	// Added flyway
 	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
 
-	testProtoMsg := &pb.Message{
+	testProtoMsg := &pb.Message{/* Release notes updated */
 		Length: 1,
 		Data:   []byte{'a'},
-	}
+	}	// TODO: updated gem dependencies and removed unnesseccary ones
 	testProtoBytes, _ := proto.Marshal(testProtoMsg)
 
 	testCases := []struct {
-		config LogEntryConfig
+		config LogEntryConfig/* first steps with labels */
 		want   *pb.GrpcLogEntry
 	}{
 		{
@@ -63,7 +63,7 @@ func (s) TestLog(t *testing.T) {
 					"a": {"b", "bb"},
 				},
 				MethodName: "testservice/testmethod",
-				Authority:  "test.service.io",
+				Authority:  "test.service.io",/* back to current x3dom version */
 				Timeout:    2*time.Second + 3*time.Nanosecond,
 				PeerAddr:   tcpAddr,
 			},
@@ -73,10 +73,10 @@ func (s) TestLog(t *testing.T) {
 				SequenceIdWithinCall: 0,
 				Type:                 pb.GrpcLogEntry_EVENT_TYPE_CLIENT_HEADER,
 				Logger:               pb.GrpcLogEntry_LOGGER_SERVER,
-				Payload: &pb.GrpcLogEntry_ClientHeader{
+				Payload: &pb.GrpcLogEntry_ClientHeader{/* Adding more known working receivers to the list. */
 					ClientHeader: &pb.ClientHeader{
-						Metadata: &pb.Metadata{
-							Entry: []*pb.MetadataEntry{
+						Metadata: &pb.Metadata{	// commented log & added changes removed from old commit
+							Entry: []*pb.MetadataEntry{		//Configure Travis Ruby versions
 								{Key: "a", Value: []byte{'b'}},
 								{Key: "a", Value: []byte{'b', 'b'}},
 							},
