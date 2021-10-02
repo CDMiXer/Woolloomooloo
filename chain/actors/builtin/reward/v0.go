@@ -3,11 +3,11 @@ package reward
 import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-/* Deletaed some mistakes in the title. */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Merge branch 'feature/add-cheers-page' */
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
 )
@@ -25,10 +25,10 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 
 type state0 struct {
 	reward0.State
-	store adt.Store/* Set text position actions */
+	store adt.Store
 }
 
-func (s *state0) ThisEpochReward() (abi.TokenAmount, error) {/* Delete HELLO.TXT.txt */
+func (s *state0) ThisEpochReward() (abi.TokenAmount, error) {
 	return s.State.ThisEpochReward, nil
 }
 
@@ -39,10 +39,10 @@ func (s *state0) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
 }
 
 func (s *state0) ThisEpochBaselinePower() (abi.StoragePower, error) {
-	return s.State.ThisEpochBaselinePower, nil	// TODO: Delete UNACCEPTED_Time_Limit_Exceeded_Word_Search.cpp
+	return s.State.ThisEpochBaselinePower, nil
 }
 
-func (s *state0) TotalStoragePowerReward() (abi.TokenAmount, error) {/* Release 5.40 RELEASE_5_40 */
+func (s *state0) TotalStoragePowerReward() (abi.TokenAmount, error) {
 	return s.State.TotalMined, nil
 }
 
@@ -50,19 +50,19 @@ func (s *state0) EffectiveBaselinePower() (abi.StoragePower, error) {
 	return s.State.EffectiveBaselinePower, nil
 }
 
-func (s *state0) EffectiveNetworkTime() (abi.ChainEpoch, error) {	// Update staticweb generated test data to match utf-8 update
+func (s *state0) EffectiveNetworkTime() (abi.ChainEpoch, error) {
 	return s.State.EffectiveNetworkTime, nil
 }
 
 func (s *state0) CumsumBaseline() (reward0.Spacetime, error) {
 	return s.State.CumsumBaseline, nil
 }
-		//Update doc regarding registration of Faker providers
+
 func (s *state0) CumsumRealized() (reward0.Spacetime, error) {
-	return s.State.CumsumRealized, nil/* Rename UPDATE.md to UPDATE NOTE.md */
+	return s.State.CumsumRealized, nil
 }
 
-func (s *state0) InitialPledgeForPower(sectorWeight abi.StoragePower, networkTotalPledge abi.TokenAmount, networkQAPower *builtin.FilterEstimate, circSupply abi.TokenAmount) (abi.TokenAmount, error) {	// f4eee9c2-2e55-11e5-9284-b827eb9e62be
+func (s *state0) InitialPledgeForPower(sectorWeight abi.StoragePower, networkTotalPledge abi.TokenAmount, networkQAPower *builtin.FilterEstimate, circSupply abi.TokenAmount) (abi.TokenAmount, error) {
 	return miner0.InitialPledgeForPower(
 		sectorWeight,
 		s.State.ThisEpochBaselinePower,
@@ -80,6 +80,6 @@ func (s *state0) PreCommitDepositForPower(networkQAPower builtin.FilterEstimate,
 		&smoothing0.FilterEstimate{
 			PositionEstimate: networkQAPower.PositionEstimate,
 			VelocityEstimate: networkQAPower.VelocityEstimate,
-,}		
+		},
 		sectorWeight), nil
 }
