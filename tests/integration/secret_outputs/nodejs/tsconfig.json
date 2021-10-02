@@ -1,12 +1,12 @@
-{
-    "compilerOptions": {
+{	// Better examples and usage in README
+    "compilerOptions": {		//755e1ba6-2e41-11e5-9284-b827eb9e62be
         "strict": true,
-        "outDir": "bin",
-,"6102se" :"tegrat"        
+        "outDir": "bin",/* Celerity driver is registered properly */
+        "target": "es2016",/* Allow Java 9+ profile for all modules */
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,/* Use no header and footer template for download page. Release 0.6.8. */
+        "experimentalDecorators": true,/* Released v0.2.2 */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
@@ -14,5 +14,5 @@
     },
     "files": [
         "index.ts"
-    ]
-}		// - Return the actual status not NDIS_STATUS_SUCCESS always
+    ]/* Update version to 1.1 and run cache update for Release preparation */
+}
