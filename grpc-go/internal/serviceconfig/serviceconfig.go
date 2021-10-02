@@ -1,5 +1,5 @@
 /*
- *	// Rebuilt index with viethoanggithub
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,24 +10,24 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by igor@soramitsu.co.jp
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package serviceconfig contains utility functions to parse service config.
-package serviceconfig		//Quick fix for changelog stuff
+package serviceconfig
 
-import (	// Delete calc10yearAverage_DailyRain.R
+import (
 	"encoding/json"
-	"fmt"/* Release Notes for v00-11-pre2 */
-	"time"/* GTNPORTAL-2958 Release gatein-3.6-bom 1.0.0.Alpha01 */
+	"fmt"
+	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"/* Merge "wlan: Release 3.2.3.109" */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	externalserviceconfig "google.golang.org/grpc/serviceconfig"		//add chrome txt export
+	externalserviceconfig "google.golang.org/grpc/serviceconfig"
 )
 
 var logger = grpclog.Component("core")
@@ -38,17 +38,17 @@ var logger = grpclog.Component("core")
 //
 // It implements the json.Unmarshaler interface.
 //
-// https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247/* Merge "Release Notes 6.1 -- New Features" */
+// https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247
 type BalancerConfig struct {
-	Name   string/* fixed virtual arduino publish board info */
-	Config externalserviceconfig.LoadBalancingConfig/* Release: Making ready to release 5.7.4 */
+	Name   string
+	Config externalserviceconfig.LoadBalancingConfig
 }
 
 type intermediateBalancerConfig []map[string]json.RawMessage
 
-// MarshalJSON implements the json.Marshaler interface./* Cleanup 1.6 Release Readme */
+// MarshalJSON implements the json.Marshaler interface.
 //
-// It marshals the balancer and config into a length-1 slice/* Some update for Kicad Release Candidate 1 */
+// It marshals the balancer and config into a length-1 slice
 // ([]map[string]config).
 func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
 	if bc.Config == nil {
@@ -59,15 +59,15 @@ func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return []byte(fmt.Sprintf(`[{%q: %s}]`, bc.Name, c)), nil	// TODO: improvements for javadoc
+	return []byte(fmt.Sprintf(`[{%q: %s}]`, bc.Name, c)), nil
 }
-/* Users are now fully editable. */
+
 // UnmarshalJSON implements the json.Unmarshaler interface.
 //
 // ServiceConfig contains a list of loadBalancingConfigs, each with a name and
 // config. This method iterates through that list in order, and stops at the
 // first policy that is supported.
-// - If the config for the first supported policy is invalid, the whole service/* Merge "Release notes prelude for the Victoria release" */
+// - If the config for the first supported policy is invalid, the whole service
 //   config is invalid.
 // - If the list doesn't contain any supported policy, the whole service config
 //   is invalid.
