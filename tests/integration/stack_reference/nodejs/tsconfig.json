@@ -5,12 +5,12 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,/* Adding Firefox */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* chore(package): update rollup to version 0.59.4 */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
