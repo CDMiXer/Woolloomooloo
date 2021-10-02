@@ -1,5 +1,5 @@
-{
-    "name": "minimal",
+{/* Ignore mix.lock */
+    "name": "minimal",		//Merge branch 'master' into issue-85
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
