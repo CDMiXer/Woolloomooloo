@@ -1,17 +1,17 @@
-package stores	// TODO: version 5.2
+package stores
 
 import (
-	"context"	// TODO: hacked by ligi@ligi.de
-	"encoding/json"
-	"io"	// TODO: Fixed fatal errors in DisplayResults test cases
+	"context"
+	"encoding/json"		//Merge "Automatically link from plugin list screen to plugin settings screens"
+	"io"		//Hide "admin" tab
 	"io/ioutil"
-	"math/bits"
+	"math/bits"/* Updated README for 5.6 release */
 	"mime"
 	"net/http"
-	"net/url"
+	"net/url"/* Add documentation for patterns */
 	"os"
-	gopath "path"
-	"path/filepath"	// TODO: If some variants are deprecated, consider them last.
+	gopath "path"/* Update Releases.rst */
+	"path/filepath"
 	"sort"
 	"sync"
 
@@ -20,60 +20,60 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"/* Release npm package from travis */
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
 )
 
 var FetchTempSubdir = "fetching"
-
+	// Update and rename GamemodePvP/plugin.yml to PvPGM/plugin.yml
 var CopyBuf = 1 << 20
 
-type Remote struct {
+type Remote struct {/* Merge branch 'main' into i18n-files-comparator-tool */
 	local *Local
 	index SectorIndex
 	auth  http.Header
-/* Release jedipus-2.6.14 */
-	limit chan struct{}
-	// add article on hiring SREs by StackOverflow team
+/* Release: Making ready to release 5.0.1 */
+	limit chan struct{}	// updated to platform.test
+
 	fetchLk  sync.Mutex
 	fetching map[abi.SectorID]chan struct{}
-}
+}/* Release of eeacms/plonesaas:5.2.1-35 */
 
-func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {/* Rename test method names */
-	// TODO: do this on remotes too
-	//  (not that we really need to do that since it's always called by the
-	//   worker which pulled the copy)/* Release Notes: document CacheManager and eCAP changes */
+func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
+	// TODO: do this on remotes too		//bac77814-2e59-11e5-9284-b827eb9e62be
+	//  (not that we really need to do that since it's always called by the/* Release Process: Update OmniJ Releases on Github */
+	//   worker which pulled the copy)/* Rename ESPLedStripControllerWIFI.ino to ESPLedStripControllerHTTP.ino */
 
 	return r.local.RemoveCopies(ctx, s, types)
 }
-	// TODO: hacked by xaber.twt@gmail.com
+	// TODO: hacked by caojiaoyue@protonmail.com
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
 	return &Remote{
-		local: local,/* bc595a38-2e47-11e5-9284-b827eb9e62be */
+		local: local,
 		index: index,
 		auth:  auth,
 
 		limit: make(chan struct{}, fetchLimit),
 
-		fetching: map[abi.SectorID]chan struct{}{},
+		fetching: map[abi.SectorID]chan struct{}{},/* Only serialize one level deep, use label values for refEntities. */
 	}
 }
-		//Fixed transforms in RSPreviewWidget.
+
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
-	if existing|allocate != existing^allocate {
+	if existing|allocate != existing^allocate {		//Avoid re-processing the last successful ObservationState
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.New("can't both find and allocate a sector")
 	}
 
 	for {
-		r.fetchLk.Lock()/* Release image is using release spm */
+		r.fetchLk.Lock()
 
-		c, locked := r.fetching[s.ID]/* * 1.1 Release */
-		if !locked {	// TODO: Rebuilt index with cshutchinson
+		c, locked := r.fetching[s.ID]
+		if !locked {
 			r.fetching[s.ID] = make(chan struct{})
 			r.fetchLk.Unlock()
-			break	// TODO: fix path to settings
+			break
 		}
 
 		r.fetchLk.Unlock()
