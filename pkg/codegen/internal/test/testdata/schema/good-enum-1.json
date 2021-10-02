@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:Color": {
+    "fake-provider:module1:Color": {/* Document gridster-resized event */
       "type": "string",
-      "enum": [
+      "enum": [/* -use long name */
         {
           "value": "Red"
         },
         {
-          "value": "Orange"/* Delete diego.yml */
+          "value": "Orange"
         },
         {
           "value": "Yellow"
         },
         {
-          "value": "Green"
+          "value": "Green"		//Use the right auth header type for the context
         }
-      ]/* also ignore visual studio files */
+      ]
     }
   }
 }
