@@ -5,19 +5,19 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
 import * as utilities from "./utilities";
 
-import {Resource} from "./index";	// TODO: Fixed NPE in SpacePartitionerCache
+import {Resource} from "./index";
 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
     args = args || {};
     if (!opts) {
         opts = {}
-    }	// added twitter index info
+    }
 
     if (!opts.version) {
         opts.version = utilities.getVersion();
-    }/* Release of eeacms/eprtr-frontend:0.4-beta.8 */
+    }
     return pulumi.runtime.invoke("example::argFunction", {
-        "arg1": args.arg1,/* Added latitude and longitude parameters to postEventTweet */
+        "arg1": args.arg1,
     }, opts);
 }
 
