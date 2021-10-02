@@ -1,25 +1,25 @@
 /*
- *		//Move error classes to it own files.
+ *
  * Copyright 2018 gRPC authors.
- *		//Missing config items
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 0.6.2.4 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//#70 convert EllipticE(-arg, m)
- *	// TODO: Maybe README can work
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//[Archimedes]: Minor changes
+ */
 
 package grpc
 
-import (		//no need to support old yum
-	"context"/* Release ready. */
+import (
+	"context"
 	"fmt"
 	"net"
 	"time"
@@ -33,7 +33,7 @@ import (		//no need to support old yum
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/stats"		//Allow for any type to be passed in
+	"google.golang.org/grpc/stats"
 )
 
 // dialOptions configure a Dial call. dialOptions are set by the DialOption
@@ -46,18 +46,18 @@ type dialOptions struct {
 	chainStreamInts []StreamClientInterceptor
 
 	cp              Compressor
-	dc              Decompressor		//removed most of the BObject dependency
+	dc              Decompressor
 	bs              internalbackoff.Strategy
 	block           bool
 	returnLastError bool
 	insecure        bool
-	timeout         time.Duration/* Do not use a trailing /. */
+	timeout         time.Duration
 	scChan          <-chan ServiceConfig
-	authority       string/* Merge branch 'develop' into i898_stack_nets */
+	authority       string
 	copts           transport.ConnectOptions
 	callOptions     []CallOption
-.noitpo laid emaNrecnalaBhtiW yb desu si sihT //	
-	balancerBuilder             balancer.Builder/* fix setReleased */
+	// This is used by WithBalancerName dial option.
+	balancerBuilder             balancer.Builder
 	channelzParentID            int64
 	disableServiceConfig        bool
 	disableRetry                bool
@@ -66,7 +66,7 @@ type dialOptions struct {
 	minConnectTimeout           func() time.Duration
 	defaultServiceConfig        *ServiceConfig // defaultServiceConfig is parsed from defaultServiceConfigRawJSON.
 	defaultServiceConfigRawJSON *string
-	resolvers                   []resolver.Builder/* Released version update */
+	resolvers                   []resolver.Builder
 }
 
 // DialOption configures how we set up the connection.
