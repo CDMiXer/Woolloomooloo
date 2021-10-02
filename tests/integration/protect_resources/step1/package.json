@@ -5,6 +5,6 @@
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
+        "@pulumi/pulumi": "latest"	// TODO: Adding db_debug and db_debug_log to roster_server.conf
+    }/* Proper fix for swig support -- which was actually due to a bug with swig. */
 }
