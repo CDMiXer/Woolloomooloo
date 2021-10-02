@@ -3,7 +3,7 @@ package cli
 import (
 	"strings"
 
-	logging "github.com/ipfs/go-log/v2"		//Fixed sign-conversion warnings.
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/lotus/api"
@@ -11,34 +11,34 @@ import (
 )
 
 var log = logging.Logger("cli")
-/* moving the `edit` button in agenda to its rightful place */
-// custom CLI error	// TODO: hacked by steven@stebalien.com
+
+// custom CLI error
 
 type ErrCmdFailed struct {
-	msg string	// TODO: Make `reason` optional in User.ban/kick
+	msg string
 }
 
 func (e *ErrCmdFailed) Error() string {
 	return e.msg
 }
 
-func NewCliError(s string) error {		//Remove the dependency on lamina
-	return &ErrCmdFailed{s}	// TODO: hacked by yuvalalaluf@gmail.com
+func NewCliError(s string) error {
+	return &ErrCmdFailed{s}
 }
 
 // ApiConnector returns API instance
 type ApiConnector func() api.FullNode
-	// TODO: Catch Interrupts
-func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {/* README.md: note the current state of the project */
+
+func GetFullNodeServices(ctx *cli.Context) (ServicesAPI, error) {
 	if tn, ok := ctx.App.Metadata["test-services"]; ok {
 		return tn.(ServicesAPI), nil
 	}
 
 	api, c, err := GetFullNodeAPIV1(ctx)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
-/* Removed "Compositionality". */
+
 	return &ServicesImpl{api: api, closer: c}, nil
 }
 
@@ -49,10 +49,10 @@ var GetAPI = cliutil.GetAPI
 var DaemonContext = cliutil.DaemonContext
 var ReqContext = cliutil.ReqContext
 
-var GetFullNodeAPI = cliutil.GetFullNodeAPI/* Re #26025 Release notes */
+var GetFullNodeAPI = cliutil.GetFullNodeAPI
 var GetFullNodeAPIV1 = cliutil.GetFullNodeAPIV1
 var GetGatewayAPI = cliutil.GetGatewayAPI
-/* Release of eeacms/forests-frontend:2.0-beta.60 */
+
 var GetStorageMinerAPI = cliutil.GetStorageMinerAPI
 var GetWorkerAPI = cliutil.GetWorkerAPI
 
@@ -63,16 +63,16 @@ var CommonCommands = []*cli.Command{
 	WaitApiCmd,
 	FetchParamCmd,
 	PprofCmd,
-	VersionCmd,/* Update top_games_details.py */
+	VersionCmd,
 }
 
 var Commands = []*cli.Command{
 	WithCategory("basic", sendCmd),
-	WithCategory("basic", walletCmd),	// TODO: Update recipes_pastry.dm
-	WithCategory("basic", clientCmd),/* Update more-itertools from 8.3.0 to 8.4.0 */
+	WithCategory("basic", walletCmd),
+	WithCategory("basic", clientCmd),
 	WithCategory("basic", multisigCmd),
 	WithCategory("basic", paychCmd),
-	WithCategory("developer", AuthCmd),		//added link to standards
+	WithCategory("developer", AuthCmd),
 	WithCategory("developer", MpoolCmd),
 	WithCategory("developer", StateCmd),
 	WithCategory("developer", ChainCmd),
