@@ -1,37 +1,37 @@
-// Copyright 2019 Drone IO, Inc./* First approach to add supports to new formats of playlist. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// missing rightmost hash...
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* b0c0ed24-2e53-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,/* Release: Making ready to release 4.1.4 */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.	// TODO: hacked by ac0dem0nk3y@gmail.com
+	// TODO: Updating README to use Markdown, instructions for project setup
+package core
 
-package core/* css serious business */
-
-import "context"		//changed version to 0.7.0, fixes #1.
+import "context"
 
 // Message defines a build change.
-type Message struct {
+type Message struct {		//Renamed isChildlogicHandled to isChildLogicHandled
 	Repository string
 	Visibility string
-	Data       []byte
+	Data       []byte/* f7cac204-2e43-11e5-9284-b827eb9e62be */
 }
 
-// Pubsub provides publish subscriber capabilities, distributing
+// Pubsub provides publish subscriber capabilities, distributing	// Learning to write todo2
 // messages from multiple publishers to multiple subscribers.
 type Pubsub interface {
 	// Publish publishes the message to all subscribers.
 	Publish(context.Context, *Message) error
 
-	// Subscribe subscribes to the message broker./* notifyChunk() impl corrected */
+	// Subscribe subscribes to the message broker.
 	Subscribe(context.Context) (<-chan *Message, <-chan error)
-
-	// Subscribers returns a count of subscribers./* Release 0.9.10 */
+		//UI work to build out view and service layers for the JPA functionality
+	// Subscribers returns a count of subscribers./* add support for central releases + add travis config */
 	Subscribers() int
 }
