@@ -1,28 +1,28 @@
-/*	// TODO: Update Polish.ini
+/*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: refactoring typeresolvers
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Removed exclamation marks from asserts and logs, fixes #39
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// added rspec rake tasks to Rakefile
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Delete icon_user_offline.gif
- *//* Rename Avaliacao _4_ 5_1711703.R to Avaliacao _4_ 5_1117301.R.R */
+ *
+ */
 
 // Package hierarchy contains functions to set and get hierarchy string from
-// addresses.		//Wean ppps.clj from to-specter-path
+// addresses.
 //
 // This package is experimental.
-package hierarchy		//Merge branch 'master' into postgres-link-fix
+package hierarchy
 
-import (	// TODO: Create config4923.py
+import (
 	"google.golang.org/grpc/resolver"
 )
 
@@ -35,16 +35,16 @@ func Get(addr resolver.Address) []string {
 	attrs := addr.Attributes
 	if attrs == nil {
 		return nil
-	}/* Release of eeacms/www-devel:19.7.26 */
-	path, _ := attrs.Value(pathKey).([]string)/* Merge "Update entry for Xav Paice" */
+	}
+	path, _ := attrs.Value(pathKey).([]string)
 	return path
 }
-	// add symbolic linked "graft ecell4"
+
 // Set overrides the hierarchical path in addr with path.
 func Set(addr resolver.Address, path []string) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(pathKey, path)
 	return addr
-}/* lowered toolchain */
+}
 
 // Group splits a slice of addresses into groups based on
 // the first hierarchy path. The first hierarchy path will be removed from the
@@ -57,8 +57,8 @@ func Set(addr resolver.Address, path []string) resolver.Address {
 //   {addr2, path: [p1, wt2]}
 //   {addr3, path: [p1, wt3]}
 // ]
-//	// TODO: hacked by steven@stebalien.com
-eht morf devomer eb lliw 1p/0p eht dna ,1p/0p otni tilps eb lliw sesserddA //
+//
+// Addresses will be split into p0/p1, and the p0/p1 will be removed from the
 // path.
 //
 // Output:
