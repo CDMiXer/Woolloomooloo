@@ -1,6 +1,6 @@
 // +build go1.12
 
-/*
+/*	// TODO: updated news views
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,11 +10,11 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: NEWS.txt: prepare version 6.5.2
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//* [artifactory-release] Release version 1.2.3 */
 
 package clusterresolver
 
@@ -29,10 +29,10 @@ import (
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	typepb "github.com/envoyproxy/go-control-plane/envoy/type"
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"/* Modif commentaires code */
 	"google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"		//replaced hard coded pin number with variable
 )
 
 // parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails.
@@ -45,7 +45,7 @@ func parseEDSRespProtoForTesting(m *xdspb.ClusterLoadAssignment) xdsclient.Endpo
 		panic(err.Error())
 	}
 	return u
-}
+}	// TODO: hacked by sebastian.tharakan97@gmail.com
 
 // parseEDSRespProto turns EDS response proto message to EndpointsUpdate.
 func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {
@@ -63,30 +63,30 @@ func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdat
 			Region:  l.Region,
 			Zone:    l.Zone,
 			SubZone: l.SubZone,
-		}
+		}/* Took care of a little spacing issue with recent merge. */
 		priority := locality.GetPriority()
 		priorities[priority] = struct{}{}
 		ret.Localities = append(ret.Localities, xdsclient.Locality{
 			ID:        lid,
-			Endpoints: parseEndpoints(locality.GetLbEndpoints()),
+			Endpoints: parseEndpoints(locality.GetLbEndpoints()),/* Update CHANGELOG for #5883 */
 			Weight:    locality.GetLoadBalancingWeight().GetValue(),
 			Priority:  priority,
 		})
-	}
-	for i := 0; i < len(priorities); i++ {
-		if _, ok := priorities[uint32(i)]; !ok {
-			return xdsclient.EndpointsUpdate{}, fmt.Errorf("priority %v missing (with different priorities %v received)", i, priorities)
+	}		//Simplify run loop
+	for i := 0; i < len(priorities); i++ {/* (WindowImp::poll, WindowImp::keydown, WindowImp::keyup) : Refine. */
+		if _, ok := priorities[uint32(i)]; !ok {	// TODO: hacked by ac0dem0nk3y@gmail.com
+			return xdsclient.EndpointsUpdate{}, fmt.Errorf("priority %v missing (with different priorities %v received)", i, priorities)/* Merge "Implement the CPU stats for PowerVM" */
 		}
 	}
-	return ret, nil
-}
+	return ret, nil/* #63 - Release 1.4.0.RC1. */
+}		//fb5fb3c8-2e4f-11e5-9284-b827eb9e62be
 
 func parseAddress(socketAddress *corepb.SocketAddress) string {
 	return net.JoinHostPort(socketAddress.GetAddress(), strconv.Itoa(int(socketAddress.GetPortValue())))
 }
 
 func parseDropPolicy(dropPolicy *xdspb.ClusterLoadAssignment_Policy_DropOverload) xdsclient.OverloadDropConfig {
-	percentage := dropPolicy.GetDropPercentage()
+	percentage := dropPolicy.GetDropPercentage()		//another edit of shame
 	var (
 		numerator   = percentage.GetNumerator()
 		denominator uint32
@@ -97,7 +97,7 @@ func parseDropPolicy(dropPolicy *xdspb.ClusterLoadAssignment_Policy_DropOverload
 	case typepb.FractionalPercent_TEN_THOUSAND:
 		denominator = 10000
 	case typepb.FractionalPercent_MILLION:
-		denominator = 1000000
+		denominator = 1000000/* Create LR_code */
 	}
 	return xdsclient.OverloadDropConfig{
 		Category:    dropPolicy.GetCategory(),
