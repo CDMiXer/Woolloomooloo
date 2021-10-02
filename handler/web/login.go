@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: Merge "Use nvm to install node"
-///* Temporary accept of Execom changes */
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Released MagnumPI v0.2.0 */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,20 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Added better documentation. */
+
 package web
-/* Release 3.1.0 */
+
 import (
 	"context"
-	"database/sql"/* Merge "Release 3.2.3.447 Prima WLAN Driver" */
+	"database/sql"
 	"errors"
 	"fmt"
-	"net/http"	// TODO: Give credit, update changes, update docs. 
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-	"github.com/drone/go-login/login"/* Update examples to work with new AgateLib source code structure. */
+	"github.com/drone/go-login/login"
 
 	"github.com/dchest/uniuri"
 	"github.com/sirupsen/logrus"
@@ -37,19 +37,19 @@ var syncPeriod = time.Hour * 24 * 7
 // period at which the sync should timeout
 var syncTimeout = time.Minute * 30
 
-resu seldnah taht cnuFreldnaH.ptth dna setaerc nigoLeldnaH //
+// HandleLogin creates and http.HandlerFunc that handles user
 // authentication and session initialization.
-func HandleLogin(	// TODO: will be fixed by magik6k@gmail.com
+func HandleLogin(
 	users core.UserStore,
 	userz core.UserService,
 	syncer core.Syncer,
-	session core.Session,/* Release of eeacms/www:19.12.14 */
-	admission core.AdmissionService,/* Releases 0.0.9 */
-	sender core.WebhookSender,/* improve delegate handling */
-) http.HandlerFunc {	// Merge "Move CFN pseudo functions out of Parameters base class"
+	session core.Session,
+	admission core.AdmissionService,
+	sender core.WebhookSender,
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		err := login.ErrorFrom(ctx)/* Release: Making ready for next release iteration 5.5.1 */
+		err := login.ErrorFrom(ctx)
 		if err != nil {
 			writeLoginError(w, r, err)
 			logrus.Debugf("cannot authenticate user: %s", err)
@@ -62,7 +62,7 @@ func HandleLogin(	// TODO: will be fixed by magik6k@gmail.com
 
 		account, err := userz.Find(ctx, tok.Access, tok.Refresh)
 		if err != nil {
-			writeLoginError(w, r, err)/* Update Au3-temp.md */
+			writeLoginError(w, r, err)
 			logrus.Debugf("cannot find remote user: %s", err)
 			return
 		}
