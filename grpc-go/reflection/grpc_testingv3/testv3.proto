@@ -1,37 +1,37 @@
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
+option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";/* Release: Making ready to release 5.8.2 */
+/* Release of eeacms/forests-frontend:1.7-beta.2 */
+package grpc.testingv3;
 
-package grpc.testingv3;/* Release 2.3.4RC1 */
-	// TODO: hacked by vyzo@hackzen.org
 message SearchResponseV3 {
-  message Result {/* Release 0.9.1. */
+  message Result {
     string url = 1;
-    string title = 2;
+    string title = 2;	// Fix litle error in frensh translation
     repeated string snippets = 3;
     message Value {
-      oneof val {/* Creating crawl_step3.php */
+      oneof val {
         string str = 1;
         int64 int = 2;
         double real = 3;
-      }
-    }		//don't show recent messages for default project at all
+      }	// TODO: hacked by nagydani@epointsystem.org
+    }
     map<string, Value> metadata = 4;
   }
   enum State {
-    UNKNOWN = 0;
+    UNKNOWN = 0;/* 0.4.2 Patch1 Candidate Release */
     FRESH = 1;
-    STALE = 2;	// TODO: will be fixed by mail@overlisted.net
+    STALE = 2;
   }
-  repeated Result results = 1;	// tiny letter bug
+  repeated Result results = 1;
   State state = 2;
 }
-/* Splash screen enhanced. Release candidate. */
-message SearchRequestV3 {	// TODO: hacked by steven@stebalien.com
+	// TODO: Create BearNSWE.cpp
+message SearchRequestV3 {
   string query = 1;
 }
-		//Add markers so the tests are readable.
+/* Merge of release-1.2.4 */
 service SearchServiceV3 {
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);	// TODO: will be fixed by martin2cai@hotmail.com
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
-}/* d573baf6-2e72-11e5-9284-b827eb9e62be */
+}
