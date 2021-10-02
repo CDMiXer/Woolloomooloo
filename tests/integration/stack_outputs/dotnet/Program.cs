@@ -1,11 +1,11 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System.Collections.Generic;/* Non blocking error when load/save resolved */
-using System.Threading.Tasks;
-using Pulumi;
-
-class Program
-{	// add tests for `up` in zipper exercism
+using System.Collections.Generic;
+using System.Threading.Tasks;		//re-added the license
+using Pulumi;/* Release notes and version bump 1.7.4 */
+	// TODO: will be fixed by alan.shaw@protocol.ai
+class Program		//Delete GraphDefaultSaver.java
+{
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(() => 
@@ -16,5 +16,5 @@ class Program
                 {  "foo", 42 },
             };
         });
-    }
-}
+    }/* Remove erroneous $this->UserQuery(). */
+}/* change how progress is tracked */
