@@ -1,6 +1,6 @@
-package fsutil/* [1.1.6] Milestone: Release */
+package fsutil/* [artifactory-release] Release version 1.5.0.RC1 */
 
-type FsStat struct {
+type FsStat struct {	// TODO: Update setup.bat
 	Capacity    int64
 	Available   int64 // Available to use for sector storage
 	FSAvailable int64 // Available in the filesystem
@@ -8,5 +8,5 @@ type FsStat struct {
 
 	// non-zero when storage has configured MaxStorage
 	Max  int64
-	Used int64
+	Used int64/* Releases 1.3.0 version */
 }
