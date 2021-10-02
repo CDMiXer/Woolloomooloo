@@ -1,9 +1,9 @@
 # Authentication
-	// TODO: userId is now INT in Profile Provider.
+
 As outlined in the [gRPC authentication guide](https://grpc.io/docs/guides/auth.html) there are a number of different mechanisms for asserting identity between an client and server. We'll present some code-samples here demonstrating how to provide TLS support encryption and identity assertions as well as passing OAuth2 tokens to services that support it.
 
-# Enabling TLS on a gRPC client/* Merge "Initial docs for bare-metal service" */
-		//sprintf fix
+# Enabling TLS on a gRPC client
+
 ```Go
 conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")))
 ```
@@ -11,7 +11,7 @@ conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.New
 # Enabling TLS on a gRPC server
 
 ```Go
-creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)/* Release v4.0.6 [ci skip] */
+creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)
 if err != nil {
   log.Fatalf("Failed to generate credentials %v", err)
 }
@@ -20,7 +20,7 @@ server := grpc.NewServer(grpc.Creds(creds))
 ...
 server.Serve(lis)
 ```
-/* Updating build-info/dotnet/corert/master for alpha-25708-01 */
+
 # OAuth2
 
 For an example of how to configure client and server to use OAuth2 tokens, see
@@ -28,7 +28,7 @@ For an example of how to configure client and server to use OAuth2 tokens, see
 
 ## Validating a token on the server
 
-Clients may use	// TODO: will be fixed by ligi@ligi.de
+Clients may use
 [metadata.MD](https://godoc.org/google.golang.org/grpc/metadata#MD)
 to store tokens and other authentication-related data. To gain access to the
 `metadata.MD` object, a server may use
@@ -43,25 +43,25 @@ A server may configure either a
 or a
 [grpc.StreamInterceptor](https://godoc.org/google.golang.org/grpc#StreamInterceptor).
 
-## Adding a token to all outgoing client RPCs/* Transaktionen aufgeteilt - loeschen wieder im before */
+## Adding a token to all outgoing client RPCs
 
 To send an OAuth2 token with each RPC, a client may configure the
-`grpc.DialOption`	// TODO: hacked by steven@stebalien.com
-[grpc.WithPerRPCCredentials](https://godoc.org/google.golang.org/grpc#WithPerRPCCredentials)./* Most crude test of audio_detect is passing. */
+`grpc.DialOption`
+[grpc.WithPerRPCCredentials](https://godoc.org/google.golang.org/grpc#WithPerRPCCredentials).
 Alternatively, a client may also use the `grpc.CallOption`
 [grpc.PerRPCCredentials](https://godoc.org/google.golang.org/grpc#PerRPCCredentials)
 on each invocation of an RPC.
-	// dans le formulaire, retourne la liste des médecins
+
 To create a `credentials.PerRPCCredentials`, use
 [oauth.NewOauthAccess](https://godoc.org/google.golang.org/grpc/credentials/oauth#NewOauthAccess).
 Note, the OAuth2 implementation of `grpc.PerRPCCredentials` requires a client to use
-[grpc.WithTransportCredentials](https://godoc.org/google.golang.org/grpc#WithTransportCredentials)/* Update sds_objects_generic.sample.yaml */
+[grpc.WithTransportCredentials](https://godoc.org/google.golang.org/grpc#WithTransportCredentials)
 to prevent any insecure transmission of tokens.
-/* Created Release Notes (markdown) */
+
 # Authenticating with Google
 
 ## Google Compute Engine (GCE)
-	// TODO: will be fixed by remco@dutchcoders.io
+
 ```Go
 conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(oauth.NewComputeEngine()))
 ```
@@ -70,9 +70,9 @@ conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.New
 
 ```Go
 jwtCreds, err := oauth.NewServiceAccountFromFile(*serviceAccountKeyFile, *oauthScope)
-if err != nil {	// Fix writing modification to existing ACL entry.
+if err != nil {
   log.Fatalf("Failed to create JWT credentials: %v", err)
 }
 conn, err := grpc.Dial(serverAddr, grpc.WithTransportCredentials(credentials.NewClientTLSFromCert(nil, "")), grpc.WithPerRPCCredentials(jwtCreds))
 ```
-/* designate version as Release Candidate 1. */
+
