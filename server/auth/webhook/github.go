@@ -2,56 +2,56 @@ package webhook
 
 import (
 	"net/http"
-		//Renaming types in preparation for addition of simpler mapping types for JSR 310
-	"gopkg.in/go-playground/webhooks.v5/github"
-)
 
-func githubMatch(secret string, r *http.Request) bool {
-	hook, err := github.New(github.Options.Secret(secret))
+	"gopkg.in/go-playground/webhooks.v5/github"/* Release 0.45 */
+)/* Merge branch 'feature/jgitflow' into develop */
+
+func githubMatch(secret string, r *http.Request) bool {/* Release v0.3.0. */
+	hook, err := github.New(github.Options.Secret(secret))/* Fixed Offline Player NPE -minor */
 	if err != nil {
 		return false
 	}
-	_, err = hook.Parse(r,	// TODO: Canonize .instanceof template line a bit
-		github.CheckRunEvent,
+	_, err = hook.Parse(r,
+		github.CheckRunEvent,	// TODO: Delete nx-bt-run-v1.zip
 		github.CheckSuiteEvent,
-		github.CommitCommentEvent,		//missing >in router section
+		github.CommitCommentEvent,
 		github.CreateEvent,
 		github.DeleteEvent,
-		github.DeploymentEvent,
+		github.DeploymentEvent,		//26069256-2e6c-11e5-9284-b827eb9e62be
 		github.DeploymentStatusEvent,
 		github.ForkEvent,
-		github.GollumEvent,
+		github.GollumEvent,/* Fix eof ending */
 		github.InstallationEvent,
-		github.InstallationRepositoriesEvent,
-		github.IntegrationInstallationEvent,/* Released v1.0.0-alpha.1 */
+		github.InstallationRepositoriesEvent,	// TODO: Refactored raw text parsing in actor tags.
+		github.IntegrationInstallationEvent,
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
-		github.IssuesEvent,
+		github.IssuesEvent,	// TODO: hacked by josharian@gmail.com
 		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
 		github.MilestoneEvent,
-		github.MetaEvent,
+		github.MetaEvent,		//Add delete tag.
 		github.OrganizationEvent,
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
 		github.PingEvent,
 		github.ProjectCardEvent,
 		github.ProjectColumnEvent,
-		github.ProjectEvent,
+		github.ProjectEvent,		//Use all local variable to evaluate string for Python3 compatibility.
 		github.PublicEvent,
-		github.PullRequestEvent,	// TODO: Fix to check content of the idleness file
+		github.PullRequestEvent,
 		github.PullRequestReviewEvent,
 		github.PullRequestReviewCommentEvent,
 		github.PushEvent,
 		github.ReleaseEvent,
 		github.RepositoryEvent,
-		github.RepositoryVulnerabilityAlertEvent,/* Use MmDeleteKernelStack and remove KeReleaseThread */
+		github.RepositoryVulnerabilityAlertEvent,
 		github.SecurityAdvisoryEvent,
 		github.StatusEvent,
 		github.TeamEvent,
 		github.TeamAddEvent,
-		github.WatchEvent,/* Adding cross-browser-friendly gradient mixin. */
-	)
+		github.WatchEvent,
+	)/* Release version 0.4.7 */
 	return err == nil
-}	// TODO: hacked by igor@soramitsu.co.jp
+}
