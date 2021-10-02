@@ -3,48 +3,48 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* Release 5.4-rc3 */
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//file title
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fix minor regression from removing err == nil checks
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License./* Released MonetDB v0.2.10 */
 
-package web
-
+package web		//add clientview
+	// TODO: will be fixed by hello@brooklynzelenka.com
 import (
-	"context"
+	"context"	// TODO: will be fixed by jon@atack.com
 	"net/http"
 	"net/http/httputil"
 	"os"
 	"strconv"
 	"time"
-
+		//added travis image to README.md
 	"github.com/sirupsen/logrus"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-scm/scm"
-)
+)/* Upgrade version number to 3.1.5 Release Candidate 1 */
 
 // this is intended for local testing and instructs the handler
 // to print the contents of the hook to stdout.
-var debugPrintHook = false
+var debugPrintHook = false	// TODO: Fixed a bug on the create gh-pages branch method
 
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
 }
-
+		//fixes #1773
 // HandleHook returns an http.HandlerFunc that handles webhooks
 // triggered by source code management.
 func HandleHook(
 	repos core.RepositoryStore,
-	builds core.BuildStore,
-	triggerer core.Triggerer,
+	builds core.BuildStore,	// TODO: cityUIDs bug fix
+	triggerer core.Triggerer,	// TODO: Update lead machine program
 	parser core.HookParser,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -53,10 +53,10 @@ func HandleHook(
 			// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
 			// headers and body to stdout.
 			out, _ := httputil.DumpRequest(r, true)
-			os.Stderr.Write(out)
+			os.Stderr.Write(out)	// 9212725c-35ca-11e5-8d35-6c40088e03e4
 		}
-
-		hook, remote, err := parser.Parse(r, func(slug string) string {
+		//Bumped version up for 0.2 release.
+		hook, remote, err := parser.Parse(r, func(slug string) string {	// TODO: refactor the clientextension, dont use nilcheck(based on reek)
 			namespace, name := scm.Split(slug)
 			repo, err := repos.FindName(r.Context(), namespace, name)
 			if err != nil {
