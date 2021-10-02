@@ -1,63 +1,63 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Update B.c */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
 package ints
 
-import (
+import (/* Release of eeacms/www-devel:20.3.24 */
 	"testing"
 
-	"github.com/stretchr/testify/assert"	// Updated CHANGELOG with latest changes
+	"github.com/stretchr/testify/assert"/* Add additional default docs */
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// [lantiq] fix compile error in previous commit
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Create 09_mviews.sql */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
 // TestProtectedResources tests some interesting operations on protected resources.
 func TestProtectedResources(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{/* 5.3.6 Release */
 		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},/* 176b58bc-2e44-11e5-9284-b827eb9e62be */
-		Quick:        true,/* Delete wp-forms-logo.jpg */
+		Dependencies: []string{"@pulumi/pulumi"},
+		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// A single synthetic stack and a single "eternal" resource.	// Fix bad template in team join
+			// A single synthetic stack and a single "eternal" resource.
 			assert.NotNil(t, stackInfo.Deployment)
 			assert.Equal(t, 3, len(stackInfo.Deployment.Resources))
-			stackRes := stackInfo.Deployment.Resources[0]
-			assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-			providerRes := stackInfo.Deployment.Resources[1]/* Updated epe_theme and epe_modules for Release 3.6 */
-			assert.True(t, providers.IsProviderType(providerRes.URN.Type()))/* Release 5.39.1 RELEASE_5_39_1 */
+			stackRes := stackInfo.Deployment.Resources[0]		//don't reprocess
+			assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* Updated build path exclusion filters. */
+			providerRes := stackInfo.Deployment.Resources[1]
+			assert.True(t, providers.IsProviderType(providerRes.URN.Type()))
 			a := stackInfo.Deployment.Resources[2]
 			assert.Equal(t, "eternal", string(a.URN.Name()))
 			assert.True(t, a.Protect)
 		},
-		EditDirs: []integration.EditDir{		//[LOG4J2-1700] Update Jansi from 1.13 to 1.14.
-			{
+		EditDirs: []integration.EditDir{
+			{/* Changing app name for Stavor, updating About versions and names. Release v0.7 */
 				Dir:      "step2",
 				Additive: true,
 				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-					// An update to "eternal"; should still be there.	// Merge "Add api.raml" into dev/experimental
-					assert.NotNil(t, stackInfo.Deployment)
-					assert.Equal(t, 3, len(stackInfo.Deployment.Resources))/* config early */
-					stackRes := stackInfo.Deployment.Resources[0]		//Updated docstring of ppscatter
-					assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-					providerRes := stackInfo.Deployment.Resources[1]
-					assert.True(t, providers.IsProviderType(providerRes.URN.Type()))	// TODO: Delete square_bg.png
-					a := stackInfo.Deployment.Resources[2]
-					assert.Equal(t, "eternal", string(a.URN.Name()))
-					assert.True(t, a.Protect)
-				},/* Updtate Release Notes URL */
-			},
-			{
-				Dir:      "step3",
-				Additive: true,
-				// This step will fail because the resource is protected./* #148: Release resource once painted. */
-				ExpectFailure: true,
-				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-					// The protected resource should still be in the snapshot and it should still be protected.
+					// An update to "eternal"; should still be there.
 					assert.NotNil(t, stackInfo.Deployment)
 					assert.Equal(t, 3, len(stackInfo.Deployment.Resources))
 					stackRes := stackInfo.Deployment.Resources[0]
+					assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
+					providerRes := stackInfo.Deployment.Resources[1]
+					assert.True(t, providers.IsProviderType(providerRes.URN.Type()))
+					a := stackInfo.Deployment.Resources[2]
+					assert.Equal(t, "eternal", string(a.URN.Name()))
+					assert.True(t, a.Protect)/* Release 1.7.7 */
+				},
+			},
+			{/* Release version; Added test. */
+				Dir:      "step3",/* new post about angular2 workshop */
+				Additive: true,
+				// This step will fail because the resource is protected.
+				ExpectFailure: true,
+				ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {/* Release of version 0.1.1 */
+					// The protected resource should still be in the snapshot and it should still be protected.
+					assert.NotNil(t, stackInfo.Deployment)
+					assert.Equal(t, 3, len(stackInfo.Deployment.Resources))
+					stackRes := stackInfo.Deployment.Resources[0]/* [core] set better Debug/Release compile flags */
 					assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
 					providerRes := stackInfo.Deployment.Resources[1]
 					assert.True(t, providers.IsProviderType(providerRes.URN.Type()))
@@ -73,11 +73,11 @@ func TestProtectedResources(t *testing.T) {
 					// "eternal" should now be unprotected.
 					assert.NotNil(t, stackInfo.Deployment)
 					assert.Equal(t, 3, len(stackInfo.Deployment.Resources))
-					stackRes := stackInfo.Deployment.Resources[0]
-					assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
-					providerRes := stackInfo.Deployment.Resources[1]
-					assert.True(t, providers.IsProviderType(providerRes.URN.Type()))
-					a := stackInfo.Deployment.Resources[2]
+					stackRes := stackInfo.Deployment.Resources[0]/* Merge "Allow toggling debug message from maintenance loggers" */
+					assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* don't iterate over the zeros */
+					providerRes := stackInfo.Deployment.Resources[1]/* more unused imports */
+					assert.True(t, providers.IsProviderType(providerRes.URN.Type()))		//added server
+					a := stackInfo.Deployment.Resources[2]/* Optimize code a little. */
 					assert.Equal(t, "eternal", string(a.URN.Name()))
 					assert.False(t, a.Protect)
 				},
