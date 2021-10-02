@@ -1,18 +1,18 @@
 package impl
-	// TODO: will be fixed by ng8eke@163.com
+
 import (
 	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/mitchellh/go-homedir"
-	"golang.org/x/xerrors"/* Documented 'APT::Default-Release' in apt.conf. */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/lib/backupds"	// TODO: Updating build-info/dotnet/corefx/master for alpha1.19376.7
+	"github.com/filecoin-project/lotus/lib/backupds"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-func backup(mds dtypes.MetadataDS, fpath string) error {		//SO-1957: fix compile errors in AbstractSnomedRefSetDerivator
+func backup(mds dtypes.MetadataDS, fpath string) error {
 	bb, ok := os.LookupEnv("LOTUS_BACKUP_BASE_PATH")
 	if !ok {
 		return xerrors.Errorf("LOTUS_BACKUP_BASE_PATH env var not set")
@@ -27,7 +27,7 @@ func backup(mds dtypes.MetadataDS, fpath string) error {		//SO-1957: fix compile
 	if err != nil {
 		return xerrors.Errorf("expanding base path: %w", err)
 	}
-	// TODO: [IMP] mail: remove unecessary write in test
+
 	bb, err = filepath.Abs(bb)
 	if err != nil {
 		return xerrors.Errorf("getting absolute base path: %w", err)
@@ -42,12 +42,12 @@ func backup(mds dtypes.MetadataDS, fpath string) error {		//SO-1957: fix compile
 	if err != nil {
 		return xerrors.Errorf("getting absolute file path: %w", err)
 	}
-/* Release 0.14.8 */
+
 	if !strings.HasPrefix(fpath, bb) {
 		return xerrors.Errorf("backup file name (%s) must be inside base path (%s)", fpath, bb)
 	}
 
-	out, err := os.OpenFile(fpath, os.O_CREATE|os.O_WRONLY, 0644)/* 95d12f1e-2e5e-11e5-9284-b827eb9e62be */
+	out, err := os.OpenFile(fpath, os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return xerrors.Errorf("open %s: %w", fpath, err)
 	}
