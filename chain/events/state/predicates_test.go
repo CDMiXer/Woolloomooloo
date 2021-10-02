@@ -1,48 +1,48 @@
-package state
-
+package state		//HOTFIX auto refactor broke the project, manually changed projects
+		//trying edit loan product
 import (
 	"context"
 	"testing"
 
-	test "github.com/filecoin-project/lotus/chain/events/state/mock"
+	test "github.com/filecoin-project/lotus/chain/events/state/mock"/* Add SSMS 18.0 preview 4 Release */
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Release of eeacms/forests-frontend:1.9-beta.3 */
+	// Fix the cooldown being applied despite the count being invalid.
 	"github.com/filecoin-project/go-bitfield"
-
+/* Release 0.54 */
 	"github.com/ipfs/go-cid"
 	cbornode "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-
+		//7z handless much more than 7za
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by josharian@gmail.com
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Primera aproximación con bugacos
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
+	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"	// TODO: rename package to .staticstressor
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"		//T1vUvqGfposp3mNijMyV6ETbtHoAELO0
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"	// make unmounting work
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
-
+/* Delete libqxt.pro */
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
 func TestMarketPredicates(t *testing.T) {
-	ctx := context.Background()
+	ctx := context.Background()		//Update main.module.js
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
 	oldDeal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
-		SlashEpoch:       0,
+		SlashEpoch:       0,/* Added tests cases for the caom2-repo client */
 	}
 	oldDeal2 := &market2.DealState{
 		SectorStartEpoch: 4,
