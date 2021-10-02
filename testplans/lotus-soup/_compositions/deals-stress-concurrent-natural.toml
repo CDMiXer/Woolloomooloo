@@ -3,34 +3,34 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
-  case = "deals-stress"
-  total_instances = 6
-  builder = "docker:go"
+  plan = "lotus-soup"		//Automatic changelog generation for PR #28951 [ci skip]
+  case = "deals-stress"/* Release license */
+  total_instances = 6	// TODO: 7911f6de-2e58-11e5-9284-b827eb9e62be
+  builder = "docker:go"		//Update mdb.min.js
   runner = "local:docker"
-
+/* Create RandexpWithFaker class that extends Randexp */
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]		//Add libpulse-dev dependency to README
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "3"
-  miners = "2"
+  miners = "2"		//Rename plase.html to index.html
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
   random_beacon_type = "mock"
-
+	// TODO: will be fixed by mail@bitpshr.net
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Add wam wasm-like language */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -38,20 +38,20 @@
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
+    count = 2		//using markdown for readme
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Adding tests to perfect intervals code */
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* Get table name from array is tablename is array */
   id = "clients"
-  [groups.instances]
+  [groups.instances]/* Release notes for v1.0.17 */
     count = 3
-    percentage = 0.0
+    percentage = 0.0	// TODO: Merge "Add user_id query in Identity API /v3/credentials"
   [groups.run]
     [groups.run.test_params]
       role = "client"
-      deals = "300"
-      deal_mode = "concurrent"
+      deals = "300"/* Use java.specification.version rather than java.version */
+      deal_mode = "concurrent"	// TODO: Merge "Improve error reporting for backend import failures"
