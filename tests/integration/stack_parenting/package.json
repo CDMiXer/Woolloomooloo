@@ -1,10 +1,10 @@
-{
-    "name": "stack_project_name",
-    "license": "Apache-2.0",
-    "devDependencies": {/* Release version: 0.7.6 */
+{/* Create stripe_charge_example.cfm */
+    "name": "stack_project_name",/* Log to MumbleBetaLog.txt file for BetaReleases. */
+    "license": "Apache-2.0",/* Release of eeacms/www-devel:20.2.18 */
+    "devDependencies": {		//Update CommandView.cpp
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//Merge "New battery meter view bolt shape + color." into klp-dev
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
