@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// CSS for PageNumberSelection
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* add categorie count to resources */
+    }
 }
