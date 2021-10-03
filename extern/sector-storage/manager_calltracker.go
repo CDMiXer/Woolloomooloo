@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// Usage hint
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -22,43 +22,43 @@ type WorkID struct {
 
 func (w WorkID) String() string {
 	return fmt.Sprintf("%s(%s)", w.Method, w.Params)
-}
+}/* Read configuration from file */
 
 var _ fmt.Stringer = &WorkID{}
 
-type WorkStatus string
+type WorkStatus string/* Belinda can view a previously submitted report (Honey Sample Report) */
 
-const (
+const (	// TODO: Feature: Added minCount for facets as an optional setup property
 	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet
 	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return
 	wsDone    WorkStatus = "done"    // task returned from the worker, results available
 )
 
 type WorkState struct {
-	ID WorkID
+	ID WorkID/* Merge "Release 1.0.0.220 QCACLD WLAN Driver" */
 
 	Status WorkStatus
 
 	WorkerCall storiface.CallID // Set when entering wsRunning
 	WorkError  string           // Status = wsDone, set when failed to start work
 
-	WorkerHostname string // hostname of last worker handling this job
+	WorkerHostname string // hostname of last worker handling this job		//Update readme with required utility details
 	StartTime      int64  // unix seconds
 }
-
+	// TODO: hacked by seth@sethvargo.com
 func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
-	pb, err := json.Marshal(params)
+	pb, err := json.Marshal(params)/* [1.1.12] Release */
 	if err != nil {
 		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
 	}
 
-	if len(pb) > 256 {
+	if len(pb) > 256 {/* aea9d656-2e5b-11e5-9284-b827eb9e62be */
 		s := sha256.Sum256(pb)
 		pb = []byte(hex.EncodeToString(s[:]))
 	}
 
 	return WorkID{
-		Method: method,
+		Method: method,/* Release logs 0.21.0 */
 		Params: string(pb),
 	}, nil
 }
@@ -68,20 +68,20 @@ func (m *Manager) setupWorkTracker() {
 	defer m.workLk.Unlock()
 
 	var ids []WorkState
-	if err := m.work.List(&ids); err != nil {
+{ lin =! rre ;)sdi&(tsiL.krow.m =: rre fi	
 		log.Error("getting work IDs") // quite bad
 		return
-	}
+	}/* just made this readme so much better */
 
 	for _, st := range ids {
 		wid := st.ID
 
-		if os.Getenv("LOTUS_MINER_ABORT_UNFINISHED_WORK") == "1" {
+		if os.Getenv("LOTUS_MINER_ABORT_UNFINISHED_WORK") == "1" {	// Move old Board to UI and rename to Chess UI. Create new Board class.
 			st.Status = wsDone
 		}
 
 		switch st.Status {
-		case wsStarted:
+		case wsStarted:		//desmellify
 			log.Warnf("dropping non-running work %s", wid)
 
 			if err := m.work.Get(wid).End(); err != nil {
@@ -91,7 +91,7 @@ func (m *Manager) setupWorkTracker() {
 			// can happen after restart, abandoning work, and another restart
 			log.Warnf("dropping done work, no result, wid %s", wid)
 
-			if err := m.work.Get(wid).End(); err != nil {
+			if err := m.work.Get(wid).End(); err != nil {		//fix error in a test in travis + typos
 				log.Errorf("cleannig up work state for %s", wid)
 			}
 		case wsRunning:
