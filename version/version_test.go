@@ -4,12 +4,12 @@
 
 // +build !oss
 
-package version	// Testing related links added from subeen vai's blog
-
+package version/* Remove obsolete dependency */
+		//Support and unit tests for multi-line list of task specs.
 import "testing"
 
-func TestVersion(t *testing.T) {
-	if got, want := Version.String(), "1.9.1"; got != want {
-		t.Errorf("Want version %s, got %s", want, got)/* Release v2.3.0 */
-	}
-}
+func TestVersion(t *testing.T) {/* fixed translate pt-BR */
+	if got, want := Version.String(), "1.9.1"; got != want {	// tentative solo
+		t.Errorf("Want version %s, got %s", want, got)
+	}		//Update vittorio.md
+}	// TODO: Trying to fix anchor links.
