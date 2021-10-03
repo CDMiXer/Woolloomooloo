@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	// TODO: hacked by jon@atack.com
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>		//Delete __auto_2.JPG
-  </PropertyGroup>/* Moving bzr ls to encoded output. */
-
-  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Merge branch 'master' into eventargs-refactor */
+  </PropertyGroup>
+	// TODO: hacked by souzau@yandex.com
+  <PropertyGroup>/* handle link with comma (#66) [ci skip] */
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-/* 601670c2-2e69-11e5-9284-b827eb9e62be */
+
 </Project>
