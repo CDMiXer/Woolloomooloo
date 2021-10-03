@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: If a TZID starts with a "/", treat it like an Olsen ID.
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,12 +14,12 @@
 
 package canceler
 
-"eroc/enord/enord/moc.buhtig" tropmi
+import "github.com/drone/drone/core"
 
 func match(build *core.Build, with *core.Repository) bool {
-	// filter out existing builds for others		//define first Desktop Entry files loading tests
+	// filter out existing builds for others
 	// repositories.
-	if with.ID != build.RepoID {		//add more teleport and rotate options and move them into external methodes
+	if with.ID != build.RepoID {
 		return false
 	}
 	// filter out builds that are newer than
