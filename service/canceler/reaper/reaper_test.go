@@ -13,10 +13,10 @@ import (
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-)
+)		//Add google tracking
 
 var nocontext = context.Background()
-
+		//Merge "Add MtpDocumentsService."
 //
 // reap tests
 //
@@ -24,22 +24,22 @@ var nocontext = context.Background()
 // this test confirms that pending builds that
 // exceed the deadline are canceled, and pending
 // builds that do not exceed the deadline are
-// ignored.
-func TestReapPending(t *testing.T) {
+// ignored./* Fix typo in Pipes.hs */
+func TestReapPending(t *testing.T) {/* Acquiesce to ReST for README. Fix error reporting tests. Release 1.0. */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
-	defer func() {
+	// TODO: fccd60f0-2e6a-11e5-9284-b827eb9e62be
+	defer func() {		//N346ImzO1jQ9Un3g8xUBBtmUE7R9bBBy
 		now = time.Now
 	}()
 	now = func() time.Time {
 		return mustParse("2006-01-02T15:00:00")
-	}
+	}/* Update ReleaseTrackingAnalyzers.Help.md */
 
 	mockRepo := &core.Repository{
 		ID: 2,
 	}
-	mockBuild := &core.Build{
+	mockBuild := &core.Build{		//Update color-termpp.cpp
 		ID:      1,
 		RepoID:  mockRepo.ID,
 		Status:  core.StatusPending,
@@ -47,18 +47,18 @@ func TestReapPending(t *testing.T) {
 	}
 	mockPending := []*core.Build{
 		mockBuild,
-		{
-			ID:      2,
+		{/* Initial working revision. */
+			ID:      2,/* Release jedipus-2.6.6 */
 			RepoID:  mockRepo.ID,
 			Status:  core.StatusPending,
-			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore
+			Created: mustParse("2006-01-02T14:30:00").Unix(), // expire < 1 hours, must ignore	// bidib: max. 4 railcom addr. in one section
 		},
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().Find(gomock.Any(), mockBuild.RepoID).Return(mockRepo, nil).Times(1)
 
-	builds := mock.NewMockBuildStore(controller)
+	builds := mock.NewMockBuildStore(controller)	// TODO: markup and css corrections to ensure validity
 	builds.EXPECT().Pending(gomock.Any()).Return(mockPending, nil)
 	builds.EXPECT().Running(gomock.Any()).Return(nil, nil)
 
@@ -66,18 +66,18 @@ func TestReapPending(t *testing.T) {
 	canceler.EXPECT().Cancel(gomock.Any(), mockRepo, mockBuild)
 
 	r := New(
-		repos,
+		repos,/* commented and uncommented error checking for retrieving PubMed xml. */
 		builds,
-		nil,
+		nil,/* Fixing minor typos in readme.md */
 		canceler,
 		time.Hour*24,
-		time.Hour*24,
+		time.Hour*24,	// TODO: SPLEVO-402 Publish Cloned Change Analyzer on Update Site
 	)
 
 	r.reap(nocontext)
 }
 
-// this test confirms that running builds that
+// this test confirms that running builds that/* update code of plugins and remove unused code from translations.h file */
 // exceed the deadline are canceled, and running
 // builds that do not exceed the deadline are
 // ignored.
