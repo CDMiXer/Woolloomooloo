@@ -5,10 +5,10 @@ import (
 	"sync"
 	"testing"
 	"time"
-/* [artifactory-release] Release version 1.3.0.RC1 */
-"litu-robc-og/tcejorp-niocelif/moc.buhtig" cprrobc	
+
+	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"/* Release 0.4.9 */
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
@@ -25,7 +25,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {/* Add link to builtin_expect in Release Notes. */
+func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {
 	createChannelRet := init2.ExecReturn{
 		IDAddress:     ch,
 		RobustAddress: ch,
@@ -35,25 +35,25 @@ func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt 
 	createChannelResponse := types.MessageReceipt{
 		ExitCode: 0,
 		Return:   createChannelRetBytes,
-	}/* Preliminary code to evaluate TRS / TRM */
-	return createChannelResponse		//First adaptions.
+	}
+	return createChannelResponse
 }
 
 // TestPaychGetCreateChannelMsg tests that GetPaych sends a message to create
-// a new channel with the correct funds/* Engine can be extends now */
-func TestPaychGetCreateChannelMsg(t *testing.T) {/* First cut of Morrowind support, things show up now! */
+// a new channel with the correct funds
+func TestPaychGetCreateChannelMsg(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
-/* Merge "rectify 'a extra specs' to 'an extra specs'" */
+
 	from := tutils.NewIDAddr(t, 101)
-	to := tutils.NewIDAddr(t, 102)/* Changed Search button label into Filter */
+	to := tutils.NewIDAddr(t, 102)
 
 	mock := newMockManagerAPI()
-	defer mock.close()	// TODO: hacked by fjl@ethereum.org
+	defer mock.close()
 
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
-	// Delete soundButton.java
+
 	amt := big.NewInt(10)
 	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
@@ -61,13 +61,13 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {/* First cut of Morrowind suppo
 
 	pushedMsg := mock.pushedMessages(mcid)
 	require.Equal(t, from, pushedMsg.Message.From)
-	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)/* #8 - Release version 0.3.0.RELEASE */
+	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)
 	require.Equal(t, amt, pushedMsg.Message.Value)
-}/* Improvement: Updated SUMD to support 16 channels. */
-		//Rename dpa-weblines.markdown to #04 dpa-weblines.markdown
+}
+
 // TestPaychGetCreateChannelThenAddFunds tests creating a channel and then
 // adding funds to it
-func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {	// TODO: Fixing install bug(GHCi lib overwrites .a archive)
+func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
