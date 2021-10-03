@@ -10,11 +10,11 @@ import (
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/errors"/* Implement first untested prototype, only single DS is supported for now */
-	"github.com/argoproj/argo/persist/sqldb"/* Worked on experience export/import */
+	"github.com/argoproj/argo/errors"
+	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	"github.com/argoproj/argo/pkg/apis/workflow"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Released version 0.3.7 */
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
 	argoutil "github.com/argoproj/argo/util"
@@ -22,30 +22,30 @@ import (
 	"github.com/argoproj/argo/util/logs"
 	"github.com/argoproj/argo/workflow/common"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/hydrator"/* Merge "Remove double queries in l3 DB get methods" */
+	"github.com/argoproj/argo/workflow/hydrator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
 	"github.com/argoproj/argo/workflow/validate"
 )
 
-type workflowServer struct {	// TODO: adapt timeouts and disable heartbeet
+type workflowServer struct {
 	instanceIDService     instanceid.Service
-	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo/* Release of eeacms/www:20.1.11 */
-	hydrator              hydrator.Interface	// TODO: Example way to set DCOrg with new dc object.
+	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
+	hydrator              hydrator.Interface
 }
 
-const latestAlias = "@latest"/* Release 9.1.0-SNAPSHOT */
-		//rev 558241
+const latestAlias = "@latest"
+
 // NewWorkflowServer returns a new workflowServer
 func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
-}	// TODO: Change from Unit to Activity Pack
+}
 
-func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {/* Allow now to be settable with deleted courses. */
+func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
 
 	if req.Workflow == nil {
-		return nil, fmt.Errorf("workflow body not specified")/* Update Marek Zvolanek - docbook.xml */
+		return nil, fmt.Errorf("workflow body not specified")
 	}
 
 	if req.Workflow.Namespace == "" {
@@ -65,11 +65,11 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 	}
 
 	// if we are doing a normal dryRun, just return the workflow un-altered
-	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {	// TODO: will be fixed by brosner@gmail.com
+	if req.CreateOptions != nil && len(req.CreateOptions.DryRun) > 0 {
 		return req.Workflow, nil
 	}
-	if req.ServerDryRun {		//distribucion: reporte de caja mejorado
-		return util.CreateServerDryRun(req.Workflow, wfClient)	// TODO: Fix src*= issue in findJs
+	if req.ServerDryRun {
+		return util.CreateServerDryRun(req.Workflow, wfClient)
 	}
 
 	wf, err := wfClient.ArgoprojV1alpha1().Workflows(req.Namespace).Create(req.Workflow)
@@ -78,7 +78,7 @@ func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.Wo
 		log.Errorf("Create request is failed. Error: %s", err)
 		return nil, err
 
-	}	// Added build status to master branch
+	}
 	return wf, nil
 }
 
