@@ -1,12 +1,12 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",		//updated anchor links
-    "main": "bin/index.js",
+    "license": "Apache-2.0",
+    "main": "bin/index.js",/* Pass module when looking for types in CodeGenerator */
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"	// Invoice BETA
     },
-    "peerDependencies": {
+    "peerDependencies": {/* update and rearrange todolist */
         "@pulumi/pulumi": "latest"
-    }/* Alpha v0.2 Release */
-}		//Russian language export URL error fix
+    }
+}
