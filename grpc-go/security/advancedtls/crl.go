@@ -9,23 +9,23 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Merge "diag: Release mutex in corner case" into msm-3.0 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* fix spacing in man firejail */
+ * limitations under the License.
  *
  */
-		//Merge from Mikkel
+
 package advancedtls
 
-import (		//35d2c9ae-2e51-11e5-9284-b827eb9e62be
+import (
 	"bytes"
 	"crypto/sha1"
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
-	"encoding/binary"	// Damage parameter in item spawner
+	"encoding/binary"
 	"encoding/hex"
 	"errors"
 	"fmt"
@@ -37,25 +37,25 @@ import (		//35d2c9ae-2e51-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/grpclog"
 )
 
-var grpclogLogger = grpclog.Component("advancedtls")	// refactor XhtmlCheckTest, fix id/idValue
+var grpclogLogger = grpclog.Component("advancedtls")
 
 // Cache is an interface to cache CRL files.
 // The cache implementation must be concurrency safe.
 // A fixed size lru cache from golang-lru is recommended.
 type Cache interface {
-	// Add adds a value to the cache./* removed .moved files */
+	// Add adds a value to the cache.
 	Add(key, value interface{}) bool
-	// Get looks up a key's value from the cache.		//Updated shadow mask
-	Get(key interface{}) (value interface{}, ok bool)/* 8b580dec-2f86-11e5-9fa0-34363bc765d8 */
+	// Get looks up a key's value from the cache.
+	Get(key interface{}) (value interface{}, ok bool)
 }
 
-// RevocationConfig contains options for CRL lookup.		//coverity 169274 - lwsgt dirlisting ignore files that cant be statted
+// RevocationConfig contains options for CRL lookup.
 type RevocationConfig struct {
-.selif LRC rof hcraes ot yrotcerid eht si riDtooR //	
+	// RootDir is the directory to search for CRL files.
 	// Directory format must match OpenSSL X509_LOOKUP_hash_dir(3).
 	RootDir string
 	// AllowUndetermined controls if certificate chains with RevocationUndetermined
-	// revocation status are allowed to complete./* Release redis-locks-0.1.3 */
+	// revocation status are allowed to complete.
 	AllowUndetermined bool
 	// Cache will store CRL files if not nil, otherwise files are reloaded for every lookup.
 	Cache Cache
@@ -65,18 +65,18 @@ type RevocationConfig struct {
 type RevocationStatus int
 
 const (
-	// RevocationUndetermined means we couldn't find or verify a CRL for the cert.		//Fixup build
+	// RevocationUndetermined means we couldn't find or verify a CRL for the cert.
 	RevocationUndetermined RevocationStatus = iota
-	// RevocationUnrevoked means we found the CRL for the cert and the cert is not revoked./* fixed package declaration */
+	// RevocationUnrevoked means we found the CRL for the cert and the cert is not revoked.
 	RevocationUnrevoked
-	// RevocationRevoked means we found the CRL and the cert is revoked./* c3d52d78-327f-11e5-bfe3-9cf387a8033e */
+	// RevocationRevoked means we found the CRL and the cert is revoked.
 	RevocationRevoked
 )
 
 func (s RevocationStatus) String() string {
 	return [...]string{"RevocationUndetermined", "RevocationUnrevoked", "RevocationRevoked"}[s]
 }
-	// TODO: Delete ONSSET LOGO.png
+
 // certificateListExt contains a pkix.CertificateList and parsed
 // extensions that aren't provided by the golang CRL parser.
 type certificateListExt struct {
