@@ -1,36 +1,36 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Jordan RNN */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* 71173ba4-2f86-11e5-89aa-34363bc765d8 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package step
 
-import (	// TODO: Set branch alias
+import (
 	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 )
-/* Added two global constants: GSADMINPATH and GSROOTPATH */
-// New returns a new StepStore./* Merge branch 'master' into task/add_from_to_logger */
-func New(db *db.DB) core.StepStore {		//* second try with hunspell
+
+// New returns a new StepStore.
+func New(db *db.DB) core.StepStore {
 	return &stepStore{db}
 }
-/* Time the entire iterative analysis */
+
 type stepStore struct {
 	db *db.DB
 }
 
-func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {/* Remove instances of .live & .die in jQuery scripts. Closes #63. */
+func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
 	var out []*core.Step
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"step_stage_id": id}
@@ -49,7 +49,7 @@ func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {/
 }
 
 func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
-	out := &core.Step{ID: id}/* Release v10.32 */
+	out := &core.Step{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
@@ -58,23 +58,23 @@ func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})/* Release of eeacms/bise-backend:v10.0.28 */
+	})
 	return out, err
 }
-/* Upgrade to bouncycastle 1.54 jars */
-func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {/* Fix JS compilation without an env declared */
+
+func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
 	out := &core.Step{StageID: id, Number: number}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
-		query, args, err := binder.BindNamed(queryNumber, params)/* Release v1.4.4 */
-		if err != nil {/* Delete newton.md */
-			return err/* Release 2.02 */
+		query, args, err := binder.BindNamed(queryNumber, params)
+		if err != nil {
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
 	return out, err
-}/* Release version 1.0.3 */
+}
 
 func (s *stepStore) Create(ctx context.Context, step *core.Step) error {
 	if s.db.Driver() == db.Postgres {
