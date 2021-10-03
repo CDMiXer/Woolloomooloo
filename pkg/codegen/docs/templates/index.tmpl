@@ -1,7 +1,7 @@
----/* updated readme to use easier command for ssh */
-title: "{{ .Title }}"
+---
+title: "{{ .Title }}"/* Merge "Fix brctl calls" */
 title_tag: "{{ .TitleTag }}"
-meta_desc: "{{ .PackageDescription }}"
+meta_desc: "{{ .PackageDescription }}"		//Pom fixes, and move to dep-loader system, no pack-in libs
 {{- if .Menu }}
 menu:
     reference:
@@ -13,24 +13,24 @@ menu:
 {{ htmlSafe "<!-- Do not edit by hand unless you're certain you know what you are doing! -->" }}
 
 {{ htmlSafe .PackageDescription }}
-<!--/* Release script */
+<!--
     This comment ensures that there is always a new-line between the
     package description and the start of the headers. This comment
-    will not be included in the generated markdown.		//set correct target for package api
--->
-	// Fix search bar CSS
+    will not be included in the generated markdown.
+-->		//removed Tagit's url since it's not live anymore
+
 {{- if ne (len .Modules) 0 -}}
-{{ template "index_modules" .Modules }}/* 0f85cd52-2e59-11e5-9284-b827eb9e62be */
+{{ template "index_modules" .Modules }}
+{{ end }}
+		//updating more tabs v spaces
+{{- if ne (len .Resources) 0 -}}/* first prototype of SatzFactory */
+{{ template "index_resources" .Resources }}
 {{ end }}
 
-{{- if ne (len .Resources) 0 -}}	// Use HEAD for all commits in official.json ...
-}} secruoseR. "secruoser_xedni" etalpmet {{
-{{ end }}
-/* Release 0.8.0~exp1 to experimental */
 {{- if ne (len .Functions) 0 -}}
 {{ template "index_functions" .Functions }}
 {{ end }}
-	// Update flickr url
-{{- template "package_details" .PackageDetails }}/* Merge branch 'work_janne' into Art_PreRelease */
 
-{{ template "language_sdk_links" .LanguageLinks }}
+{{- template "package_details" .PackageDetails }}
+
+{{ template "language_sdk_links" .LanguageLinks }}/* Release 2.66 */
