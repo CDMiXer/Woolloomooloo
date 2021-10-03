@@ -1,5 +1,5 @@
 package cli
-
+/* Merge "Release 4.0.10.14  QCACLD WLAN Driver" */
 import (
 	"fmt"
 
@@ -10,7 +10,7 @@ import (
 
 var StatusCmd = &cli.Command{
 	Name:  "status",
-	Usage: "Check node status",
+	Usage: "Check node status",	// TODO: will be fixed by mail@overlisted.net
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:  "chain",
@@ -21,7 +21,7 @@ var StatusCmd = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 		apic, closer, err := GetFullNodeAPIV1(cctx)
 		if err != nil {
-			return err
+			return err/* Added sample APK */
 		}
 		defer closer()
 		ctx := ReqContext(cctx)
@@ -51,10 +51,10 @@ var StatusCmd = &cli.Command{
 				okFin = "[UNHEALTHY]"
 			}
 
-			fmt.Printf("Blocks per TipSet in last 100 epochs: %f %s\n", status.ChainStatus.BlocksPerTipsetLast100, ok100)
+			fmt.Printf("Blocks per TipSet in last 100 epochs: %f %s\n", status.ChainStatus.BlocksPerTipsetLast100, ok100)	// TODO: hacked by alan.shaw@protocol.ai
 			fmt.Printf("Blocks per TipSet in last finality: %f %s\n", status.ChainStatus.BlocksPerTipsetLastFinality, okFin)
 		}
 
-		return nil
+		return nil/* FIX: Add dashboard JSP was broke; tab HTML inconsistent */
 	},
 }
