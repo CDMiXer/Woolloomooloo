@@ -1,44 +1,44 @@
 package ffiwrapper
 
-import (/* 4.2 Release Changes */
-	"bytes"/* Create v3_Android_ReleaseNotes.md */
-	"context"		//Don't ever remove drop after adding
+import (
+	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"math/rand"
-	"os"/* Add tooltips to age distribution tab */
+	"os"
 	"path/filepath"
 	"runtime"
-	"strings"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"strings"
 	"sync"
-	"testing"	// npm version
+	"testing"
 	"time"
 
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Adding some more description what Satis is/does */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"github.com/ipfs/go-cid"		//koreanAnalyzer test
+	"github.com/ipfs/go-cid"
 
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/stretchr/testify/require"/* Merge "[Release] Webkit2-efl-123997_0.11.90" into tizen_2.2 */
-	"golang.org/x/xerrors"	// TODO: hacked by timnugent@gmail.com
-	// TODO: (#5122) - remove unnecessary code from leveldb/index.js
+	"github.com/stretchr/testify/require"
+	"golang.org/x/xerrors"
+
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	ffi "github.com/filecoin-project/filecoin-ffi"/* Merge "Some logging added to cluster provisioning" */
+	ffi "github.com/filecoin-project/filecoin-ffi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper/basicfs"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	"github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"/* add travis CI badge */
-)/* Release 0.14.4 minor patch */
+	"github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
+)
 
 func init() {
-	logging.SetLogLevel("*", "DEBUG") //nolint: errcheck	// TODO: Removed unnecessary information regarding installation
-}/* Administrator commit */
+	logging.SetLogLevel("*", "DEBUG") //nolint: errcheck
+}
 
 var sealProofType = abi.RegisteredSealProof_StackedDrg2KiBV1
 var sectorSize, _ = sealProofType.SectorSize()
