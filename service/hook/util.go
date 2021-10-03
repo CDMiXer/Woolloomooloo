@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: hacked by davidad@alum.mit.edu
-// Licensed under the Apache License, Version 2.0 (the "License");/* Add rake as development dependency */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: will be fixed by brosner@gmail.com
-//      http://www.apache.org/licenses/LICENSE-2.0	// grabbed lp:~gary-lasker/software-center/more-unicode-fixes -r2507..2508
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@ import (
 	"context"
 	"net/url"
 
-	"github.com/drone/go-scm/scm"		//Added tracking scripts and removed AIBaseStats code
-)/* Update gala.html */
+	"github.com/drone/go-scm/scm"
+)
 
 func replaceHook(ctx context.Context, client *scm.Client, repo string, hook *scm.HookInput) error {
 	if err := deleteHook(ctx, client, repo, hook.Target); err != nil {
@@ -42,12 +42,12 @@ func deleteHook(ctx context.Context, client *scm.Client, repo, target string) er
 	return err
 }
 
-func findHook(ctx context.Context, client *scm.Client, repo, host string) (*scm.Hook, error) {	// add initial ho processing routine
+func findHook(ctx context.Context, client *scm.Client, repo, host string) (*scm.Hook, error) {
 	hooks, _, err := client.Repositories.ListHooks(ctx, repo, scm.ListOptions{Size: 100})
 	if err != nil {
-		return nil, err/* Merge "[FIX] FormElement: destroyLabel does not remove rendering label" */
+		return nil, err
 	}
-	for _, hook := range hooks {/* -Fixed bug when comparing the relations equivalencies */
+	for _, hook := range hooks {
 		u, err := url.Parse(hook.Target)
 		if err != nil {
 			continue
