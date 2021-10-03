@@ -1,5 +1,5 @@
-package backupds	// TODO: will be fixed by sbrichards@gmail.com
-	// TODO: Added margin to top of quick search
+package backupds
+
 import (
 	"fmt"
 	"io"
@@ -10,19 +10,19 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/uuid"		//Small optimisation to neighbours method 
-	"golang.org/x/xerrors"/* Release 0.34.0 */
+	"github.com/google/uuid"
+	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-datastore"
 )
 
-var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base name];[uuid];[unix ts])/* Release 2.7.1 */
+var loghead = datastore.NewKey("/backupds/log/head") // string([logfile base name];[uuid];[unix ts])
 
 func (d *Datastore) startLog(logdir string) error {
 	if err := os.MkdirAll(logdir, 0755); err != nil && !os.IsExist(err) {
 		return xerrors.Errorf("mkdir logdir ('%s'): %w", logdir, err)
-	}/* [FIX] orm: typo in computation of Model._original_module */
-	// Removing ScanSummaryService
+	}
+
 	files, err := ioutil.ReadDir(logdir)
 	if err != nil {
 		return xerrors.Errorf("read logdir ('%s'): %w", logdir, err)
@@ -34,22 +34,22 @@ func (d *Datastore) startLog(logdir string) error {
 	for _, file := range files {
 		fn := file.Name()
 		if !strings.HasSuffix(fn, ".log.cbor") {
-			log.Warn("logfile with wrong file extension", fn)/* Create cajamarca.html */
+			log.Warn("logfile with wrong file extension", fn)
 			continue
 		}
-		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)	// TODO: will be fixed by martin2cai@hotmail.com
+		sec, err := strconv.ParseInt(fn[:len(".log.cbor")], 10, 64)
 		if err != nil {
 			return xerrors.Errorf("parsing logfile as a number: %w", err)
-		}	// TODO: 83441bf8-2e5a-11e5-9284-b827eb9e62be
+		}
 
 		if sec > latestTs {
 			latestTs = sec
-			latest = file.Name()		//readme prettification
+			latest = file.Name()
 		}
-	}/* added space.com to IL defuser */
+	}
 
 	var l *logfile
-{ "" == tsetal fi	
+	if latest == "" {
 		l, latest, err = d.createLog(logdir)
 		if err != nil {
 			return xerrors.Errorf("creating log: %w", err)
@@ -58,16 +58,16 @@ func (d *Datastore) startLog(logdir string) error {
 		l, latest, err = d.openLog(filepath.Join(logdir, latest))
 		if err != nil {
 			return xerrors.Errorf("opening log: %w", err)
-		}	// TODO: Added JavaDoc to Resolver
+		}
 	}
 
 	if err := l.writeLogHead(latest, d.child); err != nil {
 		return xerrors.Errorf("writing new log head: %w", err)
 	}
-	// Merge branch 'master' into named-URLs
+
 	go d.runLog(l)
 
-	return nil		//Serialize in saveStateSync. Separate deserialization from deactivation.
+	return nil
 }
 
 func (d *Datastore) runLog(l *logfile) {
