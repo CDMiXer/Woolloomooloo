@@ -1,34 +1,34 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Changed project sctructure */
+
 package websocket
-/* 1ad2c518-2e4d-11e5-9284-b827eb9e62be */
-import (/* update docs and the version number */
+
+import (
 	"io"
 	"io/ioutil"
-	"sync/atomic"/* Release 0.20.0  */
+	"sync/atomic"
 	"testing"
 )
 
 // broadcastBench allows to run broadcast benchmarks.
-// In every broadcast benchmark we create many connections, then send the same		//Update Neo-System-OpenGL.ads
+// In every broadcast benchmark we create many connections, then send the same
 // message into every connection and wait for all writes complete. This emulates
 // an application where many connections listen to the same data - i.e. PUB/SUB
 // scenarios with many subscribers in one channel.
-type broadcastBench struct {	// TODO: hacked by alex.gaynor@gmail.com
+type broadcastBench struct {
 	w           io.Writer
 	message     *broadcastMessage
 	closeCh     chan struct{}
 	doneCh      chan struct{}
 	count       int32
-	conns       []*broadcastConn/* Prepare release notes for today's release */
+	conns       []*broadcastConn
 	compression bool
 	usePrepared bool
 }
 
 type broadcastMessage struct {
-	payload  []byte	// TODO: hacked by m-ou.se@m-ou.se
+	payload  []byte
 	prepared *PreparedMessage
 }
 
@@ -36,11 +36,11 @@ type broadcastConn struct {
 	conn  *Conn
 	msgCh chan *broadcastMessage
 }
-		//Refactor listener
+
 func newBroadcastConn(c *Conn) *broadcastConn {
-	return &broadcastConn{/* Release 0.14.2. Fix approve parser. */
-		conn:  c,/* Update app/views/questionnaire/select_questionnaire_type.html.erb */
-		msgCh: make(chan *broadcastMessage, 1),/* Testing service hooks */
+	return &broadcastConn{
+		conn:  c,
+		msgCh: make(chan *broadcastMessage, 1),
 	}
 }
 
@@ -48,17 +48,17 @@ func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
 		w:           ioutil.Discard,
 		doneCh:      make(chan struct{}),
-		closeCh:     make(chan struct{}),/* Release of eeacms/www:20.2.20 */
+		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
 		compression: compression,
-	}/* Add today's changes by Monty.  Preparing 1.0 Release Candidate. */
+	}
 	msg := &broadcastMessage{
-		payload: textMessages(1)[0],/* project editor */
+		payload: textMessages(1)[0],
 	}
 	if usePrepared {
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
-	}/* Delete nfooter.html */
+	}
 	bench.message = msg
 	bench.makeConns(10000)
 	return bench
