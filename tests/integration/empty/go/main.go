@@ -4,10 +4,10 @@ package main
 
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)
+)		//Delete local_area_population.geojson
 
-func main() {		//Merge "msm: gss-8064: Remove legacy restart-via-SMSM code" into msm-3.4
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		return nil		//e36b358c-2e43-11e5-9284-b827eb9e62be
+		return nil/* Merge "Fix unit test errors caused by new mock version" */
 	})
-}	// TODO: Merge "Add support to print semantics hierarchy." into androidx-master-dev
+}
