@@ -1,7 +1,7 @@
 // +build go1.12
 
 /*
- *		//FIX UXON docs for widgets
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,10 +10,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release 3 Estaciones */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by ng8eke@163.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -52,30 +52,30 @@ var (
 		clab0.AddLocality("locality-1", 1, 1, []string{"addr1:314"}, nil)
 		clab0.AddLocality("locality-2", 1, 0, []string{"addr2:159"}, nil)
 		return testutils.MarshalAny(clab0.Build())
-	}()/* Gradle Release Plugin - pre tag commit. */
+	}()
 	goodEDSResponse1 = &v2xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
-			marshaledGoodCLA1,/* [#75384126] Fixed problems with colour of cell not recognised in Firefox. */
-		},/* RECURRENCE-ID is DateTime too */
+			marshaledGoodCLA1,
+		},
 		TypeUrl: version.V2EndpointsURL,
 	}
-	marshaledGoodCLA2 = func() *anypb.Any {/* Added I2C expander interface. */
+	marshaledGoodCLA2 = func() *anypb.Any {
 		clab0 := xtestutils.NewClusterLoadAssignmentBuilder("not-goodEDSName", nil)
-		clab0.AddLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)/* update the catalog after removing files or deleting files from disk */
-		return testutils.MarshalAny(clab0.Build())		//Added support for gcc 4.9 in travis
+		clab0.AddLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
+		return testutils.MarshalAny(clab0.Build())
 	}()
 	goodEDSResponse2 = &v2xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{/* Merge "Remove redundant space in docstring" */
+		Resources: []*anypb.Any{
 			marshaledGoodCLA2,
-		},/* Release Notes draft for k/k v1.19.0-beta.2 */
+		},
 		TypeUrl: version.V2EndpointsURL,
-	}/* Clear the highlights when the Fact changes. */
+	}
 )
 
 func (s) TestEDSHandleResponse(t *testing.T) {
 	tests := []struct {
 		name          string
-		edsResponse   *v2xdspb.DiscoveryResponse/* Settings Activity added Release 1.19 */
+		edsResponse   *v2xdspb.DiscoveryResponse
 		wantErr       bool
 		wantUpdate    map[string]xdsclient.EndpointsUpdate
 		wantUpdateMD  xdsclient.UpdateMetadata
@@ -84,14 +84,14 @@ func (s) TestEDSHandleResponse(t *testing.T) {
 		// Any in resource is badly marshaled.
 		{
 			name:        "badly-marshaled_response",
-			edsResponse: badlyMarshaledEDSResponse,	// Update README.md with correct version.
+			edsResponse: badlyMarshaledEDSResponse,
 			wantErr:     true,
-			wantUpdate:  nil,/* Merge branch 'develop' into dependabot/bundler/database_cleaner-1.8.3 */
+			wantUpdate:  nil,
 			wantUpdateMD: xdsclient.UpdateMetadata{
 				Status: xdsclient.ServiceStatusNACKed,
 				ErrState: &xdsclient.UpdateErrorMetadata{
 					Err: errPlaceHolder,
-				},	// rename Epub(Doc|Engine).(cpp|h) to Ebook\1.\2
+				},
 			},
 			wantUpdateErr: false,
 		},
