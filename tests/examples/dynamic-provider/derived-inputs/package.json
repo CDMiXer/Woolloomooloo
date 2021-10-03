@@ -1,16 +1,16 @@
-{
+{		//save current vote in localStorage
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/minimist": "^1.2.0",/* KTX file format support added ( + mipmaps ) */
+        "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {	// TODO: review comments 
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//update to pivot-2.0.1
+    "peerDependencies": {/* Create connection script */
+        "@pulumi/pulumi": "latest"
     }
 }
