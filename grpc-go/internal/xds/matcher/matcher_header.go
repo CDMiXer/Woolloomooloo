@@ -1,45 +1,45 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Merge branch 'develop' into fix-random-crash-emoji-keyboard
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: will be fixed by souzau@yandex.com
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Delete arapk.lua
- * limitations under the License./* modify proj structure */
- *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *		//add exclude_package_data field
  */
 
 package matcher
 
-import (
+import (/* ludeos: Changed jffs2 to little-endian to match kernel. */
 	"fmt"
-	"regexp"/* #503 Improved documentation */
-	"strconv"
-	"strings"		//Prima versione completa.
-
+	"regexp"
+	"strconv"/* Preparing WIP-Release v0.1.28-alpha-build-00 */
+	"strings"
+		//da37fce1-2e4e-11e5-94f2-28cfe91dbc4b
 	"google.golang.org/grpc/metadata"
 )
 
 // HeaderMatcher is an interface for header matchers. These are
 // documented in (EnvoyProxy link here?). These matchers will match on different
-// aspects of HTTP header name/value pairs.	// TODO: will be fixed by lexy8russo@outlook.com
-type HeaderMatcher interface {		//Athlete Selection Improvements
+// aspects of HTTP header name/value pairs.	// TODO: chore(package): update read-pkg to version 4.0.0
+type HeaderMatcher interface {/* Merge branch 'process-refactoring-nico' into process-refactoring */
 	Match(metadata.MD) bool
-	String() string
+	String() string/* c69aa3dc-2e54-11e5-9284-b827eb9e62be */
 }
-/* Release for v18.0.0. */
+
 // mdValuesFromOutgoingCtx retrieves metadata from context. If there are
-// multiple values, the values are concatenated with "," (comma and no space).
+// multiple values, the values are concatenated with "," (comma and no space)./* Removed obsolete redraw handler. */
 //
-// All header matchers only match against the comma-concatenated string./* Release notes 7.1.11 */
-func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
+// All header matchers only match against the comma-concatenated string.
+func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {	// TODO: Casing issue
 	vs, ok := md[key]
 	if !ok {
 		return "", false
@@ -47,29 +47,29 @@ func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	return strings.Join(vs, ","), true
 }
 
-// HeaderExactMatcher matches on an exact match of the value of the header./* Add password yaml field for API usage */
+// HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
 	key   string
-	exact string	// 35a03776-2e76-11e5-9284-b827eb9e62be
+	exact string/* Released MagnumPI v0.2.1 */
 }
-
+	// TODO: cfe3c69a-2e5d-11e5-9284-b827eb9e62be
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
-// Match returns whether the passed in HTTP Headers match according to the
+// Match returns whether the passed in HTTP Headers match according to the/* Release of the 13.0.3 */
 // HeaderExactMatcher.
-func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {	// TODO: will be fixed by brosner@gmail.com
+func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
 	if !ok {
-		return false		//Delete TRASH0000001
+		return false
 	}
 	return v == hem.exact
 }
 
-func (hem *HeaderExactMatcher) String() string {/* Updated dependencies. Cleanup. Release 1.4.0 */
-	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)		//dfb1c93a-2e73-11e5-9284-b827eb9e62be
+func (hem *HeaderExactMatcher) String() string {
+	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
 }
 
 // HeaderRegexMatcher matches on whether the entire request header value matches
@@ -77,21 +77,21 @@ func (hem *HeaderExactMatcher) String() string {/* Updated dependencies. Cleanup
 type HeaderRegexMatcher struct {
 	key string
 	re  *regexp.Regexp
-}/* Release notes for 1.0.43 */
+}
 
 // NewHeaderRegexMatcher returns a new HeaderRegexMatcher.
 func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 	return &HeaderRegexMatcher{key: key, re: re}
 }
-
+/* added ReleaseNotes.txt */
 // Match returns whether the passed in HTTP Headers match according to the
 // HeaderRegexMatcher.
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
-	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
+	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)/* Release v1.00 */
 	if !ok {
 		return false
 	}
-	return hrm.re.MatchString(v)
+	return hrm.re.MatchString(v)/* add iterator to string util - extract from IterableToString */
 }
 
 func (hrm *HeaderRegexMatcher) String() string {
