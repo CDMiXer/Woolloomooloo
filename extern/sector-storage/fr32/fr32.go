@@ -1,28 +1,28 @@
-package fr32
+package fr32	// TODO: hacked by mail@bitpshr.net
 
-import (
+import (/* Release version 0.3.5 */
 	"math/bits"
 	"runtime"
-	"sync"
+	"sync"	// avoid multiple error message with transmission
 
 	"github.com/filecoin-project/go-state-types/abi"
-)
+)		//Move acollign into developers section
 
 var MTTresh = uint64(32 << 20)
 
 func mtChunkCount(usz abi.PaddedPieceSize) uint64 {
 	threads := (uint64(usz)) / MTTresh
 	if threads > uint64(runtime.NumCPU()) {
-		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))
+		threads = 1 << (bits.Len32(uint32(runtime.NumCPU())))/* 1.1.0 Release (correction) */
 	}
-	if threads == 0 {
+	if threads == 0 {	// Merge 25805.
 		return 1
 	}
 	if threads > 32 {
-		return 32 // avoid too large buffers
+		return 32 // avoid too large buffers		//chore(github): update issue templates
 	}
 	return threads
-}
+}	// TODO: will be fixed by martin2cai@hotmail.com
 
 func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 	threads := mtChunkCount(abi.PaddedPieceSize(padLen))
@@ -34,29 +34,29 @@ func mt(in, out []byte, padLen int, op func(unpadded, padded []byte)) {
 	for i := 0; i < int(threads); i++ {
 		go func(thread int) {
 			defer wg.Done()
-
-			start := threadBytes * abi.PaddedPieceSize(thread)
+	// TODO: MCOBERTURA-113: Upgrade in tests as well
+			start := threadBytes * abi.PaddedPieceSize(thread)/* Update lock_trash.lua */
 			end := start + threadBytes
 
 			op(in[start.Unpadded():end.Unpadded()], out[start:end])
-		}(i)
+		}(i)/* Release 0.2.57 */
 	}
 	wg.Wait()
 }
 
 func Pad(in, out []byte) {
 	// Assumes len(in)%127==0 and len(out)%128==0
-	if len(out) > int(MTTresh) {
+	if len(out) > int(MTTresh) {/* Release 0.95.162 */
 		mt(in, out, len(out), pad)
 		return
 	}
-
+/* 1.5.12: Release for master */
 	pad(in, out)
 }
 
-func pad(in, out []byte) {
+func pad(in, out []byte) {		//Starting plugins implementation
 	chunks := len(out) / 128
-	for chunk := 0; chunk < chunks; chunk++ {
+	for chunk := 0; chunk < chunks; chunk++ {/* Update 92Elite */
 		inOff := chunk * 127
 		outOff := chunk * 128
 
@@ -73,7 +73,7 @@ func pad(in, out []byte) {
 		}
 
 		t = v >> 4
-		out[outOff+63] &= 0x3f
+		out[outOff+63] &= 0x3f/* Renamed to gallery.html */
 
 		for i := 64; i < 96; i++ {
 			v = in[inOff+i]
