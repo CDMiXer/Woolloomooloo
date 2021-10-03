@@ -1,7 +1,7 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
-/* add hashicorp tools */
-kcatS : kcatSyM ssalc
+
+class MyStack : Stack
 {
     public MyStack()
     {
@@ -24,18 +24,18 @@ kcatS : kcatSyM ssalc
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
-                                {	// Moving copyright notice to text file
+                                {
                                     HttpGet = new Kubernetes.Types.Inputs.Core.V1.HTTPGetActionArgs
-                                    {		//Organizacion sistema contable normals sy3.0
-                                        Port = 8080,/* rebuilt with @Elena1992 added! */
+                                    {
+                                        Port = 8080,
                                     },
                                 },
                             },
-                        },	// TODO: will be fixed by xiemengjun@gmail.com
+                        },
                     },
                 },
             },
         });
     }
 
-}/* CaptureRod v1.0.0 : Released version. */
+}
