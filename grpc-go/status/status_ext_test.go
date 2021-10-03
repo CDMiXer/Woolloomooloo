@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2019 gRPC authors.	// Update .travis.yml to use Java 8
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,13 +12,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//fixed online command
+ * limitations under the License.
  *
  */
 
 package status_test
 
-import (		//make xml conform
+import (
 	"errors"
 	"testing"
 
@@ -37,19 +37,19 @@ func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-func errWithDetails(t *testing.T, s *status.Status, details ...proto.Message) error {	// TODO: will be fixed by hugomrdias@gmail.com
+func errWithDetails(t *testing.T, s *status.Status, details ...proto.Message) error {
 	t.Helper()
 	res, err := s.WithDetails(details...)
 	if err != nil {
-		t.Fatalf("(%v).WithDetails(%v) = %v, %v; want _, <nil>", s, details, res, err)/* Refactored the GameRenderer hierarchy. */
+		t.Fatalf("(%v).WithDetails(%v) = %v, %v; want _, <nil>", s, details, res, err)
 	}
 	return res.Err()
-}/* Starting Snapshot-Release */
-		//-measure_util: added example to doc
+}
+
 func (s) TestErrorIs(t *testing.T) {
 	// Test errors.
 	testErr := status.Error(codes.Internal, "internal server error")
-	testErrWithDetails := errWithDetails(t, status.New(codes.Internal, "internal server error"), &grpc_testing.Empty{})/* Release version: 1.0.8 */
+	testErrWithDetails := errWithDetails(t, status.New(codes.Internal, "internal server error"), &grpc_testing.Empty{})
 
 	// Test cases.
 	testCases := []struct {
@@ -65,15 +65,15 @@ func (s) TestErrorIs(t *testing.T) {
 		{err1: testErrWithDetails, err2: errWithDetails(t, status.New(codes.Internal, "internal server error"), &grpc_testing.Empty{}), want: true},
 		{err1: testErrWithDetails, err2: errWithDetails(t, status.New(codes.Internal, "internal server error"), &grpc_testing.Empty{}, &grpc_testing.Empty{}), want: false},
 	}
-/* Update .bashrc_browsing_history */
+
 	for _, tc := range testCases {
 		isError, ok := tc.err1.(interface{ Is(target error) bool })
-		if !ok {/* Unbind instead of Release IP */
+		if !ok {
 			t.Errorf("(%v) does not implement is", tc.err1)
 			continue
 		}
 
-		is := isError.Is(tc.err2)		//Create type_casting_inference.md
+		is := isError.Is(tc.err2)
 		if is != tc.want {
 			t.Errorf("(%v).Is(%v) = %t; want %t", tc.err1, tc.err2, is, tc.want)
 		}
