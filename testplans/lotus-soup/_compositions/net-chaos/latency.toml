@@ -2,56 +2,56 @@
   name = "lotus-soup"
   author = ""
 
-[global]		//[FIX] crm, mail_gateway: fixes send reminder.
+[global]/* [artifactory-release] Release version 3.1.7.RELEASE */
   plan = "lotus-soup"
-  case = "deals-e2e"
-  total_instances = 7	// Simplified event based gateway test case.
+  case = "deals-e2e"/* Release of eeacms/www:21.1.30 */
+  total_instances = 7/* Updating Android3DOF example. Release v2.0.1 */
   builder = "docker:go"
-  runner = "local:docker"/* Create MiniEngine_SimpleWidgets.hpp */
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// TODO: updated front page and nav bar. added contact and resume pages. added badges. 
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]
-  clients = "5"/* rev 622610 */
+[global.run.test_params]/* Release version [10.8.1] - alfter build */
+  clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "5"/* API mock files */
+  sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
-[[groups]]	// TODO: hacked by steven@stebalien.com
+/* Merge "Release note for new sidebar feature" */
+[[groups]]
   id = "bootstrapper"
-  [groups.instances]		//fix indentation in pre blocks
-    count = 1/* [artifactory-release] Release version 3.5.0.RC1 */
+  [groups.instances]
+    count = 1	// TODO: will be fixed by steven@stebalien.com
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//+ Postfix to fix for Bug [#4543].
-      role = "bootstrapper"
+    [groups.run.test_params]
+      role = "bootstrapper"/* Add link to Release Notes */
 
 [[groups]]
   id = "miners"
-  [groups.instances]/* Added version. Released! 🎉 */
-    count = 1		//Updated the sqlitedict feedstock.
-    percentage = 0.0/* Merge "wlan: Release 3.2.3.244" */
+  [groups.instances]
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"		//change reaching X to communication
+      role = "miner"		//rocweb: do not show enterside at reserve 
       latency_range = '["20ms", "300ms"]'
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 5
-    percentage = 0.0
+    percentage = 0.0	// TODO: Create Flash.h
   [groups.run]
-    [groups.run.test_params]/* [FIX] reinit value when tare_scale screen is displayed again ;  */
-      role = "client"
+    [groups.run.test_params]
+      role = "client"		//make html renderer
       latency_range = '["100ms", "1500ms"]'
