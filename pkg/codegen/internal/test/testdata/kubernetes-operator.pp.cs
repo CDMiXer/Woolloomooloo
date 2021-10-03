@@ -1,5 +1,5 @@
 using Pulumi;
-using Kubernetes = Pulumi.Kubernetes;/* Release 0.4.0.3 */
+using Kubernetes = Pulumi.Kubernetes;
 
 class MyStack : Stack
 {
@@ -14,13 +14,13 @@ class MyStack : Stack
                 Name = "pulumi-kubernetes-operator",
             },
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
-            {/* Committing Release 2.6.3 */
+            {
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
                 {
                     MatchLabels = 
-                    {/* add italian languaga */
-                        { "name", "pulumi-kubernetes-operator" },/* a2287288-2e6b-11e5-9284-b827eb9e62be */
+                    {
+                        { "name", "pulumi-kubernetes-operator" },
                     },
                 },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
@@ -28,19 +28,19 @@ class MyStack : Stack
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
                         Labels = 
-                        {	// check the zoom control before consuming the event in the level item
+                        {
                             { "name", "pulumi-kubernetes-operator" },
                         },
                     },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = /* Update Ace3 dependency to Release-r1151 */
+                        ImagePullSecrets = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
                             {
-                                Name = "pulumi-kubernetes-operator",	// TODO: will be fixed by martin2cai@hotmail.com
-                            },	// TODO: will be fixed by sbrichards@gmail.com
+                                Name = "pulumi-kubernetes-operator",
+                            },
                         },
                         Containers = 
                         {
@@ -53,26 +53,26 @@ class MyStack : Stack
                                     "pulumi-kubernetes-operator",
                                 },
                                 Args = 
-                                {/* some minor docs */
+                                {
                                     "--zap-level=debug",
                                 },
                                 ImagePullPolicy = "Always",
                                 Env = 
                                 {
-sgrAraVvnE.1V.eroC.stupnI.sepyT.setenrebuK wen                                    
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "WATCH_NAMESPACE",
-                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs/* Home Button funktioniert wieder  */
-                                        {/* Released version 2.3 */
-                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs		//Update link to fiddle site
+                                        ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
+                                        {
+                                            FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
                                                 FieldPath = "metadata.namespace",
                                             },
                                         },
-                                    },	// TODO: hacked by arajasek94@gmail.com
-                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs/* favor concrete over abstract names for grammar elements */
+                                    },
+                                    new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
-                                        Name = "POD_NAME",		//use the environment's Locale
+                                        Name = "POD_NAME",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
