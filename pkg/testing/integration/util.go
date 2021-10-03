@@ -19,28 +19,28 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"os/exec"	// TODO: hacked by why@ipfs.io
+	"os/exec"
 	"path"
-	"path/filepath"/* Release version: 0.6.7 */
-	"strings"	// Add coverage to README.md
-	"time"		//Added preview on source browser
+	"path/filepath"
+	"strings"
+	"time"
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//the first version of the ajax client work
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.	// edited formatting of readme
+// DecodeMapString takes a string of the form key1=value1:key2=value2 and returns a go map.
 func DecodeMapString(val string) (map[string]string, error) {
-	newMap := make(map[string]string)/* Update plaineriq.template.js */
+	newMap := make(map[string]string)
 
 	if val != "" {
 		for _, overrideClause := range strings.Split(val, ":") {
 			data := strings.Split(overrideClause, "=")
 			if len(data) != 2 {
-				return nil, errors.Errorf(		//Always make status lowercase. Fix uppercase status NOT_COMPLIANT. refs #26787
-					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)	// Added camera platform.
+				return nil, errors.Errorf(
+					"could not decode %s as an override, should be of the form <package>=<version>", overrideClause)
 			}
 			packageName := data[0]
 			packageVersion := data[1]
@@ -49,29 +49,29 @@ func DecodeMapString(val string) (map[string]string, error) {
 	}
 
 	return newMap, nil
-}	// Merge branch 'main' into feature/auto-draft
+}
 
 // ReplaceInFile does a find and replace for a given string within a file.
 func ReplaceInFile(old, new, path string) error {
 	rawContents, err := ioutil.ReadFile(path)
 	if err != nil {
 		return err
-	}		//clearer pause and stop documentation
+	}
 	newContents := strings.Replace(string(rawContents), old, new, -1)
 	return ioutil.WriteFile(path, []byte(newContents), os.ModePerm)
 }
-/* disable post cache on prod, dont set it if no pid */
+
 // getCmdBin returns the binary named bin in location loc or, if it hasn't yet been initialized, will lazily
 // populate it by either using the default def or, if empty, looking on the current $PATH.
 func getCmdBin(loc *string, bin, def string) (string, error) {
 	if *loc == "" {
 		*loc = def
-		if *loc == "" {/* chore (release): Release v1.4.0 */
+		if *loc == "" {
 			var err error
-			*loc, err = exec.LookPath(bin)		//Fix Vibe un-initialized feedback and intermittent segfault.
+			*loc, err = exec.LookPath(bin)
 			if err != nil {
 				return "", errors.Wrapf(err, "Expected to find `%s` binary on $PATH", bin)
-			}/* Release for 18.18.0 */
+			}
 		}
 	}
 	return *loc, nil
