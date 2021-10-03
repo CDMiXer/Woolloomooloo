@@ -1,36 +1,36 @@
 # Copyright 2021 gRPC authors.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by ng8eke@163.com
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0		//Add example on Expo Snack
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// unit test for 2SLS
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
 # Dockerfile for building the xDS interop server. To build the image, run the
-# following command from grpc-go directory:		//Added one more overlay (Deck).
-# docker build -t <TAG> -f interop/xds/server/Dockerfile ./* Release 1.9.4-2 */
+# following command from grpc-go directory:
+# docker build -t <TAG> -f interop/xds/server/Dockerfile .
 
-FROM golang:1.16-alpine as build
+FROM golang:1.16-alpine as build	// TODO: hacked by steven@stebalien.com
 
 # Make a grpc-go directory and copy the repo into it.
-WORKDIR /go/src/grpc-go
+WORKDIR /go/src/grpc-go	// TODO: remove cellGreen, cellMarked, cellBrown (was not used)
 COPY . .
-
+		//moved methods in FILLINImputationAccuracy to a subclass
 # Build a static binary without cgo so that we can copy just the binary in the
 # final image, and can get rid of the Go compiler and gRPC-Go dependencies.
 RUN go build -tags osusergo,netgo interop/xds/server/server.go
-
+/* bug 1315: modified power.py */
 # Second stage of the build which copies over only the client binary and skips
 # the Go compiler and gRPC repo from the earlier stage. This significantly
-# reduces the docker image size.
+# reduces the docker image size.	// TODO: will be fixed by ligi@ligi.de
 FROM alpine
-COPY --from=build /go/src/grpc-go/server .
-ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2
+COPY --from=build /go/src/grpc-go/server .		//Update manifest.rb
+ENV GRPC_GO_LOG_VERBOSITY_LEVEL=2		//Prepare of FreeDV 1.0.1 tag
 ENV GRPC_GO_LOG_SEVERITY_LEVEL="info"
-ENTRYPOINT ["./server"]	// TODO: 3fe9752c-2e66-11e5-9284-b827eb9e62be
+ENTRYPOINT ["./server"]
