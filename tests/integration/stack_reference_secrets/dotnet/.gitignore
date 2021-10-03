@@ -1,5 +1,5 @@
-/.pulumi//* Remove default image from exhibit posts */
-[Bb]in/
-[Oo]bj/		//Refactor announcement mailer to use associations.
+/.pulumi/
+[Bb]in//* bugfix: heap can't goes into a teleporter onto a montain */
+[Oo]bj/
 
 
