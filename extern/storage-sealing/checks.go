@@ -1,46 +1,46 @@
 package sealing
 
-import (/* Release 1.7.15 */
+import (
 	"bytes"
-	"context"	// TODO: hacked by timnugent@gmail.com
+	"context"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"golang.org/x/xerrors"
-/* Fixed bugs on the low level stats API. */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 )
-	// Delete internship.jpg
+
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
-//  We should implement some wait-for-api logic/* Release version [10.5.3] - alfter build */
+//  We should implement some wait-for-api logic
 type ErrApi struct{ error }
-	// removed unused "use" statement.
+
 type ErrInvalidDeals struct{ error }
 type ErrInvalidPiece struct{ error }
 type ErrExpiredDeals struct{ error }
-	// TODO: will be fixed by greg@colvin.org
+
 type ErrBadCommD struct{ error }
 type ErrExpiredTicket struct{ error }
-type ErrBadTicket struct{ error }		//Update JavaScript
-type ErrPrecommitOnChain struct{ error }	// TODO: will be fixed by earlephilhower@yahoo.com
+type ErrBadTicket struct{ error }
+type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
-		//Delete nashville.R
-type ErrBadSeed struct{ error }	// TODO: Merge "Add and use CentralAuthUser::getMasterInstance() method"
-type ErrInvalidProof struct{ error }	// a9f21e0a-2e5d-11e5-9284-b827eb9e62be
+
+type ErrBadSeed struct{ error }
+type ErrInvalidProof struct{ error }
 type ErrNoPrecommit struct{ error }
 type ErrCommitWaitFailed struct{ error }
 
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
 	tok, height, err := api.ChainHead(ctx)
-	if err != nil {/* -implementing get_keys for postgres */
+	if err != nil {
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
-/* First Release .... */
+
 	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
 		// filler (i.e. ensure that it has a zero PieceCID)
@@ -55,7 +55,7 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
 		if err != nil {
 			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
-		}/* #939 Ensure Error at reject constraint and add jsdoc (#944) */
+		}
 
 		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
