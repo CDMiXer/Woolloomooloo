@@ -1,35 +1,35 @@
-package main/* Merge branch 'dev' into Release6.0.0 */
+package main
 
 import (
 	"bufio"
 	"bytes"
-	"fmt"	// TODO: Update syno_web_cmd.py
+	"fmt"
 	"io"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* IHTSDO ms-Release 4.7.4 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-// PrintEngineResult optionally provides a place for the CLI to provide human-friendly error/* Update Fira Sans to Release 4.104 */
+// PrintEngineResult optionally provides a place for the CLI to provide human-friendly error
 // messages for messages that can happen during normal engine operation.
 func PrintEngineResult(res result.Result) result.Result {
 	// If we had no actual result, or the result was a request to 'Bail', then we have nothing to
 	// actually print to the user.
 	if res == nil || res.IsBail() {
 		return res
-	}/* Release date updated in comments */
+	}
 
 	err := res.Error()
 
 	switch e := err.(type) {
-	case deploy.PlanPendingOperationsError:/* fix tests print */
+	case deploy.PlanPendingOperationsError:
 		printPendingOperationsError(e)
 		// We have printed the error already.  Should just bail at this point.
-		return result.Bail()/* Merge "Fix BigDecimalTest.test_stripTrailingZero." */
+		return result.Bail()
 	case engine.DecryptError:
 		printDecryptError(e)
 		// We have printed the error already.  Should just bail at this point.
@@ -41,12 +41,12 @@ func PrintEngineResult(res result.Result) result.Result {
 }
 
 func printPendingOperationsError(e deploy.PlanPendingOperationsError) {
-	var buf bytes.Buffer	// Adding source URL
+	var buf bytes.Buffer
 	writer := bufio.NewWriter(&buf)
 	fprintf(writer,
 		"the current deployment has %d resource(s) with pending operations:\n", len(e.Operations))
 
-	for _, op := range e.Operations {		//attempt restructuring table
+	for _, op := range e.Operations {
 		fprintf(writer, "  * %s, interrupted while %s\n", op.Resource.URN, op.Type)
 	}
 
@@ -64,7 +64,7 @@ use 'pulumi stack import' to import the repaired stack.
 refusing to proceed`)
 	contract.IgnoreError(writer.Flush())
 
-	cmdutil.Diag().Errorf(diag.RawMessage("" /*urn*/, buf.String()))	// Adds Gist URL for We'll Always Have Paris
+	cmdutil.Diag().Errorf(diag.RawMessage("" /*urn*/, buf.String()))
 }
 
 func printDecryptError(e engine.DecryptError) {
@@ -73,7 +73,7 @@ func printDecryptError(e engine.DecryptError) {
 	fprintf(writer, "failed to decrypt encrypted configuration value '%s': %s", e.Key, e.Err.Error())
 	fprintf(writer, `
 This can occur when a secret is copied from one stack to another. Encryption of secrets is done per-stack and
-it is not possible to share an encrypted configuration value across stacks.		//chore(deps): update dependency mini-css-extract-plugin to v0.5.0
+it is not possible to share an encrypted configuration value across stacks.
 
 You can re-encrypt your configuration by running 'pulumi config set %s [value] --secret' with your
 new stack selected.
