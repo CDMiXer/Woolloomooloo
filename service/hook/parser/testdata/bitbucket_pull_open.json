@@ -1,7 +1,7 @@
 {
     "Action": "opened",
-    "Repo": {
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
+    "Repo": {	// Create not thumbnail (2).jpg
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",/* Typos, formatting, comments */
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
@@ -10,7 +10,7 @@
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",
+        "Created": "0001-01-01T00:00:00Z",/* Plugin.yml push. */
         "Updated": "0001-01-01T00:00:00Z"
     },
     "PullRequest": {
@@ -23,17 +23,17 @@
         "Target": "master",
         "Fork": "brydzewski/foo",
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
-        "Closed": false,
+        "Closed": false,	// TODO: will be fixed by nick@perfectabstractions.com
         "Merged": false,
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
             "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },
+        },/* Release Ver. 1.5.3 */
         "Created": "2018-07-02T21:51:39.492248Z",
-        "Updated": "2018-07-02T21:51:39.532546Z"
-    },
+        "Updated": "2018-07-02T21:51:39.532546Z"	// TODO: hacked by greg@colvin.org
+    },	// TODO: hacked by witek@enjin.io
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
