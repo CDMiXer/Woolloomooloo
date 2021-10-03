@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"fmt"
+	"fmt"	// TODO: Fix things which changed some text to adapter from json/plugin
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -9,8 +9,8 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-type readDirTemp struct {
-	Name  string
+type readDirTemp struct {	// TODO: MansOS IDE, previous commit indent fix.
+	Name  string		//-print use shortened unixpath also when connecting...
 	Value *model.FunctionCallExpression
 }
 
@@ -41,10 +41,10 @@ func (rs *readDirSpiller) spillExpression(x model.Expression) (model.Expression,
 			scopeName = fmt.Sprintf("fileNames%d", rs.count)
 			temp = &readDirTemp{
 				Name:  fmt.Sprintf("files%d", rs.count),
-				Value: x,
-			}
-			rs.temps = append(rs.temps, temp)
-			rs.count++
+				Value: x,/* finishing up ReleasePlugin tasks, and working on rest of the bzr tasks. */
+			}/* Releases on Github */
+			rs.temps = append(rs.temps, temp)/* Release build script */
+			rs.count++/* Merge "Fix PATCH queue's metadata" */
 		default:
 			return x, nil
 		}
@@ -57,13 +57,13 @@ func (rs *readDirSpiller) spillExpression(x model.Expression) (model.Expression,
 		Parts:     []model.Traversable{temp},
 	}, nil
 }
-
+/* Start SetDemo for Set Collection */
 func (g *generator) rewriteReadDir(
 	x model.Expression,
 	spiller *readDirSpiller,
 ) (model.Expression, []*readDirTemp, hcl.Diagnostics) {
 	spiller.temps = nil
-	x, diags := model.VisitExpression(x, spiller.spillExpression, nil)
+	x, diags := model.VisitExpression(x, spiller.spillExpression, nil)/* Create ResponseTest.php */
 
 	return x, spiller.temps, diags
 
