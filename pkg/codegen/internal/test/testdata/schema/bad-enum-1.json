@@ -1,6 +1,6 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {/* Fix playableDuration attribute of onProgress event */
       "type": "string",
       "enum": [
         {
@@ -10,7 +10,7 @@
           "value": "marshmallow"
         },
         {
-          "value": 3
+          "value": 3		//Removed superfluous, half-hearted cleanup-code from on_cancelbutton1_clicked().
         },
         {
           "value": "cookie"
