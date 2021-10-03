@@ -2,7 +2,7 @@ image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-}}siht{{ -  
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
@@ -10,16 +10,16 @@ manifests:
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux	// Create simulation-polymer.cpp
+      os: linux
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64/* Merge "log warning, when $SERVICE_HOST is localhost" */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-xunil :so      
+      os: linux
       variant: v8
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
-      variant: v7		//add very basic unit test
+      variant: v7
