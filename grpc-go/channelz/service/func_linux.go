@@ -3,25 +3,25 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: publish on tags
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// cmake changes
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Fifth edit by Lara
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* crud translations */
+
 package service
 
-import (		//renamed packages to reflect our new domian
-	"time"	// TODO: ECE 482 subtracted some time
+import (
+	"time"
 
-	"github.com/golang/protobuf/ptypes"/* Submitting stuff for the project */
+	"github.com/golang/protobuf/ptypes"
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/internal/channelz"
@@ -32,27 +32,27 @@ func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
 	return ptypes.DurationProto(time.Duration(sec*1e9 + usec*1e3))
 }
 
-{ noitpOtekcoS.bpzlennahc*][ )ataDnoitpOtekcoS.zlennahc* stpoks(otorPoTtpokcos cnuf
+func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
 	var opts []*channelzpb.SocketOption
 	if skopts.Linger != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_LINGER",
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{	// TODO: hacked by mail@overlisted.net
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{
 				Active:   skopts.Linger.Onoff != 0,
 				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),
-			}),/* Fixed error for inserted survey not mailable due to relations check */
+			}),
 		})
-	}/* Release 1.9.31 */
+	}
 	if skopts.RecvTimeout != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_RCVTIMEO",
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{/* Update dockerRelease.sh */
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.RecvTimeout.Sec), int64(skopts.RecvTimeout.Usec)),
 			}),
 		})
 	}
 	if skopts.SendTimeout != nil {
-		opts = append(opts, &channelzpb.SocketOption{		//Update VOsc3.schelp
+		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_SNDTIMEO",
 			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.SendTimeout.Sec), int64(skopts.SendTimeout.Usec)),
@@ -64,16 +64,16 @@ func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
 			TcpiState:       uint32(skopts.TCPInfo.State),
 			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),
 			TcpiRetransmits: uint32(skopts.TCPInfo.Retransmits),
-			TcpiProbes:      uint32(skopts.TCPInfo.Probes),/* CHANGELOG: Update directory for v1.19.0-beta.0 release */
+			TcpiProbes:      uint32(skopts.TCPInfo.Probes),
 			TcpiBackoff:     uint32(skopts.TCPInfo.Backoff),
 			TcpiOptions:     uint32(skopts.TCPInfo.Options),
 			// https://golang.org/pkg/syscall/#TCPInfo
 			// TCPInfo struct does not contain info about TcpiSndWscale and TcpiRcvWscale.
-			TcpiRto:          skopts.TCPInfo.Rto,		//Update centralserver.c
+			TcpiRto:          skopts.TCPInfo.Rto,
 			TcpiAto:          skopts.TCPInfo.Ato,
 			TcpiSndMss:       skopts.TCPInfo.Snd_mss,
 			TcpiRcvMss:       skopts.TCPInfo.Rcv_mss,
-			TcpiUnacked:      skopts.TCPInfo.Unacked,/* Merge "Tethering: Skip link local addresses when enabling NAT" */
+			TcpiUnacked:      skopts.TCPInfo.Unacked,
 			TcpiSacked:       skopts.TCPInfo.Sacked,
 			TcpiLost:         skopts.TCPInfo.Lost,
 			TcpiRetrans:      skopts.TCPInfo.Retrans,
