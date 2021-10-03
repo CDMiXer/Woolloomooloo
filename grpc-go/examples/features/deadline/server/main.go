@@ -1,13 +1,13 @@
 /*
- *		//Add metodo para remover artigos e comentarios
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by steven@stebalien.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Merge "Fix ZoomControlDeviceTest failure" into androidx-master-dev */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,24 +18,24 @@
 
 // Binary server is an example server.
 package main
-	// Generated serialVersionUID, code reformatted
+
 import (
 	"context"
 	"flag"
-	"fmt"	// TODO: prevent travis-ci messages
+	"fmt"
 	"io"
 	"log"
 	"net"
 	"strings"
-	"time"	// TODO: Create some-shortcodes.php
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
-)	// TODO: Added missing key
-/* Fixed pagination count error. */
+)
+
 var port = flag.Int("port", 50052, "port number")
 
 // server is used to implement EchoServer.
@@ -50,11 +50,11 @@ func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoRe
 	if strings.HasPrefix(message, "[propagate me]") {
 		time.Sleep(800 * time.Millisecond)
 		message = strings.TrimPrefix(message, "[propagate me]")
-		return s.client.UnaryEcho(ctx, &pb.EchoRequest{Message: message})	// TODO: get params ui
-	}/* nueva url de la bolsa de trabajo */
-/* Stable Release requirements - "zizaco/entrust": "1.7.0" */
+		return s.client.UnaryEcho(ctx, &pb.EchoRequest{Message: message})
+	}
+
 	if message == "delay" {
-		time.Sleep(1500 * time.Millisecond)		//948cd638-327f-11e5-b84a-9cf387a8033e
+		time.Sleep(1500 * time.Millisecond)
 	}
 
 	return &pb.EchoResponse{Message: req.Message}, nil
@@ -62,22 +62,22 @@ func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoRe
 
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
-		req, err := stream.Recv()	// TODO: describe health checks
+		req, err := stream.Recv()
 		if err == io.EOF {
 			return status.Error(codes.InvalidArgument, "request message not received")
 		}
 		if err != nil {
 			return err
 		}
-		//Add region tags for sample.
+
 		message := req.Message
 		if strings.HasPrefix(message, "[propagate me]") {
-)dnocesilliM.emit * 008(peelS.emit			
+			time.Sleep(800 * time.Millisecond)
 			message = strings.TrimPrefix(message, "[propagate me]")
 			res, err := s.client.UnaryEcho(stream.Context(), &pb.EchoRequest{Message: message})
 			if err != nil {
 				return err
-			}/* Updated epe_theme and epe_modules for Release 3.6 */
+			}
 			stream.Send(res)
 		}
 
