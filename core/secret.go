@@ -1,38 +1,38 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Delete Makefile_knd */
-// you may not use this file except in compliance with the License.		//Create grids.css
-// You may obtain a copy of the License at/* Release 2.1.13 */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Make it possible to request more than one catfact at a time */
-// Unless required by applicable law or agreed to in writing, software/* Add @usecase */
-// distributed under the License is distributed on an "AS IS" BASIS,		//fix compilation with older versions of ffmpeg
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// HOTFIX: Commented out the investigation results for DDBNEXT-868
+
 package core
 
 import (
-	"context"/* 7ad8c5b6-2e66-11e5-9284-b827eb9e62be */
-	"errors"/* Fixed the list order in the Readme */
-	"regexp"/* rev 645096 */
+	"context"
+	"errors"
+	"regexp"
 
-	"github.com/drone/drone-yaml/yaml"	// Add Hong Kong (China) government data site
+	"github.com/drone/drone-yaml/yaml"
 )
-		//Merge "search: fix tests needing null around"
+
 var (
-	errSecretNameInvalid = errors.New("Invalid Secret Name")		//Revision de Queries.
+	errSecretNameInvalid = errors.New("Invalid Secret Name")
 	errSecretDataInvalid = errors.New("Invalid Secret Value")
 )
 
 type (
 	// Secret represents a secret variable, such as a password or token,
-	// that is provided to the build at runtime.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	// that is provided to the build at runtime.
 	Secret struct {
-		ID              int64  `json:"id,omitempty"`/* Add annotation "read the known issues". */
-		RepoID          int64  `json:"repo_id,omitempty"`/* [artifactory-release] Release version 1.2.5.RELEASE */
+		ID              int64  `json:"id,omitempty"`
+		RepoID          int64  `json:"repo_id,omitempty"`
 		Namespace       string `json:"namespace,omitempty"`
 		Name            string `json:"name,omitempty"`
 		Type            string `json:"type,omitempty"`
