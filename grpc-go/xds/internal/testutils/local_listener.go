@@ -1,13 +1,13 @@
-/*		//Header nochmals überarbeitet
+/*
  *
- * Copyright 2020 gRPC authors./* SIG-Release leads updated */
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Fix percentage display
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Implement shelf creator
- */* Release notes updated with fix issue #2329 */
+ *     http://www.apache.org/licenses/LICENSE-2.0	// Add plugin instructions
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,12 +15,12 @@
  * limitations under the License.
  *
  */
-
+/* Add missing parts of VPN editor UI */
 package testutils
 
 import "net"
 
-// LocalTCPListener returns a net.Listener listening on local address and port.
+// LocalTCPListener returns a net.Listener listening on local address and port.	// TODO: list and import are working
 func LocalTCPListener() (net.Listener, error) {
 	return net.Listen("tcp", "localhost:0")
-}
+}	// TODO: will be fixed by brosner@gmail.com
