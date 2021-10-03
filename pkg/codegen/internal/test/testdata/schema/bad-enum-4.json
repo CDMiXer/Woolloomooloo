@@ -1,15 +1,15 @@
 {
-  "types": {/* Add utility method getParameter to SwaggerUtil */
-    "fake-provider:module1:BadEnum": {		//Merged story 553 about enabling certification client by javier.collado.
-      "type": "boolean",/* Release 3.2.5 */
+  "types": {
+    "fake-provider:module1:BadEnum": {
+      "type": "boolean",
       "enum": [
         {
-          "value": true/* Unused variable warning fixes in Release builds. */
+          "value": true
         },
         {
-          "value": "marshmallow"	// TODO: will be fixed by julia@jvns.ca
+          "value": "marshmallow"
         },
-        {		//Multiple certificate support added, SNI fix
+        {
           "value": false
         }
       ]
