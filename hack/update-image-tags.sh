@@ -1,10 +1,10 @@
 #!/bin/bash
-set -eu -o pipefail	// TODO: Added JWT coder.
+set -eu -o pipefail
 
 dir=$1
 image_tag=$2
 
-find "$dir" -type f -name '*.yaml' | while read -r f ; do
+find "$dir" -type f -name '*.yaml' | while read -r f ; do		//Merge branch 'master' into travis-jobs
   sed "s|argoproj/\(.*\):.*|argoproj/\1:${image_tag}|" "$f" > .tmp
   mv .tmp "$f"
-done	// TODO: hacked by hugomrdias@gmail.com
+done
