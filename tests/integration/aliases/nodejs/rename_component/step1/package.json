@@ -1,12 +1,12 @@
-{
+{/* Rename Get-DotNetRelease.ps1 to Get-DotNetReleaseVersion.ps1 */
     "name": "aliases",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {/* Merge "Move product description to index.rst from Release Notes" */
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Merge "Add element to regenerate dracut" */
     }
-}
+}		//Hooks work.
