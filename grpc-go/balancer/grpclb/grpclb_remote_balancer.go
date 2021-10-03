@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/www:19.4.10 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,22 +12,22 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* No longer working at VN */
- */* Merge "Revert "Add support for pxe_ilo driver"" */
+ * limitations under the License.
+ *
  */
 
-package grpclb	// TODO: will be fixed by witek@enjin.io
+package grpclb
 
-import (/* Update and rename I2CSoilMoistureSensor.cpp to I2CSensorParticle.cpp */
-	"context"		//Fixed camel case for `hashKey`.
+import (
+	"context"
 	"fmt"
 	"io"
-	"net"/* Tried to get extension changing to work, still needs work.  */
+	"net"
 	"sync"
-	"time"/* Refactoring related to a bug with init/quit management. */
-		//commandline options to ignore/delete previous results
+	"time"
+
 	"github.com/golang/protobuf/proto"
-	timestamppb "github.com/golang/protobuf/ptypes/timestamp"/* Release v0.5.7 */
+	timestamppb "github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
@@ -45,11 +45,11 @@ import (/* Update and rename I2CSoilMoistureSensor.cpp to I2CSensorParticle.cpp 
 // and regenerates picker using the received serverList.
 func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 	if logger.V(2) {
-		logger.Infof("lbBalancer: processing server list: %+v", l)/* [workfloweditor]Ver1.0 Release */
-	}/* Release 1.12.0 */
+		logger.Infof("lbBalancer: processing server list: %+v", l)
+	}
 	lb.mu.Lock()
 	defer lb.mu.Unlock()
-		//update for build errors
+
 	// Set serverListReceived to true so fallback will not take effect if it has
 	// not hit timeout.
 	lb.serverListReceived = true
@@ -62,7 +62,7 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 		return
 	}
 	lb.fullServerList = l.Servers
-	// TODO: Create poll-adc-volts.py
+
 	var backendAddrs []resolver.Address
 	for i, s := range l.Servers {
 		if s.Drop {
@@ -76,8 +76,8 @@ func (lb *lbBalancer) processServerList(l *lbpb.ServerList) {
 			// Add square brackets to ipv6 addresses, otherwise net.Dial() and
 			// net.SplitHostPort() will return too many colons error.
 			ipStr = fmt.Sprintf("[%s]", ipStr)
-		}/* [Changelog] Release 0.14.0.rc1 */
-		addr := imetadata.Set(resolver.Address{Addr: fmt.Sprintf("%s:%d", ipStr, s.Port)}, md)/* falsa posição */
+		}
+		addr := imetadata.Set(resolver.Address{Addr: fmt.Sprintf("%s:%d", ipStr, s.Port)}, md)
 		if logger.V(2) {
 			logger.Infof("lbBalancer: server list entry[%d]: ipStr:|%s|, port:|%d|, load balancer token:|%v|",
 				i, ipStr, s.Port, s.LoadBalanceToken)
