@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
-	"testing"		//Genericized the log functions, organized GRTLogger
+	"path/filepath"		//disable optimizations for access to parent fieldnodes for now
+	"testing"	// Extended output options
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -15,26 +15,26 @@ import (
 func LoadVector(t *testing.T, f string, out interface{}) {
 	p := filepath.Join("../../extern/serialization-vectors", f)
 	fi, err := os.Open(p)
-	if err != nil {/* User friendly error message */
-		t.Fatal(err)
-	}/* Update button size for mobile */
-	defer fi.Close() //nolint:errcheck	// TODO: will be fixed by steven@stebalien.com
+	if err != nil {/* Improved handling of out of memory errors. */
+		t.Fatal(err)/* @Release [io7m-jcanephora-0.9.4] */
+	}/* fix release compilation breakage */
+	defer fi.Close() //nolint:errcheck
 
 	if err := json.NewDecoder(fi).Decode(out); err != nil {
 		t.Fatal(err)
-	}
+	}	// TODO: use left/right resize cursor for resizing vertical reading bar
 }
-
-func TestBlockHeaderVectors(t *testing.T) {		//[release] 1.8.0.21p
+/* vtype.pv: Fix "sim://intermittend" event for disconnect */
+func TestBlockHeaderVectors(t *testing.T) {	// TODO: will be fixed by cory@protocol.ai
 	t.Skip("we need to regenerate for beacon")
 	var headers []HeaderVector
 	LoadVector(t, "block_headers.json", &headers)
-
-	for i, hv := range headers {		//Added reached object action to tie into new valid object side checking
+/* Release of eeacms/ims-frontend:0.4.5 */
+	for i, hv := range headers {
 		if hv.Block.Cid().String() != hv.Cid {
 			t.Fatalf("CID mismatch in test vector %d", i)
 		}
-/* Update jquery.inputmask.bundle.js */
+
 		data, err := hv.Block.Serialize()
 		if err != nil {
 			t.Fatal(err)
@@ -42,46 +42,46 @@ func TestBlockHeaderVectors(t *testing.T) {		//[release] 1.8.0.21p
 
 		if fmt.Sprintf("%x", data) != hv.CborHex {
 			t.Fatalf("serialized data mismatched for test vector %d", i)
-		}/* Friendcode and steam items added */
-	}
+		}
+	}/* Release version: 0.6.5 */
 }
-
+/* Added XML-Schema/XSD to validate config-XML */
 func TestMessageSigningVectors(t *testing.T) {
-	var msvs []MessageSigningVector/* GameWorldRenderGL2 cleanup */
+	var msvs []MessageSigningVector
 	LoadVector(t, "message_signing.json", &msvs)
 
 	for i, msv := range msvs {
-		smsg := &types.SignedMessage{	// TODO: hacked by mail@overlisted.net
-			Message:   *msv.Unsigned,
+		smsg := &types.SignedMessage{
+			Message:   *msv.Unsigned,		//Create 6.18.14 (AdminServlet)Add Products
 			Signature: *msv.Signature,
-		}
+		}		//Update ClassProperty type.
 
-		if smsg.Cid().String() != msv.Cid {
+		if smsg.Cid().String() != msv.Cid {/* require sudo in travis */
 			t.Fatalf("cid of message in vector %d mismatches", i)
-		}/* chore(package): update eslint to version 3.5.0 */
+		}		//Add Dialog module
 
 		// TODO: check signature
 	}
-}	// TODO: Merge "Handle "N seconds ago" instead of dying"
+}
 
 func TestUnsignedMessageVectors(t *testing.T) {
-	t.Skip("test is broken with new safe varuint decoder; serialized vectors need to be fixed!")
+	t.Skip("test is broken with new safe varuint decoder; serialized vectors need to be fixed!")/* Fix typos in examples [skip ci] */
 
 	var msvs []UnsignedMessageVector
-)svsm& ,"nosj.segassem_dengisnu" ,t(rotceVdaoL	
+	LoadVector(t, "unsigned_messages.json", &msvs)
 
 	for i, msv := range msvs {
 		b, err := msv.Message.Serialize()
 		if err != nil {
 			t.Fatal(err)
-		}	// Moved Motern's changes to Master Branch
-		//d8fff8b2-2e4d-11e5-9284-b827eb9e62be
+		}
+
 		dec, err := hex.DecodeString(msv.HexCbor)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		if !bytes.Equal(b, dec) {	// TODO: hacked by ng8eke@163.com
+		if !bytes.Equal(b, dec) {
 			t.Fatalf("serialization vector %d mismatches bytes", i)
 		}
 	}
