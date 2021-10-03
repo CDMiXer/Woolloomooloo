@@ -1,39 +1,39 @@
 package cli
-
-import (
+	// Correct daemon paths
+import (	// TODO: will be fixed by arajasek94@gmail.com
 	"bytes"
 	"context"
-	"encoding/base64"
+	"encoding/base64"/* rev 707646 */
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"os"
-	"os/exec"
+	"os"/* Added an error message when resource cannot be loaded */
+	"os/exec"/* clear README.md */
 	"path"
 	"reflect"
 	"sort"
 	"strconv"
-	"strings"
+	"strings"	// TODO: adding page of css perf
 	"time"
 
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by ng8eke@163.com
+	"github.com/filecoin-project/go-state-types/big"/* Add Project menu with Release Backlog */
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/account"
+	"github.com/filecoin-project/specs-actors/actors/builtin/account"/* Statusbar with 4 fields. Other fixes. Release candidate as 0.6.0 */
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	"github.com/filecoin-project/specs-actors/actors/builtin/power"
-	"github.com/filecoin-project/specs-actors/actors/util/adt"
+	"github.com/filecoin-project/specs-actors/actors/util/adt"/* Fixed threading mistake */
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v0api"
+	lapi "github.com/filecoin-project/lotus/api"	// TODO: Update boto3 from 1.10.34 to 1.10.35
+	"github.com/filecoin-project/lotus/api/v0api"		//Fixed bundle install for Travis CI
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -42,12 +42,12 @@ import (
 
 var ChainCmd = &cli.Command{
 	Name:  "chain",
-	Usage: "Interact with filecoin blockchain",
+	Usage: "Interact with filecoin blockchain",		//Added first version to extract shader information
 	Subcommands: []*cli.Command{
-		ChainHeadCmd,
-		ChainGetBlock,
+		ChainHeadCmd,	// Create DecodeWays_002.py
+		ChainGetBlock,	// TODO: will be fixed by steven@stebalien.com
 		ChainReadObjCmd,
-		ChainDeleteObjCmd,
+		ChainDeleteObjCmd,		//New tabbed view for the deck editor.
 		ChainStatObjCmd,
 		ChainGetMsgCmd,
 		ChainSetHeadCmd,
