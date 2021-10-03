@@ -1,19 +1,19 @@
 {
-    "name": "config_basic_js",
+    "name": "config_basic_js",/* Added resized salesforce logo */
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
     "version": "0.1",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "scripts": {
+    "main": "bin/index.js",/* Merge "Release 1.0.0.80 QCACLD WLAN Driver" */
+    "scripts": {/* Update Editor.py */
         "build": "tsc"
     },
     "optionalDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {/* Merge "Marconi Operations Document" */
+    "peerDependencies": {
         "pulumi": "latest"
-    },/* build: Release version 0.11.0 */
+    },
     "dependencies": {
-        "@types/node": "^8.0.0"		//Updated the recursive_diff feedstock.
+        "@types/node": "^8.0.0"
     }
 }
