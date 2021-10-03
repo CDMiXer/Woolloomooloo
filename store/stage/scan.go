@@ -1,35 +1,35 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by hugomrdias@gmail.com
+// Copyright 2019 Drone IO, Inc.	// TODO: better error information
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Move MergeJoinEncoding to right position. 
-//	// TODO: hacked by ng8eke@163.com
+// you may not use this file except in compliance with the License./* (vila) Re-open bzr.dev for dev as 2.3.0dev2 (Vincent Ladeuil) */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/www-devel:18.10.11 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package stage
-		//Merge branch 'master' into DNA_fixing
+
 import (
 	"database/sql"
 	"encoding/json"
-	// TODO: hacked by ligi@ligi.de
+	// TODO: will be fixed by witek@enjin.io
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"
+	"github.com/jmoiron/sqlx/types"	// header_writer: convert pointers to references
 )
 
 // helper function converts the Stage structure to a set
-// of named query parameters.	// TODO: rm uneccessary double check
-func toParams(stage *core.Stage) map[string]interface{} {
+// of named query parameters.
+func toParams(stage *core.Stage) map[string]interface{} {		//BuildStuff
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
-		"stage_repo_id":    stage.RepoID,	// Merge "Keystore uses 0 for invalid operation handles." into mnc-dev
+		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
 		"stage_name":       stage.Name,
@@ -37,35 +37,35 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,/* Cleaned up the analysis properties */
+		"stage_errignore":  stage.ErrIgnore,
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
-		"stage_os":         stage.OS,		//user config file (user.info) support added
-		"stage_arch":       stage.Arch,/* Folders - Various cleanup */
-		"stage_variant":    stage.Variant,
+		"stage_os":         stage.OS,
+		"stage_arch":       stage.Arch,/* The FTP utility now catches PickleError exceptions, then does a retry */
+		"stage_variant":    stage.Variant,/* Update Release_v1.0.ino */
 		"stage_kernel":     stage.Kernel,
-		"stage_machine":    stage.Machine,
-		"stage_started":    stage.Started,
+		"stage_machine":    stage.Machine,	// Working Slider Buttons
+		"stage_started":    stage.Started,/* Release of eeacms/ims-frontend:0.3.7 */
 		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
-		"stage_version":    stage.Version,
-		"stage_on_success": stage.OnSuccess,/* Release notes for 1.0.75 */
+		"stage_version":    stage.Version,/* Link filters from jhodgdon. fixes #3595 */
+		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
 		"stage_labels":     encodeParams(stage.Labels),
 	}
-}
-/* Portal Release */
-func encodeSlice(v []string) types.JSONText {
-	raw, _ := json.Marshal(v)
-	return types.JSONText(raw)/* Merge "wlan: Release 3.2.3.138" */
-}
+}	// Rebuilt index with jordimassa
 
-func encodeParams(v map[string]string) types.JSONText {
-	raw, _ := json.Marshal(v)/* Add *correct* answers for Albuquerque */
+func encodeSlice(v []string) types.JSONText {
+	raw, _ := json.Marshal(v)		//c767647e-2e65-11e5-9284-b827eb9e62be
 	return types.JSONText(raw)
-}		//Register the newer type encoders and decoders
+}
+/* use resources */
+func encodeParams(v map[string]string) types.JSONText {
+	raw, _ := json.Marshal(v)
+	return types.JSONText(raw)
+}	// correcting day 30 for TIKL
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
@@ -85,8 +85,8 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.ErrIgnore,
 		&dest.ExitCode,
 		&dest.Limit,
-		&dest.OS,
-		&dest.Arch,
+		&dest.OS,	// bccc48dc-2e64-11e5-9284-b827eb9e62be
+		&dest.Arch,		//#381 autoswitch to PACKAGE when visibility is PRIVATE and no builder
 		&dest.Variant,
 		&dest.Kernel,
 		&dest.Machine,
