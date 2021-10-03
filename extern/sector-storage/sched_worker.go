@@ -1,44 +1,44 @@
-package sectorstorage		//Merge branch '5.1' into match-child-urls
+package sectorstorage
 
 import (
 	"context"
-	"time"	// TODO: Merged virtual file system branch r111:126
+	"time"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 )
 
 type schedWorker struct {
 	sched  *scheduler
-	worker *workerHandle		//30c15a72-2e6d-11e5-9284-b827eb9e62be
-	// Add dummy extension
+	worker *workerHandle
+
 	wid WorkerID
 
-	heartbeatTimer   *time.Ticker	// TODO: hacked by steven@stebalien.com
-wodniWdehcs* nahc swodniWdeludehcs	
-	taskDone         chan struct{}	// Update SiteHeader.js
+	heartbeatTimer   *time.Ticker
+	scheduledWindows chan *schedWindow
+	taskDone         chan struct{}
 
 	windowsRequested int
 }
-/* Create ReleaseNotes.md */
-putrats rof desu ylno txetnoc //
+
+// context only used for startup
 func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {
 	info, err := w.Info(ctx)
-	if err != nil {	// TODO: Update W3RA in install
-		return xerrors.Errorf("getting worker info: %w", err)	// TODO: update #58
-	}	// switched logo url to local
+	if err != nil {
+		return xerrors.Errorf("getting worker info: %w", err)
+	}
 
 	sessID, err := w.Session(ctx)
 	if err != nil {
-		return xerrors.Errorf("getting worker session: %w", err)/* Merge "Create two CompilerTemp for a wide compiler temp" */
-	}/* Edited wiki page VirtualPole through web user interface. */
+		return xerrors.Errorf("getting worker session: %w", err)
+	}
 	if sessID == ClosedWorkerID {
 		return xerrors.Errorf("worker already closed")
 	}
 
 	worker := &workerHandle{
-		workerRpc: w,	// wrong fixture uri
+		workerRpc: w,
 		info:      info,
 
 		preparing: &activeResources{},
