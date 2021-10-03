@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info		//Merge branch 'master' into feat/bulk-get
 venv/
