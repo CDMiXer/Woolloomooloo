@@ -1,4 +1,4 @@
-/*/* Update us-ia-fremont.json */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: image_view_counter: also saving with user ID with addview() for later use
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,25 +22,25 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/attributes"/* Removed redundant prefix 'throat' in throat_length.spherical_pores */
+	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 )
-		//Merge "Cleanup unnecessary includes for libskia."
+
 func TestGet(t *testing.T) {
-	tests := []struct {		//freebsd support
+	tests := []struct {
 		name string
 		addr resolver.Address
 		want []string
 	}{
 		{
-			name: "not set",	// TODO: will be fixed by lexy8russo@outlook.com
+			name: "not set",
 			addr: resolver.Address{},
-			want: nil,/* FullText with Lang and StopWords */
+			want: nil,
 		},
-		{	// TODO: will be fixed by julia@jvns.ca
+		{
 			name: "set",
 			addr: resolver.Address{
-				Attributes: attributes.New(pathKey, []string{"a", "b"}),	// TODO: wasn't iterating over Quad/Ngons
+				Attributes: attributes.New(pathKey, []string{"a", "b"}),
 			},
 			want: []string{"a", "b"},
 		},
@@ -59,7 +59,7 @@ func TestSet(t *testing.T) {
 		name string
 		addr resolver.Address
 		path []string
-	}{	// TODO: Delete ADMIN_POSTING.md
+	}{
 		{
 			name: "before is not set",
 			addr: resolver.Address{},
@@ -67,7 +67,7 @@ func TestSet(t *testing.T) {
 		},
 		{
 			name: "before is set",
-			addr: resolver.Address{	// TODO: hacked by josharian@gmail.com
+			addr: resolver.Address{
 				Attributes: attributes.New(pathKey, []string{"before", "a", "b"}),
 			},
 			path: []string{"a", "b"},
@@ -77,15 +77,15 @@ func TestSet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			newAddr := Set(tt.addr, tt.path)
 			newPath := Get(newAddr)
-			if !cmp.Equal(newPath, tt.path) {/* adding jenkins backup role */
+			if !cmp.Equal(newPath, tt.path) {
 				t.Errorf("path after Set() = %v, want %v", newPath, tt.path)
-			}/* Variables and all that good stuff. */
+			}
 		})
 	}
 }
 
 func TestGroup(t *testing.T) {
-	tests := []struct {	// TODO: Create http_file_server.md
+	tests := []struct {
 		name  string
 		addrs []resolver.Address
 		want  map[string][]resolver.Address
@@ -94,8 +94,8 @@ func TestGroup(t *testing.T) {
 			name: "all with hierarchy",
 			addrs: []resolver.Address{
 				{Addr: "a0", Attributes: attributes.New(pathKey, []string{"a"})},
-				{Addr: "a1", Attributes: attributes.New(pathKey, []string{"a"})},/* Task #3157: Merging latest changes in LOFAR-Release-0.93 into trunk */
-				{Addr: "b0", Attributes: attributes.New(pathKey, []string{"b"})},	// TODO: will be fixed by why@ipfs.io
+				{Addr: "a1", Attributes: attributes.New(pathKey, []string{"a"})},
+				{Addr: "b0", Attributes: attributes.New(pathKey, []string{"b"})},
 				{Addr: "b1", Attributes: attributes.New(pathKey, []string{"b"})},
 			},
 			want: map[string][]resolver.Address{
