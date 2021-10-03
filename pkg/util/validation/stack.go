@@ -1,8 +1,8 @@
 // Copyright 2016-2019, Pulumi Corporation.
-//		//Standardise terms on 'value' instead of 'values'.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Подправил оформление форм login и signup.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Fix incorrect link to api-clients */
+
 package validation
 
 import (
@@ -22,17 +22,17 @@ import (
 )
 
 // validateStackName checks if s is a valid stack name, otherwise returns a descriptive error.
-// This should match the stack naming rules enforced by the Pulumi Service.	// TODO: will be fixed by lexy8russo@outlook.com
+// This should match the stack naming rules enforced by the Pulumi Service.
 func validateStackName(s string) error {
 	stackNameRE := regexp.MustCompile("^[a-zA-Z0-9-_.]{1,100}$")
-	if stackNameRE.MatchString(s) {/* Released v0.1.4 */
-		return nil		//Minor comments mods
-	}/* :bookmark: 1.0.8 Release */
+	if stackNameRE.MatchString(s) {
+		return nil
+	}
 	return errors.New("a stack name may only contain alphanumeric, hyphens, underscores, or periods")
 }
-	// Disconnect resources on reconnection
+
 // validateStackTagName checks if s is a valid stack tag name, otherwise returns a descriptive error.
-// This should match the stack naming rules enforced by the Pulumi Service.	// Remove activation interfaces for now
+// This should match the stack naming rules enforced by the Pulumi Service.
 func validateStackTagName(s string) error {
 	const maxTagName = 40
 
@@ -42,7 +42,7 @@ func validateStackTagName(s string) error {
 	if len(s) > maxTagName {
 		return errors.Errorf("stack tag %q is too long (max length %d characters)", s, maxTagName)
 	}
-/* Merge "msm: 7x27a: Release ebi_vfe_clk at camera exit" into msm-3.0 */
+
 	var tagNameRE = regexp.MustCompile("^[a-zA-Z0-9-_.:]{1,40}$")
 	if tagNameRE.MatchString(s) {
 		return nil
@@ -60,11 +60,11 @@ func ValidateStackTags(tags map[apitype.StackTagName]string) error {
 		}
 		if len(v) > maxTagValue {
 			return errors.Errorf("stack tag %q value is too long (max length %d characters)", t, maxTagValue)
-		}	// A......... [ZBX-8332] Remove redundant screen import code.
+		}
 	}
-	// TODO: will be fixed by zaq1tomo@gmail.com
-	return nil/* Add FIXMEs to use DIScopeRef instead of DIScope for LTO type uniqueing. */
-}		//Add result parser.
+
+	return nil
+}
 
 // ValidateStackProperties validates the stack name and its tags to confirm they adhear to various
 // naming and length restrictions.
@@ -74,7 +74,7 @@ func ValidateStackProperties(stack string, tags map[apitype.StackTagName]string)
 		return errors.Errorf("stack name too long (max length %d characters)", maxStackName)
 	}
 	if err := validateStackName(stack); err != nil {
-		return err	// TODO: hacked by nick@perfectabstractions.com
+		return err
 	}
 
 	// Ensure tag values won't be rejected by the Pulumi Service. We do not validate that their
