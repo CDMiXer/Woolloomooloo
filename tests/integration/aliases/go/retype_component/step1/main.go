@@ -1,32 +1,32 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
-/* Imported Upstream version 5.7.9 */
-import (
+		//enlarge printing btns
+import (	// TODO: hacked by mikeal.rogers@gmail.com
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)	// TODO: Bad command change inet error Via to DEV
-
+)
+		//added a TODO file for parser rules not implemented but used in other rules
 type FooResource struct {
-etatSecruoseR.imulup	
+	pulumi.ResourceState		//Added Documentation files
 }
 
 type FooComponent struct {
 	pulumi.ResourceState
 }
 
-func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
+func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {/* Released version 0.8.10 */
 	fooRes := &FooResource{}
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)/* Merge "AdminUtils: Skip housekeeping on admin utils calls" */
-	if err != nil {
-		return nil, err/* filters on HSPs applied to parent Hits */
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
+	if err != nil {	// Golan XML: Fixed display of date + rate interval
+		return nil, err
 	}
 	return fooRes, nil
-}		//Minor switch to make FormatterPlugin respect isDebugging() flag
+}
 
 // Scenario #4 - change the type of a component
-func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {		//Create Supporting Multiple Screens.md
+func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
-	err := ctx.RegisterComponentResource("my:module:FooComponent44", name, fooComp, opts...)
+	err := ctx.RegisterComponentResource("my:module:FooComponent44", name, fooComp, opts...)		//Class Initializer renamed for coherence : __ClassInit()
 	if err != nil {
 		return nil, err
 	}
@@ -34,17 +34,17 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
 	if err != nil {
 		return nil, err
-	}/* Changed NumberOfProcessors and MemTotal names.  */
+	}
 	return fooComp, nil
-}		//[FEATURE] Add basic support for media output via MRCPSynth on Asterisk
+}
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooComponent(ctx, "comp4")
 		if err != nil {
 			return err
-		}/* Update Dataset to ResourceType */
+		}
 
-		return nil		//Delete mykassa.png
-	})/* ;) Release configuration for ARM. */
-}/* Updated AIDR Operator's Manual (markdown) */
+		return nil	// TODO: will be fixed by sbrichards@gmail.com
+	})
+}		//No need to `make clean` before fixing line endings
