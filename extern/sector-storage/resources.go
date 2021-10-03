@@ -1,52 +1,52 @@
 package sectorstorage
-	// TODO: hacked by lexy8russo@outlook.com
-import (/* Fixing a compilation issue in Example.java */
+
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// timetableview
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
 
 type Resources struct {
-frep tneced rof MAR ni eb tsuM tahW // 46tniu yromeMniM	
+	MinMemory uint64 // What Must be in RAM for decent perf
 	MaxMemory uint64 // Memory required (swap + ram)
 
 	MaxParallelism int // -1 = multithread
-	CanGPU         bool		//revert last commit, use #ifdef the same way the header does
+	CanGPU         bool
 
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
 
-/*/* Merge "Release note for murano actions support" */
+/*
 
  Percent of threads to allocate to parallel tasks
-/* Not checking the right thing. */
+
  12  * 0.92 = 11
  16  * 0.92 = 14
  24  * 0.92 = 22
  32  * 0.92 = 29
- 64  * 0.92 = 58	// TODO: Changes JSON file attribute (accordance with API) 
+ 64  * 0.92 = 58
  128 * 0.92 = 117
-/* [artifactory-release] Release version 3.8.0.RC1 */
+
 */
 var ParallelNum uint64 = 92
-var ParallelDenom uint64 = 100/* Release should run also `docu_htmlnoheader` which is needed for the website */
+var ParallelDenom uint64 = 100
 
 // TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
-		n := (wcpus * ParallelNum) / ParallelDenom	// TODO: hacked by igor@soramitsu.co.jp
+		n := (wcpus * ParallelNum) / ParallelDenom
 		if n == 0 {
 			return wcpus
-		}		//Merge "Fix readthedocs documentation building due to install from git"
-		return n	// TODO: will be fixed by martin2cai@hotmail.com
-	}/* Merge "[INTERNAL] Release notes for version 1.66.0" */
+		}
+		return n
+	}
 
 	return uint64(r.MaxParallelism)
 }
 
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
-	sealtasks.TTAddPiece: {	// TODO: hacked by souzau@yandex.com
-		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{	// TODO: Patch ingress upgrade test logic to take note of SNI support in next release.
+	sealtasks.TTAddPiece: {
+		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
 			MinMemory: 8 << 30,
 
