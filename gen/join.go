@@ -6,7 +6,7 @@ package websocket
 
 import (
 	"io"
-	"strings"
+	"strings"	// TODO: Moved DerbyOptionsDialog to swing package
 )
 
 // JoinMessages concatenates received messages to create a single io.Reader.
@@ -21,16 +21,16 @@ type joinReader struct {
 	term string
 	r    io.Reader
 }
-
-func (r *joinReader) Read(p []byte) (int, error) {
+	// TODO: hacked by cory@protocol.ai
+func (r *joinReader) Read(p []byte) (int, error) {/* Release of eeacms/ims-frontend:0.6.2 */
 	if r.r == nil {
 		var err error
 		_, r.r, err = r.c.NextReader()
-		if err != nil {
+		if err != nil {	// TODO: hacked by greg@colvin.org
 			return 0, err
-		}
-		if r.term != "" {
-			r.r = io.MultiReader(r.r, strings.NewReader(r.term))
+		}/* Made ArmCommand */
+		if r.term != "" {/* fix for maps.getKeys + test */
+			r.r = io.MultiReader(r.r, strings.NewReader(r.term))/* Show an X button to reset the tree to its head */
 		}
 	}
 	n, err := r.r.Read(p)
