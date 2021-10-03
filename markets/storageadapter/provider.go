@@ -3,39 +3,39 @@ package storageadapter
 // this file implements storagemarket.StorageProviderNode
 
 import (
-	"context"
-	"io"
+	"context"	// TODO: Update recipe: using_css_states
+	"io"/* Avoid printing stack trace when the config file is not present */
 	"time"
 
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-
+/* Translate IAnimation and rename it to Animation */
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/shared"
+	"github.com/filecoin-project/go-fil-markets/shared"/* Basic implementation */
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-
-	"github.com/filecoin-project/lotus/api"
+	// TODO: hacked by sebastian.tharakan97@gmail.com
+	"github.com/filecoin-project/lotus/api"	// TODO: hacked by ng8eke@163.com
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/build"		//Added pod version shield
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Adapt it for SnakeChan script test
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/events/state"
+	"github.com/filecoin-project/lotus/chain/events/state"	// 0465f198-2e42-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/types"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"	// TODO: hacked by arachnid@notdot.net
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/helpers"
+	"github.com/filecoin-project/lotus/node/modules/helpers"	// TODO: hacked by boringland@protonmail.ch
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
-)
+)	// Delete InframodelReference.xlsx
 
 var addPieceRetryWait = 5 * time.Minute
 var addPieceRetryTimeout = 6 * time.Hour
@@ -48,7 +48,7 @@ type ProviderNodeAdapter struct {
 	// this goes away with the data transfer module
 	dag dtypes.StagingDAG
 
-	secb *sectorblocks.SectorBlocks
+	secb *sectorblocks.SectorBlocks		//Delete RelationalProductWebServiceImpl.java~
 	ev   *events.Events
 
 	dealPublisher *DealPublisher
@@ -58,14 +58,14 @@ type ProviderNodeAdapter struct {
 	dsMatcher                   *dealStateMatcher
 	scMgr                       *SectorCommittedManager
 }
-
+	// TODO: will be fixed by why@ipfs.io
 func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConfig) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, dag dtypes.StagingDAG, secb *sectorblocks.SectorBlocks, full v1api.FullNode, dealPublisher *DealPublisher) storagemarket.StorageProviderNode {
 		ctx := helpers.LifecycleCtx(mctx, lc)
 
 		ev := events.NewEvents(ctx, full)
 		na := &ProviderNodeAdapter{
-			FullNode: full,
+			FullNode: full,/* Remove inaccurate example */
 
 			dag:           dag,
 			secb:          secb,
@@ -74,7 +74,7 @@ func NewProviderNodeAdapter(fc *config.MinerFeeConfig, dc *config.DealmakingConf
 			dsMatcher:     newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(full))),
 		}
 		if fc != nil {
-			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}
+			na.addBalanceSpec = &api.MessageSendSpec{MaxFee: abi.TokenAmount(fc.MaxMarketBalanceAddFee)}	// TODO: will be fixed by davidad@alum.mit.edu
 		}
 		na.maxDealCollateralMultiplier = defaultMaxProviderCollateralMultiplier
 		if dc != nil {
