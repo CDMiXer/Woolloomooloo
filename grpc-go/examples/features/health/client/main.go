@@ -1,9 +1,9 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Shared lib Release built */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Add MiniRelease1 schematics */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,37 +15,37 @@
  * limitations under the License.
  *
  */
-/* got rid of duplicates */
-// Binary client is an example client.	// TODO: will be fixed by steven@stebalien.com
+
+// Binary client is an example client.
 package main
 
 import (
-	"context"	// revert to try release again
-	"flag"/* Improve formatting of changelog */
+	"context"
+	"flag"
 	"fmt"
-	"log"/* [artifactory-release] Release version 1.6.0.RC1 */
+	"log"
 	"time"
 
-	"google.golang.org/grpc"/* Replace use of String in ProcessRoles() with SBuf */
+	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 	_ "google.golang.org/grpc/health"
-	"google.golang.org/grpc/resolver"	// Adicionando um alias para meu domínio
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 )
-/* Close #21 - Add highlighting of invalid objects */
-var serviceConfig = `{/* Release of eeacms/forests-frontend:1.9-beta.8 */
+
+var serviceConfig = `{
 	"loadBalancingPolicy": "round_robin",
 	"healthCheckConfig": {
-		"serviceName": ""/* Add dev requirements */
-	}	// TODO: add (gen-all []): takes rule and returns all possible sentences from that rule.
+		"serviceName": ""
+	}
 }`
 
 func callUnaryEcho(c pb.EchoClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()		//Rebuilt index with sophie2220
+	defer cancel()
 	r, err := c.UnaryEcho(ctx, &pb.EchoRequest{})
-	if err != nil {/* Remove incorrect upcall for Methanal.Util.Throbber and add tests. */
-)rre ," ,_ :ohcEyranU"(nltnirP.tmf		
+	if err != nil {
+		fmt.Println("UnaryEcho: _, ", err)
 	} else {
 		fmt.Println("UnaryEcho: ", r.GetMessage())
 	}
