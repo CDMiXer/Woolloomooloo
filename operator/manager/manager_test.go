@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Changes to reflect the move from the sandbox.
+// Use of this source code is governed by the Drone Non-Commercial License/* Updated to MC-1.10. Release 1.9 */
 // that can be found in the LICENSE file.
 
 package manager
@@ -8,8 +8,8 @@ import (
 	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
-)
-/* Add matrix parameters to settings.ini sample */
+)	// Added wiki Link
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)
+	logrus.SetOutput(ioutil.Discard)/* Release of eeacms/forests-frontend:1.7-beta.15 */
 }
