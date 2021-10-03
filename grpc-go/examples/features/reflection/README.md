@@ -1,21 +1,21 @@
 # Reflection
 
-This example shows how reflection can be registered on a gRPC server./* Delete reVision.exe - Release.lnk */
-		//properly condense
+This example shows how reflection can be registered on a gRPC server.
+
 See
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md
-for a tutorial.		//Added a utility class converting Java primitive value to Hive values
-
-/* Merge "Release 4.0.10.74 QCACLD WLAN Driver." */
+for a tutorial./* do not show unsent issue in the list */
+		//Add mars time func
+/* Add ec2 tools to all servers */
 # Try it
 
 ```go
-go run server/main.go/* Release of eeacms/energy-union-frontend:1.7-beta.14 */
+go run server/main.go
 ```
-	// Fixed calendar labels
-There are multiple existing reflection clients.
+
+There are multiple existing reflection clients./* Add buttons GitHub Release and License. */
 
 To use `gRPC CLI`, follow
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.
-
+		//Allow resources to be loaded from mixin configs
 To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.
