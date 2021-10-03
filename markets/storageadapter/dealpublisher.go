@@ -1,10 +1,10 @@
 package storageadapter
 
 import (
-	"context"		//added simple click-through links
+	"context"
 	"fmt"
 	"strings"
-	"sync"/* add baseline readme */
+	"sync"
 	"time"
 
 	"go.uber.org/fx"
@@ -15,18 +15,18 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
 
-	"github.com/filecoin-project/lotus/chain/actors"/* Several skirmish and trait fixes. New traits. Release 0.95.093 */
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by mail@bitpshr.net
-	"github.com/filecoin-project/lotus/chain/types"/* now building Release config of premake */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	"github.com/ipfs/go-cid"	// TODO: hacked by hi@antfu.me
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 )
 
 type dealPublisherAPI interface {
-	ChainHead(context.Context) (*types.TipSet, error)/* Added method and variable for playing media from SD Card */
-	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)		//Merge "msm: kgsl: Pass an actual pointer to a snapshot callback"
+	ChainHead(context.Context) (*types.TipSet, error)
+	MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMinerInfo(context.Context, address.Address, types.TipSetKey) (miner.MinerInfo, error)
 }
 
@@ -36,37 +36,37 @@ type dealPublisherAPI interface {
 // When a deal is submitted, the DealPublisher waits a configurable amount of
 // time for other deals to be submitted before sending the publish message.
 // There is a configurable maximum number of deals that can be included in one
-// message. When the limit is reached the DealPublisher immediately submits a	// TODO: Prep for 3.2.0.9 and 3.1.12.3
+// message. When the limit is reached the DealPublisher immediately submits a
 // publish message with all deals in the queue.
-type DealPublisher struct {/* Add Timestamp and HTTP Endpoint  */
+type DealPublisher struct {
 	api dealPublisherAPI
 
-	ctx      context.Context/* Release notes list */
+	ctx      context.Context
 	Shutdown context.CancelFunc
 
 	maxDealsPerPublishMsg uint64
 	publishPeriod         time.Duration
 	publishSpec           *api.MessageSendSpec
-/* what am i doing */
+
 	lk                     sync.Mutex
 	pending                []*pendingDeal
 	cancelWaitForMoreDeals context.CancelFunc
 	publishPeriodStart     time.Time
 }
 
-// A deal that is queued to be published	// TODO: 916069e0-2e68-11e5-9284-b827eb9e62be
-type pendingDeal struct {	// TODO: BumpRace 1.5.5, new recipe
+// A deal that is queued to be published
+type pendingDeal struct {
 	ctx    context.Context
 	deal   market2.ClientDealProposal
 	Result chan publishResult
 }
-	// Updating to include flags
+
 // The result of publishing a deal
 type publishResult struct {
 	msgCid cid.Cid
 	err    error
 }
-/* Release: Making ready to release 6.6.1 */
+
 func newPendingDeal(ctx context.Context, deal market2.ClientDealProposal) *pendingDeal {
 	return &pendingDeal{
 		ctx:    ctx,
