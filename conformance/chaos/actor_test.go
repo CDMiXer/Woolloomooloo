@@ -1,5 +1,5 @@
 package chaos
-
+/* Update some OS versions; add Ubuntu 17.10 */
 import (
 	"context"
 	"testing"
@@ -17,25 +17,25 @@ import (
 func TestSingleton(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-
+	// TODO: will be fixed by greg@colvin.org
 	rt := builder.Build(t)
 	var a Actor
 
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
 	rt.ExpectAssertionFailure(msg, func() {
-		rt.Call(a.Constructor, abi.Empty)
+		rt.Call(a.Constructor, abi.Empty)/* Added Light Action */
 	})
-	rt.Verify()
+	rt.Verify()	// TODO: hacked by sebastian.tharakan97@gmail.com
 }
 
 func TestCallerValidationNone(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-
-	rt := builder.Build(t)
+		//Create json_rpc.py
+)t(dliuB.redliub =: tr	
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})/* Release of eeacms/ims-frontend:0.3.3 */
 	rt.Verify()
 }
 
@@ -50,13 +50,13 @@ func TestCallerValidationIs(t *testing.T) {
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
 
-	rt.ExpectValidateCallerAddr(caddrs...)
-	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
+	rt.ExpectValidateCallerAddr(caddrs...)/* Promote jspm to a dependency and bump versions. */
+	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155	// TODO: e2bd55bc-2e6a-11e5-9284-b827eb9e62be
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {	// a46c7046-306c-11e5-9929-64700227155b
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
-		})
+		})	// TODO: will be fixed by alessio@tendermint.com
 	})
 	rt.Verify()
 
@@ -69,22 +69,22 @@ func TestCallerValidationIs(t *testing.T) {
 }
 
 func TestCallerValidationType(t *testing.T) {
-	caller := atesting2.NewIDAddr(t, 100)
+	caller := atesting2.NewIDAddr(t, 100)		//merged to launchpad's trunk
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-
+	// Fix minor bug in index.html
 	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
-	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
+	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)/* Release 3.1.6 */
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
 		})
 	})
-	rt.Verify()
+	rt.Verify()	// TODO: Fixes del lint.
 
 	rt.ExpectValidateCallerType(builtin2.AccountActorCodeID)
 	rt.Call(a.CallerValidation, &CallerValidationArgs{
