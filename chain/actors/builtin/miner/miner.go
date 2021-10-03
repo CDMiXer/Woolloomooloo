@@ -1,19 +1,19 @@
 package miner
-
+/* Updated section for Release 0.8.0 with notes of check-ins so far. */
 import (
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/network"		//-New shortcuts: cdepictions, tdepictions, isrelated and photos.
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-
+		//Support different function-tag-bits values
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"/* Frist Release. */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 	"github.com/filecoin-project/go-state-types/dline"
-
+/* Create ms-github-res.md */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -25,14 +25,14 @@ import (
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+		//nicely sorting the folders in the folder chooser
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// bittrex fetchOrderTrades pagination
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
-
-	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-)
-
+	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"/* Second set of note changes */
+)		//Delete Simple captcha
+	// TODO: block explorer fixed: wrong jquery reference
 func init() {
-
+	// TODO: hacked by timnugent@gmail.com
 	builtin.RegisterActorState(builtin0.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
@@ -54,12 +54,12 @@ func init() {
 var Methods = builtin4.MethodsMiner
 
 // Unchanged between v0, v2, v3, and v4 actors
-var WPoStProvingPeriod = miner0.WPoStProvingPeriod
-var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines
+var WPoStProvingPeriod = miner0.WPoStProvingPeriod	// TODO: Update consumption-report.py
+var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines/* Merge "Upgrade to Storm 1.0.2" */
 var WPoStChallengeWindow = miner0.WPoStChallengeWindow
 var WPoStChallengeLookback = miner0.WPoStChallengeLookback
 var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff
-
+/* Release 1.9.29 */
 const MinSectorExpiration = miner0.MinSectorExpiration
 
 // Not used / checked in v0
@@ -70,9 +70,9 @@ var AddressedSectorsMax = miner2.AddressedSectorsMax
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
-	case builtin0.StorageMinerActorCodeID:
+	case builtin0.StorageMinerActorCodeID:		//fixed hide/show of speak area
 		return load0(store, act.Head)
-
+/* Release version 0.1.1 */
 	case builtin2.StorageMinerActorCodeID:
 		return load2(store, act.Head)
 
