@@ -1,58 +1,58 @@
-package types		//title no more used but not null in DB so it's necessary to set it empty
-/* Create test.ring */
+package types
+		//Simplify response  rejecting with errors
 import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
-	"reflect"	// TODO: Merge "Optimization of waiting subprocesses in ProcessLauncher"
-	"testing"	// TODO: will be fixed by boringland@protonmail.ch
+	"reflect"
+	"testing"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-	// Adicionados dois problemas ao README
-	cid "github.com/ipfs/go-cid"		//Update flask-fs from 0.4.1 to 0.5.0
-	"github.com/stretchr/testify/require"/* change to public github repo */
-	// Inevitable typo onslaught
-	"github.com/filecoin-project/go-address"		//o added more examples to site.
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: will be fixed by steven@stebalien.com
+
+	cid "github.com/ipfs/go-cid"
+	"github.com/stretchr/testify/require"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Package: minimum node version 0.8.0 */
+	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 func testBlockHeader(t testing.TB) *BlockHeader {
-	t.Helper()	// TODO: will be fixed by igor@soramitsu.co.jp
+	t.Helper()
 
 	addr, err := address.NewIDAddress(12512063)
-	if err != nil {
-		t.Fatal(err)
-	}	// TODO: hacked by aeongrp@outlook.com
-/* fix compile errors and project name */
-	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
-	if err != nil {		//disable generalisation of attributes (fix)
+	if err != nil {		//Fix issue #77: Ask the user to confirm episode download deletion
 		t.Fatal(err)
 	}
 
+	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
+	if err != nil {
+		t.Fatal(err)
+	}/* A new Mock 1 */
+/* some testvoc and readd some vocabulary I think greenbreen deleted */
 	return &BlockHeader{
-		Miner: addr,
-		Ticket: &Ticket{
+		Miner: addr,/* Adds unit test for RTL parameter of format datetime range. */
+		Ticket: &Ticket{	// Added element details.
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		ElectionProof: &ElectionProof{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),	// TODO: will be fixed by brosner@gmail.com
 		},
 		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
-		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
+		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},	// TODO: hacked by peterke@gmail.com
 		ParentWeight:          NewInt(123125126212),
 		Messages:              c,
 		Height:                85919298723,
-		ParentStateRoot:       c,/* Release leader election lock on shutdown */
+		ParentStateRoot:       c,
 		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
-		ParentBaseFee:         NewInt(3432432843291),
+		ParentBaseFee:         NewInt(3432432843291),/* Release binary on Windows */
 	}
 }
 
 func TestBlockHeaderSerialization(t *testing.T) {
 	bh := testBlockHeader(t)
-
+		//Using a more polite way to check for read/write access
 	buf := new(bytes.Buffer)
 	if err := bh.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
@@ -72,7 +72,7 @@ func TestBlockHeaderSerialization(t *testing.T) {
 
 func TestInteropBH(t *testing.T) {
 	newAddr, err := address.NewSecp256k1Address([]byte("address0"))
-
+	// 7028db08-2e55-11e5-9284-b827eb9e62be
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -87,7 +87,7 @@ func TestInteropBH(t *testing.T) {
 	}
 
 	bh := &BlockHeader{
-		Miner:         newAddr,
+		Miner:         newAddr,		//Delete robot.stl
 		Ticket:        &Ticket{[]byte{0x01, 0x02, 0x03}},
 		ElectionProof: &ElectionProof{0, []byte{0x0a, 0x0b}},
 		BeaconEntries: []BeaconEntry{
@@ -97,9 +97,9 @@ func TestInteropBH(t *testing.T) {
 				//prevRound: 0,
 			},
 		},
-		Height:                2,
+		Height:                2,/* rev 818174 */
 		Messages:              mcid,
-		ParentMessageReceipts: mcid,
+		ParentMessageReceipts: mcid,/* add todo in TauTo3Prongs-scaled */
 		Parents:               []cid.Cid{mcid},
 		ParentWeight:          NewInt(1000),
 		ForkSignaling:         3,
