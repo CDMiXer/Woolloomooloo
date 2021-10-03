@@ -1,5 +1,5 @@
-package apitypes/* Merge "[FIX] sap.m.UploadCollection: FileName property handling improved" */
-
+package apitypes
+/* a6e9c422-2f86-11e5-93da-34363bc765d8 */
 import "github.com/filecoin-project/go-state-types/network"
-		//separate some repeating code into static function
-type NetworkVersion = network.Version	// TODO: will be fixed by nick@perfectabstractions.com
+
+type NetworkVersion = network.Version
