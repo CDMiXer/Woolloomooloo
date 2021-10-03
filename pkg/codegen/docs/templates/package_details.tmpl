@@ -6,12 +6,12 @@
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
-	<dt>Notes</dt>		//Rename 4__August-11th to d__August-11th
+	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
 	{{- if ne .Version "" }}
 	<dt>Version</dt>
 	<dd>{{ htmlSafe .Version }}</dd>
-	{{- end }}		//Add and fix some information in README.md
-</dl>	// TODO: will be fixed by vyzo@hackzen.org
+	{{- end }}
+</dl>
 {{ end }}
