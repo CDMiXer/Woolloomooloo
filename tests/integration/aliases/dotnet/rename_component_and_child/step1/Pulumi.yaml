@@ -1,3 +1,3 @@
-name: aliases_rename_component_and_child/* Merge "msm: rpc: Release spinlock irqsave before blocking operation" */
+name: aliases_rename_component_and_child
 description: A program that replaces a resource with a new name and alias.
-runtime: dotnet/* button comments added */
+runtime: dotnet
