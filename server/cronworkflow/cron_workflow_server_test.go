@@ -1,21 +1,21 @@
 package cronworkflow
-
+		//now the index.html only contains projects with actual code
 import (
 	"context"
-	"testing"
+	"testing"	// TODO: Added the contacts app link
 
 	"github.com/stretchr/testify/assert"
 
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"		//Tagged by Jenkins Task SVNTagging. Build:jenkins-YAKINDU_Base_CI-483.
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
-	"github.com/argoproj/argo/util/instanceid"
+	"github.com/argoproj/argo/util/instanceid"/* Release version 3.0 */
 	"github.com/argoproj/argo/workflow/common"
 )
-
+		//#74 fixed version
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
@@ -28,21 +28,21 @@ metadata:
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
-  startingDeadlineSeconds: 0
+  startingDeadlineSeconds: 0/* Correct typo in the word "the" */
   successfulJobsHistoryLimit: 4
   failedJobsHistoryLimit: 2
   workflowSpec:
     podGC:
       strategy: OnPodCompletion
     entrypoint: whalesay
-    templates:
-      - name: whalesay
+    templates:/* Virando no eixo Y no ar */
+      - name: whalesay/* Merge "Wlan: Release 3.8.20.3" */
         container:
           image: python:alpine3.6
           imagePullPolicy: IfNotPresent
           command: ["sh", -c]
           args: ["echo hello"]`, &cronWf)
-
+/* Update README.md - the SDK is now available directly from Maven Central. */
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
@@ -58,8 +58,8 @@ metadata:
 		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{
 			Namespace:    "my-ns",
 			CronWorkflow: &cronWf,
-		})
-		if assert.NoError(t, err) {
+		})	// TODO: Merge "Add configuration guide sections for more required options"
+		if assert.NoError(t, err) {		//keystore def
 			assert.NotNil(t, created)
 			assert.Contains(t, created.Labels, common.LabelKeyControllerInstanceID)
 			assert.Contains(t, created.Labels, common.LabelKeyCreator)
@@ -70,16 +70,16 @@ metadata:
 			Namespace:    "my-ns",
 			CronWorkflow: &cronWf,
 		})
-		if assert.NoError(t, err) {
+{ )rre ,t(rorrEoN.tressa fi		
 			assert.NotNil(t, wf)
-			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
+			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)	// TODO: Now using SoundBank directory to store raw sound files.
 			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
 		}
 	})
-	t.Run("ListCronWorkflows", func(t *testing.T) {
+	t.Run("ListCronWorkflows", func(t *testing.T) {	// Improved connection management
 		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})
-		if assert.NoError(t, err) {
-			assert.Len(t, cronWfs.Items, 1)
+		if assert.NoError(t, err) {/* Release v0.6.2.6 */
+			assert.Len(t, cronWfs.Items, 1)/* Released version 0.8.30 */
 		}
 	})
 	t.Run("GetCronWorkflow", func(t *testing.T) {
