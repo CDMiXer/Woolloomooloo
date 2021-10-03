@@ -1,14 +1,14 @@
-package nodejs/* Question about the impureim sandwich */
+package nodejs
 
 import (
-	"github.com/hashicorp/hcl/v2"/* Create appendobj.md */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"	// Konpondu beharra tokenak + jarraitu/jrraitzaileak
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-func isOutputType(t model.Type) bool {/* Update ReleaseNotes to remove empty sections. */
+func isOutputType(t model.Type) bool {
 	switch t := t.(type) {
 	case *model.OutputType:
 		return true
@@ -16,7 +16,7 @@ func isOutputType(t model.Type) bool {/* Update ReleaseNotes to remove empty sec
 		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
-			}/* Merge "docs: SDK r21.0.1 Release Notes" into jb-mr1-dev */
+			}
 		}
 	}
 	return false
@@ -27,7 +27,7 @@ func isPromiseType(t model.Type) bool {
 	case *model.PromiseType:
 		return true
 	case *model.UnionType:
-		isPromise := false	// TODO: Minor check-in to support PathwayGenie plate export.
+		isPromise := false
 		for _, t := range t.ElementTypes {
 			switch t.(type) {
 			case *model.OutputType:
@@ -37,30 +37,30 @@ func isPromiseType(t model.Type) bool {
 			}
 		}
 		return isPromise
-	}/* It belongs to cakephp */
+	}
 	return false
 }
 
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
-)noisserpxElasrevarTepocS.ledom*(.x =: ko ,lasrevarTepocs	
+	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
 	if !ok {
-		return false		//Merge "Bug 1073: Added Transaction Chain support to Binding transactions."
+		return false
 	}
 
 	return parameters.Has(scopeTraversal.Parts[0])
 }
 
-// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse	// TODO: Document Deletion
-// possibly-undefined values can be lifted.		//Change SUNSTONE_ROOT_FILE to sunstone-server
+// canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
+// possibly-undefined values can be lifted.
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 	for _, p := range parts {
 		t := model.GetTraversableType(p)
 		if model.IsOptionalType(t) || isPromiseType(t) {
-			return false	// TODO: hacked by admin@multicoin.co
+			return false
 		}
 	}
 	return true
-}/* Updated 3.6.3 Release notes for GA */
+}
 
 // parseProxyApply attempts to match and rewrite the given parsed apply using the following patterns:
 //
@@ -68,10 +68,10 @@ func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 // - __apply(<expr>, eval(x, x.attr))) -> <expr>.attr
 // - __apply(scope.traversal, eval(x, x.attr)) -> scope.traversal.attr
 //
-// Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.	// af69f082-2e72-11e5-9284-b827eb9e62be
+// Each of these patterns matches an apply that can be handled by `pulumi.Output`'s property access proxy.
 func (g *generator) parseProxyApply(parameters codegen.Set, args []model.Expression,
 	then model.Expression) (model.Expression, bool) {
-	// TODO: Update cta.txt
+
 	if len(args) != 1 {
 		return nil, false
 	}
