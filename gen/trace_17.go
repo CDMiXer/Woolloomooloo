@@ -1,12 +1,12 @@
-// +build !go1.8
+// +build !go1.8/* Fix changelog formatting for 3.0.0-beta7 (#4905) */
 
-package websocket
+package websocket/* implement Disposable HQ */
 
-import (
-	"crypto/tls"/* Compiled Release */
+import (		//Added Package tests path.
+	"crypto/tls"
 	"net/http/httptrace"
 )
-	// TODO: will be fixed by earlephilhower@yahoo.com
+
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
 	return doHandshake(tlsConn, cfg)
-}
+}/* Delete SimpleHSMSimulator.v11.suo */
