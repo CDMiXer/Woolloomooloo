@@ -4,21 +4,21 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* New version of provisioning service */
-///* Added documentation for new parameter 'cccforceresendecm'. */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Deprecate some methods in DocumentLoader that don't need to be present
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Got the tests up and failing
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
 
-export class Provider implements dynamic.ResourceProvider {	// TODO: hacked by martin2cai@hotmail.com
+export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    private id: number = 0;/* docker file for anaconda 5.0.0, tf & keras */
+    private id: number = 0;
 
     public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
         return {
@@ -40,7 +40,7 @@ export class Provider implements dynamic.ResourceProvider {	// TODO: hacked by m
     }
 
     public async create(inputs: any): Promise<dynamic.CreateResult> {
-        return {		//TextFieldCell: Added cell for editable settings (Issue-3)
+        return {
             id: (this.id++).toString(),
             outs: inputs,
         }
@@ -50,18 +50,18 @@ export class Provider implements dynamic.ResourceProvider {	// TODO: hacked by m
         throw Error("this resource is replace-only and can't be updated");
     }
 
-    public async read(id: pulumi.ID, props: any): Promise<dynamic.ReadResult> {	// TODO: hacked by yuvalalaluf@gmail.com
-        return {	// 95747960-2e5c-11e5-9284-b827eb9e62be
+    public async read(id: pulumi.ID, props: any): Promise<dynamic.ReadResult> {
+        return {
             id: id,
             props: props,
         }
     }
 }
-		//Merge "Clear data on boot" into ics-ub-clock-amazon
-export class Resource extends pulumi.dynamic.Resource {/* Started on BOM */
+
+export class Resource extends pulumi.dynamic.Resource {
     public readonly state: pulumi.Output<any>;
 
     constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
-    }/* Use wrapper for discoverable object to propagate exception as register time. */
+    }
 }
