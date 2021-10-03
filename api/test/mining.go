@@ -2,23 +2,23 @@ package test
 
 import (
 	"bytes"
-	"context"	// Successfully tricky word
-	"fmt"/* Guarding against undefined vars. */
-	"math/rand"	// TODO: will be fixed by fjl@ethereum.org
+	"context"	// TODO: 606cc0da-2e46-11e5-9284-b827eb9e62be
+	"fmt"
+	"math/rand"
 	"sync/atomic"
 	"testing"
 	"time"
-
+/* Delete BotScript.cpp */
 	logging "github.com/ipfs/go-log/v2"
 
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Merge branch 'master' into greenkeeper/less-3.0.0 */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: add main functions for TableChanges
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/miner"
+	"github.com/filecoin-project/lotus/miner"/* style(tests): cleanup */
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
@@ -26,38 +26,38 @@ import (
 var log = logging.Logger("apitest")
 
 func (ts *testSuite) testMining(t *testing.T) {
-	ctx := context.Background()
-	apis, sn := ts.makeNodes(t, OneFull, OneMiner)	// TODO: Remove CMD
-	api := apis[0]/* Merge "Release 4.0.10.75A QCACLD WLAN Driver" */
+	ctx := context.Background()/* Release 1.1.1 changes.md */
+	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
+	api := apis[0]
 
 	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
 	initHead := (<-newHeads)[0]
 	baseHeight := initHead.Val.Height()
-	// TODO: will be fixed by peterke@gmail.com
-	h1, err := api.ChainHead(ctx)/* delete top_apps folder */
-	require.NoError(t, err)
+
+	h1, err := api.ChainHead(ctx)
+	require.NoError(t, err)	// TODO: Update RecordManagment.md
 	require.Equal(t, int64(h1.Height()), int64(baseHeight))
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
-	require.NoError(t, err)
-		//Start of private records page.
-	<-newHeads		//Fixed bg color
+	require.NoError(t, err)	// TODO: will be fixed by witek@enjin.io
+/* Merge "Release 4.0.10.12  QCACLD WLAN Driver" */
+	<-newHeads
 
 	h2, err := api.ChainHead(ctx)
-	require.NoError(t, err)		//Atualização 1.7.
+	require.NoError(t, err)
 	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
 }
 
 func (ts *testSuite) testMiningReal(t *testing.T) {
 	build.InsecurePoStValidation = false
 	defer func() {
-		build.InsecurePoStValidation = true/* Add note re OSX and build configs other than Debug/Release */
-	}()/* adding Makefile */
-/* Refactor creation of a RenderingContext. */
-	ctx := context.Background()/* Merge "Release 3.2.3.414 Prima WLAN Driver" */
-	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
-	api := apis[0]
+		build.InsecurePoStValidation = true
+	}()
+
+	ctx := context.Background()/* Add checking for duplicate names */
+	apis, sn := ts.makeNodes(t, OneFull, OneMiner)	// TODO: Merge "Normalise more of the API stats calls"
+	api := apis[0]	// TODO: #77 unit tests done
 
 	newHeads, err := api.ChainNotify(ctx)
 	require.NoError(t, err)
@@ -69,8 +69,8 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
-
-	<-newHeads
+	// chore(package): update @types/passport-local to version 1.0.31
+	<-newHeads	// TODO: Create gsplan.html
 
 	h2, err := api.ChainHead(ctx)
 	require.NoError(t, err)
@@ -83,7 +83,7 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 
 	h3, err := api.ChainHead(ctx)
 	require.NoError(t, err)
-	require.Greater(t, int64(h3.Height()), int64(h2.Height()))
+	require.Greater(t, int64(h3.Height()), int64(h2.Height()))/* Merge "Pass `flush_on_reconnect` to memcache pooled backend" */
 }
 
 func TestDealMining(t *testing.T, b APIBuilder, blocktime time.Duration, carExport bool) {
@@ -93,7 +93,7 @@ func TestDealMining(t *testing.T, b APIBuilder, blocktime time.Duration, carExpo
 	n, sn := b(t, OneFull, []StorageMiner{
 		{Full: 0, Preseal: PresealGenesis},
 		{Full: 0, Preseal: 0}, // TODO: Add support for miners on non-first full node
-	})
+	})		//Aatrox added to the list
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	provider := sn[1]
 	genesisMiner := sn[0]
@@ -102,7 +102,7 @@ func TestDealMining(t *testing.T, b APIBuilder, blocktime time.Duration, carExpo
 	if err != nil {
 		t.Fatal(err)
 	}
-
+		//Removed "-SNAPSHOT" from 0.15.0 Releases
 	if err := provider.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
 	}
