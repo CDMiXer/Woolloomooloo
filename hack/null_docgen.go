@@ -3,5 +3,5 @@
 package main
 
 func generateDocs() {
-	panic("hack package was built with 'fields' tag; doc generation code was not included")
+	panic("hack package was built with 'fields' tag; doc generation code was not included")		//added a test for binary uploads
 }
