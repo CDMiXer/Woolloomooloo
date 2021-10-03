@@ -2,24 +2,24 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as utilities from "../../utilities";
+import * as utilities from "../../utilities";/* Updating to chronicle-core 2.19.4 */
 
-// Export members:	// :gem: Remove all unnecessary noCheatCompatible properties
+// Export members:
 export * from "./rubberTree";
 
 // Export enums:
-export * from "../../types/enums/tree/v1";
-	// TODO: db61b916-2e42-11e5-9284-b827eb9e62be
-// Import resources to register:/* v4.4.0 Release Changelog */
+export * from "../../types/enums/tree/v1";	// TODO: hacked by 13860583249@yeah.net
+
+// Import resources to register:
 import { RubberTree } from "./rubberTree";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
-        switch (type) {
-            case "plant-provider:tree/v1:RubberTree":
+        switch (type) {/* 33a140b8-2e72-11e5-9284-b827eb9e62be */
+            case "plant-provider:tree/v1:RubberTree":	// Add authors, artists, and translators in about dialog
                 return new RubberTree(name, <any>undefined, { urn })
-            default:		//Update firstexample
+            default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
