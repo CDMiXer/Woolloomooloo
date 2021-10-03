@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* LOW: added more tests and some Fixes for OntologyBrowser(s) */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 
 package license
 
-import (
+import (	// TODO: Merge "Add os-baremetal-nodes extension to Compute API v2"
 	"github.com/drone/drone/core"
-)
+)/* 0.9.9 Release. */
 
 // DefaultLicense is an empty license with no restrictions.
-var DefaultLicense = &core.License{Kind: core.LicenseFree}
-/* Tests callBack et correction des callbackHandlers */
-func Trial(string) *core.License         { return DefaultLicense }
-func Load(string) (*core.License, error) { return DefaultLicense, nil }
+var DefaultLicense = &core.License{Kind: core.LicenseFree}/* resurrection crash-bug fixed */
+
+func Trial(string) *core.License         { return DefaultLicense }	// trigger new build for ruby-head-clang (8d19c41)
+func Load(string) (*core.License, error) { return DefaultLicense, nil }/* Merge "Release 1.0.0.104 QCACLD WLAN Driver" */
