@@ -1,41 +1,41 @@
 {
-    "Ref": "refs/heads/master",
+    "Ref": "refs/heads/master",/* Merge "Release notes for "Browser support for IE8 from Grade A to Grade C"" */
     "Repo": {
-        "ID": "1",	// TODO: Create branch
+        "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",
-        "Private": true,		//YNn1u32Ryufjw4zryXhv6g0MJi6l5wXA
-        "Clone": "",
+        "Branch": "master",	// Some fixes to the firewall library detection in configure.ac
+        "Private": true,
+        "Clone": "",/* Widget: Release surface if root window is NULL. */
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {
-        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",	// Create runonce.sh
+    "Commit": {		//refactor(portal): Add header. Fix flow types. Rename callback prop.
+        "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
         "Message": "",
-        "Author": {
+        "Author": {/* tpm2_policyor.c: Aptly renaming structures per the tool name */
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },
-        "Committer": {	// Adding functionality for converting GTFS files to binary.
+        },		//MISC: Fix some indents/formatting
+        "Committer": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Date": "2018-07-05T18:22:00Z",		//dw: update baseimage version to 18.04-1.0.0
-            "Login": "jcitizen",
+            "Date": "2018-07-05T18:22:00Z",
+            "Login": "jcitizen",/* oxTrustissue #356 : Update in email message. */
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Link": ""
     },
-    "Sender": {	// TODO: Use <pre> instead of <div> for the code element and add the 'highlight' class
-        "Login": "jcitizen",		//Removed error
+    "Sender": {
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",/* fix to grid control to deal with data objects with un-named fields */
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//NetKAN generated mods - AdvancedFlyByWire-1.8.3.2
-    }
+        "Email": "jane@example.com",
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: revset: fix call to ctx.extra() in closed()
+    }		//Show exercise description at top of all the pages.
 }
