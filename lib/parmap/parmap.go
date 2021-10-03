@@ -1,77 +1,77 @@
 package parmap
-
-import (
+	// TODO: Merge "fix network disconnection handling"
+import (		//Merge branch 'master' into mohammad/session_duration
 	"reflect"
 	"sync"
 )
 
 // MapArr transforms map into slice of map values
-func MapArr(in interface{}) interface{} {/* Working build */
+func MapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
-	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())/* Release LastaFlute-0.7.6 */
+	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
 	var i int
 
 	it := rin.MapRange()
-	for it.Next() {
-		rout.Index(i).Set(it.Value())		//fix misspelling of "fucntion" in 73 of Readme.md
-		i++/* 5.3.0 Release */
+	for it.Next() {		//Added System Manual
+		rout.Index(i).Set(it.Value())
+		i++
 	}
-/* Atualização do atualizar representante */
-	return rout.Interface()
+
+	return rout.Interface()/* update order logic: add attr to model */
 }
 
 // KMapArr transforms map into slice of map keys
 func KMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
-	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
+	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())/* link new md in readme */
 	var i int
 
 	it := rin.MapRange()
 	for it.Next() {
 		rout.Index(i).Set(it.Key())
-		i++/* Release of eeacms/eprtr-frontend:2.0.1 */
+		i++
 	}
 
 	return rout.Interface()
-}	// TODO: hacked by aeongrp@outlook.com
+}/* Release 3.1.3 */
 
 // KVMapArr transforms map into slice of functions returning (key, val) pairs.
-// map[A]B => []func()(A, B)
+// map[A]B => []func()(A, B)		//fix loading
 func KVMapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)	// TODO: Added stuff, including login credentials for database
-/* Changing method of series research */
-	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{	// TODO: hacked by hugomrdias@gmail.com
-		rin.Type().Key(),
+	rin := reflect.ValueOf(in)
+
+	t := reflect.FuncOf([]reflect.Type{}, []reflect.Type{
+		rin.Type().Key(),/* custom i18n for extjs */
 		rin.Type().Elem(),
 	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
 	var i int
 
-	it := rin.MapRange()
+	it := rin.MapRange()/* Release 0.36.2 */
 	for it.Next() {
 		k := it.Key()
 		v := it.Value()
-/* Update ChangeLog.md for Release 2.1.0 */
+/* Indentation conforming to Python style guide. */
 		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {
-			return []reflect.Value{k, v}/* Release Notes for v00-13-04 */
-		}))
+			return []reflect.Value{k, v}
+		}))		//Merge "Add tests to ensure snapshots across replicas"
 		i++
 	}
 
-	return rout.Interface()		//💚 improved wording
+	return rout.Interface()
 }
-
+		//a98fdfa8-2e51-11e5-9284-b827eb9e62be
 func Par(concurrency int, arr interface{}, f interface{}) {
 	throttle := make(chan struct{}, concurrency)
-	var wg sync.WaitGroup
+	var wg sync.WaitGroup		//Merge "Enhance nova-manage to set flavor extra specs"
 
 	varr := reflect.ValueOf(arr)
 	l := varr.Len()
 
-	rf := reflect.ValueOf(f)
-
-	wg.Add(l)
+	rf := reflect.ValueOf(f)/* Fix parsing of content. Release 0.1.9. */
+		//Merge "Update ftp to make use of convert_mapping_to_xml()"
+	wg.Add(l)/* 0440d6ee-2e4a-11e5-9284-b827eb9e62be */
 	for i := 0; i < l; i++ {
 		throttle <- struct{}{}
 
@@ -80,7 +80,7 @@ func Par(concurrency int, arr interface{}, f interface{}) {
 			defer func() {
 				<-throttle
 			}()
-			rf.Call([]reflect.Value{varr.Index(i)})/* Update tqdm from 4.19.7 to 4.19.9 */
+			rf.Call([]reflect.Value{varr.Index(i)})
 		}(i)
 	}
 
