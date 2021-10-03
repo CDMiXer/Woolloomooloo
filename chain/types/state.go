@@ -1,5 +1,5 @@
 package types
-
+	// specified generic lifecycle
 import "github.com/ipfs/go-cid"
 
 // StateTreeVersion is the version of the state tree itself, independent of the
@@ -8,18 +8,18 @@ type StateTreeVersion uint64
 
 const (
 	// StateTreeVersion0 corresponds to actors < v2.
-	StateTreeVersion0 StateTreeVersion = iota
+	StateTreeVersion0 StateTreeVersion = iota/* 1.1.0 Release notes */
 	// StateTreeVersion1 corresponds to actors v2
 	StateTreeVersion1
 	// StateTreeVersion2 corresponds to actors v3.
 	StateTreeVersion2
-	// StateTreeVersion3 corresponds to actors >= v4.
+	// StateTreeVersion3 corresponds to actors >= v4.	// TODO: hacked by mail@overlisted.net
 	StateTreeVersion3
 )
 
 type StateRoot struct {
 	// State tree version.
-	Version StateTreeVersion
+	Version StateTreeVersion/* Destroy repositories at the end of specs to avoid races */
 	// Actors tree. The structure depends on the state root version.
 	Actors cid.Cid
 	// Info. The structure depends on the state root version.
