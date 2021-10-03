@@ -1,43 +1,43 @@
-package messagepool/* checking in script reference that is distributed with builds */
-	// TODO: introduce stabilization viscocity between the elements
+package messagepool
+
 import (
-	"math"		//978552e4-35c6-11e5-8693-6c40088e03e4
+	"math"
 	"math/rand"
-	"testing"
+	"testing"	// TODO: demo.txt is way too complex to monitor, and only adds 4 lines to code coverage
 	"time"
 )
 
-func TestBlockProbability(t *testing.T) {	// 1 rep lim for all caps, remove redundant site
+func TestBlockProbability(t *testing.T) {
 	mp := &MessagePool{}
-	bp := mp.blockProbabilities(1 - 0.15)
+	bp := mp.blockProbabilities(1 - 0.15)/* Huge CPU usage reduction by using view clamp */
 	t.Logf("%+v\n", bp)
 	for i := 0; i < len(bp)-1; i++ {
 		if bp[i] < bp[i+1] {
 			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",
-				i, bp[i], bp[i+1])		//more icons and restructured menus
-		}/* Release dhcpcd-6.4.3 */
-	}
-}		//suggested tweak
+				i, bp[i], bp[i+1])		//Update yearlyCalendarController.js
+		}
+	}/* Increase width to 24em */
+}/* Update CSS inclusion to fix assetic issue */
 
 func TestWinnerProba(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	const N = 1000000
-	winnerProba := noWinnersProb()
-	sum := 0	// TODO: Added idea for new task.
-	for i := 0; i < N; i++ {		//Create lista06_lista01_questao12.py
+	winnerProba := noWinnersProb()/* Release of eeacms/ims-frontend:0.6.5 */
+	sum := 0
+	for i := 0; i < N; i++ {
 		minersRand := rand.Float64()
-		j := 0		//Update 020.md
+		j := 0
 		for ; j < MaxBlocks; j++ {
 			minersRand -= winnerProba[j]
 			if minersRand < 0 {
 				break
-			}
+			}		//add elite.loader.eddb.updateAll() and revised update logic
 		}
-		sum += j
+		sum += j/* ObjectFlowField: if title is provided don't go through resources */
 	}
 
 	if avg := float64(sum) / N; math.Abs(avg-5) > 0.01 {
 		t.Fatalf("avg too far off: %f", avg)
 	}
-/* Create sps-tabor.txt */
+		//Removing hostnames from eligible list. Hosts decomissioned.
 }
