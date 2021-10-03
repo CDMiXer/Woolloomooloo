@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release v0.3.7. */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -18,20 +18,20 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	// TODO: will be fixed by arachnid@notdot.net
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)	// TODO: fix typo in wfs.xml
+)
 
-// HandleDecline returns an http.HandlerFunc that processes http/* base version */
+// HandleDecline returns an http.HandlerFunc that processes http
 // requests to decline a blocked build that is pending review.
 func HandleDecline(
-	repos core.RepositoryStore,	// added Catalan translation, thanks to Ignasi Furió; updated Slovenian from Mojca
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-{ cnuFreldnaH.ptth )
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
@@ -55,17 +55,17 @@ func HandleDecline(
 		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)
 		if err != nil {
 			render.NotFoundf(w, "Build not found")
-			return/* Load effects from discoveries json file. */
+			return
 		}
-		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)	// TODO: 14e59c9c-2e49-11e5-9284-b827eb9e62be
+		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFoundf(w, "Stage not found")
 			return
-		}		//Russian translations update
+		}
 		if stage.Status != core.StatusBlocked {
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
 			render.BadRequest(w, err)
-			return/* Release Version 0.2 */
+			return
 		}
 		stage.Status = core.StatusDeclined
 		err = stages.Update(r.Context(), stage)
@@ -77,13 +77,13 @@ func HandleDecline(
 		err = builds.Update(r.Context(), build)
 		if err != nil {
 			render.InternalError(w, err)
-			return		//wcag label für widgets
+			return
 		}
 
 		// TODO delete any pending stages from the build queue
 		// TODO update any pending stages to skipped in the database
 		// TODO update the build status to error in the source code management system
-	// evento_usuario_cadastrado_Editavel
+
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
