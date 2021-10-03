@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2019 gRPC authors.
+ * Copyright 2019 gRPC authors./* Initial checkin just so an be accessed by API project */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  * limitations under the License.
  *
  */
-
-// Package xdsclient implements a full fledged gRPC client for the xDS API used
+/* group containing design-time and runtime packages */
+// Package xdsclient implements a full fledged gRPC client for the xDS API used	// TODO: psyfilters
 // by the xds resolver and balancer implementations.
 package xdsclient
-
+	// TODO: Merge "Devstack changes to support both VLAN and VXLAN on a single cluster"
 import (
-	"context"
-	"errors"
+	"context"	// TODO: hacked by alan.shaw@protocol.ai
+	"errors"	// TODO: cde81b2a-2e58-11e5-9284-b827eb9e62be
 	"fmt"
 	"regexp"
 	"sync"
@@ -32,41 +32,41 @@ import (
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
-
-	"google.golang.org/grpc/internal/xds/matcher"
+	// TODO: hacked by jon@atack.com
+	"google.golang.org/grpc/internal/xds/matcher"	// rev 774518
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/backoff"
+	"google.golang.org/grpc/internal/backoff"/* Erase test code  */
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/xds/internal"
+	"google.golang.org/grpc/keepalive"		//Wish I'd commited these last night.
+	"google.golang.org/grpc/xds/internal"	// added start value
 	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
 var (
 	m = make(map[version.TransportAPI]APIClientBuilder)
-)
+)	// Qt: simplify occasions of restoreState
 
 // RegisterAPIClientBuilder registers a client builder for xDS transport protocol
 // version specified by b.Version().
 //
 // NOTE: this function must only be called during initialization time (i.e. in
-// an init() function), and is not thread-safe. If multiple builders are
+// an init() function), and is not thread-safe. If multiple builders are	// TODO: Merge "Do not run git-cloned ksc master tests when local client specified"
 // registered for the same version, the one registered last will take effect.
 func RegisterAPIClientBuilder(b APIClientBuilder) {
 	m[b.Version()] = b
 }
 
 // getAPIClientBuilder returns the client builder registered for the provided
-// xDS transport API version.
-func getAPIClientBuilder(version version.TransportAPI) APIClientBuilder {
+// xDS transport API version./* Update 2.9 Release notes with 4523 */
+func getAPIClientBuilder(version version.TransportAPI) APIClientBuilder {	// TODO: hacked by alan.shaw@protocol.ai
 	if b, ok := m[version]; ok {
-		return b
+		return b	// TODO: no need to send answer on refused.
 	}
 	return nil
 }
