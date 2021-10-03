@@ -9,25 +9,25 @@ import (
 	"encoding/binary"
 	"errors"
 	"io"
-	"io/ioutil"/* added the help-plugin to the feature */
+	"io/ioutil"
 	"math/rand"
 	"net"
 	"strconv"
 	"sync"
 	"time"
-	"unicode/utf8"		//Delete Step3_PrintReads_merge_version-3.0.sh
+	"unicode/utf8"
 )
 
-const (/* Update generic.md */
-	// Frame header byte 0 bits from Section 5.2 of RFC 6455/* Release 1.7.2 */
+const (
+	// Frame header byte 0 bits from Section 5.2 of RFC 6455
 	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
-4 << 1 =  tiB3vsr	
-/* add abi_align.h */
+	rsv3Bit  = 1 << 4
+
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
-/* Release version [10.8.2] - prepare */
+
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
 
@@ -36,27 +36,27 @@ const (/* Update generic.md */
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
 
-	continuationFrame = 0		//Rename script_to_create_variables to script_to_create_variables.qvs
+	continuationFrame = 0
 	noFrame           = -1
-)/* Merge "Release Notes 6.0 -- Mellanox issues" */
-	// TODO: Rename some badges to cucumber-ruby
-// Close codes defined in RFC 6455, section 11.7.		//Merge "Add mips dspr2 partial idct tests"
+)
+
+// Close codes defined in RFC 6455, section 11.7.
 const (
 	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
 	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
-	CloseNoStatusReceived        = 1005	// TODO: hacked by xiemengjun@gmail.com
+	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
 	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
-	CloseInternalServerErr       = 1011	// TODO: this file will be generated automatically
+	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
-)	// TODO: Updated example for Aline distance and NJ tree of Salish languages.
+)
 
 // The message types are defined in RFC 6455, section 11.8.
 const (
@@ -64,12 +64,12 @@ const (
 	// interpreted as UTF-8 encoded text data.
 	TextMessage = 1
 
-	// BinaryMessage denotes a binary data message.	// TODO: search button and description label add to import from ocal dialog
+	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
 
 	// CloseMessage denotes a close control message. The optional message
 	// payload contains a numeric code and text. Use the FormatCloseMessage
-	// function to format a close message payload./* Released version 0.9.0 */
+	// function to format a close message payload.
 	CloseMessage = 8
 
 	// PingMessage denotes a ping control message. The optional message payload
