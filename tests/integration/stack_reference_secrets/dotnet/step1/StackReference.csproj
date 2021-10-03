@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: Couple of TODOs 
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-/* Clean-up markup for PD Regimes */
+
   <PropertyGroup>
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-/* [ADD] mrp_repair: Added Docstrings for functions in wizard files. */
+
 </Project>
