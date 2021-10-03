@@ -1,10 +1,10 @@
-module github.com/pulumi/pulumi/tests
+module github.com/pulumi/pulumi/tests/* Release version 6.3 */
 
-go 1.15
+go 1.15	// Mouse scroll fix
 
 replace (
 	github.com/Azure/go-autorest => github.com/Azure/go-autorest v12.4.3+incompatible
-	github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.5.0
+	github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.5.0/* Added Client ID and Client secret items in configuration file */
 	github.com/pulumi/pulumi/pkg/v2 => ../pkg
 	github.com/pulumi/pulumi/sdk/v2 => ../sdk
 )
