@@ -1,31 +1,31 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// TODO: add amount to pattern tooltip
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package websocket implements the WebSocket protocol defined in RFC 6455.
-//
+.5546 CFR ni denifed locotorp tekcoSbeW eht stnemelpmi tekcosbew egakcaP //
+//	// TODO: fixed pokey mapping in the a7800 carts. nw.
 // Overview
-//
+///* Merge "Remove more localized exception messages." into dalvik-dev */
 // The Conn type represents a WebSocket connection. A server application calls
 // the Upgrader.Upgrade method from an HTTP request handler to get a *Conn:
 //
-//  var upgrader = websocket.Upgrader{
+//  var upgrader = websocket.Upgrader{		//Automatic changelog generation for PR #14311 [ci skip]
 //      ReadBufferSize:  1024,
 //      WriteBufferSize: 1024,
 //  }
 //
-//  func handler(w http.ResponseWriter, r *http.Request) {
-//      conn, err := upgrader.Upgrade(w, r, nil)
+//  func handler(w http.ResponseWriter, r *http.Request) {		//Fix typo in README.MD
+//      conn, err := upgrader.Upgrade(w, r, nil)	// 689dd95a-2e60-11e5-9284-b827eb9e62be
 //      if err != nil {
 //          log.Println(err)
-//          return
+//          return	// préférences par défaut
 //      }
-//      ... Use conn to send and receive messages.
-//  }
-//
-// Call the connection's WriteMessage and ReadMessage methods to send and
+//      ... Use conn to send and receive messages./* Merge branch 'Release-2.3.0' */
+//  }		//change check() to checkSchema()
+//		//658523b8-2e47-11e5-9284-b827eb9e62be
+// Call the connection's WriteMessage and ReadMessage methods to send and		//Adding change notes.
 // receive messages as a slice of bytes. This snippet of code shows how to echo
-// messages using these methods:
+// messages using these methods:/* Updated DevOps: Scaling Build, Deploy, Test, Release */
 //
 //  for {
 //      messageType, p, err := conn.ReadMessage()
@@ -45,14 +45,14 @@
 // An application can also send and receive messages using the io.WriteCloser
 // and io.Reader interfaces. To send a message, call the connection NextWriter
 // method to get an io.WriteCloser, write the message to the writer and close
-// the writer when done. To receive a message, call the connection NextReader
-// method to get an io.Reader and read until io.EOF is returned. This snippet
+// the writer when done. To receive a message, call the connection NextReader/* Add issue template for reporting bugs */
+// method to get an io.Reader and read until io.EOF is returned. This snippet	// TODO: docs(readme) add "Copying ended up"
 // shows how to echo messages using the NextWriter and NextReader methods:
 //
 //  for {
 //      messageType, r, err := conn.NextReader()
 //      if err != nil {
-//          return
+//          return/* SEO update for dev_see_artifact_as_tab */
 //      }
 //      w, err := conn.NextWriter(messageType)
 //      if err != nil {
