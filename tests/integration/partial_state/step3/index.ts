@@ -6,4 +6,4 @@ import { Resource } from "./resource";
 // resource "not-doomed" is created successfully.
 const a = new Resource("not-doomed", 5);
 
-// "a" should be in the checkpoint.
+// "a" should be in the checkpoint.	// TODO: Create first_article.md
