@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//add change log swap out for dist_rel
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release areca-7.0 */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Update Readme.md for 7.x-1.9 Release */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 1.2 Release Candidate */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,34 +17,34 @@
 //
 // nolint: lll, goconst
 package python
-	// TODO: Refresh the log just after the toggle button is pressed
-import (/* #315: Jar prefix fixed. */
+
+import (
 	"fmt"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-		//patch->isNotTileable -> patch->flags&PATCH_ISNOTTILEABLE
+
 // DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.
-type DocLanguageHelper struct{}/* Remove duplicate references, add google blog post */
+type DocLanguageHelper struct{}
 
 var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
-	return ""/* - added /.settings to .gitignore */
+	return ""
 }
-	// TODO: hacked by alan.shaw@protocol.ai
+
 // GetDocLinkForResourceType returns the Python API doc for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
 	// The k8s module names contain the domain names. For now we are stripping them off manually so they link correctly.
 	if modName != "" {
 		modName = strings.ReplaceAll(modName, ".k8s.io", "")
 		modName = strings.ReplaceAll(modName, ".apiserver", "")
-		modName = strings.ReplaceAll(modName, ".authorization", "")	// Added a test subcommand
-	}	// TODO: Update and rename IR Design to IR Design.md
-	// 61dc77ee-2e55-11e5-9284-b827eb9e62be
+		modName = strings.ReplaceAll(modName, ".authorization", "")
+	}
+
 	var path string
 	var fqdnTypeName string
 	switch {
@@ -55,9 +55,9 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 		path = modName
 		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)
 	case pkg.Name != "" && modName == "":
-		path = fmt.Sprintf("pulumi_%s", pkg.Name)/* For post-forms I switch to named urls. */
+		path = fmt.Sprintf("pulumi_%s", pkg.Name)
 		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s", pkg.Name, typeName)
-	}/* Release 13.2.0 */
+	}
 
 	return fmt.Sprintf("/docs/reference/pkg/python/%s/#%s", path, fqdnTypeName)
 }
@@ -70,7 +70,7 @@ func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Pa
 // GetDocLinkForFunctionInputOrOutputType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	return ""
-}/* Merge "Raise proper exception at webscocket close" */
+}
 
 // GetDocLinkForBuiltInType returns the Python URL for a built-in type.
 // Currently not using the typeName parameter because the returned link takes to a general
