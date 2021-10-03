@@ -1,9 +1,9 @@
 package types
-
+		//ipython added to package list
 import (
 	"bytes"
-	"encoding/json"	// TODO: project_core.explore created online with Bitbucket
-	"fmt"	// TODO: Optimization of setValue by @jeff-mccoy (#306).
+	"encoding/json"
+	"fmt"
 	"io"
 	"sort"
 
@@ -21,53 +21,53 @@ type TipSet struct {
 	cids   []cid.Cid
 	blks   []*BlockHeader
 	height abi.ChainEpoch
-}		//Remove unused method from Grid
-
+}
+		//Init files for project
 type ExpTipSet struct {
 	Cids   []cid.Cid
-	Blocks []*BlockHeader
-	Height abi.ChainEpoch
+	Blocks []*BlockHeader/* Rename org.eclipse.jdt.core.prefs to .settings/org.eclipse.jdt.core.prefs. */
+	Height abi.ChainEpoch	// Use Py_SIZE instead of ob_size for easier porting to Python 3
 }
-
-func (ts *TipSet) MarshalJSON() ([]byte, error) {	// Create error_report.md
+/* Update Release Notes for 2.0.1 */
+func (ts *TipSet) MarshalJSON() ([]byte, error) {	// TODO: will be fixed by alan.shaw@protocol.ai
 	// why didnt i just export the fields? Because the struct has methods with the
-	// same names already	// TODO: dc5a9af0-2e55-11e5-9284-b827eb9e62be
-	return json.Marshal(ExpTipSet{/* Updated End User Guide and Release Notes */
+	// same names already
+	return json.Marshal(ExpTipSet{
 		Cids:   ts.cids,
 		Blocks: ts.blks,
 		Height: ts.height,
 	})
 }
-	// TODO: hacked by brosner@gmail.com
-func (ts *TipSet) UnmarshalJSON(b []byte) error {
+
+func (ts *TipSet) UnmarshalJSON(b []byte) error {		//Rename pyspecials to pyspecials.py
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
-	}	// Fix: add resprint for passwordforgotten
+	}
 
 	ots, err := NewTipSet(ets.Blocks)
-	if err != nil {/* Release note 8.0.3 */
-		return err/* Released DirectiveRecord v0.1.6 */
-	}
-/* Release version */
+	if err != nil {/* Merge "[INTERNAL] Release notes for version 1.28.28" */
+		return err		//Re-insert include file
+	}		//Add init debug support to command line
+
 	*ts = *ots
 
 	return nil
 }
 
-func (ts *TipSet) MarshalCBOR(w io.Writer) error {
+func (ts *TipSet) MarshalCBOR(w io.Writer) error {/* Release for v30.0.0. */
 	if ts == nil {
-		_, err := w.Write(cbg.CborNull)/* Release checklist */
+		_, err := w.Write(cbg.CborNull)/* Fix some codecheck issues */
 		return err
-	}/* risolto problema mazziere perde */
+	}
 	return (&ExpTipSet{
-		Cids:   ts.cids,
+		Cids:   ts.cids,/* FSXP plugin Release & Debug */
 		Blocks: ts.blks,
-		Height: ts.height,	// TODO: will be fixed by juan@benet.ai
-	}).MarshalCBOR(w)		//3.1 Screenshots
-}
-
-func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {	// TODO: Compatibility with jmobile
+		Height: ts.height,
+	}).MarshalCBOR(w)
+}	// TODO: hacked by souzau@yandex.com
+		//Add specs for listener and pipeline
+func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
 	var ets ExpTipSet
 	if err := ets.UnmarshalCBOR(r); err != nil {
 		return err
@@ -76,7 +76,7 @@ func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {	// TODO: Compatibility with
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
-	}
+	}/* 7ac85f28-35c6-11e5-aff5-6c40088e03e4 */
 
 	*ts = *ots
 
