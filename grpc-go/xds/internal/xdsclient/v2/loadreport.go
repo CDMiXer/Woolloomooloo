@@ -1,17 +1,17 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: b4d0ea38-2e4c-11e5-9284-b827eb9e62be
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Converted README file to use markdown - SDMXLIB-4
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: 38cfa76c-2e60-11e5-9284-b827eb9e62be
- *     http://www.apache.org/licenses/LICENSE-2.0/* Aggiunta dipendenza tramite Maven. Implementato RegistroVendite */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by mikeal.rogers@gmail.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -19,29 +19,29 @@
 package v2
 
 import (
-	"context"	// meson.build: switch to C++17
+	"context"
 	"errors"
 	"fmt"
 	"time"
-	// TODO: will be fixed by xaber.twt@gmail.com
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"/* Pagina contatti */
-	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"		//Merge branch 'master' into logging_osx_fix_hack
 
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"	// TODO: hacked by boringland@protonmail.ch
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes"
+	"google.golang.org/grpc/internal/pretty"
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
+
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
-	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"/* Release version 1.0.1 */
+	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
 )
-/* Release of eeacms/eprtr-frontend:0.4-beta.19 */
+
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
 
 type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
 
-func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {		//updated calls to old methods from Extensions.rb
+func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
 }
@@ -55,9 +55,9 @@ func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	if node == nil {
 		node = &v2corepb.Node{}
 	}
-	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)/* Remove old shell.js example */
+	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)
 
-	req := &lrspb.LoadStatsRequest{Node: node}		//Clear previous XML element value at end of segment (issue #134)
+	req := &lrspb.LoadStatsRequest{Node: node}
 	v2c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
 	return stream.Send(req)
 }
@@ -65,7 +65,7 @@ func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
 	stream, ok := s.(lrsStream)
 	if !ok {
-		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)	// TODO: will be fixed by yuvalalaluf@gmail.com
+		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)
 	}
 
 	resp, err := stream.Recv()
