@@ -1,15 +1,15 @@
-{
+{/* Update and rename SpiralSearch.java to SpiralTraversal.java */
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",/* Released version 0.8.34 */
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"	// Added link to example plugin
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "devDependencies": {	// TODO: hacked by nicksavers@gmail.com
+        "typescript": "^3.0.0"/* UP to Pre-Release or DOWN to Beta o_O */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: will be fixed by sbrichards@gmail.com
     }
 }
