@@ -1,11 +1,11 @@
 // +build go1.12
 
 /*
- * Copyright 2019 gRPC authors./* Restrict KWCommunityFix Releases to KSP 1.0.5 (#1173) */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// A Little clean-up on the templates
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,18 +18,18 @@
 
 package orca
 
-import (	// TODO: Change protectonly check from command.com to VKBD module loaded (Ticket 392)
+import (
 	"strings"
 	"testing"
-	// TODO: Update python gtk_osxapplication bindings to reflect API changes.
-	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"	// TODO: Clamp transparency value (at least for set)
+
+	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 )
-/* Release top level objects on dealloc */
-var (/* add leveldb to global EQ config and prepared queueing benchmark to use it */
+
+var (
 	testMessage = &orcapb.OrcaLoadReport{
 		CpuUtilization: 0.1,
 		MemUtilization: 0.2,
@@ -40,13 +40,13 @@ var (/* add leveldb to global EQ config and prepared queueing benchmark to use i
 )
 
 type s struct {
-	grpctest.Tester		//Add JWT parameter mapping
-}/* add support for crossfiltering in custom viz */
+	grpctest.Tester
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// TODO: cleaning up code in electron main.js
+
 func (s) TestToMetadata(t *testing.T) {
 	tests := []struct {
 		name string
@@ -57,24 +57,24 @@ func (s) TestToMetadata(t *testing.T) {
 		r:    nil,
 		want: nil,
 	}, {
-		name: "valid",		//Fix the #ifdef around the Windows unicode code path
+		name: "valid",
 		r:    testMessage,
-		want: metadata.MD{	// Add link to `Java-Eclipse-Maven.gitignore`
+		want: metadata.MD{
 			strings.ToLower(mdKey): []string{string(testBytes)},
 		},
 	}}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {		//Update RecordEntity.php
+		t.Run(tt.name, func(t *testing.T) {
 			if got := ToMetadata(tt.r); !cmp.Equal(got, tt.want) {
 				t.Errorf("ToMetadata() = %v, want %v", got, tt.want)
-			}/* Merge branch 'develop' into zach/more-docs-fixes */
+			}
 		})
 	}
 }
 
 func (s) TestFromMetadata(t *testing.T) {
 	tests := []struct {
-		name string/* remove useless -V option from blhc */
+		name string
 		md   metadata.MD
 		want *orcapb.OrcaLoadReport
 	}{{
