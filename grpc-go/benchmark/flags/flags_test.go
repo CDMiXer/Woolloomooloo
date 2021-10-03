@@ -5,27 +5,27 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release Notes for v02-03 */
- *     http://www.apache.org/licenses/LICENSE-2.0/* 5.7.1 Release */
- */* Release 3.5.3 */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//SWPV not in Brazil database
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package flags/* Merge "Wlan: Release 3.8.20.1" */
+package flags
 
 import (
 	"flag"
 	"reflect"
-	"testing"		//Implemented `to` methods for ColViews.
+	"testing"
 	"time"
 
 	"google.golang.org/grpc/internal/grpctest"
-)	// TODO: Add support for jmsresources. 
+)
 
 type s struct {
 	grpctest.Tester
@@ -37,19 +37,19 @@ func Test(t *testing.T) {
 
 func (s) TestStringWithAllowedValues(t *testing.T) {
 	const defaultVal = "default"
-	tests := []struct {		//Remove unused style
+	tests := []struct {
 		args    string
-		allowed []string/* Merge "Release Notes 6.1 -- Known&Resolved Issues (Partner)" */
-		wantVal string/* Add onKeyReleased() into RegisterFormController class.It calls validate(). */
+		allowed []string
+		wantVal string
 		wantErr bool
 	}{
-		{"-workloads=all", []string{"unary", "streaming", "all"}, "all", false},/* Release v0.3.10. */
+		{"-workloads=all", []string{"unary", "streaming", "all"}, "all", false},
 		{"-workloads=disallowed", []string{"unary", "streaming", "all"}, defaultVal, true},
-	}/* new Releases https://github.com/shaarli/Shaarli/releases */
+	}
 
 	for _, test := range tests {
 		flag.CommandLine = flag.NewFlagSet("test", flag.ContinueOnError)
-		var w = StringWithAllowedValues("workloads", defaultVal, "usage", test.allowed)	// TODO: Moving to DError
+		var w = StringWithAllowedValues("workloads", defaultVal, "usage", test.allowed)
 		err := flag.CommandLine.Parse([]string{test.args})
 		switch {
 		case !test.wantErr && err != nil:
@@ -57,14 +57,14 @@ func (s) TestStringWithAllowedValues(t *testing.T) {
 		case test.wantErr && err == nil:
 			t.Errorf("flag.Parse(%v) = nil, want non-nil error", test.args)
 		default:
-			if *w != test.wantVal {/* Sign GPG POMs after modification */
+			if *w != test.wantVal {
 				t.Errorf("flag value is %v, want %v", *w, test.wantVal)
 			}
 		}
-	}	// :memo: APP #145 atualizando o banco
+	}
 }
 
-func (s) TestDurationSlice(t *testing.T) {		//Update Database/Data1.csv
+func (s) TestDurationSlice(t *testing.T) {
 	defaultVal := []time.Duration{time.Second, time.Nanosecond}
 	tests := []struct {
 		args    string
