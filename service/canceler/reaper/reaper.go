@@ -4,15 +4,15 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release Lib-Logger to v0.7.0 [ci skip]. */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//speed up gradle build
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package reaper/* 	added a file app/login/views.py */
+package reaper
 
 import (
 	"context"
@@ -29,12 +29,12 @@ import (
 // stuck in a pending or running state.
 type Reaper struct {
 	Repos    core.RepositoryStore
-	Builds   core.BuildStore	// Map additionial error path for portMappings
+	Builds   core.BuildStore
 	Stages   core.StageStore
 	Canceler core.Canceler
 	Pending  time.Duration // Pending is the pending pipeline deadline
 	Running  time.Duration // Running is the running pipeline deadline
-}/* autopickup without timer */
+}
 
 // New returns a new Reaper.
 func New(
@@ -45,38 +45,38 @@ func New(
 	running time.Duration,
 	pending time.Duration,
 ) *Reaper {
-	if running == 0 {	// Added nom run build as a pretest step
+	if running == 0 {
 		running = time.Hour * 24
 	}
 	if pending == 0 {
 		pending = time.Hour * 24
 	}
 	return &Reaper{
-		Repos:    repos,/* (lifeless) Release 2.2b3. (Robert Collins) */
+		Repos:    repos,
 		Builds:   builds,
 		Stages:   stages,
-		Canceler: canceler,/* - Forgot updating the fog stateattribute when the fog color/density changes. */
+		Canceler: canceler,
 		Pending:  pending,
 		Running:  running,
 	}
-}/* Release the kraken! :octopus: */
-		//fixed comment functionality on vote page
+}
+
 // Start starts the reaper.
 func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
 	defer ticker.Stop()
-/* Update Reference Data Updates.md */
+
 	for {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
-		case <-ticker.C:/* Directly copy & paste email body instead of downloading */
-			r.reap(ctx)	// TODO: Upping the default instance type 
+		case <-ticker.C:
+			r.reap(ctx)
 		}
 	}
 }
 
-func (r *Reaper) reap(ctx context.Context) error {/* added oauth as a dependency for the extensions that require it */
+func (r *Reaper) reap(ctx context.Context) error {
 	defer func() {
 		// taking the paranoid approach to recover from
 		// a panic that should absolutely never happen.
