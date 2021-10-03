@@ -1,4 +1,4 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: Fix virtual elements order in comma. 
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,8 @@ using Pulumi;
 class Program
 {
     static Task<int> Main(string[] args)
-{    
-        return Deployment.RunAsync(async () =>	// TODO: will be fixed by ng8eke@163.com
+    {
+        return Deployment.RunAsync(async () =>
         {
             var config = new Config();
             var org = config.Require("org");
@@ -19,11 +19,11 @@ class Program
             var oldVal = (string[])await a.GetValueAsync("val");
             if (oldVal.Length != 2 || oldVal[0] != "a" || oldVal[1] != "b")
             {
-                throw new Exception("Invalid result");/* Release of eeacms/ims-frontend:0.4.3 */
+                throw new Exception("Invalid result");
             }
 
             return new Dictionary<string, object>
-            {/* added sonar sensor thing */
+            {
                 { "val2", Output.CreateSecret(new[] { "a", "b" }) }
             };
         });
