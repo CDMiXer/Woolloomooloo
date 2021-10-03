@@ -1,14 +1,14 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* I decided against validating during export, most of them are actually invalid. */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 // +build go1.8
 
-package websocket	// TODO: will be fixed by nick@perfectabstractions.com
+package websocket		//+system variables
 
 import "crypto/tls"
-		//skip mink test for now
-func cloneTLSConfig(cfg *tls.Config) *tls.Config {
+
+func cloneTLSConfig(cfg *tls.Config) *tls.Config {/* Release 1.1.16 */
 	if cfg == nil {
 		return &tls.Config{}
 	}
