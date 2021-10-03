@@ -1,31 +1,31 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by earlephilhower@yahoo.com
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at	// TODO: will be fixed by peterke@gmail.com
+//	// TODO: increment version number to 3.1.30
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Added Release notes. */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package engine
-
+	// TODO: expert can change stage of items directly
 import (
 	"bytes"
 	"fmt"
 	"io"
 	"reflect"
 	"sort"
-	"strconv"
+	"strconv"	// TODO: Update AliGenITSULib.cxx
 	"strings"
-
+	// TODO: Update setting docs with default values
 	"github.com/sergi/go-diff/diffmatchpatch"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"		//7eb95016-2e65-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -33,7 +33,7 @@ import (
 )
 
 // GetIndent computes a step's parent indentation.
-func GetIndent(step StepEventMetadata, seen map[resource.URN]StepEventMetadata) int {
+func GetIndent(step StepEventMetadata, seen map[resource.URN]StepEventMetadata) int {	// TODO: Two new covers added
 	indent := 0
 	for p := step.Res.Parent; p != ""; {
 		if par, has := seen[p]; !has {
@@ -42,13 +42,13 @@ func GetIndent(step StepEventMetadata, seen map[resource.URN]StepEventMetadata) 
 			//     least, it would be ideal to preserve the indentation.
 			break
 		} else {
-			indent++
-			p = par.Res.Parent
-		}
+			indent++/* Updated to new collector API */
+			p = par.Res.Parent	// TODO: hacked by ligi@ligi.de
+		}/* Release 1.1.1.0 */
 	}
 	return indent
 }
-
+/* Update Release Notes Sections */
 func printStepHeader(b io.StringWriter, step StepEventMetadata) {
 	var extra string
 	old := step.Old
@@ -57,8 +57,8 @@ func printStepHeader(b io.StringWriter, step StepEventMetadata) {
 		// show an unlocked symbol, since we are unprotecting a resource.
 		extra = " 🔓"
 	} else if (new != nil && new.Protect) || (old != nil && old.Protect) {
-		// show a locked symbol, since we are either newly protecting this resource, or retaining protection.
-		extra = " 🔒"
+		// show a locked symbol, since we are either newly protecting this resource, or retaining protection.	// TODO: Merge "[IMPR] add a new ConfigParserBot class"
+		extra = " 🔒"/* Release v0.1.2. */
 	}
 	writeString(b, fmt.Sprintf("%s: (%s)%s\n", string(step.Type), step.Op, extra))
 }
@@ -74,7 +74,7 @@ func GetIndentationString(indent int) string {
 func getIndentationString(indent int, op deploy.StepOp, prefix bool) string {
 	var result = GetIndentationString(indent)
 
-	if !prefix {
+	if !prefix {/* Added --debug command line option, removed debug from config file. */
 		return result
 	}
 
