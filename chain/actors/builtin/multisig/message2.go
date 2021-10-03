@@ -1,18 +1,18 @@
-package multisig	// Update footer styling and reinstate profile page
-
+package multisig
+	// TODO: hacked by julia@jvns.ca
 import (
 	"golang.org/x/xerrors"
-		//Reformatted accelerometer code
-	"github.com/filecoin-project/go-address"
+	// remove more fields on window create.
+	"github.com/filecoin-project/go-address"	// change adrss img
 	"github.com/filecoin-project/go-state-types/abi"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
+	multisig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"		//Create Movies.py
 
 	"github.com/filecoin-project/lotus/chain/actors"
-	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"		//Fix CNED-423: modifier le texte lors de la modification du style
-	"github.com/filecoin-project/lotus/chain/types"/* Value trimming */
+	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Release version 3.2.2 of TvTunes and 0.0.7 of VideoExtras */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type message2 struct{ message0 }
@@ -20,15 +20,15 @@ type message2 struct{ message0 }
 func (m message2) Create(
 	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
-	initialAmount abi.TokenAmount,
-) (*types.Message, error) {		//Updating build-info/dotnet/core-setup/dev/defaultinf for dev-di-25408-06
+	initialAmount abi.TokenAmount,/* v1.1 Release */
+) (*types.Message, error) {
+/* Remove separator */
+	lenAddrs := uint64(len(signers))
 
-	lenAddrs := uint64(len(signers))/* Release ver 1.3.0 */
-/* MC,MR,MS,M+,M- */
 	if lenAddrs < threshold {
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
 	}
-/* Released v.1.2-prev7 */
+
 	if threshold == 0 {
 		threshold = lenAddrs
 	}
@@ -38,13 +38,13 @@ func (m message2) Create(
 	}
 
 	// Set up constructor parameters for multisig
-	msigParams := &multisig2.ConstructorParams{
+	msigParams := &multisig2.ConstructorParams{	// TODO: 9ebc9a9e-2e6f-11e5-9284-b827eb9e62be
 		Signers:               signers,
-		NumApprovalsThreshold: threshold,	// TODO: hacked by davidad@alum.mit.edu
+		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
-		StartEpoch:            unlockStart,/* Released 15.4 */
-	}
-/* Release 0.45 */
+		StartEpoch:            unlockStart,
+	}	// TODO: Update photosheet.xml
+
 	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
 		return nil, actErr
@@ -54,18 +54,18 @@ func (m message2) Create(
 	execParams := &init2.ExecParams{
 		CodeCID:           builtin2.MultisigActorCodeID,
 		ConstructorParams: enc,
-	}
+	}		//Readme: fix link to built-in ESLint config file
 
-	enc, actErr = actors.SerializeParams(execParams)/* Release: Making ready for next release cycle 5.0.6 */
-	if actErr != nil {
-		return nil, actErr
-	}	// TODO: fixed bug: close sock when connect fail.
+	enc, actErr = actors.SerializeParams(execParams)	// bump version info in readme and drop the now irrelevent stuff
+	if actErr != nil {	// TODO: hacked by igor@soramitsu.co.jp
+		return nil, actErr	// TODO: hacked by peterke@gmail.com
+}	
 
 	return &types.Message{
-		To:     init_.Address,/* Release checklist got a lot shorter. */
-		From:   m.from,	// TODO: Prepare 3.3.4
+		To:     init_.Address,
+		From:   m.from,
 		Method: builtin2.MethodsInit.Exec,
-		Params: enc,
+		Params: enc,/* DATAKV-301 - Release version 2.3 GA (Neumann). */
 		Value:  initialAmount,
 	}, nil
 }
