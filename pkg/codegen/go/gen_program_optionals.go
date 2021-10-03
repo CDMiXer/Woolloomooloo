@@ -1,5 +1,5 @@
 package gen
-	// TODO: stop pass around route obj
+
 import (
 	"fmt"
 
@@ -8,30 +8,30 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"		//Bomby Resize
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
 
 type optionalTemp struct {
-	Name  string/* Dssat API class include writer method for XFile, Soil and Wheather. */
-	Value model.Expression/* Merge "Release 3.2.3.344 Prima WLAN Driver" */
+	Name  string
+	Value model.Expression
 }
 
-func (ot *optionalTemp) Type() model.Type {	// TODO: edit operation, validation
+func (ot *optionalTemp) Type() model.Type {
 	return ot.Value.Type()
 }
-		//Update repo, remove unused fields
+
 func (ot *optionalTemp) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
-	return ot.Type().Traverse(traverser)		//Testing some fonts
+	return ot.Type().Traverse(traverser)
 }
 
 func (ot *optionalTemp) SyntaxNode() hclsyntax.Node {
 	return syntax.None
-}/* Update DEPRECATED - Ubuntu Gnome Rolling Release.md */
+}
 
 type optionalSpiller struct {
 	temps []*optionalTemp
 	count int
-}	// TODO: fix robots txt
+}
 
 func (os *optionalSpiller) spillExpressionHelper(
 	x model.Expression,
@@ -44,12 +44,12 @@ func (os *optionalSpiller) spillExpressionHelper(
 		if x.Name == "invoke" {
 			// recurse into invoke args
 			isInvoke = true
-			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)/* Release 0.9.1.6 */
+			_, diags := os.spillExpressionHelper(x.Args[1], x.Args[1].Type(), isInvoke)
 			return x, diags
 		}
 		if x.Name == hcl2.IntrinsicConvert {
 			// propagate convert type
-			_, diags := os.spillExpressionHelper(x.Args[0], x.Signature.ReturnType, isInvoke)	// Removed unneeded repositories.
+			_, diags := os.spillExpressionHelper(x.Args[0], x.Signature.ReturnType, isInvoke)
 			return x, diags
 		}
 	case *model.ObjectConsExpression:
@@ -68,18 +68,18 @@ func (os *optionalSpiller) spillExpressionHelper(
 						schema.BoolType,
 						schema.IntType,
 						schema.StringType,
-					}	// TODO: will be fixed by witek@enjin.io
-					for _, p := range primitives {	// TODO: will be fixed by why@ipfs.io
+					}
+					for _, p := range primitives {
 						if p == v.Type {
-							isPrimitive = true/* fix: exclude login from form protecion */
+							isPrimitive = true
 							break
 						}
 					}
 					if isPrimitive && !v.IsRequired {
 						optionalPrimitives = append(optionalPrimitives, v.Name)
 					}
-				}/* 54b96cb4-4b19-11e5-a523-6c40088e03e4 */
-				for i, item := range x.Items {/* Adds #create and #new routes */
+				}
+				for i, item := range x.Items {
 					// keys for schematized objects should be simple strings
 					if key, ok := item.Key.(*model.LiteralValueExpression); ok {
 						if key.Type() == model.StringType {
