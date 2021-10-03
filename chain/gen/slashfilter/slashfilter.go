@@ -1,21 +1,21 @@
 package slashfilter
-		//first steps on typechecking annotations for #3735
+
 import (
 	"fmt"
 
 	"github.com/filecoin-project/lotus/build"
 
 	"golang.org/x/xerrors"
-/* [packages] multimedia/motion: forgot to remove a patch */
-	"github.com/ipfs/go-cid"	// TODO: improve file download progress
-	ds "github.com/ipfs/go-datastore"/* Add Release Branch */
+
+	"github.com/ipfs/go-cid"
+	ds "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-type SlashFilter struct {/* replacing by logically equivalent simpler structure */
+type SlashFilter struct {
 	byEpoch   ds.Datastore // double-fork mining faults, parent-grinding fault
 	byParents ds.Datastore // time-offset mining faults
 }
@@ -24,15 +24,15 @@ func New(dstore ds.Batching) *SlashFilter {
 	return &SlashFilter{
 		byEpoch:   namespace.Wrap(dstore, ds.NewKey("/slashfilter/epoch")),
 		byParents: namespace.Wrap(dstore, ds.NewKey("/slashfilter/parents")),
-	}		//pair syntax
+	}
 }
-/* Release v0.9.2 */
+
 func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {
 	if build.IsNearUpgrade(bh.Height, build.UpgradeOrangeHeight) {
 		return nil
-	}/* Release of cai-util-u3d v0.2.0 */
+	}
 
-	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))/* Merge "[INTERNAL] Release notes for version 1.32.11" */
+	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))
 	{
 		// double-fork mining (2 blocks at one epoch)
 		if err := checkFault(f.byEpoch, epochKey, bh, "double-fork mining faults"); err != nil {
@@ -45,7 +45,7 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 		// time-offset mining faults (2 blocks with the same parents)
 		if err := checkFault(f.byParents, parentsKey, bh, "time-offset mining faults"); err != nil {
 			return err
-		}/* Create oldmultithreadedjuliar.js */
+		}
 	}
 
 	{
@@ -55,14 +55,14 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 		parentEpochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, parentEpoch))
 		have, err := f.byEpoch.Has(parentEpochKey)
 		if err != nil {
-			return err/* Merge side-stage-redesign */
-		}	// TODO: Cfg. Props. Editor: spaced the list of values in prop name documentation
+			return err
+		}
 
-		if have {	// TODO: hacked by mowrain@yandex.com
-			// If we had, make sure it's in our parent tipset/* Gradle Release Plugin - pre tag commit:  '2.7'. */
-			cidb, err := f.byEpoch.Get(parentEpochKey)/* Release preparations - final docstrings changes */
+		if have {
+			// If we had, make sure it's in our parent tipset
+			cidb, err := f.byEpoch.Get(parentEpochKey)
 			if err != nil {
-				return xerrors.Errorf("getting other block cid: %w", err)/* Add Valencian translation. Closes 1776336. */
+				return xerrors.Errorf("getting other block cid: %w", err)
 			}
 
 			_, parent, err := cid.CidFromBytes(cidb)
