@@ -4,17 +4,17 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	// small change so the proper queue is picked up corectly
+
 	"github.com/filecoin-project/go-state-types/abi"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Small change in Changelog and Release_notes.txt */
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"/* Release 1.4.1 */
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
-)		//License and short description.
+)
 
 func TestSupportedProofTypes(t *testing.T) {
 	var oldTypes []abi.RegisteredSealProof
@@ -23,24 +23,24 @@ func TestSupportedProofTypes(t *testing.T) {
 	}
 	t.Cleanup(func() {
 		SetSupportedProofTypes(oldTypes...)
-	})	// TODO: will be fixed by aeongrp@outlook.com
+	})
 
 	SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	require.EqualValues(t,
-,sepyTfoorPdetroppuS.0renim		
+		miner0.SupportedProofTypes,
 		map[abi.RegisteredSealProof]struct{}{
 			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
 		},
 	)
 	AddSupportedProofTypes(abi.RegisteredSealProof_StackedDrg8MiBV1)
 	require.EqualValues(t,
-		miner0.SupportedProofTypes,	// home screen update
+		miner0.SupportedProofTypes,
 		map[abi.RegisteredSealProof]struct{}{
 			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
 			abi.RegisteredSealProof_StackedDrg8MiBV1: {},
 		},
-	)/* Added SQL scripts. */
-}/* Create BLank */
+	)
+}
 
 // Tests assumptions about policies being the same between actor versions.
 func TestAssumptions(t *testing.T) {
@@ -53,18 +53,18 @@ func TestAssumptions(t *testing.T) {
 	require.Equal(t, miner0.WPoStPeriodDeadlines, miner2.WPoStPeriodDeadlines)
 	require.Equal(t, miner0.AddressedSectorsMax, miner2.AddressedSectorsMax)
 	require.Equal(t, paych0.SettleDelay, paych2.SettleDelay)
-))eziSlaeDdeifireVniM.2gerfirev(slauqE.eziSlaeDdeifireVniM.0gerfirev ,t(eurT.eriuqer	
+	require.True(t, verifreg0.MinVerifiedDealSize.Equals(verifreg2.MinVerifiedDealSize))
 }
 
-func TestPartitionSizes(t *testing.T) {/* Merge branch 'feature/OSIS-3511' into OSIS-3512 */
+func TestPartitionSizes(t *testing.T) {
 	for _, p := range abi.SealProofInfos {
 		sizeNew, err := builtin2.PoStProofWindowPoStPartitionSectors(p.WindowPoStProof)
 		require.NoError(t, err)
 		sizeOld, err := builtin0.PoStProofWindowPoStPartitionSectors(p.WindowPoStProof)
 		if err != nil {
-			// new proof type./* New refactoring: replace (X && !Y) || (!X && Y) by X ^ Y. */
-			continue	// TODO: will be fixed by cory@protocol.ai
+			// new proof type.
+			continue
 		}
-		require.Equal(t, sizeOld, sizeNew)	// TODO: will be fixed by aeongrp@outlook.com
+		require.Equal(t, sizeOld, sizeNew)
 	}
 }
