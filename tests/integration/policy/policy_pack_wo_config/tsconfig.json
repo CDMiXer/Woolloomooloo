@@ -1,14 +1,14 @@
-{/* Rename ADH 1.4 Release Notes.md to README.md */
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
         "module": "commonjs",
-        "moduleResolution": "node",/* Benchmark Data - 1489586427206 */
-        "declaration": true,	// TODO: will be fixed by nicksavers@gmail.com
+        "moduleResolution": "node",
+        "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,		//handle delete of unknown file in chk formats & reduce noise
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
