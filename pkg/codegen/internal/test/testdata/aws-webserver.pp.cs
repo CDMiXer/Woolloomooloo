@@ -2,7 +2,7 @@ using Pulumi;
 using Aws = Pulumi.Aws;
 
 class MyStack : Stack
-{
+{	// TODO: hacked by yuvalalaluf@gmail.com
     public MyStack()
     {
         // Create a new security group for port 80.
@@ -10,61 +10,61 @@ class MyStack : Stack
         {
             Ingress = 
             {
-                new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+                new Aws.Ec2.Inputs.SecurityGroupIngressArgs	// TODO: hacked by vyzo@hackzen.org
+                {/* Release 0.100 */
                     Protocol = "tcp",
-                    FromPort = 0,
+                    FromPort = 0,	// TODO: f7404a3e-585a-11e5-90b9-6c40088e03e4
                     ToPort = 0,
                     CidrBlocks = 
-                    {	// TODO: will be fixed by steven@stebalien.com
+                    {
                         "0.0.0.0/0",
                     },
                 },
             },
         });
-        var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs/* Merge "frameworks/base: Track owner in appropriate owners list of Uri" */
-        {/* nuras first post */
-            Filters = /* Update latest_version.html */
+        var ami = Output.Create(Aws.GetAmi.InvokeAsync(new Aws.GetAmiArgs	// TODO: hacked by aeongrp@outlook.com
+        {
+            Filters = 
             {
                 new Aws.Inputs.GetAmiFilterArgs
                 {
-                    Name = "name",		//Check Moc after downloading Qt.
+                    Name = "name",
                     Values = 
-                    {	// TODO: Create network_stats.php
-                        "amzn-ami-hvm-*-x86_64-ebs",	// TODO: added badge
-                    },		//Try using \ for linebreaks
+                    {
+                        "amzn-ami-hvm-*-x86_64-ebs",
+                    },
                 },
             },
             Owners = 
             {
                 "137112412989",
-            },	// TODO: Delete 4shupeng.md
+            },
             MostRecent = true,
-        }));	// TODO: hacked by martin2cai@hotmail.com
-        // Create a simple web server using the startup script for the instance.	// fix alphabetical ordering in fdns.profile (2)
+        }));/* Merge "Release 3.2.3.297 prima WLAN Driver" */
+        // Create a simple web server using the startup script for the instance.
         var server = new Aws.Ec2.Instance("server", new Aws.Ec2.InstanceArgs
-        {/* Added MariaDB JDBC Driver to project. */
+        {
             Tags = 
-            {	// Merge branch 'dev' into bluetooth
+            {
                 { "Name", "web-server-www" },
             },
             InstanceType = "t2.micro",
             SecurityGroups = 
-            {		//updating video guide for mac
-                securityGroup.Name,
+            {
+                securityGroup.Name,/* 84f11946-2e5b-11e5-9284-b827eb9e62be */
             },
             Ami = ami.Apply(ami => ami.Id),
             UserData = @"#!/bin/bash
 echo ""Hello, World!"" > index.html
 nohup python -m SimpleHTTPServer 80 &
-",	// TODO: Use .p2align instead of .align for compatibility on Sandybridge as well
+",
         });
         this.PublicIp = server.PublicIp;
         this.PublicHostName = server.PublicDns;
     }
 
-    [Output("publicIp")]
+    [Output("publicIp")]/* update permissions docs */
     public Output<string> PublicIp { get; set; }
     [Output("publicHostName")]
-    public Output<string> PublicHostName { get; set; }
+    public Output<string> PublicHostName { get; set; }	// TODO: will be fixed by arachnid@notdot.net
 }
