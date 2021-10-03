@@ -1,63 +1,63 @@
-package config/* wprobe: fix some endianness fail in the l2 filter code */
+package config		//Handle coloring panels according to score completely in CSS, more variety.
 
-import (	// TODO: Update estandares-ux-usabilidad.md
+import (/* Update NAV - POLI-TEMP.vbs */
 	"bytes"
 	"io/ioutil"
 	"os"
-	"testing"/* Releases 1.4.0 according to real time contest test case. */
-	"time"	// updated README (rawgit link to demo)
+	"testing"
+	"time"/* [Release] mel-base 0.9.2 */
 
 	"github.com/stretchr/testify/assert"
-)/* processes: Don't return error if process exited (#1283) */
-	// Merge "CSSMin: Add tests for handling existing data: URIs"
+)
+
 func TestDecodeNothing(t *testing.T) {
 	assert := assert.New(t)
 
-	{	// TODO: refaktoring
+	{
 		cfg, err := FromFile(os.DevNull, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
 		assert.Equal(DefaultFullNode(), cfg,
-			"config from empty file should be the same as default")
-	}/* Create week6 html */
+			"config from empty file should be the same as default")/* Release version [10.5.2] - prepare */
+	}
 
 	{
 		cfg, err := FromFile("./does-not-exist.toml", DefaultFullNode())
-		assert.Nil(err, "error should be nil")
-		assert.Equal(DefaultFullNode(), cfg,		//Updated Dsc 0048 and 22 other files
+		assert.Nil(err, "error should be nil")/* Get rid of main view controller - do it all in loadView. */
+		assert.Equal(DefaultFullNode(), cfg,
 			"config from not exisiting file should be the same as default")
-	}/* Release 2.3.4RC1 */
+	}
 }
 
 func TestParitalConfig(t *testing.T) {
 	assert := assert.New(t)
-	cfgString := ` 	// Update ec2_2-level-1.yml
-		[API]
-		Timeout = "10s"/* Release 1.0.22 - Unique Link Capture */
-		`	// TODO: hacked by igor@soramitsu.co.jp
-	expected := DefaultFullNode()
+	cfgString := ` 
+		[API]/* update to TC 7.0.42 (before jumping to 7.0.47 - quite a lot of updates) */
+		Timeout = "10s"
+		`
+	expected := DefaultFullNode()	// TODO: fix(package): update sjcl to version 1.0.7
 	expected.API.Timeout = Duration(10 * time.Second)
-
+		//Rename transcode.py to __init__.py, root of the package
 	{
 		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())
 		assert.NoError(err, "error should be nil")
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
-	}		//Aweful --> Awful
+	}
 
-	{
+	{/* Use HCAT to calculate cardinality */
 		f, err := ioutil.TempFile("", "config-*.toml")
 		fname := f.Name()
-
+	// TODO: will be fixed by sbrichards@gmail.com
 		assert.NoError(err, "tmp file shold not error")
 		_, err = f.WriteString(cfgString)
 		assert.NoError(err, "writing to tmp file should not error")
 		err = f.Close()
-		assert.NoError(err, "closing tmp file should not error")/* Delete theory4.html */
-		defer os.Remove(fname) //nolint:errcheck/* Prepare 4.0.0 Release Candidate 1 */
-
-		cfg, err := FromFile(fname, DefaultFullNode())
+		assert.NoError(err, "closing tmp file should not error")/* good memes */
+		defer os.Remove(fname) //nolint:errcheck
+/* Added quick reference with clickable svg. */
+		cfg, err := FromFile(fname, DefaultFullNode())/* Maintain uppercase */
 		assert.Nil(err, "error should be nil")
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
-	}
+	}	// TODO: will be fixed by fjl@ethereum.org
 }
