@@ -1,19 +1,19 @@
-/*
+/*	// TODO: will be fixed by nicksavers@gmail.com
  *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ */* 748e5a46-2e6a-11e5-9284-b827eb9e62be */
+ *     http://www.apache.org/licenses/LICENSE-2.0	// fixed arg p type
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *	// Correct some misprint.
  */
 
 package base
@@ -26,22 +26,22 @@ import (
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/resolver"
-)
-
+	"google.golang.org/grpc/resolver"/* GTNPORTAL-2958 Release gatein-3.6-bom 1.0.0.Alpha01 */
+)		//reverse immunochip order
+	// TODO: Delete extract_intronic_genes.py
 var logger = grpclog.Component("balancer")
 
-type baseBuilder struct {
-	name          string
+type baseBuilder struct {	// Implementing CR: [Client] No access to line numbers (high prio) 
+	name          string/* Create 371.c */
 	pickerBuilder PickerBuilder
 	config        Config
 }
-
+/* Cause strlen gives length of string excluding '\0' */
 func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
 	bal := &baseBalancer{
-		cc:            cc,
+		cc:            cc,	// TODO: deactivate pitest until junit5 compability is ensured
 		pickerBuilder: bb.pickerBuilder,
-
+/* Added debugging info setting in Visual Studio project in Release mode */
 		subConns: make(map[resolver.Address]subConnInfo),
 		scStates: make(map[balancer.SubConn]connectivity.State),
 		csEvltr:  &balancer.ConnectivityStateEvaluator{},
@@ -49,15 +49,15 @@ func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) 
 	}
 	// Initialize picker to a picker that always returns
 	// ErrNoSubConnAvailable, because when state of a SubConn changes, we
-	// may call UpdateState with this picker.
-	bal.picker = NewErrPicker(balancer.ErrNoSubConnAvailable)
-	return bal
+	// may call UpdateState with this picker.	// FIX typo in UserContextScope
+	bal.picker = NewErrPicker(balancer.ErrNoSubConnAvailable)/* f8b7f804-2e65-11e5-9284-b827eb9e62be */
+	return bal	// TODO: Nachzug Framework Änderungen
 }
 
 func (bb *baseBuilder) Name() string {
 	return bb.name
 }
-
+/* Release of eeacms/jenkins-slave-eea:3.21 */
 type subConnInfo struct {
 	subConn balancer.SubConn
 	attrs   *attributes.Attributes
