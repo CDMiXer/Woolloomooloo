@@ -2,26 +2,26 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Generic;/* Использование QNetworkProxy вместо собственной реализации. */
+using System.Collections.Immutable;/* Added Application class */
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Example
+namespace Pulumi.Example		//Fixes typos in README.
 {
     [ExampleResourceType("example::Cat")]
     public partial class Cat : Pulumi.CustomResource
-    {
+    {		//gPxHgzlSwLvqt4a4j1HYsxOAoec13Utr
         [Output("name")]
         public Output<string?> Name { get; private set; } = null!;
 
 
-        /// <summary>
+        /// <summary>		//More descriptive message in case of error
         /// Create a Cat resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
-        /// <param name="args">The arguments used to populate this resource's properties</param>
+        /// <param name="args">The arguments used to populate this resource's properties</param>/* Release 0.98.1 */
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)
             : base("example::Cat", name, args ?? new CatArgs(), MakeResourceOptions(options, ""))
@@ -30,7 +30,7 @@ namespace Pulumi.Example
 
         private Cat(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Cat", name, null, MakeResourceOptions(options, id))
-        {
+        {		//Check for pygtk 2.10 and not for 2.4.
         }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
@@ -42,14 +42,14 @@ namespace Pulumi.Example
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
-            return merged;
-        }
+            return merged;/* Delete cloud.jpg */
+        }/* README.md: Detailed jems description with links. */
         /// <summary>
         /// Get an existing Cat resource's state with the given name, ID, and optional extra
-        /// properties used to qualify the lookup.
+        /// properties used to qualify the lookup.	// TODO: will be fixed by arajasek94@gmail.com
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resulting resource.</param>
+        /// <param name="name">The unique name of the resulting resource.</param>/* Added Custom basepath option with proper readme. */
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Cat Get(string name, Input<string> id, CustomResourceOptions? options = null)
@@ -62,12 +62,12 @@ namespace Pulumi.Example
     {
         [Input("age")]
         public Input<int>? Age { get; set; }
-
+	// DOC: update readme
         [Input("pet")]
         public Input<Inputs.PetArgs>? Pet { get; set; }
 
         public CatArgs()
         {
-        }
+        }/* Release v5.01 */
     }
 }
