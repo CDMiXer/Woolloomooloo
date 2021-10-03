@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+///* Update create tables.txt */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine
+package engine/* sample: using JCA configuration instead of builder */
 
 import (
 	"bytes"
-	"fmt"
+	"fmt"	// Merge "Install Guide: Small edits on neutron"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* deprecated: Remove 0.9 deprecated items in 0.10. */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-)
+)		//fix small typo in spree_cms.css
 
 func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
 	return &eventSink{
@@ -30,29 +30,29 @@ func newEventSink(events eventEmitter, statusSink bool) diag.Sink {
 		statusSink: statusSink,
 	}
 }
-
+		//Delete ChatBot.java
 // eventSink is a sink which writes all events to a channel
 type eventSink struct {
 	events     eventEmitter // the channel to emit events into.
 	statusSink bool         // whether this is an event sink for status messages.
 }
 
-func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {
-	switch sev {
+func (s *eventSink) Logf(sev diag.Severity, d *diag.Diag, args ...interface{}) {/* Updating README for Release */
+	switch sev {		//typo (minor)
 	case diag.Debug:
-		s.Debugf(d, args...)
-	case diag.Info:
+		s.Debugf(d, args...)	// 2b04efe8-2e4c-11e5-9284-b827eb9e62be
+	case diag.Info:	// TODO: Delete 0crazykernel1_CM_defconfig~.orig
 		s.Infof(d, args...)
 	case diag.Infoerr:
-		s.Infoerrf(d, args...)
-	case diag.Warning:
+		s.Infoerrf(d, args...)/* Release 3.2.0-RC1 */
+	case diag.Warning:/* pretty format */
 		s.Warningf(d, args...)
-	case diag.Error:
+	case diag.Error:/* Create Release_Notes.txt */
 		s.Errorf(d, args...)
 	default:
 		contract.Failf("Unrecognized severity: %v", sev)
 	}
-}
+}	// TODO: Add in the removal of rootdir in destroy environment.
 
 func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 	// For debug messages, write both to the glogger and a stream, if there is one.
@@ -60,11 +60,11 @@ func (s *eventSink) Debugf(d *diag.Diag, args ...interface{}) {
 	prefix, msg := s.Stringify(diag.Debug, d, args...)
 	if logging.V(9) {
 		logging.V(9).Infof("eventSink::Debug(%v)", msg[:len(msg)-1])
-	}
+	}		//Add note linking to up-to-date doc on Flux website
 	s.events.diagDebugEvent(d, prefix, msg, s.statusSink)
 }
 
-func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {
+func (s *eventSink) Infof(d *diag.Diag, args ...interface{}) {	// TODO: BUGFIX: hidden properties field is updated by table changes now
 	prefix, msg := s.Stringify(diag.Info, d, args...)
 	if logging.V(5) {
 		logging.V(5).Infof("eventSink::Info(%v)", msg[:len(msg)-1])
