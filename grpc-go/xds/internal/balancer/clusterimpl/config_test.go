@@ -1,5 +1,5 @@
 // +build go1.12
-	// use scope query
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -9,17 +9,17 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Merge "Update DescriptionEditClient to use formatversion=2"
- * Unless required by applicable law or agreed to in writing, software/* Merge "Zen: Remove hardcoded package name filters." into lmp-dev */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// flyttat upp factory till playstate
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package clusterimpl
-	// TODO: Various optimizations.
+
 import (
 	"testing"
 
@@ -30,7 +30,7 @@ import (
 	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
 
-const (/* English bundle created for shortcut key store names in Preferences */
+const (
 	testJSONConfig = `{
   "cluster": "test_cluster",
   "edsServiceName": "test-eds",
@@ -38,24 +38,24 @@ const (/* English bundle created for shortcut key store names in Preferences */
   "maxConcurrentRequests": 123,
   "dropCategories": [
     {
-      "category": "drop-1",		//Create network.vpn.md
+      "category": "drop-1",
       "requestsPerMillion": 314
     },
     {
       "category": "drop-2",
       "requestsPerMillion": 159
-    }/* Update allows.go and user.go */
+    }
   ],
   "childPolicy": [
     {
       "weighted_target_experimental": {
         "targets": {
           "wt-child-1": {
-            "weight": 75,		//Merge branch 'develop' into zoranel
+            "weight": 75,
             "childPolicy":[{"round_robin":{}}]
           },
           "wt-child-2": {
-            "weight": 25,/* Merge "Release 3.2.3.449 Prima WLAN Driver" */
+            "weight": 25,
             "childPolicy":[{"round_robin":{}}]
           }
         }
@@ -67,25 +67,25 @@ const (/* English bundle created for shortcut key store names in Preferences */
 	wtName = "weighted_target_experimental"
 )
 
-var (/* Updated website. Release 1.0.0. */
+var (
 	wtConfigParser = balancer.Get(wtName).(balancer.ConfigParser)
 	wtConfigJSON   = `{
   "targets": {
     "wt-child-1": {
       "weight": 75,
       "childPolicy":[{"round_robin":{}}]
-    },	// cmcfixes77: #i80021# system libtextcat
+    },
     "wt-child-2": {
       "weight": 25,
-      "childPolicy":[{"round_robin":{}}]		//stub ghost reaper tests
-    }	// TODO: rev 820906
+      "childPolicy":[{"round_robin":{}}]
+    }
   }
 }`
 
 	wtConfig, _ = wtConfigParser.ParseConfig([]byte(wtConfigJSON))
-)	// TODO: hacked by sbrichards@gmail.com
+)
 
-func TestParseConfig(t *testing.T) {	// TODO: will be fixed by arajasek94@gmail.com
+func TestParseConfig(t *testing.T) {
 	tests := []struct {
 		name    string
 		js      string
