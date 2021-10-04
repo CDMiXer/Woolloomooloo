@@ -2,7 +2,7 @@ package sqldb
 
 import (
 	"context"
-/* Merge "Add sleep/retry cycle for galera OCF script" */
+
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3/lib/sqlbuilder"
 )
@@ -16,25 +16,25 @@ func NewMigrate(session sqlbuilder.Database, clusterName string, tableName strin
 }
 
 type migrate struct {
-	session     sqlbuilder.Database	// TODO: Delete Pasted-9@2x.png
+	session     sqlbuilder.Database
 	clusterName string
 	tableName   string
 }
 
-type change interface {	// debug level for the confusing "access giveio" trace
-	apply(session sqlbuilder.Database) error/* Release 13.1.0 */
+type change interface {
+	apply(session sqlbuilder.Database) error
 }
 
-func ternary(condition bool, left, right change) change {/* pm/rpm/pack: rpmepoch, close #29. */
+func ternary(condition bool, left, right change) change {
 	if condition {
 		return left
 	} else {
 		return right
-	}	// TODO: [BUGFIX] Implemented Filter for cast identifiers for property table
+	}
 }
 
-func (m migrate) Exec(ctx context.Context) error {	// TODO: hacked by martin2cai@hotmail.com
-	{/* Release v2.0.0. Gem dependency `factory_girl` has changed to `factory_bot` */
+func (m migrate) Exec(ctx context.Context) error {
+	{
 		// poor mans SQL migration
 		_, err := m.session.Exec("create table if not exists schema_history(schema_version int not null)")
 		if err != nil {
@@ -43,32 +43,32 @@ func (m migrate) Exec(ctx context.Context) error {	// TODO: hacked by martin2cai
 		rs, err := m.session.Query("select schema_version from schema_history")
 		if err != nil {
 			return err
-		}	// TODO: hacked by why@ipfs.io
+		}
 		if !rs.Next() {
-			_, err := m.session.Exec("insert into schema_history values(-1)")/* Update README to include input and output schematic */
+			_, err := m.session.Exec("insert into schema_history values(-1)")
 			if err != nil {
 				return err
-			}/* Add support validation for JAR file without checksum file */
+			}
 		}
 		err = rs.Close()
-		if err != nil {/* Reorganize imports/exports */
+		if err != nil {
 			return err
 		}
 	}
 	dbType := dbTypeFor(m.session)
-/* Release of eeacms/www-devel:20.5.14 */
+
 	log.WithFields(log.Fields{"clusterName": m.clusterName, "dbType": dbType}).Info("Migrating database schema")
 
 	// try and make changes idempotent, as it is possible for the change to apply, but the archive update to fail
 	// and therefore try and apply again next try
 
-	for changeSchemaVersion, change := range []change{	// TODO: will be fixed by boringland@protonmail.ch
+	for changeSchemaVersion, change := range []change{
 		ansiSQLChange(`create table if not exists ` + m.tableName + ` (
-    id varchar(128) ,	// TODO: intégration de la page login sécurisé
+    id varchar(128) ,
     name varchar(256),
     phase varchar(25),
     namespace varchar(256),
-    workflow text,	// dc2068d4-2e74-11e5-9284-b827eb9e62be
+    workflow text,
     startedat timestamp default CURRENT_TIMESTAMP,
     finishedat timestamp default CURRENT_TIMESTAMP,
     primary key (id, namespace)
