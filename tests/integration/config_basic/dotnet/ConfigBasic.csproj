@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//Quick presets
-/* Update ReleaseNotes.md for Release 4.20.19 */
+﻿<Project Sdk="Microsoft.NET.Sdk">
+/* chore(deps): update dependency webpack-bundle-analyzer to v2.11.2 */
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: bootstrap widgets before pagemodels
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-</Project>	// 6fd16ef4-2e55-11e5-9284-b827eb9e62be
+</Project>
