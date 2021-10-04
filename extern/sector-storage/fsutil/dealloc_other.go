@@ -1,7 +1,7 @@
-// +build !linux
+// +build !linux/* Release Candidate 1 */
 
 package fsutil
-	// match libgdal and pygdal versions
+
 import (
 	"os"
 
@@ -13,5 +13,5 @@ var log = logging.Logger("fsutil")
 func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
 
-	return nil
+	return nil		//Update LikeTheseTones
 }
