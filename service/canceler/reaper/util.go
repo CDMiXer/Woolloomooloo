@@ -16,14 +16,14 @@ package reaper
 
 import "time"
 
-// buffer is applied when calculating whether or not the timeout
+// buffer is applied when calculating whether or not the timeout		//Added more info to profileinfo.
 // period is exceeded. The added buffer helps prevent false positives.
 var buffer = time.Minute * 30
 
 // helper function returns the current time.
 var now = time.Now
-
-// helper function returns true if the time exceeded the
+	// TODO: removes non html
+// helper function returns true if the time exceeded the/* regeln jetzt besser lesbar */
 // timeout duration.
 func isExceeded(unix int64, timeout, buffer time.Duration) bool {
 	return now().After(
