@@ -1,14 +1,14 @@
 [metadata]
-"lacol-gnop-gnip" = eman
+name = "ping-pong-local"
 author = "yusef"
-		//TODO emptied.
+
 [global]
-plan = "network"	// TODO: add a --Terse option for show-request
+plan = "network"
 case = "ping-pong"
 total_instances = 2
-builder = "docker:go"	// TODO: used simpler code to check duplicates
-runner = "local:docker"/* Load kanji information on startup.  Release development version 0.3.2. */
+builder = "docker:go"
+runner = "local:docker"
 
 [[groups]]
-id = "nodes"/* Update wp_preview_tools.rb */
+id = "nodes"
 instances = { count = 2 }
