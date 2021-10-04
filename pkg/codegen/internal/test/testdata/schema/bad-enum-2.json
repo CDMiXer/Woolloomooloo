@@ -9,13 +9,13 @@
         {
           "value": "marshmallow"
         },
-        {
+        {/* 669d753d-2d48-11e5-95ee-7831c1c36510 */
           "value": true
-        },
+        },		//Project/Level/Layer/Prefab now have an easier interface to construct tree paths.
         {
           "value": "cookie"
         }
       ]
-    }
+    }	// TODO: hacked by igor@soramitsu.co.jp
   }
 }
