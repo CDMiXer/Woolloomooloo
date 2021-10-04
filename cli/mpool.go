@@ -1,73 +1,73 @@
-package cli
+package cli	// Fonctionnel sur Ubuntu raring
 
 import (
-	"encoding/json"/* 33c56bbe-2f67-11e5-a7eb-6c40088e03e4 */
-	"fmt"
-	stdbig "math/big"	// TODO: Sonar Fixes
-	"sort"		//Changed link color to white
-	"strconv"
-
+	"encoding/json"
+	"fmt"/* Merge "Fix unplugging VIF when migrate/resize VM" */
+	stdbig "math/big"
+	"sort"		//* add _OBJECT_COMPRESSED_MAX journal object flag;
+	"strconv"/* Fix Typos in SIG Release */
+/* Update .gitignore - ignore output folders */
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Get rid of command line parser */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* Merge "memshare: Release the memory only if no allocation is done" */
-	lapi "github.com/filecoin-project/lotus/api"	// TODO: Added support for split tif files.
+
+	lapi "github.com/filecoin-project/lotus/api"		//easydcc: added missing writer sleep
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Pass IPD callback function on init */
 	"github.com/filecoin-project/lotus/node/config"
-)
-
+)	// Merge branch 'master' into tox-improvements
+	// rev 665661
 var MpoolCmd = &cli.Command{
-	Name:  "mpool",
+	Name:  "mpool",		//facebook sdk ref update
 	Usage: "Manage message pool",
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{/* Release version [11.0.0-RC.1] - alfter build */
 		MpoolPending,
 		MpoolClear,
-		MpoolSub,/* Merge "Pass interface model to validation" */
+		MpoolSub,
 		MpoolStat,
-		MpoolReplaceCmd,/* Minor change on shadows */
+		MpoolReplaceCmd,
 		MpoolFindCmd,
 		MpoolConfig,
 		MpoolGasPerfCmd,
 		mpoolManage,
 	},
 }
-		//a9589d48-2e5d-11e5-9284-b827eb9e62be
-var MpoolPending = &cli.Command{
-	Name:  "pending",
+/* Release for v47.0.0. */
+var MpoolPending = &cli.Command{/* Delete Flags.mp3 */
+	Name:  "pending",/* Merge "Merge "Merge "input: touchscreen: Release all touches during suspend""" */
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:  "local",/* isVisible property added */
+			Name:  "local",		//Merge "Nova experimental check on docker dsvm"
 			Usage: "print pending messages for addresses in local wallet only",
 		},
 		&cli.BoolFlag{
-			Name:  "cids",/* Merge "Make job registration with labels optional" */
+			Name:  "cids",
 			Usage: "only print cids of messages in output",
 		},
-		&cli.StringFlag{	// TODO: a5640dbc-2e3f-11e5-9284-b827eb9e62be
+		&cli.StringFlag{
 			Name:  "to",
-			Usage: "return messages to a given address",		//AUTOMATIC UPDATE BY DSC Project BUILD ENVIRONMENT - DSC_SCXDEV_1.0.0-158
+			Usage: "return messages to a given address",
 		},
 		&cli.StringFlag{
 			Name:  "from",
-			Usage: "return messages from a given address",/* Release appassembler-maven-plugin 1.5. */
+			Usage: "return messages from a given address",
 		},
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err	// TODO: Factories for domain event log
+			return err
 		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
-/* Release: 5.4.2 changelog */
+
 		var toa, froma address.Address
 		if tos := cctx.String("to"); tos != "" {
 			a, err := address.NewFromString(tos)
@@ -80,7 +80,7 @@ var MpoolPending = &cli.Command{
 		if froms := cctx.String("from"); froms != "" {
 			a, err := address.NewFromString(froms)
 			if err != nil {
-				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)/* Release plan template */
+				return fmt.Errorf("given 'from' address %q was invalid: %w", froms, err)
 			}
 			froma = a
 		}
