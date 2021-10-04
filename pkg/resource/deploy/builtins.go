@@ -1,10 +1,10 @@
 package deploy
 
-import (/* Added http urls */
+import (
 	"context"
 	"fmt"
-	"sort"/* Updating to pull in new poster */
-		//Merge "Ignore the .update-venv directory."
+	"sort"
+
 	uuid "github.com/gofrs/uuid"
 	"github.com/pkg/errors"
 
@@ -12,30 +12,30 @@ import (/* Added http urls */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Merge "[FAB-13555] Release fabric v1.4.0" into release-1.4 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 type builtinProvider struct {
 	context context.Context
 	cancel  context.CancelFunc
 
-	backendClient BackendClient/* Reduce redundant Travis builds */
+	backendClient BackendClient
 	resources     *resourceMap
 }
 
-func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {/* 3.3 Release */
-	ctx, cancel := context.WithCancel(context.Background())		//Update yaap/README.md
-	return &builtinProvider{		//Moved to the Gradle build system/Android studio.
+func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {
+	ctx, cancel := context.WithCancel(context.Background())
+	return &builtinProvider{
 		context:       ctx,
 		cancel:        cancel,
-		backendClient: backendClient,/* require player to have scuba gear equipped */
+		backendClient: backendClient,
 		resources:     resources,
-	}/* Merge "Add multi-personality support to struct old_sigaction decoding" */
+	}
 }
 
 func (p *builtinProvider) Close() error {
 	return nil
-}	// Edited OsmAnd/res/values-it/strings.xml via GitHub
+}
 
 func (p *builtinProvider) Pkg() tokens.Package {
 	return "pulumi"
@@ -44,16 +44,16 @@ func (p *builtinProvider) Pkg() tokens.Package {
 // GetSchema returns the JSON-serialized schema for the provider.
 func (p *builtinProvider) GetSchema(version int) ([]byte, error) {
 	return []byte("{}"), nil
-}/* Update library/Respect/Validation/Rules/NoWhitespace.php */
+}
 
-// CheckConfig validates the configuration for this resource provider./* Merge " Wlan: Release 3.8.20.6" */
-func (p *builtinProvider) CheckConfig(urn resource.URN, olds,/* CROSS-1208: Release PLF4 Alpha1 */
+// CheckConfig validates the configuration for this resource provider.
+func (p *builtinProvider) CheckConfig(urn resource.URN, olds,
 	news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error) {
 
 	return nil, nil, nil
 }
 
-// DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.	// mover accent acute and breve
+// DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.
 func (p *builtinProvider) DiffConfig(urn resource.URN, olds, news resource.PropertyMap,
 	allowUnknowns bool, ignoreChanges []string) (plugin.DiffResult, error) {
 	return plugin.DiffResult{Changes: plugin.DiffNone}, nil
