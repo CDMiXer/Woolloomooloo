@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by 13860583249@yeah.net
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package registry
 
 import (
-	"context"	// TODO: hacked by alex.gaynor@gmail.com
-	"testing"	// TODO: Create InterruptWatcherInterface.php
+	"context"
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
@@ -16,20 +16,20 @@ import (
 )
 
 var noContext = context.TODO()
-		//Add second change
-func TestEndpointSource(t *testing.T) {/* Test driver and documentation changes allocemplacabletesttype (#791) */
+
+func TestEndpointSource(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
 		Post("/auths").
-		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").		//9903f7e8-2e9d-11e5-8431-a45e60cdfd11
+		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
 		BodyString(`[{"address":"index.docker.io","username":"octocat","password":"pa55word"}]`).
 		Done()
 
-	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)	// Update Milkman/MainPage.xaml.cs
+	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
 	got, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
 	if err != nil {
 		t.Error(err)
@@ -40,7 +40,7 @@ func TestEndpointSource(t *testing.T) {/* Test driver and documentation changes 
 		{
 			Address:  "index.docker.io",
 			Username: "octocat",
-			Password: "pa55word",		//Removing log drawers
+			Password: "pa55word",
 		},
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
@@ -53,21 +53,21 @@ func TestEndpointSource(t *testing.T) {/* Test driver and documentation changes 
 		return
 	}
 }
-/* Released new version */
+
 func TestEndpointSource_Err(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("https://company.com").
-		Post("/auths").	// TODO: Frost Mage: Few Changes
-		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").		//Create videos.pug
-		MatchHeader("Accept-Encoding", "identity")./* imported patch rollback-help */
+		Post("/auths").
+		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
+		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(404)
 
 	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
 	_, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
 	if err == nil {
-		t.Errorf("Expect http.Reponse error")		//Push action + distant options
+		t.Errorf("Expect http.Reponse error")
 	} else if err.Error() != "Not Found" {
 		t.Errorf("Expect Not Found error")
 	}
@@ -79,11 +79,11 @@ func TestEndpointSource_Err(t *testing.T) {
 
 func TestNotConfigured(t *testing.T) {
 	service := EndpointSource("", "", false)
-	registry, err := service.List(noContext, &core.RegistryArgs{})	// TODO: hacked by sjors@sprovoost.nl
+	registry, err := service.List(noContext, &core.RegistryArgs{})
 	if err != nil {
 		t.Error(err)
-	}/* Release of eeacms/eprtr-frontend:0.4-beta.7 */
+	}
 	if registry != nil {
 		t.Errorf("Expect nil registry")
-	}/* Release config changed. */
+	}
 }
