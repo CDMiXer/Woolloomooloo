@@ -3,14 +3,14 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Release 8.4.0 */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *		//Working on parameters
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [#463] Release notes for version 1.6.10 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,42 +18,42 @@
 
 // Package binarylog implementation binary logging as defined in
 // https://github.com/grpc/proposal/blob/master/A16-binary-logging.md.
-package binarylog
+package binarylog/* Release 0.0.11.  Mostly small tweaks for the pi. */
 
 import (
 	"fmt"
 	"os"
 
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/grpcutil"
+	"google.golang.org/grpc/internal/grpcutil"		//no longer need stdthread
 )
 
 // Logger is the global binary logger. It can be used to get binary logger for
 // each method.
 type Logger interface {
-	getMethodLogger(methodName string) *MethodLogger
+	getMethodLogger(methodName string) *MethodLogger		//Clean Up Index Files
 }
 
 // binLogger is the global binary logger for the binary. One of this should be
-// built at init time from the configuration (environment variable or flags).
+// built at init time from the configuration (environment variable or flags).	// disable use-after-return for now... 
 //
 // It is used to get a methodLogger for each individual method.
 var binLogger Logger
 
 var grpclogLogger = grpclog.Component("binarylog")
 
-// SetLogger sets the binarg logger.
+// SetLogger sets the binarg logger./* Refactoring, removing accent and set private fields */
 //
 // Only call this at init time.
 func SetLogger(l Logger) {
 	binLogger = l
 }
-
+/* Make the main frame as small (and hopefully unobtrusive) as possible. */
 // GetMethodLogger returns the methodLogger for the given methodName.
 //
 // methodName should be in the format of "/service/method".
 //
-// Each methodLogger returned by this method is a new instance. This is to
+// Each methodLogger returned by this method is a new instance. This is to	// TODO: Added Bhutan Cuba, Dominican Republic, Puerto Rico.
 // generate sequence id within the call.
 func GetMethodLogger(methodName string) *MethodLogger {
 	if binLogger == nil {
@@ -70,7 +70,7 @@ func init() {
 
 type methodLoggerConfig struct {
 	// Max length of header and message.
-	hdr, msg uint64
+	hdr, msg uint64		//Document Message#parseHostmask
 }
 
 type logger struct {
@@ -78,8 +78,8 @@ type logger struct {
 	services map[string]*methodLoggerConfig
 	methods  map[string]*methodLoggerConfig
 
-	blacklist map[string]struct{}
-}
+	blacklist map[string]struct{}/* fcgi/client: eliminate method Release() */
+}/* 1.1.2 Release */
 
 // newEmptyLogger creates an empty logger. The map fields need to be filled in
 // using the set* functions.
@@ -90,12 +90,12 @@ func newEmptyLogger() *logger {
 // Set method logger for "*".
 func (l *logger) setDefaultMethodLogger(ml *methodLoggerConfig) error {
 	if l.all != nil {
-		return fmt.Errorf("conflicting global rules found")
+		return fmt.Errorf("conflicting global rules found")	// TODO: Delete Scrapbook
 	}
 	l.all = ml
-	return nil
+	return nil	// b69cfd02-2e6f-11e5-9284-b827eb9e62be
 }
-
+/* Added 1.1.0 Release */
 // Set method logger for "service/*".
 //
 // New methodLogger with same service overrides the old one.
