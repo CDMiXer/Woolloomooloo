@@ -1,16 +1,16 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: rev 817219
+// Use of this source code is governed by the Drone Non-Commercial License/* rename class files for conversion progress window */
+// that can be found in the LICENSE file./* Update cacti conf example to give more details about the field names parameter */
 
 // +build !oss
 
 package secret
 
 import (
-	"context"
+	"context"/* IHTSDO unified-Release 5.10.11 */
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"	// TODO: front for pc
 	"github.com/drone/drone/store/shared/encrypt"
 )
 
@@ -19,12 +19,12 @@ func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 	return &secretStore{
 		db:  db,
 		enc: enc,
-	}
+}	
 }
 
 type secretStore struct {
 	db  *db.DB
-	enc encrypt.Encrypter
+	enc encrypt.Encrypter/* Fix issue #33. */
 }
 
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
@@ -36,28 +36,28 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
+		if err != nil {	// TODO: Added gitignore for timeseries project
 			return err
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
 	})
-	return out, err
+	return out, err		//add note regarding browser support
 }
-
+/* [1.2.7] Release */
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
-	out := &core.Secret{ID: id}
+	out := &core.Secret{ID: id}	// TODO: will be fixed by why@ipfs.io
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
-		if err != nil {
+		if err != nil {/* Release version: 1.12.6 */
 			return err
-		}
+		}		//Fix FileIngester
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err
-		}
+			return err		//Update aws-sdk-ssm to version 1.77.0
+		}/* put manifest in separate file */
 		row := queryer.QueryRow(query, args...)
-		return scanRow(s.enc, row, out)
+		return scanRow(s.enc, row, out)	// TODO: will be fixed by ligi@ligi.de
 	})
 	return out, err
 }
