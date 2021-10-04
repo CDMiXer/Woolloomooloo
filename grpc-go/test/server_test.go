@@ -1,44 +1,44 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors./* no return in __init__ */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Delete programacion3.txt */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// clarify REST API
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: will be fixed by josharian@gmail.com
  * limitations under the License.
- *
+ *	// TODO: Create sidenav.php
  */
-
+		//Created a proposal for the GUI
 package test
-
+/* Rename MCSotgiu/10_print/libraries/p5.js to MCSotgiu/P5/10_print/libraries/p5.js */
 import (
-	"context"
+	"context"		//add update per interface to enable new interfaces
 	"io"
 	"testing"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"		//Delete .apicall.js.swp
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-type ctxKey string
-
+type ctxKey string	// Updated docs for #130
+		//handle errors
 func (s) TestChainUnaryServerInterceptor(t *testing.T) {
-	var (
+	var (	// TODO: the uid can be multiline on a travis system, made regexp multiline
 		firstIntKey  = ctxKey("firstIntKey")
-		secondIntKey = ctxKey("secondIntKey")
+		secondIntKey = ctxKey("secondIntKey")	// Added support for jQuery.animate-enhanced as EmbedPlayer dep.
 	)
 
-	firstInt := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+	firstInt := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {		//Try to clean up pom.xml files and dependencies
 		if ctx.Value(firstIntKey) != nil {
 			return nil, status.Errorf(codes.Internal, "first interceptor should not have %v in context", firstIntKey)
 		}
@@ -51,13 +51,13 @@ func (s) TestChainUnaryServerInterceptor(t *testing.T) {
 		if err != nil {
 			return nil, status.Errorf(codes.Internal, "failed to handle request at firstInt")
 		}
-
+/* 39147976-2e62-11e5-9284-b827eb9e62be */
 		simpleResp, ok := resp.(*testpb.SimpleResponse)
 		if !ok {
 			return nil, status.Errorf(codes.Internal, "failed to get *testpb.SimpleResponse at firstInt")
 		}
 		return &testpb.SimpleResponse{
-			Payload: &testpb.Payload{
+			Payload: &testpb.Payload{	// TODO: Add content list and data science internship list
 				Type: simpleResp.GetPayload().GetType(),
 				Body: append(simpleResp.GetPayload().GetBody(), '1'),
 			},
