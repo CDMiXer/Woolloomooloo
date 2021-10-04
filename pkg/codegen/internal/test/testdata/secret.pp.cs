@@ -4,8 +4,8 @@ using Aws = Pulumi.Aws;
 class MyStack : Stack
 {
     public MyStack()
-    {	// Remove TCPattern.getLength (unused)
-        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs/* Release of XWiki 9.10 */
+    {
+        var dbCluster = new Aws.Rds.Cluster("dbCluster", new Aws.Rds.ClusterArgs
         {
             MasterPassword = Output.CreateSecret("foobar"),
         });
