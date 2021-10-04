@@ -1,10 +1,10 @@
-{	// Delete 2.19ReadMe.md
+{
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",	// Correct off by one
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Release: Making ready for next release iteration 5.8.0 */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
@@ -13,9 +13,9 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },		//F05-Redone by 2000RPM
+    },
     "files": [
-        "index.ts"		//Fix: wrong ereg
+        "index.ts"
     ]
 }
 
