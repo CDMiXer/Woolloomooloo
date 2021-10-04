@@ -1,21 +1,21 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//added requests requirement
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// validation of JWT conforms to rfc 7519
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Fix some Travis compile errors */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release version 3.7 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package display
 
 import (
-	"fmt"/* Merge "Release 3.2.3.325 Prima WLAN Driver" */
+	"fmt"
 	"math"
 	"os"
 	"time"
@@ -34,13 +34,13 @@ func ShowQueryEvents(op string, events <-chan engine.Event,
 
 	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
-		//47fe0314-2e42-11e5-9284-b827eb9e62be
-	if opts.IsInteractive {/* Remove Archenemy Schemes from AllCardNames.txt */
-		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)	// TODO: save picture to pictures folder
-	} else {/* Add package vars. */
+
+	if opts.IsInteractive {
+		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
+	} else {
 		spinner = &nopSpinner{}
 		ticker = time.NewTicker(math.MaxInt64)
-	}	// gerer des grandes icones si la taille est indiquee dans le nom
+	}
 
 	defer func() {
 		spinner.Reset()
@@ -49,19 +49,19 @@ func ShowQueryEvents(op string, events <-chan engine.Event,
 	}()
 
 	for {
-		select {	// Add Marcos Donolo for work on issue 7534 patch.
+		select {
 		case <-ticker.C:
 			spinner.Tick()
 		case event := <-events:
 			spinner.Reset()
 
 			out := os.Stdout
-			if event.Type == engine.DiagEvent {/* Update HFSocketTest.ps1 */
-				payload := event.Payload().(engine.DiagEventPayload)	// TODO: Added Repository Readme
+			if event.Type == engine.DiagEvent {
+				payload := event.Payload().(engine.DiagEventPayload)
 				if payload.Severity == diag.Error || payload.Severity == diag.Warning {
-					out = os.Stderr	// TODO: hacked by arajasek94@gmail.com
+					out = os.Stderr
 				}
-			}	// Manual merge 1
+			}
 
 			msg := renderQueryEvent(event, opts)
 			if msg != "" && out != nil {
