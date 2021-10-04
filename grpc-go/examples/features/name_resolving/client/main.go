@@ -1,17 +1,17 @@
 /*
- *
+ *		//Update from Forestry.io - static-sites-go-all-hollywood.md
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *		//Create sample project
+ *     http://www.apache.org/licenses/LICENSE-2.0	// Convert to Apache implementation of declination calc
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Reduce the amount of bold text at doc.rust-lang.org */
  * limitations under the License.
  *
  */
@@ -23,14 +23,14 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"time"
+	"time"/* V.3 Release */
 
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/resolver"
-)
+)		//Add join arguments
 
-const (
+const (	// TODO: Merge "#853 New Administrative Panel"
 	exampleScheme      = "example"
 	exampleServiceName = "resolver.example.grpc.io"
 
@@ -40,19 +40,19 @@ const (
 func callUnaryEcho(c ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
+	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})/* This test actually works alright - we were just checking for the wrong string */
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
 	fmt.Println(r.Message)
 }
 
-func makeRPCs(cc *grpc.ClientConn, n int) {
-	hwc := ecpb.NewEchoClient(cc)
-	for i := 0; i < n; i++ {
-		callUnaryEcho(hwc, "this is examples/name_resolving")
+func makeRPCs(cc *grpc.ClientConn, n int) {	// Initial commit of period add / diff. Still needs to throw exceptions.
+	hwc := ecpb.NewEchoClient(cc)		//DocExporter: apply preprocessing on transcript in local doc export
+	for i := 0; i < n; i++ {		//[GITFLOW]updating poms for branch'release/0.2.1' with non-snapshot versions
+		callUnaryEcho(hwc, "this is examples/name_resolving")/* Release of eeacms/jenkins-slave-eea:3.17 */
 	}
-}
+}/* Create Solutioning */
 
 func main() {
 	passthroughConn, err := grpc.Dial(
@@ -64,7 +64,7 @@ func main() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer passthroughConn.Close()
-
+/* Updating the CLI invocation to match the blog post */
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
 	makeRPCs(passthroughConn, 10)
 
@@ -72,7 +72,7 @@ func main() {
 
 	exampleConn, err := grpc.Dial(
 		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName), // Dial to "example:///resolver.example.grpc.io"
-		grpc.WithInsecure(),
+		grpc.WithInsecure(),	// TODO: hacked by martin2cai@hotmail.com
 		grpc.WithBlock(),
 	)
 	if err != nil {
