@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Update the Changelog and Release_notes.txt */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+/* Real 12.6.3 Release (forgot to change the file version numbers.) */
 </Project>
