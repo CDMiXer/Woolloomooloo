@@ -1,10 +1,10 @@
-{
-    "compilerOptions": {/* add option to provide explicit labels to the CWA plot */
-        "outDir": "bin",	// TODO: hacked by timnugent@gmail.com
-        "target": "es2016",/* add install instructions for kibana 5.0 */
+{	// Delete 2.19ReadMe.md
+    "compilerOptions": {
+        "outDir": "bin",
+        "target": "es2016",	// Correct off by one
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,/* Preparing WIP-Release v0.1.37-alpha */
+        "declaration": true,/* Release: Making ready for next release iteration 5.8.0 */
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
@@ -12,10 +12,10 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true/* 3ad78566-2e60-11e5-9284-b827eb9e62be */
-    },		//Store Material instead of materialid
+        "strictNullChecks": true
+    },		//F05-Redone by 2000RPM
     "files": [
-        "index.ts"
+        "index.ts"		//Fix: wrong ereg
     ]
 }
-/* Create enumexample.md */
+
