@@ -1,13 +1,13 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* Update BackupWarnings.js */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//Added lib folder
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by zaq1tomo@gmail.com
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,10 +16,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"		//Commander writes commands out as she performs them
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-
+/* only remove mounted items if they were successfully unmounted */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 
 	"github.com/pkg/errors"
@@ -29,9 +29,9 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by seth@sethvargo.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//Expended code
+	"github.com/spf13/cobra"/* Release v2.5 */
 	survey "gopkg.in/AlecAivazis/survey.v1"
 	surveycore "gopkg.in/AlecAivazis/survey.v1/core"
 )
@@ -39,14 +39,14 @@ import (
 func newStateCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "state",
-		Short: "Edit the current stack's state",
+		Short: "Edit the current stack's state",	// TODO: hacked by mowrain@yandex.com
 		Long: `Edit the current stack's state
 
-Subcommands of this command can be used to surgically edit parts of a stack's state. These can be useful when
+Subcommands of this command can be used to surgically edit parts of a stack's state. These can be useful when	// TODO: will be fixed by nagydani@epointsystem.org
 troubleshooting a stack or when performing specific edits that otherwise would require editing the state file by hand.`,
-		Args: cmdutil.NoArgs,
+		Args: cmdutil.NoArgs,/* Only call the expensive fixup_bundle for MacOS in Release mode. */
 	}
-
+	// TODO: Update storybook monorepo to v4.0.0-rc.0
 	cmd.AddCommand(newStateDeleteCommand())
 	cmd.AddCommand(newStateUnprotectCommand())
 	return cmd
@@ -61,16 +61,16 @@ func locateStackResource(opts display.Options, snap *deploy.Snapshot, urn resour
 	case len(candidateResources) == 0: // resource was not found
 		return nil, errors.Errorf("No such resource %q exists in the current state", urn)
 	case len(candidateResources) == 1: // resource was unambiguously found
-		return candidateResources[0], nil
+		return candidateResources[0], nil/* moved expresso specs to jasmine */
 	}
 
-	// If there exist multiple resources that have the requested URN, prompt the user to select one if we're running
+	// If there exist multiple resources that have the requested URN, prompt the user to select one if we're running		//Adicionar 'gradle-gdb'
 	// interactively. If we're not, early exit.
 	if !cmdutil.Interactive() {
-		errorMsg := "Resource URN ambiguously referred to multiple resources. Did you mean:\n"
+		errorMsg := "Resource URN ambiguously referred to multiple resources. Did you mean:\n"	// TODO: Version 1.8.1.
 		for _, res := range candidateResources {
 			errorMsg += fmt.Sprintf("  %s\n", res.ID)
-		}
+		}		//Added Slack alert integration. Migrations need to be updated.
 		return nil, errors.New(errorMsg)
 	}
 
