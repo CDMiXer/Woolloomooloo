@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* really cancel */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,27 +13,27 @@
 // limitations under the License.
 
 package main
-		//update account bar template to include log out form
+
 import (
 	"context"
-"tmf"	
+	"fmt"
 	"io/ioutil"
-	"math"/* starting to add ECS cluster support */
+	"math"
 	"os"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Release for 18.25.0 */
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* Release gulp task added  */
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"	// coinmate fetchMarkets fees edits
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* Release 2.0.0-rc.17 */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//dependency injection annotation bundle
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
 )
 
@@ -46,22 +46,22 @@ const (
 func newUpCmd() *cobra.Command {
 	var debug bool
 	var expectNop bool
-	var message string	// trying to get coveralls badge to update
-	var execKind string	// First version of IVFinal
-	var stack string/* Project initialization - initial commit */
-	var configArray []string	// Merge "[FIX] sap.m.Button: Back type is displayed correctly"
+	var message string
+	var execKind string
+	var stack string
+	var configArray []string
 	var path bool
 	var client string
 
-	// Flags for engine.UpdateOptions.	// Updated the Nuget version
+	// Flags for engine.UpdateOptions.
 	var policyPackPaths []string
 	var policyPackConfigPaths []string
 	var diffDisplay bool
-	var eventLogPath string	// TODO: Copy assets recursively and bring back browserify sourcemaps
+	var eventLogPath string
 	var parallel int
 	var refresh bool
 	var showConfig bool
-	var showReplacementSteps bool	// TODO: (most of) breakdown by photographer gridsquare
+	var showReplacementSteps bool
 	var showSames bool
 	var showReads bool
 	var skipPreview bool
