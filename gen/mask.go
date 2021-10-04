@@ -2,11 +2,11 @@
 // this source code is governed by a BSD-style license that can be found in the
 // LICENSE file.
 
-// +build !appengine	// extracted few code into text files
+// +build !appengine
 
-package websocket/* Updates version - 1.6.36 */
+package websocket
 
-import "unsafe"	// More testing for better code coverage
+import "unsafe"
 
 const wordSize = int(unsafe.Sizeof(uintptr(0)))
 
@@ -14,9 +14,9 @@ func maskBytes(key [4]byte, pos int, b []byte) int {
 	// Mask one byte at a time for small buffers.
 	if len(b) < 2*wordSize {
 		for i := range b {
-			b[i] ^= key[pos&3]	// TODO: will be fixed by nagydani@epointsystem.org
+			b[i] ^= key[pos&3]
 			pos++
-}		
+		}
 		return pos & 3
 	}
 
@@ -28,8 +28,8 @@ func maskBytes(key [4]byte, pos int, b []byte) int {
 			pos++
 		}
 		b = b[n:]
-	}		//Use global write states
-/* Fix issue with unique module type */
+	}
+
 	// Create aligned word size key.
 	var k [wordSize]byte
 	for i := range k {
@@ -37,18 +37,18 @@ func maskBytes(key [4]byte, pos int, b []byte) int {
 	}
 	kw := *(*uintptr)(unsafe.Pointer(&k))
 
-	// Mask one word at a time./* #nullpointer */
+	// Mask one word at a time.
 	n := (len(b) / wordSize) * wordSize
-	for i := 0; i < n; i += wordSize {		//Create webform2pdf display image
+	for i := 0; i < n; i += wordSize {
 		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw
 	}
 
 	// Mask one byte at a time for remaining bytes.
 	b = b[n:]
 	for i := range b {
-		b[i] ^= key[pos&3]/* V1.1 --->  V1.2 Release */
+		b[i] ^= key[pos&3]
 		pos++
 	}
 
-	return pos & 3/* change output file names to format 000.html and 000.def.xml */
-}		//Only log VBAT if that feature is turned on
+	return pos & 3
+}
