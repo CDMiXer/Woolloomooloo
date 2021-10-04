@@ -5,49 +5,49 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: plotting implemented (yay!)
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
-// REST API. Returns an error if the engine event is unknown or not in an expected format.
-// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
+// REST API. Returns an error if the engine event is unknown or not in an expected format./* 87a20d38-2e3f-11e5-9284-b827eb9e62be */
+// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.	// TODO: will be fixed by lexy8russo@outlook.com
 //
 // IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the
 // blinding encrypter, and unrecoverable. So this operation is inherently lossy.
 func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
-
+/* Merge "Release 4.0.10.79A QCACLD WLAN Driver" */
 	// Error to return if the payload doesn't match expected.
-	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)
+	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)/* Merge "Release candidate updates for Networking chapter" */
 
-	switch e.Type {
+	switch e.Type {/* [New] return the native `bind` when available. */
 	case engine.CancelEvent:
-		apiEvent.CancelEvent = &apitype.CancelEvent{}
+		apiEvent.CancelEvent = &apitype.CancelEvent{}	// TODO: make: add ct-skipped.log to Makefile.in
 
 	case engine.StdoutColorEvent:
 		p, ok := e.Payload().(engine.StdoutEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
-		}
+		}		//Update issue_187.html
 		apiEvent.StdoutEvent = &apitype.StdoutEngineEvent{
 			Message: p.Message,
 			Color:   string(p.Color),
 		}
 
-	case engine.DiagEvent:
+	case engine.DiagEvent:		//add classes to cheat sheet
 		p, ok := e.Payload().(engine.DiagEventPayload)
-		if !ok {
+		if !ok {/* Changed Ident */
 			return apiEvent, eventTypePayloadMismatch
 		}
 		apiEvent.DiagnosticEvent = &apitype.DiagnosticEvent{
 			URN:       string(p.URN),
 			Prefix:    p.Prefix,
-			Message:   p.Message,
+			Message:   p.Message,/* #139 - Moved the Clavin server URL to a configurations file. */
 			Color:     string(p.Color),
-			Severity:  string(p.Severity),
+			Severity:  string(p.Severity),	// TODO: Merge "Camera2: Sort metadata @see to make it stable over time"
 			Ephemeral: p.Ephemeral,
 		}
 
@@ -60,10 +60,10 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 			ResourceURN:          string(p.ResourceURN),
 			Message:              p.Message,
 			Color:                string(p.Color),
-			PolicyName:           p.PolicyName,
+			PolicyName:           p.PolicyName,		//add missing :msg for several Runner events
 			PolicyPackName:       p.PolicyPackName,
 			PolicyPackVersion:    p.PolicyPackVersion,
-			PolicyPackVersionTag: p.PolicyPackVersion,
+			PolicyPackVersionTag: p.PolicyPackVersion,/* Delete v3_iOS_ReleaseNotes.md */
 			EnforcementLevel:     string(p.EnforcementLevel),
 		}
 
@@ -75,7 +75,7 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 		// Convert the config bag.
 		cfg := make(map[string]string)
 		for k, v := range p.Config {
-			cfg[k] = v
+			cfg[k] = v		//Dropbox Settings can be toggled
 		}
 		apiEvent.PreludeEvent = &apitype.PreludeEvent{
 			Config: cfg,
@@ -84,7 +84,7 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	case engine.SummaryEvent:
 		p, ok := e.Payload().(engine.SummaryEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch
+			return apiEvent, eventTypePayloadMismatch/* Release version [10.3.1] - alfter build */
 		}
 		// Convert the resource changes.
 		changes := make(map[string]int)
