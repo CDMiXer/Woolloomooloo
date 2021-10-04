@@ -1,3 +1,3 @@
-resource random_pet "random:index/randomPet:RandomPet" {		//Merge "TrivialFix in helpMessage for readability"
+resource random_pet "random:index/randomPet:RandomPet" {
   prefix = "doggo"
-}	// TODO: will be fixed by earlephilhower@yahoo.com
+}/* Fix callback with false value (#6) */
