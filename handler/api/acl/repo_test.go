@@ -1,80 +1,80 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release Notes for v02-10-01 */
+// Use of this source code is governed by the Drone Non-Commercial License	// Add mapping for old Grails command names to Gradle equivalents
+// that can be found in the LICENSE file.
 
 package acl
 
 import (
 	"context"
-	"database/sql"
-	"net/http"
-	"net/http/httptest"
+	"database/sql"/* "i.varname" -> "varname" */
+	"net/http"/* Release notes for v2.0 */
+	"net/http/httptest"/* disable kill-on-close when detaching from debugger */
 	"testing"
 	"time"
 
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Update README w/ subcommands
 
-	"github.com/go-chi/chi"/* Released DirectiveRecord v0.1.6 */
+	"github.com/go-chi/chi"	// TODO: hacked by ng8eke@163.com
 	"github.com/golang/mock/gomock"
-)		//Merge "Mount hostpath logs on /var/log"
-		//Extract out a testutils library
+)/* Update Data_Portal_Release_Notes.md */
+
 // this unit test ensures that the http request returns a
 // 401 unauthorized if the session does not exist, and the
 // repository is not found.
-func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {	// TODO: hacked by nicksavers@gmail.com
-	controller := gomock.NewController(t)		//Despublica 'orientacoes-sobre-obtencao-de-certificado-digital'
+func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)	// TODO: Adding "isNewer" function
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")		//chore: update to not test Chrome in headless mode to fix screenshots
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("name", "hello-world")		//filetransfer: update outdated documentation
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r = r.WithContext(	// TODO: will be fixed by arajasek94@gmail.com
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
-	)
+	)/* Update EventShell.php */
 
-	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {	// TODO: hacked by magik6k@gmail.com
-		t.Fail()		//Add webdev-jokes
+	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {		//Return error if image is not able to be processed
+		t.Fail()
 	})
-		//v1 collection generator
+
 	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusUnauthorized; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Merge "Add group_members_are_ids to whitelisted options" */
-	}/* $ >> document.id */
-}		//Update évènements.php
-/* Release 1.8.1 */
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
+}
+
 // this unit test ensures that the http request returns a
 // 404 not found if the session does exist, but the
 // repository is not found.
 func TestInjectRepository_RepoNotFound_User(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* First Release of Airvengers */
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
-/* Finally managed to get light type icon working in datacontrol plugin. */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
+	r := httptest.NewRequest("GET", "/", nil)/* Merge "Release note for glance config opts." */
 	r = r.WithContext(
 		context.WithValue(
 			request.WithUser(r.Context(), &core.User{}),
 			chi.RouteCtxKey, c),
-	)
+	)	// Moved exceptions out into separate package
 
 	next := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
 		t.Fail()
-	})
+	})	// TODO: will be fixed by lexy8russo@outlook.com
 
 	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, 404; want != got {
