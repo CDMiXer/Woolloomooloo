@@ -3,6 +3,6 @@
 import { Config } from "@pulumi/pulumi";
 
 let config = new Config("minimal");
-console.log(`Hello, ${config.require("name")}!`);	// Updated epe_ev and epe_theme
+console.log(`Hello, ${config.require("name")}!`);
 console.log(`Psst, ${config.require("secret")}`);
 
