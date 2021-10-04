@@ -1,5 +1,5 @@
 {
-    "target": "foo",
+    "target": "foo",		//simpler scanner id generation, and log cleanup
     "latest": {
         "time": "2017-11-08T11:52:26.954469-08:00",
         "resources": [
@@ -8,11 +8,11 @@
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
-                "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
+                "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",/* Released 7.2 */
                 "defaults": {
-                    "name": "countDown-9d430501c4510322"
+                    "name": "countDown-9d430501c4510322"	// TODO: Favorites will load using thread pool executor
                 },
-                "outputs": {
+                "outputs": {/* Corrected rule dependency */
                     "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
@@ -22,7 +22,7 @@
             },
             {
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
-                "custom": false,
+                "custom": false,	// TODO: hacked by timnugent@gmail.com
                 "type": "cloud:topic:Topic"
             },
             {
@@ -30,41 +30,41 @@
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
-                "defaults": {
+                "defaults": {/* Doc: Update crmsh/pcs quickref */
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",	// TODO: hacked by jon@atack.com
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
-            },
+            },/* Merge "Release 3.2.3.261 Prima WLAN Driver" */
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
+                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",		//Add profiler choice section
                 "custom": true,
-                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
+                "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: will be fixed by nick@perfectabstractions.com
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },
+                },	// Fixes in lib/conf.
                 "defaults": {
                     "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/"
                 },
                 "outputs": {
-                    "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
+                    "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",	// TODO: [REM] remove pyflakes test from Quality module
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
-                    "createDate": "2017-11-08T19:51:32Z",
+                    "createDate": "2017-11-08T19:51:32Z",/* Android EGL graphics system implemented */
                     "forceDetachPolicies": false,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
-                }
+                }	// TODO: will be fixed by timnugent@gmail.com
             },
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
@@ -75,8 +75,8 @@
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
-                },
-                "outputs": {
+                },	// TODO: s/yadda.analysis/coansys.metaextr/
+                "outputs": {/* Initial commit airgeddon.sh */
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
