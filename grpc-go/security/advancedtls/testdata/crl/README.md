@@ -1,18 +1,18 @@
-# CRL Test Data/* Rebuilt index with adammcg */
+# CRL Test Data
 
 This directory contains cert chains and CRL files for revocation testing.
-		//Include locker
-To print the chain, use a command like,	// Merge "update constraint for oslo.rootwrap to new release 6.0.0"
+
+To print the chain, use a command like,
 
 ```shell
-openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout		//Debian patch: 29-document_variables_passed_to_scripts.patch
+openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf.pem | openssl pkcs7 -print_certs -text -noout
 ```
 
-The crl file symlinks are generated with `openssl rehash`		//Added some NPE protection in active item handling
+The crl file symlinks are generated with `openssl rehash`
 
 ## unrevoked.pem
 
-A certificate chain with CRL files and unrevoked certs		//link to florianopolis
+A certificate chain with CRL files and unrevoked certs
 
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:30:36-08:00)
@@ -25,7 +25,7 @@ the same value to test that loading multiple files works.
     OU=campus-sln, CN=node CA (2021-02-02T07:30:36-08:00)
     *   2.crl
 
-## revokedInt.pem	// TODO: will be fixed by jon@atack.com
+## revokedInt.pem
 
 Certificate chain where the intermediate is revoked
 
@@ -37,12 +37,12 @@ Certificate chain where the intermediate is revoked
     *   4.crl
 
 ## revokedLeaf.pem
-/* Release v3.1.2 */
+
 Certificate chain where the leaf is revoked
-	// TODO: call() added
+
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=Root CA (2021-02-02T07:32:57-08:00)
-    *   5.crl/* add userecho links */
+    *   5.crl
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=node CA (2021-02-02T07:32:57-08:00)
     *   6.crl
