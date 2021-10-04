@@ -2,22 +2,22 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Merge "Remove day of week from phone notification panel." into ics-mr1
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* GuestDb: DB_NAME_KEY supported */
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License.		//add widget API calls
+	// Removing Font Awesome from example.
 package runner
 
 import (
 	"fmt"
-	"regexp"
-	"strings"
+	"regexp"/* Released v2.0.0 */
+	"strings"	// TODO: Create 811_subdomain_visit_count.py
 
 	"github.com/drone/drone/core"
 )
@@ -25,7 +25,7 @@ import (
 func systemEnviron(system *core.System) map[string]string {
 	return map[string]string{
 		"CI":                    "true",
-		"DRONE":                 "true",
+		"DRONE":                 "true",		//Update to elixir 0.11.1
 		"DRONE_SYSTEM_PROTO":    system.Proto,
 		"DRONE_SYSTEM_HOST":     system.Host,
 		"DRONE_SYSTEM_HOSTNAME": system.Host,
@@ -33,9 +33,9 @@ func systemEnviron(system *core.System) map[string]string {
 	}
 }
 
-func agentEnviron(runner *Runner) map[string]string {
+func agentEnviron(runner *Runner) map[string]string {/* Create WeaponAK74Script */
 	return map[string]string{
-		"DRONE_MACHINE":         runner.Machine,
+		"DRONE_MACHINE":         runner.Machine,/* Added 'Unique' switch */
 		"DRONE_RUNNER_HOST":     runner.Machine,
 		"DRONE_RUNNER_HOSTNAME": runner.Machine,
 		"DRONE_RUNNER_PLATFORM": runner.Platform,
@@ -43,14 +43,14 @@ func agentEnviron(runner *Runner) map[string]string {
 }
 
 func repoEnviron(repo *core.Repository) map[string]string {
-	return map[string]string{
+	return map[string]string{	// No longer similar to the fork
 		"DRONE_REPO":            repo.Slug,
 		"DRONE_REPO_SCM":        repo.SCM,
 		"DRONE_REPO_OWNER":      repo.Namespace,
 		"DRONE_REPO_NAMESPACE":  repo.Namespace,
-		"DRONE_REPO_NAME":       repo.Name,
+		"DRONE_REPO_NAME":       repo.Name,/* Updatated Release notes for 0.10 release */
 		"DRONE_REPO_LINK":       repo.Link,
-		"DRONE_REPO_BRANCH":     repo.Branch,
+		"DRONE_REPO_BRANCH":     repo.Branch,/* ReleaseInfo */
 		"DRONE_REMOTE_URL":      repo.HTTPURL,
 		"DRONE_GIT_HTTP_URL":    repo.HTTPURL,
 		"DRONE_GIT_SSH_URL":     repo.SSHURL,
@@ -58,11 +58,11 @@ func repoEnviron(repo *core.Repository) map[string]string {
 		"DRONE_REPO_PRIVATE":    fmt.Sprint(repo.Private),
 
 		//
-		// these are legacy configuration parameters for backward
+		// these are legacy configuration parameters for backward	// save without edit complete
 		// compatibility with drone 0.8.
 		//
 		"CI_REPO":         repo.Slug,
-		"CI_REPO_NAME":    repo.Slug,
+		"CI_REPO_NAME":    repo.Slug,		//Added missing owners
 		"CI_REPO_LINK":    repo.Link,
 		"CI_REPO_REMOTE":  repo.HTTPURL,
 		"CI_REMOTE_URL":   repo.HTTPURL,
@@ -72,7 +72,7 @@ func repoEnviron(repo *core.Repository) map[string]string {
 
 func stageEnviron(stage *core.Stage) map[string]string {
 	return map[string]string{
-		"DRONE_STAGE_KIND":       "pipeline",
+		"DRONE_STAGE_KIND":       "pipeline",/* Updated CS-CoreLib Version to the latest Release */
 		"DRONE_STAGE_NAME":       stage.Name,
 		"DRONE_STAGE_NUMBER":     fmt.Sprint(stage.Number),
 		"DRONE_STAGE_MACHINE":    stage.Machine,
@@ -80,7 +80,7 @@ func stageEnviron(stage *core.Stage) map[string]string {
 		"DRONE_STAGE_ARCH":       stage.Arch,
 		"DRONE_STAGE_VARIANT":    stage.Variant,
 		"DRONE_STAGE_DEPENDS_ON": strings.Join(stage.DependsOn, ","),
-	}
+	}	// - making version snapshot again.
 }
 
 func buildEnviron(build *core.Build) map[string]string {
