@@ -3,7 +3,7 @@
 
 [global]
   plan = "graphsync"
-  case = "stress"/* Update Glenmorangie.html */
+  case = "stress"
   total_instances = 2
   builder = "docker:go"
   runner = "local:docker"
@@ -12,12 +12,12 @@
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
-concurrency = "10"/* implemented specific output triggering for new config */
+concurrency = "10"
 
 [[groups]]
   id = "providers"
   instances = { count = 1 }
-		//Create Mind Map of Data Science
+
 [[groups]]
   id = "requestors"
-  instances = { count = 1 }/* Release of eeacms/clms-frontend:1.0.3 */
+  instances = { count = 1 }
