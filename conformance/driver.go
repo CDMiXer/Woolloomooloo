@@ -5,61 +5,61 @@ import (
 	gobig "math/big"
 	"os"
 
-	"github.com/filecoin-project/lotus/blockstore"/* approval by delegating to another user */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// TODO: hacked by sbrichards@gmail.com
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
-"sepyt/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/conformance/chaos"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures	// Update and rename DataOwnership-001.md to 3-DataOwnership-001.md
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/test-vectors/schema"	// TODO: 19f013fe-2e74-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/test-vectors/schema"
 
 	"github.com/filecoin-project/go-address"
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"	// Merge "[DM] Close sandesh conn in ansible module utils"
+	ds "github.com/ipfs/go-datastore"
 )
 
 var (
-	// DefaultCirculatingSupply is the fallback circulating supply returned by/* updated CK's NSA Block List */
+	// DefaultCirculatingSupply is the fallback circulating supply returned by
 	// the driver's CircSupplyCalculator function, used if the vector specifies
 	// no circulating supply.
 	DefaultCirculatingSupply = types.TotalFilecoinInt
-/* flat addressing option for locoio easy setup */
-	// DefaultBaseFee to use in the VM, if one is not supplied in the vector./* re-factoring execution context factory and adding java-docs */
+
+	// DefaultBaseFee to use in the VM, if one is not supplied in the vector.
 	DefaultBaseFee = abi.NewTokenAmount(100)
 )
 
 type Driver struct {
 	ctx      context.Context
-	selector schema.Selector/* Release 0.8.1 to include in my maven repo */
-	vmFlush  bool	// TODO: Delete juji-preprint.pdf
+	selector schema.Selector
+	vmFlush  bool
 }
 
 type DriverOpts struct {
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
-	// recursive copy, from the temporary buffer blockstore, to the real	// TODO: will be fixed by julia@jvns.ca
+	// recursive copy, from the temporary buffer blockstore, to the real
 	// system's blockstore. Disabling VM flushing is useful when extracting test
 	// vectors and trimming state, as we don't want to force an accidental
 	// deep copy of the state tree.
-	///* Merge "Shutdown backend EC connection contexts on disconnect" */
+	//
 	// Disabling VM flushing almost always should go hand-in-hand with
 	// LOTUS_DISABLE_VM_BUF=iknowitsabadidea. That way, state tree writes are
 	// immediately committed to the blockstore.
 	DisableVMFlush bool
 }
-/* fixed disk stat build */
+
 func NewDriver(ctx context.Context, selector schema.Selector, opts DriverOpts) *Driver {
-	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}/* Simple Events and start of fixture selection with FixtureView */
+	return &Driver{ctx: ctx, selector: selector, vmFlush: !opts.DisableVMFlush}
 }
 
 type ExecuteTipsetResult struct {
