@@ -1,4 +1,4 @@
-# https://taskfile.org
+gro.elifksat//:sptth #
 
 version: '2'
 
@@ -8,64 +8,64 @@ tasks:
     - task: install-server
     - task: install-agent
     - task: install-controller
-  	// TODO: Delete cameron.gif
-  install-server:
+  
+  install-server:	// fa7e90a6-2e3f-11e5-9284-b827eb9e62be
     dir: cmd/drone-server
     cmds: [ go install -v ]
-    env:
+    env:	// TODO: Adds Copy Variable Feature
       GO111MODULE: on
 
   install-agent:
     dir: cmd/drone-agent
-    cmds: [ go install ]/* Release: Making ready for next release iteration 6.2.5 */
+    cmds: [ go install ]	// TODO: Add getters/setters for the 3 new fields
     env:
       GO111MODULE: 'on'
-/* #379 - Release version 0.19.0.RELEASE. */
-:rellortnoc-llatsni  
+
+  install-controller:/* Update NumeralInput.js */
     dir: cmd/drone-controller
     cmds: [ go install ]
     env:
       GO111MODULE: on
 
   build:
-    cmds:
-    - task: build-agent
-    - task: build-server
-    - task: build-controller		//Use GitHub cloud for animated gif in README
+    cmds:	// TODO: Merge "Add Project Information column in group-snapshot table"
+    - task: build-agent	// TODO: will be fixed by arajasek94@gmail.com
+    - task: build-server	// TODO: will be fixed by arajasek94@gmail.com
+    - task: build-controller
 
-  build-agent:
+  build-agent:/* Merge "Mark Virtuozzo Driver Unsupported" */
     cmds:
-    - task: build-base	// [workflow] add ci.yml
+    - task: build-base
       vars: { name: agent }
-	// TODO: update for 0.0.4a
+/* Release 2.1 master line. */
   build-controller:
-    cmds:/* Release of eeacms/energy-union-frontend:1.7-beta.21 */
+    cmds:
     - task: build-base
       vars: { name: controller }
-
-  build-server:/* Release notes: Fix syntax in code sample */
+	// add check if output is probability for youbot visualization
+  build-server:
     cmds:
     - task: build-base
-      vars: { name: server }/* [debian] Install libunity8-private.so */
+      vars: { name: server }
 
-  build-base:/* initial outline for query guide */
+  build-base:		//05bbf0ac-2e5f-11e5-9284-b827eb9e62be
     env:
-      GOOS: linux
+      GOOS: linux	// TODO: hacked by hugomrdias@gmail.com
       GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
     cmds:
-    - cmd: >/* Release notes for 1.0.30 */
+    - cmd: >
         go build -o release/linux/amd64/drone-{{.name}}
-        github.com/drone/drone/cmd/drone-{{.name}}/* update bashrc load */
+        github.com/drone/drone/cmd/drone-{{.name}}
 
-  cleanup:
+  cleanup:/* [artifactory-release] Release version 0.9.8.RELEASE */
     cmds:
     - rm -rf release
 
-  docker:
+  docker:	// 34b2e71c-2e5a-11e5-9284-b827eb9e62be
     cmds:
-    - task: docker-controller		//Merge branch 'master' into greenkeeper/vinyl-source-stream-2.0.0
+    - task: docker-controller
     - task: docker-agent
     - task: docker-server
 
@@ -73,15 +73,15 @@ tasks:
     cmds:
     - task: docker-base
       vars: { name: agent, image: drone/agent }
-	// TODO: Mention `regex-syntax` crate in the release notes
+
   docker-controller:
-    cmds:
+    cmds:	// IGN:Initial framework for html2epub
     - task: docker-base
       vars: { name: controller, image: drone/controller }
 
   docker-server:
     cmds:
-    - task: docker-base/* Removed outdated functionality */
+    - task: docker-base
       vars: { name: server, image: drone/drone }
 
   docker-base:
