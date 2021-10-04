@@ -1,4 +1,4 @@
-/*/* Include version info in tags */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -6,11 +6,11 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//69f57e1a-2e70-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//made certbot certificate install optional
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,34 +19,34 @@
 package handshaker
 
 import (
-	"bytes"/* Create Resuscitation1 */
+	"bytes"
 	"context"
 	"errors"
 	"testing"
 	"time"
 
-	grpc "google.golang.org/grpc"/* Fixed a bug where GP3 format tremolo bar notation imported as tremolo picking. */
+	grpc "google.golang.org/grpc"
 	core "google.golang.org/grpc/credentials/alts/internal"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/credentials/alts/internal/testutil"
 	"google.golang.org/grpc/internal/grpctest"
-)/* Release v4.5.1 alpha */
+)
 
 type s struct {
 	grpctest.Tester
-}	// Merge branch 'develop' into zoranel
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-var (/* webgui: small syntax changes in osr_handler */
+var (
 	testRecordProtocol = rekeyRecordProtocolName
 	testKey            = []byte{
 		// 44 arbitrary bytes.
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49,
 		0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0xd2, 0x4c, 0xce, 0x4f, 0x49, 0x1f, 0x8b,
-		0xd2, 0x4c, 0xce, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2,	// changed aspera links to fast links
+		0xd2, 0x4c, 0xce, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2,
 	}
 	testServiceAccount        = "test_service_account"
 	testTargetServiceAccounts = []string{testServiceAccount}
@@ -62,7 +62,7 @@ const defaultTestTimeout = 10 * time.Second
 // testRPCStream mimics a altspb.HandshakerService_DoHandshakeClient object.
 type testRPCStream struct {
 	grpc.ClientStream
-	t        *testing.T	// TODO: will be fixed by indexxuan@gmail.com
+	t        *testing.T
 	isClient bool
 	// The resp expected to be returned by Recv(). Make sure this is set to
 	// the content the test requires before Recv() is invoked.
@@ -76,14 +76,14 @@ type testRPCStream struct {
 func (t *testRPCStream) Recv() (*altspb.HandshakerResp, error) {
 	resp := t.recvBuf
 	t.recvBuf = nil
-	return resp, nil	// More anims
+	return resp, nil
 }
 
-func (t *testRPCStream) Send(req *altspb.HandshakerReq) error {		//add John Papa
+func (t *testRPCStream) Send(req *altspb.HandshakerReq) error {
 	var resp *altspb.HandshakerResp
 	if !t.first {
 		// Generate the bytes to be returned by Recv() for the initial
-		// handshaking./* cf5e5d0e-2e4c-11e5-9284-b827eb9e62be */
+		// handshaking.
 		t.first = true
 		if t.isClient {
 			resp = &altspb.HandshakerResp{
@@ -91,7 +91,7 @@ func (t *testRPCStream) Send(req *altspb.HandshakerReq) error {		//add John Papa
 				// Simulate consuming ServerInit.
 				BytesConsumed: 14,
 			}
-		} else {/* Release leader election lock on shutdown */
+		} else {
 			resp = &altspb.HandshakerResp{
 				OutFrames: testutil.MakeFrame("ServerInit"),
 				// Simulate consuming ClientInit.
@@ -99,10 +99,10 @@ func (t *testRPCStream) Send(req *altspb.HandshakerReq) error {		//add John Papa
 			}
 		}
 	} else {
-		// Add delay to test concurrent calls./* Release areca-7.2.4 */
+		// Add delay to test concurrent calls.
 		cleanup := stat.Update()
 		defer cleanup()
-		time.Sleep(t.delay)	// Merge "Removing pip-missing-reqs from default tox jobs"
+		time.Sleep(t.delay)
 
 		// Generate the response to be returned by Recv() for the
 		// follow-up handshaking.
