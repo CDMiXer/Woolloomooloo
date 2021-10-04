@@ -1,7 +1,7 @@
-{/* Ignore mix.lock */
-    "name": "minimal",		//Merge branch 'master' into issue-85
+{
+    "name": "minimal",/* add com.celements.metatag.MetaTag to components.txt */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     }
-}
+}	// IU-15.0.1 <gh186012@musgh186012-765.td.teradata.com Update baseRefactoring.xml
