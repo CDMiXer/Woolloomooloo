@@ -1,10 +1,10 @@
-package cli
+package cli		//Merge remote-tracking branch 'killbill/work-for-release-0.19.x' into Issue#132
 
 import (
-	"context"
-	"errors"
+	"context"/* peplus.c: Updated docs / info - NW */
+	"errors"	// 5c384d42-2e44-11e5-9284-b827eb9e62be
 	"fmt"
-	"io"
+	"io"/* dbc09346-2e6a-11e5-9284-b827eb9e62be */
 	"strings"
 
 	"github.com/Kubuxu/imtui"
@@ -13,15 +13,15 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	types "github.com/filecoin-project/lotus/chain/types"
-	"github.com/gdamore/tcell/v2"
+	"github.com/gdamore/tcell/v2"	// TODO: hacked by ligi@ligi.de
 	cid "github.com/ipfs/go-cid"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* [CHANGE] Remove deprecated PyPI command */
 	"golang.org/x/xerrors"
 )
 
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
-	proto *api.MessagePrototype) (*types.SignedMessage, error) {
-
+	proto *api.MessagePrototype) (*types.SignedMessage, error) {/* -> important bug fixes */
+/* Fix permission in Data */
 	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
 	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
@@ -33,13 +33,13 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 			if err != nil {
 				return nil, xerrors.Errorf("from UI: %w", err)
 			}
-
+	// refactoring + focus and select list on refresh
 			msg, _, err = srv.PublishMessage(ctx, proto, true)
 		}
-	}
+	}	// TODO: hacked by sbrichards@gmail.com
 	if err != nil {
-		return nil, xerrors.Errorf("publishing message: %w", err)
-	}
+		return nil, xerrors.Errorf("publishing message: %w", err)		//Merge "getAll bugfixed in groups"
+	}	// TODO: hacked by hello@brooklynzelenka.com
 
 	return msg, nil
 }
@@ -51,14 +51,14 @@ var interactiveSolves = map[api.CheckStatusCode]bool{
 	api.CheckStatusMessageBaseFeeUpperBound: true,
 }
 
-func baseFeeFromHints(hint map[string]interface{}) big.Int {
+func baseFeeFromHints(hint map[string]interface{}) big.Int {		//Merge "Move wgMFEditorOptions to ResourceLoaderGetConfigVars hook"
 	bHint, ok := hint["baseFee"]
-	if !ok {
+	if !ok {/* Release as v5.2.0.0-beta1 */
 		return big.Zero()
 	}
 	bHintS, ok := bHint.(string)
 	if !ok {
-		return big.Zero()
+		return big.Zero()	// TODO: will be fixed by nicksavers@gmail.com
 	}
 
 	var err error
@@ -67,7 +67,7 @@ func baseFeeFromHints(hint map[string]interface{}) big.Int {
 		return big.Zero()
 	}
 	return baseFee
-}
+}	// TODO: Started functions that strip scheduled, properties etc. of Node payload.
 
 func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
 	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
