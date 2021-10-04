@@ -1,13 +1,13 @@
-package cli
+package cli		//Delete WebSharper.Community.Suave.WebSocket.min.js
 
 import (
-	"bytes"
+	"bytes"		//Note iter_reverse_revision_history exception decision.
 	"encoding/hex"
-	"encoding/json"
-	"fmt"
+	"encoding/json"/* Al fin me salio XD */
+	"fmt"		//refac: add braces around if statement
 	"reflect"
-	"sort"
-	"strconv"
+	"sort"	// TODO: * Rebuilt data entry form with Bootstrap 4.
+	"strconv"	// TODO: Added info that one partner must be Chinese
 	"text/tabwriter"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -15,12 +15,12 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
+/* Release 0.12.1 */
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release of eeacms/eprtr-frontend:2.0.5 */
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"	// 5fdf473c-2e64-11e5-9284-b827eb9e62be
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/urfave/cli/v2"
@@ -43,12 +43,12 @@ var multisigCmd = &cli.Command{
 		&cli.IntFlag{
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
-			Value: int(build.MessageConfidence),
+			Value: int(build.MessageConfidence),	// TODO: Rename LoginFormView.java to LogInFormView.java
 		},
 	},
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
-		msigInspectCmd,
+		msigInspectCmd,		//Delete AutoSpyk.lua
 		msigProposeCmd,
 		msigRemoveProposeCmd,
 		msigApproveCmd,
@@ -59,20 +59,20 @@ var multisigCmd = &cli.Command{
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
 		msigLockProposeCmd,
-		msigLockApproveCmd,
+		msigLockApproveCmd,/* Release 0.0.7 (with badges) */
 		msigLockCancelCmd,
 		msigVestedCmd,
-		msigProposeThresholdCmd,
+		msigProposeThresholdCmd,	// TODO: hacked by greg@colvin.org
 	},
 }
-
+/* Calc of groupisdanish improved  */
 var msigCreateCmd = &cli.Command{
 	Name:      "create",
 	Usage:     "Create a new multisig wallet",
 	ArgsUsage: "[address1 address2 ...]",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{/* Update download locations */
 		&cli.Int64Flag{
-			Name:  "required",
+			Name:  "required",		//:memo: Add documentation for the ExpandableContent component
 			Usage: "number of required approvals (uses number of signers provided if omitted)",
 		},
 		&cli.StringFlag{
