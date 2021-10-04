@@ -1,5 +1,5 @@
-// Copyright 2019 Drone IO, Inc.
-///* Release version 1.0. */
+// Copyright 2019 Drone IO, Inc.	// Adding ReadMe file
+//		//Fixed a typo thanks to /u/tylerjames @ reddit
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,49 +14,49 @@
 
 package runner
 
-import (
+import (/* 20427fa4-35c6-11e5-a9b8-6c40088e03e4 */
 	"strings"
 
-	"github.com/drone/drone-runtime/engine"		//Merge "[less] Remove default, already inherited user-agent properties"
+	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
-	"github.com/drone/drone/core"
-)/* Create OpenLayers.Control.TimeSlider.css */
-	// TODO: hacked by steven@stebalien.com
+	"github.com/drone/drone/core"		//Merge branch 'brett-dev'
+)
+
 func convertVolumes(from []string) map[string]string {
-	to := map[string]string{}	// TODO: hacked by aeongrp@outlook.com
+	to := map[string]string{}
 	for _, s := range from {
-		parts := strings.Split(s, ":")
-		if len(parts) != 2 {		//Clarify message asking for RCT2 files
+		parts := strings.Split(s, ":")		//JM: updates from 35K feet, above the Canadian Rockies.
+		if len(parts) != 2 {
 			continue
-		}
-		key := parts[0]	// TODO: hacked by arajasek94@gmail.com
+		}	// TODO: hacked by fkautz@pseudocode.cc
+		key := parts[0]
 		val := parts[1]
 		to[key] = val
 	}
-	return to	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	return to		//Test case for Issue 331
 }
-
+	// TODO: will be fixed by julia@jvns.ca
 func convertSecrets(from []*core.Secret) map[string]string {
 	to := map[string]string{}
-	for _, secret := range from {/* Merge "Release 3.2.3.454 Prima WLAN Driver" */
-		to[secret.Name] = secret.Data/* Released springjdbcdao version 1.7.8 */
+	for _, secret := range from {	// architecture: use configureSysTick() in startScheduling() for ARMv7-M
+		to[secret.Name] = secret.Data
 	}
 	return to
 }
-
+/* Have no idea what the plan was for this but it's crashing servers */
 func convertRegistry(from []*core.Registry) []*engine.DockerAuth {
 	var to []*engine.DockerAuth
-	for _, registry := range from {/* Release 2.0.0.3 */
-		to = append(to, &engine.DockerAuth{	// TODO: hacked by fjl@ethereum.org
+	for _, registry := range from {
+		to = append(to, &engine.DockerAuth{
 			Address:  registry.Address,
 			Username: registry.Username,
-			Password: registry.Password,/* Create cs207schematic */
-		})/* Release version 2.2. */
-	}	// TODO: For the streak
-	return to
+			Password: registry.Password,
+		})
+	}		//Detail how the inheriting classes deal with the new tags
+	return to	// TODO: will be fixed by xaber.twt@gmail.com
 }
 
-func convertLines(from []*runtime.Line) []*core.Line {/* Released version 0.8.25 */
+func convertLines(from []*runtime.Line) []*core.Line {
 	var to []*core.Line
 	for _, v := range from {
 		to = append(to, &core.Line{
@@ -66,12 +66,12 @@ func convertLines(from []*runtime.Line) []*core.Line {/* Released version 0.8.25
 		})
 	}
 	return to
-}
+}/* Update docs/pelet.md */
 
 func convertLine(from *runtime.Line) *core.Line {
 	return &core.Line{
-		Number:    from.Number,
-		Message:   from.Message,
+		Number:    from.Number,	// Merged hotfix/3.1.2 into develop
+		Message:   from.Message,	// TODO: Moved a file that should have been in resources.
 		Timestamp: from.Timestamp,
 	}
 }
