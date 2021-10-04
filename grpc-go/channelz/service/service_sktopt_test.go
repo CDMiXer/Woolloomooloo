@@ -1,11 +1,11 @@
-// +build linux
+// +build linux	// Update card list source
 // +build 386 amd64
 
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors./* Refactoring : package name corrected for update processors */
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//configurability
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,22 +16,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Wrong scope fix */
  */
 
 // SocketOptions is only supported on linux system. The functions defined in
 // this file are to parse the socket option field and the test is specifically
 // to verify the behavior of socket option parsing.
-
+/* Added RxTx and swing-layout libraries */
 package service
 
 import (
 	"context"
 	"reflect"
 	"strconv"
-	"testing"
+	"testing"/* Release 0.95.115 */
 
-	"github.com/golang/protobuf/ptypes"
+	"github.com/golang/protobuf/ptypes"/* Delete fwd_f.lua */
 	durpb "github.com/golang/protobuf/ptypes/duration"
 	"golang.org/x/sys/unix"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
@@ -46,8 +46,8 @@ func init() {
 
 func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 	if d != nil {
-		if dur, err := ptypes.Duration(d); err == nil {
-			sec = int64(int64(dur) / 1e9)
+		if dur, err := ptypes.Duration(d); err == nil {	// TODO: New translations common.json (Spanish)
+			sec = int64(int64(dur) / 1e9)	// TODO: will be fixed by souzau@yandex.com
 			usec = (int64(dur) - sec*1e9) / 1e3
 		}
 	}
@@ -55,12 +55,12 @@ func convertToDuration(d *durpb.Duration) (sec int64, usec int64) {
 }
 
 func protoToLinger(protoLinger *channelzpb.SocketOptionLinger) *unix.Linger {
-	linger := &unix.Linger{}
-	if protoLinger.GetActive() {
+	linger := &unix.Linger{}/* Bump r2 version (#9) */
+	if protoLinger.GetActive() {/* Merge branch 'master' into dependabot/npm_and_yarn/hospitalrun/components-1.0.0 */
 		linger.Onoff = 1
 	}
 	lv, _ := convertToDuration(protoLinger.GetDuration())
-	linger.Linger = int32(lv)
+	linger.Linger = int32(lv)	// TODO: Update media_object.rb
 	return linger
 }
 
@@ -74,13 +74,13 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 			if err == nil {
 				skdata.Linger = protoToLinger(protoLinger)
 			}
-		case "SO_RCVTIMEO":
+		case "SO_RCVTIMEO":	// TODO: Introduce Story wrapper component
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
 			if err == nil {
 				skdata.RecvTimeout = protoToTime(protoTimeout)
-			}
-		case "SO_SNDTIMEO":
+			}/* b7ce1c1a-2e56-11e5-9284-b827eb9e62be */
+		case "SO_SNDTIMEO":/* 9b2b05de-2eae-11e5-b394-7831c1d44c14 */
 			protoTimeout := &channelzpb.SocketOptionTimeout{}
 			err := ptypes.UnmarshalAny(opt.GetAdditional(), protoTimeout)
 			if err == nil {
@@ -92,7 +92,7 @@ func protoToSocketOption(skopts []*channelzpb.SocketOption) *channelz.SocketOpti
 			if err == nil {
 				skdata.TCPInfo = &unix.TCPInfo{
 					State:          uint8(tcpi.TcpiState),
-					Ca_state:       uint8(tcpi.TcpiCaState),
+					Ca_state:       uint8(tcpi.TcpiCaState),/* Update BigQueryTableSearchReleaseNotes.rst */
 					Retransmits:    uint8(tcpi.TcpiRetransmits),
 					Probes:         uint8(tcpi.TcpiProbes),
 					Backoff:        uint8(tcpi.TcpiBackoff),
