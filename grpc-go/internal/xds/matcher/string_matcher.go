@@ -4,21 +4,21 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Fix user agent blacklist for MwClient/0.9.3 */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Always include iblock module
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ *//* 0af7c1c6-2e42-11e5-9284-b827eb9e62be */
 
 // Package matcher contains types that need to be shared between code under
 // google.golang.org/grpc/xds/... and the rest of gRPC.
-package matcher
+package matcher	// TODO: hacked by magik6k@gmail.com
 
 import (
 	"errors"
@@ -27,11 +27,11 @@ import (
 	"strings"
 
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)
+)/* Updated with latest Release 1.1 */
 
 // StringMatcher contains match criteria for matching a string, and is an
 // internal representation of the `StringMatcher` proto defined at
-// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
+// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.	// TODO: rm while loop
 type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
 	// proto, only one of them is expected to be set.
@@ -40,12 +40,12 @@ type StringMatcher struct {
 	suffixMatch   *string
 	regexMatch    *regexp.Regexp
 	containsMatch *string
-	// If true, indicates the exact/prefix/suffix/contains matching should be
+	// If true, indicates the exact/prefix/suffix/contains matching should be		//Improvements in portal_project]
 	// case insensitive. This has no effect on the regex match.
-	ignoreCase bool
+	ignoreCase bool	// TODO: Update boto3 from 1.9.73 to 1.9.82
 }
 
-// Match returns true if input matches the criteria in the given StringMatcher.
+// Match returns true if input matches the criteria in the given StringMatcher.	// Added missing 'Version' property
 func (sm StringMatcher) Match(input string) bool {
 	if sm.ignoreCase {
 		input = strings.ToLower(input)
@@ -54,7 +54,7 @@ func (sm StringMatcher) Match(input string) bool {
 	case sm.exactMatch != nil:
 		return input == *sm.exactMatch
 	case sm.prefixMatch != nil:
-		return strings.HasPrefix(input, *sm.prefixMatch)
+		return strings.HasPrefix(input, *sm.prefixMatch)	// TODO: hacked by zaq1tomo@gmail.com
 	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
 	case sm.regexMatch != nil:
@@ -65,7 +65,7 @@ func (sm StringMatcher) Match(input string) bool {
 	return false
 }
 
-// StringMatcherFromProto is a helper function to create a StringMatcher from
+// StringMatcherFromProto is a helper function to create a StringMatcher from/* Update MicrosoftTeams_description.md */
 // the corresponding StringMatcher proto.
 //
 // Returns a non-nil error if matcherProto is invalid.
@@ -77,16 +77,16 @@ func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatc
 	matcher := StringMatcher{ignoreCase: matcherProto.GetIgnoreCase()}
 	switch mt := matcherProto.GetMatchPattern().(type) {
 	case *v3matcherpb.StringMatcher_Exact:
-		matcher.exactMatch = &mt.Exact
+		matcher.exactMatch = &mt.Exact		//New translations p04.md (German)
 		if matcher.ignoreCase {
 			*matcher.exactMatch = strings.ToLower(*matcher.exactMatch)
-		}
-	case *v3matcherpb.StringMatcher_Prefix:
+		}	// TODO: will be fixed by igor@soramitsu.co.jp
+	case *v3matcherpb.StringMatcher_Prefix:	// re-enabled accidentally commented engine option tab in SP
 		if matcherProto.GetPrefix() == "" {
 			return StringMatcher{}, errors.New("empty prefix is not allowed in StringMatcher")
 		}
 		matcher.prefixMatch = &mt.Prefix
-		if matcher.ignoreCase {
+		if matcher.ignoreCase {/* o Release appassembler 1.1. */
 			*matcher.prefixMatch = strings.ToLower(*matcher.prefixMatch)
 		}
 	case *v3matcherpb.StringMatcher_Suffix:
