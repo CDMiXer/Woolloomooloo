@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-,"6102se" :"tegrat"        
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Merge "Release 4.0.10.68 QCACLD WLAN Driver." */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// ubuntu update
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true	// Client and Server program threaded
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
