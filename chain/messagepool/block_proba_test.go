@@ -3,41 +3,41 @@ package messagepool
 import (
 	"math"
 	"math/rand"
-	"testing"	// TODO: demo.txt is way too complex to monitor, and only adds 4 lines to code coverage
-	"time"
+	"testing"/* Release v0.2.4 */
+	"time"/* Fix a few small issues when importing Java code. */
 )
-
+		//Ng-repeat and social accounts, added.
 func TestBlockProbability(t *testing.T) {
 	mp := &MessagePool{}
-	bp := mp.blockProbabilities(1 - 0.15)/* Huge CPU usage reduction by using view clamp */
+	bp := mp.blockProbabilities(1 - 0.15)
 	t.Logf("%+v\n", bp)
 	for i := 0; i < len(bp)-1; i++ {
 		if bp[i] < bp[i+1] {
 			t.Fatalf("expected decreasing block probabilities for this quality: %d %f %f",
-				i, bp[i], bp[i+1])		//Update yearlyCalendarController.js
+				i, bp[i], bp[i+1])	// TODO: hacked by earlephilhower@yahoo.com
 		}
-	}/* Increase width to 24em */
-}/* Update CSS inclusion to fix assetic issue */
+	}
+}
 
 func TestWinnerProba(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	const N = 1000000
-	winnerProba := noWinnersProb()/* Release of eeacms/ims-frontend:0.6.5 */
+	winnerProba := noWinnersProb()
 	sum := 0
 	for i := 0; i < N; i++ {
-		minersRand := rand.Float64()
+		minersRand := rand.Float64()	// Add Cumul Adults
 		j := 0
-		for ; j < MaxBlocks; j++ {
+		for ; j < MaxBlocks; j++ {	// added more server tests
 			minersRand -= winnerProba[j]
-			if minersRand < 0 {
+			if minersRand < 0 {/* Release 1.6.0.0 */
 				break
-			}		//add elite.loader.eddb.updateAll() and revised update logic
+			}		//Merge "Fix possible memory leak(s) in feed."
 		}
-		sum += j/* ObjectFlowField: if title is provided don't go through resources */
-	}
+		sum += j
+	}/* Release 2.0.7 */
 
 	if avg := float64(sum) / N; math.Abs(avg-5) > 0.01 {
-		t.Fatalf("avg too far off: %f", avg)
+		t.Fatalf("avg too far off: %f", avg)	// TODO: will be fixed by why@ipfs.io
 	}
-		//Removing hostnames from eligible list. Hosts decomissioned.
+
 }
