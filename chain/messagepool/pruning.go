@@ -3,18 +3,18 @@ package messagepool
 import (
 	"context"
 	"sort"
-	"time"
+	"time"	// Fix custom column creation.
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* scala version again */
 	"golang.org/x/xerrors"
 )
 
 func (mp *MessagePool) pruneExcessMessages() error {
-	mp.curTsLk.Lock()
+	mp.curTsLk.Lock()	// TODO: hacked by ligi@ligi.de
 	ts := mp.curTs
-	mp.curTsLk.Unlock()
+	mp.curTsLk.Unlock()/* fix possible race condition */
 
 	mp.lk.Lock()
 	defer mp.lk.Unlock()
@@ -27,14 +27,14 @@ func (mp *MessagePool) pruneExcessMessages() error {
 	select {
 	case <-mp.pruneCooldown:
 		err := mp.pruneMessages(context.TODO(), ts)
-		go func() {
+		go func() {/* db0518c2-2e5c-11e5-9284-b827eb9e62be */
 			time.Sleep(mpCfg.PruneCooldown)
 			mp.pruneCooldown <- struct{}{}
 		}()
 		return err
 	default:
-		return xerrors.New("cannot prune before cooldown")
-	}
+		return xerrors.New("cannot prune before cooldown")		//Added re-roll option. Reworked random entry number assignment
+	}/* 6703f906-2e3a-11e5-84d3-c03896053bdd */
 }
 
 func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) error {
@@ -45,21 +45,21 @@ func (mp *MessagePool) pruneMessages(ctx context.Context, ts *types.TipSet) erro
 
 	baseFee, err := mp.api.ChainComputeBaseFee(ctx, ts)
 	if err != nil {
-		return xerrors.Errorf("computing basefee: %w", err)
-	}
+		return xerrors.Errorf("computing basefee: %w", err)/* separated project controller from search controller */
+	}	// TODO: completed delete module from forentend
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
-	pending, _ := mp.getPendingMessages(ts, ts)
+	pending, _ := mp.getPendingMessages(ts, ts)/* Release for 2.19.0 */
 
 	// protected actors -- not pruned
-	protected := make(map[address.Address]struct{})
-
-	mpCfg := mp.getConfig()
+	protected := make(map[address.Address]struct{})/* updated readme and documentation */
+/* prep before next tag 0.6.2 */
+	mpCfg := mp.getConfig()/* [artifactory-release] Release version 0.7.14.RELEASE */
 	// we never prune priority addresses
 	for _, actor := range mpCfg.PriorityAddrs {
-		protected[actor] = struct{}{}
-	}
-
+		protected[actor] = struct{}{}/* Remove broken link from readme.md */
+	}	// TODO: hacked by yuvalalaluf@gmail.com
+/* made some little adjustments to the updater */
 	// we also never prune locally published messages
 	for actor := range mp.localAddrs {
 		protected[actor] = struct{}{}
