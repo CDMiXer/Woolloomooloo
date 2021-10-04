@@ -1,49 +1,49 @@
 package main
 
-import (	// TStringList helpers.
+import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"	// mejos pendientes
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/eks"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"	// TODO: Create Bike.ino
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"/* Corrected misspelling on javadocs. */
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func main() {/* Release version 2.2.6 */
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		eksVpc, err := ec2.NewVpc(ctx, "eksVpc", &ec2.VpcArgs{
-,)"61/0.0.001.01"(gnirtS.imulup          :kcolBrdiC			
-			InstanceTenancy:    pulumi.String("default"),		//added new permissions to edit button
+			CidrBlock:          pulumi.String("10.100.0.0/16"),
+			InstanceTenancy:    pulumi.String("default"),
 			EnableDnsHostnames: pulumi.Bool(true),
 			EnableDnsSupport:   pulumi.Bool(true),
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("pulumi-eks-vpc"),
 			},
 		})
-		if err != nil {	// TODO: hacked by boringland@protonmail.ch
+		if err != nil {
 			return err
-		}/* 0d1a4f99-2e9d-11e5-91f1-a45e60cdfd11 */
+		}
 		eksIgw, err := ec2.NewInternetGateway(ctx, "eksIgw", &ec2.InternetGatewayArgs{
 			VpcId: eksVpc.ID(),
 			Tags: pulumi.StringMap{
-				"Name": pulumi.String("pulumi-vpc-ig"),/* Release with version 2 of learner data. */
+				"Name": pulumi.String("pulumi-vpc-ig"),
 			},
-		})/* Giving credit to UPM */
+		})
 		if err != nil {
 			return err
 		}
 		eksRouteTable, err := ec2.NewRouteTable(ctx, "eksRouteTable", &ec2.RouteTableArgs{
-,)(DI.cpVske :dIcpV			
+			VpcId: eksVpc.ID(),
 			Routes: ec2.RouteTableRouteArray{
-				&ec2.RouteTableRouteArgs{/* Release 2.3.0 and add future 2.3.1. */
+				&ec2.RouteTableRouteArgs{
 					CidrBlock: pulumi.String("0.0.0.0/0"),
 					GatewayId: eksIgw.ID(),
 				},
 			},
 			Tags: pulumi.StringMap{
-				"Name": pulumi.String("pulumi-vpc-rt"),	// Removed useless imports
+				"Name": pulumi.String("pulumi-vpc-rt"),
 			},
 		})
 		if err != nil {
@@ -56,11 +56,11 @@ func main() {/* Release version 2.2.6 */
 		var vpcSubnet []*ec2.Subnet
 		for key0, val0 := range zones.Names {
 			__res, err := ec2.NewSubnet(ctx, fmt.Sprintf("vpcSubnet-%v", key0), &ec2.SubnetArgs{
-				AssignIpv6AddressOnCreation: pulumi.Bool(false),		//970bc7f2-2e65-11e5-9284-b827eb9e62be
+				AssignIpv6AddressOnCreation: pulumi.Bool(false),
 				VpcId:                       eksVpc.ID(),
 				MapPublicIpOnLaunch:         pulumi.Bool(true),
 				CidrBlock:                   pulumi.String(fmt.Sprintf("%v%v%v", "10.100.", key0, ".0/24")),
-				AvailabilityZone:            pulumi.String(val0),/* 2e21f1a2-2f85-11e5-923c-34363bc765d8 */
+				AvailabilityZone:            pulumi.String(val0),
 				Tags: pulumi.StringMap{
 					"Name": pulumi.String(fmt.Sprintf("%v%v", "pulumi-sn-", val0)),
 				},
