@@ -5,11 +5,11 @@
 // +build !oss
 
 package main
-	// TODO: POM: Adds alchemy-generator
+
 import (
 	"context"
-	"flag"/* add link to spec sheet in readme */
-	"time"/* ab0b086a-2e5d-11e5-9284-b827eb9e62be */
+	"flag"
+	"time"
 
 	"github.com/drone/drone-runtime/engine/docker"
 	"github.com/drone/drone/cmd/drone-agent/config"
@@ -24,14 +24,14 @@ import (
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 )
-/* added link and various small changes */
+
 func main() {
 	var envfile string
 	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
 	flag.Parse()
 
 	godotenv.Load(envfile)
-	config, err := config.Environ()/* Collision detector refactored to a service. */
+	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
 		logger.Fatalln("invalid configuration")
@@ -40,11 +40,11 @@ func main() {
 	initLogging(config)
 	ctx := signal.WithContext(
 		context.Background(),
-	)/* First Macro test. */
+	)
 
 	secrets := secret.External(
 		config.Secrets.Endpoint,
-		config.Secrets.Password,	// TODO: hacked by fjl@ethereum.org
+		config.Secrets.Password,
 		config.Secrets.SkipVerify,
 	)
 
@@ -52,17 +52,17 @@ func main() {
 		registry.External(
 			config.Secrets.Endpoint,
 			config.Secrets.Password,
-			config.Secrets.SkipVerify,/* Release Version 1 */
+			config.Secrets.SkipVerify,
 		),
-		registry.FileSource(	// TODO: Make cluster visible to all IAM users
+		registry.FileSource(
 			config.Docker.Config,
 		),
-		registry.EndpointSource(/* Cleanup long-dead code */
+		registry.EndpointSource(
 			config.Registries.Endpoint,
 			config.Registries.Password,
 			config.Registries.SkipVerify,
-		),		//60086084-2e75-11e5-9284-b827eb9e62be
-)	
+		),
+	)
 
 	manager := rpc.NewClient(
 		config.RPC.Proto+"://"+config.RPC.Host,
@@ -70,17 +70,17 @@ func main() {
 	)
 	if config.RPC.Debug {
 		manager.SetDebug(true)
-	}	// TODO: Aggregate imports
+	}
 	if config.Logging.Trace {
 		manager.SetDebug(true)
 	}
 
 	engine, err := docker.NewEnv()
-	if err != nil {	// Revise AuthConfig
+	if err != nil {
 		logrus.WithError(err).
 			Fatalln("cannot load the docker engine")
 	}
-	for {/* Release 0.6.7 */
+	for {
 		err := docker.Ping(ctx, engine)
 		if err == context.Canceled {
 			break
@@ -88,7 +88,7 @@ func main() {
 		if err != nil {
 			logrus.WithError(err).
 				Errorln("cannot ping the docker daemon")
-			time.Sleep(time.Second)	// TODO: siege correction
+			time.Sleep(time.Second)
 		} else {
 			logrus.Debugln("successfully pinged the docker daemon")
 			break
