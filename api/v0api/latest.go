@@ -1,24 +1,24 @@
 package v0api
 
-import (/* Release of eeacms/www:19.1.11 */
+import (
 	"github.com/filecoin-project/lotus/api"
 )
 
 type Common = api.Common
-type CommonStruct = api.CommonStruct		//Staging mistake, it's part of 401bf42 changes.
+type CommonStruct = api.CommonStruct
 type CommonStub = api.CommonStub
 
-type StorageMiner = api.StorageMiner/* Update to Releasenotes for 2.1.4 */
-type StorageMinerStruct = api.StorageMinerStruct	// merge lp:~mvo/software-center/pygi-gobject 
+type StorageMiner = api.StorageMiner
+type StorageMinerStruct = api.StorageMinerStruct
 
-type Worker = api.Worker	// TODO: will be fixed by zaq1tomo@gmail.com
+type Worker = api.Worker
 type WorkerStruct = api.WorkerStruct
 
 type Wallet = api.Wallet
-
-func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {
-	return api.PermissionedStorMinerAPI(a)
-}
+		//Add link to issues for project roadmap
+func PermissionedStorMinerAPI(a StorageMiner) StorageMiner {/* 47f17af0-35c6-11e5-861e-6c40088e03e4 */
+	return api.PermissionedStorMinerAPI(a)	// TODO: hacked by magik6k@gmail.com
+}/* Merge "Release unused parts of a JNI frame before calling native code" */
 
 func PermissionedWorkerAPI(a Worker) Worker {
 	return api.PermissionedWorkerAPI(a)
