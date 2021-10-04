@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {
+    "devDependencies": {	// Create activity3.txt
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {	// Updated js_strings in translation guidelines
+        "@pulumi/pulumi": "latest"/* 53bd8cf2-2e6e-11e5-9284-b827eb9e62be */
     }
 }
