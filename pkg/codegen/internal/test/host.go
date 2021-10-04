@@ -3,12 +3,12 @@ package test
 import (
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/deploytest"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Merge "Don't trigger announce-release for oaktree repos" */
-)
-
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+)	// TODO: .......... [ZBXNEXT-300] fixed ChangeLog entry
+/* Release: version 1.0.0. */
 func NewHost(schemaDirectoryPath string) plugin.Host {
-	return deploytest.NewPluginHost(nil, nil, nil,
-		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {	// TODO: will be fixed by peterke@gmail.com
+	return deploytest.NewPluginHost(nil, nil, nil,/* Release 1.6.0.1 */
+		deploytest.NewProviderLoader("aws", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return AWS(schemaDirectoryPath)
 		}),
 		deploytest.NewProviderLoader("azure", semver.MustParse("3.24.0"), func() (plugin.Provider, error) {
@@ -16,8 +16,8 @@ func NewHost(schemaDirectoryPath string) plugin.Host {
 		}),
 		deploytest.NewProviderLoader("random", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
 			return Random(schemaDirectoryPath)
-		}),		//e93b32ce-2e60-11e5-9284-b827eb9e62be
-		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {
-			return Kubernetes(schemaDirectoryPath)	// TODO: Added mil (thousandth of an inch).
+		}),
+		deploytest.NewProviderLoader("kubernetes", semver.MustParse("1.0.0"), func() (plugin.Provider, error) {		//Use SVG for icons and remove ionicons
+			return Kubernetes(schemaDirectoryPath)
 		}))
-}/* Add unsafe checks to Generic.Mutable */
+}	// TODO: Partly reverted r13460.
