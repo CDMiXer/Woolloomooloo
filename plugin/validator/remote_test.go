@@ -1,6 +1,6 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Fixed formatting and minor typos. */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* update: TPS-v3 (Release) */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
