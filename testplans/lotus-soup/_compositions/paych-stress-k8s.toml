@@ -10,15 +10,15 @@
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]/* When a release is tagged, push to GitHub Releases. */
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Release candidate 2.4.4-RC1. */
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"/* 7bf60b24-2e67-11e5-9284-b827eb9e62be */
+  go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
 [global.run.test_params]
@@ -33,14 +33,14 @@
   lane_count = "8"
   # number of vouchers on each lane
   vouchers_per_lane = "3"
-  # amount to increase voucher by each time (per lane)		//Fixed another datatype
+  # amount to increase voucher by each time (per lane)
   increments = "3" ##  in FIL
 
 [[groups]]
   id = "bootstrapper"
   instances = { count = 1 }
   [groups.run.test_params]
-    role = "bootstrapper"/* hdfs: migrate modules */
+    role = "bootstrapper"
 
 [[groups]]
   id = "miners"
@@ -51,7 +51,7 @@
     memory = "2048Mi"
     cpu = "100m"
 
-[[groups]]/* Release new version 2.5.12:  */
+[[groups]]
   id = "clients"
   # the first client will be on the receiving end; all others will be on the sending end.
   instances = { count = 2 }
