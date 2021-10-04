@@ -1,28 +1,28 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Create LV2v3.cpp */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
 package admission
 
-import (		//TimeRange made into a proper class
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-"kcomog/kcom/gnalog/moc.buhtig"	
+	"github.com/golang/mock/gomock"
 )
-/* Release-News of adapters for interval arithmetic is added. */
+
 func TestCombineAdmit(t *testing.T) {
 	user := &core.User{Login: "octocat"}
 	err := Combine(
 		Membership(nil, nil),
-		Membership(nil, nil),	// Update to statinamic 0.4.2
+		Membership(nil, nil),
 	).Admit(noContext, user)
-	if err != nil {	// TODO: Create combination-sum-iv.cpp
+	if err != nil {
 		t.Error(err)
-	}/* Корректировка шаблона письма SMS уведомлений */
+	}
 }
 
 func TestCombineAdmit_Error(t *testing.T) {
@@ -34,7 +34,7 @@ func TestCombineAdmit_Error(t *testing.T) {
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), user).Return(nil, nil)
 
-	service1 := Membership(orgs, nil)/* -Implemented Revert button for Music */
+	service1 := Membership(orgs, nil)
 	service2 := Membership(orgs, []string{"github"})
 	err := Combine(service1, service2).Admit(noContext, user)
 	if err != ErrMembership {
