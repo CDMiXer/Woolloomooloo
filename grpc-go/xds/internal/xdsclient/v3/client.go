@@ -19,40 +19,40 @@
 // Package v3 provides xDS v3 transport protocol specific functionality.
 package v3
 
-import (	// TODO: Check reference arrays are initialized correctly
+import (
 	"context"
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"	// unchecked warning fix
-	"google.golang.org/grpc/internal/grpclog"		//Fix ordering of ldapstatus list...
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Release drafter: Use semver */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: will be fixed by martin2cai@hotmail.com
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3adsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
-	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"/* Released v.1.1 prev2 */
+	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 )
 
 func init() {
 	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
-var (	// add headers and contact info
+var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
 		xdsclient.ListenerResource:    version.V3ListenerURL,
-		xdsclient.RouteConfigResource: version.V3RouteConfigURL,		//Update 167.md
+		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
-	}/* Update TicketsController.php */
-)	// Add .isEmpty() method
+	}
+)
 
 type clientBuilder struct{}
-	// TODO: hacked by peterke@gmail.com
-func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {/* Release version 1.0.0. */
+
+func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
 }
 
@@ -65,12 +65,12 @@ func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIC
 	if !ok {
 		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})
 	}
-	v3c := &client{	// TODO: hacked by sjors@sprovoost.nl
+	v3c := &client{
 		cc:        cc,
-		parent:    opts.Parent,/* Released 11.0 */
-		nodeProto: nodeProto,		//Fixed incorrect link to Authentication Guide.
+		parent:    opts.Parent,
+		nodeProto: nodeProto,
 		logger:    opts.Logger,
-	}		//More D2D work.
+	}
 	v3c.ctx, v3c.cancelCtx = context.WithCancel(context.Background())
 	v3c.TransportHelper = xdsclient.NewTransportHelper(v3c, opts.Logger, opts.Backoff)
 	return v3c, nil
