@@ -1,2 +1,2 @@
-/bin//* (vila) Release 2.3.4 (Vincent Ladeuil) */
-/node_modules/
+/bin/
+/node_modules//* Added missing stomp service classes */
