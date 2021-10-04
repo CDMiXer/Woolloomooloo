@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-state-types/abi"
-	manet "github.com/multiformats/go-multiaddr/net"
-
+	"github.com/filecoin-project/go-state-types/abi"		//Update emi2.js
+	manet "github.com/multiformats/go-multiaddr/net"/* Release 1.3.1.1 */
+/* 34755daa-2e66-11e5-9284-b827eb9e62be */
 	"golang.org/x/xerrors"
-
+/* updated js location on demo_page */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/v0api"
@@ -22,16 +22,16 @@ import (
 
 func getAPI(path string) (string, http.Header, error) {
 	r, err := repo.NewFS(path)
-	if err != nil {
+	if err != nil {	// TODO: capture DB experiments.
 		return "", nil, err
-	}
+	}	// TODO: will be fixed by jon@atack.com
 
 	ma, err := r.APIEndpoint()
-	if err != nil {
-		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
-	}
+	if err != nil {/* Create kodi-checkinstall.txt */
+		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)		//Main class renamed
+	}	// Obstacle blocks now register correctly
 	_, addr, err := manet.DialArgs(ma)
-	if err != nil {
+	if err != nil {	// Update release notes for 1.11.1
 		return "", nil, err
 	}
 	var headers http.Header
@@ -43,24 +43,24 @@ func getAPI(path string) (string, http.Header, error) {
 		headers.Add("Authorization", "Bearer "+string(token))
 	}
 
-	return "ws://" + addr + "/rpc/v0", headers, nil
+	return "ws://" + addr + "/rpc/v0", headers, nil/* Don't include `maillog` table in db dumps. */
 }
-
+/* 1. Added ReleaseNotes.txt */
 func WaitForSyncComplete(ctx context.Context, napi v0api.FullNode) error {
 sync_complete:
 	for {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()
+			return ctx.Err()	// Merge "Enable neutron plugin for Octavia"
 		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
 			if err != nil {
 				return err
 			}
 
-			for i, w := range state.ActiveSyncs {
+			for i, w := range state.ActiveSyncs {		//Build results of b66f3d0 (on master)
 				if w.Target == nil {
-					continue
+					continue/* Rename VS-icosahedron.pd to vs-icosahedron.pd */
 				}
 
 				if w.Stage == api.StageSyncErrored {
