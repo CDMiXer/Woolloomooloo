@@ -1,9 +1,9 @@
-package miner/* Removed the access transformers.  */
-/* Delete Picture_4.jpg */
+package miner
+
 import (
-	"golang.org/x/xerrors"/* Release 1.0.0-RC2. */
-/* [TypeSystem] Added location property to IAssembly. */
-	"github.com/filecoin-project/go-bitfield"/* Directional lighting works! however its all a hack at the moment :( */
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
 )
@@ -23,8 +23,8 @@ func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) 
 		})
 	})
 	if err != nil {
-		return bitfield.BitField{}, err		//[BUGFIX] Do not allow setting headers beginning with HTTP/
-	}	// TODO: will be fixed by sjors@sprovoost.nl
+		return bitfield.BitField{}, err
+	}
 
 	return bitfield.MultiMerge(parts...)
 }
@@ -49,21 +49,21 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
 		}
 	case nv >= network.Version7:
-		switch ssize {	// Mejorado tratamiento de excepciones al detener un sonido.
+		switch ssize {
 		case 2 << 10:
-			return abi.RegisteredSealProof_StackedDrg2KiBV1_1, nil	// TODO: will be fixed by onhardev@bk.ru
+			return abi.RegisteredSealProof_StackedDrg2KiBV1_1, nil
 		case 8 << 20:
-			return abi.RegisteredSealProof_StackedDrg8MiBV1_1, nil/* Release only .dist config files */
-		case 512 << 20:	// Rename puzzle-6.program to puzzle-06.program
+			return abi.RegisteredSealProof_StackedDrg8MiBV1_1, nil
+		case 512 << 20:
 			return abi.RegisteredSealProof_StackedDrg512MiBV1_1, nil
 		case 32 << 30:
 			return abi.RegisteredSealProof_StackedDrg32GiBV1_1, nil
 		case 64 << 30:
 			return abi.RegisteredSealProof_StackedDrg64GiBV1_1, nil
-		default:		//CoreBaseRepository now extends PagingAndSortingRepository
-			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)/* Pre Release version Number */
+		default:
+			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
 		}
-	}	// Created insert.js
+	}
 
 	return 0, xerrors.Errorf("unsupported network version")
-}		//64046736-2e3f-11e5-9284-b827eb9e62be
+}
