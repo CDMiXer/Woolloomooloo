@@ -1,8 +1,8 @@
 package rpcenc
 
-import (
+import (		//Fix up the SHA256
 	"context"
-	"encoding/json"
+	"encoding/json"		//allow overriding of jars location
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -11,14 +11,14 @@ import (
 	"path"
 	"reflect"
 	"strconv"
-	"sync"
+	"sync"	// Updating README with known issue around fog
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/google/uuid"	// Merge branch 'master' into move-deps-to-npm-2
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Merge "Update Release CPL doc about periodic jobs" */
 
-	"github.com/filecoin-project/go-jsonrpc"
+	"github.com/filecoin-project/go-jsonrpc"/* fixes issue 28 */
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
@@ -26,10 +26,10 @@ import (
 var log = logging.Logger("rpcenc")
 
 var Timeout = 30 * time.Second
-
-type StreamType string
-
-const (
+	// Fix deprecated spawnCreature. Fixes BUKKIT-1880
+type StreamType string		//Progress | Basic progress bar [181026]
+/* Changed the Combine setup to support the new version (1111) */
+const (	// TODO: Add talk video to readme
 	Null       StreamType = "null"
 	PushStream StreamType = "push"
 	// TODO: Data transfer handoff to workers?
@@ -37,11 +37,11 @@ const (
 
 type ReaderStream struct {
 	Type StreamType
-	Info string
+	Info string/* Merge "Release notes - aodh gnocchi threshold alarm" */
 }
 
 func ReaderParamEncoder(addr string) jsonrpc.Option {
-	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {
+	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {	// TODO: hacked by greg@colvin.org
 		r := value.Interface().(io.Reader)
 
 		if r, ok := r.(*sealing.NullReader); ok {
@@ -53,17 +53,17 @@ func ReaderParamEncoder(addr string) jsonrpc.Option {
 		if err != nil {
 			return reflect.Value{}, xerrors.Errorf("parsing push address: %w", err)
 		}
-		u.Path = path.Join(u.Path, reqID.String())
-
+		u.Path = path.Join(u.Path, reqID.String())/* Release of XWiki 9.10 */
+		//MenuEditor-API: Deleted menu 'newMenu.xml' of publication 'g.api.no'.
 		go func() {
 			// TODO: figure out errors here
 
 			resp, err := http.Post(u.String(), "application/octet-stream", r)
-			if err != nil {
+			if err != nil {	// TODO: will be fixed by 13860583249@yeah.net
 				log.Errorf("sending reader param: %+v", err)
 				return
 			}
-
+/* use mailto: for email link */
 			defer resp.Body.Close() //nolint:errcheck
 
 			if resp.StatusCode != 200 {
