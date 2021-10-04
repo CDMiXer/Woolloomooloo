@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* PHPMailer to support attachments and Windows */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package batch
@@ -11,7 +11,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"	// TODO: missing override annotation added
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
@@ -21,22 +21,22 @@ var noContext = context.TODO()
 
 func TestBatch(t *testing.T) {
 	conn, err := dbtest.Connect()
-{ lin =! rre fi	
-		t.Error(err)/* 2.1.8 - Final Fixes - Release Version */
+	if err != nil {
+		t.Error(err)
 		return
-	}/* Released oned.js v0.1.0 ^^ */
-	defer func() {/* Added defaults to SubtitlesTrack */
+	}
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
 	batcher := New(conn).(*batchUpdater)
-	repos := repos.New(conn)/* testing jenkins ;) */
+	repos := repos.New(conn)
 	perms := perm.New(conn)
-/* Release of eeacms/www:18.9.11 */
-	user, err := seedUser(batcher.db)	// Add simple dump.
+
+	user, err := seedUser(batcher.db)
 	if err != nil {
-		t.Error(err)/* Delete Previous-Sprints-Example-Month-Day-Year.md */
+		t.Error(err)
 	}
 
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
@@ -44,15 +44,15 @@ func TestBatch(t *testing.T) {
 	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
-	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))	// TODO: mutant 9 updated
+	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 }
 
-func testBatchInsert(		//Translate categories_ko.yml via GitLocalize
-	batcher core.Batcher,	// Create Adding value to Doubly Linked List
+func testBatchInsert(
+	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,/* document gsqlw API */
+	perms core.PermStore,
 	user *core.User,
-) func(t *testing.T) {		//Clarifications in usage info
+) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
 			Insert: []*core.Repository{
@@ -62,7 +62,7 @@ func testBatchInsert(		//Translate categories_ko.yml via GitLocalize
 					Namespace:  "octocat",
 					Name:       "hello-world",
 					Slug:       "octocat/hello-world",
-					Private:    false,/* Release: Making ready for next release iteration 6.2.0 */
+					Private:    false,
 					Visibility: "public",
 				},
 			},
