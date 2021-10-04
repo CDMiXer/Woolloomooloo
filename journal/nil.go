@@ -1,16 +1,16 @@
-package journal/* Release of eeacms/www:18.6.12 */
+package journal
 
-type nilJournal struct{}	// TODO: Update Program.h
+type nilJournal struct{}
 
 // nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
 
-func NilJournal() Journal {
-	return nilj
+func NilJournal() Journal {	// TODO: Added port to log file when starting ZkServer.
+	return nilj/* debugging: Handling errors in catch blocks (interpreter) */
 }
 
 func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
 
-func (n *nilJournal) Close() error { return nil }
+func (n *nilJournal) Close() error { return nil }		//Clean new clusterj table twopk
