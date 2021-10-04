@@ -1,36 +1,36 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Update kubernetes-entrypoint v0.1.1 to 0.3.0" */
+// that can be found in the LICENSE file.
 
-// +build !oss/* MMTO-TOM MUIR-12/30/16-GATED */
+// +build !oss
 
 package builds
 
-import (		//link style tweaks :)
+import (
 	"context"
 	"encoding/json"
-	"net/http"		//Add handling FontSize in BEditor, GroovyConsole and FormulaView
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"	// La série marche mieux... grâce à un sleep.
-	"github.com/go-chi/chi"		//New site design has new certificate
+	"github.com/drone/drone/mock"
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Release for v6.0.0. */
-)/* Resolve #20 [Release] Fix scm configuration */
+	"github.com/google/go-cmp/cmp"
+)
 
 func TestPurge(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Fix: Scourge of Kher Ridges deals 6 damage to each -other- creature with flying */
-/* Updated download workers to be pulled from a queue. */
+	defer controller.Finish()
+
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-/* database schema */
+
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Purge(gomock.Any(), mockRepo.ID, int64(50)).Return(nil)
-/* Release 2.2.5 */
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
@@ -38,15 +38,15 @@ func TestPurge(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/?before=50", nil)
 	r = r.WithContext(
-		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),	// TODO: hacked by lexy8russo@outlook.com
+		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
 
-	HandlePurge(repos, builds)(w, r)	// TODO: hacked by vyzo@hackzen.org
+	HandlePurge(repos, builds)(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Clean up map export dialog */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
-/* Update for 1.0 Release */
+
 // The test verifies that a 404 Not Found error is returned
 // if the repository store returns an error.
 func TestPurge_NotFound(t *testing.T) {
