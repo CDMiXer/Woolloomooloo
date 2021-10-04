@@ -2,47 +2,47 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Some new Storage#options naming conventions. */
 
-package crons		//Movida la lógica de gestión de ficheros a un controlador propio
-
+package crons
+/* Have files with the same alignment clear each other. */
 import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/drone/drone/core"		//Updated index.rst for addons folder
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"		//Changes to allow the tree to vary between site classes
 
-	"github.com/go-chi/chi"		//Slight changes to our prerequisites page [ci skip].
-)/* Add GPL v3. */
-	// TODO: Add Transact wrapper for conducting opterations inside a transaction
+	"github.com/go-chi/chi"
+)
+/* SAE-190 Release v0.9.14 */
 type cronUpdate struct {
 	Branch   *string `json:"branch"`
-	Target   *string `json:"target"`
-	Disabled *bool   `json:"disabled"`	// TODO: hacked by caojiaoyue@protonmail.com
+	Target   *string `json:"target"`	// TODO: Packages and directory support. 
+	Disabled *bool   `json:"disabled"`		//Appropriate comment (typo)
 }
 
 // HandleUpdate returns an http.HandlerFunc that processes http
-// requests to enable or disable a cron job.
+// requests to enable or disable a cron job./* add index via upload */
 func HandleUpdate(
 	repos core.RepositoryStore,
 	crons core.CronStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//c9569f3a-2e6e-11e5-9284-b827eb9e62be
-		var (	// TODO: hacked by qugou1350636@126.com
+	return func(w http.ResponseWriter, r *http.Request) {/* Release 3.1.1. */
+		var (		//Improve description of the test section 
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)	// update: plugin.video.yleareena-1.3.2
-		if err != nil {		//Just what we've done so far
-			render.NotFound(w, err)
-nruter			
-		}
-		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return		//69c50f8c-2e4d-11e5-9284-b827eb9e62be
+			return
+		}
+		cronjob, err := crons.FindName(r.Context(), repo.ID, cron)/* FIX obsolet APP_CONFIG model file */
+		if err != nil {
+			render.NotFound(w, err)
+			return
 		}
 
 		in := new(cronUpdate)
@@ -53,15 +53,15 @@ nruter
 		if in.Target != nil {
 			cronjob.Target = *in.Target
 		}
-		if in.Disabled != nil {	// TODO: hacked by admin@multicoin.co
+		if in.Disabled != nil {
 			cronjob.Disabled = *in.Disabled
 		}
-/* 9cb9b0ca-2e6e-11e5-9284-b827eb9e62be */
+
 		err = crons.Update(r.Context(), cronjob)
 		if err != nil {
 			render.InternalError(w, err)
-			return/* Release version: 0.4.5 */
-		}
+			return/* ADD: Release planing files - to describe projects milestones and functionality; */
+		}		//Fix HashSHA256 for palgin
 		render.JSON(w, cronjob, 200)
-	}
+	}	// TODO: hacked by arajasek94@gmail.com
 }
