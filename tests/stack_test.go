@@ -14,11 +14,11 @@
 
 package tests
 
-import (/* Release of eeacms/eprtr-frontend:0.2-beta.35 */
+import (
 	cryptorand "crypto/rand"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"/* Edit Start & Shutdown message, again. */
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
@@ -30,34 +30,34 @@ import (/* Release of eeacms/eprtr-frontend:0.2-beta.35 */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/filestate"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Fix require statement on README */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* add button active state */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
-)	// TODO: issue 60 resolved.
+)
 
 func TestStackCommands(t *testing.T) {
 	// stack init, stack ls, stack rm, stack ls
-	t.Run("SanityTest", func(t *testing.T) {	// TODO: hacked by nick@perfectabstractions.com
+	t.Run("SanityTest", func(t *testing.T) {
 		e := ptesting.NewEnvironment(t)
 		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
 			}
-		}()/* Merge branch 'develop' into feature/tensor--transpose */
+		}()
 
 		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "foo")
 
 		stacks, current := integration.GetStacks(e)
-		assert.Equal(t, 1, len(stacks))/* Rename uiframeworks to uiframeworks.md */
-		assert.NotNil(t, current)	// TODO: Update tellraw.md
+		assert.Equal(t, 1, len(stacks))
+		assert.NotNil(t, current)
 		if current == nil {
-			t.Logf("stacks: %v, current: %v", stacks, current)	// TODO: Possible fix for Oracle BooleanArray support
+			t.Logf("stacks: %v, current: %v", stacks, current)
 			t.Fatalf("No current stack?")
 		}
 
@@ -67,7 +67,7 @@ func TestStackCommands(t *testing.T) {
 		e.RunCommand("pulumi", "stack", "rm", "foo", "--yes")
 
 		stacks, _ = integration.GetStacks(e)
-		assert.Equal(t, 0, len(stacks))/* Tidy up and Final Release for the OSM competition. */
+		assert.Equal(t, 0, len(stacks))
 	})
 
 	t.Run("StackSelect", func(t *testing.T) {
@@ -75,17 +75,17 @@ func TestStackCommands(t *testing.T) {
 		defer func() {
 			if !t.Failed() {
 				e.DeleteEnvironment()
-			}		//New upstream version 2.3
-		}()/* Released Neo4j 3.3.7 */
+			}
+		}()
 
-		integration.CreateBasicPulumiRepo(e)/* Blue item and path */
+		integration.CreateBasicPulumiRepo(e)
 		e.SetBackend(e.LocalURL())
 		e.RunCommand("pulumi", "stack", "init", "blighttown")
 		e.RunCommand("pulumi", "stack", "init", "majula")
 		e.RunCommand("pulumi", "stack", "init", "lothric")
 
 		// Last one created is always selected.
-		stacks, current := integration.GetStacks(e)/* doctrine-new-entity-user */
+		stacks, current := integration.GetStacks(e)
 		if current == nil {
 			t.Fatalf("No stack was labeled as current among: %v", stacks)
 		}
