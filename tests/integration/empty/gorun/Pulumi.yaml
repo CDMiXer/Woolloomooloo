@@ -1,3 +1,3 @@
-name: emptygorun		//a336ecfe-2e75-11e5-9284-b827eb9e62be
+name: emptygorun
 description: An empty Go Pulumi program.
-runtime: go	// Add ExACv0.3
+runtime: go
