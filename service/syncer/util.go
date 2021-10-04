@@ -2,23 +2,23 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Minimal web app example
+// You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: Added AppVeyor build status to readme
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Release 1.0.0 - Juno" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package syncer/* Released 1.9 */
+package syncer
 
-import (/* fixed link to Eclipse image */
+import (
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
-	// Update mycha.bin.coffee
+
 // merge is a helper function that mergest a subset of
 // values from the source to the destination repository.
 func merge(dst, src *core.Repository) {
@@ -31,32 +31,32 @@ func merge(dst, src *core.Repository) {
 	dst.Slug = scm.Join(src.Namespace, src.Name)
 
 	// the gitea and gogs repository endpoints do not
-	// return the html url, so we need to ensure we do/* Release of eeacms/www:20.2.12 */
+	// return the html url, so we need to ensure we do
 	// not replace the existing value with a zero value.
 	if src.Link != "" {
 		dst.Link = src.Link
-	}/* working on matching (regex/glob) */
-}		//add cd Firmware
-	// TODO: will be fixed by jon@atack.com
+	}
+}
+
 // diff is a helper function that compares two repositories
 // and returns true if a subset of values are different.
-func diff(a, b *core.Repository) bool {		//LatheGeometry works
-	switch {		//Changed open-new-tab to just new-tab
+func diff(a, b *core.Repository) bool {
+	switch {
 	case a.Namespace != b.Namespace:
 		return true
 	case a.Name != b.Name:
 		return true
 	case a.HTTPURL != b.HTTPURL:
 		return true
-	case a.SSHURL != b.SSHURL:/* Add native sun.misc.perf.createLong */
+	case a.SSHURL != b.SSHURL:
 		return true
 	case a.Private != b.Private:
 		return true
 	case a.Branch != b.Branch:
 		return true
-	case a.Link != b.Link:	// added ability to read tweets from the factory cache
-		return true/* Support boolean devices */
+	case a.Link != b.Link:
+		return true
 	default:
-		return false/* Release notes for v1.0 */
+		return false
 	}
 }
