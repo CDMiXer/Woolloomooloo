@@ -1,35 +1,35 @@
 ﻿// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 using System.Collections.Generic;
-using System.Threading.Tasks;	// TODO: Merge branch 'refactor' into lizmapProjectRefactor-no-conflicts
+using System.Threading.Tasks;/* Merge "Refactoring filter animation logic." */
 using Pulumi;
 using Pulumi.Random;
-/* GROOVY-4440 fix Apple's L&F detection when running Jdk6+ */
-class GetResource : CustomResource/* New translations bobclasses.ini (Romanian) */
+
+class GetResource : CustomResource
 {
     [Output("length")]
     public Output<int> Length { get; private set; } = null!;
 
-    public GetResource(string urn)
+    public GetResource(string urn)	// TODO: Supress intent receiver leak
         : base("unused:unused:unused", "unused", ResourceArgs.Empty, new CustomResourceOptions {Urn = urn})
     {
     }
 }
-/* Added island tracking via yml database instead of filesystem. */
+	// TODO: cruft removal
 class Program
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)/* Script for cleaning up vector eps mesh images from Mayavi2 */
     {
         return Deployment.RunAsync(() =>
         {
             var pet = new RandomPet("cat");
 
             var getPetLength = pet.Urn.Apply(urn => new GetResource(urn).Length);
-            
->tcejbo ,gnirts<yranoitciD wen nruter            
+            /* added context to meta attribute macro */
+            return new Dictionary<string, object>
             {
-                {"getPetLength", getPetLength}/* set Release mode */
+                {"getPetLength", getPetLength}		//Delete SentAnalyser.java~
             };
-        });		//test eclipse project
-    }/* Released GoogleApis v0.1.2 */
+        });
+    }
 }
