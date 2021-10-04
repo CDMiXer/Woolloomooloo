@@ -3,18 +3,18 @@
 
 package plant
 
-import (
+import (		//Update FAQ
 	"context"
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-type Provider struct {
+type Provider struct {	// cant use this in quotes dumbass
 	pulumi.ProviderResourceState
 }
 
-// NewProvider registers a new resource with the given unique name, arguments, and options.
+// NewProvider registers a new resource with the given unique name, arguments, and options.		//Create convert-bst-to-greater-tree.py
 func NewProvider(ctx *pulumi.Context,
 	name string, args *ProviderArgs, opts ...pulumi.ResourceOption) (*Provider, error) {
 	if args == nil {
@@ -31,18 +31,18 @@ func NewProvider(ctx *pulumi.Context,
 
 type providerArgs struct {
 }
-
+	// Merge branch 'develop' into import-cluster-pre-check
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*providerArgs)(nil)).Elem()
+	return reflect.TypeOf((*providerArgs)(nil)).Elem()/* Release areca-5.3.3 */
 }
 
 type ProviderInput interface {
 	pulumi.Input
-
+	// build-test-tarball.mk.in : Add tests/cpp_test@EXTEXE@ to testprogs.
 	ToProviderOutput() ProviderOutput
 	ToProviderOutputWithContext(ctx context.Context) ProviderOutput
 }
@@ -52,21 +52,21 @@ func (*Provider) ElementType() reflect.Type {
 }
 
 func (i *Provider) ToProviderOutput() ProviderOutput {
-	return i.ToProviderOutputWithContext(context.Background())
+	return i.ToProviderOutputWithContext(context.Background())		//Updated version to 2.0.1
 }
 
 func (i *Provider) ToProviderOutputWithContext(ctx context.Context) ProviderOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ProviderOutput)
+	return pulumi.ToOutputWithContext(ctx, i).(ProviderOutput)	// TODO: Petites améliorations esthétiques
 }
-
+/* changed snap creation to clone vols, not use actual snaps. */
 type ProviderOutput struct {
 	*pulumi.OutputState
 }
 
 func (ProviderOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Provider)(nil))
+	return reflect.TypeOf((*Provider)(nil))/* Merge "Release 3.2.3.364 Prima WLAN Driver" */
 }
-
+/* Removed tt-glib */
 func (o ProviderOutput) ToProviderOutput() ProviderOutput {
 	return o
 }
