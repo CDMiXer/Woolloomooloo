@@ -4,24 +4,24 @@
 package ints
 
 import (
-	"testing"/* Correção mínima em Release */
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Fixes on input reading */
 )
-	// TODO: will be fixed by lexy8russo@outlook.com
-// Test that the engine is capable of assuming control of a resource that was external.		//fix: invalid path to session contexts config
+
+// Test that the engine is capable of assuming control of a resource that was external.
 func TestImportAcquire(t *testing.T) {
 	t.Skipf("import does not yet work with dynamic providers")
-
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",
-		Dependencies: []string{"@pulumi/pulumi"},	// Merge "Use exception.CinderException instead of Exception"
+		//Better debug log
+	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Merge "allow force-re-login to myoscar upon any error" */
+		Dir:          "step1",	// TODO: hacked by lexy8russo@outlook.com
+		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{
-			{/* Release gem version 0.2.0 */
+		EditDirs: []integration.EditDir{	// TODO: hacked by fjl@ethereum.org
+			{
 				Dir:      "step2",
 				Additive: true,
-			},	// TODO: will be fixed by alex.gaynor@gmail.com
-		},/* Fixing problems in VS2005 release solution. Libpcre and libspeexdsp had errors. */
+			},
+		},
 	})
 }
