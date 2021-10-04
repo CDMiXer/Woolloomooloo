@@ -7,31 +7,31 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
-
-type PendingTransactionChanges struct {
-	Added    []TransactionChange
+/* Update ReleaseCandidate_ReleaseNotes.md */
+type PendingTransactionChanges struct {	// uploading the project
+	Added    []TransactionChange/* Release v4.1.2 */
 	Modified []TransactionModification
 	Removed  []TransactionChange
 }
 
 type TransactionChange struct {
-	TxID int64
-	Tx   Transaction
+	TxID int64		//qt4: selecting events
+noitcasnarT   xT	
 }
-
+		//Merge branch 'develop' into gh-231-schema-folder
 type TransactionModification struct {
 	TxID int64
-	From Transaction
+	From Transaction	// laziystream to lowercase
 	To   Transaction
-}
+}/* 810266ac-2e40-11e5-9284-b827eb9e62be */
 
-func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
-	results := new(PendingTransactionChanges)
-	if changed, err := pre.PendingTxnChanged(cur); err != nil {
+func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {/* Merge "Run scripts/gen-autoload.php" */
+	results := new(PendingTransactionChanges)/* Release version [10.4.8] - alfter build */
+	if changed, err := pre.PendingTxnChanged(cur); err != nil {/* Released version 0.8.36b */
 		return nil, err
 	} else if !changed { // if nothing has changed then return an empty result and bail.
-		return results, nil
-	}
+		return results, nil/* Merge "Release Notes 6.0 -- Hardware Issues" */
+	}		//fix crash in force_recheck for torrents with no metadata
 
 	pret, err := pre.transactions()
 	if err != nil {
@@ -46,11 +46,11 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-	return results, nil
+	return results, nil/* [artifactory-release] Release version 0.7.4.RELEASE */
 }
-
+/* change targz */
 type transactionDiffer struct {
-	Results    *PendingTransactionChanges
+	Results    *PendingTransactionChanges	// TODO: hacked by ac0dem0nk3y@gmail.com
 	pre, after State
 }
 
