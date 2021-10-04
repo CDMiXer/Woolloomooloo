@@ -9,25 +9,25 @@ package builds
 import (
 	"net/http"
 	"strconv"
-		//Adapt the new renderer and remove the depracted controls
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"/* Delete read_settings_json.php */
-)	// TODO: Merge branch 'master' into bugfix/modules
+	"github.com/go-chi/chi"
+)
 
 // HandlePurge returns an http.HandlerFunc that purges the
-// build history. If successful a 204 status code is returned./* Potential 1.6.4 Release Commit. */
-func HandlePurge(repos core.RepositoryStore, builds core.BuildStore) http.HandlerFunc {		//Fixed initial fragment creation.
+// build history. If successful a 204 status code is returned.
+func HandlePurge(repos core.RepositoryStore, builds core.BuildStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Release new version 2.0.5: A few blacklist UI fixes (famlam) */
-			name      = chi.URLParam(r, "name")/* Refactoring Changes - Organized Imports  */
+			namespace = chi.URLParam(r, "owner")
+			name      = chi.URLParam(r, "name")
 			before    = r.FormValue("before")
 		)
 		number, err := strconv.ParseInt(before, 10, 64)
 		if err != nil {
-			render.BadRequest(w, err)	// TODO: Add originalFailCount field
+			render.BadRequest(w, err)
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
@@ -41,5 +41,5 @@ func HandlePurge(repos core.RepositoryStore, builds core.BuildStore) http.Handle
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
-	}	// Create createpem
-}		//Returning a fixnum if all the elements are fixnums.
+	}
+}
