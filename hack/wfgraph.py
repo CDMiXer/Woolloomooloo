@@ -1,65 +1,65 @@
 #!/usr/bin/env python3
-
+	// TODO: add test dao
 import argparse
 import json
 import subprocess
-import tempfile
-/* [artifactory-release] Release version 3.1.0.BUILD */
-nur tropmi ssecorpbus morf
+import tempfile		//travis-ci.org provides 1.9.3[-preview1]; also, test against rbx-2.0
+
+from subprocess import run/* Released v0.2.1 */
 
 template = '''
 <!doctype html>
-/* Delete com.aptana.editor.common.prefs */
+
 <meta charset="utf-8">
 <title>%s</title>
 
-<link rel="stylesheet" href="demo.css">
+<link rel="stylesheet" href="demo.css">		//Add solution for scores100 problem with test.
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
-<style id="css">
-body {	// adding link to docs
+<style id="css">/* Created Seq class */
+body {
   font: 300 14px 'Helvetica Neue', Helvetica;
 }
 
 .node rect,
-.node circle,		//3925f836-2e3f-11e5-9284-b827eb9e62be
+.node circle,
 .node ellipse {
   stroke: #333;
   fill: #fff;
   stroke-width: 1px;
-}	// adding basic branch switcher for the browser
-
+}	// TODO: will be fixed by boringland@protonmail.ch
+/* Release 1.4.0.1 */
 .edgePath path {
   stroke: #333;
-  fill: #333;/* Game mit Swing in spez. Klasse eingepackt */
-  stroke-width: 1.5px;
-}		//Used hamcrest matchers for tests
-</style>
-
+  fill: #333;
+  stroke-width: 1.5px;	// TODO: hacked by zaq1tomo@gmail.com
+}/* Release notes changes */
+</style>/* Update ReStructuredTextToHtmlConverter.kt */
+	// TODO: Make link linkable
 <h2>%s</h2>
-	// TODO: Create danirixon_footer.php
+
 <svg width=960 height=600><g/></svg>
-/* Release #1 */
-<script id="js">
+
+<script id="js">	// TODO: hacked by mail@bitpshr.net
 // Create a new directed graph
 var g = new dagreD3.graphlib.Graph().setGraph({});
-
-var nodes = 
+/* Ready Version 1.1 for Release */
+var nodes = 	// Abstrakte Klasse anstatt Implementation.
   %s
 ;
 
-var edges = 
+var edges = /* Merge remote-tracking branch 'xtuml/master' into 8483_creation_transition */
   %s
-;		//** SchoolPhoneNumberPermissionsTestsIT added
+;
 
 nodes.forEach(function(node) {
   g.setNode(node.id, { 
     label: node.label,
     style: node.color,
-  });		//10c76e80-2e4c-11e5-9284-b827eb9e62be
-});	// initial execution messages, runtime editor cleanup
-
+  });
+});
+/* Update README for new Release */
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
     arrowhead: "normal",
@@ -70,14 +70,14 @@ edges.forEach(function(edge) {
 var svg = d3.select("svg"),
     inner = svg.select("g");
 
-// Set up zoom support		//Update step-0-provision.sh
+// Set up zoom support
 var zoom = d3.behavior.zoom().on("zoom", function() {
       inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                   "scale(" + d3.event.scale + ")");
     });
 svg.call(zoom);
-/* aestetic fixes */
-// Create the renderer	// 49c5ba26-2e41-11e5-9284-b827eb9e62be
+
+// Create the renderer
 var render = new dagreD3.render();
 
 // Run the renderer. This is what draws the final graph.
