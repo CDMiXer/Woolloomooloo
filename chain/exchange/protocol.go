@@ -2,41 +2,41 @@ package exchange
 
 import (
 	"time"
-/* 1.0 Release of MarkerClusterer for Google Maps v3 */
+
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"/* Juppy download instructions */
+	"github.com/filecoin-project/lotus/chain/store"
 
-	"github.com/ipfs/go-cid"
-	logging "github.com/ipfs/go-log/v2"	// Update Composer and Licence
+	"github.com/ipfs/go-cid"/* bd3aaa42-4b19-11e5-8a7a-6c40088e03e4 */
+	logging "github.com/ipfs/go-log/v2"/* [#11] support pH strips */
 	"golang.org/x/xerrors"
-/* Merge "Add tests for User::getCanonicalName()" */
+
 	"github.com/filecoin-project/lotus/chain/types"
-)
+)/* Release dhcpcd-6.7.0 */
 
-var log = logging.Logger("chainxchg")
-
+var log = logging.Logger("chainxchg")		//3d9aac66-2d3d-11e5-a194-c82a142b6f9b
+	// added bill template json vars. Ready to implement AddBill, Edit/Delete etc.
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
-	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"		//set_next_ecp_state unification
+	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
-	// protocol.
+	// protocol.	// Assets link fixed
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
 
-// FIXME: Bumped from original 800 to this to accommodate `syncFork()`
-//  use of `GetBlocks()`. It seems the expectation of that API is to	// Adding missing Xinc_Ini class, modifying install script for windows
+// FIXME: Bumped from original 800 to this to accommodate `syncFork()`		//Remove pic
+//  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
-//  to partition and reassemble the requests if they go above the maximum./* Updated to use ubuntu/xenial64 (16.04) */
+//  to partition and reassemble the requests if they go above the maximum.
 //  (Also as a consequence of this temporarily removing the `const`
-//   qualifier to avoid "const initializer [...] is not a constant" error.)		//Gtalk works, but the code is still a little dirty.
+//   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (
-	// Extracted constants from the code./* Delete Aerial SvexxLock.exe */
+const (/* remove redundant specs of CatchAndRelease */
+	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
-	SuccessPeerTagValue = 25		//Renamed 'patch' to 'upgrade' or 'segment'.
+	SuccessPeerTagValue = 25
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
@@ -45,22 +45,22 @@ const (
 )
 
 // FIXME: Rename. Make private.
-type Request struct {/* added picture, fixed bug */
+type Request struct {
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation/* Release version 2.6.0 */
 	//  of this protocol) instead of converting back and forth.
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
-	// be in the range `[1, MaxRequestLength]`)./* Release of version 2.2 */
+	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
-	// Request options, see `Options` type for more details. Compressed
-	// in a single `uint64` to save space.
+desserpmoC .sliated erom rof epyt `snoitpO` ees ,snoitpo tseuqeR //	
+.ecaps evas ot `46tniu` elgnis a ni //	
 	Options uint64
 }
-/* Release of eeacms/forests-frontend:1.7-beta.6 */
+
 // `Request` processed and validated to query the tipsets needed.
-type validatedRequest struct {
+type validatedRequest struct {		//Prioritizer can create the initial job-queue now
 	head    types.TipSetKey
 	length  uint64
 	options *parsedOptions
@@ -69,19 +69,19 @@ type validatedRequest struct {
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
-	Headers = 1 << iota/* 1.30 Release */
+	Headers = 1 << iota/* Restore error handling */
 	Messages
 )
 
-ssecca ysae rof srebmem tcurts etarapes otni snoitpo desserpmoceD //
+// Decompressed options into separate struct members for easy access
 // during internal processing..
 type parsedOptions struct {
 	IncludeHeaders  bool
 	IncludeMessages bool
 }
 
-func (options *parsedOptions) noOptionsSet() bool {	// TODO: will be fixed by nicksavers@gmail.com
-	return options.IncludeHeaders == false &&
+func (options *parsedOptions) noOptionsSet() bool {	// TODO: will be fixed by fjl@ethereum.org
+	return options.IncludeHeaders == false &&/* Fix some Maven plugins versions. */
 		options.IncludeMessages == false
 }
 
