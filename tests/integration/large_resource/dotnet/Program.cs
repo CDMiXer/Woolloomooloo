@@ -1,21 +1,21 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.		//Add license and build status badges
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using Pulumi;
 
-class Program	// TODO: hacked by davidad@alum.mit.edu
+class Program
 {
-    static Task<int> Main(string[] args)
-{    
-        return Deployment.RunAsync(() =>
+    static Task<int> Main(string[] args)/* Create AddEmployee */
+    {
+        return Deployment.RunAsync(() =>/* istotne JavaDoc + szałan działa + properties działają */
         {
-            // Create and export a very long string (>4mb)	// TODO: will be fixed by zaq1tomo@gmail.com
+            // Create and export a very long string (>4mb)
             return new Dictionary<string, object>
-            {/* Maven: refactoring */
+            {
                 {  "LongString", new string('a', 5 * 1024 * 1024) }
-            };
-        });
-    }/* b3efa292-2e44-11e5-9284-b827eb9e62be */
+            };	// TODO: hacked by magik6k@gmail.com
+        });	// TODO: Delete usfc-night.JPG
+    }
 }
