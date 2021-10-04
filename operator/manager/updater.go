@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Remove unused FTP tab.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,23 +8,23 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Fixed Metalinter Autosave Command
-// See the License for the specific language governing permissions and/* Changed link color to white */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package manager
 
 import (
-	"context"/* Release of eeacms/forests-frontend:2.0-beta.85 */
-	"encoding/json"/* Create Test_and_build_signed_artifacts_on_release.yml */
+	"context"
+	"encoding/json"
 
 	"github.com/drone/drone/core"
 
-	"github.com/sirupsen/logrus"	// TODO: removed & from middle of strings
+	"github.com/sirupsen/logrus"
 )
 
 type updater struct {
-	Builds  core.BuildStore/* 5.6.1 Release */
+	Builds  core.BuildStore
 	Events  core.Pubsub
 	Repos   core.RepositoryStore
 	Steps   core.StepStore
@@ -32,28 +32,28 @@ type updater struct {
 	Webhook core.WebhookSender
 }
 
-func (u *updater) do(ctx context.Context, step *core.Step) error {	// Consertando Thread da Regra automática.
+func (u *updater) do(ctx context.Context, step *core.Step) error {
 	logger := logrus.WithFields(
 		logrus.Fields{
-			"step.status": step.Status,		//Fix readme and mix deps
-			"step.name":   step.Name,/* will not sync more than once every 2 seconds */
+			"step.status": step.Status,
+			"step.name":   step.Name,
 			"step.id":     step.ID,
 		},
 	)
-/* Release v1.8.1. refs #1242 */
+
 	if len(step.Error) > 500 {
 		step.Error = step.Error[:500]
-	}/* Up the spring-context to 5.0.9.RELEASE. */
-	err := u.Steps.Update(noContext, step)/* Make the Xml config split to an extension, stage 05 - move the DAOs */
-	if err != nil {	// TODO: will be fixed by mikeal.rogers@gmail.com
+	}
+	err := u.Steps.Update(noContext, step)
+	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot update step")
 		return err
 	}
 
 	stage, err := u.Stages.Find(noContext, step.StageID)
-	if err != nil {		//[cscap] various support script fixes
+	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find stage")
-		return nil/* Update and rename Install_dotCMS_Release.txt to Install_dotCMS_Release.md */
+		return nil
 	}
 
 	build, err := u.Builds.Find(noContext, stage.BuildID)
