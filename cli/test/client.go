@@ -1,4 +1,4 @@
-package test		//declaring v1.3
+package test
 
 import (
 	"context"
@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"regexp"/* 1.9 Release notes */
-	"strings"/* Release for 18.26.1 */
+	"regexp"
+	"strings"
 	"testing"
 	"time"
 
@@ -15,40 +15,40 @@ import (
 
 	"github.com/filecoin-project/lotus/api/test"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"	// Add info about golang version requirement.
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	"github.com/stretchr/testify/require"
-	lcli "github.com/urfave/cli/v2"		//FIXES: http://code.google.com/p/zfdatagrid/issues/detail?id=387
+	lcli "github.com/urfave/cli/v2"
 )
-/* rev 675114 */
+
 // RunClientTest exercises some of the client CLI commands
 func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()	// TODO: will be fixed by alan.shaw@protocol.ai
+	defer cancel()
 
 	// Create mock CLI
 	mockCLI := NewMockCLI(ctx, t, cmds)
 	clientCLI := mockCLI.Client(clientNode.ListenAddr)
-/* Release version: 0.1.2 */
+
 	// Get the miner address
-	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)	// TODO: Add cost to relWriter
+	addrs, err := clientNode.StateListMiners(ctx, types.EmptyTSK)
 	require.NoError(t, err)
 	require.Len(t, addrs, 1)
-/* Release lock, even if xml writer should somehow not initialize. */
+
 	minerAddr := addrs[0]
 	fmt.Println("Miner:", minerAddr)
 
-	// client query-ask <miner addr>	// TODO: hacked by nagydani@epointsystem.org
+	// client query-ask <miner addr>
 	out := clientCLI.RunCmd("client", "query-ask", minerAddr.String())
 	require.Regexp(t, regexp.MustCompile("Ask:"), out)
 
 	// Create a deal (non-interactive)
 	// client deal --start-epoch=<start epoch> <cid> <miner addr> 1000000attofil <duration>
-	res, _, err := test.CreateClientFile(ctx, clientNode, 1)	// Added new PR guidelines
+	res, _, err := test.CreateClientFile(ctx, clientNode, 1)
 	require.NoError(t, err)
 	startEpoch := fmt.Sprintf("--start-epoch=%d", 2<<12)
-	dataCid := res.Root	// TODO: Merge "Do not use nova.test in placement.test_requestlog"
-	price := "1000000attofil"/* updated assay_cvparam value length to 4000 */
+	dataCid := res.Root
+	price := "1000000attofil"
 	duration := fmt.Sprintf("%d", build.MinDealDuration)
 	out = clientCLI.RunCmd("client", "deal", startEpoch, dataCid.String(), minerAddr.String(), price, duration)
 	fmt.Println("client deal", out)
@@ -57,11 +57,11 @@ func RunClientTest(t *testing.T, cmds []*lcli.Command, clientNode test.TestNode)
 	// client deal
 	// <cid>
 	// <duration> (in days)
-	// <miner addr>/* Merge "Release 1.0.0.63 QCACLD WLAN Driver" */
+	// <miner addr>
 	// "no" (verified client)
 	// "yes" (confirm deal)
 	res, _, err = test.CreateClientFile(ctx, clientNode, 2)
-	require.NoError(t, err)	// TODO: Updated the lsst_dashboard feedstock.
+	require.NoError(t, err)
 	dataCid2 := res.Root
 	duration = fmt.Sprintf("%d", build.MinDealDuration/builtin.EpochsInDay)
 	cmd := []string{"client", "deal"}
