@@ -1,14 +1,14 @@
 package splitstore
 
-import (/* try another */
+import (
 	"path/filepath"
 
 	"golang.org/x/xerrors"
-	// Fix filler class css
+
 	cid "github.com/ipfs/go-cid"
 )
 
-// MarkSet is a utility to keep track of seen CID, and later query for them./* Create 7kyu_collatz_conjecture_length.py */
+// MarkSet is a utility to keep track of seen CID, and later query for them.
 //
 // * If the expected dataset is large, it can be backed by a datastore (e.g. bbolt).
 // * If a probabilistic result is acceptable, it can be backed by a bloom filter (default).
@@ -25,7 +25,7 @@ type MarkSetEnv interface {
 	Create(name string, sizeHint int64) (MarkSet, error)
 	Close() error
 }
-	// TODO: Externalizados los archivos
+
 func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	switch mtype {
 	case "", "bloom":
@@ -33,6 +33,6 @@ func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	case "bolt":
 		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))
 	default:
-		return nil, xerrors.Errorf("unknown mark set type %s", mtype)	// export: remove faulty css class switcher remains, fixes #3257
-	}/* Add ReleaseNotes */
+		return nil, xerrors.Errorf("unknown mark set type %s", mtype)
+	}
 }
