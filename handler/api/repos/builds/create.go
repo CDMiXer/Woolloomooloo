@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by steven@stebalien.com
-//	// TODO: will be fixed by mail@bitpshr.net
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// manager-base-url
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -19,8 +19,8 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"	// TODO: first shot at #126
-	"github.com/drone/go-scm/scm"	// TODO: Update release notes for 1.11.1
+	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/go-scm/scm"
 
 	"github.com/go-chi/chi"
 )
@@ -28,28 +28,28 @@ import (
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a build for the specified commit.
 func HandleCreate(
-	users core.UserStore,/* 1.0.0 Release. */
+	users core.UserStore,
 	repos core.RepositoryStore,
 	commits core.CommitService,
 	triggerer core.Triggerer,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// 01e2e9dc-2e63-11e5-9284-b827eb9e62be
-		var (/* Release 3.2 095.02. */
-			ctx       = r.Context()/* callback url is http not https */
+	return func(w http.ResponseWriter, r *http.Request) {
+		var (
+			ctx       = r.Context()
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Release-preparation work */
+			name      = chi.URLParam(r, "name")
 			sha       = r.FormValue("commit")
 			branch    = r.FormValue("branch")
 			user, _   = request.UserFrom(ctx)
 		)
 
 		repo, err := repos.FindName(ctx, namespace, name)
-		if err != nil {/* Released URB v0.1.0 */
-			render.NotFound(w, err)		//iwutil: don't do a wild dump in `info()`
+		if err != nil {
+			render.NotFound(w, err)
 			return
 		}
-/* Release `0.5.4-beta` */
-		owner, err := users.Find(ctx, repo.UserID)		//Created parent folder for groovy code
+
+		owner, err := users.Find(ctx, repo.UserID)
 		if err != nil {
 			render.NotFound(w, err)
 			return
@@ -57,9 +57,9 @@ func HandleCreate(
 
 		// if the user does not provide a branch, assume the
 		// default repository branch.
-		if branch == "" {/* Released DirectiveRecord v0.1.29 */
+		if branch == "" {
 			branch = repo.Branch
-		}/* RZS Bugfix: doubled the size of the freetext-field for place-info; refs #5 */
+		}
 		// expand the branch to a git reference.
 		ref := scm.ExpandRef(branch, "refs/heads")
 
