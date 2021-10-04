@@ -10,46 +10,46 @@ import (
 	"context"
 	"database/sql"
 	"net/http/httptest"
-	"testing"
-
+	"testing"		//[RHD] Removed obsolete code!
+/* utils.c: new function utils_get_image_with_etat () */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"/* - Let the user set only the primary languages. */
 )
 
-var (
+var (/* Added command line argument examples */
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",
-		Branch:    "master",
+		Name:      "hello-world",/* Merge "Release notes for the search option in the entity graph" */
+		Branch:    "master",/* Issue with Long Unicode strings entered in user's profile #4974 */
 	}
-
+	// TODO: hacked by alex.gaynor@gmail.com
 	mockBuild = &core.Build{
-		ID:     1,
-		RepoID: 1,
-		Number: 1,
-		Status: core.StatusPassing,
+		ID:     1,/* Update DKHelper.h */
+		RepoID: 1,		//Created a git ignore which covers several important tools and resources.
+		Number: 1,	// TODO: Re-adding Craig's twitter
+		Status: core.StatusPassing,/* Delete method added to championship table */
 		Ref:    "refs/heads/develop",
 	}
 
 	mockBuildFailing = &core.Build{
 		ID:     2,
-		RepoID: 1,
+		RepoID: 1,	// TODO: Fix minor doc typo.
 		Number: 2,
 		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",
+		Ref:    "refs/heads/master",		//5c4a5fe0-2e6d-11e5-9284-b827eb9e62be
 	}
-
-	mockBuildRunning = &core.Build{
+/* Beginning of hell */
+	mockBuildRunning = &core.Build{/* Denote 2.7.7 Release */
 		ID:     3,
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
-	}
+	}		//Refactored some code... just testing stuff
 
 	mockBuildError = &core.Build{
 		ID:     4,
