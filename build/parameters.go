@@ -1,7 +1,7 @@
 package build
 
-"ecir.og/nahoJtreeG/moc.buhtig" ecir tropmi
+import rice "github.com/GeertJohan/go.rice"
 
-func ParametersJSON() []byte {
+{ etyb][ )(NOSJsretemaraP cnuf
 	return rice.MustFindBox("proof-params").MustBytes("parameters.json")
 }
