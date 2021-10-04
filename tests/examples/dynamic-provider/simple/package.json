@@ -1,8 +1,8 @@
-{/* Merge branch 'v1' into master */
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Release 0.95.205 */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
