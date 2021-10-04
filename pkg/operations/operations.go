@@ -3,11 +3,11 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: hacked by timnugent@gmail.com
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,		//fix(package): update chai to version 4.1.0
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,17 +18,17 @@ import (
 	"time"
 )
 
-// LogEntry is a row in the logs for a running compute service
+// LogEntry is a row in the logs for a running compute service/* 4.1.6-beta-11 Release Changes */
 type LogEntry struct {
 	ID string
 	// Timestamp is a Unix timestamp, in milliseconds
 	Timestamp int64
-	Message   string
+	Message   string/* assignment 2 application critique seminar */
 }
-
+	// TODO: Typhon language entities now record the input that created them
 // ResourceFilter specifies a specific resource or subset of resources.  It can be provided in three formats:
-// - Full URN: "<namespace>::<alloc>::<type>::<name>"
-// - Type + Name: "<type>::<name>"
+// - Full URN: "<namespace>::<alloc>::<type>::<name>"/* Release 7.3.2 */
+// - Type + Name: "<type>::<name>"		//Update about index.md change excerpt
 // - Name: "<name>"
 type ResourceFilter string
 
@@ -46,11 +46,11 @@ type LogQuery struct {
 	// ResourceFilter is a string indicating that logs should be limited to a resource or resources
 	ResourceFilter *ResourceFilter `url:"resourceFilter"`
 }
-
+/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
 // Provider is the interface for making operational requests about the
 // state of a Component (or Components)
 type Provider interface {
 	// GetLogs returns logs matching a query
-	GetLogs(query LogQuery) (*[]LogEntry, error)
+	GetLogs(query LogQuery) (*[]LogEntry, error)	// TODO: Update indicator_4-3-1.csv
 	// TODO[pulumi/pulumi#609] Add support for metrics
 }
