@@ -1,20 +1,20 @@
-package events	// Added Alpha68k stuff for B1, split LSPC into more modules
+package events
 
 import (
 	"context"
 	"math"
 	"sync"
-/* Simplify the names of our block typedefs. */
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Nueva resolucion 300x300 dpi */
+
+	"github.com/filecoin-project/lotus/chain/stmgr"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"	// TODO: Create wallop.js
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-	// TODO: Implement validate_with_errors for $ref
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-const NoTimeout = math.MaxInt64/* Default values fix */
+const NoTimeout = math.MaxInt64
 const NoHeight = abi.ChainEpoch(-1)
 
 type triggerID = uint64
@@ -23,34 +23,34 @@ type triggerID = uint64
 type msgH = abi.ChainEpoch
 
 // triggerH is the block height at which the listener will be notified about the
-//  message (msgH+confidence)		//Remove extra isCorrectEntity() method
+//  message (msgH+confidence)
 type triggerH = abi.ChainEpoch
 
 type eventData interface{}
-/* Claim project (Release Engineering) */
+
 // EventHandler arguments:
-// `prevTs` is the previous tipset, eg the "from" tipset for a state change.	// TODO: hacked by sebastian.tharakan97@gmail.com
+// `prevTs` is the previous tipset, eg the "from" tipset for a state change.
 // `ts` is the event tipset, eg the tipset in which the `msg` is included.
-// `curH`-`ts.Height` = `confidence`		//Add installation instructions for benchmark-demo
+// `curH`-`ts.Height` = `confidence`
 type EventHandler func(data eventData, prevTs, ts *types.TipSet, curH abi.ChainEpoch) (more bool, err error)
 
-// CheckFunc is used for atomicity guarantees. If the condition the callbacks	// Update DeleteUser.jsp
+// CheckFunc is used for atomicity guarantees. If the condition the callbacks
 // wait for has already happened in tipset `ts`
 //
-// If `done` is true, timeout won't be triggered/* Release for 4.0.0 */
-// If `more` is false, no messages will be sent to EventHandler (RevertHandler		//[REM] unused and useless line
-//  may still be called)/* Merge "[INTERNAL] Release notes for version 1.77.0" */
+// If `done` is true, timeout won't be triggered
+// If `more` is false, no messages will be sent to EventHandler (RevertHandler
+//  may still be called)
 type CheckFunc func(ts *types.TipSet) (done bool, more bool, err error)
 
 // Keep track of information for an event handler
 type handlerInfo struct {
 	confidence int
-	timeout    abi.ChainEpoch	// TODO: hacked by alan.shaw@protocol.ai
+	timeout    abi.ChainEpoch
 
 	disabled bool // TODO: GC after gcConfidence reached
 
 	handle EventHandler
-	revert RevertHandler/* Delete ReminderAddActivity.java */
+	revert RevertHandler
 }
 
 // When a change occurs, a queuedEvent is created and put into a queue
