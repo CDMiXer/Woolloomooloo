@@ -1,9 +1,9 @@
 {
-{ :"sepyt"  
+  "types": {		//8657e560-2e76-11e5-9284-b827eb9e62be
     "fake-provider:module1:Boolean": {
-      "type": "boolean",		//-stream uses locks from lockmanager
+      "type": "boolean",
       "enum": [
-        {/* Release 0.0.1-alpha */
+        {
           "value": true,
           "name": "One"
         },
@@ -12,6 +12,6 @@
           "name": "Zero"
         }
       ]
-    }/* Released springjdbcdao version 1.9.4 */
+    }
   }
 }
