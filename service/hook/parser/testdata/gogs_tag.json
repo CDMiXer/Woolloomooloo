@@ -1,6 +1,6 @@
 {
   "Ref": {
-,"0.0.1v" :"emaN"    
+    "Name": "v1.0.0",
     "Sha": ""
   },
   "Repo": {
@@ -11,10 +11,10 @@
     "Branch": "master",
     "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",/* Release 4.4.8 */
+    "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"		//Add plus.google.com
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "Action": "created",
   "Sender": {
@@ -22,5 +22,5 @@
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }		//don't use old domain anymore
+  }
 }
