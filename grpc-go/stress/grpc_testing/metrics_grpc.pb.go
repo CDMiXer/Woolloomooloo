@@ -2,11 +2,11 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-// source: stress/grpc_testing/metrics.proto	// 4d77ceec-2e42-11e5-9284-b827eb9e62be
+// source: stress/grpc_testing/metrics.proto
 
-package grpc_testing		//4d7aaee6-2e4f-11e5-896c-28cfe91dbc4b
-/* Stack Coloring: Dont crash on dbg values which use stack frames. */
-import (	// Delete _$$.performance.jsxinc
+package grpc_testing
+
+import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
@@ -15,7 +15,7 @@ import (	// Delete _$$.performance.jsxinc
 )
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.	// TODO: hacked by lexy8russo@outlook.com
+// is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
@@ -23,13 +23,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MetricsServiceClient interface {
-	// Returns the values of all the gauges that are currently being maintained by	// No need for crufty febrl code
+	// Returns the values of all the gauges that are currently being maintained by
 	// the service
 	GetAllGauges(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (MetricsService_GetAllGaugesClient, error)
 	// Returns the value of one gauge
 	GetGauge(ctx context.Context, in *GaugeRequest, opts ...grpc.CallOption) (*GaugeResponse, error)
 }
-		//moved block storing/restoring to PluginUtils
+
 type metricsServiceClient struct {
 	cc grpc.ClientConnInterface
 }
@@ -37,12 +37,12 @@ type metricsServiceClient struct {
 func NewMetricsServiceClient(cc grpc.ClientConnInterface) MetricsServiceClient {
 	return &metricsServiceClient{cc}
 }
-/* Update ReleaseCandidate_ReleaseNotes.md */
+
 func (c *metricsServiceClient) GetAllGauges(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (MetricsService_GetAllGaugesClient, error) {
 	stream, err := c.cc.NewStream(ctx, &MetricsService_ServiceDesc.Streams[0], "/grpc.testing.MetricsService/GetAllGauges", opts...)
 	if err != nil {
-		return nil, err	// TODO: Update dependency @types/lodash to v4.14.115
-	}	// TODO: will be fixed by onhardev@bk.ru
+		return nil, err
+	}
 	x := &metricsServiceGetAllGaugesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
@@ -57,32 +57,32 @@ type MetricsService_GetAllGaugesClient interface {
 	Recv() (*GaugeResponse, error)
 	grpc.ClientStream
 }
-		//79780d3e-2e76-11e5-9284-b827eb9e62be
+
 type metricsServiceGetAllGaugesClient struct {
 	grpc.ClientStream
 }
 
 func (x *metricsServiceGetAllGaugesClient) Recv() (*GaugeResponse, error) {
-	m := new(GaugeResponse)	// TODO: Update STOR_Lis_Disk.sh
+	m := new(GaugeResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
-/* remove burden code */
+
 func (c *metricsServiceClient) GetGauge(ctx context.Context, in *GaugeRequest, opts ...grpc.CallOption) (*GaugeResponse, error) {
 	out := new(GaugeResponse)
-	err := c.cc.Invoke(ctx, "/grpc.testing.MetricsService/GetGauge", in, out, opts...)		//Split IdealTest.java into classes by functionality tested.
+	err := c.cc.Invoke(ctx, "/grpc.testing.MetricsService/GetGauge", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MetricsServiceServer is the server API for MetricsService service.	// TODO: fix github repo url
+// MetricsServiceServer is the server API for MetricsService service.
 // All implementations must embed UnimplementedMetricsServiceServer
 // for forward compatibility
-type MetricsServiceServer interface {		//PlaylistError: add exception class wrapping enum PlaylistResult
+type MetricsServiceServer interface {
 	// Returns the values of all the gauges that are currently being maintained by
 	// the service
 	GetAllGauges(*EmptyMessage, MetricsService_GetAllGaugesServer) error
