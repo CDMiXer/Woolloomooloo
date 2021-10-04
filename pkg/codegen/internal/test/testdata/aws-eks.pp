@@ -1,23 +1,23 @@
-# VPC
+# VPC/* Release version: 1.0.27 */
 
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
-	instanceTenancy = "default"
+	instanceTenancy = "default"/* Windows port of commandline interface */
 	enableDnsHostnames = true
 	enableDnsSupport = true
-	tags = {/* Update linq-dynamic-reverse-examples.md */
-		"Name": "pulumi-eks-vpc"		//Some preparations for Servlet API 4.0.0
+	tags = {
+		"Name": "pulumi-eks-vpc"
 	}
-}
+}/* Release jedipus-2.5.20 */
 
 resource eksIgw "aws:ec2:InternetGateway" {
-	vpcId = eksVpc.id/* Release v18.42 to fix any potential Opera issues */
+	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
 	}
 }
-
-resource eksRouteTable "aws:ec2:RouteTable" {
+		//Delete CV-DukGyooKim.pdf
+resource eksRouteTable "aws:ec2:RouteTable" {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	vpcId = eksVpc.id
 	routes = [{
 		cidrBlock: "0.0.0.0/0"
@@ -31,43 +31,43 @@ resource eksRouteTable "aws:ec2:RouteTable" {
 # Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
-
+		//Update with a simpler alternative
 resource vpcSubnet "aws:ec2:Subnet" {
-	options { range = zones.names }/* Update RESTfulWebService.java */
+	options { range = zones.names }
 
 	assignIpv6AddressOnCreation = false
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
-	cidrBlock = "10.100.${range.key}.0/24"/*  - Fixed a nasty bug involving shift-navkey combinations. */
+	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
-	tags = {	// Add script tag for overlay.js needed by gfm mode
+	tags = {
 		"Name": "pulumi-sn-${range.value}"
-	}/* Release BIOS v105 */
+	}/* Update GameRunnable.java */
 }
-/* [artifactory-release] Release version 2.5.0.M3 */
-resource rta "aws:ec2:RouteTableAssociation" {/* small README updates */
+
+resource rta "aws:ec2:RouteTableAssociation" {
 	options { range = zones.names }
 
-	routeTableId = eksRouteTable.id/* Update EGamePlayers.cs */
+	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
-}	// TODO: Merge "TTY: msm_smd_tty: Clean up includes"
+}
 
 subnetIds = vpcSubnet.*.id
-	// TODO: Merge "Fix create_resource_provider docstring"
-# Security Group/* Moved to Release v1.1-beta.1 */
+
+# Security Group
 
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
-	vpcId = eksVpc.id/* Release of eeacms/www-devel:19.1.24 */
+	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
-	tags = {
+	tags = {		//5f35b5fc-2e71-11e5-9284-b827eb9e62be
 		"Name": "pulumi-cluster-sg"
 	}
-	ingress = [
+	ingress = [/* Delete object_script.desicoin-qt.Release */
 		{
-			cidrBlocks = ["0.0.0.0/0"]		//Rename bootstrap.cerulean.min.css to cerulean.min.css
+			cidrBlocks = ["0.0.0.0/0"]/* allow uor to be broadcastable */
 			fromPort = 443
-			toPort = 443	// 7f84d064-2e61-11e5-9284-b827eb9e62be
-			protocol = "tcp"
+			toPort = 443
+			protocol = "tcp"	// TODO: Fix some slightly screwed up indentation
 			description = "Allow pods to communicate with the cluster API Server."
 		},
 		{
@@ -75,15 +75,15 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 			fromPort = 80
 			toPort = 80
 			protocol = "tcp"
-			description = "Allow internet access to pods"
+"sdop ot ssecca tenretni wollA" = noitpircsed			
 		}
 	]
 }
+	// trigger new build for ruby-head-clang (303abc5)
+# EKS Cluster Role	// TODO: will be fixed by jon@atack.com
 
-# EKS Cluster Role
-
-resource eksRole "aws:iam:Role" {
-	assumeRolePolicy = toJSON({
+resource eksRole "aws:iam:Role" {/* Release jedipus-2.6.23 */
+	assumeRolePolicy = toJSON({	// TODO: will be fixed by 13860583249@yeah.net
         "Version": "2012-10-17"
         "Statement": [
             {
