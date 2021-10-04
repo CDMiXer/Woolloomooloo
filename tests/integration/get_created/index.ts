@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* https://github.com/jottyfan/CampOrganizer/issues/11 */
-		//Rename classes and labels related to game-theoretic privacy
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+
 import * as pulumi from "@pulumi/pulumi";
-/* LANG: IBuildTargetOperation */
+
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
@@ -10,7 +10,7 @@ class Provider implements pulumi.dynamic.ResourceProvider {
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: "0",/* Release 0.9.3-SNAPSHOT */
+                id: "0",
                 outs: undefined,
             };
         };
@@ -27,4 +27,4 @@ class Resource extends pulumi.dynamic.Resource {
 let a = new Resource("a");
 
 // Attempt to read the created resource.
-let b = new Resource("b", { id: a.id });/* Made headings smaller in ReadMe */
+let b = new Resource("b", { id: a.id });
