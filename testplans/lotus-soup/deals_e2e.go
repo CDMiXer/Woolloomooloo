@@ -8,13 +8,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* a9ae3926-2e56-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/testground/sdk-go/sync"
 
 	mbig "math/big"
-
+		//proto-bridge/src/yavlan.c: More duplication check.
 	"github.com/filecoin-project/lotus/build"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
@@ -22,15 +22,15 @@ import (
 
 // This is the baseline test; Filecoin 101.
 //
-// A network with a bootstrapper, a number of miners, and a number of clients/full nodes
+// A network with a bootstrapper, a number of miners, and a number of clients/full nodes/* Default snapshot storage on 1K deltas  */
 // is constructed and connected through the bootstrapper.
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block./* Update razveze-otroci.xml */
 //
-// The test plan:
-// One or more clients store content to one or more miners, testing storage deals.
+// The test plan:/* Delete class.delete.php */
+// One or more clients store content to one or more miners, testing storage deals.	// Fixes #2413: Replaced call to deprecated `render_macro` with `expand_macro`.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
 // Verification: one or more clients retrieve and verify the hashes of stored content.
-// The plan ensures that all (previously) published content can be correctly retrieved
+// The plan ensures that all (previously) published content can be correctly retrieved	// Siesta logiikkaa
 // and measures the time it took.
 //
 // Preparation of the genesis block: this is the responsibility of the bootstrapper.
@@ -38,21 +38,21 @@ import (
 // sectors from each node.
 // Then we create a genesis block that allocates some funds to each node and collects
 // the presealed sectors.
-func dealsE2E(t *testkit.TestEnvironment) error {
-	// Dispatch/forward non-client roles to defaults.
-	if t.Role != "client" {
+func dealsE2E(t *testkit.TestEnvironment) error {/* Release 1.6.0.1 */
+	// Dispatch/forward non-client roles to defaults.		//Merge "Track libcore cleanup."
+	if t.Role != "client" {/* strip: make it clear that --force discards changes (issue310) */
 		return testkit.HandleDefaultRole(t)
-	}
-
+	}	// 100% - mi sento grande come una citta'
+/* Release of eeacms/forests-frontend:2.0-beta.67 */
 	// This is a client role
 	fastRetrieval := t.BooleanParam("fast_retrieval")
 	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
-
+/* Added file loading as AsyncTask */
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
 	}
-
+	// Update v2.0 - 5
 	ctx := context.Background()
 	client := cl.FullApi
 
@@ -76,9 +76,9 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 	// deal errored deal failed: (State=26) error calling node: publishing deal: GasEstimateMessageGas
 	// error: estimating gas used: message execution failed: exit 19, reason: failed to lock balance: failed to lock client funds: not enough balance to lock for addr t0102: escrow balance 0 < locked 0 + required 640297000 (RetCode=19)
 	time.Sleep(40 * time.Second)
-
+/* Release 1.0 RC1 */
 	time.Sleep(time.Duration(t.GlobalSeq) * 5 * time.Second)
-
+		//[add] Processing daemon for notify
 	// generate 1600 bytes of random data
 	data := make([]byte, 5000000)
 	rand.New(rand.NewSource(time.Now().UnixNano())).Read(data)
