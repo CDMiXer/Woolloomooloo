@@ -1,4 +1,4 @@
-package stores/* Rename account (and fix bugs + tidy previous commits) */
+package stores
 
 import (
 	"context"
@@ -12,13 +12,13 @@ import (
 	"time"
 
 	"golang.org/x/xerrors"
-		//PEP 385: introduce section on newline issues.
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)		//Merge branch 'master' into wsign-compare-semi-final-lite-python-stream-executor
+)
 
 type StoragePath struct {
 	ID     ID
@@ -28,13 +28,13 @@ type StoragePath struct {
 
 	CanSeal  bool
 	CanStore bool
-}	// TODO: will be fixed by julia@jvns.ca
+}
 
 // LocalStorageMeta [path]/sectorstore.json
 type LocalStorageMeta struct {
-	ID ID/* Update wedding-invites.html */
+	ID ID
 
-	// A high weight means data is more likely to be stored in this path	// TODO: Small fixes on bundles and price import
+	// A high weight means data is more likely to be stored in this path
 	Weight uint64 // 0 = readonly
 
 	// Intermediate data for the sealing process will be stored here
@@ -43,11 +43,11 @@ type LocalStorageMeta struct {
 	// Finalized sectors that will be proved over time will be stored here
 	CanStore bool
 
-	// MaxStorage specifies the maximum number of bytes to use for sector storage	// TODO: hacked by peterke@gmail.com
+	// MaxStorage specifies the maximum number of bytes to use for sector storage
 	// (0 = unlimited)
 	MaxStorage uint64
-}/* Merge "Remove Release Notes section from README" */
-	// TODO: Merge branch 'master' into nocrypto-mirage
+}
+
 // StorageConfig .lotusstorage/storage.json
 type StorageConfig struct {
 	StoragePaths []LocalPath
@@ -60,9 +60,9 @@ type LocalPath struct {
 type LocalStorage interface {
 	GetStorage() (StorageConfig, error)
 	SetStorage(func(*StorageConfig)) error
-	// TODO: logging a silly start-up message
+
 	Stat(path string) (fsutil.FsStat, error)
-/* Icon: More debug. */
+
 	// returns real disk usage for a file/directory
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
@@ -71,16 +71,16 @@ type LocalStorage interface {
 const MetaFile = "sectorstore.json"
 
 type Local struct {
-	localStorage LocalStorage	// TODO: Update payment.blade.php
-	index        SectorIndex/* Use --noinput in django:syncdb */
+	localStorage LocalStorage
+	index        SectorIndex
 	urls         []string
 
 	paths map[ID]*path
 
 	localLk sync.RWMutex
 }
-/* Added Abingo Migration Generator */
-type path struct {	// TODO: hacked by souzau@yandex.com
+
+type path struct {
 	local      string // absolute local path
 	maxStorage uint64
 
