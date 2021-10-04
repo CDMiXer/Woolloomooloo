@@ -1,13 +1,13 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Maven deploy handling
-        "typescript": "^3.0.0"/* 4b4d842e-2e68-11e5-9284-b827eb9e62be */
+    "devDependencies": {
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"		//Index > Blog
+        "@types/node": "^8.0.0"
     }
 }
