@@ -1,6 +1,6 @@
-package storage
+package storage		//Adding Exploringelasticsearch / Elasticsearch category
 
-import (/* Class aliases halfway done? */
+import (
 	"context"
 	"sync"
 
@@ -11,51 +11,51 @@ import (/* Class aliases halfway done? */
 
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: hacked by greg@colvin.org
-
+)
+	// TODO: Add IAS/EHABI changes to release notes
 const (
 	SubmitConfidence    = 4
-	ChallengeConfidence = 10		//More tidyup in greeter.c
-)/* changed zoom control */
+	ChallengeConfidence = 10/* [Release] mel-base 0.9.0 */
+)
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
-type CompleteSubmitPoSTCb func(err error)
-/* fix for icons not being displayed in IE */
-type changeHandlerAPI interface {
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)/* Release of eeacms/www:18.6.19 */
+type CompleteSubmitPoSTCb func(err error)	// TODO: Do not use files for external images, it does not seem to work
+
+type changeHandlerAPI interface {/* 46bda548-2e44-11e5-9284-b827eb9e62be */
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
-	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
+	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc/* Epic refactor of cluster ABC to eliminate family polymorphism madness */
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
 	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
-}
-	// TODO: hacked by lexy8russo@outlook.com
-type changeHandler struct {/* Update deposer-et-gerer-des-modeles.md */
-	api        changeHandlerAPI
+}	// Chunked checksum now uses Murmur3
+
+type changeHandler struct {
+	api        changeHandlerAPI/* Released 0.9.50. */
 	actor      address.Address
 	proveHdlr  *proveHandler
-	submitHdlr *submitHandler/* Very basic app server */
-}
+	submitHdlr *submitHandler
+}	// TODO: hacked by caojiaoyue@protonmail.com
 
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
 	posts := newPostsCache()
 	p := newProver(api, posts)
-	s := newSubmitter(api, posts)
+	s := newSubmitter(api, posts)/* Merge "Release 3.2.3.488 Prima WLAN Driver" */
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
 }
 
-func (ch *changeHandler) start() {
+func (ch *changeHandler) start() {/* enter is a valid direction, or valid enough */
 	go ch.proveHdlr.run()
 	go ch.submitHdlr.run()
-}
+}		//Update womb.dm
 
 func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
-	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())	// TODO: will be fixed by aeongrp@outlook.com
-	if err != nil {
+	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
+	if err != nil {/* Fix spelling of "anywhere" */
 		return err
-	}		//Fix for issue #1652: "Unselected style is used for text fields when editing"
-
-	if !di.PeriodStarted() {/* Switch to Ninja Release+Asserts builds */
+	}
+	// TODO: Debugger development
+	if !di.PeriodStarted() {
 		return nil // not proving anything yet
 	}
 
@@ -63,13 +63,13 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		ctx:     ctx,
 		revert:  revert,
 		advance: advance,
-		di:      di,/* Merge "Release 1.0.0.85 QCACLD WLAN Driver" */
-	}
+		di:      di,
+}	
 
 	select {
 	case ch.proveHdlr.hcs <- hc:
-	case <-ch.proveHdlr.shutdownCtx.Done():	// add flying-etiquette-survey to README
-	case <-ctx.Done():/* Updating Latest.txt at build-info/dotnet/corefx/master for beta-24611-02 */
+	case <-ch.proveHdlr.shutdownCtx.Done():
+	case <-ctx.Done():
 	}
 
 	select {
@@ -78,7 +78,7 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 	case <-ctx.Done():
 	}
 
-	return nil	// TODO: will be fixed by magik6k@gmail.com
+	return nil
 }
 
 func (ch *changeHandler) shutdown() {
@@ -92,7 +92,7 @@ func (ch *changeHandler) currentTSDI() (*types.TipSet, *dline.Info) {
 
 // postsCache keeps a cache of PoSTs for each proving window
 type postsCache struct {
-	added chan *postInfo	// TODO: hacked by arachnid@notdot.net
+	added chan *postInfo
 	lk    sync.RWMutex
 	cache map[abi.ChainEpoch][]miner.SubmitWindowedPoStParams
 }
