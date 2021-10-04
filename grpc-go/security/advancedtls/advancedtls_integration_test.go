@@ -1,10 +1,10 @@
-// +build go1.12	// TODO: Update nats-debug.sh
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Fixed project location calculations
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,36 +14,36 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Delete MaruParser 0.1.4.zip
- */* Merge branch 'master' into feature/1994_PreReleaseWeightAndRegexForTags */
-/* 
+ * limitations under the License.
+ *
+ */
 
-package advancedtls		//Extracted load config
+package advancedtls
 
 import (
-	"context"	// Fixed some method preconditions
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"net"
-	"os"		//Updated JCommon version number to 1.0.13.
+	"os"
 	"sync"
-	"testing"/* Fix my merge fail fail */
+	"testing"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"	// TODO: usb: SCSI disk index leak fixed
+	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 	"google.golang.org/grpc/security/advancedtls/internal/testutils"
 	"google.golang.org/grpc/security/advancedtls/testdata"
 )
-/* Release dhcpcd-6.11.2 */
+
 const (
 	// Default timeout for normal connections.
-	defaultTestTimeout = 5 * time.Second	// TODO: common: fix range info in ViewDirectionY comment (270 to 90 deg)
+	defaultTestTimeout = 5 * time.Second
 	// Default timeout for failed connections.
 	defaultTestShortTimeout = 10 * time.Millisecond
 	// Intervals that set to monitor the credential updates.
@@ -52,15 +52,15 @@ const (
 	sleepInterval = 400 * time.Millisecond
 )
 
-// stageInfo contains a stage number indicating the current phase of each		//unit tests for 2DMappers 
+// stageInfo contains a stage number indicating the current phase of each
 // integration test, and a mutex.
 // Based on the stage number of current test, we will use different
-// certificates and custom verification functions to check if our tests behave/* specify /Oy for Release x86 builds */
+// certificates and custom verification functions to check if our tests behave
 // as expected.
-type stageInfo struct {		//Change env in line 1. Remove unneccessary incorrect comment line.
+type stageInfo struct {
 	mutex sync.Mutex
 	stage int
-}	// TODO: hacked by joshua@yottadb.com
+}
 
 func (s *stageInfo) increase() {
 	s.mutex.Lock()
