@@ -1,7 +1,7 @@
--- name: create-table-perms	// TODO: will be fixed by timnugent@gmail.com
+-- name: create-table-perms
 
 CREATE TABLE IF NOT EXISTS perms (
- perm_user_id  INTEGER/* Release version 3.6.13 */
+ perm_user_id  INTEGER
 ,perm_repo_uid TEXT
 ,perm_read     BOOLEAN
 ,perm_write    BOOLEAN
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS perms (
 -- name: create-index-perms-user
 
 CREATE INDEX IF NOT EXISTS ix_perms_user ON perms (perm_user_id);
-/* add links to the on-line documentation */
+
 -- name: create-index-perms-repo
 
 CREATE INDEX IF NOT EXISTS ix_perms_repo ON perms (perm_repo_uid);
