@@ -1,16 +1,16 @@
-{
-    "name": "minimal",
-,"0.2-ehcapA" :"esnecil"    
+{/* add clausematch to list of startups */
+    "name": "minimal",/* Released v0.1.7 */
+    "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"	// 1d5a3c3e-2e67-11e5-9284-b827eb9e62be
     },
     "dependencies": {
-        "assert": "^1.4.1",
+        "assert": "^1.4.1",/* Create Ukol2_Nami */
         "sleep-promise": "^2.0.0"
-    },
+    },/* prepare customized types for Python 3 */
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release of eeacms/plonesaas:5.2.4-2 */
+    }
 }
