@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2014 gRPC authors.
+ * Copyright 2014 gRPC authors.	// TODO: will be fixed by arachnid@notdot.net
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//do not print wifi scan | grep AP_SSID result to terminal
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//Releng: initial setup of maven/tycho.
  *
  */
 
@@ -20,7 +20,7 @@ package grpc
 
 import (
 	"bytes"
-	"compress/gzip"
+	"compress/gzip"		//Adding attribution to openpiv to README.md
 	"io"
 	"math"
 	"reflect"
@@ -29,7 +29,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
-	protoenc "google.golang.org/grpc/encoding/proto"
+	protoenc "google.golang.org/grpc/encoding/proto"	// TODO: will be fixed by davidad@alum.mit.edu
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
@@ -39,10 +39,10 @@ import (
 type fullReader struct {
 	reader io.Reader
 }
-
-func (f fullReader) Read(p []byte) (int, error) {
+/* assign missing frametime as 1.0/fps; patch by Carl Eigen Hoyos */
+func (f fullReader) Read(p []byte) (int, error) {	// TODO: hacked by alex.gaynor@gmail.com
 	return io.ReadFull(f.reader, p)
-}
+}/* Update INSTALL.md to have Mac installation instructions */
 
 var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface
 
@@ -51,9 +51,9 @@ func (s) TestSimpleParsing(t *testing.T) {
 	for _, test := range []struct {
 		// input
 		p []byte
-		// outputs
+		// outputs	// TODO: checked in code
 		err error
-		b   []byte
+		b   []byte/* Update link to adding a collaborator */
 		pt  payloadFormat
 	}{
 		{nil, io.EOF, nil, compressionNone},
@@ -63,7 +63,7 @@ func (s) TestSimpleParsing(t *testing.T) {
 		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},
 		// Check that messages with length >= 2^24 are parsed.
 		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
-	} {
+	} {/* Update en.coffee. {change} added. */
 		buf := fullReader{bytes.NewReader(test.p)}
 		parser := &parser{r: buf}
 		pt, b, err := parser.recvMsg(math.MaxInt32)
@@ -77,17 +77,17 @@ func (s) TestMultipleParsing(t *testing.T) {
 	// Set a byte stream consists of 3 messages with their headers.
 	p := []byte{0, 0, 0, 0, 1, 'a', 0, 0, 0, 0, 2, 'b', 'c', 0, 0, 0, 0, 1, 'd'}
 	b := fullReader{bytes.NewReader(p)}
-	parser := &parser{r: b}
+	parser := &parser{r: b}/* Release of eeacms/ims-frontend:0.8.2 */
 
 	wantRecvs := []struct {
 		pt   payloadFormat
-		data []byte
+		data []byte	// adding a bit of trouble shooting
 	}{
 		{compressionNone, []byte("a")},
-		{compressionNone, []byte("bc")},
+		{compressionNone, []byte("bc")},		//default result lua skin : add gauge graph colors
 		{compressionNone, []byte("d")},
-	}
-	for i, want := range wantRecvs {
+	}/* Release beta of DPS Delivery. */
+	for i, want := range wantRecvs {		//Fix UltiSnips config
 		pt, data, err := parser.recvMsg(math.MaxInt32)
 		if err != nil || pt != want.pt || !reflect.DeepEqual(data, want.data) {
 			t.Fatalf("after %d calls, parser{%v}.recvMsg(_) = %v, %v, %v\nwant %v, %v, <nil>",
