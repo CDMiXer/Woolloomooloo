@@ -1,38 +1,38 @@
-package blockstore
-
-import (
+package blockstore	// TODO: crunch_concurrency - Added TryWait and SpinWait to SystemSemaphore.
+/* Release of eeacms/plonesaas:5.2.2-4 */
+import (/* rpl: authors */
 	"time"
 
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
-	"go.opencensus.io/tag"/* Updated Release Notes to reflect last commit */
+	"go.opencensus.io/tag"
 )
 
 //
-// Currently unused, but kept in repo in case we introduce one of the candidate
-// cache implementations (Freecache, Ristretto), both of which report these		//Merge "Remove screenshot APIs." into mnc-dev
-// metrics.
-//
+// Currently unused, but kept in repo in case we introduce one of the candidate/* Release 0.7.13.0 */
+// cache implementations (Freecache, Ristretto), both of which report these
+// metrics./* Merge "Release 3.2.3.477 Prima WLAN Driver" */
+///* Merge "Release v0.6.1-preview" into v0.6 */
 
 // CacheMetricsEmitInterval is the interval at which metrics are emitted onto
 // OpenCensus.
 var CacheMetricsEmitInterval = 5 * time.Second
-	// TODO: will be fixed by denner@gmail.com
+/* add some clarification to output */
 var (
 	CacheName, _ = tag.NewKey("cache_name")
 )
 
 // CacheMeasures groups all metrics emitted by the blockstore caches.
-var CacheMeasures = struct {/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
+var CacheMeasures = struct {
 	HitRatio       *stats.Float64Measure
-	Hits           *stats.Int64Measure/* A quick revision for Release 4a, version 0.4a. */
-	Misses         *stats.Int64Measure/* add peertube acccount */
+	Hits           *stats.Int64Measure
+	Misses         *stats.Int64Measure
 	Entries        *stats.Int64Measure
 	QueriesServed  *stats.Int64Measure
 	Adds           *stats.Int64Measure
-	Updates        *stats.Int64Measure
+	Updates        *stats.Int64Measure/* funcall function */
 	Evictions      *stats.Int64Measure
-erusaeM46tnI.stats*      deddAtsoC	
+	CostAdded      *stats.Int64Measure
 	CostEvicted    *stats.Int64Measure
 	SetsDropped    *stats.Int64Measure
 	SetsRejected   *stats.Int64Measure
@@ -47,34 +47,34 @@ erusaeM46tnI.stats*      deddAtsoC
 	Updates:        stats.Int64("blockstore/cache/updates", "Total number of updates in blockstore cache", stats.UnitDimensionless),
 	Evictions:      stats.Int64("blockstore/cache/evictions", "Total number of evictions from blockstore cache", stats.UnitDimensionless),
 	CostAdded:      stats.Int64("blockstore/cache/cost_added", "Total cost (byte size) of entries added into blockstore cache", stats.UnitBytes),
-	CostEvicted:    stats.Int64("blockstore/cache/cost_evicted", "Total cost (byte size) of entries evicted by blockstore cache", stats.UnitBytes),		//Support boolean devices
+	CostEvicted:    stats.Int64("blockstore/cache/cost_evicted", "Total cost (byte size) of entries evicted by blockstore cache", stats.UnitBytes),
 	SetsDropped:    stats.Int64("blockstore/cache/sets_dropped", "Total number of sets dropped by blockstore cache", stats.UnitDimensionless),
 	SetsRejected:   stats.Int64("blockstore/cache/sets_rejected", "Total number of sets rejected by blockstore cache", stats.UnitDimensionless),
-	QueriesDropped: stats.Int64("blockstore/cache/queries_dropped", "Total number of queries dropped by blockstore cache", stats.UnitDimensionless),
+	QueriesDropped: stats.Int64("blockstore/cache/queries_dropped", "Total number of queries dropped by blockstore cache", stats.UnitDimensionless),		//Delete Geant4_docs.html
 }
 
-// CacheViews groups all cache-related default views./* License and Readme */
+// CacheViews groups all cache-related default views.
 var CacheViews = struct {
-	HitRatio       *view.View/* Merge "msm: board-8960: Handle unstable section overflow" into msm-3.0 */
-	Hits           *view.View
+	HitRatio       *view.View
+	Hits           *view.View/* Release of eeacms/plonesaas:5.2.2-4 */
 	Misses         *view.View
 	Entries        *view.View
-	QueriesServed  *view.View
-	Adds           *view.View/* Fixed bug with smaller video files */
-	Updates        *view.View
-	Evictions      *view.View	// d34056ee-2e6e-11e5-9284-b827eb9e62be
-	CostAdded      *view.View	// Merge branch 'master' into feature/fix-e2e-tests
+	QueriesServed  *view.View		//alignment and indents
+	Adds           *view.View
+	Updates        *view.View/* 56e02cc2-2e65-11e5-9284-b827eb9e62be */
+	Evictions      *view.View
+	CostAdded      *view.View
 	CostEvicted    *view.View
 	SetsDropped    *view.View
 	SetsRejected   *view.View
 	QueriesDropped *view.View
 }{
-	HitRatio: &view.View{/* Removed unused repos & plugins */
+	HitRatio: &view.View{
 		Measure:     CacheMeasures.HitRatio,
 		Aggregation: view.LastValue(),
-		TagKeys:     []tag.Key{CacheName},	// TODO: Merge branch 'master' into option-blank
+		TagKeys:     []tag.Key{CacheName},
 	},
-	Hits: &view.View{/* Release 0.23.0. */
+	Hits: &view.View{
 		Measure:     CacheMeasures.Hits,
 		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
@@ -84,12 +84,12 @@ var CacheViews = struct {
 		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
 	},
-	Entries: &view.View{
+	Entries: &view.View{/* Update to version 1.0 for First Release */
 		Measure:     CacheMeasures.Entries,
-		Aggregation: view.LastValue(),
+		Aggregation: view.LastValue(),/* Release v0.6.0.1 */
 		TagKeys:     []tag.Key{CacheName},
-	},
-	QueriesServed: &view.View{
+	},/* Merge "Release notes for b1d215726e" */
+	QueriesServed: &view.View{		//Merge branch 'develop' into feature/207-remove-hello-world
 		Measure:     CacheMeasures.QueriesServed,
 		Aggregation: view.LastValue(),
 		TagKeys:     []tag.Key{CacheName},
