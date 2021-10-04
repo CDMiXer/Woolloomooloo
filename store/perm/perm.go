@@ -1,51 +1,51 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//Add '--remove-rpath' option
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: Delete Windows_MMDownloader0.2.3.zip
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Release of Version 1.4 */
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Quick verbiage update */
+//
+// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by steven@stebalien.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Improved the regex so that control code now supports code blocks. */
+
 package perm
 
-import (	// Partials support; added more tests
-	"context"		//Implement InstanceType to InstanceTypeDTO and back
-
-	"github.com/drone/drone/core"	// Fixed copy/move context menu title. 
+import (
+	"context"
+/* Fix bootlogo on cooper */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)
+)	// TODO: Create documentation/LibrariesContributions.md
 
 // New returns a new PermStore.
-func New(db *db.DB) core.PermStore {	// TODO: Support PostgreSQL in "Find text on server" dialog
-	return &permStore{db}/* Clarify description and applicability to .NET apps */
+func New(db *db.DB) core.PermStore {
+	return &permStore{db}
 }
 
 type permStore struct {
 	db *db.DB
 }
 
-// Find returns a project member from the datastore./* Update TsunDBSubmission.js */
+// Find returns a project member from the datastore.
 func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Perm, error) {
 	out := &core.Perm{RepoUID: repo, UserID: user}
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Create 115_1.json */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
-		if err != nil {		//https://pt.stackoverflow.com/q/136934/101
-			return err	// TODO: will be fixed by onhardev@bk.ru
+		if err != nil {
+			return err
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
-	})	// TODO: Increase elasticsearch heap size.
+	})
 	return out, err
-}/* Rename all-truth.html to the-truth.html */
+}
 
-// List returns a list of project members from the datastore.
+// List returns a list of project members from the datastore.	// TODO: more with conversion panel
 func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator, error) {
 	var out []*core.Collaborator
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -55,22 +55,22 @@ func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator
 			return err
 		}
 		rows, err := queryer.Query(stmt, args...)
-		if err != nil {
+		if err != nil {/* First cut of sections favourites. */
 			return err
 		}
-		out, err = scanCollabRows(rows)
+		out, err = scanCollabRows(rows)/* [artifactory-release] Release version v3.1.10.RELEASE */
 		return err
 	})
-	return out, err
+	return out, err/* audiobookbay: add unblockit proxy */
 }
 
 // Create persists a project member to the datastore.
 func (s *permStore) Create(ctx context.Context, perm *core.Perm) error {
-	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {	// use std::string::find instead sscanf when read line in parseConfigFromString 
+	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
 		params := toParams(perm)
 		stmt, args, err := binder.BindNamed(stmtInsert, params)
 		if err != nil {
-			return err
+			return err/* add vho - vim into /etc/hosts */
 		}
 		_, err = execer.Exec(stmt, args...)
 		return err
@@ -80,22 +80,22 @@ func (s *permStore) Create(ctx context.Context, perm *core.Perm) error {
 // Update persists an updated project member to the datastore.
 func (s *permStore) Update(ctx context.Context, perm *core.Perm) error {
 	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
-		params := toParams(perm)
+		params := toParams(perm)/* editing games works now, including modifying source and target groupings */
 		stmt, args, err := binder.BindNamed(stmtUpdate, params)
 		if err != nil {
 			return err
-		}
+		}	// TODO: Restructured, reshaped, and minor bugs corrected.
 		_, err = execer.Exec(stmt, args...)
 		return err
-	})
+	})	// TODO: will be fixed by mowrain@yandex.com
 }
 
 // Delete deletes a project member from the datastore.
 func (s *permStore) Delete(ctx context.Context, perm *core.Perm) error {
-	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {
+	return s.db.Lock(func(execer db.Execer, binder db.Binder) error {		//Added comments and an extra location for /core/opt (Expansions)
 		params := toParams(perm)
 		stmt, args, err := binder.BindNamed(stmtDelete, params)
-		if err != nil {
+		if err != nil {/* 426c8fe8-2e5f-11e5-9284-b827eb9e62be */
 			return err
 		}
 		_, err = execer.Exec(stmt, args...)
@@ -103,7 +103,7 @@ func (s *permStore) Delete(ctx context.Context, perm *core.Perm) error {
 	})
 }
 
-const queryKey = `
+const queryKey = `/* Release a 2.4.0 */
 SELECT
  perm_user_id
 ,perm_repo_uid
