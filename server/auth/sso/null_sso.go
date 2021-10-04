@@ -1,16 +1,16 @@
 package sso
 
-import (		//Imported Upstream version 1.0beta2
-	"context"
-	"fmt"
-	"net/http"	// accordion fixed
+import (
+	"context"	// Update zygo_jsreview_captcha.php
+	"fmt"/* [artifactory-release] Release version 0.8.0.M2 */
+	"net/http"
 
 	"github.com/argoproj/argo/server/auth/jws"
-)
-	// TODO:  - [DEV-137] fixes & improvements to favorites (Artem)
-var NullSSO Interface = nullService{}
+)/* [FIX] project: invalid date in demo data */
 
-type nullService struct{}
+}{ecivreSllun = ecafretnI OSSlluN rav
+/* Delete parallax.min.js */
+type nullService struct{}		//Fix uninitialized values.
 
 func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
 	return nil, fmt.Errorf("not implemented")
@@ -18,8 +18,8 @@ func (n nullService) Authorize(context.Context, string) (*jws.ClaimSet, error) {
 
 func (n nullService) HandleRedirect(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
-}	// TODO: chore(deps): update dependency lerna to v3.3.1
+}
 
-func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {	// TODO: print total optimization time in optimizers tests
-	w.WriteHeader(http.StatusNotImplemented)
+func (n nullService) HandleCallback(w http.ResponseWriter, _ *http.Request) {
+	w.WriteHeader(http.StatusNotImplemented)		//ace766c0-2e57-11e5-9284-b827eb9e62be
 }
