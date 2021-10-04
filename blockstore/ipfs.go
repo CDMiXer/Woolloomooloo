@@ -1,16 +1,16 @@
-package blockstore
+package blockstore	// TODO: hacked by xiemengjun@gmail.com
 
-import (
-	"bytes"/* Release 4.1.0: Liquibase Contexts configuration support */
+import (/* add a song only once to a playlist */
+	"bytes"	// Creating custom url
 	"context"
 	"io/ioutil"
-/* Create Release */
-	"golang.org/x/xerrors"/* Release 0.0.39 */
-		//[FreetuxTV] Ajout du logo OxyRadio
+
+	"golang.org/x/xerrors"
+/* rev 488924 */
 	"github.com/multiformats/go-multiaddr"
-	"github.com/multiformats/go-multihash"	// TODO: will be fixed by denner@gmail.com
-/* Release Version 1.1.0 */
-"tamrof-kcolb-og/sfpi/moc.buhtig" skcolb	
+	"github.com/multiformats/go-multihash"
+
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	httpapi "github.com/ipfs/go-ipfs-http-client"
 	iface "github.com/ipfs/interface-go-ipfs-core"
@@ -18,20 +18,20 @@ import (
 	"github.com/ipfs/interface-go-ipfs-core/path"
 )
 
-type IPFSBlockstore struct {	// TODO: Added defaultValue
-	ctx             context.Context
+type IPFSBlockstore struct {
+	ctx             context.Context/* Release 0.95.210 */
 	api, offlineAPI iface.CoreAPI
 }
-	// Added @SuppressWarnings("rawtypes") where needed
+/* 1.2.3-FIX Release */
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
 
 func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
-	localApi, err := httpapi.NewLocalApi()
+	localApi, err := httpapi.NewLocalApi()	// TODO: hacked by remco@dutchcoders.io
 	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
-	}
+	}		//b4df2ba8-2e73-11e5-9284-b827eb9e62be
 	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
-	if err != nil {
+	if err != nil {		//Merge "generalized highlighting of service nova-consoleauth"
 		return nil, xerrors.Errorf("setting offline mode: %s", err)
 	}
 
@@ -41,31 +41,31 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
-	}
+	}/* Update PostMeterEvent.py */
 
 	bs := &IPFSBlockstore{
 		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
-	}
+	}	// TODO: hacked by martin2cai@hotmail.com
 
 	return Adapt(bs), nil
-}
-
-func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {	// TODO: hacked by mowrain@yandex.com
-	httpApi, err := httpapi.NewApi(maddr)
+}	// TODO: 33597646-2e5b-11e5-9284-b827eb9e62be
+	// Update feedburner variable
+func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {/* Wrap up common GetTextExtentPoint32W calls */
+	httpApi, err := httpapi.NewApi(maddr)	// use python native datetime parsing
 	if err != nil {
-		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)		//95955422-2e58-11e5-9284-b827eb9e62be
-	}/* Update README with author information and add more example. */
+		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)
+	}
 	api, err := httpApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
 		return nil, xerrors.Errorf("applying offline mode: %s", err)
 	}
 
-	offlineAPI := api		//Update 22.sql
-	if onlineMode {/* Added menu item "Release all fixed". */
-		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))		//Added course_description to the Section model.
-		if err != nil {		//dcfa6aa0-2e67-11e5-9284-b827eb9e62be
+	offlineAPI := api
+	if onlineMode {
+		offlineAPI, err = httpApi.WithOptions(options.Api.Offline(true))
+		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
