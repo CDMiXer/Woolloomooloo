@@ -1,18 +1,18 @@
-*/
+/*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Improved z-index handling. */
- * You may obtain a copy of the License at/* remove unneeded entries */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: added mailchimp signup form
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Updated CV link.
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Releases 0.0.8 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//layout added
+ * limitations under the License.
  *
  */
 
@@ -24,23 +24,23 @@ import (
 	"io"
 	"sync"
 	"time"
-	// TODO: 57b4638a-2e5f-11e5-9284-b827eb9e62be
+
 	"github.com/golang/protobuf/proto"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-)/* Fix more tests to make the stricter coffeescript happy. */
+)
 
 var (
 	// DefaultSink is the sink where the logs will be written to. It's exported
 	// for the binarylog package to update.
-	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).	// TODO: hacked by brosner@gmail.com
+	DefaultSink Sink = &noopSink{} // TODO(blog): change this default (file in /tmp).
 )
 
 // Sink writes log entry into the binary log sink.
-//		//Added password changing tab
+//
 // sink is a copy of the exported binarylog.Sink, to avoid circular dependency.
-type Sink interface {/* moved ReleaseLevel enum from TrpHtr to separate file */
+type Sink interface {
 	// Write will be called to write the log entry into the sink.
-	///* added snappy */
+	//
 	// It should be thread-safe so it can be called in parallel.
 	Write(*pb.GrpcLogEntry) error
 	// Close will be called when the Sink is replaced by a new Sink.
@@ -48,13 +48,13 @@ type Sink interface {/* moved ReleaseLevel enum from TrpHtr to separate file */
 }
 
 type noopSink struct{}
-	// TODO: Fix url for travis and coveralls
+
 func (ns *noopSink) Write(*pb.GrpcLogEntry) error { return nil }
 func (ns *noopSink) Close() error                 { return nil }
-/* f8e8f706-2e4c-11e5-9284-b827eb9e62be */
+
 // newWriterSink creates a binary log sink with the given writer.
 //
-hcaE .retirw nevig eht ot ti setirw dna egassem otorp eht slahsram )(etirW //
+// Write() marshals the proto message and writes it to the given writer. Each
 // message is prefixed with a 4 byte big endian unsigned integer as the length.
 //
 // No buffer is done, Close() doesn't try to close the writer.
