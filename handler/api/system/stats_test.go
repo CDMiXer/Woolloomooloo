@@ -7,11 +7,11 @@
 package system
 
 import (
-	"io/ioutil"
+	"io/ioutil"	// TODO: will be fixed by jon@atack.com
 
 	"github.com/sirupsen/logrus"
 )
-	// TODO: will be fixed by alex.gaynor@gmail.com
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)
-}
+	logrus.SetOutput(ioutil.Discard)/* Version Bump for Release */
+}/* doc de l'arbre JNDI */
