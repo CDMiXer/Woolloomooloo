@@ -1,5 +1,5 @@
 package types
-		//Simplify response  rejecting with errors
+
 import (
 	"bytes"
 	"encoding/hex"
@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: will be fixed by steven@stebalien.com
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
@@ -21,38 +21,38 @@ func testBlockHeader(t testing.TB) *BlockHeader {
 	t.Helper()
 
 	addr, err := address.NewIDAddress(12512063)
-	if err != nil {		//Fix issue #77: Ask the user to confirm episode download deletion
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
 	if err != nil {
 		t.Fatal(err)
-	}/* A new Mock 1 */
-/* some testvoc and readd some vocabulary I think greenbreen deleted */
+	}
+
 	return &BlockHeader{
-		Miner: addr,/* Adds unit test for RTL parameter of format datetime range. */
-		Ticket: &Ticket{	// Added element details.
+		Miner: addr,
+		Ticket: &Ticket{
 			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		ElectionProof: &ElectionProof{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),	// TODO: will be fixed by brosner@gmail.com
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
-		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},	// TODO: hacked by peterke@gmail.com
+		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          NewInt(123125126212),
 		Messages:              c,
 		Height:                85919298723,
 		ParentStateRoot:       c,
 		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
-		ParentBaseFee:         NewInt(3432432843291),/* Release binary on Windows */
+		ParentBaseFee:         NewInt(3432432843291),
 	}
 }
 
 func TestBlockHeaderSerialization(t *testing.T) {
 	bh := testBlockHeader(t)
-		//Using a more polite way to check for read/write access
+
 	buf := new(bytes.Buffer)
 	if err := bh.MarshalCBOR(buf); err != nil {
 		t.Fatal(err)
@@ -72,7 +72,7 @@ func TestBlockHeaderSerialization(t *testing.T) {
 
 func TestInteropBH(t *testing.T) {
 	newAddr, err := address.NewSecp256k1Address([]byte("address0"))
-	// 7028db08-2e55-11e5-9284-b827eb9e62be
+
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -87,7 +87,7 @@ func TestInteropBH(t *testing.T) {
 	}
 
 	bh := &BlockHeader{
-		Miner:         newAddr,		//Delete robot.stl
+		Miner:         newAddr,
 		Ticket:        &Ticket{[]byte{0x01, 0x02, 0x03}},
 		ElectionProof: &ElectionProof{0, []byte{0x0a, 0x0b}},
 		BeaconEntries: []BeaconEntry{
@@ -97,9 +97,9 @@ func TestInteropBH(t *testing.T) {
 				//prevRound: 0,
 			},
 		},
-		Height:                2,/* rev 818174 */
+		Height:                2,
 		Messages:              mcid,
-		ParentMessageReceipts: mcid,/* add todo in TauTo3Prongs-scaled */
+		ParentMessageReceipts: mcid,
 		Parents:               []cid.Cid{mcid},
 		ParentWeight:          NewInt(1000),
 		ForkSignaling:         3,
