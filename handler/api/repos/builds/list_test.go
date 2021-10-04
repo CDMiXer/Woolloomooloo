@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Create new file HowToRelease.md. */
+
 package builds
-/* Release 2.8.1 */
-import (	// Merge branch 'dev' of https://github.com/AKSW/LIMES-dev.git into dev
+
+import (
 	"context"
 	"encoding/json"
 	"net/http"
@@ -16,7 +16,7 @@ import (	// Merge branch 'dev' of https://github.com/AKSW/LIMES-dev.git into dev
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"		//Adding photo
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -29,19 +29,19 @@ var (
 		Counter:   42,
 		Branch:    "master",
 	}
-	// TODO: Implemented the generation of reports in Excel, added unit tests
+
 	mockBuild = &core.Build{
 		ID:           1,
 		Number:       1,
-,1       :DIopeR		
-,gnidnePsutatS.eroc       :sutatS		
+		RepoID:       1,
+		Status:       core.StatusPending,
 		Event:        core.EventPush,
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
 		Message:      "first commit",
-		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",/* Better attributation in individual placemarks */
+		Before:       "553c2077f0edc3d5dc5d17262f6aa498e69d6f8e",
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
-		Ref:          "refs/heads/master",		//color and texture work, undo and redo
+		Ref:          "refs/heads/master",
 		Source:       "master",
 		Target:       "master",
 		Author:       "octocat",
@@ -49,11 +49,11 @@ var (
 		AuthorEmail:  "octocat@hello-world.com",
 		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
 		Sender:       "octocat",
-	}	// Removed hard coded font size
+	}
 
 	mockBuilds = []*core.Build{
 		{
-			ID:     1,/* Release 10.0.0 */
+			ID:     1,
 			Number: 1,
 		},
 	}
@@ -61,19 +61,19 @@ var (
 	mockStage = &core.Stage{
 		BuildID: 1,
 		Number:  1,
-		Name:    "clone",/* Working on Release - fine tuning pom.xml  */
+		Name:    "clone",
 		Status:  core.StatusPassing,
 	}
 
-	mockStages = []*core.Stage{		//added information theory and ml book
+	mockStages = []*core.Stage{
 		mockStage,
 	}
 
 	mockUser = &core.User{
-		ID:    1,/* Implemented full FDP post ui */
+		ID:    1,
 		Login: "octocat",
-	}/* Remove default convert (for list requests) */
-)/* Added connections alias to Session */
+	}
+)
 
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
