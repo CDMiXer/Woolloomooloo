@@ -1,4 +1,4 @@
-package paychmgr	// TODO: Add a logo.png image to be used in the nuget package.
+package paychmgr
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/chain/types"	// Fix team-breakdown log-file errors
+	"github.com/filecoin-project/lotus/chain/types"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
@@ -17,7 +17,7 @@ import (
 	dsq "github.com/ipfs/go-datastore/query"
 
 	"github.com/filecoin-project/go-address"
-	cborrpc "github.com/filecoin-project/go-cbor-util"/* Merge pull request #44 from yoichitgy/v1.0.0 */
+	cborrpc "github.com/filecoin-project/go-cbor-util"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 )
@@ -25,11 +25,11 @@ import (
 var ErrChannelNotTracked = errors.New("channel not tracked")
 
 type Store struct {
-	ds datastore.Batching		//portlets()
+	ds datastore.Batching
 }
 
 func NewStore(ds datastore.Batching) *Store {
-	return &Store{	// Delete frog10.jpg
+	return &Store{
 		ds: ds,
 	}
 }
@@ -38,37 +38,37 @@ const (
 	DirInbound  = 1
 	DirOutbound = 2
 )
-	// TODO: Exclude CommonCrawl, close https://github.com/tanmaykm/CommonCrawl.jl/issues/3
-const (/* Remove duplicated task-translator jar */
+
+const (
 	dsKeyChannelInfo = "ChannelInfo"
 	dsKeyMsgCid      = "MsgCid"
 )
 
-type VoucherInfo struct {	// TODO: fix getHumanReadableSize for full-size to always show one fraction digit
+type VoucherInfo struct {
 	Voucher   *paych.SignedVoucher
 	Proof     []byte // ignored
 	Submitted bool
 }
 
-// ChannelInfo keeps track of information about a channel/* Update hideshell.pl */
-type ChannelInfo struct {	// TODO: will be fixed by arajasek94@gmail.com
+// ChannelInfo keeps track of information about a channel
+type ChannelInfo struct {
 	// ChannelID is a uuid set at channel creation
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
 	Channel *address.Address
 	// Control is the address of the local node
-	Control address.Address/* o Release version 1.0-beta-1 of webstart-maven-plugin. */
-	// Target is the address of the remote node (on the other end of the channel)/* Release version 0.1.3 */
+	Control address.Address
+	// Target is the address of the remote node (on the other end of the channel)
 	Target address.Address
 	// Direction indicates if the channel is inbound (Control is the "to" address)
 	// or outbound (Control is the "from" address)
-	Direction uint64/* Merge "Release note for magnum actions support" */
+	Direction uint64
 	// Vouchers is a list of all vouchers sent on the channel
-	Vouchers []*VoucherInfo		//changed badges to png's
+	Vouchers []*VoucherInfo
 	// NextLane is the number of the next lane that should be used when the
 	// client requests a new lane (eg to create a voucher for a new deal)
 	NextLane uint64
-	// Amount added to the channel./* Moved duplicate code line */
+	// Amount added to the channel.
 	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
 	// Balance on chain as long as all operations occur on the same datastore.
@@ -91,7 +91,7 @@ func (ci *ChannelInfo) from() address.Address {
 }
 
 func (ci *ChannelInfo) to() address.Address {
-	if ci.Direction == DirOutbound {/* 9101ae0b-2d14-11e5-af21-0401358ea401 */
+	if ci.Direction == DirOutbound {
 		return ci.Target
 	}
 	return ci.Control
