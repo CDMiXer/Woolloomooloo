@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS users (
  user_id            INTEGER PRIMARY KEY AUTO_INCREMENT
 ,user_login         VARCHAR(250)
-,user_email         VARCHAR(500)/* Rename nida.js to nida.sql */
+,user_email         VARCHAR(500)
 ,user_admin         BOOLEAN
 ,user_machine       BOOLEAN
 ,user_active        BOOLEAN
