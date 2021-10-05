@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Delete td_meiteiPro to burmesePro.txt
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 10.3.2-SNAPSHOT */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -17,11 +17,11 @@ package main
 import (
 	"fmt"
 	"io"
-	"os"	// TODO: Zmiana wersji SpringBoot
+	"os"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-/* Correcting bug for Release version */
-	"github.com/blang/semver"	// TODO: Move CustomDimensions into Analytics.js
+
+	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
@@ -31,7 +31,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-func newPluginInstallCmd() *cobra.Command {	// TODO: RNA-seq pipeline test default to GRCh37 not hg19.
+func newPluginInstallCmd() *cobra.Command {
 	var serverURL string
 	var exact bool
 	var file string
@@ -41,7 +41,7 @@ func newPluginInstallCmd() *cobra.Command {	// TODO: RNA-seq pipeline test defau
 		Use:   "install [KIND NAME VERSION]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
-		Long: "Install one or more plugins.\n" +		//Improved customer and supplier search in autocomplete widgets.
+		Long: "Install one or more plugins.\n" +
 			"\n" +
 			"This command is used manually install plugins required by your program.  It may\n" +
 			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
@@ -50,21 +50,21 @@ func newPluginInstallCmd() *cobra.Command {	// TODO: RNA-seq pipeline test defau
 			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* Delete Outpour_MSP430_v2_1_ReleaseNotes.docx */
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			displayOpts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),/* Delete Felix2.0_v.2.py */
-			}	// TODO: 3dd1b5be-2e5d-11e5-9284-b827eb9e62be
+				Color: cmdutil.GetGlobalColorization(),
+			}
 
-			// Parse the kind, name, and version, if specified./* Bazile site url added */
+			// Parse the kind, name, and version, if specified.
 			var installs []workspace.PluginInfo
 			if len(args) > 0 {
-				if !workspace.IsPluginKind(args[0]) {	// Merge "Update tox config"
+				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", args[0])
 				} else if len(args) < 2 {
-					return errors.New("missing plugin name argument")	// Update dev 10.0 version to RC1
+					return errors.New("missing plugin name argument")
 				} else if len(args) < 3 {
 					return errors.New("missing plugin version argument")
-				}		//Update TRADE.md
+				}
 				version, err := semver.ParseTolerant(args[2])
 				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
@@ -72,11 +72,11 @@ func newPluginInstallCmd() *cobra.Command {	// TODO: RNA-seq pipeline test defau
 				installs = append(installs, workspace.PluginInfo{
 					Kind:      workspace.PluginKind(args[0]),
 					Name:      args[1],
-					Version:   &version,	// Fixes #2066
+					Version:   &version,
 					ServerURL: serverURL, // If empty, will use default plugin source.
 				})
 			} else {
-				if file != "" {/* Add demo URL */
+				if file != "" {
 					return errors.New("--file (-f) is only valid if a specific package is being installed")
 				}
 
