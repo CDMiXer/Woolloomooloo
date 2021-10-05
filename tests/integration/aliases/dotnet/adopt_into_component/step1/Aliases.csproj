@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* added support for wma and m4a */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+>puorGytreporP<  
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
->puorGytreporP/<  
+  </PropertyGroup>
 
 </Project>
