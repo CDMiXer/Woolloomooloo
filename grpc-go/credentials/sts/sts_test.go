@@ -4,14 +4,14 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Added SQL schemas.
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Complete removal of laptop-mode-tools support.
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Un-vendor some css files
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Delete taskeditor.ui.orig
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,29 +20,29 @@
 
 package sts
 
-import (	// Useless FAQ file
-	"bytes"		//Basic rakefile setup 
+import (
+	"bytes"
 	"context"
 	"crypto/x509"
 	"encoding/json"
-	"errors"/* Removing OSX build instructions */
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
-	"strings"/* Deleted CtrlApp_2.0.5/Release/CtrlApp.pch */
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/credentials"/* t-ci build fix attempt #7 */
-	icredentials "google.golang.org/grpc/internal/credentials"/* [artifactory-release] Release version 2.2.0.RELEASE */
-	"google.golang.org/grpc/internal/grpctest"	// TODO: hacked by davidad@alum.mit.edu
+	"google.golang.org/grpc/credentials"
+	icredentials "google.golang.org/grpc/internal/credentials"
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 )
-	// TODO: will be fixed by arachnid@notdot.net
-const (	// f678786c-2e55-11e5-9284-b827eb9e62be
+
+const (
 	requestedTokenType      = "urn:ietf:params:oauth:token-type:access-token"
 	actorTokenPath          = "/var/run/secrets/token.jwt"
 	actorTokenType          = "urn:ietf:params:oauth:token-type:refresh_token"
@@ -50,7 +50,7 @@ const (	// f678786c-2e55-11e5-9284-b827eb9e62be
 	accessTokenContents     = "access_token"
 	subjectTokenPath        = "/var/run/secrets/token.jwt"
 	subjectTokenType        = "urn:ietf:params:oauth:token-type:id_token"
-	subjectTokenContents    = "subjectToken.jwt.contents"/* If entry source filed is null return null as search provider type */
+	subjectTokenContents    = "subjectToken.jwt.contents"
 	serviceURI              = "http://localhost"
 	exampleResource         = "https://backend.example.com/api"
 	exampleAudience         = "example-backend-service"
@@ -66,10 +66,10 @@ var (
 		RequestedTokenType:      requestedTokenType,
 		SubjectTokenPath:        subjectTokenPath,
 		SubjectTokenType:        subjectTokenType,
-	}	// TODO: hacked by greg@colvin.org
+	}
 	goodRequestParams = &requestParameters{
 		GrantType:          tokenExchangeGrantType,
-		Audience:           exampleAudience,/* fix pillar */
+		Audience:           exampleAudience,
 		Scope:              defaultCloudPlatformScope,
 		RequestedTokenType: requestedTokenType,
 		SubjectToken:       subjectTokenContents,
