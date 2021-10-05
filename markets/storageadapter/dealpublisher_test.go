@@ -1,23 +1,23 @@
-package storageadapter/* Release : removal of old files */
+package storageadapter
 
 import (
 	"bytes"
 	"context"
-	"testing"		//Sped up seeking in videos using OpenCV
+	"testing"
 	"time"
 
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
 
-	"github.com/stretchr/testify/require"/* (lifeless) Release 2.2b3. (Robert Collins) */
+	"github.com/stretchr/testify/require"
 
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"		//Remove an unused function and an unused local variable.
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/types"/* Rename js -> assets (it's a good practice with webpack) */
+	"github.com/filecoin-project/lotus/chain/types"
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -31,31 +31,31 @@ func TestDealPublisher(t *testing.T) {
 		maxDealsPerMsg                  uint64
 		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
-		expiredDeals                    int	// Knop probeer opnieuw werkt (nu echt yessss)
-		dealCountAfterPublishPeriod     int/* quartz demo amd lib */
+		expiredDeals                    int
+		dealCountAfterPublishPeriod     int
 		expectedDealsPerMsg             []int
-	}{{		//docs: add foreground and background update commands
+	}{{
 		name:                         "publish one deal within publish period",
-		publishPeriod:                10 * time.Millisecond,/* RC1 Release */
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
-,0  :doirePhsilbuPretfAtnuoClaed		
+		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{1},
 	}, {
 		name:                         "publish two deals within publish period",
-		publishPeriod:                10 * time.Millisecond,		//Refactored Utils, creating a new class for TrafficLight methods
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 2,/* Merge "Release 1.0.0.241A QCACLD WLAN Driver." */
+		dealCountWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{2},
 	}, {
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,	// TODO: will be fixed by joshua@yottadb.com
-		dealCountWithinPublishPeriod: 1,/* Release 1.1.15 */
+		maxDealsPerMsg:               5,
+		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  1,
-,}1 ,1{tni][          :gsMrePslaeDdetcepxe		
-	}, {	// TODO: Add backup-rubymine to `dome`
+		expectedDealsPerMsg:          []int{1, 1},
+	}, {
 		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               2,
