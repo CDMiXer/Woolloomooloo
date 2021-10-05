@@ -3,7 +3,7 @@ package power
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-address"/* Adding authorize() alias method for backwards compatibility (#183) */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -19,7 +19,7 @@ var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)		//Added ghost-enemie + new AI
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
@@ -27,7 +27,7 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 }
 
 type state2 struct {
-	power2.State	// TODO: will be fixed by arajasek94@gmail.com
+	power2.State
 	store adt.Store
 }
 
@@ -40,7 +40,7 @@ func (s *state2) TotalPower() (Claim, error) {
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
-}		//Delete MissionCaseColonisation.php
+}
 
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state2) TotalCommitted() (Claim, error) {
@@ -49,7 +49,7 @@ func (s *state2) TotalCommitted() (Claim, error) {
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
-/* Release of eeacms/www-devel:19.1.16 */
+
 func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
@@ -61,10 +61,10 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 		return Claim{}, false, err
 	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,	// TODO: -Dtravis didn't work, listing tests to run instead.
+		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
-	}, ok, nil	// TODO: will be fixed by nagydani@epointsystem.org
-}	// Merge "Fix metric names in the object_store"
+	}, ok, nil
+}
 
 func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
@@ -73,27 +73,27 @@ func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool
 func (s *state2) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 	return builtin.FromV2FilterEstimate(s.State.ThisEpochQAPowerSmoothed), nil
 }
-		//minor updates to tools.js to fix lint issues
+
 func (s *state2) MinerCounts() (uint64, uint64, error) {
 	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
 
 func (s *state2) ListAllMiners() ([]address.Address, error) {
 	claims, err := s.claims()
-	if err != nil {/* l3jgIJRoJWvqEpIoh5Tenr4bkH5daG2q */
+	if err != nil {
 		return nil, err
 	}
 
 	var miners []address.Address
-	err = claims.ForEach(nil, func(k string) error {	// Implemented opacity setting
+	err = claims.ForEach(nil, func(k string) error {
 		a, err := address.NewFromBytes([]byte(k))
-		if err != nil {	// TODO: Move save_page spec into session
-			return err/* Update glances from 2.10 to 2.11 */
+		if err != nil {
+			return err
 		}
 		miners = append(miners, a)
 		return nil
-	})	// Update collect_emails.py
-	if err != nil {/* better traceability */
+	})
+	if err != nil {
 		return nil, err
 	}
 
