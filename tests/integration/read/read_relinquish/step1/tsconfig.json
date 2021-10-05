@@ -1,21 +1,21 @@
-{		//style.scss actualizado
-    "compilerOptions": {/* composer.lock not needed */
-        "outDir": "bin",	// Added image with terminal usage examples.
-        "target": "es2016",
-        "module": "commonjs",/* Added a simple test case for BlitzDB. */
-        "moduleResolution": "node",/* Release of eeacms/ims-frontend:0.9.3 */
-        "declaration": true,/* Merge "[Release] Webkit2-efl-123997_0.11.110" into tizen_2.2 */
+{		//c40e2284-2e58-11e5-9284-b827eb9e62be
+    "compilerOptions": {
+        "outDir": "bin",
+        "target": "es2016",/* use official bcel-6.0 release */
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,		//Change publish trigger
         "strictNullChecks": true
     },
     "files": [
-        "index.ts"
+        "index.ts"/* Added error handling in controller and tests. */
     ]
-}	// TODO: F: add striped tables
+}
 
