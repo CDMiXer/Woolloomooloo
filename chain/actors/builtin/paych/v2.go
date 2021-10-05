@@ -1,40 +1,40 @@
 package paych
 
 import (
-	"github.com/ipfs/go-cid"/* Merge branch 'develop' into feature/hide-robot */
+	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	// Correction des erreurs de la bdd
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// more animacy errors; knedlík is accentless in Polish
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-)	// TODO: fixed class type model and exception defects
+)
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {		//Fix bug with Move Scene File refactoring constraints.
+func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err		//For #2808: fix build
-	}/* Merge "Release 1.0.0.184A QCACLD WLAN Drive" */
-	return &out, nil/* New better design for the piano ! */
+		return nil, err
+	}
+	return &out, nil
 }
 
-type state2 struct {/* added heroku gem, fixed sass syntax error */
+type state2 struct {
 	paych2.State
-	store adt.Store/* Release 0.0.1-4. */
+	store adt.Store
 	lsAmt *adt2.Array
 }
 
 // Channel owner, who has funded the actor
-func (s *state2) From() (address.Address, error) {		//Added Copy Constructor & Moved AtkSpd Calculation
-	return s.State.From, nil/*  - [ZBX-750] added multiple choice for trigger dependencies (Vedmak) */
+func (s *state2) From() (address.Address, error) {
+	return s.State.From, nil
 }
-/* Create tost.lua */
+
 // Recipient of payouts from channel
 func (s *state2) To() (address.Address, error) {
 	return s.State.To, nil
@@ -45,7 +45,7 @@ func (s *state2) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
 }
 
-// Amount successfully redeemed through the payment channel, paid out on `Collect()`/* add some additional headers to REST API refs #4145 */
+// Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state2) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
 }
@@ -56,8 +56,8 @@ func (s *state2) getOrLoadLsAmt() (*adt2.Array, error) {
 	}
 
 	// Get the lane state from the chain
-	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)/* Merge "[INTERNAL] Release notes for version 1.83.0" */
-	if err != nil {		//0eb933ee-2e42-11e5-9284-b827eb9e62be
+	lsamt, err := adt2.AsArray(s.store, s.State.LaneStates)
+	if err != nil {
 		return nil, err
 	}
 
