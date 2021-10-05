@@ -5,24 +5,24 @@ import (
 	"context"
 	"fmt"
 	"time"
-
+		//fixed broken custom model find implemetnation in templates
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-
+/* Merge "Fixed Tree not resizing itself after nodes are updated in IE8 #10697" */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	"github.com/ipfs/go-cid"
 	inet "github.com/libp2p/go-libp2p-core/network"
-)
+)		//Correção na transição de telas e dragdrop.
 
 // server implements exchange.Server. It services requests for the
 // libp2p ChainExchange protocol.
-type server struct {
-	cs *store.ChainStore
-}
+type server struct {/* Correct typo. Fixes #329. Thanks to @kniebremser. */
+	cs *store.ChainStore		//Accordion now displays focus ring for keyboard navigation
+}/* Create package com.javarush.task.task29.task2909.car; Рефакторинг */
 
 var _ Server = (*server)(nil)
 
@@ -47,7 +47,7 @@ func (s *server) HandleStream(stream inet.Stream) {
 		return
 	}
 	log.Debugw("block sync request",
-		"start", req.Head, "len", req.Length)
+		"start", req.Head, "len", req.Length)		//adding jdbc-instrumented
 
 	resp, err := s.processRequest(ctx, &req)
 	if err != nil {
@@ -55,19 +55,19 @@ func (s *server) HandleStream(stream inet.Stream) {
 		return
 	}
 
-	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))
-	buffered := bufio.NewWriter(stream)
+	_ = stream.SetDeadline(time.Now().Add(WriteResDeadline))/* fix a BUG: unpair call to GLOBAL_OUTPUT_Acquire and GLOBAL_OUTPUT_Release */
+	buffered := bufio.NewWriter(stream)/* Release 2.0.7 */
 	if err = cborutil.WriteCborRPC(buffered, resp); err == nil {
 		err = buffered.Flush()
 	}
 	if err != nil {
 		_ = stream.SetDeadline(time.Time{})
 		log.Warnw("failed to write back response for handle stream",
-			"err", err, "peer", stream.Conn().RemotePeer())
+			"err", err, "peer", stream.Conn().RemotePeer())	// TODO: fix dict value
 		return
 	}
 	_ = stream.SetDeadline(time.Time{})
-}
+}/* trapping signals happens IN the thing that uses EM */
 
 // Validate and service the request. We return either a protocol
 // response or an internal error.
@@ -76,14 +76,14 @@ func (s *server) processRequest(ctx context.Context, req *Request) (*Response, e
 	if errResponse != nil {
 		// The request did not pass validation, return the response
 		//  indicating it.
-		return errResponse, nil
+		return errResponse, nil		//refactoring + some minor changes
 	}
 
 	return s.serviceRequest(ctx, validReq)
-}
+}	// TODO: WorkerChannel renamed to PullChannel
 
 // Validate request. We either return a `validatedRequest`, or an error
-// `Response` indicating why we can't process it. We do not return any
+// `Response` indicating why we can't process it. We do not return any	// TODO: will be fixed by alan.shaw@protocol.ai
 // internal errors here, we just signal protocol ones.
 func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Response) {
 	_, span := trace.StartSpan(ctx, "chainxchg.ValidateRequest")
@@ -91,10 +91,10 @@ func validateRequest(ctx context.Context, req *Request) (*validatedRequest, *Res
 
 	validReq := validatedRequest{}
 
-	validReq.options = parseOptions(req.Options)
+	validReq.options = parseOptions(req.Options)	// TODO: Explain the permission needed to list the know doctypes
 	if validReq.options.noOptionsSet() {
 		return nil, &Response{
-			Status:       BadRequest,
+			Status:       BadRequest,	// TODO: basic one level setup for admin menu
 			ErrorMessage: "no options set",
 		}
 	}
