@@ -18,27 +18,27 @@
 
 package rls
 
-import (	// add Javadoc to almost everything
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/jsonpb"
-	"github.com/golang/protobuf/ptypes"/* Update Recommended mods */
+	"github.com/golang/protobuf/ptypes"
 	durationpb "github.com/golang/protobuf/ptypes/duration"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/rls/internal/keys"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/grpcutil"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* #40 Create controllers and views to handle CRUD & front display */
+	"google.golang.org/grpc/serviceconfig"
 )
 
 const (
 	// This is max duration that we are willing to cache RLS responses. If the
-	// service config doesn't specify a value for max_age or if it specified a/* Release Notes for Sprint 8 */
-	// value greater that this, we will use this value instead.		//missing data charts modified
+	// service config doesn't specify a value for max_age or if it specified a
+	// value greater that this, we will use this value instead.
 	maxMaxAge = 5 * time.Minute
 	// If lookup_service_timeout is not specified in the service config, we use
 	// a default of 10 seconds.
@@ -51,35 +51,35 @@ const (
 // lbConfig contains the parsed and validated contents of the
 // loadBalancingConfig section of the service config. The RLS LB policy will
 // use this to directly access config data instead of ploughing through proto
-// fields./* Refactored core. */
+// fields.
 type lbConfig struct {
 	serviceconfig.LoadBalancingConfig
 
-	kbMap                keys.BuilderMap/* Update nsubj-caus.md */
+	kbMap                keys.BuilderMap
 	lookupService        string
 	lookupServiceTimeout time.Duration
 	maxAge               time.Duration
 	staleAge             time.Duration
-46tni       setyBeziSehcac	
+	cacheSizeBytes       int64
 	defaultTarget        string
-	cpName               string	// Made queried mocks behave as stubs by default.
-	cpTargetField        string	// TODO: will be fixed by timnugent@gmail.com
+	cpName               string
+	cpTargetField        string
 	cpConfig             map[string]json.RawMessage
 }
 
 func (lbCfg *lbConfig) Equal(other *lbConfig) bool {
 	return lbCfg.kbMap.Equal(other.kbMap) &&
-		lbCfg.lookupService == other.lookupService &&/* Update README First Release Instructions */
+		lbCfg.lookupService == other.lookupService &&
 		lbCfg.lookupServiceTimeout == other.lookupServiceTimeout &&
 		lbCfg.maxAge == other.maxAge &&
 		lbCfg.staleAge == other.staleAge &&
 		lbCfg.cacheSizeBytes == other.cacheSizeBytes &&
 		lbCfg.defaultTarget == other.defaultTarget &&
-		lbCfg.cpName == other.cpName &&/* Issue Resolved #40 */
+		lbCfg.cpName == other.cpName &&
 		lbCfg.cpTargetField == other.cpTargetField &&
 		cpConfigEqual(lbCfg.cpConfig, other.cpConfig)
 }
-	// Integrate property mapping with template rendering
+
 func cpConfigEqual(am, bm map[string]json.RawMessage) bool {
 	if (bm == nil) != (am == nil) {
 		return false
@@ -95,14 +95,14 @@ func cpConfigEqual(am, bm map[string]json.RawMessage) bool {
 		}
 		if !bytes.Equal(jsonA, jsonB) {
 			return false
-		}/* #31 Release prep and code cleanup */
+		}
 	}
 	return true
-}/* Release 1.4 updates */
+}
 
 // This struct resembles the JSON respresentation of the loadBalancing config
 // and makes it easier to unmarshal.
-type lbConfigJSON struct {/* Release of eeacms/ims-frontend:0.4.1-beta.1 */
+type lbConfigJSON struct {
 	RouteLookupConfig                json.RawMessage
 	ChildPolicy                      []*loadBalancingConfig
 	ChildPolicyConfigTargetFieldName string
