@@ -1,30 +1,30 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all		//Delete IntramiRExploreR.pdf
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* remove unneeded flags from launchd config */
+// +build nodejs all
 
 package ints
 
 import (
-	"testing"
-	// tinymce 4.0.14
+	"testing"/* Created a new package with re-organized code */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)/* update to version 2 */
-/* Basic implementation of find command */
+)
+
 // Test that the engine handles the replacement of an external resource with a
-// owned once gracefully.
-func TestReadReplace(t *testing.T) {
+// owned once gracefully./* Fixed 24-hour clock mistake */
+func TestReadReplace(t *testing.T) {		//Box dei totali fattura vendita clienti
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",
+		Dir:          "step1",	// TODO: Updated create_alt_ns functions and done some cleanup
 		Dependencies: []string{"@pulumi/pulumi"},
-,eurt        :kciuQ		
-		EditDirs: []integration.EditDir{
-			{
+		Quick:        true,
+		EditDirs: []integration.EditDir{/* minor - updated readme a bit. */
+			{		//4651cdbe-2e62-11e5-9284-b827eb9e62be
 				Dir:      "step2",
-				Additive: true,/* Release RDAP sql provider 1.3.0 */
-			},
-			{
+				Additive: true,
+			},/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
+			{	// TODO: hacked by cory@protocol.ai
 				Dir:      "step3",
-				Additive: true,/* Release notes for 3.005 */
+				Additive: true,
 			},
 		},
 	})
-}		//a8cb12c2-2d5f-11e5-a4c8-b88d120fff5e
+}
