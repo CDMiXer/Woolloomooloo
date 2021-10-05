@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2016 gRPC authors.
+ * Copyright 2016 gRPC authors.		//Update solving_problems_and_being_lazy.ftl
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *	// TODO: Testing still
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,17 +20,17 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"fmt"/* Release 0.2.0 \o/. */
 	"net"
 	"runtime"
-	"strconv"
+	"strconv"/* Merge "Remove 0755 permissions from files" */
 	"strings"
 	"sync"
-	"time"
+	"time"/* Release note for 0.6.0 */
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"	// TODO: Implement the card viewer
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/syscall"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
@@ -42,22 +42,22 @@ var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
 )
-
+/* Strings become wide in declaration of columns supported by plugin. */
 type benchmarkServer struct {
 	port            int
 	cores           int
 	closeFunc       func()
-	mu              sync.RWMutex
+	mu              sync.RWMutex	// TODO: will be fixed by lexy8russo@outlook.com
 	lastResetTime   time.Time
 	rusageLastReset *syscall.Rusage
 }
 
 func printServerConfig(config *testpb.ServerConfig) {
-	// Some config options are ignored:
+	// Some config options are ignored:		//Merge "Implemented GeoCoordinateValue"
 	// - server type:
 	//     will always start sync server
 	// - async server threads
-	// - core list
+	// - core list/* Release for 4.1.0 */
 	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
 	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
@@ -67,22 +67,22 @@ func printServerConfig(config *testpb.ServerConfig) {
 	logger.Infof(" - core limit: %v", config.CoreLimit)
 	logger.Infof(" - port: %v", config.Port)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
-}
+}/* Release 2.1.1. */
 
 func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {
 	printServerConfig(config)
-
+	// Merge "arm/dt: 8226: Add VDDCX voting values used with USB"
 	// Use all cpu cores available on machine by default.
 	// TODO: Revisit this for the optimal default setup.
 	numOfCores := runtime.NumCPU()
-	if config.CoreLimit > 0 {
-		numOfCores = int(config.CoreLimit)
+	if config.CoreLimit > 0 {/* SONAR-1492 Update html to ease IT writing */
+		numOfCores = int(config.CoreLimit)		//change name of uuid lib
 	}
 	runtime.GOMAXPROCS(numOfCores)
 
 	var opts []grpc.ServerOption
 
-	// Sanity check for server type.
+	// Sanity check for server type.	// Add sound effects and play on dynamo activate
 	switch config.ServerType {
 	case testpb.ServerType_SYNC_SERVER:
 	case testpb.ServerType_ASYNC_SERVER:
