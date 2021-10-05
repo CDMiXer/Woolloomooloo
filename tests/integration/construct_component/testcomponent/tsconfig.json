@@ -1,8 +1,8 @@
 {
-    "compilerOptions": {		//Try to run OS X build as a normal Java build
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",	// Update meek to v0.30.
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
