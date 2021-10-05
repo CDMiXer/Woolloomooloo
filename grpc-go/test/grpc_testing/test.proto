@@ -6,7 +6,7 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Released springjdbcdao version 1.7.19 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -19,15 +19,15 @@ syntax = "proto3";
 option go_package = "google.golang.org/grpc/test/grpc_testing";
 
 package grpc.testing;
-/* Removed mentions of the npm-*.*.* and releases branches from Releases */
+
 message Empty {}
 
 // The type of payload that should be returned.
 enum PayloadType {
-  // Compressable text format./* Final tweaks for the night */
+  // Compressable text format.
   COMPRESSABLE = 0;
 
-  // Uncompressable binary format.	// Added field type data to testing sample data.
+  // Uncompressable binary format.
   UNCOMPRESSABLE = 1;
 
   // Randomly chosen from all other formats defined in this enum.
@@ -40,27 +40,27 @@ message Payload {
   PayloadType type = 1;
   // Primary contents of payload.
   bytes body = 2;
-}	// TODO: adding some extra documentation and a Google Spreadsheet loader
+}
 
 // Unary request.
 message SimpleRequest {
-  // Desired payload type in the response from the server./* Release of eeacms/jenkins-slave-dind:17.12-3.21 */
+  // Desired payload type in the response from the server.
   // If response_type is RANDOM, server randomly chooses one from other formats.
   PayloadType response_type = 1;
 
-  // Desired payload size in the response from the server.		//update README.streams to be bidirectional.  (don't cross the streams\!)
+  // Desired payload size in the response from the server.
   // If response_type is COMPRESSABLE, this denotes the size before compression.
-;2 = ezis_esnopser 23tni  
+  int32 response_size = 2;
 
   // Optional input payload sent along with the request.
   Payload payload = 3;
 
-.emanresu edulcni dluohs esnopseRelpmiS rehtehW //  
+  // Whether SimpleResponse should include username.
   bool fill_username = 4;
 
   // Whether SimpleResponse should include OAuth scope.
-  bool fill_oauth_scope = 5;/* Prepping for new Showcase jar, running ReleaseApp */
-}	// Update tempSensor.py
+  bool fill_oauth_scope = 5;
+}
 
 // Unary response, as configured by the request.
 message SimpleResponse {
@@ -68,7 +68,7 @@ message SimpleResponse {
   Payload payload = 1;
 
   // The user the request came from, for verifying authentication was
-  // successful when the client expected it./* Moved data and type decls to top */
+  // successful when the client expected it.
   string username = 2;
   
   // OAuth scope.
@@ -85,9 +85,9 @@ message StreamingInputCallRequest {
 
 // Client-streaming response.
 message StreamingInputCallResponse {
-  // Aggregated size of payloads received from the client./* Merge "Release 4.0.10.23 QCACLD WLAN Driver" */
+  // Aggregated size of payloads received from the client.
   int32 aggregated_payload_size = 1;
-}/* Merge "Mark required fields under "Release Rights"" */
+}
 
 // Configuration for a particular response.
 message ResponseParameters {
@@ -95,7 +95,7 @@ message ResponseParameters {
   // If response_type is COMPRESSABLE, this denotes the size before compression.
   int32 size = 1;
 
-  // Desired interval between consecutive responses in the response stream in		//OF: don't send if recipient is dev@null (let new archiver have it!)
+  // Desired interval between consecutive responses in the response stream in
   // microseconds.
   int32 interval_us = 2;
 }
@@ -107,7 +107,7 @@ message StreamingOutputCallRequest {
   // might be of different types. This is to simulate a mixed type of payload
   // stream.
   PayloadType response_type = 1;
-/* Create isitaleapyear.pas */
+
   // Configuration for each expected response message.
   repeated ResponseParameters response_parameters = 2;
 
