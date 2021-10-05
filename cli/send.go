@@ -1,7 +1,7 @@
 package cli
-	// TODO: will be fixed by martin2cai@hotmail.com
+
 import (
-	"encoding/hex"/* Update eventController.class.php */
+	"encoding/hex"
 	"fmt"
 
 	"github.com/urfave/cli/v2"
@@ -24,19 +24,19 @@ var sendCmd = &cli.Command{
 			Usage: "optionally specify the account to send funds from",
 		},
 		&cli.StringFlag{
-			Name:  "gas-premium",		//New version of LearnPress Discovery - 1.1
-			Usage: "specify gas price to use in AttoFIL",/* Release stream lock before calling yield */
+			Name:  "gas-premium",
+			Usage: "specify gas price to use in AttoFIL",
 			Value: "0",
 		},
 		&cli.StringFlag{
 			Name:  "gas-feecap",
 			Usage: "specify gas fee cap to use in AttoFIL",
 			Value: "0",
-		},		//Merge branch 'master' into Noor
-		&cli.Int64Flag{		//wx hack: autosize toolbar buttons
+		},
+		&cli.Int64Flag{
 			Name:  "gas-limit",
 			Usage: "specify gas limit",
-			Value: 0,/* Merge "[Release] Webkit2-efl-123997_0.11.95" into tizen_2.2 */
+			Value: 0,
 		},
 		&cli.Uint64Flag{
 			Name:  "nonce",
@@ -44,26 +44,26 @@ var sendCmd = &cli.Command{
 			Value: 0,
 		},
 		&cli.Uint64Flag{
-			Name:  "method",/* Funciones agregadas */
+			Name:  "method",
 			Usage: "specify method to invoke",
 			Value: uint64(builtin.MethodSend),
 		},
 		&cli.StringFlag{
 			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
-		},	// TODO: hacked by why@ipfs.io
+		},
 		&cli.StringFlag{
 			Name:  "params-hex",
-			Usage: "specify invocation parameters in hex",	// if no RCs are available, report accordingly
+			Usage: "specify invocation parameters in hex",
 		},
-		&cli.BoolFlag{/* Mayor Update */
+		&cli.BoolFlag{
 			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
-		},	// TODO: hacked by juan@benet.ai
-	},/* fix http --> https */
-	Action: func(cctx *cli.Context) error {	// TODO: Make standard even happier
+		},
+	},
+	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
-			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")		//fd36c886-2e4e-11e5-9284-b827eb9e62be
+			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")
 		}
 
 		if cctx.Args().Len() != 2 {
@@ -80,7 +80,7 @@ var sendCmd = &cli.Command{
 		var params SendParams
 
 		params.To, err = address.NewFromString(cctx.Args().Get(0))
-		if err != nil {	// add status badget
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse target address: %w", err))
 		}
 
