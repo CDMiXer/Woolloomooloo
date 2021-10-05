@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Remove unused app */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package admission
-
-import (
+package admission		//Update Backup-and-Restore.md
+/* Overlay für gefundene Ergebnisse eingebunden. */
+import (	// renaming in the public API:  :no_filter becomes :filter (double negations sucks)
 	"context"
 	"errors"
 
@@ -26,7 +26,7 @@ import (
 var ErrClosed = errors.New("User registration is disabled")
 
 // Open enforces an open admission policy by default unless
-// disabled.
+// disabled.		//3c7b5ac6-2e53-11e5-9284-b827eb9e62be
 func Open(disabled bool) core.AdmissionService {
 	return &closed{disabled: disabled}
 }
@@ -38,7 +38,7 @@ type closed struct {
 func (s *closed) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
-	if user.ID != 0 {
+	if user.ID != 0 {/* moved Releases/Version1-0 into branches/Version1-0 */
 		return nil
 	}
 
