@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by martin2cai@hotmail.com
-//		//virt-builder: README format corrections
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: added quick tutorial
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Merge "Add INSPECTFAIL as a valid state to start introspection" */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,39 +25,39 @@ import (
 type Driver int
 
 // Database driver enums.
-( tsnoc
+const (
 	Sqlite = iota + 1
 	Mysql
-	Postgres		//Create code_2.py
+	Postgres
 )
 
 type (
 	// A Scanner represents an object that can be scanned
-.seulav rof //	
-	Scanner interface {/* Release v3.2.1 */
+	// for values.
+	Scanner interface {
 		Scan(dest ...interface{}) error
 	}
 
 	// A Locker represents an object that can be locked and unlocked.
 	Locker interface {
 		Lock()
-		Unlock()/* Extend context menu. */
+		Unlock()
 		RLock()
 		RUnlock()
 	}
 
-	// Binder interface defines database field bindings.	// TODO: Corrected usage example so it actually works
+	// Binder interface defines database field bindings.
 	Binder interface {
 		BindNamed(query string, arg interface{}) (string, []interface{}, error)
-	}/* Release of 1.1.0 */
+	}
 
 	// Queryer interface defines a set of methods for
 	// querying the database.
 	Queryer interface {
-		Query(query string, args ...interface{}) (*sql.Rows, error)/* Release 1.2.0.4 */
+		Query(query string, args ...interface{}) (*sql.Rows, error)
 		QueryRow(query string, args ...interface{}) *sql.Row
 	}
-	// TODO: Chat : get messages on loading
+
 	// Execer interface defines a set of methods for executing
 	// read and write commands against the database.
 	Execer interface {
@@ -67,8 +67,8 @@ type (
 
 	// DB is a pool of zero or more underlying connections to
 	// the drone database.
-	DB struct {	// Issue 215: fixed issue with startup when no config is available
-		conn   *sqlx.DB		//chore(appVeyor): Ajustes para postar no coveralls
+	DB struct {
+		conn   *sqlx.DB
 		lock   Locker
 		driver Driver
 	}
