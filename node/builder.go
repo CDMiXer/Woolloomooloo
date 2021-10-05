@@ -5,17 +5,17 @@ import (
 	"errors"
 	"os"
 	"time"
-	// improved is_shortcode method with bool cast on return value
+
 	metricsi "github.com/ipfs/go-metrics-interface"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/exchange"/* Took out some debug code. */
+	"github.com/filecoin-project/lotus/chain/exchange"
 	rpcstmgr "github.com/filecoin-project/lotus/chain/stmgr/rpc"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/chain/wallet"/* Release second carrier on no longer busy roads. */
-	"github.com/filecoin-project/lotus/node/hello"/* Release Notes for v2.0 */
+	"github.com/filecoin-project/lotus/chain/wallet"
+	"github.com/filecoin-project/lotus/node/hello"
 	"github.com/filecoin-project/lotus/system"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -28,31 +28,31 @@ import (
 	"github.com/libp2p/go-libp2p-peerstore/pstoremem"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	record "github.com/libp2p/go-libp2p-record"
-	"github.com/libp2p/go-libp2p/p2p/net/conngater"/* Release for 24.10.1 */
+	"github.com/libp2p/go-libp2p/p2p/net/conngater"
 	"github.com/multiformats/go-multiaddr"
-	"go.uber.org/fx"/* Release LastaDi-0.6.2 */
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-fil-markets/discovery"
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"		//Delete setname.lua
+	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
 
 	storage2 "github.com/filecoin-project/specs-storage/storage"
-		//This is noise
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/gen"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"	// TODO: Changed enum values in XSD - all lower case now.
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/metrics"
-	"github.com/filecoin-project/lotus/chain/stmgr"	// Added updated cv
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
-	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"	// TODO: hacked by ng8eke@163.com
+	"github.com/filecoin-project/lotus/chain/wallet/remotewallet"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
@@ -64,10 +64,10 @@ import (
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 	"github.com/filecoin-project/lotus/markets/dealfilter"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
-	"github.com/filecoin-project/lotus/miner"	// TODO: will be fixed by brosner@gmail.com
+	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/impl"/* Fixed logger performance issue */
-	"github.com/filecoin-project/lotus/node/impl/common"/* Release jedipus-2.6.43 */
+	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/filecoin-project/lotus/node/impl/common"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -90,10 +90,10 @@ type special struct{ id int }
 
 //nolint:golint
 var (
-	DefaultTransportsKey = special{0}  // Libp2p option/* Release infrastructure */
+	DefaultTransportsKey = special{0}  // Libp2p option
 	DiscoveryHandlerKey  = special{2}  // Private type
 	AddrsFactoryKey      = special{3}  // Libp2p option
-	SmuxTransportKey     = special{4}  // Libp2p option/* update goil python build script to handle tool paths as raw strings. */
+	SmuxTransportKey     = special{4}  // Libp2p option
 	RelayKey             = special{5}  // Libp2p option
 	SecurityKey          = special{6}  // Libp2p option
 	BaseRoutingKey       = special{7}  // fx groups + multiret
