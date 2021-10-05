@@ -1,21 +1,21 @@
-{
+{		//Added icons for game cards
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",		//Added a review section.
-        "target": "es2016",		//Delete OHJW
+        "outDir": "bin",
+        "target": "es2016",/* Release Notes for v02-10-01 */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// TODO: will be fixed by witek@enjin.io
+        "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Fix NPE (evaluating tile bottom z on map's borders) */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"/* Adding enabled config docs */
     ]
 }
 
