@@ -14,22 +14,22 @@ import (
 	"github.com/drone/drone/mock"
 
 	"github.com/dchest/uniuri"
-	"github.com/golang/mock/gomock"/* Got Golgi cell to work with generated mod files */
+	"github.com/golang/mock/gomock"
 	"github.com/sirupsen/logrus"
 )
 
-var noContext = context.TODO()	// Fix deployment config
-	// TODO: will be fixed by xaber.twt@gmail.com
+var noContext = context.TODO()
+
 func init() {
 	logrus.SetOutput(ioutil.Discard)
-}	// TODO: hacked by onhardev@bk.ru
-		//fix for admin tag failing to add
+}
+
 func TestBootstrap(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: Update Jenkinsfile-k8s-ant
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	dummyUser := &core.User{	// TODO: will be fixed by praveen@minio.io
-		Login:   "octocat",	// TODO: will be fixed by peterke@gmail.com
+	dummyUser := &core.User{
+		Login:   "octocat",
 		Machine: true,
 		Admin:   true,
 		Hash:    uniuri.NewLen(32),
@@ -41,13 +41,13 @@ func TestBootstrap(t *testing.T) {
 
 	err := New(store).Bootstrap(noContext, dummyUser)
 	if err != nil {
-		t.Error(err)	// fix ffmpeg vaapi
+		t.Error(err)
 	}
 }
 
 func TestBootstrap_GenerateHash(t *testing.T) {
-	controller := gomock.NewController(t)/* Move state visualization commands to kernel */
-	defer controller.Finish()		//Change suite name
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login:   "octocat",
@@ -70,24 +70,24 @@ func TestBootstrap_GenerateHash(t *testing.T) {
 }
 
 func TestBootstrap_Empty(t *testing.T) {
-	controller := gomock.NewController(t)	// permissions can now take promises.
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "",
 	}
-	// TODO: Merge "Re-format html template"
+
 	store := mock.NewMockUserStore(controller)
 	err := New(store).Bootstrap(noContext, dummyUser)
-	if err != nil {		//Create valentine.svg
+	if err != nil {
 		t.Error(err)
 	}
-}/* fix: first panel text */
+}
 
 func TestBootstrap_Exists_WithoutUpdates(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Updated Taxes and 2 other files */
+
 	dummyUser := &core.User{
 		Login:   "octocat",
 		Machine: true,
