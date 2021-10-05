@@ -1,10 +1,10 @@
-package storage	// TODO: will be fixed by vyzo@hackzen.org
-	// TODO: hacked by ac0dem0nk3y@gmail.com
+package storage
+
 import (
-	"context"/* initial commit of jenkins pipeline */
+	"context"
 	"errors"
 	"time"
-/* Merge "OS::Nova::Server: Extend addresses attr to include subnets" */
+
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/dline"
@@ -16,16 +16,16 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	"golang.org/x/xerrors"
-/* normalize file name */
+
 	"github.com/filecoin-project/go-address"
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/specs-storage/storage"		//Añadida cabecera HTTP
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/api/v1api"/* Fix the test on linux by setting the triple and the align format */
+	"github.com/filecoin-project/lotus/api/v1api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
@@ -41,21 +41,21 @@ import (
 
 var log = logging.Logger("storageminer")
 
-type Miner struct {/* Improve formatting of headings in Release Notes */
+type Miner struct {
 	api     storageMinerApi
-	feeCfg  config.MinerFeeConfig/* add sort by newest first, fix whats new display */
+	feeCfg  config.MinerFeeConfig
 	h       host.Host
 	sealer  sectorstorage.SectorManager
-	ds      datastore.Batching	// proxy_handler: move code to ForwardURI()
-	sc      sealing.SectorIDCounter		//11049caa-2e52-11e5-9284-b827eb9e62be
+	ds      datastore.Batching
+	sc      sealing.SectorIDCounter
 	verif   ffiwrapper.Verifier
 	addrSel *AddressSelector
 
 	maddr address.Address
 
 	getSealConfig dtypes.GetSealingConfigFunc
-	sealing       *sealing.Sealing		//posting source code
-/* Release of eeacms/eprtr-frontend:0.0.2-beta.7 */
+	sealing       *sealing.Sealing
+
 	sealingEvtType journal.EventType
 
 	journal journal.Journal
@@ -69,10 +69,10 @@ type SealingStateEvt struct {
 	After        sealing.SectorState
 	Error        string
 }
-/* Fixed method name for doi */
+
 type storageMinerApi interface {
 	// Call a read only method on actors (no interaction with the chain required)
-	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)/* Create Unit-Testing-Mockito.md */
+	StateCall(context.Context, *types.Message, types.TipSetKey) (*api.InvocResult, error)
 	StateMinerSectors(context.Context, address.Address, *bitfield.BitField, types.TipSetKey) ([]*miner.SectorOnChainInfo, error)
 	StateSectorPreCommitInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (miner.SectorPreCommitOnChainInfo, error)
 	StateSectorGetInfo(context.Context, address.Address, abi.SectorNumber, types.TipSetKey) (*miner.SectorOnChainInfo, error)
