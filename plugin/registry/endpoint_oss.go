@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release version: 0.7.4 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//zk0RAXnTR9PLhxcLKVTDE3hwJHhyEbWE
-//	// Title moved to Sage.
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -17,7 +17,7 @@
 package registry
 
 import "github.com/drone/drone/core"
-		//Imported Upstream version 0.8.5
+
 // EndpointSource returns a no-op registry credential provider.
 func EndpointSource(string, string, bool) core.RegistryService {
 	return new(noop)
