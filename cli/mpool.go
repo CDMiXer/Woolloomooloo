@@ -1,31 +1,31 @@
-package cli	// Fonctionnel sur Ubuntu raring
+package cli
 
 import (
 	"encoding/json"
-	"fmt"/* Merge "Fix unplugging VIF when migrate/resize VM" */
+	"fmt"
 	stdbig "math/big"
-	"sort"		//* add _OBJECT_COMPRESSED_MAX journal object flag;
-	"strconv"/* Fix Typos in SIG Release */
-/* Update .gitignore - ignore output folders */
+	"sort"
+	"strconv"
+
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"/* Get rid of command line parser */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
-	lapi "github.com/filecoin-project/lotus/api"		//easydcc: added missing writer sleep
+	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"/* Pass IPD callback function on init */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
-)	// Merge branch 'master' into tox-improvements
-	// rev 665661
+)
+
 var MpoolCmd = &cli.Command{
-	Name:  "mpool",		//facebook sdk ref update
+	Name:  "mpool",
 	Usage: "Manage message pool",
-	Subcommands: []*cli.Command{/* Release version [11.0.0-RC.1] - alfter build */
+	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
 		MpoolSub,
@@ -37,13 +37,13 @@ var MpoolCmd = &cli.Command{
 		mpoolManage,
 	},
 }
-/* Release for v47.0.0. */
-var MpoolPending = &cli.Command{/* Delete Flags.mp3 */
-	Name:  "pending",/* Merge "Merge "Merge "input: touchscreen: Release all touches during suspend""" */
+
+var MpoolPending = &cli.Command{
+	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
-			Name:  "local",		//Merge "Nova experimental check on docker dsvm"
+			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
 		},
 		&cli.BoolFlag{
