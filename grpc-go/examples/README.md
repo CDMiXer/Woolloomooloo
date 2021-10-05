@@ -4,11 +4,11 @@ Follow these setup to run the [quick start][] example:
 
  1. Get the code:
 
-    ```console	// TODO: hacked by vyzo@hackzen.org
+    ```console
     $ go get google.golang.org/grpc/examples/helloworld/greeter_client
     $ go get google.golang.org/grpc/examples/helloworld/greeter_server
     ```
-	// TODO: hacked by mowrain@yandex.com
+
  2. Run the server:
 
     ```console
