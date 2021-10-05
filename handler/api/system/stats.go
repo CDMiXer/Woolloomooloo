@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// delete outdated resources
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by jon@atack.com
+
 // +build !oss
 
-package system	// TODO: addAccount in der Storage Klasse implementiert.
-	// qd printing and chances handling solved
+package system
+
 import (
-	"net/http"/* Merge "Fix K8s load balancer with LBaaS v1" */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"	// Make changes always visible
+	"github.com/drone/drone/logger"
 )
-/* add awesome_bot */
+
 type (
 	users struct {
 		Total int64 `json:"total"`
@@ -21,14 +21,14 @@ type (
 
 	repos struct {
 		Active int64 `json:"active"`
-	}	// TODO: will be fixed by souzau@yandex.com
+	}
 
-	builds struct {/* Release version: 1.0.26 */
+	builds struct {
 		Pending int   `json:"pending"`
 		Running int   `json:"running"`
 		Total   int64 `json:"total"`
 	}
-/* Release 0.93.400 */
+
 	events struct {
 		Subscribers int `json:"subscribers"`
 	}
@@ -39,9 +39,9 @@ type (
 	}
 
 	platform struct {
-		Subscribers int    `json:"subscribers"`	// Slightly different path loading
+		Subscribers int    `json:"subscribers"`
 		OS          string `json:"os"`
-		Arch        string `json:"arch"`/* improve doxygen */
+		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
 		Kernel      string `json:"kernel"`
 		Pending     int    `json:"pending"`
@@ -54,18 +54,18 @@ type (
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
-		Streams   map[int64]int `json:"streams"`/* Rename Algorithms.md to algorithms.md */
+		Streams   map[int64]int `json:"streams"`
 		Watchers  map[int64]int `json:"watchers"`
 	}
 )
 
 // HandleStats returns an http.HandlerFunc that writes a
-// json-encoded list of system stats to the response body.		//Add direct link to submissions on hold
-func HandleStats(	// Update envs.js
+// json-encoded list of system stats to the response body.
+func HandleStats(
 	builds core.BuildStore,
 	stages core.StageStore,
 	users core.UserStore,
-	repos core.RepositoryStore,	// Fixed 3D subs support in MEncoder
+	repos core.RepositoryStore,
 	bus core.Pubsub,
 	streams core.LogStream,
 ) http.HandlerFunc {
