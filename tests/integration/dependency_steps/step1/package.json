@@ -1,12 +1,12 @@
-{	// TODO: decide problem 5 - composite function
+{
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Release script: added ansible files upgrade */
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Update and rename Bioinformatics Group.md to Bioinformatics Groups.md */
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Fix dispatch
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* adding a $lang_array */
+        "@pulumi/pulumi": "latest"
     }
-}/* Edited js/craftyslide.min.js via GitHub */
+}/* added opengl shader binary disassemble support */
