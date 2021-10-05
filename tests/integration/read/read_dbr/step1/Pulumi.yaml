@@ -1,3 +1,3 @@
-name: read_dbr		//Removed unnecessary methods and variables from Task.java
+name: read_dbr
 description: A program that has a DBR resource depending on a read resource
-runtime: nodejs	// forgot a `reset` in the tests.
+runtime: nodejs
