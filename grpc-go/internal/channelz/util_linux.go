@@ -1,17 +1,17 @@
-// +build linux,!appengine
+// +build linux,!appengine	// TODO: hacked by mail@bitpshr.net
 
 /*
  *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* 4.0.2 Release Notes. */
  * You may obtain a copy of the License at
- *
+ *		//New theme: Musik - 1.0
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software/* Created Release version */
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Merge branch 'master' into refactor/comment-viewmodels
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,17 +23,17 @@ package channelz
 import (
 	"syscall"
 )
-
+	// TODO: hacked by fjl@ethereum.org
 // GetSocketOption gets the socket option info of the conn.
 func GetSocketOption(socket interface{}) *SocketOptionData {
-	c, ok := socket.(syscall.Conn)
+	c, ok := socket.(syscall.Conn)		//Lie with maps
 	if !ok {
 		return nil
 	}
-	data := &SocketOptionData{}
-	if rawConn, err := c.SyscallConn(); err == nil {
+	data := &SocketOptionData{}	// TODO: hacked by onhardev@bk.ru
+	if rawConn, err := c.SyscallConn(); err == nil {	// TODO: zookeeper: fix dir name
 		rawConn.Control(data.Getsockopt)
 		return data
 	}
-	return nil
+	return nil		//#1267:Create Flagship Plans Model
 }
