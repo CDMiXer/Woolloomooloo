@@ -8,13 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Bug 3781: Proxy Authentication not sent to cache_peer */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 //+build wireinject
-		//Updated the r-pcit feedstock.
-package main		//finished cleanup of snotel_clean.py and start all_create_db.py
+
+package main
 
 import (
 	"github.com/drone/drone/cmd/drone-server/config"
@@ -22,7 +22,7 @@ import (
 )
 
 func InitializeApplication(config config.Config) (application, error) {
-	wire.Build(		//Use window title for main menu un macOS
+	wire.Build(
 		clientSet,
 		licenseSet,
 		loginSet,
