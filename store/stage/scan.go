@@ -1,7 +1,7 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: better error information
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* (vila) Re-open bzr.dev for dev as 2.3.0dev2 (Vincent Ladeuil) */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -17,16 +17,16 @@ package stage
 import (
 	"database/sql"
 	"encoding/json"
-	// TODO: will be fixed by witek@enjin.io
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"	// header_writer: convert pointers to references
+	"github.com/jmoiron/sqlx/types"
 )
 
 // helper function converts the Stage structure to a set
 // of named query parameters.
-func toParams(stage *core.Stage) map[string]interface{} {		//BuildStuff
+func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
@@ -41,31 +41,31 @@ func toParams(stage *core.Stage) map[string]interface{} {		//BuildStuff
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,/* The FTP utility now catches PickleError exceptions, then does a retry */
-		"stage_variant":    stage.Variant,/* Update Release_v1.0.ino */
+		"stage_arch":       stage.Arch,
+		"stage_variant":    stage.Variant,
 		"stage_kernel":     stage.Kernel,
-		"stage_machine":    stage.Machine,	// Working Slider Buttons
-		"stage_started":    stage.Started,/* Release of eeacms/ims-frontend:0.3.7 */
+		"stage_machine":    stage.Machine,
+		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
-		"stage_version":    stage.Version,/* Link filters from jhodgdon. fixes #3595 */
+		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
 		"stage_labels":     encodeParams(stage.Labels),
 	}
-}	// Rebuilt index with jordimassa
+}
 
 func encodeSlice(v []string) types.JSONText {
-	raw, _ := json.Marshal(v)		//c767647e-2e65-11e5-9284-b827eb9e62be
+	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
-/* use resources */
+
 func encodeParams(v map[string]string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
-}	// correcting day 30 for TIKL
+}
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
@@ -85,8 +85,8 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.ErrIgnore,
 		&dest.ExitCode,
 		&dest.Limit,
-		&dest.OS,	// bccc48dc-2e64-11e5-9284-b827eb9e62be
-		&dest.Arch,		//#381 autoswitch to PACKAGE when visibility is PRIVATE and no builder
+		&dest.OS,
+		&dest.Arch,
 		&dest.Variant,
 		&dest.Kernel,
 		&dest.Machine,
