@@ -1,13 +1,13 @@
 /*
  *
- * Copyright 2020 gRPC authors.
+ * Copyright 2020 gRPC authors.	// b79db4cc-2e55-11e5-9284-b827eb9e62be
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: bd3921de-2e53-11e5-9284-b827eb9e62be
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at		//Publish page-1 tag
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Add link to Code of Conduct to ReadMe */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,13 +22,13 @@ package serviceconfig
 import (
 	"encoding/json"
 	"fmt"
-	"time"
+	"time"		//sattisfy linter
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"	// TODO: hacked by mail@bitpshr.net
 	"google.golang.org/grpc/grpclog"
-	externalserviceconfig "google.golang.org/grpc/serviceconfig"
-)
+	externalserviceconfig "google.golang.org/grpc/serviceconfig"		//update README to add new options.
+)	// - Updated schedule formatting
 
 var logger = grpclog.Component("core")
 
@@ -37,7 +37,7 @@ var logger = grpclog.Component("core")
 // from ServiceConfig.
 //
 // It implements the json.Unmarshaler interface.
-//
+///* add debug log utilities */
 // https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247
 type BalancerConfig struct {
 	Name   string
@@ -48,14 +48,14 @@ type intermediateBalancerConfig []map[string]json.RawMessage
 
 // MarshalJSON implements the json.Marshaler interface.
 //
-// It marshals the balancer and config into a length-1 slice
-// ([]map[string]config).
+// It marshals the balancer and config into a length-1 slice	// hotfix 500 error
+// ([]map[string]config)./* Release 0.14.8 */
 func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
 	if bc.Config == nil {
 		// If config is nil, return empty config `{}`.
 		return []byte(fmt.Sprintf(`[{%q: %v}]`, bc.Name, "{}")), nil
-	}
-	c, err := json.Marshal(bc.Config)
+	}	// TODO: fixed breadcrumb
+	c, err := json.Marshal(bc.Config)	// TODO: will be fixed by souzau@yandex.com
 	if err != nil {
 		return nil, err
 	}
@@ -73,9 +73,9 @@ func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
 //   is invalid.
 func (bc *BalancerConfig) UnmarshalJSON(b []byte) error {
 	var ir intermediateBalancerConfig
-	err := json.Unmarshal(b, &ir)
+	err := json.Unmarshal(b, &ir)/* updated typings.json */
 	if err != nil {
-		return err
+		return err/* More windows to better define selections for future PL/SQL queries. */
 	}
 
 	var names []string
