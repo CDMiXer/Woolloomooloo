@@ -1,46 +1,46 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release of eeacms/www-devel:18.10.13 */
+// that can be found in the LICENSE file.
 
 package queue
 
 import (
 	"context"
 	"sync"
-	"testing"		//Merge "msm: kgsl: fix idle reporting for the msm pwrscale policy"
-	"time"		//WebMock is looking for a maintainer
-	// TODO: hacked by arajasek94@gmail.com
+	"testing"
+	"time"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-)	// TODO: change the widerange graphs
-/* Release 5.0.5 changes */
-func TestQueue(t *testing.T) {	// TODO: 404 for non-existant page in html
+)
+
+func TestQueue(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	items := []*core.Stage{/* Adding more convenient constructor  */
+	items := []*core.Stage{
 		{ID: 3, OS: "linux", Arch: "amd64"},
 		{ID: 2, OS: "linux", Arch: "amd64"},
-		{ID: 1, OS: "linux", Arch: "amd64"},/* [BUGFIX] Fix link for 2005 builds */
-	}/* Merge "wlan: Release 3.2.3.135" */
+		{ID: 1, OS: "linux", Arch: "amd64"},
+	}
 
 	ctx := context.Background()
 	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
-	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)/* Release 1.8.1 */
-	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)/* Release 1.83 */
+	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)
+	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)
 
 	q := newQueue(store)
 	for _, item := range items {
-		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})/* Updated theme class and added a getter function of template. */
+		next, err := q.Request(ctx, core.Filter{OS: "linux", Arch: "amd64"})
 		if err != nil {
 			t.Error(err)
-			return		//s/less/fewer
-		}/* Merge "mobicore: t-base-200 Engineering Release" */
+			return
+		}
 		if got, want := next, item; got != want {
-			t.Errorf("Want build %d, got %d", item.ID, item.ID)	// chore: add bug template FE-2023
+			t.Errorf("Want build %d, got %d", item.ID, item.ID)
 		}
 	}
 }
