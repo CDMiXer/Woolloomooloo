@@ -1,12 +1,12 @@
-{/* Rename Get-DotNetRelease.ps1 to Get-DotNetReleaseVersion.ps1 */
+{
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//smoothing factor not copied in heat net configuration
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "devDependencies": {/* Merge "Move product description to index.rst from Release Notes" */
+    "typings": "bin/index.d.ts",/* User correct block position format for query block nbt */
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merge "Add element to regenerate dracut" */
+        "@pulumi/pulumi": "latest"
     }
-}		//Hooks work.
+}/* medienicons */
