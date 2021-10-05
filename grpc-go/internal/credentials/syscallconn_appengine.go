@@ -1,30 +1,30 @@
-// +build appengine
+// +build appengine/* Fix using cookie to remember speed */
 
-/*	// TODO: FIX #435 Adding loader and control functions
- *	// TODO: will be fixed by jon@atack.com
- * Copyright 2018 gRPC authors.
- *	// TODO: Merge "Suppress ExpandHelper on quick settings." into jb-mr1-dev
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+/*		//Replaced the deprecated client.Element with dom.Element type, GWT 2.6.0
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* PopupMenu close on mouseReleased, item width fixed */
- */* Release 0.1 */
+ * Copyright 2018 gRPC authors./* Release v0.3.3 */
+ */* Fixed a bug. Released 1.0.1. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.	// check for SELECT_CATALOG_ROLE
+ * You may obtain a copy of the License at	// 1b66baa8-2e47-11e5-9284-b827eb9e62be
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Rspec init */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by remco@dutchcoders.io
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: hacked by martin2cai@hotmail.com
  * limitations under the License.
  *
  */
 
-package credentials
-	// Add PID FBS: Durand_PID;Event_driven_PID;Time_driven_PID
+package credentials/* Markdown file renamed */
+
 import (
 	"net"
 )
 
 // WrapSyscallConn returns newConn on appengine.
-func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
-	return newConn		//futile attempt to fix crash in setActivePlayer function
+func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {/* 4.1.6-beta-11 Release Changes */
+	return newConn
 }
