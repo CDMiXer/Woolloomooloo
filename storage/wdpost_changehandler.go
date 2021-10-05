@@ -1,4 +1,4 @@
-package storage		//Adding Exploringelasticsearch / Elasticsearch category
+package storage
 
 import (
 	"context"
@@ -12,49 +12,49 @@ import (
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// TODO: Add IAS/EHABI changes to release notes
+
 const (
 	SubmitConfidence    = 4
-	ChallengeConfidence = 10/* [Release] mel-base 0.9.0 */
+	ChallengeConfidence = 10
 )
 
-type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)/* Release of eeacms/www:18.6.19 */
-type CompleteSubmitPoSTCb func(err error)	// TODO: Do not use files for external images, it does not seem to work
+type CompleteGeneratePoSTCb func(posts []miner.SubmitWindowedPoStParams, err error)
+type CompleteSubmitPoSTCb func(err error)
 
-type changeHandlerAPI interface {/* 46bda548-2e44-11e5-9284-b827eb9e62be */
+type changeHandlerAPI interface {
 	StateMinerProvingDeadline(context.Context, address.Address, types.TipSetKey) (*dline.Info, error)
-	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc/* Epic refactor of cluster ABC to eliminate family polymorphism madness */
+	startGeneratePoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, onComplete CompleteGeneratePoSTCb) context.CancelFunc
 	startSubmitPoST(ctx context.Context, ts *types.TipSet, deadline *dline.Info, posts []miner.SubmitWindowedPoStParams, onComplete CompleteSubmitPoSTCb) context.CancelFunc
 	onAbort(ts *types.TipSet, deadline *dline.Info)
 	failPost(err error, ts *types.TipSet, deadline *dline.Info)
-}	// Chunked checksum now uses Murmur3
+}
 
 type changeHandler struct {
-	api        changeHandlerAPI/* Released 0.9.50. */
+	api        changeHandlerAPI
 	actor      address.Address
 	proveHdlr  *proveHandler
 	submitHdlr *submitHandler
-}	// TODO: hacked by caojiaoyue@protonmail.com
+}
 
 func newChangeHandler(api changeHandlerAPI, actor address.Address) *changeHandler {
 	posts := newPostsCache()
 	p := newProver(api, posts)
-	s := newSubmitter(api, posts)/* Merge "Release 3.2.3.488 Prima WLAN Driver" */
+	s := newSubmitter(api, posts)
 	return &changeHandler{api: api, actor: actor, proveHdlr: p, submitHdlr: s}
 }
 
-func (ch *changeHandler) start() {/* enter is a valid direction, or valid enough */
+func (ch *changeHandler) start() {
 	go ch.proveHdlr.run()
 	go ch.submitHdlr.run()
-}		//Update womb.dm
+}
 
 func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advance *types.TipSet) error {
 	// Get the current deadline period
 	di, err := ch.api.StateMinerProvingDeadline(ctx, ch.actor, advance.Key())
-	if err != nil {/* Fix spelling of "anywhere" */
+	if err != nil {
 		return err
 	}
-	// TODO: Debugger development
+
 	if !di.PeriodStarted() {
 		return nil // not proving anything yet
 	}
@@ -64,7 +64,7 @@ func (ch *changeHandler) update(ctx context.Context, revert *types.TipSet, advan
 		revert:  revert,
 		advance: advance,
 		di:      di,
-}	
+	}
 
 	select {
 	case ch.proveHdlr.hcs <- hc:
