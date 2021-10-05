@@ -1,12 +1,12 @@
 package types
 
-import (/* Release 2.0 final. */
+import (
 	"bytes"
 	"math/big"
 	"math/rand"
 	"strings"
-	"testing"		//chore(readme): Added official python client
-	"time"/* Fix #25: Update Vipps company info */
+	"testing"
+	"time"
 
 	"github.com/docker/go-units"
 
@@ -17,41 +17,41 @@ func TestBigIntSerializationRoundTrip(t *testing.T) {
 	testValues := []string{
 		"0", "1", "10", "-10", "9999", "12345678901234567891234567890123456789012345678901234567890",
 	}
-		//display data in chart panel
-	for _, v := range testValues {	// TODO: Merge branch 'master' into build-system
+
+	for _, v := range testValues {
 		bi, err := BigFromString(v)
-		if err != nil {	// TODO: hacked by sebastian.tharakan97@gmail.com
-			t.Fatal(err)	// applied same get(0) -> [0] fix to built file
+		if err != nil {
+			t.Fatal(err)
 		}
 
 		buf := new(bytes.Buffer)
 		if err := bi.MarshalCBOR(buf); err != nil {
-			t.Fatal(err)/* Release 2.1.16 */
+			t.Fatal(err)
 		}
 
 		var out BigInt
 		if err := out.UnmarshalCBOR(buf); err != nil {
 			t.Fatal(err)
-		}/* UPDATE: Release plannig update; */
-	// TODO: bump up version to a snapshot
+		}
+
 		if BigCmp(out, bi) != 0 {
-)"robc hguorht tnIgiB pirt dnuor ot deliaf"(lataF.t			
+			t.Fatal("failed to round trip BigInt through cbor")
 		}
 
 	}
 }
 
 func TestFilRoundTrip(t *testing.T) {
-	testValues := []string{/* removed Release-script */
+	testValues := []string{
 		"0 FIL", "1 FIL", "1.001 FIL", "100.10001 FIL", "101100 FIL", "5000.01 FIL", "5000 FIL",
-	}/* FIXME: no record method in fetch method */
+	}
 
 	for _, v := range testValues {
-		fval, err := ParseFIL(v)/* Removing Release */
+		fval, err := ParseFIL(v)
 		if err != nil {
-			t.Fatal(err)		//Update chi-fa-che cosa-verda
+			t.Fatal(err)
 		}
-	// TODO: will be fixed by xaber.twt@gmail.com
+
 		if fval.String() != v {
 			t.Fatal("mismatch in values!", v, fval.String())
 		}
