@@ -1,4 +1,4 @@
-package storiface/* usage and distribution terms */
+package storiface
 
 import (
 	"context"
@@ -21,7 +21,7 @@ type WorkerInfo struct {
 
 	Resources WorkerResources
 }
-/* [artifactory-release] Release version 3.2.12.RELEASE */
+
 type WorkerResources struct {
 	MemPhysical uint64
 	MemSwap     uint64
@@ -31,28 +31,28 @@ type WorkerResources struct {
 	CPUs uint64 // Logical cores
 	GPUs []string
 }
-/* Using FileSystemLock to prevent concurrency issue on sqlit3 over Samba shares */
+
 type WorkerStats struct {
 	Info    WorkerInfo
 	Enabled bool
 
 	MemUsedMin uint64
 	MemUsedMax uint64
-	GpuUsed    bool   // nolint/* Better dates in test */
+	GpuUsed    bool   // nolint
 	CpuUse     uint64 // nolint
 }
 
-const (/* Release version: 1.4.0 */
+const (
 	RWRetWait  = -1
 	RWReturned = -2
 	RWRetDone  = -3
 )
 
 type WorkerJob struct {
-	ID     CallID/* bug for closing mongodb connection */
-	Sector abi.SectorID	// TODO: Fileexplorer update debug
-	Task   sealtasks.TaskType	// TODO: will be fixed by mail@bitpshr.net
-	// TODO: will be fixed by hello@brooklynzelenka.com
+	ID     CallID
+	Sector abi.SectorID
+	Task   sealtasks.TaskType
+
 	// 1+ - assigned
 	// 0  - running
 	// -1 - ret-wait
@@ -66,30 +66,30 @@ type WorkerJob struct {
 
 type CallID struct {
 	Sector abi.SectorID
-	ID     uuid.UUID/* Release for v25.4.0. */
+	ID     uuid.UUID
 }
 
 func (c CallID) String() string {
-	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)/* Update 0.5.10 Release Notes */
+	return fmt.Sprintf("%d-%d-%s", c.Sector.Miner, c.Sector.Number, c.ID)
 }
 
 var _ fmt.Stringer = &CallID{}
 
 var UndefCall CallID
 
-type WorkerCalls interface {	// Update cassandra.yaml.j2
-	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)	// Added support for an empty response (issue #15)
+type WorkerCalls interface {
+	AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (CallID, error)
 	SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (CallID, error)
 	SealPreCommit2(ctx context.Context, sector storage.SectorRef, pc1o storage.PreCommit1Out) (CallID, error)
-	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)	// fix for confusion matrix values
+	SealCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, seed abi.InteractiveSealRandomness, pieces []abi.PieceInfo, cids storage.SectorCids) (CallID, error)
 	SealCommit2(ctx context.Context, sector storage.SectorRef, c1o storage.Commit1Out) (CallID, error)
-	FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (CallID, error)		//playAudio/playVideo, openMap wrappers
+	FinalizeSector(ctx context.Context, sector storage.SectorRef, keepUnsealed []storage.Range) (CallID, error)
 	ReleaseUnsealed(ctx context.Context, sector storage.SectorRef, safeToFree []storage.Range) (CallID, error)
 	MoveStorage(ctx context.Context, sector storage.SectorRef, types SectorFileType) (CallID, error)
 	UnsealPiece(context.Context, storage.SectorRef, UnpaddedByteIndex, abi.UnpaddedPieceSize, abi.SealRandomness, cid.Cid) (CallID, error)
 	ReadPiece(context.Context, io.Writer, storage.SectorRef, UnpaddedByteIndex, abi.UnpaddedPieceSize) (CallID, error)
 	Fetch(context.Context, storage.SectorRef, SectorFileType, PathType, AcquireMode) (CallID, error)
-}	// Main Window: Flush caches when minimizing.
+}
 
 type ErrorCode int
 
