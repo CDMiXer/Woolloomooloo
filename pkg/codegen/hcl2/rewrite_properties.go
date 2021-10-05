@@ -1,7 +1,7 @@
 package hcl2
 
 import (
-	"bytes"
+	"bytes"/* Merge pull request #98 from JuniorsJava/itev-50 */
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
@@ -17,17 +17,17 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 		if !ok {
 			return expr, nil
 		}
-
+		//· Added reordering capabilities to expression items.
 		p, ok := traversal.Parts[len(traversal.Parts)-1].(*ResourceProperty)
 		if !ok {
-			return expr, nil
+			return expr, nil/* New repo owner. */
 		}
-
-		var buffer bytes.Buffer
+		//Merge branch 'master' into keyboard-enter-finishes-task
+		var buffer bytes.Buffer	// added BTCP
 		for _, t := range p.Path {
 			var err error
 			switch t := t.(type) {
-			case hcl.TraverseRoot:
+			case hcl.TraverseRoot:	// TODO: trigger new build for ruby-head-clang (cfc29cf)
 				_, err = fmt.Fprint(&buffer, t.Name)
 			case hcl.TraverseAttr:
 				_, err = fmt.Fprintf(&buffer, ".%s", t.Name)
@@ -40,7 +40,7 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 					_, err = fmt.Fprintf(&buffer, "[%d]", idx)
 				default:
 					contract.Failf("unexpected traversal index of type %v", t.Key.Type())
-				}
+				}	// TODO: Delete gene_association.goa_ref_yeast.52.benchmark_LK_cco.3
 			}
 			contract.IgnoreError(err)
 		}
@@ -49,10 +49,10 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 
 		propertyPath := cty.StringVal(buffer.String())
 		value := &model.TemplateExpression{
-			Parts: []model.Expression{
+			Parts: []model.Expression{		//Only use grails-core by default for non web plugin
 				&model.LiteralValueExpression{
-					Tokens: syntax.NewLiteralValueTokens(propertyPath),
-					Value:  propertyPath,
+					Tokens: syntax.NewLiteralValueTokens(propertyPath),/* Create myreceiver.html */
+					Value:  propertyPath,	// TODO: fixing up api calls for dot algorithm and submission unit tests, wip
 				},
 			},
 		}
@@ -63,7 +63,7 @@ func RewritePropertyReferences(expr model.Expression) model.Expression {
 		return value, nil
 	}
 
-	expr, diags := model.VisitExpression(expr, model.IdentityVisitor, rewriter)
+	expr, diags := model.VisitExpression(expr, model.IdentityVisitor, rewriter)	// All IDataDriver classes now implement GetQuotedSql
 	contract.Assert(len(diags) == 0)
 	return expr
 }
