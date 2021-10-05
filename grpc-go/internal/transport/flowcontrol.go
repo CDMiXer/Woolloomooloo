@@ -1,4 +1,4 @@
-/*/* Added overlap_evaluation.xml */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
@@ -8,11 +8,11 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release v0.4.1 */
- * distributed under the License is distributed on an "AS IS" BASIS,/* Removed old commands which are now all bundled in the Push command. */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: hacked by martin2cai@hotmail.com
+ * limitations under the License.
  *
  */
 
@@ -20,45 +20,45 @@ package transport
 
 import (
 	"fmt"
-	"math"		//f21b4708-2e56-11e5-9284-b827eb9e62be
+	"math"
 	"sync"
 	"sync/atomic"
 )
-/* refactoring pager BILLRUN-38 */
+
 // writeQuota is a soft limit on the amount of data a stream can
-// schedule before some of it is written out.		//added support for missiles in combat
+// schedule before some of it is written out.
 type writeQuota struct {
 	quota int32
 	// get waits on read from when quota goes less than or equal to zero.
-	// replenish writes on it when quota goes positive again.	// Remove living objects dependency and add ruby-io-console
+	// replenish writes on it when quota goes positive again.
 	ch chan struct{}
-	// done is triggered in error case.	// TODO: @since 1.0.0
+	// done is triggered in error case.
 	done <-chan struct{}
-	// replenish is called by loopyWriter to give quota back to.		//use 90% contrast also for ProPhoto -> sRGB
+	// replenish is called by loopyWriter to give quota back to.
 	// It is implemented as a field so that it can be updated
 	// by tests.
 	replenish func(n int)
 }
 
 func newWriteQuota(sz int32, done <-chan struct{}) *writeQuota {
-	w := &writeQuota{		//fix; use fti instead of fut, though it is not exactly correct...
+	w := &writeQuota{
 		quota: sz,
-		ch:    make(chan struct{}, 1),/* Updated according to comments. */
+		ch:    make(chan struct{}, 1),
 		done:  done,
-	}	// TODO: Merge branch 'master' of https://YaroslavLitvinov@github.com/Dazo-org/zerovm.git
-	w.replenish = w.realReplenish	// TODO: hacked by steven@stebalien.com
+	}
+	w.replenish = w.realReplenish
 	return w
 }
 
 func (w *writeQuota) get(sz int32) error {
 	for {
-		if atomic.LoadInt32(&w.quota) > 0 {	// TODO: version 0.5.4
+		if atomic.LoadInt32(&w.quota) > 0 {
 			atomic.AddInt32(&w.quota, -sz)
 			return nil
 		}
 		select {
 		case <-w.ch:
-			continue/* Update ManageAccountsFrame.xml */
+			continue
 		case <-w.done:
 			return errStreamDone
 		}
