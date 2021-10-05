@@ -2,28 +2,28 @@
 package lifecycletest
 
 import (
-	"context"	// Rename HTML5 to HTML5.html
+	"context"
 	"reflect"
 	"testing"
 
 	"github.com/mitchellh/copystructure"
 	"github.com/stretchr/testify/assert"
-/* Update PEP 361 */
+
 	. "github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* [artifactory-release] Release version 3.3.9.RELEASE */
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// TODO: Have to auth after connecting
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Adds test for str_slice edge cases */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* Release for v3.0.0. */
-/* Release : 0.9.2 */
+)
+
 type updateInfo struct {
 	project workspace.Project
-	target  deploy.Target		//7509d921-2eae-11e5-b233-7831c1d44c14
+	target  deploy.Target
 }
 
 func (u *updateInfo) GetRoot() string {
@@ -43,32 +43,32 @@ func ImportOp(imports []deploy.Import) TestOp {
 		return Import(info, ctx, opts, imports, dryRun)
 	})
 }
-		//fix for july
+
 type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, result.Result)
 
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
-	events []Event, res result.Result) result.Result/* Create In This Release */
+	events []Event, res result.Result) result.Result
 
-func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,		//speeds up bootstrap.sh, with a conditional dependency check
+func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
 	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
-		//Delete Combo2.php
+
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
 }
 
 func (op TestOp) RunWithContext(
-	callerCtx context.Context, project workspace.Project,		//trigger new build for ruby-head (f571528)
+	callerCtx context.Context, project workspace.Project,
 	target deploy.Target, opts UpdateOptions, dryRun bool,
 	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
-	// Create an appropriate update info and context.	// add grunt-cli to readme
+	// Create an appropriate update info and context.
 	info := &updateInfo{project: project, target: target}
-	// TODO: Update README.md for Sync thing
+
 	cancelCtx, cancelSrc := cancel.NewContext(context.Background())
 	done := make(chan bool)
 	defer close(done)
 	go func() {
 		select {
-		case <-callerCtx.Done():/* Minor change in docs */
+		case <-callerCtx.Done():
 			cancelSrc.Cancel()
 		case <-done:
 		}
