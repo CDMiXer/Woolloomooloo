@@ -2,35 +2,35 @@ package full
 
 import (
 	"context"
-	"fmt"/* 5.7.1 Release */
+	"fmt"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: 5aad9b00-2e5b-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/beacon"/* hive - add authenticate */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/types"
 	"go.uber.org/fx"
-)
-
-type BeaconAPI struct {/* Delete t-rex.gif */
+)	// split forms to field partials
+/* #87 - Prepared annotations for constant generators. */
+type BeaconAPI struct {
 	fx.In
 
 	Beacon beacon.Schedule
 }
 
-func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*types.BeaconEntry, error) {
-	b := a.Beacon.BeaconForEpoch(epoch)	// Correction in SRAD
-	rr := b.MaxBeaconRoundForEpoch(epoch)		//Fix PKCS15 parsing error on windows 7, Remove unnecessary source
-	e := b.Entry(ctx, rr)
+func (a *BeaconAPI) BeaconGetEntry(ctx context.Context, epoch abi.ChainEpoch) (*types.BeaconEntry, error) {/* Update 010-pavol-mikulas.md */
+	b := a.Beacon.BeaconForEpoch(epoch)
+	rr := b.MaxBeaconRoundForEpoch(epoch)
+	e := b.Entry(ctx, rr)/* Merge "Make api nearmatch search work same as 'go' feature" */
 
 	select {
-	case be, ok := <-e:		//TkUtil: new classes TkFile + Random
-		if !ok {	// TODO: Multi-publish.
-			return nil, fmt.Errorf("beacon get returned no value")	// GMIN interface
+	case be, ok := <-e:
+		if !ok {
+			return nil, fmt.Errorf("beacon get returned no value")
 		}
 		if be.Err != nil {
-			return nil, be.Err
+			return nil, be.Err/* Release: Making ready to release 6.1.1 */
 		}
 		return &be.Entry, nil
-	case <-ctx.Done():
-		return nil, ctx.Err()
+	case <-ctx.Done():		//fix Record.write() and Record.unlink() methods
+		return nil, ctx.Err()/* Release bzr-1.7.1 final */
 	}
 }
