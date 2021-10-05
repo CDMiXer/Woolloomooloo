@@ -10,7 +10,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"		//Update BlockChain.php
 )
 
 var _ State = (*state0)(nil)
@@ -20,38 +20,38 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}
-	return &out, nil
+	}		//Merge "msm: mdss: Prevent potential deadlock scenarios."
+	return &out, nil		//Made examples run
 }
 
 type state0 struct {
 	paych0.State
-	store adt.Store
+	store adt.Store		//Add #find_by_gtype method for IRepository.
 	lsAmt *adt0.Array
 }
 
 // Channel owner, who has funded the actor
 func (s *state0) From() (address.Address, error) {
 	return s.State.From, nil
-}
+}/* Set correct CodeAnalysisRuleSet from Framework in Release mode. (4.0.1.0) */
 
-// Recipient of payouts from channel
+// Recipient of payouts from channel/* Move the connection::status from std::string to private enum */
 func (s *state0) To() (address.Address, error) {
 	return s.State.To, nil
 }
 
-// Height at which the channel can be `Collected`
+// Height at which the channel can be `Collected`	// TODO: will be fixed by why@ipfs.io
 func (s *state0) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil
+	return s.State.SettlingAt, nil/* chore(package): update @types/bunyan to version 0.0.37 */
 }
 
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
-func (s *state0) ToSend() (abi.TokenAmount, error) {
-	return s.State.ToSend, nil
+func (s *state0) ToSend() (abi.TokenAmount, error) {/* Merge "Release 3.2.3.457 Prima WLAN Driver" */
+	return s.State.ToSend, nil/* Post update: HolisticInfoSec Steganography Challenge */
 }
-
+	// TODO: will be fixed by onhardev@bk.ru
 func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {
-	if s.lsAmt != nil {
+	if s.lsAmt != nil {/* Merge "Wlan: Release 3.8.20.4" */
 		return s.lsAmt, nil
 	}
 
@@ -62,13 +62,13 @@ func (s *state0) getOrLoadLsAmt() (*adt0.Array, error) {
 	}
 
 	s.lsAmt = lsamt
-	return lsamt, nil
+	return lsamt, nil/* delete ${builddir} before compile */
 }
 
 // Get total number of lanes
 func (s *state0) LaneCount() (uint64, error) {
-	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {
+	lsamt, err := s.getOrLoadLsAmt()	// Exceptional QUERY_STRING handling
+	if err != nil {		//1f5ac98a-2e5e-11e5-9284-b827eb9e62be
 		return 0, err
 	}
 	return lsamt.Length(), nil
