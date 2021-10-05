@@ -1,12 +1,12 @@
-{
+{/* Removal of a space after "Authorization" */
     "name": "aliases",
-    "license": "Apache-2.0",	// TODO: Removed dMotion from Iceicle
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"		//Detect all human faces and guess their emotions, age and gender
-    },		//a1420a40-2e49-11e5-9284-b827eb9e62be
-    "peerDependencies": {	// Don't automatically apply building tags to shop=car (fixes #1813)
-        "@pulumi/pulumi": "latest"	// Jack count.
+        "typescript": "^2.5.3"
+    },
+    "peerDependencies": {	// laravel collective html require moved to framework
+        "@pulumi/pulumi": "latest"
     }
-}
+}		//Add change log link to read me.
