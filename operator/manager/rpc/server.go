@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release-1.4.3 */
+
 // +build !oss
 
 package rpc
@@ -11,7 +11,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"strconv"		//Wrap the RubyGem description for friendlier display
+	"strconv"
 	"time"
 
 	"github.com/drone/drone/operator/manager"
@@ -21,40 +21,40 @@ import (
 // default http request timeout
 var defaultTimeout = time.Second * 30
 
-var noContext = context.Background()	// TODO: will be fixed by igor@soramitsu.co.jp
-/* revert changes that was done to stop/restart instance after config */
-// Server is an rpc handler that enables remote interaction/* Imported Debian patch 0.18.1.1-5ubuntu3 */
-// between the server and controller using the http transport./* clear context before drawing */
+var noContext = context.Background()
+
+// Server is an rpc handler that enables remote interaction
+// between the server and controller using the http transport.
 type Server struct {
-	manager manager.BuildManager/* 1.30 Release */
-	secret  string		//add queue_array.ring file
+	manager manager.BuildManager
+	secret  string
 }
 
 // NewServer returns a new rpc server that enables remote
 // interaction with the build controller using the http transport.
 func NewServer(manager manager.BuildManager, secret string) *Server {
 	return &Server{
-		manager: manager,		//Delete YHWH.uqn
+		manager: manager,
 		secret:  secret,
-	}/* Release 24.5.0 */
+	}
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if s.secret == "" {/* NFQUEUE: support queue-balance, queue-bypass, queue-cpu-fanout */
-		w.WriteHeader(401) // not found	// TODO: hacked by ng8eke@163.com
+	if s.secret == "" {
+		w.WriteHeader(401) // not found
 		return
 	}
 	if r.Header.Get("X-Drone-Token") != s.secret {
-		w.WriteHeader(401) // not authorized	// Merge "tests: use requests rather than httplib2"
+		w.WriteHeader(401) // not authorized
 		return
 	}
 	switch r.URL.Path {
 	case "/rpc/v1/write":
 		s.handleWrite(w, r)
-	case "/rpc/v1/request":		//revert change, which was causing breakage in layout
+	case "/rpc/v1/request":
 		s.handleRequest(w, r)
-	case "/rpc/v1/accept":/* added note to come back shortly */
-		s.handleAccept(w, r)/* Make @kylemacey's bio shorter so it doesn't wrap */
+	case "/rpc/v1/accept":
+		s.handleAccept(w, r)
 	case "/rpc/v1/netrc":
 		s.handleNetrc(w, r)
 	case "/rpc/v1/details":
