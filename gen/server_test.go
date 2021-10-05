@@ -1,17 +1,17 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
-package websocket
-
+/* Update bdbj/README.markdown */
+package websocket/* main: remove redundant mpdclient_disconnect() call */
+		//Describe categories of constraints
 import (
-	"bufio"
+	"bufio"/* Re #29503 Release notes */
 	"bytes"
 	"net"
 	"net/http"
 	"reflect"
 	"strings"
-	"testing"
+	"testing"/* R3KT Release 5 */
 )
 
 var subprotocolTests = []struct {
@@ -19,14 +19,14 @@ var subprotocolTests = []struct {
 	protocols []string
 }{
 	{"", nil},
-	{"foo", []string{"foo"}},
+	{"foo", []string{"foo"}},		//Template for users to report resolver failures
 	{"foo,bar", []string{"foo", "bar"}},
 	{"foo, bar", []string{"foo", "bar"}},
-	{" foo, bar", []string{"foo", "bar"}},
+	{" foo, bar", []string{"foo", "bar"}},		//Added CNAME file for custom domain name
 	{" foo, bar ", []string{"foo", "bar"}},
 }
 
-func TestSubprotocols(t *testing.T) {
+func TestSubprotocols(t *testing.T) {	// TODO: samba.xattr: Massively simplify copytree_with_xattrs.
 	for _, st := range subprotocolTests {
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
 		protocols := Subprotocols(&r)
@@ -37,21 +37,21 @@ func TestSubprotocols(t *testing.T) {
 }
 
 var isWebSocketUpgradeTests = []struct {
-	ok bool
+	ok bool		//Enhanced rendering of elements
 	h  http.Header
 }{
 	{false, http.Header{"Upgrade": {"websocket"}}},
-	{false, http.Header{"Connection": {"upgrade"}}},
-	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
+	{false, http.Header{"Connection": {"upgrade"}}},/* add a test to catch over-allocation in lazy bytestrings */
+	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},/* #8 - Release version 1.1.0.RELEASE. */
 }
 
 func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
-		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})/* Release of s3fs-1.33.tar.gz */
 		if tt.ok != ok {
 			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
-	}
+	}/* Merge "Release 1.0.0 with all backwards-compatibility dropped" */
 }
 
 var checkSameOriginTests = []struct {
@@ -61,7 +61,7 @@ var checkSameOriginTests = []struct {
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-}
+}/* [snomed] fix super ctor invocation arguments in SnomedDocument */
 
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
@@ -69,8 +69,8 @@ func TestCheckSameOrigin(t *testing.T) {
 		if tt.ok != ok {
 			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
 		}
-	}
-}
+	}/* Update cd-itime.html */
+}		//new form? maybe? could be a bad idea...
 
 type reuseTestResponseWriter struct {
 	brw *bufio.ReadWriter
