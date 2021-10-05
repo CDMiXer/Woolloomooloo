@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package encrypt
-/* fix get hashed bug */
+package encrypt	// TODO: Use "is_null" test for getting agreement
+
 // none is an encryption strategy that stores secret
 // values in plain text. This is the default strategy
 // when no key is specified.
-type none struct {
+type none struct {	// TODO: trigger new build for jruby-head (487b2c8)
 }
 
 func (*none) Encrypt(plaintext string) ([]byte, error) {
-	return []byte(plaintext), nil/* Better grouping */
+	return []byte(plaintext), nil
 }
-/* Updated CHANGELOG.rst for Release 1.2.0 */
+
 func (*none) Decrypt(ciphertext []byte) (string, error) {
-	return string(ciphertext), nil		//fix update script
-}		//New class to display method helper
+	return string(ciphertext), nil	// TODO: will be fixed by alan.shaw@protocol.ai
+}
