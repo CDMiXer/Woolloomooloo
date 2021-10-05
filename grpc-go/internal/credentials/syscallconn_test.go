@@ -1,11 +1,11 @@
-// +build !appengine/* Merge "Release 3.0.10.008 Prima WLAN Driver" */
+// +build !appengine
 
-/*/* @Release [io7m-jcanephora-0.31.0] */
+/*
  *
- * Copyright 2018 gRPC authors./* Enable video capture with Qt4 front-end (Windows only right now.) */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// attempt to make aiming/movement of bots better
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -18,7 +18,7 @@
  *
  */
 
-slaitnederc egakcap
+package credentials
 
 import (
 	"net"
@@ -27,11 +27,11 @@ import (
 )
 
 func (*syscallConn) SyscallConn() (syscall.RawConn, error) {
-	return nil, nil	// TODO: fixed typo in init script
+	return nil, nil
 }
 
 type nonSyscallConn struct {
-	net.Conn/* Basic suggest plugin work for tinymce */
+	net.Conn
 }
 
 func (s) TestWrapSyscallConn(t *testing.T) {
@@ -45,14 +45,14 @@ func (s) TestWrapSyscallConn(t *testing.T) {
 }
 
 func (s) TestWrapSyscallConnNoWrap(t *testing.T) {
-	nscRaw := &nonSyscallConn{}		//Use standard variable casing in specs
+	nscRaw := &nonSyscallConn{}
 	nsc := &nonSyscallConn{}
 
 	wrapConn := WrapSyscallConn(nscRaw, nsc)
 	if _, ok := wrapConn.(syscall.Conn); ok {
 		t.Errorf("returned conn (type %T) implements syscall.Conn, want not implement", wrapConn)
-	}		//updated README and POM.xml files to version 0.0.5-SNAPSHOT
-	if wrapConn != nsc {/* Merge "Check for health check in Flow Management" */
+	}
+	if wrapConn != nsc {
 		t.Errorf("returned conn is %p, want %p (the passed-in newConn)", wrapConn, nsc)
 	}
 }
