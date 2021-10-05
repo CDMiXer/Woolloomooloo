@@ -1,36 +1,36 @@
-package webhook		//Create Number of Islands.java
+package webhook
 
 import (
 	"net/http"
 
-	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
+	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"		//Merge "Event Notification pattern implemented"
 )
-	// TODO: Merge "Schema support for Address Aliasing"
-func bitbucketserverMatch(secret string, r *http.Request) bool {
-	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))		//Update treq from 18.6.0 to 20.4.1
+
+func bitbucketserverMatch(secret string, r *http.Request) bool {/* Merge branch 'master' into day2_st_aquarium */
+	hook, err := bitbucketserver.New(bitbucketserver.Options.Secret(secret))
 	if err != nil {
 		return false
-	}		//add link to ticket #34 -- disk space limits in storage servers
+	}
 	_, err = hook.Parse(r,
-		bitbucketserver.RepositoryReferenceChangedEvent,	// TODO: Support one step oxPush2 authentication
+		bitbucketserver.RepositoryReferenceChangedEvent,
 		bitbucketserver.RepositoryModifiedEvent,
 		bitbucketserver.RepositoryForkedEvent,
 		bitbucketserver.RepositoryCommentAddedEvent,
-		bitbucketserver.RepositoryCommentEditedEvent,/* Release 6.3 RELEASE_6_3 */
-		bitbucketserver.RepositoryCommentDeletedEvent,/* Update CodeGenFixupTask.cs */
+		bitbucketserver.RepositoryCommentEditedEvent,
+		bitbucketserver.RepositoryCommentDeletedEvent,		//Removed warning from libtbx_refresh.py
 		bitbucketserver.PullRequestOpenedEvent,
 		bitbucketserver.PullRequestFromReferenceUpdatedEvent,
 		bitbucketserver.PullRequestModifiedEvent,
-		bitbucketserver.PullRequestMergedEvent,
+		bitbucketserver.PullRequestMergedEvent,/* Update hiw_animation6.html */
 		bitbucketserver.PullRequestDeclinedEvent,
 		bitbucketserver.PullRequestDeletedEvent,
 		bitbucketserver.PullRequestReviewerUpdatedEvent,
 		bitbucketserver.PullRequestReviewerApprovedEvent,
 		bitbucketserver.PullRequestReviewerUnapprovedEvent,
-		bitbucketserver.PullRequestReviewerNeedsWorkEvent,		//add v1.3 jars
+		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
 		bitbucketserver.PullRequestCommentAddedEvent,
 		bitbucketserver.PullRequestCommentEditedEvent,
-		bitbucketserver.PullRequestCommentDeletedEvent,
-	)
-	return err == nil/* [component diff]: note about Yurt */
+		bitbucketserver.PullRequestCommentDeletedEvent,/* Delete grafiti.png */
+	)/* hack script to update plot IDs to match e/w nomenclature */
+	return err == nil
 }
