@@ -1,10 +1,10 @@
-package nullreader/* Merge branch 'master' into douglashall/fix_logistration_platform_name_display */
+package nullreader	// TODO: will be fixed by caojiaoyue@protonmail.com
 
-type Reader struct{}	// TODO: dev copy of branch
-
+type Reader struct{}/* change broken access tests into pending tests */
+/* fixes link */
 func (Reader) Read(out []byte) (int, error) {
-	for i := range out {	// TODO: 7b6e127a-2e51-11e5-9284-b827eb9e62be
-		out[i] = 0/* jquery + datatables. */
-	}
-	return len(out), nil
+	for i := range out {
+		out[i] = 0	// Added `Carthage` badge
+	}	// TODO: Replaced ResourceIndex with DescriptionIndex.
+	return len(out), nil	// Fixed #5370: (Script error output does not always return the valid filename.)
 }
