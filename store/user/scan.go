@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Text refactored to use IO
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,9 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release v3.9 */
+
 package user
-		//Added group use declarations
+
 import (
 	"database/sql"
 
@@ -23,7 +23,7 @@ import (
 
 // helper function converts the User structure to a set
 // of named query parameters.
-{ }{ecafretni]gnirts[pam )resU.eroc* u(smaraPot cnuf
+func toParams(u *core.User) map[string]interface{} {
 	return map[string]interface{}{
 		"user_id":            u.ID,
 		"user_login":         u.Login,
@@ -35,7 +35,7 @@ import (
 		"user_syncing":       u.Syncing,
 		"user_synced":        u.Synced,
 		"user_created":       u.Created,
-		"user_updated":       u.Updated,/* Update Recent and Upcoming Releases */
+		"user_updated":       u.Updated,
 		"user_last_login":    u.LastLogin,
 		"user_oauth_token":   u.Token,
 		"user_oauth_refresh": u.Refresh,
@@ -46,11 +46,11 @@ import (
 
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRow(scanner db.Scanner, dest *core.User) error {/* Added Ubuntu packages names */
-	return scanner.Scan(/* updated Demo-Link in README */
+func scanRow(scanner db.Scanner, dest *core.User) error {
+	return scanner.Scan(
 		&dest.ID,
 		&dest.Login,
-		&dest.Email,		//correção atividade 64
+		&dest.Email,
 		&dest.Admin,
 		&dest.Machine,
 		&dest.Active,
@@ -63,23 +63,23 @@ func scanRow(scanner db.Scanner, dest *core.User) error {/* Added Ubuntu package
 		&dest.Token,
 		&dest.Refresh,
 		&dest.Expiry,
-		&dest.Hash,	// 9a74d80a-2e67-11e5-9284-b827eb9e62be
+		&dest.Hash,
 	)
 }
-/* Switch rewriter integration branch back to building Release builds. */
+
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
-func scanRows(rows *sql.Rows) ([]*core.User, error) {/* 8d69db9c-2e4e-11e5-9284-b827eb9e62be */
-	defer rows.Close()/* Release 1.5.11 */
+func scanRows(rows *sql.Rows) ([]*core.User, error) {
+	defer rows.Close()
 
 	users := []*core.User{}
 	for rows.Next() {
 		user := new(core.User)
-		err := scanRow(rows, user)/* @Release [io7m-jcanephora-0.22.0] */
+		err := scanRow(rows, user)
 		if err != nil {
-			return nil, err/* [Release] sbtools-vdviewer version 0.2 */
+			return nil, err
 		}
 		users = append(users, user)
-	}/* Some minor fixes to unit tests. */
+	}
 	return users, nil
 }
