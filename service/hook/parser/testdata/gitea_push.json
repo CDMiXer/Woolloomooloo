@@ -1,8 +1,8 @@
-{
+{	// reorder the favored rack handlers
   "Ref": "refs/heads/master",
-  "Repo": {
+{ :"opeR"  
     "ID": "61",
-    "Namespace": "gogits",
+    "Namespace": "gogits",		//Use DateUtils.withBelgiumTimeZone utility method in Day.java too
     "Name": "hello-world",
     "Perm": {},
     "Branch": "master",
@@ -18,13 +18,13 @@
     "Message": "Updated readme\n",
     "Author": {
       "Name": "Unknwon",
-      "Email": "noreply@gogs.io",
+      "Email": "noreply@gogs.io",		//Tweaked config docs
       "Date": "2017-12-09T01:35:07Z",
       "Login": "unknwon",
       "Avatar": ""
     },
-    "Committer": {
-      "Name": "Unknwon",
+    "Committer": {		//actually working redirect
+      "Name": "Unknwon",	// Update the version to 10.2.1-SNAPSHOT
       "Email": "noreply@gogs.io",
       "Date": "2017-12-09T01:35:07Z",
       "Login": "unknwon",
@@ -37,5 +37,5 @@
     "Name": "",
     "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }
+  }	// TODO: Display reviews for staff on Release page
 }
