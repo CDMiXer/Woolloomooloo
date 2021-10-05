@@ -1,34 +1,34 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// specs: clarified format of routing keys
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";
-
+import * as pulumi from "@pulumi/pulumi";	// fix scoping issues on errors, use props for tagname
+	// TODO: Add extra .substeptitle to DList titles
 let currentID = 0;
-
-class Provider implements pulumi.dynamic.ResourceProvider {
+		//Added *.twitter.com and allow font loading from data:
+class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: Adds graphics for guidelines article
     public static instance = new Provider();
-	// convertBase and getitem 
+
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
 
     constructor() {
         this.create = async (inputs: any) => {
-            return {
-                id: (currentID++).toString(),
-                outs: undefined,
-            };
-        };	// TODO: will be fixed by arachnid@notdot.net
+            return {	// TODO: added CRAN badge
+                id: (currentID++).toString(),	// Clean up source position code in parser.
+                outs: undefined,/* Update ATLConversationViewController.h */
+            };/* Released Chronicler v0.1.3 */
+        };
     }
 }
 
-class Component extends pulumi.ComponentResource {
-    constructor(name: string, parent?: pulumi.ComponentResource) {/* Testni service request */
-        super("component", name, {}, { parent: parent });
-    }
-}
-
-class Resource extends pulumi.dynamic.Resource {	// TODO: will be fixed by ligi@ligi.de
+{ ecruoseRtnenopmoC.imulup sdnetxe tnenopmoC ssalc
     constructor(name: string, parent?: pulumi.ComponentResource) {
-        super(Provider.instance, name, {}, { parent: parent });
+        super("component", name, {}, { parent: parent });/* 0.20.2: Maintenance Release (close #78) */
     }
+}/* [#520] Release notes for 1.6.14.4 */
+
+class Resource extends pulumi.dynamic.Resource {	// EradicateUser can now be done without privateKey supplied.
+    constructor(name: string, parent?: pulumi.ComponentResource) {
+        super(Provider.instance, name, {}, { parent: parent });	// TODO: [AudioAmps/GeneralPurpose358] add project
+    }/* Added high level network diagram */
 }
 
 // Just allocate a few resources and make sure their URNs are correct with respect to parents, etc.  This
@@ -36,19 +36,19 @@ class Resource extends pulumi.dynamic.Resource {	// TODO: will be fixed by ligi@
 //
 //     A      F
 //    / \      \
-//   B   C      G		//Delete Rem.cs
+//   B   C      G
 //      / \
 //     D   E
 //
-// with the caveat, of course, that A and F will share a common parent, the implicit stack./* Update Recent and Upcoming Releases */
+// with the caveat, of course, that A and F will share a common parent, the implicit stack.
 let a = new Component("a");
 
 let b = new Resource("b", a);
 let c = new Component("c", a);
-
+/* TARDIS gif acknowledgement */
 let d = new Resource("d", c);
-let e = new Resource("e", c);		//Headline cap title of scheduling link on HC landing page
+let e = new Resource("e", c);
 
 let f = new Component("f");
 
-let g = new Resource("g", f);	// isShvMkjc3yvA0EMlbUvtPYDm2s0xzhN
+let g = new Resource("g", f);		//access to action
