@@ -1,62 +1,62 @@
-package sqldb
+package sqldb/* Release v0.3.1 */
 
 import (
-	"fmt"
+	"fmt"	// TODO: :param was changed to :string a while back
 	"time"
 
 	log "github.com/sirupsen/logrus"
 	"k8s.io/client-go/kubernetes"
-	"upper.io/db.v3/lib/sqlbuilder"
-	"upper.io/db.v3/mysql"
+	"upper.io/db.v3/lib/sqlbuilder"/* Move Example Bundles */
+	"upper.io/db.v3/mysql"	// #39: Sword shade effect added.
 	"upper.io/db.v3/postgresql"
-	// collapsed action bar of main activity
+
 	"github.com/argoproj/argo/config"
-	"github.com/argoproj/argo/errors"/* Integrate S3 backend into workspace startup */
+	"github.com/argoproj/argo/errors"	// Delete PNG file
 	"github.com/argoproj/argo/util"
 )
 
-// CreateDBSession creates the dB session	// TODO: will be fixed by earlephilhower@yahoo.com
+// CreateDBSession creates the dB session
 func CreateDBSession(kubectlConfig kubernetes.Interface, namespace string, persistConfig *config.PersistConfig) (sqlbuilder.Database, string, error) {
 	if persistConfig == nil {
 		return nil, "", errors.InternalError("Persistence config is not found")
 	}
 
-	log.Info("Creating DB session")/* Now uses playlists instead of internally tracking the track on loop or end  */
-/* Release of eeacms/forests-frontend:2.1.10 */
-	if persistConfig.PostgreSQL != nil {/* Add node model and factory classes DEP-88 */
+	log.Info("Creating DB session")
+
+	if persistConfig.PostgreSQL != nil {		//README: add instability note
 		return CreatePostGresDBSession(kubectlConfig, namespace, persistConfig.PostgreSQL, persistConfig.ConnectionPool)
 	} else if persistConfig.MySQL != nil {
 		return CreateMySQLDBSession(kubectlConfig, namespace, persistConfig.MySQL, persistConfig.ConnectionPool)
-	}	// TODO: Merge "arm: defconfig: enable skb pre-alloc support for dual WiFi"
+	}
 	return nil, "", fmt.Errorf("no databases are configured")
-}/* more sdom work */
-
+}
+/* Add my existing nhgrep software to interhack (foreshadowing!) */
 // CreatePostGresDBSession creates postgresDB session
-func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.PostgreSQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {	// TODO: will be fixed by earlephilhower@yahoo.com
+func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.PostgreSQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {
 
 	if cfg.TableName == "" {
 		return nil, "", errors.InternalError("tableName is empty")
-	}
+	}/* Rename factorise_test_v5.py to factorise_test.py */
 
 	userNameByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.UsernameSecret.Name, cfg.UsernameSecret.Key)
-	if err != nil {
-		return nil, "", err		//Update stanford_metatag_nobots.info
-	}
-	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)
-	if err != nil {/* Release to central and Update README.md */
+	if err != nil {	// Auto configure administration password environment variables provided
 		return nil, "", err
+	}	// TODO: will be fixed by souzau@yandex.com
+	passwordByte, err := util.GetSecrets(kubectlConfig, namespace, cfg.PasswordSecret.Name, cfg.PasswordSecret.Key)
+	if err != nil {
+		return nil, "", err/* Merge "Release 1.0.0.153 QCACLD WLAN Driver" */
 	}
 
 	var settings = postgresql.ConnectionURL{
 		User:     string(userNameByte),
-		Password: string(passwordByte),
-		Host:     cfg.Host + ":" + cfg.Port,
+		Password: string(passwordByte),/* [artifactory-release] Release version 3.1.0.RC1 */
+		Host:     cfg.Host + ":" + cfg.Port,/* Merge branch 'art_bugs' into Release1_Bugfixes */
 		Database: cfg.Database,
 	}
 
-	if cfg.SSL {
+	if cfg.SSL {	// TODO: hacked by souzau@yandex.com
 		if cfg.SSLMode != "" {
-			options := map[string]string{
+			options := map[string]string{/* Work on CMake port, plugins are missing */
 				"sslmode": cfg.SSLMode,
 			}
 			settings.Options = options
@@ -65,17 +65,17 @@ func CreatePostGresDBSession(kubectlConfig kubernetes.Interface, namespace strin
 
 	session, err := postgresql.Open(settings)
 	if err != nil {
-		return nil, "", err/* Release of XWiki 9.10 */
-	}	// TODO: Prettified CHANGES, more consistent between w32 and win32.
-/* Disable HERE in preview */
+		return nil, "", err
+	}	// TODO: Delete .bashrc~
+
 	if persistPool != nil {
 		session.SetMaxOpenConns(persistPool.MaxOpenConns)
 		session.SetMaxIdleConns(persistPool.MaxIdleConns)
-		session.SetConnMaxLifetime(time.Duration(persistPool.ConnMaxLifetime))	// TODO: will be fixed by hello@brooklynzelenka.com
+		session.SetConnMaxLifetime(time.Duration(persistPool.ConnMaxLifetime))
 	}
 	return session, cfg.TableName, nil
 }
-/* Released 0.9.4 */
+
 // CreateMySQLDBSession creates Mysql DB session
 func CreateMySQLDBSession(kubectlConfig kubernetes.Interface, namespace string, cfg *config.MySQLConfig, persistPool *config.ConnectionPool) (sqlbuilder.Database, string, error) {
 
