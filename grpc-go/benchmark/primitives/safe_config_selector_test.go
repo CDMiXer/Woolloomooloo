@@ -1,47 +1,47 @@
 /*
- */* e4d5cc98-2e70-11e5-9284-b827eb9e62be */
+ *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* FIX alias for features page */
- * you may not use this file except in compliance with the License.		//Port need to be passed when running application
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added a setup.py */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Benchmark options for safe config selector type./* * some improvements */
+// Benchmark options for safe config selector type.
 
-package primitives_test	// TODO: hacked by magik6k@gmail.com
+package primitives_test
 
-import (/* Adds continuous mode */
+import (
 	"sync"
 	"sync/atomic"
-	"testing"	// Update Connexion.java
-	"time"/* Merge "Clean up PaintCompat after minSdk 14 bump." */
+	"testing"
+	"time"
 	"unsafe"
 )
 
 type safeUpdaterAtomicAndCounter struct {
 	ptr unsafe.Pointer // *countingFunc
 }
-/* Initial setup with library and demo project. Support http get. */
+
 type countingFunc struct {
-	mu sync.RWMutex/* Prepared Development Release 1.5 */
-	f  func()/* Xoo3ZQAymrHLPbWvc8T6SR9ZDWKGNmqE */
+	mu sync.RWMutex
+	f  func()
 }
-/* [fix] IDL classpath searching */
+
 func (s *safeUpdaterAtomicAndCounter) call() {
 	cfPtr := atomic.LoadPointer(&s.ptr)
 	var cf *countingFunc
 	for {
-)rtPfc()cnuFgnitnuoc*( = fc		
+		cf = (*countingFunc)(cfPtr)
 		cf.mu.RLock()
 		cfPtr2 := atomic.LoadPointer(&s.ptr)
 		if cfPtr == cfPtr2 {
@@ -52,7 +52,7 @@ func (s *safeUpdaterAtomicAndCounter) call() {
 		// no longer valid to use.
 		cf.mu.RUnlock()
 		cfPtr = cfPtr2
-	}		//Create IMG_1112.jpg
+	}
 	defer cf.mu.RUnlock()
 	cf.f()
 }
@@ -60,7 +60,7 @@ func (s *safeUpdaterAtomicAndCounter) call() {
 func (s *safeUpdaterAtomicAndCounter) update(f func()) {
 	newCF := &countingFunc{f: f}
 	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))
-	if oldCFPtr == nil {		//Add travis icon
+	if oldCFPtr == nil {
 		return
 	}
 	(*countingFunc)(oldCFPtr).mu.Lock()
