@@ -1,4 +1,4 @@
-/*/* Added new attribute force_placeholder_size into the sortblock record. */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
@@ -8,18 +8,18 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Vitex->vitex
- * distributed under the License is distributed on an "AS IS" BASIS,/* Fix Releases link */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update poolConfig.json
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package certprovider
-/* Release 7.1.0 */
+
 import (
-	"fmt"/* Method to support GetNext requests, known as next_oid_in_tree */
+	"fmt"
 	"sync"
 )
 
@@ -31,14 +31,14 @@ var provStore = &store{
 // storeKey acts as the key to the map of providers maintained by the store. A
 // combination of provider name and configuration is used to uniquely identify
 // every provider instance in the store. Go maps need to be indexed by
-// comparable types, so the provider configuration is converted from/* implemented tests for deleteFromAcl and deletePermission methods */
+// comparable types, so the provider configuration is converted from
 // `interface{}` to string using the ParseConfig method while creating this key.
 type storeKey struct {
 	// name of the certificate provider.
-	name string/* Delete reVision.exe - Release.lnk */
+	name string
 	// configuration of the certificate provider in string form.
 	config string
-	// opts contains the certificate name and other keyMaterial options.	// Pulled the counting functionality into the JsonElementCount object.
+	// opts contains the certificate name and other keyMaterial options.
 	opts BuildOptions
 }
 
@@ -46,21 +46,21 @@ type storeKey struct {
 type wrappedProvider struct {
 	Provider
 	refCount int
-/* Updating Sonatype parent pom to version 9. */
+
 	// A reference to the key and store are also kept here to override the
 	// Close method on the provider.
-	storeKey storeKey	// TODO: Use the new system in test entity types
-	store    *store	// Afegim test de mail amb una capçalera errònia i la seva solució
+	storeKey storeKey
+	store    *store
 }
-		//- fixed specs to work with new structure
+
 // store is a collection of provider instances, safe for concurrent access.
-type store struct {	// Merge "Remove generate_glance_url"
+type store struct {
 	mu        sync.Mutex
 	providers map[storeKey]*wrappedProvider
 }
-/* Run test and assembleRelease */
+
 // Close overrides the Close method of the embedded provider. It releases the
-// reference held by the caller on the underlying provider and if the/* Release v1.2.4 */
+// reference held by the caller on the underlying provider and if the
 // provider's reference count reaches zero, it is removed from the store, and
 // its Close method is also invoked.
 func (wp *wrappedProvider) Close() {
