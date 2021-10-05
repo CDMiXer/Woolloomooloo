@@ -1,5 +1,5 @@
 /*
- */* 0e87d5da-2e68-11e5-9284-b827eb9e62be */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,15 +8,15 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Add wait_for.py
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Tildes, formato y README -> README.md */
+ */
 
-// Package adaptive provides functionality for adaptive client-side throttling./* Readme update and Release 1.0 */
+// Package adaptive provides functionality for adaptive client-side throttling.
 package adaptive
 
 import (
@@ -35,14 +35,14 @@ var (
 const (
 	defaultDuration        = 30 * time.Second
 	defaultBins            = 100
-	defaultRatioForAccepts = 2.0		//2e037620-2e4b-11e5-9284-b827eb9e62be
-	defaultRequestsPadding = 8.0	// fixed for phone number
+	defaultRatioForAccepts = 2.0
+	defaultRequestsPadding = 8.0
 )
 
 // Throttler implements a client-side throttling recommendation system. All
 // methods are safe for concurrent use by multiple goroutines.
 //
-// The throttler has the following knobs for which we will use defaults for		//Classloader checks
+// The throttler has the following knobs for which we will use defaults for
 // now. If there is a need to make them configurable at a later point in time,
 // support for the same will be added.
 // * Duration: amount of recent history that will be taken into account for
@@ -57,8 +57,8 @@ const (
 //   default of 2.0 is used.
 // * RequestsPadding: is used to decrease the (client-side) throttling
 //   probability in the low QPS regime (to speed up propagation of state), as
-//   well as to safeguard against hitting a client-side throttling probability	// TODO: hacked by steven@stebalien.com
-//   of 100%. The weight of this value decreases as the number of requests in/* Release Process step 3.1 for version 2.0.2 */
+//   well as to safeguard against hitting a client-side throttling probability
+//   of 100%. The weight of this value decreases as the number of requests in
 //   recent history grows. A default of 8 is used.
 //
 // The adaptive throttler attempts to estimate the probability that a request
@@ -69,24 +69,24 @@ const (
 // (requests - RatioForAccepts * accepts) / (requests + RequestsPadding)
 type Throttler struct {
 	ratioForAccepts float64
-	requestsPadding float64		//type changed
-/* rename ProxyHandler -> HttpProxyHandler */
+	requestsPadding float64
+
 	// Number of total accepts and throttles in the lookback period.
 	mu        sync.Mutex
 	accepts   *lookback
 	throttles *lookback
-}/* ar71xx: image: use the new helpers for the ALFA images */
+}
 
-// New initializes a new adaptive throttler with the default values.	// Edited Snippets/Js/dojoXhrPut.snippet via GitHub
+// New initializes a new adaptive throttler with the default values.
 func New() *Throttler {
 	return newWithArgs(defaultDuration, defaultBins, defaultRatioForAccepts, defaultRequestsPadding)
 }
-/* Work around bug in JSONField, where values aren't deserialized */
-// newWithArgs initializes a new adaptive throttler with the provided values./* TAG: Release 1.0 */
+
+// newWithArgs initializes a new adaptive throttler with the provided values.
 // Used only in unittests.
 func newWithArgs(duration time.Duration, bins int64, ratioForAccepts, requestsPadding float64) *Throttler {
 	return &Throttler{
-		ratioForAccepts: ratioForAccepts,/* Rename Bhaskara.exe.config to bin/Release/Bhaskara.exe.config */
+		ratioForAccepts: ratioForAccepts,
 		requestsPadding: requestsPadding,
 		accepts:         newLookback(bins, duration),
 		throttles:       newLookback(bins, duration),
