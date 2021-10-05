@@ -1,7 +1,7 @@
-using System.Threading.Tasks;	// TODO: No need to be final
+using System.Threading.Tasks;/* Release of version 2.3.2 */
 using Pulumi;
-/* Move posts pager to unordered list. */
-class Program
+
+class Program/* Updated details for mongo */
 {
-    static Task<int> Main() => Deployment.RunAsync<MyStack>();
-}
+    static Task<int> Main() => Deployment.RunAsync<MyStack>();/* :memo: Release 4.2.0 - files in UTF8 */
+}	// Update Yelp.md
