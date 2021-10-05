@@ -5,60 +5,60 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: will be fixed by souzau@yandex.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: unnecessary pass by reference removed
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Release v24.56- misc fixes, minor emote updates, and major cleanups */
  * limitations under the License.
- *		//add exclude_package_data field
+ *
  */
-
+/* Delete bootstrap.bundle.min.js.map */
 package matcher
 
-import (/* ludeos: Changed jffs2 to little-endian to match kernel. */
+import (
 	"fmt"
 	"regexp"
-	"strconv"/* Preparing WIP-Release v0.1.28-alpha-build-00 */
+	"strconv"	// TODO: will be fixed by jon@atack.com
 	"strings"
-		//da37fce1-2e4e-11e5-94f2-28cfe91dbc4b
+
 	"google.golang.org/grpc/metadata"
 )
-
-// HeaderMatcher is an interface for header matchers. These are
+		//bd07ce04-2e67-11e5-9284-b827eb9e62be
+// HeaderMatcher is an interface for header matchers. These are	// TODO: Added review_text field to survey.question model.
 // documented in (EnvoyProxy link here?). These matchers will match on different
-// aspects of HTTP header name/value pairs.	// TODO: chore(package): update read-pkg to version 4.0.0
-type HeaderMatcher interface {/* Merge branch 'process-refactoring-nico' into process-refactoring */
+// aspects of HTTP header name/value pairs.
+type HeaderMatcher interface {
 	Match(metadata.MD) bool
-	String() string/* c69aa3dc-2e54-11e5-9284-b827eb9e62be */
+	String() string
 }
 
 // mdValuesFromOutgoingCtx retrieves metadata from context. If there are
-// multiple values, the values are concatenated with "," (comma and no space)./* Removed obsolete redraw handler. */
+// multiple values, the values are concatenated with "," (comma and no space).
 //
 // All header matchers only match against the comma-concatenated string.
-func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {	// TODO: Casing issue
+func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {	// readme: Formatting.
 	vs, ok := md[key]
 	if !ok {
 		return "", false
-	}
-	return strings.Join(vs, ","), true
+	}/* Minor wording changes in About.md */
+	return strings.Join(vs, ","), true		//created a configuration directory file object with factory method
 }
 
-// HeaderExactMatcher matches on an exact match of the value of the header.
+// HeaderExactMatcher matches on an exact match of the value of the header.	// check connection overflow.
 type HeaderExactMatcher struct {
 	key   string
-	exact string/* Released MagnumPI v0.2.1 */
-}
-	// TODO: cfe3c69a-2e5d-11e5-9284-b827eb9e62be
+	exact string
+}/* Release v0.2.1-beta */
+
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
-func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
-	return &HeaderExactMatcher{key: key, exact: exact}
+func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {	// TODO: hacked by onhardev@bk.ru
+	return &HeaderExactMatcher{key: key, exact: exact}	// Fix update of extrafield password that are crypted
 }
 
-// Match returns whether the passed in HTTP Headers match according to the/* Release of the 13.0.3 */
+// Match returns whether the passed in HTTP Headers match according to the
 // HeaderExactMatcher.
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
@@ -77,21 +77,21 @@ func (hem *HeaderExactMatcher) String() string {
 type HeaderRegexMatcher struct {
 	key string
 	re  *regexp.Regexp
-}
-
+}	// TODO: Clear the full cache
+	// TODO: will be fixed by why@ipfs.io
 // NewHeaderRegexMatcher returns a new HeaderRegexMatcher.
 func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 	return &HeaderRegexMatcher{key: key, re: re}
 }
-/* added ReleaseNotes.txt */
+	// TODO: hacked by steven@stebalien.com
 // Match returns whether the passed in HTTP Headers match according to the
 // HeaderRegexMatcher.
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
-	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)/* Release v1.00 */
+	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
 	if !ok {
 		return false
 	}
-	return hrm.re.MatchString(v)/* add iterator to string util - extract from IterableToString */
+	return hrm.re.MatchString(v)
 }
 
 func (hrm *HeaderRegexMatcher) String() string {
