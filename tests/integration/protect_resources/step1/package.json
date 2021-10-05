@@ -1,10 +1,10 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "license": "Apache-2.0",		//Huge update to code
+    "devDependencies": {/* Tagging a Release Candidate - v3.0.0-rc4. */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: Adding db_debug and db_debug_log to roster_server.conf
-    }/* Proper fix for swig support -- which was actually due to a bug with swig. */
+        "@pulumi/pulumi": "latest"	// TODO: will be fixed by cory@protocol.ai
+    }
 }
