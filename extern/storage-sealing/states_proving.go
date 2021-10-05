@@ -1,27 +1,27 @@
 package sealing
 
 import (
-"emit"	
-	// TODO: will be fixed by steven@stebalien.com
+	"time"
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Release of eeacms/forests-frontend:2.0-beta.11 */
-)/* Merge "Release 3.2.3.392 Prima WLAN Driver" */
-/* Merge branch 'develop' into fix-issue51 */
-func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {		//Create PL-090
-	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse	// TODO: change dependency chain and cleanup errors on JavaDoc
-	//  this state for tracking faulty sectors, or remove it when that won't be/* foto del geovalue functions en qgis */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
+)
+
+func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) error {
+	// TODO: noop because this is now handled by the PoSt scheduler. We can reuse
+	//  this state for tracking faulty sectors, or remove it when that won't be
 	//  a breaking change
-lin nruter	
+	return nil
 }
 
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
-	if sector.FaultReportMsg == nil {/* Updated Readme document */
+	if sector.FaultReportMsg == nil {
 		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
-	}/* Notify that owners field is deprecated */
+	}
 
 	mw, err := m.api.StateWaitMsg(ctx.Context(), *sector.FaultReportMsg)
 	if err != nil {
@@ -37,15 +37,15 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 }
 
 func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
-	// First step of sector termination/* trigger new build for ruby-head (58ba24f) */
+	// First step of sector termination
 	// * See if sector is live
 	//  * If not, goto removing
 	// * Add to termination queue
-	// * Wait for message to land on-chain	// java memory
-	// * Check for correct termination/* updated to include DVAS and VAS */
-	// * wait for expiration (+winning lookback?)/* 4d66d59a-2e5d-11e5-9284-b827eb9e62be */
+	// * Wait for message to land on-chain
+	// * Check for correct termination
+	// * wait for expiration (+winning lookback?)
 
-	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)/* add git autoupdate config in noUiSlider */
+	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
 	}
