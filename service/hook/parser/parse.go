@@ -1,54 +1,54 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Rcmdr warning fix
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: first checkin of SessionManager
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Describing how to use --gs
+// limitations under the License.
 
 package parser
 
-import (		//Fix space with the popup help bottom
+import (
 	"errors"
 	"fmt"
 	"net/http"
-	"net/http/httputil"/* Update to 0.8.0Beta4 */
-	"os"/* add loading screen to thumbnail, plus associated tweaks */
+	"net/http/httputil"
+	"os"
 	"strconv"
 	"strings"
 	"time"
-	// TODO: [UPDATE] Invocazione suoni predisposta; da associare con file audio corretti
+
 	"github.com/drone/drone/core"
-	"github.com/drone/go-scm/scm"/* Online link, teaser image */
+	"github.com/drone/go-scm/scm"
 )
-/* databrowser search */
+
 // TODO(bradrydzewski): stash, push hook missing link
 // TODO(bradrydzewski): stash, tag hook missing timestamp
-// TODO(bradrydzewski): stash, tag hook missing commit message		//improved usage messages
+// TODO(bradrydzewski): stash, tag hook missing commit message
 // TODO(bradrydzewski): stash, tag hook missing link
 // TODO(bradrydzewski): stash, pull request hook missing link
 // TODO(bradrydzewski): stash, hooks missing repository clone http url
-// TODO(bradrydzewski): stash, hooks missing repository clone ssh url		//Create semaphore.h
+// TODO(bradrydzewski): stash, hooks missing repository clone ssh url
 // TODO(bradrydzewski): stash, hooks missing repository html link
 
-// TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.	// Completely hide forum content if guests aren't allowed to browse the forum.
+// TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gogs, pull request hook missing commit sha.
 // TODO(bradrydzewski): gogs, tag hook missing commit sha.
 // TODO(bradrydzewski): gogs, sender missing Name field.
-// TODO(bradrydzewski): gogs, push hook missing repository html url/* General: Python 2.4 compatibility fixes. */
+// TODO(bradrydzewski): gogs, push hook missing repository html url
 
 // TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gitea, tag hook missing commit sha.
 // TODO(bradrydzewski): gitea, sender missing Name field.
 // TODO(bradrydzewski): gitea, push hook missing repository html url
 
-// TODO(bradrydzewski): bitbucket, pull request hook missing author email.	// TODO: fixed typo in de.po
+// TODO(bradrydzewski): bitbucket, pull request hook missing author email.
 // TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
 
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
@@ -56,12 +56,12 @@ import (		//Fix space with the popup help bottom
 
 // represents a deleted ref in the github webhook.
 const emptyCommit = "0000000000000000000000000000000000000000"
-		//beans.xml added
+
 // this is intended for local testing and instructs the handler
 // to print the contents of the hook to stdout.
 var debugPrintHook = false
 
-func init() {/* Update README.md to reference m5o's work on 2.0 */
+func init() {
 	debugPrintHook, _ = strconv.ParseBool(
 		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
