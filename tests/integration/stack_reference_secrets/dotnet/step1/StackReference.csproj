@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,4 +9,4 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
 
-</Project>
+</Project>	// TODO: hacked by admin@multicoin.co
