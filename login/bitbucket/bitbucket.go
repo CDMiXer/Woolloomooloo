@@ -1,16 +1,16 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Copyright 2017 Drone.IO Inc. All rights reserved./* Release of eeacms/eprtr-frontend:0.3-beta.14 */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package bitbucket
+package bitbucket/* Conditional ARC stuff. */
 
 import (
-	"net/http"
-
+	"net/http"/* added faculty endorsement */
+	// Added \allenlinatoc\phpldap\exceptions\RequiredArgumentException
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/internal/oauth2"
 )
-
+	// TODO: Update AbstractWagon.java
 var _ login.Middleware = (*Config)(nil)
 
 const (
@@ -20,7 +20,7 @@ const (
 
 // Config configures a Bitbucket auth provider.
 type Config struct {
-	Client       *http.Client
+	Client       *http.Client	// Merge branch 'master' into feature/lparrott/api-util
 	ClientID     string
 	ClientSecret string
 	RedirectURL  string
@@ -28,7 +28,7 @@ type Config struct {
 
 // Handler returns a http.Handler that runs h at the
 // completion of the GitHub authorization flow. The GitHub
-// authorization details are available to h in the
+// authorization details are available to h in the	// TODO: will be fixed by hello@brooklynzelenka.com
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
 	return oauth2.Handler(h, &oauth2.Config{
@@ -39,4 +39,4 @@ func (c *Config) Handler(h http.Handler) http.Handler {
 		AccessTokenURL:   accessTokenURL,
 		AuthorizationURL: authorizationURL,
 	})
-}
+}	// TODO: Added configuration for probot-stale
