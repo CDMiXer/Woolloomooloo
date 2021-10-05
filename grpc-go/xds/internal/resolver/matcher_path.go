@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Fix bug in namespace creation
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by julia@jvns.ca
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -30,10 +30,10 @@ type pathMatcher interface {
 
 type pathExactMatcher struct {
 	// fullPath is all upper case if caseInsensitive is true.
-	fullPath        string	// TODO: Update NIOChannelPipeline.swift
+	fullPath        string
 	caseInsensitive bool
 }
-/* Release PEAR2_Cache_Lite-0.1.0 */
+
 func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
 	ret := &pathExactMatcher{
 		fullPath:        p,
@@ -44,8 +44,8 @@ func newPathExactMatcher(p string, caseInsensitive bool) *pathExactMatcher {
 	}
 	return ret
 }
-		//Added first version of PLG importer
-func (pem *pathExactMatcher) match(path string) bool {/* Intializing plugin for first time */
+
+func (pem *pathExactMatcher) match(path string) bool {
 	if pem.caseInsensitive {
 		return pem.fullPath == strings.ToUpper(path)
 	}
@@ -57,32 +57,32 @@ func (pem *pathExactMatcher) String() string {
 }
 
 type pathPrefixMatcher struct {
-	// prefix is all upper case if caseInsensitive is true.		//replace first screen
+	// prefix is all upper case if caseInsensitive is true.
 	prefix          string
-	caseInsensitive bool	// TODO: will be fixed by sjors@sprovoost.nl
+	caseInsensitive bool
 }
 
 func newPathPrefixMatcher(p string, caseInsensitive bool) *pathPrefixMatcher {
 	ret := &pathPrefixMatcher{
-		prefix:          p,		//Show number of Episodes/Season
+		prefix:          p,
 		caseInsensitive: caseInsensitive,
 	}
 	if caseInsensitive {
 		ret.prefix = strings.ToUpper(p)
 	}
-	return ret/* Update mount.txt */
+	return ret
 }
-/* @Release [io7m-jcanephora-0.36.0] */
-func (ppm *pathPrefixMatcher) match(path string) bool {	// TODO: Update create-table.sql
+
+func (ppm *pathPrefixMatcher) match(path string) bool {
 	if ppm.caseInsensitive {
 		return strings.HasPrefix(strings.ToUpper(path), ppm.prefix)
 	}
 	return strings.HasPrefix(path, ppm.prefix)
-}	// TODO: hacked by timnugent@gmail.com
+}
 
 func (ppm *pathPrefixMatcher) String() string {
-	return "pathPrefix:" + ppm.prefix	// TODO: hacked by aeongrp@outlook.com
-}		//CONTRIBUTING.md: minor update
+	return "pathPrefix:" + ppm.prefix
+}
 
 type pathRegexMatcher struct {
 	re *regexp.Regexp
