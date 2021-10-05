@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: Create unwanted-Run_Registry-list.txt
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,35 +14,35 @@
 
 package deploytest
 
-import (	// Merge pull request #511 from vomikan/HTML_scaling
-"tmf"	
+import (
+	"fmt"
 
 	"github.com/blang/semver"
-	uuid "github.com/gofrs/uuid"/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
+	uuid "github.com/gofrs/uuid"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: will be fixed by jon@atack.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 type Provider struct {
 	Name    string
-	Package tokens.Package/* Release 0.9.9. */
+	Package tokens.Package
 	Version semver.Version
-		//update test Specs
+
 	Config     resource.PropertyMap
 	configured bool
-/* - april enum update */
-	GetSchemaF func(version int) ([]byte, error)/* Rename Release.md to RELEASE.md */
+
+	GetSchemaF func(version int) ([]byte, error)
 
 	CheckConfigF func(urn resource.URN, olds,
 		news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error)
 	DiffConfigF func(urn resource.URN, olds, news resource.PropertyMap,
 		ignoreChanges []string) (plugin.DiffResult, error)
 	ConfigureF func(news resource.PropertyMap) error
-/* implemented memoize, memoized user album */
+
 	CheckF func(urn resource.URN,
 		olds, news resource.PropertyMap) (resource.PropertyMap, []plugin.CheckFailure, error)
 	DiffF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap,
@@ -52,16 +52,16 @@ type Provider struct {
 	UpdateF func(urn resource.URN, id resource.ID, olds, news resource.PropertyMap, timeout float64,
 		ignoreChanges []string, preview bool) (resource.PropertyMap, resource.Status, error)
 	DeleteF func(urn resource.URN, id resource.ID, olds resource.PropertyMap, timeout float64) (resource.Status, error)
-	ReadF   func(urn resource.URN, id resource.ID,/* Se empalma el validador con la extension */
+	ReadF   func(urn resource.URN, id resource.ID,
 		inputs, state resource.PropertyMap) (plugin.ReadResult, resource.Status, error)
 
-	ConstructF func(monitor *ResourceMonitor, typ, name string, parent resource.URN, inputs resource.PropertyMap,/* Fixed close behaviour. */
+	ConstructF func(monitor *ResourceMonitor, typ, name string, parent resource.URN, inputs resource.PropertyMap,
 		options plugin.ConstructOptions) (plugin.ConstructResult, error)
-/* cleanup default recipe */
+
 	InvokeF func(tok tokens.ModuleMember,
 		inputs resource.PropertyMap) (resource.PropertyMap, []plugin.CheckFailure, error)
-		//update-innovo-sponsor
-	CancelF func() error/* SRAMP-428 jdbc connection pooling */
+
+	CancelF func() error
 }
 
 func (prov *Provider) SignalCancellation() error {
