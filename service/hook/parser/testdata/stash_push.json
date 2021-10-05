@@ -1,33 +1,33 @@
 {
-    "Ref": "refs/heads/master",/* Merge "Release notes for "Browser support for IE8 from Grade A to Grade C"" */
+    "Ref": "refs/heads/master",
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",	// Some fixes to the firewall library detection in configure.ac
+        "Branch": "master",
         "Private": true,
-        "Clone": "",/* Widget: Release surface if root window is NULL. */
+        "Clone": "",
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {		//refactor(portal): Add header. Fix flow types. Rename callback prop.
+    "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
         "Message": "",
-        "Author": {/* tpm2_policyor.c: Aptly renaming structures per the tool name */
+        "Author": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },		//MISC: Fix some indents/formatting
+        },
         "Committer": {
             "Name": "Jane Citizen",
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
-            "Login": "jcitizen",/* oxTrustissue #356 : Update in email message. */
+            "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Link": ""
@@ -36,6 +36,6 @@
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: revset: fix call to ctx.extra() in closed()
-    }		//Show exercise description at top of all the pages.
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+    }
 }
