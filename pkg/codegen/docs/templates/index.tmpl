@@ -1,7 +1,7 @@
 ---
-title: "{{ .Title }}"/* Merge "Fix brctl calls" */
+title: "{{ .Title }}"
 title_tag: "{{ .TitleTag }}"
-meta_desc: "{{ .PackageDescription }}"		//Pom fixes, and move to dep-loader system, no pack-in libs
+meta_desc: "{{ .PackageDescription }}"
 {{- if .Menu }}
 menu:
     reference:
@@ -17,13 +17,13 @@ menu:
     This comment ensures that there is always a new-line between the
     package description and the start of the headers. This comment
     will not be included in the generated markdown.
--->		//removed Tagit's url since it's not live anymore
+-->
 
 {{- if ne (len .Modules) 0 -}}
 {{ template "index_modules" .Modules }}
 {{ end }}
-		//updating more tabs v spaces
-{{- if ne (len .Resources) 0 -}}/* first prototype of SatzFactory */
+
+{{- if ne (len .Resources) 0 -}}
 {{ template "index_resources" .Resources }}
 {{ end }}
 
@@ -33,4 +33,4 @@ menu:
 
 {{- template "package_details" .PackageDetails }}
 
-{{ template "language_sdk_links" .LanguageLinks }}/* Release 2.66 */
+{{ template "language_sdk_links" .LanguageLinks }}
