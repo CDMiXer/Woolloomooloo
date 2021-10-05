@@ -5,5 +5,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}	// TODO: will be fixed by jon@atack.com
+    }	// TODO: Добавил вывод сообщения о незагруженном модуле app.
+}
