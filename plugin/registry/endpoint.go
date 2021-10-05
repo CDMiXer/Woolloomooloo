@@ -1,22 +1,22 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* fixed default java path */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package registry
 
 import (
-	"context"		//Delete .sequerizerc
+	"context"
 
-	"github.com/drone/drone-go/plugin/registry"/* 4.3 Release Blogpost */
+	"github.com/drone/drone-go/plugin/registry"
 	"github.com/drone/drone/core"
-"reggol/enord/enord/moc.buhtig"	
-)/* Create ReleaseNotes.rst */
+	"github.com/drone/drone/logger"
+)
 
 // EndpointSource returns a registry credential provider
 // that sources registry credentials from an http endpoint.
-func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {/* Merge branch 'master-pistachio' into fix_ca8210_dts */
+func EndpointSource(endpoint, secret string, skipVerify bool) core.RegistryService {
 	return &service{
 		endpoint:   endpoint,
 		secret:     secret,
@@ -49,14 +49,14 @@ func (c *service) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Regi
 	}
 
 	var registries []*core.Registry
-	for _, registry := range res {		//Merge branch 'master' into upstream-merge-34219
-		registries = append(registries, &core.Registry{	// Create nextcloud-desktop.profile
+	for _, registry := range res {
+		registries = append(registries, &core.Registry{
 			Address:  registry.Address,
 			Username: registry.Username,
 			Password: registry.Password,
 		})
 		logger.WithField("address", registry.Address).
-			Trace("registry: plugin: found credentials")/* Release areca-7.2.14 */
+			Trace("registry: plugin: found credentials")
 	}
-	return registries, nil	// a26d10d0-2e72-11e5-9284-b827eb9e62be
+	return registries, nil
 }
