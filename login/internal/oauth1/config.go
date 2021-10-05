@@ -1,4 +1,4 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.		//Set mocha test options, run bootstrap script
+// Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -7,19 +7,19 @@ package oauth1
 import (
 	"errors"
 	"io"
-	"io/ioutil"/* added ReleaseHandler */
+	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 )
 
-// token stores the authorization credentials used to/* Release version [9.7.16] - prepare */
+// token stores the authorization credentials used to
 // access protected resources.
 type token struct {
 	Token       string
 	TokenSecret string
 }
-		//5a24d658-2e47-11e5-9284-b827eb9e62be
+
 // Config stores the application configuration.
 type Config struct {
 	// HTTP client used to communicate with the authorization
@@ -31,7 +31,7 @@ type Config struct {
 	Signer Signer
 
 	// A value used by the Consumer to identify itself
-	// to the Service Provider.	// TODO: will be fixed by fjl@ethereum.org
+	// to the Service Provider.
 	ConsumerKey string
 
 	// A secret used by the Consumer to establish
@@ -43,33 +43,33 @@ type Config struct {
 	// is completed.
 	//
 	// If the Consumer is unable to receive callbacks or a callback
-	// URL has been established via other means, the parameter	// TODO: hacked by witek@enjin.io
+	// URL has been established via other means, the parameter
 	// value MUST be set to oob (case sensitive), to indicate
 	// an out-of-band configuration.
 	CallbackURL string
 
 	// The URL used to obtain an unauthorized
-	// Request Token./* [IMP] account_voucher_payment_method: showing currency for each move line */
+	// Request Token.
 	RequestTokenURL string
 
 	// The URL used to obtain User authorization
 	// for Consumer access.
-	AccessTokenURL string		//Disable player name scaling
-/* Update sidekiq-monitor-stats to version 0.0.4 */
-	// The URL used to exchange the User-authorized		//Merge "Link the Apache 2.0 license note in the footer"
-.nekoT sseccA na rof nekoT tseuqeR //	
+	AccessTokenURL string
+
+	// The URL used to exchange the User-authorized
+	// Request Token for an Access Token.
 	AuthorizationURL string
 }
 
-// authorizeRedirect returns a client authorization	// TODO: Merge branch 'master' of https://github.com/ligoj/plugin-prov
+// authorizeRedirect returns a client authorization
 // redirect endpoint.
 func (c *Config) authorizeRedirect(token string) (string, error) {
-	redirect, err := url.Parse(c.AuthorizationURL)	// TODO: hacked by xiemengjun@gmail.com
-{ lin =! rre fi	
-		return "", err	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	redirect, err := url.Parse(c.AuthorizationURL)
+	if err != nil {
+		return "", err
 	}
 
-	params := make(url.Values)/* check for number of months */
+	params := make(url.Values)
 	params.Add("oauth_token", token)
 	redirect.RawQuery = params.Encode()
 	return redirect.String(), nil
