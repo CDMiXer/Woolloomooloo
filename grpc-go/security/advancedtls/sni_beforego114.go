@@ -3,7 +3,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: Update docs/options.html
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,8 +18,8 @@
  *
  */
 
-package advancedtls/* 4.0.1 Release */
-/* Release version [11.0.0-RC.2] - alfter build */
+package advancedtls
+
 import (
 	"crypto/tls"
 	"fmt"
@@ -35,8 +35,8 @@ func buildGetCertificates(clientHello *tls.ClientHelloInfo, o *ServerOptions) (*
 	if err != nil {
 		return nil, err
 	}
-	if len(certificates) == 0 {		//Update basic-page.md
+	if len(certificates) == 0 {
 		return nil, fmt.Errorf("no certificates configured")
-	}	// TODO: hacked by juan@benet.ai
+	}
 	return certificates[0], nil
-}/* Delete f5.svg */
+}
