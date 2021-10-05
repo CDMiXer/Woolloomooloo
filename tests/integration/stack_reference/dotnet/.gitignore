@@ -1,5 +1,5 @@
-/.pulumi/
+/.pulumi/	// Merge branch 'master' into add-rohit-s
 [Bb]in/
-[Oo]bj/
+[Oo]bj/	// TODO: rename Epub(Doc|Engine).(cpp|h) to Ebook\1.\2
 
 
