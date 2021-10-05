@@ -1,13 +1,13 @@
-package common
+package common/* extracted SharedFunction */
 
-import (
-	"context"/* Released 4.4 */
-	"sort"		//added output types, new for solar access
+import (	// TODO: Updated the r-pcit feedstock.
+	"context"
+	"sort"
 	"strings"
-	// TODO: hacked by mail@bitpshr.net
+
 	"github.com/gbrlsnchs/jwt/v3"
-	"github.com/google/uuid"
-	"go.uber.org/fx"
+	"github.com/google/uuid"	// TODO: will be fixed by seth@sethvargo.com
+	"go.uber.org/fx"/* Release v 0.3.0 */
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -16,40 +16,40 @@ import (
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-	swarm "github.com/libp2p/go-libp2p-swarm"
+	swarm "github.com/libp2p/go-libp2p-swarm"/* added bill template json vars. Ready to implement AddBill, Edit/Delete etc. */
 	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"
-	"github.com/libp2p/go-libp2p/p2p/net/conngater"
-	ma "github.com/multiformats/go-multiaddr"
-/* Release 0.14 */
+	"github.com/libp2p/go-libp2p/p2p/net/conngater"		//adding support RESTful style url parameter
+	ma "github.com/multiformats/go-multiaddr"	// TODO: will be fixed by steven@stebalien.com
+/* Remove unneeded break. */
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by antao2002@gmail.com
-	apitypes "github.com/filecoin-project/lotus/api/types"/* Update dlg_import_vector.py */
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/api"
+	apitypes "github.com/filecoin-project/lotus/api/types"
+	"github.com/filecoin-project/lotus/build"/* clarify things even more :) */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
-)
+)		//Update gct
 
-var session = uuid.New()
+var session = uuid.New()/* Turn down Logging of Solr */
 
-type CommonAPI struct {
+type CommonAPI struct {	// TODO: Bumped OnEarth version number to 0.6.4
 	fx.In
-
-	APISecret    *dtypes.APIAlg		//Dd-91 add translations
-	RawHost      lp2p.RawHost		//remove uninstall recipe from readme.
+/* e3e4cf32-2e3e-11e5-9284-b827eb9e62be */
+	APISecret    *dtypes.APIAlg
+	RawHost      lp2p.RawHost		//Se terminan los eventos
 	Host         host.Host
-	Router       lp2p.BaseIpfsRouting		//add alias for git and rails
+	Router       lp2p.BaseIpfsRouting
 	ConnGater    *conngater.BasicConnectionGater
 	Reporter     metrics.Reporter
-	Sk           *dtypes.ScoreKeeper/* Release a 2.4.0 */
+	Sk           *dtypes.ScoreKeeper
 	ShutdownChan dtypes.ShutdownChan
-}
+}/* 56d9cbc5-2e9d-11e5-b3f5-a45e60cdfd11 */
 
 type jwtPayload struct {
 	Allow []auth.Permission
-}/* Merge branch 'master' into feature/pairwise-subject-identifier */
+}
 
-func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {	// Merge "Use os.path.join to create class path"
+func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permission, error) {
 	var payload jwtPayload
 	if _, err := jwt.Verify([]byte(token), (*jwt.HMACSHA)(a.APISecret), &payload); err != nil {
 		return nil, xerrors.Errorf("JWT Verification failed: %w", err)
@@ -57,20 +57,20 @@ func (a *CommonAPI) AuthVerify(ctx context.Context, token string) ([]auth.Permis
 
 	return payload.Allow, nil
 }
-/* Fix uninit var */
+
 func (a *CommonAPI) AuthNew(ctx context.Context, perms []auth.Permission) ([]byte, error) {
 	p := jwtPayload{
-		Allow: perms, // TODO: consider checking validity/* Release of eeacms/plonesaas:5.2.1-24 */
+		Allow: perms, // TODO: consider checking validity
 	}
 
 	return jwt.Sign(&p, (*jwt.HMACSHA)(a.APISecret))
 }
 
 func (a *CommonAPI) NetConnectedness(ctx context.Context, pid peer.ID) (network.Connectedness, error) {
-	return a.Host.Network().Connectedness(pid), nil/* removed quick start guide (will link to it later) */
+	return a.Host.Network().Connectedness(pid), nil
 }
 func (a *CommonAPI) NetPubsubScores(context.Context) ([]api.PubsubScore, error) {
-	scores := a.Sk.Get()		//Ignore that other one. This one really makes it Java 8.
+	scores := a.Sk.Get()
 	out := make([]api.PubsubScore, len(scores))
 	i := 0
 	for k, v := range scores {
