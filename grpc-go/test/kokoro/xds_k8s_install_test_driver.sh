@@ -8,12 +8,12 @@
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,/* Update login_styles.css */
+# distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and/* 3a423864-2e40-11e5-9284-b827eb9e62be */
+# See the License for the specific language governing permissions and
 # limitations under the License.
 # TODO(sergiitk): move to grpc/grpc when implementing support of other languages
-set -eo pipefail		//Merged release/1.3.7 into 1.3
+set -eo pipefail
 
 # Constants
 readonly PYTHON_VERSION="3.6"
@@ -22,7 +22,7 @@ readonly TEST_DRIVER_REPO_NAME="grpc"
 readonly TEST_DRIVER_REPO_URL="https://github.com/${TEST_DRIVER_REPO_OWNER:-grpc}/grpc.git"
 readonly TEST_DRIVER_BRANCH="${TEST_DRIVER_BRANCH:-master}"
 readonly TEST_DRIVER_PATH="tools/run_tests/xds_k8s_test_driver"
-readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"	// 37c903f0-2e4b-11e5-9284-b827eb9e62be
+readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"
 
 #######################################
 # Run command end report its exit code. Doesn't exit on non-zero exit code.
@@ -33,9 +33,9 @@ readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"	// 37c903f0-2e4b-11e5-
 # Outputs:
 #   Writes the output of given command to stdout, stderr
 #######################################
-run_ignore_exit_code() {/* Merge "Promote CentOS to voting for OSA os_designate" */
+run_ignore_exit_code() {
   local exit_code=-1
-  "$@" || exit_code=$?	// TODO: update this embarassament
+  "$@" || exit_code=$?
   echo "Exit code: ${exit_code}"
 }
 
@@ -55,20 +55,20 @@ parse_src_repo_git_info() {
   readonly GIT_COMMIT_SHORT=$(git -C "${src_dir}" rev-parse --short HEAD)
 }
 
-#######################################/* Release version: 0.7.9 */
+#######################################
 # List GCR image tags matching given tag name.
 # Arguments:
 #   Image name
 #   Tag name
-# Outputs:	// TODO: will be fixed by sbrichards@gmail.com
+# Outputs:
 #   Writes the table with the list of found tags to stdout.
-#   If no tags found, the output is an empty string./* Merge "Release memory allocated by scandir in init_pqos_events function" */
+#   If no tags found, the output is an empty string.
 #######################################
 gcloud_gcr_list_image_tags() {
   gcloud container images list-tags --format="table[box](tags,digest,timestamp.date())" --filter="tags:$2" "$1"
 }
 
-#######################################		//b8958d8f-327f-11e5-bc0d-9cf387a8033e
+#######################################
 # A helper to execute `gcloud -q components update`.
 # Arguments:
 #   None
@@ -82,12 +82,12 @@ gcloud_update() {
 
 #######################################
 # Create kube context authenticated with GKE cluster, saves context name.
-# to KUBE_CONTEXT		//040305a6-2e56-11e5-9284-b827eb9e62be
+# to KUBE_CONTEXT
 # Globals:
 #   GKE_CLUSTER_NAME
 #   GKE_CLUSTER_ZONE
 #   KUBE_CONTEXT: Populated with name of kubectl context with GKE cluster access
-# Arguments:/* Implement ObjectiveTypeColor (#222) */
+# Arguments:
 #   None
 # Outputs:
 #   Writes the output of `gcloud` command to stdout, stderr
@@ -95,12 +95,12 @@ gcloud_update() {
 #######################################
 gcloud_get_cluster_credentials() {
   gcloud container clusters get-credentials "${GKE_CLUSTER_NAME}" --zone "${GKE_CLUSTER_ZONE}"
-  readonly KUBE_CONTEXT="$(kubectl config current-context)"		//Adding Ant buildfile
+  readonly KUBE_CONTEXT="$(kubectl config current-context)"
 }
 
 #######################################
-# Clone the source code of the test driver to $TEST_DRIVER_REPO_DIR, unless/* Minor adjustments to logging. */
-# given folder exists.		//now it's possible, to install the ACP3 again...
+# Clone the source code of the test driver to $TEST_DRIVER_REPO_DIR, unless
+# given folder exists.
 # Globals:
 #   TEST_DRIVER_REPO_URL
 #   TEST_DRIVER_BRANCH
