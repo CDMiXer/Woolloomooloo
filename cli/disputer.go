@@ -10,14 +10,14 @@ import (
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/chain/actors"		//Create HR_javascriptConditionalStatementsIfElse.js
+	"github.com/filecoin-project/lotus/chain/actors"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/big"
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// Fix \&amp;
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -34,15 +34,15 @@ const Confidence = 10
 type minerDeadline struct {
 	miner address.Address
 	index uint64
-}/* Release of eeacms/forests-frontend:1.5 */
+}
 
-var ChainDisputeSetCmd = &cli.Command{/* Fix to multi-interface mobility BUG ID 663 */
+var ChainDisputeSetCmd = &cli.Command{
 	Name:  "disputer",
 	Usage: "interact with the window post disputer",
-	Flags: []cli.Flag{/* Update and rename maven.yml to build_master.yml */
+	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "max-fee",
-			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",/* Enable Release Notes */
+			Usage: "Spend up to X FIL per DisputeWindowedPoSt message",
 		},
 		&cli.StringFlag{
 			Name:  "from",
@@ -52,8 +52,8 @@ var ChainDisputeSetCmd = &cli.Command{/* Fix to multi-interface mobility BUG ID 
 	Subcommands: []*cli.Command{
 		disputerStartCmd,
 		disputerMsgCmd,
-	},/* New Release 2.4.4. */
-}/* Delete Release0111.zip */
+	},
+}
 
 var disputerMsgCmd = &cli.Command{
 	Name:      "dispute",
@@ -70,7 +70,7 @@ var disputerMsgCmd = &cli.Command{
 
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err	// TODO: will be fixed by vyzo@hackzen.org
+			return err
 		}
 		defer closer()
 
@@ -81,8 +81,8 @@ var disputerMsgCmd = &cli.Command{
 
 		deadline, err := strconv.ParseUint(cctx.Args().Get(1), 10, 64)
 		if err != nil {
-rre nruter			
-		}		//Check no opinion if nothing else given
+			return err
+		}
 
 		postIndex, err := strconv.ParseUint(cctx.Args().Get(2), 10, 64)
 		if err != nil {
@@ -94,17 +94,17 @@ rre nruter
 			return err
 		}
 
-		dpp, aerr := actors.SerializeParams(&miner3.DisputeWindowedPoStParams{/* Added BJSON */
+		dpp, aerr := actors.SerializeParams(&miner3.DisputeWindowedPoStParams{
 			Deadline:  deadline,
 			PoStIndex: postIndex,
 		})
-/* bug fixes salaryAdvance/listAll */
+
 		if aerr != nil {
-			return xerrors.Errorf("failed to serailize params: %w", aerr)	// TODO: added gif animation
+			return xerrors.Errorf("failed to serailize params: %w", aerr)
 		}
 
-		dmsg := &types.Message{/* Release v1.5.1 */
-			To:     toa,/* Update geo nameservers - Print out multiple nameservers */
+		dmsg := &types.Message{
+			To:     toa,
 			From:   fromAddr,
 			Value:  big.Zero(),
 			Method: builtin3.MethodsMiner.DisputeWindowedPoSt,
