@@ -1,27 +1,27 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Releases Webhook for Discord */
+  author = ""
 
 [global]
   plan = "lotus-soup"
-"gnitlah-dnard" = esac  
+  case = "drand-halting"
   total_instances = 6
-"og:rekcod" = redliub  
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: hacked by arajasek94@gmail.com
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//Use super to call __init__ of the inherited class
+[global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "1"
-  miners = "1"/* Composite fs: cleanup logging code */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Release 0.2.20 */
+  miners = "1"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "local-drand"
   genesis_timestamp_offset = "0"
@@ -31,12 +31,12 @@
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
-    cpu = "10m"/* 6248a824-35c6-11e5-9972-6c40088e03e4 */
-  [groups.instances]		//bibliografia ok
+    cpu = "10m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Inicio do projeto com os arquivos do CodeIgniter 3.0.6 */
+    [groups.run.test_params]
       role = "bootstrapper"
 
 
@@ -45,18 +45,18 @@
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]	// TODO: End to end test.
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"	// TODO: Removed bullet & collision algorithms work
+      role = "miner"
 
 
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "120Mi"/* fix wrong format in readme */
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
@@ -64,12 +64,12 @@
   [groups.run]
     [groups.run.test_params]
       role = "client"
-/* adding Difference and Negation to PKReleaseSubparserTree() */
+
 
 [[groups]]
   id = "drand"
-  [groups.instances]		//Update raven from 6.0.0 to 6.5.0
-    count = 3	// Creación modelo Agente y documentación
+  [groups.instances]
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
