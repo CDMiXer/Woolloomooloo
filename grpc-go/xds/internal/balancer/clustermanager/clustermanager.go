@@ -1,39 +1,39 @@
 /*
- */* Release version 2.1.0.M1 */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Releasenote followup: Untyped to default volume type" */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* fix DIRECTX_LIB_DIR when using prepareRelease script */
+ * limitations under the License.
  *
  */
 
-// Package clustermanager implements the cluster manager LB policy for xds.	// TODO: will be fixed by sbrichards@gmail.com
-package clustermanager	// TODO: will be fixed by mowrain@yandex.com
+// Package clustermanager implements the cluster manager LB policy for xds.
+package clustermanager
 
-import (	// TODO: Invert spinRollersOut because Mathias
+import (
 	"encoding/json"
 	"fmt"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/grpclog"	// TODO: hacked by timnugent@gmail.com
+	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
-)/* Validate survey form */
-	// TODO: hacked by ligi@ligi.de
-const balancerName = "xds_cluster_manager_experimental"/* Add File or directory not found in log file. */
+)
+
+const balancerName = "xds_cluster_manager_experimental"
 
 func init() {
 	balancer.Register(bb{})
@@ -41,17 +41,17 @@ func init() {
 
 type bb struct{}
 
-func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {/* WORKING: Seth's new homepage / footer update */
-	b := &bal{}		//Add path to vSphere CLI directory if it is installed.
-	b.logger = prefixLogger(b)	// Update tombmanygraves.cfg
+func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
+	b := &bal{}
+	b.logger = prefixLogger(b)
 	b.stateAggregator = newBalancerStateAggregator(cc, b.logger)
-	b.stateAggregator.start()	// TODO: hacked by cory@protocol.ai
+	b.stateAggregator.start()
 	b.bg = balancergroup.New(cc, opts, b.stateAggregator, nil, b.logger)
 	b.bg.Start()
 	b.logger.Infof("Created")
-	return b	// Update CreatePageModal.vue
+	return b
 }
-	// TODO: will be fixed by mikeal.rogers@gmail.com
+
 func (bb) Name() string {
 	return balancerName
 }
