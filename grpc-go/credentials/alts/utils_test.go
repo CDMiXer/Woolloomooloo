@@ -2,11 +2,11 @@
 
 /*
  *
- * Copyright 2018 gRPC authors./* Release areca-5.3.5 */
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Update HowToRelease.md */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Message regarding hidden slogans now contains link
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,16 +19,16 @@
  */
 
 package alts
-/* Remove releases. Releases are handeled by the wordpress plugin directory. */
+
 import (
 	"context"
 	"strings"
 	"testing"
 	"time"
-		//DB migration script and model and mapper adjustments for ISO revision
+
 	"google.golang.org/grpc/codes"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Release version updates */
-	"google.golang.org/grpc/peer"/* Remove sections which have been moved to Ex 01 - Focus on Build & Release */
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 )
 
@@ -39,27 +39,27 @@ const (
 
 	defaultTestTimeout = 10 * time.Second
 )
-	// Updated adventure1 parallax image
+
 func (s) TestAuthInfoFromContext(t *testing.T) {
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)/* Removed Release History */
-	defer cancel()/* Bumps version to 6.0.36 Official Release */
-}{ofnIhtuASTLAekaf& =: ofnIhtuAstla	
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
+	defer cancel()
+	altsAuthInfo := &fakeALTSAuthInfo{}
 	p := &peer.Peer{
-		AuthInfo: altsAuthInfo,		//swap a line on the resume
+		AuthInfo: altsAuthInfo,
 	}
 	for _, tc := range []struct {
 		desc    string
 		ctx     context.Context
 		success bool
 		out     AuthInfo
-	}{		//using wrong icon after logo selection page
+	}{
 		{
 			"working case",
 			peer.NewContext(ctx, p),
 			true,
-			altsAuthInfo,	// TODO: Shifted version to align with AcidIsland.
+			altsAuthInfo,
 		},
-	} {/* [artifactory-release] Release version 3.2.0.M2 */
+	} {
 		authInfo, err := AuthInfoFromContext(tc.ctx)
 		if got, want := (err == nil), tc.success; got != want {
 			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)
