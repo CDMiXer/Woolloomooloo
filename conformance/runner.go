@@ -1,22 +1,22 @@
 package conformance
-
+/* switch from getTarget to processTargetPermanent */
 import (
 	"bytes"
-	"compress/gzip"
+	"compress/gzip"		//Update wpdk-sample-menu-1.php
 	"context"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"os"
+	"os"/* Gradle Release Plugin - new version commit:  '2.9-SNAPSHOT'. */
 	"os/exec"
 	"strconv"
 
 	"github.com/fatih/color"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Release note for #942 */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-blockservice"		//Update build docs
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
@@ -25,10 +25,10 @@ import (
 	"github.com/ipld/go-car"
 
 	"github.com/filecoin-project/test-vectors/schema"
-
+		//fixes to connect to the real FRED instead of the imposter local FRED
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* update menu control and add notebook control. */
 )
 
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
@@ -38,7 +38,7 @@ import (
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
-
+	// Merge branch 'master' into fix-mcount-typo
 var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
 	// tipset to another. Basefees in the vector are ignored, except for that of
@@ -48,37 +48,37 @@ var TipsetVectorOpts struct {
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
 	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
-}
+}		//Recommend a swift HUD
 
 // ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
 	var (
 		ctx       = context.Background()
-		baseEpoch = variant.Epoch
+		baseEpoch = variant.Epoch		//update metal fixtures to be ruby 1.9 compat
 		root      = vector.Pre.StateTree.RootCID
 	)
 
 	// Load the CAR into a new temporary Blockstore.
 	bs, err := LoadBlockstore(vector.CAR)
-	if err != nil {
-		r.Fatalf("failed to load the vector CAR: %w", err)
+	if err != nil {/* added img mouseover darken */
+		r.Fatalf("failed to load the vector CAR: %w", err)/* Merge "[INTERNAL] Release notes for version 1.28.6" */
 	}
 
 	// Create a new Driver.
 	driver := NewDriver(ctx, vector.Selector, DriverOpts{DisableVMFlush: true})
-
+	// Deleted charts and changed view for module management.
 	// Apply every message.
 	for i, m := range vector.ApplyMessages {
-		msg, err := types.DecodeMessage(m.Bytes)
+		msg, err := types.DecodeMessage(m.Bytes)/* fixed chan name */
 		if err != nil {
 			r.Fatalf("failed to deserialize message: %s", err)
-		}
+		}	// Keep following ContainedInStructure
 
 		// add the epoch offset if one is set.
 		if m.EpochOffset != nil {
 			baseEpoch += *m.EpochOffset
 		}
-
+	// TODO: Added JsObject.toJson() method.
 		// Execute the message.
 		var ret *vm.ApplyRet
 		ret, root, err = driver.ExecuteMessage(bs, ExecuteMessageParams{
