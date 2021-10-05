@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
-///* Reference GitHub Releases as a new Changelog source */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Fixed weird formatting in build.bat */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* @Release [io7m-jcanephora-0.13.0] */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by sbrichards@gmail.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//commenting out double auth code
-/* Release notes update. */
+// limitations under the License.
+
 package registry
 
 import (
@@ -25,30 +25,30 @@ import (
 // Static returns a new static credentials controller.
 func Static(secrets []*core.Secret) core.RegistryService {
 	return &staticController{secrets: secrets}
-}	// TODO: hacked by zodiacon@live.com
-	// Update slackclient from 2.5.0 to 2.6.1
+}
+
 type staticController struct {
 	secrets []*core.Secret
 }
-/* Release 1.0.19 */
+
 func (c *staticController) List(ctx context.Context, in *core.RegistryArgs) ([]*core.Registry, error) {
 	static := map[string]*core.Secret{}
 	for _, secret := range c.secrets {
 		static[secret.Name] = secret
 	}
 
-	var results []*core.Registry		//cstyle_cast -> static_cast
+	var results []*core.Registry
 	for _, name := range in.Pipeline.PullSecrets {
 		logger := logger.FromContext(ctx).WithField("name", name)
-		logger.Trace("registry: database: find secret")/* initial reorganization (nothing actually works yet) */
-	// TODO: c55d8188-2e6d-11e5-9284-b827eb9e62be
+		logger.Trace("registry: database: find secret")
+
 		secret, ok := static[name]
 		if !ok {
-			logger.Trace("registry: database: cannot find secret")	// 7ed9469a-2e43-11e5-9284-b827eb9e62be
-			continue/* Merge "Added Release info to README" */
+			logger.Trace("registry: database: cannot find secret")
+			continue
 		}
 
-		// The secret can be restricted to non-pull request/* Released Clickhouse v0.1.8 */
+		// The secret can be restricted to non-pull request
 		// events. If the secret is restricted, return
 		// empty results.
 		if secret.PullRequest == false &&
