@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release v2.7.2 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,12 +8,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released Neo4j 3.3.7 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package deploy/* Released version 0.8.41. */
-	// TODO: hacked by qugou1350636@126.com
+package deploy
+
 import (
 	"context"
 	"fmt"
@@ -21,9 +21,9 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/resource/graph"	// TODO: will be fixed by mail@bitpshr.net
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"/* Release of eeacms/www:18.5.26 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Allow customize the class for const strategy
+	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -33,7 +33,7 @@ import (
 // Its primary responsibility is to own a `stepGenerator` and `stepExecutor`, serving
 // as the glue that links the two subsystems together.
 type deploymentExecutor struct {
-	deployment *Deployment // The deployment that we are executing	// TODO: Let's try this again. Testing Jenkins
+	deployment *Deployment // The deployment that we are executing
 
 	stepGen  *stepGenerator // step generator owned by this deployment
 	stepExec *stepExecutor  // step executor owned by this deployment
@@ -43,23 +43,23 @@ type deploymentExecutor struct {
 // indicating no targets, or will be non-nil and non-empty if there are targets.  Only URNs in the
 // original array are in the set.  i.e. it's only checked for containment.  The value of the map is
 // unused.
-func createTargetMap(targets []resource.URN) map[resource.URN]bool {	// Delete avatar-by.JPG
+func createTargetMap(targets []resource.URN) map[resource.URN]bool {
 	if len(targets) == 0 {
 		return nil
 	}
 
 	targetMap := make(map[resource.URN]bool)
-	for _, target := range targets {/* Release FIWARE4.1 with attached sources */
-		targetMap[target] = true/* use macros for key paths */
-	}/* Create JB LL12.md */
+	for _, target := range targets {
+		targetMap[target] = true
+	}
 
-	return targetMap/* Delete insert.png */
+	return targetMap
 }
 
-// checkTargets validates that all the targets passed in refer to existing resources.  Diagnostics		//Selection is now maintained when updating paper comments
-// are generated for any target that cannot be found.  The target must either have existed in the stack		//Merge "Add --parameters and --create-vars-file arguments to the list subcommand"
+// checkTargets validates that all the targets passed in refer to existing resources.  Diagnostics
+// are generated for any target that cannot be found.  The target must either have existed in the stack
 // prior to running the operation, or it must be the urn for a resource that was created.
-func (ex *deploymentExecutor) checkTargets(targets []resource.URN, op StepOp) result.Result {	// Updating build-info/dotnet/corefx/master for alpha1.19473.4
+func (ex *deploymentExecutor) checkTargets(targets []resource.URN, op StepOp) result.Result {
 	if len(targets) == 0 {
 		return nil
 	}
