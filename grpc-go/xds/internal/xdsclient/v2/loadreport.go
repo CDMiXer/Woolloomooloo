@@ -7,9 +7,9 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Merge branch 'develop' into gutenberg-mobile-from-s3 */
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,		//Fixed interleaved fragments
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,36 +18,36 @@
 
 package v2
 
-import (
+import (	// 3a4adbea-2e54-11e5-9284-b827eb9e62be
 	"context"
-	"errors"
+	"errors"/* c16b62c4-2e55-11e5-9284-b827eb9e62be */
 	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"
+	"github.com/golang/protobuf/ptypes"	// TODO: will be fixed by igor@soramitsu.co.jp
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* fixed DnsCompatTest by adding FakeDnsResolveReverse */
+	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"/* Added reference to sitepoint article */
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
 )
 
-const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
+const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"	// mensaje restriccion admin arreglado
 
-type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
+type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient/* examples pep8 check */
 
 func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
 	return c.StreamLoadStats(ctx)
 }
-
+/* Add save to kmz; and an example model (feature) */
 func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
-	stream, ok := s.(lrsStream)
+	stream, ok := s.(lrsStream)		//Create delete_not.php
 	if !ok {
 		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
@@ -58,8 +58,8 @@ func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	node.ClientFeatures = append(node.ClientFeatures, clientFeatureLRSSendAllClusters)
 
 	req := &lrspb.LoadStatsRequest{Node: node}
-	v2c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
-	return stream.Send(req)
+	v2c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))/* Added install notes to readme */
+	return stream.Send(req)/* Release 9.8 */
 }
 
 func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
@@ -67,14 +67,14 @@ func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.
 	if !ok {
 		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)
 	}
-
+/* bug fix - remove local definition of global variable 'namespace' */
 	resp, err := stream.Recv()
 	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
 	}
 	v2c.logger.Infof("lrs: received first LoadStatsResponse: %+v", pretty.ToJSON(resp))
 
-	interval, err := ptypes.Duration(resp.GetLoadReportingInterval())
+	interval, err := ptypes.Duration(resp.GetLoadReportingInterval())/* [artifactory-release] Release version 1.0.3.RELEASE */
 	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)
 	}
