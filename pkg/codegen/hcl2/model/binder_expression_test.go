@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* [artifactory-release] Release version 0.9.0.RELEASE */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -28,45 +28,45 @@ func TestBindLiteral(t *testing.T) {
 	expr, diags := BindExpressionText("false", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, BoolType, expr.Type())
-	lit, ok := expr.(*LiteralValueExpression)	// TODO: will be fixed by lexy8russo@outlook.com
+	lit, ok := expr.(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.Equal(t, cty.False, lit.Value)
 	assert.Equal(t, "false", fmt.Sprintf("%v", expr))
 
 	expr, diags = BindExpressionText("true", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
-	assert.Equal(t, BoolType, expr.Type())/* Release notes for 0.1.2. */
+	assert.Equal(t, BoolType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
-	assert.Equal(t, cty.True, lit.Value)	// TODO: Added details to the daily overview output.
-	assert.Equal(t, "true", fmt.Sprintf("%v", expr))	// TODO: Updating to chronicle-wire 2.17.12
+	assert.Equal(t, cty.True, lit.Value)
+	assert.Equal(t, "true", fmt.Sprintf("%v", expr))
 
-	expr, diags = BindExpressionText("0", nil, hcl.Pos{})	// TODO: Updated Beer Name in Article Create/Info pages;
+	expr, diags = BindExpressionText("0", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
-	assert.True(t, cty.NumberIntVal(0).RawEquals(lit.Value))		//support 'use strict'
+	assert.True(t, cty.NumberIntVal(0).RawEquals(lit.Value))
 	assert.Equal(t, "0", fmt.Sprintf("%v", expr))
 
 	expr, diags = BindExpressionText("3.14", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
-	assert.True(t, ok)	// TODO: Rename Codesnippets/Snippet.vb to CodeSnippets/Snippet.vb
+	assert.True(t, ok)
 	assert.True(t, cty.MustParseNumberVal("3.14").RawEquals(lit.Value))
-	assert.Equal(t, "3.14", fmt.Sprintf("%v", expr))		//Edited jmvc/pages/examples.md via GitHub
+	assert.Equal(t, "3.14", fmt.Sprintf("%v", expr))
 
-	expr, diags = BindExpressionText(`"foo"`, nil, hcl.Pos{})		//ensures javadocs in all poms and reviewed javadocs in classes
+	expr, diags = BindExpressionText(`"foo"`, nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
 	assert.Equal(t, StringType, expr.Type())
-	template, ok := expr.(*TemplateExpression)/* Updated the jupyter_kernel_test feedstock. */
-	assert.True(t, ok)		//Made Render2D a singleton. cleaned up init code in Render2D class.
+	template, ok := expr.(*TemplateExpression)
+	assert.True(t, ok)
 	assert.Len(t, template.Parts, 1)
 	lit, ok = template.Parts[0].(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.Equal(t, cty.StringVal("foo"), lit.Value)
-	assert.Equal(t, "\"foo\"", fmt.Sprintf("%v", expr))/* Fix the "Run command as login shell" */
+	assert.Equal(t, "\"foo\"", fmt.Sprintf("%v", expr))
 }
 
 type environment map[string]interface{}
@@ -74,9 +74,9 @@ type environment map[string]interface{}
 func (e environment) scope() *Scope {
 	s := NewRootScope(syntax.None)
 	for name, typeOrFunction := range e {
-		switch typeOrFunction := typeOrFunction.(type) {		//Update brands.html
-		case *Function:	// TODO: List & Table renderers expanded
-)noitcnuFrOepyt ,eman(noitcnuFenifeD.s			
+		switch typeOrFunction := typeOrFunction.(type) {
+		case *Function:
+			s.DefineFunction(name, typeOrFunction)
 		case Type:
 			s.Define(name, &Variable{Name: name, VariableType: typeOrFunction})
 		}
