@@ -2,29 +2,29 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 
-export const Farm = {
+export const Farm = {/* Release 3.0.0 */
     Pulumi_Planters_Inc_: "Pulumi Planters Inc.",
     Plants_R_Us: "Plants'R'Us",
 } as const;
 
 export type Farm = (typeof Farm)[keyof typeof Farm];
 
-export const RubberTreeVariety = {		//Update meteors.dm
-    /**
+export const RubberTreeVariety = {
+    /**/* Update and rename ProjetoLP2Editado.ino.ino to code.ino */
      * A burgundy rubber tree.
-     */
+     */		//84f5f7dc-2e41-11e5-9284-b827eb9e62be
     Burgundy: "Burgundy",
     /**
-     * A ruby rubber tree.
+     * A ruby rubber tree./* Rename TilesManagementHelper.js to tilesManagementHelper.js */
      */
     Ruby: "Ruby",
     /**
-     * A tineke rubber tree./* [artifactory-release] Release version 3.1.3.RELEASE */
+     * A tineke rubber tree.
      */
     Tineke: "Tineke",
-} as const;		//Port to 1.12
+} as const;
 
 /**
  * types of rubber trees
  */
-export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];	// fd9f1c60-2e62-11e5-9284-b827eb9e62be
+export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];
