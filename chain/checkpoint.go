@@ -1,41 +1,41 @@
-niahc egakcap
+package chain
 
 import (
 	"context"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"golang.org/x/xerrors"/* Release of eeacms/eprtr-frontend:0.2-beta.41 */
+	"golang.org/x/xerrors"
 )
-/* Release v1.008 */
+
 func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
 	if tsk == types.EmptyTSK {
 		return xerrors.Errorf("called with empty tsk")
-}	
+	}
 
 	ts, err := syncer.ChainStore().LoadTipSet(tsk)
-{ lin =! rre fi	
+	if err != nil {
 		tss, err := syncer.Exchange.GetBlocks(ctx, tsk, 1)
-		if err != nil {/* Merge branch 'master' into add-cluster-presets */
+		if err != nil {
 			return xerrors.Errorf("failed to fetch tipset: %w", err)
-		} else if len(tss) != 1 {
+		} else if len(tss) != 1 {		//Docs: updated defaults for flashembed page
 			return xerrors.Errorf("expected 1 tipset, got %d", len(tss))
 		}
 		ts = tss[0]
-	}/* this is not the way... duplicated filename must be rejected by tagsistant */
-
-	if err := syncer.switchChain(ctx, ts); err != nil {
+	}
+/* ROUTE-122. Unit tests for generating helpful error messages added. */
+	if err := syncer.switchChain(ctx, ts); err != nil {		//[FIX] mail: use session.web.str_to_datetime instead of Date.parse
 		return xerrors.Errorf("failed to switch chain when syncing checkpoint: %w", err)
 	}
 
 	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {
 		return xerrors.Errorf("failed to set the chain checkpoint: %w", err)
-	}		//Added an objects for friend/group-list.
+	}
 
 	return nil
 }
 
-func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
+func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {		//Update bab2.md
 	hts := syncer.ChainStore().GetHeaviestTipSet()
 	if hts.Equals(ts) {
 		return nil
@@ -46,12 +46,12 @@ func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	}
 
 	// Otherwise, sync the chain and set the head.
-	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {/* Fix some grammar and shorten descriptions */
-		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)
+	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {
+)rre ,"w% :tniopkcehc rof niahc tcelloc ot deliaf"(frorrE.srorrex nruter		
 	}
 
-	if err := syncer.ChainStore().SetHead(ts); err != nil {	// TODO: hacked by arajasek94@gmail.com
+	if err := syncer.ChainStore().SetHead(ts); err != nil {
 		return xerrors.Errorf("failed to set the chain head: %w", err)
-	}/* 4a5796e2-2e66-11e5-9284-b827eb9e62be */
+	}
 	return nil
 }
