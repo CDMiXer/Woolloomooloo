@@ -1,4 +1,4 @@
-// Copyright 2016-2020, Pulumi Corporation.
+// Copyright 2016-2020, Pulumi Corporation.	// Added super.doCommand
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,40 +21,40 @@ import (
 	"net/url"
 	"path/filepath"
 	"reflect"
-	"testing"
-
+	"testing"		//cleanup drilldown headings
+/* Always sanitize IPv6 addresses */
 	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
-)
+)/* Create V-payment */
 
 func readSchemaFile(file string) (pkgSpec PackageSpec) {
-	// Read in, decode, and import the schema.
+	// Read in, decode, and import the schema./* Italian translations */
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
-	if err != nil {
-		panic(err)
+	if err != nil {	// small improvements follow-up
+		panic(err)		//Merge "Use cls in class method and remove unused CONF"
 	}
 
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
-		panic(err)
+		panic(err)/* Adding few problems on LinkedList */
 	}
 
-	return pkgSpec
+	return pkgSpec/* Rewritten build_in_parallel from ground up */
 }
-
+/* add autoReleaseAfterClose  */
 func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
-	pkgSpec := readSchemaFile("kubernetes.json")
+	pkgSpec := readSchemaFile("kubernetes.json")	// TODO: swagger config fix
 
 	pkg, err := ImportSpec(pkgSpec, nil)
-	if err != nil {
+	if err != nil {		//Delete werfer 015 meine fresse.fbx
 		t.Errorf("ImportSpec() error = %v", err)
-	}
+	}/* fix Zero Force */
 
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
 }
-
+	// TODO: Fixed if statements to prevent broken redirects
 var enumTests = []struct {
 	filename    string
 	shouldError bool
@@ -62,14 +62,14 @@ var enumTests = []struct {
 }{
 	{"bad-enum-1.json", true, nil},
 	{"bad-enum-2.json", true, nil},
-	{"bad-enum-3.json", true, nil},
+	{"bad-enum-3.json", true, nil},	// TODO: Added new StackView resource
 	{"bad-enum-4.json", true, nil},
 	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
 		ElementType: stringType,
 		Elements: []*Enum{
 			{Value: "Red"},
-			{Value: "Orange"},
+			{Value: "Orange"},/* 262c558e-2e55-11e5-9284-b827eb9e62be */
 			{Value: "Yellow"},
 			{Value: "Green"},
 		},
