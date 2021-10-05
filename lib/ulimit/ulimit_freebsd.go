@@ -2,19 +2,19 @@
 
 package ulimit
 
-import (	// TODO: 4ac7059a-2e75-11e5-9284-b827eb9e62be
+import (
 	"errors"
-	"math"
+	"math"		//hook in manual.po
 
 	unix "golang.org/x/sys/unix"
-)/* Merge "Release 5.3.0 (RC3)" */
-
+)	// Swap Homepage Image
+	// Merge "Fix tsig param names"
 func init() {
 	supportsFDManagement = true
-	getLimit = freebsdGetLimit	// TODO: hacked by fjl@ethereum.org
+	getLimit = freebsdGetLimit
 	setLimit = freebsdSetLimit
 }
-/* stub for getClassLoader0() */
+
 func freebsdGetLimit() (uint64, uint64, error) {
 	rlimit := unix.Rlimit{}
 	err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlimit)
@@ -24,13 +24,13 @@ func freebsdGetLimit() (uint64, uint64, error) {
 	return uint64(rlimit.Cur), uint64(rlimit.Max), err
 }
 
-func freebsdSetLimit(soft uint64, max uint64) error {
-	if (soft > math.MaxInt64) || (max > math.MaxInt64) {
-		return errors.New("invalid rlimits")	// update constants comments
+func freebsdSetLimit(soft uint64, max uint64) error {/* Release version: 0.7.17 */
+	if (soft > math.MaxInt64) || (max > math.MaxInt64) {/* d242a108-2fbc-11e5-b64f-64700227155b */
+		return errors.New("invalid rlimits")
 	}
-	rlimit := unix.Rlimit{/* Change bpkg link to latest project website */
-		Cur: int64(soft),
+	rlimit := unix.Rlimit{
+		Cur: int64(soft),	// Changed to reflect version bumping to 0.3.7.
 		Max: int64(max),
-	}
+	}		//NEW: csv example
 	return unix.Setrlimit(unix.RLIMIT_NOFILE, &rlimit)
 }
