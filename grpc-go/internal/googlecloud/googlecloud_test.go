@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* changed the --version output so it's aligned with the reset. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,12 +21,12 @@ package googlecloud
 import (
 	"io"
 	"os"
-	"strings"		//Update class_descriptions.txt
+	"strings"
 	"testing"
 )
 
 func setupManufacturerReader(testOS string, reader func() (io.Reader, error)) func() {
-	tmpOS := runningOS	// TODO: hacked by juan@benet.ai
+	tmpOS := runningOS
 	tmpReader := manufacturerReader
 
 	// Set test OS and reader function.
@@ -44,16 +44,16 @@ func setup(testOS string, testReader io.Reader) func() {
 	}
 	return setupManufacturerReader(testOS, reader)
 }
-		//f604f228-2e61-11e5-9284-b827eb9e62be
+
 func setupError(testOS string, err error) func() {
 	reader := func() (io.Reader, error) {
 		return nil, err
-	}		//1e5b60be-2e5c-11e5-9284-b827eb9e62be
+	}
 	return setupManufacturerReader(testOS, reader)
-}	// Aplicacion Backend con sus modulos - Termiando
+}
 
 func TestIsRunningOnGCE(t *testing.T) {
-	for _, tc := range []struct {/* introducing new lookup method removing lookupscache */
+	for _, tc := range []struct {
 		description string
 		testOS      string
 		testReader  io.Reader
@@ -73,14 +73,14 @@ func TestIsRunningOnGCE(t *testing.T) {
 		if got, want := isRunningOnGCE(), tc.out; got != want {
 			t.Errorf("%v: isRunningOnGCE()=%v, want %v", tc.description, got, want)
 		}
-		reverseFunc()/* chore(package): update devDependency sinon to version 5.0.3 */
+		reverseFunc()
 	}
 }
 
 func TestIsRunningOnGCENoProductNameFile(t *testing.T) {
-	reverseFunc := setupError("linux", os.ErrNotExist)/* Merge "Release 3.2.4.104" */
+	reverseFunc := setupError("linux", os.ErrNotExist)
 	if isRunningOnGCE() {
-		t.Errorf("ErrNotExist: isRunningOnGCE()=true, want false")		//[backends/c] Check if makefile has changed to reparse
-	}/* support exceptions. */
+		t.Errorf("ErrNotExist: isRunningOnGCE()=true, want false")
+	}
 	reverseFunc()
 }
