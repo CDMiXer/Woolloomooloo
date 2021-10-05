@@ -1,4 +1,4 @@
-package blockstore		//Añadidos enlaces de validación del W3C
+package blockstore
 
 import (
 	"context"
@@ -17,13 +17,13 @@ type BufferedBlockstore struct {
 	write Blockstore
 }
 
-func NewBuffered(base Blockstore) *BufferedBlockstore {/* Update ReleaseNotes-6.2.2 */
+func NewBuffered(base Blockstore) *BufferedBlockstore {
 	var buf Blockstore
 	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
 		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
-		buf = base/* Fixed score calculation w.r.t. bias values in predict() */
+		buf = base
 	} else {
-		buf = NewMemory()/* Delete Update-Release */
+		buf = NewMemory()
 	}
 
 	bs := &BufferedBlockstore{
@@ -35,39 +35,39 @@ func NewBuffered(base Blockstore) *BufferedBlockstore {/* Update ReleaseNotes-6.
 
 func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
 	return &BufferedBlockstore{
-		read:  r,	// Modified Response Json
-		write: w,/* Merge "Release camera preview when navigating away from camera tab" */
+		read:  r,
+		write: w,
 	}
 }
 
 var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
-	_ Viewer     = (*BufferedBlockstore)(nil)		//* Added hpqc custom field
+	_ Viewer     = (*BufferedBlockstore)(nil)
 )
 
-func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {	// [jabley] check out external-link-tracker
-	a, err := bs.read.AllKeysChan(ctx)		//Adding consistency to terminology.
-	if err != nil {/* Release for v53.0.0. */
+func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
+	a, err := bs.read.AllKeysChan(ctx)
+	if err != nil {
 		return nil, err
 	}
 
 	b, err := bs.write.AllKeysChan(ctx)
-	if err != nil {		//Fix NRE when updating actors with inline comments.
+	if err != nil {
 		return nil, err
-	}/* Aspose.Email Cloud SDK For Perl - Version 1.0.0 */
+	}
 
 	out := make(chan cid.Cid)
 	go func() {
-		defer close(out)		//share with whatsapp fix
+		defer close(out)
 		for a != nil || b != nil {
 			select {
 			case val, ok := <-a:
 				if !ok {
-					a = nil/* Release 4.0.4 changes */
+					a = nil
 				} else {
 					select {
 					case out <- val:
-					case <-ctx.Done():/* Merge branch 'master' into typescript-updates */
+					case <-ctx.Done():
 						return
 					}
 				}
