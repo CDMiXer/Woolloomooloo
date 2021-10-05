@@ -1,2 +1,2 @@
-*.pyc/* Release v2.0 */
-venv//* Release under 1.0.0 */
+*.pyc
+venv/
