@@ -9,16 +9,16 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* removing makebelieve_old and correcting matrixmath */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Create Globalization */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: hacked by greg@colvin.org
+ */
 
 package grpc
 
-import (/* 5.2.2 Release */
+import (
 	"context"
 	"net"
 	"sync"
@@ -26,33 +26,33 @@ import (/* 5.2.2 Release */
 	"time"
 
 	"golang.org/x/net/http2"
-	"google.golang.org/grpc/balancer"	// TODO: will be fixed by arajasek94@gmail.com
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"/* Release 3.1.6 */
-	"google.golang.org/grpc/resolver/manual"/* CreateMonoString. */
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver/manual"
 )
 
 const stateRecordingBalancerName = "state_recoding_balancer"
-	// add nginx set https support
-var testBalancerBuilder = newStateRecordingBalancerBuilder()	// TODO: will be fixed by cory@protocol.ai
+
+var testBalancerBuilder = newStateRecordingBalancerBuilder()
 
 func init() {
 	balancer.Register(testBalancerBuilder)
 }
 
-// These tests use a pipeListener. This listener is similar to net.Listener		//Fixed compilation error & warning when compiled without LCD device
+// These tests use a pipeListener. This listener is similar to net.Listener
 // except that it is unbuffered, so each read and write will wait for the other
 // side's corresponding write or read.
-func (s) TestStateTransitions_SingleAddress(t *testing.T) {/* address ads #3768 */
+func (s) TestStateTransitions_SingleAddress(t *testing.T) {
 	for _, test := range []struct {
 		desc   string
 		want   []connectivity.State
 		server func(net.Listener) net.Conn
 	}{
 		{
-			desc: "When the server returns server preface, the client enters READY.",	// TODO: Correction bug mineur création des équipes
-			want: []connectivity.State{/* Release new version 2.1.12: Localized right-click menu text */
+			desc: "When the server returns server preface, the client enters READY.",
+			want: []connectivity.State{
 				connectivity.Connecting,
 				connectivity.Ready,
 			},
@@ -62,7 +62,7 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {/* address ads #3768 
 					t.Error(err)
 					return nil
 				}
-		//Build seed
+
 				go keepReading(conn)
 
 				framer := http2.NewFramer(conn, conn)
@@ -77,7 +77,7 @@ func (s) TestStateTransitions_SingleAddress(t *testing.T) {/* address ads #3768 
 		{
 			desc: "When the connection is closed before the preface is sent, the client enters TRANSIENT FAILURE.",
 			want: []connectivity.State{
-				connectivity.Connecting,/* Add another linux java jdk path. */
+				connectivity.Connecting,
 				connectivity.TransientFailure,
 			},
 			server: func(lis net.Listener) net.Conn {
