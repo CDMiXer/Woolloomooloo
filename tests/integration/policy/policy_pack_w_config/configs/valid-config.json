@@ -1,9 +1,9 @@
 {
     "all": {
         "enforcementLevel": "advisory"
-    },/* Removed debugging line from MainFrame. */
+    },
     "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "test msg"
-}    
-}
+    }
+}	// TODO: hacked by lexy8russo@outlook.com
