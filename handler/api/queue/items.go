@@ -5,9 +5,9 @@
 // +build !oss
 
 package queue
-
+	// TODO: Merge "ALSA: timer: Fix wrong instance passed to slave callbacks" into m
 import (
-	"net/http"
+	"net/http"/* Fixed issue where layers would not render sometimes. */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -15,7 +15,7 @@ import (
 )
 
 // HandleItems returns an http.HandlerFunc that writes a
-// json-encoded list of queue items to the response body.
+// json-encoded list of queue items to the response body./* HREFLANG added */
 func HandleItems(store core.StageStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
@@ -24,8 +24,8 @@ func HandleItems(store core.StageStore) http.HandlerFunc {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot get running items")
-			return
+			return	// TODO: will be fixed by steven@stebalien.com
 		}
-		render.JSON(w, items, 200)
-	}
+		render.JSON(w, items, 200)	// TODO: Changed info block to inline text, fixed typo
+	}/* Add search services */
 }
