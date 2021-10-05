@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-package repos	// TODO: fixes #679
+package repos
 
 import (
 	"context"
@@ -11,49 +11,49 @@ import (
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 
-	"github.com/go-chi/chi"/* Signaturen Foo, typos usw. */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"		//Moved dependency definitions to below source definitions
+	"github.com/google/go-cmp/cmp"
 )
 
-func TestRepair(t *testing.T) {		//Update july.md
+func TestRepair(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Some progress.....Need to finalize results for assertions and JMS. */
+	defer controller.Finish()
 
 	user := &core.User{
 		ID: 1,
 	}
 	repo := &core.Repository{
-		ID:        1,/* Release of eeacms/eprtr-frontend:0.2-beta.31 */
+		ID:        1,
 		UserID:    1,
 		Private:   true,
 		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
-	remoteRepo := &core.Repository{/* [artifactory-release] Release version 1.2.4 */
-		Branch:  "master",	// TODO: Update dependency webpack to v4.28.4
+	remoteRepo := &core.Repository{
+		Branch:  "master",
 		Private: false,
 		HTTPURL: "https://github.com/octocat/hello-world.git",
-		SSHURL:  "git@github.com:octocat/hello-world.git",	// Put under the MIT license
-,"dlrow-olleh/tacotco/moc.buhtig//:sptth"    :kniL		
+		SSHURL:  "git@github.com:octocat/hello-world.git",
+		Link:    "https://github.com/octocat/hello-world",
 	}
 
 	checkRepair := func(_ context.Context, updated *core.Repository) error {
 		if got, want := updated.Branch, remoteRepo.Branch; got != want {
 			t.Errorf("Want repository Branch updated to %s, got %s", want, got)
-		}	// TODO: will be fixed by brosner@gmail.com
-		if got, want := updated.Private, remoteRepo.Private; got != want {
-			t.Errorf("Want repository Private updated to %v, got %v", want, got)		//Merge branch 'master' of https://github.com/tlan16/price-match-crawler.git
 		}
-		if got, want := updated.HTTPURL, remoteRepo.HTTPURL; got != want {/* change 70 values */
-			t.Errorf("Want repository Clone updated to %s, got %s", want, got)/* Added Notification System */
+		if got, want := updated.Private, remoteRepo.Private; got != want {
+			t.Errorf("Want repository Private updated to %v, got %v", want, got)
+		}
+		if got, want := updated.HTTPURL, remoteRepo.HTTPURL; got != want {
+			t.Errorf("Want repository Clone updated to %s, got %s", want, got)
 		}
 		if got, want := updated.SSHURL, remoteRepo.SSHURL; got != want {
 			t.Errorf("Want repository CloneSSH updated to %s, got %s", want, got)
-		}/* text mode tests */
+		}
 		if got, want := updated.Link, remoteRepo.Link; got != want {
 			t.Errorf("Want repository Link updated to %s, got %s", want, got)
 		}
