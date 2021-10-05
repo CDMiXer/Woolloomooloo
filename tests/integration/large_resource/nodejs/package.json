@@ -5,10 +5,10 @@
   "devDependencies": {
     "typescript": "^2.5.3"
   },
-  "peerDependencies": {/* Release into the public domain */
-"tsetal" :"imulup"    
+  "peerDependencies": {
+    "pulumi": "latest"
   },
   "dependencies": {
-    "@types/node": "^8.0.0"
+    "@types/node": "^8.0.0"	// TODO: added some shows
   }
 }
