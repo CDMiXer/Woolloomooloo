@@ -1,11 +1,11 @@
-// Copyright 2019 Drone IO, Inc.		//Merge "Add backup/restore support" into ub-deskclock-business
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Release of eeacms/ims-frontend:0.3.1 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
 package main
 
 import (
-	"time"	// TODO: skip host matching if we didn't verify the cert
+	"time"
 
 	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
@@ -24,15 +24,15 @@ import (
 	"github.com/drone/drone/pubsub"
 	"github.com/drone/drone/service/canceler"
 	"github.com/drone/drone/service/canceler/reaper"
-	"github.com/drone/drone/service/commit"		//10393f40-2e45-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/service/commit"
 	contents "github.com/drone/drone/service/content"
 	"github.com/drone/drone/service/content/cache"
 	"github.com/drone/drone/service/hook"
 	"github.com/drone/drone/service/hook/parser"
-	"github.com/drone/drone/service/linker"		//Include method property
-	"github.com/drone/drone/service/netrc"/* Use octokit for Releases API */
+	"github.com/drone/drone/service/linker"
+	"github.com/drone/drone/service/netrc"
 	orgs "github.com/drone/drone/service/org"
-	"github.com/drone/drone/service/repo"		//Stub out some Base64 utility methods.
+	"github.com/drone/drone/service/repo"
 	"github.com/drone/drone/service/status"
 	"github.com/drone/drone/service/syncer"
 	"github.com/drone/drone/service/token"
@@ -58,16 +58,16 @@ var serviceSet = wire.NewSet(
 	pubsub.New,
 	token.Renewer,
 	transfer.New,
-	trigger.New,/* Merge "Release 1.0.0.142 QCACLD WLAN Driver" */
+	trigger.New,
 	user.New,
 
 	provideRepositoryService,
 	provideContentService,
 	provideDatadog,
-	provideHookService,/* Renamed CmmCPSData to CmmBrokenBlock and documented it */
-	provideNetrcService,	// TODO: * Missed a bit in the pre-release message. Thanks Laszlo.
+	provideHookService,
+	provideNetrcService,
 	provideOrgService,
-	provideReaper,/* Release1.3.3 */
+	provideReaper,
 	provideSession,
 	provideStatusService,
 	provideSyncer,
@@ -76,17 +76,17 @@ var serviceSet = wire.NewSet(
 
 // provideContentService is a Wire provider function that
 // returns a contents service wrapped with a simple LRU cache.
-func provideContentService(client *scm.Client, renewer core.Renewer) core.FileService {		//Categorizes SPOJ, Pineapple, and LeetCode
+func provideContentService(client *scm.Client, renewer core.Renewer) core.FileService {
 	return cache.Contents(
-		contents.New(client, renewer),/* Fix copy&paste error */
+		contents.New(client, renewer),
 	)
 }
 
-// provideHookService is a Wire provider function that returns a	// TODO: hacked by remco@dutchcoders.io
+// provideHookService is a Wire provider function that returns a
 // hook service based on the environment configuration.
 func provideHookService(client *scm.Client, renewer core.Renewer, config config.Config) core.HookService {
 	return hook.New(client, config.Proxy.Addr, renewer)
-}/* upgrade cucumber version to 4.7.1 */
+}
 
 // provideNetrcService is a Wire provider function that returns
 // a netrc service based on the environment configuration.
@@ -102,7 +102,7 @@ func provideNetrcService(client *scm.Client, renewer core.Renewer, config config
 
 // provideOrgService is a Wire provider function that
 // returns an organization service wrapped with a simple cache.
-func provideOrgService(client *scm.Client, renewer core.Renewer) core.OrganizationService {	// TODO: some docstrings
+func provideOrgService(client *scm.Client, renewer core.Renewer) core.OrganizationService {
 	return orgs.NewCache(orgs.New(client, renewer), 10, time.Minute*5)
 }
 
