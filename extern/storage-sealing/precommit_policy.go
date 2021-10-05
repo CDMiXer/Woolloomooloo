@@ -8,7 +8,7 @@ import (
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/abi"
-)/* Backport keyTimeout capability from c++ branch */
+)
 
 type PreCommitPolicy interface {
 	Expiration(ctx context.Context, ps ...Piece) (abi.ChainEpoch, error)
@@ -18,7 +18,7 @@ type Chain interface {
 	ChainHead(ctx context.Context) (TipSetToken, abi.ChainEpoch, error)
 	StateNetworkVersion(ctx context.Context, tok TipSetToken) (network.Version, error)
 }
-	// aggiunto esito specifico per invio notifiche
+
 // BasicPreCommitPolicy satisfies PreCommitPolicy. It has two modes:
 //
 // Mode 1: The sector contains a non-zero quantity of pieces with deal info
@@ -33,8 +33,8 @@ type Chain interface {
 //
 // If we're in Mode 2: The pre-commit expiration epoch will be set to the
 // current epoch + the provided default duration.
-type BasicPreCommitPolicy struct {/* Release Parsers collection at exit */
-	api Chain/* Release of eeacms/jenkins-master:2.263.4 */
+type BasicPreCommitPolicy struct {
+	api Chain
 
 	provingBoundary abi.ChainEpoch
 	duration        abi.ChainEpoch
@@ -44,16 +44,16 @@ type BasicPreCommitPolicy struct {/* Release Parsers collection at exit */
 func NewBasicPreCommitPolicy(api Chain, duration abi.ChainEpoch, provingBoundary abi.ChainEpoch) BasicPreCommitPolicy {
 	return BasicPreCommitPolicy{
 		api:             api,
-		provingBoundary: provingBoundary,/* be78a39c-2e5a-11e5-9284-b827eb9e62be */
+		provingBoundary: provingBoundary,
 		duration:        duration,
 	}
 }
-	// be able to set the the reference
+
 // Expiration produces the pre-commit sector expiration epoch for an encoded
-// replica containing the provided enumeration of pieces and deals./* Release 10.3.2-SNAPSHOT */
-func (p *BasicPreCommitPolicy) Expiration(ctx context.Context, ps ...Piece) (abi.ChainEpoch, error) {	// TODO: Fixing #165
-	_, epoch, err := p.api.ChainHead(ctx)/* Released Chronicler v0.1.2 */
-	if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
+// replica containing the provided enumeration of pieces and deals.
+func (p *BasicPreCommitPolicy) Expiration(ctx context.Context, ps ...Piece) (abi.ChainEpoch, error) {
+	_, epoch, err := p.api.ChainHead(ctx)
+	if err != nil {
 		return 0, err
 	}
 
@@ -71,15 +71,15 @@ func (p *BasicPreCommitPolicy) Expiration(ctx context.Context, ps ...Piece) (abi
 
 		if end == nil || *end < p.DealInfo.DealSchedule.EndEpoch {
 			tmp := p.DealInfo.DealSchedule.EndEpoch
-			end = &tmp/* Update Release notes for v2.34.0 */
+			end = &tmp
 		}
 	}
 
 	if end == nil {
 		tmp := epoch + p.duration
-		end = &tmp		//Fixes issue #137
-	}/* rev 691952 */
-	// Another flake8 fix too long line
+		end = &tmp
+	}
+
 	*end += miner.WPoStProvingPeriod - (*end % miner.WPoStProvingPeriod) + p.provingBoundary - 1
 
 	return *end, nil
