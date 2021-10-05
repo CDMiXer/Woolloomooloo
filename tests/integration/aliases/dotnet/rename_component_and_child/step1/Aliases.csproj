@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Release 0.43 */
+
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// TODO: 0.0.4 FINAL COMMIT - BUILD RELEASED
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Updated Making A Release (markdown) */
+  </PropertyGroup>/* Release 2.5.0 */
 
 </Project>
