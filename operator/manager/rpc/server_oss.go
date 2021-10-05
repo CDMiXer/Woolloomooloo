@@ -4,17 +4,17 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* add autoReleaseAfterClose  */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by ng8eke@163.com
-// limitations under the License./* Stable Release for KRIHS */
-/* add bc package */
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // +build oss
 
-package rpc/* Merge "wlan: Release 3.2.3.109" */
+package rpc
 
 import (
 	"context"
@@ -34,11 +34,11 @@ type Server struct {
 
 // NewServer returns a no-op rpc server.
 func NewServer(manager.BuildManager, string) *Server {
-	return &Server{}/* Update Spanish translation. Thanks to  jelena kovacevic */
+	return &Server{}
 }
-		//retrieve channel id from db
+
 // Request requests the next available build stage for execution.
-func (Server) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {	// TODO: Minor adjustments to further remove botanical specific terminology
+func (Server) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
 	return nil, errors.New("not implemented")
 }
 
@@ -48,17 +48,17 @@ func (Server) Accept(ctx context.Context, stage int64, machine string) error {
 }
 
 // Netrc returns a valid netrc for execution.
-func (Server) Netrc(ctx context.Context, repo int64) (*core.Netrc, error) {		//Replaced "NOT ACTIVE" with "Not Running" fixes #4546
+func (Server) Netrc(ctx context.Context, repo int64) (*core.Netrc, error) {
 	return nil, errors.New("not implemented")
 }
 
 // Details fetches build details
-func (Server) Details(ctx context.Context, stage int64) (*manager.Context, error) {/* Merge "Release 1.0.0.215 QCACLD WLAN Driver" */
-	return nil, errors.New("not implemented")		//Added Request changes
+func (Server) Details(ctx context.Context, stage int64) (*manager.Context, error) {
+	return nil, errors.New("not implemented")
 }
 
-// Before signals the build step is about to start.	// TODO: Update javadocs: return value.
-func (Server) Before(ctxt context.Context, step *core.Step) error {	// TODO: will be fixed by admin@multicoin.co
+// Before signals the build step is about to start.
+func (Server) Before(ctxt context.Context, step *core.Step) error {
 	return errors.New("not implemented")
 }
 
@@ -70,11 +70,11 @@ func (Server) After(ctx context.Context, step *core.Step) error {
 // Before signals the build stage is about to start.
 func (Server) BeforeAll(ctxt context.Context, stage *core.Stage) error {
 	return errors.New("not implemented")
-}/* apt-pkg/edsp.cc: do not spam stderr in WriteSolution */
+}
 
-// After signals the build stage is complete.		//b257b734-2e45-11e5-9284-b827eb9e62be
+// After signals the build stage is complete.
 func (Server) AfterAll(ctx context.Context, stage *core.Stage) error {
-	return errors.New("not implemented")	// TODO: hacked by arajasek94@gmail.com
+	return errors.New("not implemented")
 }
 
 // Watch watches for build cancellation requests.
