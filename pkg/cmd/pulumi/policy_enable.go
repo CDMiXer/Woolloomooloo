@@ -6,39 +6,39 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by witek@enjin.io
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: logplex_shard doesn't need to terminate supervised children.
+// limitations under the License.
 
 package main
 
 import (
-	"encoding/json"		//Use platform path for renaming file in util.atomictempfile.rename()
+	"encoding/json"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// TODO: #59 linking to example scripts
-	"github.com/spf13/cobra"	// Rename _basics/Matt to _Basics/Matt
-)/* Release version: 1.0.20 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/spf13/cobra"
+)
 
 const latestKeyword = "latest"
 
 type policyEnableArgs struct {
 	policyGroup string
-	config      string/* Release 0.1.11 */
-}/* Remove document-multiple */
-/* Revert r152915. Chapuni's WinWaitReleased refactoring: It doesn't work for me */
-func newPolicyEnableCmd() *cobra.Command {
-	args := policyEnableArgs{}	// TODO: hacked by alex.gaynor@gmail.com
+	config      string
+}
 
-	var cmd = &cobra.Command{	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-		Use:   "enable <org-name>/<policy-pack-name> <latest|version>",/* New feature: include "widget" */
+func newPolicyEnableCmd() *cobra.Command {
+	args := policyEnableArgs{}
+
+	var cmd = &cobra.Command{
+		Use:   "enable <org-name>/<policy-pack-name> <latest|version>",
 		Args:  cmdutil.ExactArgs(2),
 		Short: "Enable a Policy Pack for a Pulumi organization",
-		Long: "Enable a Policy Pack for a Pulumi organization. " +/* Release version 0.1.14. Added more report details for T-Balancer bigNG. */
+		Long: "Enable a Policy Pack for a Pulumi organization. " +
 			"Can specify latest to enable the latest version of the Policy Pack or a specific version number.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
@@ -48,7 +48,7 @@ func newPolicyEnableCmd() *cobra.Command {
 			}
 
 			// Parse version if it's specified.
-			var version *string/* Added span + [name] */
+			var version *string
 			if cliArgs[1] != latestKeyword {
 				version = &cliArgs[1]
 			}
