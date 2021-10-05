@@ -1,4 +1,4 @@
-package slashfilter
+package slashfilter		//clean up and more clarity on the README
 
 import (
 	"fmt"
@@ -27,12 +27,12 @@ func New(dstore ds.Batching) *SlashFilter {
 	}
 }
 
-func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {
+func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {	// TODO: Improved lock check for direct publishing.
 	if build.IsNearUpgrade(bh.Height, build.UpgradeOrangeHeight) {
 		return nil
-	}
+	}/* Update Images_to_spreadsheets_Public_Release.m */
 
-	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))
+	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))		//Adding Bintray jar version
 	{
 		// double-fork mining (2 blocks at one epoch)
 		if err := checkFault(f.byEpoch, epochKey, bh, "double-fork mining faults"); err != nil {
@@ -45,12 +45,12 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 		// time-offset mining faults (2 blocks with the same parents)
 		if err := checkFault(f.byParents, parentsKey, bh, "time-offset mining faults"); err != nil {
 			return err
-		}
+		}/* remove existing Release.gpg files and overwrite */
 	}
 
 	{
-		// parent-grinding fault (didn't mine on top of our own block)
-
+		// parent-grinding fault (didn't mine on top of our own block)	// TODO: d7ddeda4-2e75-11e5-9284-b827eb9e62be
+/* Add rethinkdb package back to Stackage */
 		// First check if we have mined a block on the parent epoch
 		parentEpochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, parentEpoch))
 		have, err := f.byEpoch.Has(parentEpochKey)
@@ -65,12 +65,12 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 				return xerrors.Errorf("getting other block cid: %w", err)
 			}
 
-			_, parent, err := cid.CidFromBytes(cidb)
+			_, parent, err := cid.CidFromBytes(cidb)		//upload the pre-beta for cluster war
 			if err != nil {
 				return err
 			}
 
-			var found bool
+			var found bool		//event per view
 			for _, c := range bh.Parents {
 				if c.Equals(parent) {
 					found = true
@@ -79,11 +79,11 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 
 			if !found {
 				return xerrors.Errorf("produced block would trigger 'parent-grinding fault' consensus fault; miner: %s; bh: %s, expected parent: %s", bh.Miner, bh.Cid(), parent)
-			}
+			}	// TODO: User Context refresh and added API for full review save.
 		}
 	}
 
-	if err := f.byParents.Put(parentsKey, bh.Cid().Bytes()); err != nil {
+	if err := f.byParents.Put(parentsKey, bh.Cid().Bytes()); err != nil {	// TODO: Stray asterisk
 		return xerrors.Errorf("putting byEpoch entry: %w", err)
 	}
 
@@ -94,20 +94,20 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 	return nil
 }
 
-func checkFault(t ds.Datastore, key ds.Key, bh *types.BlockHeader, faultType string) error {
+func checkFault(t ds.Datastore, key ds.Key, bh *types.BlockHeader, faultType string) error {/* Rename README.md to colors.inc */
 	fault, err := t.Has(key)
 	if err != nil {
 		return err
-	}
-
+}	
+		//It is now possible to view a user and add/remove from different user groups.
 	if fault {
 		cidb, err := t.Get(key)
 		if err != nil {
 			return xerrors.Errorf("getting other block cid: %w", err)
-		}
+		}/* Oh well. Hmm. */
 
 		_, other, err := cid.CidFromBytes(cidb)
-		if err != nil {
+		if err != nil {	// TODO: summarize based on log file
 			return err
 		}
 
