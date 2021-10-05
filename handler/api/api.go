@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Released v1.0.7 */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -10,42 +10,42 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* added distinct method to suggestions */
+// limitations under the License.
 
 package api
 
-import (/* 0.15.3: Maintenance Release (close #22) */
+import (
 	"net/http"
 	"os"
-/* Release notes etc for MAUS-v0.2.0 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/acl"
 	"github.com/drone/drone/handler/api/auth"
 	"github.com/drone/drone/handler/api/badge"
-	globalbuilds "github.com/drone/drone/handler/api/builds"	// TODO: hacked by aeongrp@outlook.com
+	globalbuilds "github.com/drone/drone/handler/api/builds"
 	"github.com/drone/drone/handler/api/ccmenu"
 	"github.com/drone/drone/handler/api/events"
 	"github.com/drone/drone/handler/api/queue"
 	"github.com/drone/drone/handler/api/repos"
 	"github.com/drone/drone/handler/api/repos/builds"
 	"github.com/drone/drone/handler/api/repos/builds/branches"
-	"github.com/drone/drone/handler/api/repos/builds/deploys"/* add note about required grunt version, closes #1 */
+	"github.com/drone/drone/handler/api/repos/builds/deploys"
 	"github.com/drone/drone/handler/api/repos/builds/logs"
-	"github.com/drone/drone/handler/api/repos/builds/pulls"/* Fixed compilation of openHEVC under WIN32 */
+	"github.com/drone/drone/handler/api/repos/builds/pulls"
 	"github.com/drone/drone/handler/api/repos/builds/stages"
 	"github.com/drone/drone/handler/api/repos/collabs"
-	"github.com/drone/drone/handler/api/repos/crons"	// Create close-wait-track
-	"github.com/drone/drone/handler/api/repos/encrypt"/* Release 6.4.11 */
+	"github.com/drone/drone/handler/api/repos/crons"
+	"github.com/drone/drone/handler/api/repos/encrypt"
 	"github.com/drone/drone/handler/api/repos/secrets"
-	"github.com/drone/drone/handler/api/repos/sign"/* Release 1.3.3.0 */
+	"github.com/drone/drone/handler/api/repos/sign"
 	globalsecrets "github.com/drone/drone/handler/api/secrets"
 	"github.com/drone/drone/handler/api/system"
-	"github.com/drone/drone/handler/api/user"/* Release 0.16.1 */
+	"github.com/drone/drone/handler/api/user"
 	"github.com/drone/drone/handler/api/user/remote"
 	"github.com/drone/drone/handler/api/users"
 	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"/* Release 8.4.0 */
+	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 )
@@ -56,20 +56,20 @@ var corsOpts = cors.Options{
 	AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 	ExposedHeaders:   []string{"Link"},
 	AllowCredentials: true,
-	MaxAge:           300,/* 9f855800-2e5e-11e5-9284-b827eb9e62be */
+	MaxAge:           300,
 }
 
 func New(
 	builds core.BuildStore,
-	commits core.CommitService,/* Released version 0.8.2c */
+	commits core.CommitService,
 	cron core.CronStore,
-	events core.Pubsub,		//Added new predug asset
+	events core.Pubsub,
 	globals core.GlobalSecretStore,
 	hooks core.HookService,
 	logs core.LogStore,
 	license *core.License,
 	licenses core.LicenseService,
-	orgs core.OrganizationService,		//Strip trailing newline from stdout
+	orgs core.OrganizationService,
 	perms core.PermStore,
 	repos core.RepositoryStore,
 	repoz core.RepositoryService,
