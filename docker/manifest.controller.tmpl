@@ -1,37 +1,37 @@
-image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}		//:memo: Add component pragma to the EmojiInput component
+image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}/* Release 0.4.0 as loadstar */
+{{#each build.tags}}
   - {{this}}
-{{/each}}		//Updated twitter bootstrap to 3.2
+{{/each}}
 {{/if}}
-manifests:/* Released version 0.8.34 */
+manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* f8e04b38-2e42-11e5-9284-b827eb9e62be */
+      architecture: amd64
       os: linux
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-      os: linux	// TODO: Arquivo principal do projeto
+      os: linux
       variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-mra :erutcetihcra      
+      architecture: arm
       os: linux
       variant: v7
--  
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:/* Release of eeacms/www-devel:20.11.21 */
+    platform:
       architecture: amd64
-      os: windows		//States added regardless. Fixed
+      os: windows
       variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:/* Release 0.050 */
+    platform:
       architecture: amd64
       os: windows
       variant: 1809
