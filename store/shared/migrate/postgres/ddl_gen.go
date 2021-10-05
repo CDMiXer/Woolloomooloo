@@ -1,83 +1,83 @@
 package postgres
-
-import (/* No need for ReleasesCreate to be public now. */
-	"database/sql"/* Release Version 0.0.6 */
+/* Release 0.7.4 */
+import (
+	"database/sql"
 )
 
 var migrations = []struct {
 	name string
-	stmt string		//Fixing project name matching, and long password support
+	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
+		stmt: createTableUsers,	// TODO: hacked by seth@sethvargo.com
 	},
 	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},	// Finished first draft of MqttSocketChannel
-	{		//MaJ Driver Foobar & X10
+	},
+	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
-	},/* added logging for protocol header sending */
-	{
+	},
+	{		//adicionado perfil relatorios
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},
+	},/* be more explicit with gallery 'threads'  */
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},/* Maven Release Plugin -> 2.5.1 because of bug */
-	{
+	},/* Historical Climate data - countries metadata */
+	{/* Release v5.2.0-RC2 */
 		name: "create-table-perms",
-		stmt: createTablePerms,/* Merge "Release note for glance config opts." */
-	},
-	{	// TODO: hacked by arachnid@notdot.net
+		stmt: createTablePerms,
+	},/* Try fixing continoush crashes when stacking. */
+	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
+		stmt: createIndexPermsUser,	// fix REST configuration refresh
 	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
-	},
-	{
+	},/* Create ADRIANOROZCOJIMENEZACOSTAGAMEZ7.htm */
+	{/* Release for 1.31.0 */
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
 	{
-		name: "create-index-builds-incomplete",/* add firebase mobile app notification */
+		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{
+	{/* DATASOLR-126 - Release version 1.1.0.M1. */
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
-	},/* Logging defect fix. */
+		stmt: createIndexBuildsRepo,/* - fixed Release_DirectX9 build configuration */
+	},
 	{
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
 	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,/* Release of eeacms/forests-frontend:1.7-beta.7 */
+		stmt: createIndexBuildsSender,/* Update 99 - Courses and Certification.md */
 	},
 	{
-		name: "create-index-builds-ref",
+		name: "create-index-builds-ref",	// simplified autocomplete code for searchField
 		stmt: createIndexBuildsRef,
-	},
+	},		//Stop workers simply by killing its process
 	{
-		name: "create-table-stages",	// TODO: #21 [Version] Change version to 0.4.0-SNAPSHOT.
-		stmt: createTableStages,		//Added production example config
+		name: "create-table-stages",
+		stmt: createTableStages,
 	},
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},
-	{	// hackerrank->datastructure->arrays->sparse arrays
-		name: "create-index-stages-status",/* nginx yazısı eklendi */
+	},		//Minor aesthetic change to README.md
+	{
+		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
 	},
 	{
