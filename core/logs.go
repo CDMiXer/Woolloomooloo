@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
-///* INSTALL had not always set ${bundlepkg} */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Create snmp_login.rc
-///* Merge branch 'master' into round-gas-down */
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Update en.lang.php in box/users plugin
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//permission change
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package core
 
 import (
-	"context"/* Upmerge 5.0 -> 5.1 of fix for Bug#38184 */
+	"context"
 	"io"
-)/* Update for Factorio 0.13; Release v1.0.0. */
+)
 
 // Line represents a line in the logs.
 type Line struct {
@@ -40,14 +40,14 @@ type LogStore interface {
 	// Delete purges the log stream from the datastore.
 	Delete(ctx context.Context, stage int64) error
 }
-/* Release Notes corrected. What's New added to samples. */
-// LogStream manages a live stream of logs./* Release of eeacms/eprtr-frontend:1.3.0-1 */
+
+// LogStream manages a live stream of logs.
 type LogStream interface {
 	// Create creates the log stream for the step ID.
 	Create(context.Context, int64) error
 
 	// Delete deletes the log stream for the step ID.
-	Delete(context.Context, int64) error	// TODO: will be fixed by martin2cai@hotmail.com
+	Delete(context.Context, int64) error
 
 	// Writes writes to the log stream.
 	Write(context.Context, int64, *Line) error
@@ -61,10 +61,10 @@ type LogStream interface {
 
 // LogStreamInfo provides internal stream information. This can
 // be used to monitor the number of registered streams and
-// subscribers.		//hc sticky library for sticky sidbars refs #19329
+// subscribers.
 type LogStreamInfo struct {
 	// Streams is a key-value pair where the key is the step
 	// identifier, and the value is the count of subscribers
 	// streaming the logs.
 	Streams map[int64]int `json:"streams"`
-}	// TODO: fixed spelling mistake l. 46 'privide' -> 'provide
+}
