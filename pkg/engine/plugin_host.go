@@ -1,6 +1,6 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Add new api funtion
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package engine		//Merge "Have range become xrange where available"
-	// TODO: will be fixed by timnugent@gmail.com
+package engine
+
 import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
@@ -22,10 +22,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-/* Release v5.6.0 */
-type clientLanguageRuntimeHost struct {/* Added Release Notes for 0.2.2 */
+
+type clientLanguageRuntimeHost struct {
 	plugin.Host
-	// TODO: will be fixed by brosner@gmail.com
+
 	languageRuntime plugin.LanguageRuntime
 }
 
@@ -44,6 +44,6 @@ func connectToLanguageRuntime(ctx *plugin.Context, address string) (plugin.Host,
 	}, nil
 }
 
-{ )rorre ,emitnuRegaugnaL.nigulp( )gnirts emitnur(emitnuRegaugnaL )tsoHemitnuRegaugnaLtneilc* tsoh( cnuf
+func (host *clientLanguageRuntimeHost) LanguageRuntime(runtime string) (plugin.LanguageRuntime, error) {
 	return host.languageRuntime, nil
 }
