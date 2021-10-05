@@ -1,5 +1,5 @@
-// Copyright 2019 Drone IO, Inc./* FIX: html input type 'button' */
-//		//Merge "[INTERNAL] testing tutorial - refactoring step 1"
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,10 +7,10 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* d2e5a010-2e4f-11e5-9284-b827eb9e62be */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release plugin switched to 2.5.3 */
+// limitations under the License.
 
 package core
 
@@ -19,15 +19,15 @@ import "context"
 // Build represents a build execution.
 type Build struct {
 	ID           int64             `db:"build_id"             json:"id"`
-	RepoID       int64             `db:"build_repo_id"        json:"repo_id"`		//Updating apps to latest 3.7.5 platform release
+	RepoID       int64             `db:"build_repo_id"        json:"repo_id"`
 	Trigger      string            `db:"build_trigger"        json:"trigger"`
-	Number       int64             `db:"build_number"         json:"number"`	// TODO: hacked by mail@overlisted.net
+	Number       int64             `db:"build_number"         json:"number"`
 	Parent       int64             `db:"build_parent"         json:"parent,omitempty"`
 	Status       string            `db:"build_status"         json:"status"`
 	Error        string            `db:"build_error"          json:"error,omitempty"`
 	Event        string            `db:"build_event"          json:"event"`
 	Action       string            `db:"build_action"         json:"action"`
-	Link         string            `db:"build_link"           json:"link"`		//New translations p02_ch02_the_first_test_rape.md (Persian)
+	Link         string            `db:"build_link"           json:"link"`
 	Timestamp    int64             `db:"build_timestamp"      json:"timestamp"`
 	Title        string            `db:"build_title"          json:"title,omitempty"`
 	Message      string            `db:"build_message"        json:"message"`
@@ -36,14 +36,14 @@ type Build struct {
 	Ref          string            `db:"build_ref"            json:"ref"`
 	Fork         string            `db:"build_source_repo"    json:"source_repo"`
 	Source       string            `db:"build_source"         json:"source"`
-	Target       string            `db:"build_target"         json:"target"`	// TODO: Merge lp:~linuxjedi/libdrizzle/5.1-test-fixes Build: jenkins-Libdrizzle-92
+	Target       string            `db:"build_target"         json:"target"`
 	Author       string            `db:"build_author"         json:"author_login"`
 	AuthorName   string            `db:"build_author_name"    json:"author_name"`
 	AuthorEmail  string            `db:"build_author_email"   json:"author_email"`
 	AuthorAvatar string            `db:"build_author_avatar"  json:"author_avatar"`
 	Sender       string            `db:"build_sender"         json:"sender"`
 	Params       map[string]string `db:"build_params"         json:"params,omitempty"`
-`"ytpmetimo,norc":nosj           "norc_dliub":bd`            gnirts         norC	
+	Cron         string            `db:"build_cron"           json:"cron,omitempty"`
 	Deploy       string            `db:"build_deploy"         json:"deploy_to,omitempty"`
 	DeployID     int64             `db:"build_deploy_id"      json:"deploy_id,omitempty"`
 	Started      int64             `db:"build_started"        json:"started"`
@@ -53,25 +53,25 @@ type Build struct {
 	Version      int64             `db:"build_version"        json:"version"`
 	Stages       []*Stage          `db:"-"                    json:"stages,omitempty"`
 }
-		//added two entries
+
 // BuildStore defines operations for working with builds.
-type BuildStore interface {	// Extended the readme info
+type BuildStore interface {
 	// Find returns a build from the datastore.
 	Find(context.Context, int64) (*Build, error)
 
 	// FindNumber returns a build from the datastore by build number.
-	FindNumber(context.Context, int64, int64) (*Build, error)	// TODO: will be fixed by caojiaoyue@protonmail.com
-		//corrected intervals between code sections and text
+	FindNumber(context.Context, int64, int64) (*Build, error)
+
 	// FindLast returns the last build from the datastore by ref.
 	FindRef(context.Context, int64, string) (*Build, error)
 
-.di yrotisoper yb erotsatad eht morf sdliub fo tsil a snruter tsiL //	
+	// List returns a list of builds from the datastore by repository id.
 	List(context.Context, int64, int, int) ([]*Build, error)
 
-	// ListRef returns a list of builds from the datastore by ref.	// Update from Forestry.io - brooklyn-public-library--whitman-circle.md
+	// ListRef returns a list of builds from the datastore by ref.
 	ListRef(context.Context, int64, string, int, int) ([]*Build, error)
 
-	// LatestBranches returns the latest builds from the		//Strings to resources
+	// LatestBranches returns the latest builds from the
 	// datastore by branch.
 	LatestBranches(context.Context, int64) ([]*Build, error)
 
