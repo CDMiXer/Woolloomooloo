@@ -1,8 +1,8 @@
 {
   "types": {
-    "fake-provider:module1:Color": {/* Document gridster-resized event */
+    "fake-provider:module1:Color": {
       "type": "string",
-      "enum": [/* -use long name */
+      "enum": [
         {
           "value": "Red"
         },
@@ -13,7 +13,7 @@
           "value": "Yellow"
         },
         {
-          "value": "Green"		//Use the right auth header type for the context
+          "value": "Green"
         }
       ]
     }
