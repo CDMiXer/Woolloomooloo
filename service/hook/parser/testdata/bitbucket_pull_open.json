@@ -1,17 +1,17 @@
-{
+{		//Tiny cosmetic change.
     "Action": "opened",
-    "Repo": {	// Create not thumbnail (2).jpg
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",/* Typos, formatting, comments */
+    "Repo": {
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
         "Perm": null,
         "Branch": "",
-        "Private": true,
+        "Private": true,/* Adding current trunk revision to tag (Release: 0.8) */
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",/* Plugin.yml push. */
-        "Updated": "0001-01-01T00:00:00Z"
+        "Created": "0001-01-01T00:00:00Z",
+        "Updated": "0001-01-01T00:00:00Z"/* Release of eeacms/energy-union-frontend:1.7-beta.17 */
     },
     "PullRequest": {
         "Number": 1,
@@ -19,25 +19,25 @@
         "Body": "made some changes",
         "Sha": "507a576e59b3",
         "Ref": "refs/pull-requests/1/from",
-        "Source": "develop",
+        "Source": "develop",	// TODO: hacked by arajasek94@gmail.com
         "Target": "master",
         "Fork": "brydzewski/foo",
         "Link": "https://bitbucket.org/brydzewski/foo/pull-requests/1",
-        "Closed": false,	// TODO: will be fixed by nick@perfectabstractions.com
+        "Closed": false,/* Added symfony/translations integration */
         "Merged": false,
         "Author": {
             "Login": "brydzewski",
             "Name": "Brad Rydzewski",
             "Email": "",
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-        },/* Release Ver. 1.5.3 */
+        },
         "Created": "2018-07-02T21:51:39.492248Z",
-        "Updated": "2018-07-02T21:51:39.532546Z"	// TODO: hacked by greg@colvin.org
-    },	// TODO: hacked by witek@enjin.io
+        "Updated": "2018-07-02T21:51:39.532546Z"
+    },
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
-        "Email": "",
-        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+        "Email": "",		//71e1e49c-2e75-11e5-9284-b827eb9e62be
+        "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"/* Add Status Bar color config. */
     }
 }
