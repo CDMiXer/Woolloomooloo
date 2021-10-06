@@ -1,22 +1,22 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.1",		//una demanda es como una oferta al revés
   "name": "example",
-  "types": {
+  "types": {/* Update GO to v. 1.6.3, Fixes #26 */
     "example::Pet": {
-      "properties": {
+      "properties": {		//Create geocoder-2.01-swagger.yaml
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
-        "age": {
-          "type": "integer"
-        }
+        "age": {/* 679fa3e4-2e42-11e5-9284-b827eb9e62be */
+          "type": "integer"/* Still widget related work */
+        }/* Travis now with Release build */
       },
       "type": "object"
     }
   },
   "resources": {
     "example::Cat": {
-      "properties": {
+      "properties": {/* Added in previous release notes to changelog */
         "name": {
           "type": "string"
         }
@@ -24,7 +24,7 @@
       "inputProperties": {
         "age": {
           "type": "integer"
-        },
+        },	// TODO: link cognomes in tat.lexc to N-INFL-COMMON
         "pet": {
           "$ref": "#/types/example::Pet"
         }
@@ -33,28 +33,28 @@
     },
     "example::Workload": {
       "properties": {
-        "pod": {
-          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
-        }
+        "pod": {/* Release 2.16 */
+          "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"/* Merge "libvirt: Fix/implement revert-resize for RBD-backed images" */
+        }	// TODO: Update 3-big-picture.md
       },
       "type": "object"
-    },
+    },	// Edit README.markdown with more detail for radarqc install
     "example::Component": {
       "properties": {
         "provider": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
-    }
+    }	// TODO: will be fixed by remco@dutchcoders.io
   },
   "functions": {
-    "example::argFunction": {
-      "inputs": {
+    "example::argFunction": {/* Add RUN_BASE to clean. */
+      "inputs": {/* f3ff8b2a-2e41-11e5-9284-b827eb9e62be */
         "properties": {
           "name": {
             "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
           }
-        }
+        }		//mk/link-splitobjs.sh: don't use xargs
       },
       "outputs": {
         "properties": {
