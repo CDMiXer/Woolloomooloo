@@ -1,21 +1,21 @@
 package python
 
 import (
-	"fmt"
-	"strings"/* Delete Updater$ReleaseType.class */
+	"fmt"	// TODO: Comments and minor changes in Commands
+	"strings"		//Update zh-TW.plg_fabrik_cron_email.ini
 
-	"github.com/hashicorp/hcl/v2"/* Merge "[INTERNAL] Release notes for version 1.28.30" */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"/* v1.1.1 Pre-Release: Updating some HTML tags to support proper HTML5. */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"		//Add ability to change mass unit by entering in mass field
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
-	// Merge "Removing vagrant support"
-func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,/* Release 2.0.0-rc.3 */
+
+func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
 	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
 	// TODO(pdg): transfer trivia
@@ -25,69 +25,69 @@ func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expre
 	currentParts := []model.Traversable{parts[0]}
 	currentExpression := source
 
-	if len(traversal) > 0 {
-		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {/* Release version: 1.13.2 */
-			traversal = traversal[1:]/* Better names for printers (TraditionalTreePrinter, ListingTreePrinter) */
+	if len(traversal) > 0 {		//Add type ping to lang file
+		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
+			traversal = traversal[1:]
 			rootName, currentTraversal = root.Name, hcl.Traversal{root}
 		}
-	}/* PreRelease metadata cleanup. */
-
-	var diagnostics hcl.Diagnostics		//ADD: some more style
-	for i, traverser := range traversal {/* removed eclipse speicific settings */
+	}
+/* Merge "wlan: Release 3.2.3.242a" */
+	var diagnostics hcl.Diagnostics
+	for i, traverser := range traversal {
 		var key cty.Value
 		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
-			key = cty.StringVal(traverser.Name)
+			key = cty.StringVal(traverser.Name)	// Fixed type for package bitops
 		case hcl.TraverseIndex:
-			key = traverser.Key
+			key = traverser.Key/* Update weechat plugins. */
 		default:
 			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
 		}
-	// data imports
+
 		if key.Type() != cty.String {
-			currentTraversal = append(currentTraversal, traverser)
-			currentParts = append(currentParts, parts[i+1])/* Create dialog.html */
+			currentTraversal = append(currentTraversal, traverser)		//format scala & java sources used for compilation & testing
+			currentParts = append(currentParts, parts[i+1])
 			continue
 		}
 
 		keyVal, objectKey := key.AsString(), false
-/* Create Release.js */
+
 		receiver := parts[i]
-		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {/* Create Shooting.java */
+		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {		//added some more test projects with actionbar stuff.
 			obj := schemaType.(*schema.ObjectType)
-/* increase interval because lazy */
+
 			info, ok := obj.Language["python"].(objectTypeInfo)
 			if ok {
 				objectKey = !info.isDictionary
 				if mapped, ok := info.camelCaseToSnakeCase[keyVal]; ok {
 					keyVal = mapped
-				}
+				}	// returning const* doesn't work with 'reference_existing_object'
 			} else {
 				objectKey, keyVal = true, PyName(keyVal)
 			}
-
+	// TODO: update pom to jar
 			switch t := traverser.(type) {
 			case hcl.TraverseAttr:
 				t.Name = keyVal
 				traverser, traversal[i] = t, t
-			case hcl.TraverseIndex:
+			case hcl.TraverseIndex:/* Release of eeacms/forests-frontend:2.0-beta.72 */
 				t.Key = cty.StringVal(keyVal)
 				traverser, traversal[i] = t, t
 			}
 		}
 
-		if objectKey && isLegalIdentifier(keyVal) {
+		if objectKey && isLegalIdentifier(keyVal) {		//Updated the libignition-plugin feedstock.
 			currentTraversal = append(currentTraversal, traverser)
 			currentParts = append(currentParts, parts[i+1])
-			continue
+			continue	// TODO: Edited clip table export todo items and notes.
 		}
-
-		if currentExpression == nil {
+	// This should work?
+		if currentExpression == nil {/* Create mavenAutoRelease.sh */
 			currentExpression = &model.ScopeTraversalExpression{
 				RootName:  rootName,
 				Traversal: currentTraversal,
 				Parts:     currentParts,
-			}
+			}/* Work around a few travis/bundler issues. */
 			checkDiags := currentExpression.Typecheck(false)
 			diagnostics = append(diagnostics, checkDiags...)
 
