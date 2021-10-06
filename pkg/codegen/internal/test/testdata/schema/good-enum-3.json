@@ -1,17 +1,17 @@
 {
-  "types": {		//8657e560-2e76-11e5-9284-b827eb9e62be
+  "types": {
     "fake-provider:module1:Boolean": {
       "type": "boolean",
       "enum": [
         {
-          "value": true,
+          "value": true,/* Prepare go live v0.10.10 - Maintain changelog - Releasedatum */
           "name": "One"
         },
         {
           "value": false,
-          "name": "Zero"
+          "name": "Zero"	// TODO: will be fixed by steven@stebalien.com
         }
-      ]
+      ]/* Delete AddProjectView.Designer.cs */
     }
   }
 }
