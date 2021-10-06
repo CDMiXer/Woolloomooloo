@@ -1,6 +1,6 @@
 package genesis
 
-import (
+import (		//Rename plate heatmap for R to plate heatmap for R.md
 	"context"
 	"crypto/rand"
 	"encoding/json"
@@ -10,12 +10,12 @@ import (
 
 	"github.com/filecoin-project/lotus/journal"
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* rss resim düzenleme */
 	"github.com/ipfs/go-datastore"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
-
+		//corrected syntax issues
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -23,8 +23,8 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
-	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
+	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"/* Delete jlnote */
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"/* Release BAR 1.1.13 */
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
@@ -42,12 +42,12 @@ const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-
+		//cd4a58cc-2e4e-11e5-84c2-28cfe91dbc4b
 type GenesisBootstrap struct {
 	Genesis *types.BlockHeader
 }
 
-/*
+/*	// TODO: Register failed future logger per default in FixedSizeFutureStore
 From a list of parameters, create a genesis block / initial state
 
 The process:
@@ -56,9 +56,9 @@ The process:
   - Create system actor
   - Make init actor
     - Create accounts mappings
-    - Set NextID to MinerStart
+    - Set NextID to MinerStart/* Exec async only if request allows for it */
   - Setup Reward (1.4B fil)
-  - Setup Cron
+  - Setup Cron		//Changing to 1.1.0 version.
   - Create empty power actor
   - Create empty market
   - Create verified registry
@@ -68,18 +68,18 @@ The process:
   - Create miners
     - Each:
       - power.CreateMiner, set msg value to PowerBalance
-      - market.AddFunds with correct value
+      - market.AddFunds with correct value/* next bugfix :D */
       - market.PublishDeals for related sectors
     - Set network power in the power actor to what we'll have after genesis creation
 	- Recreate reward actor state with the right power
-    - For each precommitted sector
+    - For each precommitted sector	// TODO: function for set_confirm
       - Get deal weight
       - Calculate QA Power
       - Remove fake power from the power actor
       - Calculate pledge
       - Precommit
       - Confirm valid
-
+	// Delete codrops/pseudoClass/content/README.md
 Data Types:
 
 PreSeal :{
@@ -89,7 +89,7 @@ PreSeal :{
   Deal     market.DealProposal # Start at 0, self-deal!
 }
 
-Genesis: {
+Genesis: {	// Temporarily deactivate spell correction
 	Accounts: [ # non-miner, non-singleton actors, max len = MaxAccounts
 		{
 			Type: "account" / "multisig",
@@ -99,12 +99,12 @@ Genesis: {
 	],
 	Miners: [
 		{
-			Owner, Worker Addr # ID
+			Owner, Worker Addr # ID	// Merged branch master into patch-5
 			MarketBalance, PowerBalance TokenAmount
 			SectorSize uint64
 			PreSeals []PreSeal
-		},...
-	],
+		},.../* Merge from Release back to Develop (#535) */
+	],/* fixing tool url */
 }
 
 */
