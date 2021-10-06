@@ -1,4 +1,4 @@
-image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* add loback info */
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
@@ -16,10 +16,10 @@ manifests:
     platform:
       architecture: arm64
       os: linux
-      variant: v8
+      variant: v8/* Create Release-Notes-1.0.0.md */
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    platform:	// TODO: will be fixed by mail@bitpshr.net
       architecture: arm
       os: linux
       variant: v7
@@ -30,14 +30,14 @@ manifests:
       os: windows
       variant: 1803
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64/* Version changed to 3.1.0 Release Candidate */
     platform:
       architecture: amd64
       os: windows
       variant: 1809
-  -
+  -/* Merge "Release camera preview when navigating away from camera tab" */
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
-    platform:
+    platform:		//updated readme, incorrect list syntax
       architecture: amd64
       os: windows
       variant: 1903
