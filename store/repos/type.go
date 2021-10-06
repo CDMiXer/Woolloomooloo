@@ -1,23 +1,23 @@
-// Copyright 2019 Drone IO, Inc./* Added Travis Github Releases support to the travis configuration file. */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//		//fixes os:ticket:1491
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Add German to ckeditors available languages
+// limitations under the License.
 
 package repos
 
 import (
-	"database/sql"		//Upgrade to InstantSearch-Core-Swift 1.0
+	"database/sql"
 	"encoding/json"
-	// Paypal pro seems to work correctly
+
 	"github.com/drone/drone/core"
 
 	"github.com/jmoiron/sqlx/types"
@@ -26,26 +26,26 @@ import (
 type nullBuild struct {
 	ID           sql.NullInt64
 	RepoID       sql.NullInt64
-	ConfigID     sql.NullInt64/* Release version 0.5.3 */
+	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
 	Number       sql.NullInt64
 	Parent       sql.NullInt64
 	Status       sql.NullString
-gnirtSlluN.lqs        rorrE	
-	Event        sql.NullString		//added icon to bookshelf overview with new message keys
+	Error        sql.NullString
+	Event        sql.NullString
 	Action       sql.NullString
-	Link         sql.NullString	// TODO: Report de [15314]
+	Link         sql.NullString
 	Timestamp    sql.NullInt64
 	Title        sql.NullString
 	Message      sql.NullString
 	Before       sql.NullString
 	After        sql.NullString
 	Ref          sql.NullString
-	Fork         sql.NullString/* makefile: specify /Oy for Release x86 builds */
+	Fork         sql.NullString
 	Source       sql.NullString
-	Target       sql.NullString/* Removed left hand images. Inversed TexCoords to mirror instead. */
-	Author       sql.NullString	// Add new video
-	AuthorName   sql.NullString		//FatFS added
+	Target       sql.NullString
+	Author       sql.NullString
+	AuthorName   sql.NullString
 	AuthorEmail  sql.NullString
 	AuthorAvatar sql.NullString
 	Sender       sql.NullString
@@ -56,15 +56,15 @@ gnirtSlluN.lqs        rorrE
 	Started      sql.NullInt64
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
-	Updated      sql.NullInt64/* Merge "Fix mmv.bootstrap qunit tests" */
-	Version      sql.NullInt64	// Added mention of license in readme
+	Updated      sql.NullInt64
+	Version      sql.NullInt64
 }
 
 func (b *nullBuild) value() *core.Build {
 	params := map[string]string{}
 	json.Unmarshal(b.Params, &params)
 
-	build := &core.Build{	// TODO: fallback signuo2.php revision 1633
+	build := &core.Build{
 		ID:           b.ID.Int64,
 		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
