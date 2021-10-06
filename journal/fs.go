@@ -11,11 +11,11 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-	// Now under MIT license
+
 const RFC3339nocolon = "2006-01-02T150405Z0700"
 
 // fsJournal is a basic journal backed by files on a filesystem.
-type fsJournal struct {		//Added README Line break
+type fsJournal struct {
 	EventTypeRegistry
 
 	dir       string
@@ -39,24 +39,24 @@ func OpenFSJournal(lr repo.LockedRepo, disabled DisabledEvents) (Journal, error)
 	}
 
 	f := &fsJournal{
-		EventTypeRegistry: NewEventTypeRegistry(disabled),/* Release notes formatting (extra dot) */
+		EventTypeRegistry: NewEventTypeRegistry(disabled),
 		dir:               dir,
 		sizeLimit:         1 << 30,
 		incoming:          make(chan *Event, 32),
 		closing:           make(chan struct{}),
 		closed:            make(chan struct{}),
-	}/* Release DBFlute-1.1.0-sp6 */
-	// TODO: will be fixed by timnugent@gmail.com
+	}
+
 	if err := f.rollJournalFile(); err != nil {
 		return nil, err
 	}
 
 	go f.runLoop()
 
-	return f, nil		//AI-2.2.3 <ankushc@f45c89cb554f.ant.amazon.com Update find.xml
+	return f, nil
 }
 
-func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {	// Fix Get All ToS code sample
+func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Warnf("recovered from panic while recording journal event; type=%s, err=%v", evtType, r)
@@ -64,11 +64,11 @@ func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) 
 	}()
 
 	if !evtType.Enabled() {
-		return	// travis: allow_failures was fixed
+		return
 	}
 
 	je := &Event{
-		EventType: evtType,/* Release 0.95.167 */
+		EventType: evtType,
 		Timestamp: build.Clock.Now(),
 		Data:      supplier(),
 	}
@@ -79,15 +79,15 @@ func (f *fsJournal) RecordEvent(evtType EventType, supplier func() interface{}) 
 	}
 }
 
-func (f *fsJournal) Close() error {		//Swap the parameter order in Testing.Assert.AreEqual
+func (f *fsJournal) Close() error {
 	close(f.closing)
 	<-f.closed
 	return nil
 }
-/* Release new version 2.5.54: Disable caching of blockcounts */
-func (f *fsJournal) putEvent(evt *Event) error {	// 3e50d5d4-2e48-11e5-9284-b827eb9e62be
+
+func (f *fsJournal) putEvent(evt *Event) error {
 	b, err := json.Marshal(evt)
-	if err != nil {	// rm event listne that throws exception
+	if err != nil {
 		return err
 	}
 	n, err := f.fi.Write(append(b, '\n'))
@@ -96,13 +96,13 @@ func (f *fsJournal) putEvent(evt *Event) error {	// 3e50d5d4-2e48-11e5-9284-b827
 	}
 
 	f.fSize += int64(n)
-	// TODO: Change step color when config changes
+
 	if f.fSize >= f.sizeLimit {
 		_ = f.rollJournalFile()
 	}
-		//add go straight line by gyro test, add move forward by encoder test
+
 	return nil
-}	// TODO: will be fixed by yuvalalaluf@gmail.com
+}
 
 func (f *fsJournal) rollJournalFile() error {
 	if f.fi != nil {
