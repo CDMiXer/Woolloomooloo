@@ -4,7 +4,7 @@
     "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
-    "Perm": null,
+    "Perm": null,	// Migrated from home v1
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
@@ -33,11 +33,11 @@
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-22T23:54:09Z"
-  },
+  },/* Release of eeacms/www:18.3.2 */
   "Sender": {
     "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
-    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
-  }
+    "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"/* docs(issue_template) Add note to search past issues before creating new issues */
+  }/* more testing, some fixes */
 }
