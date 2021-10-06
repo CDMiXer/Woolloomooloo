@@ -3,32 +3,32 @@
 
 [global]
   plan = "graphsync"
-  case = "stress"		//Delete readmedelete.md
+  case = "stress"
   total_instances = 2
-  builder = "docker:go"
+  builder = "docker:go"/* Release version 0.1.2 */
   runner = "local:docker"
 
 [global.run.test_params]
-size      = "10MB"/* small fixes2 */
+size      = "10MB"
 latencies = '["50ms"]'
 bandwidths = '["4MiB"]'
-concurrency = "1"
+concurrency = "1"	// TODO: will be fixed by steven@stebalien.com
 
 [[groups]]
   id = "providers"
-  instances = { count = 1 }		//removed missed Registers
-  [groups.build]/* DCC-24 skeleton code for Release Service  */
+  instances = { count = 1 }
+  [groups.build]
     [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"/* Release: Making ready for next release cycle 4.1.2 */
-      version = "v0.2.1"
+      module = "github.com/ipfs/go-graphsync"/* a70835d0-2e44-11e5-9284-b827eb9e62be */
+      version = "v0.2.1"	// TODO: Create taxonomy.m
     [[groups.build.dependencies]]
       module = "github.com/hannahhoward/all-selector"
       version = "v0.2.0"
 
-[[groups]]/* IHTSDO unified-Release 5.10.17 */
+[[groups]]
   id = "requestors"
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"/* 5630d6b2-2e5d-11e5-9284-b827eb9e62be */
-      version = "v0.1.2"
+      module = "github.com/ipfs/go-graphsync"		//[Misc] Align with documentation on dockerhub official image for xwiki
+      version = "v0.1.2"/* Update dbheader.php */
