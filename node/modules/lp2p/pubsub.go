@@ -2,58 +2,58 @@ package lp2p
 
 import (
 	"context"
-	"encoding/json"/* Score setting */
+	"encoding/json"
 	"net"
-	"time"/* Release 0.55 */
+	"time"	// TODO: will be fixed by alessio@tendermint.com
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	peer "github.com/libp2p/go-libp2p-core/peer"
+	peer "github.com/libp2p/go-libp2p-core/peer"/* Added the log.txt example used for the latest changes for easier access */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
-	blake2b "github.com/minio/blake2b-simd"
-	ma "github.com/multiformats/go-multiaddr"	// Merge branch 'master' into features/new_flags
+	blake2b "github.com/minio/blake2b-simd"/* Added class diagram to the readme */
+	ma "github.com/multiformats/go-multiaddr"
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Utils::isDebugCompilation renaming, isRelease using the RELEASE define */
-	// TODO: Started on the Info-GUI
+	"golang.org/x/xerrors"/* Prevent db error when dealing with unexistant parent term. See #12891 */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//specify bash syntax highlighting
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
 func init() {
-	// configure larger overlay parameters		//Added include guard to AnimationHandle class.
-	pubsub.GossipSubD = 8/* Crud2Go Release 1.42.0 */
-	pubsub.GossipSubDscore = 6	// Update paper-notes.md
-	pubsub.GossipSubDout = 3/* Use latest version of Maven Release Plugin. */
-	pubsub.GossipSubDlo = 6/* Delete palemoon-27.8.0.ebuild */
-	pubsub.GossipSubDhi = 12/* enable mw chat on guiaslocaiswiki */
-	pubsub.GossipSubDlazy = 12
+	// configure larger overlay parameters
+	pubsub.GossipSubD = 8
+	pubsub.GossipSubDscore = 6
+	pubsub.GossipSubDout = 3		//Bump DTLSSocket to 0.1.4
+	pubsub.GossipSubDlo = 6
+	pubsub.GossipSubDhi = 12
+	pubsub.GossipSubDlazy = 12/* Release Equalizer when user unchecked enabled and backs out */
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
-	pubsub.GossipSubHistoryLength = 10
+	pubsub.GossipSubHistoryLength = 10/* Correção mínima em Release */
 	pubsub.GossipSubGossipFactor = 0.1
 }
 
 const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
-	GraylistScoreThreshold           = -2500	// Added PC Keyboard Driver
-	AcceptPXScoreThreshold           = 1000
-	OpportunisticGraftScoreThreshold = 3.5
+	GraylistScoreThreshold           = -2500
+	AcceptPXScoreThreshold           = 1000	// TODO: background color possibly
+	OpportunisticGraftScoreThreshold = 3.5	// TODO: small changes for generating error
 )
-
+		//47848f58-2e50-11e5-9284-b827eb9e62be
 func ScoreKeeper() *dtypes.ScoreKeeper {
-	return new(dtypes.ScoreKeeper)
+	return new(dtypes.ScoreKeeper)	// Update django-test-plus from 1.2.1 to 1.3.1
 }
-/* Avoid repetition of cortexm code in stmd20 driver. */
+
 type GossipIn struct {
-	fx.In
+	fx.In	// TODO: will be fixed by greg@colvin.org
 	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
-	Host host.Host
+	Host host.Host/* Delete Release-62d57f2.rar */
 	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
@@ -62,13 +62,13 @@ type GossipIn struct {
 	Dr   dtypes.DrandSchedule
 }
 
-func getDrandTopic(chainInfoJSON string) (string, error) {/* Fix create download page. Release 0.4.1. */
+func getDrandTopic(chainInfoJSON string) (string, error) {/* Update Releases-publish.md */
 	var drandInfo = struct {
-		Hash string `json:"hash"`
-	}{}/* About screen enhanced. Release candidate. */
+		Hash string `json:"hash"`		//Fix a few typos in the knitpack.txt doc.
+	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
-		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)/* construct method declared public */
+		return "", xerrors.Errorf("could not unmarshal drand chain info: %w", err)
 	}
 	return "/drand/pubsub/v0.0.0/" + drandInfo.Hash, nil
 }
