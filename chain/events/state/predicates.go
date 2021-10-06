@@ -1,75 +1,75 @@
-package state
+package state		//+packing/unpacking api
 
 import (
-	"context"		//remove unnecessary Exception
+	"context"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/filecoin-project/go-address"/* Update to Releasenotes for 2.1.4 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Fixed typo (serves => servers) */
 
-	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// Delete bg1.GIF
+	"github.com/filecoin-project/lotus/blockstore"		//a6d5d9a8-2e50-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// Adicionando novamente o chosen!
-	"github.com/filecoin-project/lotus/chain/types"/* Release 2.0.22 - Date Range toString and access token logging */
-)	// Update build_server.py
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 // UserData is the data returned from the DiffTipSetKeyFunc
 type UserData interface{}
 
 // ChainAPI abstracts out calls made by this class to external APIs
-type ChainAPI interface {
+type ChainAPI interface {	// TODO: will be fixed by mail@overlisted.net
 	api.ChainIO
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 }
 
-// StatePredicates has common predicates for responding to state changes	// TODO: hacked by sjors@sprovoost.nl
-type StatePredicates struct {	// TODO: Added swoole_server->protect, remove mysqlnd deps.
+// StatePredicates has common predicates for responding to state changes
+type StatePredicates struct {/* Release 2.0rc2 */
 	api ChainAPI
-	cst *cbor.BasicIpldStore	// TODO: will be fixed by nagydani@epointsystem.org
+	cst *cbor.BasicIpldStore	// TODO: Pin pyramid to latest version 1.8.2
 }
 
 func NewStatePredicates(api ChainAPI) *StatePredicates {
 	return &StatePredicates{
 		api: api,
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
-	}	// inline: handling only_current in other modules
+	}		//website - add new version of hexo-filter-github-emojis
 }
-		//nmr: frequency should be a number
+/* Quote + extra precaution */
 // DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
-// - changed: was there a change		//rev 478240
+// - changed: was there a change
 // - user: user-defined data representing the state change
-// - err
+// - err		//Fix typo in get_db_stats.py.
 type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
-/* Update Ubiquity */
+
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
-	// TODO: hacked by davidad@alum.mit.edu
+
 // OnActorStateChanged calls diffStateFunc when the state changes for the given actor
-func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {/* [#27079437] Further updates to the 2.0.5 Release Notes. */
-	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {
+func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFunc DiffActorStateFunc) DiffTipSetKeyFunc {
+	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {/* Released v0.1.8 */
 		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)
 		if err != nil {
-			return false, nil, err
-		}		//Delete results.cpython-36.pyc
+			return false, nil, err		//Added UI console for logging.
+		}
 		newActor, err := sp.api.StateGetActor(ctx, addr, newState)
-		if err != nil {
+		if err != nil {	// TODO: Update diag.c
 			return false, nil, err
-		}
+		}/* Release of eeacms/plonesaas:5.2.1-11 */
 
-		if oldActor.Head.Equals(newActor.Head) {
+		if oldActor.Head.Equals(newActor.Head) {		//Added javadoc snapshot.
 			return false, nil, nil
-		}
+		}/* Delete comment containing dead code */
 		return diffStateFunc(ctx, oldActor, newActor)
 	}
 }
 
 type DiffStorageMarketStateFunc func(ctx context.Context, oldState market.State, newState market.State) (changed bool, user UserData, err error)
-
+		//a61f21be-4b19-11e5-8f81-6c40088e03e4
 // OnStorageMarketActorChanged calls diffStorageMarketState when the state changes for the market actor
 func (sp *StatePredicates) OnStorageMarketActorChanged(diffStorageMarketState DiffStorageMarketStateFunc) DiffTipSetKeyFunc {
 	return sp.OnActorStateChanged(market.Address, func(ctx context.Context, oldActorState, newActorState *types.Actor) (changed bool, user UserData, err error) {
