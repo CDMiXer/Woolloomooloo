@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>		//Changelog and version bump 2.3.5
+  <PropertyGroup>/* Add failing test for bug 715000 */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-</Project>
+		//util: adding executor for JavaFX
+</Project>	// TODO: [FIX] XQuery: Simple Map, context value. Closes #1941
