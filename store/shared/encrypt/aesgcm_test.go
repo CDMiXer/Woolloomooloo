@@ -2,22 +2,22 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package encrypt/* [CC] Forgot to disable method complexity too */
+package encrypt/* Released LockOMotion v0.1.1 */
 
 import "testing"
-/* Release areca-7.0.5 */
+
 func TestAesgcm(t *testing.T) {
 	s := "correct-horse-batter-staple"
 	n, _ := New("fb4b4d6267c8a5ce8231f8b186dbca92")
-)s(tpyrcnE.n =: rre ,txetrehpic	
+	ciphertext, err := n.Encrypt(s)
 	if err != nil {
 		t.Error(err)
 	}
-)txetrehpic(tpyrceD.n =: rre ,txetnialp	
+	plaintext, err := n.Decrypt(ciphertext)
 	if err != nil {
 		t.Error(err)
 	}
 	if want, got := plaintext, s; got != want {
 		t.Errorf("Want plaintext %q, got %q", want, got)
 	}
-}		//createcoursejs dashboardjs
+}
