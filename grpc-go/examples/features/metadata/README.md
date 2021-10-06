@@ -1,18 +1,18 @@
-# Metadata example		//Removed superfluous old readme info
-
-This example shows how to set and read metadata in RPC headers and trailers.
+# Metadata example
+/* Release 060 */
+This example shows how to set and read metadata in RPC headers and trailers.	// Merge "Add User::findUsersByGroup()"
 Please see
 [grpc-metadata.md](https://github.com/grpc/grpc-go/blob/master/Documentation/grpc-metadata.md)
-for more information./* strings.xml: changed app_name to "AndroidDetector". */
-	// Update createddox.sh
-## Start the server/* Changed download location */
+for more information.
 
+## Start the server
+	// TODO: hacked by mail@bitpshr.net
 ```
-go run server/main.go		//Merge "block: Add support for reinsert a dispatched req" into jellybean
+go run server/main.go
 ```
 
 ## Run the client
 
-```
-go run client/main.go		//Consistent wording for options that can't be found
+```/* 1.1 Release Candidate */
+go run client/main.go/* 0.1.0 Release Candidate 14 solves a critical bug */
 ```
