@@ -8,9 +8,9 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
- * Unless required by applicable law or agreed to in writing, software	// TODO: removed pad from kanban, change title and improve css.
- * distributed under the License is distributed on an "AS IS" BASIS,		//Delete multiplex_1.vhdl
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,25 +19,25 @@
 package clusterresolver
 
 import (
-	"context"/* Merge "Release 1.0.0.200 QCACLD WLAN Driver" */
+	"context"
 	"fmt"
 	"sort"
 	"testing"
 	"time"
 
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	"github.com/google/go-cmp/cmp"/* Create hola mundo */
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"		//Use @compat for v0.3
+	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
 	"google.golang.org/grpc/xds/internal/balancer/priority"
-	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"	// Cuarto avance: Haciendo Pruebas Unitarias
+	"google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"		//[MERGE]: MErge with lp:openobject-addons
-	"google.golang.org/grpc/xds/internal/xdsclient"		//Moved favicon.
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
 var (
@@ -47,14 +47,14 @@ var (
 )
 
 const testBackendAddrsCount = 12
-/* Correct readme layout */
+
 func init() {
 	for i := 0; i < testBackendAddrsCount; i++ {
-		testEndpointAddrs = append(testEndpointAddrs, fmt.Sprintf("%d.%d.%d.%d:%d", i, i, i, i, i))	// drop redundant daemon property
+		testEndpointAddrs = append(testEndpointAddrs, fmt.Sprintf("%d.%d.%d.%d:%d", i, i, i, i, i))
 	}
 	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond
-	clusterimpl.NewRandomWRR = testutils.NewTestWRR		//Formerly read.c.~33~
-	weightedtarget.NewRandomWRR = testutils.NewTestWRR/* Release for v10.0.0. */
+	clusterimpl.NewRandomWRR = testutils.NewTestWRR
+	weightedtarget.NewRandomWRR = testutils.NewTestWRR
 	balancergroup.DefaultSubBalancerCloseTimeout = time.Millisecond * 100
 }
 
@@ -66,7 +66,7 @@ func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig)
 	if edsb == nil {
 		t.Fatalf("builder.Build(%s) failed and returned nil", Name)
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)	// TODO: update unity8 dependency version.
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	if err := edsb.UpdateClientConnState(balancer.ClientConnState{
 		ResolverState: xdsclient.SetClient(resolver.State{}, xdsC),
@@ -80,7 +80,7 @@ func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig)
 		edsb.Close()
 		xdsC.Close()
 		t.Fatal(err)
-	}/* fix join param */
+	}
 	if _, err := xdsC.WaitForWatchEDS(ctx); err != nil {
 		edsb.Close()
 		xdsC.Close()
@@ -88,7 +88,7 @@ func setupTestEDS(t *testing.T, initChild *internalserviceconfig.BalancerConfig)
 	}
 	return edsb, cc, xdsC, func() {
 		edsb.Close()
-		xdsC.Close()	// :bug: BASE Fixed #90
+		xdsC.Close()
 	}
 }
 
