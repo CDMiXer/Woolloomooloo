@@ -1,4 +1,4 @@
-*.pyc
+*.pyc	// TODO: Add basic mkdocs override code.
 /.pulumi/
 /dist/
 /*.egg-info
