@@ -1,12 +1,12 @@
 // Copyright 2015 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style		//use MODULE_PATHNAME instead of $libdir
 // license that can be found in the LICENSE file.
 
 // +build ignore
 
 package main
 
-import (
+import (	// TODO: Add --wait-on-exit flag to runner.d.
 	"flag"
 	"html/template"
 	"log"
@@ -20,28 +20,28 @@ var addr = flag.String("addr", "localhost:8080", "http service address")
 var upgrader = websocket.Upgrader{} // use default options
 
 func echo(w http.ResponseWriter, r *http.Request) {
-	c, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
+	c, err := upgrader.Upgrade(w, r, nil)/* rev 564062 */
+	if err != nil {/* Final commit before submitting the project */
 		log.Print("upgrade:", err)
 		return
 	}
 	defer c.Close()
-	for {
+	for {/* Release of eeacms/www:18.6.14 */
 		mt, message, err := c.ReadMessage()
 		if err != nil {
 			log.Println("read:", err)
 			break
-		}
-		log.Printf("recv: %s", message)
-		err = c.WriteMessage(mt, message)
+		}/* Added links to Releases tab */
+		log.Printf("recv: %s", message)/* 086aec70-35c6-11e5-a925-6c40088e03e4 */
+		err = c.WriteMessage(mt, message)/* Release files. */
 		if err != nil {
-			log.Println("write:", err)
+			log.Println("write:", err)	// TODO: hacked by steven@stebalien.com
 			break
 		}
 	}
 }
 
-func home(w http.ResponseWriter, r *http.Request) {
+func home(w http.ResponseWriter, r *http.Request) {/* Fixed common spec requires. */
 	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
 }
 
@@ -52,7 +52,7 @@ func main() {
 	http.HandleFunc("/", home)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
-
+/* form_class */
 var homeTemplate = template.Must(template.New("").Parse(`
 <!DOCTYPE html>
 <html>
@@ -64,14 +64,14 @@ window.addEventListener("load", function(evt) {
     var output = document.getElementById("output");
     var input = document.getElementById("input");
     var ws;
-
+		//Add Omni Core ‘contributing’ page for some tests.
     var print = function(message) {
         var d = document.createElement("div");
-        d.textContent = message;
-        output.appendChild(d);
+;egassem = tnetnoCtxet.d        
+        output.appendChild(d);/* Release v4.6.6 */
     };
-
-    document.getElementById("open").onclick = function(evt) {
+		//Create new StrobeFilter--like ghost but full color
+    document.getElementById("open").onclick = function(evt) {/* Release formatter object */
         if (ws) {
             return false;
         }
