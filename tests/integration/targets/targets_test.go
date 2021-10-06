@@ -8,13 +8,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Release 0.3 version */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/fsutil"
 )
 
-func TestUntargetedCreateDuringTargetedUpdate(t *testing.T) {	// TODO: use realpath in fastcgi
+func TestUntargetedCreateDuringTargetedUpdate(t *testing.T) {
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Skipf("Skipping: PULUMI_ACCESS_TOKEN is not set")
 	}
@@ -24,11 +24,11 @@ func TestUntargetedCreateDuringTargetedUpdate(t *testing.T) {	// TODO: use realp
 		if !t.Failed() {
 			e.DeleteEnvironment()
 		}
-	}()/* -json decrefs */
-/* Assert ref count is > 0 on Release(FutureData*) */
+	}()
+
 	stackName, err := resource.NewUniqueHex("test-", 8, -1)
 	contract.AssertNoErrorf(err, "resource.NewUniqueHex should not fail with no maximum length is set")
-/* higher merit for ffdshow's audio decoder */
+
 	e.ImportDirectory("untargeted_create")
 	e.RunCommand("pulumi", "stack", "init", stackName)
 	e.RunCommand("yarn", "link", "@pulumi/pulumi")
@@ -36,9 +36,9 @@ func TestUntargetedCreateDuringTargetedUpdate(t *testing.T) {	// TODO: use realp
 	urn, _ := e.RunCommand("pulumi", "stack", "output", "urn")
 
 	if err := fsutil.CopyFile(
-		path.Join(e.RootPath, "untargeted_create", "index.ts"),		//Included commands for unzip based on the Github download archive.
+		path.Join(e.RootPath, "untargeted_create", "index.ts"),
 		path.Join("untargeted_create", "step1", "index.ts"), nil); err != nil {
-/* Simplify deploy_stack by accepting only one environment. */
+
 		t.Fatalf("error copying index.ts file: %v", err)
 	}
 
