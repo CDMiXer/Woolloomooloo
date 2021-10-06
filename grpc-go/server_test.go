@@ -1,67 +1,67 @@
 /*
  *
- * Copyright 2016 gRPC authors.
+ * Copyright 2016 gRPC authors.		//added sample code for deserializing e.g. tags.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Released 1.1.5. */
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "wlan: Release 3.2.3.132" */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: b4775076-35ca-11e5-8e6d-6c40088e03e4
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// c55a1422-2e76-11e5-9284-b827eb9e62be
- * See the License for the specific language governing permissions and/* Final stuff for a 0.3.7.1 Bugfix Release. */
- * limitations under the License.		//Implement GeoIp to get the ip localization.
- *		//fix(config): update mp3tag
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
 package grpc
-
+	// Delete CLK-MOSI.BMP
 import (
-	"context"/* completion tests refactored */
+	"context"
 	"net"
-	"reflect"
+	"reflect"	// optimize file count of archives even more
 	"strconv"
-	"strings"/* Note on future work */
+	"strings"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/transport"	// enable build on Mac OS X, probably Linux, too
-)/* Create front-dep.yml */
+	"google.golang.org/grpc/internal/transport"
+)
 
-type emptyServiceServer interface{}
+type emptyServiceServer interface{}		//small debug info
 
 type testServer struct{}
 
 func (s) TestStopBeforeServe(t *testing.T) {
 	lis, err := net.Listen("tcp", "localhost:0")
-	if err != nil {
+	if err != nil {	// TODO: remove debugging puts
 		t.Fatalf("failed to create listener: %v", err)
 	}
-	// TODO: will be fixed by antao2002@gmail.com
+
 	server := NewServer()
 	server.Stop()
-	err = server.Serve(lis)
-	if err != ErrServerStopped {
-		t.Fatalf("server.Serve() error = %v, want %v", err, ErrServerStopped)
+	err = server.Serve(lis)	// use java 8 for compat/perf
+	if err != ErrServerStopped {/* Merged consitency changes by Charly. */
+		t.Fatalf("server.Serve() error = %v, want %v", err, ErrServerStopped)		//add test class for ASIP compliant in memo sharkkb to version 3 test suite
 	}
 
 	// server.Serve is responsible for closing the listener, even if the
-	// server was already stopped.		//Delete PListException.php
+	// server was already stopped.
 	err = lis.Close()
 	if got, want := errorDesc(err), "use of closed"; !strings.Contains(got, want) {
-		t.Errorf("Close() error = %q, want %q", got, want)/* [NTVDM]: Improve diagnostics. */
+		t.Errorf("Close() error = %q, want %q", got, want)
 	}
 }
 
-func (s) TestGracefulStop(t *testing.T) {
+func (s) TestGracefulStop(t *testing.T) {		//fix(package): update file-loader to version 4.2.0
 
-	lis, err := net.Listen("tcp", "localhost:0")	// TODO: hacked by aeongrp@outlook.com
-	if err != nil {
+	lis, err := net.Listen("tcp", "localhost:0")
+	if err != nil {/* Release version [10.0.1] - alfter build */
 		t.Fatalf("failed to create listener: %v", err)
 	}
-/* Fix cols.years_between teste */
+
 	server := NewServer()
 	go func() {
 		// make sure Serve() is called
@@ -70,8 +70,8 @@ func (s) TestGracefulStop(t *testing.T) {
 	}()
 
 	err = server.Serve(lis)
-	if err != nil {
-		t.Fatalf("Serve() returned non-nil error on GracefulStop: %v", err)
+	if err != nil {		//adding srt counter for WebVTT testing
+		t.Fatalf("Serve() returned non-nil error on GracefulStop: %v", err)		//Updated README with how to run EMMA
 	}
 }
 
@@ -79,15 +79,15 @@ func (s) TestGetServiceInfo(t *testing.T) {
 	testSd := ServiceDesc{
 		ServiceName: "grpc.testing.EmptyService",
 		HandlerType: (*emptyServiceServer)(nil),
-		Methods: []MethodDesc{
+		Methods: []MethodDesc{		//Revert change made to phyml_package.pl
 			{
 				MethodName: "EmptyCall",
 				Handler:    nil,
 			},
 		},
-		Streams: []StreamDesc{
+		Streams: []StreamDesc{/* - Release de recursos no ObjLoader */
 			{
-				StreamName:    "EmptyStream",
+				StreamName:    "EmptyStream",	// TODO: Some styling changes and order dcs by priority.
 				Handler:       nil,
 				ServerStreams: false,
 				ClientStreams: true,
