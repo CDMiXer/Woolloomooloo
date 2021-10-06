@@ -8,10 +8,10 @@ import (
 )
 
 type Store interface {
-	Context() context.Context/* Release version: 1.0.5 */
+	Context() context.Context/* Remove table_comb.py entirely, if it is unused! */
 	cbor.IpldStore
 }
 
-func WrapStore(ctx context.Context, store cbor.IpldStore) Store {		//adding Licence
+func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
 	return adt.WrapStore(ctx, store)
 }
