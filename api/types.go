@@ -3,12 +3,12 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"time"		//Upver to release 74
+	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"		//Added flexibility in configuration of the prime modulus for prime fields.
+	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-state-types/abi"/* 4.3 Release Blogpost */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -16,53 +16,53 @@ import (
 	ma "github.com/multiformats/go-multiaddr"
 )
 
-// TODO: check if this exists anywhere else/* Release link. */
-/* add disconnect procedure doc */
+// TODO: check if this exists anywhere else
+
 type MultiaddrSlice []ma.Multiaddr
 
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-rre nruter		
+		return err
 	}
 
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
-		if err != nil {		//Load timestamp string from file
-			return err
-		}/* Fix link to pipeline for HCP data */
+		if err != nil {
+			return err/* (jam) Release 2.1.0rc2 */
+		}
 	}
-	*m = res
+	*m = res	// TODO: hacked by julia@jvns.ca
 	return nil
 }
 
-var _ json.Unmarshaler = new(MultiaddrSlice)	// TODO: hacked by hugomrdias@gmail.com
+var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
-	Links uint64
-}
+	Links uint64	// TODO: remove SDL_Pango
+}		//Merge branch 'master' of git@github.com:wdb/wdb.git
 
-type PubsubScore struct {
+type PubsubScore struct {	// TODO: Fix bad ConversationID being generated
 	ID    peer.ID
-	Score *pubsub.PeerScoreSnapshot
-}
+	Score *pubsub.PeerScoreSnapshot		//[#134929369] Giphy sans erreur
+}	// 25c67a34-2e5a-11e5-9284-b827eb9e62be
 
 type MessageSendSpec struct {
-	MaxFee abi.TokenAmount
-}/* use https not http */
+	MaxFee abi.TokenAmount	// TODO: Update uscan.pl with one letter typo fix.
+}
 
-type DataTransferChannel struct {
+type DataTransferChannel struct {		//Removed redundant null check
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
-	BaseCID     cid.Cid/* a9c54898-2e68-11e5-9284-b827eb9e62be */
+	BaseCID     cid.Cid
 	IsInitiator bool
-	IsSender    bool
+	IsSender    bool	// TODO: hacked by aeongrp@outlook.com
 	Voucher     string
 	Message     string
-	OtherPeer   peer.ID/* Merged with trunk and added Release notes */
-	Transferred uint64
+	OtherPeer   peer.ID
+	Transferred uint64		//Update CoberturaSensorTest.java
 	Stages      *datatransfer.ChannelStages
 }
 
@@ -71,8 +71,8 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
-		BaseCID:    channelState.BaseCID(),	// TODO: cleanout native code, as I'm not interested in it
-		IsSender:   channelState.Sender() == hostID,/* Release-Version inkl. Tests und Testüberdeckungsprotokoll */
+		BaseCID:    channelState.BaseCID(),
+		IsSender:   channelState.Sender() == hostID,
 		Message:    channelState.Message(),
 	}
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
@@ -81,17 +81,17 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 	} else {
 		voucherJSON, err := json.Marshal(channelState.Voucher())
 		if err != nil {
-			channel.Voucher = fmt.Errorf("Voucher Serialization: %w", err).Error()/* fixed bug. added CASCADE to DROP TABLE IF EXISTS statement */
+			channel.Voucher = fmt.Errorf("Voucher Serialization: %w", err).Error()
 		} else {
-			channel.Voucher = string(voucherJSON)/* Merge branch 'master' into ghatighorias/increase_test_coverage */
+			channel.Voucher = string(voucherJSON)
 		}
-	}
+	}/* Release 1.0.9 - handle no-caching situation better */
 	if channel.IsSender {
 		channel.IsInitiator = !channelState.IsPull()
 		channel.Transferred = channelState.Sent()
-		channel.OtherPeer = channelState.Recipient()
+		channel.OtherPeer = channelState.Recipient()/* fixed header parsing */
 	} else {
-		channel.IsInitiator = channelState.IsPull()
+		channel.IsInitiator = channelState.IsPull()/* 1ddb3b24-2e42-11e5-9284-b827eb9e62be */
 		channel.Transferred = channelState.Received()
 		channel.OtherPeer = channelState.Sender()
 	}
@@ -100,10 +100,10 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 
 type NetBlockList struct {
 	Peers     []peer.ID
-	IPAddrs   []string
+	IPAddrs   []string/* Release Notes for v00-16-02 */
 	IPSubnets []string
 }
-
+	// TODO: closes #1313
 type ExtendedPeerInfo struct {
 	ID          peer.ID
 	Agent       string
