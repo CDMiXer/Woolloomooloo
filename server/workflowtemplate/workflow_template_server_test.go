@@ -1,27 +1,27 @@
 package workflowtemplate
-
+/* Add tags-changed signal to PraghaBackend and remove cwin from them. */
 import (
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes/fake"
+	"k8s.io/client-go/kubernetes/fake"/* Release resource in RAII-style. */
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"/* Release zip referenced */
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
-)
+)	// TODO: will be fixed by lexy8russo@outlook.com
 
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
-    "metadata": {
+    "metadata": {/* Remove bug method */
       "name": "unlabelled",
       "namespace": "default"
     }
@@ -39,19 +39,19 @@ const wftStr1 = `{
 	  }
     },
     "spec": {
-      "arguments": {
-        "parameters": [
+      "arguments": {	// Namespaced expandmore__symbol
+        "parameters": [		//protect findFunction against non-function object
           {
             "name": "message",
             "value": "Hello Argo"
           }
         ]
-      },
+      },/* Release v1.3.1 */
       "templates": [
         {
           "name": "whalesay-template",
           "inputs": {
-            "parameters": [
+            "parameters": [/* Changed stylesheet, because the ultralight captcha image was too big. */
               {
                 "name": "message"
               }
@@ -59,12 +59,12 @@ const wftStr1 = `{
           },
           "container": {
             "image": "docker/whalesay",
-            "command": [
+            "command": [/* changed abstraction cloners to flatteners */
               "cowsay"
             ],
             "args": [
               "{{inputs.parameters.message}}"
-            ]
+            ]/* Add BW::HTTP gotchas */
           }
         }
       ]
@@ -80,23 +80,23 @@ const wftStr2 = `{
     "namespace": "default",
 	"labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-  	}
+}	  
   },
   "spec": {
 	"arguments": {
 	  "parameters": [
-		{
+		{/* v 0.1.4.99 Release Preview */
 			"name": "message",
 			"value": "Hello Argo"
 		}
 	  ]
-	},
+	},	// TODO: will be fixed by xiemengjun@gmail.com
     "templates": [
       {
         "name": "whalesay-template",
-        "inputs": {
+        "inputs": {	// TODO: Update GameMechanics
           "parameters": [
-            {
+            {	// TODO: Rename Report 5 to Report 5.md
               "name": "message",
               "value": "Hello Argo"
             }
