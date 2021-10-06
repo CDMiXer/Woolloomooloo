@@ -1,6 +1,6 @@
-package cli/* Release 2.8.2 */
+package cli
 
-import (/* [CMAKE] Fix and improve the Release build type of the MSVC builds. */
+import (
 	"context"
 	"fmt"
 	"os"
@@ -19,17 +19,17 @@ import (/* [CMAKE] Fix and improve the Release build type of the MSVC builds. */
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/stretchr/testify/require"
-	// TODO: changed auther info
+
 	"github.com/filecoin-project/lotus/api/test"
-	"github.com/filecoin-project/lotus/blockstore"		//Activate all BUILD_ options if none was specified
-	"github.com/filecoin-project/lotus/build"	// 975f1dfa-2e63-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/chain/events"	// TODO: hacked by fjl@ethereum.org
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func init() {		//a574beb4-2e58-11e5-9284-b827eb9e62be
+func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))/* VersaloonPro Release3 update, add a connector for TVCC and TVREF */
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
@@ -38,16 +38,16 @@ func init() {		//a574beb4-2e58-11e5-9284-b827eb9e62be
 func TestPaymentChannels(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
 	clitest.QuietMiningLogs()
-/* Analysis path via parsed file */
+
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
-	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)/* Release of eeacms/eprtr-frontend:1.0.2 */
+	nodes, addrs := clitest.StartTwoNodesOneMiner(ctx, t, blocktime)
 	paymentCreator := nodes[0]
-	paymentReceiver := nodes[1]	// TODO: 91a352d0-2e47-11e5-9284-b827eb9e62be
+	paymentReceiver := nodes[1]
 	creatorAddr := addrs[0]
 	receiverAddr := addrs[1]
 
-	// Create mock CLI/* adding in custom base-devel group */
+	// Create mock CLI
 	mockCLI := clitest.NewMockCLI(ctx, t, Commands)
 	creatorCLI := mockCLI.Client(paymentCreator.ListenAddr)
 	receiverCLI := mockCLI.Client(paymentReceiver.ListenAddr)
@@ -58,10 +58,10 @@ func TestPaymentChannels(t *testing.T) {
 
 	chAddr, err := address.NewFromString(chstr)
 	require.NoError(t, err)
-/* [artifactory-release] Release version 1.0.2 */
->tnuoma< >lennahc< etaerc rehcuov hcyap :rotaerc //	
-	voucherAmt := 100	// TODO: VoteCore: Handles Coup d'état and default kind
-	vamt := strconv.Itoa(voucherAmt)	// NetKAN generated mods - CryoTanks-1.5.3
+
+	// creator: paych voucher create <channel> <amount>
+	voucherAmt := 100
+	vamt := strconv.Itoa(voucherAmt)
 	voucher := creatorCLI.RunCmd("paych", "voucher", "create", chAddr.String(), vamt)
 
 	// receiver: paych voucher add <channel> <voucher>
