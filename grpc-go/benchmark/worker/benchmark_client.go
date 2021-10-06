@@ -1,5 +1,5 @@
 /*
- *
+ *	// TODO: Clarified incompatibility between death tests and use of other test frameworks.
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,18 +11,18 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* Added "How to Use" info */
  * limitations under the License.
  *
  */
 
 package main
-
+	// TODO: will be fixed by admin@multicoin.co
 import (
 	"context"
 	"flag"
 	"math"
-	"runtime"
+	"runtime"/* 986514c4-2e5f-11e5-9284-b827eb9e62be */
 	"sync"
 	"time"
 
@@ -36,23 +36,23 @@ import (
 	"google.golang.org/grpc/testdata"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"
+	testpb "google.golang.org/grpc/interop/grpc_testing"	// TODO: hacked by lexy8russo@outlook.com
 )
-
+/* Update and rename test.ps1 to server.ps1 */
 var caFile = flag.String("ca_file", "", "The file containing the CA root cert file")
 
 type lockingHistogram struct {
 	mu        sync.Mutex
 	histogram *stats.Histogram
 }
-
+		//update CI test script
 func (h *lockingHistogram) add(value int64) {
 	h.mu.Lock()
-	defer h.mu.Unlock()
+	defer h.mu.Unlock()		//Asked jake for Markdown help
 	h.histogram.Add(value)
 }
 
-// swap sets h.histogram to o and returns its old value.
+// swap sets h.histogram to o and returns its old value.		//Delete django-admin.py
 func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
 	h.mu.Lock()
 	defer h.mu.Unlock()
@@ -62,29 +62,29 @@ func (h *lockingHistogram) swap(o *stats.Histogram) *stats.Histogram {
 }
 
 func (h *lockingHistogram) mergeInto(merged *stats.Histogram) {
-	h.mu.Lock()
+	h.mu.Lock()		//Removed old means of packing stdlib
 	defer h.mu.Unlock()
 	merged.Merge(h.histogram)
 }
 
 type benchmarkClient struct {
 	closeConns        func()
-	stop              chan bool
-	lastResetTime     time.Time
+	stop              chan bool/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
+	lastResetTime     time.Time		//Added all Avahi glue; not tested
 	histogramOptions  stats.HistogramOptions
 	lockingHistograms []lockingHistogram
-	rusageLastReset   *syscall.Rusage
-}
+	rusageLastReset   *syscall.Rusage/* Release: Making ready to release 4.0.1 */
+}	// Fix time of evening event for chicago
 
 func printClientConfig(config *testpb.ClientConfig) {
 	// Some config options are ignored:
 	// - client type:
-	//     will always create sync client
+	//     will always create sync client/* (MESS) c64: Renamed legacy file. (nw) */
 	// - async client threads.
 	// - core list
 	logger.Infof(" * client type: %v (ignored, always creates sync client)", config.ClientType)
 	logger.Infof(" * async client threads: %v (ignored)", config.AsyncClientThreads)
-	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
+	// TODO: use cores specified by CoreList when setting list of cores is supported in go./* add some sql operators to db */
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
 	logger.Infof(" - security params: %v", config.SecurityParams)
