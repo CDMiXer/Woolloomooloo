@@ -1,10 +1,10 @@
-{/* Release of eeacms/www:18.6.19 */
-  "compilerOptions": {/* fixed PH_BARRIER */
+{
+  "compilerOptions": {	// TODO: will be fixed by peterke@gmail.com
     "strict": true,
-    "outDir": "bin",	// move Create Operation to v1.2
-    "target": "es2016",/* Release of eeacms/www:20.5.27 */
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "outDir": "bin",
+    "target": "es2016",
+    "module": "commonjs",	// TODO: will be fixed by nagydani@epointsystem.org
+    "moduleResolution": "node",/* Update DockerfileRelease */
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
@@ -14,7 +14,7 @@
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
+  "files": [/* background the smbstatus -n command */
     "index.ts"
   ]
 }
