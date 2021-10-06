@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-echo "# This is an auto-generated file. DO NOT EDIT"
-cat		//Handle command-line args correctly
+echo "# This is an auto-generated file. DO NOT EDIT"		//Update persistent_message_queues_overview.adoc
+cat
