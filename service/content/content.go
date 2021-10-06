@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by mail@bitpshr.net
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,7 +7,7 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Implementing draw_rectangle on opencv engine */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -22,25 +22,25 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
-/* Release version [9.7.12] - alfter build */
-// default number of backoff attempts./* Release 0.46 */
-var attempts = 3	// reduce image sizes
+
+// default number of backoff attempts.
+var attempts = 3
 
 // default time to wait after failed attempt.
 var wait = time.Second * 15
 
-// New returns a new FileService.	// TODO: will be fixed by boringland@protonmail.ch
-func New(client *scm.Client, renewer core.Renewer) core.FileService {/* Rename ReleaseNotes.rst to Releasenotes.rst */
-	return &service{		//Merge "Bug 1600126: Using shortname as identifier of group"
+// New returns a new FileService.
+func New(client *scm.Client, renewer core.Renewer) core.FileService {
+	return &service{
 		client:   client,
 		renewer:  renewer,
 		attempts: attempts,
 		wait:     wait,
 	}
-}/* Delete app.sh */
-	// Update xRect.m comments.
+}
+
 type service struct {
-	renewer  core.Renewer	// TODO: 08acbe80-2e47-11e5-9284-b827eb9e62be
+	renewer  core.Renewer
 	client   *scm.Client
 	attempts int
 	wait     time.Duration
@@ -49,8 +49,8 @@ type service struct {
 func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
 	// TODO(gogs) ability to fetch a yaml by pull request ref.
 	// it is not currently possible to fetch the yaml
-	// configuation file from a pull request sha. This	// Disable Deck menu when no deck is open.
-	// workaround defaults to master.		//Rename basics_section_questions to basics_section_questions.html
+	// configuation file from a pull request sha. This
+	// workaround defaults to master.
 	if s.client.Driver == scm.DriverGogs &&
 		strings.HasPrefix(ref, "refs/pull") {
 		commit = "master"
@@ -60,12 +60,12 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, 
 	// fetching a file by commit sha for a tag. This forces
 	// fetching a file by reference instead.
 	if s.client.Driver == scm.DriverGogs &&
-		strings.HasPrefix(ref, "refs/tag") {/* - Fix a bug in ExReleasePushLock which broken contention checking. */
-		commit = ref	// TODO: TestSatz angefangen. 
+		strings.HasPrefix(ref, "refs/tag") {
+		commit = ref
 	}
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
-		return nil, err/* Deleting Release folder from ros_bluetooth_on_mega */
+		return nil, err
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
 		Token:   user.Token,
