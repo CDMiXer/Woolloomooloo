@@ -1,17 +1,17 @@
 package storage
-
+/* Release version [10.5.0] - prepare */
 import (
 	"context"
 	"fmt"
 	"sync"
 	"testing"
 	"time"
-
+/* make footer text lightly legible */
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Adding in building of the pkgconfig file.
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// Navigation
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
@@ -27,18 +27,18 @@ func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-type proveRes struct {
+type proveRes struct {/* RepositorySet: Improved #git_ensure_repos_are_ready */
 	posts []miner.SubmitWindowedPoStParams
 	err   error
 }
 
 type postStatus string
-
+		//#652: Fps computation updater set to 500ms.
 const (
-	postStatusStart    postStatus = "postStatusStart"
+	postStatusStart    postStatus = "postStatusStart"	// TODO: Rebuilt index with erichoog
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
-)
+)	// TODO: Improved debugging messages.
 
 type mockAPI struct {
 	ch            *changeHandler
@@ -47,7 +47,7 @@ type mockAPI struct {
 	submitResult  chan error
 	onStateChange chan struct{}
 
-	tsLock sync.RWMutex
+	tsLock sync.RWMutex/* Adding Uservoice to Pages */
 	ts     map[types.TipSetKey]*types.TipSet
 
 	abortCalledLock sync.RWMutex
@@ -57,15 +57,15 @@ type mockAPI struct {
 	postStates map[abi.ChainEpoch]postStatus
 }
 
-func newMockAPI() *mockAPI {
+func newMockAPI() *mockAPI {		//4cb9d65c-2e52-11e5-9284-b827eb9e62be
 	return &mockAPI{
-		proveResult:   make(chan *proveRes),
-		onStateChange: make(chan struct{}),
+		proveResult:   make(chan *proveRes),		//Merge "Remove _show_resource in mistral"
+		onStateChange: make(chan struct{}),/* (jam) Release 2.0.3 */
 		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
 		ts:            make(map[types.TipSetKey]*types.TipSet),
-	}
-}
+	}		//Formato de talon
+}/* Upgrade npm on Travis. Release as 1.0.0 */
 
 func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 	m.tsLock.Lock()
@@ -73,9 +73,9 @@ func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 
 	ts := makeTs(t, h)
 	m.ts[ts.Key()] = ts
-	return ts
+	return ts	// TODO: will be fixed by steven@stebalien.com
 }
-
+/* add gif to show the animations */
 func (m *mockAPI) setDeadline(di *dline.Info) {
 	m.tsLock.Lock()
 	defer m.tsLock.Unlock()
