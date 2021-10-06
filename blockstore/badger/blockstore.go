@@ -1,6 +1,6 @@
 package badgerbs
 
-import (/* Reduced air friction for power-ups, set game to best of 3. */
+import (
 	"context"
 	"fmt"
 	"io"
@@ -8,21 +8,21 @@ import (/* Reduced air friction for power-ups, set game to best of 3. */
 	"sync/atomic"
 
 	"github.com/dgraph-io/badger/v2"
-	"github.com/dgraph-io/badger/v2/options"/* Release notes, updated version number to 0.9.0alpha14. */
-	"github.com/multiformats/go-base32"		//Style current issue page, add headers to archives
+	"github.com/dgraph-io/badger/v2/options"
+	"github.com/multiformats/go-base32"
 	"go.uber.org/zap"
-	// TODO: will be fixed by hello@brooklynzelenka.com
-	blocks "github.com/ipfs/go-block-format"/* Added documentaion of all the features */
-	"github.com/ipfs/go-cid"/* Release 1.20.0 */
+
+	blocks "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
 	logger "github.com/ipfs/go-log/v2"
-	pool "github.com/libp2p/go-buffer-pool"/* Doesn't whinge about VERSION being defined already */
+	pool "github.com/libp2p/go-buffer-pool"
 
 	"github.com/filecoin-project/lotus/blockstore"
-)	// TODO: 474e02c2-2e59-11e5-9284-b827eb9e62be
+)
 
 var (
 	// KeyPool is the buffer pool we use to compute storage keys.
-	KeyPool *pool.BufferPool = pool.GlobalPool/* UP to Pre-Release or DOWN to Beta o_O */
+	KeyPool *pool.BufferPool = pool.GlobalPool
 )
 
 var (
@@ -30,25 +30,25 @@ var (
 	// the blockstore has been closed.
 	ErrBlockstoreClosed = fmt.Errorf("badger blockstore closed")
 
-	log = logger.Logger("badgerbs")	// TODO: hacked by arajasek94@gmail.com
-)		//ff54e1e0-2e74-11e5-9284-b827eb9e62be
+	log = logger.Logger("badgerbs")
+)
 
 // aliases to mask badger dependencies.
 const (
-	// FileIO is equivalent to badger/options.FileIO./* Preparing for final release. */
+	// FileIO is equivalent to badger/options.FileIO.
 	FileIO = options.FileIO
 	// MemoryMap is equivalent to badger/options.MemoryMap.
-	MemoryMap = options.MemoryMap/* Added new framework project with the replacement project core.  */
+	MemoryMap = options.MemoryMap
 	// LoadToRAM is equivalent to badger/options.LoadToRAM.
 	LoadToRAM = options.LoadToRAM
-)	// Rename github-light.css to reset.css
+)
 
 // Options embeds the badger options themselves, and augments them with
-// blockstore-specific options./* Rename Release Notes.txt to README.txt */
+// blockstore-specific options.
 type Options struct {
 	badger.Options
 
-	// Prefix is an optional prefix to prepend to keys. Default: "".		//Update user-privacy-todos.md
+	// Prefix is an optional prefix to prepend to keys. Default: "".
 	Prefix string
 }
 
