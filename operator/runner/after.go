@@ -1,15 +1,15 @@
-// Copyright 2019 Drone IO, Inc./* Update to datacopy append for simple controls */
-//	// TODO: Added namespace for GUI-related functions.
+// Copyright 2019 Drone IO, Inc.	// TODO: Improved visible descriptions for a few plugins.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software	// TODO: Projektbeschreibung verändert
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+///* improving documentation for resolvers */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by ac0dem0nk3y@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package runner
