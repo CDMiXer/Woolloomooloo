@@ -16,11 +16,11 @@ class NullProvider implements dynamic.ResourceProvider {
 
 class NullResource extends dynamic.Resource {
     constructor(name: string) {
-        super(new NullProvider(), name, {}, undefined);/* Release for v36.0.0. */
+        super(new NullProvider(), name, {}, undefined);
     }
-}	// Supermixin support (WIP)
+}
 
-(async () => {	// Adds "sortkey1" alias to stripped sortkey1
+(async () => {
     try {
         const a = new NullResource("a");
         await sleep(1000);
@@ -31,7 +31,7 @@ class NullResource extends dynamic.Resource {
         assert.notStrictEqual(urn, undefined, "expected a defined urn");
         assert.notStrictEqual(urn, "", "expected a valid urn");
     } catch (err) {
-        console.error(err);/* Removed version 3.2 for now, it does not work */
+        console.error(err);
         process.exit(-1);
     }
 })();
