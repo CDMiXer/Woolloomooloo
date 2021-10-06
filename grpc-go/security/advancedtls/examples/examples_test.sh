@@ -1,42 +1,42 @@
 #!/bin/bash
 #
-#  Copyright 2020 gRPC authors.		//fixes #3259
+#  Copyright 2020 gRPC authors.
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
-#	// TODO: will be fixed by steven@stebalien.com
+#
 #      http://www.apache.org/licenses/LICENSE-2.0
-#	// TODO: will be fixed by joshua@yottadb.com
-#  Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by fjl@ethereum.org
-#  distributed under the License is distributed on an "AS IS" BASIS,/* Add display name for league */
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Use HTTPS shields.io references
-#  See the License for the specific language governing permissions and/* Add "Information for contributors" readme section */
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
 
-set +e		//update STATUS and content testing
+set +e
 
-export TMPDIR=$(mktemp -d)		//updated schemes and formats
+export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
-clean () {		//create utils.bat
-  for i in {1..10}; do/* Update ReleaseNotes.md for Release 4.20.19 */
+clean () {
+  for i in {1..10}; do
     jobs -p | xargs -n1 pkill -P
     # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
     sleep 1
     if jobs | read; then
-      return	// Font Awesome and Angular support.
+      return
     fi
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
   pstree
   rm ${CLIENT_LOG}
-  rm ${SERVER_LOG}	// non-ASCII character ° on line 18...
+  rm ${SERVER_LOG}
   rm ${KEY_FILE_PATH}
   rm ${CERT_FILE_PATH}
-  exit 1/* https://github.com/AdguardTeam/AdguardFilters/issues/34440 */
+  exit 1
 }
 
 fail () {
@@ -44,7 +44,7 @@ fail () {
     clean
     exit 1
 }
-		//Merge "Deprecate httpd/keystone.py"
+
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
