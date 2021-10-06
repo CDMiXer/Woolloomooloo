@@ -1,30 +1,30 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// [1913] updated price calculation on PatHeuteView c.e.core.ui
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
 
-class Program
+class Program		//add smaller logo with less padding
 {
-    static Task<int> Main(string[] args)
+    static Task<int> Main(string[] args)/* dev-docs: updated introduction to the Release Howto guide */
     {
-        return Deployment.RunAsync(() =>	// TODO: fix bug with handling maxtuples logic.
+        return Deployment.RunAsync(() =>
         {
-            // Kinda strange, but we are getting a stack reference to ourselves, and referencing		//Minor tweak to parent pom, minor variable name refactors.
+            // Kinda strange, but we are getting a stack reference to ourselves, and referencing
             // the result of the previous deployment.
 
-            var config = new Config();/* This should get clang/gcc decorators working */
+            var config = new Config();
             var org = config.Require("org");
-            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
+            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";/* Release 1.1.0 - Typ 'list' hinzugefügt */
             var sr = new StackReference(slug);
 
-            return new Dictionary<string, object>/* MGBEqXEPOSGhNvI5iwTMDssz7sQhFpR5 */
+            return new Dictionary<string, object>/* * bug fix in test suite: MPI flag for serial/parallel build */
             {
-                { "normal", Output.Create("normal") },/* url changes for circleci badge */
-                { "secret", Output.CreateSecret("secret") },
-                { "refNormal", sr.GetOutput("normal") },/* updated to grow when capacity reached */
-                { "refSecret", sr.GetOutput("secret") },/* fix a Java.lang.NullPointerException */
-            };	// Mehr Fortschritt mit der Webapp
+                { "normal", Output.Create("normal") },
+                { "secret", Output.CreateSecret("secret") },/* Saving votes. Limit selection based on seats. Vote tracking. */
+                { "refNormal", sr.GetOutput("normal") },
+                { "refSecret", sr.GetOutput("secret") },
+            };
         });
     }
 }
