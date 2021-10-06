@@ -1,19 +1,19 @@
-{{ define "examples" -}}		//Create 042. Trapping Rain Water.py
-{{ print "{{% examples %}}" }}/* Added KeyReleased event to input system. */
+{{ define "examples" -}}	// TODO: Merge "Remove Java 6 build support"
+{{ print "{{% examples %}}" }}/* build: Release version 0.2 */
 ## Example Usage
-
+	// TODO: remove outdated links to sassc [CI SKIP]
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
-	// TODO: hacked by fjl@ethereum.org
+
 {{- range . }}
 {{ .Title }}
 
-{{- range $key, $val := .Snippets }}
+{{- range $key, $val := .Snippets }}		//rebuilt show/hide element browser
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}
+{{ htmlSafe $val }}	// TODO: minor refactor + remove obsolete code
 {{ print "{{% /example %}}" }}
 {{ end }}
 
-{{- end }}	// update: added Yordan Sketch html link
+{{- end }}	// TODO: Change `runnung` to `running`
 {{ print "{{% /examples %}}" }}
 
-{{- end }}
+{{- end }}	// TODO: ENH: Update Python package version to  0.3.0
