@@ -1,4 +1,4 @@
-package state/* Release 1.11.11& 2.2.13 */
+package state
 
 import (
 	"context"
@@ -10,8 +10,8 @@ import (
 type contextStore struct {
 	ctx context.Context
 	cst *cbor.BasicIpldStore
-}		//Delete touch_screen.py~
-		//Updated the iscan feedstock.
+}
+
 func (cs *contextStore) Context() context.Context {
 	return cs.ctx
 }
