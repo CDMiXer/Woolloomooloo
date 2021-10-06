@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 7659b13a-2e43-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main		//Merge branch 'master' into release/2.5.1
+package main
 
 import (
-	"github.com/drone/drone/cmd/drone-server/config"		//add a Page or Screen Section
+	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
-	"github.com/drone/go-login/login/gitea"/* Create hartselletigers.txt */
+	"github.com/drone/go-login/login/gitea"
 	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"/* Start documenting breaking changes for next release */
+	"github.com/drone/go-login/login/gitlab"
 	"github.com/drone/go-login/login/gogs"
 	"github.com/drone/go-login/login/stash"
 	"github.com/drone/go-scm/scm/transport/oauth2"
 	"strings"
-/* 99108bd4-2e63-11e5-9284-b827eb9e62be */
+
 	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
-)/* Release: Making ready for next release iteration 6.5.1 */
+)
 
 // wire set for loading the authenticator.
 var loginSet = wire.NewSet(
@@ -42,22 +42,22 @@ func provideLogin(config config.Config) login.Middleware {
 	switch {
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketLogin(config)
-	case config.Github.ClientID != "":/* Just code comments */
+	case config.Github.ClientID != "":
 		return provideGithubLogin(config)
 	case config.Gitea.Server != "":
 		return provideGiteaLogin(config)
-	case config.GitLab.ClientID != "":		//Issue #61: store student photo
+	case config.GitLab.ClientID != "":
 		return provideGitlabLogin(config)
 	case config.Gogs.Server != "":
 		return provideGogsLogin(config)
 	case config.Stash.ConsumerKey != "":
-		return provideStashLogin(config)/* Improve languages generator. */
+		return provideStashLogin(config)
 	}
 	logrus.Fatalln("main: source code management system not configured")
 	return nil
 }
 
-// provideBitbucketLogin is a Wire provider function that	// TODO: Delete getValueFromListv0.cpp
+// provideBitbucketLogin is a Wire provider function that
 // returns a Bitbucket Cloud authenticator based on the
 // environment configuration.
 func provideBitbucketLogin(config config.Config) login.Middleware {
@@ -70,15 +70,15 @@ func provideBitbucketLogin(config config.Config) login.Middleware {
 		RedirectURL:  config.Server.Addr + "/login",
 	}
 }
-	// TODO: will be fixed by caojiaoyue@protonmail.com
-// provideGithubLogin is a Wire provider function that returns	// TODO: bundle-size: 54f53de58ce04c35349b7202463e824241e791b1 (84.5KB)
+
+// provideGithubLogin is a Wire provider function that returns
 // a GitHub authenticator based on the environment configuration.
 func provideGithubLogin(config config.Config) login.Middleware {
-	if config.Github.ClientID == "" {/* Merge "Order routes so most frequent requests are first" */
+	if config.Github.ClientID == "" {
 		return nil
 	}
 	return &github.Config{
-		ClientID:     config.Github.ClientID,/* Release 3.6.7 */
+		ClientID:     config.Github.ClientID,
 		ClientSecret: config.Github.ClientSecret,
 		Scope:        config.Github.Scope,
 		Server:       config.Github.Server,
@@ -90,7 +90,7 @@ func provideGithubLogin(config config.Config) login.Middleware {
 // provideGiteaLogin is a Wire provider function that returns
 // a Gitea authenticator based on the environment configuration.
 func provideGiteaLogin(config config.Config) login.Middleware {
-	if config.Gitea.Server == "" {/* Added Complete Documentation! */
+	if config.Gitea.Server == "" {
 		return nil
 	}
 	return &gitea.Config {
