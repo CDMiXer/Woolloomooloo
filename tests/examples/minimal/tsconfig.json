@@ -5,17 +5,17 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": true,	// TODO: Delete createTask
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,	// Updating build-info/dotnet/roslyn/dev16.4 for beta1-19462-03
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [
+        "forceConsistentCasingInFileNames": true	// TODO: Create Java String Reverse.java
+    },/* Added session ping javascript code to avoid session timeout */
+    "files": [/* Updated bundle metadata */
         "index.ts"
     ]
 }
-
+		//commented out concert section
