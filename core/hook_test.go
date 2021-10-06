@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release 0.14.2 (#793) */
+// +build !oss
 
 package core
