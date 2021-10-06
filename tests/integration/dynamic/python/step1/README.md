@@ -1,1 +1,1 @@
-Intentionally make no changes./* using JFrame instead of java applet */
+Intentionally make no changes.
