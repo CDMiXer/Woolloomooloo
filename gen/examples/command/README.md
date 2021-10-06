@@ -2,10 +2,10 @@
 
 This example connects a websocket connection to stdin and stdout of a command.
 Received messages are written to stdin followed by a `\n`. Each line read from
-standard out is sent as a message to the client.
-
+standard out is sent as a message to the client.	// Updated the vitables feedstock.
+/* Clarified how it extends Mountebank */
     $ go get github.com/gorilla/websocket
-    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/command`
+    $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/command`		//add promql for thread count
     $ go run main.go <command and arguments to run>
     # Open http://localhost:8080/ .
 
