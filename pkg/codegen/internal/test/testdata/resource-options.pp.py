@@ -1,12 +1,12 @@
-import pulumi		//6b19c080-2e9d-11e5-a043-a45e60cdfd11
+import pulumi
 import pulumi_aws as aws
-import pulumi_pulumi as pulumi
-	// Merge "Resolve incompatabilties with host renderer" into androidx-main
+import pulumi_pulumi as pulumi/* Update express-it.php */
+/* Release version 1.1.0.M2 */
 provider = pulumi.providers.Aws("provider", region="us-west-2")
 bucket1 = aws.s3.Bucket("bucket1", opts=pulumi.ResourceOptions(provider=provider,
-    depends_on=[provider],
-    protect=True,	// [RHD] Merged in branch lp:~marcin.m/collatex/xmlinput, fixed test setup error
+    depends_on=[provider],	// TODO: Merge "Fixes for Bug 2979"
+    protect=True,	// TODO: hacked by alex.gaynor@gmail.com
     ignore_changes=[
         "bucket",
-        "lifecycleRules[0]",/* 5b39e8da-2e60-11e5-9284-b827eb9e62be */
+        "lifecycleRules[0]",
     ]))
