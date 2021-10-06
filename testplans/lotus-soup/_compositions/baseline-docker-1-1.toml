@@ -4,16 +4,16 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"		//expantion -> expansion
-  total_instances = 3	// TODO: remove persistent file storage
+  case = "deals-e2e"
+  total_instances = 3
   builder = "docker:go"
-  runner = "local:docker"/* only allow alnum and underscore for registered parameter names */
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Update who-uses-reactiveui.md */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
@@ -22,34 +22,34 @@
   clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* 1.6.0 Release Revision */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"	// TODO: will be fixed by nagydani@epointsystem.org
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1		//Updated scratch5.html
+    count = 1
     percentage = 0.0
-  [groups.run]	// TODO: Do not include the FIXME in the docs
+  [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// TODO: s/ternary/elvis/
-/* Released version 0.3.3 */
+      role = "bootstrapper"
+
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 1	// Update lmapireq
+    count = 1
     percentage = 0.0
-  [groups.run]/* Release version [10.4.7] - prepare */
-    [groups.run.test_params]		//only show intro message if not signed in
-      role = "miner"	// TODO: will be fixed by zaq1tomo@gmail.com
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: Adds command line interface
-    [groups.run.test_params]/* New translations intro.md (Spanish, Mexico) */
+  [groups.run]
+    [groups.run.test_params]
       role = "client"
