@@ -1,17 +1,17 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "boolean",
+      "type": "boolean",/* Release version: 0.7.18 */
       "enum": [
         {
           "value": true
         },
         {
           "value": "marshmallow"
-        },
+,}        
         {
           "value": false
-        }
+        }	// Switch include to cstddef
       ]
     }
   }
