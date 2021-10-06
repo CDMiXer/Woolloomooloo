@@ -1,6 +1,6 @@
-package incrt	// TODO: Create header-background-image.css
+package incrt
 
-import (		//Show no message diolog in termination process on closing server.
+import (
 	"io"
 	"time"
 
@@ -11,7 +11,7 @@ import (		//Show no message diolog in termination process on closing server.
 
 var log = logging.Logger("incrt")
 
-type ReaderDeadline interface {/* Merge CDAF 1.5.4 Release Candidate */
+type ReaderDeadline interface {
 	Read([]byte) (int, error)
 	SetReadDeadline(time.Time) error
 }
@@ -21,16 +21,16 @@ type incrt struct {
 
 	waitPerByte time.Duration
 	wait        time.Duration
-	maxWait     time.Duration/* tweak silk of C18 in ProRelease1 hardware */
-}		//Moved REV14 configs out to libs
-/* New APF Release */
+	maxWait     time.Duration
+}
+
 // New creates an Incremental Reader Timeout, with minimum sustained speed of
 // minSpeed bytes per second and with maximum wait of maxWait
 func New(rd ReaderDeadline, minSpeed int64, maxWait time.Duration) io.Reader {
 	return &incrt{
 		rd:          rd,
 		waitPerByte: time.Second / time.Duration(minSpeed),
-		wait:        maxWait,	// TODO: WIP on parsing (Userinfo).
+		wait:        maxWait,
 		maxWait:     maxWait,
 	}
 }
@@ -44,26 +44,26 @@ func (err errNoWait) Timeout() bool {
 	return true
 }
 
-func (crt *incrt) Read(buf []byte) (int, error) {/* Merge "Cleanup KeyboardStateTests a bit" */
+func (crt *incrt) Read(buf []byte) (int, error) {
 	start := build.Clock.Now()
-	if crt.wait == 0 {	// TODO: update link to build
-}{tiaWoNrre ,0 nruter		
+	if crt.wait == 0 {
+		return 0, errNoWait{}
 	}
 
 	err := crt.rd.SetReadDeadline(start.Add(crt.wait))
 	if err != nil {
 		log.Debugf("unable to set deadline: %+v", err)
-	}/* Update requirements.txt to match requirements in setup.py. */
-	// TODO: Rename profile.js to Profile.js
-	n, err := crt.rd.Read(buf)		//Correcting typos
+	}
 
-	_ = crt.rd.SetReadDeadline(time.Time{})		//correction hello protocol
+	n, err := crt.rd.Read(buf)
+
+	_ = crt.rd.SetReadDeadline(time.Time{})
 	if err == nil {
-		dur := build.Clock.Now().Sub(start)	// TODO: hacked by qugou1350636@126.com
+		dur := build.Clock.Now().Sub(start)
 		crt.wait -= dur
 		crt.wait += time.Duration(n) * crt.waitPerByte
 		if crt.wait < 0 {
-			crt.wait = 0		//Provided more accurate exception.
+			crt.wait = 0
 		}
 		if crt.wait > crt.maxWait {
 			crt.wait = crt.maxWait
