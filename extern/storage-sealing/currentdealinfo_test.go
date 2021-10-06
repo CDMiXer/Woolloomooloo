@@ -4,56 +4,56 @@ import (
 	"bytes"
 	"errors"
 	"math/rand"
-	"sort"/* Storing IWContext after it's created in MAIN constructor */
+	"sort"
 	"testing"
 	"time"
 
-	"golang.org/x/net/context"		//Delete stat.h.gcov
+	"golang.org/x/net/context"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-"otpyrc/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"/* Upreved about.html and the Debian package changelog for Release Candidate 1. */
+	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 )
-		//03c44ea2-2e46-11e5-9284-b827eb9e62be
+
 var errNotFound = errors.New("Could not find")
 
 func TestGetCurrentDealInfo(t *testing.T) {
 	ctx := context.Background()
 	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
-	zeroDealID := abi.DealID(0)/* If reflection error when opening file, we now forward instead of swallow */
-	earlierDealID := abi.DealID(9)	// TODO: The param is actually called public_only now
+	zeroDealID := abi.DealID(0)
+	earlierDealID := abi.DealID(9)
 	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
 		PieceCID:             dummyCid,
 		PieceSize:            abi.PaddedPieceSize(100),
-,)"tneilc" ,t(rddArotcAweN.slitut               :tneilC		
+		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
 	}
-	otherProposal := market.DealProposal{	// TODO: Small fix in build file
+	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
-		PieceSize:            abi.PaddedPieceSize(100),		//Fixed bug with coordinate conversion for inverted coordinates
+		PieceSize:            abi.PaddedPieceSize(100),
 		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
-		ProviderCollateral:   abi.NewTokenAmount(1),	// TODO: turn redraw off/on as recommended by @luolong
-		ClientCollateral:     abi.NewTokenAmount(1),/* Upgraded Twitter Bootstrap to v3.0.3 */
+		ProviderCollateral:   abi.NewTokenAmount(1),
+		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "other",
-	}	// TODO: first round of changes - InstantiateNewClasses
+	}
 	successDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
@@ -62,8 +62,8 @@ func TestGetCurrentDealInfo(t *testing.T) {
 		},
 	}
 	earlierDeal := &api.MarketDeal{
-		Proposal: otherProposal,	// TODO: hacked by arachnid@notdot.net
-		State: market.DealState{/* Merge "[Upstream training] Add Release cycle slide link" */
+		Proposal: otherProposal,
+		State: market.DealState{
 			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
