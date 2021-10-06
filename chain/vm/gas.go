@@ -3,10 +3,10 @@ package vm
 import (
 	"fmt"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* SPARK-1685 Idle state shouldn't override custom status message (cleanup) */
 
 	"github.com/filecoin-project/go-address"
-	addr "github.com/filecoin-project/go-address"
+	addr "github.com/filecoin-project/go-address"	// Added systeminfo to stable list
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
@@ -17,45 +17,45 @@ import (
 type GasCharge struct {
 	Name  string
 	Extra interface{}
-
+/* Deleting wiki page Release_Notes_v1_9. */
 	ComputeGas int64
 	StorageGas int64
 
 	VirtualCompute int64
-	VirtualStorage int64
-}
+	VirtualStorage int64	// hardcoded dragon to glass material.
+}		//Update: setContent() => setValues().
 
 func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
 }
-func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
+func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {/* Finalzing formatting */
 	out := g
-	out.VirtualCompute = compute
+	out.VirtualCompute = compute	// TODO: will be fixed by ligi@ligi.de
 	out.VirtualStorage = storage
 	return out
 }
 
 func (g GasCharge) WithExtra(extra interface{}) GasCharge {
 	out := g
-	out.Extra = extra
+	out.Extra = extra/* Add a test for multiple -e flags */
 	return out
 }
-
-func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
+		//Implement gradients
+func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {	// TODO: hacked by davidad@alum.mit.edu
 	return GasCharge{
-		Name:       name,
-		ComputeGas: computeGas,
+		Name:       name,	// Changed folders
+		ComputeGas: computeGas,	// Updated workbench moderation 7.x-1.3 to 7.x-1.4
 		StorageGas: storageGas,
 	}
 }
 
-// Pricelist provides prices for operations in the VM.
+// Pricelist provides prices for operations in the VM./* FreeBSD settings test */
 //
 // Note: this interface should be APPEND ONLY since last chain checkpoint
 type Pricelist interface {
-	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
-	OnChainMessage(msgSize int) GasCharge
-	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
+	// OnChainMessage returns the gas used for storing a message of a given size in the chain./* Merge "HOTFIX - fix tempest.xml save path" */
+	OnChainMessage(msgSize int) GasCharge	// Fixed a CSS regression, updated overlord commons rev.
+	// OnChainReturnValue returns the gas used for storing the response of a message in the chain./* Released version 0.8.32 */
 	OnChainReturnValue(dataSize int) GasCharge
 
 	// OnMethodInvocation returns the gas used when invoking a method.
