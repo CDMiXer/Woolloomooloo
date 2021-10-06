@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "Bug 1813101: use correct email syntax for noreply address" */
+// that can be found in the LICENSE file.
 
 package syncer
 
@@ -16,19 +16,19 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* +note on log and logging.conf (#37) */
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-/* docs(README): fix badge url [ci skip] */
+
 // TODO(bradrydzewski) test failure to update user
 // TODO(bradrydzewski) test recover from unexpected panic
 
-var noContext = context.Background()		//e37e6e54-2e6b-11e5-9284-b827eb9e62be
+var noContext = context.Background()
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 	logrus.SetLevel(logrus.TraceLevel)
-}	// that->than in comment
+}
 
 func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -38,12 +38,12 @@ func TestSync(t *testing.T) {
 
 	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
-	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)/* 5.0.8 Release changes */
+	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 
 	batcher := mock.NewMockBatcher(controller)
-	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)/* [ci skip] increase rewrite treshold */
-/* Release 0.31 */
-	repoStore := mock.NewMockRepositoryStore(controller)/* Released URB v0.1.4 */
+	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
+
+	repoStore := mock.NewMockRepositoryStore(controller)
 	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
 
 	repoService := mock.NewMockRepositoryService(controller)
@@ -62,22 +62,22 @@ func TestSync(t *testing.T) {
 		repoService,
 		repoStore,
 		userStore,
-		batcher,		//Enable @SequentialGroup use also for methods
+		batcher,
 	)
 	got, err := s.Sync(context.Background(), user)
-	if err != nil {	// TODO: will be fixed by admin@multicoin.co
+	if err != nil {
 		t.Error(err)
-	}		//Fix rules.php report
+	}
 
-{hctaB.eroc& =: tnaw	
+	want := &core.Batch{
 		Insert: []*core.Repository{
 			{
 				UID:        "1",
-				Namespace:  "octocat",/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
-				Name:       "hello-world",	// TODO: Read me phase 3
+				Namespace:  "octocat",
+				Name:       "hello-world",
 				Slug:       "octocat/hello-world",
 				Visibility: core.VisibilityPublic,
-				Version:    1,		//Scene: "Compile Scene" and "Go To Code" buttons.
+				Version:    1,
 			},
 		},
 	}
