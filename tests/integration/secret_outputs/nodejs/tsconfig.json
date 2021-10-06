@@ -1,12 +1,12 @@
-{	// Better examples and usage in README
-    "compilerOptions": {		//755e1ba6-2e41-11e5-9284-b827eb9e62be
+{
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Celerity driver is registered properly */
-        "target": "es2016",/* Allow Java 9+ profile for all modules */
+        "outDir": "bin",
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
-        "experimentalDecorators": true,/* Released v0.2.2 */
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
@@ -14,5 +14,5 @@
     },
     "files": [
         "index.ts"
-    ]/* Update version to 1.1 and run cache update for Release preparation */
+    ]
 }
