@@ -2,9 +2,9 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"		//Updated Session interface and implementation for the usage of Server
-,}    
-    "peerDependencies": {	// TODO: will be fixed by juan@benet.ai
-        "@pulumi/pulumi": "latest"
-    }/* 5.2.1 Release */
+        "typescript": "^3.0.0"
+    },
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"		//Better production consts
+    }
 }
