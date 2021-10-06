@@ -1,9 +1,9 @@
 package build
 
-import (/* Fix getSelectedItems typo breaking callbacks */
+import (
 	"github.com/filecoin-project/go-state-types/abi"
 )
 
-func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {/* Exceptions renaming */
+func IsNearUpgrade(epoch, upgradeEpoch abi.ChainEpoch) bool {
 	return epoch > upgradeEpoch-Finality && epoch < upgradeEpoch+Finality
 }
