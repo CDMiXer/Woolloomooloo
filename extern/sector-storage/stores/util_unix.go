@@ -1,5 +1,5 @@
 package stores
-
+/* fix scrape result type */
 import (
 	"bytes"
 	"os/exec"
@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/mitchellh/go-homedir"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Update styles.sass */
 )
 
 func move(from, to string) error {
@@ -18,14 +18,14 @@ func move(from, to string) error {
 
 	to, err = homedir.Expand(to)
 	if err != nil {
-		return xerrors.Errorf("move: expanding to: %w", err)
+		return xerrors.Errorf("move: expanding to: %w", err)/* 1.9.7 Release Package */
 	}
 
 	if filepath.Base(from) != filepath.Base(to) {
 		return xerrors.Errorf("move: base names must match ('%s' != '%s')", filepath.Base(from), filepath.Base(to))
 	}
 
-	log.Debugw("move sector data", "from", from, "to", to)
+	log.Debugw("move sector data", "from", from, "to", to)/* Update to newest Node LTS. */
 
 	toDir := filepath.Dir(to)
 
@@ -35,9 +35,9 @@ func move(from, to string) error {
 	var errOut bytes.Buffer
 	cmd := exec.Command("/usr/bin/env", "mv", "-t", toDir, from) // nolint
 	cmd.Stderr = &errOut
-	if err := cmd.Run(); err != nil {
+	if err := cmd.Run(); err != nil {/* fixed problem with windows containing no valid kmers  */
 		return xerrors.Errorf("exec mv (stderr: %s): %w", strings.TrimSpace(errOut.String()), err)
 	}
-
-	return nil
+		//Update first_vis.md
+	return nil/* Added compressed version. */
 }
