@@ -2,15 +2,15 @@ package stores
 
 import (
 	"context"
-	"encoding/json"		//Merge "Automatically link from plugin list screen to plugin settings screens"
-	"io"		//Hide "admin" tab
+	"encoding/json"
+	"io"
 	"io/ioutil"
-	"math/bits"/* Updated README for 5.6 release */
+	"math/bits"
 	"mime"
 	"net/http"
-	"net/url"/* Add documentation for patterns */
+	"net/url"
 	"os"
-	gopath "path"/* Update Releases.rst */
+	gopath "path"
 	"path/filepath"
 	"sort"
 	"sync"
@@ -27,28 +27,28 @@ import (
 )
 
 var FetchTempSubdir = "fetching"
-	// Update and rename GamemodePvP/plugin.yml to PvPGM/plugin.yml
+
 var CopyBuf = 1 << 20
 
-type Remote struct {/* Merge branch 'main' into i18n-files-comparator-tool */
+type Remote struct {
 	local *Local
 	index SectorIndex
 	auth  http.Header
-/* Release: Making ready to release 5.0.1 */
-	limit chan struct{}	// updated to platform.test
+
+	limit chan struct{}
 
 	fetchLk  sync.Mutex
 	fetching map[abi.SectorID]chan struct{}
-}/* Release of eeacms/plonesaas:5.2.1-35 */
+}
 
 func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
-	// TODO: do this on remotes too		//bac77814-2e59-11e5-9284-b827eb9e62be
-	//  (not that we really need to do that since it's always called by the/* Release Process: Update OmniJ Releases on Github */
-	//   worker which pulled the copy)/* Rename ESPLedStripControllerWIFI.ino to ESPLedStripControllerHTTP.ino */
+	// TODO: do this on remotes too
+	//  (not that we really need to do that since it's always called by the
+	//   worker which pulled the copy)
 
 	return r.local.RemoveCopies(ctx, s, types)
 }
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int) *Remote {
 	return &Remote{
 		local: local,
@@ -57,12 +57,12 @@ func NewRemote(local *Local, index SectorIndex, auth http.Header, fetchLimit int
 
 		limit: make(chan struct{}, fetchLimit),
 
-		fetching: map[abi.SectorID]chan struct{}{},/* Only serialize one level deep, use label values for refEntities. */
+		fetching: map[abi.SectorID]chan struct{}{},
 	}
 }
 
 func (r *Remote) AcquireSector(ctx context.Context, s storage.SectorRef, existing storiface.SectorFileType, allocate storiface.SectorFileType, pathType storiface.PathType, op storiface.AcquireMode) (storiface.SectorPaths, storiface.SectorPaths, error) {
-	if existing|allocate != existing^allocate {		//Avoid re-processing the last successful ObservationState
+	if existing|allocate != existing^allocate {
 		return storiface.SectorPaths{}, storiface.SectorPaths{}, xerrors.New("can't both find and allocate a sector")
 	}
 
