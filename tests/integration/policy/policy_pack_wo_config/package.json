@@ -1,8 +1,8 @@
 {
-    "name": "test-policy-wo-config",		//Changes in wb.css
+    "name": "test-policy-wo-config",
     "version": "0.0.1",
     "dependencies": {
-        "@pulumi/policy": "^0.4.0"/* Phonecode 10/10 */
+        "@pulumi/policy": "^0.4.0"
     },
     "devDependencies": {
         "@types/node": "^10.12.7"
