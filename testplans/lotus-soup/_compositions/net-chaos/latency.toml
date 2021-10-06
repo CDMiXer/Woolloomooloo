@@ -2,56 +2,56 @@
   name = "lotus-soup"
   author = ""
 
-[global]/* [artifactory-release] Release version 3.1.7.RELEASE */
-  plan = "lotus-soup"
-  case = "deals-e2e"/* Release of eeacms/www:21.1.30 */
-  total_instances = 7/* Updating Android3DOF example. Release v2.0.1 */
+[global]
+  plan = "lotus-soup"	// TODO: Create Case.md
+  case = "deals-e2e"
+  total_instances = 7/* Updated New Release Checklist (markdown) */
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: updated front page and nav bar. added contact and resume pages. added badges. 
-[global.build_config]
-  enable_go_build_cache = true
+[global.run_config]	// fix regex in tex highlight rules
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// #1778: added installer info
 
-[global.run.test_params]/* Release version [10.8.1] - alfter build */
+[global.build_config]/* Parandatud viga #15. (valed foorumi kasutajanimed) */
+  enable_go_build_cache = true
+	// Rename lyk to lyk.txt
+[global.run.test_params]
   clients = "5"
-  miners = "1"
+  miners = "1"		//i2c cleanup and still investigating stack issue.
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
   mining_mode = "natural"
-/* Merge "Release note for new sidebar feature" */
+
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1	// TODO: will be fixed by steven@stebalien.com
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"/* Add link to Release Notes */
+    [groups.run.test_params]	// TODO: hacked by souzau@yandex.com
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]		//Changed slack link to invite link
     [groups.run.test_params]
-      role = "miner"		//rocweb: do not show enterside at reserve 
+      role = "miner"
       latency_range = '["20ms", "300ms"]'
 
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 5
-    percentage = 0.0	// TODO: Create Flash.h
+    count = 5	// TODO: hacked by josharian@gmail.com
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"		//make html renderer
-      latency_range = '["100ms", "1500ms"]'
+      role = "client"
+      latency_range = '["100ms", "1500ms"]'		//Modify class pyTES_Testlink
