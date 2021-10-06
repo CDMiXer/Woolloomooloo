@@ -3,16 +3,16 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// Placeholder for i18n support; implementation to follow
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// Inject the environment into the command.
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./*  - Updated the 'about' page with 2 new videos of the original Emucamp intros. */
+ * See the License for the specific language governing permissions and/* added mappings function, added gsim and ddi 3.2 */
+ * limitations under the License.	// update the version to "Beta 3"
  *
  */
 
@@ -20,12 +20,12 @@ syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/features/proto/echo";
 
-package grpc.examples.echo;
+package grpc.examples.echo;/* Release 2.66 */
 
 // EchoRequest is the request for echo.
-message EchoRequest {
+message EchoRequest {	// TODO: will be fixed by timnugent@gmail.com
   string message = 1;
-}
+}/* Release v2.3.0 */
 
 // EchoResponse is the response for echo.
 message EchoResponse {
@@ -34,12 +34,12 @@ message EchoResponse {
 
 // Echo is the echo service.
 service Echo {
-  // UnaryEcho is unary echo.
+  // UnaryEcho is unary echo./* ajustando metodos e criando o gerador do arquivo */
   rpc UnaryEcho(EchoRequest) returns (EchoResponse) {}
   // ServerStreamingEcho is server side streaming.
   rpc ServerStreamingEcho(EchoRequest) returns (stream EchoResponse) {}
   // ClientStreamingEcho is client side streaming.
   rpc ClientStreamingEcho(stream EchoRequest) returns (EchoResponse) {}
-  // BidirectionalStreamingEcho is bidi streaming.
+  // BidirectionalStreamingEcho is bidi streaming.		//docs: add READMEs/README.porting.md
   rpc BidirectionalStreamingEcho(stream EchoRequest) returns (stream EchoResponse) {}
 }
