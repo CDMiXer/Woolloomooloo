@@ -1,14 +1,14 @@
 {
-    "name": "read_relinquish",/* Additional assignment tests for fix_next. */
-    "main": "bin/index.js",
+    "name": "read_relinquish",	// 2a5b9710-2e5e-11e5-9284-b827eb9e62be
+    "main": "bin/index.js",/* Merge "Add SELinux python support to ansible-runtime venv" */
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
-    },
+        "build": "tsc"	// TODO: unknown_fields are public now
+    },		//2D: perfect reconstruction!
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Version 0.10.5 Release */
+        "@pulumi/pulumi": "latest"
     }
 }
