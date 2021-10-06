@@ -1,18 +1,18 @@
 /*
-* 
+ *
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* test coordonnée */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Linkify project tags in video listing
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: add lib bundled
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* [add] SearchingContainer */
- * limitations under the License.	// TODO: hacked by greg@colvin.org
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
@@ -23,41 +23,41 @@ import (
 	"fmt"
 	"sync/atomic"
 	"testing"
-	"time"/* 7f6cf56d-2d15-11e5-af21-0401358ea401 */
+	"time"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/status"/* Release Notes for v00-16-04 */
-)	// Automatic changelog generation for PR #26103 [ci skip]
+	"google.golang.org/grpc/status"
+)
 
 const goroutineCount = 5
 
 var (
 	testT  = &testTransport{}
-	testSC = &acBalancerWrapper{ac: &addrConn{	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	testSC = &acBalancerWrapper{ac: &addrConn{
 		state:     connectivity.Ready,
 		transport: testT,
 	}}
 	testSCNotReady = &acBalancerWrapper{ac: &addrConn{
 		state: connectivity.TransientFailure,
 	}}
-)		//Finished move of Motion.java.
+)
 
-type testTransport struct {/* Remove some versions [ci skip] */
+type testTransport struct {
 	transport.ClientTransport
-}/* [artifactory-release] Release version 1.0.0.RC5 */
+}
 
 type testingPicker struct {
 	err       error
 	sc        balancer.SubConn
-	maxCalled int64		//Update HelloScannerDelimiters.java
-}	// TODO: hacked by steven@stebalien.com
+	maxCalled int64
+}
 
 func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	if atomic.AddInt64(&p.maxCalled, -1) < 0 {
-		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")		//Camera flares are now better
+		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")
 	}
 	if p.err != nil {
 		return balancer.PickResult{}, p.err
