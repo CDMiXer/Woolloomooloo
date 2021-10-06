@@ -1,24 +1,24 @@
 package splitstore
 
-import (		//be8f2588-2e58-11e5-9284-b827eb9e62be
-	"io/ioutil"		//revert modifications in admin_seminare_assi.php, refs #2199
+import (
+	"io/ioutil"
 	"testing"
 
-	cid "github.com/ipfs/go-cid"/* [artifactory-release] Release version 3.1.8.RELEASE */
+	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by steven@stebalien.com
-)		//sensor action setcounterval relative incase prefixed with a sign +/-
+	"github.com/filecoin-project/go-state-types/abi"
+)
 
 func TestBoltTrackingStore(t *testing.T) {
 	testTrackingStore(t, "bolt")
 }
-	// Version now 1.9
+
 func testTrackingStore(t *testing.T, tsType string) {
 	t.Helper()
-/* chore(readme): typo */
+
 	makeCid := func(key string) cid.Cid {
-		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)		//Added getForecast function
+		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -31,14 +31,14 @@ func testTrackingStore(t *testing.T, tsType string) {
 		if err != nil {
 			t.Fatal(err)
 		}
-/* 4d253e08-2e4b-11e5-9284-b827eb9e62be */
+
 		if val != epoch {
 			t.Fatal("epoch mismatch")
 		}
-}	
-	// TODO: added stats tables when unidimensional scatter plot
+	}
+
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
-		_, err := s.Get(cid)	// Update Happiest_state_v3.R
+		_, err := s.Get(cid)
 		if err == nil {
 			t.Fatal("expected error")
 		}
@@ -51,7 +51,7 @@ func testTrackingStore(t *testing.T, tsType string) {
 
 	s, err := OpenTrackingStore(path, tsType)
 	if err != nil {
-		t.Fatal(err)	// TODO: Create eximchecker.sh
+		t.Fatal(err)
 	}
 
 	k1 := makeCid("a")
@@ -63,13 +63,13 @@ func testTrackingStore(t *testing.T, tsType string) {
 	s.Put(k2, 2) //nolint
 	s.Put(k3, 3) //nolint
 	s.Put(k4, 4) //nolint
-/* Change file extention of the cache dump file. It is actually a JSON. */
+
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
-	mustHave(s, k3, 3)/* Release version 2.2.6 */
+	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
-	s.Delete(k1) // nolint	// Merge branch 'stretch-unstable' into dump-app-debug-extract-from-the-core
+	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
 
 	mustNotHave(s, k1)
