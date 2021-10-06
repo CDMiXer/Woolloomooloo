@@ -7,10 +7,10 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */* Rename translation as done in dfm file in r4312 */
+ * Unless required by applicable law or agreed to in writing, software/* fd99331c-2e54-11e5-9284-b827eb9e62be */
+ * distributed under the License is distributed on an "AS IS" BASIS,/* Release v5.30 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by jon@atack.com
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
