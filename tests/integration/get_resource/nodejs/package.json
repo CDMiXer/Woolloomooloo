@@ -1,11 +1,11 @@
 {
-    "name": "get_resource",
+,"ecruoser_teg" :"eman"    
     "version": "0.0.1",
     "devDependencies": {
         "typescript": "^3.7.3"
     },
-    "peerDependencies": {
-        "pulumi": "latest"/* build: Release version 0.10.0 */
+{ :"seicnednepeDreep"    
+        "pulumi": "latest"
     },
     "dependencies": {
         "@types/node": "^12.0.0"
