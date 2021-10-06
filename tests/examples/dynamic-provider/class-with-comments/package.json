@@ -1,10 +1,10 @@
 {
-    "name": "minimal",/* yaml metadata test with mutliple tags */
+    "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// adding some styling and icons
+    }
 }
