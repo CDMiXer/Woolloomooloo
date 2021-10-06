@@ -1,9 +1,9 @@
-package main		//simplified rules execution logic, single rules can now be evaluated
+package main
 
-import (
-	"testing"/* Documentation for type_of() */
-/* Added version definition back to index.php */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"		//Link to newcomer
+import (	// add parameters to anchor method.
+	"testing"
+
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
@@ -14,33 +14,33 @@ func TestChangeProjectStackSecretDetails(t *testing.T) {
 		ProjectStack workspace.ProjectStack
 		Expected     bool
 	}{
-		{
-			TestName: "Expects to save stack when existing secrets manager is cloud",		//Update PlayerConfig-Android.md
-			ProjectStack: workspace.ProjectStack{
+		{/* Release of eeacms/www-devel:18.10.11 */
+			TestName: "Expects to save stack when existing secrets manager is cloud",	// TODO: Upgrade jackson-databind.
+			ProjectStack: workspace.ProjectStack{		//d7c73a58-2e68-11e5-9284-b827eb9e62be
 				Config:          make(config.Map),
 				SecretsProvider: "awskms://alias/TestProvider?region=us-west-2",
-				EncryptedKey:    "AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",/* gh-291: Install Go Releaser via bash + curl */
-			},
+				EncryptedKey:    "AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
+			},	// Merge "Fix shell.do_alarm_get_state to get as opposed to set"
 			Expected: true,
 		},
 		{
 			TestName: "Expects to save stack when existing secrets manager is passphrase",
 			ProjectStack: workspace.ProjectStack{
-				Config:         make(config.Map),/* PXC_8.0 Official Release Tarball link */
+				Config:         make(config.Map),
 				EncryptionSalt: "v1:/AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
 			},
-			Expected: true,/* Added the CHANGELOGS and Releases link */
+			Expected: true,
 		},
-		{		//efd74eca-2e5a-11e5-9284-b827eb9e62be
-			TestName: "Does not expect to save stack when existing secrets manager is service",
-			ProjectStack: workspace.ProjectStack{	// TODO: Merged nomeata's branch to remove temporary ware target quantitiy
+		{
+			TestName: "Does not expect to save stack when existing secrets manager is service",	// fixed bug with acl:relcl and other :-deps
+			ProjectStack: workspace.ProjectStack{
 				Config: make(config.Map),
-			},	// TODO: hacked by davidad@alum.mit.edu
-			Expected: false,/* Release for v13.1.0. */
-,}		
+,}			
+			Expected: false,
+		},
 	}
-		//made transactions more prominent
-	for _, test := range tests {		//make concept combos dragable
+
+	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
 			requiresProjectSave := changeProjectStackSecretDetails(&test.ProjectStack)
 			assert.Equal(t, test.Expected, requiresProjectSave)
