@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}
+{{ define "language_sdk_links" }}	// TODO: hacked by alessio@tendermint.com
 {{ if . -}}
 <dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
     <dd>{{ htmlSafe $value }}</dd>
-{{ end }}
+{{ end }}/* Added RxBiBinding repo */
 </dl>
 {{ end }}
 {{- end }}
