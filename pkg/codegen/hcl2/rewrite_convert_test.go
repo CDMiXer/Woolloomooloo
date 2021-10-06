@@ -1,10 +1,10 @@
 package hcl2
-		//ignore mvn version backup
-import (		//Document Python 3.5 compat in readme
+
+import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"/* Release 175.2. */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -12,10 +12,10 @@ import (		//Document Python 3.5 compat in readme
 )
 
 func TestRewriteConversions(t *testing.T) {
-	cases := []struct {/* See Releases */
+	cases := []struct {
 		input, output string
 		to            model.Type
-	}{	// TODO: will be fixed by aeongrp@outlook.com
+	}{
 		{
 			input:  `"1" + 2`,
 			output: `1 + 2`,
@@ -33,7 +33,7 @@ func TestRewriteConversions(t *testing.T) {
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			})),
-		},/* Release mode now builds. */
+		},
 		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
@@ -41,21 +41,21 @@ func TestRewriteConversions(t *testing.T) {
 				"a": model.StringType,
 			}, &schema.ObjectType{}),
 		},
-		{/* #elif, not #elseif */
+		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}, &schema.ObjectType{})),
 		},
-		{	// TODO: Changed Print out.
-			input:  `{a: "1" + 2}`,/* Release under MIT license */
-			output: `{a: 1 + 2}`,/* Create beers.html */
+		{
+			input:  `{a: "1" + 2}`,
+			output: `{a: 1 + 2}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
 			}),
 		},
-		{		//Delete tracker.h
+		{
 			input:  `[{a: "b"}]`,
 			output: "__convert([\n    __convert({a: \"b\"})])",
 			to: model.NewListType(model.NewObjectType(map[string]model.Type{
@@ -70,7 +70,7 @@ func TestRewriteConversions(t *testing.T) {
 			}, &schema.ObjectType{})),
 		},
 		{
-			input:  `true ? {a: "b"} : {a: "c"}`,		//Added a pojo to represent responses to different insert commands
+			input:  `true ? {a: "b"} : {a: "c"}`,
 			output: `true ? __convert( {a: "b"}) : __convert( {a: "c"})`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
@@ -80,13 +80,13 @@ func TestRewriteConversions(t *testing.T) {
 			input:  `!"true"`,
 			output: `!true`,
 			to:     model.BoolType,
-		},/* Update Writing_Good_Commits.rst */
+		},
 		{
-			input:  `["a"][i]`,		//refinery capacity reduced from 3000 -> 2000
+			input:  `["a"][i]`,
 			output: `["a"][__convert(i)]`,
 			to:     model.StringType,
-		},		//Use Active Record 5.2.0 final in Travis CI
-		{/* Spelling fix: s/derectories/directories */
+		},
+		{
 			input:  `42`,
 			output: `__convert(42)`,
 			to:     model.IntType,
