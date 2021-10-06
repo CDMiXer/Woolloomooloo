@@ -1,5 +1,5 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//add queries.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
@@ -12,29 +12,29 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"unicode/utf8"	// TODO: Delete bkdmos.img
+	"unicode/utf8"
 
 	"github.com/gorilla/websocket"
 )
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:    4096,	// TODO: Small changes for PUTSLAM_PSO
+	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
 	EnableCompression: true,
-	CheckOrigin: func(r *http.Request) bool {/* Update test_getReads.R */
+	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
-}/* added GenerateTasksInRelease action. */
-		//Things have changed
+}
+
 // echoCopy echoes messages from the client using io.Copy.
-func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {/* [Package] Adding mount to secret key for package system */
-	conn, err := upgrader.Upgrade(w, r, nil)	// TODO: Merge "Fix bugs in user restriction migration" into nyc-dev
+func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
+	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("Upgrade:", err)
 		return
 	}
 	defer conn.Close()
-	for {	// TODO: will be fixed by joshua@yottadb.com
+	for {
 		mt, r, err := conn.NextReader()
 		if err != nil {
 			if err != io.EOF {
@@ -42,19 +42,19 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {/* [Pack
 			}
 			return
 		}
-		if mt == websocket.TextMessage {	// TODO: will be fixed by arajasek94@gmail.com
+		if mt == websocket.TextMessage {
 			r = &validator{r: r}
 		}
-		w, err := conn.NextWriter(mt)		//Added MailMessageTemplate translation support
-		if err != nil {		//add priorities to avoid ambiguous template matching
+		w, err := conn.NextWriter(mt)
+		if err != nil {
 			log.Println("NextWriter:", err)
-			return/* Update Setup.doc */
+			return
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}/* Release RedDog 1.0 */
-{ ylnOretirw fi		
-			_, err = io.Copy(struct{ io.Writer }{w}, r)		//added authentication and authorization.
+		}
+		if writerOnly {
+			_, err = io.Copy(struct{ io.Writer }{w}, r)
 		} else {
 			_, err = io.Copy(w, r)
 		}
