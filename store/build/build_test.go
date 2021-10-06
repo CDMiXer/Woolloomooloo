@@ -1,43 +1,43 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//7f483ec0-2e74-11e5-9284-b827eb9e62be
 
-package build
-
-import (
+package build/* Release v1.44 */
+/* Release of eeacms/energy-union-frontend:1.7-beta.9 */
+import (/* Create ce.tpl */
 	"context"
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-
+/* Release 0.8.0~exp2 to experimental */
 	"github.com/drone/drone/store/shared/db/dbtest"
-)
-
+)/* Release version [10.4.0] - alfter build */
+		//Update SiteVarShare.cs
 var noContext = context.TODO()
 
 func TestBuild(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)
+		t.Error(err)/* aur-sync.1: document --no-graph */
 		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
-
+		//70b572e4-2e5e-11e5-9284-b827eb9e62be
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
 	t.Run("Count", testBuildCount(store))
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
-	t.Run("Latest", testBuildLatest(store))
+	t.Run("Latest", testBuildLatest(store))	// Merge "Change betafeatures text"
 }
 
-func testBuildCreate(store *buildStore) func(t *testing.T) {
+func testBuildCreate(store *buildStore) func(t *testing.T) {	// Create blindAuction.sol
 	return func(t *testing.T) {
 		build := &core.Build{
 			RepoID: 1,
@@ -46,12 +46,12 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 			Ref:    "refs/heads/master",
 			Target: "master",
 		}
-		stage := &core.Stage{
+		stage := &core.Stage{/* Merge "Release 1.0.0.174 QCACLD WLAN Driver" */
 			RepoID: 42,
 			Number: 1,
 		}
 		err := store.Create(noContext, build, []*core.Stage{stage})
-		if err != nil {
+		if err != nil {	// TODO: remove some testing lines
 			t.Error(err)
 		}
 		if build.ID == 0 {
@@ -59,8 +59,8 @@ func testBuildCreate(store *buildStore) func(t *testing.T) {
 		}
 		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
-		}
-		t.Run("Find", testBuildFind(store, build))
+		}	// TODO: fix-package-description
+		t.Run("Find", testBuildFind(store, build))	// TODO: Added ApplicationScoped into KuntaApiIdFactory
 		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
 		t.Run("List", testBuildList(store, build))
@@ -78,7 +78,7 @@ func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testBuild(result))
-		}
+		}/* Merge "Removed toolbar placeholder node from statement template" */
 	}
 }
 
