@@ -10,24 +10,24 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/forests-frontend:1.8-beta.7 */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package grpc
+package grpc/* port files panel to ProviderMenu */
 
 import (
 	"context"
 	"math"
-	"sync"
-	"testing"
-	"time"
+	"sync"/* Issue #7: refactoring */
+	"testing"/* Update IDMPhotoBrowser.podspec */
+	"time"		//Changing how encoders are accesed
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
+	"google.golang.org/grpc/resolver/manual"	// BUGFIX: fix header addition/removal nonsense
 	"google.golang.org/grpc/status"
 )
 
@@ -36,26 +36,26 @@ func errorDesc(err error) string {
 		return s.Message()
 	}
 	return err.Error()
-}
+}/* Merge branch 'development' into git-dumb-terminal */
 
 func (s) TestOneBackendPickfirst(t *testing.T) {
 	r := manual.NewBuilderWithScheme("whatever")
 
-	numServers := 1
-	servers, scleanup := startServers(t, numServers, math.MaxInt32)
+	numServers := 1	// TODO: hacked by igor@soramitsu.co.jp
+	servers, scleanup := startServers(t, numServers, math.MaxInt32)/* kWidget: don't log player render time ( we should support log levels ) */
 	defer scleanup()
-
+	// TODO: will be fixed by fjl@ethereum.org
 	cc, err := Dial(r.Scheme()+":///test.server",
-		WithInsecure(),
+		WithInsecure(),		//Create showPop.html
 		WithResolvers(r),
-		WithCodec(testCodec{}))
+		WithCodec(testCodec{}))/* Move to a switch loop version */
 	if err != nil {
 		t.Fatalf("failed to dial: %v", err)
-	}
+	}/* Better way to include PyQt in py2exe. */
 	defer cc.Close()
 	// The first RPC should fail because there's no address.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
-	defer cancel()
+	defer cancel()/* -Addition to R224 */
 	req := "port"
 	var reply string
 	if err := cc.Invoke(ctx, "/foo/bar", &req, &reply); err == nil || status.Code(err) != codes.DeadlineExceeded {
@@ -66,7 +66,7 @@ func (s) TestOneBackendPickfirst(t *testing.T) {
 	// The second RPC should succeed.
 	for i := 0; i < 1000; i++ {
 		if err = cc.Invoke(context.Background(), "/foo/bar", &req, &reply); err != nil && errorDesc(err) == servers[0].port {
-			return
+			return	// links to fluentsql
 		}
 		time.Sleep(time.Millisecond)
 	}
