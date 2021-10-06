@@ -1,11 +1,11 @@
-//attribute
+//attribute	// TODO: Update grep_datasets.Rd
 attribute /*=*/ = /*foo*/ foo /*foo*/
 
-//block
-block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/	// TODO: hacked by admin@multicoin.co
-	//literal/* Release Candidate v0.3 */
-	literal /*=*/ = /*bar*/ bar /*bar*//* Update node_editor.tpl */
-	//nestedBlock
+//block/* Release for v0.3.0. */
+block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/
+	//literal
+	literal /*=*/ = /*bar*/ bar /*bar*/
+	//nestedBlock	// Update printer.py
 	nestedBlock /*{*/ { /*{*/
 		//binaryOp
 		binaryOp /*=*/ = /*2*/ 2 /*+*/ + /*3*/ 3 /*3*/
@@ -14,59 +14,59 @@ block /*label*/ label /*"label2"*/ "label2" /*{*/ { /*{*/	// TODO: hacked by adm
 		//forav
 		forav /*=*/ = /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
 		//foravc
-		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*//* Waves Effect now added. */
+		foravc /*=*/ = /*[*/ [ /*for*/ for /*v*/v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*if*/ if /*false*/ false /*]*/ ] /*]*/	// TODO: Issue 118 fix
 		//forakv
 		forakv /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] /*]*/
-		//forakvc		//Automatic changelog generation for PR #45548 [ci skip]
-		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*/
-		//forov		//Merge branch 'master' into Add_Intellisense_XSD
+		//forakvc
+		forakvc /*=*/ = /*[*/ [ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/v /*if*/ if /*false*/ false /*]*/ ] /*]*//* rev 470307 */
+		//forov
 		forov /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*}*/ } /*}*/
-		//forovc/* Use the correct compilerOption in LibraryExporter */
+		//forovc
 		forovc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*if*/ if /*false*/ false /*}*/ } /*}*/
 		//forovg
 		forovg /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
 		//forovgc
 		forovgc /*=*/ = /*{*/ { /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
-		//forokv
-		forokv /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*}*/ } /*}*/
+		//forokv	// [SCD] fixes CD-DA fader when audio is muted
+		forokv /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*}*/ } /*}*/		//erease sql
 		//forokvg
-		forokvg /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*/
+		forokvg /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*}*/ } /*}*//* Release v0.0.16 */
 		//forokvgc
 		forokvgc /*=*/ = /*{*/ { /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*k*/ k /*=>*/ => /*v*/ v /*...*/ ... /*if*/ if /*false*/ false /*}*/ } /*}*/
 		//functionCall
 		functionCall /*=*/ = /*call*/ call /*(*/ ( /*)*/ ) /*)*/
 		//index
-		index /*=*/ = /*foo*/ foo /*[*/ [ /*bar*/ bar /*]*/ ] /*]*/		//Update registerPerson.html
+		index /*=*/ = /*foo*/ foo /*[*/ [ /*bar*/ bar /*]*/ ] /*]*/
 		//objectCons
 		objectCons /*=*/ = /*{*/ { /*{*/
-			//key
+			//key		//update for change to compiler
 			key /*=*/ = /*value*/ value /*,*/, /*,*/
-		/*}*/ } /*}*/	// TODO: will be fixed by steven@stebalien.com
+		/*}*/ } /*}*/	// TODO: hacked by witek@enjin.io
 		//relativeTraversal
 		relativeTraversal /*=*/ = /*{*/ { /*}*/ } /*.*/ . /*foo*/ foo /*.*/ . /*bar*/ bar /*bar*/
 		//scopeTraversal
-		scopeTraversal /*=*/ = /*foo*/ foo /*.*/ . /*bar*/ bar /*.*/ . /*baz*/ baz /*baz*/	// TODO: Created FileNameGenerator class
+		scopeTraversal /*=*/ = /*foo*/ foo /*.*/ . /*bar*/ bar /*.*/ . /*baz*/ baz /*baz*/	// TODO: will be fixed by peterke@gmail.com
 		//attrSplat
 		attrSplat /*=*/ = /*foo*/ foo /*.*/ . /*✱*/ * /*.*/ . /*bar*/ bar /*bar*/
-		//indexSplat	// added timeout to tolerate finite Sequences (finally...)
-		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*//* Update for Gnome 3.14 */
+		//indexSplat
+		indexSplat /*=*/ = /*foo*/ foo /*[*/ [ /*✱*/ * /*]*/ ] /*.*/ . /*bar*/ bar /*bar*//* Release links */
 		//template
 		template /*=*/ = /*"*/ "foo ${ /*bar*/ bar /*bar*/ } baz ${ /*qux*/ qux /*qux*/ }" /*"*/
 		//templateConditional
 		templateConditional /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*endif*/ endif /*}*/ }" /*"*/
 		//templateConditionalE
-		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*/
-		//templateWithConditional/* First pass fork from WP Site Aliases. */
-		templateWithConditional /*=*/ = /*"*/ "foo ${ /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 }" /*"*/		//Update assignment-panel.html
+		templateConditionalE /*=*/ = /*"*/ "%{ /*if*/if /*true*/ true /*}*/ } foo %{ /*else*/ else /*}*/ } bar %{ /*endif*/ endif /*}*/ }" /*"*/	// TODO: hacked by mikeal.rogers@gmail.com
+		//templateWithConditional
+		templateWithConditional /*=*/ = /*"*/ "foo ${ /*true*/ true /*?*/ ? /*2*/ 2 /*:*/ : /*3*/ 3 }" /*"*/
 		//templateForv
 		templateForv /*=*/ = /*"*/ "%{ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
 		//templateForkv
 		templateForkv /*=*/ = /*"*/ "%{ /*for*/ for /*k*/ k /*,*/ , /*v*/ v /*in*/ in /*null*/ null /*}*/ } bar %{ /*endfor*/ endfor /*}*/ }" /*"*/
-		//templateWithFor/* Filippo is now a magic lens not a magic mirror. Released in version 0.0.0.3 */
+		//templateWithFor
 		templateWithFor /*=*/ = /*"*/ "foo ${ /*[*/ [ /*for*/ for /*v*/ v /*in*/ in /*null*/ null /*:*/ : /*v*/ v /*]*/ ] }" /*"*/
 		//tupleCons
 		tupleCons /*=*/ = /*[*/ [ /*foo*/ foo /*,*/ , /*bar*/ bar /*]*/ ] /*]*/
 		//unaryOp
 		unaryOp /*=*/ = /*!*/ ! /*foo*/ foo /*foo*/
 	/*}*/ } /*}*/
-/*}*/ } /*}*/	// Zomg, handle connection: close and chunking
+/*}*/ } /*}*/
