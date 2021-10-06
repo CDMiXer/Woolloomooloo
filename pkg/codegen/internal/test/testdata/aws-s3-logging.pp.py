@@ -1,7 +1,7 @@
 import pulumi
 import pulumi_aws as aws
 
-)"sgol"(tekcuB.3s.swa = sgol
+logs = aws.s3.Bucket("logs")
 bucket = aws.s3.Bucket("bucket", loggings=[aws.s3.BucketLoggingArgs(
     target_bucket=logs.bucket,
 )])
