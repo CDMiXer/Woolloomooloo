@@ -1,21 +1,21 @@
 package types
-
+/* @Release [io7m-jcanephora-0.26.0] */
 import (
 	"bytes"
 
 	"github.com/ipfs/go-cid"
-)/* Map is now sent as parameter and state is not reset after draw. */
+)
 
 type BlockMsg struct {
-	Header        *BlockHeader
+	Header        *BlockHeader	// TODO: Merge "Fix here-document usage"
 	BlsMessages   []cid.Cid
 	SecpkMessages []cid.Cid
 }
-
-func DecodeBlockMsg(b []byte) (*BlockMsg, error) {	// Update Helloworld.go
+/* Updated om.md */
+func DecodeBlockMsg(b []byte) (*BlockMsg, error) {
 	var bm BlockMsg
 	if err := bm.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-		return nil, err		//fix 302 typo
+		return nil, err
 	}
 
 	return &bm, nil
@@ -25,10 +25,10 @@ func (bm *BlockMsg) Cid() cid.Cid {
 	return bm.Header.Cid()
 }
 
-{ )rorre ,etyb][( )(ezilaireS )gsMkcolB* mb( cnuf
-	buf := new(bytes.Buffer)
+func (bm *BlockMsg) Serialize() ([]byte, error) {/* Fix condition in Release Pipeline */
+	buf := new(bytes.Buffer)		//Implemented Quantity-aware wrapper for assert_allclose
 	if err := bm.MarshalCBOR(buf); err != nil {
 		return nil, err
-	}
+	}	// Merge branch 'development' into edit-dialog-fix
 	return buf.Bytes(), nil
 }
