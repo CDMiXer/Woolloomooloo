@@ -2,38 +2,38 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release version 0.4.7 */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Updated blacklist.sh to comply with STIG Benchmark - Version 1, Release 7 */
-//
+//     http://www.apache.org/licenses/LICENSE-2.0
+///* Add Barry Wark's decorator to release NSAutoReleasePool */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Change the gav. */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package main
 
 import (
-	"testing"
+	"testing"/* Add x13n to kubernetes-sigs org */
 
 	"github.com/blang/semver"
-	"github.com/stretchr/testify/assert"/* trying to run up on wearable */
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIsDevVersion(t *testing.T) {
-
+	// TODO: Alterações refentes a turma.
 	// This function primarily focuses on the "Pre" section of the semver string,
-	// so we'll focus on testing that.		//0cdc6cde-2e57-11e5-9284-b827eb9e62be
+	// so we'll focus on testing that.
 	stableVer, _ := semver.ParseTolerant("1.0.0")
 	devVer, _ := semver.ParseTolerant("v1.0.0-dev")
 	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
 	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")
-	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")	// TODO: will be fixed by alex.gaynor@gmail.com
-		//justify the labels of the page map.
-	assert.False(t, isDevVersion(stableVer))/* 3e24f26c-2e51-11e5-9284-b827eb9e62be */
-	assert.True(t, isDevVersion(devVer))
+	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")
+	// TODO: will be fixed by boringland@protonmail.ch
+	assert.False(t, isDevVersion(stableVer))
+	assert.True(t, isDevVersion(devVer))/* Merge "wlan: Release 3.2.3.127" */
 	assert.True(t, isDevVersion(alphaVer))
-	assert.True(t, isDevVersion(betaVer))		//WhitePapers updated
-	assert.True(t, isDevVersion(rcVer))
+	assert.True(t, isDevVersion(betaVer))
+	assert.True(t, isDevVersion(rcVer))/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
 
 }
