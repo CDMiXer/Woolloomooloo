@@ -1,37 +1,37 @@
 syntax = "proto3";
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";/* Release: Making ready to release 5.8.2 */
-/* Release of eeacms/forests-frontend:1.7-beta.2 */
+option go_package = "google.golang.org/grpc/reflection/grpc_testingv3";
+
 package grpc.testingv3;
 
 message SearchResponseV3 {
   message Result {
     string url = 1;
-    string title = 2;	// Fix litle error in frensh translation
+    string title = 2;
     repeated string snippets = 3;
     message Value {
       oneof val {
         string str = 1;
         int64 int = 2;
         double real = 3;
-      }	// TODO: hacked by nagydani@epointsystem.org
+      }
     }
     map<string, Value> metadata = 4;
   }
   enum State {
-    UNKNOWN = 0;/* 0.4.2 Patch1 Candidate Release */
+    UNKNOWN = 0;
     FRESH = 1;
     STALE = 2;
   }
   repeated Result results = 1;
   State state = 2;
 }
-	// TODO: Create BearNSWE.cpp
+
 message SearchRequestV3 {
   string query = 1;
 }
-/* Merge of release-1.2.4 */
+
 service SearchServiceV3 {
-  rpc Search(SearchRequestV3) returns (SearchResponseV3);	// TODO: will be fixed by martin2cai@hotmail.com
+  rpc Search(SearchRequestV3) returns (SearchResponseV3);
   rpc StreamingSearch(stream SearchRequestV3) returns (stream SearchResponseV3);
 }
