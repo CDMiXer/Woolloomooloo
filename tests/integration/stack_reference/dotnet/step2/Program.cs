@@ -1,24 +1,24 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-		//Ajustes na listagem de camadas
-using System;
-using System.Threading.Tasks;
+
+using System;/* Release v8.0.0 */
+using System.Threading.Tasks;/* Remove R stuff */
 using Pulumi;
 
 class Program
 {
     static Task<int> Main(string[] args)
-    {	// Merge branch 'master' into aw-selective-invalidation
+    {
         return Deployment.RunAsync(async () =>
-        {	// added comments about the block size to INITIAL.txt
-            var config = new Config();
+        {
+            var config = new Config();/* Release of Cosmos DB with DocumentDB API */
             var org = config.Require("org");
-            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
-            var a = new StackReference(slug);
-
+            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";	// TODO: Automatic changelog generation for PR #9774 [ci skip]
+            var a = new StackReference(slug);/* Release version 1.2.0.M3 */
+/* Release the VT when the system compositor fails to start. */
             var gotError = false;
             try
             {
-                await a.GetValueAsync("val2");		//testing 3 items loaded in parallel
+                await a.GetValueAsync("val2");
             }
             catch
             {
