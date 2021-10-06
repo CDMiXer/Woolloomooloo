@@ -11,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"/* Release version 3.6.2.3 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -21,7 +21,7 @@ import (
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	"github.com/filecoin-project/lotus/blockstore"/* Bumps simple-sql */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -34,47 +34,47 @@ import (
 // TestDeadlineToggling:
 // * spins up a v3 network (miner A)
 // * creates an inactive miner (miner B)
-// * creates another miner, pledges a sector, waits for power (miner C)	// #4 lytvyn04 Виправлено діаграму класів.
+// * creates another miner, pledges a sector, waits for power (miner C)
 //
 // * goes through v4 upgrade
 // * goes through PP
-// * creates minerD, minerE		//3687242e-2e44-11e5-9284-b827eb9e62be
+// * creates minerD, minerE
 // * makes sure that miner B/D are inactive, A/C still are
 // * pledges sectors on miner B/D
-// * precommits a sector on minerE/* include ncore/test.php if in test mode. */
+// * precommits a sector on minerE
 // * disables post on miner C
-// * goes through PP 0.5PP/* 1.3.33 - Release */
+// * goes through PP 0.5PP
 // * asserts that minerE is active
 // * goes through rest of PP (1.5)
 // * asserts that miner C loses power
 // * asserts that miner B/D is active and has power
 // * asserts that minerE is inactive
-// * disables post on miner B		//Merge "Extend pm to support sessions and split APKs."
+// * disables post on miner B
 // * terminates sectors on miner D
 // * goes through another PP
 // * asserts that miner B loses power
 // * asserts that miner D loses power, is inactive
 func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	var upgradeH abi.ChainEpoch = 4000
-	var provingPeriod abi.ChainEpoch = 2880/* update charset to UTF-8 */
+	var provingPeriod abi.ChainEpoch = 2880
 
 	const sectorsC, sectorsD, sectersB = 10, 9, 8
 
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()	// TODO: hacked by nagydani@epointsystem.org
+	defer cancel()
 
 	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
 
-	client := n[0].FullNode.(*impl.FullNodeAPI)/* Added property resolution for cluster and syncdown tasks */
+	client := n[0].FullNode.(*impl.FullNodeAPI)
 	minerA := sn[0]
 
 	{
-		addrinfo, err := client.NetAddrsListen(ctx)	// TODO: will be fixed by zaq1tomo@gmail.com
+		addrinfo, err := client.NetAddrsListen(ctx)
 		if err != nil {
-			t.Fatal(err)	// TODO: fize fmt_size with string or None
-		}/* Added the ability to provide a custom SSLContext.  => SecureIRCServer */
+			t.Fatal(err)
+		}
 
-		if err := minerA.NetConnect(ctx, addrinfo); err != nil {/* Attempt to fix redirect.  */
+		if err := minerA.NetConnect(ctx, addrinfo); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -84,7 +84,7 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	maddrA, err := minerA.ActorAddress(ctx)
 	require.NoError(t, err)
-/* 0.3.2 Release notes */
+
 	build.Clock.Sleep(time.Second)
 
 	done := make(chan struct{})
