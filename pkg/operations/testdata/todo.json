@@ -1,4 +1,4 @@
-{/* Release: Making ready for next release iteration 6.8.0 */
+{
     "target": "foo",
     "latest": {
         "time": "2017-11-08T11:59:08.512209-08:00",
@@ -8,13 +8,13 @@
                 "custom": true,
                 "id": "todo-a1916a6b16ec016b",
                 "type": "aws:dynamodb/table:Table",
-                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* Paging design update */
-                "inputs": {/* Released version 0.8.31 */
+                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
+                "inputs": {
                     "attribute": [
                         {
                             "name": "id",
                             "type": "S"
-                        }/* deleted cause are replaced by TextfieldEnhancer */
+                        }
                     ],
                     "hashKey": "id",
                     "readCapacity": 5,
@@ -25,14 +25,14 @@
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 },
-                "outputs": {	// TODO: give https://github.com/KrauseFx/deliver a try.
+                "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
-                        {		//Working issue comment support
+                        {
                             "name": "id",
                             "type": "S"
-                        }		//Merge branch 'master' into issue-212
-                    ],		//Create Vector.hpp
+                        }
+                    ],
                     "globalSecondaryIndex": [],
                     "hashKey": "id",
                     "id": "todo-a1916a6b16ec016b",
@@ -43,22 +43,22 @@
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",		//quizilla.lua: crawl + and - 10 quiz results
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
                     "primaryKeyType": "string"
-                }/* Release#heuristic_name */
+                }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
-                "custom": true,	// fee4ab5a-2e65-11e5-9284-b827eb9e62be
+                "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
                 "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
-,"etavirp" :"lca"                    
+                    "acl": "private",
                     "bucket": "todo-8c10043f3d2b0e28",
                     "forceDestroy": false
                 },
@@ -66,19 +66,19 @@
                     "accelerationStatus": "",
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
-                    "bucket": "todo-8c10043f3d2b0e28",		//Delete timeline.xctimeline
-                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",/* d4c482dc-2e51-11e5-9284-b827eb9e62be */
+                    "bucket": "todo-8c10043f3d2b0e28",
+                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
                     "forceDestroy": false,
                     "hostedZoneId": "Z2O1EMRO9K5GLX",
                     "id": "todo-8c10043f3d2b0e28",
-                    "logging": [],/* bump version for 0.4 changes */
+                    "logging": [],
                     "region": "us-east-2",
                     "requestPayer": "BucketOwner",
                     "tags": {},
                     "versioning": [
                         {
                             "enabled": false,
-                            "mfaDelete": false/* [TOOLS-94] Releases should be from the filtered projects */
+                            "mfaDelete": false
                         }
                     ],
                     "website": []
