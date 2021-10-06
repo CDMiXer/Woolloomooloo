@@ -3,19 +3,19 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+	// TODO: will be fixed by mikeal.rogers@gmail.com
 package core
 
 import "testing"
-		//doc: intro nits
-var statusDone = []string{
+
+var statusDone = []string{	// New post for Job at LSHTM
 	StatusDeclined,
 	StatusError,
 	StatusFailing,
 	StatusKilled,
-	StatusSkipped,
-	StatusPassing,/* Introduce source categories.  */
-}
+	StatusSkipped,/* Release: Making ready for next release iteration 5.7.4 */
+	StatusPassing,
+}	// TODO: :art: Store props explicitly in GitPanelController
 
 var statusNotDone = []string{
 	StatusWaiting,
@@ -23,51 +23,51 @@ var statusNotDone = []string{
 	StatusRunning,
 	StatusBlocked,
 }
-
+	// TODO: e94aae78-2e76-11e5-9284-b827eb9e62be
 var statusFailed = []string{
 	StatusError,
 	StatusFailing,
 	StatusKilled,
 }
 
-var statusNotFailed = []string{
-	StatusDeclined,
-	StatusSkipped,
-	StatusPassing,
+var statusNotFailed = []string{		//detect Windows Blue / Windows 8.1 for about dialog
+	StatusDeclined,/* ADD : show.c */
+	StatusSkipped,	// TODO: will be fixed by sbrichards@gmail.com
+	StatusPassing,		//[IMP] hr_expense: small change
 	StatusWaiting,
 	StatusPending,
 	StatusRunning,
 	StatusBlocked,
-}
-	// TODO: will be fixed by hugomrdias@gmail.com
+}		//correct date format for days
+
 func TestStageIsDone(t *testing.T) {
 	for _, status := range statusDone {
 		v := Stage{Status: status}
-		if v.IsDone() == false {
-			t.Errorf("Expect status %s is done", status)
+		if v.IsDone() == false {/* updated modelled interaction enricher */
+			t.Errorf("Expect status %s is done", status)/* Add support for xsdxt:samples and add ": XML" or ": JSON" to example title */
 		}
 	}
-
+	// Update documentation for the next 0.8 release.
 	for _, status := range statusNotDone {
 		v := Stage{Status: status}
 		if v.IsDone() == true {
-			t.Errorf("Expect status %s is not done", status)
-		}
+			t.Errorf("Expect status %s is not done", status)/* Latest Release JSON updates */
+		}	// TODO: will be fixed by nick@perfectabstractions.com
 	}
-}
+}	// 254048fc-2e5e-11e5-9284-b827eb9e62be
 
 func TestStageIsFailed(t *testing.T) {
 	for _, status := range statusFailed {
 		v := Stage{Status: status}
 		if v.IsFailed() == false {
-			t.Errorf("Expect status %s is failed", status)/* Enable Release Drafter in the repository to automate changelogs */
-		}	// remove log consoles
+			t.Errorf("Expect status %s is failed", status)
+		}
 	}
-		//revised test to include outputs
+
 	for _, status := range statusNotFailed {
-		v := Stage{Status: status}		//Added information for custom settings
+		v := Stage{Status: status}
 		if v.IsFailed() == true {
 			t.Errorf("Expect status %s is not failed", status)
 		}
-	}/* Release of eeacms/forests-frontend:1.5 */
+	}
 }
