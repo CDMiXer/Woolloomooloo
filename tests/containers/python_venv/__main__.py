@@ -1,4 +1,4 @@
 import pulumi
-
-config = pulumi.Config()/* avoid incorrect compiler warning */
+	// Modify header.jsp
+config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
