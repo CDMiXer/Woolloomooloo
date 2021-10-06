@@ -7,11 +7,11 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Merge "Build layoutlib_create tests. [DO NOT MERGE]" into klp-modular-dev
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Added pagination support for Releases API  */
+
 package deploy
 
 import (
@@ -23,24 +23,24 @@ import (
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc"	// TODO: will be fixed by boringland@protonmail.ch
+	"google.golang.org/grpc"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//Add scss highlighting to README
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-)	// icse15: Renaming PUs to Decisions
+)
 
 // QuerySource evaluates a query program, and provides the ability to synchronously wait for
 // completion.
 type QuerySource interface {
-	Wait() result.Result/* Release version [10.8.0-RC.1] - prepare */
+	Wait() result.Result
 }
 
 // NewQuerySource creates a `QuerySource` for some target runtime environment specified by
@@ -54,31 +54,31 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 
 	reg, err := providers.NewRegistry(plugctx.Host, nil, false, builtins)
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to start resource monitor")	// TODO: Add subtle threat in PR template ;)
-	}	// TODO: will be fixed by souzau@yandex.com
+		return nil, errors.Wrapf(err, "failed to start resource monitor")
+	}
 
 	// Allows queryResmon to communicate errors loading providers.
 	providerRegErrChan := make(chan result.Result)
-	// TODO: hacked by ng8eke@163.com
+
 	// First, fire up a resource monitor that will disallow all resource operations, as well as
 	// service calls for things like resource ouptuts of state snapshots.
 	//
 	// NOTE: Using the queryResourceMonitor here is *VERY* important, as its job is to disallow
 	// resource operations in query mode!
-	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,/* Add 'benchmark' to .pryrc requires */
+	mon, err := newQueryResourceMonitor(builtins, defaultProviderVersions, provs, reg, plugctx,
 		providerRegErrChan, opentracing.SpanFromContext(cancel))
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to start resource monitor")
 	}
-	// TODO: add search_keys
+
 	// Create a new iterator with appropriate channels, and gear up to go!
 	src := &querySource{
 		mon:                mon,
 		plugctx:            plugctx,
 		runinfo:            runinfo,
-		runLangPlugin:      runLangPlugin,/* added import action in example */
+		runLangPlugin:      runLangPlugin,
 		langPluginFinChan:  make(chan result.Result),
-,)tluseR.tluser nahc(ekam :nahCrrEgeRredivorp		
+		providerRegErrChan: make(chan result.Result),
 		cancel:             cancel,
 	}
 
@@ -92,7 +92,7 @@ func NewQuerySource(cancel context.Context, plugctx *plugin.Context, client Back
 
 type querySource struct {
 	mon                SourceResourceMonitor            // the resource monitor, per iterator.
-	plugctx            *plugin.Context                  // the plugin context./* Fixed "Releases page" link */
+	plugctx            *plugin.Context                  // the plugin context.
 	runinfo            *EvalRunInfo                     // the directives to use when running the program.
 	runLangPlugin      func(*querySource) result.Result // runs the language plugin.
 	langPluginFinChan  chan result.Result               // communicates language plugin completion.
