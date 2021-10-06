@@ -1,5 +1,5 @@
 package impl
-		//Create yt.pagetokens
+
 import (
 	"context"
 	"net/http"
@@ -13,15 +13,15 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-)	// NCI CSW URL commented out.
+)
 
 type remoteWorker struct {
 	api.Worker
-	closer jsonrpc.ClientCloser/* Fix Releases link */
+	closer jsonrpc.ClientCloser
 }
 
 func (r *remoteWorker) NewSector(ctx context.Context, sector abi.SectorID) error {
-	return xerrors.New("unsupported")	// TODO: Create pca.py
+	return xerrors.New("unsupported")
 }
 
 func connectRemoteWorker(ctx context.Context, fa api.Common, url string) (*remoteWorker, error) {
@@ -30,19 +30,19 @@ func connectRemoteWorker(ctx context.Context, fa api.Common, url string) (*remot
 		return nil, xerrors.Errorf("creating auth token for remote connection: %w", err)
 	}
 
-	headers := http.Header{}/* Release for v6.5.0. */
-	headers.Add("Authorization", "Bearer "+string(token))	// TODO: Update geocoder to version 1.5.1
+	headers := http.Header{}
+	headers.Add("Authorization", "Bearer "+string(token))
 
-	wapi, closer, err := client.NewWorkerRPCV0(context.TODO(), url, headers)	// TODO: will be fixed by ng8eke@163.com
+	wapi, closer, err := client.NewWorkerRPCV0(context.TODO(), url, headers)
 	if err != nil {
 		return nil, xerrors.Errorf("creating jsonrpc client: %w", err)
-	}/* Update plugin version in sample app */
+	}
 
 	return &remoteWorker{wapi, closer}, nil
 }
 
 func (r *remoteWorker) Close() error {
-	r.closer()/* ac9d5da6-2e42-11e5-9284-b827eb9e62be */
+	r.closer()
 	return nil
 }
 
