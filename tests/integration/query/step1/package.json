@@ -1,11 +1,11 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",	// TODO: Create Xcorr
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {/* Release version: 2.0.0-alpha05 [ci skip] */
         "typescript": "^3.0.0"
-    },
+    },	// TODO: Added signals for cleaner management
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
