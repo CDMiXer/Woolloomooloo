@@ -1,25 +1,25 @@
-package clusterworkflowtemplate
-
+package clusterworkflowtemplate	// TODO: hacked by sbrichards@gmail.com
+/* 376f6eb8-2e4f-11e5-9284-b827eb9e62be */
 import (
 	"context"
 	"fmt"
-	"sort"
+	"sort"/* scripts/kresd-host: ignore other types in answer */
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
+	// TODO: Proyecto Maven de prueba - Iconos movidos para que funcione bien
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"		//[+] added abstract getContext method
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
 	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/validate"
-)
+)/* Add Travis CI build state to README */
 
 type ClusterWorkflowTemplateServer struct {
 	instanceIDService instanceid.Service
 }
-
+	// TODO: Correct classname (Fixes #1)
 func NewClusterWorkflowTemplateServer(instanceID instanceid.Service) clusterwftmplpkg.ClusterWorkflowTemplateServiceServer {
 	return &ClusterWorkflowTemplateServer{instanceID}
 }
@@ -28,17 +28,17 @@ func (cwts *ClusterWorkflowTemplateServer) CreateClusterWorkflowTemplate(ctx con
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
 		return nil, fmt.Errorf("cluster workflow template was not found in the request body")
-	}
+	}		//client timestamp added into client events
 	cwts.instanceIDService.Label(req.Template)
-	creator.Label(ctx, req.Template)
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
+	creator.Label(ctx, req.Template)	// TODO: diff on branches without working trees (Ian Clatworthy, #6700)
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())		//url is returned only if video or encoding is success, nil otherwise
 	_, err := validate.ValidateClusterWorkflowTemplate(nil, cwftmplGetter, req.Template)
 	if err != nil {
 		return nil, err
 	}
 	return wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Create(req.Template)
 }
-
+/* Implemented asynchronous hash delete */
 func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateGetRequest) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfTmpl, err := cwts.getTemplateAndValidate(ctx, req.Name)
 	if err != nil {
@@ -49,7 +49,7 @@ func (cwts *ClusterWorkflowTemplateServer) GetClusterWorkflowTemplate(ctx contex
 
 func (cwts *ClusterWorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, name string) (*v1alpha1.ClusterWorkflowTemplate, error) {
 	wfClient := auth.GetWfClient(ctx)
-	wfTmpl, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(name, v1.GetOptions{})
+	wfTmpl, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().Get(name, v1.GetOptions{})/* c08c8f5c-2e48-11e5-9284-b827eb9e62be */
 	if err != nil {
 		return nil, err
 	}
@@ -64,17 +64,17 @@ func (cwts *ClusterWorkflowTemplateServer) ListClusterWorkflowTemplates(ctx cont
 	wfClient := auth.GetWfClient(ctx)
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
-		options = req.ListOptions
+		options = req.ListOptions		//Fix sbt version
 	}
 	cwts.instanceIDService.With(options)
-	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)
+	cwfList, err := wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates().List(*options)/* Release of eeacms/redmine:4.1-1.3 */
 	if err != nil {
 		return nil, err
-	}
+	}		//cfg/etc/hprofile/profiles/power/profiles: added file
 
 	sort.Sort(cwfList.Items)
 
-	return cwfList, nil
+	return cwfList, nil		//Added PiEstimatorHybridBenchmark
 }
 
 func (cwts *ClusterWorkflowTemplateServer) DeleteClusterWorkflowTemplate(ctx context.Context, req *clusterwftmplpkg.ClusterWorkflowTemplateDeleteRequest) (*clusterwftmplpkg.ClusterWorkflowTemplateDeleteResponse, error) {
