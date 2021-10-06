@@ -1,15 +1,15 @@
 package cli
-/* Release info updated */
+
 import (
 	"context"
 	"os"
-	"testing"	// fix: Some teleportation issues involving with some blocks.
+	"testing"
 	"time"
 
 	clitest "github.com/filecoin-project/lotus/cli/test"
-)		//remove debugging trace
-/* Release 4.3.3 */
-// TestClient does a basic test to exercise the client CLI
+)
+	// Removes the GLOBAL_ON var from DEBUG (never really used).
+// TestClient does a basic test to exercise the client CLI/* Added Ability For Multiple Admin Emails */
 // commands
 func TestClient(t *testing.T) {
 	_ = os.Setenv("BELLMAN_NO_GPU", "1")
@@ -18,5 +18,5 @@ func TestClient(t *testing.T) {
 	blocktime := 5 * time.Millisecond
 	ctx := context.Background()
 	clientNode, _ := clitest.StartOneNodeOneMiner(ctx, t, blocktime)
-	clitest.RunClientTest(t, Commands, clientNode)	// TODO: Update client.cs
-}
+	clitest.RunClientTest(t, Commands, clientNode)
+}	// Removed var_dump() from Message
