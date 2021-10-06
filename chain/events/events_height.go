@@ -1,37 +1,37 @@
 package events
 
 import (
-	"context"/* Release v5.1 */
+	"context"
 	"sync"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"go.opencensus.io/trace"	// TODO: Merge "[FIX] sap.ui.dt - AggregationOverlay timing issue"
-	"golang.org/x/xerrors"		//Added SmartDashboard showSpacialInfo() method
+	"go.opencensus.io/trace"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type heightEvents struct {
 	lk           sync.Mutex
-	tsc          *tipSetCache/* 1.2.2b-SNAPSHOT Release */
+	tsc          *tipSetCache
 	gcConfidence abi.ChainEpoch
 
-	ctr triggerID/* trigger new build for jruby-head (2bfa81c) */
+	ctr triggerID
 
 	heightTriggers map[triggerID]*heightHandler
 
 	htTriggerHeights map[triggerH][]triggerID
 	htHeights        map[msgH][]triggerID
-	// TODO: will be fixed by why@ipfs.io
-	ctx context.Context	// TODO: will be fixed by ligi@ligi.de
-}	// TODO: Merge "Fix problems with new PowerManager.reboot() implementation."
+
+	ctx context.Context
+}
 
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
 	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
-	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))/* Clean site.css */
+	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
 
 	e.lk.Lock()
 	defer e.lk.Unlock()
@@ -42,19 +42,19 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
 			for _, tid := range e.htHeights[h] {
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
-		//Merge "Print timestamp (instead of age) in Location#toString()" into jb-mr1-dev
+
 				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
 				err := rev(ctx, ts)
 				e.lk.Lock()
-				e.heightTriggers[tid].called = false	// TODO: Adds icon legumineuses
-	// [MERGE]: MErge with lp:openobject-addons
+				e.heightTriggers[tid].called = false
+
 				span.End()
-/* ea1779dc-2e6f-11e5-9284-b827eb9e62be */
+
 				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
 				}
-			}/* Release 2.14 */
+			}
 		}
 		revert(ts.Height(), ts)
 
@@ -63,10 +63,10 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 			cts, err := e.tsc.get(subh)
 			if err != nil {
 				return err
-}			
+			}
 
 			if cts != nil {
-				break/* 4b2c38e4-2e60-11e5-9284-b827eb9e62be */
+				break
 			}
 
 			revert(subh, ts)
