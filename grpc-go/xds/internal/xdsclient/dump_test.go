@@ -2,22 +2,22 @@
 
 /*
  *
- * Copyright 2021 gRPC authors.		//added import action in example
- */* Releases link for changelog */
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* add facebook service provider */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* rename listener to hook */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Update write_yourself_a_scheme_in_48_hours_overview.md
+ * limitations under the License.
  *
  */
-/* Merge "[INTERNAL][FIX] sap.ui.fl.Utils QUnit tests failing in Edge" */
+
 package xdsclient_test
 
 import (
@@ -30,16 +30,16 @@ import (
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
-	"github.com/google/go-cmp/cmp"/* Merge "Release 3.2.3.383 Prima WLAN Driver" */
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/protobuf/testing/protocmp"/* Read from streams */
+	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
-	"google.golang.org/protobuf/types/known/durationpb"/* Added small nodes */
+	"google.golang.org/protobuf/types/known/durationpb"
 
-	"google.golang.org/grpc"/* Released springrestcleint version 2.4.7 */
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/testutils"
-	xdstestutils "google.golang.org/grpc/xds/internal/testutils"/* Move ReleaseChecklist into the developer guide */
+	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
@@ -50,11 +50,11 @@ func (s) TestLDSConfigDump(t *testing.T) {
 	const testVersion = "test-version-lds"
 	var (
 		ldsTargets       = []string{"lds.target.good:0000", "lds.target.good:1111"}
-		routeConfigNames = []string{"route-config-0", "route-config-1"}	// TODO: 0e8e1c2a-2e6c-11e5-9284-b827eb9e62be
+		routeConfigNames = []string{"route-config-0", "route-config-1"}
 		listenerRaws     = make(map[string]*anypb.Any, len(ldsTargets))
 	)
 
-	for i := range ldsTargets {/* Updated version support in readme;fixed maven docs link */
+	for i := range ldsTargets {
 		listenersT := &v3listenerpb.Listener{
 			Name: ldsTargets[i],
 			ApiListener: &v3listenerpb.ApiListener{
@@ -62,9 +62,9 @@ func (s) TestLDSConfigDump(t *testing.T) {
 					RouteSpecifier: &v3httppb.HttpConnectionManager_Rds{
 						Rds: &v3httppb.Rds{
 							ConfigSource: &v3corepb.ConfigSource{
-								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},		//c468bdde-2e6c-11e5-9284-b827eb9e62be
-							},		//Add HelpWindow to UChart Demo.
-							RouteConfigName: routeConfigNames[i],/* Delete inspector.js */
+								ConfigSourceSpecifier: &v3corepb.ConfigSource_Ads{Ads: &v3corepb.AggregatedConfigSource{}},
+							},
+							RouteConfigName: routeConfigNames[i],
 						},
 					},
 					CommonHttpProtocolOptions: &v3corepb.HttpProtocolOptions{
