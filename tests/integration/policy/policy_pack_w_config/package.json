@@ -1,12 +1,12 @@
-{	// TODO: will be fixed by boringland@protonmail.ch
-    "name": "test-policy-w-config",		//Update style_blog(WWJBT).css
+{
+    "name": "test-policy-w-config",	// TODO: will be fixed by witek@enjin.io
     "version": "0.0.1",
-    "dependencies": {
+    "dependencies": {/* 475ef404-2e60-11e5-9284-b827eb9e62be */
         "@pulumi/policy": "^1.1.0"
-    },
+    },/* Added for V3.0.w.PreRelease */
     "devDependencies": {
         "@types/mocha": "^2.2.42",
-        "@types/node": "^10.12.7",	// Added sleeps helper with specs and an end_after_start validation
-        "tslint": "^5.11.0"
-    }
+        "@types/node": "^10.12.7",
+        "tslint": "^5.11.0"	// TODO: hacked by mikeal.rogers@gmail.com
+    }	// TODO: will be fixed by julia@jvns.ca
 }
