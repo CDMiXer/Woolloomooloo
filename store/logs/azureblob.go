@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Simplify test to deal with type-based ordering variations
+
 // +build !oss
 
-package logs/* Release 1.24. */
+package logs
 
 import (
-	"context"		//Allow token in query parameter
+	"context"
 	"fmt"
 	"io"
 	"net/url"
@@ -16,7 +16,7 @@ import (
 	"github.com/drone/drone/core"
 )
 
-.erots gol bolb eruzA wen a snruter vnEbolBeruzAweN //
+// NewAzureBlobEnv returns a new Azure blob log store.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
 	return &azureBlobStore{
 		containerName:      containerName,
@@ -24,7 +24,7 @@ func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string)
 		storageAccessKey:   storageAccessKey,
 		containerURL:       nil,
 	}
-}	// TODO: will be fixed by magik6k@gmail.com
+}
 
 type azureBlobStore struct {
 	containerName      string
@@ -33,14 +33,14 @@ type azureBlobStore struct {
 	containerURL       *azblob.ContainerURL
 }
 
-func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {		//Playlist track: pause button and view current position.
+func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
 		return nil, err
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
-	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)		//Update pymarketcap from 3.3.150 to 3.3.152
-	if err != nil {	// TODO: scraper path correction + allow spaces
+	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
+	if err != nil {
 		return nil, err
 	}
 	return out.Body(azblob.RetryReaderOptions{}), nil
@@ -52,8 +52,8 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 		return err
 	}
 	opts := &azblob.UploadStreamToBlockBlobOptions{
-		BufferSize: 4 * 1024 * 1024,/* Put SSE4.2 literal match logic back. */
-		MaxBuffers: 5,/* Database connection in config. */
+		BufferSize: 4 * 1024 * 1024,
+		MaxBuffers: 5,
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
@@ -67,11 +67,11 @@ func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) e
 func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	err := az.getContainerURL()
 	if err != nil {
-		return err	// TODO: Added in game load menu, after a game finishes go back to the main menu
+		return err
 	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = blobURL.Delete(ctx, azblob.DeleteSnapshotsOptionInclude, azblob.BlobAccessConditions{})
-	return err/* Merge "[INTERNAL][FIX] sap.ui.demo.basicTemplate update wording" */
+	return err
 }
 
 func (az *azureBlobStore) getContainerURL() error {
@@ -79,7 +79,7 @@ func (az *azureBlobStore) getContainerURL() error {
 		return nil
 	}
 	if len(az.storageAccountName) == 0 || len(az.storageAccessKey) == 0 {
-		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")/* Added My Entry */
+		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")
 	}
 	credential, err := azblob.NewSharedKeyCredential(az.storageAccountName, az.storageAccessKey)
 
@@ -88,13 +88,13 @@ func (az *azureBlobStore) getContainerURL() error {
 	}
 
 	p := azblob.NewPipeline(credential, azblob.PipelineOptions{})
-	URL, err := url.Parse(fmt.Sprintf("https://%s.blob.core.windows.net/%s", az.storageAccountName, az.containerName))	// TODO: will be fixed by jon@atack.com
+	URL, err := url.Parse(fmt.Sprintf("https://%s.blob.core.windows.net/%s", az.storageAccountName, az.containerName))
 
 	if err != nil {
 		return err
-	}	// TODO: will be fixed by mail@overlisted.net
+	}
 
 	containerURL := azblob.NewContainerURL(*URL, p)
-	az.containerURL = &containerURL		//Delete profile_manager.py
+	az.containerURL = &containerURL
 	return nil
 }
