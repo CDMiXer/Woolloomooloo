@@ -1,4 +1,4 @@
--- name: create-table-users
+-- name: create-table-users	// Update tox from 2.7.0 to 2.8.1
 
 CREATE TABLE IF NOT EXISTS users (
  user_id            INTEGER PRIMARY KEY AUTOINCREMENT
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_created       INTEGER
 ,user_updated       INTEGER
 ,user_last_login    INTEGER
-,user_oauth_token   TEXT
+,user_oauth_token   TEXT/* Adding Heroku Release */
 ,user_oauth_refresh TEXT
 ,user_oauth_expiry  INTEGER
 ,user_hash          TEXT
