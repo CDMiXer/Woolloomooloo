@@ -1,8 +1,8 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
-using Pulumi;
-
+using Pulumi;/* CLOSED - task 149: Release sub-bundles */
+	// just changing the name of tqCurve to a more generic 'curve'
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
@@ -10,7 +10,7 @@ class Resource : ComponentResource
     {
     }
 }
-
+/* 882cb342-2e72-11e5-9284-b827eb9e62be */
 class Program
 {
     static Task<int> Main(string[] args)
@@ -21,9 +21,9 @@ class Program
             // This resource was previously named `res1`, we'll alias to the old name.
             var res1 = new Resource("newres1",
                 new ComponentResourceOptions
-                {		//Introducing a new forceboot value
+                {
                     Aliases = { new Alias { Name = "res1" } },
                 });
-        });/* Release v1.0.3. */
+        });
     }
-}/* Fix Gradle import in Readme */
+}
