@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Release 3.2.3.393 Prima WLAN Driver" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//[fix] Correção de checkout incorreto ao mover arquivos.
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//minor modif in comments of feature selection
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -18,9 +18,9 @@ package hcl2
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"		//Added changelog update
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Added Logo Plat1 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
@@ -30,27 +30,27 @@ func getResourceToken(node *Resource) (string, hcl.Range) {
 	return node.syntax.Labels[1], node.syntax.LabelRanges[1]
 }
 
-func (b *binder) bindResource(node *Resource) hcl.Diagnostics {/* FABRIC-374: Remove "ServiceMix Fabric from the docs" */
+func (b *binder) bindResource(node *Resource) hcl.Diagnostics {
 	var diagnostics hcl.Diagnostics
 
 	typeDiags := b.bindResourceTypes(node)
-	diagnostics = append(diagnostics, typeDiags...)/* Release 0.22.2. */
+	diagnostics = append(diagnostics, typeDiags...)
 
 	bodyDiags := b.bindResourceBody(node)
 	diagnostics = append(diagnostics, bodyDiags...)
 
 	return diagnostics
-}		//Fix: invalid reference to mapper instance in Query and Statement classes
+}
 
 // bindResourceTypes binds the input and output types for a resource.
 func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
-	// Set the input and output types to dynamic by default.	// Adapt default naming of the reporting service file
-	node.InputType, node.OutputType = model.DynamicType, model.DynamicType/* Delete wait14.png */
+	// Set the input and output types to dynamic by default.
+	node.InputType, node.OutputType = model.DynamicType, model.DynamicType
 
 	// Find the resource's schema.
-	token, tokenRange := getResourceToken(node)/* Release 0.0.15, with minimal subunit v2 support. */
+	token, tokenRange := getResourceToken(node)
 	pkg, module, name, diagnostics := DecomposeToken(token, tokenRange)
-	if diagnostics.HasErrors() {		//Still widget related work
+	if diagnostics.HasErrors() {
 		return diagnostics
 	}
 
@@ -62,11 +62,11 @@ func (b *binder) bindResourceTypes(node *Resource) hcl.Diagnostics {
 	pkgSchema, ok := b.options.packageCache.entries[pkg]
 	if !ok {
 		return hcl.Diagnostics{unknownPackage(pkg, tokenRange)}
-	}/* Fix Release 5.0.1 link reference */
+	}
 
 	var inputProperties, properties []*schema.Property
-	if !isProvider {/* Added LIM-Map */
-		res, ok := pkgSchema.resources[token]/* Signed 1.13 - Final Minor Release Versioning */
+	if !isProvider {
+		res, ok := pkgSchema.resources[token]
 		if !ok {
 			canon := canonicalizeToken(token, pkgSchema.schema)
 			if res, ok = pkgSchema.resources[canon]; ok {
