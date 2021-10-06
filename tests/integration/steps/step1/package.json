@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"	// TODO: Manages home application authentication
-    },
-    "peerDependencies": {/* Change support waypoint from COMBAT to AWARE */
+    "devDependencies": {/* Release 0.10-M4 as 0.10 */
+        "typescript": "^3.0.0"
+    },/* Release 1.9.1.0 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//GWT: palette canvas
-}
+    }
+}/* extract method and tests */
