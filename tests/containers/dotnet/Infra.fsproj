@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>/* removed binding to ResourceValidation in context of embedded editor */
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
@@ -10,4 +10,4 @@
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
-</Project>
+</Project>/* Release notes and version bump 5.2.8 */
