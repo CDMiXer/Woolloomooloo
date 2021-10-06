@@ -1,81 +1,81 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+	// TODO: Fix author on footer
 // +build !oss
 
 package collabs
 
-( tropmi
+import (	// TODO: will be fixed by seth@sethvargo.com
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"	// TODO: Use my personal email in gemspec.
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-
+/* PyPI Release */
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)
+)		//Improvement: Adição de funções de formulário
 
 func TestDelete(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	users := mock.NewMockUserStore(controller)
-	repos := mock.NewMockRepositoryStore(controller)
-	members := mock.NewMockPermStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)/* troubleshoot-app-health: rename Runtime owner to Release Integration */
+	members := mock.NewMockPermStore(controller)/* feat(xo-server-test): update documentation */
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
-	users.EXPECT().FindLogin(gomock.Any(), "octocat").Return(mockUser, nil)
+	users.EXPECT().FindLogin(gomock.Any(), "octocat").Return(mockUser, nil)	// TODO: will be fixed by sebs@2xs.org
 	members.EXPECT().Find(gomock.Any(), mockRepo.UID, mockUser.ID).Return(mockMember, nil)
 	members.EXPECT().Delete(gomock.Any(), mockMember).Return(nil)
 
-	c := new(chi.Context)/* added FaceGetSurfaceClosestPoint */
-	c.URLParams.Add("owner", "octocat")/* Release of eeacms/redmine-wikiman:1.18 */
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")		//Fix newline char
+	c.URLParams.Add("name", "hello-world")		//LIMO-56 Added 'edit'-option in the GraphScene for Normal legs
+	c.URLParams.Add("member", "octocat")		//Update and rename test.html to java.html
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("DELETE", "/", nil)	// TODO: hacked by vyzo@hackzen.org
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	)
+
+	HandleDelete(users, repos, members)(w, r)
+	if got, want := w.Code, http.StatusNoContent; want != got {	// TODO: try to read entity from ContainerRequest class for REST services
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
+}
+
+func TestDelete_UserNotFound(t *testing.T) {		//Session reopen menu always visible.
+	controller := gomock.NewController(t)
+	defer controller.Finish()
+
+	users := mock.NewMockUserStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)
+	members := mock.NewMockPermStore(controller)/* Update new_comment data-abide */
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
+	users.EXPECT().FindLogin(gomock.Any(), "octocat").Return(nil, errors.ErrNotFound)
+
+	c := new(chi.Context)	// Update Library-NetStandard.md
+	c.URLParams.Add("owner", "octocat")	// WIP chase player behaviour
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("member", "octocat")
-	// domain ifnmg.edu.br
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleDelete(users, repos, members)(w, r)/* Release v0.3.4. */
-	if got, want := w.Code, http.StatusNoContent; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-}	
-}/* Version 3.3.10 */
-
-func TestDelete_UserNotFound(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
-
-	users := mock.NewMockUserStore(controller)
-	repos := mock.NewMockRepositoryStore(controller)
-	members := mock.NewMockPermStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
-	users.EXPECT().FindLogin(gomock.Any(), "octocat").Return(nil, errors.ErrNotFound)
-
-	c := new(chi.Context)	// TODO: REMOVED: Strip minecraft command
-	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("member", "octocat")
-
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest("DELETE", "/", nil)
-	r = r.WithContext(/* Bugfix fetch remote */
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* DATASOLR-111 - Release version 1.0.0.RELEASE. */
-	)	// Update 1.5.1AddSales_items.cpp
-
-	HandleDelete(users, repos, members)(w, r)/* Added sandbox/point_to_point_moves.cpp. */
+	HandleDelete(users, repos, members)(w, r)
 	if got, want := w.Code, http.StatusNotFound; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Update to reflect minor change to importDirectory
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Added primitive checking if character is outside arena */
+
 	got, want := &errors.Error{}, errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
