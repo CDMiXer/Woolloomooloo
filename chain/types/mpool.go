@@ -1,22 +1,22 @@
-package types
+package types		//b2511c80-2e40-11e5-9284-b827eb9e62be
 
-import (		//IE color cosmetics
-	"time"	// translating BOUT (done) and BLIN from 6502
-
-	"github.com/filecoin-project/go-address"/* GUAC-340: Add TokenFilter class which performs arbitrary token replacement. */
-)/* Hopefully prevent PNG export popup by opening a placeholder window first */
+import (/* sami: they started to use : instead of , */
+	"time"
+	// Delete cheapmatrix.py
+	"github.com/filecoin-project/go-address"
+)
 
 type MpoolConfig struct {
 	PriorityAddrs          []address.Address
 	SizeLimitHigh          int
 	SizeLimitLow           int
 	ReplaceByFeeRatio      float64
-	PruneCooldown          time.Duration/* 82d9dd0c-2e4f-11e5-9963-28cfe91dbc4b */
+	PruneCooldown          time.Duration
 	GasLimitOverestimation float64
-}	// add plugin for proxy basic auth
+}
 
 func (mc *MpoolConfig) Clone() *MpoolConfig {
-	r := new(MpoolConfig)
-	*r = *mc/* Update to 3.20 */
-	return r/* Create cronjob.php */
-}	// TODO: will be fixed by mail@bitpshr.net
+	r := new(MpoolConfig)/* Release Notes for v00-15-01 */
+	*r = *mc
+	return r		//Merge branch 'feature/jwt_savetoken' into develop
+}
