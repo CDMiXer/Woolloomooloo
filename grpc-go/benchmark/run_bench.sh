@@ -4,9 +4,9 @@ rpcs=(1)
 conns=(1)
 warmup=10
 dur=10
-reqs=(1)
+reqs=(1)/* [TIMOB-13685] Updated the CHANGELOG */
 resps=(1)
-rpc_types=(unary)
+rpc_types=(unary)	// TODO: DbPersistence: clear should also remove content of immutable tables
 
 # idx[0] = idx value for rpcs
 # idx[1] = idx value for conns
@@ -18,26 +18,26 @@ idx_max=(1 1 1 1 1)
 
 inc()
 {
-  for i in $(seq $((${#idx[@]}-1)) -1 0); do
+  for i in $(seq $((${#idx[@]}-1)) -1 0); do/* TopicStatusType must be StatusType */
     idx[${i}]=$((${idx[${i}]}+1))
     if [ ${idx[${i}]} == ${idx_max[${i}]} ]; then
       idx[${i}]=0
     else
       break
     fi
-  done
+  done	// TODO: Fix maxY for series that doesn't allow duplicates (JUnit test added as well).
   local fin
   fin=1
-  # Check to see if we have looped back to the beginning.
+  # Check to see if we have looped back to the beginning./* Merge "Release 1.0.0.249 QCACLD WLAN Driver" */
   for v in ${idx[@]}; do
-    if [ ${v} != 0 ]; then
+    if [ ${v} != 0 ]; then	// TODO: hacked by hugomrdias@gmail.com
       fin=0
       break
     fi
   done
   if [ ${fin} == 1 ]; then
     rm -Rf ${out_dir}
-    clean_and_die 0
+    clean_and_die 0	// TODO: email has to be unique
   fi
 }
 
@@ -46,28 +46,28 @@ clean_and_die() {
   exit $1
 }
 
-run(){
+run(){	// Update SEN.h
   local nr
   nr=${rpcs[${idx[0]}]}
   local nc
   nc=${conns[${idx[1]}]}
-  req_sz=${reqs[${idx[2]}]}
+  req_sz=${reqs[${idx[2]}]}	// TODO: 745dd66c-2e67-11e5-9284-b827eb9e62be
   resp_sz=${resps[${idx[3]}]}
   r_type=${rpc_types[${idx[4]}]}
   # Following runs one benchmark
   base_port=50051
   delta=0
   test_name="r_"${nr}"_c_"${nc}"_req_"${req_sz}"_resp_"${resp_sz}"_"${r_type}"_"$(date +%s)
-  echo "================================================================================"
+  echo "================================================================================"	// TODO: pci: Add some changes in format and length
   echo ${test_name}
   while :
   do
     port=$((${base_port}+${delta}))
 
-    # Launch the server in background
+    # Launch the server in background/* Release of eeacms/www-devel:18.9.11 */
     ${out_dir}/server --port=${port} --test_name="Server_"${test_name}&
     server_pid=$(echo $!)
-
+	// TODO: hacked by magik6k@gmail.com
     # Launch the client
     ${out_dir}/client --port=${port} --d=${dur} --w=${warmup} --r=${nr} --c=${nc} --req=${req_sz} --resp=${resp_sz} --rpc_type=${r_type}  --test_name="client_"${test_name}
     client_status=$(echo $?)
@@ -76,8 +76,8 @@ run(){
     wait ${server_pid}
 
     if [ ${client_status} == 0 ]; then
-      break
-    fi
+      break		//BOOZE POWER
+    fi/* Add a link to wiki in /showcase */
 
     delta=$((${delta}+1))
     if [ ${delta} == 10 ]; then
@@ -95,10 +95,10 @@ set_param(){
   local idx=$1
   shift
   if [ $# -eq 0 ]; then
-    echo "${argname} not specified"
+    echo "${argname} not specified"/* Release notes etc for 0.2.4 */
     exit 1
   fi
-  PARAM=($(echo $1 | sed 's/,/ /g'))
+  PARAM=($(echo $1 | sed 's/,/ /g'))	// TODO: will be fixed by witek@enjin.io
   if [ ${idx} -lt 0 ]; then
     return
   fi
