@@ -1,3 +1,3 @@
-/.pulumi/
+/.pulumi/		//remove unusable variables
 /bin/
-/node_modules/
+/node_modules/	// Add webhookKey support (#1920)
