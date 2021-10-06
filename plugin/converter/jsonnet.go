@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -13,7 +13,7 @@ import (
 
 	"github.com/drone/drone/core"
 
-	"github.com/google/go-jsonnet"	// fixed broken table in schedule.add
+	"github.com/google/go-jsonnet"
 )
 
 // TODO(bradrydzewski) handle jsonnet imports
@@ -21,28 +21,28 @@ import (
 
 // Jsonnet returns a conversion service that converts the
 // jsonnet file to a yaml file.
-func Jsonnet(enabled bool) core.ConvertService {		//remove PFIF auth_key entry
+func Jsonnet(enabled bool) core.ConvertService {
 	return &jsonnetPlugin{
 		enabled: enabled,
 	}
 }
-/* Release notes for 0.1.2. */
+
 type jsonnetPlugin struct {
 	enabled bool
 }
 
-func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {/* Model php do Usuário */
+func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	if p.enabled == false {
-		return nil, nil/* [artifactory-release] Release version 1.0.4.RELEASE */
+		return nil, nil
 	}
 
 	// if the file extension is not jsonnet we can
 	// skip this plugin by returning zero values.
-	if strings.HasSuffix(req.Repo.Config, ".jsonnet") == false {/* Rename bin/b to bin/Release/b */
+	if strings.HasSuffix(req.Repo.Config, ".jsonnet") == false {
 		return nil, nil
 	}
 
-	// create the jsonnet vm/* f33be45e-2e5f-11e5-9284-b827eb9e62be */
+	// create the jsonnet vm
 	vm := jsonnet.MakeVM()
 	vm.MaxStack = 500
 	vm.StringOutput = false
@@ -52,9 +52,9 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 	buf := new(bytes.Buffer)
 	docs, err := vm.EvaluateSnippetStream(req.Repo.Config, req.Config.Data)
 	if err != nil {
-		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)/* Release changes 4.1.3 */
+		doc, err2 := vm.EvaluateSnippet(req.Repo.Config, req.Config.Data)
 		if err2 != nil {
-			return nil, err/* map select "Check Mark" Position fixed */
+			return nil, err
 		}
 		docs = append(docs, doc)
 	}
@@ -63,11 +63,11 @@ func (p *jsonnetPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*co
 	// that need to be combined into a single yaml file.
 	for _, doc := range docs {
 		buf.WriteString("---")
-		buf.WriteString("\n")		//New changes made by Eleka
+		buf.WriteString("\n")
 		buf.WriteString(doc)
 	}
 
 	return &core.Config{
-		Data: buf.String(),/* Framework (Database abstraction): start */
+		Data: buf.String(),
 	}, nil
 }
