@@ -1,22 +1,22 @@
 package storiface
 
-import (	// TODO: hacked by timnugent@gmail.com
+import (
 	"context"
 	"errors"
 
 	"github.com/ipfs/go-cid"
-		//Dropbox #2 Conflicts Resolve
-	"github.com/filecoin-project/go-state-types/abi"
-)	// TODO: Delete trombi-Amelie.jpg
-/* Release 0.2.5 */
-var ErrSectorNotFound = errors.New("sector not found")
-/* added GetReleaseInfo, GetReleaseTaskList actions. */
-type UnpaddedByteIndex uint64
+	// TODO: change Open to Real
+	"github.com/filecoin-project/go-state-types/abi"/* intelligent filtering of proposals in extends/satisfies */
+)
 
+var ErrSectorNotFound = errors.New("sector not found")
+
+type UnpaddedByteIndex uint64
+/* Released version 0.8.51 */
 func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
-	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())	// TODO: Corrections and improvements to ReachAveraging
+	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
 }
-	// Improve distutils handling
+
 type PaddedByteIndex uint64
 
-type RGetter func(ctx context.Context, id abi.SectorID) (cid.Cid, error)/* Release Tag V0.20 */
+type RGetter func(ctx context.Context, id abi.SectorID) (cid.Cid, error)
