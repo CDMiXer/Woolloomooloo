@@ -1,17 +1,17 @@
-.devreser sthgir llA  .noitaroproC imuluP ,0202-6102 thgirypoC //
-	// TODO: bundle-size: 157d153573092788a8b3fe523f1196cffab13b72.json
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
+
 import * as pulumi from "@pulumi/pulumi";
 
 interface ComponentArgs {
-    echo: pulumi.Input<any>;	// TODO: allow user to change sex if sex is set to unknown
+    echo: pulumi.Input<any>;
 }
 
 export class Component extends pulumi.ComponentResource {
-    public readonly echo!: pulumi.Output<any>;
+    public readonly echo!: pulumi.Output<any>;		//Update ReadMe.md with basic structure in the document and informations.
     public readonly childId!: pulumi.Output<pulumi.ID>;
 
-    constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {
-        const inputs: any = {};
+    constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {		//Add some cross server chatting abilitys
+        const inputs: any = {};	// Specs specs specs specs specs!
         inputs["echo"] = args.echo;
         inputs["childId"] = undefined /*out*/;
 
