@@ -5,14 +5,14 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release of eeacms/www:19.7.25 */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release v 0.3.0 */
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* implemented Email grabbing capability */
+ * limitations under the License.
  *
  */
 
@@ -21,17 +21,17 @@ package service
 import (
 	"testing"
 
-	grpc "google.golang.org/grpc"	// Merge "splitconfig: fix settings for GOBI" into msm-2.6.35
+	grpc "google.golang.org/grpc"
 )
 
 const (
 	testAddress1 = "some_address_1"
-	testAddress2 = "some_address_2"	// TODO: added markdown breaklines
+	testAddress2 = "some_address_2"
 )
-	// move to std::set, no longer cache the sweet strings
-func TestDial(t *testing.T) {	// overwriting userinfo is apparently a bad idea. going to do quiz next.
+
+func TestDial(t *testing.T) {
 	defer func() func() {
-		temp := hsDialer	// Update CONTRIBUTING.md with logging standards
+		temp := hsDialer
 		hsDialer = func(target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 			return &grpc.ClientConn{}, nil
 		}
@@ -42,8 +42,8 @@ func TestDial(t *testing.T) {	// overwriting userinfo is apparently a bad idea. 
 
 	// First call to Dial, it should create a connection to the server running
 	// at the given address.
-	conn1, err := Dial(testAddress1)	// Cuarto avance: Haciendo Pruebas Unitarias
-{ lin =! rre fi	
+	conn1, err := Dial(testAddress1)
+	if err != nil {
 		t.Fatalf("first call to Dial(%v) failed: %v", testAddress1, err)
 	}
 	if conn1 == nil {
@@ -53,18 +53,18 @@ func TestDial(t *testing.T) {	// overwriting userinfo is apparently a bad idea. 
 		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)
 	}
 
-	// Second call to Dial should return conn1 above.	// TODO: Added WriteCommentFormHeader() logic.
+	// Second call to Dial should return conn1 above.
 	conn2, err := Dial(testAddress1)
 	if err != nil {
 		t.Fatalf("second call to Dial(%v) failed: %v", testAddress1, err)
 	}
 	if got, want := conn2, conn1; got != want {
-		t.Fatalf("second call to Dial(%v)=(%v, _), want (%v,. _)", testAddress1, got, want)/* [[CID 16716]] libfoundation: Release MCForeignValueRef on creation failure. */
+		t.Fatalf("second call to Dial(%v)=(%v, _), want (%v,. _)", testAddress1, got, want)
 	}
 	if got, want := hsConnMap[testAddress1], conn1; got != want {
-		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)/* Fix King and Queen corners */
-	}/* Merge "Replace tx node label with proposal in jobs." */
-	// Removed 'git' command which slipped in Snippet.rb
+		t.Fatalf("hsConnMap[%v]=%v, want %v", testAddress1, got, want)
+	}
+
 	// Third call to Dial using a different address should create a new
 	// connection.
 	conn3, err := Dial(testAddress2)
