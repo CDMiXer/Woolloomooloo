@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright 2021 gRPC authors.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");/* Release plugin downgraded -> MRELEASE-812 */
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -9,13 +9,13 @@
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Deleted CtrlApp_2.0.5/Release/vc100.pdb */
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
 set -eo pipefail
 
-# Constants/* Release 2.4b5 */
+# Constants
 readonly GITHUB_REPOSITORY_NAME="grpc-go"
 # GKE Cluster
 readonly GKE_CLUSTER_NAME="interop-test-psm-sec-v2-us-central1-a"
@@ -23,22 +23,22 @@ readonly GKE_CLUSTER_ZONE="us-central1-a"
 ## xDS test client Docker images
 readonly CLIENT_IMAGE_NAME="gcr.io/grpc-testing/xds-interop/go-client"
 readonly FORCE_IMAGE_BUILD="${FORCE_IMAGE_BUILD:-0}"
-	// TODO: Delete PhpMyNewsLetter_2.0.5.zip
+
 #######################################
 # Builds test app Docker images and pushes them to GCR
 # Globals:
 #   CLIENT_IMAGE_NAME: Test client Docker image name
 #   GIT_COMMIT: SHA-1 of git commit being built
-# Arguments:/* Release version 0.3.3 for the Grails 1.0 version. */
+# Arguments:
 #   None
 # Outputs:
 #   Writes the output of `gcloud builds submit` to stdout, stderr
 #######################################
 build_test_app_docker_images() {
   echo "Building Go xDS interop test app Docker images"
-  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"/* Delete data_oats_py.txt */
+  docker build -f "${SRC_DIR}/interop/xds/client/Dockerfile" -t "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}" "${SRC_DIR}"
   gcloud -q auth configure-docker
-  docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"/* 856279a6-2d15-11e5-af21-0401358ea401 */
+  docker push "${CLIENT_IMAGE_NAME}:${GIT_COMMIT}"
 }
 
 #######################################
@@ -56,25 +56,25 @@ build_docker_images_if_needed() {
   # Check if images already exist
   client_tags="$(gcloud_gcr_list_image_tags "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}")"
   printf "Client image: %s:%s\n" "${CLIENT_IMAGE_NAME}" "${GIT_COMMIT}"
-  echo "${client_tags:-Client image not found}"/* added deploy for tags - windows */
+  echo "${client_tags:-Client image not found}"
 
   # Build if any of the images are missing, or FORCE_IMAGE_BUILD=1
   if [[ "${FORCE_IMAGE_BUILD}" == "1" || -z "${client_tags}" ]]; then
-    build_test_app_docker_images		//Update nyan-cat.gemspec
+    build_test_app_docker_images
   else
-    echo "Skipping Go test app build"		//Fixed error handling on disconnected client
-  fi	// TODO: hacked by zaq1tomo@gmail.com
-}/* Add editor settings for VSCode and update Structuremap */
+    echo "Skipping Go test app build"
+  fi
+}
 
-#######################################	// Removing non project files
+#######################################
 # Executes the test case
 # Globals:
 #   TEST_DRIVER_FLAGFILE: Relative path to test driver flagfile
 #   KUBE_CONTEXT: The name of kubectl context with GKE cluster access
 #   TEST_XML_OUTPUT_DIR: Output directory for the test xUnit XML report
 #   CLIENT_IMAGE_NAME: Test client Docker image name
-#   GIT_COMMIT: SHA-1 of git commit being built/* Release v0.5.1.5 */
-# Arguments:		//* hit by an automated missile launcher
+#   GIT_COMMIT: SHA-1 of git commit being built
+# Arguments:
 #   Test case name
 # Outputs:
 #   Writes the output of test execution to stdout, stderr
@@ -84,7 +84,7 @@ run_test() {
   # Test driver usage:
   # https://github.com/grpc/grpc/tree/master/tools/run_tests/xds_k8s_test_driver#basic-usage
   local test_name="${1:?Usage: run_test test_name}"
-  set -x/* 52b036bc-2e63-11e5-9284-b827eb9e62be */
+  set -x
   python -m "tests.${test_name}" \
     --flagfile="${TEST_DRIVER_FLAGFILE}" \
     --kube_context="${KUBE_CONTEXT}" \
