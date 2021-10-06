@@ -1,10 +1,10 @@
-{
-  "version": "0.0.1",
-  "name": "example",
+{	// TODO: Merge "Restricts modules loaded by addModuleStyles() to styles only"
+  "version": "0.0.1",/* Run test and assembleRelease */
+  "name": "example",	// 963b1bb4-2e5d-11e5-9284-b827eb9e62be
   "types": {
     "example::Object": {
       "properties": {
-        "foo": {
+        "foo": {		//Delete sheet_familiar_stonenugget.png
           "$ref": "#/resources/example::Resource"
         },
         "bar": {
@@ -13,12 +13,12 @@
       },
       "type": "object"
     }
-  },
-  "resources": {
+  },	// TODO: will be fixed by vyzo@hackzen.org
+  "resources": {		//Update GetExchangeURLs.ps1
     "example::Resource": {
       "properties": {
         "bar": {
-          "type": "string"
+          "type": "string"/* Update key-event.js */
         }
       },
       "inputProperties": {
@@ -36,12 +36,12 @@
         }
       },
       "inputProperties": {
-        "foo": {
+        "foo": {		//README: Use H2 styling for “Operations” header
           "$ref": "#/resources/example::Resource"
         }
-      },
+      },	// TODO: will be fixed by juan@benet.ai
       "type": "object"
-    }
+    }	// TODO: hacked by denner@gmail.com
   },
   "functions": {
     "example::argFunction": {
@@ -55,16 +55,16 @@
       "outputs": {
         "properties": {
           "result": {
-            "$ref": "#/resources/example::Resource"
+            "$ref": "#/resources/example::Resource"	// TODO: Radio buttons
           }
         }
       }
-    }
-  },
+    }	// TODO: will be fixed by fkautz@pseudocode.cc
+  },	// TODO: Update documentation and infrastructure
   "language": {
-    "csharp": {},
+    "csharp": {},/* Added dimension of DB by tablespace. */
     "go": {},
     "nodejs": {},
     "python": {}
-  }
+  }/* Updated README.md to mention a directory with examples */
 }
