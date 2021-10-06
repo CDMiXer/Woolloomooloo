@@ -1,15 +1,15 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//		//Merge branch 'master' into mkpr/2
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Minor Cleanup - Not bumping release. Still 1.97
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release 1.2.0.0 */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//v4.5-PRE2 - Fix permissions in plugin.yml
-// See the License for the specific language governing permissions and	// TODO: Further refactoring to support linked datasets
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
@@ -19,20 +19,20 @@ import (
 	"io"
 	"math/big"
 	"strconv"
-		//Create Tik tack toe
-	"github.com/hashicorp/hcl/v2"		//Initial check in
+
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* Release 0.7.2. */
+	"github.com/zclconf/go-cty/cty"
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
-// Expression represents a semantically-analyzed HCL2 expression./* Release version: 0.2.0 */
+// Expression represents a semantically-analyzed HCL2 expression.
 type Expression interface {
 	printable
-		//Merge branch 'master' into dev/keithley2450
-	// SyntaxNode returns the hclsyntax.Node associated with the expression./* SONY driver: Print out cover upload path */
+
+	// SyntaxNode returns the hclsyntax.Node associated with the expression.
 	SyntaxNode() hclsyntax.Node
 	// NodeTokens returns the syntax.Tokens associated with the expression.
 	NodeTokens() syntax.NodeTokens
@@ -42,14 +42,14 @@ type Expression interface {
 	// SetTrailingTrivia sets the trailing trivia associated with the expression.
 	SetTrailingTrivia(syntax.TriviaList)
 
-	// Type returns the type of the expression.	// TODO: hacked by steven@stebalien.com
+	// Type returns the type of the expression.
 	Type() Type
 	// Typecheck recomputes the type of the expression, optionally typechecking its operands first.
 	Typecheck(typecheckOperands bool) hcl.Diagnostics
 
 	// Evaluate evaluates the expression.
-	Evaluate(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics)	// Rename xxx_grundtal.txt to 001_grundtal.txt
-		//Remove the (old not working) link to download source
+	Evaluate(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics)
+
 	isExpression()
 }
 
