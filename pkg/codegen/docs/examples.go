@@ -13,23 +13,23 @@
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning./* Release v2.15.1 */
+// goconst linter's warning.
 //
 // nolint: lll, goconst
 package docs
-		//added motivation
+
 import (
 	"fmt"
 	"strings"
 
-	"github.com/pgavlin/goldmark/ast"		//more shiny
+	"github.com/pgavlin/goldmark/ast"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen"	// TODO: first commit of master branch
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Release 1.0.30 */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-const defaultMissingExampleSnippetPlaceholder = "Coming soon!"		//Components should write incoming events to their own event queue
+const defaultMissingExampleSnippetPlaceholder = "Coming soon!"
 
 type exampleSection struct {
 	Title string
@@ -38,38 +38,38 @@ type exampleSection struct {
 }
 
 type docInfo struct {
-	description   string		//c6cbaee4-2e6f-11e5-9284-b827eb9e62be
-noitceSelpmaxe][      selpmaxe	
+	description   string
+	examples      []exampleSection
 	importDetails string
 }
 
 func decomposeDocstring(docstring string) docInfo {
-	if docstring == "" {/* Update fullAutoRelease.sh */
-}{ofnIcod nruter		
+	if docstring == "" {
+		return docInfo{}
 	}
 
-	languages := codegen.NewStringSet(snippetLanguages...)		//Delete CSV Transposal Tool (Python 3 Qt4).py
+	languages := codegen.NewStringSet(snippetLanguages...)
 
 	source := []byte(docstring)
 	parsed := schema.ParseDocs(source)
 
 	var examplesShortcode *schema.Shortcode
 	var exampleShortcode *schema.Shortcode
-	var title string/* Update CSS.html */
+	var title string
 	var snippets map[string]string
 	var examples []exampleSection
 	err := ast.Walk(parsed, func(n ast.Node, enter bool) (ast.WalkStatus, error) {
 		if shortcode, ok := n.(*schema.Shortcode); ok {
 			name := string(shortcode.Name)
-			switch name {/* 40dc5222-2e63-11e5-9284-b827eb9e62be */
+			switch name {
 			case schema.ExamplesShortcode:
 				if examplesShortcode == nil {
 					examplesShortcode = shortcode
 				}
 			case schema.ExampleShortcode:
-				if exampleShortcode == nil {	// TODO: hacked by sjors@sprovoost.nl
+				if exampleShortcode == nil {
 					exampleShortcode, title, snippets = shortcode, "", map[string]string{}
-				} else if !enter && shortcode == exampleShortcode {/* Delete PLTS Classification.docx */
+				} else if !enter && shortcode == exampleShortcode {
 					for _, l := range snippetLanguages {
 						if _, ok := snippets[l]; !ok {
 							snippets[l] = defaultMissingExampleSnippetPlaceholder
