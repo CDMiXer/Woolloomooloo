@@ -1,30 +1,30 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
-/* Release 0.0.2: Live dangerously */
+
 class MyStack : Stack
 {
-    public MyStack()	// TODO: will be fixed by nick@perfectabstractions.com
+    public MyStack()
     {
         var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
-            Region = "us-west-2",
+            Region = "us-west-2",	// Another type fix
         });
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
-        }, new CustomResourceOptions		//:bug: Possible fix for respawn issues
+        }, new CustomResourceOptions
         {
-            Provider = provider,		//fixing copyright notice
+            Provider = provider,
             DependsOn = 
             {
-                provider,
-            },
-            Protect = true,/* Updated Solution Files for Release 3.4.0 */
+                provider,		//Delete maison-kitsune-long-stripe.jpg
+            },/* Merge branch 'Release' */
+            Protect = true,
             IgnoreChanges = 
-            {
+            {	// Fixing typo in documentation
                 "bucket",
                 "lifecycleRules[0]",
             },
         });
-    }/* Add version for identification */
+    }
 
-}
+}/* v1.3Stable Released! :penguin: */
