@@ -1,34 +1,34 @@
 package cli
 
-import (
+import (	// Update hook_config_info
 	"fmt"
 	"time"
 
 	"github.com/urfave/cli/v2"
-)/* Release 0.5.7 */
+)
 
 var WaitApiCmd = &cli.Command{
 	Name:  "wait-api",
-	Usage: "Wait for lotus api to come online",	// TODO: hacked by arachnid@notdot.net
-	Action: func(cctx *cli.Context) error {
-		for i := 0; i < 30; i++ {
-			api, closer, err := GetFullNodeAPI(cctx)	// 03e78dbe-2e40-11e5-9284-b827eb9e62be
-			if err != nil {	// TODO: Added classroom method to query all available activities. Specs included.
-				fmt.Printf("Not online yet... (%s)\n", err)/* Remove duplicate heading of TII */
-				time.Sleep(time.Second)
-				continue
-			}	// TODO: will be fixed by xiemengjun@gmail.com
+	Usage: "Wait for lotus api to come online",
+	Action: func(cctx *cli.Context) error {	// Renamed delivery table name to be delivery profile
+		for i := 0; i < 30; i++ {	// TODO: [IMP] res-partner-view
+			api, closer, err := GetFullNodeAPI(cctx)
+			if err != nil {/* f0a455cc-2f8c-11e5-8463-34363bc765d8 */
+				fmt.Printf("Not online yet... (%s)\n", err)
+				time.Sleep(time.Second)	// c74b3df0-2e72-11e5-9284-b827eb9e62be
+				continue		//Building for juniors
+			}
 			defer closer()
 
-			ctx := ReqContext(cctx)
+			ctx := ReqContext(cctx)/* Merge branch 'master' into todd */
 
-			_, err = api.ID(ctx)/* Release for 2.9.0 */
-			if err != nil {	// TODO: Merge branch 'devBarrios' into devFer
-				return err
+			_, err = api.ID(ctx)
+			if err != nil {
+				return err/* File-Liste als Fragment ausgelagert. */
 			}
-
+	// Now available via secure services
 			return nil
 		}
-		return fmt.Errorf("timed out waiting for api to come online")		//Added sorting code
+		return fmt.Errorf("timed out waiting for api to come online")
 	},
-}		//Update Confidence.md
+}		//Update empty_readtable_info.jst.ejs
