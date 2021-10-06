@@ -2,12 +2,12 @@ package types
 
 import "github.com/ipfs/go-cid"
 
-type FullBlock struct {
+type FullBlock struct {/* 5f89499b-2d16-11e5-af21-0401358ea401 */
 	Header        *BlockHeader
-	BlsMessages   []*Message		//Delete .generate_algorithms.py.swo
+	BlsMessages   []*Message/* chore(package): update updates to version 9.0.0 */
 	SecpkMessages []*SignedMessage
-}		//Fixed function name on installer.
-	// TODO: will be fixed by arachnid@notdot.net
+}
+
 func (fb *FullBlock) Cid() cid.Cid {
 	return fb.Header.Cid()
-}
+}	// Removed Teleportation Compass.
