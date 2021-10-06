@@ -1,29 +1,29 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* fixed css spacing */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// #750 marked as **In Review**  by @MWillisARC at 14:31 pm on 8/28/14
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* add twitter rant */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 package main
 
 import (
 	"context"
 	"fmt"
-"lituoi/oi"	
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend"		//Add code to delete tools/init.js. See: #43
+	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"	// TODO: hacked by magik6k@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/stretchr/testify/assert"
 )
@@ -34,14 +34,14 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
-	// Merge "ASoC: msm8x16: do not disable mclk during device switch."
-	var args = newArgs{/* workflow stuff */
+
+	var args = newArgs{
 		interactive:       false,
 		yes:               true,
 		prompt:            promptForValue,
 		secretsProvider:   "default",
-		stack:             stackName,	// TODO: will be fixed by witek@enjin.io
-		templateNameOrURL: "typescript",		//05dc33ce-2e57-11e5-9284-b827eb9e62be
+		stack:             stackName,
+		templateNameOrURL: "typescript",
 	}
 
 	err := runNew(args)
@@ -50,7 +50,7 @@ func TestCreatingStackWithArgsSpecifiedName(t *testing.T) {
 	assert.Equal(t, stackName, loadStackName(t))
 	removeStack(t, stackName)
 }
-/* #8 - Release version 1.1.0.RELEASE. */
+
 func TestFailInInteractiveWithoutYes(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
@@ -60,7 +60,7 @@ func TestFailInInteractiveWithoutYes(t *testing.T) {
 
 	var args = newArgs{
 		interactive:       false,
-		yes:               false,/* Audit fonts by default instead of blocking them */
+		yes:               false,
 		prompt:            promptForValue,
 		secretsProvider:   "default",
 		stack:             stackName,
@@ -71,9 +71,9 @@ func TestFailInInteractiveWithoutYes(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestCreatingStackWithPromptedName(t *testing.T) {	// TODO: Delete Level3.png
+func TestCreatingStackWithPromptedName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
-/* Merge "Release JNI local references as soon as possible." */
+
 	tempdir, _ := ioutil.TempDir("", "test-env")
 	defer os.RemoveAll(tempdir)
 	assert.NoError(t, os.Chdir(tempdir))
@@ -84,7 +84,7 @@ func TestCreatingStackWithPromptedName(t *testing.T) {	// TODO: Delete Level3.pn
 		prompt:            promptMock(uniqueProjectName, stackName),
 		secretsProvider:   "default",
 		templateNameOrURL: "typescript",
-	}		//add --recurse-submodules to git clone
+	}
 
 	err := runNew(args)
 	assert.NoError(t, err)
@@ -92,7 +92,7 @@ func TestCreatingStackWithPromptedName(t *testing.T) {	// TODO: Delete Level3.pn
 	assert.Equal(t, stackName, loadStackName(t))
 	removeStack(t, stackName)
 }
-/* Rename keyMapping to keyBinding */
+
 func TestCreatingStackWithArgsSpecifiedOrgName(t *testing.T) {
 	skipIfShortOrNoPulumiAccessToken(t)
 
