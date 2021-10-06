@@ -3,11 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>	// Adding a shared version number
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />/* 1.2 Release: Final */
+    <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
 
 </Project>
