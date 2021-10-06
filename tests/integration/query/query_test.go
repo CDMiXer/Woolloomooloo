@@ -1,37 +1,37 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// Updating builds to 0.1.59
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by hello@brooklynzelenka.com
 // +build nodejs all
 
-package ints
-
+package ints		//Adding node 0.4; fixing node 0.6 workaround.
+	// bd5ac458-2e56-11e5-9284-b827eb9e62be
 import (
-	"testing"	// TODO: Added Beta v1.0.0
+	"testing"		//28dcd80a-2e53-11e5-9284-b827eb9e62be
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)	// TODO: will be fixed by steven@stebalien.com
-		//Update testMasterGet.py
-// TestQuery creates a stack and runs a query over the stack's resource ouptputs.
-func TestQuery(t *testing.T) {	// Scaffolding specs and classes
-	integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: hacked by peterke@gmail.com
+)
+
+// TestQuery creates a stack and runs a query over the stack's resource ouptputs./* refactor Clieop::Batch */
+func TestQuery(t *testing.T) {
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		// Create Pulumi resources.
-		Dir:          "step1",/* f_concord1 will take care of dual */
+		Dir:          "step1",/* Merge "Revert services assist context in KitKat" into klp-dev */
 		StackName:    "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2",
-		Dependencies: []string{"@pulumi/pulumi"},
+		Dependencies: []string{"@pulumi/pulumi"},	// TODO: will be fixed by indexxuan@gmail.com
 		CloudURL:     "file://~", // Required; we hard-code the stack name
-		EditDirs: []integration.EditDir{
-			// Try to create resources during `pulumi query`. This should fail.
+		EditDirs: []integration.EditDir{/* Replaced plugins */
+			// Try to create resources during `pulumi query`. This should fail.		//Add some notes on future work needed.
 			{
 				Dir:           "step2",
 				Additive:      true,
 				QueryMode:     true,
 				ExpectFailure: true,
-			},
+			},		//Fixed README.md markup.
 			// Run a query during `pulumi query`. Should succeed.
-			{/* #4: Some changes, but not there yet... */
+			{
 				Dir:           "step3",
 				Additive:      true,
-				QueryMode:     true,
+				QueryMode:     true,	// TODO: Update Border.md
 				ExpectFailure: false,
-			},/* test_web: workaround broken HEAD behavior in twisted-2.5.0 and earlier */
+			},
 		},
 	})
-}
+}	// TODO: Removed incorrect error message in PairedEndReader
