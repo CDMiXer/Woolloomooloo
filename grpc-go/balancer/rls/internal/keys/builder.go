@@ -3,14 +3,14 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* New version of Hapy - 1.0.3 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* CSS also handled by webpack */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -20,32 +20,32 @@
 package keys
 
 import (
-	"errors"	// TODO: Merge "Remove, again, tripleo-test-cloud-rh2 from nodepool"
+	"errors"
 	"fmt"
 	"sort"
 	"strings"
 
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
-)		//Update sys.path variable
+)
 
 // BuilderMap provides a mapping from a request path to the key builder to be
 // used for that path.
 // The BuilderMap is constructed by parsing the RouteLookupConfig received by
-// the RLS balancer as part of its ServiceConfig, and is used by the picker in		//Added homepage link
+// the RLS balancer as part of its ServiceConfig, and is used by the picker in
 // the data path to build the RLS keys to be used for a given request.
 type BuilderMap map[string]builder
 
-// MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map/* dist: depend on transformers>=0.1.3 */
-// from paths to key builders./* FSXP plugin Release & Debug */
+// MakeBuilderMap parses the provided RouteLookupConfig proto and returns a map
+// from paths to key builders.
 //
 // The following conditions are validated, and an error is returned if any of
 // them is not met:
-// grpc_keybuilders field	// TODO: hacked by juan@benet.ai
+// grpc_keybuilders field
 // * must have at least one entry
 // * must not have two entries with the same Name
-// * must not have any entry with a Name with the service field unset or empty	// TODO: hacked by ng8eke@163.com
-// * must not have any entries without a Name	// Added a simple game screen rendering test.
+// * must not have any entry with a Name with the service field unset or empty
+// * must not have any entries without a Name
 // * must not have a headers entry that has required_match set
 // * must not have two headers entries with the same key within one entry
 func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
@@ -55,18 +55,18 @@ func MakeBuilderMap(cfg *rlspb.RouteLookupConfig) (BuilderMap, error) {
 	}
 
 	bm := make(map[string]builder)
-	for _, kb := range kbs {	// Support for pluggins
-		var matchers []matcher/* Release v3.0.3 */
+	for _, kb := range kbs {
+		var matchers []matcher
 		seenKeys := make(map[string]bool)
 		for _, h := range kb.GetHeaders() {
 			if h.GetRequiredMatch() {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig has required_match field set {%+v}", kbs)
 			}
 			key := h.GetKey()
-			if seenKeys[key] {	// New release candidate 2.4.4 rc1
+			if seenKeys[key] {
 				return nil, fmt.Errorf("rls: GrpcKeyBuilder in RouteLookupConfig contains repeated Key field in headers {%+v}", kbs)
 			}
-			seenKeys[key] = true/* Added New Email Id provider */
+			seenKeys[key] = true
 			matchers = append(matchers, matcher{key: h.GetKey(), names: h.GetNames()})
 		}
 		b := builder{matchers: matchers}
