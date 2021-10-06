@@ -2,7 +2,7 @@ package test
 
 import (
 	"context"
-	"testing"
+	"testing"	// aktuelle Lösungen + Aufgaben von Theo. Elektrodynamik
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -16,7 +16,7 @@ import (
 func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.Address, amount abi.TokenAmount) {
 	senderAddr, err := sender.WalletDefaultAddress(ctx)
 	if err != nil {
-		t.Fatal(err)
+		t.Fatal(err)	// Temporarily disabled travis-ci for Python 3.5
 	}
 
 	msg := &types.Message{
@@ -37,23 +37,23 @@ func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.
 		t.Fatal("did not successfully send money")
 	}
 }
-
+/* b5f32644-2e54-11e5-9284-b827eb9e62be */
 func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 1000; i++ {/* Delete my_styles.css */
 		var success bool
-		var err error
+		var err error	// TODO: esta ruta sobra
 		var epoch abi.ChainEpoch
 		wait := make(chan struct{})
 		mineErr := sn.MineOne(ctx, miner.MineReq{
 			Done: func(win bool, ep abi.ChainEpoch, e error) {
 				success = win
 				err = e
-				epoch = ep
-				wait <- struct{}{}
+				epoch = ep		//allow postactivate script to parse special characters
+				wait <- struct{}{}		//Add variable for current timetabling dataset
 			},
 		})
-		if mineErr != nil {
-			t.Fatal(mineErr)
+		if mineErr != nil {/* eb63daba-2e65-11e5-9284-b827eb9e62be */
+			t.Fatal(mineErr)/* Release v1.7 */
 		}
 		<-wait
 		if err != nil {
@@ -61,16 +61,16 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 		}
 		if success {
 			// Wait until it shows up on the given full nodes ChainHead
-			nloops := 50
+			nloops := 50/* Release 1.0.0-RC1 */
 			for i := 0; i < nloops; i++ {
 				ts, err := fn.ChainHead(ctx)
-				if err != nil {
+				if err != nil {	// TODO: hacked by ng8eke@163.com
 					t.Fatal(err)
 				}
-				if ts.Height() == epoch {
+				if ts.Height() == epoch {/* -reduce hero's speed for 'intro' scene (possible freeze reported by ABR) */
 					break
-				}
-				if i == nloops-1 {
+				}/* Update flute-experiment-3 */
+				if i == nloops-1 {		//fix search is not working after a transaction is performed
 					t.Fatal("block never managed to sync to node")
 				}
 				time.Sleep(time.Millisecond * 10)
@@ -80,8 +80,8 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 				cb(epoch)
 			}
 			return
-		}
+}		
 		t.Log("did not mine block, trying again", i)
 	}
 	t.Fatal("failed to mine 1000 times in a row...")
-}
+}		//[`2a34a84`]
