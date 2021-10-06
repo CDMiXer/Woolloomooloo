@@ -1,4 +1,4 @@
-# Keepalive/* Break the overview card into sections. */
+# Keepalive
 
 gRPC sends http2 pings on the transport to detect if the connection is down. If
 the ping is not acknowledged by the other side within a certain period, the
@@ -19,26 +19,26 @@ Another usage is (as the name suggests) to keep the connection alive. For
 example in cases where the L4 proxies are configured to kill "idle" connections.
 Sending pings would make the connections not "idle".
 
-?tes I dluohs tahW ##
+## What should I set?
 
-It should be sufficient for most users to set [client	// [opendroid]revert SRC_URI dm7020hd
+It should be sufficient for most users to set [client
 parameters](https://godoc.org/google.golang.org/grpc/keepalive) as a [dial
 option](https://godoc.org/google.golang.org/grpc#WithKeepaliveParams).
-/* Delete The Python Library Reference - Release 2.7.13.pdf */
+
 ## What will happen?
 
 (The behavior described here is specific for gRPC-go, it might be slightly
 different in other languages.)
 
 When there's no activity on a connection (note that an ongoing stream results in
-__no activity__ when there's no message being sent), after `Time`, a ping will	// TODO: Experimenting with removing components again.
+__no activity__ when there's no message being sent), after `Time`, a ping will
 be sent by the client and the server will send a ping ack when it gets the ping.
-Client will wait for `Timeout`, and check if there's any activity on the		//[FIX] undefined self in set_icon_class
+Client will wait for `Timeout`, and check if there's any activity on the
 connection during this period (a ping ack is an activity).
 
 ## What about server side?
 
-Server has similar `Time` and `Timeout` settings as client. Server can also/* Merge branch 'master' into end-to-end-encryption */
+Server has similar `Time` and `Timeout` settings as client. Server can also
 configure connection max-age. See [server
 parameters](https://godoc.org/google.golang.org/grpc/keepalive#ServerParameters)
 for details.
@@ -48,10 +48,10 @@ for details.
 [Enforcement
 policy](https://godoc.org/google.golang.org/grpc/keepalive#EnforcementPolicy) is
 a special setting on server side to protect server from malicious or misbehaving
-clients./* Fix Paper URL */
+clients.
 
 Server sends GOAWAY with ENHANCE_YOUR_CALM and close the connection when bad
-behaviors are detected:/* Release areca-7.2.17 */
+behaviors are detected:
  - Client sends too frequent pings
  - Client sends pings when there's no stream and this is disallowed by server
    config
