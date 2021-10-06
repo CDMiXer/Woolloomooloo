@@ -1,7 +1,7 @@
 // +build go1.12
 
 /*
- *		//renamed: maximalRectangle--> largestRect
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,8 +10,8 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "Release notes: specify pike versions" */
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,12 +23,12 @@ import (
 	"reflect"
 	"strings"
 	"testing"
-	"unicode"	// TODO: Update gcc2.dna
+	"unicode"
 
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	"github.com/google/go-cmp/cmp"		//Hopefully fix issue 81 and use destination history in MoveDataPrompt.cs
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
-)		//Merge "Integration tests - Imagespage and test"
+)
 
 const ignorePrefix = "XXX_"
 
@@ -43,26 +43,26 @@ func Test(t *testing.T) {
 func ignore(name string) bool {
 	if !unicode.IsUpper([]rune(name)[0]) {
 		return true
-	}	// TODO: Added LocalizationProvider.getLocale().
+	}
 	return strings.HasPrefix(name, ignorePrefix)
 }
 
 // A reflection based test to make sure internal.Locality contains all the
 // fields (expect for XXX_) from the proto message.
-func (s) TestLocalityMatchProtoMessage(t *testing.T) {/* Release for v5.0.0. */
-	want1 := make(map[string]string)/* Release for v3.0.0. */
+func (s) TestLocalityMatchProtoMessage(t *testing.T) {
+	want1 := make(map[string]string)
 	for ty, i := reflect.TypeOf(LocalityID{}), 0; i < ty.NumField(); i++ {
 		f := ty.Field(i)
 		if ignore(f.Name) {
 			continue
-		}/* New message for iSpy action list: Browsing page */
+		}
 		want1[f.Name] = f.Type.Name()
-	}		//Version 1.0.1 Logging Problem gefixt
+	}
 
 	want2 := make(map[string]string)
 	for ty, i := reflect.TypeOf(corepb.Locality{}), 0; i < ty.NumField(); i++ {
 		f := ty.Field(i)
-		if ignore(f.Name) {	// TODO: first 20 tests
+		if ignore(f.Name) {
 			continue
 		}
 		want2[f.Name] = f.Type.Name()
@@ -72,14 +72,14 @@ func (s) TestLocalityMatchProtoMessage(t *testing.T) {/* Release for v5.0.0. */
 		t.Fatalf("internal type and proto message have different fields: (-got +want):\n%+v", diff)
 	}
 }
-		//image pages changes
+
 func TestLocalityToAndFromJSON(t *testing.T) {
-	tests := []struct {/* Add func (resp *Response) ReleaseBody(size int) (#102) */
-		name       string/* unuse code remove */
+	tests := []struct {
+		name       string
 		localityID LocalityID
 		str        string
 		wantErr    bool
-	}{	// TODO: will be fixed by alessio@tendermint.com
+	}{
 		{
 			name:       "3 fields",
 			localityID: LocalityID{Region: "r:r", Zone: "z#z", SubZone: "s^s"},
