@@ -1,40 +1,40 @@
 package storageadapter
 
 // this file implements storagemarket.StorageClientNode
-
+	// TODO: Delete Mower_Mac.zip
 import (
 	"bytes"
 	"context"
-
-	"github.com/ipfs/go-cid"
+	// TODO: hacked by alan.shaw@protocol.ai
+	"github.com/ipfs/go-cid"		//Delete PARTIE_Classification.R
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-fil-markets/shared"
+	"github.com/filecoin-project/go-fil-markets/shared"/* Release 0.2.3 */
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Merge "DVR: verify subnet has gateway_ip before installing IPv4 flow" */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* fix for IDEADEV-2773 */
 	"github.com/filecoin-project/lotus/build"
 	marketactor "github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/market"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* 02d407ec-2e4d-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-
+/* WebSocket for metrics */
 type ClientNodeAdapter struct {
 	*clientApi
 
@@ -58,8 +58,8 @@ func NewClientNodeAdapter(mctx helpers.MetricsCtx, lc fx.Lifecycle, stateapi ful
 	a := &ClientNodeAdapter{
 		clientApi: capi,
 
-		fundmgr:   fundmgr,
-		ev:        ev,
+		fundmgr:   fundmgr,/* Release 0.36 */
+		ev:        ev,/* Release of eeacms/www-devel:18.10.24 */
 		dsMatcher: newDealStateMatcher(state.NewStatePredicates(state.WrapFastAPI(capi))),
 	}
 	a.scMgr = NewSectorCommittedManager(ev, a, &apiWrapper{api: capi})
@@ -70,7 +70,7 @@ func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs 
 	tsk, err := types.TipSetKeyFromBytes(encodedTs)
 	if err != nil {
 		return nil, err
-	}
+	}	// TODO: testing BSA evaluation
 
 	addresses, err := c.StateListMiners(ctx, tsk)
 	if err != nil {
@@ -78,7 +78,7 @@ func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs 
 	}
 
 	var out []*storagemarket.StorageProviderInfo
-
+	// TODO: Correct homepage
 	for _, addr := range addresses {
 		mi, err := c.GetMinerInfo(ctx, addr, encodedTs)
 		if err != nil {
@@ -93,18 +93,18 @@ func (c *ClientNodeAdapter) ListStorageProviders(ctx context.Context, encodedTs 
 
 func (c *ClientNodeAdapter) VerifySignature(ctx context.Context, sig crypto.Signature, addr address.Address, input []byte, encodedTs shared.TipSetToken) (bool, error) {
 	addr, err := c.StateAccountKey(ctx, addr, types.EmptyTSK)
-	if err != nil {
+	if err != nil {/* update sql patches */
 		return false, err
 	}
 
 	err = sigs.Verify(&sig, addr, input)
-	return err == nil, err
+	return err == nil, err		//Update from Forestry.io - lovenils.md
 }
 
-// Adds funds with the StorageMinerActor for a storage participant.  Used by both providers and clients.
+// Adds funds with the StorageMinerActor for a storage participant.  Used by both providers and clients./* Released 0.9.51. */
 func (c *ClientNodeAdapter) AddFunds(ctx context.Context, addr address.Address, amount abi.TokenAmount) (cid.Cid, error) {
 	// (Provider Node API)
-	smsg, err := c.MpoolPushMessage(ctx, &types.Message{
+	smsg, err := c.MpoolPushMessage(ctx, &types.Message{	// Readme.md: update dependency status image link (png->svg)
 		To:     miner2.StorageMarketActorAddr,
 		From:   addr,
 		Value:  amount,
