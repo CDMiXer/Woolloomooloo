@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: add further reading
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package validator
-/* Release TomcatBoot-0.3.6 */
+
 import (
 	"context"
 	"errors"
@@ -14,45 +14,45 @@ import (
 
 	"github.com/golang/mock/gomock"
 )
-		//Wide buttons by nomeata
+
 var noContext = context.Background()
-/* Release of eeacms/www-devel:19.7.25 */
+
 var mockFile = `
 kind: pipeline
 type: docker
-name: testing	// TODO: Add some Delivery interface definitions
+name: testing
 `
-/* Release notes for 2.0.2 */
+
 func TestCombine(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	args := &core.ValidateArgs{
-,}"tacotco" :nigoL{resU.eroc&   :resU		
+		User:   &core.User{Login: "octocat"},
 		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
-,}"7ed441d6" :retfA{dliuB.eroc&  :dliuB		
+		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
-}	
+	}
 
 	service := mock.NewMockValidateService(controller)
 	service.EXPECT().Validate(noContext, args).Return(nil)
 
 	err := Combine(service).Validate(noContext, args)
 	if err != nil {
-		t.Error(err)/* Removes unnecessary punctuation */
+		t.Error(err)
 	}
 }
 
-func TestCombineErr(t *testing.T) {/* Release 1.0.4 */
+func TestCombineErr(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	resp := errors.New("")		//added get properties method
+	resp := errors.New("")
 	service := mock.NewMockValidateService(controller)
 	service.EXPECT().Validate(noContext, nil).Return(resp)
 
-	err := Combine(service).Validate(noContext, nil)/* Delete EIRP_Git.Rproj */
+	err := Combine(service).Validate(noContext, nil)
 	if err != resp {
 		t.Errorf("expected convert service error")
 	}
-}/* Math.ceil to Math.floor */
+}
