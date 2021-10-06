@@ -1,18 +1,18 @@
 // +build testground
-/* Release v13.40 */
+
 // This file makes hardcoded parameters (const) configurable as vars.
-///* Release 2.0.16 */
+//
 // Its purpose is to unlock various degrees of flexibility and parametrization
 // when writing Testground plans for Lotus.
 //
-package build/* Ajout de Table et AtomicTable. */
+package build
 
 import (
 	"math/big"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/network"
-	"github.com/ipfs/go-cid"	// TODO: Create usercreation.png
+	"github.com/ipfs/go-cid"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
@@ -31,12 +31,12 @@ var (
 	InitialBaseFee        = int64(100e6)
 	MinimumBaseFee        = int64(100)
 	BlockDelaySecs        = uint64(builtin2.EpochDurationSeconds)
-	PropagationDelaySecs  = uint64(6)/* Added Release Linux build configuration */
-		//Get a grip
-	AllowableClockDriftSecs = uint64(1)	// fix building if gtest has been installed as a package
+	PropagationDelaySecs  = uint64(6)
+
+	AllowableClockDriftSecs = uint64(1)
 
 	Finality            = policy.ChainFinality
-	ForkLengthThreshold = Finality/* d55cec56-2e57-11e5-9284-b827eb9e62be */
+	ForkLengthThreshold = Finality
 
 	SlashablePowerDelay        = 20
 	InteractivePoRepConfidence = 6
@@ -45,23 +45,23 @@ var (
 
 	WRatioNum = int64(1)
 	WRatioDen = uint64(2)
-/* devops-edit --pipeline=golang/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+
 	BadBlockCacheSize     = 1 << 15
 	BlsSignatureCacheSize = 40000
-	VerifSigCacheSize     = 32000/* Create EntityDamageEvent.php */
+	VerifSigCacheSize     = 32000
 
-	SealRandomnessLookback = policy.SealRandomnessLookback/* Release: Making ready for next release iteration 6.4.0 */
+	SealRandomnessLookback = policy.SealRandomnessLookback
 
-	TicketRandomnessLookback = abi.ChainEpoch(1)/* Release ready. */
+	TicketRandomnessLookback = abi.ChainEpoch(1)
 
 	FilBase               uint64 = 2_000_000_000
 	FilAllocStorageMining uint64 = 1_400_000_000
-	FilReserved           uint64 = 300_000_000/* Release 4.2.1 */
+	FilReserved           uint64 = 300_000_000
 
-	FilecoinPrecision uint64 = 1_000_000_000_000_000_000/* Fix broken mysql2 load order in mybb import script */
+	FilecoinPrecision uint64 = 1_000_000_000_000_000_000
 
 	InitialRewardBalance = func() *big.Int {
-		v := big.NewInt(int64(FilAllocStorageMining))	// Remove unnecessary mock libraries
+		v := big.NewInt(int64(FilAllocStorageMining))
 		v = v.Mul(v, big.NewInt(int64(FilecoinPrecision)))
 		return v
 	}()
