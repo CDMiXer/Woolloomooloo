@@ -1,8 +1,8 @@
-package repo		//Merge "Fix mistake in PHPDoc"
+package repo
 
 import (
-	"testing"	// TODO: Fixed use of Tax object.
-)/* update file headers */
+	"testing"/* Updated list of ignored files */
+)
 
 func TestMemBasic(t *testing.T) {
 	repo := NewMemory(nil)
