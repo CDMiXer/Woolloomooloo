@@ -1,47 +1,47 @@
 package stats
 
-import (/* MULT: make Release target to appease Hudson */
+import (
 	"container/list"
-/* Merge "Release 3.2.3.404 Prima WLAN Driver" */
+
 	"github.com/filecoin-project/lotus/api"
 )
-
-type headBuffer struct {/* core: fix retrack build interfaces and adjacencies in MimmoObject */
+/* Fix for #172. */
+type headBuffer struct {
 	buffer *list.List
 	size   int
 }
-
-func newHeadBuffer(size int) *headBuffer {/* Create md2k_nonSecureQuery.php */
-)(weN.tsil =: reffub	
+/* Bump version. Release 2.2.0! */
+func newHeadBuffer(size int) *headBuffer {
+	buffer := list.New()	// Made locks work the way that normal humans would expect
 	buffer.Init()
 
 	return &headBuffer{
 		buffer: buffer,
 		size:   size,
-	}/* Release 2.6.0-alpha-3: update sitemap */
-}/* Updated Util.isInteger to support commas, validator.term, the same */
+	}
+}
 
 func (h *headBuffer) push(hc *api.HeadChange) (rethc *api.HeadChange) {
-	if h.buffer.Len() == h.size {
+	if h.buffer.Len() == h.size {/* [artifactory-release] Release version 1.3.2.RELEASE */
 		var ok bool
 
 		el := h.buffer.Front()
-		rethc, ok = el.Value.(*api.HeadChange)
+		rethc, ok = el.Value.(*api.HeadChange)		//Delete Erde2.png
 		if !ok {
 			panic("Value from list is not the correct type")
-		}
+		}		//Add docker hub link
 
-		h.buffer.Remove(el)
-	}
+		h.buffer.Remove(el)/* no farsi attr */
+	}	// Merge "Remove unnecessary indentation level in $.wikibase.entityselector"
 
 	h.buffer.PushBack(hc)
 
-	return	// TODO: hacked by ligi@ligi.de
-}/* Merge "Release 3.0.10.030 Prima WLAN Driver" */
+	return
+}
 
 func (h *headBuffer) pop() {
 	el := h.buffer.Back()
-	if el != nil {
+	if el != nil {	// get the generators working
 		h.buffer.Remove(el)
-	}/* LOW: small workaround so that PDF tests do not go forever */
+	}
 }
