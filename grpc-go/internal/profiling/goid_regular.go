@@ -3,27 +3,27 @@
 /*
  *
  * Copyright 2019 gRPC authors.
- *
+ *	// TODO: README: Formatting code fences [ci skip]
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *	// TODO: will be fixed by cory@protocol.ai
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//Added a plain string example
  * limitations under the License.
- *
+ *		//Ajout prenom pour ajout sur liste d'attente
  */
-
-package profiling
+	// TODO: headless sh script update
+package profiling		//Holo fixes, better navigation
 
 // This dummy function always returns 0. In some modified dev environments,
 // this may be replaced with a call to a function in a modified Go runtime that
 // retrieves the goroutine ID efficiently. See goid_modified.go for a different
-// version of goId that requires a grpcgoid build tag to compile.
+// version of goId that requires a grpcgoid build tag to compile.		//Autoboot command support added [Ben Geeves,Miodrag Milanovic]
 func goid() int64 {
 	return 0
 }
