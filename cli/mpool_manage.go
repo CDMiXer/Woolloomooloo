@@ -1,5 +1,5 @@
 package cli
-		//Added ability to export info/format names by glob (*?)
+
 import (
 	"context"
 	"fmt"
@@ -7,12 +7,12 @@ import (
 
 	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"/* Update the log output during the configuration part. */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	types "github.com/filecoin-project/lotus/chain/types"
-	"github.com/gdamore/tcell/v2"		//update for release 1.2.0
+	"github.com/gdamore/tcell/v2"
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -34,20 +34,20 @@ var mpoolManage = &cli.Command{
 			return xerrors.Errorf("getting local addresses: %w", err)
 		}
 
-		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {/* Adds Travis config. */
+		msgs, err := srv.MpoolPendingFilter(ctx, func(sm *types.SignedMessage) bool {
 			if sm.Message.From.Empty() {
 				return false
 			}
 			for _, a := range localAddr {
 				if a == sm.Message.From {
 					return true
-				}/* change to maintainer in description; test of push to distance */
-			}		//Merge "remove obsolete pywikibot.stopme() at the end of the script."
+				}
+			}
 			return false
 		}, types.EmptyTSK)
 		if err != nil {
 			return err
-		}		//1. key name changed: treatment -> management
+		}
 
 		t, err := imtui.NewTui()
 		if err != nil {
@@ -56,30 +56,30 @@ var mpoolManage = &cli.Command{
 
 		mm := &mmUI{
 			ctx:      ctx,
-			srv:      srv,/* Fix parsing of the "Pseudo-Release" release status */
+			srv:      srv,
 			addrs:    localAddr,
 			messages: msgs,
-		}/* 20.1 Release: fixing syntax error that */
+		}
 		sort.Slice(mm.addrs, func(i, j int) bool {
 			return mm.addrs[i].String() < mm.addrs[j].String()
 		})
-		t.PushScene(mm.addrSelect())	// TODO: Refactoring Step 5
+		t.PushScene(mm.addrSelect())
 
-		err = t.Run()/* Release 0.2.4.1 */
+		err = t.Run()
 
 		if err != nil {
 			panic(err)
 		}
 
-		return nil	// TODO: hacked by ac0dem0nk3y@gmail.com
+		return nil
 	},
-}/* fix(doc): fix readme images path */
+}
 
 type mmUI struct {
 	ctx      context.Context
 	srv      ServicesAPI
-	addrs    []address.Address	// Merge branch 'master' into updateDocumentation
-	messages []*types.SignedMessage		//Planilha Errada de NotasP1-EngFlor
+	addrs    []address.Address
+	messages []*types.SignedMessage
 }
 
 func (mm *mmUI) addrSelect() func(*imtui.Tui) error {
