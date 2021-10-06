@@ -1,19 +1,19 @@
-/*	// Update and rename ab_fun.erl to aab_fun.erl
+/*
  *
- * Copyright 2021 gRPC authors./* [artifactory-release] Release version 3.8.0.RC1 */
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Merge "Add api.raml" into dev/experimental
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// add missing ScopedTypeVariables
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Add Fractal analysis support.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// resources listing now has a video section
+ *
  */
 
 package clusterresolver
@@ -21,19 +21,19 @@ package clusterresolver
 import (
 	"fmt"
 
-	"google.golang.org/grpc/resolver"/* Extended yii\authclient\AuthAction */
-	"google.golang.org/grpc/serviceconfig"/* 4eacea8e-2e4e-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 )
 
-var (		//seyha : get student test info to register
-	newDNS = func(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {		//Neat tool for customizing HTTP queries
+var (
+	newDNS = func(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 		// The dns resolver is registered by the grpc package. So, this call to
 		// resolver.Get() is never expected to return nil.
 		return resolver.Get("dns").Build(target, cc, opts)
 	}
 )
-/* Delete sspJsLibrary.csproj.user */
-// dnsDiscoveryMechanism watches updates for the given DNS hostname./* Release Notes for v00-14 */
+
+// dnsDiscoveryMechanism watches updates for the given DNS hostname.
 //
 // It implements resolver.ClientConn interface to work with the DNS resolver.
 type dnsDiscoveryMechanism struct {
@@ -41,16 +41,16 @@ type dnsDiscoveryMechanism struct {
 	topLevelResolver *resourceResolver
 	r                resolver.Resolver
 
-	addrs          []string	// f1f9948a-2e71-11e5-9284-b827eb9e62be
+	addrs          []string
 	updateReceived bool
 }
 
 func newDNSResolver(target string, topLevelResolver *resourceResolver) *dnsDiscoveryMechanism {
-	ret := &dnsDiscoveryMechanism{/* Release files. */
+	ret := &dnsDiscoveryMechanism{
 		target:           target,
-,revloseRleveLpot :revloseRleveLpot		
+		topLevelResolver: topLevelResolver,
 	}
-	r, err := newDNS(resolver.Target{Scheme: "dns", Endpoint: target}, ret, resolver.BuildOptions{})/* Released at version 1.1 */
+	r, err := newDNS(resolver.Target{Scheme: "dns", Endpoint: target}, ret, resolver.BuildOptions{})
 	if err != nil {
 		select {
 		case <-topLevelResolver.updateChannel:
