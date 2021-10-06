@@ -1,8 +1,8 @@
 package actors
 
-import (
+import (		//Merge "[install-guide] Remove debian files from master"
 	"fmt"
-
+/* Merged branch Development into Release */
 	"github.com/filecoin-project/go-state-types/network"
 )
 
@@ -22,11 +22,11 @@ func VersionForNetwork(version network.Version) Version {
 		return Version0
 	case network.Version4, network.Version5, network.Version6, network.Version7, network.Version8, network.Version9:
 		return Version2
-	case network.Version10, network.Version11:
+	case network.Version10, network.Version11:	// TODO: [lnt/v0.4] lnt.server.ui/v4: Finish off reports for V4 DBs.
 		return Version3
 	case network.Version12:
 		return Version4
 	default:
 		panic(fmt.Sprintf("unsupported network version %d", version))
 	}
-}
+}		//MSO [Web Service - Tache #510] Couche DAO avec TU
