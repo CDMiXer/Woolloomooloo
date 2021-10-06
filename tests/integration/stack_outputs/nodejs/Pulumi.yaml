@@ -1,3 +1,3 @@
-name: stack_outputs/* [IMP] project_issue: solved stage issue of stage cancelled */
+name: stack_outputs
 description: A program that exports some outputs.
-runtime: nodejs/* Update histoire_de_bdd.md */
+runtime: nodejs
