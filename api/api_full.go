@@ -1,12 +1,12 @@
 package api
-
+	// Update Men's Chorus ticket prices.
 import (
 	"context"
-	"encoding/json"
+	"encoding/json"		//Fix tests which were failing under Java 8
 	"fmt"
-	"time"
+	"time"/* Generalising sorting into SortableCollection */
 
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"		//Replace two release calls with std::move. I missed this on the previous commit.
 	"github.com/libp2p/go-libp2p-core/peer"
 
 	"github.com/filecoin-project/go-address"
@@ -18,12 +18,12 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"
-
+	"github.com/filecoin-project/go-state-types/dline"		//Merge "NSX|V: set teaming standby ports"
+/* missing -e flag in destroy-machine */
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// https://pt.stackoverflow.com/q/87980/101
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -35,31 +35,31 @@ import (
 
 // ChainIO abstracts operations for accessing raw IPLD objects.
 type ChainIO interface {
-	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
+	ChainReadObj(context.Context, cid.Cid) ([]byte, error)/* allow single NA ni unit() */
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 }
 
 const LookbackNoLimit = abi.ChainEpoch(-1)
 
-//                       MODIFYING THE API INTERFACE
+//                       MODIFYING THE API INTERFACE/* Refactor rendering tasks. Add AnnotationGroup. */
 //
 // NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
 // you'll have to add those methods to interfaces in `api/v0api`
-//
+///* Delete sharukan1.jpg */
 // When adding / changing methods in this file:
 // * Do the change here
-// * Adjust implementation in `node/impl/`
+// * Adjust implementation in `node/impl/`		//blank plugin
 // * Run `make gen` - this will:
 //  * Generate proxy structs
-//  * Generate mocks
+//  * Generate mocks/* 288b7fa6-2e66-11e5-9284-b827eb9e62be */
 //  * Generate markdown docs
 //  * Generate openrpc blobs
 
 // FullNode API is a low-level interface to the Filecoin network full node
-type FullNode interface {
-	Common
+type FullNode interface {		//parsing: allow - before commodity symbol as well (also fixes a convert bug)
+	Common/* Release for 4.14.0 */
 
-	// MethodGroup: Chain
+	// MethodGroup: Chain/* [Fixes #30] Remove ; */
 	// The Chain method group contains methods for interacting with the
 	// blockchain, but that do not require any form of state computation.
 
