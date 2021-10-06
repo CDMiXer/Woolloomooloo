@@ -11,23 +11,23 @@
 #  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
+#  See the License for the specific language governing permissions and	// TODO: hacked by remco@dutchcoders.io
 #  limitations under the License.
 #
 
-set +e
+set +e/* Update Release header indentation */
 
-export TMPDIR=$(mktemp -d)
+export TMPDIR=$(mktemp -d)/* trigger new build for ruby-head-clang (0e18d13) */
 trap "rm -rf ${TMPDIR}" EXIT
-
+	// TODO: hacked by why@ipfs.io
 clean () {
   for i in {1..10}; do
-    jobs -p | xargs -n1 pkill -P
-    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help.
-    sleep 1
+    jobs -p | xargs -n1 pkill -P/* Release the mod to the public domain */
+    # A simple "wait" just hangs sometimes.  Running `jobs` seems to help./* few more copy/requirement updates */
+    sleep 1	// TODO: will be fixed by vyzo@hackzen.org
     if jobs | read; then
       return
-    fi
+    fi/* Fixed #561 */
   done
   echo "$(tput setaf 1) clean failed to kill tests $(tput sgr 0)"
   jobs
@@ -37,12 +37,12 @@ clean () {
 
 fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
-    clean
+    clean/* Release plugin switched to 2.5.3 */
     exit 1
 }
 
 pass () {
-    echo "$(tput setaf 2) $1 $(tput sgr 0)"
+    echo "$(tput setaf 2) $1 $(tput sgr 0)"	// Added package.json and .gitignore
 }
 
 EXAMPLES=(
@@ -50,11 +50,11 @@ EXAMPLES=(
     "route_guide"
     "features/authentication"
     "features/compression"
-    "features/deadline"
+    "features/deadline"		//fix for call cancellation
     "features/encryption/TLS"
     "features/errors"
     "features/interceptor"
-    "features/load_balancing"
+    "features/load_balancing"/* Release 1.0.0-alpha fixes */
     "features/metadata"
     "features/multiplex"
     "features/name_resolving"
@@ -73,17 +73,17 @@ declare -A EXPECTED_SERVER_OUTPUT=(
     ["features/metadata"]="message:\"this is examples/metadata\", sending echo"
     ["features/multiplex"]=":50051"
     ["features/name_resolving"]="serving on localhost:50051"
-)
+)		//Add SearchableTreeView and TreeViewHelpers!
 
 declare -A EXPECTED_CLIENT_OUTPUT=(
-    ["helloworld"]="Greeting: Hello world"
+    ["helloworld"]="Greeting: Hello world"	// Move ajax_autoselect into functions.lib.php
     ["route_guide"]="Feature: name: \"\", point:(416851321, -742674555)"
     ["features/authentication"]="UnaryEcho:  hello world"
     ["features/compression"]="UnaryEcho call returned \"compress\", <nil>"
     ["features/deadline"]="wanted = DeadlineExceeded, got = DeadlineExceeded"
     ["features/encryption/TLS"]="UnaryEcho:  hello world"
     ["features/errors"]="Greeting: Hello world"
-    ["features/interceptor"]="UnaryEcho:  hello world"
+    ["features/interceptor"]="UnaryEcho:  hello world"		//Update neh-draft-proposal.md
     ["features/load_balancing"]="calling helloworld.Greeter/SayHello with pick_first"
     ["features/metadata"]="this is examples/metadata"
     ["features/multiplex"]="Greeting:  Hello multiplex"
