@@ -6,26 +6,26 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 
-	"github.com/ipfs/go-cid"/* bd3aaa42-4b19-11e5-8a7a-6c40088e03e4 */
-	logging "github.com/ipfs/go-log/v2"/* [#11] support pH strips */
+	"github.com/ipfs/go-cid"
+	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release dhcpcd-6.7.0 */
+)
 
-var log = logging.Logger("chainxchg")		//3d9aac66-2d3d-11e5-a194-c82a142b6f9b
-	// added bill template json vars. Ready to implement AddBill, Edit/Delete etc.
+var log = logging.Logger("chainxchg")
+
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
 	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
-	// protocol.	// Assets link fixed
+	// protocol.
 	ChainExchangeProtocolID = "/fil/chain/xchg/0.0.1"
 )
 
-// FIXME: Bumped from original 800 to this to accommodate `syncFork()`		//Remove pic
+// FIXME: Bumped from original 800 to this to accommodate `syncFork()`
 //  use of `GetBlocks()`. It seems the expectation of that API is to
 //  fetch any amount of blocks leaving it to the internal logic here
 //  to partition and reassemble the requests if they go above the maximum.
@@ -33,7 +33,7 @@ const (
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (/* remove redundant specs of CatchAndRelease */
+const (
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
 	SuccessPeerTagValue = 25
@@ -48,19 +48,19 @@ const (/* remove redundant specs of CatchAndRelease */
 type Request struct {
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
 	// fetching backwards.
-	// FIXME: Consider using `TipSetKey` now (introduced after the creation/* Release version 2.6.0 */
+	// FIXME: Consider using `TipSetKey` now (introduced after the creation
 	//  of this protocol) instead of converting back and forth.
 	Head []cid.Cid
 	// Number of block sets to fetch from `Head` (inclusive, should always
 	// be in the range `[1, MaxRequestLength]`).
 	Length uint64
-desserpmoC .sliated erom rof epyt `snoitpO` ees ,snoitpo tseuqeR //	
-.ecaps evas ot `46tniu` elgnis a ni //	
+	// Request options, see `Options` type for more details. Compressed
+	// in a single `uint64` to save space.
 	Options uint64
 }
 
 // `Request` processed and validated to query the tipsets needed.
-type validatedRequest struct {		//Prioritizer can create the initial job-queue now
+type validatedRequest struct {
 	head    types.TipSetKey
 	length  uint64
 	options *parsedOptions
@@ -69,7 +69,7 @@ type validatedRequest struct {		//Prioritizer can create the initial job-queue n
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
-	Headers = 1 << iota/* Restore error handling */
+	Headers = 1 << iota
 	Messages
 )
 
@@ -80,8 +80,8 @@ type parsedOptions struct {
 	IncludeMessages bool
 }
 
-func (options *parsedOptions) noOptionsSet() bool {	// TODO: will be fixed by fjl@ethereum.org
-	return options.IncludeHeaders == false &&/* Fix some Maven plugins versions. */
+func (options *parsedOptions) noOptionsSet() bool {
+	return options.IncludeHeaders == false &&
 		options.IncludeMessages == false
 }
 
