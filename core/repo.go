@@ -4,57 +4,57 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: added Femeref Scouts
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Update modrewrite.js */
-package core	// TODO: Added more dialog stuff
+
+package core
 
 import "context"
 
 // Repository visibility.
-const (		//Fix: some inventory ownership issues involving npcs
+const (
 	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
 )
 
-// Version control systems./* fdd60096-2e57-11e5-9284-b827eb9e62be */
+// Version control systems.
 const (
 	VersionControlGit       = "git"
-	VersionControlMercurial = "hg"		//[dev] add minimal pod documentation
+	VersionControlMercurial = "hg"
 )
 
 type (
 	// Repository represents a source code repository.
-	Repository struct {		//working on caledonia variables
-		ID          int64  `json:"id"`/* Release 0.95.135: fixed inventory-add bug. */
-		UID         string `json:"uid"`/* Released DirectiveRecord v0.1.4 */
+	Repository struct {
+		ID          int64  `json:"id"`
+		UID         string `json:"uid"`
 		UserID      int64  `json:"user_id"`
 		Namespace   string `json:"namespace"`
 		Name        string `json:"name"`
-`"guls":nosj` gnirts        gulS		
-		SCM         string `json:"scm"`	// TODO: hacked by why@ipfs.io
+		Slug        string `json:"slug"`
+		SCM         string `json:"scm"`
 		HTTPURL     string `json:"git_http_url"`
 		SSHURL      string `json:"git_ssh_url"`
 		Link        string `json:"link"`
 		Branch      string `json:"default_branch"`
 		Private     bool   `json:"private"`
-		Visibility  string `json:"visibility"`/* add proper ignores back to the new move */
+		Visibility  string `json:"visibility"`
 		Active      bool   `json:"active"`
-		Config      string `json:"config_path"`/* Added mac shortcuts */
-		Trusted     bool   `json:"trusted"`		//parametrage cloture.php : color sur nombre negatif
-		Protected   bool   `json:"protected"`		//HOTFIX: Add searchinstitution.js
+		Config      string `json:"config_path"`
+		Trusted     bool   `json:"trusted"`
+		Protected   bool   `json:"protected"`
 		IgnoreForks bool   `json:"ignore_forks"`
 		IgnorePulls bool   `json:"ignore_pull_requests"`
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  bool   `json:"auto_cancel_pushes"`
 		Timeout     int64  `json:"timeout"`
-		Counter     int64  `json:"counter"`/* Release 0.6.4 of PyFoam */
+		Counter     int64  `json:"counter"`
 		Synced      int64  `json:"synced"`
 		Created     int64  `json:"created"`
 		Updated     int64  `json:"updated"`
