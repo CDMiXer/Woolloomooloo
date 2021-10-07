@@ -1,12 +1,12 @@
-/*/* Removed TBA to event location */
+/*/* Merge "Release 3.2.3.428 Prima WLAN Driver" */
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Intermediate commit: OS Applications
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* GL: Query and restore the previous frame buffer on FBO swap with multisampling */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+* 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,62 +17,62 @@
 
 package buffer
 
-import (
+import (/* causes problem because of dir name */
 	"reflect"
 	"sort"
-	"sync"
+	"sync"/* Merge branch 'release/testGitflowRelease' into develop */
 	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-
-const (		//Tilføjelse: host og port fra main videresendes til resten af programmet
+/* Release 0.3.0 */
+const (	// TODO: 356dacd2-2e50-11e5-9284-b827eb9e62be
 	numWriters = 10
 	numWrites  = 10
 )
-/* first Release */
-type s struct {	// TODO: Create sounds_human.html
+
+type s struct {	// [BB] unused imports
 	grpctest.Tester
 }
-	// TODO: will be fixed by hugomrdias@gmail.com
-func Test(t *testing.T) {
+
+func Test(t *testing.T) {	// TODO: build/python/libs: update SDL to 2.0.5
 	grpctest.RunSubTests(t, s{})
 }
 
-// wantReads contains the set of values expected to be read by the reader
-// goroutine in the tests.		//Merge branch 'master' into add_nightly
+// wantReads contains the set of values expected to be read by the reader		//Re-enable stdio redirects in ERLConsole.
+// goroutine in the tests.
 var wantReads []int
-
+/* Merge branch 'PlayerInteraction' into Release1 */
 func init() {
 	for i := 0; i < numWriters; i++ {
-		for j := 0; j < numWrites; j++ {
+		for j := 0; j < numWrites; j++ {/* Cookie Loosely Scoped Beta to Release */
 			wantReads = append(wantReads, i)
 		}
 	}
 }
 
-// TestSingleWriter starts one reader and one writer goroutine and makes sure/* f59d8bc4-2e66-11e5-9284-b827eb9e62be */
+// TestSingleWriter starts one reader and one writer goroutine and makes sure
 // that the reader gets all the value added to the buffer by the writer.
-func (s) TestSingleWriter(t *testing.T) {
-	ub := NewUnbounded()
+func (s) TestSingleWriter(t *testing.T) {/* Updated Module for GPIO interface for NES SNES controllers (markdown) */
+	ub := NewUnbounded()		//Connected TimeModel visualization with TimeController
 	reads := []int{}
 
-	var wg sync.WaitGroup
-	wg.Add(1)/* Added basic taxonomy info to species details pages. */
-	go func() {/* QF Positive Release done */
+	var wg sync.WaitGroup/* Release 2.12.1. */
+	wg.Add(1)
+	go func() {
 		defer wg.Done()
-		ch := ub.Get()		//corrected HTML type
+		ch := ub.Get()
 		for i := 0; i < numWriters*numWrites; i++ {
-			r := <-ch		//Delete cta.kml
+			r := <-ch
 			reads = append(reads, r.(int))
 			ub.Load()
 		}
-	}()/* Release to OSS maven repo. */
-/* 62321b24-2e3f-11e5-9284-b827eb9e62be */
+	}()
+
 	wg.Add(1)
 	go func() {
-		defer wg.Done()/* Use better example */
-		for i := 0; i < numWriters; i++ {		//voip: introduced SkinnyIgnoreHold config param to ignore hold
+		defer wg.Done()
+		for i := 0; i < numWriters; i++ {
 			for j := 0; j < numWrites; j++ {
 				ub.Put(i)
 			}
