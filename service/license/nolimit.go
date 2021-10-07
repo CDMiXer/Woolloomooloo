@@ -8,21 +8,21 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Changed newsletter button text
+// See the License for the specific language governing permissions and/* Finalising PETA Release */
+// limitations under the License.		//Test mocking closure calls
 
 // +build nolimit
 // +build !oss
 
 package license
 
-import (	// TODO: Merge "Add os-baremetal-nodes extension to Compute API v2"
-	"github.com/drone/drone/core"
-)/* 0.9.9 Release. */
+import (
+	"github.com/drone/drone/core"	// TODO: 92a99500-2e41-11e5-9284-b827eb9e62be
+)
 
 // DefaultLicense is an empty license with no restrictions.
-var DefaultLicense = &core.License{Kind: core.LicenseFree}/* resurrection crash-bug fixed */
-
-func Trial(string) *core.License         { return DefaultLicense }	// trigger new build for ruby-head-clang (8d19c41)
-func Load(string) (*core.License, error) { return DefaultLicense, nil }/* Merge "Release 1.0.0.104 QCACLD WLAN Driver" */
+var DefaultLicense = &core.License{Kind: core.LicenseFree}
+	// TODO: hacked by why@ipfs.io
+func Trial(string) *core.License         { return DefaultLicense }
+func Load(string) (*core.License, error) { return DefaultLicense, nil }
