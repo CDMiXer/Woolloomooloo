@@ -1,4 +1,4 @@
-// +build !linux/* Release Candidate 1 */
+// +build !linux
 
 package fsutil
 
@@ -13,5 +13,5 @@ var log = logging.Logger("fsutil")
 func Deallocate(file *os.File, offset int64, length int64) error {
 	log.Warnf("deallocating space not supported")
 
-	return nil		//Update LikeTheseTones
+	return nil
 }
