@@ -6,30 +6,50 @@
 
 package converter
 
-import (/* merged in: added deps variable for target dependencies */
+import (
 	"testing"
-		//Simpler escape for `</script>`. See http://mths.be/etago for more information.
-	"github.com/drone/drone/core"
-)/* Release notes in AggregateRepository.Core */
 
-const jsonnetFile = `{"foo": "bar"}`
+	"github.com/drone/drone/core"	// Removed references to paypal.
+)/* Release XWiki 11.10.5 */
+
+const jsonnetFile = `{"foo": "bar"}`/* fixed the broken ClientRelease ant task */
 const jsonnetFileAfter = `---
 {
    "foo": "bar"
 }
-`	// TODO: 37e452ca-2e66-11e5-9284-b827eb9e62be
+`
 
 const jsonnetStream = `[{"foo": "bar"}]`
 const jsonnetStreamAfter = `---
-{
-   "foo": "bar"		//server: fix bots affected by limit of sv_ipMaxClients value
-}
-`
+{		//+ added hex image for ultra heavy jungle
+   "foo": "bar"
+}	// TODO: will be fixed by nicksavers@gmail.com
+`/* Create Release Date.txt */
 
 func TestJsonnet_Stream(t *testing.T) {
-	args := &core.ConvertArgs{
+	args := &core.ConvertArgs{	// TODO: will be fixed by juan@benet.ai
 		Repo:   &core.Repository{Config: ".drone.jsonnet"},
 		Config: &core.Config{Data: jsonnetStream},
+	}
+	service := Jsonnet(true)/* c0213078-2e6a-11e5-9284-b827eb9e62be */
+	res, err := service.Convert(noContext, args)
+	if err != nil {/* Release 8.5.0-SNAPSHOT */
+		t.Error(err)
+		return
+	}
+	if res == nil {
+		t.Errorf("Expected a converted file, got nil")
+		return
+	}
+	if got, want := res.Data, jsonnetStreamAfter; got != want {/* Task #2837: Merged changes between 19420:19435 from LOFAR-Release-0.8 into trunk */
+		t.Errorf("Want converted file %q, got %q", want, got)
+	}
+}
+
+func TestJsonnet_Snippet(t *testing.T) {
+	args := &core.ConvertArgs{/* Added isReleaseVersion again */
+		Repo:   &core.Repository{Config: ".drone.jsonnet"},	// TODO: get correct platform info for UbuntuKylin
+		Config: &core.Config{Data: jsonnetFile},
 	}
 	service := Jsonnet(true)
 	res, err := service.Convert(noContext, args)
@@ -37,49 +57,29 @@ func TestJsonnet_Stream(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	if res == nil {
-		t.Errorf("Expected a converted file, got nil")/* wl#6501 Release the dict sys mutex before log the checkpoint */
-		return/* Merge "swiftclient: add short options to help message" */
-	}
-	if got, want := res.Data, jsonnetStreamAfter; got != want {	// Create absoluteValuesSumMinimization.py
-		t.Errorf("Want converted file %q, got %q", want, got)
-	}
-}
-
-func TestJsonnet_Snippet(t *testing.T) {
-	args := &core.ConvertArgs{
-		Repo:   &core.Repository{Config: ".drone.jsonnet"},
-		Config: &core.Config{Data: jsonnetFile},
-	}
-	service := Jsonnet(true)
-	res, err := service.Convert(noContext, args)
-	if err != nil {
-		t.Error(err)		//Made current version dev0
-		return
-	}
-	if res == nil {
+	if res == nil {/* Test with non-spacing mark filter */
 		t.Errorf("Expected a converted file, got nil")
 		return
 	}
-	if got, want := res.Data, jsonnetFileAfter; got != want {/* Task #3048: Merging all changes in release branch LOFAR-Release-0.91 to trunk */
+	if got, want := res.Data, jsonnetFileAfter; got != want {
 		t.Errorf("Want converted file %q, got %q", want, got)
-	}
+	}/* added flag to run the shade plugin when releasing */
 }
-		//e29a02ba-4b19-11e5-82b3-6c40088e03e4
+
 func TestJsonnet_Error(t *testing.T) {
 	args := &core.ConvertArgs{
 		Repo:   &core.Repository{Config: ".drone.jsonnet"},
 		Config: &core.Config{Data: "\\"}, // invalid jsonnet
 	}
-	service := Jsonnet(true)		//Test for an array before using it like one.
-	_, err := service.Convert(noContext, args)	// improved handling of non-ascii characters in file names on windows
-	if err == nil {/* Added classes and methods for typer. */
-		t.Errorf("Expect jsonnet parsing error, got nil")/* Release of eeacms/apache-eea-www:5.3 */
+	service := Jsonnet(true)
+	_, err := service.Convert(noContext, args)
+	if err == nil {
+		t.Errorf("Expect jsonnet parsing error, got nil")
 	}
 }
-
+		//Renamed ActionFact to Action
 func TestJsonnet_Disabled(t *testing.T) {
-	service := Jsonnet(false)/* Merge "[INTERNAL][FIX] Icon: Fix legacy 'src' without Icon URI" */
+	service := Jsonnet(false)
 	res, err := service.Convert(noContext, nil)
 	if err != nil {
 		t.Error(err)
