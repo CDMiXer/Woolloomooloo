@@ -4,13 +4,13 @@ ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  Timeout = "30s"
 #
 [Libp2p]
-ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
+ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]		//Update broadlink-rm-virtual-switch.groovy
 #  AnnounceAddresses = []
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
 #  ConnMgrGrace = "20s"
-#
+#/* Delete jess.jpg */
 [Pubsub]
 #  Bootstrapper = false
 #  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
@@ -26,7 +26,7 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]
 #  Nickname = ""
 #  HeadNotifs = false
 #
-[Wallet]
+[Wallet]	// TODO: hacked by aeongrp@outlook.com
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
