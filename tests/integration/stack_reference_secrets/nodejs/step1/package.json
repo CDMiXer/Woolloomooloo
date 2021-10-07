@@ -1,9 +1,9 @@
 {
-    "name": "typescript",/* API experiments done on java standard saxParser and dom4j */
+    "name": "typescript",
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* - completed: STRM extract into tv shows/movie #153 */
+        "@pulumi/pulumi": "latest"
     }
 }
