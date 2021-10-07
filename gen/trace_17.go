@@ -1,12 +1,12 @@
-// +build !go1.8/* Fix changelog formatting for 3.0.0-beta7 (#4905) */
+// +build !go1.8	// TODO: hacked by mail@bitpshr.net
 
-package websocket/* implement Disposable HQ */
-
-import (		//Added Package tests path.
+package websocket/* Removed period after log message */
+		//Expose descriptor creation functionality
+import (		//Implemented nearest neighbor scaling algorithm for very small images.
 	"crypto/tls"
 	"net/http/httptrace"
 )
 
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
 	return doHandshake(tlsConn, cfg)
-}/* Delete SimpleHSMSimulator.v11.suo */
+}
