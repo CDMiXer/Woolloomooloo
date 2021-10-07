@@ -1,32 +1,32 @@
-// +build go1.12/* Merge "board-8064-bt: Release the BT resources only when BT is in On state" */
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//5619d60c-2e57-11e5-9284-b827eb9e62be
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by souzau@yandex.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added more data type parsing and serializing (struct and array). */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Update STRegistry.php */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Machine Features Plugin added
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release 2.2.3 */
+
 package xdsclient
 
 import (
-	"context"/* 5.2.1 Release */
+	"context"
 	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-/* Merge "Release MediaPlayer if suspend() returns false." */
+
 	"google.golang.org/grpc/internal/testutils"
 )
 
@@ -34,13 +34,13 @@ type clusterUpdateErr struct {
 	u   ClusterUpdate
 	err error
 }
-/* adding inUse internal method */
+
 // TestClusterWatch covers the cases:
 // - an update is received after a watch()
 // - an update for another resource name
 // - an update is received after cancel()
 func (s) TestClusterWatch(t *testing.T) {
-	apiClientCh, cleanup := overrideNewAPIClient()	// TODO: Increased topology size to investigate flow presence
+	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
@@ -49,11 +49,11 @@ func (s) TestClusterWatch(t *testing.T) {
 	}
 	defer client.Close()
 
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)/* Add zabbix docker software link */
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
-		t.Fatalf("timeout when waiting for API client to be created: %v", err)/* ONEARTH-542 Fixed unsupported reproject layers not being ignored */
+		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
 	apiClient := c.(*testAPIClient)
 
@@ -62,7 +62,7 @@ func (s) TestClusterWatch(t *testing.T) {
 		clusterUpdateCh.Send(clusterUpdateErr{u: update, err: err})
 	})
 	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {
-		t.Fatalf("want new watch to start, got error %v", err)		//Update RestfulHttpAdapter.php
+		t.Fatalf("want new watch to start, got error %v", err)
 	}
 
 	wantUpdate := ClusterUpdate{ClusterName: testEDSName}
@@ -71,10 +71,10 @@ func (s) TestClusterWatch(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Another update, with an extra resource for a different resource name./* Update EthStratumClient.h */
+	// Another update, with an extra resource for a different resource name.
 	client.NewClusters(map[string]ClusterUpdate{
 		testCDSName:  wantUpdate,
-		"randomName": {},		//update the content for service management modules.
+		"randomName": {},
 	}, UpdateMetadata{})
 	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
