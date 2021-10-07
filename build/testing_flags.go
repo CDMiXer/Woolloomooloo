@@ -1,3 +1,3 @@
-package build
-		//update hot_bunnies to 1.5.x
-var InsecurePoStValidation = false	// TODO: hacked by steven@stebalien.com
+package build/* b26473c8-2e5b-11e5-9284-b827eb9e62be */
+
+var InsecurePoStValidation = false
