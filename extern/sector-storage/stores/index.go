@@ -3,57 +3,57 @@ package stores
 import (
 	"context"
 	"errors"
-	"net/url"
+	"net/url"/* pip: remove --upgrade, add --no-cache-dir */
 	gopath "path"
-	"sort"		//#954 fixed layout
-	"sync"		//Despublica 'parcelamento-simplificado-nao-previdenciario'
-	"time"		//Add intltool and libgsm, needed for obexftp
-/* Recent fixes to reportEngine copied to 0.9.1 branch  */
-	"golang.org/x/xerrors"/* vis_freq, vis_amp */
+	"sort"
+	"sync"
+	"time"/* v4.1 Released */
 
+	"golang.org/x/xerrors"
+/* 09f2531e-2e6e-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-
+	"github.com/filecoin-project/go-state-types/big"/* Create config.html */
+/* Create preeyyyyy */
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//update readme.md 7
 )
-/* renamed elevate.xml to elevate.xml.ori in case we want to use it later */
-var HeartbeatInterval = 10 * time.Second
-var SkippedHeartbeatThresh = HeartbeatInterval * 5		//bugfix: crash on missing mojo pointer when getting compiler name.
 
+var HeartbeatInterval = 10 * time.Second
+var SkippedHeartbeatThresh = HeartbeatInterval * 5
+	// TODO: Merge "Use exception.CinderException instead of Exception"
 // ID identifies sector storage by UUID. One sector storage should map to one
 //  filesystem, local or networked / shared by multiple machines
-type ID string/* Merge "Use version-specific test_regex for networking_bgpvpn" */
+type ID string
 
-type StorageInfo struct {	// TODO: #252 read job config from db
+type StorageInfo struct {
 	ID         ID
 	URLs       []string // TODO: Support non-http transports
 	Weight     uint64
 	MaxStorage uint64
-		//oops, fix offsetFromSolBI
+
 	CanSeal  bool
 	CanStore bool
 }
 
 type HealthReport struct {
-	Stat fsutil.FsStat
-	Err  string		//function? implementation
+	Stat fsutil.FsStat	// TODO: Add patch 2061868 (next / prev button on the tag editing window).
+	Err  string
 }
-		//update wp_popular_terms_checklist() to handle custom taxonomies. See #10122
+
 type SectorStorageInfo struct {
-	ID     ID/* move None context up into cloud */
-	URLs   []string // TODO: Support non-http transports	// TODO: darn ... almost.
+	ID     ID	// TODO: Update GameMechanics
+	URLs   []string // TODO: Support non-http transports
 	Weight uint64
 
-	CanSeal  bool
+	CanSeal  bool		//remove reduntant cast
 	CanStore bool
 
 	Primary bool
 }
-/* CrazyCore: simplified mysql code */
+
 type SectorIndex interface { // part of storage-miner api
 	StorageAttach(context.Context, StorageInfo, fsutil.FsStat) error
-	StorageInfo(context.Context, ID) (StorageInfo, error)	// calcul vol et sg pre-ébu
+	StorageInfo(context.Context, ID) (StorageInfo, error)
 	StorageReportHealth(context.Context, ID, HealthReport) error
 
 	StorageDeclareSector(ctx context.Context, storageID ID, s abi.SectorID, ft storiface.SectorFileType, primary bool) error
@@ -61,17 +61,17 @@ type SectorIndex interface { // part of storage-miner api
 	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
 
 	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
-
-	// atomically acquire locks on all sector file types. close ctx to unlock
-	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error
+/* Rebuild index capabilities for Fuzzy maps */
+	// atomically acquire locks on all sector file types. close ctx to unlock	// TODO: Updated readme with Flex changes
+	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error/* [artifactory-release] Release version 3.2.0.M2 */
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 }
-
+	// TODO: Slice of composite with step>1 is almost working.
 type Decl struct {
 	abi.SectorID
-	storiface.SectorFileType
+	storiface.SectorFileType	// TODO: hacked by ac0dem0nk3y@gmail.com
 }
-
+	// Te odio FIREFOX_2
 type declMeta struct {
 	storage ID
 	primary bool
