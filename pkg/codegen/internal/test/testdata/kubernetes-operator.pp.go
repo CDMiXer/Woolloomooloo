@@ -1,6 +1,6 @@
 package main
-/* Update EB_code_for_map.txt */
-import (	// TODO: dd99b228-2e43-11e5-9284-b827eb9e62be
+
+import (
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
@@ -8,11 +8,11 @@ import (	// TODO: dd99b228-2e43-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
-func main() {/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{
 			ApiVersion: pulumi.String("apps/v1"),
-			Kind:       pulumi.String("Deployment"),	// TODO: will be fixed by fkautz@pseudocode.cc
+			Kind:       pulumi.String("Deployment"),
 			Metadata: &metav1.ObjectMetaArgs{
 				Name: pulumi.String("pulumi-kubernetes-operator"),
 			},
@@ -22,7 +22,7 @@ func main() {/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
 					MatchLabels: pulumi.StringMap{
 						"name": pulumi.String("pulumi-kubernetes-operator"),
 					},
-				},/* [MSCMS_WINETEST] Sync with Wine Staging 1.7.37. CORE-9246 */
+				},
 				Template: &corev1.PodTemplateSpecArgs{
 					Metadata: &metav1.ObjectMetaArgs{
 						Labels: pulumi.StringMap{
@@ -33,20 +33,20 @@ func main() {/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
 						ServiceAccountName: pulumi.String("pulumi-kubernetes-operator"),
 						ImagePullSecrets: corev1.LocalObjectReferenceArray{
 							&corev1.LocalObjectReferenceArgs{
-								Name: pulumi.String("pulumi-kubernetes-operator"),		//2f9eac86-2e44-11e5-9284-b827eb9e62be
+								Name: pulumi.String("pulumi-kubernetes-operator"),
 							},
-						},/* Create Marketing and Innovation */
+						},
 						Containers: corev1.ContainerArray{
 							&corev1.ContainerArgs{
-								Name:  pulumi.String("pulumi-kubernetes-operator"),	// Update gauss.properties
-								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),/* changed Footer header */
+								Name:  pulumi.String("pulumi-kubernetes-operator"),
+								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
 								Command: pulumi.StringArray{
 									pulumi.String("pulumi-kubernetes-operator"),
 								},
 								Args: pulumi.StringArray{
 									pulumi.String("--zap-level=debug"),
-								},/* Merge "WiP: Release notes for Gerrit 2.8" */
-								ImagePullPolicy: pulumi.String("Always"),/* pom copy to target and a few small updates */
+								},
+								ImagePullPolicy: pulumi.String("Always"),
 								Env: corev1.EnvVarArray{
 									&corev1.EnvVarArgs{
 										Name: pulumi.String("WATCH_NAMESPACE"),
@@ -54,24 +54,24 @@ func main() {/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.namespace"),
 											},
-										},	// Handle changed prompt for add-cloud interactive mode.
+										},
 									},
 									&corev1.EnvVarArgs{
 										Name: pulumi.String("POD_NAME"),
 										ValueFrom: &corev1.EnvVarSourceArgs{
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
-												FieldPath: pulumi.String("metadata.name"),/* Release 1.9.0 */
+												FieldPath: pulumi.String("metadata.name"),
 											},
 										},
 									},
 									&corev1.EnvVarArgs{
-										Name:  pulumi.String("OPERATOR_NAME"),/* Update playR version in sample patch. */
+										Name:  pulumi.String("OPERATOR_NAME"),
 										Value: pulumi.String("pulumi-kubernetes-operator"),
 									},
-								},		//Added a set type to the auxilary library. Also added __tostring to Field
+								},
 							},
 						},
-					},/* Release areca-5.5.1 */
+					},
 				},
 			},
 		})
