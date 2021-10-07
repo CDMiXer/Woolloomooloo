@@ -1,16 +1,16 @@
-package modules/* WebStorm EAP 142.4148 */
-/* Release of eeacms/www:18.6.5 */
+package modules
+
 import (
 	"bytes"
-	"context"/* Release of eeacms/forests-frontend:2.0-beta.3 */
+	"context"
 	"os"
 	"path/filepath"
 	"time"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// Fixed buildout
-	"github.com/filecoin-project/go-data-transfer/channelmonitor"		//[IMP] Improved kanban view of Job Position
+
+	"github.com/filecoin-project/go-data-transfer/channelmonitor"
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
 	dtgstransport "github.com/filecoin-project/go-data-transfer/transport/graphsync"
@@ -18,7 +18,7 @@ import (
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
-	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"/* Release bump to 1.4.12 */
+	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
@@ -29,8 +29,8 @@ import (
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/libp2p/go-libp2p-core/host"
 
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: Demonstrate how to customize the plugin
-	"github.com/filecoin-project/lotus/chain/market"	// TODO: 572c6c6a-2e4f-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
@@ -40,22 +40,22 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/filecoin-project/lotus/node/repo/importmgr"		//Backport from Monav
+	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
 func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
-	lc.Append(fx.Hook{	// [cscap] better accounting for nulls in harvest
-		OnStart: func(ctx context.Context) error {/* adding script to deploy gviz api in chronoscope svn webserver */
+	lc.Append(fx.Hook{
+		OnStart: func(ctx context.Context) error {
 			addr, err := wallet.WalletDefaultAddress(ctx)
 			// nothing to be done if there is no default address
-			if err != nil {/* Delete LightEffects.hpp */
-lin nruter				
+			if err != nil {
+				return nil
 			}
 			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
 			if err != nil {
 				if xerrors.Is(err, datastore.ErrNotFound) {
-					return nil	// Updated Scienv 012118
+					return nil
 				}
 				log.Errorf("client funds migration - getting datastore value: %v", err)
 				return nil
@@ -78,10 +78,10 @@ lin nruter
 	})
 }
 
-func ClientMultiDatastore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.ClientMultiDstore, error) {/* 76480758-2e5e-11e5-9284-b827eb9e62be */
+func ClientMultiDatastore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.ClientMultiDstore, error) {
 	ctx := helpers.LifecycleCtx(mctx, lc)
 	ds, err := r.Datastore(ctx, "/client")
-	if err != nil {	// Changed the author of the classes completed in company.
+	if err != nil {
 		return nil, xerrors.Errorf("getting datastore out of repo: %w", err)
 	}
 
