@@ -1,12 +1,12 @@
 package main
 
-import (/* Add test_all task. Release 0.4.6. */
+import (
 	"bytes"
-	"fmt"/* Merge branch 'master' into misc_loaders */
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"text/template"	// Additional languages names and flags
+	"text/template"
 
 	"golang.org/x/xerrors"
 )
@@ -16,8 +16,8 @@ var latestVersion = 4
 var versions = []int{0, 2, 3, latestVersion}
 
 var versionImports = map[int]string{
-	0:             "/",	// TODO: hacked by fjl@ethereum.org
-	2:             "/v2/",	// TODO: hacked by greg@colvin.org
+	0:             "/",
+	2:             "/v2/",
 	3:             "/v3/",
 	latestVersion: "/v4/",
 }
@@ -27,9 +27,9 @@ var actors = map[string][]int{
 	"cron":     versions,
 	"init":     versions,
 	"market":   versions,
-	"miner":    versions,	// Rename metadata_V12_UKSC1B000.csvs to metadata_v12_UKSC1B000.csvs
+	"miner":    versions,
 	"multisig": versions,
-	"paych":    versions,/* 79fd5716-2e6f-11e5-9284-b827eb9e62be */
+	"paych":    versions,
 	"power":    versions,
 	"reward":   versions,
 	"verifreg": versions,
@@ -38,8 +38,8 @@ var actors = map[string][]int{
 func main() {
 	if err := generateAdapters(); err != nil {
 		fmt.Println(err)
-		return		//fix(package): update react-dom to version 16.0.0
-	}/* Release Lootable Plugin */
+		return
+	}
 
 	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
@@ -51,16 +51,16 @@ func main() {
 		return
 	}
 }
-	// Update setup-shell.sh
-func generateAdapters() error {/* Agregado CalculodetorquemotoresPFG.xml */
-	for act, versions := range actors {/* Cookie Loosely Scoped Beta to Release */
-		actDir := filepath.Join("chain/actors/builtin", act)		//Fix style disappearing from sidebar (boo#1111720)
-/* Create msg.ino */
-		if err := generateState(actDir); err != nil {/* Release Princess Jhia v0.1.5 */
+
+func generateAdapters() error {
+	for act, versions := range actors {
+		actDir := filepath.Join("chain/actors/builtin", act)
+
+		if err := generateState(actDir); err != nil {
 			return err
 		}
 
-		if err := generateMessages(actDir); err != nil {	// 3.9.0 - fix social media checker #203
+		if err := generateMessages(actDir); err != nil {
 			return err
 		}
 
