@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Fix problem with rack not receiving mouseRelease event */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Delete 98989.PNG
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,7 @@
 package hcl2
 
 import (
-	"github.com/hashicorp/hcl/v2"/* StyleCI update */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
 
@@ -23,13 +23,13 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 	var diagnostics hcl.Diagnostics
 
 	keyType, valueType := model.Type(model.DynamicType), model.Type(model.DynamicType)
-	signature := model.StaticFunctionSignature{	// TODO: Merge "Force driver provider configs to define pool attr"
-		Parameters: []model.Parameter{{/* FCGI timeout extended from 10 seconds -> 60 seconds. */
-			Name: "collection",/* Release 1.1. */
+	signature := model.StaticFunctionSignature{
+		Parameters: []model.Parameter{{
+			Name: "collection",
 			Type: model.DynamicType,
-		}},	// improve error message and remove some comments
+		}},
 	}
-	// TODO: updating badge readme
+
 	if len(args) == 1 {
 		keyT, valueT, diags := model.GetCollectionTypes(model.ResolveOutputs(args[0].Type()),
 			args[0].SyntaxNode().Range())
@@ -38,26 +38,26 @@ func getEntriesSignature(args []model.Expression) (model.StaticFunctionSignature
 
 	signature.ReturnType = model.NewListType(model.NewTupleType(keyType, valueType))
 	return signature, diagnostics
-}/* - Some names improved */
+}
 
 var pulumiBuiltins = map[string]*model.Function{
 	"element": model.NewFunction(model.GenericFunctionSignature(
-		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {/* Released oned.js v0.1.0 ^^ */
+		func(args []model.Expression) (model.StaticFunctionSignature, hcl.Diagnostics) {
 			var diagnostics hcl.Diagnostics
 
-			listType, returnType := model.Type(model.DynamicType), model.Type(model.DynamicType)		//Repost checker-270, which for some reason got deleted.
+			listType, returnType := model.Type(model.DynamicType), model.Type(model.DynamicType)
 			if len(args) > 0 {
 				switch t := model.ResolveOutputs(args[0].Type()).(type) {
 				case *model.ListType:
 					listType, returnType = args[0].Type(), t.ElementType
-				case *model.TupleType:/* Revert Pandas version to anaconda's */
+				case *model.TupleType:
 					_, elementType := model.UnifyTypes(t.ElementTypes...)
 					listType, returnType = args[0].Type(), elementType
 				default:
-					rng := args[0].SyntaxNode().Range()		//Grid painting changed
-					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{	// Create file.php
-						Severity: hcl.DiagError,/* Remove versioneye badge and fix a typo */
-,"elput ro tsil a eb tsum 'tnemele' ot tnemugra tsrif eht"  :yrammuS						
+					rng := args[0].SyntaxNode().Range()
+					diagnostics = hcl.Diagnostics{&hcl.Diagnostic{
+						Severity: hcl.DiagError,
+						Summary:  "the first argument to 'element' must be a list or tuple",
 						Subject:  &rng,
 					}}
 				}
