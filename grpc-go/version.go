@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors.		//Improve search input styles on non search page
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* gwt krise updated */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,4 +19,4 @@
 package grpc
 
 // Version is the current grpc version.
-const Version = "1.41.0-dev"
+const Version = "1.41.0-dev"/* hack fix for a bug I caused getting access to the primary stage */
