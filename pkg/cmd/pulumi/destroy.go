@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.		//[REF] gamification: change name of folder
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Fixed many issues, but not yet all.
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main/* Upgrade ruby-build version */
+package main
 
 import (
-	"context"/* build: Release version 0.1 */
+	"context"
 	"fmt"
 
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"/* Correct relative paths in Releases. */
+	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -31,7 +31,7 @@ import (
 
 func newDestroyCmd() *cobra.Command {
 	var debug bool
-	var stack string/* Release 0.5.7 */
+	var stack string
 
 	var message string
 	var execKind string
@@ -40,7 +40,7 @@ func newDestroyCmd() *cobra.Command {
 	var diffDisplay bool
 	var eventLogPath string
 	var parallel int
-	var refresh bool/* Release 1.0.62 */
+	var refresh bool
 	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
@@ -54,22 +54,22 @@ func newDestroyCmd() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:        "destroy",
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
-		Short:      "Destroy an existing stack and its resources",	// Create mac_OS_setup.md
-		Long: "Destroy an existing stack and its resources\n" +/* use getter instead of initialize assignments */
+		Short:      "Destroy an existing stack and its resources",
+		Long: "Destroy an existing stack and its resources\n" +
 			"\n" +
 			"This command deletes an entire existing stack by name.  The current state is\n" +
 			"loaded from the associated state file in the workspace.  After running to completion,\n" +
-			"all of this stack's resources and associated state will be gone.\n" +/* Release notes are updated. */
+			"all of this stack's resources and associated state will be gone.\n" +
 			"\n" +
 			"Warning: this command is generally irreversible and should be used with great care.",
-		Args: cmdutil.NoArgs,/* Release 0.7.6 Version */
-		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {	// TODO: Minor fixes in the SYCL cmake examples
+		Args: cmdutil.NoArgs,
+		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
 			yes = yes || skipConfirmations()
-			interactive := cmdutil.Interactive()/* add projeto */
-			if !interactive && !yes {	// TODO: Switch to hasOwnProperty
+			interactive := cmdutil.Interactive()
+			if !interactive && !yes {
 				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
 			}
-	// TODO: Merge "Fix endpoint parameters for check result rows"
+
 			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
 			if err != nil {
 				return result.FromError(err)
@@ -77,7 +77,7 @@ func newDestroyCmd() *cobra.Command {
 
 			var displayType = display.DisplayProgress
 			if diffDisplay {
-				displayType = display.DisplayDiff		//DBRecord code clean-up on create()
+				displayType = display.DisplayDiff
 			}
 
 			opts.Display = display.Options{
