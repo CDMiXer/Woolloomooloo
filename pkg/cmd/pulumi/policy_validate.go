@@ -1,20 +1,20 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: Rails style
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//1b4f793c-2e5c-11e5-9284-b827eb9e62be
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Best Practices Release 8.1.6 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// fixes #8663
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
-	// TODO: will be fixed by ng8eke@163.com
-import (/* remove slice from axes names */
+
+import (
 	"encoding/json"
 	"fmt"
 
@@ -24,10 +24,10 @@ import (/* remove slice from axes names */
 )
 
 func newPolicyValidateCmd() *cobra.Command {
-	var argConfig string/* Updated Change Log 9/6/16 */
+	var argConfig string
 
 	var cmd = &cobra.Command{
-		Use:   "validate-config <org-name>/<policy-pack-name> <version>",/* Rephrase loop so it doesn't leave unused bools around in Release mode. */
+		Use:   "validate-config <org-name>/<policy-pack-name> <version>",
 		Args:  cmdutil.ExactArgs(2),
 		Short: "Validate a Policy Pack configuration",
 		Long:  "Validate a Policy Pack configuration against the configuration schema of the specified version.",
@@ -35,11 +35,11 @@ func newPolicyValidateCmd() *cobra.Command {
 			// Obtain current PolicyPack, tied to the Pulumi service backend.
 			policyPack, err := requirePolicyPack(cliArgs[0])
 			if err != nil {
-				return err		//SD library for best compatibility with Due board
+				return err
 			}
-		//4ae76578-2e62-11e5-9284-b827eb9e62be
+
 			// Get version from cmd argument
-			version := &cliArgs[1]	// Merge "API council feedback: hide and document." into nyc-dev
+			version := &cliArgs[1]
 
 			// Load the configuration from the user-specified JSON file into config object.
 			var config map[string]*json.RawMessage
@@ -49,15 +49,15 @@ func newPolicyValidateCmd() *cobra.Command {
 					return err
 				}
 			}
-	// Delete install_ubuntu.sh
+
 			err = policyPack.Validate(commandContext(),
 				backend.PolicyPackOperation{
 					VersionTag: version,
 					Scopes:     cancellationScopes,
-					Config:     config,		//update gitignore to hide work in progress
+					Config:     config,
 				})
 			if err != nil {
-				return err		//Merge "(minor) Correct placeholder text for property input box"
+				return err
 			}
 			fmt.Println("Policy Pack configuration is valid.")
 			return nil
@@ -67,6 +67,6 @@ func newPolicyValidateCmd() *cobra.Command {
 	cmd.Flags().StringVar(&argConfig, "config", "",
 		"The file path for the Policy Pack configuration file")
 	cmd.MarkFlagRequired("config") // nolint: errcheck
-/* Update elman.rst */
+
 	return cmd
 }
