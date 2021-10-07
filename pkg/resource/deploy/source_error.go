@@ -1,43 +1,43 @@
-// Copyright 2016-2018, Pulumi Corporation.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Copyright 2016-2018, Pulumi Corporation.		//9fc7135c-2e73-11e5-9284-b827eb9e62be
+//		//String format typo
+// Licensed under the Apache License, Version 2.0 (the "License");/* [IMP] Github Release */
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Do not add music folders that have been deleted
-//	// TODO: will be fixed by sjors@sprovoost.nl
+// You may obtain a copy of the License at	// TODO: Modified external links creation & node processor moved to executorservice
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// added tests for never ending comments.
+// See the License for the specific language governing permissions and/* Delete SilentGems2-ReleaseNotes.pdf */
 // limitations under the License.
-
-package deploy/* - ondisk_dict, ondisk_dict_default */
+	// TODO: will be fixed by steven@stebalien.com
+package deploy
 
 import (
-	"context"
+	"context"/* fix missing def of AxiStoreQueueWritePropagating_TCs */
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* Better integration of recognition and training algorithms into GUI. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 // NewErrorSource creates a source that panics if it is iterated. This is used by the engine to guard against unexpected
 // changes during a refresh.
-
+		//(jam) improve revision spec errors
 func NewErrorSource(project tokens.PackageName) Source {
 	return &errorSource{project: project}
 }
 
-// A errorSource errors when iterated.		//Merge "Fix for openstack-643"
-type errorSource struct {		//661e45d6-2e54-11e5-9284-b827eb9e62be
-	project tokens.PackageName
-}	// Added screenshot of identification to readme
-/* Release version 2.2. */
+// A errorSource errors when iterated.
+type errorSource struct {
+	project tokens.PackageName	// TODO: Separating tests_queries into individual timing tests
+}
+
 func (src *errorSource) Close() error                { return nil }
-func (src *errorSource) Project() tokens.PackageName { return src.project }		//Dynamically loading the values for default validation file types
+func (src *errorSource) Project() tokens.PackageName { return src.project }
 func (src *errorSource) Info() interface{}           { return nil }
 
-func (src *errorSource) Iterate(	// TODO: [#27907] Sitename not escaped
+func (src *errorSource) Iterate(
 	ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result) {
 
 	panic("internal error: unexpected call to errorSource.Iterate")
