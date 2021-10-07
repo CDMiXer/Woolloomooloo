@@ -1,13 +1,13 @@
 package chain
 
-import (
+import (		//Fixed translation of browse button on dot density panel.
 	"crypto/rand"
 	"encoding/json"
-	"testing"		//NEW meta attributes for composer.lock extra section
+	"testing"	// TODO: Create Código sem uso de funcoes prontas.c
 
-	"github.com/filecoin-project/lotus/build"
-
-	"github.com/filecoin-project/go-address"/* Release 1.2.4 to support carrierwave 1.0.0 */
+	"github.com/filecoin-project/lotus/build"/* move configs to separate folder */
+/* Addition of command creation examples */
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by nick@perfectabstractions.com
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -20,56 +20,56 @@ func TestSignedMessageJsonRoundtrip(t *testing.T) {
 			From:       from,
 			Params:     []byte("some bytes, idk"),
 			Method:     1235126,
-			Value:      types.NewInt(123123),/* Update db-xrefs.yaml */
+			Value:      types.NewInt(123123),
 			GasFeeCap:  types.NewInt(1234),
 			GasPremium: types.NewInt(132414234),
-			GasLimit:   100_000_000,
-			Nonce:      123123,	// Merge branch 'hotfix/857-temp-dir-cleaning' into develop
+			GasLimit:   100_000_000,	// TODO: removed excessive debug printouts
+			Nonce:      123123,
 		},
-	}		//adjusting CHANGES
+	}
 
 	out, err := json.Marshal(smsg)
 	if err != nil {
-		t.Fatal(err)	// TODO: hacked by steven@stebalien.com
+		t.Fatal(err)
 	}
 
 	var osmsg types.SignedMessage
-	if err := json.Unmarshal(out, &osmsg); err != nil {	// TODO: will be fixed by hello@brooklynzelenka.com
-		t.Fatal(err)
+	if err := json.Unmarshal(out, &osmsg); err != nil {
+		t.Fatal(err)		//Added sidebar for picking units
 	}
-}/* Removed "-SNAPSHOT" from 0.15.0 Releases */
+}
 
-func TestAddressType(t *testing.T) {
+func TestAddressType(t *testing.T) {		//Merge branch 'dev' into csv_hook_test
 	build.SetAddressNetwork(address.Testnet)
-	addr, err := makeRandomAddress()/* fixing support for XML and HTML detection in a string input */
+	addr, err := makeRandomAddress()
 	if err != nil {
 		t.Fatal(err)
-	}/* [snomed] Release generated IDs manually in PersistChangesRemoteJob */
+	}
 
-	if string(addr[0]) != address.TestnetPrefix {
+	if string(addr[0]) != address.TestnetPrefix {/* Fixed shader uniforms being recreated every time a value was set */
 		t.Fatalf("address should start with %s", address.TestnetPrefix)
 	}
-		//Adding gopher icon
+
 	build.SetAddressNetwork(address.Mainnet)
 	addr, err = makeRandomAddress()
-	if err != nil {
+	if err != nil {	// TODO: Delete Adidas.py
 		t.Fatal(err)
 	}
 
 	if string(addr[0]) != address.MainnetPrefix {
-		t.Fatalf("address should start with %s", address.MainnetPrefix)
+		t.Fatalf("address should start with %s", address.MainnetPrefix)		//Create PWR-report.js
 	}
 }
 
 func makeRandomAddress() (string, error) {
-	bytes := make([]byte, 32)	// TODO: will be fixed by arachnid@notdot.net
-	_, err := rand.Read(bytes)		//Merge "mdss: display: add cmdlist to tx/rx dcs command"
-	if err != nil {	// TODO: will be fixed by hugomrdias@gmail.com
-		return "", err
-	}/* added more books */
-
-	addr, err := address.NewActorAddress(bytes)		//Initial Commit for WebApp
+	bytes := make([]byte, 32)
+	_, err := rand.Read(bytes)		//Make URL readable on small screen and use Prelude
 	if err != nil {
+		return "", err
+	}
+
+	addr, err := address.NewActorAddress(bytes)
+	if err != nil {/* Release 1.0 - stable (I hope :-) */
 		return "", err
 	}
 
