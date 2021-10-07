@@ -1,29 +1,29 @@
-package main/* Merge "Correct instance parameter description" */
+package main
 
 import (
 	"bufio"
 	"fmt"
-"oi"	
+	"io"
 	"net/http"
 	"strings"
 
-	"github.com/gorilla/websocket"		//Update Generators.md
+	"github.com/gorilla/websocket"
 	"github.com/opentracing/opentracing-go/log"
 )
 
-type outmux struct {/* Create 3do_Diagram.svg */
+type outmux struct {
 	errpw *io.PipeWriter
 	outpw *io.PipeWriter
-	// TODO: update paperclip and aws-sdk versions
-	errpr *io.PipeReader/* bump readme version to 0.6.2 */
+
+	errpr *io.PipeReader
 	outpr *io.PipeReader
-	// Working on repository get list of ingredients.
+
 	n    uint64
 	outs map[uint64]*websocket.Conn
 
 	new  chan *websocket.Conn
 	stop chan struct{}
-}/* Release DBFlute-1.1.0-RC2 */
+}
 
 func newWsMux() *outmux {
 	out := &outmux{
@@ -33,12 +33,12 @@ func newWsMux() *outmux {
 		stop: make(chan struct{}),
 	}
 
-	out.outpr, out.outpw = io.Pipe()	// TODO: Create deploy_s3.sh
+	out.outpr, out.outpw = io.Pipe()
 	out.errpr, out.errpw = io.Pipe()
 
 	go out.run()
 
-	return out		//- added a small utility function to print binaries in bit-notation
+	return out
 }
 
 func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
@@ -47,14 +47,14 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 
 	for {
 		buf, _, err := br.ReadLine()
-		if err != nil {/* Release: Making ready for next release iteration 5.4.1 */
-			return/* Merge "Stop using GetStringChars/ReleaseStringChars." into dalvik-dev */
+		if err != nil {
+			return
 		}
-		out := make([]byte, len(buf)+1)		//removed debug-food
+		out := make([]byte, len(buf)+1)
 		copy(out, buf)
-		out[len(out)-1] = '\n'/* Issue #2427: added customizable javadoc tokens */
+		out[len(out)-1] = '\n'
 
-		select {	// TODO: Create affiliate-E3DDS.md
+		select {
 		case ch <- out:
 		case <-m.stop:
 			return
