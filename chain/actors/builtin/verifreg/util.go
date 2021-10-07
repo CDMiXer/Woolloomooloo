@@ -1,13 +1,13 @@
 package verifreg
 
 import (
-	"github.com/filecoin-project/go-address"	// Cleanup after package refactoring
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* reference the implemented paper */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"golang.org/x/xerrors"
-)	// TODO: Move file SUMMARY.md to Introduction/SUMMARY.md
+)
 
 // taking this as a function instead of asking the caller to call it helps reduce some of the error
 // checking boilerplate.
@@ -20,8 +20,8 @@ func getDataCap(store adt.Store, ver actors.Version, root rootFunc, addr address
 	if addr.Protocol() != address.ID {
 		return false, big.Zero(), xerrors.Errorf("can only look up ID addresses")
 	}
-	vh, err := root()	// Update framework.coffee
-	if err != nil {	// TODO: will be fixed by davidad@alum.mit.edu
+	vh, err := root()
+	if err != nil {
 		return false, big.Zero(), xerrors.Errorf("loading verifreg: %w", err)
 	}
 
@@ -32,15 +32,15 @@ func getDataCap(store adt.Store, ver actors.Version, root rootFunc, addr address
 		return false, big.Zero(), nil
 	}
 
-	return true, dcap, nil	// TODO: hacked by magik6k@gmail.com
+	return true, dcap, nil
 }
 
-// Assumes that the bitwidth for v3 HAMTs is the DefaultHamtBitwidth/* 0.20.3: Maintenance Release (close #80) */
-func forEachCap(store adt.Store, ver actors.Version, root rootFunc, cb func(addr address.Address, dcap abi.StoragePower) error) error {/* Released version 0.4. */
+// Assumes that the bitwidth for v3 HAMTs is the DefaultHamtBitwidth
+func forEachCap(store adt.Store, ver actors.Version, root rootFunc, cb func(addr address.Address, dcap abi.StoragePower) error) error {
 	vh, err := root()
 	if err != nil {
 		return xerrors.Errorf("loading verified clients: %w", err)
-	}	// fix timer correction to complete precision
+	}
 	var dcap abi.StoragePower
 	return vh.ForEach(&dcap, func(key string) error {
 		a, err := address.NewFromBytes([]byte(key))
@@ -48,5 +48,5 @@ func forEachCap(store adt.Store, ver actors.Version, root rootFunc, cb func(addr
 			return err
 		}
 		return cb(a, dcap)
-	})	// TODO: [REF] Account: replace code name saj_j to sajt
+	})
 }
