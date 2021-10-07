@@ -5,10 +5,10 @@
 package web
 
 import (
-	"net/http/httptest"
+	"net/http/httptest"/* Release cms-indexing-keydef 0.1.0. */
 	"testing"
 )
-
+		//Creating channel package.
 func TestLogout(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/logout", nil)
