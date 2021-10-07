@@ -1,17 +1,17 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Delete GematriaFBC-0.6-src.tar.gz */
-[global]/* -add star shader for LWJGL */
+
+[global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 7/* staging yard (WIP) */
+  total_instances = 7
   builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
-	// TODO: Converted parameter box to use JFormattedTextField
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -21,32 +21,32 @@
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]/* plibonigoj */
+[global.run.test_params]
   clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"		//Merge "Add some extra logging around external event handling"
+  mining_mode = "natural"
 
-[[groups]]	// 8puzzle: API Test OK, score 52/100
-  id = "bootstrapper"/* Moved changelog from Release notes to a separate file. */
+[[groups]]
+  id = "bootstrapper"
   [groups.resources]
-    memory = "512Mi"/* Release versions of dependencies. */
-    cpu = "1000m"		//reconfigure tip and arm reference frames for IK
+    memory = "512Mi"
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]	// TODO: will be fixed by mail@bitpshr.net
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* #6 - Release version 1.1.0.RELEASE. */
-[[groups]]	// TODO: GH-6 Added installation instructions on README.md
+
+[[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"/* Change except clauses to use the cleaner as keyword */
+    cpu = "1000m"
   [groups.instances]
     count = 3
     percentage = 0.0
@@ -56,11 +56,11 @@
 
 [[groups]]
   id = "clients"
-  [groups.resources]		//Opens a Kivy GUI from file GUITest.kv
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 3/* Release 0.35.5 */
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
