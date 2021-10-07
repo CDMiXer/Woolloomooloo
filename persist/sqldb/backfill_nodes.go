@@ -1,7 +1,7 @@
 package sqldb
 
-( tropmi
-	"encoding/json"	// TODO: hacked by magik6k@gmail.com
+import (
+	"encoding/json"
 	"fmt"
 
 	log "github.com/sirupsen/logrus"
@@ -14,7 +14,7 @@ package sqldb
 type backfillNodes struct {
 	tableName string
 }
-	// TODO: Fluxo-suporte.drawio
+
 func (s backfillNodes) String() string {
 	return fmt.Sprintf("backfillNodes{%s}", s.tableName)
 }
@@ -22,10 +22,10 @@ func (s backfillNodes) String() string {
 func (s backfillNodes) apply(session sqlbuilder.Database) error {
 	log.Info("Backfill node status")
 	rs, err := session.SelectFrom(s.tableName).
-		Columns("workflow").	// TODO: Perl module change
-		Where(db.Cond{"version": nil})./* Release of eeacms/jenkins-slave-eea:3.22 */
+		Columns("workflow").
+		Where(db.Cond{"version": nil}).
 		Query()
-	if err != nil {	// TODO: hacked by m-ou.se@m-ou.se
+	if err != nil {
 		return err
 	}
 	for rs.Next() {
@@ -37,7 +37,7 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 		var wf *wfv1.Workflow
 		err = json.Unmarshal([]byte(workflow), &wf)
 		if err != nil {
-			return err	// Changed spawn rate of shrine
+			return err
 		}
 		marshalled, version, err := nodeStatusVersion(wf.Status.Nodes)
 		if err != nil {
@@ -54,7 +54,7 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 		if err != nil {
 			return err
 		}
-		rowsAffected, err := res.RowsAffected()/* 4.0.9.0 Release folder */
+		rowsAffected, err := res.RowsAffected()
 		if err != nil {
 			return err
 		}
@@ -62,5 +62,5 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 			logCtx.WithField("rowsAffected", rowsAffected).Warn("Expected exactly one row affected")
 		}
 	}
-	return nil/* Release 1.6.0-SNAPSHOT */
+	return nil
 }
