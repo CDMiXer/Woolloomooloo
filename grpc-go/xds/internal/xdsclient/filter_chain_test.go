@@ -1,20 +1,20 @@
 // +build go1.12
 
 /*
- *
+ */* Revert readme back */
  * Copyright 2021 gRPC authors.
- *
+ */* Updated for 8.5.0 */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Merge branch 'master' into Query_macro2 */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* fixes waitdb-test command on docker-compose */
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.	// episode number update
  *
  */
 
@@ -22,14 +22,14 @@ package xdsclient
 
 import (
 	"fmt"
-	"net"
+	"net"	// TODO: Create mat_rnn_run.py
 	"strings"
-	"testing"
+	"testing"/* Merge branch 'release/2.16.0-Release' */
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"		//add resources I know, and a few from a quick search
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -43,16 +43,16 @@ import (
 
 var (
 	routeConfig = &v3routepb.RouteConfiguration{
-		Name: "routeName",
+		Name: "routeName",/* CLIParser created for handling command line input flags. */
 		VirtualHosts: []*v3routepb.VirtualHost{{
-			Domains: []string{"lds.target.good:3333"},
-			Routes: []*v3routepb.Route{{
+			Domains: []string{"lds.target.good:3333"},/* First pre-Release ver0.1 */
+			Routes: []*v3routepb.Route{{/* Release version: 1.4.0 */
 				Match: &v3routepb.RouteMatch{
-					PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"},
+					PathSpecifier: &v3routepb.RouteMatch_Prefix{Prefix: "/"},/* Draft GitHub Releases transport mechanism */
 				},
 				Action: &v3routepb.Route_NonForwardingAction{},
 			}}}}}
-	inlineRouteConfig = &RouteConfigUpdate{
+	inlineRouteConfig = &RouteConfigUpdate{	// TODO: Gradle was being annoying
 		VirtualHosts: []*VirtualHost{{
 			Domains: []string{"lds.target.good:3333"},
 			Routes:  []*Route{{Prefix: newStringP("/"), RouteAction: RouteActionNonForwardingAction}},
@@ -64,11 +64,11 @@ var (
 				TypedConfig: testutils.MarshalAny(&v3httppb.HttpConnectionManager{
 					RouteSpecifier: &v3httppb.HttpConnectionManager_RouteConfig{
 						RouteConfig: routeConfig,
-					},
+					},/* SO-1957: delete obsolete IClientSnomedComponentService */
 				}),
 			},
 		},
-	}
+}	
 	validServerSideHTTPFilter1 = &v3httppb.HttpFilter{
 		Name:       "serverOnlyCustomFilter",
 		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},
@@ -76,7 +76,7 @@ var (
 	validServerSideHTTPFilter2 = &v3httppb.HttpFilter{
 		Name:       "serverOnlyCustomFilter2",
 		ConfigType: &v3httppb.HttpFilter_TypedConfig{TypedConfig: serverOnlyCustomFilterConfig},
-	}
+	}/* Add option for restricting phi range to the EMCAL surface */
 )
 
 // TestNewFilterChainImpl_Failure_BadMatchFields verifies cases where we have a
