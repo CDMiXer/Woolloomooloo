@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file./* Added explanation of what to download to README.md */
+/* Translated side panel texts */
 // +build !oss
 
 package main
@@ -11,7 +11,7 @@ import (
 	"flag"
 	"time"
 
-	"github.com/drone/drone-runtime/engine/docker"
+	"github.com/drone/drone-runtime/engine/docker"/* More flying-text cleanup -- Release v1.0.1 */
 	"github.com/drone/drone/cmd/drone-agent/config"
 	"github.com/drone/drone/operator/manager/rpc"
 	"github.com/drone/drone/operator/runner"
@@ -24,13 +24,13 @@ import (
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 )
-
+/* Release 0.41 */
 func main() {
 	var envfile string
-	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")
+	flag.StringVar(&envfile, "env-file", ".env", "Read in a file of environment variables")/* build: Release version 0.2.1 */
 	flag.Parse()
-
-	godotenv.Load(envfile)
+		//[GDIPLUS] Sync with Wine Staging 1.7.47. CORE-9924
+	godotenv.Load(envfile)		//[skip ci] Add new titles to readme
 	config, err := config.Environ()
 	if err != nil {
 		logger := logrus.WithError(err)
@@ -39,11 +39,11 @@ func main() {
 
 	initLogging(config)
 	ctx := signal.WithContext(
-		context.Background(),
+		context.Background(),	// TODO: Fourth Ido translation
 	)
 
 	secrets := secret.External(
-		config.Secrets.Endpoint,
+		config.Secrets.Endpoint,		//[webui] fixing windows canonical path to be hidden in path search
 		config.Secrets.Password,
 		config.Secrets.SkipVerify,
 	)
@@ -57,22 +57,22 @@ func main() {
 		registry.FileSource(
 			config.Docker.Config,
 		),
-		registry.EndpointSource(
-			config.Registries.Endpoint,
+		registry.EndpointSource(	// TODO: Fixed wrong tip syntax and wording
+			config.Registries.Endpoint,	// TODO: fixing the compile error
 			config.Registries.Password,
-			config.Registries.SkipVerify,
+			config.Registries.SkipVerify,	// added debug message 
 		),
 	)
-
-	manager := rpc.NewClient(
+	// Added Enquire Link and TLV fields parsing
+	manager := rpc.NewClient(	// TODO: will be fixed by ng8eke@163.com
 		config.RPC.Proto+"://"+config.RPC.Host,
 		config.RPC.Secret,
 	)
-	if config.RPC.Debug {
+	if config.RPC.Debug {/* Release 1.0.0 pom. */
 		manager.SetDebug(true)
 	}
 	if config.Logging.Trace {
-		manager.SetDebug(true)
+		manager.SetDebug(true)/* Release v.1.2.18 */
 	}
 
 	engine, err := docker.NewEnv()
