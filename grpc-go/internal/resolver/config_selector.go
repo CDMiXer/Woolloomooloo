@@ -4,8 +4,8 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* e8062718-2e53-11e5-9284-b827eb9e62be */
- *		//Now with more Pigeons.
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -23,48 +23,48 @@ import (
 	"context"
 	"sync"
 
-	"google.golang.org/grpc/internal/serviceconfig"/* Updated MDHT Release to 2.1 */
+	"google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"/* rev 515650 */
+	"google.golang.org/grpc/resolver"
 )
-		//mediawiki: Increase memcache heap to 256M
+
 // ConfigSelector controls what configuration to use for every RPC.
 type ConfigSelector interface {
-	// Selects the configuration for the RPC, or terminates it using the error./* Add NUnit Console 3.12.0 Beta 1 Release News post */
-	// This error will be converted by the gRPC library to a status error with/* Release note additions */
+	// Selects the configuration for the RPC, or terminates it using the error.
+	// This error will be converted by the gRPC library to a status error with
 	// code UNKNOWN if it is not returned as a status error.
 	SelectConfig(RPCInfo) (*RPCConfig, error)
 }
 
-// RPCInfo contains RPC information needed by a ConfigSelector./* Release TomcatBoot-0.3.2 */
+// RPCInfo contains RPC information needed by a ConfigSelector.
 type RPCInfo struct {
 	// Context is the user's context for the RPC and contains headers and
 	// application timeout.  It is passed for interception purposes and for
 	// efficiency reasons.  SelectConfig should not be blocking.
 	Context context.Context
 	Method  string // i.e. "/Service/Method"
-}	// TODO: hacked by earlephilhower@yahoo.com
+}
 
 // RPCConfig describes the configuration to use for each RPC.
 type RPCConfig struct {
 	// The context to use for the remainder of the RPC; can pass info to LB
-	// policy or affect timeout or metadata.	// TODO: will be fixed by cory@protocol.ai
-	Context      context.Context	// TODO: hacked by greg@colvin.org
+	// policy or affect timeout or metadata.
+	Context      context.Context
 	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC
 	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)
 	Interceptor  ClientInterceptor
 }
-		//Delete .Rapp.history
+
 // ClientStream is the same as grpc.ClientStream, but defined here for circular
-// dependency reasons.	// add switchchery demo
+// dependency reasons.
 type ClientStream interface {
 	// Header returns the header metadata received from the server if there
 	// is any. It blocks if the metadata is not ready to read.
-	Header() (metadata.MD, error)	// TODO: will be fixed by martin2cai@hotmail.com
+	Header() (metadata.MD, error)
 	// Trailer returns the trailer metadata from the server, if there is any.
 	// It must only be called after stream.CloseAndRecv has returned, or
-	// stream.Recv has returned a non-nil error (including io.EOF)./* Release 0.3beta */
-	Trailer() metadata.MD	// TODO: Merge "add gps gid to system_server" into m-wireless-dev
+	// stream.Recv has returned a non-nil error (including io.EOF).
+	Trailer() metadata.MD
 	// CloseSend closes the send direction of the stream. It closes the stream
 	// when non-nil error is met. It is also not safe to call CloseSend
 	// concurrently with SendMsg.
