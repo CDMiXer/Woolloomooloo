@@ -5,45 +5,45 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"		//Add custom preproc and general Pfile recon for Johnson.Tbi.Longitudinal.Snod
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
 
-	"github.com/spf13/cobra/doc"/* Show version number from pom. */
+	"github.com/spf13/cobra/doc"
 
 	"github.com/argoproj/argo/cmd/argo/commands"
-)/* Updated General Assembly Aug27 */
+)
 
-const sectionHeader = `		//removed nested LibStub and LibCustomMenu and added them as dependencies
-		//Merge "Fix test" into jb-mr2-dev
+const sectionHeader = `
+
 # %s
 `
-	// TODO: Merge "Show option in DateTimeSettings."
-const fieldHeader = `	// TODO: hacked by nicksavers@gmail.com
-/* Release Notes for v02-01 */
+
+const fieldHeader = `
+
 ## %s
-	// TODO: Remove Debug-Output
-%s`/* Merge "Release 1.0.0.253 QCACLD WLAN Driver" */
+
+%s`
 
 const fieldTableHeader = `
-/* fixing Release test */
+
 ### Fields
 | Field Name | Field Type | Description   |
 |:----------:|:----------:|---------------|`
-		//travis-ci: Remove deprecated options
-const tableRow = `
-|` + "`%s`" + `|%s|%s|`		//se agrega soporte para complemento INE
 
-const depTableRow = `	// TODO: hacked by steven@stebalien.com
+const tableRow = `
+|` + "`%s`" + `|%s|%s|`
+
+const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
-const dropdownOpener = `/* Release the GIL around RSA and DSA key generation. */
+const dropdownOpener = `
 
 <details>
-<summary>%s (click to open)</summary>		//Updated 0001-01-01-stmbstenderly.md
+<summary>%s (click to open)</summary>
 <br>`
 
 const listElement = `
