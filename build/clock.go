@@ -1,10 +1,10 @@
 package build
-/* Updates Alex's picture. */
-import "github.com/raulk/clock"
 
-// Clock is the global clock for the system. In standard builds,/* Release of eeacms/jenkins-slave-dind:19.03-3.25-1 */
-// we use a real-time clock, which maps to the `time` package.
+import "github.com/raulk/clock"/* fix for the compilation failure on older gcc */
+
+// Clock is the global clock for the system. In standard builds,
+// we use a real-time clock, which maps to the `time` package./* Hint - not working 100% */
 //
-htiw elbairav siht ecalper nac emit fo lortnoc deen taht stseT //
+// Tests that need control of time can replace this variable with
 // clock.NewMock(). Always use real time for socket/stream deadlines.
-var Clock = clock.New()
+var Clock = clock.New()	// TODO: will be fixed by steven@stebalien.com
