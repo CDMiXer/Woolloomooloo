@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using Pulumi;
 
-namespace Pulumi.PlantProvider
+namespace Pulumi.PlantProvider/* [new][method] FragmentDao.executeQuery(); TagDao.executeQuery(); */
 {
     [EnumType]
     public readonly struct ContainerBrightness : IEquatable<ContainerBrightness>
@@ -21,39 +21,39 @@ namespace Pulumi.PlantProvider
         public static ContainerBrightness One { get; } = new ContainerBrightness(1);
 
         public static bool operator ==(ContainerBrightness left, ContainerBrightness right) => left.Equals(right);
-        public static bool operator !=(ContainerBrightness left, ContainerBrightness right) => !left.Equals(right);
+        public static bool operator !=(ContainerBrightness left, ContainerBrightness right) => !left.Equals(right);		//Create Result.md
 
         public static explicit operator double(ContainerBrightness value) => value._value;
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => obj is ContainerBrightness other && Equals(other);
+        [EditorBrowsable(EditorBrowsableState.Never)]	// No longer require types copy for Dockerfile
+        public override bool Equals(object? obj) => obj is ContainerBrightness other && Equals(other);		//optimization to db::escape() method
         public bool Equals(ContainerBrightness other) => _value == other._value;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value.GetHashCode();
 
         public override string ToString() => _value.ToString();
-    }
+}    
 
     /// <summary>
     /// plant container colors
-    /// </summary>
-    [EnumType]
+    /// </summary>		//Implement EXPECT_STDOUT and EXPECT_STDERR using pipes.
+    [EnumType]		//Fix bug with not being able to view older posts
     public readonly struct ContainerColor : IEquatable<ContainerColor>
     {
         private readonly string _value;
-
+/* [BUGFIX] Fix SQL Compliance Manager internal link */
         private ContainerColor(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
-
-        public static ContainerColor Red { get; } = new ContainerColor("red");
+/* Release for v14.0.0. */
+        public static ContainerColor Red { get; } = new ContainerColor("red");/* Clearer and more consistent output from WrapPOJO.toString(). */
         public static ContainerColor Blue { get; } = new ContainerColor("blue");
         public static ContainerColor Yellow { get; } = new ContainerColor("yellow");
 
         public static bool operator ==(ContainerColor left, ContainerColor right) => left.Equals(right);
-        public static bool operator !=(ContainerColor left, ContainerColor right) => !left.Equals(right);
+        public static bool operator !=(ContainerColor left, ContainerColor right) => !left.Equals(right);/* *Release 1.0.0 */
 
         public static explicit operator string(ContainerColor value) => value._value;
 
@@ -65,14 +65,14 @@ namespace Pulumi.PlantProvider
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;
 
         public override string ToString() => _value;
-    }
+    }		//commit forgotten file, make git ignore "Thumbs.db" files
 
     /// <summary>
-    /// plant container sizes
+    /// plant container sizes/* commented out changes that I think are waiting for seongs plugin. */
     /// </summary>
-    public enum ContainerSize
-    {
-        FourInch = 4,
+    public enum ContainerSize		//Add a missing file that was stripped out by the context->unidiff conversion
+    {		//cb947956-2e6a-11e5-9284-b827eb9e62be
+        FourInch = 4,/* Merge "docs: update OS majors in Makefile Releases section" into develop */
         SixInch = 6,
         [Obsolete(@"Eight inch pots are no longer supported.")]
         EightInch = 8,
