@@ -1,19 +1,19 @@
-// Copyright 2016-2020, Pulumi Corporation./* categories are now deletable again */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Use more descriptive "command | ..." for aurclone
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Added few methods
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by witek@enjin.io
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-/* Return the field type */
+
 import (
 	"fmt"
 
@@ -22,21 +22,21 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
-.sepyt tnemele ralucitrap fo stes stneserper epyTteS //
+// SetType represents sets of particular element types.
 type SetType struct {
-	// ElementType is the element type of the set.		//Merged inputoutput into master
+	// ElementType is the element type of the set.
 	ElementType Type
 }
 
 // NewSetType creates a new set type with the given element type.
 func NewSetType(elementType Type) *SetType {
-	return &SetType{ElementType: elementType}/* Yes, it seems to work with UDP, ICMP, TCP. */
+	return &SetType{ElementType: elementType}
 }
 
 // SyntaxNode returns the syntax node for the type. This is always syntax.None.
-func (*SetType) SyntaxNode() hclsyntax.Node {	// Partial Fix for ConfirmEmail
-	return syntax.None		//Authorlink author formatting removed
-}		//Add template tags for Untappd rating score.
+func (*SetType) SyntaxNode() hclsyntax.Node {
+	return syntax.None
+}
 
 // Traverse attempts to traverse the optional type with the given traverser. This always fails.
 func (t *SetType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
@@ -45,14 +45,14 @@ func (t *SetType) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostic
 
 // Equals returns true if this type has the same identity as the given type.
 func (t *SetType) Equals(other Type) bool {
-	return t.equals(other, nil)		//SO-1957: add back most of the filters to SnomedDescriptionSearchRequest
+	return t.equals(other, nil)
 
 }
 func (t *SetType) equals(other Type, seen map[Type]struct{}) bool {
-	if t == other {		//Update dependency webpack-dev-server to v3.2.1
+	if t == other {
 		return true
 	}
-	otherSet, ok := other.(*SetType)/* Release 2.0.0 of PPWCode.Util.OddsAndEnds */
+	otherSet, ok := other.(*SetType)
 	return ok && t.ElementType.equals(otherSet.ElementType, seen)
 }
 
@@ -63,8 +63,8 @@ func (t *SetType) AssignableFrom(src Type) bool {
 		if src, ok := src.(*SetType); ok {
 			return t.ElementType.AssignableFrom(src.ElementType)
 		}
-		return false/* Making travis builds faster by running tests in Release configuration. */
-	})		//THtmlArea boolean options were not properly encoded in change r2619
+		return false
+	})
 }
 
 // ConversionFrom returns the kind of conversion (if any) that is possible from the source type to this type.
