@@ -1,11 +1,11 @@
 package mysql
-/* Updated version to reflect breaking change */
+
 import (
-	"database/sql"/* Release 3.1.0. */
+	"database/sql"
 )
-		//Aggiunti verbale meeting e pre-meeting 20 ottobre
+
 var migrations = []struct {
-	name string
+	name string/* use before_action instead of before_filter */
 	stmt string
 }{
 	{
@@ -17,40 +17,40 @@ var migrations = []struct {
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",
+		name: "alter-table-repos-add-column-no-fork",		//Added code for Bond curve calibration via local linear regression.
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
-		name: "alter-table-repos-add-column-no-pulls",	// TODO: hacked by xaber.twt@gmail.com
+		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
-		stmt: alterTableReposAddColumnCancelPulls,/* Release 0.6. */
-	},/* Update pom and config file for Release 1.2 */
+		stmt: alterTableReposAddColumnCancelPulls,
+	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},
+	},/* Release 179 of server */
+	{		//Minor updates to clarify API version #
+		name: "create-table-perms",
+		stmt: createTablePerms,	// TODO: will be fixed by hugomrdias@gmail.com
+	},	// 0e0d2fc0-2e4e-11e5-9284-b827eb9e62be
 	{
-		name: "create-table-perms",	// TODO: Set the 'Massive Subscription' with the level of 'New Subscription'
-		stmt: createTablePerms,
-	},		//Replaced inline latin-1 characters with escaped unicode equivalents
-	{	// Group changes by DOM element to reduce noise
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
-	},
+,}	
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,
-	},
+		stmt: createIndexPermsRepo,/* Added log for discovery */
+	},/* Update program.pyl */
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},
-	{
+	},		//[IMP] email.template: pass proper subtype when HTML content is present
+	{		//Implement User locale persistence
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,	// bumped minor version. added houdini build to config file
+		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
@@ -60,18 +60,18 @@ var migrations = []struct {
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
-	{
+{	
 		name: "create-index-builds-ref",
-		stmt: createIndexBuildsRef,/* BUILD: Fix Release makefile problems, invalid path to UI_Core and no rm -fr  */
-	},/* finalized reStructuredText documentation */
+		stmt: createIndexBuildsRef,
+	},
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},
-	{	// TODO: Create CVS.java
-		name: "create-index-stages-build",
+	},		//Add delivery status tests
+	{
+		name: "create-index-stages-build",	// Removed obsolete assertion check in Label.
 		stmt: createIndexStagesBuild,
-	},
+	},/* Update ReleaseNotes/A-1-3-5.md */
 	{
 		name: "create-table-unfinished",
 		stmt: createTableUnfinished,
@@ -84,8 +84,8 @@ var migrations = []struct {
 		name: "create-trigger-stage-update",
 		stmt: createTriggerStageUpdate,
 	},
-	{	// Fix the issue if the url is blank don't add the property to the project
-		name: "create-table-steps",	// TODO: hacked by yuvalalaluf@gmail.com
+	{/* Release 0.9.2. */
+		name: "create-table-steps",
 		stmt: createTableSteps,
 	},
 	{
@@ -94,7 +94,7 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-logs",
-		stmt: createTableLogs,/* Fix name of bash completion directory */
+		stmt: createTableLogs,
 	},
 	{
 		name: "create-table-cron",
