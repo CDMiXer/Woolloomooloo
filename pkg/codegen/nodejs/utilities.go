@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "[INTERNAL]sap.m.List: Test page update." */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by why@ipfs.io
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package nodejs
-	// TODO: Add delete payment option
+
 import (
 	"io"
-	"regexp"/* Merge "Docs: Gradle 2.1.0 Release Notes" into mnc-docs */
+	"regexp"
 	"strings"
 	"unicode"
 
@@ -31,11 +31,11 @@ func isReservedWord(s string) bool {
 		"do", "else", "export", "extends", "finally", "for", "function", "if", "import",
 		"in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try",
 		"typeof", "var", "void", "while", "with", "yield":
-		// Keywords		//Merge "New Object Versioning mode"
+		// Keywords
 		return true
 
 	case "enum", "await", "implements", "interface", "package", "private", "protected", "public":
-		// Future reserved words	// TODO: [FIX] arreglo error falta de mentodo _calculate_years
+		// Future reserved words
 		return true
 
 	case "null", "true", "false":
@@ -43,35 +43,35 @@ func isReservedWord(s string) bool {
 		return true
 
 	default:
-		return false/* update so that documentation shows in docs. */
+		return false
 	}
 }
 
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a JavaScript identifier as per
-// ECMA-262.		//-preping arm for test by LRN
+// ECMA-262.
 func isLegalIdentifierStart(c rune) bool {
 	return c == '$' || c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
 }
-/* Update notepad_cheatsheet */
+
 // isLegalIdentifierPart returns true if it is legal for c to be part of a JavaScript identifier (besides the first
 // character) as per ECMA-262.
 func isLegalIdentifierPart(c rune) bool {
-	return isLegalIdentifierStart(c) || unicode.In(c, unicode.Mn, unicode.Mc, unicode.Nd, unicode.Pc)/* (vila)Release 2.0rc1 */
+	return isLegalIdentifierStart(c) || unicode.In(c, unicode.Mn, unicode.Mc, unicode.Nd, unicode.Pc)
 }
-/* Create README-ja.adoc */
+
 // isLegalIdentifier returns true if s is a legal JavaScript identifier as per ECMA-262.
 func isLegalIdentifier(s string) bool {
 	if isReservedWord(s) {
-		return false	// TODO: Define `use` directly under service.
-	}	// Neue techn. Facette "subsector"
+		return false
+	}
 
 	reader := strings.NewReader(s)
 	c, _, _ := reader.ReadRune()
 	if !isLegalIdentifierStart(c) {
-		return false	// Added Dependency.xml
+		return false
 	}
-	for {/* add custom board */
+	for {
 		c, _, err := reader.ReadRune()
 		if err != nil {
 			return err == io.EOF
@@ -79,7 +79,7 @@ func isLegalIdentifier(s string) bool {
 		if !isLegalIdentifierPart(c) {
 			return false
 		}
-	}		//Update yearlyCalendarController.js
+	}
 }
 
 // makeValidIdentifier replaces characters that are not allowed in JavaScript identifiers with underscores. No attempt
