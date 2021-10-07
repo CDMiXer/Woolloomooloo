@@ -1,10 +1,10 @@
-import pulumi
+import pulumi/* Merge "Colorado Release note" */
+	// Added start of cairo draw library.
+config = pulumi.Config()
 
-config = pulumi.Config()	// TODO: hacked by davidad@alum.mit.edu
-
-exporterStackName = config.require('exporter_stack_name')		//fixed mex struct bug and removed check for timezone 
+exporterStackName = config.require('exporter_stack_name')
 org = config.require('org')
 a = pulumi.StackReference(f'{org}/exporter/{exporterStackName}')
 
-pulumi.export('val1', a.require_output('val'))	// TODO: hacked by brosner@gmail.com
-pulumi.export('val2', pulumi.Output.secret(['d', 'x']))/* topcode problem */
+pulumi.export('val1', a.require_output('val'))		//added email service test
+pulumi.export('val2', pulumi.Output.secret(['d', 'x']))
