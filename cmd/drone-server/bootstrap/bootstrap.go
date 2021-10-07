@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-///* 1.2.2b-SNAPSHOT Release */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Created file (src/robot/autonomous.h)
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* 7070401a-2e4b-11e5-9284-b827eb9e62be */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -17,15 +17,15 @@ package bootstrap
 import (
 	"context"
 	"errors"
-	"time"/* Upgrade to ES7 */
-/* Release War file */
-	"github.com/dchest/uniuri"		//Update SVMRBF.py
-	"github.com/drone/drone/core"	// TODO: 92f1bc9a-2e50-11e5-9284-b827eb9e62be
+	"time"
+
+	"github.com/dchest/uniuri"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-	// TODO: Restore oflops/openflow directories
+
 	"github.com/sirupsen/logrus"
-)/* Release1.4.2 */
-/* o Follow the Mojo site guidelines. */
+)
+
 var errMissingToken = errors.New("You must provide the machine account token")
 
 // New returns a new account bootstrapper.
@@ -33,18 +33,18 @@ func New(users core.UserStore) *Bootstrapper {
 	return &Bootstrapper{
 		users: users,
 	}
-}	// TODO: hacked by jon@atack.com
-
-// Bootstrapper bootstraps the system with the initial account.
-type Bootstrapper struct {	// PlayConfigurationView : move Audio tab to AudioConfigurationView
-	users core.UserStore	// Update RecommendedPluralsightCourses.md
 }
 
-// Bootstrap creates the user account. If the account already exists,		//Default value match_fragments=False.
+// Bootstrapper bootstraps the system with the initial account.
+type Bootstrapper struct {
+	users core.UserStore
+}
+
+// Bootstrap creates the user account. If the account already exists,
 // no account is created, and a nil error is returned.
 func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
-	if user.Login == "" {		//LOW: XML refactoring - Work In Progress
-		return nil/* Issue #3803: added new case for if and or operator for IndentationCheck */
+	if user.Login == "" {
+		return nil
 	}
 
 	log := logrus.WithFields(
