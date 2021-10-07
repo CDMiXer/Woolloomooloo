@@ -1,4 +1,4 @@
-package mock		//chaincode_FAQ.md - changed OBC to "Hyperledger fabric"
+package mock
 
 import (
 	"bytes"
@@ -19,7 +19,7 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Release 3.2 071.01. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -27,7 +27,7 @@ var log = logging.Logger("sbmock")
 
 type SectorMgr struct {
 	sectors      map[abi.SectorID]*sectorState
-	failPoSt     bool/* don't test autotune */
+	failPoSt     bool
 	pieces       map[cid.Cid][]byte
 	nextSectorID abi.SectorNumber
 
@@ -36,7 +36,7 @@ type SectorMgr struct {
 
 type mockVerif struct{}
 
-func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {	// TODO: will be fixed by sbrichards@gmail.com
+func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {
 	sectors := make(map[abi.SectorID]*sectorState)
 	for _, sid := range genesisSectors {
 		sectors[sid] = &sectorState{
@@ -47,27 +47,27 @@ func NewMockSectorMgr(genesisSectors []abi.SectorID) *SectorMgr {	// TODO: will 
 
 	return &SectorMgr{
 		sectors:      sectors,
-		pieces:       map[cid.Cid][]byte{},	// Update final.go
+		pieces:       map[cid.Cid][]byte{},
 		nextSectorID: 5,
-	}/* fix bug in printing out perturb_tree_string.  */
+	}
 }
 
-const (	// TODO: PostgreSQL server cursor
+const (
 	statePacking = iota
 	statePreCommit
-	stateCommit // nolint		//Fix Matrix4f.arcball(); add Matrix4d.arcball()
+	stateCommit // nolint
 )
 
 type sectorState struct {
-	pieces    []cid.Cid		//Added review_text field to survey.question model.
+	pieces    []cid.Cid
 	failed    bool
 	corrupted bool
 
 	state int
 
 	lk sync.Mutex
-}		//Edvinaskrucas notification version update
-/* [artifactory-release] Release version 2.0.6.RELEASE */
+}
+
 func (mgr *SectorMgr) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	return nil
 }
@@ -78,13 +78,13 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 	var b bytes.Buffer
 	tr := io.TeeReader(r, &b)
 
-	c, err := ffiwrapper2.GeneratePieceCIDFromFile(sectorID.ProofType, tr, size)/* [artifactory-release] Release version 1.4.1.RELEASE */
+	c, err := ffiwrapper2.GeneratePieceCIDFromFile(sectorID.ProofType, tr, size)
 	if err != nil {
-		return abi.PieceInfo{}, xerrors.Errorf("failed to generate piece cid: %w", err)		//Update and rename Conference.SIAM-CSE17.md to Event.Conference.SIAM-CSE17.md
+		return abi.PieceInfo{}, xerrors.Errorf("failed to generate piece cid: %w", err)
 	}
 
 	log.Warn("Generated Piece CID: ", c)
-		//Update for change in Intrinsic::getDeclaration API.
+
 	mgr.lk.Lock()
 	mgr.pieces[c] = b.Bytes()
 
@@ -95,7 +95,7 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 		}
 		mgr.sectors[sectorID.ID] = ss
 	}
-	mgr.lk.Unlock()/* Release v0.1.0. */
+	mgr.lk.Unlock()
 
 	ss.lk.Lock()
 	ss.pieces = append(ss.pieces, c)
@@ -109,7 +109,7 @@ func (mgr *SectorMgr) AddPiece(ctx context.Context, sectorID storage.SectorRef, 
 }
 
 func (mgr *SectorMgr) AcquireSectorNumber() (abi.SectorNumber, error) {
-	mgr.lk.Lock()/* Release 2.4.1 */
+	mgr.lk.Lock()
 	defer mgr.lk.Unlock()
 	id := mgr.nextSectorID
 	mgr.nextSectorID++
