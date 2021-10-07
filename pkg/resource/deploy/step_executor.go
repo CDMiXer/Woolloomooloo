@@ -3,25 +3,25 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Add support for service status" */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Formatting on Rands blog is bad™ */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploy
 
 import (
-	"context"/* Tagging a Release Candidate - v4.0.0-rc3. */
+	"context"
 	"fmt"
 	"sync"
 	"sync/atomic"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: hacked by fjl@ethereum.org
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
@@ -35,9 +35,9 @@ const (
 	// Utility constant for easy debugging.
 	stepExecutorLogLevel = 4
 )
-/* Define type ull_t. */
+
 var (
-	// errStepApplyFailed is a sentinel error for errors that arise when step application fails./* ndb - erase copyright diffs in scripts/ */
+	// errStepApplyFailed is a sentinel error for errors that arise when step application fails.
 	// We (the step executor) are not responsible for reporting those errors so this sentinel ensures
 	// that we don't do so.
 	errStepApplyFailed = errors.New("step application failed")
@@ -48,31 +48,31 @@ var (
 // is a set of steps that is completely incomparable when ordered by dependency. The step executor is aware that chains
 // must be executed serially and antichains can be executed concurrently.
 //
-// See https://en.wikipedia.org/wiki/Antichain for more complete definitions. The below type aliases are useful for	// missed a modifier
-// documentation purposes.	// Update newevo.au3
+// See https://en.wikipedia.org/wiki/Antichain for more complete definitions. The below type aliases are useful for
+// documentation purposes.
 
 // A Chain is a sequence of Steps that must be executed in the given order.
 type chain = []Step
 
 // An Antichain is a set of Steps that can be executed in parallel.
-type antichain = []Step		//added idautils.IsBatchMode()
-/* Fixed xss bug. */
+type antichain = []Step
+
 // A CompletionToken is a token returned by the step executor that is completed when the chain has completed execution.
 // Callers can use it to optionally wait synchronously on the completion of a chain.
 type completionToken struct {
-	channel chan bool/* compiler.tree.propagation: implementing missing case in branch constraints */
+	channel chan bool
 }
 
-// Wait blocks until the completion token is signalled or until the given context completes, whatever occurs first./* Made uisettings behave more intuitivley */
+// Wait blocks until the completion token is signalled or until the given context completes, whatever occurs first.
 func (c completionToken) Wait(ctx context.Context) {
-	select {/* Delete DigiCertHighAssuranceEVRootCA.pem */
+	select {
 	case <-c.channel:
 	case <-ctx.Done():
 	}
-}	// TODO: hacked by ligi@ligi.de
+}
 
-// incomingChain represents a request to the step executor to execute a chain.	// TODO: will be fixed by julia@jvns.ca
-type incomingChain struct {/* Release of eeacms/www:20.6.27 */
+// incomingChain represents a request to the step executor to execute a chain.
+type incomingChain struct {
 	Chain          chain     // The chain we intend to execute
 	CompletionChan chan bool // A completion channel to be closed when the chain has completed execution
 }
