@@ -9,26 +9,26 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// Fix up the http transports so that tests pass with the new configuration.
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
 
-	"github.com/golang/mock/gomock"/* Changed log level to debug when printing RAW data of received messages */
+	"github.com/golang/mock/gomock"
 )
-	// TODO: hacked by 13860583249@yeah.net
+
 var noContext = context.Background()
 
-func TestStatus(t *testing.T) {/* Deleted extra files */
+func TestStatus(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Merge remote-tracking branch 'origin/Copy_MSE_from_feedback_to_generictrace'
+	defer controller.Finish()
 
 	mockUser := &core.User{}
-/* Delete createAutoReleaseBranch.sh */
+
 	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)/* New version of Lustrous - 1.2 */
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	statusInput := &scm.StatusInput{
-		Title:  "Build #1",	// TODO: add todict + some docs
+		Title:  "Build #1",
 		State:  scm.StateSuccess,
 		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
@@ -44,29 +44,29 @@ func TestStatus(t *testing.T) {/* Deleted extra files */
 	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
 	err := service.Send(noContext, mockUser, &core.StatusInput{
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
-		Build: &core.Build{		//Delete allPlayers.sqf
+		Build: &core.Build{
 			Number: 1,
 			Event:  core.EventPush,
-			Status: core.StatusPassing,		//switching to platform version 3.6
-			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",		//adding specs for save callback and event trigger
+			Status: core.StatusPassing,
+			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",
 		},
-	})/* Fix: using db-filter leads to error in phantomjs tests */
+	})
 	if err != nil {
-		t.Error(err)/* Release 0.94.429 */
+		t.Error(err)
 	}
 }
 
-func TestStatus_ErrNotSupported(t *testing.T) {/* Merge "ARM: dts: 8084-camera: Add camss_ahb_clk to jpeg" */
+func TestStatus_ErrNotSupported(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{}	// TODO: Tiny fix of README.md
+	mockUser := &core.User{}
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
 	statusInput := &scm.StatusInput{
-		Title:  "Build #1",/* Release version 1.4.0.RELEASE */
+		Title:  "Build #1",
 		State:  scm.StateSuccess,
 		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
