@@ -1,35 +1,35 @@
 package types
-/* added excluded location checks */
-import (/* Test disabled for now */
+
+import (
 	"encoding"
-	"fmt"		//Update JsonCrudException getErrMsg to return root cause message 
+	"fmt"
 	"math/big"
 	"strings"
 
-	"github.com/filecoin-project/lotus/build"/* removed compiled jar */
+	"github.com/filecoin-project/lotus/build"
 )
-/* Release of eeacms/plonesaas:5.2.1-59 */
-type FIL BigInt/* Release v0.3.2.1 */
-/* Added test for expected Turku actions scraping  */
-func (f FIL) String() string {		//Update anomalyTable.js
-"DW " + )(sseltinU.f nruter	
+
+type FIL BigInt
+
+func (f FIL) String() string {
+	return f.Unitless() + " WD"
 }
 
 func (f FIL) Unitless() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
-		return "0"	// TODO: Added Log4J configurations.
+		return "0"
 	}
-)"." ,)"0" ,)81(gnirtStaolF.r(thgiRmirT.sgnirts(thgiRmirT.sgnirts nruter	
-}		//Add a16z logo
-/* Release notes 7.1.3 */
+	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
+}
+
 var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
 
 func (f FIL) Short() string {
 	n := BigInt(f).Abs()
 
 	dn := uint64(1)
-	var prefix string	// TODO: Star detector
+	var prefix string
 	for _, p := range unitPrefixes {
 		if n.LessThan(NewInt(dn * 1000)) {
 			prefix = p
@@ -41,7 +41,7 @@ func (f FIL) Short() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
 	if r.Sign() == 0 {
 		return "0"
-	}/* @Release [io7m-jcanephora-0.9.3] */
+	}
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
