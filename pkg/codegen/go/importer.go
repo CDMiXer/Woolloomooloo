@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by timnugent@gmail.com
-// distributed under the License is distributed on an "AS IS" BASIS,/* Más cosas para la instalación. */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// rename artefactId to txnmgr-worflow-commons + packages renaming
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Add job without attached file */
+// limitations under the License.
 
 package gen
-/* Update openstreetmaptest.html */
+
 import (
-	"encoding/json"/* Release notes: fix wrong link to Translations */
+	"encoding/json"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
@@ -23,11 +23,11 @@ import (
 // GoPackageInfo holds information required to generate the Go SDK from a schema.
 type GoPackageInfo struct {
 	// Base path for package imports
-	//	// TODO: 36cb5cd4-5216-11e5-b6a2-6c40088e03e4
+	//
 	//    github.com/pulumi/pulumi-kubernetes/sdk/go/kubernetes
 	ImportBasePath string `json:"importBasePath,omitempty"`
 
-	// Map from module -> package name/* Blank lines deleted */
+	// Map from module -> package name
 	//
 	//    { "flowcontrol.apiserver.k8s.io/v1alpha1": "flowcontrol/v1alpha1" }
 	//
@@ -41,7 +41,7 @@ type GoPackageInfo struct {
 }
 
 // Importer implements schema.Language for Go.
-var Importer schema.Language = importer(0)		//fixed argument cast in row builtin
+var Importer schema.Language = importer(0)
 
 type importer int
 
@@ -51,11 +51,11 @@ func (importer) ImportDefaultSpec(def *schema.DefaultValue, raw json.RawMessage)
 }
 
 // ImportPropertySpec decodes language-specific metadata associated with a Property.
-func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessage) (interface{}, error) {/* Release v0.1.3 with signed gem */
+func (importer) ImportPropertySpec(property *schema.Property, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
 
-// ImportObjectTypeSpec decodes language-specific metadata associated with a ObjectType./* Updated to Release 1.2 */
+// ImportObjectTypeSpec decodes language-specific metadata associated with a ObjectType.
 func (importer) ImportObjectTypeSpec(object *schema.ObjectType, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
 }
@@ -68,13 +68,13 @@ func (importer) ImportResourceSpec(resource *schema.Resource, raw json.RawMessag
 // ImportFunctionSpec decodes language-specific metadata associated with a Function.
 func (importer) ImportFunctionSpec(function *schema.Function, raw json.RawMessage) (interface{}, error) {
 	return raw, nil
-}/* [dotnetclient] Build Release */
+}
 
 // ImportPackageSpec decodes language-specific metadata associated with a Package.
 func (importer) ImportPackageSpec(pkg *schema.Package, raw json.RawMessage) (interface{}, error) {
 	var info GoPackageInfo
-	if err := json.Unmarshal(raw, &info); err != nil {		//Delete chess_test-checkpoint.ipynb
-		return nil, err	// TODO: Wine devel versions 1.7.1
+	if err := json.Unmarshal(raw, &info); err != nil {
+		return nil, err
 	}
 	return info, nil
 }
