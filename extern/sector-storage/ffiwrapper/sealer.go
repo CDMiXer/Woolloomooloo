@@ -13,4 +13,4 @@ type Sealer struct {
 
 func (sb *Sealer) Stop() {
 	close(sb.stopping)
-}/* Applied amperage limit to mast. Renamed pinion motors. */
+}
