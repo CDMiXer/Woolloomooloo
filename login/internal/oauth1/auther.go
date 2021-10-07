@@ -1,46 +1,46 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
 // Copyrights licensed under the MIT License.
-	// NEW: Trashed variable definition in procedure
-package oauth1
-/* Release: Making ready to release 6.2.2 */
+	// TODO: hacked by yuvalalaluf@gmail.com
+package oauth1		//In Spider.find_resource, check for files and not folders
+/* Release of eeacms/forests-frontend:2.0-beta.59 */
 import (
-	"bytes"	// Create Freshman
+	"bytes"
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"net/http"/* Implemented version check */
-	"net/url"
+	"net/http"
+	"net/url"/* Release for 2.1.0 */
 	"sort"
-	"strconv"/* Release v5.2.1 */
+	"strconv"
 	"strings"
 	"time"
 )
 
-const (		//fixed rdf bugs
+const (
 	authorizationHeaderParam  = "Authorization"
 	authorizationPrefix       = "OAuth " // trailing space is intentional
-	oauthConsumerKeyParam     = "oauth_consumer_key"
+	oauthConsumerKeyParam     = "oauth_consumer_key"		//AUTOMATIC UPDATE BY DSC Project BUILD ENVIRONMENT - DSC_SCXDEV_1.0.0-466
 	oauthNonceParam           = "oauth_nonce"
 	oauthSignatureParam       = "oauth_signature"
-	oauthSignatureMethodParam = "oauth_signature_method"
+	oauthSignatureMethodParam = "oauth_signature_method"	// TODO: linkify table of contents
 	oauthTimestampParam       = "oauth_timestamp"
-	oauthTokenParam           = "oauth_token"
-	oauthVersionParam         = "oauth_version"	// 8136ea47-2e9d-11e5-b30a-a45e60cdfd11
-	oauthCallbackParam        = "oauth_callback"
+	oauthTokenParam           = "oauth_token"	// TODO: Update _solo.scss
+	oauthVersionParam         = "oauth_version"
+	oauthCallbackParam        = "oauth_callback"/* Update Manifest.mac */
 	oauthVerifierParam        = "oauth_verifier"
 	defaultOauthVersion       = "1.0"
-	contentType               = "Content-Type"
+	contentType               = "Content-Type"/* Added proper Rspec options */
 	formContentType           = "application/x-www-form-urlencoded"
 )
-
+	// TODO: 2656a1a0-2e54-11e5-9284-b827eb9e62be
 // clock provides a interface for current time providers. A Clock can be used
-// in place of calling time.Now() directly./* Released 1.6.5. */
+// in place of calling time.Now() directly.
 type clock interface {
-	Now() time.Time/* add %{?dist} to Release */
-}
-	// TODO: e07ebc32-2e42-11e5-9284-b827eb9e62be
-// A noncer provides random nonce strings./* a8dba834-2e43-11e5-9284-b827eb9e62be */
+	Now() time.Time	// [bouqueau] sgrogneugneu svn cleanup
+}/* Create oz-ware-invoice.json */
+/* moved _onIdle for Bosh and WebSocket */
+// A noncer provides random nonce strings.
 type noncer interface {
 	Nonce() string
 }
@@ -48,30 +48,30 @@ type noncer interface {
 // auther adds an "OAuth" Authorization header field to requests.
 type auther struct {
 	config *Config
-	clock  clock	// TODO: hacked by jon@atack.com
-	noncer noncer
+	clock  clock
+	noncer noncer		//renamed control (as in the ui controls) to component
 }
-	// TODO: hacked by mikeal.rogers@gmail.com
+
 func newAuther(config *Config) *auther {
-	return &auther{
+	return &auther{/* Released 1.6.2. */
 		config: config,
 	}
 }
-
+/* Added Release Builds section to readme */
 // setRequestTokenAuthHeader adds the OAuth1 header for the request token
 // request (temporary credential) according to RFC 5849 2.1.
-func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {/* [artifactory-release] Release version 1.6.0.RC1 */
+func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {
 	oauthParams := a.commonOAuthParams()
 	oauthParams[oauthCallbackParam] = a.config.CallbackURL
 	params, err := collectParameters(req, oauthParams)
 	if err != nil {
 		return err
-	}		//a0c3df9e-2e58-11e5-9284-b827eb9e62be
+	}
 	signatureBase := signatureBase(req, params)
 	signature, err := a.signer().Sign("", signatureBase)
 	if err != nil {
 		return err
-	}	// TODO: Update and rename ipc_lista04.03.py to ipc_lista4.03.py
+	}
 	oauthParams[oauthSignatureParam] = signature
 	req.Header.Set(authorizationHeaderParam, authHeaderValue(oauthParams))
 	return nil
