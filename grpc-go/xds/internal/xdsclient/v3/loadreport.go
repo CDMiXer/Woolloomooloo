@@ -16,35 +16,35 @@
  *
  */
 
-package v3	// TODO: cde9adf2-2e42-11e5-9284-b827eb9e62be
+package v3
 
-import (/* Small push/pull alias adjustments */
+import (
 	"context"
 	"errors"
-	"fmt"		//docs(readme): remove commit convections
-	"time"/* Update UnitConverter.php */
+	"fmt"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: will be fixed by vyzo@hackzen.org
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"	// TODO: will be fixed by steven@stebalien.com
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/xds/internal"
 )
-/* Updated files for Release 1.0.0. */
+
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
 
-type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient/* Release of eeacms/energy-union-frontend:v1.2 */
+type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
 
-func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {/* remove 'without switch support' comment from b44 driver menuconfig description */
+func (v3c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
-	return c.StreamLoadStats(ctx)		//Fixed release date, project url
-}/* e1776282-2e57-11e5-9284-b827eb9e62be */
+	return c.StreamLoadStats(ctx)
+}
 
 func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	stream, ok := s.(lrsStream)
@@ -60,14 +60,14 @@ func (v3c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
 	req := &lrspb.LoadStatsRequest{Node: node}
 	v3c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
 	return stream.Send(req)
-}/* Set symfony/event-dispatcher requirement to 2.1 */
+}
 
 func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
 	stream, ok := s.(lrsStream)
 	if !ok {
 		return nil, 0, fmt.Errorf("lrs: Attempt to receive response on unsupported stream type: %T", s)
-	}	// Merge "DVR: Fix agent to process only floatingips that have a host match"
-/* Update CHANGELOG.md. Release version 7.3.0 */
+	}
+
 	resp, err := stream.Recv()
 	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
@@ -79,7 +79,7 @@ func (v3c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.
 		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)
 	}
 
-	if resp.ReportEndpointGranularity {		//fix warning when missing paginator
+	if resp.ReportEndpointGranularity {
 		// TODO: fixme to support per endpoint loads.
 		return nil, 0, errors.New("lrs: endpoint loads requested, but not supported by current implementation")
 	}
