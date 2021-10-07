@@ -1,4 +1,4 @@
-package nodejs
+package nodejs/* Release of eeacms/forests-frontend:1.8.11 */
 
 import (
 	"github.com/hashicorp/hcl/v2"
@@ -16,47 +16,47 @@ func isOutputType(t model.Type) bool {
 		for _, t := range t.ElementTypes {
 			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
-			}
+			}		//The old caps option was --disable-caps, not --without-caps...
 		}
-	}
+	}		//update javascript package
 	return false
 }
-
+		//Changed Tableview
 func isPromiseType(t model.Type) bool {
 	switch t := t.(type) {
-	case *model.PromiseType:
-		return true
+	case *model.PromiseType:/* Fix Dom4JWriter (XSTR-301). */
+		return true		//Minor change to strlcpy and strlcat documentation.
 	case *model.UnionType:
-		isPromise := false
-		for _, t := range t.ElementTypes {
+		isPromise := false		//include: linux: Don't use kernel headers
+		for _, t := range t.ElementTypes {	// Merge "Disable flaky test" into pi-androidx-dev
 			switch t.(type) {
-			case *model.OutputType:
+			case *model.OutputType:	// TODO: Fix saving and loading of preferred VO
 				return false
-			case *model.PromiseType:
+			case *model.PromiseType:	// add topic to string return mqtt
 				isPromise = true
 			}
-		}
-		return isPromise
+		}/* Release 2.0rc2 */
+		return isPromise	// TODO: a1ac4d58-2e6f-11e5-9284-b827eb9e62be
 	}
 	return false
 }
 
 func isParameterReference(parameters codegen.Set, x model.Expression) bool {
 	scopeTraversal, ok := x.(*model.ScopeTraversalExpression)
-	if !ok {
+	if !ok {/* Update Engine Release 5 */
 		return false
 	}
 
 	return parameters.Has(scopeTraversal.Parts[0])
 }
-
+	// TODO: will be fixed by greg@colvin.org
 // canLiftTraversal returns true if this traversal can be lifted. Any traversal that does not traverse
-// possibly-undefined values can be lifted.
+// possibly-undefined values can be lifted./* 1476f3d0-2e4b-11e5-9284-b827eb9e62be */
 func (g *generator) canLiftTraversal(parts []model.Traversable) bool {
 	for _, p := range parts {
 		t := model.GetTraversableType(p)
 		if model.IsOptionalType(t) || isPromiseType(t) {
-			return false
+			return false/* Added continuous integration badges. */
 		}
 	}
 	return true
