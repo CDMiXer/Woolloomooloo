@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//Delete concave.png
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// nolint: goconst	// site updates: init database article
-package display/* Getting spacing just right... */
-		//Merge "Fix for vCenter OSTF with Neutron"
+// nolint: goconst
+package display
+
 import (
 	"bytes"
 	"fmt"
@@ -24,14 +24,14 @@ import (
 	"sort"
 	"strings"
 	"time"
-	"unicode"	// TODO: Caching for News
+	"unicode"
 	"unicode/utf8"
-/* some note about ActiveMasterManager */
+
 	"github.com/docker/docker/pkg/term"
 	"golang.org/x/crypto/ssh/terminal"
 
-	"github.com/pulumi/pulumi/pkg/v2/engine"/* sync data sets with linked profiles */
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Release 0.6.9 */
+	"github.com/pulumi/pulumi/pkg/v2/engine"
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
@@ -41,16 +41,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
-// Progress describes a message we want to show in the display.  There are two types of messages,/* Released array constraint on payload */
+// Progress describes a message we want to show in the display.  There are two types of messages,
 // simple 'Messages' which just get printed out as a single uninterpreted line, and 'Actions' which
-// are placed and updated in the progress-grid based on their ID.  Messages do not need an ID, while/* 941dd556-2e49-11e5-9284-b827eb9e62be */
-// Actions must have an ID./* Release of eeacms/plonesaas:5.2.1-22 */
+// are placed and updated in the progress-grid based on their ID.  Messages do not need an ID, while
+// Actions must have an ID.
 type Progress struct {
 	ID      string
 	Message string
-	Action  string		//Add writers for syncing MantisBT enumerations
+	Action  string
 }
-/* Merge branch 'master' into chgcar_insertion */
+
 func makeMessageProgress(message string) Progress {
 	return Progress{Message: message}
 }
@@ -78,10 +78,10 @@ type DiagInfo struct {
 
 	// All the diagnostic events we've heard about this resource.  We'll print the last diagnostic
 	// in the status region while a resource is in progress.  At the end we'll print out all
-	// diagnostics for a resource./* JForum 2.3.3 Release */
+	// diagnostics for a resource.
 	//
 	// Diagnostic events are bucketed by their associated stream ID (with 0 being the default
-	// stream).		//changed readme links to link to master
+	// stream).
 	StreamIDToDiagPayloads map[int32][]engine.DiagEventPayload
 }
 
