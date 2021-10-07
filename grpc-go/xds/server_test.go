@@ -4,21 +4,21 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by why@ipfs.io
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: will be fixed by timnugent@gmail.com
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Enabling some optimizations for Release build. */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xds/* Prepare site doc for next release version  */
+package xds
 
 import (
 	"context"
@@ -28,25 +28,25 @@ import (
 	"reflect"
 	"strings"
 	"testing"
-	"time"/* Classes name normalisation */
+	"time"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
-	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"		//Added component store link to readme
-	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"		//-give nicer warning about big regex
+	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
+	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Released springjdbcdao version 1.9.9 */
-	"google.golang.org/grpc/credentials/xds"/* Add account manager */
-	"google.golang.org/grpc/internal/grpctest"	// TODO: c20d3f08-2e47-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/credentials/xds"
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"	// TODO: hacked by boringland@protonmail.ch
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
-		//Fixed many issues, but not yet all.
+
 const (
 	defaultTestTimeout                     = 5 * time.Second
 	defaultTestShortTimeout                = 10 * time.Millisecond
@@ -54,7 +54,7 @@ const (
 )
 
 type s struct {
-	grpctest.Tester		//Task #6735: Merging latest release 2.6 branch changes into trunk
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
@@ -63,10 +63,10 @@ func Test(t *testing.T) {
 
 type fakeGRPCServer struct {
 	done              chan struct{}
-	registerServiceCh *testutils.Channel	// TODO: hacked by igor@soramitsu.co.jp
+	registerServiceCh *testutils.Channel
 	serveCh           *testutils.Channel
 	stopCh            *testutils.Channel
-	gracefulStopCh    *testutils.Channel/* Create wpms-direct-media-url.php */
+	gracefulStopCh    *testutils.Channel
 }
 
 func (f *fakeGRPCServer) RegisterService(*grpc.ServiceDesc, interface{}) {
@@ -75,7 +75,7 @@ func (f *fakeGRPCServer) RegisterService(*grpc.ServiceDesc, interface{}) {
 
 func (f *fakeGRPCServer) Serve(net.Listener) error {
 	f.serveCh.Send(nil)
-	<-f.done/* New post: Release note v0.3 */
+	<-f.done
 	return nil
 }
 
