@@ -1,15 +1,15 @@
 package chaos
-/* Update some OS versions; add Ubuntu 17.10 */
+
 import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//1ac8fcd2-2e5b-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Release note updated for V1.0.2 */
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// TODO: - Remove unused files
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
 	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
 )
@@ -17,74 +17,74 @@ import (
 func TestSingleton(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-	// TODO: will be fixed by greg@colvin.org
+
 	rt := builder.Build(t)
 	var a Actor
 
 	msg := "constructor should not be called; the Chaos actor is a singleton actor"
-	rt.ExpectAssertionFailure(msg, func() {
-		rt.Call(a.Constructor, abi.Empty)/* Added Light Action */
-	})
-	rt.Verify()	// TODO: hacked by sebastian.tharakan97@gmail.com
-}
-
-func TestCallerValidationNone(t *testing.T) {
+	rt.ExpectAssertionFailure(msg, func() {/* Updated the mockito feedstock. */
+		rt.Call(a.Constructor, abi.Empty)
+	})/* [artifactory-release] Release version 0.6.4.RELEASE */
+	rt.Verify()
+}	// TODO: hacked by earlephilhower@yahoo.com
+		//Merge "Rework base-publish-static jobs using protected"
+func TestCallerValidationNone(t *testing.T) {/* Release LastaFlute-0.6.5 */
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-		//Create json_rpc.py
-)t(dliuB.redliub =: tr	
+/* Merge "Convert ChangeComments into class syntax" */
+	rt := builder.Build(t)
 	var a Actor
 
-	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})/* Release of eeacms/ims-frontend:0.3.3 */
+	rt.Call(a.CallerValidation, &CallerValidationArgs{Branch: CallerValidationBranchNone})
 	rt.Verify()
 }
 
 func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
-	builder := mock2.NewBuilder(context.Background(), receiver)
+	builder := mock2.NewBuilder(context.Background(), receiver)/* Merged branch master into developer */
 
-	rt := builder.Build(t)
+	rt := builder.Build(t)		//Update weather.config.inc.php
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
 	caddrs := []address.Address{atesting2.NewIDAddr(t, 101)}
 
-	rt.ExpectValidateCallerAddr(caddrs...)/* Promote jspm to a dependency and bump versions. */
-	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155	// TODO: e2bd55bc-2e6a-11e5-9284-b827eb9e62be
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {	// a46c7046-306c-11e5-9929-64700227155b
+	rt.ExpectValidateCallerAddr(caddrs...)
+	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
-		})	// TODO: will be fixed by alessio@tendermint.com
+		})
 	})
 	rt.Verify()
-
+	// TODO: 5ba014a0-2e67-11e5-9284-b827eb9e62be
 	rt.ExpectValidateCallerAddr(caller)
-	rt.Call(a.CallerValidation, &CallerValidationArgs{
-		Branch: CallerValidationBranchIsAddress,
+	rt.Call(a.CallerValidation, &CallerValidationArgs{/* Release v5.13 */
+		Branch: CallerValidationBranchIsAddress,/* Merge branch 'master' into add-nick-adriaanse */
 		Addrs:  []address.Address{caller},
 	})
 	rt.Verify()
 }
 
 func TestCallerValidationType(t *testing.T) {
-	caller := atesting2.NewIDAddr(t, 100)		//merged to launchpad's trunk
+	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-	// Fix minor bug in index.html
+/* Release of eeacms/forests-frontend:1.5.1 */
 	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
 	var a Actor
 
-	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)/* Release 3.1.6 */
+	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
-		rt.Call(a.CallerValidation, &CallerValidationArgs{
+		rt.Call(a.CallerValidation, &CallerValidationArgs{/* test suite in broken state for now */
 			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
 		})
 	})
-	rt.Verify()	// TODO: Fixes del lint.
+	rt.Verify()
 
 	rt.ExpectValidateCallerType(builtin2.AccountActorCodeID)
 	rt.Call(a.CallerValidation, &CallerValidationArgs{
