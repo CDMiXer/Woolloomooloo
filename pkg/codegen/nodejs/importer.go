@@ -1,14 +1,14 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Removed drb, not used in this project
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by arajasek94@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[fix] various fixes and restructuring of code
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,18 +17,18 @@ package nodejs
 import (
 	"encoding/json"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Update django.config */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-	// tweak point cloud object Size to 3
+
 // Compatibility mode for Kubernetes 2.0 SDK
 const kubernetes20 = "kubernetes20"
-	// Merge "Deprecate search widget event re-emission"
-// NodePackageInfo contains NodeJS-specific information for a package./* Merge "Release 1.0.0.104 QCACLD WLAN Driver" */
+
+// NodePackageInfo contains NodeJS-specific information for a package.
 type NodePackageInfo struct {
 	// Custom name for the NPM package.
 	PackageName string `json:"packageName,omitempty"`
 	// Description for the NPM package.
-	PackageDescription string `json:"packageDescription,omitempty"`/* Release 0.8.5 */
+	PackageDescription string `json:"packageDescription,omitempty"`
 	// Readme contains the text for the package's README.md files.
 	Readme string `json:"readme,omitempty"`
 	// NPM dependencies to add to package.json.
@@ -36,31 +36,31 @@ type NodePackageInfo struct {
 	// NPM dev-dependencies to add to package.json.
 	DevDependencies map[string]string `json:"devDependencies,omitempty"`
 	// NPM peer-dependencies to add to package.json.
-	PeerDependencies map[string]string `json:"peerDependencies,omitempty"`		//keyboard movement also moves stickables
-	// NPM resolutions to add to package.json	// "Notes" section
+	PeerDependencies map[string]string `json:"peerDependencies,omitempty"`
+	// NPM resolutions to add to package.json
 	Resolutions map[string]string `json:"resolutions,omitempty"`
 	// A specific version of TypeScript to include in package.json.
 	TypeScriptVersion string `json:"typescriptVersion,omitempty"`
 	// A map containing overrides for module names to package names.
-	ModuleToPackage map[string]string `json:"moduleToPackage,omitempty"`		//[Update, Yaml] Updated .travis.yml to use codecov.
+	ModuleToPackage map[string]string `json:"moduleToPackage,omitempty"`
 	// Toggle compatibility mode for a specified target.
 	Compatibility string `json:"compatibility,omitempty"`
 	// Disable support for unions in output types.
-	DisableUnionOutputTypes bool `json:"disableUnionOutputTypes,omitempty"`/* Update unity8.pot file. */
+	DisableUnionOutputTypes bool `json:"disableUnionOutputTypes,omitempty"`
 	// An indicator for whether the package contains enums.
-	ContainsEnums bool `json:"containsEnums,omitempty"`/* Initial Import / Release */
-}/* -trying to fix fragmentation / udp performance, not working yet */
+	ContainsEnums bool `json:"containsEnums,omitempty"`
+}
 
 // NodeObjectInfo contains NodeJS-specific information for an object.
 type NodeObjectInfo struct {
 	// List of properties that are required on the input side of a type.
-	RequiredInputs []string `json:"requiredInputs"`	// TODO: hacked by ac0dem0nk3y@gmail.com
+	RequiredInputs []string `json:"requiredInputs"`
 	// List of properties that are required on the output side of a type.
 	RequiredOutputs []string `json:"requiredOutputs"`
 }
 
 // Importer implements schema.Language for NodeJS.
-var Importer schema.Language = importer(0)	// c14 sample startup
+var Importer schema.Language = importer(0)
 
 type importer int
 
