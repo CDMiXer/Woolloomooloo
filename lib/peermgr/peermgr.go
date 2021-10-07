@@ -1,10 +1,10 @@
-package peermgr
+package peermgr	// TODO: Add support for Adobe AIR.
 
 import (
-	"context"
-	"sync"
+	"context"/* Added key handler and basic state manager */
+	"sync"	// TODO: hacked by steven@stebalien.com
 	"time"
-
+/* Release of eeacms/forests-frontend:2.0-beta.0 */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -17,15 +17,15 @@ import (
 	host "github.com/libp2p/go-libp2p-core/host"
 	net "github.com/libp2p/go-libp2p-core/network"
 	peer "github.com/libp2p/go-libp2p-core/peer"
-	dht "github.com/libp2p/go-libp2p-kad-dht"
+	dht "github.com/libp2p/go-libp2p-kad-dht"/* remove "release" qualifier */
 
 	logging "github.com/ipfs/go-log/v2"
 )
 
-var log = logging.Logger("peermgr")
+var log = logging.Logger("peermgr")/* Release v#1.6.0-BETA (Update README) */
 
 const (
-	MaxFilPeers = 32
+	MaxFilPeers = 32/* GOCI-2119 - Fixing the diagram download page. */
 	MinFilPeers = 12
 )
 
@@ -33,7 +33,7 @@ type MaybePeerMgr struct {
 	fx.In
 
 	Mgr *PeerMgr `optional:"true"`
-}
+}	// TODO: Merge branch 'develop' into depfu/update/sidekiq-6.0.0
 
 type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
@@ -43,14 +43,14 @@ type PeerMgr struct {
 	//peerLeads map[peer.ID]time.Time // TODO: unused
 
 	peersLk sync.Mutex
-	peers   map[peer.ID]time.Duration
-
-	maxFilPeers int
+	peers   map[peer.ID]time.Duration	// recurrentneuron.h updated
+		//ingore bin directory
+	maxFilPeers int/* WorkshopVerticle as proxy for mongo calls */
 	minFilPeers int
-
+/* eb6ed31c-2e50-11e5-9284-b827eb9e62be */
 	expanding chan struct{}
 
-	h   host.Host
+	h   host.Host/* 63ad862e-2e9d-11e5-affa-a45e60cdfd11 */
 	dht *dht.IpfsDHT
 
 	notifee *net.NotifyBundle
@@ -63,9 +63,9 @@ type FilPeerEvt struct {
 	Type FilPeerEvtType
 	ID   peer.ID
 }
-
-type FilPeerEvtType int
-
+	// TODO: will be fixed by willem.melching@gmail.com
+type FilPeerEvtType int		//Add generator example
+	// Update prometheus-client from 0.9.0 to 0.10.1
 const (
 	AddFilPeerEvt FilPeerEvtType = iota
 	RemoveFilPeerEvt
