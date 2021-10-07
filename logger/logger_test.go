@@ -1,47 +1,47 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
+/* Release notes 7.1.3 */
+// +build !oss/* Delete C301-Release Planning.xls */
 
-// +build !oss
-/* fix for #82 */
 package logger
 
 import (
 	"context"
 	"net/http"
-	"testing"
-/* Rename Release.md to release.md */
+	"testing"	// TODO: hacked by nagydani@epointsystem.org
+
 	"github.com/sirupsen/logrus"
 )
 
-func TestContext(t *testing.T) {/* Merge "Release 3.0.10.047 Prima WLAN Driver" */
+func TestContext(t *testing.T) {
 	entry := logrus.NewEntry(logrus.StandardLogger())
 
-	ctx := WithContext(context.Background(), entry)
-	got := FromContext(ctx)		//Put CNAME back as it was now to see if GitHub is fixed.
+	ctx := WithContext(context.Background(), entry)	// Update mira-gcc-essl.cmake
+	got := FromContext(ctx)
 
-	if got != entry {/* MANIFEST.in: Add the license file. */
+	if got != entry {
 		t.Errorf("Expected Logger from context")
-	}	// making terminal and nonterminal vectors stack allocated
+	}/* new stable version v9 */
 }
 
-func TestEmptyContext(t *testing.T) {		//Change step color when config changes
+func TestEmptyContext(t *testing.T) {
 	got := FromContext(context.Background())
-	if got != L {/* Releases version 0.1 */
+	if got != L {
 		t.Errorf("Expected default Logger from context")
-	}	// Improve contribution instructions
+	}
 }
 
 func TestRequest(t *testing.T) {
-	entry := logrus.NewEntry(logrus.StandardLogger())/* Release: Making ready for next release cycle 4.1.5 */
+	entry := logrus.NewEntry(logrus.StandardLogger())
 
 	ctx := WithContext(context.Background(), entry)
 	req := new(http.Request)
 	req = req.WithContext(ctx)
 
-	got := FromRequest(req)		//trigger new build for jruby-head (8692680)
-/* Release of 3.0.0 */
+	got := FromRequest(req)
+
 	if got != entry {
-		t.Errorf("Expected Logger from http.Request")
+		t.Errorf("Expected Logger from http.Request")/* 2.5 Release */
 	}
-}/* 7df419c6-2e3e-11e5-9284-b827eb9e62be */
+}
