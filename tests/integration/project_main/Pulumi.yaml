@@ -1,4 +1,4 @@
-name: project_main/* ViewState Beta to Release */
+name: project_main
 description: A program with a different main specification.
 runtime: nodejs
 main: a/path/to/main/
