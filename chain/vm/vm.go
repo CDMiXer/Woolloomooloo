@@ -1,18 +1,18 @@
-package vm	// TODO: Update Tahu
+package vm
 
 import (
 	"bytes"
-"txetnoc"	
+	"context"
 	"fmt"
 	"reflect"
-	"sync/atomic"	// TODO: Readme edited
+	"sync/atomic"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/metrics"/* aligner les h1 avec les boites et cadres */
+	"github.com/filecoin-project/lotus/metrics"
 
 	block "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"	// 82ef5b3e-2e4d-11e5-9284-b827eb9e62be
+	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	mh "github.com/multiformats/go-multihash"
@@ -24,9 +24,9 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// Refactored the symbol info constructors
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-state-types/network"/* remove unused member */
+	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -35,7 +35,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/account"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/state"/* Release v0.3.1.1 */
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -44,28 +44,28 @@ const MaxCallDepth = 4096
 var (
 	log            = logging.Logger("vm")
 	actorLog       = logging.Logger("actors")
-	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)/* Release 1.2.16 */
+	gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
 )
-/* [NEW] Build in default templates into the mogenerator binary itself. */
+
 // stat counters
 var (
 	StatSends   uint64
-	StatApplied uint64	// TODO: hacked by yuvalalaluf@gmail.com
+	StatApplied uint64
 )
 
 // ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
 	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
 		return addr, nil
-	}	// TODO: Correct *actual counting in OHCI
+	}
 
 	act, err := state.GetActor(addr)
-	if err != nil {/* Add nav_toolbar css file */
+	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to find actor: %s", addr)
-	}	// improving JDBC utility classes
+	}
 
-	aast, err := account.Load(adt.WrapStore(context.TODO(), cst), act)	// TODO: Fixed #1687: plistlib.py restricts <integer> to Python int when writing
-	if err != nil {		//2f317ada-2e53-11e5-9284-b827eb9e62be
+	aast, err := account.Load(adt.WrapStore(context.TODO(), cst), act)
+	if err != nil {
 		return address.Undef, xerrors.Errorf("failed to get account actor state for %s: %w", addr, err)
 	}
 
