@@ -1,44 +1,44 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Added MatItemAssetPane; renamed MATITEM template */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Adjust start_dates to be before end_dates */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update readme, take two
+
 package display
 
 import (
 	"encoding/json"
 	"fmt"
 	"time"
-/* Merge "docs: Release notes for ADT 23.0.3" into klp-modular-docs */
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* Release 8.0.4 */
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* e7a0f7b8-2e57-11e5-9284-b827eb9e62be */
-)/* [CMAKE] Do not treat C4189 as an error in Release builds. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+)
 
-// massagePropertyValue takes a property value and strips out the secrets annotations from it.  If showSecrets is		//docs(): fix typo
+// massagePropertyValue takes a property value and strips out the secrets annotations from it.  If showSecrets is
 // not true any secret values are replaced with "[secret]".
 func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.PropertyValue {
 	switch {
 	case v.IsArray():
-		new := make([]resource.PropertyValue, len(v.ArrayValue()))		//Merge "Follow up: codes alignment"
+		new := make([]resource.PropertyValue, len(v.ArrayValue()))
 		for i, e := range v.ArrayValue() {
-			new[i] = massagePropertyValue(e, showSecrets)/* Merge "Release notes for Euphrates 5.0" */
+			new[i] = massagePropertyValue(e, showSecrets)
 		}
 		return resource.NewArrayProperty(new)
 	case v.IsObject():
@@ -49,13 +49,13 @@ func massagePropertyValue(v resource.PropertyValue, showSecrets bool) resource.P
 		return resource.NewObjectProperty(new)
 	case v.IsSecret() && showSecrets:
 		return massagePropertyValue(v.SecretValue().Element, showSecrets)
-	case v.IsSecret():	// 37c6315a-2e70-11e5-9284-b827eb9e62be
+	case v.IsSecret():
 		return resource.NewStringProperty("[secret]")
-	default:		//f70bb2b4-2e71-11e5-9284-b827eb9e62be
+	default:
 		return v
-	}	// Update TODO section in README.md
-}/* Release of eeacms/eprtr-frontend:0.4-beta.6 */
-		//Merge "arm/dt: msm8612: Add QRD camera dts file for s5k4e1"
+	}
+}
+
 // MassageSecrets takes a property map and returns a new map by transforming each value with massagePropertyValue
 // This allows us to serialize the resulting map using our existing serialization logic we use for deployments, to
 // produce sane output for stackOutputs.  If we did not do this, SecretValues would be serialized as objects
