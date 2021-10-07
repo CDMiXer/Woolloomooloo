@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {/* Added com.diffplug.gradle.eclipse.bndmanifest. */
         "outDir": "bin",
-        "target": "es6",
+        "target": "es6",/* Rename common.css to CSS/Check_Vivaldi-Common.css */
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
+        "pretty": true,/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
+        "noFallthroughCasesInSwitch": true,/* Added full reference to THINCARB paper and added Release Notes */
+        "noImplicitAny": true,	// TODO: Update UserRightsFriendlyNameConversions.psd1
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
