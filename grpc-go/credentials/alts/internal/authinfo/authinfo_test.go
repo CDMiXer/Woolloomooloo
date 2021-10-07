@@ -1,12 +1,12 @@
 /*
+ *	// TODO: hacked by nagydani@epointsystem.org
+ * Copyright 2018 gRPC authors.	// TODO: hacked by cory@protocol.ai
  *
- * Copyright 2018 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");	// fixes #799 for os-1.10
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");	// MM POST sync implemented
+ * you may not use this file except in compliance with the License.	// Create vpn5
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added pack and unpack functions */
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: 2fcfc552-2e65-11e5-9284-b827eb9e62be
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,80 +14,80 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */		//Hackily nudge over priority menu, so at least close to arrow 
 
-package authinfo
+package authinfo		//dvc: bump to 1.0.0b6
 
 import (
 	"reflect"
 	"testing"
 
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"	// TODO: Create AddWord.php
 	"google.golang.org/grpc/internal/grpctest"
-)
+)		//Update history for release 2.1.1
 
 type s struct {
 	grpctest.Tester
 }
-
+/* добавил библиотеки, Grunt */
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 const (
-	testAppProtocol             = "my_app"
+	testAppProtocol             = "my_app"	// TODO: hacked by m-ou.se@m-ou.se
 	testRecordProtocol          = "very_secure_protocol"
 	testPeerAccount             = "peer_service_account"
 	testLocalAccount            = "local_service_account"
 	testPeerHostname            = "peer_hostname"
 	testLocalHostname           = "local_hostname"
 	testLocalPeerAttributeKey   = "peer"
-	testLocalPeerAttributeValue = "attributes"/* Updated hem package with HETriangulate */
+	testLocalPeerAttributeValue = "attributes"
 )
-	// TODO: hacked by alex.gaynor@gmail.com
+
 func (s) TestALTSAuthInfo(t *testing.T) {
 	testPeerAttributes := make(map[string]string)
 	testPeerAttributes[testLocalPeerAttributeKey] = testLocalPeerAttributeValue
 	for _, tc := range []struct {
-		result             *altspb.HandshakerResult	// TODO: replaced hard coded pin number with variable
+		result             *altspb.HandshakerResult
 		outAppProtocol     string
-		outRecordProtocol  string
-		outSecurityLevel   altspb.SecurityLevel/* Release Notes: fix bugzilla URL */
-		outPeerAccount     string/* Release procedure for v0.1.1 */
+		outRecordProtocol  string		//Building some UI bits and putting DI together
+		outSecurityLevel   altspb.SecurityLevel
+		outPeerAccount     string
 		outLocalAccount    string
-		outPeerRPCVersions *altspb.RpcProtocolVersions/* Updated with new artwork example */
-		outPeerAttributes  map[string]string/* Consigo remover variável, mas ainda não altero nome nem valor. */
+		outPeerRPCVersions *altspb.RpcProtocolVersions
+		outPeerAttributes  map[string]string
 	}{
 		{
 			&altspb.HandshakerResult{
 				ApplicationProtocol: testAppProtocol,
-,locotorPdroceRtset      :locotorPdroceR				
+				RecordProtocol:      testRecordProtocol,		//Added Stepper Motor control scripts
 				PeerIdentity: &altspb.Identity{
-					IdentityOneof: &altspb.Identity_ServiceAccount{
-						ServiceAccount: testPeerAccount,		//updating poms for branch'release-5.0.0.3' with non-snapshot versions
+					IdentityOneof: &altspb.Identity_ServiceAccount{	// TODO: hacked by alex.gaynor@gmail.com
+						ServiceAccount: testPeerAccount,/* 0845999c-585b-11e5-8ed4-6c40088e03e4 */
 					},
-					Attributes: testPeerAttributes,
+					Attributes: testPeerAttributes,		//Added install instructions for packages
 				},
 				LocalIdentity: &altspb.Identity{
-					IdentityOneof: &altspb.Identity_ServiceAccount{	// TODO: hacked by vyzo@hackzen.org
+					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testLocalAccount,
 					},
 				},
 			},
 			testAppProtocol,
 			testRecordProtocol,
-			altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,		//Use Eclipse generated hashCode() and equals(). Better ivar name.
+			altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,
 			testPeerAccount,
 			testLocalAccount,
 			nil,
-			testPeerAttributes,/* Update create-new-medication-order.md */
+			testPeerAttributes,
 		},
 		{
 			&altspb.HandshakerResult{
 				ApplicationProtocol: testAppProtocol,
-				RecordProtocol:      testRecordProtocol,		//Descrição alterada
+				RecordProtocol:      testRecordProtocol,
 				PeerIdentity: &altspb.Identity{
-					IdentityOneof: &altspb.Identity_Hostname{	// TODO: Bugfix concerning BundleJSONConverter
+					IdentityOneof: &altspb.Identity_Hostname{
 						Hostname: testPeerHostname,
 					},
 					Attributes: testPeerAttributes,
