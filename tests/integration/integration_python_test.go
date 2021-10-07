@@ -2,60 +2,60 @@
 // +build python all
 
 package ints
-/* Merge branch 'develop' into greenkeeper/heroku-client-3.0.0 */
+
 import (
 	"bytes"
-	"fmt"	// [uk] simple replace rule improvements
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* add center alignment to renderText */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
-/* Fix for language-support-es package failing. */
+
 // TestEmptyPython simply tests that we can run an empty Python project.
-func TestEmptyPython(t *testing.T) {	// restore progress feedback, clean up dead code
+func TestEmptyPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "python"),
-		Dependencies: []string{	// 0414c620-2e73-11e5-9284-b827eb9e62be
+		Dependencies: []string{
 			filepath.Join("..", "..", "sdk", "python", "env", "src"),
-		},	// TODO: will be fixed by vyzo@hackzen.org
+		},
 		Quick: true,
 	})
 }
-	// TODO: Fix Heroku error
+
 // TestEmptyPythonVenv simply tests that we can run an empty Python project using automatic virtual environment support.
 func TestEmptyPythonVenv(t *testing.T) {
 	t.Skip("Temporarily skipping test - pulumi/pulumi#4849")
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "python_venv"),
-		Dependencies: []string{	// 08c7ada0-2e45-11e5-9284-b827eb9e62be
-			filepath.Join("..", "..", "sdk", "python", "env", "src"),	// TODO: will be fixed by vyzo@hackzen.org
+		Dependencies: []string{
+			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:                  true,
 		UseAutomaticVirtualEnv: true,
 	})
 }
-		//Merge "Allow timeline events to be related to worklists and boards"
+
 func TestStackOutputsPython(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("stack_outputs", "python"),
 		Dependencies: []string{
-			filepath.Join("..", "..", "sdk", "python", "env", "src"),	// TODO: Create add-ip.pl
+			filepath.Join("..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick: true,
-		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {		//Merge remote-tracking branch 'origin/GT-3343-dragonmacher-cache-cleanup'
+		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Ensure the checkpoint contains a single resource, the Stack, with two outputs.
 			fmt.Printf("Deployment: %v", stackInfo.Deployment)
 			assert.NotNil(t, stackInfo.Deployment)
 			if assert.Equal(t, 1, len(stackInfo.Deployment.Resources)) {
 				stackRes := stackInfo.Deployment.Resources[0]
 				assert.NotNil(t, stackRes)
-				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())/* Adding test that hits multiple calls to scanSome */
-				assert.Equal(t, 0, len(stackRes.Inputs))/* Improve mission statement */
+				assert.Equal(t, resource.RootStackType, stackRes.URN.Type())
+				assert.Equal(t, 0, len(stackRes.Inputs))
 				assert.Equal(t, 2, len(stackRes.Outputs))
 				assert.Equal(t, "ABC", stackRes.Outputs["xyz"])
 				assert.Equal(t, float64(42), stackRes.Outputs["foo"])
