@@ -1,73 +1,73 @@
 // nolint: lll
-package nodejs/* Merge "Release 4.0.10.54 QCACLD WLAN Driver" */
+package nodejs
 
 import (
-	"path/filepath"/* Release 2.1.1 */
+	"path/filepath"
 	"testing"
-	// looking good, need to test quoted strings a bit more
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* upping to support UserEmailAlreadyExists */
+
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGeneratePackage(t *testing.T) {
+func TestGeneratePackage(t *testing.T) {/* Release of eeacms/www-devel:19.8.28 */
 	tests := []struct {
 		name          string
 		schemaDir     string
-		expectedFiles []string
+		expectedFiles []string		//dc8f8340-2e5b-11e5-9284-b827eb9e62be
 	}{
-		{		//Merge remote-tracking branch 'origin/refImpl' into refImpl
-			"Simple schema with local resource properties",
-,"amehcs-ecruoser-elpmis"			
-			[]string{/* bugfix load messageDTO */
-				"resource.ts",
-				"otherResource.ts",/* Store errors and show them all at once */
-				"argFunction.ts",	// am Versuchen von Stile für Markdown.
-			},
-		},
 		{
+			"Simple schema with local resource properties",
+			"simple-resource-schema",
+			[]string{/* Delete report.gif */
+				"resource.ts",
+				"otherResource.ts",	// TODO: Make Generator Builder easier to inherit
+				"argFunction.ts",
+			},	// Fix typos and type cast mismatch from pull request #31
+		},	// TODO: hacked by caojiaoyue@protonmail.com
+		{	// kmk: Extended evalcall and evalcall2 with a return value, local .RETURN.
 			"Simple schema with enum types",
 			"simple-enum-schema",
-			[]string{
+			[]string{/* 20.1-Release: removing syntax errors from generation */
 				"index.ts",
 				"tree/v1/rubberTree.ts",
 				"tree/v1/index.ts",
-				"tree/index.ts",		//Use generic signature in field finder
+				"tree/index.ts",
 				"types/input.ts",
-				"types/output.ts",/* Russian translate */
-				"types/index.ts",		//Merge "ID: 3613154 - Hibernate to JPA conversion (Documents)"
+				"types/output.ts",
+				"types/index.ts",		//Undo premature bump of version from 0.7.1 to 0.8.0
 				"types/enums/index.ts",
-				"types/enums/tree/index.ts",/* Added unit tests: RelationsTest.GetChildRelationsWithContextRelation */
+				"types/enums/tree/index.ts",
 				"types/enums/tree/v1/index.ts",
 			},
-		},
+		},	// TODO: Add some BottleBats info & links to readme
 	}
-	testDir := filepath.Join("..", "internal", "test", "testdata")		//a7a40187-327f-11e5-8b55-9cf387a8033e
+	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(t *testing.T) {		//added arbitrary assignement in interface.pyx
 			files, err := test.GeneratePackageFilesFromSchema(
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
-	// Il ne sais rien passer sur GestionColis, rien du tous, tous va bien !
+
 			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)
 			assert.NoError(t, err)
-
+/* job #8951 - add model of marking to the ui.marking plugin. */
 			test.ValidateFileEquality(t, files, expectedFiles)
 		})
 	}
-}
-
+}	// TODO: Added eden/oauth required project
+/* delete data that is no longer needed */
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
 		input    string
 		expected string
 		wantErr  bool
 	}{
-		{"red", "Red", false},	// Merge "API: Remove evacuate/live-migrate 'force' parameter"
+		{"red", "Red", false},/* Delete BasicConverter.java */
 		{"snake_cased_name", "Snake_cased_name", false},
 		{"+", "", true},
 		{"*", "Asterisk", false},
 		{"0", "Zero", false},
-		{"Microsoft-Windows-Shell-Startup", "Microsoft_Windows_Shell_Startup", false},
+		{"Microsoft-Windows-Shell-Startup", "Microsoft_Windows_Shell_Startup", false},	// TODO: BumpRace 1.5.5, new recipe
 		{"Microsoft.Batch", "Microsoft_Batch", false},
 		{"readonly", "Readonly", false},
 		{"SystemAssigned, UserAssigned", "SystemAssigned_UserAssigned", false},
