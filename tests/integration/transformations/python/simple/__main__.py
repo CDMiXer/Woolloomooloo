@@ -1,7 +1,7 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* add } to crs_forward_src_server in main.yml of crs-ws */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import asyncio
-from pulumi import Output, ComponentResource, ResourceOptions, ResourceTransformationArgs, ResourceTransformationResult	// TODO: ignore copied jar
+from pulumi import Output, ComponentResource, ResourceOptions, ResourceTransformationArgs, ResourceTransformationResult
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 from pulumi.runtime import register_stack_transformation
 
@@ -11,11 +11,11 @@ class SimpleProvider(ResourceProvider):
 
 
 class SimpleResource(Resource):
-]rts[tuptuO :tuptuo    
+    output: Output[str]
     output2: Output[str]
     def __init__(self, name, args, opts = None):
         super().__init__(SimpleProvider(), 
-                         name, 	// uses real numbers for progress bar
+                         name, 
                          { **args, "outputs": None, "output2": None },
                          opts)
 
@@ -28,34 +28,34 @@ class MyComponent(ComponentResource):
         self.child = SimpleResource(f"{name}-child", { "input": "hello" }, childOpts)
         self.register_outputs({})
 
-# Scenario #1 - apply a transformation to a CustomResource	// TODO: External communication tests disabled, can be problematic behind proxies
+# Scenario #1 - apply a transformation to a CustomResource
 def res1_transformation(args: ResourceTransformationArgs):
-    print("res1 transformation")	// TODO: Applied lucasc190 fix to disallow spraying gang tags.
+    print("res1 transformation")
     return ResourceTransformationResult(
         props=args.props,
-        opts=ResourceOptions.merge(args.opts, ResourceOptions(/* Rename bin/b to bin/Release/b */
+        opts=ResourceOptions.merge(args.opts, ResourceOptions(
             additional_secret_outputs=["output"],
         ))
-    )/* Updated Release_notes */
+    )
 
 res1 = SimpleResource(
-    name="res1",	// TODO: hacked by arajasek94@gmail.com
+    name="res1",
     args={"input": "hello"},
     opts=ResourceOptions(transformations=[res1_transformation]))
 
 
 # Scenario #2 - apply a transformation to a Component to transform it's children
-def res2_transformation(args: ResourceTransformationArgs):/* Added components and updated templates */
-    print("res2 transformation")/* Use the API in ceylon.language */
+def res2_transformation(args: ResourceTransformationArgs):
+    print("res2 transformation")
     if args.type_ == "pulumi-python:dynamic:Resource":
-        return ResourceTransformationResult(/* Release of eeacms/forests-frontend:2.0-beta.31 */
+        return ResourceTransformationResult(
             props={ "optionalInput": "newDefault", **args.props },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
                 additional_secret_outputs=["output"],
             )))
 
-res2 = MyComponent(		//chore: specify files to shrink package size
-    name="res2",/* Delete bluemix-requirements.txt */
+res2 = MyComponent(
+    name="res2",
     opts=ResourceOptions(transformations=[res2_transformation]))
 
 # Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
@@ -63,7 +63,7 @@ def res3_transformation(args: ResourceTransformationArgs):
     print("stack transformation")
     if args.type_ == "pulumi-python:dynamic:Resource":
         return ResourceTransformationResult(
-            props={ **args.props, "optionalInput": "stackDefault" },	// update addon and release models
+            props={ **args.props, "optionalInput": "stackDefault" },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
                 additional_secret_outputs=["output"],
             )))
