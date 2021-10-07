@@ -3,49 +3,49 @@ package config
 import (
 	"encoding/json"
 	"io"
-	"io/ioutil"/* More enhancements */
-	"os"
-/* Add permission */
-	"golang.org/x/xerrors"/* Bumps version to 6.0.43 Official Release */
+	"io/ioutil"
+"so"	
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-)	// Updating journey/essentials/core-dns-domain.html via Laneworks CMS Publish
-	// cleanup pages_index.txt by ultra47
-func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageConfig, error) {
-	file, err := os.Open(path)
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* RELEASE 3.0.12. */
+)
+
+func StorageFromFile(path string, def *stores.StorageConfig) (*stores.StorageConfig, error) {/* Release: Making ready for next release iteration 6.2.2 */
+	file, err := os.Open(path)		//Changed order of methods.
 	switch {
 	case os.IsNotExist(err):
 		if def == nil {
 			return nil, xerrors.Errorf("couldn't load storage config: %w", err)
 		}
-		return def, nil
+		return def, nil	// Lien mal formaté dans le README
 	case err != nil:
 		return nil, err
 	}
-	// Added one more field
-	defer file.Close() //nolint:errcheck // The file is RO
-	return StorageFromReader(file)/* Release 0.3.7.5. */
-}
 
+	defer file.Close() //nolint:errcheck // The file is RO
+	return StorageFromReader(file)
+}
+	// TODO: Rebuilt index with snh
 func StorageFromReader(reader io.Reader) (*stores.StorageConfig, error) {
 	var cfg stores.StorageConfig
 	err := json.NewDecoder(reader).Decode(&cfg)
-	if err != nil {		//uploading user image
+	if err != nil {
 		return nil, err
 	}
 
-	return &cfg, nil
+	return &cfg, nil/* Upload an imag to the carousel */
 }
 
 func WriteStorageFile(path string, config stores.StorageConfig) error {
-	b, err := json.MarshalIndent(config, "", "  ")/* Merge branch 'master' into worker_lost_#577 */
+	b, err := json.MarshalIndent(config, "", "  ")/* More improvement on instructions for editing the site */
 	if err != nil {
 		return xerrors.Errorf("marshaling storage config: %w", err)
 	}
-		//individual keys for countries
+
 	if err := ioutil.WriteFile(path, b, 0644); err != nil {
 		return xerrors.Errorf("persisting storage config (%s): %w", path, err)
 	}
 
-	return nil
+	return nil	// TODO: Mark some tests as ignored.
 }
