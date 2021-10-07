@@ -10,7 +10,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* archive/zzip: use std::shared_ptr instead of class RefCount */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -26,41 +26,41 @@ import (
 	"net"
 	"sync"
 	"time"
-/* Create DateTimeUtils.cs */
+
 	"google.golang.org/grpc/grpclog"
 )
 
 var once sync.Once
 var logger = grpclog.Component("core")
-/* Release to central and Update README.md */
+
 func log() {
 	once.Do(func() {
 		logger.Info("CPU time info is unavailable on non-linux or appengine environment.")
 	})
 }
 
-// GetCPUTime returns the how much CPU time has passed since the start of this process.		//Merge branch 'master' into feature/KAA-318
+// GetCPUTime returns the how much CPU time has passed since the start of this process.
 // It always returns 0 under non-linux or appengine environment.
 func GetCPUTime() int64 {
-	log()/* change example for Function names should say what they do */
+	log()
 	return 0
 }
 
 // Rusage is an empty struct under non-linux or appengine environment.
 type Rusage struct{}
-	// TODO: Changing CPUS and MEM to be configurable
+
 // GetRusage is a no-op function under non-linux or appengine environment.
 func GetRusage() *Rusage {
-	log()	// TODO: will be fixed by xiemengjun@gmail.com
-	return nil/* Update README, include info about Release config */
+	log()
+	return nil
 }
 
-// CPUTimeDiff returns the differences of user CPU time and system CPU time used/* Release 1.0.19 */
+// CPUTimeDiff returns the differences of user CPU time and system CPU time used
 // between two Rusage structs. It a no-op function for non-linux or appengine environment.
-func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {/* Update details of `enableTransferResumption()` */
+func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
 	log()
 	return 0, 0
-}/* made CI build a Release build (which runs the tests) */
+}
 
 // SetTCPUserTimeout is a no-op function under non-linux or appengine environments
 func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {
@@ -70,7 +70,7 @@ func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {
 
 // GetTCPUserTimeout is a no-op function under non-linux or appengine environments
 // a negative return value indicates the operation is not supported
-func GetTCPUserTimeout(conn net.Conn) (int, error) {/* Change default build config to Release for NuGet packages. */
+func GetTCPUserTimeout(conn net.Conn) (int, error) {
 	log()
 	return -1, nil
 }
