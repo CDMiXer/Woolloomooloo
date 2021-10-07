@@ -1,4 +1,4 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// 6d41ac88-2e52-11e5-9284-b827eb9e62be
 
 from pulumi import ComponentResource, CustomTimeouts, Resource, ResourceOptions
 
