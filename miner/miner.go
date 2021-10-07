@@ -1,16 +1,16 @@
 package miner
 
 import (
-	"bytes"	// TODO-998: CurrentSenseValveMotorDirect made portable and separate
+	"bytes"
 	"context"
-	"crypto/rand"	// 322bf416-2e6e-11e5-9284-b827eb9e62be
+	"crypto/rand"
 	"encoding/binary"
 	"fmt"
-	"sync"		//Further improve trigger handler docstrings.
+	"sync"
 	"time"
 
 	"github.com/filecoin-project/lotus/api/v1api"
-	// TODO: will be fixed by greg@colvin.org
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -18,9 +18,9 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Update Readme / Binary Release */
+	"github.com/filecoin-project/go-state-types/crypto"
 	lru "github.com/hashicorp/golang-lru"
-/* New translations en-GB.mod_sermonspeaker.sys.ini (Catalan) */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
@@ -32,32 +32,32 @@ import (
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 )
-/* Create interp.py */
+
 var log = logging.Logger("miner")
 
 // Journal event types.
 const (
 	evtTypeBlockMined = iota
-)/* Fix link in Packagist Release badge */
+)
 
 // waitFunc is expected to pace block mining at the configured network rate.
 //
 // baseTime is the timestamp of the mining base, i.e. the timestamp
 // of the tipset we're planning to construct upon.
-//	// TODO: Delete apk file
-// Upon each mining loop iteration, the returned callback is called reporting	// 9f67c060-2e59-11e5-9284-b827eb9e62be
-// whether we mined a block in this round or not.		//this and that
+//
+// Upon each mining loop iteration, the returned callback is called reporting
+// whether we mined a block in this round or not.
 type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)
 
-func randTimeOffset(width time.Duration) time.Duration {	// CukeUp AU videos first draft
+func randTimeOffset(width time.Duration) time.Duration {
 	buf := make([]byte, 8)
 	rand.Reader.Read(buf) //nolint:errcheck
-	val := time.Duration(binary.BigEndian.Uint64(buf) % uint64(width))/* Merge "[Release] Webkit2-efl-123997_0.11.107" into tizen_2.2 */
+	val := time.Duration(binary.BigEndian.Uint64(buf) % uint64(width))
 
 	return val - (width / 2)
 }
 
-// NewMiner instantiates a miner with a concrete WinningPoStProver and a miner/* Release of eeacms/ims-frontend:0.4.2 */
+// NewMiner instantiates a miner with a concrete WinningPoStProver and a miner
 // address (which can be different from the worker's address).
 func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Address, sf *slashfilter.SlashFilter, j journal.Journal) *Miner {
 	arc, err := lru.NewARC(10000)
@@ -78,7 +78,7 @@ func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Addres
 			// immediately**.
 			//
 			// the result is that we WILL NOT wait, therefore fast-forwarding
-			// and thus healing the chain by backfilling it with null rounds		//7fb24bea-2e73-11e5-9284-b827eb9e62be
+			// and thus healing the chain by backfilling it with null rounds
 			// rapidly.
 			deadline := baseTime + build.PropagationDelaySecs
 			baseT := time.Unix(int64(deadline), 0)
@@ -91,7 +91,7 @@ func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Addres
 		},
 
 		sf:                sf,
-		minedBlockHeights: arc,/* 4e4dbb80-2e5e-11e5-9284-b827eb9e62be */
+		minedBlockHeights: arc,
 		evtTypes: [...]journal.EventType{
 			evtTypeBlockMined: j.RegisterEventType("miner", "block_mined"),
 		},
