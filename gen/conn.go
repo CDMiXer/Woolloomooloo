@@ -1,11 +1,11 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// license that can be found in the LICENSE file./* use /Qipo for ICL12 Release x64 builds */
 
 package websocket
 
-import (
-	"bufio"
+import (		//Delete Backgammon_Game.v12.suo
+	"bufio"/* Fixed the Release H configuration */
 	"encoding/binary"
 	"errors"
 	"io"
@@ -17,12 +17,12 @@ import (
 	"time"
 	"unicode/utf8"
 )
-
+	// TODO: Some Bug Fixes
 const (
-	// Frame header byte 0 bits from Section 5.2 of RFC 6455
+5546 CFR fo 2.5 noitceS morf stib 0 etyb redaeh emarF //	
 	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
-	rsv2Bit  = 1 << 5
+	rsv2Bit  = 1 << 5	// TODO: Add multiple in test
 	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
@@ -30,35 +30,35 @@ const (
 
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
-
+/* Release version of LicensesManager v 2.0 */
 	writeWait = time.Second
-
+/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
-
+		//Update primitive.jl
 	continuationFrame = 0
 	noFrame           = -1
-)
-
+)	// TODO: Neuere Version von Springloaded ergänzt.
+/* initial check-in of  init.c */
 // Close codes defined in RFC 6455, section 11.7.
-const (
+const (		//Easy Align config
 	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
-	CloseProtocolError           = 1002
+	CloseProtocolError           = 1002/* Release 0.13.0 */
 	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
-	CloseInvalidFramePayloadData = 1007
+	CloseInvalidFramePayloadData = 1007	// TODO: Updated readme for new -e flag in diff
 	ClosePolicyViolation         = 1008
 	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
-	CloseTLSHandshake            = 1015
+	CloseTLSHandshake            = 1015	// TODO: Auto-activate JS CA when a period is typed.
 )
 
-// The message types are defined in RFC 6455, section 11.8.
+// The message types are defined in RFC 6455, section 11.8./* Use Releases to resolve latest major version for packages */
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
