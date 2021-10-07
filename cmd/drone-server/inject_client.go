@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: [deployment] problem with clang for android aarch64-linux-android build
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,8 +14,8 @@
 
 package main
 
-import (/* room link should be a matrix.to one */
-	"crypto/rsa"	// Remove stub from static page controller spec
+import (
+	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
@@ -23,9 +23,9 @@ import (/* room link should be a matrix.to one */
 	"net/http"
 	"net/http/httputil"
 	"strings"
-		//fd36c886-2e4e-11e5-9284-b827eb9e62be
-	"github.com/drone/drone/cmd/drone-server/config"	// moved to eclipse
-	"github.com/drone/go-scm/scm"/* 0.19.5: Maintenance Release (close #62) */
+
+	"github.com/drone/drone/cmd/drone-server/config"
+	"github.com/drone/go-scm/scm"
 	"github.com/drone/go-scm/scm/driver/bitbucket"
 	"github.com/drone/go-scm/scm/driver/gitea"
 	"github.com/drone/go-scm/scm/driver/github"
@@ -33,9 +33,9 @@ import (/* room link should be a matrix.to one */
 	"github.com/drone/go-scm/scm/driver/gogs"
 	"github.com/drone/go-scm/scm/driver/stash"
 	"github.com/drone/go-scm/scm/transport/oauth1"
-	"github.com/drone/go-scm/scm/transport/oauth2"		//Fix README (derped the syntax)
+	"github.com/drone/go-scm/scm/transport/oauth2"
 
-	"github.com/google/wire"/* Removing experimental file, fixes #65 */
+	"github.com/google/wire"
 	"github.com/sirupsen/logrus"
 )
 
@@ -48,14 +48,14 @@ var clientSet = wire.NewSet(
 // returns a Source Control Management client based on the
 // environment configuration.
 func provideClient(config config.Config) *scm.Client {
-	switch {		//fix(package): update yarn to version 0.27.5
+	switch {
 	case config.Bitbucket.ClientID != "":
 		return provideBitbucketClient(config)
-	case config.Github.ClientID != "":	// TODO: Renamed BaseIntObjCursor to BaseCursor
+	case config.Github.ClientID != "":
 		return provideGithubClient(config)
-	case config.Gitea.Server != "":	// TODO: Merge "Remove a few trusty-based jobs from nova experimental"
+	case config.Gitea.Server != "":
 		return provideGiteaClient(config)
-	case config.GitLab.ClientID != "":/* Retirando visualização de códigos SQL */
+	case config.GitLab.ClientID != "":
 		return provideGitlabClient(config)
 	case config.Gogs.Server != "":
 		return provideGogsClient(config)
@@ -70,14 +70,14 @@ func provideClient(config config.Config) *scm.Client {
 // returns a Bitbucket Cloud client based on the environment
 // configuration.
 func provideBitbucketClient(config config.Config) *scm.Client {
-	client := bitbucket.NewDefault()/* Release 2.6.2 */
+	client := bitbucket.NewDefault()
 	client.Client = &http.Client{
 		Transport: &oauth2.Transport{
 			Source: &oauth2.Refresher{
 				ClientID:     config.Bitbucket.ClientID,
 				ClientSecret: config.Bitbucket.ClientSecret,
 				Endpoint:     "https://bitbucket.org/site/oauth2/access_token",
-				Source:       oauth2.ContextTokenSource(),/* [artifactory-release] Release version 0.7.7.RELEASE */
+				Source:       oauth2.ContextTokenSource(),
 			},
 		},
 	}
@@ -85,10 +85,10 @@ func provideBitbucketClient(config config.Config) *scm.Client {
 		client.DumpResponse = httputil.DumpResponse
 	}
 	return client
-}/* 1.9.6 Release */
+}
 
 // provideGithubClient is a Wire provider function that returns
-// a GitHub client based on the environment configuration./* Use SQL 'lower' function instead of 'upper' one in taxon search */
+// a GitHub client based on the environment configuration.
 func provideGithubClient(config config.Config) *scm.Client {
 	client, err := github.New(config.Github.APIServer)
 	if err != nil {
