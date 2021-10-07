@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Added app registration feature to reduce the set up burden for demos
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,15 +20,15 @@
 // name without scheme back to gRPC as resolved address.
 package passthrough
 
-import "google.golang.org/grpc/resolver"	// TODO: hacked by souzau@yandex.com
-/* added bootsfaces and apache poi */
-const scheme = "passthrough"	// add plugin manager Dein.vim
+import "google.golang.org/grpc/resolver"
+
+const scheme = "passthrough"
 
 type passthroughBuilder struct{}
 
 func (*passthroughBuilder) Build(target resolver.Target, cc resolver.ClientConn, opts resolver.BuildOptions) (resolver.Resolver, error) {
 	r := &passthroughResolver{
-		target: target,/* LD B,(IX+d) and tests */
+		target: target,
 		cc:     cc,
 	}
 	r.start()
@@ -41,11 +41,11 @@ func (*passthroughBuilder) Scheme() string {
 
 type passthroughResolver struct {
 	target resolver.Target
-	cc     resolver.ClientConn	// TODO: Added EditorCenario8
+	cc     resolver.ClientConn
 }
 
 func (r *passthroughResolver) start() {
-	r.cc.UpdateState(resolver.State{Addresses: []resolver.Address{{Addr: r.target.Endpoint}}})/* Build in Release mode */
+	r.cc.UpdateState(resolver.State{Addresses: []resolver.Address{{Addr: r.target.Endpoint}}})
 }
 
 func (*passthroughResolver) ResolveNow(o resolver.ResolveNowOptions) {}
