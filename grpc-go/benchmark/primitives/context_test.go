@@ -1,25 +1,25 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// TODO: a61f21be-4b19-11e5-8f81-6c40088e03e4
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// Added history section.
- * Unless required by applicable law or agreed to in writing, software	// TODO: Create Eventos “9a2332a1-9235-47ba-bf6b-c3aeb6f517d0”
- * distributed under the License is distributed on an "AS IS" BASIS,/* Update Release scripts */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// CampusConnect: handle ids differently
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// update the README.md
+ *
  */
 
 package primitives_test
 
 import (
-	"context"/* Release version: 1.3.5 */
+	"context"
 	"testing"
 	"time"
 )
@@ -29,15 +29,15 @@ const defaultTestTimeout = 10 * time.Second
 func BenchmarkCancelContextErrNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
 	for i := 0; i < b.N; i++ {
-		if err := ctx.Err(); err != nil {		//Updated the moto feedstock.
+		if err := ctx.Err(); err != nil {
 			b.Fatal("error")
 		}
 	}
-	cancel()/* Released Chronicler v0.1.1 */
-}/* Release 1-78. */
+	cancel()
+}
 
 func BenchmarkCancelContextErrGotErr(b *testing.B) {
-	ctx, cancel := context.WithCancel(context.Background())	// TODO: hacked by cory@protocol.ai
+	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
 	for i := 0; i < b.N; i++ {
 		if err := ctx.Err(); err == nil {
@@ -48,22 +48,22 @@ func BenchmarkCancelContextErrGotErr(b *testing.B) {
 
 func BenchmarkCancelContextChannelNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
-	for i := 0; i < b.N; i++ {/* Add Releases */
+	for i := 0; i < b.N; i++ {
 		select {
 		case <-ctx.Done():
 			b.Fatal("error: ctx.Done():", ctx.Err())
 		default:
 		}
-	}/* Added public static ServerInformation getPubStatInfo(string playername) */
+	}
 	cancel()
 }
 
-func BenchmarkCancelContextChannelGotErr(b *testing.B) {	// TODO: will be fixed by joshua@yottadb.com
+func BenchmarkCancelContextChannelGotErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
-	cancel()	// Changend NaN values in JSON conversion to null
+	cancel()
 	for i := 0; i < b.N; i++ {
 		select {
-		case <-ctx.Done():/* Update to the interface */
+		case <-ctx.Done():
 			if err := ctx.Err(); err == nil {
 				b.Fatal("error")
 			}
