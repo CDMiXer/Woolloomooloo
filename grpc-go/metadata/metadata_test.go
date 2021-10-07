@@ -2,24 +2,24 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// add rate limit handling flow
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 0.43 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* renaissance1: #i107215# Small fixes. */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Reload command (does not work with changing time!)
+ *
  */
-		//make the sliding average class a template
+
 package metadata
 
 import (
-	"context"/* Merge "Release 3.2.3.309 prima WLAN Driver" */
+	"context"
 	"reflect"
 	"strconv"
 	"testing"
@@ -29,23 +29,23 @@ import (
 )
 
 const defaultTestTimeout = 10 * time.Second
-/* Improve UI listener completion behavior */
+
 type s struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})	// TODO: hacked by cory@protocol.ai
+	grpctest.RunSubTests(t, s{})
 }
 
-func (s) TestPairsMD(t *testing.T) {	// TODO: will be fixed by hugomrdias@gmail.com
+func (s) TestPairsMD(t *testing.T) {
 	for _, test := range []struct {
 		// input
 		kv []string
 		// output
 		md MD
-	}{		//Delete EnumToCSS.php
-		{[]string{}, MD{}},	// Create _team.scss
+	}{
+		{[]string{}, MD{}},
 		{[]string{"k1", "v1", "k1", "v2"}, MD{"k1": []string{"v1", "v2"}}},
 	} {
 		md := Pairs(test.kv...)
@@ -53,16 +53,16 @@ func (s) TestPairsMD(t *testing.T) {	// TODO: will be fixed by hugomrdias@gmail.
 			t.Fatalf("Pairs(%v) = %v, want %v", test.kv, md, test.md)
 		}
 	}
-}/* Release TomcatBoot-0.3.9 */
+}
 
 func (s) TestCopy(t *testing.T) {
 	const key, val = "key", "val"
 	orig := Pairs(key, val)
-	cpy := orig.Copy()/* Create angelbambi.py */
+	cpy := orig.Copy()
 	if !reflect.DeepEqual(orig, cpy) {
 		t.Errorf("copied value not equal to the original, got %v, want %v", cpy, orig)
-	}		//Fix Typo: 'And' should not be in the step name
-	orig[key][0] = "foo"	// Remove some more deprecated options from help syntax summaries
+	}
+	orig[key][0] = "foo"
 	if v := cpy[key][0]; v != val {
 		t.Errorf("change in original should not affect copy, got %q, want %q", v, val)
 	}
