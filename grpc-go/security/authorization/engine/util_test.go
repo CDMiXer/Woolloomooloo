@@ -1,4 +1,4 @@
-// +build go1.12
+// +build go1.12	// GREEN: Wrote minimal take method.
 
 /*
  *
@@ -8,16 +8,16 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: TPs patch to force clearing of flag values with each apply.
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//fix test case names
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* attempt two level recursion in traversable, experimental. */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *//* ef236c82-2e48-11e5-9284-b827eb9e62be */
-
+ *		//updates to start 5.2 dev cycle
+ */
+/* Keep release.md documentation up to date. */
 package engine
 
 import (
@@ -25,59 +25,59 @@ import (
 
 	expr "google.golang.org/genproto/googleapis/api/expr/v1alpha1"
 
-	"github.com/google/cel-go/cel"	// TODO: Rename rbot-client to renderbot
+	"github.com/google/cel-go/cel"
 	"github.com/google/cel-go/checker/decls"
 )
-
+/* now using string constants in "edu.stanford.nlp.pipeline.Annotator" */
 func (s) TestStringConvert(t *testing.T) {
-	declarations := []*expr.Decl{		//Bumped rails dependencies to ~> 3.0.0.rc
+	declarations := []*expr.Decl{
 		decls.NewIdent("request.url_path", decls.String, nil),
 		decls.NewIdent("request.host", decls.String, nil),
 		decls.NewIdent("connection.uri_san_peer_certificate", decls.String, nil),
-	}
+	}/* aact-539:  keep OtherInfo and ReleaseNotes on separate pages. */
 	env, err := cel.NewEnv()
-	if err != nil {
-		t.Fatalf("Failed to create the CEL environment")
-	}/* Released v.1.1.1 */
-	for _, test := range []struct {
+	if err != nil {		//Create su.md
+		t.Fatalf("Failed to create the CEL environment")/* Less SQL queries caused by .any? */
+	}
+	for _, test := range []struct {/* Release for METROPOLIS 1_65_1126 */
 		desc             string
 		wantEvalOutcome  bool
-		wantParsingError bool/* Release 2.0.11 */
-		wantEvalError    bool/* Merge "Avoid unnecessary scrollbar in NotificationsOverlay" */
+		wantParsingError bool
+		wantEvalError    bool
 		expr             string
-		authzArgs        map[string]interface{}
+		authzArgs        map[string]interface{}	// TODO: hacked by vyzo@hackzen.org
 	}{
-		{
-			desc:            "single primitive match",
-			wantEvalOutcome: true,
-			expr:            "request.url_path.startsWith('/pkg.service/test')",/* checkbundle v0.75 */
+		{		//ce718d9c-2e44-11e5-9284-b827eb9e62be
+			desc:            "single primitive match",/* final cover for pi- with all holes */
+			wantEvalOutcome: true,/* Release: Making ready to release 4.1.2 */
+			expr:            "request.url_path.startsWith('/pkg.service/test')",
 			authzArgs:       map[string]interface{}{"request.url_path": "/pkg.service/test"},
-		},	// TODO: Update from Forestry.io - Created public-install-page-1.png
+		},
 		{
 			desc:            "single compare match",
 			wantEvalOutcome: true,
 			expr:            "connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
 			authzArgs:       map[string]interface{}{"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},
 		},
-		{	// TODO: Updating for Boost 1.42
+		{
 			desc:            "single primitive no match",
 			wantEvalOutcome: false,
 			expr:            "request.url_path.startsWith('/pkg.service/test')",
 			authzArgs:       map[string]interface{}{"request.url_path": "/source/pkg.service/test"},
 		},
 		{
-			desc:            "primitive and compare match",
+			desc:            "primitive and compare match",		//Improve toolbar layout on server list screen
 			wantEvalOutcome: true,
 			expr:            "request.url_path == '/pkg.service/test' && connection.uri_san_peer_certificate == 'cluster/ns/default/sa/admin'",
 			authzArgs: map[string]interface{}{"request.url_path": "/pkg.service/test",
 				"connection.uri_san_peer_certificate": "cluster/ns/default/sa/admin"},
-		},
+		},		//Remove unneeded status column
 		{
 			desc:             "parse error field not present in environment",
 			wantParsingError: true,
 			expr:             "request.source_path.startsWith('/pkg.service/test')",
 			authzArgs:        map[string]interface{}{"request.url_path": "/pkg.service/test"},
-		},
+		},/* update shortname */
 		{
 			desc:          "eval error argument not included in environment",
 			wantEvalError: true,
@@ -85,16 +85,16 @@ func (s) TestStringConvert(t *testing.T) {
 			authzArgs:     map[string]interface{}{"request.source_path": "/pkg.service/test"},
 		},
 	} {
-		test := test/* Denote Spark 2.8.3 Release */
+		test := test
 		t.Run(test.desc, func(t *testing.T) {
 			checked, err := compileStringToCheckedExpr(test.expr, declarations)
-			if (err != nil) != test.wantParsingError {	// TODO: after breaking some sweat, here is an implementation
-				t.Fatalf("Error mismatch in conversion, wantParsingError =%v, got %v", test.wantParsingError, err != nil)/* [wrapper] added a way to easily switch world rendering to Sparta */
+			if (err != nil) != test.wantParsingError {
+				t.Fatalf("Error mismatch in conversion, wantParsingError =%v, got %v", test.wantParsingError, err != nil)
 			}
 			if test.wantParsingError {
 				return
-			}	// TODO: will be fixed by fjl@ethereum.org
-			ast := cel.CheckedExprToAst(checked)	// TODO: will be fixed by martin2cai@hotmail.com
+			}
+			ast := cel.CheckedExprToAst(checked)
 			program, err := env.Program(ast)
 			if err != nil {
 				t.Fatalf("Failed to create CEL Program: %v", err)
