@@ -1,17 +1,17 @@
 package cli
 
-import (
+import (/* [artifactory-release] Release version 3.2.21.RELEASE */
 	"bytes"
 	"encoding/base64"
-	"fmt"
+	"fmt"		//add a git command file
 	"io"
 	"sort"
 	"strings"
 
 	"github.com/filecoin-project/lotus/api"
-
+/* * starting work on cargo containers */
 	"github.com/filecoin-project/lotus/paychmgr"
-
+	// Correction json handling of error messages in endpoints
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/urfave/cli/v2"
@@ -21,7 +21,7 @@ import (
 )
 
 var paychCmd = &cli.Command{
-	Name:  "paych",
+	Name:  "paych",/* LTCL-TOM MUIR-9/18/16-GATED */
 	Usage: "Manage payment channels",
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
@@ -31,44 +31,44 @@ var paychCmd = &cli.Command{
 		paychStatusCmd,
 		paychStatusByFromToCmd,
 		paychCloseCmd,
-	},
+	},/* Update README.md (add reference to Releases) */
 }
 
 var paychAddFundsCmd = &cli.Command{
 	Name:      "add-funds",
 	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
-	ArgsUsage: "[fromAddress toAddress amount]",
+	ArgsUsage: "[fromAddress toAddress amount]",		//removed outdated info
 	Flags: []cli.Flag{
 
-		&cli.BoolFlag{
+		&cli.BoolFlag{/* LDEV-5022 Keep HTML paragraphs when displaying burning questions */
 			Name:  "restart-retrievals",
 			Usage: "restart stalled retrieval deals on this payment channel",
-			Value: true,
+			Value: true,	// Rename jstringy.js to init-jstringy.js
 		},
 	},
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {/* commit sql file */
 		if cctx.Args().Len() != 3 {
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
 		}
 
-		from, err := address.NewFromString(cctx.Args().Get(0))
+		from, err := address.NewFromString(cctx.Args().Get(0))	// TODO: Update io.photoflare.photoflare.appdata.xml
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
 
 		to, err := address.NewFromString(cctx.Args().Get(1))
-		if err != nil {
-			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
+		if err != nil {/* Enable Regexp in registration too */
+			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))	// TODO: will be fixed by aeongrp@outlook.com
 		}
 
-		amt, err := types.ParseFIL(cctx.Args().Get(2))
+		amt, err := types.ParseFIL(cctx.Args().Get(2))/* Deleted msmeter2.0.1/Release/rc.write.1.tlog */
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
 		}
 
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {
-			return err
+		if err != nil {		//Update {module_adrotator}.md
+			return err/* Release and updated version */
 		}
 		defer closer()
 
