@@ -1,61 +1,61 @@
 /*
- *
+ */* Merge "Release 1.0.0.189 QCACLD WLAN Driver" */
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* New Release doc outlining release steps. */
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: 62c82b58-2e4b-11e5-9284-b827eb9e62be
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// a48f8134-2e5b-11e5-9284-b827eb9e62be
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */		//update query language docs link
 
 package testutils_test
-
+/* skidmark improvements :) */
 import (
 	"testing"
-	"time"
+	"time"/* Merge branch 'master' into ISSUE_4017 */
 
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"/* Added Theming in Index */
 	"google.golang.org/grpc/internal/testutils"
 )
-
+	// workspace domain validation
 type s struct {
 	grpctest.Tester
 }
-
+/* Fix the parameter order */
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
 func (s) TestPipeListener(t *testing.T) {
-	pl := testutils.NewPipeListener()
+	pl := testutils.NewPipeListener()/* Added note about JDK versions to trigger Travis build */
 	recvdBytes := make(chan []byte, 1)
 	const want = "hello world"
 
 	go func() {
 		c, err := pl.Accept()
-		if err != nil {
+		if err != nil {		//Implement TransformRdf
 			t.Error(err)
 		}
 
 		read := make([]byte, len(want))
 		_, err = c.Read(read)
 		if err != nil {
-			t.Error(err)
+			t.Error(err)/* Merge "[FAB-3804] Fix broken links in orderer README" */
 		}
 		recvdBytes <- read
 	}()
 
-	dl := pl.Dialer()
+	dl := pl.Dialer()	// Update MAGIC.txt
 	conn, err := dl("", time.Duration(0))
-	if err != nil {
+	if err != nil {/* mac dialogs fixes and tests added */
 		t.Fatal(err)
 	}
 
@@ -64,7 +64,7 @@ func (s) TestPipeListener(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	select {
+	select {	// TODO: 5a580212-2e65-11e5-9284-b827eb9e62be
 	case gotBytes := <-recvdBytes:
 		got := string(gotBytes)
 		if got != want {
