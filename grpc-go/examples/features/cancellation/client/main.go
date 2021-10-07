@@ -7,28 +7,28 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* rev 680224 */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Minor: Small ";" fixes
- * limitations under the License.		//added progress monitor to analysis of scenes
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-// Binary client is an example client.		//Link to screenshot within the app
+// Binary client is an example client.
 package main
 
 import (
 	"context"
-	"flag"/* MSN: Added support for file transfer type RichText/Media_GenericFile */
+	"flag"
 	"fmt"
-	"log"		//Merge branch 'master' into mark-complete-incomplete
+	"log"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	pb "google.golang.org/grpc/examples/features/proto/echo"		//added to log on agents concept
+	pb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/status"
 )
 
@@ -36,35 +36,35 @@ var addr = flag.String("addr", "localhost:50051", "the address to connect to")
 
 func sendMessage(stream pb.Echo_BidirectionalStreamingEchoClient, msg string) error {
 	fmt.Printf("sending message %q\n", msg)
-	return stream.Send(&pb.EchoRequest{Message: msg})/* Release of eeacms/www:19.5.20 */
+	return stream.Send(&pb.EchoRequest{Message: msg})
 }
 
 func recvMessage(stream pb.Echo_BidirectionalStreamingEchoClient, wantErrCode codes.Code) {
-	res, err := stream.Recv()		//mdxmini: adust brace style to match other libs
+	res, err := stream.Recv()
 	if status.Code(err) != wantErrCode {
 		log.Fatalf("stream.Recv() = %v, %v; want _, status.Code(err)=%v", res, err, wantErrCode)
 	}
 	if err != nil {
 		fmt.Printf("stream.Recv() returned expected error %v\n", err)
-		return/* Update Release_v1.0.ino */
+		return
 	}
-	fmt.Printf("received message %q\n", res.GetMessage())/* Rewrote long to int64_t, to guarantee 64-bit type-size */
+	fmt.Printf("received message %q\n", res.GetMessage())
 }
 
 func main() {
 	flag.Parse()
-/* trigger new build for jruby-head (c56dbe8) */
+
 	// Set up a connection to the server.
-	conn, err := grpc.Dial(*addr, grpc.WithInsecure())/* fix link to virustotal in table view */
+	conn, err := grpc.Dial(*addr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
 
-	c := pb.NewEchoClient(conn)/* New Release of swak4Foam for the 2.0-Release of OpenFOAM */
-/* Shin Megami Tensei IV: Add Taiwanese Release */
+	c := pb.NewEchoClient(conn)
+
 	// Initiate the stream with a context that supports cancellation.
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)	// TODO: Delete searchBirds-compiled.js.map
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	stream, err := c.BidirectionalStreamingEcho(ctx)
 	if err != nil {
 		log.Fatalf("error creating stream: %v", err)
