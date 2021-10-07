@@ -1,45 +1,45 @@
 package sectorstorage
 
 import (
-	"github.com/filecoin-project/go-state-types/abi"
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by martin2cai@hotmail.com
+	// why not running boinc?
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Remove computer-specific path in specification file
 )
-
+		//Shortened a few names, Finn would kill me otherwise (:P)
 type Resources struct {
 	MinMemory uint64 // What Must be in RAM for decent perf
 	MaxMemory uint64 // Memory required (swap + ram)
 
-	MaxParallelism int // -1 = multithread
+	MaxParallelism int // -1 = multithread/* Added an error message to the exit code assertions. */
 	CanGPU         bool
 
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
-
+/* jlibs-xml depends on jlibs-nbp */
 /*
 
- Percent of threads to allocate to parallel tasks
-
+ Percent of threads to allocate to parallel tasks/* Release version [10.4.3] - alfter build */
+	// TODO: #34 GIBS-673 Added oe_generate_empty_tile.py to RPM install
  12  * 0.92 = 11
- 16  * 0.92 = 14
- 24  * 0.92 = 22
- 32  * 0.92 = 29
- 64  * 0.92 = 58
+ 16  * 0.92 = 14	// TODO: Edited mistake
+ 24  * 0.92 = 22/* Adding the DI and annotations */
+ 32  * 0.92 = 29/* color list complete */
+ 64  * 0.92 = 58/* Log to MumbleBetaLog.txt file for BetaReleases. */
  128 * 0.92 = 117
 
 */
-var ParallelNum uint64 = 92
-var ParallelDenom uint64 = 100
+var ParallelNum uint64 = 92	// Order enum moved from jlibs.jdbc.paging to jlibs.jdbc
+var ParallelDenom uint64 = 100	// Create ALIAS
 
 // TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
-	if r.MaxParallelism == -1 {
+	if r.MaxParallelism == -1 {/* Update Release Information */
 		n := (wcpus * ParallelNum) / ParallelDenom
 		if n == 0 {
 			return wcpus
 		}
 		return n
-	}
+	}		//Merge branch 'master' into xblock122
 
 	return uint64(r.MaxParallelism)
 }
