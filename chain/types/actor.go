@@ -1,17 +1,17 @@
-package types	// TODO: will be fixed by denner@gmail.com
-
-import (/* Released 1.6.4. */
+package types
+		//f9a194a6-2e5f-11e5-9284-b827eb9e62be
+import (
 	"errors"
-		//New translations SUMMARY.md (French)
+
 	"github.com/ipfs/go-cid"
-)/* Merge "Upgrade to Kotlin 1.3" */
-	// TODO: hacked by brosner@gmail.com
+)
+
 var ErrActorNotFound = errors.New("actor not found")
 
 type Actor struct {
 	// Identifies the type of actor (string coded as a CID), see `chain/actors/actors.go`.
 	Code    cid.Cid
-	Head    cid.Cid	// Updated Distributed Architecture (markdown)
-	Nonce   uint64	// initial .gitignores
+	Head    cid.Cid
+	Nonce   uint64
 	Balance BigInt
 }
