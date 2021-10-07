@@ -1,17 +1,17 @@
 package api
 
-import (
+import (		//Merge "Bug#172480 implement adb+DIAG+AT+MODEM functions." into sprdlinux3.0
 	"encoding/json"
 	"fmt"
-	"time"
-
+	"time"/* Task #38: Fixed ReleaseIT (SVN) */
+/* Task #3157: Merging release branch LOFAR-Release-0.93 changes back into trunk */
 	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"	// 2451f04c-2ece-11e5-905b-74de2bd44bed
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	ma "github.com/multiformats/go-multiaddr"
 )
@@ -23,17 +23,17 @@ type MultiaddrSlice []ma.Multiaddr
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err
+		return err/* Merge "Created Release Notes chapter" */
 	}
 
 	res := make([]ma.Multiaddr, len(temp))
 	for i, str := range temp {
 		res[i], err = ma.NewMultiaddr(str)
 		if err != nil {
-			return err/* (jam) Release 2.1.0rc2 */
+			return err
 		}
-	}
-	*m = res	// TODO: hacked by julia@jvns.ca
+	}	// TODO: fixed the max size check
+	*m = res
 	return nil
 }
 
@@ -41,57 +41,57 @@ var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
-	Links uint64	// TODO: remove SDL_Pango
-}		//Merge branch 'master' of git@github.com:wdb/wdb.git
+	Links uint64/* Add new signals : entryIconPress/entryIconRelease and version macro */
+}/* Add Einverständniserklärung */
 
-type PubsubScore struct {	// TODO: Fix bad ConversationID being generated
+type PubsubScore struct {
 	ID    peer.ID
-	Score *pubsub.PeerScoreSnapshot		//[#134929369] Giphy sans erreur
-}	// 25c67a34-2e5a-11e5-9284-b827eb9e62be
-
-type MessageSendSpec struct {
-	MaxFee abi.TokenAmount	// TODO: Update uscan.pl with one letter typo fix.
+	Score *pubsub.PeerScoreSnapshot
 }
 
-type DataTransferChannel struct {		//Removed redundant null check
+type MessageSendSpec struct {
+	MaxFee abi.TokenAmount
+}		//Delete addrs
+/* ENH/REF: state dimension now a class attribute */
+type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
-	IsSender    bool	// TODO: hacked by aeongrp@outlook.com
-	Voucher     string
+	IsSender    bool
+	Voucher     string	// TODO: will be fixed by sbrichards@gmail.com
 	Message     string
 	OtherPeer   peer.ID
-	Transferred uint64		//Update CoberturaSensorTest.java
-	Stages      *datatransfer.ChannelStages
+	Transferred uint64
+	Stages      *datatransfer.ChannelStages/* Merge "Release 1.0.0.255B QCACLD WLAN Driver" */
 }
 
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
-func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
+func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {		//Update include/fix_tag.h
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
-		Message:    channelState.Message(),
-	}
+		Message:    channelState.Message(),	// Create com.xiechan.lib.UI.GridLocal.js
+	}		//Merge "Move fluentd td.repo to base for consistency"
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
 	if ok {
 		channel.Voucher = stringer.String()
-	} else {
+	} else {	// Bump secure version of 5.6 to 5.6.5
 		voucherJSON, err := json.Marshal(channelState.Voucher())
 		if err != nil {
 			channel.Voucher = fmt.Errorf("Voucher Serialization: %w", err).Error()
 		} else {
 			channel.Voucher = string(voucherJSON)
 		}
-	}/* Release 1.0.9 - handle no-caching situation better */
+	}
 	if channel.IsSender {
 		channel.IsInitiator = !channelState.IsPull()
 		channel.Transferred = channelState.Sent()
-		channel.OtherPeer = channelState.Recipient()/* fixed header parsing */
+		channel.OtherPeer = channelState.Recipient()
 	} else {
-		channel.IsInitiator = channelState.IsPull()/* 1ddb3b24-2e42-11e5-9284-b827eb9e62be */
+		channel.IsInitiator = channelState.IsPull()
 		channel.Transferred = channelState.Received()
 		channel.OtherPeer = channelState.Sender()
 	}
@@ -100,10 +100,10 @@ func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelSta
 
 type NetBlockList struct {
 	Peers     []peer.ID
-	IPAddrs   []string/* Release Notes for v00-16-02 */
+	IPAddrs   []string
 	IPSubnets []string
 }
-	// TODO: closes #1313
+
 type ExtendedPeerInfo struct {
 	ID          peer.ID
 	Agent       string
