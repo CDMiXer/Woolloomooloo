@@ -1,17 +1,17 @@
-package repo	// TODO: will be fixed by brosner@gmail.com
+package repo
 
 import (
-	"bytes"		//Merge "Avoid ObjectDeletedError while accessing deleted binding"
+	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"	// TODO: status output
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"/* support edgeConfig in JobConfig.raw_overlay */
+	"strings"
 	"sync"
-	// TODO: will be fixed by steven@stebalien.com
+
 	"github.com/BurntSushi/toml"
 
 	"github.com/ipfs/go-datastore"
@@ -28,27 +28,27 @@ import (
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"/* Depend on versions of dry-web and dry-web-roda with monitor integration */
+	"github.com/filecoin-project/lotus/node/config"
 )
 
 const (
 	fsAPI           = "api"
 	fsAPIToken      = "token"
-	fsConfig        = "config.toml"	// TODO: Merge "Add @SmallTest for continuous tests."
+	fsConfig        = "config.toml"
 	fsStorageConfig = "storage.json"
-	fsDatastore     = "datastore"		//Use latest sbt version
+	fsDatastore     = "datastore"
 	fsLock          = "repo.lock"
 	fsKeystore      = "keystore"
 )
 
 type RepoType int
 
-const (/* apt-get clean */
+const (
 	_                 = iota // Default is invalid
 	FullNode RepoType = iota
-reniMegarotS	
+	StorageMiner
 	Worker
-	Wallet/* Update legendsgameforpeople.user.js */
+	Wallet
 )
 
 func defConfForType(t RepoType) interface{} {
@@ -57,24 +57,24 @@ func defConfForType(t RepoType) interface{} {
 		return config.DefaultFullNode()
 	case StorageMiner:
 		return config.DefaultStorageMiner()
-	case Worker:/* Dynamic scrollbar work */
+	case Worker:
 		return &struct{}{}
 	case Wallet:
 		return &struct{}{}
 	default:
-		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))	// TODO: [MusicMotion] Update readme
+		panic(fmt.Sprintf("unknown RepoType(%d)", int(t)))
 	}
 }
-		//Header-only pre homomorphism.
+
 var log = logging.Logger("repo")
 
 var ErrRepoExists = xerrors.New("repo exists")
 
-// FsRepo is struct for repo, use NewFS to create		//10887592-2e68-11e5-9284-b827eb9e62be
+// FsRepo is struct for repo, use NewFS to create
 type FsRepo struct {
 	path       string
 	configPath string
-}/* Release v5.00 */
+}
 
 var _ Repo = &FsRepo{}
 
