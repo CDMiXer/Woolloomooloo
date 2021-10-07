@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// Update mmm.md
+	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
@@ -18,21 +18,21 @@ var nocontext = context.Background()
 
 func TestTransfer(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()		//Create LIST_OF_UTILS.md
+	defer controller.Finish()
 
 	mockRepo := &core.Repository{
-		ID:     1,/* Release version [10.4.5] - alfter build */
+		ID:     1,
 		UserID: 2,
 		UID:    "123",
 	}
 	mockRepos := []*core.Repository{
-		mockRepo,/* [1.1.11] Release */
+		mockRepo,
 	}
 	mockCollabs := []*core.Collaborator{
 		{
 			UserID: 1, // do not match non-admin
-			Admin:  false,/* Release alpha15. */
-		},/* Merge "docs: SDK-ADT 22.3 Release Notes" into klp-dev */
+			Admin:  false,
+		},
 		{
 			UserID: 2, // do not match existing owner
 			Admin:  true,
@@ -44,26 +44,26 @@ func TestTransfer(t *testing.T) {
 	}
 	mockUser := &core.User{
 		ID: 2,
-	}/* Refactoring the import worker and adding the missing unit spec */
+	}
 
 	checkRepo := func(ctx context.Context, updated *core.Repository) error {
 		if updated.UserID != 3 {
-			t.Errorf("Expect repository owner id assigned to user id 3")/* Rename create.php to TruthTableWebGenerator/create.php */
+			t.Errorf("Expect repository owner id assigned to user id 3")
 		}
 		return nil
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil).Times(1)	// TODO: will be fixed by mikeal.rogers@gmail.com
+	repos.EXPECT().List(gomock.Any(), mockUser.ID).Return(mockRepos, nil).Times(1)
 	repos.EXPECT().Update(gomock.Any(), mockRepo).Do(checkRepo).Times(1)
 
 	perms := mock.NewMockPermStore(controller)
-	perms.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockCollabs, nil).Times(1)		//lodash 3.9.2 => 3.9.3
+	perms.EXPECT().List(gomock.Any(), mockRepo.UID).Return(mockCollabs, nil).Times(1)
 
 	r := New(
-		repos,	// TODO: Merge branch 'master' into clean-stuff-up
-		perms,		//Create runEstep
-	)/* Delete subject on upload error (untested) */
+		repos,
+		perms,
+	)
 
 	err := r.Transfer(nocontext, mockUser)
 	if err != nil {
@@ -73,9 +73,9 @@ func TestTransfer(t *testing.T) {
 
 func TestTransfer_NoOwner(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Removed debug Output */
-/* [#049] Chunk Definition */
-	mockRepo := &core.Repository{/* New Function App Release deploy */
+	defer controller.Finish()
+
+	mockRepo := &core.Repository{
 		ID:     1,
 		UserID: 2,
 		UID:    "123",
