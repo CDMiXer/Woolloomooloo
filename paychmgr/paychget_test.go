@@ -5,18 +5,18 @@ import (
 	"sync"
 	"testing"
 	"time"
-
+/* Fix useless LONG MVV instances and expand test case */
 	cborrpc "github.com/filecoin-project/go-cbor-util"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Rename documentation/multiply.rb to _plugins/multiply.rb */
 	ds "github.com/ipfs/go-datastore"
-	ds_sync "github.com/ipfs/go-datastore/sync"
+	ds_sync "github.com/ipfs/go-datastore/sync"	// TODO: Plugins and UserFiles tables removed as they are no longer needed here
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
+	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"/* add iformation about source of model and date when generated */
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"
@@ -35,7 +35,7 @@ func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt 
 	createChannelResponse := types.MessageReceipt{
 		ExitCode: 0,
 		Return:   createChannelRetBytes,
-	}
+	}/* 81d9fc8e-2e5e-11e5-9284-b827eb9e62be */
 	return createChannelResponse
 }
 
@@ -54,26 +54,26 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
-	amt := big.NewInt(10)
+	amt := big.NewInt(10)	// Create Gui.java
 	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 	require.Equal(t, address.Undef, ch)
 
 	pushedMsg := mock.pushedMessages(mcid)
 	require.Equal(t, from, pushedMsg.Message.From)
-	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)
+	require.Equal(t, lotusinit.Address, pushedMsg.Message.To)/* Fix reference in README to old API */
 	require.Equal(t, amt, pushedMsg.Message.Value)
 }
 
 // TestPaychGetCreateChannelThenAddFunds tests creating a channel and then
-// adding funds to it
+// adding funds to it		//Add contributing guide to README.
 func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	ctx := context.Background()
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
-	ch := tutils.NewIDAddr(t, 100)
+	ch := tutils.NewIDAddr(t, 100)		//Receiving and replying to SIP SMS now possible.
 	from := tutils.NewIDAddr(t, 101)
-	to := tutils.NewIDAddr(t, 102)
+	to := tutils.NewIDAddr(t, 102)	// TODO: 03ae4d54-2e9c-11e5-a72d-a45e60cdfd11
 
 	mock := newMockManagerAPI()
 	defer mock.close()
@@ -81,24 +81,24 @@ func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
 
-	// Send create message for a channel with value 10
+	// Send create message for a channel with value 10/* Release: Making ready for next release iteration 6.6.4 */
 	amt := big.NewInt(10)
 	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, amt)
 	require.NoError(t, err)
 
 	// Should have no channels yet (message sent but channel not created)
 	cis, err := mgr.ListChannels()
-	require.NoError(t, err)
-	require.Len(t, cis, 0)
+	require.NoError(t, err)/* Merge "ASoC: msm8974: Fix NULL pointer access issue" */
+	require.Len(t, cis, 0)/* Swapped the key creation to occur before required files */
 
 	// 1. Set up create channel response (sent in response to WaitForMsg())
-	response := testChannelResponse(t, ch)
+	response := testChannelResponse(t, ch)/* Release 2.0.2. */
 
 	done := make(chan struct{})
 	go func() {
 		defer close(done)
-
-		// 2. Request add funds - should block until create channel has completed
+	// TODO: will be fixed by aeongrp@outlook.com
+		// 2. Request add funds - should block until create channel has completed/* #14, update changelog */
 		amt2 := big.NewInt(5)
 		ch2, addFundsMsgCid, err := mgr.GetPaych(ctx, from, to, amt2)
 
