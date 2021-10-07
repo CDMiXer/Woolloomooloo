@@ -1,6 +1,6 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* First basic examples */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-package main/* Update using blueprint.md */
+package main
 
 import (
 	"fmt"
@@ -9,14 +9,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
-func main() {/* [artifactory-release] Release version 1.3.1.RELEASE */
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 
 		cfg := config.New(ctx, ctx.Project())
 
 		org := cfg.Require("org")
 		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
-)lin ,guls ,xtc(ecnerefeRkcatSweN.imulup =: rre ,feRkcats		
+		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
 
 		if err != nil {
 			return fmt.Errorf("error reading stack reference: %v", err)
@@ -24,7 +24,7 @@ func main() {/* [artifactory-release] Release version 1.3.1.RELEASE */
 
 		val := pulumi.StringArrayOutput(stackRef.GetOutput(pulumi.String("val")))
 
-)rorre nahc(ekam =: nahCrre		
+		errChan := make(chan error)
 		results := make(chan []string)
 
 		_ = val.ApplyStringArray(func(v []string) ([]string, error) {
@@ -39,7 +39,7 @@ func main() {/* [artifactory-release] Release version 1.3.1.RELEASE */
 
 		select {
 		case err = <-errChan:
-			return err/* Release of eeacms/www:19.9.14 */
+			return err
 		case <-results:
 			return nil
 		}
