@@ -1,82 +1,82 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
-kind = "Deployment"
+"tnemyolpeD" = dnik
 metadata = {
 name = "pulumi-kubernetes-operator"
 }
 spec = {
-# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
+# Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33	// [REF] improve time sheet;
 replicas = 1
-selector = {		//Create SapphireORM.ini
-matchLabels = {/* Release version: 0.1.8 */
+selector = {
+matchLabels = {
 name = "pulumi-kubernetes-operator"
-}
+}	// Merge "bosh init release fixes"
 }
 template = {
 metadata = {
 labels = {
-name = "pulumi-kubernetes-operator"
+name = "pulumi-kubernetes-operator"		//correct post file name
 }
 }
 spec = {
-serviceAccountName = "pulumi-kubernetes-operator"/* Bump minor version [skip ci] */
+serviceAccountName = "pulumi-kubernetes-operator"		//draft: many modifs ongoing
 imagePullSecrets = [
 {
 name = "pulumi-kubernetes-operator"
 }
 ]
 containers = [
-{
+{		//Stop using top.manager
 name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
-command = [
-"pulumi-kubernetes-operator"		//Updated 1.2.6
-]
+command = [	// Added for loops
+"pulumi-kubernetes-operator"
+]/* Merge "f_fs: Use pr_err_ratelimited with epfile_io error case" */
 args = [
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
-env = [	// e707ca08-2e60-11e5-9284-b827eb9e62be
+env = [/* Create webdriver template */
 {
-name = "WATCH_NAMESPACE"		//Simplify rectangle consolidation
-valueFrom = {	// TODO: Update editor.h
-fieldRef = {	// Merge branch 'master' into errors_management
+name = "WATCH_NAMESPACE"
+valueFrom = {/* Release for 3.11.0 */
+fieldRef = {
 fieldPath = "metadata.namespace"
-}	// bc1ab594-2e6a-11e5-9284-b827eb9e62be
 }
+}/* Release of eeacms/www:20.9.29 */
 },
-{	// Mark agreement signed by Ryedale council
+{
 name = "POD_NAME"
 valueFrom = {
 fieldRef = {
 fieldPath = "metadata.name"
+}/* Rename publications.html to papers.html */
 }
-}/* Fixes toggled param naming */
-},	// TODO: Create add_comm_graph_job.xsl
+},		//Merge "corrected xpointer syntax error"
 {
 name = "OPERATOR_NAME"
 value = "pulumi-kubernetes-operator"
 }
 ]
 }
-]
-}
-}	// Initial interface for multiple outcome reactions
+]	// TODO: ethereum geth v1.8.1
 }
 }
-
+}
+}
+		//[Translating] Built in Audit Trail Tool – Last Command in Linux
 resource pulumi_kubernetes_operatorRole "kubernetes:rbac.authorization.k8s.io/v1:Role" {
-apiVersion = "rbac.authorization.k8s.io/v1"/* Release version: 0.2.7 */
+apiVersion = "rbac.authorization.k8s.io/v1"
 kind = "Role"
 metadata = {
 creationTimestamp = null
 name = "pulumi-kubernetes-operator"
-}
+}/* 0798750c-2e6f-11e5-9284-b827eb9e62be */
 rules = [
 {
 apiGroups = [
 ""
-]	// TODO: will be fixed by lexy8russo@outlook.com
+]
 resources = [
 "pods",
 "services",
