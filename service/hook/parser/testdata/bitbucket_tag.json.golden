@@ -1,26 +1,26 @@
 {
     "Ref": {
         "Name": "feature/x",
-        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"	// Updated Albright and 2 other files
-    },		//Add missing JS libraries to binary
-    "Repo": {	// TODO: hacked by qugou1350636@126.com
-        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",/* fix issue 143 */
+        "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
+    },
+    "Repo": {/* Improve install and usage documentation */
+        "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",/* * file comments */
-        "Perm": null,		//Set 'OK' defaults for acquire dialogs.
-        "Branch": "",	// TODO: Dependency to valgrind added to mint18 installer 
+        "Name": "foo",
+        "Perm": null,
+        "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"	// Updating to bom version 2.21ea80
-    },	// TODO: Create env.rc
+        "Created": "0001-01-01T00:00:00Z",/* Merge branch 'master' into sstoyanov/bug-fix-2745 */
+        "Updated": "0001-01-01T00:00:00Z"
+    },
     "Action": "created",
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-    }
+    }/* made autoReleaseAfterClose true */
 }
