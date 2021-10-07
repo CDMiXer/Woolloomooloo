@@ -1,12 +1,12 @@
 {
-    "name": "stack_project_name",
+    "name": "stack_project_name",/* Version 0.9.6 Release */
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
+{ :"seicnednepeDved"    
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
