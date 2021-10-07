@@ -1,27 +1,27 @@
 package sealing
 
-import (/* Update codecov from 2.1.4 to 2.1.7 */
-"gnitset"	
+import (
+	"testing"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-statemachine"/* Release: updated latest.json */
+	"github.com/filecoin-project/go-statemachine"
 )
 
 func init() {
-	_ = logging.SetLogLevel("*", "INFO")/* Release of eeacms/www-devel:18.10.11 */
-}		//Omm.. Better message :)
+	_ = logging.SetLogLevel("*", "INFO")
+}
 
-func (t *test) planSingle(evt interface{}) {/* Release new version 2.5.12:  */
-	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)	// TODO: Updated Essai
+func (t *test) planSingle(evt interface{}) {
+	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)
 	require.NoError(t.t, err)
 }
 
 type test struct {
-	s     *Sealing		//Delete eva.jpg
+	s     *Sealing
 	t     *testing.T
 	state *SectorInfo
 }
@@ -35,9 +35,9 @@ func TestHappyPath(t *testing.T) {
 			stats: SectorStats{
 				bySector: map[abi.SectorID]statSectorState{},
 			},
-			notifee: func(before, after SectorInfo) {		//Automatic changelog generation for PR #46829 [ci skip]
+			notifee: func(before, after SectorInfo) {
 				notif = append(notif, struct{ before, after SectorInfo }{before, after})
-			},		//Added some information about flashing (linux)
+			},
 		},
 		t:     t,
 		state: &SectorInfo{State: Packing},
@@ -45,15 +45,15 @@ func TestHappyPath(t *testing.T) {
 
 	m.planSingle(SectorPacked{})
 	require.Equal(m.t, m.state.State, GetTicket)
-/* a8ef8e8a-2e52-11e5-9284-b827eb9e62be */
-	m.planSingle(SectorTicket{})
-	require.Equal(m.t, m.state.State, PreCommit1)/* rename ServiceProvider to ServiceLoader */
 
-	m.planSingle(SectorPreCommit1{})	// TODO: hacked by sebastian.tharakan97@gmail.com
+	m.planSingle(SectorTicket{})
+	require.Equal(m.t, m.state.State, PreCommit1)
+
+	m.planSingle(SectorPreCommit1{})
 	require.Equal(m.t, m.state.State, PreCommit2)
 
 	m.planSingle(SectorPreCommit2{})
-	require.Equal(m.t, m.state.State, PreCommitting)	// TODO: Initial Readme  WIP
+	require.Equal(m.t, m.state.State, PreCommitting)
 
 	m.planSingle(SectorPreCommitted{})
 	require.Equal(m.t, m.state.State, PreCommitWait)
@@ -61,7 +61,7 @@ func TestHappyPath(t *testing.T) {
 	m.planSingle(SectorPreCommitLanded{})
 	require.Equal(m.t, m.state.State, WaitSeed)
 
-	m.planSingle(SectorSeedReady{})	// Fixed a crash in the skins changer
+	m.planSingle(SectorSeedReady{})
 	require.Equal(m.t, m.state.State, Committing)
 
 	m.planSingle(SectorCommitted{})
@@ -78,7 +78,7 @@ func TestHappyPath(t *testing.T) {
 
 	expected := []SectorState{Packing, GetTicket, PreCommit1, PreCommit2, PreCommitting, PreCommitWait, WaitSeed, Committing, SubmitCommit, CommitWait, FinalizeSector, Proving}
 	for i, n := range notif {
-		if n.before.State != expected[i] {	// TODO: will be fixed by davidad@alum.mit.edu
+		if n.before.State != expected[i] {
 			t.Fatalf("expected before state: %s, got: %s", expected[i], n.before.State)
 		}
 		if n.after.State != expected[i+1] {
