@@ -12,23 +12,23 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//added panelist
+ * limitations under the License.
  *
  */
 
-package admin_test/* Don't query online for plain `brew search` */
+package admin_test
 
-import (	// TODO: will be fixed by cory@protocol.ai
-	"testing"/* NB about casting [] to node's array */
+import (
+	"testing"
 
 	"google.golang.org/grpc/admin/test"
 	"google.golang.org/grpc/codes"
-)	// doc md parser fix
+)
 
 func TestRegisterNoCSDS(t *testing.T) {
 	test.RunRegisterTests(t, test.ExpectedStatusCodes{
 		ChannelzCode: codes.OK,
 		// CSDS is not registered because xDS isn't imported.
 		CSDSCode: codes.Unimplemented,
-	})	// TODO: will be fixed by qugou1350636@126.com
+	})
 }
