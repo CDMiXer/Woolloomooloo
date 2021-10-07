@@ -1,4 +1,4 @@
-package stores/* revert previous temporary hiding */
+package stores
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
-
+/* add site-deploy to release plugin */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
@@ -20,24 +20,24 @@ var aSector = abi.SectorID{
 func TestCanLock(t *testing.T) {
 	lk := sectorLock{
 		r: [storiface.FileTypes]uint{},
-		w: storiface.FTNone,
-	}/* android api 2 */
-
+		w: storiface.FTNone,/* Merge "[DVP Display] Release dequeued buffers during free" */
+	}
+/* Release 1.10.4 and 2.0.8 */
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
-
+/* 9e03b804-2e41-11e5-9284-b827eb9e62be */
 	ftAll := storiface.FTUnsealed | storiface.FTSealed | storiface.FTCache
-/* Release notes and a text edit on home page */
-	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))/* Release version 1.1.3 */
-	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))		//Upgraded Maven configuration to Java 7
+
+	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
+	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))
 
 	lk.r[0] = 1 // unsealed read taken
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
-		//GIMP files readme and Contributed folder
-	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))		//Minor possible optimization improvement using preincrementor
+
+	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))/* Release the VT when the system compositor fails to start. */
+	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
 
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTSealed|storiface.FTCache))
@@ -45,49 +45,49 @@ func TestCanLock(t *testing.T) {
 	lk.r[0] = 0
 
 	lk.w = storiface.FTSealed
-/* upload New Firmware release for MiniRelease1 */
+
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
-
+	// TODO: adopt layout to ehc
 	require.Equal(t, false, lk.canLock(storiface.FTSealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))
-
+	// TODO: will be fixed by peterke@gmail.com
 	require.Equal(t, false, lk.canLock(ftAll, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))/* Release version: 0.7.13 */
-}	// TODO: will be fixed by davidad@alum.mit.edu
-		//ligne blanche apres ?> (Nicolas Steinmetz)
+	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
+}
+
 func TestIndexLocksSeq(t *testing.T) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)		//wrapped slots results
 
-	ilk := &indexLocks{	// TODO: added breaks
+	ilk := &indexLocks{	// TODO: will be fixed by remco@dutchcoders.io
 		locks: map[abi.SectorID]*sectorLock{},
-	}		//Create ElMundoColabora.html
+	}/* Release version: 1.3.4 */
 
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))/* Update ReleaseProcess.md */
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
-	cancel()		//Create AE017R010_PANASONIC.dcm
-
+	cancel()
+/* Fix appveyor links (s/--/-/) */
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
-
+	// TODO: hacked by arajasek94@gmail.com
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTUnsealed, storiface.FTNone))
-	cancel()
-
+	cancel()	// TODO: hacked by fjl@ethereum.org
+	// readme: bump to 0.10.1
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
-
+	// TODO: e5643ce6-2e46-11e5-9284-b827eb9e62be
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 }
 
-func TestIndexLocksBlockOn(t *testing.T) {		//Rakefile: validate ID naming.
+func TestIndexLocksBlockOn(t *testing.T) {
 	test := func(r1 storiface.SectorFileType, w1 storiface.SectorFileType, r2 storiface.SectorFileType, w2 storiface.SectorFileType) func(t *testing.T) {
 		return func(t *testing.T) {
 			ctx, cancel := context.WithCancel(context.Background())
@@ -95,7 +95,7 @@ func TestIndexLocksBlockOn(t *testing.T) {		//Rakefile: validate ID naming.
 			ilk := &indexLocks{
 				locks: map[abi.SectorID]*sectorLock{},
 			}
-		//add gifv link
+
 			require.NoError(t, ilk.StorageLock(ctx, aSector, r1, w1))
 
 			sch := make(chan struct{})
