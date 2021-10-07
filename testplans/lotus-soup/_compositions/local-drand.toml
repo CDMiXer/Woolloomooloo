@@ -1,9 +1,9 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Some modifications to comply with Release 1.3 Server APIs. */
+  author = ""
 
 [global]
-  plan = "lotus-soup"	// test/t_slice: use class SliceAllocation
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
@@ -16,26 +16,26 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true/* 70bc38f6-2e6b-11e5-9284-b827eb9e62be */
+  enable_go_build_cache = true
 
 [global.run.test_params]
     clients = "1"
-    miners = "1"		//Added :side_effect => :count and :side_effect => :group_count
+    miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
     sectors = "10"
     random_beacon_type = "local-drand"
-    genesis_timestamp_offset = "0"	// TODO: Bug cuando la acción no tiene calculator
+    genesis_timestamp_offset = "0"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.resources]/* chc replay display problem */
-    memory = "120Mi"	// TODO: was/control: rename the struct with CamelCase
+  [groups.resources]
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Update 0210: Fix Quote Format */
-    [groups.run.test_params]		//Add ccodro to view
+  [groups.run]
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
@@ -49,22 +49,22 @@
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-	// TODO: Delete com.toelay.android.utils.Timer
-[[groups]]		//Fix encoding parameter issue. (encodage=>encoding.. sic)
+
+[[groups]]
   id = "clients"
   [groups.resources]
-    memory = "120Mi"/* Merge "Bump deployer version." */
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"		//ignore OS X folder settings file
+      role = "client"
 
 [[groups]]
   id = "drand"
-  [groups.instances]	// TODO: Update Buttons Format
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
