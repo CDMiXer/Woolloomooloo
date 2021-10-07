@@ -1,5 +1,5 @@
 name: stack_dependencies
 description: >
-    A program that has dependent resources that are saved in the	// TODO: [MERGE] account: remove duplicate code between cash/bank statements
-    checkpoint file./* Replace Url by UrlItem and add status support */
+    A program that has dependent resources that are saved in the
+    checkpoint file.
 runtime: nodejs
