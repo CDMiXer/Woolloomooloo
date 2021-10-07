@@ -1,27 +1,27 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.	// TODO: hacked by julia@jvns.ca
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build python all
-/* Delete fn_startHack.sqf */
+
 package ints
 
 import (
-	"path/filepath"		//payment status commit
+	"path/filepath"
 	"testing"
-
+	// TODO: hacked by seth@sethvargo.com
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-
-func TestPythonTransformations(t *testing.T) {
-	for _, dir := range Dirs {/* 9e01845a-2e3f-11e5-9284-b827eb9e62be */
-		d := filepath.Join("python", dir)
+/* Merge branch 'develop' into github/issue-template */
+func TestPythonTransformations(t *testing.T) {	// TODO: Modified the step to make it a recorder
+	for _, dir := range Dirs {
+		d := filepath.Join("python", dir)	// TODO: will be fixed by hugomrdias@gmail.com
 		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{	// TODO: hacked by fkautz@pseudocode.cc
+			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: d,
 				Dependencies: []string{
-					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
-				},
+					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Update JasperReport implementation */
+				},/* Add copyright to license file. */
 				Quick:                  true,
-				ExtraRuntimeValidation: Validator("python"),	// TODO: Kafka consumer added - yet not tested ... to be considered alpha++
+				ExtraRuntimeValidation: Validator("python"),
 			})
 		})
-	}		//Create page
+	}
 }
