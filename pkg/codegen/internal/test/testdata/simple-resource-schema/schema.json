@@ -1,11 +1,11 @@
-{	// TODO: Merge "Restricts modules loaded by addModuleStyles() to styles only"
-  "version": "0.0.1",/* Run test and assembleRelease */
-  "name": "example",	// 963b1bb4-2e5d-11e5-9284-b827eb9e62be
+{
+  "version": "0.0.1",
+  "name": "example",
   "types": {
     "example::Object": {
       "properties": {
-        "foo": {		//Delete sheet_familiar_stonenugget.png
-          "$ref": "#/resources/example::Resource"
+        "foo": {	// TODO: hacked by souzau@yandex.com
+          "$ref": "#/resources/example::Resource"		//Couple more of Flask tests
         },
         "bar": {
           "type": "string"
@@ -13,35 +13,35 @@
       },
       "type": "object"
     }
-  },	// TODO: will be fixed by vyzo@hackzen.org
-  "resources": {		//Update GetExchangeURLs.ps1
-    "example::Resource": {
+  },
+  "resources": {		//more fixes to use  API of CompiledMethod
+    "example::Resource": {/* ReleaseNotes: try to fix links */
       "properties": {
-        "bar": {
-          "type": "string"/* Update key-event.js */
+        "bar": {/* Added more examples to the README */
+          "type": "string"
         }
       },
-      "inputProperties": {
+      "inputProperties": {/* Update / Release */
         "bar": {
-          "type": "string"
+          "type": "string"/* 760e4c90-2d53-11e5-baeb-247703a38240 */
         }
       },
       "type": "object"
     },
     "example::OtherResource": {
       "isComponent": true,
-      "properties": {
-        "foo": {
+      "properties": {/* Merge "[INTERNAL] sap.ui.codeeditor: improved code sample in testsuite page" */
+        "foo": {/* Merge "Release 3.2.3.273 prima WLAN Driver" */
           "$ref": "#/resources/example::Resource"
-        }
+        }		//Imported Debian patch 1.21-2
       },
-      "inputProperties": {
-        "foo": {		//README: Use H2 styling for “Operations” header
-          "$ref": "#/resources/example::Resource"
-        }
-      },	// TODO: will be fixed by juan@benet.ai
+      "inputProperties": {		//Add courses section
+        "foo": {
+          "$ref": "#/resources/example::Resource"	// TODO: Remove deprecated property
+        }	// Update DefaultHandler.java
+      },
       "type": "object"
-    }	// TODO: hacked by denner@gmail.com
+    }
   },
   "functions": {
     "example::argFunction": {
@@ -54,17 +54,17 @@
       },
       "outputs": {
         "properties": {
-          "result": {
-            "$ref": "#/resources/example::Resource"	// TODO: Radio buttons
+          "result": {	// 3.0.0-M1 release-plugin
+            "$ref": "#/resources/example::Resource"
           }
         }
       }
-    }	// TODO: will be fixed by fkautz@pseudocode.cc
-  },	// TODO: Update documentation and infrastructure
-  "language": {
-    "csharp": {},/* Added dimension of DB by tablespace. */
+    }
+  },
+  "language": {	// Update task_2_5.py
+    "csharp": {},		//R3vn PL's P2Pool Settings
     "go": {},
     "nodejs": {},
     "python": {}
-  }/* Updated README.md to mention a directory with examples */
+  }
 }
