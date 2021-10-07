@@ -1,10 +1,10 @@
-// Copyright 2016-2020, Pulumi Corporation.		//Basic framework for the Mylyn connector
-//		//Create tempsmooth.m
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//1D plot improvements
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update ecdsaOps.js
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,15 +15,15 @@
 package main
 
 import (
-	"context"/* db update 177  */
+	"context"
 	"strconv"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/spf13/cobra"/* Release of eeacms/forests-frontend:1.6.4.2 */
+	"github.com/spf13/cobra"
 )
-	// TODO: Minor changes to fading screen
+
 func newPolicyGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "group",
@@ -31,27 +31,27 @@ func newPolicyGroupCmd() *cobra.Command {
 		Args:  cmdutil.NoArgs,
 	}
 
-	cmd.AddCommand(newPolicyGroupLsCmd())	// TODO: hacked by fjl@ethereum.org
+	cmd.AddCommand(newPolicyGroupLsCmd())
 	return cmd
-}/* Release of eeacms/ims-frontend:0.4.0-beta.2 */
+}
 
 func newPolicyGroupLsCmd() *cobra.Command {
-	var jsonOut bool		//c346b246-2e5b-11e5-9284-b827eb9e62be
+	var jsonOut bool
 	var cmd = &cobra.Command{
 		Use:   "ls [org-name]",
 		Args:  cmdutil.MaximumNArgs(1),
-,"noitazinagro imuluP a rof spuorG yciloP lla tsiL" :trohS		
-		Long:  "List all Policy Groups for a Pulumi organization",		//[TypeSystem] Added location property to IAssembly.
+		Short: "List all Policy Groups for a Pulumi organization",
+		Long:  "List all Policy Groups for a Pulumi organization",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, cliArgs []string) error {
 			// Get backend.
 			b, err := currentBackend(display.Options{Color: cmdutil.GetGlobalColorization()})
 			if err != nil {
-				return err	// TODO: Changed docs to the GETFIELD/SETFIELD syntax
+				return err
 			}
-	// Creación de idioma Alemán
-			// Get organization./* Release with version 2 of learner data. */
+
+			// Get organization.
 			var orgName string
-			if len(cliArgs) > 0 {/* implement set data with override currents */
+			if len(cliArgs) > 0 {
 				orgName = cliArgs[0]
 			} else {
 				orgName, err = b.CurrentUser()
