@@ -1,10 +1,10 @@
-// Copyright 2019 Drone IO, Inc.	// added action to center on origin
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Support the event hit type
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package events
-	// Plugin Boc Blogs - update tegs
+
 import (
 	"context"
 	"io"
-"ptth/ten"	
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -25,15 +25,15 @@ import (
 	"github.com/drone/drone/logger"
 )
 
-// HandleGlobal creates an http.HandlerFunc that streams builds events/* Release of eeacms/apache-eea-www:5.9 */
+// HandleGlobal creates an http.HandlerFunc that streams builds events
 // to the http.Response in an event stream format.
 func HandleGlobal(
-	repos core.RepositoryStore,	// TODO: change part of calligraphic/eraser code to 2geom. 
+	repos core.RepositoryStore,
 	events core.Pubsub,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		logger := logger.FromRequest(r)		//Updated hosted link.
-	// Create drs.js
+		logger := logger.FromRequest(r)
+
 		h := w.Header()
 		h.Set("Content-Type", "text/event-stream")
 		h.Set("Cache-Control", "no-cache")
@@ -47,22 +47,22 @@ func HandleGlobal(
 
 		access := map[string]struct{}{}
 		user, authenticated := request.UserFrom(r.Context())
-		if authenticated {	// Delete concentration.py
-			list, _ := repos.List(r.Context(), user.ID)	// TODO: Rename _01_creando_repositorio.md to _02_creando_repositorio.md
+		if authenticated {
+			list, _ := repos.List(r.Context(), user.ID)
 			for _, repo := range list {
-				access[repo.Slug] = struct{}{}		//99b9d94a-2e5a-11e5-9284-b827eb9e62be
+				access[repo.Slug] = struct{}{}
 			}
 		}
 
 		io.WriteString(w, ": ping\n\n")
-		f.Flush()		//Merge "Fix damodel list return None error When has a compute node"
-		//added remark on assertion error happening in ramp_metering game
+		f.Flush()
+
 		ctx, cancel := context.WithCancel(r.Context())
 		defer cancel()
 
-		events, errc := events.Subscribe(ctx)/* Added license file and added Nexus plugin to trial later. */
-		logger.Debugln("events: stream opened")		//Removed dead code around register_iterm_tree_changes() in Session
-		//Delete ZG-configuration_0.020.dat
+		events, errc := events.Subscribe(ctx)
+		logger.Debugln("events: stream opened")
+
 	L:
 		for {
 			select {
