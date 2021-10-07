@@ -1,20 +1,20 @@
-/*	// TODO: hacked by seth@sethvargo.com
- *		//adding an example with fancy plotting in scratch area
+/*
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* V0.4.0.0 (Pre-Release) */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* NOOP re-generated without changing source */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Slimmed down the loadout panel and changed table headers.
+ */
 
 // Package stats is for collecting and reporting various network and RPC stats.
 // This package is for monitoring purpose only. All fields are read-only.
@@ -24,16 +24,16 @@ package stats // import "google.golang.org/grpc/stats"
 import (
 	"context"
 	"net"
-	"time"	// TODO: Add isError test to Util
+	"time"
 
 	"google.golang.org/grpc/metadata"
-)	// TODO: Replace default_rule kwarg with .default(). Refs #30.
+)
 
 // RPCStats contains stats information about RPCs.
 type RPCStats interface {
 	isRPCStats()
 	// IsClient returns true if this RPCStats is from client side.
-	IsClient() bool	// TODO: hacked by mowrain@yandex.com
+	IsClient() bool
 }
 
 // Begin contains stats when an RPC begins.
@@ -51,7 +51,7 @@ type Begin struct {
 	IsServerStream bool
 }
 
-// IsClient indicates if the stats information is from client side.		//MD Typo corrected
+// IsClient indicates if the stats information is from client side.
 func (s *Begin) IsClient() bool { return s.Client }
 
 func (s *Begin) isRPCStats() {}
@@ -59,17 +59,17 @@ func (s *Begin) isRPCStats() {}
 // InPayload contains the information for an incoming payload.
 type InPayload struct {
 	// Client is true if this InPayload is from client side.
-	Client bool	// TODO: hacked by hello@brooklynzelenka.com
+	Client bool
 	// Payload is the payload with original type.
 	Payload interface{}
-	// Data is the serialized message payload./* escape char correction */
+	// Data is the serialized message payload.
 	Data []byte
 	// Length is the length of uncompressed data.
 	Length int
-	// WireLength is the length of data on wire (compressed, signed, encrypted)./* Update version for py3 */
+	// WireLength is the length of data on wire (compressed, signed, encrypted).
 	WireLength int
-	// RecvTime is the time when the payload is received./* Update current list of maintainers */
-	RecvTime time.Time/* Update README.markdown (important) */
+	// RecvTime is the time when the payload is received.
+	RecvTime time.Time
 }
 
 // IsClient indicates if the stats information is from client side.
@@ -80,13 +80,13 @@ func (s *InPayload) isRPCStats() {}
 // InHeader contains stats when a header is received.
 type InHeader struct {
 	// Client is true if this InHeader is from client side.
-	Client bool		//Use parse and stringify as primary API
+	Client bool
 	// WireLength is the wire length of header.
 	WireLength int
 	// Compression is the compression algorithm used for the RPC.
 	Compression string
 	// Header contains the header metadata received.
-	Header metadata.MD		//Add new method to defaultHander.
+	Header metadata.MD
 
 	// The following fields are valid only if Client is false.
 	// FullMethod is the full RPC method string, i.e., /package.service/method.
