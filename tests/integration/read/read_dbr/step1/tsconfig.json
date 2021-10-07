@@ -1,21 +1,21 @@
-{/* ed96d776-2e4a-11e5-9284-b827eb9e62be */
-    "compilerOptions": {	// TODO: Improved wording for reference to use
+{
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,	// TODO: hacked by steven@stebalien.com
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: Add screen transition effect
-        "noFallthroughCasesInSwitch": true,		//Controle da revisão de desenvolvimento no rodapé do template base.html
-        "noImplicitReturns": true,		//Fix geometry type for "Convert geometry type" algorithm
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,	// TODO: will be fixed by souzau@yandex.com
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
-    },/* Update Release History */
-    "files": [		//Delete Quiz questions.odt
-        "index.ts"/* Allow passing in tuples as file ids in various places. */
+        "strictNullChecks": true	// TODO: Add v4.4.1 patch release
+    },/* Merge "[DM] Fix commit fabric config role" */
+    "files": [	// TODO: hacked by vyzo@hackzen.org
+        "index.ts"
     ]
-}/* Update ReleaseNotes-6.1.19 */
+}
 
