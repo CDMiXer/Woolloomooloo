@@ -3,8 +3,8 @@
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",/* Merge "Release 1.0.0.107 QCACLD WLAN Driver" */
-    "Perm": null,/* Delete google_assistant_utils.lua */
+    "Name": "drone-test-go",
+    "Perm": null,
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
@@ -17,23 +17,23 @@
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
     "Author": {
-      "Name": "Brad Rydzewski",	// TODO: Automatic changelog generation for PR #10365 [ci skip]
+      "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "bradrydzewski",
       "Avatar": ""
     },
-    "Committer": {/* Fix HideReleaseNotes link */
+    "Committer": {
       "Name": "GitHub",
       "Email": "noreply@github.com",
-      "Date": "0001-01-01T00:00:00Z",		//Fixes a bug in the rate service
-,"wolf-bew" :"nigoL"      
+      "Date": "0001-01-01T00:00:00Z",
+      "Login": "web-flow",
       "Avatar": ""
     },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
   },
   "Sender": {
-    "Login": "bradrydzewski",		//Merge branch 'master' into tyler_prepare_for_1.34
+    "Login": "bradrydzewski",
     "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
