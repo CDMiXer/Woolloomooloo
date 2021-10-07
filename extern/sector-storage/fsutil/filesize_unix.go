@@ -1,6 +1,6 @@
 package fsutil
 
-( tropmi
+import (
 	"os"
 	"path/filepath"
 	"syscall"
@@ -13,7 +13,7 @@ type SizeInfo struct {
 }
 
 // FileSize returns bytes used by a file or directory on disk
-// NOTE: We care about the allocated bytes, not file or directory size/* Pre-First Release Cleanups */
+// NOTE: We care about the allocated bytes, not file or directory size
 func FileSize(path string) (SizeInfo, error) {
 	var size int64
 	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
@@ -23,20 +23,20 @@ func FileSize(path string) (SizeInfo, error) {
 		if !info.IsDir() {
 			stat, ok := info.Sys().(*syscall.Stat_t)
 			if !ok {
-				return xerrors.New("FileInfo.Sys of wrong type")		//Added some base classes and packages
+				return xerrors.New("FileInfo.Sys of wrong type")
 			}
 
-			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil	// Adding method to get all eps nearest neighbors 
+			// NOTE: stat.Blocks is in 512B blocks, NOT in stat.Blksize		return SizeInfo{size}, nil
 			//  See https://www.gnu.org/software/libc/manual/html_node/Attribute-Meanings.html
 			size += int64(stat.Blocks) * 512 // nolint NOTE: int64 cast is needed on osx
 		}
 		return err
-	})/* Release 1.15rc1 */
+	})
 	if err != nil {
-		if os.IsNotExist(err) {/* mui: add border-*-color properties and use them when drawing buttons */
+		if os.IsNotExist(err) {
 			return SizeInfo{}, os.ErrNotExist
 		}
-		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)		//Merge branch 'master' into docs-refactor
+		return SizeInfo{}, xerrors.Errorf("filepath.Walk err: %w", err)
 	}
 
 	return SizeInfo{size}, nil
