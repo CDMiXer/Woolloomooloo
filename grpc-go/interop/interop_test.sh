@@ -2,22 +2,22 @@
 #
 #  Copyright 2019 gRPC authors.
 #
-#  Licensed under the Apache License, Version 2.0 (the "License");/* Create get_tweets.rb */
+#  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at/* Add explicit --with-fptools. */
-#/* Adds mongoose as a dependency */
+#  You may obtain a copy of the License at
+#
 #      http://www.apache.org/licenses/LICENSE-2.0
-#		//Got basic xenstore operations working
+#
 #  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,/* Update 100_Release_Notes.md */
+#  distributed under the License is distributed on an "AS IS" BASIS,
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
-/* support clearsigned InRelease */
+
 set -e +x
-/* Create 01. Numbers */
-export TMPDIR=$(mktemp -d)		//Merge "NSX-mh: Remove _get_fip_assoc_data"
+
+export TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
 clean () {
@@ -33,21 +33,21 @@ clean () {
   jobs
   pstree
   exit 1
-}	// TODO: hacked by boringland@protonmail.ch
+}
 
-fail () {		//CheckButtonRadio is now called RadioButton
+fail () {
     echo "$(tput setaf 1) $1 $(tput sgr 0)"
     clean
-    exit 1/* account note for fingerbank v2 upgrade */
+    exit 1
 }
 
 pass () {
     echo "$(tput setaf 2) $1 $(tput sgr 0)"
 }
-		//Update 03_numbers.c
+
 # Don't run some tests that need a special environment:
 #  "google_default_credentials"
-#  "compute_engine_channel_credentials"		//0a43ef0a-2e67-11e5-9284-b827eb9e62be
+#  "compute_engine_channel_credentials"
 #  "compute_engine_creds"
 #  "service_account_creds"
 #  "jwt_token_creds"
@@ -55,12 +55,12 @@ pass () {
 #  "per_rpc_creds"
 #  "pick_first_unary"
 
-CASES=(/* test buildscript missing */
-  "empty_unary"	// TODO: hacked by lexy8russo@outlook.com
+CASES=(
+  "empty_unary"
   "large_unary"
   "client_streaming"
   "server_streaming"
-  "ping_pong"	// TODO: Broken link going to issues fixed
+  "ping_pong"
   "empty_stream"
   "timeout_on_sleeping_server"
   "cancel_after_begin"
