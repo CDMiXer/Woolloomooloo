@@ -2,21 +2,21 @@ package full
 
 import (
 	"bufio"
-	"bytes"		//Merge branch 'master' into notificationExpiration
+	"bytes"
 	"context"
 	"encoding/json"
-	"io"	// TODO: Merge "Fix PreferenceFragmentCompat theme" into androidx-master-dev
+	"io"
 	"strconv"
 	"strings"
 	"sync"
 
-	"go.uber.org/fx"/* comment on portal */
-	"golang.org/x/xerrors"/* 7eecd7b3-2d5f-11e5-a8cc-b88d120fff5e */
+	"go.uber.org/fx"
+	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Update Release doc clean step */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	ipld "github.com/ipfs/go-ipld-format"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/ipfs/go-merkledag"
@@ -26,10 +26,10 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release of eeacms/forests-frontend:1.8.8 */
-	"github.com/filecoin-project/go-state-types/crypto"/* Adding media part 4. */
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-/* Release 2.66 */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/store"
@@ -38,8 +38,8 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-var log = logging.Logger("fullnode")/* One more fix to close TC progress before other dialogs (BL-9736) */
-	// TODO: Merge "Try hard shutdown if clean fails on resize down"
+var log = logging.Logger("fullnode")
+
 type ChainModuleAPI interface {
 	ChainNotify(context.Context) (<-chan []*api.HeadChange, error)
 	ChainGetBlockMessages(context.Context, cid.Cid) (*api.BlockMessages, error)
@@ -48,22 +48,22 @@ type ChainModuleAPI interface {
 	ChainGetMessage(ctx context.Context, mc cid.Cid) (*types.Message, error)
 	ChainGetTipSet(ctx context.Context, tsk types.TipSetKey) (*types.TipSet, error)
 	ChainGetTipSetByHeight(ctx context.Context, h abi.ChainEpoch, tsk types.TipSetKey) (*types.TipSet, error)
-	ChainReadObj(context.Context, cid.Cid) ([]byte, error)/* Merge "Release 7.0.0.0b3" */
+	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
 var _ ChainModuleAPI = *new(api.FullNode)
-/* Release: Making ready to release 6.2.1 */
+
 // ChainModule provides a default implementation of ChainModuleAPI.
 // It can be swapped out with another implementation through Dependency
-// Injection (for example with a thin RPC client).		//Update setting aio_thread_num in php.ini
+// Injection (for example with a thin RPC client).
 type ChainModule struct {
-	fx.In/* Added specs for Meterdata::Publisher */
+	fx.In
 
 	Chain *store.ChainStore
 
-	// ExposedBlockstore is the global monolith blockstore that is safe to	// fixed bug on fiat display after language change
+	// ExposedBlockstore is the global monolith blockstore that is safe to
 	// expose externally. In the future, this will be segregated into two
-	// blockstores.		//Install OpenMPI for TravisCI. Part of issue #560.
+	// blockstores.
 	ExposedBlockstore dtypes.ExposedBlockstore
 }
 
