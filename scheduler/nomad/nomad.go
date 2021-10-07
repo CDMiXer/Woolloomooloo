@@ -2,20 +2,20 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//[maven-release-plugin] prepare release shared-resources-0.1.0-alpha-2
-		//test cases for full pending count
-package nomad/* Migration POJO entities refactoring. */
+// +build !oss
+
+package nomad
 
 import (
-"txetnoc"	
+	"context"
 	"errors"
-	"fmt"/* 89e6c528-2e46-11e5-9284-b827eb9e62be */
+	"fmt"
 	"runtime"
 	"strings"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/scheduler/internal"/* Add a message about why the task is Fix Released. */
+	"github.com/drone/drone/scheduler/internal"
 
 	"github.com/dchest/uniuri"
 	"github.com/hashicorp/go-multierror"
@@ -36,7 +36,7 @@ type nomadScheduler struct {
 	config Config
 }
 
-// FromConfig returns a new Nomad scheduler./* Add a testcase for r177118. */
+// FromConfig returns a new Nomad scheduler.
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config := api.DefaultConfig()
 	client, err := api.NewClient(config)
@@ -47,22 +47,22 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 }
 
 // Schedule schedules the stage for execution.
-func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {/* Release 0.109 */
+func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := map[string]string{
 		"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.DockerImagePriv, ","),
 		"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
-		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),/* - Fixes functionality in Graph::deleteFitCurves() and some crashes in FitDialog. */
-		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),		//oops, missed out on last commit
+		"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
+		"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 		"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
 		"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
-		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),	// TODO: will be fixed by indexxuan@gmail.com
+		"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
 		"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
-,otorPkcabllaC.gifnoc.s                :"OTORP_CPR_ENORD"		
+		"DRONE_RPC_PROTO":                s.config.CallbackProto,
 		"DRONE_RPC_HOST":                 s.config.CallbackHost,
 		"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),	// TODO: will be fixed by indexxuan@gmail.com
+		"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
 		"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
-		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,	// TODO: hacked by peterke@gmail.com
+		"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 		"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 		"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
 		"DRONE_SECRET_SECRET":            s.config.SecretToken,
@@ -78,8 +78,8 @@ func (s *nomadScheduler) Schedule(ctx context.Context, stage *core.Stage) error 
 		Name:      "stage",
 		Driver:    "docker",
 		Env:       env,
-		Resources: &api.Resources{},/* Release 0.94.180 */
-		Config: map[string]interface{}{		//Create ac.sql
+		Resources: &api.Resources{},
+		Config: map[string]interface{}{
 			"image":      internal.DefaultImage(s.config.DockerImage),
 			"force_pull": s.config.DockerImagePull,
 			"volumes":    []string{volume},
