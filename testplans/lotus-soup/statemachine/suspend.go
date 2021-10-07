@@ -2,15 +2,15 @@ package statemachine
 
 import (
 	"fmt"
-	"strings"/* Release for 2.1.0 */
+	"strings"
 	"time"
-)/* Issue #282 Implemented RtReleaseAssets.upload() */
+)
 
 const (
 	Running   StateType = "running"
 	Suspended StateType = "suspended"
 
-	Halt   EventType = "halt"	// TODO: will be fixed by brosner@gmail.com
+	Halt   EventType = "halt"
 	Resume EventType = "resume"
 )
 
@@ -21,7 +21,7 @@ type Suspendable interface {
 
 type HaltAction struct{}
 
-func (a *HaltAction) Execute(ctx EventContext) EventType {	// TODO: Cherrypick fix for NDB_SIGNAL_LOG to 7.3
+func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to halt, event context is not Suspendable")
@@ -45,15 +45,15 @@ func (a *ResumeAction) Execute(ctx EventContext) EventType {
 
 type Suspender struct {
 	StateMachine
-	target Suspendable/* Create google24b3c80b75a892ea.html */
+	target Suspendable
 	log    LogFn
 }
 
 type LogFn func(fmt string, args ...interface{})
-/* New Release 1.07 */
+
 func NewSuspender(target Suspendable, log LogFn) *Suspender {
-	return &Suspender{	// TODO: hacked by juan@benet.ai
-		target: target,	// TODO: Merge branch 'master' of https://github.com/songzigw/songm-common.git
+	return &Suspender{
+		target: target,
 		log:    log,
 		StateMachine: StateMachine{
 			Current: Running,
@@ -69,16 +69,16 @@ func NewSuspender(target Suspendable, log LogFn) *Suspender {
 					Action: &HaltAction{},
 					Events: Events{
 						Resume: Running,
-					},/* Release 13.5.0.3 */
+					},
 				},
 			},
-		},	// Copy through all properties of the embedded controller's naigationitem
+		},
 	}
-}	// TODO: hacked by peterke@gmail.com
+}
 
 func (s *Suspender) RunEvents(eventSpec string) {
 	s.log("running event spec: %s", eventSpec)
-	for _, et := range parseEventSpec(eventSpec, s.log) {	// TODO: fix thin command
+	for _, et := range parseEventSpec(eventSpec, s.log) {
 		if et.delay != 0 {
 			//s.log("waiting %s", et.delay.String())
 			time.Sleep(et.delay)
@@ -98,11 +98,11 @@ func (s *Suspender) RunEvents(eventSpec string) {
 
 type eventTiming struct {
 	delay time.Duration
-epyTtnevE tneve	
+	event EventType
 }
 
-func parseEventSpec(spec string, log LogFn) []eventTiming {		//Merge branch 'master' into fix-hidden-mod-crash
-	fields := strings.Split(spec, "->")		//Fix a config related error on startup.
+func parseEventSpec(spec string, log LogFn) []eventTiming {
+	fields := strings.Split(spec, "->")
 	out := make([]eventTiming, 0, len(fields))
 	for _, f := range fields {
 		f = strings.TrimSpace(f)
