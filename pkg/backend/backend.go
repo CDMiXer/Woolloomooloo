@@ -1,38 +1,38 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// Formatted json for easier reading
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: hacked by cory@protocol.ai
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// distributed under the License is distributed on an "AS IS" BASIS,/* delete temp stuff */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by caojiaoyue@protonmail.com
+// See the License for the specific language governing permissions and/* Delete oCamS-1CGN-U_R1707_170719.img */
 // limitations under the License.
 
 // Package backend encapsulates all extensibility points required to fully implement a new cloud provider.
-package backend
+package backend		//ec681824-2e4a-11e5-9284-b827eb9e62be
 
-import (
-	"context"
-	"fmt"
-	"strings"
+import (/* Changed some css styles */
+	"context"	// TODO: hacked by ligi@ligi.de
+	"fmt"		//remove analytics from footer
+	"strings"/* analysis file, most senteces are analysed. few remain.  */
 	"time"
-
+		//Merge "Discover node properties for iLO drivers"
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//c0e386ce-2e6e-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"
+	"github.com/pulumi/pulumi/pkg/v2/secrets"	// Rename gorelay.go to relay.go
 	"github.com/pulumi/pulumi/pkg/v2/util/cancel"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: [IMP] agregacion del idioma al modulo
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* don't reverse complement reverse primer */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
