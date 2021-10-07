@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Update symfony/twig-bundle */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
 </Project>
