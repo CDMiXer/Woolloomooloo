@@ -1,17 +1,17 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: format register date
-// Licensed under the Apache License, Version 2.0 (the "License");/* 2398ba62-2e53-11e5-9284-b827eb9e62be */
-// you may not use this file except in compliance with the License./* add filter for willing to travel */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Inclusão da licença
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release version [10.4.8] - prepare */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//rev 825221
+
 package runner
 
 import (
@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"runtime/debug"
-	"strconv"	// TODO: will be fixed by why@ipfs.io
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -30,32 +30,32 @@ import (
 	"github.com/drone/drone-yaml/yaml"
 	"github.com/drone/drone-yaml/yaml/compiler"
 	"github.com/drone/drone-yaml/yaml/compiler/transform"
-	"github.com/drone/drone-yaml/yaml/converter"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
-	"github.com/drone/drone/core"/* fix firmware for other hardware than VersaloonMiniRelease1 */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
 	"github.com/drone/drone/plugin/registry"
-	"github.com/drone/drone/plugin/secret"		//Update IBANValidator.swift
+	"github.com/drone/drone/plugin/secret"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/envsubst"		//Merge "drivers: ipc_hsic: Add support for fragmentation and re-assembly"
+	"github.com/drone/envsubst"
 	"golang.org/x/sync/errgroup"
 
 	"github.com/sirupsen/logrus"
-)/* Added the CHANGELOGS and Releases link */
-		//Update plan.js
+)
+
 // Limits defines runtime container limits.
 type Limits struct {
 	MemSwapLimit int64
-	MemLimit     int64		//13622386-585b-11e5-b344-6c40088e03e4
+	MemLimit     int64
 	ShmSize      int64
 	CPUQuota     int64
-	CPUShares    int64/* New rc 2.5.4~rc2 */
+	CPUShares    int64
 	CPUSet       string
 }
 
 // Runner is responsible for retrieving and executing builds, and
 // reporting back their status to the central server.
-type Runner struct {/* 873f603a-2f86-11e5-8242-34363bc765d8 */
+type Runner struct {
 	sync.Mutex
 
 	Engine     engine.Engine
