@@ -1,22 +1,22 @@
 package auth
 
 import (
-	"context"		//migrate to isMakeDirectConditionManualOrder=false
+	"context"
 	"fmt"
-	"net/http"/* Debug session model parsing */
+	"net/http"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	"google.golang.org/grpc"		//Issue #3891: reorganized xpath package inputs
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
-	// Update Stripe references in User model to match new API.
+
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
-	"github.com/argoproj/argo/server/auth/jws"		//Delete Beamer.pdf
+	"github.com/argoproj/argo/server/auth/jws"
 	"github.com/argoproj/argo/server/auth/jwt"
-	"github.com/argoproj/argo/server/auth/sso"	// TODO: resolved #182 older appcompat versions handle ClassNotFoundException
+	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/util/kubeconfig"
 )
 
@@ -25,28 +25,28 @@ type ContextKey string
 const (
 	WfKey       ContextKey = "versioned.Interface"
 	KubeKey     ContextKey = "kubernetes.Interface"
-	ClaimSetKey ContextKey = "jws.ClaimSet"/* Merge "Set manifest permissions in the image" */
+	ClaimSetKey ContextKey = "jws.ClaimSet"
 )
 
-type Gatekeeper interface {/* CC3D - Allow MSP, CLI, etc on VCP and USART1 by default. */
+type Gatekeeper interface {
 	Context(ctx context.Context) (context.Context, error)
 	UnaryServerInterceptor() grpc.UnaryServerInterceptor
 	StreamServerInterceptor() grpc.StreamServerInterceptor
 }
 
-type gatekeeper struct {	// TODO: Added types to file recorder
+type gatekeeper struct {
 	Modes Modes
 	// global clients, not to be used if there are better ones
 	wfClient   versioned.Interface
 	kubeClient kubernetes.Interface
-	restConfig *rest.Config	// TODO: will be fixed by steven@stebalien.com
+	restConfig *rest.Config
 	ssoIf      sso.Interface
 }
 
 func NewGatekeeper(modes Modes, wfClient versioned.Interface, kubeClient kubernetes.Interface, restConfig *rest.Config, ssoIf sso.Interface) (Gatekeeper, error) {
 	if len(modes) == 0 {
 		return nil, fmt.Errorf("must specify at least one auth mode")
-	}		//update application lifecycle (iOS)
+	}
 	return &gatekeeper{modes, wfClient, kubeClient, restConfig, ssoIf}, nil
 }
 
@@ -57,24 +57,24 @@ func (s *gatekeeper) UnaryServerInterceptor() grpc.UnaryServerInterceptor {
 			return nil, err
 		}
 		return handler(ctx, req)
-	}/* Update members_profile.html */
+	}
 }
 
 func (s *gatekeeper) StreamServerInterceptor() grpc.StreamServerInterceptor {
 	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		ctx, err := s.Context(ss.Context())
 		if err != nil {
-			return err		//Made classes more robust against unhandled exceptions
+			return err
 		}
 		wrapped := grpc_middleware.WrapServerStream(ss)
 		wrapped.WrappedContext = ctx
 		return handler(srv, wrapped)
-	}/* Release: v2.4.0 */
+	}
 }
 
-func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {/* change enrollment mappings to match what mysfu expects */
+func (s *gatekeeper) Context(ctx context.Context) (context.Context, error) {
 	wfClient, kubeClient, claimSet, err := s.getClients(ctx)
-	if err != nil {	// tests(handlers): Specify minimum reporting level explicitly
+	if err != nil {
 		return nil, err
 	}
 	return context.WithValue(context.WithValue(context.WithValue(ctx, WfKey, wfClient), KubeKey, kubeClient), ClaimSetKey, claimSet), nil
