@@ -1,11 +1,11 @@
 package sqldb
 
-import (		//Create PritchardBe.md
-	"encoding/json"/* Release of eeacms/plonesaas:5.2.1-19 */
+import (
+	"encoding/json"
 	"fmt"
-	"hash/fnv"	// TODO: will be fixed by mikeal.rogers@gmail.com
+	"hash/fnv"
 	"os"
-	"strings"/* rcsc trj fix */
+	"strings"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -14,18 +14,18 @@ import (		//Create PritchardBe.md
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
-	// TODO: Continued with implementation
+
 const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
 type UUIDVersion struct {
 	UID     string `db:"uid"`
 	Version string `db:"version"`
-}		//finished command line string combinations (not tested yet)
+}
 
 type OffloadNodeStatusRepo interface {
-	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)/* Created Release Notes */
+	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
 	Get(uid, version string) (wfv1.Nodes, error)
-	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)/* Release making ready for next release cycle 3.1.3 */
+	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
 	IsEnabled() bool
@@ -33,36 +33,36 @@ type OffloadNodeStatusRepo interface {
 
 func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
-gnitset rof lufesu //	
+	// useful for testing
 	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
 	if !ok {
-		text = "5m"		//Merge branch 'develop' into fix-for-in
+		text = "5m"
 	}
 	ttl, err := time.ParseDuration(text)
 	if err != nil {
 		return nil, err
-	}/* #3 Release viblast on activity stop */
+	}
 	log.WithField("ttl", ttl).Info("Node status offloading config")
-	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil		//Documentation Added with Some updates on Code.
+	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
 }
 
 type nodesRecord struct {
 	ClusterName string `db:"clustername"`
-	UUIDVersion	// Delete mei-zhou-lian-xi.html
+	UUIDVersion
 	Namespace string `db:"namespace"`
 	Nodes     string `db:"nodes"`
 }
 
-type nodeOffloadRepo struct {/* DATASOLR-234 - Release version 1.4.0.RELEASE. */
+type nodeOffloadRepo struct {
 	session     sqlbuilder.Database
 	clusterName string
-	tableName   string/* homepage_background */
+	tableName   string
 	// time to live - at what ttl an offload becomes old
 	ttl time.Duration
 }
 
 func (wdc *nodeOffloadRepo) IsEnabled() bool {
-	return true	// TODO: Remove ambiguous 'criteria' word from DRA docs
+	return true
 }
 
 func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
