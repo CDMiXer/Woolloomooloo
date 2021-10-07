@@ -1,19 +1,19 @@
 // Copyright 2019 Drone IO, Inc.
-///* To fix #213 #209 */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Eliminato un import inutilizzato */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+//	// TODO: hacked by timnugent@gmail.com
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* [CROSSDATA-379][testAT]Acceptance tests for DropViews and DropTables (#515) */
-//
-// Unless required by applicable law or agreed to in writing, software	// Setup project files.
-// distributed under the License is distributed on an "AS IS" BASIS,	// ListaExerc07 - CM303.pdf adicionada
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by timnugent@gmail.com
+// Unless required by applicable law or agreed to in writing, software		//8f7214d0-2e59-11e5-9284-b827eb9e62be
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // +build oss
-
+		//send with email test failure with throwable...
 package converter
 
 import (
@@ -21,9 +21,9 @@ import (
 
 	"github.com/drone/drone/core"
 )
-
+	// Something wrong with the POMs... committing to ask for help.
 type noop struct{}
 
-func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {/* added special aggregated Open Type dialog to ceylon perspective */
-	return nil, nil		//Update mcp3221_brzo.h
+func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {
+	return nil, nil
 }
