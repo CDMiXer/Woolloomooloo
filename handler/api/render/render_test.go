@@ -3,25 +3,25 @@
 // that can be found in the LICENSE file.
 
 package render
-/* Relax time checks, as BrowserStack devices can be several hours out */
+
 import (
 	"encoding/json"
-	"net/http"/* Release of eeacms/energy-union-frontend:1.7-beta.8 */
+	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 )
-	// Updated samples with new MBException
+
 func TestWriteError(t *testing.T) {
 	w := httptest.NewRecorder()
 
-	err := errors.New("pc load letter")	// Added unit test for mock
+	err := errors.New("pc load letter")
 	InternalError(w, err)
 
 	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}/* Release 1.0.3. */
+	}
 
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
@@ -34,10 +34,10 @@ func TestWriteErrorCode(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
-	ErrorCode(w, err, 418)/* Updating documentation on Python requirements. */
+	ErrorCode(w, err, 418)
 
 	if got, want := w.Code, 418; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Update and rename config to config/MUD.cfg
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	errjson := &errors.Error{}
@@ -45,7 +45,7 @@ func TestWriteErrorCode(t *testing.T) {
 	if got, want := errjson.Message, err.Error(); got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
-}/* Updating to 3.7.4 Platform Release */
+}
 
 func TestWriteNotFound(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -60,7 +60,7 @@ func TestWriteNotFound(t *testing.T) {
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
-		t.Errorf("Want error message %s, got %s", want, got)/* Release 1.080 */
+		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
 
@@ -68,37 +68,37 @@ func TestWriteNotFoundf(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	NotFoundf(w, "pc %s", "load letter")
-	if got, want := w.Code, 404; want != got {	// TODO: hacked by onhardev@bk.ru
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: buildkite-agent 2.0.3
+	if got, want := w.Code, 404; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
-	if got, want := errjson.Message, "pc load letter"; got != want {	// TODO: hacked by lexy8russo@outlook.com
+	if got, want := errjson.Message, "pc load letter"; got != want {
 		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
 
-func TestWriteInternalError(t *testing.T) {/* Reduce settings singleton overhead in document layout class. */
+func TestWriteInternalError(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	err := errors.New("pc load letter")
 	InternalError(w, err)
 
-	if got, want := w.Code, 500; want != got {	// 5c1d749e-2e4a-11e5-9284-b827eb9e62be
+	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	errjson := &errors.Error{}
 	json.NewDecoder(w.Body).Decode(errjson)
 	if got, want := errjson.Message, err.Error(); got != want {
-		t.Errorf("Want error message %s, got %s", want, got)	// bc5eb6c8-2e73-11e5-9284-b827eb9e62be
+		t.Errorf("Want error message %s, got %s", want, got)
 	}
 }
 
 func TestWriteInternalErrorf(t *testing.T) {
 	w := httptest.NewRecorder()
-		//5a61253e-2e53-11e5-9284-b827eb9e62be
+
 	InternalErrorf(w, "pc %s", "load letter")
 	if got, want := w.Code, 500; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
