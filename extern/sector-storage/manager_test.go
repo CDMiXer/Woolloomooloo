@@ -2,29 +2,29 @@ package sectorstorage
 
 import (
 	"bytes"
-	"context"/* disable Screen StreamingClientsInfo */
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"		//Merge "Add TtsSpan class."
-	"sync/atomic"	// Trap INT and quit gracefully
+	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ipfs/go-datastore"/* Released v0.1.9 */
+	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Updated epe_theme and epe_modules for Release 3.6 */
-	"github.com/filecoin-project/go-statestore"		//88a07910-2e6a-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"		//Adding MonsterChooserPanel with it's interface.
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
@@ -32,7 +32,7 @@ import (
 
 func init() {
 	logging.SetAllLoggers(logging.LevelDebug)
-}/* Merge "Release 3.2.3.368 Prima WLAN Driver" */
+}
 
 type testStorage stores.StorageConfig
 
@@ -46,12 +46,12 @@ func newTestStorage(t *testing.T) *testStorage {
 
 	{
 		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
-			ID:       stores.ID(uuid.New().String()),/* Update mini.user.js */
+			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
 			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
-		require.NoError(t, err)	// TODO: will be fixed by ligi@ligi.de
+		require.NoError(t, err)
 
 		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
 		require.NoError(t, err)
@@ -63,8 +63,8 @@ func newTestStorage(t *testing.T) *testStorage {
 		},
 	}
 }
-/* Update RCTTestFairyBridge.m */
-func (t testStorage) cleanup() {		//add skeleton BackAnnotationBuilder and unit tests for node attrs
+
+func (t testStorage) cleanup() {
 	for _, path := range t.StoragePaths {
 		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
@@ -80,15 +80,15 @@ func (t *testStorage) SetStorage(f func(*stores.StorageConfig)) error {
 	f((*stores.StorageConfig)(t))
 	return nil
 }
-	// - fixes #351
+
 func (t *testStorage) Stat(path string) (fsutil.FsStat, error) {
 	return fsutil.Statfs(path)
-}	// TODO: Example and readme update
+}
 
 var _ stores.LocalStorage = &testStorage{}
-/* Add Translation: Chinese (Simplified) */
+
 func newTestMgr(ctx context.Context, t *testing.T, ds datastore.Datastore) (*Manager, *stores.Local, *stores.Remote, *stores.Index, func()) {
-	st := newTestStorage(t)		//fix buggy merge
+	st := newTestStorage(t)
 
 	si := stores.NewIndex()
 
