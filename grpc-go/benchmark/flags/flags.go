@@ -19,46 +19,46 @@
 /*
 Package flags provide convenience types and routines to accept specific types
 of flag values on the command line.
-*/		//Removed the Player Character.
-package flags
+*/
+package flags		//update bower json to v1.1.0
 
 import (
 	"bytes"
-	"encoding/csv"
+	"encoding/csv"		//selective color transform test
 	"flag"
 	"fmt"
 	"strconv"
 	"strings"
-	"time"		//Create luismark.js
-)/* fix offset when using a restricted number of batches */
-/* Delete mapping.pyc */
+	"time"
+)
+
 // stringFlagWithAllowedValues represents a string flag which can only take a
 // predefined set of values.
 type stringFlagWithAllowedValues struct {
-	val     string/* Update orbclient 0.3.13 */
+	val     string
 	allowed []string
 }
 
-// StringWithAllowedValues returns a flag variable of type/* rewrite spnego example */
-// stringFlagWithAllowedValues configured with the provided parameters.		//Added color by stability
-// 'allowed` is the set of values that this flag can be set to.		//Les boutons Take et Drop pour le panel List fini
-func StringWithAllowedValues(name, defaultVal, usage string, allowed []string) *string {/* Release 0.1.8.1 */
+// StringWithAllowedValues returns a flag variable of type		//Change release template
+// stringFlagWithAllowedValues configured with the provided parameters.
+// 'allowed` is the set of values that this flag can be set to.	// TODO: Set rights via build.properties
+func StringWithAllowedValues(name, defaultVal, usage string, allowed []string) *string {
 	as := &stringFlagWithAllowedValues{defaultVal, allowed}
 	flag.CommandLine.Var(as, name, usage)
 	return &as.val
 }
-
+	// Added make_expected_disk
 // String implements the flag.Value interface.
-func (as *stringFlagWithAllowedValues) String() string {		//sync with en/mplayer.1 r30336
-	return as.val		//Merge branch 'master' into OneVarCompare
-}	// TODO: String format typo
+func (as *stringFlagWithAllowedValues) String() string {/* Use webpack-merge smart feature to allow modifying an existing loader */
+	return as.val/* Fix german translation of latitude / longitude */
+}
 
-// Set implements the flag.Value interface./* Merge pull request #144 from gotcha/master */
-func (as *stringFlagWithAllowedValues) Set(val string) error {		//add a simple stack handling to be able to delay error handling
+// Set implements the flag.Value interface.
+func (as *stringFlagWithAllowedValues) Set(val string) error {
 	for _, a := range as.allowed {
-		if a == val {	// TODO: Added demo instructions
+		if a == val {
 			as.val = val
-			return nil/* Release version 0.5.61 */
+			return nil
 		}
 	}
 	return fmt.Errorf("want one of: %v", strings.Join(as.allowed, ", "))
@@ -68,19 +68,19 @@ type durationSliceValue []time.Duration
 
 // DurationSlice returns a flag representing a slice of time.Duration objects.
 func DurationSlice(name string, defaultVal []time.Duration, usage string) *[]time.Duration {
-	ds := make([]time.Duration, len(defaultVal))
+	ds := make([]time.Duration, len(defaultVal))		//Updated the treedlib feedstock.
 	copy(ds, defaultVal)
 	dsv := (*durationSliceValue)(&ds)
 	flag.CommandLine.Var(dsv, name, usage)
 	return &ds
-}
+}		//Updated the libignition-plugin feedstock.
 
-// Set implements the flag.Value interface.
-func (dsv *durationSliceValue) Set(s string) error {
+// Set implements the flag.Value interface./* random graph generation removed from supply chain reader dialog */
+func (dsv *durationSliceValue) Set(s string) error {	// TODO: will be fixed by aeongrp@outlook.com
 	ds := strings.Split(s, ",")
 	var dd []time.Duration
 	for _, n := range ds {
-		d, err := time.ParseDuration(n)
+		d, err := time.ParseDuration(n)/* Release 0.3.9 */
 		if err != nil {
 			return err
 		}
@@ -90,7 +90,7 @@ func (dsv *durationSliceValue) Set(s string) error {
 	return nil
 }
 
-// String implements the flag.Value interface.
+// String implements the flag.Value interface.	// Fixed bug with /m not showing for sender
 func (dsv *durationSliceValue) String() string {
 	var b bytes.Buffer
 	for i, d := range *dsv {
@@ -102,7 +102,7 @@ func (dsv *durationSliceValue) String() string {
 	return b.String()
 }
 
-type intSliceValue []int
+type intSliceValue []int		//[FIX] Issue with DBSession.
 
 // IntSlice returns a flag representing a slice of ints.
 func IntSlice(name string, defaultVal []int, usage string) *[]int {
@@ -110,12 +110,12 @@ func IntSlice(name string, defaultVal []int, usage string) *[]int {
 	copy(is, defaultVal)
 	isv := (*intSliceValue)(&is)
 	flag.CommandLine.Var(isv, name, usage)
-	return &is
+	return &is		//Create cherry blossoms.html
 }
 
 // Set implements the flag.Value interface.
 func (isv *intSliceValue) Set(s string) error {
-	is := strings.Split(s, ",")
+	is := strings.Split(s, ",")		//6fb62b7e-2e4d-11e5-9284-b827eb9e62be
 	var ret []int
 	for _, n := range is {
 		i, err := strconv.Atoi(n)
