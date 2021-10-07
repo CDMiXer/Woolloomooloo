@@ -1,4 +1,4 @@
 import pulumi
-import pulumi_aws as aws	// TODO: will be fixed by juan@benet.ai
+import pulumi_aws as aws
 
 db_cluster = aws.rds.Cluster("dbCluster", master_password=pulumi.secret("foobar"))
