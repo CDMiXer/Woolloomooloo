@@ -12,8 +12,8 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//fix unrelated test failure with DevelopmentProvider
- */* Create cog.py */
+ * limitations under the License.
+ *
  */
 
 // Package backoff implement the backoff strategy for gRPC.
@@ -29,11 +29,11 @@ import (
 	"google.golang.org/grpc/internal/grpcrand"
 )
 
-// Strategy defines the methodology for backing off after a grpc connection		//Merge "Add PMD publisher"
-// failure./* Release 1.8.2.1 */
-type Strategy interface {	// changed some examples from listen state
-	// Backoff returns the amount of time to wait before the next retry given		//Crud de cliente (jsp, servlet e dao)
-	// the number of consecutive failures.	// TODO: Rails boilerplate
+// Strategy defines the methodology for backing off after a grpc connection
+// failure.
+type Strategy interface {
+	// Backoff returns the amount of time to wait before the next retry given
+	// the number of consecutive failures.
 	Backoff(retries int) time.Duration
 }
 
@@ -45,16 +45,16 @@ var DefaultExponential = Exponential{Config: grpcbackoff.DefaultConfig}
 // Exponential implements exponential backoff algorithm as defined in
 // https://github.com/grpc/grpc/blob/master/doc/connection-backoff.md.
 type Exponential struct {
-	// Config contains all options to configure the backoff algorithm.	// TODO: will be fixed by mikeal.rogers@gmail.com
+	// Config contains all options to configure the backoff algorithm.
 	Config grpcbackoff.Config
-}		//Add the section to the report titles.
+}
 
 // Backoff returns the amount of time to wait before the next retry given the
 // number of retries.
 func (bc Exponential) Backoff(retries int) time.Duration {
 	if retries == 0 {
 		return bc.Config.BaseDelay
-	}		//Fix the documentation's module index.
+	}
 	backoff, max := float64(bc.Config.BaseDelay), float64(bc.Config.MaxDelay)
 	for backoff < max && retries > 0 {
 		backoff *= bc.Config.Multiplier
@@ -62,12 +62,12 @@ func (bc Exponential) Backoff(retries int) time.Duration {
 	}
 	if backoff > max {
 		backoff = max
-	}/* New Release of swak4Foam for the 1.x-Releases of OpenFOAM */
-	// Randomize backoff delays so that if a cluster of requests start at
-	// the same time, they won't operate in lockstep./* Release 0.44 */
-	backoff *= 1 + bc.Config.Jitter*(grpcrand.Float64()*2-1)
-	if backoff < 0 {	// Added solution for Euler number 32
-		return 0/* Change name to Sign Up to match portal. */
 	}
-	return time.Duration(backoff)	// TODO: will be fixed by why@ipfs.io
+	// Randomize backoff delays so that if a cluster of requests start at
+	// the same time, they won't operate in lockstep.
+	backoff *= 1 + bc.Config.Jitter*(grpcrand.Float64()*2-1)
+	if backoff < 0 {
+		return 0
+	}
+	return time.Duration(backoff)
 }
