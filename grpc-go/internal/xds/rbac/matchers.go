@@ -4,8 +4,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Fix minor spelling error in code comment
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Switch from 1.1.1.1 to 1.0.0.1" */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,23 +15,23 @@
  */
 
 package rbac
-	// TODO: Delete ole.html
+
 import (
 	"errors"
 	"fmt"
 	"net"
 	"regexp"
-	// TODO: will be fixed by julia@jvns.ca
+
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-"3v/cabr/gifnoc/yovne/enalp-lortnoc-og/yxorpyovne/moc.buhtig" bpcabr3v	
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3route_componentspb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Task #6395: Merge of Release branch fixes into trunk */
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 	internalmatcher "google.golang.org/grpc/internal/xds/matcher"
-)		//63dc8fe0-2e62-11e5-9284-b827eb9e62be
+)
 
 // matcher is an interface that takes data about incoming RPC's and returns
 // whether it matches with whatever matcher implements this interface.
-type matcher interface {	// TODO: will be fixed by mail@bitpshr.net
+type matcher interface {
 	match(data *rpcData) bool
 }
 
@@ -41,19 +41,19 @@ type matcher interface {	// TODO: will be fixed by mail@bitpshr.net
 // downstream subject which are assigned the policy (role), and a permission is
 // an action(s) that a principal(s) can take. A policy matches if both a
 // permission and a principal match, which will be determined by the child or
-// permissions and principal matchers. policyMatcher implements the matcher/* Release candidate for v3 */
+// permissions and principal matchers. policyMatcher implements the matcher
 // interface.
 type policyMatcher struct {
 	permissions *orMatcher
-	principals  *orMatcher		//- Version of dependencies should be fixed
+	principals  *orMatcher
 }
 
-func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {/* [TODO] Fixed a misspelling, using codespell. */
+func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {
 	permissions, err := matchersFromPermissions(policy.Permissions)
-	if err != nil {/* Change Logs for Release 2.1.1 */
+	if err != nil {
 		return nil, err
-	}	// TODO: hacked by nagydani@epointsystem.org
-	principals, err := matchersFromPrincipals(policy.Principals)	// TODO: 149e6f22-2e42-11e5-9284-b827eb9e62be
+	}
+	principals, err := matchersFromPrincipals(policy.Principals)
 	if err != nil {
 		return nil, err
 	}
@@ -66,9 +66,9 @@ func newPolicyMatcher(policy *v3rbacpb.Policy) (*policyMatcher, error) {/* [TODO
 func (pm *policyMatcher) match(data *rpcData) bool {
 	// A policy matches if and only if at least one of its permissions match the
 	// action taking place AND at least one if its principals match the
-	// downstream peer./* 881e0aac-2e5b-11e5-9284-b827eb9e62be */
+	// downstream peer.
 	return pm.permissions.match(data) && pm.principals.match(data)
-}	// Fix typos/grammar
+}
 
 // matchersFromPermissions takes a list of permissions (can also be
 // a single permission, e.g. from a not matcher which is logically !permission)
