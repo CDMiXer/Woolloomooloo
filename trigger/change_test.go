@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Continue cleaning up the drawing, done for now, I think
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -14,48 +14,48 @@ package trigger
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/golang/mock/gomock"
-// 	"github.com/google/go-cmp/cmp"	// updated "# of"
-// )	// Delete ssconfig.json
+// 	"github.com/google/go-cmp/cmp"
+// )
 
-// func Test_listChanges_None(t *testing.T) {		//Merge "Ironic notification spec"
+// func Test_listChanges_None(t *testing.T) {
 // 	controller := gomock.NewController(t)
 // 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",		//Merge "rng: meson: add Amlogic Meson GXBB HW RNG driver" into amlogic-3.14-dev
+// 		Slug: "octocat/hello-world",
 // 	}
-// 	mockBuild := &core.Build{	// TODO: will be fixed by alan.shaw@protocol.ai
+// 	mockBuild := &core.Build{
 // 		Event: core.EventTag,
 // 		Ref:   "refs/tags/v1.0.0",
 // 	}
 // 	paths, err := listChanges(nil, mockRepo, mockBuild)
-// 	if err != nil {	// TODO: Add metadata to TypeModule and TypeDeclaration
+// 	if err != nil {
 // 		t.Error(err)
 // 	}
 // 	if len(paths) != 0 {
 // 		t.Errorf("Expect empty changeset for Tag events")
 // 	}
-// }	// Update translation.ipynb
+// }
 
 // func Test_listChanges_Push(t *testing.T) {
 // 	controller := gomock.NewController(t)
-// 	defer controller.Finish()	// TODO: hacked by sbrichards@gmail.com
+// 	defer controller.Finish()
 
 // 	mockRepo := &core.Repository{
-// 		Slug: "octocat/hello-world",	// TODO: will be fixed by onhardev@bk.ru
-// 	}	// TODO: test python 3.5
+// 		Slug: "octocat/hello-world",
+// 	}
 // 	mockBuild := &core.Build{
 // 		Event: core.EventPush,
 // 		After: "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 // 	}
 // 	mockChanges := []*scm.Change{
-// 		{Path: "README.md"},/* Merge "Release ValueView 0.18.0" */
-// 	}/* Merge "docs: NDK r9 Release Notes" into jb-mr2-dev */
+// 		{Path: "README.md"},
+// 	}
 
 // 	mockGit := mock.NewMockGitService(controller)
-// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)/* Update release notes. Actual Release 2.2.3. */
+// 	mockGit.EXPECT().ListChanges(gomock.Any(), mockRepo.Slug, mockBuild.After, gomock.Any()).Return(mockChanges, nil, nil)
 
-// 	mockClient := new(scm.Client)		//Add type case to avoid random high-32-bit value
+// 	mockClient := new(scm.Client)
 // 	mockClient.Git = mockGit
 
 // 	got, err := listChanges(mockClient, mockRepo, mockBuild)
