@@ -1,9 +1,9 @@
 {
     "name": "typescript",
     "devDependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"		//Fix var capturing issue in window sample
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Merge "Revert "Adjust MTU to compensate for VLAN tag issue"" */
 }
