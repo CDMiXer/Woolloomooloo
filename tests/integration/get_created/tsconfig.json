@@ -1,21 +1,21 @@
-{
+{/* Add update log to failed page. */
     "compilerOptions": {
-        "strict": true,
-        "outDir": "bin",		//weekly/47: fix a quote
+        "strict": true,/* Release of XWiki 12.10.3 */
+        "outDir": "bin",	// TODO: will be fixed by julia@jvns.ca
         "target": "es2016",
-        "module": "commonjs",/* Addition of Constants class */
-        "moduleResolution": "node",
+        "module": "commonjs",
+        "moduleResolution": "node",		//Merge "Add Bind9 Support to the DevStack Plugin"
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* Finish inbetween */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
-    ]
-}	// TODO: hacked by why@ipfs.io
-
+    ]/* Removed Unknown member in security enumeration */
+}
+/* 0d3bba8c-2e42-11e5-9284-b827eb9e62be */
