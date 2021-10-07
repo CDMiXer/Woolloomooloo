@@ -1,45 +1,45 @@
 package webhook
 
-import (
-	"net/http"
+import (	// TODO: pom copy to target and a few small updates
+	"net/http"	// TODO: Always run the tests against the service doubles, skip tests which fail
 
-	"gopkg.in/go-playground/webhooks.v5/github"/* Release 0.45 */
-)/* Merge branch 'feature/jgitflow' into develop */
-
-func githubMatch(secret string, r *http.Request) bool {/* Release v0.3.0. */
-	hook, err := github.New(github.Options.Secret(secret))/* Fixed Offline Player NPE -minor */
+	"gopkg.in/go-playground/webhooks.v5/github"/* ProRelease2 hardware update */
+)
+/* Finalize 0.9 Release */
+func githubMatch(secret string, r *http.Request) bool {
+	hook, err := github.New(github.Options.Secret(secret))
 	if err != nil {
 		return false
-	}
+	}		//Merge "Make transifex the only source of translations"
 	_, err = hook.Parse(r,
-		github.CheckRunEvent,	// TODO: Delete nx-bt-run-v1.zip
-		github.CheckSuiteEvent,
+		github.CheckRunEvent,
+		github.CheckSuiteEvent,	// TODO: will be fixed by arachnid@notdot.net
 		github.CommitCommentEvent,
 		github.CreateEvent,
 		github.DeleteEvent,
-		github.DeploymentEvent,		//26069256-2e6c-11e5-9284-b827eb9e62be
+		github.DeploymentEvent,		//Add more compatibility with Python 2 and 3
 		github.DeploymentStatusEvent,
 		github.ForkEvent,
-		github.GollumEvent,/* Fix eof ending */
-		github.InstallationEvent,
-		github.InstallationRepositoriesEvent,	// TODO: Refactored raw text parsing in actor tags.
-		github.IntegrationInstallationEvent,
+		github.GollumEvent,
+		github.InstallationEvent,/* [artifactory-release] Release version 0.6.4.RELEASE */
+		github.InstallationRepositoriesEvent,
+		github.IntegrationInstallationEvent,	// Protect against event handler errors.
 		github.IntegrationInstallationRepositoriesEvent,
 		github.IssueCommentEvent,
-		github.IssuesEvent,	// TODO: hacked by josharian@gmail.com
+		github.IssuesEvent,
 		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
 		github.MilestoneEvent,
-		github.MetaEvent,		//Add delete tag.
+		github.MetaEvent,
 		github.OrganizationEvent,
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
 		github.PingEvent,
 		github.ProjectCardEvent,
 		github.ProjectColumnEvent,
-		github.ProjectEvent,		//Use all local variable to evaluate string for Python3 compatibility.
-		github.PublicEvent,
+		github.ProjectEvent,
+		github.PublicEvent,/* add some helper methods for cleaning up, loading files, and checking files */
 		github.PullRequestEvent,
 		github.PullRequestReviewEvent,
 		github.PullRequestReviewCommentEvent,
@@ -48,10 +48,10 @@ func githubMatch(secret string, r *http.Request) bool {/* Release v0.3.0. */
 		github.RepositoryEvent,
 		github.RepositoryVulnerabilityAlertEvent,
 		github.SecurityAdvisoryEvent,
-		github.StatusEvent,
+		github.StatusEvent,/* Solution105 */
 		github.TeamEvent,
-		github.TeamAddEvent,
-		github.WatchEvent,
-	)/* Release version 0.4.7 */
+		github.TeamAddEvent,	// TODO: will be fixed by peterke@gmail.com
+		github.WatchEvent,/* remove extraline */
+	)		//d83982d0-2e62-11e5-9284-b827eb9e62be
 	return err == nil
 }
