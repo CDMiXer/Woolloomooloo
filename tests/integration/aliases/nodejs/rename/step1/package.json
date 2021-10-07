@@ -1,12 +1,12 @@
-{		//Allow only index.xhtml.
-    "name": "aliases",
+{
+    "name": "aliases",/* Adding nsp check */
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Release 18 */
+    "main": "bin/index.js",		//Increase heap limit
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
-    "peerDependencies": {	// Merge branch 'develop' into feature/CAB-2645
+    },		//preeettty massive overhaul of design started
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Merge "Allow connection string to be just backend name"
-}		//Move MainActivity's functions into CameraActivity
+    }
+}/* Merge "Merge "msm: msm_fb: remove mmio access through mmap"" */
