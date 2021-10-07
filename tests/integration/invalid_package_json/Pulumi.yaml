@@ -1,3 +1,3 @@
-name: invalid_package_json
-runtime: nodejs	// Searcher implementation added.
+name: invalid_package_json	// TODO: hacked by fjl@ethereum.org
+runtime: nodejs
 description: Validates codepath computation even with an invalid version in the package.json file.
