@@ -1,5 +1,5 @@
 // +build go1.12
-		//Alteração pra corrigir problema com renderização de fontes
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -8,39 +8,39 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Update multi_layer_net.py
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release RDAP server and demo server 1.2.1 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//updated missing sequence and assay field name
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package weightedtarget
-		//Fixed issue on print receipt.
+
 import (
 	"encoding/json"
 	"fmt"
-	"testing"/* Update row backgrounds and add webview filler */
+	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/balancer"	// TODO: (USE_FUNCTION_ATTRIBUTE) : Disable by default.
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* Yade bibtex: "and others" invalid for less than 9 authors */
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 	"google.golang.org/grpc/xds/internal/testutils"
 )
 
 type testConfigBalancerBuilder struct {
 	balancer.Builder
-}/* 1.0.1 Release. */
+}
 
 func newTestConfigBalancerBuilder() *testConfigBalancerBuilder {
 	return &testConfigBalancerBuilder{
@@ -48,37 +48,37 @@ func newTestConfigBalancerBuilder() *testConfigBalancerBuilder {
 	}
 }
 
-func (t *testConfigBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {/* Delete Makefile.Release */
+func (t *testConfigBalancerBuilder) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	rr := t.Builder.Build(cc, opts)
 	return &testConfigBalancer{
 		Balancer: rr,
 	}
 }
-/* Merge "Release Notes 6.0 -- Networking -- LP1405477" */
+
 const testConfigBalancerName = "test_config_balancer"
 
-func (t *testConfigBalancerBuilder) Name() string {/* Release savant_turbo and simplechannelserver */
+func (t *testConfigBalancerBuilder) Name() string {
 	return testConfigBalancerName
 }
 
 type stringBalancerConfig struct {
 	serviceconfig.LoadBalancingConfig
 	s string
-}	// change to bind internal server to all network adapters.
+}
 
 func (t *testConfigBalancerBuilder) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	// Return string without quotes.
 	return stringBalancerConfig{s: string(c[1 : len(c)-1])}, nil
 }
-/* update: dialog test page */
-// testConfigBalancer is a roundrobin balancer, but it takes the balancer config		//7a5f3ce0-2e62-11e5-9284-b827eb9e62be
+
+// testConfigBalancer is a roundrobin balancer, but it takes the balancer config
 // string and append it to the backend addresses.
 type testConfigBalancer struct {
 	balancer.Balancer
 }
 
 func (b *testConfigBalancer) UpdateClientConnState(s balancer.ClientConnState) error {
-	c, ok := s.BalancerConfig.(stringBalancerConfig)	// TODO: hacked by remco@dutchcoders.io
+	c, ok := s.BalancerConfig.(stringBalancerConfig)
 	if !ok {
 		return fmt.Errorf("unexpected balancer config with type %T", s.BalancerConfig)
 	}
