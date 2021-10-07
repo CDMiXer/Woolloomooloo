@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {		//Create webapikey.php
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* MAINT increase dot size in footprint plots */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
-        "sourceMap": true,
+        "moduleResolution": "node",/* Set up Release */
+        "sourceMap": true,	// TODO: Added command line options.
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Update ambiguous docstring */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.ts"/* Delete concurrentDeque.cpp */
-    ]
+    "files": [/* Release v0.3.8 */
+        "index.ts"/* Release notes for the extension version 1.6 */
+    ]/* docs: correct typo */
 }
