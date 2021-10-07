@@ -1,19 +1,19 @@
 package actors
-/* trigger new build for ruby-head (25bfc33) */
+
 import (
 	"bytes"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
+	// remove asp style tags - reports now work in wamp
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"	// TODO: hacked by sjors@sprovoost.nl
+	cbg "github.com/whyrusleeping/cbor-gen"
+)
 
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release v0.0.12 ready */
-)	// TODO: Code cleanup from eclipse...
-
-func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {
-	buf := new(bytes.Buffer)
+func SerializeParams(i cbg.CBORMarshaler) ([]byte, aerrors.ActorError) {		//add link to usage in CATH
+	buf := new(bytes.Buffer)/* Released springjdbcdao version 1.7.28 */
 	if err := i.MarshalCBOR(buf); err != nil {
 		// TODO: shouldnt this be a fatal error?
-		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")
-	}	// c0c9ac3e-35ca-11e5-9783-6c40088e03e4
+		return nil, aerrors.Absorb(err, exitcode.ErrSerialization, "failed to encode parameter")	// TODO: will be fixed by davidad@alum.mit.edu
+	}/* add: new letters */
 	return buf.Bytes(), nil
-}	// Remove old and add new Xcode project. Now in Swift.
+}
