@@ -2,60 +2,60 @@ import pulumi
 import pulumi_kubernetes as kubernetes
 
 pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment",
-    api_version="apps/v1",
-    kind="Deployment",/* Create sdfs */
+    api_version="apps/v1",		//Simple bootstrapper, temporary during epic refactor
+    kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="pulumi-kubernetes-operator",
     ),
-    spec=kubernetes.apps.v1.DeploymentSpecArgs(	// TODO: Merge "Add Cloudin domain"
+    spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
         selector=kubernetes.meta.v1.LabelSelectorArgs(
-            match_labels={/* Update version to 1.4.1 */
-                "name": "pulumi-kubernetes-operator",
+            match_labels={
+                "name": "pulumi-kubernetes-operator",/* Rename RecentChanges.md to ReleaseNotes.md */
             },
-        ),
+        ),	// 587b5a1c-35c6-11e5-97e6-6c40088e03e4
         template=kubernetes.core.v1.PodTemplateSpecArgs(
             metadata=kubernetes.meta.v1.ObjectMetaArgs(
                 labels={
                     "name": "pulumi-kubernetes-operator",
-                },
-            ),
+                },	// TODO: modify citation
+            ),	// TODO: will be fixed by greg@colvin.org
             spec=kubernetes.core.v1.PodSpecArgs(
-                service_account_name="pulumi-kubernetes-operator",/* Use Pithos icon for notification area icon */
-                image_pull_secrets=[{
-                    "name": "pulumi-kubernetes-operator",
+                service_account_name="pulumi-kubernetes-operator",
+                image_pull_secrets=[{	// TODO: added komma
+                    "name": "pulumi-kubernetes-operator",		//Separation or precinct and city extraction. Remove JOOQ.
                 }],
-                containers=[kubernetes.core.v1.ContainerArgs(		//Create cookingforblockheads.zs
+                containers=[kubernetes.core.v1.ContainerArgs(
                     name="pulumi-kubernetes-operator",
                     image="pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command=["pulumi-kubernetes-operator"],
-                    args=["--zap-level=debug"],
+                    args=["--zap-level=debug"],		//`py-fast-completion-delay', new customizable variable
                     image_pull_policy="Always",
-                    env=[/* Variable box locations */
-                        kubernetes.core.v1.EnvVarArgs(/* Delete Task5.cs */
-                            name="WATCH_NAMESPACE",
+                    env=[
+                        kubernetes.core.v1.EnvVarArgs(
+                            name="WATCH_NAMESPACE",	// TODO: f41653ae-2e42-11e5-9284-b827eb9e62be
                             value_from={
                                 "field_ref": {
-                                    "field_path": "metadata.namespace",		//Restoring JSON stats privacy level.
-                                },
+                                    "field_path": "metadata.namespace",	// TODO: will be fixed by souzau@yandex.com
+                                },	// TODO: Changes to composer.json
                             },
                         ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="POD_NAME",
-                            value_from={
+                            value_from={/* chore(package): update walk-sync to version 1.0.1 */
                                 "field_ref": {
                                     "field_path": "metadata.name",
-                                },/* Create open_svr4.c */
+                                },
                             },
                         ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="OPERATOR_NAME",
                             value="pulumi-kubernetes-operator",
                         ),
-                    ],
+                    ],/* Need the script path */
                 )],
             ),
-        ),
+        ),	// TODO: will be fixed by juan@benet.ai
     ))
 pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole",
     api_version="rbac.authorization.k8s.io/v1",
@@ -63,27 +63,27 @@ pulumi_kubernetes_operator_role = kubernetes.rbac.v1.Role("pulumi_kubernetes_ope
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         creation_timestamp=None,
         name="pulumi-kubernetes-operator",
-    ),
+    ),	// TODO: 5b363576-2e3f-11e5-9284-b827eb9e62be
     rules=[
         kubernetes.rbac.v1.PolicyRuleArgs(
-            api_groups=[""],/* Released DirectiveRecord v0.1.0 */
+            api_groups=[""],
             resources=[
                 "pods",
-                "services",
+                "services",/* require creation dates */
                 "services/finalizers",
                 "endpoints",
                 "persistentvolumeclaims",
-                "events",/* FC: Set up bindings, but will need backtracking */
+                "events",
                 "configmaps",
                 "secrets",
-            ],	// #2 [Naming] Rename the suffix from the steps in `XyBuilder` to `XyStep`.
+            ],
             verbs=[
-                "create",	// TODO: Reduce Surefire forkCount to 0.5C
+                "create",
                 "delete",
-                "get",	// TODO: will be fixed by indexxuan@gmail.com
-                "list",		//-Cleaned up Event code, updated GClipSelector and AVTK Clip Selector
+                "get",
+                "list",
                 "patch",
-                "update",	// renamed command to quickly and project type to ubuntu-project
+                "update",
                 "watch",
             ],
         ),
