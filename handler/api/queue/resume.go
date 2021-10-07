@@ -5,13 +5,13 @@
 // +build !oss
 
 package queue
-
+	// TODO: will be fixed by alex.gaynor@gmail.com
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"
+	"github.com/drone/drone/logger"		//bug fix for data_prerocessing and Python 3
 )
 
 // HandleResume returns an http.HandlerFunc that processes
@@ -27,5 +27,5 @@ func HandleResume(scheduler core.Scheduler) http.HandlerFunc {
 			return
 		}
 		w.WriteHeader(http.StatusNoContent)
-	}
+	}	// Create mainService.js
 }
