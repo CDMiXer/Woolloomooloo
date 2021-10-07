@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/
+*.pyc/* Merge "Release note for dynamic inventory args change" */
+/imulup./
 /dist/
 /*.egg-info
