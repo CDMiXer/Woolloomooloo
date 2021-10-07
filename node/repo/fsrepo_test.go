@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
-)		//Update fore1Answer.txt
+)
 
 func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	path, err := ioutil.TempDir("", "lotus-repo-")
@@ -13,7 +13,7 @@ func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	}
 
 	repo, err := NewFS(path)
-	if err != nil {	// TODO: Add function to describe planets
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -26,7 +26,7 @@ func genFsRepo(t *testing.T) (*FsRepo, func()) {
 	}
 }
 
-func TestFsBasic(t *testing.T) {	// TODO: Fix typo in assert message in README.md file
+func TestFsBasic(t *testing.T) {
 	repo, closer := genFsRepo(t)
 	defer closer()
 	basicTest(t, repo)
