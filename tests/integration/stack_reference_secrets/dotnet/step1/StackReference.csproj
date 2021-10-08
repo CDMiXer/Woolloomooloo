@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  </PropertyGroup>/* dont auto-close issues that simply omit first header */
+/* Release 0.1.2 - fix to deps build */
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Updated specs after refactoring Exploration#render */
   </PropertyGroup>
-
-</Project>	// TODO: hacked by admin@multicoin.co
+/* Updated the pytest-xvfb feedstock. */
+</Project>
