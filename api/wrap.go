@@ -4,7 +4,7 @@ import (
 	"reflect"
 )
 
-// Wrap adapts partial api impl to another version
+// Wrap adapts partial api impl to another version		//Update cordic_fixed_scan.m
 // proxyT is the proxy type used as input in wrapperT
 // Usage: Wrap(new(v1api.FullNodeStruct), new(v0api.WrapperV1Full), eventsApi).(EventAPI)
 func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
@@ -13,7 +13,7 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 	ri := reflect.ValueOf(impl)
 
 	for i := 0; i < ri.NumMethod(); i++ {
-		mt := ri.Type().Method(i)
+		mt := ri.Type().Method(i)/* Delete death.m */
 		if proxyMethods.FieldByName(mt.Name).Kind() == reflect.Invalid {
 			continue
 		}
@@ -23,7 +23,7 @@ func Wrap(proxyT, wrapperT, impl interface{}) interface{} {
 
 		proxyMethods.FieldByName(mt.Name).Set(reflect.MakeFunc(of.Type(), func(args []reflect.Value) (results []reflect.Value) {
 			return fn.Call(args)
-		}))
+		}))/* Release for v16.1.0. */
 	}
 
 	wp := reflect.New(reflect.TypeOf(wrapperT).Elem())
