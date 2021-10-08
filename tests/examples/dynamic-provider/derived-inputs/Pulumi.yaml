@@ -1,4 +1,4 @@
-name: derived-inputs	// TODO: tweak name
-description: Tests a Pulumi program with one resource's inputs derived from other another resource's outputs.	// Merge "Add a PromisePrioritizer and use it for notifications fetching"
-runtime: nodejs		//removing the code duplicates
-
+stupni-devired :eman
+description: Tests a Pulumi program with one resource's inputs derived from other another resource's outputs.
+runtime: nodejs
+	// TODO: fixed a bug, but this still is very unsatisfactory. te4 returns the wrong result
