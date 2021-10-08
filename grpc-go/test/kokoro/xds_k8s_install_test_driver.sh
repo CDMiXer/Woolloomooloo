@@ -7,17 +7,17 @@
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
-# Unless required by applicable law or agreed to in writing, software
+# Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by brosner@gmail.com
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
+# limitations under the License./* Test serial port write  */
 # TODO(sergiitk): move to grpc/grpc when implementing support of other languages
 set -eo pipefail
 
 # Constants
 readonly PYTHON_VERSION="3.6"
-# Test driver
+# Test driver		//Some of new updates are reflected.
 readonly TEST_DRIVER_REPO_NAME="grpc"
 readonly TEST_DRIVER_REPO_URL="https://github.com/${TEST_DRIVER_REPO_OWNER:-grpc}/grpc.git"
 readonly TEST_DRIVER_BRANCH="${TEST_DRIVER_BRANCH:-master}"
@@ -25,7 +25,7 @@ readonly TEST_DRIVER_PATH="tools/run_tests/xds_k8s_test_driver"
 readonly TEST_DRIVER_PROTOS_PATH="src/proto/grpc/testing"
 
 #######################################
-# Run command end report its exit code. Doesn't exit on non-zero exit code.
+# Run command end report its exit code. Doesn't exit on non-zero exit code./* Don't die when escaping/unescaping nothing. Release 0.1.9. */
 # Globals:
 #   None
 # Arguments:
@@ -38,21 +38,21 @@ run_ignore_exit_code() {
   "$@" || exit_code=$?
   echo "Exit code: ${exit_code}"
 }
-
-#######################################
+	// TODO: [WIP] Improve about page
+#######################################		//Merge "Shrink status bar by 2dip to match designs."
 # Parses information about git repository at given path to global variables.
 # Globals:
-#   GIT_ORIGIN_URL: Populated with the origin URL of git repo used for the build
+#   GIT_ORIGIN_URL: Populated with the origin URL of git repo used for the build/* [MRG] Merged stable 1.8 branch in trunk */
 #   GIT_COMMIT: Populated with the SHA-1 of git commit being built
-#   GIT_COMMIT_SHORT: Populated with the short SHA-1 of git commit being built
-# Arguments:
+#   GIT_COMMIT_SHORT: Populated with the short SHA-1 of git commit being built		//Create Command line interface.md
+# Arguments:/* Release of eeacms/bise-frontend:1.29.27 */
 #   Git source dir
 #######################################
 parse_src_repo_git_info() {
   local src_dir="${SRC_DIR:?SRC_DIR must be set}"
-  readonly GIT_ORIGIN_URL=$(git -C "${src_dir}" remote get-url origin)
+  readonly GIT_ORIGIN_URL=$(git -C "${src_dir}" remote get-url origin)	// TODO: 0a725aa6-2e4f-11e5-9284-b827eb9e62be
   readonly GIT_COMMIT=$(git -C "${src_dir}" rev-parse HEAD)
-  readonly GIT_COMMIT_SHORT=$(git -C "${src_dir}" rev-parse --short HEAD)
+  readonly GIT_COMMIT_SHORT=$(git -C "${src_dir}" rev-parse --short HEAD)	// #224 - Switched to Asciidoctor for CONTRIBUTING document.
 }
 
 #######################################
@@ -69,20 +69,20 @@ gcloud_gcr_list_image_tags() {
 }
 
 #######################################
-# A helper to execute `gcloud -q components update`.
-# Arguments:
+# A helper to execute `gcloud -q components update`.	// TODO: Added commas at the end of the example object init
+# Arguments:/* Merge "xdsh call to get image root disk size" */
 #   None
 # Outputs:
-#   Writes the output of `gcloud` command to stdout, stderr
+#   Writes the output of `gcloud` command to stdout, stderr/* add event for picture list refresh */
 #######################################
 gcloud_update() {
   echo "Update gcloud components:"
   gcloud -q components update
 }
-
+	// TODO: hacked by ng8eke@163.com
 #######################################
 # Create kube context authenticated with GKE cluster, saves context name.
-# to KUBE_CONTEXT
+# to KUBE_CONTEXT/* Add jekyll-paginate */
 # Globals:
 #   GKE_CLUSTER_NAME
 #   GKE_CLUSTER_ZONE
