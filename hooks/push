@@ -1,6 +1,6 @@
-#!/bin/bash -e		//refactoring IndexReader.readIndex()
+#!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"/* a494538a-2e4c-11e5-9284-b827eb9e62be */
+targets="workflow-controller argoexec argocli"
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker push $image_name
