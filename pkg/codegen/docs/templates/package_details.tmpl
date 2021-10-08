@@ -1,11 +1,11 @@
 {{ define "package_details" }}
-<h2 id="package-details">Package Details</h2>
+<h2 id="package-details">Package Details</h2>		//fix(HtmlParser): add missing ;
 <dl class="package-details">
 	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
 	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
-    {{- if ne .Notes "" }}
+    {{- if ne .Notes "" }}	// TODO: will be fixed by ligi@ligi.de
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
 	{{- end }}
