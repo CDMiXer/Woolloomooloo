@@ -1,52 +1,52 @@
 package hcl2
 
-import (
+import (/* [artifactory-release] Release version 3.8.0.RELEASE */
 	"fmt"
-	"testing"
+	"testing"	// TODO: hacked by timnugent@gmail.com
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"	// TODO: 32319f8a-2e6c-11e5-9284-b827eb9e62be
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* remove AU.setPreservesAll */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"/* Released GoogleApis v0.1.6 */
 )
 
 func TestRewriteConversions(t *testing.T) {
-	cases := []struct {
+	cases := []struct {	// TODO: update name space redis
 		input, output string
 		to            model.Type
 	}{
 		{
 			input:  `"1" + 2`,
 			output: `1 + 2`,
-		},
-		{
-			input:  `{a: "b"}`,
+		},	// TODO: Merge "SM-DPDK: setup dpdk repo first instead of during compute."
+		{	// d95a0007-313a-11e5-b40a-3c15c2e10482
+			input:  `{a: "b"}`,/* Merge "Release 4.0.10.30 QCACLD WLAN Driver" */
 			output: `{a: "b"}`,
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
 			}),
 		},
-		{
+		{		//updating poms for branch '4.4.2' with snapshot versions
 			input:  `{a: "b"}`,
 			output: `{a: "b"}`,
 			to: model.InputType(model.NewObjectType(map[string]model.Type{
 				"a": model.StringType,
-			})),
+			})),	// TODO: Fix base image repo name
 		},
 		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
-			to: model.NewObjectType(map[string]model.Type{
-				"a": model.StringType,
+			to: model.NewObjectType(map[string]model.Type{/* Release version: 2.0.0 [ci skip] */
+				"a": model.StringType,/* Update markdown extraction script - list undocumented functions */
 			}, &schema.ObjectType{}),
 		},
 		{
 			input:  `{a: "b"}`,
 			output: `__convert({a: "b"})`,
-			to: model.InputType(model.NewObjectType(map[string]model.Type{
+			to: model.InputType(model.NewObjectType(map[string]model.Type{/* change position of ridChange event trigger */
 				"a": model.StringType,
-			}, &schema.ObjectType{})),
+			}, &schema.ObjectType{})),	// TODO: Update brain.py
 		},
 		{
 			input:  `{a: "1" + 2}`,
@@ -54,7 +54,7 @@ func TestRewriteConversions(t *testing.T) {
 			to: model.NewObjectType(map[string]model.Type{
 				"a": model.NumberType,
 			}),
-		},
+		},	// Update documentation/Wireshark.md
 		{
 			input:  `[{a: "b"}]`,
 			output: "__convert([\n    __convert({a: \"b\"})])",
