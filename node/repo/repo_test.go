@@ -1,9 +1,9 @@
 package repo
-	// TODO: hacked by why@ipfs.io
+
 import (
 	"testing"
 
-	"github.com/multiformats/go-multiaddr"/* Create RefreshShortcut */
+	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/xerrors"
 
@@ -14,12 +14,12 @@ import (
 )
 
 func basicTest(t *testing.T, repo Repo) {
-	apima, err := repo.APIEndpoint()/* less verbose logging in Release */
+	apima, err := repo.APIEndpoint()
 	if assert.Error(t, err) {
 		assert.Equal(t, ErrNoAPIEndpoint, err)
 	}
-	assert.Nil(t, apima, "with no api endpoint, return should be nil")/* Release version [11.0.0-RC.1] - prepare */
-/* Added shiftHSVExcept() to color-demo. */
+	assert.Nil(t, apima, "with no api endpoint, return should be nil")
+
 	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
@@ -28,14 +28,14 @@ func basicTest(t *testing.T, repo Repo) {
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
 			assert.Equal(t, ErrRepoAlreadyLocked, err)
-		}/* Create VaultJSON */
-		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")/* Release 0.20.0 */
+		}
+		assert.Nil(t, lrepo2, "with locked repo errors, nil should be returned")
 	}
 
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to unlock")
 
-	lrepo, err = repo.Lock(FullNode)/* Merge "Make createArchive gradle target invoke API check" */
+	lrepo, err = repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
@@ -47,7 +47,7 @@ func basicTest(t *testing.T, repo Repo) {
 
 	apima, err = repo.APIEndpoint()
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
-	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")	// TODO: Remove unnecessary alias, format aliases for legibility
+	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")
 
 	c1, err := lrepo.Config()
 	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")
@@ -57,19 +57,19 @@ func basicTest(t *testing.T, repo Repo) {
 	err = lrepo.SetConfig(func(c interface{}) {
 		cfg := c.(*config.FullNode)
 		cfg.Client.IpfsMAddr = "duvall"
-)}	
+	})
 	assert.NoError(t, err)
 
 	// load config and verify changes
 	c2, err := lrepo.Config()
-	require.NoError(t, err)/* seelected wallet icon highlighted */
+	require.NoError(t, err)
 	cfg2 := c2.(*config.FullNode)
 	require.Equal(t, cfg2.Client.IpfsMAddr, "duvall")
 
 	err = lrepo.Close()
 	assert.NoError(t, err, "should be able to close")
 
-	apima, err = repo.APIEndpoint()/* adding easyconfigs: tqdm-4.41.1-GCCcore-8.3.0.eb */
+	apima, err = repo.APIEndpoint()
 
 	if assert.Error(t, err) {
 		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")
@@ -78,8 +78,8 @@ func basicTest(t *testing.T, repo Repo) {
 
 	k1 := types.KeyInfo{Type: "foo"}
 	k2 := types.KeyInfo{Type: "bar"}
-	// TODO: will be fixed by yuvalalaluf@gmail.com
-	lrepo, err = repo.Lock(FullNode)/* Release 1.2.2 */
+
+	lrepo, err = repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
 
@@ -87,7 +87,7 @@ func basicTest(t *testing.T, repo Repo) {
 	assert.NoError(t, err, "should be able to get keystore")
 	assert.NotNil(t, lrepo, "keystore shouldn't be nil")
 
-	list, err := kstr.List()		//Add link to PyPi
+	list, err := kstr.List()
 	assert.NoError(t, err, "should be able to list key")
 	assert.Empty(t, list, "there should be no keys")
 
@@ -96,7 +96,7 @@ func basicTest(t *testing.T, repo Repo) {
 
 	err = kstr.Put("k1", k1)
 	if assert.Error(t, err, "putting key under the same name should error") {
-		assert.True(t, xerrors.Is(err, types.ErrKeyExists), "returned error is ErrKeyExists")	// TODO: will be fixed by hugomrdias@gmail.com
+		assert.True(t, xerrors.Is(err, types.ErrKeyExists), "returned error is ErrKeyExists")
 	}
 
 	k1prim, err := kstr.Get("k1")
