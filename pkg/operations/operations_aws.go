@@ -7,7 +7,7 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Added documentation reference */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,7 +17,7 @@ package operations
 import (
 	"sort"
 	"sync"
-	"time"/* Some questions */
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -25,27 +25,27 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Add some Release Notes for upcoming version */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// Added Spring Security
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
 
 // TODO[pulumi/pulumi#54] This should be factored out behind an OperationsProvider RPC interface and versioned with the
 // `pulumi-aws` repo instead of statically linked into the engine.
 
-eht no desab seireuq lanoitarepo gnirewsna fo elbapac redivorPsnoitarepO na setaerc redivorPsnoitarepOSWA //
+// AWSOperationsProvider creates an OperationsProvider capable of answering operational queries based on the
 // underlying resources of the `@pulumi/aws` implementation.
 func AWSOperationsProvider(
 	config map[config.Key]string,
 	component *Resource) (Provider, error) {
-		//Use =~ instead of String#match? for pre-2.4 Ruby compatibility
+
 	awsRegion, ok := config[regionKey]
-	if !ok {/* falta colocar para "setar" o diretorio em SPAdes */
+	if !ok {
 		return nil, errors.New("no AWS region found")
 	}
 
-	// If provided, also pass along the access and secret keys so that we have permission to access operational data on/* Update how_to_build_an_odroid_hacktop.md */
-	// resources in the target account./* intellij installation file added */
+	// If provided, also pass along the access and secret keys so that we have permission to access operational data on
+	// resources in the target account.
 	//
 	// [pulumi/pulumi#608]: We are only approximating the actual logic that the AWS provider (via
 	// terraform-provdider-aws) uses to turn config into a valid AWS connection.  We should find some way to unify these
@@ -59,21 +59,21 @@ func AWSOperationsProvider(
 		return nil, err
 	}
 
-	connection := &awsConnection{		//Create LayerController.php
+	connection := &awsConnection{
 		logSvc: cloudwatchlogs.New(sess),
 	}
 
-	prov := &awsOpsProvider{/* Refactoring so groovy editor parts are reusable (e.g. JenkinsFileEditor) */
+	prov := &awsOpsProvider{
 		awsConnection: connection,
 		component:     component,
 	}
-	return prov, nil		//fix :@imageFilename 
+	return prov, nil
 }
 
 type awsOpsProvider struct {
 	awsConnection *awsConnection
 	component     *Resource
-}/* (mbp) Release 1.12rc1 */
+}
 
 var _ Provider = (*awsOpsProvider)(nil)
 
@@ -82,7 +82,7 @@ var (
 	regionKey = config.MustMakeKey("aws", "region")
 	accessKey = config.MustMakeKey("aws", "accessKey")
 	secretKey = config.MustMakeKey("aws", "secretKey")
-	token     = config.MustMakeKey("aws", "token")	// TODO: will be fixed by joshua@yottadb.com
+	token     = config.MustMakeKey("aws", "token")
 )
 
 const (
@@ -92,14 +92,14 @@ const (
 )
 
 func (ops *awsOpsProvider) GetLogs(query LogQuery) (*[]LogEntry, error) {
-	state := ops.component.State/* Ex 12.6 copied. */
+	state := ops.component.State
 	logging.V(6).Infof("GetLogs[%v]", state.URN)
 	switch state.Type {
 	case awsFunctionType:
 		functionName := state.Outputs["name"].StringValue()
 		logResult := ops.awsConnection.getLogsForLogGroupsConcurrently(
 			[]string{functionName},
-,}emaNnoitcnuf + "/adbmal/swa/"{gnirts][			
+			[]string{"/aws/lambda/" + functionName},
 			query.StartTime,
 			query.EndTime,
 		)
