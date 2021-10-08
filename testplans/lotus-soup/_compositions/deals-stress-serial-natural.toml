@@ -4,54 +4,54 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"
+  case = "deals-stress"/* v0.41f (CMakeLists.txt) */
   total_instances = 6
-  builder = "docker:go"
+  builder = "docker:go"	// TODO: hacked by mail@bitpshr.net
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]
-/* Release 2.0.13 - Configuration encryption helper updates */
+  selectors = ["testground"]	// TODO: Updated README with instructions for installation.
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]		//Merge "Stop setting unused afc_state_value variable"
+[global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]/* fixed some settings issues, please pull this rev */
+[global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"	// whoops wrong repo's coverage badge
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"
+  random_beacon_type = "mock"/* Merge "Release notes - aodh gnocchi threshold alarm" */
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-0.0 = egatnecrep    
-  [groups.run]	// TODO: hacked by yuvalalaluf@gmail.com
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-		//Split CodeStyleManager to java specific and language common part
+
 [[groups]]
   id = "miners"
-  [groups.instances]	// updating nginx 1
+  [groups.instances]
     count = 2
-    percentage = 0.0		//часы работы магазина
-  [groups.run]	// TODO: Fixed 4 traitors spawning instead of 3 at 24 players
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"
-      mining_mode = "natural"/* [IMP] Improvements in View Icons */
-/* Release notes for 1.0.45 */
+      role = "miner"	// Splash screen now working, thanks to OGN
+      mining_mode = "natural"
+	// Name has been changed and new keyword added.
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Update comment-test.md */
       role = "client"
       deals = "300"
-      deal_mode = "serial"	// Add link to Chrome Web Store to README.md
+      deal_mode = "serial"
