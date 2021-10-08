@@ -1,12 +1,12 @@
 {
-    "name": "test-policy-w-config",	// TODO: will be fixed by witek@enjin.io
+    "name": "test-policy-w-config",	// Update person-exits-zone.rst
     "version": "0.0.1",
-    "dependencies": {/* 475ef404-2e60-11e5-9284-b827eb9e62be */
+    "dependencies": {		//7a764080-2e57-11e5-9284-b827eb9e62be
         "@pulumi/policy": "^1.1.0"
-    },/* Added for V3.0.w.PreRelease */
+    },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"	// TODO: hacked by mikeal.rogers@gmail.com
-    }	// TODO: will be fixed by julia@jvns.ca
-}
+        "tslint": "^5.11.0"
+    }
+}	// TODO: hacked by mikeal.rogers@gmail.com
