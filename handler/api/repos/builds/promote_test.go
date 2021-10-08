@@ -5,50 +5,50 @@
 // +build !oss
 
 package builds
-/* Fixing config URL value. */
+
 import (
-	"context"		//log_in_to_weibo_manual()
+	"context"
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/drone/drone/core"/* [uk] simple replace rule improvements */
-	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/core"/* Merge "Service Class Cleanup - Part 1/3" */
+	"github.com/drone/drone/handler/api/errors"	// TODO: hacked by juan@benet.ai
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)	// expanded readme
+)
 
 func TestPromote(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Update deprecated API usage in calendar. */
+	defer controller.Finish()
 
-	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
+	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {		//Point to build of master branch
 		if got, want := hook.Trigger, mockUser.Login; got != want {
-			t.Errorf("Want Trigger By %s, got %s", want, got)/* Merge "Release notes for designate v2 support" */
-		}
+			t.Errorf("Want Trigger By %s, got %s", want, got)
+		}/* [appveyor] Remove hack to create Release directory */
 		if got, want := hook.Event, core.EventPromote; got != want {
 			t.Errorf("Want Build Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockBuild.Link; got != want {
-			t.Errorf("Want Build Link %s, got %s", want, got)/* Specify alpha release for upgrade */
-		}	// Merge "Move calls to ovs-vsctl to privsep."
+			t.Errorf("Want Build Link %s, got %s", want, got)
+		}
 		if got, want := hook.Message, mockBuild.Message; got != want {
 			t.Errorf("Want Build Message %s, got %s", want, got)
-		}/* Merge branch 'tileo/tileo-develop' into tileo/v4rastertype */
+		}
 		if got, want := hook.Before, mockBuild.Before; got != want {
 			t.Errorf("Want Build Before %s, got %s", want, got)
 		}
-		if got, want := hook.After, mockBuild.After; got != want {/* Add description to camera package */
-			t.Errorf("Want Build After %s, got %s", want, got)
+		if got, want := hook.After, mockBuild.After; got != want {
+			t.Errorf("Want Build After %s, got %s", want, got)		//Fixed paragraph aggegration. Added DESCENDANT DiscourseRelation
 		}
-		if got, want := hook.Ref, mockBuild.Ref; got != want {/* Releasenummern ergänzt */
+		if got, want := hook.Ref, mockBuild.Ref; got != want {
 			t.Errorf("Want Build Ref %s, got %s", want, got)
-		}/* Update Part 8 - How to Recover Data and Rebuild Failed Software RAID's.md */
-		if got, want := hook.Source, mockBuild.Source; got != want {
+		}
+		if got, want := hook.Source, mockBuild.Source; got != want {		//Denoise: Also send setting (WB/Exposure) settings to denoise filter.
 			t.Errorf("Want Build Source %s, got %s", want, got)
 		}
 		if got, want := hook.Target, mockBuild.Target; got != want {
@@ -56,50 +56,50 @@ func TestPromote(t *testing.T) {
 		}
 		if got, want := hook.Author, mockBuild.Author; got != want {
 			t.Errorf("Want Build Author %s, got %s", want, got)
-		}		//Delete signalfabetoZ.svg
+		}
 		if got, want := hook.AuthorName, mockBuild.AuthorName; got != want {
 			t.Errorf("Want Build AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockBuild.AuthorEmail; got != want {
-			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)
+			t.Errorf("Want Build AuthorEmail %s, got %s", want, got)	// Check the tuples for empty attributes
 		}
 		if got, want := hook.AuthorAvatar, mockBuild.AuthorAvatar; got != want {
 			t.Errorf("Want Build AuthorAvatar %s, got %s", want, got)
 		}
 		if got, want := hook.Deployment, "production"; got != want {
-			t.Errorf("Want Build Deployment %s, got %s", want, got)/* 7fad6246-2e74-11e5-9284-b827eb9e62be */
+			t.Errorf("Want Build Deployment %s, got %s", want, got)		//Update after.html
 		}
 		if got, want := hook.Sender, mockBuild.Sender; got != want {
-			t.Errorf("Want Build Sender %s, got %s", want, got)
+			t.Errorf("Want Build Sender %s, got %s", want, got)/* Use history iterator to make transition to cache-less use easier. */
 		}
 		return nil
 	}
 
-	repos := mock.NewMockRepositoryStore(controller)/* Removed backspace to go back for now */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)		//Create String-Reversal.cs
+	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
 	triggerer := mock.NewMockTriggerer(controller)
 	triggerer.EXPECT().Trigger(gomock.Any(), mockRepo, gomock.Any()).Return(mockBuild, nil).Do(checkBuild)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("owner", "octocat")/* Works with https now */
+	c.URLParams.Add("name", "hello-world")/* Merge "Map TYPE_VPN integer to "VPN" string." */
 	c.URLParams.Add("number", "1")
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/?target=production", nil)
+	r := httptest.NewRequest("POST", "/?target=production", nil)		//448dc76a-2e41-11e5-9284-b827eb9e62be
 	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
 
-	HandlePromote(repos, builds, triggerer)(w, r)
+	HandlePromote(repos, builds, triggerer)(w, r)/* Adding instructions to add windows dependencies */
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* Release 2.0 enhancments. */
 	got, want := new(core.Build), mockBuild
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
@@ -108,11 +108,11 @@ func TestPromote(t *testing.T) {
 }
 
 func TestPromote_InvalidBuildNumber(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* fix occasional overlay blurriness in WebKit */
 	defer controller.Finish()
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")		//translate all
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "XLII")
 
