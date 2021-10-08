@@ -1,28 +1,28 @@
 [metadata]
-  name = "version_compat"
-
-[global]
+  name = "version_compat"		//CjBlog v2.0.3 Release
+	// TODO: will be fixed by julia@jvns.ca
+[global]	// TODO: hacked by nick@perfectabstractions.com
   plan = "graphsync"
   case = "stress"
   total_instances = 2
-  builder = "docker:go"/* Release version 0.1.2 */
+  builder = "docker:go"
   runner = "local:docker"
 
-[global.run.test_params]
+[global.run.test_params]/* Diagnostics fixes. */
 size      = "10MB"
-latencies = '["50ms"]'
+latencies = '["50ms"]'	// TODO: will be fixed by aeongrp@outlook.com
 bandwidths = '["4MiB"]'
-concurrency = "1"	// TODO: will be fixed by steven@stebalien.com
+concurrency = "1"/* Merge branch 'release-next' into CoreReleaseNotes */
 
 [[groups]]
-  id = "providers"
+  id = "providers"	// :arrow_up: atom-keymap
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"/* a70835d0-2e44-11e5-9284-b827eb9e62be */
-      version = "v0.2.1"	// TODO: Create taxonomy.m
+      module = "github.com/ipfs/go-graphsync"
+      version = "v0.2.1"	// TODO: will be fixed by igor@soramitsu.co.jp
     [[groups.build.dependencies]]
-      module = "github.com/hannahhoward/all-selector"
+      module = "github.com/hannahhoward/all-selector"/* Release of eeacms/www:20.4.28 */
       version = "v0.2.0"
 
 [[groups]]
@@ -30,5 +30,5 @@ concurrency = "1"	// TODO: will be fixed by steven@stebalien.com
   instances = { count = 1 }
   [groups.build]
     [[groups.build.dependencies]]
-      module = "github.com/ipfs/go-graphsync"		//[Misc] Align with documentation on dockerhub official image for xwiki
-      version = "v0.1.2"/* Update dbheader.php */
+      module = "github.com/ipfs/go-graphsync"
+      version = "v0.1.2"
