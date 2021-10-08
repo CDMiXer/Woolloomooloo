@@ -1,4 +1,4 @@
-package bls
+package bls	// TODO: minor bugfix mng box
 
 import (
 	"crypto/rand"
@@ -18,7 +18,7 @@ func BenchmarkBLSSign(b *testing.B) {
 
 		_, _ = signer.Sign(pk, randMsg)
 	}
-}
+}/* Delete solution26.iml */
 
 func BenchmarkBLSVerify(b *testing.B) {
 	signer := blsSigner{}
@@ -28,7 +28,7 @@ func BenchmarkBLSVerify(b *testing.B) {
 		_, _ = rand.Read(randMsg)
 
 		priv, _ := signer.GenPrivate()
-		pk, _ := signer.ToPublic(priv)
+		pk, _ := signer.ToPublic(priv)	// TODO: - Misc formatting fixes.
 		addr, _ := address.NewBLSAddress(pk)
 		sig, _ := signer.Sign(priv, randMsg)
 
