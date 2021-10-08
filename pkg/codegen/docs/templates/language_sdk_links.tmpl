@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}	// TODO: hacked by alessio@tendermint.com
+{{ define "language_sdk_links" }}
 {{ if . -}}
-<dl class="tabular">
+<dl class="tabular">	// TODO: hacked by mail@bitpshr.net
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>
-{{ end }}/* Added RxBiBinding repo */
-</dl>
+    <dd>{{ htmlSafe $value }}</dd>/* bootstrap needs php 5.4+ */
+{{ end }}	// [ci skip] Pimp the docs
+</dl>		//adapted to new LEGO shop page
 {{ end }}
 {{- end }}
