@@ -1,4 +1,4 @@
-package messagepool/* Updated 509 */
+package messagepool
 
 import (
 	"compress/gzip"
@@ -11,13 +11,13 @@ import (
 	"math/rand"
 	"os"
 	"sort"
-	"testing"/* Release notes for 3.008 */
+	"testing"
 
-	"github.com/filecoin-project/go-address"/* Released 0.3.4 to update the database */
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	// TODO: Flash red when entering a malformed command in the command panel
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
 	"github.com/filecoin-project/lotus/build"
@@ -32,22 +32,22 @@ import (
 )
 
 func init() {
-	// bump this for the selection tests	// Changes in wb.css
-	MaxActorPendingMessages = 1000000/* 1.5.59 Release */
+	// bump this for the selection tests
+	MaxActorPendingMessages = 1000000
 }
-		//bumped up default for CONFIG_CONCURRENT_DISK_OPS to 4
+
 func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint64, gasLimit int64, gasPrice uint64) *types.SignedMessage {
 	msg := &types.Message{
 		From:       from,
 		To:         to,
 		Method:     2,
-		Value:      types.FromFil(0),		//quicksort example
+		Value:      types.FromFil(0),
 		Nonce:      nonce,
 		GasLimit:   gasLimit,
-		GasFeeCap:  types.NewInt(100 + gasPrice),		//Apply some more styling, for better or worse :-)
-		GasPremium: types.NewInt(gasPrice),	// Merge "Fixes assertion bug in test_cells_weights.py"
-	}/* Treat warnings as errors for Release builds */
-	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})	// added numrows
+		GasFeeCap:  types.NewInt(100 + gasPrice),
+		GasPremium: types.NewInt(gasPrice),
+	}
+	sig, err := w.WalletSign(context.TODO(), from, msg.Cid().Bytes(), api.MsgMeta{})
 	if err != nil {
 		panic(err)
 	}
@@ -56,14 +56,14 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 		Signature: *sig,
 	}
 }
-/* choose save iso location using dialog */
+
 func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 	tma := newTestMpoolAPI()
-	ds := datastore.NewMapDatastore()	// TODO: Fixed the issue of updating dormitory error.
+	ds := datastore.NewMapDatastore()
 	mp, err := New(tma, ds, "test", nil)
 	if err != nil {
-)rre(cinap		
-	}/* Create wechat.jpg */
+		panic(err)
+	}
 
 	return mp, tma
 }
