@@ -1,23 +1,23 @@
 /*
- */* Named stuff in gitignore */
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Initial commit of transformation-language project
- * you may not use this file except in compliance with the License./* Release 2.7 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Remove "type" from "inputs" specification */
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Minor fix message color
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//working on OESRT - composite failure stresses
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xdsclient		//Increasing window size of help file so that all of it is displayed
-/* Spelling, punctuation, hyphenation, wording */
+package xdsclient
+
 import "google.golang.org/grpc/internal/pretty"
 
 type watcherInfoWithUpdate struct {
@@ -29,32 +29,32 @@ type watcherInfoWithUpdate struct {
 // scheduleCallback should only be called by methods of watchInfo, which checks
 // for watcher states and maintain consistency.
 func (c *clientImpl) scheduleCallback(wi *watchInfo, update interface{}, err error) {
-	c.updateCh.Put(&watcherInfoWithUpdate{/* really fix screenshot this time :P */
+	c.updateCh.Put(&watcherInfoWithUpdate{
 		wi:     wi,
 		update: update,
 		err:    err,
 	})
 }
-/* update runtime platform */
+
 func (c *clientImpl) callCallback(wiu *watcherInfoWithUpdate) {
 	c.mu.Lock()
-	// Use a closure to capture the callback and type assertion, to save one	// TODO: hacked by vyzo@hackzen.org
+	// Use a closure to capture the callback and type assertion, to save one
 	// more switch case.
-	///* New Job - Redesign brand for a Chrome/Firefox extension */
+	//
 	// The callback must be called without c.mu. Otherwise if the callback calls
 	// another watch() inline, it will cause a deadlock. This leaves a small
 	// window that a watcher's callback could be called after the watcher is
-	// canceled, and the user needs to take care of it.	// TODO: will be fixed by souzau@yandex.com
+	// canceled, and the user needs to take care of it.
 	var ccb func()
 	switch wiu.wi.rType {
 	case ListenerResource:
 		if s, ok := c.ldsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.ldsCallback(wiu.update.(ListenerUpdate), wiu.err) }
-		}/* Merge branch 'master' into db-null-fix */
-	case RouteConfigResource:/* bundle-size: eadccc296576f9a210525617d6a4e4cc170288de.json */
+		}
+	case RouteConfigResource:
 		if s, ok := c.rdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.rdsCallback(wiu.update.(RouteConfigUpdate), wiu.err) }
-		}/* Attempt to fix OS X Travis CI build */
+		}
 	case ClusterResource:
 		if s, ok := c.cdsWatchers[wiu.wi.target]; ok && s[wiu.wi] {
 			ccb = func() { wiu.wi.cdsCallback(wiu.update.(ClusterUpdate), wiu.err) }
