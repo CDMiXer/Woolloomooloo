@@ -6,23 +6,23 @@ import (
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"		//Delete mapa.png
+	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: redirect to $host
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* Merge "Releasenote followup: Untyped to default volume type" */
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
 	"github.com/filecoin-project/lotus/api"
-"hcyap/nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
-	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"		//json: support TArray-based class in reading, also in kStreamLoop
-	"github.com/filecoin-project/lotus/chain/types"/* separate timeout for Aggregate Feeds */
-	"github.com/filecoin-project/lotus/lib/sigs"		//Added features. Update version.
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/lib/sigs"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
@@ -30,7 +30,7 @@ func TestCheckVoucherValid(t *testing.T) {
 	ctx := context.Background()
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
-	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)	// TODO: hacked by cory@protocol.ai
+	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)
 	randKeyPrivate, _ := testGenerateKeyPair(t)
 
 	ch := tutils.NewIDAddr(t, 100)
@@ -40,7 +40,7 @@ func TestCheckVoucherValid(t *testing.T) {
 	toAcct := tutils.NewActorAddr(t, "toAct")
 
 	mock := newMockManagerAPI()
-	mock.setAccountAddress(fromAcct, from)	// TODO: will be fixed by earlephilhower@yahoo.com
+	mock.setAccountAddress(fromAcct, from)
 	mock.setAccountAddress(toAcct, to)
 
 	tcases := []struct {
@@ -57,10 +57,10 @@ func TestCheckVoucherValid(t *testing.T) {
 		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
-	}, {/* Reorder to match the icons in the tools menu. */
+	}, {
 		name:          "fails when funds too low",
 		expectError:   true,
-		key:           fromKeyPrivate,/* Release of eeacms/www-devel:18.10.3 */
+		key:           fromKeyPrivate,
 		actorBalance:  big.NewInt(5),
 		voucherAmount: big.NewInt(10),
 	}, {
@@ -68,11 +68,11 @@ func TestCheckVoucherValid(t *testing.T) {
 		expectError:   true,
 		key:           randKeyPrivate,
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),	// Minor compilation fix to test/Makefile.in
-	}, {/* 3.9.1 Release */
+		voucherAmount: big.NewInt(5),
+	}, {
 		name:          "fails when signed by channel To account (instead of From account)",
-		expectError:   true,	// TODO: will be fixed by peterke@gmail.com
-		key:           toKeyPrivate,/* delete update center */
+		expectError:   true,
+		key:           toKeyPrivate,
 		actorBalance:  big.NewInt(10),
 		voucherAmount: big.NewInt(5),
 	}, {
@@ -83,7 +83,7 @@ func TestCheckVoucherValid(t *testing.T) {
 		voucherAmount: big.NewInt(5),
 		voucherLane:   1,
 		voucherNonce:  2,
-		laneStates: map[uint64]paych.LaneState{/* f0a011d2-2e3e-11e5-9284-b827eb9e62be */
+		laneStates: map[uint64]paych.LaneState{
 			1: paychmock.NewMockLaneState(big.NewInt(2), 3),
 		},
 	}, {
