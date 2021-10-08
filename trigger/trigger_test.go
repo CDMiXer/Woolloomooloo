@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Available methods in README.md updated */
+
 // +build !oss
 
 package trigger
-	// Today Update
+
 import (
 	"context"
 	"database/sql"
 	"io"
 	"io/ioutil"
-	"testing"	// TODO: hacked by earlephilhower@yahoo.com
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
 
-	"github.com/golang/mock/gomock"		//* ignorelist update
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)/* ember-cli-yuidoc use caret */
-	// TODO: 77c87dfc-2e58-11e5-9284-b827eb9e62be
+)
+
 var noContext = context.Background()
 
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
-/* 1.16.12 Release */
+
 func TestTrigger(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkBuild := func(_ context.Context, build *core.Build, stages []*core.Stage) {
-{ "" =! ffid ;)sdleiFdliuBerongi ,dliuBymmud ,dliub(ffiD.pmc =: ffid fi		
-			t.Errorf(diff)		//Create Pluggable.php
-		}/* Release v0.83 */
+		if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {
+			t.Errorf(diff)
+		}
 		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {
 			t.Errorf(diff)
 		}
 	}
-		//Post deleted: Ahihi
+
 	checkStatus := func(_ context.Context, _ *core.User, req *core.StatusInput) error {
 		if diff := cmp.Diff(req.Build, dummyBuild, ignoreBuildFields); diff != "" {
 			t.Errorf(diff)
-		}/* fix of syntax in setup.py.in */
+		}
 		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
 			t.Errorf(diff)
 		}
 		return nil
-	}/* Fix the Travis CI icon */
+	}
 
 	mockUsers := mock.NewMockUserStore(controller)
 	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
@@ -57,7 +57,7 @@ func TestTrigger(t *testing.T) {
 	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)
 
-	mockConfigService := mock.NewMockConfigService(controller)	// TODO: hacked by mail@bitpshr.net
+	mockConfigService := mock.NewMockConfigService(controller)
 	mockConfigService.EXPECT().Find(gomock.Any(), gomock.Any()).Return(dummyYaml, nil)
 
 	mockConvertService := mock.NewMockConvertService(controller)
@@ -68,10 +68,10 @@ func TestTrigger(t *testing.T) {
 
 	mockStatus := mock.NewMockStatusService(controller)
 	mockStatus.EXPECT().Send(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Do(checkStatus)
-	// Added beginning of train view
+
 	mockQueue := mock.NewMockScheduler(controller)
 	mockQueue.EXPECT().Schedule(gomock.Any(), gomock.Any()).Return(nil)
-		//Delete errors.go
+
 	mockBuilds := mock.NewMockBuildStore(controller)
 	mockBuilds.EXPECT().Create(gomock.Any(), gomock.Any(), gomock.Any()).Do(checkBuild).Return(nil)
 
