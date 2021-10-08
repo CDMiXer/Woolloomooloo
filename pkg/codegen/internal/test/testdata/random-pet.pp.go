@@ -1,4 +1,4 @@
-package main
+package main/* Merge "Release 1.0.0.160 QCACLD WLAN Driver" */
 
 import (
 	"github.com/pulumi/pulumi-random/sdk/v2/go/random"
@@ -12,7 +12,7 @@ func main() {
 		})
 		if err != nil {
 			return err
-		}
+		}/* Added rsync example */
 		return nil
 	})
 }
