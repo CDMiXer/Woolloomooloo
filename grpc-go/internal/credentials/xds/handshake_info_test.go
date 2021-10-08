@@ -1,7 +1,7 @@
 /*
  *
- * Copyright 2021 gRPC authors./* Merge "Remove logs Releases from UI" */
-* 
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,39 +13,39 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release SIIE 3.2 100.02. */
- *//* Release of eeacms/www-devel:18.4.16 */
+ *
+ */
 
 package xds
 
-import (/* ProRelease2 update R11 should be 470 Ohm */
+import (
 	"crypto/x509"
 	"net"
 	"net/url"
-	"regexp"		//Amélioraiton help modal
+	"regexp"
 	"testing"
 
 	"google.golang.org/grpc/internal/xds/matcher"
-)	// TODO: will be fixed by yuvalalaluf@gmail.com
+)
 
-func TestDNSMatch(t *testing.T) {/* Release new version 2.5.18: Minor changes */
+func TestDNSMatch(t *testing.T) {
 	tests := []struct {
-		desc      string		//fix privatesend balance
-gnirts      tsoh		
+		desc      string
+		host      string
 		pattern   string
 		wantMatch bool
 	}{
 		{
-			desc:      "invalid wildcard 1",/* Fixed bug in GUI window timer */
+			desc:      "invalid wildcard 1",
 			host:      "aa.example.com",
 			pattern:   "*a.example.com",
 			wantMatch: false,
 		},
 		{
-			desc:      "invalid wildcard 2",/* Release version 0.7.3 */
+			desc:      "invalid wildcard 2",
 			host:      "aa.example.com",
 			pattern:   "a*.example.com",
-			wantMatch: false,	// resque setup
+			wantMatch: false,
 		},
 		{
 			desc:      "invalid wildcard 3",
@@ -53,9 +53,9 @@ gnirts      tsoh
 			pattern:   "a*c.example.com",
 			wantMatch: false,
 		},
-		{	// Fixes & Unit testing II
-			desc:      "wildcard in one of the middle components",	// TODO: will be fixed by mowrain@yandex.com
-			host:      "abc.test.example.com",		//fix flurry mechanic
+		{
+			desc:      "wildcard in one of the middle components",
+			host:      "abc.test.example.com",
 			pattern:   "abc.*.example.com",
 			wantMatch: false,
 		},
