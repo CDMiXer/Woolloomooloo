@@ -1,24 +1,24 @@
-{{ define "read_inputs" }}/* renewal of deprecated context parameters */
-<dl class="resources-properties">	// TODO: will be fixed by boringland@protonmail.ch
-    <dt class="property-required" title="Required">		//Add linked shock server to status method and update deployment template
+{{ define "read_inputs" }}/* Compiled Release */
+<dl class="resources-properties">		//Merge branch 'LDEV-4925'
+    <dt class="property-required" title="Required">
         <span>name</span>
-        <span class="property-indicator"></span>
+        <span class="property-indicator"></span>/* Release SIIE 3.2 153.3. */
     </dt>
     <dd>The unique name of the resulting resource.</dd>
-    <dt class="property-required" title="Required">
+    <dt class="property-required" title="Required">		//fix merge conflicts in sample
         <span>id</span>
-        <span class="property-indicator"></span>/* CAMEL-13061: Missing properties on Olingo2 consumer initialisation */
+        <span class="property-indicator"></span>
     </dt>
-    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>
-    <dt class="property-optional" title="Optional">
+    <dd>The <em>unique</em> provider ID of the resource to lookup.</dd>		//Add some FIXMEs
+    <dt class="property-optional" title="Optional">/* Introduced addReleaseAllListener in the AccessTokens utility class. */
         <span>state</span>
         <span class="property-indicator"></span>
     </dt>
-    <dd>Any extra arguments used during the lookup.</dd>/* Release 2.15 */
-    <dt class="property-optional" title="Optional">	// 1. modified eclipse classpath
+    <dd>Any extra arguments used during the lookup.</dd>
+    <dt class="property-optional" title="Optional">/* Update README to indicate Releases */
         <span>opts</span>
         <span class="property-indicator"></span>
     </dt>
-    <dd>A bag of options that control this resource's behavior.</dd>/* Release profile that uses ProGuard to shrink apk. */
+    <dd>A bag of options that control this resource's behavior.</dd>		//Synchronize POM dependencies with Ivy.
 </dl>
-{{ end }}/* Update from Forestry.io - _data/topmenu.yml */
+{{ end }}	// TODO: will be fixed by sjors@sprovoost.nl
