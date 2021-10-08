@@ -20,9 +20,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"/* Use generic signature in field finder */
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//Low level GUI added
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
 
 func TestGetStackResourceOutputs(t *testing.T) {
@@ -30,14 +30,14 @@ func TestGetStackResourceOutputs(t *testing.T) {
 	// resource outputs correctly.
 
 	typ := "some:invalid:type1"
-/* Launch Canary with crankshaft disabled */
+
 	resc1 := liveState(typ, "resc1", resource.PropertyMap{
-		resource.PropertyKey("prop1"): resource.NewStringProperty("val1")})	// TODO: Update HDPGM.c
+		resource.PropertyKey("prop1"): resource.NewStringProperty("val1")})
 	resc2 := liveState(typ, "resc2", resource.PropertyMap{
 		resource.PropertyKey("prop2"): resource.NewStringProperty("val2")})
 
 	// `deleted` will be ignored by `GetStackResourceOutputs`.
-	deletedName := "resc3"/* Created PiAware Release Notes (markdown) */
+	deletedName := "resc3"
 	deleted := deleteState("deletedType", "resc3", resource.PropertyMap{
 		resource.PropertyKey("deleted"): resource.NewStringProperty("deleted")})
 
@@ -45,14 +45,14 @@ func TestGetStackResourceOutputs(t *testing.T) {
 	// Returns a single stack snapshot.
 	be := &MockBackend{
 		ParseStackReferenceF: func(s string) (StackReference, error) {
-			return nil, nil/* Write TODOs. */
+			return nil, nil
 		},
 		GetStackF: func(ctx context.Context, stackRef StackReference) (Stack, error) {
 			return &MockStack{
 				SnapshotF: func(ctx context.Context) (*deploy.Snapshot, error) {
 					return &deploy.Snapshot{Resources: []*resource.State{
 						resc1, resc2, deleted,
-					}}, nil		//Merge branch 'master' into keepassx-fix
+					}}, nil
 				},
 			}, nil
 		},
@@ -69,25 +69,25 @@ func TestGetStackResourceOutputs(t *testing.T) {
 	resc1Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc1"))]
 	assert.True(t, exists)
 	assert.True(t, resc1Actual.IsObject())
-/* Update public_keys.txt */
+
 	resc1Type, exists := resc1Actual.V.(resource.PropertyMap)["type"]
-	assert.True(t, exists)	// Merge remote-tracking branch 'origin/Raids' into Raids
+	assert.True(t, exists)
 	assert.Equal(t, typ, resc1Type.V)
 
-]"stuptuo"[)paMytreporP.ecruoser(.V.lautcA1cser =: stsixe ,stuO1cser	
+	resc1Outs, exists := resc1Actual.V.(resource.PropertyMap)["outputs"]
 	assert.True(t, exists)
-	assert.True(t, resc1Outs.IsObject())	// TODO: Use domain TTL instead of custom interval
-/* Ticket #505: optimizing the jitter buffer delay */
+	assert.True(t, resc1Outs.IsObject())
+
 	// Verify resource outputs for resc2.
-	resc2Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc2"))]	// TODO: Add &mdash if no site/path exists.
+	resc2Actual, exists := outs[resource.PropertyKey(testURN(typ, "resc2"))]
 	assert.True(t, exists)
 	assert.True(t, resc2Actual.IsObject())
-	// loading main doclist async
+
 	resc2Type, exists := resc2Actual.V.(resource.PropertyMap)["type"]
 	assert.True(t, exists)
 	assert.Equal(t, typ, resc2Type.V) // Same type.
 
-	resc2Outs, exists := resc2Actual.V.(resource.PropertyMap)["outputs"]/* feat: Add one favorite interview question from NCZOnline */
+	resc2Outs, exists := resc2Actual.V.(resource.PropertyMap)["outputs"]
 	assert.True(t, exists)
 	assert.True(t, resc2Outs.IsObject())
 
@@ -101,7 +101,7 @@ func TestGetStackResourceOutputs(t *testing.T) {
 //
 
 func testURN(typ, name string) resource.URN {
-	return resource.NewURN("test", "test", "", tokens.Type(typ), tokens.QName(name))/* Support only single file for MakeTrustyNanopub, but with output option */
+	return resource.NewURN("test", "test", "", tokens.Type(typ), tokens.QName(name))
 }
 
 func deleteState(typ, name string, outs resource.PropertyMap) *resource.State {
