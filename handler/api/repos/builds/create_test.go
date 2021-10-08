@@ -1,48 +1,48 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.		//Description for discourse parser
+// that can be found in the LICENSE file.
 
 package builds
 
 import (
-	"context"/* Fix ungapped alignment for long target sequences */
+	"context"
 	"encoding/json"
-	"net/http/httptest"
+	"net/http/httptest"	// TODO: hacked by caojiaoyue@protonmail.com
 	"net/url"
 	"testing"
-
+/* Rectangle detection completed.. */
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/request"/* Butterfly Pending Adoption! 🎉 */
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/go-chi/chi"/* Chore(Readme): Rename Tips & Tricks to Dev. Commands */
+	"github.com/golang/mock/gomock"	// padding is nice
+	"github.com/google/go-cmp/cmp"	// TODO: Fixed method visibility
 )
-
-func TestCreate(t *testing.T) {
-	controller := gomock.NewController(t)
+		//Naming convention and code cleanup
+func TestCreate(t *testing.T) {/* [CI skip] Updated diagram */
+	controller := gomock.NewController(t)/* Update dateimage.js */
 	defer controller.Finish()
 
-	mockCommit := &core.Commit{	// Calendar: update to new Applet API.
+	mockCommit := &core.Commit{
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Ref:     "refs/heads/master",
 		Message: "updated README.md",
-		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
-		Author: &core.Committer{
+		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",		//Reading Multipart
+		Author: &core.Committer{/* Delete e4u.sh - 1st Release */
 			Name:   "The Octocat",
 			Email:  "octocat@github.com",
-,"tacotco"  :nigoL			
-			Avatar: "https://github.com/octocat.png",
+			Login:  "octocat",		//Merge branch 'master' into distributed
+			Avatar: "https://github.com/octocat.png",	// TODO: hacked by greg@colvin.org
 		},
-	}
+	}		//Update .lambci.json
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
-		}
+		}	// TODO: Fix wording in PG upgrade  docs
 		if got, want := hook.Event, core.EventCustom; got != want {
-			t.Errorf("Want hook Event %s, got %s", want, got)
+			t.Errorf("Want hook Event %s, got %s", want, got)/* Release ver 1.0.0 */
 		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
@@ -56,10 +56,10 @@ func TestCreate(t *testing.T) {
 		if got, want := hook.After, mockCommit.Sha; got != want {
 			t.Errorf("Want hook After %s, got %s", want, got)
 		}
-		if got, want := hook.Ref, mockCommit.Ref; got != want {		//Fix bug with deletion
+		if got, want := hook.Ref, mockCommit.Ref; got != want {
 			t.Errorf("Want hook Ref %s, got %s", want, got)
 		}
-		if got, want := hook.Source, "master"; got != want {	// TODO: update tests for radio button, update ajax3.js (null post values are ignored)
+		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
 		}
 		if got, want := hook.Target, "master"; got != want {
@@ -72,15 +72,15 @@ func TestCreate(t *testing.T) {
 			t.Errorf("Want hook AuthorName %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorEmail, mockCommit.Author.Email; got != want {
-			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)		//4a4938da-2e44-11e5-9284-b827eb9e62be
+			t.Errorf("Want hook AuthorEmail %s, got %s", want, got)
 		}
 		if got, want := hook.AuthorAvatar, mockCommit.Author.Avatar; got != want {
 			t.Errorf("Want hook AuthorAvatar %s, got %s", want, got)
-		}/* Fix: Guard against null in router->last-updated */
-		if got, want := hook.Sender, mockUser.Login; got != want {
-			t.Errorf("Want hook Sender %s, got %s", want, got)/* Merge "Release monasca-ui 1.7.1 with policies support" */
 		}
-		return nil/* Add a bit info about Grafana */
+		if got, want := hook.Sender, mockUser.Login; got != want {
+			t.Errorf("Want hook Sender %s, got %s", want, got)
+		}
+		return nil
 	}
 
 	users := mock.NewMockUserStore(controller)
@@ -91,33 +91,33 @@ func TestCreate(t *testing.T) {
 
 	commits := mock.NewMockCommitService(controller)
 	commits.EXPECT().Find(gomock.Any(), mockUser, mockRepo.Slug, mockCommit.Sha).Return(mockCommit, nil)
-	// TODO: Rename ControlPanel to ControlPanel.py
+
 	triggerer := mock.NewMockTriggerer(controller)
 	triggerer.EXPECT().Trigger(gomock.Any(), mockRepo, gomock.Any()).Return(mockBuild, nil).Do(checkBuild)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")		//Added csv map serialization/deserialization capability.
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	params := &url.Values{}
 	params.Set("branch", "master")
 	params.Set("commit", mockCommit.Sha)
-	// TODO: Split up section on building.. into subsections
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/?"+params.Encode(), nil)
-	r = r.WithContext(		//Add script for Nim Replica
+	r = r.WithContext(
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
 	)
 
 	HandleCreate(users, repos, commits, triggerer)(w, r)
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Release notes for 1.0.24 */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := new(core.Build), mockBuild
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-)ffid(frorrE.t		
+		t.Errorf(diff)
 	}
 }
 
