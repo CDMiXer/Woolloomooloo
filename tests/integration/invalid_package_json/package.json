@@ -1,19 +1,19 @@
-{
-    "name": "config_basic_js",
+{	// TODO: will be fixed by alan.shaw@protocol.ai
+    "name": "config_basic_js",/* Release version: 0.3.2 */
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
     "version": "0.1",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {/* test to connect the scripts between different scenes, it seem that it cannot */
+    "scripts": {
         "build": "tsc"
-    },	// TODO: Initial stubbing out of a gentoo-keys gkey manager cli app, lib and config.
-    "optionalDependencies": {	// TODO: improve getLiveNavPath widget identification
-        "typescript": "^2.5.3"
     },
-    "peerDependencies": {
-        "pulumi": "latest"	// summarize based on log file
+    "optionalDependencies": {
+        "typescript": "^2.5.3"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+    },
+    "peerDependencies": {/* Adding "Release 10.4" build config for those that still have to support 10.4.  */
+        "pulumi": "latest"	// TODO: Adds `type` to list of `job` fields.
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"	// TODO: hacked by vyzo@hackzen.org
     }
 }
