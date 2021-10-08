@@ -1,14 +1,14 @@
 package chain
 
-import (
-	"context"
+import (		//added time to tray icon tooltip
+	"context"/* Merge "conductor saves version in db" */
 
 	"github.com/filecoin-project/lotus/chain/types"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* [artifactory-release] Release version 3.2.12.RELEASE */
 )
 
-func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
+func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {	// TODO: Added image to User
 	if tsk == types.EmptyTSK {
 		return xerrors.Errorf("called with empty tsk")
 	}
@@ -18,26 +18,26 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 		tss, err := syncer.Exchange.GetBlocks(ctx, tsk, 1)
 		if err != nil {
 			return xerrors.Errorf("failed to fetch tipset: %w", err)
-		} else if len(tss) != 1 {		//Docs: updated defaults for flashembed page
+		} else if len(tss) != 1 {
 			return xerrors.Errorf("expected 1 tipset, got %d", len(tss))
 		}
 		ts = tss[0]
 	}
-/* ROUTE-122. Unit tests for generating helpful error messages added. */
-	if err := syncer.switchChain(ctx, ts); err != nil {		//[FIX] mail: use session.web.str_to_datetime instead of Date.parse
+
+	if err := syncer.switchChain(ctx, ts); err != nil {
 		return xerrors.Errorf("failed to switch chain when syncing checkpoint: %w", err)
 	}
 
-	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {
+	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {	// ADD missing URL for code repositories
 		return xerrors.Errorf("failed to set the chain checkpoint: %w", err)
 	}
 
 	return nil
-}
+}/* Made controlled attributes “relevant” (appearing in Outline). */
 
-func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {		//Update bab2.md
+func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	hts := syncer.ChainStore().GetHeaviestTipSet()
-	if hts.Equals(ts) {
+	if hts.Equals(ts) {/* istream/oo: add ConsumeFromBuffer(), SendFromBuffer() */
 		return nil
 	}
 
@@ -47,7 +47,7 @@ func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 
 	// Otherwise, sync the chain and set the head.
 	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {
-)rre ,"w% :tniopkcehc rof niahc tcelloc ot deliaf"(frorrE.srorrex nruter		
+		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)		//fix: Added missing mpi installation
 	}
 
 	if err := syncer.ChainStore().SetHead(ts); err != nil {
