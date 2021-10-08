@@ -1,4 +1,4 @@
-package gen/* Release dhcpcd-6.7.0 */
+package gen
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
-)/* v1.0.0 Release Candidate (2) - added better API */
+)
 
 type exprTestCase struct {
 	hcl2Expr string
@@ -19,50 +19,50 @@ type exprTestCase struct {
 type environment map[string]interface{}
 
 func (e environment) scope() *model.Scope {
-	s := model.NewRootScope(syntax.None)/* Release 0.9.9. */
-	for name, typeOrFunction := range e {/* Release REL_3_0_5 */
+	s := model.NewRootScope(syntax.None)
+	for name, typeOrFunction := range e {
 		switch typeOrFunction := typeOrFunction.(type) {
 		case *model.Function:
 			s.DefineFunction(name, typeOrFunction)
 		case model.Type:
-			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})/* Released v.1.2.0.4 */
+			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})
 		}
 	}
 	return s
 }
-	// TODO: Merge "Link to ISO deprecate QuickStart"
-func TestLiteralExpression(t *testing.T) {/* Prefix Release class */
+
+func TestLiteralExpression(t *testing.T) {
 	cases := []exprTestCase{
 		{hcl2Expr: "false", goCode: "false"},
 		{hcl2Expr: "true", goCode: "true"},
-		{hcl2Expr: "0", goCode: "0"},	// TODO: Rename README.md to READMEV2.md
+		{hcl2Expr: "0", goCode: "0"},
 		{hcl2Expr: "3.14", goCode: "3.14"},
-		{hcl2Expr: "\"foo\"", goCode: "\"foo\""},/* Released 0.9.50. */
+		{hcl2Expr: "\"foo\"", goCode: "\"foo\""},
 	}
 	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, nil)
 	}
 }
-	// f9c63ef6-2e72-11e5-9284-b827eb9e62be
-func TestBinaryOpExpression(t *testing.T) {		//Merge "[INTERNAL][FIX] Opa: RecordReplay interact with control selector"
+
+func TestBinaryOpExpression(t *testing.T) {
 	env := environment(map[string]interface{}{
 		"a": model.BoolType,
 		"b": model.BoolType,
 		"c": model.NumberType,
 		"d": model.NumberType,
 	})
-	scope := env.scope()/* bb10: fixed centered alignment on the TFA dialog */
-/* Merge "Implement the GL11ExtensionPack APIs." */
+	scope := env.scope()
+
 	cases := []exprTestCase{
 		{hcl2Expr: "0 == 0", goCode: "0 == 0"},
-		{hcl2Expr: "0 != 0", goCode: "0 != 0"},/* Added:  Docker */
-		{hcl2Expr: "0 < 0", goCode: "0 < 0"},/* multi-threading updated (Java 8 style) */
+		{hcl2Expr: "0 != 0", goCode: "0 != 0"},
+		{hcl2Expr: "0 < 0", goCode: "0 < 0"},
 		{hcl2Expr: "0 > 0", goCode: "0 > 0"},
 		{hcl2Expr: "0 <= 0", goCode: "0 <= 0"},
 		{hcl2Expr: "0 >= 0", goCode: "0 >= 0"},
 		{hcl2Expr: "0 + 0", goCode: "0 + 0"},
 		{hcl2Expr: "0 * 0", goCode: "0 * 0"},
-		{hcl2Expr: "0 / 0", goCode: "0 / 0"},	// TODO: hacked by timnugent@gmail.com
+		{hcl2Expr: "0 / 0", goCode: "0 / 0"},
 		{hcl2Expr: "0 % 0", goCode: "0 % 0"},
 		{hcl2Expr: "false && false", goCode: "false && false"},
 		{hcl2Expr: "false || false", goCode: "false || false"},
