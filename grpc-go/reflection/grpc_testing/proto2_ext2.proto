@@ -1,23 +1,23 @@
 // Copyright 2017 gRPC authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+///* Merge "Release 1.0.0 - Juno" */
+// Licensed under the Apache License, Version 2.0 (the "License");	// 14a00774-585b-11e5-97d9-6c40088e03e4
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//		//Included document link in the README.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: added SwingUtilities guard to PortGui and added publishPortNames to Ard
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto2";
+syntax = "proto2";	// TODO: will be fixed by earlephilhower@yahoo.com
 
-option go_package = "google.golang.org/grpc/reflection/grpc_testing";
+option go_package = "google.golang.org/grpc/reflection/grpc_testing";	// TODO: 911bdb4c-2e66-11e5-9284-b827eb9e62be
 
 package grpc.testing;
-
+	// TODO: fix names of ViolationHandler test methods
 import "reflection/grpc_testing/proto2.proto";
 
 extend ToBeExtended {
