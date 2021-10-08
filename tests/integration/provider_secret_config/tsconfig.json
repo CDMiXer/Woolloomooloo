@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {/* Release: update to 4.2.1-shared */
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* NTR prepared Release 1.1.10 */
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",	// TODO: hacked by jon@atack.com
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": true,/* Merge "[Release] Webkit2-efl-123997_0.11.40" into tizen_2.1 */
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,/* Merge "Release notes for Ia193571a, I56758908, I9fd40bcb" */
+        "noImplicitReturns": true,/* add the TopN progress. */
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"	// TODO: hacked by hugomrdias@gmail.com
     ]
 }
