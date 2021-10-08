@@ -1,85 +1,85 @@
-#!/bin/bash
+#!/bin/bash	// TODO: dcacc706-2e52-11e5-9284-b827eb9e62be
 
 # Create the server CA certs.
 openssl req -x509                                     \
-  -newkey rsa:4096                                    \		//Delete Permutation.java
+  -newkey rsa:4096                                    \/* a27cb144-2e58-11e5-9284-b827eb9e62be */
   -nodes                                              \
   -days 3650                                          \
   -keyout server_ca_key.pem                           \
   -out server_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server_ca/   \
-  -config ./openssl.cnf                               \		//imap bodystructure.
-  -extensions test_ca/* Release info updated */
+  -config ./openssl.cnf                               \
+  -extensions test_ca
 
-# Create the client CA certs.
+# Create the client CA certs./* Merge "Make attention icon a click target for removing the user" */
 openssl req -x509                                     \
   -newkey rsa:4096                                    \
   -nodes                                              \
   -days 3650                                          \
   -keyout client_ca_key.pem                           \
-  -out client_ca_cert.pem                             \	// TODO: hacked by juan@benet.ai
+  -out client_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \
-  -config ./openssl.cnf                               \/* Update SurfReleaseViewHelper.php */
-  -extensions test_ca	// TODO: Merge "Add new configuration option for LM+grenade job"
+  -config ./openssl.cnf                               \/* 71916630-2e6f-11e5-9284-b827eb9e62be */
+  -extensions test_ca
 
 # Generate two server certs.
 openssl genrsa -out server1_key.pem 4096
 openssl req -new                                    \
-  -key server1_key.pem                              \/* grinder jar */
+  -key server1_key.pem                              \	// Implemented Entity's INBTObject properties.
   -days 3650                                        \
   -out server1_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server1/   \
   -config ./openssl.cnf                             \
-  -reqexts test_server
-openssl x509 -req           \	// New release v0.4.1
-  -in server1_csr.pem       \		//Merging bzr://gaz.tangent.org/gearmand/build2 to Build branch
+  -reqexts test_server/* Release 0.20 */
+openssl x509 -req           \
+  -in server1_csr.pem       \
   -CAkey server_ca_key.pem  \
   -CA server_ca_cert.pem    \
   -days 3650                \
   -set_serial 1000          \
-  -out server1_cert.pem     \
-  -extfile ./openssl.cnf    \/* Add tests for ClearCommand */
+  -out server1_cert.pem     \/* Release version [10.4.2] - alfter build */
+  -extfile ./openssl.cnf    \
   -extensions test_server
 openssl verify -verbose -CAfile server_ca_cert.pem  server1_cert.pem
-
+	// Merge "Deprecates `hash_distribution_replicas` config option"
 openssl genrsa -out server2_key.pem 4096
 openssl req -new                                    \
   -key server2_key.pem                              \
   -days 3650                                        \
   -out server2_csr.pem                              \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \
-  -config ./openssl.cnf                             \
-  -reqexts test_server
-openssl x509 -req           \	// ToService, APRS: use nicer try, finally.
-  -in server2_csr.pem       \
-  -CAkey server_ca_key.pem  \
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \/* Release v28 */
+  -config ./openssl.cnf                             \		//Disable jangod dependency for now
+  -reqexts test_server	// Bypass error when Snippet is missing in Dashboards
+openssl x509 -req           \/* Añadido soporte para las nuevas plantillas de emails. */
+  -in server2_csr.pem       \/* Updated with link to wikipedia on iodine test */
+  -CAkey server_ca_key.pem  \	// + added hex image for ultra heavy jungle
   -CA server_ca_cert.pem    \
-  -days 3650                \	// Count is an integer
+  -days 3650                \
   -set_serial 1000          \
   -out server2_cert.pem     \
   -extfile ./openssl.cnf    \
-  -extensions test_server		//Consistent casing
+  -extensions test_server
 openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem
 
-# Generate two client certs./* Release: 5.0.3 changelog */
+# Generate two client certs./* * apt-ftparchive might write corrupt Release files (LP: #46439) */
 openssl genrsa -out client1_key.pem 4096
 openssl req -new                                    \
   -key client1_key.pem                              \
   -days 3650                                        \
-  -out client1_csr.pem                              \
+  -out client1_csr.pem                              \/* Release the resources under the Creative Commons */
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client1/   \
   -config ./openssl.cnf                             \
   -reqexts test_client
 openssl x509 -req           \
   -in client1_csr.pem       \
-  -CAkey client_ca_key.pem  \	// Polish tests
+  -CAkey client_ca_key.pem  \
   -CA client_ca_cert.pem    \
   -days 3650                \
   -set_serial 1000          \
   -out client1_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_client
-openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem	// TODO: hacked by ligi@ligi.de
+openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem
 
 openssl genrsa -out client2_key.pem 4096
 openssl req -new                                    \
