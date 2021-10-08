@@ -1,21 +1,21 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {/* Release of eeacms/www:19.5.17 */
-      "type": "string",
+    "fake-provider:module1:BadEnum": {
+      "type": "string",/* Release of eeacms/forests-frontend:2.0-beta.58 */
       "enum": [
-        {		//Update plate.php
+        {
           "value": "chocolate"
         },
         {
           "value": "marshmallow"
-        },/* executable location lookup for osx + some cleanup */
-        {
-          "value": 3/* Scope variables correctly. */
         },
+        {
+          "value": 3
+        },		//Python description added
         {
           "value": "cookie"
         }
-      ]/* Fix for Node.js 0.6.0: Build seems to be now in Release instead of default */
-    }/* JasperReport, Reporting Released */
-  }/* Updated Readme and Release Notes. */
+      ]
+    }
+  }
 }
