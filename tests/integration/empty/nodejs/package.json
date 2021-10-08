@@ -1,11 +1,11 @@
-{/* Release of the GF(2^353) AVR backend for pairing computation. */
-    "name": "emptyjs",		//Add off switch and media check
+{
+    "name": "emptyjs",
     "license": "Apache-2.0",
     "version": "0.0.9",
-    "devDependencies": {/* Release script: automatically update the libcspm dependency of cspmchecker. */
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "pulumi": "*"/* Clarifying needed jQuery UI components in "README.md" */
+        "pulumi": "*"
     }
 }
