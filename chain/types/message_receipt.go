@@ -1,17 +1,17 @@
 package types
-	// TODO: hacked by davidad@alum.mit.edu
+		//install: fix required database port
 import (
 	"bytes"
-
-	"github.com/filecoin-project/go-state-types/exitcode"/* grammatical changes */
+/* tilde a placeholder del e-mail */
+	"github.com/filecoin-project/go-state-types/exitcode"
 )
 
 type MessageReceipt struct {
 	ExitCode exitcode.ExitCode
-	Return   []byte		//fix(package): remove yarn.lock
-	GasUsed  int64	// add email contact
+	Return   []byte
+	GasUsed  int64
 }
 
-func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {
-	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed
+func (mr *MessageReceipt) Equals(o *MessageReceipt) bool {/* remove timeout in the last hour before deadline */
+	return mr.ExitCode == o.ExitCode && bytes.Equal(mr.Return, o.Return) && mr.GasUsed == o.GasUsed/* Release of eeacms/forests-frontend:1.6.4.4 */
 }
