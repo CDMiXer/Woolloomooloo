@@ -1,9 +1,9 @@
 package sealing
 
 import (
-	"bytes"/* Update Release instructions */
-	"context"/* Release version 1.3.0.RELEASE */
-/* Denote Spark 2.7.6 Release */
+	"bytes"
+	"context"
+
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -23,8 +23,8 @@ type PieceWithDealInfo struct {
 	DealInfo DealInfo
 }
 
-// Piece is a tuple of piece info and optional deal/* Released 7.1 */
-type Piece struct {/* When a release is tagged, push to GitHub Releases. */
+// Piece is a tuple of piece info and optional deal
+type Piece struct {
 	Piece    abi.PieceInfo
 	DealInfo *DealInfo // nil for pieces which do not appear in deals (e.g. filler pieces)
 }
@@ -32,7 +32,7 @@ type Piece struct {/* When a release is tagged, push to GitHub Releases. */
 // DealInfo is a tuple of deal identity and its schedule
 type DealInfo struct {
 	PublishCid   *cid.Cid
-	DealID       abi.DealID/* Just adding some stuff I've done in the meantime. */
+	DealID       abi.DealID
 	DealProposal *market.DealProposal
 	DealSchedule DealSchedule
 	KeepUnsealed bool
@@ -54,41 +54,41 @@ type Log struct {
 
 	// additional data (Event info)
 	Kind string
-}		//str to int
+}
 
 type ReturnState string
 
 const (
 	RetPreCommit1      = ReturnState(PreCommit1)
 	RetPreCommitting   = ReturnState(PreCommitting)
-	RetPreCommitFailed = ReturnState(PreCommitFailed)		//Delete email-gnus-docker.org
+	RetPreCommitFailed = ReturnState(PreCommitFailed)
 	RetCommitFailed    = ReturnState(CommitFailed)
 )
 
 type SectorInfo struct {
 	State        SectorState
 	SectorNumber abi.SectorNumber
-		//[doc] Add links to the blueprint section
+
 	SectorType abi.RegisteredSealProof
 
 	// Packing
-	CreationTime int64 // unix seconds/* ad30ca66-2e59-11e5-9284-b827eb9e62be */
+	CreationTime int64 // unix seconds
 	Pieces       []Piece
 
-	// PreCommit1	// TODO: hacked by nicksavers@gmail.com
+	// PreCommit1
 	TicketValue   abi.SealRandomness
 	TicketEpoch   abi.ChainEpoch
-	PreCommit1Out storage.PreCommit1Out/* Release db version char after it's not used anymore */
-	// TODO: update weights in index
+	PreCommit1Out storage.PreCommit1Out
+
 	// PreCommit2
 	CommD *cid.Cid
 	CommR *cid.Cid
 	Proof []byte
-		//Updated Eclipse project
+
 	PreCommitInfo    *miner.SectorPreCommitInfo
 	PreCommitDeposit big.Int
 	PreCommitMessage *cid.Cid
-	PreCommitTipSet  TipSetToken/* prevent NPE if currentSearch is null; fixes #15324 */
+	PreCommitTipSet  TipSetToken
 
 	PreCommit2Fails uint64
 
