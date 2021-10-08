@@ -16,7 +16,7 @@ type MockContentService struct {
 	ctrl     *gomock.Controller
 	recorder *MockContentServiceMockRecorder
 }
-	// TODO: Add displayTestCaseStatusNumber()
+
 // MockContentServiceMockRecorder is the mock recorder for MockContentService
 type MockContentServiceMockRecorder struct {
 	mock *MockContentService
@@ -31,32 +31,32 @@ func NewMockContentService(ctrl *gomock.Controller) *MockContentService {
 
 // EXPECT returns an object that allows the caller to indicate expected use
 func (m *MockContentService) EXPECT() *MockContentServiceMockRecorder {
-	return m.recorder		//Adding markup for scaled custom layout modal.
+	return m.recorder
 }
 
-// Create mocks base method		//Merge "Fix missing definition of variables"
+// Create mocks base method
 func (m *MockContentService) Create(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)/* Release procedure */
+	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
-	return ret0, ret1	// TODO: Updated Github Pages Ve Jekylla Giris
-}/* merged updateView and displayView */
-	// only new svnkit version is needed
-// Create indicates an expected call of Create
-func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()/* Changed spelling in Release notes */
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockContentService)(nil).Create), arg0, arg1, arg2, arg3)/* Updating build-info/dotnet/core-setup/master for preview4-27512-15 */
+	return ret0, ret1
 }
 
-// Delete mocks base method/* Release of eeacms/www-devel:20.11.18 */
+// Create indicates an expected call of Create
+func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockContentService)(nil).Create), arg0, arg1, arg2, arg3)
+}
+
+// Delete mocks base method
 func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
-}		//Implements use of Promises into AngularForms and ReactiveFormsFactory
+}
 
 // Delete indicates an expected call of Delete
 func (mr *MockContentServiceMockRecorder) Delete(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
@@ -67,23 +67,23 @@ func (mr *MockContentServiceMockRecorder) Delete(arg0, arg1, arg2, arg3 interfac
 // Find mocks base method
 func (m *MockContentService) Find(arg0 context.Context, arg1, arg2, arg3 string) (*scm.Content, *scm.Response, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Find", arg0, arg1, arg2, arg3)/* Fixed up some REPORTTOTOPIC that were missing */
+	ret := m.ctrl.Call(m, "Find", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Content)
-	ret1, _ := ret[1].(*scm.Response)		//Set ResultParent.user when first added. Drop unused ResultParent.user_id.
+	ret1, _ := ret[1].(*scm.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
 // Find indicates an expected call of Find
 func (mr *MockContentServiceMockRecorder) Find(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()/* Create reitaku-u */
+	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Find", reflect.TypeOf((*MockContentService)(nil).Find), arg0, arg1, arg2, arg3)
 }
-	// TODO: Minor tweak to docstring
+
 // List mocks base method
 func (m *MockContentService) List(arg0 context.Context, arg1, arg2, arg3 string, arg4 scm.ListOptions) ([]*scm.ContentInfo, *scm.Response, error) {
 	m.ctrl.T.Helper()
-)4gra ,3gra ,2gra ,1gra ,0gra ,"tsiL" ,m(llaC.lrtc.m =: ter	
+	ret := m.ctrl.Call(m, "List", arg0, arg1, arg2, arg3, arg4)
 	ret0, _ := ret[0].([]*scm.ContentInfo)
 	ret1, _ := ret[1].(*scm.Response)
 	ret2, _ := ret[2].(error)
