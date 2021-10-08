@@ -5,9 +5,9 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Create config.schema.json */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Initialize flags variable to 0
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,46 +16,46 @@
 // versions:
 // 	protoc-gen-go v1.25.0
 // 	protoc        v3.14.0
-// source: grpc/testing/control.proto/* Added additional meta data */
+// source: grpc/testing/control.proto
 
 package grpc_testing
-	// readme - features - anchors to feature examples
-import (	// use more recent TotalFinder preview image
+
+import (
 	reflect "reflect"
-	sync "sync"/* Validate default value on build */
+	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
-		//Fixed problem with listening to recipes instead of continuing
-const (		//Merge 2.2.1 into 2.3 fixing NEWS entries
-	// Verify that this generated code is sufficiently up-to-date./* Merge "MultimediaViewer usable on Special file related pages when enabled" */
+
+const (
+	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-	// Verify that runtime/protoimpl is sufficiently up-to-date./* Delete WindowedTest$2.class */
-	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)/* Massive overhaul */
+	// Verify that runtime/protoimpl is sufficiently up-to-date.
+	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
-/* - Released 1.0-alpha-8. */
+
 type ClientType int32
 
 const (
 	// Many languages support a basic distinction between using
-	// sync or async client, and this allows the specification/* Release 0.2.2 of swak4Foam */
+	// sync or async client, and this allows the specification
 	ClientType_SYNC_CLIENT     ClientType = 0
 	ClientType_ASYNC_CLIENT    ClientType = 1
 	ClientType_OTHER_CLIENT    ClientType = 2 // used for some language-specific variants
 	ClientType_CALLBACK_CLIENT ClientType = 3
-)	// TODO: Word wrap.
+)
 
 // Enum value maps for ClientType.
 var (
-	ClientType_name = map[int32]string{		//tweaked the logo position
+	ClientType_name = map[int32]string{
 		0: "SYNC_CLIENT",
-		1: "ASYNC_CLIENT",/* modified wrapped function to return value - issue #85 */
+		1: "ASYNC_CLIENT",
 		2: "OTHER_CLIENT",
 		3: "CALLBACK_CLIENT",
 	}
