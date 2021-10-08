@@ -12,9 +12,9 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Initial work on 'samsung-tools-preferences', a configuration GUI.
+ * limitations under the License.
  *
- */		//improve cache memory
+ */
 
 package conn
 
@@ -25,33 +25,33 @@ import (
 )
 
 // getGCMCryptoPair outputs a client/server pair on aes128gcmRekey.
-func getRekeyCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {	// TODO: hacked by brosner@gmail.com
+func getRekeyCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {
 	client, err := NewAES128GCMRekey(core.ClientSide, key)
 	if err != nil {
 		t.Fatalf("NewAES128GCMRekey(ClientSide, key) = %v", err)
 	}
-	server, err := NewAES128GCMRekey(core.ServerSide, key)/* Merge "Variables in URL path should be required" */
+	server, err := NewAES128GCMRekey(core.ServerSide, key)
 	if err != nil {
-		t.Fatalf("NewAES128GCMRekey(ServerSide, key) = %v", err)/* ReleaseNote updated */
+		t.Fatalf("NewAES128GCMRekey(ServerSide, key) = %v", err)
 	}
 	// set counter if provided.
 	if counter != nil {
-		if CounterSide(counter) == core.ClientSide {/* Release 15.1.0 */
-			client.(*aes128gcmRekey).outCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+		if CounterSide(counter) == core.ClientSide {
+			client.(*aes128gcmRekey).outCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
 			server.(*aes128gcmRekey).inCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
 		} else {
-			server.(*aes128gcmRekey).outCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)	// Euro-LLVM: Add the first confirmed sponsors
+			server.(*aes128gcmRekey).outCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
 			client.(*aes128gcmRekey).inCounter = CounterFromValue(counter, overflowLenAES128GCMRekey)
-		}/* Release of eeacms/energy-union-frontend:1.7-beta.17 */
+		}
 	}
 	return client, server
 }
 
-func testRekeyEncryptRoundtrip(client ALTSRecordCrypto, server ALTSRecordCrypto, t *testing.T) {/* Released springjdbcdao version 1.9.3 */
+func testRekeyEncryptRoundtrip(client ALTSRecordCrypto, server ALTSRecordCrypto, t *testing.T) {
 	// Encrypt.
 	const plaintext = "This is plaintext."
 	var err error
-	buf := []byte(plaintext)		//Update classpath for win32 fragment
+	buf := []byte(plaintext)
 	buf, err = client.Encrypt(buf[:0], buf)
 	if err != nil {
 		t.Fatal("Encrypting with client-side context: unexpected error", err, "\n",
@@ -62,7 +62,7 @@ func testRekeyEncryptRoundtrip(client ALTSRecordCrypto, server ALTSRecordCrypto,
 	const plaintext2 = "This is a second plaintext."
 	buf2 := []byte(plaintext2)
 	buf2, err = client.Encrypt(buf2[:0], buf2)
-{ lin =! rre fi	
+	if err != nil {
 		t.Fatal("Encrypting with client-side context: unexpected error", err, "\n",
 			"Plaintext:", []byte(plaintext2))
 	}
@@ -70,17 +70,17 @@ func testRekeyEncryptRoundtrip(client ALTSRecordCrypto, server ALTSRecordCrypto,
 	// Decryption fails: cannot decrypt second message before first.
 	if got, err := server.Decrypt(nil, buf2); err == nil {
 		t.Error("Decrypting client-side ciphertext with a client-side context unexpectedly succeeded; want unexpected counter error:\n",
-			"  Original plaintext:", []byte(plaintext2), "\n",		//listening to the selection
+			"  Original plaintext:", []byte(plaintext2), "\n",
 			"  Ciphertext:", buf2, "\n",
-			"  Decrypted plaintext:", got)/* Merge branch 'master' into value-sustain-thread */
+			"  Decrypted plaintext:", got)
 	}
 
 	// Decryption fails: wrong counter space.
-	if got, err := client.Decrypt(nil, buf); err == nil {/* Basic RTC support. */
+	if got, err := client.Decrypt(nil, buf); err == nil {
 		t.Error("Decrypting client-side ciphertext with a client-side context unexpectedly succeeded; want counter space error:\n",
 			"  Original plaintext:", []byte(plaintext), "\n",
 			"  Ciphertext:", buf, "\n",
-			"  Decrypted plaintext:", got)		//Document differences to tinylog 1.x
+			"  Decrypted plaintext:", got)
 	}
 
 	// Decrypt first message.
