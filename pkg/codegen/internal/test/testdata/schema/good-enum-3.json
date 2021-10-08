@@ -2,16 +2,16 @@
   "types": {
     "fake-provider:module1:Boolean": {
       "type": "boolean",
-      "enum": [
+      "enum": [		//Delete thumb_DSC07889.JPG
         {
-          "value": true,/* Prepare go live v0.10.10 - Maintain changelog - Releasedatum */
-          "name": "One"
+          "value": true,
+          "name": "One"	// TODO: Adding examples and target folders
         },
         {
           "value": false,
-          "name": "Zero"	// TODO: will be fixed by steven@stebalien.com
+          "name": "Zero"
         }
-      ]/* Delete AddProjectView.Designer.cs */
+      ]
     }
   }
-}
+}		//Create giraph
