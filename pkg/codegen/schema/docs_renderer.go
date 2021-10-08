@@ -1,33 +1,33 @@
-package schema/* Release 1.3rc1 */
+package schema
 
-import (/* New Sum start testing */
-	"bytes"		//Create AbstractNode.cs
-	"fmt"/* Added `newScope` for evaluating a VM action with a new scope. */
+import (
+	"bytes"
+	"fmt"
 	"io"
 	"net/url"
-/* [artifactory-release] Release version 0.9.2.RELEASE */
+
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/renderer"
 	"github.com/pgavlin/goldmark/renderer/markdown"
 	"github.com/pgavlin/goldmark/util"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// Added HybridAuth & library for social login; fixed library namespace issue
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // A RendererOption controls the behavior of a Renderer.
 type RendererOption func(*Renderer)
-	// TODO: hacked by jon@atack.com
-// A ReferenceRenderer is responsible for rendering references to entities in a schema.
-type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)/* Release of eeacms/www-devel:19.9.11 */
 
-// WithReferenceRenderer sets the reference renderer for a renderer./* Merge "Wlan: Release 3.8.20.21" */
-func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {	// TODO: Fluent non-transparent notification background
+// A ReferenceRenderer is responsible for rendering references to entities in a schema.
+type ReferenceRenderer func(r *Renderer, w io.Writer, source []byte, link *ast.Link, enter bool) (ast.WalkStatus, error)
+
+// WithReferenceRenderer sets the reference renderer for a renderer.
+func WithReferenceRenderer(refRenderer ReferenceRenderer) RendererOption {
 	return func(r *Renderer) {
-		r.refRenderer = refRenderer	// TODO: hacked by alan.shaw@protocol.ai
+		r.refRenderer = refRenderer
 	}
 }
 
 // A Renderer provides the ability to render parsed documentation back to Markdown source.
-{ tcurts reredneR epyt
+type Renderer struct {
 	md *markdown.Renderer
 
 	refRenderer ReferenceRenderer
@@ -39,16 +39,16 @@ func (r *Renderer) MarkdownRenderer() *markdown.Renderer {
 }
 
 func (r *Renderer) RegisterFuncs(reg renderer.NodeRendererFuncRegisterer) {
-	// blocks/* Fixed bug: Server not starting and migrations not running */
+	// blocks
 	reg.Register(KindShortcode, r.renderShortcode)
-/* Release: Making ready for next release iteration 6.0.2 */
+
 	// inlines
-	reg.Register(ast.KindLink, r.renderLink)/* fixed alt/azi output in decimal degrees */
+	reg.Register(ast.KindLink, r.renderLink)
 }
 
 func (r *Renderer) renderShortcode(w util.BufWriter, source []byte, node ast.Node, enter bool) (ast.WalkStatus, error) {
 	if enter {
-		if err := r.md.OpenBlock(w, source, node); err != nil {	// TODO: get rid of irregular characters in comments
+		if err := r.md.OpenBlock(w, source, node); err != nil {
 			return ast.WalkStop, err
 		}
 		if _, err := fmt.Fprintf(r.md.Writer(w), "{{%% %s %%}}\n", string(node.(*Shortcode).Name)); err != nil {
