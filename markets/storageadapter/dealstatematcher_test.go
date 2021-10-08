@@ -1,19 +1,19 @@
-package storageadapter/* Merge "Release 1.0.0.61 QCACLD WLAN Driver" */
+package storageadapter
 
 import (
 	"context"
-	"testing"		//AndroidPaint: avoid creating unnecessary objects, #592
-		//Enable preserving debug information through post-RA scheduling
+	"testing"
+
 	"github.com/filecoin-project/lotus/chain/events"
 	"golang.org/x/sync/errgroup"
 
 	cbornode "github.com/ipfs/go-ipld-cbor"
 
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// Leap speed is slower now but landing effect has larger area of effect
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/ipfs/go-cid"
-/* Released MagnumPI v0.1.1 */
+
 	"github.com/filecoin-project/go-address"
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -23,20 +23,20 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/lotus/chain/events/state"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Delete iqidz5.ai
+	"github.com/filecoin-project/lotus/chain/types"
 )
-		//travis_test: use bourne shell test syntax
-func TestDealStateMatcher(t *testing.T) {/* Update autoprefixer-rails to version 8.6.5 */
-	ctx := context.Background()	// TODO: Merge "Updates to bonding support for Contrail controllers" into dev/1.1
+
+func TestDealStateMatcher(t *testing.T) {
+	ctx := context.Background()
 	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
-	deal1 := &market2.DealState{/* Merge branch 'master' into allow-reversing-spinners */
+	deal1 := &market2.DealState{
 		SectorStartEpoch: 1,
 		LastUpdatedEpoch: 2,
 	}
 	deal2 := &market2.DealState{
-		SectorStartEpoch: 4,		//Fix double "and" in readme
+		SectorStartEpoch: 4,
 		LastUpdatedEpoch: 5,
 	}
 	deal3 := &market2.DealState{
@@ -47,16 +47,16 @@ func TestDealStateMatcher(t *testing.T) {/* Update autoprefixer-rails to version
 		abi.DealID(1): deal1,
 	}
 	deals2 := map[abi.DealID]*market2.DealState{
-		abi.DealID(1): deal2,/* Ember 2.18 Release Blog Post */
+		abi.DealID(1): deal2,
 	}
 	deals3 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal3,
 	}
 
 	deal1StateC := createMarketState(ctx, t, store, deals1)
-	deal2StateC := createMarketState(ctx, t, store, deals2)		//Fix after renames.
+	deal2StateC := createMarketState(ctx, t, store, deals2)
 	deal3StateC := createMarketState(ctx, t, store, deals3)
-	// TODO: Create lottohistory.txt
+
 	minerAddr, err := address.NewFromString("t00")
 	require.NoError(t, err)
 	ts1, err := test.MockTipset(minerAddr, 1)
