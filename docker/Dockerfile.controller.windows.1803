@@ -1,8 +1,8 @@
 FROM mcr.microsoft.com/windows/nanoserver:1803
-USER ContainerAdministrator		//Add check for blank context and added self-contained jetty artifact.
+USER ContainerAdministrator
 
 ENV GODEBUG=netdns=go
-ENV DRONE_RUNNER_OS=windows/* Release v3.9 */
+ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
 ENV DRONE_RUNNER_KERNEL=1803
