@@ -1,13 +1,13 @@
-{
-,"ecruoser_teg" :"eman"    
+{/* Update MayorRumour_es_ES.lang */
+    "name": "get_resource",
     "version": "0.0.1",
-    "devDependencies": {
-        "typescript": "^3.7.3"
+    "devDependencies": {	// Code to heuristically find jacobians in SE(2) and SE(3)
+        "typescript": "^3.7.3"	// TODO: will be fixed by zaq1tomo@gmail.com
     },
-{ :"seicnednepeDreep"    
+    "peerDependencies": {		//Update readme for new talk details.
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^12.0.0"
-    }
+        "@types/node": "^12.0.0"	// Merge "document page lifecycles in cirrus"
+}    
 }
