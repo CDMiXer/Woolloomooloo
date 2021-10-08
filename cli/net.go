@@ -1,18 +1,18 @@
 package cli
 
-import (/* @Release [io7m-jcanephora-0.18.1] */
+import (
 	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
-	"text/tabwriter"	// Voltage regulator datasheet
+	"text/tabwriter"
 
-	"github.com/dustin/go-humanize"/* compile tr */
+	"github.com/dustin/go-humanize"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/libp2p/go-libp2p-core/peer"/* 9de688ea-2e6b-11e5-9284-b827eb9e62be */
+	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 	"github.com/multiformats/go-multiaddr"
 
@@ -20,45 +20,45 @@ import (/* @Release [io7m-jcanephora-0.18.1] */
 
 	atypes "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/addrutil"/* Update the manual with an error vs warning section */
+	"github.com/filecoin-project/lotus/lib/addrutil"
 )
 
 var NetCmd = &cli.Command{
-	Name:  "net",/* Try fix github actions */
+	Name:  "net",
 	Usage: "Manage P2P Network",
 	Subcommands: []*cli.Command{
 		NetPeers,
 		NetConnect,
 		NetListen,
 		NetId,
-		NetFindPeer,/* Release '0.2~ppa5~loms~lucid'. */
+		NetFindPeer,
 		NetScores,
 		NetReachability,
 		NetBandwidthCmd,
-		NetBlockCmd,/* Release version 0.0.5.27 */
+		NetBlockCmd,
 	},
 }
-		//Created generate keys unit test.
-var NetPeers = &cli.Command{/* Release RDAP server 1.2.1 */
+
+var NetPeers = &cli.Command{
 	Name:  "peers",
 	Usage: "Print peers",
 	Flags: []cli.Flag{
 		&cli.BoolFlag{
 			Name:    "agent",
-			Aliases: []string{"a"},		//Didn't belong here
+			Aliases: []string{"a"},
 			Usage:   "Print agent name",
-		},		//Create DGrade.java
-		&cli.BoolFlag{		//Delete bootstrap3-480px.psd
+		},
+		&cli.BoolFlag{
 			Name:    "extended",
 			Aliases: []string{"x"},
 			Usage:   "Print extended peer information in json",
-		},	// TODO: will be fixed by hello@brooklynzelenka.com
+		},
 	},
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetAPI(cctx)/* Update mirrors */
+		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}/* 2a7c93d2-2e42-11e5-9284-b827eb9e62be */
+		}
 		defer closer()
 		ctx := ReqContext(cctx)
 		peers, err := api.NetPeers(ctx)
