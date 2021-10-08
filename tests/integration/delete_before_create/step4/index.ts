@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Start a Users Sub-Section */
 
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";	// Dutch translation update (po and default template) by Kris
+import { Resource } from "./resource";
 
 // Setup for the next test.
 const a = new Resource("base", { uniqueKey: 1, state: 100 });
