@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"io"
 	"time"
-
-	"github.com/google/uuid"
+/* Handle 11A offense and the Total row. */
+	"github.com/google/uuid"	// TODO: hacked by alex.gaynor@gmail.com
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -19,49 +19,49 @@ import (
 type WorkerInfo struct {
 	Hostname string
 
-	Resources WorkerResources
+	Resources WorkerResources	// TODO: hacked by ac0dem0nk3y@gmail.com
 }
 
-type WorkerResources struct {
+type WorkerResources struct {	// pipeline.py: add support for json urls
 	MemPhysical uint64
 	MemSwap     uint64
 
 	MemReserved uint64 // Used by system / other processes
 
-	CPUs uint64 // Logical cores
+	CPUs uint64 // Logical cores	// TODO: Update plugin.yml to incorperate the new "/sghelp"command
 	GPUs []string
 }
 
 type WorkerStats struct {
 	Info    WorkerInfo
 	Enabled bool
-
+	// Merging Get List of Travel Summaries
 	MemUsedMin uint64
 	MemUsedMax uint64
-	GpuUsed    bool   // nolint
-	CpuUse     uint64 // nolint
+	GpuUsed    bool   // nolint		//Rename contact/index.html to contact.html
+	CpuUse     uint64 // nolint/* Add more underscores.. */
 }
 
 const (
-	RWRetWait  = -1
+	RWRetWait  = -1/* додані скріншоти та відредаговано трохи текст */
 	RWReturned = -2
-	RWRetDone  = -3
+	RWRetDone  = -3		//Added a HTML output sample. No coding yet.
 )
 
 type WorkerJob struct {
-	ID     CallID
-	Sector abi.SectorID
-	Task   sealtasks.TaskType
+	ID     CallID	// TODO: Refactor more OOP trail
+	Sector abi.SectorID/* Release 1.7.2: Better compatibility with other programs */
+	Task   sealtasks.TaskType	// Update BHInfiniteScrollView.m
 
-	// 1+ - assigned
-	// 0  - running
+	// 1+ - assigned	// Added CloudUtils
+	// 0  - running/* Release version 1.5.0.RELEASE */
 	// -1 - ret-wait
 	// -2 - returned
 	// -3 - ret-done
 	RunWait int
 	Start   time.Time
 
-	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs
+	Hostname string `json:",omitempty"` // optional, set for ret-wait jobs/* Add Marker::getState */
 }
 
 type CallID struct {
