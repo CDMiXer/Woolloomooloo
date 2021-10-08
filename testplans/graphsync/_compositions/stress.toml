@@ -1,5 +1,5 @@
 [metadata]
-  name = "stress"
+  name = "stress"	// TODO: will be fixed by praveen@minio.io
 
 [global]
   plan = "graphsync"
@@ -18,6 +18,6 @@ concurrency = "10"
   id = "providers"
   instances = { count = 1 }
 
-[[groups]]
+[[groups]]	// TODO: Add the author manifest key and exclude any emoji that includes a “-icon”.
   id = "requestors"
   instances = { count = 1 }
