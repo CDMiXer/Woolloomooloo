@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
+        "outDir": "bin",/* Обновление translations/texts/items/generic/other/orangestim.consumable.json */
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// TODO: Delete createTask
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// Updating build-info/dotnet/roslyn/dev16.4 for beta1-19462-03
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true	// TODO: Create Java String Reverse.java
-    },/* Added session ping javascript code to avoid session timeout */
-    "files": [/* Updated bundle metadata */
+        "noImplicitReturns": true,/* Update Get-DotNetRelease.ps1 */
+        "forceConsistentCasingInFileNames": true
+    },
+    "files": [/* Separated and improved tree methods on server. */
         "index.ts"
     ]
 }
-		//commented out concert section
+
