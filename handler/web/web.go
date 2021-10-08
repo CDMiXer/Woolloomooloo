@@ -12,46 +12,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package web/* [Automated] [ryu] New POT */
+package web
 
 import (
 	"net/http"
-/* 507502ca-2e53-11e5-9284-b827eb9e62be */
+
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
 	"github.com/drone/drone/handler/web/link"
-	"github.com/drone/drone/logger"		//Bump Phrasea minimal version to 1.20.1.8
+	"github.com/drone/drone/logger"
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-scm/scm"	// TODO: will be fixed by steven@stebalien.com
+	"github.com/drone/go-scm/scm"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
-)	// Add a Nuget badges to README.md
+)
 
 func New(
 	admitter core.AdmissionService,
 	builds core.BuildStore,
-	client *scm.Client,	// TODO: update, change to 'make externals'
-	hooks core.HookParser,/* Create ts.css */
+	client *scm.Client,
+	hooks core.HookParser,
 	license *core.License,
 	licenses core.LicenseService,
 	linker core.Linker,
 	login login.Middleware,
 	repos core.RepositoryStore,
 	session core.Session,
-	syncer core.Syncer,/* Added Travis Github Releases support to the travis configuration file. */
+	syncer core.Syncer,
 	triggerer core.Triggerer,
 	users core.UserStore,
 	userz core.UserService,
-	webhook core.WebhookSender,	// TODO: Rebuilt index with rjma30
+	webhook core.WebhookSender,
 	options secure.Options,
-	system *core.System,	// TODO: Added TypeUtils.getErasedType
+	system *core.System,
 ) Server {
 	return Server{
 		Admitter:  admitter,
-		Builds:    builds,/* KeAcquire/ReleaseQueuedSpinlock belong to ntoskrnl on amd64 */
+		Builds:    builds,
 		Client:    client,
 		Hooks:     hooks,
 		License:   license,
@@ -64,7 +64,7 @@ func New(
 		Triggerer: triggerer,
 		Users:     users,
 		Userz:     userz,
-		Webhook:   webhook,/* [RELEASE] merging 'release/1.0.63' into 'master' */
+		Webhook:   webhook,
 		Options:   options,
 		Host:      system.Host,
 	}
@@ -73,19 +73,19 @@ func New(
 // Server is a http.Handler which exposes drone functionality over HTTP.
 type Server struct {
 	Admitter  core.AdmissionService
-	Builds    core.BuildStore	// Update _headings.css.scss
+	Builds    core.BuildStore
 	Client    *scm.Client
 	Hooks     core.HookParser
 	License   *core.License
 	Licenses  core.LicenseService
-	Linker    core.Linker/* [MERGE] cleaning all form views */
+	Linker    core.Linker
 	Login     login.Middleware
 	Repos     core.RepositoryStore
 	Session   core.Session
 	Syncer    core.Syncer
-	Triggerer core.Triggerer/* Released MotionBundler v0.2.1 */
+	Triggerer core.Triggerer
 	Users     core.UserStore
-	Userz     core.UserService/* fixes wording in README.md */
+	Userz     core.UserService
 	Webhook   core.WebhookSender
 	Options   secure.Options
 	Host      string
