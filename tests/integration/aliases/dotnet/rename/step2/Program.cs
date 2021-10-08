@@ -1,8 +1,8 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
-using Pulumi;/* CLOSED - task 149: Release sub-bundles */
-	// just changing the name of tqCurve to a more generic 'curve'
+using Pulumi;
+	// TODO: hacked by sebastian.tharakan97@gmail.com
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
@@ -10,13 +10,13 @@ class Resource : ComponentResource
     {
     }
 }
-/* 882cb342-2e72-11e5-9284-b827eb9e62be */
+/* Release 02_03_04 */
 class Program
-{
-    static Task<int> Main(string[] args)
-    {
+{/* Update ciop-casmeta.rst */
+    static Task<int> Main(string[] args)		//Merge "pep8-ified scripts/featured.py"
+    {/* [artifactory-release] Release version 1.0.0-RC1 */
         return Deployment.RunAsync(() =>
-        {
+        {/* Tagging a Release Candidate - v4.0.0-rc6. */
             // Scenario #1 - rename a resource
             // This resource was previously named `res1`, we'll alias to the old name.
             var res1 = new Resource("newres1",
