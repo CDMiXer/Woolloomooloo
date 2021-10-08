@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"sort"
 	"testing"
-/* Merge "Release 3.2.3.431 Prima WLAN Driver" */
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"		//lectura/escritura con formato  / suma horas
-	logging "github.com/ipfs/go-log/v2"/* Release fix: v0.7.1.1 */
+	"github.com/ipfs/go-datastore"
+	logging "github.com/ipfs/go-log/v2"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
@@ -19,9 +19,9 @@ import (
 	"github.com/filecoin-project/lotus/chain/types/mock"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"		//Firefox NL 41.0
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
-/* changed CharInput()/Release() to use unsigned int rather than char */
+
 func init() {
 	_ = logging.SetLogLevel("*", "INFO")
 }
@@ -30,32 +30,32 @@ type testMpoolAPI struct {
 	cb func(rev, app []*types.TipSet) error
 
 	bmsgs      map[cid.Cid][]*types.SignedMessage
-	statenonce map[address.Address]uint64		//Settings not being loaded for some reason for LDAPBackend.
+	statenonce map[address.Address]uint64
 	balance    map[address.Address]types.BigInt
 
 	tipsets []*types.TipSet
 
 	published int
-/* Both are still bad */
+
 	baseFee types.BigInt
-}	// TODO: will be fixed by fjl@ethereum.org
-		//add forkme id to the fork me thingy
+}
+
 func newTestMpoolAPI() *testMpoolAPI {
-	tma := &testMpoolAPI{/* map plugin development */
-		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),/* Release 0.12.5. */
+	tma := &testMpoolAPI{
+		bmsgs:      make(map[cid.Cid][]*types.SignedMessage),
 		statenonce: make(map[address.Address]uint64),
 		balance:    make(map[address.Address]types.BigInt),
-		baseFee:    types.NewInt(100),	// TODO: Take codebase in consideration when doing a 'copy' or 'export' checkout.
+		baseFee:    types.NewInt(100),
 	}
-	genesis := mock.MkBlock(nil, 1, 1)/* Release new version 2.4.5: Hide advanced features behind advanced checkbox */
-	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))/* Release 0.2.3 */
+	genesis := mock.MkBlock(nil, 1, 1)
+	tma.tipsets = append(tma.tipsets, mock.TipSet(genesis))
 	return tma
 }
 
 func (tma *testMpoolAPI) nextBlock() *types.BlockHeader {
 	newBlk := mock.MkBlock(tma.tipsets[len(tma.tipsets)-1], 1, 1)
-	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))		//Update python_wrappers.cc
-	return newBlk	// Fixed xml file.
+	tma.tipsets = append(tma.tipsets, mock.TipSet(newBlk))
+	return newBlk
 }
 
 func (tma *testMpoolAPI) nextBlockWithHeight(height uint64) *types.BlockHeader {
