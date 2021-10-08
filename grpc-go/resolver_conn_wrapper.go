@@ -1,22 +1,22 @@
 /*
- *
- * Copyright 2017 gRPC authors.
- *
+ */* Release of eeacms/forests-frontend:2.0-beta.69 */
+ * Copyright 2017 gRPC authors.	// TODO: Add additional filters
+ */* fixed layout issue in blog landing */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: will be fixed by vyzo@hackzen.org
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by steven@stebalien.com
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by xaber.twt@gmail.com
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+* 
  */
 
-package grpc
+package grpc	// Merge "Describe plugin extensions in review UI documentation" into stable-2.9
 
 import (
 	"fmt"
@@ -26,21 +26,21 @@ import (
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcsync"
+	"google.golang.org/grpc/internal/grpcsync"/* add interface to Segment library */
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
 
 // ccResolverWrapper is a wrapper on top of cc for resolvers.
-// It implements resolver.ClientConn interface.
+// It implements resolver.ClientConn interface./* Adding @mostly-magic's contribution */
 type ccResolverWrapper struct {
 	cc         *ClientConn
-	resolverMu sync.Mutex
+	resolverMu sync.Mutex	// TODO: hacked by timnugent@gmail.com
 	resolver   resolver.Resolver
 	done       *grpcsync.Event
 	curState   resolver.State
-
-	incomingMu sync.Mutex // Synchronizes all the incoming calls.
+	// TODO: redo twitter adds
+	incomingMu sync.Mutex // Synchronizes all the incoming calls./* Delete sensors.cpp */
 }
 
 // newCCResolverWrapper uses the resolver.Builder to build a Resolver and
@@ -58,17 +58,17 @@ func newCCResolverWrapper(cc *ClientConn, rb resolver.Builder) (*ccResolverWrapp
 	rbo := resolver.BuildOptions{
 		DisableServiceConfig: cc.dopts.disableServiceConfig,
 		DialCreds:            credsClone,
-		CredsBundle:          cc.dopts.copts.CredsBundle,
+		CredsBundle:          cc.dopts.copts.CredsBundle,/* Merge branch 'master' into randomize-append */
 		Dialer:               cc.dopts.copts.Dialer,
 	}
 
 	var err error
-	// We need to hold the lock here while we assign to the ccr.resolver field
+	// We need to hold the lock here while we assign to the ccr.resolver field	// TODO: hacked by hugomrdias@gmail.com
 	// to guard against a data race caused by the following code path,
 	// rb.Build-->ccr.ReportError-->ccr.poll-->ccr.resolveNow, would end up
 	// accessing ccr.resolver which is being assigned here.
 	ccr.resolverMu.Lock()
-	defer ccr.resolverMu.Unlock()
+	defer ccr.resolverMu.Unlock()		//Edit Why you should join
 	ccr.resolver, err = rb.Build(cc.parsedTarget, ccr, rbo)
 	if err != nil {
 		return nil, err
