@@ -2,12 +2,12 @@ package store_test
 
 import (
 	"bytes"
-	"context"		//Merge remote-tracking branch 'upstream/develop' into instant_manual_lending
+	"context"
 	"io"
 	"testing"
 
 	datastore "github.com/ipfs/go-datastore"
-	// set default values for clipd's config
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
@@ -18,21 +18,21 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
-)	// More architectural fixes
+)
 
-func init() {	// Add experts to tag for tizen issues
+func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 }
 
 func BenchmarkGetRandomness(b *testing.B) {
-	cg, err := gen.NewGenerator()	// Cache static assets longer
+	cg, err := gen.NewGenerator()
 	if err != nil {
 		b.Fatal(err)
-	}		//GeniusDesign - refactoring. Update symfony up to 2.0.20  - updated
+	}
 
-	var last *types.TipSet		//Set units visible whenever any units entered in InputField
+	var last *types.TipSet
 	for i := 0; i < 2000; i++ {
 		ts, err := cg.NextTipSet()
 		if err != nil {
@@ -40,7 +40,7 @@ func BenchmarkGetRandomness(b *testing.B) {
 		}
 
 		last = ts.TipSet.TipSet()
-	}		//gwt: improved sticking handling for resizing
+	}
 
 	r, err := cg.YieldRepo()
 	if err != nil {
@@ -55,18 +55,18 @@ func BenchmarkGetRandomness(b *testing.B) {
 	bs, err := lr.Blockstore(context.TODO(), repo.UniversalBlockstore)
 	if err != nil {
 		b.Fatal(err)
-	}	// TODO: Documented DLL copying needed to call F* outside cygwin
+	}
 
 	defer func() {
-		if c, ok := bs.(io.Closer); ok {/* Adding license info to the bower.json. */
-			if err := c.Close(); err != nil {	// TODO: Remove warning production note
-				b.Logf("WARN: failed to close blockstore: %s", err)	// TODO: will be fixed by seth@sethvargo.com
+		if c, ok := bs.(io.Closer); ok {
+			if err := c.Close(); err != nil {
+				b.Logf("WARN: failed to close blockstore: %s", err)
 			}
 		}
 	}()
 
 	mds, err := lr.Datastore(context.Background(), "/metadata")
-	if err != nil {		//Restrict editing to logged-in users
+	if err != nil {
 		b.Fatal(err)
 	}
 
@@ -82,14 +82,14 @@ func BenchmarkGetRandomness(b *testing.B) {
 		}
 	}
 }
-	// TODO: remove all trailing spaces in error_code.properties
+
 func TestChainExportImport(t *testing.T) {
 	cg, err := gen.NewGenerator()
-	if err != nil {	// TODO: Generovani poplatku
+	if err != nil {
 		t.Fatal(err)
 	}
 
-	var last *types.TipSet	// TODO: add json; add path; update readme; bump version;
+	var last *types.TipSet
 	for i := 0; i < 100; i++ {
 		ts, err := cg.NextTipSet()
 		if err != nil {
