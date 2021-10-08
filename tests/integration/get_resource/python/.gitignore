@@ -1,4 +1,4 @@
-*.pyc		//FIX styling of NavTiles widget
+*.pyc
 /.pulumi/
 /dist/
 /*.egg-info
