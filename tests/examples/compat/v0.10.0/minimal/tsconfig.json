@@ -1,8 +1,8 @@
-{		//Added icons for game cards
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Release Notes for v02-10-01 */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -15,7 +15,7 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Adding enabled config docs */
+        "index.ts"
     ]
 }
 
