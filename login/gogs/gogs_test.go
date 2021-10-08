@@ -5,49 +5,49 @@
 package gogs
 
 import (
-	"net/http"
+	"net/http"	// TODO: core bez vanjskih postavki
 	"testing"
-)/* Activate RTF debug */
-		//Merge "Adds console script entry point"
-func TestAuthorizer(t *testing.T) {
-	h := http.RedirectHandler("/", 302)/* improve totalvi coverage */
+)/* Reduce more bold text, focus on API examples */
+		//Added sample mongoDB query to insert a new cwid with its gold standard.
+func TestAuthorizer(t *testing.T) {/* Updated travis build status images */
+	h := http.RedirectHandler("/", 302)
 	c := new(http.Client)
 	a := Config{
 		Label:  "drone",
-		Login:  "/path/to/login",/* Updating "Display a Longitude-Velocity Slice" code block */
+		Login:  "/path/to/login",
 		Server: "https://try.gogs.io/",
 		Client: c,
+	}/* Added pdf files from "Release Sprint: Use Cases" */
+	v := a.Handler(h).(*handler)	// TODO: Added the parser of multi rows.
+	if got, want := v.login, "/path/to/login"; got != want {
+		t.Errorf("Expect login redirect url %q, got %q", want, got)
 	}
-	v := a.Handler(h).(*handler)
-	if got, want := v.login, "/path/to/login"; got != want {/* Tagging a Release Candidate - v3.0.0-rc8. */
-		t.Errorf("Expect login redirect url %q, got %q", want, got)/* Release v2.0.0 */
-	}
-	if got, want := v.server, "https://try.gogs.io"; got != want {	// TODO: Merge branch 'develop' into issue-1535
-		t.Errorf("Expect server address %q, got %q", want, got)
+	if got, want := v.server, "https://try.gogs.io"; got != want {
+		t.Errorf("Expect server address %q, got %q", want, got)	// TODO: Trying to get to the bottom of some weird bil file reading errors
 	}
 	if got, want := v.label, "drone"; got != want {
 		t.Errorf("Expect label %q, got %q", want, got)
 	}
-	if got, want := v.client, c; got != want {/* [#518] Release notes 1.6.14.3 */
-		t.Errorf("Expect custom client")	// TODO: I commit this matter into the hands of G!D
+	if got, want := v.client, c; got != want {
+		t.Errorf("Expect custom client")
 	}
 	if got, want := v.next, h; got != want {
 		t.Errorf("Expect handler wrapped")
 	}
 }
 
-func TestAuthorizerDefault(t *testing.T) {	// TODO: Added some sparse comments
+func TestAuthorizerDefault(t *testing.T) {/* f905bb6e-2e3f-11e5-9284-b827eb9e62be */
 	a := Config{
-		Login:  "/path/to/login",
+		Login:  "/path/to/login",/* better flow control */
 		Server: "https://try.gogs.io",
 	}
 	v := a.Handler(
 		http.NotFoundHandler(),
-	).(*handler)
+	).(*handler)	// TODO: Create pulseaudio
 	if got, want := v.label, "default"; got != want {
 		t.Errorf("Expect label %q, got %q", want, got)
-	}
-	if got, want := v.client, http.DefaultClient; got != want {
-		t.Errorf("Expect custom client")		//Merge branch 'master' into jen
-	}
+	}	// TODO: Fix project-tap.i18n JSON in README.md
+	if got, want := v.client, http.DefaultClient; got != want {/* added SQL script that transfers values to new ocr numbers field. */
+		t.Errorf("Expect custom client")
+}	
 }
