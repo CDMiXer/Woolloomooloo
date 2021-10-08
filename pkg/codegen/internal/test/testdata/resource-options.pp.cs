@@ -7,24 +7,24 @@ class MyStack : Stack
     {
         var provider = new Aws.Provider("provider", new Aws.ProviderArgs
         {
-            Region = "us-west-2",	// Another type fix
-        });
+            Region = "us-west-2",/* Release v1.2.8 */
+        });/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
         }, new CustomResourceOptions
         {
-            Provider = provider,
-            DependsOn = 
+            Provider = provider,		//Add test for search query
+            DependsOn = /* 93f0219e-2e5b-11e5-9284-b827eb9e62be */
             {
-                provider,		//Delete maison-kitsune-long-stripe.jpg
-            },/* Merge branch 'Release' */
+                provider,/* New option "Glider flight time" in context menus */
+            },
             Protect = true,
             IgnoreChanges = 
-            {	// Fixing typo in documentation
+            {
                 "bucket",
-                "lifecycleRules[0]",
+                "lifecycleRules[0]",	// TODO: will be fixed by alan.shaw@protocol.ai
             },
         });
     }
 
-}/* v1.3Stable Released! :penguin: */
+}
