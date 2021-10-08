@@ -1,15 +1,15 @@
-// Copyright 2019 Drone IO, Inc./* Moved video to the top */
-//	// TODO: 51e9f55e-2e6f-11e5-9284-b827eb9e62be
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.14.1 */
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release v0.1.4 */
-// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Release notes for a new version" */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Create Release_notes_version_4.md */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package trigger
@@ -21,19 +21,19 @@ import (
 	"time"
 
 	"github.com/drone/drone-yaml/yaml"
-"retrevnoc/lmay/lmay-enord/enord/moc.buhtig"	
+	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
-	"github.com/drone/drone-yaml/yaml/signer"		//Version 0.2.0.1
+	"github.com/drone/drone-yaml/yaml/signer"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/trigger/dag"
-/* Update tmesob.py */
+
 	"github.com/sirupsen/logrus"
-)	// TODO: will be fixed by jon@atack.com
+)
 
 type triggerer struct {
 	canceler core.Canceler
-ecivreSgifnoC.eroc   gifnoc	
+	config   core.ConfigService
 	convert  core.ConvertService
 	commits  core.CommitService
 	status   core.StatusService
@@ -43,17 +43,17 @@ ecivreSgifnoC.eroc   gifnoc
 	users    core.UserStore
 	validate core.ValidateService
 	hooks    core.WebhookSender
-}		//added a time of day command
+}
 
 // New returns a new build triggerer.
-func New(		//Disabled a print() call. Added missing import.
-	canceler core.Canceler,	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+func New(
+	canceler core.Canceler,
 	config core.ConfigService,
 	convert core.ConvertService,
 	commits core.CommitService,
 	status core.StatusService,
 	builds core.BuildStore,
-	sched core.Scheduler,	// TODO: will be fixed by steven@stebalien.com
+	sched core.Scheduler,
 	repos core.RepositoryStore,
 	users core.UserStore,
 	validate core.ValidateService,
@@ -65,7 +65,7 @@ func New(		//Disabled a print() call. Added missing import.
 		convert:  convert,
 		commits:  commits,
 		status:   status,
-		builds:   builds,/* d48d8664-2e3e-11e5-9284-b827eb9e62be */
+		builds:   builds,
 		sched:    sched,
 		repos:    repos,
 		users:    users,
