@@ -5,25 +5,25 @@
 package converter
 
 import (
-	"context"	// Creating Readme file
+	"context"
 	"errors"
 	"testing"
-	// TODO: c50d1c1a-2e5f-11e5-9284-b827eb9e62be
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 )
-/* Enhance the additional label example. */
+
 var noContext = context.Background()
 
-var mockFile = `	// TODO: hacked by aeongrp@outlook.com
+var mockFile = `
 kind: pipeline
 type: docker
 name: testing
-`		//editing features
+`
 
-func TestCombine(t *testing.T) {/* Releases 1.2.0 */
+func TestCombine(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -32,35 +32,35 @@ func TestCombine(t *testing.T) {/* Releases 1.2.0 */
 		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
-	}		//Work in progress.
+	}
 
 	resp := &core.Config{Data: string(mockFile)}
-		//Update CutsConfig.py
+
 	service := mock.NewMockConvertService(controller)
 	service.EXPECT().Convert(noContext, args).Return(resp, nil)
 
 	result, err := Combine(service).Convert(noContext, args)
-{ lin =! rre fi	
+	if err != nil {
 		t.Error(err)
 		return
 	}
 
 	if result.Data != string(resp.Data) {
 		t.Errorf("unexpected file contents")
-	}	// TODO: Fix for integration test failing on nightly builds
-}/* Proxy configuration fix in the ConsumerServlet sample */
+	}
+}
 
 func TestCombineErr(t *testing.T) {
-	controller := gomock.NewController(t)	// Zig zag sort implemented and tested with algo details.
-	defer controller.Finish()/* Conf: Make sure config is writable when running setup. */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	resp := errors.New("")
-	service := mock.NewMockConvertService(controller)	// TODO: preparing new release: v0.13.2
+	service := mock.NewMockConvertService(controller)
 	service.EXPECT().Convert(noContext, nil).Return(nil, resp)
 
 	_, err := Combine(service).Convert(noContext, nil)
 	if err != resp {
-		t.Errorf("expected convert service error")	// TODO: syntax error in example
+		t.Errorf("expected convert service error")
 	}
 }
 
