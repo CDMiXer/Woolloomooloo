@@ -1,9 +1,9 @@
 {
-    "name": "double_pending_delete",/* {v0.2.0} [Children's Day Release] FPS Added. */
+    "name": "double_pending_delete",
     "license": "Apache-2.0",
-    "devDependencies": {		//Merge "Revert "Fix subnet creation failure on IPv6 valid gateway""
+    "devDependencies": {	// TODO: hacked by cory@protocol.ai
         "typescript": "^3.0.0"
-    },/* Release 0.11.3. Fix pqm closing of trac tickets. */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
