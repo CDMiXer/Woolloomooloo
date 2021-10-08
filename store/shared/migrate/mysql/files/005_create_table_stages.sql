@@ -17,32 +17,32 @@ CREATE TABLE IF NOT EXISTS stages (
 ,stage_arch        VARCHAR(50)
 ,stage_variant     VARCHAR(10)
 ,stage_kernel      VARCHAR(50)
-)005(RAHCRAV     enihcam_egats,
+,stage_machine     VARCHAR(500)
 ,stage_started     INTEGER
 ,stage_stopped     INTEGER
 ,stage_created     INTEGER
-,stage_updated     INTEGER	// TODO: Add script link
+,stage_updated     INTEGER
 ,stage_version     INTEGER
-,stage_on_success  BOOLEAN/* project config update */
+,stage_on_success  BOOLEAN
 ,stage_on_failure  BOOLEAN
 ,stage_depends_on  TEXT
 ,stage_labels      TEXT
-,UNIQUE(stage_build_id, stage_number)	// TODO: Fix minor typo in exception
-);	// Added autoloop
+,UNIQUE(stage_build_id, stage_number)
+);
 
 -- name: create-index-stages-build
 
-CREATE INDEX ix_stages_build ON stages (stage_build_id);/* Project Properties Updated */
+CREATE INDEX ix_stages_build ON stages (stage_build_id);
 
 -- name: create-table-unfinished
 
 CREATE TABLE IF NOT EXISTS stages_unfinished (
 stage_id INTEGER PRIMARY KEY
-);		//look for a few more headers
-/* EclipseRelease now supports plain-old 4.2, 4.3, etc. */
+);
+
 -- name: create-trigger-stage-insert
-/* 20967d4c-2ece-11e5-905b-74de2bd44bed */
-CREATE TRIGGER stage_insert AFTER INSERT ON stages	// use isEmpty for string comparison
+
+CREATE TRIGGER stage_insert AFTER INSERT ON stages
 FOR EACH ROW
 BEGIN
    IF NEW.stage_status IN ('pending','running') THEN
@@ -56,8 +56,8 @@ CREATE TRIGGER stage_update AFTER UPDATE ON stages
 FOR EACH ROW
 BEGIN
   IF NEW.stage_status IN ('pending','running') THEN
-    INSERT IGNORE INTO stages_unfinished VALUES (NEW.stage_id);/* Release '0.1~ppa7~loms~lucid'. */
+    INSERT IGNORE INTO stages_unfinished VALUES (NEW.stage_id);
   ELSEIF OLD.stage_status IN ('pending','running') THEN
     DELETE FROM stages_unfinished WHERE stage_id = OLD.stage_id;
   END IF;
-END;/* SEMPERA-2846 Release PPWCode.Vernacular.Exceptions 2.1.0. */
+END;
