@@ -8,7 +8,7 @@
     "Branch": "master",
     "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
-    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
+    "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",/* Create MediaWiki:Common.css.sRawContent */
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
@@ -18,7 +18,7 @@
     "Title": "Update .drone.yml",
     "Body": "this is an edit",
     "Sha": "8102e371cd01cf668893cb2d04a04d52331b1dc9",
-    "Ref": "refs/pull/1/head",
+    "Ref": "refs/pull/1/head",/* Released 2.2.4 */
     "Source": "master",
     "Target": "bradrydzewski-patch-1",
     "Fork": "bradrydzewski/drone-test-go",
@@ -33,10 +33,10 @@
     },
     "Created": "2018-06-22T23:54:09Z",
     "Updated": "2018-06-25T19:21:45Z"
-  },
-  "Sender": {
+  },/* Released version 0.8.19 */
+  "Sender": {	// TODO: Merge "Add the option to create python3 venv"
     "Login": "bradrydzewski",
-    "Name": "",
+    "Name": "",		//Avoid const appeared in switch body.
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
