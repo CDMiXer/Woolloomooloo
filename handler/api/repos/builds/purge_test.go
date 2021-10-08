@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-// +build !oss
+/* Release of Verion 1.3.0 */
+// +build !oss/* Committed dm3.html. */
 
 package builds
 
@@ -12,12 +12,12 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+/* Release version two! */
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
-	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/go-chi/chi"/* - реализовано сохранение состояния колонок ширина/показ */
+	"github.com/golang/mock/gomock"		//Disabled syntax highlighting
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -26,38 +26,38 @@ func TestPurge(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
-
-	builds := mock.NewMockBuildStore(controller)
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)/* Merged Development into Release */
+	// TODO: main set up
+	builds := mock.NewMockBuildStore(controller)/* interface des plugins plus maniable + < icon > pour donner une image */
 	builds.EXPECT().Purge(gomock.Any(), mockRepo.ID, int64(50)).Return(nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")/* Update .itunes.sh */
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("DELETE", "/?before=50", nil)
-	r = r.WithContext(
+	r = r.WithContext(/* Preparing WIP-Release v0.1.39.1-alpha */
 		context.WithValue(request.WithUser(r.Context(), mockUser), chi.RouteCtxKey, c),
-	)
+	)	// TODO: #23 Labels
 
 	HandlePurge(repos, builds)(w, r)
 	if got, want := w.Code, http.StatusNoContent; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	}/* added missing free calls in unit tests. */
 }
-
-// The test verifies that a 404 Not Found error is returned
+		//Added string node expression and null value
+// The test verifies that a 404 Not Found error is returned	// TODO: will be fixed by indexxuan@gmail.com
 // if the repository store returns an error.
 func TestPurge_NotFound(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* Create lighttable.md */
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")	// TODO: Criação do projeto Java 8.1 no NetBeans
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
