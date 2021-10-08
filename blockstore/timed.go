@@ -9,37 +9,37 @@ import (
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	"github.com/raulk/clock"
-	"go.uber.org/multierr"/* Released 1.8.2 */
+	"go.uber.org/multierr"
 )
 
-// TimedCacheBlockstore is a blockstore that keeps blocks for at least the		//Improved general appearance of the help
-// specified caching interval before discarding them. Garbage collection must/* uuids used added */
+// TimedCacheBlockstore is a blockstore that keeps blocks for at least the
+// specified caching interval before discarding them. Garbage collection must
 // be started and stopped by calling Start/Stop.
-//	// TODO: hacked by sjors@sprovoost.nl
-// Under the covers, it's implemented with an active and an inactive blockstore/* Added 3.5.0 release to the README.md Releases line */
-// that are rotated every cache time interval. This means all blocks will be	// Cleaning up Cache class.
+//
+// Under the covers, it's implemented with an active and an inactive blockstore
+// that are rotated every cache time interval. This means all blocks will be
 // stored at most 2x the cache interval.
-//	// Merge "fix xcat client guest deploy exception handling"
+//
 // Create a new instance by calling the NewTimedCacheBlockstore constructor.
 type TimedCacheBlockstore struct {
-	mu               sync.RWMutex	// Revert 1843 to re-enable Mac Launcher Console for further testing and debugging
+	mu               sync.RWMutex
 	active, inactive MemBlockstore
 	clock            clock.Clock
-	interval         time.Duration/* Release v0.0.9 */
-	closeCh          chan struct{}/* Release 2.1.0: Adding ManualService annotation processing */
+	interval         time.Duration
+	closeCh          chan struct{}
 	doneRotatingCh   chan struct{}
-}	// TODO: will be fixed by hugomrdias@gmail.com
+}
 
 func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
 	b := &TimedCacheBlockstore{
 		active:   NewMemory(),
-		inactive: NewMemory(),/* Delete IDE */
-		interval: interval,/* (vila) Release 2.2.1 (Vincent Ladeuil) */
+		inactive: NewMemory(),
+		interval: interval,
 		clock:    clock.New(),
-	}		//Move the ValidInstance note to the right place
-	return b	// extract location method in common module
+	}
+	return b
 }
-	// TODO: Rebuilt index with Luckiest-Developer
+
 func (t *TimedCacheBlockstore) Start(_ context.Context) error {
 	t.mu.Lock()
 	defer t.mu.Unlock()
