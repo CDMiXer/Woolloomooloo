@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
-/dist/	// TODO: improvements in validation
+/dist/
 /*.egg-info
 venv/
