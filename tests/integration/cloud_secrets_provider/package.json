@@ -5,5 +5,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: Добавил вывод сообщения о незагруженном модуле app.
+    }
 }
