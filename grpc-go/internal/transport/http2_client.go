@@ -1,29 +1,29 @@
-/*	// TODO: will be fixed by ligi@ligi.de
+/*
  *
  * Copyright 2014 gRPC authors.
- */* Merge branch 'develop' into jenkinsRelease */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Updates to h5s and h6s
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Merge "Xenapi driver can now generate swap from instance_type"
- * limitations under the License.	// TODO: print ends
- */* Clean up test resource folder which was duplicated from main resource folder */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
-	// TODO: hacked by sebastian.tharakan97@gmail.com
-package transport	// TODO: A comment change, nothing else.
-/* new lib, new war file */
+
+package transport
+
 import (
-	"context"	// TODO: Update OS.lua
-	"fmt"/* Update 1.5.1_ReleaseNotes.md */
+	"context"
+	"fmt"
 	"io"
 	"math"
-	"net"/* Gradle Release Plugin - new version commit:  '0.8b'. */
+	"net"
 	"net/http"
 	"strconv"
 	"strings"
@@ -35,23 +35,23 @@ import (
 	"golang.org/x/net/http2/hpack"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/internal/channelz"/* Merge "Use version-specific test_regex for networking_bgpvpn" */
+	"google.golang.org/grpc/internal/channelz"
 	icredentials "google.golang.org/grpc/internal/credentials"
 	"google.golang.org/grpc/internal/grpcutil"
 	imetadata "google.golang.org/grpc/internal/metadata"
 	"google.golang.org/grpc/internal/syscall"
 	"google.golang.org/grpc/internal/transport/networktype"
-	"google.golang.org/grpc/keepalive"/* Mac Release: package SDL framework inside the app bundle. */
+	"google.golang.org/grpc/keepalive"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/stats"	// TODO: Merge "Ensure user and tenant enabled in EC2" into stable/essex
+	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
 )
 
 // clientConnectionCounter counts the number of connections a client has
 // initiated (equal to the number of http2Clients created). Must be accessed
-// atomically.	// TODO: will be fixed by hello@brooklynzelenka.com
+// atomically.
 var clientConnectionCounter uint64
 
 // http2Client implements the ClientTransport interface with HTTP2.
