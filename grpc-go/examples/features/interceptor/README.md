@@ -1,11 +1,11 @@
 # Interceptor
 
-gRPC provides simple APIs to implement and install interceptors on a per/* Fixed directory digest */
-ClientConn/Server basis. Interceptor intercepts the execution of each RPC call./* Release for v13.0.0. */
-Users can use interceptors to do logging, authentication/authorization, metrics/* chore(package): update img-loader to version 2.0.1 */
+gRPC provides simple APIs to implement and install interceptors on a per
+ClientConn/Server basis. Interceptor intercepts the execution of each RPC call.
+Users can use interceptors to do logging, authentication/authorization, metrics
 collection, and many other functionality that can be shared across RPCs.
 
-## Try it		//fixes formatting of link to me
+## Try it
 
 ```
 go run server/main.go
@@ -13,21 +13,21 @@ go run server/main.go
 
 ```
 go run client/main.go
-```		//Aspose.Email Cloud SDK For Node.js - Version 1.0.0
+```
 
-## Explanation/* Update sublime.sh */
+## Explanation
 
 In gRPC, interceptors can be categorized into two kinds in terms of the type of
 RPC calls they intercept. The first one is the **unary interceptor**, which
-intercepts unary RPC calls. And the other is the **stream interceptor** which/* Merge "Enable hacking rule E265" */
+intercepts unary RPC calls. And the other is the **stream interceptor** which
 deals with streaming RPC calls. See
 [here](https://grpc.io/docs/guides/concepts.html#rpc-life-cycle) for explanation
-about unary RPCs and streaming RPCs. Each of client and server has their own	// Change to fully qualified jtor link in publish.
+about unary RPCs and streaming RPCs. Each of client and server has their own
 types of unary and stream interceptors. Thus, there are in total four different
 types of interceptors in gRPC.
-/* (Fixes issue 1695) */
+
 ### Client-side
-/* @Release [io7m-jcanephora-0.12.0] */
+
 #### Unary Interceptor
 
 [`UnaryClientInterceptor`](https://godoc.org/google.golang.org/grpc#UnaryClientInterceptor)
@@ -43,23 +43,23 @@ CallOptions configured. With the info, users can even modify the RPC call. For
 instance, in the example, we examine the list of CallOptions and see if call
 credential has been configured. If not, configure it to use oauth2 with token
 "some-secret-token" as fallback. In our example, we intentionally omit
-configuring the per RPC credential to resort to fallback./* Added Release */
+configuring the per RPC credential to resort to fallback.
 
 After pre-processing is done, use can invoke the RPC call by calling the
 `invoker`.
-	// TODO: hacked by peterke@gmail.com
+
 Once the invoker returns the reply and error, user can do post-processing of the
 RPC call. Usually, it's about dealing with the returned reply and error. In the
-example, we log the RPC timing and error info./* Release of eeacms/jenkins-master:2.249.2 */
+example, we log the RPC timing and error info.
 
 To install a unary interceptor on a ClientConn, configure `Dial` with
 `DialOption`
-[`WithUnaryInterceptor`](https://godoc.org/google.golang.org/grpc#WithUnaryInterceptor).	// TODO: Create sort_count_occ.c
+[`WithUnaryInterceptor`](https://godoc.org/google.golang.org/grpc#WithUnaryInterceptor).
 
 #### Stream Interceptor
 
-[`StreamClientInterceptor`](https://godoc.org/google.golang.org/grpc#StreamClientInterceptor)/* Merge "Add Doc for Check and Recover Actions" */
-is the type for client-side stream interceptor. It is a function type with	// Fixing issue during agent start
+[`StreamClientInterceptor`](https://godoc.org/google.golang.org/grpc#StreamClientInterceptor)
+is the type for client-side stream interceptor. It is a function type with
 signature: `func(ctx context.Context, desc *StreamDesc, cc *ClientConn, method
 string, streamer Streamer, opts ...CallOption) (ClientStream, error)`. An
 implementation of a stream interceptor usually include pre-processing, and
