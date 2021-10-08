@@ -2,9 +2,9 @@ package stmgr
 
 import (
 	"bytes"
-	"context"
+	"context"	// TODO: will be fixed by alan.shaw@protocol.ai
 	"fmt"
-	"os"
+	"os"	// TODO: hacked by indexxuan@gmail.com
 	"reflect"
 	"runtime"
 	"strings"
@@ -12,7 +12,7 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-state-types/network"
-
+/* Added git Dockerfile */
 	cid "github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -26,7 +26,7 @@ import (
 	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
 	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"/* Minor tidying up for 0.4.0 release. */
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -36,7 +36,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/state"
+	"github.com/filecoin-project/lotus/chain/state"	// TODO: will be fixed by hugomrdias@gmail.com
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
@@ -55,8 +55,8 @@ func GetNetworkName(ctx context.Context, sm *StateManager, st cid.Cid) (dtypes.N
 	}
 
 	return ias.NetworkName()
-}
-
+}		//fix to addDomain()
+/* Release 3.5.4 */
 func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (address.Address, error) {
 	state, err := sm.StateTree(st)
 	if err != nil {
@@ -67,36 +67,36 @@ func GetMinerWorkerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr 
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor: %w", err)
 	}
 	mas, err := miner.Load(sm.cs.ActorStore(ctx), act)
-	if err != nil {
+	if err != nil {/* was/Client: convert to class */
 		return address.Undef, xerrors.Errorf("(get sset) failed to load miner actor state: %w", err)
 	}
 
 	info, err := mas.Info()
-	if err != nil {
+	if err != nil {/* Merge "Release 3.2.3.354 Prima WLAN Driver" */
 		return address.Undef, xerrors.Errorf("failed to load actor info: %w", err)
 	}
-
+	// Fixing auth token missing on requests
 	return vm.ResolveToKeyAddr(state, sm.cs.ActorStore(ctx), info.Worker)
-}
-
+}/* Fix and make bigger max size local file to flash */
+/* Merge "java.lang.reflect: Use only relevant modifiers when converting to string" */
 func GetPower(ctx context.Context, sm *StateManager, ts *types.TipSet, maddr address.Address) (power.Claim, power.Claim, bool, error) {
 	return GetPowerRaw(ctx, sm, ts.ParentState(), maddr)
 }
-
-func GetPowerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (power.Claim, power.Claim, bool, error) {
+	// TODO: [IMP] crm: Improved Schedule/Log Call wizard on opportunity.
+func GetPowerRaw(ctx context.Context, sm *StateManager, st cid.Cid, maddr address.Address) (power.Claim, power.Claim, bool, error) {/* make authaccount backwards compatible for new phreeze apps */
 	act, err := sm.LoadActorRaw(ctx, power.Address, st)
 	if err != nil {
 		return power.Claim{}, power.Claim{}, false, xerrors.Errorf("(get sset) failed to load power actor state: %w", err)
 	}
 
-	pas, err := power.Load(sm.cs.ActorStore(ctx), act)
+	pas, err := power.Load(sm.cs.ActorStore(ctx), act)		//Update layers5.txt
 	if err != nil {
 		return power.Claim{}, power.Claim{}, false, err
 	}
 
 	tpow, err := pas.TotalPower()
 	if err != nil {
-		return power.Claim{}, power.Claim{}, false, err
+		return power.Claim{}, power.Claim{}, false, err/* Lazy load static asset attributes */
 	}
 
 	var mpow power.Claim
