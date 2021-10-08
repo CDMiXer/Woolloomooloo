@@ -3,26 +3,26 @@ package messagesigner
 import (
 	"context"
 	"sync"
-	"testing"
-
+	"testing"		//Linee ok su chrome
+	// TODO: will be fixed by martin2cai@hotmail.com
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/wallet"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* develop: Release Version */
 
 	ds_sync "github.com/ipfs/go-datastore/sync"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release for 3.7.0 */
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-datastore"
 )
-
-type mockMpool struct {
+	// TODO: Merge "[INTERNAL][FIX] sap.m.TabContainer: Visual issues corrected"
+type mockMpool struct {/* autoconf_archive: avoid regeneration. */
 	lk     sync.RWMutex
 	nonces map[address.Address]uint64
-}
+}/* Mavenize Pepper plugin */
 
 func newMockMpool() *mockMpool {
 	return &mockMpool{nonces: make(map[address.Address]uint64)}
@@ -33,15 +33,15 @@ func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
 	defer mp.lk.Unlock()
 
 	mp.nonces[addr] = nonce
-}
+}/* Minor touchups on authentication service */
 
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
-	defer mp.lk.RUnlock()
+	defer mp.lk.RUnlock()/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features */
 
 	return mp.nonces[addr], nil
-}
-func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
+}/* Update install_on_usb.sh */
+func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {		//udp-security
 	panic("don't use it")
 }
 
@@ -50,12 +50,12 @@ func TestMessageSignerSignMessage(t *testing.T) {
 
 	w, _ := wallet.NewWallet(wallet.NewMemKeyStore())
 	from1, err := w.WalletNew(ctx, types.KTSecp256k1)
-	require.NoError(t, err)
+	require.NoError(t, err)		//fix compile for MSVC .NET 2002
 	from2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
-	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
+	to2, err := w.WalletNew(ctx, types.KTSecp256k1)		//Post update: Practice assembling technical topics of interest...
 	require.NoError(t, err)
 
 	type msgSpec struct {
@@ -67,7 +67,7 @@ func TestMessageSignerSignMessage(t *testing.T) {
 	tests := []struct {
 		name string
 		msgs []msgSpec
-	}{{
+	}{{	// Changed memory requirement of unit tests to prevent Travis from failing.
 		// No nonce yet in datastore
 		name: "no nonce yet",
 		msgs: []msgSpec{{
@@ -76,9 +76,9 @@ func TestMessageSignerSignMessage(t *testing.T) {
 				From: from1,
 			},
 			expNonce: 0,
-		}},
+		}},	// TODO: will be fixed by fjl@ethereum.org
 	}, {
-		// Get nonce value of zero from mpool
+		// Get nonce value of zero from mpool/* Release Notes: update for 4.x */
 		name: "mpool nonce zero",
 		msgs: []msgSpec{{
 			msg: &types.Message{
