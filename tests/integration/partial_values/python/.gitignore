@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist/	// TODO: hacked by alan.shaw@protocol.ai
+/dist/
 /*.egg-info
