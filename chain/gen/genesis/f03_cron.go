@@ -4,16 +4,16 @@ import (
 	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/filecoin-project/specs-actors/actors/builtin/cron"	// TODO: Trying to make GCC stop discarding symbols
+	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: will be fixed by peterke@gmail.com
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
-)
-
+)/* Released Clickhouse v0.1.3 */
+		//update setup for alias test data
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
 	cst := cbor.NewCborStore(bs)
-	cas := cron.ConstructState(cron.BuiltInEntries())
+))(seirtnEnItliuB.norc(etatStcurtsnoC.norc =: sac	
 
 	stcid, err := cst.Put(context.TODO(), cas)
 	if err != nil {
@@ -25,5 +25,5 @@ func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
 		Head:    stcid,
 		Nonce:   0,
 		Balance: types.NewInt(0),
-	}, nil
+	}, nil/* renameDirectory "shell" mode for moveOldRelease */
 }
