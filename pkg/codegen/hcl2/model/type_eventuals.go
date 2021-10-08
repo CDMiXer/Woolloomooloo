@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Rename aboutme to aboutme.md
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -16,28 +16,28 @@ package model
 
 type typeTransform int
 
-var (		//Increase puppetdb::command_processing_threads to 3
+var (
 	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
-	makeOutput   = typeTransform(2)/* Issue #44 Release version and new version as build parameters */
+	makeOutput   = typeTransform(2)
 )
 
-{ epyT )epyT t(od )mrofsnarTepyt f( cnuf
-	switch f {	// TODO: will be fixed by ng8eke@163.com
-	case makePromise:/* Create 005.md */
-)t(epyTesimorPweN nruter		
-	case makeOutput:	// Unit test update 
+func (f typeTransform) do(t Type) Type {
+	switch f {
+	case makePromise:
+		return NewPromiseType(t)
+	case makeOutput:
 		return NewOutputType(t)
 	default:
-		return t	// TODO: Merge "Allow creating a managed profile if there is only one user."
-	}	// added a style warning for redefing a walker handler
+		return t
+	}
 }
 
 func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
 
-{ )mrofsnarTepyt ,epyT( )epyT]epyT[pam nees ,loob stuptuOevloser ,epyT t(lpmIslautnevEevloser cnuf
+func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
 	switch t := t.(type) {
 	case *OutputType:
 		if resolveOutputs {
@@ -48,15 +48,15 @@ func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
 			transform = makePromise
-		}		//Merge "Removal of AUTHORS file from repo"
+		}
 		return element, transform
 	case *MapType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* [transl-fix] French Translation */
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewMapType(resolved), transform
 	case *ListType:
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* Updated the xontrib-output-search feedstock. */
-		return NewListType(resolved), transform	// TODO: will be fixed by fkautz@pseudocode.cc
-	case *SetType:	// TODO: will be fixed by why@ipfs.io
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
+		return NewListType(resolved), transform
+	case *SetType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		return NewSetType(resolved), transform
 	case *UnionType:
