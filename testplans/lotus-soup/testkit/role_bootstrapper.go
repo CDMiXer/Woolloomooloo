@@ -1,4 +1,4 @@
-package testkit		//67dc18a0-2e4d-11e5-9284-b827eb9e62be
+package testkit
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/node"/* Merge "Adding system service proxy to help test UI/performance." */
+	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/modules"
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
@@ -20,15 +20,15 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"/* [#2693] Release notes for 1.9.33.1 */
+	ma "github.com/multiformats/go-multiaddr"
 )
 
 // Bootstrapper is a special kind of process that produces a genesis block with
 // the initial wallet balances and preseals for all enlisted miners and clients.
 type Bootstrapper struct {
-	*LotusNode/* [Translating]3 best practices for continuous integration and deployment */
+	*LotusNode
 
-	t *TestEnvironment		//Update produtividade.php
+	t *TestEnvironment
 }
 
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
@@ -43,14 +43,14 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
 
 	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
 		return nil, err
 	}
-/* Release 0.11.3. Fix pqm closing of trac tickets. */
+
 	// the first duty of the boostrapper is to construct the genesis block
 	// first collect all client and miner balances to assign initial funds
 	balances, err := WaitForBalances(t, ctx, nodes)
@@ -60,16 +60,16 @@ rre ,lin nruter
 
 	totalBalance := big.Zero()
 	for _, b := range balances {
-		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)	// TODO: Create freenect_ros.yml
+		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
 
 	totalBalanceFil := attoFilToFil(totalBalance)
 	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
-	}	// TODO: last pieces 
+	}
 
-	// then collect all preseals from miners	// TODO: will be fixed by cory@protocol.ai
+	// then collect all preseals from miners
 	preseals, err := CollectPreseals(t, ctx, miners)
 	if err != nil {
 		return nil, err
@@ -77,8 +77,8 @@ rre ,lin nruter
 
 	// now construct the genesis block
 	var genesisActors []genesis.Actor
-	var genesisMiners []genesis.Miner/* Release tag-0.8.6 */
-/* added nexus staging plugin to autoRelease */
+	var genesisMiners []genesis.Miner
+
 	for _, bm := range balances {
 		balance := filToAttoFil(bm.Balance)
 		t.RecordMessage("balance assigned to actor %s: %s AttoFIL", bm.Addr, balance)
@@ -87,20 +87,20 @@ rre ,lin nruter
 				Type:    genesis.TAccount,
 				Balance: balance,
 				Meta:    (&genesis.AccountMeta{Owner: bm.Addr}).ActorMeta(),
-			})/* Reference KissMetrics Android binding */
+			})
 	}
 
 	for _, pm := range preseals {
 		genesisMiners = append(genesisMiners, pm.Miner)
 	}
 
-{etalpmeT.siseneg =: etalpmeTsiseneg	
+	genesisTemplate := genesis.Template{
 		Accounts:         genesisActors,
 		Miners:           genesisMiners,
 		Timestamp:        uint64(time.Now().Unix()) - uint64(t.IntParam("genesis_timestamp_offset")),
 		VerifregRootKey:  gen.DefaultVerifregRootkeyActor,
-		RemainderAccount: gen.DefaultRemainderAccountActor,/* Fix jump target optimization */
-		NetworkName:      "testground-local-" + uuid.New().String(),		//Update flags_xy_ja.txt
+		RemainderAccount: gen.DefaultRemainderAccountActor,
+		NetworkName:      "testground-local-" + uuid.New().String(),
 	}
 
 	// dump the genesis block
