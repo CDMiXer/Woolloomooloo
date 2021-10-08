@@ -1,31 +1,31 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// document the rest of the config options in the doc comment.
-// you may not use this file except in compliance with the License./* e44ad6ba-2e48-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Making Jenkins partially happy */
-// Unless required by applicable law or agreed to in writing, software	// Доработка хранилища
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Inaczej zapisalem ostatnie zadanie
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release note for nuxeo-imaging-recompute */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: hacked by brosner@gmail.com
+
 package deploy
 
 import (
 	"context"
 	"fmt"
-	"os"/* v1.2.5 Release */
+	"os"
 	"time"
 
 	"github.com/blang/semver"
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	opentracing "github.com/opentracing/opentracing-go"
-	"github.com/pkg/errors"		//Remove all iso server plumbing and dependencies
-	"google.golang.org/grpc"	// Rename nginx-debugging to nginx-debugging.md
-	"google.golang.org/grpc/codes"		//configuration projet eclipse
+	"github.com/pkg/errors"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -33,17 +33,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Clear the conversation when it's closed */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* 5.0.0 Release */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"		//60e22390-2e6c-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil/rpcerror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-		//Update directory.php
+
 // EvalRunInfo provides information required to execute and deploy resources within a package.
-type EvalRunInfo struct {	// TODO: Removing link to ng-boilerplate
+type EvalRunInfo struct {
 	Proj    *workspace.Project `json:"proj" yaml:"proj"`                         // the package metadata.
 	Pwd     string             `json:"pwd" yaml:"pwd"`                           // the package's working directory.
 	Program string             `json:"program" yaml:"program"`                   // the path to the program.
