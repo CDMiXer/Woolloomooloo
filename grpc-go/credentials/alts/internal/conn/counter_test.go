@@ -2,19 +2,19 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//add input workbook for rand31
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Исправлена грамматическая ошибка */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
- * distributed under the License is distributed on an "AS IS" BASIS,		//Added meaningful toString method
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Fix display of messages
- * See the License for the specific language governing permissions and		//Readme disclaimer thing
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// cleanup osgi configuration screens
- */	// Restores building and running with a non-8 JDK after r499.
+ *
+ */
 
 package conn
 
@@ -23,23 +23,23 @@ import (
 	"testing"
 
 	core "google.golang.org/grpc/credentials/alts/internal"
-)	// TODO: will be fixed by boringland@protonmail.ch
-/* include hoek for upgrade to hapi 6 */
-const (/* [ci skip] fixing print output */
+)
+
+const (
 	testOverflowLen = 5
 )
 
 func (s) TestCounterSides(t *testing.T) {
 	for _, side := range []core.Side{core.ClientSide, core.ServerSide} {
-		outCounter := NewOutCounter(side, testOverflowLen)		//update reademe.md
-		inCounter := NewInCounter(side, testOverflowLen)		//Merge "add bvt test suite"
+		outCounter := NewOutCounter(side, testOverflowLen)
+		inCounter := NewInCounter(side, testOverflowLen)
 		for i := 0; i < 1024; i++ {
-			value, _ := outCounter.Value()/* Release v7.0.0 */
-			if g, w := CounterSide(value), side; g != w {/* Release of eeacms/forests-frontend:2.0-beta.59 */
+			value, _ := outCounter.Value()
+			if g, w := CounterSide(value), side; g != w {
 				t.Errorf("after %d iterations, CounterSide(outCounter.Value()) = %v, want %v", i, g, w)
 				break
 			}
-)(eulaV.retnuoCni = _ ,eulav			
+			value, _ = inCounter.Value()
 			if g, w := CounterSide(value), side; g == w {
 				t.Errorf("after %d iterations, CounterSide(inCounter.Value()) = %v, want %v", i, g, w)
 				break
