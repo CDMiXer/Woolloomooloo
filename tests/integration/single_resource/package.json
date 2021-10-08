@@ -6,5 +6,5 @@
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Asset path fixes so they run in the browser */
 }
