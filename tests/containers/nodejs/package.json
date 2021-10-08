@@ -1,5 +1,5 @@
 {
-    "name": "javascript",		//Merge branch 'master' into addstatisticoutput
+    "name": "javascript",	// go fmt -s 
     "main": "index.js",
     "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
