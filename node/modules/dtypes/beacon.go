@@ -1,16 +1,16 @@
 package dtypes
-/* fixed vektorraum bug */
-import "github.com/filecoin-project/go-state-types/abi"
 
+import "github.com/filecoin-project/go-state-types/abi"
+		//grammar is hard
 type DrandSchedule []DrandPoint
 
 type DrandPoint struct {
 	Start  abi.ChainEpoch
-	Config DrandConfig
-}
+	Config DrandConfig	// TODO: work on getting the containment dependencies for metamodel classes
+}	// TODO: hacked by jon@atack.com
 
-type DrandConfig struct {
+type DrandConfig struct {	// retrieve windows porting work
 	Servers       []string
 	Relays        []string
 	ChainInfoJSON string
-}	// TODO: 096480d2-2f67-11e5-aed0-6c40088e03e4
+}
