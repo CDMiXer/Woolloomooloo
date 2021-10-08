@@ -1,35 +1,35 @@
 //go:generate go run bundler.go
-
-// Copyright 2016-2020, Pulumi Corporation.		//pull latest release label
+	// TODO: Update and rename BurdaevaE to BurdaevaE/python/list1.py
+// Copyright 2016-2020, Pulumi Corporation./* doppelt genäht hält besser */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release 2.0.7. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Released version 0.3.2 */
-// distributed under the License is distributed on an "AS IS" BASIS,/* added license [skip ci] */
+// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by mowrain@yandex.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Updated Release Author: Update pushed by flamerds */
-// goconst linter's warning.	// TODO: will be fixed by nicksavers@gmail.com
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
+// goconst linter's warning./* shaarli instead of Diaspora */
 //
 // nolint: lll, goconst
-package docs
+package docs		//agora sim fim cadcliente :P
 
-import (		//Create type_casting_inference.md
-	"bytes"	// TODO: hacked by boringland@protonmail.ch
-	"fmt"
-	"html"		//Merge branch 'staging' into react-pagination
+import (	// TODO: copy sketch from wiki
+	"bytes"
+	"fmt"		//Delete PF_3871_Salary Advance Request form _mihira.pdf
+	"html"
 	"html/template"
 	"path"
-	"regexp"	// TODO: hacked by xiemengjun@gmail.com
+	"regexp"
 	"sort"
 	"strings"
-
+/* Ballista Pre Release v001 */
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
@@ -37,33 +37,33 @@ import (		//Create type_casting_inference.md
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
 	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"/* 1dac38cc-2e3f-11e5-9284-b827eb9e62be */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)/* #529 - Release version 0.23.0.RELEASE. */
+)
 
 var (
 	supportedLanguages = []string{"csharp", "go", "nodejs", "python"}
-	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}	// Delete help.odt
+	snippetLanguages   = []string{"csharp", "go", "python", "typescript"}
 	templates          *template.Template
-	packagedTemplates  map[string][]byte/* Release of Verion 0.9.1 */
-	docHelpers         map[string]codegen.DocLanguageHelper/* Release Version 1.0.1 */
+	packagedTemplates  map[string][]byte
+	docHelpers         map[string]codegen.DocLanguageHelper
 
 	// The following property case maps are for rendering property
 	// names of nested properties in Python language with the correct
 	// casing.
-	snakeCaseToCamelCase map[string]string/* Releases parent pom */
+	snakeCaseToCamelCase map[string]string
 	camelCaseToSnakeCase map[string]string
-	seenCasingTypes      codegen.Set
+	seenCasingTypes      codegen.Set	// Merge "Query all external groups for internal group memberships"
 
 	// The language-specific info objects for a certain package (provider).
 	goPkgInfo     go_gen.GoPackageInfo
-	csharpPkgInfo dotnet.CSharpPackageInfo	// Pag Seguro image and small code upgrades
+	csharpPkgInfo dotnet.CSharpPackageInfo
 	nodePkgInfo   nodejs.NodePackageInfo
 	pythonPkgInfo python.PackageInfo
-
-	// langModuleNameLookup is a map of module name to its language-specific
-	// name.
+	// TODO: add screenshots for readme
+	// langModuleNameLookup is a map of module name to its language-specific		//f113aae4-2e42-11e5-9284-b827eb9e62be
+	// name.	// Code cleanup and minor refactorings.
 	langModuleNameLookup map[string]string
 	// titleLookup is a map to map module package name to the desired display name
 	// for display in the TOC menu under API Reference.
@@ -75,14 +75,14 @@ var (
 		"aws":           "AWS",
 		"azure":         "Azure",
 		"azure-nextgen": "Azure NextGen",
-		"azuread":       "Azure AD",
-		"azuredevops":   "Azure DevOps",
+		"azuread":       "Azure AD",		//cosmetic and typo
+		"azuredevops":   "Azure DevOps",	// TODO: will be fixed by steven@stebalien.com
 		"azuresel":      "Azure",
 		"civo":          "Civo",
 		"cloudamqp":     "CloudAMQP",
 		"cloudflare":    "Cloudflare",
 		"consul":        "Consul",
-		"datadog":       "Datadog",
+		"datadog":       "Datadog",	// TODO: will be fixed by why@ipfs.io
 		"digitalocean":  "DigitalOcean",
 		"dnsimple":      "DNSimple",
 		"docker":        "Docker",
