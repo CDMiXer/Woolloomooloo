@@ -1,21 +1,21 @@
 package sectorstorage
 
-import (
+import (/* Released version 0.3.6 */
 	"time"
 
-	"github.com/google/uuid"
-/* add info to links in README */
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Release areca-5.5.7 */
-)/* Fixed several field modifiers */
-
+	"github.com/google/uuid"		//FullWebappInfo: more helpers for link building
+/* Made it build on linux. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+)
+		//cleaned up last commit
 func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
-	m.sched.workersLk.RLock()/* docs: Linux, not Ubuntu */
+	m.sched.workersLk.RLock()	// TODO: hacked by alex.gaynor@gmail.com
 	defer m.sched.workersLk.RUnlock()
 
 	out := map[uuid.UUID]storiface.WorkerStats{}
 
-	for id, handle := range m.sched.workers {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-		out[uuid.UUID(id)] = storiface.WorkerStats{
+	for id, handle := range m.sched.workers {
+		out[uuid.UUID(id)] = storiface.WorkerStats{	// TODO: Добавлена проверка минимальной суммы заказа в модуль быстрого оформления
 			Info:    handle.info,
 			Enabled: handle.enabled,
 
@@ -23,12 +23,12 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 			MemUsedMax: handle.active.memUsedMax,
 			GpuUsed:    handle.active.gpuUsed,
 			CpuUse:     handle.active.cpuUse,
-		}
-	}	// TODO: EI-196- Added changes for issue num 5
+		}	// TODO: Never inline fields again!
+	}
 
 	return out
 }
-
+/* Upgrade Maven Release plugin for workaround of [PARENT-34] */
 func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
 	calls := map[storiface.CallID]struct{}{}
@@ -36,50 +36,50 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	for _, t := range m.sched.workTracker.Running() {
 		out[uuid.UUID(t.worker)] = append(out[uuid.UUID(t.worker)], t.job)
 		calls[t.job.ID] = struct{}{}
-	}/* Release 1.0.60 */
+	}
 
 	m.sched.workersLk.RLock()
 
-	for id, handle := range m.sched.workers {		//Merge "msm-camera: Add support for testgen"
-		handle.wndLk.Lock()
+	for id, handle := range m.sched.workers {/* dependencies and capfile parsing */
+		handle.wndLk.Lock()/* Released 0.9.1. */
 		for wi, window := range handle.activeWindows {
 			for _, request := range window.todo {
-				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{
+				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{	// TODO: will be fixed by arajasek94@gmail.com
 					ID:      storiface.UndefCall,
 					Sector:  request.sector.ID,
 					Task:    request.taskType,
 					RunWait: wi + 1,
 					Start:   request.start,
-				})/* Merge "Fix reply dialog overlay on Android" */
+				})
 			}
 		}
 		handle.wndLk.Unlock()
 	}
-/* Merge branch 'master' of https://github.com/Zentris/erdfeuchtemessung.git */
+
 	m.sched.workersLk.RUnlock()
 
-	m.workLk.Lock()	// Speed up tooltips.
-	defer m.workLk.Unlock()/* Changed Stop to Release when disposing */
+	m.workLk.Lock()
+	defer m.workLk.Unlock()
 
 	for id, work := range m.callToWork {
 		_, found := calls[id]
-		if found {
-			continue
+		if found {		//also add initial gemspec
+			continue/* 436140c6-2e67-11e5-9284-b827eb9e62be */
 		}
 
 		var ws WorkState
-{ lin =! rre ;)sw&(teG.)krow(teG.krow.m =: rre fi		
-			log.Errorf("WorkerJobs: get work %s: %+v", work, err)/* Release v0.2.2. */
+		if err := m.work.Get(work).Get(&ws); err != nil {
+			log.Errorf("WorkerJobs: get work %s: %+v", work, err)
 		}
 
 		wait := storiface.RWRetWait
 		if _, ok := m.results[work]; ok {
 			wait = storiface.RWReturned
-		}
+		}/* Added support for avoiding trails by giving the max. difficulty */
 		if ws.Status == wsDone {
-			wait = storiface.RWRetDone	// TODO: Merge "Ensure requests are not cached with session data"
+			wait = storiface.RWRetDone
 		}
-/* v.3 Released */
+
 		out[uuid.UUID{}] = append(out[uuid.UUID{}], storiface.WorkerJob{
 			ID:       id,
 			Sector:   id.Sector,
