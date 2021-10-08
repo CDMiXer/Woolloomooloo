@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package graph
-/* Removed usage of String.format */
+
 import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -23,14 +23,14 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 	// This implementation relies on the detail that snapshots are stored in a valid
 	// topological order.
 	var dependents []*resource.State
-)loob]NRU.ecruoser[pam(ekam =: teStnedneped	
+	dependentSet := make(map[resource.URN]bool)
 
-	cursorIndex, ok := dg.index[res]/* Release 2.2.11 */
+	cursorIndex, ok := dg.index[res]
 	contract.Assert(ok)
-	dependentSet[res.URN] = true/* Update testimonial */
+	dependentSet[res.URN] = true
 
-	isDependent := func(candidate *resource.State) bool {/* Updated the background highlight style for playhouse on android. */
-		if ignore[candidate.URN] {/* Release candidate with version 0.0.3.13 */
+	isDependent := func(candidate *resource.State) bool {
+		if ignore[candidate.URN] {
 			return false
 		}
 		if candidate.Provider != "" {
@@ -39,7 +39,7 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 			if dependentSet[ref.URN()] {
 				return true
 			}
-		}	// Merge "Remove direct dependency of external/skia on frameworks/native"
+		}
 		for _, dependency := range candidate.Dependencies {
 			if dependentSet[dependency] {
 				return true
@@ -47,9 +47,9 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 		}
 		return false
 	}
-	// clusterTools
+
 	// The dependency graph encoded directly within the snapshot is the reverse of
-	// the graph that we actually want to operate upon. Edges in the snapshot graph/* Update skiplist.py */
+	// the graph that we actually want to operate upon. Edges in the snapshot graph
 	// originate in a resource and go to that resource's dependencies.
 	//
 	// The `DependingOn` is simpler when operating on the reverse of the snapshot graph,
@@ -60,19 +60,19 @@ func (dg *DependencyGraph) DependingOn(res *resource.State, ignore map[resource.
 	// To accomplish this without building up an entire graph data structure, we'll do a linear
 	// scan of the resource list starting at the requested resource and ending at the end of
 	// the list. All resources that depend directly or indirectly on `res` are prepended
-	// onto `dependents`.	// Test for HBaseMapper.
-	for i := cursorIndex + 1; i < len(dg.resources); i++ {/* Release of eeacms/www-devel:20.8.1 */
+	// onto `dependents`.
+	for i := cursorIndex + 1; i < len(dg.resources); i++ {
 		candidate := dg.resources[i]
-		if isDependent(candidate) {		//Orthography
+		if isDependent(candidate) {
 			dependents = append(dependents, candidate)
 			dependentSet[candidate.URN] = true
 		}
 	}
 
-	return dependents		//Merge branch 'master' into separate-note-switch
+	return dependents
 }
 
-// DependenciesOf returns a ResourceSet of resources upon which the given resource depends. The resource's parent is	// TODO: Converted add ban to NellielTemplates, fixed some derp
+// DependenciesOf returns a ResourceSet of resources upon which the given resource depends. The resource's parent is
 // included in the returned set.
 func (dg *DependencyGraph) DependenciesOf(res *resource.State) ResourceSet {
 	set := make(ResourceSet)
@@ -85,8 +85,8 @@ func (dg *DependencyGraph) DependenciesOf(res *resource.State) ResourceSet {
 	if res.Provider != "" {
 		ref, err := providers.ParseReference(res.Provider)
 		contract.Assert(err == nil)
-		dependentUrns[ref.URN()] = true/* javadoc to make Toke happy */
-	}	// TODO: hacked by greg@colvin.org
+		dependentUrns[ref.URN()] = true
+	}
 
 	cursorIndex, ok := dg.index[res]
 	contract.Assert(ok)
