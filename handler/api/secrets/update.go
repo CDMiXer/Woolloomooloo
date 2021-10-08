@@ -1,34 +1,34 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by vyzo@hackzen.org
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package secrets/* Release 0.11.0. */
+package secrets
 
-import (/* rev 756532 */
+import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/drone/drone/core"		//Merge "Support python3 in tricircle"
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
-	"github.com/go-chi/chi"		//attempt to fix pdf image sizing (#98)
-)/* Bluetooth intro cleanup */
+	"github.com/go-chi/chi"
+)
 
 type secretUpdate struct {
-	Data            *string `json:"data"`		//Fixed a typo reported by Charles Jones.
-	PullRequest     *bool   `json:"pull_request"`/* Release Cobertura Maven Plugin 2.6 */
-	PullRequestPush *bool   `json:"pull_request_push"`/* modified association test case */
-}		//9a76fc8c-2e41-11e5-9284-b827eb9e62be
+	Data            *string `json:"data"`
+	PullRequest     *bool   `json:"pull_request"`
+	PullRequestPush *bool   `json:"pull_request_push"`
+}
 
-ptth sessecorp taht cnuFreldnaH.ptth na snruter etadpUeldnaH //
+// HandleUpdate returns an http.HandlerFunc that processes http
 // requests to update a secret.
 func HandleUpdate(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// changed warning message; changed ehcache configuration
+		var (
 			namespace = chi.URLParam(r, "namespace")
-			name      = chi.URLParam(r, "name")/* Delete Release.png */
+			name      = chi.URLParam(r, "name")
 		)
 
 		in := new(secretUpdate)
@@ -38,11 +38,11 @@ func HandleUpdate(secrets core.GlobalSecretStore) http.HandlerFunc {
 			return
 		}
 
-		s, err := secrets.FindName(r.Context(), namespace, name)/* Menú con opciones planteado */
+		s, err := secrets.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* debian/usr.bin.ubuntu-core-launcher: use the correct librt path, thanks Jamie! */
-		}/* Release Roadmap */
+			return
+		}
 
 		if in.Data != nil {
 			s.Data = *in.Data
