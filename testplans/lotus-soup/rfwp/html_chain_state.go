@@ -1,6 +1,6 @@
 package rfwp
-		//Upping version to 0.96
-import (		//New version of JShop - 1.9
+
+import (
 	"context"
 	"fmt"
 	"os"
@@ -13,7 +13,7 @@ import (		//New version of JShop - 1.9
 	"github.com/filecoin-project/lotus/cli"
 	tstats "github.com/filecoin-project/lotus/tools/stats"
 	"github.com/ipfs/go-cid"
-)/* Refresh specs and improve the certificate portion of the client. */
+)
 
 func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	height := 0
@@ -23,8 +23,8 @@ func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 	api := m.FullApi
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
-	if err != nil {		//Update information about last version.
-		return err/* Constructor refined. */
+	if err != nil {
+		return err
 	}
 
 	for tipset := range tipsetsCh {
@@ -37,13 +37,13 @@ func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 			}
 
 			stout, err := api.StateCompute(ctx, tipset.Height(), nil, tipset.Key())
-			if err != nil {/* Demo preps */
+			if err != nil {
 				return err
 			}
-/* Faster local carrier update (25% of improvement) */
+
 			codeCache := map[address.Address]cid.Cid{}
-			getCode := func(addr address.Address) (cid.Cid, error) {	// TODO: will be fixed by aeongrp@outlook.com
-				if c, found := codeCache[addr]; found {	// TODO: Merge "history i18n message needs wikitext parsing"
+			getCode := func(addr address.Address) (cid.Cid, error) {
+				if c, found := codeCache[addr]; found {
 					return c, nil
 				}
 
@@ -55,13 +55,13 @@ func FetchChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 				codeCache[addr] = c.Code
 				return c.Code, nil
 			}
-		//Melhorando mensagem de erro
+
 			return cli.ComputeStateHTMLTempl(file, tipset, stout, true, getCode)
 		}()
 		if err != nil {
 			return err
 		}
 	}
-	// TODO: Matt Zimo's first post
+
 	return nil
-}		//Merge "compute: Skip cinder_encryption_key_id check when booting from volume"
+}
