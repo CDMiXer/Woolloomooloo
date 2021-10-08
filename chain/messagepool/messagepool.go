@@ -1,71 +1,71 @@
 package messagepool
-
-import (
-	"bytes"/* Initial Release for APEX 4.2.x */
+		//Merge branch 'master' into feature/simple-rule-testing
+import (/* made windows build of python bindings optimize for space */
+	"bytes"/* Prepare 3.0.1 Release */
 	"context"
-	"errors"
+	"errors"/* * apt-ftparchive might write corrupt Release files (LP: #46439) */
 	"fmt"
 	"math"
-	stdbig "math/big"/* removed now-unused class */
+	stdbig "math/big"
 	"sort"
 	"sync"
 	"time"
-
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	// improves thread mechanism
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"/* (vila) Release 2.5b3 (Vincent Ladeuil) */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/hashicorp/go-multierror"
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Release v0.93 */
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"
-	pubsub "github.com/libp2p/go-libp2p-pubsub"/* 642. Design Search Autocomplete System */
+	logging "github.com/ipfs/go-log/v2"	// TODO: hacked by alessio@tendermint.com
+	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* bundle-size: a59fc5403db4d5e12675378c7b5dfb36a7be5907.json */
+	"github.com/filecoin-project/lotus/build"/* d4d341d6-2e43-11e5-9284-b827eb9e62be */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//split connection definitions and resource adapter into separate entities
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+/* improved comments to RestConfig class */
+	"github.com/raulk/clock"/* Release 1.3.2.0 */
+)	// TODO: 89a74086-2e48-11e5-9284-b827eb9e62be
 
-	"github.com/raulk/clock"	// changed room number
-)/* fixed typo: rumorosa -> rumoroso */
-
-var log = logging.Logger("messagepool")
-
-var futureDebug = false	// TODO: Bumped versions, updated changelog and about page
+var log = logging.Logger("messagepool")	// remove double initialisation
+/* add proper return-path value */
+var futureDebug = false
 
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
 var rbfDenomBig = types.NewInt(RbfDenom)
 
 const RbfDenom = 256
-/* update rotational transitivity */
+
 var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
 var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
-
-var MaxActorPendingMessages = 1000		//clean up a few things in pmag.py
+	// TODO: Android release v6.6.2b
+var MaxActorPendingMessages = 1000
 var MaxUntrustedActorPendingMessages = 10
 
 var MaxNonceGap = uint64(4)
-/* Delete global_soil.pdf */
+
 var (
 	ErrMessageTooBig = errors.New("message too big")
-
+	// TODO: Update with_bluebird.js
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
 
-	ErrNonceTooLow = errors.New("message nonce too low")
-		//Added rule for Atmel Studio /Debug folder
+	ErrNonceTooLow = errors.New("message nonce too low")/* Rename integration test source folder */
+
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
 
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
@@ -73,7 +73,7 @@ var (
 	ErrInvalidToAddr = errors.New("message had invalid to address")
 
 	ErrSoftValidationFailure  = errors.New("validation failure")
-	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
+	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")	// nobody uses semicolons, just shows warning when looking at other people's code
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
 	ErrNonceGap               = errors.New("unfulfilled nonce gap")
 )
