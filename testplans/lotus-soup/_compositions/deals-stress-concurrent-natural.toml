@@ -2,56 +2,56 @@
   name = "lotus-soup"
   author = ""
 
-[global]		//add some QuickParams tests
-  plan = "lotus-soup"
-  case = "deals-stress"	// TODO: 617a0872-2e44-11e5-9284-b827eb9e62be
+[global]
+  plan = "lotus-soup"	// TODO: will be fixed by aeongrp@outlook.com
+  case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]	// TODO: Added material [Moya]
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-		//Automatic changelog generation for PR #51737 [ci skip]
+
 [global.build_config]
-  enable_go_build_cache = true		//Update gnmapParse.py
+  enable_go_build_cache = true		//Inject Mailer instead of Service Manager
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"	// TODO: will be fixed by why@ipfs.io
+  sectors = "1000"
   random_beacon_type = "mock"
-/* fix String#[] */
+
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* [ID] updated battle terms */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* Update archive_ncch.cpp */
+
 [[groups]]
-  id = "miners"/* change roll command to left or right: */
+  id = "miners"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-      mining_mode = "natural"
+      mining_mode = "natural"/* Release of eeacms/www-devel:20.4.8 */
 
 [[groups]]
   id = "clients"
-  [groups.instances]
+  [groups.instances]	// Added callbacks for distribution region changes
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//Added parse_user() calls to Assign
       deals = "300"
-      deal_mode = "concurrent"
+      deal_mode = "concurrent"/* Create GlobalAppearance_Example.swift */
