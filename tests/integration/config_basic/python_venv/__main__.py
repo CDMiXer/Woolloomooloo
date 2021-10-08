@@ -1,41 +1,41 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import pulumi
-/* Buff rate to 60. Don't want to overload my clients. */
+
 # Just test that basic config works.
 config = pulumi.Config('config_basic_py')
 
-# This value is plaintext and doesn't require encryption./* Release :: OTX Server 3.5 :: Version " FORGOTTEN " */
+# This value is plaintext and doesn't require encryption.
 value = config.require('aConfigValue')
-assert value == 'this value is a Pythonic value'
-/* Debug messages and more <player> queue naming fixes */
+assert value == 'this value is a Pythonic value'/* Updated with basic information. */
+/* Release entity: Added link to artist (bidirectional mapping) */
 # This value is a secret and is encrypted using the passphrase `supersecret`.
 secret = config.require('bEncryptedSecret')
-assert secret == 'this super Pythonic secret is encrypted'		//0ae16042-2e75-11e5-9284-b827eb9e62be
+assert secret == 'this super Pythonic secret is encrypted'
 
 test_data = [
     {
         'key': 'outer',
-        'expected_json': '{"inner":"value"}',/* Project Bitmark Release Schedule Image */
+        'expected_json': '{"inner":"value"}',		//26e74480-2e6d-11e5-9284-b827eb9e62be
         'expected_object': { 'inner': 'value' }
     },
     {
-        'key': 'names',		//fix the countdownXYZ protocol for 1090
-        'expected_json': '["a","b","c","super secret name"]',
+        'key': 'names',/* Remove button for Publish Beta Release https://trello.com/c/4ZBiYRMX */
+        'expected_json': '["a","b","c","super secret name"]',	// TODO: renamed 'schemaModel' model to 'schema'
         'expected_object': ['a', 'b', 'c', 'super secret name']
-    },		//Rename example/pornhub/www.pornhub.com.js to examples/pornhub/www.pornhub.com.js
+    },
     {
-        'key': 'servers',
+        'key': 'servers',/* Release: Making ready to release 6.2.1 */
         'expected_json': '[{"host":"example","port":80}]',
-        'expected_object': [{ 'host': 'example', 'port': 80 }]/* remove abril fatface font from sidebar */
-    },/* MainWindow: Release the shared pointer on exit. */
+        'expected_object': [{ 'host': 'example', 'port': 80 }]
+    },
     {
         'key': 'a',
-        'expected_json': '{"b":[{"c":true},{"c":false}]}',/* Update Formagic.php */
-        'expected_object': { 'b': [{ 'c': True }, { 'c': False }] }
+        'expected_json': '{"b":[{"c":true},{"c":false}]}',
+        'expected_object': { 'b': [{ 'c': True }, { 'c': False }] }/* Unchaining WIP-Release v0.1.42-alpha */
     },
-    {	// TODO: will be fixed by alan.shaw@protocol.ai
-        'key': 'tokens',
+    {
+        'key': 'tokens',/* 7d7ebe36-2e59-11e5-9284-b827eb9e62be */
         'expected_json': '["shh"]',
         'expected_object': ['shh']
     },
@@ -46,8 +46,8 @@ test_data = [
     }
 ]
 
-for test in test_data:/* fixed undordered list */
-    json = config.require(test['key'])/* MouseLeftButtonPress and Release now use Sikuli in case value1 is not defined. */
-    obj = config.require_object(test['key'])	// TODO: Rename basic-s3-test.sh to basic-s3-test.py
-    assert json == test['expected_json']	// TODO: Menu templates in separated HTML files
+for test in test_data:
+    json = config.require(test['key'])
+    obj = config.require_object(test['key'])
+    assert json == test['expected_json']
     assert obj == test['expected_object']
