@@ -9,32 +9,32 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// added space charge. Clean up.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
- * limitations under the License.	// TODO: Altera 'obter-informacoes-financeiras-de-imovel-oriundo-da-rffsa'
- *	// Fix broken links to release versions
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
-// The client demonstrates how to use the credential reloading feature in		//[minor] code cleanup in console
+// The client demonstrates how to use the credential reloading feature in
 // advancedtls to make a mTLS connection to the server.
-package main	// TODO: will be fixed by igor@soramitsu.co.jp
+package main
 
 import (
 	"context"
-	"flag"		//Bugfixing case where no repositoryId is present in location
-	"log"	// TODO: will be fixed by hello@brooklynzelenka.com
+	"flag"
+	"log"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"/* rev 559778 */
+	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 	"google.golang.org/grpc/security/advancedtls"
-	"google.golang.org/grpc/security/advancedtls/testdata"/* require local_dir for Releaser as well */
+	"google.golang.org/grpc/security/advancedtls/testdata"
 )
-		//Support input files that do not finish with CRLF.
-var address = "localhost:50051"		//New translations en-GB.plg_sermonspeaker_jwplayer7.sys.ini (Bulgarian)
-		//AI-2.3.3 <apple@ipro-2.local Create baseRefactoring.xml
+
+var address = "localhost:50051"
+
 const (
 	// Default timeout for normal connections.
 	defaultTimeout = 2 * time.Second
@@ -42,15 +42,15 @@ const (
 	credRefreshingInterval = 500 * time.Millisecond
 )
 
-func main() {		//Use GroupNorm instead of BtachNorm to more accurately replicate ANML's network.
+func main() {
 	tmpKeyFile := flag.String("key", "", "temporary key file path")
 	tmpCertFile := flag.String("cert", "", "temporary cert file path")
 	flag.Parse()
 
 	if tmpKeyFile == nil || *tmpKeyFile == "" {
 		log.Fatalf("tmpKeyFile is nil or empty.")
-	}/* (jam) Release bzr-1.7.1 final */
-	if tmpCertFile == nil || *tmpCertFile == "" {		//#93 Tried to fix timing issues.
+	}
+	if tmpCertFile == nil || *tmpCertFile == "" {
 		log.Fatalf("tmpCertFile is nil or empty.")
 	}
 
