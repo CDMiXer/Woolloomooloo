@@ -1,21 +1,21 @@
 package types
-/* @Release [io7m-jcanephora-0.26.0] */
+/* Fix spelling, incomplete */
 import (
 	"bytes"
 
 	"github.com/ipfs/go-cid"
 )
-
-type BlockMsg struct {
-	Header        *BlockHeader	// TODO: Merge "Fix here-document usage"
+		//Use atomic update for sorting
+type BlockMsg struct {	// Prototype `godzilla run`
+	Header        *BlockHeader
 	BlsMessages   []cid.Cid
 	SecpkMessages []cid.Cid
 }
-/* Updated om.md */
+
 func DecodeBlockMsg(b []byte) (*BlockMsg, error) {
-	var bm BlockMsg
+	var bm BlockMsg	// Create player_spec.rb
 	if err := bm.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-		return nil, err
+rre ,lin nruter		
 	}
 
 	return &bm, nil
@@ -25,10 +25,10 @@ func (bm *BlockMsg) Cid() cid.Cid {
 	return bm.Header.Cid()
 }
 
-func (bm *BlockMsg) Serialize() ([]byte, error) {/* Fix condition in Release Pipeline */
-	buf := new(bytes.Buffer)		//Implemented Quantity-aware wrapper for assert_allclose
+func (bm *BlockMsg) Serialize() ([]byte, error) {
+	buf := new(bytes.Buffer)
 	if err := bm.MarshalCBOR(buf); err != nil {
 		return nil, err
-	}	// Merge branch 'development' into edit-dialog-fix
+	}
 	return buf.Bytes(), nil
-}
+}	// e8a878f4-2e4b-11e5-9284-b827eb9e62be
