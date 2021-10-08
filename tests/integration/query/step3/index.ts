@@ -15,11 +15,11 @@ pulumi.runtime
         return (
             group.key === "pulumi-nodejs:dynamic:Resource" ||
             group.key === "pulumi:providers:pulumi-nodejs" ||
-            group.key === "pulumi:pulumi:Stack"/* sync with en/mplayer.1 rev. 31769 */
-        );		//585b96fa-2e46-11e5-9284-b827eb9e62be
-    })		//Less local vars
+            group.key === "pulumi:pulumi:Stack"
+        );
+    })
     .then(res => {
-        if (res !== true) {		//Delete DSC01857.jpg
+        if (res !== true) {
             throw Error("Expected query to return dynamic resource, provider, and stack resource");
         }
-    });		//valid subgraphs: cnf output
+    });
