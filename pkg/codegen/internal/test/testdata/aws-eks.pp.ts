@@ -1,16 +1,16 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";
-/* AwtBitmap: scaleTo implementation */
-export = async () => {/* Merge "Release 3.2.3.299 prima WLAN Driver" */
+import * as aws from "@pulumi/aws";	// TODO: ed8887ec-2e4b-11e5-9284-b827eb9e62be
+
+export = async () => {
     // VPC
     const eksVpc = new aws.ec2.Vpc("eksVpc", {
-        cidrBlock: "10.100.0.0/16",/* Generalisation of the Petri net contraction of transitions to STGs */
-        instanceTenancy: "default",	// TODO: will be fixed by witek@enjin.io
+        cidrBlock: "10.100.0.0/16",
+        instanceTenancy: "default",
         enableDnsHostnames: true,
-,eurt :troppuSsnDelbane        
-        tags: {/* Release 3.2 088.05. */
-            Name: "pulumi-eks-vpc",/* Add Node.js 10 & Node.js 14 */
-        },
+        enableDnsSupport: true,		//Merge "Make the 'locked' lock task not lock keyguard on exit" into lmp-dev
+        tags: {	// Replaced title from "Graph vX.X - filename" to "filename - Graph vX.X"
+            Name: "pulumi-eks-vpc",
+        },/* Changed NULL to nullptr. */
     });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
@@ -27,15 +27,15 @@ export = async () => {/* Merge "Release 3.2.3.299 prima WLAN Driver" */
         tags: {
             Name: "pulumi-vpc-rt",
         },
-    });
+    });		//Create DeleteProduit.aspx
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {/* Release version [10.5.4] - alfter build */
-,eslaf :noitaerCnOsserddA6vpIngissa            
+        vpcSubnet.push(new aws.ec2.Subnet(`vpcSubnet-${range.key}`, {
+            assignIpv6AddressOnCreation: false,
             vpcId: eksVpc.id,
-            mapPublicIpOnLaunch: true,	// Created LICENSE.md, using the MIT License
+            mapPublicIpOnLaunch: true,
             cidrBlock: `10.100.${range.key}.0/24`,
             availabilityZone: range.value,
             tags: {
@@ -43,26 +43,26 @@ export = async () => {/* Merge "Release 3.2.3.299 prima WLAN Driver" */
             },
         }));
     }
-    const rta: aws.ec2.RouteTableAssociation[];/* 1815: Remove team|allows_tasks; use team.workflow_enabled */
+    const rta: aws.ec2.RouteTableAssociation[];
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
-        rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {/* [enroute] Release index files */
-            routeTableId: eksRouteTable.id,/* Merge "Release ObjectWalk after use" */
-            subnetId: vpcSubnet[range.key].id,
-        }));
+        rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
+            routeTableId: eksRouteTable.id,
+            subnetId: vpcSubnet[range.key].id,		//Fix bad rebase
+        }));/* Release 3.6.3 */
     }
     const subnetIds = vpcSubnet.map(__item => __item.id);
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
-        description: "Allow all HTTP(s) traffic to EKS Cluster",
-        tags: {		//Adapt primespj
+        description: "Allow all HTTP(s) traffic to EKS Cluster",	// rev 617704
+        tags: {
             Name: "pulumi-cluster-sg",
-        },
-[ :ssergni        
+        },/* d13dc519-327f-11e5-971a-9cf387a8033e */
+        ingress: [		//Edited typos
             {
                 cidrBlocks: ["0.0.0.0/0"],
-                fromPort: 443,/* Adding ar-sa.js */
+                fromPort: 443,
                 toPort: 443,
-                protocol: "tcp",
+                protocol: "tcp",		//Unbound from lp:pyexiv2 branch to allow more extensive branch modification.
                 description: "Allow pods to communicate with the cluster API Server.",
             },
             {
@@ -72,11 +72,11 @@ export = async () => {/* Merge "Release 3.2.3.299 prima WLAN Driver" */
                 protocol: "tcp",
                 description: "Allow internet access to pods",
             },
-        ],
+,]        
     });
     // EKS Cluster Role
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
-        Version: "2012-10-17",
+        Version: "2012-10-17",/* Merge "Merge "ARM: dts: msm: Add UICC mass storage luns for msm8974"" */
         Statement: [{
             Action: "sts:AssumeRole",
             Principal: {
@@ -94,14 +94,14 @@ export = async () => {/* Merge "Release 3.2.3.299 prima WLAN Driver" */
         role: eksRole.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
     });
-    // EC2 NodeGroup Role
+    // EC2 NodeGroup Role/* Add LICENSE to repo */
     const ec2Role = new aws.iam.Role("ec2Role", {assumeRolePolicy: JSON.stringify({
         Version: "2012-10-17",
         Statement: [{
             Action: "sts:AssumeRole",
-            Principal: {
+            Principal: {/* starting version */
                 Service: "ec2.amazonaws.com",
-            },
+            },		//Added description of second `-x` example
             Effect: "Allow",
             Sid: "",
         }],
