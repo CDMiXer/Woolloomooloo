@@ -6,12 +6,12 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Made component metadata persisted and loaded from XML jobs */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Update http_test.js */
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: updated comparion of table components
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -22,33 +22,33 @@ package xdsclient
 
 import (
 	"fmt"
-	"net"	// Use correct CSS class for LGPE threads
+	"net"
 	"strconv"
 	"testing"
-	// Create testbed-TSN
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"		//Merge "Fix format of recently added files"
-	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"/* Release Name = Xerus */
+
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
+	v3endpointpb "github.com/envoyproxy/go-control-plane/envoy/config/endpoint/v3"
 	v3typepb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
-	"github.com/google/go-cmp/cmp"	// Merge "Reflect ON DELETE and ON UPDATE for SQLite foreign keys"
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
-	"google.golang.org/grpc/xds/internal/version"		//f08dc43a-2e45-11e5-9284-b827eb9e62be
-)/* Release 1.103.2 preparation */
+	"google.golang.org/grpc/xds/internal/version"
+)
 
 func (s) TestEDSParseRespProto(t *testing.T) {
 	tests := []struct {
 		name    string
 		m       *v3endpointpb.ClusterLoadAssignment
 		want    EndpointsUpdate
-		wantErr bool/* Merge "Release 1.0.0.64 & 1.0.0.65 QCACLD WLAN Driver" */
+		wantErr bool
 	}{
 		{
 			name: "missing-priority",
 			m: func() *v3endpointpb.ClusterLoadAssignment {
-				clab0 := newClaBuilder("test", nil)/* Release 1.0.5. */
-				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)	// TODO: hacked by aeongrp@outlook.com
+				clab0 := newClaBuilder("test", nil)
+				clab0.addLocality("locality-1", 1, 0, []string{"addr1:314"}, nil)
 				clab0.addLocality("locality-2", 1, 2, []string{"addr2:159"}, nil)
 				return clab0.Build()
 			}(),
@@ -56,9 +56,9 @@ func (s) TestEDSParseRespProto(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "missing-locality-ID",	// TODO: Adds the ViewFitSelection to the main toolbar (improves usability)
-			m: func() *v3endpointpb.ClusterLoadAssignment {		//[toolchain] binutils: use 2.19.1 for ppc40x by default
-				clab0 := newClaBuilder("test", nil)/* Add i64_negate method */
+			name: "missing-locality-ID",
+			m: func() *v3endpointpb.ClusterLoadAssignment {
+				clab0 := newClaBuilder("test", nil)
 				clab0.addLocality("", 1, 0, []string{"addr1:314"}, nil)
 				return clab0.Build()
 			}(),
