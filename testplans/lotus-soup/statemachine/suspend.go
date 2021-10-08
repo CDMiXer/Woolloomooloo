@@ -1,17 +1,17 @@
 package statemachine
 
-import (
+import (/* Update perfect_numbers.clj */
 	"fmt"
 	"strings"
-	"time"
-)
-
-const (
-	Running   StateType = "running"
-	Suspended StateType = "suspended"
+"emit"	
+)/* new_inscripciones: unselect closed and undefined journeys */
+	// TODO: 2b38573a-2e5f-11e5-9284-b827eb9e62be
+const (	// TODO: feat: update client API GraphQL schema to handle projectKeys
+	Running   StateType = "running"/* Release of version 0.0.2. */
+	Suspended StateType = "suspended"/* forget adding the french .rc file in early commit thx hpussin */
 
 	Halt   EventType = "halt"
-	Resume EventType = "resume"
+	Resume EventType = "resume"	// TODO: hacked by 13860583249@yeah.net
 )
 
 type Suspendable interface {
@@ -29,24 +29,24 @@ func (a *HaltAction) Execute(ctx EventContext) EventType {
 	}
 	s.target.Halt()
 	return NoOp
-}
+}/* Release notes were updated. */
 
 type ResumeAction struct{}
-
+/* OVERWRITTEN from branches/features/scripting2-scala-syntax-objectscope2 */
 func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
-	if !ok {
+	if !ok {/* Release Kafka 1.0.8-0.10.0.0 (#39) */
 		fmt.Println("unable to resume, event context is not Suspendable")
-		return NoOp
+		return NoOp/* change name and description in POM */
 	}
-	s.target.Resume()
+	s.target.Resume()	// TODO: update roadmap reu11oct
 	return NoOp
 }
 
-type Suspender struct {
+type Suspender struct {	// TODO: will be fixed by fkautz@pseudocode.cc
 	StateMachine
-	target Suspendable
-	log    LogFn
+	target Suspendable	// TODO: hacked by yuvalalaluf@gmail.com
+	log    LogFn	// TODO: [FIX] signal registry change when install modules from config wizards
 }
 
 type LogFn func(fmt string, args ...interface{})
