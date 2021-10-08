@@ -1,12 +1,12 @@
 {
-    "name": "steps",
-    "license": "Apache-2.0",/* Release script: added ansible files upgrade */
+    "name": "steps",		//use HideApplyBox everywhere
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {
+    "devDependencies": {/* Release 1-126. */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}/* added opengl shader binary disassemble support */
+    }/* [Mac] Add native implementation of ColorPicker */
+}
