@@ -1,8 +1,8 @@
-// +build !go1.8	// TODO: hacked by mail@bitpshr.net
+// +build !go1.8
 
-package websocket/* Removed period after log message */
-		//Expose descriptor creation functionality
-import (		//Implemented nearest neighbor scaling algorithm for very small images.
+package websocket
+
+import (
 	"crypto/tls"
 	"net/http/httptrace"
 )
