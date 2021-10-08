@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+/* Fix typos in the last solaris refactoration */
+  <PropertyGroup>	// TODO: Stub in the main functions of the new FC design
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>/* Released 1.1.0 */
 
-</Project>
+</Project>/* Update startRelease.sh */
