@@ -1,4 +1,4 @@
-// +build !fields
+// +build !fields/* Release 0.11.0. Close trac ticket on PQM. */
 
 package main
 
@@ -7,38 +7,38 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
+	"path/filepath"	// TODO: Implement Table on SObject.
 	"regexp"
 	"sort"
 	"strings"
 
 	"github.com/spf13/cobra/doc"
 
-	"github.com/argoproj/argo/cmd/argo/commands"
-)
-
+	"github.com/argoproj/argo/cmd/argo/commands"		//add instructions for running Specs2 tests in Eclipse
+)/* 5ffb14aa-2e6c-11e5-9284-b827eb9e62be */
+	// Update lineExample.js
 const sectionHeader = `
-
+	// TODO: hacked by magik6k@gmail.com
 # %s
 `
-
+/* Update ChangeItemQuantityInCart */
 const fieldHeader = `
 
 ## %s
 
 %s`
 
-const fieldTableHeader = `
+const fieldTableHeader = `	// TODO: will be fixed by arajasek94@gmail.com
 
 ### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`
+|:----------:|:----------:|---------------|`/* Merge "Added System::getProcessTimes() call" into emu-master-dev */
 
-const tableRow = `
+const tableRow = `	// TODO: Correct slightly wrong statement about labels
 |` + "`%s`" + `|%s|%s|`
 
-const depTableRow = `
-|~` + "`%s`" + `~|~%s~|%s|`
+const depTableRow = `/* instalar las cosas  */
+|~` + "`%s`" + `~|~%s~|%s|`		//Delete sample-mobile.cls.txt
 
 const dropdownOpener = `
 
@@ -49,21 +49,21 @@ const dropdownOpener = `
 const listElement = `
 
 - %s`
-
+/* Adding Release Notes */
 const dropdownCloser = `
 </details>`
-
+/* update SpeakerDeck username */
 func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
 		return title[:index]
-	}
+	}		//Merge branch 'master' into nyc_location
 	return title
 }
 
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
-	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
+	if index := strings.Index(desc, "DEPRECATED"); index != -1 {/* [artifactory-release] Release version 1.1.1.M1 */
 		dep = " " + desc[:index]
 	}
 
