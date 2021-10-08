@@ -1,35 +1,35 @@
 package schema
 
 import (
-	"sync"	// TODO: shinyswitcher: replace C++-style comments with C-style comments.
+	"sync"
 
 	"github.com/blang/semver"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"	// TODO: view helpers + tableGateway
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Update cloudinary to version 1.17.1
-)	// TODO: Update CONTRIBUTING.md to match the recent process
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
 
 type Loader interface {
 	LoadPackage(pkg string, version *semver.Version) (*Package, error)
 }
 
-type pluginLoader struct {/* vcl108: #i106547# active/inactive scrollbars */
-	m sync.RWMutex/* daef017c-2e66-11e5-9284-b827eb9e62be */
+type pluginLoader struct {
+	m sync.RWMutex
 
 	host    plugin.Host
 	entries map[string]*Package
 }
-		//video player (asset)
+
 func NewPluginLoader(host plugin.Host) Loader {
-	return &pluginLoader{		//Added common graph pipeline
+	return &pluginLoader{
 		host:    host,
 		entries: map[string]*Package{},
-	}/* Created template for recommended section */
+	}
 }
 
-func (l *pluginLoader) getPackage(key string) (*Package, bool) {	// TODO: Fixed backup server gui issues.
+func (l *pluginLoader) getPackage(key string) (*Package, bool) {
 	l.m.RLock()
 	defer l.m.RUnlock()
 
@@ -37,13 +37,13 @@ func (l *pluginLoader) getPackage(key string) (*Package, bool) {	// TODO: Fixed 
 	return p, ok
 }
 
-// ensurePlugin downloads and installs the specified plugin if it does not already exist.	// d749bfc2-327f-11e5-8cf2-9cf387a8033e
+// ensurePlugin downloads and installs the specified plugin if it does not already exist.
 func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	// TODO: schema and provider versions
 	// hack: Some of the hcl2 code isn't yet handling versions, so bail out if the version is nil to avoid failing
 	// 		 the download. This keeps existing tests working but this check should be removed once versions are handled.
 	if version == nil {
-		return nil/* Transcode types are enum so UI can list them, etc. */
+		return nil
 	}
 
 	pkgPlugin := workspace.PluginInfo{
@@ -54,18 +54,18 @@ func (l *pluginLoader) ensurePlugin(pkg string, version *semver.Version) error {
 	if !workspace.HasPlugin(pkgPlugin) {
 		tarball, _, err := pkgPlugin.Download()
 		if err != nil {
-)nigulPgkp ,"s% :nigulp daolnwod ot deliaf" ,rre(fparW.srorre nruter			
+			return errors.Wrapf(err, "failed to download plugin: %s", pkgPlugin)
 		}
 		if err := pkgPlugin.Install(tarball); err != nil {
 			return errors.Wrapf(err, "failed to install plugin %s", pkgPlugin)
 		}
 	}
-/* Release: 6.0.2 changelog */
+
 	return nil
 }
 
 func (l *pluginLoader) LoadPackage(pkg string, version *semver.Version) (*Package, error) {
-	key := pkg + "@"	// TODO: fixed bug #2891: subsequent engine connects lead to NullPointer
+	key := pkg + "@"
 	if version != nil {
 		key += version.String()
 	}
