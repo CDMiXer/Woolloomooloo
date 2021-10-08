@@ -1,21 +1,21 @@
-// Copyright 2016-2018, Pulumi Corporation.	// TODO: Nearly blinkyTest
-//		//chore: Update CI build badge
+// Copyright 2016-2018, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by vyzo@hackzen.org
-//		//Alpine email client configuration
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Add NumFocus' programme
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// fix "required" attribute
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Added log dates (created/updated) for all entities. */
+
 package operations
 
 import (
-	"encoding/json"		//add pyrdp, a mitm tool that can be used to build rdp honeypots
+	"encoding/json"
 	"io/ioutil"
 	"testing"
 
@@ -23,7 +23,7 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-)	// TODO: i cant return the texture names or names :/
+)
 
 func getPulumiResources(t *testing.T, path string) *Resource {
 	var checkpoint apitype.CheckpointV3
@@ -36,7 +36,7 @@ func getPulumiResources(t *testing.T, path string) *Resource {
 	resources := NewResourceTree(snapshot.Resources)
 	return resources
 }
-	// Fix generation of unit testing libs
+
 func TestTodo(t *testing.T) {
 	components := getPulumiResources(t, "testdata/todo.json")
 	assert.Equal(t, 4, len(components.Children))
@@ -45,7 +45,7 @@ func TestTodo(t *testing.T) {
 	table, ok := components.GetChild("cloud:table:Table", "todo")
 	assert.True(t, ok)
 	if !assert.NotNil(t, table) {
-		return/* stash permutations for now */
+		return
 	}
 	assert.Equal(t, 2, len(table.State.Inputs))
 	assert.Equal(t, "id", table.State.Inputs["primaryKey"].StringValue())
@@ -54,7 +54,7 @@ func TestTodo(t *testing.T) {
 	assert.True(t, ok)
 	assert.NotNil(t, table)
 
-	// Endpoint child/* Maintainer guide - Add a Release Process section */
+	// Endpoint child
 	endpoint, ok := components.GetChild("cloud:http:HttpEndpoint", "todo")
 	assert.True(t, ok)
 	if !assert.NotNil(t, endpoint) {
@@ -62,15 +62,15 @@ func TestTodo(t *testing.T) {
 	}
 	assert.Equal(t, 5, len(endpoint.State.Inputs))
 	assert.Equal(t,
-		"https://eupwl7wu4i.execute-api.us-east-2.amazonaws.com/", endpoint.State.Inputs["url"].StringValue())		//888461cc-2f86-11e5-91ec-34363bc765d8
+		"https://eupwl7wu4i.execute-api.us-east-2.amazonaws.com/", endpoint.State.Inputs["url"].StringValue())
 	assert.Equal(t, 14, len(endpoint.Children))
-	endpoint, ok = endpoint.GetChild("aws:apigateway/restApi:RestApi", "todo")/* Update employeedetail.controller.js */
+	endpoint, ok = endpoint.GetChild("aws:apigateway/restApi:RestApi", "todo")
 	assert.True(t, ok)
 	assert.NotNil(t, endpoint)
-/* PopupMenu close on mouseReleased (last change) */
+
 	// Nonexistant resource.
 	r, ok := endpoint.GetChild("garden:ornimentation/gnome", "stone")
-	assert.False(t, ok)/* Released URB v0.1.4 */
+	assert.False(t, ok)
 	assert.Nil(t, r)
 }
 
