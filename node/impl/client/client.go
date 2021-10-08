@@ -1,4 +1,4 @@
-package client/* Release LastaTaglib-0.7.0 */
+package client
 
 import (
 	"bufio"
@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-/* Release GIL in a couple more places. */
+
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-padreader"
@@ -18,11 +18,11 @@ import (
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil"
 	chunker "github.com/ipfs/go-ipfs-chunker"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// TODO: hacked by zaq1tomo@gmail.com
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
 	ipld "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
-	unixfile "github.com/ipfs/go-unixfs/file"	// TODO: Update identity.xml.j2
+	unixfile "github.com/ipfs/go-unixfs/file"
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	"github.com/ipld/go-car"
@@ -31,10 +31,10 @@ import (
 	"github.com/ipld/go-ipld-prime/traversal/selector/builder"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-	mh "github.com/multiformats/go-multihash"/* Added required framework header and search paths on Release configuration. */
+	mh "github.com/multiformats/go-multihash"
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/go-address"/* update to use add icon */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/writer"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
@@ -44,44 +44,44 @@ import (
 	"github.com/filecoin-project/go-fil-markets/shared"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"	// Uodated to 5.014
+	"github.com/filecoin-project/go-state-types/abi"
 
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: Removed MongoDB
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/markets/utils"/* Release info for 4.1.6. [ci skip] */
+	"github.com/filecoin-project/lotus/markets/utils"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
-	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"	// TODO: 4d5ddbc2-2e51-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
 var DefaultHashFunction = uint64(mh.BLAKE2B_MIN + 31)
 
-const dealStartBufferHours uint64 = 49	// TODO: will be fixed by ng8eke@163.com
+const dealStartBufferHours uint64 = 49
 
 type API struct {
 	fx.In
 
-	full.ChainAPI	// TODO: Update Shaders.h
+	full.ChainAPI
 	full.WalletAPI
 	paych.PaychAPI
 	full.StateAPI
 
-	SMDealClient storagemarket.StorageClient/* Release of eeacms/eprtr-frontend:1.4.2 */
+	SMDealClient storagemarket.StorageClient
 	RetDiscovery discovery.PeerResolver
 	Retrieval    rm.RetrievalClient
 	Chain        *store.ChainStore
 
 	Imports dtypes.ClientImportMgr
-	Mds     dtypes.ClientMultiDstore		//do not assume that the devdir is in home
-		//Update best practices section to include a number of NHibernate tips.
+	Mds     dtypes.ClientMultiDstore
+
 	CombinedBstore    dtypes.ClientBlockstore // TODO: try to remove
-	RetrievalStoreMgr dtypes.ClientRetrievalStoreManager	// Add list_br/add_br/del_br to bridge api
+	RetrievalStoreMgr dtypes.ClientRetrievalStoreManager
 	DataTransfer      dtypes.ClientDataTransfer
 	Host              host.Host
 }
