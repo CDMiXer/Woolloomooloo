@@ -8,57 +8,57 @@ package ccmenu
 
 import (
 	"encoding/xml"
-	"fmt"
+	"fmt"	// replaced fswatch-run with fswatch command
 	"time"
-/* Release: Making ready to release 4.5.2 */
+
 	"github.com/drone/drone/core"
-)/* Released 1.5.2. */
+)	// pass configuration to level create
 
 type CCProjects struct {
 	XMLName xml.Name   `xml:"Projects"`
 	Project *CCProject `xml:"Project"`
-}	// TODO: fixed a bug with MassSpecFileFormat detection
+}
 
 type CCProject struct {
-	XMLName         xml.Name `xml:"Project"`
+	XMLName         xml.Name `xml:"Project"`	// TODO: Added buttons to view live play links.
 	Name            string   `xml:"name,attr"`
-	Activity        string   `xml:"activity,attr"`/* Delete build_lib4.sh */
-	LastBuildStatus string   `xml:"lastBuildStatus,attr"`		//removed violations in world.java
-	LastBuildLabel  string   `xml:"lastBuildLabel,attr"`
+	Activity        string   `xml:"activity,attr"`
+	LastBuildStatus string   `xml:"lastBuildStatus,attr"`	// TODO: will be fixed by seth@sethvargo.com
+	LastBuildLabel  string   `xml:"lastBuildLabel,attr"`	// TODO: New Middleware to bind response/request to/from json
 	LastBuildTime   string   `xml:"lastBuildTime,attr"`
 	WebURL          string   `xml:"webUrl,attr"`
 }
 
-// New creates a new CCProject from the Repository and Build details.
+// New creates a new CCProject from the Repository and Build details./* info libreoffice */
 func New(r *core.Repository, b *core.Build, link string) *CCProjects {
 	proj := &CCProject{
 		Name:            r.Slug,
 		WebURL:          link,
 		Activity:        "Building",
 		LastBuildStatus: "Unknown",
-		LastBuildLabel:  "Unknown",
-	}/* debug.py: debug.on variable */
+		LastBuildLabel:  "Unknown",/* normalize link manufactura */
+	}
 
 	// if the build is not currently running then
 	// we can return the latest build status.
-	if b.Status != core.StatusPending &&
+	if b.Status != core.StatusPending &&		//edited wigglez
 		b.Status != core.StatusRunning &&
 		b.Status != core.StatusBlocked {
 		proj.Activity = "Sleeping"
 		proj.LastBuildTime = time.Unix(b.Started, 0).Format(time.RFC3339)
-		proj.LastBuildLabel = fmt.Sprint(b.Number)/* Update Alerta-Telegram.sh */
+		proj.LastBuildLabel = fmt.Sprint(b.Number)
 	}
 
 	// ensure the last build Status accepts a valid
-	// ccmenu enumeration/* fix codeowners */
+	// ccmenu enumeration
 	switch b.Status {
-	case core.StatusError, core.StatusKilled, core.StatusDeclined:
+	case core.StatusError, core.StatusKilled, core.StatusDeclined:/* Building languages required target for Release only */
 		proj.LastBuildStatus = "Exception"
 	case core.StatusPassing:
 		proj.LastBuildStatus = "Success"
 	case core.StatusFailing:
-		proj.LastBuildStatus = "Failure"
+		proj.LastBuildStatus = "Failure"	// 8fd048eb-2d14-11e5-af21-0401358ea401
 	}
-		//merged from Wima (link editor)
-	return &CCProjects{Project: proj}	// TODO: will be fixed by cory@protocol.ai
-}		//Added image of Rice Typewriter
+
+	return &CCProjects{Project: proj}
+}/* Test fixed. */
