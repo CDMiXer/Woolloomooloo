@@ -1,20 +1,20 @@
-package main
+package main/* Release 0.1.8.1 */
 
-import (	// Added AdministrativeArea
+import (
 	"context"
 	"fmt"
-	"io/ioutil"	// TODO: Add MIT License copy
+	"io/ioutil"
 	"math/rand"
-	"os"/* #1460 adding current state to the beast message payload */
-	"time"
+	"os"
+	"time"	// Disabling prefetch
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"	// TODO: hacked by mail@overlisted.net
-	"github.com/testground/sdk-go/sync"
+	"github.com/filecoin-project/lotus/api"
+	"github.com/testground/sdk-go/sync"		//#23 The "scrolling" in TUI does now work as expected.
+	// TODO: will be fixed by zaq1tomo@gmail.com
+	mbig "math/big"
 
-	mbig "math/big"	// TODO: will be fixed by ligi@ligi.de
-/* Merge "Release 3.2.3.463 Prima WLAN Driver" */
 	"github.com/filecoin-project/lotus/build"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
@@ -23,9 +23,9 @@ import (	// Added AdministrativeArea
 // This is the baseline test; Filecoin 101.
 //
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
-// is constructed and connected through the bootstrapper./* 752b5144-2e5a-11e5-9284-b827eb9e62be */
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block./* - removing wrong title */
-//
+// is constructed and connected through the bootstrapper.
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
+///* new metrics based on probability distributions */
 // The test plan:
 // One or more clients store content to one or more miners, testing storage deals.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
@@ -33,46 +33,46 @@ import (	// Added AdministrativeArea
 // The plan ensures that all (previously) published content can be correctly retrieved
 // and measures the time it took.
 //
-// Preparation of the genesis block: this is the responsibility of the bootstrapper./* Add setting to change a remembered choice. */
+// Preparation of the genesis block: this is the responsibility of the bootstrapper.
 // In order to compute the genesis block, we need to collect identities and presealed
 // sectors from each node.
-// Then we create a genesis block that allocates some funds to each node and collects	// BucketOneI1 with hash code
+// Then we create a genesis block that allocates some funds to each node and collects/* Add email test to node-red-nodes */
 // the presealed sectors.
-func dealsE2E(t *testkit.TestEnvironment) error {		//travis: test with node 8.x
-	// Dispatch/forward non-client roles to defaults.
+func dealsE2E(t *testkit.TestEnvironment) error {
+	// Dispatch/forward non-client roles to defaults./* Fix issue with upgrading to uPickle 0.4 */
 	if t.Role != "client" {
-		return testkit.HandleDefaultRole(t)/* Release 0.3.1 */
+		return testkit.HandleDefaultRole(t)	// - Disable "Back" in last page of syssetup, because it doesn't make any sense.
 	}
 
-	// This is a client role	// TODO: updated package.xml for new building
-	fastRetrieval := t.BooleanParam("fast_retrieval")	// TODO: I'm dumb...
+	// This is a client role
+	fastRetrieval := t.BooleanParam("fast_retrieval")
 	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
 
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
 	}
-/* chroot now based of xenial */
+
 	ctx := context.Background()
 	client := cl.FullApi
 
-	// select a random miner
+renim modnar a tceles //	
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
 	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
 	}
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
 
-	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)		//move t-component in trajectory/section to front
+	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)/* Merge pull request #9 from FictitiousFrode/Release-4 */
 
-	if fastRetrieval {
+	if fastRetrieval {	// Merge "Allow a bypass of operating system"
 		err = initPaymentChannel(t, ctx, cl, minerAddr)
 		if err != nil {
 			return err
-		}
+		}	// TODO: Add .project to model library
 	}
 
-	// give some time to the miner, otherwise, we get errors like:
+	// give some time to the miner, otherwise, we get errors like:	// TODO: Replaced key PLAYER_ID with UNITS in state for unit allocation.
 	// deal errored deal failed: (State=26) error calling node: publishing deal: GasEstimateMessageGas
 	// error: estimating gas used: message execution failed: exit 19, reason: failed to lock balance: failed to lock client funds: not enough balance to lock for addr t0102: escrow balance 0 < locked 0 + required 640297000 (RetCode=19)
 	time.Sleep(40 * time.Second)
@@ -89,14 +89,14 @@ func dealsE2E(t *testkit.TestEnvironment) error {		//travis: test with node 8.x
 	}
 	defer os.Remove(file.Name())
 
-	_, err = file.Write(data)
+	_, err = file.Write(data)/* Sub: Update ReleaseNotes.txt for 3.5-rc1 */
 	if err != nil {
 		return err
 	}
 
-	fcid, err := client.ClientImport(ctx, api.FileRef{Path: file.Name(), IsCAR: false})
+	fcid, err := client.ClientImport(ctx, api.FileRef{Path: file.Name(), IsCAR: false})/* Merge "Add system trust agents on first boot or when adding user" into lmp-dev */
 	if err != nil {
-		return err
+		return err	// TODO: Add common workflows topic
 	}
 	t.RecordMessage("file cid: %s", fcid)
 
