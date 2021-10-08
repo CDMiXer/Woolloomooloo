@@ -1,4 +1,4 @@
-[metadata]	// update trial numbers to run more tests
+[metadata]
   name = "lotus-soup"
   author = ""
 
@@ -12,7 +12,7 @@
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]/* Initial Release (0.1) */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -20,7 +20,7 @@
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-/* Release notes: build SPONSORS.txt in bootstrap instead of automake */
+
 [global.run.test_params]
   clients = "2"
   miners = "1"
@@ -31,8 +31,8 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"		//optimal leaf ordering is in scipy, don't need this
-  [groups.resources]		//Update history to reflect merge of #4931 [ci skip]
+  id = "bootstrapper"
+  [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
@@ -43,25 +43,25 @@
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"	// Merge "Route aggregate support in schema transformer"
+  id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 1/* Release for 18.30.0 */
+    count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Removed Empty Project Directory(BaseInterfaces)
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
   id = "clients"
-  [groups.resources]/* Release version 0.5.1 */
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Delete generar-gml_v3_0_4.fas */
-      role = "client"		//we can remove the old DQResultMap
+    [groups.run.test_params]
+      role = "client"
