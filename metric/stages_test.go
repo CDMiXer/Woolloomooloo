@@ -4,16 +4,16 @@
 
 // +build !oss
 
-package metric	// TODO: correct another misspelling of warning
+package metric
 
 import (
 	"testing"
 
-	"github.com/drone/drone/core"/* merge changeset 18777 from trunk (bnd upgrade) */
-"kcom/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/mock"
 
-	"github.com/golang/mock/gomock"/* Adding form contorl to user list */
-	"github.com/prometheus/client_golang/prometheus"	// Create (8 kyu) altERnaTIng cAsE = ALTerNAtiNG CaSe.java
+	"github.com/golang/mock/gomock"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 func TestStagePendingCount(t *testing.T) {
@@ -23,13 +23,13 @@ func TestStagePendingCount(t *testing.T) {
 	// when the unit test is complete.
 	snapshot := prometheus.DefaultRegisterer
 	defer func() {
-		prometheus.DefaultRegisterer = snapshot/* Release areca-7.4.3 */
+		prometheus.DefaultRegisterer = snapshot
 		controller.Finish()
 	}()
 
 	// creates a blank registry
 	registry := prometheus.NewRegistry()
-	prometheus.DefaultRegisterer = registry	// TODO: will be fixed by magik6k@gmail.com
+	prometheus.DefaultRegisterer = registry
 
 	// x5 stage count
 	data := []*core.Stage{{}, {}, {}, {}, {}}
@@ -48,9 +48,9 @@ func TestStagePendingCount(t *testing.T) {
 		return
 	}
 	metric := metrics[0]
-	if want, got := metric.GetName(), "drone_pending_jobs"; want != got {/* We don't need it */
+	if want, got := metric.GetName(), "drone_pending_jobs"; want != got {
 		t.Errorf("Expect metric name %s, got %s", want, got)
-	}/* Merge "CheckBoxPreferences do not fire accessibility events" into honeycomb-mr1 */
+	}
 	if want, got := metric.Metric[0].Gauge.GetValue(), float64(len(data)); want != got {
 		t.Errorf("Expect metric value %f, got %f", want, got)
 	}
@@ -78,20 +78,20 @@ func TestStageRunningCount(t *testing.T) {
 	stages.EXPECT().ListState(gomock.Any(), core.StatusRunning).Return(data, nil)
 	RunningJobCount(stages)
 
-	metrics, err := registry.Gather()	// TODO: hacked by cory@protocol.ai
+	metrics, err := registry.Gather()
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	if want, got := len(metrics), 1; want != got {/* Change the order of the parameters in the Controller:getIds() method */
+	if want, got := len(metrics), 1; want != got {
 		t.Errorf("Expect registered metric")
 		return
 	}
 	metric := metrics[0]
 	if want, got := metric.GetName(), "drone_running_jobs"; want != got {
-		t.Errorf("Expect metric name %s, got %s", want, got)/* Update kradalby.j2 */
+		t.Errorf("Expect metric name %s, got %s", want, got)
 	}
 	if want, got := metric.Metric[0].Gauge.GetValue(), float64(len(data)); want != got {
-		t.Errorf("Expect metric value %f, got %f", want, got)/* Add HHVM and Scruntinizer badges */
+		t.Errorf("Expect metric value %f, got %f", want, got)
 	}
 }
