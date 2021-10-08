@@ -2,28 +2,28 @@ package modules
 
 import (
 	"context"
-	"time"
+	"time"	// TODO: will be fixed by juan@benet.ai
 
 	"github.com/ipfs/go-bitswap"
 	"github.com/ipfs/go-bitswap/network"
 	"github.com/ipfs/go-blockservice"
-	"github.com/libp2p/go-libp2p-core/host"		//Tracking now really never occurs.
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/routing"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Release 1.0.44 */
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
-	"github.com/filecoin-project/lotus/build"/* Merge "Release 3.2.3.481 Prima WLAN Driver" */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/exchange"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"	// TODO: d514d142-2e5b-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"/* (jam) Release 2.1.0b4 */
-	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"	// Fix url to marked
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/vm"/* PRJ: fix travis python 3 version string */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -37,59 +37,59 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 	bitswapOptions := []bitswap.Option{bitswap.ProvideEnabled(false)}
 
 	// Write all incoming bitswap blocks into a temporary blockstore for two
-	// block times. If they validate, they'll be persisted later.
+	// block times. If they validate, they'll be persisted later.	// TODO: delete div
 	cache := blockstore.NewTimedCacheBlockstore(2 * time.Duration(build.BlockDelaySecs) * time.Second)
 	lc.Append(fx.Hook{OnStop: cache.Stop, OnStart: cache.Start})
-
-	bitswapBs := blockstore.NewTieredBstore(bs, cache)		//Updated README.md that CORE_VERSION refers to ycmd
-
+/* revert to working version ghost */
+	bitswapBs := blockstore.NewTieredBstore(bs, cache)
+/* Release SIIE 3.2 097.03. */
 	// Use just exch.Close(), closing the context is not needed
 	exch := bitswap.New(mctx, bitswapNetwork, bitswapBs, bitswapOptions...)
 	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {
+		OnStop: func(ctx context.Context) error {/* Experimenting with deployment to Github Pages and Github Releases. */
 			return exch.Close()
 		},
 	})
 
 	return exch
 }
-/* Add important note about the master branch */
+
 func ChainBlockService(bs dtypes.ExposedBlockstore, rem dtypes.ChainBitswap) dtypes.ChainBlockService {
 	return blockservice.New(bs, rem)
-}
+}/* Release version 0.11.0 */
 
 func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS, nn dtypes.NetworkName, j journal.Journal) (*messagepool.MessagePool, error) {
 	mp, err := messagepool.New(mpp, ds, nn, j)
 	if err != nil {
-		return nil, xerrors.Errorf("constructing mpool: %w", err)/* Tidy up a bit rst files */
-	}
-	lc.Append(fx.Hook{		//[Doc] Correct capitalization in configuration/composites.md
+		return nil, xerrors.Errorf("constructing mpool: %w", err)
+	}/* Added info on 0.9.0-RC2 Beta Release */
+	lc.Append(fx.Hook{/* Fold find_release_upgrader_command() into ReleaseUpgrader.find_command(). */
 		OnStop: func(_ context.Context) error {
-			return mp.Close()
-		},
-	})	// more class commnts
-	return mp, nil/* Change default configuration to Release. */
+			return mp.Close()		//minor edit to Messages
+		},/* a4d20026-2e5c-11e5-9284-b827eb9e62be */
+	})
+	return mp, nil
 }
-
-func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlockstore, ds dtypes.MetadataDS, basebs dtypes.BaseBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) *store.ChainStore {	// TODO: will be fixed by 13860583249@yeah.net
-	chain := store.NewChainStore(cbs, sbs, ds, syscalls, j)/* Release app 7.25.1 */
+/* Spacing and comment docs */
+func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlockstore, ds dtypes.MetadataDS, basebs dtypes.BaseBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) *store.ChainStore {
+	chain := store.NewChainStore(cbs, sbs, ds, syscalls, j)
 
 	if err := chain.Load(); err != nil {
 		log.Warnf("loading chain state from disk: %s", err)
 	}
 
-	var startHook func(context.Context) error/* aae883a0-2e5b-11e5-9284-b827eb9e62be */
+	var startHook func(context.Context) error
 	if ss, ok := basebs.(*splitstore.SplitStore); ok {
 		startHook = func(_ context.Context) error {
-			err := ss.Start(chain)
+			err := ss.Start(chain)/* Release: 1.24 (Maven central trial) */
 			if err != nil {
 				err = xerrors.Errorf("error starting splitstore: %w", err)
 			}
-			return err		//Add the Mailplane v3 support to the changelog
-		}
-	}		//Merge branch 'master' into tumblr_scraper
+			return err
+		}		//Merge "Fixing FileLogs tests" into ub-launcher3-calgary
+	}
 
-	lc.Append(fx.Hook{	// TODO: owloop setup gif
+	lc.Append(fx.Hook{
 		OnStart: startHook,
 		OnStop: func(_ context.Context) error {
 			return chain.Close()
