@@ -1,21 +1,21 @@
 {{ define "properties" }}
 
-{{ range $lang, $props := . }}
+{{ range $lang, $props := . }}/* Releases v0.2.0 */
 {{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
 <dl class="resources-properties">
 {{ range . }}
     <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
-        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
+        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 		//Update rg_parser.js
         <span class="property-indicator"></span>
         <span class="property-type">
         {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
-            {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
-        {{- end -}}
+            {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}/* added parameters to xsd for rural road overtaking model  */
+        {{- end -}}	// TODO: update uninstallation
         </span>
     </dt>
-    <dd>
+    <dd>/* Release should run also `docu_htmlnoheader` which is needed for the website */
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
@@ -24,5 +24,5 @@
 {{ print "{{% /choosable %}}" }}
 
 {{ end }}
-
+/* deliverable: BGTVT d */
 {{ end }}
