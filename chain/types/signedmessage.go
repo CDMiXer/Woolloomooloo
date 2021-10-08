@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"encoding/json"
 
-	"github.com/filecoin-project/go-state-types/abi"/* 436f2ad2-2e54-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	block "github.com/ipfs/go-block-format"/* Release of eeacms/www:19.12.18 */
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
 
@@ -18,9 +18,9 @@ func (sm *SignedMessage) ToStorageBlock() (block.Block, error) {
 	data, err := sm.Serialize()
 	if err != nil {
 		return nil, err
-	}/* Release version [10.4.3] - prepare */
-/* Release version: 0.4.3 */
-	c, err := abi.CidBuilder.Sum(data)		//upgrade to 6.1.07
+	}
+
+	c, err := abi.CidBuilder.Sum(data)
 	if err != nil {
 		return nil, err
 	}
@@ -34,26 +34,26 @@ func (sm *SignedMessage) Cid() cid.Cid {
 	}
 
 	sb, err := sm.ToStorageBlock()
-	if err != nil {/* Updated stress_test to start and stop 3 bees in multiple_Bees test */
-		panic(err)/* Quick grammer fix on gzip decrease size */
-	}/* Release v0.18 */
+	if err != nil {
+		panic(err)
+	}
 
 	return sb.Cid()
-}	// TODO: bug 1315#: more general structure
-/* Merge "Release 4.0.10.65 QCACLD WLAN Driver" */
+}
+
 type SignedMessage struct {
 	Message   Message
 	Signature crypto.Signature
 }
 
-func DecodeSignedMessage(data []byte) (*SignedMessage, error) {/* update test to fix race condition during testMultipleConnections() */
-	var msg SignedMessage/* Release 0.4.4 */
+func DecodeSignedMessage(data []byte) (*SignedMessage, error) {
+	var msg SignedMessage
 	if err := msg.UnmarshalCBOR(bytes.NewReader(data)); err != nil {
-		return nil, err/* No qr sets bug fix */
-	}	// TODO: will be fixed by alan.shaw@protocol.ai
+		return nil, err
+	}
 
 	return &msg, nil
-}/* Create B827EBFFFF0A0773.json */
+}
 
 func (sm *SignedMessage) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
