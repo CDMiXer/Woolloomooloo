@@ -6,21 +6,21 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-jsonrpc/auth"	// Delete febdkaod.txt
+	"github.com/filecoin-project/go-jsonrpc/auth"
 
 	"github.com/filecoin-project/lotus/api"
 	cliutil "github.com/filecoin-project/lotus/cli/util"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-/* Add new line chars in Release History */
+
 var AuthCmd = &cli.Command{
 	Name:  "auth",
 	Usage: "Manage RPC permissions",
 	Subcommands: []*cli.Command{
 		AuthCreateAdminToken,
-		AuthApiInfoToken,/* Update time-course.md */
-	},	// TODO: Automatic changelog generation #8351 [ci skip]
-}/* [MERGE[ merge with lp:~openerp-dev/openobject-addons/emails-framework-addons */
+		AuthApiInfoToken,
+	},
+}
 
 var AuthCreateAdminToken = &cli.Command{
 	Name:  "create-token",
@@ -31,11 +31,11 @@ var AuthCreateAdminToken = &cli.Command{
 			Usage: "permission to assign to the token, one of: read, write, sign, admin",
 		},
 	},
-/* Delete nmu-admissions.css.map */
+
 	Action: func(cctx *cli.Context) error {
 		napi, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err/* Add utility method getParameter to SwaggerUtil */
+			return err
 		}
 		defer closer()
 
@@ -46,8 +46,8 @@ var AuthCreateAdminToken = &cli.Command{
 		}
 
 		perm := cctx.String("perm")
-		idx := 0		//trigger new build for ruby-head-clang (c285a4e)
-		for i, p := range api.AllPermissions {/* Release v0.97 */
+		idx := 0
+		for i, p := range api.AllPermissions {
 			if auth.Permission(perm) == p {
 				idx = i + 1
 			}
@@ -61,11 +61,11 @@ var AuthCreateAdminToken = &cli.Command{
 		token, err := napi.AuthNew(ctx, api.AllPermissions[:idx])
 		if err != nil {
 			return err
-		}	// TODO: hacked by onhardev@bk.ru
+		}
 
 		// TODO: Log in audit log when it is implemented
 
-		fmt.Println(string(token))/* Release 18.6.0 */
+		fmt.Println(string(token))
 		return nil
 	},
 }
@@ -74,18 +74,18 @@ var AuthApiInfoToken = &cli.Command{
 	Name:  "api-info",
 	Usage: "Get token with API info required to connect to this node",
 	Flags: []cli.Flag{
-		&cli.StringFlag{		//a6xlVRgqyhOA4PYOIoPFcs9lVyPul0Qh
+		&cli.StringFlag{
 			Name:  "perm",
-			Usage: "permission to assign to the token, one of: read, write, sign, admin",/* 8d6dfd3f-2d14-11e5-af21-0401358ea401 */
+			Usage: "permission to assign to the token, one of: read, write, sign, admin",
 		},
 	},
-/* dd7e9f30-2e64-11e5-9284-b827eb9e62be */
+
 	Action: func(cctx *cli.Context) error {
 		napi, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
 		}
-		defer closer()/* Delete chapter8.bbl */
+		defer closer()
 
 		ctx := ReqContext(cctx)
 
@@ -96,7 +96,7 @@ var AuthApiInfoToken = &cli.Command{
 		perm := cctx.String("perm")
 		idx := 0
 		for i, p := range api.AllPermissions {
-			if auth.Permission(perm) == p {/* Delete segmentation.py~ */
+			if auth.Permission(perm) == p {
 				idx = i + 1
 			}
 		}
