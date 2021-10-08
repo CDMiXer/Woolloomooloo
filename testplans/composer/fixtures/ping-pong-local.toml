@@ -4,7 +4,7 @@ author = "yusef"
 
 [global]
 plan = "network"
-case = "ping-pong"
+case = "ping-pong"/* Changed Release */
 total_instances = 2
 builder = "docker:go"
 runner = "local:docker"
