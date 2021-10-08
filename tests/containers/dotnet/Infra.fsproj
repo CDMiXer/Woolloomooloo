@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
+  <PropertyGroup>/* Released GoogleApis v0.1.3 */
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Releases downloading implemented */
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup>/* Create monotheme */
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
-</Project>/* Release notes and version bump 5.2.8 */
+</Project>
