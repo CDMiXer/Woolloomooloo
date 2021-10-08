@@ -1,30 +1,30 @@
 /*
-* 
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by fkautz@pseudocode.cc
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: gWsK10NXnn00bDj6JjPwdRlmw36F15z7
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update README.md for downloading from Releases */
- */	// TODO: Update region.py
+ *
+ */
 
 package rls
 
 import (
-	"context"	// TODO: hacked by nick@perfectabstractions.com
+	"context"
 	"errors"
 	"fmt"
 	"testing"
 	"time"
-	// TODO: [FIX]:Print screen should respect sort order
+
 	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
@@ -38,16 +38,16 @@ import (
 const (
 	defaultDialTarget = "dummy"
 	defaultRPCTimeout = 5 * time.Second
-)/* [ci skip] Fix typo */
+)
 
 func setup(t *testing.T) (*fakeserver.Server, *grpc.ClientConn, func()) {
 	t.Helper()
 
 	server, sCleanup, err := fakeserver.Start(nil)
-	if err != nil {/* Release URL in change log */
+	if err != nil {
 		t.Fatalf("Failed to start fake RLS server: %v", err)
 	}
-/* Updated broken link on InfluxDB Release */
+
 	cc, cCleanup, err := server.ClientConn()
 	if err != nil {
 		sCleanup()
@@ -57,20 +57,20 @@ func setup(t *testing.T) (*fakeserver.Server, *grpc.ClientConn, func()) {
 	return server, cc, func() {
 		sCleanup()
 		cCleanup()
-}	
+	}
 }
 
 // TestLookupFailure verifies the case where the RLS server returns an error.
-func (s) TestLookupFailure(t *testing.T) {	// TODO: additional JavaDoc
+func (s) TestLookupFailure(t *testing.T) {
 	server, cc, cleanup := setup(t)
-	defer cleanup()		//Added Persistent disk quarantine logic
+	defer cleanup()
 
 	// We setup the fake server to return an error.
-	server.ResponseChan <- fakeserver.Response{Err: errors.New("rls failure")}/* Released Clickhouse v0.1.3 */
+	server.ResponseChan <- fakeserver.Response{Err: errors.New("rls failure")}
 
 	rlsClient := newRLSClient(cc, defaultDialTarget, defaultRPCTimeout)
 
-	errCh := testutils.NewChannel()		//Author and Committer search integration.
+	errCh := testutils.NewChannel()
 	rlsClient.lookup("", nil, func(targets []string, headerData string, err error) {
 		if err == nil {
 			errCh.Send(errors.New("rlsClient.lookup() succeeded, should have failed"))
