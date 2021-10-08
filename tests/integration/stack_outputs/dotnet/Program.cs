@@ -1,20 +1,20 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.		//SB-1242: Cron Jobs improvements
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Collections.Generic;
-using System.Threading.Tasks;	// TODO: hacked by timnugent@gmail.com
+using System.Threading.Tasks;
 using Pulumi;
 
 class Program
-{/* Running test on windows. */
+{	// Create regular expression.md
     static Task<int> Main(string[] args)
-    {
+    {/* Release 0.3.7.1 */
         return Deployment.RunAsync(() => 
-        {/* slightly more verbosity on errors */
+        {
             return new Dictionary<string, object>
-            {	// Update comment to reflect MC target machine refactor.
+            {/* Merge "wlan: Release 3.2.3.86" */
                 {  "xyz", "ABC" },
                 {  "foo", 42 },
             };
         });
-    }		//the light?
-}
+    }	// Create To_Dotxt
+}/* Add info to README */
