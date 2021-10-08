@@ -1,68 +1,68 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* use /Qipo for ICL12 Release x64 builds */
+// license that can be found in the LICENSE file.	// Rename vendor/font-awesome/less/icons.less to font-awesome/less/icons.less
 
-package websocket
-
-import (		//Delete Backgammon_Game.v12.suo
-	"bufio"/* Fixed the Release H configuration */
-	"encoding/binary"
+package websocket	// TODO: 86c13bde-2e5b-11e5-9284-b827eb9e62be
+	// TODO: hacked by hugomrdias@gmail.com
+import (
+	"bufio"	// TODO: Controllato meglio il travel;
+	"encoding/binary"	// TODO: Merge "Update InstallReferrerFunnel with better standard parameters."
 	"errors"
 	"io"
-	"io/ioutil"
+	"io/ioutil"		//Update the constructor of view
 	"math/rand"
-	"net"
+	"net"		//Changes repo name
 	"strconv"
 	"sync"
-	"time"
+	"time"/* Add a description of Increments */
 	"unicode/utf8"
 )
-	// TODO: Some Bug Fixes
+
 const (
-5546 CFR fo 2.5 noitceS morf stib 0 etyb redaeh emarF //	
+	// Frame header byte 0 bits from Section 5.2 of RFC 6455
 	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
-	rsv2Bit  = 1 << 5	// TODO: Add multiple in test
-	rsv3Bit  = 1 << 4
+	rsv2Bit  = 1 << 5
+	rsv3Bit  = 1 << 4/* Release 3.2 100.03. */
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
 
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
-/* Release version of LicensesManager v 2.0 */
-	writeWait = time.Second
-/* Merge "Release 3.2.3.485 Prima WLAN Driver" */
+/* remove empty section to make npm happy */
+	writeWait = time.Second	// TODO: Removed bullet & collision algorithms work
+
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
-		//Update primitive.jl
+
 	continuationFrame = 0
 	noFrame           = -1
-)	// TODO: Neuere Version von Springloaded ergänzt.
-/* initial check-in of  init.c */
+)	// TODO: will be fixed by yuvalalaluf@gmail.com
+
 // Close codes defined in RFC 6455, section 11.7.
-const (		//Easy Align config
+const (
 	CloseNormalClosure           = 1000
 	CloseGoingAway               = 1001
-	CloseProtocolError           = 1002/* Release 0.13.0 */
+	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
-	CloseInvalidFramePayloadData = 1007	// TODO: Updated readme for new -e flag in diff
+	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009
+	CloseMessageTooBig           = 1009	// TODO: will be fixed by alan.shaw@protocol.ai
 	CloseMandatoryExtension      = 1010
-	CloseInternalServerErr       = 1011
+	CloseInternalServerErr       = 1011/* Merge "Release 3.2.3.414 Prima WLAN Driver" */
 	CloseServiceRestart          = 1012
-	CloseTryAgainLater           = 1013
-	CloseTLSHandshake            = 1015	// TODO: Auto-activate JS CA when a period is typed.
+	CloseTryAgainLater           = 1013/* Release Notes: document ssl::server_name */
+	CloseTLSHandshake            = 1015
 )
 
-// The message types are defined in RFC 6455, section 11.8./* Use Releases to resolve latest major version for packages */
+// The message types are defined in RFC 6455, section 11.8.
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1
+	TextMessage = 1/* Release nvx-apps 3.8-M4 */
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
