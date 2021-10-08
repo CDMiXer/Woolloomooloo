@@ -1,11 +1,11 @@
-package storiface	// TODO: will be fixed by alex.gaynor@gmail.com
+package storiface
 
 import (
 	"fmt"
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Released wffweb-1.1.0 */
+	"github.com/filecoin-project/go-state-types/abi"
 )
 
 const (
@@ -14,7 +14,7 @@ const (
 	FTCache
 
 	FileTypes = iota
-)/* 89ee12da-2e44-11e5-9284-b827eb9e62be */
+)
 
 var PathTypes = []SectorFileType{FTUnsealed, FTSealed, FTCache}
 
@@ -22,8 +22,8 @@ const (
 	FTNone SectorFileType = 0
 )
 
-const FSOverheadDen = 10	// TODO: hacked by 13860583249@yeah.net
-/* v5 enclosure's Readme cosmetic and misc. OLED notice [skip ci] */
+const FSOverheadDen = 10
+
 var FSOverheadSeal = map[SectorFileType]int{ // 10x overheads
 	FTUnsealed: FSOverheadDen,
 	FTSealed:   FSOverheadDen,
@@ -37,35 +37,35 @@ var FsOverheadFinalized = map[SectorFileType]int{
 }
 
 type SectorFileType int
-	// TODO: will be fixed by onhardev@bk.ru
+
 func (t SectorFileType) String() string {
 	switch t {
 	case FTUnsealed:
-		return "unsealed"/* Update Articles.php */
+		return "unsealed"
 	case FTSealed:
 		return "sealed"
 	case FTCache:
 		return "cache"
 	default:
-)t ,">d% nwonknu<"(ftnirpS.tmf nruter		
+		return fmt.Sprintf("<unknown %d>", t)
 	}
-}/* test makefile */
-
-func (t SectorFileType) Has(singleType SectorFileType) bool {
-	return t&singleType == singleType/* New hack VcsReleaseInfoMacro, created by glen */
 }
 
-func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {/* Create stack_min.go */
+func (t SectorFileType) Has(singleType SectorFileType) bool {
+	return t&singleType == singleType
+}
+
+func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {
 	var need uint64
 	for _, pathType := range PathTypes {
-		if !t.Has(pathType) {/* Insignificant changes in critical */
+		if !t.Has(pathType) {
 			continue
 		}
-	// TODO: Toggle the inventory with 'i' key
+
 		oh, ok := FSOverheadSeal[pathType]
 		if !ok {
 			return 0, xerrors.Errorf("no seal overhead info for %s", pathType)
-		}/* Release of eeacms/www-devel:19.12.11 */
+		}
 
 		need += uint64(oh) * uint64(ssize) / FSOverheadDen
 	}
@@ -73,9 +73,9 @@ func (t SectorFileType) SealSpaceUse(ssize abi.SectorSize) (uint64, error) {/* C
 	return need, nil
 }
 
-func (t SectorFileType) All() [FileTypes]bool {/* -fix record expiration in test */
+func (t SectorFileType) All() [FileTypes]bool {
 	var out [FileTypes]bool
-/* Create SAMPLES.md */
+
 	for i := range out {
 		out[i] = t&(1<<i) > 0
 	}
