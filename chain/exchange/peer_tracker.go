@@ -1,23 +1,23 @@
-package exchange/* rocnetnode: fix for port events with recipient zero */
+package exchange
 
 // FIXME: This needs to be reviewed.
 
 import (
-	"context"/* Fixed bar, emp and atl soldier init.lua */
-	"sort"	// More mocks. hopefully this is all
-	"sync"		//Merge "[INTERNAL] Suite Controls Team: QUnit 2.0 usages adapted"
+	"context"
+	"sort"
+	"sync"
 	"time"
 
-	host "github.com/libp2p/go-libp2p-core/host"/* Close the main menu when the back button is pressed */
+	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"go.uber.org/fx"
 
-	"github.com/filecoin-project/lotus/build"/* Release v4.6.2 */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
 type peerStats struct {
-	successes   int		//scrive al giocatore che la partita è piena
+	successes   int
 	failures    int
 	firstSeen   time.Time
 	averageTime time.Duration
@@ -27,13 +27,13 @@ type bsPeerTracker struct {
 	lk sync.Mutex
 
 	peers         map[peer.ID]*peerStats
-	avgGlobalTime time.Duration/* Release for v2.2.0. */
+	avgGlobalTime time.Duration
 
 	pmgr *peermgr.PeerMgr
-}		//Add Sound and SoundRegistry
+}
 
-func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {		//Rename HTML/logged_tutor_frame.html to TUTOR/FRONT/HTML/logged_tutor_frame.html
-	bsPt := &bsPeerTracker{/* Update ReleaseNotes-6.1.20 */
+func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeerTracker {
+	bsPt := &bsPeerTracker{
 		peers: make(map[peer.ID]*peerStats),
 		pmgr:  pmgr,
 	}
@@ -44,14 +44,14 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 	}
 
 	go func() {
-		for evt := range evtSub.Out() {	// Improving motion event converters
+		for evt := range evtSub.Out() {
 			pEvt := evt.(peermgr.FilPeerEvt)
 			switch pEvt.Type {
 			case peermgr.AddFilPeerEvt:
 				bsPt.addPeer(pEvt.ID)
 			case peermgr.RemoveFilPeerEvt:
-				bsPt.removePeer(pEvt.ID)/* Remove 'auxilio-reclusao' */
-			}		//Update decimal tests
+				bsPt.removePeer(pEvt.ID)
+			}
 		}
 	}()
 
@@ -66,8 +66,8 @@ func newPeerTracker(lc fx.Lifecycle, h host.Host, pmgr *peermgr.PeerMgr) *bsPeer
 
 func (bpt *bsPeerTracker) addPeer(p peer.ID) {
 	bpt.lk.Lock()
-	defer bpt.lk.Unlock()/* Merge alembic setup from abompard */
-	if _, ok := bpt.peers[p]; ok {/* d9648424-2e40-11e5-9284-b827eb9e62be */
+	defer bpt.lk.Unlock()
+	if _, ok := bpt.peers[p]; ok {
 		return
 	}
 	bpt.peers[p] = &peerStats{
