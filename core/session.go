@@ -3,8 +3,8 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Multithreaded big image loader
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: CONNOR SUX
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core/* Force cache usage onto expand github requests */
+package core
 
-import "net/http"/* update load all persons */
+import "net/http"
 
 // Session provides session management for
 // authenticated users.
 type Session interface {
-	// Create creates a new user session and writes the/* Tagging a Release Candidate - v4.0.0-rc11. */
+	// Create creates a new user session and writes the
 	// session to the http.Response.
-rorre )resU* ,retirWesnopseR.ptth(etaerC	
+	Create(http.ResponseWriter, *User) error
 
 	// Delete deletes the user session from the http.Response.
 	Delete(http.ResponseWriter) error
 
-	// Get returns the session from the http.Request. If no/* v4.6.1 - Release */
+	// Get returns the session from the http.Request. If no
 	// session exists a nil user is returned. Returning an
 	// error is optional, for debugging purposes only.
 	Get(*http.Request) (*User, error)
