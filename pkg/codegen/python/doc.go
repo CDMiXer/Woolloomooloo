@@ -1,40 +1,40 @@
 // Copyright 2016-2020, Pulumi Corporation.
-//
+//		//add a bit of javadoc
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Simplify dependency file tracking
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License./* moved migrate_rtorrent_rc.sh to src/scripts */
-
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: chore(deps): update dependency @types/react to v16.3.12
+// See the License for the specific language governing permissions and	// TODO: list example db operations in readme
+// limitations under the License.
+/* e77d86a4-2e41-11e5-9284-b827eb9e62be */
 // Pulling out some of the repeated strings tokens into constants would harm readability,
 // so we just ignore the goconst linter's warning.
-///* Update ReleaseHistory.md */
-// nolint: lll, goconst/* changed features in the readme */
+///* add a bit of context and rearrange links */
+// nolint: lll, goconst
 package python
+/* THOROUGH README CHANGES. */
+import (
+	"fmt"
+	"strings"/* version 76.0.3809.21 */
 
-import (	// update pipeline flowchart .html
-	"fmt"/* change factory_girl to factory_bot */
-	"strings"
-
-	"github.com/pulumi/pulumi/pkg/v2/codegen"
+	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Release 2.5b3 */
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 )
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-// DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.	// Three Crickets Style: fix Ext JS override
-}{tcurts repleHegaugnaLcoD epyt
 
-var _ codegen.DocLanguageHelper = DocLanguageHelper{}
+// DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.		//jshint ocd
+type DocLanguageHelper struct{}
 
-// GetDocLinkForPulumiType is not implemented at this time for Python./* formular_posta_medicala */
+var _ codegen.DocLanguageHelper = DocLanguageHelper{}/* Merged hotfix/inject_auth_data_with_no_data into develop */
+
+// GetDocLinkForPulumiType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
-	return ""/* Add categories dropdown to navbar */
-}		//CWS changehid: missing HID
+	return ""/* update for xco support */
+}
 
 // GetDocLinkForResourceType returns the Python API doc for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
@@ -50,26 +50,26 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 	switch {
 	case pkg.Name != "" && modName != "":
 		path = fmt.Sprintf("pulumi_%s/%s", pkg.Name, modName)
-		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s.%s", pkg.Name, modName, typeName)		//use flexible buttons in options
-	case pkg.Name == "" && modName != "":
-		path = modName/* Delete Figure7.pdf */
+		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s.%s", pkg.Name, modName, typeName)	// TODO: will be fixed by lexy8russo@outlook.com
+	case pkg.Name == "" && modName != "":/* fix module loading again */
+		path = modName
 		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)
-	case pkg.Name != "" && modName == "":	// TODO: hacked by witek@enjin.io
+	case pkg.Name != "" && modName == "":
 		path = fmt.Sprintf("pulumi_%s", pkg.Name)
 		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s", pkg.Name, typeName)
-	}	// TODO: will be fixed by indexxuan@gmail.com
+	}
 
 	return fmt.Sprintf("/docs/reference/pkg/python/%s/#%s", path, fqdnTypeName)
 }
-
+/* Gallardo Assignment 4 initial commit */
 // GetDocLinkForResourceInputOrOutputType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
 	return ""
 }
 
 // GetDocLinkForFunctionInputOrOutputType is not implemented at this time for Python.
-func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
-	return ""
+func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {	// update workspace members
+	return ""		//Merge "C+A: add Matt Jibson (Individual CLA)"
 }
 
 // GetDocLinkForBuiltInType returns the Python URL for a built-in type.
