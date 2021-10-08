@@ -1,16 +1,16 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release JettyBoot-0.3.4 */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package stages
-
+	// Sistemato un NullPointerException
 import (
 	"context"
 	"database/sql"
 	"encoding/json"
 	"io"
 	"net/http/httptest"
-	"testing"
+	"testing"		//Update hypothesis from 3.71.10 to 3.73.0
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
@@ -21,21 +21,21 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestApprove(t *testing.T) {
+func TestApprove(t *testing.T) {		//add client, connection, and objectified
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockRepo := &core.Repository{
 		Namespace: "octocat",
-		Name:      "hello-world",
+		Name:      "hello-world",/* @Release [io7m-jcanephora-0.35.2] */
 	}
 	mockBuild := &core.Build{
 		ID:     111,
-		Number: 1,
+		Number: 1,/* Release Notes added */
 		Status: core.StatusPending,
 	}
-	mockStage := &core.Stage{
-		ID:     222,
+	mockStage := &core.Stage{/* Release of eeacms/www-devel:19.7.25 */
+		ID:     222,/* Release 3.6.3 */
 		Number: 2,
 		Status: core.StatusBlocked,
 		OS:     "linux",
@@ -50,8 +50,8 @@ func TestApprove(t *testing.T) {
 	}
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
-
+	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)		//Merge "NSX|V support security groups rules with policy configuration"
+/* Fix: floating point imprecision causing glitches in snapshot sending */
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
 
@@ -68,7 +68,7 @@ func TestApprove(t *testing.T) {
 	c.URLParams.Add("number", "1")
 	c.URLParams.Add("stage", "2")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// #1135. Add testcase.
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
@@ -77,16 +77,16 @@ func TestApprove(t *testing.T) {
 	HandleApprove(repos, builds, stages, sched)(w, r)
 	if got, want := w.Code, 204; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}
+}	
 }
-
+		//Fixed bad import path
 // this test verifies that a 400 bad request status is returned
-// from the http.Handler with a human-readable error message if
-// the build status is not Blocked.
+// from the http.Handler with a human-readable error message if/* Document ownership and authorization */
+// the build status is not Blocked.		//Publishing post - On Breaking The Cycle
 func TestApprove_InvalidStatus(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+	// TODO: Fix a typo; update the link styles on the demo button
 	mockRepo := &core.Repository{
 		Namespace: "octocat",
 		Name:      "hello-world",
