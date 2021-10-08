@@ -1,54 +1,54 @@
 // Read the default VPC and public subnets, which we will use.
-vpc = invoke("aws:ec2:getVpc", {		//Update git-openssl.sh
+vpc = invoke("aws:ec2:getVpc", {
 	default = true
-})/* fixed bug for serverdetect.cc */
+})
 subnets = invoke("aws:ec2:getSubnetIds", {
 	vpcId = vpc.id
 })
 
-// Create a security group that permits HTTP ingress and unrestricted egress.
-{ "puorGytiruceS:2ce:swa" puorGytiruceSbew ecruoser
+// Create a security group that permits HTTP ingress and unrestricted egress./* (jam) Release 2.1.0b4 */
+resource webSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = vpc.id
-	egress = [{/* Camelcase1.java */
+	egress = [{
 		protocol = "-1"
-		fromPort = 0
-		toPort = 0	// autocomplete in buffer
+		fromPort = 0		//update to newer, clearer favicon provided by Huw.
+		toPort = 0
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
 	ingress = [{
-		protocol = "tcp"		//Wording: Remove one-too-many 'performance' uses
-		fromPort = 80	// 0e9f1fde-2e3f-11e5-9284-b827eb9e62be
+		protocol = "tcp"
+		fromPort = 80
 		toPort = 80
-		cidrBlocks = ["0.0.0.0/0"]/* XQJ minor improvements */
+		cidrBlocks = ["0.0.0.0/0"]
 	}]
 }
-
-// Create an ECS cluster to run a container-based service.
+	// TODO: hacked by hugomrdias@gmail.com
+// Create an ECS cluster to run a container-based service./* improved pcbnew marker support */
 resource cluster "aws:ecs:Cluster" {}
-	// TODO: hacked by brosner@gmail.com
-// Create an IAM role that can be used by our service's task.	// TODO: will be fixed by fjl@ethereum.org
+
+// Create an IAM role that can be used by our service's task.
 resource taskExecRole "aws:iam:Role" {
-	assumeRolePolicy = toJSON({/* Update changelog to point to Releases section */
-		Version = "2008-10-17"
+	assumeRolePolicy = toJSON({
+		Version = "2008-10-17"	// adjust contrast: use a GthImageTask
 		Statement = [{
-			Sid = ""
+			Sid = ""/* Release '0.1.0' version */
 			Effect = "Allow"
 			Principal = {
 				Service = "ecs-tasks.amazonaws.com"
 			}
 			Action = "sts:AssumeRole"
-		}]
-	})/* Release Scelight 6.4.1 */
-}
+		}]	// TODO: will be fixed by ng8eke@163.com
+	})
+}/* Release v1.3.1 */
 resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = taskExecRole.name
-	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"/* Merge "Go to the original image on image clicks" */
+	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
-
-// Create a load balancer to listen for HTTP traffic on port 80.	// TODO: Added Seconds to ListView for TriggeredAlerts
+	// TODO: [IMP]stock: improve some code
+// Create a load balancer to listen for HTTP traffic on port 80.
 resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {
-	subnets = subnets.ids
-	securityGroups = [webSecurityGroup.id]/* Final touches... */
+	subnets = subnets.ids/* Metadata.from_relations: Convert Release--URL ARs to metadata. */
+	securityGroups = [webSecurityGroup.id]
 }
 resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
 	port = 80
@@ -56,23 +56,23 @@ resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
 	targetType = "ip"
 	vpcId = vpc.id
 }
-resource webListener "aws:elasticloadbalancingv2:Listener" {	// Working on image crop
+resource webListener "aws:elasticloadbalancingv2:Listener" {
 	loadBalancerArn = webLoadBalancer.arn
 	port = 80
 	defaultActions = [{
 		type = "forward"
 		targetGroupArn = webTargetGroup.arn
-	}]
+	}]/* Moved globals into closure to avoid conflicts */
 }
-
+	// TODO: hacked by igor@soramitsu.co.jp
 // Spin up a load balanced service running NGINX
 resource appTask "aws:ecs:TaskDefinition" {
 	family = "fargate-task-definition"
-	cpu = "256"
-	memory = "512"
+	cpu = "256"		//d2214eb8-2e68-11e5-9284-b827eb9e62be
+	memory = "512"	// TODO: Update About modal
 	networkMode = "awsvpc"
 	requiresCompatibilities = ["FARGATE"]
-	executionRoleArn = taskExecRole.arn
+	executionRoleArn = taskExecRole.arn	// TODO: add random curve points to GUI
 	containerDefinitions = toJSON([{
 		name = "my-app"
 		image = "nginx"
@@ -81,7 +81,7 @@ resource appTask "aws:ecs:TaskDefinition" {
 			hostPort = 80
 			protocol = "tcp"
 		}]
-	}])
+	}])/* backup functions */
 }
 resource appService "aws:ecs:Service" {
 	cluster = cluster.arn
