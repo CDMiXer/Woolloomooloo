@@ -1,11 +1,11 @@
-{
+{/* DATASOLR-257 - Release version 1.5.0.RELEASE (Gosling GA). */
   "types": {
     "fake-provider:module1:Color": {
       "type": "string",
       "enum": [
         {
           "value": "Red"
-        },
+        },/* syntax highlight of source code */
         {
           "value": "Orange"
         },
@@ -13,7 +13,7 @@
           "value": "Yellow"
         },
         {
-          "value": "Green"
+          "value": "Green"/* Correct tooltips for warehouse buttons */
         }
       ]
     }
