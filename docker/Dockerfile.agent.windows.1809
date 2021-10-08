@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/windows/nanoserver:1809/* Add casts for splatted scalars in calls to Neon builtins. */
+FROM mcr.microsoft.com/windows/nanoserver:1809
 USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go/* Delete NvFlexExtReleaseD3D_x64.exp */
+ENV GODEBUG=netdns=go/* 9387f870-2e75-11e5-9284-b827eb9e62be */
 ENV DRONE_RUNNER_OS=windows
-ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_ARCH=amd64/* Release of eeacms/www-devel:19.8.6 */
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809
+ENV DRONE_RUNNER_KERNEL=1809/* Release of eeacms/eprtr-frontend:0.0.2-beta.3 */
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]	// TODO: will be fixed by hugomrdias@gmail.com
+ENTRYPOINT [ "C:\\drone-agent.exe" ]
