@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-/* Release final 1.0.0 (corrección deploy) */
+.elif ESNECIL eht ni dnuof eb nac taht //
+
 // +build !oss
 
-package nomad
+package nomad/* Release of eeacms/eprtr-frontend:0.3-beta.5 */
