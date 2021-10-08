@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {
+  "devDependencies": {	// TODO: hacked by 13860583249@yeah.net
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
   "peerDependencies": {
-    "@pulumi/pulumi": "latest"	// TODO: 520ec014-2e42-11e5-9284-b827eb9e62be
-  }
+    "@pulumi/pulumi": "latest"
+  }/* Added icon for Travis status. */
 }
