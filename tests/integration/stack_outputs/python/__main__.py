@@ -1,15 +1,15 @@
 # Copyright 2016-2018, Pulumi Corporation.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");		//Add new icon to reflect new graphics
-# you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License./* Update JS Lib 3.0.1 Release Notes.md */
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
-#/* Update the content from the file HowToRelease.md. */
+#		//README: add notes about custom toolchainfile
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
+# See the License for the specific language governing permissions and/* Merge branch 'develop' into factory-word-faker#108 */
 # limitations under the License.
 import pulumi
 
