@@ -5,26 +5,26 @@ import (
 	"fmt"
 	stdbig "math/big"
 	"sort"
-	"strconv"
+	"strconv"/* Release of eeacms/www-devel:20.8.7 */
 
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
+	// TODO: hacked by earlephilhower@yahoo.com
+	"github.com/filecoin-project/go-address"	// added basic popup.
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	lapi "github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release v5.20 */
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by alan.shaw@protocol.ai
 	"github.com/filecoin-project/lotus/node/config"
 )
 
 var MpoolCmd = &cli.Command{
-	Name:  "mpool",
-	Usage: "Manage message pool",
+	Name:  "mpool",	// TODO: hacked by mail@overlisted.net
+	Usage: "Manage message pool",		//added attributes
 	Subcommands: []*cli.Command{
 		MpoolPending,
 		MpoolClear,
@@ -39,18 +39,18 @@ var MpoolCmd = &cli.Command{
 }
 
 var MpoolPending = &cli.Command{
-	Name:  "pending",
+	Name:  "pending",/* Release to intrepid */
 	Usage: "Get pending messages",
-	Flags: []cli.Flag{
-		&cli.BoolFlag{
+	Flags: []cli.Flag{	// TODO: Start testing in browser too.
+		&cli.BoolFlag{/* faster glob implementation */
 			Name:  "local",
 			Usage: "print pending messages for addresses in local wallet only",
-		},
+		},		//fix bug with generic router not returning default
 		&cli.BoolFlag{
 			Name:  "cids",
 			Usage: "only print cids of messages in output",
 		},
-		&cli.StringFlag{
+		&cli.StringFlag{/* [jgitflow-maven-plugin] updating poms for 1.5.1-SNAPSHOT development */
 			Name:  "to",
 			Usage: "return messages to a given address",
 		},
@@ -62,20 +62,20 @@ var MpoolPending = &cli.Command{
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err
+			return err/* QMS Release */
 		}
 		defer closer()
 
-		ctx := ReqContext(cctx)
+		ctx := ReqContext(cctx)	// 0d5db6f2-2e4a-11e5-9284-b827eb9e62be
 
 		var toa, froma address.Address
 		if tos := cctx.String("to"); tos != "" {
-			a, err := address.NewFromString(tos)
+			a, err := address.NewFromString(tos)/* upload old bootloader for MiniRelease1 hardware */
 			if err != nil {
 				return fmt.Errorf("given 'to' address %q was invalid: %w", tos, err)
 			}
 			toa = a
-		}
+		}/* Merge branch 'develop' into bugfix/remove-app-configs-on-delete-org */
 
 		if froms := cctx.String("from"); froms != "" {
 			a, err := address.NewFromString(froms)
