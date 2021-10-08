@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");/* debian: Release 0.11.8-1 */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package version
+package version/* re-code install & uninstall module */
 
 // Version is initialized by the Go linker to contain the semver of this build.
 var Version string
