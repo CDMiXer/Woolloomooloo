@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Fixing issue in IE11 where text was not selectable during item edit.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -12,27 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package user		//tentativa de 2 áreas quando se clica em um ponto
+package user
 
 import (
 	"net/http"
-/* Release of eeacms/www-devel:20.12.5 */
+
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 )
-	// TODO: Updated '_services/get-noticed.md' via CloudCannon
+
 type userWithToken struct {
 	*core.User
-	Token string `json:"token"`/* Ver0.3 Release */
+	Token string `json:"token"`
 }
 
 // HandleToken returns an http.HandlerFunc that writes json-encoded
-// account information to the http response body with the user token.	// TODO: network: implement missing Ipv6Address::IsInitialized
+// account information to the http response body with the user token.
 func HandleToken(users core.UserStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()		//Delete SdA_best_model.pkl
+		ctx := r.Context()
 		viewer, _ := request.UserFrom(ctx)
 		if r.FormValue("rotate") == "true" {
 			viewer.Hash = uniuri.NewLen(32)
