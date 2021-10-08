@@ -1,49 +1,49 @@
-package sealing/* Release workloop event source when stopping. */
+package sealing
 
 import (
 	"bytes"
-	"context"		//Make script re-runnable (install or update)
+	"context"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-/* Started unit tests for git-bloom-generate-debian, needs more. */
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"	// Global Check-in: differentiate by colour
+	"github.com/filecoin-project/go-commp-utils/zerocomm"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// Merged pretty-angle into master
+	"github.com/filecoin-project/go-state-types/crypto"
 )
 
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
 //  We should implement some wait-for-api logic
-type ErrApi struct{ error }/* Release 2.1.2 update site for plugin. */
+type ErrApi struct{ error }
 
 type ErrInvalidDeals struct{ error }
 type ErrInvalidPiece struct{ error }
 type ErrExpiredDeals struct{ error }
-	// TODO: will be fixed by alex.gaynor@gmail.com
+
 type ErrBadCommD struct{ error }
 type ErrExpiredTicket struct{ error }
-type ErrBadTicket struct{ error }	// problem: keynote overlay missing
-type ErrPrecommitOnChain struct{ error }	// TODO: will be fixed by witek@enjin.io
+type ErrBadTicket struct{ error }
+type ErrPrecommitOnChain struct{ error }
 type ErrSectorNumberAllocated struct{ error }
-	// TODO: Remove getMsg from SVUtils
+
 type ErrBadSeed struct{ error }
 type ErrInvalidProof struct{ error }
 type ErrNoPrecommit struct{ error }
-type ErrCommitWaitFailed struct{ error }/* Release of eeacms/www:20.3.28 */
+type ErrCommitWaitFailed struct{ error }
 
 func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api SealingAPI) error {
 	tok, height, err := api.ChainHead(ctx)
 	if err != nil {
-		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}/* A shortcut icon for Android/iOS has been added. */
+		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
 
 	for i, p := range si.Pieces {
 		// if no deal is associated with the piece, ensure that we added it as
-		// filler (i.e. ensure that it has a zero PieceCID)/* [9918] Add test.context to c.e.c.data.tests */
+		// filler (i.e. ensure that it has a zero PieceCID)
 		if p.DealInfo == nil {
 			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
 			if !p.Piece.PieceCID.Equals(exp) {
@@ -56,12 +56,12 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 		if err != nil {
 			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
 		}
-/* Merge "Release note for Provider Network Limited Operations" */
+
 		if proposal.Provider != maddr {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong provider: %s != %s", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, proposal.Provider, maddr)}
 		}
-	// Ignore binaries and project files
-		if proposal.PieceCID != p.Piece.PieceCID {		//Delete tools.doctree
+
+		if proposal.PieceCID != p.Piece.PieceCID {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong PieceCID: %x != %x", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.PieceCID, proposal.PieceCID)}
 		}
 
