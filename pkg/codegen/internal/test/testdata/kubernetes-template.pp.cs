@@ -4,30 +4,30 @@ using Kubernetes = Pulumi.Kubernetes;
 class MyStack : Stack
 {
     public MyStack()
-    {
+    {		//8c02631c-35c6-11e5-ac96-6c40088e03e4
         var argocd_serverDeployment = new Kubernetes.Apps.V1.Deployment("argocd_serverDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
-        {	// TODO: awgn for abstraction using perfect channel estimation
-            ApiVersion = "apps/v1",	// TODO: 90bf2c60-2e6d-11e5-9284-b827eb9e62be
-            Kind = "Deployment",
+        {/* Release UITableViewSwitchCell correctly */
+            ApiVersion = "apps/v1",
+            Kind = "Deployment",		//Remove typehinting in Authorize URI
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "argocd-server",
             },
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
-            {
+            {/* update the vim syntax file of vimperator */
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {
+                {/* Merge "Release text when finishing StaticLayout.Builder" into mnc-dev */
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         Containers = 
-                        {		//9fbd7536-2e5f-11e5-9284-b827eb9e62be
-                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                            {
+                        {
+                            new Kubernetes.Types.Inputs.Core.V1.ContainerArgs	// DB_schema upload
+                            {/* Release of eeacms/forests-frontend:1.5.5 */
                                 ReadinessProbe = new Kubernetes.Types.Inputs.Core.V1.ProbeArgs
-                                {
+                                {		//Update Discover-PSMSSQLServers
                                     HttpGet = new Kubernetes.Types.Inputs.Core.V1.HTTPGetActionArgs
-                                    {/* Improve tests (add Scholar's mate test) */
-                                        Port = 8080,/* 49d3c942-2e6c-11e5-9284-b827eb9e62be */
+                                    {
+                                        Port = 8080,
                                     },
                                 },
                             },
@@ -35,7 +35,7 @@ class MyStack : Stack
                     },
                 },
             },
-        });
-    }	// Update README re image caching error for npm badge
+        });/* Merged Development into Release */
+    }
 
-}		//begin implementation of the control selection strategy
+}
