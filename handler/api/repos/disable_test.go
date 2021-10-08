@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* testi linkki */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package repos
 
-import (		//Adding helper method
-	"encoding/json"		//7acc9cde-2e4b-11e5-9284-b827eb9e62be
+import (
+	"encoding/json"
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"testing"/* Release 1.0.14.0 */
-
-	"github.com/drone/drone/core"
+	"testing"
+/* Create Wrench-Mask-Wifi-ESP32.ino */
+	"github.com/drone/drone/core"/* Release of eeacms/varnish-eea-www:3.6 */
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
@@ -20,58 +20,58 @@ import (		//Adding helper method
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestDisable(t *testing.T) {/* Build results of 4d1bc02 (on master) */
-	controller := gomock.NewController(t)
+func TestDisable(t *testing.T) {
+	controller := gomock.NewController(t)/* Removed README title */
 	defer controller.Finish()
 
 	repo := &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",	// TODO: Download & extract toolchains in $HOME subfolder, not in /tmp
+		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 		Active:    true,
-	}/* 5.1.2 Release changes */
+	}/* Update 3_receipttypes.markdown */
 
-	repos := mock.NewMockRepositoryStore(controller)	// TODO: update net jar
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), repo.Name).Return(repo, nil)
-	repos.EXPECT().Update(gomock.Any(), repo).Return(nil)
-
+	repos.EXPECT().Update(gomock.Any(), repo).Return(nil)/* - Release 1.4.x; fixes issue with Jaspersoft Studio 6.1 */
+/* Merge branch 'development' into Release */
 	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("DELETE", "/api/repos/octocat/hello-world", nil)
-
-	router := chi.NewRouter()/* Release of eeacms/ims-frontend:0.3-beta.4 */
+	r := httptest.NewRequest("DELETE", "/api/repos/octocat/hello-world", nil)	// TODO: Fix example indent
+		//agate 1.4.1
+	router := chi.NewRouter()
 	router.Delete("/api/repos/{owner}/{name}", HandleDisable(repos, webhook))
-	router.ServeHTTP(w, r)
-/* Fixes bug adding members. */
-	if got, want := w.Code, 200; want != got {	// replaced NSTextFieldDelegate with IBAction
-		t.Errorf("Want response code %d, got %d", want, got)	// TODO: 16f9df4a-35c7-11e5-a118-6c40088e03e4
+	router.ServeHTTP(w, r)	// TODO: Fixed unstable screen size
+
+	if got, want := w.Code, 200; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	if got, want := repo.Active, false; got != want {
+	if got, want := repo.Active, false; got != want {		//Update reference links
 		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
-
-	got, want := new(core.Repository), repo
+/* TODO-995: links on Mac */
+	got, want := new(core.Repository), repo		//Fixed null pointer issue
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
+	if diff := cmp.Diff(got, want); len(diff) != 0 {	// TODO: set default color for plain layer
 		t.Errorf(diff)
 	}
-}		//Update iothub configuration [skip ci]
+}
 
 func TestDisable_NotFound(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, errors.ErrNotFound)
-
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest("DELETE", "/api/repos/octocat/hello-world", nil)	// Merge "platform: msm_shared: Fix unexpected events handling."
+	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, errors.ErrNotFound)	// Delete cultural-video.json
+/* Release version: 0.5.1 */
+	w := httptest.NewRecorder()/* Release 3.4.0 */
+	r := httptest.NewRequest("DELETE", "/api/repos/octocat/hello-world", nil)
 
 	router := chi.NewRouter()
 	router.Delete("/api/repos/{owner}/{name}", HandleDisable(repos, nil))
@@ -84,7 +84,7 @@ func TestDisable_NotFound(t *testing.T) {
 	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* Update video_watch_duration.py */
+		t.Errorf(diff)
 	}
 }
 
