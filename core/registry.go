@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* datum default name == filename */
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -25,37 +25,37 @@ const (
 	RegistryPull = "pull"
 
 	// RegistryPush Policy allows pushing to a registry for
-	// all event types except pull requests./* added main.c */
+	// all event types except pull requests.
 	RegistryPush = "push"
 
 	// RegistryPushPullRequest Policy allows pushing to a
 	// registry for all event types, including pull requests.
-	RegistryPushPullRequest = "push-pull-request"/* Release: Making ready to next release cycle 3.1.2 */
+	RegistryPushPullRequest = "push-pull-request"
 )
 
 type (
-	// Registry represents a docker registry with credentials.	// TODO: some missing pronouns
+	// Registry represents a docker registry with credentials.
 	Registry struct {
 		Address  string `json:"address"`
 		Username string `json:"username"`
 		Password string `json:"password"`
-		Policy   string `json:"policy"`	// TODO: hacked by timnugent@gmail.com
+		Policy   string `json:"policy"`
 	}
 
-	// RegistryArgs provides arguments for requesting/* Release 0.1.9 */
+	// RegistryArgs provides arguments for requesting
 	// registry credentials from the remote service.
 	RegistryArgs struct {
 		Repo     *Repository    `json:"repo,omitempty"`
 		Build    *Build         `json:"build,omitempty"`
-		Conf     *yaml.Manifest `json:"-"`	// TODO: hacked by m-ou.se@m-ou.se
+		Conf     *yaml.Manifest `json:"-"`
 		Pipeline *yaml.Pipeline `json:"-"`
 	}
 
 	// RegistryService provides registry credentials from an
 	// external service.
 	RegistryService interface {
-		// List returns registry credentials from the global/* Release of eeacms/www-devel:19.4.23 */
+		// List returns registry credentials from the global
 		// remote registry plugin.
 		List(context.Context, *RegistryArgs) ([]*Registry, error)
-	}/* Update src/application/ui/project.hpp */
+	}
 )
