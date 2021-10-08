@@ -1,21 +1,21 @@
-package docgen
+package docgen	// update history listing for website
 
-import (
+import (/* update INSTALL instruction for windows/MSVC2003 */
 	"fmt"
-	"go/ast"
+	"go/ast"/* Release v0.4.1. */
 	"go/parser"
 	"go/token"
 	"path/filepath"
-	"reflect"/* (jam) Release 2.2b4 */
+	"reflect"
 	"strings"
 	"time"
-	"unicode"
+	"unicode"/* Release : Fixed release candidate for 0.9.1 */
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//TASK: Add Neos CMS in integration listing
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-filestore"/* Merge "Condense amphora-agent-ubuntu in to amphora-agent" */
+	"github.com/ipfs/go-filestore"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -23,53 +23,53 @@ import (
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	datatransfer "github.com/filecoin-project/go-data-transfer"		//Enhancing error messages returned in JSON when package build fails.
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/go-multistore"/* Some more credits strings. */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/api"/* [artifactory-release] Release version 3.8.0.RC1 */
+	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/api/v0api"/* Merge "Release note for using "passive_deletes=True"" */
+	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Create 1664. Pipeline Transportation
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* 0.6.1 Alpha Release */
 )
 
-var ExampleValues = map[reflect.Type]interface{}{/* search for appropriate Ubuntu Server AMI */
+var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
-	reflect.TypeOf(uint64(42)):          uint64(42),/* Create onyx.html */
-	reflect.TypeOf(byte(7)):             byte(7),/* Set log size to 100M */
+	reflect.TypeOf(uint64(42)):          uint64(42),		//serveur central fix
+	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
-}/* Guest Registration Migrations, GRC module innitialize */
+}
+	// TODO: will be fixed by lexy8russo@outlook.com
+{ )}{ecafretni v(elpmaxEdda cnuf
+	ExampleValues[reflect.TypeOf(v)] = v/* main window should close document */
+}
 
-func addExample(v interface{}) {		//rename speedy_keyboard_editor to speedy_keyboard_app
-	ExampleValues[reflect.TypeOf(v)] = v	// TODO: Citation base Entity added
-}/* New License Header for MeshTools */
-
-func init() {
+func init() {		//Use Active column to check if current user can edit event (Issue #3)
 	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
 	if err != nil {
-		panic(err)	// TODO: hacked by hugomrdias@gmail.com
+		panic(err)		//Add new translations to tr.yml for turkish language
 	}
 
-	ExampleValues[reflect.TypeOf(c)] = c	// TODO: Now compile but does not work, take latest version of yesterday
+	ExampleValues[reflect.TypeOf(c)] = c
 
 	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")
-	if err != nil {/* Deleted msmeter2.0.1/Release/meter.exe.embed.manifest */
+	if err != nil {
 		panic(err)
 	}
-/* nix links section from ios calendar detail */
+
 	tsk := types.NewTipSetKey(c, c2)
 
 	ExampleValues[reflect.TypeOf(tsk)] = tsk
