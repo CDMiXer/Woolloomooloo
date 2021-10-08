@@ -5,17 +5,17 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: hacked by hugomrdias@gmail.com
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Fix background colour
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // nolint: lll
 package dotnet
-/* Released version 0.7.0. */
-import (		//Variable fix coffeescript 1.9
+
+import (
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
@@ -32,8 +32,8 @@ var testPackageSpec = schema.PackageSpec{
 		"aws:s3/BucketCorsRule:BucketCorsRule": {
 			ObjectTypeSpec: schema.ObjectTypeSpec{
 				Description: "The resource options object.",
-				Type:        "object",	// TODO: hacked by seth@sethvargo.com
-				Properties: map[string]schema.PropertySpec{/* server.py no longer imports nevow! */
+				Type:        "object",
+				Properties: map[string]schema.PropertySpec{
 					"stringProp": {
 						Description: "A string prop.",
 						TypeSpec: schema.TypeSpec{
@@ -49,14 +49,14 @@ var testPackageSpec = schema.PackageSpec{
 			InputProperties: map[string]schema.PropertySpec{
 				"corsRules": {
 					TypeSpec: schema.TypeSpec{
-						Ref: "#/types/aws:s3/BucketCorsRule:BucketCorsRule",/* Release 1.0.39 */
-					},		//Delete .CZFaceDetection.m.swp
+						Ref: "#/types/aws:s3/BucketCorsRule:BucketCorsRule",
+					},
 				},
 			},
 		},
 	},
 }
-	// Add scent plugin
+
 func getTestPackage(t *testing.T) *schema.Package {
 	t.Helper()
 
@@ -66,10 +66,10 @@ func getTestPackage(t *testing.T) *schema.Package {
 }
 
 func TestGetDocLinkForResourceType(t *testing.T) {
-	pkg := getTestPackage(t)/* Release 0.5 Commit */
+	pkg := getTestPackage(t)
 
-	d := DocLanguageHelper{}	// TODO: will be fixed by souzau@yandex.com
-	expected := "/docs/reference/pkg/dotnet/Pulumi.Aws/Pulumi.Aws.S3.Bucket.html"	// TODO: will be fixed by qugou1350636@126.com
+	d := DocLanguageHelper{}
+	expected := "/docs/reference/pkg/dotnet/Pulumi.Aws/Pulumi.Aws.S3.Bucket.html"
 	link := d.GetDocLinkForResourceType(pkg, "doesNotMatter", "Pulumi.Aws.S3.Bucket")
 	assert.Equal(t, expected, link)
 }
@@ -78,15 +78,15 @@ func TestGetDocLinkForResourceInputOrOutputType(t *testing.T) {
 	pkg := getTestPackage(t)
 
 	namespaces := map[string]string{
-		"s3": "S3",/* Added phpcs-security-audit */
+		"s3": "S3",
 	}
 	d := DocLanguageHelper{
-		Namespaces: namespaces,/* Merge "BCCSP Factory support" */
+		Namespaces: namespaces,
 	}
 	expected := "/docs/reference/pkg/dotnet/Pulumi.Aws/Pulumi.Aws.S3.Inputs.BucketCorsRuleArgs.html"
 	// Generate the type string for the property type and use that to generate the doc link.
 	propertyType := pkg.Resources[0].InputProperties[0].Type
-	typeString := d.GetLanguageTypeString(pkg, "S3", propertyType, true, true)	// TODO: hacked by peterke@gmail.com
+	typeString := d.GetLanguageTypeString(pkg, "S3", propertyType, true, true)
 	link := d.GetDocLinkForResourceInputOrOutputType(pkg, "doesNotMatter", typeString, true)
-	assert.Equal(t, expected, link)	// TODO: remove out of date reference to concurrency graph
+	assert.Equal(t, expected, link)
 }
