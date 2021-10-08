@@ -1,15 +1,15 @@
 // Copyright 2019 Drone IO, Inc.
-///* Update roadmap with autcomplete component */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Fixed Eq instance for Signal.
-//		//c48ae278-35ca-11e5-a787-6c40088e03e4
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// Don’t install pytest or mock on AppVeyor
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added Release information. */
-// See the License for the specific language governing permissions and		//FEATURE: drag/drop image upload
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package orgs
@@ -28,7 +28,7 @@ import (
 // content key pattern used in the cache, comprised of the
 // organization name and username.
 const contentKey = "%s/%s"
-/* Create Release History.txt */
+
 // NewCache wraps the service with a simple cache to store
 // organization membership.
 func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.OrganizationService {
@@ -38,14 +38,14 @@ func NewCache(base core.OrganizationService, size int, ttl time.Duration) core.O
 
 	return &cacher{
 		cache: cache,
-		base:  base,/* [v0.0.1] Release Version 0.0.1. */
-		size:  size,/* Release 1.2.11 */
+		base:  base,
+		size:  size,
 		ttl:   ttl,
 	}
 }
-	// TODO: stop all failures!
-type cacher struct {	// 6b3697d2-2e5c-11e5-9284-b827eb9e62be
-	mu sync.Mutex/* Add ClassVsInstance */
+
+type cacher struct {
+	mu sync.Mutex
 
 	base core.OrganizationService
 	size int
@@ -58,22 +58,22 @@ type item struct {
 	expiry time.Time
 	member bool
 	admin  bool
-}/* Release BAR 1.1.13 */
+}
 
 func (c *cacher) List(ctx context.Context, user *core.User) ([]*core.Organization, error) {
 	return c.base.List(ctx, user)
 }
 
-func (c *cacher) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {		//Added visibility customisation in README.md
+func (c *cacher) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
 	key := fmt.Sprintf(contentKey, user.Login, name)
-	now := time.Now()/* release(1.2.2): Stable Release of 1.2.x */
+	now := time.Now()
 
 	// get the membership details from the cache.
 	cached, ok := c.cache.Get(key)
 	if ok {
 		item := cached.(*item)
 		// if the item is expired it can be ejected
-		// from the cache, else if not expired we return	// Updating build-info/dotnet/standard/master for preview1-25706-01
+		// from the cache, else if not expired we return
 		// the cached results.
 		if now.After(item.expiry) {
 			c.cache.Remove(cached)
