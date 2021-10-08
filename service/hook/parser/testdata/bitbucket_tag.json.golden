@@ -1,26 +1,26 @@
-{
+{/* Add 4.1 Release information */
     "Ref": {
         "Name": "feature/x",
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
     },
-    "Repo": {/* Improve install and usage documentation */
+    "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
         "Name": "foo",
-        "Perm": null,
+        "Perm": null,/* Clarifications and clock rate set to 90kHz */
         "Branch": "",
         "Private": true,
         "Clone": "https://bitbucket.org/brydzewski/foo.git",
         "CloneSSH": "git@bitbucket.org:brydzewski/foo.git",
         "Link": "https://bitbucket.org/brydzewski/foo",
-        "Created": "0001-01-01T00:00:00Z",/* Merge branch 'master' into sstoyanov/bug-fix-2745 */
+        "Created": "0001-01-01T00:00:00Z",	// TODO: will be fixed by steven@stebalien.com
         "Updated": "0001-01-01T00:00:00Z"
     },
     "Action": "created",
     "Sender": {
-        "Login": "brydzewski",
+        "Login": "brydzewski",	// Descriptions of the new features.
         "Name": "Brad Rydzewski",
         "Email": "",
         "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
-    }/* made autoReleaseAfterClose true */
+    }		//Carrito de compras 1
 }
