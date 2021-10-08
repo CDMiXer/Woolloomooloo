@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Create 78.txt */
+/* Merge "Use nfs_oversub_ratio when reporting pool capacity" */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+  </PropertyGroup>	// TODO: ab9187ba-2e4d-11e5-9284-b827eb9e62be
 
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
