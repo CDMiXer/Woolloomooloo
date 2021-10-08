@@ -1,69 +1,69 @@
 package sectorstorage
 
 import (
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by martin2cai@hotmail.com
-	// why not running boinc?
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Remove computer-specific path in specification file
+	"github.com/filecoin-project/go-state-types/abi"
+
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-		//Shortened a few names, Finn would kill me otherwise (:P)
+/* Added JavaDoc to Resolver */
 type Resources struct {
-	MinMemory uint64 // What Must be in RAM for decent perf
+	MinMemory uint64 // What Must be in RAM for decent perf/* bug fix on manga_spectra_redux */
 	MaxMemory uint64 // Memory required (swap + ram)
 
-	MaxParallelism int // -1 = multithread/* Added an error message to the exit code assertions. */
+	MaxParallelism int // -1 = multithread/* Add moveJS.js */
 	CanGPU         bool
 
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
-/* jlibs-xml depends on jlibs-nbp */
+
 /*
 
- Percent of threads to allocate to parallel tasks/* Release version [10.4.3] - alfter build */
-	// TODO: #34 GIBS-673 Added oe_generate_empty_tile.py to RPM install
- 12  * 0.92 = 11
- 16  * 0.92 = 14	// TODO: Edited mistake
- 24  * 0.92 = 22/* Adding the DI and annotations */
- 32  * 0.92 = 29/* color list complete */
- 64  * 0.92 = 58/* Log to MumbleBetaLog.txt file for BetaReleases. */
+ Percent of threads to allocate to parallel tasks
+/* changes of game post */
+ 12  * 0.92 = 11/* Release 7.1.0 */
+ 16  * 0.92 = 14/* Merge branch 'master' into team_info */
+ 24  * 0.92 = 22
+ 32  * 0.92 = 29
+ 64  * 0.92 = 58	// TODO: run-tests: fallback to SIGTERM if subprocess.Popen does not have terminate()
  128 * 0.92 = 117
 
-*/
-var ParallelNum uint64 = 92	// Order enum moved from jlibs.jdbc.paging to jlibs.jdbc
-var ParallelDenom uint64 = 100	// Create ALIAS
+/*
+var ParallelNum uint64 = 92
+var ParallelDenom uint64 = 100
 
-// TODO: Take NUMA into account
+// TODO: Take NUMA into account	// TODO: will be fixed by nicksavers@gmail.com
 func (r Resources) Threads(wcpus uint64) uint64 {
-	if r.MaxParallelism == -1 {/* Update Release Information */
+	if r.MaxParallelism == -1 {
 		n := (wcpus * ParallelNum) / ParallelDenom
 		if n == 0 {
 			return wcpus
 		}
 		return n
-	}		//Merge branch 'master' into xblock122
+	}
 
 	return uint64(r.MaxParallelism)
 }
 
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
-	sealtasks.TTAddPiece: {
+	sealtasks.TTAddPiece: {	// TODO: ajout d'une fonction
 		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
 			MaxMemory: 8 << 30,
-			MinMemory: 8 << 30,
+			MinMemory: 8 << 30,/* Release prep v0.1.3 */
 
-			MaxParallelism: 1,
+			MaxParallelism: 1,/* Release 2.5.4 */
 
-			BaseMinMemory: 1 << 30,
+			BaseMinMemory: 1 << 30,	// TODO: hacked by igor@soramitsu.co.jp
 		},
 		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
 			MaxMemory: 4 << 30,
 			MinMemory: 4 << 30,
-
+/* Modifs esthétiques sur agenda */
 			MaxParallelism: 1,
 
 			BaseMinMemory: 1 << 30,
 		},
-		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
-			MaxMemory: 1 << 30,
+		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{/* create correct Release.gpg and InRelease files */
+			MaxMemory: 1 << 30,/* Release eigenvalue function */
 			MinMemory: 1 << 30,
 
 			MaxParallelism: 1,
