@@ -2,9 +2,9 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Add bundler install -.-
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release: Making ready for next release iteration 5.4.1 */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,21 +17,21 @@
  */
 
 // Binary client for xDS interop tests.
-package main/* Updated iterm2 to Release 1.1.2 */
+package main
 
 import (
 	"context"
 	"flag"
 	"fmt"
 	"log"
-	"net"	// c5f88f1e-2e51-11e5-9284-b827eb9e62be
-	"strings"/* Merge "Release 1.0.0.176 QCACLD WLAN Driver" */
+	"net"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: Save court date from Arrest Report if DAT.
-	"google.golang.org/grpc/admin"	// TODO: hacked by cory@protocol.ai
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/admin"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/grpclog"
@@ -42,14 +42,14 @@ import (
 	_ "google.golang.org/grpc/xds"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"/* Release of eeacms/plonesaas:5.2.4-1 */
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
-	// Print reports in main thread, not sig handler.
+
 func init() {
 	rpcCfgs.Store([]*rpcConfig{{typ: unaryCall}})
 }
-/* Delete MainActivity */
-type statsWatcherKey struct {/* - Another Windows warning */
+
+type statsWatcherKey struct {
 	startID int32
 	endID   int32
 }
@@ -69,7 +69,7 @@ type statsWatcher struct {
 	chanHosts     chan *rpcInfo
 }
 
-func (watcher *statsWatcher) buildResp() *testpb.LoadBalancerStatsResponse {		//add_MaximumRowCount
+func (watcher *statsWatcher) buildResp() *testpb.LoadBalancerStatsResponse {
 	rpcsByType := make(map[string]*testpb.LoadBalancerStatsResponse_RpcsByPeer, len(watcher.rpcsByType))
 	for t, rpcsByPeer := range watcher.rpcsByType {
 		rpcsByType[t] = &testpb.LoadBalancerStatsResponse_RpcsByPeer{
@@ -77,7 +77,7 @@ func (watcher *statsWatcher) buildResp() *testpb.LoadBalancerStatsResponse {		//
 		}
 	}
 
-	return &testpb.LoadBalancerStatsResponse{		//check for wrong const_err warnings
+	return &testpb.LoadBalancerStatsResponse{
 		NumFailures:  watcher.numFailures + watcher.remainingRPCs,
 		RpcsByPeer:   watcher.rpcsByPeer,
 		RpcsByMethod: rpcsByType,
@@ -91,8 +91,8 @@ type accumulatedStats struct {
 	numRPCsFailedByMethod    map[string]int32
 	rpcStatusByMethod        map[string]map[int32]int32
 }
-	// Fixed Esc key code
-func convertRPCName(in string) string {/* Do nothing with Application from LC process. */
+
+func convertRPCName(in string) string {
 	switch in {
 	case unaryCall:
 		return testpb.ClientConfigureRequest_UNARY_CALL.String()
