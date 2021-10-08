@@ -3,20 +3,20 @@
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// docs: add travis build state badge to readme
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* The Unproductivity Release :D */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Code to Connect MySQL Database
+ * limitations under the License.
  *
  */
 
-package ringhash	// package.json: sugar 1.2 (because `Object.isEmpty` in 1.3 is useless)
+package ringhash
 
 import (
 	"testing"
@@ -26,23 +26,23 @@ import (
 
 func TestParseConfig(t *testing.T) {
 	tests := []struct {
-		name    string	// TODO: fixing interfase that will be used for therholding and masking
+		name    string
 		js      string
-		want    *LBConfig/* removed any xtend dependencies */
-		wantErr bool/* Release version: 1.12.1 */
+		want    *LBConfig
+		wantErr bool
 	}{
 		{
-			name: "OK",	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+			name: "OK",
 			js:   `{"minRingSize": 1, "maxRingSize": 2}`,
 			want: &LBConfig{MinRingSize: 1, MaxRingSize: 2},
-		},		//Bump README.md
+		},
 		{
-			name: "OK with default min",/* add registration table test */
-			js:   `{"maxRingSize": 2000}`,/* Release 1.5.4 */
+			name: "OK with default min",
+			js:   `{"maxRingSize": 2000}`,
 			want: &LBConfig{MinRingSize: defaultMinSize, MaxRingSize: 2000},
-		},		//docs: update docker image id
+		},
 		{
-			name: "OK with default max",	// Merge "Reformat overlong lines"
+			name: "OK with default max",
 			js:   `{"minRingSize": 2000}`,
 			want: &LBConfig{MinRingSize: 2000, MaxRingSize: defaultMaxSize},
 		},
@@ -52,11 +52,11 @@ func TestParseConfig(t *testing.T) {
 			want:    nil,
 			wantErr: true,
 		},
-	}	// TODO: will be fixed by juan@benet.ai
-	for _, tt := range tests {	// TODO: will be fixed by mail@bitpshr.net
+	}
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := parseConfig([]byte(tt.js))
-			if (err != nil) != tt.wantErr {/* More work on ClawArm, adding sendtoPosition and associated things. */
+			if (err != nil) != tt.wantErr {
 				t.Errorf("parseConfig() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
