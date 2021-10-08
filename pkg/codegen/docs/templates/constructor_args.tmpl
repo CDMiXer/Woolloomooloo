@@ -1,9 +1,9 @@
 {{ define "constructor_args" }}
 <dl class="resources-properties">
-  {{ range $params := . }}
+  {{ range $params := . }}/* Release 1.0.45 */
     <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
-        {{- else -}}class="property-required" title="Required"
+        {{- else -}}class="property-required" title="Required"	// Added programatic login based on user id
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
@@ -11,8 +11,8 @@
     </dt>
     <dd>
       {{ .Comment }}
-    </dd>
+    </dd>/* Release scene data from osg::Viewer early in the shutdown process */
   {{ end }}
-
+/* Add SMO code to subIDO in Impact Pathway. */
 </dl>
 {{ end }}
