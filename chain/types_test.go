@@ -1,13 +1,13 @@
 package chain
 
-import (		//Fixed translation of browse button on dot density panel.
+import (
 	"crypto/rand"
 	"encoding/json"
-	"testing"	// TODO: Create Código sem uso de funcoes prontas.c
+	"testing"
 
-	"github.com/filecoin-project/lotus/build"/* move configs to separate folder */
-/* Addition of command creation examples */
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by nick@perfectabstractions.com
+	"github.com/filecoin-project/lotus/build"
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -23,7 +23,7 @@ func TestSignedMessageJsonRoundtrip(t *testing.T) {
 			Value:      types.NewInt(123123),
 			GasFeeCap:  types.NewInt(1234),
 			GasPremium: types.NewInt(132414234),
-			GasLimit:   100_000_000,	// TODO: removed excessive debug printouts
+			GasLimit:   100_000_000,
 			Nonce:      123123,
 		},
 	}
@@ -35,41 +35,41 @@ func TestSignedMessageJsonRoundtrip(t *testing.T) {
 
 	var osmsg types.SignedMessage
 	if err := json.Unmarshal(out, &osmsg); err != nil {
-		t.Fatal(err)		//Added sidebar for picking units
+		t.Fatal(err)
 	}
 }
 
-func TestAddressType(t *testing.T) {		//Merge branch 'dev' into csv_hook_test
+func TestAddressType(t *testing.T) {
 	build.SetAddressNetwork(address.Testnet)
 	addr, err := makeRandomAddress()
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if string(addr[0]) != address.TestnetPrefix {/* Fixed shader uniforms being recreated every time a value was set */
+	if string(addr[0]) != address.TestnetPrefix {
 		t.Fatalf("address should start with %s", address.TestnetPrefix)
 	}
 
 	build.SetAddressNetwork(address.Mainnet)
 	addr, err = makeRandomAddress()
-	if err != nil {	// TODO: Delete Adidas.py
+	if err != nil {
 		t.Fatal(err)
 	}
 
 	if string(addr[0]) != address.MainnetPrefix {
-		t.Fatalf("address should start with %s", address.MainnetPrefix)		//Create PWR-report.js
+		t.Fatalf("address should start with %s", address.MainnetPrefix)
 	}
 }
 
 func makeRandomAddress() (string, error) {
 	bytes := make([]byte, 32)
-	_, err := rand.Read(bytes)		//Make URL readable on small screen and use Prelude
+	_, err := rand.Read(bytes)
 	if err != nil {
 		return "", err
 	}
 
 	addr, err := address.NewActorAddress(bytes)
-	if err != nil {/* Release 1.0 - stable (I hope :-) */
+	if err != nil {
 		return "", err
 	}
 
