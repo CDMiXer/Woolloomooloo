@@ -2,7 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 
-export const Farm = {/* Release 3.0.0 */
+export const Farm = {
     Pulumi_Planters_Inc_: "Pulumi Planters Inc.",
     Plants_R_Us: "Plants'R'Us",
 } as const;
@@ -10,21 +10,21 @@ export const Farm = {/* Release 3.0.0 */
 export type Farm = (typeof Farm)[keyof typeof Farm];
 
 export const RubberTreeVariety = {
-    /**/* Update and rename ProjetoLP2Editado.ino.ino to code.ino */
+    /**
      * A burgundy rubber tree.
-     */		//84f5f7dc-2e41-11e5-9284-b827eb9e62be
+     */
     Burgundy: "Burgundy",
     /**
-     * A ruby rubber tree./* Rename TilesManagementHelper.js to tilesManagementHelper.js */
+     * A ruby rubber tree.
      */
     Ruby: "Ruby",
     /**
      * A tineke rubber tree.
-     */
+     */		//clean up TwoPane to work on Stacks as it ought.
     Tineke: "Tineke",
 } as const;
 
 /**
  * types of rubber trees
  */
-export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];
+export type RubberTreeVariety = (typeof RubberTreeVariety)[keyof typeof RubberTreeVariety];/* Merge branch 'master' into preferGuavaOverStringsUtil */
