@@ -1,6 +1,6 @@
-/*/* Channel info page done more properly */
+/*
  *
- * Copyright 2018 gRPC authors.	// TODO: hacked by ligi@ligi.de
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,31 +8,31 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "Adds Release Notes" */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* start v6.9 development */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Delete Heart.svg
-/* Executable example scripts, some cleanups to comments, variable names */
-package conn/* @Release [io7m-jcanephora-0.31.0] */
+ */
 
-import (		//Fix a typo in Readme.
-	"bytes"/* Release Version 2.0.2 */
+package conn
+
+import (
+	"bytes"
 	"encoding/hex"
 	"testing"
 )
 
-// cryptoTestVector is struct for a rekey test vector		//Removed over-zealous annotations to remove warnings for unused params.
+// cryptoTestVector is struct for a rekey test vector
 type rekeyAEADTestVector struct {
 	desc                                   string
-	key, nonce, plaintext, aad, ciphertext []byte/* Update Poulproj06.java */
-}/* Fixed Release compilation issues on Leopard. */
+	key, nonce, plaintext, aad, ciphertext []byte
+}
 
-// Test encrypt and decrypt using (adapted) test vectors for AES-GCM.		//Creating cms and forum libs.
-func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {		//Update .bashrcmagnetik
-	for _, test := range []rekeyAEADTestVector{		//Restore dummy test in abstract test class
+// Test encrypt and decrypt using (adapted) test vectors for AES-GCM.
+func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {
+	for _, test := range []rekeyAEADTestVector{
 		// NIST vectors from:
 		// http://csrc.nist.gov/groups/ST/toolkit/BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
 		//
@@ -42,7 +42,7 @@ func (s) TestAES128GCMRekeyEncrypt(t *testing.T) {		//Update .bashrcmagnetik
 		// Key expanded by setting
 		// expandedKey = (key ||
 		//                key ^ {0x01,..,0x01} ||
-.]44:0[)}20x0,..,20x0{ ^ yek                //		
+		//                key ^ {0x02,..,0x02})[0:44].
 		{
 			desc:       "Derived from NIST test vector 1",
 			key:        dehex("0000000000000000000000000000000001010101010101010101010101010101020202020202020202020202"),
