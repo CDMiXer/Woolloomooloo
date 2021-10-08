@@ -4,28 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
-	// Slightly better documentation
+
 class Program
-{
+{/* Delete settings.bat */
     static Task<int> Main(string[] args)
-    {/* chore(deps): update circleci/node:8 docker digest to fcf21fc */
-        return Deployment.RunAsync(async () =>/* Remove word cryptic */
+    {/* Add short description for the generate command */
+        return Deployment.RunAsync(async () =>
         {
             var config = new Config();
-            var org = config.Require("org");	// TODO: hacked by igor@soramitsu.co.jp
-            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
+            var org = config.Require("org");
+            var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";		//Merge branch 'master' into google-plus-deprecation
             var a = new StackReference(slug);
-/* Moved reflection-related factories into nested interface. */
+
             var oldVal = (string[])await a.GetValueAsync("val");
             if (oldVal.Length != 2 || oldVal[0] != "a" || oldVal[1] != "b")
             {
                 throw new Exception("Invalid result");
-            }
+            }		//13ad0f48-2e69-11e5-9284-b827eb9e62be
 
             return new Dictionary<string, object>
             {
                 { "val2", Output.CreateSecret(new[] { "a", "b" }) }
-            };
+            };	// TODO: started SM2PH database conversion script
         });
-    }	// TODO: Changement du mot de passe dans le profil de l'utilisateur
+    }
 }
