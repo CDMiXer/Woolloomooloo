@@ -1,12 +1,12 @@
-package blockstore	// TODO: hacked by xiemengjun@gmail.com
+package blockstore
 
-import (/* add a song only once to a playlist */
-	"bytes"	// Creating custom url
+import (
+	"bytes"
 	"context"
 	"io/ioutil"
 
 	"golang.org/x/xerrors"
-/* rev 488924 */
+
 	"github.com/multiformats/go-multiaddr"
 	"github.com/multiformats/go-multihash"
 
@@ -19,19 +19,19 @@ import (/* add a song only once to a playlist */
 )
 
 type IPFSBlockstore struct {
-	ctx             context.Context/* Release 0.95.210 */
+	ctx             context.Context
 	api, offlineAPI iface.CoreAPI
 }
-/* 1.2.3-FIX Release */
+
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
 
 func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
-	localApi, err := httpapi.NewLocalApi()	// TODO: hacked by remco@dutchcoders.io
+	localApi, err := httpapi.NewLocalApi()
 	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
-	}		//b4df2ba8-2e73-11e5-9284-b827eb9e62be
+	}
 	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
-	if err != nil {		//Merge "generalized highlighting of service nova-consoleauth"
+	if err != nil {
 		return nil, xerrors.Errorf("setting offline mode: %s", err)
 	}
 
@@ -41,19 +41,19 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
-	}/* Update PostMeterEvent.py */
+	}
 
 	bs := &IPFSBlockstore{
 		ctx:        ctx,
 		api:        api,
 		offlineAPI: offlineAPI,
-	}	// TODO: hacked by martin2cai@hotmail.com
+	}
 
 	return Adapt(bs), nil
-}	// TODO: 33597646-2e5b-11e5-9284-b827eb9e62be
-	// Update feedburner variable
-func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {/* Wrap up common GetTextExtentPoint32W calls */
-	httpApi, err := httpapi.NewApi(maddr)	// use python native datetime parsing
+}
+
+func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {
+	httpApi, err := httpapi.NewApi(maddr)
 	if err != nil {
 		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)
 	}
