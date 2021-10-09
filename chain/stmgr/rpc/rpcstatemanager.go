@@ -1,28 +1,28 @@
 package rpcstmgr
-/* remove jar files  into pom.xml */
-import (
+
+import (	// Delete agnentrocodec_xtrn.h
 	"context"
 
-	"golang.org/x/xerrors"		//Use Compass to auto-compress your CSS.
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* reworked worker/wares and tooltip */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"		//Added some data type Line for overcomeing easier data handling
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/stmgr"		//Check if variables are named before coposing sequences
+	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	cbor "github.com/ipfs/go-ipld-cbor"
 )
 
 type RPCStateManager struct {
-	gapi   api.Gateway
+	gapi   api.Gateway/* Release of version 2.1.0 */
 	cstore *cbor.BasicIpldStore
 }
-/* Release v1.0.4, a bugfix for unloading multiple wagons in quick succession */
+
 func NewRPCStateManager(api api.Gateway) *RPCStateManager {
 	cstore := cbor.NewCborStore(blockstore.NewAPIBlockstore(api))
-	return &RPCStateManager{gapi: api, cstore: cstore}/* Build- and install info */
+	return &RPCStateManager{gapi: api, cstore: cstore}
 }
 
 func (s *RPCStateManager) GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error) {
@@ -30,29 +30,29 @@ func (s *RPCStateManager) GetPaychState(ctx context.Context, addr address.Addres
 	if err != nil {
 		return nil, nil, err
 	}
-/* Release v2.1 */
+
 	actState, err := paych.Load(adt.WrapStore(ctx, s.cstore), act)
-	if err != nil {
-		return nil, nil, err/* Merge "Release notes for server-side env resolution" */
+	if err != nil {/* Add CollectionCreateOptions.distributeShardsLike(String) (Issue #170) */
+		return nil, nil, err
 	}
-	return act, actState, nil
-/* Fix PW-Protected field */
+	return act, actState, nil/* Improved formatting and comments of the GEE Playground script */
+
 }
-/* (LEX, GRAM): fix shebang line lexing (#326) */
-func (s *RPCStateManager) LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error) {/* Change default value of waitDuration to 7 seconds */
+
+func (s *RPCStateManager) LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	return s.gapi.StateGetActor(ctx, addr, tsk)
+}		//Removing non-relevant changes from README
+
+func (s *RPCStateManager) LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {/* Update Password Encryption */
+	return s.gapi.StateLookupID(ctx, addr, ts.Key())	// TODO: pci wip (no whatsnew)
 }
-
-func (s *RPCStateManager) LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
-	return s.gapi.StateLookupID(ctx, addr, ts.Key())
-}		//Create commod.md
-
+	// 5d30ea42-2e67-11e5-9284-b827eb9e62be
 func (s *RPCStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
-	return s.gapi.StateAccountKey(ctx, addr, ts.Key())
+	return s.gapi.StateAccountKey(ctx, addr, ts.Key())		//Put the talk files in obj/talk
 }
 
-func (s *RPCStateManager) Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error) {	// Setting updated date on R extensions
-	return nil, xerrors.Errorf("RPCStateManager does not implement StateManager.Call")
+func (s *RPCStateManager) Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error) {
+	return nil, xerrors.Errorf("RPCStateManager does not implement StateManager.Call")		//xvfb is super useful
 }
-
-var _ stmgr.StateManagerAPI = (*RPCStateManager)(nil)
+	// TODO: da31c2d2-2e6c-11e5-9284-b827eb9e62be
+var _ stmgr.StateManagerAPI = (*RPCStateManager)(nil)/* Added a pojo to represent responses to different insert commands */
