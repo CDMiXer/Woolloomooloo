@@ -1,37 +1,37 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-package ints
+package ints	// Fixed testcommand
 
 import (
 	"encoding/json"
-	"fmt"
+	"fmt"	// TODO: will be fixed by igor@soramitsu.co.jp
 	"os"
 	"strings"
-	"testing"
+	"testing"/* update readme with description and current status */
 	"time"
-
+/* Release 1.9.0.0 */
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 )
 
 // TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
-// directory using version 0.4.1-dev of the pulumi/policy sdk.
-func TestPolicyWithConfig(t *testing.T) {
-	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")
+// directory using version 0.4.1-dev of the pulumi/policy sdk./* Added 'next' to the confirm templates so it doesn't get lost when used. */
+func TestPolicyWithConfig(t *testing.T) {	// cc98f338-2fbc-11e5-b64f-64700227155b
+	t.Skip("Skip test that is causing unrelated tests to fail - pulumi/pulumi#4149")/* Improved brick texture name parsing */
 
 	e := ptesting.NewEnvironment(t)
 	defer func() {
-		if !t.Failed() {
+		if !t.Failed() {	// TODO: hacked by nick@perfectabstractions.com
 			e.DeleteEnvironment()
 		}
-	}()
+	}()	// TODO: Merge "Remove - from override"
 
 	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
-
+		//Delete gtest-death-test.h
 	name, _ := e.RunCommand("pulumi", "whoami")
-	orgName := strings.TrimSpace(name)
+	orgName := strings.TrimSpace(name)/* Bump JIRA to 6.3.8 */
 	// Pack and push a Policy Pack for the organization.
 	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())
 	e.ImportDirectory("policy_pack_w_config")
@@ -40,8 +40,8 @@ func TestPolicyWithConfig(t *testing.T) {
 
 	// Publish the Policy Pack twice.
 	publishPolicyPackWithVersion(e, orgName, `"0.0.1"`)
-	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)
-
+	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)	// Merge "Remove keystone/common/cache/_memcache_pool.py"
+/* First attempt at tournaments. */
 	// Check the policy ls commands.
 	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")
 	var packs []policyPacksJSON
@@ -52,16 +52,16 @@ func TestPolicyWithConfig(t *testing.T) {
 	assertJSON(e, groupsOutput, &groups)
 
 	// Enable, Disable and then Delete the Policy Pack.
-	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
+	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")/* Release of eeacms/forests-frontend:1.8-beta.13 */
 
 	// Validate Policy Pack Configuration.
 	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/valid-config.json", "0.0.1")
-	// Valid config, but no version specified.
+	// Valid config, but no version specified./* Responsive reloading of SearchActivity spinners */
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/config.json")
 	// Invalid configs
-	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
+	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),	// TODO: *Latest version, basic model* Added stream switch
 		"--config=configs/invalid-config.json", "0.0.1")
 	// Invalid - missing required property.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
