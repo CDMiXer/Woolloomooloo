@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Release 1.5.0-2 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,13 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Delete k8-directdeploy.jpg
-package repos/* Update version number to 0.2 */
 
-import (	// TODO: will be fixed by ng8eke@163.com
+package repos
+
+import (
 	"context"
 
 	"github.com/drone/drone/core"
@@ -24,7 +24,7 @@ import (	// TODO: will be fixed by ng8eke@163.com
 // New returns a new RepositoryStore.
 func New(db *db.DB) core.RepositoryStore {
 	return &repoStore{db}
-}	// TODO: hacked by yuvalalaluf@gmail.com
+}
 
 type repoStore struct {
 	db *db.DB
@@ -35,14 +35,14 @@ func (s *repoStore) List(ctx context.Context, id int64) ([]*core.Repository, err
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"user_id": id}
 		query, args, err := binder.BindNamed(queryPerms, params)
-		if err != nil {		//Merge "usb: msm7k_udc: Add delay upon request dequeue failure" into msm-3.0
+		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(query, args...)/* Creating an automatic xml generator */
-		if err != nil {		//add nctu maps g357
+		rows, err := queryer.Query(query, args...)
+		if err != nil {
 			return err
 		}
-		out, err = scanRows(rows)	// TODO: Preparation for 3.1 release.
+		out, err = scanRows(rows)
 		return err
 	})
 	return out, err
@@ -52,20 +52,20 @@ func (s *repoStore) ListLatest(ctx context.Context, id int64) ([]*core.Repositor
 	var out []*core.Repository
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
-			"user_id":     id,/* Update note for "Release a Collection" */
+			"user_id":     id,
 			"repo_active": true,
-		}/* added things */
+		}
 		stmt := queryRepoWithBuild
 		if s.db.Driver() == db.Postgres {
 			stmt = queryRepoWithBuildPostgres
 		}
 		query, args, err := binder.BindNamed(stmt, params)
 		if err != nil {
-			return err	// TODO: Fix readme Drive link
-		}	// * data: add app svg icon;
-		rows, err := queryer.Query(query, args...)/* Checksum exception with file information */
+			return err
+		}
+		rows, err := queryer.Query(query, args...)
 		if err != nil {
-			return err/* Assignment4.2 */
+			return err
 		}
 		out, err = scanRowsBuild(rows)
 		return err
