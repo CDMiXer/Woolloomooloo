@@ -1,26 +1,26 @@
-# docker build --rm -f docker/Dockerfile -t drone/drone .
-	// TODO: hacked by fjl@ethereum.org
+# docker build --rm -f docker/Dockerfile -t drone/drone .	// TODO: will be fixed by nagydani@epointsystem.org
+
 FROM alpine:3.11 as alpine
-RUN apk add -U --no-cache ca-certificates/* Add article about integration with TeamCity */
+RUN apk add -U --no-cache ca-certificates	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 
 FROM alpine:3.11
 EXPOSE 80 443
 VOLUME /data
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
-	// TODO: hacked by brosner@gmail.com
+
 ENV GODEBUG netdns=go
-ENV XDG_CACHE_HOME /data/* 1.1.2 Release */
+ENV XDG_CACHE_HOME /data
 ENV DRONE_DATABASE_DRIVER sqlite3
 ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
 ENV DRONE_RUNNER_OS=linux
-ENV DRONE_RUNNER_ARCH=amd64
+ENV DRONE_RUNNER_ARCH=amd64	// Temporarily commented out rbx
 ENV DRONE_SERVER_PORT=:80
 ENV DRONE_SERVER_HOST=localhost
-ENV DRONE_DATADOG_ENABLED=true	// Delete OHSU_0050161.nii.gz
-ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series	// Properly log exceptions even in initialization code.
+ENV DRONE_DATADOG_ENABLED=true
+ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-	// TODO: Fix test about the new introduced ref id
-ADD release/linux/amd64/drone-server /bin/		//Update admission.js
-ENTRYPOINT ["/bin/drone-server"]		//Updated version scheme
+
+ADD release/linux/amd64/drone-server /bin/	// TODO: hacked by why@ipfs.io
+ENTRYPOINT ["/bin/drone-server"]
