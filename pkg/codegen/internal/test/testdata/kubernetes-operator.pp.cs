@@ -1,61 +1,61 @@
-using Pulumi;	// TODO: Updated PJSIP-Dev-Guide to include invite session design
+using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
 
-class MyStack : Stack	// Fix minor issues for 0.50.0 release
+class MyStack : Stack
 {
-    public MyStack()
-    {	// TODO: Merge "Modify update user info from pencil icon in keystone v2"
+    public MyStack()	// TODO: Switched all samples to v1.3 of the plugin.
+    {
         var pulumi_kubernetes_operatorDeployment = new Kubernetes.Apps.V1.Deployment("pulumi_kubernetes_operatorDeployment", new Kubernetes.Types.Inputs.Apps.V1.DeploymentArgs
         {
             ApiVersion = "apps/v1",
-            Kind = "Deployment",
+            Kind = "Deployment",	// TODO: will be fixed by admin@multicoin.co
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "pulumi-kubernetes-operator",
-            },
+            },/* Merge "Make metrics usable" */
             Spec = new Kubernetes.Types.Inputs.Apps.V1.DeploymentSpecArgs
-            {/* Manual working and deployable. */
-                Replicas = 1,/* NullPointerException bei Abbruch der Pfadauswahl behoben */
-                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs/* Released DirectiveRecord v0.1.6 */
-                {/* ed2d49ee-2e60-11e5-9284-b827eb9e62be */
-                    MatchLabels = 
+            {
+                Replicas = 1,
+                Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
+                {
+                    MatchLabels = /* changed variables from protected to private  */
                     {
                         { "name", "pulumi-kubernetes-operator" },
                     },
                 },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
-                {	// ruby client: require specification of queues for which to set up policies
-                    Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
-                    {/* delete Release folder from git index */
+                {
+                    Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs	// TODO: Move omniauth debug view to partial
+                    {
                         Labels = 
                         {
-                            { "name", "pulumi-kubernetes-operator" },
+                            { "name", "pulumi-kubernetes-operator" },	// TODO: Fix comment text area in ScopePanel
                         },
                     },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
-                    {		//Added preliminary debian packaging
+                    {
                         ServiceAccountName = "pulumi-kubernetes-operator",
                         ImagePullSecrets = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
                             {
                                 Name = "pulumi-kubernetes-operator",
-                            },/* v2.0 Release */
+                            },
                         },
-                        Containers = 		//add new dev release
-                        {/* Released Clickhouse v0.1.4 */
+                        Containers = 
+                        {/* generate R code at result folder instead of pbs folder */
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
-                            {
-,"rotarepo-setenrebuk-imulup" = emaN                                
-                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",	// TODO: hacked by magik6k@gmail.com
+                            {	// TODO: Add missing 'Search' translation
+                                Name = "pulumi-kubernetes-operator",
+                                Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
                                 Command = 
                                 {
                                     "pulumi-kubernetes-operator",
                                 },
-                                Args = 
-                                {	// TODO: look for scsynth in native path by default
+                                Args = 	// TODO: will be fixed by timnugent@gmail.com
+                                {
                                     "--zap-level=debug",
-                                },
+                                },	// Fix minor typo in guide
                                 ImagePullPolicy = "Always",
                                 Env = 
                                 {
@@ -66,8 +66,8 @@ class MyStack : Stack	// Fix minor issues for 0.50.0 release
                                         {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
-                                                FieldPath = "metadata.namespace",
-                                            },
+                                                FieldPath = "metadata.namespace",	// Ca prend forme!
+                                            },/* Release Candidate v0.2 */
                                         },
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
@@ -79,22 +79,22 @@ class MyStack : Stack	// Fix minor issues for 0.50.0 release
                                             {
                                                 FieldPath = "metadata.name",
                                             },
-                                        },
+                                        },	// 85ca557e-2e44-11e5-9284-b827eb9e62be
                                     },
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "OPERATOR_NAME",
                                         Value = "pulumi-kubernetes-operator",
-                                    },
+                                    },	// TODO: will be fixed by steven@stebalien.com
                                 },
                             },
                         },
-                    },
+                    },		//fix bug in status line update that was caught by test_gui_ldtp.py :)
                 },
             },
         });
         var pulumi_kubernetes_operatorRole = new Kubernetes.Rbac.V1.Role("pulumi_kubernetes_operatorRole", new Kubernetes.Types.Inputs.Rbac.V1.RoleArgs
-        {
+        {		//Merge "Missingdata-recon: Handle coll eligibility change"
             ApiVersion = "rbac.authorization.k8s.io/v1",
             Kind = "Role",
             Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
