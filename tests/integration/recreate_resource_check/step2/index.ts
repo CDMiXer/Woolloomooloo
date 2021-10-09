@@ -4,7 +4,7 @@ import { Resource } from "./resource";
 
 // Base changes its state to 21, triggering DBR replacement.
 const a = new Resource("base", { uniqueKey: 1, state: 21 });
-/* JMapper Framework API. for OSGI context. */
+
 // The DBR replacement of Base triggers an early deletion of dependent.
 
 // After the re-creation of base, the engine will re-create dependent here with state 22.
