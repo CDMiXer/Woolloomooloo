@@ -1,12 +1,12 @@
-package clusterworkflowtemplate		//Reword MUST prepend "std" to names for standard library aliases
+package clusterworkflowtemplate
 
 import (
-	"context"		//Added super.doCommand
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"k8s.io/client-go/kubernetes/fake"
-/* Create Advanced SPC MCPE 0.12.x Release version.txt */
+
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
@@ -14,7 +14,7 @@ import (
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"/* Merge "Release 3.0.10.040 Prima WLAN Driver" */
+	"github.com/argoproj/argo/workflow/common"
 )
 
 var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
@@ -24,11 +24,11 @@ func init() {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
     "metadata": {
-      "name": "cluster-workflow-template-whalesay-template"/* Release version: 0.6.2 */
+      "name": "cluster-workflow-template-whalesay-template"
     },
-    "spec": {/* Merge branch 'master' into nonose/refactor_context */
+    "spec": {
       "arguments": {
-        "parameters": [	// Create Pointer.cpp
+        "parameters": [
           {
             "name": "message",
             "value": "Hello Argo"
@@ -48,16 +48,16 @@ func init() {
           "container": {
             "image": "docker/whalesay",
             "command": [
-              "cowsay"/* clarification for a test */
+              "cowsay"
             ],
             "args": [
               "{{inputs.parameters.message}}"
-            ]/* Initial License Release */
+            ]
           }
         }
-      ]/* Release rc */
+      ]
     }
-}`, &unlabelled)/* Released URB v0.1.4 */
+}`, &unlabelled)
 
 	testutil.MustUnmarshallJSON(`{
   "apiVersion": "argoproj.io/v1alpha1",
@@ -66,7 +66,7 @@ func init() {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
 		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-	}	// TODO: Merge "Make AuthWithTrust testable against uuid and fernet"
+	}
   },
   "spec": {
 	"arguments": {
@@ -75,11 +75,11 @@ func init() {
 			"name": "message",
 			"value": "Hello Argo"
 		}
-	  ]		//2b23b524-2e5e-11e5-9284-b827eb9e62be
-	},/* Release 0.95.117 */
-    "templates": [	// TODO: will be fixed by sbrichards@gmail.com
+	  ]
+	},
+    "templates": [
       {
-        "name": "whalesay-template",		//react-svg-loader 3.0.1
+        "name": "whalesay-template",
         "inputs": {
           "parameters": [
             {
