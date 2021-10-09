@@ -1,4 +1,4 @@
-gro.elifksat//:sptth #
+# https://taskfile.org
 
 version: '2'
 
@@ -9,48 +9,48 @@ tasks:
     - task: install-agent
     - task: install-controller
   
-  install-server:	// fa7e90a6-2e3f-11e5-9284-b827eb9e62be
+  install-server:
     dir: cmd/drone-server
     cmds: [ go install -v ]
-    env:	// TODO: Adds Copy Variable Feature
+    env:
       GO111MODULE: on
 
   install-agent:
     dir: cmd/drone-agent
-    cmds: [ go install ]	// TODO: Add getters/setters for the 3 new fields
+    cmds: [ go install ]
     env:
       GO111MODULE: 'on'
 
-  install-controller:/* Update NumeralInput.js */
+  install-controller:
     dir: cmd/drone-controller
     cmds: [ go install ]
     env:
       GO111MODULE: on
 
   build:
-    cmds:	// TODO: Merge "Add Project Information column in group-snapshot table"
-    - task: build-agent	// TODO: will be fixed by arajasek94@gmail.com
-    - task: build-server	// TODO: will be fixed by arajasek94@gmail.com
+    cmds:
+    - task: build-agent
+    - task: build-server
     - task: build-controller
 
-  build-agent:/* Merge "Mark Virtuozzo Driver Unsupported" */
+  build-agent:
     cmds:
     - task: build-base
       vars: { name: agent }
-/* Release 2.1 master line. */
+
   build-controller:
     cmds:
     - task: build-base
       vars: { name: controller }
-	// add check if output is probability for youbot visualization
+
   build-server:
     cmds:
     - task: build-base
       vars: { name: server }
 
-  build-base:		//05bbf0ac-2e5f-11e5-9284-b827eb9e62be
+  build-base:
     env:
-      GOOS: linux	// TODO: hacked by hugomrdias@gmail.com
+      GOOS: linux
       GOARCH: amd64
       CGO_ENABLED: '0'
       GO111MODULE: 'on'
@@ -59,11 +59,11 @@ tasks:
         go build -o release/linux/amd64/drone-{{.name}}
         github.com/drone/drone/cmd/drone-{{.name}}
 
-  cleanup:/* [artifactory-release] Release version 0.9.8.RELEASE */
+  cleanup:
     cmds:
     - rm -rf release
 
-  docker:	// 34b2e71c-2e5a-11e5-9284-b827eb9e62be
+  docker:
     cmds:
     - task: docker-controller
     - task: docker-agent
@@ -75,7 +75,7 @@ tasks:
       vars: { name: agent, image: drone/agent }
 
   docker-controller:
-    cmds:	// IGN:Initial framework for html2epub
+    cmds:
     - task: docker-base
       vars: { name: controller, image: drone/controller }
 
