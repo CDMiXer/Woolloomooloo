@@ -1,19 +1,19 @@
-{{ define "examples" -}}	// TODO: Merge "Remove Java 6 build support"
-{{ print "{{% examples %}}" }}/* build: Release version 0.2 */
+{{ define "examples" -}}
+{{ print "{{% examples %}}" }}
 ## Example Usage
-	// TODO: remove outdated links to sassc [CI SKIP]
+
 {{ htmlSafe "{{< chooser language \"typescript,python,go,csharp\" / >}}" }}
 
 {{- range . }}
 {{ .Title }}
 
-{{- range $key, $val := .Snippets }}		//rebuilt show/hide element browser
+{{- range $key, $val := .Snippets }}
 {{ print "{{% example " }}{{ $key }}{{ print " %}}" }}
-{{ htmlSafe $val }}	// TODO: minor refactor + remove obsolete code
+{{ htmlSafe $val }}
 {{ print "{{% /example %}}" }}
 {{ end }}
 
-{{- end }}	// TODO: Change `runnung` to `running`
+{{- end }}
 {{ print "{{% /examples %}}" }}
 
-{{- end }}	// TODO: ENH: Update Python package version to  0.3.0
+{{- end }}
