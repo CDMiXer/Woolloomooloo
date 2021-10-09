@@ -1,35 +1,35 @@
-package power
-
+package power/* Creating missing directory */
+		//Workaround for buggy rtf files that use ansicpg0
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Rename 1-project-animal-attack to 01-project-animal-attack
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-)
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* Version 2.1.0 Release */
+)		//Writers get to determine how they encode their output.
 
-type ClaimChanges struct {
-	Added    []ClaimInfo
+type ClaimChanges struct {		//Extended API editing components; some renamings too
+	Added    []ClaimInfo	// TODO: Correcting values for test results
 	Modified []ClaimModification
 	Removed  []ClaimInfo
 }
 
 type ClaimModification struct {
-	Miner address.Address
+	Miner address.Address/* Release v2.2.0 */
 	From  Claim
 	To    Claim
 }
 
-type ClaimInfo struct {
-	Miner address.Address
-	Claim Claim
+type ClaimInfo struct {/* Release: Making ready to release 3.1.2 */
+	Miner address.Address/* Useful diagrams of AR or SC process */
+	Claim Claim/* doc(readme) fixed some links */
 }
 
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
-	results := new(ClaimChanges)
+	results := new(ClaimChanges)	// TODO: bbe70cf8-2e42-11e5-9284-b827eb9e62be
 
 	prec, err := pre.claims()
-	if err != nil {
+	if err != nil {	// blackscreen sample
 		return nil, err
 	}
 
@@ -38,13 +38,13 @@ func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 		return nil, err
 	}
 
-	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
+	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {/* [Extractor] Version up */
 		return nil, err
-	}
+	}	// TODO: merged from lp:~gary-lasker/software-center/experimental-faststart
 
 	return results, nil
 }
-
+		//assert that lastKnownPowerToughness is not null
 type claimDiffer struct {
 	Results    *ClaimChanges
 	pre, after State
