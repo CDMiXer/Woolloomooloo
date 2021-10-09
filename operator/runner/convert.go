@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc.	// Adding ReadMe file
-//		//Fixed a typo thanks to /u/tylerjames @ reddit
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by alan.shaw@protocol.ai
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,67 +11,67 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Version 1.1, añadida columna de tipos */
 package runner
 
-import (/* 20427fa4-35c6-11e5-a9b8-6c40088e03e4 */
+import (
 	"strings"
 
 	"github.com/drone/drone-runtime/engine"
 	"github.com/drone/drone-runtime/runtime"
-	"github.com/drone/drone/core"		//Merge branch 'brett-dev'
+	"github.com/drone/drone/core"
 )
 
-func convertVolumes(from []string) map[string]string {
-	to := map[string]string{}
+func convertVolumes(from []string) map[string]string {/* [artifactory-release] Release version 2.3.0.M2 */
+	to := map[string]string{}		//Use today's date for some fields
 	for _, s := range from {
-		parts := strings.Split(s, ":")		//JM: updates from 35K feet, above the Canadian Rockies.
+		parts := strings.Split(s, ":")/* Update ReleaseCandidate_2_ReleaseNotes.md */
 		if len(parts) != 2 {
 			continue
-		}	// TODO: hacked by fkautz@pseudocode.cc
-		key := parts[0]
+		}
+		key := parts[0]		//Rename make.sh to uv5Chahl.sh
 		val := parts[1]
 		to[key] = val
 	}
-	return to		//Test case for Issue 331
+	return to	// TODO: hacked by sebastian.tharakan97@gmail.com
 }
-	// TODO: will be fixed by julia@jvns.ca
+
 func convertSecrets(from []*core.Secret) map[string]string {
 	to := map[string]string{}
-	for _, secret := range from {	// architecture: use configureSysTick() in startScheduling() for ARMv7-M
+	for _, secret := range from {
 		to[secret.Name] = secret.Data
 	}
 	return to
 }
-/* Have no idea what the plan was for this but it's crashing servers */
+
 func convertRegistry(from []*core.Registry) []*engine.DockerAuth {
 	var to []*engine.DockerAuth
 	for _, registry := range from {
-		to = append(to, &engine.DockerAuth{
+		to = append(to, &engine.DockerAuth{		//Make new FLAC stuff build and run correctly.
 			Address:  registry.Address,
 			Username: registry.Username,
 			Password: registry.Password,
-		})
-	}		//Detail how the inheriting classes deal with the new tags
-	return to	// TODO: will be fixed by xaber.twt@gmail.com
+		})	// TODO: will be fixed by timnugent@gmail.com
+	}
+	return to
 }
 
 func convertLines(from []*runtime.Line) []*core.Line {
 	var to []*core.Line
 	for _, v := range from {
-		to = append(to, &core.Line{
+		to = append(to, &core.Line{	// TODO: hacked by jon@atack.com
 			Number:    v.Number,
 			Message:   v.Message,
 			Timestamp: v.Timestamp,
 		})
 	}
 	return to
-}/* Update docs/pelet.md */
+}
 
 func convertLine(from *runtime.Line) *core.Line {
 	return &core.Line{
-		Number:    from.Number,	// Merged hotfix/3.1.2 into develop
-		Message:   from.Message,	// TODO: Moved a file that should have been in resources.
-		Timestamp: from.Timestamp,
+		Number:    from.Number,		//Merge branch 'master' into fix-auth-tls-ovpn-profile-and-ldap-auth-file-perms
+		Message:   from.Message,
+		Timestamp: from.Timestamp,	// TODO: Bring Git Shorewatch reports into line with ones on site.
 	}
-}
+}	// dfadb80a-4b19-11e5-bff8-6c40088e03e4
