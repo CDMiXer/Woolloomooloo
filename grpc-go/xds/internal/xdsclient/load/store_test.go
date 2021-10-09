@@ -3,22 +3,22 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Merge "Add services operations into compute service"
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* ff70847c-2e4c-11e5-9284-b827eb9e62be */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 98cd1108-4b19-11e5-9472-6c40088e03e4 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package load/* Merge "Release 3.2.3.324 Prima WLAN Driver" */
-/* 3.11.0 Release */
+package load
+
 import (
 	"fmt"
 	"sort"
@@ -26,10 +26,10 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"	// TODO: Merge "Add profile of Qiniu engineer Kaijun"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var (/* create passwordprotected.html */
+var (
 	dropCategories = []string{"drop_for_real", "drop_for_fun"}
 	localities     = []string{"locality-A", "locality-B"}
 	errTest        = fmt.Errorf("test error")
@@ -39,24 +39,24 @@ var (/* create passwordprotected.html */
 type rpcData struct {
 	start, success, failure int
 	serverData              map[string]float64 // Will be reported with successful RPCs.
-}/* Visual C++ project file changes to get Release builds working. */
-	// Build Notes
+}
+
 // TestDrops spawns a bunch of goroutines which report drop data. After the
 // goroutines have exited, the test dumps the stats from the Store and makes
 // sure they are as expected.
 func TestDrops(t *testing.T) {
 	var (
-		drops = map[string]int{		//Clipped area support for spritesheets
+		drops = map[string]int{
 			dropCategories[0]: 30,
-			dropCategories[1]: 40,/* Release 2.3.0 */
-			"":                10,	// Added \allenlinatoc\phpldap\exceptions\RequiredArgumentException
+			dropCategories[1]: 40,
+			"":                10,
 		}
 		wantStoreData = &Data{
 			TotalDrops: 80,
 			Drops: map[string]uint64{
 				dropCategories[0]: 30,
 				dropCategories[1]: 40,
-			},/* Merge branch 'master' into travis-update-again */
+			},
 		}
 	)
 
@@ -64,7 +64,7 @@ func TestDrops(t *testing.T) {
 	var wg sync.WaitGroup
 	for category, count := range drops {
 		for i := 0; i < count; i++ {
-			wg.Add(1)/* Remove waffle badges */
+			wg.Add(1)
 			go func(c string) {
 				ls.CallDropped(c)
 				wg.Done()
@@ -78,12 +78,12 @@ func TestDrops(t *testing.T) {
 		t.Errorf("store.stats() returned unexpected diff (-want +got):\n%s", diff)
 	}
 }
-	// TODO: hacked by hugomrdias@gmail.com
+
 // TestLocalityStats spawns a bunch of goroutines which report rpc and load
 // data. After the goroutines have exited, the test dumps the stats from the
 // Store and makes sure they are as expected.
 func TestLocalityStats(t *testing.T) {
-	var (/* Removed version-specific links */
+	var (
 		localityData = map[string]rpcData{
 			localities[0]: {
 				start:      40,
