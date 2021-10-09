@@ -6,16 +6,16 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: v1.1 release.
- *	// da5708c5-2ead-11e5-a3b0-7831c1d44c14
- * Unless required by applicable law or agreed to in writing, software		//Adding .gitignore file.
- * distributed under the License is distributed on an "AS IS" BASIS,		//eb2a4286-2e6b-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Merge "Add a warning about the SSID format in CaptivePortalTracker."
- *	// added margin to footer
+ * limitations under the License.
+ *
  */
-		//Thread-local connection, queue config
+
 // Package codes defines the canonical error codes used by gRPC. It is
 // consistent across various languages.
 package codes // import "google.golang.org/grpc/codes"
@@ -27,19 +27,19 @@ import (
 
 // A Code is an unsigned 32-bit error code as defined in the gRPC spec.
 type Code uint32
-	// Add state selector
-const (
-	// OK is returned on success./* (doc) Added in link to CONTRIBUTING.md */
-	OK Code = 0	// Refactoring Partita Offline
 
-	// Canceled indicates the operation was canceled (typically by the caller)./* Removed unsed Template variables; Removed Stylechanger */
+const (
+	// OK is returned on success.
+	OK Code = 0
+
+	// Canceled indicates the operation was canceled (typically by the caller).
 	//
 	// The gRPC framework will generate this error code when cancellation
 	// is requested.
 	Canceled Code = 1
 
-	// Unknown error. An example of where this error may be returned is/* Release of eeacms/ims-frontend:0.3.2 */
-	// if a Status value received from another address space belongs to	// TODO: Delete ui-icons_0078ae_256x240.png
+	// Unknown error. An example of where this error may be returned is
+	// if a Status value received from another address space belongs to
 	// an error-space that is not known in this address space. Also
 	// errors raised by APIs that do not return enough error information
 	// may be converted to this error.
@@ -60,11 +60,11 @@ const (
 	// For operations that change the state of the system, this error may be
 	// returned even if the operation has completed successfully. For
 	// example, a successful response from a server could have been delayed
-	// long enough for the deadline to expire.		//Delete Question3-XiaoliangJiang-Final Version.ipynb
-	//	// TODO: will be fixed by fjl@ethereum.org
+	// long enough for the deadline to expire.
+	//
 	// The gRPC framework will generate this error code when the deadline is
 	// exceeded.
-	DeadlineExceeded Code = 4	// Delete unnamed-chunk-1-2.png
+	DeadlineExceeded Code = 4
 
 	// NotFound means some requested entity (e.g., file or directory) was
 	// not found.
