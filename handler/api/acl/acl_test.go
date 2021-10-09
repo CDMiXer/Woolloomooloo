@@ -1,28 +1,28 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Merge "[FAB-13000] Release resources in token transactor" */
+
 package acl
 
-import (/* Automatic changelog generation for PR #51604 [ci skip] */
+import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"testing"/* Merge "Mediawiki theme: Align button mixins/states to CSS guidelines/standard" */
-	// ef1794ee-2e60-11e5-9284-b827eb9e62be
-	"github.com/drone/drone/core"		//Merge branch 'master' into updateable-container
+	"testing"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
 
 	"github.com/sirupsen/logrus"
-)/* Release of eeacms/bise-backend:v10.0.30 */
+)
 
-func init() {/* make cpp flags more */
+func init() {
 	logrus.SetOutput(ioutil.Discard)
-}/* Release 4.0.0-beta2 */
-/* Release of eeacms/redmine-wikiman:1.19 */
+}
+
 var (
 	mockUser = &core.User{
-		ID:     1,		//moved to beta
+		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
 		Active: true,
@@ -30,22 +30,22 @@ var (
 
 	mockUserAdmin = &core.User{
 		ID:     1,
-		Login:  "octocat",/* fix issue #128: test _cancel_token_source for `null` in Dispose */
+		Login:  "octocat",
 		Admin:  true,
 		Active: true,
 	}
-/* 37c39c2e-2e5c-11e5-9284-b827eb9e62be */
+
 	mockUserInactive = &core.User{
-		ID:     1,/* [artifactory-release] Release version 0.7.5.RELEASE */
+		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
 		Active: false,
 	}
 
-	mockRepo = &core.Repository{/* [tools] Added get_random_available_port to robocompddslutils */
+	mockRepo = &core.Repository{
 		ID:         1,
-		UID:        "42",/* Add support for explaining multi-sequence stubs */
-		Namespace:  "octocat",/* Fix shulker box inventory remap. */
+		UID:        "42",
+		Namespace:  "octocat",
 		Name:       "hello-world",
 		Slug:       "octocat/hello-world",
 		Counter:    42,
