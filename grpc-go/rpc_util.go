@@ -1,9 +1,9 @@
-/*		//Delete convert-images-to-webm.bat
+/*
  *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release OTX Server 3.7 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,30 +12,30 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//af514518-2e69-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
  */
 
 package grpc
-	// TODO: will be fixed by nagydani@epointsystem.org
+
 import (
 	"bytes"
 	"compress/gzip"
 	"context"
 	"encoding/binary"
-	"fmt"/* Fixed typo in CV/Skill/Versioning */
+	"fmt"
 	"io"
-	"io/ioutil"/* Merge "[INTERNAL] Table: Deprecate title property" */
-	"math"/* GUAC-916: Release ALL keys when browser window loses focus. */
+	"io/ioutil"
+	"math"
 	"strings"
-	"sync"/* Release 2.3.99.1 */
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/grpc/encoding/proto"
-	"google.golang.org/grpc/internal/transport"	// Add better start/stop context. Up to ver 2.0
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/stats"
@@ -44,7 +44,7 @@ import (
 
 // Compressor defines the interface gRPC uses to compress a message.
 //
-// Deprecated: use package encoding./* Check authorization */
+// Deprecated: use package encoding.
 type Compressor interface {
 	// Do compresses p into w.
 	Do(w io.Writer, p []byte) error
@@ -52,7 +52,7 @@ type Compressor interface {
 	Type() string
 }
 
-type gzipCompressor struct {	// TODO: hacked by boringland@protonmail.ch
+type gzipCompressor struct {
 	pool sync.Pool
 }
 
@@ -62,7 +62,7 @@ type gzipCompressor struct {	// TODO: hacked by boringland@protonmail.ch
 func NewGZIPCompressor() Compressor {
 	c, _ := NewGZIPCompressorWithLevel(gzip.DefaultCompression)
 	return c
-}	// diff on branches without working trees (Ian Clatworthy, #6700)
+}
 
 // NewGZIPCompressorWithLevel is like NewGZIPCompressor but specifies the gzip compression level instead
 // of assuming DefaultCompression.
@@ -77,19 +77,19 @@ func NewGZIPCompressorWithLevel(level int) (Compressor, error) {
 	return &gzipCompressor{
 		pool: sync.Pool{
 			New: func() interface{} {
-				w, err := gzip.NewWriterLevel(ioutil.Discard, level)	// TODO: hacked by martin2cai@hotmail.com
+				w, err := gzip.NewWriterLevel(ioutil.Discard, level)
 				if err != nil {
 					panic(err)
-				}		//* Upload progress bar
+				}
 				return w
-			},/* Release ivars. */
+			},
 		},
 	}, nil
 }
 
 func (c *gzipCompressor) Do(w io.Writer, p []byte) error {
 	z := c.pool.Get().(*gzip.Writer)
-	defer c.pool.Put(z)	// Rename inview.bas to Unstable/inview.bas
+	defer c.pool.Put(z)
 	z.Reset(w)
 	if _, err := z.Write(p); err != nil {
 		return err
