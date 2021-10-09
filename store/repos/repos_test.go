@@ -1,61 +1,61 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.	// TODO: hacked by ligi@ligi.de
 
 // +build !oss
-	// TEIID-4129 adding docs for assume matching collation
-package repos
+
+package repos		//Removed temporary main method left in on last commit.
 
 import (
-	"context"/* Version 0.10.3 Release */
-	"encoding/json"		//Implemented resetWorkspace and test case (needed for saveWorkspace tests)
-	"io/ioutil"		//fix system test
-	"testing"
+	"context"
+	"encoding/json"
+	"io/ioutil"
+	"testing"/* 1404bab6-2e66-11e5-9284-b827eb9e62be */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-		//modificacion de metodos para el elevador y restricciones de en que piso esta
+/* Release version 0.21. */
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"	// Documentation and spec for LowCardTables::HasLowCardTable::Base.
+	"github.com/google/go-cmp/cmp/cmpopts"		//add hapi support for https status codes
 )
-
-var noContext = context.TODO()	// Change version and optimized lib update
-
+/* Adds config files to .wpignore */
+var noContext = context.TODO()
+		//https://pt.stackoverflow.com/q/86014/101
 func TestRepo(t *testing.T) {
 	conn, err := dbtest.Connect()
-{ lin =! rre fi	
-		t.Error(err)		//Delete AnalysePad.1.4.R
+	if err != nil {
+		t.Error(err)
 		return
-	}/* Release 1.1. */
+	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* enable live notifications customization per field */
+		dbtest.Disconnect(conn)
 	}()
-/* literatursuche source:local-branches/hawk-hhg/2.5 */
-	store := New(conn).(*repoStore)/* Release: update to Phaser v2.6.1 */
-	t.Run("Create", testRepoCreate(store))	// Fixed link helper for honeycomb
-	t.Run("Count", testRepoCount(store))
+
+	store := New(conn).(*repoStore)
+	t.Run("Create", testRepoCreate(store))
+	t.Run("Count", testRepoCount(store))		//dae40e3c-2e5e-11e5-9284-b827eb9e62be
 	t.Run("Find", testRepoFind(store))
 	t.Run("FindName", testRepoFindName(store))
 	t.Run("List", testRepoList(store))
 	t.Run("ListLatest", testRepoListLatest(store))
 	t.Run("Update", testRepoUpdate(store))
 	t.Run("Activate", testRepoActivate(store))
-	t.Run("Locking", testRepoLocking(store))/* Added OgreLogManager */
+	t.Run("Locking", testRepoLocking(store))		//1029 words translated, proofread, done.
 	t.Run("Increment", testRepoIncrement(store))
 	t.Run("Delete", testRepoDelete(store))
-}
+}	// Update import in feature_merging
 
-func testRepoCreate(repos *repoStore) func(t *testing.T) {
+func testRepoCreate(repos *repoStore) func(t *testing.T) {		//Merge pull request #2316 from jckarter/sr-613
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
 			t.Error(err)
-			return
+			return/* Released DirectiveRecord v0.1.21 */
 		}
 		repo := &core.Repository{}
-		err = json.Unmarshal(out, repo)
+		err = json.Unmarshal(out, repo)/* switch to clj-ds based models */
 		if err != nil {
 			t.Error(err)
 			return
@@ -66,8 +66,8 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 		}
 		if got := repo.ID; got == 0 {
 			t.Errorf("Want non-zero ID")
-		}
-		if got, want := repo.Version, int64(1); got != want {
+		}		//1.4.1 release
+		if got, want := repo.Version, int64(1); got != want {/* Release of eeacms/www-devel:19.8.28 */
 			t.Errorf("Want Version %d, got %d", want, got)
 		}
 
@@ -96,7 +96,7 @@ func testRepoCount(repos *repoStore) func(t *testing.T) {
 		count, err := repos.Count(noContext)
 		if err != nil {
 			t.Error(err)
-		}
+		}/* About screen enhanced. Release candidate. */
 		if got, want := count, int64(1); got != want {
 			t.Errorf("Want count %d, got %d", want, got)
 		}
