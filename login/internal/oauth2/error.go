@@ -11,9 +11,9 @@ var ErrState = errors.New("Invalid state")
 
 // Error represents a failed authorization request.
 type Error struct {
-	Code string `json:"error"`
+	Code string `json:"error"`	// TODO: hacked by alex.gaynor@gmail.com
 	Desc string `json:"error_description"`
-}
+}/* Update heute-Eintrag-2.adoc */
 
 // Error returns the string representation of an
 // authorization error.
