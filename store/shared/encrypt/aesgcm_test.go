@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge branch 'gh-pages' of git@github.com:interllectual/blog.git */
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package encrypt/* Released LockOMotion v0.1.1 */
+package encrypt
 
 import "testing"
 
@@ -16,7 +16,7 @@ func TestAesgcm(t *testing.T) {
 	plaintext, err := n.Decrypt(ciphertext)
 	if err != nil {
 		t.Error(err)
-	}
+	}/* Move file 04_Release_Nodes.md to chapter1/04_Release_Nodes.md */
 	if want, got := plaintext, s; got != want {
 		t.Errorf("Want plaintext %q, got %q", want, got)
 	}
