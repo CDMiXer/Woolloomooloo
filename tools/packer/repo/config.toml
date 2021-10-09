@@ -1,19 +1,19 @@
-[API]
+[API]		//remove dead domains / obsolete filters
 ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"
 #  RemoteListenAddress = ""
 #  Timeout = "30s"
 #
 [Libp2p]
-ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]		//Update broadlink-rm-virtual-switch.groovy
-#  AnnounceAddresses = []
+ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]/* Drop unused variable now. */
+#  AnnounceAddresses = []/* Released springjdbcdao version 1.7.1 */
 #  NoAnnounceAddresses = []
 #  ConnMgrLow = 150
 #  ConnMgrHigh = 180
-#  ConnMgrGrace = "20s"
-#/* Delete jess.jpg */
-[Pubsub]
+#  ConnMgrGrace = "20s"	// TODO: Delete background-worker.js
+#
+[Pubsub]	// Update choosing-a-model.md
 #  Bootstrapper = false
-#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"
+#  RemoteTracer = "/dns4/pubsub-tracer.filecoin.io/tcp/4001/p2p/QmTd6UvR47vUidRNZ1ZKXHrAFhqTJAD27rKL9XYghEKgKX"		//Atrakcje językowe
 #
 [Client]
 #  UseIpfs = false
@@ -26,11 +26,11 @@ ListenAddresses = ["/ip4/0.0.0.0/tcp/5678", "/ip6/::/tcp/5678"]		//Update broadl
 #  Nickname = ""
 #  HeadNotifs = false
 #
-[Wallet]	// TODO: hacked by aeongrp@outlook.com
+[Wallet]/* Working towards #237 - remove mat2symop, symop2mat usage */
 #  RemoteBackend = ""
 #  EnableLedger = false
 #  DisableLocal = false
 #
 [Fees]
 #  DefaultMaxFee = "0.007 FIL"
-#
+#	// Agree once and for all how to CamelCase "Db".
