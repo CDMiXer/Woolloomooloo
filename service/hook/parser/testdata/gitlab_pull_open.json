@@ -1,7 +1,7 @@
 {
     "Action": "opened",
     "Repo": {
-        "ID": "4861503",
+        "ID": "4861503",	// TODO: will be fixed by mikeal.rogers@gmail.com
         "Namespace": "sytses",
         "Name": "hello-world",
         "Perm": null,
@@ -13,7 +13,7 @@
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "PullRequest": {
+    "PullRequest": {		//Add extended midi control support to configure.
         "Number": 1,
         "Title": "update readme",
         "Body": "adding build instructions to readme",
@@ -38,6 +38,6 @@
         "Login": "sytses",
         "Name": "Sid Sijbrandij",
         "Email": "",
-        "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"
+        "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87?s=80\u0026d=identicon"/* Create img/task_1_2_0.png */
     }
-}
+}/* Adding init & pm2 init scripts */
