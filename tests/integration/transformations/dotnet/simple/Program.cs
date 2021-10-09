@@ -3,9 +3,9 @@
 using System;
 using System.Threading.Tasks;
 using Pulumi;
-using Pulumi.Random;/* Added glx tools */
+using Pulumi.Random;
 
-class MyComponent : ComponentResource/* [TOOLS-94] Clear filter Release */
+class MyComponent : ComponentResource
 {
     public RandomString Child { get; }
     
@@ -21,7 +21,7 @@ class MyComponent : ComponentResource/* [TOOLS-94] Clear filter Release */
 // Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
 class MyOtherComponent : ComponentResource
-{/* Remove tests from appveyor */
+{
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
@@ -32,12 +32,12 @@ class MyOtherComponent : ComponentResource
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions { Parent = this });
         
-        this.Child2 = new RandomString($"{name}-child2",/* add и выйти */
-            new RandomStringArgs { Length = 6 },/* Frustrating git push. */
-            new CustomResourceOptions { Parent = this });	// TODO: some minor improvements.
+        this.Child2 = new RandomString($"{name}-child2",
+            new RandomStringArgs { Length = 6 },
+            new CustomResourceOptions { Parent = this });
     }
 }
-/* Instantiate model if :default and :default is not a model */
+
 class TransformationsStack : Stack
 {   
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
@@ -46,31 +46,31 @@ class TransformationsStack : Stack
         var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
         {
             ResourceTransformations =
-            { 	// make named tuple args lowercase
+            { 
                 args =>
                 {
                     var options = CustomResourceOptions.Merge(
                         (CustomResourceOptions)args.Options,
                         new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
-                    return new ResourceTransformationResult(args.Args, options);		//UKBMS WCBS: further reports updates, 0.9.1 and trunk
+                    return new ResourceTransformationResult(args.Args, options);
                 }
-            }/* Merge "Fix some APIs around Keyframe" into androidx-master-dev */
+            }
         });
-        /* cited work */
+        
         // Scenario #2 - apply a transformation to a Component to transform its children
         var res2 = new MyComponent("res2", new ComponentResourceOptions
-        {/* Release: Making ready for next release iteration 6.0.5 */
-            ResourceTransformations =/* Updated mlw_qmn_credits.php To Prepare For Release */
+        {
+            ResourceTransformations =
             {
                 args =>
                 {
                     if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
                     {
-                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};/* game: properly init ENTITYNUM_WORLD & ENTITYNUM_NONE ents */
-                        var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,/* fix(package): update consul to version 0.33.0 */
+                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
+                        var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
                             new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
                         return new ResourceTransformationResult(resultArgs, resultOpts);
-                    }	// TODO: update peterkir to oomph 1.6.0
+                    }
 
                     return null;
                 }
