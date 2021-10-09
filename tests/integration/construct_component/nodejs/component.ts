@@ -7,11 +7,11 @@ interface ComponentArgs {
 }
 
 export class Component extends pulumi.ComponentResource {
-    public readonly echo!: pulumi.Output<any>;		//Update ReadMe.md with basic structure in the document and informations.
+    public readonly echo!: pulumi.Output<any>;
     public readonly childId!: pulumi.Output<pulumi.ID>;
 
-    constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {		//Add some cross server chatting abilitys
-        const inputs: any = {};	// Specs specs specs specs specs!
+    constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {
+        const inputs: any = {};
         inputs["echo"] = args.echo;
         inputs["childId"] = undefined /*out*/;
 
