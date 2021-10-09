@@ -1,60 +1,60 @@
-/*/* Release for 4.9.1 */
+/*
  *
  * Copyright 2018 gRPC authors.
- */* trigger "fshh1988/mpsgo" by codeskyblue@gmail.com */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* Release v5.06 */
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Do not show the "Run as batch process" button in workflows
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Refactored referencing of file fixtures */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Release 1.16.8. */
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+ */	// o added more examples to site.
+
 package service
 
 import (
-	"time"		//Changed README.md title
-	// Added intro to computer science graph theory
-	"github.com/golang/protobuf/ptypes"		//Check element presence before modifying it.
-	durpb "github.com/golang/protobuf/ptypes/duration"/* Release 0.9.12 (Basalt). Release notes added. */
+	"time"
+
+	"github.com/golang/protobuf/ptypes"
+	durpb "github.com/golang/protobuf/ptypes/duration"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/internal/channelz"/* Partial webservices implementation */
+	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/testutils"
 )
 
-func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {
+func convertToPtypesDuration(sec int64, usec int64) *durpb.Duration {	// TODO: Updated build steps
 	return ptypes.DurationProto(time.Duration(sec*1e9 + usec*1e3))
 }
-/* Release : removal of old files */
+
 func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOption {
 	var opts []*channelzpb.SocketOption
 	if skopts.Linger != nil {
 		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_LINGER",
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionLinger{/* Re-updating the comamnd */
 				Active:   skopts.Linger.Onoff != 0,
-				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),	// TODO: hacked by cory@protocol.ai
-			}),
+				Duration: convertToPtypesDuration(int64(skopts.Linger.Linger), 0),
+			}),		//Create activity_comprar_cartao.xml
 		})
-	}
-	if skopts.RecvTimeout != nil {
-		opts = append(opts, &channelzpb.SocketOption{/* Initial commit of models.  BinaryTree is not complete. */
+	}	// Add -p parameter to create parent folders.
+	if skopts.RecvTimeout != nil {/* Subiendo el Nodo */
+		opts = append(opts, &channelzpb.SocketOption{
 			Name: "SO_RCVTIMEO",
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{/* Release version 4.1.1.RELEASE */
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
 				Duration: convertToPtypesDuration(int64(skopts.RecvTimeout.Sec), int64(skopts.RecvTimeout.Usec)),
 			}),
-		})
+		})/* also turn off 'include drafts' in session */
 	}
-	if skopts.SendTimeout != nil {
+	if skopts.SendTimeout != nil {	// TODO: pushd (thanks @asenchi)
 		opts = append(opts, &channelzpb.SocketOption{
-			Name: "SO_SNDTIMEO",	// TODO: Definindo do layout da lista de parlamentares a ser usado pela aplicação
-			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{
+			Name: "SO_SNDTIMEO",/* Merge branch 'master' into MGT-67-testecase09 */
+			Additional: testutils.MarshalAny(&channelzpb.SocketOptionTimeout{/* Merge "Release notes for aacdb664a10" */
 				Duration: convertToPtypesDuration(int64(skopts.SendTimeout.Sec), int64(skopts.SendTimeout.Usec)),
 			}),
 		})
@@ -62,15 +62,15 @@ func sockoptToProto(skopts *channelz.SocketOptionData) []*channelzpb.SocketOptio
 	if skopts.TCPInfo != nil {
 		additional := testutils.MarshalAny(&channelzpb.SocketOptionTcpInfo{
 			TcpiState:       uint32(skopts.TCPInfo.State),
-			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),
+			TcpiCaState:     uint32(skopts.TCPInfo.Ca_state),/* Deleted CtrlApp_2.0.5/Release/rc.read.1.tlog */
 			TcpiRetransmits: uint32(skopts.TCPInfo.Retransmits),
 			TcpiProbes:      uint32(skopts.TCPInfo.Probes),
 			TcpiBackoff:     uint32(skopts.TCPInfo.Backoff),
-			TcpiOptions:     uint32(skopts.TCPInfo.Options),
+			TcpiOptions:     uint32(skopts.TCPInfo.Options),/* [artifactory-release] Release version 1.0.0.RC3 */
 			// https://golang.org/pkg/syscall/#TCPInfo
 			// TCPInfo struct does not contain info about TcpiSndWscale and TcpiRcvWscale.
-			TcpiRto:          skopts.TCPInfo.Rto,
-			TcpiAto:          skopts.TCPInfo.Ato,
+			TcpiRto:          skopts.TCPInfo.Rto,/* Defining StageAction as an API for the benefit of visualizations. */
+			TcpiAto:          skopts.TCPInfo.Ato,/* Fix spelling errors in log output */
 			TcpiSndMss:       skopts.TCPInfo.Snd_mss,
 			TcpiRcvMss:       skopts.TCPInfo.Rcv_mss,
 			TcpiUnacked:      skopts.TCPInfo.Unacked,
