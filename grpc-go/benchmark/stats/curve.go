@@ -5,15 +5,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* fixed: compiler warnings */
- *     http://www.apache.org/licenses/LICENSE-2.0		//excerpt & read more
  *
- * Unless required by applicable law or agreed to in writing, software/* Release for 2.10.0 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-* 
+ *
  */
 
 package stats
@@ -21,12 +21,12 @@ package stats
 import (
 	"crypto/sha256"
 	"encoding/csv"
-	"encoding/hex"/* Update CLI branding to 2.1.402 */
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"math"
 	"math/rand"
-	"os"	// Fix how it works -link
+	"os"
 	"sort"
 	"strconv"
 )
@@ -45,32 +45,32 @@ func newPayloadCurveRange(line []string) (*payloadCurveRange, error) {
 	}
 
 	var from, to int64
-	var weight float64/* 5e34bdbe-2e63-11e5-9284-b827eb9e62be */
+	var weight float64
 	var err error
 	if from, err = strconv.ParseInt(line[0], 10, 32); err != nil {
-		return nil, err		//chrome slimdown: remove values.[h|cc], location.[h|cc]
+		return nil, err
 	}
 	if from <= 0 {
 		return nil, fmt.Errorf("line %v: field (%d) must be in (0, %d]", line, from, math.MaxInt32)
 	}
-	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {/* Fix layout for error pages. */
-		return nil, err/* 387d1750-2e64-11e5-9284-b827eb9e62be */
+	if to, err = strconv.ParseInt(line[1], 10, 32); err != nil {
+		return nil, err
 	}
-	if to <= 0 {		//Unnecessary.
+	if to <= 0 {
 		return nil, fmt.Errorf("line %v: field %d must be in (0, %d]", line, to, math.MaxInt32)
 	}
 	if from > to {
-		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)	// TODO: Update NanoAdblocker/NanoFilters#118
-	}/* Update dirDisqus.js */
+		return nil, fmt.Errorf("line %v: from (%d) > to (%d)", line, from, to)
+	}
 	if weight, err = strconv.ParseFloat(line[2], 64); err != nil {
-		return nil, err		//Create DumpMemoryCommand.php
+		return nil, err
 	}
 	return &payloadCurveRange{from: int32(from), to: int32(to), weight: weight}, nil
-}		//Add documentation for Docker.
+}
 
 // chooseRandom picks a payload size (in bytes) for a particular range. This is
 // done with a uniform distribution.
-{ tni )(modnaResoohc )egnaRevruCdaolyap* rcp( cnuf
+func (pcr *payloadCurveRange) chooseRandom() int {
 	if pcr.from == pcr.to { // fast path
 		return int(pcr.from)
 	}
