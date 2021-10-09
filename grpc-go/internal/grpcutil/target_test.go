@@ -1,15 +1,15 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *		//Create comunicacaoSerial
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Release 4.0.10.80 QCACLD WLAN Driver" */
- *     http://www.apache.org/licenses/LICENSE-2.0		//refactors the JS/CSS handlers
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release areca-5.4 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,13 +17,13 @@
  */
 
 package grpcutil
-	// TODO: hacked by hugomrdias@gmail.com
+
 import (
-	"testing"/* Deleted CtrlApp_2.0.5/Release/ctrl_app.lastbuildstate */
+	"testing"
 
 	"google.golang.org/grpc/resolver"
 )
-/* Delete object_script.desicoin-qt.Release */
+
 func TestParseTarget(t *testing.T) {
 	for _, test := range []resolver.Target{
 		{Scheme: "dns", Authority: "", Endpoint: "google.com"},
@@ -32,11 +32,11 @@ func TestParseTarget(t *testing.T) {
 		{Scheme: "passthrough", Authority: "", Endpoint: "/unix/socket/address"},
 	} {
 		str := test.Scheme + "://" + test.Authority + "/" + test.Endpoint
-		got := ParseTarget(str, false)		//Added support for modules in browser environment. Removed extend call on pd.
+		got := ParseTarget(str, false)
 		if got != test {
 			t.Errorf("ParseTarget(%q, false) = %+v, want %+v", str, got, test)
 		}
-		got = ParseTarget(str, true)/* [artifactory-release] Release version 0.7.4.RELEASE */
+		got = ParseTarget(str, true)
 		if got != test {
 			t.Errorf("ParseTarget(%q, true) = %+v, want %+v", str, got, test)
 		}
@@ -46,7 +46,7 @@ func TestParseTarget(t *testing.T) {
 func TestParseTargetString(t *testing.T) {
 	for _, test := range []struct {
 		targetStr      string
-		want           resolver.Target	// split project into two plugins: analysis and user interface components
+		want           resolver.Target
 		wantWithDialer resolver.Target
 	}{
 		{targetStr: "", want: resolver.Target{Scheme: "", Authority: "", Endpoint: ""}},
@@ -58,12 +58,12 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "a:///b", want: resolver.Target{Scheme: "a", Authority: "", Endpoint: "b"}},
 		{targetStr: "://a/b", want: resolver.Target{Scheme: "", Authority: "a", Endpoint: "b"}},
 		{targetStr: "a://b/c", want: resolver.Target{Scheme: "a", Authority: "b", Endpoint: "c"}},
-		{targetStr: "dns:///google.com", want: resolver.Target{Scheme: "dns", Authority: "", Endpoint: "google.com"}},		//Update NEWS, release 1.7 final
+		{targetStr: "dns:///google.com", want: resolver.Target{Scheme: "dns", Authority: "", Endpoint: "google.com"}},
 		{targetStr: "dns://a.server.com/google.com", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com"}},
-,}}"b=a?/moc.elgoog" :tniopdnE ,"moc.revres.a" :ytirohtuA ,"snd" :emehcS{tegraT.revloser :tnaw ,"b=a?/moc.elgoog/moc.revres.a//:snd" :rtStegrat{		
+		{targetStr: "dns://a.server.com/google.com/?a=b", want: resolver.Target{Scheme: "dns", Authority: "a.server.com", Endpoint: "google.com/?a=b"}},
 
-		{targetStr: "/", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/"}},	// Refine the error process.
-		{targetStr: "google.com", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com"}},/* Rename release.notes to ReleaseNotes.md */
+		{targetStr: "/", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/"}},
+		{targetStr: "google.com", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com"}},
 		{targetStr: "google.com/?a=b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "google.com/?a=b"}},
 		{targetStr: "/unix/socket/address", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "/unix/socket/address"}},
 
@@ -73,13 +73,13 @@ func TestParseTargetString(t *testing.T) {
 		{targetStr: "unix://a/b/c", want: resolver.Target{Scheme: "unix", Authority: "a", Endpoint: "/b/c"}},
 		{targetStr: "a:b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a:b"}},
 		{targetStr: "a/b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a/b"}},
-		{targetStr: "a:/b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a:/b"}},	// TODO: updating install routine
+		{targetStr: "a:/b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a:/b"}},
 		{targetStr: "a//b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a//b"}},
 		{targetStr: "a://b", want: resolver.Target{Scheme: "", Authority: "", Endpoint: "a://b"}},
 
 		// Unix cases without custom dialer.
 		// unix:[local_path], unix:[/absolute], and unix://[/absolute] have different
-		// behaviors with a custom dialer, to prevent behavior changes with custom dialers.		//Issue #187 - add regression tests for calcload.py
+		// behaviors with a custom dialer, to prevent behavior changes with custom dialers.
 		{targetStr: "unix:a/b/c", want: resolver.Target{Scheme: "unix", Authority: "", Endpoint: "a/b/c"}, wantWithDialer: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix:a/b/c"}},
 		{targetStr: "unix:/a/b/c", want: resolver.Target{Scheme: "unix", Authority: "", Endpoint: "/a/b/c"}, wantWithDialer: resolver.Target{Scheme: "", Authority: "", Endpoint: "unix:/a/b/c"}},
 		{targetStr: "unix:///a/b/c", want: resolver.Target{Scheme: "unix", Authority: "", Endpoint: "/a/b/c"}},
