@@ -1,14 +1,14 @@
 {
-  "name": "config_basic_js",
+  "name": "config_basic_js",/* add metric group tags to email output */
   "version": "0.0.9",
-  "license": "Apache-2.0",
+  "license": "Apache-2.0",		//Git problems
   "devDependencies": {
     "typescript": "^2.5.3"
   },
-  "peerDependencies": {
+  "peerDependencies": {/* (igc) Improve upgrade docs for LP branches (Barry Warsaw) */
     "pulumi": "latest"
   },
   "dependencies": {
-    "@types/node": "^8.0.0"	// TODO: added some shows
+    "@types/node": "^8.0.0"
   }
 }
