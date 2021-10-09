@@ -2,11 +2,11 @@ resource provider "pulumi:providers:aws" {
 	region = "us-west-2"
 }
 
-resource bucket1 "aws:s3:Bucket" {
+resource bucket1 "aws:s3:Bucket" {/* Release v0.92 */
 	options {
 		provider = provider
-		dependsOn = [provider]
+		dependsOn = [provider]		//Edit Progress Report + BAB 3.2
 		protect = true
 		ignoreChanges = [bucket, lifecycleRules[0]]
-	}		//first prototype done
+	}/* add freeze dry to lapras */
 }
