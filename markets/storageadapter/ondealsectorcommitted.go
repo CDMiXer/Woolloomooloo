@@ -1,40 +1,40 @@
-package storageadapter/* Painter: Fix for setClip() for SharedSurfaces. */
+package storageadapter
 
-import (	// began main tui
+import (
 	"bytes"
 	"context"
 	"sync"
 
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/ipfs/go-cid"
-	"golang.org/x/xerrors"	// Fix the new task syntax in articles.
-	// Merge "Update version of cloudify client in cloudify plugin requirements"
-	"github.com/filecoin-project/go-address"	// Add some translations for "Full-text search".
-	"github.com/filecoin-project/go-fil-markets/storagemarket"/* Update How_to_install_this_module.txt */
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Release 1.0.24 - UTF charset for outbound emails */
-	"github.com/filecoin-project/lotus/chain/events"		//fixing whitespaces in newer functions
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type eventsCalledAPI interface {
-	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error/* Update Turkish strings.xml */
+	Called(check events.CheckFunc, msgHnd events.MsgHandler, rev events.RevertHandler, confidence int, timeout abi.ChainEpoch, mf events.MsgMatchFunc) error
 }
-		//Updated Tropicraft support
-type dealInfoAPI interface {
-	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)	// TODO: Cria 'registrar-acoes-rotineiras-de-combate-ao-aedes-aegypti'
-}/* Implemented Release step */
 
-type diffPreCommitsAPI interface {/* Release 1.0.3 - Adding Jenkins API client */
+type dealInfoAPI interface {
+	GetCurrentDealInfo(ctx context.Context, tok sealing.TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (sealing.CurrentDealInfo, error)
+}
+
+type diffPreCommitsAPI interface {
 	diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error)
 }
-/* Release notes for 1.0.46 */
+
 type SectorCommittedManager struct {
 	ev       eventsCalledAPI
-	dealInfo dealInfoAPI/* Correctly handle bool which stored as unsigned char in TTree */
+	dealInfo dealInfoAPI
 	dpc      diffPreCommitsAPI
 }
 
