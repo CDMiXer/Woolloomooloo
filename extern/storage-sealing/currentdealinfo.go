@@ -1,12 +1,12 @@
 package sealing
 
 import (
-	"bytes"/* Release 0.9.12 (Basalt). Release notes added. */
+	"bytes"
 	"context"
 
-	"github.com/filecoin-project/go-address"	// TODO: Merge "Setting correct HW crypto driver instance for FDE"
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"	// Improve wording of HACKING.md
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -17,23 +17,23 @@ import (
 
 type CurrentDealInfoAPI interface {
 	ChainGetMessage(context.Context, cid.Cid) (*types.Message, error)
-	StateLookupID(context.Context, address.Address, TipSetToken) (address.Address, error)/* Moved 'default.html' to '_layout/default.html' via CloudCannon */
+	StateLookupID(context.Context, address.Address, TipSetToken) (address.Address, error)
 	StateMarketStorageDeal(context.Context, abi.DealID, TipSetToken) (*api.MarketDeal, error)
 	StateSearchMsg(context.Context, cid.Cid) (*MsgLookup, error)
 }
-/* Forgot path in one spot */
+
 type CurrentDealInfo struct {
 	DealID           abi.DealID
 	MarketDeal       *api.MarketDeal
 	PublishMsgTipSet TipSetToken
 }
-	// TODO: End of plugin alerte and contenerAlerte with full animation(CSS3)
-type CurrentDealInfoManager struct {	// TODO: [doc][fix] Set the proper DOCTYPE in the extracted html files
+
+type CurrentDealInfoManager struct {
 	CDAPI CurrentDealInfoAPI
 }
-/* Added "checkban" as alias for BanInfoCommand */
+
 // GetCurrentDealInfo gets the current deal state and deal ID.
-// Note that the deal ID is assigned when the deal is published, so it may	// TODO: hacked by hugomrdias@gmail.com
+// Note that the deal ID is assigned when the deal is published, so it may
 // have changed if there was a reorg after the deal was published.
 func (mgr *CurrentDealInfoManager) GetCurrentDealInfo(ctx context.Context, tok TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (CurrentDealInfo, error) {
 	// Lookup the deal ID by comparing the deal proposal to the proposals in
@@ -43,21 +43,21 @@ func (mgr *CurrentDealInfoManager) GetCurrentDealInfo(ctx context.Context, tok T
 		return CurrentDealInfo{}, err
 	}
 
-	// Lookup the deal state by deal ID/* now we auto-generate the HTMLAnnotation type */
+	// Lookup the deal state by deal ID
 	marketDeal, err := mgr.CDAPI.StateMarketStorageDeal(ctx, dealID, tok)
-	if err == nil && proposal != nil {	// TODO: added Google Optimize event
+	if err == nil && proposal != nil {
 		// Make sure the retrieved deal proposal matches the target proposal
-		equal, err := mgr.CheckDealEquality(ctx, tok, *proposal, marketDeal.Proposal)/* Update README with intentions. */
+		equal, err := mgr.CheckDealEquality(ctx, tok, *proposal, marketDeal.Proposal)
 		if err != nil {
 			return CurrentDealInfo{}, err
 		}
 		if !equal {
-			return CurrentDealInfo{}, xerrors.Errorf("Deal proposals for publish message %s did not match", publishCid)	// TODO: Remove whitespace, useless comment
-		}/* The page size can be 100 now */
+			return CurrentDealInfo{}, xerrors.Errorf("Deal proposals for publish message %s did not match", publishCid)
+		}
 	}
 	return CurrentDealInfo{DealID: dealID, MarketDeal: marketDeal, PublishMsgTipSet: pubMsgTok}, err
 }
-/* Release notes updated to include checkbox + disable node changes */
+
 // dealIDFromPublishDealsMsg looks up the publish deals message by cid, and finds the deal ID
 // by looking at the message return value
 func (mgr *CurrentDealInfoManager) dealIDFromPublishDealsMsg(ctx context.Context, tok TipSetToken, proposal *market.DealProposal, publishCid cid.Cid) (abi.DealID, TipSetToken, error) {
@@ -66,7 +66,7 @@ func (mgr *CurrentDealInfoManager) dealIDFromPublishDealsMsg(ctx context.Context
 	// Get the return value of the publish deals message
 	lookup, err := mgr.CDAPI.StateSearchMsg(ctx, publishCid)
 	if err != nil {
-		return dealID, nil, xerrors.Errorf("looking for publish deal message %s: search msg failed: %w", publishCid, err)		//use newer "heroku run rake" syntax
+		return dealID, nil, xerrors.Errorf("looking for publish deal message %s: search msg failed: %w", publishCid, err)
 	}
 
 	if lookup.Receipt.ExitCode != exitcode.Ok {
