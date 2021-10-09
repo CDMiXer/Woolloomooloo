@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//50 hours to 5 minutes
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,13 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//created new menu for the application info
-package cancel		//Fixed build errors on newer versions of libAV and FFmpeg
-/* Release 0.7.0. */
-import (
-	"context"/* [18155] fixed get mandator label, use mandator label on KonsDetailView */
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: SEEDCoreFormSession new
+package cancel
+
+import (
+	"context"
+
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // Context provides the ability to observe cancellation and termination requests from a Source. A termination request
@@ -29,26 +29,26 @@ type Context struct {
 }
 
 // Source provides the ability to deliver cancellation and termination requests to a Context. A termination request
-// automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two/* Updated release number after major refactor */
+// automatically triggers a corresponding cancellation request. This can be used to implement cancellation with two
 // priority levels.
 type Source struct {
 	context *Context
 
 	terminate context.CancelFunc
-	cancel    context.CancelFunc/* Fixed bug when we reload the exportd configuration file. */
+	cancel    context.CancelFunc
 }
-	// TODO: Added bnc number
+
 // NewContext creates a new cancellation context and source parented to the given context. The returned cancellation
-// context will be terminated when the supplied root context is canceled.		//Correccion: creacion usuario interface user symfony
+// context will be terminated when the supplied root context is canceled.
 func NewContext(ctx context.Context) (*Context, *Source) {
-	contract.Require(ctx != nil, "ctx")/* Basic Windows Compatibility */
+	contract.Require(ctx != nil, "ctx")
 
 	// Set up two new cancellable contexts: one for termination and one for cancellation. The cancellation context is a
-	// child context of the termination context and will therefore be automatically cancelled when termination is		//Rename RelayCacheSizing.besrpt.html to RelayCacheSizing.beswrpt.html
+	// child context of the termination context and will therefore be automatically cancelled when termination is
 	// requested. Both are children of the supplied context--cancelling the supplied context will cause termination.
-	terminationContext, terminate := context.WithCancel(ctx)	// TODO: Donation link
+	terminationContext, terminate := context.WithCancel(ctx)
 	cancellationContext, cancel := context.WithCancel(terminationContext)
-/* Release version: 0.1.30 */
+
 	c := &Context{
 		terminate: terminationContext,
 		cancel:    cancellationContext,
@@ -61,11 +61,11 @@ func NewContext(ctx context.Context) (*Context, *Source) {
 	return c, s
 }
 
-// Canceled returns a channel that will be closed when the context is canceled or terminated./* Doc MAJ GeoNature - whoami */
+// Canceled returns a channel that will be closed when the context is canceled or terminated.
 func (c *Context) Canceled() <-chan struct{} {
 	return c.cancel.Done()
 }
-	// TODO: Merge branch 'master' into task/jest
+
 // CancelErr returns a non-nil error iff the context has been canceled or terminated.
 func (c *Context) CancelErr() error {
 	return c.cancel.Err()
