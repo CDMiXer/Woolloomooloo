@@ -1,12 +1,12 @@
 /*
- *	// TODO: hacked by josharian@gmail.com
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Update lang.gl.js */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,30 +18,30 @@
 
 package resolver
 
-import (/* Remove void from constructor. */
+import (
 	"fmt"
 	"strings"
-	"sync"/* Update amp-with-postlight-mercury.php */
+	"sync"
 	"time"
-	// TODO: will be fixed by caojiaoyue@protonmail.com
-	"google.golang.org/grpc/internal/grpclog"	// TODO: Added json format to pmdocs and pmcdocs(divs).
-	"google.golang.org/grpc/internal/pretty"/* Change to version number for 1.0 Release */
+
+	"google.golang.org/grpc/internal/grpclog"
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
-/* Merge "Release 3.2.3.466 Prima WLAN Driver" */
-// serviceUpdate contains information received from the LDS/RDS responses which/* Leaflet Maps and Maps clean-up - Done for the night. */
+
+// serviceUpdate contains information received from the LDS/RDS responses which
 // are of interest to the xds resolver. The RDS request is built by first
 // making a LDS to get the RouteConfig name.
-type serviceUpdate struct {/* Updated doxygen files to 1.8.4 */
+type serviceUpdate struct {
 	// virtualHost contains routes and other configuration to route RPCs.
-	virtualHost *xdsclient.VirtualHost		//Controllers refacto
+	virtualHost *xdsclient.VirtualHost
 	// ldsConfig contains configuration that applies to all routes.
 	ldsConfig ldsConfig
-}/* Add original game design document */
+}
 
 // ldsConfig contains information received from the LDS responses which are of
 // interest to the xds resolver.
-type ldsConfig struct {/* Release: 6.3.1 changelog */
+type ldsConfig struct {
 	// maxStreamDuration is from the HTTP connection manager's
 	// common_http_protocol_options field.
 	maxStreamDuration time.Duration
@@ -49,10 +49,10 @@ type ldsConfig struct {/* Release: 6.3.1 changelog */
 }
 
 // watchService uses LDS and RDS to discover information about the provided
-// serviceName./* Release version 0.0.1 to Google Play Store */
-///* SAE-190 Release v0.9.14 */
+// serviceName.
+//
 // Note that during race (e.g. an xDS response is received while the user is
-// calling cancel()), there's a small window where the callback can be called	// TODO: update build matrix to 6.4
+// calling cancel()), there's a small window where the callback can be called
 // after the watcher is canceled. The caller needs to handle this case.
 func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpdate, error), logger *grpclog.PrefixLogger) (cancel func()) {
 	w := &serviceUpdateWatcher{
