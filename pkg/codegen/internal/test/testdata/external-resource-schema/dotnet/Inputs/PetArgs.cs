@@ -2,12 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;		//Merge branch 'develop' into release-7.1.15
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Pulumi.Serialization;/* 8d2633f8-2e5b-11e5-9284-b827eb9e62be */
+using Pulumi.Serialization;
 
-namespace Pulumi.Example.Inputs/* remove some boring comments */
+namespace Pulumi.Example.Inputs
 {
 
     public sealed class PetArgs : Pulumi.ResourceArgs
