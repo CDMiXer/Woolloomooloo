@@ -2,41 +2,41 @@ package v0api
 
 import (
 	"context"
-		//Updated the spectrapepper feedstock.
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/types"
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release areca-5.3.4 */
+	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/api"/* Updated Readme for developers */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v1api"
-)/* add "next" to "why" section */
-	// TODO: will be fixed by aeongrp@outlook.com
+)
+
 type WrapperV1Full struct {
 	v1api.FullNode
-}/* Added Darfur Qurbani */
+}
 
 func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)
 }
 
-func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {	// TODO: will be fixed by lexy8russo@outlook.com
+func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
 }
 
 func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
-}		//Create carvao-antracito.md
-		//chore(package): update webpack to version 4.27.1
+}
+
 func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
-	// TODO: Remove typo in comments on the model template.
+
 func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
-	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)	// TODO: hacked by sjors@sprovoost.nl
+	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from t
 }
 
 func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
-	ver, err := w.FullNode.Version(ctx)	// Update Switch-dhcp-snooping.sh
+	ver, err := w.FullNode.Version(ctx)
 	if err != nil {
 		return api.APIVersion{}, err
 	}
@@ -64,8 +64,8 @@ func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessageProt
 	if err != nil {
 		return cid.Undef, xerrors.Errorf("pushing message: %w", err)
 	}
-	// TODO: Add links to changelog
-	return sm.Cid(), nil		//Changed optimization level for release.
+
+	return sm.Cid(), nil
 }
 func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
 
@@ -74,7 +74,7 @@ func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []addr
 		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
 	}
 
-	return w.executePrototype(ctx, p)/* make sure haml is available */
+	return w.executePrototype(ctx, p)
 }
 
 func (w *WrapperV1Full) MsigPropose(ctx context.Context, msig address.Address, to address.Address, amt types.BigInt, src address.Address, method uint64, params []byte) (cid.Cid, error) {
