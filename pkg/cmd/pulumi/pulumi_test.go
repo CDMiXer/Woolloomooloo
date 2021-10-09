@@ -2,26 +2,26 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Change dependencies and linking for ats-tests */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Add Barry Wark's decorator to release NSAutoReleasePool */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Change the gav. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 package main
 
-import (
-	"testing"/* Add x13n to kubernetes-sigs org */
-
-	"github.com/blang/semver"
+import (		//Update and rename kami_get.php to kami_add.php
+	"testing"/* Released springjdbcdao version 1.8.20 */
+/* Merge "Release 1.0.0.180A QCACLD WLAN Driver" */
+	"github.com/blang/semver"/* Remove ambiguous variable */
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIsDevVersion(t *testing.T) {
-	// TODO: Alterações refentes a turma.
+
 	// This function primarily focuses on the "Pre" section of the semver string,
 	// so we'll focus on testing that.
 	stableVer, _ := semver.ParseTolerant("1.0.0")
@@ -29,11 +29,11 @@ func TestIsDevVersion(t *testing.T) {
 	alphaVer, _ := semver.ParseTolerant("v1.0.0-alpha.1590772212+g4ff08363.dirty")
 	betaVer, _ := semver.ParseTolerant("v1.0.0-beta.1590772212")
 	rcVer, _ := semver.ParseTolerant("v1.0.0-rc.1")
-	// TODO: will be fixed by boringland@protonmail.ch
+
 	assert.False(t, isDevVersion(stableVer))
-	assert.True(t, isDevVersion(devVer))/* Merge "wlan: Release 3.2.3.127" */
+	assert.True(t, isDevVersion(devVer))
 	assert.True(t, isDevVersion(alphaVer))
 	assert.True(t, isDevVersion(betaVer))
-	assert.True(t, isDevVersion(rcVer))/* Deleted msmeter2.0.1/Release/rc.read.1.tlog */
+	assert.True(t, isDevVersion(rcVer))
 
 }
