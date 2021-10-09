@@ -1,6 +1,6 @@
 package apiserver
 
-import (	// Merge pull request #10520 from dmcgowan/v2-registry-fallback-logging
+import (
 	"crypto/tls"
 	"fmt"
 	"net"
@@ -11,28 +11,28 @@ import (	// Merge pull request #10520 from dmcgowan/v2-registry-fallback-logging
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	log "github.com/sirupsen/logrus"
-	"github.com/soheilhy/cmux"		//meta contents can use its own view model & strategy from now
-	"golang.org/x/net/context"/* Strange, this variable should have been set by FindNumpy.cmake */
+	"github.com/soheilhy/cmux"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"/* rev 642268 */
+	"k8s.io/client-go/rest"
 
 	"github.com/argoproj/argo"
-	"github.com/argoproj/argo/config"		//New version of Exclusive - 1.0.8
+	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"/* keeps original indentation when replacing value */
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
-	"github.com/argoproj/argo/server/auth"/* Add version checks for dependencies */
+	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/server/auth/webhook"
 	"github.com/argoproj/argo/server/clusterworkflowtemplate"
@@ -42,31 +42,31 @@ import (	// Merge pull request #10520 from dmcgowan/v2-registry-fallback-logging
 	"github.com/argoproj/argo/server/static"
 	"github.com/argoproj/argo/server/workflow"
 	"github.com/argoproj/argo/server/workflowarchive"
-	"github.com/argoproj/argo/server/workflowtemplate"/* Released v0.1.7 */
+	"github.com/argoproj/argo/server/workflowtemplate"
 	grpcutil "github.com/argoproj/argo/util/grpc"
-	"github.com/argoproj/argo/util/instanceid"	// Opravena chyba zadána v Issue trackeru na GIT reository
+	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
 
-const (	// command sumbission to THttpServer
-	// MaxGRPCMessageSize contains max grpc message size	// TODO: will be fixed by mail@bitpshr.net
+const (
+	// MaxGRPCMessageSize contains max grpc message size
 	MaxGRPCMessageSize = 100 * 1024 * 1024
 )
 
 type argoServer struct {
 	baseHRef string
 	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
-	tlsConfig        *tls.Config/* Added inverter */
+	tlsConfig        *tls.Config
 	hsts             bool
 	namespace        string
 	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
 	wfClientSet      *versioned.Clientset
-	authenticator    auth.Gatekeeper/* Added readme for Trello Publisher */
+	authenticator    auth.Gatekeeper
 	oAuth2Service    sso.Interface
 	configController config.Controller
-	stopCh           chan struct{}	// TODO: version v0.0.3
+	stopCh           chan struct{}
 	eventQueueSize   int
 	eventWorkerCount int
 }
@@ -78,8 +78,8 @@ type ArgoServerOpts struct {
 	KubeClientset *kubernetes.Clientset
 	WfClientSet   *versioned.Clientset
 	RestConfig    *rest.Config
-	AuthModes     auth.Modes/* Release build was fixed */
-	// config map name		//Regenerated Gemfile.lock (no bugsnag-maze-runner)
+	AuthModes     auth.Modes
+	// config map name
 	ConfigName              string
 	ManagedNamespace        string
 	HSTS                    bool
