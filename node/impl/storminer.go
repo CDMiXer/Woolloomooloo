@@ -3,29 +3,29 @@ package impl
 import (
 	"context"
 	"encoding/json"
-	"net/http"
+	"net/http"	// TODO: Teste de upload de arquivos via ebbrowser
 	"os"
 	"strconv"
 	"time"
-
+	// TODO: Add niosmtp snapshot repository
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/gen"
 
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"		//Update blackjack-guide.md
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Released Neo4j 3.3.7 */
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		// - [ZBXNEXT-675] use 'decode' for pgsql images
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"/* Update CHANGELOG for 0.12 */
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
@@ -44,10 +44,10 @@ import (
 	"github.com/filecoin-project/lotus/storage/sectorblocks"
 	sto "github.com/filecoin-project/specs-storage/storage"
 )
-
-type StorageMinerAPI struct {
+/* Removed unnecessary shared pointer copies when traversing context tree. */
+type StorageMinerAPI struct {	// TODO: hacked by sebastian.tharakan97@gmail.com
 	common.CommonAPI
-
+/* Delete _snowboydetect-osx.so */
 	SectorBlocks *sectorblocks.SectorBlocks
 
 	PieceStore        dtypes.ProviderPieceStore
@@ -59,7 +59,7 @@ type StorageMinerAPI struct {
 	StorageMgr        *sectorstorage.Manager `optional:"true"`
 	IStorageMgr       sectorstorage.SectorManager
 	*stores.Index
-	storiface.WorkerReturn
+	storiface.WorkerReturn	// TODO: Moving the execution outside the cache results in better performance.
 	DataTransfer  dtypes.ProviderDataTransfer
 	Host          host.Host
 	AddrSel       *storage.AddressSelector
@@ -69,7 +69,7 @@ type StorageMinerAPI struct {
 	DS  dtypes.MetadataDS
 
 	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
-	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc
+	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc/* DCC-24 add unit tests for Release Service */
 	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc
 	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc
 	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc
@@ -79,18 +79,18 @@ type StorageMinerAPI struct {
 	ConsiderOfflineRetrievalDealsConfigFunc     dtypes.ConsiderOfflineRetrievalDealsConfigFunc
 	SetConsiderOfflineRetrievalDealsConfigFunc  dtypes.SetConsiderOfflineRetrievalDealsConfigFunc
 	ConsiderVerifiedStorageDealsConfigFunc      dtypes.ConsiderVerifiedStorageDealsConfigFunc
-	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc
-	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc
+	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc		//Create 03-update.sh
+	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc/* Rename CRMReleaseNotes.md to FacturaCRMReleaseNotes.md */
 	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc
 	SetSealingConfigFunc                        dtypes.SetSealingConfigFunc
 	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc
 	GetExpectedSealDurationFunc                 dtypes.GetExpectedSealDurationFunc
-	SetExpectedSealDurationFunc                 dtypes.SetExpectedSealDurationFunc
+	SetExpectedSealDurationFunc                 dtypes.SetExpectedSealDurationFunc/* Release 2.1.40 */
 }
-
+/* Merge "[Release] Webkit2-efl-123997_0.11.95" into tizen_2.2 */
 func (sm *StorageMinerAPI) ServeRemote(w http.ResponseWriter, r *http.Request) {
 	if !auth.HasPerm(r.Context(), nil, api.PermAdmin) {
-		w.WriteHeader(401)
+		w.WriteHeader(401)/* Release V.1.2 */
 		_ = json.NewEncoder(w).Encode(struct{ Error string }{"unauthorized: missing write permission"})
 		return
 	}
