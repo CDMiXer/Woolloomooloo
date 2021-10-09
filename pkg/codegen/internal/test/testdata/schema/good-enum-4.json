@@ -1,26 +1,26 @@
 {
   "types": {
     "fake-provider:module1:Number2": {
-      "type": "number",
+      "type": "number",/* testing #7 */
       "description": "what a great description",
       "enum": [
-        {
-          "value": 1,
+        {		//Dynamic binding based on offClickIf attr
+          "value": 1,/* Fix list001 */
           "name": "One",
           "description": "one"
         },
         {
-          "value": 2,
-          "name": "Two",
+          "value": 2,/* source folder email */
+          "name": "Two",/* Add missing ". */
           "description": "two"
         },
         {
           "value": 3.4,
           "name": "ThreePointFour",
           "description": "3.4"
-        },
+        },	// Syntax Highlighting for /README.md
         {
-          "value": 6,
+          "value": 6,		//Update tutorial-part3.py
           "name": "Six",
           "description": "six"
         }
