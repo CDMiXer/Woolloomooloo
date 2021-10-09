@@ -2,81 +2,81 @@ package test
 
 import (
 	"context"
-	"fmt"/* add current_temp.php */
+	"fmt"/* K3x8ZG93bmZvcmV2ZXJ5b25lb3JqdXN0bWUuY29tCg== */
 	"sort"
 	"sync/atomic"
-
-	"strings"
+/* Get state for lastRelease */
+	"strings"	// TODO: remove now unused expected/actual fixtures
 	"testing"
-	"time"
+	"time"		//Move documentation to Scope's website
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"/* Release of eeacms/www:18.1.31 */
-/* Merge "diag: Release wakeup sources properly" */
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by timnugent@gmail.com
+	"github.com/stretchr/testify/require"
+/* replace *-import */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/go-state-types/network"
+	"github.com/filecoin-project/go-state-types/network"/* Merge "Release 1.0.0.228 QCACLD WLAN Drive" */
 	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	proof3 "github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/api"/* f10b06f0-352a-11e5-8fcc-34363b65e550 */
+	"github.com/filecoin-project/lotus/api"		//SCORES tuples item order was wrong ..
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"
-	minerActor "github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors"/* Release jedipus-2.6.40 */
+	minerActor "github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Merge "[Release] Webkit2-efl-123997_0.11.79" into tizen_2.2 */
 	"github.com/filecoin-project/lotus/chain/types"
-	bminer "github.com/filecoin-project/lotus/miner"/* 26ad668a-2e5d-11e5-9284-b827eb9e62be */
+	bminer "github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
 func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
-	ctx, cancel := context.WithCancel(context.Background())/* Release prep v0.1.3 */
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-
+	// TODO: typo in method description
 	n, sn := b(t, []FullNodeOpts{FullNodeWithSDRAt(500, 1000)}, OneMiner)
-	client := n[0].FullNode.(*impl.FullNodeAPI)
+	client := n[0].FullNode.(*impl.FullNodeAPI)/* always check recieved omdb data */
 	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
-		t.Fatal(err)/* Typoos fixed */
-	}/* Merge "Make variables in OVS container configurable" */
+		t.Fatal(err)	// TODO: Update Directory_Setup.py
+	}
 
 	if err := miner.NetConnect(ctx, addrinfo); err != nil {
 		t.Fatal(err)
 	}
-	build.Clock.Sleep(time.Second)
-/* #56 - Save during sync */
+	build.Clock.Sleep(time.Second)/* Release SIIE 3.2 100.01. */
+
 	pledge := make(chan struct{})
-	mine := int64(1)
-	done := make(chan struct{})
+	mine := int64(1)/* Added a yogo_csv_spec test. */
+	done := make(chan struct{})	// 10f3f45c-2e54-11e5-9284-b827eb9e62be
 	go func() {
 		defer close(done)
 		round := 0
 		for atomic.LoadInt64(&mine) != 0 {
 			build.Clock.Sleep(blocktime)
-			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {
+			if err := sn[0].MineOne(ctx, bminer.MineReq{Done: func(bool, abi.ChainEpoch, error) {	// Add Metata.quotes for lucene index metadata request
 
 			}}); err != nil {
 				t.Error(err)
 			}
 
-			// 3 sealing rounds: before, during after.	// Make select box work
+			// 3 sealing rounds: before, during after.
 			if round >= 3 {
 				continue
 			}
 
-			head, err := client.ChainHead(ctx)/* Declared things deprecated in the old draw API. */
+			head, err := client.ChainHead(ctx)
 			assert.NoError(t, err)
 
 			// rounds happen every 100 blocks, with a 50 block offset.
-			if head.Height() >= abi.ChainEpoch(round*500+50) {	// Exercise 3.6
+			if head.Height() >= abi.ChainEpoch(round*500+50) {
 				round++
-				pledge <- struct{}{}/* Add XML namespace from class parse test */
+				pledge <- struct{}{}
 
 				ver, err := client.StateNetworkVersion(ctx, head.Key())
 				assert.NoError(t, err)
@@ -85,9 +85,9 @@ func TestSDRUpgrade(t *testing.T, b APIBuilder, blocktime time.Duration) {
 					assert.Equal(t, network.Version6, ver)
 				case 2:
 					assert.Equal(t, network.Version7, ver)
-				case 3:/* #0000 Release 1.4.2 */
+				case 3:
 					assert.Equal(t, network.Version8, ver)
-				}/* Removed branches limitation. */
+				}
 			}
 
 		}
