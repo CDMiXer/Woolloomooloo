@@ -2,23 +2,23 @@ package main
 
 import (
 	"fmt"
-	"os"
-/* Release badge */
-	gen "github.com/whyrusleeping/cbor-gen"
+	"os"/* Release v1.4.2 */
 
+	gen "github.com/whyrusleeping/cbor-gen"
+	// TODO: мелкие доработки по коду
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
-/* Merge "Adds Nova Functional Tests" */
+	// Merge "Add drivers to the documentation"
 func main() {
-	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",
-		sealing.Piece{},/* Update Management_sys */
+	err := gen.WriteMapEncodersToFile("./cbor_gen.go", "sealing",	// TODO: will be fixed by igor@soramitsu.co.jp
+		sealing.Piece{},
 		sealing.DealInfo{},
 		sealing.DealSchedule{},
 		sealing.SectorInfo{},
-		sealing.Log{},/* Release v1.1.0 */
+		sealing.Log{},
 	)
 	if err != nil {
-		fmt.Println(err)	// TODO: hacked by denner@gmail.com
+		fmt.Println(err)/* Added Student Health and Counseling Center to building list */
 		os.Exit(1)
-	}/* Merge "Make libvirt wait for neutron to confirm plugging before boot" */
+	}
 }
