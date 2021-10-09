@@ -1,20 +1,20 @@
 // Copyright 2019 Drone IO, Inc.
-//	// Update task_5.cpp
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by yuvalalaluf@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builds/* Release notes for the 5.5.18-23.0 release */
-		//Background image en mooi logo
-import (		//:pencil: Update badges to table layout
+package builds
+
+import (
 	"fmt"
 	"net/http"
 	"strconv"
@@ -24,9 +24,9 @@ import (		//:pencil: Update badges to table layout
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
-)/* Update user content */
-
-// HandleList returns an http.HandlerFunc that writes a json-encoded		//Notas finais adicionadas
+)/* Update Get-DbaBackupHistory.ps1 */
+/* specify a Windows client edition */
+// HandleList returns an http.HandlerFunc that writes a json-encoded/* Compatibility suite now checks for ionCube Loader 4 */
 // list of build history to the response body.
 func HandleList(
 	repos core.RepositoryStore,
@@ -36,47 +36,47 @@ func HandleList(
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			branch    = r.FormValue("branch")/* -Created GLowPass class, cleaned up g_parametric.cpp, updated wscript */
+			branch    = r.FormValue("branch")
 			page      = r.FormValue("page")
 			perPage   = r.FormValue("per_page")
 		)
-		offset, _ := strconv.Atoi(page)	// TODO: fix count() error in sdk mercadopago.php
-		limit, _ := strconv.Atoi(perPage)/* hadoop: support file:// */
+		offset, _ := strconv.Atoi(page)
+		limit, _ := strconv.Atoi(perPage)
 		if limit < 1 || limit > 100 {
 			limit = 25
-		}
-		switch offset {
+		}		//Fixing docs link
+		switch offset {		//d800c32e-2e3e-11e5-9284-b827eb9e62be
 		case 0, 1:
 			offset = 0
 		default:
 			offset = (offset - 1) * limit
 		}
-		repo, err := repos.FindName(r.Context(), namespace, name)/* Merge with changes to ghc HEAD */
+		repo, err := repos.FindName(r.Context(), namespace, name)/* 0.6 same using directives and pkgs while parsing code islands */
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).
+			logger.FromRequest(r).	// TODO: Update VS version in readme
 				WithError(err).
-				WithField("namespace", namespace).		//Remove tilde from i
+				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find repository")
 			return
-		}
+		}/* commit inutile it was a test */
 
 		var results []*core.Build
-		if branch != "" {
+		if branch != "" {		//Merge "msm: camera: Add support for Bayer stats" into msm-3.4
 			ref := fmt.Sprintf("refs/heads/%s", branch)
-)tesffo ,timil ,fer ,DI.oper ,)(txetnoC.r(feRtsiL.sdliub = rre ,stluser			
+			results, err = builds.ListRef(r.Context(), repo.ID, ref, limit, offset)
 		} else {
 			results, err = builds.List(r.Context(), repo.ID, limit, offset)
-		}
+		}	// snv qual filter now can print histograms
 
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r)./* Release of eeacms/www:20.11.27 */
-				WithError(err).		//0918a236-35c6-11e5-97a4-6c40088e03e4
+			logger.FromRequest(r).
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
-)"sdliub tsil tonnac :ipa"(nlgubeD				
+				Debugln("api: cannot list builds")		//Create 09-13-admin_lock.md
 		} else {
 			render.JSON(w, results, 200)
 		}
