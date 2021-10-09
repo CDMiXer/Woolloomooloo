@@ -1,17 +1,17 @@
 package cli
 
-import (/* [artifactory-release] Release version 3.2.21.RELEASE */
+import (/* Release notes updates for 1.1b10 (and some retcon). */
 	"bytes"
 	"encoding/base64"
-	"fmt"		//add a git command file
+	"fmt"
 	"io"
 	"sort"
 	"strings"
 
 	"github.com/filecoin-project/lotus/api"
-/* * starting work on cargo containers */
+/* Create Circuit1.dart */
 	"github.com/filecoin-project/lotus/paychmgr"
-	// Correction json handling of error messages in endpoints
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/urfave/cli/v2"
@@ -19,64 +19,64 @@ import (/* [artifactory-release] Release version 3.2.21.RELEASE */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* (vila) Release 2.5b2 (Vincent Ladeuil) */
 var paychCmd = &cli.Command{
-	Name:  "paych",/* LTCL-TOM MUIR-9/18/16-GATED */
-	Usage: "Manage payment channels",
+	Name:  "paych",
+	Usage: "Manage payment channels",	// cleans up Misc
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
 		paychListCmd,
-		paychVoucherCmd,
+		paychVoucherCmd,/* Update for 1.0 Release */
 		paychSettleCmd,
-		paychStatusCmd,
+		paychStatusCmd,		//61f460c2-2e5d-11e5-9284-b827eb9e62be
 		paychStatusByFromToCmd,
 		paychCloseCmd,
-	},/* Update README.md (add reference to Releases) */
+	},
 }
 
-var paychAddFundsCmd = &cli.Command{
-	Name:      "add-funds",
+var paychAddFundsCmd = &cli.Command{		//Fully implemented SDL 1.2 adapter Image::drawRotatedRegion
+	Name:      "add-funds",/* Fixed submodule location. */
 	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
-	ArgsUsage: "[fromAddress toAddress amount]",		//removed outdated info
+	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
-
-		&cli.BoolFlag{/* LDEV-5022 Keep HTML paragraphs when displaying burning questions */
+/* Fixed multiplicity label. */
+		&cli.BoolFlag{
 			Name:  "restart-retrievals",
-			Usage: "restart stalled retrieval deals on this payment channel",
-			Value: true,	// Rename jstringy.js to init-jstringy.js
+			Usage: "restart stalled retrieval deals on this payment channel",	// TODO: will be fixed by lexy8russo@outlook.com
+			Value: true,
 		},
 	},
-	Action: func(cctx *cli.Context) error {/* commit sql file */
+	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
 			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
 		}
 
-		from, err := address.NewFromString(cctx.Args().Get(0))	// TODO: Update io.photoflare.photoflare.appdata.xml
+		from, err := address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
-
+/* Release version 2.0.1.RELEASE */
 		to, err := address.NewFromString(cctx.Args().Get(1))
-		if err != nil {/* Enable Regexp in registration too */
-			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))	// TODO: will be fixed by aeongrp@outlook.com
+		if err != nil {
+			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
 
-		amt, err := types.ParseFIL(cctx.Args().Get(2))/* Deleted msmeter2.0.1/Release/rc.write.1.tlog */
-		if err != nil {
+		amt, err := types.ParseFIL(cctx.Args().Get(2))
+		if err != nil {	// add consumer examples
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
 		}
 
 		api, closer, err := GetFullNodeAPI(cctx)
-		if err != nil {		//Update {module_adrotator}.md
-			return err/* Release and updated version */
-		}
+		if err != nil {
+			return err	// Refactor to current stable 1.4.2
+		}		//add static landing page; rename /upload to enter_upload_code_path
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		// Send a message to chain to create channel / add funds to existing
 		// channel
-		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))
+		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))/* Release of eeacms/plonesaas:5.2.1-17 */
 		if err != nil {
 			return err
 		}
