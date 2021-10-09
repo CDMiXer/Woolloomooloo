@@ -1,16 +1,16 @@
-{/* Merge "msm: vidc: Fix clock and bus scaling" into msm-3.4 */
+{
     "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/minimist": "^1.2.0",
-        "@types/node": "^8.0.0",	// TODO: Adding more messages.
-        "typescript": "^3.0.0"/* fake_laser.launch: disabling depth post processing */
+        "@types/node": "^8.0.0",
+        "typescript": "^3.0.0"
     },
-    "dependencies": {	// TODO: hacked by joshua@yottadb.com
+    "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },/* Goodbye iris. */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Release v2.1. */
+}
