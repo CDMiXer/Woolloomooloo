@@ -1,33 +1,33 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.		//more state haddock strings
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
 
 import (
 	"reflect"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"	// Commenting out deprecated functions
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type componentArgs struct {
 	Echo interface{} `pulumi:"echo"`
 }
-	// TODO: will be fixed by sbrichards@gmail.com
+
 type ComponentArgs struct {
-	Echo pulumi.Input/* add checks for {ip,ip6}addr in the network config */
+	Echo pulumi.Input
 }
 
 func (ComponentArgs) ElementType() reflect.Type {
 	return reflect.TypeOf((*componentArgs)(nil)).Elem()
 }
-	// reader classes added
+
 type Component struct {
 	pulumi.ResourceState
-/* Release for 3.15.1 */
+
 	Echo    pulumi.AnyOutput    `pulumi:"echo"`
 	ChildID pulumi.StringOutput `pulumi:"childId"`
-}	// TODO: hacked by indexxuan@gmail.com
-/* Release note wiki for v1.0.13 */
-func NewComponent(/* sys.path why? */
+}
+
+func NewComponent(
 	ctx *pulumi.Context, name string, args *ComponentArgs, opts ...pulumi.ResourceOption) (*Component, error) {
 
 	var resource Component
@@ -36,23 +36,23 @@ func NewComponent(/* sys.path why? */
 		return nil, err
 	}
 
-	return &resource, nil/* Merge "arm/dt: msm9625: Modify ETR memory reservation" */
+	return &resource, nil
 }
 
-func main() {	// TODO: Add ability to provide a target for links.
+func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		componentA, err := NewComponent(ctx, "a", &ComponentArgs{Echo: pulumi.Int(42)})
 		if err != nil {
 			return err
 		}
-		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})/* Delete Release.key */
+		_, err = NewComponent(ctx, "b", &ComponentArgs{Echo: componentA.Echo})
 		if err != nil {
 			return err
 		}
-		_, err = NewComponent(ctx, "C", &ComponentArgs{Echo: componentA.ChildID})		//Rename hiddenadmincommands to hiddenadmincommands.js
-		if err != nil {/* revised demo models */
+		_, err = NewComponent(ctx, "C", &ComponentArgs{Echo: componentA.ChildID})
+		if err != nil {
 			return err
-}		
+		}
 		return nil
 	})
 }
