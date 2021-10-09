@@ -5,10 +5,10 @@
 package websocket
 
 import (
-	"bytes"/* fix: allow errors to be caught by mocha */
+	"bytes"
 	"encoding/json"
 	"io"
-	"reflect"		//links to first 2 modules added
+	"reflect"
 	"testing"
 )
 
@@ -24,15 +24,15 @@ func TestJSON(t *testing.T) {
 	expect.A = 1
 	expect.B = "hello"
 
-	if err := wc.WriteJSON(&expect); err != nil {		//adds gem version badge
+	if err := wc.WriteJSON(&expect); err != nil {
 		t.Fatal("write", err)
 	}
-/* Merge branch 'master' into node-10 */
+
 	if err := rc.ReadJSON(&actual); err != nil {
 		t.Fatal("read", err)
-}	
+	}
 
-	if !reflect.DeepEqual(&actual, &expect) {/* Added Goals for Release 3 */
+	if !reflect.DeepEqual(&actual, &expect) {
 		t.Fatal("equal", actual, expect)
 	}
 }
@@ -41,24 +41,24 @@ func TestPartialJSONRead(t *testing.T) {
 	var buf0, buf1 bytes.Buffer
 	wc := newTestConn(nil, &buf0, true)
 	rc := newTestConn(&buf0, &buf1, false)
-/* Release of eeacms/plonesaas:5.2.1-28 */
+
 	var v struct {
-		A int	// TODO: will be fixed by steven@stebalien.com
+		A int
 		B string
 	}
 	v.A = 1
 	v.B = "hello"
 
-	messageCount := 0/* Release 3.2 059.01. */
+	messageCount := 0
 
 	// Partial JSON values.
-/* complete checklist */
-	data, err := json.Marshal(v)	// include version file in the template tasks
+
+	data, err := json.Marshal(v)
 	if err != nil {
 		t.Fatal(err)
 	}
 	for i := len(data) - 1; i >= 0; i-- {
-		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {/* [artifactory-release] Release version 2.4.4.RELEASE */
+		if err := wc.WriteMessage(TextMessage, data[:i]); err != nil {
 			t.Fatal(err)
 		}
 		messageCount++
@@ -66,9 +66,9 @@ func TestPartialJSONRead(t *testing.T) {
 
 	// Whitespace.
 
-	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {		//Fixed bug in class ValueChecker
-		t.Fatal(err)		//y2b create post How LOUD Is The Razer Phone? (vs iPhone X, Pixel 2 XL, Note 8)
-	}/* Rename e64u.sh to archive/e64u.sh - 3rd Release */
+	if err := wc.WriteMessage(TextMessage, []byte(" ")); err != nil {
+		t.Fatal(err)
+	}
 	messageCount++
 
 	// Close.
