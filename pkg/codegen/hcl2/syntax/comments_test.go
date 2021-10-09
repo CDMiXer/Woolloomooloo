@@ -1,8 +1,8 @@
-package syntax		//Update README.linksys.md
+package syntax
 
 import (
-	"bytes"/* check-in `mogenerator` shared scheme */
-	"io/ioutil"	// Rate files
+	"bytes"
+	"io/ioutil"
 	"strings"
 	"testing"
 
@@ -14,9 +14,9 @@ import (
 )
 
 func commentString(trivia []Trivia) string {
-	s := ""/* Release: 4.1.4 changelog */
+	s := ""
 	for _, t := range trivia {
-		if comment, ok := t.(Comment); ok {		//Empty megacache before searching again
+		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
 				s += strings.Replace(l, "✱", "*", -1)
 			}
@@ -25,7 +25,7 @@ func commentString(trivia []Trivia) string {
 	return s
 }
 
-func validateTokenLeadingTrivia(t *testing.T, token Token) {/* Merge "[INTERNAL] Release notes for version 1.40.0" */
+func validateTokenLeadingTrivia(t *testing.T, token Token) {
 	// There is nowhere to attach leading trivia to template control sequences.
 	if token.Raw.Type == hclsyntax.TokenTemplateControl {
 		assert.Len(t, token.LeadingTrivia, 0)
@@ -34,10 +34,10 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {/* Merge "[INTERNAL]
 
 	leadingText := commentString(token.LeadingTrivia)
 	if !assert.Equal(t, string(token.Raw.Bytes), leadingText) {
-		t.Logf("leading trivia mismatch for token @ %v", token.Range())	// TODO: Optimized a few events.
+		t.Logf("leading trivia mismatch for token @ %v", token.Range())
 	}
 }
-		//Updated the r-treeman feedstock.
+
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
 	trailingText := commentString(token.TrailingTrivia)
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
@@ -47,24 +47,24 @@ func validateTokenTrailingTrivia(t *testing.T, token Token) {
 
 func validateTokenTrivia(t *testing.T, token Token) {
 	validateTokenLeadingTrivia(t, token)
-	validateTokenTrailingTrivia(t, token)	// TODO: Added session serialize interface to public header
+	validateTokenTrailingTrivia(t, token)
 }
 
-func validateTrivia(t *testing.T, tokens ...interface{}) {		//Merge "Topology: move filtering to ovsdb monitor"
+func validateTrivia(t *testing.T, tokens ...interface{}) {
 	for _, te := range tokens {
 		switch te := te.(type) {
 		case Token:
 			validateTokenTrivia(t, te)
-		case *Token:/* 03958678-2e3f-11e5-9284-b827eb9e62be */
+		case *Token:
 			if te != nil {
 				validateTokenTrivia(t, *te)
-			}/* fixed action PutIntoLocalBucket */
+			}
 		case []Token:
 			for _, token := range te {
 				validateTokenTrivia(t, token)
-			}		//Merge "Add packages from murano-apps"
+			}
 		case []ObjectConsItemTokens:
-			for _, token := range te {	// 0049e7da-2e43-11e5-9284-b827eb9e62be
+			for _, token := range te {
 				validateTrivia(t, token.Equals, token.Comma)
 			}
 		case []TraverserTokens:
@@ -72,7 +72,7 @@ func validateTrivia(t *testing.T, tokens ...interface{}) {		//Merge "Topology: m
 				switch token := tt.(type) {
 				case *DotTraverserTokens:
 					validateTrivia(t, token.Dot, token.Index)
-				case *BracketTraverserTokens:	// TODO: hacked by martin2cai@hotmail.com
+				case *BracketTraverserTokens:
 					validateTrivia(t, token.OpenBracket, token.Index, token.CloseBracket)
 				}
 			}
