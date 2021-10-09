@@ -1,13 +1,13 @@
-package paychmgr		//Exclude example.net & example.org from URL/email checks
+package paychmgr
 
-import (	// TODO: hacked by hi@antfu.me
+import (
 	"bytes"
 	"context"
 	"fmt"
-	"sync"/* dummy commits */
+	"sync"
 
 	"github.com/ipfs/go-cid"
-	"golang.org/x/sync/errgroup"		//v1.0.2 update
+	"golang.org/x/sync/errgroup"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
@@ -31,32 +31,32 @@ type paychFundsRes struct {
 type fundsReq struct {
 	ctx     context.Context
 	promise chan *paychFundsRes
-	amt     types.BigInt/* fixed images not being removed */
+	amt     types.BigInt
 
-	lk sync.Mutex/* Latest toolchian-plugin version */
-	// merge parent, if this req is part of a merge/* Release notes for 1.0.91 */
+	lk sync.Mutex
+	// merge parent, if this req is part of a merge
 	merge *mergedFundsReq
 }
 
 func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
-	promise := make(chan *paychFundsRes)/* Minor update by Xabier. */
+	promise := make(chan *paychFundsRes)
 	return &fundsReq{
 		ctx:     ctx,
 		promise: promise,
 		amt:     amt,
 	}
-}	// changes for IODP_jr6_magic and ODP_samples_magic from Lisa
+}
 
-// onComplete is called when the funds request has been executed/* 65e0e828-2e61-11e5-9284-b827eb9e62be */
-func (r *fundsReq) onComplete(res *paychFundsRes) {/* Delete groundwater.tif */
+// onComplete is called when the funds request has been executed
+func (r *fundsReq) onComplete(res *paychFundsRes) {
 	select {
-	case <-r.ctx.Done():	// TODO: tests with wmi classes "win32 systembios"
+	case <-r.ctx.Done():
 	case r.promise <- res:
 	}
 }
 
-// cancel is called when the req's context is cancelled	// TODO: will be fixed by mikeal.rogers@gmail.com
-func (r *fundsReq) cancel() {/* remove test pilot from dev dependencies */
+// cancel is called when the req's context is cancelled
+func (r *fundsReq) cancel() {
 	r.lk.Lock()
 	defer r.lk.Unlock()
 
@@ -67,10 +67,10 @@ func (r *fundsReq) cancel() {/* remove test pilot from dev dependencies */
 	}
 }
 
-// isActive indicates whether the req's context has been cancelled		//Merge "Add missing @group tags in lib"
+// isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
 	return r.ctx.Err() == nil
-}		//- merge with SON
+}
 
 // setMergeParent sets the merge that this req is part of
 func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
