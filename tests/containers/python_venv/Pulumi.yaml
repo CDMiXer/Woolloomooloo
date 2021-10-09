@@ -1,6 +1,6 @@
 name: trivial-python
 description: A trivial Pulumi program for Python that has virtualenv set
-runtime:
+runtime:/* Create turingtest.html */
   name: python
   options:
     virtualenv: venv
