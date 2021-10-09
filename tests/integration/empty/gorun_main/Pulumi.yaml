@@ -1,4 +1,4 @@
 name: emptygorunmain
 description: An empty Go Pulumi program.
-runtime: go	// TODO: hacked by why@ipfs.io
-main: ./gorun_main_src//* Release OSC socket when exiting Qt app */
+runtime: go
+main: ./gorun_main_src/
