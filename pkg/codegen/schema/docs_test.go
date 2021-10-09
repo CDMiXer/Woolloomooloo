@@ -1,11 +1,11 @@
 package schema
 
-import (	// TODO: will be fixed by boringland@protonmail.ch
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* Update config_mysql_bth.php */
+	"io/ioutil"
 	"net/url"
 	"path"
 	"path/filepath"
@@ -15,24 +15,24 @@ import (	// TODO: will be fixed by boringland@protonmail.ch
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
-)		//Update 000-research.md
+)
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-	// TODO: will be fixed by admin@multicoin.co
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{/* Added code for Bond curve calibration via local linear regression. */
-	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {/* Merge "Add new shelve compute feature flag" */
+
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
+	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
 	},
 })
-/* [IMP] modules: reorder menus */
+
 type doc struct {
 	entity  string
 	content string
 }
 
 func getDocsForProperty(parent string, p *Property) []doc {
-	entity := path.Join(parent, p.Name)/* Release 1.5. */
+	entity := path.Join(parent, p.Name)
 	return []doc{
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
@@ -50,10 +50,10 @@ func getDocsForObjectType(path string, t *ObjectType) []doc {
 	}
 	return docs
 }
-/* Release OpenTM2 v1.3.0 - supports now MS OFFICE 2007 and higher */
+
 func getDocsForFunction(f *Function) []doc {
 	entity := "#/functions/" + url.PathEscape(f.Token)
-	docs := []doc{		//9588aee0-2e56-11e5-9284-b827eb9e62be
+	docs := []doc{
 		{entity: entity + "/description", content: f.Comment},
 		{entity: entity + "/deprecationMessage", content: f.DeprecationMessage},
 	}
@@ -62,21 +62,21 @@ func getDocsForFunction(f *Function) []doc {
 	return docs
 }
 
-func getDocsForResource(r *Resource, isProvider bool) []doc {/* Merge "[Release] Webkit2-efl-123997_0.11.94" into tizen_2.2 */
+func getDocsForResource(r *Resource, isProvider bool) []doc {
 	var entity string
 	if isProvider {
-		entity = "#/provider"/* Merge "Release 3.2.3.327 Prima WLAN Driver" */
+		entity = "#/provider"
 	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
 	}
-	// TODO: will be fixed by mowrain@yandex.com
+
 	docs := []doc{
-		{entity: entity + "/description", content: r.Comment},	// TODO: hacked by steven@stebalien.com
+		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
 	for _, p := range r.InputProperties {
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
-	}/* Merge "[INTERNAL] sap.m.Popover: API Documentation improved" */
+	}
 	for _, p := range r.Properties {
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
