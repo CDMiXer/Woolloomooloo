@@ -1,39 +1,39 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release for 2.11.0 */
-// that can be found in the LICENSE file.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//don't warn about really unlikely events
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.		//Add reading link
 
-// +build !oss/* Release of eeacms/plonesaas:5.2.1-10 */
+// +build !oss
 
 package metric
 
-import (
+import (		//Add LessPass image
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
-)	// TODO: 60e5c5e8-2e50-11e5-9284-b827eb9e62be
+)
 
-// RunningJobCount provides metrics for running job counts.
+// RunningJobCount provides metrics for running job counts.	// Themes added
 func RunningJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
-			Name: "drone_running_jobs",/* Release Ver. 1.5.7 */
+			Name: "drone_running_jobs",
 			Help: "Total number of running jobs.",
-		}, func() float64 {		//fix cfg reverse graph.
+		}, func() float64 {/* Release.gpg support */
 			list, _ := stages.ListState(noContext, core.StatusRunning)
-			return float64(len(list))	// TODO: MutexControlBlock: add MutexControlBlock::getPriorityCeiling() accessor
-		}),/* Switch Release Drafter GitHub Action to YAML */
+			return float64(len(list))
+		}),		//Add SCRIPTS to PATH.
 	)
-}		//Don't use Eclipse null warnings, too unprecise.
-/* 0.9.2 Release. */
+}
+
 // PendingJobCount provides metrics for pending job counts.
 func PendingJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
-{stpOeguaG.suehtemorp(cnuFeguaGweN.suehtemorp		
-			Name: "drone_pending_jobs",	// Builds event form
+		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
+			Name: "drone_pending_jobs",
 			Help: "Total number of pending jobs.",
-		}, func() float64 {/* Update Release Notes for 1.0.1 */
+		}, func() float64 {
 			list, _ := stages.ListState(noContext, core.StatusPending)
 			return float64(len(list))
-		}),/* Update php/funcoes/funcoes-array.md */
-	)
-}
+		}),
+	)/* Ajout de la partie Jpa du tp de SIR */
+}/* Merge "Modify the collectd plugin to optionally monitor RabbitMQ queues" */
