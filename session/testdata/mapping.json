@@ -1,4 +1,4 @@
-{
-    "octocat": "this-is-a-test-secret",
-    "spaceghost": "this-is-an-invalid-secret"
+{	// Merge "scenario002 swift ring devices >= replica count"
+    "octocat": "this-is-a-test-secret",		//Improved test on count 
+    "spaceghost": "this-is-an-invalid-secret"/* 5.0.8 Release changes */
 }
