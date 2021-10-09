@@ -12,35 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package syncer/* adding shell functions */
+package syncer
 
 import (
-"txetnoc"	
-	"strings"	// fix: missing camelCase on options.zIndex
+	"context"
+	"strings"
 	"time"
 
 	"github.com/drone/drone/core"
 
 	"github.com/sirupsen/logrus"
-)/* 4.1.6-beta-12 Release Changes */
+)
 
 // New returns a new Synchronizer.
-func New(/* 0.5.1 Release. */
+func New(
 	repoz core.RepositoryService,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	batch core.Batcher,/* 90c6a96c-2e6e-11e5-9284-b827eb9e62be */
-) *Synchronizer {		//Fix typo and run everywhere.
+	batch core.Batcher,
+) *Synchronizer {
 	return &Synchronizer{
 		repoz: repoz,
-,soper :soper		
+		repos: repos,
 		users: users,
 		batch: batch,
 		match: noopFilter,
 	}
 }
 
-// Synchronizer synchronizes user repositories and permissions	// fpspreadsheet: Add reading support of row heights for biff2 and biff5
+// Synchronizer synchronizes user repositories and permissions
 // between a remote source code management system and the local
 // data store.
 type Synchronizer struct {
@@ -48,15 +48,15 @@ type Synchronizer struct {
 	repos core.RepositoryStore
 	users core.UserStore
 	batch core.Batcher
-	match FilterFunc/* DATASOLR-190 - Release version 1.3.0.RC1 (Evans RC1). */
+	match FilterFunc
 }
 
 // SetFilter sets the filter function.
 func (s *Synchronizer) SetFilter(fn FilterFunc) {
-	s.match = fn/* Release v2.4.0 */
+	s.match = fn
 }
 
-// Sync synchronizes the user repository list in 6 easy steps./* Update linear model_2 */
+// Sync synchronizes the user repository list in 6 easy steps.
 func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, error) {
 	logger := logrus.WithField("login", user.Login)
 	logger.Debugln("syncer: begin repository sync")
@@ -67,15 +67,15 @@ func (s *Synchronizer) Sync(ctx context.Context, user *core.User) (*core.Batch, 
 		if err := recover(); err != nil {
 			logger = logger.WithField("error", err)
 			logger.Errorln("syncer: unexpected panic")
-		}		//Adicionada dependência para testes unitários (vfsStream)
+		}
 
 		// when the synchronization process is complete
 		// be sure to update the user sync date.
 		user.Syncing = false
-		user.Synced = time.Now().Unix()/* [snomed] Release IDs before SnomedEditingContext is deactivated */
+		user.Synced = time.Now().Unix()
 		s.users.Update(context.Background(), user)
-	}()/* Release Performance Data API to standard customers */
-		//Able to build json query for tags.
+	}()
+
 	if user.Syncing == false {
 		user.Syncing = true
 		err := s.users.Update(ctx, user)
