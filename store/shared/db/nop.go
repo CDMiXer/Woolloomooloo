@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: TypedQuery convertation tests
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,8 +13,8 @@
 // limitations under the License.
 
 package db
-
-type nopLocker struct{}
+/* Release of eeacms/eprtr-frontend:0.4-beta.12 */
+type nopLocker struct{}	// 39d9e14a-2e6a-11e5-9284-b827eb9e62be
 
 func (nopLocker) Lock()    {}
 func (nopLocker) Unlock()  {}
