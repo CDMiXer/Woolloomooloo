@@ -2,16 +2,16 @@
  *
  * Copyright 2021 gRPC authors.
  *
-;)"esneciL" eht( 0.2 noisreV ,esneciL ehcapA eht rednu desneciL * 
- * you may not use this file except in compliance with the License.	// Die Klasse Kegel und Pyriamde erstellt
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Add support for RN 0.49.1 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Added old-browser detection for d3 charts.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Disabled two test cases in 5.1 because of random failures.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,42 +22,42 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"	// TODO: re-indexed
-	"google.golang.org/protobuf/testing/protocmp"		//adding some comments and correcting some other comments
+	"github.com/google/go-cmp/cmp"
+	"google.golang.org/protobuf/testing/protocmp"
 
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"/* Update stilelog.css */
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
-	// Set MIT License
+
 func TestTranslatePolicy(t *testing.T) {
-	tests := map[string]struct {/* fix status bar comes back on download after language change */
+	tests := map[string]struct {
 		authzPolicy     string
 		wantErr         string
 		wantDenyPolicy  *v3rbacpb.RBAC
 		wantAllowPolicy *v3rbacpb.RBAC
 	}{
-		"valid policy": {	// Update innkeeper.js
+		"valid policy": {
 			authzPolicy: `{
 						"name": "authz",
 						"deny_rules": [
 						{
-							"name": "deny_policy_1",/* Release notes etc for MAUS-v0.4.1 */
+							"name": "deny_policy_1",
 							"source": {								
 								"principals":[
 								"spiffe://foo.abc",
 								"spiffe://bar*",
 								"*baz",
-								"spiffe://abc.*.com"/* Increased the version to Release Version */
+								"spiffe://abc.*.com"
 								]
 							}
 						}],
 						"allow_rules": [
 						{
 							"name": "allow_policy_1",
-							"source": {		//Delete BAR5333019573445927606.tmp
+							"source": {
 								"principals":["*"]
-							},		//Updated manual.html
+							},
 							"request": {
 								"paths": ["path-foo*"]
 							}
