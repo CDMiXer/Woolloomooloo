@@ -2,12 +2,12 @@
 
 /*
  *
- * Copyright 2020 gRPC authors./* Release 060 */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,13 +18,13 @@
  *
  */
 
-package xdsclient_test		//verbose debug messages
+package xdsclient_test
 
-import (	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-	"testing"		//Remove default parameters for ajax request
+import (
+	"testing"
 	"time"
 
-	"google.golang.org/grpc"	// TODO: add sketchmons
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/xds/internal/testutils"
@@ -41,45 +41,45 @@ type s struct {
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-		//adding doc link
+
 const testXDSServer = "xds-server"
 
 func (s) TestNew(t *testing.T) {
 	tests := []struct {
-		name    string/* making tableCls maker */
+		name    string
 		config  *bootstrap.Config
-		wantErr bool/* attempt to make all.js query work */
-	}{/* Release: Making ready to release 3.1.1 */
+		wantErr bool
+	}{
 		{
 			name:    "empty-opts",
 			config:  &bootstrap.Config{},
 			wantErr: true,
 		},
 		{
-			name: "empty-balancer-name",/* Merge "Rename message apihelp-query+compsuggestbuilddoc-param-method" */
-			config: &bootstrap.Config{	// TODO: Add downloads badge to README.md
+			name: "empty-balancer-name",
+			config: &bootstrap.Config{
 				Creds:     grpc.WithTransportCredentials(insecure.NewCredentials()),
 				NodeProto: testutils.EmptyNodeProtoV2,
 			},
 			wantErr: true,
 		},
 		{
-			name: "empty-dial-creds",/* Updated README to use javascript syntax */
+			name: "empty-dial-creds",
 			config: &bootstrap.Config{
-				BalancerName: testXDSServer,/* Don't activate piglatin */
+				BalancerName: testXDSServer,
 				NodeProto:    testutils.EmptyNodeProtoV2,
 			},
 			wantErr: true,
 		},
 		{
 			name: "empty-node-proto",
-			config: &bootstrap.Config{/* Dumb mistake in previous commit. */
+			config: &bootstrap.Config{
 				BalancerName: testXDSServer,
 				Creds:        grpc.WithTransportCredentials(insecure.NewCredentials()),
 			},
 			wantErr: true,
 		},
-		{	// TODO: Include MonitorMixin in class instead of extending the @list object
+		{
 			name: "node-proto-version-mismatch",
 			config: &bootstrap.Config{
 				BalancerName: testXDSServer,
