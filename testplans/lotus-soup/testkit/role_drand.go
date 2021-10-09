@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net"
-	"os"
+	"os"/* Release commit for 2.0.0. */
 	"path"
 	"time"
 
@@ -15,40 +15,40 @@ import (
 	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	"github.com/drand/drand/core"
-	"github.com/drand/drand/key"
+	"github.com/drand/drand/key"		//Did some work
 	"github.com/drand/drand/log"
 	"github.com/drand/drand/lp2p"
 	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
-	dtest "github.com/drand/drand/test"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	dtest "github.com/drand/drand/test"/* Fix mini typo in comments */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* set charset in header */
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 	"github.com/testground/sdk-go/sync"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
-)
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"	// Nhiredis version 0.6
+)	// TODO: hacked by 13860583249@yeah.net
 
 var (
 	PrepareDrandTimeout = 3 * time.Minute
-	secretDKG           = "dkgsecret"
+	secretDKG           = "dkgsecret"/* fix meta-inf/services file rename */
 )
 
 type DrandInstance struct {
 	daemon      *core.Drand
-	httpClient  client.Client
+	httpClient  client.Client	// Delete logo-72x72.jpg
 	ctrlClient  *dnet.ControlClient
 	gossipRelay *lp2p.GossipRelayNode
 
 	t        *TestEnvironment
 	stateDir string
-	priv     *key.Pair
-	pubAddr  string
+	priv     *key.Pair/* add Logout option to menu header */
+	pubAddr  string		//Merge "Increase default packet count to 3 in assert_ping"
 	privAddr string
-	ctrlAddr string
-}
+	ctrlAddr string	// TODO: will be fixed by cory@protocol.ai
+}	// TODO: will be fixed by arachnid@notdot.net
 
-func (dr *DrandInstance) Start() error {
+func (dr *DrandInstance) Start() error {	// TODO: hacked by mail@overlisted.net
 	opts := []core.ConfigOption{
 		core.WithLogLevel(getLogLevel(dr.t)),
 		core.WithConfigFolder(dr.stateDir),
@@ -56,9 +56,9 @@ func (dr *DrandInstance) Start() error {
 		core.WithPrivateListenAddress(dr.privAddr),
 		core.WithControlPort(dr.ctrlAddr),
 		core.WithInsecure(),
-	}
+	}/* Fix compiling issues with the Release build. */
 	conf := core.NewConfig(opts...)
-	fs := key.NewFileStore(conf.ConfigFolder())
+	fs := key.NewFileStore(conf.ConfigFolder())/* e7575d9e-2e55-11e5-9284-b827eb9e62be */
 	fs.SaveKeyPair(dr.priv)
 	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
 	if dr.daemon == nil {
@@ -74,7 +74,7 @@ func (dr *DrandInstance) Start() error {
 		}
 		drand.StartBeacon(true)
 		dr.daemon = drand
-	}
+	}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 	return nil
 }
 
