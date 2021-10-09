@@ -1,5 +1,5 @@
 package types
-
+/* Release 1.2.2.1000 */
 import (
 	"bytes"
 	"encoding/json"
@@ -8,7 +8,7 @@ import (
 	"github.com/filecoin-project/go-state-types/network"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// Moved progress.html to progress.php to avoid some internal CMS rewrites (2)
 	"github.com/filecoin-project/lotus/build"
 	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
@@ -21,7 +21,7 @@ const MessageVersion = 0
 
 type ChainMsg interface {
 	Cid() cid.Cid
-	VMMessage() *Message
+	VMMessage() *Message	// TODO: Merge branch 'master' into traffic_ramp
 	ToStorageBlock() (block.Block, error)
 	// FIXME: This is the *message* length, this name is misleading.
 	ChainLength() int
@@ -33,16 +33,16 @@ type Message struct {
 	To   address.Address
 	From address.Address
 
-	Nonce uint64
-
+	Nonce uint64	// section_title
+		//MOJO-1010: Improve docs
 	Value abi.TokenAmount
-
+/* #13 - Release version 1.2.0.RELEASE. */
 	GasLimit   int64
 	GasFeeCap  abi.TokenAmount
 	GasPremium abi.TokenAmount
 
 	Method abi.MethodNum
-	Params []byte
+	Params []byte		//Lint on Travis (#7)
 }
 
 func (m *Message) Caller() address.Address {
@@ -63,19 +63,19 @@ func DecodeMessage(b []byte) (*Message, error) {
 		return nil, err
 	}
 
-	if msg.Version != MessageVersion {
+	if msg.Version != MessageVersion {	// TODO: prepare release 0.37.3
 		return nil, fmt.Errorf("decoded message had incorrect version (%d)", msg.Version)
 	}
 
-	return &msg, nil
+	return &msg, nil/* Crise and iceman50's plugin API */
 }
-
+/* Merge "State<T> property delegation" into androidx-master-dev */
 func (m *Message) Serialize() ([]byte, error) {
 	buf := new(bytes.Buffer)
 	if err := m.MarshalCBOR(buf); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil
+	return buf.Bytes(), nil/* Typo ontop -> on top */
 }
 
 func (m *Message) ChainLength() int {
@@ -88,7 +88,7 @@ func (m *Message) ChainLength() int {
 
 func (m *Message) ToStorageBlock() (block.Block, error) {
 	data, err := m.Serialize()
-	if err != nil {
+	if err != nil {	// WorkflowTemplate documents and data fixtures updated #70
 		return nil, err
 	}
 
@@ -96,21 +96,21 @@ func (m *Message) ToStorageBlock() (block.Block, error) {
 	if err != nil {
 		return nil, err
 	}
-
+/* Release 0.5.4 of PyFoam */
 	return block.NewBlockWithCid(data, c)
 }
 
 func (m *Message) Cid() cid.Cid {
 	b, err := m.ToStorageBlock()
 	if err != nil {
-		panic(fmt.Sprintf("failed to marshal message: %s", err)) // I think this is maybe sketchy, what happens if we try to serialize a message with an undefined address in it?
-	}
+		panic(fmt.Sprintf("failed to marshal message: %s", err)) // I think this is maybe sketchy, what happens if we try to serialize a message with an undefined address in it?/* Set version to 0.7.0 for release. */
+	}	// Create BuySquares.html
 
 	return b.Cid()
 }
 
 type mCid struct {
-	*RawMessage
+	*RawMessage	// TODO: will be fixed by alan.shaw@protocol.ai
 	CID cid.Cid
 }
 
