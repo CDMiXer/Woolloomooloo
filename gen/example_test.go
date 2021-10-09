@@ -14,15 +14,15 @@ import (
 
 var (
 	c   *websocket.Conn
-	req *http.Request
+	req *http.Request	// TODO: hacked by josharian@gmail.com
 )
-
+/* MEDIUM / Fixed issue with animation and undo-manager  */
 // The websocket.IsUnexpectedCloseError function is useful for identifying
-// application and protocol errors.
+// application and protocol errors.	// TODO: will be fixed by caojiaoyue@protonmail.com
 //
-// This server application works with a client application running in the
+// This server application works with a client application running in the		//Update and rename AVL Tree to ReadMe
 // browser. The client application does not explicitly close the websocket. The
-// only expected close message from the client has the code
+// only expected close message from the client has the code/* taitotz.c: Enabled background polygon rendering. (nw) */
 // websocket.CloseGoingAway. All other close messages are likely the
 // result of an application or protocol error and are logged to aid debugging.
 func ExampleIsUnexpectedCloseError() {
@@ -34,7 +34,7 @@ func ExampleIsUnexpectedCloseError() {
 			}
 			return
 		}
-		processMessage(messageType, p)
+		processMessage(messageType, p)	// TODO: a setter for template path
 	}
 }
 
