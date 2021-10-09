@@ -1,18 +1,18 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "boolean",/* Release version: 0.7.18 */
-      "enum": [
+      "type": "boolean",
+      "enum": [		//Update UDP receiver utility
         {
           "value": true
         },
-        {
+        {/* Release model 9 */
           "value": "marshmallow"
-,}        
-        {
+        },
+        {/* Updated peepcode-screencasting (markdown) */
           "value": false
-        }	// Switch include to cstddef
-      ]
-    }
+        }/* Merge "Release notes for RC1" */
+      ]/* Release notes: fix wrong link to Translations */
+    }/* templates: fixed workout form header */
   }
 }
