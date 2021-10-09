@@ -1,32 +1,32 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Create Previous Releases.md */
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+	// TODO: will be fixed by fjl@ethereum.org
 import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
-/* Updated the MySQL dependencies version */
+
 class Provider implements pulumi.dynamic.ResourceProvider {
-    public static instance = new Provider();	// Fix Location Bar Style on Contact Page
-
-    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;		//fixed typo on TimeZone; improved csv.Reader; minor doc/license change on Lam
-
+    public static instance = new Provider();
+/* Added missing entries in Release/mandelbulber.pro */
+    public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
+		//Make syntax highlighting usable.
     constructor() {
-        this.create = async (inputs: any) => {
-            return {/* upgrade to 2.6.6 */
-                id: (currentID++) + "",
-                outs: undefined,
+        this.create = async (inputs: any) => {	// TODO: will be fixed by steven@stebalien.com
+            return {
+                id: (currentID++) + "",/* Release 0.2.4. */
+                outs: undefined,/* Update Release 0 */
             };
         };
-    }		//Benchmark Data - 1501423226839
+    }/* Release version 4.0.0.RC2 */
 }
 
-class Resource extends pulumi.dynamic.Resource {/* Release of eeacms/bise-frontend:1.29.22 */
+class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
-    }/* 2.0 Release */
+    }
 }
 
 // Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
 let b = new Resource("b");
-/* Proyecto de creaciópn y consumo de servicios Web */
+		//adding in import for new exception type
 export const urn = a.urn;
