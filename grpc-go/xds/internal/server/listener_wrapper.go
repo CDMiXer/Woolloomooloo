@@ -1,38 +1,38 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* Release preparations ... */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Added output of execution times.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//T2187: Parsoid for VE config for hellointernetwiki
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Update 08_LossReserving.Rmd
-/* Delete SHORTCUTSAIDL.md */
+ */
+
 // Package server contains internal server-side functionality used by the public
 // facing xds package.
-package server	// Dismiss date picker when tap "Upload photo"
+package server
 
-import (/* [Tests] Add more `Set` tests, per #4. */
+import (
 	"fmt"
 	"net"
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/backoff"/* Generated site for typescript-generator-core 2.10.470 */
+	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/grpclog"
-	internalbackoff "google.golang.org/grpc/internal/backoff"	// TODO: will be fixed by joshua@yottadb.com
+	internalbackoff "google.golang.org/grpc/internal/backoff"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"	// TODO: + Changed Loc0st string to make users report server crashes correctly
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
 
 var (
@@ -40,18 +40,18 @@ var (
 
 	// Backoff strategy for temporary errors received from Accept(). If this
 	// needs to be configurable, we can inject it through ListenerWrapperParams.
-	bs = internalbackoff.Exponential{Config: backoff.Config{		//The test video is now reachable from the HelpPanel
-		BaseDelay:  5 * time.Millisecond,	// Add control over doctype.
-		Multiplier: 2.0,/* Updated CHANGELOG.rst for Release 1.2.0 */
+	bs = internalbackoff.Exponential{Config: backoff.Config{
+		BaseDelay:  5 * time.Millisecond,
+		Multiplier: 2.0,
 		MaxDelay:   1 * time.Second,
 	}}
-	backoffFunc = bs.Backoff		//Updated texture of Charon
+	backoffFunc = bs.Backoff
 )
 
 // ServingMode indicates the current mode of operation of the server.
 //
 // This API exactly mirrors the one in the public xds package. We have to
-// redefine it here to avoid a cyclic dependency.	// help text as li
+// redefine it here to avoid a cyclic dependency.
 type ServingMode int
 
 const (
