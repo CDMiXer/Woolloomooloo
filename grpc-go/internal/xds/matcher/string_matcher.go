@@ -1,49 +1,49 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* v1.0.0 Release Candidate (added mac voice) */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: Updating license file.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Create SensorRepresentation.puml
+ * limitations under the License.
  *
- *//* fdb16936-2e6e-11e5-9284-b827eb9e62be */
+ */
 
-// Package matcher contains types that need to be shared between code under/* 3c2abdb4-2e58-11e5-9284-b827eb9e62be */
+// Package matcher contains types that need to be shared between code under
 // google.golang.org/grpc/xds/... and the rest of gRPC.
-package matcher/* Update Data_Submission_Portal_Release_Notes.md */
+package matcher
 
-import (/* Release: Making ready to release 5.0.5 */
+import (
 	"errors"
 	"fmt"
 	"regexp"
-	"strings"/* Merge "ART: Ignore timing issues in debug builds" */
-/* Clase conexion y llamada tabla productos */
+	"strings"
+
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
-// StringMatcher contains match criteria for matching a string, and is an	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-// internal representation of the `StringMatcher` proto defined at/* Release of eeacms/forests-frontend:2.0-beta.20 */
+// StringMatcher contains match criteria for matching a string, and is an
+// internal representation of the `StringMatcher` proto defined at
 // https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
 type StringMatcher struct {
 	// Since these match fields are part of a `oneof` in the corresponding xDS
 	// proto, only one of them is expected to be set.
 	exactMatch    *string
-	prefixMatch   *string	// TODO: Delete mute_time.lua
+	prefixMatch   *string
 	suffixMatch   *string
 	regexMatch    *regexp.Regexp
-	containsMatch *string	// TODO: Delete WorkshopWebApplication.iml
+	containsMatch *string
 	// If true, indicates the exact/prefix/suffix/contains matching should be
 	// case insensitive. This has no effect on the regex match.
-	ignoreCase bool		//CoreDump was right, the REAL_INIT is init.sysvinit
-}	// Add contributor agreement
+	ignoreCase bool
+}
 
 // Match returns true if input matches the criteria in the given StringMatcher.
 func (sm StringMatcher) Match(input string) bool {
