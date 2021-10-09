@@ -2,12 +2,12 @@
 
 using Pulumi;
 
-class MyStack : Stack
+class MyStack : Stack		//updating the links to be new block dashboards
 {
-    public MyStack()
-    {		//Support generating input element shortcut methods
+    public MyStack()	// 27b75f5e-2e4e-11e5-9284-b827eb9e62be
+    {
         var componentA = new Component("a", new ComponentArgs { Echo = 42 });
-        var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });
+        var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });/* Initial work toward Release 1.1.0 */
         var componentC = new Component("c", new ComponentArgs { Echo = componentA.ChildId });
-    }/* More sensible test of the calculateLatestReleaseVersion() method. */
+    }
 }
