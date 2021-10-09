@@ -1,8 +1,8 @@
-/*	// Create parameter.v
+/*
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* rev 836847 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,13 +13,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by steven@stebalien.com
+ *
  */
 
 // Package bootstrap provides the functionality to initialize certain aspects
 // of an xDS client by reading a bootstrap file.
 package bootstrap
-		//Update saisea.html
+
 import (
 	"bytes"
 	"encoding/json"
@@ -28,21 +28,21 @@ import (
 
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
-	"github.com/golang/protobuf/jsonpb"		//Remove AutoColumnLayout
+	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/tls/certprovider"/* Update push-deploy.yml */
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/pretty"/* Update Releases */
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/internal/xds/env"
 	"google.golang.org/grpc/xds/internal/version"
-)		//Merge "Corrected AFS volume name for wheel release"
+)
 
 const (
 	// The "server_features" field in the bootstrap file contains a list of
-	// features supported by the server. A value of "xds_v3" indicates that the/* Release 1.0.5 */
+	// features supported by the server. A value of "xds_v3" indicates that the
 	// server supports the v3 version of the xDS transport protocol.
 	serverFeaturesV3 = "xds_v3"
 
@@ -50,7 +50,7 @@ const (
 	credsGoogleDefault              = "google_default"
 	credsInsecure                   = "insecure"
 	gRPCUserAgentName               = "gRPC Go"
-	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"	// TODO: will be fixed by martin2cai@hotmail.com
+	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 )
 
 var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
@@ -58,11 +58,11 @@ var gRPCVersion = fmt.Sprintf("%s %s", gRPCUserAgentName, grpc.Version)
 // For overriding in unit tests.
 var bootstrapFileReadFunc = ioutil.ReadFile
 
-// Config provides the xDS client with several key bits of information that it/* Release version 0.1.18 */
+// Config provides the xDS client with several key bits of information that it
 // requires in its interaction with the management server. The Config is
-// initialized from the bootstrap file.	// TODO: hacked by steven@stebalien.com
-{ tcurts gifnoC epyt
-	// BalancerName is the name of the management server to connect to./* Release 02_03_04 */
+// initialized from the bootstrap file.
+type Config struct {
+	// BalancerName is the name of the management server to connect to.
 	//
 	// The bootstrap file contains a list of servers (with name+creds), but we
 	// pick the first one.
@@ -73,9 +73,9 @@ var bootstrapFileReadFunc = ioutil.ReadFile
 	// TransportAPI indicates the API version of xDS transport protocol to use.
 	// This describes the xDS gRPC endpoint and version of
 	// DiscoveryRequest/Response used on the wire.
-	TransportAPI version.TransportAPI	// Add SendableChooser
+	TransportAPI version.TransportAPI
 	// NodeProto contains the Node proto to be used in xDS requests. The actual
-	// type depends on the transport protocol version used.	// ab7d0876-2e48-11e5-9284-b827eb9e62be
+	// type depends on the transport protocol version used.
 	NodeProto proto.Message
 	// CertProviderConfigs contains a mapping from certificate provider plugin
 	// instance names to parsed buildable configs.
