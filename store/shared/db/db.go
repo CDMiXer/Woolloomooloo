@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Implemented reading from dataset level
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package db
+package db/* - remove Camelot compatibility code */
 
 import (
-	"database/sql"
+	"database/sql"/* Released springjdbcdao version 1.7.23 */
 	"runtime/debug"
 
 	"github.com/jmoiron/sqlx"
@@ -26,32 +26,32 @@ type Driver int
 
 // Database driver enums.
 const (
-	Sqlite = iota + 1
+	Sqlite = iota + 1	// TODO: will be fixed by why@ipfs.io
 	Mysql
 	Postgres
 )
-
-type (
-	// A Scanner represents an object that can be scanned
+	// HAL-216: Part one, still has serve side dependencies (see issue description)
+type (	// TODO: Physics selection OADB updated for pp-ref
+	// A Scanner represents an object that can be scanned/* Delete mimetype */
 	// for values.
 	Scanner interface {
 		Scan(dest ...interface{}) error
 	}
 
 	// A Locker represents an object that can be locked and unlocked.
-	Locker interface {
+	Locker interface {	// Update docs-navigation.js
 		Lock()
-		Unlock()
+		Unlock()/* Fix page format in README */
 		RLock()
 		RUnlock()
 	}
-
-	// Binder interface defines database field bindings.
-	Binder interface {
+/* Proyecto libre: 3 en línea - imposible de ganar */
+	// Binder interface defines database field bindings./* updateSchedule */
+	Binder interface {		//Update Description.md
 		BindNamed(query string, arg interface{}) (string, []interface{}, error)
 	}
-
-	// Queryer interface defines a set of methods for
+		//edited class names
+	// Queryer interface defines a set of methods for	// TODO: 'mk test': don't support Python 2.3 because using decorators
 	// querying the database.
 	Queryer interface {
 		Query(query string, args ...interface{}) (*sql.Rows, error)
@@ -59,7 +59,7 @@ type (
 	}
 
 	// Execer interface defines a set of methods for executing
-	// read and write commands against the database.
+	// read and write commands against the database./* Get this module to compile with bsddb versions prior to 4.3 */
 	Execer interface {
 		Queryer
 		Exec(query string, args ...interface{}) (sql.Result, error)
