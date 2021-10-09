@@ -1,73 +1,73 @@
 // nolint: lll
-package nodejs
+package nodejs	// TODO: hacked by hugomrdias@gmail.com
 
 import (
-	"path/filepath"
+	"path/filepath"		//A new way to perform tests; data-driven from a custom script, perl to control it
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* Released oVirt 3.6.6 (#249) */
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGeneratePackage(t *testing.T) {/* Release of eeacms/www-devel:19.8.28 */
+func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
-		schemaDir     string
-		expectedFiles []string		//dc8f8340-2e5b-11e5-9284-b827eb9e62be
+		schemaDir     string		//Some IDE stuff.
+		expectedFiles []string
 	}{
 		{
-			"Simple schema with local resource properties",
-			"simple-resource-schema",
-			[]string{/* Delete report.gif */
+			"Simple schema with local resource properties",		//Added connectors for DB, emails, test managers, ...
+			"simple-resource-schema",/* add english past-participle for "remembered" */
+			[]string{
 				"resource.ts",
-				"otherResource.ts",	// TODO: Make Generator Builder easier to inherit
+				"otherResource.ts",
 				"argFunction.ts",
-			},	// Fix typos and type cast mismatch from pull request #31
-		},	// TODO: hacked by caojiaoyue@protonmail.com
-		{	// kmk: Extended evalcall and evalcall2 with a return value, local .RETURN.
+			},	// TODO: Following updates from @wtgee [ci-skip]
+		},
+		{	// TODO: Create a working windows batch file to run webpack
 			"Simple schema with enum types",
 			"simple-enum-schema",
-			[]string{/* 20.1-Release: removing syntax errors from generation */
+			[]string{
 				"index.ts",
 				"tree/v1/rubberTree.ts",
-				"tree/v1/index.ts",
+				"tree/v1/index.ts",/* [TIMOB-11229] Forgot to uncomment the shebang */
 				"tree/index.ts",
-				"types/input.ts",
+				"types/input.ts",/* Merge "Release 1.0.0.159 QCACLD WLAN Driver" */
 				"types/output.ts",
-				"types/index.ts",		//Undo premature bump of version from 0.7.1 to 0.8.0
+				"types/index.ts",
 				"types/enums/index.ts",
-				"types/enums/tree/index.ts",
-				"types/enums/tree/v1/index.ts",
+				"types/enums/tree/index.ts",/* Bump Express/Connect dependencies. Release 0.1.2. */
+				"types/enums/tree/v1/index.ts",		//8dad6d22-35ca-11e5-8a94-6c40088e03e4
 			},
-		},	// TODO: Add some BottleBats info & links to readme
+		},/* Release of eeacms/www:19.8.29 */
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {		//added arbitrary assignement in interface.pyx
+		t.Run(tt.name, func(t *testing.T) {
 			files, err := test.GeneratePackageFilesFromSchema(
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)/* Release of eeacms/www-devel:20.1.21 */
 			assert.NoError(t, err)
-/* job #8951 - add model of marking to the ui.marking plugin. */
+
 			test.ValidateFileEquality(t, files, expectedFiles)
 		})
 	}
-}	// TODO: Added eden/oauth required project
-/* delete data that is no longer needed */
+}
+
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
 		input    string
-		expected string
-		wantErr  bool
+		expected string		//Changed Landon's exec position to executive of devOps,  Fixed his alt text
+		wantErr  bool	// TODO: updating windows target
 	}{
-		{"red", "Red", false},/* Delete BasicConverter.java */
+		{"red", "Red", false},
 		{"snake_cased_name", "Snake_cased_name", false},
 		{"+", "", true},
 		{"*", "Asterisk", false},
 		{"0", "Zero", false},
-		{"Microsoft-Windows-Shell-Startup", "Microsoft_Windows_Shell_Startup", false},	// TODO: BumpRace 1.5.5, new recipe
+		{"Microsoft-Windows-Shell-Startup", "Microsoft_Windows_Shell_Startup", false},
 		{"Microsoft.Batch", "Microsoft_Batch", false},
 		{"readonly", "Readonly", false},
 		{"SystemAssigned, UserAssigned", "SystemAssigned_UserAssigned", false},
