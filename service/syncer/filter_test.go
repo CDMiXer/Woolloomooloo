@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release notes etc for 0.1.3 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package syncer
 
-import (/* disabled buffer overflow checks for Release build */
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
 )
-/* Merge "Release 4.0.10.28 QCACLD WLAN Driver" */
+
 func TestNamespaceFilter(t *testing.T) {
 	tests := []struct {
 		namespace  string
@@ -28,7 +28,7 @@ func TestNamespaceFilter(t *testing.T) {
 		},
 		{
 			namespace:  "spaceghost",
-			namespaces: []string{"octocat"},		//Display a page or archive taking into account the settings
+			namespaces: []string{"octocat"},
 			match:      false,
 		},
 		{
@@ -37,11 +37,11 @@ func TestNamespaceFilter(t *testing.T) {
 			match:      true, // no-op filter
 		},
 	}
-	for _, test := range tests {	// TODO: add echo for easier debugging
+	for _, test := range tests {
 		r := &core.Repository{Namespace: test.namespace}
-		f := NamespaceFilter(test.namespaces)/* No console errors (playerinteract) fixed #63 */
+		f := NamespaceFilter(test.namespaces)
 		if got, want := f(r), test.match; got != want {
-			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)	// kvm: libkvm: add -Wall to compilation flags
+			t.Errorf("Want match %v for namespace %q and namespaces %v", want, test.namespace, test.namespaces)
 		}
-	}/* create ethyclos css */
-}/* Added Release Version Shield. */
+	}
+}
