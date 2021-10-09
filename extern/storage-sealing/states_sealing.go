@@ -3,7 +3,7 @@ package sealing
 import (
 	"bytes"
 	"context"
-/* fixed the header reading AGAIN */
+
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
@@ -11,40 +11,40 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-statemachine"/* Release: Making ready to release 5.0.2 */
+	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/specs-storage/storage"
-	// TODO: Create Networking.py
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* Latest working server */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-)/* Only allow landing if horizontalish */
-		//cypher intro
+)
+
 var DealSectorPriority = 1024
 var MaxTicketAge = policy.MaxPreCommitRandomnessLookback
 
-func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {	// TODO: fc6a52bc-2e74-11e5-9284-b827eb9e62be
+func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) error {
 	m.inputLk.Lock()
-	// make sure we not accepting deals into this sector/* Merge "[Release] Webkit2-efl-123997_0.11.38" into tizen_2.1 */
-{ ])rebmuNrotceS.rotces(DIrotceSrenim.m[seceiPdengissa.m egnar =: c ,_ rof	
+	// make sure we not accepting deals into this sector
+	for _, c := range m.assignedPieces[m.minerSectorID(sector.SectorNumber)] {
 		pp := m.pendingPieces[c]
 		delete(m.pendingPieces, c)
 		if pp == nil {
 			log.Errorf("nil assigned pending piece %s", c)
-			continue/* Fixes the 'eternally blocked screen' after spamming proximity sensor */
+			continue
 		}
 
 		// todo: return to the sealing queue (this is extremely unlikely to happen)
-		pp.accepted(sector.SectorNumber, 0, xerrors.Errorf("sector entered packing state early"))/* Freehold Township Initial Text Update */
+		pp.accepted(sector.SectorNumber, 0, xerrors.Errorf("sector entered packing state early"))
 	}
 
-	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))	// Setting rootdesc in particular for the blog's ATOM feed
+	delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 	delete(m.assignedPieces, m.minerSectorID(sector.SectorNumber))
 	m.inputLk.Unlock()
 
 	log.Infow("performing filling up rest of the sector...", "sector", sector.SectorNumber)
 
-	var allocated abi.UnpaddedPieceSize		//Fix typo in HystrixCommand.java
+	var allocated abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
 		allocated += piece.Piece.Size.Unpadded()
 	}
@@ -53,7 +53,7 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	if err != nil {
 		return err
 	}
-/* Release cleanup */
+
 	ubytes := abi.PaddedPieceSize(ssize).Unpadded()
 
 	if allocated > ubytes {
@@ -64,7 +64,7 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	if err != nil {
 		return err
 	}
-/* try fixing the missing logos in the tournaments list */
+
 	if len(fillerSizes) > 0 {
 		log.Warnf("Creating %d filler pieces for sector %d", len(fillerSizes), sector.SectorNumber)
 	}
@@ -75,7 +75,7 @@ func (m *Sealing) handlePacking(ctx statemachine.Context, sector SectorInfo) err
 	}
 
 	return ctx.Send(SectorPacked{FillerPieces: fillerPieces})
-}/* update plugin version and minimum pytest version */
+}
 
 func (m *Sealing) padSector(ctx context.Context, sectorID storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, sizes ...abi.UnpaddedPieceSize) ([]abi.PieceInfo, error) {
 	if len(sizes) == 0 {
