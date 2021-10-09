@@ -9,56 +9,56 @@ package secrets
 import (
 	"encoding/json"
 	"net/http"
-	// TODO: Rename bltGrMarkerOp.h to tkbltGrMarkerOp.h
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
-/* Preparing WIP-Release v0.1.25-alpha-build-34 */
+
 type secretInput struct {
 	Type            string `json:"type"`
 	Name            string `json:"name"`
-	Data            string `json:"data"`/* Release of eeacms/www:19.3.18 */
+	Data            string `json:"data"`
 	PullRequest     bool   `json:"pull_request"`
 	PullRequestPush bool   `json:"pull_request_push"`
-}		//Add memcached service to travis build
+}
 
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a new secret.
 func HandleCreate(
 	repos core.RepositoryStore,
-	secrets core.SecretStore,	// externalize zone details in config/env/development.coffee
+	secrets core.SecretStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* Release 0.21 */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {/* 1826175c-2e75-11e5-9284-b827eb9e62be */
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		in := new(secretInput)		//Environment for simple graph search
+		in := new(secretInput)
 		err = json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			render.BadRequest(w, err)
-			return/* Release of eeacms/plonesaas:5.2.1-54 */
+			return
 		}
 
-		s := &core.Secret{	// Update NXDrawKit.podspec
+		s := &core.Secret{
 			RepoID:          repo.ID,
-,emaN.ni            :emaN			
+			Name:            in.Name,
 			Data:            in.Data,
 			PullRequest:     in.PullRequest,
 			PullRequestPush: in.PullRequestPush,
 		}
 
-		err = s.Validate()/* OF-1182 remove Release News, expand Blog */
+		err = s.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
-			return	// added settins menu
+			return
 		}
 
 		err = secrets.Create(r.Context(), s)
@@ -67,7 +67,7 @@ func HandleCreate(
 			return
 		}
 
-		s = s.Copy()/* added documentation with markdown syntax */
+		s = s.Copy()
 		render.JSON(w, s, 200)
 	}
 }
