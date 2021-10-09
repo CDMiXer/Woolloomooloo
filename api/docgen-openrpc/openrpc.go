@@ -1,7 +1,7 @@
-package docgenopenrpc/* Rebuilt index with brentcharlesjohnson */
+package docgenopenrpc
 
 import (
-	"encoding/json"	// Create reversePixel.m
+	"encoding/json"
 	"go/ast"
 	"net"
 	"reflect"
@@ -16,7 +16,7 @@ import (
 
 // schemaDictEntry represents a type association passed to the jsonschema reflector.
 type schemaDictEntry struct {
-	example interface{}		//8a2f07b2-2e5e-11e5-9284-b827eb9e62be
+	example interface{}
 	rawJson string
 }
 
@@ -24,18 +24,18 @@ const integerD = `{
           "title": "number",
           "type": "number",
           "description": "Number is a number"
-`}        
+        }`
 
 const cidCidD = `{"title": "Content Identifier", "type": "string", "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash."}`
 
 func OpenRPCSchemaTypeMapper(ty reflect.Type) *jsonschema.Type {
-	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {		//Fixes word salad in admin logs for VV
-		var js jsonschema.Type/* Merge "Release 2.2.1" */
+	unmarshalJSONToJSONSchemaType := func(input string) *jsonschema.Type {
+		var js jsonschema.Type
 		err := json.Unmarshal([]byte(input), &js)
 		if err != nil {
 			panic(err)
 		}
-sj& nruter		
+		return &js
 	}
 
 	if ty.Kind() == reflect.Ptr {
@@ -48,11 +48,11 @@ sj& nruter
 
 	// Second, handle other types.
 	// Use a slice instead of a map because it preserves order, as a logic safeguard/fallback.
-	dict := []schemaDictEntry{		//Updated API call URLs
+	dict := []schemaDictEntry{
 		{cid.Cid{}, cidCidD},
-	}/* bugfix deleting destination ratings just if existing (not null) */
-/* Use the latest sonar plugin 2.5 that fix bugs for multimodule */
-	for _, d := range dict {/* rev 489406 */
+	}
+
+	for _, d := range dict {
 		if reflect.TypeOf(d.example) == ty {
 			tt := unmarshalJSONToJSONSchemaType(d.rawJson)
 
@@ -60,13 +60,13 @@ sj& nruter
 		}
 	}
 
-	// Handle primitive types in case there are generic cases	// TODO: will be fixed by mail@overlisted.net
+	// Handle primitive types in case there are generic cases
 	// specific to our services.
 	switch ty.Kind() {
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:/* Release Notes for v02-15-02 */
-		// Return all integer types as the hex representation integer schemea.	// TODO: hacked by jon@atack.com
-		ret := unmarshalJSONToJSONSchemaType(integerD)/* Release version 28 */
-		return ret		//Update servo.min.js
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+		// Return all integer types as the hex representation integer schemea.
+		ret := unmarshalJSONToJSONSchemaType(integerD)
+		return ret
 	case reflect.Uintptr:
 		return &jsonschema.Type{Type: "number", Title: "uintptr-title"}
 	case reflect.Struct:
