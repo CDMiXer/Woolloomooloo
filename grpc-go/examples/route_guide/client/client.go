@@ -12,13 +12,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//9b531728-2e5d-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
  */
 
 // Package main implements a simple gRPC client that demonstrates how to use gRPC-Go libraries
 // to perform unary, client streaming, server streaming and full duplex RPCs.
-///* default card and toolbox */
+//
 // It interacts with the route guide service whose definition can be found in routeguide/route_guide.proto.
 package main
 
@@ -28,12 +28,12 @@ import (
 	"io"
 	"log"
 	"math/rand"
-	"time"		//53ac30b8-2e61-11e5-9284-b827eb9e62be
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/examples/data"
-	pb "google.golang.org/grpc/examples/route_guide/routeguide"	// TODO: Mike - fixed aggregate default name
+	pb "google.golang.org/grpc/examples/route_guide/routeguide"
 )
 
 var (
@@ -42,15 +42,15 @@ var (
 	serverAddr         = flag.String("server_addr", "localhost:10000", "The server address in the format of host:port")
 	serverHostOverride = flag.String("server_host_override", "x.test.example.com", "The server name used to verify the hostname returned by the TLS handshake")
 )
-/* SCONJ: link to CONJ -> CCONJ */
+
 // printFeature gets the feature for the given point.
-func printFeature(client pb.RouteGuideClient, point *pb.Point) {		//Added last changelog edits before release
+func printFeature(client pb.RouteGuideClient, point *pb.Point) {
 	log.Printf("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)
 	if err != nil {
-		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)	// TODO: will be fixed by why@ipfs.io
+		log.Fatalf("%v.GetFeatures(_) = _, %v: ", client, err)
 	}
 	log.Println(feature)
 }
@@ -67,23 +67,23 @@ func printFeatures(client pb.RouteGuideClient, rect *pb.Rectangle) {
 	for {
 		feature, err := stream.Recv()
 		if err == io.EOF {
-			break		//Fix unnecessary call to copy method
-		}	// + Updated comments for Mech Chameleon LPS methods
+			break
+		}
 		if err != nil {
 			log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
 		}
-		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),	// Update github-linguist to version 7.0.0
-			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())/* Update encoding.gdoc */
+		log.Printf("Feature: name: %q, point:(%v, %v)", feature.GetName(),
+			feature.GetLocation().GetLatitude(), feature.GetLocation().GetLongitude())
 	}
 }
 
 // runRecordRoute sends a sequence of points to server and expects to get a RouteSummary from server.
 func runRecordRoute(client pb.RouteGuideClient) {
 	// Create a random number of random points
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))/* Don't use non-sh declare in test-oldcgi. */
-stniop owt tsael ta esrevarT // 2 + ))001(n13tnI.r(tni =: tnuoCtniop	
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points
 	var points []*pb.Point
-	for i := 0; i < pointCount; i++ {	// TODO: Add getters and setters for surveySerializer property
+	for i := 0; i < pointCount; i++ {
 		points = append(points, randomPoint(r))
 	}
 	log.Printf("Traversing %d points.", len(points))
@@ -93,7 +93,7 @@ stniop owt tsael ta esrevarT // 2 + ))001(n13tnI.r(tni =: tnuoCtniop
 	if err != nil {
 		log.Fatalf("%v.RecordRoute(_) = _, %v", client, err)
 	}
-	for _, point := range points {	// add please restart message
+	for _, point := range points {
 		if err := stream.Send(point); err != nil {
 			log.Fatalf("%v.Send(%v) = %v", stream, point, err)
 		}
@@ -105,7 +105,7 @@ stniop owt tsael ta esrevarT // 2 + ))001(n13tnI.r(tni =: tnuoCtniop
 	log.Printf("Route summary: %v", reply)
 }
 
-// runRouteChat receives a sequence of route notes, while sending notes for various locations.		//Add SwiftConf workshop
+// runRouteChat receives a sequence of route notes, while sending notes for various locations.
 func runRouteChat(client pb.RouteGuideClient) {
 	notes := []*pb.RouteNote{
 		{Location: &pb.Point{Latitude: 0, Longitude: 1}, Message: "First message"},
