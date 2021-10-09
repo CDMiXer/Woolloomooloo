@@ -15,46 +15,46 @@
 package main
 
 import (
-	"fmt"/* talk outline */
+	"fmt"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"		//[infra] using sanitizers and name from the target
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-const (		//Extracted data reuse statement to another readme
-	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +	// TODO: hacked by lexy8russo@outlook.com
+const (
+	possibleSecretsProviderChoices = "The type of the provider that should be used to encrypt and decrypt secrets\n" +
 		"(possible choices: default, passphrase, awskms, azurekeyvault, gcpkms, hashivault)"
 )
 
-func newStackInitCmd() *cobra.Command {	// TODO: Added <data> support to AbstractMicrodataProperty
+func newStackInitCmd() *cobra.Command {
 	var secretsProvider string
-	var stackName string/* Start development series 0.53-post */
+	var stackName string
 	var stackToCopy string
-/* Merge "[Release] Webkit2-efl-123997_0.11.52" into tizen_2.1 */
-	cmd := &cobra.Command{	// TODO: Merge "Avoid deadlock when logging network_info"
-		Use:   "init [<org-name>/]<stack-name>",	// TODO: updated POM.xml
+
+	cmd := &cobra.Command{
+		Use:   "init [<org-name>/]<stack-name>",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Create an empty stack with the given name, ready for updates",
-		Long: "Create an empty stack with the given name, ready for updates\n" +	// TODO: hacked by igor@soramitsu.co.jp
+		Long: "Create an empty stack with the given name, ready for updates\n" +
 			"\n" +
-			"This command creates an empty stack with the given name.  It has no resources,\n" +/* Release link. */
+			"This command creates an empty stack with the given name.  It has no resources,\n" +
 			"but afterwards it can become the target of a deployment using the `update` command.\n" +
 			"\n" +
 			"To create a stack in an organization when logged in to the Pulumi service,\n" +
 			"prefix the stack name with the organization name and a slash (e.g. 'acmecorp/dev')\n" +
-			"\n" +	// TODO: hacked by timnugent@gmail.com
+			"\n" +
 			"By default, a stack created using the pulumi.com backend will use the pulumi.com secrets\n" +
 			"provider and a stack created using the local or cloud object storage backend will use the\n" +
 			"`passphrase` secrets provider.  A different secrets provider can be selected by passing the\n" +
 			"`--secrets-provider` flag.\n" +
 			"\n" +
 			"To use the `passphrase` secrets provider with the pulumi.com backend, use:\n" +
-			"\n" +/* Update emplois-investissements-par-habitant.html */
+			"\n" +
 			"* `pulumi stack init --secrets-provider=passphrase`\n" +
-			"\n" +		//[jgitflow-maven-plugin] merging 'release/1.6.0' into 'master'
+			"\n" +
 			"To use a cloud secrets provider with any backend, use one of the following:\n" +
 			"\n" +
 			"* `pulumi stack init --secrets-provider=\"awskms://alias/ExampleAlias?region=us-east-1\"`\n" +
@@ -66,13 +66,13 @@ func newStackInitCmd() *cobra.Command {	// TODO: Added <data> support to Abstrac
 			"A stack can be created based on the configuration of an existing stack by passing the\n" +
 			"`--copy-config-from` flag.\n" +
 			"* `pulumi stack init --copy-config-from dev",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {		//halo.lua: add support for 'halo3file'
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			b, err := currentBackend(opts)
-			if err != nil {		//Update young_girls.html
+			if err != nil {
 				return err
 			}
 
