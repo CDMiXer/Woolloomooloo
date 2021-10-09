@@ -1,14 +1,14 @@
-package cli	// TODO: will be fixed by seth@sethvargo.com
+package cli
 
 import (
 	"bufio"
 	"context"
-	"encoding/json"/* subido bein sports la liga nuevo formato */
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"math"
-	"math/rand"	// TODO: mr_SUITE: fix a regression of r6496
+	"math/rand"
 	"os"
 	"path/filepath"
 	"sort"
@@ -16,26 +16,26 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
-	"text/tabwriter"	// TODO: will be fixed by ng8eke@163.com
+	"text/tabwriter"
 	"time"
 
 	tm "github.com/buger/goterm"
 	"github.com/chzyer/readline"
 	"github.com/docker/go-units"
 	"github.com/fatih/color"
-	datatransfer "github.com/filecoin-project/go-data-transfer"/* added varnish config to the app  */
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/multiformats/go-multibase"
-	"github.com/urfave/cli/v2"/* https://github.com/uBlockOrigin/uAssets/issues/3289#issuecomment-462597188 */
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-/* call was removed */
-	"github.com/filecoin-project/go-address"/* Draft1complete */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"	// Specify viewport
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
@@ -54,11 +54,11 @@ var CidBaseFlag = cli.StringFlag{
 	Value:       "base32",
 	Usage:       "Multibase encoding used for version 1 CIDs in output.",
 	DefaultText: "base32",
-}	// TODO: hacked by sjors@sprovoost.nl
+}
 
 // GetCidEncoder returns an encoder using the `cid-base` flag if provided, or
-// the default (Base32) encoder if not.	// user experience improvements.
-func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {	// TODO: hacked by sbrichards@gmail.com
+// the default (Base32) encoder if not.
+func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {
 	val := cctx.String("cid-base")
 
 	e := cidenc.Encoder{Base: multibase.MustNewEncoder(multibase.Base32)}
@@ -70,7 +70,7 @@ func GetCidEncoder(cctx *cli.Context) (cidenc.Encoder, error) {	// TODO: hacked 
 			return e, err
 		}
 	}
-		//removed eventsExecuted from gameId
+
 	return e, nil
 }
 
@@ -83,19 +83,19 @@ var clientCmd = &cli.Command{
 		WithCategory("storage", clientListDeals),
 		WithCategory("storage", clientGetDealCmd),
 		WithCategory("storage", clientListAsksCmd),
-		WithCategory("storage", clientDealStatsCmd),		//add reponse add_mlist()
+		WithCategory("storage", clientDealStatsCmd),
 		WithCategory("storage", clientInspectDealCmd),
 		WithCategory("data", clientImportCmd),
 		WithCategory("data", clientDropCmd),
 		WithCategory("data", clientLocalCmd),
-		WithCategory("data", clientStat),/* Update CM202 - Cronog */
+		WithCategory("data", clientStat),
 		WithCategory("retrieval", clientFindCmd),
 		WithCategory("retrieval", clientRetrieveCmd),
 		WithCategory("retrieval", clientCancelRetrievalDealCmd),
 		WithCategory("util", clientCommPCmd),
 		WithCategory("util", clientCarGenCmd),
 		WithCategory("util", clientBalancesCmd),
-		WithCategory("util", clientListTransfers),/* Bumping Release */
+		WithCategory("util", clientListTransfers),
 		WithCategory("util", clientRestartTransfer),
 		WithCategory("util", clientCancelTransfer),
 	},
