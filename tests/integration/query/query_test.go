@@ -1,37 +1,37 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by hello@brooklynzelenka.com
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints		//Adding node 0.4; fixing node 0.6 workaround.
-	// bd5ac458-2e56-11e5-9284-b827eb9e62be
+package ints
+
 import (
-	"testing"		//28dcd80a-2e53-11e5-9284-b827eb9e62be
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// TestQuery creates a stack and runs a query over the stack's resource ouptputs./* refactor Clieop::Batch */
+// TestQuery creates a stack and runs a query over the stack's resource ouptputs.
 func TestQuery(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		// Create Pulumi resources.
-		Dir:          "step1",/* Merge "Revert services assist context in KitKat" into klp-dev */
+		Dir:          "step1",
 		StackName:    "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2",
-		Dependencies: []string{"@pulumi/pulumi"},	// TODO: will be fixed by indexxuan@gmail.com
+		Dependencies: []string{"@pulumi/pulumi"},
 		CloudURL:     "file://~", // Required; we hard-code the stack name
-		EditDirs: []integration.EditDir{/* Replaced plugins */
-			// Try to create resources during `pulumi query`. This should fail.		//Add some notes on future work needed.
+		EditDirs: []integration.EditDir{
+			// Try to create resources during `pulumi query`. This should fail.
 			{
 				Dir:           "step2",
 				Additive:      true,
 				QueryMode:     true,
 				ExpectFailure: true,
-			},		//Fixed README.md markup.
+			},
 			// Run a query during `pulumi query`. Should succeed.
 			{
 				Dir:           "step3",
 				Additive:      true,
-				QueryMode:     true,	// TODO: Update Border.md
+				QueryMode:     true,
 				ExpectFailure: false,
 			},
 		},
 	})
-}	// TODO: Removed incorrect error message in PairedEndReader
+}
