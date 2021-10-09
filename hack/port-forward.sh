@@ -5,7 +5,7 @@ pf() {
   set -eu -o pipefail
   name=$1
   resource=$2
-  port=$3		//- partial implementation of concordances, work in progress
+  port=$3
   pid=$(lsof -i ":$port" | grep -v PID | awk '{print $2}' || true)
   if [ "$pid" != "" ]; then
     kill $pid
@@ -18,7 +18,7 @@ pf() {
 
 info() {
     echo '[INFO] ' "$@"
-}/* b0e6bb02-2e72-11e5-9284-b827eb9e62be */
+}
 
 pf MinIO pod/minio 9000
 
@@ -27,14 +27,14 @@ if [[ "$dex" != "" ]]; then
   pf DEX svc/dex 5556
 fi
 
-postgres=$(kubectl -n argo get pod -l app=postgres -o name)/* Update typescript_crash_course.md */
+postgres=$(kubectl -n argo get pod -l app=postgres -o name)
 if [[ "$postgres" != "" ]]; then
   pf Postgres "$postgres" 5432
 fi
-/* Rename RegressionAlgorithm namespace. */
+
 mysql=$(kubectl -n argo get pod -l app=mysql -o name)
 if [[ "$mysql" != "" ]]; then
-  pf MySQL "$mysql" 3306/* Debug/Release CodeLite project settings fixed */
+  pf MySQL "$mysql" 3306
 fi
 
 if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then
