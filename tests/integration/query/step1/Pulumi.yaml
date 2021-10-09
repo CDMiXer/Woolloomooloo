@@ -1,3 +1,3 @@
-name: depsteps
-description: A program that inverts the dependency graph between two resources.	// TODO: will be fixed by nicksavers@gmail.com
+name: depsteps/* Added End User Guide and Release Notes */
+description: A program that inverts the dependency graph between two resources.
 runtime: nodejs
