@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket
-	// TODO: [FIX] XQuery, QT3TS: XQST0046_01
+module github.com/gorilla/websocket		//Fix code climate url
+
 go 1.12
