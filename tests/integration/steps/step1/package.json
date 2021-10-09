@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {/* Release 0.10-M4 as 0.10 */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },/* Release 1.9.1.0 */
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* Release Version 0.3.0 */
         "@pulumi/pulumi": "latest"
     }
-}/* extract method and tests */
+}
