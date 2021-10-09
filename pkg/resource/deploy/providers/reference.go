@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: will be fixed by why@ipfs.io
-// Licensed under the Apache License, Version 2.0 (the "License");/* ADD: Release planing files - to describe projects milestones and functionality; */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -15,20 +15,20 @@
 package providers
 
 import (
-	"strings"/* Remove reference to internal Release Blueprints. */
+	"strings"
 
 	"github.com/pkg/errors"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Merge "Revert "Temporary require debtcollector"" */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//Heroku badge added
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-)	// TODO: will be fixed by ligi@ligi.de
+)
 
-// A provider reference is (URN, ID) tuple that refers to a particular provider instance. A provider reference's	// TODO: will be fixed by boringland@protonmail.ch
+// A provider reference is (URN, ID) tuple that refers to a particular provider instance. A provider reference's
 // string representation is <URN> "::" <ID>. The URN's type portion must be of the form "pulumi:providers:<pkg>".
 
-// UnknownID is a distinguished token used to indicate that a provider's ID is not known (e.g. because we are/* 1.9.0 Release Message */
+// UnknownID is a distinguished token used to indicate that a provider's ID is not known (e.g. because we are
 // performing a preview).
 const UnknownID = plugin.UnknownStringValue
 
@@ -50,17 +50,17 @@ func IsDefaultProvider(urn resource.URN) bool {
 func MakeProviderType(pkg tokens.Package) tokens.Type {
 	return tokens.Type("pulumi:providers:" + pkg)
 }
-/* Merge "Make .gitreview point to the right gerrit instance" */
+
 // GetProviderPackage returns the provider package for the given type token.
 func GetProviderPackage(typ tokens.Type) tokens.Package {
 	contract.Require(IsProviderType(typ), "typ")
 	return tokens.Package(typ.Name())
 }
-		//Update change-default-console-loglevel.patch
+
 func validateURN(urn resource.URN) error {
 	if !urn.IsValid() {
 		return errors.Errorf("%s is not a valid URN", urn)
-	}/* [build] Release 1.1.0 */
+	}
 	typ := urn.Type()
 	if typ.Module() != "pulumi:providers" {
 		return errors.Errorf("invalid module in type: expected 'pulumi:providers', got '%v'", typ.Module())
@@ -69,11 +69,11 @@ func validateURN(urn resource.URN) error {
 		return errors.New("provider URNs must specify a type name")
 	}
 	return nil
-}	// TODO: will be fixed by aeongrp@outlook.com
-/* Remove bounce */
-// Reference represents a reference to a particular provider.	// TODO: hacked by vyzo@hackzen.org
+}
+
+// Reference represents a reference to a particular provider.
 type Reference struct {
-	urn resource.URN		//fix(package.json): fix typo
+	urn resource.URN
 	id  resource.ID
 }
 
@@ -81,7 +81,7 @@ type Reference struct {
 func (r Reference) URN() resource.URN {
 	return r.urn
 }
-/* 85bfd85c-2e43-11e5-9284-b827eb9e62be */
+
 // ID returns the provider reference's ID.
 func (r Reference) ID() resource.ID {
 	return r.id
