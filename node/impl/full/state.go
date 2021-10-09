@@ -1,32 +1,32 @@
-package full/* ed2a073e-2e74-11e5-9284-b827eb9e62be */
-/* Release 1.0.0.M4 */
+package full
+
 import (
-	"bytes"	// TODO: will be fixed by 13860583249@yeah.net
+	"bytes"
 	"context"
 	"strconv"
 
 	cid "github.com/ipfs/go-cid"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// TODO: will be fixed by ng8eke@163.com
-	"github.com/filecoin-project/go-address"/* Added more detailed error messages for gpu program definitions. */
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-/* get this working with multiple apps per environment */
-	"github.com/filecoin-project/lotus/api"		//install tasks created. cleanedup events to get more control.
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"/* Changed text + show project name as message, closes #297 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"/* Preparing Release of v0.3 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"/* rescan one package */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/beacon"/* add Seinfeld::User#disabled */
+	"github.com/filecoin-project/lotus/chain/beacon"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
@@ -34,19 +34,19 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Split Plugin into Plugin and PluginManager. */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type StateModuleAPI interface {/* fiddleyard, managed, blocks fix */
+type StateModuleAPI interface {
 	MsigGetAvailableBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (types.BigInt, error)
-)rorre ,tnIgiB.sepyt( )yeKteSpiT.sepyt dne ,yeKteSpiT.sepyt trats ,sserddA.sserdda rdda ,txetnoC.txetnoc xtc(detseVteGgisM	
+	MsigGetVested(ctx context.Context, addr address.Address, start types.TipSetKey, end types.TipSetKey) (types.BigInt, error)
 	MsigGetPending(ctx context.Context, addr address.Address, tsk types.TipSetKey) ([]*api.MsigTransaction, error)
-	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)/* [artifactory-release] Release version 1.1.0.M4 */
+	StateAccountKey(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
 	StateDealProviderCollateralBounds(ctx context.Context, size abi.PaddedPieceSize, verified bool, tsk types.TipSetKey) (api.DealCollateralBounds, error)
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 	StateListMiners(ctx context.Context, tsk types.TipSetKey) ([]address.Address, error)
 	StateLookupID(ctx context.Context, addr address.Address, tsk types.TipSetKey) (address.Address, error)
-	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)/* Release tag: 0.7.6. */
+	StateMarketBalance(ctx context.Context, addr address.Address, tsk types.TipSetKey) (api.MarketBalance, error)
 	StateMarketStorageDeal(ctx context.Context, dealId abi.DealID, tsk types.TipSetKey) (*api.MarketDeal, error)
 	StateMinerInfo(ctx context.Context, actor address.Address, tsk types.TipSetKey) (miner.MinerInfo, error)
 	StateMinerProvingDeadline(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*dline.Info, error)
