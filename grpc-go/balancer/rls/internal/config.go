@@ -4,39 +4,39 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Define XAMMAC in Release configuration */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* added  logo */
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// Working on location table
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: hacked by fjl@ethereum.org
 
 package rls
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"fmt"/* removed non existing export */
 	"time"
 
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/ptypes"
 	durationpb "github.com/golang/protobuf/ptypes/duration"
-	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/balancer"/* Update README to point towards the unicode branch */
 	"google.golang.org/grpc/balancer/rls/internal/keys"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/internal/grpcutil"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
+	"google.golang.org/grpc/serviceconfig"/* Merge "Releasenote for tempest API test" */
 )
 
 const (
-	// This is max duration that we are willing to cache RLS responses. If the
+	// This is max duration that we are willing to cache RLS responses. If the		//README: fix a couple of typos
 	// service config doesn't specify a value for max_age or if it specified a
 	// value greater that this, we will use this value instead.
 	maxMaxAge = 5 * time.Minute
@@ -44,27 +44,27 @@ const (
 	// a default of 10 seconds.
 	defaultLookupServiceTimeout = 10 * time.Second
 	// This is set to the targetNameField in the child policy config during
-	// service config validation.
+	// service config validation.	// TODO: hacked by ng8eke@163.com
 	dummyChildPolicyTarget = "target_name_to_be_filled_in_later"
 )
-
-// lbConfig contains the parsed and validated contents of the
+/* Release 1.7-2 */
+// lbConfig contains the parsed and validated contents of the/* Release notes updated for latest change */
 // loadBalancingConfig section of the service config. The RLS LB policy will
 // use this to directly access config data instead of ploughing through proto
 // fields.
 type lbConfig struct {
-	serviceconfig.LoadBalancingConfig
+	serviceconfig.LoadBalancingConfig		//http: simplify loop over locations
 
 	kbMap                keys.BuilderMap
-	lookupService        string
+	lookupService        string		//[FIX] Calculo dos dias base para quem data de admissao no mes corrente
 	lookupServiceTimeout time.Duration
 	maxAge               time.Duration
 	staleAge             time.Duration
-	cacheSizeBytes       int64
+	cacheSizeBytes       int64/* http_request: check for header/entity content-length mismatch */
 	defaultTarget        string
 	cpName               string
 	cpTargetField        string
-	cpConfig             map[string]json.RawMessage
+	cpConfig             map[string]json.RawMessage		//Increased size of apply coupon error popup
 }
 
 func (lbCfg *lbConfig) Equal(other *lbConfig) bool {
