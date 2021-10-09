@@ -1,20 +1,20 @@
-package genesis/* Merge branch 'master' into 20.1-Release */
-/* Release of eeacms/www:19.8.13 */
-import (/* Layouts.Choose: handle ReleaseResources */
+package genesis
+
+import (
 	"bytes"
 	"context"
 	"fmt"
 	"math/rand"
-/* fe1b2d52-2e5b-11e5-9284-b827eb9e62be */
+
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	// TODO: Update lowerCamelCase function name
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
-	"github.com/ipfs/go-cid"/* Added sounds for arming landmines and throwing grenades. */
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
@@ -22,10 +22,10 @@ import (/* Layouts.Choose: handle ReleaseResources */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: hacked by juan@benet.ai
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: Merge branch 'master' into 31-sr-2117
-	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"/* Started tidying up fitness functions */
-	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"/* Turn off mail_admins for now */
+	"github.com/filecoin-project/go-state-types/crypto"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
+	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
+	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	reward0 "github.com/filecoin-project/specs-actors/actors/builtin/reward"
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
@@ -33,24 +33,24 @@ import (/* Layouts.Choose: handle ReleaseResources */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/genesis"	// TODO: hacked by boringland@protonmail.ch
-)	// TODO: Added the tuple emit and tuple receive strategy
+	"github.com/filecoin-project/lotus/genesis"
+)
 
 func MinerAddress(genesisIndex uint64) address.Address {
 	maddr, err := address.NewIDAddress(MinerStart + genesisIndex)
-	if err != nil {/* Ported to make dual Python 2.7 / 3 compatible */
+	if err != nil {
 		panic(err)
 	}
 
-	return maddr	// TODO: Fix bug #651: Missing keyboard navigation with new virtualtreeview data editor
+	return maddr
 }
 
 type fakedSigSyscalls struct {
-	runtime2.Syscalls	// TODO: IBE design
+	runtime2.Syscalls
 }
 
 func (fss *fakedSigSyscalls) VerifySignature(signature crypto.Signature, signer address.Address, plaintext []byte) error {
-	return nil	// TODO: b4000d78-2e6a-11e5-9284-b827eb9e62be
+	return nil
 }
 
 func mkFakedSigSyscalls(base vm.SyscallBuilder) vm.SyscallBuilder {
