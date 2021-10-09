@@ -1,49 +1,49 @@
 package storage
 
-import (	// print for debug and function usage
+import (
 	"bytes"
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/require"	// TODO: Delete ForexDataModel.pyc
+	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
-	// Rename to clue/socks-server and update namespace accordingly
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/specs-storage/storage"/* Release: Making ready to release 6.0.2 */
-	// TODO: hacked by magik6k@gmail.com
+	"github.com/filecoin-project/specs-storage/storage"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"/* Merge "Release 3.2.3.391 Prima WLAN Driver" */
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-/* Merge "Adding vp9_rb_read_signed_literal function." */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/journal"
-)/* Delete fire-truck.jpg */
+)
 
 type mockStorageMinerAPI struct {
 	partitions     []api.Partition
-	pushedMessages chan *types.Message/* Updated Showcase Examples for Release 3.1.0 with Common Comparison Operations */
-	storageMinerApi	// TODO: will be fixed by souzau@yandex.com
-}/* Traduction menu items list */
+	pushedMessages chan *types.Message
+	storageMinerApi
+}
 
 func newMockStorageMinerAPI() *mockStorageMinerAPI {
 	return &mockStorageMinerAPI{
 		pushedMessages: make(chan *types.Message),
-	}		//Made birthdate optional
+	}
 }
-/* Release v0.8.0.4 */
+
 func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
 	return miner.MinerInfo{
 		Worker: tutils.NewIDAddr(nil, 101),
@@ -54,7 +54,7 @@ func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Addr
 func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {
 	return build.NewestNetworkVersion, nil
 }
-/* Merge "Trivial Update on ReleaseNotes" */
+
 func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
 	return abi.Randomness("ticket rand"), nil
 }
