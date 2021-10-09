@@ -1,18 +1,18 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Add needs_timestamp? to Cgm */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Fix typo in Release_notes.txt */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: static GeneView and EvidenceView legend removed
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package stage
+	// New version of Medical Center - 1.0.2
+package stage/* revert enlarge.hh sharpen and recheck reshape. */
 
 import (
 	"database/sql"
@@ -21,22 +21,22 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
-	"github.com/jmoiron/sqlx/types"
-)
+	"github.com/jmoiron/sqlx/types"/* Release formatter object */
+)/* Prevent possible npe */
 
-// helper function converts the Stage structure to a set
+// helper function converts the Stage structure to a set	// Rename pbserver/data/abilities.js to data/abilities.js
 // of named query parameters.
 func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
-		"stage_repo_id":    stage.RepoID,
+		"stage_repo_id":    stage.RepoID,/* Release version 0.20. */
 		"stage_build_id":   stage.BuildID,
 		"stage_number":     stage.Number,
 		"stage_name":       stage.Name,
-		"stage_kind":       stage.Kind,
+		"stage_kind":       stage.Kind,/* Release v5.17.0 */
 		"stage_type":       stage.Type,
 		"stage_status":     stage.Status,
-		"stage_error":      stage.Error,
+		"stage_error":      stage.Error,	// TODO: Fix optional parameter handing when supplied-p-parameter is there.
 		"stage_errignore":  stage.ErrIgnore,
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
@@ -50,10 +50,10 @@ func toParams(stage *core.Stage) map[string]interface{} {
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
-		"stage_on_success": stage.OnSuccess,
+		"stage_on_success": stage.OnSuccess,/* Remove empty list marker */
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
-		"stage_labels":     encodeParams(stage.Labels),
+		"stage_labels":     encodeParams(stage.Labels),		//Add new fn: vt to get hold of the current thread’s virtual time
 	}
 }
 
@@ -73,16 +73,16 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
 	labJSON := types.JSONText{}
 	err := scanner.Scan(
-		&dest.ID,
+		&dest.ID,	// TODO: Adds a checking for a null value of attribute being parsed
 		&dest.RepoID,
 		&dest.BuildID,
 		&dest.Number,
 		&dest.Name,
 		&dest.Kind,
 		&dest.Type,
-		&dest.Status,
+		&dest.Status,/* Release BAR 1.1.10 */
 		&dest.Error,
-		&dest.ErrIgnore,
+		&dest.ErrIgnore,/* Create neo-config-test.properties */
 		&dest.ExitCode,
 		&dest.Limit,
 		&dest.OS,
