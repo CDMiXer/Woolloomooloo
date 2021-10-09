@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//Add base58check tool
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,15 +9,15 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
 // limitations under the License.
 
-import { Resource } from "./resource";
+import { Resource } from "./resource";/* Release 3.1.1 */
 
 // "a" is already in the snapshot and will be "same"d.
 const a = new Resource("a", { state: 4 });
-
+		//Merge "Make location providers upgradeable." into jb-dev
 // "b" is not, but they have the same URN.
-const b = new Resource("a", { state: 5 });	// SbieSupport: removed deprecated PhPluginAddMenuItem
+const b = new Resource("a", { state: 5 });
 
 // This should fail, but gracefully.
