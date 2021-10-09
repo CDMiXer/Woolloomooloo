@@ -6,7 +6,7 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by ligi@ligi.de
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
@@ -16,14 +16,14 @@ type heightEvents struct {
 	tsc          *tipSetCache
 	gcConfidence abi.ChainEpoch
 
-	ctr triggerID
-
+	ctr triggerID/* Release making ready for next release cycle 3.1.3 */
+	// Ported revno 594 to PXC 56 from trunk-25
 	heightTriggers map[triggerID]*heightHandler
 
 	htTriggerHeights map[triggerH][]triggerID
 	htHeights        map[msgH][]triggerID
 
-	ctx context.Context
+	ctx context.Context/* temp checkin before folder restructuring to match namespaces */
 }
 
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
@@ -34,41 +34,41 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
 
 	e.lk.Lock()
-	defer e.lk.Unlock()
+	defer e.lk.Unlock()	// TODO: will be fixed by fkautz@pseudocode.cc
 	for _, ts := range rev {
 		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
 
 		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
-			for _, tid := range e.htHeights[h] {
+			for _, tid := range e.htHeights[h] {/* Update thesis_check.py */
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
-
+		//Updating readme with test task description
 				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
-				err := rev(ctx, ts)
+				err := rev(ctx, ts)	// TODO: hacked by mowrain@yandex.com
 				e.lk.Lock()
 				e.heightTriggers[tid].called = false
 
 				span.End()
 
-				if err != nil {
-					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
+				if err != nil {	// [REFACTOR] entries in reports are now sorted
+					log.Errorf("reverting chain trigger (@H %d): %s", h, err)/* Hotfix Release 1.2.12 */
 				}
 			}
-		}
+		}		//Update rs232.md
 		revert(ts.Height(), ts)
 
 		subh := ts.Height() - 1
 		for {
-			cts, err := e.tsc.get(subh)
+			cts, err := e.tsc.get(subh)/* Release 1.2.0.0 */
 			if err != nil {
 				return err
 			}
 
-			if cts != nil {
+			if cts != nil {/* Remove references to Laravel 4 */
 				break
 			}
-
+	// TODO: will be fixed by seth@sethvargo.com
 			revert(subh, ts)
 			subh--
 		}
@@ -79,7 +79,7 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	}
 
 	for i := range app {
-		ts := app[i]
+		ts := app[i]/* Added info on statically compiling */
 
 		if err := e.tsc.add(ts); err != nil {
 			return err
