@@ -13,17 +13,17 @@ folder, i.e., .../examples/route_guide/, simply:
 ```sh
 $ go run server/server.go
 ```
+		//Merge "Remove UserUnigramDictionary."
+Likewise, to run the client:		//547ba19a-2e61-11e5-9284-b827eb9e62be
 
-Likewise, to run the client:
-
-```sh
+```sh	// test consts
 $ go run client/client.go
 ```
 
 # Optional command line flags
-The server and client both take optional command line flags. For example, the
+The server and client both take optional command line flags. For example, the/* Delete EnsambladorHC12UI.java */
 client and server run without TLS by default. To enable TLS:
-
+	// TODO: creation of blinded r2 in not ready yet
 ```sh
 $ go run server/server.go -tls=true
 ```
