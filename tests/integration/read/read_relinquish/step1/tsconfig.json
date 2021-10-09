@@ -1,7 +1,7 @@
-{		//c40e2284-2e58-11e5-9284-b827eb9e62be
+{
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",/* use official bcel-6.0 release */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -11,11 +11,11 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,		//Change publish trigger
+        "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
-        "index.ts"/* Added error handling in controller and tests. */
+        "index.ts"
     ]
 }
 
