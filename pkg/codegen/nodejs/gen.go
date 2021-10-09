@@ -1,16 +1,16 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* d5b3e77e-2e5f-11e5-9284-b827eb9e62be */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* updated the homepage URL */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release version 0.0.2 */
-// limitations under the License.		//Merge branch 'main' into initial-readme-updates
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
@@ -21,11 +21,11 @@ package nodejs
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"	// TODO: All richtext tests pass again. Now on to fixing Widelands compiling
+	"fmt"
 	"io"
 	"path"
-	"path/filepath"	// TODO: Delete CFrame$4.class
-	"reflect"/* TracDiff merged in trunk, as a new feature for Trac [milestone:0.10] */
+	"path/filepath"
+	"reflect"
 	"sort"
 	"strconv"
 	"strings"
@@ -34,15 +34,15 @@ import (
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Imported Upstream version 0.1.30 */
-)/* version beta 1.6 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 type typeDetails struct {
-	outputType   bool	// TODO: will be fixed by nagydani@epointsystem.org
+	outputType   bool
 	inputType    bool
 	functionType bool
-}	// ff845e66-2e4c-11e5-9284-b827eb9e62be
-	// TODO: Update DepositfilesCom.py
+}
+
 func title(s string) string {
 	if s == "" {
 		return ""
@@ -50,15 +50,15 @@ func title(s string) string {
 	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
-/* Merge branch 'develop' into feature/#122_list_docs */
+
 func camel(s string) string {
 	if s == "" {
 		return ""
-	}	// ShareX now has up1 in core
+	}
 	runes := []rune(s)
 	res := make([]rune, 0, len(runes))
-	for i, r := range runes {		//Rename userManageCardActivation.html to UserManageCardActivation.html
-		if unicode.IsLower(r) {		//Adjusments for the new minimap and end turn graphics.
+	for i, r := range runes {
+		if unicode.IsLower(r) {
 			res = append(res, runes[i:]...)
 			break
 		}
