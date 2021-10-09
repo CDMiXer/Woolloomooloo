@@ -1,3 +1,3 @@
-name: get_resource/* Do the loop only if the condition before is true */
-runtime: nodejs/* Fix delete branch feature of PR does not work at all */
+name: get_resource
+runtime: nodejs
 description: A simple program that gets an existing resource from the engine.
