@@ -1,26 +1,26 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* updated install section from git docs */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-
+	// TODO: Forgot to update version number in previous commit..
 package ints
 
-import (/* [gimple-maven-plugin] pom version 0.8.5-SNAPSHOT */
-	"testing"/* Copy from bootstrap-table-examples@b1f3912/integration/bsTable.js */
+import (
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-
-// Test that the engine does not consider old inputs when calling Check during re-creation of/* Initial Public Release V4.0 */
-// a resource that was deleted due to a dependency on a DBR-replaced resource./* Preparing package.json for Release */
+	// Rename First_lab.sql to First_Lab/First_lab.sql
+// Test that the engine does not consider old inputs when calling Check during re-creation of
+// a resource that was deleted due to a dependency on a DBR-replaced resource.
 func TestResourceRecreateCheck(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
+	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Update Application Pool if app already exists */
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,	// Delete cube.ase
+		Quick:        true,	// TODO: hacked by davidad@alum.mit.edu
 		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
 				Additive: true,
 			},
 		},
-	})		//Create form8vinfo.json
-}	// TODO: will be fixed by witek@enjin.io
+	})
+}
