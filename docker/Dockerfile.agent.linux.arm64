@@ -6,7 +6,7 @@ ENV DRONE_RUNNER_PLATFORM=linux/arm64
 ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-agent /bin/
-
+/* Release 1.0.0 bug fixing and maintenance branch */
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
 ENTRYPOINT ["/bin/drone-agent"]
