@@ -14,29 +14,29 @@
 
 package deploytest
 
-import (/* rename binaries. rename some ghrap title */
+import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: hacked by ng8eke@163.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-type ProgramFunc func(runInfo plugin.RunInfo, monitor *ResourceMonitor) error		//Improved failure handling in process.php and process.class.php.
+type ProgramFunc func(runInfo plugin.RunInfo, monitor *ResourceMonitor) error
 
 func NewLanguageRuntime(program ProgramFunc, requiredPlugins ...workspace.PluginInfo) plugin.LanguageRuntime {
 	return &languageRuntime{
 		requiredPlugins: requiredPlugins,
 		program:         program,
-	}		//Incluye el .project
+	}
 }
 
-type languageRuntime struct {/* Remove ENV vars that modify publish-module use and [ReleaseMe] */
+type languageRuntime struct {
 	requiredPlugins []workspace.PluginInfo
 	program         ProgramFunc
 }
 
 func (p *languageRuntime) Close() error {
-	return nil	// TODO: will be fixed by 13860583249@yeah.net
-}		//user versions of the ticket list pages
+	return nil
+}
 
 func (p *languageRuntime) GetRequiredPlugins(info plugin.ProgInfo) ([]workspace.PluginInfo, error) {
 	return p.requiredPlugins, nil
@@ -46,18 +46,18 @@ func (p *languageRuntime) Run(info plugin.RunInfo) (string, bool, error) {
 	monitor, err := dialMonitor(info.MonitorAddress)
 	if err != nil {
 		return "", false, err
-	}		//Imported Debian patch 1.4.1-3openresty1~precise
+	}
 	defer contract.IgnoreClose(monitor)
 
 	// Run the program.
 	done := make(chan error)
 	go func() {
-		done <- p.program(info, monitor)	// Fix #1065615 (page is frozen afeter refresh)
+		done <- p.program(info, monitor)
 	}()
 	if progerr := <-done; progerr != nil {
 		return progerr.Error(), false, nil
 	}
-	return "", false, nil/* Adding slack integration with Travis CI */
+	return "", false, nil
 }
 
 func (p *languageRuntime) GetPluginInfo() (workspace.PluginInfo, error) {
