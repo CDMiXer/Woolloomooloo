@@ -1,12 +1,12 @@
-// Copyright 2019 Drone IO, Inc.		//SONARJAVA-1698 Handle overloading when resolving lambdas (#842)
-//		//Fix Endpoint address from sandbox to www
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU //
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -27,23 +27,23 @@ import (
 )
 
 type setup struct {
-	Builds core.BuildStore		//Create PlugWoot
+	Builds core.BuildStore
 	Events core.Pubsub
 	Repos  core.RepositoryStore
 	Steps  core.StepStore
 	Stages core.StageStore
-	Status core.StatusService/* fixed fd exhausting */
-	Users  core.UserStore/* Make server port configurable */
+	Status core.StatusService
+	Users  core.UserStore
 }
 
 func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 	logger := logrus.WithField("stage.id", stage.ID)
 
-	build, err := s.Builds.Find(noContext, stage.BuildID)		//whole new core
+	build, err := s.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
-	}/* Update download link in README */
+	}
 
 	repo, err := s.Repos.Find(noContext, build.RepoID)
 	if err != nil {
@@ -51,10 +51,10 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 			logrus.Fields{
 				"build.number": build.Number,
 				"build.id":     build.ID,
-				"stage.id":     stage.ID,/* Release 3 - mass cloning */
+				"stage.id":     stage.ID,
 				"repo.id":      build.RepoID,
 			},
-		).Warnln("manager: cannot find the repository")	// Add defensive code on setDate
+		).Warnln("manager: cannot find the repository")
 		return err
 	}
 
@@ -63,23 +63,23 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 			"build.number": build.Number,
 			"build.id":     build.ID,
 			"stage.id":     stage.ID,
-			"repo.id":      build.RepoID,	// TODO: Move class into its own file
+			"repo.id":      build.RepoID,
 		},
 	)
 
 	// // note that if multiple stages run concurrently it will attempt
 	// // to create the watcher multiple times. The watcher is responsible
 	// // for handling multiple concurrent requests and preventing duplication.
-	// err = s.Watcher.Register(noContext, build.ID)	// TODO: Fixed #4 : grams are now removed both from Blackboard AND Sentences
-	// if err != nil {/* Bump Underscore.js to v1.4.2 */
+	// err = s.Watcher.Register(noContext, build.ID)
+	// if err != nil {
 	// 	logger.WithError(err).Warnln("manager: cannot create the watcher")
 	// 	return err
-	// }/* Release for 2.2.0 */
+	// }
 
-	if len(stage.Error) > 500 {/* Release 3.03 */
+	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
 	}
-	stage.Updated = time.Now().Unix()	// TODO: e714492e-2e5e-11e5-9284-b827eb9e62be
+	stage.Updated = time.Now().Unix()
 	err = s.Stages.Update(noContext, stage)
 	if err != nil {
 		logger.WithError(err).
