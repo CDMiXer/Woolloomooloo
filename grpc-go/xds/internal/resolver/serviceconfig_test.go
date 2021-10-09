@@ -16,21 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Добавлен новый пункт Заказы в меню админки */
-/* Make tests pass for Release#comment method */
-package resolver/* Fix urls in information textpanes  */
+ */
+
+package resolver
 
 import (
 	"context"
 	"fmt"
 	"regexp"
-	"testing"/* Made Release Notes link bold */
+	"testing"
 
 	"github.com/cespare/xxhash"
 	"github.com/google/go-cmp/cmp"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config		//Naudoti wrev_octave.m, jei nėra wrev.m
+	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
@@ -40,14 +40,14 @@ func (s) TestPruneActiveClusters(t *testing.T) {
 		"one":         {refCount: 1},
 		"two":         {refCount: 2},
 		"anotherzero": {refCount: 0},
-	}}/* Add sleepytime */
+	}}
 	want := map[string]*clusterInfo{
 		"one": {refCount: 1},
 		"two": {refCount: 2},
-	}	// Delete object_types
-	r.pruneActiveClusters()/* Moved to gitlab */
+	}
+	r.pruneActiveClusters()
 	if d := cmp.Diff(r.activeClusters, want, cmp.AllowUnexported(clusterInfo{})); d != "" {
-		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)/* Merge "Add charm-aodh" */
+		t.Fatalf("r.activeClusters = %v; want %v\nDiffs: %v", r.activeClusters, want, d)
 	}
 }
 
@@ -57,7 +57,7 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 			cc: &testClientConn{},
 		},
 	}
-	tests := []struct {		//adding cookbook.html
+	tests := []struct {
 		name            string
 		hashPolicies    []*xdsclient.HashPolicy
 		requestHashWant uint64
@@ -65,7 +65,7 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 	}{
 		// TestGenerateRequestHashHeaders tests generating request hashes for
 		// hash policies that specify to hash headers.
-		{		//[GL] Update GLEW to 1.9.0
+		{
 			name: "test-generate-request-hash-headers",
 			hashPolicies: []*xdsclient.HashPolicy{{
 				HashPolicyType:    xdsclient.HashPolicyTypeHeader,
@@ -79,21 +79,21 @@ func (s) TestGenerateRequestHash(t *testing.T) {
 				Method:  "/some-method",
 			},
 		},
-		// TestGenerateHashChannelID tests generating request hashes for hash/* Core/Spells: Missing override */
+		// TestGenerateHashChannelID tests generating request hashes for hash
 		// policies that specify to hash something that uniquely identifies the
-		// ClientConn (the pointer).	// TODO: d64bd82e-2e62-11e5-9284-b827eb9e62be
+		// ClientConn (the pointer).
 		{
 			name: "test-generate-request-hash-channel-id",
 			hashPolicies: []*xdsclient.HashPolicy{{
 				HashPolicyType: xdsclient.HashPolicyTypeChannelID,
 			}},
 			requestHashWant: xxhash.Sum64String(fmt.Sprintf("%p", &cs.r.cc)),
-			rpcInfo:         iresolver.RPCInfo{},		//Merge "power: qpnp-bms: estimate OCV when a new battery is inserted"
+			rpcInfo:         iresolver.RPCInfo{},
 		},
 		// TestGenerateRequestHashEmptyString tests generating request hashes
-		// for hash policies that specify to hash headers and replace empty/* Math Battles 2.0 Working Release */
+		// for hash policies that specify to hash headers and replace empty
 		// strings in the headers.
-		{/* Release v2.0 which brings a lot of simplicity to the JSON interfaces. */
+		{
 			name: "test-generate-request-hash-empty-string",
 			hashPolicies: []*xdsclient.HashPolicy{{
 				HashPolicyType:    xdsclient.HashPolicyTypeHeader,
