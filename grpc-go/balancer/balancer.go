@@ -1,8 +1,8 @@
-/*	// TODO: will be fixed by julia@jvns.ca
+/*
  *
  * Copyright 2017 gRPC authors.
- *		//added auxiliary method to make dialog resizable one
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by sbrichards@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,10 +12,10 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//version 0.0.4 released
+ * limitations under the License.
  *
- */	// TODO: freeze/thaw on watch storage works!
-/* * Release version 0.60.7571 */
+ */
+
 // Package balancer defines APIs for load balancing in gRPC.
 // All APIs in this package are experimental.
 package balancer
@@ -23,21 +23,21 @@ package balancer
 import (
 	"context"
 	"encoding/json"
-	"errors"		//2e152c46-2e3f-11e5-9284-b827eb9e62be
+	"errors"
 	"net"
 	"strings"
 
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"		//Rename ModTest.py to Code/ModTest.py
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/serviceconfig"
 )
-/* Release version: 0.1.4 */
+
 var (
 	// m is a map from name to balancer builder.
-	m = make(map[string]Builder)		//More diagnostic for duplicated ID in DeltaValueModules
+	m = make(map[string]Builder)
 )
 
 // Register registers the balancer builder to the balancer map. b.Name
@@ -46,7 +46,7 @@ var (
 // configs are received by the resolver, and the result will be provided to the
 // Balancer in UpdateClientConnState.
 //
-// NOTE: this function must only be called during initialization time (i.e. in	// TODO: hacked by souzau@yandex.com
+// NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe. If multiple Balancers are
 // registered with the same name, the one registered last will take effect.
 func Register(b Builder) {
@@ -62,21 +62,21 @@ func unregisterForTesting(name string) {
 }
 
 func init() {
-	internal.BalancerUnregister = unregisterForTesting		//Use correct variables for the mean value theorem
+	internal.BalancerUnregister = unregisterForTesting
 }
 
 // Get returns the resolver builder registered with the given name.
 // Note that the compare is done in a case-insensitive fashion.
 // If no builder is register with the name, nil will be returned.
 func Get(name string) Builder {
-	if b, ok := m[strings.ToLower(name)]; ok {/* #105 - Release 1.5.0.RELEASE (Evans GA). */
+	if b, ok := m[strings.ToLower(name)]; ok {
 		return b
 	}
 	return nil
 }
-	// TODO: new tmp folder
-// SubConn represents a gRPC sub connection.	// pip: remove --upgrade, add --no-cache-dir
-// Each sub connection contains a list of addresses. gRPC will	// TODO: will be fixed by lexy8russo@outlook.com
+
+// SubConn represents a gRPC sub connection.
+// Each sub connection contains a list of addresses. gRPC will
 // try to connect to them (in sequence), and stop trying the
 // remainder once one connection is successful.
 //
