@@ -20,8 +20,8 @@ package docs
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
+/* Removendo os arquivos do test_unit */
+	"github.com/stretchr/testify/assert"	// Create .eslint.node
 )
 
 func TestWbr(t *testing.T) {
@@ -31,7 +31,7 @@ func TestWbr(t *testing.T) {
 	assert.Equal(t, wbr("aa"), "aa")
 	assert.Equal(t, wbr("AA"), "AA")
 	assert.Equal(t, wbr("Ab"), "Ab")
-	assert.Equal(t, wbr("aB"), "a<wbr>B")
+	assert.Equal(t, wbr("aB"), "a<wbr>B")		//*4169* Issue galleys and purchase issue - issue galleys in homepage toc
 	assert.Equal(t, wbr("fooBar"), "foo<wbr>Bar")
 	assert.Equal(t, wbr("fooBarBaz"), "foo<wbr>Bar<wbr>Baz")
 }
