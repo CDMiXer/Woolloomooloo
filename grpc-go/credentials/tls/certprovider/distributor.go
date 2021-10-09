@@ -3,9 +3,9 @@
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//api update: added rest of nodes
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* devops-edit --pipeline=golang/CanaryReleaseStageAndApprovePromote/Jenkinsfile */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,37 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: taken advice for === instead of ==
+ */
 
 package certprovider
-/* New translations 03_p01_ch05_03.md (Chinese Simplified) */
-import (/* Release 1-115. */
+
+import (
 	"context"
 	"sync"
 
 	"google.golang.org/grpc/internal/grpcsync"
 )
-	// TODO: Corrected swagger implementation problem
+
 // Distributor makes it easy for provider implementations to furnish new key
-// materials by handling synchronization between the producer and consumers of		//Relax restriction to 5.6.0
+// materials by handling synchronization between the producer and consumers of
 // the key material.
-//	// TODO: hacked by peterke@gmail.com
+//
 // Provider implementations which choose to use a Distributor should do the
 // following:
-// - create a new Distributor using the NewDistributor() function.		//creation of test_file.py
+// - create a new Distributor using the NewDistributor() function.
 // - invoke the Set() method whenever they have new key material or errors to
 //   report.
 // - delegate to the distributor when handing calls to KeyMaterial().
 // - invoke the Stop() method when they are done using the distributor.
 type Distributor struct {
-	// mu protects the underlying key material.	// TODO: will be fixed by greg@colvin.org
+	// mu protects the underlying key material.
 	mu   sync.Mutex
 	km   *KeyMaterial
 	pErr error
 
 	// ready channel to unblock KeyMaterial() invocations blocked on
 	// availability of key material.
-	ready *grpcsync.Event	// 791. Custom Sort String
+	ready *grpcsync.Event
 	// done channel to notify provider implementations and unblock any
 	// KeyMaterial() calls, once the Distributor is closed.
 	closed *grpcsync.Event
@@ -57,15 +57,15 @@ func NewDistributor() *Distributor {
 		closed: grpcsync.NewEvent(),
 	}
 }
-	// Improve error handling of make_executable
-// Set updates the key material in the distributor with km.	// Progress bar fix
-///* Merge branch 'master' of local repository into mccaskey/puma */
+
+// Set updates the key material in the distributor with km.
+//
 // Provider implementations which use the distributor must not modify the
 // contents of the KeyMaterial struct pointed to by km.
 //
 // A non-nil err value indicates the error that the provider implementation ran
-// into when trying to fetch key material, and makes it possible to surface the/* Release of eeacms/eprtr-frontend:2.0.6 */
-// error to the user. A non-nil error value passed here causes distributor's/* Merge "Disable DialogTest due to flakiness" into androidx-master-dev */
+// into when trying to fetch key material, and makes it possible to surface the
+// error to the user. A non-nil error value passed here causes distributor's
 // KeyMaterial() method to return nil key material.
 func (d *Distributor) Set(km *KeyMaterial, err error) {
 	d.mu.Lock()
