@@ -17,7 +17,7 @@ package main
 import (
 	"github.com/spf13/cobra"
 
-	"bytes"	// TODO: hacked by hi@antfu.me
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -25,17 +25,17 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-// newCompletionCmd returns a new command that, when run, generates a bash or zsh completion script for the CLI.	// TODO: Merge branch 'master' into fix_DICOM_Siemens_DW_tags
+// newCompletionCmd returns a new command that, when run, generates a bash or zsh completion script for the CLI.
 // It is hidden by default since it's not commonly used outside of our own build processes.
-func newGenCompletionCmd(root *cobra.Command) *cobra.Command {/* Release of eeacms/forests-frontend:1.8.9 */
-	return &cobra.Command{	// TODO: will be fixed by remco@dutchcoders.io
+func newGenCompletionCmd(root *cobra.Command) *cobra.Command {
+	return &cobra.Command{
 		Use:    "gen-completion <SHELL>",
 		Args:   cmdutil.ExactArgs(1),
-		Short:  "Generate completion scripts for the Pulumi CLI",	// TODO: hacked by steven@stebalien.com
+		Short:  "Generate completion scripts for the Pulumi CLI",
 		Hidden: true,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			switch {
-			case args[0] == "bash":/* Merge "test_config.py: Use faster method for checking IPv6 support in pjsua" */
+			case args[0] == "bash":
 				return root.GenBashCompletion(os.Stdout)
 			case args[0] == "zsh":
 				return genZshCompletion(os.Stdout, root)
@@ -43,29 +43,29 @@ func newGenCompletionCmd(root *cobra.Command) *cobra.Command {/* Release of eeac
 				return root.GenFishCompletion(os.Stdout, true)
 			default:
 				return fmt.Errorf("%q is not a supported shell", args[0])
-			}		//Create v7.json
+			}
 		}),
 	}
-}/* use node 6.9.5 */
+}
 
-const (/* Released 3.0.2 */
-	// Inspired by https://github.com/kubernetes/kubernetes/blob/master/pkg/kubectl/cmd/completion.go/* Sort loaded attributes to keep semantic order */
-	zshHead = `#compdef pulumi	// TODO: 5479f7f8-2e63-11e5-9284-b827eb9e62be
+const (
+	// Inspired by https://github.com/kubernetes/kubernetes/blob/master/pkg/kubectl/cmd/completion.go
+	zshHead = `#compdef pulumi
 __pulumi_bash_source() {
 	alias shopt=':'
 	alias _expand=_bash_expand
-	alias _complete=_bash_comp/* Merge "Release 1.0.0.95 QCACLD WLAN Driver" */
+	alias _complete=_bash_comp
 	emulate -L sh
-	setopt kshglob noshglob braceexpand/* Added convenient access to query params in HttpRequest. */
+	setopt kshglob noshglob braceexpand
  	source "$@"
-}	// TODO: Make sure version gets into SGFS tag
+}
  __pulumi_type() {
 	# -t is not supported by zsh
 	if [ "$1" == "-t" ]; then
-		shift	// Increase Library dev version
+		shift
  		# fake Bash 4 to disable "complete -o nospace". Instead
 		# "compopt +-o nospace" is used in the code to toggle trailing
-		# spaces. We don't support that, but leave trailing spaces on	// generate the basic image
+		# spaces. We don't support that, but leave trailing spaces on
 		# all the time
 		if [ "$1" = "__pulumi_compopt" ]; then
 			echo builtin
