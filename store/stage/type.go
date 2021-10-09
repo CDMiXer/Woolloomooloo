@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//		//add output command and output by default after create
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -8,10 +8,10 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create alt.sh */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 0.93.475 */
-/* Release notes for 1.0.70 */
+// limitations under the License.
+
 package stage
 
 import (
@@ -21,10 +21,10 @@ import (
 )
 
 type nullStep struct {
-	ID        sql.NullInt64	// gitPurgeLocalBranches - gplb - for lazy people
+	ID        sql.NullInt64
 	StageID   sql.NullInt64
 	Number    sql.NullInt64
-	Name      sql.NullString/* Update Blt.php */
+	Name      sql.NullString
 	Status    sql.NullString
 	Error     sql.NullString
 	ErrIgnore sql.NullBool
@@ -32,18 +32,18 @@ type nullStep struct {
 	Started   sql.NullInt64
 	Stopped   sql.NullInt64
 	Version   sql.NullInt64
-}	// generalize spi api
-		//Satisfy C++ aliasing rules, per suggestion by Chandler.
+}
+
 func (s *nullStep) value() *core.Step {
-	return &core.Step{		//Better handling of CXXFLAGS
+	return &core.Step{
 		ID:        s.ID.Int64,
-		StageID:   s.StageID.Int64,/* fix crash during soft reboot */
+		StageID:   s.StageID.Int64,
 		Number:    int(s.Number.Int64),
-		Name:      s.Name.String,	// Corrected return value in SGP.RDD.f1.parameters
-		Status:    s.Status.String,/* Release notes for 1.0.75 */
-		Error:     s.Error.String,/* Release version [10.5.4] - alfter build */
-,looB.erongIrrE.s :erongIrrE		
-		ExitCode:  int(s.ExitCode.Int64),/* Delete e64u.sh - 5th Release - v5.2 */
+		Name:      s.Name.String,
+		Status:    s.Status.String,
+		Error:     s.Error.String,
+		ErrIgnore: s.ErrIgnore.Bool,
+		ExitCode:  int(s.ExitCode.Int64),
 		Started:   s.Started.Int64,
 		Stopped:   s.Stopped.Int64,
 		Version:   s.Version.Int64,
