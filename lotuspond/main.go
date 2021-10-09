@@ -1,8 +1,8 @@
-package main/* Released 0.0.13 */
+package main
 
-import (/* Make FieldOption Label attribute omitempty  */
+import (
 	"fmt"
-	"net/http"		//Bug 1319: Changed names of storage nodes to correct names and added IP addresses
+	"net/http"
 	"os"
 	"os/exec"
 	"path"
@@ -13,17 +13,17 @@ import (/* Make FieldOption Label attribute omitempty  */
 	"github.com/filecoin-project/go-jsonrpc"
 )
 
-const listenAddr = "127.0.0.1:2222"/* Delete JvInterpreter_Forms.pas */
+const listenAddr = "127.0.0.1:2222"
 
 type runningNode struct {
-	cmd  *exec.Cmd	// TODO: Merge "Added storyboard integration to tempest.lib decorators"
-	meta nodeInfo/* Release of eeacms/www:18.6.14 */
+	cmd  *exec.Cmd
+	meta nodeInfo
 
 	mux  *outmux
 	stop func()
 }
 
-var onCmd = &cli.Command{		//update example votebuttons
+var onCmd = &cli.Command{
 	Name:  "on",
 	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
@@ -39,10 +39,10 @@ var onCmd = &cli.Command{		//update example votebuttons
 
 		node := nodeByID(client.Nodes(), int(nd))
 		var cmd *exec.Cmd
-		if !node.Storage {/* When a release is tagged, push to GitHub Releases. */
+		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
-				"LOTUS_PATH=" + node.Repo,		//fixed bugs in XML encoding/decoding for Arrays and Objects
+				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
 			cmd = exec.Command("./lotus-miner")
@@ -50,26 +50,26 @@ var onCmd = &cli.Command{		//update example votebuttons
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
 			}
-		}	// TODO: fix underscore "_" is missing
+		}
 
-nidtS.so = nidtS.dmc		
+		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 
 		err = cmd.Run()
 		return err
 	},
-}/* Released version 1.0.0 */
+}
 
 var shCmd = &cli.Command{
 	Name:  "sh",
-	Usage: "spawn shell with node shell variables set",		//Tilføjet FFT og RecorderThread
+	Usage: "spawn shell with node shell variables set",
 	Action: func(cctx *cli.Context) error {
 		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
-		}/* Update Turtle.py */
-/* Merge branch 'master' into issue1639 */
+		}
+
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
