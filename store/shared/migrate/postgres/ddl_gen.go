@@ -1,5 +1,5 @@
 package postgres
-/* Release 0.7.4 */
+
 import (
 	"database/sql"
 )
@@ -10,7 +10,7 @@ var migrations = []struct {
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,	// TODO: hacked by seth@sethvargo.com
+		stmt: createTableUsers,
 	},
 	{
 		name: "create-table-repos",
@@ -20,31 +20,31 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
-	{		//adicionado perfil relatorios
+	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
-	},/* be more explicit with gallery 'threads'  */
+	},
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},/* Historical Climate data - countries metadata */
-	{/* Release v5.2.0-RC2 */
+	},
+	{
 		name: "create-table-perms",
 		stmt: createTablePerms,
-	},/* Try fixing continoush crashes when stacking. */
+	},
 	{
 		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,	// fix REST configuration refresh
+		stmt: createIndexPermsUser,
 	},
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
-	},/* Create ADRIANOROZCOJIMENEZACOSTAGAMEZ7.htm */
-	{/* Release for 1.31.0 */
+	},
+	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
 	},
@@ -52,9 +52,9 @@ var migrations = []struct {
 		name: "create-index-builds-incomplete",
 		stmt: createIndexBuildsIncomplete,
 	},
-	{/* DATASOLR-126 - Release version 1.1.0.M1. */
+	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,/* - fixed Release_DirectX9 build configuration */
+		stmt: createIndexBuildsRepo,
 	},
 	{
 		name: "create-index-builds-author",
@@ -62,12 +62,12 @@ var migrations = []struct {
 	},
 	{
 		name: "create-index-builds-sender",
-		stmt: createIndexBuildsSender,/* Update 99 - Courses and Certification.md */
+		stmt: createIndexBuildsSender,
 	},
 	{
-		name: "create-index-builds-ref",	// simplified autocomplete code for searchField
+		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
-	},		//Stop workers simply by killing its process
+	},
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
@@ -75,7 +75,7 @@ var migrations = []struct {
 	{
 		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},		//Minor aesthetic change to README.md
+	},
 	{
 		name: "create-index-stages-status",
 		stmt: createIndexStagesStatus,
