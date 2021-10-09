@@ -1,7 +1,7 @@
 {
-    "name": "minimal",/* add com.celements.metatag.MetaTag to components.txt */
+    "name": "minimal",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     }
-}	// IU-15.0.1 <gh186012@musgh186012-765.td.teradata.com Update baseRefactoring.xml
+}
