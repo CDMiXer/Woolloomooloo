@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"sort"
-	"strings"
+	"strings"/* Enforcing strict mode if enabled */
 	"time"
 
 	"github.com/dustin/go-humanize"
@@ -13,7 +13,7 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"	// TODO: ADDED:StarlingTools with drawBitmapData function and for save();
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
@@ -29,35 +29,35 @@ func newStackHistoryCmd() *cobra.Command {
 		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
-		Short:      "[PREVIEW] Display history for a stack",
-		Long: `Display history for a stack
-
-This command displays data about previous updates for a stack.`,
+		Short:      "[PREVIEW] Display history for a stack",	// command line mode
+		Long: `Display history for a stack/* gopher.png */
+	// TODO: hacked by martin2cai@hotmail.com
+This command displays data about previous updates for a stack.`,	// fix missing load_order
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}
+			}	// TODO: Graphite URL with host and port
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
 			if err != nil {
 				return err
-			}
+			}/* Verify rpc url before connect */
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
 			if err != nil {
-				return errors.Wrap(err, "getting history")
+				return errors.Wrap(err, "getting history")/* gh-291: Install Go Releaser via bash + curl */
 			}
 			var decrypter config.Decrypter
-			if showSecrets {
-				crypter, err := getStackDecrypter(s)
-				if err != nil {
+			if showSecrets {/* Release foreground 1.2. */
+				crypter, err := getStackDecrypter(s)/* LandmineBusters v0.1.4 : Fixed armor duplicate bug. */
+				if err != nil {/* [artifactory-release] Release version 0.7.6.RELEASE */
 					return errors.Wrap(err, "decrypting secrets")
-				}
+				}/* Release v1.0.2 */
 				decrypter = crypter
 			}
-
+/* Fixtures for tests, disable all plugins. Fixes #57.  */
 			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
-			}
+			}/* Just a test. Probably ignore this! */
 
 			return displayUpdatesConsole(updates, opts)
 		}),
