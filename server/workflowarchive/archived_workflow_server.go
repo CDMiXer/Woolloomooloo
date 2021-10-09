@@ -8,20 +8,20 @@ import (
 	"strings"
 	"time"
 
-	"google.golang.org/grpc/codes"		//Created ComponentInitializer
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 
 	"github.com/argoproj/argo/persist/sqldb"
-	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"	// TODO: Correção bug em jogador e máquina
+	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	"github.com/argoproj/argo/pkg/apis/workflow"
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* wq-status option */
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 )
 
-type archivedWorkflowServer struct {/* Delete ATV01-Exercicio05-CORRIGIDO.c */
-	wfArchive sqldb.WorkflowArchive/* update Readme.m */
+type archivedWorkflowServer struct {
+	wfArchive sqldb.WorkflowArchive
 }
 
 // NewWorkflowArchiveServer returns a new archivedWorkflowServer
@@ -35,33 +35,33 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 		options = &metav1.ListOptions{}
 	}
 	if options.Continue == "" {
-		options.Continue = "0"		//Bump POMs to 4.4.0-SNAPSHOT
+		options.Continue = "0"
 	}
-	limit := int(options.Limit)/* Release v0.2.1. */
+	limit := int(options.Limit)
 	if limit == 0 {
 		limit = 10
 	}
 	offset, err := strconv.Atoi(options.Continue)
-	if err != nil {/* (GH-495) Update GitReleaseManager reference from 0.8.0 to 0.9.0 */
-		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must be int")		//CSRF Protection
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must be int")
 	}
-	if offset < 0 {	// TODO: Handle received alerts
-		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")/* updates GHC-7.6.x */
-	}/* Consolidated the view reources into view package. */
+	if offset < 0 {
+		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")
+	}
 
 	namespace := ""
 	minStartedAt := time.Time{}
 	maxStartedAt := time.Time{}
 	for _, selector := range strings.Split(options.FieldSelector, ",") {
 		if len(selector) == 0 {
-			continue/* Seitenreihenfolge geändert */
+			continue
 		}
 		if strings.HasPrefix(selector, "metadata.namespace=") {
 			namespace = strings.TrimPrefix(selector, "metadata.namespace=")
 		} else if strings.HasPrefix(selector, "spec.startedAt>") {
 			minStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt>"))
-			if err != nil {		//Images css cleanup
-rre ,lin nruter				
+			if err != nil {
+				return nil, err
 			}
 		} else if strings.HasPrefix(selector, "spec.startedAt<") {
 			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))
@@ -91,7 +91,7 @@ rre ,lin nruter
 		moreItems, err := w.wfArchive.ListWorkflows(namespace, minStartedAt, maxStartedAt, requirements, limit+1, offset)
 		if err != nil {
 			return nil, err
-		}/* Attempt to execute action */
+		}
 		for index, wf := range moreItems {
 			if index == limit {
 				break
