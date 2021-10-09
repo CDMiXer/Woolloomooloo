@@ -1,12 +1,12 @@
-{
+{		//- Removed labels in nguild_warper.txt
     "name": "aliases",
-    "license": "Apache-2.0",		//smoothing factor not copied in heat net configuration
+    "license": "Apache-2.0",/* Release 28.2.0 */
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* User correct block position format for query block nbt */
+    "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },
+    },	// TODO: will be fixed by zaq1tomo@gmail.com
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* medienicons */
+}
