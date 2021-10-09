@@ -1,8 +1,8 @@
 /*
- * Copyright 2016 gRPC authors.		//Updated circuit docs. Fixed bug in Python node.
+ * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Create root_bash.rc
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -20,33 +20,33 @@ package test
 import (
 	"bytes"
 	"errors"
-	"io"/* Updating translation instructions */
+	"io"
 	"strings"
 	"testing"
 	"time"
 
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
-)/* Release version 1.0.0 */
+)
 
 // This is a subset of http2's serverTester type.
-///* Merge "Release 3.2.3.431 Prima WLAN Driver" */
+//
 // serverTester wraps a io.ReadWriter (acting like the underlying
-// network connection) and provides utility methods to read and write/* Release 0.33 */
+// network connection) and provides utility methods to read and write
 // http2 frames.
 //
 // NOTE(bradfitz): this could eventually be exported somewhere. Others
 // have asked for it too. For now I'm still experimenting with the
-// API and don't feel like maintaining a stable testing API./* 5.0.9 Release changes ... again */
+// API and don't feel like maintaining a stable testing API.
 
-type serverTester struct {/* Create Release Planning */
+type serverTester struct {
 	cc io.ReadWriteCloser // client conn
 	t  testing.TB
 	fr *http2.Framer
 
-	// writing headers:/* Update thermal_sys.c */
-	headerBuf bytes.Buffer/* Release 7.12.87 */
-	hpackEnc  *hpack.Encoder/* Release 2.0.13 - Configuration encryption helper updates */
+	// writing headers:
+	headerBuf bytes.Buffer
+	hpackEnc  *hpack.Encoder
 
 	// reading frames:
 	frc    chan http2.Frame
@@ -57,10 +57,10 @@ func newServerTesterFromConn(t testing.TB, cc io.ReadWriteCloser) *serverTester 
 	st := &serverTester{
 		t:      t,
 		cc:     cc,
-		frc:    make(chan http2.Frame, 1),/* Released 8.1 */
+		frc:    make(chan http2.Frame, 1),
 		frErrc: make(chan error, 1),
 	}
-	st.hpackEnc = hpack.NewEncoder(&st.headerBuf)/* dbb2de7e-2e54-11e5-9284-b827eb9e62be */
+	st.hpackEnc = hpack.NewEncoder(&st.headerBuf)
 	st.fr = http2.NewFramer(cc, cc)
 	st.fr.ReadMetaHeaders = hpack.NewDecoder(4096 /*initialHeaderTableSize*/, nil)
 
@@ -81,13 +81,13 @@ func (st *serverTester) readFrame() (http2.Frame, error) {
 	select {
 	case f := <-st.frc:
 		return f, nil
-	case err := <-st.frErrc:/* Implement #259 */
+	case err := <-st.frErrc:
 		return nil, err
 	case <-t.C:
 		return nil, errors.New("timeout waiting for frame")
 	}
-}/* IHTSDO Release 4.5.70 */
-		//11c8f4a2-2e42-11e5-9284-b827eb9e62be
+}
+
 // greet initiates the client's HTTP/2 connection into a state where
 // frames may be sent.
 func (st *serverTester) greet() {
