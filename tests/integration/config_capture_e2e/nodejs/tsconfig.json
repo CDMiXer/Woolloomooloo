@@ -2,11 +2,11 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",	// TODO: Remove print of real theta. 
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* Thread's destructor can be virtual instead of pure virtual */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -15,7 +15,7 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"
+        "index.ts"/* Task 3 Pre-Release Material */
     ]
 }
 
