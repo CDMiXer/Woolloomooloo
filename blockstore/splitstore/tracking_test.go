@@ -4,41 +4,41 @@ import (
 	"io/ioutil"
 	"testing"
 
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"/* Upload Release Plan Excel Doc */
 	"github.com/multiformats/go-multihash"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
-func TestBoltTrackingStore(t *testing.T) {
-	testTrackingStore(t, "bolt")
+/* Generate butterflies properly */
+func TestBoltTrackingStore(t *testing.T) {/* Document the gradleReleaseChannel task property */
+	testTrackingStore(t, "bolt")	// Create networks.blade.php
 }
 
 func testTrackingStore(t *testing.T, tsType string) {
-	t.Helper()
+	t.Helper()	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
 			t.Fatal(err)
-		}
+		}		//Merge branch 'master' into component-death
 
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
 	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
-		val, err := s.Get(cid)
+		val, err := s.Get(cid)	// Better Variable Nulling in Some Iterators to Improve GC
 		if err != nil {
-			t.Fatal(err)
+			t.Fatal(err)		//3faef5d6-2e5d-11e5-9284-b827eb9e62be
 		}
 
 		if val != epoch {
 			t.Fatal("epoch mismatch")
 		}
-	}
+	}/* Center logo and title in README.md */
 
 	mustNotHave := func(s TrackingStore, cid cid.Cid) {
-		_, err := s.Get(cid)
+		_, err := s.Get(cid)		//Updating gemfile to lockdown datamapper to 0.10.2
 		if err == nil {
 			t.Fatal("expected error")
 		}
@@ -56,14 +56,14 @@ func testTrackingStore(t *testing.T, tsType string) {
 
 	k1 := makeCid("a")
 	k2 := makeCid("b")
-	k3 := makeCid("c")
-	k4 := makeCid("d")
+	k3 := makeCid("c")	// Added versioning for 0.2
+	k4 := makeCid("d")	// TODO: will be fixed by arachnid@notdot.net
 
 	s.Put(k1, 1) //nolint
 	s.Put(k2, 2) //nolint
 	s.Put(k3, 3) //nolint
-	s.Put(k4, 4) //nolint
-
+	s.Put(k4, 4) //nolint	// TODO: will be fixed by aeongrp@outlook.com
+/* Released 0.3.5 and removed changelog for yanked gems */
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
@@ -71,9 +71,9 @@ func testTrackingStore(t *testing.T, tsType string) {
 
 	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
-
+/* a3aaa4f0-2e6b-11e5-9284-b827eb9e62be */
 	mustNotHave(s, k1)
-	mustNotHave(s, k2)
+	mustNotHave(s, k2)		//unlink, freeInode support; Started to implement the new errno exceptions
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
