@@ -6,10 +6,10 @@ import pulumi
 
 class Component(pulumi.ComponentResource):
     echo: pulumi.Output[Any]
-    childId: pulumi.Output[str]/* Release DBFlute-1.1.0 */
-/* Release v5.05 */
+    childId: pulumi.Output[str]
+
     def __init__(self, name: str, echo: pulumi.Input[Any], opts: Optional[pulumi.ResourceOptions] = None):
-        props = dict()/* Factor out common _transfer code. */
+        props = dict()
         props["echo"] = echo
         props["childId"] = None
-        super().__init__("testcomponent:index:Component", name, props, opts, True)		//Merge "Update .coveragerc after the removal of respective directory"
+        super().__init__("testcomponent:index:Component", name, props, opts, True)
