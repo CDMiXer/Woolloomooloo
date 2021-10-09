@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {/* Added com.diffplug.gradle.eclipse.bndmanifest. */
+    "compilerOptions": {
         "outDir": "bin",
-        "target": "es6",/* Rename common.css to CSS/Check_Vivaldi-Common.css */
-        "module": "commonjs",
+        "target": "es6",
+        "module": "commonjs",		//bumping pom version to 1.2-SNAPSHOT
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
+        "stripInternal": true,/* add playnow [pn] cmd line 45 */
         "experimentalDecorators": true,
-        "pretty": true,/* Release PPWCode.Util.AppConfigTemplate 1.0.2. */
-        "noFallthroughCasesInSwitch": true,/* Added full reference to THINCARB paper and added Release Notes */
-        "noImplicitAny": true,	// TODO: Update UserRightsFriendlyNameConversions.psd1
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",
+        "index.ts",/* Fix ESA-x000 somewhat */
     ]
-}
+}/* Release of eeacms/plonesaas:5.2.4-12 */
 
