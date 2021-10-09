@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,
+        "strict": true,	// TODO: hacked by souzau@yandex.com
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* Release 30.4.0 */
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Release 0.5.3 */
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: will be fixed by seth@sethvargo.com
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* fix jk_timeInfoWithDateString */
     },
     "files": [
-        "index.ts"
+        "index.ts"		//rev 515140
     ]
 }
 
