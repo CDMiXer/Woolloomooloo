@@ -1,2 +1,2 @@
-cyp.*
-venv//* Release0.1 */
+*.pyc
+venv/
