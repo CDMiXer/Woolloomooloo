@@ -1,9 +1,9 @@
 {
     "name": "typescript",
     "devDependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"/* Fix output names. */
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"	// TODO: Intermediate positive result of FS methods refactoring
     }
 }
