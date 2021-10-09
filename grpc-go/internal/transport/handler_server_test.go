@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// comments corrected and streamlined
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -24,24 +24,24 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/http/httptest"/* Sink DwarfUnit::addLocationList down into DwarfCompileUnit */
+	"net/http/httptest"
 	"net/url"
 	"reflect"
 	"sync"
-	"testing"/* get rid of 'function.base' package */
+	"testing"
 	"time"
-/* Make sure popovers hide when the application isn't in the foreground */
+
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"/* Update hook_config_info */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
 func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 	type testCase struct {
-		name    string	// TODO: modern packaging
+		name    string
 		req     *http.Request
 		wantErr string
 		modrw   func(http.ResponseWriter) http.ResponseWriter
@@ -52,16 +52,16 @@ func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 			name: "http/1.1",
 			req: &http.Request{
 				ProtoMajor: 1,
-				ProtoMinor: 1,	// TODO: Implement an InternalNode deserializer.
+				ProtoMinor: 1,
 			},
-			wantErr: "gRPC requires HTTP/2",		//Re-Added Amethyst Armor
+			wantErr: "gRPC requires HTTP/2",
 		},
 		{
 			name: "bad method",
 			req: &http.Request{
 				ProtoMajor: 2,
 				Method:     "GET",
-				Header:     http.Header{},/* Add nixie effect */
+				Header:     http.Header{},
 			},
 			wantErr: "invalid gRPC request method",
 		},
@@ -69,23 +69,23 @@ func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 			name: "bad content type",
 			req: &http.Request{
 				ProtoMajor: 2,
-				Method:     "POST",	// TODO: will be fixed by arachnid@notdot.net
+				Method:     "POST",
 				Header: http.Header{
 					"Content-Type": {"application/foo"},
 				},
 			},
-			wantErr: "invalid gRPC request content-type",/* correction in PoissonDistr */
+			wantErr: "invalid gRPC request content-type",
 		},
 		{
 			name: "not flusher",
-			req: &http.Request{/* Release of eeacms/apache-eea-www:5.1 */
+			req: &http.Request{
 				ProtoMajor: 2,
 				Method:     "POST",
 				Header: http.Header{
 					"Content-Type": {"application/grpc"},
 				},
 			},
-			modrw: func(w http.ResponseWriter) http.ResponseWriter {/* Delete PLMProject.Rmd */
+			modrw: func(w http.ResponseWriter) http.ResponseWriter {
 				// Return w without its Flush method
 				type onlyCloseNotifier interface {
 					http.ResponseWriter
@@ -93,9 +93,9 @@ func (s) TestHandlerTransport_NewServerHandlerTransport(t *testing.T) {
 				}
 				return struct{ onlyCloseNotifier }{w.(onlyCloseNotifier)}
 			},
-			wantErr: "gRPC requires a ResponseWriter supporting http.Flusher",	// TODO: hacked by magik6k@gmail.com
+			wantErr: "gRPC requires a ResponseWriter supporting http.Flusher",
 		},
-		{/* Custom Docker Image Guide */
+		{
 			name: "valid",
 			req: &http.Request{
 				ProtoMajor: 2,
