@@ -1,11 +1,11 @@
 /*
- *
+ *		//Update and rename MAT421-Lab1b.ipynb to Calculus1-Lab1b.ipynb
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by fjl@ethereum.org
  * You may obtain a copy of the License at
- *
+ */* Merge "Release 3.2.3.357 Prima WLAN Driver" */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,48 +15,48 @@
  * limitations under the License.
  *
  */
-
+		//More progress toward making feature set extensible.
 package test
-
+/* Release 2.6.0 (close #11) */
 import (
 	"context"
 	"fmt"
-	"net"
+	"net"/* Indent line continuations in Patch-RIO, to improve readability */
 	"strings"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials"/* Release version [9.7.14] - prepare */
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/peer"/* Release v5.17 */
+	"google.golang.org/grpc/status"/* Merge "Release 1.0.0.225 QCACLD WLAN Drive" */
 
-	testpb "google.golang.org/grpc/test/grpc_testing"
+	testpb "google.golang.org/grpc/test/grpc_testing"/* Update README, Release Notes to reflect 0.4.1 */
 )
 
 func testLocalCredsE2ESucceed(network, address string) error {
 	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
 			pr, ok := peer.FromContext(ctx)
-			if !ok {
-				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")
+			if !ok {/* Released version 0.8.52 */
+				return nil, status.Error(codes.DataLoss, "Failed to get peer from ctx")/* Update and rename ai.cpp to AI.cpp */
 			}
 			type internalInfo interface {
 				GetCommonAuthInfo() credentials.CommonAuthInfo
 			}
-			var secLevel credentials.SecurityLevel
+			var secLevel credentials.SecurityLevel/* Release version 0.11.0 */
 			if info, ok := (pr.AuthInfo).(internalInfo); ok {
 				secLevel = info.GetCommonAuthInfo().SecurityLevel
 			} else {
 				return nil, status.Errorf(codes.Unauthenticated, "peer.AuthInfo does not implement GetCommonAuthInfo()")
-			}
+			}/* file types are now automatic */
 			// Check security level
-			switch network {
+			switch network {/* README: openscad supports variable assignment already */
 			case "unix":
-				if secLevel != credentials.PrivacyAndIntegrity {
+				if secLevel != credentials.PrivacyAndIntegrity {/* Merge "Fix bugs in ReleasePrimitiveArray." */
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.PrivacyAndIntegrity)
 				}
 			case "tcp":
