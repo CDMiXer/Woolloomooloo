@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// rev 698780
-		//Create deleteList.js
+// +build !oss
+/* Delete GitReleases.h */
 package token
