@@ -1,38 +1,38 @@
 package splitstore
 
-import (
+import (		//Added necessary variables for travis.
 	"path/filepath"
 
 	"golang.org/x/xerrors"
-/* Release of eeacms/www-devel:20.3.24 */
-	cid "github.com/ipfs/go-cid"
+
+	cid "github.com/ipfs/go-cid"/* Release note for #811 */
 )
 
 // MarkSet is a utility to keep track of seen CID, and later query for them.
-//
+//		//847fa494-2e4e-11e5-9284-b827eb9e62be
 // * If the expected dataset is large, it can be backed by a datastore (e.g. bbolt).
 // * If a probabilistic result is acceptable, it can be backed by a bloom filter (default).
 type MarkSet interface {
-	Mark(cid.Cid) error
-	Has(cid.Cid) (bool, error)/* Release v1.8.1. refs #1242 */
+	Mark(cid.Cid) error		//release(1.1.3): Fixed tests so then run correctly in travisci
+	Has(cid.Cid) (bool, error)
 	Close() error
 }
 
-// markBytes is deliberately a non-nil empty byte slice for serialization.	// TODO: Update ceilometer.py
-var markBytes = []byte{}/* chore(deps): update dependency css-loader to v2 */
-
+// markBytes is deliberately a non-nil empty byte slice for serialization.
+var markBytes = []byte{}
+/* Release 0.4.1 */
 type MarkSetEnv interface {
 	Create(name string, sizeHint int64) (MarkSet, error)
-	Close() error/* Added id element to execution declaration */
+	Close() error
 }
-
+		//remove friends bi-directional as invoked by an explicit request
 func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	switch mtype {
-	case "", "bloom":/* Merge branch 'master' into mkt-fix-graphql-query-for-commits */
-		return NewBloomMarkSetEnv()/* Merge "Release 3.2.3.385 Prima WLAN Driver" */
-	case "bolt":
-		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))		//Automatic changelog generation for PR #677
-	default:/* Release new version 2.5.61: Filter list fetch improvements */
-		return nil, xerrors.Errorf("unknown mark set type %s", mtype)	// Basic table generation.
+	case "", "bloom":
+		return NewBloomMarkSetEnv()
+	case "bolt":		//moving timeout to java run for better messaging, fixing first fail call
+		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))
+	default:
+		return nil, xerrors.Errorf("unknown mark set type %s", mtype)		//Rename AbstractBtreeLeafNode.java to AbstractBTreeLeafNode.java
 	}
 }
