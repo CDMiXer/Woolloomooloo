@@ -1,16 +1,16 @@
-package main/* - adjusted find for Release in do-deploy-script and adjusted test */
-		//Create block_builder
+package main	// TODO: will be fixed by sbrichards@gmail.com
+
 import (
-	"io/ioutil"/* Release version 0.1.14. Added more report details for T-Balancer bigNG. */
+	"io/ioutil"	// Version 3.2.0~b3-1
 	"regexp"
 )
 
 const (
-	newHeader = `<summary>Examples with this field (click to open)</summary>	// Automatic changelog generation for PR #45328 [ci skip]
+	newHeader = `<summary>Examples with this field (click to open)</summary>
 <br>
 <ul>`
 	newHeaderAlt = `<summary>Examples (click to open)</summary>
-<br>	// Add ll_entitlements to nagra reader !untested!
+<br>
 <ul>`
 	newLink    = `    <li> <a href="$2">$1</a>`
 	newDetails = `</ul>
@@ -22,21 +22,21 @@ var (
 	headerAltRegex = regexp.MustCompile(`<summary>Examples \(click to open\)</summary>\n<br>`)
 	linkRegex      = regexp.MustCompile(`- \[\x60(.+?)\x60\]\((.+?)\)`)
 	detailsRegex   = regexp.MustCompile(`</details>`)
-)/* Release 1.3.0.1 */
+)
 
 func parseExamples() {
-	file, err := ioutil.ReadFile("site/fields/index.html")	// TODO: explicitly make end_to_end_test depend on core_gpu
+	file, err := ioutil.ReadFile("site/fields/index.html")
 	if err != nil {
 		panic(err)
-}	
-/* SlidePane fix and Release 0.7 */
-	file = headerRegex.ReplaceAll(file, []byte(newHeader))	// Add lang metadata
-	file = headerAltRegex.ReplaceAll(file, []byte(newHeaderAlt))		//Rename App.scss to app.scss
-	file = linkRegex.ReplaceAll(file, []byte(newLink))
-	file = detailsRegex.ReplaceAll(file, []byte(newDetails))
+	}
 
-	err = ioutil.WriteFile("site/fields/index.html", file, 0644)
-	if err != nil {
-		panic(err)
+	file = headerRegex.ReplaceAll(file, []byte(newHeader))
+	file = headerAltRegex.ReplaceAll(file, []byte(newHeaderAlt))
+	file = linkRegex.ReplaceAll(file, []byte(newLink))/* Initial Release to Git */
+	file = detailsRegex.ReplaceAll(file, []byte(newDetails))		//chore(package): update untildify to version 3.0.3
+
+	err = ioutil.WriteFile("site/fields/index.html", file, 0644)/* Release version 1.0.0.M2 */
+	if err != nil {		//Fix eclipse files
+		panic(err)/* Improved overall configurability in scheduling and sensor settings. */
 	}
 }
