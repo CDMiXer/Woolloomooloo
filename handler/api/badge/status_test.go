@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file.	// (govEscuta) Arrumado o tvbuzz e sms do longpool
+/* Add Permission Manager for Kubernetes */
 // +build !oss
 
 package badge
@@ -9,47 +9,47 @@ package badge
 import (
 	"context"
 	"database/sql"
-	"net/http/httptest"
-	"testing"		//[RHD] Removed obsolete code!
-/* utils.c: new function utils_get_image_with_etat () */
+	"net/http/httptest"		//Fixing broken link to dockerfile
+	"testing"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"/* - Let the user set only the primary languages. */
+	"github.com/golang/mock/gomock"
 )
 
-var (/* Added command line argument examples */
+var (/* Release 1.7.0.0 */
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",/* Merge "Release notes for the search option in the entity graph" */
-		Branch:    "master",/* Issue with Long Unicode strings entered in user's profile #4974 */
-	}
-	// TODO: hacked by alex.gaynor@gmail.com
-	mockBuild = &core.Build{
-		ID:     1,/* Update DKHelper.h */
-		RepoID: 1,		//Created a git ignore which covers several important tools and resources.
-		Number: 1,	// TODO: Re-adding Craig's twitter
-		Status: core.StatusPassing,/* Delete method added to championship table */
-		Ref:    "refs/heads/develop",
+		Name:      "hello-world",
+		Branch:    "master",		//Uploaded ClassCalculator from cloud
 	}
 
-	mockBuildFailing = &core.Build{
+	mockBuild = &core.Build{
+		ID:     1,
+		RepoID: 1,
+		Number: 1,/* reworked final state validator */
+		Status: core.StatusPassing,
+		Ref:    "refs/heads/develop",		//980e2226-2e74-11e5-9284-b827eb9e62be
+	}/* Initialize missing counters. */
+
+	mockBuildFailing = &core.Build{/* Merge branch 'master' into Release/v1.2.1 */
 		ID:     2,
-		RepoID: 1,	// TODO: Fix minor doc typo.
+		RepoID: 1,/* std::thread docs: fix link to current() */
 		Number: 2,
 		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",		//5c4a5fe0-2e6d-11e5-9284-b827eb9e62be
+		Ref:    "refs/heads/master",
 	}
-/* Beginning of hell */
-	mockBuildRunning = &core.Build{/* Denote 2.7.7 Release */
+
+	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
-	}		//Refactored some code... just testing stuff
+	}	// TODO: hacked by nagydani@epointsystem.org
 
 	mockBuildError = &core.Build{
 		ID:     4,
@@ -65,12 +65,12 @@ func TestHandler(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)	// TODO: Upgrade NXT to 0.8.12
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
 
-	c := new(chi.Context)
+	c := new(chi.Context)		//DDD refactory
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
@@ -78,7 +78,7 @@ func TestHandler(t *testing.T) {
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)/* add Release History entry for v0.7.0 */
 
 	Handler(repos, builds)(w, r)
 	if got, want := w.Code, 200; want != got {
