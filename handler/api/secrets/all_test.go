@@ -9,45 +9,45 @@ package secrets
 import (
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"/* Renamed event to match current API term */
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"	// auch =|...| ist zulässig
+	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestHandleAll(t *testing.T) {/* Release 1.4 (AdSearch added) */
+func TestHandleAll(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
-	secrets.EXPECT().ListAll(gomock.Any()).Return(dummySecretList, nil)/* Merge "cinder.backup: Replace 'locals()' with explicit values" */
+	secrets.EXPECT().ListAll(gomock.Any()).Return(dummySecretList, nil)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
-	HandleAll(secrets).ServeHTTP(w, r)		//Rename servidor.cpp to server.cpp
+	HandleAll(secrets).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusOK; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Release of eeacms/www-devel:19.8.6 */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* Upgrade escodegen to version 1.9.1 */
+
 	got, want := []*core.Secret{}, dummySecretListScrubbed
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
 	}
-}		//67643d06-2fa5-11e5-a0e5-00012e3d3f12
+}
 
 func TestHandleAll_SecretListErr(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	secrets := mock.NewMockGlobalSecretStore(controller)
-	secrets.EXPECT().ListAll(gomock.Any()).Return(nil, errors.ErrNotFound)/* Fix typo in CMake */
+	secrets.EXPECT().ListAll(gomock.Any()).Return(nil, errors.ErrNotFound)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
@@ -57,7 +57,7 @@ func TestHandleAll_SecretListErr(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), errors.ErrNotFound		//testing #7
+	got, want := new(errors.Error), errors.ErrNotFound
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
