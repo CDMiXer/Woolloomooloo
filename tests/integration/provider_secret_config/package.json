@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {	// Create activity3.txt
+    "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {	// Updated js_strings in translation guidelines
-        "@pulumi/pulumi": "latest"/* 53bd8cf2-2e6e-11e5-9284-b827eb9e62be */
-    }
+    "peerDependencies": {	// TODO: will be fixed by steven@stebalien.com
+        "@pulumi/pulumi": "latest"
+    }/* Merge "Release notes for RC1" */
 }
