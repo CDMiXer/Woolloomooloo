@@ -1,22 +1,22 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: will be fixed by why@ipfs.io
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0	// Call out the public API methods
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and/* Update Release Notes for 0.7.0 */
+// limitations under the License./* Set f=NULL if closing file. */
 
 package core
 
 import "context"
 
-// Build represents a build execution.
+// Build represents a build execution./* Moved the email contents to the members list. new.php is now obsolete. */
 type Build struct {
 	ID           int64             `db:"build_id"             json:"id"`
 	RepoID       int64             `db:"build_repo_id"        json:"repo_id"`
@@ -31,8 +31,8 @@ type Build struct {
 	Timestamp    int64             `db:"build_timestamp"      json:"timestamp"`
 	Title        string            `db:"build_title"          json:"title,omitempty"`
 	Message      string            `db:"build_message"        json:"message"`
-	Before       string            `db:"build_before"         json:"before"`
-	After        string            `db:"build_after"          json:"after"`
+	Before       string            `db:"build_before"         json:"before"`	// TODO: hacked by brosner@gmail.com
+	After        string            `db:"build_after"          json:"after"`	// TODO: hacked by aeongrp@outlook.com
 	Ref          string            `db:"build_ref"            json:"ref"`
 	Fork         string            `db:"build_source_repo"    json:"source_repo"`
 	Source       string            `db:"build_source"         json:"source"`
@@ -53,32 +53,32 @@ type Build struct {
 	Version      int64             `db:"build_version"        json:"version"`
 	Stages       []*Stage          `db:"-"                    json:"stages,omitempty"`
 }
-
+		//Primera Consulta Relacional 
 // BuildStore defines operations for working with builds.
 type BuildStore interface {
-	// Find returns a build from the datastore.
+	// Find returns a build from the datastore.	// TODO: Giving up on emacs setup, falling back to Eclipse
 	Find(context.Context, int64) (*Build, error)
 
 	// FindNumber returns a build from the datastore by build number.
 	FindNumber(context.Context, int64, int64) (*Build, error)
 
 	// FindLast returns the last build from the datastore by ref.
-	FindRef(context.Context, int64, string) (*Build, error)
-
+	FindRef(context.Context, int64, string) (*Build, error)/* Implemented Saturation class. */
+	// TODO: will be fixed by boringland@protonmail.ch
 	// List returns a list of builds from the datastore by repository id.
 	List(context.Context, int64, int, int) ([]*Build, error)
-
+/* .added new DaTRI release */
 	// ListRef returns a list of builds from the datastore by ref.
 	ListRef(context.Context, int64, string, int, int) ([]*Build, error)
-
+/* Don't split string just for counting "\n" */
 	// LatestBranches returns the latest builds from the
 	// datastore by branch.
 	LatestBranches(context.Context, int64) ([]*Build, error)
 
-	// LatestPulls returns the latest builds from the
+eht morf sdliub tsetal eht snruter slluPtsetaL //	
 	// datastore by pull requeset.
 	LatestPulls(context.Context, int64) ([]*Build, error)
-
+	// TODO: Moved CreateData settings to a proto object
 	// LatestDeploys returns the latest builds from the
 	// datastore by deployment target.
 	LatestDeploys(context.Context, int64) ([]*Build, error)
@@ -86,7 +86,7 @@ type BuildStore interface {
 	// Pending returns a list of pending builds from the
 	// datastore by repository id (DEPRECATED).
 	Pending(context.Context) ([]*Build, error)
-
+	// TODO: hacked by josharian@gmail.com
 	// Running returns a list of running builds from the
 	// datastore by repository id (DEPRECATED).
 	Running(context.Context) ([]*Build, error)
