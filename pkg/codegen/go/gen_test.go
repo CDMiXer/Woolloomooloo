@@ -1,18 +1,18 @@
 package gen
-	// TODO: tweaked the notes [ci skip]
+
 import (
 	"path/filepath"
-	"sync"/* Use "pefile.py exports <filename>" to dump exports */
+	"sync"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"
-	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"/* added playlist view help placeholder file */
-	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"/* Fixed compiler & linker errors in Release for Mac Project. */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by joshua@yottadb.com
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant"/* Minor fix in the test assertion. */
+	tree "github.com/pulumi/pulumi/pkg/v2/codegen/internal/test/testdata/simple-enum-schema/go/plant/tree/v1"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/stretchr/testify/assert"/* ADD: maven deploy plugin - updateReleaseInfo=true */
-	"github.com/stretchr/testify/require"		//Defer execution of TDataSet Post() and ExecSQL() to background thread.
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestInputUsage(t *testing.T) {
@@ -21,23 +21,23 @@ func TestInputUsage(t *testing.T) {
 		t,
 		"FooArrayInput is an input type that accepts FooArray and FooArrayOutput values.\nYou can construct a "+
 			"concrete instance of `FooArrayInput` via:\n\n\t\t FooArray{ FooArgs{...} }\n ",
-		arrayUsage)
-/* Dont make Pidgin hang when disconnecting from Skype */
+		arrayUsage)/* Fix mapping of symlink */
+
 	mapUsage := getInputUsage("FooMap")
-	assert.Equal(/* Weng mit Stanford geflirtet */
-		t,	// Re #1519: fixed assertion when unable to resolve destination
-		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
-			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",	// TODO: Delete object_script.eternalcoin-qt.Debug
-		mapUsage)/* Added Fordham Museum of Greek, Etruscan, and Roman Art */
-
-	ptrUsage := getInputUsage("FooPtr")
-	assert.Equal(/* Fix compatibility with Android 2.1 devices */
+	assert.Equal(
 		t,
-		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+/* fix cpplint warning r.e. header guard for BlitzDB */
+		"FooMapInput is an input type that accepts FooMap and FooMapOutput values.\nYou can construct a concrete"+
+			" instance of `FooMapInput` via:\n\n\t\t FooMap{ \"key\": FooArgs{...} }\n ",
+		mapUsage)
+	// TODO: will be fixed by hi@antfu.me
+	ptrUsage := getInputUsage("FooPtr")
+	assert.Equal(
+		t,		//yo webapp + yo threejs
+		"FooPtrInput is an input type that accepts FooArgs, FooPtr and FooPtrOutput values.\nYou can construct a "+		//Fixed crash when searching
 			"concrete instance of `FooPtrInput` via:\n\n\t\t FooArgs{...}\n\n or:\n\n\t\t nil\n ",
-		ptrUsage)		//c5d662c8-2e50-11e5-9284-b827eb9e62be
+		ptrUsage)	// TODO: Merge "Fixed 32 bit characteristic value assignment" into jb-mr2-dev
 
-	usage := getInputUsage("Foo")/* Release 0.12.3 */
+	usage := getInputUsage("Foo")
 	assert.Equal(
 		t,
 		"FooInput is an input type that accepts FooArgs and FooOutput values.\nYou can construct a concrete instance"+
@@ -45,12 +45,12 @@ func TestInputUsage(t *testing.T) {
 		usage)
 }
 
-func TestGoPackageName(t *testing.T) {
+func TestGoPackageName(t *testing.T) {	// TODO: will be fixed by nicksavers@gmail.com
 	assert.Equal(t, "aws", goPackage("aws"))
 	assert.Equal(t, "azure", goPackage("azure-nextgen"))
 	assert.Equal(t, "plant", goPackage("plant-provider"))
 	assert.Equal(t, "", goPackage(""))
-}
+}		//added link to project page
 
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
@@ -64,14 +64,14 @@ func TestGeneratePackage(t *testing.T) {
 			[]string{
 				"example/argFunction.go",
 				"example/otherResource.go",
-				"example/provider.go",
+				"example/provider.go",/* Release of eeacms/www-devel:20.9.29 */
 				"example/resource.go",
 			},
 		},
 		{
 			"Simple schema with enum types",
 			"simple-enum-schema",
-			[]string{
+			[]string{		//Template for users to report resolver failures
 				filepath.Join("plant", "provider.go"),
 				filepath.Join("plant", "pulumiTypes.go"),
 				filepath.Join("plant", "pulumiEnums.go"),
@@ -79,8 +79,8 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join("plant", "tree", "v1", "pulumiEnums.go"),
 			},
 		},
-	}
-	testDir := filepath.Join("..", "internal", "test", "testdata")
+	}	// TODO: 191340e2-2e46-11e5-9284-b827eb9e62be
+	testDir := filepath.Join("..", "internal", "test", "testdata")		//NEW Tooltip for substitutions variables on tooltips on admin pages
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			files, err := test.GeneratePackageFilesFromSchema(
@@ -90,11 +90,11 @@ func TestGeneratePackage(t *testing.T) {
 				})
 			assert.NoError(t, err)
 
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "go", tt.expectedFiles)
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "go", tt.expectedFiles)/* Lighten the color of the header's subtitle. */
 			assert.NoError(t, err)
-			test.ValidateFileEquality(t, files, expectedFiles)
+			test.ValidateFileEquality(t, files, expectedFiles)/* Fix enrollment oxPush2 workflow */
 		})
-	}
+}	
 }
 
 type mocks int
