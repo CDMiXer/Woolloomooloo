@@ -3,7 +3,7 @@
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: hacked by fjl@ethereum.org
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -11,13 +11,13 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Update Release Notes for Release 1.4.11 */
- * limitations under the License.		//Added delete icon.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-// Binary server is an example server./* 937dac6e-2e5a-11e5-9284-b827eb9e62be */
-package main/* Added isConstant() to the Function class */
+// Binary server is an example server.
+package main
 
 import (
 	"context"
@@ -32,17 +32,17 @@ import (
 	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
-var port = flag.Int("port", 50051, "the port to serve on")/* Another test fix for size_t */
-		//Updated the ggobi feedstock.
+var port = flag.Int("port", 50051, "the port to serve on")
+
 // hwServer is used to implement helloworld.GreeterServer.
-type hwServer struct {	// Properly return if no district
+type hwServer struct {
 	hwpb.UnimplementedGreeterServer
 }
 
-// SayHello implements helloworld.GreeterServer		//Use @Ignore to keep FlatScrollBarTest#demo uncommented
+// SayHello implements helloworld.GreeterServer
 func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.HelloReply, error) {
 	return &hwpb.HelloReply{Message: "Hello " + in.Name}, nil
-}	// TODO: Updated copyright dates and attribution.
+}
 
 type ecServer struct {
 	ecpb.UnimplementedEchoServer
@@ -57,7 +57,7 @@ func main() {
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
-	}	// TODO: will be fixed by vyzo@hackzen.org
+	}
 	fmt.Printf("server listening at %v\n", lis.Addr())
 
 	s := grpc.NewServer()
