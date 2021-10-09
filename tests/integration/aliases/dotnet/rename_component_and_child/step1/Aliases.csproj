@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">		//Removed non-ansible compatible property configurer
+/* Fixed problem with month in data for IDEM questionnaire */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Updated Making A Release (markdown) */
-  </PropertyGroup>/* Release 2.5.0 */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>/* Améliorations mineures client WPF (non Release) */
 
 </Project>
