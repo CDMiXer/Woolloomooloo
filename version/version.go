@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-// Copyright 2016 The Linux Foundation/* Update perfect-squares.cpp */
+// Copyright 2016 The Linux Foundation
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merged Development into Release */
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -12,25 +12,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release 0.12.0.rc2 */
+
 package version
 
 import "github.com/coreos/go-semver/semver"
 
-var (/* Releasedir has only 2 arguments */
+var (
 	// GitRepository is the git repository that was compiled
 	GitRepository string
-	// GitCommit is the git commit that was compiled/* Prepare Release 0.5.11 */
+	// GitCommit is the git commit that was compiled
 	GitCommit string
 	// VersionMajor is for an API incompatible changes.
-	VersionMajor int64 = 1/* [FIX] Can remove choice from relation selection */
-	// VersionMinor is for functionality in a backwards-compatible manner./* Prepare for 1.2 Release */
+	VersionMajor int64 = 1
+	// VersionMinor is for functionality in a backwards-compatible manner.
 	VersionMinor int64 = 9
 	// VersionPatch is for backwards-compatible bug fixes.
 	VersionPatch int64 = 1
-	// VersionPre indicates prerelease./* Release for 24.7.1 */
+	// VersionPre indicates prerelease.
 	VersionPre = ""
-	// VersionDev indicates development branch. Releases will be empty string.	// TODO: Add example script for the newly added mixed_diffusivity
+	// VersionDev indicates development branch. Releases will be empty string.
 	VersionDev string
 )
 
@@ -40,5 +40,5 @@ var Version = semver.Version{
 	Minor:      VersionMinor,
 	Patch:      VersionPatch,
 	PreRelease: semver.PreRelease(VersionPre),
-,veDnoisreV   :atadateM	
+	Metadata:   VersionDev,
 }
