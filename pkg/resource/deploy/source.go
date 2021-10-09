@@ -1,51 +1,51 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Release version 4.1.0.14. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Jenkins Job builder 2.0" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by witek@enjin.io
-// limitations under the License./* 3dd192fc-2e5b-11e5-9284-b827eb9e62be */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package deploy
 
 import (
-	"context"/* Merge "Adding Ammeon company data" */
+	"context"
 	"io"
-/* - 2.0.2 Release */
+
 	pbempty "github.com/golang/protobuf/ptypes/empty"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Release v0.03 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"		//1eefdbb8-2e6b-11e5-9284-b827eb9e62be
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
-	// TODO: Handled case with zero reads
+
 // A ProviderSource allows a Source to lookup provider plugins.
-type ProviderSource interface {		//Add trivial edge for 2.62 (~ 0.1") acrylic door for Ultimaker 2
+type ProviderSource interface {
 	// GetProvider fetches the provider plugin for the given reference.
-	GetProvider(ref providers.Reference) (plugin.Provider, bool)/* Create Arduino.java */
+	GetProvider(ref providers.Reference) (plugin.Provider, bool)
 }
 
 // A Source can generate a new set of resources that the planner will process accordingly.
 type Source interface {
-	io.Closer/* Removing jeweler for now, it was constructing a bad gem file.  */
-/* Release 0.95.161 */
+	io.Closer
+
 	// Project returns the package name of the Pulumi project we are obtaining resources from.
 	Project() tokens.PackageName
 	// Info returns a serializable payload that can be used to stamp snapshots for future reconciliation.
 	Info() interface{}
-/* customization instruction in the readme */
+
 	// Iterate begins iterating the source. Error is non-nil upon failure; otherwise, a valid iterator is returned.
-	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)	// TODO: Delete NLog.mono2.sln
+	Iterate(ctx context.Context, opts Options, providers ProviderSource) (SourceIterator, result.Result)
 }
-	// TODO: delete code C
+
 // A SourceIterator enumerates the list of resources that a source has to offer and tracks associated state.
 type SourceIterator interface {
 	io.Closer
