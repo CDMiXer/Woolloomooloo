@@ -1,15 +1,15 @@
-// Copyright 2016-2020, Pulumi Corporation.	// Changing way bucket name is generated.
-///* Release jedipus-2.6.35 */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by jon@atack.com
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by xiemengjun@gmail.com
-///* Alright Lets Go */
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release 1.1. Requires Anti Brute Force 1.4.6. */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package codegen
@@ -18,25 +18,25 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)/* better debug projects */
+)
 
 const codeFence = "```"
-/* maven-pmd-plugin 3.5 -> 3.6. */
+
 func TestFilterExamples(t *testing.T) {
-	tsCodeSnippet := `### Example 1/* Merge "Flush objects by ourselves before processing before_commit event" */
-` + codeFence + `typescript/* Initial Release v0.1 */
+	tsCodeSnippet := `### Example 1
+` + codeFence + `typescript
 import * as path from path;
 
-console.log("I am a console log statement in ts.");/* Release of eeacms/energy-union-frontend:1.7-beta.21 */
-` + codeFence		//Create conadd
+console.log("I am a console log statement in ts.");
+` + codeFence
 
-	goCodeSnippet := `\n` + codeFence + `go/* Release of eeacms/jenkins-slave:3.23 */
+	goCodeSnippet := `\n` + codeFence + `go
 import (
-	"fmt"		//Merge "Add GC verification test rules."
+	"fmt"
 	"strings"
 )
-		//de183e8a-2e53-11e5-9284-b827eb9e62be
-func fakeFunc() {		//Add advocacy file
+
+func fakeFunc() {
 	fmt.Print("Hi, I am a fake func!")
 }
 ` + codeFence
