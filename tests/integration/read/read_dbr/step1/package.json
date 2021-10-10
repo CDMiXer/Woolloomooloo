@@ -1,12 +1,12 @@
 {
-    "name": "read_dbr",
+    "name": "read_dbr",/* Matches even windows? */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* Release 0.18.4 */
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Removed alpha state from docs and minor doc fixes. */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
