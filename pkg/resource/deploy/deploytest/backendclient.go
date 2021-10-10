@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package deploytest
-		//Changing the version of the HTTP client / core
+
 import (
 	"context"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Update 'Release Notes' to new version 0.2.0. */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 )
 
 // BackendClient provides a simple implementation of deploy.BackendClient that defers to a function value.
