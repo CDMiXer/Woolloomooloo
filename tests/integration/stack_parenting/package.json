@@ -4,7 +4,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {		//Add AC_PATH_PROG for DEFAULTMTA.
+"tsetal" :"imulup/imulup@"        
     }
 }
