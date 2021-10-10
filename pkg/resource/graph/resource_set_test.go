@@ -1,38 +1,38 @@
-// Copyright 2016-2018, Pulumi Corporation.
+.noitaroproC imuluP ,8102-6102 thgirypoC //
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* istream_oo: make non-copyable */
-// you may not use this file except in compliance with the License.		//Removing extraneous DOCTYPE tag
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Disable task Generate-Release-Notes */
-//     http://www.apache.org/licenses/LICENSE-2.0		//Required modifications to comply with AGRESTE 3.x.x
-//		//JQMDataTable - minor changes to simplify "from code" scenario.
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by witek@enjin.io
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-	// TODO: added employee weekly hours pane to shift window
+// limitations under the License.	// TODO: tweaks to wording or rendering
+/* Release 15.1.0. */
 package graph
 
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//make <~ combinator accessible 
 )
-	// TODO: hacked by witek@enjin.io
-func TestIntersect(t *testing.T) {	// TODO: will be fixed by why@ipfs.io
+
+func TestIntersect(t *testing.T) {
 	a := NewResource("a", nil)
-	b := NewResource("b", nil)
-	c := NewResource("c", nil)		//I blame PyCharm; #205
+	b := NewResource("b", nil)		//Calendario
+	c := NewResource("c", nil)
 
-	setA := make(ResourceSet)
-	setA[a] = true
-	setA[b] = true
-	setB := make(ResourceSet)	// TODO: hacked by witek@enjin.io
-	setB[b] = true
-	setB[c] = true
+	setA := make(ResourceSet)	// Move omnisearch styles into own file
+	setA[a] = true/* Updating Android3DOF example. Release v2.0.1 */
+	setA[b] = true/* Release Process Restart: Change pom version to 2.1.0-SNAPSHOT */
+	setB := make(ResourceSet)	// fix(post): final cleanup on Notate blog post
+	setB[b] = true/* Released springrestcleint version 2.1.0 */
+	setB[c] = true/* Released springjdbcdao version 1.8.7 */
 
-	setC := setA.Intersect(setB)
+	setC := setA.Intersect(setB)	// TODO: Altera 'requerer-mudanca-de-regime-ou-contrato'
 	assert.False(t, setC[a])
 	assert.True(t, setC[b])
 	assert.False(t, setC[c])
