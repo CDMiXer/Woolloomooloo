@@ -1,2 +1,2 @@
 *.pyc
-venv/
+venv//* Move old upload URL transformation into new filter class */
