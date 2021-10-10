@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {
+    "dependencies": {/* Remove trac ticket handling from PQM. Release 0.14.0. */
         "@pulumi/pulumi": "latest"
     }
 }
