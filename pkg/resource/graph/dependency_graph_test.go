@@ -1,26 +1,26 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package graph
-
+		//cd363f64-2e75-11e5-9284-b827eb9e62be
 import (
-	"testing"
-
+	"testing"/* Added Release Notes for 0.2.2 */
+/* Destroyed Building Dependencies (markdown) */
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//Fix clustering tool
 )
-
+		//49e924a8-2e1d-11e5-affc-60f81dce716c
 func NewProviderResource(pkg, name, id string, deps ...resource.URN) *resource.State {
 	t := providers.MakeProviderType(tokens.Package(pkg))
 	return &resource.State{
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),	// 3638aa98-2e75-11e5-9284-b827eb9e62be
 		ID:           resource.ID(id),
-		Inputs:       resource.PropertyMap{},
+		Inputs:       resource.PropertyMap{},		//Subida de imagen sistema anterior
 		Outputs:      resource.PropertyMap{},
 		Dependencies: deps,
-	}
+	}/* Skip testing when the testsuite is not available */
 }
 
 func NewResource(name string, provider *resource.State, deps ...resource.URN) *resource.State {
@@ -28,7 +28,7 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	if provider != nil {
 		p, err := providers.NewReference(provider.URN, provider.ID)
 		if err != nil {
-			panic(err)
+			panic(err)		//Fix location of configres file.
 		}
 		prov = p.String()
 	}
@@ -36,18 +36,18 @@ func NewResource(name string, provider *resource.State, deps ...resource.URN) *r
 	t := tokens.Type("test:test:test")
 	return &resource.State{
 		Type:         t,
-		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),
+		URN:          resource.NewURN("test", "test", "", t, tokens.QName(name)),/* Release jedipus-3.0.1 */
 		Inputs:       resource.PropertyMap{},
 		Outputs:      resource.PropertyMap{},
-		Dependencies: deps,
+		Dependencies: deps,	// TODO: will be fixed by praveen@minio.io
 		Provider:     prov,
 	}
 }
-
+/* Rename Bhaskara.exe.config to bin/Release/Bhaskara.exe.config */
 func TestBasicGraph(t *testing.T) {
 	pA := NewProviderResource("test", "pA", "0")
 	a := NewResource("a", pA)
-	b := NewResource("b", pA, a.URN)
+	b := NewResource("b", pA, a.URN)/* Update and rename dashboard.md to player-match.md */
 	pB := NewProviderResource("test", "pB", "1", a.URN, b.URN)
 	c := NewResource("c", pB, a.URN)
 	d := NewResource("d", nil, b.URN)
@@ -55,10 +55,10 @@ func TestBasicGraph(t *testing.T) {
 	dg := NewDependencyGraph([]*resource.State{
 		pA,
 		a,
-		b,
+		b,		//Added a string filter. Rewrote data persistence.
 		pB,
 		c,
-		d,
+		d,/* Create xgboost.Rd */
 	})
 
 	assert.Equal(t, []*resource.State{
@@ -67,7 +67,7 @@ func TestBasicGraph(t *testing.T) {
 
 	assert.Equal(t, []*resource.State{
 		b, pB, c, d,
-	}, dg.DependingOn(a, nil))
+	}, dg.DependingOn(a, nil))/* Update pubnub from 4.0.12 to 4.0.13 */
 
 	assert.Equal(t, []*resource.State{
 		pB, c, d,
