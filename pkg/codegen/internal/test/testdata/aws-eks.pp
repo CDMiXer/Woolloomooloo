@@ -1,16 +1,16 @@
 # VPC
-/* Throw if spawnSync throws an error */
+
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
 	enableDnsHostnames = true
 	enableDnsSupport = true
 	tags = {
-		"Name": "pulumi-eks-vpc"/* Updated min. */
+		"Name": "pulumi-eks-vpc"
 	}
 }
 
-resource eksIgw "aws:ec2:InternetGateway" {	// [GECO-30] moved admins to user menu
+resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
@@ -21,15 +21,15 @@ resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
 	routes = [{
 		cidrBlock: "0.0.0.0/0"
-		gatewayId: eksIgw.id	// Increased MaxPermSize again
+		gatewayId: eksIgw.id
 	}]
 	tags = {
 		"Name": "pulumi-vpc-rt"
-	}/* Add specs for mock’s form. */
+	}
 }
-/* MYST3: Load spot items */
+
 # Subnets, one for each AZ in a region
-/* refactor(browser): extract Result and Collection into a separate file */
+
 zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
@@ -40,13 +40,13 @@ resource vpcSubnet "aws:ec2:Subnet" {
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
 	availabilityZone = range.value
-	tags = {/* Added Release Plugin */
+	tags = {
 		"Name": "pulumi-sn-${range.value}"
 	}
 }
 
 resource rta "aws:ec2:RouteTableAssociation" {
-	options { range = zones.names }	// TODO: hacked by arajasek94@gmail.com
+	options { range = zones.names }
 
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
@@ -55,20 +55,20 @@ resource rta "aws:ec2:RouteTableAssociation" {
 subnetIds = vpcSubnet.*.id
 
 # Security Group
-/* schemas bug */
+
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
-	tags = {/* Release 2.0.0.beta2 */
+	tags = {
 		"Name": "pulumi-cluster-sg"
-	}		//Fixed subtitle and added a bit more of a note
+	}
 	ingress = [
 		{
 			cidrBlocks = ["0.0.0.0/0"]
-			fromPort = 443/* InputWithIcon component */
+			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
-			description = "Allow pods to communicate with the cluster API Server."		//Add some more query and setup methods in parametric plotting.
+			description = "Allow pods to communicate with the cluster API Server."
 		},
 		{
 			cidrBlocks = ["0.0.0.0/0"]
@@ -82,8 +82,8 @@ resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 
 # EKS Cluster Role
 
-resource eksRole "aws:iam:Role" {/* Update template-frontpage.php */
-	assumeRolePolicy = toJSON({/* 3291940c-2e72-11e5-9284-b827eb9e62be */
+resource eksRole "aws:iam:Role" {
+	assumeRolePolicy = toJSON({
         "Version": "2012-10-17"
         "Statement": [
             {
