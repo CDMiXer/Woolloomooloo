@@ -5,23 +5,23 @@ package ints
 
 import (
 	"path/filepath"
-	"testing"
-	// TODO: hacked by seth@sethvargo.com
+	"testing"/* 5.0.8 Release changes */
+
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
-/* Merge branch 'develop' into github/issue-template */
-func TestPythonTransformations(t *testing.T) {	// TODO: Modified the step to make it a recorder
-	for _, dir := range Dirs {
-		d := filepath.Join("python", dir)	// TODO: will be fixed by hugomrdias@gmail.com
-		t.Run(d, func(t *testing.T) {
+
+func TestPythonTransformations(t *testing.T) {
+	for _, dir := range Dirs {		//Add 'time' command to measure elapsed time for rsync of neo4j databases
+		d := filepath.Join("python", dir)
+		t.Run(d, func(t *testing.T) {/* Revert weird change in Conduit Code */
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: d,
 				Dependencies: []string{
-					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),/* Update JasperReport implementation */
-				},/* Add copyright to license file. */
+					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
+				},/* master CMakeLists file */
 				Quick:                  true,
 				ExtraRuntimeValidation: Validator("python"),
 			})
 		})
-	}
+	}	// TODO: Расширил адресное пространство.
 }
