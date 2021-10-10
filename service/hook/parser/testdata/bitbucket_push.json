@@ -1,9 +1,9 @@
 {
-    "Ref": "refs/heads/master",/* Release notes: remove spaces before bullet list */
+    "Ref": "refs/heads/master",
     "Repo": {
         "ID": "{bc771cbf-829e-4c4b-b71f-a0eb3ac2b860}",
         "Namespace": "brydzewski",
-        "Name": "foo",	// sync w/ current version
+        "Name": "foo",
         "Perm": null,
         "Branch": "",
         "Private": true,
@@ -13,17 +13,17 @@
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
-    "Commit": {/* Added three new gameplay-specific classes */
+    "Commit": {
         "Sha": "141977fedf5cf35aa290ac87d4b5177ac4cd9de1",
         "Message": "Update README\n",
         "Author": {
             "Name": "Brad Rydzewski",
-            "Email": "brad.rydzewski@gmail.com",	// TODO: hacked by davidad@alum.mit.edu
+            "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
             "Login": "brydzewski",
-            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"	// TODO: Update yeoman-generator to 4.6.0
-        },		//902c3866-2e71-11e5-9284-b827eb9e62be
-        "Committer": {	// Issue #612, documentation fixes on statistics module.
+            "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
+        },
+        "Committer": {
             "Name": "Brad Rydzewski",
             "Email": "brad.rydzewski@gmail.com",
             "Date": "2018-07-02T20:26:56Z",
@@ -31,7 +31,7 @@
             "Avatar": "https://bitbucket.org/account/brydzewski/avatar/32/"
         },
         "Link": "https://bitbucket.org/brydzewski/foo/commits/141977fedf5cf35aa290ac87d4b5177ac4cd9de1"
-    },/* Update DoublePredicate.java */
+    },
     "Sender": {
         "Login": "brydzewski",
         "Name": "Brad Rydzewski",
