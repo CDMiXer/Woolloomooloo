@@ -1,8 +1,8 @@
 -- name: create-table-secrets
 
 CREATE TABLE IF NOT EXISTS secrets (
- secret_id                SERIAL PRIMARY KEY/* Merge branch 'master' into 2098/support_for_digital_product */
-,secret_repo_id           INTEGER	// Added dump SQL
+ secret_id                SERIAL PRIMARY KEY
+,secret_repo_id           INTEGER
 ,secret_name              VARCHAR(500)
 ,secret_data              BYTEA
 ,secret_pull_request      BOOLEAN
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS secrets (
 
 -- name: create-index-secrets-repo
 
-CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);	// TODO: reference to the wiki
+CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
--- name: create-index-secrets-repo-name/* incorporate JJ's changes */
+-- name: create-index-secrets-repo-name
 
 CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
