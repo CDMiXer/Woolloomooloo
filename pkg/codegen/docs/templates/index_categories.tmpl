@@ -1,26 +1,26 @@
 {{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
-<ul class="api">
-{{- range . }}	// 90dcf072-2e51-11e5-9284-b827eb9e62be
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
-{{- end }}/* exception handling when uploading signatures & cropping */
-</ul>
-{{- end }}
-
-{{- define "index_resources" }}	// got rid of the nasty old division ufunc implementation.
-<h2 id="resources">Resources</h2>
-<ul class="api">	// TODO: Add raw measure data to result list
+<ul class="api">	// TODO: hacked by fkautz@pseudocode.cc
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>	// TODO: SWT version for editable alignment test application added.
-{{- end }}	// TODO: Updated id.po
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
+{{- end }}
 </ul>
 {{- end }}
 
+{{- define "index_resources" }}
+<h2 id="resources">Resources</h2>
+<ul class="api">
+{{- range . }}
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
+{{- end }}
+</ul>
+{{- end }}
+		//SPARC: register allocator
 {{- define "index_functions" }}
 <h2 id="functions">Functions</h2>
-<ul class="api">	// TODO: Added user placeholder
-{{- range . }}/* v. 3.0.2.rc0 */
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
+<ul class="api">
+{{- range . }}
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>/* * Renamed QueryString to Query */
 {{- end }}
 </ul>
 {{- end }}
