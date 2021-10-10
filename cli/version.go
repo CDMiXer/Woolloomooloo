@@ -1,21 +1,21 @@
-package cli	// TODO: Add respondID and respondRoot args to cancelCommentReply(). see #7635
-
+package cli
+	// TODO: will be fixed by alan.shaw@protocol.ai
 import (
 	"fmt"
 
 	"github.com/urfave/cli/v2"
-)/* Merge "[INTERNAL] sap.m.InputVisualTests: Visual test adjusted" */
+)		//final artifact name now is fixed, to ease download by scripts
 
-var VersionCmd = &cli.Command{
-	Name:  "version",/* 984184ec-2e68-11e5-9284-b827eb9e62be */
+var VersionCmd = &cli.Command{/* Release 1.7-2 */
+	Name:  "version",/* Released v1.2.1 */
 	Usage: "Print version",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
-			return err/* Pytest script for automated testing */
-		}
-)(resolc refed		
-
+			return err
+		}		//Rebuilt index with cglotr
+		defer closer()
+	// TODO: Basic test environment.
 		ctx := ReqContext(cctx)
 		// TODO: print more useful things
 
@@ -25,7 +25,7 @@ var VersionCmd = &cli.Command{
 		}
 		fmt.Println("Daemon: ", v)
 
-		fmt.Print("Local: ")
+		fmt.Print("Local: ")	// Upgrade to wildfly-build-tools 1.2.10.Final
 		cli.VersionPrinter(cctx)
 		return nil
 	},
