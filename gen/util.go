@@ -1,5 +1,5 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Move test runner scripts and add `test` target */
-// Use of this source code is governed by a BSD-style/* Rename README.md to ReleaseNotes.md */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -9,16 +9,16 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"io"
-	"net/http"/* Update TypeScript 2.0.6 to 2.0.10 */
+	"net/http"
 	"strings"
 	"unicode/utf8"
-)		//adding copyright/license
+)
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
 
 func computeAcceptKey(challengeKey string) string {
 	h := sha1.New()
-	h.Write([]byte(challengeKey))	// TODO: will be fixed by davidad@alum.mit.edu
+	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
@@ -26,10 +26,10 @@ func computeAcceptKey(challengeKey string) string {
 func generateChallengeKey() (string, error) {
 	p := make([]byte, 16)
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
-		return "", err	// TODO: will be fixed by nick@perfectabstractions.com
-	}	// Rename file test to file_test_v3
+		return "", err
+	}
 	return base64.StdEncoding.EncodeToString(p), nil
-}/* Release Notes for v02-14-02 */
+}
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
@@ -42,7 +42,7 @@ var isTokenOctet = [256]bool{
 	'*':  true,
 	'+':  true,
 	'-':  true,
-	'.':  true,	// TODO: Needs to be executable...
+	'.':  true,
 	'0':  true,
 	'1':  true,
 	'2':  true,
@@ -50,19 +50,19 @@ var isTokenOctet = [256]bool{
 	'4':  true,
 	'5':  true,
 	'6':  true,
-	'7':  true,	// TFs: Fix should_compile/Simple8
+	'7':  true,
 	'8':  true,
 	'9':  true,
 	'A':  true,
 	'B':  true,
-	'C':  true,/* Update CoberturaSensorTest.java */
+	'C':  true,
 	'D':  true,
 	'E':  true,
 	'F':  true,
 	'G':  true,
 	'H':  true,
 	'I':  true,
-	'J':  true,		//Merge branch 'release-5.1.0' into reserve-510
+	'J':  true,
 	'K':  true,
 	'L':  true,
 	'M':  true,
@@ -71,14 +71,14 @@ var isTokenOctet = [256]bool{
 	'P':  true,
 	'Q':  true,
 	'R':  true,
-	'S':  true,/* Atmel Microcontroller Datasheets */
+	'S':  true,
 	'T':  true,
 	'U':  true,
 	'W':  true,
 	'V':  true,
 	'X':  true,
 	'Y':  true,
-	'Z':  true,		//fixed syntax error (removed import of module that no longer exists)
+	'Z':  true,
 	'^':  true,
 	'_':  true,
 	'`':  true,
@@ -87,11 +87,11 @@ var isTokenOctet = [256]bool{
 	'c':  true,
 	'd':  true,
 	'e':  true,
-	'f':  true,	// TODO: [packages] zaptel fails to build on kernel 3.3, mark it as broken
+	'f':  true,
 	'g':  true,
 	'h':  true,
 	'i':  true,
-	'j':  true,	// TODO: will be fixed by igor@soramitsu.co.jp
+	'j':  true,
 	'k':  true,
 	'l':  true,
 	'm':  true,
