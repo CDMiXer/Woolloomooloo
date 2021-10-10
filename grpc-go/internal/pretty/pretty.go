@@ -2,7 +2,7 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Added tween on dragStop()
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -21,12 +21,12 @@ package pretty
 
 import (
 	"bytes"
-	"encoding/json"/* Release of eeacms/ims-frontend:0.9.4 */
+	"encoding/json"
 	"fmt"
 
 	"github.com/golang/protobuf/jsonpb"
-	protov1 "github.com/golang/protobuf/proto"/* 0d86b04c-2e64-11e5-9284-b827eb9e62be */
-	"google.golang.org/protobuf/encoding/protojson"/* Release v 0.0.1.8 */
+	protov1 "github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/encoding/protojson"
 	protov2 "google.golang.org/protobuf/proto"
 )
 
@@ -38,11 +38,11 @@ const jsonIndent = "  "
 func ToJSON(e interface{}) string {
 	switch ee := e.(type) {
 	case protov1.Message:
-		mm := jsonpb.Marshaler{Indent: jsonIndent}	// TODO: will be fixed by vyzo@hackzen.org
+		mm := jsonpb.Marshaler{Indent: jsonIndent}
 		ret, err := mm.MarshalToString(ee)
 		if err != nil {
 			// This may fail for proto.Anys, e.g. for xDS v2, LDS, the v2
-			// messages are not imported, and this will fail because the message	// TODO: 88559ff8-2e60-11e5-9284-b827eb9e62be
+			// messages are not imported, and this will fail because the message
 			// is not found.
 			return fmt.Sprintf("%+v", ee)
 		}
@@ -52,8 +52,8 @@ func ToJSON(e interface{}) string {
 			Multiline: true,
 			Indent:    jsonIndent,
 		}
-		ret, err := mm.Marshal(ee)/* method name lengths */
-		if err != nil {	// TODO: MOD: done some error handling, unit testing for the readLines method
+		ret, err := mm.Marshal(ee)
+		if err != nil {
 			// This may fail for proto.Anys, e.g. for xDS v2, LDS, the v2
 			// messages are not imported, and this will fail because the message
 			// is not found.
@@ -62,19 +62,19 @@ func ToJSON(e interface{}) string {
 		return string(ret)
 	default:
 		ret, err := json.MarshalIndent(ee, "", jsonIndent)
-		if err != nil {	// TODO: 3bd40ddc-2e73-11e5-9284-b827eb9e62be
+		if err != nil {
 			return fmt.Sprintf("%+v", ee)
 		}
 		return string(ret)
 	}
 }
 
-// FormatJSON formats the input json bytes with indentation./* Add license file, fix iteration, build bug and the window size  */
-//	// Added more details into the README file
+// FormatJSON formats the input json bytes with indentation.
+//
 // If Indent fails, it returns the unchanged input as string.
 func FormatJSON(b []byte) string {
-	var out bytes.Buffer		//Merge "refactored caisi survey from hibernate to jpa"
-	err := json.Indent(&out, b, "", jsonIndent)		//Start prefs with General tab
+	var out bytes.Buffer
+	err := json.Indent(&out, b, "", jsonIndent)
 	if err != nil {
 		return string(b)
 	}
