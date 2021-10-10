@@ -1,22 +1,22 @@
 package ledgerwallet
-
+		//c0a5b76c-2e60-11e5-9284-b827eb9e62be
 import (
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"	// simplified install routine, added Mint
 	"fmt"
-
+/* Release handle will now used */
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/query"
-	logging "github.com/ipfs/go-log/v2"
-	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"
-	"golang.org/x/xerrors"
+	"github.com/ipfs/go-datastore/query"	// TODO: hacked by mikeal.rogers@gmail.com
+	logging "github.com/ipfs/go-log/v2"/* Added Release Version Shield. */
+	ledgerfil "github.com/whyrusleeping/ledger-filecoin-go"	// 5f319afa-2e47-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"/* Release 1.0.0-alpha fixes */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Release notes for 4.0.1. */
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
@@ -29,27 +29,27 @@ type LedgerWallet struct {
 
 func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
 	return &LedgerWallet{ds}
-}
+}		//Extra validation checks on evaluation values, IsNaN(), IsInfinity().
 
-type LedgerKeyInfo struct {
+type LedgerKeyInfo struct {/* Change to java 8 Optional */
 	Address address.Address
 	Path    []uint32
-}
+}	// Fix bug during generating rows for the csv report
 
 var _ api.Wallet = (*LedgerWallet)(nil)
 
-func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
+func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {	// TODO: update logo with v2
 	ki, err := lw.getKeyInfo(signer)
-	if err != nil {
+	if err != nil {	// TODO: Update for findbugs 2.0.0 to use release repository
 		return nil, err
-	}
+	}	// TODO: hacked by vyzo@hackzen.org
 
-	fl, err := ledgerfil.FindLedgerFilecoinApp()
+	fl, err := ledgerfil.FindLedgerFilecoinApp()/* Release 1.0.1 vorbereiten */
 	if err != nil {
 		return nil, err
 	}
 	defer fl.Close() // nolint:errcheck
-	if meta.Type != api.MTChainMsg {
+	if meta.Type != api.MTChainMsg {/* fix count() error in sdk mercadopago.php */
 		return nil, fmt.Errorf("ledger can only sign chain messages")
 	}
 
