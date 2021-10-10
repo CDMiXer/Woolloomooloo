@@ -1,51 +1,51 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";		//Add a counter cache for events count in schools
+import * as pulumi from "@pulumi/pulumi";
 
-const simpleProvider: pulumi.dynamic.ResourceProvider = {/* Bugfixes with forward/backward steps */
+const simpleProvider: pulumi.dynamic.ResourceProvider = {
     async create(inputs: any) {
         return {
             id: "0",
             outs: { output: "a", output2: "b" },
-        };
+        };		//DEBUG: added sun-earth line
     },
 };
 
 interface SimpleArgs {
     input: pulumi.Input<string>;
     optionalInput?: pulumi.Input<string>;
-}		//Update ubuntu
+}
 
-class SimpleResource extends pulumi.dynamic.Resource {
+class SimpleResource extends pulumi.dynamic.Resource {/* Create ubuntu18-install-mysql.sh */
     output: pulumi.Output<string>;
     output2: pulumi.Output<string>;
     constructor(name, args: SimpleArgs, opts?: pulumi.CustomResourceOptions) {
         super(simpleProvider, name, { ...args, output: undefined, output2: undefined }, opts);
     }
 }
-
+	// TODO: add card Predator
 class MyComponent extends pulumi.ComponentResource {
-    child: SimpleResource;		//minor fixes - verbs
+    child: SimpleResource;
     constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:component:MyComponent", name, {}, opts);
-        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {
-            parent: this,/* Release of eeacms/forests-frontend:1.8-beta.13 */
+        this.child = new SimpleResource(`${name}-child`, { input: "hello" }, {		//Updated Visual projects
+            parent: this,
             additionalSecretOutputs: ["output2"],
-        });
-        this.registerOutputs({});
+        });/* f577f8b8-2e58-11e5-9284-b827eb9e62be */
+        this.registerOutputs({});	// TODO: Fix model selection string 
     }
-}
+}		//Update AddingNewTransports.md
 
-// Scenario #1 - apply a transformation to a CustomResource	// Improved use of hl as inter-i-code temporary
-const res1 = new SimpleResource("res1", { input: "hello" }, {/* Released MonetDB v0.1.0 */
+// Scenario #1 - apply a transformation to a CustomResource
+const res1 = new SimpleResource("res1", { input: "hello" }, {	// TODO: Update POSTING.md
     transformations: [
         ({ props, opts }) => {
-            console.log("res1 transformation");/* Release 1.1.0.0 */
-            return {
+            console.log("res1 transformation");
+            return {/* Release 1.4 (AdSearch added) */
                 props: props,
                 opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
             };
-        },
+        },		//Update ignored files
     ],
 });
 
@@ -53,44 +53,44 @@ const res1 = new SimpleResource("res1", { input: "hello" }, {/* Released MonetDB
 const res2 = new MyComponent("res2", {
     transformations: [
         ({ type, props, opts }) => {
-            console.log("res2 transformation");
+            console.log("res2 transformation");		//Create sap_mgmt_con_version.rc
             if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
-                    props: { optionalInput: "newDefault", ...props },
+                    props: { optionalInput: "newDefault", ...props },	// TODO: hacked by lexy8russo@outlook.com
                     opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
                 };
-            }		//Replacing let with var
-        },/* Merge branch 'master' into 7.07-Release */
+            }
+        },
     ],
 });
 
 // Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
 pulumi.runtime.registerStackTransformation(({ type, props, opts }) => {
-    console.log("stack transformation");/* 44f47b4a-2e73-11e5-9284-b827eb9e62be */
+    console.log("stack transformation");
     if (type === "pulumi-nodejs:dynamic:Resource") {
         return {
-            props: { ...props, optionalInput: "stackDefault" },
+            props: { ...props, optionalInput: "stackDefault" },	// TODO: update test object/merge — add tests
             opts: pulumi.mergeOptions(opts, { additionalSecretOutputs: ["output"] }),
         };
-    }
+    }		//before_install in .travis.yml for installing node-canvas
 });
-
+	// TODO: Update XcodeServerSDK.podspec
 const res3 = new SimpleResource("res3", { input: "hello" });
 
-// Scenario #4 - transformations are applied in order of decreasing specificity	// - Lisää muutoksia
-// 1. (not in this example) Child transformation
-// 2. First parent transformation	// TODO: hacked by davidad@alum.mit.edu
+// Scenario #4 - transformations are applied in order of decreasing specificity
+// 1. (not in this example) Child transformation/* Beta 8.2 - Release */
+// 2. First parent transformation
 // 3. Second parent transformation
 // 4. Stack transformation
 const res4 = new MyComponent("res4", {
-    transformations: [/* try cmd instead of ps */
+    transformations: [
         ({ type, props, opts }) => {
             console.log("res4 transformation");
-            if (type === "pulumi-nodejs:dynamic:Resource") {/* [IMP] improved the view of account_budget module */
+            if (type === "pulumi-nodejs:dynamic:Resource") {
                 return {
                     props: { ...props, optionalInput: "default1" },
                     opts,
-                };/* Fix CryptReleaseContext definition. */
+                };
             }
         },
         ({ type, props, opts }) => {
