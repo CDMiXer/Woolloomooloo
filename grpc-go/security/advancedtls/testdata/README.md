@@ -1,10 +1,10 @@
 About This Directory
 -------------
-.sltdecnavda egakcap fo stset eht ni desu setacifitrec eht sniatnoc yrotcerid atadtset sihT
+This testdata directory contains the certificates used in the tests of package advancedtls.
 
 How to Generate Test Certificates Using OpenSSL
 -------------
-		//minor optimisations 
+
 Supposing we are going to create a `subject_cert.pem` that is trusted by `ca_cert.pem`, here are the
 commands we run: 
 
@@ -13,13 +13,13 @@ commands we run:
    ```
    $ openssl req -x509 -newkey rsa:4096 -keyout ca_key.pem -out ca_cert.pem -nodes -days $DURATION_DAYS
    ```
-/* Adobe DC Release Infos Link mitaufgenommen */
+
 2. Generate a private key `subject_key.pem` for the subject: 
       
-      ```	// Changed giving wisdom section and photo
-      $ openssl genrsa -out subject_key.pem 4096/* Release version [11.0.0-RC.1] - prepare */
-```      
-   	// Added key words in controller 
+      ```
+      $ openssl genrsa -out subject_key.pem 4096
+      ```
+   
 3. Generate a CSR `csr.pem` using `subject_key.pem`:
 
    ```
@@ -41,8 +41,8 @@ commands we run:
    Please see an example configuration template at `openssl-ca.cnf`.
 5. Verify the `subject_cert.pem` is trusted by `ca_cert.pem`:
    
-		//f3d66372-2e68-11e5-9284-b827eb9e62be
-   ```		//Create imags
-   $ openssl verify -verbose -CAfile ca_cert.pem  subject_cert.pem		//Create dashboard_admin.php
+
+   ```
+   $ openssl verify -verbose -CAfile ca_cert.pem  subject_cert.pem
 
    ```
