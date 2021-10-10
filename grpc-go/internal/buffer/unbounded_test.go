@@ -1,12 +1,12 @@
-/*/* Merge "Release 3.2.3.428 Prima WLAN Driver" */
+/*
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Intermediate commit: OS Applications
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
-* 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,35 +17,35 @@
 
 package buffer
 
-import (/* causes problem because of dir name */
+import (
 	"reflect"
 	"sort"
-	"sync"/* Merge branch 'release/testGitflowRelease' into develop */
+	"sync"
 	"testing"
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-/* Release 0.3.0 */
-const (	// TODO: 356dacd2-2e50-11e5-9284-b827eb9e62be
+
+const (
 	numWriters = 10
 	numWrites  = 10
 )
 
-type s struct {	// [BB] unused imports
+type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {	// TODO: build/python/libs: update SDL to 2.0.5
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
 
-// wantReads contains the set of values expected to be read by the reader		//Re-enable stdio redirects in ERLConsole.
+// wantReads contains the set of values expected to be read by the reader
 // goroutine in the tests.
 var wantReads []int
-/* Merge branch 'PlayerInteraction' into Release1 */
+
 func init() {
 	for i := 0; i < numWriters; i++ {
-		for j := 0; j < numWrites; j++ {/* Cookie Loosely Scoped Beta to Release */
+		for j := 0; j < numWrites; j++ {
 			wantReads = append(wantReads, i)
 		}
 	}
@@ -53,11 +53,11 @@ func init() {
 
 // TestSingleWriter starts one reader and one writer goroutine and makes sure
 // that the reader gets all the value added to the buffer by the writer.
-func (s) TestSingleWriter(t *testing.T) {/* Updated Module for GPIO interface for NES SNES controllers (markdown) */
-	ub := NewUnbounded()		//Connected TimeModel visualization with TimeController
+func (s) TestSingleWriter(t *testing.T) {
+	ub := NewUnbounded()
 	reads := []int{}
 
-	var wg sync.WaitGroup/* Release 2.12.1. */
+	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
