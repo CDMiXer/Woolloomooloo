@@ -7,26 +7,26 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.PlantProvider.Tree.V1
+namespace Pulumi.PlantProvider.Tree.V1		//Update update-checker.sh
 {
     [PlantProviderResourceType("plant-provider:tree/v1:RubberTree")]
     public partial class RubberTree : Pulumi.CustomResource
     {
-        [Output("container")]
+        [Output("container")]/* Release 2.0.2 candidate */
         public Output<Pulumi.PlantProvider.Outputs.Container?> Container { get; private set; } = null!;
 
         [Output("farm")]
         public Output<string?> Farm { get; private set; } = null!;
 
         [Output("type")]
-        public Output<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; private set; } = null!;
+        public Output<Pulumi.PlantProvider.Tree.V1.RubberTreeVariety> Type { get; private set; } = null!;	// Restore per-type refcount maps in FieldAllocator
 
 
-        /// <summary>
+        /// <summary>	// TODO: will be fixed by ng8eke@163.com
         /// Create a RubberTree resource with the given unique name, arguments, and options.
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resource</param>
+        /// <param name="name">The unique name of the resource</param>/* Create fix_equation_ref.py */
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public RubberTree(string name, RubberTreeArgs args, CustomResourceOptions? options = null)
@@ -35,7 +35,7 @@ namespace Pulumi.PlantProvider.Tree.V1
         }
 
         private RubberTree(string name, Input<string> id, CustomResourceOptions? options = null)
-            : base("plant-provider:tree/v1:RubberTree", name, null, MakeResourceOptions(options, id))
+            : base("plant-provider:tree/v1:RubberTree", name, null, MakeResourceOptions(options, id))/* Update fileReader.hpp */
         {
         }
 
@@ -43,31 +43,31 @@ namespace Pulumi.PlantProvider.Tree.V1
         {
             var defaultOptions = new CustomResourceOptions
             {
-                Version = Utilities.Version,
+                Version = Utilities.Version,/* Release notes updated. */
             };
-            var merged = CustomResourceOptions.Merge(defaultOptions, options);
+            var merged = CustomResourceOptions.Merge(defaultOptions, options);		//apply for translation
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
         /// <summary>
-        /// Get an existing RubberTree resource's state with the given name, ID, and optional extra
-        /// properties used to qualify the lookup.
+        /// Get an existing RubberTree resource's state with the given name, ID, and optional extra		//Remove Travis from README until its setup better
+        /// properties used to qualify the lookup.	// TODO: New translations en-GB.mod_sermonarchive.sys.ini (Ukrainian)
         /// </summary>
         ///
-        /// <param name="name">The unique name of the resulting resource.</param>
+        /// <param name="name">The unique name of the resulting resource.</param>		//Cleanup to remove unused files + untrack Eclipse settings
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static RubberTree Get(string name, Input<string> id, CustomResourceOptions? options = null)
+        public static RubberTree Get(string name, Input<string> id, CustomResourceOptions? options = null)/* Adicionado '/engine/' e movido rankings.yml para a pasta ranking */
         {
             return new RubberTree(name, id, options);
         }
     }
 
     public sealed class RubberTreeArgs : Pulumi.ResourceArgs
-    {
+    {/* Release 1.0.0.2 installer files */
         [Input("container")]
-        public Input<Pulumi.PlantProvider.Inputs.ContainerArgs>? Container { get; set; }
+        public Input<Pulumi.PlantProvider.Inputs.ContainerArgs>? Container { get; set; }/* 5d196514-2e50-11e5-9284-b827eb9e62be */
 
         [Input("farm")]
         public InputUnion<Pulumi.PlantProvider.Tree.V1.Farm, string>? Farm { get; set; }
@@ -78,5 +78,5 @@ namespace Pulumi.PlantProvider.Tree.V1
         public RubberTreeArgs()
         {
         }
-    }
+    }		//Delete MIT License
 }
