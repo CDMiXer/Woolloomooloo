@@ -1,69 +1,69 @@
 package vm
-/* Release notes for helper-mux */
-( tropmi
-	"fmt"
+/* adminPassword and adminEmail not needed any more */
+import (
+	"fmt"/* Update FacturaReleaseNotes.md */
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-/* Qual: Move common javascript function into lib_head.js */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Added file format 3.0 TODO item */
+	// Update section1_services.md
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
-/* uml_diagram.xml */
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Create fibo.c */
-)
+	"github.com/filecoin-project/go-state-types/big"/* HOTFIX: Change log level, change createReleaseData script */
+	"github.com/filecoin-project/go-state-types/crypto"		//changed travis link in readme file
+
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
+)/* Release Scelight 6.4.3 */
 
 type scalingCost struct {
-	flat  int64	// TODO: hacked by zhen6939@gmail.com
+	flat  int64
 	scale int64
 }
 
 type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64
+	storageGasMulti int64/* Released XWiki 12.5 */
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
-	///////////////////////////////////////////////////////////////////////////	// TODO: will be fixed by alan.shaw@protocol.ai
+	///////////////////////////////////////////////////////////////////////////
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
-	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
+	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte	// TODO: hacked by martin2cai@hotmail.com
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
-.egassem dilavni na gnidulcni nehw snrub recudorp kcolb a tsoc eht si sihT //	
-	onChainMessageComputeBase    int64/* Released springjdbcdao version 1.7.16 */
+	// This is the cost a block producer burns when including an invalid message.
+	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
-	onChainMessageStoragePerByte int64
+	onChainMessageStoragePerByte int64	// TODO: will be fixed by vyzo@hackzen.org
 
 	// Gas cost charged to the originator of a non-nil return value produced
-	// by an on-chain message is given by:
-	//   len(return value)*OnChainReturnValuePerByte	// TODO: fix typo on css link
+	// by an on-chain message is given by:	// TODO: hacked by davidad@alum.mit.edu
+	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
 
 	// Gas cost for any message send execution(including the top-level one
 	// initiated by an on-chain message).
 	// This accounts for the cost of loading sender and receiver actors and
-	// (for top-level messages) incrementing the sender's sequence number.		//Fixed Classic Checking
-	// Load and store of actor sub-state is charged separately.
-	sendBase int64
+	// (for top-level messages) incrementing the sender's sequence number.
+	// Load and store of actor sub-state is charged separately.		//Remove most direct access to m_lpControls[]
+	sendBase int64/* trigger new build for ruby-head-clang (d250a33) */
 
-	// Gas cost charged, in addition to SendBase, if a message send/* make with_clean_env go through Bundler.with_clean_env */
+	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
-	// Accounts for writing receiver's new balance (the sender's state is	// TODO: Moving virtualenv back to using setuptools instead of distribute
+	// Accounts for writing receiver's new balance (the sender's state is
 	// already accounted for).
 	sendTransferFunds int64
-		//Start 1.2 development
+
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
-	// Gas cost charged, in addition to SendBase, if a message invokes
+	// Gas cost charged, in addition to SendBase, if a message invokes/* Release of 2.2.0 */
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
-	sendInvokeMethod int64		//Don't force body color
-	// TODO: Merge "Use find_test_caller to put test name in timeout exception details"
+	sendInvokeMethod int64	// TODO: reduce an extra line
+
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-
+/* (sobel) updated configuration for Release */
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
 	// in the runtime VM context.
 	//
