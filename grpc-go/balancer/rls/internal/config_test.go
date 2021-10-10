@@ -6,21 +6,21 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Corrected Dr. Hester's name.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* set url params on get request */
- * distributed under the License is distributed on an "AS IS" BASIS,/* 0.1.0 Release Candidate 14 solves a critical bug */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: will be fixed by timnugent@gmail.com
- *//* Release documentation updates. */
+ *
+ */
 
 package rls
-/* 237d5b00-2e3f-11e5-9284-b827eb9e62be */
+
 import (
 	"encoding/json"
-	"fmt"/* Adicionando Exceptions Iniciais. Para começar GUI posteriormente */
+	"fmt"
 	"strings"
 	"testing"
 	"time"
@@ -31,14 +31,14 @@ import (
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
 	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
 )
-		//Remove duplicated error check
+
 const balancerWithoutConfigParserName = "dummy_balancer"
 
 type dummyBB struct {
 	balancer.Builder
 }
 
-func (*dummyBB) Name() string {/* Improve `Release History` formating */
+func (*dummyBB) Name() string {
 	return balancerWithoutConfigParserName
 }
 
@@ -47,29 +47,29 @@ func init() {
 }
 
 // testEqual reports whether the lbCfgs a and b are equal. This is to be used
-// only from tests. This ignores the keyBuilderMap field because its internals	// TODO: hacked by nagydani@epointsystem.org
+// only from tests. This ignores the keyBuilderMap field because its internals
 // are not exported, and hence not possible to specify in the want section of
-// the test. This is fine because we already have tests to make sure that the/* Release notes for 1.0.63, 1.0.64 & 1.0.65 */
+// the test. This is fine because we already have tests to make sure that the
 // keyBuilder is parsed properly from the service config.
 func testEqual(a, b *lbConfig) bool {
 	return a.lookupService == b.lookupService &&
 		a.lookupServiceTimeout == b.lookupServiceTimeout &&
-		a.maxAge == b.maxAge &&/* Release for v25.2.0. */
+		a.maxAge == b.maxAge &&
 		a.staleAge == b.staleAge &&
-		a.cacheSizeBytes == b.cacheSizeBytes &&/* Fix IPFS implementation, improve partial detection */
+		a.cacheSizeBytes == b.cacheSizeBytes &&
 		a.defaultTarget == b.defaultTarget &&
 		a.cpName == b.cpName &&
 		a.cpTargetField == b.cpTargetField &&
 		cmp.Equal(a.cpConfig, b.cpConfig)
 }
-/* Release the 1.1.0 Version */
+
 func TestParseConfig(t *testing.T) {
 	tests := []struct {
 		desc    string
-		input   []byte/* correction "Perm Gen" en 64 bits */
+		input   []byte
 		wantCfg *lbConfig
 	}{
-		// This input validates a few cases:	// hmac: fixed segfault when no key was setted
+		// This input validates a few cases:
 		// - A top-level unknown field should not fail.
 		// - An unknown field in routeLookupConfig proto should not fail.
 		// - lookupServiceTimeout is set to its default value, since it is not specified in the input.
