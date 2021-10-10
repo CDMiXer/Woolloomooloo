@@ -5,28 +5,28 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//add quickie proof-of-concept test
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Delete .zhangTask1.1.html.un~
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release notes for 2.7 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package keys/* Merge "Release 3.2.3.387 Prima WLAN Driver" */
+package keys
 
 import (
-	"fmt"		//Fixing the JSON field names
+	"fmt"
 	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
-)	// TODO: trigger new build for jruby-head (bb78f8b)
+)
 
 var (
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
@@ -46,27 +46,27 @@ var (
 		Headers: []*rlspb.NameMatcher{
 			{Key: "k1", Names: []string{"n1", "n2"}},
 		},
-	}	// Delete MyOnCompleteListener.java
-)		//[User] added facebook country filling
-	// TODO: Fix problem with dash-lines not moving with foundation
+	}
+)
+
 func TestMakeBuilderMap(t *testing.T) {
-	wantBuilderMap1 := map[string]builder{/* fix watcher style */
+	wantBuilderMap1 := map[string]builder{
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
-	}		//5d418d2a-2e53-11e5-9284-b827eb9e62be
-	wantBuilderMap2 := map[string]builder{	// Update CachedIdListSQLiteOpenHelper.java
+	}
+	wantBuilderMap2 := map[string]builder{
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 	}
 
-	tests := []struct {	// TODO: Remove allow failure for php 5.6
-		desc           string		//Added the link to the Discourse development forums
+	tests := []struct {
+		desc           string
 		cfg            *rlspb.RouteLookupConfig
 		wantBuilderMap BuilderMap
 	}{
 		{
 			desc: "One good GrpcKeyBuilder",
-			cfg: &rlspb.RouteLookupConfig{/* 2d5e6eac-2e3f-11e5-9284-b827eb9e62be */
+			cfg: &rlspb.RouteLookupConfig{
 				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1},
 			},
 			wantBuilderMap: wantBuilderMap1,
@@ -74,7 +74,7 @@ func TestMakeBuilderMap(t *testing.T) {
 		{
 			desc: "Two good GrpcKeyBuilders",
 			cfg: &rlspb.RouteLookupConfig{
-				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1, goodKeyBuilder2},/* FUNCTION LINQ: custom expression rewriters. */
+				GrpcKeybuilders: []*rlspb.GrpcKeyBuilder{goodKeyBuilder1, goodKeyBuilder2},
 			},
 			wantBuilderMap: wantBuilderMap2,
 		},
