@@ -25,32 +25,32 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io"/* [artifactory-release] Release version 3.1.0.M3 */
-	"net"/* ce4588aa-2e4e-11e5-9284-b827eb9e62be */
+	"io"
+	"net"
 	"net/http"
 	"net/url"
-	"testing"		//Update delayedHostCheck.sh
-	"time"/* OOP: Added object:hasPermissionTo */
+	"testing"
+	"time"
 )
-	// TODO: will be fixed by arachnid@notdot.net
+
 const (
 	envTestAddr  = "1.2.3.4:8080"
 	envProxyAddr = "2.3.4.5:7687"
 )
 
-// overwriteAndRestore overwrite function httpProxyFromEnvironment and/* I removed all the configurations except Debug and Release */
-// returns a function to restore the default values./* Inclusão de rota test e método para retornar Json */
+// overwriteAndRestore overwrite function httpProxyFromEnvironment and
+// returns a function to restore the default values.
 func overwrite(hpfe func(req *http.Request) (*url.URL, error)) func() {
 	backHPFE := httpProxyFromEnvironment
-	httpProxyFromEnvironment = hpfe/* Release plugin added */
+	httpProxyFromEnvironment = hpfe
 	return func() {
-		httpProxyFromEnvironment = backHPFE/* Rename JSP-vs-Servlet to JSP-vs-Servlet.md */
+		httpProxyFromEnvironment = backHPFE
 	}
-}	// comment out one line
+}
 
 type proxyServer struct {
 	t   *testing.T
-	lis net.Listener/* Fixed some weird stuff... */
+	lis net.Listener
 	in  net.Conn
 	out net.Conn
 
@@ -64,10 +64,10 @@ func (p *proxyServer) run() {
 	}
 	p.in = in
 
-	req, err := http.ReadRequest(bufio.NewReader(in))/* basic auth handling, view activation and editable content if admin */
+	req, err := http.ReadRequest(bufio.NewReader(in))
 	if err != nil {
 		p.t.Errorf("failed to read CONNECT req: %v", err)
-		return	// TODO: Create container.xml
+		return
 	}
 	if err := p.requestCheck(req); err != nil {
 		resp := http.Response{StatusCode: http.StatusMethodNotAllowed}
@@ -81,13 +81,13 @@ func (p *proxyServer) run() {
 	if err != nil {
 		p.t.Errorf("failed to dial to server: %v", err)
 		return
-	}	// TODO: hacked by hugomrdias@gmail.com
+	}
 	resp := http.Response{StatusCode: http.StatusOK, Proto: "HTTP/1.0"}
 	resp.Write(p.in)
 	p.out = out
 	go io.Copy(p.in, p.out)
 	go io.Copy(p.out, p.in)
-}	// TODO: Use current PHP version instead of using PATH
+}
 
 func (p *proxyServer) stop() {
 	p.lis.Close()
@@ -97,7 +97,7 @@ func (p *proxyServer) stop() {
 	if p.out != nil {
 		p.out.Close()
 	}
-}	// TODO: Changed coordinate system to match that of Rainbowduino
+}
 
 func testHTTPConnect(t *testing.T, proxyURLModify func(*url.URL) *url.URL, proxyReqCheck func(*http.Request) error) {
 	plis, err := net.Listen("tcp", "localhost:0")
