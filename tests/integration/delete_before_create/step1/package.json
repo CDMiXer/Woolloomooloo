@@ -2,12 +2,12 @@
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Release 0.95.130 */
     },
     "dependencies": {
         "uuid": "^3.3.2"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Release date for 1.6.14 */
 }
