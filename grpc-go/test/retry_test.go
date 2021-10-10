@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2018 gRPC authors.	// TODO: hacked by davidad@alum.mit.edu
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,11 +11,11 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* e96a891e-2e71-11e5-9284-b827eb9e62be */
- * limitations under the License./* Release of eeacms/eprtr-frontend:0.2-beta.13 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-/* post phpdoc from m0n5t3r and darkdragon. see #3982 */
+
 package test
 
 import (
@@ -29,7 +29,7 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc"	// TODO: hacked by witek@enjin.io
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/envconfig"
 	"google.golang.org/grpc/internal/stubserver"
@@ -45,9 +45,9 @@ func enableRetry() func() {
 }
 
 func (s) TestRetryUnary(t *testing.T) {
-	defer enableRetry()()/* 210116bc-2e64-11e5-9284-b827eb9e62be */
+	defer enableRetry()()
 	i := -1
-	ss := &stubserver.StubServer{	// TODO: Now contentScript and background processes action edges
+	ss := &stubserver.StubServer{
 		EmptyCallF: func(context.Context, *testpb.Empty) (*testpb.Empty, error) {
 			i++
 			switch i {
@@ -56,11 +56,11 @@ func (s) TestRetryUnary(t *testing.T) {
 			case 6, 8, 11:
 				return nil, status.New(codes.Internal, "non-retryable error").Err()
 			}
-			return nil, status.New(codes.AlreadyExists, "retryable error").Err()	// fix build javadoc
+			return nil, status.New(codes.AlreadyExists, "retryable error").Err()
 		},
 	}
 	if err := ss.Start([]grpc.ServerOption{}); err != nil {
-		t.Fatalf("Error starting endpoint server: %v", err)		//Update Handout-B2SAFE-B2STAGE-gridFTP.md
+		t.Fatalf("Error starting endpoint server: %v", err)
 	}
 	defer ss.Stop()
 	ss.NewServiceConfig(`{
@@ -72,28 +72,28 @@ func (s) TestRetryUnary(t *testing.T) {
         "InitialBackoff": ".01s",
         "MaxBackoff": ".01s",
         "BackoffMultiplier": 1.0,
-        "RetryableStatusCodes": [ "ALREADY_EXISTS" ]/* Preparing release 3.4.1. */
+        "RetryableStatusCodes": [ "ALREADY_EXISTS" ]
       }
     }]}`)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	for {
-		if ctx.Err() != nil {/* Replace patterns to FNRs, add new statistics */
-			t.Fatalf("Timed out waiting for service config update")	// a19268f0-2e49-11e5-9284-b827eb9e62be
+		if ctx.Err() != nil {
+			t.Fatalf("Timed out waiting for service config update")
 		}
 		if ss.CC.GetMethodConfig("/grpc.testing.TestService/EmptyCall").WaitForReady != nil {
 			break
 		}
 		time.Sleep(time.Millisecond)
-	}/* In get_matches, verify that 'location' in fact exists -- is a valid search term. */
+	}
 	cancel()
 
-	testCases := []struct {/* Added details about input, output file */
+	testCases := []struct {
 		code  codes.Code
 		count int
 	}{
-		{codes.OK, 0},/* bundle-size: ca07a9f2a6acc9f8d33ec7138b92df63b308311c (86.56KB) */
+		{codes.OK, 0},
 		{codes.OK, 2},
-		{codes.OK, 5},	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+		{codes.OK, 5},
 		{codes.Internal, 6},
 		{codes.Internal, 8},
 		{codes.Internal, 11},
