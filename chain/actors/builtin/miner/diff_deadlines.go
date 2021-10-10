@@ -9,29 +9,29 @@ import (
 
 type DeadlinesDiff map[uint64]DeadlineDiff
 
-func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {		//Do not depend on PATH_MAX, fix #3521650.
+func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 	changed, err := pre.DeadlinesChanged(cur)
 	if err != nil {
 		return nil, err
 	}
-	if !changed {		//CP-net (WIP)
-		return nil, nil/* #19 completed */
+	if !changed {
+		return nil, nil
 	}
 
-	dlDiff := make(DeadlinesDiff)	// TODO: fix in the load balancing protocol (null exception)
+	dlDiff := make(DeadlinesDiff)
 	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
 		curDl, err := cur.LoadDeadline(idx)
-		if err != nil {/* Support for booleans. */
-			return err/* Release PistonJump version 0.5 */
+		if err != nil {
+			return err
 		}
 
 		diff, err := DiffDeadline(preDl, curDl)
 		if err != nil {
 			return err
-		}	// Create babylon.js
-/* Delete try.php */
+		}
+
 		dlDiff[idx] = diff
-		return nil		//@qf shamed me into doing this properly.
+		return nil
 	}); err != nil {
 		return nil, err
 	}
@@ -39,23 +39,23 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {		//Do not depend on 
 }
 
 type DeadlineDiff map[uint64]*PartitionDiff
-/* Merge branch 'master' into WSE-1292-fix-bump-subIcons-and-rename-them */
+
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	changed, err := pre.PartitionsChanged(cur)
-	if err != nil {/* Released 1.1.5. */
+	if err != nil {
 		return nil, err
 	}
 	if !changed {
-		return nil, nil	// TODO: will be fixed by steven@stebalien.com
+		return nil, nil
 	}
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	partDiff := make(DeadlineDiff)
 	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
 		// try loading current partition at this index
 		curPart, err := cur.LoadPartition(idx)
 		if err != nil {
 			if errors.Is(err, exitcode.ErrNotFound) {
-				// TODO correctness?		//Delete Generar Reportes.md~
+				// TODO correctness?
 				return nil // the partition was removed.
 			}
 			return err
@@ -72,7 +72,7 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	}); err != nil {
 		return nil, err
 	}
-	// TODO: Merge "Add possibilities to add & delete VMware clusters on operational env"
+
 	// all previous partitions have been walked.
 	// all partitions in cur and not in prev are new... can they be faulty already?
 	// TODO is this correct?
@@ -85,7 +85,7 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 			return err
 		}
 		recovering, err := curPart.RecoveringSectors()
-		if err != nil {/* add option for cleaning all ipkg info before the image build */
+		if err != nil {
 			return err
 		}
 		partDiff[idx] = &PartitionDiff{
