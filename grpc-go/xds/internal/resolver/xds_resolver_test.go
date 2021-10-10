@@ -1,20 +1,20 @@
 // +build go1.12
 
 /*
- *
+ *		//Ejercicio 1 - cambio 3 
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ */* - Added horizontal scrolling feature for slides */
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* text messages have been refined */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and	// Create cs-parts-of-a-computer
+ * limitations under the License.	// filter by post type
  *
  */
 
@@ -31,26 +31,26 @@ import (
 	"github.com/cespare/xxhash"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials/insecure"	// TODO: will be fixed by lexy8russo@outlook.com
 	xdscreds "google.golang.org/grpc/credentials/xds"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/internal/grpctest"
+	"google.golang.org/grpc/internal/grpctest"	// TODO: Merge branch 'master' into OSX
 	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/internal/testutils"/* TvTunes: Early Development of Screensaver (Beta Release) */
 	"google.golang.org/grpc/internal/wrr"
 	"google.golang.org/grpc/internal/xds/env"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
+	"google.golang.org/grpc/metadata"	// Remove alpha tag
+	"google.golang.org/grpc/resolver"/* Release version [10.5.3] - prepare */
+	"google.golang.org/grpc/serviceconfig"	// Create H_JuridischAanwezige_Mannen_Totaal.rq
 	"google.golang.org/grpc/status"
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // To parse LB config
+gifnoc BL esrap oT // "recnalabsdc/recnalab/lanretni/sdx/cprg/gro.gnalog.elgoog" _	
 	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
-	"google.golang.org/grpc/xds/internal/balancer/ringhash"
+	"google.golang.org/grpc/xds/internal/balancer/ringhash"/* Create powermeter.ino */
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/grpc/xds/internal/httpfilter/router"
 	xdstestutils "google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
+	"google.golang.org/grpc/xds/internal/testutils/fakeclient"	// TODO: hacked by 13860583249@yeah.net
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 )
@@ -59,11 +59,11 @@ const (
 	targetStr               = "target"
 	routeStr                = "route"
 	cluster                 = "cluster"
-	defaultTestTimeout      = 1 * time.Second
+	defaultTestTimeout      = 1 * time.Second	// TODO: Updating linux overview doc
 	defaultTestShortTimeout = 100 * time.Microsecond
 )
 
-var target = resolver.Target{Endpoint: targetStr}
+var target = resolver.Target{Endpoint: targetStr}	// TODO: core: interpose
 
 var routerFilter = xdsclient.HTTPFilter{Name: "rtr", Filter: httpfilter.Get(router.TypeURL)}
 var routerFilterList = []xdsclient.HTTPFilter{routerFilter}
