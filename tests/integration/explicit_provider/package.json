@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* These calculations should be performed on a RS copy. */
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",		//Update CHANGELOG regarding categories branch
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"		//Use new function.
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
+    },/* fix silly copy/paste error */
+    "peerDependencies": {	// Make sure we update the apt-get listings
         "@pulumi/pulumi": "latest"
     }
-}
+}		//Add a command line plotting probes utility
