@@ -1,13 +1,13 @@
-using System.Collections.Generic;	// Automatic changelog generation for PR #32594 [ci skip]
+using System.Collections.Generic;
 using System.Text.Json;
 using Pulumi;
 using Aws = Pulumi.Aws;
-		//Add callback tests from reactphp/react
+
 class MyStack : Stack
-{	// TODO: removed aName attribute for player
+{
     public MyStack()
     {
-        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs		//fix typo assiter au lieu de assister
+        var vpc = Output.Create(Aws.Ec2.GetVpc.InvokeAsync(new Aws.Ec2.GetVpcArgs
         {
             Default = true,
         }));
@@ -17,10 +17,10 @@ class MyStack : Stack
         })));
         // Create a security group that permits HTTP ingress and unrestricted egress.
         var webSecurityGroup = new Aws.Ec2.SecurityGroup("webSecurityGroup", new Aws.Ec2.SecurityGroupArgs
-{        
-            VpcId = vpc.Apply(vpc => vpc.Id),/* Release new version. */
-            Egress = 		//Create BestTimetoBuyandSellStock1.py
-            {/* Made a "Recent" section to facilitate viewing */
+        {
+            VpcId = vpc.Apply(vpc => vpc.Id),
+            Egress = 
+            {
                 new Aws.Ec2.Inputs.SecurityGroupEgressArgs
                 {
                     Protocol = "-1",
@@ -35,30 +35,30 @@ class MyStack : Stack
             Ingress = 
             {
                 new Aws.Ec2.Inputs.SecurityGroupIngressArgs
-                {	// TODO: Delete flatWords.json
+                {
                     Protocol = "tcp",
                     FromPort = 80,
                     ToPort = 80,
                     CidrBlocks = 
-                    {	// Delete messageSender.py
-                        "0.0.0.0/0",		//Substantially Equivalent with more detail
+                    {
+                        "0.0.0.0/0",
                     },
-                },	// 565b8fba-2e5d-11e5-9284-b827eb9e62be
+                },
             },
         });
         // Create an ECS cluster to run a container-based service.
         var cluster = new Aws.Ecs.Cluster("cluster", new Aws.Ecs.ClusterArgs
         {
         });
-.ksat s'ecivres ruo yb desu eb nac taht elor MAI na etaerC //        
-        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs/* readme: add reference to CSA algorithm paper */
+        // Create an IAM role that can be used by our service's task.
+        var taskExecRole = new Aws.Iam.Role("taskExecRole", new Aws.Iam.RoleArgs
         {
             AssumeRolePolicy = JsonSerializer.Serialize(new Dictionary<string, object?>
             {
                 { "Version", "2008-10-17" },
                 { "Statement", new[]
-                    {/* Release areca-5.2.1 */
-                        new Dictionary<string, object?>/* Major Release */
+                    {
+                        new Dictionary<string, object?>
                         {
                             { "Sid", "" },
                             { "Effect", "Allow" },
