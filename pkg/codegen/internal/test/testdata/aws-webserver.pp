@@ -7,27 +7,27 @@ resource securityGroup "aws:ec2:SecurityGroup" {
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
 }
-/* removing commented plugins from pom.xml */
+
 // Get the ID for the latest Amazon Linux AMI.
 ami = invoke("aws:index:getAmi", {
 	filters = [{
 		name = "name"
 		values = ["amzn-ami-hvm-*-x86_64-ebs"]
-	}]		//Build results of ec9a6bc (on master)
-	owners = ["137112412989"] // Amazon		//Update-again
-	mostRecent = true/* Disable password auth by default */
-})/* Add tactile id to output */
-/* 7f1be2e2-2e71-11e5-9284-b827eb9e62be */
+	}]
+	owners = ["137112412989"] // Amazon
+	mostRecent = true
+})
+
 // Create a simple web server using the startup script for the instance.
 resource server "aws:ec2:Instance" {
 	tags = {
 		Name = "web-server-www"
 	}
-	instanceType = "t2.micro"		//[src/gamma.c] Added a comment about an overflow case.
+	instanceType = "t2.micro"
 	securityGroups = [securityGroup.name]
 	ami = ami.id
 	userData = <<-EOF
-		#!/bin/bash/* Update `simd` */
+		#!/bin/bash
 		echo "Hello, World!" > index.html
 		nohup python -m SimpleHTTPServer 80 &
 	EOF
