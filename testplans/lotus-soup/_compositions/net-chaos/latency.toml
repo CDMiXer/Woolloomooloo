@@ -3,24 +3,24 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"	// TODO: Create Case.md
+  plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 7/* Updated New Release Checklist (markdown) */
+  total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]	// fix regex in tex highlight rules
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// #1778: added installer info
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Parandatud viga #15. (valed foorumi kasutajanimed) */
+[global.build_config]
   enable_go_build_cache = true
-	// Rename lyk to lyk.txt
+
 [global.run.test_params]
   clients = "5"
-  miners = "1"		//i2c cleanup and still investigating stack issue.
+  miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
@@ -33,7 +33,7 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by souzau@yandex.com
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
@@ -41,7 +41,7 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]		//Changed slack link to invite link
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       latency_range = '["20ms", "300ms"]'
@@ -49,9 +49,9 @@
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 5	// TODO: hacked by josharian@gmail.com
+    count = 5
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
-      latency_range = '["100ms", "1500ms"]'		//Modify class pyTES_Testlink
+      latency_range = '["100ms", "1500ms"]'
