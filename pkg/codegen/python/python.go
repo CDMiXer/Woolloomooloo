@@ -5,43 +5,43 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Remove react-tools since detective-es6 handles it now.
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by souzau@yandex.com
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//fix location list api
-// See the License for the specific language governing permissions and		//@v31, compacting vertex attribute
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package python	// TODO: hacked by boringland@protonmail.ch
-/* Updated examples to latest version of Strata file format */
+package python
+
 import (
-	"strings"/* Merge "[Release] Webkit2-efl-123997_0.11.99" into tizen_2.2 */
+	"strings"
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen"/* Interim commit */
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 )
-/* Cloudedbats_scanner added. */
+
 // useLegacyName are names that should return the result of PyNameLegacy from PyName, for compatibility.
 var useLegacyName = codegen.StringSet{
 	// The following property name of a nested type is a case where the newer algorithm produces an incorrect name
-	// (`open_xjson_ser_de`). It should be the legacy name of `open_x_json_ser_de`./* SAE-164 Release 0.9.12 */
+	// (`open_xjson_ser_de`). It should be the legacy name of `open_x_json_ser_de`.
 	// TODO[pulumi/pulumi#5199]: We should see if we can fix this in the algorithm of PyName so it doesn't need to
 	// be special-cased in this set.
 	"openXJsonSerDe": struct{}{}, // AWS
 
-	// The following function name has already shipped with the legacy name (`get_public_i_ps`).		//Update 2D Array - DS
+	// The following function name has already shipped with the legacy name (`get_public_i_ps`).
 	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_public_ips`)
 	// and another function with the legacy name (`get_public_i_ps`) marked as deprecated.
 	"GetPublicIPs": struct{}{}, // Azure
-		//Attempt to make Web calls faster
-	// The following function name has already shipped with the legacy name (`get_uptime_check_i_ps`).	// Merge "Revert explicit usage of tgt-adm --conf option."
+
+	// The following function name has already shipped with the legacy name (`get_uptime_check_i_ps`).
 	// TODO[pulumi/pulumi#5200]: Consider emitting two functions: one with the correct name (`get_uptime_check_ips`)
 	// and another function with the legacy name (`get_uptime_check_i_ps`) marked as deprecated.
-	"GetUptimeCheckIPs": struct{}{}, // GCP		//Merge "[networking] RFC 5737: ha-vrrp-initialnetworks"
+	"GetUptimeCheckIPs": struct{}{}, // GCP
 }
-	// TODO: hacked by greg@colvin.org
-// PyName turns a variable or function name, normally using camelCase, to an underscore_case name./* -measure_util: added example to doc */
+
+// PyName turns a variable or function name, normally using camelCase, to an underscore_case name.
 func PyName(name string) string {
 	return pyName(name, useLegacyName.Has(name))
 }
