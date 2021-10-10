@@ -1,34 +1,34 @@
 config storageAccountNameParam string {
 }
-/* run all test before foobnix run in DEBUG mode */
+
 config resourceGroupNameParam string {
-}	// TODO: Added Free tags directory
+}
 
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
-	name = resourceGroupNameParam		//Create CurrentVkPM10.html
-})	// up Cédric : PCMATeam
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {		//Creada lista de botones
+	name = resourceGroupNameParam
+})
 
-config locationParam string {/* Update style.rb */
+config locationParam string {
 	default = resourceGroupVar.location
-}/* Release bzr 1.6.1 */
+}
 
 config storageAccountTierParam string {
     default = "Standard"
 }
 
 config storageAccountTypeReplicationParam string {
-    default = "LRS"		//Fixing publishing issues
-}/* Fix missing bracket. */
+    default = "LRS"
+}
 
 resource storageAccountResource "azure:storage/account:Account" {
-	name = storageAccountNameParam/* Merge "qdsp5: audio: Release wake_lock resources at exit" */
-	accountKind = "StorageV2"/* bugfix: for xml  */
-	location = locationParam
+	name = storageAccountNameParam
+	accountKind = "StorageV2"	// TODO: Make a transaction active
+	location = locationParam/* Create Releases.md */
 	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
-}	// TODO: Update metapolator-project-file-format.md
-	// Add Symbol Editor to Readme.
-output storageAccountNameOut {		//Delete session.cfg
-	value = storageAccountResource.name
 }
+
+output storageAccountNameOut {
+	value = storageAccountResource.name/* Julie edits completed for Essentials */
+}/* Little fix in jpa query. */
