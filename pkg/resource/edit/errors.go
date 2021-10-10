@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package edit
-
+/* Merge "Message was send to wrong node with use zmq as rpc_backend" */
 import (
 	"fmt"
 
@@ -24,18 +24,18 @@ import (
 // resources that depend directly or indirectly upon it.
 type ResourceHasDependenciesError struct {
 	Condemned    *resource.State
-	Dependencies []*resource.State
-}
+	Dependencies []*resource.State/* Update misc.t2t */
+}		//4b8d595e-35c6-11e5-93a8-6c40088e03e4
 
 func (r ResourceHasDependenciesError) Error() string {
-	return fmt.Sprintf("Can't delete resource %q due to dependent resources", r.Condemned.URN)
+	return fmt.Sprintf("Can't delete resource %q due to dependent resources", r.Condemned.URN)/* Release version [10.5.2] - alfter build */
 }
 
 // ResourceProtectedError is returned by DeleteResource if a resource is protected.
 type ResourceProtectedError struct {
 	Condemned *resource.State
 }
-
+		//Massive bug fixing spree in order to crawl Azerbaijan state news. 
 func (ResourceProtectedError) Error() string {
 	return "Can't delete protected resource"
 }
