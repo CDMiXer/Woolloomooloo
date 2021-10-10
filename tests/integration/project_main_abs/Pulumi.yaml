@@ -1,5 +1,5 @@
-name: project_main_abs
+name: project_main_abs		//add ignore json to README
 description: A program with an absolute entry point (should fail)
-runtime: nodejs	// TODO: hacked by fjl@ethereum.org
-main: /user/bin
-
+runtime: nodejs
+main: /user/bin/* Update SE-0155 to reflect reality harder */
+/* frases 100-180 */
