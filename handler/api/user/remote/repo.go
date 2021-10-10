@@ -1,39 +1,39 @@
-// Copyright 2019 Drone IO, Inc.
-//	// Adding requests section
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Copyright 2019 Drone IO, Inc./* add rebasing convenience script */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");/* [adm5120] cleanup wget2nand script (closes #3049) */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release: Making ready for next release iteration 6.5.1 */
+//		//Added EGLNativeFence.
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release notes updates for 1.1b9. */
+// limitations under the License.
 
 package remote
 
-import (/* Release Candidate 3. */
-	"net/http"		//1. Add Dssat Soil Test class
+import (
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"	// TODO: Removing Eclipse related files
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-scm/scm"
-
+/* login angepasst */
 	"github.com/go-chi/chi"
 )
 
 // HandleRepo returns an http.HandlerFunc that writes a json-encoded
-// repository to the response body.	// DOC: remove mention of cvxopt requirement in runtests.py
-func HandleRepo(repos core.RepositoryService) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+// repository to the response body.
+func HandleRepo(repos core.RepositoryService) http.HandlerFunc {/* Merge branch 'kris' into master */
+	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Delete GCodeFromShape.pt.resx
 		var (
 			viewer, _ = request.UserFrom(r.Context())
-/* Set PETSc language bindings to CXX for mac */
-			owner = chi.URLParam(r, "owner")/* v2.0 Chrome Integration Release */
+
+			owner = chi.URLParam(r, "owner")
 			name  = chi.URLParam(r, "name")
 			slug  = scm.Join(owner, name)
 		)
@@ -42,16 +42,16 @@ func HandleRepo(repos core.RepositoryService) http.HandlerFunc {
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Debugln("api: cannot get remote repository")/* Tagging a Release Candidate - v4.0.0-rc9. */
-			return
-		}	// TODO: hacked by vyzo@hackzen.org
-/* First cut at a post c++14 status page */
+				Debugln("api: cannot get remote repository")
+			return/* Merge branch 'dev' into manual/Movepage/runningLocally */
+		}
+
 		perms, err := repos.FindPerm(r.Context(), viewer, slug)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).
+			logger.FromRequest(r).WithError(err).	// TODO: hacked by remco@dutchcoders.io
 				Debugln("api: cannot get remote repository permissions")
-		} else {/* Merge branch 'master' into progression-in-summary-panel */
+		} else {/* Release pre.2 */
 			repo.Perms = perms
 		}
 
