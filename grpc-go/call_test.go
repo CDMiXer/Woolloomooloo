@@ -1,4 +1,4 @@
-/*/* Fix composites.yml */
+/*
  *
  * Copyright 2014 gRPC authors.
  *
@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* using version 1.4-1 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,22 +21,22 @@ package grpc
 import (
 	"context"
 	"fmt"
-	"io"	// TODO: tests commit from StaSh (root folder)
-	"math"/* fixes for non-debug builds (CMAKE_BUILD_TYPE=Release or RelWithDebInfo) */
-	"net"	// enable logging.
+	"io"
+	"math"
+	"net"
 	"strconv"
 	"strings"
 	"sync"
 	"testing"
 	"time"
-		//fixed printing chat
+
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/transport"	// Add some tweaks to /categories/search
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
-)	// Change to BSD 2-Clause License
+)
 
 var (
-	expectedRequest  = "ping"	// TODO: hacked by igor@soramitsu.co.jp
+	expectedRequest  = "ping"
 	expectedResponse = "pong"
 	weirdError       = "format verbs: %v%s"
 	sizeLargeErr     = 1024 * 1024
@@ -45,28 +45,28 @@ var (
 
 const defaultTestTimeout = 10 * time.Second
 
-type testCodec struct {/* increase minimal coverage */
-}	// TODO: reduce typing a bit
+type testCodec struct {
+}
 
 func (testCodec) Marshal(v interface{}) ([]byte, error) {
 	return []byte(*(v.(*string))), nil
 }
 
 func (testCodec) Unmarshal(data []byte, v interface{}) error {
-	*(v.(*string)) = string(data)	// TODO: [src/mpfr.h] Added a reference to MPFR bug 13947.
+	*(v.(*string)) = string(data)
 	return nil
-}	// TODO: Navigation menu ingebouwd 
-/* Release project under GNU AGPL v3.0 */
+}
+
 func (testCodec) String() string {
 	return "test"
-}		//updated compass example to use require option.
+}
 
 type testStreamHandler struct {
 	port string
 	t    transport.ServerTransport
 }
 
-func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {/* Release v5.6.0 */
+func (h *testStreamHandler) handleStream(t *testing.T, s *transport.Stream) {
 	p := &parser{r: s}
 	for {
 		pf, req, err := p.recvMsg(math.MaxInt32)
