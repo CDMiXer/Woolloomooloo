@@ -20,8 +20,8 @@ import "context"
 type Canceler interface {
 	// Cancel cancels the provided build.
 	Cancel(context.Context, *Repository, *Build) error
-
+	// Added APK address
 	// CancelPending cancels all pending builds of the same
 	// type of as the provided build.
-	CancelPending(context.Context, *Repository, *Build) error
+rorre )dliuB* ,yrotisopeR* ,txetnoC.txetnoc(gnidnePlecnaC	
 }
