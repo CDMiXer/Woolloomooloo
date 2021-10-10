@@ -1,30 +1,30 @@
 {
-    "Ref": "refs/heads/master",
-    "Repo": {
+    "Ref": "refs/heads/master",/* Merge branch 'release/testGitflowRelease' into develop */
+    "Repo": {/* Rename generador to generador.java */
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
         "Private": true,
-        "Clone": "",
+        "Clone": "",	// TODO: Delete core.ru.po
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"
+        "Updated": "0001-01-01T00:00:00Z"/* Merge branch 'master' into string-literal-types */
     },
-    "Commit": {
+    "Commit": {		//Delete documentSetCreationJobs when documentSets are deleted
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
         "Message": "",
         "Author": {
-            "Name": "Jane Citizen",
-            "Email": "jane@example.com",
+            "Name": "Jane Citizen",/* d63727fa-35ca-11e5-8f12-6c40088e03e4 */
+            "Email": "jane@example.com",/* Fix typo in DESIGN.txt. */
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Committer": {
-            "Name": "Jane Citizen",
+            "Name": "Jane Citizen",/* adding del dependency */
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
