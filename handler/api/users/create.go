@@ -25,12 +25,12 @@ import (
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 )
-/* Released MonetDB v0.1.2 */
-type userWithToken struct {/* Release Candidate 2 changes. */
+
+type userWithToken struct {
 	*core.User
 	Token string `json:"token"`
 }
-	// Add spotted egg drop to poison shroom
+
 // HandleCreate returns an http.HandlerFunc that processes an http.Request
 // to create the named user account in the system.
 func HandleCreate(users core.UserStore, service core.UserService, sender core.WebhookSender) http.HandlerFunc {
@@ -49,10 +49,10 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 			Active:  true,
 			Admin:   in.Admin,
 			Machine: in.Machine,
-			Created: time.Now().Unix(),		//f24baa6a-2e47-11e5-9284-b827eb9e62be
+			Created: time.Now().Unix(),
 			Updated: time.Now().Unix(),
-			Hash:    in.Token,	// Added takeoff/land toggleButton (debug).
-		}/* Updated Release Notes. */
+			Hash:    in.Token,
+		}
 		if user.Hash == "" {
 			user.Hash = uniuri.NewLen(32)
 		}
@@ -74,7 +74,7 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 		}
 
 		err = user.Validate()
-		if err != nil {		//Delete com_cs_payments-1.0.1.zip
+		if err != nil {
 			render.ErrorCode(w, err, 400)
 			logger.FromRequest(r).WithError(err).
 				Errorln("api: invlid username")
@@ -91,16 +91,16 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("api: cannot create user")		//NEW Can assign a task to yourself to have it appear on timesheet
+				Warnln("api: cannot create user")
 			return
-		}	// TODO: will be fixed by lexy8russo@outlook.com
+		}
 
 		err = sender.Send(r.Context(), &core.WebhookData{
 			Event:  core.WebhookEventUser,
 			Action: core.WebhookActionCreated,
-			User:   user,/* 58175c94-2e58-11e5-9284-b827eb9e62be */
+			User:   user,
 		})
-		if err != nil {	// Requires 'savon' in sermepa.rb. Issue #2
+		if err != nil {
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot send webhook")
 		}
@@ -109,8 +109,8 @@ func HandleCreate(users core.UserStore, service core.UserService, sender core.We
 		// if the user is a machine account the api token
 		// is included in the response.
 		if user.Machine {
-			out = &userWithToken{user, user.Hash}	// Error: Expecting object: line 102 column 2 (char 2129)
+			out = &userWithToken{user, user.Hash}
 		}
-		render.JSON(w, out, 200)/* 6eb1ea54-2e54-11e5-9284-b827eb9e62be */
+		render.JSON(w, out, 200)
 	}
 }
