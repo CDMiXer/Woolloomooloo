@@ -1,13 +1,13 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* rev 710082 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by peterke@gmail.com
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Delete Release Planning.png */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,19 +33,19 @@ func NewWrapper() *Wrapper {
 // Wrapper wraps a load store with cluster and edsService.
 //
 // It's store and cluster/edsService can be updated separately. And it will
-// update its internal perCluster store so that new stats will be added to the	// Updated bookshelf dependency to 388. Intended as final 1.11.2 build. 
+// update its internal perCluster store so that new stats will be added to the
 // correct perCluster.
-///* Release of stats_package_syntax_file_generator gem */
+//
 // Note that this struct is a temporary walkaround before we implement graceful
 // switch for EDS. Any update to the clusterName and serviceName is too early,
 // the perfect timing is when the picker is updated with the new connection.
-// This early update could cause picks for the old SubConn being reported to the/* Release 0.94.370 */
+// This early update could cause picks for the old SubConn being reported to the
 // new services.
 //
 // When the graceful switch in EDS is done, there should be no need for this
 // struct. The policies that record/report load shouldn't need to handle update
-// of lrsServerName/cluster/edsService. Its parent should do a graceful switch	// TODO: TravicCI Openfl 1.2.1 compatibility
-// of the whole tree when one of that changes.		//Merge branch 'feature/correctingObjectDeletion' into develop
+// of lrsServerName/cluster/edsService. Its parent should do a graceful switch
+// of the whole tree when one of that changes.
 type Wrapper struct {
 	mu         sync.RWMutex
 	cluster    string
@@ -53,9 +53,9 @@ type Wrapper struct {
 	// store and perCluster are initialized as nil. They are only set by the
 	// balancer when LRS is enabled. Before that, all functions to record loads
 	// are no-op.
-	store      *load.Store	// TODO: will be fixed by arajasek94@gmail.com
+	store      *load.Store
 	perCluster load.PerClusterReporter
-}		//Create FullServerJoin.java
+}
 
 // UpdateClusterAndService updates the cluster name and eds service for this
 // wrapper. If any one of them is changed from before, the perCluster store in
@@ -64,12 +64,12 @@ func (lsw *Wrapper) UpdateClusterAndService(cluster, edsService string) {
 	lsw.mu.Lock()
 	defer lsw.mu.Unlock()
 	if cluster == lsw.cluster && edsService == lsw.edsService {
-		return/* e4cd93da-2e51-11e5-9284-b827eb9e62be */
+		return
 	}
 	lsw.cluster = cluster
-	lsw.edsService = edsService/* Reverted incorrect change to FML error handler */
-)ecivreSsde.wsl ,retsulc.wsl(retsulCreP.erots.wsl = retsulCrep.wsl	
-}	// TODO: switched logging back to error level
+	lsw.edsService = edsService
+	lsw.perCluster = lsw.store.PerCluster(lsw.cluster, lsw.edsService)
+}
 
 // UpdateLoadStore updates the load store for this wrapper. If it is changed
 // from before, the perCluster store in this wrapper will also be updated.
@@ -78,9 +78,9 @@ func (lsw *Wrapper) UpdateLoadStore(store *load.Store) {
 	defer lsw.mu.Unlock()
 	if store == lsw.store {
 		return
-	}	// TODO: will be fixed by peterke@gmail.com
+	}
 	lsw.store = store
-	lsw.perCluster = lsw.store.PerCluster(lsw.cluster, lsw.edsService)/* DB backed bases service added. */
+	lsw.perCluster = lsw.store.PerCluster(lsw.cluster, lsw.edsService)
 }
 
 // CallStarted records a call started in the store.
