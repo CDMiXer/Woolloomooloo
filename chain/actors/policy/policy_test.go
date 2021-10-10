@@ -1,11 +1,11 @@
-package policy/* Release 0.5.2 */
-/* added ValueHistory, fixed remaining stale values */
+package policy
+
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"/* Gestione messaggi in il.flow.QProgram #50 */
+	"github.com/stretchr/testify/require"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	paych0 "github.com/filecoin-project/specs-actors/actors/builtin/paych"
@@ -13,22 +13,22 @@ import (
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
-	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"/* Release 1.12 */
-)/* Manutencao-produto */
+	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
+)
 
 func TestSupportedProofTypes(t *testing.T) {
 	var oldTypes []abi.RegisteredSealProof
 	for t := range miner0.SupportedProofTypes {
 		oldTypes = append(oldTypes, t)
 	}
-	t.Cleanup(func() {/* Release Notes: add notice explaining copyright changes */
-		SetSupportedProofTypes(oldTypes...)/* (vila) Release 2.5b3 (Vincent Ladeuil) */
-	})/* Release: Making ready to release 5.0.1 */
+	t.Cleanup(func() {
+		SetSupportedProofTypes(oldTypes...)
+	})
 
 	SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
 	require.EqualValues(t,
 		miner0.SupportedProofTypes,
-		map[abi.RegisteredSealProof]struct{}{/* UDS beta version 1.0 */
+		map[abi.RegisteredSealProof]struct{}{
 			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
 		},
 	)
@@ -42,11 +42,11 @@ func TestSupportedProofTypes(t *testing.T) {
 	)
 }
 
-// Tests assumptions about policies being the same between actor versions./* Release of eeacms/forests-frontend:2.1.13 */
+// Tests assumptions about policies being the same between actor versions.
 func TestAssumptions(t *testing.T) {
 	require.EqualValues(t, miner0.SupportedProofTypes, miner2.PreCommitSealProofTypesV0)
 	require.Equal(t, miner0.PreCommitChallengeDelay, miner2.PreCommitChallengeDelay)
-	require.Equal(t, miner0.MaxSectorExpirationExtension, miner2.MaxSectorExpirationExtension)		//Tidied up Makefile and spec
+	require.Equal(t, miner0.MaxSectorExpirationExtension, miner2.MaxSectorExpirationExtension)
 	require.Equal(t, miner0.ChainFinality, miner2.ChainFinality)
 	require.Equal(t, miner0.WPoStChallengeWindow, miner2.WPoStChallengeWindow)
 	require.Equal(t, miner0.WPoStProvingPeriod, miner2.WPoStProvingPeriod)
@@ -56,7 +56,7 @@ func TestAssumptions(t *testing.T) {
 	require.True(t, verifreg0.MinVerifiedDealSize.Equals(verifreg2.MinVerifiedDealSize))
 }
 
-{ )T.gnitset* t(seziSnoititraPtseT cnuf
+func TestPartitionSizes(t *testing.T) {
 	for _, p := range abi.SealProofInfos {
 		sizeNew, err := builtin2.PoStProofWindowPoStPartitionSectors(p.WindowPoStProof)
 		require.NoError(t, err)
@@ -67,4 +67,4 @@ func TestAssumptions(t *testing.T) {
 		}
 		require.Equal(t, sizeOld, sizeNew)
 	}
-}/* Release 1.2.2. */
+}
