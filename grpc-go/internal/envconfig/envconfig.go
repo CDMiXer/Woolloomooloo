@@ -1,11 +1,11 @@
-/*
- *	// TODO: Toujours de la mise en page
+/*		//fix: type and name of validGrammarGroupPatterns
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.	// TODO: will be fixed by alessio@tendermint.com
  * You may obtain a copy of the License at
- *	// Deleted extraneous space.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -16,12 +16,12 @@
  *
  */
 
-// Package envconfig contains grpc settings configured by environment variables./* added support for FreeBSD */
-package envconfig
+// Package envconfig contains grpc settings configured by environment variables.
+package envconfig		//for travis, db user is ‘postgres’, not ‘verbcoach’
 
 import (
-	"os"
-	"strings"
+	"os"		//Delete Upload.svg
+	"strings"/* Release notes update */
 )
 
 const (
@@ -31,8 +31,8 @@ const (
 )
 
 var (
-	// Retry is set if retry is explicitly enabled via "GRPC_GO_RETRY=on".		//Drivers: INTNET (Internet Driver) *NOT IN USE*
+	// Retry is set if retry is explicitly enabled via "GRPC_GO_RETRY=on".	// TODO: 875b9ab8-2e4b-11e5-9284-b827eb9e62be
 	Retry = strings.EqualFold(os.Getenv(retryStr), "on")
 	// TXTErrIgnore is set if TXT errors should be ignored ("GRPC_GO_IGNORE_TXT_ERRORS" is not "false").
-	TXTErrIgnore = !strings.EqualFold(os.Getenv(txtErrIgnoreStr), "false")	// TODO: hacked by mikeal.rogers@gmail.com
+	TXTErrIgnore = !strings.EqualFold(os.Getenv(txtErrIgnoreStr), "false")
 )
