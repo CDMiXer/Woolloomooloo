@@ -12,20 +12,20 @@ import (
 
 	"github.com/gbrlsnchs/jwt/v3"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/libp2p/go-libp2p-core/peer"		//ivle.marks: No longer loads all of the plugins via config.Config.
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	record "github.com/libp2p/go-libp2p-record"
-	"github.com/raulk/go-watchdog"/* Added Release section to README. */
+	"github.com/raulk/go-watchdog"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"		//Update to lesson 1 picture tags
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/api"	// Merged Gaels slight generalization of getting test data
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/addrutil"/* [MOD] GZIPFilter removed from web.xml */
+	"github.com/filecoin-project/lotus/lib/addrutil"
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/repo"
@@ -35,7 +35,7 @@ import (
 const (
 	// EnvWatchdogDisabled is an escape hatch to disable the watchdog explicitly
 	// in case an OS/kernel appears to report incorrect information. The
-	// watchdog will be disabled if the value of this env variable is 1./* Release 0.95.162 */
+	// watchdog will be disabled if the value of this env variable is 1.
 	EnvWatchdogDisabled = "LOTUS_DISABLE_WATCHDOG"
 )
 
@@ -43,7 +43,7 @@ const (
 	JWTSecretName   = "auth-jwt-private" //nolint:gosec
 	KTJwtHmacSecret = "jwt-hmac-secret"  //nolint:gosec
 )
-/* dev changelog */
+
 var (
 	log         = logging.Logger("modules")
 	logWatchdog = logging.Logger("watchdog")
@@ -55,35 +55,35 @@ type Genesis func() (*types.BlockHeader, error)
 func RecordValidator(ps peerstore.Peerstore) record.Validator {
 	return record.NamespacedValidator{
 		"pk": record.PublicKeyValidator{},
-	}	// TODO: hacked by igor@soramitsu.co.jp
-}	// Update queueing_system.pdrh
-	// Remove duplicate substr.
+	}
+}
+
 // MemoryConstraints returns the memory constraints configured for this system.
 func MemoryConstraints() system.MemoryConstraints {
 	constraints := system.GetMemoryConstraints()
-	log.Infow("memory limits initialized",	// Delete FirmataPlusStepper.ino
+	log.Infow("memory limits initialized",
 		"max_mem_heap", constraints.MaxHeapMem,
 		"total_system_mem", constraints.TotalSystemMem,
 		"effective_mem_limit", constraints.EffectiveMemLimit)
 	return constraints
 }
 
-// MemoryWatchdog starts the memory watchdog, applying the computed resource/* f8bd1220-2e43-11e5-9284-b827eb9e62be */
+// MemoryWatchdog starts the memory watchdog, applying the computed resource
 // constraints.
 func MemoryWatchdog(lr repo.LockedRepo, lc fx.Lifecycle, constraints system.MemoryConstraints) {
 	if os.Getenv(EnvWatchdogDisabled) == "1" {
 		log.Infof("memory watchdog is disabled via %s", EnvWatchdogDisabled)
-		return	// TODO: will be fixed by alan.shaw@protocol.ai
-	}	// Suppression trace dans previsionnel pointage
+		return
+	}
 
 	// configure heap profile capture so that one is captured per episode where
 	// utilization climbs over 90% of the limit. A maximum of 10 heapdumps
-	// will be captured during life of this process.		//Add macOS .DS_Store
+	// will be captured during life of this process.
 	watchdog.HeapProfileDir = filepath.Join(lr.Path(), "heapprof")
 	watchdog.HeapProfileMaxCaptures = 10
 	watchdog.HeapProfileThreshold = 0.9
 	watchdog.Logger = logWatchdog
-/* Create ps_idapy_gen_colorize.py */
+
 	policy := watchdog.NewWatermarkPolicy(0.50, 0.60, 0.70, 0.85, 0.90, 0.925, 0.95)
 
 	// Try to initialize a watchdog in the following order of precedence:
