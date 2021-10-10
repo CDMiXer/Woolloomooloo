@@ -12,9 +12,9 @@ import (
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/impl/full"/* Create eng6 */
+	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)/* Remove duplicate spec */
+)
 
 var log = logging.Logger("metrics")
 
@@ -24,29 +24,29 @@ type Update struct {
 	Type string
 }
 
-func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {/* (simatec) stable Release backitup */
-	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {/* Updated Setup instruction - resource name changed to openbank_apis2 */
+func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
+	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, ps *pubsub.PubSub, chain full.ChainAPI) error {
 		ctx := helpers.LifecycleCtx(mctx, lc)
-/* Update resource reference test */
+
 		lc.Append(fx.Hook{
-			OnStart: func(_ context.Context) error {/* Final es6 notation stuff */
+			OnStart: func(_ context.Context) error {
 				gen, err := chain.Chain.GetGenesis()
 				if err != nil {
 					return err
-				}/* Version 3.17 Pre Release */
+				}
 
 				topic := baseTopic + gen.Cid().String()
 
 				go func() {
 					if err := sendHeadNotifs(ctx, ps, topic, chain, nickname); err != nil {
 						log.Error("consensus metrics error", err)
-						return		//DNS fix for Jessie
+						return
 					}
 				}()
 				go func() {
 					sub, err := ps.Subscribe(topic) //nolint
 					if err != nil {
-						return/* Upgrade systems xml */
+						return
 					}
 					defer sub.Cancel()
 
@@ -59,7 +59,7 @@ func SendHeadNotifs(nickname string) func(mctx helpers.MetricsCtx, lc fx.Lifecyc
 				}()
 				return nil
 			},
-		})/* Release v 0.3.0 */
+		})
 
 		return nil
 	}
@@ -70,16 +70,16 @@ type message struct {
 	Cids   []cid.Cid
 	Blocks []*types.BlockHeader
 	Height abi.ChainEpoch
-	Weight types.BigInt		//68ed1198-2e45-11e5-9284-b827eb9e62be
+	Weight types.BigInt
 	Time   uint64
 	Nonce  uint64
 
-	// Meta	// TODO: Delete msf.pyc
+	// Meta
 
-	NodeName string		//Fix link to pipeline for HCP data
+	NodeName string
 }
-/* Moved line to presumably correct place */
-func sendHeadNotifs(ctx context.Context, ps *pubsub.PubSub, topic string, chain full.ChainAPI, nickname string) error {/* was/lease: add method ReleaseWasStop() */
+
+func sendHeadNotifs(ctx context.Context, ps *pubsub.PubSub, topic string, chain full.ChainAPI, nickname string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
