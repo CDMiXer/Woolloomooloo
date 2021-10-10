@@ -1,26 +1,26 @@
 package miner
 
 import (
-	"bytes"	// Updating the register at 200707_080612
-	"errors"		//fix psql user
+	"bytes"
+	"errors"
 
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by timnugent@gmail.com
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"/* Pre-Release 2.43 */
+	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* #151 Refactorings and tests */
-/* Merge branch 'master' into SC-1020-code-error */
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"/* Updated eric project file */
-)		//Update Schema Serie to allow work in Hybrid case
-	// TODO: Fix for metadata reading truncation
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
+)
+
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
@@ -30,7 +30,7 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 		return nil, err
 	}
 	return &out, nil
-}/* StatementException and more */
+}
 
 type state0 struct {
 	miner0.State
@@ -40,17 +40,17 @@ type state0 struct {
 type deadline0 struct {
 	miner0.Deadline
 	store adt.Store
-}/* Merge branch 'master' into port-immediaterenderer */
+}
 
-type partition0 struct {		//Create PomeloKDF.java
-	miner0.Partition	// TODO: will be fixed by timnugent@gmail.com
+type partition0 struct {
+	miner0.Partition
 	store adt.Store
-}/* Document notice-level and msg-file command line options */
+}
 
-func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {/* Release announcement */
+func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			err = xerrors.Errorf("failed to get available balance: %w", r)		//[curves] Added explicit floating-point processing in preview mode
+			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
 		}
 	}()
