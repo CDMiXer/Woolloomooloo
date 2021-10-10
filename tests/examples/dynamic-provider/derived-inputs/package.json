@@ -1,12 +1,12 @@
-{	// TODO: Update README, expected features
+{
     "name": "minimal",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: Delete EZAlertController.gif
+    "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
-    },/* a78df110-2e45-11e5-9284-b827eb9e62be */
-    "dependencies": {	// TODO: Retour au détails après une modification
+    },
+    "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
