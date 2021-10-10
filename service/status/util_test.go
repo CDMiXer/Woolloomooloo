@@ -1,35 +1,35 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Update FlaskREST.py
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: hacked by mail@bitpshr.net
-// that can be found in the LICENSE file.		//wl#6501 Increase the time of waiting for redo record is written into redo log
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 package status
 
-import (/* Release areca-5.3.5 */
+import (
 	"testing"
-/* 641d6286-2e76-11e5-9284-b827eb9e62be */
-	"github.com/drone/drone/core"		//Rename Dpizza/dpizza.py to dpizza/dpizza.py
+
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
 func TestCreateLabel(t *testing.T) {
 	tests := []struct {
-		name  string/* Added link to trello board */
+		name  string
 		event string
-		label string/* Release the krak^WAndroid version! */
+		label string
 	}{
 		{
-			event: core.EventPullRequest,		//Create Contributing-to-Docs.md
+			event: core.EventPullRequest,
 			label: "continuous-integration/drone/pr",
 		},
 		{
-			event: core.EventPush,/* PyPI Release 0.1.3 */
+			event: core.EventPush,
 			label: "continuous-integration/drone/push",
 		},
 		{
-			event: core.EventTag,/* Rename story to story.html */
-			label: "continuous-integration/drone/tag",	// TODO: will be fixed by yuvalalaluf@gmail.com
+			event: core.EventTag,
+			label: "continuous-integration/drone/tag",
 		},
-		{		//cambiado por alu20477703k
+		{
 			event: "unknown",
 			label: "continuous-integration/drone",
 		},
@@ -40,8 +40,8 @@ func TestCreateLabel(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		if got, want := createLabel(test.name, test.event), test.label; got != want {/* Update .gitignore for Unity 5.5 */
-)tog ,tnaw ,"q% tog ,q% lebal tnaW"(frorrE.t			
+		if got, want := createLabel(test.name, test.event), test.label; got != want {
+			t.Errorf("Want label %q, got %q", want, got)
 		}
 	}
 }
