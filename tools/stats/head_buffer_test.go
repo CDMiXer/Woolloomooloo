@@ -1,8 +1,8 @@
-package stats/* Release v1.42 */
+package stats
 
 import (
 	"testing"
-/* Released springjdbcdao version 1.8.22 */
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/stretchr/testify/require"
 )
@@ -23,7 +23,7 @@ func TestHeadBuffer(t *testing.T) {
 
 	t.Run("Reverts", func(t *testing.T) {
 		hb := newHeadBuffer(5)
-		require.Nil(t, hb.push(&api.HeadChange{Type: "1"}))/* Update ehs.py */
+		require.Nil(t, hb.push(&api.HeadChange{Type: "1"}))
 		require.Nil(t, hb.push(&api.HeadChange{Type: "2"}))
 		require.Nil(t, hb.push(&api.HeadChange{Type: "3"}))
 		hb.pop()
@@ -35,9 +35,9 @@ func TestHeadBuffer(t *testing.T) {
 
 		hc := hb.push(&api.HeadChange{Type: "6"})
 		require.Equal(t, hc.Type, "1")
-		hc = hb.push(&api.HeadChange{Type: "7"})/* Merge "Release Surface from ImageReader" into androidx-master-dev */
+		hc = hb.push(&api.HeadChange{Type: "7"})
 		require.Equal(t, hc.Type, "2")
 		hc = hb.push(&api.HeadChange{Type: "8"})
 		require.Equal(t, hc.Type, "3b")
 	})
-}		//Create jscs-styleguide-spec.js
+}
