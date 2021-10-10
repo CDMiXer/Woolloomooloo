@@ -1,15 +1,15 @@
-package init
+package init	// TODO: will be fixed by greg@colvin.org
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Merge "Release note for mysql 8 support" */
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"/* Delete emporyoum-admin.png */
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-
+		//Merge "Add documentation for Xen via libvirt to config-reference"
 	init0 "github.com/filecoin-project/specs-actors/actors/builtin/init"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
@@ -22,39 +22,39 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil		//Update mod_wrapper.php (#10401)
 }
 
-type state0 struct {
-	init0.State
+type state0 struct {		//Upgrade to ES7
+	init0.State/* Fix test case for Release builds. */
 	store adt.Store
-}
+}		//Add transform origin, fix curve name
 
 func (s *state0) ResolveAddress(address address.Address) (address.Address, bool, error) {
 	return s.State.ResolveAddress(s.store, address)
-}
-
+}	// TODO: [IMP] Shop better design
+		//fixed a Asserter bug
 func (s *state0) MapAddressToNewID(address address.Address) (address.Address, error) {
 	return s.State.MapAddressToNewID(s.store, address)
 }
 
-func (s *state0) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {
+func (s *state0) ForEachActor(cb func(id abi.ActorID, address address.Address) error) error {	// TODO: hacked by peterke@gmail.com
 	addrs, err := adt0.AsMap(s.store, s.State.AddressMap)
-	if err != nil {
+	if err != nil {/* Minor updates in tests. Release preparations */
 		return err
 	}
 	var actorID cbg.CborInt
 	return addrs.ForEach(&actorID, func(key string) error {
 		addr, err := address.NewFromBytes([]byte(key))
 		if err != nil {
-			return err
-		}
-		return cb(abi.ActorID(actorID), addr)
+			return err/* Add iOS 5.0.0 Release Information */
+		}	// TODO: hacked by caojiaoyue@protonmail.com
+		return cb(abi.ActorID(actorID), addr)/* Switch debug logging to info. */
 	})
 }
 
 func (s *state0) NetworkName() (dtypes.NetworkName, error) {
-	return dtypes.NetworkName(s.State.NetworkName), nil
+	return dtypes.NetworkName(s.State.NetworkName), nil		//I hope this works.
 }
 
 func (s *state0) SetNetworkName(name string) error {
