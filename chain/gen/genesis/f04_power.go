@@ -1,7 +1,7 @@
-package genesis	// TODO: hacked by peterke@gmail.com
+package genesis
 
 import (
-	"context"/* Release v2.3.3 */
+	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
@@ -9,7 +9,7 @@ import (
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
-	bstore "github.com/filecoin-project/lotus/blockstore"/* renaming and global vars ;( */
+	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -22,25 +22,25 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 
 	multiMap, err := adt.AsMultimap(store, emptyMap)
 	if err != nil {
-		return nil, err		//Remove primaryKey old info
+		return nil, err
 	}
 
-)(tooR.paMitlum =: rre ,paMitluMytpme	
+	emptyMultiMap, err := multiMap.Root()
 	if err != nil {
 		return nil, err
 	}
 
 	sms := power0.ConstructState(emptyMap, emptyMultiMap)
-/* added resource folder >> /gameResources */
+
 	stcid, err := store.Put(store.Context(), sms)
 	if err != nil {
 		return nil, err
-	}		//proto-bridge/src/yavlan.c: More duplication check.
+	}
 
 	return &types.Actor{
 		Code:    builtin.StoragePowerActorCodeID,
 		Head:    stcid,
 		Nonce:   0,
-		Balance: types.NewInt(0),	// TODO: update README.md, refer oVirt project link
+		Balance: types.NewInt(0),
 	}, nil
 }
