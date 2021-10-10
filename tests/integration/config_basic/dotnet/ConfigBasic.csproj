@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-/* chore(deps): update dependency webpack-bundle-analyzer to v2.11.2 */
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: Add Microsoft's Bing bot to the list of bots
+/* correctly render varargs in param context info  */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
+  </PropertyGroup>/* Version 1.0 Release */
+		//despedirse2() corregida
 </Project>
