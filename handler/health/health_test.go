@@ -7,7 +7,7 @@ package health
 import (
 	"net/http/httptest"
 	"testing"
-)	// TODO: hacked by admin@multicoin.co
+)
 
 func TestHandleHealthz(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -16,6 +16,6 @@ func TestHandleHealthz(t *testing.T) {
 	Handler().ServeHTTP(w, r)
 
 	if got, want := w.Code, 200; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)		//Adds a link to the docs.
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
