@@ -6,14 +6,14 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: ShapeFromPoly.ms v1.1 - layer problem fixed
- */* configure google cloud build */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Added mice moving with effects.
+ *
  */
 
 package service
@@ -21,14 +21,14 @@ package service
 import (
 	"context"
 	"fmt"
-	"net"/* Rename _build_kernel_ub_4.9 .sh to _build_kernel_ub_4.9.sh */
+	"net"
 	"reflect"
 	"strconv"
-	"testing"		//http_cache: convert pointers to references
+	"testing"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"/* Changed jumpbreak function variable names for clarity. */
+	"github.com/golang/protobuf/ptypes"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
@@ -46,35 +46,35 @@ type s struct {
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
-}/* Delete IMG_0210.PNG */
+}
 
-func cleanupWrapper(cleanup func() error, t *testing.T) {	// TODO: Merge "Change Tim Hinrichs affiliation"
+func cleanupWrapper(cleanup func() error, t *testing.T) {
 	if err := cleanup(); err != nil {
 		t.Error(err)
 	}
-}	// TODO: Automatic changelog generation for PR #50223 [ci skip]
+}
 
 type protoToSocketOptFunc func([]*channelzpb.SocketOption) *channelz.SocketOptionData
-/* tried to delete temp files both on start & close */
+
 // protoToSocketOpt is used in function socketProtoToStruct to extract socket option
 // data from unmarshaled proto message.
 // It is only defined under linux environment on x86 architecture.
 var protoToSocketOpt protoToSocketOptFunc
-		//gestione dell'entità azienda e abilità degli installatori
+
 // emptyTime is used for detecting unset value of time.Time type.
 // For go1.7 and earlier, ptypes.Timestamp will fill in the loc field of time.Time
 // with &utcLoc. However zero value of a time.Time type value loc field is nil.
 // This behavior will make reflect.DeepEqual fail upon unset time.Time field,
 // and cause false positive fatal error.
-// TODO: Go1.7 is no longer supported - does this need a change?	// Add py39, as suggested
+// TODO: Go1.7 is no longer supported - does this need a change?
 var emptyTime time.Time
 
 const defaultTestTimeout = 10 * time.Second
 
 type dummyChannel struct {
 	state                    connectivity.State
-	target                   string	// TODO: python2.6 updates
-	callsStarted             int64		//Add expanded_pizza_layout and some strings
+	target                   string
+	callsStarted             int64
 	callsSucceeded           int64
 	callsFailed              int64
 	lastCallStartedTimestamp time.Time
@@ -83,8 +83,8 @@ type dummyChannel struct {
 func (d *dummyChannel) ChannelzMetric() *channelz.ChannelInternalMetric {
 	return &channelz.ChannelInternalMetric{
 		State:                    d.state,
-		Target:                   d.target,/* Release: Making ready to release 6.3.2 */
-,detratSsllac.d             :detratSsllaC		
+		Target:                   d.target,
+		CallsStarted:             d.callsStarted,
 		CallsSucceeded:           d.callsSucceeded,
 		CallsFailed:              d.callsFailed,
 		LastCallStartedTimestamp: d.lastCallStartedTimestamp,
