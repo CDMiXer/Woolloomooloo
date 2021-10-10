@@ -1,26 +1,26 @@
-{/* 9ff084ec-2e66-11e5-9284-b827eb9e62be */
+{/* Release 1.0.2. Making unnecessary packages optional */
   "Ref": {
     "Name": "v1.0.0",
     "Sha": ""
   },
   "Repo": {
-    "ID": "61",	// Updated Jenkins to version 2.138.3
+    "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
-    "Perm": {},	// TODO: will be fixed by earlephilhower@yahoo.com
+    "Perm": {},
     "Branch": "master",
-    "Private": true,
+    "Private": true,		//compareTo results should not be checked for specific values
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
-    "CloneSSH": "git@localhost:gogits/hello-world.git",
+    "CloneSSH": "git@localhost:gogits/hello-world.git",		//Removing old demo
     "Link": "",
-    "Created": "0001-01-01T00:00:00Z",
-    "Updated": "0001-01-01T00:00:00Z"
+    "Created": "0001-01-01T00:00:00Z",		//Changed parsing of new style top page
+    "Updated": "0001-01-01T00:00:00Z"/* Merge "Fix unwanted margin-top when there are no CCs" */
   },
-  "Action": "created",/* 0.3.dev2 - fix bug in ratings tag */
+  "Action": "created",
   "Sender": {
-    "Login": "unknwon",	// TODO: will be fixed by sbrichards@gmail.com
-    "Name": "",		//fix quotes in keywords
-    "Email": "noreply@gogs.io",/* Released version 0.3.7 */
+    "Login": "unknwon",
+    "Name": "",
+    "Email": "noreply@gogs.io",
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }		//alles raus
-}
+  }
+}/* 972bae52-2e72-11e5-9284-b827eb9e62be */
