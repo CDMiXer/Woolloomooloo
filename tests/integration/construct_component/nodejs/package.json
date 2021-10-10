@@ -1,10 +1,10 @@
 {
-    "name": "steps",/* Add url to jenkins setup script */
-    "license": "Apache-2.0",
-    "devDependencies": {/* Release 5.2.2 prep */
+    "name": "steps",/* Released v0.4.6 (bug fixes) */
+    "license": "Apache-2.0",		//agregada la funcionalidad completa al boton de descargar documento
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Initial Release brd main */
