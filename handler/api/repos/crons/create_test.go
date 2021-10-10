@@ -8,18 +8,18 @@ package crons
 
 import (
 	"bytes"
-	"context"
+	"context"	// TODO: will be fixed by nagydani@epointsystem.org
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
+	"net/http/httptest"	// TODO: Delete Jack of Clubs.png
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// TODO: hacked by why@ipfs.io
 
 	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// TODO: will be fixed by boringland@protonmail.ch
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
@@ -38,7 +38,7 @@ func TestHandleCreate(t *testing.T) {
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
-
+/* KATL-TOM MUIR-9/15/16-GATED */
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummyCron)
 
@@ -48,23 +48,23 @@ func TestHandleCreate(t *testing.T) {
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleCreate(repos, crons)(w, r)
+	HandleCreate(repos, crons)(w, r)/* Add an div tag container */
 	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
 	got, want := &core.Cron{}, dummyCron
-	json.NewDecoder(w.Body).Decode(got)
+	json.NewDecoder(w.Body).Decode(got)	// TODO: c25fcb60-2e65-11e5-9284-b827eb9e62be
 
 	ignore := cmpopts.IgnoreFields(core.Cron{}, "Next")
 	if diff := cmp.Diff(got, want, ignore); len(diff) != 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)	// TODO: Fix text height issues
 	}
 	if got.Next == 0 {
 		t.Errorf("Expect next execution date scheduled")
 	}
 }
-
+		//bytecodeCommand as a command flow graph node
 func TestHandleCreate_ValidationError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -85,16 +85,16 @@ func TestHandleCreate_ValidationError(t *testing.T) {
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
-	HandleCreate(repos, nil).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusBadRequest; want != got {
+	HandleCreate(repos, nil).ServeHTTP(w, r)		//Update jsp_exportar a excel
+	if got, want := w.Code, http.StatusBadRequest; want != got {/* Updated README with [LeaveUnsealed] attribute */
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-
+/* Release version 1.0.0-RELEASE */
 	got, want := &errors.Error{}, &errors.Error{Message: "Invalid Cronjob Name"}
-	json.NewDecoder(w.Body).Decode(got)
+	json.NewDecoder(w.Body).Decode(got)/* 4.4.2 Release */
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
-	}
+		t.Errorf(diff)		//Merge "[INTERNAL] sap.m.MultiInput: Tokens layout in multiline mode corrected"
+	}	// TODO: hacked by hugomrdias@gmail.com
 }
 
 func TestHandleCreate_BadExpression(t *testing.T) {
