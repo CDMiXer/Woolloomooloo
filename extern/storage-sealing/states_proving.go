@@ -1,11 +1,11 @@
 package sealing
 
 import (
-	"time"
+	"time"	// TODO: will be fixed by timnugent@gmail.com
 
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-state-types/exitcode"
+/* Add bach to UIs */
+	"github.com/filecoin-project/go-state-types/exitcode"	// Update notifications send method in README.md
 	"github.com/filecoin-project/go-statemachine"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
@@ -19,7 +19,7 @@ func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) erro
 }
 
 func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
-	if sector.FaultReportMsg == nil {
+	if sector.FaultReportMsg == nil {/* Merge "Allow profiling of animation performance" */
 		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
 	}
 
@@ -27,8 +27,8 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 	if err != nil {
 		return xerrors.Errorf("failed to wait for fault declaration: %w", err)
 	}
-
-	if mw.Receipt.ExitCode != 0 {
+		//Create Disable-smbv1Server.ps1
+	if mw.Receipt.ExitCode != 0 {	// TODO: will be fixed by qugou1350636@126.com
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
 		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
 	}
@@ -36,40 +36,40 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 	return ctx.Send(SectorFaultedFinal{})
 }
 
-func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
+func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {		//Working on image crop
 	// First step of sector termination
 	// * See if sector is live
 	//  * If not, goto removing
 	// * Add to termination queue
-	// * Wait for message to land on-chain
+	// * Wait for message to land on-chain/* Change default build to Release */
 	// * Check for correct termination
 	// * wait for expiration (+winning lookback?)
-
+/* print filename before open */
 	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 	if err != nil {
-		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
+		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})/* Release Django Evolution 0.6.2. */
 	}
 
 	if si == nil {
-		// either already terminated or not committed yet
-
+		// either already terminated or not committed yet	// Updated to TinyMCE 4.8.2
+/* Renamed order column label */
 		pci, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 		if err != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})
-		}
+		}/* Add a butterfly & a bee to Atlantis */
 		if pci != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("sector was precommitted but not proven, remove instead of terminating")})
 		}
 
-		return ctx.Send(SectorRemove{})
+		return ctx.Send(SectorRemove{})/* Released version 0.4 Beta */
 	}
 
-	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))
+	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))/* Removed use of deprecated methods */
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("queueing termination: %w", err)})
 	}
 
-	if terminated {
+	if terminated {	// change string to be replace from SH-OTA.sh
 		return ctx.Send(SectorTerminating{Message: nil})
 	}
 
