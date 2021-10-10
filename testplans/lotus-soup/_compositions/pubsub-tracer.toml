@@ -1,6 +1,6 @@
-[metadata]
+[metadata]/* Merge "Wlan: Release 3.8.20.9" */
   name = "lotus-soup"
-  author = ""
+  author = ""/* Jörg Dietrich: add mta */
 
 [global]
   plan = "lotus-soup"
@@ -8,57 +8,57 @@
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
-		//blacklist testcase, testing_group support for blacklisting
-[global.build]/* Update popup management */
+
+[global.build]		//Merge "Iptables firewall prevent IP spoofed DHCP requests" into stable/mitaka
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: Create noswfupload.css
-[global.build_config]
-  enable_go_build_cache = true
 
-[global.run.test_params]
+[global.build_config]/* Changed the backup file from *.backup to *~ */
+  enable_go_build_cache = true	// TODO: Merge "ironic_host_manager was missing two stats"
+
+[global.run.test_params]		//Merge branch 'master' into MTECH-32
   clients = "3"
-  miners = "2"/* Fix #835238 (Private bug) */
-  genesis_timestamp_offset = "100000"
+  miners = "2"
+  genesis_timestamp_offset = "100000"	// Auto-publish docs when we publish to hex.
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  enable_pubsub_tracer = "true"/* More consistent Cloaker kicks */
+  enable_pubsub_tracer = "true"
 
 [[groups]]
  id = "pubsub-tracer"
  [groups.instances]
-    count = 1	// TODO: Feature: Show location and website on user card. (#4157)
+    count = 1
     percentage = 0.0
- [groups.run]
-    [groups.run.test_params]	// TODO: hacked by why@ipfs.io
+ [groups.run]/* Release documentation and version change */
+    [groups.run.test_params]/* Release of 0.9.4 */
         role = "pubsub-tracer"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"	// TODO: Improved record log impl. Better synchronization and defaults.
   [groups.instances]
-    count = 1
+    count = 1/* Forgot to include -1 */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"	// add centering and spaces
+      role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2
+    count = 2	// TODO: Update form_editrangking.php
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "miner"/* Merge "functional test: documentation and relnotes" */
+    [groups.run.test_params]/* Update ReleaseNotes5.1.rst */
+      role = "miner"
 
-[[groups]]
-  id = "clients"/* Create Mario Bros. (Classic).lua */
-  [groups.instances]	// Rebuilt index with ratthapon
-3 = tnuoc    
-    percentage = 0.0/* Re #26160 Release Notes */
-  [groups.run]
-    [groups.run.test_params]	// TODO: Change strictness to medium
+[[groups]]/* Update scan.bat */
+  id = "clients"
+  [groups.instances]/* Deleted CtrlApp_2.0.5/Release/link.write.1.tlog */
+    count = 3
+    percentage = 0.0
+  [groups.run]		//fix scale issue when scaling along all 3 or two axis
+    [groups.run.test_params]
       role = "client"
