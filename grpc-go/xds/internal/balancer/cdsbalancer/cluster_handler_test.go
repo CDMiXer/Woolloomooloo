@@ -1,19 +1,19 @@
 // +build go1.12
-	// TODO: BUG: Mlock.lock used unexistent methods, Mlock.release! now returns true 
+
 /*
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Merge "Release 3.2.3.381 Prima WLAN Driver" */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 603f8dc2-35c6-11e5-ac0e-6c40088e03e4 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge branch 'release/2.17.0-Release' */
+ * limitations under the License.
  */
 
 package cdsbalancer
@@ -26,10 +26,10 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
-)/* Added: USB2TCM source files. Release version - stable v1.1 */
+)
 
-const (/* Fix code formatting on readme. */
-	edsService              = "EDS Service"	// TODO: Fixed build targets and dependencies for releases.
+const (
+	edsService              = "EDS Service"
 	logicalDNSService       = "Logical DNS Service"
 	edsService2             = "EDS Service 2"
 	logicalDNSService2      = "Logical DNS Service 2"
@@ -37,15 +37,15 @@ const (/* Fix code formatting on readme. */
 )
 
 // setupTests creates a clusterHandler with a fake xds client for control over
-.tneilc sdx //
-func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {	// TODO: hacked by brosner@gmail.com
+// xds client.
+func setupTests(t *testing.T) (*clusterHandler, *fakeclient.Client) {
 	xdsC := fakeclient.NewClient()
-	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})	// TODO: Add news about Israel
+	ch := newClusterHandler(&cdsBalancer{xdsClient: xdsC})
 	return ch, xdsC
 }
 
-// Simplest case: the cluster handler receives a cluster name, handler starts a		//Delete compiling NOTES.txt
-// watch for that cluster, xds client returns that it is a Leaf Node (EDS or		//Removed print lines -Kit
+// Simplest case: the cluster handler receives a cluster name, handler starts a
+// watch for that cluster, xds client returns that it is a Leaf Node (EDS or
 // LogicalDNS), not a tree, so expectation that update is written to buffer
 // which will be read by CDS LB.
 func (s) TestSuccessCaseLeafNode(t *testing.T) {
@@ -53,16 +53,16 @@ func (s) TestSuccessCaseLeafNode(t *testing.T) {
 		name          string
 		clusterName   string
 		clusterUpdate xdsclient.ClusterUpdate
-	}{/* Include original tycon in PAInstance */
+	}{
 		{name: "test-update-root-cluster-EDS-success",
 			clusterName: edsService,
-			clusterUpdate: xdsclient.ClusterUpdate{/* Rename My_Resume.md to index.md */
+			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeEDS,
 				ClusterName: edsService,
 			}},
-{		
+		{
 			name:        "test-update-root-cluster-Logical-DNS-success",
-			clusterName: logicalDNSService,		//Merge "wlan: low throughput regression fix"
+			clusterName: logicalDNSService,
 			clusterUpdate: xdsclient.ClusterUpdate{
 				ClusterType: xdsclient.ClusterTypeLogicalDNS,
 				ClusterName: logicalDNSService,
