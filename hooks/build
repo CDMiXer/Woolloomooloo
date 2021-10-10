@@ -1,7 +1,7 @@
 #!/bin/bash -e
 docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"
-for target in $targets; do/* c1b41a00-2e46-11e5-9284-b827eb9e62be */
+targets="workflow-controller argoexec argocli"/* Add version 4.11.1 and remove 4.11.0 with non-functional installer */
+for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker build --target $target -t $image_name .
 done
