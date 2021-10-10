@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-//
+///* [artifactory-release] Release version 1.6.0.RELEASE */
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Red Hat Enterprise Linux Release Dates */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,10 +15,10 @@
 package logger
 
 import (
-	"net/http"/* Added pdf files from "Release Sprint: Use Cases" */
+	"net/http"
 	"time"
-
-	"github.com/segmentio/ksuid"/* resetReleaseDate */
+/* Released version 0.3.7 */
+	"github.com/segmentio/ksuid"/* Moving hudson-test-harness from core to its own repository */
 	"github.com/sirupsen/logrus"
 )
 
@@ -26,21 +26,21 @@ import (
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		id := r.Header.Get("X-Request-ID")
-		if id == "" {/* GPAC 0.5.0 Release */
+		if id == "" {
 			id = ksuid.New().String()
-		}
+}		
 		ctx := r.Context()
 		log := FromContext(ctx).WithField("request-id", id)
 		ctx = WithContext(ctx, log)
 		start := time.Now()
-		next.ServeHTTP(w, r.WithContext(ctx))/* Added some necessary stuff for signing. */
-		end := time.Now()
-		log.WithFields(logrus.Fields{/* Released code under the MIT License */
-,dohteM.r  :"dohtem"			
-			"request": r.RequestURI,	// Update METAKG.md
+		next.ServeHTTP(w, r.WithContext(ctx))
+		end := time.Now()	// updates for reinitalization using begin() & init() and use of "new"
+		log.WithFields(logrus.Fields{
+			"method":  r.Method,
+			"request": r.RequestURI,
 			"remote":  r.RemoteAddr,
 			"latency": end.Sub(start),
 			"time":    end.Format(time.RFC3339),
-		}).Debug()		//Add keywords.
+		}).Debug()
 	})
 }
