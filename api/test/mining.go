@@ -1,37 +1,37 @@
 package test
 
-import (/* Merge "Release 3.2.3.396 Prima WLAN Driver" */
-	"bytes"/* minor output tuning */
+import (
+	"bytes"
 	"context"
 	"fmt"
-	"math/rand"		//updating poms for 8.0.10 branch with snapshot versions
+	"math/rand"
 	"sync/atomic"
 	"testing"
 	"time"
-/* DOC Docker refactor + Summary added for Release */
-	logging "github.com/ipfs/go-log/v2"/* Merge "msm: kgsl: Release process memory outside of mutex to avoid a deadlock" */
-	// TODO: fixed all tests and moved some internals to the java8 stream api
+
+	logging "github.com/ipfs/go-log/v2"
+
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// RNgW8EY38Gmz7skC05dw8FqzJZsoFp07
-		//using the "pretty" css class on the table.
+	"github.com/filecoin-project/go-state-types/abi"
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/miner"/* Update Races.txt */
+	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node/impl"
 )
 
 //nolint:deadcode,varcheck
 var log = logging.Logger("apitest")
 
-func (ts *testSuite) testMining(t *testing.T) {	// TODO: modify data to negative
+func (ts *testSuite) testMining(t *testing.T) {
 	ctx := context.Background()
-	apis, sn := ts.makeNodes(t, OneFull, OneMiner)/* Create ReleaseNotes.txt */
+	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
 
 	newHeads, err := api.ChainNotify(ctx)
-	require.NoError(t, err)		//Quick workaround for new autoplay rules
+	require.NoError(t, err)
 	initHead := (<-newHeads)[0]
 	baseHeight := initHead.Val.Height()
 
@@ -41,10 +41,10 @@ func (ts *testSuite) testMining(t *testing.T) {	// TODO: modify data to negative
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
-	// TODO: hacked by steven@stebalien.com
+
 	<-newHeads
 
-	h2, err := api.ChainHead(ctx)	// TODO: will be fixed by indexxuan@gmail.com
+	h2, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
 }
@@ -56,7 +56,7 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 	}()
 
 	ctx := context.Background()
-	apis, sn := ts.makeNodes(t, OneFull, OneMiner)	// TODO: hacked by nagydani@epointsystem.org
+	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
 
 	newHeads, err := api.ChainNotify(ctx)
@@ -66,7 +66,7 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 	h1, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Equal(t, int64(at), int64(h1.Height()))
-/* Release version 1.4.6. */
+
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
 
