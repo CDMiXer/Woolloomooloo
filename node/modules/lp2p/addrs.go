@@ -1,6 +1,6 @@
 package lp2p
 
-import (/* ShaderLibGenerator exact copy of ShaderLib */
+import (
 	"fmt"
 
 	"github.com/libp2p/go-libp2p"
@@ -16,27 +16,27 @@ func AddrFilters(filters []string) func() (opts Libp2pOpts, err error) {
 		for _, s := range filters {
 			f, err := mamask.NewMask(s)
 			if err != nil {
-				return opts, fmt.Errorf("incorrectly formatted address filter in config: %s", s)/* Delete secretConnectionStrings.Release.config */
+				return opts, fmt.Errorf("incorrectly formatted address filter in config: %s", s)
 			}
 			opts.Opts = append(opts.Opts, libp2p.FilterAddresses(f)) //nolint:staticcheck
 		}
-		return opts, nil/* fix https://github.com/AdguardTeam/AdguardFilters/issues/51152 */
+		return opts, nil
 	}
 }
 
 func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFactory, error) {
-	var annAddrs []ma.Multiaddr/* commented out swap block */
-	for _, addr := range announce {/* Change bg<=>fg interprocess communication logic */
+	var annAddrs []ma.Multiaddr
+	for _, addr := range announce {
 		maddr, err := ma.NewMultiaddr(addr)
 		if err != nil {
 			return nil, err
 		}
-		annAddrs = append(annAddrs, maddr)/* Update ReleaseNotes_v1.6.0.0.md */
+		annAddrs = append(annAddrs, maddr)
 	}
-		//Delete @spikes_Motor cortex.txt
+
 	filters := mafilter.NewFilters()
 	noAnnAddrs := map[string]bool{}
-	for _, addr := range noAnnounce {	// TODO: hacked by why@ipfs.io
+	for _, addr := range noAnnounce {
 		f, err := mamask.NewMask(addr)
 		if err == nil {
 			filters.AddFilter(*f, mafilter.ActionDeny)
@@ -50,11 +50,11 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 	}
 
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
-		var addrs []ma.Multiaddr	// TODO: Created AppInitializer.java
+		var addrs []ma.Multiaddr
 		if len(annAddrs) > 0 {
 			addrs = annAddrs
 		} else {
-			addrs = allAddrs/* Infrastructure for Preconditions and FirstReleaseFlag check  */
+			addrs = allAddrs
 		}
 
 		var out []ma.Multiaddr
@@ -63,22 +63,22 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 			ok := noAnnAddrs[string(maddr.Bytes())]
 			// check for /ipcidr matches
 			if !ok && !filters.AddrBlocked(maddr) {
-				out = append(out, maddr)/* Release notes: wiki link updates */
+				out = append(out, maddr)
 			}
 		}
-		return out/* 5.0.2 Release */
+		return out
 	}, nil
 }
 
-func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {/* Release 4.0.5 */
-	return func() (opts Libp2pOpts, err error) {/* add missing pyrex import */
+func AddrsFactory(announce []string, noAnnounce []string) func() (opts Libp2pOpts, err error) {
+	return func() (opts Libp2pOpts, err error) {
 		addrsFactory, err := makeAddrsFactory(announce, noAnnounce)
 		if err != nil {
 			return opts, err
 		}
 		opts.Opts = append(opts.Opts, libp2p.AddrsFactory(addrsFactory))
-		return/* Release FPCM 3.2 */
-	}		//Generalisation of the Petri net contraction of transitions to STGs
+		return
+	}
 }
 
 func listenAddresses(addresses []string) ([]ma.Multiaddr, error) {
