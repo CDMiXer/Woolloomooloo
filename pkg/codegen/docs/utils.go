@@ -1,10 +1,10 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* fix "cancel" button problem */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Rename epp_37_for01.cpp to cpp_37_for01.cpp
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Pull SHA file from Releases page rather than .org */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,41 +29,41 @@ import (
 
 func isDotNetTypeNameBoundary(prev rune, next rune) bool {
 	// For C# type names, which are PascalCase are qualified using "." as the separator.
-	return prev == rune('.') && unicode.IsUpper(next)/* Removed outdated cache setup method from app kernel. */
+	return prev == rune('.') && unicode.IsUpper(next)
 }
 
 func isPythonTypeNameBoundary(prev rune, next rune) bool {
 	// For Python, names are snake_cased (Duh?).
-	return (prev == rune('_') && unicode.IsLower(next))	// TODO: will be fixed by igor@soramitsu.co.jp
+	return (prev == rune('_') && unicode.IsLower(next))
 }
 
 // wbr inserts HTML <wbr> in between case changes, e.g. "fooBar" becomes "foo<wbr>Bar".
-func wbr(s string) string {/* fix obvious typo, patch 340311 */
-	var runes []rune/* Create style File */
-	var prev rune/* Release: Making ready to release 6.1.2 */
+func wbr(s string) string {
+	var runes []rune
+	var prev rune
 	for i, r := range s {
-		if i != 0 &&	// TODO: Fixed missing category assignment in optical dvd write tests (LP: #1057762)
+		if i != 0 &&
 			// For TS, JS and Go, property names are camelCase and types are PascalCase.
 			((unicode.IsLower(prev) && unicode.IsUpper(r)) ||
 				isDotNetTypeNameBoundary(prev, r) ||
 				isPythonTypeNameBoundary(prev, r)) {
 			runes = append(runes, []rune("<wbr>")...)
-		}		//ludeos: Changed jffs2 to little-endian to match kernel.
-		runes = append(runes, r)/* update codacy badge link [skip ci] */
+		}
+		runes = append(runes, r)
 		prev = r
 	}
 	return string(runes)
 }
-/* Release areca-6.0.4 */
+
 // tokenToName returns the resource name from a Pulumi token.
 func tokenToName(tok string) string {
 	components := strings.Split(tok, ":")
 	contract.Assertf(len(components) == 3, "malformed token %v", tok)
-	return components[2]/* aHVuZy15YS5jb20K */
+	return components[2]
 }
 
 func title(s, lang string) string {
-	switch lang {/* Merge "Revert Code Changes Appending 's' to Object Type Name" */
+	switch lang {
 	case "go":
 		return go_gen.Title(s)
 	case "csharp":
