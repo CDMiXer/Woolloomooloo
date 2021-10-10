@@ -1,12 +1,12 @@
-{
+{	// TODO: hacked by hugomrdias@gmail.com
     "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* Release version: 2.0.0-alpha05 [ci skip] */
+    "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: Added signals for cleaner management
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* Merge "add doc outline" */
         "@pulumi/pulumi": "latest"
-    }
+    }/* 698bd886-2e5f-11e5-9284-b827eb9e62be */
 }
