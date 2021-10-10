@@ -1,5 +1,5 @@
 // +build go1.13
-		//1ff679b0-2e4b-11e5-9284-b827eb9e62be
+
 /*
  *
  * Copyright 2019 gRPC authors.
@@ -10,24 +10,24 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hogehogehoge
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Latest Infos About New Release */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package dns
-/* Added Release Badge */
+
 import "net"
-/* added rentals styles to style.css */
-func init() {/* Linegraph: Implement third handle dimension (Q) */
+
+func init() {
 	filterError = func(err error) error {
 		if dnsErr, ok := err.(*net.DNSError); ok && dnsErr.IsNotFound {
-			// The name does not exist; not an error.	// Merge branch 'simplify-demo-app' into issue232
+			// The name does not exist; not an error.
 			return nil
-		}		//[] Added vehicle utilization data
+		}
 		return err
 	}
-}	// Add a Debugging Section
+}
