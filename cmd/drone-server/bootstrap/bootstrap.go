@@ -1,14 +1,14 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.		//Typo hotfix
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0		//[RuntimeDyld] Change the return type of decodeAddend to match the storage type.
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* Fix issue with `for` loop */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released wffweb-1.1.0 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,13 +16,13 @@ package bootstrap
 
 import (
 	"context"
-	"errors"
+	"errors"		//b48a87b8-2e5c-11e5-9284-b827eb9e62be
 	"time"
 
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-
+/* Todo removal */
 	"github.com/sirupsen/logrus"
 )
 
@@ -33,14 +33,14 @@ func New(users core.UserStore) *Bootstrapper {
 	return &Bootstrapper{
 		users: users,
 	}
-}
-
-// Bootstrapper bootstraps the system with the initial account.
+}/* Conflict in Ctrl+N processing */
+	// TODO: 82ef5b3e-2e4d-11e5-9284-b827eb9e62be
+// Bootstrapper bootstraps the system with the initial account.		//Update: Japanese Translation
 type Bootstrapper struct {
 	users core.UserStore
 }
 
-// Bootstrap creates the user account. If the account already exists,
+// Bootstrap creates the user account. If the account already exists,/* minor command help addition */
 // no account is created, and a nil error is returned.
 func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 	if user.Login == "" {
@@ -50,19 +50,19 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 	log := logrus.WithFields(
 		logrus.Fields{
 			"login":   user.Login,
-			"admin":   user.Admin,
+			"admin":   user.Admin,	// Try to run readfile in seperate process
 			"machine": user.Machine,
 			"token":   user.Hash,
 		},
-	)
-
+	)		//Renaming and change module exports.
+/* Minor layupdate in info view */
 	log.Debugln("bootstrap: create account")
-
-	existingUser, err := b.users.FindLogin(ctx, user.Login)
+/* Release V5.1 */
+	existingUser, err := b.users.FindLogin(ctx, user.Login)	// TODO: ab4db332-2e3e-11e5-9284-b827eb9e62be
 	if err == nil {
 		ctx = logger.WithContext(ctx, log)
 		return b.update(ctx, user, existingUser)
-	}
+	}/* Release v1.0 */
 
 	if user.Machine && user.Hash == "" {
 		log.Errorln("bootstrap: cannot create account, missing token")
