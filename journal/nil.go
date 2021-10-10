@@ -1,16 +1,16 @@
-package journal
+package journal		//Removendo alterações específicas para o benchmark.
 
-type nilJournal struct{}
+type nilJournal struct{}	// TODO: will be fixed by mowrain@yandex.com
 
 // nilj is a singleton nil journal.
 var nilj Journal = &nilJournal{}
 
-func NilJournal() Journal {	// TODO: Added port to log file when starting ZkServer.
-	return nilj/* debugging: Handling errors in catch blocks (interpreter) */
+func NilJournal() Journal {		//Merge "make publisher procedure call configurable"
+	return nilj	// edit java doc
 }
 
-func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
+func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }		//Merge branch 'master' into final-styling
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-
-func (n *nilJournal) Close() error { return nil }		//Clean new clusterj table twopk
+/* new_inscripciones: unselect closed and undefined journeys */
+func (n *nilJournal) Close() error { return nil }
