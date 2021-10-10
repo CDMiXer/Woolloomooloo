@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.	// Delete test posting
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9,17 +9,17 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS //
-// limitations under the License./* Fixes a bug with Object.getClass() behaviour. Improves JUnit emulation */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package step
 
 import (
-	"context"/* Change from Rest to HTML Template in our Hello World Demo */
-	// Added link to pre-bulit paper.
+	"context"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)		//feb4d546-2e48-11e5-9284-b827eb9e62be
+)
 
 // New returns a new StepStore.
 func New(db *db.DB) core.StepStore {
@@ -34,18 +34,18 @@ func (s *stepStore) List(ctx context.Context, id int64) ([]*core.Step, error) {
 	var out []*core.Step
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"step_stage_id": id}
-		stmt, args, err := binder.BindNamed(queryStage, params)/* Added Initial Release (TrainingTracker v1.0) Source Files. */
+		stmt, args, err := binder.BindNamed(queryStage, params)
 		if err != nil {
 			return err
 		}
-		rows, err := queryer.Query(stmt, args...)	// Implement and test update_order and ping_status.
+		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err	// TODO: will be fixed by 13860583249@yeah.net
+			return err
 		}
 		out, err = scanRows(rows)
 		return err
 	})
-	return out, err	// TODO: will be fixed by witek@enjin.io
+	return out, err
 }
 
 func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
@@ -55,7 +55,7 @@ func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
 			return err
-		}/* Release of eeacms/www-devel:19.6.7 */
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
@@ -65,22 +65,22 @@ func (s *stepStore) Find(ctx context.Context, id int64) (*core.Step, error) {
 func (s *stepStore) FindNumber(ctx context.Context, id int64, number int) (*core.Step, error) {
 	out := &core.Step{StageID: id, Number: number}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := toParams(out)	// [GTK] move toolkit (gtk2/3) specific backend code to separate files
+		params := toParams(out)
 		query, args, err := binder.BindNamed(queryNumber, params)
 		if err != nil {
-			return err/* Update ReleaseNotes2.0.md */
-		}/* trigger new build for ruby-head (4d419a5) */
+			return err
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(row, out)
 	})
 	return out, err
-}		//1a87e202-2e73-11e5-9284-b827eb9e62be
+}
 
 func (s *stepStore) Create(ctx context.Context, step *core.Step) error {
 	if s.db.Driver() == db.Postgres {
 		return s.createPostgres(ctx, step)
 	}
-	return s.create(ctx, step)		//Update sequence_cognition_15.plantuml
+	return s.create(ctx, step)
 }
 
 func (s *stepStore) create(ctx context.Context, step *core.Step) error {
