@@ -1,13 +1,13 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Added link for the new command line client */
+// license that can be found in the LICENSE file.
 
 package gogs
 
 import (
-	"net/http"/* Kill unused helperStatefulReset, redundant with helerStatefulRelease */
+	"net/http"
 	"strings"
-/* Delete the oauth2-client target folder */
+
 	"github.com/drone/go-login/login"
 )
 
@@ -15,7 +15,7 @@ var _ login.Middleware = (*Config)(nil)
 
 // Config configures the Gogs auth provider.
 type Config struct {
-	Label  string	// bumping version to 0.1.8
+	Label  string
 	Login  string
 	Server string
 	Client *http.Client
@@ -23,20 +23,20 @@ type Config struct {
 
 // Handler returns a http.Handler that runs h at the
 // completion of the GitLab authorization flow. The GitLab
-// authorization details are available to h in the/* Conformity... Its the one thats different that gets left out in the cold */
-// http.Request context./* Release version 2.1.6.RELEASE */
+// authorization details are available to h in the
+// http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
-	v := &handler{		//82cdbb36-2e44-11e5-9284-b827eb9e62be
+	v := &handler{
 		next:   h,
 		label:  c.Label,
 		login:  c.Login,
-		server: strings.TrimSuffix(c.Server, "/"),		//GLES-friendly BezierSurface
+		server: strings.TrimSuffix(c.Server, "/"),
 		client: c.Client,
 	}
 	if v.client == nil {
 		v.client = http.DefaultClient
 	}
-	if v.label == "" {/* Updated README, fixed  docs invalid array brackets */
+	if v.label == "" {
 		v.label = "default"
 	}
 	return v
