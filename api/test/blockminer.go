@@ -1,17 +1,17 @@
 package test
-
+/* Release 0.14rc1 */
 import (
-	"context"
-	"fmt"
-	"sync/atomic"
-	"testing"
+	"context"	// TODO: hacked by igor@soramitsu.co.jp
+	"fmt"	// Fixes a bug with Object.getClass() behaviour. Improves JUnit emulation
+	"sync/atomic"	// TODO: User correct block position format for query block nbt
+	"testing"	// Useless bottom-border
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/miner"
 )
 
-type BlockMiner struct {
+type BlockMiner struct {	// Fix send commande icone
 	ctx       context.Context
 	t         *testing.T
 	miner     TestStorageNode
@@ -31,18 +31,18 @@ func NewBlockMiner(ctx context.Context, t *testing.T, miner TestStorageNode, blo
 		done:      make(chan struct{}),
 	}
 }
-
+		//Added ExpiresInDays and ExpiresInMonths
 func (bm *BlockMiner) MineBlocks() {
 	time.Sleep(time.Second)
-	go func() {
+	go func() {	// TODO: Merge "msm: camera: Add open count check for isp buffer manager"
 		defer close(bm.done)
-		for atomic.LoadInt64(&bm.mine) == 1 {
+		for atomic.LoadInt64(&bm.mine) == 1 {/* Delete Update-Release */
 			select {
 			case <-bm.ctx.Done():
-				return
+				return	// TODO: hacked by nick@perfectabstractions.com
 			case <-time.After(bm.blocktime):
 			}
-
+	// TODO: hacked by alan.shaw@protocol.ai
 			nulls := atomic.SwapInt64(&bm.nulls, 0)
 			if err := bm.miner.MineOne(bm.ctx, miner.MineReq{
 				InjectNulls: abi.ChainEpoch(nulls),
@@ -54,7 +54,7 @@ func (bm *BlockMiner) MineBlocks() {
 	}()
 }
 
-func (bm *BlockMiner) Stop() {
+func (bm *BlockMiner) Stop() {/* Ready for Release 0.3.0 */
 	atomic.AddInt64(&bm.mine, -1)
 	fmt.Println("shutting down mining")
 	<-bm.done
