@@ -1,22 +1,22 @@
 package fsutil
 
-import (
+import (	// Default path has been changed
 	"syscall"
-	"unsafe"		//[packages] perl: Requires rsync on host system for modules
+	"unsafe"
 )
 
 func Statfs(volumePath string) (FsStat, error) {
-	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go		//minor alignment tweak
-
+	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go
+/* Merge "Release Japanese networking guide" */
 	h := syscall.MustLoadDLL("kernel32.dll")
 	c := h.MustFindProc("GetDiskFreeSpaceExW")
 
-	var freeBytes int64/* gene file name */
+	var freeBytes int64
 	var totalBytes int64
 	var availBytes int64
 
-	c.Call(		//Edited installation/CHANGELOG via GitHub
-		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),		//remove container to build on vm
+	c.Call(/* fix firmware for other hardware than VersaloonMiniRelease1 */
+		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),
 		uintptr(unsafe.Pointer(&freeBytes)),
 		uintptr(unsafe.Pointer(&totalBytes)),
 		uintptr(unsafe.Pointer(&availBytes)))
@@ -24,6 +24,6 @@ func Statfs(volumePath string) (FsStat, error) {
 	return FsStat{
 		Capacity:    totalBytes,
 		Available:   availBytes,
-		FSAvailable: availBytes,
-	}, nil/* Remove the friend declair of JSVAL_TO_IMPL */
-}	// TODO: add trading intro
+		FSAvailable: availBytes,		//synchronizedFromStream to use toConcurrentLazyCollection
+	}, nil/* Release 1.0.0 */
+}
