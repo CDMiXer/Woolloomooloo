@@ -5,9 +5,9 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Add .txt to end of renamed log files, fix warnings */
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//47e00400-2e5f-11e5-9284-b827eb9e62be
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,8 +16,8 @@ package core
 
 import "context"
 
-// Transferer handles transfering repository ownership from one/* Release of eeacms/www:20.5.14 */
-// user to another user account./* Delete table-parser.py */
+// Transferer handles transfering repository ownership from one
+// user to another user account.
 type Transferer interface {
 	Transfer(ctx context.Context, user *User) error
 }
