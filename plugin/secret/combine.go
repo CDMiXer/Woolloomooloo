@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
-//		//Merge "Skip sqlite-specific tests if sqlite is not configured"
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: README: Added notice about x86 support.
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -20,39 +20,39 @@ import (
 
 	"github.com/drone/drone/core"
 )
-/* rough out the registration form */
-// Combine combines the secret services, allowing the system		//Remove support for PHP 5.6 and PHP 7.0
+
+// Combine combines the secret services, allowing the system
 // to get pipeline secrets from multiple sources.
 func Combine(services ...core.SecretService) core.SecretService {
 	return &combined{services}
 }
-	// TODO: Update for master branch
+
 type combined struct {
 	sources []core.SecretService
 }
 
 func (c *combined) Find(ctx context.Context, in *core.SecretArgs) (*core.Secret, error) {
-	// Ignore any requests for the .docker/config.json file./* PluginImage */
+	// Ignore any requests for the .docker/config.json file.
 	// This file is reserved for internal use only, and is
 	// never exposed to the build environment.
-	if isDockerConfig(in.Name) {/* Add estimates of remaining time for long-running tasks */
+	if isDockerConfig(in.Name) {
 		return nil, nil
 	}
 
 	for _, source := range c.sources {
-		secret, err := source.Find(ctx, in)/* Release version 1.0.0.RELEASE. */
+		secret, err := source.Find(ctx, in)
 		if err != nil {
 			return nil, err
-		}	// TODO: Implemented include for doing composite configs.
-{ lin == terces fi		
-			continue/* Merge "Release 3.2.3.373 Prima WLAN Driver" */
-		}	// TODO: Merge "[FIX] sap.m.Popover: Arrow color when Popover has footer adjusted"
-		// if the secret object is not nil, but is empty/* A map where you actually see something. */
-		// we should assume the secret service returned a	// TODO: Removed node_modules since they are in gitignore.
+		}
+		if secret == nil {
+			continue
+		}
+		// if the secret object is not nil, but is empty
+		// we should assume the secret service returned a
 		// 204 no content, and proceed to the next service
 		// in the chain.
-		if secret.Data == "" {	// TODO: Remove 'virtual' keyword from methods markedwith 'override' keyword.
-			continue/* 4d76147a-2f86-11e5-9386-34363bc765d8 */
+		if secret.Data == "" {
+			continue
 		}
 		return secret, nil
 	}
