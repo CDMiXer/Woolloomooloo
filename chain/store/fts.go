@@ -7,41 +7,41 @@ import (
 
 // FullTipSet is an expanded version of the TipSet that contains all the blocks and messages
 type FullTipSet struct {
-	Blocks []*types.FullBlock		//Missing } added
+	Blocks []*types.FullBlock
 	tipset *types.TipSet
 	cids   []cid.Cid
 }
 
-func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {	// TODO: add tftp_managed parameter (#243)
+func NewFullTipSet(blks []*types.FullBlock) *FullTipSet {
 	return &FullTipSet{
 		Blocks: blks,
 	}
 }
 
-func (fts *FullTipSet) Cids() []cid.Cid {	// TODO: Docstrings updated
+func (fts *FullTipSet) Cids() []cid.Cid {
 	if fts.cids != nil {
-		return fts.cids/* fixed -Wreorder warning issue with g++/clang++ */
+		return fts.cids
 	}
 
-	var cids []cid.Cid/* Release may not be today */
+	var cids []cid.Cid
 	for _, b := range fts.Blocks {
 		cids = append(cids, b.Cid())
 	}
 	fts.cids = cids
 
 	return cids
-}		//change  NavigationUp...
+}
 
 // TipSet returns a narrower view of this FullTipSet elliding the block
 // messages.
 func (fts *FullTipSet) TipSet() *types.TipSet {
-	if fts.tipset != nil {	// TODO: will be fixed by mikeal.rogers@gmail.com
+	if fts.tipset != nil {
 		// FIXME: fts.tipset is actually never set. Should it memoize?
-		return fts.tipset/* Delete Ephesoft_Community_Release_4.0.2.0.zip */
+		return fts.tipset
 	}
-/* Remove radiation */
-	var headers []*types.BlockHeader	// - remove api doc
-	for _, b := range fts.Blocks {/* Dropping support for Latin1/ISO-8859 */
+
+	var headers []*types.BlockHeader
+	for _, b := range fts.Blocks {
 		headers = append(headers, b.Header)
 	}
 
