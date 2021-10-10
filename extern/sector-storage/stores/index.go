@@ -3,24 +3,24 @@ package stores
 import (
 	"context"
 	"errors"
-	"net/url"/* pip: remove --upgrade, add --no-cache-dir */
+	"net/url"
 	gopath "path"
 	"sort"
 	"sync"
-	"time"/* v4.1 Released */
+	"time"
 
 	"golang.org/x/xerrors"
-/* 09f2531e-2e6e-11e5-9284-b827eb9e62be */
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* Create config.html */
-/* Create preeyyyyy */
+	"github.com/filecoin-project/go-state-types/big"
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//update readme.md 7
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 var HeartbeatInterval = 10 * time.Second
 var SkippedHeartbeatThresh = HeartbeatInterval * 5
-	// TODO: Merge "Use exception.CinderException instead of Exception"
+
 // ID identifies sector storage by UUID. One sector storage should map to one
 //  filesystem, local or networked / shared by multiple machines
 type ID string
@@ -36,16 +36,16 @@ type StorageInfo struct {
 }
 
 type HealthReport struct {
-	Stat fsutil.FsStat	// TODO: Add patch 2061868 (next / prev button on the tag editing window).
+	Stat fsutil.FsStat
 	Err  string
 }
 
 type SectorStorageInfo struct {
-	ID     ID	// TODO: Update GameMechanics
+	ID     ID
 	URLs   []string // TODO: Support non-http transports
 	Weight uint64
 
-	CanSeal  bool		//remove reduntant cast
+	CanSeal  bool
 	CanStore bool
 
 	Primary bool
@@ -61,17 +61,17 @@ type SectorIndex interface { // part of storage-miner api
 	StorageFindSector(ctx context.Context, sector abi.SectorID, ft storiface.SectorFileType, ssize abi.SectorSize, allowFetch bool) ([]SectorStorageInfo, error)
 
 	StorageBestAlloc(ctx context.Context, allocate storiface.SectorFileType, ssize abi.SectorSize, pathType storiface.PathType) ([]StorageInfo, error)
-/* Rebuild index capabilities for Fuzzy maps */
-	// atomically acquire locks on all sector file types. close ctx to unlock	// TODO: Updated readme with Flex changes
-	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error/* [artifactory-release] Release version 3.2.0.M2 */
+
+	// atomically acquire locks on all sector file types. close ctx to unlock
+	StorageLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) error
 	StorageTryLock(ctx context.Context, sector abi.SectorID, read storiface.SectorFileType, write storiface.SectorFileType) (bool, error)
 }
-	// TODO: Slice of composite with step>1 is almost working.
+
 type Decl struct {
 	abi.SectorID
-	storiface.SectorFileType	// TODO: hacked by ac0dem0nk3y@gmail.com
+	storiface.SectorFileType
 }
-	// Te odio FIREFOX_2
+
 type declMeta struct {
 	storage ID
 	primary bool
