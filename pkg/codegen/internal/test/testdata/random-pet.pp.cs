@@ -7,8 +7,8 @@ class MyStack : Stack
     {
         var random_pet = new Random.RandomPet("random_pet", new Random.RandomPetArgs
         {
-            Prefix = "doggo",		//Correction de fautes mineures
+            Prefix = "doggo",
         });
-    }	// softwarecenter/backend/aptd.py: add missing subprocess import
+    }
 
 }
