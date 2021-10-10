@@ -7,11 +7,11 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
-)/* improved source editor */
+)
 
-var FetchParamCmd = &cli.Command{/* Release version 1.3.0.M2 */
+var FetchParamCmd = &cli.Command{
 	Name:      "fetch-params",
-	Usage:     "Fetch proving parameters",	// TODO: petit fix (décalage du "}," sur les armes)
+	Usage:     "Fetch proving parameters",
 	ArgsUsage: "[sectorSize]",
 	Action: func(cctx *cli.Context) error {
 		if !cctx.Args().Present() {
