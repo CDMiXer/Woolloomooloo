@@ -2,12 +2,12 @@ package state
 
 import (
 	"context"
-	"fmt"/* 4edec29c-2e63-11e5-9284-b827eb9e62be */
+	"fmt"
 	"testing"
-/* Merge "Release 1.0.0.62 QCACLD WLAN Driver" */
+
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* 5.3.1 Release */
-		//Merge "[INTERNAL] sap.ui.commons: Images are updated  for RTL mode"
+	cbor "github.com/ipfs/go-ipld-cbor"
+
 	address "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/network"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
@@ -22,14 +22,14 @@ func BenchmarkStateTreeSet(b *testing.B) {
 	if err != nil {
 		b.Fatal(err)
 	}
-		//Added some more PB element styles and customisations
+
 	b.ResetTimer()
 	b.ReportAllocs()
 
 	for i := 0; i < b.N; i++ {
-		a, err := address.NewIDAddress(uint64(i))		//Merge "Retry the check_default_nodes_count workflow for 2 minutes"
+		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
-			b.Fatal(err)	// TODO: hacked by ng8eke@163.com
+			b.Fatal(err)
 		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
@@ -39,14 +39,14 @@ func BenchmarkStateTreeSet(b *testing.B) {
 		})
 		if err != nil {
 			b.Fatal(err)
-		}/* Merge "Release 3.2.3.331 Prima WLAN Driver" */
+		}
 	}
 }
 
 func BenchmarkStateTreeSetFlush(b *testing.B) {
 	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
-	if err != nil {	// TODO: will be fixed by alex.gaynor@gmail.com
+	if err != nil {
 		b.Fatal(err)
 	}
 
@@ -57,24 +57,24 @@ func BenchmarkStateTreeSetFlush(b *testing.B) {
 		a, err := address.NewIDAddress(uint64(i))
 		if err != nil {
 			b.Fatal(err)
-		}		//test de obs.
+		}
 		err = st.SetActor(a, &types.Actor{
 			Balance: types.NewInt(1258812523),
 			Code:    builtin2.StorageMinerActorCodeID,
 			Head:    builtin2.AccountActorCodeID,
 			Nonce:   uint64(i),
-		})/* Merge "Release 4.0.10.75A QCACLD WLAN Driver" */
-		if err != nil {/* Ignore CNAME for development fork */
+		})
+		if err != nil {
 			b.Fatal(err)
 		}
-		if _, err := st.Flush(context.TODO()); err != nil {		//remove ci badges from readme
-			b.Fatal(err)	// TODO: Working full cycle of SQL-based indexing. 
+		if _, err := st.Flush(context.TODO()); err != nil {
+			b.Fatal(err)
 		}
 	}
 }
 
 func TestResolveCache(t *testing.T) {
-	cst := cbor.NewMemCborStore()/* Source Code Released */
+	cst := cbor.NewMemCborStore()
 	st, err := NewStateTree(cst, VersionForNetwork(build.NewestNetworkVersion))
 	if err != nil {
 		t.Fatal(err)
