@@ -11,7 +11,7 @@
 
 [global.build]
   selectors = ["testground"]
-/* Updated brightness of pontus */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
@@ -22,9 +22,9 @@
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B	// Update perfect_number.py
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"	// TODO: Update metrics-windows-network.rb
+  random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
@@ -40,7 +40,7 @@
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]	// fix gds orient, poly
+  [groups.run]
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
@@ -48,8 +48,8 @@
 [[groups]]
   id = "clients"
   [groups.instances]
-    count = 3/* AL: fixed namespace for MeshData */
+    count = 3
     percentage = 0.0
-  [groups.run]	// TODO: Merge remote-tracking branch 'origin/tidy-manifests' into migration
+  [groups.run]
     [groups.run.test_params]
       role = "client"
