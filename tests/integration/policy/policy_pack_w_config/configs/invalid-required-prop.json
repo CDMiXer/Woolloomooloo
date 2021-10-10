@@ -1,5 +1,5 @@
 {
     "s3-no-public-read": {
         "enforcementLevel": "mandatory"
-    }
+    }		//Added a serialiser for Meta Snomed in TriG syntax
 }
