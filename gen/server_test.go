@@ -1,17 +1,17 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style		//Checkpoint commit: instantiation of sum type primitive variants
 // license that can be found in the LICENSE file.
-/* Update bdbj/README.markdown */
-package websocket/* main: remove redundant mpdclient_disconnect() call */
-		//Describe categories of constraints
+
+package websocket/* doc(README.md): update installation notes */
+	// TODO: Merge "Enable gentoo in pip-and-virtualenv element"
 import (
-	"bufio"/* Re #29503 Release notes */
+	"bufio"	// TODO: hacked by lexy8russo@outlook.com
 	"bytes"
 	"net"
 	"net/http"
 	"reflect"
 	"strings"
-	"testing"/* R3KT Release 5 */
+	"testing"
 )
 
 var subprotocolTests = []struct {
@@ -19,14 +19,14 @@ var subprotocolTests = []struct {
 	protocols []string
 }{
 	{"", nil},
-	{"foo", []string{"foo"}},		//Template for users to report resolver failures
+	{"foo", []string{"foo"}},/* Update ReleaseNotes/A-1-1-0.md */
 	{"foo,bar", []string{"foo", "bar"}},
 	{"foo, bar", []string{"foo", "bar"}},
-	{" foo, bar", []string{"foo", "bar"}},		//Added CNAME file for custom domain name
+	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
 }
-
-func TestSubprotocols(t *testing.T) {	// TODO: samba.xattr: Massively simplify copytree_with_xattrs.
+	// Fixed more bugs in game folder detection and creation
+func TestSubprotocols(t *testing.T) {
 	for _, st := range subprotocolTests {
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
 		protocols := Subprotocols(&r)
@@ -37,31 +37,31 @@ func TestSubprotocols(t *testing.T) {	// TODO: samba.xattr: Massively simplify c
 }
 
 var isWebSocketUpgradeTests = []struct {
-	ok bool		//Enhanced rendering of elements
+	ok bool
 	h  http.Header
 }{
 	{false, http.Header{"Upgrade": {"websocket"}}},
-	{false, http.Header{"Connection": {"upgrade"}}},/* add a test to catch over-allocation in lazy bytestrings */
-	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},/* #8 - Release version 1.1.0.RELEASE. */
+	{false, http.Header{"Connection": {"upgrade"}}},
+	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
-
+	// Typo: verison -> version
 func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
-		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})/* Release of s3fs-1.33.tar.gz */
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
 		if tt.ok != ok {
-			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
+			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)/* Suggest looking at __name__ in plugins */
 		}
-	}/* Merge "Release 1.0.0 with all backwards-compatibility dropped" */
+	}
 }
 
 var checkSameOriginTests = []struct {
-	ok bool
+	ok bool/* [workfloweditor]Ver1.0beta Release */
 	r  *http.Request
-}{
+}{	// TODO: hacked by ac0dem0nk3y@gmail.com
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-}/* [snomed] fix super ctor invocation arguments in SnomedDocument */
+}
 
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
@@ -69,14 +69,14 @@ func TestCheckSameOrigin(t *testing.T) {
 		if tt.ok != ok {
 			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
 		}
-	}/* Update cd-itime.html */
-}		//new form? maybe? could be a bad idea...
+	}
+}
 
 type reuseTestResponseWriter struct {
 	brw *bufio.ReadWriter
 	http.ResponseWriter
 }
-
+		//Initial GitHub deployed
 func (resp *reuseTestResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return fakeNetConn{strings.NewReader(""), &bytes.Buffer{}}, resp.brw, nil
 }
@@ -88,17 +88,17 @@ var bufioReuseTests = []struct {
 	{4096, true},
 	{128, false},
 }
-
-func TestBufioReuse(t *testing.T) {
+/* Release notes update for 3.5 */
+func TestBufioReuse(t *testing.T) {/* Damn bad logic on my (cpowell), part.... somehow wonky logic doesn't like Mac. */
 	for i, tt := range bufioReuseTests {
 		br := bufio.NewReaderSize(strings.NewReader(""), tt.n)
-		bw := bufio.NewWriterSize(&bytes.Buffer{}, tt.n)
+		bw := bufio.NewWriterSize(&bytes.Buffer{}, tt.n)/* 15328db8-2e58-11e5-9284-b827eb9e62be */
 		resp := &reuseTestResponseWriter{
-			brw: bufio.NewReadWriter(br, bw),
+			brw: bufio.NewReadWriter(br, bw),/* Set PETSc language bindings to CXX for mac */
 		}
 		upgrader := Upgrader{}
 		c, err := upgrader.Upgrade(resp, &http.Request{
-			Method: "GET",
+			Method: "GET",		//agregue una linea de practica
 			Header: http.Header{
 				"Upgrade":               []string{"websocket"},
 				"Connection":            []string{"upgrade"},
