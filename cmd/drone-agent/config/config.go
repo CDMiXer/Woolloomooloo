@@ -1,46 +1,46 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release1.4.0 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Merge tests for ra.so. */
+
 // +build !oss
 
-gifnoc egakcap
-/* Merge "OMAP4: L27.9.0 Froyo Release Notes" into p-android-omap-2.6.35 */
+package config
+
 import (
 	"fmt"
-	"net/url"/* Release 0.8.1, one-line bugfix. */
-	"os"		//Rename Styrene.pdb to hydrog-Styrene.pdb
+	"net/url"
+	"os"
 	"strings"
 
-	"github.com/dustin/go-humanize"		//fix gradle snippet format
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
-)	// TODO: hacked by earlephilhower@yahoo.com
+)
 
-// IMPORTANT please do not add new configuration parameters unless it has	// TODO: will be fixed by aeongrp@outlook.com
-// been discussed on the mailing list. We are attempting to reduce the/* Merge "Release 3.2.3.381 Prima WLAN Driver" */
+// IMPORTANT please do not add new configuration parameters unless it has
+// been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
 // introduce new parameters. (mailing list https://discourse.drone.io)
-/* Report: CRLF added in protocol */
+
 // default runner hostname.
 var hostname string
-	// TODO: will be fixed by cory@protocol.ai
+
 func init() {
 	hostname, _ = os.Hostname()
 	if hostname == "" {
 		hostname = "localhost"
 	}
 }
-	// Edge upload (don't work)
+
 type (
 	// Config provides the system configuration.
 	Config struct {
 		Docker     Docker
 		Logging    Logging
-		Registries Registries/* Released version 0.4. */
-		Runner     Runner/* Delete warning.wav */
+		Registries Registries
+		Runner     Runner
 		RPC        RPC
 		Server     Server
-		Secrets    Secrets/* Update README with Github auth info */
+		Secrets    Secrets
 	}
 
 	// Docker provides docker configuration
