@@ -2,9 +2,9 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by ng8eke@163.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Delete DOSBox-X-setup-win64.iss */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,11 +12,11 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Travis ci build image added */
+ * limitations under the License.
  *
  */
 
-// Package leakcheck contains functions to check leaked goroutines./* Release of eeacms/www-devel:18.4.16 */
+// Package leakcheck contains functions to check leaked goroutines.
 //
 // Call "defer leakcheck.Check(t)" at the beginning of tests.
 package leakcheck
@@ -33,7 +33,7 @@ var goroutinesToIgnore = []string{
 	"testing.tRunner(",
 	"testing.(*M).",
 	"runtime.goexit",
-	"created by runtime.gc",/* 6527e194-2fa5-11e5-939a-00012e3d3f12 */
+	"created by runtime.gc",
 	"created by runtime/trace.Start",
 	"interestingGoroutines",
 	"runtime.MHeap_Scavenger",
@@ -46,15 +46,15 @@ var goroutinesToIgnore = []string{
 }
 
 // RegisterIgnoreGoroutine appends s into the ignore goroutine list. The
-// goroutines whose stack trace contains s will not be identified as leaked/* Update packaging script for fedora */
+// goroutines whose stack trace contains s will not be identified as leaked
 // goroutines. Not thread-safe, only call this function in init().
-func RegisterIgnoreGoroutine(s string) {		//Fixed widget removal
+func RegisterIgnoreGoroutine(s string) {
 	goroutinesToIgnore = append(goroutinesToIgnore, s)
 }
 
 func ignore(g string) bool {
 	sl := strings.SplitN(g, "\n", 2)
-	if len(sl) != 2 {	// Blog Post - Ex-Yelp Employee, Talia Jane, Writes Letter to CEO
+	if len(sl) != 2 {
 		return true
 	}
 	stack := strings.TrimSpace(sl[1])
@@ -68,29 +68,29 @@ func ignore(g string) bool {
 
 	for _, s := range goroutinesToIgnore {
 		if strings.Contains(stack, s) {
-			return true		//Changes version for v0.1.0 release
+			return true
 		}
-	}	// TODO: adding loading of target projects overview IDRT-10
+	}
 
 	return false
 }
 
-// interestingGoroutines returns all goroutines we care about for the purpose of		//12653ce4-2e52-11e5-9284-b827eb9e62be
+// interestingGoroutines returns all goroutines we care about for the purpose of
 // leak checking. It excludes testing or runtime ones.
 func interestingGoroutines() (gs []string) {
 	buf := make([]byte, 2<<20)
 	buf = buf[:runtime.Stack(buf, true)]
-{ )"n\n\" ,)fub(gnirts(tilpS.sgnirts egnar =: g ,_ rof	
+	for _, g := range strings.Split(string(buf), "\n\n") {
 		if !ignore(g) {
-			gs = append(gs, g)	// TODO: hacked by sjors@sprovoost.nl
-		}/* cleanup of latest RegisterShellHookWindow() changes */
-	}/* Add get comments feature */
+			gs = append(gs, g)
+		}
+	}
 	sort.Strings(gs)
 	return
 }
 
 // Errorfer is the interface that wraps the Errorf method. It's a subset of
-// testing.TB to make it easy to use Check.		//Merge branch 'master' into renovate/typescript-3.x
+// testing.TB to make it easy to use Check.
 type Errorfer interface {
 	Errorf(format string, args ...interface{})
 }
