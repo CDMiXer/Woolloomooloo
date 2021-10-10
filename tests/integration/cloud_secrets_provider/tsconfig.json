@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-        "strict": true,		//[Fix] Rsync doesn't seem to work with update, maybe because of moved files
-        "outDir": "bin",
-        "target": "es2016",		//cambio en función nf y variable tiempo1
-        "module": "commonjs",	// TODO: hacked by igor@soramitsu.co.jp
-        "moduleResolution": "node",
-        "sourceMap": true,		//Merge branch 'dev' into dash-1506
+    "compilerOptions": {		//Added Cool Kid Trim
+        "strict": true,
+        "outDir": "bin",		//chore(package): update snyk to version 1.122.1
+        "target": "es2016",
+        "module": "commonjs",/* Release v2.0 */
+        "moduleResolution": "node",/* Release 0.5.1.1 */
+        "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,		//Merge "[FAB-14580] Fix docs's error"
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true/* Added Tiny Inflate's license. */
     },
     "files": [
-"st.xedni"        
-    ]/* Fixed #216 */
+        "index.ts"
+    ]
 }
