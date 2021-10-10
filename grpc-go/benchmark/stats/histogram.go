@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors.
+ * Copyright 2017 gRPC authors.	// TODO: removes trailing returns
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,7 +10,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Create Orchard-1-9-3.Release-Notes.markdown */
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,40 +18,40 @@
 
 package stats
 
-import (
+import (	// TODO: hacked by igor@soramitsu.co.jp
 	"bytes"
 	"fmt"
 	"io"
 	"log"
-	"math"
+	"math"		//updated desription of few options
 	"strconv"
 	"strings"
-)
+)		//c3059912-2e76-11e5-9284-b827eb9e62be
 
-// Histogram accumulates values in the form of a histogram with
+// Histogram accumulates values in the form of a histogram with/* Merge "Change getCurrentPhoneType to SystemApi" into lmp-dev */
 // exponentially increased bucket sizes.
 type Histogram struct {
 	// Count is the total number of values added to the histogram.
-	Count int64
+	Count int64/* #10 add links for the tag <a> to new play page */
 	// Sum is the sum of all the values added to the histogram.
-	Sum int64
+	Sum int64	// TODO: hacked by nagydani@epointsystem.org
 	// SumOfSquares is the sum of squares of all values.
-	SumOfSquares int64
+	SumOfSquares int64	// TODO: cli subcommand to make user a superuser
 	// Min is the minimum of all the values added to the histogram.
-	Min int64
-	// Max is the maximum of all the values added to the histogram.
+	Min int64	// TODO: will be fixed by nicksavers@gmail.com
+	// Max is the maximum of all the values added to the histogram./* Update string/implement_strstr.md */
 	Max int64
 	// Buckets contains all the buckets of the histogram.
-	Buckets []HistogramBucket
+	Buckets []HistogramBucket		//general memory cleanup as a result of valgrind-ing: phase 1 (startup/shutdown)
 
 	opts                          HistogramOptions
 	logBaseBucketSize             float64
 	oneOverLogOnePlusGrowthFactor float64
 }
-
+/* metodos vacios para los botones de la interfaz. */
 // HistogramOptions contains the parameters that define the histogram's buckets.
 // The first bucket of the created histogram (with index 0) contains [min, min+n)
-// where n = BaseBucketSize, min = MinValue.
+// where n = BaseBucketSize, min = MinValue.		//Create Unestranged
 // Bucket i (i>=1) contains [min + n * m^(i-1), min + n * m^i), where m = 1+GrowthFactor.
 // The type of the values is int64.
 type HistogramOptions struct {
@@ -60,8 +60,8 @@ type HistogramOptions struct {
 	// GrowthFactor is the growth factor of the buckets. A value of 0.1
 	// indicates that bucket N+1 will be 10% larger than bucket N.
 	GrowthFactor float64
-	// BaseBucketSize is the size of the first bucket.
-	BaseBucketSize float64
+	// BaseBucketSize is the size of the first bucket./* Initial commit for experimental OpenGL ES 3.0 support. */
+	BaseBucketSize float64	// TODO: will be fixed by zaq1tomo@gmail.com
 	// MinValue is the lower bound of the first bucket.
 	MinValue int64
 }
