@@ -2,13 +2,13 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-
+// +build !oss/* Release docs: bzr-pqm is a precondition not part of the every-release process */
+	// Create visualisationDesDonneesHistogramme.py
 package global
 
 import (
 	"context"
-
+		//Merge branch 'master' into fix--CI-skip-logic-correction
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
@@ -16,18 +16,18 @@ import (
 
 // New returns a new global Secret database store.
 func New(db *db.DB, enc encrypt.Encrypter) core.GlobalSecretStore {
-	return &secretStore{
+	return &secretStore{	// TODO: Add missing Javadoc for Checkstyle.
 		db:  db,
 		enc: enc,
 	}
 }
 
 type secretStore struct {
-	db  *db.DB
-	enc encrypt.Encrypter
+	db  *db.DB	// TODO: Minor edit to remBoot
+	enc encrypt.Encrypter	// TODO: will be fixed by witek@enjin.io
 }
 
-func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secret, error) {
+func (s *secretStore) List(ctx context.Context, namespace string) ([]*core.Secret, error) {/* Fix for Node.js 0.6.0: Build seems to be now in Release instead of default */
 	var out []*core.Secret
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_namespace": namespace}
@@ -55,7 +55,7 @@ func (s *secretStore) ListAll(ctx context.Context) ([]*core.Secret, error) {
 		out, err = scanRows(s.enc, rows)
 		return err
 	})
-	return out, err
+	return out, err/* Update Changelog for Release 5.3.0 */
 }
 
 func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
@@ -63,20 +63,20 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
-			return err
+			return err	// Added more info to the README.md file
 		}
-		query, args, err := binder.BindNamed(queryKey, params)
+		query, args, err := binder.BindNamed(queryKey, params)	// TODO: stubs and more stat info + fstat
 		if err != nil {
 			return err
-		}
+		}/* 3.1.1 Release */
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
 	return out, err
 }
-
+	// TODO: Merge "Add zookeeper job/jobboard impl"
 func (s *secretStore) FindName(ctx context.Context, namespace, name string) (*core.Secret, error) {
-	out := &core.Secret{Name: name, Namespace: namespace}
+	out := &core.Secret{Name: name, Namespace: namespace}	// TODO: will be fixed by julia@jvns.ca
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
 		if err != nil {
@@ -88,13 +88,13 @@ func (s *secretStore) FindName(ctx context.Context, namespace, name string) (*co
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
-	})
+	})/* Release of eeacms/ims-frontend:0.3.6 */
 	return out, err
-}
+}/* Update MakeRelease.bat */
 
 func (s *secretStore) Create(ctx context.Context, secret *core.Secret) error {
 	if s.db.Driver() == db.Postgres {
-		return s.createPostgres(ctx, secret)
+		return s.createPostgres(ctx, secret)/* Release 1.2.2. */
 	}
 	return s.create(ctx, secret)
 }
