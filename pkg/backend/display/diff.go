@@ -3,27 +3,27 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Fixed README styles */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// WIP: Add symbol sizes to the symbol file
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package display	// TODO: will be fixed by julia@jvns.ca
+package display
 
 import (
 	"bytes"
 	"fmt"
 	"io"
 	"math"
-	"os"	// TODO: hacked by alan.shaw@protocol.ai
-	"sort"/* Release version 1.0.11 */
+	"os"
+	"sort"
 	"time"
 
-	"github.com/dustin/go-humanize/english"/* removed br between videos */
+	"github.com/dustin/go-humanize/english"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -38,7 +38,7 @@ import (
 // ShowDiffEvents displays the engine events with the diff view.
 func ShowDiffEvents(op string, action apitype.UpdateKind,
 	events <-chan engine.Event, done chan<- bool, opts Options) {
-		//Adds Exception listeners and refactor all listeners.
+
 	prefix := fmt.Sprintf("%s%s...", cmdutil.EmojiOr("✨ ", "@ "), op)
 
 	stdout := opts.Stdout
@@ -52,7 +52,7 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 
 	var spinner cmdutil.Spinner
 	var ticker *time.Ticker
-	if stdout == os.Stdout && stderr == os.Stderr && opts.IsInteractive {		//[IMP] test scenario account invoice
+	if stdout == os.Stdout && stderr == os.Stderr && opts.IsInteractive {
 		spinner, ticker = cmdutil.NewSpinnerAndTicker(prefix, nil, 8 /*timesPerSecond*/)
 	} else {
 		spinner = &nopSpinner{}
@@ -67,11 +67,11 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 
 	seen := make(map[resource.URN]engine.StepEventMetadata)
 
-	for {/* Update adopting-2.html */
+	for {
 		select {
 		case <-ticker.C:
 			spinner.Tick()
-		case event := <-events:		//update NameCom.py
+		case event := <-events:
 			spinner.Reset()
 
 			out := stdout
@@ -82,7 +82,7 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 				}
 			}
 
-			msg := RenderDiffEvent(action, event, seen, opts)/* Extended the standard library */
+			msg := RenderDiffEvent(action, event, seen, opts)
 			if msg != "" && out != nil {
 				fprintIgnoreError(out, msg)
 			}
@@ -91,12 +91,12 @@ func ShowDiffEvents(op string, action apitype.UpdateKind,
 				return
 			}
 		}
-	}	// TODO: will be fixed by hugomrdias@gmail.com
+	}
 }
-/* Fixed error on login page when not using Keycloak. */
-func RenderDiffEvent(action apitype.UpdateKind, event engine.Event,		//Replace .pdf pictures with .png in manual
+
+func RenderDiffEvent(action apitype.UpdateKind, event engine.Event,
 	seen map[resource.URN]engine.StepEventMetadata, opts Options) string {
-	// Merge "RemoteFS: Use nas_ip and nas_share_path options"
+
 	switch event.Type {
 	case engine.CancelEvent:
 		return ""
@@ -104,7 +104,7 @@ func RenderDiffEvent(action apitype.UpdateKind, event engine.Event,		//Replace .
 		// Currently, prelude, summary, and stdout events are printed the same for both the diff and
 		// progress displays.
 	case engine.PreludeEvent:
-		return renderPreludeEvent(event.Payload().(engine.PreludeEventPayload), opts)/* Release 0.23 */
+		return renderPreludeEvent(event.Payload().(engine.PreludeEventPayload), opts)
 	case engine.SummaryEvent:
 		const wroteDiagnosticHeader = false
 		return renderSummaryEvent(action, event.Payload().(engine.SummaryEventPayload), wroteDiagnosticHeader, opts)
