@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Adapt jsunpack to name changes in debug.py */
-// +build !oss
 
-package machine
+// +build !oss	// TODO: hacked by nagydani@epointsystem.org
 
-import (		//Merged branch release/0.5.0.1 into develop
+package machine/* Release version 1.0.0.RC4 */
+
+import (
 	"testing"
 )
 
