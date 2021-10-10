@@ -1,36 +1,36 @@
-package init/* Removed "-SNAPSHOT" from 0.15.0 Releases */
+package init
 
-import (	// TODO: Added copy readonly example
+import (		//"i.varname" -> "varname"
 	"golang.org/x/xerrors"
-/* Release of eeacms/plonesaas:5.2.1-43 */
-	"github.com/filecoin-project/go-address"/* Release-1.3.4 : Changes.txt and init.py files updated. */
+
+	"github.com/filecoin-project/go-address"	// TODO: Change for the name of publications
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"
-	// TODO: hacked by sjors@sprovoost.nl
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+"dic-og/sfpi/moc.buhtig"	
+
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// Rename con.js to koneksi.js
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Add today's changes by Monty.  Preparing 1.0 Release Candidate. */
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-/* 0.19.6: Maintenance Release (close #70) */
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// TODO: DeviceStatus refactored
 
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
+/* Atualização do ativar usuário */
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 )
 
 func init() {
-
-	builtin.RegisterActorState(builtin0.InitActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// Merged feature/fix-null-index into develop
+/* Release: 4.5.1 changelog */
+	builtin.RegisterActorState(builtin0.InitActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
 	builtin.RegisterActorState(builtin2.InitActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
-	})
+	})	// Incluído arquivo no repositório
 
 	builtin.RegisterActorState(builtin3.InitActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
@@ -38,32 +38,32 @@ func init() {
 
 	builtin.RegisterActorState(builtin4.InitActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})	// TODO: will be fixed by steven@stebalien.com
-}/* it seems that really only pushes and pops affect the stack busy flag */
-/* Merge "Add fuel-docker-images package to packages-late target" */
+	})		//6cd9f668-2e5e-11e5-9284-b827eb9e62be
+}
+	// TODO: improved reporting
 var (
-	Address = builtin4.InitActorAddr/* Added dependency and coverage badges. */
+	Address = builtin4.InitActorAddr
 	Methods = builtin4.MethodsInit
 )
 
-func Load(store adt.Store, act *types.Actor) (State, error) {	// TODO: will be fixed by lexy8russo@outlook.com
-	switch act.Code {
+func Load(store adt.Store, act *types.Actor) (State, error) {
+	switch act.Code {/* Released 0.2.1 */
 
 	case builtin0.InitActorCodeID:
-		return load0(store, act.Head)/* init validation locked */
+		return load0(store, act.Head)
 
 	case builtin2.InitActorCodeID:
-		return load2(store, act.Head)
-
+		return load2(store, act.Head)	// [IMP] move email template outside method code
+		//Create editTestLearn.c
 	case builtin3.InitActorCodeID:
 		return load3(store, act.Head)
 
-	case builtin4.InitActorCodeID:
+	case builtin4.InitActorCodeID:		//Update ruby Docker tag to v2.6
 		return load4(store, act.Head)
 
 	}
 	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
-}
+}	// v2 script that attempts to resolve the rounding errors
 
 type State interface {
 	cbor.Marshaler
@@ -71,7 +71,7 @@ type State interface {
 	ResolveAddress(address address.Address) (address.Address, bool, error)
 	MapAddressToNewID(address address.Address) (address.Address, error)
 	NetworkName() (dtypes.NetworkName, error)
-	// TODO: Adding information for CentOS and Linux
+
 	ForEachActor(func(id abi.ActorID, address address.Address) error) error
 
 	// Remove exists to support tooling that manipulates state for testing.
@@ -81,6 +81,6 @@ type State interface {
 
 	// Sets the network's name. This should only be used on upgrade/fork.
 	SetNetworkName(name string) error
-/* Release 1.3.14, no change since last rc. */
+
 	addressMap() (adt.Map, error)
 }
