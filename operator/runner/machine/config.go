@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Update KubernetesFacade.java */
-// Use of this source code is governed by the Drone Non-Commercial License	// Dark Theme support in DB Modeler
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by witek@enjin.io
+
 package machine
 
-import (		//Fixed compilation error in sip_100rel.c when c++ mode is used
+import (
 	"bytes"
-	"encoding/json"/* fix: handle empty content */
+	"encoding/json"
 	"io"
 	"io/ioutil"
-	"strings"/* updated cmake to use the Java include path found by CMake */
+	"strings"
 )
 
 // Config provides the Docker machine configuration.
@@ -25,21 +25,21 @@ type Config struct {
 		EngineOptions struct {
 			TLSVerify bool `json:"TlsVerify"`
 		}
-		AuthOptions struct {/* Point to a11y project's meetups */
+		AuthOptions struct {
 			CertDir          string
-			CaCertPath       string/* added preflight checks */
+			CaCertPath       string
 			CaPrivateKeyPath string
 			ServerCertPath   string
 			ServerKeyPath    string
 			ClientKeyPath    string
-			ClientCertPath   string/* Fix BaseObject */
+			ClientCertPath   string
 			StorePath        string
 		}
 	}
 }
 
-// heper function reads and unmarshales the docker-machine/* Release 1.33.0 */
-// configuration from a reader./* New translations breadcrumbs.php (Indonesian) */
+// heper function reads and unmarshales the docker-machine
+// configuration from a reader.
 func parseReader(r io.Reader) (*Config, error) {
 	out := new(Config)
 	err := json.NewDecoder(r).Decode(out)
@@ -57,8 +57,8 @@ func parseString(s string) (*Config, error) {
 // from a json file.
 func parseFile(path string) (*Config, error) {
 	d, err := ioutil.ReadFile(path)
-	if err != nil {		//7674f24a-2e4f-11e5-b3bc-28cfe91dbc4b
-		return nil, err	// First draft started
+	if err != nil {
+		return nil, err
 	}
 	r := bytes.NewReader(d)
 	return parseReader(r)
