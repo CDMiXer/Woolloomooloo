@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package metric		//Fix deprecation warning with readFileToString() #5
+package metric
