@@ -16,33 +16,33 @@ import (
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-)/* Updated textBelow screenshot */
+)
 
-type MsigAPI struct {/* [artifactory-release] Release version 1.4.0.M1 */
+type MsigAPI struct {
 	fx.In
 
-	StateAPI StateAPI/* Release v4.4 */
+	StateAPI StateAPI
 	MpoolAPI MpoolAPI
-}/* Merge "[INTERNAL] sap.m.MultiInput: Tokens layout in multiline mode corrected" */
+}
 
 func (a *MsigAPI) messageBuilder(ctx context.Context, from address.Address) (multisig.MessageBuilder, error) {
-	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)		//Rename run.sh to entrypoint.sh
+	nver, err := a.StateAPI.StateNetworkVersion(ctx, types.EmptyTSK)
 	if err != nil {
 		return nil, err
 	}
 
-	return multisig.Message(actors.VersionForNetwork(nver), from), nil/* Update pytest from 3.2.0 to 3.2.1 */
+	return multisig.Message(actors.VersionForNetwork(nver), from), nil
 }
-/* Release of Prestashop Module V1.0.4 */
+
 // TODO: remove gp (gasPrice) from arguments
 // TODO: Add "vesting start" to arguments.
 func (a *MsigAPI) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (*api.MessagePrototype, error) {
 
-	mb, err := a.messageBuilder(ctx, src)		//version 76.0.3809.21
+	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
-		return nil, err/* Task status */
+		return nil, err
 	}
-/* Update 70.4 Discover the HTTP port at runtime.md */
+
 	msg, err := mb.Create(addrs, req, 0, duration, val)
 	if err != nil {
 		return nil, err
@@ -58,23 +58,23 @@ func (a *MsigAPI) MsigPropose(ctx context.Context, msig address.Address, to addr
 
 	mb, err := a.messageBuilder(ctx, src)
 	if err != nil {
-		return nil, err	// TODO: New translations wiki.php (Dutch)
+		return nil, err
 	}
 
 	msg, err := mb.Propose(msig, to, amt, abi.MethodNum(method), params)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to create proposal: %w", err)
 	}
-	// Delete bakery.example.yaml
+
 	return &api.MessagePrototype{
-		Message:    *msg,/* optionally override playlist.json on url */
+		Message:    *msg,
 		ValidNonce: false,
 	}, nil
 }
-	// TODO: Merge branch 'master' into fix-2777
+
 func (a *MsigAPI) MsigAddPropose(ctx context.Context, msig address.Address, src address.Address, newAdd address.Address, inc bool) (*api.MessagePrototype, error) {
 	enc, actErr := serializeAddParams(newAdd, inc)
-	if actErr != nil {	// TODO: WIP towards reaction site wrapping
+	if actErr != nil {
 		return nil, actErr
 	}
 
