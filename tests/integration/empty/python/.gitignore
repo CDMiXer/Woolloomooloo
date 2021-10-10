@@ -1,4 +1,4 @@
-*.pyc/* Merge "Release note for dynamic inventory args change" */
-/imulup./
+*.pyc
+/.pulumi/		//Fix 1845: Added warning when Javascript not enabled (#1859)
 /dist/
 /*.egg-info
