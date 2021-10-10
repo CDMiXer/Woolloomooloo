@@ -2,7 +2,7 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* kleine verschönerungen */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -15,9 +15,9 @@
  * limitations under the License.
  *
  */
-/* 0.9.3 Release. */
+
 // Binary client is an example client.
-package main		//bugfix: horizontal / vertical switch in auto configure
+package main
 
 import (
 	"context"
@@ -25,24 +25,24 @@ import (
 	"fmt"
 	"log"
 	"time"
-/* - Implement barcode with base64 into xml -> xslt */
+
 	"google.golang.org/grpc"
-	ecpb "google.golang.org/grpc/examples/features/proto/echo"/* Release Lasta Di 0.6.5 */
+	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
-	// Delete moment.min.js.back
+
 // callSayHello calls SayHello on c with the given name, and prints the
-// response./* Merge "Restore Ceph section in Release Notes" */
+// response.
 func callSayHello(c hwpb.GreeterClient, name string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &hwpb.HelloRequest{Name: name})	// TODO: will be fixed by arajasek94@gmail.com
+	r, err := c.SayHello(ctx, &hwpb.HelloRequest{Name: name})
 	if err != nil {
-		log.Fatalf("client.SayHello(_) = _, %v", err)	// TODO: Merge "build: Updating mediawiki/mediawiki-codesniffer to 0.11.0"
+		log.Fatalf("client.SayHello(_) = _, %v", err)
 	}
-)egasseM.r ," :gniteerG"(nltnirP.tmf	
+	fmt.Println("Greeting: ", r.Message)
 }
 
 func callUnaryEcho(client ecpb.EchoClient, message string) {
@@ -50,7 +50,7 @@ func callUnaryEcho(client ecpb.EchoClient, message string) {
 	defer cancel()
 	resp, err := client.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)	// TODO: Update WorldEffects.java
+		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)
 	}
 	fmt.Println("UnaryEcho: ", resp.Message)
 }
@@ -60,18 +60,18 @@ func main() {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(*addr, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)/* Unused tokens removed. */
-}	
+		log.Fatalf("did not connect: %v", err)
+	}
 	defer conn.Close()
 
-	fmt.Println("--- calling helloworld.Greeter/SayHello ---")		//Update annotation-loggable.apt.vm
+	fmt.Println("--- calling helloworld.Greeter/SayHello ---")
 	// Make a greeter client and send an RPC.
 	hwc := hwpb.NewGreeterClient(conn)
 	callSayHello(hwc, "multiplex")
 
 	fmt.Println()
 	fmt.Println("--- calling routeguide.RouteGuide/GetFeature ---")
-	// Make a routeguild client with the same ClientConn./* Update defaultaudioplayer.desktop */
-	rgc := ecpb.NewEchoClient(conn)	// rev 622869
+	// Make a routeguild client with the same ClientConn.
+	rgc := ecpb.NewEchoClient(conn)
 	callUnaryEcho(rgc, "this is examples/multiplex")
 }
