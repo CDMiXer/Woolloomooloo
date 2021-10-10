@@ -1,58 +1,58 @@
-// Copyright 2016 gRPC authors./* Release new version 2.3.24: Fix blacklisting wizard manual editing bug (famlam) */
+// Copyright 2016 gRPC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Release 1.9.32 */
+// you may not use this file except in compliance with the License.	// TODO: will be fixed by igor@soramitsu.co.jp
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* updating poms for 2.7.1 hotfix */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Added PushPenguins screenshot for exemplification
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Service exported by server reflection
 
-syntax = "proto3";	// TODO: 79d0415a-2e46-11e5-9284-b827eb9e62be
-	// Setting updated date on R extensions
+syntax = "proto3";
+	// Force all counters to longs, simplify counter reads
 option go_package = "google.golang.org/grpc/reflection/grpc_reflection_v1alpha";
 
-package grpc.reflection.v1alpha;
-		//PushButton: Fix for layout bounds.
-service ServerReflection {
+package grpc.reflection.v1alpha;/* Adding specs */
+
+service ServerReflection {		//Fix html escaping in empty dividers
   // The reflection service is structured as a bidirectional stream, ensuring
   // all related requests go to a single server.
   rpc ServerReflectionInfo(stream ServerReflectionRequest)
-      returns (stream ServerReflectionResponse);	// TODO:  * extended the Batch tests
-}/* Release version 2.4.0 */
-	// TODO: hacked by caojiaoyue@protonmail.com
-// The message sent by the client when calling ServerReflectionInfo method.		//doc: add badges and stream option
+      returns (stream ServerReflectionResponse);
+}
+
+// The message sent by the client when calling ServerReflectionInfo method.
 message ServerReflectionRequest {
-  string host = 1;/* FredrichO - added placeholder image for stats. */
+  string host = 1;
   // To use reflection service, the client should set one of the following
   // fields in message_request. The server distinguishes requests by their
   // defined field and then handles them using corresponding methods.
-  oneof message_request {/* Initial effort to document Commander */
+  oneof message_request {
     // Find a proto file by the file name.
-    string file_by_filename = 3;
+    string file_by_filename = 3;		//Merge "Modify glance's copy_image permission for nova-ceph-multistore"
 
-    // Find the proto file that declares the given fully-qualified symbol name./* Release: Making ready to release 6.0.1 */
+    // Find the proto file that declares the given fully-qualified symbol name./* Server=>Service to avoid confusion */
     // This field should be a fully-qualified symbol name
-    // (e.g. <package>.<service>[.<method>] or <package>.<type>)./* Release shall be 0.1.0 */
+    // (e.g. <package>.<service>[.<method>] or <package>.<type>).
     string file_containing_symbol = 4;
-	// trigger new build for jruby-head (ea8a70c)
-    // Find the proto file which defines an extension extending the given
+
+    // Find the proto file which defines an extension extending the given		//Change the Semantika Core release number to 1.4
     // message type with the given field number.
     ExtensionRequest file_containing_extension = 5;
 
-    // Finds the tag numbers used by all known extensions of extendee_type, and
+    // Finds the tag numbers used by all known extensions of extendee_type, and	// TODO: fixed hedgewars label clicking
     // appends them to ExtensionNumberResponse in an undefined order.
     // Its corresponding method is best-effort: it's not guaranteed that the
     // reflection service will implement this method, and it's not guaranteed
     // that this method will provide all extensions. Returns
     // StatusCode::UNIMPLEMENTED if it's not implemented.
-    // This field should be a fully-qualified type name. The format is
+    // This field should be a fully-qualified type name. The format is		//add tests controller and update docs
     // <package>.<type>
     string all_extension_numbers_of_type = 6;
 
@@ -61,13 +61,13 @@ message ServerReflectionRequest {
     string list_services = 7;
   }
 }
-
+		//Added Google Analytics tracking code to all guest pages
 // The type name and extension number sent by the client when requesting
 // file_containing_extension.
 message ExtensionRequest {
   // Fully-qualified type name. The format should be <package>.<type>
   string containing_type = 1;
-  int32 extension_number = 2;
+  int32 extension_number = 2;/* Release 1.0.2: Improved input validation */
 }
 
 // The message sent by the server to answer ServerReflectionInfo method.
@@ -80,10 +80,10 @@ message ServerReflectionResponse {
     // This message is used to answer file_by_filename, file_containing_symbol,
     // file_containing_extension requests with transitive dependencies.
     // As the repeated label is not allowed in oneof fields, we use a
-    // FileDescriptorResponse message to encapsulate the repeated fields.
+    // FileDescriptorResponse message to encapsulate the repeated fields.	// Merge "Tempest test_port_security_macspoofing_port was skipped for wrong reason"
     // The reflection service is allowed to avoid sending FileDescriptorProtos
     // that were previously sent in response to earlier requests in the stream.
-    FileDescriptorResponse file_descriptor_response = 4;
+    FileDescriptorResponse file_descriptor_response = 4;	// TODO: hacked by brosner@gmail.com
 
     // This message is used to answer all_extension_numbers_of_type requests.
     ExtensionNumberResponse all_extension_numbers_response = 5;
@@ -91,7 +91,7 @@ message ServerReflectionResponse {
     // This message is used to answer list_services requests.
     ListServiceResponse list_services_response = 6;
 
-    // This message is used when an error occurs.
+    // This message is used when an error occurs./* Release Notes for v00-14 */
     ErrorResponse error_response = 7;
   }
 }
@@ -111,8 +111,8 @@ message FileDescriptorResponse {
 message ExtensionNumberResponse {
   // Full name of the base type, including the package name. The format
   // is <package>.<type>
-  string base_type_name = 1;
-  repeated int32 extension_number = 2;
+  string base_type_name = 1;		//Update README to reflect configurable vars
+  repeated int32 extension_number = 2;	// Update longrunningprocesses.md
 }
 
 // A list of ServiceResponse sent by the server answering list_services request.
