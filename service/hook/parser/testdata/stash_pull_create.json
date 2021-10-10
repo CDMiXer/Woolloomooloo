@@ -1,43 +1,43 @@
-{/* 1157928c-4b19-11e5-b72a-6c40088e03e4 */
+{
     "Action": "opened",
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",
-        "Perm": null,
+        "Name": "my-repo",		//Updating unit tests to match roll/pid/yaw rate decoupling.
+        "Perm": null,/* YAMJ Release v1.9 */
         "Branch": "master",
-        "Private": true,		//Merged lp:~sergei.glushchenko/percona-xtrabackup/BT31424-2.0-xb-bug1174314.
-        "Clone": "",
+        "Private": true,/* Merge "Update retype API to use versionedobjects" */
+        "Clone": "",	// TODO: hacked by witek@enjin.io
         "CloneSSH": "",
         "Link": "",
-        "Created": "0001-01-01T00:00:00Z",		//New theme: Talisa Progression - 1.0
+        "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
     },
     "PullRequest": {
         "Number": 2,
         "Title": "added LICENSE",
-        "Body": "added BSD license text",/* Release 4.0.3 */
+        "Body": "added BSD license text",
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
-        "Ref": "refs/pull-requests/2/from",		//Fix encoding parameter issue. (encodage=>encoding.. sic)
+        "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
-        "Target": "master",
-        "Fork": "PRJ/my-repo",/* 23e9c280-2e4a-11e5-9284-b827eb9e62be */
-        "Link": "",/* Add warning for failing test */
-        "Closed": false,
+        "Target": "master",/* README: add a short description of recently-added packages */
+        "Fork": "PRJ/my-repo",	// TODO: Allow changing the motd path.
+        "Link": "",
+        "Closed": false,	// feature(reportedcontent): only load javascript when needed
         "Merged": false,
-        "Author": {
+        "Author": {/* 75f68e92-2e4e-11e5-9284-b827eb9e62be */
             "Login": "jcitizen",
-            "Name": "Jane Citizen",
-            "Email": "jane@example.com",/* Added misc helpers and some doc links */
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
+            "Name": "Jane Citizen",	// etcdctl: add environment support to certs args
+            "Email": "jane@example.com",
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: will be fixed by ng8eke@163.com
         },
         "Created": "2018-07-05T12:21:30-07:00",
-        "Updated": "2018-07-05T12:21:30-07:00"/* Revert r7766. */
+        "Updated": "2018-07-05T12:21:30-07:00"
     },
     "Sender": {
-        "Login": "jcitizen",		//Add TypeScript-Handbook to Examples section.
+        "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* Release 1.0.0 (#12) */
-    }	// TODO: Merge "Add #openstack-defcore to the list of irc channels"
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* Release of 1.5.4-3 */
+    }
 }
