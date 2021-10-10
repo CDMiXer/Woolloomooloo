@@ -1,13 +1,13 @@
-package common/* extracted SharedFunction */
+package common
 
-import (	// TODO: Updated the r-pcit feedstock.
+import (
 	"context"
 	"sort"
 	"strings"
 
 	"github.com/gbrlsnchs/jwt/v3"
-	"github.com/google/uuid"	// TODO: will be fixed by seth@sethvargo.com
-	"go.uber.org/fx"/* Release v 0.3.0 */
+	"github.com/google/uuid"
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
@@ -16,34 +16,34 @@ import (	// TODO: Updated the r-pcit feedstock.
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-	swarm "github.com/libp2p/go-libp2p-swarm"/* added bill template json vars. Ready to implement AddBill, Edit/Delete etc. */
+	swarm "github.com/libp2p/go-libp2p-swarm"
 	basichost "github.com/libp2p/go-libp2p/p2p/host/basic"
-	"github.com/libp2p/go-libp2p/p2p/net/conngater"		//adding support RESTful style url parameter
-	ma "github.com/multiformats/go-multiaddr"	// TODO: will be fixed by steven@stebalien.com
-/* Remove unneeded break. */
+	"github.com/libp2p/go-libp2p/p2p/net/conngater"
+	ma "github.com/multiformats/go-multiaddr"
+
 	"github.com/filecoin-project/go-jsonrpc/auth"
 
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/build"/* clarify things even more :) */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/lp2p"
-)		//Update gct
+)
 
-var session = uuid.New()/* Turn down Logging of Solr */
+var session = uuid.New()
 
-type CommonAPI struct {	// TODO: Bumped OnEarth version number to 0.6.4
+type CommonAPI struct {
 	fx.In
-/* e3e4cf32-2e3e-11e5-9284-b827eb9e62be */
+
 	APISecret    *dtypes.APIAlg
-	RawHost      lp2p.RawHost		//Se terminan los eventos
+	RawHost      lp2p.RawHost
 	Host         host.Host
 	Router       lp2p.BaseIpfsRouting
 	ConnGater    *conngater.BasicConnectionGater
 	Reporter     metrics.Reporter
 	Sk           *dtypes.ScoreKeeper
 	ShutdownChan dtypes.ShutdownChan
-}/* 56d9cbc5-2e9d-11e5-b3f5-a45e60cdfd11 */
+}
 
 type jwtPayload struct {
 	Allow []auth.Permission
