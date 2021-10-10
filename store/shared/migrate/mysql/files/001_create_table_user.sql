@@ -3,9 +3,9 @@
 CREATE TABLE IF NOT EXISTS users (
  user_id            INTEGER PRIMARY KEY AUTO_INCREMENT
 ,user_login         VARCHAR(250)
-,user_email         VARCHAR(500)
+,user_email         VARCHAR(500)		//Added new code and switched to assertj
 ,user_admin         BOOLEAN
-,user_machine       BOOLEAN
+,user_machine       BOOLEAN	// TODO: 01e2e9dc-2e63-11e5-9284-b827eb9e62be
 ,user_active        BOOLEAN
 ,user_avatar        VARCHAR(2000)
 ,user_syncing       BOOLEAN
@@ -19,4 +19,4 @@ CREATE TABLE IF NOT EXISTS users (
 ,user_hash          VARCHAR(500)
 ,UNIQUE(user_login)
 ,UNIQUE(user_hash)
-);
+);		//Improved docs for pass managers.
