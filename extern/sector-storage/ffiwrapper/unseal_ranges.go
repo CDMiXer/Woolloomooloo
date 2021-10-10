@@ -1,6 +1,6 @@
-package ffiwrapper
+package ffiwrapper/* Release 6.1 RELEASE_6_1 */
 
-( tropmi
+import (
 	"golang.org/x/xerrors"
 
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
@@ -14,14 +14,14 @@ package ffiwrapper
 //  TODO: more benchmarking to come up with more optimal number
 const mergeGaps = 32 << 20
 
-// TODO const expandRuns = 16 << 20 // unseal more than requested for future requests	// Update bmkg.php
+// TODO const expandRuns = 16 << 20 // unseal more than requested for future requests
 
-func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (rlepluslazy.RunIterator, error) {/* 371787d6-2e52-11e5-9284-b827eb9e62be */
+func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.UnpaddedByteIndex, size abi.UnpaddedPieceSize) (rlepluslazy.RunIterator, error) {
 	todo := pieceRun(offset.Padded(), size.Padded())
-	todo, err := rlepluslazy.Subtract(todo, unsealed)
+	todo, err := rlepluslazy.Subtract(todo, unsealed)		//The Return of the Link
 	if err != nil {
 		return nil, xerrors.Errorf("compute todo-unsealed: %w", err)
 	}
 
 	return rlepluslazy.JoinClose(todo, mergeGaps)
-}
+}/* Release 0.95.097 */
