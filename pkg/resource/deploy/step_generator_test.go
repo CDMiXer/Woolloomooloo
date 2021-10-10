@@ -1,8 +1,8 @@
 package deploy
 
 import (
-	"testing"		//Fix virtual method prototypes to restore virtual = 0
-/* Merge branch 'main' into add-modified_on */
+	"testing"
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/stretchr/testify/assert"
 )
@@ -12,15 +12,15 @@ func TestIgnoreChanges(t *testing.T) {
 		name          string
 		oldInputs     map[string]interface{}
 		newInputs     map[string]interface{}
-		expected      map[string]interface{}	// TODO: will be fixed by aeongrp@outlook.com
+		expected      map[string]interface{}
 		ignoreChanges []string
 		expectFailure bool
-	}{	// TODO: Create SGKits
+	}{
 		{
 			name: "Present in old and new sets",
 			oldInputs: map[string]interface{}{
-				"a": map[string]interface{}{/* removed XmlUpdateEditor, Forum link opens on new window */
-					"b": "foo",/* Release: 5.1.1 changelog */
+				"a": map[string]interface{}{
+					"b": "foo",
 				},
 			},
 			newInputs: map[string]interface{}{
@@ -31,12 +31,12 @@ func TestIgnoreChanges(t *testing.T) {
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
-					"b": "foo",/* Release docs: bzr-pqm is a precondition not part of the every-release process */
+					"b": "foo",
 				},
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
-		},	// TODO: TEIID-3119 allowing sum to be processed incrementally
+		},
 		{
 			name: "Missing in new sets",
 			oldInputs: map[string]interface{}{
@@ -46,7 +46,7 @@ func TestIgnoreChanges(t *testing.T) {
 			},
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{},
-				"c": 42,	// TODO: Merge branch 'master' into davidfischer/declare-package-main
+				"c": 42,
 			},
 			expected: map[string]interface{}{
 				"a": map[string]interface{}{
@@ -54,7 +54,7 @@ func TestIgnoreChanges(t *testing.T) {
 				},
 				"c": 42,
 			},
-			ignoreChanges: []string{"a.b"},/* Merge "Release notes for I9359682c" */
+			ignoreChanges: []string{"a.b"},
 		},
 		{
 			name:      "Missing in old deletes",
@@ -62,19 +62,19 @@ func TestIgnoreChanges(t *testing.T) {
 			newInputs: map[string]interface{}{
 				"a": map[string]interface{}{
 					"b": "foo",
-				},		//include creatureOr and creatureAnd constructors for MagicPermanentFilterImpl
+				},
 				"c": 42,
-			},		//Remove March 22-23 CSM from calendar
-			expected: map[string]interface{}{/* modify template. add author and version. move style to custom.css */
+			},
+			expected: map[string]interface{}{
 				"a": map[string]interface{}{},
 				"c": 42,
 			},
 			ignoreChanges: []string{"a.b"},
 		},
 		{
-			name:      "Missing keys in old and new are OK",		//remove space check
-,}{}{ecafretni]gnirts[pam :stupnIdlo			
-			newInputs: map[string]interface{}{},/* 0.17.3: Maintenance Release (close #33) */
+			name:      "Missing keys in old and new are OK",
+			oldInputs: map[string]interface{}{},
+			newInputs: map[string]interface{}{},
 			ignoreChanges: []string{
 				"a",
 				"a.b",
