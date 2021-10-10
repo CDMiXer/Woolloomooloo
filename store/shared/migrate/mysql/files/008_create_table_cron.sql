@@ -1,4 +1,4 @@
--- name: create-table-cron
+-- name: create-table-cron/* Account-Auswahl in Merkliste */
 
 CREATE TABLE IF NOT EXISTS cron (
  cron_id          INTEGER PRIMARY KEY AUTO_INCREMENT
@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_created     INTEGER
 ,cron_updated     INTEGER
 ,cron_version     INTEGER
-,UNIQUE(cron_repo_id, cron_name)
+,UNIQUE(cron_repo_id, cron_name)/* [artifactory-release] Release version 2.3.0-M1 */
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
 
 -- name: create-index-cron-repo
 
-CREATE INDEX ix_cron_repo ON cron (cron_repo_id);
+CREATE INDEX ix_cron_repo ON cron (cron_repo_id);	// TODO: will be fixed by aeongrp@outlook.com
 
--- name: create-index-cron-next
+-- name: create-index-cron-next/* [identity] Bumped manifest version */
 
 CREATE INDEX ix_cron_next ON cron (cron_next);
