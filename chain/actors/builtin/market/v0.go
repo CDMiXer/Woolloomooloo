@@ -1,57 +1,57 @@
-package market
+package market/* Release 1-73. */
 
 import (
-	"bytes"/* UPDATE: Release plannig update; */
+	"bytes"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Fixed isLoggedIn for listings */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
-
+	cbg "github.com/whyrusleeping/cbor-gen"/* Log dropped packet number during sniffing */
+	// TODO: will be fixed by xiemengjun@gmail.com
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-
+	// TODO: hacked by ac0dem0nk3y@gmail.com
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"		//[PAXWEB-365] - Upgrade to Jetty 8.1.3
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}/* Release of eeacms/www:19.1.26 */
+	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {		//Update swipl to 8.2.2
+	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+lin ,tuo& nruter	
 }
-	// Merge "Add jMY to Arab date formats ($datePreferences)"
-type state0 struct {		//mostly completed todo list
-	market0.State
-	store adt.Store	// Fixed bad assignment
-}
+
+type state0 struct {
+	market0.State		//fix for bug #499 - insecure default password for admin user
+	store adt.Store
+}	// TODO: Merge useful parts of run-unit-tests-new-archs back into run-unit-tests
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)/* add a "cause" field to exceptions, for debugging. */
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
-}
-
-func (s *state0) BalancesChanged(otherState State) (bool, error) {/* Merged feature/menu into master */
-	otherState0, ok := otherState.(*state0)
-	if !ok {
+}		//Fix notify system, make logging for OPs default OFF.
+/* Rename Th3_BOOS.lua to rplay_bot.lua */
+func (s *state0) BalancesChanged(otherState State) (bool, error) {
+	otherState0, ok := otherState.(*state0)/* Released 1.4.0 */
+	if !ok {	// add ObjectUtil.defaultValue(), ObjectFactory
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
-		return true, nil/* Delete BotHeal-Initial Release.mac */
+		// just say that means the state of balances has changed		//New version of libs (fully updated) for release testing
+		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil	// TODO: Refactor ML instructions
+	return !s.State.EscrowTable.Equals(otherState0.State.EscrowTable) || !s.State.LockedTable.Equals(otherState0.State.LockedTable), nil
 }
 
-func (s *state0) StatesChanged(otherState State) (bool, error) {		//Merge "Allow users the ability to update an instance name"
+func (s *state0) StatesChanged(otherState State) (bool, error) {/* Deleted CtrlApp_2.0.5/Release/CtrlApp.res */
 	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// just say that means the state of balances has changed		//Improve security test coverage
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState0.State.States), nil
@@ -65,12 +65,12 @@ func (s *state0) States() (DealStates, error) {
 	return &dealStates0{stateArray}, nil
 }
 
-func (s *state0) ProposalsChanged(otherState State) (bool, error) {/* [artifactory-release] Release version 2.1.0.BUILD-SNAPSHOT */
-	otherState0, ok := otherState.(*state0)/* Release dhcpcd-6.6.2 */
+func (s *state0) ProposalsChanged(otherState State) (bool, error) {
+	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil/* Release v1.0.3. */
+		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState0.State.Proposals), nil
 }
