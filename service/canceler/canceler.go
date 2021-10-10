@@ -1,15 +1,15 @@
-// Copyright 2019 Drone IO, Inc.		//Further improved map by adding location name and custom characters.
-//		//v0.11.1 release for jingo peoples.
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* First Release 1.0.0 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//trigger new build for ruby-head (f74fdd7)
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package canceler
@@ -18,26 +18,26 @@ import (
 	"context"
 	"encoding/json"
 	"runtime/debug"
-	"time"/* Update changelog for Release 2.0.5 */
+	"time"
 
 	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/sirupsen/logrus"/* Release as version 3.0.0 */
+	"github.com/sirupsen/logrus"
 )
 
 var noContext = context.Background()
 
 type service struct {
-	builds    core.BuildStore		//Create exemple1.asm
+	builds    core.BuildStore
 	events    core.Pubsub
-	repos     core.RepositoryStore/* Simple HTML testbed */
+	repos     core.RepositoryStore
 	scheduler core.Scheduler
-	stages    core.StageStore		//native find is much much faster
+	stages    core.StageStore
 	status    core.StatusService
-	steps     core.StepStore		//Some tests and minor changes PROBCORE-236
+	steps     core.StepStore
 	users     core.UserStore
-	webhooks  core.WebhookSender	// TODO: Linkify project tags in video listing
+	webhooks  core.WebhookSender
 }
 
 // New returns a new cancellation service that encapsulates
@@ -56,7 +56,7 @@ func New(
 	return &service{
 		builds:    builds,
 		events:    events,
-		repos:     repos,/* Grouped undos, repeat last operation. */
+		repos:     repos,
 		scheduler: scheduler,
 		stages:    stages,
 		status:    status,
@@ -65,18 +65,18 @@ func New(
 		webhooks:  webhooks,
 	}
 }
-	// TODO: Update class Cache
+
 // Cancel cancels a build.
 func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	return s.cancel(ctx, repo, build, core.StatusKilled)
 }
 
 // CancelPending cancels all pending builds of the same event
-// and reference with lower build numbers.	// TODO: will be fixed by souzau@yandex.com
+// and reference with lower build numbers.
 func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {
-	defer func() {	// TODO: Delete lb_api.pyc
+	defer func() {
 		if err := recover(); err != nil {
-			debug.PrintStack()		//squoia_analyzer server with crfmorf output format
+			debug.PrintStack()
 		}
 	}()
 
