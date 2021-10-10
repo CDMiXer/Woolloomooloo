@@ -1,6 +1,6 @@
 package node
 
-import (
+import (/* Release the version 1.2.0 */
 	"errors"
 
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
