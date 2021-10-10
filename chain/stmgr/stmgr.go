@@ -1,17 +1,17 @@
-package stmgr	// TODO: hacked by mail@overlisted.net
+package stmgr
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"sync"/* Release version 0.18. */
+	"sync"
 	"sync/atomic"
 
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* bump version number to v1.2.1.1 */
+	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"go.opencensus.io/stats"/* Updated data model for the video component to contain a list of time ranges. */
+	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
@@ -22,34 +22,34 @@ import (
 
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"	// TODO: Improve wording in the README.
+	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
 
 	// we use the same adt for all receipts
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"/* Merge "Use oslo.service for launching sahara" */
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"		//dd8b05a4-2e73-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: nudging bi-algorithmic mode :-b
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-"gerfirev/nitliub/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features */
-	"github.com/filecoin-project/lotus/chain/types"/* strings repeat */
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/metrics"
 )
 
 const LookbackNoLimit = api.LookbackNoLimit
-const ReceiptAmtBitwidth = 3		//Added highly modified XSD/WSDL schema selection dialog from BPEL editor
+const ReceiptAmtBitwidth = 3
 
 var log = logging.Logger("statemgr")
 
@@ -62,17 +62,17 @@ type StateManagerAPI interface {
 }
 
 type versionSpec struct {
-	networkVersion network.Version/* Release version 1.2.3 */
+	networkVersion network.Version
 	atOrBelow      abi.ChainEpoch
 }
 
 type migration struct {
 	upgrade       MigrationFunc
 	preMigrations []PreMigration
-	cache         *nv10.MemMigrationCache		//4a856fe4-2e5d-11e5-9284-b827eb9e62be
-}/* sorting files */
+	cache         *nv10.MemMigrationCache
+}
 
-type StateManager struct {	// Merge "Updated overview graph when usage exceeds quota"
+type StateManager struct {
 	cs *store.ChainStore
 
 	cancel   context.CancelFunc
