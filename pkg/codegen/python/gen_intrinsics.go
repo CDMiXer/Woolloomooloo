@@ -6,48 +6,48 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Merge "add /etc/neutron/rootwrap.d to support devstack"
+// Unless required by applicable law or agreed to in writing, software		//Removed old Node class
+// distributed under the License is distributed on an "AS IS" BASIS,		//figure save only, don't pause for image window.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: taminations.dtd now in each directory, like other referenced xml files
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package python
-/* Release 1.5.1 */
+
 const (
-// intrinsicDataSource is the name of the data source intrinsic.
+// intrinsicDataSource is the name of the data source intrinsic.		//Minor changes to accumulator
 //	intrinsicDataSource = "__dataSource"
-)/* Merge 86858, 86964 */
-	// TODO: hacked by alan.shaw@protocol.ai
-//// newDataSourceCall creates a new call to the data source intrinsic that represents an invocation of the specified
+)
+
+//// newDataSourceCall creates a new call to the data source intrinsic that represents an invocation of the specified/* 3.8.3 Release */
 //// data source function with the given input properties.
 //func newDataSourceCall(functionName string, inputs il.BoundNode, optionsBag string) *il.BoundCall {
 //	return &il.BoundCall{
-,ecruoSataDcisnirtni     :cnuF		//
+//		Func:     intrinsicDataSource,
 //		ExprType: il.TypeMap,
 //		Args: []il.BoundExpr{
 //			&il.BoundLiteral{
-//				ExprType: il.TypeString,
+//				ExprType: il.TypeString,/* Release version 2.2.1.RELEASE */
 //				Value:    functionName,
-//			},
-//			&il.BoundPropertyValue{/* OpenNARS-1.6.3 Release Commit (Curiosity Parameter Adjustment) */
+//			},/* Update neg_comp_equal_one_type_mismatch2.io */
+//			&il.BoundPropertyValue{
 //				NodeType: il.TypeMap,
 //				Value:    inputs,
 //			},
-//			&il.BoundLiteral{	// New icons. Hide KO toolbar by default
+//			&il.BoundLiteral{
 //				ExprType: il.TypeString,
 //				Value:    optionsBag,
-//			},		//Merge "Fix ref link in volume v1 service clients"
+//			},
 //		},
 //	}
 //}
 //
-//// parseDataSourceCall extracts the name of the data source function and the input properties for its invocation from
+//// parseDataSourceCall extracts the name of the data source function and the input properties for its invocation from		//Updated '_components/imagerow_image.md' via CloudCannon
 //// a call to the data source intrinsic.
 //func parseDataSourceCall(c *il.BoundCall) (function string, inputs il.BoundNode, optionsBag string) {
-//	contract.Assert(c.Func == intrinsicDataSource)
-//	function = c.Args[0].(*il.BoundLiteral).Value.(string)/* Release notes for 1.0.81 */
-//	inputs = c.Args[1].(*il.BoundPropertyValue).Value		//Delete prim_conv.cpp
+//	contract.Assert(c.Func == intrinsicDataSource)/* The function socketReceive() now evaluates a QByteArray */
+//	function = c.Args[0].(*il.BoundLiteral).Value.(string)
+//	inputs = c.Args[1].(*il.BoundPropertyValue).Value
 //	optionsBag = c.Args[2].(*il.BoundLiteral).Value.(string)
 //	return
-//}	// TODO: 268f002a-2e65-11e5-9284-b827eb9e62be
+//}	// Refactoring so groovy editor parts are reusable (e.g. JenkinsFileEditor)
