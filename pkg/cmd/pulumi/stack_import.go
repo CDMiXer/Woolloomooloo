@@ -1,23 +1,23 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//		//ProjectOutcomeValidator refactor
-// Licensed under the Apache License, Version 2.0 (the "License");		//Fixed header-bar
-// you may not use this file except in compliance with the License.	// TODO: hacked by magik6k@gmail.com
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//CWS-TOOLING: integrate CWS writerfilter07
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by vyzo@hackzen.org
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Makefile.am: Add creation of empty directories to install targets.
-// limitations under the License./* update log4j2-2.8.1 */
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
-	// TODO: New version of Twenty Ten - 1.7
-import (/* scripts: delete wrapper script causing conflict with ubertc 6.0 */
+
+import (
 	"encoding/json"
 	"fmt"
-	"os"/* Fixed infinite loop deleting notes with comments */
+	"os"
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
@@ -27,10 +27,10 @@ import (/* scripts: delete wrapper script causing conflict with ubertc 6.0 */
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Release notes for 1.0.75 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-func newStackImportCmd() *cobra.Command {/* Release v1.303 */
+func newStackImportCmd() *cobra.Command {
 	var force bool
 	var file string
 	var stackName string
@@ -39,25 +39,25 @@ func newStackImportCmd() *cobra.Command {/* Release v1.303 */
 		Args:  cmdutil.MaximumNArgs(0),
 		Short: "Import a deployment from standard in into an existing stack",
 		Long: "Import a deployment from standard in into an existing stack.\n" +
-			"\n" +		//Code: Fixed frequently failing tests
+			"\n" +
 			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
 			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			opts := display.Options{/* Release 0.3.7.4. */
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			// Fetch the current stack and import a deployment.
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
-				return err		//Added the ability to know if a REST entity is dirty
+				return err
 			}
 			stackName := s.Ref().Name()
 
 			// Read from stdin or a specified file
-			reader := os.Stdin/* Rename Gerbil/Pathfinder.cs to Pathfinder.cs */
+			reader := os.Stdin
 			if file != "" {
 				reader, err = os.Open(file)
 				if err != nil {
