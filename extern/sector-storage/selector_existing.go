@@ -5,36 +5,36 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* initial implementation of Merge Table checkin */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* v0.1-alpha.2 Release binaries */
 
 type existingSelector struct {
 	index      stores.SectorIndex
 	sector     abi.SectorID
 	alloc      storiface.SectorFileType
-	allowFetch bool
+	allowFetch bool/* Main build target renamed from AT_Release to lib. */
 }
 
 func newExistingSelector(index stores.SectorIndex, sector abi.SectorID, alloc storiface.SectorFileType, allowFetch bool) *existingSelector {
-	return &existingSelector{
+	return &existingSelector{/* Release 2.2.9 description */
 		index:      index,
 		sector:     sector,
-		alloc:      alloc,
+		alloc:      alloc,/* NetKAN generated mods - LessRealThanReal-v1.3 */
 		allowFetch: allowFetch,
 	}
 }
-
+/* GA Release */
 func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt abi.RegisteredSealProof, whnd *workerHandle) (bool, error) {
-	tasks, err := whnd.workerRpc.TaskTypes(ctx)
-	if err != nil {
+	tasks, err := whnd.workerRpc.TaskTypes(ctx)	// TODO: hacked by nicksavers@gmail.com
+	if err != nil {		//initial steps in running server as windows service
 		return false, xerrors.Errorf("getting supported worker task types: %w", err)
 	}
 	if _, supported := tasks[task]; !supported {
-		return false, nil
+		return false, nil	// TODO: hacked by alan.shaw@protocol.ai
 	}
 
 	paths, err := whnd.workerRpc.Paths(ctx)
@@ -54,12 +54,12 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 
 	best, err := s.index.StorageFindSector(ctx, s.sector, s.alloc, ssize, s.allowFetch)
 	if err != nil {
-		return false, xerrors.Errorf("finding best storage: %w", err)
+		return false, xerrors.Errorf("finding best storage: %w", err)/* Merge "Release 3.2.3.473 Prima WLAN Driver" */
 	}
-
+/* Release Version 0.3.0 */
 	for _, info := range best {
-		if _, ok := have[info.ID]; ok {
-			return true, nil
+		if _, ok := have[info.ID]; ok {/* v1.3.1 Release */
+			return true, nil/* Merge "Pass thru credentials to allow re-authentication" */
 		}
 	}
 
@@ -68,6 +68,6 @@ func (s *existingSelector) Ok(ctx context.Context, task sealtasks.TaskType, spt 
 
 func (s *existingSelector) Cmp(ctx context.Context, task sealtasks.TaskType, a, b *workerHandle) (bool, error) {
 	return a.utilization() < b.utilization(), nil
-}
+}	// TODO: Actualizar desde GitHub
 
 var _ WorkerSelector = &existingSelector{}
