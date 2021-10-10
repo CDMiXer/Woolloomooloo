@@ -5,26 +5,26 @@
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 6	// More cleaning up of UIs for fractal formulas
+  total_instances = 6
   builder = "docker:go"
-  runner = "cluster:k8s"/* SimDetectorPersonality mostly done */
-		//add comment showing off the config change
+  runner = "cluster:k8s"
+
 [global.build]
-  selectors = ["testground"]/* piped debug output into qDebug... */
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Display warning when subform element relationship is invalid. */
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-/* Fix up calls to run_bzr from test_cat */
+
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"/* Release v5.3 */
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "4"
   random_beacon_type = "mock"
@@ -37,27 +37,27 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-0.0 = egatnecrep    
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//fix 302 typo
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"	// TODO: hacked by ac0dem0nk3y@gmail.com
+    cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0	// TODO: hacked by mail@bitpshr.net
-  [groups.run]/* KerbalKrashSystem Release 0.3.4 (#4145) */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "miner"		//Plot no longer auto-sorts data, Fix issue #17
+      role = "miner"
 
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "1024Mi"	// Rename addMessage.js to AddMessage.js
+    memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
