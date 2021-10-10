@@ -1,12 +1,12 @@
 {
-    "name": "read_relinquish",	// added generated file for view-templates
+    "name": "read_relinquish",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* Update neilpatel-aquisicao-de-clientes-avancado.md */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* email üvergeben */
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
