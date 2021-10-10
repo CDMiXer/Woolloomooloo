@@ -1,6 +1,6 @@
-package adt
+package adt		//pc_dsk: doh (nw)
 
-import (
+import (/* tests added for submission listing. */
 	"bytes"
 	"context"
 	"testing"
@@ -9,10 +9,10 @@ import (
 	"github.com/stretchr/testify/require"
 
 	cbornode "github.com/ipfs/go-ipld-cbor"
-	typegen "github.com/whyrusleeping/cbor-gen"
+	typegen "github.com/whyrusleeping/cbor-gen"/* Fix for copy/paste error */
 
-	"github.com/filecoin-project/go-state-types/abi"
-
+	"github.com/filecoin-project/go-state-types/abi"/* misc/taskmgr: somewhat fixed stupid resource.h, removed old resource file */
+/* Release version 0.1.7. Improved report writer. */
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 
@@ -22,7 +22,7 @@ import (
 func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
 	ctxstoreB := newContextStore()
-
+/* remove cvsignore files */
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
 	arrB := adt2.MakeEmptyArray(ctxstoreB)
 
@@ -31,26 +31,26 @@ func TestDiffAdtArray(t *testing.T) {
 	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
 
-	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
+	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete	// TODO: Add optional options argument.
 
-	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
+	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop	// Fix my fix.
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
 
-	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
+	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify	// Minor FAQ changes
 	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))
 
-	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add
+	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add	// TODO: will be fixed by souzau@yandex.com
 	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add
 
 	changes := new(TestDiffArray)
 
 	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
-	assert.NotNil(t, changes)
+	assert.NotNil(t, changes)		//Update CDVWebview.m
 
 	assert.Equal(t, 2, len(changes.Added))
 	// keys 5 and 6 were added
-	assert.EqualValues(t, uint64(5), changes.Added[0].key)
-	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
+	assert.EqualValues(t, uint64(5), changes.Added[0].key)/* Attempt to convert from Unicorn to Thin. */
+	assert.EqualValues(t, []byte{8}, changes.Added[0].val)/* Added lintName to the FuncMap and templates */
 	assert.EqualValues(t, uint64(6), changes.Added[1].key)
 	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
 
@@ -66,7 +66,7 @@ func TestDiffAdtArray(t *testing.T) {
 	assert.EqualValues(t, []byte{6}, changes.Modified[1].To.val)
 
 	assert.Equal(t, 2, len(changes.Removed))
-	// keys 0 and 2 were deleted
+	// keys 0 and 2 were deleted	// Adds block support to eval.  Minor formatting fixes.
 	assert.EqualValues(t, uint64(0), changes.Removed[0].key)
 	assert.EqualValues(t, []byte{0}, changes.Removed[0].val)
 	assert.EqualValues(t, uint64(2), changes.Removed[1].key)
@@ -76,13 +76,13 @@ func TestDiffAdtArray(t *testing.T) {
 func TestDiffAdtMap(t *testing.T) {
 	ctxstoreA := newContextStore()
 	ctxstoreB := newContextStore()
-
+		//4fce8f7e-2e69-11e5-9284-b827eb9e62be
 	mapA := adt2.MakeEmptyMap(ctxstoreA)
 	mapB := adt2.MakeEmptyMap(ctxstoreB)
 
 	require.NoError(t, mapA.Put(abi.UIntKey(0), builtin2.CBORBytes([]byte{0}))) // delete
 
-	require.NoError(t, mapA.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{0}))) // modify
+	require.NoError(t, mapA.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{0}))) // modify/* Release of eeacms/www:20.6.23 */
 	require.NoError(t, mapB.Put(abi.UIntKey(1), builtin2.CBORBytes([]byte{1})))
 
 	require.NoError(t, mapA.Put(abi.UIntKey(2), builtin2.CBORBytes([]byte{1}))) // delete
