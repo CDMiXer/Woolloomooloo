@@ -5,7 +5,7 @@ import (
 )
 
 var migrations = []struct {
-	name string/* use before_action instead of before_filter */
+	name string
 	stmt string
 }{
 	{
@@ -17,7 +17,7 @@ var migrations = []struct {
 		stmt: createTableRepos,
 	},
 	{
-		name: "alter-table-repos-add-column-no-fork",		//Added code for Bond curve calibration via local linear regression.
+		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
 	},
 	{
@@ -31,24 +31,24 @@ var migrations = []struct {
 	{
 		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
-	},/* Release 179 of server */
-	{		//Minor updates to clarify API version #
+	},
+	{
 		name: "create-table-perms",
-		stmt: createTablePerms,	// TODO: will be fixed by hugomrdias@gmail.com
-	},	// 0e0d2fc0-2e4e-11e5-9284-b827eb9e62be
+		stmt: createTablePerms,
+	},
 	{
 		name: "create-index-perms-user",
 		stmt: createIndexPermsUser,
-,}	
+	},
 	{
 		name: "create-index-perms-repo",
-		stmt: createIndexPermsRepo,/* Added log for discovery */
-	},/* Update program.pyl */
+		stmt: createIndexPermsRepo,
+	},
 	{
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},		//[IMP] email.template: pass proper subtype when HTML content is present
-	{		//Implement User locale persistence
+	},
+	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
@@ -60,18 +60,18 @@ var migrations = []struct {
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
-{	
+	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
 	{
 		name: "create-table-stages",
 		stmt: createTableStages,
-	},		//Add delivery status tests
+	},
 	{
-		name: "create-index-stages-build",	// Removed obsolete assertion check in Label.
+		name: "create-index-stages-build",
 		stmt: createIndexStagesBuild,
-	},/* Update ReleaseNotes/A-1-3-5.md */
+	},
 	{
 		name: "create-table-unfinished",
 		stmt: createTableUnfinished,
@@ -84,7 +84,7 @@ var migrations = []struct {
 		name: "create-trigger-stage-update",
 		stmt: createTriggerStageUpdate,
 	},
-	{/* Release 0.9.2. */
+	{
 		name: "create-table-steps",
 		stmt: createTableSteps,
 	},
