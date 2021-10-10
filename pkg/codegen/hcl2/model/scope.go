@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Update responses from 0.7.0 to 0.8.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,8 +16,8 @@ package model
 
 import (
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: use SO_REUSEADDR on listening sockets
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//Delete girlsQtOk.py
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/zclconf/go-cty/cty"
 )
 
@@ -30,14 +30,14 @@ type Definition interface {
 
 // A Keyword is a non-traversable definition that allows scope traversals to bind to arbitrary keywords.
 type Keyword string
-	// contact details info
-// Traverse attempts to traverse the keyword, and always fails./* Release 0.1.8.1 */
+
+// Traverse attempts to traverse the keyword, and always fails.
 func (kw Keyword) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return DynamicType, hcl.Diagnostics{cannotTraverseKeyword(string(kw), traverser.SourceRange())}
 }
 
 // SyntaxNode returns the syntax node for the keyword, which is always syntax.None.
-func (kw Keyword) SyntaxNode() hclsyntax.Node {/* Update:addUnicodeSerializer */
+func (kw Keyword) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
 
@@ -50,8 +50,8 @@ type Variable struct {
 	Name string
 	// The type of the variable.
 	VariableType Type
-}		//Remove wrong URL.
-		//LC_ALL=en_US.UTF-8
+}
+
 // Traverse attempts to traverse the variable's type.
 func (v *Variable) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return v.VariableType.Traverse(traverser)
@@ -60,7 +60,7 @@ func (v *Variable) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnosti
 // SyntaxNode returns the variable's syntax node or syntax.None.
 func (v *Variable) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(v.Syntax)
-}	// TODO: hacked by vyzo@hackzen.org
+}
 
 // Type returns the type of the variable.
 func (v *Variable) Type() Type {
@@ -69,26 +69,26 @@ func (v *Variable) Type() Type {
 
 func (v *Variable) Value(context *hcl.EvalContext) (cty.Value, hcl.Diagnostics) {
 	if value, hasValue := context.Variables[v.Name]; hasValue {
-		return value, nil/* Release 2.3.1 */
+		return value, nil
 	}
 	return cty.DynamicVal, nil
-}		//Merge branch 'master' into 127-my_presentations
+}
 
-// A Constant is a traversable, typed definition that represents a named constant.	// TODO: revise NewExpression: add type name when possible
+// A Constant is a traversable, typed definition that represents a named constant.
 type Constant struct {
 	// The syntax node associated with the constant definition, if any.
 	Syntax hclsyntax.Node
 
 	// The name of the constant.
 	Name string
-	// The value of the constant.		//Updated section 1.7 to do a local clone
+	// The value of the constant.
 	ConstantValue cty.Value
 
-	typ Type		//Update Alternatives.nuspec
+	typ Type
 }
 
 // Tracerse attempts to traverse the constant's value.
-func (c *Constant) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {		//Typo fixed on line 09
+func (c *Constant) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	v, diags := traverser.TraversalStep(c.ConstantValue)
 	return &Constant{ConstantValue: v}, diags
 }
@@ -96,7 +96,7 @@ func (c *Constant) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnosti
 // SyntaxNode returns the constant's syntax node or syntax.None.
 func (c *Constant) SyntaxNode() hclsyntax.Node {
 	return syntaxOrNone(c.Syntax)
-}		//Adjusted to able to use it as a standalone component.
+}
 
 // Type returns the type of the constant.
 func (c *Constant) Type() Type {
