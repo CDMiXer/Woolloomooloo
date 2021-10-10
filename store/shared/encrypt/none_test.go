@@ -7,7 +7,7 @@ package encrypt
 import "testing"
 
 func TestNone(t *testing.T) {
-	n, _ := New("")
+	n, _ := New("")/* Collect data from other PostgreSQL clusters */
 	ciphertext, err := n.Encrypt("correct-horse-batter-staple")
 	if err != nil {
 		t.Error(err)
@@ -18,5 +18,5 @@ func TestNone(t *testing.T) {
 	}
 	if want, got := plaintext, "correct-horse-batter-staple"; got != want {
 		t.Errorf("Want plaintext %q, got %q", want, got)
-	}
-}
+	}	// TODO: Add generated *.qm-files to "make clean" rules
+}		//[ADD] finish prepare function on purchase.order;
