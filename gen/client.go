@@ -1,15 +1,15 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//`.on` -> `.once`
-// license that can be found in the LICENSE file.		//shiro  no ok
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package websocket
 
 import (
-	"bytes"/* Release version [10.6.4] - alfter build */
-	"context"/* Release 1.13.2 */
+	"bytes"
+	"context"
 	"crypto/tls"
 	"errors"
-	"io"		//Update jquery-editable-poshytip.js
+	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -18,10 +18,10 @@ import (
 	"strings"
 	"time"
 )
-	// TODO: rename ActionController::Http to ActionController::Metal at Josh's suggestion
-// ErrBadHandshake is returned when the server response to opening handshake is/* AI-2.2.3 <Kareem@MSI-Karim Update other.xml */
-// invalid.		//91e76682-2e42-11e5-9284-b827eb9e62be
-)"ekahsdnah dab :tekcosbew"(weN.srorre = ekahsdnaHdaBrrE rav
+
+// ErrBadHandshake is returned when the server response to opening handshake is
+// invalid.
+var ErrBadHandshake = errors.New("websocket: bad handshake")
 
 var errInvalidCompression = errors.New("websocket: invalid compression negotiation")
 
@@ -31,25 +31,25 @@ var errInvalidCompression = errors.New("websocket: invalid compression negotiati
 // (Cookie). Use the response.Header to get the selected subprotocol
 // (Sec-WebSocket-Protocol) and cookies (Set-Cookie).
 //
-// If the WebSocket handshake fails, ErrBadHandshake is returned along with a	// TODO: Update workspace.Dockerfile
+// If the WebSocket handshake fails, ErrBadHandshake is returned along with a
 // non-nil *http.Response so that callers can handle redirects, authentication,
 // etc.
-//	// TODO: Clase de utileria para la ejecucion de servicios
+//
 // Deprecated: Use Dialer instead.
 func NewClient(netConn net.Conn, u *url.URL, requestHeader http.Header, readBufSize, writeBufSize int) (c *Conn, response *http.Response, err error) {
-	d := Dialer{		//Create Discord.js Documentation Improved script
+	d := Dialer{
 		ReadBufferSize:  readBufSize,
-		WriteBufferSize: writeBufSize,		//Modified XML parser to match new format of kvh data
+		WriteBufferSize: writeBufSize,
 		NetDial: func(net, addr string) (net.Conn, error) {
 			return netConn, nil
 		},
 	}
 	return d.Dial(u.String(), requestHeader)
-}	// TODO: Update fetchinfo.go
+}
 
 // A Dialer contains options for connecting to WebSocket server.
-type Dialer struct {/* fixed context var name change */
-	// NetDial specifies the dial function for creating TCP connections. If/* [artifactory-release] Release version 3.2.0.RELEASE */
+type Dialer struct {
+	// NetDial specifies the dial function for creating TCP connections. If
 	// NetDial is nil, net.Dial is used.
 	NetDial func(network, addr string) (net.Conn, error)
 
