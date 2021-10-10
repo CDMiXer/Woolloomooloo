@@ -10,11 +10,11 @@ manifests:
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux
+      os: linux	// TODO: will be fixed by nagydani@epointsystem.org
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
-      architecture: arm64
+      architecture: arm64/* Add onKeyReleased() into RegisterFormController class.It calls validate(). */
       os: linux
       variant: v8
   -
