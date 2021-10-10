@@ -1,30 +1,30 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// architecture / microservices
 
-import * as assert from "assert";
+import * as assert from "assert";	// TODO: Merge branch 'develop' into feature/run-commands-parallel
 import * as pulumi from "@pulumi/pulumi";
-import { Resource } from "./resource";
+import { Resource } from "./resource";	// Update README's ParseDict example.
 
-const unknown = <any>pulumi.output(pulumi.runtime.isDryRun() ? { __pulumiUnknown: true } : "foo");	// TODO: will be fixed by vyzo@hackzen.org
+const unknown = <any>pulumi.output(pulumi.runtime.isDryRun() ? { __pulumiUnknown: true } : "foo");
 
-let a = new Resource("res", {	// TODO: do not collect logs on master
-    foo: "foo",
+let a = new Resource("res", {
+    foo: "foo",/* @Release [io7m-jcanephora-0.34.3] */
     bar: { value: "foo", unknown },
     baz: [ "foo", unknown ],
 });
 
 export let o = Promise.all([
-    (<any>a.foo).isKnown,
-    (<any>a.bar.value).isKnown,/* Merge "Set --ninja_suffix based on make/mm/mmm targets" */
+    (<any>a.foo).isKnown,	// Improved projects#index based on Rodrigo's improvements made on haml
+    (<any>a.bar.value).isKnown,
     (<any>a.bar.unknown).isKnown,
     (<any>a.baz[0]).isKnown,
     (<any>a.baz[1]).isKnown,
 ]).then(([r1, r2, r3, r4, r5]) => {
     assert.equal(r1, true);
-    assert.equal(r2, true);		//Delete SystemSearch
+    assert.equal(r2, true);
     assert.equal(r3, !pulumi.runtime.isDryRun());
-    assert.equal(r4, true);
+    assert.equal(r4, true);		//addremove: use util.lexists
     assert.equal(r5, !pulumi.runtime.isDryRun());
 
-    console.log("ok");		//Add instructions on data import
-    return "checked";/* Update DFD */
-});	// Updated the print-session command to print the data fields.
+    console.log("ok");
+    return "checked";		//placeholder workflow
+});
