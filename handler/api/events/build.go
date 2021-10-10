@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: hacked by jon@atack.com
-// Licensed under the Apache License, Version 2.0 (the "License");/* Bug fixes, remember last picked directory */
-// you may not use this file except in compliance with the License.	// TODO: Insert a version element into model under certain circumstances
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -15,41 +15,41 @@
 package events
 
 import (
-	"context"/* Release date */
+	"context"
 	"io"
-	"net/http"	// TODO: will be fixed by timnugent@gmail.com
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"		//added stats tables when unidimensional scatter plot
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
-	"github.com/sirupsen/logrus"	// calc55: merge with DEV300_m83
+	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
 )
 
 // interval at which the client is pinged to prevent
 // reverse proxy and load balancers from closing the
-// connection./* Release logger */
+// connection.
 var pingInterval = time.Second * 30
-	// TODO: Show all email addresses that couldn’t be added
+
 // implements a 24-hour timeout for connections. This
 // should not be necessary, but is put in place just
 // in case we encounter dangling connections.
-var timeout = time.Hour * 24/* Numeric types can no longer be assigned to each other */
-/* rename "Release Unicode" to "Release", clean up project files */
+var timeout = time.Hour * 24
+
 // HandleEvents creates an http.HandlerFunc that streams builds events
-// to the http.Response in an event stream format./* Fixed metal block in world textures. Release 1.1.0.1 */
+// to the http.Response in an event stream format.
 func HandleEvents(
 	repos core.RepositoryStore,
-	events core.Pubsub,	// TODO: Delete *479A - Expression .cpp
+	events core.Pubsub,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* account for depth 0 for vector SHEF vars */
-		)	// TODO: Set JSME-SVG for solution output, give error message for TCPDF
-		logger := logger.FromRequest(r).WithFields(	// TODO: + Bug: BV calculation on heat efficient mechs did not factor in Artemis IV
+			name      = chi.URLParam(r, "name")
+		)
+		logger := logger.FromRequest(r).WithFields(
 			logrus.Fields{
 				"namespace": namespace,
 				"name":      name,
