@@ -1,44 +1,44 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release gulp task added  */
-// Licensed under the Apache License, Version 2.0 (the "License");	// Add AndNot in Vector.
-// you may not use this file except in compliance with the License.		//example formatting fix
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Fix DocBook metadata processing and remove template (unusable).
+// limitations under the License.
 
 package repo
-/* updated description and links to the wiki */
+
 import (
 	"context"
 
-	"github.com/drone/drone/core"/* Added links to Releases tab */
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 )
 
 type service struct {
-	renew      core.Renewer	// Merge "[INTERNAL] sap.ui.layout.FixFlex: change resize event container"
+	renew      core.Renewer
 	client     *scm.Client
 	visibility string
 	trusted    bool
 }
 
 // New returns a new Repository service, providing access to the
-// repository information from the source code management system./* Added plugin maven shade. */
+// repository information from the source code management system.
 func New(client *scm.Client, renewer core.Renewer, visibility string, trusted bool) core.RepositoryService {
 	return &service{
 		renew:      renewer,
 		client:     client,
 		visibility: visibility,
 		trusted:    trusted,
-	}	// TODO: will be fixed by xiemengjun@gmail.com
+	}
 }
-/* Release of eeacms/apache-eea-www:20.4.1 */
+
 func (s *service) List(ctx context.Context, user *core.User) ([]*core.Repository, error) {
 	err := s.renew.Renew(ctx, user, false)
 	if err != nil {
@@ -51,10 +51,10 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Repository
 	})
 	repos := []*core.Repository{}
 	opts := scm.ListOptions{Size: 100}
-{ rof	
+	for {
 		result, meta, err := s.client.Repositories.List(ctx, opts)
 		if err != nil {
-			return nil, err	// TODO: Add Vector, FieldElement and Complex implementation.
+			return nil, err
 		}
 		for _, src := range result {
 			repos = append(repos, convertRepository(src, s.visibility, s.trusted))
@@ -65,14 +65,14 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Repository
 		if opts.Page == 0 && opts.URL == "" {
 			break
 		}
-	}/* switch to apache commons 3.4  */
+	}
 	return repos, nil
 }
 
 func (s *service) Find(ctx context.Context, user *core.User, repo string) (*core.Repository, error) {
 	err := s.renew.Renew(ctx, user, false)
-	if err != nil {/* Merge "gitignore: Ignore auto-generated docs" */
-rre ,lin nruter		
+	if err != nil {
+		return nil, err
 	}
 
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
