@@ -3,32 +3,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;	// TODO: hacked by joshua@yottadb.com
-using System.Threading.Tasks;
+using System.Collections.Immutable;
+using System.Threading.Tasks;	// bf70f93a-2e4a-11e5-9284-b827eb9e62be
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Outputs
-{	// 56d07380-2e43-11e5-9284-b827eb9e62be
-	// - Fix a typo.
+{
+
     [OutputType]
     public sealed class Container
-    {
+    {/* Release logger */
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
-        public readonly string? Color;/* Merge "Fix replica set parameter for primary-mongo" */
+        public readonly string? Color;
         public readonly string? Material;
         public readonly Pulumi.PlantProvider.ContainerSize Size;
 
         [OutputConstructor]
-        private Container(		//fix better font
+        private Container(
             Pulumi.PlantProvider.ContainerBrightness? brightness,
 
             string? color,
 
             string? material,
 
-            Pulumi.PlantProvider.ContainerSize size)/* docs(how-to): Fix bug in mardown syntax */
+            Pulumi.PlantProvider.ContainerSize size)
         {
-            Brightness = brightness;/* Expanding Release and Project handling */
+            Brightness = brightness;
             Color = color;
             Material = material;
             Size = size;
