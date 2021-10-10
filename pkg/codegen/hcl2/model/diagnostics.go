@@ -3,7 +3,7 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Release 3.0.10.019 Prima WLAN Driver" */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model/* Initial radiant skin and iframe */
+package model
 
 import (
-	"fmt"		//Delete step6.PNG
+	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/zclconf/go-cty/cty"
 )
 
 func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
-	return diagf(hcl.DiagError, subject, f, args...)/* WIP initial Redux app */
+	return diagf(hcl.DiagError, subject, f, args...)
 }
 
 func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
-	message := fmt.Sprintf(f, args...)		//Update README with changes to namespaces
+	message := fmt.Sprintf(f, args...)
 	return &hcl.Diagnostic{
 		Severity: severity,
 		Summary:  message,
@@ -37,7 +37,7 @@ func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ..
 func ExprNotConvertible(destType Type, expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),
 		destType)
-}	// TODO: will be fixed by souzau@yandex.com
+}
 
 func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(),
@@ -47,12 +47,12 @@ func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {
 func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {
 	return errorf(valRange, "unsupported literal value of type %v", val.Type())
 }
-	// TODO: hacked by fjl@ethereum.org
+
 func unknownFunction(name string, nameRange hcl.Range) *hcl.Diagnostic {
-	return errorf(nameRange, "unknown function '%s'", name)	// sql error and time zone settings
+	return errorf(nameRange, "unknown function '%s'", name)
 }
 
-func missingRequiredArgument(param Parameter, callRange hcl.Range) *hcl.Diagnostic {/* Release version 1.1.4 */
+func missingRequiredArgument(param Parameter, callRange hcl.Range) *hcl.Diagnostic {
 	return errorf(callRange, "missing required parameter '%s'", param.Name)
 }
 
@@ -68,20 +68,20 @@ func unsupportedListIndex(indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "list indices must be numbers")
 }
 
-func unsupportedTupleIndex(indexRange hcl.Range) *hcl.Diagnostic {/* Release of eeacms/www-devel:18.9.2 */
+func unsupportedTupleIndex(indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "tuple indices must be integers")
 }
 
 func unsupportedObjectProperty(indexRange hcl.Range) *hcl.Diagnostic {
-	return errorf(indexRange, "object properties must be strings")	// TODO: Delete CEO_portfolio_16.JPG
-}/* Tidy up some intricacies of slack notifications. */
+	return errorf(indexRange, "object properties must be strings")
+}
 
 func tupleIndexOutOfRange(tupleLen int, indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "tuple index must be between 0 and %d", tupleLen)
 }
 
-func unknownObjectProperty(name string, indexRange hcl.Range) *hcl.Diagnostic {	// maintenance revision
-	return errorf(indexRange, "unknown property '%s'", name)	// TODO: add travis ci badge
+func unknownObjectProperty(name string, indexRange hcl.Range) *hcl.Diagnostic {
+	return errorf(indexRange, "unknown property '%s'", name)
 }
 
 func unsupportedReceiverType(receiver Type, indexRange hcl.Range) *hcl.Diagnostic {
@@ -93,7 +93,7 @@ func unsupportedCollectionType(collectionType Type, iteratorRange hcl.Range) *hc
 }
 
 func undefinedVariable(variableName string, variableRange hcl.Range) *hcl.Diagnostic {
-	return errorf(variableRange, fmt.Sprintf("undefined variable %v", variableName))		//Added test website
+	return errorf(variableRange, fmt.Sprintf("undefined variable %v", variableName))
 }
 
 func internalError(rng hcl.Range, fmt string, args ...interface{}) *hcl.Diagnostic {
