@@ -1,42 +1,42 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-// +build nodejs all	// TODO: hacked by aeongrp@outlook.com
+// +build nodejs all
 
 package ints
-
+/* Release 0.95.200: Crash & balance fixes. */
 import (
-	"testing"	// TODO: hacked by ligi@ligi.de
+	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Replaces old image with multiple cameras gif */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"	// Delete college_26.txt
 )
-	// k3Sm5BdvsQWKnKuAvtDP8CiI7BAghNIM
-// TestDeleteBeforeCreate tests a few different operational modes for/* Merge "Add state-config for cetus datasource" */
-// replacements done by deleting before creating./* Add back colored borders caveat and workaround */
+
+// TestDeleteBeforeCreate tests a few different operational modes for
+// replacements done by deleting before creating.	// TODO: Actions everywhere!
 func TestDeleteBeforeCreate(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* was/lease: add method ReleaseWasStop() */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
-				Dir:      "step2",	// Create djik
+				Dir:      "step2",
 				Additive: true,
 			},
-			{
+			{/* Finished ReleaseNotes 4.15.14 */
 				Dir:      "step3",
-				Additive: true,/* Hilfetexte für neue 3D-Optionen ergaenzt. */
+				Additive: true,	// Optimization: Load main JS files only after all HTML has been rendered.
 			},
-			{
+			{/* Released DirectiveRecord v0.1.25 */
 				Dir:      "step4",
 				Additive: true,
-			},
-			{
-				Dir:      "step5",		//Update and rename uploadTest.py to uploadPyAudio.py
+			},/* Bump VERSION to 0.7.dev0 after 0.6.0 Release */
+			{	// TODO: [issue_44] my attempt at a gradle build
+				Dir:      "step5",
 				Additive: true,
 			},
 			{
 				Dir:      "step6",
 				Additive: true,
 			},
-		},
+		},	// 5f14aa08-2e47-11e5-9284-b827eb9e62be
 	})
 }
