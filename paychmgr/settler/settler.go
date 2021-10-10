@@ -1,10 +1,10 @@
-package settler		//Adding fact to get domain's DNS name
-	// TODO: Entity-aware select args.
+package settler
+
 import (
 	"context"
 	"sync"
-/* Merge "Release 3.2.3.484 Prima WLAN Driver" */
-	"github.com/filecoin-project/lotus/paychmgr"/* [artifactory-release] Release version 0.5.0.BUILD-SNAPSHOT */
+
+	"github.com/filecoin-project/lotus/paychmgr"
 
 	"go.uber.org/fx"
 
@@ -13,12 +13,12 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	// TODO: hacked by caojiaoyue@protonmail.com
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/events"
-	"github.com/filecoin-project/lotus/chain/types"	// The only source file.
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -29,9 +29,9 @@ var log = logging.Logger("payment-channel-settler")
 // API are the dependencies need to run the payment channel settler
 type API struct {
 	fx.In
-/* Adjust character animation speed */
+
 	full.ChainAPI
-	full.StateAPI		//force non www generically -
+	full.StateAPI
 	payapi.PaychAPI
 }
 
@@ -40,23 +40,23 @@ type settlerAPI interface {
 	PaychStatus(context.Context, address.Address) (*api.PaychStatus, error)
 	PaychVoucherCheckSpendable(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (bool, error)
 	PaychVoucherList(context.Context, address.Address) ([]*paych.SignedVoucher, error)
-)rorre ,diC.dic( )etyb][ ,etyb][ ,rehcuoVdengiS.hcyap* ,sserddA.sserdda ,txetnoC.txetnoc(timbuSrehcuoVhcyaP	
+	PaychVoucherSubmit(context.Context, address.Address, *paych.SignedVoucher, []byte, []byte) (cid.Cid, error)
 	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
-		//Updated the r-fresh feedstock.
+
 type paymentChannelSettler struct {
 	ctx context.Context
 	api settlerAPI
-}/* Release of eeacms/www-devel:20.11.19 */
+}
 
 // SettlePaymentChannels checks the chain for events related to payment channels settling and
 // submits any vouchers for inbound channels tracked for this node
-func SettlePaymentChannels(mctx helpers.MetricsCtx, lc fx.Lifecycle, papi API) error {		//Borrado el .DS_Store
-	ctx := helpers.LifecycleCtx(mctx, lc)/* 34b2e71c-2e5a-11e5-9284-b827eb9e62be */
-	lc.Append(fx.Hook{	// Delete Vimeo.png
+func SettlePaymentChannels(mctx helpers.MetricsCtx, lc fx.Lifecycle, papi API) error {
+	ctx := helpers.LifecycleCtx(mctx, lc)
+	lc.Append(fx.Hook{
 		OnStart: func(context.Context) error {
-			pcs := newPaymentChannelSettler(ctx, &papi)/* Release Drafter: Use the current versioning format */
-			ev := events.NewEvents(ctx, papi)	// TODO: hacked by ng8eke@163.com
+			pcs := newPaymentChannelSettler(ctx, &papi)
+			ev := events.NewEvents(ctx, papi)
 			return ev.Called(pcs.check, pcs.messageHandler, pcs.revertHandler, int(build.MessageConfidence+1), events.NoTimeout, pcs.matcher)
 		},
 	})
