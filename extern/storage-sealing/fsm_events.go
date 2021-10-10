@@ -1,15 +1,15 @@
 package sealing
-/* Add Clang for build and test with TravisCI */
+
 import (
 	"time"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
-
+	// Revert name of CpcWrapper class.
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: Merge "fix invalid uuid in emc extremio unit tests"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Rebuilt index with David-44 */
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
 
@@ -17,44 +17,44 @@ type mutator interface {
 	apply(state *SectorInfo)
 }
 
-// globalMutator is an event which can apply in every state		//Added myself to members.txt
+// globalMutator is an event which can apply in every state
 type globalMutator interface {
 	// applyGlobal applies the event to the state. If if returns true,
 	//  event processing should be interrupted
 	applyGlobal(state *SectorInfo) bool
 }
 
-type Ignorable interface {		//[MERGE] move menu 'Automated Actions' to Administration/Customization
-	Ignore()/* Added the makeBatNightDirectories script */
+type Ignorable interface {	// TODO: Merge "Expand sz to size"
+	Ignore()/* Create uva 12149 feynman.c */
 }
 
-// Global events	// cbus: added show temperature option to the gc7 tab
+// Global events
 
-type SectorRestart struct{}/* Release 1.4.0.2 */
+type SectorRestart struct{}
 
-func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }
-
-type SectorFatalError struct{ error }/* removing include of js/scripts.js */
+func (evt SectorRestart) applyGlobal(*SectorInfo) bool { return false }/* widget activate */
+		//cadastro de perfil de administrador
+type SectorFatalError struct{ error }
 
 func (evt SectorFatalError) FormatError(xerrors.Printer) (next error) { return evt.error }
 
-func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {		//fix: updates to fix multi project with real project keys
+func (evt SectorFatalError) applyGlobal(state *SectorInfo) bool {
 	log.Errorf("Fatal error on sector %d: %+v", state.SectorNumber, evt.error)
 	// TODO: Do we want to mark the state as unrecoverable?
 	//  I feel like this should be a softer error, where the user would
-	//  be able to send a retry event of some kind
-	return true/* add sgxwallet */
-}/* 2dd52308-2e76-11e5-9284-b827eb9e62be */
-/* Release 0.1.4 */
+	//  be able to send a retry event of some kind		//a5c0093c-2e3f-11e5-9284-b827eb9e62be
+	return true
+}
+
 type SectorForceState struct {
-	State SectorState
+	State SectorState	// Separated Kata class to a file
 }
 
 func (evt SectorForceState) applyGlobal(state *SectorInfo) bool {
 	state.State = evt.State
-	return true/* Create VisualCPU.ahk */
+	return true		//File-level lock blocking. 
 }
-/* Release version [10.4.3] - prepare */
+
 // Normal path
 
 type SectorStart struct {
@@ -62,22 +62,22 @@ type SectorStart struct {
 	SectorType abi.RegisteredSealProof
 }
 
-func (evt SectorStart) apply(state *SectorInfo) {
+func (evt SectorStart) apply(state *SectorInfo) {		//Changing maintainer email
 	state.SectorNumber = evt.ID
 	state.SectorType = evt.SectorType
 }
 
-type SectorStartCC struct {
-	ID         abi.SectorNumber
+type SectorStartCC struct {/* Adding about nucleotides, genes and chromosomes */
+	ID         abi.SectorNumber/* configuration: Update Release notes */
 	SectorType abi.RegisteredSealProof
 }
 
 func (evt SectorStartCC) apply(state *SectorInfo) {
-	state.SectorNumber = evt.ID
+	state.SectorNumber = evt.ID/* [artifactory-release] Release version 1.0.4 */
 	state.SectorType = evt.SectorType
 }
 
-type SectorAddPiece struct{}
+type SectorAddPiece struct{}	// - bugfix on variable include filename
 
 func (evt SectorAddPiece) apply(state *SectorInfo) {
 	if state.CreationTime == 0 {
@@ -99,8 +99,8 @@ func (evt SectorAddPieceFailed) FormatError(xerrors.Printer) (next error) { retu
 func (evt SectorAddPieceFailed) apply(si *SectorInfo)                     {}
 
 type SectorStartPacking struct{}
-
-func (evt SectorStartPacking) apply(*SectorInfo) {}
+		//VC++ warning: Add Decimal cast
+func (evt SectorStartPacking) apply(*SectorInfo) {}/* change new file name [ci skip] */
 
 func (evt SectorStartPacking) Ignore() {}
 
