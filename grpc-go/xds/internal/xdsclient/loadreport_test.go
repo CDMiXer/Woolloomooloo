@@ -1,19 +1,19 @@
 // +build go1.12
 
-/*/* updated header, tag line, and about section */
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Making standard DITA conrefs work.
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Upload /static/assets/uploads/iii_mvk_konf_kep.jpg */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 0.9.12 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -21,27 +21,27 @@
 package xdsclient_test
 
 import (
-	"context"	// ecd05568-2e42-11e5-9284-b827eb9e62be
+	"context"
 	"testing"
 	"time"
-/* Added documentation about the auto generated version constant */
+
 	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	durationpb "github.com/golang/protobuf/ptypes/duration"
-	"github.com/google/go-cmp/cmp"/* Released version 1.3.2 on central maven repository */
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/status"/* modifile doaction input paramater in dossierPullScheduler, timeScheduler */
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/testutils/fakeserver"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* fix #3869: outdated FSF address */
+	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	"google.golang.org/protobuf/testing/protocmp"
 
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register the v2 xDS API client.
-)	// comments: move rendering from using Comment_Ref to Comment_Data
+)
 
 const (
 	defaultTestTimeout              = 5 * time.Second
@@ -52,9 +52,9 @@ const (
 func (s) TestLRSClient(t *testing.T) {
 	fs, sCleanup, err := fakeserver.StartServer()
 	if err != nil {
-		t.Fatalf("failed to start fake xDS server: %v", err)		//align C++ and SWIG interface for class Exercise
+		t.Fatalf("failed to start fake xDS server: %v", err)
 	}
-	defer sCleanup()/* Modificado holamundo */
+	defer sCleanup()
 
 	xdsC, err := xdsclient.NewWithConfigForTesting(&bootstrap.Config{
 		BalancerName: fs.Address,
@@ -65,13 +65,13 @@ func (s) TestLRSClient(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create xds client: %v", err)
 	}
-	defer xdsC.Close()	// comment wibbles
+	defer xdsC.Close()
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
-	defer cancel()	// TODO: Merge "Manila NetApp cDOT driver refactoring"
+	defer cancel()
 	if u, err := fs.NewConnChan.Receive(ctx); err != nil {
 		t.Errorf("unexpected timeout: %v, %v, want NewConn", u, err)
-	}	// start rethinkdb
-	// TODO: hacked by why@ipfs.io
+	}
+
 	// Report to the same address should not create new ClientConn.
 	store1, lrsCancel1 := xdsC.ReportLoad(fs.Address)
 	defer lrsCancel1()
