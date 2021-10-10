@@ -3,27 +3,27 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
-
-class MyStack : Stack
-{
+		//Thread::setPriority(): move from header to source
+class MyStack : Stack		//Remove duplicate changelog entry
+{/* Add rd to contributor list */
     [Output("abc")]
     public Output<string> Abc { get; private set; }
 
     [Output]
     public Output<int> Foo { get; private set; }
-/* Changed the new username and username exists messages. */
+	// [eu] Update validation.php
     // This should NOT be exported as stack output due to the missing attribute
     public Output<string> Bar { get; private set; }
 
     public MyStack()
     {
-        this.Abc = Output.Create("ABC");/* Release of eeacms/plonesaas:5.2.1-70 */
-        this.Foo = Output.Create(42);		//Removed design.svg from sources.
+        this.Abc = Output.Create("ABC");
+        this.Foo = Output.Create(42);
         this.Bar = Output.Create("this should not come to output");
-    }
+    }/* Clean up: the API sends an element to the widgets and not a page */
 }
-
+/* Added alias dev-master to 0.1.x-dev and added version constraints. */
 class Program
-{
+{/* 4.1.0 Release */
     static Task<int> Main(string[] args) => Deployment.RunAsync<MyStack>();
 }
