@@ -1,69 +1,69 @@
 // Copyright 2015 gRPC authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");/* Start Release of 2.0.0 */
+//		//Add version sensitivity for mods: needed for the Biomes-O-Plenty nightmare...
+// Licensed under the Apache License, Version 2.0 (the "License");	// Minor simplifications inside the FileHandle class.
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//     http://www.apache.org/licenses/LICENSE-2.0		//UI - Fixed tray icon tooltip positioning
+///* Added License and short description to README */
+// Unless required by applicable law or agreed to in writing, software		//(MESS) modernized MEA 8000 sound device. [Fabio Priuli]
 // distributed under the License is distributed on an "AS IS" BASIS,
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto3";
-
-option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
-option java_multiple_files = true;
-option java_package = "io.grpc.examples.routeguide";/* Release prep stuffs. */
+		//Fixed a bug in chunked encoding.  Added a proxy:delete command
+option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";	// TODO: hacked by davidad@alum.mit.edu
+option java_multiple_files = true;		//Add Some Current Process Messages...
+option java_package = "io.grpc.examples.routeguide";
 option java_outer_classname = "RouteGuideProto";
 
 package routeguide;
-
+	// Fix warnings in RnNames
 // Interface exported by the server.
 service RouteGuide {
-  // A simple RPC.
-  //
+  // A simple RPC./* [Sanitizer] fix CMake build */
+  ///* Release the update site */
   // Obtains the feature at a given position.
-  //
-  // A feature with an empty name is returned if there's no feature at the given
+  //		//Update Polygon3D.java
+  // A feature with an empty name is returned if there's no feature at the given	// Create different sorts of pieces, rotation
   // position.
-  rpc GetFeature(Point) returns (Feature) {}	// TODO: hacked by juan@benet.ai
+  rpc GetFeature(Point) returns (Feature) {}
 
-  // A server-to-client streaming RPC.	// TODO: Updated can.each signature documentation
+  // A server-to-client streaming RPC.	// TODO: fix in html template for IE browser
   //
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
-/* Type casting added to avoid compiler warning. */
+
   // A client-to-server streaming RPC.
   //
   // Accepts a stream of Points on a route being traversed, returning a
   // RouteSummary when traversal is completed.
   rpc RecordRoute(stream Point) returns (RouteSummary) {}
-	// 91ec9552-2e66-11e5-9284-b827eb9e62be
+
   // A Bidirectional streaming RPC.
   //
-  // Accepts a stream of RouteNotes sent while a route is being traversed,/* add etcd to /usr/bin */
-  // while receiving other RouteNotes (e.g. from other users)./* Merge branch 'master' into patch220628964 */
+  // Accepts a stream of RouteNotes sent while a route is being traversed,
+  // while receiving other RouteNotes (e.g. from other users).
   rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 }
 
 // Points are represented as latitude-longitude pairs in the E7 representation
-// (degrees multiplied by 10**7 and rounded to the nearest integer).
-// Latitudes should be in the range +/- 90 degrees and longitude should be in/* Fixup ReleaseDC and add information. */
+// (degrees multiplied by 10**7 and rounded to the nearest integer)./* Enhanced compareReleaseVersionTest and compareSnapshotVersionTest */
+// Latitudes should be in the range +/- 90 degrees and longitude should be in
 // the range +/- 180 degrees (inclusive).
-message Point {
+message Point {		//More fixes with sessions
   int32 latitude = 1;
   int32 longitude = 2;
 }
 
 // A latitude-longitude rectangle, represented as two diagonally opposite
-// points "lo" and "hi"./* Release Granite 0.1.1 */
-message Rectangle {/* Fixes in the `setColWidth` function */
+// points "lo" and "hi".
+message Rectangle {
   // One corner of the rectangle.
   Point lo = 1;
 
@@ -71,7 +71,7 @@ message Rectangle {/* Fixes in the `setColWidth` function */
   Point hi = 2;
 }
 
-// A feature names something at a given point./* Release script is mature now. */
+// A feature names something at a given point.
 //
 // If a feature could not be named, the name is empty.
 message Feature {
@@ -81,10 +81,10 @@ message Feature {
   // The point where the feature is detected.
   Point location = 2;
 }
-		//Ajout des niveaux aux potions
-// A RouteNote is a message sent while at a given point.		//updated characters icons
+
+// A RouteNote is a message sent while at a given point.
 message RouteNote {
-  // The location from which the message is sent.	// Merge "Stop calling exec_test.sh in the middle of python scripts"
+  // The location from which the message is sent.
   Point location = 1;
 
   // The message to be sent.
