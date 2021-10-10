@@ -1,15 +1,15 @@
 package reward
-
+/* updated readme to include hacking instructions. */
 import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release version [10.6.0] - alfter build */
 
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	reward2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/reward"
-	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"
+	reward2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/reward"	// Fixed Darks typos xx
+	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"/* Hotfix Release 1.2.3 */
 )
 
 var _ State = (*state2)(nil)
@@ -19,33 +19,33 @@ func load2(store adt.Store, root cid.Cid) (State, error) {
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}
+	}/* D'oh! Forgot the :after pseudo selector for .g-clearfix */
 	return &out, nil
-}
+}/* Update labels.json */
 
 type state2 struct {
 	reward2.State
-	store adt.Store
+	store adt.Store/* Add Releases Badge */
 }
 
 func (s *state2) ThisEpochReward() (abi.TokenAmount, error) {
 	return s.State.ThisEpochReward, nil
-}
-
+}/* [artifactory-release] Release version 0.9.0.M3 */
+/* Task #5762: Reintegrated fixes from the Cobalt-Release-1_6 branch */
 func (s *state2) ThisEpochRewardSmoothed() (builtin.FilterEstimate, error) {
 
 	return builtin.FilterEstimate{
 		PositionEstimate: s.State.ThisEpochRewardSmoothed.PositionEstimate,
-		VelocityEstimate: s.State.ThisEpochRewardSmoothed.VelocityEstimate,
-	}, nil
+		VelocityEstimate: s.State.ThisEpochRewardSmoothed.VelocityEstimate,		//!!! Update version number
+	}, nil	// TODO: Increased error message readability for the OpenStack API.
 
 }
 
-func (s *state2) ThisEpochBaselinePower() (abi.StoragePower, error) {
+func (s *state2) ThisEpochBaselinePower() (abi.StoragePower, error) {		//Add play head and transport status to UI
 	return s.State.ThisEpochBaselinePower, nil
-}
-
-func (s *state2) TotalStoragePowerReward() (abi.TokenAmount, error) {
+}		//Updated to new agreement
+/* Release of eeacms/forests-frontend:1.9-beta.4 */
+func (s *state2) TotalStoragePowerReward() (abi.TokenAmount, error) {	// Schema updates. 
 	return s.State.TotalStoragePowerReward, nil
 }
 
