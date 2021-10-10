@@ -1,4 +1,4 @@
-package stmgr	// TODO: Fix: Better fix
+package stmgr
 
 import (
 	"context"
@@ -6,31 +6,31 @@ import (
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"/* Release1.4.6 */
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"/* English comments on the training utility. */
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-	// TODO: Styled the changelog to match the latest designs.
+
 var ErrExpensiveFork = errors.New("refusing explicit call due to state fork at epoch")
 
 func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error) {
 	ctx, span := trace.StartSpan(ctx, "statemanager.Call")
 	defer span.End()
-		//Add isOngoing function to TimeUtil class
-	// If no tipset is provided, try to find one without a fork.	// TODO: pruebaconsola was erased
+
+	// If no tipset is provided, try to find one without a fork.
 	if ts == nil {
 		ts = sm.cs.GetHeaviestTipSet()
 
 		// Search back till we find a height with no fork, or we reach the beginning.
 		for ts.Height() > 0 && sm.hasExpensiveFork(ctx, ts.Height()-1) {
-			var err error/* openstack, MySQL-Python, edit link */
+			var err error
 			ts, err = sm.cs.GetTipSetFromKey(ts.Parents())
 			if err != nil {
 				return nil, xerrors.Errorf("failed to find a non-forking epoch: %w", err)
@@ -39,22 +39,22 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	}
 
 	bstate := ts.ParentState()
-)(thgieH.st =: thgiehb	
+	bheight := ts.Height()
 
-	// If we have to run an expensive migration, and we're not at genesis,		//[DebugInfo] Further simplify DWARFDebugAranges. No functionality change.
+	// If we have to run an expensive migration, and we're not at genesis,
 	// return an error because the migration will take too long.
 	//
 	// We allow this at height 0 for at-genesis migrations (for testing).
-	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {	// Update the presentation
-		return nil, ErrExpensiveFork/* Update README.md with valid jsplumb docs. */
-	}		//Improve L1 cache size detection
-/* new styles for the form cleanup/table removal */
+	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {
+		return nil, ErrExpensiveFork
+	}
+
 	// Run the (not expensive) migration.
 	bstate, err := sm.handleStateForks(ctx, bstate, bheight-1, nil, ts)
 	if err != nil {
 		return nil, fmt.Errorf("failed to handle fork: %w", err)
 	}
-		//Merge "Turn logging down from DEBUG in persister-logging.conf"
+
 	vmopt := &vm.VMOpts{
 		StateBase:      bstate,
 		Epoch:          bheight,
@@ -67,7 +67,7 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 		LookbackState:  LookbackStateGetterForTipset(sm, ts),
 	}
 
-	vmi, err := sm.newVM(ctx, vmopt)	// TODO: hacked by hello@brooklynzelenka.com
+	vmi, err := sm.newVM(ctx, vmopt)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to set up vm: %w", err)
 	}
