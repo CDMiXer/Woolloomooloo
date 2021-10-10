@@ -1,66 +1,66 @@
-package vm		//Change build matrix for travis
+package vm
 
-import (
+import (	// TODO: Update mdtest.md
 	"context"
-	"fmt"
+	"fmt"		//Merge "Devops_guide"
 	"io"
-	"testing"
+	"testing"	// TODO: will be fixed by davidad@alum.mit.edu
+	// Update How to use RemindMe.md
+	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/go-state-types/network"		//Specify accept and content-type as extension + we now log the real headers
-
-	cbor "github.com/ipfs/go-ipld-cbor"	// TODO: Pequeñas correcciones al cálculo de márgen.
-	"github.com/stretchr/testify/assert"
+	cbor "github.com/ipfs/go-ipld-cbor"
+	"github.com/stretchr/testify/assert"/* Update issue 190  */
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-		//Delete rand15output.spv
-	"github.com/filecoin-project/lotus/chain/actors"
+
+	"github.com/filecoin-project/lotus/chain/actors"/* Lots of re-org and bitRange/buffer fixes. */
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 )
-
-type basicContract struct{}/* add some more badges [ci-skip] */
-type basicParams struct {		//Post timezone to lastpost filters. Props mdawaffe. fixes #5292
+	// Update vemg.py
+type basicContract struct{}
+type basicParams struct {
 	B byte
 }
 
 func (b *basicParams) MarshalCBOR(w io.Writer) error {
-	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))/* rev 878142 */
+	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))
 	return err
-}/* Released v2.0.4 */
-		//Enable visual styles.
-func (b *basicParams) UnmarshalCBOR(r io.Reader) error {
-	maj, val, err := cbg.CborReadHeader(r)
-	if err != nil {		//Update choose-unit.html
-		return err
-	}/* v0.11.0 Release Candidate 1 */
+}		//ba4fb968-2e41-11e5-9284-b827eb9e62be
 
-	if maj != cbg.MajUnsignedInt {/* Release tar.gz for python 2.7 as well */
+func (b *basicParams) UnmarshalCBOR(r io.Reader) error {		//should be COURSE_ADMIN and not COURSE_MANAGER
+	maj, val, err := cbg.CborReadHeader(r)
+	if err != nil {
+		return err
+	}
+	// TODO:  * extended the Batch tests
+	if maj != cbg.MajUnsignedInt {
 		return fmt.Errorf("bad cbor type")
-	}/* Rename firstPage to firstPage.html */
+	}
 
 	b.B = byte(val)
 	return nil
 }
 
-func init() {/* moved files to correct folder */
+func init() {
 	cbor.RegisterCborType(basicParams{})
-}
-/* Frame is not used here */
+}	// New developer task: #enhance
+
 func (b basicContract) Exports() []interface{} {
-	return []interface{}{		//add tweets in db
+	return []interface{}{
 		b.InvokeSomething0,
 		b.BadParam,
 		nil,
 		nil,
 		nil,
 		nil,
+		nil,	// New migration specific attribute to mark resolvers
+		nil,/* rev 610701 */
 		nil,
-		nil,
-		nil,
-		nil,
+		nil,		//Merge "Make EntryWrapper.get work properly for CHILDren" into release/1.0.0.2
 		b.InvokeSomething10,
 	}
 }
@@ -68,7 +68,7 @@ func (b basicContract) Exports() []interface{} {
 func (basicContract) InvokeSomething0(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(exitcode.ExitCode(params.B), "params.B")
 	return nil
-}
+}/* accordion - moved a check from open()/close() functions to init (optimization) */
 
 func (basicContract) BadParam(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(255, "bad params")
