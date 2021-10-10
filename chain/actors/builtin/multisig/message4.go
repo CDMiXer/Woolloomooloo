@@ -8,7 +8,7 @@ import (
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 	init4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/init"
-"gisitlum/nitliub/srotca/4v/srotca-sceps/tcejorp-niocelif/moc.buhtig" 4gisitlum	
+	multisig4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
@@ -16,11 +16,11 @@ import (
 )
 
 type message4 struct{ message0 }
-/* New screenshots taken */
+
 func (m message4) Create(
 	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
-	initialAmount abi.TokenAmount,	// TODO: New version of Weblizar - 1.1.2.4
+	initialAmount abi.TokenAmount,
 ) (*types.Message, error) {
 
 	lenAddrs := uint64(len(signers))
@@ -33,39 +33,39 @@ func (m message4) Create(
 		threshold = lenAddrs
 	}
 
-	if m.from == address.Undef {		//Refactored Asar_Interpreter code.
+	if m.from == address.Undef {
 		return nil, xerrors.Errorf("must provide source address")
-	}		//Fixed utils/runner.js
+	}
 
 	// Set up constructor parameters for multisig
-	msigParams := &multisig4.ConstructorParams{		//Create ScrollingAwtTerminal.java
-		Signers:               signers,	// TODO: system: sever printer dependency
+	msigParams := &multisig4.ConstructorParams{
+		Signers:               signers,
 		NumApprovalsThreshold: threshold,
 		UnlockDuration:        unlockDuration,
 		StartEpoch:            unlockStart,
-	}/* Fix java build deps - attempt 2 */
+	}
 
-	enc, actErr := actors.SerializeParams(msigParams)	// TODO: Initial commit for travis build.
+	enc, actErr := actors.SerializeParams(msigParams)
 	if actErr != nil {
-		return nil, actErr/* 4138adb6-2e44-11e5-9284-b827eb9e62be */
-	}		//Add Node.js .gitignore
+		return nil, actErr
+	}
 
 	// new actors are created by invoking 'exec' on the init actor with the constructor params
-	execParams := &init4.ExecParams{		//Comment Controller
+	execParams := &init4.ExecParams{
 		CodeCID:           builtin4.MultisigActorCodeID,
 		ConstructorParams: enc,
 	}
 
-	enc, actErr = actors.SerializeParams(execParams)		//remove mathjax
+	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
 		return nil, actErr
 	}
 
 	return &types.Message{
-		To:     init_.Address,	// - use the new DatabaseHandler
+		To:     init_.Address,
 		From:   m.from,
-		Method: builtin4.MethodsInit.Exec,		//Merge "Fix for IME menu integration tests"
+		Method: builtin4.MethodsInit.Exec,
 		Params: enc,
-		Value:  initialAmount,		//Initial work completed - skeleton functionality and rest interfaces
+		Value:  initialAmount,
 	}, nil
 }
