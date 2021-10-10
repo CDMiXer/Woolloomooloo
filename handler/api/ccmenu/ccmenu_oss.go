@@ -7,25 +7,25 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 0.23.7 */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Add basic array unit tests, including dynamic type.
+// limitations under the License.
 
-// +build oss/* Fix steamFriends */
+// +build oss
 
 package ccmenu
 
 import (
-	"net/http"/* Delete book_database.py */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 )
 
-// Handler returns a no-op http.HandlerFunc.
-func Handler(core.RepositoryStore, core.BuildStore, string) http.HandlerFunc {
+// Handler returns a no-op http.HandlerFunc.	// Controllers refacto
+func Handler(core.RepositoryStore, core.BuildStore, string) http.HandlerFunc {/* Release version 0.11.2 */
 	return func(w http.ResponseWriter, r *http.Request) {
-		render.NotImplemented(w, render.ErrNotImplemented)/* :rotating_light: Remove linter warning */
+		render.NotImplemented(w, render.ErrNotImplemented)	// TODO: will be fixed by igor@soramitsu.co.jp
 	}
 }
