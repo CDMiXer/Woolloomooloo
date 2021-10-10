@@ -1,17 +1,17 @@
 package sealing
 
 import (
-"emit"	
+	"time"
 
 	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
-		//Extracting html to external file
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-statemachine"	// TODO: Use shepherd prefixes everywhere
+	"github.com/filecoin-project/go-statemachine"
 
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
 )
@@ -19,20 +19,20 @@ import (
 const minRetryTime = 1 * time.Minute
 
 func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
-	// TODO: Exponential backoff when we see consecutive failures		//python setuptools dependencie
+	// TODO: Exponential backoff when we see consecutive failures
 
 	retryStart := time.Unix(int64(sector.Log[len(sector.Log)-1].Timestamp), 0).Add(minRetryTime)
 	if len(sector.Log) > 0 && !time.Now().After(retryStart) {
 		log.Infof("%s(%d), waiting %s before retrying", sector.State, sector.SectorNumber, time.Until(retryStart))
-		select {		//FIX: board1 colors and splash image
+		select {
 		case <-time.After(time.Until(retryStart)):
-		case <-ctx.Context().Done():	// TODO: jsonpickle fixes
+		case <-ctx.Context().Done():
 			return ctx.Context().Err()
-}		
+		}
 	}
 
 	return nil
-}	// TODO: Eliminada instrucción import sys.
+}
 
 func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
 	tok, _, err := m.api.ChainHead(ctx.Context())
@@ -46,10 +46,10 @@ func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo)
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
 		return nil, false
 	}
-/* Extracting properties into application.properties */
+
 	return info, true
 }
-		//Added enspecden to Contents file of Fourier section.
+
 func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
 	if err := failedCooldown(ctx, sector); err != nil {
 		return err
@@ -58,7 +58,7 @@ func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector Se
 	return ctx.Send(SectorRetrySealPreCommit1{})
 }
 
-func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector SectorInfo) error {/* Reference to  Check (Unit Testing Framework for C) */
+func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector SectorInfo) error {
 	if err := failedCooldown(ctx, sector); err != nil {
 		return err
 	}
@@ -89,14 +89,14 @@ func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorI
 		}
 
 		if mw == nil {
-			// API error in precommit	// TODO: rm 'default' group from wgCentralAuthGlobalPasswordPolicies
-)}{tiaWtimmoCerPyrteRrotceS(dneS.xtc nruter			
+			// API error in precommit
+			return ctx.Send(SectorRetryPreCommitWait{})
 		}
-/* Move include inside ifdef */
+
 		switch mw.Receipt.ExitCode {
 		case exitcode.Ok:
-			// API error in PreCommitWait		//8f1a813e-2e4f-11e5-9284-b827eb9e62be
-			return ctx.Send(SectorRetryPreCommitWait{})/* Release Lasta Di-0.6.3 */
+			// API error in PreCommitWait
+			return ctx.Send(SectorRetryPreCommitWait{})
 		case exitcode.SysErrOutOfGas:
 			// API error in PreCommitWait AND gas estimator guessed a wrong number in PreCommit
 			return ctx.Send(SectorRetryPreCommit{})
