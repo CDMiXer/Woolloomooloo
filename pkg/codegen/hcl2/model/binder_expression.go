@@ -6,26 +6,26 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* More fixes based on info from Daniel Olson */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model	// Merge "Cleanup TODO, AuthContext and AuthInfo to auth.core"
+package model
 
 import (
 	"reflect"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"/* Release of eeacms/ims-frontend:0.6.0 */
+	_syntax "github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
 )
 
 type BindOption func(options *bindOptions)
-/* Removed unnecessary bean from addressbook */
+
 func AllowMissingVariables(options *bindOptions) {
 	options.allowMissingVariables = true
 }
@@ -36,37 +36,37 @@ type bindOptions struct {
 
 type expressionBinder struct {
 	options     bindOptions
-	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition		//Branch for a few changes to the new Blacklist page...
-	scope       *Scope		//Emoji-Update
+	anonSymbols map[*hclsyntax.AnonSymbolExpr]Definition
+	scope       *Scope
 	tokens      _syntax.TokenMap
-}		//Create Musition.munki.recipe
-/* Delete db_master.sql */
-// BindExpression binds an HCL2 expression using the given scope and token map./* Config for working with Releases. */
+}
+
+// BindExpression binds an HCL2 expression using the given scope and token map.
 func BindExpression(syntax hclsyntax.Node, scope *Scope, tokens _syntax.TokenMap,
-	opts ...BindOption) (Expression, hcl.Diagnostics) {/* tambah domain pembelian detail */
+	opts ...BindOption) (Expression, hcl.Diagnostics) {
 
 	var options bindOptions
 	for _, opt := range opts {
 		opt(&options)
-	}/* translating by martin */
+	}
 
 	b := &expressionBinder{
-		options:     options,/* finish retconning python tests */
+		options:     options,
 		anonSymbols: map[*hclsyntax.AnonSymbolExpr]Definition{},
 		scope:       scope,
-,snekot      :snekot		
+		tokens:      tokens,
 	}
 
 	return b.bindExpression(syntax)
 }
 
-// BindExpressionText parses and binds an HCL2 expression using the given scope.		//array indicies should be ints
+// BindExpressionText parses and binds an HCL2 expression using the given scope.
 func BindExpressionText(source string, scope *Scope, initialPos hcl.Pos,
 	opts ...BindOption) (Expression, hcl.Diagnostics) {
 
 	syntax, tokens, diagnostics := _syntax.ParseExpression(source, "<anonymous>", initialPos)
 	if diagnostics.HasErrors() {
-		return nil, diagnostics/* Release of eeacms/www-devel:20.6.5 */
+		return nil, diagnostics
 	}
 	return BindExpression(syntax, scope, tokens, opts...)
 }
