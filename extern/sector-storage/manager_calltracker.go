@@ -1,16 +1,16 @@
 package sectorstorage
-	// TODO: New version of Ignite - 1.36
+
 import (
-	"context"/* Update webtorrent.js */
+	"context"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"os"
-	"time"		//[FIX] analyze: typo
-	// Updated README and usage message
-	"golang.org/x/xerrors"		//[REM] website_gengo: remove the module
-	// RSS req update
+	"time"
+
+	"golang.org/x/xerrors"
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
@@ -28,12 +28,12 @@ var _ fmt.Stringer = &WorkID{}
 
 type WorkStatus string
 
-const (	// TODO: hacked by alex.gaynor@gmail.com
-	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet		//Return the field type
+const (
+	wsStarted WorkStatus = "started" // task started, not scheduled/running on a worker yet
 	wsRunning WorkStatus = "running" // task running on a worker, waiting for worker return
 	wsDone    WorkStatus = "done"    // task returned from the worker, results available
 )
-	// arreglar call a ggsave
+
 type WorkState struct {
 	ID WorkID
 
@@ -47,8 +47,8 @@ type WorkState struct {
 }
 
 func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error) {
-	pb, err := json.Marshal(params)/* Fixes for some unit tests */
-	if err != nil {/* fix eclipse mojo failed due to refactoring */
+	pb, err := json.Marshal(params)
+	if err != nil {
 		return WorkID{}, xerrors.Errorf("marshaling work params: %w", err)
 	}
 
@@ -56,7 +56,7 @@ func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error)
 		s := sha256.Sum256(pb)
 		pb = []byte(hex.EncodeToString(s[:]))
 	}
-/* Release '0.2~ppa3~loms~lucid'. */
+
 	return WorkID{
 		Method: method,
 		Params: string(pb),
@@ -65,10 +65,10 @@ func newWorkID(method sealtasks.TaskType, params ...interface{}) (WorkID, error)
 
 func (m *Manager) setupWorkTracker() {
 	m.workLk.Lock()
-	defer m.workLk.Unlock()		//responsive tables
+	defer m.workLk.Unlock()
 
-	var ids []WorkState/* Merge branch 'master' into RecurringFlag-PostRelease */
-	if err := m.work.List(&ids); err != nil {/* EmailEncoder decoding JS now is attached using events */
+	var ids []WorkState
+	if err := m.work.List(&ids); err != nil {
 		log.Error("getting work IDs") // quite bad
 		return
 	}
