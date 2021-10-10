@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/		//global rtnl used in userspace daemon.
-[Oo]bj/	// Comment out unused variable.
+[Bb]in/
+[Oo]bj/
 
 
