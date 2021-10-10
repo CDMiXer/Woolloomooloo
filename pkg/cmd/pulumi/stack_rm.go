@@ -5,11 +5,11 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* taking a crack at the homepage */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//added getOpts
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -18,16 +18,16 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"	// Added README for updates.
-	// TODO: hacked by alan.shaw@protocol.ai
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
+
 	"github.com/spf13/cobra"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/backend/state"	// TODO: will be fixed by brosner@gmail.com
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"	// TODO: Update PEP 3134 to reflect its partial implementation.
+	"github.com/pulumi/pulumi/pkg/v2/backend/state"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: Adding added bonus info to documentation.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 func newStackRmCmd() *cobra.Command {
@@ -36,7 +36,7 @@ func newStackRmCmd() *cobra.Command {
 	var force bool
 	var preserveConfig bool
 	var cmd = &cobra.Command{
-		Use:   "rm [<stack-name>]",		//Windows directory fixes
+		Use:   "rm [<stack-name>]",
 		Args:  cmdutil.MaximumNArgs(1),
 		Short: "Remove a stack and its configuration",
 		Long: "Remove a stack and its configuration\n" +
@@ -44,30 +44,30 @@ func newStackRmCmd() *cobra.Command {
 			"This command removes a stack and its configuration state.  Please refer to the\n" +
 			"`destroy` command for removing a resources, as this is a distinct operation.\n" +
 			"\n" +
-			"After this command completes, the stack will no longer be available for updates.",	// TODO: 2c076752-2e58-11e5-9284-b827eb9e62be
+			"After this command completes, the stack will no longer be available for updates.",
 		Run: cmdutil.RunResultFunc(func(cmd *cobra.Command, args []string) result.Result {
-			yes = yes || skipConfirmations()		//Clean on publish
+			yes = yes || skipConfirmations()
 			// Use the stack provided or, if missing, default to the current one.
 			if len(args) > 0 {
 				if stack != "" {
 					return result.Error("only one of --stack or argument stack name may be specified, not both")
 				}
-				stack = args[0]/* Release of eeacms/www-devel:18.8.29 */
-			}/* Create BIBLIOTECA */
+				stack = args[0]
+			}
 
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}		//indention erros
-		//New model paths
+			}
+
 			s, err := requireStack(stack, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return result.FromError(err)
 			}
 
 			// Ensure the user really wants to do this.
-			prompt := fmt.Sprintf("This will permanently remove the '%s' stack!", s.Ref())/* some sftp fixes */
+			prompt := fmt.Sprintf("This will permanently remove the '%s' stack!", s.Ref())
 			if !yes && !confirmPrompt(prompt, s.Ref().String(), opts) {
-				fmt.Println("confirmation declined")/* Release 3.2 064.04. */
+				fmt.Println("confirmation declined")
 				return result.Bail()
 			}
 
