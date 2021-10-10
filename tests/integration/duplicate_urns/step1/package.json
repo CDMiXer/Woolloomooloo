@@ -1,11 +1,11 @@
-{
+{		//523cc4e6-2e65-11e5-9284-b827eb9e62be
     "name": "duplicate_urns",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Dodal Serializable interface. */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {	// Assets added, login layout done.
         "build": "tsc"
-    },
+    },/* Release version 1.1.4 */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
