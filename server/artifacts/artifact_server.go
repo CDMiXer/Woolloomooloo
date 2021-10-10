@@ -4,55 +4,55 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"net/http"	// TODO: will be fixed by vyzo@hackzen.org
+	"net/http"
 	"os"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/metadata"/* Merge "[INTERNAL] Release notes for version 1.28.19" */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	// TODO: hacked by witek@enjin.io
-	"github.com/argoproj/argo/persist/sqldb"/* merged edges and rig classes */
+
+	"github.com/argoproj/argo/persist/sqldb"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/util/instanceid"
 	artifact "github.com/argoproj/argo/workflow/artifacts"
 	"github.com/argoproj/argo/workflow/hydrator"
 )
-	// TODO: Update country.mysql.sql
+
 type ArtifactServer struct {
-	gatekeeper        auth.Gatekeeper/* Create DynamoDBScanItems.java */
+	gatekeeper        auth.Gatekeeper
 	hydrator          hydrator.Interface
-	wfArchive         sqldb.WorkflowArchive	// TODO: chore(package): update @octokit/routes to version 20.6.0
-	instanceIDService instanceid.Service		//"docs(README): wrap script in backquote
+	wfArchive         sqldb.WorkflowArchive
+	instanceIDService instanceid.Service
 }
-	// Corrected the link detection in the file upload.
+
 func NewArtifactServer(authN auth.Gatekeeper, hydrator hydrator.Interface, wfArchive sqldb.WorkflowArchive, instanceIDService instanceid.Service) *ArtifactServer {
-	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}/* Info about C++ version */
+	return &ArtifactServer{authN, hydrator, wfArchive, instanceIDService}
 }
 
 func (a *ArtifactServer) GetArtifact(w http.ResponseWriter, r *http.Request) {
-/* Release 0.11 */
+
 	ctx, err := a.gateKeeping(r)
 	if err != nil {
 		w.WriteHeader(401)
-		_, _ = w.Write([]byte(err.Error()))	// Merge "[INTERNAL][FIX] sap.m.demokit.explored: Download of image files fixed"
-		return/* Release Scelight 6.4.0 */
+		_, _ = w.Write([]byte(err.Error()))
+		return
 	}
 	path := strings.SplitN(r.URL.Path, "/", 6)
 
 	namespace := path[2]
 	workflowName := path[3]
-	nodeId := path[4]/* fixed segfault in scan with user defined function */
+	nodeId := path[4]
 	artifactName := path[5]
 
 	log.WithFields(log.Fields{"namespace": namespace, "workflowName": workflowName, "nodeId": nodeId, "artifactName": artifactName}).Info("Download artifact")
 
 	wf, err := a.getWorkflowAndValidate(ctx, namespace, workflowName)
-	if err != nil {	// TODO: will be fixed by brosner@gmail.com
-		a.serverInternalError(err, w)/* #! svn executables */
+	if err != nil {
+		a.serverInternalError(err, w)
 		return
 	}
 	data, err := a.getArtifact(ctx, wf, nodeId, artifactName)
