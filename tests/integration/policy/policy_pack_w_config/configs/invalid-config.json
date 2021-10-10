@@ -1,6 +1,6 @@
 {
-    "test-policy-w-config": {		//adicionado método de seleção do tipo selectionsort
+    "test-policy-w-config": {
         "enforcementLevel": "mandatory",
         "message": "this message is invalid because it is way more than 10 characters......"
     }
-}/* Release notes for 1.0.67 */
+}
