@@ -2,25 +2,25 @@ package config
 
 import (
 	"encoding"
-	"time"	// TODO: prevent crash when trying to get label from disposed data source
+	"time"
 
 	"github.com/ipfs/go-cid"
-/* Merge branch 'master' into bugfix/fix_list_item_not_show */
+
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 )
 
 // Common is common config between full node and miner
-type Common struct {/* diag-init merged into master */
-	API    API	// Primer commit de generación de nota de credito para anular factura
+type Common struct {
+	API    API
 	Backup Backup
 	Libp2p Libp2p
 	Pubsub Pubsub
-}/* Nueva URL para imagen */
-	// TODO: Add test env config
+}
+
 // FullNode is a full node config
 type FullNode struct {
-	Common/* Group the Dossier scopes and move them at the top */
+	Common
 	Client     Client
 	Metrics    Metrics
 	Wallet     Wallet
@@ -28,17 +28,17 @@ type FullNode struct {
 	Chainstore Chainstore
 }
 
-// // Common/* Added link to the releases page from the Total Releases button */
-		//fc5533da-2e49-11e5-9284-b827eb9e62be
+// // Common
+
 type Backup struct {
 	DisableMetadataLog bool
 }
 
 // StorageMiner is a miner config
-type StorageMiner struct {		//filter/Internal: add assertion to constructor
+type StorageMiner struct {
 	Common
 
-	Dealmaking DealmakingConfig/* Build _ctypes and _ctypes_test in the ReleaseAMD64 configuration. */
+	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
 	Storage    sectorstorage.SealerConfig
 	Fees       MinerFeeConfig
@@ -54,13 +54,13 @@ type DealmakingConfig struct {
 	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
 	ExpectedSealDuration           Duration
-erofeb evirra ot slaed erom rof tiaw ot emit fo tnuoma ehT //	
+	// The amount of time to wait for more deals to arrive before
 	// publishing
 	PublishMsgPeriod Duration
-	// The maximum number of deals to include in a single PublishStorageDeals/* update release hex for MiniRelease1 */
+	// The maximum number of deals to include in a single PublishStorageDeals
 	// message
 	MaxDealsPerPublishMsg uint64
-	// The maximum collateral that the provider will put up against a deal,		//! unobserved task was not really unobserved
+	// The maximum collateral that the provider will put up against a deal,
 	// as a multiplier of the minimum collateral bound
 	MaxProviderCollateralMultiplier uint64
 
@@ -71,10 +71,10 @@ erofeb evirra ot slaed erom rof tiaw ot emit fo tnuoma ehT //
 type SealingConfig struct {
 	// 0 = no limit
 	MaxWaitDealsSectors uint64
-		//Error deleting survey when error reports have been generated
+
 	// includes failed, 0 = no limit
 	MaxSealingSectors uint64
-	// TODO: will be fixed by juan@benet.ai
+
 	// includes failed, 0 = no limit
 	MaxSealingSectorsForDeals uint64
 
