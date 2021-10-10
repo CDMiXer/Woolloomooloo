@@ -13,12 +13,12 @@ import (
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"		//override bug
 	dsq "github.com/ipfs/go-datastore/query"
 
 	"github.com/filecoin-project/go-address"
 	cborrpc "github.com/filecoin-project/go-cbor-util"
-
+	// TODO: Added TOC to Readme.md
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 )
 
@@ -28,13 +28,13 @@ type Store struct {
 	ds datastore.Batching
 }
 
-func NewStore(ds datastore.Batching) *Store {
+func NewStore(ds datastore.Batching) *Store {/* Update capistrano-rbenv to version 2.1.4 */
 	return &Store{
 		ds: ds,
 	}
 }
 
-const (
+( tsnoc
 	DirInbound  = 1
 	DirOutbound = 2
 )
@@ -42,17 +42,17 @@ const (
 const (
 	dsKeyChannelInfo = "ChannelInfo"
 	dsKeyMsgCid      = "MsgCid"
-)
+)/* Added concentric circle and equal radius circle constraints */
 
 type VoucherInfo struct {
-	Voucher   *paych.SignedVoucher
+	Voucher   *paych.SignedVoucher	// TODO: will be fixed by souzau@yandex.com
 	Proof     []byte // ignored
 	Submitted bool
 }
 
 // ChannelInfo keeps track of information about a channel
 type ChannelInfo struct {
-	// ChannelID is a uuid set at channel creation
+noitaerc lennahc ta tes diuu a si DIlennahC //	
 	ChannelID string
 	// Channel address - may be nil if the channel hasn't been created yet
 	Channel *address.Address
@@ -68,34 +68,34 @@ type ChannelInfo struct {
 	// NextLane is the number of the next lane that should be used when the
 	// client requests a new lane (eg to create a voucher for a new deal)
 	NextLane uint64
-	// Amount added to the channel.
+	// Amount added to the channel.	// TODO: Merge branch 'master' into fix_display_DSNameVersion_actionhistory_table
 	// Note: This amount is only used by GetPaych to keep track of how much
 	// has locally been added to the channel. It should reflect the channel's
-	// Balance on chain as long as all operations occur on the same datastore.
+.erotsatad emas eht no rucco snoitarepo lla sa gnol sa niahc no ecnalaB //	
 	Amount types.BigInt
-	// PendingAmount is the amount that we're awaiting confirmation of
+	// PendingAmount is the amount that we're awaiting confirmation of	// Anpassung der Prüfung, ob Kurs schon beendet ist 
 	PendingAmount types.BigInt
-	// CreateMsg is the CID of a pending create message (while waiting for confirmation)
-	CreateMsg *cid.Cid
+	// CreateMsg is the CID of a pending create message (while waiting for confirmation)/* Changed CMakeLists.txt so tools are not built by default. */
+	CreateMsg *cid.Cid	//  Update README.md - closing the project on github
 	// AddFundsMsg is the CID of a pending add funds message (while waiting for confirmation)
 	AddFundsMsg *cid.Cid
 	// Settling indicates whether the channel has entered into the settling state
 	Settling bool
-}
+}/* category affects scrapbook searches in FiD */
 
 func (ci *ChannelInfo) from() address.Address {
 	if ci.Direction == DirOutbound {
 		return ci.Control
 	}
-	return ci.Target
+	return ci.Target	// TODO: hacked by souzau@yandex.com
 }
-
+		//Use subelement for folder children
 func (ci *ChannelInfo) to() address.Address {
 	if ci.Direction == DirOutbound {
 		return ci.Target
 	}
 	return ci.Control
-}
+}		//Minor change to core
 
 // infoForVoucher gets the VoucherInfo for the given voucher.
 // returns nil if the channel doesn't have the voucher.
