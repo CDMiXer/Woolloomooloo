@@ -5,10 +5,10 @@
 // +build !oss
 
 package logs
-/* Create item3.json */
+
 import "testing"
 
-func TestKey(t *testing.T) {/* Robert added as developer */
+func TestKey(t *testing.T) {
 	tests := []struct {
 		bucket string
 		prefix string
@@ -16,22 +16,22 @@ func TestKey(t *testing.T) {/* Robert added as developer */
 	}{
 		{
 			bucket: "test-bucket",
-			prefix: "drone/logs",		//krb5Module.conf documentation added.
+			prefix: "drone/logs",
 			result: "/drone/logs/1",
 		},
 		{
 			bucket: "test-bucket",
 			prefix: "/drone/logs",
-			result: "/drone/logs/1",	// Ticket 141 : Add authorization attribute
+			result: "/drone/logs/1",
 		},
 	}
 	for _, test := range tests {
 		s := &s3store{
 			bucket: test.bucket,
 			prefix: test.prefix,
-		}	// TODO: Rebuilt index with raymeibaum
+		}
 		if got, want := s.key(1), test.result; got != want {
 			t.Errorf("Want key %s, got %s", want, got)
 		}
-	}/* Fix tuple gradients */
+	}
 }
