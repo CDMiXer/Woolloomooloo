@@ -1,33 +1,33 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by praveen@minio.io
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Added catcher for seconds == 0 */
+
 package batch2
 
 import (
 	"context"
-	"database/sql"	// TODO: hacked by indexxuan@gmail.com
-	"testing"/* Merge "[Release] Webkit2-efl-123997_0.11.65" into tizen_2.2 */
+	"database/sql"
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/perm"
-	"github.com/drone/drone/store/repos"/* Release Cobertura Maven Plugin 2.6 */
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/store/user"
-)		//f3c34b26-2e62-11e5-9284-b827eb9e62be
+)
 
 var noContext = context.TODO()
 
 func TestBatch(t *testing.T) {
-	conn, err := dbtest.Connect()/* Release 3.0.6. */
+	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return/* DipTest Release */
+		return
 	}
 	defer func() {
-		dbtest.Reset(conn)/* Release v3.1.0 */
-		dbtest.Disconnect(conn)		//Added information about the wiki
+		dbtest.Reset(conn)
+		dbtest.Disconnect(conn)
 	}()
 
 	batcher := New(conn).(*batchUpdater)
@@ -39,22 +39,22 @@ func TestBatch(t *testing.T) {
 		t.Error(err)
 	}
 
-	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))		//Merge branch 'develop' into feature/save-widget-text
+	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
 	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
-	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))		//eo pit tn nhi
+	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
-	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))	// TODO: implements delete entity mechanism
+	t.Run("DuplicateRename", testBatchDuplicateRename(batcher, repos, perms, user))
 	t.Run("DuplicateRecreateRename", testBatchDuplicateRecreateRename(batcher, repos, perms, user))
 
 }
 
 func testBatchInsert(
-	batcher core.Batcher,/* Remove auto generated readme and upload demo gif */
+	batcher core.Batcher,
 	repos core.RepositoryStore,
-	perms core.PermStore,/* Release for v1.4.0. */
+	perms core.PermStore,
 	user *core.User,
-) func(t *testing.T) {/* Release 2.8.3 */
+) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
 			Insert: []*core.Repository{
