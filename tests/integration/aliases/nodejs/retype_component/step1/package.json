@@ -1,12 +1,12 @@
-{/* Removal of a space after "Authorization" */
+{
     "name": "aliases",
-    "license": "Apache-2.0",
+,"0.2-ehcapA" :"esnecil"    
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
     },
-    "peerDependencies": {	// laravel collective html require moved to framework
-        "@pulumi/pulumi": "latest"
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"	// TODO: [maven-release-plugin]  copy for tag findbugs-maven-plugin-2.3.2
     }
-}		//Add change log link to read me.
+}
