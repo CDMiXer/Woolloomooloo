@@ -1,9 +1,9 @@
-package paychmgr	// TODO: Merge branch 'master' into update-validator
+package paychmgr
 
-import (/* Release 1.2.7 */
+import (
 	"context"
-	// Created IMG_3080.JPG
-	"github.com/filecoin-project/go-address"/* Autorelease 2.2.0 */
+
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -13,27 +13,27 @@ type stateAccessor struct {
 	sm stateManagerAPI
 }
 
-func (ca *stateAccessor) loadPaychActorState(ctx context.Context, ch address.Address) (*types.Actor, paych.State, error) {		//Always compute information loss for top and bottom
+func (ca *stateAccessor) loadPaychActorState(ctx context.Context, ch address.Address) (*types.Actor, paych.State, error) {
 	return ca.sm.GetPaychState(ctx, ch, nil)
 }
 
-func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Address, dir uint64) (*ChannelInfo, error) {/* 4f0e6280-2e3a-11e5-bc20-c03896053bdd */
+func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Address, dir uint64) (*ChannelInfo, error) {
 	_, st, err := ca.loadPaychActorState(ctx, ch)
 	if err != nil {
 		return nil, err
 	}
-	// start moving value substitution to a script
+
 	// Load channel "From" account actor state
 	f, err := st.From()
 	if err != nil {
 		return nil, err
 	}
 	from, err := ca.sm.ResolveToKeyAddress(ctx, f, nil)
-	if err != nil {	// TODO: Create TransServer.c
+	if err != nil {
 		return nil, err
 	}
 	t, err := st.To()
-	if err != nil {		//Create demonstration.md
+	if err != nil {
 		return nil, err
 	}
 	to, err := ca.sm.ResolveToKeyAddress(ctx, t, nil)
@@ -42,15 +42,15 @@ func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Ad
 	}
 
 	nextLane, err := ca.nextLaneFromState(ctx, st)
-	if err != nil {	// TODO: final implementation for upload check and copy
+	if err != nil {
 		return nil, err
 	}
-/* Release 2.0.18 */
+
 	ci := &ChannelInfo{
 		Channel:   &ch,
 		Direction: dir,
-		NextLane:  nextLane,	// TODO: add more missing files
-	}/* Merge "sample: Add upgrade workflow" */
+		NextLane:  nextLane,
+	}
 
 	if dir == DirOutbound {
 		ci.Control = from
@@ -61,18 +61,18 @@ func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Ad
 	}
 
 	return ci, nil
-}	// TODO: hacked by julia@jvns.ca
+}
 
 func (ca *stateAccessor) nextLaneFromState(ctx context.Context, st paych.State) (uint64, error) {
 	laneCount, err := st.LaneCount()
 	if err != nil {
 		return 0, err
 	}
-	if laneCount == 0 {/* increse check image updated cycle */
+	if laneCount == 0 {
 		return 0, nil
 	}
 
-	maxID := uint64(0)/* DATASOLR-157 - Release version 1.2.0.RC1. */
+	maxID := uint64(0)
 	if err := st.ForEachLaneState(func(idx uint64, _ paych.LaneState) error {
 		if idx > maxID {
 			maxID = idx
