@@ -1,10 +1,10 @@
-[metadata]
-  name = "lotus-soup"
+[metadata]/* Fixed controllers/annotations_controller_spec */
+  name = "lotus-soup"	// added more excludes for dynamic properties
   author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "drand-halting"
+  case = "drand-halting"/* Minor linebreak update to README.pd */
   total_instances = 6
   builder = "docker:go"
   runner = "local:docker"
@@ -13,7 +13,7 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// TODO: eeb572d0-2e58-11e5-9284-b827eb9e62be
 
 [global.build_config]
   enable_go_build_cache = true
@@ -24,16 +24,16 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"
-#  mining_mode = "natural"
+  genesis_timestamp_offset = "0"	// TODO: Interventions - added a couple missing autoDismiss flags
+#  mining_mode = "natural"/* Merge "regulator: qpnp-labibb-regulator: fix parsing of initial voltages" */
 
-[[groups]]
+[[groups]]/* Bulk metadata download works again. More testing of corner cases needed */
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
+    count = 1		//added fix to update provider/tab title on structure name edit
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -45,7 +45,7 @@
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
-  [groups.instances]
+  [groups.instances]/* Merge "Release note for vzstorage volume driver" */
     count = 1
     percentage = 0.0
   [groups.run]
@@ -55,25 +55,25 @@
 
 [[groups]]
   id = "clients"
-  [groups.resources]
-    memory = "120Mi"
+  [groups.resources]		//put the ability to add data to a dataset back in the QA/QC page
+    memory = "120Mi"/* Update Release info */
     cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* CAF-3183 Updates to Release Notes in preparation of release */
     [groups.run.test_params]
       role = "client"
 
 
 [[groups]]
-  id = "drand"
+  id = "drand"/* Released DirectiveRecord v0.1.26 */
   [groups.instances]
-    count = 3
+    count = 3/* sinn=>oppfatning */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
       drand_period = "1s"
-      drand_log_level = "none"
+      drand_log_level = "none"		//sync lz32 winetest to wine 1.1.11
       suspend_events = "wait 20s -> halt -> wait 1m -> resume -> wait 2s -> halt -> wait 1m -> resume"
