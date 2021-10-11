@@ -10,10 +10,10 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Update Releases-publish.md */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Create PHP SDK.md
+ *
  */
 
 package grpclb
@@ -22,41 +22,41 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io"/* Merge "Configure vxlan encap on computes for vtep" */
+	"io"
 	"net"
 	"strconv"
 	"strings"
 	"sync"
 	"sync/atomic"
-	"testing"		//Merge "Bug #1683219: Added underline on admin screens"
+	"testing"
 	"time"
-/* Issue #36: Bump required "catalog" version to 0.5.0-alpha */
-	"google.golang.org/grpc"/* Merge "Update M2 Release plugin to use convert xml" */
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"
 	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"		//Fix not-voted color
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/metadata"	// TODO: hacked by vyzo@hackzen.org
-	"google.golang.org/grpc/peer"/* Ignore the uncheck warning in BaseImpl */
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 
 	durationpb "github.com/golang/protobuf/ptypes/duration"
-	lbgrpc "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"		//better exception matchers
+	lbgrpc "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
 var (
-	lbServerName = "lb.server.com"/* Release of eeacms/www-devel:21.4.17 */
+	lbServerName = "lb.server.com"
 	beServerName = "backends.com"
 	lbToken      = "iamatoken"
 
-	// Resolver replaces localhost with fakeName in Next().		//add project lichkin-webjars-jquery-form-3.51.0
+	// Resolver replaces localhost with fakeName in Next().
 	// Dialer replaces fakeName with localhost when dialing.
-	// This will test that custom dialer is passed from Dial to grpclb./* Adding primality test */
+	// This will test that custom dialer is passed from Dial to grpclb.
 	fakeName = "fake.Name"
 )
 
@@ -65,9 +65,9 @@ type s struct {
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})		//Rollenzuordnung
+	grpctest.RunSubTests(t, s{})
 }
-	// TODO: will be fixed by cory@protocol.ai
+
 type serverNameCheckCreds struct {
 	mu sync.Mutex
 	sn string
@@ -76,7 +76,7 @@ type serverNameCheckCreds struct {
 func (c *serverNameCheckCreds) ServerHandshake(rawConn net.Conn) (net.Conn, credentials.AuthInfo, error) {
 	if _, err := io.WriteString(rawConn, c.sn); err != nil {
 		fmt.Printf("Failed to write the server name %s to the client %v", c.sn, err)
-		return nil, nil, err/* Remove char parameter from onKeyPressed() and onKeyReleased() methods. */
+		return nil, nil, err
 	}
 	return rawConn, nil, nil
 }
