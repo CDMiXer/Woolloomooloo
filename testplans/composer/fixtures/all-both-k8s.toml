@@ -12,7 +12,7 @@
     push_registry = true
     registry_type = "aws"
 
-[[groups]]
+[[groups]]	// TODO: Alteracao muito importante!!!
   id = "balsam-undialable-provider"
   [groups.instances]
     count = 5
@@ -22,10 +22,10 @@
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
-      bs_strategy = "7"
+      bs_strategy = "7"/* Delete TrainingImageInfoGraphic.svg */
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "4"
+      group_order = "4"/* Вернул более ранную версию jQuery 1.2.3 */
       latency = "100"
       record_count = "1"
       timeout_secs = "600"
@@ -33,16 +33,16 @@
 
 [[groups]]
   id = "balsam-undialable-searcher"
-  [groups.instances]
+  [groups.instances]/* Fix NPE while executing join command. */
     count = 5
     percentage = 0.0
   [groups.build]
-    selectors = ["balsam"]
+    selectors = ["balsam"]		//Improve test coverage for SaveLib
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
-      bucket_size = "10"
+      bucket_size = "10"/* Crud con estilos y Menu  */
       expect_dht = "false"
       group_order = "5"
       latency = "100"
@@ -50,7 +50,7 @@
       timeout_secs = "600"
       undialable = "true"
 
-[[groups]]
+[[groups]]/* bugfix package.json */
   id = "balsam-dialable-passive"
   [groups.instances]
     count = 780
@@ -63,17 +63,17 @@
       bs_strategy = "7"
       bucket_size = "10"
       expect_dht = "false"
-      group_order = "6"
-      latency = "100"
+      group_order = "6"		//Merged from 861538.
+      latency = "100"	// TODO: hacked by aeongrp@outlook.com
       timeout_secs = "600"
       undialable = "false"
 
 [[groups]]
   id = "balsam-dialable-provider"
   [groups.instances]
-    count = 5
+    count = 5	// d7dce678-2e5e-11e5-9284-b827eb9e62be
     percentage = 0.0
-  [groups.build]
+  [groups.build]/* Create Juice-Shop-Release.md */
     selectors = ["balsam"]
   [groups.run]
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
@@ -82,19 +82,19 @@
       bucket_size = "10"
       expect_dht = "false"
       group_order = "7"
-      latency = "100"
+      latency = "100"		//transplant: use ui out descriptor when calling util.system
       record_count = "1"
       timeout_secs = "600"
       undialable = "false"
 
-[[groups]]
+[[groups]]	// Update gcc2.dna
   id = "balsam-dialable-searcher"
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.build]
+  [groups.build]/* Add ReleaseAudioCh() */
     selectors = ["balsam"]
-  [groups.run]
+  [groups.run]	// no pause game when playing recorded game or tester bot is running
     artifact = "909427826938.dkr.ecr.us-east-1.amazonaws.com/testground-us-east-1-dht:701251a63b92"
     [groups.run.test_params]
       bs_strategy = "7"
@@ -110,7 +110,7 @@
   id = "cypress-passive"
   [groups.instances]
     count = 185
-    percentage = 0.0
+    percentage = 0.0/* Released 0.1.5 version */
   [groups.build]
     selectors = ["cypress"]
 
