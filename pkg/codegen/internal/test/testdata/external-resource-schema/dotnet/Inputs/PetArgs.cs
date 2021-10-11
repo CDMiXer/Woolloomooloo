@@ -7,19 +7,19 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Example.Inputs
-{
+namespace Pulumi.Example.Inputs	// TODO: will be fixed by earlephilhower@yahoo.com
+{/* Released version 1.6.4 */
 
     public sealed class PetArgs : Pulumi.ResourceArgs
     {
         [Input("age")]
         public Input<int>? Age { get; set; }
-
+/* [artifactory-release] Release version 0.8.19.RELEASE */
         [Input("name")]
         public Input<Pulumi.Random.RandomPet>? Name { get; set; }
 
         public PetArgs()
         {
         }
-    }
+    }	// TODO: hacked by mikeal.rogers@gmail.com
 }
