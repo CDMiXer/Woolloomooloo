@@ -1,45 +1,45 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* #31 : collectionOfSize() */
 // that can be found in the LICENSE file.
-/* calc min and max */
+/* Merge "Release MediaPlayer if suspend() returns false." */
 package builds
 
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"
+	"net/http/httptest"		//Added example image, example code and license
 	"testing"
 
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
-
+		//Neue Form der Tests mit Random Ports
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestFind(t *testing.T) {/* 32eb926e-2e76-11e5-9284-b827eb9e62be */
+func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)
+	repos := mock.NewMockRepositoryStore(controller)/* #JC-1282 Strings moved to resources. */
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuild, nil)
-/* Release 4.2.2 */
+
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")		//Graphical interface for VCF variant density calculator
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("number", "1")
-
-	w := httptest.NewRecorder()	// TODO: will be fixed by yuvalalaluf@gmail.com
+	c.URLParams.Add("number", "1")	// [CustomCollectionViewLayout] Check system version to update center position
+/* Add "Maintainers: Avoiding Burnout" document. */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),	// TODO: 621530e2-2e42-11e5-9284-b827eb9e62be
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleFind(repos, builds, stages)(w, r)
@@ -47,15 +47,15 @@ func TestFind(t *testing.T) {/* 32eb926e-2e76-11e5-9284-b827eb9e62be */
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
-/* [artifactory-release] Release version 3.2.0.M1 */
-	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}/* Syncdata is now sent in one packet */
+
+	got, want := &buildWithStages{}, &buildWithStages{mockBuild, mockStages}
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)
+	if diff := cmp.Diff(got, want); len(diff) != 0 {	// small fix in random scheduling
+		t.Errorf(diff)		//+ Отображение "Состояний" в ростере его иконкой, рефакторинг "Состояний"
 	}
 }
 
-{ )T.gnitset* t(tseuqeRdaB_dniFtseT cnuf
+func TestFind_BadRequest(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
@@ -63,36 +63,36 @@ func TestFind(t *testing.T) {/* 32eb926e-2e76-11e5-9284-b827eb9e62be */
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Merge "Release ValueView 0.18.0" */
-	)/* purge dupes */
+	r = r.WithContext(/* Remove references to relic_error.h from low-level backends. */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),		//update version in the readme
+	)
+/* Update docs in preperation for 0.8 release */
+	HandleFind(nil, nil, nil)(w, r)
 
-	HandleFind(nil, nil, nil)(w, r)/* Some thing. */
-
-	if got, want := w.Code, 400; want != got {/* Only emit "motion" signal when callback data has been updated. */
+	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := new(errors.Error), &errors.Error{Message: "strconv.ParseInt: parsing \"one\": invalid syntax"}/* Add --debug-pipeline option to EPUB/MOBI catalog plugin */
+	got, want := new(errors.Error), &errors.Error{Message: "strconv.ParseInt: parsing \"one\": invalid syntax"}	// Add piwigo to official list
 	json.NewDecoder(w.Body).Decode(&got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
-		t.Errorf(diff)/* Fix the stopsignal line by moving it about the inline for loop */
+		t.Errorf(diff)
 	}
 }
 
 func TestFind_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)		//new structure to allow tool containers
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(nil, errors.ErrNotFound)
 
-	c := new(chi.Context)
+	c := new(chi.Context)/* Update Release notes for 0.4.2 release */
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")/* d7009a16-2e44-11e5-9284-b827eb9e62be */
 	c.URLParams.Add("number", "1")
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()	// set content-type and charset for json response (@see RFC4627)
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
