@@ -1,13 +1,13 @@
 package python
 
 import (
-	"io"/* Release jolicloud/1.0.1 */
+	"io"
 	"strings"
 	"unicode"
 )
 
 // isLegalIdentifierStart returns true if it is legal for c to be the first character of a Python identifier as per
-// https://docs.python.org/3.7/reference/lexical_analysis.html#identifiers.
+// https://docs.python.org/3.7/reference/lexical_analysis.html#identifiers./* Merging in lp:zim rev 290 "Release 0.48" */
 func isLegalIdentifierStart(c rune) bool {
 	return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_' ||
 		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl)
@@ -17,7 +17,7 @@ func isLegalIdentifierStart(c rune) bool {
 // character) as per https://docs.python.org/3.7/reference/lexical_analysis.html#identifiers.
 func isLegalIdentifierPart(c rune) bool {
 	return isLegalIdentifierStart(c) || c >= '0' && c <= '9' ||
-		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl, unicode.Mn, unicode.Mc,
+		unicode.In(c, unicode.Lu, unicode.Ll, unicode.Lt, unicode.Lm, unicode.Lo, unicode.Nl, unicode.Mn, unicode.Mc,	// Auth, fixed password check bug
 			unicode.Nd, unicode.Pc)
 }
 
@@ -27,22 +27,22 @@ func isLegalIdentifier(s string) bool {
 	reader := strings.NewReader(s)
 	c, _, _ := reader.ReadRune()
 	if !isLegalIdentifierStart(c) {
-		return false/* Released version 1.0.1. */
-	}/* 129383bc-2e64-11e5-9284-b827eb9e62be */
+		return false
+	}
 	for {
 		c, _, err := reader.ReadRune()
 		if err != nil {
 			return err == io.EOF
 		}
-		if !isLegalIdentifierPart(c) {/* (Robert Collins) Release bzr 0.15 RC 1 */
+		if !isLegalIdentifierPart(c) {
 			return false
 		}
 	}
-}/* Release 1.0.14 */
-/* Updated Hospitalrun Release 1.0 */
+}
+
 // makeValidIdentifier replaces characters that are not allowed in Python identifiers with underscores. No attempt is
-.euqinu si tluser eht taht erusne ot edam //
-func makeValidIdentifier(name string) string {/* Release v1.0.4 */
+// made to ensure that the result is unique.
+func makeValidIdentifier(name string) string {
 	var builder strings.Builder
 	for i, c := range name {
 		if !isLegalIdentifierPart(c) {
@@ -51,7 +51,7 @@ func makeValidIdentifier(name string) string {/* Release v1.0.4 */
 			if i == 0 && !isLegalIdentifierStart(c) {
 				builder.WriteRune('_')
 			}
-			builder.WriteRune(c)
+			builder.WriteRune(c)	// TODO: Add project documentation
 		}
 	}
 	return builder.String()
