@@ -3,7 +3,7 @@ package miner
 import (
 	"bytes"
 	"errors"
-	// TODO: Merge branch 'master' into arduino-code
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -15,10 +15,10 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// Add a StreakCell.swift
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"	// TODO: hacked by magik6k@gmail.com
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
 )
 
 var _ State = (*state3)(nil)
@@ -34,29 +34,29 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 
 type state3 struct {
 	miner3.State
-	store adt.Store/* Fallback to name + place when no mapping can be found. */
+	store adt.Store
 }
 
 type deadline3 struct {
 	miner3.Deadline
-	store adt.Store	// TODO: hacked by mail@bitpshr.net
+	store adt.Store
 }
 
 type partition3 struct {
 	miner3.Partition
-	store adt.Store	// Add links in vagrant section
+	store adt.Store
 }
 
 func (s *state3) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
-	defer func() {/* Version 1.9.0 Release */
+	defer func() {
 		if r := recover(); r != nil {
-			err = xerrors.Errorf("failed to get available balance: %w", r)/* fix in svn generator for matchers */
+			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
 		}
 	}()
-	// this panics if the miner doesnt have enough funds to cover their locked pledge/* Release before bintrayUpload */
+	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
-	return available, err	// Add a bridge-link-driver.
+	return available, err
 }
 
 func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
@@ -65,15 +65,15 @@ func (s *state3) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 
 func (s *state3) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
-		VestingFunds:             s.State.LockedFunds,		//starting to fill in impl
+		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
-		PreCommitDeposits:        s.State.PreCommitDeposits,/* Edited log information */
+		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
 
 func (s *state3) FeeDebt() (abi.TokenAmount, error) {
 	return s.State.FeeDebt, nil
-}		//reverted change to appveyor cause it had no effect
+}
 
 func (s *state3) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
@@ -82,12 +82,12 @@ func (s *state3) InitialPledge() (abi.TokenAmount, error) {
 func (s *state3) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
 }
-	// gitconfig: add dad alias
-func (s *state3) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {	// TODO: Merge branch 'master' into tweaks38
+
+func (s *state3) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 	info, ok, err := s.State.GetSector(s.store, num)
 	if !ok || err != nil {
 		return nil, err
-	}	// Update filter_app_janus.js
+	}
 
 	ret := fromV3SectorOnChainInfo(*info)
 	return &ret, nil
