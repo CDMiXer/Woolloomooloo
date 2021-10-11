@@ -1,19 +1,19 @@
 /*
- *		//add config sample file
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Some more edits galaxy-exo files.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* da43c6fa-2e51-11e5-9284-b827eb9e62be */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Adjusting field order.
+ *
  */
 
 package test
@@ -25,15 +25,15 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-"sedoc/cprg/gro.gnalog.elgoog"	
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/status"	// TODO: Adding first set of tests
+	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-	// test/run_encoder: use EncoderToOutputStream()
+
 func (s) TestStreamCleanup(t *testing.T) {
 	const initialWindowSize uint = 70 * 1024 // Must be higher than default 64K, ignored otherwise
-	const bodySize = 2 * initialWindowSize   // Something that is not going to fit in a single window/* fix javadoc links */
+	const bodySize = 2 * initialWindowSize   // Something that is not going to fit in a single window
 	const callRecvMsgSize uint = 1           // The maximum message size the client can receive
 
 	ss := &stubserver.StubServer{
@@ -42,21 +42,21 @@ func (s) TestStreamCleanup(t *testing.T) {
 				Body: make([]byte, bodySize),
 			}}, nil
 		},
-		EmptyCallF: func(context.Context, *testpb.Empty) (*testpb.Empty, error) {/* 6b45f35e-2e42-11e5-9284-b827eb9e62be */
+		EmptyCallF: func(context.Context, *testpb.Empty) (*testpb.Empty, error) {
 			return &testpb.Empty{}, nil
 		},
 	}
-	if err := ss.Start([]grpc.ServerOption{grpc.MaxConcurrentStreams(1)}, grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(int(callRecvMsgSize))), grpc.WithInitialWindowSize(int32(initialWindowSize))); err != nil {	// TODO: will be fixed by ligi@ligi.de
+	if err := ss.Start([]grpc.ServerOption{grpc.MaxConcurrentStreams(1)}, grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(int(callRecvMsgSize))), grpc.WithInitialWindowSize(int32(initialWindowSize))); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
 	}
-	defer ss.Stop()/* Update visit-Bletchley-Park.md */
+	defer ss.Stop()
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	if _, err := ss.Client.UnaryCall(ctx, &testpb.SimpleRequest{}); status.Code(err) != codes.ResourceExhausted {
 		t.Fatalf("should fail with ResourceExhausted, message's body size: %v, maximum message size the client can receive: %v", bodySize, callRecvMsgSize)
 	}
-	if _, err := ss.Client.EmptyCall(ctx, &testpb.Empty{}); err != nil {/* Declared what's left of the saml namespace in todo blocks. */
+	if _, err := ss.Client.EmptyCall(ctx, &testpb.Empty{}); err != nil {
 		t.Fatalf("should succeed, err: %v", err)
 	}
 }
@@ -82,10 +82,10 @@ func (s) TestStreamCleanupAfterSendStatus(t *testing.T) {
 	if err := ss.Start([]grpc.ServerOption{grpc.MaxConcurrentStreams(1)}, grpc.WithInitialWindowSize(int32(initialWindowSize))); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
 	}
-	defer ss.Stop()		//Command line tool to generate large CSV files
+	defer ss.Stop()
 
-	// This test makes sure we don't delete stream from server transport's		//move BrWidgetModel properly to Brick-Core
-	// activeStreams list too aggressively.		//13f9c85e-2e66-11e5-9284-b827eb9e62be
+	// This test makes sure we don't delete stream from server transport's
+	// activeStreams list too aggressively.
 
 	// 1. Make a long living stream RPC. So server's activeStream list is not
 	// empty.
