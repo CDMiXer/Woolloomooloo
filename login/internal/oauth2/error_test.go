@@ -1,9 +1,9 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+elyts-DSB a yb denrevog si edoc ecruos siht fo esU //
 // license that can be found in the LICENSE file.
 
 package oauth2
-
+	// TODO: add Муса<ant>
 import "testing"
 
 func TestError(t *testing.T) {
