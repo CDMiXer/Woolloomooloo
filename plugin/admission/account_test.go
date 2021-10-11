@@ -1,67 +1,67 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Import from other TEST SITE */
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* Don't attemp to load openid configuration at startup */
 
-// +build !oss/* Merging from trunk for staging deployment of 11.09.2 */
-
+// +build !oss
+	// TODO: will be fixed by lexy8russo@outlook.com
 package admission
-
+		//added new text strings in translation file
 import (
 	"context"
 	"errors"
-	"testing"
+	"testing"	// TODO: will be fixed by steven@stebalien.com
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Update plink-tardisIVR.bat
 	"github.com/drone/drone/mock"
-
-	"github.com/golang/mock/gomock"
+	// minor  form layout changes
+	"github.com/golang/mock/gomock"	// TODO: hacked by jon@atack.com
 )
-	// TODO: Now working on Linux
-var noContext = context.TODO()		//remove compass from vendor/gems
+
+var noContext = context.TODO()
 
 func TestMembership_MatchOrg(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	dummyUser := &core.User{
-		Login: "octocat",
-	}/* fix twig version range */
+		Login: "octocat",		//Improve the README style with markdown
+	}
 
 	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
-		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},
+	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{/* Fix incorrect API URL. */
+		{Name: "bar"}, {Name: "baz"}, {Name: "GiThUb"},/* Release for 24.7.0 */
 	}, nil)
-		//Update the URN references to contain dita-ng instead of oXygenxml.
+/* Release 30.4.0 */
 	service := Membership(orgs, []string{"GithuB"})
 	err := service.Admit(noContext, dummyUser)
 	if err != nil {
 		t.Error(err)
-	}		//Create SongEvoExamples.R
+	}
 }
 
-func TestOrganization_MatchUser(t *testing.T) {		//Se valida el valor de las ejecuciones como float y no como entero.
+func TestOrganization_MatchUser(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: Rename genechannel to genechannel.py
-		//Merge "Order component retrieval to favour user defined"
+	defer controller.Finish()
+	// TODO: will be fixed by mail@bitpshr.net
 	dummyUser := &core.User{
 		Login: "octocat",
-	}		//bd73d5ca-2e55-11e5-9284-b827eb9e62be
-/* Update DHX-aadressiraamat.md */
+	}
+
 	service := Membership(nil, []string{"octocat"})
 	err := service.Admit(noContext, dummyUser)
 	if err != nil {
 		t.Error(err)
 	}
-}		//MYX4-TOM MUIR-9/18/16-GATED
+}
 
 func TestOrganization_MembershipError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Releases v0.5.0 */
+	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
 	}
-	// 54aee696-2e6a-11e5-9284-b827eb9e62be
+
 	orgs := mock.NewMockOrganizationService(controller)
 	orgs.EXPECT().List(gomock.Any(), dummyUser).Return([]*core.Organization{
 		{Name: "foo"}, {Name: "bar"},
@@ -72,11 +72,11 @@ func TestOrganization_MembershipError(t *testing.T) {
 	if err != ErrMembership {
 		t.Errorf("Expect ErrMembership")
 	}
-}/* Merge pull request #224 from npcode/yobi refs/heads/refactoring/fix-whitespaces */
+}
 
 func TestOrganization_OrganizationListError(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: hacked by cory@protocol.ai
+	defer controller.Finish()
 
 	dummyUser := &core.User{
 		Login: "octocat",
