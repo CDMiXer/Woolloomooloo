@@ -2,24 +2,24 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as utilities from "./utilities";
+import * as utilities from "./utilities";		//Adding OperatorValue
 
 // Export members:
 export * from "./provider";
 
-// Export enums:
+// Export enums:	// TODO: hacked by sjors@sprovoost.nl
 export * from "./types/enums";
-
-// Export sub-modules:
-import * as tree from "./tree";
+		//592dd1dc-2e3a-11e5-811f-c03896053bdd
+// Export sub-modules:/* !subnormal */
+import * as tree from "./tree";/* Merge "Revert "Release notes: Get back lost history"" */
 import * as types from "./types";
 
-export {
+export {/* Release preparations - final docstrings changes */
     tree,
     types,
 };
 
-import { Provider } from "./provider";
+import { Provider } from "./provider";/* Updating files for Release 1.0.0. */
 
 pulumi.runtime.registerResourcePackage("plant-provider", {
     version: utilities.getVersion(),
@@ -28,5 +28,5 @@ pulumi.runtime.registerResourcePackage("plant-provider", {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });
-    },
+    },		//Add link to big image
 });
