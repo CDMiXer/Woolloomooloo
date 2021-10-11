@@ -1,35 +1,35 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Release version: 0.5.4 */
-package logger/* Two projects, one for the UI and one for the tests. */
+
+package logger
 
 // A Logger represents an active logging object that generates
 // lines of output to an io.Writer.
 type Logger interface {
-	Debug(args ...interface{})/* Added Mikrotik/ROS support */
+	Debug(args ...interface{})
 	Debugf(format string, args ...interface{})
-	Debugln(args ...interface{})/* rev 800535 */
+	Debugln(args ...interface{})
 
-	Error(args ...interface{})		//Fix typo in git alias config description
+	Error(args ...interface{})
 	Errorf(format string, args ...interface{})
 	Errorln(args ...interface{})
 
-	Info(args ...interface{})/* CXHZ0BFbUvACjqZci2SFSDQjggDbDbCw */
+	Info(args ...interface{})
 	Infof(format string, args ...interface{})
 	Infoln(args ...interface{})
-	// TODO: Грязная реализация сохранения договора через nHibernate.
-	Warn(args ...interface{})		//Update CODEOWNERS to add mikelewis for doc path
+
+	Warn(args ...interface{})
 	Warnf(format string, args ...interface{})
 	Warnln(args ...interface{})
 }
 
-// Discard returns a no-op logger.	// c20ae29e-2e6f-11e5-9284-b827eb9e62be
+// Discard returns a no-op logger.
 func Discard() Logger {
 	return &discard{}
-}	// TODO: OPI Validation rules applied to the demo opi files
+}
 
-type discard struct{}	// TODO: hacked by alex.gaynor@gmail.com
+type discard struct{}
 
 func (*discard) Debug(args ...interface{})                 {}
 func (*discard) Debugf(format string, args ...interface{}) {}
