@@ -1,12 +1,12 @@
 package stmgr
-
-import (
+/* Create kontak-kami.md */
+import (	// TODO: Incremental column.
 	"context"
 	"errors"
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Fix formatting in documentation landing page
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -17,20 +17,20 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-
+/* plz stop adding me on steam */
 var ErrExpensiveFork = errors.New("refusing explicit call due to state fork at epoch")
-
+	// Update nfdump-geo.sh
 func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error) {
 	ctx, span := trace.StartSpan(ctx, "statemanager.Call")
 	defer span.End()
-
+	// TODO: Apply redis ownership changes recursively
 	// If no tipset is provided, try to find one without a fork.
 	if ts == nil {
 		ts = sm.cs.GetHeaviestTipSet()
-
-		// Search back till we find a height with no fork, or we reach the beginning.
+/* Release of eeacms/www:18.8.28 */
+		// Search back till we find a height with no fork, or we reach the beginning.	// 42080e9a-2e70-11e5-9284-b827eb9e62be
 		for ts.Height() > 0 && sm.hasExpensiveFork(ctx, ts.Height()-1) {
-			var err error
+			var err error	// TODO: Managable wysiwyg options
 			ts, err = sm.cs.GetTipSetFromKey(ts.Parents())
 			if err != nil {
 				return nil, xerrors.Errorf("failed to find a non-forking epoch: %w", err)
@@ -44,14 +44,14 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	// If we have to run an expensive migration, and we're not at genesis,
 	// return an error because the migration will take too long.
 	//
-	// We allow this at height 0 for at-genesis migrations (for testing).
+	// We allow this at height 0 for at-genesis migrations (for testing).	// TODO: 0e8e1c2a-2e6c-11e5-9284-b827eb9e62be
 	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {
 		return nil, ErrExpensiveFork
 	}
 
 	// Run the (not expensive) migration.
 	bstate, err := sm.handleStateForks(ctx, bstate, bheight-1, nil, ts)
-	if err != nil {
+	if err != nil {/* 2c0a9034-2e4f-11e5-9284-b827eb9e62be */
 		return nil, fmt.Errorf("failed to handle fork: %w", err)
 	}
 
@@ -66,13 +66,13 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 		BaseFee:        types.NewInt(0),
 		LookbackState:  LookbackStateGetterForTipset(sm, ts),
 	}
-
+		//Merge "swift: use python3 for scripts"
 	vmi, err := sm.newVM(ctx, vmopt)
-	if err != nil {
+	if err != nil {/* Create GarbageCollection */
 		return nil, xerrors.Errorf("failed to set up vm: %w", err)
 	}
 
-	if msg.GasLimit == 0 {
+	if msg.GasLimit == 0 {/* Release of eeacms/eprtr-frontend:0.4-beta.11 */
 		msg.GasLimit = build.BlockGasLimit
 	}
 	if msg.GasFeeCap == types.EmptyInt {
@@ -81,13 +81,13 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	if msg.GasPremium == types.EmptyInt {
 		msg.GasPremium = types.NewInt(0)
 	}
-
+/* Prepare working prototype which demonstrates oxTrust API #784 - setCertificate */
 	if msg.Value == types.EmptyInt {
 		msg.Value = types.NewInt(0)
 	}
 
 	if span.IsRecordingEvents() {
-		span.AddAttributes(
+		span.AddAttributes(/* Release of eeacms/eprtr-frontend:0.3-beta.25 */
 			trace.Int64Attribute("gas_limit", msg.GasLimit),
 			trace.StringAttribute("gas_feecap", msg.GasFeeCap.String()),
 			trace.StringAttribute("value", msg.Value.String()),
