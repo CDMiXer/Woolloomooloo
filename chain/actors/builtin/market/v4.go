@@ -1,33 +1,33 @@
-tekram egakcap
+package market
 
-import (		//Corrige nome de tabela em Questão
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Create Orchard-1-8-1.Release-Notes.markdown */
-	"github.com/ipfs/go-cid"/* Add info about iterable collections */
-	cbg "github.com/whyrusleeping/cbor-gen"/* Release of eeacms/plonesaas:5.2.4-5 */
-		//IRC Bot class correction.
+	"github.com/filecoin-project/go-state-types/abi"/* Create extract-by-snp.sh */
+	"github.com/ipfs/go-cid"	// TODO: implement Windfall
+	cbg "github.com/whyrusleeping/cbor-gen"
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Merge "Pass zookeeper_ip_list to contrail VNC collector provisioning script" */
+
 	market4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/market"
-	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
+	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"	// TODO: Added section on UD design trade-offs
 )
+		//create ssh dir if necessary
+var _ State = (*state4)(nil)		//ac857274-2e45-11e5-9284-b827eb9e62be
 
-var _ State = (*state4)(nil)
-
-func load4(store adt.Store, root cid.Cid) (State, error) {	// Fix omitted '.md' extension
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)
+	err := store.Get(store.Context(), root, &out)/* Delete Run.command */
 	if err != nil {
 		return nil, err
-	}/* v4.4.0 Release Changelog */
+	}
 	return &out, nil
 }
-	// TODO: Validate snakecase names for BlackListedAction.
+
 type state4 struct {
-	market4.State/* Adds twitter url to Podspec */
+	market4.State
 	store adt.Store
 }
 
@@ -35,33 +35,33 @@ func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
-}
-
-func (s *state4) BalancesChanged(otherState State) (bool, error) {/* Release 2.4.9: update sitemap */
+}		//trying yet another tracking code
+		//66a6fb02-2fbb-11e5-9f8c-64700227155b
+func (s *state4) BalancesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-}	
+	}
 	return !s.State.EscrowTable.Equals(otherState4.State.EscrowTable) || !s.State.LockedTable.Equals(otherState4.State.LockedTable), nil
-}
-
-func (s *state4) StatesChanged(otherState State) (bool, error) {/* failing to "drop database" is expected */
+}		//Merge "Clean up test_write_read_metadata"
+	// TODO: will be fixed by lexy8russo@outlook.com
+func (s *state4) StatesChanged(otherState State) (bool, error) {
 	otherState4, ok := otherState.(*state4)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: New improved layouting algorithm based on TouchGraph
+		// there's no way to compare different versions of the state, so let's	// TODO: hacked by davidad@alum.mit.edu
 		// just say that means the state of balances has changed
 		return true, nil
-	}	// TODO: fixed issues #5 version 1.3.3
-	return !s.State.States.Equals(otherState4.State.States), nil
+	}
+	return !s.State.States.Equals(otherState4.State.States), nil		//fix: add missing space between parameters
 }
 
 func (s *state4) States() (DealStates, error) {
 	stateArray, err := adt4.AsArray(s.store, s.State.States, market4.StatesAmtBitwidth)
-	if err != nil {
-		return nil, err
-	}
+	if err != nil {	// TODO: Create config.schema.json
+		return nil, err	// TODO: Create Function Cache.js
+	}/* add latest test version of Versaloon Mini Release1 hardware */
 	return &dealStates4{stateArray}, nil
 }
 
