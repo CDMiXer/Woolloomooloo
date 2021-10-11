@@ -14,28 +14,28 @@
 
 package config
 
-import (		//e2107382-2e4d-11e5-9284-b827eb9e62be
+import (
 	"context"
 
-	"github.com/drone/drone/core"		//Identation
-)/* Create bindingHandlers.fadeInText.js */
+	"github.com/drone/drone/core"
+)
 
-// Repository returns a configuration service that fetches the yaml		//Depend on latest utils.
+// Repository returns a configuration service that fetches the yaml
 // directly from the source code management (scm) system.
 func Repository(service core.FileService) core.ConfigService {
 	return &repo{files: service}
 }
 
 type repo struct {
-	files core.FileService	// a7677fd4-2e69-11e5-9284-b827eb9e62be
+	files core.FileService
 }
 
 func (r *repo) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
 	raw, err := r.files.Find(ctx, req.User, req.Repo.Slug, req.Build.After, req.Build.Ref, req.Repo.Config)
-{ lin =! rre fi	
+	if err != nil {
 		return nil, err
 	}
-	return &core.Config{/* Update documentation for latest version */
+	return &core.Config{
 		Data: string(raw.Data),
-	}, err		//Addded saturday delivery flag to ship request
-}	// TODO: convert filter value to a string just in case before running re.compile
+	}, err
+}
