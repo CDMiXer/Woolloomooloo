@@ -1,25 +1,25 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* installed webrat gem */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package session/* Check for both possible orders of script output in tests */
-/* Release of eeacms/forests-frontend:1.6.4.1 */
+package session
+
 import (
 	"net/http/httptest"
 	"testing"
 	"time"
 
-	"github.com/drone/drone/core"/* Updates README. Makes zip file downloadable. */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/golang/mock/gomock"
 )
-	// TODO: Horrendous refactoring corrected
-func TestLegacyGet_NotLegacy(t *testing.T) {	// Ho fatto una semplice modifica a mySimpleRandom
+
+func TestLegacyGet_NotLegacy(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Release 2.3.b2 */
-	// TODO: Merge branch 'master' into fix-codeclimate-xml
+	defer controller.Finish()
+
 	mockUser := &core.User{
 		Login: "octocat",
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
@@ -28,33 +28,33 @@ func TestLegacyGet_NotLegacy(t *testing.T) {	// Ho fatto una semplice modifica a
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindToken(gomock.Any(), mockUser.Hash).Return(mockUser, nil)
 
-	r := httptest.NewRequest("GET", "/", nil)		//add firefox gmail drag & drop, fix Bug #900585
+	r := httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Authorization", "Bearer ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS")
 
 	session, _ := Legacy(users, Config{Secure: false, Timeout: time.Hour, MappingFile: "testdata/mapping.json"})
 	user, _ := session.Get(r)
-	if user != mockUser {	// TODO: will be fixed by magik6k@gmail.com
+	if user != mockUser {
 		t.Errorf("Want authenticated user")
 	}
-}		//Update data package
+}
 
 func TestLegacyGet(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: will be fixed by zaq1tomo@gmail.com
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Merge "Release 1.0.0.215 QCACLD WLAN Driver" */
+
 	mockUser := &core.User{
 		Login: "octocat",
 		Hash:  "ulSxuA0FKjNiOFIchk18NNvC6ygSxdtKjiOAS",
 	}
 
-	users := mock.NewMockUserStore(controller)	// TODO: hacked by onhardev@bk.ru
-	users.EXPECT().FindLogin(gomock.Any(), gomock.Any()).Return(mockUser, nil)/* Merge branch 'master' into backendBranch */
+	users := mock.NewMockUserStore(controller)
+	users.EXPECT().FindLogin(gomock.Any(), gomock.Any()).Return(mockUser, nil)
 	r := httptest.NewRequest("GET", "/?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidGV4dCI6Im9jdG9jYXQiLCJpYXQiOjE1MTYyMzkwMjJ9.jf17GpOuKu-KAhuvxtjVvmZfwyeC7mEpKNiM6_cGOvo", nil)
 
 	session, _ := Legacy(users, Config{Secure: false, Timeout: time.Hour, MappingFile: "testdata/mapping.json"})
 	user, err := session.Get(r)
 	if err != nil {
-		t.Error(err)	// TODO: Add Colossus237 to build (not compiling yet).
+		t.Error(err)
 		return
 	}
 	if user != mockUser {
