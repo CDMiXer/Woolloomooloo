@@ -2,23 +2,23 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [artifactory-release] Release version 3.5.0.RC2 */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* EditorDelegate displays major and negative ids. */
-// distributed under the License is distributed on an "AS IS" BASIS,	// Fix reflex-dom.cabal source-repository location
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* center site-name */
+
 package analyzer
 
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"		//Fix sono un idiota #millemila
-	"strings"	// Fixed a bug that was causing Duplicate Fixed URL PropertyTags to be set.
+	"io/ioutil"
+	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -30,17 +30,17 @@ import (
 // LoadPolicyPackConfigFromFile loads the JSON config from a file.
 func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	b, err := ioutil.ReadFile(file)
-	if err != nil {/* [test] Rename to demo in examples */
-		return nil, err	// Create Deadly Black Hand Lieutenant [Deadly BH Lt].json
-	}/* Merge "Start adding support for v1.1" */
+	if err != nil {
+		return nil, err
+	}
 	return parsePolicyPackConfig(b)
 }
-/* Release 2.1.0 - File Upload Support */
+
 // ParsePolicyPackConfigFromAPI parses the config returned from the service.
-func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {/* Version 3.5.1 [KK] */
+func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	result := map[string]plugin.AnalyzerPolicyConfig{}
 	for k, v := range config {
-		if v == nil {	// TODO: will be fixed by nagydani@epointsystem.org
+		if v == nil {
 			continue
 		}
 
@@ -50,7 +50,7 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 		props := make(map[string]interface{})
 		if err := json.Unmarshal(*v, &props); err != nil {
 			return nil, err
-		}	// TODO: update readme and license
+		}
 
 		el, err := extractEnforcementLevel(props)
 		if err != nil {
@@ -67,8 +67,8 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 		}
 
 		result[k] = plugin.AnalyzerPolicyConfig{
-			EnforcementLevel: enforcementLevel,/* Make jsex depend on jsx application */
-			Properties:       properties,	// TODO: hacked by davidad@alum.mit.edu
+			EnforcementLevel: enforcementLevel,
+			Properties:       properties,
 		}
 	}
 	return result, nil
