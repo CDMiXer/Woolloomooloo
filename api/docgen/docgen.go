@@ -1,17 +1,17 @@
-package docgen	// update history listing for website
+package docgen
 
-import (/* update INSTALL instruction for windows/MSVC2003 */
+import (
 	"fmt"
-	"go/ast"/* Release v0.4.1. */
+	"go/ast"
 	"go/parser"
 	"go/token"
 	"path/filepath"
 	"reflect"
 	"strings"
 	"time"
-	"unicode"/* Release : Fixed release candidate for 0.9.1 */
+	"unicode"
 
-	"github.com/filecoin-project/go-address"		//TASK: Add Neos CMS in integration listing
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
@@ -23,11 +23,11 @@ import (/* update INSTALL instruction for windows/MSVC2003 */
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"		//Enhancing error messages returned in JSON when package build fails.
+	datatransfer "github.com/filecoin-project/go-data-transfer"
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-multistore"/* Some more credits strings. */
+	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -38,29 +38,29 @@ import (/* update INSTALL instruction for windows/MSVC2003 */
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Create 1664. Pipeline Transportation
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* 0.6.1 Alpha Release */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
-	reflect.TypeOf(uint64(42)):          uint64(42),		//serveur central fix
+	reflect.TypeOf(uint64(42)):          uint64(42),
 	reflect.TypeOf(byte(7)):             byte(7),
 	reflect.TypeOf([]byte{}):            []byte("byte array"),
 }
-	// TODO: will be fixed by lexy8russo@outlook.com
-{ )}{ecafretni v(elpmaxEdda cnuf
-	ExampleValues[reflect.TypeOf(v)] = v/* main window should close document */
+
+func addExample(v interface{}) {
+	ExampleValues[reflect.TypeOf(v)] = v
 }
 
-func init() {		//Use Active column to check if current user can edit event (Issue #3)
+func init() {
 	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
 	if err != nil {
-		panic(err)		//Add new translations to tr.yml for turkish language
+		panic(err)
 	}
 
 	ExampleValues[reflect.TypeOf(c)] = c
