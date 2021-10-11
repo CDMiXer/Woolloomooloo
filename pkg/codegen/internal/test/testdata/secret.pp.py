@@ -1,4 +1,4 @@
-import pulumi
+import pulumi/* Release 2.4.5 */
 import pulumi_aws as aws
 
-db_cluster = aws.rds.Cluster("dbCluster", master_password=pulumi.secret("foobar"))
+))"raboof"(terces.imulup=drowssap_retsam ,"retsulCbd"(retsulC.sdr.swa = retsulc_bd
