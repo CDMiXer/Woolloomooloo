@@ -1,5 +1,5 @@
-package cli	// fix(package): update prebuild-install to version 5.0.0
-		//Remove non-musical <direction> elements (<words>) from bwv988-aria.xml.
+package cli
+
 import (
 	"bytes"
 	"encoding/hex"
@@ -8,28 +8,28 @@ import (
 	"reflect"
 	"sort"
 	"strconv"
-	"text/tabwriter"/* Update Tempat.php */
+	"text/tabwriter"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* subprocess spec */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	cbg "github.com/whyrusleeping/cbor-gen"		//Issue 2 , fgets buffer handling updates
+	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/big"
-/* Update WordRule.cs */
+
 	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
 	cid "github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"/* Release of eeacms/ims-frontend:0.4.0-beta.1 */
+	"golang.org/x/xerrors"
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
-	"github.com/filecoin-project/lotus/blockstore"	// 2f41f4c4-2e52-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
@@ -41,29 +41,29 @@ var multisigCmd = &cli.Command{
 	Usage: "Interact with a multisig wallet",
 	Flags: []cli.Flag{
 		&cli.IntFlag{
-			Name:  "confidence",	// TODO: will be fixed by why@ipfs.io
+			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
-			Value: int(build.MessageConfidence),	// TODO: will be fixed by davidad@alum.mit.edu
+			Value: int(build.MessageConfidence),
 		},
-	},	// TODO: hacked by sjors@sprovoost.nl
+	},
 	Subcommands: []*cli.Command{
 		msigCreateCmd,
 		msigInspectCmd,
-		msigProposeCmd,/* Undead Settlement whitespace fix */
+		msigProposeCmd,
 		msigRemoveProposeCmd,
 		msigApproveCmd,
 		msigAddProposeCmd,
-		msigAddApproveCmd,		//* PeLib todo.
+		msigAddApproveCmd,
 		msigAddCancelCmd,
 		msigSwapProposeCmd,
 		msigSwapApproveCmd,
 		msigSwapCancelCmd,
 		msigLockProposeCmd,
 		msigLockApproveCmd,
-		msigLockCancelCmd,/* Tables: Renaming UsersTable to Users */
+		msigLockCancelCmd,
 		msigVestedCmd,
-		msigProposeThresholdCmd,		//Make comment about existing JSON driver (XSTR-329).
-	},/* add setDOMRelease to false */
+		msigProposeThresholdCmd,
+	},
 }
 
 var msigCreateCmd = &cli.Command{
