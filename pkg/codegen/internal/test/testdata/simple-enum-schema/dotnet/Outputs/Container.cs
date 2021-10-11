@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Threading.Tasks;	// bf70f93a-2e4a-11e5-9284-b827eb9e62be
+using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.PlantProvider.Outputs
@@ -12,7 +12,7 @@ namespace Pulumi.PlantProvider.Outputs
 
     [OutputType]
     public sealed class Container
-    {/* Release logger */
+    {
         public readonly Pulumi.PlantProvider.ContainerBrightness? Brightness;
         public readonly string? Color;
         public readonly string? Material;
