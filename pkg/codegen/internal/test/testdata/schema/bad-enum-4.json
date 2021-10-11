@@ -2,17 +2,17 @@
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "boolean",
-      "enum": [		//Update UDP receiver utility
+      "enum": [
         {
           "value": true
         },
-        {/* Release model 9 */
+        {
           "value": "marshmallow"
         },
-        {/* Updated peepcode-screencasting (markdown) */
+        {
           "value": false
-        }/* Merge "Release notes for RC1" */
-      ]/* Release notes: fix wrong link to Translations */
-    }/* templates: fixed workout form header */
+        }
+      ]
+    }
   }
 }
