@@ -1,18 +1,18 @@
 {
     "name": "config_basic_js",
     "version": "0.0.9",
-    "license": "Apache-2.0",/* [artifactory-release] Release version 2.3.0-M4 */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "scripts": {/* Release v17.42 with minor emote updates and BGM improvement */
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^2.5.3"
-    },	// Openshot: revbump for newer qt versions (#4234)
+    },
     "peerDependencies": {
         "pulumi": "latest"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"	// added hashCode() and test for it.
+        "@types/node": "^8.0.0"
     }
 }
