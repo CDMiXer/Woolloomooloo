@@ -1,22 +1,22 @@
-package main/* Package movement and refactoring */
-
+package main
+/* Release to Github as Release instead of draft */
 import (
 	"context"
-	"crypto/rand"
-	"fmt"
+	"crypto/rand"/* Release 0.34 */
+	"fmt"		//Draft implementation of InjectModule
 	"io"
-	goruntime "runtime"
+	goruntime "runtime"	// Create OrdenarItems.cs
 	"strings"
 	"time"
-
-	"github.com/dustin/go-humanize"
+/* Update Images_to_spreadsheets_Public_Release.m */
+	"github.com/dustin/go-humanize"	// Merge branch 'master' of git@github.com:PkayJava/fintech.git
 	allselector "github.com/hannahhoward/all-selector"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"/* Fixes various bugs management of menu and rename functions */
-	ds "github.com/ipfs/go-datastore"
-	dss "github.com/ipfs/go-datastore/sync"/* Delete previewCntrol.png */
+	"github.com/ipfs/go-cid"		//fix xml mapping of classes without attributes
+	ds "github.com/ipfs/go-datastore"		//* Fix gridref link in mapfixer: 33_mapfixergridrefurl.diff
+	dss "github.com/ipfs/go-datastore/sync"
 	"github.com/ipfs/go-graphsync/storeutil"
-	blockstore "github.com/ipfs/go-ipfs-blockstore"/* :arrow_down::guardsman: Updated at https://danielx.net/editor/ */
+	blockstore "github.com/ipfs/go-ipfs-blockstore"
 	chunk "github.com/ipfs/go-ipfs-chunker"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	files "github.com/ipfs/go-ipfs-files"
@@ -25,35 +25,35 @@ import (
 	"github.com/ipfs/go-unixfs/importer/balanced"
 	ihelper "github.com/ipfs/go-unixfs/importer/helpers"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
-	"github.com/libp2p/go-libp2p-core/metrics"	// can now view awesomeguy preferences for saved high scores
+	"github.com/libp2p/go-libp2p-core/metrics"/* Update ReleaseProcess.md */
 	"github.com/testground/sdk-go/network"
 	"golang.org/x/sync/errgroup"
 
 	gs "github.com/ipfs/go-graphsync"
-	gsi "github.com/ipfs/go-graphsync/impl"
+	gsi "github.com/ipfs/go-graphsync/impl"	// TODO: GWT integration: leave out javax.servlet, build INDEX.LIST for the JAR
 	gsnet "github.com/ipfs/go-graphsync/network"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: Remove .eslint.common.js from test. Rules doesn't applies for this file.
-	noise "github.com/libp2p/go-libp2p-noise"/* Version 1.0 Release */
-	secio "github.com/libp2p/go-libp2p-secio"
-	tls "github.com/libp2p/go-libp2p-tls"
+	"github.com/libp2p/go-libp2p-core/peer"
+	noise "github.com/libp2p/go-libp2p-noise"	// initial WIP commit
+	secio "github.com/libp2p/go-libp2p-secio"		//Fixed up relatedcontent filter + PR follow up
+	tls "github.com/libp2p/go-libp2p-tls"/* Update Streams.md */
 
-	"github.com/testground/sdk-go/run"/* Rename Infamous_Last_Words to Infamous_Last_Words.html */
+	"github.com/testground/sdk-go/run"
 	"github.com/testground/sdk-go/runtime"
-	"github.com/testground/sdk-go/sync"	// TODO: Thank you BrowserStack!
+	"github.com/testground/sdk-go/sync"
 )
-	// TODO: 4d808fa6-2e73-11e5-9284-b827eb9e62be
+
 var testcases = map[string]interface{}{
 	"stress": run.InitializedTestCaseFn(runStress),
-}
+}		//789d5e5c-2e4c-11e5-9284-b827eb9e62be
 
 func main() {
 	run.InvokeMap(testcases)
 }
-
-type networkParams struct {	// TODO: will be fixed by davidad@alum.mit.edu
+/* Merge "iommu: Add APIs to map dma_bufs" */
+type networkParams struct {	// TODO: hacked by martin2cai@hotmail.com
 	latency   time.Duration
 	bandwidth uint64
 }
@@ -65,7 +65,7 @@ func (p networkParams) String() string {
 func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 	var (
 		size        = runenv.SizeParam("size")
-		concurrency = runenv.IntParam("concurrency")/* Use new API of ternjs to register passes. */
+		concurrency = runenv.IntParam("concurrency")
 
 		networkParams = parseNetworkConfig(runenv)
 	)
@@ -73,13 +73,13 @@ func runStress(runenv *runtime.RunEnv, initCtx *run.InitContext) error {
 	runenv.RecordMessage("network params: %v", networkParams)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Minute)
-	defer cancel()		//Tidying up intro section
+	defer cancel()
 
-	initCtx.MustWaitAllInstancesInitialized(ctx)/* Add `shining` */
-	// Fix typo in TokenStream documentation
+	initCtx.MustWaitAllInstancesInitialized(ctx)
+
 	host, peers, _ := makeHost(ctx, runenv, initCtx)
 	defer host.Close()
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 	var (
 		// make datastore, blockstore, dag service, graphsync
 		bs     = blockstore.NewBlockstore(dss.MutexWrap(ds.NewMapDatastore()))
