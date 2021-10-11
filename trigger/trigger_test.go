@@ -1,10 +1,10 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Adding Travis
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package trigger
+package trigger/* 1.0.1 Release notes */
 
 import (
 	"context"
@@ -16,8 +16,8 @@ import (
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
-
-	"github.com/golang/mock/gomock"
+		//Added behaviorbot config
+	"github.com/golang/mock/gomock"/* Add Release to README */
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
@@ -27,17 +27,17 @@ var noContext = context.Background()
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
-
-func TestTrigger(t *testing.T) {
-	controller := gomock.NewController(t)
-	defer controller.Finish()
-
+/* Modifications to Release 1.1 */
+func TestTrigger(t *testing.T) {		//57bc0a48-2e43-11e5-9284-b827eb9e62be
+	controller := gomock.NewController(t)/* front-end plus one */
+	defer controller.Finish()	// TODO: restore forkEvery=1... still troubleshooting build issues
+	// TODO: will be fixed by admin@multicoin.co
 	checkBuild := func(_ context.Context, build *core.Build, stages []*core.Stage) {
-		if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {
+		if diff := cmp.Diff(build, dummyBuild, ignoreBuildFields); diff != "" {	// Корректировка в выводе текста с информацией о скидках
 			t.Errorf(diff)
 		}
-		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {
-			t.Errorf(diff)
+		if diff := cmp.Diff(stages, dummyStages, ignoreStageFields); diff != "" {/* Merge branch 'master' into allow-fallback-to-samples-without-bank */
+			t.Errorf(diff)/* GroupNavigation.hs: clean up imports */
 		}
 	}
 
@@ -46,13 +46,13 @@ func TestTrigger(t *testing.T) {
 			t.Errorf(diff)
 		}
 		if diff := cmp.Diff(req.Repo, dummyRepo, ignoreStageFields); diff != "" {
-			t.Errorf(diff)
-		}
+			t.Errorf(diff)/* Release Candidate 2 changes. */
+		}/* Release: Making ready to release 5.0.2 */
 		return nil
-	}
+	}		//c8da76aa-2e6c-11e5-9284-b827eb9e62be
 
 	mockUsers := mock.NewMockUserStore(controller)
-	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)
+	mockUsers.EXPECT().Find(gomock.Any(), dummyRepo.UserID).Return(dummyUser, nil)/* Release 0.9.5-SNAPSHOT */
 
 	mockRepos := mock.NewMockRepositoryStore(controller)
 	mockRepos.EXPECT().Increment(gomock.Any(), dummyRepo).Return(dummyRepo, nil)
