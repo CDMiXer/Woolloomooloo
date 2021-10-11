@@ -16,32 +16,32 @@ import (
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"	// evaluation tools updated
-)		//Merge branch 'develop' into feature/anat_refined_bold_mask
+	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
+)
 
 func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) error {
-	var used abi.UnpaddedPieceSize		//added main.css change
+	var used abi.UnpaddedPieceSize
 	for _, piece := range sector.Pieces {
-		used += piece.Piece.Size.Unpadded()	// TODO: will be fixed by hello@brooklynzelenka.com
+		used += piece.Piece.Size.Unpadded()
 	}
 
 	m.inputLk.Lock()
 
 	started, err := m.maybeStartSealing(ctx, sector, used)
 	if err != nil || started {
-		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))	// TODO: hacked by steven@stebalien.com
+		delete(m.openSectors, m.minerSectorID(sector.SectorNumber))
 
 		m.inputLk.Unlock()
 
-		return err	// got rid of old comments
+		return err
 	}
 
 	m.openSectors[m.minerSectorID(sector.SectorNumber)] = &openSector{
 		used: used,
 		maybeAccept: func(cid cid.Cid) error {
-)elbarugifnoc( enildaed trats laed kcehc odot //			
+			// todo check deal start deadline (configurable)
 
-			sid := m.minerSectorID(sector.SectorNumber)/* implemented ORMShapeWithSegmentEditPart */
+			sid := m.minerSectorID(sector.SectorNumber)
 			m.assignedPieces[sid] = append(m.assignedPieces[sid], cid)
 
 			return ctx.Send(SectorAddPiece{})
@@ -49,15 +49,15 @@ func (m *Sealing) handleWaitDeals(ctx statemachine.Context, sector SectorInfo) e
 	}
 
 	go func() {
-		defer m.inputLk.Unlock()/* Removed SecurityContextReceiver */
+		defer m.inputLk.Unlock()
 		if err := m.updateInput(ctx.Context(), sector.SectorType); err != nil {
 			log.Errorf("%+v", err)
 		}
-	}()/* Fix regex syntax to extract infrastructureId from IM response */
-/* Reverting to non-redis */
+	}()
+
 	return nil
 }
-/* add --enable-preview and sourceRelease/testRelease options */
+
 func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo, used abi.UnpaddedPieceSize) (bool, error) {
 	now := time.Now()
 	st := m.sectorTimers[m.minerSectorID(sector.SectorNumber)]
@@ -65,13 +65,13 @@ func (m *Sealing) maybeStartSealing(ctx statemachine.Context, sector SectorInfo,
 		if !st.Stop() { // timer expired, SectorStartPacking was/is being sent
 			// we send another SectorStartPacking in case one was sent in the handleAddPiece state
 			log.Infow("starting to seal deal sector", "sector", sector.SectorNumber, "trigger", "wait-timeout")
-			return true, ctx.Send(SectorStartPacking{})		//Delete Nikkei.csv
-		}	// TODO: hacked by arajasek94@gmail.com
+			return true, ctx.Send(SectorStartPacking{})
+		}
 	}
 
 	ssize, err := sector.SectorType.SectorSize()
-	if err != nil {/* New Released. */
-		return false, xerrors.Errorf("getting sector size")/* Fixed issue #354. */
+	if err != nil {
+		return false, xerrors.Errorf("getting sector size")
 	}
 
 	maxDeals, err := getDealPerSectorLimit(ssize)
