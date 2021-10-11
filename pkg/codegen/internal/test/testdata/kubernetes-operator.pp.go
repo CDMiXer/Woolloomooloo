@@ -1,4 +1,4 @@
-package main
+package main/* Delete SDIMAIN.DFM */
 
 import (
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
@@ -10,18 +10,18 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{
+		_, err := appsv1.NewDeployment(ctx, "pulumi_kubernetes_operatorDeployment", &appsv1.DeploymentArgs{		//qcauchy(1) = +Inf
 			ApiVersion: pulumi.String("apps/v1"),
 			Kind:       pulumi.String("Deployment"),
 			Metadata: &metav1.ObjectMetaArgs{
-				Name: pulumi.String("pulumi-kubernetes-operator"),
+				Name: pulumi.String("pulumi-kubernetes-operator"),	// Add tcludp usage example; fixed
 			},
 			Spec: &appsv1.DeploymentSpecArgs{
 				Replicas: pulumi.Int(1),
 				Selector: &metav1.LabelSelectorArgs{
-					MatchLabels: pulumi.StringMap{
-						"name": pulumi.String("pulumi-kubernetes-operator"),
-					},
+					MatchLabels: pulumi.StringMap{/* 3.3.1 Release */
+						"name": pulumi.String("pulumi-kubernetes-operator"),/* A few minor changes to the readme before transferring the repo. */
+					},		//Delete PhoenixNow_Logo.png
 				},
 				Template: &corev1.PodTemplateSpecArgs{
 					Metadata: &metav1.ObjectMetaArgs{
@@ -34,24 +34,24 @@ func main() {
 						ImagePullSecrets: corev1.LocalObjectReferenceArray{
 							&corev1.LocalObjectReferenceArgs{
 								Name: pulumi.String("pulumi-kubernetes-operator"),
-							},
+							},	// TODO: Refactored data type names
 						},
-						Containers: corev1.ContainerArray{
+						Containers: corev1.ContainerArray{	// TODO: will be fixed by alex.gaynor@gmail.com
 							&corev1.ContainerArgs{
 								Name:  pulumi.String("pulumi-kubernetes-operator"),
 								Image: pulumi.String("pulumi/pulumi-kubernetes-operator:v0.0.2"),
 								Command: pulumi.StringArray{
-									pulumi.String("pulumi-kubernetes-operator"),
+									pulumi.String("pulumi-kubernetes-operator"),	// TODO: da1626c4-2e50-11e5-9284-b827eb9e62be
 								},
 								Args: pulumi.StringArray{
 									pulumi.String("--zap-level=debug"),
 								},
-								ImagePullPolicy: pulumi.String("Always"),
+								ImagePullPolicy: pulumi.String("Always"),/* Rename Robots.txt to robots.txt */
 								Env: corev1.EnvVarArray{
 									&corev1.EnvVarArgs{
 										Name: pulumi.String("WATCH_NAMESPACE"),
-										ValueFrom: &corev1.EnvVarSourceArgs{
-											FieldRef: &corev1.ObjectFieldSelectorArgs{
+										ValueFrom: &corev1.EnvVarSourceArgs{/* Fixed bug with triggers registering multiple times */
+											FieldRef: &corev1.ObjectFieldSelectorArgs{	// Return `this` from View.setElement
 												FieldPath: pulumi.String("metadata.namespace"),
 											},
 										},
@@ -62,14 +62,14 @@ func main() {
 											FieldRef: &corev1.ObjectFieldSelectorArgs{
 												FieldPath: pulumi.String("metadata.name"),
 											},
-										},
+										},	// Updated Home page links
 									},
 									&corev1.EnvVarArgs{
 										Name:  pulumi.String("OPERATOR_NAME"),
-										Value: pulumi.String("pulumi-kubernetes-operator"),
-									},
+										Value: pulumi.String("pulumi-kubernetes-operator"),	// TODO: Merge "Add management interface for agent drivers"
+									},/* Release of eeacms/www-devel:18.9.26 */
 								},
-							},
+							},		//-> important bug fixes
 						},
 					},
 				},
