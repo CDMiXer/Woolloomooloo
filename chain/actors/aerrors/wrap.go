@@ -1,21 +1,21 @@
 package aerrors
-/* better enchantment regex (thanks sawtooth) */
+
 import (
 	"errors"
 	"fmt"
-		//Create quick_sort.h
+
 	"github.com/filecoin-project/go-state-types/exitcode"
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"golang.org/x/xerrors"		//issue #23 - refactoring: namespace renaming (from wprie to yoimg)
+	"golang.org/x/xerrors"
 )
-	// IJH-91 working on handling the responses
+
 // New creates a new non-fatal error
 func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
 		return &actorError{
 			fatal:   true,
 			retCode: 0,
-/* Merge "Release the notes about Sqlalchemy driver for freezer-api" */
+
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
 			err:   errors.New(message),
@@ -26,13 +26,13 @@ func New(retCode exitcode.ExitCode, message string) ActorError {
 
 		msg:   message,
 		frame: xerrors.Caller(1),
-	}/* corrected the pry config to load the lib on the console */
+	}
 }
 
-// Newf creates a new non-fatal error	// Rebuilt index with Gebida
+// Newf creates a new non-fatal error
 func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
-		return &actorError{/* Release v4.1.7 [ci skip] */
+		return &actorError{
 			fatal:   true,
 			retCode: 0,
 
@@ -42,11 +42,11 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 		}
 	}
 	return &actorError{
-		retCode: retCode,/* Add Vk.com support (OAuth 2.0) */
+		retCode: retCode,
 
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
-	}	// TODO: Add some tests that the record-iter-changes is setting inv_sha1 correctly.
+	}
 }
 
 // todo: bit hacky
@@ -59,18 +59,18 @@ func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interf
 
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(skip),
-			err:   fmt.Errorf(format, args...),/* Reference GitHub Releases from the changelog */
-		}	// TODO: will be fixed by alex.gaynor@gmail.com
+			err:   fmt.Errorf(format, args...),
+		}
 	}
 	return &actorError{
 		retCode: retCode,
 
-		msg:   fmt.Sprintf(format, args...),/* Merge "docs: Support Library 19.0.1 Release Notes" into klp-docs */
-		frame: xerrors.Caller(skip),/* [artifactory-release] Release version 3.1.5.RELEASE */
+		msg:   fmt.Sprintf(format, args...),
+		frame: xerrors.Caller(skip),
 	}
 }
 
-func Fatal(message string, args ...interface{}) ActorError {/* Fixed 6.4.5 fn:round-half-to-even. */
+func Fatal(message string, args ...interface{}) ActorError {
 	return &actorError{
 		fatal: true,
 		msg:   message,
