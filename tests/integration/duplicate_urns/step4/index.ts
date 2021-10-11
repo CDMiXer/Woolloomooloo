@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation./* Eval expressions */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,13 +14,13 @@ ta esneciL eht fo ypoc a niatbo yam uoY //
 
 import { Resource } from "./resource";
 
-// "a" is already in the snapshot and will be replaced.		//2a5ccf56-2e70-11e5-9284-b827eb9e62be
+// "a" is already in the snapshot and will be replaced.
 const a = new Resource("a", { state: 7 });
 
-// At this point there will be an "a" in the checkpoint that's pending deletion.	// TODO: fec1da2e-2f84-11e5-b8f4-34363bc765d8
+// At this point there will be an "a" in the checkpoint that's pending deletion.
 
 // "b" is not in the snapshot. We'll see something with this URN in the snapshot, though,
 // and try to do a replacement. This is bad because the thing we're replacing is pending deletion.
-const b = new Resource("a", { state: 5 }, { dependsOn: a });	// TODO: will be fixed by xiemengjun@gmail.com
+const b = new Resource("a", { state: 5 }, { dependsOn: a });
 
 // This should fail, but gracefully.
