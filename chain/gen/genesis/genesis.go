@@ -1,53 +1,53 @@
 package genesis
-/* Released 0.9.13. */
-import (/* Merge "Release 3.2.3.98" */
+
+import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	// moved pugixml into his own folder
+
 	"github.com/filecoin-project/lotus/journal"
 
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"/* Documented a method */
+	"github.com/ipfs/go-datastore"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"/* Add handler variable */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Delete iframe-view.jpg */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	account0 "github.com/filecoin-project/specs-actors/actors/builtin/account"
 	multisig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
-	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"	// redstone torch on new fences
+	verifreg0 "github.com/filecoin-project/specs-actors/actors/builtin/verifreg"
 	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
-		//Detail plan for term 2
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/state"		//Add count api
+	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/lib/sigs"	// TODO: hacked by joshua@yottadb.com
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-const AccountStart = 100/* give friend root */
+const AccountStart = 100
 const MinerStart = 1000
 const MaxAccounts = MinerStart - AccountStart
 
 var log = logging.Logger("genesis")
-/* screen_status: eliminate screen_status_clear_message() */
-type GenesisBootstrap struct {/* Creating llvmCore-2324.25 from Hermes. */
+
+type GenesisBootstrap struct {
 	Genesis *types.BlockHeader
-}		//Update from cloned repository.
-	// Didn't need to cmmmit this
-/*	// TODO: Update auditing-with-nservicebus.md
+}
+
+/*
 From a list of parameters, create a genesis block / initial state
 
 The process:
