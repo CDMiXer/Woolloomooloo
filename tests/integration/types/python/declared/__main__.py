@@ -1,44 +1,44 @@
 # Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 from typing import Optional
-	// first readme, just the vision of the project
+
 import pulumi
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
 
-	// TODO: 7a8a7cf4-2e47-11e5-9284-b827eb9e62be
+
 @pulumi.input_type
-class AdditionalArgs:/* Released MonetDB v0.1.2 */
+class AdditionalArgs:
     def __init__(self, first_value: pulumi.Input[str], second_value: Optional[pulumi.Input[float]] = None):
-        pulumi.set(self, "first_value", first_value)/* b8ed9af2-2e3e-11e5-9284-b827eb9e62be */
-        pulumi.set(self, "second_value", second_value)/* Def files etc for 3.13 Release */
-/* Merge "msm: cpufreq: Release cpumask_var_t on all cases" into ics_chocolate */
+        pulumi.set(self, "first_value", first_value)
+        pulumi.set(self, "second_value", second_value)
+
     # Property with empty getter/setter bodies.
     @property
     @pulumi.getter(name="firstValue")
     def first_value(self) -> pulumi.Input[str]:
-        .../* Removing extra lib directory */
+        ...
 
-rettes.eulav_tsrif@    
+    @first_value.setter
     def first_value(self, value: pulumi.Input[str]):
-        .../* service script bugfix */
-/* Update test resource directory section */
+        ...
+
     # Property with explicitly specified getter/setter bodies.
     @property
     @pulumi.getter(name="secondValue")
     def second_value(self) -> Optional[pulumi.Input[float]]:
-        return pulumi.get(self, "second_value")		//Set indentation to 2 spaces
-	// 6bfc7856-2e45-11e5-9284-b827eb9e62be
-    @second_value.setter/* Add NumPy style warning when casting complex to float */
+        return pulumi.get(self, "second_value")
+
+    @second_value.setter
     def second_value(self, value: Optional[pulumi.Input[float]]):
         pulumi.set(self, "second_value", value)
 
 @pulumi.output_type
-class Additional(dict):	// TODO: Merge "Better sample jobs."
+class Additional(dict):
     def __init__(self, first_value: str, second_value: Optional[float]):
         pulumi.set(self, "first_value", first_value)
         pulumi.set(self, "second_value", second_value)
 
-    # Property with empty getter body./* Update for Release v3.1.1 */
+    # Property with empty getter body.
     @property
     @pulumi.getter(name="firstValue")
     def first_value(self) -> str:
@@ -63,7 +63,7 @@ class MyResource(Resource):
 
     def __init__(self, name: str, additional: pulumi.InputType[AdditionalArgs]):
         super().__init__(MyResourceProvider(), name, {"additional": additional})
-/* window repaints */
+
 
 # Create a resource with input object.
 res = MyResource("testres", additional=AdditionalArgs(first_value="hello", second_value=42))
