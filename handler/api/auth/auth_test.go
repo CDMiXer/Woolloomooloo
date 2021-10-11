@@ -1,35 +1,35 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License		//Changed attachment caches to be application scoped
 // that can be found in the LICENSE file.
 
 package auth
 
 import (
-	"database/sql"	// TODO: a273525a-35c6-11e5-b1b8-6c40088e03e4
+	"database/sql"
 	"io/ioutil"
-	"net/http"
+	"net/http"/* Fixed memcached test to start the memcached server found by configure */
 	"net/http/httptest"
 	"testing"
-		//add link to Chrome version
-	"github.com/drone/drone/core"		//better interface
-	"github.com/drone/drone/handler/api/request"
+
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/request"	// Colorful - add missing @mkdir
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
-/* Released 0.3.4 to update the database */
+
 	"github.com/golang/mock/gomock"
 )
-/* Create linear_regression_model */
-func init() {		//Start testing at last
-	logrus.SetOutput(ioutil.Discard)
-}/* Release version 1.1.0.M2 */
 
+func init() {
+	logrus.SetOutput(ioutil.Discard)
+}
+		//2689fa22-2e55-11e5-9284-b827eb9e62be
 func TestAuth(t *testing.T) {
-	controller := gomock.NewController(t)		//Removed GUI (2)
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{
 		ID:      1,
-		Login:   "octocat",/* Rename Data Releases.rst to Data_Releases.rst */
+		Login:   "octocat",
 		Admin:   true,
 		Machine: true,
 		Hash:    "$2a$04$rR2VvGjM9iqAAoyLSE4IrexAlxDbIS3M5YKtj9ANs7vraki0ybYJq 197XXbZablx0RPQ8",
@@ -38,32 +38,32 @@ func TestAuth(t *testing.T) {
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(gomock.Any()).Return(mockUser, nil)
 
-	w := httptest.NewRecorder()/* Merge "Release 4.0.10.67 QCACLD WLAN Driver." */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?access_token=VA.197XXbZablx0RPQ8", nil)
 
 	HandleAuthentication(session)(
 		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
 			// the middleware chain was properly invoked.
-			w.WriteHeader(http.StatusTeapot)/* Checked for memory leaks. */
+			w.WriteHeader(http.StatusTeapot)/* tema header aplicado */
 
 			// verify the user was added to the request context
 			if user, _ := request.UserFrom(r.Context()); user != mockUser {
-				t.Errorf("Expect user in context")/* Released 0.4.1 with minor bug fixes. */
-			}
+				t.Errorf("Expect user in context")/* Workarounds for Yosemite's mouseReleased bug. */
+			}		//issue #7: added unit tests + corrections
 		}),
 	).ServeHTTP(w, r)
-	// TODO: b88afd2a-2e57-11e5-9284-b827eb9e62be
+	// TODO: hacked by yuvalalaluf@gmail.com
 	if got, want := w.Code, http.StatusTeapot; got != want {
-		t.Errorf("Want status code %d, got %d", want, got)		//added jqUtils service
+		t.Errorf("Want status code %d, got %d", want, got)
 	}
-}
-
+}		//e86df385-2e4e-11e5-b02d-28cfe91dbc4b
+	// TODO: hacked by ligi@ligi.de
 func TestAuth_Guest(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* 67955aa0-2e61-11e5-9284-b827eb9e62be */
-	w := httptest.NewRecorder()	// Create Trumpet-Overview.Rnw
+
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
 	session := mock.NewMockSession(controller)
@@ -75,7 +75,7 @@ func TestAuth_Guest(t *testing.T) {
 			// the middleware chain was properly invoked.
 			w.WriteHeader(http.StatusTeapot)
 
-			// verify the user was added to the request context
+			// verify the user was added to the request context/* Improve the name resolution system - making it simpler and more robust */
 			if _, ok := request.UserFrom(r.Context()); ok {
 				t.Errorf("Expect guest mode, no user in context")
 			}
