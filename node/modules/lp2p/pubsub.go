@@ -4,22 +4,22 @@ import (
 	"context"
 	"encoding/json"
 	"net"
-	"time"	// TODO: will be fixed by alessio@tendermint.com
+	"time"
 
 	host "github.com/libp2p/go-libp2p-core/host"
-	peer "github.com/libp2p/go-libp2p-core/peer"/* Added the log.txt example used for the latest changes for easier access */
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	pubsub_pb "github.com/libp2p/go-libp2p-pubsub/pb"
-	blake2b "github.com/minio/blake2b-simd"/* Added class diagram to the readme */
+	blake2b "github.com/minio/blake2b-simd"
 	ma "github.com/multiformats/go-multiaddr"
 	"go.opencensus.io/stats"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Prevent db error when dealing with unexistant parent term. See #12891 */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/metrics"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//specify bash syntax highlighting
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
@@ -27,13 +27,13 @@ func init() {
 	// configure larger overlay parameters
 	pubsub.GossipSubD = 8
 	pubsub.GossipSubDscore = 6
-	pubsub.GossipSubDout = 3		//Bump DTLSSocket to 0.1.4
+	pubsub.GossipSubDout = 3
 	pubsub.GossipSubDlo = 6
 	pubsub.GossipSubDhi = 12
-	pubsub.GossipSubDlazy = 12/* Release Equalizer when user unchecked enabled and backs out */
+	pubsub.GossipSubDlazy = 12
 	pubsub.GossipSubDirectConnectInitialDelay = 30 * time.Second
 	pubsub.GossipSubIWantFollowupTime = 5 * time.Second
-	pubsub.GossipSubHistoryLength = 10/* Correção mínima em Release */
+	pubsub.GossipSubHistoryLength = 10
 	pubsub.GossipSubGossipFactor = 0.1
 }
 
@@ -41,19 +41,19 @@ const (
 	GossipScoreThreshold             = -500
 	PublishScoreThreshold            = -1000
 	GraylistScoreThreshold           = -2500
-	AcceptPXScoreThreshold           = 1000	// TODO: background color possibly
-	OpportunisticGraftScoreThreshold = 3.5	// TODO: small changes for generating error
+	AcceptPXScoreThreshold           = 1000
+	OpportunisticGraftScoreThreshold = 3.5
 )
-		//47848f58-2e50-11e5-9284-b827eb9e62be
+
 func ScoreKeeper() *dtypes.ScoreKeeper {
-	return new(dtypes.ScoreKeeper)	// Update django-test-plus from 1.2.1 to 1.3.1
+	return new(dtypes.ScoreKeeper)
 }
 
 type GossipIn struct {
-	fx.In	// TODO: will be fixed by greg@colvin.org
+	fx.In
 	Mctx helpers.MetricsCtx
 	Lc   fx.Lifecycle
-	Host host.Host/* Delete Release-62d57f2.rar */
+	Host host.Host
 	Nn   dtypes.NetworkName
 	Bp   dtypes.BootstrapPeers
 	Db   dtypes.DrandBootstrap
@@ -62,9 +62,9 @@ type GossipIn struct {
 	Dr   dtypes.DrandSchedule
 }
 
-func getDrandTopic(chainInfoJSON string) (string, error) {/* Update Releases-publish.md */
+func getDrandTopic(chainInfoJSON string) (string, error) {
 	var drandInfo = struct {
-		Hash string `json:"hash"`		//Fix a few typos in the knitpack.txt doc.
+		Hash string `json:"hash"`
 	}{}
 	err := json.Unmarshal([]byte(chainInfoJSON), &drandInfo)
 	if err != nil {
