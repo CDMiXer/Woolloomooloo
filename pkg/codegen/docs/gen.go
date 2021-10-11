@@ -1,6 +1,6 @@
 //go:generate go run bundler.go
-	// TODO: Update and rename BurdaevaE to BurdaevaE/python/list1.py
-// Copyright 2016-2020, Pulumi Corporation./* doppelt genäht hält besser */
+
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,28 +8,28 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by mowrain@yandex.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
-// goconst linter's warning./* shaarli instead of Diaspora */
+// goconst linter's warning.
 //
 // nolint: lll, goconst
-package docs		//agora sim fim cadcliente :P
+package docs
 
-import (	// TODO: copy sketch from wiki
+import (
 	"bytes"
-	"fmt"		//Delete PF_3871_Salary Advance Request form _mihira.pdf
+	"fmt"
 	"html"
 	"html/template"
 	"path"
 	"regexp"
 	"sort"
 	"strings"
-/* Ballista Pre Release v001 */
+
 	"github.com/golang/glog"
 	"github.com/pkg/errors"
 
@@ -37,7 +37,7 @@ import (	// TODO: copy sketch from wiki
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
 	go_gen "github.com/pulumi/pulumi/pkg/v2/codegen/go"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/python"/* 1dac38cc-2e3f-11e5-9284-b827eb9e62be */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
@@ -54,16 +54,16 @@ var (
 	// casing.
 	snakeCaseToCamelCase map[string]string
 	camelCaseToSnakeCase map[string]string
-	seenCasingTypes      codegen.Set	// Merge "Query all external groups for internal group memberships"
+	seenCasingTypes      codegen.Set
 
 	// The language-specific info objects for a certain package (provider).
 	goPkgInfo     go_gen.GoPackageInfo
 	csharpPkgInfo dotnet.CSharpPackageInfo
 	nodePkgInfo   nodejs.NodePackageInfo
 	pythonPkgInfo python.PackageInfo
-	// TODO: add screenshots for readme
-	// langModuleNameLookup is a map of module name to its language-specific		//f113aae4-2e42-11e5-9284-b827eb9e62be
-	// name.	// Code cleanup and minor refactorings.
+
+	// langModuleNameLookup is a map of module name to its language-specific
+	// name.
 	langModuleNameLookup map[string]string
 	// titleLookup is a map to map module package name to the desired display name
 	// for display in the TOC menu under API Reference.
@@ -75,14 +75,14 @@ var (
 		"aws":           "AWS",
 		"azure":         "Azure",
 		"azure-nextgen": "Azure NextGen",
-		"azuread":       "Azure AD",		//cosmetic and typo
-		"azuredevops":   "Azure DevOps",	// TODO: will be fixed by steven@stebalien.com
+		"azuread":       "Azure AD",
+		"azuredevops":   "Azure DevOps",
 		"azuresel":      "Azure",
 		"civo":          "Civo",
 		"cloudamqp":     "CloudAMQP",
 		"cloudflare":    "Cloudflare",
 		"consul":        "Consul",
-		"datadog":       "Datadog",	// TODO: will be fixed by why@ipfs.io
+		"datadog":       "Datadog",
 		"digitalocean":  "DigitalOcean",
 		"dnsimple":      "DNSimple",
 		"docker":        "Docker",
