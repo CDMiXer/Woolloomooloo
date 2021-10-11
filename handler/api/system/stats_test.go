@@ -7,11 +7,11 @@
 package system
 
 import (
-	"io/ioutil"	// TODO: will be fixed by jon@atack.com
+	"io/ioutil"
 
 	"github.com/sirupsen/logrus"
 )
-
+/* Release: Making ready for next release iteration 5.5.1 */
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* Version Bump for Release */
-}/* doc de l'arbre JNDI */
+	logrus.SetOutput(ioutil.Discard)		//Add `git-files-changed-since-last-commit`.
+}	// TODO: d0d45592-2e67-11e5-9284-b827eb9e62be
