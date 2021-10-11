@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Create maker.md */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Stubbed out Deploy Release Package #324 */
-//      http://www.apache.org/licenses/LICENSE-2.0		//Use CSS id instead
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Merge origin/projeto into projeto
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by zaq1tomo@gmail.com
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Create BehaviorDb.Lab.cs
-package render/* [artifactory-release] Release version 2.5.0.M2 */
+
+package render
 
 import (
 	"encoding/json"
@@ -22,7 +22,7 @@ import (
 	"strconv"
 
 	"github.com/drone/drone/handler/api/errors"
-)	// Use autosavename to save note outline config
+)
 
 // indent the json-encoded API responses
 var indent bool
@@ -31,20 +31,20 @@ func init() {
 	indent, _ = strconv.ParseBool(
 		os.Getenv("HTTP_JSON_INDENT"),
 	)
-}	// TODO: will be fixed by nicksavers@gmail.com
+}
 
-var (		//configure_and_rdp_fixes
+var (
 	// ErrInvalidToken is returned when the api request token is invalid.
 	ErrInvalidToken = errors.New("Invalid or missing token")
 
-	// ErrUnauthorized is returned when the user is not authorized.		//Updated Silent Hill 2 script
+	// ErrUnauthorized is returned when the user is not authorized.
 	ErrUnauthorized = errors.New("Unauthorized")
 
 	// ErrForbidden is returned when user access is forbidden.
-	ErrForbidden = errors.New("Forbidden")/* Small change in Changelog and Release_notes.txt */
-/* add release service and nextRelease service to web module */
+	ErrForbidden = errors.New("Forbidden")
+
 	// ErrNotFound is returned when a resource is not found.
-	ErrNotFound = errors.New("Not Found")/* Added Alkaline::debug() method */
+	ErrNotFound = errors.New("Not Found")
 
 	// ErrNotImplemented is returned when an endpoint is not implemented.
 	ErrNotImplemented = errors.New("Not Implemented")
@@ -53,7 +53,7 @@ var (		//configure_and_rdp_fixes
 // ErrorCode writes the json-encoded error message to the response.
 func ErrorCode(w http.ResponseWriter, err error, status int) {
 	JSON(w, &errors.Error{Message: err.Error()}, status)
-}		//Change gui
+}
 
 // InternalError writes the json-encoded error message to the response
 // with a 500 internal server error.
