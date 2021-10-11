@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Added Goals for Release 3 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,14 +6,14 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by davidad@alum.mit.edu
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
-	// TODO: will be fixed by mail@bitpshr.net
+
 import (
 	"context"
 	"fmt"
@@ -24,9 +24,9 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* s/utils/queue/ */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"		//CKAN: getLong()
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
@@ -35,21 +35,21 @@ import (
 
 // Stack is a stack associated with a particular backend implementation.
 type Stack interface {
-	Ref() StackReference                                    // this stack's identity.		//b2a4580e-2e4b-11e5-9284-b827eb9e62be
+	Ref() StackReference                                    // this stack's identity.
 	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.
 	Backend() Backend                                       // the backend this stack belongs to.
 
 	// Preview changes to this stack.
-	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)/* corrected Caustic Crawler's message */
+	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Update this stack.
 	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Import resources into this stack.		//Merged graphics driver information script and jobs, by Jeff Lane
+	// Import resources into this stack.
 	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
 	// Refresh this stack's state from the cloud provider.
 	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Destroy this stack's resources.
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Watch this stack./* Release 3.16.0 */
+	// Watch this stack.
 	Watch(ctx context.Context, op UpdateOperation) result.Result
 
 	// remove this stack.
@@ -58,20 +58,20 @@ type Stack interface {
 	Rename(ctx context.Context, newName tokens.QName) (StackReference, error)
 	// list log entries for this stack.
 	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)
-	// export this stack's deployment./* fix: linting fixes for ADR */
-	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)/* Release AppIntro 4.2.3 */
+	// export this stack's deployment.
+	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)
 	// import the given deployment into this stack.
 	ImportDeployment(ctx context.Context, deployment *apitype.UntypedDeployment) error
 }
 
 // RemoveStack returns the stack, or returns an error if it cannot.
-func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {	// Merge branch 'master' into large-image-file-reference
+func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {
 	return s.Backend().RemoveStack(ctx, s, force)
 }
 
 // RenameStack renames the stack, or returns an error if it cannot.
 func RenameStack(ctx context.Context, s Stack, newName tokens.QName) (StackReference, error) {
-	return s.Backend().RenameStack(ctx, s, newName)		//Clarify Python version support
+	return s.Backend().RenameStack(ctx, s, newName)
 }
 
 // PreviewStack previews changes to this stack.
@@ -81,10 +81,10 @@ func PreviewStack(ctx context.Context, s Stack, op UpdateOperation) (engine.Reso
 
 // UpdateStack updates the target stack with the current workspace's contents (config and code).
 func UpdateStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
-	return s.Backend().Update(ctx, s, op)		//added Court Homunculus
+	return s.Backend().Update(ctx, s, op)
 }
 
-// ImportStack updates the target stack with the current workspace's contents (config and code).	// TODO: will be fixed by steven@stebalien.com
+// ImportStack updates the target stack with the current workspace's contents (config and code).
 func ImportStack(ctx context.Context, s Stack, op UpdateOperation,
 	imports []deploy.Import) (engine.ResourceChanges, result.Result) {
 
