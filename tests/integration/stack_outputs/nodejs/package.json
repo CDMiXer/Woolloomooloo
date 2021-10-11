@@ -1,7 +1,7 @@
 {
-    "name": "stack_outputs",
+    "name": "stack_outputs",/* Merge "Allow Creation of Branches by Project Release Team" */
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^2.5.3"
     }
-}/* Released DirectiveRecord v0.1.16 */
+}
