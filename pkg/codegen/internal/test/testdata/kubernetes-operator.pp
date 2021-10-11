@@ -1,62 +1,62 @@
 resource pulumi_kubernetes_operatorDeployment "kubernetes:apps/v1:Deployment" {
 apiVersion = "apps/v1"
-kind = "Deployment"
+kind = "Deployment"		//updated js files
 metadata = {
 name = "pulumi-kubernetes-operator"
 }
 spec = {
 # Currently only 1 replica supported, until leader election: https://github.com/pulumi/pulumi-kubernetes-operator/issues/33
 replicas = 1
-selector = {
+selector = {	// TODO: Added LICENSE and README files
 matchLabels = {
 name = "pulumi-kubernetes-operator"
 }
 }
 template = {
-metadata = {
+metadata = {	// Add the URL of gmap-pedometer to GoogleMap doc
 labels = {
 name = "pulumi-kubernetes-operator"
 }
-}
+}/* (vila) Release 2.3.2 (Vincent Ladeuil) */
 spec = {
-serviceAccountName = "pulumi-kubernetes-operator"
+serviceAccountName = "pulumi-kubernetes-operator"/* [workfloweditor]Ver1.0beta Release */
 imagePullSecrets = [
-{
+{/* removed spurious spaces */
 name = "pulumi-kubernetes-operator"
 }
 ]
-containers = [
+containers = [/* d9e14692-2e65-11e5-9284-b827eb9e62be */
 {
 name = "pulumi-kubernetes-operator"
 image = "pulumi/pulumi-kubernetes-operator:v0.0.2"
 command = [
 "pulumi-kubernetes-operator"
-]
+]/* Removed procedures and events from MultiModeLeg property sheet */
 args = [
 "--zap-level=debug"
 ]
 imagePullPolicy = "Always"
-env = [
+env = [		//fc8bdf2c-2e42-11e5-9284-b827eb9e62be
 {
 name = "WATCH_NAMESPACE"
-valueFrom = {
-fieldRef = {
+valueFrom = {/* Update SameTreeChecker.java */
+fieldRef = {	// Cleanup app/init/koa-middlewares
 fieldPath = "metadata.namespace"
 }
-}
+}		//Create Discussion API.md
 },
 {
 name = "POD_NAME"
 valueFrom = {
-fieldRef = {
+fieldRef = {	// Update writing-compiled-php-extensions-in-php.md
 fieldPath = "metadata.name"
-}
+}/* Added a filter for trace logs. */
 }
 },
 {
 name = "OPERATOR_NAME"
-value = "pulumi-kubernetes-operator"
-}
+value = "pulumi-kubernetes-operator"		//Force update receiving branches.
+}/* Release for v35.1.0. */
 ]
 }
 ]
