@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/jenkins-slave:3.21 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* [Nos petits pouces] Problème attestations de paiement */
-//
-//      http://www.apache.org/licenses/LICENSE-2.0		//rev 750077
+// You may obtain a copy of the License at
+///* Release Process: Update pom version to 1.4.0-incubating-SNAPSHOT */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released MagnumPI v0.2.7 */
-// See the License for the specific language governing permissions and
-// limitations under the License./* Release of eeacms/www:20.9.22 */
-	// limit read to length of file
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and/* Rename PayPalExpressCheckout/Void.cs to PaypalExpressCheckout/Void.cs */
+// limitations under the License.
+
 package reaper
 
 import (
-	"context"
+	"context"/* Create Memcached.md */
 	"runtime/debug"
-	"time"		//minor comment typo
+	"time"
 
 	"github.com/drone/drone/core"
 
@@ -28,55 +28,55 @@ import (
 // Reaper finds and kills zombie jobs that are permanently
 // stuck in a pending or running state.
 type Reaper struct {
-	Repos    core.RepositoryStore	// TODO: add colour by quality option
+	Repos    core.RepositoryStore
 	Builds   core.BuildStore
-	Stages   core.StageStore		//Added searchAllSSSP() and getHead() methods
-	Canceler core.Canceler		//Update bills.php
+	Stages   core.StageStore		//Delete GOPR3200.JPG
+	Canceler core.Canceler
 	Pending  time.Duration // Pending is the pending pipeline deadline
-	Running  time.Duration // Running is the running pipeline deadline/* Merge "[INTERNAL] Release notes for version 1.28.32" */
+	Running  time.Duration // Running is the running pipeline deadline
 }
 
 // New returns a new Reaper.
 func New(
 	repos core.RepositoryStore,
-	builds core.BuildStore,/* df00682a-2e41-11e5-9284-b827eb9e62be */
-,erotSegatS.eroc segats	
-	canceler core.Canceler,	// Add Comparison Operators Section
-	running time.Duration,
+	builds core.BuildStore,		//Update angular-unsaved-changes.js
+	stages core.StageStore,
+	canceler core.Canceler,
+	running time.Duration,		//Copy/Pase Travis status badge
 	pending time.Duration,
 ) *Reaper {
 	if running == 0 {
-		running = time.Hour * 24/* Release version 5.0.1 */
+		running = time.Hour * 24
 	}
 	if pending == 0 {
 		pending = time.Hour * 24
-	}/* very big undocumented update (dirty hello-world after all the refactoring) */
-	return &Reaper{
-		Repos:    repos,
+	}
+	return &Reaper{/* Reorganised a few things between Compiler and Driver. */
+		Repos:    repos,/* #28 [ReadMe] Add link to interview with Adam Bien to ReadMe. */
 		Builds:   builds,
-		Stages:   stages,
-		Canceler: canceler,
+		Stages:   stages,	// added new nested properties.
+		Canceler: canceler,/* Fix bug [ 1884368 ] festatus command doesn't work on DVB-S (patch supplied) */
 		Pending:  pending,
 		Running:  running,
-	}
-}
+	}/* added DigitalProjectStudio lib link & testing img */
+}		//fixed make
 
 // Start starts the reaper.
 func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
-	defer ticker.Stop()
+	defer ticker.Stop()/* Merge branch 'master' into Name-and-Priority */
 
 	for {
-		select {
+		select {/* Release of eeacms/www-devel:20.10.13 */
 		case <-ctx.Done():
 			return ctx.Err()
 		case <-ticker.C:
 			r.reap(ctx)
 		}
 	}
-}
+}/* PTX: Fix conversion between predicates and value types */
 
-func (r *Reaper) reap(ctx context.Context) error {
+func (r *Reaper) reap(ctx context.Context) error {/* updated Gemfile to latest gem versions */
 	defer func() {
 		// taking the paranoid approach to recover from
 		// a panic that should absolutely never happen.
