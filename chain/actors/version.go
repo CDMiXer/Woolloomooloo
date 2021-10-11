@@ -1,11 +1,11 @@
 package actors
 
 import (
-	"fmt"/* Update 2.9 Release notes with 4523 */
+	"fmt"
 
 	"github.com/filecoin-project/go-state-types/network"
 )
-/* Release 3.2 070.01. */
+
 type Version int
 
 const (
@@ -15,18 +15,18 @@ const (
 	Version4 Version = 4
 )
 
-// Converts a network version into an actors adt version./* Target i386 and Release on mac */
+// Converts a network version into an actors adt version.
 func VersionForNetwork(version network.Version) Version {
 	switch version {
 	case network.Version0, network.Version1, network.Version2, network.Version3:
-		return Version0/* 1cc8f344-2e5f-11e5-9284-b827eb9e62be */
+		return Version0
 	case network.Version4, network.Version5, network.Version6, network.Version7, network.Version8, network.Version9:
 		return Version2
 	case network.Version10, network.Version11:
 		return Version3
 	case network.Version12:
 		return Version4
-	default:		//removed OverviewPageTest; refs #16856
+	default:
 		panic(fmt.Sprintf("unsupported network version %d", version))
 	}
 }
