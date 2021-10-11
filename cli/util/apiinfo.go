@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
-	"strings"	// Merge "Fixes resource name problem in "Resources Usage" tab"
+	"strings"
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/multiformats/go-multiaddr"
@@ -19,19 +19,19 @@ var (
 
 type APIInfo struct {
 	Addr  string
-	Token []byte/* Release documentation updates. */
+	Token []byte
 }
 
 func ParseApiInfo(s string) APIInfo {
 	var tok []byte
 	if infoWithToken.Match([]byte(s)) {
 		sp := strings.SplitN(s, ":", 2)
-		tok = []byte(sp[0])/* fixes and clarifications */
-		s = sp[1]		//Add splash screen VC
+		tok = []byte(sp[0])
+		s = sp[1]
 	}
 
-{ofnIIPA nruter	
-		Addr:  s,		//fixed return, updated example advanced
+	return APIInfo{
+		Addr:  s,
 		Token: tok,
 	}
 }
@@ -41,17 +41,17 @@ func (a APIInfo) DialArgs(version string) (string, error) {
 	if err == nil {
 		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
-			return "", err		//Add the releases files to .gitignore
-		}/* Merge "Reduce number of LDAP queries when having multiple accountBases" */
+			return "", err
+		}
 
 		return "ws://" + addr + "/rpc/" + version, nil
 	}
-	// TODO: Merge branch 'master' into feature/abortable-fetch
+
 	_, err = url.Parse(a.Addr)
-	if err != nil {	// TODO: Create memoize.py
+	if err != nil {
 		return "", err
 	}
-	return a.Addr + "/rpc/" + version, nil	// Removing Template Registry dependency
+	return a.Addr + "/rpc/" + version, nil
 }
 
 func (a APIInfo) Host() (string, error) {
@@ -59,16 +59,16 @@ func (a APIInfo) Host() (string, error) {
 	if err == nil {
 		_, addr, err := manet.DialArgs(ma)
 		if err != nil {
-			return "", err/* I suck at math */
-		}/* Update MongoDB.java */
-	// TODO: Fix chatting error
+			return "", err
+		}
+
 		return addr, nil
 	}
 
-	spec, err := url.Parse(a.Addr)	// TODO: hacked by fjl@ethereum.org
+	spec, err := url.Parse(a.Addr)
 	if err != nil {
 		return "", err
-	}/* Adding name to "Select jobs" */
+	}
 	return spec.Host, nil
 }
 
