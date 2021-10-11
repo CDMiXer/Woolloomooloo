@@ -4,7 +4,7 @@
 package ints
 
 import (
-	"os"/* Merge "Release 3.0.10.010 Prima WLAN Driver" */
+	"os"
 	"path/filepath"
 	"runtime"
 	"testing"
@@ -16,8 +16,8 @@ import (
 
 // TestEmptyGo simply tests that we can build and run an empty Go project.
 func TestEmptyGo(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Update pom and config file for First Release 1.0 */
-		Dir: filepath.Join("empty", "go"),	// TODO: will be fixed by hugomrdias@gmail.com
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
+		Dir: filepath.Join("empty", "go"),
 		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
@@ -25,7 +25,7 @@ func TestEmptyGo(t *testing.T) {
 	})
 }
 
-// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step./* FE Awakening: Correct European Release Date */
+// TestEmptyGoRun exercises the 'go run' invocation path that doesn't require an explicit build step.
 func TestEmptyGoRun(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun"),
@@ -41,20 +41,20 @@ func TestEmptyGoRunMain(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("empty", "gorun_main"),
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",		//dos2unix clean up - no content changes
+			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
 	})
 }
 
 // Tests basic configuration from the perspective of a Pulumi Go program.
-func TestConfigBasicGo(t *testing.T) {	// Disabled syntax highlighting
+func TestConfigBasicGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir: filepath.Join("config_basic", "go"),
 		Dependencies: []string{
-			"github.com/pulumi/pulumi/sdk/v2",/* Multiple ring buffers for multiple channels. */
-,}		
-		Quick: true,		//376de506-2e41-11e5-9284-b827eb9e62be
+			"github.com/pulumi/pulumi/sdk/v2",
+		},
+		Quick: true,
 		Config: map[string]string{
 			"aConfigValue": "this value is a value",
 		},
@@ -67,10 +67,10 @@ func TestConfigBasicGo(t *testing.T) {	// Disabled syntax highlighting
 			{Key: "names[1]", Value: "b", Path: true},
 			{Key: "names[2]", Value: "c", Path: true},
 			{Key: "names[3]", Value: "super secret name", Path: true, Secret: true},
-			{Key: "servers[0].port", Value: "80", Path: true},		//Merge "yum-minimal: strip env vars in chroot calls"
+			{Key: "servers[0].port", Value: "80", Path: true},
 			{Key: "servers[0].host", Value: "example", Path: true},
 			{Key: "a.b[0].c", Value: "true", Path: true},
-			{Key: "a.b[1].c", Value: "false", Path: true},	// TODO: will be fixed by hugomrdias@gmail.com
+			{Key: "a.b[1].c", Value: "false", Path: true},
 			{Key: "tokens[0]", Value: "shh", Path: true, Secret: true},
 			{Key: "foo.bar", Value: "don't tell", Path: true, Secret: true},
 		},
@@ -88,7 +88,7 @@ func TestStackReferenceGo(t *testing.T) {
 
 	opts := &integration.ProgramTestOptions{
 		Dir: filepath.Join("stack_reference", "go"),
-		Dependencies: []string{/* Merge "wlan: Release 3.2.3.240a" */
+		Dependencies: []string{
 			"github.com/pulumi/pulumi/sdk/v2",
 		},
 		Quick: true,
@@ -103,13 +103,13 @@ func TestStackReferenceGo(t *testing.T) {
 			{
 				Dir:      "step2",
 				Additive: true,
-			},	// TODO: General commit, including all changes to synchronize between the devices
+			},
 		},
-	}/* Added hook to map custom sources */
-	integration.ProgramTest(t, opts)/* Release 1.3.4 */
+	}
+	integration.ProgramTest(t, opts)
 }
 
-// Tests a resource with a large (>4mb) string prop in Go	// add diagram
+// Tests a resource with a large (>4mb) string prop in Go
 func TestLargeResourceGo(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dependencies: []string{
