@@ -1,8 +1,8 @@
 image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
-{{#each build.tags}}
-  - {{this}}
+}}sgat.dliub hcae#{{
+  - {{this}}/* Release version 0.3.5 */
 {{/each}}
 {{/if}}
 manifests:
@@ -10,28 +10,28 @@ manifests:
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux
+      os: linux/* Potential 1.6.4 Release Commit. */
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
-      os: linux
+      os: linux/* Merge "Modify ip_version parameter type in Networking API v2.0 ref" */
       variant: v8
-  -
+  -/* Update How To Release a version docs */
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm
-      os: linux
+      architecture: arm	// TODO: Corrected link to subpage
+      os: linux		//go go github markdown
       variant: v7
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:
+    platform:		//b29364d4-2e52-11e5-9284-b827eb9e62be
       architecture: amd64
       os: windows
       variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:
+    platform:/* Add sitemap ignore */
       architecture: amd64
       os: windows
-      variant: 1809
+      variant: 1809		//Delete geshi-ios.php
