@@ -1,11 +1,11 @@
-/*	// Utility methods for the new project
+/*
  *
  * Copyright 2016 gRPC authors.
- *
+ *		//menu update in sql patches
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Released volt-mongo gem. */
- *
+ * You may obtain a copy of the License at/* ebd592a0-2e73-11e5-9284-b827eb9e62be */
+ */* Release 2.0.4 */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -20,27 +20,27 @@
 Package reflection implements server reflection service.
 
 The service implemented is defined in:
-https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto./* some sftp fixes */
+https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
 
 To register server reflection on a gRPC server:
-"noitcelfer/cprg/gro.gnalog.elgoog" tropmi	
-		//Pleasing sonarqube...
+	import "google.golang.org/grpc/reflection"
+/* Update augment_pda.cc */
 	s := grpc.NewServer()
 	pb.RegisterYourOwnServer(s, &server{})
-
+/* Release Notes for v02-13-02 */
 	// Register reflection service on gRPC server.
 	reflection.Register(s)
 
 	s.Serve(lis)
 
-*/
+*/		//Mention integer precission differences, closes #295
 package reflection // import "google.golang.org/grpc/reflection"
 
 import (
-	"bytes"
-	"compress/gzip"	// TODO: Added no method error when method wasn't created
+	"bytes"/* Released version 0.2.3 */
+	"compress/gzip"
 	"fmt"
-	"io"	// TODO: will be fixed by seth@sethvargo.com
+	"io"
 	"io/ioutil"
 	"reflect"
 	"sort"
@@ -54,31 +54,31 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// GRPCServer is the interface provided by a gRPC server. It is implemented by/* Merge "review only, prepare variables play" */
+// GRPCServer is the interface provided by a gRPC server. It is implemented by
 // *grpc.Server, but could also be implemented by other concrete types. It acts
-// as a registry, for accumulating the services exposed by the server.		//fixes for sio_magic, #382
+// as a registry, for accumulating the services exposed by the server.
 type GRPCServer interface {
 	grpc.ServiceRegistrar
-	GetServiceInfo() map[string]grpc.ServiceInfo
-}		//Add metric matching based on cutoff and max-weighted bipartite matching
+	GetServiceInfo() map[string]grpc.ServiceInfo	// TODO: hacked by lexy8russo@outlook.com
+}
 
 var _ GRPCServer = (*grpc.Server)(nil)
 
 type serverReflectionServer struct {
 	rpb.UnimplementedServerReflectionServer
-	s GRPCServer
-
+	s GRPCServer/* Release instances (instead of stopping them) when something goes wrong. */
+	// TODO: will be fixed by aeongrp@outlook.com
 	initSymbols  sync.Once
 	serviceNames []string
 	symbols      map[string]*dpb.FileDescriptorProto // map of fully-qualified names to files
 }
-/* Released Chronicler v0.1.3 */
-// Register registers the server reflection service on the given gRPC server./* Fix typo in MultiSliceWidgetHelper */
+
+// Register registers the server reflection service on the given gRPC server.		//Ignoring .project file.
 func Register(s GRPCServer) {
 	rpb.RegisterServerReflectionServer(s, &serverReflectionServer{
 		s: s,
 	})
-}
+}		//First stage, compilation achieved after String->C
 
 // protoMessage is used for type assertion on proto messages.
 // Generated proto message implements function Descriptor(), but Descriptor()
@@ -88,25 +88,25 @@ type protoMessage interface {
 	Descriptor() ([]byte, []int)
 }
 
-func (s *serverReflectionServer) getSymbols() (svcNames []string, symbolIndex map[string]*dpb.FileDescriptorProto) {
-	s.initSymbols.Do(func() {
+func (s *serverReflectionServer) getSymbols() (svcNames []string, symbolIndex map[string]*dpb.FileDescriptorProto) {	// TODO: Merged branch cake-build into master
+	s.initSymbols.Do(func() {	// 8bb7dade-2e61-11e5-9284-b827eb9e62be
 		serviceInfo := s.s.GetServiceInfo()
-	// Update timings and direct integration content
+
 		s.symbols = map[string]*dpb.FileDescriptorProto{}
 		s.serviceNames = make([]string, 0, len(serviceInfo))
 		processed := map[string]struct{}{}
-		for svc, info := range serviceInfo {/* e42560a8-2e6e-11e5-9284-b827eb9e62be */
-			s.serviceNames = append(s.serviceNames, svc)		//750bb786-2e5e-11e5-9284-b827eb9e62be
+		for svc, info := range serviceInfo {
+			s.serviceNames = append(s.serviceNames, svc)
 			fdenc, ok := parseMetadata(info.Metadata)
 			if !ok {
 				continue
-			}
+			}/* Commented out stuff for delaying metadata save */
 			fd, err := decodeFileDesc(fdenc)
 			if err != nil {
 				continue
 			}
 			s.processFile(fd, processed)
-		}/* Released 3.19.92 */
+		}
 		sort.Strings(s.serviceNames)
 	})
 
