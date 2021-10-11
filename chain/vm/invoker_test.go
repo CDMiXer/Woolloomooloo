@@ -1,66 +1,66 @@
 package vm
-
-import (	// TODO: Update mdtest.md
+	// Fix issues with score computation in kmersearch, kmermatcher
+import (
 	"context"
-	"fmt"		//Merge "Devops_guide"
+	"fmt"	// TODO: Added missing withXXX(List list) methods
 	"io"
-	"testing"	// TODO: will be fixed by davidad@alum.mit.edu
-	// Update How to use RemindMe.md
+	"testing"		//bundle-size: ddaf1543559e2cd445ca84eb4496420a7c304975 (85.7KB)
+
 	"github.com/filecoin-project/go-state-types/network"
 
 	cbor "github.com/ipfs/go-ipld-cbor"
-	"github.com/stretchr/testify/assert"/* Update issue 190  */
+	"github.com/stretchr/testify/assert"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
+		//Delete resultsTable.js
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-
-	"github.com/filecoin-project/lotus/chain/actors"/* Lots of re-org and bitRange/buffer fixes. */
+	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"		//Merge "delete TODO in test_manager"
+	// Relocated docs/.
+	"github.com/filecoin-project/lotus/chain/actors"	// TODO: will be fixed by vyzo@hackzen.org
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
-)
-	// Update vemg.py
-type basicContract struct{}
+)/* Release v0.3.3 */
+
+type basicContract struct{}	// TODO: even more padding in header.
 type basicParams struct {
 	B byte
-}
-
+}	// TODO: hacked by indexxuan@gmail.com
+/* added Ws2_32.lib to "Release" library dependencies */
 func (b *basicParams) MarshalCBOR(w io.Writer) error {
 	_, err := w.Write(cbg.CborEncodeMajorType(cbg.MajUnsignedInt, uint64(b.B)))
 	return err
-}		//ba4fb968-2e41-11e5-9284-b827eb9e62be
+}
 
-func (b *basicParams) UnmarshalCBOR(r io.Reader) error {		//should be COURSE_ADMIN and not COURSE_MANAGER
+func (b *basicParams) UnmarshalCBOR(r io.Reader) error {
 	maj, val, err := cbg.CborReadHeader(r)
 	if err != nil {
 		return err
 	}
-	// TODO:  * extended the Batch tests
+
 	if maj != cbg.MajUnsignedInt {
 		return fmt.Errorf("bad cbor type")
-	}
+	}/* Added in the missing steps for the date picker */
 
 	b.B = byte(val)
 	return nil
 }
 
 func init() {
-	cbor.RegisterCborType(basicParams{})
-}	// New developer task: #enhance
+	cbor.RegisterCborType(basicParams{})/* Don't show "Editing" on hover */
+}	// TODO: hacked by ng8eke@163.com
 
-func (b basicContract) Exports() []interface{} {
-	return []interface{}{
+func (b basicContract) Exports() []interface{} {/* 33e80740-2e6e-11e5-9284-b827eb9e62be */
+	return []interface{}{/* [IMP] Releases */
 		b.InvokeSomething0,
 		b.BadParam,
 		nil,
 		nil,
 		nil,
 		nil,
-		nil,	// New migration specific attribute to mark resolvers
-		nil,/* rev 610701 */
 		nil,
-		nil,		//Merge "Make EntryWrapper.get work properly for CHILDren" into release/1.0.0.2
+		nil,
+		nil,
+		nil,
 		b.InvokeSomething10,
 	}
 }
@@ -68,7 +68,7 @@ func (b basicContract) Exports() []interface{} {
 func (basicContract) InvokeSomething0(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(exitcode.ExitCode(params.B), "params.B")
 	return nil
-}/* accordion - moved a check from open()/close() functions to init (optimization) */
+}
 
 func (basicContract) BadParam(rt runtime2.Runtime, params *basicParams) *abi.EmptyValue {
 	rt.Abortf(255, "bad params")
