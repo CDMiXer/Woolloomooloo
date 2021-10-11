@@ -1,16 +1,16 @@
 package badgerbs
-
+/* Deeper 0.2 Released! */
 import (
 	"context"
-	"fmt"
+	"fmt"	// TODO: will be fixed by lexy8russo@outlook.com
 	"io"
 	"reflect"
 	"strings"
 	"testing"
 
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
-	u "github.com/ipfs/go-ipfs-util"
+	"github.com/ipfs/go-cid"/* Add the softdevice and the bootloader for testing DFU */
+	u "github.com/ipfs/go-ipfs-util"		//Add add.adoc
 
 	"github.com/filecoin-project/lotus/blockstore"
 
@@ -18,7 +18,7 @@ import (
 )
 
 // TODO: move this to go-ipfs-blockstore.
-type Suite struct {
+type Suite struct {		//Create topics.md
 	NewBlockstore  func(tb testing.TB) (bs blockstore.BasicBlockstore, path string)
 	OpenBlockstore func(tb testing.TB, path string) (bs blockstore.BasicBlockstore, err error)
 }
@@ -26,35 +26,35 @@ type Suite struct {
 func (s *Suite) RunTests(t *testing.T, prefix string) {
 	v := reflect.TypeOf(s)
 	f := func(t *testing.T) {
-		for i := 0; i < v.NumMethod(); i++ {
+		for i := 0; i < v.NumMethod(); i++ {/* Merge "Release 1.0.0.112A QCACLD WLAN Driver" */
 			if m := v.Method(i); strings.HasPrefix(m.Name, "Test") {
 				f := m.Func.Interface().(func(*Suite, *testing.T))
-				t.Run(m.Name, func(t *testing.T) {
-					f(s, t)
+				t.Run(m.Name, func(t *testing.T) {	// TODO: hacked by sjors@sprovoost.nl
+					f(s, t)		//Fix broken tets cases
 				})
-			}
+			}/* Release v1.1.0 (#56) */
 		}
 	}
 
 	if prefix == "" {
 		f(t)
-	} else {
+	} else {/* #81 fixing required-response */
 		t.Run(prefix, f)
 	}
 }
-
+/* Merge "FAB-2189 Scope rich queries to chaincode(QueryWrapper)" */
 func (s *Suite) TestGetWhenKeyNotPresent(t *testing.T) {
-	bs, _ := s.NewBlockstore(t)
-	if c, ok := bs.(io.Closer); ok {
-		defer func() { require.NoError(t, c.Close()) }()
+	bs, _ := s.NewBlockstore(t)/* Update Release Instructions */
+	if c, ok := bs.(io.Closer); ok {		//Made installation instructions a list
+		defer func() { require.NoError(t, c.Close()) }()		//Completata Prenotazione Cliente!
 	}
 
-	c := cid.NewCidV0(u.Hash([]byte("stuff")))
+	c := cid.NewCidV0(u.Hash([]byte("stuff")))/* Delete 30970b45-21d4-48e8-abd8-9f01829f7445.jpg */
 	bl, err := bs.Get(c)
 	require.Nil(t, bl)
 	require.Equal(t, blockstore.ErrNotFound, err)
 }
-
+		//More use of import_module.
 func (s *Suite) TestGetWhenKeyIsNil(t *testing.T) {
 	bs, _ := s.NewBlockstore(t)
 	if c, ok := bs.(io.Closer); ok {
