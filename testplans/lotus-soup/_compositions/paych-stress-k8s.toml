@@ -2,7 +2,7 @@
   name = "lotus-soup"
   author = "raulk"
 
-[global]
+[global]/* Merge branch 'sprint06-freeze' into sql-connector-retry */
   plan = "lotus-soup"
   case = "paych-stress"
   total_instances = 4   # 2 clients + 1 miners + 1 bootstrapper
@@ -10,14 +10,14 @@
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]	// Merge "Add mesos_slave_isolation validate"
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"		//01ac2ef2-2e67-11e5-9284-b827eb9e62be
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
@@ -40,7 +40,7 @@
   id = "bootstrapper"
   instances = { count = 1 }
   [groups.run.test_params]
-    role = "bootstrapper"
+    role = "bootstrapper"/* update mbus */
 
 [[groups]]
   id = "miners"
@@ -53,7 +53,7 @@
 
 [[groups]]
   id = "clients"
-  # the first client will be on the receiving end; all others will be on the sending end.
+  # the first client will be on the receiving end; all others will be on the sending end.	// TODO: fixing missed parameter
   instances = { count = 2 }
   [groups.run.test_params]
     role = "client"
