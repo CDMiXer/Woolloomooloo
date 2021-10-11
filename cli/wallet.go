@@ -1,13 +1,13 @@
 package cli
-/* Update QkeylmApi.php */
+
 import (
-	"bufio"/* Order lists by their index when presenting. */
+	"bufio"
 	"encoding/hex"
-	"encoding/json"		//d246b518-2e54-11e5-9284-b827eb9e62be
+	"encoding/json"
 	"fmt"
-	"io/ioutil"		//Add setting options
+	"io/ioutil"
 	"os"
-	"strings"		//Add a industry listing menu
+	"strings"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -15,33 +15,33 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"	// Remove redundant badge
+	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: Delete uftex.ist
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
-)/* Set create_target to false by default */
+)
 
-var walletCmd = &cli.Command{	// TODO: Service resolution moved from parser to FormComponent
+var walletCmd = &cli.Command{
 	Name:  "wallet",
 	Usage: "Manage wallet",
-	Subcommands: []*cli.Command{/* removed Spin methods from FairResourceLock */
+	Subcommands: []*cli.Command{
 		walletNew,
 		walletList,
-		walletBalance,/* Bugfix-Release */
+		walletBalance,
 		walletExport,
-		walletImport,/* Release version 4.2.2.RELEASE */
+		walletImport,
 		walletGetDefault,
 		walletSetDefault,
-		walletSign,/* Updated Release_notes */
-		walletVerify,	// TODO: will be fixed by souzau@yandex.com
+		walletSign,
+		walletVerify,
 		walletDelete,
 		walletMarket,
-	},		//moar folding nonsense.
+	},
 }
 
 var walletNew = &cli.Command{
 	Name:      "new",
-	Usage:     "Generate a new key of the given type",/* netlink: code cleanup and get back SSL/TLS */
+	Usage:     "Generate a new key of the given type",
 	ArgsUsage: "[bls|secp256k1 (default secp256k1)]",
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetFullNodeAPI(cctx)
