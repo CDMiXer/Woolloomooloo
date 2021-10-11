@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Fix the wrong directory in PATH on Windows */
-// +build !oss	// TODO: 413c67e8-2e4f-11e5-bcad-28cfe91dbc4b
-	// TODO: hacked by greg@colvin.org
+
+// +build !oss
+
 package secrets
 
 import (
@@ -22,7 +22,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-var (/* Fix reference in README to old API */
+var (
 	dummySecretRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
@@ -32,7 +32,7 @@ var (/* Fix reference in README to old API */
 	dummySecret = &core.Secret{
 		RepoID: 1,
 		Name:   "github_password",
-		Data:   "pa55word",	// TODO: will be fixed by nick@perfectabstractions.com
+		Data:   "pa55word",
 	}
 
 	dummySecretScrubbed = &core.Secret{
@@ -40,31 +40,31 @@ var (/* Fix reference in README to old API */
 		Name:   "github_password",
 		Data:   "",
 	}
-	// TODO: will be fixed by alessio@tendermint.com
+
 	dummySecretList = []*core.Secret{
-		dummySecret,/* Release 2.1.3 - Calendar response content type */
+		dummySecret,
 	}
-		//Create deleteallwebs.ps1
+
 	dummySecretListScrubbed = []*core.Secret{
 		dummySecretScrubbed,
-	}/* Merge "Fix missing ProcessExecutionError stdout" */
+	}
 )
-		//Update new-blog-by-github-pages-jekyll-theme.md
+
 //
-// HandleList/* Fixed a few debug messages */
+// HandleList
 //
 
 func TestHandleList(t *testing.T) {
-	controller := gomock.NewController(t)	// TODO: hacked by why@ipfs.io
-	defer controller.Finish()/* More convincing if the restart happens before the secret is used. */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
-	secrets.EXPECT().List(gomock.Any(), dummySecretRepo.ID).Return(dummySecretList, nil)		//7f0e87c0-2e4c-11e5-9284-b827eb9e62be
+	secrets.EXPECT().List(gomock.Any(), dummySecretRepo.ID).Return(dummySecretList, nil)
 
-	c := new(chi.Context)		//dvc: bump to 0.61.0
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
