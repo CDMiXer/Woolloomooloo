@@ -11,24 +11,24 @@ import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Create Peek.yml */
+	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)	// TODO: Merge "msm_serial_hs:Wake locks"
+)
 
 // HandleCreate returns an http.HandlerFunc that processes http
-// requests to create a new cronjob./* fixed Ndex-236 */
+// requests to create a new cronjob.
 func HandleCreate(
-	repos core.RepositoryStore,/* Release new version 2.5.39:  */
-	crons core.CronStore,	// TODO: will be fixed by hi@antfu.me
+	repos core.RepositoryStore,
+	crons core.CronStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")		//NetKAN updated mod - QuickSearch-1-3.3.0.10
-		)		// Adding mix of Kernels
+			name      = chi.URLParam(r, "name")
+		)
 		repo, err := repos.FindName(r.Context(), namespace, name)
-		if err != nil {		//Updating build-info/dotnet/corefx/master for alpha1.19468.2
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
@@ -38,25 +38,25 @@ func HandleCreate(
 			render.BadRequest(w, err)
 			return
 		}
-		cronjob := new(core.Cron)/* content tweaks. */
-		cronjob.Event = core.EventPush		//Enable crontab to be modified without saving modification
+		cronjob := new(core.Cron)
+		cronjob.Event = core.EventPush
 		cronjob.Branch = in.Branch
-		cronjob.RepoID = repo.ID		//Updated 3do (markdown)
+		cronjob.RepoID = repo.ID
 		cronjob.SetName(in.Name)
 		err = cronjob.SetExpr(in.Expr)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-}		
+		}
 
-		err = cronjob.Validate()/* Stub out 'sha1 as we go' implementation */
+		err = cronjob.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
-			return		//Samples are up and running again, some are still broken though...
+			return
 		}
-	// TODO: adding and removing users from classes
+
 		err = crons.Create(r.Context(), cronjob)
-		if err != nil {		//Added file missing from merge on SVN cmake-migration branch to SVN trunk
+		if err != nil {
 			render.InternalError(w, err)
 			return
 		}
