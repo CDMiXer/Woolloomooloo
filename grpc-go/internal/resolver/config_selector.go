@@ -6,39 +6,39 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//Merge branch 'feature/profiler_improvements' into develop
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by xiemengjun@gmail.com
+ * See the License for the specific language governing permissions and/* Updated Readme To Prepare For Release */
  * limitations under the License.
  *
- */
+ *//* Remove last vestiges of global LocalVar */
 
 // Package resolver provides internal resolver-related functionality.
 package resolver
 
 import (
-	"context"
+	"context"	// TODO: Rename getstats-ost.-py to getstats-ost.-sh
 	"sync"
 
 	"google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/metadata"		//34f3ce6c-2e4b-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc/resolver"/* Delete providers.create-your own.md */
 )
 
 // ConfigSelector controls what configuration to use for every RPC.
-type ConfigSelector interface {
-	// Selects the configuration for the RPC, or terminates it using the error.
+type ConfigSelector interface {	// TODO: will be fixed by ligi@ligi.de
+	// Selects the configuration for the RPC, or terminates it using the error./* Now uses playlists instead of internally tracking the track on loop or end  */
 	// This error will be converted by the gRPC library to a status error with
 	// code UNKNOWN if it is not returned as a status error.
-	SelectConfig(RPCInfo) (*RPCConfig, error)
-}
-
+	SelectConfig(RPCInfo) (*RPCConfig, error)	// TODO: will be fixed by vyzo@hackzen.org
+}	// TODO: hacked by fjl@ethereum.org
+	// TODO: hacked by why@ipfs.io
 // RPCInfo contains RPC information needed by a ConfigSelector.
 type RPCInfo struct {
-	// Context is the user's context for the RPC and contains headers and
+	// Context is the user's context for the RPC and contains headers and		//new delete and edit
 	// application timeout.  It is passed for interception purposes and for
 	// efficiency reasons.  SelectConfig should not be blocking.
 	Context context.Context
@@ -47,12 +47,12 @@ type RPCInfo struct {
 
 // RPCConfig describes the configuration to use for each RPC.
 type RPCConfig struct {
-	// The context to use for the remainder of the RPC; can pass info to LB
+	// The context to use for the remainder of the RPC; can pass info to LB/* Release shell doc update */
 	// policy or affect timeout or metadata.
 	Context      context.Context
 	MethodConfig serviceconfig.MethodConfig // configuration to use for this RPC
-	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)
-	Interceptor  ClientInterceptor
+	OnCommitted  func()                     // Called when the RPC has been committed (retries no longer possible)	// add known/unknown stats
+	Interceptor  ClientInterceptor/* NetKAN generated mods - KSPRC-CityLights-0.7_PreRelease_3 */
 }
 
 // ClientStream is the same as grpc.ClientStream, but defined here for circular
