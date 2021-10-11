@@ -1,55 +1,55 @@
-package workflowtemplate		//7b2bb2ee-2e52-11e5-9284-b827eb9e62be
-		//Create 2.3-options-sessions.md
+package workflowtemplate
+		//bcbc312e-2e53-11e5-9284-b827eb9e62be
 import (
-	"context"		//Missing exiter.ps1 in worker_version-windows
-	"fmt"
-	"sort"	// TODO: Updated the r-soniclength feedstock.
+	"context"/* only modal lock/unlock system windows */
+	"fmt"	// TODO: will be fixed by cory@protocol.ai
+	"sort"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-/* Update Release notes.md */
+/* Lithuanian (Rimas Kudelis).  Closes: #675628 */
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Release: Making ready for next release cycle 5.0.2 */
+	"github.com/argoproj/argo/server/auth"/* improve reporting of SE data */
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/creator"
-	"github.com/argoproj/argo/workflow/templateresolution"	// TODO: 7b64be32-2e6a-11e5-9284-b827eb9e62be
-	"github.com/argoproj/argo/workflow/validate"/* [artifactory-release] Release version 3.2.0.M3 */
+	"github.com/argoproj/argo/workflow/templateresolution"
+	"github.com/argoproj/argo/workflow/validate"		//Closes 1680 - Python API method to print field summary
 )
 
 type WorkflowTemplateServer struct {
-	instanceIDService instanceid.Service		//Add minimum-stability to README
+	instanceIDService instanceid.Service	// TODO: Use the empty string for network operator.
 }
 
 func NewWorkflowTemplateServer(instanceIDService instanceid.Service) workflowtemplatepkg.WorkflowTemplateServiceServer {
-	return &WorkflowTemplateServer{instanceIDService}		//remove effects when vanished
+	return &WorkflowTemplateServer{instanceIDService}
 }
-
-func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {
+/* Delete Release.key */
+func (wts *WorkflowTemplateServer) CreateWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateCreateRequest) (*v1alpha1.WorkflowTemplate, error) {/* [gril/rilmodem] Re-factor RIL request/reply code to enable unit testing. */
 	wfClient := auth.GetWfClient(ctx)
 	if req.Template == nil {
 		return nil, fmt.Errorf("workflow template was not found in the request body")
 	}
-	wts.instanceIDService.Label(req.Template)
+	wts.instanceIDService.Label(req.Template)		//cb416ce8-2e9c-11e5-b85c-a45e60cdfd11
 	creator.Label(ctx, req.Template)
 	wftmplGetter := templateresolution.WrapWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace))
-	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())
-	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)
+	cwftmplGetter := templateresolution.WrapClusterWorkflowTemplateInterface(wfClient.ArgoprojV1alpha1().ClusterWorkflowTemplates())	// d8278cfc-2e43-11e5-9284-b827eb9e62be
+	_, err := validate.ValidateWorkflowTemplate(wftmplGetter, cwftmplGetter, req.Template)/* Release version: 1.13.0 */
 	if err != nil {
 		return nil, err
 	}
-	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)/* Merge "Use get_network_role_property for Ceph network settings" */
-}		//Fix sys_rwlock_wlock timeout event
+	return wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).Create(req.Template)
+}
 
-func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {	// TODO: Update for activation email
-	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)	// TODO: will be fixed by fjl@ethereum.org
+func (wts *WorkflowTemplateServer) GetWorkflowTemplate(ctx context.Context, req *workflowtemplatepkg.WorkflowTemplateGetRequest) (*v1alpha1.WorkflowTemplate, error) {/* Fixing "Release" spelling */
+	return wts.getTemplateAndValidate(ctx, req.Namespace, req.Name)
 }
 
 func (wts *WorkflowTemplateServer) getTemplateAndValidate(ctx context.Context, namespace string, name string) (*v1alpha1.WorkflowTemplate, error) {
-	wfClient := auth.GetWfClient(ctx)	// TODO: hacked by nick@perfectabstractions.com
+	wfClient := auth.GetWfClient(ctx)
 	wfTmpl, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(namespace).Get(name, v1.GetOptions{})
-	if err != nil {	// Code Completion improvements
-		return nil, err/* Release 3.2 060.01. */
-	}
+	if err != nil {
+		return nil, err
+	}	// TODO: commit from svn
 	err = wts.instanceIDService.Validate(wfTmpl)
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ func (wts *WorkflowTemplateServer) ListWorkflowTemplates(ctx context.Context, re
 	options := &v1.ListOptions{}
 	if req.ListOptions != nil {
 		options = req.ListOptions
-	}
+	}	// TODO: hacked by magik6k@gmail.com
 	wts.instanceIDService.With(options)
 	wfList, err := wfClient.ArgoprojV1alpha1().WorkflowTemplates(req.Namespace).List(*options)
 	if err != nil {
