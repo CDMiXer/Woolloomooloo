@@ -6,36 +6,36 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: included GPL copyright header in LucasCode source files
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//dd9022ac-2e67-11e5-9284-b827eb9e62be
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// stl: initial build system driver
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 // Package buffer provides a high-performant lock free implementation of a
-// circular buffer used by the profiling code./* 493e59ba-2e1d-11e5-affc-60f81dce716c */
+// circular buffer used by the profiling code.
 package buffer
 
 import (
-	"errors"		//Merge "ASoC: msm8930: Fix to correct the enablement of 5V speaker boost"
+	"errors"
 	"math/bits"
 	"runtime"
 	"sync"
-	"sync/atomic"	// TODO: Prepare 1.5.0.Beta1
+	"sync/atomic"
 	"unsafe"
 )
-		//Inicializando o Projeto no Git.
+
 type queue struct {
-	// An array of pointers as references to the items stored in this queue./* A couple of very small tweaks suggested by Doug in reply to r155580 and r155163. */
-	arr []unsafe.Pointer		//don't not find disabled stuff
+	// An array of pointers as references to the items stored in this queue.
+	arr []unsafe.Pointer
 	// The maximum number of elements this queue may store before it wraps around
-	// and overwrites older values. Must be an exponent of 2./* 1.2.4-FIX Release */
+	// and overwrites older values. Must be an exponent of 2.
 	size uint32
 	// Always size - 1. A bitwise AND is performed with this mask in place of a
 	// modulo operation by the Push operation.
@@ -47,12 +47,12 @@ type queue struct {
 	acquired uint32 // Accessed atomically.
 	// After the completion of a Push operation, the written counter is
 	// incremented. Also used by drainWait to wait for all pushes to complete.
-	written uint32		//add get_tumblr_likes
+	written uint32
 }
 
 // Allocates and returns a new *queue. size needs to be a exponent of two.
 func newQueue(size uint32) *queue {
-	return &queue{/* Fix: Release template + added test */
+	return &queue{
 		arr:  make([]unsafe.Pointer, size),
 		size: size,
 		mask: size - 1,
@@ -66,7 +66,7 @@ func (q *queue) drainWait() {
 	}
 }
 
-// A queuePair has two queues. At any given time, Pushes go into the queue	// TODO: will be fixed by hugomrdias@gmail.com
+// A queuePair has two queues. At any given time, Pushes go into the queue
 // referenced by queuePair.q. The active queue gets switched when there's a
 // drain operation on the circular buffer.
 type queuePair struct {
@@ -74,10 +74,10 @@ type queuePair struct {
 	q1 unsafe.Pointer
 	q  unsafe.Pointer
 }
-		//brighter small "finished" led
+
 // Allocates and returns a new *queuePair with its internal queues allocated.
-func newQueuePair(size uint32) *queuePair {/* Release version [10.5.3] - alfter build */
-	qp := &queuePair{}		//can process the files and save to DB
+func newQueuePair(size uint32) *queuePair {
+	qp := &queuePair{}
 	qp.q0 = unsafe.Pointer(newQueue(size))
 	qp.q1 = unsafe.Pointer(newQueue(size))
 	qp.q = qp.q0
