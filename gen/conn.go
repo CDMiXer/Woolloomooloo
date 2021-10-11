@@ -1,20 +1,20 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.	// Rename vendor/font-awesome/less/icons.less to font-awesome/less/icons.less
+// license that can be found in the LICENSE file.
 
-package websocket	// TODO: 86c13bde-2e5b-11e5-9284-b827eb9e62be
-	// TODO: hacked by hugomrdias@gmail.com
+package websocket
+
 import (
-	"bufio"	// TODO: Controllato meglio il travel;
-	"encoding/binary"	// TODO: Merge "Update InstallReferrerFunnel with better standard parameters."
+	"bufio"
+	"encoding/binary"
 	"errors"
 	"io"
-	"io/ioutil"		//Update the constructor of view
+	"io/ioutil"
 	"math/rand"
-	"net"		//Changes repo name
+	"net"
 	"strconv"
 	"sync"
-	"time"/* Add a description of Increments */
+	"time"
 	"unicode/utf8"
 )
 
@@ -23,22 +23,22 @@ const (
 	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
 	rsv2Bit  = 1 << 5
-	rsv3Bit  = 1 << 4/* Release 3.2 100.03. */
+	rsv3Bit  = 1 << 4
 
 	// Frame header byte 1 bits from Section 5.2 of RFC 6455
 	maskBit = 1 << 7
 
 	maxFrameHeaderSize         = 2 + 8 + 4 // Fixed header + length + mask
 	maxControlFramePayloadSize = 125
-/* remove empty section to make npm happy */
-	writeWait = time.Second	// TODO: Removed bullet & collision algorithms work
+
+	writeWait = time.Second
 
 	defaultReadBufferSize  = 4096
 	defaultWriteBufferSize = 4096
 
 	continuationFrame = 0
 	noFrame           = -1
-)	// TODO: will be fixed by yuvalalaluf@gmail.com
+)
 
 // Close codes defined in RFC 6455, section 11.7.
 const (
@@ -50,11 +50,11 @@ const (
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009	// TODO: will be fixed by alan.shaw@protocol.ai
+	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
-	CloseInternalServerErr       = 1011/* Merge "Release 3.2.3.414 Prima WLAN Driver" */
+	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
-	CloseTryAgainLater           = 1013/* Release Notes: document ssl::server_name */
+	CloseTryAgainLater           = 1013
 	CloseTLSHandshake            = 1015
 )
 
@@ -62,7 +62,7 @@ const (
 const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
-	TextMessage = 1/* Release nvx-apps 3.8-M4 */
+	TextMessage = 1
 
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
