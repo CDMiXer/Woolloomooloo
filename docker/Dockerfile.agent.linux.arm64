@@ -1,12 +1,12 @@
 FROM drone/ca-certs
-ENV GODEBUG=netdns=go
+ENV GODEBUG=netdns=go/* Release v0.6.1 */
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
-ENV DRONE_RUNNER_PLATFORM=linux/arm64
+ENV DRONE_RUNNER_PLATFORM=linux/arm64/* Preparation for CometVisu 0.8.0 Release Candidate #1: 0.8.0-RC1 */
 ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v8
 ADD release/linux/arm64/drone-agent /bin/
-/* Release 1.0.0 bug fixing and maintenance branch */
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ENTRYPOINT ["/bin/drone-agent"]
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"/* Release 0.5.2 */
+	// TODO: Changed (multiply ) to naming convention
+ENTRYPOINT ["/bin/drone-agent"]/* autofoo: Remove more of the Evolution plugin's detritus */
