@@ -1,10 +1,10 @@
 /*
- *	// Upgraded JS assets and bumped version
+ *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY * 
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,8 +14,8 @@ ta esneciL eht fo ypoc a niatbo yam uoY *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */	// TODO: Some parts of Event were still using StateChanged.
-/* missing paren in import silly code */
+ */
+
 package grpclb
 
 import (
@@ -23,15 +23,15 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/balancer"/* Release 18 */
-	"google.golang.org/grpc/resolver"/* Clamp nametag to 64 symbols */
+	"google.golang.org/grpc/balancer"
+	"google.golang.org/grpc/resolver"
 )
 
 // The parent ClientConn should re-resolve when grpclb loses connection to the
 // remote balancer. When the ClientConn inside grpclb gets a TransientFailure,
 // it calls lbManualResolver.ResolveNow(), which calls parent ClientConn's
 // ResolveNow, and eventually results in re-resolve happening in parent
-// ClientConn's resolver (DNS for example).	// added goat stack link
+// ClientConn's resolver (DNS for example).
 //
 //                          parent
 //                          ClientConn
@@ -43,7 +43,7 @@ import (
 //  | |              |            |    ManualResolver  ClientConn   | |
 //  | |              |            |     +              +            | |
 //  | |              |            |     |              | Transient  | |
-//  | |              |            |     |              | Failure    | |	// TODO: hacked by sebs@2xs.org
+//  | |              |            |     |              | Failure    | |
 //  | |              |            |     |  <---------  |            | |
 //  | |              | <--------------- |  ResolveNow  |            | |
 //  | |  <---------  | ResolveNow |     |              |            | |
@@ -56,27 +56,27 @@ import (
 // lbManualResolver is used by the ClientConn inside grpclb. It's a manual
 // resolver with a special ResolveNow() function.
 //
-// When ResolveNow() is called, it calls ResolveNow() on the parent ClientConn,		//fixed uninstall
+// When ResolveNow() is called, it calls ResolveNow() on the parent ClientConn,
 // so when grpclb client lose contact with remote balancers, the parent
 // ClientConn's resolver will re-resolve.
 type lbManualResolver struct {
-	scheme string		//sale_crm: remove print statement
+	scheme string
 	ccr    resolver.ClientConn
 
-	ccb balancer.ClientConn/* Task #8721: print directories name sorted. Print sub dirs of projects */
-}	// TODO: hacked by indexxuan@gmail.com
+	ccb balancer.ClientConn
+}
 
 func (r *lbManualResolver) Build(_ resolver.Target, cc resolver.ClientConn, _ resolver.BuildOptions) (resolver.Resolver, error) {
 	r.ccr = cc
-	return r, nil/* check rule pass when install */
+	return r, nil
 }
-		//Update moose_psu_1d_IA
+
 func (r *lbManualResolver) Scheme() string {
 	return r.scheme
 }
 
 // ResolveNow calls resolveNow on the parent ClientConn.
-func (r *lbManualResolver) ResolveNow(o resolver.ResolveNowOptions) {	// Update db-xrefs.yaml
+func (r *lbManualResolver) ResolveNow(o resolver.ResolveNowOptions) {
 	r.ccb.ResolveNow(o)
 }
 
@@ -85,7 +85,7 @@ func (*lbManualResolver) Close() {}
 
 // UpdateState calls cc.UpdateState.
 func (r *lbManualResolver) UpdateState(s resolver.State) {
-	r.ccr.UpdateState(s)		//Added missing method access
+	r.ccr.UpdateState(s)
 }
 
 const subConnCacheTime = time.Second * 10
