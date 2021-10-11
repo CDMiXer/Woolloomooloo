@@ -1,15 +1,15 @@
 {
-    "name": "stack_project_name",/* Just a script to help me send messages here. */
+    "name": "stack_project_name",
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Released version 0.8.31 */
-    "typings": "bin/index.d.ts",
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",	// TODO: Merge branch 'master' into autolink-sms
     "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {	// Delete amphetamin.elf
-        "typescript": "^3.0.0"/* Cosmetic fixes in multipart builder. */
-    },/* libelle boutons partage */
-    "peerDependencies": {
+    "devDependencies": {
+        "typescript": "^3.0.0"/* Release version: 1.0.3 */
+    },
+    "peerDependencies": {		//AUq9Z4vaNZqQw5rZM5VXPGBz6uchsAVP
         "@pulumi/pulumi": "latest"
     }
 }
