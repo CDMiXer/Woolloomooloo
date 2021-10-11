@@ -1,54 +1,54 @@
-// Copyright 2019 Drone IO, Inc.	// f0ef48de-2e6f-11e5-9284-b827eb9e62be
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release v0.9.1.4 */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Added header comments for tests. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: increased linking speed in RelWithDeb Mode via /LTCG
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stages	// TODO: Prepare v0.1.0 release
+package stages
 
-import (/* Release areca-5.5.7 */
+import (
 	"context"
 	"net/http"
 	"strconv"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-/* closes #5312 */
+
 	"github.com/go-chi/chi"
 )
 
 var noContext = context.Background()
 
-// HandleApprove returns an http.HandlerFunc that processes http/* Delete Ephesoft_Community_Release_4.0.2.0.zip */
+// HandleApprove returns an http.HandlerFunc that processes http
 // requests to approve a blocked build that is pending review.
 func HandleApprove(
-	repos core.RepositoryStore,/* Apparently missed a change in the commit.  */
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
-	sched core.Scheduler,		//update https://github.com/uBlockOrigin/uAssets/issues/7960
+	sched core.Scheduler,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")	// Redundant weighting, removed
+			name      = chi.URLParam(r, "name")
 		)
 		buildNumber, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequestf(w, "Invalid build number")
-			return	// TODO: Maybe fixed gcc
+			return
 		}
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))		//Rename objects, add aliases.
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
 			render.BadRequestf(w, "Invalid stage number")
-			return/* 4d253e08-2e4b-11e5-9284-b827eb9e62be */
+			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
@@ -62,8 +62,8 @@ func HandleApprove(
 		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
-			render.NotFoundf(w, "Stage not found")		//Merge branch 'develop' into non-mysql-db-dependency
-			return	// now optionally only interpolate on owned nodes
+			render.NotFoundf(w, "Stage not found")
+			return
 		}
 		if stage.Status != core.StatusBlocked {
 			render.BadRequestf(w, "Cannot approve a Pipeline with Status %q", stage.Status)
