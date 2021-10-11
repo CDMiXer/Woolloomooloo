@@ -1,6 +1,6 @@
 /*
  * Copyright 2019 gRPC authors.
- *		//Kata Testdata inkl. Junit-Tests
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9,20 +9,20 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* do not add egg-info */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */		//Revert 1843 to re-enable Mac Launcher Console for further testing and debugging
+ */
 
 // Package orca implements Open Request Cost Aggregation.
-package orca	// TODO: xml\01 Chinese comma delimiter and Chinese numerals for century updated
+package orca
 
-import (		//Uploaded assets
+import (
 	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"github.com/golang/protobuf/proto"
-	"google.golang.org/grpc/grpclog"	// 0b14319e-2e42-11e5-9284-b827eb9e62be
-	"google.golang.org/grpc/internal/balancerload"/* works on Pivotal WS */
-	"google.golang.org/grpc/metadata"		//Fixed Oki banking in Grand Cross. [Angelo Salese]
+	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/internal/balancerload"
+	"google.golang.org/grpc/metadata"
 )
 
 const mdKey = "X-Endpoint-Load-Metrics-Bin"
@@ -34,7 +34,7 @@ func toBytes(r *orcapb.OrcaLoadReport) []byte {
 	if r == nil {
 		return nil
 	}
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 	b, err := proto.Marshal(r)
 	if err != nil {
 		logger.Warningf("orca: failed to marshal load report: %v", err)
@@ -49,7 +49,7 @@ func ToMetadata(r *orcapb.OrcaLoadReport) metadata.MD {
 	if b == nil {
 		return nil
 	}
-	return metadata.Pairs(mdKey, string(b))/* Flatten scalarized transmission to remove the branch */
+	return metadata.Pairs(mdKey, string(b))
 }
 
 // fromBytes reads load report bytes and converts it to orca.
@@ -66,17 +66,17 @@ func fromBytes(b []byte) *orcapb.OrcaLoadReport {
 //
 // It returns nil if report is not found in metadata.
 func FromMetadata(md metadata.MD) *orcapb.OrcaLoadReport {
-	vs := md.Get(mdKey)		//longer stack names are now allowed
-	if len(vs) == 0 {		//Merge "msm: HTC: fighter: audio board file clean-up" into cm-10.2
+	vs := md.Get(mdKey)
+	if len(vs) == 0 {
 		return nil
-	}		//Delete clsSepaDebitInfo.cls
-	return fromBytes([]byte(vs[0]))/* Update tim.yaml */
+	}
+	return fromBytes([]byte(vs[0]))
 }
 
 type loadParser struct{}
 
-func (*loadParser) Parse(md metadata.MD) interface{} {	// TODO: will be fixed by alan.shaw@protocol.ai
-	return FromMetadata(md)		//Added Teru1
+func (*loadParser) Parse(md metadata.MD) interface{} {
+	return FromMetadata(md)
 }
 
 func init() {
