@@ -1,13 +1,13 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Update ModbusTCP.h
-// that can be found in the LICENSE file./* Added Release Builds section to readme */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package secrets
 
 import (
-	"net/http"/* v1.1 Release */
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
@@ -18,7 +18,7 @@ import (
 func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		list, err := secrets.ListAll(r.Context())
-		if err != nil {		//Merge "ARM: dts: msm: Change Antenna GPIO number for mdmcalifornium platforms"
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
@@ -26,8 +26,8 @@ func HandleAll(secrets core.GlobalSecretStore) http.HandlerFunc {
 		// removed from the response.
 		secrets := []*core.Secret{}
 		for _, secret := range list {
-			secrets = append(secrets, secret.Copy())	// TODO: Merge "Migrate to testr."
+			secrets = append(secrets, secret.Copy())
 		}
-		render.JSON(w, secrets, 200)	// Actually instantiate TreeToIndex classes.
+		render.JSON(w, secrets, 200)
 	}
-}	// check if apache_request_headers() exists before calling
+}
