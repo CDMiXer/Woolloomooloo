@@ -8,7 +8,7 @@ import (
 )
 
 type Store interface {
-	Context() context.Context/* Remove table_comb.py entirely, if it is unused! */
+	Context() context.Context
 	cbor.IpldStore
 }
 
