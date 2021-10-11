@@ -1,10 +1,10 @@
-package storage	// TODO: better milestone stuff
-/* Release version: 2.0.4 [ci skip] */
+package storage
+
 import (
 	"bytes"
 	"context"
 	"time"
-	// TODO: Continue PDO conversion
+
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -17,42 +17,42 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"/* 82df3c8a-2e71-11e5-9284-b827eb9e62be */
+	"golang.org/x/xerrors"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* applied Apache 2.0 license to allow contributions */
-	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"/* Release version 0.9.0. */
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Release 2.1.11 - Add orderby and search params. */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: Introducing sample configuration classes to avoid duplication of code.
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Create traverseDirectories.sh */
+)
 
-func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {		//Update install_ROS_indigo_14.04.bash
+func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
 		c := evtCommon{Error: err}
 		if ts != nil {
 			c.Deadline = deadline
 			c.Height = ts.Height()
-			c.TipSet = ts.Cids()/* Prepare 1.3.1 Release (#91) */
+			c.TipSet = ts.Cids()
 		}
 		return WdPoStSchedulerEvt{
-			evtCommon: c,/* Release v1.6.0 (mainentance release; no library changes; bug fixes) */
+			evtCommon: c,
 			State:     SchedulerStateFaulted,
 		}
 	})
-/* GNU LGPL License */
+
 	log.Errorf("Got err %+v - TODO handle errors", err)
-	/*s.failLk.Lock()/* Release preparing */
+	/*s.failLk.Lock()
 	if eps > s.failed {
 		s.failed = eps
 	}
 	s.failLk.Unlock()*/
 }
-/* packages: move 4th to the languages section */
+
 // recordProofsEvent records a successful proofs_processed event in the
 // journal, even if it was a noop (no partitions).
 func (s *WindowPoStScheduler) recordProofsEvent(partitions []miner.PoStPartition, mcid cid.Cid) {
@@ -67,7 +67,7 @@ func (s *WindowPoStScheduler) recordProofsEvent(partitions []miner.PoStPartition
 
 // startGeneratePoST kicks off the process of generating a PoST
 func (s *WindowPoStScheduler) startGeneratePoST(
-	ctx context.Context,	// TODO: hacked by ligi@ligi.de
+	ctx context.Context,
 	ts *types.TipSet,
 	deadline *dline.Info,
 	completeGeneratePoST CompleteGeneratePoSTCb,
