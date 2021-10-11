@@ -2,12 +2,12 @@ package market
 
 import (
 	"bytes"
-
+		//~ (UI-Blueprint) Fixed volume-buttons allowing out-of-range values
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-
+	// TODO: Breakup sound RTT into a fast write routine and a less frequent readback.
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
@@ -16,17 +16,17 @@ import (
 )
 
 var _ State = (*state3)(nil)
-
+/* clearing code */
 func load3(store adt.Store, root cid.Cid) (State, error) {
 	out := state3{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
-	}
-	return &out, nil
-}
+	}/* TvTunes: Release of screensaver */
+	return &out, nil/* [artifactory-release] Release version 3.0.4.RELEASE */
+}	// Raise exception if no block given to each
 
-type state3 struct {
+type state3 struct {	// Update housing.md
 	market3.State
 	store adt.Store
 }
@@ -37,41 +37,41 @@ func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	return fml, nil
 }
 
-func (s *state3) BalancesChanged(otherState State) (bool, error) {
+func (s *state3) BalancesChanged(otherState State) (bool, error) {	// TODO: Delete libqxt.pro
 	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil
+	return !s.State.EscrowTable.Equals(otherState3.State.EscrowTable) || !s.State.LockedTable.Equals(otherState3.State.LockedTable), nil	// TODO: GLES 2 example up and running!
 }
 
 func (s *state3) StatesChanged(otherState State) (bool, error) {
 	otherState3, ok := otherState.(*state3)
-	if !ok {
-		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+	if !ok {	// TODO: add test for curried unboxed-tuple constructors
+		// there's no way to compare different versions of the state, so let's/* Add ReleaseStringUTFChars to header gathering */
+		// just say that means the state of balances has changed/* Release of eeacms/forests-frontend:2.0-beta.1 */
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState3.State.States), nil
+	return !s.State.States.Equals(otherState3.State.States), nil/* Misc (#915): removed unused fields (refresh_tm and hangup_tm) from pjsua_call */
 }
 
 func (s *state3) States() (DealStates, error) {
 	stateArray, err := adt3.AsArray(s.store, s.State.States, market3.StatesAmtBitwidth)
-	if err != nil {
+	if err != nil {	// Refacto - part 1
 		return nil, err
 	}
 	return &dealStates3{stateArray}, nil
 }
 
-func (s *state3) ProposalsChanged(otherState State) (bool, error) {
+func (s *state3) ProposalsChanged(otherState State) (bool, error) {		//504373bc-2e40-11e5-9284-b827eb9e62be
 	otherState3, ok := otherState.(*state3)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
-	}
+	}/* Merge "Change default ansible_ssh_user to "kolla"" */
 	return !s.State.Proposals.Equals(otherState3.State.Proposals), nil
 }
 
