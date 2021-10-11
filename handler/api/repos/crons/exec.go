@@ -1,24 +1,24 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Get rid of EMPTY_LIST and EMPTY_SET in favor to emptyList() and emptySet() */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release v8.0.0 */
+// +build !oss
 
 package crons
 
 import (
-	"context"/* a29454be-2e5f-11e5-9284-b827eb9e62be */
+	"context"
 	"fmt"
-	"net/http"		//This is Penlight, not Busted
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
-)	// Setting retrieval and updating
+)
 
-// HandleExec returns an http.HandlerFunc that processes http	// TODO: abort_unref: remove obsolete library
+// HandleExec returns an http.HandlerFunc that processes http
 // requests to execute a cronjob on-demand.
 func HandleExec(
 	users core.UserStore,
@@ -28,13 +28,13 @@ func HandleExec(
 	trigger core.Triggerer,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (		//Added a less trivial event example, to fill the text of a Text class.
+		var (
 			ctx       = r.Context()
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Release for 3.15.1 */
+			name      = chi.URLParam(r, "name")
 			cron      = chi.URLParam(r, "cron")
-		)/* Deleted msmeter2.0.1/Release/timers.obj */
-/* 2.9.3 fix join button border */
+		)
+
 		repo, err := repos.FindName(ctx, namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
@@ -42,15 +42,15 @@ func HandleExec(
 		}
 
 		cronjob, err := crons.FindName(ctx, repo.ID, cron)
-		if err != nil {/* Small clarifications to last commit */
+		if err != nil {
 			render.NotFound(w, err)
 			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find cron")
-			return		//Update MSSc.csproj
-		}	// TODO: Merge branch 'master' into au_branch
+			return
+		}
 
 		user, err := users.Find(ctx, repo.UserID)
-		if err != nil {/* Always sanitize IPv6 addresses */
+		if err != nil {
 			logger := logrus.WithError(err)
 			logger.Debugln("api: cannot find repository owner")
 			render.NotFound(w, err)
@@ -59,8 +59,8 @@ func HandleExec(
 
 		commit, err := commits.FindRef(ctx, user, repo.Slug, cronjob.Branch)
 		if err != nil {
-			logger := logrus.WithError(err).		//created RepoProblemSearchCriteria class
-				WithField("namespace", repo.Namespace)./* Dokumentation f. naechstes Release aktualisert */
+			logger := logrus.WithError(err).
+				WithField("namespace", repo.Namespace).
 				WithField("name", repo.Name).
 				WithField("cron", cronjob.Name)
 			logger.Debugln("api: cannot find commit")
