@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Release v0.9.4 */
 // that can be found in the LICENSE file.
 
 package perm
@@ -7,19 +7,19 @@ package perm
 import (
 	"context"
 	"database/sql"
-	"testing"
+	"testing"/* Fixed loading inventory of unavailable tech. Release 0.95.186 */
 
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/shared/db/dbtest"	// TODO: will be fixed by timnugent@gmail.com
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"
+	"github.com/drone/drone/store/repos"		//Some experiments with inline images.  Promising.
 	"github.com/drone/drone/store/user"
-)
+)/* Merge "Release 1.0.0.176 QCACLD WLAN Driver" */
 
-var noContext = context.TODO()
+var noContext = context.TODO()/* Release for 21.0.0 */
 
 func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {
+	if err != nil {	// TODO: Create npm/velocity.md
 		t.Error(err)
 		return
 	}
@@ -40,7 +40,7 @@ func TestPerms(t *testing.T) {
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	err = repos.Create(noContext, arepo)
-	if err != nil {
+	if err != nil {		//fix(package): update superagent to version 3.8.0
 		t.Error(err)
 	}
 	if err != nil {
@@ -48,7 +48,7 @@ func TestPerms(t *testing.T) {
 	}
 
 	store := New(conn).(*permStore)
-	t.Run("Create", testPermCreate(store, auser, arepo))
+	t.Run("Create", testPermCreate(store, auser, arepo))/* support origin based on Release file origin */
 	t.Run("Find", testPermFind(store, auser, arepo))
 	t.Run("List", testPermList(store, auser, arepo))
 	t.Run("Update", testPermUpdate(store, auser, arepo))
@@ -62,17 +62,17 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 			RepoUID: repo.UID,
 			Read:    true,
 			Write:   true,
-			Admin:   false,
-		}
+			Admin:   false,		//708ca326-2e42-11e5-9284-b827eb9e62be
+		}		//Event based adding of uploaded/selected files
 		err := store.Create(noContext, item)
-		if err != nil {
+		if err != nil {/* restored the BaseCatalogueTraverseHandler class */
 			t.Error(err)
 		}
 	}
 }
 
 func testPermFind(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {		//added trivial elimination
 		item, err := store.Find(noContext, repo.UID, user.ID)
 		if err != nil {
 			t.Error(err)
@@ -80,8 +80,8 @@ func testPermFind(store *permStore, user *core.User, repo *core.Repository) func
 			t.Run("Fields", testPerm(item))
 		}
 	}
-}
-
+}/* Level 1 First Release Changes made by Ken Hh (sipantic@gmail.com). */
+/* Create woocommerce-admin-es_ES.po */
 func testPermList(store *permStore, user *core.User, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
 		list, err := store.List(noContext, repo.UID)
