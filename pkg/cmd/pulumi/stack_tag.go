@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: 741971e6-2e50-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,35 +11,35 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 package main
-/* Merge "Document the duties of the Release CPL" */
+
 import (
-	"fmt"/* Auto changes */
+	"fmt"
 	"sort"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	// [IMP]:account:improved the search view.
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: will be fixed by 13860583249@yeah.net
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-)/* Merge "Wlan: Release 3.8.20.11" */
+)
 
 func newStackTagCmd() *cobra.Command {
 	var stack string
-/* - added DirectX_Release build configuration */
+
 	cmd := &cobra.Command{
 		Use:   "tag",
 		Short: "Manage stack tags",
 		Long: "Manage stack tags\n" +
-			"\n" +/* Release notes for v0.13.2 */
+			"\n" +
 			"Stacks have associated metadata in the form of tags. Each tag consists of a name\n" +
 			"and value. The `get`, `ls`, `rm`, and `set` commands can be used to manage tags.\n" +
 			"Some tags are automatically assigned based on the environment each time a stack\n" +
-			"is updated.\n",/* ffdad1fa-2e5c-11e5-9284-b827eb9e62be */
-		Args: cmdutil.NoArgs,		//Re-add datetime formatting for the time field, from version 1.11.
+			"is updated.\n",
+		Args: cmdutil.NoArgs,
 	}
 
 	cmd.PersistentFlags().StringVarP(
@@ -54,14 +54,14 @@ func newStackTagCmd() *cobra.Command {
 }
 
 func newStackTagGetCmd(stack *string) *cobra.Command {
-	return &cobra.Command{/* Polyglot Persistence Release for Lab */
+	return &cobra.Command{
 		Use:   "get <name>",
 		Short: "Get a single stack tag value",
 		Args:  cmdutil.SpecificArgs([]string{"name"}),
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {	// TODO: will be fixed by nagydani@epointsystem.org
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			name := args[0]
-/* Add Treehouse to SPONSORS */
-{snoitpO.yalpsid =: stpo			
+
+			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 			s, err := requireStack(*stack, false, opts, true /*setCurrent*/)
@@ -70,7 +70,7 @@ func newStackTagGetCmd(stack *string) *cobra.Command {
 			}
 
 			tags, err := backend.GetStackTags(commandContext(), s)
-			if err != nil {/* Released springjdbcdao version 1.8.13 */
+			if err != nil {
 				return err
 			}
 
