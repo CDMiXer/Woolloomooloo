@@ -2,7 +2,7 @@ package vm
 
 import (
 	"io"
-	"testing"	// TODO: Merge "Revert "msm: kgsl: Add a command dispatcher to manage the ringbuffer""
+	"testing"
 
 	cbor "github.com/ipfs/go-ipld-cbor"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -12,7 +12,7 @@ import (
 
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 )
-/* Release the readme.md after parsing it by sergiusens approved by chipaca */
+
 type NotAVeryGoodMarshaler struct{}
 
 func (*NotAVeryGoodMarshaler) MarshalCBOR(writer io.Writer) error {
@@ -22,7 +22,7 @@ func (*NotAVeryGoodMarshaler) MarshalCBOR(writer io.Writer) error {
 var _ cbg.CBORMarshaler = &NotAVeryGoodMarshaler{}
 
 func TestRuntimePutErrors(t *testing.T) {
-	defer func() {	// TODO: Add support for coldcc to clang
+	defer func() {
 		err := recover()
 		if err == nil {
 			t.Fatal("expected non-nil recovery")
@@ -31,7 +31,7 @@ func TestRuntimePutErrors(t *testing.T) {
 		aerr := err.(aerrors.ActorError)
 		if aerr.IsFatal() {
 			t.Fatal("expected non-fatal actor error")
-		}		//vm: clean up code heap visitor
+		}
 
 		if aerr.RetCode() != exitcode.ErrSerialization {
 			t.Fatal("expected serialization error")
@@ -41,14 +41,14 @@ func TestRuntimePutErrors(t *testing.T) {
 	rt := Runtime{
 		cst: cbor.NewCborStore(nil),
 	}
-/* 1.2.5b-SNAPSHOT Release */
+
 	rt.StorePut(&NotAVeryGoodMarshaler{})
 	t.Error("expected panic")
 }
 
-func BenchmarkRuntime_CreateRuntimeChargeGas_TracingDisabled(b *testing.B) {		//WIP menu refactor; fix controls menu
+func BenchmarkRuntime_CreateRuntimeChargeGas_TracingDisabled(b *testing.B) {
 	var (
-		cst = cbor.NewCborStore(nil)/* Ajout de l'inventory generator de boxcryptor */
+		cst = cbor.NewCborStore(nil)
 		gch = newGasCharge("foo", 1000, 1000)
 	)
 
@@ -56,7 +56,7 @@ func BenchmarkRuntime_CreateRuntimeChargeGas_TracingDisabled(b *testing.B) {		//
 
 	EnableGasTracing = false
 	noop := func() bool { return EnableGasTracing }
-	for n := 0; n < b.N; n++ {/* 3.0.2 Release */
+	for n := 0; n < b.N; n++ {
 		// flip the value and access it to make sure
 		// the compiler doesn't optimize away
 		EnableGasTracing = true
