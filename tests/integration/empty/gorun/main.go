@@ -10,4 +10,4 @@ func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		return nil
 	})
-}
+}	// test/gtk/test_software_channels.py: fix tests
