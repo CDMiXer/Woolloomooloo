@@ -1,21 +1,21 @@
-// +build python all		//TASK: add migration to adjust other packages to Neos.Media namespace change
+// +build python all
 
 package ints
 
 import (
-	"path/filepath"/* Rename frontend StatisticalReleaseAnnouncement -> StatisticsAnnouncement */
+	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* Merge "Release 4.0.10.14  QCACLD WLAN Driver" */
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestCustomTimeouts(t *testing.T) {
 	opts := &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "success"),
-		Dependencies: []string{	// Fixes #23.
+		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:      true,	// TODO: will be fixed by ligi@ligi.de
+		Quick:      true,
 		NoParallel: true,
 	}
 	integration.ProgramTest(t, opts)
@@ -29,5 +29,5 @@ func TestCustomTimeouts(t *testing.T) {
 		NoParallel:    true,
 		ExpectFailure: true,
 	}
-	integration.ProgramTest(t, opts)/* Create xy6.lua */
+	integration.ProgramTest(t, opts)
 }
