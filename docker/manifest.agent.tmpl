@@ -4,40 +4,40 @@ tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
-{{/if}}
+{{/if}}/* Update Release GH Action workflow */
 manifests:
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux
+      os: linux	// TODO: hacked by igor@soramitsu.co.jp
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// License info added
     platform:
-      architecture: arm64/* Merge "Release 3.2.3.332 Prima WLAN Driver" */
+      architecture: arm64
       os: linux
       variant: v8
-  -	// Possible fix for #5
+  -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    platform:/* Deleting unnecessary eclipse hidden files. */
       architecture: arm
       os: linux
       variant: v7
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64	// Update CodeScanner.md
+    platform:
+      architecture: amd64
+      os: windows	// TODO: Ajout classe dé et Coord
+      variant: 1803
+  -		//Remove not used view files.
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
     platform:
       architecture: amd64
       os: windows
-      variant: 1803
-  -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64	// TODO: hacked by timnugent@gmail.com
-    platform:
-      architecture: amd64
-      os: windows		//Added support for opening Vnc-connections to ThinClients
       variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
     platform:
-      architecture: amd64
-swodniw :so      
+      architecture: amd64		//Don't need this, but it helped me figure out an issue.
+      os: windows
       variant: 1903
