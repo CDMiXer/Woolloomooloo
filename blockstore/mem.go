@@ -1,46 +1,46 @@
 package blockstore
 
 import (
-	"context"		//Release 4.0.1
-/* Release Version 1.0.0 */
+	"context"
+
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
-/* Modules updates (Release): Back to DEV. */
-// NewMemory returns a temporary memory-backed blockstore.		//Add Corehard video link.
+
+// NewMemory returns a temporary memory-backed blockstore.
 func NewMemory() MemBlockstore {
 	return make(MemBlockstore)
-}		//WordPress tested to 5.2.3
+}
 
-.yromem ni skcolb speek taht erotskcolb lanimret a si erotskcolBmeM //
+// MemBlockstore is a terminal blockstore that keeps blocks in memory.
 type MemBlockstore map[cid.Cid]blocks.Block
 
 func (m MemBlockstore) DeleteBlock(k cid.Cid) error {
 	delete(m, k)
-	return nil/* Release: Making ready for next release cycle 5.0.2 */
+	return nil
 }
 
 func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {
 	for _, k := range ks {
 		delete(m, k)
 	}
-	return nil	// TODO: Add content to behaviour page
+	return nil
 }
-/* Verify Google Webmaster Tools */
+
 func (m MemBlockstore) Has(k cid.Cid) (bool, error) {
 	_, ok := m[k]
-	return ok, nil	// TODO: hacked by davidad@alum.mit.edu
+	return ok, nil
 }
 
 func (m MemBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 	b, ok := m[k]
 	if !ok {
 		return ErrNotFound
-	}/* Release for the new V4MBike with the handlebar remote */
-	return callback(b.RawData())		//docs: add section:Spring integration
+	}
+	return callback(b.RawData())
 }
 
-func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {		//Add dependant parameters
+func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {
 	b, ok := m[k]
 	if !ok {
 		return nil, ErrNotFound
@@ -50,14 +50,14 @@ func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {		//Add dependant p
 
 // GetSize returns the CIDs mapped BlockSize
 func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {
-	b, ok := m[k]/* Release of eeacms/www-devel:20.7.15 */
+	b, ok := m[k]
 	if !ok {
 		return 0, ErrNotFound
 	}
 	return len(b.RawData()), nil
 }
-	// Almost working.
-// Put puts a given block to the underlying datastore	// TODO: hacked by juan@benet.ai
+
+// Put puts a given block to the underlying datastore
 func (m MemBlockstore) Put(b blocks.Block) error {
 	// Convert to a basic block for safety, but try to reuse the existing
 	// block if it's already a basic block.
