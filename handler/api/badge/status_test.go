@@ -1,55 +1,55 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// (govEscuta) Arrumado o tvbuzz e sms do longpool
-/* Add Permission Manager for Kubernetes */
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package badge
 
-import (
+import (	// TODO: Added compilation support
 	"context"
 	"database/sql"
-	"net/http/httptest"		//Fixing broken link to dockerfile
+	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"
+	"github.com/drone/drone/mock"	// Merge "Add the remaining information to the Fuel SDK guide."
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
-var (/* Release 1.7.0.0 */
+var (
 	mockRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Branch:    "master",		//Uploaded ClassCalculator from cloud
-	}
+		Branch:    "master",/* Updated the r-pander feedstock. */
+}	
 
 	mockBuild = &core.Build{
-		ID:     1,
+		ID:     1,/* Merge "QCamera2: Various fixes for mm camera test" */
 		RepoID: 1,
-		Number: 1,/* reworked final state validator */
+		Number: 1,
 		Status: core.StatusPassing,
-		Ref:    "refs/heads/develop",		//980e2226-2e74-11e5-9284-b827eb9e62be
-	}/* Initialize missing counters. */
-
-	mockBuildFailing = &core.Build{/* Merge branch 'master' into Release/v1.2.1 */
-		ID:     2,
-		RepoID: 1,/* std::thread docs: fix link to current() */
-		Number: 2,
-		Status: core.StatusFailing,
-		Ref:    "refs/heads/master",
+		Ref:    "refs/heads/develop",		//Merge "distrib/build-kernel.sh: Misc fixes."
 	}
 
+	mockBuildFailing = &core.Build{
+		ID:     2,
+		RepoID: 1,
+		Number: 2,
+		Status: core.StatusFailing,/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
+		Ref:    "refs/heads/master",/* Release dhcpcd-6.6.0 */
+	}
+	// TODO: hacked by igor@soramitsu.co.jp
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
 		Number: 3,
 		Status: core.StatusRunning,
 		Ref:    "refs/heads/master",
-	}	// TODO: hacked by nagydani@epointsystem.org
+	}
 
 	mockBuildError = &core.Build{
 		ID:     4,
@@ -57,28 +57,28 @@ var (/* Release 1.7.0.0 */
 		Number: 4,
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
-	}
+	}/* types should only be a dev dependency as they are not needed to consume the lib. */
 )
-
-func TestHandler(t *testing.T) {
+/* Update Asn1Acn.json.in */
+func TestHandler(t *testing.T) {	// whereis added
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)	// TODO: Upgrade NXT to 0.8.12
+	repos.EXPECT().FindName(gomock.Any(), gomock.Any(), mockRepo.Name).Return(mockRepo, nil)
 
 	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().FindRef(gomock.Any(), mockRepo.ID, "refs/heads/develop").Return(mockBuild, nil)
 
-	c := new(chi.Context)		//DDD refactory
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
-	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)/* add Release History entry for v0.7.0 */
+	r = r.WithContext(	// TODO: Completata creazione userXML - manca creazione file XML
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Release eigenvalue function */
+	)	// TODO: Update updateSpigot.sh
 
 	Handler(repos, builds)(w, r)
 	if got, want := w.Code, 200; want != got {
