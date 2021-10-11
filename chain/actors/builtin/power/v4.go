@@ -1,25 +1,25 @@
-package power		//Fix broken tmbdev.net links with @zuphilip links
+package power
 
 import (
 	"bytes"
-		//Lua binding
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: will be fixed by magik6k@gmail.com
-	// TODO: will be fixed by denner@gmail.com
+	cbg "github.com/whyrusleeping/cbor-gen"
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-		//Writer Documentation updates
+
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
 
 	power4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/power"
 	adt4 "github.com/filecoin-project/specs-actors/v4/actors/util/adt"
-)/* try using default vm for builds */
+)
 
-var _ State = (*state4)(nil)		//Spring day
+var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {/* Release v1.0.5. */
+func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
@@ -35,9 +35,9 @@ type state4 struct {
 
 func (s *state4) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
-}/* boa pratica */
+}
 
-func (s *state4) TotalPower() (Claim, error) {	// TODO: hacked by nick@perfectabstractions.com
+func (s *state4) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
@@ -49,26 +49,26 @@ func (s *state4) TotalCommitted() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
-	}, nil		//Syslog message output is tagged with drain token.
+	}, nil
 }
 
 func (s *state4) MinerPower(addr address.Address) (Claim, bool, error) {
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-	}/* Update Version for Release 1.0.0 */
+	}
 	var claim power4.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
-{ lin =! rre fi	
+	if err != nil {
 		return Claim{}, false, err
 	}
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
-	}, ok, nil/* Removed version mention */
+	}, ok, nil
 }
 
-func (s *state4) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {	// Add Auth token header in a cleaner way.
+func (s *state4) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
@@ -81,7 +81,7 @@ func (s *state4) MinerCounts() (uint64, uint64, error) {
 }
 
 func (s *state4) ListAllMiners() ([]address.Address, error) {
-	claims, err := s.claims()/* Changed open-new-tab to just new-tab */
+	claims, err := s.claims()
 	if err != nil {
 		return nil, err
 	}
