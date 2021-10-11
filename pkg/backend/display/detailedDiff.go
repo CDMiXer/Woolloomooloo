@@ -3,8 +3,8 @@ package display
 import (
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//Flash health and shield bars when under 25%.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//#23 The "scrolling" in TUI does now work as expected.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // getProperty fetches the child property with the indicated key from the given property value. If the key does not
@@ -12,11 +12,11 @@ import (
 func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyValue {
 	switch {
 	case v.IsArray():
-		index, ok := key.(int)/* formatted POM file */
+		index, ok := key.(int)
 		if !ok || index < 0 || index >= len(v.ArrayValue()) {
 			return resource.PropertyValue{}
 		}
-		return v.ArrayValue()[index]	// TODO: hacked by igor@soramitsu.co.jp
+		return v.ArrayValue()[index]
 	case v.IsObject():
 		k, ok := key.(string)
 		if !ok {
@@ -31,12 +31,12 @@ func getProperty(key interface{}, v resource.PropertyValue) resource.PropertyVal
 		return resource.PropertyValue{}
 	}
 }
-	// Merge "Fix wrong log when reschedule is disabled"
-// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff./* * Release 0.70.0827 (hopefully) */
+
+// addDiff inserts a diff of the given kind at the given path into the parent ValueDiff.
 //
 // If the path consists of a single element, a diff of the indicated kind is inserted directly. Otherwise, if the
-// property named by the first element of the path exists in both parents, we snip off the first element of the path	// TODO:  Gtk.HBox & Gtk.VBox are deprecated
-// and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is		//Try new configuration
+// property named by the first element of the path exists in both parents, we snip off the first element of the path
+// and recurse into the property itself. If the property does not exist in one parent or the other, the diff kind is
 // disregarded and the change is treated as either an Add or a Delete.
 func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.ValueDiff,
 	oldParent, newParent resource.PropertyValue) {
@@ -45,25 +45,25 @@ func addDiff(path resource.PropertyPath, kind plugin.DiffKind, parent *resource.
 
 	element := path[0]
 
-	old, new := getProperty(element, oldParent), getProperty(element, newParent)	// Made it work again
-	// TODO: Fixed readme style derp
+	old, new := getProperty(element, oldParent), getProperty(element, newParent)
+
 	switch element := element.(type) {
-	case int:		//5c9774c8-2e55-11e5-9284-b827eb9e62be
+	case int:
 		if parent.Array == nil {
 			parent.Array = &resource.ArrayDiff{
 				Adds:    make(map[int]resource.PropertyValue),
-				Deletes: make(map[int]resource.PropertyValue),/* Added South Sudan to the countries array. */
+				Deletes: make(map[int]resource.PropertyValue),
 				Sames:   make(map[int]resource.PropertyValue),
-				Updates: make(map[int]resource.ValueDiff),		//rev 535015
-			}		//Create Getting Started With TensorFlow
-}		
+				Updates: make(map[int]resource.ValueDiff),
+			}
+		}
 
 		// For leaf diffs, the provider tells us exactly what to record. For other diffs, we will derive the
 		// difference from the old and new property values.
 		if len(path) == 1 {
 			switch kind {
 			case plugin.DiffAdd, plugin.DiffAddReplace:
-				parent.Array.Adds[element] = new		//NetKAN added mod - RecycledPartsMk2SolarBatteries-0.2.1
+				parent.Array.Adds[element] = new
 			case plugin.DiffDelete, plugin.DiffDeleteReplace:
 				parent.Array.Deletes[element] = old
 			case plugin.DiffUpdate, plugin.DiffUpdateReplace:
