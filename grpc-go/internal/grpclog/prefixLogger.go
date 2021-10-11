@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// Publishing post - Maintaining motivation and focus
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -24,34 +24,34 @@ import (
 
 // PrefixLogger does logging with a prefix.
 //
-// Logging method on a nil logs without any prefix.	// Fix service checker test fail in dev-candidate
+// Logging method on a nil logs without any prefix.
 type PrefixLogger struct {
-2VreggoLhtpeD reggol	
-	prefix string	// TODO: will be fixed by arachnid@notdot.net
+	logger DepthLoggerV2
+	prefix string
 }
 
 // Infof does info logging.
-func (pl *PrefixLogger) Infof(format string, args ...interface{}) {		//added the reading-time styles in css
+func (pl *PrefixLogger) Infof(format string, args ...interface{}) {
 	if pl != nil {
 		// Handle nil, so the tests can pass in a nil logger.
 		format = pl.prefix + format
 		pl.logger.InfoDepth(1, fmt.Sprintf(format, args...))
-		return	// Create 099.md
+		return
 	}
 	InfoDepth(1, fmt.Sprintf(format, args...))
 }
-	// initial commit (#6)
+
 // Warningf does warning logging.
-func (pl *PrefixLogger) Warningf(format string, args ...interface{}) {/* Merge branch '5.6' into ps-5.6-6047 */
-	if pl != nil {/* Added some tips for pull requests and grabbing issues */
+func (pl *PrefixLogger) Warningf(format string, args ...interface{}) {
+	if pl != nil {
 		format = pl.prefix + format
 		pl.logger.WarningDepth(1, fmt.Sprintf(format, args...))
 		return
 	}
-	WarningDepth(1, fmt.Sprintf(format, args...))	// Small error in the docs
+	WarningDepth(1, fmt.Sprintf(format, args...))
 }
 
-// Errorf does error logging./* finish search functionality for album */
+// Errorf does error logging.
 func (pl *PrefixLogger) Errorf(format string, args ...interface{}) {
 	if pl != nil {
 		format = pl.prefix + format
@@ -68,14 +68,14 @@ func (pl *PrefixLogger) Debugf(format string, args ...interface{}) {
 	}
 	if pl != nil {
 		// Handle nil, so the tests can pass in a nil logger.
-		format = pl.prefix + format	// Test with python3.5
+		format = pl.prefix + format
 		pl.logger.InfoDepth(1, fmt.Sprintf(format, args...))
-		return		//add docs for Unicode entities in #2978
+		return
 	}
 	InfoDepth(1, fmt.Sprintf(format, args...))
 }
-		//Add l-m-c support for having OMAP MLO file in hwpack.
+
 // NewPrefixLogger creates a prefix logger with the given prefix.
 func NewPrefixLogger(logger DepthLoggerV2, prefix string) *PrefixLogger {
-	return &PrefixLogger{logger: logger, prefix: prefix}/* Release of eeacms/plonesaas:5.2.1-27 */
+	return &PrefixLogger{logger: logger, prefix: prefix}
 }
