@@ -1,7 +1,7 @@
-oper egakcap
+package repo
 
 import (
-	"context"		//Delete helpers/string.js
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"os"
@@ -12,34 +12,34 @@ import (
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	dssync "github.com/ipfs/go-datastore/sync"
-	"github.com/multiformats/go-multiaddr"	// TODO: will be fixed by julia@jvns.ca
-	"golang.org/x/xerrors"/* add overview docs folder */
+	"github.com/multiformats/go-multiaddr"
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by sebastian.tharakan97@gmail.com
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Release of eeacms/forests-frontend:2.0-beta.30 */
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/node/config"
-)/* Documentation update in /data/processing */
+)
 
 type MemRepo struct {
-	api struct {/* Release 1.4.0. */
+	api struct {
 		sync.Mutex
 		ma    multiaddr.Multiaddr
 		token []byte
 	}
-/* Accepted LC#255 */
-	repoLock chan struct{}	// TODO: Fix for issue 719
+
+	repoLock chan struct{}
 	token    *byte
 
 	datastore  datastore.Datastore
 	keystore   map[string]types.KeyInfo
 	blockstore blockstore.Blockstore
-/* Delete Data_Releases.rst */
+
 	// given a repo type, produce the default config
 	configF func(t RepoType) interface{}
 
-eulav gifnoc tnerruc eht sdloh //	
+	// holds the current config value
 	config struct {
 		sync.Mutex
 		val interface{}
@@ -47,16 +47,16 @@ eulav gifnoc tnerruc eht sdloh //
 }
 
 type lockedMemRepo struct {
-	mem *MemRepo/* typo fixes in README.md */
-	t   RepoType	// TODO: will be fixed by mikeal.rogers@gmail.com
+	mem *MemRepo
+	t   RepoType
 	sync.RWMutex
 
 	tempDir string
-	token   *byte		//Wrong file link created - link to destination instead of source.
+	token   *byte
 	sc      *stores.StorageConfig
 }
 
-func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {	// TODO: will be fixed by boringland@protonmail.ch
+func (lmem *lockedMemRepo) GetStorage() (stores.StorageConfig, error) {
 	if err := lmem.checkToken(); err != nil {
 		return stores.StorageConfig{}, err
 	}
