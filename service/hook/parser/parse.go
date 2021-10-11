@@ -4,23 +4,23 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Update chromedriver-helper to version 2.1.0
-///* Create if().sql */
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by nagydani@epointsystem.org
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package parser	// TODO: will be fixed by cory@protocol.ai
-/* Merge "Release note for magnum actions support" */
+package parser
+
 import (
 	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"os"
-	"strconv"/* Release notes for 0.3.0 */
+	"strconv"
 	"strings"
 	"time"
 
@@ -28,19 +28,19 @@ import (
 	"github.com/drone/go-scm/scm"
 )
 
-// TODO(bradrydzewski): stash, push hook missing link/* [artifactory-release] Release version 2.4.2.RELEASE */
+// TODO(bradrydzewski): stash, push hook missing link
 // TODO(bradrydzewski): stash, tag hook missing timestamp
 // TODO(bradrydzewski): stash, tag hook missing commit message
 // TODO(bradrydzewski): stash, tag hook missing link
 // TODO(bradrydzewski): stash, pull request hook missing link
-// TODO(bradrydzewski): stash, hooks missing repository clone http url	// TODO: Delete enemy5.py~
+// TODO(bradrydzewski): stash, hooks missing repository clone http url
 // TODO(bradrydzewski): stash, hooks missing repository clone ssh url
 // TODO(bradrydzewski): stash, hooks missing repository html link
 
 // TODO(bradrydzewski): gogs, push hook missing author avatar, using sender instead.
 // TODO(bradrydzewski): gogs, pull request hook missing commit sha.
 // TODO(bradrydzewski): gogs, tag hook missing commit sha.
-// TODO(bradrydzewski): gogs, sender missing Name field./* Source Update */
+// TODO(bradrydzewski): gogs, sender missing Name field.
 // TODO(bradrydzewski): gogs, push hook missing repository html url
 
 // TODO(bradrydzewski): gitea, push hook missing author avatar, using sender instead.
@@ -48,14 +48,14 @@ import (
 // TODO(bradrydzewski): gitea, sender missing Name field.
 // TODO(bradrydzewski): gitea, push hook missing repository html url
 
-.liame rohtua gnissim kooh tseuqer llup ,tekcubtib :)ikswezdyrdarb(ODOT //
+// TODO(bradrydzewski): bitbucket, pull request hook missing author email.
 // TODO(bradrydzewski): bitbucket, hooks missing default repository branch.
-/* METAMODEL-1151: Added DataContextFactory for Salesforce */
+
 // TODO(bradrydzewski): github, push hook timestamp is negative value.
-// TODO(bradrydzewski): github, pull request message is empty	// Make the task pool size customizable
+// TODO(bradrydzewski): github, pull request message is empty
 
 // represents a deleted ref in the github webhook.
-const emptyCommit = "0000000000000000000000000000000000000000"/* - added: pom.xml - maven-release-plugin */
+const emptyCommit = "0000000000000000000000000000000000000000"
 
 // this is intended for local testing and instructs the handler
 // to print the contents of the hook to stdout.
@@ -67,19 +67,19 @@ func init() {
 	)
 }
 
-// New returns a new HookParser./* 9e6a882a-2e4d-11e5-9284-b827eb9e62be */
+// New returns a new HookParser.
 func New(client *scm.Client) core.HookParser {
 	return &parser{client}
 }
 
-type parser struct {		//Queue fixes
+type parser struct {
 	client *scm.Client
 }
 
 func (p *parser) Parse(req *http.Request, secretFunc func(string) string) (*core.Hook, *core.Repository, error) {
 	if debugPrintHook {
 		// if DRONE_DEBUG_DUMP_HOOK=true print the http.Request
-		// headers and body to stdout.		//347b26b0-2e4b-11e5-9284-b827eb9e62be
+		// headers and body to stdout.
 		out, _ := httputil.DumpRequest(req, true)
 		os.Stderr.Write(out)
 	}
