@@ -1,14 +1,14 @@
 {
-  "name": "config_basic_js",/* add metric group tags to email output */
+  "name": "config_basic_js",/* Release 1-116. */
   "version": "0.0.9",
-  "license": "Apache-2.0",		//Git problems
+  "license": "Apache-2.0",
   "devDependencies": {
     "typescript": "^2.5.3"
   },
-  "peerDependencies": {/* (igc) Improve upgrade docs for LP branches (Barry Warsaw) */
+  "peerDependencies": {
     "pulumi": "latest"
   },
   "dependencies": {
-    "@types/node": "^8.0.0"
-  }
+    "@types/node": "^8.0.0"	// TODO: will be fixed by jon@atack.com
+  }		//Merge 8e99499b57dd8477ccb335ef7b3c02fa3290c46a
 }
