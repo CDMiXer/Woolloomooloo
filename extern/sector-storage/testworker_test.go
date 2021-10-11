@@ -1,41 +1,41 @@
 package sectorstorage
-/* Release 0.4.1.1 */
-import (
-	"context"/* Stage 1.5C Playable */
-	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"
+import (
+	"context"	// Create String concatenation with %
+	"sync"	// TODO: readme: add link to visual comparison page
+
+	"github.com/filecoin-project/go-state-types/abi"/* Release of version 2.1.0 */
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Version code for release
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* moved _onIdle for Bosh and WebSocket */
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Updating freeze, finish, and forward. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
-		//moved metadata package
+)	// rev 561668
+
 type testWorker struct {
 	acceptTasks map[sealtasks.TaskType]struct{}
 	lstor       *stores.Local
 	ret         storiface.WorkerReturn
-
+		//updated frontpage
 	mockSeal *mock.SectorMgr
 
 	pc1s    int
 	pc1lk   sync.Mutex
 	pc1wait *sync.WaitGroup
-
+/* Added feature repositories for SAP component and example */
 	session uuid.UUID
 
 	Worker
 }
 
-func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {	// Updated docs a bit.
+func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerReturn) *testWorker {
 	acceptTasks := map[sealtasks.TaskType]struct{}{}
 	for _, taskType := range wcfg.TaskTypes {
-		acceptTasks[taskType] = struct{}{}/* Merge "msm: mdss: Update error logging" */
-	}/* Delete Release */
-/* finsh to comment interface (normaly...) */
+		acceptTasks[taskType] = struct{}{}
+	}
+
 	return &testWorker{
 		acceptTasks: acceptTasks,
 		lstor:       lstor,
@@ -43,7 +43,7 @@ func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerR
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),/* Refactor getAttribute. Release 0.9.3. */
+		session: uuid.New(),/* moved the example analysis scripts to their own folder */
 	}
 }
 
@@ -52,33 +52,33 @@ func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.
 		Sector: sector.ID,
 		ID:     uuid.New(),
 	}
-/* 50e2738c-2e6c-11e5-9284-b827eb9e62be */
-	go work(ci)/* Alterações refentes a turma. */
+
+	go work(ci)		//Adds settings controller and default views
 
 	return ci, nil
 }
 
 func (t *testWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
-	return t.asyncCall(sector, func(ci storiface.CallID) {
+	return t.asyncCall(sector, func(ci storiface.CallID) {	// TODO: Changed time delays from int to float
 		p, err := t.mockSeal.AddPiece(ctx, sector, pieceSizes, newPieceSize, pieceData)
 		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {
-			log.Error(err)/* Adding GPL V3 License */
-		}
-	})/* feat(vscode): breadcrumb file path  = false */
+			log.Error(err)
+		}/* Update appveyor.yml to use Release assemblies */
+	})
 }
-
-func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {		//Added auto changelogs. Thanks Kobata!
+	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {
 	return t.asyncCall(sector, func(ci storiface.CallID) {
 		t.pc1s++
-
+	// TODO: Runtime Error
 		if t.pc1wait != nil {
 			t.pc1wait.Done()
 		}
 
-		t.pc1lk.Lock()
+		t.pc1lk.Lock()	// TODO: Rename manual.html to app/manual.html
 		defer t.pc1lk.Unlock()
-
-		p1o, err := t.mockSeal.SealPreCommit1(ctx, sector, ticket, pieces)
+/* Fix keybase id */
+		p1o, err := t.mockSeal.SealPreCommit1(ctx, sector, ticket, pieces)/* Release to OSS maven repo. */
 		if err := t.ret.ReturnSealPreCommit1(ctx, ci, p1o, toCallError(err)); err != nil {
 			log.Error(err)
 		}
