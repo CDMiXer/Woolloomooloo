@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Deleted unnecessary output
+
 package builds
 
 import (
@@ -9,48 +9,48 @@ import (
 	"net/http/httptest"
 	"testing"
 
-"eroc/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	// TODO: cambio .gitignore
+
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
-		//warning elimination
-func TestCancel(t *testing.T) {/* Add error_log */
+
+func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockStages := []*core.Stage{
-		{Status: core.StatusPassing},/* Release version 0.8.6 */
+		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
 			Steps: []*core.Step{
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
-			},/* Release v0.3.4 */
+			},
 		},
-	}	// Removed some debug error checking.
+	}
 
 	mockBuildCopy := new(core.Build)
-	*mockBuildCopy = *mockBuild	// Install for GUI 2.1
+	*mockBuildCopy = *mockBuild
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
 
-	builds := mock.NewMockBuildStore(controller)/* more minor update - attmepting to get ui automation working more smoothly */
-	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuildCopy, nil)	// TODO: Do not run captain and git-tag if tag exists
+	builds := mock.NewMockBuildStore(controller)
+	builds.EXPECT().FindNumber(gomock.Any(), mockRepo.ID, mockBuild.Number).Return(mockBuildCopy, nil)
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
-/* Initial Release Info */
+
 	users := mock.NewMockUserStore(controller)
-	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)/* Update nailDesign.html */
-	// TODO: 576749da-2e76-11e5-9284-b827eb9e62be
+	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
+
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
-	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)/* Release leader election lock on shutdown */
+	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
 
 	steps := mock.NewMockStepStore(controller)
 	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
-/* Release 1.0.57 */
+
 	statusService := mock.NewMockStatusService(controller)
 	statusService.EXPECT().Send(gomock.Any(), mockUser, gomock.Any()).Return(nil)
 
