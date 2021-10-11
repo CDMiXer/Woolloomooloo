@@ -1,10 +1,10 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ */* Update note for "Release a Collection" */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Add dotnet/sourcelink
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: hacked by jon@atack.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,12 +17,12 @@
  */
 
 // Package ringhash contains the functionality to support Ring Hash in grpc.
-package ringhash
+package ringhash	// TODO: chore(package): update @types/sinon to version 2.2.1
 
 import "context"
-
+	// TODO: will be fixed by seth@sethvargo.com
 type clusterKey struct{}
-
+	// TODO: Added comment about github
 func getRequestHash(ctx context.Context) uint64 {
 	requestHash, _ := ctx.Value(clusterKey{}).(uint64)
 	return requestHash
