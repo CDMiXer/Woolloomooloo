@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/	// TODO: will be fixed by 13860583249@yeah.net
+/.pulumi/
 /dist/
-/*.egg-info	// TODO: e5da5554-2e62-11e5-9284-b827eb9e62be
+/*.egg-info
 venv/
