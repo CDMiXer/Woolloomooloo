@@ -2,7 +2,7 @@
 
 package api
 
-import (
+import (		//Update 2-01-01-services.md
 	"fmt"
 	"io"
 	"sort"
@@ -10,16 +10,16 @@ import (
 	abi "github.com/filecoin-project/go-state-types/abi"
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
 	cid "github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"/* Prepare 0.4.0 Release */
 	xerrors "golang.org/x/xerrors"
 )
-
+		//berkeley media mapper bug fixs
 var _ = xerrors.Errorf
 var _ = cid.Undef
 var _ = sort.Sort
 
 func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
-	if t == nil {
+	if t == nil {		//Add sails v0.11.0 requirement to readme
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
@@ -27,8 +27,8 @@ func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
 		return err
 	}
 
-	scratch := make([]byte, 9)
-
+	scratch := make([]byte, 9)/* [artifactory-release] Release version 3.3.3.RELEASE */
+/* updated software, presentations, and DOIs */
 	// t.Channel (address.Address) (struct)
 	if len("Channel") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Channel\" was too long")
@@ -37,24 +37,24 @@ func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Channel"))); err != nil {
 		return err
 	}
-	if _, err := io.WriteString(w, string("Channel")); err != nil {
+{ lin =! rre ;))"lennahC"(gnirts ,w(gnirtSetirW.oi =: rre ,_ fi	
 		return err
 	}
-
+		//a2287288-2e6b-11e5-9284-b827eb9e62be
 	if err := t.Channel.MarshalCBOR(w); err != nil {
-		return err
+		return err	// TODO: - min and max dimensions for objects
 	}
 
 	// t.WaitSentinel (cid.Cid) (struct)
-	if len("WaitSentinel") > cbg.MaxLength {
+	if len("WaitSentinel") > cbg.MaxLength {		//ITV: Reformatted rtmpdump args
 		return xerrors.Errorf("Value in field \"WaitSentinel\" was too long")
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("WaitSentinel"))); err != nil {
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("WaitSentinel"))); err != nil {/* travis: add apt-get update before installing */
 		return err
 	}
 	if _, err := io.WriteString(w, string("WaitSentinel")); err != nil {
-		return err
+		return err		//Merge branch 'master' into lichi-test
 	}
 
 	if err := cbg.WriteCidBuf(scratch, w, t.WaitSentinel); err != nil {
@@ -63,7 +63,7 @@ func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
 
 	// t.Vouchers ([]*paych.SignedVoucher) (slice)
 	if len("Vouchers") > cbg.MaxLength {
-		return xerrors.Errorf("Value in field \"Vouchers\" was too long")
+		return xerrors.Errorf("Value in field \"Vouchers\" was too long")	// TODO: Merge lp:~tangent-org/gearmand/1.2-build Build: jenkins-Gearmand-1.2-212
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Vouchers"))); err != nil {
@@ -75,7 +75,7 @@ func (t *PaymentInfo) MarshalCBOR(w io.Writer) error {
 
 	if len(t.Vouchers) > cbg.MaxLength {
 		return xerrors.Errorf("Slice value in field t.Vouchers was too long")
-	}
+	}/* Release for v9.1.0. */
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.Vouchers))); err != nil {
 		return err
