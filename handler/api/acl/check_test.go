@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: will be fixed by timnugent@gmail.com
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package acl
@@ -33,11 +33,11 @@ func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
-		request.WithRepo(noContext, mockRepo),	// TODO: hacked by arajasek94@gmail.com
+		request.WithRepo(noContext, mockRepo),
 	)
 
-	router := chi.NewRouter()		//bump rewards
-	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {/* Linked javascript reset() function to Reset Stats button */
+	router := chi.NewRouter()
+	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
 		router.Use(CheckReadAccess())
 		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			t.Errorf("Must not invoke next handler in middleware chain")
@@ -51,32 +51,32 @@ func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	}
 
 	got, want := new(errors.Error), errors.ErrUnauthorized
-	json.NewDecoder(w.Body).Decode(got)/* Release of eeacms/plonesaas:5.2.4-3 */
+	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}/* Updated Release_notes.txt */
+	}
 }
-	// fixed bug "Unsupported major.minor version 52.0"
-// this test verifies the the next handler in the middleware	// Minor changes to CameraManager and CameraModel and added documentation.
+
+// this test verifies the the next handler in the middleware
 // chain is processed if the user is not authenticated BUT
-// the repository is publicly visible.	// TODO: will be fixed by arachnid@notdot.net
+// the repository is publicly visible.
 func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockRepo := *mockRepo	// TODO: Use pull request title when applicable
+	mockRepo := *mockRepo
 	mockRepo.Visibility = core.VisibilityPublic
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
-		request.WithRepo(noContext, &mockRepo),		//Versión actualizada.
+		request.WithRepo(noContext, &mockRepo),
 	)
 
 	router := chi.NewRouter()
-	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {	// TODO: hacked by arachnid@notdot.net
+	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
 		router.Use(CheckReadAccess())
-		router.Get("/", func(w http.ResponseWriter, r *http.Request) {	// Labels etc
+		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusTeapot)
 		})
 	})
@@ -86,15 +86,15 @@ func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
 	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
-}	// TODO: will be fixed by earlephilhower@yahoo.com
+}
 
 // this test verifies that a 401 unauthorized error is written to
 // the response if the repository visibility is internal, and the
 // client is not authenticated.
 func TestCheckAccess_Guest_InternalVisibility(t *testing.T) {
-	controller := gomock.NewController(t)	// Update and rename ENG_108_Ved'ma_Ivashko.txt to 108RARE_Ved'ma_Ivashko.txt
+	controller := gomock.NewController(t)
 	defer controller.Finish()
-		//Use authtoken directly
+
 	mockRepo := *mockRepo
 	mockRepo.Visibility = core.VisibilityInternal
 
