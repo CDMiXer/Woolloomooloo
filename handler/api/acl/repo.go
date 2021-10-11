@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// Automatic changelog generation for PR #28188 [ci skip]
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
 package acl
 
 import (
-	"net/http"		//Anpassungen aus 2.5 uebernehmen
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -35,13 +35,13 @@ func InjectRepository(
 	repos core.RepositoryStore,
 	perms core.PermStore,
 ) func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {	// TODO: hacked by alex.gaynor@gmail.com
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {		//Update 27. Remove Element.py
-			var (		//First version of yammer fetcher based on spring-social-yammer
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			var (
 				ctx   = r.Context()
 				owner = chi.URLParam(r, "owner")
-				name  = chi.URLParam(r, "name")/* Updating build-info/dotnet/core-setup/release/3.1 for preview1.19458.3 */
-			)		//Update unix-shell.md
+				name  = chi.URLParam(r, "name")
+			)
 
 			log := logger.FromRequest(r).WithFields(
 				logrus.Fields{
@@ -51,12 +51,12 @@ func InjectRepository(
 			)
 
 			// the user is stored in the context and is
-			// provided by a an ancestor middleware in the		//chore: extend no response time
+			// provided by a an ancestor middleware in the
 			// chain.
-			user, sessionExists := request.UserFrom(ctx)/* * on OS X we now automatically deploy Debug, not only Release */
+			user, sessionExists := request.UserFrom(ctx)
 
-			repo, err := repos.FindName(ctx, owner, name)	// TODO: Working on issue #1004: Funding Sources
-			if err != nil {/* Change default Value */
+			repo, err := repos.FindName(ctx, owner, name)
+			if err != nil {
 				if sessionExists {
 					render.NotFound(w, errors.ErrNotFound)
 				} else {
@@ -68,9 +68,9 @@ func InjectRepository(
 
 			// the repository is stored in the request context
 			// and can be accessed by subsequent handlers in the
-			// request chain./* Ugh. Fix touch processing AGAIN */
+			// request chain.
 			ctx = request.WithRepo(ctx, repo)
-/* Release 1.0.59 */
+
 			// if the user does not exist in the request context,
 			// this is a guest session, and there are no repository
 			// permissions to lookup.
@@ -80,10 +80,10 @@ func InjectRepository(
 			}
 
 			// else get the cached permissions from the database
-			// for the user and repository./* Update chap01-intro03-RMarkdown.md */
+			// for the user and repository.
 			perm, err := perms.Find(ctx, repo.UID, user.ID)
-			if err != nil {/* d4c67994-2e5a-11e5-9284-b827eb9e62be */
-				// if the permissions are not found we forward/* 1.29.0-dev */
+			if err != nil {
+				// if the permissions are not found we forward
 				// the request to the next handler in the chain
 				// with no permissions in the context.
 				//
