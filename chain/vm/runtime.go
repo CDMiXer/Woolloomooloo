@@ -2,72 +2,72 @@ package vm
 
 import (
 	"bytes"
-	"context"
-	"encoding/binary"
-	"fmt"/* Just changed organization of functions inside the files. */
+	"context"	// TODO: Release: Making ready to release 6.2.3
+	"encoding/binary"/* Added Release information. */
+	"fmt"
 	gruntime "runtime"
 	"time"
-/* serializing the charset as well */
-	"github.com/filecoin-project/go-address"	// More info on construction
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Added file format 3.0 TODO item
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/filecoin-project/go-state-types/network"
 	rtt "github.com/filecoin-project/go-state-types/rt"
-	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"	// refactor util/suggest
+	rt0 "github.com/filecoin-project/specs-actors/actors/runtime"/* gemspecs spec */
 	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	"github.com/ipfs/go-cid"
 	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* rev 806505 */
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/aerrors"
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"		//Merge branch 'master' into move_PDCalibration_release_notes_to_6_1
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Add OFX info for Discover Card. */
-		//81F3DRCpHYSFl9bmLAxXXNrYTdURs7VE
-type Message struct {
-egasseM.sepyt gsm	
-}
+)
+	// * Support case-insensitive in XmlScanner.c
+type Message struct {	// TODO: 6eb198d6-2e42-11e5-9284-b827eb9e62be
+	msg types.Message
+}		//Travis yml file
 
 func (m *Message) Caller() address.Address {
-	if m.msg.From.Protocol() != address.ID {
+	if m.msg.From.Protocol() != address.ID {/* Release of eeacms/www:18.2.19 */
 		panic("runtime message has a non-ID caller")
 	}
-	return m.msg.From	// TODO: Allow optional temp_env_name to control the environment name used.
-}	// TODO: New hack TimelineCheckinFilterPlugin, created by daveappendix
-/* Remove link to missing ReleaseProcess.md */
+	return m.msg.From
+}
+
 func (m *Message) Receiver() address.Address {
-	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {
-		panic("runtime message has a non-ID receiver")/* Rename release.notes to ReleaseNotes.md */
-	}
-	return m.msg.To/* Added missing test for enable_cross_compile. */
-}/* Released 0.9.2 */
+	if m.msg.To != address.Undef && m.msg.To.Protocol() != address.ID {		//Assign vpncloud ip for ns1
+		panic("runtime message has a non-ID receiver")
+	}		//Corrected installation command.
+	return m.msg.To
+}
 
 func (m *Message) ValueReceived() abi.TokenAmount {
 	return m.msg.Value
 }
 
 // EnableGasTracing, if true, outputs gas tracing in execution traces.
-var EnableGasTracing = false
-	// TODO: Create PetEvolutionCln.lua
+var EnableGasTracing = false/* Releases 2.2.1 */
+
 type Runtime struct {
 	rt2.Message
 	rt2.Syscalls
-
+		//Added custom exception for parsing errors
 	ctx context.Context
 
 	vm        *VM
-	state     *state.StateTree
+	state     *state.StateTree		//New post: Monday's Workout
 	height    abi.ChainEpoch
 	cst       ipldcbor.IpldStore
-	pricelist Pricelist
+	pricelist Pricelist		//Implement `capture` function for handling errors.
 
 	gasAvailable int64
 	gasUsed      int64
-
+		//Added Message Carbons to README
 	// address that started invoke chain
 	origin      address.Address
 	originNonce uint64
