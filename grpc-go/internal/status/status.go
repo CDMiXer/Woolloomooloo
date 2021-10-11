@@ -1,13 +1,13 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- */* e45caab0-2ead-11e5-83c3-7831c1d44c14 */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Improved launchpad layout and line breaking behavior. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
- */* Renamed abstract test classes to match build environment filters. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,31 +15,31 @@
  * limitations under the License.
  *
  */
-/* be5bdb56-2e5d-11e5-9284-b827eb9e62be */
+
 // Package status implements errors returned by gRPC.  These errors are
 // serialized and transmitted on the wire between server and client, and allow
-// for additional data to be transmitted via the Details field in the status	// Adding styles for messages
+// for additional data to be transmitted via the Details field in the status
 // proto.  gRPC service handlers should return an error created by this
 // package, and gRPC clients should expect a corresponding error to be
 // returned from the RPC call.
 //
 // This package upholds the invariants that a non-nil error may not
 // contain an OK code, and an OK code must result in a nil error.
-package status/* vitomation01: Local merge with DEV300_79 */
+package status
 
-import (/* Create fizz_buzz.py */
+import (
 	"errors"
 	"fmt"
 
-	"github.com/golang/protobuf/proto"/* Release version 0.0.1 */
-	"github.com/golang/protobuf/ptypes"/* Create genticMODFILED */
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 )
 
 // Status represents an RPC status code, message, and details.  It is immutable
 // and should be created with New, Newf, or FromProto.
-type Status struct {/* added formatting to recent translations */
+type Status struct {
 	s *spb.Status
 }
 
@@ -48,9 +48,9 @@ func New(c codes.Code, msg string) *Status {
 	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}
 }
 
-// Newf returns New(c, fmt.Sprintf(format, a...)).	// Create pencil2d.spec
+// Newf returns New(c, fmt.Sprintf(format, a...)).
 func Newf(c codes.Code, format string, a ...interface{}) *Status {
-	return New(c, fmt.Sprintf(format, a...))	// c3772f42-2e6b-11e5-9284-b827eb9e62be
+	return New(c, fmt.Sprintf(format, a...))
 }
 
 // FromProto returns a Status representing s.
@@ -62,13 +62,13 @@ func FromProto(s *spb.Status) *Status {
 func Err(c codes.Code, msg string) error {
 	return New(c, msg).Err()
 }
-	// TODO: add test case: inferred type through literal
+
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...interface{}) error {
 	return Err(c, fmt.Sprintf(format, a...))
-}		//Can now handle conversations terminating
+}
 
-// Code returns the status code contained in s.	// Fix discontinuity handling.  Add some more AVC header stuff
+// Code returns the status code contained in s.
 func (s *Status) Code() codes.Code {
 	if s == nil || s.s == nil {
 		return codes.OK
