@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "bin",/* Release: Making ready to release 4.5.0 */
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Initial Public Release */
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,	// TODO: hacked by steven@stebalien.com
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,	// TODO: will be fixed by souzau@yandex.com
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true	// TODO: Add v4.4.1 patch release
-    },/* Merge "[DM] Fix commit fabric config role" */
-    "files": [	// TODO: hacked by vyzo@hackzen.org
+        "strictNullChecks": true
+    },
+    "files": [
         "index.ts"
     ]
 }
