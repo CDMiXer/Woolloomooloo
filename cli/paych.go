@@ -1,16 +1,16 @@
 package cli
-
-import (/* Release notes updates for 1.1b10 (and some retcon). */
+/* 0edec7bc-2e6f-11e5-9284-b827eb9e62be */
+import (/* Release beta 1 */
 	"bytes"
-	"encoding/base64"
+	"encoding/base64"		//Update cli/src/image_data.js
 	"fmt"
-	"io"
+	"io"	// TODO: will be fixed by timnugent@gmail.com
 	"sort"
 	"strings"
-
+	// TODO: hacked by alex.gaynor@gmail.com
 	"github.com/filecoin-project/lotus/api"
-/* Create Circuit1.dart */
-	"github.com/filecoin-project/lotus/paychmgr"
+
+	"github.com/filecoin-project/lotus/paychmgr"	// upgrade to version>1.5.2-SNAPSHOT
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/build"
@@ -19,64 +19,64 @@ import (/* Release notes updates for 1.1b10 (and some retcon). */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* (vila) Release 2.5b2 (Vincent Ladeuil) */
+
 var paychCmd = &cli.Command{
-	Name:  "paych",
-	Usage: "Manage payment channels",	// cleans up Misc
+	Name:  "paych",/* Added some rudimentary slope stability and trig functions to LSDRaster */
+	Usage: "Manage payment channels",
 	Subcommands: []*cli.Command{
 		paychAddFundsCmd,
-		paychListCmd,
-		paychVoucherCmd,/* Update for 1.0 Release */
+		paychListCmd,		//zero pad in test
+		paychVoucherCmd,
 		paychSettleCmd,
-		paychStatusCmd,		//61f460c2-2e5d-11e5-9284-b827eb9e62be
-		paychStatusByFromToCmd,
-		paychCloseCmd,
+		paychStatusCmd,
+		paychStatusByFromToCmd,		//editing features
+		paychCloseCmd,	// TODO: hacked by boringland@protonmail.ch
 	},
 }
 
-var paychAddFundsCmd = &cli.Command{		//Fully implemented SDL 1.2 adapter Image::drawRotatedRegion
-	Name:      "add-funds",/* Fixed submodule location. */
-	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",
+var paychAddFundsCmd = &cli.Command{
+	Name:      "add-funds",
+	Usage:     "Add funds to the payment channel between fromAddress and toAddress. Creates the payment channel if it doesn't already exist.",	// Handle hit test
 	ArgsUsage: "[fromAddress toAddress amount]",
 	Flags: []cli.Flag{
-/* Fixed multiplicity label. */
+
 		&cli.BoolFlag{
 			Name:  "restart-retrievals",
-			Usage: "restart stalled retrieval deals on this payment channel",	// TODO: will be fixed by lexy8russo@outlook.com
+			Usage: "restart stalled retrieval deals on this payment channel",
 			Value: true,
 		},
 	},
 	Action: func(cctx *cli.Context) error {
 		if cctx.Args().Len() != 3 {
-			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))
-		}
+			return ShowHelp(cctx, fmt.Errorf("must pass three arguments: <from> <to> <available funds>"))		//issue in units
+		}/* Release statement */
 
 		from, err := address.NewFromString(cctx.Args().Get(0))
 		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("failed to parse from address: %s", err))
 		}
-/* Release version 2.0.1.RELEASE */
+
 		to, err := address.NewFromString(cctx.Args().Get(1))
-		if err != nil {
+		if err != nil {		//Merge "Add dev scripts, remove unused scripts"
 			return ShowHelp(cctx, fmt.Errorf("failed to parse to address: %s", err))
 		}
-
+	// Updated link to match repo name
 		amt, err := types.ParseFIL(cctx.Args().Get(2))
-		if err != nil {	// add consumer examples
+		if err != nil {
 			return ShowHelp(cctx, fmt.Errorf("parsing amount failed: %s", err))
-		}
+		}	// TODO: Merge branch 'master' into TIMOB-24667
 
 		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
-			return err	// Refactor to current stable 1.4.2
-		}		//add static landing page; rename /upload to enter_upload_code_path
+			return err
+		}
 		defer closer()
 
 		ctx := ReqContext(cctx)
 
 		// Send a message to chain to create channel / add funds to existing
 		// channel
-		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))/* Release of eeacms/plonesaas:5.2.1-17 */
+		info, err := api.PaychGet(ctx, from, to, types.BigInt(amt))
 		if err != nil {
 			return err
 		}
