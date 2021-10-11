@@ -1,12 +1,12 @@
-{/* Updated Release Notes (markdown) */
-    "compilerOptions": {/* Release 0.2.2 */
+{
+    "compilerOptions": {
         "strict": true,
-,"nib" :"riDtuo"        
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Release mdadm-3.1.2 */
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -18,4 +18,4 @@
         "index.ts"
     ]
 }
-
+	// TODO: minor, rm todo comment
