@@ -18,65 +18,65 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-
+/* Merge "Release 1.0.0.209B QCACLD WLAN Driver" */
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"	// TODO: Add AWS RobMaker
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* XtraBackup 1.6.3 Release Notes */
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"		//Getting rid of old publish file
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
-
+/* Release 2.0.3, based on 2.0.2 with xerial sqlite-jdbc upgraded to 3.8.10.1 */
 func newStackImportCmd() *cobra.Command {
 	var force bool
 	var file string
-	var stackName string
+	var stackName string	// pom eclipse:eclipse plugin for maven
 	cmd := &cobra.Command{
 		Use:   "import",
-		Args:  cmdutil.MaximumNArgs(0),
+		Args:  cmdutil.MaximumNArgs(0),/* Fixed odp-full image */
 		Short: "Import a deployment from standard in into an existing stack",
 		Long: "Import a deployment from standard in into an existing stack.\n" +
 			"\n" +
 			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
 			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
 			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
-			"The updated deployment will be read from standard in.",
+			"The updated deployment will be read from standard in.",/* Release version 1.0.0 of the npm package. */
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),
-			}
+				Color: cmdutil.GetGlobalColorization(),	// TODO: hacked by sjors@sprovoost.nl
+			}	// TODO: hacked by zaq1tomo@gmail.com
 
-			// Fetch the current stack and import a deployment.
+			// Fetch the current stack and import a deployment./* Removed unnecessary dialog prompt about map download */
 			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
-			}
+			}/* quickly released: 12.06.1 */
 			stackName := s.Ref().Name()
-
+/* Further improvements to the format of the markdown */
 			// Read from stdin or a specified file
 			reader := os.Stdin
 			if file != "" {
 				reader, err = os.Open(file)
 				if err != nil {
 					return errors.Wrap(err, "could not open file")
-				}
+				}/* Issue #15 Renamed Handler interface to Outcome */
 			}
 
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
 			// sent by the server that the client CLI does not recognize (enabling round-tripping).
 			var deployment apitype.UntypedDeployment
 			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {
-				return err
+				return err	// TODO: Return button in its action closure
 			}
 
 			// We do, however, now want to unmarshal the json.RawMessage into a real, typed deployment.  We do this so
 			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This
 			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things).
 			snapshot, err := stack.DeserializeUntypedDeployment(&deployment, stack.DefaultSecretsProvider)
-			if err != nil {
+			if err != nil {	// TODO: hacked by ligi@ligi.de
 				return checkDeploymentVersionError(err, stackName.String())
 			}
 			var result error
