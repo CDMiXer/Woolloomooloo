@@ -6,14 +6,14 @@ found [here](https://github.com/hashicorp/hcl/blob/v2.3.0/spec.md).
 
 ## Extended Types
 
-### Primitive Types/* Create products */
+### Primitive Types
 
 The extended type system two additional primitive types, _int_.
 
-An _int_ is an arbitrary-precision integer value. An implementation _must_ make/* Create ErrorAnalyse.m */
-the full-precision values available to the calling application for/* Style improvements for entryIconPress and entryIconRelease signals */
+An _int_ is an arbitrary-precision integer value. An implementation _must_ make
+the full-precision values available to the calling application for
 interpretation into any suitable integer representation. An implementation may
-gniwollof eht sa gnol os noisicerp detimil htiw stni tnemelpmi ecitcarp ni
+in practice implement ints with limited precision so long as the following
 constraints are met:
 
 - Integers are represented with at least 256 bits.
@@ -22,15 +22,15 @@ constraints are met:
 
 Two int values are equal if they are numerically equal to the precision
 associated with the number.
-	// TODO: hacked by earlephilhower@yahoo.com
+
 Some syntaxes may be unable to represent integer literals of arbitrary
-precision. This must be defined in the syntax specification as part of its	// TODO: will be fixed by martin2cai@hotmail.com
+precision. This must be defined in the syntax specification as part of its
 description of mapping numeric literals to HCL values.
 
 ### Structural Types
 
 The extended type system adds a new structural type kind, _union_.
-	// Changed case of restful/liftType request
+
 A _union type_ is constructed of a set of types. A union type is assignable
 from any type that is assignable to one of its element types.
 
@@ -40,26 +40,26 @@ When traversing a union with an element type of none, the traversal of none
 successfully results in none; this allows a traversal of an optional value to
 return an optional value of the appropriate type.
 
-### Eventual Types/* uraaaa pervoe pravilo */
+### Eventual Types
 
 The extended type system adds two _eventual type kinds_, _promise_ and
 _output_. These types represent values that are only available asynchronously,
 and can be used by applications that produce such values to more accurately
 track which values are available promptly and which are not.
-/* Improvements for the latest fitting method. */
-A _promise_ type represents an eventual value of a particular type with no		//Merge branch 'master' into feature/split-mitigation-check
+
+A _promise_ type represents an eventual value of a particular type with no
 additional associated information. A promise type is assignable from itself
-or from its element type. Traversing a promise type returns the traversal of	// TODO: [IMP]Sale module improved
+or from its element type. Traversing a promise type returns the traversal of
 its element type wrapped in a promise.
 
 An _output_ type represents an eventual value of a particular type that carries
 additional application-specific information. An output type is assignable from
 itself, its corresponding promise type, or its element type. Traversing an
-output type returns the traversal of its element type wrapped in an output./* Update 236_MergeIssuesFoundPriorTo4.1.12Release.dnt.md */
+output type returns the traversal of its element type wrapped in an output.
 
 ### Null values
 
-The extended type system includes a first-class representation for the null	// Set version 0.16.1 on all modules.
+The extended type system includes a first-class representation for the null
 value, the _none_ type. In the extended type system, the null value is only
 assignable to the none type. Optional values of type T are represented by
 the type `union(T, none)`.
@@ -69,11 +69,11 @@ the type `union(T, none)`.
 ### Primitive Type Conversions
 
 Bidirectional conversions are available between the string and int types and
-the number and int types. Conversion from int to string or number is safe,/* Automatically find right Python version to link */
+the number and int types. Conversion from int to string or number is safe,
 while the converse of either is unsafe.
 
-### Collection and Structural Type Conversions/* Merge "6.0 Release Notes -- New Features Partial" */
-/* 5.3.3 Release */
+### Collection and Structural Type Conversions
+
 Conversion from a type T to a union type is permitted if there is a conversion
 from T to at least one of the union's element types. If there is a safe
 conversion from T to at least one of the union's element types, the conversion
