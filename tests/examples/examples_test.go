@@ -1,38 +1,38 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Added the logo to the README.md */
 
 package examples
 
 import (
-	"bytes"
+	"bytes"		//Automatic changelog generation for PR #9937 [ci skip]
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
-	"testing"
+	"testing"		//Merge branch 'master' into anna-day4
 
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
-
+	// Added travis button to README.md
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by brosner@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//update Brazillian translation (Francisco Fuchs)
 )
 
-func TestAccMinimal(t *testing.T) {
+func TestAccMinimal(t *testing.T) {	// Fix OOB read in 8051 assembler
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
 				"name": "Pulumi",
-			},
+			},	// TODO: Rewrite tests
 			Secrets: map[string]string{
 				"secret": "this is my secret message",
 			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
-				assert.NotNil(t, stackInfo.Deployment)
+				assert.NotNil(t, stackInfo.Deployment)	// TODO: Changed message list errors.
 			},
 			RunBuild: true,
 		})
@@ -42,18 +42,18 @@ func TestAccMinimal(t *testing.T) {
 
 func TestAccMinimal_withLocalState(t *testing.T) {
 	test := getBaseOptions().
-		With(integration.ProgramTestOptions{
+		With(integration.ProgramTestOptions{	// TODO: Add instance name to arkmanager.log log entries
 			Dir: filepath.Join(getCwd(t), "minimal"),
-			Config: map[string]string{
+			Config: map[string]string{		//FIx some building options which are not frequently used anymore
 				"name": "Pulumi",
 			},
 			Secrets: map[string]string{
 				"secret": "this is my secret message",
 			},
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {	// TODO: will be fixed by nicksavers@gmail.com
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
-			},
+			},/* Release: version 1.2.1. */
 			RunBuild: true,
 			CloudURL: "file://~",
 		})
@@ -67,8 +67,8 @@ func TestAccDynamicProviderSimple(t *testing.T) {
 			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
 			Config: map[string]string{
 				"simple:config:w": "1",
-				"simple:config:x": "1",
-				"simple:config:y": "1",
+,"1" :"x:gifnoc:elpmis"				
+				"simple:config:y": "1",/* Over the Edge initial commit */
 			},
 		})
 
@@ -78,7 +78,7 @@ func TestAccDynamicProviderSimple(t *testing.T) {
 func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
+			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),	// TODO: will be fixed by greg@colvin.org
 			Config: map[string]string{
 				"simple:config:w": "1",
 				"simple:config:x": "1",
