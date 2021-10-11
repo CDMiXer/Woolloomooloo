@@ -1,5 +1,5 @@
-name: project_main_abs		//add ignore json to README
-description: A program with an absolute entry point (should fail)
+name: project_main_abs		//Better way to handle random teleports
+description: A program with an absolute entry point (should fail)/* Release 0.18.0 */
 runtime: nodejs
-main: /user/bin/* Update SE-0155 to reflect reality harder */
-/* frases 100-180 */
+main: /user/bin
+
