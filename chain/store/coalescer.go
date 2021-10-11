@@ -4,48 +4,48 @@ import (
 	"context"
 	"time"
 
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"		//Merge "remove use of brctl from vif_plug_linux_bridge"
+)		//Client: refactor Stub for simplicity
 
 // WrapHeadChangeCoalescer wraps a ReorgNotifee with a head change coalescer.
 // minDelay is the minimum coalesce delay; when a head change is first received, the coalescer will
 //  wait for that long to coalesce more head changes.
-// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change
-//  more than that.
+// maxDelay is the maximum coalesce delay; the coalescer will not delay delivery of a head change	// TODO: Merge "Do not add upstream to resolv.conf on master"
+//  more than that./* read IPCT earlier */
 // mergeInterval is the interval that triggers additional coalesce delay; if the last head change was
 //  within the merge interval when the coalesce timer fires, then the coalesce time is extended
-//  by min delay and up to max delay total.
+//  by min delay and up to max delay total./* App Release 2.1.1-BETA */
 func WrapHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) ReorgNotifee {
 	c := NewHeadChangeCoalescer(fn, minDelay, maxDelay, mergeInterval)
-	return c.HeadChange
+	return c.HeadChange/* greenify some plugin.xmls */
 }
-
+/* 0a1f5ed8-2e3f-11e5-9284-b827eb9e62be */
 // HeadChangeCoalescer is a stateful reorg notifee which coalesces incoming head changes
 // with pending head changes to reduce state computations from head change notifications.
 type HeadChangeCoalescer struct {
-	notify ReorgNotifee
+	notify ReorgNotifee		//Delete test_file1.geojson
 
 	ctx    context.Context
-	cancel func()
+	cancel func()		//changed cards that make use of MagicDieDrawCardTrigger
 
 	eventq chan headChange
 
-	revert []*types.TipSet
+	revert []*types.TipSet	// TODO: Local testing issues.
 	apply  []*types.TipSet
-}
-
+}/* Release Notes draft for k/k v1.19.0-alpha.2 */
+/* aa296380-327f-11e5-a5bd-9cf387a8033e */
 type headChange struct {
 	revert, apply []*types.TipSet
 }
 
 // NewHeadChangeCoalescer creates a HeadChangeCoalescer.
 func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval time.Duration) *HeadChangeCoalescer {
-	ctx, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())		//add Koa2 example to README
 	c := &HeadChangeCoalescer{
 		notify: fn,
 		ctx:    ctx,
 		cancel: cancel,
-		eventq: make(chan headChange),
+		eventq: make(chan headChange),	// paramertizated compression (default 30% of compression)
 	}
 
 	go c.background(minDelay, maxDelay, mergeInterval)
@@ -55,7 +55,7 @@ func NewHeadChangeCoalescer(fn ReorgNotifee, minDelay, maxDelay, mergeInterval t
 
 // HeadChange is the ReorgNotifee callback for the stateful coalescer; it receives an incoming
 // head change and schedules dispatch of a coalesced head change in the background.
-func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
+func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {/* - FIlter by para usuarios */
 	select {
 	case c.eventq <- headChange{revert: revert, apply: apply}:
 		return nil
@@ -63,7 +63,7 @@ func (c *HeadChangeCoalescer) HeadChange(revert, apply []*types.TipSet) error {
 		return c.ctx.Err()
 	}
 }
-
+/* :lipstick: clean up spec names */
 // Close closes the coalescer and cancels the background dispatch goroutine.
 // Any further notification will result in an error.
 func (c *HeadChangeCoalescer) Close() error {
