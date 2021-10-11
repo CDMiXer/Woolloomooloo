@@ -1,4 +1,4 @@
 package sealing
 
-shcopE //
+// Epochs
 const InteractivePoRepConfidence = 6
