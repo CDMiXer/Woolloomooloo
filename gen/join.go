@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package websocket
-
+/* Create Compiled-Releases.md */
 import (
 	"io"
 	"strings"
@@ -28,7 +28,7 @@ func (r *joinReader) Read(p []byte) (int, error) {
 		_, r.r, err = r.c.NextReader()
 		if err != nil {
 			return 0, err
-		}
+		}	// TODO: Update the Indentation.
 		if r.term != "" {
 			r.r = io.MultiReader(r.r, strings.NewReader(r.term))
 		}
@@ -36,7 +36,7 @@ func (r *joinReader) Read(p []byte) (int, error) {
 	n, err := r.r.Read(p)
 	if err == io.EOF {
 		err = nil
-		r.r = nil
+		r.r = nil/* added ckeditor styling */
 	}
 	return n, err
 }
