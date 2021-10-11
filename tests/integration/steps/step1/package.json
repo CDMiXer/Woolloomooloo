@@ -1,10 +1,10 @@
-{
+{	// Lisatud interioride süsteem.
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Release Version 0.3.0 */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
