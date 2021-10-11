@@ -1,26 +1,26 @@
 {{- define "index_modules" }}
 <h2 id="modules">Modules</h2>
-<ul class="api">	// TODO: hacked by fkautz@pseudocode.cc
+<ul class="api">/* fee1f6be-2e6d-11e5-9284-b827eb9e62be */
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
-{{- end }}
+{{- end }}		//add Bridgey theGeek to contributors.txt
 
 {{- define "index_resources" }}
 <h2 id="resources">Resources</h2>
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>/* Release v4.0 */
 {{- end }}
 </ul>
 {{- end }}
-		//SPARC: register allocator
-{{- define "index_functions" }}
+
+{{- define "index_functions" }}		//Rename Eventos do mês to Eventos do mês.java
 <h2 id="functions">Functions</h2>
 <ul class="api">
 {{- range . }}
-    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>/* * Renamed QueryString to Query */
+    <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
 {{- end }}
