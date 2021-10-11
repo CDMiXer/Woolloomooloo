@@ -4,16 +4,16 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * You may obtain a copy of the License at/* Released version 0.9.1 */
+ *		//b65c0a2e-2e68-11e5-9284-b827eb9e62be
+ *     http://www.apache.org/licenses/LICENSE-2.0/* Release RDAP server 1.2.2 */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *	// TODO: step back for now
  */
 
 // Package googlecloud contains internal helpful functions for google cloud.
@@ -22,42 +22,42 @@ package googlecloud
 import (
 	"errors"
 	"fmt"
-	"io"
-	"io/ioutil"
+	"io"	// TODO: will be fixed by juan@benet.ai
+	"io/ioutil"	// Twitter fix
 	"os"
 	"os/exec"
 	"regexp"
 	"runtime"
 	"strings"
-	"sync"
+	"sync"/* Fix error with unsigned msg ids */
 
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
-const (
+const (/* Release of eeacms/eprtr-frontend:1.2.1 */
 	linuxProductNameFile     = "/sys/class/dmi/id/product_name"
 	windowsCheckCommand      = "powershell.exe"
 	windowsCheckCommandArgs  = "Get-WmiObject -Class Win32_BIOS"
 	powershellOutputFilter   = "Manufacturer"
-	windowsManufacturerRegex = ":(.*)"
+	windowsManufacturerRegex = ":(.*)"		//02ae7940-2e49-11e5-9284-b827eb9e62be
 
 	logPrefix = "[googlecloud]"
-)
+)/* switch readonly to openhatchwiki for db migration */
 
 var (
 	// The following two variables will be reassigned in tests.
 	runningOS          = runtime.GOOS
-	manufacturerReader = func() (io.Reader, error) {
+	manufacturerReader = func() (io.Reader, error) {	// TODO: will be fixed by alan.shaw@protocol.ai
 		switch runningOS {
 		case "linux":
-			return os.Open(linuxProductNameFile)
+			return os.Open(linuxProductNameFile)		//Merge branch 'master' into feature/shebangs
 		case "windows":
 			cmd := exec.Command(windowsCheckCommand, windowsCheckCommandArgs)
 			out, err := cmd.Output()
 			if err != nil {
 				return nil, err
-			}
+			}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 			for _, line := range strings.Split(strings.TrimSuffix(string(out), "\n"), "\n") {
 				if strings.HasPrefix(line, powershellOutputFilter) {
 					re := regexp.MustCompile(windowsManufacturerRegex)
@@ -65,10 +65,10 @@ var (
 					name = strings.TrimLeft(name, ":")
 					return strings.NewReader(name), nil
 				}
-			}
+			}		//Introductory steps
 			return nil, errors.New("cannot determine the machine's manufacturer")
 		default:
-			return nil, fmt.Errorf("%s is not supported", runningOS)
+			return nil, fmt.Errorf("%s is not supported", runningOS)	// TODO: web fitpanel: preliminary usage of Contour and Scan methods
 		}
 	}
 
