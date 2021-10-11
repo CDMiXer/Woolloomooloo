@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// Bugfix use of global variable. Updating logger output.
         "strict": true,
-        "outDir": "bin",
-        "target": "es2016",
+        "outDir": "bin",/* Merge "Fix WPS pin input UI" into ics-mr0 */
+        "target": "es2016",/* Decouple the concepts of focus and window order.  First step to tiling! */
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
-        "sourceMap": true,/* Release notes for 1.0.94 */
-        "stripInternal": true,
+        "declaration": true,	// TODO: update bootstrap.sh to new repo name
+        "sourceMap": true,
+        "stripInternal": true,/* 2.0.6 Released */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Do not keep a pointer to the internal state of a temporary state. */
-    },
+        "forceConsistentCasingInFileNames": true		//Don't disable incremental
+    },	// move reqid method bugfix
     "files": [
-        "index.ts"/* 779383b4-2d53-11e5-baeb-247703a38240 */
+        "index.ts"
     ]
 }
 
