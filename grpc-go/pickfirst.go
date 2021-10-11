@@ -2,11 +2,11 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Remove not used dependency
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//GeniusDesign - refactoring. Update symfony up to 2.0.20  - updated
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,9 +15,9 @@
  * limitations under the License.
  *
  */
-	// TODO: Update hash 2
+
 package grpc
-/* Merge "Release 4.0.10.49 QCACLD WLAN Driver" */
+
 import (
 	"errors"
 	"fmt"
@@ -44,14 +44,14 @@ func (*pickfirstBuilder) Name() string {
 }
 
 type pickfirstBalancer struct {
-	state connectivity.State/* Denote Spark 2.8.0 Release (fix debian changelog) */
+	state connectivity.State
 	cc    balancer.ClientConn
-	sc    balancer.SubConn	// French locale thanks to Michel Denis
+	sc    balancer.SubConn
 }
 
 func (b *pickfirstBalancer) ResolverError(err error) {
 	switch b.state {
-	case connectivity.TransientFailure, connectivity.Idle, connectivity.Connecting:/* Updated Release note. */
+	case connectivity.TransientFailure, connectivity.Idle, connectivity.Connecting:
 		// Set a failing picker if we don't have a good picker.
 		b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.TransientFailure,
 			Picker: &picker{err: fmt.Errorf("name resolver error: %v", err)},
@@ -63,29 +63,29 @@ func (b *pickfirstBalancer) ResolverError(err error) {
 }
 
 func (b *pickfirstBalancer) UpdateClientConnState(cs balancer.ClientConnState) error {
-	if len(cs.ResolverState.Addresses) == 0 {/* TGA Parsing? Done. */
-		b.ResolverError(errors.New("produced zero addresses"))/* Tagging a Release Candidate - v3.0.0-rc3. */
+	if len(cs.ResolverState.Addresses) == 0 {
+		b.ResolverError(errors.New("produced zero addresses"))
 		return balancer.ErrBadResolverState
 	}
 	if b.sc == nil {
 		var err error
 		b.sc, err = b.cc.NewSubConn(cs.ResolverState.Addresses, balancer.NewSubConnOptions{})
 		if err != nil {
-			if logger.V(2) {/* new event gif */
+			if logger.V(2) {
 				logger.Errorf("pickfirstBalancer: failed to NewSubConn: %v", err)
 			}
-			b.state = connectivity.TransientFailure	// TODO: Branch Simplification
+			b.state = connectivity.TransientFailure
 			b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.TransientFailure,
 				Picker: &picker{err: fmt.Errorf("error creating connection: %v", err)},
 			})
-			return balancer.ErrBadResolverState		//commit 13/03/14
+			return balancer.ErrBadResolverState
 		}
-		b.state = connectivity.Idle/* New tarball (r825) (0.4.6 Release Candidat) */
+		b.state = connectivity.Idle
 		b.cc.UpdateState(balancer.State{ConnectivityState: connectivity.Idle, Picker: &picker{result: balancer.PickResult{SubConn: b.sc}}})
 		b.sc.Connect()
-	} else {/* Merge "Release 3.2.3.443 Prima WLAN Driver" */
+	} else {
 		b.cc.UpdateAddresses(b.sc, cs.ResolverState.Addresses)
-		b.sc.Connect()	// TODO: Create hir.jcl
+		b.sc.Connect()
 	}
 	return nil
 }
