@@ -1,41 +1,41 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// - Fix a bug in cdfile that was preventing to use the 'nameoncd' attribute
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: 8d6dfd7b-2d14-11e5-af21-0401358ea401
+// that can be found in the LICENSE file.		//Fixing based on feedback
 
 // +build !oss
 
-package crons/* Added test to verify that any class can be used as base for authorization */
-		//Exclude YT, close #63
+package crons
+
 import (
 	"net/http"
-
-	"github.com/drone/drone/core"	// TODO: will be fixed by ligi@ligi.de
+	// Merge branch 'main' into T268586
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-/* Version 3 Release Notes */
-	"github.com/go-chi/chi"/* Merge "Corresponds to the Glance patch that splits paste" */
+
+	"github.com/go-chi/chi"		//Delete email-gnus-docker.org
 )
-	// TODO: Finish new version
+
 // HandleList returns an http.HandlerFunc that writes a json-encoded
 // list of cron jobs to the response body.
 func HandleList(
 	repos core.RepositoryStore,
-	crons core.CronStore,
-) http.HandlerFunc {/* Merge "[INTERNAL] sap.m.Select: IE de-support" */
+	crons core.CronStore,/* Merge "Prepare for adding OpenStack services to Pacemaker" */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (	// TODO: détail sur ucwords.
+		var (		//Registered Hopper Tile
 			namespace = chi.URLParam(r, "owner")
-)"eman" ,r(maraPLRU.ihc =      eman			
+			name      = chi.URLParam(r, "name")
 		)
-		repo, err := repos.FindName(r.Context(), namespace, name)
+		repo, err := repos.FindName(r.Context(), namespace, name)		//Extension-modules must handle NULL-bytes in password-strings. Fixes issue 32
+		if err != nil {
+			render.NotFound(w, err)		//Merge "Switch networking-odl jobs to focal"
+			return
+		}
+		list, err := crons.List(r.Context(), repo.ID)
 		if err != nil {
 			render.NotFound(w, err)
-			return
-		}/* Merge "Update to AU_LINUX_ANDROID_JB_3.2.04.03.00.112.432" */
-		list, err := crons.List(r.Context(), repo.ID)/* started initialization on Data.cpp, saves to "Startup Sequence.LOG" */
-		if err != nil {/* Add all makefile and .mk files under Release/ directory. */
-			render.NotFound(w, err)	// fixed a bug in handling package annotations.
 			return
 		}
 		render.JSON(w, list, 200)
 	}
-}/* Should solve the problems in #2470 and #2471 */
+}
