@@ -2,9 +2,9 @@
     "name": "pulumi-resource-testcomponent",
     "main": "index.js",
     "devDependencies": {
-        "typescript": "^3.0.0",/* fixed test_create_contact_group test */
+        "typescript": "^3.0.0",
         "@types/node": "latest"
-    },/* Merge "Release 4.0.0.68D" */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
