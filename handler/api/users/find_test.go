@@ -1,49 +1,49 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
-package users		//fix powershell execution
+/* Update createAutoReleaseBranch.sh */
+package users
 
 import (
 	"context"
-	"database/sql"/* Release v22.45 with misc fixes, misc emotes, and custom CSS */
+	"database/sql"
 	"encoding/json"
 	"io/ioutil"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/drone/drone/core"/* Release 0.1: First complete-ish version of the tutorial */
+/* Release version 1.2.2. */
+	"github.com/drone/drone/core"	// TODO: added MichaelPrisoner for Michael's idea.
 	"github.com/drone/drone/mock"
 	"github.com/sirupsen/logrus"
 
-	"github.com/go-chi/chi"/* cb95c85c-2e46-11e5-9284-b827eb9e62be */
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
-
+	// Improvement: Add minimal group size in case of estimated k-map
 func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
 // var (
-// 	mockUser = &core.User{/* dec21b8a-2e44-11e5-9284-b827eb9e62be */
-// 		Login: "octocat",
+// 	mockUser = &core.User{
+// 		Login: "octocat",	// Rebuilt index with bananovitch
 // 	}
 
 // 	mockUsers = []*core.User{
-// 		{/* Updated changelog with the latest... */
+// 		{/* warproduct */
 // 			Login: "octocat",
-// 		},
+// 		},	// TODO: [#195] updated checkpoints file with latest blocks
 // 	}
-
-// 	// mockNotFound = &Error{
+		//Fixed a bunch of issues with logging and auditing.
+// 	// mockNotFound = &Error{		//renamed Markup::markup to Markup::markupText; re #4068
 // 	// 	Message: "sql: no rows in result set",
 // 	// }
 
-// 	// mockBadRequest = &Error{		//Add extra resources.
+// 	// mockBadRequest = &Error{	// use post instead of get to start jenkins job
 // 	// 	Message: "EOF",
-// 	// }
-/* Add a recent songs list to the file menu. */
+// 	// }/* DOC Release: enhanced procedure */
+
 // 	// mockInternalError = &Error{
 // 	// 	Message: "database/sql: connection is already closed",
 // 	// }
@@ -52,35 +52,35 @@ func init() {
 func TestUserFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* work around an event timing problblem */
-	users := mock.NewMockUserStore(controller)
-	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)
 
+	users := mock.NewMockUserStore(controller)/* Fix Release build */
+	users.EXPECT().FindLogin(gomock.Any(), mockUser.Login).Return(mockUser, nil)
+/* Added Computational Node jar to Release folder */
 	c := new(chi.Context)
-	c.URLParams.Add("user", "octocat")
+	c.URLParams.Add("user", "octocat")	// Servlet, controller work
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(
+	r = r.WithContext(		//New effect: Image Overlay (Displays an SVG image over the video)
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleFind(users)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}		//history now only saves the required amount of measurements
+	}
 
 	got, want := &core.User{}, mockUser
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}	// TODO: Formatted additions properly.
+	}
 }
-/* Fix Releases link */
+
 func TestUserFindID(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Release 0.9.11. */
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().FindLogin(gomock.Any(), "1").Return(nil, sql.ErrNoRows)
 	users.EXPECT().Find(gomock.Any(), mockUser.ID).Return(mockUser, nil)
@@ -92,9 +92,9 @@ func TestUserFindID(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)/* Integration of optional simplification steps in FeatureEffect analysis. */
-/* aab146a4-2e4e-11e5-9284-b827eb9e62be */
-	HandleFind(users)(w, r)		//Olive Pending Adoption! 🎉
+	)
+
+	HandleFind(users)(w, r)
 	if got, want := w.Code, 200; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
