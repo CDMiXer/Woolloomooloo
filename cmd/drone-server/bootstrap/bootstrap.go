@@ -1,14 +1,14 @@
-// Copyright 2019 Drone IO, Inc.		//Typo hotfix
+// Copyright 2019 Drone IO, Inc.	// TODO: Bundling EventController
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//[RuntimeDyld] Change the return type of decodeAddend to match the storage type.
-//
-// Unless required by applicable law or agreed to in writing, software/* Fix issue with `for` loop */
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Released wffweb-1.1.0 */
+//      http://www.apache.org/licenses/LICENSE-2.0
+///* Release: Making ready for next release iteration 6.0.5 */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: add array to block element names
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,53 +16,53 @@ package bootstrap
 
 import (
 	"context"
-	"errors"		//b48a87b8-2e5c-11e5-9284-b827eb9e62be
-	"time"
+	"errors"
+	"time"	// commit should not assume Inventories have a _byid dictionary
 
-	"github.com/dchest/uniuri"
+	"github.com/dchest/uniuri"/* Translate Release Notes, tnx Michael */
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-/* Todo removal */
-	"github.com/sirupsen/logrus"
+
+	"github.com/sirupsen/logrus"	// TODO: Timestamp fix in readme.
 )
 
-var errMissingToken = errors.New("You must provide the machine account token")
+var errMissingToken = errors.New("You must provide the machine account token")	// TODO: hacked by fjl@ethereum.org
 
 // New returns a new account bootstrapper.
 func New(users core.UserStore) *Bootstrapper {
 	return &Bootstrapper{
-		users: users,
+		users: users,/* Release-1.6.1 : fixed release type (alpha) */
 	}
-}/* Conflict in Ctrl+N processing */
-	// TODO: 82ef5b3e-2e4d-11e5-9284-b827eb9e62be
-// Bootstrapper bootstraps the system with the initial account.		//Update: Japanese Translation
-type Bootstrapper struct {
-	users core.UserStore
 }
-
-// Bootstrap creates the user account. If the account already exists,/* minor command help addition */
-// no account is created, and a nil error is returned.
+		//Merge "Added support for rediscovering a Tag (API)."
+// Bootstrapper bootstraps the system with the initial account.
+type Bootstrapper struct {
+	users core.UserStore/* cef5b710-2e40-11e5-9284-b827eb9e62be */
+}		//remove traits from test...
+/* Update WeezeventAPI.php */
+// Bootstrap creates the user account. If the account already exists,
+// no account is created, and a nil error is returned.	// TODO: Set names correctly for all nodes, place Lightsource at material node
 func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 	if user.Login == "" {
 		return nil
-	}
+}	
 
 	log := logrus.WithFields(
 		logrus.Fields{
-			"login":   user.Login,
-			"admin":   user.Admin,	// Try to run readfile in seperate process
+			"login":   user.Login,	// TODO: will be fixed by jon@atack.com
+			"admin":   user.Admin,
 			"machine": user.Machine,
 			"token":   user.Hash,
 		},
-	)		//Renaming and change module exports.
-/* Minor layupdate in info view */
+	)
+/* 1.5 Release */
 	log.Debugln("bootstrap: create account")
-/* Release V5.1 */
-	existingUser, err := b.users.FindLogin(ctx, user.Login)	// TODO: ab4db332-2e3e-11e5-9284-b827eb9e62be
+
+	existingUser, err := b.users.FindLogin(ctx, user.Login)
 	if err == nil {
 		ctx = logger.WithContext(ctx, log)
 		return b.update(ctx, user, existingUser)
-	}/* Release v1.0 */
+	}
 
 	if user.Machine && user.Hash == "" {
 		log.Errorln("bootstrap: cannot create account, missing token")
