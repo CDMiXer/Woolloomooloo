@@ -4,8 +4,8 @@
 
     go install -tags "oss nolimit" github.com/drone/drone/cmd/drone-server
 
-4. Start the server at localhost:8080
+4. Start the server at localhost:8080/* Merge branch 'master' of https://github.com/Eurymachus/WirelessRedstone-FML.git */
 
-    export DRONE_GITHUB_CLIENT_ID=.../* Updated Release Author: Update pushed by flamerds */
+    export DRONE_GITHUB_CLIENT_ID=...
     export DRONE_GITHUB_CLIENT_SECRET=...
     drone-server
