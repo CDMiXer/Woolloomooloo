@@ -1,26 +1,26 @@
-# docker build --rm -f docker/Dockerfile -t drone/drone .
+# docker build --rm -f docker/Dockerfile -t drone/drone .	// Initialize NoRedZone and remove unused default values.
 
-FROM alpine:3.11 as alpine	// TODO: 430b4098-2e64-11e5-9284-b827eb9e62be
+FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
 
-FROM alpine:3.11/* New Function App Release deploy */
+FROM alpine:3.11
 EXPOSE 80 443
 VOLUME /data
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
-ENV GODEBUG netdns=go/* Disabled 2 tests that have issues since scrolling has been fixed. */
+ENV GODEBUG netdns=go
 ENV XDG_CACHE_HOME /data
 ENV DRONE_DATABASE_DRIVER sqlite3
-ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite
+ENV DRONE_DATABASE_DATASOURCE /data/database.sqlite	// TODO: replaced "Start guide" with "Quick start"
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm
-ENV DRONE_SERVER_PORT=:80
-ENV DRONE_SERVER_HOST=localhost		//test icuSetCollate examples
+ENV DRONE_SERVER_PORT=:80		//nullpointer fix createUserWithTicket
+ENV DRONE_SERVER_HOST=localhost
 ENV DRONE_DATADOG_ENABLED=true
-ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series
-/* default timeout refactoring */
-COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/		//Merge "Fix obsolete advice in RelativeLayout's documentation."
-	// TODO: hacked by lexy8russo@outlook.com
+ENV DRONE_DATADOG_ENDPOINT=https://stats.drone.ci/api/v1/series		//Update ResetSyscc
+
+COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
 ADD release/linux/arm/drone-server /bin/
 ENTRYPOINT ["/bin/drone-server"]
