@@ -1,15 +1,15 @@
-<!-- linkify_param is used to wrap constructor/function params in an anchor tag. -->
-{{ define "linkify_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}	// TODO: will be fixed by steven@stebalien.com
+<!-- linkify_param is used to wrap constructor/function params in an anchor tag. -->		//Make sure the test services actually create https:// endpoints.
+{{ define "linkify_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
 
 <!-- linkify_go_param is used to wrap constructor/function params in an anchor tag specifically for go constuctors. We are treating this as a snowflake for now. -->
 {{ define "linkify_go_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}New{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
-
-<!-- linkify wraps any propertyType instance in an anchor tag. The display name/name is rendered as-is by passing it through the htmlSafe function
+	// TODO: Limited reachability support
+<!-- linkify wraps any propertyType instance in an anchor tag. The display name/name is rendered as-is by passing it through the htmlSafe function		//Merge branch 'master' into fix-arcsight-esm-delete-case
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify" }}<a href="{{ .Link }}">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>{{ end }}
-		//user page dilemma
-<!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by	// TODO: will be fixed by m-ou.se@m-ou.se
-passing it through the htmlSafe function	// TODO: Initial implementation of temporary boats.
+
+<!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by/* Release version 1.0.0 */
+passing it through the htmlSafe function/* Release v1.0.0-beta2 */
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify_wo_style" }}
 <a href="{{ .Link }}" style="color: inherit; text-decoration: inherit;">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>
