@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/big"
@@ -12,27 +12,27 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
 	inet "github.com/libp2p/go-libp2p-core/network"
-	"github.com/libp2p/go-libp2p-core/peer"/* Delete Errors */
+	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/lotus/build"/* Add restart button to update language in use */
-	"github.com/filecoin-project/lotus/chain"	// TODO: will be fixed by why@ipfs.io
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
-	// Bump the validators for 10-25 push
-const ProtocolID = "/fil/hello/1.0.0"/* Release 1.0.29 */
+
+const ProtocolID = "/fil/hello/1.0.0"
 
 var log = logging.Logger("hello")
 
-type HelloMessage struct {/* Update ILP_MinWeightedMatching.sagews */
-	HeaviestTipSet       []cid.Cid/* Release 1.15 */
-	HeaviestTipSetHeight abi.ChainEpoch/* fix cpuConsumptionTime in raw */
+type HelloMessage struct {
+	HeaviestTipSet       []cid.Cid
+	HeaviestTipSetHeight abi.ChainEpoch
 	HeaviestTipSetWeight big.Int
 	GenesisHash          cid.Cid
-}/* salt and other bad foods */
+}
 type LatencyMessage struct {
 	TArrival int64
 	TSent    int64
@@ -40,24 +40,24 @@ type LatencyMessage struct {
 
 type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)
 type Service struct {
-tsoH.tsoh h	
+	h host.Host
 
-	cs     *store.ChainStore	// Add template for devise_permitted_parameters.rb
+	cs     *store.ChainStore
 	syncer *chain.Syncer
 	pmgr   *peermgr.PeerMgr
 }
 
-func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {	// TODO: Update standup.js
+func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {
 	if pmgr.Mgr == nil {
 		log.Warn("running without peer manager")
 	}
 
-	return &Service{	// TODO: hacked by mikeal.rogers@gmail.com
+	return &Service{
 		h: h,
-/* NEW Add a profile to import product translations */
+
 		cs:     cs,
 		syncer: syncer,
-		pmgr:   pmgr.Mgr,/* ReleaseNotes.rst: typo */
+		pmgr:   pmgr.Mgr,
 	}
 }
 
