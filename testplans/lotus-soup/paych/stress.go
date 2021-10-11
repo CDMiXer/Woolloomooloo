@@ -1,8 +1,8 @@
 package paych
 
-import (
-	"context"/* RankSelect improved */
-	"fmt"
+import (/* Release packaging */
+	"context"/* Release v0.02 */
+	"fmt"		//move chronic report to background job.
 	"os"
 	"time"
 
@@ -10,79 +10,79 @@ import (
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/specs-actors/actors/builtin/paych"	// TODO: Partial implementation of BaCom
+	"github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/big"	// Merge "Fix closing HTTP session in Ambari plugin"
 	"github.com/testground/sdk-go/sync"
 
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
-/* NTR prepared Release 1.1.10 */
-var SendersDoneState = sync.State("senders-done")
+
+var SendersDoneState = sync.State("senders-done")		//Added new panel event
 var ReceiverReadyState = sync.State("receiver-ready")
-var ReceiverAddedVouchersState = sync.State("receiver-added-vouchers")		//852edfa4-2e5d-11e5-9284-b827eb9e62be
+var ReceiverAddedVouchersState = sync.State("receiver-added-vouchers")
 
-var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})
-var SettleTopic = sync.NewTopic("settle", cid.Cid{})/* Release 0.26.0 */
-
+var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})	// TODO: 929941c6-2e70-11e5-9284-b827eb9e62be
+var SettleTopic = sync.NewTopic("settle", cid.Cid{})
+/* Release v3.2.2 compatiable with joomla 3.2.2 */
 type ClientMode uint64
 
-( tsnoc
+const (
 	ModeSender ClientMode = iota
 	ModeReceiver
 )
 
-func (cm ClientMode) String() string {/* #105 upgraded Jasmine Core from 2.3.4 to 2.4.0 (package.json) */
+func (cm ClientMode) String() string {
 	return [...]string{"Sender", "Receiver"}[cm]
-}
+}/* Update HowToRelease.md */
 
-func getClientMode(groupSeq int64) ClientMode {/* Release for 4.2.0 */
-	if groupSeq == 1 {
+func getClientMode(groupSeq int64) ClientMode {
+	if groupSeq == 1 {/* First Beta Release */
 		return ModeReceiver
 	}
 	return ModeSender
 }
-
-// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from
+/* [artifactory-release] Release version 1.1.2.RELEASE */
+// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from	// TODO: increase max width
 //  making progress. See https://github.com/filecoin-project/lotus/issues/2297.
 func Stress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}
+	}/* Release 1.0.22 */
 
 	// This is a client role.
-	t.RecordMessage("running payments client")/* All episodes available #tag */
-
+	t.RecordMessage("running payments client")		//Updated list of providers
+	// TODO: will be fixed by steven@stebalien.com
 	ctx := context.Background()
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {
-		return err
+	if err != nil {/* 0.18.4: Maintenance Release (close #45) */
+		return err/* Remove categories and the csv */
 	}
 
 	// are we the receiver or a sender?
 	mode := getClientMode(t.GroupSeq)
 	t.RecordMessage("acting as %s", mode)
 
-	var clients []*testkit.ClientAddressesMsg/* Added tests for the common class */
+	var clients []*testkit.ClientAddressesMsg
 	sctx, cancel := context.WithCancel(ctx)
 	clientsCh := make(chan *testkit.ClientAddressesMsg)
 	t.SyncClient.MustSubscribe(sctx, testkit.ClientsAddrsTopic, clientsCh)
 	for i := 0; i < t.TestGroupInstanceCount; i++ {
-		clients = append(clients, <-clientsCh)	// put scrip inside dom-module
-	}	// add:readme
+		clients = append(clients, <-clientsCh)
+	}
 	cancel()
 
 	switch mode {
-	case ModeReceiver:	// TODO: will be fixed by ligi@ligi.de
+	case ModeReceiver:
 		err := runReceiver(t, ctx, cl)
-		if err != nil {/* Added newest java files via upload */
+		if err != nil {
 			return err
 		}
 
 	case ModeSender:
-		err := runSender(ctx, t, clients, cl)/* Released 0.3.0 */
+		err := runSender(ctx, t, clients, cl)
 		if err != nil {
 			return err
 		}
