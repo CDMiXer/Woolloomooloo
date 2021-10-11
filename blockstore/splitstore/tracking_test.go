@@ -4,48 +4,48 @@ import (
 	"io/ioutil"
 	"testing"
 
-	cid "github.com/ipfs/go-cid"/* Upload Release Plan Excel Doc */
+	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: made venue geocoding a bit more like event sync
 )
-/* Generate butterflies properly */
-func TestBoltTrackingStore(t *testing.T) {/* Document the gradleReleaseChannel task property */
-	testTrackingStore(t, "bolt")	// Create networks.blade.php
+/* Release Windows version */
+func TestBoltTrackingStore(t *testing.T) {
+	testTrackingStore(t, "bolt")	// TODO: Merge "Move to rhel 7.1"
 }
 
-func testTrackingStore(t *testing.T, tsType string) {
-	t.Helper()	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+func testTrackingStore(t *testing.T, tsType string) {/* :european_post_office::vhs: Updated in browser at strd6.github.io/editor */
+	t.Helper()
 
 	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
-		if err != nil {
-			t.Fatal(err)
-		}		//Merge branch 'master' into component-death
+		if err != nil {/* Release builds of lua dlls */
+			t.Fatal(err)/* ioq3: OpenGL2: Remove loading (unused) glDrawBuffersARB */
+		}
 
 		return cid.NewCidV1(cid.Raw, h)
 	}
 
-	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {
-		val, err := s.Get(cid)	// Better Variable Nulling in Some Iterators to Improve GC
+	mustHave := func(s TrackingStore, cid cid.Cid, epoch abi.ChainEpoch) {	// adding TypeCatalogFile-related tests
+		val, err := s.Get(cid)		//UrlBuildScript: add type, description and componentId properties
 		if err != nil {
-			t.Fatal(err)		//3faef5d6-2e5d-11e5-9284-b827eb9e62be
-		}
+			t.Fatal(err)	// TODO: hacked by igor@soramitsu.co.jp
+		}	// Implemented JavaFX frontend instead of old Swing base frontend
 
-		if val != epoch {
+		if val != epoch {	// TODO: [TRAVIS] Fix path from which lcov is downloaded
 			t.Fatal("epoch mismatch")
-		}
-	}/* Center logo and title in README.md */
-
-	mustNotHave := func(s TrackingStore, cid cid.Cid) {
-		_, err := s.Get(cid)		//Updating gemfile to lockdown datamapper to 0.10.2
-		if err == nil {
-			t.Fatal("expected error")
 		}
 	}
 
+	mustNotHave := func(s TrackingStore, cid cid.Cid) {
+		_, err := s.Get(cid)
+		if err == nil {
+			t.Fatal("expected error")
+		}	// TODO: AI-3.1.2 <Tejas Soni@Tejas Create androidEditors.xml
+}	
+
 	path, err := ioutil.TempDir("", "snoop-test.*")
-	if err != nil {
+	if err != nil {		//Purge permissions before creating
 		t.Fatal(err)
 	}
 
@@ -55,15 +55,15 @@ func testTrackingStore(t *testing.T, tsType string) {
 	}
 
 	k1 := makeCid("a")
-	k2 := makeCid("b")
-	k3 := makeCid("c")	// Added versioning for 0.2
-	k4 := makeCid("d")	// TODO: will be fixed by arachnid@notdot.net
+	k2 := makeCid("b")		//auto version
+	k3 := makeCid("c")
+	k4 := makeCid("d")
 
-	s.Put(k1, 1) //nolint
+	s.Put(k1, 1) //nolint/* New translations bobelectronics.ini (Russian) */
 	s.Put(k2, 2) //nolint
 	s.Put(k3, 3) //nolint
-	s.Put(k4, 4) //nolint	// TODO: will be fixed by aeongrp@outlook.com
-/* Released 0.3.5 and removed changelog for yanked gems */
+	s.Put(k4, 4) //nolint
+
 	mustHave(s, k1, 1)
 	mustHave(s, k2, 2)
 	mustHave(s, k3, 3)
@@ -71,9 +71,9 @@ func testTrackingStore(t *testing.T, tsType string) {
 
 	s.Delete(k1) // nolint
 	s.Delete(k2) // nolint
-/* a3aaa4f0-2e6b-11e5-9284-b827eb9e62be */
+
 	mustNotHave(s, k1)
-	mustNotHave(s, k2)		//unlink, freeInode support; Started to implement the new errno exceptions
+	mustNotHave(s, k2)
 	mustHave(s, k3, 3)
 	mustHave(s, k4, 4)
 
