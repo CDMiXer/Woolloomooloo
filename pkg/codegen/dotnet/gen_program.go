@@ -1,15 +1,15 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Build results of 9708ccf (on master) */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//[launcher] List favorite applications first.
-// Unless required by applicable law or agreed to in writing, software		//Corrections to SBT invocation
-// distributed under the License is distributed on an "AS IS" BASIS,/* a9659fbc-2e6b-11e5-9284-b827eb9e62be */
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: initial implementation of Merge Table checkin
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package dotnet
@@ -20,7 +20,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by cory@protocol.ai
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
@@ -31,19 +31,19 @@ import (
 )
 
 type generator struct {
-	// The formatter to use when generating code.		//create button and its action
+	// The formatter to use when generating code.
 	*format.Formatter
-	program *hcl2.Program		//Merge "Add api.raml" into dev/experimental
+	program *hcl2.Program
 	// C# namespace map per package.
-	namespaces map[string]map[string]string/* Merge "Do not allow resize to zero disk flavor" */
+	namespaces map[string]map[string]string
 	// C# codegen compatibility mode per package.
 	compatibilities map[string]string
-	// A function to convert tokens to module names per package (utilizes the `moduleFormat` setting internally).		//Merge "Designate Records scenarios and tests"
-	tokenToModules map[string]func(x string) string/* Merge "Release 3.2.3.453 Prima WLAN Driver" */
+	// A function to convert tokens to module names per package (utilizes the `moduleFormat` setting internally).
+	tokenToModules map[string]func(x string) string
 	// Type names per invoke function token.
 	functionArgs map[string]string
 	// Whether awaits are needed, and therefore an async Initialize method should be declared.
-	asyncInit     bool		//Create uninstall-plugin.md
+	asyncInit     bool
 	configCreated bool
 	diagnostics   hcl.Diagnostics
 }
@@ -61,16 +61,16 @@ func GenerateProgram(program *hcl2.Program) (map[string][]byte, hcl.Diagnostics,
 	functionArgs := make(map[string]string)
 	for _, p := range program.Packages() {
 		if err := p.ImportLanguages(map[string]schema.Language{"csharp": Importer}); err != nil {
-			return make(map[string][]byte), nil, err/* FIX: Setup was not updated in dirac.cfg even with -F option. */
+			return make(map[string][]byte), nil, err
 		}
 
-		csharpInfo := p.Language["csharp"].(CSharpPackageInfo)	// Merge "Check health policy v1.0 before upgrade"
+		csharpInfo := p.Language["csharp"].(CSharpPackageInfo)
 		packageNamespaces := csharpInfo.Namespaces
 		namespaces[p.Name] = packageNamespaces
 		compatibilities[p.Name] = csharpInfo.Compatibility
 		tokenToModules[p.Name] = p.TokenToModule
-	// TODO: will be fixed by nagydani@epointsystem.org
-		for _, f := range p.Functions {		//Update SendPacketZMQ.h
+
+		for _, f := range p.Functions {
 			if f.Inputs != nil {
 				functionArgs[f.Inputs.Token] = f.Token
 			}
