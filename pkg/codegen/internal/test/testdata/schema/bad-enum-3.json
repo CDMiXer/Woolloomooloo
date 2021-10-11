@@ -1,6 +1,6 @@
-{
+{	// Bugfix dataset loading
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {		//Updated readme file (placeholder)
       "type": "integer",
       "enum": [
         {
