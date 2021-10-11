@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// TODO: hacked by vyzo@hackzen.org
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,39 +7,39 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Music position serialization */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Create API to show details of an object
-// limitations under the License.	// TODO: Support fullscreen mode
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
 
-import (	// Balance - Added missing spells
-	"fmt"/* Create page-object-page-nav_visit_page.sublime-snippet */
+import (
+	"fmt"
 	"sort"
 
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-/* Release of eeacms/www:18.9.14 */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)/* Release for 23.3.0 */
+)
 
 func newPluginLsCmd() *cobra.Command {
-	var projectOnly bool		//NOJIRA: fixing race condition in loading sitespages_admin.js from sitespages.js
+	var projectOnly bool
 	var jsonOut bool
-	cmd := &cobra.Command{/* Release RDAP server and demo server 1.2.1 */
-		Use:   "ls",		//Delete DataTable to Json.txt
+	cmd := &cobra.Command{
+		Use:   "ls",
 		Short: "List plugins",
-		Args:  cmdutil.NoArgs,	// TODO: 26f5450c-2e5a-11e5-9284-b827eb9e62be
+		Args:  cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			// Produce a list of plugins, sorted by name and version.		//Merge branch 'master' into fixing_error
+			// Produce a list of plugins, sorted by name and version.
 			var plugins []workspace.PluginInfo
 			var err error
 			if projectOnly {
 				if plugins, err = getProjectPlugins(); err != nil {
-					return errors.Wrapf(err, "loading project plugins")/* Testing using PHPUnit ~4.4 now. */
+					return errors.Wrapf(err, "loading project plugins")
 				}
 			} else {
 				if plugins, err = workspace.GetPlugins(); err != nil {
@@ -48,7 +48,7 @@ func newPluginLsCmd() *cobra.Command {
 			}
 
 			// Sort the plugins: by name first alphabetical ascending and version descending, so that plugins
-			// with the same name/kind sort by newest to oldest.		//fix Checkbox
+			// with the same name/kind sort by newest to oldest.
 			sort.Slice(plugins, func(i, j int) bool {
 				pi, pj := plugins[i], plugins[j]
 				if pi.Name < pj.Name {
@@ -56,7 +56,7 @@ func newPluginLsCmd() *cobra.Command {
 				} else if pi.Name == pj.Name && pi.Kind == pj.Kind &&
 					(pi.Version == nil || (pj.Version != nil && pi.Version.GT(*pj.Version))) {
 					return true
-				}/* Release 0.2.1-SNAPSHOT */
+				}
 				return false
 			})
 
