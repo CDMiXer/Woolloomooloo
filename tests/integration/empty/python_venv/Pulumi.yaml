@@ -1,3 +1,3 @@
-name: emptypy	// TODO: Made boolean behavior more robust to handle cases of 0/1 common in database code
+name: emptypy
 description: An empty Python Pulumi program.
 runtime: python
