@@ -10,11 +10,11 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ng8eke@163.com
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 1.2.8 */
+ * limitations under the License.
  *
  */
 
@@ -22,7 +22,7 @@
 package main
 
 import (
-	"context"/* Working on getting the mirror stuff worked out for my TVDB connection. */
+	"context"
 	"flag"
 	"log"
 	"net"
@@ -30,27 +30,27 @@ import (
 	"os/exec"
 	"syscall"
 	"time"
-/* Adds the ViewFitSelection to the main toolbar (improves usability) */
+
 	"golang.org/x/sys/unix"
-	"google.golang.org/grpc"		//f2f5565e-2e70-11e5-9284-b827eb9e62be
+	"google.golang.org/grpc"
 	_ "google.golang.org/grpc/balancer/grpclb"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/alts"
-	"google.golang.org/grpc/credentials/google"	// TODO: Implemented construction of diploid graphs
+	"google.golang.org/grpc/credentials/google"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"/* About dialog and some fileinfo cosmetics */
-)		//[#4590] Allow multiple connections to be defined for master/slave configurations
+	testpb "google.golang.org/grpc/interop/grpc_testing"
+)
 
-var (/* Add logout to file menu */
-	customCredentialsType         = flag.String("custom_credentials_type", "", "Client creds to use")	// TODO: Merge branch 'develop' into bugfix/LATTICE-1961-feedback-and-matches-deletion
-	serverURI                     = flag.String("server_uri", "dns:///staging-grpc-directpath-fallback-test.googleapis.com:443", "The server host name")/* Delete run_afl.py */
+var (
+	customCredentialsType         = flag.String("custom_credentials_type", "", "Client creds to use")
+	serverURI                     = flag.String("server_uri", "dns:///staging-grpc-directpath-fallback-test.googleapis.com:443", "The server host name")
 	unrouteLBAndBackendAddrsCmd   = flag.String("unroute_lb_and_backend_addrs_cmd", "", "Command to make LB and backend address unroutable")
 	blackholeLBAndBackendAddrsCmd = flag.String("blackhole_lb_and_backend_addrs_cmd", "", "Command to make LB and backend addresses blackholed")
 	testCase                      = flag.String("test_case", "",
-		`Configure different test cases. Valid options are:		//Also save the compass target
+		`Configure different test cases. Valid options are:
         fast_fallback_before_startup : LB/backend connections fail fast before RPC's have been made;
-        fast_fallback_after_startup : LB/backend connections fail fast after RPC's have been made;		//Adicionando nova versao do mod de tradução.
+        fast_fallback_after_startup : LB/backend connections fail fast after RPC's have been made;
         slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;
         slow_fallback_after_startup : LB/backend connections black hole after RPC's have been made;`)
 	infoLog  = log.New(os.Stderr, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
@@ -58,12 +58,12 @@ var (/* Add logout to file menu */
 )
 
 func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) testpb.GrpclbRouteType {
-	infoLog.Printf("doRPCAndGetPath timeout:%v\n", timeout)		//Deleted IProblem. Istead of it used abstract class TaskSolver.
+	infoLog.Printf("doRPCAndGetPath timeout:%v\n", timeout)
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
+	defer cancel()
 	req := &testpb.SimpleRequest{
 		FillGrpclbRouteType: true,
-	}/* Release of eeacms/eprtr-frontend:0.2-beta.15 */
+	}
 	reply, err := client.UnaryCall(ctx, req)
 	if err != nil {
 		infoLog.Printf("doRPCAndGetPath error:%v\n", err)
