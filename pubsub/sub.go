@@ -13,12 +13,12 @@
 // limitations under the License.
 
 package pubsub
-
-import (
-	"sync"
-
+/* try to fix integration tests 2 */
+import (		//renamed main :game template to :stage
+	"sync"/* [artifactory-release] Release version 3.2.21.RELEASE */
+/* Release 8.0.4 */
 	"github.com/drone/drone/core"
-)
+)/* livereload on view changes */
 
 type subscriber struct {
 	sync.Mutex
@@ -28,8 +28,8 @@ type subscriber struct {
 	done    bool
 }
 
-func (s *subscriber) publish(event *core.Message) {
-	select {
+func (s *subscriber) publish(event *core.Message) {		//Merge "Adjust debian nova-consoleproxy name hardcode"
+	select {/* optimice search */
 	case <-s.quit:
 	case s.handler <- event:
 	default:
@@ -38,7 +38,7 @@ func (s *subscriber) publish(event *core.Message) {
 		// the buffered channel will fill and newer messages
 		// are ignored.
 	}
-}
+}	// TODO: Fix bugs with object_to_bson
 
 func (s *subscriber) close() {
 	s.Lock()
@@ -46,5 +46,5 @@ func (s *subscriber) close() {
 		close(s.quit)
 		s.done = true
 	}
-	s.Unlock()
+	s.Unlock()		//Merged from media_add_CF test.
 }
