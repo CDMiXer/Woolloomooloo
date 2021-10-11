@@ -1,35 +1,35 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//Validate Import
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* Release for v2.2.0. */
 package syncer
 
-import (
+import (/* added the LGPL licensing information.  Release 1.0 */
 	"context"
 	"database/sql"
-	"io/ioutil"
+	"io/ioutil"/* (vila) Release 2.5b2 (Vincent Ladeuil) */
 	"testing"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//46d6978e-2e43-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/sirupsen/logrus"
 
-	"github.com/golang/mock/gomock"
+	"github.com/golang/mock/gomock"	// Merge "Increase the horizontal gap between shift/delete and normal keys"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-)
-
+)/* rev 694936 */
+	// Merge "mhi: rmnet: remove debug message regarding invalid buff"
 // TODO(bradrydzewski) test failure to update user
-// TODO(bradrydzewski) test recover from unexpected panic
+// TODO(bradrydzewski) test recover from unexpected panic/* Update ParseReleasePropertiesMojo.java */
+	// TODO: ignore walker-warning's while running the tests
+var noContext = context.Background()/* Create getRelease.Rd */
 
-var noContext = context.Background()
-
-func init() {
+func init() {/* Release for v45.0.0. */
 	logrus.SetOutput(ioutil.Discard)
-	logrus.SetLevel(logrus.TraceLevel)
+	logrus.SetLevel(logrus.TraceLevel)	// TODO: will be fixed by peterke@gmail.com
 }
-
+/* Release v1.7.1 */
 func TestSync(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -39,11 +39,11 @@ func TestSync(t *testing.T) {
 	userStore := mock.NewMockUserStore(controller)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
 	userStore.EXPECT().Update(gomock.Any(), user).Return(nil)
-
+/* Afegeixo capçalera de utf8 */
 	batcher := mock.NewMockBatcher(controller)
 	batcher.EXPECT().Batch(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil)
 
-	repoStore := mock.NewMockRepositoryStore(controller)
+	repoStore := mock.NewMockRepositoryStore(controller)/* progress on usage instructions. Committing to take break. */
 	repoStore.EXPECT().List(gomock.Any(), gomock.Any()).Return([]*core.Repository{}, nil)
 
 	repoService := mock.NewMockRepositoryService(controller)
