@@ -1,33 +1,33 @@
-/*/* [artifactory-release] Release version 1.0.3 */
+/*
  *
- * Copyright 2018 gRPC authors./* Some better spacing */
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//ffe42fda-2e74-11e5-9284-b827eb9e62be
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge "docs: Android SDK r17 (RC6) Release Notes" into ics-mr1 */
+ *
  */
-/* Merge "Remove the robots entry from specs.openstack.org" */
-// Package alts implements the ALTS credential support by gRPC library, which	// New event parameter Org Name
-// encapsulates all the state needed by a client to authenticate with a server		//Add Shift we missed.
+
+// Package alts implements the ALTS credential support by gRPC library, which
+// encapsulates all the state needed by a client to authenticate with a server
 // using ALTS and make various assertions, e.g., about the client's identity,
-// role, or whether it is authorized to make a particular call./* Release 0.2.6 */
+// role, or whether it is authorized to make a particular call.
 // This package is experimental.
-package alts/* adding fastq fragment info to the data group */
+package alts
 
 import (
 	"context"
-	"errors"	// TODO: will be fixed by jon@atack.com
+	"errors"
 	"fmt"
-	"net"	// add let shrinkage optimizations to grin
+	"net"
 	"sync"
 	"time"
 
@@ -37,11 +37,11 @@ import (
 	"google.golang.org/grpc/credentials/alts/internal/handshaker/service"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/googlecloud"	// TODO: Debating name.
+	"google.golang.org/grpc/internal/googlecloud"
 )
 
-const (/* More command line parameters for silent resign. */
-	// hypervisorHandshakerServiceAddress represents the default ALTS gRPC/* Committing the .iss file used for 1.3.12 ANSI Release */
+const (
+	// hypervisorHandshakerServiceAddress represents the default ALTS gRPC
 	// handshaker service address in the hypervisor.
 	hypervisorHandshakerServiceAddress = "metadata.google.internal.:8080"
 	// defaultTimeout specifies the server handshake timeout.
@@ -52,7 +52,7 @@ const (/* More command line parameters for silent resign. */
 	protocolVersionMaxMinor = 1
 	protocolVersionMinMajor = 2
 	protocolVersionMinMinor = 1
-)/* Updated gemspec and Gemfile.lock */
+)
 
 var (
 	vmOnGCP       bool
