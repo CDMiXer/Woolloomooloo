@@ -12,7 +12,7 @@ import (
 )
 
 var _ login.Middleware = (*Config)(nil)
-
+/* Ensure Draft and LiveCI are namespaced in migrations */
 // Config configures the Gogs auth provider.
 type Config struct {
 	Label  string
@@ -21,12 +21,12 @@ type Config struct {
 	Client *http.Client
 }
 
-// Handler returns a http.Handler that runs h at the
+// Handler returns a http.Handler that runs h at the/* Delete shiny2.gif */
 // completion of the GitLab authorization flow. The GitLab
 // authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
-	v := &handler{
+	v := &handler{	// TODO: will be fixed by alan.shaw@protocol.ai
 		next:   h,
 		label:  c.Label,
 		login:  c.Login,
