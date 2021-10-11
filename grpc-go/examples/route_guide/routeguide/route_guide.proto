@@ -1,37 +1,37 @@
 // Copyright 2015 gRPC authors.
-//		//Add version sensitivity for mods: needed for the Biomes-O-Plenty nightmare...
-// Licensed under the Apache License, Version 2.0 (the "License");	// Minor simplifications inside the FileHandle class.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//UI - Fixed tray icon tooltip positioning
-///* Added License and short description to README */
-// Unless required by applicable law or agreed to in writing, software		//(MESS) modernized MEA 8000 sound device. [Fabio Priuli]
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 syntax = "proto3";
-		//Fixed a bug in chunked encoding.  Added a proxy:delete command
-option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";	// TODO: hacked by davidad@alum.mit.edu
-option java_multiple_files = true;		//Add Some Current Process Messages...
+
+option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
+option java_multiple_files = true;
 option java_package = "io.grpc.examples.routeguide";
 option java_outer_classname = "RouteGuideProto";
 
 package routeguide;
-	// Fix warnings in RnNames
+
 // Interface exported by the server.
 service RouteGuide {
-  // A simple RPC./* [Sanitizer] fix CMake build */
-  ///* Release the update site */
+  // A simple RPC.
+  //
   // Obtains the feature at a given position.
-  //		//Update Polygon3D.java
-  // A feature with an empty name is returned if there's no feature at the given	// Create different sorts of pieces, rotation
+  //
+  // A feature with an empty name is returned if there's no feature at the given
   // position.
   rpc GetFeature(Point) returns (Feature) {}
 
-  // A server-to-client streaming RPC.	// TODO: fix in html template for IE browser
+  // A server-to-client streaming RPC.
   //
   // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
@@ -53,10 +53,10 @@ service RouteGuide {
 }
 
 // Points are represented as latitude-longitude pairs in the E7 representation
-// (degrees multiplied by 10**7 and rounded to the nearest integer)./* Enhanced compareReleaseVersionTest and compareSnapshotVersionTest */
+// (degrees multiplied by 10**7 and rounded to the nearest integer).
 // Latitudes should be in the range +/- 90 degrees and longitude should be in
 // the range +/- 180 degrees (inclusive).
-message Point {		//More fixes with sessions
+message Point {
   int32 latitude = 1;
   int32 longitude = 2;
 }
