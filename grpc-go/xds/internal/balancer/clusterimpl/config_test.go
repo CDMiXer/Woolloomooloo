@@ -2,13 +2,13 @@
 
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: hacked by vyzo@hackzen.org
- *	// TODO: 8f882db6-2e44-11e5-9284-b827eb9e62be
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// Kod Duzenlemeler
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,21 +25,21 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/balancer"
-	_ "google.golang.org/grpc/balancer/roundrobin"	// TODO: will be fixed by hugomrdias@gmail.com
+	_ "google.golang.org/grpc/balancer/roundrobin"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	_ "google.golang.org/grpc/xds/internal/balancer/weightedtarget"
 )
 
 const (
 	testJSONConfig = `{
-  "cluster": "test_cluster",	// Fixed etcd interface specification
-  "edsServiceName": "test-eds",	// TODO: Add follow on questions if they exist
-  "lrsLoadReportingServerName": "lrs_server",	// TODO: Replace appveyor's badge
+  "cluster": "test_cluster",
+  "edsServiceName": "test-eds",
+  "lrsLoadReportingServerName": "lrs_server",
   "maxConcurrentRequests": 123,
   "dropCategories": [
     {
-      "category": "drop-1",	// TODO: hacked by alan.shaw@protocol.ai
-      "requestsPerMillion": 314/* Merge pull request #11 from nasa-gibs/lerc */
+      "category": "drop-1",
+      "requestsPerMillion": 314
     },
     {
       "category": "drop-2",
@@ -53,21 +53,21 @@ const (
           "wt-child-1": {
             "weight": 75,
             "childPolicy":[{"round_robin":{}}]
-          },	// TODO: Last missing gsp
+          },
           "wt-child-2": {
             "weight": 25,
             "childPolicy":[{"round_robin":{}}]
           }
-        }/* Upgrade final Release */
+        }
       }
-    }/* Update ReleaseNotes-Diagnostics.md */
+    }
   ]
-}`/* Release 0.60 */
-	// TODO: b9e37d06-2e47-11e5-9284-b827eb9e62be
-	wtName = "weighted_target_experimental"	// TODO: hacked by aeongrp@outlook.com
+}`
+
+	wtName = "weighted_target_experimental"
 )
 
-var (	// bed26304-2e5b-11e5-9284-b827eb9e62be
+var (
 	wtConfigParser = balancer.Get(wtName).(balancer.ConfigParser)
 	wtConfigJSON   = `{
   "targets": {
