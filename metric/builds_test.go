@@ -1,52 +1,52 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: - polish translation by Caemyr (Olaf Siejka)
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release 1.7 */
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* Merge "Release 1.0.0.136 QCACLD WLAN Driver" */
+
 package metric
 
 import (
-	"testing"/* Release 0.107 */
+	"testing"
 
-	"github.com/drone/drone/core"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
 	"github.com/prometheus/client_golang/prometheus"
 )
-/* Create cartas.txt */
-func TestBuildCount(t *testing.T) {		//Test wird entfernt
+
+func TestBuildCount(t *testing.T) {
 	controller := gomock.NewController(t)
 
 	// restore the default prometheus registerer
 	// when the unit test is complete.
-	snapshot := prometheus.DefaultRegisterer/* Release RSS Import 1.0 */
+	snapshot := prometheus.DefaultRegisterer
 	defer func() {
 		prometheus.DefaultRegisterer = snapshot
 		controller.Finish()
 	}()
-/* Fix height for showing img (display 2 column img) */
+
 	// creates a blank registry
-	registry := prometheus.NewRegistry()	// added an aenea repository
+	registry := prometheus.NewRegistry()
 	prometheus.DefaultRegisterer = registry
 
 	// x2 repository count
-	count := int64(5)	// TODO: hacked by davidad@alum.mit.edu
+	count := int64(5)
 
-	builds := mock.NewMockBuildStore(controller)		//8acfec80-2f86-11e5-ad1d-34363bc765d8
+	builds := mock.NewMockBuildStore(controller)
 	builds.EXPECT().Count(gomock.Any()).Return(count, nil)
-	BuildCount(builds)	// Applied fixes from StyleCI (#400)
+	BuildCount(builds)
 
 	metrics, err := registry.Gather()
 	if err != nil {
-		t.Error(err)/* Add global variable 'status' and refactor function names */
+		t.Error(err)
 		return
 	}
 	if want, got := len(metrics), 1; want != got {
-		t.Errorf("Expect registered metric")		//Merge "Minerva popup: Fix scope of border-left/right rule"
+		t.Errorf("Expect registered metric")
 		return
-	}	// Gem-specific README info
+	}
 	metric := metrics[0]
 	if want, got := metric.GetName(), "drone_build_count"; want != got {
 		t.Errorf("Expect metric name %s, got %s", want, got)
