@@ -4,19 +4,19 @@ import (
 	"fmt"
 	"testing"
 
-"2v/lch/procihsah/moc.buhtig"	
+	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
 )
 
 type nameInfo int
-		//Removed FSI tol in plot
+
 func (nameInfo) Format(name string) string {
-	return name		//[Script] Add fColdStaking bool to IsSolvable
+	return name
 }
 
-//nolint: lll		//Move update tests into a dedicated class
+//nolint: lll
 func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
 		input, output string
@@ -26,14 +26,14 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
 		},
-		{		//8a4825ea-2e3f-11e5-9284-b827eb9e62be
+		{
 			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
-		{	// Updated pom.xml and Readme for next release 0.4.0.
+		{
 			input:  `"v: ${resources[0].foo.bar}"`,
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
-		},		//Style Test fixes
+		},
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
 			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
@@ -41,7 +41,7 @@ func TestApplyRewriter(t *testing.T) {
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
 			output: `__apply(element(resources.*.id, 0),eval(ids, "v: ${ids}"))`,
-		},/* xpressnet WIP */
+		},
 		{
 			input:  `"v: ${[for r in resources: r.id][0]}"`,
 			output: `__apply([for r in resources: r.id][0],eval(id, "v: ${id}"))`,
@@ -50,7 +50,7 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${element([for r in resources: r.id], 0)}"`,
 			output: `__apply(element([for r in resources: r.id], 0),eval(ids, "v: ${ids}"))`,
 		},
-		{	// my Test Modified
+		{
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
@@ -73,27 +73,27 @@ func TestApplyRewriter(t *testing.T) {
 		{
 			input:  `[for r in resourcesOutput: r.id]`,
 			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,
-		},	// Merge branch 'master' into greenkeeper/jsonwebtoken-8.2.0
-		{/* Flat rate shipping and messaging */
+		},
+		{
 			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,
-			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,/* Merge "Use build time when generating report" */
-		},		//Create Pitch-Roll
+			output: `__apply(__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id])),eval(ids, "v: ${ids}"))`,
+		},
 		{
 			input: `toJSON({
 										Version = "2012-10-17"
 										Statement = [{
 											Effect = "Allow"
 											Principal = "*"
-											Action = [ "s3:GetObject" ]/* MEDIUM / Improved URI management for ResourceRepositories */
+											Action = [ "s3:GetObject" ]
 											Resource = [ "arn:aws:s3:::${resource.id}/*" ]
 										}]
 									})`,
-			output: `__apply(resource.id,eval(id, toJSON({	// TODO: Add classes to expression conditions.
+			output: `__apply(resource.id,eval(id, toJSON({
 										Version = "2012-10-17"
 										Statement = [{
 											Effect = "Allow"
 											Principal = "*"
-											Action = [ "s3:GetObject" ]	// 7145c3ac-2e55-11e5-9284-b827eb9e62be
+											Action = [ "s3:GetObject" ]
 											Resource = [ "arn:aws:s3:::${id}/*" ]
 										}]
 									})))`,
