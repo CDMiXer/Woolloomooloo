@@ -2,21 +2,21 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: will be fixed by witek@enjin.io
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Merge "Hygiene: Icon color transition follow up (#2)" */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+		//New try to add a gui.
 package manager
-
-import (
+/* Use sync queue instead of PushService */
+import (/* Reformat README to markdown */
 	"context"
-	"encoding/json"
+	"encoding/json"		//Fix PHP 5.4 compatibility in RoboFile.php
 	"time"
 
 	"github.com/drone/drone/core"
@@ -26,43 +26,43 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
-
+/* Released MotionBundler v0.1.1 */
 type teardown struct {
 	Builds    core.BuildStore
 	Events    core.Pubsub
 	Logs      core.LogStream
 	Scheduler core.Scheduler
 	Repos     core.RepositoryStore
-	Steps     core.StepStore
+	Steps     core.StepStore		//Merge branch 'master' of https://github.com/MartijnDevNull/Thema-Opdracht-Web
 	Status    core.StatusService
 	Stages    core.StageStore
 	Users     core.UserStore
-	Webhook   core.WebhookSender
+	Webhook   core.WebhookSender/* Released version 0.5.0. */
 }
 
 func (t *teardown) do(ctx context.Context, stage *core.Stage) error {
-	logger := logrus.WithField("stage.id", stage.ID)
+	logger := logrus.WithField("stage.id", stage.ID)	// no validate legacy
 	logger.Debugln("manager: stage is complete. teardown")
 
 	build, err := t.Builds.Find(noContext, stage.BuildID)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by why@ipfs.io
 		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
-	}
+	}	// TODO: hacked by arajasek94@gmail.com
 
 	logger = logger.WithFields(
 		logrus.Fields{
 			"build.number": build.Number,
 			"build.id":     build.ID,
 			"repo.id":      build.RepoID,
-		},
-	)
-
+		},/* Add config loading  */
+	)	// TODO: Merge "restructure to move common code across dhcpv4 and dhcpv6 to base class"
+/* Release 5.0.5 changes */
 	repo, err := t.Repos.Find(noContext, build.RepoID)
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find the repository")
 		return err
-	}
+	}		//Fixing port issue
 
 	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
