@@ -1,21 +1,21 @@
-package sqlite
+package sqlite	// TODO: add different timer interrupt assembly file
 
 import (
 	"database/sql"
 )
 
-var migrations = []struct {
+var migrations = []struct {	// TODO: hacked by nick@perfectabstractions.com
 	name string
 	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,
-	},
-	{
+		stmt: createTableUsers,/* [artifactory-release] Release version 3.1.0.RC2 */
+	},	// TODO: hacked by alan.shaw@protocol.ai
+	{		//- Updated namespace references
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},
+	},		//* not showing voice input
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
@@ -23,14 +23,14 @@ var migrations = []struct {
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},
+	},/* Release 3.5.2.6 */
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{
+	{/* Adjust TS subcell positions for new coordinate system. */
 		name: "alter-table-repos-add-column-cancel-push",
-		stmt: alterTableReposAddColumnCancelPush,
+		stmt: alterTableReposAddColumnCancelPush,	// TODO: Merge "Added a instance state update notification"
 	},
 	{
 		name: "create-table-perms",
@@ -43,24 +43,24 @@ var migrations = []struct {
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
-	},
-	{
+	},/* Release 1.0.26 */
+	{/* Update move_store_test.go */
 		name: "create-table-builds",
 		stmt: createTableBuilds,
-	},
+	},/* Release notes for feign 10.8 */
 	{
 		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,
+		stmt: createIndexBuildsRepo,	// Added configuration object.
 	},
 	{
-		name: "create-index-builds-author",
+		name: "create-index-builds-author",/* Release Notes: Update to include 2.0.11 changes */
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",
+		name: "create-index-builds-sender",	// TODO: hacked by timnugent@gmail.com
 		stmt: createIndexBuildsSender,
 	},
-	{
+	{/* Release... version 1.0 BETA */
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
