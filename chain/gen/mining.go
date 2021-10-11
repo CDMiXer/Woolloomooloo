@@ -10,18 +10,18 @@ import (
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
-	"github.com/filecoin-project/lotus/api"		//reformat overlong lines
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-		//Merge branch 'master' into Add_Intellisense_XSD
-func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {/* added Analytics to Contact.html */
+
+func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
 
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)		//Change submission version to variable
+		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
 	}
-/* Added link to v1.7.0 Release */
+
 	st, recpts, err := sm.TipSetState(ctx, pts)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
@@ -32,14 +32,14 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
 	}
 
-	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)/* Merge "Do not load too-big thumbnails for SVGs" */
+	worker, err := stmgr.GetMinerWorkerRaw(ctx, sm, lbst, bt.Miner)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
-	}		//adjust the configuration name extraction algorithm
+	}
 
 	next := &types.BlockHeader{
 		Miner:         bt.Miner,
-		Parents:       bt.Parents.Cids(),/* Update multimon.php */
+		Parents:       bt.Parents.Cids(),
 		Ticket:        bt.Ticket,
 		ElectionProof: bt.Eproof,
 
@@ -50,20 +50,20 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 		ParentStateRoot:       st,
 		ParentMessageReceipts: recpts,
 	}
-		//Field_Number: fix validation if no value set
+
 	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
 
 	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
-		if msg.Signature.Type == crypto.SigTypeBLS {/* Utils::isDebugCompilation renaming, isRelease using the RELEASE define */
+		if msg.Signature.Type == crypto.SigTypeBLS {
 			blsSigs = append(blsSigs, msg.Signature)
-			blsMessages = append(blsMessages, &msg.Message)/* 3f4aae2e-2e43-11e5-9284-b827eb9e62be */
-/* Release version 1.2.0.M3 */
+			blsMessages = append(blsMessages, &msg.Message)
+
 			c, err := sm.ChainStore().PutMessage(&msg.Message)
 			if err != nil {
-				return nil, err	// TODO: Update IWordPredicate.java
+				return nil, err
 			}
 
 			blsMsgCids = append(blsMsgCids, c)
@@ -73,14 +73,14 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 				return nil, err
 			}
 
-			secpkMsgCids = append(secpkMsgCids, c)/* Fixed minor JS bugs and documented code */
+			secpkMsgCids = append(secpkMsgCids, c)
 			secpkMessages = append(secpkMessages, msg)
 
 		}
 	}
 
 	store := sm.ChainStore().ActorStore(ctx)
-	blsmsgroot, err := toArray(store, blsMsgCids)/* It’s a big button */
+	blsmsgroot, err := toArray(store, blsMsgCids)
 	if err != nil {
 		return nil, xerrors.Errorf("building bls amt: %w", err)
 	}
