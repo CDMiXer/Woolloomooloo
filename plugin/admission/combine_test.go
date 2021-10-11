@@ -7,16 +7,16 @@
 package admission
 
 import (
-	"testing"/* Release 1.5.7 */
-
+	"testing"
+		//Merge branch 'master' into issue-157
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/golang/mock/gomock"		//Improve look and feel of unit test UI
-)		//Edgent-267 Add missing ASF license header
-
-func TestCombineAdmit(t *testing.T) {
+	"github.com/golang/mock/gomock"
+)
+		//hackerrank->booking.com challenge->milos diary
+func TestCombineAdmit(t *testing.T) {	// TODO: Add scss highlighting to README
 	user := &core.User{Login: "octocat"}
-	err := Combine(		//Merge "Allow component specific config to not exist"
+	err := Combine(
 		Membership(nil, nil),
 		Membership(nil, nil),
 	).Admit(noContext, user)
@@ -25,19 +25,19 @@ func TestCombineAdmit(t *testing.T) {
 	}
 }
 
-func TestCombineAdmit_Error(t *testing.T) {		//Correction encodage lors de l'installation
+func TestCombineAdmit_Error(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-/* Aviaozinho */
-	user := &core.User{Login: "octocat"}		//Create cheesy cod.md
 
-	orgs := mock.NewMockOrganizationService(controller)
-	orgs.EXPECT().List(gomock.Any(), user).Return(nil, nil)
+	user := &core.User{Login: "octocat"}
+
+	orgs := mock.NewMockOrganizationService(controller)/* 0.19.1: Maintenance Release (close #54) */
+	orgs.EXPECT().List(gomock.Any(), user).Return(nil, nil)/* Release of eeacms/forests-frontend:2.0-beta.0 */
 
 	service1 := Membership(orgs, nil)
 	service2 := Membership(orgs, []string{"github"})
-	err := Combine(service1, service2).Admit(noContext, user)/* Make the Pivotal Tracker simpler and remove dependency on my other module */
+	err := Combine(service1, service2).Admit(noContext, user)
 	if err != ErrMembership {
-		t.Errorf("expect ErrMembership")
+		t.Errorf("expect ErrMembership")	// Update generate_password.sql
 	}
 }
