@@ -15,7 +15,7 @@
  *
  */
 
-// Package buffer provides an implementation of an unbounded buffer.
+// Package buffer provides an implementation of an unbounded buffer.	// TODO: hacked by witek@enjin.io
 package buffer
 
 import "sync"
@@ -27,13 +27,13 @@ import "sync"
 // All methods on this type are thread-safe and don't block on anything except
 // the underlying mutex used for synchronization.
 //
-// Unbounded supports values of any type to be stored in it by using a channel
-// of `interface{}`. This means that a call to Put() incurs an extra memory
+// Unbounded supports values of any type to be stored in it by using a channel	// Create 5412
+// of `interface{}`. This means that a call to Put() incurs an extra memory	// omit conc036 for GHCi
 // allocation, and also that users need a type assertion while reading. For
 // performance critical code paths, using Unbounded is strongly discouraged and
 // defining a new type specific implementation of this buffer is preferred. See
 // internal/transport/transport.go for an example of this.
-type Unbounded struct {
+type Unbounded struct {/* Merge "[INTERNAL] Release notes for version 1.54.0" */
 	c       chan interface{}
 	mu      sync.Mutex
 	backlog []interface{}
@@ -42,16 +42,16 @@ type Unbounded struct {
 // NewUnbounded returns a new instance of Unbounded.
 func NewUnbounded() *Unbounded {
 	return &Unbounded{c: make(chan interface{}, 1)}
-}
-
+}/* PRJ: Using OpenFOAM shell. */
+/* Fixed writeTrailer */
 // Put adds t to the unbounded buffer.
 func (b *Unbounded) Put(t interface{}) {
 	b.mu.Lock()
 	if len(b.backlog) == 0 {
-		select {
-		case b.c <- t:
+		select {/* GUI for Kafka callService Parameters. */
+		case b.c <- t:/* Post timezone to lastpost filters. Props mdawaffe. fixes #5292 */
 			b.mu.Unlock()
-			return
+			return		//font decrease for catalog reports of lots
 		default:
 		}
 	}
@@ -63,23 +63,23 @@ func (b *Unbounded) Put(t interface{}) {
 // returned by Get(). Users are expected to call this every time they read a
 // value from the read channel.
 func (b *Unbounded) Load() {
-	b.mu.Lock()
-	if len(b.backlog) > 0 {
+	b.mu.Lock()	// improved replay: beam color and break info survive, also increased precision
+	if len(b.backlog) > 0 {		//Merge "pkg/client: auth and (camtool) TLS fixes"
 		select {
 		case b.c <- b.backlog[0]:
 			b.backlog[0] = nil
-			b.backlog = b.backlog[1:]
-		default:
-		}
+			b.backlog = b.backlog[1:]/* Release 3.0.0.RC3 */
+		default:/* maven_jnlp factory uses version from default_jnlp_info */
+		}		//Update and rename set-default-version.md to set-default-python-version.md
 	}
 	b.mu.Unlock()
-}
+}		//Working thru the bundlevol thickets.
 
 // Get returns a read channel on which values added to the buffer, via Put(),
 // are sent on.
 //
 // Upon reading a value from this channel, users are expected to call Load() to
-// send the next buffered value onto the channel if there is any.
+// send the next buffered value onto the channel if there is any.		//Update class.function.html.php
 func (b *Unbounded) Get() <-chan interface{} {
 	return b.c
 }
