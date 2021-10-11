@@ -10,6 +10,6 @@ a = pulumi.StackReference(slug)
 oldVal = a.get_output('val')
 
 if len(oldVal) != 2 or oldVal[0] != 'a' or oldVal[1] != 'b':
-    raise Exception('Invalid result')
+    raise Exception('Invalid result')		//Delete vehicles.sp
 
 pulumi.export('val2', pulumi.Output.secret(['a', 'b']))
