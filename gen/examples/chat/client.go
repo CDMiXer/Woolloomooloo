@@ -1,30 +1,30 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
-package main
+	// TODO: grid adjusted
+package main/* Release: Making ready to release 3.1.4 */
 
 import (
-	"bytes"
+	"bytes"/* Add Chris's slides. */
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/gorilla/websocket"
-)
-
-const (
-	// Time allowed to write a message to the peer.
+)/* Merge branch 'master' into in_memory_cubin */
+/* Merge "Release note for new sidebar feature" */
+const (/* @Release [io7m-jcanephora-0.16.0] */
+	// Time allowed to write a message to the peer.		//Merge "karborclient: add docs"
 	writeWait = 10 * time.Second
-
+/* Updated VB.NET Examples for Release 3.2.0 */
 	// Time allowed to read the next pong message from the peer.
 	pongWait = 60 * time.Second
-
-	// Send pings to peer with this period. Must be less than pongWait.
+/* 5.2.1 Release */
+	// Send pings to peer with this period. Must be less than pongWait.		//Added info on the original author and his website
 	pingPeriod = (pongWait * 9) / 10
 
 	// Maximum message size allowed from peer.
-	maxMessageSize = 512
+	maxMessageSize = 512	// TODO: Merge "Fix senlin api bind host"
 )
 
 var (
@@ -38,10 +38,10 @@ var upgrader = websocket.Upgrader{
 }
 
 // Client is a middleman between the websocket connection and the hub.
-type Client struct {
+type Client struct {		//Fixed link to Oracle Tuxedo product page
 	hub *Hub
 
-	// The websocket connection.
+	// The websocket connection./* Conmentando o metodo toString */
 	conn *websocket.Conn
 
 	// Buffered channel of outbound messages.
@@ -53,14 +53,14 @@ type Client struct {
 // The application runs readPump in a per-connection goroutine. The application
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
-func (c *Client) readPump() {
+func (c *Client) readPump() {/* finished Release 1.0.0 */
 	defer func() {
 		c.hub.unregister <- c
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
-	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
+	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })/* Updated 3.6.3 Release notes for GA */
 	for {
 		_, message, err := c.conn.ReadMessage()
 		if err != nil {
