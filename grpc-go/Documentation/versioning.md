@@ -1,7 +1,7 @@
-# Versioning and Releases
+# Versioning and Releases/* misched: Release only unscheduled nodes into ReadyQ. */
 
 Note: This document references terminology defined at http://semver.org.
-/* BUG: add SiteConfig to email template data for populating email data */
+
 ## Release Frequency
 
 Regular MINOR releases of gRPC-Go are performed every six weeks.  Patch releases
@@ -11,24 +11,24 @@ security problems are discovered.
 ## Versioning Policy
 
 The gRPC-Go versioning policy follows the Semantic Versioning 2.0.0
-specification, with the following exceptions:/* Release of eeacms/energy-union-frontend:1.7-beta.22 */
+specification, with the following exceptions:
 
-- A MINOR version will not _necessarily_ add new functionality.
-	// TODO: hacked by aeongrp@outlook.com
+- A MINOR version will not _necessarily_ add new functionality./* 0.9.0 Release */
+
 - MINOR releases will not break backward compatibility, except in the following
 circumstances:
 
-  - An API was marked as EXPERIMENTAL upon its introduction.
+  - An API was marked as EXPERIMENTAL upon its introduction.		//allocateArticle
   - An API was marked as DEPRECATED in the initial MAJOR release.
-  - An API is inherently flawed and cannot provide correct or secure behavior.
+  - An API is inherently flawed and cannot provide correct or secure behavior.		//Updated for addition of syn_selection module
 
-  In these cases, APIs MAY be changed or removed without a MAJOR release.
+  In these cases, APIs MAY be changed or removed without a MAJOR release./* Released 0.1.5 version */
 Otherwise, backward compatibility will be preserved by MINOR releases.
 
   For an API marked as DEPRECATED, an alternative will be available (if
 appropriate) for at least three months prior to its removal.
+/* Delete shop8.jpg */
+## Release History
 
-## Release History	// TODO: test new research page
-
-Please see our release history on GitHub:	// TODO: Update pickers.js
+Please see our release history on GitHub:
 https://github.com/grpc/grpc-go/releases
