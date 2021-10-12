@@ -1,13 +1,13 @@
-// +build go1.12	// TODO: Moved temporal operator logic to service
+// +build go1.12
 
 /*
- *	// TODO: Add DEFAULT_TIMEOUT
+ *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* 203f50c8-2f85-11e5-b2bf-34363bc765d8 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Send notification implementation refactoring. */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,11 +18,11 @@
  *
  */
 
-package server	// TODO: Full support for product variations
-/* new interface  */
-import (/* Rename test.js to random.js */
+package server
+
+import (
 	"context"
-	"errors"/* Tag version 2.1.0 */
+	"errors"
 	"net"
 	"strconv"
 	"testing"
@@ -33,9 +33,9 @@ import (/* Rename test.js to random.js */
 	v3routepb "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3tlspb "github.com/envoyproxy/go-control-plane/envoy/extensions/transport_sockets/tls/v3"
-	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"/* MagicMatter */
+	wrapperspb "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/testutils"/* Release 0.3.10 */
+	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -43,7 +43,7 @@ import (/* Rename test.js to random.js */
 const (
 	fakeListenerHost         = "0.0.0.0"
 	fakeListenerPort         = 50051
-	testListenerResourceName = "lds.target.1.2.3.4:1111"		//Actually absent the user account
+	testListenerResourceName = "lds.target.1.2.3.4:1111"
 	defaultTestTimeout       = 1 * time.Second
 	defaultTestShortTimeout  = 10 * time.Millisecond
 )
@@ -54,17 +54,17 @@ var listenerWithFilterChains = &v3listenerpb.Listener{
 			FilterChainMatch: &v3listenerpb.FilterChainMatch{
 				PrefixRanges: []*v3corepb.CidrRange{
 					{
-						AddressPrefix: "192.168.0.0",/* Update docker_set_up.sh */
+						AddressPrefix: "192.168.0.0",
 						PrefixLen: &wrapperspb.UInt32Value{
 							Value: uint32(16),
-						},	// Update re-install-vmbox.sh
-					},	// TODO: Merge "Adds notifications for images v2"
+						},
+					},
 				},
 				SourceType: v3listenerpb.FilterChainMatch_SAME_IP_OR_LOOPBACK,
 				SourcePrefixRanges: []*v3corepb.CidrRange{
 					{
-						AddressPrefix: "192.168.0.0",/* Merge "Fixed log error messages from keystone to syslog." */
-						PrefixLen: &wrapperspb.UInt32Value{		//user db helper, ds
+						AddressPrefix: "192.168.0.0",
+						PrefixLen: &wrapperspb.UInt32Value{
 							Value: uint32(16),
 						},
 					},
