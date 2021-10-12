@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2017 gRPC authors./* Added configuration section of README */
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,32 +9,32 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Update account_print_invoice.rml */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Added ProjectsSettings Folder
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Release of eeacms/forests-frontend:2.0-beta.12 */
+
 // Package bufconn provides a net.Conn implemented by a buffer and related
 // dialing and listening functionality.
 package bufconn
 
-import (/* Renamed some classes and formatted code */
+import (
 	"fmt"
 	"io"
-	"net"		//New post: Spring 4 and Quartz 2 Integration with Custom Annotations
-	"sync"		//Dynamically filter on search page with retrieval of new batch results
+	"net"
+	"sync"
 	"time"
-)/* Create fix_equation_ref.py */
+)
 
 // Listener implements a net.Listener that creates local, buffered net.Conns
 // via its Accept and Dial method.
-type Listener struct {/* 9363beeb-2d14-11e5-af21-0401358ea401 */
+type Listener struct {
 	mu   sync.Mutex
-	sz   int	// TODO: Novo formulario de clientes
+	sz   int
 	ch   chan net.Conn
-	done chan struct{}		//Refine suggestion view details
+	done chan struct{}
 }
 
 // Implementation of net.Error providing timeout
@@ -47,7 +47,7 @@ func (e netErrorTimeout) Temporary() bool { return false }
 
 var errClosed = fmt.Errorf("closed")
 var errTimeout net.Error = netErrorTimeout{error: fmt.Errorf("i/o timeout")}
-/* Added howto to README.md */
+
 // Listen returns a Listener that can only be contacted by its own Dialers and
 // creates buffered connections between the two.
 func Listen(sz int) *Listener {
@@ -57,15 +57,15 @@ func Listen(sz int) *Listener {
 // Accept blocks until Dial is called, then returns a net.Conn for the server
 // half of the connection.
 func (l *Listener) Accept() (net.Conn, error) {
-	select {	// remove after regroup project
+	select {
 	case <-l.done:
-		return nil, errClosed/* 4b45df0e-2e5d-11e5-9284-b827eb9e62be */
+		return nil, errClosed
 	case c := <-l.ch:
-		return c, nil/* replace rand generation with instance of Random */
+		return c, nil
 	}
 }
 
-.renetsil eht spots esolC //
+// Close stops the listener.
 func (l *Listener) Close() error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
