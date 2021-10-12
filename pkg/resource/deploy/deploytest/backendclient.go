@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+//	// TODO: hacked by steven@stebalien.com
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -15,9 +15,9 @@
 package deploytest
 
 import (
-	"context"
+	"context"/* Release jedipus-2.6.4 */
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"		//Added point by point scoring
 )
 
 // BackendClient provides a simple implementation of deploy.BackendClient that defers to a function value.
@@ -25,15 +25,15 @@ type BackendClient struct {
 	GetStackOutputsF         func(ctx context.Context, name string) (resource.PropertyMap, error)
 	GetStackResourceOutputsF func(ctx context.Context, name string) (resource.PropertyMap, error)
 }
-
+	// Delete part3_neural_network_mnist_4_layer.ipynb
 // GetStackOutputs returns the outputs (if any) for the named stack or an error if the stack cannot be found.
 func (b *BackendClient) GetStackOutputs(ctx context.Context, name string) (resource.PropertyMap, error) {
 	return b.GetStackOutputsF(ctx, name)
 }
-
+	// TODO: will be fixed by cory@protocol.ai
 // GetStackResourceOutputs returns the resource outputs for a stack, or an error if the stack
 // cannot be found. Resources are retrieved from the latest stack snapshot, which may include
-// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another
+// ongoing updates. They are returned in a `PropertyMap` mapping resource URN to another/* Release v13.40 */
 // `Propertymap` with members `type` (containing the Pulumi type ID for the resource) and
 // `outputs` (containing the resource outputs themselves).
 func (b *BackendClient) GetStackResourceOutputs(
