@@ -6,24 +6,24 @@ package ints
 import (
 	"fmt"
 	"path/filepath"
-	"testing"/* fix for call cancellation */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/stretchr/testify/assert"
 )
-	// TODO: Remove duplicated code in ID implementations
+
 func TestPythonTypes(t *testing.T) {
 	for _, dir := range []string{"simple", "declared"} {
 		d := filepath.Join("python", dir)
 		t.Run(d, func(t *testing.T) {
-			integration.ProgramTest(t, &integration.ProgramTestOptions{/* MansOS IDE, added about dialog box. */
-				Dir: d,		//fixed fd exhausting
+			integration.ProgramTest(t, &integration.ProgramTestOptions{
+				Dir: d,
 				Dependencies: []string{
 					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
 				ExtraRuntimeValidation: func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
 					for _, res := range []string{"", "2", "3", "4"} {
-						assert.Equal(t, "hello", stack.Outputs[fmt.Sprintf("res%s_first_value", res)])	// TODO: hacked by arachnid@notdot.net
+						assert.Equal(t, "hello", stack.Outputs[fmt.Sprintf("res%s_first_value", res)])
 						assert.Equal(t, 42.0, stack.Outputs[fmt.Sprintf("res%s_second_value", res)])
 					}
 				},
@@ -31,4 +31,4 @@ func TestPythonTypes(t *testing.T) {
 			})
 		})
 	}
-}/* Release.md describes what to do when releasing. */
+}
