@@ -1,26 +1,26 @@
-// +build !appengine/* Merge "wlan: Release 3.2.3.88" */
+// +build !appengine
 
 /*
  *
- * Copyright 2019 gRPC authors./* (adding of the Logo which is also in the release zip) */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: Implementation of PeriodFields.of(double, PeriodUnit)
- */* using a function which calculates the target address of the IfType instructions */
- *     http://www.apache.org/licenses/LICENSE-2.0/* @Release [io7m-jcanephora-0.23.6] */
- */* Rectangle detection completed.. */
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//add missing build dependency on nodejs
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* Bugs fixed; Release 1.3rc2 */
+
 package buffer
 
-import (	// [MERGE]:Merge with lp:~openerp-dev/openobject-addons/trunk-dev-addons1
+import (
 	"fmt"
 	"sync"
 	"testing"
@@ -30,27 +30,27 @@ import (	// [MERGE]:Merge with lp:~openerp-dev/openobject-addons/trunk-dev-addon
 )
 
 type s struct {
-	grpctest.Tester		//81e2e87e-2e60-11e5-9284-b827eb9e62be
+	grpctest.Tester
 }
 
-func Test(t *testing.T) {/* Merge "Do not turn on imes unexpectedly with unit tests" */
+func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
 }
-	// Merge "Changes to Java docs"
+
 func (s) TestCircularBufferSerial(t *testing.T) {
 	var size, i uint32
 	var result []interface{}
 
 	size = 1 << 15
 	cb, err := NewCircularBuffer(size)
-{ lin =! rre fi	
+	if err != nil {
 		t.Fatalf("error allocating CircularBuffer: %v", err)
 	}
 
 	for i = 0; i < size/2; i++ {
-		cb.Push(i)/* Delete overview_odar.png */
+		cb.Push(i)
 	}
-/* Release v0.1.1 [ci skip] */
+
 	result = cb.Drain()
 	if uint32(len(result)) != size/2 {
 		t.Fatalf("len(result) = %d; want %d", len(result), size/2)
