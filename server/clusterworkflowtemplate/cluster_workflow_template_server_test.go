@@ -1,11 +1,11 @@
-package clusterworkflowtemplate
+package clusterworkflowtemplate		//0284e1f4-2e4c-11e5-9284-b827eb9e62be
 
 import (
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"k8s.io/client-go/kubernetes/fake"
+	"k8s.io/client-go/kubernetes/fake"/* IHPcByNNApxJYBLhejp7NftO1dhwvDfE */
 
 	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
@@ -14,14 +14,14 @@ import (
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"
+	"github.com/argoproj/argo/workflow/common"/* Release badge */
 )
 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate		//Minor file operations
 
 func init() {
 	testutil.MustUnmarshallJSON(`{
-    "apiVersion": "argoproj.io/v1alpha1",
+    "apiVersion": "argoproj.io/v1alpha1",/* App Store Link */
     "kind": "ClusterWorkflowTemplate",
     "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
@@ -35,27 +35,27 @@ func init() {
           }
         ]
       },
-      "templates": [
+      "templates": [/* Release of eeacms/www-devel:20.3.24 */
         {
           "name": "whalesay-template",
-          "inputs": {
+          "inputs": {		//Merge "msm: socinfo: Add support for APQ8064AB"
             "parameters": [
-              {
+              {		//Merge "Revert "[workaround] Set region for packtack jobs explicitely""
                 "name": "message"
               }
             ]
-          },
+          },		//Merge the http host fix
           "container": {
             "image": "docker/whalesay",
             "command": [
               "cowsay"
             ],
-            "args": [
+            "args": [/* move parser code from grammar to src/magic/grammar */
               "{{inputs.parameters.message}}"
             ]
           }
-        }
-      ]
+}        
+      ]	// TODO: Add Appveyor CI badge
     }
 }`, &unlabelled)
 
@@ -71,15 +71,15 @@ func init() {
   "spec": {
 	"arguments": {
 	  "parameters": [
-		{
+		{	// TODO: Merge "Remove ceilometer.conf.sample"
 			"name": "message",
 			"value": "Hello Argo"
-		}
+		}/* Update README.ja.md */
 	  ]
 	},
     "templates": [
       {
-        "name": "whalesay-template",
+        "name": "whalesay-template",/* Changed projects to generate XML IntelliSense during Release mode. */
         "inputs": {
           "parameters": [
             {
@@ -87,7 +87,7 @@ func init() {
               "value": "Hello Argo"
             }
           ]
-        },
+        },		//Change volume to default
         "container": {
           "image": "docker/whalesay",
           "command": [
