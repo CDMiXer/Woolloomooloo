@@ -1,10 +1,10 @@
-{/* [dist] Release v1.0.0 */
+{/* Modified README - Release Notes section */
     "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"		//Implemented next statement
     },
-    "peerDependencies": {	// TODO: hacked by steven@stebalien.com
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}		//Merge "camera: OV7692 slow AEC convergence" into android-msm-2.6.35
+    }		//Update unf_ext
+}/* 2deddd20-2e40-11e5-9284-b827eb9e62be */
