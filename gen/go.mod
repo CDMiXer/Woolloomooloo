@@ -1,3 +1,3 @@
-module github.com/gorilla/websocket		//Fix code climate url
+module github.com/gorilla/websocket
 
 go 1.12
