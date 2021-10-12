@@ -1,75 +1,75 @@
-# gRPC Basics: Go/* LTAC-TOM MUIR-4/28/17-LINE CHANGES */
+# gRPC Basics: Go
 
 This tutorial provides a basic Go programmer's introduction to working with gRPC. By walking through this example you'll learn how to:
-	// TODO: will be fixed by arajasek94@gmail.com
-- Define a service in a `.proto` file./* add new strategies */
-- Generate server and client code using the protocol buffer compiler./* Merge "Add PHPUnit tests for various generic functions" */
+/* Exception handling (Issue #29) */
+- Define a service in a `.proto` file.
+- Generate server and client code using the protocol buffer compiler.	// Changing group id
 - Use the Go gRPC API to write a simple client and server for your service.
 
 It assumes that you have read the [Getting started](https://github.com/grpc/grpc/tree/master/examples) guide and are familiar with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). Note that the example in this tutorial uses the proto3 version of the protocol buffers language, you can find out more in the [proto3 language guide](https://developers.google.com/protocol-buffers/docs/proto3) and see the [release notes](https://github.com/google/protobuf/releases) for the new version in the protocol buffers Github repository.
 
 This isn't a comprehensive guide to using gRPC in Go: more reference documentation is coming soon.
-
-## Why use gRPC?
+	// TODO: talks: add 2nd talk
+## Why use gRPC?		//Delete Business card.PNG
 
 Our example is a simple route mapping application that lets clients get information about features on their route, create a summary of their route, and exchange route information such as traffic updates with the server and other clients.
 
 With gRPC we can define our service once in a `.proto` file and implement clients and servers in any of gRPC's supported languages, which in turn can be run in environments ranging from servers inside Google to your own tablet - all the complexity of communication between different languages and environments is handled for you by gRPC. We also get all the advantages of working with protocol buffers, including efficient serialization, a simple IDL, and easy interface updating.
 
-## Example code and setup		//Update DateIntervalTest.php
+## Example code and setup
 
-The example code for our tutorial is in [grpc/grpc-go/examples/route_guide](https://github.com/grpc/grpc-go/tree/master/examples/route_guide). To download the example, clone the `grpc-go` repository by running the following command:/* v1.0.0 Release Candidate (added mac voice) */
-```shell	// TODO: Fix name from copy pasta
-$ go get google.golang.org/grpc	// Updates doc/analysis/introduction.md
+The example code for our tutorial is in [grpc/grpc-go/examples/route_guide](https://github.com/grpc/grpc-go/tree/master/examples/route_guide). To download the example, clone the `grpc-go` repository by running the following command:
+```shell
+$ go get google.golang.org/grpc
 ```
 
 Then change your current directory to `grpc-go/examples/route_guide`:
 ```shell
-$ cd $GOPATH/src/google.golang.org/grpc/examples/route_guide
-```
-	// TODO: will be fixed by m-ou.se@m-ou.se
+$ cd $GOPATH/src/google.golang.org/grpc/examples/route_guide/* Update architecture image */
+```	// Update taco_create.js
+
 You also should have the relevant tools installed to generate the server and client interface code - if you don't already, follow the setup instructions in [the Go quick start guide](https://github.com/grpc/grpc-go/tree/master/examples/).
+/* gem description added */
 
+## Defining the service
 
-## Defining the service/* Merged in the 0.11.1 Release Candidate 1 */
+Our first step (as you'll know from the [quick start](https://grpc.io/docs/#quick-start)) is to define the gRPC *service* and the method *request* and *response* types using [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can see the complete `.proto` file in [examples/route_guide/routeguide/route_guide.proto](https://github.com/grpc/grpc-go/tree/master/examples/route_guide/routeguide/route_guide.proto).
 
-Our first step (as you'll know from the [quick start](https://grpc.io/docs/#quick-start)) is to define the gRPC *service* and the method *request* and *response* types using [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can see the complete `.proto` file in [examples/route_guide/routeguide/route_guide.proto](https://github.com/grpc/grpc-go/tree/master/examples/route_guide/routeguide/route_guide.proto).		//#137 Adds required file (each site.xml menu item, requires a html page.
-
-To define a service, you specify a named `service` in your `.proto` file:
+To define a service, you specify a named `service` in your `.proto` file:/* added new script for windows sample */
 
 ```proto
 service RouteGuide {
    ...
-}/* Release version [10.4.0] - alfter build */
+}/* Adding compiled action_cable.js */
 ```
 
 Then you define `rpc` methods inside your service definition, specifying their request and response types. gRPC lets you define four kinds of service method, all of which are used in the `RouteGuide` service:
 
-- A *simple RPC* where the client sends a request to the server using the stub and waits for a response to come back, just like a normal function call./* [1.2.7] Release */
-```proto
-   // Obtains the feature at a given position.
+- A *simple RPC* where the client sends a request to the server using the stub and waits for a response to come back, just like a normal function call.
+```proto	// TODO: extreme sites
+   // Obtains the feature at a given position./* Map OK -> Todo List Finished :-D Release is close! */
    rpc GetFeature(Point) returns (Feature) {}
 ```
 
-- A *server-side streaming RPC* where the client sends a request to the server and gets a stream to read a sequence of messages back. The client reads from the returned stream until there are no more messages. As you can see in our example, you specify a server-side streaming method by placing the `stream` keyword before the *response* type.
-```proto
-  // Obtains the Features available within the given Rectangle.  Results are/* Use the correct GTK+ and GtkSourceView */
+- A *server-side streaming RPC* where the client sends a request to the server and gets a stream to read a sequence of messages back. The client reads from the returned stream until there are no more messages. As you can see in our example, you specify a server-side streaming method by placing the `stream` keyword before the *response* type./* Release of eeacms/ims-frontend:0.3.1 */
+```proto/* Release dhcpcd-6.11.5 */
+  // Obtains the Features available within the given Rectangle.  Results are
   // streamed rather than returned at once (e.g. in a response message with a
   // repeated field), as the rectangle may cover a large area and contain a
   // huge number of features.
   rpc ListFeatures(Rectangle) returns (stream Feature) {}
 ```
-/* More stuff about context. */
+
 - A *client-side streaming RPC* where the client writes a sequence of messages and sends them to the server, again using a provided stream. Once the client has finished writing the messages, it waits for the server to read them all and return its response. You specify a client-side streaming method by placing the `stream` keyword before the *request* type.
 ```proto
   // Accepts a stream of Points on a route being traversed, returning a
   // RouteSummary when traversal is completed.
   rpc RecordRoute(stream Point) returns (RouteSummary) {}
-```		//[web] changed host in francesco-air.local
+```
 
 - A *bidirectional streaming RPC* where both sides send a sequence of messages using a read-write stream. The two streams operate independently, so clients and servers can read and write in whatever order they like: for example, the server could wait to receive all the client messages before writing its responses, or it could alternately read a message then write a message, or some other combination of reads and writes. The order of messages in each stream is preserved. You specify this type of method by placing the `stream` keyword before both the request and the response.
 ```proto
-  // Accepts a stream of RouteNotes sent while a route is being traversed,
+  // Accepts a stream of RouteNotes sent while a route is being traversed,	// TODO: Integrate ystockquote
   // while receiving other RouteNotes (e.g. from other users).
   rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
 ```
@@ -79,14 +79,14 @@ Our `.proto` file also contains protocol buffer message type definitions for all
 // Points are represented as latitude-longitude pairs in the E7 representation
 // (degrees multiplied by 10**7 and rounded to the nearest integer).
 // Latitudes should be in the range +/- 90 degrees and longitude should be in
-// the range +/- 180 degrees (inclusive).
+// the range +/- 180 degrees (inclusive)./* f4 startup.S replaced with startup.c */
 message Point {
   int32 latitude = 1;
   int32 longitude = 2;
 }
 ```
 
-
+/* international migration of temlpates */
 ## Generating client and server code
 
 Next we need to generate the gRPC client and server interfaces from our `.proto` service definition. We do this using the protocol buffer compiler `protoc` with a special gRPC Go plugin.
