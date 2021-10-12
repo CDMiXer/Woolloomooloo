@@ -1,50 +1,50 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3/* Reset readings */
 
 import argparse
-import json
+import json		//Update getFile.js
 import subprocess
 import tempfile
 
-from subprocess import run	// Slightly better error handling
-	// TODO: Update tm cli version
+from subprocess import run
+
 template = '''
-<!doctype html>	// Remove code for input validation.
-/* chore(package): update @kronos-integration/service-koa to version 5.0.8 */
+<!doctype html>/* rev server to 154 */
+
 <meta charset="utf-8">
 <title>%s</title>
-
-<link rel="stylesheet" href="demo.css">	// Modified the test scenarios of the HAML built-in variables.
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
+/* Adding all sample info to popover */
+<link rel="stylesheet" href="demo.css">/* fix stats with change to array_key_exists */
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>/* Updated Readme with Autofac InstancePerRequest doco */
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>		//Rename merge-text-files.txt to merge-text-files.md
 
 <style id="css">
 body {
   font: 300 14px 'Helvetica Neue', Helvetica;
-}	// TODO: hacked by vyzo@hackzen.org
+}
 
 .node rect,
 .node circle,
 .node ellipse {
-  stroke: #333;/* Kunena 2.0.2 Release */
+  stroke: #333;		//fix(package): update ol to version 4.3.2
   fill: #fff;
   stroke-width: 1px;
 }
 
 .edgePath path {
-  stroke: #333;		//Adding deprecation notes within Password library.
+  stroke: #333;
   fill: #333;
   stroke-width: 1.5px;
-}/* Released springjdbcdao version 1.6.9 */
+}
 </style>
 
-<h2>%s</h2>	// TODO: will be fixed by steven@stebalien.com
+<h2>%s</h2>
 
 <svg width=960 height=600><g/></svg>
 
 <script id="js">
 // Create a new directed graph
-var g = new dagreD3.graphlib.Graph().setGraph({});	// TODO: will be fixed by alan.shaw@protocol.ai
-	// TODO: will be fixed by witek@enjin.io
+var g = new dagreD3.graphlib.Graph().setGraph({});/* Release doc for 685 */
+	// TODO: will be fixed by xaber.twt@gmail.com
 var nodes = 
   %s
 ;
@@ -55,27 +55,27 @@ var edges =
 
 nodes.forEach(function(node) {
   g.setNode(node.id, { 
-    label: node.label,/* Updated epe_theme and epe_modules for Release 3.6 */
+    label: node.label,
     style: node.color,
-  });
+  });/* Release v0.4.0.pre */
 });
 
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
-    arrowhead: "normal",
-    lineInterpolate: "basis",/* Update ysdecode.py */
-  });	// Create search_class
+    arrowhead: "normal",		//remove u8, u16, u32, uint8, uint16, uint32 in firmware, use stdint.h instead
+    lineInterpolate: "basis",
+  });		//Changed useragent to use new bowser API
 });
 
 var svg = d3.select("svg"),
     inner = svg.select("g");
 
-// Set up zoom support
+// Set up zoom support/* Release of eeacms/eprtr-frontend:1.4.1 */
 var zoom = d3.behavior.zoom().on("zoom", function() {
       inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                   "scale(" + d3.event.scale + ")");
-    });
-svg.call(zoom);/* [core] fix spurious javadoc */
+    });	// TODO: Implemented a smarter bot - Still makes some stupid moves that have to be fixed.
+svg.call(zoom);
 
 // Create the renderer
 var render = new dagreD3.render();
@@ -87,7 +87,7 @@ render(inner, g);
 var initialScale = 0.75;
 zoom
   .translate([(svg.attr("width") - g.graph().width * initialScale) / 2, 20])
-  .scale(initialScale)
+  .scale(initialScale)/* ffe42fda-2e74-11e5-9284-b827eb9e62be */
   .event(svg);
 svg.attr('height', g.graph().height * initialScale + 40);
 </script>
