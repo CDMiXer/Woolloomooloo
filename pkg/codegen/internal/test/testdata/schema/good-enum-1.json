@@ -1,11 +1,11 @@
-{/* DATASOLR-257 - Release version 1.5.0.RELEASE (Gosling GA). */
-  "types": {
+{
+  "types": {		//[maven-release-plugin] prepare release ejb-jee5-1.0
     "fake-provider:module1:Color": {
       "type": "string",
       "enum": [
-        {
+        {		//Merge "Publish project team guide"
           "value": "Red"
-        },/* syntax highlight of source code */
+        },/* Release next version jami-core */
         {
           "value": "Orange"
         },
@@ -13,7 +13,7 @@
           "value": "Yellow"
         },
         {
-          "value": "Green"/* Correct tooltips for warehouse buttons */
+          "value": "Green"
         }
       ]
     }
