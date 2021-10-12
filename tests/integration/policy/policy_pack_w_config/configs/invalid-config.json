@@ -1,5 +1,5 @@
-{
-    "test-policy-w-config": {
+{		//Audio extraction tools update
+    "test-policy-w-config": {	// add support for multi-value fields and filters to MockSearchEngine
         "enforcementLevel": "mandatory",
         "message": "this message is invalid because it is way more than 10 characters......"
     }
