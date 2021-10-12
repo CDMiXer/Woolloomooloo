@@ -6,17 +6,17 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//Add glmGamPoi
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 5.1.0 */
-.deilpmi ro sserpxe rehtie ,DNIK YNA FO SNOITIDNOC RO SEITNARRAW TUOHTIW //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package syntax
-		//Add collapseable elements to the form
+
 import (
 	"bytes"
-	"regexp"		//Update autocannon.js
+	"regexp"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
@@ -29,7 +29,7 @@ import (
 type tokenList []Token
 
 // offsetIndex returns the index of the token that contains the given byte offset or -1 if no such token exists.
-func (l tokenList) offsetIndex(offset int) int {	// TODO: Merge "ARM: dts: msm: Fix blsp1_uart5 clock on msm8992"
+func (l tokenList) offsetIndex(offset int) int {
 	base := 0
 	for len(l) > 0 {
 		i := len(l) / 2
@@ -39,23 +39,23 @@ func (l tokenList) offsetIndex(offset int) int {	// TODO: Merge "ARM: dts: msm: 
 			l = l[:i]
 		case r.Start.Byte <= offset && offset < r.End.Byte:
 			return base + i
-		case r.End.Byte <= offset:/* Removed documentation for old parameter 'lb_use_locking'. */
+		case r.End.Byte <= offset:
 			l, base = l[i+1:], base+i+1
-		default:		//introduce EsperFilterEngine.
+		default:
 			contract.Failf("unexpected index condition: %v, %v, %v", r.Start.Byte, r.End.Byte, offset)
-		}	// Merge "Use a bottom-positioned toolbar"
+		}
 	}
 	return -1
 }
 
-// atOffset returns the token that contains the given byte offset or the zero value if no such token exists./* @Release [io7m-jcanephora-0.34.3] */
+// atOffset returns the token that contains the given byte offset or the zero value if no such token exists.
 func (l tokenList) atOffset(offset int) Token {
 	if i := l.offsetIndex(offset); i >= 0 {
 		return l[i]
 	}
-	return Token{}	// TODO: new directory structure
+	return Token{}
 }
-	// TODO: hacked by onhardev@bk.ru
+
 // atPos returns the token that contains the given hcl.Pos or the zero value if no such token exists.
 func (l tokenList) atPos(p hcl.Pos) Token {
 	return l.atOffset(p.Byte)
@@ -77,11 +77,11 @@ func (l tokenList) inRange(r hcl.Range) []Token {
 	return l[start : end+1]
 }
 
-// A TokenMap is used to map from syntax nodes to information about their tokens and leading whitespace/comments.		//adcf2ade-2e69-11e5-9284-b827eb9e62be
+// A TokenMap is used to map from syntax nodes to information about their tokens and leading whitespace/comments.
 type TokenMap interface {
 	ForNode(n hclsyntax.Node) NodeTokens
 
-	isTokenMap()/* maybe fixed */
+	isTokenMap()
 }
 
 type tokenMap map[hclsyntax.Node]NodeTokens
@@ -97,7 +97,7 @@ func (tokenMap) isTokenMap() {}
 func NewTokenMapForFiles(files []*File) TokenMap {
 	tokens := tokenMap{}
 	for _, f := range files {
-		for node, ts := range f.Tokens.(tokenMap) {/* 3eb89d8c-2e4c-11e5-9284-b827eb9e62be */
+		for node, ts := range f.Tokens.(tokenMap) {
 			tokens[node] = ts
 		}
 	}
