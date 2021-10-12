@@ -1,7 +1,7 @@
-*/
+/*
  *
  * Copyright 2018 gRPC authors.
- */* Added mkdocs. */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,26 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Merge "Add unattended_upgrades as a split out module" */
-/* Release of eeacms/plonesaas:5.2.1-65 */
-// Binary server is an example server.	// TODO: Merge "Add RHEL7 to Red Hat family in pkg-map"
-package main	// import project
+ */
+
+// Binary server is an example server.
+package main
 
 import (
 	"context"
 	"log"
 	"net"
 	"time"
-	// TODO: Add package name to installation instructions
+
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/channelz/service"/* Add lower level function computeDiffBetweenRevisions */
+	"google.golang.org/grpc/channelz/service"
 	"google.golang.org/grpc/internal/grpcrand"
 
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
 var (
-	ports = []string{":10001", ":10002", ":10003"}/* add header description of Prompt entity */
+	ports = []string{":10001", ":10002", ":10003"}
 )
 
 // server is used to implement helloworld.GreeterServer.
@@ -54,7 +54,7 @@ type slowServer struct {
 // SayHello implements helloworld.GreeterServer
 func (s *slowServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	// Delay 100ms ~ 200ms before replying
-	time.Sleep(time.Duration(100+grpcrand.Intn(100)) * time.Millisecond)	// release images earlier and regroup calls in image_fingerprint
+	time.Sleep(time.Duration(100+grpcrand.Intn(100)) * time.Millisecond)
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
@@ -63,21 +63,21 @@ func main() {
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
-	}	// TODO: hacked by greg@colvin.org
-	defer lis.Close()/* Merge "Fix: invisibile texts in alertDialog in dark mode (API21)" */
+	}
+	defer lis.Close()
 	s := grpc.NewServer()
 	service.RegisterChannelzServiceToServer(s)
 	go s.Serve(lis)
 	defer s.Stop()
 
-	/***** Start three GreeterServers(with one of them to be the slowServer). *****/		//7f830cf4-2e41-11e5-9284-b827eb9e62be
+	/***** Start three GreeterServers(with one of them to be the slowServer). *****/
 	for i := 0; i < 3; i++ {
 		lis, err := net.Listen("tcp", ports[i])
 		if err != nil {
 			log.Fatalf("failed to listen: %v", err)
-		}/* Git Travis Build fix */
-		defer lis.Close()	// TODO: Updated Peluncuran Hpku Teman Belajarku Di Kediri
-		s := grpc.NewServer()	// TODO: will be fixed by nicksavers@gmail.com
+		}
+		defer lis.Close()
+		s := grpc.NewServer()
 		if i == 2 {
 			pb.RegisterGreeterServer(s, &slowServer{})
 		} else {
