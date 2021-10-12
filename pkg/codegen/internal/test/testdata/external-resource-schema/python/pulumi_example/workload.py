@@ -4,14 +4,14 @@
 
 import warnings
 import pulumi
-import pulumi.runtime	// TODO: will be fixed by alex.gaynor@gmail.com
+import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
-from pulumi_kubernetes import core_v1 as _core_v1		//Add some basic typing to ViewList.
+from pulumi_kubernetes import core_v1 as _core_v1
 from pulumi_kubernetes import meta_v1 as _meta_v1
 
 __all__ = ['Workload']
-/* Deleted CtrlApp_2.0.5/Release/CtrlApp.obj */
+
 
 class Workload(pulumi.CustomResource):
     def __init__(__self__,
@@ -21,21 +21,21 @@ class Workload(pulumi.CustomResource):
                  __name__=None,
                  __opts__=None):
         """
-        Create a Workload resource with the given unique name, props, and options.		//Update statistics-poll.html
+        Create a Workload resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
-        if __name__ is not None:/* Release 1.7.15 */
+        if __name__ is not None:
             warnings.warn("explicit use of __name__ is deprecated", DeprecationWarning)
             resource_name = __name__
         if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
             opts = __opts__
-        if opts is None:	// TODO: Merge "Remove RPC notification from transaction in create/update port"
+        if opts is None:
             opts = pulumi.ResourceOptions()
-        if not isinstance(opts, pulumi.ResourceOptions):/* Modified SAMPLE_DATA information (.ini files) */
-            raise TypeError('Expected resource options to be a ResourceOptions instance')	// Fix add department store view
-        if opts.version is None:/* Update exclude file location */
+        if not isinstance(opts, pulumi.ResourceOptions):
+            raise TypeError('Expected resource options to be a ResourceOptions instance')
+        if opts.version is None:
             opts.version = _utilities.get_version()
         if opts.id is None:
             if __props__ is not None:
@@ -46,15 +46,15 @@ class Workload(pulumi.CustomResource):
         super(Workload, __self__).__init__(
             'example::Workload',
             resource_name,
-            __props__,	// Updating build-info/dotnet/core-setup/master for preview5-27618-15
+            __props__,
             opts)
 
     @staticmethod
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Workload':
-        """/* Fix if statement for handle pointer check. */
-        Get an existing Workload resource's state with the given name, id, and optional extra	// Release of eeacms/www-devel:20.10.13
+        """
+        Get an existing Workload resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
@@ -62,11 +62,11 @@ class Workload(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
-		//Scale down tiny scarab sprite
-        __props__ = dict()/* Merge "Release 4.4.31.63" */
+
+        __props__ = dict()
 
         return Workload(resource_name, opts=opts, __props__=__props__)
-/* Manual merge from mysql-5.5. */
+
     @property
     @pulumi.getter
     def pod(self) -> pulumi.Output[Optional['_core_v1.outputs.Pod']]:
@@ -76,5 +76,5 @@ class Workload(pulumi.CustomResource):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
 
     def translate_input_property(self, prop):
-        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop	// Moved the @Nullable to a better place.
+        return _tables.SNAKE_TO_CAMEL_CASE_TABLE.get(prop) or prop
 
