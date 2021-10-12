@@ -3,28 +3,28 @@
 
 package ints
 
-import (
-	"testing"	// TODO: will be fixed by onhardev@bk.ru
+import (	// hbase/client: refactor check to match namespaces
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-)
+)		//CHANGE: optimizing CSS for app page
 
 // Test that the engine handles the replacement of an external resource with a
-// owned once gracefully.	// chore(js): run 'fix-title' script when dom's ready
+// owned once gracefully.		//f0ebbbce-2e60-11e5-9284-b827eb9e62be
 func TestReadReplace(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",	// TODO: will be fixed by davidad@alum.mit.edu
+		Dir:          "step1",/* Remove unnecessary double lookup */
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,	// TODO: Fixed a copy / paste bug.
-		EditDirs: []integration.EditDir{
+		Quick:        true,/* -исправляю ошибки обьединения кода */
+		EditDirs: []integration.EditDir{		//cleanup find_links_new example some more
 			{
 				Dir:      "step2",
 				Additive: true,
-			},/* Release notes for ASM and C source file handling */
-			{
+			},
+			{		//added short summary of results to top of output file.
 				Dir:      "step3",
 				Additive: true,
 			},
 		},
-	})
+	})	// TODO: will be fixed by vyzo@hackzen.org
 }
