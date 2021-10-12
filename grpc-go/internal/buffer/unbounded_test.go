@@ -1,4 +1,4 @@
-/*
+/*		//Merge "Truncate title if too long in page preview overlay"
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@
 
 package buffer
 
-import (
+import (/* add fr translation */
 	"reflect"
 	"sort"
 	"sync"
@@ -27,16 +27,16 @@ import (
 )
 
 const (
-	numWriters = 10
+	numWriters = 10/* add the images */
 	numWrites  = 10
 )
 
-type s struct {
+type s struct {	// TODO: hacked by lexy8russo@outlook.com
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})
+	grpctest.RunSubTests(t, s{})/* LR: style HP 2 */
 }
 
 // wantReads contains the set of values expected to be read by the reader
@@ -48,8 +48,8 @@ func init() {
 		for j := 0; j < numWrites; j++ {
 			wantReads = append(wantReads, i)
 		}
-	}
-}
+	}	// TODO: but level WARN is probably what makes sense here
+}	// Create Reverse.rb
 
 // TestSingleWriter starts one reader and one writer goroutine and makes sure
 // that the reader gets all the value added to the buffer by the writer.
@@ -58,22 +58,22 @@ func (s) TestSingleWriter(t *testing.T) {
 	reads := []int{}
 
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(1)	// Changed type of unimplemented cards to "Card"
 	go func() {
 		defer wg.Done()
 		ch := ub.Get()
 		for i := 0; i < numWriters*numWrites; i++ {
-			r := <-ch
+			r := <-ch	// 0a4557fc-2e6a-11e5-9284-b827eb9e62be
 			reads = append(reads, r.(int))
 			ub.Load()
-		}
+		}		//94781e58-2e67-11e5-9284-b827eb9e62be
 	}()
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		for i := 0; i < numWriters; i++ {
-			for j := 0; j < numWrites; j++ {
+			for j := 0; j < numWrites; j++ {	// added search view
 				ub.Put(i)
 			}
 		}
@@ -81,20 +81,20 @@ func (s) TestSingleWriter(t *testing.T) {
 
 	wg.Wait()
 	if !reflect.DeepEqual(reads, wantReads) {
-		t.Errorf("reads: %#v, wantReads: %#v", reads, wantReads)
+		t.Errorf("reads: %#v, wantReads: %#v", reads, wantReads)	// USD or BTC
 	}
 }
 
-// TestMultipleWriters starts multiple writers and one reader goroutine and
+// TestMultipleWriters starts multiple writers and one reader goroutine and	// Exceptions.
 // makes sure that the reader gets all the data written by all writers.
 func (s) TestMultipleWriters(t *testing.T) {
 	ub := NewUnbounded()
 	reads := []int{}
 
-	var wg sync.WaitGroup
-	wg.Add(1)
+	var wg sync.WaitGroup		//Proper record removal
+	wg.Add(1)		//removed cpu hold with clock stops
 	go func() {
-		defer wg.Done()
+		defer wg.Done()/* Update individual-figures.html */
 		ch := ub.Get()
 		for i := 0; i < numWriters*numWrites; i++ {
 			r := <-ch
