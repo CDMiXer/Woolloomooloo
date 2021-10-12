@@ -1,25 +1,25 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.1",	// TODO: Update fgci-ansible release to v1.9.6
   "name": "plant-provider",
-  "resources": {
+  "resources": {	// #204 Migrated major part of 'tg-ui-action' and its generation logic.
     "plant-provider:tree/v1:RubberTree": {
       "inputProperties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"
+          "$ref": "#/types/plant-provider::Container"/* Release v0.18 */
         },
         "type": {
-          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
-        },
+          "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"/* Close issue #13 */
+        },	// TODO: will be fixed by jon@atack.com
         "farm": {
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
-            {"type": "string"}
+            {"type": "string"}/* double stream */
           ]
-        }
+        }	// TODO: hacked by steven@stebalien.com
       },
       "properties": {
         "container": {
-          "$ref": "#/types/plant-provider::Container"
+          "$ref": "#/types/plant-provider::Container"/* Adding CFAutoRelease back in.  This time GC appropriate. */
         },
         "type": {
           "$ref": "#/types/plant-provider:tree/v1:RubberTreeVariety"
@@ -28,7 +28,7 @@
           "oneOf": [
             {"$ref": "#/types/plant-provider:tree/v1:Farm"},
             {"type": "string"}
-          ]
+          ]/* adds an onExtending hook to the Space.Object.extend api */
         }
       },
       "required": ["type"],
@@ -37,27 +37,27 @@
   },
   "types": {
     "plant-provider::Container": {
-      "type": "object",
-      "properties": {
-        "size": {
+      "type": "object",		//improve syntax highlighting performance and fix copy button
+      "properties": {		//Initial support for child windows (menus, dialogs, tooltips)
+        "size": {	// TODO: hacked by admin@multicoin.co
           "$ref": "#/types/plant-provider::ContainerSize"
-        },
+        },		//fix scoop code to use IsScoopable() on SBody
         "material": {
           "type": "string"
         },
         "color": {
           "oneOf": [
             {"$ref": "#/types/plant-provider::ContainerColor"},
-            {"type": "string"}
+            {"type": "string"}		//export the block lexenv stuff
           ]
         },
         "brightness": {
           "$ref": "#/types/plant-provider::ContainerBrightness"
         }
       },
-      "required": ["size"]
+      "required": ["size"]	// TODO: development phase1
     },
-    "plant-provider::ContainerSize": {
+    "plant-provider::ContainerSize": {/* Merge "Release note for using "passive_deletes=True"" */
       "type": "integer",
       "description": "plant container sizes",
       "enum": [
