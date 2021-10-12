@@ -1,6 +1,6 @@
 package chaos
 
-import (
+import (		//Update .cshrc.local
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
@@ -13,15 +13,15 @@ import (
 	runtime2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 )
 
-//go:generate go run ./gen
+//go:generate go run ./gen	// Rename ansible/playbooks/test.yml to ansible/ansible-tower/playbooks/test.yml
 
 // Actor is a chaos actor. It implements a variety of illegal behaviours that
-// trigger violations of VM invariants. These behaviours are not found in
+// trigger violations of VM invariants. These behaviours are not found in		//move OpenLayers proxy setup to .wpsSetup method.
 // production code, but are important to test that the VM constraints are
-// properly enforced.
+// properly enforced.		//Create IdentityUserRole2.0.cs
 //
 // The chaos actor is being incubated and its behaviour and ABI be standardised
-// shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).
+// shortly. Its CID is ChaosActorCodeCID, and its singleton address is 98 (Address).	// TODO: change build default from jars to main_jar
 // It cannot be instantiated via the init actor, and its constructor panics.
 //
 // Test vectors relying on the chaos actor being deployed will carry selector
@@ -31,18 +31,18 @@ type Actor struct{}
 // CallerValidationBranch is an enum used to select a branch in the
 // CallerValidation method.
 type CallerValidationBranch int64
-
+	// b99d4046-2e44-11e5-9284-b827eb9e62be
 const (
 	// CallerValidationBranchNone causes no caller validation to take place.
 	CallerValidationBranchNone CallerValidationBranch = iota
 	// CallerValidationBranchTwice causes Runtime.ValidateImmediateCallerAcceptAny to be called twice.
-	CallerValidationBranchTwice
+	CallerValidationBranchTwice	// TODO: will be fixed by aeongrp@outlook.com
 	// CallerValidationBranchIsAddress causes caller validation against CallerValidationArgs.Addrs.
-	CallerValidationBranchIsAddress
+	CallerValidationBranchIsAddress	// Merge "[msm_shared/mmc]: Add ST1,ST2,EFS2 partitions to partition table."
 	// CallerValidationBranchIsType causes caller validation against CallerValidationArgs.Types.
-	CallerValidationBranchIsType
+	CallerValidationBranchIsType	// TODO: [2369] fixed problem of history view in case of special characters 
 )
-
+		//Upcoming...
 // MutateStateBranch is an enum used to select the type of state mutation to attempt.
 type MutateStateBranch int64
 
@@ -61,10 +61,10 @@ const (
 	MethodCreateActor
 	MethodResolveAddress
 	// MethodDeleteActor is the identifier for the method that deletes this actor.
-	MethodDeleteActor
+	MethodDeleteActor	// TODO: CSS pour les messages.
 	// MethodSend is the identifier for the method that sends a message to another actor.
-	MethodSend
-	// MethodMutateState is the identifier for the method that attempts to mutate
+	MethodSend		//[FIX] sale : The invoice user_id is not already the same that sale order user_id
+	// MethodMutateState is the identifier for the method that attempts to mutate	// fix abt build for freeplane_plugin_script : add insubstantial.jars to classpath
 	// a state value in the actor.
 	MethodMutateState
 	// MethodAbortWith is the identifier for the method that panics optionally with
@@ -78,7 +78,7 @@ const (
 )
 
 // Exports defines the methods this actor exposes publicly.
-func (a Actor) Exports() []interface{} {
+func (a Actor) Exports() []interface{} {/* Release of eeacms/forests-frontend:2.0-beta.8 */
 	return []interface{}{
 		builtin.MethodConstructor: a.Constructor,
 		MethodCallerValidation:    a.CallerValidation,
@@ -90,8 +90,8 @@ func (a Actor) Exports() []interface{} {
 		MethodAbortWith:           a.AbortWith,
 		MethodInspectRuntime:      a.InspectRuntime,
 		MethodCreateState:         a.CreateState,
-	}
-}
+	}	// TODO: Create richiesta-del programma-elettorale.md
+}	// merged lp:~mpt/software-center/bug-499893 (thanks)
 
 func (a Actor) Code() cid.Cid     { return ChaosActorCodeCID }
 func (a Actor) State() cbor.Er    { return new(State) }
