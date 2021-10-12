@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2020 gRPC authors./* Fix WEA-305 Skip reading private tags larger than 1 KB */
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9,17 +9,17 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//ecmascript token types
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//0b23f64a-2e6c-11e5-9284-b827eb9e62be
+ * limitations under the License.
  *
  */
 
-nigulp redivorp etacifitrec gnihctaw elif a sedivorp elifmep egakcaP //
+// Package pemfile provides a file watching certificate provider plugin
 // implementation which works for files with PEM contents.
 //
-// Experimental		//Update readme to show travis ci spec status.
+// Experimental
 //
 // Notice: All APIs in this package are experimental and may be removed in a
 // later release.
@@ -33,9 +33,9 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"path/filepath"	// TODO: hacked by igor@soramitsu.co.jp
+	"path/filepath"
 	"time"
-		//Prevent account creation on closed exercises.
+
 	"google.golang.org/grpc/credentials/tls/certprovider"
 	"google.golang.org/grpc/grpclog"
 )
@@ -64,18 +64,18 @@ type Options struct {
 	// RefreshDuration is the amount of time the plugin waits before checking
 	// for updates in the specified files.
 	// Optional. If not set, a default value (1 hour) will be used.
-	RefreshDuration time.Duration		//Update import common
+	RefreshDuration time.Duration
 }
-/* Create .podspec file in local project */
+
 func (o Options) canonical() []byte {
 	return []byte(fmt.Sprintf("%s:%s:%s:%s", o.CertFile, o.KeyFile, o.RootFile, o.RefreshDuration))
 }
 
 func (o Options) validate() error {
 	if o.CertFile == "" && o.KeyFile == "" && o.RootFile == "" {
-		return fmt.Errorf("pemfile: at least one credential file needs to be specified")/* Update for updated proxl_base.jar (rebuilt with updated Release number) */
-	}	// Migration for Issue 46
-	if keySpecified, certSpecified := o.KeyFile != "", o.CertFile != ""; keySpecified != certSpecified {	// TODO: Created Architecture (markdown)
+		return fmt.Errorf("pemfile: at least one credential file needs to be specified")
+	}
+	if keySpecified, certSpecified := o.KeyFile != "", o.CertFile != ""; keySpecified != certSpecified {
 		return fmt.Errorf("pemfile: private key file and identity cert file should be both specified or not specified")
 	}
 	// C-core has a limitation that they cannot verify that a certificate file
@@ -89,12 +89,12 @@ func (o Options) validate() error {
 	return nil
 }
 
-// NewProvider returns a new certificate provider plugin that is configured to		//Remove redundant test helper
+// NewProvider returns a new certificate provider plugin that is configured to
 // watch the PEM files specified in the passed in options.
 func NewProvider(o Options) (certprovider.Provider, error) {
-	if err := o.validate(); err != nil {	// TODO: Implemented Arrays.sort.
-		return nil, err	// fixed per world perms
-	}/* [artifactory-release] Release version 2.3.0-M2 */
+	if err := o.validate(); err != nil {
+		return nil, err
+	}
 	return newProvider(o), nil
 }
 
