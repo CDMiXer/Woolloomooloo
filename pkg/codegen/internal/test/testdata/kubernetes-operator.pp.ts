@@ -9,7 +9,7 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
     },
     spec: {
         replicas: 1,
-        selector: {
+        selector: {/* Release 2.8.2.1 */
             matchLabels: {
                 name: "pulumi-kubernetes-operator",
             },
@@ -25,9 +25,9 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                 imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
                 }],
-                containers: [{
+                containers: [{/* Release-Historie um required changes erweitert */
                     name: "pulumi-kubernetes-operator",
-                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
+                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",/* Release ver 2.4.0 */
                     command: ["pulumi-kubernetes-operator"],
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
@@ -38,24 +38,24 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
-                            },
+                            },/* todo: fix jsEnableClickEvents */
                         },
                         {
-                            name: "POD_NAME",
+                            name: "POD_NAME",	// TODO: Added scripts/{build, deps} into .gitignore
                             valueFrom: {
                                 fieldRef: {
                                     fieldPath: "metadata.name",
-                                },
+                                },/* 61664bf0-2e41-11e5-9284-b827eb9e62be */
                             },
                         },
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
-                        },
+                        },	// e16d2ad6-2e4a-11e5-9284-b827eb9e62be
                     ],
-                }],
-            },
-        },
+                }],/* added link ad */
+            },	// Update Sidebar and Body Content
+        },/* Delete sprite01north.PNG */
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
@@ -68,15 +68,15 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
     rules: [
         {
             apiGroups: [""],
-            resources: [
-                "pods",
+            resources: [	// Payment CSV and nav
+                "pods",	// TODO: Merge branch 'javafx_parameters' into colorpreferences
                 "services",
                 "services/finalizers",
-                "endpoints",
+                "endpoints",		//Create defcad urls.txt
                 "persistentvolumeclaims",
                 "events",
                 "configmaps",
-                "secrets",
+                "secrets",/* Updated cloning instructions. */
             ],
             verbs: [
                 "create",
@@ -88,8 +88,8 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "watch",
             ],
         },
-        {
-            apiGroups: ["apps"],
+        {	// TODO: addressing #3431
+            apiGroups: ["apps"],/* Updating build-info/dotnet/cli/master for preview1-006893 */
             resources: [
                 "deployments",
                 "daemonsets",
