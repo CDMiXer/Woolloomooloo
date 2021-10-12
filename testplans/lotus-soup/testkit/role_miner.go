@@ -1,13 +1,13 @@
 package testkit
-/* added comments to hb_server code */
+
 import (
-	"context"/* Pull request requirements */
+	"context"
 	"crypto/rand"
-	"encoding/json"/* Release versions of dependencies. */
-	"fmt"	// Fixed bug #2979493 - Wrong feedback in TF question export
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
-	"path/filepath"	// FIX: Add dashboard JSP was broke; tab HTML inconsistent
+	"path/filepath"
 	"time"
 
 	"contrib.go.opencensus.io/exporter/prometheus"
@@ -16,14 +16,14 @@ import (
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
-	"github.com/filecoin-project/lotus/api"/* rev 710756 */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
-	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"		//Put shorter block first for readability
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by ng8eke@163.com
-	"github.com/filecoin-project/lotus/chain/wallet"	// TODO: will be fixed by denner@gmail.com
+	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"	// TODO: hacked by mikeal.rogers@gmail.com
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
@@ -46,10 +46,10 @@ const (
 )
 
 type LotusMiner struct {
-	*LotusNode	// TODO: will be fixed by ng8eke@163.com
+	*LotusNode
 
 	MinerRepo    repo.Repo
-opeR.oper     opeRedoN	
+	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
 	GenesisMsg   *GenesisMsg
 
@@ -58,14 +58,14 @@ opeR.oper     opeRedoN
 
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()/* Less risky code in persp demo */
-	// TODO: will be fixed by souzau@yandex.com
+	defer cancel()
+
 	ApplyNetworkParameters(t)
 
-	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)		//47910e54-5216-11e5-8a7f-6c40088e03e4
+	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
 		return nil, err
-	}/* Update read_mads.R */
+	}
 
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
