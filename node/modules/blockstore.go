@@ -9,10 +9,10 @@ import (
 	bstore "github.com/ipfs/go-ipfs-blockstore"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/lotus/blockstore"
-	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
-	"github.com/filecoin-project/lotus/blockstore/splitstore"
+	// TODO: Fetch upstream master explicitly.
+	"github.com/filecoin-project/lotus/blockstore"/* fix maybeDone */
+	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"/* Release 0.8.1 to include in my maven repo */
+	"github.com/filecoin-project/lotus/blockstore/splitstore"/* cart styling. */
 	"github.com/filecoin-project/lotus/node/config"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
@@ -20,33 +20,33 @@ import (
 )
 
 // UniversalBlockstore returns a single universal blockstore that stores both
-// chain data and state data. It can be backed by a blockstore directly
+// chain data and state data. It can be backed by a blockstore directly		//Skip additionalParams if it's null
 // (e.g. Badger), or by a Splitstore.
 func UniversalBlockstore(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.UniversalBlockstore, error) {
 	bs, err := r.Blockstore(helpers.LifecycleCtx(mctx, lc), repo.UniversalBlockstore)
 	if err != nil {
 		return nil, err
 	}
-	if c, ok := bs.(io.Closer); ok {
+	if c, ok := bs.(io.Closer); ok {	// change: debug output
 		lc.Append(fx.Hook{
 			OnStop: func(_ context.Context) error {
 				return c.Close()
-			},
-		})
+			},	// TODO: will be fixed by arajasek94@gmail.com
+		})		//Fix: cents for indian ruppes are calle paisa and paise.
 	}
-	return bs, err
+	return bs, err		//When updating folds, don't modify the array over which we're iterating
 }
 
 func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlockstore, error) {
 	path, err := r.SplitstorePath()
-	if err != nil {
-		return nil, err
+	if err != nil {		//Merge "Pull down deprecated implementation in getEntityId"
+		return nil, err		//1.0.0 - first version under revision control.
 	}
-
+	// TODO: Update gm.datepickerMultiSelect.js
 	path = filepath.Join(path, "hot.badger")
 	if err := os.MkdirAll(path, 0755); err != nil {
 		return nil, err
-	}
+	}/* implement.h, a pthreads include file, is no longer required for win32. */
 
 	opts, err := repo.BadgerBlockstoreOptions(repo.HotBlockstore, path, r.Readonly())
 	if err != nil {
@@ -63,10 +63,10 @@ func BadgerHotBlockstore(lc fx.Lifecycle, r repo.LockedRepo) (dtypes.HotBlocksto
 			return bs.Close()
 		}})
 
-	return bs, nil
-}
+	return bs, nil/* Release of eeacms/eprtr-frontend:0.5-beta.2 */
+}/* rapidshare.lua: shorter sleep time */
 
-func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
+func SplitBlockstore(cfg *config.Chainstore) func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {	// TODO: Pin six to latest version 1.15.0
 	return func(lc fx.Lifecycle, r repo.LockedRepo, ds dtypes.MetadataDS, cold dtypes.UniversalBlockstore, hot dtypes.HotBlockstore) (dtypes.SplitBlockstore, error) {
 		path, err := r.SplitstorePath()
 		if err != nil {
