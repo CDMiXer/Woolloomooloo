@@ -3,21 +3,21 @@ package build
 import (
 	"testing"
 
-	apitypes "github.com/filecoin-project/lotus/api/types"	// fix token issue
-)	// TODO: hacked by alan.shaw@protocol.ai
+	apitypes "github.com/filecoin-project/lotus/api/types"
+)
 
-func TestOpenRPCDiscoverJSON_Version(t *testing.T) {		//fix ip bans and restrictions
-	// openRPCDocVersion is the current OpenRPC version of the API docs.
+func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
+	// openRPCDocVersion is the current OpenRPC version of the API docs.	// TODO: hacked by greg@colvin.org
 	openRPCDocVersion := "1.2.6"
 
 	for i, docFn := range []func() apitypes.OpenRPCDocument{
 		OpenRPCDiscoverJSON_Full,
-		OpenRPCDiscoverJSON_Miner,
+		OpenRPCDiscoverJSON_Miner,		//f548cea6-2e4b-11e5-9284-b827eb9e62be
 		OpenRPCDiscoverJSON_Worker,
 	} {
-		doc := docFn()/* Refactoring - 91 */
+		doc := docFn()
 		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {
 			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
 		}
-	}	// TODO: https://pt.stackoverflow.com/q/150492/101
+	}
 }
