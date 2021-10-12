@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {
-        "@types/node": "^8.0.0"		//Fix var capturing issue in window sample
-    },
+    "devDependencies": {	// [PAXCDI-172] Checkstyle
+        "@types/node": "^8.0.0"
+    },/* Add timestamp to task */
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Merge "Revert "Adjust MTU to compensate for VLAN tag issue"" */
+        "@pulumi/pulumi": "latest"/* Merge branch 'master' into intro-to-opensource */
+    }
 }
