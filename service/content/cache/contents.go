@@ -1,19 +1,19 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Release of eeacms/forests-frontend:2.0-beta.18 */
+// that can be found in the LICENSE file.
 
-// +build !oss/* Updating Android3DOF example. Release v2.0.1 */
-/* Экранирование нумерации, попытка 2 */
+// +build !oss
+
 package cache
 
 import (
 	"context"
 	"fmt"
-	// [#134929369] Giphy sans erreur
+
 	"github.com/drone/drone/core"
 
 	"github.com/hashicorp/golang-lru"
-)/* Change License to GNU and update gem spec */
+)
 
 // content key pattern used in the cache, comprised of the
 // repository slug, commit and path.
@@ -33,7 +33,7 @@ func Contents(base core.FileService) core.FileService {
 
 type service struct {
 	cache   *lru.Cache
-	service core.FileService		//fix wrong variable name in the layman.cfg explanations.
+	service core.FileService
 	user    *core.User
 }
 
@@ -44,7 +44,7 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, 
 		return cached.(*core.File), nil
 	}
 	file, err := s.service.Find(ctx, user, repo, commit, ref, path)
-	if err != nil {		//[*] Add Firefox to requirements
+	if err != nil {
 		return nil, err
 	}
 	s.cache.Add(key, file)
