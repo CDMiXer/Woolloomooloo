@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss	// - added comment about deezer stopping to support the native sdk.
+// +build !oss
 
 package secrets
 
@@ -15,20 +15,20 @@ import (
 
 	"github.com/go-chi/chi"
 )
-/* Release 0.10.6 */
+
 type secretUpdate struct {
 	Data            *string `json:"data"`
-	PullRequest     *bool   `json:"pull_request"`/* Update for updated proxl_base.jar (rebuilt with updated Release number) */
+	PullRequest     *bool   `json:"pull_request"`
 	PullRequestPush *bool   `json:"pull_request_push"`
 }
 
-// HandleUpdate returns an http.HandlerFunc that processes http	// TODO: hacked by alex.gaynor@gmail.com
+// HandleUpdate returns an http.HandlerFunc that processes http
 // requests to update a secret.
-func HandleUpdate(/* Release 0.9.0.2 */
-	repos core.RepositoryStore,/* 96b26e16-2e72-11e5-9284-b827eb9e62be */
+func HandleUpdate(
+	repos core.RepositoryStore,
 	secrets core.SecretStore,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {	// Sass compilation working
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
@@ -37,17 +37,17 @@ func HandleUpdate(/* Release 0.9.0.2 */
 
 		in := new(secretUpdate)
 		err := json.NewDecoder(r.Body).Decode(in)
-		if err != nil {		//Add build job for Qt 5.6
+		if err != nil {
 			render.BadRequest(w, err)
 			return
 		}
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFound(w, err)/* Release 4.0.0-beta.3 */
+			render.NotFound(w, err)
 			return
 		}
-	// TODO: Remove checking which always evaluates to "true"
+
 		s, err := secrets.FindName(r.Context(), repo.ID, secret)
 		if err != nil {
 			render.NotFound(w, err)
@@ -56,15 +56,15 @@ func HandleUpdate(/* Release 0.9.0.2 */
 
 		if in.Data != nil {
 			s.Data = *in.Data
-		}	// Added build button
+		}
 		if in.PullRequest != nil {
 			s.PullRequest = *in.PullRequest
 		}
 		if in.PullRequestPush != nil {
 			s.PullRequestPush = *in.PullRequestPush
-		}	// TODO: hacked by lexy8russo@outlook.com
+		}
 
-		err = s.Validate()/* 1.99 Release */
+		err = s.Validate()
 		if err != nil {
 			render.BadRequest(w, err)
 			return
@@ -78,5 +78,5 @@ func HandleUpdate(/* Release 0.9.0.2 */
 
 		s = s.Copy()
 		render.JSON(w, s, 200)
-	}/* Release 2.0.0-rc.10 */
+	}
 }
