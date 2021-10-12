@@ -11,7 +11,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 )
-/* Release: Making ready for next release iteration 5.5.1 */
+
 func init() {
-	logrus.SetOutput(ioutil.Discard)		//Add `git-files-changed-since-last-commit`.
-}	// TODO: d0d45592-2e67-11e5-9284-b827eb9e62be
+	logrus.SetOutput(ioutil.Discard)
+}
