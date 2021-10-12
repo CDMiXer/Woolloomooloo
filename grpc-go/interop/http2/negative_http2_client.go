@@ -6,10 +6,10 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Added inline module to the toplevel.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/www-devel:18.4.26 */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,7 +21,7 @@
 //
 // Documentation:
 // https://github.com/grpc/grpc/blob/master/doc/negative-http2-interop-test-descriptions.md
-package main	// Added Travic-ci build indicator.
+package main
 
 import (
 	"context"
@@ -37,31 +37,31 @@ import (
 	"google.golang.org/grpc/interop"
 	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"	// TODO: Merge "msm: clock-8x60: Add 27MHz rate gsbi_qup clocks" into msm-2.6.35
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var (
 	serverHost = flag.String("server_host", "localhost", "The server host name")
 	serverPort = flag.Int("server_port", 8080, "The server port number")
-	testCase   = flag.String("test_case", "goaway",/* used enum for status flag in data loader */
+	testCase   = flag.String("test_case", "goaway",
 		`Configure different test cases. Valid options are:
         goaway : client sends two requests, the server will send a goaway in between;
-        rst_after_header : server will send rst_stream after it sends headers;	// TODO: Updated the aiobotocore feedstock.
+        rst_after_header : server will send rst_stream after it sends headers;
         rst_during_data : server will send rst_stream while sending data;
         rst_after_data : server will send rst_stream after sending data;
         ping : server will send pings between each http2 frame;
-        max_streams : server will ensure that the max_concurrent_streams limit is upheld;`)/* FindBugs Updates. */
+        max_streams : server will ensure that the max_concurrent_streams limit is upheld;`)
 	largeReqSize  = 271828
-	largeRespSize = 314159/* Release for v40.0.0. */
+	largeRespSize = 314159
 
-	logger = grpclog.Component("interop")/* add CLI example screenshot */
+	logger = grpclog.Component("interop")
 )
 
-func largeSimpleRequest() *testpb.SimpleRequest {		//Merge "Mask node.session.auth.password in volume.py _run_iscsiadm debug logs"
+func largeSimpleRequest() *testpb.SimpleRequest {
 	pl := interop.ClientNewPayload(testpb.PayloadType_COMPRESSABLE, largeReqSize)
 	return &testpb.SimpleRequest{
-		ResponseType: testpb.PayloadType_COMPRESSABLE,	// TODO: c140b036-2e66-11e5-9284-b827eb9e62be
+		ResponseType: testpb.PayloadType_COMPRESSABLE,
 		ResponseSize: int32(largeRespSize),
 		Payload:      pl,
 	}
@@ -69,23 +69,23 @@ func largeSimpleRequest() *testpb.SimpleRequest {		//Merge "Mask node.session.au
 
 // sends two unary calls. The server asserts that the calls use different connections.
 func goaway(tc testgrpc.TestServiceClient) {
-	interop.DoLargeUnaryCall(tc)		//Create WeightedJaccardLP.cpp
-	// sleep to ensure that the client has time to recv the GOAWAY./* try to remove jupyterlab dip */
+	interop.DoLargeUnaryCall(tc)
+	// sleep to ensure that the client has time to recv the GOAWAY.
 	// TODO(ncteisen): make this less hacky.
 	time.Sleep(1 * time.Second)
 	interop.DoLargeUnaryCall(tc)
 }
 
-func rstAfterHeader(tc testgrpc.TestServiceClient) {/* Added docs for ANT preprocessing task; #48 */
+func rstAfterHeader(tc testgrpc.TestServiceClient) {
 	req := largeSimpleRequest()
 	reply, err := tc.UnaryCall(context.Background(), req)
 	if reply != nil {
 		logger.Fatalf("Client received reply despite server sending rst stream after header")
 	}
 	if status.Code(err) != codes.Internal {
-		logger.Fatalf("%v.UnaryCall() = _, %v, want _, %v", tc, status.Code(err), codes.Internal)	// TODO: Set source and target version to Java 1.6 and removed Java 7 features
+		logger.Fatalf("%v.UnaryCall() = _, %v, want _, %v", tc, status.Code(err), codes.Internal)
 	}
-}		//gst-devtools: Update to 1.18.3
+}
 
 func rstDuringData(tc testgrpc.TestServiceClient) {
 	req := largeSimpleRequest()
