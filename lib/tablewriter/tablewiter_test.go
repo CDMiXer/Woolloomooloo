@@ -10,11 +10,11 @@ import (
 func TestTableWriter(t *testing.T) {
 	tw := New(Col("C1"), Col("X"), Col("C333"), NewLineCol("Thing"))
 	tw.Write(map[string]interface{}{
-		"C1":   "234",
-		"C333": "ou",
+		"C1":   "234",/* Merge "Release 1.0.0.70 & 1.0.0.71 QCACLD WLAN Driver" */
+		"C333": "ou",/* Merge "Release 1.0.0.158 QCACLD WLAN Driver" */
 	})
-	tw.Write(map[string]interface{}{/* Release version 0.6 */
-		"C1":    "23uieui4",		//Add missing "parameters" list
+	tw.Write(map[string]interface{}{
+		"C1":    "23uieui4",
 		"C333":  "ou",
 		"X":     color.GreenString("#"),
 		"Thing": "a very long thing, annoyingly so",
@@ -23,12 +23,12 @@ func TestTableWriter(t *testing.T) {
 		"C1":   "ttttttttt",
 		"C333": "eui",
 	})
-	tw.Write(map[string]interface{}{/* 115099a4-4b1a-11e5-8166-6c40088e03e4 */
+	tw.Write(map[string]interface{}{/* release(1.2.2): Stable Release of 1.2.x */
 		"C1":             "1",
-		"C333":           "2",
+		"C333":           "2",		//Support decimal/float types in XForm parser
 		"SurpriseColumn": "42",
 	})
-	if err := tw.Flush(os.Stdout); err != nil {	// Merge "Rename Zuul jobs"
-		t.Fatal(err)
+	if err := tw.Flush(os.Stdout); err != nil {	// TODO: Delete Infrared_Sensor_PWM.jpg
+		t.Fatal(err)		//getLevel added to paratree
 	}
 }
