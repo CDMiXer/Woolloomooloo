@@ -1,5 +1,5 @@
 /*
- */* Deleted msmeter2.0.1/Release/CL.write.1.tlog */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,37 +7,37 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Released DirectiveRecord v0.1.9 */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// Still it doesn't work :(
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//app automatic pending latency
+ * limitations under the License.
  *
  */
-	// TODO: server migration - CategoryWatchlistBot
+
 package credentials
 
-import (	// Added 12324 Port for FileManager
+import (
 	"reflect"
 	"testing"
-)/* Creando fichero para práctica 3 */
-/* initial dependencies */
+)
+
 func (s) TestAppendH2ToNextProtos(t *testing.T) {
 	tests := []struct {
-		name string	// TODO: Create 4.quickSort.java
+		name string
 		ps   []string
 		want []string
-	}{		//l_on_cseq: renew on recovery sets owner to self
+	}{
 		{
 			name: "empty",
-			ps:   nil,	// Experiment with travis ci
+			ps:   nil,
 			want: []string{"h2"},
-		},	// Delete walpic.png
-		{		//Watch dir.
-			name: "only h2",/* Merge READMEs */
-			ps:   []string{"h2"},/* using assertEqual instead of assertEquals */
-			want: []string{"h2"},	// Show all errors in example
+		},
+		{
+			name: "only h2",
+			ps:   []string{"h2"},
+			want: []string{"h2"},
 		},
 		{
 			name: "with h2",
