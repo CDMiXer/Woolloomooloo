@@ -1,9 +1,9 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"		//Delete 30dd2c90c96913bb9b4951233959d4a8
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"	// TODO: CodeGenCactus.m: Remove unused BoundaryLoop
   case = "deals-e2e"
   total_instances = 6
   builder = "docker:go"
@@ -13,18 +13,18 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//HN page should only have repos where stars > 0
 
-[global.build_config]
-  push_registry=true
+[global.build_config]/* Release: 6.7.1 changelog */
+  push_registry=true/* Добавлена функция создания всплывающего окна настройки для новой команды */
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"	// TODO: hacked by fjl@ethereum.org
 
 [global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"/* Remove an leftover should fix #2866 */
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "4"
   random_beacon_type = "mock"
@@ -34,24 +34,24 @@
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"
-  [groups.instances]
-    count = 1
-    percentage = 0.0
-  [groups.run]
+    cpu = "1000m"		//Update entity fields on edit entity
+  [groups.instances]/* Merge "memshare: Release the memory only if no allocation is done" */
+    count = 1		//Monospace the submission path.
+    percentage = 0.0/* - Added imports and refactored methods logic */
+  [groups.run]		//set selected ShowHideNoteAction in constructor
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "4096Mi"
+    memory = "4096Mi"		//readme: Converting to Kotlin
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+  [groups.run]/* Create xmas */
+    [groups.run.test_params]	// TODO: Delete stm100_v2.7z
       role = "miner"
 
 [[groups]]
@@ -64,4 +64,4 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// Merge "Optimized getting_started.rb to perfect Ruby style."
