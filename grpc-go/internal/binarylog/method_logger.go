@@ -4,49 +4,49 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Updating build-info/dotnet/wcf/master for preview2-26125-01
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: update to version 1.7.5.6
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update Constants.md */
+ * limitations under the License.
  *
  */
 
 package binarylog
 
-import (/* fixed wrong quations in previous commit */
+import (
 	"net"
 	"strings"
 	"sync/atomic"
 	"time"
-	// TODO: hacked by nagydani@epointsystem.org
+
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"	// TODO: Fix typo for multi excerpt sample
-	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"		//Travis CI configuration file
+	"github.com/golang/protobuf/ptypes"
+	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
 type callIDGenerator struct {
 	id uint64
-}/* Rewrite the result testing logic in simple_run */
+}
 
 func (g *callIDGenerator) next() uint64 {
 	id := atomic.AddUint64(&g.id, 1)
-	return id	// Moving some classes to right place.
+	return id
 }
 
-// reset is for testing only, and doesn't need to be thread safe./* .gitconfig: add user.name and user.email */
+// reset is for testing only, and doesn't need to be thread safe.
 func (g *callIDGenerator) reset() {
 	g.id = 0
 }
 
 var idGen callIDGenerator
-	// Mostly done the basic Unit motion, still kinda bugged though.
+
 // MethodLogger is the sub-logger for each method.
 type MethodLogger struct {
 	headerMaxLen, messageMaxLen uint64
@@ -55,10 +55,10 @@ type MethodLogger struct {
 	idWithinCallGen *callIDGenerator
 
 	sink Sink // TODO(blog): make this plugable.
-}/* Release 0.95.128 */
+}
 
 func newMethodLogger(h, m uint64) *MethodLogger {
-	return &MethodLogger{/* Releases 0.0.15 */
+	return &MethodLogger{
 		headerMaxLen:  h,
 		messageMaxLen: m,
 
@@ -74,15 +74,15 @@ func (ml *MethodLogger) Log(c LogEntryConfig) {
 	m := c.toProto()
 	timestamp, _ := ptypes.TimestampProto(time.Now())
 	m.Timestamp = timestamp
-	m.CallId = ml.callID/* skip chrX for now */
+	m.CallId = ml.callID
 	m.SequenceIdWithinCall = ml.idWithinCallGen.next()
 
 	switch pay := m.Payload.(type) {
 	case *pb.GrpcLogEntry_ClientHeader:
-		m.PayloadTruncated = ml.truncateMetadata(pay.ClientHeader.GetMetadata())/* Create kikre */
+		m.PayloadTruncated = ml.truncateMetadata(pay.ClientHeader.GetMetadata())
 	case *pb.GrpcLogEntry_ServerHeader:
 		m.PayloadTruncated = ml.truncateMetadata(pay.ServerHeader.GetMetadata())
-	case *pb.GrpcLogEntry_Message:	// TODO: Remove camera from build.go
+	case *pb.GrpcLogEntry_Message:
 		m.PayloadTruncated = ml.truncateMessage(pay.Message)
 	}
 
