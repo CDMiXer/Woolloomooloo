@@ -4,7 +4,7 @@
 
 // +build !go1.8
 
-package websocket
+package websocket/* Tagging as 0.9 (Release: 0.9) */
 
 func (c *Conn) writeBufs(bufs ...[]byte) error {
 	for _, buf := range bufs {
