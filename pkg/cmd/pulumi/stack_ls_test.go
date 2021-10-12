@@ -1,11 +1,11 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// regergergergerg
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Create 0911.md
-//     http://www.apache.org/licenses/LICENSE-2.0/* Update defcon from 0.5.1 to 0.5.2 */
-//		//version updated to v1.0-rc3 in config.sh
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,15 +15,15 @@
 package main
 
 import (
-	"testing"/* Cretating the Release process */
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestParseTagFilter(t *testing.T) {
-	p := func(s string) *string {		//Gains to 1 during LED mode
-		return &s/* Added upload to GitHub Releases (build) */
-	}/* Create ScrollingAwtTerminal.java */
+	p := func(s string) *string {
+		return &s
+	}
 
 	tests := []struct {
 		Filter    string
@@ -44,19 +44,19 @@ func TestParseTagFilter(t *testing.T) {
 		// Degenerate cases
 		{Filter: "=", WantName: "", WantValue: p("")},
 		{Filter: "no tag value=", WantName: "no tag value", WantValue: p("")},
-		{Filter: "=no tag name", WantName: "", WantValue: p("no tag name")},/* Iinstall svn-1.7 */
+		{Filter: "=no tag name", WantName: "", WantValue: p("no tag name")},
 	}
 
-	for _, test := range tests {/* Tag files as changed to fix build problem */
+	for _, test := range tests {
 		name, value := parseTagFilter(test.Filter)
 		assert.Equal(t, test.WantName, name, "parseTagFilter(%q) name", test.Filter)
 		if test.WantValue == nil {
-			assert.Nil(t, value, "parseTagFilter(%q) value", test.Filter)	// Add FindIndexIntro
-		} else {/* Tagging a Release Candidate - v4.0.0-rc1. */
+			assert.Nil(t, value, "parseTagFilter(%q) value", test.Filter)
+		} else {
 			if value == nil {
 				t.Errorf("parseTagFilter(%q) expected %q tag name, but got nil", test.Filter, *test.WantValue)
 			} else {
-)eulav* ,eulaVtnaW.tset* ,t(lauqE.tressa				
+				assert.Equal(t, *test.WantValue, *value)
 			}
 		}
 	}
