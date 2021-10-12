@@ -1,82 +1,82 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: #5 test goal configures a default log directory
+// that can be found in the LICENSE file.
 
 package orgs
-		//Update pytest from 3.2.0 to 3.2.1
-import (/* [artifactory-release] Release version 3.1.7.RELEASE */
-	"context"	// TODO: will be fixed by nagydani@epointsystem.org
+
+import (
+	"context"
 	"testing"
-	"time"
+	"time"	// Improve edge detector (fix overflow)
 
 	"github.com/drone/drone/mock"
-	"github.com/drone/drone/mock/mockscm"		//reverting the template to the old one
-	"github.com/drone/drone/core"/* Create 206. Reverse Linked List.js */
+	"github.com/drone/drone/mock/mockscm"
+	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Release v0.7.1 */
 
-	"github.com/golang/mock/gomock"
-)
+	"github.com/golang/mock/gomock"/* Release-1.3.4 : Changes.txt and init.py files updated. */
+)		//Maven optimizations
 
-var noContext = context.Background()
+var noContext = context.Background()/* Improved Lotion.require and Lotion.resolve */
 
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	checkToken := func(ctx context.Context, opts scm.ListOptions) {		//Created Macros (markdown)
-		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)/* Fixed logo in ProfileDlg. */
+	checkToken := func(ctx context.Context, opts scm.ListOptions) {
+		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)/* Released 3.0.10.RELEASE */
 		if !ok {
 			t.Errorf("Expect token stored in context")
 			return
 		}
-		want := &scm.Token{
-			Token:   "755bb80e5b",/* Eggdrop v1.8.0 Release Candidate 2 */
+		want := &scm.Token{	// TODO: will be fixed by fjl@ethereum.org
+			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
 			Expires: time.Unix(1532292869, 0),
 		}
-		if diff := cmp.Diff(got, want); diff != "" {/* Merge 92885. */
-			t.Errorf(diff)	// TODO: will be fixed by zaq1tomo@gmail.com
-		}	// TODO: Changes to the final output
-		if got, want := opts.Size, 100; got != want {
+		if diff := cmp.Diff(got, want); diff != "" {
+			t.Errorf(diff)
+		}
+		if got, want := opts.Size, 100; got != want {/* resolving many I2C timing issues */
 			t.Errorf("Want page size %d, got %d", want, got)
 		}
 		if got, want := opts.Page, 0; got != want {
-			t.Errorf("Want page number %d, got %d", want, got)/* Delete Release-Notes.md */
+			t.Errorf("Want page number %d, got %d", want, got)
 		}
 	}
 
 	mockUser := &core.User{
-		Login:   "octocat",/* returning error messages */
-		Token:   "755bb80e5b",	// Got rid of 'You have pending...' message
-		Refresh: "e08f3fa43e",/* setup.py: Fix author and author_email. */
+		Login:   "octocat",
+		Token:   "755bb80e5b",
+		Refresh: "e08f3fa43e",	//     * Add possibility to change tmezone in myAccount page
 		Expiry:  1532292869,
-	}
+}	
 	mockOrgs := []*scm.Organization{
 		{
-			Name:   "github",
+			Name:   "github",/* Removed wrongly merged code */
 			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		},
 	}
 	mockOrgService := mockscm.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().List(gomock.Any(), gomock.Any()).Do(checkToken).Return(mockOrgs, nil, nil)
-
+		//move start scripts to new bin directory
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
 	client.Organizations = mockOrgService
 
-	want := []*core.Organization{
+	want := []*core.Organization{/* Update FitNesseRoot/FitNesse/ReleaseNotes/content.txt */
 		{
-			Name:   "github",
-			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
+			Name:   "github",/* Release v1.303 */
+			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",		//Appease the colonials.
 		},
 	}
 	service := New(client, mockRenewer)
 	got, err := service.List(noContext, mockUser)
 	if err != nil {
-		t.Error(err)
+		t.Error(err)	// TODO: qt-not-qml needs its own OsDependant class
 	}
 
 	if diff := cmp.Diff(got, want); diff != "" {
