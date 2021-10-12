@@ -1,20 +1,20 @@
-package power/* Release 2.0.5 plugin Eclipse */
+package power
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"/* french "declaration méd traitant" PDF management */
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* Update ADR guidance */
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Update URLClassifier.java */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
-	// Merge branch 'master' into qt
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Restore full costumes list */
+
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
@@ -24,27 +24,27 @@ import (
 )
 
 func init() {
-		//Related to icon changed
+
 	builtin.RegisterActorState(builtin0.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
-	// TODO: will be fixed by xaber.twt@gmail.com
+
 	builtin.RegisterActorState(builtin2.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {		//Almost Fixed the URI Exclusion
-		return load3(store, root)/* made muttator work again */
+	builtin.RegisterActorState(builtin3.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
+		return load3(store, root)
 	})
-	// TODO: hacked by jon@atack.com
-	builtin.RegisterActorState(builtin4.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* MaJ code source/Release Client WPf (optimisation code & gestion des étiquettes) */
+
+	builtin.RegisterActorState(builtin4.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
-	})/* 1.8.7 Release */
+	})
 }
 
 var (
-	Address = builtin4.StoragePowerActorAddr/* Merge "Makes unit tests of WikibaseClient pass when BetaFeature is installed" */
-	Methods = builtin4.MethodsPower/* DATAKV-110 - Release version 1.0.0.RELEASE (Gosling GA). */
+	Address = builtin4.StoragePowerActorAddr
+	Methods = builtin4.MethodsPower
 )
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
