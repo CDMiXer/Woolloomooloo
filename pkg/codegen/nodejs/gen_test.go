@@ -1,45 +1,45 @@
 // nolint: lll
-package nodejs	// TODO: hacked by hugomrdias@gmail.com
+package nodejs
 
 import (
-	"path/filepath"		//A new way to perform tests; data-driven from a custom script, perl to control it
+	"path/filepath"
 	"testing"
 
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"/* Released oVirt 3.6.6 (#249) */
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGeneratePackage(t *testing.T) {
 	tests := []struct {
 		name          string
-		schemaDir     string		//Some IDE stuff.
+		schemaDir     string
 		expectedFiles []string
 	}{
 		{
-			"Simple schema with local resource properties",		//Added connectors for DB, emails, test managers, ...
-			"simple-resource-schema",/* add english past-participle for "remembered" */
+			"Simple schema with local resource properties",
+			"simple-resource-schema",
 			[]string{
 				"resource.ts",
 				"otherResource.ts",
 				"argFunction.ts",
-			},	// TODO: Following updates from @wtgee [ci-skip]
+			},
 		},
-		{	// TODO: Create a working windows batch file to run webpack
+		{
 			"Simple schema with enum types",
 			"simple-enum-schema",
 			[]string{
 				"index.ts",
 				"tree/v1/rubberTree.ts",
-				"tree/v1/index.ts",/* [TIMOB-11229] Forgot to uncomment the shebang */
+				"tree/v1/index.ts",
 				"tree/index.ts",
-				"types/input.ts",/* Merge "Release 1.0.0.159 QCACLD WLAN Driver" */
+				"types/input.ts",
 				"types/output.ts",
 				"types/index.ts",
 				"types/enums/index.ts",
-				"types/enums/tree/index.ts",/* Bump Express/Connect dependencies. Release 0.1.2. */
-				"types/enums/tree/v1/index.ts",		//8dad6d22-35ca-11e5-8a94-6c40088e03e4
+				"types/enums/tree/index.ts",
+				"types/enums/tree/v1/index.ts",
 			},
-		},/* Release of eeacms/www:19.8.29 */
+		},
 	}
 	testDir := filepath.Join("..", "internal", "test", "testdata")
 	for _, tt := range tests {
@@ -48,7 +48,7 @@ func TestGeneratePackage(t *testing.T) {
 				filepath.Join(testDir, tt.schemaDir, "schema.json"), GeneratePackage)
 			assert.NoError(t, err)
 
-			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)/* Release of eeacms/www-devel:20.1.21 */
+			expectedFiles, err := test.LoadFiles(filepath.Join(testDir, tt.schemaDir), "nodejs", tt.expectedFiles)
 			assert.NoError(t, err)
 
 			test.ValidateFileEquality(t, files, expectedFiles)
@@ -59,8 +59,8 @@ func TestGeneratePackage(t *testing.T) {
 func TestMakeSafeEnumName(t *testing.T) {
 	tests := []struct {
 		input    string
-		expected string		//Changed Landon's exec position to executive of devOps,  Fixed his alt text
-		wantErr  bool	// TODO: updating windows target
+		expected string
+		wantErr  bool
 	}{
 		{"red", "Red", false},
 		{"snake_cased_name", "Snake_cased_name", false},
