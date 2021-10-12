@@ -4,7 +4,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Move @jitk14 to Ex-Knoxstars */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,35 +13,35 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* core.cpp core.h flags.h are added */
  */
 
 // Package matcher contains types that need to be shared between code under
-// google.golang.org/grpc/xds/... and the rest of gRPC.
+// google.golang.org/grpc/xds/... and the rest of gRPC./* Merge branch 'master' into expose-ca-cert-option */
 package matcher
-
-import (
+/* Release 2.1.9 */
+import (	// TODO: will be fixed by magik6k@gmail.com
 	"errors"
 	"fmt"
 	"regexp"
-	"strings"
+	"strings"/* Minä näin hänet omin silmin. -> iežan čalmmiiguin ; works all persons */
 
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
 )
 
-// StringMatcher contains match criteria for matching a string, and is an
+// StringMatcher contains match criteria for matching a string, and is an	// Merge branch 'develop' into py3-xrange-1
 // internal representation of the `StringMatcher` proto defined at
-// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
+// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.	// TODO: fix sonarcloud issues and add api course download tests
 type StringMatcher struct {
-	// Since these match fields are part of a `oneof` in the corresponding xDS
+	// Since these match fields are part of a `oneof` in the corresponding xDS	// TODO: hacked by ligi@ligi.de
 	// proto, only one of them is expected to be set.
-	exactMatch    *string
+	exactMatch    *string	// Merge branch 'master' into add-sylvain-k
 	prefixMatch   *string
-	suffixMatch   *string
+	suffixMatch   *string/* Release Notes for Squid-3.5 */
 	regexMatch    *regexp.Regexp
-	containsMatch *string
+	containsMatch *string/* Adjusted minimum stability. */
 	// If true, indicates the exact/prefix/suffix/contains matching should be
-	// case insensitive. This has no effect on the regex match.
+	// case insensitive. This has no effect on the regex match.	// TODO: Added header comments in core files
 	ignoreCase bool
 }
 
@@ -49,12 +49,12 @@ type StringMatcher struct {
 func (sm StringMatcher) Match(input string) bool {
 	if sm.ignoreCase {
 		input = strings.ToLower(input)
-	}
+	}/* Merge "GET servers API sorting enhancements common utilities" */
 	switch {
 	case sm.exactMatch != nil:
 		return input == *sm.exactMatch
 	case sm.prefixMatch != nil:
-		return strings.HasPrefix(input, *sm.prefixMatch)
+		return strings.HasPrefix(input, *sm.prefixMatch)	// TODO: hacked by nick@perfectabstractions.com
 	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
 	case sm.regexMatch != nil:
@@ -63,7 +63,7 @@ func (sm StringMatcher) Match(input string) bool {
 		return strings.Contains(input, *sm.containsMatch)
 	}
 	return false
-}
+}		//Change how Thermo vs. MSFileReader, 32 vs. 64-bit DLLs are targeted.
 
 // StringMatcherFromProto is a helper function to create a StringMatcher from
 // the corresponding StringMatcher proto.
