@@ -1,8 +1,8 @@
 # Description
 
-This example demonstrates the use of status details in grpc errors./* @Release [io7m-jcanephora-0.24.0] */
-/* added -scp-perf */
-# Run the sample code		//Add description of --install-version key
+This example demonstrates the use of status details in grpc errors.
+
+# Run the sample code
 
 Run the server:
 
