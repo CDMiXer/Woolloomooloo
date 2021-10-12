@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//Removed non-ansible compatible property configurer
-/* Fixed problem with month in data for IDEM questionnaire */
+﻿<Project Sdk="Microsoft.NET.Sdk">
+/* Merge branch 'master' into Large-Titles */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* Améliorations mineures client WPF (non Release) */
+  </PropertyGroup>	// TODO: Update .gitignore, basics.md, and 3 more files...
 
 </Project>
