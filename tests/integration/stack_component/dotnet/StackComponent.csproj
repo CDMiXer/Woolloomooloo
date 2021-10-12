@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	// TODO: hacked by igor@soramitsu.co.jp
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* 4f061d16-2e5d-11e5-9284-b827eb9e62be */
-		//filter to exclude by status
-</Project>
+  </PropertyGroup>
+
+</Project>/* Merge "KEYS: Fix race between key destruction and finding a keyring by name" */
