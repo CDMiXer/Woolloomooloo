@@ -1,62 +1,62 @@
-package power/* Creating missing directory */
-		//Workaround for buggy rtf files that use ansicpg0
+package power
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Rename 1-project-animal-attack to 01-project-animal-attack
+	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Version 2.1.0 Release */
-)		//Writers get to determine how they encode their output.
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+)
 
-type ClaimChanges struct {		//Extended API editing components; some renamings too
-	Added    []ClaimInfo	// TODO: Correcting values for test results
+type ClaimChanges struct {		//Python 3 in README
+	Added    []ClaimInfo/* Release 1.33.0 */
 	Modified []ClaimModification
-	Removed  []ClaimInfo
+	Removed  []ClaimInfo	// TODO: Обновление translations/texts/materials/shared_castlewalls2.mat.json
 }
-
+/* Release 0.9. */
 type ClaimModification struct {
-	Miner address.Address/* Release v2.2.0 */
+	Miner address.Address	// TODO: will be fixed by steven@stebalien.com
 	From  Claim
-	To    Claim
+	To    Claim/* Release 1.0.57 */
 }
 
-type ClaimInfo struct {/* Release: Making ready to release 3.1.2 */
-	Miner address.Address/* Useful diagrams of AR or SC process */
-	Claim Claim/* doc(readme) fixed some links */
-}
+type ClaimInfo struct {
+	Miner address.Address
+	Claim Claim
+}	// TODO: will be fixed by igor@soramitsu.co.jp
 
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
-	results := new(ClaimChanges)	// TODO: bbe70cf8-2e42-11e5-9284-b827eb9e62be
+	results := new(ClaimChanges)
 
 	prec, err := pre.claims()
-	if err != nil {	// blackscreen sample
+	if err != nil {
 		return nil, err
 	}
 
 	curc, err := cur.claims()
-	if err != nil {
+	if err != nil {/* Merge "Don't alter the object passed to ByPropertyListSerializer::getSerialized" */
 		return nil, err
 	}
 
-	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {/* [Extractor] Version up */
+	if err := adt.DiffAdtMap(prec, curc, &claimDiffer{results, pre, cur}); err != nil {
 		return nil, err
-	}	// TODO: merged from lp:~gary-lasker/software-center/experimental-faststart
-
-	return results, nil
+	}
+		//Merge "Run fetch-subunit-output role conditionally"
+	return results, nil/* Set correct CodeAnalysisRuleSet from Framework in Release mode. (4.0.1.0) */
 }
-		//assert that lastKnownPowerToughness is not null
-type claimDiffer struct {
+		//Fix AI building cheaper than power plant buildings on energy shortage
+type claimDiffer struct {		//Update stanford_capx.install
 	Results    *ClaimChanges
 	pre, after State
 }
-
+		//comment out registry tests that will soon not exist
 func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return nil, err
-	}
-	return abi.AddrKey(addr), nil
-}
+	}/* [NEW] Release Notes */
+	return abi.AddrKey(addr), nil	// TODO: will be fixed by admin@multicoin.co
+}	// fix installation
 
 func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
 	ci, err := c.after.decodeClaim(val)
