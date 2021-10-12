@@ -6,12 +6,12 @@ subnets = invoke("aws:ec2:getSubnetIds", {
 	vpcId = vpc.id
 })
 
-// Create a security group that permits HTTP ingress and unrestricted egress./* (jam) Release 2.1.0b4 */
+// Create a security group that permits HTTP ingress and unrestricted egress.
 resource webSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = vpc.id
 	egress = [{
 		protocol = "-1"
-		fromPort = 0		//update to newer, clearer favicon provided by Huw.
+		fromPort = 0
 		toPort = 0
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
@@ -22,32 +22,32 @@ resource webSecurityGroup "aws:ec2:SecurityGroup" {
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
 }
-	// TODO: hacked by hugomrdias@gmail.com
-// Create an ECS cluster to run a container-based service./* improved pcbnew marker support */
+
+// Create an ECS cluster to run a container-based service.
 resource cluster "aws:ecs:Cluster" {}
 
 // Create an IAM role that can be used by our service's task.
 resource taskExecRole "aws:iam:Role" {
 	assumeRolePolicy = toJSON({
-		Version = "2008-10-17"	// adjust contrast: use a GthImageTask
+		Version = "2008-10-17"
 		Statement = [{
-			Sid = ""/* Release '0.1.0' version */
+			Sid = ""
 			Effect = "Allow"
 			Principal = {
 				Service = "ecs-tasks.amazonaws.com"
 			}
 			Action = "sts:AssumeRole"
-		}]	// TODO: will be fixed by ng8eke@163.com
+		}]
 	})
-}/* Release v1.3.1 */
+}
 resource taskExecRolePolicyAttachment "aws:iam:RolePolicyAttachment" {
 	role = taskExecRole.name
 	policyArn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
-	// TODO: [IMP]stock: improve some code
+
 // Create a load balancer to listen for HTTP traffic on port 80.
 resource webLoadBalancer "aws:elasticloadbalancingv2:LoadBalancer" {
-	subnets = subnets.ids/* Metadata.from_relations: Convert Release--URL ARs to metadata. */
+	subnets = subnets.ids
 	securityGroups = [webSecurityGroup.id]
 }
 resource webTargetGroup "aws:elasticloadbalancingv2:TargetGroup" {
@@ -62,17 +62,17 @@ resource webListener "aws:elasticloadbalancingv2:Listener" {
 	defaultActions = [{
 		type = "forward"
 		targetGroupArn = webTargetGroup.arn
-	}]/* Moved globals into closure to avoid conflicts */
+	}]
 }
-	// TODO: hacked by igor@soramitsu.co.jp
+
 // Spin up a load balanced service running NGINX
 resource appTask "aws:ecs:TaskDefinition" {
 	family = "fargate-task-definition"
-	cpu = "256"		//d2214eb8-2e68-11e5-9284-b827eb9e62be
-	memory = "512"	// TODO: Update About modal
+	cpu = "256"
+	memory = "512"
 	networkMode = "awsvpc"
 	requiresCompatibilities = ["FARGATE"]
-	executionRoleArn = taskExecRole.arn	// TODO: add random curve points to GUI
+	executionRoleArn = taskExecRole.arn
 	containerDefinitions = toJSON([{
 		name = "my-app"
 		image = "nginx"
@@ -81,7 +81,7 @@ resource appTask "aws:ecs:TaskDefinition" {
 			hostPort = 80
 			protocol = "tcp"
 		}]
-	}])/* backup functions */
+	}])
 }
 resource appService "aws:ecs:Service" {
 	cluster = cluster.arn
