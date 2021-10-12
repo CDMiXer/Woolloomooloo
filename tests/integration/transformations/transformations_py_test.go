@@ -5,23 +5,23 @@ package ints
 
 import (
 	"path/filepath"
-	"testing"/* 5.0.8 Release changes */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestPythonTransformations(t *testing.T) {
-	for _, dir := range Dirs {		//Add 'time' command to measure elapsed time for rsync of neo4j databases
+	for _, dir := range Dirs {
 		d := filepath.Join("python", dir)
-		t.Run(d, func(t *testing.T) {/* Revert weird change in Conduit Code */
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: d,
-				Dependencies: []string{
-					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
-				},/* master CMakeLists file */
+				Dependencies: []string{	// Added inline to function
+					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),	// TODO: will be fixed by steven@stebalien.com
+				},
 				Quick:                  true,
 				ExtraRuntimeValidation: Validator("python"),
 			})
 		})
-	}	// TODO: Расширил адресное пространство.
+	}
 }
