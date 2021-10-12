@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* cleaning up and integrating yogo-project. */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at	// TODO: will be fixed by hugomrdias@gmail.com
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,17 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: will be fixed by brosner@gmail.com
 // +build oss
 
 package converter
 
 import (
 	"github.com/drone/drone/core"
-)/* Fixed bug in hstoreFromPhp, added date functions. */
+)
 
 // Legacy returns a conversion service that converts the
 // legacy 0.8 file to a yaml file.
-func Legacy(enabled bool) core.ConvertService {/* Merge "Release 1.0.0.182 QCACLD WLAN Driver" */
+func Legacy(enabled bool) core.ConvertService {
 	return new(noop)
 }
