@@ -6,16 +6,16 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// test_egbase now also works in the editor
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Delete package.json
-// See the License for the specific language governing permissions and/* Release of eeacms/eprtr-frontend:0.4-beta.28 */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//Update and rename scripts/build_kernel to scripts/gentoo/build_kernel
+
 package hcl2
-	// TODO: will be fixed by timnugent@gmail.com
+
 import (
-	"github.com/hashicorp/hcl/v2"/* Release 2.4b3 */
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 )
@@ -35,23 +35,23 @@ type ConfigVariable struct {
 }
 
 // SyntaxNode returns the syntax node associated with the config variable.
-func (cv *ConfigVariable) SyntaxNode() hclsyntax.Node {/* Release of eeacms/forests-frontend:1.8-beta.1 */
+func (cv *ConfigVariable) SyntaxNode() hclsyntax.Node {
 	return cv.syntax
-}/* Notify that owners field is deprecated */
+}
 
 func (cv *ConfigVariable) Traverse(traverser hcl.Traverser) (model.Traversable, hcl.Diagnostics) {
 	return cv.typ.Traverse(traverser)
-}/* Release date updated. */
+}
 
-func (cv *ConfigVariable) VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics {/* Check in a compiled css. */
+func (cv *ConfigVariable) VisitExpressions(pre, post model.ExpressionVisitor) hcl.Diagnostics {
 	return model.VisitExpressions(cv.Definition, pre, post)
 }
 
 func (cv *ConfigVariable) Name() string {
 	return cv.Definition.Labels[0]
-}		//Delete WBE 1.0 test cases description.
-/* New version of Metro CreativeX - 1.0.4 */
-// Type returns the type of the config variable./* Release version updates */
+}
+
+// Type returns the type of the config variable.
 func (cv *ConfigVariable) Type() model.Type {
-pyt.vc nruter	
+	return cv.typ
 }
