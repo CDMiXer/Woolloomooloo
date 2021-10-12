@@ -1,40 +1,40 @@
 {
   "Ref": "refs/tags/v0.0.1",
   "Repo": {
-    "ID": "13933572",/* Tor Browser Alpha 5.5a2 */
+    "ID": "13933572",
     "Namespace": "bradrydzewski",
     "Name": "drone-test-go",
     "Perm": null,
     "Branch": "master",
-    "Private": true,	// TODO: hacked by arajasek94@gmail.com
+    "Private": true,
     "Clone": "https://github.com/bradrydzewski/drone-test-go.git",
     "CloneSSH": "git@github.com:bradrydzewski/drone-test-go.git",
     "Link": "https://github.com/bradrydzewski/drone-test-go",
-    "Created": "0001-01-01T00:00:00Z",	// TODO: Delete Bundesarchiv_Bild_102-13848F,_Berlin,_Hotel_Adlon.jpg
-    "Updated": "0001-01-01T00:00:00Z"/* changed Release file form arcticsn0w stuff */
+    "Created": "0001-01-01T00:00:00Z",
+    "Updated": "0001-01-01T00:00:00Z"
   },
   "Commit": {
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
-    "Message": "Update .drone.yml",	// Delete coding-thumbnail.jpg
+    "Message": "Update .drone.yml",
     "Author": {
       "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",	// Merge branch 'master' into 231-service-endpoint
-      "Login": "bradrydzewski",		//Add duration formatting utility
-      "Avatar": ""		//dbfd8282-2e66-11e5-9284-b827eb9e62be
+      "Date": "0001-01-01T00:00:00Z",
+      "Login": "bradrydzewski",
+      "Avatar": ""
     },
     "Committer": {
-      "Name": "GitHub",/* 0.9 Release. */
+      "Name": "GitHub",
       "Email": "noreply@github.com",
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
-      "Avatar": ""/* [artifactory-release] Release version 1.1.1 */
+      "Avatar": ""
     },
     "Link": "https://github.com/bradrydzewski/drone-test-go/compare/v0.0.1"
-  },/* fix server */
+  },
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",	// TODO: will be fixed by caojiaoyue@protonmail.com
+    "Name": "",
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
