@@ -1,1 +1,1 @@
-pulumi>=2.0.0,<3.0.0
+pulumi>=2.0.0,<3.0.0		//Add md5s for ruby-1.9.3-p448.
