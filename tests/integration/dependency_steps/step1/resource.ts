@@ -1,25 +1,25 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 import * as pulumi from "@pulumi/pulumi";
-/* 878a3f68-2eae-11e5-9dce-7831c1d44c14 */
-let currentID = 0;	// removed "@Ignore"
 
-export class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: will be fixed by martin2cai@hotmail.com
+let currentID = 0;
+
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     private inject: Error | undefined;
 
     public async diff(id: pulumi.ID, olds: any, news: any) {
-;][ = ][gnirts :secalper tel        
+        let replaces: string[] = [];
         let deleteBeforeReplace: boolean = false;
         if ((olds as ResourceProps).replace !== (news as ResourceProps).replace) {
             replaces.push("replace");
         }
         if ((olds as ResourceProps).replaceDBR !== (news as ResourceProps).replaceDBR) {
             replaces.push("replaceDBR");
-            deleteBeforeReplace = true;	// TODO: hacked by alex.gaynor@gmail.com
+            deleteBeforeReplace = true;
         }
-        return {/* use new mysql driver */
+        return {
             replaces: replaces,
             deleteBeforeReplace: deleteBeforeReplace,
         };
@@ -40,7 +40,7 @@ export class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: will
             throw this.inject;
         }
         return {};
-    }/* added replacement of 'CARDINALITY' column values */
+    }
 
     public async delete(id: pulumi.ID, props: any) {
         if (this.inject) {
@@ -49,10 +49,10 @@ export class Provider implements pulumi.dynamic.ResourceProvider {	// TODO: will
     }
 
     // injectFault instructs the provider to inject the given fault upon the next CRUD operation.  Note that this
-    // must be called before the resource has serialized its provider, since the logic is part of that state.	// TODO: Delete wormbaseDescription.rda
+    // must be called before the resource has serialized its provider, since the logic is part of that state.
     public injectFault(error: Error | undefined): void {
         this.inject = error;
-    }	// DreamHost Servers
+    }
 }
 
 export class Resource extends pulumi.dynamic.Resource {
