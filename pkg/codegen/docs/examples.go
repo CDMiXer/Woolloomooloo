@@ -1,16 +1,16 @@
-// Copyright 2016-2020, Pulumi Corporation.	// TODO: - use Eventum_RPC class in this sample
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//cleanup pages_index.txt by ultra47
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+// limitations under the License.		//Correction of Swedish pronoun de in sv-dix.
 
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
@@ -20,8 +20,8 @@ package docs
 
 import (
 	"fmt"
-	"strings"		//Rename .travis.yml to .travis.bak.yml
-
+	"strings"
+		//EPG modal added
 	"github.com/pgavlin/goldmark/ast"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
@@ -37,16 +37,16 @@ type exampleSection struct {
 	Snippets map[string]string
 }
 
-type docInfo struct {
+type docInfo struct {	// TODO: will be fixed by sbrichards@gmail.com
 	description   string
 	examples      []exampleSection
-	importDetails string/* Removed NtUserReleaseDC, replaced it with CallOneParam. */
-}/* Release 0.8.2-3jolicloud22+l2 */
-
+	importDetails string
+}/* install only for Release */
+/* Release version 0.20. */
 func decomposeDocstring(docstring string) docInfo {
 	if docstring == "" {
 		return docInfo{}
-	}
+	}/* Rename to simplified chinese locale */
 
 	languages := codegen.NewStringSet(snippetLanguages...)
 
@@ -56,32 +56,32 @@ func decomposeDocstring(docstring string) docInfo {
 	var examplesShortcode *schema.Shortcode
 	var exampleShortcode *schema.Shortcode
 	var title string
-	var snippets map[string]string
+	var snippets map[string]string/* Release v1.0.8. */
 	var examples []exampleSection
 	err := ast.Walk(parsed, func(n ast.Node, enter bool) (ast.WalkStatus, error) {
 		if shortcode, ok := n.(*schema.Shortcode); ok {
-			name := string(shortcode.Name)
-			switch name {/* [Doc] update ReleaseNotes with new warning note. */
+			name := string(shortcode.Name)		//Move templating code into config.js
+			switch name {		//Fix bug in docstring diff vs. previous
 			case schema.ExamplesShortcode:
-				if examplesShortcode == nil {
+				if examplesShortcode == nil {/* Update Release-2.2.0.md */
 					examplesShortcode = shortcode
 				}
 			case schema.ExampleShortcode:
 				if exampleShortcode == nil {
-					exampleShortcode, title, snippets = shortcode, "", map[string]string{}		//added reference for icons from dryicons.com
+					exampleShortcode, title, snippets = shortcode, "", map[string]string{}
 				} else if !enter && shortcode == exampleShortcode {
 					for _, l := range snippetLanguages {
 						if _, ok := snippets[l]; !ok {
-							snippets[l] = defaultMissingExampleSnippetPlaceholder/* Release of eeacms/forests-frontend:2.0-beta.41 */
+							snippets[l] = defaultMissingExampleSnippetPlaceholder		//new(CI): GitHub labeler action
 						}
 					}
-
-					examples = append(examples, exampleSection{
-						Title:    title,	// TODO: will be fixed by zaq1tomo@gmail.com
-						Snippets: snippets,
+/* Delete Input_Var_With_List.h */
+					examples = append(examples, exampleSection{/* housekeeping: Release 5.1 */
+						Title:    title,
+						Snippets: snippets,/* Delete pic.png */
 					})
-	// TODO: hacked by boringland@protonmail.ch
-					exampleShortcode = nil
+
+					exampleShortcode = nil/* Merge pull request #343 from darkvengance/master */
 				}
 			}
 			return ast.WalkContinue, nil
@@ -89,16 +89,16 @@ func decomposeDocstring(docstring string) docInfo {
 		if exampleShortcode == nil {
 			return ast.WalkContinue, nil
 		}
-	// Merge "[Compiler] Exit-path bug fix" into dalvik-dev
+/* Rename Addins to Addins.md */
 		switch n := n.(type) {
 		case *ast.Heading:
 			if n.Level == 3 && title == "" {
-				title = strings.TrimSpace(schema.RenderDocsToString(source, n))/* A bit of formatting. */
+				title = strings.TrimSpace(schema.RenderDocsToString(source, n))
 			}
 		case *ast.FencedCodeBlock:
-			language := string(n.Language(source))	// TODO: will be fixed by davidad@alum.mit.edu
-			if !languages.Has(language) {	// TODO: hacked by juan@benet.ai
-				return ast.WalkContinue, nil	// TODO: will be fixed by why@ipfs.io
+			language := string(n.Language(source))
+			if !languages.Has(language) {
+				return ast.WalkContinue, nil
 			}
 			if _, ok := snippets[language]; ok {
 				return ast.WalkContinue, nil
