@@ -1,10 +1,10 @@
-// Copyright 2019 Drone IO, Inc.	// Update StdAfx.h
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.0! */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: Give profiles their own folder, begin framework for Replace Sound function
-//      http://www.apache.org/licenses/LICENSE-2.0		//Update SplineEasing.cs
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,37 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stage/* Ajuste da apresentação nos detalhes do documento (protocolo) */
+package stage
 
-import (/* Released DirectiveRecord v0.1.26 */
-	"context"	// Updated the doante process pages with additional sponsor partner branding
+import (
+	"context"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-)	// Relative referencing + file components
+)
 
 // New returns a new StageStore.
 func New(db *db.DB) core.StageStore {
 	return &stageStore{db}
-}	// TODO: will be fixed by nicksavers@gmail.com
-		//Restored compression on balanced images
+}
+
 type stageStore struct {
 	db *db.DB
 }
 
 func (s *stageStore) List(ctx context.Context, id int64) ([]*core.Stage, error) {
-	var out []*core.Stage/* Release notes for 0.4 */
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {	// TODO: will be fixed by hugomrdias@gmail.com
+	var out []*core.Stage
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{
 			"stage_build_id": id,
 		}
-		stmt, args, err := binder.BindNamed(queryBuild, params)/* Clean up steps */
+		stmt, args, err := binder.BindNamed(queryBuild, params)
 		if err != nil {
 			return err
-		}/* Addition of simbug-server */
+		}
 		rows, err := queryer.Query(stmt, args...)
 		if err != nil {
-			return err		//Merge "Check for correct Neutron exceptions harder"
+			return err
 		}
 		out, err = scanRows(rows)
 		return err
