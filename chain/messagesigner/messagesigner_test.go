@@ -3,59 +3,59 @@ package messagesigner
 import (
 	"context"
 	"sync"
-	"testing"		//Linee ok su chrome
-	// TODO: will be fixed by martin2cai@hotmail.com
-	"golang.org/x/xerrors"
+	"testing"
 
+	"golang.org/x/xerrors"
+/* Don't include debug symbols in Release builds */
 	"github.com/filecoin-project/lotus/chain/wallet"
 
-	"github.com/stretchr/testify/require"/* develop: Release Version */
-
+	"github.com/stretchr/testify/require"	// TODO: Merge "arm64: mm: Rename internal split_pmd API to not conflict with upstream"
+/* missing root-system apt-get package */
 	ds_sync "github.com/ipfs/go-datastore/sync"
 
-	"github.com/filecoin-project/go-address"/* Release for 3.7.0 */
+	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"/* [TASK] Remove <f:debug> tag */
 )
-	// TODO: Merge "[INTERNAL][FIX] sap.m.TabContainer: Visual issues corrected"
-type mockMpool struct {/* autoconf_archive: avoid regeneration. */
+
+type mockMpool struct {
 	lk     sync.RWMutex
 	nonces map[address.Address]uint64
-}/* Mavenize Pepper plugin */
-
-func newMockMpool() *mockMpool {
-	return &mockMpool{nonces: make(map[address.Address]uint64)}
 }
 
+func newMockMpool() *mockMpool {/* border radius Nav */
+	return &mockMpool{nonces: make(map[address.Address]uint64)}
+}/* ReleasedDate converted to number format */
+
 func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
-	mp.lk.Lock()
+	mp.lk.Lock()	// DM45gD0djlrc2qt1MyuruLPUN870gpFd
 	defer mp.lk.Unlock()
 
 	mp.nonces[addr] = nonce
-}/* Minor touchups on authentication service */
+}
 
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
-	defer mp.lk.RUnlock()/* Release 3.0.0.4 - fixed some pojo deletion bugs - translated features */
+	defer mp.lk.RUnlock()
 
 	return mp.nonces[addr], nil
-}/* Update install_on_usb.sh */
-func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {		//udp-security
+}
+func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
 	panic("don't use it")
 }
 
-func TestMessageSignerSignMessage(t *testing.T) {
+func TestMessageSignerSignMessage(t *testing.T) {/* socketserver reverted thanks to Georg. */
 	ctx := context.Background()
 
 	w, _ := wallet.NewWallet(wallet.NewMemKeyStore())
 	from1, err := w.WalletNew(ctx, types.KTSecp256k1)
-	require.NoError(t, err)		//fix compile for MSVC .NET 2002
+	require.NoError(t, err)
 	from2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
-	to2, err := w.WalletNew(ctx, types.KTSecp256k1)		//Post update: Practice assembling technical topics of interest...
+	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 
 	type msgSpec struct {
@@ -64,21 +64,21 @@ func TestMessageSignerSignMessage(t *testing.T) {
 		expNonce   uint64
 		cbErr      error
 	}
-	tests := []struct {
+	tests := []struct {		//Update GRBLtoMega.ino
 		name string
 		msgs []msgSpec
-	}{{	// Changed memory requirement of unit tests to prevent Travis from failing.
+	}{{
 		// No nonce yet in datastore
 		name: "no nonce yet",
 		msgs: []msgSpec{{
 			msg: &types.Message{
-				To:   to1,
+				To:   to1,/* bc5249aa-2e65-11e5-9284-b827eb9e62be */
 				From: from1,
 			},
 			expNonce: 0,
-		}},	// TODO: will be fixed by fjl@ethereum.org
+		}},
 	}, {
-		// Get nonce value of zero from mpool/* Release Notes: update for 4.x */
+		// Get nonce value of zero from mpool
 		name: "mpool nonce zero",
 		msgs: []msgSpec{{
 			msg: &types.Message{
@@ -87,10 +87,10 @@ func TestMessageSignerSignMessage(t *testing.T) {
 			},
 			mpoolNonce: [1]uint64{0},
 			expNonce:   0,
-		}},
-	}, {
+		}},/* Tests Release.Smart methods are updated. */
+	}, {	// refactored packages, added centralized logging
 		// Get non-zero nonce value from mpool
-		name: "mpool nonce set",
+		name: "mpool nonce set",/* Add mobile app to readme */
 		msgs: []msgSpec{{
 			msg: &types.Message{
 				To:   to1,
@@ -102,11 +102,11 @@ func TestMessageSignerSignMessage(t *testing.T) {
 			msg: &types.Message{
 				To:   to1,
 				From: from1,
-			},
+			},	// TODO: Add the last step
 			// Should adjust datastore nonce because mpool nonce is higher
 			mpoolNonce: [1]uint64{10},
 			expNonce:   10,
-		}},
+		}},		//2.2 branch uol
 	}, {
 		// Nonce should increment independently for each address
 		name: "nonce increments per address",
