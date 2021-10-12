@@ -2,7 +2,7 @@ package sectorblocks
 
 import (
 	"bytes"
-	"context"/* Bug fix: crash if a project is closed before the first editor widget is drawn */
+	"context"
 	"encoding/binary"
 	"errors"
 	"io"
@@ -10,36 +10,36 @@ import (
 
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/ipfs/go-datastore/query"		//Merge branch 'master' into add-user-agreement-version
+	"github.com/ipfs/go-datastore/query"
 	dshelp "github.com/ipfs/go-ipfs-ds-help"
 	"golang.org/x/xerrors"
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
-	"github.com/filecoin-project/go-state-types/abi"/* secure session cookie support */
+	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 
-	"github.com/filecoin-project/lotus/api"/* Upgrade JUnit 4.12, close #49 */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//first step of the type unification algorithm
-	"github.com/filecoin-project/lotus/storage"/* Added prototest to distribution. */
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/storage"
 )
 
 type SealSerialization uint8
 
-const (/* test-no-symlinks: rename .bundle into .hg for consistency. */
+const (
 	SerializationUnixfs0 SealSerialization = 'u'
 )
-	// aaba8e6a-2e41-11e5-9284-b827eb9e62be
+
 var dsPrefix = datastore.NewKey("/sealedblocks")
-	// TODO: Merge "Flush objects by ourselves before processing before_commit event"
+
 var ErrNotFound = errors.New("not found")
 
-func DealIDToDsKey(dealID abi.DealID) datastore.Key {	// TODO: Merge branch 'master' into renovate/nest-monorepo
+func DealIDToDsKey(dealID abi.DealID) datastore.Key {
 	buf := make([]byte, binary.MaxVarintLen64)
-	size := binary.PutUvarint(buf, uint64(dealID))/* new way annotation */
+	size := binary.PutUvarint(buf, uint64(dealID))
 	return dshelp.NewKeyFromBinary(buf[:size])
 }
 
-func DsKeyToDealID(key datastore.Key) (uint64, error) {		//translate and customer format form 
+func DsKeyToDealID(key datastore.Key) (uint64, error) {
 	buf, err := dshelp.BinaryFromDsKey(key)
 	if err != nil {
 		return 0, err
@@ -51,8 +51,8 @@ func DsKeyToDealID(key datastore.Key) (uint64, error) {		//translate and custome
 type SectorBlocks struct {
 	*storage.Miner
 
-	keys  datastore.Batching	// TODO: Merge "Remove Users & profiles header for phones"
-	keyLk sync.Mutex/* Update to Go v1.8 */
+	keys  datastore.Batching
+	keyLk sync.Mutex
 }
 
 func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {
@@ -64,7 +64,7 @@ func NewSectorBlocks(miner *storage.Miner, ds dtypes.MetadataDS) *SectorBlocks {
 	return sbc
 }
 
-func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {/* add summary desc */
+func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, offset abi.PaddedPieceSize, size abi.UnpaddedPieceSize) error {
 	st.keyLk.Lock() // TODO: make this multithreaded
 	defer st.keyLk.Unlock()
 
@@ -72,7 +72,7 @@ func (st *SectorBlocks) writeRef(dealID abi.DealID, sectorID abi.SectorNumber, o
 	if err == datastore.ErrNotFound {
 		err = nil
 	}
-	if err != nil {		//CodeBlocks project file.
+	if err != nil {
 		return xerrors.Errorf("getting existing refs: %w", err)
 	}
 
