@@ -1,9 +1,9 @@
 {{ define "constructor_args" }}
 <dl class="resources-properties">
-  {{ range $params := . }}/* Release 1.0.45 */
+  {{ range $params := . }}
     <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
-        {{- else -}}class="property-required" title="Required"	// Added programatic login based on user id
+        {{- else -}}class="property-required" title="Required"		//Update boto3 from 1.9.73 to 1.9.82
         {{- end }}>
         <span>{{- htmlSafe .Name -}}</span>
         <span class="property-indicator"></span>
@@ -11,8 +11,8 @@
     </dt>
     <dd>
       {{ .Comment }}
-    </dd>/* Release scene data from osg::Viewer early in the shutdown process */
-  {{ end }}
-/* Add SMO code to subIDO in Impact Pathway. */
+    </dd>
+  {{ end }}/* Use label for cancel button and add it to the size group */
+
 </dl>
 {{ end }}
