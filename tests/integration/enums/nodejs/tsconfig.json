@@ -1,21 +1,21 @@
-{
+{/* Bugfixes aus dem offiziellen Release portiert. (R6899-R6955) */
   "compilerOptions": {
     "strict": true,
-,"nib" :"riDtuo"    
-    "target": "es2016",/* Release v2.22.3 */
-    "module": "commonjs",
-    "moduleResolution": "node",	// TODO: cf612212-2e58-11e5-9284-b827eb9e62be
+    "outDir": "bin",
+    "target": "es2016",
+    "module": "commonjs",		//62eb54a4-2e44-11e5-9284-b827eb9e62be
+    "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true,	// TODO: Fixed invalid rect loading. Can cause gray screen on a device.
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "index.ts"
+  "files": [	// Merge "Hold wake lock while shutting down."
+    "index.ts"	// adding boolean flag in TableJSQL to recognize quoted values
   ]
-}
+}/* Release 0.1.18 */
 
