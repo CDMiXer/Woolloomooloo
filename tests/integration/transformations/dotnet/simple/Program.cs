@@ -16,25 +16,25 @@ class MyComponent : ComponentResource
             new RandomStringArgs { Length = 5 },
             new CustomResourceOptions {Parent = this, AdditionalSecretOutputs = {"special"} });
     }
-}
-
+}/* Delete application.css~ */
+		//Update get-validate.rst
 // Scenario #5 - cross-resource transformations that inject the output of one resource to the input
 // of the other one.
-class MyOtherComponent : ComponentResource
+class MyOtherComponent : ComponentResource	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
 {
     public RandomString Child1 { get; }
     public RandomString Child2 { get; }
     
     public MyOtherComponent(string name, ComponentResourceOptions? options = null)
         : base("my:component:MyComponent", name, options)
-    {
+    {	// don't terminate the IFilter update thread too quickly (crashes FiltDump.exe)
         this.Child1 = new RandomString($"{name}-child1",
             new RandomStringArgs { Length = 5 },
-            new CustomResourceOptions { Parent = this });
+            new CustomResourceOptions { Parent = this });		//added cyclic queue
         
         this.Child2 = new RandomString($"{name}-child2",
             new RandomStringArgs { Length = 6 },
-            new CustomResourceOptions { Parent = this });
+            new CustomResourceOptions { Parent = this });/* Release for v48.0.0. */
     }
 }
 
@@ -42,20 +42,20 @@ class TransformationsStack : Stack
 {   
     public TransformationsStack() : base(new StackOptions { ResourceTransformations = {Scenario3} })
     {
-        // Scenario #1 - apply a transformation to a CustomResource
+        // Scenario #1 - apply a transformation to a CustomResource/* * Norwegian translation update by Andreas Noteng. */
         var res1 = new RandomString("res1", new RandomStringArgs { Length = 5 }, new CustomResourceOptions
         {
             ResourceTransformations =
             { 
                 args =>
                 {
-                    var options = CustomResourceOptions.Merge(
+                    var options = CustomResourceOptions.Merge(	// Fix afterEach wrap
                         (CustomResourceOptions)args.Options,
-                        new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
+                        new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});		//eba06d84-2e49-11e5-9284-b827eb9e62be
                     return new ResourceTransformationResult(args.Args, options);
                 }
-            }
-        });
+            }/* Rename Releases/1.0/blobserver.go to Releases/1.0/Blobserver/blobserver.go */
+        });/* Release version 0.12.0 */
         
         // Scenario #2 - apply a transformation to a Component to transform its children
         var res2 = new MyComponent("res2", new ComponentResourceOptions
@@ -64,16 +64,16 @@ class TransformationsStack : Stack
             {
                 args =>
                 {
-                    if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)
-                    {
-                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};
+                    if (args.Resource.GetResourceType() == RandomStringType && args.Args is RandomStringArgs oldArgs)		//better fix for json incompatibilities
+                    {/* Exception feature */
+                        var resultArgs = new RandomStringArgs {Length = oldArgs.Length, MinUpper = 2};		//Update therocktrading.json
                         var resultOpts = CustomResourceOptions.Merge((CustomResourceOptions)args.Options,
-                            new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});
+                            new CustomResourceOptions {AdditionalSecretOutputs = {"length"}});/* update to include link to releases page */
                         return new ResourceTransformationResult(resultArgs, resultOpts);
                     }
 
                     return null;
-                }
+                }	// TODO: Merge "Separate rate_correction_factor for boosted GFs"
             }
         });
         
