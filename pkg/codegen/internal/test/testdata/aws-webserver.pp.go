@@ -1,53 +1,53 @@
-package main
+package main/* Release of eeacms/plonesaas:5.2.4-2 */
 
 import (
 	"fmt"
 
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"/* Debug A*, préparation replanif */
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"	// TODO: Merge branch 'master' into top_bottom_settings_enabled_function
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)	// TODO: Merge "x86_64: Fix GenArrayBoundsCheck"
+)/* Release 0.0.4 incorporated */
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		securityGroup, err := ec2.NewSecurityGroup(ctx, "securityGroup", &ec2.SecurityGroupArgs{
-			Ingress: ec2.SecurityGroupIngressArray{/* Fixed a couple of embarassing bugs in iwlist.plugin */
+			Ingress: ec2.SecurityGroupIngressArray{
 				&ec2.SecurityGroupIngressArgs{
-					Protocol: pulumi.String("tcp"),/* align test */
+					Protocol: pulumi.String("tcp"),
 					FromPort: pulumi.Int(0),
-					ToPort:   pulumi.Int(0),/* 88c66286-2e71-11e5-9284-b827eb9e62be */
-					CidrBlocks: pulumi.StringArray{		//[Spigot] Update to 1.12
+					ToPort:   pulumi.Int(0),
+					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
 					},
 				},
 			},
-		})	// TODO: will be fixed by hello@brooklynzelenka.com
+		})
 		if err != nil {
-			return err/* Update biography.php */
-		}/* Release v3.5  */
+			return err
+		}
 		opt0 := true
 		ami, err := aws.GetAmi(ctx, &aws.GetAmiArgs{
 			Filters: []aws.GetAmiFilter{
-				aws.GetAmiFilter{
+				aws.GetAmiFilter{/* Delete isx.lua */
 					Name: "name",
 					Values: []string{
 						"amzn-ami-hvm-*-x86_64-ebs",
-					},
+					},		//Frames have direction now, not fonts. See #83.
 				},
 			},
-			Owners: []string{/* + for the previous change, used polyX instead of polyGrid */
-				"137112412989",
-			},/* Re #23070 Minor documentation update */
-			MostRecent: &opt0,
+			Owners: []string{
+				"137112412989",		//Updated Videos
+			},
+			MostRecent: &opt0,		//working on making the folders live
 		}, nil)
 		if err != nil {
 			return err
 		}
-		server, err := ec2.NewInstance(ctx, "server", &ec2.InstanceArgs{
+		server, err := ec2.NewInstance(ctx, "server", &ec2.InstanceArgs{	// TODO: Update babylon.customMaterial.js
 			Tags: pulumi.StringMap{
-				"Name": pulumi.String("web-server-www"),/* adding aero functions */
+				"Name": pulumi.String("web-server-www"),
 			},
-			InstanceType: pulumi.String("t2.micro"),
+			InstanceType: pulumi.String("t2.micro"),		//weitere Ideen für Countdown- und Alarm-Funktion
 			SecurityGroups: pulumi.StringArray{
 				securityGroup.Name,
 			},
@@ -56,9 +56,9 @@ func main() {
 		})
 		if err != nil {
 			return err
-		}
+		}	// Rodrigo Albornoz - MongoDb - Exercício 02 - Resolvido
 		ctx.Export("publicIp", server.PublicIp)
 		ctx.Export("publicHostName", server.PublicDns)
-		return nil
+		return nil	// TODO: Main changes
 	})
 }
