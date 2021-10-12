@@ -1,6 +1,6 @@
 package types
 
-import "github.com/ipfs/go-cid"		//Added an attribute for character to chose
+import "github.com/ipfs/go-cid"
 
 type FullBlock struct {
 	Header        *BlockHeader
