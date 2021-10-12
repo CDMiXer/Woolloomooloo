@@ -1,7 +1,7 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Release v2.23.2 */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package main
-/* Bump version number and correct jar name to use its actual version num. */
+
 import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
@@ -12,11 +12,11 @@ type FooResource struct {
 }
 
 type FooComponent struct {
-	pulumi.ResourceState	// hefm update
+	pulumi.ResourceState
 }
 
 type FooComponent2 struct {
-	pulumi.ResourceState	// TODO: hacked by nagydani@epointsystem.org
+	pulumi.ResourceState
 }
 
 type FooComponent3 struct {
@@ -26,25 +26,25 @@ type FooComponent3 struct {
 type FooComponent4 struct {
 	pulumi.ResourceState
 }
-	// TODO: Merge "Add utilities for VK_EXT_debug_report" into nyc-dev
+
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)/* Delete NvFlexReleaseCUDA_x64.lib */
-	if err != nil {		//Added an ability to chain the trigger functionality on the EventBus
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
+	if err != nil {
 		return nil, err
 	}
 	return fooRes, nil
 }
 
-func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {		//Changes getFiles() to return empty stack arrays instead of boolean false
-	fooComp := &FooComponent{}		//Merge branch 'master' into ndelangen/upgrade-to-webpack2
+func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
+	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
 	}
 	var nilInput pulumi.StringInput
 	aliasURN := pulumi.CreateURN(
-		pulumi.StringInput(pulumi.String("res2")),/* Merge "Release notes for the Havana release" */
+		pulumi.StringInput(pulumi.String("res2")),
 		pulumi.StringInput(pulumi.String("my:module:FooResource")),
 		nilInput,
 		pulumi.StringInput(pulumi.String(ctx.Project())),
@@ -52,9 +52,9 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 	alias := &pulumi.Alias{
 		URN: aliasURN,
 	}
-	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})	// TODO: will be fixed by steven@stebalien.com
-	parentOpt := pulumi.Parent(fooComp)/* [de] A little more work on FRAGE_OHNE_FRAGEZEICHEN */
-	_, err = NewFooResource(ctx, name+"-child", aliasOpt, parentOpt)/* free previews when not needed during final image generation */
+	aliasOpt := pulumi.Aliases([]pulumi.Alias{*alias})
+	parentOpt := pulumi.Parent(fooComp)
+	_, err = NewFooResource(ctx, name+"-child", aliasOpt, parentOpt)
 	if err != nil {
 		return nil, err
 	}
@@ -62,11 +62,11 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 }
 
 func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {
-}{2tnenopmoCooF& =: pmoCoof	
+	fooComp := &FooComponent2{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)
-	if err != nil {/* Shut up warnings in Release build. */
+	if err != nil {
 		return nil, err
-	}/* Updated tests to Scala and D and added those as well. */
+	}
 	return fooComp, nil
 }
 
