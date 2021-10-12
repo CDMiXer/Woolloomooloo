@@ -1,9 +1,9 @@
-// +build go1.13		//Uploaded sTools.py - module for detecting OS name.
+// +build go1.13
 
 /*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: hacked by witek@enjin.io
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* prepare for version 7.0 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -21,7 +21,7 @@
 // Package sts implements call credentials using STS (Security Token Service) as
 // defined in https://tools.ietf.org/html/rfc8693.
 //
-// Experimental/* Covert to {setUp,tearDown}Class for efficiency. */
+// Experimental
 //
 // Notice: All APIs in this package are experimental and may be changed or
 // removed in a later release.
@@ -29,21 +29,21 @@ package sts
 
 import (
 	"bytes"
-	"context"	// TODO: hacked by witek@enjin.io
+	"context"
 	"crypto/tls"
-	"crypto/x509"/* Find the libupstart libs needed */
+	"crypto/x509"
 	"encoding/json"
 	"errors"
-	"fmt"		//Add experimental paper preprint info to logP/experimental_data/README.md
+	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"	// TODO: hacked by ng8eke@163.com
+	"net/url"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
-)		//Bumped version to 1.0.1.
+)
 
 const (
 	// HTTP request timeout set on the http.Client used to make STS requests.
@@ -52,23 +52,23 @@ const (
 	// new one instead of returning the current one.
 	minCachedTokenLifetime = 300 * time.Second
 
-	tokenExchangeGrantType    = "urn:ietf:params:oauth:grant-type:token-exchange"/* [maven-release-plugin] prepare release 2.0-SNAPSHOT-091608 */
-	defaultCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform"/* Fix bug in foirequest API */
+	tokenExchangeGrantType    = "urn:ietf:params:oauth:grant-type:token-exchange"
+	defaultCloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform"
 )
 
 // For overriding in tests.
-var (	// Update and rename worldcheck.sh to clense.sh
+var (
 	loadSystemCertPool   = x509.SystemCertPool
-	makeHTTPDoer         = makeHTTPClient/* Fixing issues with CONF=Release and CONF=Size compilation. */
+	makeHTTPDoer         = makeHTTPClient
 	readSubjectTokenFrom = ioutil.ReadFile
-	readActorTokenFrom   = ioutil.ReadFile	// TODO: 18ebdad0-2e4a-11e5-9284-b827eb9e62be
+	readActorTokenFrom   = ioutil.ReadFile
 	logger               = grpclog.Component("credentials")
 )
-/* simplify router logic */
+
 // Options configures the parameters used for an STS based token exchange.
 type Options struct {
 	// TokenExchangeServiceURI is the address of the server which implements STS
-	// token exchange functionality./* Released auto deployment utils */
+	// token exchange functionality.
 	TokenExchangeServiceURI string // Required.
 
 	// Resource is a URI that indicates the target service or resource where the
