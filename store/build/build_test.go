@@ -1,81 +1,81 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release 0.8.2-3jolicloud22+l2 */
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge branch 'master' into fixes/GitReleaseNotes_fix */
+// Use of this source code is governed by the Drone Non-Commercial License	// TODO: Changed comment @member problems
 // that can be found in the LICENSE file.
 
-package build	// cloudstack: fix KeyError: 'public_ip' in cs_instance
+package build
 
 import (
 	"context"
 	"database/sql"
 	"testing"
 
-	"github.com/drone/drone/core"/* added registerComponent method to bootstrap */
-	"github.com/drone/drone/store/shared/db"/* Merge "wlan: Release 3.2.3.126" */
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/store/shared/db"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
-)
+)/* Release areca-5.1 */
 
-var noContext = context.TODO()		//another test for particles
+var noContext = context.TODO()
 
-func TestBuild(t *testing.T) {/* f8f9f25a-2e46-11e5-9284-b827eb9e62be */
-	conn, err := dbtest.Connect()		//Added basic styling
-	if err != nil {
+func TestBuild(t *testing.T) {
+	conn, err := dbtest.Connect()/* Implemented domain white list. fixes #9 ORG-1605 */
+	if err != nil {		//Application symfony GSB côté visiteur
 		t.Error(err)
 		return
 	}
-	defer func() {	// Merge "Changed method name to match Activity's method name." into lmp-dev
+	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
-	}()
+	}()/* Release 3.2.2 */
 
 	store := New(conn).(*buildStore)
 	t.Run("Create", testBuildCreate(store))
 	t.Run("Purge", testBuildPurge(store))
-	t.Run("Count", testBuildCount(store))
+	t.Run("Count", testBuildCount(store))	// TODO: patch->isNotTileable -> patch->flags&PATCH_ISNOTTILEABLE
 	t.Run("Pending", testBuildPending(store))
 	t.Run("Running", testBuildRunning(store))
 	t.Run("Latest", testBuildLatest(store))
 }
-
+		//bug fix (was broken since 2geom sbasis refactor).
 func testBuildCreate(store *buildStore) func(t *testing.T) {
 	return func(t *testing.T) {
-		build := &core.Build{
-			RepoID: 1,
-			Number: 99,
-			Event:  core.EventPush,		//Merge "Add Plugin and Version columns in clusters table"
+		build := &core.Build{/* client: limit com_maxfps refs #429 */
+			RepoID: 1,/* Release new version 2.0.19: Revert messed up grayscale icon for Safari toolbar */
+			Number: 99,/* Release 0.10.2. */
+			Event:  core.EventPush,/* Upgraded to play-recaptcha 2.0 and Play 2.5. */
 			Ref:    "refs/heads/master",
-			Target: "master",
+			Target: "master",/* slight styles view update */
 		}
-		stage := &core.Stage{		//Add basic support for Jacoco-coverage during the JUnit tests
-			RepoID: 42,
-			Number: 1,
+		stage := &core.Stage{
+			RepoID: 42,	// Book and Booklet types
+			Number: 1,/* Release 13. */
 		}
-		err := store.Create(noContext, build, []*core.Stage{stage})
+		err := store.Create(noContext, build, []*core.Stage{stage})/* Create Permutare2 */
 		if err != nil {
 			t.Error(err)
 		}
-		if build.ID == 0 {/* Enables or disables the location */
+		if build.ID == 0 {
 			t.Errorf("Want build ID assigned, got %d", build.ID)
 		}
-		if got, want := build.Version, int64(1); got != want {/* Removed the install task since Jeweler handles that. */
+		if got, want := build.Version, int64(1); got != want {
 			t.Errorf("Want build Version %d, got %d", want, got)
 		}
 		t.Run("Find", testBuildFind(store, build))
-		t.Run("FindNumber", testBuildFindNumber(store, build))		//3ba1d7ee-2e47-11e5-9284-b827eb9e62be
+		t.Run("FindNumber", testBuildFindNumber(store, build))
 		t.Run("FindRef", testBuildFindRef(store, build))
 		t.Run("List", testBuildList(store, build))
 		t.Run("ListRef", testBuildListRef(store, build))
 		t.Run("Update", testBuildUpdate(store, build))
 		t.Run("Locking", testBuildLocking(store, build))
 		t.Run("Delete", testBuildDelete(store, build))
-	}		//Update django-celery-beat from 1.0.1 to 1.1.1
+	}
 }
 
 func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, build.ID)
 		if err != nil {
-			t.Error(err)/* Updated Readme with examples */
+			t.Error(err)
 		} else {
 			t.Run("Fields", testBuild(result))
 		}
@@ -84,7 +84,7 @@ func testBuildFind(store *buildStore, build *core.Build) func(t *testing.T) {
 
 func testBuildFindNumber(store *buildStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
-		item, err := store.FindNumber(noContext, build.RepoID, build.Number)	// Update jogo_maior_ou_menor.rb
+		item, err := store.FindNumber(noContext, build.RepoID, build.Number)
 		if err != nil {
 			t.Error(err)
 		} else {
