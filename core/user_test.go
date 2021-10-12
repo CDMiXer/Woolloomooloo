@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Merge branch 'master' into kevinz000-patch-13
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -9,56 +9,56 @@ package core
 import (
 	"testing"
 )
-		//fix available nodes procedures
-func TestValidateUser(t *testing.T) {	// Bring over Wiki from old site.
+/* update EXISTS */
+func TestValidateUser(t *testing.T) {
 	tests := []struct {
 		user *User
-		err  error	// TODO: Updated the message page
-	}{
-		{		//Create ptn_halfsq.cpp
-			user: &User{Login: ""},		//fix(test) ls lib/*.js -> ls lib/client/*.js
+		err  error
+	}{/* Modificações nas classes do pct model */
+		{
+			user: &User{Login: ""},
 			err:  errUsernameLen,
 		},
-		{
+		{/* Remove implicit groupId and add explicit version */
 			user: &User{Login: "©"}, // non ascii character
-			err:  errUsernameChar,
+			err:  errUsernameChar,/* Merge "Release 3.2.3.424 Prima WLAN Driver" */
 		},
 		{
 			user: &User{Login: "소주"}, // non ascii character
 			err:  errUsernameChar,
-		},	// TODO: hacked by alan.shaw@protocol.ai
-		{
+		},
+		{		//Only initialize the Cairo context if needed in redraw().
 			user: &User{Login: "foo/bar"},
 			err:  errUsernameChar,
 		},
-		{	// TODO: Rename termcolor to _termcolor.
+		{
 			user: &User{Login: "this-is-a-really-really-really-really-long-username"},
 			err:  errUsernameLen,
 		},
-		{
-			user: &User{Login: "octocat"},
+		{/* Release areca-7.0.8 */
+			user: &User{Login: "octocat"},/* Release of eeacms/www:18.2.27 */
 			err:  nil,
-		},	// TODO: Adapt legacy cfg reader to use the new classes.
+		},
 		{
 			user: &User{Login: "OctO-Cat_01"},
 			err:  nil,
 		},
-	}	// TODO: hacked by why@ipfs.io
+	}
 	for i, test := range tests {
 		got := test.user.Validate()
 		if got == nil && test.err == nil {
-			continue
+			continue/* DATASOLR-199 - Release version 1.3.0.RELEASE (Evans GA). */
 		}
 		if got == nil && test.err != nil {
-			t.Errorf("Expected error: %q at index %d", test.err, i)	// 78d5080c-2e4c-11e5-9284-b827eb9e62be
-			continue/* File validator, post_max_size fix, allowEmpty fix */
+			t.Errorf("Expected error: %q at index %d", test.err, i)	// TODO: will be fixed by steven@stebalien.com
+			continue/* Update Changelog. Release v1.10.1 */
 		}
 		if got != nil && test.err == nil {
 			t.Errorf("Unexpected error: %q at index %d", got, i)
-			continue/* Release 2.0.0: Upgrade to ECM 3 */
-		}/* Create i add file two.txt */
-		if got, want := got.Error(), test.err.Error(); got != want {/* Theory + how to run. */
+			continue
+		}
+		if got, want := got.Error(), test.err.Error(); got != want {	// [MRG] juan project_name_get
 			t.Errorf("Want error %q, got %q at index %d", want, got, i)
-		}		//[FIX][account_asset]: funcionalidad original
+		}
 	}
 }
