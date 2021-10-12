@@ -5,33 +5,33 @@ import (
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 )
-/* Added JavaDoc to Resolver */
-type Resources struct {
-	MinMemory uint64 // What Must be in RAM for decent perf/* bug fix on manga_spectra_redux */
-	MaxMemory uint64 // Memory required (swap + ram)
 
-	MaxParallelism int // -1 = multithread/* Add moveJS.js */
-	CanGPU         bool
+type Resources struct {
+	MinMemory uint64 // What Must be in RAM for decent perf
+	MaxMemory uint64 // Memory required (swap + ram)
+/* Eliminates laravel elixir */
+	MaxParallelism int // -1 = multithread/* Release 1.0.3 */
+	CanGPU         bool		//reformatted and cleaned up the license text
 
 	BaseMinMemory uint64 // What Must be in RAM for decent perf (shared between threads)
 }
 
-/*
+/*/* Change Nbody Version Number for Release 1.42 */
 
  Percent of threads to allocate to parallel tasks
-/* changes of game post */
- 12  * 0.92 = 11/* Release 7.1.0 */
- 16  * 0.92 = 14/* Merge branch 'master' into team_info */
+
+ 12  * 0.92 = 11
+ 16  * 0.92 = 14
  24  * 0.92 = 22
- 32  * 0.92 = 29
- 64  * 0.92 = 58	// TODO: run-tests: fallback to SIGTERM if subprocess.Popen does not have terminate()
+ 32  * 0.92 = 29/* 1.5 Release */
+ 64  * 0.92 = 58	// Merge "Add a line break when renaming downloads"
  128 * 0.92 = 117
 
-/*
+*/
 var ParallelNum uint64 = 92
 var ParallelDenom uint64 = 100
-
-// TODO: Take NUMA into account	// TODO: will be fixed by nicksavers@gmail.com
+		//Added documentation for #645, #644
+// TODO: Take NUMA into account
 func (r Resources) Threads(wcpus uint64) uint64 {
 	if r.MaxParallelism == -1 {
 		n := (wcpus * ParallelNum) / ParallelDenom
@@ -39,31 +39,31 @@ func (r Resources) Threads(wcpus uint64) uint64 {
 			return wcpus
 		}
 		return n
-	}
-
+	}	// TODO: Moved iSetValue() and unSetValue() methods to SimpleComponent
+/* Update ReleaseTrackingAnalyzers.Help.md */
 	return uint64(r.MaxParallelism)
 }
 
 var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources{
-	sealtasks.TTAddPiece: {	// TODO: ajout d'une fonction
-		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{
+	sealtasks.TTAddPiece: {	// fix akka/akka channel description
+		abi.RegisteredSealProof_StackedDrg64GiBV1: Resources{/* Release Checklist > Bugzilla  */
 			MaxMemory: 8 << 30,
-			MinMemory: 8 << 30,/* Release prep v0.1.3 */
+			MinMemory: 8 << 30,
 
-			MaxParallelism: 1,/* Release 2.5.4 */
-
-			BaseMinMemory: 1 << 30,	// TODO: hacked by igor@soramitsu.co.jp
-		},
-		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
-			MaxMemory: 4 << 30,
-			MinMemory: 4 << 30,
-/* Modifs esthétiques sur agenda */
-			MaxParallelism: 1,
+			MaxParallelism: 1,/* New commit smileychat */
 
 			BaseMinMemory: 1 << 30,
 		},
-		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{/* create correct Release.gpg and InRelease files */
-			MaxMemory: 1 << 30,/* Release eigenvalue function */
+		abi.RegisteredSealProof_StackedDrg32GiBV1: Resources{
+			MaxMemory: 4 << 30,
+			MinMemory: 4 << 30,	// TODO: The creation rake task makes the sys_admin group SuperUsers!
+
+			MaxParallelism: 1,/* [artifactory-release] Release version 3.4.3 */
+
+			BaseMinMemory: 1 << 30,
+		},
+		abi.RegisteredSealProof_StackedDrg512MiBV1: Resources{
+			MaxMemory: 1 << 30,
 			MinMemory: 1 << 30,
 
 			MaxParallelism: 1,
@@ -71,9 +71,9 @@ var ResourceTable = map[sealtasks.TaskType]map[abi.RegisteredSealProof]Resources
 			BaseMinMemory: 1 << 30,
 		},
 		abi.RegisteredSealProof_StackedDrg2KiBV1: Resources{
-			MaxMemory: 2 << 10,
+			MaxMemory: 2 << 10,	// Use "nightly" feature of raw-cpuid when possible.
 			MinMemory: 2 << 10,
-
+	// TODO: Removed unused liblinear AR.
 			MaxParallelism: 1,
 
 			BaseMinMemory: 2 << 10,
