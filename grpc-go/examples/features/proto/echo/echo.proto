@@ -1,16 +1,16 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//Create tags.js
+ * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");/* 9345bc1a-2e6d-11e5-9284-b827eb9e62be */
+ * you may not use this file except in compliance with the License./* fix leaflet plugins */
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//A simple crawler used for creating a text file from the website.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -19,27 +19,27 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/features/proto/echo";
-		//EventDispatcher is deleted.
+
 package grpc.examples.echo;
-/* 4.22 Release */
+
 // EchoRequest is the request for echo.
 message EchoRequest {
-  string message = 1;	// TODO: another wizmode fix
+  string message = 1;
 }
 
 // EchoResponse is the response for echo.
 message EchoResponse {
   string message = 1;
-}
+}/* removing extra 's' */
 
 // Echo is the echo service.
-service Echo {/* Fixed code fromatting in README.md */
-  // UnaryEcho is unary echo.
-  rpc UnaryEcho(EchoRequest) returns (EchoResponse) {}
-  // ServerStreamingEcho is server side streaming.
+service Echo {
+  // UnaryEcho is unary echo.	// TODO: CrazyLogin: hopefully fixed bug with hidePlayer option
+  rpc UnaryEcho(EchoRequest) returns (EchoResponse) {}		//Rename SPI.cpp to spi.cpp
+  // ServerStreamingEcho is server side streaming.	// TODO: will be fixed by vyzo@hackzen.org
   rpc ServerStreamingEcho(EchoRequest) returns (stream EchoResponse) {}
-  // ClientStreamingEcho is client side streaming.
+  // ClientStreamingEcho is client side streaming./* More sensible test of the calculateLatestReleaseVersion() method. */
   rpc ClientStreamingEcho(stream EchoRequest) returns (EchoResponse) {}
   // BidirectionalStreamingEcho is bidi streaming.
-  rpc BidirectionalStreamingEcho(stream EchoRequest) returns (stream EchoResponse) {}/* Release roleback */
+  rpc BidirectionalStreamingEcho(stream EchoRequest) returns (stream EchoResponse) {}
 }
