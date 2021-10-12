@@ -1,12 +1,12 @@
 {
     "name": "minimal",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
-    "scripts": {
+    "main": "bin/index.js",	// 6fffaf76-2f86-11e5-a29c-34363bc765d8
+    "typings": "bin/index.d.ts",/* Release v10.0.0. */
+    "scripts": {/* bug sur la fonction style2attr */
         "build": "tsc"
-    },
-    "devDependencies": {
+    },		//Merging r1031 from branches/jiadong
+    "devDependencies": {	// TODO: hacked by fjl@ethereum.org
         "typescript": "^3.0.0"
     },
     "dependencies": {
