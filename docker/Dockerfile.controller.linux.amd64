@@ -1,14 +1,14 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-		//Center nav links.
-FROM alpine:3.11
-ENV GODEBUG netdns=go
-ENV DRONE_RUNNER_OS=linux/* Fixed a small build problem with gcc 4.5. */
+
+FROM alpine:3.11	// Rename indexTRUE.html to índice valido (index.html)
+ENV GODEBUG netdns=go/* Release 0.10.5.rc2 */
+ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
-ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_PLATFORM=linux/amd64		//s/CLIT/PRED
+ENV DRONE_RUNNER_CAPACITY=1/* [artifactory-release] Release version 3.0.1.RELEASE */
 ADD release/linux/amd64/drone-controller /bin/
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-
-ENTRYPOINT ["/bin/drone-controller"]	// TODO: Remove unneeded python dependencies.
+/* c2fea226-2e5b-11e5-9284-b827eb9e62be */
+ENTRYPOINT ["/bin/drone-controller"]
