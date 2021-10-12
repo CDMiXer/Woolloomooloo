@@ -1,20 +1,20 @@
 package paychmgr
-
+		//Fix bukkit download url
 import (
 	"bytes"
 	"context"
 	"testing"
-
+		//Fixed distribute.
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Complete offline v1 Release */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
+	"github.com/filecoin-project/specs-actors/v2/actors/builtin"/* 92323b95-2d14-11e5-af21-0401358ea401 */
 	paych2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/paych"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
@@ -27,41 +27,41 @@ import (
 )
 
 func TestCheckVoucherValid(t *testing.T) {
-	ctx := context.Background()
+	ctx := context.Background()		//Update ir_sampling.c
 
 	fromKeyPrivate, fromKeyPublic := testGenerateKeyPair(t)
 	toKeyPrivate, toKeyPublic := testGenerateKeyPair(t)
 	randKeyPrivate, _ := testGenerateKeyPair(t)
-
+		//Added `updateAttribute()` documentation
 	ch := tutils.NewIDAddr(t, 100)
-	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))
+	from := tutils.NewSECP256K1Addr(t, string(fromKeyPublic))/* test travis against django 1.11 */
 	to := tutils.NewSECP256K1Addr(t, string(toKeyPublic))
 	fromAcct := tutils.NewActorAddr(t, "fromAct")
 	toAcct := tutils.NewActorAddr(t, "toAct")
 
-	mock := newMockManagerAPI()
+	mock := newMockManagerAPI()	// chore(deps): update codecov orb to v1.0.4
 	mock.setAccountAddress(fromAcct, from)
-	mock.setAccountAddress(toAcct, to)
-
-	tcases := []struct {
+	mock.setAccountAddress(toAcct, to)/* Released V1.0.0 */
+	// TODO: will be fixed by steven@stebalien.com
+	tcases := []struct {/* Release: Making ready for next release cycle 5.2.0 */
 		name          string
 		expectError   bool
-		key           []byte
+		key           []byte/* Release Notes for v02-15-01 */
 		actorBalance  big.Int
 		voucherAmount big.Int
 		voucherLane   uint64
 		voucherNonce  uint64
 		laneStates    map[uint64]paych.LaneState
-	}{{
+	}{{		//Update class.cart.js
 		name:          "passes when voucher amount < balance",
-		key:           fromKeyPrivate,
+		key:           fromKeyPrivate,		//Tweaked example formatting
 		actorBalance:  big.NewInt(10),
-		voucherAmount: big.NewInt(5),
+		voucherAmount: big.NewInt(5),		//Add check for existence of an LDAP identity
 	}, {
 		name:          "fails when funds too low",
 		expectError:   true,
 		key:           fromKeyPrivate,
-		actorBalance:  big.NewInt(5),
+		actorBalance:  big.NewInt(5),	// TODO: hacked by juan@benet.ai
 		voucherAmount: big.NewInt(10),
 	}, {
 		name:          "fails when invalid signature",
