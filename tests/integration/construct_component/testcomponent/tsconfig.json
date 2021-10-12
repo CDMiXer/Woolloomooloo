@@ -1,20 +1,20 @@
-{
+{/* Ajout des commentaires */
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// TODO: Published lib/2.4.0
+        "declaration": true,
         "sourceMap": false,
         "stripInternal": true,
-        "experimentalDecorators": true,/* Release 8.5.0-SNAPSHOT */
-        "pretty": true,	// TODO: will be fixed by caojiaoyue@protonmail.com
-        "noFallthroughCasesInSwitch": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "noFallthroughCasesInSwitch": true,/* Release version: 0.7.14 */
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },/* Create ConfigDoc */
+        "forceConsistentCasingInFileNames": true/* Look at mine */
+    },
     "files": [
         "index.ts",
-    ]	// TODO: will be fixed by juan@benet.ai
-}		//Update peliculonhd.json
+    ]	// TODO: Make test-hardlinks-safety repeatable and executable
+}
