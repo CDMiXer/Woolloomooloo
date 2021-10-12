@@ -6,11 +6,11 @@
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {
+    "dependencies": {		//Switch web tryout to default datasource
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"		//Change table title.
     }
 }
