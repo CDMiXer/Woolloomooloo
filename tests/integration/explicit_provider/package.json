@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",/* These calculations should be performed on a RS copy. */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Update CHANGELOG regarding categories branch
+    "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"		//Use new function.
-    },
+        "build": "tsc"	// First-commit iEVA v.0.0.1
+    },		//Implemented pointer access in the parser.
     "devDependencies": {
         "typescript": "^3.0.0"
-    },/* fix silly copy/paste error */
-    "peerDependencies": {	// Make sure we update the apt-get listings
+    },
+    "peerDependencies": {		//Update ccpp_cmake.yml
         "@pulumi/pulumi": "latest"
     }
-}		//Add a command line plotting probes utility
+}
