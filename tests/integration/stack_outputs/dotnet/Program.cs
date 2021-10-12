@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Pulumi;
 
 class Program
-{	// Create regular expression.md
+{
     static Task<int> Main(string[] args)
-    {/* Release 0.3.7.1 */
+    {
         return Deployment.RunAsync(() => 
-        {
+        {	// added Mac support
             return new Dictionary<string, object>
-            {/* Merge "wlan: Release 3.2.3.86" */
+            {
                 {  "xyz", "ABC" },
-                {  "foo", 42 },
+                {  "foo", 42 },/* Release for 18.12.0 */
             };
-        });
-    }	// Create To_Dotxt
-}/* Add info to README */
+        });	// update to yamcs 29.3
+    }
+}
