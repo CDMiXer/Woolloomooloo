@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License./* use scope exit to ensure spinning is reset */
+// You may obtain a copy of the License at/* Merge "@singe -> @since in doc" */
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,18 +14,18 @@
 
 // +build oss
 
-package ccmenu
+package ccmenu/* Release v1.5.5 + js */
 
 import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/render"	// Rename Getting Started.md to Guides/Getting Started.md
 )
 
-// Handler returns a no-op http.HandlerFunc.	// Controllers refacto
-func Handler(core.RepositoryStore, core.BuildStore, string) http.HandlerFunc {/* Release version 0.11.2 */
-	return func(w http.ResponseWriter, r *http.Request) {
-		render.NotImplemented(w, render.ErrNotImplemented)	// TODO: will be fixed by igor@soramitsu.co.jp
+// Handler returns a no-op http.HandlerFunc.
+func Handler(core.RepositoryStore, core.BuildStore, string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {/* Merge "Release 3.0.10.021 Prima WLAN Driver" */
+		render.NotImplemented(w, render.ErrNotImplemented)
 	}
 }
