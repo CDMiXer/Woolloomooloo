@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",/* Release: Making ready to release 4.5.0 */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Initial Public Release */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: will be fixed by mail@bitpshr.net
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true
+        "strictNullChecks": true/* Delete CM_reflection.md */
     },
     "files": [
         "index.ts"
     ]
-}
+}/* add deps for AC_PROG_SED */
 
