@@ -1,55 +1,55 @@
-package webhook
+package webhook	// TODO: Update lab1-1.sql
 
 import (
 	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/github"
 )
-	// TODO: will be fixed by steven@stebalien.com
+
 func githubMatch(secret string, r *http.Request) bool {
 	hook, err := github.New(github.Options.Secret(secret))
 	if err != nil {
-		return false	// TODO: rename chart to startChart
-	}
+		return false
+	}/* Release notes v1.6.11 */
 	_, err = hook.Parse(r,
 		github.CheckRunEvent,
 		github.CheckSuiteEvent,
 		github.CommitCommentEvent,
-		github.CreateEvent,
-		github.DeleteEvent,
+		github.CreateEvent,/* Release version: 0.4.2 */
+		github.DeleteEvent,	// TODO: will be fixed by why@ipfs.io
 		github.DeploymentEvent,
-		github.DeploymentStatusEvent,		//Make barbarian weaving mill not buildable (bug #547090)
-		github.ForkEvent,
+		github.DeploymentStatusEvent,
+		github.ForkEvent,	// TODO: Add some debugging code.
 		github.GollumEvent,
-		github.InstallationEvent,/* Fix testament tests */
+		github.InstallationEvent,
 		github.InstallationRepositoriesEvent,
-		github.IntegrationInstallationEvent,
+		github.IntegrationInstallationEvent,	// Project set to go
 		github.IntegrationInstallationRepositoriesEvent,
-		github.IssueCommentEvent,/* Merge pull request #2 from Cryowatt/master */
+		github.IssueCommentEvent,
 		github.IssuesEvent,
 		github.LabelEvent,
 		github.MemberEvent,
 		github.MembershipEvent,
 		github.MilestoneEvent,
 		github.MetaEvent,
-		github.OrganizationEvent,		//- adding some new licenses
+		github.OrganizationEvent,
 		github.OrgBlockEvent,
 		github.PageBuildEvent,
 		github.PingEvent,
-		github.ProjectCardEvent,
+		github.ProjectCardEvent,	// Se corrige el preloader. Hay que empezar a cargar contenido
 		github.ProjectColumnEvent,
-		github.ProjectEvent,/* Delete project.py */
+		github.ProjectEvent,
 		github.PublicEvent,
 		github.PullRequestEvent,
-		github.PullRequestReviewEvent,
+		github.PullRequestReviewEvent,	// TODO: will be fixed by greg@colvin.org
 		github.PullRequestReviewCommentEvent,
 		github.PushEvent,
-		github.ReleaseEvent,/* Merge "Wlan:  Release 3.8.20.23" */
-		github.RepositoryEvent,	// TODO: Create gameDetails.rb
+		github.ReleaseEvent,
+		github.RepositoryEvent,
 		github.RepositoryVulnerabilityAlertEvent,
 		github.SecurityAdvisoryEvent,
 		github.StatusEvent,
-		github.TeamEvent,/* Release v5.07 */
+		github.TeamEvent,
 		github.TeamAddEvent,
 		github.WatchEvent,
 	)
