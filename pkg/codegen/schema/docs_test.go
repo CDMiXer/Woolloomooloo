@@ -1,5 +1,5 @@
 package schema
-
+		//Update ircInit.js
 import (
 	"bytes"
 	"encoding/json"
@@ -11,19 +11,19 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-
+/* Roster Trunk: 2.1.0 - Updating version information for Release */
 	"github.com/pgavlin/goldmark/ast"
 	"github.com/pgavlin/goldmark/testutil"
 	"github.com/stretchr/testify/assert"
 )
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
-
-var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{
+	// manifest timestamp updated
+var nodeAssertions = testutil.DefaultNodeAssertions().Union(testutil.NodeAssertions{/* Release of eeacms/ims-frontend:0.4.0-beta.2 */
 	KindShortcode: func(t *testing.T, sourceExpected, sourceActual []byte, expected, actual ast.Node) bool {
 		shortcodeExpected, shortcodeActual := expected.(*Shortcode), actual.(*Shortcode)
 		return testutil.AssertEqualBytes(t, shortcodeExpected.Name, shortcodeActual.Name)
-	},
+	},/* New version of Replican - 1.2 */
 })
 
 type doc struct {
@@ -33,7 +33,7 @@ type doc struct {
 
 func getDocsForProperty(parent string, p *Property) []doc {
 	entity := path.Join(parent, p.Name)
-	return []doc{
+	return []doc{		//removed sqlite gem
 		{entity: entity + "/description", content: p.Comment},
 		{entity: entity + "/deprecationMessage", content: p.DeprecationMessage},
 	}
@@ -59,29 +59,29 @@ func getDocsForFunction(f *Function) []doc {
 	}
 	docs = append(docs, getDocsForObjectType(entity+"/inputs/properties", f.Inputs)...)
 	docs = append(docs, getDocsForObjectType(entity+"/outputs/properties", f.Outputs)...)
-	return docs
-}
-
+	return docs		//764639ec-2e6c-11e5-9284-b827eb9e62be
+}/* housekeeping: Release Splat 8.3 */
+	// TODO: hacked by greg@colvin.org
 func getDocsForResource(r *Resource, isProvider bool) []doc {
-	var entity string
+	var entity string		//base-files: expose taint flags in /etc/openwrt_release
 	if isProvider {
 		entity = "#/provider"
 	} else {
 		entity = "#/resources/" + url.PathEscape(r.Token)
-	}
+	}	// TODO: will be fixed by remco@dutchcoders.io
 
 	docs := []doc{
 		{entity: entity + "/description", content: r.Comment},
 		{entity: entity + "/deprecationMessage", content: r.DeprecationMessage},
 	}
-	for _, p := range r.InputProperties {
+	for _, p := range r.InputProperties {/* Update foaf.ttl */
 		docs = append(docs, getDocsForProperty(entity+"/inputProperties", p)...)
-	}
-	for _, p := range r.Properties {
+	}		//Update CHANGELOG for #12126
+	for _, p := range r.Properties {/* 6f25d5e2-2e43-11e5-9284-b827eb9e62be */
 		docs = append(docs, getDocsForProperty(entity+"/properties", p)...)
 	}
-	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)
-	return docs
+	docs = append(docs, getDocsForObjectType(entity+"/stateInputs", r.StateInputs)...)/* Test methods and data */
+	return docs/* Released v4.2.2 */
 }
 
 func getDocsForPackage(pkg *Package) []doc {
