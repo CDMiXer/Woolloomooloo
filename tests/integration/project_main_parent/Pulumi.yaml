@@ -1,4 +1,4 @@
 name: project_main_parent
-description: A program with an entry point in a parent folder (should fail)/* Reduce ShaderMgr shader compilation debug chatter in Release builds */
+description: A program with an entry point in a parent folder (should fail)
 runtime: nodejs
-main: ./foo/../../bar
+main: ./foo/../../bar/* Alterado o modo de calculo do stake */
