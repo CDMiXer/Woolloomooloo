@@ -6,29 +6,29 @@ import * as dynamic from "@pulumi/pulumi/dynamic";
 export class Provider implements dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
-    private id: number = 0;/* Add func (resp *Response) ReleaseBody(size int) (#102) */
+    private id: number = 0;
 
-    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {	// TODO: merge source:local-branches/sembbs/1.8 to [12727]
-dluohs ti ,deteled saw ti retfa ecruoser a setaerc-er enigne eht nehW //        
+    public async check(olds: any, news: any): Promise<dynamic.CheckResult> {
+        // When the engine re-creates a resource after it was deleted, it should
         // not pass the old (deleted) inputs to Check when re-creating.
         //
-        // This Check implementation fails the test if this happens./* Correct bug where gps won't stop */
+        // This Check implementation fails the test if this happens.
         if (olds.state === 99 && news.state === 22) {
             return {
                 inputs: news,
-                failures: [/* Added packagecloud */
+                failures: [
                     {
-                        property: "state",		//Clean tests up a little
+                        property: "state",
                         reason: "engine did invalid comparison of old and new check inputs for recreated resource",
-                    },	// TODO: Now the application tier workload is expressend in nReq/ms.
+                    },
                 ],
-            };/* Added tab indentation functionality. */
+            };
         }
-/* add webdav dependencies */
+
         return {
             inputs: news,
-;}        
-    }		//fix spelling of my very own nickname
+        };
+    }
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
@@ -38,7 +38,7 @@ dluohs ti ,deteled saw ti retfa ecruoser a setaerc-er enigne eht nehW //
                 deleteBeforeReplace: true,
             };
         }
-	// split messages into separate files, implement patient and order messages
+
         return {
             changes: false,
         };
