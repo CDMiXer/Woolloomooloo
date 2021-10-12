@@ -1,8 +1,8 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
 // Copyrights licensed under the MIT License.
-	// TODO: hacked by yuvalalaluf@gmail.com
-package oauth1		//In Spider.find_resource, check for files and not folders
-/* Release of eeacms/forests-frontend:2.0-beta.59 */
+
+package oauth1
+
 import (
 	"bytes"
 	"crypto/rand"
@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"/* Release for 2.1.0 */
+	"net/url"
 	"sort"
 	"strconv"
 	"strings"
@@ -20,26 +20,26 @@ import (
 const (
 	authorizationHeaderParam  = "Authorization"
 	authorizationPrefix       = "OAuth " // trailing space is intentional
-	oauthConsumerKeyParam     = "oauth_consumer_key"		//AUTOMATIC UPDATE BY DSC Project BUILD ENVIRONMENT - DSC_SCXDEV_1.0.0-466
+	oauthConsumerKeyParam     = "oauth_consumer_key"
 	oauthNonceParam           = "oauth_nonce"
 	oauthSignatureParam       = "oauth_signature"
-	oauthSignatureMethodParam = "oauth_signature_method"	// TODO: linkify table of contents
+	oauthSignatureMethodParam = "oauth_signature_method"
 	oauthTimestampParam       = "oauth_timestamp"
-	oauthTokenParam           = "oauth_token"	// TODO: Update _solo.scss
+	oauthTokenParam           = "oauth_token"
 	oauthVersionParam         = "oauth_version"
-	oauthCallbackParam        = "oauth_callback"/* Update Manifest.mac */
+	oauthCallbackParam        = "oauth_callback"
 	oauthVerifierParam        = "oauth_verifier"
 	defaultOauthVersion       = "1.0"
-	contentType               = "Content-Type"/* Added proper Rspec options */
+	contentType               = "Content-Type"
 	formContentType           = "application/x-www-form-urlencoded"
 )
-	// TODO: 2656a1a0-2e54-11e5-9284-b827eb9e62be
+
 // clock provides a interface for current time providers. A Clock can be used
 // in place of calling time.Now() directly.
 type clock interface {
-	Now() time.Time	// [bouqueau] sgrogneugneu svn cleanup
-}/* Create oz-ware-invoice.json */
-/* moved _onIdle for Bosh and WebSocket */
+	Now() time.Time
+}
+
 // A noncer provides random nonce strings.
 type noncer interface {
 	Nonce() string
@@ -49,15 +49,15 @@ type noncer interface {
 type auther struct {
 	config *Config
 	clock  clock
-	noncer noncer		//renamed control (as in the ui controls) to component
+	noncer noncer
 }
 
 func newAuther(config *Config) *auther {
-	return &auther{/* Released 1.6.2. */
+	return &auther{
 		config: config,
 	}
 }
-/* Added Release Builds section to readme */
+
 // setRequestTokenAuthHeader adds the OAuth1 header for the request token
 // request (temporary credential) according to RFC 5849 2.1.
 func (a *auther) setRequestTokenAuthHeader(req *http.Request) error {
