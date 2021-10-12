@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
->epyTtuptuO/<exE>epyTtuptuO<    
+>puorGytreporP<  
+    <OutputType>Exe</OutputType>	// TODO: Fix off by one access of pv_hist.
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+  </PropertyGroup>	// TODO: will be fixed by witek@enjin.io
 
-</Project>
+</Project>/* 9867934c-4b19-11e5-8a6d-6c40088e03e4 */
