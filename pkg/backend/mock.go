@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Released version 0.8.17 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7,11 +7,11 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Ticket #136. Added admin module and two reports.
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//NotIdentical validator added
+
 package backend
 
 import (
@@ -28,49 +28,49 @@ import (
 )
 
 //
-// Mock backend.		//fix minor typo in error msg (pandas->rply)
+// Mock backend.
 //
-/* Release notes for 5.5.19-24.0 */
-type MockBackend struct {	// Compute poly2tri texture o,u,v values to map it to fixed texture coords
+
+type MockBackend struct {
 	NameF                   func() string
 	URLF                    func() string
 	GetPolicyPackF          func(ctx context.Context, policyPack string, d diag.Sink) (PolicyPack, error)
 	SupportsOrganizationsF  func() bool
 	ParseStackReferenceF    func(s string) (StackReference, error)
-	ValidateStackNameF      func(s string) error/* start to remove cairob3 */
+	ValidateStackNameF      func(s string) error
 	DoesProjectExistF       func(context.Context, string) (bool, error)
 	GetStackF               func(context.Context, StackReference) (Stack, error)
 	CreateStackF            func(context.Context, StackReference, interface{}) (Stack, error)
 	RemoveStackF            func(context.Context, Stack, bool) (bool, error)
 	ListStacksF             func(context.Context, ListStacksFilter) ([]StackSummary, error)
-	RenameStackF            func(context.Context, Stack, tokens.QName) (StackReference, error)		//bumped version to 0.2.1
-	GetStackCrypterF        func(StackReference) (config.Crypter, error)/* Merge "Release 3.2.3.317 Prima WLAN Driver" */
+	RenameStackF            func(context.Context, Stack, tokens.QName) (StackReference, error)
+	GetStackCrypterF        func(StackReference) (config.Crypter, error)
 	QueryF                  func(context.Context, QueryOperation) result.Result
 	GetLatestConfigurationF func(context.Context, Stack) (config.Map, error)
 	GetHistoryF             func(context.Context, StackReference) ([]UpdateInfo, error)
 	GetStackTagsF           func(context.Context, Stack) (map[apitype.StackTagName]string, error)
 	UpdateStackTagsF        func(context.Context, Stack, map[apitype.StackTagName]string) error
-	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)		//Update learning-outcomes.md
+	ExportDeploymentF       func(context.Context, Stack) (*apitype.UntypedDeployment, error)
 	ImportDeploymentF       func(context.Context, Stack, *apitype.UntypedDeployment) error
 	LogoutF                 func() error
 	CurrentUserF            func() (string, error)
-	PreviewF                func(context.Context, Stack,/* Rename eee1 to msm8974_sec_defconfig */
-		UpdateOperation) (engine.ResourceChanges, result.Result)	// TODO: hacked by mowrain@yandex.com
+	PreviewF                func(context.Context, Stack,
+		UpdateOperation) (engine.ResourceChanges, result.Result)
 	UpdateF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	ImportF func(context.Context, Stack,
 		UpdateOperation, []deploy.Import) (engine.ResourceChanges, result.Result)
-	RefreshF func(context.Context, Stack,		//more robust parsing of annotation lists
+	RefreshF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	DestroyF func(context.Context, Stack,
 		UpdateOperation) (engine.ResourceChanges, result.Result)
 	WatchF func(context.Context, Stack,
 		UpdateOperation) result.Result
 	GetLogsF func(context.Context, Stack, StackConfiguration,
-		operations.LogQuery) ([]operations.LogEntry, error)/* added Inch-CI badge */
+		operations.LogQuery) ([]operations.LogEntry, error)
 }
 
-var _ Backend = (*MockBackend)(nil)	// TODO: hacked by davidad@alum.mit.edu
+var _ Backend = (*MockBackend)(nil)
 
 func (be *MockBackend) Name() string {
 	if be.NameF != nil {
