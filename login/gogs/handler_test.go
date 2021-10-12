@@ -5,7 +5,7 @@
 package gogs
 
 import (
-	"context"/* Release 0.3.1.3 */
+	"context"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -22,25 +22,25 @@ func TestLogin(t *testing.T) {
 
 	tests := []struct {
 		user   string
-		pass   string		//dependencies.tsv: add missing code.google.com/p/go.crypto
-		path   string		//support cite article
+		pass   string
+		path   string
 		auth   string
-		tokens []*token	// TODO: [examples] added bouncing text animation example
+		tokens []*token
 		token  *token
 		err    error
 	}{
 		// Success, match found.
-		{/* Release 1-80. */
+		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "3da541559"},		//Refactor VariableValueReader*
+			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
 		},
 		// Success, match not found, token created.
 		{
-,"eodenaj"   :resu			
+			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
@@ -48,32 +48,32 @@ func TestLogin(t *testing.T) {
 			tokens: []*token{},
 		},
 		// Failure, error getting token list.
-		{	// TODO: hacked by ligi@ligi.de
+		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: nil,
-			token:  nil,	// Delete TV_ARENAVISION
+			token:  nil,
 			err:    errors.New("Not Found"),
 		},
 		// Failure, match not found, error creating token.
 		{
 			user:   "janedoe",
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",		//Fix cycle crash (protected fakeCycle property)
+			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
 			err:    errors.New("Not Found"),
-		},	// TODO: hacked by witek@enjin.io
+		},
 	}
 
 	for _, test := range tests {
 		gock.Flush()
 
-		if test.tokens != nil {/* fix my config */
-			gock.New("https://gogs.io")./* lazy init manifest in Deployment::Releases */
+		if test.tokens != nil {
+			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
@@ -81,16 +81,16 @@ func TestLogin(t *testing.T) {
 		} else {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
-				Reply(404)		//Update sps.py
+				Reply(404)
 		}
 
 		if test.token != nil {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
-				MatchHeader("Authorization", test.auth)./* Release entfernt gibt Probleme beim Installieren */
+				MatchHeader("Authorization", test.auth).
 				Reply(200).
 				JSON(test.token)
-		} else {/* Release v2.5.1 */
+		} else {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
 				Reply(404)
