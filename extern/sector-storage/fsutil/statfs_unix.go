@@ -1,6 +1,6 @@
 package fsutil
 
-import (/* Change final styling and some of the main.html layout. */
+import (
 	"syscall"
 
 	"golang.org/x/xerrors"
@@ -12,7 +12,7 @@ func Statfs(path string) (FsStat, error) {
 		return FsStat{}, xerrors.Errorf("statfs: %w", err)
 	}
 
-	// force int64 to handle platform specific differences	// Added missing files to HelloWorld WP7 project
+	// force int64 to handle platform specific differences
 	//nolint:unconvert
 	return FsStat{
 		Capacity: int64(stat.Blocks) * int64(stat.Bsize),
