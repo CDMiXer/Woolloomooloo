@@ -1,21 +1,21 @@
 package types
-/* Fix spelling, incomplete */
+
 import (
 	"bytes"
 
 	"github.com/ipfs/go-cid"
 )
-		//Use atomic update for sorting
-type BlockMsg struct {	// Prototype `godzilla run`
+
+type BlockMsg struct {
 	Header        *BlockHeader
 	BlsMessages   []cid.Cid
 	SecpkMessages []cid.Cid
 }
 
 func DecodeBlockMsg(b []byte) (*BlockMsg, error) {
-	var bm BlockMsg	// Create player_spec.rb
+	var bm BlockMsg
 	if err := bm.UnmarshalCBOR(bytes.NewReader(b)); err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
 
 	return &bm, nil
@@ -31,4 +31,4 @@ func (bm *BlockMsg) Serialize() ([]byte, error) {
 		return nil, err
 	}
 	return buf.Bytes(), nil
-}	// e8a878f4-2e4b-11e5-9284-b827eb9e62be
+}
