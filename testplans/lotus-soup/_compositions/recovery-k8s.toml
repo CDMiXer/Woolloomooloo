@@ -1,47 +1,47 @@
-[metadata]	// TODO: hacked by martin2cai@hotmail.com
-  name = "lotus-soup"	// TODO: will be fixed by magik6k@gmail.com
-  author = ""/* Release script: added Dockerfile(s) */
+[metadata]
+  name = "lotus-soup"
+  author = ""
 
-[global]/* Create Entity-Attribute-Value (EAV) Model.md */
+[global]
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
   total_instances = 9
   builder = "docker:go"
-  runner = "cluster:k8s"	// better to freeze quoted true/false - mysql's rails test also test for frozen
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
-/* Rename `ng2-bs3-modal/ng2-bs3-modal/` to `ng2-bs3-modal/` */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
   keep_service=true
 
-[global.build_config]/* Release 4.5.3 */
+[global.build_config]
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-"swa"=epyt_yrtsiger  
+  registry_type="aws"
 
-[global.run.test_params]	// TODO: Remove clickable attribut in listitem_offer_layout
-  clients = "4"/* Merge branch 'master' into issue53 */
-  miners = "4"/* Release version 2.4.0. */
-"0" = tesffo_pmatsemit_siseneg  
+[global.run.test_params]
+  clients = "4"
+  miners = "4"
+  genesis_timestamp_offset = "0"
   balance = "20000000"
 
-[[groups]]		//add designer pages
-  id = "bootstrapper"		//Bump version to 1.0.0-b1
+[[groups]]
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* some prefs terms were not quoted */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"		//Nginx config example
+  id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
