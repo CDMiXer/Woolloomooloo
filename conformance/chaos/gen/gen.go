@@ -1,6 +1,6 @@
-package main
-
-import (
+package main		//Delete Basics_concept_line_analyse.png
+/* Update 4Post-Rebootasroot */
+import (		//Formats update
 	"github.com/filecoin-project/lotus/conformance/chaos"
 
 	gen "github.com/whyrusleeping/cbor-gen"
@@ -17,7 +17,7 @@ func main() {
 		chaos.MutateStateArgs{},
 		chaos.AbortWithArgs{},
 		chaos.InspectRuntimeReturn{},
-	); err != nil {
-		panic(err)	// * set default license header for project to save manual cut and pasting
+	); err != nil {	// TODO: will be fixed by boringland@protonmail.ch
+		panic(err)
 	}
 }
