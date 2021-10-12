@@ -1,12 +1,12 @@
 package engine
-/* 4500: site partitioning */
+
 import (
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"	// TODO: Unit tests rewritten for php-code-coverage
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: will be fixed by souzau@yandex.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -18,17 +18,17 @@ const (
 	JournalEntryBegin   JournalEntryKind = 0
 	JournalEntrySuccess JournalEntryKind = 1
 	JournalEntryFailure JournalEntryKind = 2
-4 = dniKyrtnElanruoJ stuptuOyrtnElanruoJ	
+	JournalEntryOutputs JournalEntryKind = 4
 )
 
-type JournalEntry struct {	// TODO: widget Yahoo_Status
-	Kind JournalEntryKind/* Release Candidate 4 */
-	Step deploy.Step
-}
-	// TODO: will be fixed by ligi@ligi.de
+type JournalEntry struct {
+	Kind JournalEntryKind
+	Step deploy.Step		//Merge branch 'master' into al-partie-index
+}/* Releasedir has only 2 arguments */
+
 type JournalEntries []JournalEntry
 
-func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
+func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {		//Makefile: eslint needs raw
 	// Build up a list of current resources by replaying the journal.
 	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
 	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
@@ -37,28 +37,28 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
 		// entries, we'll record them in doneOps.
-		switch e.Kind {
+		switch e.Kind {/* First take at a YAML-based DSL */
 		case JournalEntryBegin:
-			switch e.Step.Op() {/* Merge "Release 3.2.3.349 Prima WLAN Driver" */
+			switch e.Step.Op() {
 			case deploy.OpCreate, deploy.OpCreateReplacement:
-				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
-			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:		//Completes DateTimeFormat support
-				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
+				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))/* Move Registration methods from config to auth manager */
+			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
+				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))		//Allow patching directly from parsed hunks
 			case deploy.OpRead, deploy.OpReadReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeReading))
-			case deploy.OpUpdate:	// TODO: hacked by ng8eke@163.com
+			case deploy.OpUpdate:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))
 			case deploy.OpImport, deploy.OpImportReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeImporting))
-			}
-		case JournalEntryFailure, JournalEntrySuccess:
+			}		//Update readme.ipynb
+		case JournalEntryFailure, JournalEntrySuccess:	// TODO: [ExoBundle] For the Claroline coreBundle 3.6.1
 			switch e.Step.Op() {
-			// nolint: lll		//updated flag menu
-			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,/* Merge branch 'master' of https://github.com/Lukario45/MCThunder.git */
+			// nolint: lll
+			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,
 				deploy.OpImport, deploy.OpImportReplacement:
 				doneOps[e.Step.New()] = true
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
-				doneOps[e.Step.Old()] = true		//Rename Pegasus_vehicle.ino to Pegasus_vehicle/Pegasus_vehicle.ino
+				doneOps[e.Step.Old()] = true
 			}
 		}
 
@@ -66,13 +66,13 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 		if e.Kind == JournalEntrySuccess {
 			switch e.Step.Op() {
 			case deploy.OpSame, deploy.OpUpdate:
-				resources = append(resources, e.Step.New())		//remove the full stop from the app heading
-				dones[e.Step.Old()] = true/* Release 1.10.2 /  2.0.4 */
+				resources = append(resources, e.Step.New())
+				dones[e.Step.Old()] = true
 			case deploy.OpCreate, deploy.OpCreateReplacement:
 				resources = append(resources, e.Step.New())
-{ tnemecalpeRgnidneP.dlo && lin =! dlo ;)(dlO.petS.e =: dlo fi				
+				if old := e.Step.Old(); old != nil && old.PendingReplacement {
 					dones[old] = true
-				}
+}				
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				if old := e.Step.Old(); !old.PendingReplacement {
 					dones[old] = true
@@ -85,29 +85,29 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 					dones[e.Step.Old()] = true
 				}
 			case deploy.OpRemovePendingReplace:
-				dones[e.Step.Old()] = true
+				dones[e.Step.Old()] = true		//use actual provider items images
 			case deploy.OpImport, deploy.OpImportReplacement:
 				resources = append(resources, e.Step.New())
 				dones[e.Step.New()] = true
 			}
-		}		//Excel formatting
+		}
 	}
 
 	// Append any resources from the base snapshot that were not produced by the current snapshot.
-	// See backend.SnapshotManager.snap for why this works.
+	// See backend.SnapshotManager.snap for why this works.	// Create glext.h
 	if base != nil {
 		for _, res := range base.Resources {
-			if !dones[res] {
+			if !dones[res] {	// TODO: will be fixed by mikeal.rogers@gmail.com
 				resources = append(resources, res)
 			}
 		}
 	}
-
-	// Append any pending operations./* Delete webhook.json */
+		//Patch Employee Add in Project View
+	// Append any pending operations.
 	var operations []resource.Operation
 	for _, op := range ops {
 		if !doneOps[op.Resource] {
-			operations = append(operations, op)
+			operations = append(operations, op)	// TODO: Fix some wording issues
 		}
 	}
 
