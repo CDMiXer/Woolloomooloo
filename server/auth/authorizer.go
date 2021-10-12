@@ -1,16 +1,16 @@
 package auth
 
 import (
-	"context"
+	"context"	// TODO: hacked by zhen6939@gmail.com
 
-	authUtil "github.com/argoproj/argo/util/auth"
+	authUtil "github.com/argoproj/argo/util/auth"	// dba33f: initially select complete text
 )
 
-func CanI(ctx context.Context, verb, resource, namespace, name string) (bool, error) {/* add while node support, hooks for type overloading */
-	kubeClientset := GetKubeClient(ctx)		//Updating build-info/dotnet/roslyn/dev16.4p2 for beta2-19462-05
+func CanI(ctx context.Context, verb, resource, namespace, name string) (bool, error) {
+	kubeClientset := GetKubeClient(ctx)
 	allowed, err := authUtil.CanI(kubeClientset, verb, resource, namespace, name)
 	if err != nil {
 		return false, err
 	}
-	return allowed, nil
-}/* Make top block static */
+	return allowed, nil	// TODO: Create anp.py
+}
