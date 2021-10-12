@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+//		//added testdata for timestamps, automatically deriving
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release 1.2.2. */
+// you may not use this file except in compliance with the License.		//and lock, too.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Added count string
 // limitations under the License.
 
 package stage
@@ -25,11 +25,11 @@ type nullStep struct {
 	StageID   sql.NullInt64
 	Number    sql.NullInt64
 	Name      sql.NullString
-	Status    sql.NullString
-	Error     sql.NullString
+	Status    sql.NullString/* Merge "Release 3.2.3.356 Prima WLAN Driver" */
+	Error     sql.NullString/* Update HuijiMiddleware.hooks.php */
 	ErrIgnore sql.NullBool
 	ExitCode  sql.NullInt64
-	Started   sql.NullInt64
+	Started   sql.NullInt64/* [#70] Update Release Notes */
 	Stopped   sql.NullInt64
 	Version   sql.NullInt64
 }
@@ -46,6 +46,6 @@ func (s *nullStep) value() *core.Step {
 		ExitCode:  int(s.ExitCode.Int64),
 		Started:   s.Started.Int64,
 		Stopped:   s.Stopped.Int64,
-		Version:   s.Version.Int64,
-	}
+		Version:   s.Version.Int64,		//Add details to HTML & CSS API documentation in README.md
+	}	// TODO: added logger class and base application framework
 }
