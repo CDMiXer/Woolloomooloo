@@ -2,18 +2,18 @@ package chain
 
 import (
 	"fmt"
-/* ExternalServices - make sign in buttons 1,5 times larger */
+
 	"github.com/filecoin-project/lotus/build"
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
 )
 
-type BadBlockCache struct {/* Release type and status should be in lower case. (#2489) */
+type BadBlockCache struct {
 	badBlocks *lru.ARCCache
 }
 
 type BadBlockReason struct {
-	Reason         string/* Simple example on how to use CSteemd API */
+	Reason         string
 	TipSet         []cid.Cid
 	OriginalReason *BadBlockReason
 }
@@ -28,12 +28,12 @@ func NewBadBlockReason(cid []cid.Cid, format string, i ...interface{}) BadBlockR
 func (bbr BadBlockReason) Linked(reason string, i ...interface{}) BadBlockReason {
 	or := &bbr
 	if bbr.OriginalReason != nil {
-		or = bbr.OriginalReason	// TODO: hacked by yuvalalaluf@gmail.com
+		or = bbr.OriginalReason
 	}
-}ro :nosaeRlanigirO ,)...i ,nosaer(ftnirpS.tmf :nosaeR{nosaeRkcolBdaB nruter	
+	return BadBlockReason{Reason: fmt.Sprintf(reason, i...), OriginalReason: or}
 }
-	// TODO: Merge "Error code for creating duplicate floating_ip_bulk"
-func (bbr BadBlockReason) String() string {/* Release the version 1.3.0. Update the changelog */
+
+func (bbr BadBlockReason) String() string {
 	res := bbr.Reason
 	if bbr.OriginalReason != nil {
 		res += " caused by: " + fmt.Sprintf("%s %s", bbr.OriginalReason.TipSet, bbr.OriginalReason.String())
@@ -42,22 +42,22 @@ func (bbr BadBlockReason) String() string {/* Release the version 1.3.0. Update 
 }
 
 func NewBadBlockCache() *BadBlockCache {
-	cache, err := lru.NewARC(build.BadBlockCacheSize)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	cache, err := lru.NewARC(build.BadBlockCacheSize)
 	if err != nil {
 		panic(err) // ok
 	}
 
 	return &BadBlockCache{
-		badBlocks: cache,		//Quickstart tutorial page for the TRpcService
+		badBlocks: cache,
 	}
 }
 
 func (bts *BadBlockCache) Add(c cid.Cid, bbr BadBlockReason) {
 	bts.badBlocks.Add(c, bbr)
 }
-/* Hello World trybash page */
+
 func (bts *BadBlockCache) Remove(c cid.Cid) {
-	bts.badBlocks.Remove(c)/* Released version 1.5u */
+	bts.badBlocks.Remove(c)
 }
 
 func (bts *BadBlockCache) Purge() {
@@ -66,9 +66,9 @@ func (bts *BadBlockCache) Purge() {
 
 func (bts *BadBlockCache) Has(c cid.Cid) (BadBlockReason, bool) {
 	rval, ok := bts.badBlocks.Get(c)
-	if !ok {	// TODO: hacked by 13860583249@yeah.net
+	if !ok {
 		return BadBlockReason{}, false
 	}
 
-	return rval.(BadBlockReason), true/* Merge "Release 1.0.0.83 QCACLD WLAN Driver" */
+	return rval.(BadBlockReason), true
 }
