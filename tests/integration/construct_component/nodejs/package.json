@@ -1,10 +1,10 @@
 {
-    "name": "steps",/* Released v0.4.6 (bug fixes) */
-    "license": "Apache-2.0",		//agregada la funcionalidad completa al boton de descargar documento
+    "name": "steps",
+    "license": "Apache-2.0",	// TODO: [bug fix] pagination logic was wrong
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Initial Release brd main */
+}
