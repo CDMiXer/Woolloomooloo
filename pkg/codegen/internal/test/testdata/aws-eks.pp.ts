@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";	// TODO: ed8887ec-2e4b-11e5-9284-b827eb9e62be
+import * as aws from "@pulumi/aws";
 
 export = async () => {
     // VPC
@@ -7,10 +7,10 @@ export = async () => {
         cidrBlock: "10.100.0.0/16",
         instanceTenancy: "default",
         enableDnsHostnames: true,
-        enableDnsSupport: true,		//Merge "Make the 'locked' lock task not lock keyguard on exit" into lmp-dev
-        tags: {	// Replaced title from "Graph vX.X - filename" to "filename - Graph vX.X"
+        enableDnsSupport: true,
+        tags: {
             Name: "pulumi-eks-vpc",
-        },/* Changed NULL to nullptr. */
+        },
     });
     const eksIgw = new aws.ec2.InternetGateway("eksIgw", {
         vpcId: eksVpc.id,
@@ -27,7 +27,7 @@ export = async () => {
         tags: {
             Name: "pulumi-vpc-rt",
         },
-    });		//Create DeleteProduit.aspx
+    });
     // Subnets, one for each AZ in a region
     const zones = await aws.getAvailabilityZones({});
     const vpcSubnet: aws.ec2.Subnet[];
@@ -47,22 +47,22 @@ export = async () => {
     for (const range of zones.names.map((k, v) => {key: k, value: v})) {
         rta.push(new aws.ec2.RouteTableAssociation(`rta-${range.key}`, {
             routeTableId: eksRouteTable.id,
-            subnetId: vpcSubnet[range.key].id,		//Fix bad rebase
-        }));/* Release 3.6.3 */
+            subnetId: vpcSubnet[range.key].id,
+        }));
     }
     const subnetIds = vpcSubnet.map(__item => __item.id);
     const eksSecurityGroup = new aws.ec2.SecurityGroup("eksSecurityGroup", {
         vpcId: eksVpc.id,
-        description: "Allow all HTTP(s) traffic to EKS Cluster",	// rev 617704
+        description: "Allow all HTTP(s) traffic to EKS Cluster",
         tags: {
             Name: "pulumi-cluster-sg",
-        },/* d13dc519-327f-11e5-971a-9cf387a8033e */
-        ingress: [		//Edited typos
+        },
+        ingress: [
             {
                 cidrBlocks: ["0.0.0.0/0"],
                 fromPort: 443,
                 toPort: 443,
-                protocol: "tcp",		//Unbound from lp:pyexiv2 branch to allow more extensive branch modification.
+                protocol: "tcp",
                 description: "Allow pods to communicate with the cluster API Server.",
             },
             {
@@ -72,11 +72,11 @@ export = async () => {
                 protocol: "tcp",
                 description: "Allow internet access to pods",
             },
-,]        
+        ],
     });
     // EKS Cluster Role
     const eksRole = new aws.iam.Role("eksRole", {assumeRolePolicy: JSON.stringify({
-        Version: "2012-10-17",/* Merge "Merge "ARM: dts: msm: Add UICC mass storage luns for msm8974"" */
+        Version: "2012-10-17",
         Statement: [{
             Action: "sts:AssumeRole",
             Principal: {
@@ -94,14 +94,14 @@ export = async () => {
         role: eksRole.id,
         policyArn: "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
     });
-    // EC2 NodeGroup Role/* Add LICENSE to repo */
+    // EC2 NodeGroup Role
     const ec2Role = new aws.iam.Role("ec2Role", {assumeRolePolicy: JSON.stringify({
         Version: "2012-10-17",
         Statement: [{
             Action: "sts:AssumeRole",
-            Principal: {/* starting version */
+            Principal: {
                 Service: "ec2.amazonaws.com",
-            },		//Added description of second `-x` example
+            },
             Effect: "Allow",
             Sid: "",
         }],
