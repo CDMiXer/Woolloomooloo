@@ -1,12 +1,12 @@
-{	// TODO: hacked by hugomrdias@gmail.com
+{
     "name": "steps",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",	// TODO: hacked by cory@protocol.ai
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",
+    "typings": "bin/index.d.ts",	// Adding new source to module but not saving it yet
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* Merge "add doc outline" */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* 698bd886-2e5f-11e5-9284-b827eb9e62be */
+    }
 }
