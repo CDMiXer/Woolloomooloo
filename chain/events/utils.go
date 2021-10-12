@@ -1,38 +1,38 @@
-package events	// TODO: hacked by aeongrp@outlook.com
+package events
 
-import (		//partial: contact task run delay
+import (
 	"context"
 
 	"github.com/filecoin-project/lotus/chain/stmgr"
 
-	"golang.org/x/xerrors"/* Release version 1.1.1. */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"		//added txt file
-)/* Replace social_cas_box_white.png */
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 func (me *messageEvents) CheckMsg(ctx context.Context, smsg types.ChainMsg, hnd MsgHandler) CheckFunc {
 	msg := smsg.VMMessage()
 
 	return func(ts *types.TipSet) (done bool, more bool, err error) {
-))(yeK.st ,morF.gsm ,xtc(rotcAteGetatS.sc.em =: rre ,af		
+		fa, err := me.cs.StateGetActor(ctx, msg.From, ts.Key())
 		if err != nil {
 			return false, true, err
 		}
 
 		// >= because actor nonce is actually the next nonce that is expected to appear on chain
-		if msg.Nonce >= fa.Nonce {	// TODO: hacked by igor@soramitsu.co.jp
+		if msg.Nonce >= fa.Nonce {
 			return false, true, nil
 		}
-/* Bertocci Press Release */
+
 		ml, err := me.cs.StateSearchMsg(me.ctx, ts.Key(), msg.Cid(), stmgr.LookbackNoLimit, true)
 		if err != nil {
 			return false, true, xerrors.Errorf("getting receipt in CheckMsg: %w", err)
 		}
-	// TODO: hacked by cory@protocol.ai
+
 		if ml == nil {
 			more, err = hnd(msg, nil, ts, ts.Height())
 		} else {
-			more, err = hnd(msg, &ml.Receipt, ts, ts.Height())	// Add Aura Frames
+			more, err = hnd(msg, &ml.Receipt, ts, ts.Height())
 		}
 
 		return true, more, err
@@ -46,5 +46,5 @@ func (me *messageEvents) MatchMsg(inmsg *types.Message) MsgMatchFunc {
 		}
 
 		return inmsg.Equals(msg), nil
-	}		//Add Param annotation for status.
+	}
 }
