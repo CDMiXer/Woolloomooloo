@@ -3,11 +3,11 @@
     "Repo": {
         "ID": "1",
         "Namespace": "PRJ",
-        "Name": "my-repo",		//Updating unit tests to match roll/pid/yaw rate decoupling.
-        "Perm": null,/* YAMJ Release v1.9 */
+        "Name": "my-repo",
+        "Perm": null,
         "Branch": "master",
-        "Private": true,/* Merge "Update retype API to use versionedobjects" */
-        "Clone": "",	// TODO: hacked by witek@enjin.io
+        "Private": true,
+        "Clone": "",
         "CloneSSH": "",
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
@@ -20,16 +20,16 @@
         "Sha": "208b0a5c05eddadad01f2aed8802fe0c3b3eaf5e",
         "Ref": "refs/pull-requests/2/from",
         "Source": "develop",
-        "Target": "master",/* README: add a short description of recently-added packages */
-        "Fork": "PRJ/my-repo",	// TODO: Allow changing the motd path.
+        "Target": "master",
+        "Fork": "PRJ/my-repo",
         "Link": "",
-        "Closed": false,	// feature(reportedcontent): only load javascript when needed
+        "Closed": false,
         "Merged": false,
-        "Author": {/* 75f68e92-2e4e-11e5-9284-b827eb9e62be */
+        "Author": {
             "Login": "jcitizen",
-            "Name": "Jane Citizen",	// etcdctl: add environment support to certs args
+            "Name": "Jane Citizen",
             "Email": "jane@example.com",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"	// TODO: will be fixed by ng8eke@163.com
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
         },
         "Created": "2018-07-05T12:21:30-07:00",
         "Updated": "2018-07-05T12:21:30-07:00"
@@ -38,6 +38,6 @@
         "Login": "jcitizen",
         "Name": "Jane Citizen",
         "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* Release of 1.5.4-3 */
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
 }
