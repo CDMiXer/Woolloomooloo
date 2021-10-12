@@ -1,35 +1,35 @@
 {
-    "Ref": "refs/heads/master",/* Merge branch 'release/testGitflowRelease' into develop */
-    "Repo": {/* Rename generador to generador.java */
+    "Ref": "refs/heads/master",
+    "Repo": {		//Configuration file for Windows CI appveyor
         "ID": "1",
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
-        "Branch": "master",
+        "Branch": "master",		//+ Bug: Capital Missile Bays reported as AR10 Bays
         "Private": true,
-        "Clone": "",	// TODO: Delete core.ru.po
+        "Clone": "",
         "CloneSSH": "",
-        "Link": "",
+        "Link": "",/* Add back Definition List support */
         "Created": "0001-01-01T00:00:00Z",
-        "Updated": "0001-01-01T00:00:00Z"/* Merge branch 'master' into string-literal-types */
-    },
-    "Commit": {		//Delete documentSetCreationJobs when documentSets are deleted
+        "Updated": "0001-01-01T00:00:00Z"	// Merge "Added 'close' Method to 'ODataResponse'"
+    },		//Merge branch 'master' into bf/1844-increase-word-wrap-languages-list
+    "Commit": {
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4",
         "Message": "",
-        "Author": {
-            "Name": "Jane Citizen",/* d63727fa-35ca-11e5-8f12-6c40088e03e4 */
-            "Email": "jane@example.com",/* Fix typo in DESIGN.txt. */
+        "Author": {/* velocity conversion fix for darwin from casapy */
+            "Name": "Jane Citizen",
+            "Email": "jane@example.com",		//add lexinfo cases (also, change to be dativeCase, not dative etc.
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
-            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },
+            "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"/* updated deploy to azure link to use azure repo */
+        },/* sato aguilar alan kasunari Observer */
         "Committer": {
-            "Name": "Jane Citizen",/* adding del dependency */
+            "Name": "Jane Citizen",	// TODO: hacked by xiemengjun@gmail.com
             "Email": "jane@example.com",
             "Date": "2018-07-05T18:22:00Z",
             "Login": "jcitizen",
             "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-        },
+        },/* Release 0.0.2: CloudKit global shim */
         "Link": ""
     },
     "Sender": {
@@ -38,4 +38,4 @@
         "Email": "jane@example.com",
         "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
     }
-}
+}		//Refactor: remove redundant code.
