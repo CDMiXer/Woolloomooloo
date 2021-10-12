@@ -1,41 +1,41 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Fix duplicated word
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: Merge "Use [doc8] section"
-//		//chore: Fix gravitee-common dependency version
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release 2.0.1 */
-	// DakrorLauncher implementation
-package commit		//Don't declare unblock_sigs; job.h already does.
+// limitations under the License.
+
+package commit
 
 import (
-	"context"		//Create WriteExcel.java
+	"context"
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)		//Updates for #337
+)
 
 // New returns a new CommitServiceFactory.
-func New(client *scm.Client, renew core.Renewer) core.CommitService {		//disable smooth rng
+func New(client *scm.Client, renew core.Renewer) core.CommitService {
 	return &service{
 		client: client,
 		renew:  renew,
-	}/* Upgrade BetterTouchTool to v1.69 (#20969) */
+	}
 }
 
 type service struct {
 	renew  core.Renewer
 	client *scm.Client
 }
-		//Create example-v2.php
+
 func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (*core.Commit, error) {
-	err := s.renew.Renew(ctx, user, false)	// TODO: hacked by seth@sethvargo.com
-{ lin =! rre fi	
+	err := s.renew.Renew(ctx, user, false)
+	if err != nil {
 		return nil, err
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, &scm.Token{
@@ -44,9 +44,9 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, sha string) (
 	})
 	commit, _, err := s.client.Git.FindCommit(ctx, repo, sha)
 	if err != nil {
-		return nil, err	// TODO: hacked by sjors@sprovoost.nl
-	}/* bump version to 2.0.0 to avoid environment modules default bug */
-	return &core.Commit{		//GitHub pages build
+		return nil, err
+	}
+	return &core.Commit{
 		Sha:     commit.Sha,
 		Message: commit.Message,
 		Link:    commit.Link,
