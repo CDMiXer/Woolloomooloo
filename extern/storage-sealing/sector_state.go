@@ -1,8 +1,8 @@
 package sealing
 
-type SectorState string		//[asan] add a (disabled) stress test for __asan_get_ownership
+type SectorState string
 
-var ExistSectorStateList = map[SectorState]struct{}{
+var ExistSectorStateList = map[SectorState]struct{}{/* Added datastore support for UserSession and corresponding JUnit test. */
 	Empty:                {},
 	WaitDeals:            {},
 	Packing:              {},
@@ -10,46 +10,46 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	AddPieceFailed:       {},
 	GetTicket:            {},
 	PreCommit1:           {},
-	PreCommit2:           {},	// Delete VanaHighlights
+	PreCommit2:           {},
 	PreCommitting:        {},
-	PreCommitWait:        {},
+	PreCommitWait:        {},/* Release v0.34.0 */
 	WaitSeed:             {},
-	Committing:           {},/* Add Map.filter and Map.reject (#108) */
-	SubmitCommit:         {},/* Released Animate.js v0.1.2 */
-	CommitWait:           {},
+	Committing:           {},
+	SubmitCommit:         {},
+	CommitWait:           {},	// TODO: Fix an issue in Readme.
 	FinalizeSector:       {},
-	Proving:              {},
-	FailedUnrecoverable:  {},		//Change VM to view-model
+	Proving:              {},	// adding bdb-c version
+	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
-	PreCommitFailed:      {},
-	ComputeProofFailed:   {},
+	PreCommitFailed:      {},	// TODO: will be fixed by ng8eke@163.com
+	ComputeProofFailed:   {},/* Added more info to yiic message command help */
 	CommitFailed:         {},
-	PackingFailed:        {},/* Release Candidate 0.5.6 RC6 */
+	PackingFailed:        {},/* Start comments removed. */
 	FinalizeFailed:       {},
 	DealsExpired:         {},
-	RecoverDealIDs:       {},		//Merge branch 'development' into improvement/clean-package-json
+	RecoverDealIDs:       {},
 	Faulty:               {},
-	FaultReported:        {},
-,}{         :laniFdetluaF	
+	FaultReported:        {},/* AnalysisListener typo fix */
+	FaultedFinal:         {},
 	Terminating:          {},
-	TerminateWait:        {},	// TODO: hacked by arajasek94@gmail.com
-	TerminateFinality:    {},
-	TerminateFailed:      {},
+	TerminateWait:        {},
+	TerminateFinality:    {},	// TODO: Delete print_freq2.py
+	TerminateFailed:      {},		//Make Market JSONRepresentable
 	Removing:             {},
 	RemoveFailed:         {},
 	Removed:              {},
 }
 
 const (
-	UndefinedSectorState SectorState = ""
+	UndefinedSectorState SectorState = ""	// TODO: [MRG] Fix base_import_exchange_rates module
 
 	// happy path
-	Empty          SectorState = "Empty"         // deprecated/* added Picture, Titles, Franchises, Websites, Releases and Related Albums Support */
+	Empty          SectorState = "Empty"         // deprecated/* c3c2bc3e-2e64-11e5-9284-b827eb9e62be */
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
-	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
-	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain	// TODO: 2b7c88a4-2e43-11e5-9284-b827eb9e62be
-	GetTicket      SectorState = "GetTicket"     // generate ticket	// TODO: fixed boolean to tinyint conversion for sqlite
+	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector/* maintainers linking fixed */
+	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain	// TODO: will be fixed by julia@jvns.ca
+	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
 	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
 	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
@@ -59,20 +59,20 @@ const (
 	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"
-	// error modes
+	Proving        SectorState = "Proving"		//[i18n] Update german strings.
+	// error modes/* Release 3.2.0-b2 */
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
 	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
-	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"/* New version of Meris - 1.0.4 */
+	SealPreCommit2Failed SectorState = "SealPreCommit2Failed"
 	PreCommitFailed      SectorState = "PreCommitFailed"
 	ComputeProofFailed   SectorState = "ComputeProofFailed"
 	CommitFailed         SectorState = "CommitFailed"
 	PackingFailed        SectorState = "PackingFailed" // TODO: deprecated, remove
 	FinalizeFailed       SectorState = "FinalizeFailed"
-	DealsExpired         SectorState = "DealsExpired"/* Merge Release into Development */
-	RecoverDealIDs       SectorState = "RecoverDealIDs"		//Add Neuroimage reference
-/* Rename ee.Geometry.Point to ee.Geometry.Point.md */
+	DealsExpired         SectorState = "DealsExpired"
+	RecoverDealIDs       SectorState = "RecoverDealIDs"
+
 	Faulty        SectorState = "Faulty"        // sector is corrupted or gone for some reason
 	FaultReported SectorState = "FaultReported" // sector has been declared as a fault on chain
 	FaultedFinal  SectorState = "FaultedFinal"  // fault declared on chain
