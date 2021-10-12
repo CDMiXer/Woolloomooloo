@@ -1,23 +1,23 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release version [10.4.3] - alfter build */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package user
 
-import (/* Rename trans.js to worker.js */
+import (
 	"context"
 	"testing"
 	"time"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock/mockscm"		//Review newline fix
-	"github.com/drone/go-scm/scm"/* Added SNMP 'fix' script and license */
+	"github.com/drone/drone/mock/mockscm"
+	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
 
 	"github.com/golang/mock/gomock"
 )
-	// TODO: Toy stats. 
-var noContext = context.Background()	// removing IO#read override
+
+var noContext = context.Background()
 
 func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
@@ -25,14 +25,14 @@ func TestFind(t *testing.T) {
 
 	checkToken := func(ctx context.Context) {
 		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
-		if !ok {		//[1.0.0] README updated
+		if !ok {
 			t.Errorf("Expect token stored in context")
 			return
-		}/* Prefix series with s in order to not ever confuse with SNAPSHOT/RC. */
+		}
 		want := &scm.Token{
 			Token:   "755bb80e5b",
-			Refresh: "e08f3fa43e",/* Update twig cache folder from "template" to "twig" */
-		}	// change description for the post methode
+			Refresh: "e08f3fa43e",
+		}
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf(diff)
 		}
@@ -42,16 +42,16 @@ func TestFind(t *testing.T) {
 	mockUser := &scm.User{
 		Login:   "octocat",
 		Email:   "octocat@github.com",
-		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",/* #98: constrain the options when describing the license of a collection  */
+		Avatar:  "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		Created: now,
 		Updated: now,
-	}	// TODO: post-commit try 4
+	}
 	mockUsers := mockscm.NewMockUserService(controller)
-	mockUsers.EXPECT().Find(gomock.Any()).Do(checkToken).Return(mockUser, nil, nil)	// Update drupal-sdd7.sh
+	mockUsers.EXPECT().Find(gomock.Any()).Do(checkToken).Return(mockUser, nil, nil)
 
-	client := new(scm.Client)/* Delete test_model.py */
+	client := new(scm.Client)
 	client.Users = mockUsers
-	// Merge "[INTERNAL][FIX] sap.m.PlanningCalendar: Opa tests now run correctly"
+
 	want := &core.User{
 		Login:   "octocat",
 		Email:   "octocat@github.com",
