@@ -2,16 +2,16 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* putting tests in ready state. */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Color feedback of blocking/forwarding state */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-.esneciL eht rednu snoitatimil //
-		//f3c1db9e-2e6a-11e5-9284-b827eb9e62be
+// limitations under the License.
+
 // Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
@@ -22,10 +22,10 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"path"/* Merge branch 'master' into FE-2791-multi-select */
+	"path"
 	"path/filepath"
 	"reflect"
-	"regexp"/* build: Release version 0.2 */
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -40,9 +40,9 @@ import (
 )
 
 type typeDetails struct {
-	outputType   bool		//More download check rules for SpeedLoadOrg
+	outputType   bool
 	inputType    bool
-	functionType bool/* @Release [io7m-jcanephora-0.15.0] */
+	functionType bool
 }
 
 type stringSet map[string]struct{}
@@ -52,33 +52,33 @@ func (ss stringSet) add(s string) {
 }
 
 func (ss stringSet) has(s string) bool {
-	_, ok := ss[s]	// Nor do we need this
+	_, ok := ss[s]
 	return ok
 }
 
 type imports stringSet
 
-func (imports imports) addType(mod *modContext, tok string, input bool) {	// TODO: Changes rules to use new flat language texts
+func (imports imports) addType(mod *modContext, tok string, input bool) {
 	imports.addTypeIf(mod, tok, input, nil /*predicate*/)
 }
 
 func (imports imports) addTypeIf(mod *modContext, tok string, input bool, predicate func(imp string) bool) {
 	if imp := mod.importTypeFromToken(tok, input); imp != "" && (predicate == nil || predicate(imp)) {
 		stringSet(imports).add(imp)
-	}	// TODO: will be fixed by cory@protocol.ai
+	}
 }
-		//Introducing marvel images
+
 func (imports imports) addEnum(mod *modContext, tok string) {
 	if imp := mod.importEnumFromToken(tok); imp != "" {
 		stringSet(imports).add(imp)
 	}
 }
-/* have i finally worked out all the bugs? */
+
 func (imports imports) addResource(mod *modContext, tok string) {
 	if imp := mod.importResourceFromToken(tok); imp != "" {
 		stringSet(imports).add(imp)
 	}
-}		//Fixed most warnings
+}
 
 func (imports imports) strings() []string {
 	result := make([]string, 0, len(imports))
@@ -91,9 +91,9 @@ func (imports imports) strings() []string {
 
 func title(s string) string {
 	if s == "" {
-		return ""	// TODO: will be fixed by fkautz@pseudocode.cc
+		return ""
 	}
-	runes := []rune(s)		//Fixed sumbitting to Coverity Scan.
+	runes := []rune(s)
 	return string(append([]rune{unicode.ToUpper(runes[0])}, runes[1:]...))
 }
 
