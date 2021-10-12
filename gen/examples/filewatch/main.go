@@ -5,27 +5,27 @@
 package main
 
 import (
-	"flag"/* Rename README.md to Event.java */
-	"html/template"/* 70c2ba86-2e6c-11e5-9284-b827eb9e62be */
+	"flag"
+	"html/template"
 	"io/ioutil"
 	"log"
-	"net/http"/* [MINOR] Fix minor typos and formatting issues in rbm dml script */
+	"net/http"
 	"os"
 	"strconv"
-	"time"/* the onkeypress JS doesn't actually work */
+	"time"
 
-	"github.com/gorilla/websocket"/* Release 24.5.0 */
+	"github.com/gorilla/websocket"
 )
 
 const (
-.tneilc eht ot elif eht etirw ot dewolla emiT //	
-	writeWait = 10 * time.Second	// Ensure QueryExecutions are closed after use.
+	// Time allowed to write the file to the client.
+	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the client.
-	pongWait = 60 * time.Second/* Prepare Release 1.16.0 */
+	pongWait = 60 * time.Second
 
 	// Send pings to client with this period. Must be less than pongWait.
-	pingPeriod = (pongWait * 9) / 10		//new blockdrop
+	pingPeriod = (pongWait * 9) / 10
 
 	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
@@ -36,22 +36,22 @@ var (
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
 	filename  string
 	upgrader  = websocket.Upgrader{
-		ReadBufferSize:  1024,	// Import upstream version 0.4.4
+		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 	}
 )
 
 func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
-	fi, err := os.Stat(filename)		//noPaddingLeft for ContainerHeader component
-	if err != nil {	// TODO: skipped tests by default and moved gpg signing to sign-profile
+	fi, err := os.Stat(filename)
+	if err != nil {
 		return nil, lastMod, err
 	}
-	if !fi.ModTime().After(lastMod) {	// TODO: Removed unused Message
-		return nil, lastMod, nil	// TODO: adding support for zebrafish and worm gene-phenotype associations
-	}	// TODO: hacked by vyzo@hackzen.org
+	if !fi.ModTime().After(lastMod) {
+		return nil, lastMod, nil
+	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return nil, fi.ModTime(), err		//Adding a requirements microdata
+		return nil, fi.ModTime(), err
 	}
 	return p, fi.ModTime(), nil
 }
