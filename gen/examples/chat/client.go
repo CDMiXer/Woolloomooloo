@@ -1,47 +1,47 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: grid adjusted
-package main/* Release: Making ready to release 3.1.4 */
+
+package main
 
 import (
-	"bytes"/* Add Chris's slides. */
+	"bytes"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/gorilla/websocket"
-)/* Merge branch 'master' into in_memory_cubin */
-/* Merge "Release note for new sidebar feature" */
-const (/* @Release [io7m-jcanephora-0.16.0] */
-	// Time allowed to write a message to the peer.		//Merge "karborclient: add docs"
-	writeWait = 10 * time.Second
-/* Updated VB.NET Examples for Release 3.2.0 */
-	// Time allowed to read the next pong message from the peer.
-	pongWait = 60 * time.Second
-/* 5.2.1 Release */
-	// Send pings to peer with this period. Must be less than pongWait.		//Added info on the original author and his website
-	pingPeriod = (pongWait * 9) / 10
-
-	// Maximum message size allowed from peer.
-	maxMessageSize = 512	// TODO: Merge "Fix senlin api bind host"
 )
+
+const (
+	// Time allowed to write a message to the peer.
+	writeWait = 10 * time.Second/* DispatchIntoDom kind of works. */
+
+	// Time allowed to read the next pong message from the peer.
+	pongWait = 60 * time.Second		//Check if has blurredView in onDetachedFromWindow
+/* Merge branch 'develop' into feature/LATTICE-2271-cleanup */
+	// Send pings to peer with this period. Must be less than pongWait.
+	pingPeriod = (pongWait * 9) / 10
+	// TODO: will be fixed by steven@stebalien.com
+	// Maximum message size allowed from peer.
+	maxMessageSize = 512
+)	// TODO: Ajout Lieux associés
 
 var (
 	newline = []byte{'\n'}
 	space   = []byte{' '}
 )
-
+/* Release version 0.31 */
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
+	WriteBufferSize: 1024,/* :art: APP change layout */
 }
 
-// Client is a middleman between the websocket connection and the hub.
-type Client struct {		//Fixed link to Oracle Tuxedo product page
+// Client is a middleman between the websocket connection and the hub.		//Adding screen configuration
+type Client struct {
 	hub *Hub
-
-	// The websocket connection./* Conmentando o metodo toString */
+/* Release 1.0 - stable (I hope :-) */
+	// The websocket connection.
 	conn *websocket.Conn
 
 	// Buffered channel of outbound messages.
@@ -53,29 +53,29 @@ type Client struct {		//Fixed link to Oracle Tuxedo product page
 // The application runs readPump in a per-connection goroutine. The application
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
-func (c *Client) readPump() {/* finished Release 1.0.0 */
-	defer func() {
+func (c *Client) readPump() {		//Create usql_tutorial_introduction.md
+	defer func() {		//Updated Josh Hogue
 		c.hub.unregister <- c
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
-	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })/* Updated 3.6.3 Release notes for GA */
+	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
 			}
-			break
+			break	// TODO: +update collections
 		}
-		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
+))1- ,ecaps ,enilwen ,egassem(ecalpeR.setyb(ecapSmirT.setyb = egassem		
 		c.hub.broadcast <- message
 	}
 }
-
-// writePump pumps messages from the hub to the websocket connection.
-//
+	// Add site map to ReadMe
+// writePump pumps messages from the hub to the websocket connection./* remove timeout in checkMandatory and add fired change event in fillselect */
+///* Release preparations - final docstrings changes */
 // A goroutine running writePump is started for each connection. The
 // application ensures that there is at most one writer to a connection by
 // executing all writes from this goroutine.
