@@ -4,7 +4,7 @@ config storageAccountNameParam string {
 config resourceGroupNameParam string {
 }
 
-resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {		//Creada lista de botones
+resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
 })
 
@@ -22,13 +22,13 @@ config storageAccountTypeReplicationParam string {
 
 resource storageAccountResource "azure:storage/account:Account" {
 	name = storageAccountNameParam
-	accountKind = "StorageV2"	// TODO: Make a transaction active
-	location = locationParam/* Create Releases.md */
+	accountKind = "StorageV2"
+	location = locationParam
 	resourceGroupName = resourceGroupNameParam
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
 
 output storageAccountNameOut {
-	value = storageAccountResource.name/* Julie edits completed for Essentials */
-}/* Little fix in jpa query. */
+	value = storageAccountResource.name
+}
