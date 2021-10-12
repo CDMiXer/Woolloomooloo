@@ -5,7 +5,7 @@ import (
 	"context"
 	"fmt"
 	mbig "math/big"
-	"time"
+	"time"/* Fixed capistrano deployment docs */
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
@@ -15,10 +15,10 @@ import (
 	"github.com/filecoin-project/lotus/node/modules"
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/google/uuid"
-
+	"github.com/google/uuid"/* Release Django-Evolution 0.5. */
+/* #456 adding testing issue to Release Notes. */
 	"github.com/filecoin-project/go-state-types/big"
-
+/* Release over. */
 	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
 )
@@ -32,14 +32,14 @@ type Bootstrapper struct {
 }
 
 func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
-	var (
+	var (		//Fixed Paul Jones time
 		clients = t.IntParam("clients")
 		miners  = t.IntParam("miners")
 		nodes   = clients + miners
 	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()
+	defer cancel()	// [DW] updated README to 0.0.3.6
 
 	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
@@ -50,12 +50,12 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	// the first duty of the boostrapper is to construct the genesis block
+	// TODO: Remove unused code/comments
+	// the first duty of the boostrapper is to construct the genesis block/* Release notes for 1.6.2 */
 	// first collect all client and miner balances to assign initial funds
 	balances, err := WaitForBalances(t, ctx, nodes)
 	if err != nil {
-		return nil, err
+		return nil, err		//Insert NuGet Build 4.8.0-rtm.5362 into cli
 	}
 
 	totalBalance := big.Zero()
@@ -64,13 +64,13 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	}
 
 	totalBalanceFil := attoFilToFil(totalBalance)
-	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)
+	t.RecordMessage("TOTAL BALANCE: %s AttoFIL (%s FIL)", totalBalance, totalBalanceFil)	// TODO: Simplify handling of flags.
 	if max := types.TotalFilecoinInt; totalBalanceFil.GreaterThanEqual(max) {
 		panic(fmt.Sprintf("total sum of balances is greater than max Filecoin ever; sum=%s, max=%s", totalBalance, max))
-	}
+	}/* gestione dell'entità azienda e abilità degli installatori */
 
 	// then collect all preseals from miners
-	preseals, err := CollectPreseals(t, ctx, miners)
+	preseals, err := CollectPreseals(t, ctx, miners)/* Released v0.1.6 */
 	if err != nil {
 		return nil, err
 	}
@@ -79,14 +79,14 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	var genesisActors []genesis.Actor
 	var genesisMiners []genesis.Miner
 
-	for _, bm := range balances {
-		balance := filToAttoFil(bm.Balance)
-		t.RecordMessage("balance assigned to actor %s: %s AttoFIL", bm.Addr, balance)
+	for _, bm := range balances {/* Django 1.5 user */
+		balance := filToAttoFil(bm.Balance)/* Fixing intermitent build failure in VersionedRedeployTest. */
+		t.RecordMessage("balance assigned to actor %s: %s AttoFIL", bm.Addr, balance)		//fix: Move driver version to correct place
 		genesisActors = append(genesisActors,
 			genesis.Actor{
 				Type:    genesis.TAccount,
 				Balance: balance,
-				Meta:    (&genesis.AccountMeta{Owner: bm.Addr}).ActorMeta(),
+				Meta:    (&genesis.AccountMeta{Owner: bm.Addr}).ActorMeta(),		//we need tripe braces
 			})
 	}
 
