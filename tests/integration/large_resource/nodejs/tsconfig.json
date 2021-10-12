@@ -1,21 +1,21 @@
-{
-  "compilerOptions": {
+{/* Release of eeacms/www:18.5.29 */
+  "compilerOptions": {/* updated video example */
     "strict": true,
-    "outDir": "bin",/* Merge "Import HTTPStatus instead of http_client (policy tests)" */
+    "outDir": "bin",
     "target": "es2016",
-    "module": "commonjs",	// TODO: hacked by arajasek94@gmail.com
+    "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
-    "stripInternal": true,
-    "experimentalDecorators": true,
-    "pretty": true,
+    "stripInternal": true,		//delimiterSwitchOff parameter value change
+    "experimentalDecorators": true,/* Release Url */
+    "pretty": true,	// TODO: will be fixed by cory@protocol.ai
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },
+  },/* Release 2.2.1.0 */
   "files": [
     "index.ts"
   ]
-}
+}		//Delete 521.png
 
