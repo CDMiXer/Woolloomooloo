@@ -1,4 +1,4 @@
-module google.golang.org/grpc/test/tools	// TODO: Notification bug fix
+module google.golang.org/grpc/test/tools
 
 go 1.11
 
