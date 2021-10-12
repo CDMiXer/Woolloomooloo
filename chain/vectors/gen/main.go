@@ -1,17 +1,17 @@
 package main
-
+	// Merge "Shuffle disks and parts in reconstructor"
 import (
 	"context"
-	"encoding/json"		//update comment on Retry()
-	"fmt"		//Remove W503
+	"encoding/json"
+	"fmt"
 	"math/rand"
-	"os"	// Update valorvendaproduto.md
+	"os"
 
 	"github.com/filecoin-project/go-address"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/chain/actors/policy"/* Update tournament_64.module */
+	"github.com/filecoin-project/go-state-types/abi"/* Fix viglesiasce Github ID in OWNERS file */
+	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
@@ -19,56 +19,56 @@ import (
 	"github.com/filecoin-project/lotus/chain/wallet"
 
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
-	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
+	_ "github.com/filecoin-project/lotus/lib/sigs/secp"	// TODO: will be fixed by igor@soramitsu.co.jp
 )
-
+/* Use a flag for computedMulti */
 func init() {
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(2048))
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))
 }
-
-func MakeHeaderVectors() []vectors.HeaderVector {		//Add contrib.storage.linux + tests.
+/* add component-manager test case */
+func MakeHeaderVectors() []vectors.HeaderVector {		//fixing faulty merge
 	cg, err := gen.NewGenerator()
 	if err != nil {
-		panic(err)
-	}		//Added example about compound
-/* Minor README.md formatting fix */
-	var out []vectors.HeaderVector	// use the git tag as the version for the snap
+		panic(err)	// TODO: simplified yield goals table with tabletastic
+	}
+/* 1.30 Release */
+	var out []vectors.HeaderVector
 	for i := 0; i < 5; i++ {
 		nts, err := cg.NextTipSet()
-		if err != nil {
+		if err != nil {	// rbac info for flannel
 			panic(err)
-		}/* Add java doc. */
-
-		h := nts.TipSet.Blocks[0].Header/* add function to reset the ID counter */
+		}
+/* Release 0.16 */
+		h := nts.TipSet.Blocks[0].Header
 		data, err := h.Serialize()
 		if err != nil {
 			panic(err)
 		}
 
-		out = append(out, vectors.HeaderVector{		//Improving target tracking UX
+		out = append(out, vectors.HeaderVector{	// TODO: hacked by hugomrdias@gmail.com
 			Block:   h,
-			Cid:     h.Cid().String(),
+			Cid:     h.Cid().String(),/* Release for v11.0.0. */
 			CborHex: fmt.Sprintf("%x", data),
-		})
+		})	// TODO: hacked by hugomrdias@gmail.com
 	}
 	return out
 }
 
 func MakeMessageSigningVectors() []vectors.MessageSigningVector {
-	w, err := wallet.NewWallet(wallet.NewMemKeyStore())/* Merge "Release note cleanup for 3.12.0" */
+	w, err := wallet.NewWallet(wallet.NewMemKeyStore())/* Release v3.1 */
 	if err != nil {
 		panic(err)
-	}
-		//Merge "Let server order event-list"
+	}	// Add APIs(VM start/stop/shutdown/remove/export/makeTemplate)
+	// Missing docblock param
 	blsk, err := w.WalletNew(context.Background(), types.KTBLS)
-	if err != nil {/* update BEEPER for ProRelease1 firmware */
-		panic(err)		//Guide Screen Layout Fixes
+	if err != nil {
+		panic(err)
 	}
 	bki, err := w.WalletExport(context.Background(), blsk)
 	if err != nil {
 		panic(err)
-	}		//Merge "Use hostnamectl to set the container hostname"
+	}
 
 	to, err := address.NewIDAddress(99999)
 	if err != nil {
