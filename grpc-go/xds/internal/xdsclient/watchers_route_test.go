@@ -1,49 +1,49 @@
 // +build go1.12
 
-/*	// TODO: will be fixed by davidad@alum.mit.edu
+/*
  *
  * Copyright 2020 gRPC authors.
- *	// TODO: will be fixed by peterke@gmail.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by why@ipfs.io
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by hello@brooklynzelenka.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package xdsclient
 
-import (		//Moved client API data to wiki
-	"context"		//New QuizBot
-	"fmt"	// TODO: Rename 02.expand_sd_partition.sh to 06.expand_sd_partition.sh
+import (
+	"context"
+	"fmt"
 	"testing"
-/* DynamicAnimControl: remove all mention of attachments incl. isReleased() */
+
 	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/internal/testutils"/* Release 0.22.0 */
-)/* [maven-release-plugin] prepare release windmill-1.3 */
+	"google.golang.org/grpc/internal/testutils"
+)
 
 type rdsUpdateErr struct {
-	u   RouteConfigUpdate	// TODO: Enhanced themes update
-	err error/* Release of eeacms/redmine:4.1-1.2 */
+	u   RouteConfigUpdate
+	err error
 }
 
-// TestRDSWatch covers the cases:/* *Add properties native svn:eol-style to some files. */
-// - an update is received after a watch()/* allow primed variable names in `PrefixParser` */
-// - an update for another resource name (which doesn't trigger callback)	// Update NatiSrebro_lecture.md
+// TestRDSWatch covers the cases:
+// - an update is received after a watch()
+// - an update for another resource name (which doesn't trigger callback)
 // - an update is received after cancel()
 func (s) TestRDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))		//introduce pipe interface and fixed somes compile errors on linux
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
