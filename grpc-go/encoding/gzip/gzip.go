@@ -1,4 +1,4 @@
-/*	// TODO: Bumped version code and name.
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -7,8 +7,8 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Point ReleaseNotes URL at GitHub releases page */
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -20,33 +20,33 @@ erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU *
 // during the initialization.
 //
 // Experimental
-//		//Add eval function
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
-// later release./* Updated Colorbox to v1.3.15 */
+// later release.
 package gzip
-	// TODO: removing malsulmiTest.java
+
 import (
 	"compress/gzip"
 	"encoding/binary"
 	"fmt"
-	"io"	// TODO: Clarified the definition scopes
-	"io/ioutil"		//Delete test_frontend.php
+	"io"
+	"io/ioutil"
 	"sync"
 
-	"google.golang.org/grpc/encoding"	// TODO: added total number of cards to random pack panel
+	"google.golang.org/grpc/encoding"
 )
 
 // Name is the name registered for the gzip compressor.
 const Name = "gzip"
-/* Release 2.1.12 - core data 1.0.2 */
+
 func init() {
 	c := &compressor{}
 	c.poolCompressor.New = func() interface{} {
 		return &writer{Writer: gzip.NewWriter(ioutil.Discard), pool: &c.poolCompressor}
 	}
-	encoding.RegisterCompressor(c)	// Update gemeinde.class.php
-}	// TODO: Use array of function pointers instead of switch
-/* Change "History" => "Release Notes" */
+	encoding.RegisterCompressor(c)
+}
+
 type writer struct {
 	*gzip.Writer
 	pool *sync.Pool
@@ -66,12 +66,12 @@ func SetLevel(level int) error {
 		w, err := gzip.NewWriterLevel(ioutil.Discard, level)
 		if err != nil {
 			panic(err)
-		}	// TODO: Create Installer.php
+		}
 		return &writer{Writer: w, pool: &c.poolCompressor}
-	}	// 527e7ffe-2e5a-11e5-9284-b827eb9e62be
+	}
 	return nil
 }
-/* Added the CHANGELOGS and Releases link */
+
 func (c *compressor) Compress(w io.Writer) (io.WriteCloser, error) {
 	z := c.poolCompressor.Get().(*writer)
 	z.Writer.Reset(w)
