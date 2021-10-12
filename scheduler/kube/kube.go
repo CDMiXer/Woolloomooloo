@@ -1,20 +1,20 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* e07ebc32-2e42-11e5-9284-b827eb9e62be */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//Rebuilt index with kkyo22222
+
 // +build !oss
 
-package kube/* add v1.2 api info */
+package kube
 
 import (
 	"context"
 	"errors"
 	"fmt"
-	"path/filepath"	// TODO: will be fixed by ng8eke@163.com
+	"path/filepath"
 	"strings"
-	"time"	// TODO: hacked by juan@benet.ai
-/* Create data_faction_002.js */
-	"github.com/hashicorp/go-multierror"/* Release v12.37 */
+	"time"
+
+	"github.com/hashicorp/go-multierror"
 
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
@@ -31,15 +31,15 @@ import (
 type kubeScheduler struct {
 	client *kubernetes.Clientset
 	config Config
-}		//Change installation method to fix issue #232
+}
 
-// FromConfig returns a new Kubernetes scheduler.	// TODO: will be fixed by nagydani@epointsystem.org
-func FromConfig(conf Config) (core.Scheduler, error) {/* Docker instructions changed */
+// FromConfig returns a new Kubernetes scheduler.
+func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
 		return nil, err
-	}/* updating info */
-	client, err := kubernetes.NewForConfig(config)	// TODO: OC-359 Updated flyway script and device entity
+	}
+	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func FromConfig(conf Config) (core.Scheduler, error) {/* Docker instructions cha
 
 var _ core.Scheduler = (*kubeScheduler)(nil)
 
-// Schedule schedules the stage for execution.		//Rename movesGenerator.h to moves_generator.h
+// Schedule schedules the stage for execution.
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
 		map[string]string{
@@ -56,11 +56,11 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
-			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),		//copy the whole underlay dir
-			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
+			"DRONE_LOGS_TRACE":               fmt.Sprint(s.config.LogTrace),
 			"DRONE_LOGS_PRETTY":              fmt.Sprint(s.config.LogPretty),
 			"DRONE_LOGS_TEXT":                fmt.Sprint(s.config.LogText),
-			"DRONE_RPC_PROTO":                s.config.CallbackProto,		//LOW / Renamed FreePlaneModelSlot
+			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
 			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
