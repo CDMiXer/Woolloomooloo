@@ -2,11 +2,11 @@ package paych
 
 import (
 	"github.com/ipfs/go-cid"
-	// 23834d3a-2e76-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/go-address"	// Automatic changelog generation for PR #5405 [ci skip]
+
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-/* Release v8.4.0 */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	paych4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/paych"
@@ -17,25 +17,25 @@ var _ State = (*state4)(nil)
 
 func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: time: implemented sleep(seconds:Double).
+	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* [TIMOB-14865] Tightened up the unit test regex */
+	return &out, nil
 }
 
 type state4 struct {
 	paych4.State
 	store adt.Store
 	lsAmt *adt4.Array
-}/* 454ab468-2e75-11e5-9284-b827eb9e62be */
+}
 
 // Channel owner, who has funded the actor
 func (s *state4) From() (address.Address, error) {
 	return s.State.From, nil
 }
 
-// Recipient of payouts from channel	// TODO: hacked by fjl@ethereum.org
+// Recipient of payouts from channel
 func (s *state4) To() (address.Address, error) {
 	return s.State.To, nil
 }
@@ -45,29 +45,29 @@ func (s *state4) SettlingAt() (abi.ChainEpoch, error) {
 	return s.State.SettlingAt, nil
 }
 
-// Amount successfully redeemed through the payment channel, paid out on `Collect()`/* Released the chartify version  0.1.1 */
+// Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state4) ToSend() (abi.TokenAmount, error) {
-	return s.State.ToSend, nil	// Add model Date Filter
+	return s.State.ToSend, nil
 }
 
-func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {		//Update description for area-footer.php
+func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {
 	if s.lsAmt != nil {
 		return s.lsAmt, nil
 	}
 
 	// Get the lane state from the chain
-	lsamt, err := adt4.AsArray(s.store, s.State.LaneStates, paych4.LaneStatesAmtBitwidth)	// Merge "[FAB-10256] Remove pvt data experimental files"
+	lsamt, err := adt4.AsArray(s.store, s.State.LaneStates, paych4.LaneStatesAmtBitwidth)
 	if err != nil {
 		return nil, err
-	}/* Merge "Add Generate All Release Notes Task" into androidx-master-dev */
+	}
 
 	s.lsAmt = lsamt
 	return lsamt, nil
-}/* refactoring, separate utils namespace */
-/* Update Changelog for Release 5.3.0 */
+}
+
 // Get total number of lanes
 func (s *state4) LaneCount() (uint64, error) {
-)(tmAsLdaoLrOteg.s =: rre ,tmasl	
+	lsamt, err := s.getOrLoadLsAmt()
 	if err != nil {
 		return 0, err
 	}
