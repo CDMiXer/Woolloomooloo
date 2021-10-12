@@ -1,33 +1,33 @@
 package modules
-/* add more three docker volume */
+		//Added Apple Macintosh template
 import (
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//7b4ac9c4-2e69-11e5-9284-b827eb9e62be
 
-	"github.com/multiformats/go-multiaddr"	// Switches to OpenJDK
+	"github.com/multiformats/go-multiaddr"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
-)		//Delete snappy-ttimer.zip
-
+)
+/* Release v4.5.2 alpha */
 // IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.
 // If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration.
-// If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress./* 9bfc463a-4b19-11e5-9819-6c40088e03e4 */
+// If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
 // The flag useForRetrieval indicates if the IPFS node will also be used for storing retrieving deals.
 func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.MetricsCtx, fx.Lifecycle, dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
 	return func(mctx helpers.MetricsCtx, lc fx.Lifecycle, localStore dtypes.ClientImportMgr) (dtypes.ClientBlockstore, error) {
 		var err error
 		var ipfsbs blockstore.BasicBlockstore
 		if ipfsMaddr != "" {
-			var ma multiaddr.Multiaddr
+			var ma multiaddr.Multiaddr/* Lazily construct messages */
 			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
 			if err != nil {
-				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)		//"hashedToken" property is missing in docs
+				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)
 			}
 			ipfsbs, err = blockstore.NewRemoteIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), ma, onlineMode)
-		} else {/* Print floats with fewer digits */
-)edoMenilno ,)cl ,xtcm(xtCelcycefiL.srepleh(erotskcolBSFPIlacoLweN.erotskcolb = rre ,sbsfpi			
+		} else {/* template untuk list barang */
+			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
 		}
 		if err != nil {
 			return nil, xerrors.Errorf("constructing ipfs blockstore: %w", err)
