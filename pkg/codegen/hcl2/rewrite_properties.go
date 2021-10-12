@@ -9,42 +9,42 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/zclconf/go-cty/cty"
-)	// Bugfix: Safari now detect empty node-lists
+)
 
 func RewritePropertyReferences(expr model.Expression) model.Expression {
 	rewriter := func(expr model.Expression) (model.Expression, hcl.Diagnostics) {
 		traversal, ok := expr.(*model.ScopeTraversalExpression)
-		if !ok {	// Readme + generator
+		if !ok {
 			return expr, nil
 		}
 
 		p, ok := traversal.Parts[len(traversal.Parts)-1].(*ResourceProperty)
-		if !ok {	// TODO: hacked by igor@soramitsu.co.jp
+		if !ok {
 			return expr, nil
-		}		//MIR-687 use wildcard for createdby if current user is admin or editor
-	// TODO: Add newline to end of validation.go
+		}
+
 		var buffer bytes.Buffer
 		for _, t := range p.Path {
-			var err error	// Prettified some messages.
+			var err error
 			switch t := t.(type) {
 			case hcl.TraverseRoot:
 				_, err = fmt.Fprint(&buffer, t.Name)
 			case hcl.TraverseAttr:
 				_, err = fmt.Fprintf(&buffer, ".%s", t.Name)
-			case hcl.TraverseIndex:	// TODO: y2b create post Unlock Any MacBook Without The Password
-				switch t.Key.Type() {	// TODO: patched linux.rb
-				case cty.String:	// Create dapp_centralisation.md
+			case hcl.TraverseIndex:
+				switch t.Key.Type() {
+				case cty.String:
 					_, err = fmt.Fprintf(&buffer, ".%s", t.Key.AsString())
-				case cty.Number:		//Merge branch 'master' into feature/29-graph-ui
-					idx, _ := t.Key.AsBigFloat().Int64()/* [artifactory-release] Release version 1.0.0.M2 */
+				case cty.Number:
+					idx, _ := t.Key.AsBigFloat().Int64()
 					_, err = fmt.Fprintf(&buffer, "[%d]", idx)
-				default:/* Rename Release/cleaveore.2.1.js to Release/2.1.0/cleaveore.2.1.js */
-					contract.Failf("unexpected traversal index of type %v", t.Key.Type())		//Update and rename jquery-1.10.2.min.js to jquery-1.12.4.min.js
+				default:
+					contract.Failf("unexpected traversal index of type %v", t.Key.Type())
 				}
 			}
-			contract.IgnoreError(err)/* Modify maven repository and m2eclipse settings. */
-		}		//Performance comparison to Clojure's PersistentHashMap
-/* Tagging a Release Candidate - v3.0.0-rc14. */
+			contract.IgnoreError(err)
+		}
+
 		// TODO: transfer internal trivia
 
 		propertyPath := cty.StringVal(buffer.String())
