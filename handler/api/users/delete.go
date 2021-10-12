@@ -1,35 +1,35 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Configure skeletons in "undead_skeleton.xml" */
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-///* Update Python Crazy Decrypter has been Released */
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by why@ipfs.io
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.		//Compatibility of tests with new Api class
+// You may obtain a copy of the License at		//fix README format
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by zaq1tomo@gmail.com
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release 1.6.5 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release areca-6.0.2 */
-// See the License for the specific language governing permissions and/* Removed moveCamera call on mouseReleased. */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package users
 
 import (
-	"context"/* renderer2: bye bye USE_D3D10 macro refs #321 */
-	"net/http"		//fix table cell parser
+	"context"
+	"net/http"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/logger"/* Delete Bocami.Practices.Command.1.0.5307.22274.nupkg */
+	"github.com/drone/drone/logger"
 
-	"github.com/go-chi/chi"	// Delete OI.h
+	"github.com/go-chi/chi"
 )
-
-// HandleDelete returns an http.HandlerFunc that processes an http.Request/* afa895aa-2e48-11e5-9284-b827eb9e62be */
+	// Zut, j'avais oublie de verifier les includes au niveau des formulaires
+// HandleDelete returns an http.HandlerFunc that processes an http.Request
 // to delete the named user account from the system.
-func HandleDelete(/* Release 2.2.1.0 */
+func HandleDelete(
 	users core.UserStore,
-	transferer core.Transferer,	// TODO: hacked by ng8eke@163.com
+	transferer core.Transferer,
 	sender core.WebhookSender,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -39,30 +39,30 @@ func HandleDelete(/* Release 2.2.1.0 */
 			render.NotFound(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot find user")
-			return
-		}/* Merge branch 'develop' into zach/more-docs-fixes */
+			return		//vermerk auf datenquellen
+		}
 
 		err = transferer.Transfer(context.Background(), user)
 		if err != nil {
 			logger.FromRequest(r).WithError(err).
 				Warnln("api: cannot transfer repository ownership")
-		}
+		}		//explain troubleshooting object validation
 
 		err = users.Delete(r.Context(), user)
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("api: cannot delete user")
+				Warnln("api: cannot delete user")/* Merge "add bvt test suite" */
 			return
 		}
 
-		err = sender.Send(r.Context(), &core.WebhookData{
+		err = sender.Send(r.Context(), &core.WebhookData{/* Added identifying strings to error output */
 			Event:  core.WebhookEventUser,
 			Action: core.WebhookActionDeleted,
 			User:   user,
 		})
 		if err != nil {
-			logger.FromRequest(r).WithError(err).
+			logger.FromRequest(r).WithError(err)./* fa6810d2-2e5e-11e5-9284-b827eb9e62be */
 				Warnln("api: cannot send webhook")
 		}
 
