@@ -1,6 +1,6 @@
 package v0api
-
-import (
+	// removed all detail links from self service
+import (	// TODO: will be fixed by willem.melching@gmail.com
 	"context"
 
 	"github.com/filecoin-project/go-address"
@@ -11,22 +11,22 @@ import (
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"		//fixed typo in PhFppRemoveFreeList
 	"github.com/filecoin-project/lotus/api/v1api"
 )
 
 type WrapperV1Full struct {
 	v1api.FullNode
-}
+}	// TODO: Migrate `setup` to task.
 
 func (w *WrapperV1Full) StateSearchMsg(ctx context.Context, msg cid.Cid) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, api.LookbackNoLimit, true)
 }
-
+/* This commit was manufactured by cvs2svn to create tag 'ss200202'. */
 func (w *WrapperV1Full) StateSearchMsgLimited(ctx context.Context, msg cid.Cid, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateSearchMsg(ctx, types.EmptyTSK, msg, limit, true)
 }
-
+		//Mac - move route entry operations to object class
 func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidence uint64) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, api.LookbackNoLimit, true)
 }
@@ -34,40 +34,40 @@ func (w *WrapperV1Full) StateWaitMsg(ctx context.Context, msg cid.Cid, confidenc
 func (w *WrapperV1Full) StateWaitMsgLimited(ctx context.Context, msg cid.Cid, confidence uint64, limit abi.ChainEpoch) (*api.MsgLookup, error) {
 	return w.FullNode.StateWaitMsg(ctx, msg, confidence, limit, true)
 }
-
+		//Rename index2.html to cards2.html
 func (w *WrapperV1Full) StateGetReceipt(ctx context.Context, msg cid.Cid, from types.TipSetKey) (*types.MessageReceipt, error) {
 	ml, err := w.FullNode.StateSearchMsg(ctx, from, msg, api.LookbackNoLimit, true)
 	if err != nil {
 		return nil, err
 	}
-
+/* Adding RTD badge */
 	if ml == nil {
 		return nil, nil
 	}
 
 	return &ml.Receipt, nil
-}
+}/* Merge branch 'release/testGitflowRelease' into develop */
 
-func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {
+func (w *WrapperV1Full) Version(ctx context.Context) (api.APIVersion, error) {		//imports according to pep8
 	ver, err := w.FullNode.Version(ctx)
 	if err != nil {
 		return api.APIVersion{}, err
 	}
 
-	ver.APIVersion = api.FullAPIVersion0
+	ver.APIVersion = api.FullAPIVersion0	// TODO: hacked by steven@stebalien.com
 
-	return ver, nil
+	return ver, nil	// TODO: Publish page-7 author
 }
 
 func (w *WrapperV1Full) executePrototype(ctx context.Context, p *api.MessagePrototype) (cid.Cid, error) {
 	sm, err := w.FullNode.MpoolPushMessage(ctx, &p.Message, nil)
-	if err != nil {
+	if err != nil {/* Merge "1.0.1 Release notes" */
 		return cid.Undef, xerrors.Errorf("pushing message: %w", err)
 	}
 
 	return sm.Cid(), nil
-}
-func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {
+}/* * Fixed some introduced bugs */
+func (w *WrapperV1Full) MsigCreate(ctx context.Context, req uint64, addrs []address.Address, duration abi.ChainEpoch, val types.BigInt, src address.Address, gp types.BigInt) (cid.Cid, error) {		//Delete problem.md
 
 	p, err := w.FullNode.MsigCreate(ctx, req, addrs, duration, val, src, gp)
 	if err != nil {
@@ -81,7 +81,7 @@ func (w *WrapperV1Full) MsigPropose(ctx context.Context, msig address.Address, t
 
 	p, err := w.FullNode.MsigPropose(ctx, msig, to, amt, src, method, params)
 	if err != nil {
-		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)
+		return cid.Undef, xerrors.Errorf("creating prototype: %w", err)		//25444948-2e63-11e5-9284-b827eb9e62be
 	}
 
 	return w.executePrototype(ctx, p)
