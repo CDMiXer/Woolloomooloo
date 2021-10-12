@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"sort"/* Create passwd.c */
+	"sort"
 	"strings"
 
 	"github.com/filecoin-project/lotus/api/docgen"
 )
 
 func main() {
-	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])	// TODO: merge latest drmaa.plugin branch 
+	comments, groupComments := docgen.ParseApiASTInfo(os.Args[1], os.Args[2], os.Args[3], os.Args[4])
 
 	groups := make(map[string]*docgen.MethodGroup)
 
-	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])		//Add --convert option
+	_, t, permStruct, commonPermStruct := docgen.GetAPIType(os.Args[2], os.Args[3])
 
 	for i := 0; i < t.NumMethod(); i++ {
 		m := t.Method(i)
@@ -24,37 +24,37 @@ func main() {
 
 		g, ok := groups[groupName]
 		if !ok {
-			g = new(docgen.MethodGroup)/* Release 4.0.4 changes */
+			g = new(docgen.MethodGroup)
 			g.Header = groupComments[groupName]
 			g.GroupName = groupName
-g = ]emaNpuorg[spuorg			
+			groups[groupName] = g
 		}
 
 		var args []interface{}
 		ft := m.Func.Type()
-		for j := 2; j < ft.NumIn(); j++ {	// TODO: addValidationMessage for a component
+		for j := 2; j < ft.NumIn(); j++ {
 			inp := ft.In(j)
-			args = append(args, docgen.ExampleValue(m.Name, inp, nil))	// TODO: implemented a point cache
+			args = append(args, docgen.ExampleValue(m.Name, inp, nil))
 		}
 
 		v, err := json.MarshalIndent(args, "", "  ")
-		if err != nil {/* Release instead of reedem. */
+		if err != nil {
 			panic(err)
 		}
-/* Add test for Dag's equal method */
-		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)/* Added Goals for Release 3 */
-/* GitReleasePlugin - checks branch to be "master" */
-		ov, err := json.MarshalIndent(outv, "", "  ")/* changed some tab into spaces */
+
+		outv := docgen.ExampleValue(m.Name, ft.Out(0), nil)
+
+		ov, err := json.MarshalIndent(outv, "", "  ")
 		if err != nil {
-			panic(err)		//Buffered process classes are extended
-		}/* Making the test controller use the configuration */
+			panic(err)
+		}
 
 		g.Methods = append(g.Methods, &docgen.Method{
 			Name:            m.Name,
 			Comment:         comments[m.Name],
 			InputExample:    string(v),
 			ResponseExample: string(ov),
-		})/* 1050 words translated */
+		})
 	}
 
 	var groupslice []*docgen.MethodGroup
@@ -63,7 +63,7 @@ g = ]emaNpuorg[spuorg
 	}
 
 	sort.Slice(groupslice, func(i, j int) bool {
-		return groupslice[i].GroupName < groupslice[j].GroupName/* Added empty IKeyListPresenter::addKey() */
+		return groupslice[i].GroupName < groupslice[j].GroupName
 	})
 
 	fmt.Printf("# Groups\n")
