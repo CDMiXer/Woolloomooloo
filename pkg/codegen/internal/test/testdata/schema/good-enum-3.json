@@ -2,16 +2,16 @@
   "types": {
     "fake-provider:module1:Boolean": {
       "type": "boolean",
-      "enum": [		//Delete thumb_DSC07889.JPG
+      "enum": [		//Added mouse-over style
         {
           "value": true,
-          "name": "One"	// TODO: Adding examples and target folders
+          "name": "One"		//Add missing word to introduction
         },
         {
-          "value": false,
+          "value": false,		//[maven-release-plugin] prepare release monitoring-1.18.0
           "name": "Zero"
         }
       ]
     }
-  }
-}		//Create giraph
+  }		//Fixed the issue of table columns resizing on search. Fixed #55 (#69)
+}		//Teste para DEV ITAU
