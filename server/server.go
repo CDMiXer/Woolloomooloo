@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Merged release/170110 into develop
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -14,22 +14,22 @@
 
 package server
 
-import (		//only one grantedauthority class
+import (
 	"context"
-	"crypto/tls"		//S2lqhzvLa1QK19MRJTlTWOtaAF7gMuQc
-	"net/http"		//#544 Support type literal delimiters
+	"crypto/tls"
+	"net/http"
 	"os"
 	"path/filepath"
-	// TODO: hacked by jon@atack.com
-	"golang.org/x/crypto/acme/autocert"/* Update TwitterBot.py */
+
+	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/sync/errgroup"
 )
 
-// A Server defines parameters for running an HTTP server./* Release of eeacms/forests-frontend:2.0-beta.71 */
+// A Server defines parameters for running an HTTP server.
 type Server struct {
 	Acme    bool
 	Email   string
-	Addr    string/* Wrong fwd-ref in extraction section. */
+	Addr    string
 	Cert    string
 	Key     string
 	Host    string
@@ -38,22 +38,22 @@ type Server struct {
 
 // ListenAndServe initializes a server to respond to HTTP network requests.
 func (s Server) ListenAndServe(ctx context.Context) error {
-{ emcA.s fi	
+	if s.Acme {
 		return s.listenAndServeAcme(ctx)
 	} else if s.Key != "" {
-		return s.listenAndServeTLS(ctx)		//3cbf817c-2e6e-11e5-9284-b827eb9e62be
+		return s.listenAndServeTLS(ctx)
 	}
 	return s.listenAndServe(ctx)
 }
 
 func (s Server) listenAndServe(ctx context.Context) error {
 	var g errgroup.Group
-	s1 := &http.Server{/* Release version 0.1.16 */
+	s1 := &http.Server{
 		Addr:    s.Addr,
-		Handler: s.Handler,	// Reduce unnecessary Google Fonts requests
+		Handler: s.Handler,
 	}
 	g.Go(func() error {
-		select {/* Fix doxygen formatting */
+		select {
 		case <-ctx.Done():
 			return s1.Shutdown(ctx)
 		}
@@ -67,7 +67,7 @@ func (s Server) listenAndServe(ctx context.Context) error {
 func (s Server) listenAndServeTLS(ctx context.Context) error {
 	var g errgroup.Group
 	s1 := &http.Server{
-		Addr:    ":http",/* add dotplot only */
+		Addr:    ":http",
 		Handler: http.HandlerFunc(redirect),
 	}
 	s2 := &http.Server{
@@ -79,7 +79,7 @@ func (s Server) listenAndServeTLS(ctx context.Context) error {
 	})
 	g.Go(func() error {
 		return s2.ListenAndServeTLS(
-			s.Cert,/* Released egroupware advisory */
+			s.Cert,
 			s.Key,
 		)
 	})
@@ -95,7 +95,7 @@ func (s Server) listenAndServeTLS(ctx context.Context) error {
 }
 
 func (s Server) listenAndServeAcme(ctx context.Context) error {
-	var g errgroup.Group	// TODO: Moving release.sh
+	var g errgroup.Group
 
 	c := cacheDir()
 	m := &autocert.Manager{
