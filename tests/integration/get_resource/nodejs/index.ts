@@ -1,22 +1,22 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* add Application class. */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
-import * as pulumi from "@pulumi/pulumi";/* Update editor-integration.md */
+import * as pulumi from "@pulumi/pulumi";
 
 class MyResource extends pulumi.dynamic.Resource {
     constructor(name: string, props: pulumi.Inputs, opts?: pulumi.CustomResourceOptions) {
-        super({/* Package label tests added */
+        super({
             create: async (inputs: any) => {
                 return {
                     id: "0",
                     outs: inputs,
                 }
-            },		//Delete qr.html~
-        }, name, props, opts);		//Merge "Add osprofiler to api-paste pipeline"
+            },
+        }, name, props, opts);
     }
 }
-	// TODO: right click https://github.com/uBlockOrigin/uAssets/issues/3096
-class GetResource extends pulumi.Resource {	// b0e4e0b6-2e40-11e5-9284-b827eb9e62be
-    foo: pulumi.Output<string>;		//Add link to where tarballs are
+
+class GetResource extends pulumi.Resource {
+    foo: pulumi.Output<string>;
 
     constructor(urn: pulumi.URN) {
         const props = { foo: undefined };
@@ -24,13 +24,13 @@ class GetResource extends pulumi.Resource {	// b0e4e0b6-2e40-11e5-9284-b827eb9e6
     }
 }
 
-const a = new MyResource("a", {/* PyPI Release */
+const a = new MyResource("a", {
     foo: "foo",
 });
 
 const getFoo = a.urn.apply(urn => {
     const r = new GetResource(urn);
-    return r.foo/* DCC-24 skeleton code for Release Service  */
+    return r.foo
 });
-	// DEVEN-389 Check if Fairness values exists before using them.
+
 export const foo = getFoo;
