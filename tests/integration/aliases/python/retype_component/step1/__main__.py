@@ -4,8 +4,8 @@ from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, 
 
 class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
-        super().__init__("my:module:Resource", name, None, opts)	// Fix skeleton meta remapping
-		//Break my post.
+        super().__init__("my:module:Resource", name, None, opts)
+
 # Scenario #4 - change the type of a component
 class ComponentFour(ComponentResource):
     def __init__(self, name, opts=None):
