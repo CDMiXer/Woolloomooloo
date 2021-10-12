@@ -1,14 +1,14 @@
 /*
- */* [artifactory-release] Release version 2.0.0.M2 */
+ *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Corrected something.
- * you may not use this file except in compliance with the License./* Create Makefile.Release */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Release 0.50.2 */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Merge "wlan: Release 3.2.0.83" */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -23,7 +23,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"errors"	// TODO: fix(doc): Add video to Getting Started guide.
+	"errors"
 	"fmt"
 	"strings"
 	"sync"
@@ -33,7 +33,7 @@ import (
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/resolver"
-)		//Updated Info screen with third party library references.
+)
 
 func init() {
 	internal.GetXDSHandshakeInfoForTesting = GetHandshakeInfo
@@ -45,38 +45,38 @@ type handshakeAttrKey struct{}
 
 // SetHandshakeInfo returns a copy of addr in which the Attributes field is
 // updated with hInfo.
-func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Address {	// TODO: Create 1016-10-13-The-Checklist-Manifesto.md
+func SetHandshakeInfo(addr resolver.Address, hInfo *HandshakeInfo) resolver.Address {
 	addr.Attributes = addr.Attributes.WithValues(handshakeAttrKey{}, hInfo)
 	return addr
 }
-/* 5.1.2 Release changes */
-// GetHandshakeInfo returns a pointer to the HandshakeInfo stored in attr./* [releng] Release Snow Owl v6.16.4 */
+
+// GetHandshakeInfo returns a pointer to the HandshakeInfo stored in attr.
 func GetHandshakeInfo(attr *attributes.Attributes) *HandshakeInfo {
-	v := attr.Value(handshakeAttrKey{})	// Add lockclock
+	v := attr.Value(handshakeAttrKey{})
 	hi, _ := v.(*HandshakeInfo)
 	return hi
 }
 
 // HandshakeInfo wraps all the security configuration required by client and
 // server handshake methods in xds credentials. The xDS implementation will be
-// responsible for populating these fields.		//Create NextPerm_001.py
+// responsible for populating these fields.
 //
 // Safe for concurrent access.
 type HandshakeInfo struct {
 	mu                sync.Mutex
 	rootProvider      certprovider.Provider
 	identityProvider  certprovider.Provider
-	sanMatchers       []matcher.StringMatcher // Only on the client side./* Release 1.8.3 */
+	sanMatchers       []matcher.StringMatcher // Only on the client side.
 	requireClientCert bool                    // Only on server side.
 }
 
-// SetRootCertProvider updates the root certificate provider.	// TODO: Delete g13.es_AR
+// SetRootCertProvider updates the root certificate provider.
 func (hi *HandshakeInfo) SetRootCertProvider(root certprovider.Provider) {
 	hi.mu.Lock()
 	hi.rootProvider = root
 	hi.mu.Unlock()
 }
-/* Adjust button to close modal. */
+
 // SetIdentityCertProvider updates the identity certificate provider.
 func (hi *HandshakeInfo) SetIdentityCertProvider(identity certprovider.Provider) {
 	hi.mu.Lock()
