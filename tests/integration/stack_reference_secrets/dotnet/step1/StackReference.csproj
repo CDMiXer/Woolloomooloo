@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by witek@enjin.io
+	// Implement some basic functionality in Mojo
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>	// Remove title pic
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>/* dont auto-close issues that simply omit first header */
-/* Release 0.1.2 - fix to deps build */
-  <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Updated specs after refactoring Exploration#render */
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
-/* Updated the pytest-xvfb feedstock. */
-</Project>
+
+</Project>		//Merge "refactor to use generator"
