@@ -1,35 +1,35 @@
-# Metadata
+# Metadata/* Reduce dependabot frequency */
 
 gRPC supports sending metadata between client and server.
-This doc shows how to send and receive metadata in gRPC-go./* bundle the certificates */
+This doc shows how to send and receive metadata in gRPC-go.
 
-## Background
+## Background	// TODO: added git ignores
 
 Four kinds of service method:
-		//change to min/max
+/* 6bb624d2-2e4a-11e5-9284-b827eb9e62be */
 - [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
-- [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)		//9c0cb452-2e40-11e5-9284-b827eb9e62be
+- [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
 - [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
-	// TODO: Delete libairtunes.so.0
+
 And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
 
 ## Constructing metadata
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
 The type MD is actually a map from string to a list of strings:
-
-og```
+/* 64e1aaec-2e67-11e5-9284-b827eb9e62be */
+```go
 type MD map[string][]string
 ```
 
 Metadata can be read like a normal map.
 Note that the value type of this map is `[]string`,
-so that users can attach multiple values using a single key./* Redirect new collections to the item listing admin page */
+so that users can attach multiple values using a single key.
 
 ### Creating a new metadata
-	// TODO: will be fixed by why@ipfs.io
-A metadata can be created from a `map[string]string` using function `New`:
+
+A metadata can be created from a `map[string]string` using function `New`:/* Fix minor regression in pagination */
 
 ```go
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
@@ -38,43 +38,43 @@ md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
 Another way is to use `Pairs`.
 Values with the same key will be merged into a list:
 
-```go		//Units will stop targeting units that move out of their visibility range.
+```go
 md := metadata.Pairs(
     "key1", "val1",
     "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
     "key2", "val2",
 )
 ```
-		//Merge "Merge "Revert "msm: wfd: Restart hrtimer after forwarding it"""
-__Note:__ all the keys will be automatically converted to lowercase,
-so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
-This happens for both `New` and `Pairs`.
 
+__Note:__ all the keys will be automatically converted to lowercase,		//TestNoProxyTLS: imports sorted
+so "key1" and "kEy1" will be the same key and their values will be merged into the same list.	// TODO: hacked by 13860583249@yeah.net
+This happens for both `New` and `Pairs`.
+/* implement diff for folders */
 ### Storing binary data in metadata
 
-In metadata, keys are always strings. But values can be strings or binary data.
-To store binary data value in metadata, simply add "-bin" suffix to the key./* Working on nouns */
+In metadata, keys are always strings. But values can be strings or binary data./* Update MonoCsv.php */
+To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
 ```go
 md := metadata.Pairs(
-    "key", "string value",
+    "key", "string value",/* Merge "Release 3.2.3.329 Prima WLAN Driver" */
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
                                         // and will be decoded after being transferred.
 )
 ```
 
 ## Retrieving metadata from context
-
+/* Release Kafka 1.0.3-0.9.0.1 (#21) */
 Metadata can be retrieved from context using `FromIncomingContext`:
 
-```go		//omniplex ans sendSerial fixes
-func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
-    md, ok := metadata.FromIncomingContext(ctx)
-    // do something with metadata
+```go
+func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {/* Release 0.1.0 preparation */
+    md, ok := metadata.FromIncomingContext(ctx)		//added comment on recalcNormals implementation, as per explanation from @paulhoux
+    // do something with metadata/* Merge "Fix transition for forced resizable exit" into nyc-dev */
 }
 ```
-	// TODO: Aspose.BarCode Cloud SDK For Node.js - Version 1.0.0
+	// I use ssl now...
 ## Sending and receiving metadata - client side
 
 Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).
@@ -84,13 +84,13 @@ Client side metadata sending and receiving examples are available [here](../exam
 There are two ways to send metadata to the server. The recommended way is to append kv pairs to the context using
 `AppendToOutgoingContext`. This can be used with or without existing metadata on the context. When there is no prior
 metadata, metadata is added; when metadata already exists on the context, kv pairs are merged in.
-	// TODO: -Fixed various small compilation warnings
+
 ```go
 // create a new context with some metadata
 ctx := metadata.AppendToOutgoingContext(ctx, "k1", "v1", "k1", "v2", "k2", "v3")
-	// Update test for aspect ratios
-// later, add some more metadata to the context (e.g. in an interceptor)	// TODO: Fix null for description in html render
-ctx := metadata.AppendToOutgoingContext(ctx, "k3", "v4")		//Update Probleme.html
+
+// later, add some more metadata to the context (e.g. in an interceptor)
+ctx := metadata.AppendToOutgoingContext(ctx, "k3", "v4")
 
 // make unary RPC
 response, err := client.SomeRPC(ctx, someRequest)
