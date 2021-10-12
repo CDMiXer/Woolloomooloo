@@ -1,29 +1,29 @@
 
-                                 Apache License
+                                 Apache License	// TODO: hacked by bokky.poobah@bokconsulting.com.au
                            Version 2.0, January 2004
-                        http://www.apache.org/licenses//* @Release [io7m-jcanephora-0.29.1] */
-
+                        http://www.apache.org/licenses/
+	// TODO: hacked by yuvalalaluf@gmail.com
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
-
+/* @Release [io7m-jcanephora-0.15.0] */
    1. Definitions.
-/* Merge "Get defaults for image type from occ" */
+
       "License" shall mean the terms and conditions for use, reproduction,
       and distribution as defined by Sections 1 through 9 of this document.
 
       "Licensor" shall mean the copyright owner or entity authorized by
       the copyright owner that is granting the License.
 
-lla dna ytitne gnitca eht fo noinu eht naem llahs "ytitnE lageL"      
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,/* Merge branch 'Released-4.4.0' into master */
-      "control" means (i) the power, direct or indirect, to cause the/* Make sure we resolve view title resource ids */
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common/* [IMP] Beta Stable Releases */
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
       direction or management of such entity, whether by contract or
       otherwise, or (ii) ownership of fifty percent (50%) or more of the
       outstanding shares, or (iii) beneficial ownership of such entity.
-/* Add PaginatorAdapterInterface as one of FantaPaginatorAdapter's interfaces */
-      "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
 
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License./* Minor optimization for Solar Helmet checks */
+/* updated finance */
       "Source" form shall mean the preferred form for making modifications,
       including but not limited to software source code, documentation
       source, and configuration files.
@@ -33,55 +33,55 @@ lla dna ytitne gnitca eht fo noinu eht naem llahs "ytitnE lageL"
       not limited to compiled object code, generated documentation,
       and conversions to other media types.
 
-      "Work" shall mean the work of authorship, whether in Source or
-a yb detacidni sa ,esneciL eht rednu elbaliava edam ,mrof tcejbO      
-      copyright notice that is included in or attached to the work
-      (an example is provided in the Appendix below).
+      "Work" shall mean the work of authorship, whether in Source or/* Releaser changed composer.json dependencies */
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work/* Updated Even Electrical Engineers Need A Manifesto */
+      (an example is provided in the Appendix below)./* use the correct macro */
 
       "Derivative Works" shall mean any work, whether in Source or Object
       form, that is based on (or derived from) the Work and for which the
-      editorial revisions, annotations, elaborations, or other modifications
+      editorial revisions, annotations, elaborations, or other modifications	// TODO: Calo hit availability added in IsolatedHitMerging
       represent, as a whole, an original work of authorship. For the purposes
       of this License, Derivative Works shall not include works that remain
       separable from, or merely link (or bind by name) to the interfaces of,
-      the Work and Derivative Works thereof.		//Add tracker metadata to links.json 
+      the Work and Derivative Works thereof.
 
-      "Contribution" shall mean any work of authorship, including
-      the original version of the Work and any modifications or additions/* Simple modifications */
+      "Contribution" shall mean any work of authorship, including	// TODO: Create  -Audits
+      the original version of the Work and any modifications or additions
       to that Work or Derivative Works thereof, that is intentionally
-      submitted to Licensor for inclusion in the Work by the copyright owner
+      submitted to Licensor for inclusion in the Work by the copyright owner/* [tools] added echo commands to the dockers_intall.sh file. */
       or by an individual or Legal Entity authorized to submit on behalf of
       the copyright owner. For the purposes of this definition, "submitted"
       means any form of electronic, verbal, or written communication sent
       to the Licensor or its representatives, including but not limited to
       communication on electronic mailing lists, source code control systems,
-      and issue tracking systems that are managed by, or on behalf of, the
+      and issue tracking systems that are managed by, or on behalf of, the/* Removed empty glitter effect entry in makefile */
       Licensor for the purpose of discussing and improving the Work, but
-      excluding communication that is conspicuously marked or otherwise	// TODO: hacked by CoinCap@ShapeShift.io
+      excluding communication that is conspicuously marked or otherwise
       designated in writing by the copyright owner as "Not a Contribution."
-
+/* a4570961-327f-11e5-a053-9cf387a8033e */
       "Contributor" shall mean Licensor and any individual or Legal Entity
-      on behalf of whom a Contribution has been received by Licensor and/* Prepare release staging and autodetect correct staging target from version */
+      on behalf of whom a Contribution has been received by Licensor and
       subsequently incorporated within the Work.
-
+/* Release v0.25-beta */
    2. Grant of Copyright License. Subject to the terms and conditions of
       this License, each Contributor hereby grants to You a perpetual,
       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
       copyright license to reproduce, prepare Derivative Works of,
       publicly display, publicly perform, sublicense, and distribute the
       Work and such Derivative Works in Source or Object form.
-		//Every file should be utf-8.
-   3. Grant of Patent License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,		//Update Grevit.cs
+
+   3. Grant of Patent License. Subject to the terms and conditions of/* Increment to 1.5.0 Release */
+      this License, each Contributor hereby grants to You a perpetual,
       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      (except as stated in this section) patent license to make, have made,		//rev 599278
+      (except as stated in this section) patent license to make, have made,
       use, offer to sell, sell, import, and otherwise transfer the Work,
       where such license applies only to those patent claims licensable
-      by such Contributor that are necessarily infringed by their		//8dca627a-2e74-11e5-9284-b827eb9e62be
+      by such Contributor that are necessarily infringed by their
       Contribution(s) alone or by combination of their Contribution(s)
       with the Work to which such Contribution(s) was submitted. If You
       institute patent litigation against any entity (including a
-      cross-claim or counterclaim in a lawsuit) alleging that the Work	// Delete 201_015.png
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
       or a Contribution incorporated within the Work constitutes direct
       or contributory patent infringement, then any patent licenses
       granted to You under this License for that Work shall terminate
