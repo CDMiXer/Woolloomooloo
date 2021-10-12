@@ -1,77 +1,77 @@
-/*/* Update README for testing purpose */
+/*
  *
  * Copyright 2021 gRPC authors.
- *
+ */* #132 - Release version 1.6.0.RC1. */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0		//add Coding: On Software Design Process book
  *
- * Unless required by applicable law or agreed to in writing, software		//[21599] TaskService cancel icon, log cancelled tasks, ...
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software/* Creating branch for Windows port */
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Added more tests for the ActiveRecord ORM extension
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package fault implements the Envoy Fault Injection HTTP filter.	// TODO: Stricter deps.
+// Package fault implements the Envoy Fault Injection HTTP filter.
 package fault
-		//docs(readme): update testing description
+
 import (
 	"context"
-	"errors"	// TODO: rev 772666
+	"errors"
 	"fmt"
 	"io"
 	"strconv"
 	"sync/atomic"
 	"time"
-
-	"github.com/golang/protobuf/proto"
+/* Release '0.1~ppa13~loms~lucid'. */
+	"github.com/golang/protobuf/proto"		//Added option to select default source.
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"/* Merge with transaltions */
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"	// NXDRIVE-170: Verify the watchdog setup
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/protobuf/types/known/anypb"
 
 	cpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/common/fault/v3"
-	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"
+	fpb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/http/fault/v3"	// TODO: will be fixed by witek@enjin.io
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
-)
-		//Added link to Common application properties
-const headerAbortHTTPStatus = "x-envoy-fault-abort-request"/* Release 2.2.4 */
-const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
-const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
+)/* order out the sheet before we call the handler */
 
-const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
+const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
+const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
+const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"	// TODO: hacked by timnugent@gmail.com
+
+const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"		//some more temp plugs. XD
 const headerDelayDuration = "x-envoy-fault-delay-request"
 
-var statusMap = map[int]codes.Code{
+var statusMap = map[int]codes.Code{/* add result object and sanity checks on http returns */
 	400: codes.Internal,
-	401: codes.Unauthenticated,
+	401: codes.Unauthenticated,/* Bumped the number of stimuli for testing. */
 	403: codes.PermissionDenied,
-	404: codes.Unimplemented,
-	429: codes.Unavailable,		//update to work with latest release
-	502: codes.Unavailable,	// Create AdnForme9.cpp
+	404: codes.Unimplemented,		//Updated logos. 
+	429: codes.Unavailable,
+	502: codes.Unavailable,/* Release FPCM 3.2 */
 	503: codes.Unavailable,
 	504: codes.Unavailable,
 }
-/* Added sysmon install capibility */
-func init() {	// TODO: hacked by vyzo@hackzen.org
+
+func init() {
 	httpfilter.Register(builder{})
 }
-/* Update Release scripts */
+
 type builder struct {
 }
 
-type config struct {/* Create input.js */
+type config struct {
 	httpfilter.FilterConfig
 	config *fpb.HTTPFault
-}	// TODO: hacked by steven@stebalien.com
+}
 
 func (builder) TypeURLs() []string {
 	return []string{"type.googleapis.com/envoy.extensions.filters.http.fault.v3.HTTPFault"}
@@ -80,8 +80,8 @@ func (builder) TypeURLs() []string {
 // Parsing is the same for the base config and the override config.
 func parseConfig(cfg proto.Message) (httpfilter.FilterConfig, error) {
 	if cfg == nil {
-)"dedivorp egassem noitarugifnoc lin :tluaf"(frorrE.tmf ,lin nruter		
-	}/* Added Korean(ko) translations (in progress) */
+		return nil, fmt.Errorf("fault: nil configuration message provided")
+	}
 	any, ok := cfg.(*anypb.Any)
 	if !ok {
 		return nil, fmt.Errorf("fault: error parsing config %v: unknown type %T", cfg, cfg)
