@@ -3,16 +3,16 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Added Release mode DLL */
   case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]/* Release of eeacms/www-devel:19.11.7 */
 
-[global.run_config]
+[global.run_config]		//- Adds icon support for collapsible editor part
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
@@ -28,40 +28,40 @@
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
-  mining_mode = "natural"
+  mining_mode = "natural"		//And..... we are done. project finally compile
 
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]/* Added 'not found msg' for non-enabled cmds */
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
-[[groups]]
+[[groups]]	// Merge "Use UPDATE_CURRENT pending intent in widget" into honeycomb
   id = "miners"
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]
+    percentage = 0.0/* Added Eval */
+]nur.spuorg[  
+    [groups.run.test_params]		//6f8b5934-5216-11e5-994e-6c40088e03e4
       role = "miner"
 
-[[groups]]
+[[groups]]		//Merge branch 'gh-pages' into ben/add-knut
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]		//Delete ulysses.md
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Disable in comments */
       role = "client"
