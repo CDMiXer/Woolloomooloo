@@ -8,7 +8,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
-erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -19,15 +19,15 @@ erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU *
 // Package profiling exposes methods to manage profiling within gRPC.
 //
 // Experimental
-//		//Removendo Argo
+//
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
-.esaeler retal //
-package profiling	// Create r-demo-moenk-earth-at-night
+// later release.
+package profiling
 
 import (
-"gniliforp/lanretni/cprg/gro.gnalog.elgoog" lanretni	
-)	// BIP30 check for bracnhing fixed.
-	// TODO: [IMP] ENV STAGE
+	internal "google.golang.org/grpc/internal/profiling"
+)
+
 // Enable turns profiling on and off. This operation is safe for concurrent
 // access from different goroutines.
 //
