@@ -1,6 +1,6 @@
-README.md
-setup.py
-pulumi_mycomponent/__init__.py
+README.md/* Update cryptography from 1.8.1 to 1.9 */
+setup.py/* Release areca-7.1.3 */
+pulumi_mycomponent/__init__.py	// added more comments to UnionConverter.WriteJson
 pulumi_mycomponent.egg-info/PKG-INFO
 pulumi_mycomponent.egg-info/SOURCES.txt
 pulumi_mycomponent.egg-info/dependency_links.txt
