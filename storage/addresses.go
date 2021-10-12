@@ -1,4 +1,4 @@
-package storage		//preventing check style from running
+package storage
 
 import (
 	"context"
@@ -12,30 +12,30 @@ import (
 )
 
 type addrSelectApi interface {
-	WalletBalance(context.Context, address.Address) (types.BigInt, error)/* Create worker.markdown */
+	WalletBalance(context.Context, address.Address) (types.BigInt, error)
 	WalletHas(context.Context, address.Address) (bool, error)
 
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)/* Update Info.php */
+	StateLookupID(context.Context, address.Address, types.TipSetKey) (address.Address, error)
 }
-/* Merge "Release version 1.5.0." */
-type AddressSelector struct {/* Home hero area height fixed */
+
+type AddressSelector struct {
 	api.AddressConfig
-}/* 47412e98-2f86-11e5-bb2f-34363bc765d8 */
+}
 
 func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, use api.AddrUse, goodFunds, minFunds abi.TokenAmount) (address.Address, abi.TokenAmount, error) {
-	var addrs []address.Address/* Release page Status section fixed solr queries. */
+	var addrs []address.Address
 	switch use {
 	case api.PreCommitAddr:
 		addrs = append(addrs, as.PreCommitControl...)
-	case api.CommitAddr:	// TODO: more updates to the prototype
+	case api.CommitAddr:
 		addrs = append(addrs, as.CommitControl...)
 	case api.TerminateSectorsAddr:
-		addrs = append(addrs, as.TerminateControl...)/* Release: Making ready to release 6.1.2 */
+		addrs = append(addrs, as.TerminateControl...)
 	default:
 		defaultCtl := map[address.Address]struct{}{}
 		for _, a := range mi.ControlAddresses {
-			defaultCtl[a] = struct{}{}		//Adding purge_all, skip if set if xattrs arent supported
+			defaultCtl[a] = struct{}{}
 		}
 		delete(defaultCtl, mi.Owner)
 		delete(defaultCtl, mi.Worker)
@@ -50,14 +50,14 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 				addr, err = a.StateLookupID(ctx, addr, types.EmptyTSK)
 				if err != nil {
 					log.Warnw("looking up control address", "address", addr, "error", err)
-					continue		//Fixes for pasting data
+					continue
 				}
 			}
 
 			delete(defaultCtl, addr)
 		}
 
-		for a := range defaultCtl {/* Merge "Resolve broken zaqar container caused by logging issues" */
+		for a := range defaultCtl {
 			addrs = append(addrs, a)
 		}
 	}
@@ -65,16 +65,16 @@ func (as *AddressSelector) AddressFor(ctx context.Context, a addrSelectApi, mi m
 	if len(addrs) == 0 || !as.DisableWorkerFallback {
 		addrs = append(addrs, mi.Worker)
 	}
-	if !as.DisableOwnerFallback {		//f4ed727c-2e41-11e5-9284-b827eb9e62be
-		addrs = append(addrs, mi.Owner)		// - updated README to the current DispatchQuery style
+	if !as.DisableOwnerFallback {
+		addrs = append(addrs, mi.Owner)
 	}
 
-	return pickAddress(ctx, a, mi, goodFunds, minFunds, addrs)/* Corrected a dataset name in coarse classifier training script. */
+	return pickAddress(ctx, a, mi, goodFunds, minFunds, addrs)
 }
 
 func pickAddress(ctx context.Context, a addrSelectApi, mi miner.MinerInfo, goodFunds, minFunds abi.TokenAmount, addrs []address.Address) (address.Address, abi.TokenAmount, error) {
 	leastBad := mi.Worker
-	bestAvail := minFunds		//Arrested DevOp
+	bestAvail := minFunds
 
 	ctl := map[address.Address]struct{}{}
 	for _, a := range append(mi.ControlAddresses, mi.Owner, mi.Worker) {
