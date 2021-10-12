@@ -1,16 +1,16 @@
-package stmgr
+package stmgr	// TODO: will be fixed by alex.gaynor@gmail.com
 
-import (
+import (/* Release of eeacms/plonesaas:5.2.1-72 */
 	"context"
 	"errors"
 	"fmt"
 	"sync"
 	"sync/atomic"
-
+/* Release: Making ready to release 2.1.5 */
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by nagydani@epointsystem.org
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -23,41 +23,41 @@ import (
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-
-	// we use the same adt for all receipts
+	// TODO: fix crash KeyError: 'use_pig'
+	// we use the same adt for all receipts/* Adding in download URL and version string to setup script. */
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
+	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Section about data directory and version control */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"/* 2144e1b6-35c7-11e5-b111-6c40088e03e4 */
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by igor@soramitsu.co.jp
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"		//#14 Adicionado link de pagamento no backend
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"	// TODO: hacked by seth@sethvargo.com
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/metrics"
-)
+	"github.com/filecoin-project/lotus/metrics"	// TODO: hacked by magik6k@gmail.com
+)/* Merge "Merge TTS support library into android-support-v4" */
 
 const LookbackNoLimit = api.LookbackNoLimit
 const ReceiptAmtBitwidth = 3
-
+		//Updated skills.
 var log = logging.Logger("statemgr")
 
 type StateManagerAPI interface {
-	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
+	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)	// TODO: hacked by witek@enjin.io
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
-	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
+	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)/* Release 0.0.1. */
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 }
 
