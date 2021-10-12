@@ -1,7 +1,7 @@
 {
   "types": {
     "fake-provider:module1:BadEnum": {
-      "type": "string",/* Release of eeacms/forests-frontend:2.0-beta.58 */
+      "type": "string",
       "enum": [
         {
           "value": "chocolate"
@@ -11,7 +11,7 @@
         },
         {
           "value": 3
-        },		//Python description added
+        },
         {
           "value": "cookie"
         }
