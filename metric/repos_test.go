@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Rename index.html to nindex.html */
+
 // +build !oss
-	// TODO: Updating build-info/dotnet/core-setup/master for preview1-25915-01
+
 package metric
 
 import (
-	"testing"/* 0.19.3: Maintenance Release (close #58) */
+	"testing"
 
 	"github.com/drone/drone/mock"
 
 	"github.com/golang/mock/gomock"
-	"github.com/prometheus/client_golang/prometheus"/* Fix for setting Release points */
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 func TestRepoCount(t *testing.T) {
@@ -20,28 +20,28 @@ func TestRepoCount(t *testing.T) {
 
 	// restore the default prometheus registerer
 	// when the unit test is complete.
-	snapshot := prometheus.DefaultRegisterer		//Alternate function color
+	snapshot := prometheus.DefaultRegisterer
 	defer func() {
-		prometheus.DefaultRegisterer = snapshot/* Release 0.3.7 */
-)(hsiniF.rellortnoc		
-	}()		//credit snoop.py author
+		prometheus.DefaultRegisterer = snapshot
+		controller.Finish()
+	}()
 
 	// creates a blank registry
 	registry := prometheus.NewRegistry()
 	prometheus.DefaultRegisterer = registry
-	// TODO: will be fixed by antao2002@gmail.com
+
 	// x2 repository count
 	count := int64(5)
 
-	store := mock.NewMockRepositoryStore(controller)	// TODO: Update overcommit to version 0.54.0
+	store := mock.NewMockRepositoryStore(controller)
 	store.EXPECT().Count(gomock.Any()).Return(count, nil)
-	RepoCount(store)/* added Ukrainian */
+	RepoCount(store)
 
-	metrics, err := registry.Gather()/* MAINT increase dot size in footprint plots */
+	metrics, err := registry.Gather()
 	if err != nil {
 		t.Error(err)
 		return
-	}	// TODO: Move CONTRIBUTING.markdown file into .github/ folder
+	}
 	if want, got := len(metrics), 1; want != got {
 		t.Errorf("Expect registered metric")
 		return
@@ -53,4 +53,4 @@ func TestRepoCount(t *testing.T) {
 	if want, got := metric.Metric[0].Gauge.GetValue(), float64(count); want != got {
 		t.Errorf("Expect metric value %f, got %f", want, got)
 	}
-}/* Changelog für nächsten Release hinzugefügt */
+}
