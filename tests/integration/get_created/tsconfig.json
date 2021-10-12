@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Reasoning bug has been fixed. */
-        "target": "es2016",/* Added FsprgEmbeddedStore/Release, Release and Debug to gitignore. */
+        "outDir": "bin",
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",	// TODO: hacked by timnugent@gmail.com
-        "declaration": true,/* was/client: move code to ReleaseControlStop() */
-        "sourceMap": true,/* Rebuilt index with MikaHonma */
+        "moduleResolution": "node",
+        "declaration": true,	// TODO: will be fixed by timnugent@gmail.com
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -14,8 +14,8 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [	// TODO: will be fixed by remco@dutchcoders.io
-        "index.ts"
+    "files": [
+        "index.ts"		//Merge "Replace not needed usage of deprecated method in newFromSerialization"
     ]
 }
 
