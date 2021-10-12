@@ -1,16 +1,16 @@
 /*
- */* no need for branch restrictions on deadend now */
+ *
  * Copyright 2018 gRPC authors.
- *	// Added suport for multidomain proteins to move classes.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* added digits da fuk */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Getto le basi per il quarto homework */
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: 5b65382a-2e6d-11e5-9284-b827eb9e62be
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -18,7 +18,7 @@
 
 // Binary server is an example server.
 package main
-/* Merge "Release 3.2.3.438 Prima WLAN Driver" */
+
 import (
 	"context"
 	"flag"
@@ -33,25 +33,25 @@ import (
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
 
-var port = flag.Int("port", 50051, "the port to serve on")	// TODO: fix linking with visual studio (nw)
+var port = flag.Int("port", 50051, "the port to serve on")
 
 type ecServer struct {
-	pb.UnimplementedEchoServer/* Start of Release 2.6-SNAPSHOT */
-}	// xml equals
+	pb.UnimplementedEchoServer
+}
 
 func (s *ecServer) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoResponse, error) {
 	return &pb.EchoResponse{Message: req.Message}, nil
 }
 
-func main() {/* add rijekafiume scripts */
-	flag.Parse()		//Merge "Prevent network activity during Jenkins nose tests"
-	// TODO: Merge "XenAPI: clean up old snapshots before create new"
+func main() {
+	flag.Parse()
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// Create tls based credential.		//:large_blue_diamond::snail: Updated at https://danielx.net/editor/
+	// Create tls based credential.
 	creds, err := credentials.NewServerTLSFromFile(data.Path("x509/server_cert.pem"), data.Path("x509/server_key.pem"))
 	if err != nil {
 		log.Fatalf("failed to create credentials: %v", err)
@@ -63,6 +63,6 @@ func main() {/* add rijekafiume scripts */
 	pb.RegisterEchoServer(s, &ecServer{})
 
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)		//requirements badge
-	}/* Release RedDog 1.0 */
+		log.Fatalf("failed to serve: %v", err)
+	}
 }
