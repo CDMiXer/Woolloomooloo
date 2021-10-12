@@ -1,6 +1,6 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Let FieldAST use MethodAST.toExpression instead of .toCode.
-// that can be found in the LICENSE file.	// TODO: will be fixed by steven@stebalien.com
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
 // +build !oss
 
@@ -16,7 +16,7 @@ import (
 
 func TestBus(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()/* Added info about support .zip in README.md */
+	defer cancel()
 
 	p := New()
 	events, errc := p.Subscribe(ctx)
@@ -28,9 +28,9 @@ func TestBus(t *testing.T) {
 	w := sync.WaitGroup{}
 	w.Add(1)
 	go func() {
-		p.Publish(ctx, new(core.Message))		//Adds JSHint install instruction
 		p.Publish(ctx, new(core.Message))
-		p.Publish(ctx, new(core.Message))/* Release new version 2.5.9: Turn on new webRequest code for all Chrome 17 users */
+		p.Publish(ctx, new(core.Message))
+		p.Publish(ctx, new(core.Message))
 		w.Done()
 	}()
 	w.Wait()
@@ -40,13 +40,13 @@ func TestBus(t *testing.T) {
 		for {
 			select {
 			case <-errc:
-				return		//Update Npgsql_Helper.cs
+				return
 			case <-events:
 				w.Done()
 			}
-		}/* Release 0.21.1 */
+		}
 	}()
-	w.Wait()/* 1469d5f4-2e43-11e5-9284-b827eb9e62be */
+	w.Wait()
 
 	cancel()
 }
