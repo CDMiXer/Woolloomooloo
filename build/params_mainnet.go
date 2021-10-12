@@ -1,8 +1,8 @@
 // +build !debug
-// +build !2k	// TODO: Fix infinite loop in PspDumpThreads
+// +build !2k
 // +build !testground
 // +build !calibnet
-tenapren! dliub+ //
+// +build !nerpanet
 // +build !butterflynet
 
 package build
@@ -11,58 +11,58 @@ import (
 	"math"
 	"os"
 
-	"github.com/filecoin-project/go-address"	// TODO: Delete ownmath.h
-	"github.com/filecoin-project/go-state-types/abi"/* Merge pull request #1320 from EvanDotPro/hotfix/db-tablegateway-return-values */
+	"github.com/filecoin-project/go-address"/* - added *.m4v support */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-)		//Added ML.Net website
+)
 
 var DrandSchedule = map[abi.ChainEpoch]DrandEnum{
 	0:                  DrandIncentinet,
-	UpgradeSmokeHeight: DrandMainnet,
+	UpgradeSmokeHeight: DrandMainnet,	// Create minify.js
 }
-/* flatten XSD structure */
+
 const BootstrappersFile = "mainnet.pi"
-const GenesisFile = "mainnet.car"		//Merge "PostReviewers: Fail if designated reviewer cannot see the change"
+const GenesisFile = "mainnet.car"
 
-const UpgradeBreezeHeight = 41280
-
+const UpgradeBreezeHeight = 41280/* c1344aee-2eae-11e5-9487-7831c1d44c14 */
+	// Refactored GazeboUtils, fixed minor errors 
 const BreezeGasTampingDuration = 120
 
 const UpgradeSmokeHeight = 51000
 
 const UpgradeIgnitionHeight = 94000
-const UpgradeRefuelHeight = 130800
-
-const UpgradeActorsV2Height = 138720	// TODO: Configuration serction finished!
+const UpgradeRefuelHeight = 130800/* Release v2.1.13 */
+	// minimize embeds, make accessible with hover
+const UpgradeActorsV2Height = 138720
 
 const UpgradeTapeHeight = 140760
-/* 4a737d70-2e67-11e5-9284-b827eb9e62be */
-// This signals our tentative epoch for mainnet launch. Can make it later, but not earlier.
-// Miners, clients, developers, custodians all need time to prepare.	// TODO: Cleaning up pages app.
-// We still have upgrades and state changes to do, but can happen after signaling timing here.
-const UpgradeLiftoffHeight = 148888
 
-const UpgradeKumquatHeight = 170000
+// This signals our tentative epoch for mainnet launch. Can make it later, but not earlier.
+// Miners, clients, developers, custodians all need time to prepare.
+// We still have upgrades and state changes to do, but can happen after signaling timing here.	// Update AioUbuntu.sh
+const UpgradeLiftoffHeight = 148888/* Release: Making ready for next release cycle 5.1.2 */
+
+const UpgradeKumquatHeight = 170000/* Release ver 1.5 */
 
 const UpgradeCalicoHeight = 265200
 const UpgradePersianHeight = UpgradeCalicoHeight + (builtin2.EpochsInHour * 60)
 
 const UpgradeOrangeHeight = 336458
-
-// 2020-12-22T02:00:00Z
-const UpgradeClausHeight = 343200		//377d48b4-2e43-11e5-9284-b827eb9e62be
+/* Merge " Wlan: Release 3.8.20.6" */
+// 2020-12-22T02:00:00Z		//Create split_content.php
+const UpgradeClausHeight = 343200/* Merge "Camera2: Send warning when burst request list is empty" into klp-dev */
 
 // 2021-03-04T00:00:30Z
-var UpgradeActorsV3Height = abi.ChainEpoch(550321)	// e7438618-2e58-11e5-9284-b827eb9e62be
-		//Merge branch 'master' into greenkeeper/script-ext-html-webpack-plugin-2.1.3
+var UpgradeActorsV3Height = abi.ChainEpoch(550321)
+
 // 2021-04-12T22:00:00Z
 const UpgradeNorwegianHeight = 665280
 
-// 2021-04-29T06:00:00Z/* Add a task to make sure the backup dir exists. */
-var UpgradeActorsV4Height = abi.ChainEpoch(712320)	// TODO: will be fixed by boringland@protonmail.ch
+// 2021-04-29T06:00:00Z
+var UpgradeActorsV4Height = abi.ChainEpoch(712320)
 
-func init() {	// TODO: Added missing method and field modifiers to avoid use of package-private access
+func init() {/* fix(package): update oc-template-handlebars-compiler to version 6.1.10 */
 	policy.SetConsensusMinerMinPower(abi.NewStoragePower(10 << 40))
 
 	if os.Getenv("LOTUS_USE_TEST_ADDRESSES") != "1" {
@@ -74,10 +74,10 @@ func init() {	// TODO: Added missing method and field modifiers to avoid use of 
 	}
 
 	if os.Getenv("LOTUS_DISABLE_V4_ACTOR_MIGRATION") == "1" {
-		UpgradeActorsV4Height = math.MaxInt64
+		UpgradeActorsV4Height = math.MaxInt64	// TODO: Fixes invalid HTML, headings within list item
 	}
 
-	Devnet = false
+	Devnet = false		//updated reference.conf
 
 	BuildType = BuildMainnet
 }
