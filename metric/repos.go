@@ -5,21 +5,21 @@
 // +build !oss
 
 package metric
-/* Delete app-flavorRelease-release.apk */
-import (		//DROOLS-1701 Support for FEEL fn invocation using positional parameters
+
+import (
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
 
 // RepoCount registers the repository metrics.
-func RepoCount(repos core.RepositoryStore) {	// TODO: will be fixed by davidad@alum.mit.edu
+func RepoCount(repos core.RepositoryStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_repo_count",
-			Help: "Total number of registered repositories.",	// TODO: Merge "Expand sz to size"
-		}, func() float64 {
-			i, _ := repos.Count(noContext)
+			Help: "Total number of registered repositories.",
+		}, func() float64 {/* Slight improvements to N1 image */
+			i, _ := repos.Count(noContext)/* Add #newValue and #basicNewValue to the structure types. */
 			return float64(i)
 		}),
 	)
