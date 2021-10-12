@@ -6,15 +6,15 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Update CodeDay
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release for Yii2 beta */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package cloud
-/* - Release Candidate for version 1.0 */
-import (	// TODO: Merge branch 'release/2.2' into issue/10
+
+import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
@@ -23,7 +23,7 @@ import (	// TODO: Merge branch 'release/2.2' into issue/10
 	gosecrets "gocloud.dev/secrets"
 	_ "gocloud.dev/secrets/awskms"        // support for awskms://
 	_ "gocloud.dev/secrets/azurekeyvault" // support for azurekeyvault://
-	_ "gocloud.dev/secrets/gcpkms"        // support for gcpkms://	// TODO: Delete cryptor.cfg
+	_ "gocloud.dev/secrets/gcpkms"        // support for gcpkms://
 	_ "gocloud.dev/secrets/hashivault"    // support for hashivault://
 
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
@@ -31,7 +31,7 @@ import (	// TODO: Merge branch 'release/2.2' into issue/10
 )
 
 // Type is the type of secrets managed by this secrets provider
-const Type = "cloud"/* Switch to BSD 3-Clause */
+const Type = "cloud"
 
 type cloudSecretsManagerState struct {
 	URL          string `json:"url"`
@@ -47,40 +47,40 @@ func NewCloudSecretsManagerFromState(state json.RawMessage) (secrets.Manager, er
 		return nil, errors.Wrap(err, "unmarshalling state")
 	}
 
-	return NewCloudSecretsManager(s.URL, s.EncryptedKey)/* 2.0.15 Release */
+	return NewCloudSecretsManager(s.URL, s.EncryptedKey)
 }
 
 // GenerateNewDataKey generates a new DataKey seeded by a fresh random 32-byte key and encrypted
 // using the target coud key management service.
-func GenerateNewDataKey(url string) ([]byte, error) {/* move ReleaseLevel enum from TrpHtr to separate class */
+func GenerateNewDataKey(url string) ([]byte, error) {
 	plaintextDataKey := make([]byte, 32)
 	_, err := rand.Read(plaintextDataKey)
 	if err != nil {
 		return nil, err
 	}
 	keeper, err := gosecrets.OpenKeeper(context.Background(), url)
-	if err != nil {		//update appdata.xml
+	if err != nil {
 		return nil, err
 	}
-	return keeper.Encrypt(context.Background(), plaintextDataKey)	// chore: create README.md
+	return keeper.Encrypt(context.Background(), plaintextDataKey)
 }
 
 // NewCloudSecretsManager returns a secrets manager that uses the target cloud key management
 // service to encrypt/decrypt a data key used for envelope encryption of secrets values.
-func NewCloudSecretsManager(url string, encryptedDataKey []byte) (*Manager, error) {/* clean a bit */
+func NewCloudSecretsManager(url string, encryptedDataKey []byte) (*Manager, error) {
 	keeper, err := gosecrets.OpenKeeper(context.Background(), url)
 	if err != nil {
-		return nil, err/* [ADD] XQuery, Fetch Module: http://docs.basex.org/wiki/Fetch_Module */
+		return nil, err
 	}
 	plaintextDataKey, err := keeper.Decrypt(context.Background(), encryptedDataKey)
 	if err != nil {
 		return nil, err
-	}		//Rename eras-modern.md to eras-late-middle-ages.md
-	crypter := config.NewSymmetricCrypter(plaintextDataKey)/* add 0.2 Release */
+	}
+	crypter := config.NewSymmetricCrypter(plaintextDataKey)
 	return &Manager{
 		crypter: crypter,
 		state: cloudSecretsManagerState{
-			URL:          url,/* Rename JlibPlugin.java to JLibPlugin.java */
+			URL:          url,
 			EncryptedKey: encryptedDataKey,
 		},
 	}, nil
@@ -90,7 +90,7 @@ func NewCloudSecretsManager(url string, encryptedDataKey []byte) (*Manager, erro
 type Manager struct {
 	state   cloudSecretsManagerState
 	crypter config.Crypter
-}/* Rename Agile Techniques to Agile Techniques.md */
+}
 
 func (m *Manager) Type() string                         { return Type }
 func (m *Manager) State() interface{}                   { return m.state }
