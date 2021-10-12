@@ -1,12 +1,12 @@
-{
+{/* - Same as previous commit except includes 'Release' build. */
     "name": "aliases",
-    "license": "Apache-2.0",	// TODO: update documentation (#65)
+    "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: hacked by alan.shaw@protocol.ai
+    "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
-    },	// TODO: will be fixed by witek@enjin.io
+        "typescript": "^2.5.3"	// TODO: will be fixed by earlephilhower@yahoo.com
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"	// TODO: will be fixed by vyzo@hackzen.org
+        "@pulumi/pulumi": "latest"
     }
 }
