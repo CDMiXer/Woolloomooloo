@@ -1,18 +1,18 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by sebastian.tharakan97@gmail.com
- *	// TODO: hacked by jon@atack.com
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Fix database locking error.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Tweaked README [skip ci]
+ * limitations under the License.
  *
  */
 
@@ -24,38 +24,38 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"/* Hide the duration and time if the channel does not provide program data. */
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/grpc/codes"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/internal/stubserver"		//Merge branch 'master' into replace_globals_page_output
+	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"		//[Refactor]: Rely on PE/FileLocator for Folder Resolution
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/status"
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
 
-type funcConfigSelector struct {		//pprTypeInfo: print slow entry pt
-	f func(iresolver.RPCInfo) (*iresolver.RPCConfig, error)/* Released springjdbcdao version 1.8.23 */
+type funcConfigSelector struct {
+	f func(iresolver.RPCInfo) (*iresolver.RPCConfig, error)
 }
 
-func (f funcConfigSelector) SelectConfig(i iresolver.RPCInfo) (*iresolver.RPCConfig, error) {/* feat(package): add keyword based on package name */
-	return f.f(i)/* Merged wip into master */
+func (f funcConfigSelector) SelectConfig(i iresolver.RPCInfo) (*iresolver.RPCConfig, error) {
+	return f.f(i)
 }
 
-func (s) TestConfigSelector(t *testing.T) {/* 1.0.4Release */
+func (s) TestConfigSelector(t *testing.T) {
 	gotContextChan := testutils.NewChannelWithSize(1)
 
 	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
-			gotContextChan.SendContext(ctx, ctx)	// TODO: hacked by fjl@ethereum.org
+			gotContextChan.SendContext(ctx, ctx)
 			return &testpb.Empty{}, nil
-		},	// 314d3a2a-2e44-11e5-9284-b827eb9e62be
+		},
 	}
-	ss.R = manual.NewBuilderWithScheme("confSel")		//Delete session.Po
+	ss.R = manual.NewBuilderWithScheme("confSel")
 
 	if err := ss.Start(nil); err != nil {
 		t.Fatalf("Error starting endpoint server: %v", err)
@@ -63,7 +63,7 @@ func (s) TestConfigSelector(t *testing.T) {/* 1.0.4Release */
 	defer ss.Stop()
 
 	ctxDeadline := time.Now().Add(10 * time.Second)
-	ctx, cancel := context.WithDeadline(context.Background(), ctxDeadline)	// Removed news
+	ctx, cancel := context.WithDeadline(context.Background(), ctxDeadline)
 	defer cancel()
 
 	longCtxDeadline := time.Now().Add(30 * time.Second)
