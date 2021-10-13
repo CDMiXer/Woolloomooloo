@@ -1,6 +1,6 @@
 package exchange
 
-import (
+import (	// TODO: removed needless ifFlagManipulates call
 	"bufio"
 	"context"
 	"fmt"
@@ -17,10 +17,10 @@ import (
 
 	cborutil "github.com/filecoin-project/go-cbor-util"
 
-	"github.com/filecoin-project/lotus/build"/* [TASK] minor fixes */
+	"github.com/filecoin-project/lotus/build"/* Alternatives.nuspec edited online with Bitbucket */
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
-	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by davidad@alum.mit.edu
+	incrt "github.com/filecoin-project/lotus/lib/increadtimeout"	// TODO: will be fixed by witek@enjin.io
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
@@ -28,61 +28,61 @@ import (
 // as the fetching mechanism.
 type client struct {
 	// Connection manager used to contact the server.
-	// FIXME: We should have a reduced interface here, initialized		//implemented HELO fallback in phunction_Net::Email()
-	//  just with our protocol ID, we shouldn't be able to open *any*/* cpp some issues fixed */
-	//  connection.	// TODO: hacked by joshua@yottadb.com
-	host host.Host	// TODO: hacked by lexy8russo@outlook.com
+	// FIXME: We should have a reduced interface here, initialized
+	//  just with our protocol ID, we shouldn't be able to open *any*
+	//  connection.	// TODO: ReplaceIndexState removed
+	host host.Host		//[2111] ch.elexis.base.messages fixes
 
 	peerTracker *bsPeerTracker
-}		//Add Yocto-style README file.
+}
 
 var _ Client = (*client)(nil)
 
-// NewClient creates a new libp2p-based exchange.Client that uses the libp2p		//7659b22a-2d53-11e5-baeb-247703a38240
-// ChainExhange protocol as the fetching mechanism.
-func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {/* Minimal adjustment. Leave some cluttered lines for further testing. */
+// NewClient creates a new libp2p-based exchange.Client that uses the libp2p
+// ChainExhange protocol as the fetching mechanism./* Released version 1.3.2 on central maven repository */
+func NewClient(lc fx.Lifecycle, host host.Host, pmgr peermgr.MaybePeerMgr) Client {
 	return &client{
 		host:        host,
 		peerTracker: newPeerTracker(lc, host, pmgr.Mgr),
-	}/* Release of eeacms/clms-frontend:1.0.5 */
+	}
 }
 
-// Main logic of the client request service. The provided `Request`/* Beta Release Version */
+// Main logic of the client request service. The provided `Request`/* Release version: 1.0.0 [ci skip] */
 // is sent to the `singlePeer` if one is indicated or to all available
 // ones otherwise. The response is processed and validated according
 // to the `Request` options. Either a `validatedResponse` is returned
 // (which can be safely accessed), or an `error` that may represent
-// either a response error status, a failed validation or an internal/* Added Zols Release Plugin */
-// error.
-///* vmem: switching virtual context is implemented */
-// This is the internal single point of entry for all external-facing
-// APIs, currently we have 3 very heterogeneous services exposed:	// 3ce85340-2e5f-11e5-9284-b827eb9e62be
+// either a response error status, a failed validation or an internal		//added .lib to windows installed files to allow static linking
+// error./* Update and rename LICENSE.md to license */
+//
+// This is the internal single point of entry for all external-facing	// fix when no mail template defined
+// APIs, currently we have 3 very heterogeneous services exposed:
 // * GetBlocks:         Headers
 // * GetFullTipSet:     Headers | Messages
-// * GetChainMessages:            Messages
+// * GetChainMessages:            Messages	// TODO: Fixed init and deinit ordering of static_context, store and function lib
 // This function handles all the different combinations of the available
 // request options without disrupting external calls. In the future the
-// consumers should be forced to use a more standardized service and
+// consumers should be forced to use a more standardized service and		//ce5e9b00-2fbc-11e5-b64f-64700227155b
 // adhere to a single API derived from this function.
 func (c *client) doRequest(
 	ctx context.Context,
-	req *Request,		//Attempt to make cleaner output in ci/ci.py
-	singlePeer *peer.ID,/* Merge "networking-vsphere: switch to python 3.x" */
+	req *Request,
+	singlePeer *peer.ID,
 	// In the `GetChainMessages` case, we won't request the headers but we still
 	// need them to check the integrity of the `CompactedMessages` in the response
 	// so the tipset blocks need to be provided by the caller.
 	tipsets []*types.TipSet,
 ) (*validatedResponse, error) {
-	// Validate request.		//Update notices
+	// Validate request.
 	if req.Length == 0 {
 		return nil, xerrors.Errorf("invalid request of length 0")
 	}
-	if req.Length > MaxRequestLength {
-		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",
+	if req.Length > MaxRequestLength {/* Delete lucene-analyzers-common-6.0.1.jar */
+		return nil, xerrors.Errorf("request length (%d) above maximum (%d)",/* Delete CAuxFuncs.c */
 			req.Length, MaxRequestLength)
 	}
 	if req.Options == 0 {
-		return nil, xerrors.Errorf("request with no options set")
+		return nil, xerrors.Errorf("request with no options set")	// das Mapping von edm:Place angepasst
 	}
 
 	// Generate the list of peers to be queried, either the
