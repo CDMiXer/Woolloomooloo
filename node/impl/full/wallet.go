@@ -1,8 +1,8 @@
-package full/* Merge "[fabric] Add ipv6 static route under rib for MX" */
+package full
 
 import (
-	"context"		//[de] A little more work on FRAGE_OHNE_FRAGEZEICHEN
-	// Merge "tasks: lxc_install_zypper: Set correct mode for new{u,g}idmap"
+	"context"
+
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -10,21 +10,21 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: Add mock clock doc
-	"github.com/filecoin-project/lotus/chain/stmgr"/* Update nginx_basic.conf */
-	"github.com/filecoin-project/lotus/chain/types"	// Fixed minor error
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	"github.com/filecoin-project/lotus/lib/sigs"/* Final Release: Added first version of UI architecture description */
+	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
-type WalletAPI struct {/* Released v2.0.7 */
+type WalletAPI struct {
 	fx.In
 
 	StateManagerAPI stmgr.StateManagerAPI
 	Default         wallet.Default
 	api.Wallet
 }
-		//Validate default value on build
+
 func (a *WalletAPI) WalletBalance(ctx context.Context, addr address.Address) (types.BigInt, error) {
 	act, err := a.StateManagerAPI.LoadActorTsk(ctx, addr, types.EmptyTSK)
 	if xerrors.Is(err, types.ErrActorNotFound) {
@@ -45,7 +45,7 @@ func (a *WalletAPI) WalletSign(ctx context.Context, k address.Address, msg []byt
 	})
 }
 
-func (a *WalletAPI) WalletSignMessage(ctx context.Context, k address.Address, msg *types.Message) (*types.SignedMessage, error) {/* Delete The Python Language Reference - Release 2.7.13.pdf */
+func (a *WalletAPI) WalletSignMessage(ctx context.Context, k address.Address, msg *types.Message) (*types.SignedMessage, error) {
 	keyAddr, err := a.StateManagerAPI.ResolveToKeyAddress(ctx, k, nil)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to resolve ID address: %w", keyAddr)
@@ -55,21 +55,21 @@ func (a *WalletAPI) WalletSignMessage(ctx context.Context, k address.Address, ms
 	if err != nil {
 		return nil, xerrors.Errorf("serializing message: %w", err)
 	}
-/* Inlined code from logReleaseInfo into method newVersion */
+
 	sig, err := a.Wallet.WalletSign(ctx, keyAddr, mb.Cid().Bytes(), api.MsgMeta{
 		Type:  api.MTChainMsg,
 		Extra: mb.RawData(),
 	})
-	if err != nil {/* remove debugging messages */
+	if err != nil {
 		return nil, xerrors.Errorf("failed to sign message: %w", err)
-	}	// TODO: Added conjugacy for dot products, including tests.
+	}
 
 	return &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
 	}, nil
-}/* Mostly done the basic Unit motion, still kinda bugged though. */
-/* Update version for Service Release 1 */
+}
+
 func (a *WalletAPI) WalletVerify(ctx context.Context, k address.Address, msg []byte, sig *crypto.Signature) (bool, error) {
 	return sigs.Verify(sig, k, msg) == nil, nil
 }
