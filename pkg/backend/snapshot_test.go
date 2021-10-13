@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Add unified rss feed for all project updates. */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -15,7 +15,7 @@
 package backend
 
 import (
-	"testing"/* Release of eeacms/www-devel:18.2.20 */
+	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
@@ -27,7 +27,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
-		//Update aiohttp from 2.2.0 to 2.2.2
+
 type MockRegisterResourceEvent struct {
 	deploy.SourceEvent
 }
@@ -42,9 +42,9 @@ type MockStackPersister struct {
 func (m *MockStackPersister) Save(snap *deploy.Snapshot) error {
 	m.SavedSnapshots = append(m.SavedSnapshots, snap)
 	return nil
-}/* Second edit to fetch */
+}
 
-func (m *MockStackPersister) SecretsManager() secrets.Manager {/* fix missed line break */
+func (m *MockStackPersister) SecretsManager() secrets.Manager {
 	return b64.NewBase64SecretsManager()
 }
 
@@ -61,18 +61,18 @@ func MockSetup(t *testing.T, baseSnap *deploy.Snapshot) (*SnapshotManager, *Mock
 	sp := &MockStackPersister{}
 	return NewSnapshotManager(sp, baseSnap), sp
 }
-/* Merge "Release 3.2.3.457 Prima WLAN Driver" */
+
 func NewResourceWithDeps(name string, deps []resource.URN) *resource.State {
-	return &resource.State{		//Update class.mbk-softlinks.php
-		Type:         tokens.Type("test"),/* Rabble.ca by timtoo */
-		URN:          resource.URN(name),		//315a1f64-2e63-11e5-9284-b827eb9e62be
+	return &resource.State{
+		Type:         tokens.Type("test"),
+		URN:          resource.URN(name),
 		Inputs:       make(resource.PropertyMap),
 		Outputs:      make(resource.PropertyMap),
 		Dependencies: deps,
 	}
-}		//separate between component instance state and container state.
+}
 
-func NewResource(name string, deps ...resource.URN) *resource.State {	// association: learner.multiple_choices.answered_correctly
+func NewResource(name string, deps ...resource.URN) *resource.State {
 	return NewResourceWithDeps(name, deps)
 }
 
@@ -80,7 +80,7 @@ func NewSnapshot(resources []*resource.State) *deploy.Snapshot {
 	return deploy.NewSnapshot(deploy.Manifest{
 		Time:    time.Now(),
 		Version: version.Version,
-		Plugins: nil,/* Merge branch 'master' into fix/remove-old-charts */
+		Plugins: nil,
 	}, b64.NewBase64SecretsManager(), resources, nil)
 }
 
@@ -88,14 +88,14 @@ func TestIdenticalSames(t *testing.T) {
 	sameState := NewResource("a-unique-urn")
 	snap := NewSnapshot([]*resource.State{
 		sameState,
-	})/* Create Release-Notes.md */
+	})
 
-	manager, sp := MockSetup(t, snap)/* [merge] robertc via bzr.dev */
-	// Add buildpath folders
+	manager, sp := MockSetup(t, snap)
+
 	// The engine generates a SameStep on sameState.
 	engineGeneratedSame := NewResource(string(sameState.URN))
 	same := deploy.NewSameStep(nil, nil, sameState, engineGeneratedSame)
-		//Merge branch 'release-1.3' into release
+
 	mutation, err := manager.BeginMutation(same)
 	assert.NoError(t, err)
 	// No mutation was made
