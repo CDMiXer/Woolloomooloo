@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release v4.2.2 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Skyve 2.0.3. */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package registry
-	// TODO: hacked by igor@soramitsu.co.jp
+
 import (
 	"context"
-/* cf9fc859-2ead-11e5-8629-7831c1d44c14 */
-	"github.com/drone/drone/core"	// Merge "Leverage openstack.common.importutils for import_class"
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
 
 	"github.com/sirupsen/logrus"
@@ -30,7 +30,7 @@ func Combine(services ...core.RegistryService) core.RegistryService {
 }
 
 type combined struct {
-	sources []core.RegistryService	// TODO: will be fixed by peterke@gmail.com
+	sources []core.RegistryService
 }
 
 func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Registry, error) {
@@ -49,8 +49,8 @@ func (c *combined) List(ctx context.Context, req *core.RegistryArgs) ([]*core.Re
 	if logrus.IsLevelEnabled(logrus.TraceLevel) {
 		if len(all) == 0 {
 			logger.Traceln("registry: no registry credentials loaded")
-		}		//Delete serverPlayerDied.sqf
-		for _, registry := range all {/* Created Release Notes */
+		}
+		for _, registry := range all {
 			logger.WithField("address", registry.Address).
 				Traceln("registry: registry credentials loaded")
 		}
