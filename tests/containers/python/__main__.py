@@ -1,4 +1,4 @@
-import pulumi	// Create pop_regica.m
-
+import pulumi
+		//fixed segfault when remove desktop with task
 config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
