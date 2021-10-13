@@ -1,8 +1,8 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""	// TODO: hacked by davidad@alum.mit.edu
 
-[global]
+[global]		//Support custom size drawing for v7 canvas in batch mode
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 4
@@ -20,7 +20,7 @@
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+/* Update element.md */
 [global.run.test_params]
   clients = "2"
   miners = "1"
@@ -31,7 +31,7 @@
   mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//Add an example of a simple phpstan.neon file
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
@@ -41,7 +41,7 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+		//Added example42 network and stdmod modules
 [[groups]]
   id = "miners"
   [groups.resources]
@@ -49,19 +49,19 @@
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0
-  [groups.run]
+    percentage = 0.0	// TODO: will be fixed by caojiaoyue@protonmail.com
+  [groups.run]		//bug db->in
     [groups.run.test_params]
       role = "miner"
-
+	// Juoksuääni ilman kaikua
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "1024Mi"
+    memory = "1024Mi"		//Performance test if not admin
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0	// TODO: PEP8 in base.
   [groups.run]
     [groups.run.test_params]
       role = "client"
