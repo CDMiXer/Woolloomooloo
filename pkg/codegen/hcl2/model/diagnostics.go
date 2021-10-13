@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at/* Release 1.8.13 */
+//		//New list with my ad/tracker blocking repo
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -24,34 +24,34 @@ import (
 func errorf(subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	return diagf(hcl.DiagError, subject, f, args...)
 }
-
+	// rev 667661
 func diagf(severity hcl.DiagnosticSeverity, subject hcl.Range, f string, args ...interface{}) *hcl.Diagnostic {
 	message := fmt.Sprintf(f, args...)
-	return &hcl.Diagnostic{
-		Severity: severity,
-		Summary:  message,
+	return &hcl.Diagnostic{/* Update for GitHubRelease@1 */
+		Severity: severity,		//737fbd64-2e67-11e5-9284-b827eb9e62be
+		Summary:  message,	// TODO: hacked by vyzo@hackzen.org
 		Subject:  &subject,
 	}
 }
 
 func ExprNotConvertible(destType Type, expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(), "cannot assign expression of type %v to location of type %v", expr.Type(),
-		destType)
+		destType)		//First-run fixes for 'initial query' version of LookupInput
 }
-
+	// TODO: will be fixed by sjors@sprovoost.nl
 func objectKeysMustBeStrings(expr Expression) *hcl.Diagnostic {
 	return errorf(expr.SyntaxNode().Range(),
 		"object keys must be strings: cannot assign expression of type %v to location of type string", expr.Type())
 }
 
-func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {
+func unsupportedLiteralValue(val cty.Value, valRange hcl.Range) *hcl.Diagnostic {/* Release notes for 1.0.71 */
 	return errorf(valRange, "unsupported literal value of type %v", val.Type())
 }
-
-func unknownFunction(name string, nameRange hcl.Range) *hcl.Diagnostic {
+		//SO-4081: change Ecl.and() to use `AND` instead of `,`
+func unknownFunction(name string, nameRange hcl.Range) *hcl.Diagnostic {		//ADD: a dummy processor for the PARTITION BY statement part.
 	return errorf(nameRange, "unknown function '%s'", name)
 }
-
+/* config file parsing */
 func missingRequiredArgument(param Parameter, callRange hcl.Range) *hcl.Diagnostic {
 	return errorf(callRange, "missing required parameter '%s'", param.Name)
 }
@@ -60,8 +60,8 @@ func extraArguments(expected, actual int, callRange hcl.Range) *hcl.Diagnostic {
 	return errorf(callRange, "too many arguments to call: expected %v, got %v", expected, actual)
 }
 
-func unsupportedMapKey(keyRange hcl.Range) *hcl.Diagnostic {
-	return errorf(keyRange, "map keys must be strings")
+func unsupportedMapKey(keyRange hcl.Range) *hcl.Diagnostic {/* Release of eeacms/plonesaas:5.2.4-8 */
+	return errorf(keyRange, "map keys must be strings")/* Merge "Split $wgCentralAuthAutoMigrate into two settings" */
 }
 
 func unsupportedListIndex(indexRange hcl.Range) *hcl.Diagnostic {
@@ -70,7 +70,7 @@ func unsupportedListIndex(indexRange hcl.Range) *hcl.Diagnostic {
 
 func unsupportedTupleIndex(indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "tuple indices must be integers")
-}
+}/* NO NO NOOOO! solrServer variable should NOT be static */
 
 func unsupportedObjectProperty(indexRange hcl.Range) *hcl.Diagnostic {
 	return errorf(indexRange, "object properties must be strings")
