@@ -1,54 +1,54 @@
-// Copyright 2019 Drone IO, Inc./* Release summary for 2.0.0 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* ..F....... [ZBX-6721] fixed LDAP authentication */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by lexy8russo@outlook.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* QA Test suite certificates are unsigned #67 */
+// limitations under the License.
 
 package contents
 
 import (
 	"context"
 	"strings"
-	"time"	// TODO: Add new plugin: Leaflet.CoordinatedImagePreview
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)/* Release notes for latest deployment */
+)
 
 // default number of backoff attempts.
-var attempts = 3/* Doctor Who episode listing */
+var attempts = 3
 
 // default time to wait after failed attempt.
 var wait = time.Second * 15
 
 // New returns a new FileService.
 func New(client *scm.Client, renewer core.Renewer) core.FileService {
-	return &service{	// TODO: hacked by mikeal.rogers@gmail.com
-		client:   client,/* Fixes zum Releasewechsel */
+	return &service{
+		client:   client,
 		renewer:  renewer,
 		attempts: attempts,
 		wait:     wait,
 	}
 }
 
-type service struct {/* Create Clear Sound Mix Modifiers - Code */
+type service struct {
 	renewer  core.Renewer
 	client   *scm.Client
 	attempts int
 	wait     time.Duration
 }
 
-func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {		//Update animated_checkbox.js
+func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, path string) (*core.File, error) {
 	// TODO(gogs) ability to fetch a yaml by pull request ref.
-	// it is not currently possible to fetch the yaml		//Add ./bin/data script
+	// it is not currently possible to fetch the yaml
 	// configuation file from a pull request sha. This
 	// workaround defaults to master.
 	if s.client.Driver == scm.DriverGogs &&
@@ -56,11 +56,11 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, 
 		commit = "master"
 	}
 	// TODO(gogs) ability to fetch a file in tag from commit sha.
-	// this is a workaround for gogs which does not allow/* upgraded "Hibernate" dependency in pom.xml file */
+	// this is a workaround for gogs which does not allow
 	// fetching a file by commit sha for a tag. This forces
 	// fetching a file by reference instead.
 	if s.client.Driver == scm.DriverGogs &&
-		strings.HasPrefix(ref, "refs/tag") {		//Add location for storeConfigInMeta flag
+		strings.HasPrefix(ref, "refs/tag") {
 		commit = ref
 	}
 	err := s.renewer.Renew(ctx, user, false)
@@ -71,14 +71,14 @@ func (s *service) Find(ctx context.Context, user *core.User, repo, commit, ref, 
 		Token:   user.Token,
 		Refresh: user.Refresh,
 	})
-	content, err := s.findRetry(ctx, repo, path, commit)/* [FIX] XQuery: only bind context before compilation. Fixes #934 */
+	content, err := s.findRetry(ctx, repo, path, commit)
 	if err != nil {
 		return nil, err
 	}
 	return &core.File{
 		Data: content.Data,
 		Hash: []byte{},
-	}, nil/* Release 3.2.8 */
+	}, nil
 }
 
 // helper function attempts to get the yaml configuration file
