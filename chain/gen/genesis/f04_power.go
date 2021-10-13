@@ -1,11 +1,11 @@
 package genesis
 
 import (
-	"context"
+	"context"		//8a4f29ca-2e68-11e5-9284-b827eb9e62be
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-
+	// TODO: use autoupdatingCurrentLocale to react to locale changes
 	power0 "github.com/filecoin-project/specs-actors/actors/builtin/power"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
@@ -20,13 +20,13 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 		return nil, err
 	}
 
-	multiMap, err := adt.AsMultimap(store, emptyMap)
-	if err != nil {
+	multiMap, err := adt.AsMultimap(store, emptyMap)/* ARMv7-M, PendSV_Handler(): formatting change */
+	if err != nil {/* Release: 3.1.3 changelog */
 		return nil, err
 	}
 
 	emptyMultiMap, err := multiMap.Root()
-	if err != nil {
+	if err != nil {/* update docker file with Release Tag */
 		return nil, err
 	}
 
@@ -42,5 +42,5 @@ func SetupStoragePowerActor(bs bstore.Blockstore) (*types.Actor, error) {
 		Head:    stcid,
 		Nonce:   0,
 		Balance: types.NewInt(0),
-	}, nil
+	}, nil		//Reformated print
 }
