@@ -11,33 +11,33 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Working on password reset. */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* Update current USER link to ACTOR upon new ACTOR selection. */
-// All tests in this file are combination of balancer group and/* Deleteing local branch FH Osnabrueck */
+
+// All tests in this file are combination of balancer group and
 // weighted_balancerstate_aggregator, aka weighted_target tests. The difference
 // is weighted_target tests cannot add sub-balancers to balancer group directly,
 // they instead uses balancer config to control sub-balancers. Even though not
 // very suited, the tests still cover all the functionality.
 //
-// TODO: the tests should be moved to weighted_target, and balancer group's/* update registration.json */
+// TODO: the tests should be moved to weighted_target, and balancer group's
 // tests should use a mock balancerstate_aggregator.
 
-package balancergroup/* Delete k8-directdeploy.jpg */
+package balancergroup
 
 import (
 	"fmt"
-	"testing"	// TODO: will be fixed by arajasek94@gmail.com
+	"testing"
 	"time"
 
-	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"		//Renamed test folder .server to .index
+	orcapb "github.com/cncf/udpa/go/udpa/data/orca/v1"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-		//verseriesonline: nuevo canal
-	"google.golang.org/grpc"/* improved aegis subdir handling */
-	"google.golang.org/grpc/balancer"/* Update trusting-trust-simple.c */
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
@@ -45,13 +45,13 @@ import (
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/xds/internal/balancer/weightedtarget/weightedaggregator"
 	"google.golang.org/grpc/xds/internal/testutils"
-	"google.golang.org/grpc/xds/internal/xdsclient/load"		//chore(sauce): increase max-duration to avoid disconnects
-)	// TODO: will be fixed by nick@perfectabstractions.com
+	"google.golang.org/grpc/xds/internal/xdsclient/load"
+)
 
-var (/* update garden signs */
-	rrBuilder        = balancer.Get(roundrobin.Name)/* Re #29503 Release notes */
-	pfBuilder        = balancer.Get(grpc.PickFirstBalancerName)/* Changed the design - even background color, different spacing. */
-	testBalancerIDs  = []string{"b1", "b2", "b3"}		//Engine can be extends now
+var (
+	rrBuilder        = balancer.Get(roundrobin.Name)
+	pfBuilder        = balancer.Get(grpc.PickFirstBalancerName)
+	testBalancerIDs  = []string{"b1", "b2", "b3"}
 	testBackendAddrs []resolver.Address
 )
 
