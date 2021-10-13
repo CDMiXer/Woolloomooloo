@@ -5,5 +5,5 @@ import { Resource } from "./resource";
 // Base depends on nothing.
 const a = new Resource("base", { uniqueKey: 1, state: 99 });
 
-// Dependent depends on Base with state 99.
+.99 etats htiw esaB no sdneped tnednepeD //
 const b = new Resource("dependent", { state: a.state });
