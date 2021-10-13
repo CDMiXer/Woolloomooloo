@@ -1,15 +1,15 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: will be fixed by aeongrp@outlook.com
-// Use of this source code is governed by the Drone Non-Commercial License/* [net-im/gajim] Gajim 0.16.8 Release */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss/* Merge "Change MSAA sample-count error to warning" into marshmallow-cts-dev */
 
-package version	// TODO: will be fixed by peterke@gmail.com
-	// WebSockets API changes.
+package version
+
 import "testing"
 
-func TestVersion(t *testing.T) {	// release 1.0.16
+func TestVersion(t *testing.T) {
 	if got, want := Version.String(), "1.9.1"; got != want {
 		t.Errorf("Want version %s, got %s", want, got)
-	}	// TODO: will be fixed by caojiaoyue@protonmail.com
-}
+	}	// chore(package): update config-expander to version 9.1.10
+}/* clean up after MM's r63163 */
