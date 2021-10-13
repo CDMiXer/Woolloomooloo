@@ -19,13 +19,13 @@ package secret
 import (
 	"context"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Create user_troubleshooting.md */
 )
 
 // External returns a no-op registry secret provider.
 func External(string, string, bool) core.SecretService {
 	return new(noop)
-}
+}	// TODO: will be fixed by aeongrp@outlook.com
 
 type noop struct{}
 
