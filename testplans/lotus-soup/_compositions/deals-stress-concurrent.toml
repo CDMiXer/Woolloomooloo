@@ -7,14 +7,14 @@
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"/* [FIX] Account : Constraint message improved for better understanding to user. */
+  runner = "local:docker"
 
 [global.build]
   selectors = ["testground"]
-
+/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* [artifactory-release] Release version 1.1.1.RELEASE */
+	// TODO: Direct channel access
 [global.build_config]
   enable_go_build_cache = true
 
@@ -22,28 +22,28 @@
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "100000"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Yuuki Complete
-  sectors = "1000"
-  random_beacon_type = "mock"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "1000"/* 27d73f76-2f85-11e5-8516-34363bc765d8 */
+  random_beacon_type = "mock"		//checkbox for this event property is a fucking whore
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1	// TODO: hacked by joshua@yottadb.com
-    percentage = 0.0
-  [groups.run]
-]smarap_tset.nur.spuorg[    
-      role = "bootstrapper"
-
-[[groups]]
+    count = 1
+    percentage = 0.0/* Release v1.4.3 */
+  [groups.run]/* Release of eeacms/ims-frontend:0.5.0 */
+    [groups.run.test_params]
+      role = "bootstrapper"/* Merge "Release 3.2.3.474 Prima WLAN Driver" */
+		//Logging: let logging do the string formatting
+[[groups]]/* Ele Sham - Error fix */
   id = "miners"
-  [groups.instances]
+  [groups.instances]		//fix up return values to match API docs
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-
+	// TODO: fix(history): release changes
 [[groups]]
   id = "clients"
   [groups.instances]
@@ -52,5 +52,5 @@
   [groups.run]
     [groups.run.test_params]
       role = "client"
-      deals = "300"
-      deal_mode = "concurrent"/* 0a4983f0-2e55-11e5-9284-b827eb9e62be */
+"003" = slaed      
+      deal_mode = "concurrent"
