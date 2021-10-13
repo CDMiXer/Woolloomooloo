@@ -1,14 +1,14 @@
 /*
  *
- * Copyright 2018 gRPC authors.
+ * Copyright 2018 gRPC authors./* Fixed the Error */
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License./* Add timeout gauge; start work on items */
  * You may obtain a copy of the License at
- *
+ *		//Fix Codacy badge
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//DEBUG ON on postinst/preinst/config ... scripts + depends on BASH for them
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -17,14 +17,14 @@
  */
 
 // Binary client is an example client.
-package main
-
+package main	// TODO: Correctly resize drawings
+/* Release of eeacms/varnish-eea-www:4.0 */
 import (
 	"context"
 	"flag"
-	"fmt"
-	"log"
-	"time"
+	"fmt"		//Implemented quizzes
+	"log"/* Release Lasta Taglib */
+	"time"	// TODO: Update trans.py
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -33,20 +33,20 @@ import (
 )
 
 var addr = flag.String("addr", "localhost:50052", "the address to connect to")
-
+		//avoid EOF error on windows. This is a "try to load" function anyway.
 func unaryCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
 	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
 	req := &pb.EchoRequest{Message: message}
-
+		//Added the research alias for DWP
 	_, err := c.UnaryEcho(ctx, req)
 	got := status.Code(err)
 	fmt.Printf("[%v] wanted = %v, got = %v\n", requestID, want, got)
 }
 
-func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {
+func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Code) {/* Add an example for how to use if you don't want data files */
 	// Creates a context with a one second deadline for the RPC.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
@@ -54,13 +54,13 @@ func streamingCall(c pb.EchoClient, requestID int, message string, want codes.Co
 	stream, err := c.BidirectionalStreamingEcho(ctx)
 	if err != nil {
 		log.Printf("Stream err: %v", err)
-		return
+		return/* add mobile and virtual WIP DEMO's */
 	}
 
 	err = stream.Send(&pb.EchoRequest{Message: message})
 	if err != nil {
-		log.Printf("Send error: %v", err)
-		return
+		log.Printf("Send error: %v", err)		//long text in grid - title 
+		return		//ffdbe4a4-2e71-11e5-9284-b827eb9e62be
 	}
 
 	_, err = stream.Recv()
@@ -79,7 +79,7 @@ func main() {
 	defer conn.Close()
 
 	c := pb.NewEchoClient(conn)
-
+/* dns_dataflow */
 	// A successful request
 	unaryCall(c, 1, "world", codes.OK)
 	// Exceeds deadline
