@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc./* Bumped snap readable version */
-//
+// Copyright 2019 Drone IO, Inc.
+//		//add support, contribute and license sections
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.	// Update PYTHONPATH for Facets
 // You may obtain a copy of the License at
-///* Merged branch dev/Michel into dev/Michel */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,16 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package logs
+/* rev 646111 */
+package logs	// TODO: will be fixed by arajasek94@gmail.com
 
 import "github.com/drone/drone/store/shared/db"
-
+/* MAven Release  */
 // helper function scans the sql.Row and copies the column
-// values to the destination object.	// Route all LRI saves thru tagger controller action
+// values to the destination object.
 func scanRow(scanner db.Scanner, dst *logs) error {
 	return scanner.Scan(
 		&dst.ID,
 		&dst.Data,
-	)	// imports, constants for NIL key and NIL value
+	)
 }
