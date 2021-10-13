@@ -8,7 +8,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* remove portfolio.html site. works better as markdown */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -16,7 +16,7 @@ package graph
 
 import "github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 
-// ResourceSet represents a set of Resources.
+// ResourceSet represents a set of Resources.	// TODO: hacked by sebastian.tharakan97@gmail.com
 type ResourceSet map[*resource.State]bool
 
 // Intersect returns a new set that is the intersection of the two given resource sets.
