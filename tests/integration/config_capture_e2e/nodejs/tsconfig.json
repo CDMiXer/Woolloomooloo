@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
         "strict": true,
-        "outDir": "bin",
-        "target": "es2016",	// TODO: Remove print of real theta. 
+        "outDir": "bin",		//ijodi85md3R4SKQ6iy0KUOt19YAwhP8K
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Thread's destructor can be virtual instead of pure virtual */
+        "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
+        "experimentalDecorators": true,	// TODO: hacked by ligi@ligi.de
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitReturns": true,/* Major simplification of 3D box code. */
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Task 3 Pre-Release Material */
+        "index.ts"	// Update DownloadHTMLWithProxy
     ]
-}
+}/* Release 1.12.1 */
 
