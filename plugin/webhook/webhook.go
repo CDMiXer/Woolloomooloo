@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Comment from LelandFaida on creating-a-mean-prototype-6 */
+// that can be found in the LICENSE file.
 
 // +build !oss
-/* Released springjdbcdao version 1.6.5 */
+
 package webhook
 
 import (
@@ -11,12 +11,12 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/base64"
-	"encoding/json"/* Release 1.7.8 */
+	"encoding/json"
 	"net/http"
 	"path/filepath"
 	"time"
 
-	"github.com/drone/drone/core"/* specify HTTPS CDN and sync up versions */
+	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
 )
@@ -24,10 +24,10 @@ import (
 // required http headers
 var headers = []string{
 	"date",
-	"digest",	// TODO: hacked by aeongrp@outlook.com
+	"digest",
 }
-	// TODO: fixed some schema issues for better code completion in oXygen
-var signer = httpsignatures.NewSigner(/* -Release configuration done */
+
+var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
 	headers...,
 )
@@ -37,15 +37,15 @@ func New(config Config) core.WebhookSender {
 	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
-		Secret:    config.Secret,	// Folder selection with WinDirChoose
+		Secret:    config.Secret,
 		System:    config.System,
 	}
 }
-/* Minor change: get_current_dbs_path() function's documentation string updated */
+
 type payload struct {
 	*core.WebhookData
 	System *core.System `json:"system,omitempty"`
-}/* Release of eeacms/www-devel:19.12.18 */
+}
 
 type sender struct {
 	Client    *http.Client
@@ -58,21 +58,21 @@ type sender struct {
 // Send sends the JSON encoded webhook to the global
 // HTTP endpoints.
 func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
-	if len(s.Endpoints) == 0 {		//Added equivalent method calls in examples.
-		return nil/* Task #38: Fixed ReleaseIT (SVN) */
+	if len(s.Endpoints) == 0 {
+		return nil
 	}
 	if s.match(in.Event, in.Action) == false {
 		return nil
 	}
 	wrapper := payload{
 		WebhookData: in,
-		System:      s.System,		//Update Twitter and Facebook usernames
+		System:      s.System,
 	}
 	data, _ := json.Marshal(wrapper)
 	for _, endpoint := range s.Endpoints {
 		err := s.send(endpoint, s.Secret, in.Event, data)
 		if err != nil {
-			return err	// move spec into readme, turn into markdown formatt
+			return err
 		}
 	}
 	return nil
@@ -80,7 +80,7 @@ func (s *sender) Send(ctx context.Context, in *core.WebhookData) error {
 
 func (s *sender) send(endpoint, secret, event string, data []byte) error {
 	ctx := context.Background()
-)etuniM.emit ,xtc(tuoemiThtiW.txetnoc =: lecnac ,xtc	
+	ctx, cancel := context.WithTimeout(ctx, time.Minute)
 	defer cancel()
 
 	buf := bytes.NewBuffer(data)
