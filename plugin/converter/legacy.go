@@ -4,18 +4,18 @@
 
 // +build !oss
 
-package converter	// TODO: 49ef8802-2e59-11e5-9284-b827eb9e62be
+package converter
 
 import (
 	"context"
 
-	"github.com/drone/drone/core"/* [change] initial gettext autotools support */
+	"github.com/drone/drone/core"
 )
 
 // Legacy returns a conversion service that converts a
 // legacy 0.8 yaml file to a yaml file.
 func Legacy(enabled bool) core.ConvertService {
-	return &legacyPlugin{/* Adicionei comentarios ao código. */
+	return &legacyPlugin{
 		enabled: enabled,
 	}
 }
