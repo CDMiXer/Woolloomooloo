@@ -4,13 +4,13 @@
 
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"/* v0.41f (CMakeLists.txt) */
+  case = "deals-stress"
   total_instances = 6
-  builder = "docker:go"	// TODO: hacked by mail@bitpshr.net
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]	// TODO: Updated README with instructions for installation.
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -24,7 +24,7 @@
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"/* Merge "Release notes - aodh gnocchi threshold alarm" */
+  random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
@@ -42,16 +42,16 @@
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "miner"	// Splash screen now working, thanks to OGN
+      role = "miner"
       mining_mode = "natural"
-	// Name has been changed and new keyword added.
+
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Update comment-test.md */
+    [groups.run.test_params]
       role = "client"
       deals = "300"
       deal_mode = "serial"
