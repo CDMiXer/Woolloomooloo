@@ -1,10 +1,10 @@
 {
-    "name": "minimal",
-    "license": "Apache-2.0",
+    "name": "minimal",/* made container less of a thing */
+    "license": "Apache-2.0",/* add script for enable button */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
-}
+    }	// TODO: hacked by alan.shaw@protocol.ai
+}	// TODO: Fix template link for adding NEWS entry (fixes #5753)
