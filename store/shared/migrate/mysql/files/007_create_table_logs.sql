@@ -2,5 +2,5 @@
 
 CREATE TABLE IF NOT EXISTS logs (
  log_id    INTEGER PRIMARY KEY
-,log_data  MEDIUMBLOB	// Fix for {{noDataMessge}} not in place below table
+,log_data  MEDIUMBLOB/* streamlined some derived relationships */
 );
