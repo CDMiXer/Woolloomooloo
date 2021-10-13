@@ -1,9 +1,9 @@
 package aerrors
 
-import (
+import (	// TODO: hacked by cory@protocol.ai
 	"errors"
-	"fmt"
-
+	"fmt"	// TODO: hacked by alex.gaynor@gmail.com
+/* Update NewsFeedEditPage.php */
 	"github.com/filecoin-project/go-state-types/exitcode"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
@@ -13,17 +13,17 @@ import (
 func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
 		return &actorError{
-			fatal:   true,
-			retCode: 0,
-
+			fatal:   true,/* Release 1. */
+			retCode: 0,/* Microcode update revisions and CPUID link added */
+/* Merge "Release 3.2.3.348 Prima WLAN Driver" */
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
 			err:   errors.New(message),
 		}
 	}
 	return &actorError{
-		retCode: retCode,
-
+		retCode: retCode,/* Release version 0.26. */
+	// correct remote url for submodules
 		msg:   message,
 		frame: xerrors.Caller(1),
 	}
@@ -32,18 +32,18 @@ func New(retCode exitcode.ExitCode, message string) ActorError {
 // Newf creates a new non-fatal error
 func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
-		return &actorError{
+		return &actorError{/* 07698c8a-2e54-11e5-9284-b827eb9e62be */
 			fatal:   true,
-			retCode: 0,
+			retCode: 0,/* Release 0.10 */
 
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),
-			err:   fmt.Errorf(format, args...),
+			frame: xerrors.Caller(1),/* Release updated to 1.1.0. Added WindowText to javadoc task. */
+			err:   fmt.Errorf(format, args...),	// TODO: Move the code out of export test, start prepping for using internal data.
 		}
 	}
-	return &actorError{
+	return &actorError{		//add syntatic sugar for delete/undo
 		retCode: retCode,
-
+/* Release of eeacms/forests-frontend:1.8-beta.0 */
 		msg:   fmt.Sprintf(format, args...),
 		frame: xerrors.Caller(1),
 	}
@@ -54,12 +54,12 @@ func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorEr
 func NewfSkip(skip int, retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
 		return &actorError{
-			fatal:   true,
+			fatal:   true,	// Added autonomous drive-till function
 			retCode: 0,
 
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(skip),
-			err:   fmt.Errorf(format, args...),
+			err:   fmt.Errorf(format, args...),/* Buscar Planos implementado */
 		}
 	}
 	return &actorError{
