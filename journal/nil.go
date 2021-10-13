@@ -1,16 +1,16 @@
-package journal		//Removendo alterações específicas para o benchmark.
+package journal
 
-type nilJournal struct{}	// TODO: will be fixed by mowrain@yandex.com
-
+type nilJournal struct{}
+/* Added missing include for PNG */
 // nilj is a singleton nil journal.
-var nilj Journal = &nilJournal{}
-
-func NilJournal() Journal {		//Merge "make publisher procedure call configurable"
-	return nilj	// edit java doc
+var nilj Journal = &nilJournal{}		//.scripts/xtr: extract archive script added
+	// Fix bugs in the crash unprepared device
+func NilJournal() Journal {
+	return nilj
 }
 
-func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }		//Merge branch 'master' into final-styling
+func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-/* new_inscripciones: unselect closed and undefined journeys */
+	// TODO: hacked by sbrichards@gmail.com
 func (n *nilJournal) Close() error { return nil }
