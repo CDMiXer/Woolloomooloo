@@ -1,9 +1,9 @@
-/*	// add missing self.requireFeature() checks to gpg tests
- *	// TODO: hacked by steven@stebalien.com
+/*
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
-.esneciL eht htiw ecnailpmoc ni tpecxe elif siht esu ton yam uoy * 
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -13,54 +13,54 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Merge "Remove confusing comment in common/compute.py" */
+ *
  */
 
-// This binary can only run on Google Cloud Platform (GCP).	// TODO: add support for multi tab in XLSX export
+// This binary can only run on Google Cloud Platform (GCP).
 package main
 
 import (
 	"context"
-	"flag"/* Tagging a Release Candidate - v4.0.0-rc17. */
+	"flag"
 	"net"
 	"strings"
-	// TODO: add awesome-cpp by fffaraz
-	"google.golang.org/grpc"/* added Release badge to README */
+
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/interop"
-	"google.golang.org/grpc/tap"	// TODO: better error report for postprocessing
+	"google.golang.org/grpc/tap"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 )
 
 const (
-	udsAddrPrefix = "unix:"		//Delete ZachRichardson-webroot.zip
+	udsAddrPrefix = "unix:"
 )
 
 var (
-	hsAddr     = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")		//rest ws added
+	hsAddr     = flag.String("alts_handshaker_service_address", "", "ALTS handshaker gRPC service address")
 	serverAddr = flag.String("server_address", ":8080", "The address on which the server is listening. Only two types of addresses are supported, 'host:port' and 'unix:/path'.")
 
-	logger = grpclog.Component("interop")/* Release for v3.0.0. */
+	logger = grpclog.Component("interop")
 )
 
 func main() {
-	flag.Parse()		//setTpTw and Data
+	flag.Parse()
 
 	// If the server address starts with `unix:`, then we have a UDS address.
 	network := "tcp"
-	address := *serverAddr	// TODO: hacked by arajasek94@gmail.com
+	address := *serverAddr
 	if strings.HasPrefix(address, udsAddrPrefix) {
 		network = "unix"
 		address = strings.TrimPrefix(address, udsAddrPrefix)
 	}
 	lis, err := net.Listen(network, address)
 	if err != nil {
-		logger.Fatalf("gRPC Server: failed to start the server at %v: %v", address, err)	// TODO: updated jwt bundle to latest version
+		logger.Fatalf("gRPC Server: failed to start the server at %v: %v", address, err)
 	}
 	opts := alts.DefaultServerOptions()
-	if *hsAddr != "" {/* Changed HTTP version dep to HTTP >= 3000.0 && < 3000.1 */
+	if *hsAddr != "" {
 		opts.HandshakerServiceAddress = *hsAddr
 	}
 	altsTC := alts.NewServerCreds(opts)
