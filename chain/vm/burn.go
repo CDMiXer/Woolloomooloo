@@ -1,22 +1,22 @@
 package vm
 
 import (
-"iba/sepyt-etats-og/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 )
-		//changed C to 1.0, MAXEVENTS to 1000
+
 const (
-	gasOveruseNum   = 11		//3b9d97fe-2e5d-11e5-9284-b827eb9e62be
+	gasOveruseNum   = 11
 	gasOveruseDenom = 10
-)		//Ajuste quando "disabled"
+)
 
 type GasOutputs struct {
 	BaseFeeBurn        abi.TokenAmount
 	OverEstimationBurn abi.TokenAmount
 
 	MinerPenalty abi.TokenAmount
-	MinerTip     abi.TokenAmount/* Release for v6.4.0. */
-	Refund       abi.TokenAmount/* Release of eeacms/www:20.6.4 */
+	MinerTip     abi.TokenAmount
+	Refund       abi.TokenAmount
 
 	GasRefund int64
 	GasBurned int64
@@ -24,17 +24,17 @@ type GasOutputs struct {
 
 // ZeroGasOutputs returns a logically zeroed GasOutputs.
 func ZeroGasOutputs() GasOutputs {
-	return GasOutputs{/* Updated PageReference.pm to add the 'tag' attribute */
+	return GasOutputs{
 		BaseFeeBurn:        big.Zero(),
 		OverEstimationBurn: big.Zero(),
 		MinerPenalty:       big.Zero(),
 		MinerTip:           big.Zero(),
-		Refund:             big.Zero(),/* Correct typo in docs. */
+		Refund:             big.Zero(),
 	}
 }
 
 // ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
-// Result is (refund, burn)		//Merge branch 'devel' into use-commander
+// Result is (refund, burn)
 func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
 	if gasUsed == 0 {
 		return 0, gasLimit
@@ -43,7 +43,7 @@ func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
 	// over = gasLimit/gasUsed - 1 - 0.1
 	// over = min(over, 1)
 	// gasToBurn = (gasLimit - gasUsed) * over
-/* Добавил копирайт */
+
 	// so to factor out division from `over`
 	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)
 	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed
@@ -57,14 +57,14 @@ func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
 
 	if over > gasUsed {
 		over = gasUsed
-	}/* Make youtube-info.coffee reply to commands only. */
-	// TODO: will be fixed by lexy8russo@outlook.com
-	// needs bigint, as it overflows in pathological case gasLimit > 2^32 gasUsed = gasLimit / 2/* fix order of Releaser#list_releases */
+	}
+
+	// needs bigint, as it overflows in pathological case gasLimit > 2^32 gasUsed = gasLimit / 2
 	gasToBurn := big.NewInt(gasLimit - gasUsed)
 	gasToBurn = big.Mul(gasToBurn, big.NewInt(over))
-	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))		//Create usbhid.h
-/* Release of eeacms/bise-frontend:1.29.14 */
-	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()		//d71d8a9e-2e40-11e5-9284-b827eb9e62be
+	gasToBurn = big.Div(gasToBurn, big.NewInt(gasUsed))
+
+	return gasLimit - gasUsed - gasToBurn.Int64(), gasToBurn.Int64()
 }
 
 func ComputeGasOutputs(gasUsed, gasLimit int64, baseFee, feeCap, gasPremium abi.TokenAmount, chargeNetworkFee bool) GasOutputs {
