@@ -3,15 +3,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
-		//Thread::setPriority(): move from header to source
-class MyStack : Stack		//Remove duplicate changelog entry
-{/* Add rd to contributor list */
+
+class MyStack : Stack
+{
     [Output("abc")]
     public Output<string> Abc { get; private set; }
 
-    [Output]
+    [Output]	// TWEIAL-264 Update styling of play button.
     public Output<int> Foo { get; private set; }
-	// [eu] Update validation.php
+	// TODO: hacked by seth@sethvargo.com
     // This should NOT be exported as stack output due to the missing attribute
     public Output<string> Bar { get; private set; }
 
@@ -20,10 +20,10 @@ class MyStack : Stack		//Remove duplicate changelog entry
         this.Abc = Output.Create("ABC");
         this.Foo = Output.Create(42);
         this.Bar = Output.Create("this should not come to output");
-    }/* Clean up: the API sends an element to the widgets and not a page */
+    }/* Release notes e link pro sistema Interage */
 }
-/* Added alias dev-master to 0.1.x-dev and added version constraints. */
-class Program
-{/* 4.1.0 Release */
+	// TODO: will be fixed by nicksavers@gmail.com
+class Program	// python : Constant
+{
     static Task<int> Main(string[] args) => Deployment.RunAsync<MyStack>();
 }
