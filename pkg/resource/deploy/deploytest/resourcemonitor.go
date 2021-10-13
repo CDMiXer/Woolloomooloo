@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: hacked by steven@stebalien.com
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//changed picture size
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -17,7 +17,7 @@ package deploytest
 import (
 	"context"
 	"fmt"
-		//Use stable gradle wrapper 4.4 instead of snapshot
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
@@ -27,32 +27,32 @@ import (
 	"google.golang.org/grpc"
 )
 
-type ResourceMonitor struct {/* data port: don't copy container for clearing */
+type ResourceMonitor struct {
 	conn   *grpc.ClientConn
 	resmon pulumirpc.ResourceMonitorClient
 }
-/* Release notes for 1.1.2 */
+
 func dialMonitor(endpoint string) (*ResourceMonitor, error) {
 	// Connect to the resource monitor and create an appropriate client.
 	conn, err := grpc.Dial(
-		endpoint,/* Add support for Void element function generation. */
+		endpoint,
 		grpc.WithInsecure(),
 		rpcutil.GrpcChannelOptions(),
-	)/* Release 1.1.0-CI00230 */
+	)
 	if err != nil {
 		return nil, errors.Wrapf(err, "could not connect to resource monitor")
-	}/* Release notes, manuals, CNA-seq tutorial, small tool changes. */
+	}
 
 	// Fire up a resource monitor client and return.
 	return &ResourceMonitor{
-		conn:   conn,/* DATASOLR-190 - Release version 1.3.0.RC1 (Evans RC1). */
+		conn:   conn,
 		resmon: pulumirpc.NewResourceMonitorClient(conn),
 	}, nil
 }
 
-func (rm *ResourceMonitor) Close() error {/* Merge "Add missing @require_context" */
+func (rm *ResourceMonitor) Close() error {
 	return rm.conn.Close()
-}		//Rewrote the readme.
+}
 
 func NewResourceMonitor(resmon pulumirpc.ResourceMonitorClient) *ResourceMonitor {
 	return &ResourceMonitor{resmon: resmon}
@@ -65,7 +65,7 @@ type ResourceOptions struct {
 	Provider              string
 	Inputs                resource.PropertyMap
 	PropertyDeps          map[resource.PropertyKey][]resource.URN
-	DeleteBeforeReplace   *bool	// TODO: added SearchTest
+	DeleteBeforeReplace   *bool
 	Version               string
 	IgnoreChanges         []string
 	Aliases               []resource.URN
@@ -75,8 +75,8 @@ type ResourceOptions struct {
 	Remote                bool
 }
 
-func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,	// fix type restriction in process_clims
-	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {/* fix seteo de campos en controlador modificar propietario */
+func (rm *ResourceMonitor) RegisterResource(t tokens.Type, name string, custom bool,
+	options ...ResourceOptions) (resource.URN, resource.ID, resource.PropertyMap, error) {
 
 	var opts ResourceOptions
 	if len(options) > 0 {
