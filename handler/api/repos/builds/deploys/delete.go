@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Bugfix: Release the old editors lock */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,24 +8,24 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [artifactory-release] Release version 1.6.1.RELEASE */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploys
-		//Delete SART.pyc
-import (/* Released springjdbcdao version 1.8.10 */
+
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"/* Enable size-reducing optimizations in Release build. */
+	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
 )
 
 // HandleDelete returns an http.HandlerFunc that handles an
-// http.Request to delete a branch entry from the datastore.		//fc59c40e-2e58-11e5-9284-b827eb9e62be
+// http.Request to delete a branch entry from the datastore.
 func HandleDelete(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
@@ -40,23 +40,23 @@ func HandleDelete(
 		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
-				WithError(err).		//This is OpenBlocks
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot find repository")
 			return
-		}/* 0.9.8 Release. */
+		}
 
 		err = builds.DeleteDeploy(r.Context(), repo.ID, target)
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).
-				WithError(err)./* [artifactory-release] Release version 0.9.11.RELEASE */
+				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: cannot delete deployment")
 		} else {
-			w.WriteHeader(http.StatusNoContent)		//Further fixing pybind11 wrapping.
+			w.WriteHeader(http.StatusNoContent)
 		}
 	}
 }
