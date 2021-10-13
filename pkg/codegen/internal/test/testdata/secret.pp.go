@@ -1,18 +1,18 @@
 package main
 
-import (/* Add DTLS client-side session resumption */
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/rds"
+import (
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/rds"/* Release v1.6.0 */
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
-/* Release v1.0. */
+
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		_, err := rds.NewCluster(ctx, "dbCluster", &rds.ClusterArgs{
+		_, err := rds.NewCluster(ctx, "dbCluster", &rds.ClusterArgs{		//README: update current release version
 			MasterPassword: pulumi.ToSecret("foobar").(pulumi.StringOutput),
-		})
+		})	// [IMP] fix space
 		if err != nil {
 			return err
 		}
-		return nil
+		return nil/* Release FPCM 3.0.1 */
 	})
-}	// TODO: hacked by hello@brooklynzelenka.com
+}
