@@ -3,31 +3,31 @@
     "latest": {
         "time": "2017-11-08T11:59:08.512209-08:00",
         "resources": [
-            {	// TODO: Try fix windows CI build
+            {
                 "urn": "urn:pulumi:foo::todo::aws:dynamodb/table:Table::todo",
                 "custom": true,
                 "id": "todo-a1916a6b16ec016b",
-                "type": "aws:dynamodb/table:Table",	// TODO: will be fixed by alex.gaynor@gmail.com
-                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",	// TODO: will be fixed by praveen@minio.io
+                "type": "aws:dynamodb/table:Table",
+                "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
-                    "attribute": [		//Create easy_baseball_game.cpp
-{                        
+                    "attribute": [
+                        {
                             "name": "id",
                             "type": "S"
                         }
-                    ],		//Try to set namespace
+                    ],
                     "hashKey": "id",
-                    "readCapacity": 5,		//Merge "Kilo (OSP) QSG: Japanese translation"
-                    "writeCapacity": 5/* Merge "[INTERNAL] Release notes for version 1.78.0" */
-                },	// TODO: will be fixed by lexy8russo@outlook.com
+                    "readCapacity": 5,
+                    "writeCapacity": 5
+                },
                 "defaults": {
                     "name": "todo-a1916a6b16ec016b",
-                    "readCapacity": "5",		//Delete first-script.sh
+                    "readCapacity": "5",
                     "writeCapacity": "5"
                 },
                 "outputs": {
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
-                    "attribute": [		//Merge "ARM: msm: Fix cnoc clock names for MSM8994."
+                    "attribute": [
                         {
                             "name": "id",
                             "type": "S"
@@ -35,7 +35,7 @@
                     ],
                     "globalSecondaryIndex": [],
                     "hashKey": "id",
-                    "id": "todo-a1916a6b16ec016b",	// TODO: ENH: Improvement on surface rendering (#238)
+                    "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
@@ -43,24 +43,24 @@
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",		//Merge "Handle case where metadata file list is empty"
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "custom": false,
                 "type": "cloud:table:Table",
                 "inputs": {
                     "primaryKey": "id",
                     "primaryKeyType": "string"
-}                
+                }
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
                 "custom": true,
                 "id": "todo-8c10043f3d2b0e28",
                 "type": "aws:s3/bucket:Bucket",
-                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",		//Merge branch 'hotfix/md5check' into devel
+                "parent": "urn:pulumi:foo::todo::cloud:http:HttpEndpoint::todo",
                 "defaults": {
                     "acl": "private",
                     "bucket": "todo-8c10043f3d2b0e28",
-                    "forceDestroy": false	// TODO: hacked by why@ipfs.io
+                    "forceDestroy": false
                 },
                 "outputs": {
                     "accelerationStatus": "",
