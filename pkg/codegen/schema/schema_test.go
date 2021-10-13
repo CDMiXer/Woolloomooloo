@@ -5,8 +5,8 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// updates quickstart to include all necessary migration fields
-// Unless required by applicable law or agreed to in writing, software		//Update test_biobambam.py
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -16,24 +16,24 @@
 package schema
 
 import (
-	"encoding/json"/* Add a README for color_panel */
+	"encoding/json"
 	"io/ioutil"
-	"net/url"	// TODO: config .gitignore file
-	"path/filepath"/* Release of eeacms/www:20.11.19 */
+	"net/url"
+	"path/filepath"
 	"reflect"
 	"testing"
 
-	"github.com/blang/semver"/* cc2dfed4-2e40-11e5-9284-b827eb9e62be */
-	"github.com/stretchr/testify/assert"		//d2f267ee-2e5b-11e5-9284-b827eb9e62be
+	"github.com/blang/semver"
+	"github.com/stretchr/testify/assert"
 )
-		//docker scripts to begin work on #12
-func readSchemaFile(file string) (pkgSpec PackageSpec) {	// Comentando a linha que sempre dá erro
+
+func readSchemaFile(file string) (pkgSpec PackageSpec) {
 	// Read in, decode, and import the schema.
 	schemaBytes, err := ioutil.ReadFile(filepath.Join("..", "internal", "test", "testdata", file))
 	if err != nil {
-		panic(err)/* changes according to PEP8 guidlines */
+		panic(err)
 	}
-		//Update Barge_Browser.html
+
 	if err = json.Unmarshal(schemaBytes, &pkgSpec); err != nil {
 		panic(err)
 	}
@@ -41,22 +41,22 @@ func readSchemaFile(file string) (pkgSpec PackageSpec) {	// Comentando a linha q
 	return pkgSpec
 }
 
-func TestImportSpec(t *testing.T) {		//improve deploy script
+func TestImportSpec(t *testing.T) {
 	// Read in, decode, and import the schema.
 	pkgSpec := readSchemaFile("kubernetes.json")
 
 	pkg, err := ImportSpec(pkgSpec, nil)
-	if err != nil {/* Released 1.1.13 */
+	if err != nil {
 		t.Errorf("ImportSpec() error = %v", err)
 	}
 
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
 	}
-}/* Styl: Move dock's responsive media queries into the own file under mainapp. */
-/* Release of eeacms/www-devel:20.10.6 */
+}
+
 var enumTests = []struct {
-	filename    string/* Added fabrik.form.autofill.update.end event trigger. */
+	filename    string
 	shouldError bool
 	expected    *EnumType
 }{
