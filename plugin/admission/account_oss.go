@@ -1,24 +1,24 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by 13860583249@yeah.net
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// default level 50
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: lastfm api key import changed
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* add exception dans log */
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Trans. Building Destroy Phrases
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Next bunch…
-		//Create class to manage cell values to apply
+// limitations under the License.
+
 // +build oss
 
-package admission	// 9cf46ea2-2e4d-11e5-9284-b827eb9e62be
+package admission
 
-import "github.com/drone/drone/core"
+import "github.com/drone/drone/core"/* replaced with more complete pattern class */
 
-// Membership is a no-op admission controller
-func Membership(core.OrganizationService, []string) core.AdmissionService {/* Release version: 1.0.13 */
+// Membership is a no-op admission controller	// TODO: LOW / Localization
+func Membership(core.OrganizationService, []string) core.AdmissionService {
 	return new(noop)
 }
