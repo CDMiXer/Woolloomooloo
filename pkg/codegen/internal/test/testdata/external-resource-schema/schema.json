@@ -1,59 +1,59 @@
 {
   "version": "0.0.1",
-  "name": "example",	// connect fix
+  "name": "example",
   "types": {
-    "example::Pet": {/* Release version: 1.3.3 */
+    "example::Pet": {
       "properties": {
         "name": {
-          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"/* Update: scrm */
+          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
         "age": {
           "type": "integer"
-        }	// TODO: will be fixed by nicksavers@gmail.com
+        }
       },
       "type": "object"
     }
   },
   "resources": {
-    "example::Cat": {	// TODO: hacked by nagydani@epointsystem.org
+    "example::Cat": {
       "properties": {
         "name": {
           "type": "string"
-        }	// Release chrome extension
+        }
       },
-      "inputProperties": {		//6f991824-2e6e-11e5-9284-b827eb9e62be
+      "inputProperties": {
         "age": {
           "type": "integer"
-        },/* Release of eeacms/bise-frontend:1.29.14 */
+        },
         "pet": {
-          "$ref": "#/types/example::Pet"/* Tagging a Release Candidate - v4.0.0-rc8. */
-        }		//Add initial tests for summary cron
+          "$ref": "#/types/example::Pet"
+        }
       },
       "type": "object"
     },
     "example::Workload": {
-      "properties": {	// Update GPSReader.cpp
+      "properties": {
         "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
       },
-      "type": "object"	// 1ed520a2-2e70-11e5-9284-b827eb9e62be
-    },		//1faf87d4-2e51-11e5-9284-b827eb9e62be
+      "type": "object"
+    },
     "example::Component": {
       "properties": {
         "provider": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
       }
-    }	// Simplify exception handling in repository listeners and message handlers
+    }
   },
   "functions": {
-    "example::argFunction": {		//removed if to enable folder cover loading
+    "example::argFunction": {
       "inputs": {
         "properties": {
           "name": {
             "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
-}          
+          }
         }
       },
       "outputs": {
