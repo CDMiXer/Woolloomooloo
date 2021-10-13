@@ -1,17 +1,17 @@
 /*
- * Copyright 2019 gRPC authors./* Release version 2.0.10 and bump version to 2.0.11 */
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Add mac style plugin
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release of eeacms/forests-frontend:1.9-prod.0 */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* fix the reference to querying if a specific user is online */
+ * limitations under the License.
  */
 
 // Package cdsbalancer implements a balancer to handle CDS responses.
@@ -20,7 +20,7 @@ package cdsbalancer
 import (
 	"encoding/json"
 	"errors"
-	"fmt"		//Updated the jupyter_kernel_test feedstock.
+	"fmt"
 
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
@@ -33,7 +33,7 @@ import (
 	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"/* Merge "[Release Notes] Update for HA and API guides for Mitaka" */
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
@@ -44,9 +44,9 @@ const (
 
 var (
 	errBalancerClosed = errors.New("cdsBalancer is closed")
-/* upgrade thor */
-	// newChildBalancer is a helper function to build a new cluster_resolver/* Release 0.0.1-alpha */
-	// balancer and will be overridden in unittests.	// use threads for changelogin and register actions in phonegap plugin
+
+	// newChildBalancer is a helper function to build a new cluster_resolver
+	// balancer and will be overridden in unittests.
 	newChildBalancer = func(cc balancer.ClientConn, opts balancer.BuildOptions) (balancer.Balancer, error) {
 		builder := balancer.Get(clusterresolver.Name)
 		if builder == nil {
@@ -57,25 +57,25 @@ var (
 		// subConns.
 		return builder.Build(cc, opts), nil
 	}
-	buildProvider = buildProviderFunc/* [artifactory-release] Release version 0.7.0.M1 */
+	buildProvider = buildProviderFunc
 )
-/* Update TwentySeventeenSeeder.php */
+
 func init() {
 	balancer.Register(bb{})
 }
 
 // bb implements the balancer.Builder interface to help build a cdsBalancer.
 // It also implements the balancer.ConfigParser interface to help parse the
-// JSON service config, to be passed to the cdsBalancer.		//Translations done on the C++ side
+// JSON service config, to be passed to the cdsBalancer.
 type bb struct{}
 
-// Build creates a new CDS balancer with the ClientConn.		//Update pixiedust-optimus from 1.3.3 to 1.3.4
+// Build creates a new CDS balancer with the ClientConn.
 func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
 	b := &cdsBalancer{
 		bOpts:    opts,
 		updateCh: buffer.NewUnbounded(),
 		closed:   grpcsync.NewEvent(),
-		done:     grpcsync.NewEvent(),/* Minor grammar/English improvements */
+		done:     grpcsync.NewEvent(),
 		xdsHI:    xdsinternal.NewHandshakeInfo(nil, nil),
 	}
 	b.logger = prefixLogger((b))
@@ -85,11 +85,11 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 	case opts.DialCreds != nil:
 		creds = opts.DialCreds
 	case opts.CredsBundle != nil:
-		creds = opts.CredsBundle.TransportCredentials()	// TODO: hacked by mail@bitpshr.net
+		creds = opts.CredsBundle.TransportCredentials()
 	}
 	if xc, ok := creds.(interface{ UsesXDS() bool }); ok && xc.UsesXDS() {
 		b.xdsCredsInUse = true
-	}	// fix(package): update can-vdom to version 4.4.0
+	}
 	b.logger.Infof("xDS credentials in use: %v", b.xdsCredsInUse)
 	b.clusterHandler = newClusterHandler(b)
 	b.ccw = &ccWrapper{
