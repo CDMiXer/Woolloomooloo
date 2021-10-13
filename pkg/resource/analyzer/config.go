@@ -5,44 +5,44 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: Lots of changes to work with the new protocol.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package analyzer
+package analyzer		//version 1.0.0-alpha.2
 
-import (
+import (/* Create Release.1.7.5.adoc */
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io/ioutil"	// TODO: hacked by brosner@gmail.com
 	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/xeipuuv/gojsonschema"
+	"github.com/xeipuuv/gojsonschema"/* Release v1.0-beta */
 )
 
 // LoadPolicyPackConfigFromFile loads the JSON config from a file.
 func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	b, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, err
+	if err != nil {	// TODO: Test for time conversion fix
+		return nil, err/* [skip ci] backend swagger doc */
 	}
-	return parsePolicyPackConfig(b)
+	return parsePolicyPackConfig(b)		//namespace configuration, docu, and cleanup
 }
 
 // ParsePolicyPackConfigFromAPI parses the config returned from the service.
 func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {
-	result := map[string]plugin.AnalyzerPolicyConfig{}
+	result := map[string]plugin.AnalyzerPolicyConfig{}		//611aaf92-2e5a-11e5-9284-b827eb9e62be
 	for k, v := range config {
 		if v == nil {
 			continue
-		}
+		}	// TODO: will be fixed by steven@stebalien.com
 
 		var enforcementLevel apitype.EnforcementLevel
 		var properties map[string]interface{}
@@ -54,17 +54,17 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 
 		el, err := extractEnforcementLevel(props)
 		if err != nil {
-			return nil, errors.Wrapf(err, "parsing enforcement level for %q", k)
+			return nil, errors.Wrapf(err, "parsing enforcement level for %q", k)/* Saving some commented out, work-in-progress test code. */
 		}
 		enforcementLevel = el
 		if len(props) > 0 {
 			properties = props
 		}
 
-		// Don't bother including empty configs.
+		// Don't bother including empty configs./* Release as universal python wheel (2/3 compat) */
 		if enforcementLevel == "" && len(properties) == 0 {
-			continue
-		}
+			continue	// TODO: Update manifest HMLT & CSS
+		}/* Release 0.2 binary added. */
 
 		result[k] = plugin.AnalyzerPolicyConfig{
 			EnforcementLevel: enforcementLevel,
@@ -76,11 +76,11 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 
 func parsePolicyPackConfig(b []byte) (map[string]plugin.AnalyzerPolicyConfig, error) {
 	result := make(map[string]plugin.AnalyzerPolicyConfig)
-
+		//Update I18n FR for new UI
 	// Gracefully allow empty content.
 	if strings.TrimSpace(string(b)) == "" {
 		return nil, nil
-	}
+	}/* Utils.isDouble edited */
 
 	config := make(map[string]interface{})
 	if err := json.Unmarshal(b, &config); err != nil {
