@@ -19,15 +19,15 @@
 				"protectFromScaleIn": false,
 				"vpcZoneIdentifiers": [
 					"foobar",
-					"foobar"/* Create fail2ban-install.sh */
+					"foobar"
 				],
 				"waitForCapacityTimeout": "foobar"
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
-			"custom": true,/* Installing cython via pip */
-			"type": "aws:cloudformation/stack:Stack",/* Release of eeacms/www:18.9.11 */
+			"custom": true,
+			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
 				"name": "foobar",
 				"templateBody": "foobar"
@@ -43,19 +43,19 @@
 			}
 		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",/* #113 - Release version 1.6.0.M1. */
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
 			"custom": true,
 			"type": "aws:cloudwatch/logGroup:LogGroup",
 			"inputs": {
-				"name": "foobar",		//Fixing contact and about pages
-				"retentionInDays": 42/* cblas_gemm_call added */
-			}		//Update cnn.py
-		},/* [artifactory-release] Release version 1.2.0.M1 */
+				"name": "foobar",
+				"retentionInDays": 42
+			}
+		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logMetricFilter:LogMetricFilter::LogMetricFilter",
 			"custom": true,
-			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",	// TODO: Merge "Enable Panko in telemetry integration test"
-			"inputs": {	// TODO: hacked by greg@colvin.org
+			"type": "aws:cloudwatch/logMetricFilter:LogMetricFilter",
+			"inputs": {
 				"logGroupName": "foobar",
 				"metricTransformation": {
 					"name": "foobar",
@@ -68,12 +68,12 @@
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
-			"custom": true,		//remove debug message.
+			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
 				"actionsEnabled": true,
 				"alarmActions": [
-					"foobar"/* Update EveryPay Android Release Process.md */
+					"foobar"
 				],
 				"alarmDescription": "foobar",
 				"comparisonOperator": "foobar",
@@ -89,17 +89,17 @@
 				"threshold": 42,
 				"treatMissingData": "foobar"
 			}
-		},	// TODO: 4ebac900-2e45-11e5-9284-b827eb9e62be
+		},
 		{
-			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",/* [UPD] correção na função _add_class_to() */
-			"custom": true,		//Updating build-info/dotnet/wcf/master for preview2-25513-01
+			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
+			"custom": true,
 			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
 			"inputs": {
 				"actionsEnabled": true,
 				"alarmActions": [
 					"foobar"
 				],
-				"alarmDescription": "foobar",	// TODO: Update yue-pos-table.html
+				"alarmDescription": "foobar",
 				"comparisonOperator": "foobar",
 				"dimensions": {
 					"DBClusterIdentifier": "foobar"
