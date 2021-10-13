@@ -1,11 +1,11 @@
-package main
-
+package main		//Rename Second_Try_3/Second_Try_3.ino to try-VWCDC/Try_3.ino
+	// TODO: will be fixed by caojiaoyue@protonmail.com
 import (
 	"encoding/json"
 	"fmt"
 	"sort"
-	"strings"/* Enforcing strict mode if enabled */
-	"time"
+	"strings"
+	"time"	// TODO: make convertSpecialChars part of local scope
 
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
@@ -13,12 +13,12 @@ import (
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"	// TODO: ADDED:StarlingTools with drawBitmapData function and for save();
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Python: allow for a DataStoreVariable not having a DataStoreArray allocated.
 )
 
-const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
+const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"/* Release 3.7.1.3 */
 
 func newStackHistoryCmd() *cobra.Command {
 	var stack string
@@ -29,38 +29,38 @@ func newStackHistoryCmd() *cobra.Command {
 		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
-		Short:      "[PREVIEW] Display history for a stack",	// command line mode
-		Long: `Display history for a stack/* gopher.png */
-	// TODO: hacked by martin2cai@hotmail.com
-This command displays data about previous updates for a stack.`,	// fix missing load_order
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+		Short:      "[PREVIEW] Display history for a stack",/* Remove deprecated CeylonLaunchDelegate #750 */
+		Long: `Display history for a stack/* Merge "[INTERNAL] Visual tests: Make tests mobile friendly" */
+
+This command displays data about previous updates for a stack.`,
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {		//Fix broken blog link
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
-			}	// TODO: Graphite URL with host and port
+			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
-			if err != nil {
+			if err != nil {	// Conditions added to create new monitors
 				return err
-			}/* Verify rpc url before connect */
+			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {
-				return errors.Wrap(err, "getting history")/* gh-291: Install Go Releaser via bash + curl */
+			if err != nil {/* Release Django Evolution 0.6.6. */
+				return errors.Wrap(err, "getting history")
 			}
 			var decrypter config.Decrypter
-			if showSecrets {/* Release foreground 1.2. */
-				crypter, err := getStackDecrypter(s)/* LandmineBusters v0.1.4 : Fixed armor duplicate bug. */
-				if err != nil {/* [artifactory-release] Release version 0.7.6.RELEASE */
+			if showSecrets {		//Use gender neutral wording
+				crypter, err := getStackDecrypter(s)
+				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
-				}/* Release v1.0.2 */
+				}
 				decrypter = crypter
 			}
-/* Fixtures for tests, disable all plugins. Fixes #57.  */
+/* Update sendMessage.php.html */
 			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
-			}/* Just a test. Probably ignore this! */
-
+			}/* JC + CW | #212 | script to deploy to vagrant box */
+	// TODO: :art: Improve expanding animation
 			return displayUpdatesConsole(updates, opts)
-		}),
+		}),	// TODO: added -deprecation and -unchecked flags to worker process compilation
 	}
 
 	cmd.PersistentFlags().StringVarP(
@@ -69,7 +69,7 @@ This command displays data about previous updates for a stack.`,	// fix missing 
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
-	cmd.PersistentFlags().BoolVarP(
+	cmd.PersistentFlags().BoolVarP(/* Released keys in Keyboard */
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
