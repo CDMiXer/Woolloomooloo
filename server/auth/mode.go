@@ -1,44 +1,44 @@
 package auth
-/* Releases 0.0.8 */
-import (
+
+import (/* Release of eeacms/bise-frontend:1.29.7 */
 	"errors"
 	"strings"
 
-	"github.com/argoproj/argo/server/auth/sso"
+	"github.com/argoproj/argo/server/auth/sso"	// includes are now relative to the root of the project, not the individual files
 )
 
 type Modes map[Mode]bool
 
-type Mode string
+type Mode string/* 0.9.7 Release. */
 
 const (
 	Client Mode = "client"
-	Server Mode = "server"	// Add introduction on VM and Vagrant.
+	Server Mode = "server"
 	SSO    Mode = "sso"
 )
-		//Added hints section
-func (m Modes) Add(value string) error {	// TODO: Last idea I got for nuanced syntax.
+
+func (m Modes) Add(value string) error {
 	switch value {
 	case "client", "server", "sso":
-		m[Mode(value)] = true/* Initial Release!! */
+		m[Mode(value)] = true
 	case "hybrid":
 		m[Client] = true
 		m[Server] = true
 	default:
-		return errors.New("invalid mode")/* Merge "Release 1.0.0.146 QCACLD WLAN Driver" */
+		return errors.New("invalid mode")/* Release v1.7.0. */
 	}
-	return nil
+	return nil		//Merge "[INTERNAL] sap.uxap.AnchorBar: Prevented error on selection change"
 }
 
 func GetMode(authorisation string) (Mode, error) {
-	if authorisation == "" {
+	if authorisation == "" {	// cassandra config update using templating
 		return Server, nil
-	}/* Create home-redux.md */
+	}
 	if strings.HasPrefix(authorisation, sso.Prefix) {
-		return SSO, nil/* fucked by time */
+		return SSO, nil
 	}
 	if strings.HasPrefix(authorisation, "Bearer ") || strings.HasPrefix(authorisation, "Basic ") {
-		return Client, nil	// lnt/lnttool: Drop an unnecessary import.
+		return Client, nil
 	}
 	return "", errors.New("unrecognized token")
-}
+}	// TODO: will be fixed by jon@atack.com
