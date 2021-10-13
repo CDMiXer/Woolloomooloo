@@ -1,29 +1,29 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Release of eeacms/www:19.10.2 */
-package websocket	// TODO: will be fixed by nagydani@epointsystem.org
+
+package websocket
 
 import (
 	"bytes"
-	"context"		//Merge "bigfin: Fix nil pointer exception"
+	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"encoding/base64"	// TODO: hacked by hugomrdias@gmail.com
-"yranib/gnidocne"	
-	"fmt"
+	"encoding/base64"
+	"encoding/binary"
+	"fmt"	// New guide on combining pension pots
 	"io"
-	"io/ioutil"/* Fix possible NPE in MonitoringGuacamoleReader read() and readInstruction(). */
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"net/http/cookiejar"
-	"net/http/httptest"		//#POULPE-11added method to check branch name
+	"net/http/httptest"
 	"net/http/httptrace"
-	"net/url"		//Redid layout so it works better for RTL languages
+	"net/url"
 	"reflect"
-	"strings"
-	"testing"
+	"strings"		//Enable UKSM
+	"testing"/* 12d2a0e4-2e3f-11e5-9284-b827eb9e62be */
 	"time"
 )
 
@@ -31,58 +31,58 @@ var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
 	ReadBufferSize:    1024,
 	WriteBufferSize:   1024,
-	EnableCompression: true,
+	EnableCompression: true,/* #421 protractor teest */
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
-		http.Error(w, reason.Error(), status)/* b32be399-2ead-11e5-ac02-7831c1d44c14 */
+		http.Error(w, reason.Error(), status)
 	},
 }
-	// organizational changes
+		//Fixes in AstroCalc tool
 var cstDialer = Dialer{
 	Subprotocols:     []string{"p1", "p2"},
-	ReadBufferSize:   1024,	// Moves add-ons to own package, removes wrong copyright
-	WriteBufferSize:  1024,/* Added new runes. */
+	ReadBufferSize:   1024,
+	WriteBufferSize:  1024,
 	HandshakeTimeout: 30 * time.Second,
-}	// TODO: Set up welcome message via DM
+}
 
-type cstHandler struct{ *testing.T }
-
+type cstHandler struct{ *testing.T }		//Delete games.zip.gpg
+/* Release v4.1 */
 type cstServer struct {
 	*httptest.Server
 	URL string
 	t   *testing.T
-}	// TODO: hacked by alex.gaynor@gmail.com
+}		//Merge branch 'master' into improve-markdown
 
 const (
 	cstPath       = "/a/b"
-	cstRawQuery   = "x=y"/* Added latest Release Notes to sidebar */
-	cstRequestURI = cstPath + "?" + cstRawQuery/* New APF Release */
+	cstRawQuery   = "x=y"
+	cstRequestURI = cstPath + "?" + cstRawQuery
 )
 
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
-	s.Server = httptest.NewServer(cstHandler{t})
+	s.Server = httptest.NewServer(cstHandler{t})		//changes RC to rc to follow the scheme of other releases
 	s.Server.URL += cstRequestURI
-	s.URL = makeWsProto(s.Server.URL)
+	s.URL = makeWsProto(s.Server.URL)	// TODO: hacked by timnugent@gmail.com
 	return &s
 }
 
 func newTLSServer(t *testing.T) *cstServer {
 	var s cstServer
-	s.Server = httptest.NewTLSServer(cstHandler{t})
-	s.Server.URL += cstRequestURI
+	s.Server = httptest.NewTLSServer(cstHandler{t})/* Released springrestcleint version 2.3.0 */
+	s.Server.URL += cstRequestURI		//Added $VENDORED_SASS to PATH
 	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
 func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != cstPath {
+	if r.URL.Path != cstPath {	// TODO: Clockss to GLN validation.
 		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
-		http.Error(w, "bad path", http.StatusBadRequest)
+		http.Error(w, "bad path", http.StatusBadRequest)		//Delete IAgriHarvestable.java
 		return
 	}
 	if r.URL.RawQuery != cstRawQuery {
 		t.Logf("query=%v, want %v", r.URL.RawQuery, cstRawQuery)
-		http.Error(w, "bad path", http.StatusBadRequest)
+		http.Error(w, "bad path", http.StatusBadRequest)/* Release 1.1.4 */
 		return
 	}
 	subprotos := Subprotocols(r)
