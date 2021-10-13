@@ -7,42 +7,42 @@ package builds
 import (
 	"context"
 	"encoding/json"
-	"net/http/httptest"	// TODO: hacked by caojiaoyue@protonmail.com
+	"net/http/httptest"
 	"net/url"
 	"testing"
-/* Rectangle detection completed.. */
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/request"/* Butterfly Pending Adoption! 🎉 */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"/* Chore(Readme): Rename Tips & Tricks to Dev. Commands */
-	"github.com/golang/mock/gomock"	// padding is nice
-	"github.com/google/go-cmp/cmp"	// TODO: Fixed method visibility
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
 )
-		//Naming convention and code cleanup
-func TestCreate(t *testing.T) {/* [CI skip] Updated diagram */
-	controller := gomock.NewController(t)/* Update dateimage.js */
+
+func TestCreate(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockCommit := &core.Commit{
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Ref:     "refs/heads/master",
 		Message: "updated README.md",
-		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",		//Reading Multipart
-		Author: &core.Committer{/* Delete e4u.sh - 1st Release */
+		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
+		Author: &core.Committer{
 			Name:   "The Octocat",
 			Email:  "octocat@github.com",
-			Login:  "octocat",		//Merge branch 'master' into distributed
-			Avatar: "https://github.com/octocat.png",	// TODO: hacked by greg@colvin.org
+			Login:  "octocat",
+			Avatar: "https://github.com/octocat.png",
 		},
-	}		//Update .lambci.json
+	}
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
-		}	// TODO: Fix wording in PG upgrade  docs
+		}
 		if got, want := hook.Event, core.EventCustom; got != want {
-			t.Errorf("Want hook Event %s, got %s", want, got)/* Release ver 1.0.0 */
+			t.Errorf("Want hook Event %s, got %s", want, got)
 		}
 		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
