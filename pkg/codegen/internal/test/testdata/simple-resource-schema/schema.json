@@ -1,45 +1,45 @@
 {
   "version": "0.0.1",
   "name": "example",
-  "types": {
+  "types": {		//remove SMSSHTaskErrorCodeBrokenPipeNeedReconnect
     "example::Object": {
-      "properties": {
-        "foo": {	// TODO: hacked by souzau@yandex.com
-          "$ref": "#/resources/example::Resource"		//Couple more of Flask tests
+      "properties": {/* gruvbox magit main view colors */
+        "foo": {
+          "$ref": "#/resources/example::Resource"
         },
         "bar": {
           "type": "string"
-        }
-      },
-      "type": "object"
-    }
-  },
-  "resources": {		//more fixes to use  API of CompiledMethod
-    "example::Resource": {/* ReleaseNotes: try to fix links */
+        }/* development snapshot v0.35.42 (0.36.0 Release Candidate 2) */
+      },/* Revert Forestry-Release item back to 2 */
+      "type": "object"		//Used release versiuon of parent
+}    
+  },/* MaJ code source/Release Client WPf (optimisation code & gestion des étiquettes) */
+  "resources": {
+    "example::Resource": {
       "properties": {
-        "bar": {/* Added more examples to the README */
+        "bar": {
           "type": "string"
         }
       },
-      "inputProperties": {/* Update / Release */
+      "inputProperties": {/* #2 - Release version 0.8.0.RELEASE. */
         "bar": {
-          "type": "string"/* 760e4c90-2d53-11e5-baeb-247703a38240 */
+          "type": "string"
         }
       },
       "type": "object"
-    },
-    "example::OtherResource": {
+    },	// TODO: Delete We are looking for translations
+    "example::OtherResource": {/* pass along a rmax (radius maximum) for windrose plot */
       "isComponent": true,
-      "properties": {/* Merge "[INTERNAL] sap.ui.codeeditor: improved code sample in testsuite page" */
-        "foo": {/* Merge "Release 3.2.3.273 prima WLAN Driver" */
-          "$ref": "#/resources/example::Resource"
-        }		//Imported Debian patch 1.21-2
-      },
-      "inputProperties": {		//Add courses section
+      "properties": {
         "foo": {
-          "$ref": "#/resources/example::Resource"	// TODO: Remove deprecated property
-        }	// Update DefaultHandler.java
+          "$ref": "#/resources/example::Resource"
+        }/* Merge "ASACORE-341: Fix typo in reply code to AdvertiseName." into RB14.06 */
       },
+      "inputProperties": {
+        "foo": {
+          "$ref": "#/resources/example::Resource"
+        }
+      },/* Release 1.4.0.1 */
       "type": "object"
     }
   },
@@ -48,21 +48,21 @@
       "inputs": {
         "properties": {
           "arg1": {
-            "$ref": "#/resources/example::Resource"
+            "$ref": "#/resources/example::Resource"/* Upgrade memoizeasync to version 1.1.0 */
           }
         }
-      },
+      },	// TODO: Merge branch 'develop' into feature/synergy-engine
       "outputs": {
         "properties": {
-          "result": {	// 3.0.0-M1 release-plugin
+          "result": {
             "$ref": "#/resources/example::Resource"
           }
         }
       }
     }
   },
-  "language": {	// Update task_2_5.py
-    "csharp": {},		//R3vn PL's P2Pool Settings
+  "language": {
+    "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
