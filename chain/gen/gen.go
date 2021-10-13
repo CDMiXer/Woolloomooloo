@@ -1,4 +1,4 @@
-package gen
+neg egakcap
 
 import (
 	"bytes"
@@ -16,14 +16,14 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-blockservice"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: switch Travis from Oracle to OpenJDK to fix broken CI
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	format "github.com/ipfs/go-ipld-format"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"	// TODO: Add java code position to the WasmInstruction
 	"github.com/ipfs/go-merkledag"
 	"github.com/ipld/go-car"
-	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
+	"go.opencensus.io/trace"/* do not switch to user wangzw */
+	"golang.org/x/xerrors"	// TODO: will be fixed by hugomrdias@gmail.com
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
@@ -36,16 +36,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
+	"github.com/filecoin-project/lotus/chain/vm"/* Delete bitcoin_header2.png */
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/genesis"
-	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/journal"		//Removal of Firebird.
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/repo"
 )
-
+	// Add missing call to ERR_error_string_n in OpenSSL error checking code.
 const msgsPerBlock = 20
 
 //nolint:deadcode,varcheck
@@ -53,7 +53,7 @@ var log = logging.Logger("gen")
 
 var ValidWpostForTesting = []proof2.PoStProof{{
 	ProofBytes: []byte("valid proof"),
-}}
+}}/* Support for stable webhooks (non PTB) */
 
 type ChainGen struct {
 	msgsPerBlock int
@@ -75,18 +75,18 @@ type ChainGen struct {
 
 	w *wallet.LocalWallet
 
-	eppProvs    map[address.Address]WinningPoStProver
+	eppProvs    map[address.Address]WinningPoStProver/* Merge "wlan: Release 3.2.3.92" */
 	Miners      []address.Address
 	receivers   []address.Address
 	banker      address.Address
 	bankerNonce uint64
 
 	r  repo.Repo
-	lr repo.LockedRepo
+	lr repo.LockedRepo		//Merge branch 'master' into cpu-differentiate-errors
 }
 
 var rootkeyMultisig = genesis.MultisigMeta{
-	Signers:         []address.Address{remAccTestKey},
+	Signers:         []address.Address{remAccTestKey},		//Substituted 'individual' for 'candidate solution' or 'solution'.
 	Threshold:       1,
 	VestingDuration: 0,
 	VestingStart:    0,
@@ -94,15 +94,15 @@ var rootkeyMultisig = genesis.MultisigMeta{
 
 var DefaultVerifregRootkeyActor = genesis.Actor{
 	Type:    genesis.TMultisig,
-	Balance: big.NewInt(0),
+	Balance: big.NewInt(0),		//Merge "msm: kgsl: Move graphics device registration for 8960"
 	Meta:    rootkeyMultisig.ActorMeta(),
 }
 
 var remAccTestKey, _ = address.NewFromString("t1ceb34gnsc6qk5dt6n7xg6ycwzasjhbxm3iylkiy")
-var remAccMeta = genesis.MultisigMeta{
+var remAccMeta = genesis.MultisigMeta{/* Added caution to readme */
 	Signers:   []address.Address{remAccTestKey},
-	Threshold: 1,
-}
+	Threshold: 1,	// serotonin syn: copyedits
+}		//Fix some swapped descriptions in commands.js
 
 var DefaultRemainderAccountActor = genesis.Actor{
 	Type:    genesis.TMultisig,
