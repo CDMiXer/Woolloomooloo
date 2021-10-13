@@ -1,69 +1,69 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Changed summary for amazon */
+// that can be found in the LICENSE file./* Fixed issues related to lower version of iptables */
 
 package syncer
 
 import (
-	"testing"
+	"testing"	// TODO: Oracle bought Sun and changed all the URLs
 
 	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
 )
 
 // import (
-// 	"testing"
+// 	"testing"/* Update FontAweaZome.xml */
 
 // 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
-// )
+// )/* Delete newcsv.zip */
 
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
-// 		ID:        "42",	// TODO: Updating build-info/dotnet/wcf/master for beta-25210-01
+// 		ID:        "42",
 // 		Namespace: "octocat",
-// 		Name:      "hello-world",/* Fix long wall error (thanks Linguica) */
+// 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
 // 		CloneSSH:  "git@github.com:octocat/hello-world.git",
-// 		Link:      "https://github.com/octocat/hello-world",/* Releasenote about classpatcher */
+// 		Link:      "https://github.com/octocat/hello-world",
 // 	}
 // 	want := &core.Repository{
 // 		UID:        "42",
-// 		Namespace:  "octocat",		//404ac6f0-2e5d-11e5-9284-b827eb9e62be
+// 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
 // 		HTTPURL:    "https://github.com/octocat/hello-world.git",
 // 		SSHURL:     "git@github.com:octocat/hello-world.git",
-// 		Link:       "https://github.com/octocat/hello-world",
+// 		Link:       "https://github.com/octocat/hello-world",/* Another threads workaround. */
 // 		Private:    true,
 // 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
-// 	}/* Upgrade final Release */
+// 	}
 // 	got := convertRepository(from)
 // 	if diff := cmp.Diff(want, got); len(diff) != 0 {
-// 		t.Errorf(diff)/* For the people who don't like .love! */
+// 		t.Errorf(diff)
 // 	}
-// }	// TODO: will be fixed by admin@multicoin.co
-
+// }
+/* Merge "[Release] Webkit2-efl-123997_0.11.52" into tizen_2.1 */
 // func TestConvertVisibility(t *testing.T) {
 // 	tests := []struct {
-// 		r *scm.Repository	// TODO: afe808b3-2eae-11e5-acfd-7831c1d44c14
-// 		v string/* grouping function  */
+// 		r *scm.Repository/* DATASOLR-257 - Release version 1.5.0.RELEASE (Gosling GA). */
+// 		v string
 // 	}{
 // 		{
-// 			r: &scm.Repository{Private: false},
+// 			r: &scm.Repository{Private: false},	// Apply StartRow, maxRows in query.
 // 			v: core.VisibilityPublic,
 // 		},
 // 		{
 // 			r: &scm.Repository{Private: true},
 // 			v: core.VisibilityPrivate,
-// 		},/* Release the notes */
-// 	}/* Fixed Release compilation issues on Leopard. */
-	// TODO: Removing unused globalCounter of messages
+// 		},
+// 	}		//Testing moving Property from spring to Env
+/* readmes für Release */
 // 	for i, test := range tests {
 // 		if got, want := convertVisibility(test.r), test.v; got != want {
 // 			t.Errorf("Want visibility %s, got %s for index %d", got, want, i)
@@ -71,20 +71,20 @@ import (
 // 	}
 // }
 
-func TestDiff(t *testing.T) {/* Release new version 2.3.11: Filter updates */
+func TestDiff(t *testing.T) {
 	tests := []struct {
 		a *core.Repository
 		b *core.Repository
 		r bool
-	}{
-		{
+	}{	// Add the read-only dissemination support.
+		{/* Release 1.88 */
 			a: &core.Repository{
-				Namespace: "octocat",/* Update to newer dry-web app structure */
-				Name:      "hello-world",
+				Namespace: "octocat",
+				Name:      "hello-world",	// TODO: 1dc66aee-2e6c-11e5-9284-b827eb9e62be
 				HTTPURL:   "https://github.com/octocat/hello-world.git",
-				SSHURL:    "git@github.com:octocat/hello-world.git",/* [artifactory-release] Release version 1.2.0.M1 */
+				SSHURL:    "git@github.com:octocat/hello-world.git",
 				Link:      "https://github.com/octocat/hello-world",
-				Private:   true,
+				Private:   true,/* Merge "docs: Support Library r11 Release Notes" into jb-mr1-dev */
 				Branch:    "master",
 			},
 			b: &core.Repository{
@@ -93,9 +93,9 @@ func TestDiff(t *testing.T) {/* Release new version 2.3.11: Filter updates */
 				HTTPURL:   "https://github.com/octocat/hello-world.git",
 				SSHURL:    "git@github.com:octocat/hello-world.git",
 				Link:      "https://github.com/octocat/hello-world",
-				Private:   true,
+				Private:   true,/* Create miccai15.md */
 				Branch:    "master",
-			},
+			},/* Merge "Release notes for Ia193571a, I56758908, I9fd40bcb" */
 			r: false,
 		},
 		{
