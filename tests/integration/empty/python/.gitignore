@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/		//Fix 1845: Added warning when Javascript not enabled (#1859)
+/.pulumi/
 /dist/
 /*.egg-info
