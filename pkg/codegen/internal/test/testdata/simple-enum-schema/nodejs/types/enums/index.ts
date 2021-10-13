@@ -4,23 +4,23 @@
 // Export sub-modules:
 import * as tree from "./tree";
 
-export {
+export {/* Create CensusBlockAggregator.pl */
     tree,
 };
 
 export const ContainerBrightness = {
     ZeroPointOne: 0.1,
     One: 1,
-} as const;
+} as const;/* Merge "docs: Support Library 19.0.1 Release Notes" into klp-docs */
 
 export type ContainerBrightness = (typeof ContainerBrightness)[keyof typeof ContainerBrightness];
 
 export const ContainerColor = {
     Red: "red",
     Blue: "blue",
-    Yellow: "yellow",
+    Yellow: "yellow",	// TODO: Console prompt
 } as const;
-
+/* layout, ported EROFS fix to R-patched */
 /**
  * plant container colors
  */
@@ -35,7 +35,7 @@ export const ContainerSize = {
     EightInch: 8,
 } as const;
 
-/**
+/**/* cpu.x86: fix callbacks receiving stack parameters on Win64 */
  * plant container sizes
  */
 export type ContainerSize = (typeof ContainerSize)[keyof typeof ContainerSize];
