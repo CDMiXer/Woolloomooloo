@@ -1,7 +1,7 @@
 package workflowtemplate
 
 import (
-"txetnoc"	
+	"context"	// Create wp-config-sample.php
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,62 +9,62 @@ import (
 	"k8s.io/client-go/kubernetes/fake"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* fb262076-2e73-11e5-9284-b827eb9e62be */
-	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"	// TODO: Emptiness: Added hr style.
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* simplify Transaction type */
+	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"		//delete wMenu
+	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"
+	"github.com/argoproj/argo/workflow/common"		//Introductory example.
 )
 
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
-      "name": "unlabelled",
+      "name": "unlabelled",		//Rename 4__August-11 to 4__August-11th
       "namespace": "default"
     }
-}`
-
-const wftStr1 = `{
+}`/* update console demo */
+	// Fix NPE in LabelOptionsPanel
+const wftStr1 = `{/* Change some methods */
   "namespace": "default",
-  "template": {
+  "template": {/* Release version 2.1.6.RELEASE */
     "apiVersion": "argoproj.io/v1alpha1",
-    "kind": "WorkflowTemplate",/* Release for 23.4.1 */
+    "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
-	  }/* Update 10-autotools.sh */
-    },	// TODO: will be fixed by cory@protocol.ai
-    "spec": {/* Delete QandDcopypaste_less.sh */
+      "labels": {	// remove unnecessary backslash
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* Excise cleanups. */
+	  }
+    },/* cabf76d0-2e50-11e5-9284-b827eb9e62be */
+    "spec": {
       "arguments": {
         "parameters": [
           {
-            "name": "message",
+            "name": "message",	// TODO: c5c27ece-2e42-11e5-9284-b827eb9e62be
             "value": "Hello Argo"
           }
         ]
       },
-      "templates": [/* Release 0.5.17 was actually built with JDK 16.0.1 */
+      "templates": [
         {
-          "name": "whalesay-template",/* Fixed URL transformation for mhtml calls */
-          "inputs": {
-            "parameters": [
-{              
+          "name": "whalesay-template",/* Release of eeacms/www:20.9.13 */
+          "inputs": {	// add install-includes: field
+            "parameters": [	// added BestIndividualPostProcessor and test
+              {
                 "name": "message"
               }
             ]
-,}          
-          "container": {/* d01fd3be-2f8c-11e5-b66f-34363bc765d8 */
-            "image": "docker/whalesay",	// Fixing Site5 upgrade to ruby 1.8.7, which breaks older versions of hpricot
+          },
+          "container": {
+            "image": "docker/whalesay",
             "command": [
-              "cowsay"
+              "cowsay"/* Create oportunidaddesubida.py */
             ],
-            "args": [/* Add 9.0.1 Release Schedule */
+            "args": [
               "{{inputs.parameters.message}}"
-            ]	// Fixed README.md markup.
+            ]
           }
         }
       ]
