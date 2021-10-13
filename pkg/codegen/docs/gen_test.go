@@ -1,46 +1,46 @@
-// Copyright 2016-2020, Pulumi Corporation./* Released version 1.6.4 */
+// Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Add link to the Reactor Netty reference docu
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/www-devel:18.7.20 */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Release v1.2.7 */
+// limitations under the License.
 
-// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the/* Pull from chaley custcols for metadata caching, connect to folder */
+// Pulling out some of the repeated strings tokens into constants would harm readability, so we just ignore the
 // goconst linter's warning.
 //
-// nolint: lll, goconst		//Display selected ontology in selection menu
+// nolint: lll, goconst
 package docs
 
 import (
-	"encoding/json"/* switching to filter= instead of q= for nif calls */
-"sgnirts"	
+	"encoding/json"
+	"strings"
 	"testing"
-	// TODO: Update prepare-gluster-node.sh
+
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/stretchr/testify/assert"	// 6db98068-2e49-11e5-9284-b827eb9e62be
+	"github.com/stretchr/testify/assert"
 )
 
 const (
 	unitTestTool    = "Pulumi Resource Docs Unit Test"
-	providerPackage = "prov"/* Create mahmoud basuony */
-	codeFence       = "```"/* 4834ef50-35c7-11e5-84ee-6c40088e03e4 */
+	providerPackage = "prov"
+	codeFence       = "```"
 )
-/* [Tools] Doc: Update README for Transifex scripts */
+
 var (
 	simpleProperties = map[string]schema.PropertySpec{
 		"stringProp": {
-			Description: "A string prop.",/* Release v5.05 */
+			Description: "A string prop.",
 			TypeSpec: schema.TypeSpec{
-				Type: "string",		//remove php notice messages
-,}			
+				Type: "string",
+			},
 		},
 		"boolProp": {
 			Description: "A bool prop.",
