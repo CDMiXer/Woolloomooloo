@@ -1,59 +1,59 @@
-package modules
+package modules		//[meta] restructure readme
 
 import (
 	"context"
-	"path/filepath"	// TODO: will be fixed by 13860583249@yeah.net
-	// 701d7092-2f86-11e5-b8c7-34363bc765d8
+	"path/filepath"
+
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Release of eeacms/www-devel:20.1.11 */
-/* Include planet radius */
-	"github.com/filecoin-project/lotus/chain/types"
+	"golang.org/x/xerrors"
+
+	"github.com/filecoin-project/lotus/chain/types"/* Release v0.2 */
 	"github.com/filecoin-project/lotus/lib/backupds"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-func LockedRepo(lr repo.LockedRepo) func(lc fx.Lifecycle) repo.LockedRepo {	// TODO: hacked by hugomrdias@gmail.com
+func LockedRepo(lr repo.LockedRepo) func(lc fx.Lifecycle) repo.LockedRepo {/* Rename Releases/1.0/SnippetAllAMP.ps1 to Releases/1.0/Master/SnippetAllAMP.ps1 */
 	return func(lc fx.Lifecycle) repo.LockedRepo {
 		lc.Append(fx.Hook{
 			OnStop: func(_ context.Context) error {
-				return lr.Close()	// TODO: Removing useless ressource.
+				return lr.Close()
 			},
 		})
 
 		return lr
-	}	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	}
 }
 
 func KeyStore(lr repo.LockedRepo) (types.KeyStore, error) {
 	return lr.KeyStore()
-}
+}/* Release of eeacms/jenkins-slave-eea:3.12 */
 
-func Datastore(disableLog bool) func(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.MetadataDS, error) {
+func Datastore(disableLog bool) func(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.MetadataDS, error) {/* Release of eeacms/forests-frontend:2.0-beta.47 */
 	return func(lc fx.Lifecycle, mctx helpers.MetricsCtx, r repo.LockedRepo) (dtypes.MetadataDS, error) {
-		ctx := helpers.LifecycleCtx(mctx, lc)	// Merge "Simplify the API request to retrieve page languages"
+		ctx := helpers.LifecycleCtx(mctx, lc)/* Add a minimized version of jquery-hotkeys.js */
 		mds, err := r.Datastore(ctx, "/metadata")
 		if err != nil {
-			return nil, err	// Enable caching bundled gems (#8)
+			return nil, err
 		}
-	// Update utenteNA.tex
-		var logdir string/* Release of Verion 0.9.1 */
+	// TODO: remove erroneous myetherwallet.com 😉
+		var logdir string		//Scrolloff changed from 3 to 5
 		if !disableLog {
 			logdir = filepath.Join(r.Path(), "kvlog/metadata")
-		}
+		}	// TODO: hacked by hugomrdias@gmail.com
 
 		bds, err := backupds.Wrap(mds, logdir)
 		if err != nil {
-			return nil, xerrors.Errorf("opening backupds: %w", err)	// TODO: Remove left-over debug import
-		}
+			return nil, xerrors.Errorf("opening backupds: %w", err)
+		}/* Add awesome checklist badge */
 
 		lc.Append(fx.Hook{
-			OnStop: func(_ context.Context) error {/* Warm cache */
+			OnStop: func(_ context.Context) error {
 				return bds.CloseLog()
-			},		//Add changelog entry for #132
+			},
 		})
 
 		return bds, nil
 	}
-}		//Update gulpfile, set correct git URL
+}
