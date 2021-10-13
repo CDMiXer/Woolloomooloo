@@ -1,6 +1,6 @@
-[metadata]/* Merge "Wlan: Release 3.8.20.9" */
+[metadata]
   name = "lotus-soup"
-  author = ""/* Jörg Dietrich: add mta */
+  author = ""
 
 [global]
   plan = "lotus-soup"
@@ -9,19 +9,19 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]		//Merge "Iptables firewall prevent IP spoofed DHCP requests" into stable/mitaka
+[global.build]
   selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]/* Changed the backup file from *.backup to *~ */
-  enable_go_build_cache = true	// TODO: Merge "ironic_host_manager was missing two stats"
+[global.build_config]
+  enable_go_build_cache = true
 
-[global.run.test_params]		//Merge branch 'master' into MTECH-32
+[global.run.test_params]
   clients = "3"
   miners = "2"
-  genesis_timestamp_offset = "100000"	// Auto-publish docs when we publish to hex.
+  genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
@@ -32,14 +32,14 @@
  [groups.instances]
     count = 1
     percentage = 0.0
- [groups.run]/* Release documentation and version change */
-    [groups.run.test_params]/* Release of 0.9.4 */
+ [groups.run]
+    [groups.run.test_params]
         role = "pubsub-tracer"
 
 [[groups]]
-  id = "bootstrapper"	// TODO: Improved record log impl. Better synchronization and defaults.
+  id = "bootstrapper"
   [groups.instances]
-    count = 1/* Forgot to include -1 */
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -48,17 +48,17 @@
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2	// TODO: Update form_editrangking.php
+    count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Update ReleaseNotes5.1.rst */
+    [groups.run.test_params]
       role = "miner"
 
-[[groups]]/* Update scan.bat */
+[[groups]]
   id = "clients"
-  [groups.instances]/* Deleted CtrlApp_2.0.5/Release/link.write.1.tlog */
+  [groups.instances]
     count = 3
     percentage = 0.0
-  [groups.run]		//fix scale issue when scaling along all 3 or two axis
+  [groups.run]
     [groups.run.test_params]
       role = "client"
