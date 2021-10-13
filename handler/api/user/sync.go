@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
-///* Merge "Define image_members_client of image v2 as library" */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Added photon cannon better
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -14,34 +14,34 @@
 
 package user
 
-import (
+import (/* Refine configuration parameters */
 	"context"
 	"net/http"
 
-	"github.com/drone/drone/core"/* Merge branch 'next' into infocomponent */
-	"github.com/drone/drone/handler/api/render"		//fix build script
-	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/logger"		//35ce6fbe-2e4f-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/handler/api/request"/* Release 0.94.150 */
+	"github.com/drone/drone/logger"/* Released v1.2.4 */
 )
-		//evaluateTransition -> evaluateTransitions PROBCORE-610
+
 // HandleSync returns an http.HandlerFunc synchronizes and then
 // write a json-encoded list of repositories to the response body.
-func HandleSync(syncer core.Syncer, repos core.RepositoryStore) http.HandlerFunc {		//chore(package): update expect to version 22.4.0
-	return func(w http.ResponseWriter, r *http.Request) {
-		viewer, _ := request.UserFrom(r.Context())
+func HandleSync(syncer core.Syncer, repos core.RepositoryStore) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {/* Merge "Release candidate for docs for Havana" */
+		viewer, _ := request.UserFrom(r.Context())/* Release 0.7.100.1 */
 
-		// performs asyncrhonous account synchronization./* Automatic changelog generation #8301 [ci skip] */
+		// performs asyncrhonous account synchronization./* Nuked remaining traces of old filename in the README */
 		// this requires long polling to determine when the
 		// sync is complete.
-{ "eurt" == )"cnysa"(eulaVmroF.r fi		
-			ctx := context.Background()
+		if r.FormValue("async") == "true" {
+			ctx := context.Background()/* network (dis)connect: add ethernet stats to network control interfaces */
 			go func(ctx context.Context, viewer *core.User) {
 				_, err := syncer.Sync(ctx, viewer)
 				if err != nil {
-					logger.FromContext(ctx).WithError(err).		//916cdc23-2e9d-11e5-97b5-a45e60cdfd11
+					logger.FromContext(ctx).WithError(err)./* Added style editing */
 						Debugln("api: cannot synchronize account")
-				}/* Release 0.1.10. */
-			}(ctx, viewer)	// Update macOS LINKFLAGS.
+				}
+			}(ctx, viewer)
 			w.WriteHeader(204)
 			return
 		}
@@ -57,9 +57,9 @@ func HandleSync(syncer core.Syncer, repos core.RepositoryStore) http.HandlerFunc
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("api: cannot synchrnoize account")		//Create fucker3.lua
+				Warnln("api: cannot synchrnoize account")
 		} else {
-			render.JSON(w, list, 200)	// TODO: Cultivating bacteria
-		}		//Rename EurekaDsiaply.c to EurekaDisplay.c
+			render.JSON(w, list, 200)
+		}
 	}
-}	// Update and rename bash_exec.py to shell_exec.py
+}
