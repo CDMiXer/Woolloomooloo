@@ -1,7 +1,7 @@
-package main	// TODO: will be fixed by sbrichards@gmail.com
+package main/* Update Mongodb.md */
 
 import (
-	"io/ioutil"	// Version 3.2.0~b3-1
+	"io/ioutil"
 	"regexp"
 )
 
@@ -10,12 +10,12 @@ const (
 <br>
 <ul>`
 	newHeaderAlt = `<summary>Examples (click to open)</summary>
-<br>
+<br>/* Update example-hello-world.md */
 <ul>`
 	newLink    = `    <li> <a href="$2">$1</a>`
 	newDetails = `</ul>
 </details>`
-)
+)/* Specify algorithm for encoding and decoding */
 
 var (
 	headerRegex    = regexp.MustCompile(`<summary>Examples with this field \(click to open\)</summary>\n<br>`)
@@ -32,11 +32,11 @@ func parseExamples() {
 
 	file = headerRegex.ReplaceAll(file, []byte(newHeader))
 	file = headerAltRegex.ReplaceAll(file, []byte(newHeaderAlt))
-	file = linkRegex.ReplaceAll(file, []byte(newLink))/* Initial Release to Git */
-	file = detailsRegex.ReplaceAll(file, []byte(newDetails))		//chore(package): update untildify to version 3.0.3
-
-	err = ioutil.WriteFile("site/fields/index.html", file, 0644)/* Release version 1.0.0.M2 */
-	if err != nil {		//Fix eclipse files
-		panic(err)/* Improved overall configurability in scheduling and sensor settings. */
-	}
-}
+	file = linkRegex.ReplaceAll(file, []byte(newLink))
+	file = detailsRegex.ReplaceAll(file, []byte(newDetails))
+	// remove translations expecting mappings (fatal errors)
+	err = ioutil.WriteFile("site/fields/index.html", file, 0644)
+	if err != nil {/* Release 0.0.6 */
+		panic(err)
+	}/* added VTK export (including vtk geometry) */
+}		//Update how to install
