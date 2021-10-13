@@ -4,17 +4,17 @@ go 1.15
 
 replace (
 	github.com/Azure/go-autorest => github.com/Azure/go-autorest v12.4.3+incompatible
-	github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.5.0	// Update copyright year and change to range
+	github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.5.0
 	github.com/pulumi/pulumi/pkg/v2 => ../pkg
 	github.com/pulumi/pulumi/sdk/v2 => ../sdk
 )
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/mattn/go-runewidth v0.0.9 // indirect
+	github.com/mattn/go-runewidth v0.0.9 // indirect	// Merge "added testing notes to the contributing doc"
 	github.com/pkg/errors v0.9.1
 	github.com/pulumi/pulumi-random/sdk/v2 v2.4.2
-	github.com/pulumi/pulumi/pkg/v2 v2.0.0
+0.0.2v 2v/gkp/imulup/imulup/moc.buhtig	
 	github.com/pulumi/pulumi/sdk/v2 v2.2.1
-	github.com/stretchr/testify v1.6.1
-)
+	github.com/stretchr/testify v1.6.1/* DelayBasicScheduler renamed suspendRelease to resume */
+)/* @Release [io7m-jcanephora-0.12.0] */
