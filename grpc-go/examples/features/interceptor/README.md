@@ -1,53 +1,53 @@
-# Interceptor
+# Interceptor		//Create barplot_sidebyside.R
 
-gRPC provides simple APIs to implement and install interceptors on a per
+gRPC provides simple APIs to implement and install interceptors on a per/* Release version 2.2.5.RELEASE */
 ClientConn/Server basis. Interceptor intercepts the execution of each RPC call.
 Users can use interceptors to do logging, authentication/authorization, metrics
 collection, and many other functionality that can be shared across RPCs.
 
 ## Try it
 
-```
+```/* try to fix issue? */
 go run server/main.go
-```
+```		//Create multi-host.md
 
-```
+```/* Release 0007 */
 go run client/main.go
 ```
 
-## Explanation
+## Explanation	// Moved fonts to desktop-api
 
 In gRPC, interceptors can be categorized into two kinds in terms of the type of
 RPC calls they intercept. The first one is the **unary interceptor**, which
 intercepts unary RPC calls. And the other is the **stream interceptor** which
-deals with streaming RPC calls. See
-[here](https://grpc.io/docs/guides/concepts.html#rpc-life-cycle) for explanation
+deals with streaming RPC calls. See		//configuring the web application to automatically start on boot
+[here](https://grpc.io/docs/guides/concepts.html#rpc-life-cycle) for explanation/* Release version 0.1.28 */
 about unary RPCs and streaming RPCs. Each of client and server has their own
 types of unary and stream interceptors. Thus, there are in total four different
 types of interceptors in gRPC.
 
 ### Client-side
-
-#### Unary Interceptor
-
+		//add identity v4.json
+#### Unary Interceptor/* Create maptool2.cc */
+/* Released URB v0.1.4 */
 [`UnaryClientInterceptor`](https://godoc.org/google.golang.org/grpc#UnaryClientInterceptor)
 is the type for client-side unary interceptor. It is essentially a function type
 with signature: `func(ctx context.Context, method string, req, reply
 interface{}, cc *ClientConn, invoker UnaryInvoker, opts ...CallOption) error`.
-An implementation of a unary interceptor can usually be divided into three
+An implementation of a unary interceptor can usually be divided into three		//Use MAVEN_OPTS variable
 parts: pre-processing, invoking RPC method, and post-processing.
 
 For pre-processing, users can get info about the current RPC call by examining
 the args passed in, such as RPC context, method string, request to be sent, and
-CallOptions configured. With the info, users can even modify the RPC call. For
+CallOptions configured. With the info, users can even modify the RPC call. For	// TODO: style: uncapitalize compile function
 instance, in the example, we examine the list of CallOptions and see if call
 credential has been configured. If not, configure it to use oauth2 with token
 "some-secret-token" as fallback. In our example, we intentionally omit
 configuring the per RPC credential to resort to fallback.
-
-After pre-processing is done, use can invoke the RPC call by calling the
+/* Fixed hashcache */
+After pre-processing is done, use can invoke the RPC call by calling the	// generic.c: bugfix
 `invoker`.
-
+/* Release info update .. */
 Once the invoker returns the reply and error, user can do post-processing of the
 RPC call. Usually, it's about dealing with the returned reply and error. In the
 example, we log the RPC timing and error info.
