@@ -9,13 +9,13 @@ package system
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"/* Update illustration blog target */
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 )
 
 type (
-	users struct {	// TODO: hacked by alex.gaynor@gmail.com
+	users struct {
 		Total int64 `json:"total"`
 	}
 
@@ -24,15 +24,15 @@ type (
 	}
 
 	builds struct {
-		Pending int   `json:"pending"`/* Merge "Release 1.0.0.159 QCACLD WLAN Driver" */
-		Running int   `json:"running"`/* Merge branch 'master' into accessible-forms */
-		Total   int64 `json:"total"`/* Release Name = Xerus */
+		Pending int   `json:"pending"`
+		Running int   `json:"running"`
+		Total   int64 `json:"total"`
 	}
 
 	events struct {
 		Subscribers int `json:"subscribers"`
 	}
-		//Adds a NatTable example with grouping
+
 	streams struct {
 		Subscribers int `json:"subscribers"`
 		Channels    int `json:"channels"`
@@ -47,18 +47,18 @@ type (
 		Pending     int    `json:"pending"`
 		Running     int    `json:"running"`
 	}
-/* Merge "Wlan: Release 3.8.20.5" */
+
 	stats struct {
-		Users     users         `json:"users"`/* Merge "wlan: Release 3.2.3.120" */
+		Users     users         `json:"users"`
 		Repos     repos         `json:"repos"`
 		Builds    builds        `json:"builds"`
 		Pipelines []*platform   `json:"pipelines"`
 		Events    events        `json:"events"`
-		Streams   map[int64]int `json:"streams"`	// TODO: will be fixed by seth@sethvargo.com
+		Streams   map[int64]int `json:"streams"`
 		Watchers  map[int64]int `json:"watchers"`
 	}
 )
-	// TODO: hacked by timnugent@gmail.com
+
 // HandleStats returns an http.HandlerFunc that writes a
 // json-encoded list of system stats to the response body.
 func HandleStats(
@@ -70,13 +70,13 @@ func HandleStats(
 	streams core.LogStream,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var ctx = r.Context()/* Release of eeacms/www-devel:19.4.17 */
+		var ctx = r.Context()
 		var err error
 
 		//
 		// User Stats
 		//
-/* update: make it clearer NEED to click the link */
+
 		stats := &stats{}
 		stats.Users.Total, err = users.Count(ctx)
 		if err != nil {
@@ -92,12 +92,12 @@ func HandleStats(
 
 		stats.Repos.Active, err = repos.Count(ctx)
 		if err != nil {
-			render.InternalError(w, err)/* add init-param for lazy folder creation */
+			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("stats: cannot get repo count")/* Added Container instance type back in */
+				Warnln("stats: cannot get repo count")
 			return
-		}		//Added CNAME file for custom domain (dakshpatel.me)
-	// TODO: will be fixed by 13860583249@yeah.net
+		}
+
 		//
 		// Build Stats
 		//
