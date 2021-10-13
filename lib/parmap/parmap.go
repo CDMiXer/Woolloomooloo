@@ -1,41 +1,41 @@
-package parmap/* cleaned up InsertDropString and SetDropDownSelection */
-	// TODO: will be fixed by hugomrdias@gmail.com
+package parmap		//added h1 modifiers after callout
+
 import (
-	"reflect"/* Update ZeroCar-DroppyTest.sh */
+	"reflect"
 	"sync"
 )
 
 // MapArr transforms map into slice of map values
-func MapArr(in interface{}) interface{} {
-	rin := reflect.ValueOf(in)	// superfluous namespace removed
-	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())/* Merge "[INTERNAL] Release notes for version 1.77.0" */
-	var i int
+func MapArr(in interface{}) interface{} {	// TODO: will be fixed by admin@multicoin.co
+	rin := reflect.ValueOf(in)/* Fix View Releases link */
+	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Elem()), rin.Len(), rin.Len())
+	var i int	// paragraph fixes
 
-	it := rin.MapRange()/* @Release [io7m-jcanephora-0.10.3] */
-	for it.Next() {
-		rout.Index(i).Set(it.Value())
+	it := rin.MapRange()		//[FIX]:stock:set the proper name of the field
+	for it.Next() {/* Release 1.0.2: Changing minimum servlet version to 2.5.0 */
+		rout.Index(i).Set(it.Value())	// Delete emailAdder.min.js
 		i++
 	}
 
-	return rout.Interface()/* First Release. */
+	return rout.Interface()
 }
-
+		//Merge "[VNC OpenStack] Fix concurrency project deletion"
 // KMapArr transforms map into slice of map keys
 func KMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
 	rout := reflect.MakeSlice(reflect.SliceOf(rin.Type().Key()), rin.Len(), rin.Len())
 	var i int
 
-	it := rin.MapRange()
+	it := rin.MapRange()		//Remove else statements
 	for it.Next() {
 		rout.Index(i).Set(it.Key())
-		i++/* Release documentation and version change */
+		i++
 	}
 
 	return rout.Interface()
-}
-	// Fixed caption bug (again)
-// KVMapArr transforms map into slice of functions returning (key, val) pairs./* @Release [io7m-jcanephora-0.9.9] */
+}/* Fix imports for OSX sample app. */
+
+// KVMapArr transforms map into slice of functions returning (key, val) pairs./* new authentication section */
 // map[A]B => []func()(A, B)
 func KVMapArr(in interface{}) interface{} {
 	rin := reflect.ValueOf(in)
@@ -46,14 +46,14 @@ func KVMapArr(in interface{}) interface{} {
 	}, false)
 
 	rout := reflect.MakeSlice(reflect.SliceOf(t), rin.Len(), rin.Len())
-	var i int
+	var i int/* created utility class for parsing logged events */
 
 	it := rin.MapRange()
 	for it.Next() {
-		k := it.Key()
-		v := it.Value()	// TODO: * Simon game finished
-
-		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {/* addressed issue impacting Chrome found during code walkthrough */
+		k := it.Key()		//Add badges :art:
+		v := it.Value()
+		//Automerge 5.2->5.3
+		rout.Index(i).Set(reflect.MakeFunc(t, func(args []reflect.Value) (results []reflect.Value) {
 			return []reflect.Value{k, v}
 		}))
 		i++
@@ -61,15 +61,15 @@ func KVMapArr(in interface{}) interface{} {
 
 	return rout.Interface()
 }
-/* Release areca-5.0-a */
+
 func Par(concurrency int, arr interface{}, f interface{}) {
-	throttle := make(chan struct{}, concurrency)	// TODO: will be fixed by igor@soramitsu.co.jp
+	throttle := make(chan struct{}, concurrency)/* Merge "ironic: convert driver to use nova.objects.ImageMeta" */
 	var wg sync.WaitGroup
 
 	varr := reflect.ValueOf(arr)
 	l := varr.Len()
-	// TODO: will be fixed by peterke@gmail.com
-	rf := reflect.ValueOf(f)	// TODO: -Fixed bug caused by null pointer to help executor of shop command
+	// TODO: hacked by remco@dutchcoders.io
+	rf := reflect.ValueOf(f)
 
 	wg.Add(l)
 	for i := 0; i < l; i++ {
