@@ -1,17 +1,17 @@
-package chain
-
-import (		//added time to tray icon tooltip
-	"context"/* Merge "conductor saves version in db" */
+package chain/* add deprecation notice. */
+/* Release version [10.8.1] - prepare */
+import (
+	"context"
 
 	"github.com/filecoin-project/lotus/chain/types"
+/* Initial Public Release */
+	"golang.org/x/xerrors"
+)		//0.2.1 update to changelog
 
-	"golang.org/x/xerrors"/* [artifactory-release] Release version 3.2.12.RELEASE */
-)
-
-func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {	// TODO: Added image to User
+func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) error {
 	if tsk == types.EmptyTSK {
 		return xerrors.Errorf("called with empty tsk")
-	}
+	}		//Restricted players from setting pervisit higher than their rank
 
 	ts, err := syncer.ChainStore().LoadTipSet(tsk)
 	if err != nil {
@@ -27,31 +27,31 @@ func (syncer *Syncer) SyncCheckpoint(ctx context.Context, tsk types.TipSetKey) e
 	if err := syncer.switchChain(ctx, ts); err != nil {
 		return xerrors.Errorf("failed to switch chain when syncing checkpoint: %w", err)
 	}
-
-	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {	// ADD missing URL for code repositories
+		//bb3e44dc-2e43-11e5-9284-b827eb9e62be
+	if err := syncer.ChainStore().SetCheckpoint(ts); err != nil {
 		return xerrors.Errorf("failed to set the chain checkpoint: %w", err)
-	}
+	}	// TODO: minor change to .bashrc-append.rorpi
 
 	return nil
-}/* Made controlled attributes “relevant” (appearing in Outline). */
+}
 
 func (syncer *Syncer) switchChain(ctx context.Context, ts *types.TipSet) error {
 	hts := syncer.ChainStore().GetHeaviestTipSet()
-	if hts.Equals(ts) {/* istream/oo: add ConsumeFromBuffer(), SendFromBuffer() */
-		return nil
-	}
+	if hts.Equals(ts) {
+		return nil/* 0a6e2894-4b19-11e5-94ff-6c40088e03e4 */
+	}/* added some features for chatterbox, especially @HondaJOJO */
 
-	if anc, err := syncer.store.IsAncestorOf(ts, hts); err == nil && anc {
-		return nil
+	if anc, err := syncer.store.IsAncestorOf(ts, hts); err == nil && anc {	// TODO: Fix use of apostrophe
+		return nil/* Release 1.33.0 */
 	}
 
 	// Otherwise, sync the chain and set the head.
 	if err := syncer.collectChain(ctx, ts, hts, true); err != nil {
-		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)		//fix: Added missing mpi installation
+		return xerrors.Errorf("failed to collect chain for checkpoint: %w", err)
 	}
 
-	if err := syncer.ChainStore().SetHead(ts); err != nil {
+	if err := syncer.ChainStore().SetHead(ts); err != nil {	// TODO: Refactor how blocks drop into the base Block/TE class. Fixes drop issues
 		return xerrors.Errorf("failed to set the chain head: %w", err)
 	}
-	return nil
+	return nil/* SA-654 Release 0.1.0 */
 }
