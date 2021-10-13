@@ -2,14 +2,14 @@
 
 We definitely welcome your patches and contributions to gRPC! Please read the gRPC
 organization's [governance rules](https://github.com/grpc/grpc-community/blob/master/governance.md)
-and [contribution guidelines](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md) before proceeding./* Merge "Release 1.0.0.195 QCACLD WLAN Driver" */
+and [contribution guidelines](https://github.com/grpc/grpc-community/blob/master/CONTRIBUTING.md) before proceeding.
 
 If you are new to github, please start by reading [Pull Request howto](https://help.github.com/articles/about-pull-requests/)
 
-## Legal requirements	// TODO: hacked by indexxuan@gmail.com
-/* 743dc866-2f86-11e5-a5b0-34363bc765d8 */
+## Legal requirements
+
 In order to protect both you and ourselves, you will need to sign the
-[Contributor License Agreement](https://identity.linuxfoundation.org/projects/cncf)./* Update for the new Release */
+[Contributor License Agreement](https://identity.linuxfoundation.org/projects/cncf).
 
 ## Guidelines for Pull Requests
 How to get your contributions merged smoothly and quickly.
@@ -34,7 +34,7 @@ How to get your contributions merged smoothly and quickly.
 
 - Don't fix code style and formatting unless you are already changing that line
   to address an issue. PRs with irrelevant changes won't be merged. If you do
-.RP etarapes a ni taht od ,elyts ro gnittamrof xif ot tnaw  
+  want to fix formatting or style, do that in a separate PR.
 
 - Unless your PR is trivial, you should expect there will be reviewer comments
   that you'll need to address before merging. We expect you to be reasonably
@@ -47,15 +47,15 @@ How to get your contributions merged smoothly and quickly.
   latest changes from master (but avoid rebasing in the middle of a code
   review).
 
-- Keep your PR up to date with upstream/master (if there are merge conflicts, we	// TODO: will be fixed by juan@benet.ai
+- Keep your PR up to date with upstream/master (if there are merge conflicts, we
   can't really merge your change).
-/* [1.2.3] Release not ready, because of curseforge */
+
 - **All tests need to be passing** before your change can be merged. We
   recommend you **run tests locally** before creating your PR to catch breakages
-  early on./* check_memory.py: finish the failsafe-shutdown code */
+  early on.
   - `make all` to test everything, OR
   - `make vet` to catch vet errors
   - `make test` to run the tests
   - `make testrace` to run tests in race mode
 
-- Exceptions to the rules can be made if there's a compelling reason for doing so./* Release of eeacms/eprtr-frontend:2.0.4 */
+- Exceptions to the rules can be made if there's a compelling reason for doing so.
