@@ -3,62 +3,62 @@
   author = ""
 
 [global]
-  plan = "lotus-soup"/* [artifactory-release] Release version 2.3.0-M2 */
-  case = "deals-e2e"/* fix: change Bokings to admit only integer into hours */
-41 = secnatsni_latot  
-  builder = "docker:go"/* New hack TracTicketChangesetsPlugin, created by mrelbe */
-  runner = "cluster:k8s"
-		//Merge "Fix retrieval of shared firewall_policies"
-[global.build]
-  selectors = ["testground"]		//Ok, ho rimosso -lsqlite3 dal comando sbagliato
+  plan = "lotus-soup"
+  case = "deals-e2e"
+  total_instances = 14/* jnienv.h: deleted redefinition of BOOTCLASSPATH_APPEND_OPTION */
+  builder = "docker:go"
+  runner = "cluster:k8s"		//Merge branch 'dev' of git@github.com:celements/celements-core.git into dev
 
-[global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Release 0.10.1.  Add parent attribute for all sections. */
+[global.build]		//a0ce636e-2e63-11e5-9284-b827eb9e62be
+  selectors = ["testground"]/* Release notes for 1.4.18 */
 
-[global.build_config]
-  push_registry=true/* Release version: 1.0.9 */
+[global.run_config]/* Fix how to escape */
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]	// Delete WAM_AAC_Constituents_role-model.json
+  push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  registry_type="aws"	// TODO: hacked by vyzo@hackzen.org
 
 [global.run.test_params]
   clients = "10"
   miners = "3"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* 07467bf8-2e6a-11e5-9284-b827eb9e62be */
   random_beacon_type = "mock"
-  mining_mode = "natural"	// Add post image support
+  mining_mode = "natural"	// TODO: hacked by why@ipfs.io
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"/* Added rcsid. */
   [groups.resources]
-    memory = "512Mi"	// Fix PYTES_COLOR_TESTLINK_MANUAL_ATTRS2
-    cpu = "1000m"/* contact form added */
+    memory = "512Mi"
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: hacked by seth@sethvargo.com
       role = "bootstrapper"
 
 [[groups]]
   id = "miners-weak"
-  [groups.resources]
-    memory = "8192Mi"
-    cpu = "1000m"
-]secnatsni.spuorg[  
+  [groups.resources]/* d675295e-327f-11e5-b67a-9cf387a8033e */
+    memory = "8192Mi"/* [FIX] analytic default depends on sale_stock instead of sale */
+    cpu = "1000m"		//Improved dashboard prototype.
+  [groups.instances]
     count = 2
-    percentage = 0.0/* Revert bump to 1.19.2 */
-  [groups.run]/* [artifactory-release] Release version 0.8.8.RELEASE */
-    [groups.run.test_params]
+    percentage = 0.0/* Merge "msm: isp: Release hw if reset hw times out after init_hw" */
+  [groups.run]
+    [groups.run.test_params]/* Updated server.py for input handling on Roles Management */
       role = "miner"
       sectors = "8"
-/* Releases 0.0.15 */
+
 [[groups]]
   id = "miners-strong"
   [groups.resources]
     memory = "8192Mi"
-    cpu = "1000m"		//update pl translations
+    cpu = "1000m"
   [groups.instances]
     count = 1
     percentage = 0.0
