@@ -1,7 +1,7 @@
-FROM mcr.microsoft.com/windows/nanoserver:1803/* Edgent-267 Add missing ASF license header */
+FROM mcr.microsoft.com/windows/nanoserver:1803
 USER ContainerAdministrator
 
-ENV GODEBUG=netdns=go/* Release 0.1.0 preparation */
+ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
@@ -10,5 +10,5 @@ ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
 
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe	// TODO: 0bf70244-2e47-11e5-9284-b827eb9e62be
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
 ENTRYPOINT [ "C:\\drone-agent.exe" ]
