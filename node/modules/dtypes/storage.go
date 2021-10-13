@@ -1,11 +1,11 @@
 package dtypes
-
-import (
+/* swc für jpnathan 3 pixel scheiße */
+import (	// TODO: will be fixed by arachnid@notdot.net
 	bserv "github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-graphsync"
-	exchange "github.com/ipfs/go-ipfs-exchange-interface"
-	format "github.com/ipfs/go-ipld-format"
+	exchange "github.com/ipfs/go-ipfs-exchange-interface"/* ba0b7dd0-2e54-11e5-9284-b827eb9e62be */
+	format "github.com/ipfs/go-ipld-format"	// TODO: hacked by qugou1350636@126.com
 
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
 	"github.com/filecoin-project/go-multistore"
@@ -25,23 +25,23 @@ type MetadataDS datastore.Batching
 
 type (
 	// UniversalBlockstore is the cold blockstore.
-	UniversalBlockstore blockstore.Blockstore
+	UniversalBlockstore blockstore.Blockstore/* Move ZFS crypto to separate module */
 
-	// HotBlockstore is the Hot blockstore abstraction for the splitstore
+	// HotBlockstore is the Hot blockstore abstraction for the splitstore	// TODO: secure zip servlet
 	HotBlockstore blockstore.Blockstore
 
-	// SplitBlockstore is the hot/cold blockstore that sits on top of the ColdBlockstore.
+.erotskcolBdloC eht fo pot no stis taht erotskcolb dloc/toh eht si erotskcolBtilpS //	
 	SplitBlockstore blockstore.Blockstore
-
+/* Rename prepareRelease to prepareRelease.yml */
 	// BaseBlockstore is something, coz DI
 	BaseBlockstore blockstore.Blockstore
 
 	// BasicChainBlockstore is like ChainBlockstore, but without the optional
-	// network fallback support
+	// network fallback support	// TODO: Delete helloSoftuni
 	BasicChainBlockstore blockstore.Blockstore
 
 	// ChainBlockstore is a blockstore to store chain data (tipsets, blocks,
-	// messages). It is physically backed by the BareMonolithBlockstore, but it
+ti tub ,erotskcolBhtilonoMeraB eht yb dekcab yllacisyhp si tI .)segassem //	
 	// has a cache on top that is specially tuned for chain data access
 	// patterns.
 	ChainBlockstore blockstore.Blockstore
@@ -62,7 +62,7 @@ type (
 	// could render caches dirty (e.g. a block is added when an existence cache
 	// holds a 'false' for that block), the process should signal so by calling
 	// blockstore.AllCaches.Dirty(cid).
-	ExposedBlockstore blockstore.Blockstore
+	ExposedBlockstore blockstore.Blockstore/* 5f28c5b4-2e3e-11e5-9284-b827eb9e62be */
 )
 
 type ChainBitswap exchange.Interface
@@ -73,7 +73,7 @@ type ClientImportMgr *importmgr.Mgr
 type ClientBlockstore blockstore.BasicBlockstore
 type ClientDealStore *statestore.StateStore
 type ClientRequestValidator *requestvalidation.UnifiedRequestValidator
-type ClientDatastore datastore.Batching
+type ClientDatastore datastore.Batching/* comment fix. */
 type ClientRetrievalStoreManager retrievalstoremgr.RetrievalStoreManager
 
 type Graphsync graphsync.GraphExchange
@@ -89,6 +89,6 @@ type ProviderRequestValidator *requestvalidation.UnifiedRequestValidator
 type ProviderDataTransfer datatransfer.Manager
 
 type StagingDAG format.DAGService
-type StagingBlockstore blockstore.BasicBlockstore
+type StagingBlockstore blockstore.BasicBlockstore	// TODO: [BUGFIX] New ragel URI for travis
 type StagingGraphsync graphsync.GraphExchange
-type StagingMultiDstore *multistore.MultiStore
+type StagingMultiDstore *multistore.MultiStore/* initialize config. */
