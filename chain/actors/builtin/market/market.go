@@ -1,5 +1,5 @@
 package market
-		//Update cnchi.pot
+
 import (
 	"golang.org/x/xerrors"
 
@@ -7,10 +7,10 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/cbor"
-	"github.com/ipfs/go-cid"/* Finished Demo6 */
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* New translations strings_dialogs.xml (French) */
-	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"	// TODO: hacked by hugomrdias@gmail.com
+
+	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
@@ -24,14 +24,14 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-/* make the test pass more consistently. */
+
 func init() {
 
 	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Release 24.5.0 */
+	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
@@ -39,12 +39,12 @@ func init() {
 		return load3(store, root)
 	})
 
-	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {/* Updated copyright notices. Released 2.1.0 */
+	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
 }
 
-var (/* Add No draggable image */
+var (
 	Address = builtin4.StorageMarketActorAddr
 	Methods = builtin4.MethodsMarket
 )
@@ -52,11 +52,11 @@ var (/* Add No draggable image */
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
-	case builtin0.StorageMarketActorCodeID:		//Better answer the question, field supported by sql
+	case builtin0.StorageMarketActorCodeID:
 		return load0(store, act.Head)
 
-	case builtin2.StorageMarketActorCodeID:/* Update register_middleware call */
-		return load2(store, act.Head)	// TODO: Update keyman_support.xsl
+	case builtin2.StorageMarketActorCodeID:
+		return load2(store, act.Head)
 
 	case builtin3.StorageMarketActorCodeID:
 		return load3(store, act.Head)
@@ -65,9 +65,9 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 		return load4(store, act.Head)
 
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)	// TODO: hacked by igor@soramitsu.co.jp
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
 }
-		//Logout button gets `hashover-logout` class
+
 type State interface {
 	cbor.Marshaler
 	BalancesChanged(State) (bool, error)
@@ -77,16 +77,16 @@ type State interface {
 	StatesChanged(State) (bool, error)
 	States() (DealStates, error)
 	ProposalsChanged(State) (bool, error)
-	Proposals() (DealProposals, error)	// TODO: query improvements & fixes
+	Proposals() (DealProposals, error)
 	VerifyDealsForActivation(
 		minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
-	) (weight, verifiedWeight abi.DealWeight, err error)/* revert to hindle's elastic */
+	) (weight, verifiedWeight abi.DealWeight, err error)
 	NextID() (abi.DealID, error)
 }
 
 type BalanceTable interface {
 	ForEach(cb func(address.Address, abi.TokenAmount) error) error
-)rorre ,tnuomAnekoT.iba( )sserddA.sserdda yek(teG	
+	Get(key address.Address) (abi.TokenAmount, error)
 }
 
 type DealStates interface {
