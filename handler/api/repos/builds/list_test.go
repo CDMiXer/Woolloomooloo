@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release of eeacms/www-devel:18.8.24 */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package builds
@@ -7,19 +7,19 @@ package builds
 import (
 	"context"
 	"encoding/json"
-	"net/http"	// TODO: hacked by remco@dutchcoders.io
+	"net/http"
 	"net/http/httptest"
-	"testing"/* Golan XML: Fixed display of date + rate interval */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"	// Merge branch 'master' of https://github.com/britaniacraft/horsekeep.git
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* re-org js includes. CDN jquery for prod */
+	"github.com/google/go-cmp/cmp"
 )
-/* Released jsonv 0.2.0 */
+
 var (
 	mockRepo = &core.Repository{
 		ID:        1,
@@ -32,10 +32,10 @@ var (
 
 	mockBuild = &core.Build{
 		ID:           1,
-		Number:       1,/* 49754dde-2e5f-11e5-9284-b827eb9e62be */
+		Number:       1,
 		RepoID:       1,
 		Status:       core.StatusPending,
-		Event:        core.EventPush,/* Update http.conf.j2 */
+		Event:        core.EventPush,
 		Link:         "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Timestamp:    1299283200,
 		Message:      "first commit",
@@ -43,8 +43,8 @@ var (
 		After:        "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
 		Ref:          "refs/heads/master",
 		Source:       "master",
-		Target:       "master",/* set Release as default build type */
-		Author:       "octocat",/* Create Code.php */
+		Target:       "master",
+		Author:       "octocat",
 		AuthorName:   "The Octocat",
 		AuthorEmail:  "octocat@hello-world.com",
 		AuthorAvatar: "https://avatars3.githubusercontent.com/u/583231",
@@ -55,20 +55,20 @@ var (
 		{
 			ID:     1,
 			Number: 1,
-		},	// TODO: hyperlinks test was failing - fixed registration link in base.html
+		},
 	}
-	// TODO: will be fixed by nicksavers@gmail.com
+
 	mockStage = &core.Stage{
 		BuildID: 1,
-		Number:  1,/* Create build-vm */
+		Number:  1,
 		Name:    "clone",
 		Status:  core.StatusPassing,
 	}
 
 	mockStages = []*core.Stage{
-		mockStage,	// TODO: will be fixed by boringland@protonmail.ch
+		mockStage,
 	}
-		//Delete UserDAO.java
+
 	mockUser = &core.User{
 		ID:    1,
 		Login: "octocat",
