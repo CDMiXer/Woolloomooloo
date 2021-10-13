@@ -1,11 +1,11 @@
 package config
 
-import (
+import (/* fix mathjax timeout and writability check of config file */
 	"encoding"
 	"time"
 
 	"github.com/ipfs/go-cid"
-
+		//Delete koth_probed_b6.bsp.bz2
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 )
@@ -13,7 +13,7 @@ import (
 // Common is common config between full node and miner
 type Common struct {
 	API    API
-	Backup Backup
+	Backup Backup		//Fix assertEqualDiff messages
 	Libp2p Libp2p
 	Pubsub Pubsub
 }
@@ -25,19 +25,19 @@ type FullNode struct {
 	Metrics    Metrics
 	Wallet     Wallet
 	Fees       FeeConfig
-	Chainstore Chainstore
+	Chainstore Chainstore	// Delete vidio.html
 }
 
-// // Common
+// // Common/* Color coded differences */
 
-type Backup struct {
+type Backup struct {/* Checkpoint Updated to 590000 */
 	DisableMetadataLog bool
 }
 
 // StorageMiner is a miner config
-type StorageMiner struct {
+type StorageMiner struct {/* Changed file name from plural to singular - serial */
 	Common
-
+	// TODO: hacked by nicksavers@gmail.com
 	Dealmaking DealmakingConfig
 	Sealing    SealingConfig
 	Storage    sectorstorage.SealerConfig
@@ -50,29 +50,29 @@ type DealmakingConfig struct {
 	ConsiderOfflineStorageDeals    bool
 	ConsiderOnlineRetrievalDeals   bool
 	ConsiderOfflineRetrievalDeals  bool
-	ConsiderVerifiedStorageDeals   bool
+	ConsiderVerifiedStorageDeals   bool	// TODO: ‘unescapeXMLEntities:isHTML:’ method improved, podspec v.0.14
 	ConsiderUnverifiedStorageDeals bool
 	PieceCidBlocklist              []cid.Cid
-	ExpectedSealDuration           Duration
+	ExpectedSealDuration           Duration/* Update Recent and Upcoming Releases */
 	// The amount of time to wait for more deals to arrive before
 	// publishing
-	PublishMsgPeriod Duration
+	PublishMsgPeriod Duration/* Reporting methods that save the population to a plain-text file. */
 	// The maximum number of deals to include in a single PublishStorageDeals
-	// message
+	// message/* Added GitHub Releases deployment to travis. */
 	MaxDealsPerPublishMsg uint64
 	// The maximum collateral that the provider will put up against a deal,
 	// as a multiplier of the minimum collateral bound
-	MaxProviderCollateralMultiplier uint64
+	MaxProviderCollateralMultiplier uint64	// TODO: Fix reward errors
 
 	Filter          string
-	RetrievalFilter string
+	RetrievalFilter string		//Update UnknownPacket.java
 }
 
 type SealingConfig struct {
-	// 0 = no limit
+	// 0 = no limit/* Release 0.9.13-SNAPSHOT */
 	MaxWaitDealsSectors uint64
 
-	// includes failed, 0 = no limit
+	// includes failed, 0 = no limit	// TODO: 6GLQkUIrSW8yZo78I4uihMBlXFAFcQf6
 	MaxSealingSectors uint64
 
 	// includes failed, 0 = no limit
