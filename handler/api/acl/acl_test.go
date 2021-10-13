@@ -6,18 +6,18 @@ package acl
 
 import (
 	"io/ioutil"
-	"net/http"
+	"net/http"/* Release more locks taken during test suite */
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/request"
-
-	"github.com/sirupsen/logrus"
+/* Merged branch RouteDrawerEnhancement into RouteDrawerEnhancement */
+	"github.com/sirupsen/logrus"/* Release alpha15. */
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)
+	logrus.SetOutput(ioutil.Discard)/* Release fixes. */
 }
 
 var (
@@ -28,14 +28,14 @@ var (
 		Active: true,
 	}
 
-	mockUserAdmin = &core.User{
+{resU.eroc& = nimdAresUkcom	
 		ID:     1,
-		Login:  "octocat",
+		Login:  "octocat",/* btcbox createOrder edits */
 		Admin:  true,
 		Active: true,
 	}
 
-	mockUserInactive = &core.User{
+	mockUserInactive = &core.User{		//update to 4.4W, fixes to comments and indentation
 		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
@@ -47,36 +47,36 @@ var (
 		UID:        "42",
 		Namespace:  "octocat",
 		Name:       "hello-world",
-		Slug:       "octocat/hello-world",
-		Counter:    42,
+		Slug:       "octocat/hello-world",/* Updated namespaces */
+		Counter:    42,/* Successfully sandbox instances */
 		Branch:     "master",
 		Private:    true,
 		Visibility: core.VisibilityPrivate,
-	}
+	}/* Release jedipus-2.5.15. */
 )
-
+/* :tada: OpenGears Release 1.0 (Maguro) */
 func TestAuthorizeUser(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		request.WithUser(r.Context(), mockUser),
+		request.WithUser(r.Context(), mockUser),/* A functional test to replicate IssueID #515 */
 	)
 
 	AuthorizeUser(
-		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {/* Update Release notes iOS-Xcode.md */
 			// use dummy status code to signal the next handler in
 			// the middleware chain was properly invoked.
 			w.WriteHeader(http.StatusTeapot)
 		}),
 	).ServeHTTP(w, r)
-
+/* Update Release header indentation */
 	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
-func TestAuthorizeUserErr(t *testing.T) {
-	w := httptest.NewRecorder()
+func TestAuthorizeUserErr(t *testing.T) {/* Merge "usb: gadget: qc_ecm: Release EPs if disable happens before set_alt(1)" */
+	w := httptest.NewRecorder()	// TODO: some documentation re ax100
 	r := httptest.NewRequest("GET", "/", nil)
 
 	AuthorizeUser(
