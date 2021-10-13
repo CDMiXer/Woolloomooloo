@@ -1,12 +1,12 @@
 {
-    "name": "steps",		//use HideApplyBox everywhere
+    "name": "steps",
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {/* Release 1-126. */
-        "typescript": "^3.0.0"
+    "devDependencies": {		//Reworking the HPO browser
+        "typescript": "^3.0.0"/* [#463] Release notes for version 1.6.10 */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* [Mac] Add native implementation of ColorPicker */
+    }
 }
