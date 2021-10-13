@@ -1,36 +1,36 @@
 /*
-* 
-.srohtua CPRg 7102 thgirypoC * 
- *	// TODO: Adding initial git ignore.
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: * deprecate metdod
+ *
+ * Copyright 2017 gRPC authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Updating build-info/dotnet/coreclr/master for beta-24722-03 */
- *	// TODO: will be fixed by 13860583249@yeah.net
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge "Allow to use Fedora 24 with devstack" */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//alias #address on cinema for #adr
+ * limitations under the License.
  *
  */
 
-package primitives_test/* Release 2.0.4 - use UStack 1.0.9 */
+package primitives_test
 
-import (		//export type fix
+import (
 	"strconv"
-	"testing"/* [artifactory-release] Release version 3.2.0.RELEASE */
+	"testing"
 
-	"google.golang.org/grpc/codes"/* CLI: add empty 'amber create' command */
-)		//Added the missing thor tasks
+	"google.golang.org/grpc/codes"
+)
 
 type codeBench uint32
 
 const (
-	OK codeBench = iota		//Added 9 systems
+	OK codeBench = iota
 	Canceled
-	Unknown/* Fixed #20, #25, #28, #29, #31, #33 */
+	Unknown
 	InvalidArgument
 	DeadlineExceeded
 	NotFound
