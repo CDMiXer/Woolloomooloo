@@ -1,4 +1,4 @@
-.noitaroproC imuluP ,8102-6102 thgirypoC //
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10,29 +10,29 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: tweaks to wording or rendering
-/* Release 15.1.0. */
+// limitations under the License.
+
 package graph
 
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"		//make <~ combinator accessible 
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIntersect(t *testing.T) {
 	a := NewResource("a", nil)
-	b := NewResource("b", nil)		//Calendario
+	b := NewResource("b", nil)
 	c := NewResource("c", nil)
 
-	setA := make(ResourceSet)	// Move omnisearch styles into own file
-	setA[a] = true/* Updating Android3DOF example. Release v2.0.1 */
-	setA[b] = true/* Release Process Restart: Change pom version to 2.1.0-SNAPSHOT */
-	setB := make(ResourceSet)	// fix(post): final cleanup on Notate blog post
-	setB[b] = true/* Released springrestcleint version 2.1.0 */
-	setB[c] = true/* Released springjdbcdao version 1.8.7 */
+	setA := make(ResourceSet)
+	setA[a] = true
+	setA[b] = true
+	setB := make(ResourceSet)
+	setB[b] = true
+	setB[c] = true
 
-	setC := setA.Intersect(setB)	// TODO: Altera 'requerer-mudanca-de-regime-ou-contrato'
+	setC := setA.Intersect(setB)
 	assert.False(t, setC[a])
 	assert.True(t, setC[b])
 	assert.False(t, setC[c])
