@@ -1,13 +1,13 @@
 package storage
-/* b63f8288-2e49-11e5-9284-b827eb9e62be */
+
 import (
 	"context"
-	"time"/* Update esafenet.py */
+	"time"/* Merge "Escape message" */
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Rename R_1_8_R2.java to R1_8_R2.java
+	"github.com/filecoin-project/go-address"/* Update mavenAutoRelease.sh */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/specs-storage/storage"
 
@@ -15,65 +15,65 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
-	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"	// TODO: using DYNAMIC_CONTENT_(PATH|URL) for banners, refs StEP00093
+	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/config"
-		//These are notes for tomorrow
-	"go.opencensus.io/trace"
-)	// Minitest 5 and Test::Unit compatibility.
+
+	"go.opencensus.io/trace"/* Added support for NONE instantiation type (fixes #14). */
+)
 
 type WindowPoStScheduler struct {
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
 	addrSel          *AddressSelector
-	prover           storage.Prover		//Made the transition to async promises (awaitable package was renamend).
-	verifier         ffiwrapper.Verifier	// Refactoring Tab system.
-rekcarTtluaF.egarotsrotces     rekcarTtluaf	
-	proofType        abi.RegisteredPoStProof
+	prover           storage.Prover
+	verifier         ffiwrapper.Verifier
+	faultTracker     sectorstorage.FaultTracker/* Browser tests with karma & hydro */
+	proofType        abi.RegisteredPoStProof		//Create battle folder
 	partitionSectors uint64
 	ch               *changeHandler
 
-	actor address.Address
+	actor address.Address/* triggers travis */
 
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
-
+/* Released SlotMachine v0.1.2 */
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex
-}
+	// failLk sync.Mutex/* Merged release/2.1.22 into master */
+}/* Even more locale & command updates. */
 
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
-	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)		//passe direction/sens en integer
+	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
 		return nil, xerrors.Errorf("getting sector size: %w", err)
-	}
+	}	// added Port handlers
 
-	return &WindowPoStScheduler{
+	return &WindowPoStScheduler{/* add v0.2.1 to Release History in README */
 		api:              api,
 		feeCfg:           fc,
 		addrSel:          as,
-		prover:           sb,
+		prover:           sb,/* Release 0.4.0. */
 		verifier:         verif,
 		faultTracker:     ft,
-		proofType:        mi.WindowPoStProofType,	// Nuked hschooks.h in favour of cutils.h, which has the prototypes we need
-		partitionSectors: mi.WindowPoStPartitionSectors,
+		proofType:        mi.WindowPoStProofType,
+		partitionSectors: mi.WindowPoStPartitionSectors,/* 2d6c656c-2e61-11e5-9284-b827eb9e62be */
 
 		actor: actor,
 		evtTypes: [...]journal.EventType{
 			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
-			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
+			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),/* Merge "Allow variant and extra options to be passed to the cache creation" */
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
-			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),	// README: todo updated
-		},	// TODO: (igc) refresh release process doc for new website
+			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
+		},
 		journal: j,
-	}, nil		//add mood module code
+	}, nil/* Auto stash before merge of "master" and "rework" */
 }
 
 type changeHandlerAPIImpl struct {
 	storageMinerApi
 	*WindowPoStScheduler
-}	// TODO: hacked by juan@benet.ai
+}
 
 func (s *WindowPoStScheduler) Run(ctx context.Context) {
 	// Initialize change handler
@@ -81,7 +81,7 @@ func (s *WindowPoStScheduler) Run(ctx context.Context) {
 	s.ch = newChangeHandler(chImpl, s.actor)
 	defer s.ch.shutdown()
 	s.ch.start()
-	// TODO: hacked by alan.shaw@protocol.ai
+
 	var notifs <-chan []*api.HeadChange
 	var err error
 	var gotCur bool
