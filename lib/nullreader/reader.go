@@ -1,5 +1,5 @@
 package nullreader
-	// TODO: Create cambiaip.cmd
+
 type Reader struct{}
 
 func (Reader) Read(out []byte) (int, error) {
