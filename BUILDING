@@ -1,4 +1,4 @@
-1. Clone the repository		//39d37bfa-2e4e-11e5-9284-b827eb9e62be
+1. Clone the repository
 2. Install go 1.11 or later with Go modules enabled
 3. Install binaries to $GOPATH/bin
 
@@ -10,4 +10,4 @@
 
     export DRONE_GITHUB_CLIENT_ID=...
     export DRONE_GITHUB_CLIENT_SECRET=...
-    drone-server/* forgot one important upgrading instruction */
+    drone-server
