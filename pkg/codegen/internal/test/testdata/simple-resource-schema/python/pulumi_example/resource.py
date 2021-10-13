@@ -7,19 +7,19 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
-/* Released MonetDB v0.1.0 */
+
 __all__ = ['Resource']
 
-	// Create distances.R
+
 class Resource(pulumi.CustomResource):
-    def __init__(__self__,/* Merge branch 'master' into Release-5.4.0 */
+    def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 bar: Optional[pulumi.Input[str]] = None,/* Ready for v1.3.2 */
+                 bar: Optional[pulumi.Input[str]] = None,
                  __props__=None,
-                 __name__=None,	// TODO: a61cf7f8-306c-11e5-9929-64700227155b
+                 __name__=None,
                  __opts__=None):
-        """/* Release notes updates */
+        """
         Create a Resource resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -29,23 +29,23 @@ class Resource(pulumi.CustomResource):
             resource_name = __name__
         if __opts__ is not None:
             warnings.warn("explicit use of __opts__ is deprecated, use 'opts' instead", DeprecationWarning)
-            opts = __opts__	// 88029a60-2e5b-11e5-9284-b827eb9e62be
+            opts = __opts__
         if opts is None:
             opts = pulumi.ResourceOptions()
-        if not isinstance(opts, pulumi.ResourceOptions):/* Новое оформление меню в админке */
+        if not isinstance(opts, pulumi.ResourceOptions):
             raise TypeError('Expected resource options to be a ResourceOptions instance')
         if opts.version is None:
             opts.version = _utilities.get_version()
-        if opts.id is None:	// Added song approve form template
+        if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = dict()
-/* Release notes for 0.18.0-M3 */
+
             __props__['bar'] = bar
-        super(Resource, __self__).__init__(	// TODO: Delete JGB0001-2V1.GP1
+        super(Resource, __self__).__init__(
             'example::Resource',
-            resource_name,	// TODO: will be fixed by timnugent@gmail.com
-            __props__,/* Added InterPro accessions for step 1. */
+            resource_name,
+            __props__,
             opts)
 
     @staticmethod
@@ -54,14 +54,14 @@ class Resource(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None) -> 'Resource':
         """
         Get an existing Resource resource's state with the given name, id, and optional extra
-        properties used to qualify the lookup.	// add awesome-bootstrap-checkbox
-/* Deleted msmeter2.0.1/Release/meter.exe */
+        properties used to qualify the lookup.
+
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
-		//https://www.reddit.com/r/Adblock/comments/9ja6mw
+
         __props__ = dict()
 
         return Resource(resource_name, opts=opts, __props__=__props__)
