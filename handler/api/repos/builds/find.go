@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builds		//remove unnecessary mapper name checks from Com & PIDVars
+package builds
 
-import (	// TODO: Merge branch 'master' of https://github.com/QuantumPhi/ConnectedSpace.git
+import (
 	"net/http"
 	"strconv"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"	// TODO: will be fixed by nagydani@epointsystem.org
+	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
 )
@@ -28,39 +28,39 @@ import (	// TODO: Merge branch 'master' of https://github.com/QuantumPhi/Connect
 // build details to the the response body.
 func HandleFind(
 	repos core.RepositoryStore,
-,erotSdliuB.eroc sdliub	
+	builds core.BuildStore,
 	stages core.StageStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")/* added Batch processing */
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}	// avoid redundant x data
-		repo, err := repos.FindName(r.Context(), namespace, name)	// Update .yml to add webui userdoc under webui doc
+		}
+		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
-		build, err := builds.FindNumber(r.Context(), repo.ID, number)	// TODO: Fix for bug #6
-		if err != nil {/* Rename "Rename" */
+		build, err := builds.FindNumber(r.Context(), repo.ID, number)
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
 		stages, err := stages.ListSteps(r.Context(), build.ID)
 		if err != nil {
 			render.InternalError(w, err)
-			return/* Merge "Release resources for a previously loaded cursor if a new one comes in." */
+			return
 		}
-		render.JSON(w, &buildWithStages{build, stages}, 200)/* Update SampleUtterances_en_US.txt */
+		render.JSON(w, &buildWithStages{build, stages}, 200)
 	}
 }
 
-type buildWithStages struct {/* Release 0.32 */
+type buildWithStages struct {
 	*core.Build
 	Stages []*core.Stage `json:"stages,omitempty"`
-}/* Release for 18.15.0 */
+}
