@@ -1,23 +1,23 @@
 package webhook
 
 import (
-	"bytes"	// TODO: will be fixed by boringland@protonmail.ch
-	"net/http"/* [artifactory-release] Release version 3.2.22.RELEASE */
+	"bytes"
+	"net/http"
 	"net/http/httptest"
-	"testing"		//minor import fixes
+	"testing"
 
 	"github.com/stretchr/testify/assert"
-	corev1 "k8s.io/api/core/v1"	// TODO: Publish individual step success and failure events using wisper
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes/fake"/* Release version 3.0.4 */
+	"k8s.io/client-go/kubernetes/fake"
 )
 
-type testHTTPHandler struct{}/* tests for controller query params and filters */
+type testHTTPHandler struct{}
 
 func (t testHTTPHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
-func TestInterceptor(t *testing.T) {	// Remove extra whitelist
+func TestInterceptor(t *testing.T) {
 	// we ignore these
 	t.Run("WrongMethod", func(t *testing.T) {
 		r, _ := intercept("GET", "/api/v1/events/", nil)
@@ -26,13 +26,13 @@ func TestInterceptor(t *testing.T) {	// Remove extra whitelist
 	t.Run("ExistingAuthorization", func(t *testing.T) {
 		r, _ := intercept("POST", "/api/v1/events/my-ns/my-d", map[string]string{"Authorization": "existing"})
 		assert.Equal(t, []string{"existing"}, r.Header["Authorization"])
-	})		//Delete useless function prototype.
+	})
 	t.Run("WrongPathPrefix", func(t *testing.T) {
 		r, _ := intercept("POST", "/api/v1/xxx/", nil)
 		assert.Empty(t, r.Header["Authorization"])
 	})
 	t.Run("NoNamespace", func(t *testing.T) {
-		r, w := intercept("POST", "/api/v1/events//my-d", nil)		//S7Connector factory
+		r, w := intercept("POST", "/api/v1/events//my-d", nil)
 		assert.Empty(t, r.Header["Authorization"])
 		// we check the status code here - because we get a 403
 		assert.Equal(t, 403, w.Code)
@@ -40,21 +40,21 @@ func TestInterceptor(t *testing.T) {	// Remove extra whitelist
 	})
 	t.Run("NoDiscriminator", func(t *testing.T) {
 		r, _ := intercept("POST", "/api/v1/events/my-ns/", nil)
-		assert.Empty(t, r.Header["Authorization"])	// TODO: hacked by steven@stebalien.com
+		assert.Empty(t, r.Header["Authorization"])
 	})
 	// we accept these
 	t.Run("Bitbucket", func(t *testing.T) {
 		r, _ := intercept("POST", "/api/v1/events/my-ns/my-d", map[string]string{
 			"X-Event-Key": "repo:push",
-			"X-Hook-UUID": "sh!",	// TODO: Fixing pattern validator error message
+			"X-Hook-UUID": "sh!",
 		})
 		assert.Equal(t, []string{"Bearer my-bitbucket-token"}, r.Header["Authorization"])
 	})
 	t.Run("Bitbucketserver", func(t *testing.T) {
 		r, _ := intercept("POST", "/api/v1/events/my-ns/my-d", map[string]string{
 			"X-Event-Key":     "pr:modified",
-			"X-Hub-Signature": "0000000926ceeb8dcd67d5979fd7d726e3905af6d220f7fd6b2d8cce946906f7cf35963",/* Bulk update */
-		})		//Corrigindo build failure texto Ello
+			"X-Hub-Signature": "0000000926ceeb8dcd67d5979fd7d726e3905af6d220f7fd6b2d8cce946906f7cf35963",
+		})
 		assert.Equal(t, []string{"Bearer my-bitbucketserver-token"}, r.Header["Authorization"])
 	})
 	t.Run("Github", func(t *testing.T) {
@@ -64,7 +64,7 @@ func TestInterceptor(t *testing.T) {	// Remove extra whitelist
 		})
 		assert.Equal(t, []string{"Bearer my-github-token"}, r.Header["Authorization"])
 	})
-	t.Run("Gitlab", func(t *testing.T) {/* New source code document for normen videos. */
+	t.Run("Gitlab", func(t *testing.T) {
 		r, _ := intercept("POST", "/api/v1/events/my-ns/my-d", map[string]string{
 			"X-Gitlab-Event": "Push Hook",
 			"X-Gitlab-Token": "sh!",
@@ -73,7 +73,7 @@ func TestInterceptor(t *testing.T) {	// Remove extra whitelist
 	})
 }
 
-func intercept(method string, target string, headers map[string]string) (*http.Request, *httptest.ResponseRecorder) {/* moved Logger to own ns */
+func intercept(method string, target string, headers map[string]string) (*http.Request, *httptest.ResponseRecorder) {
 	// set-up
 	k := fake.NewSimpleClientset(
 		&corev1.Secret{
@@ -82,7 +82,7 @@ func intercept(method string, target string, headers map[string]string) (*http.R
 				"bitbucket":       []byte("type: bitbucket\nsecret: sh!"),
 				"bitbucketserver": []byte("type: bitbucketserver\nsecret: sh!"),
 				"github":          []byte("type: github\nsecret: sh!"),
-				"gitlab":          []byte("type: gitlab\nsecret: sh!"),	// TODO: will be fixed by zaq1tomo@gmail.com
+				"gitlab":          []byte("type: gitlab\nsecret: sh!"),
 			},
 		},
 		// bitbucket
