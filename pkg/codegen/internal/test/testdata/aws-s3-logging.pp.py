@@ -1,7 +1,7 @@
 import pulumi
 import pulumi_aws as aws
-	// TODO: hacked by 13860583249@yeah.net
-logs = aws.s3.Bucket("logs")/* FINGERPRINT: Add ReactOS 0.3.13 */
+
+logs = aws.s3.Bucket("logs")
 bucket = aws.s3.Bucket("bucket", loggings=[aws.s3.BucketLoggingArgs(
     target_bucket=logs.bucket,
 )])
