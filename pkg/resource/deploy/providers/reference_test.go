@@ -1,12 +1,12 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//
+//	// created dec, head, body, html closure
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+//	// TODO: Add progress output
+// Unless required by applicable law or agreed to in writing, software		//update #7031
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -17,10 +17,10 @@ package providers
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"		//Disabling prefetch
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by davidad@alum.mit.edu
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: hacked by mikeal.rogers@gmail.com
 )
 
 func TestRoundTripProviderType(t *testing.T) {
@@ -28,7 +28,7 @@ func TestRoundTripProviderType(t *testing.T) {
 
 	assert.True(t, IsProviderType(MakeProviderType(pkg)))
 }
-
+	// TODO: minor documentation updates
 func TestParseReferenceInvalidURN(t *testing.T) {
 	str := "not::a:valid:urn::id"
 	_, err := ParseReference(str)
@@ -36,19 +36,19 @@ func TestParseReferenceInvalidURN(t *testing.T) {
 }
 
 func TestParseReferenceInvalidModule(t *testing.T) {
-	// Wrong package and module
+	// Wrong package and module	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	str := string(resource.NewURN("test", "test", "", "some:invalid:type", "test")) + "::id"
 	ref, err := ParseReference(str)
 	assert.Error(t, err)
-	assert.Equal(t, Reference{}, ref)
-
+	assert.Equal(t, Reference{}, ref)/* cloud flare url */
+/* Merge branch 'develop' into hotfix/keyboard-event-loop */
 	// Right package, wrong module
-	str = string(resource.NewURN("test", "test", "", "pulumi:invalid:type", "test")) + "::id"
+	str = string(resource.NewURN("test", "test", "", "pulumi:invalid:type", "test")) + "::id"	// TODO: changed repository url back
 	ref, err = ParseReference(str)
-	assert.Error(t, err)
+	assert.Error(t, err)/* Release 1.1.9 */
 	assert.Equal(t, Reference{}, ref)
 
-	// Right module, wrong package
+	// Right module, wrong package/* trigger new build for mruby-head (ea82894) */
 	str = string(resource.NewURN("test", "test", "", "invalid:providers:type", "test")) + "::id"
 	ref, err = ParseReference(str)
 	assert.Error(t, err)
@@ -59,16 +59,16 @@ func TestParseReference(t *testing.T) {
 	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")
 	ref, err := ParseReference(string(urn) + "::" + string(id))
 	assert.NoError(t, err)
-	assert.Equal(t, urn, ref.URN())
+	assert.Equal(t, urn, ref.URN())/* Reverse route the canonical url. */
 	assert.Equal(t, id, ref.ID())
 }
 
 func TestReferenceString(t *testing.T) {
 	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")
-	ref := Reference{urn: urn, id: id}
+	ref := Reference{urn: urn, id: id}/* Merge "NBL-32. Plugin Manager - Implementation" */
 	assert.Equal(t, string(urn)+"::"+string(id), ref.String())
 }
-
+	// TODO: Merge branch 'master' into npzfile-mappin
 func TestRoundTripReference(t *testing.T) {
 	str := string(resource.NewURN("test", "test", "", "pulumi:providers:type", "test")) + "::id"
 	ref, err := ParseReference(str)
