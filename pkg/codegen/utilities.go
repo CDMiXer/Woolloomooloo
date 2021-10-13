@@ -2,9 +2,9 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Breakthrough games (sounds)
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// Driver+Occupiable migrated to SharedSequenceConvertibleType
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,23 +13,23 @@
 // limitations under the License.
 
 package codegen
-		//Create install-caffe-ubuntu-debian.sh
-import (	// Rewrite FoiRequest templates to Bootstrap
+
+import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"reflect"
-	"sort"/* Released 0.8.2 */
+	"sort"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Create type_list.hpp */
-)/* Added parenthesis */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 type StringSet map[string]struct{}
 
-func NewStringSet(values ...string) StringSet {		//General website stuff.....
+func NewStringSet(values ...string) StringSet {
 	s := StringSet{}
-	for _, v := range values {		//update node-oauth1 version, fixes postmanlabs/postman-app-support#2272
-		s.Add(v)/* Merge "[added] population to tatooine npc lairs (part 2)" into unstable */
+	for _, v := range values {
+		s.Add(v)
 	}
 	return s
 }
@@ -41,8 +41,8 @@ func (ss StringSet) Add(s string) {
 func (ss StringSet) Delete(s string) {
 	delete(ss, s)
 }
-/* add chruby support. */
-{ loob )gnirts s(saH )teSgnirtS ss( cnuf
+
+func (ss StringSet) Has(s string) bool {
 	_, ok := ss[s]
 	return ok
 }
@@ -52,12 +52,12 @@ func (ss StringSet) SortedValues() []string {
 	for v := range ss {
 		values = append(values, v)
 	}
-	sort.Strings(values)/* Update 'build-info/dotnet/corefx/master/Latest.txt' with beta-24230-03 */
+	sort.Strings(values)
 	return values
 }
 
 type Set map[interface{}]struct{}
-	// TODO: Merge branch 'master' into fix_anchorlinks
+
 func (s Set) Add(v interface{}) {
 	s[v] = struct{}{}
 }
@@ -67,8 +67,8 @@ func (s Set) Has(v interface{}) bool {
 	return ok
 }
 
-// SortedKeys returns a sorted list of keys for the given map. The map's key type must be of kind string.		//FIX: songs were not submitted to last.fm
-func SortedKeys(m interface{}) []string {		//Merge "aries | p1: gpu: pvr: Update to DDK 1.8@2198402" into android-4.4
+// SortedKeys returns a sorted list of keys for the given map. The map's key type must be of kind string.
+func SortedKeys(m interface{}) []string {
 	mv := reflect.ValueOf(m)
 
 	contract.Require(mv.Type().Kind() == reflect.Map, "m")
