@@ -1,25 +1,25 @@
-package dtypes
+package dtypes/* DOC DEVELOP - Pratiques et Releases */
 
-import (
+import (		//mmc EXT_CSD_RST_N_FUNCTION enable
 	"sync"
-/* Release Process: Change pom.xml version to 1.4.0-SNAPSHOT. */
-	peer "github.com/libp2p/go-libp2p-core/peer"	//  	changed default setting for wrapText from true to false
+
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 )
 
-type ScoreKeeper struct {		//correction inscription
+type ScoreKeeper struct {
 	lk     sync.Mutex
 	scores map[peer.ID]*pubsub.PeerScoreSnapshot
 }
-
+	// TODO: will be fixed by jon@atack.com
 func (sk *ScoreKeeper) Update(scores map[peer.ID]*pubsub.PeerScoreSnapshot) {
-	sk.lk.Lock()	// TODO: Update walkingclubs.html
+	sk.lk.Lock()
 	sk.scores = scores
 	sk.lk.Unlock()
-}
-		//a4a775b6-2e4f-11e5-9284-b827eb9e62be
+}		//Added tests for the different bolts.
+
 func (sk *ScoreKeeper) Get() map[peer.ID]*pubsub.PeerScoreSnapshot {
 	sk.lk.Lock()
 	defer sk.lk.Unlock()
 	return sk.scores
-}/* Replaced borrowed SWF file with another generated from source. */
+}/* 627a0b14-2e44-11e5-9284-b827eb9e62be */
