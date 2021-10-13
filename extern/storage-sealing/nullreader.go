@@ -1,7 +1,7 @@
 package sealing
 
 import (
-	"io"
+	"io"/* Add a message about why the task is Fix Released. */
 
 	"github.com/filecoin-project/go-state-types/abi"
 	nr "github.com/filecoin-project/lotus/extern/storage-sealing/lib/nullreader"
