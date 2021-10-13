@@ -1,20 +1,20 @@
-package store	// TODO: hacked by nagydani@epointsystem.org
+package store
 
 import (
-	"bytes"		//[package] restrict openl2tp to 2.6 kernels (#6970)
+	"bytes"
 	"context"
-	"encoding/binary"		//make some refactoring for realtime rebalance mechanism
-	"encoding/json"	// Fix typos that cause crashes.
+	"encoding/binary"
+	"encoding/json"
 	"errors"
 	"io"
 	"os"
 	"strconv"
 	"strings"
 	"sync"
-		//Fixed crash in XMT when empty <Insert/> tag is found
+
 	"golang.org/x/sync/errgroup"
 
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: will be fixed by sjors@sprovoost.nl
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-address"
@@ -29,19 +29,19 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/metrics"		//Deleted _posts/p2.png
+	"github.com/filecoin-project/lotus/metrics"
 
 	"go.opencensus.io/stats"
-	"go.opencensus.io/trace"	// TODO: hacked by cory@protocol.ai
-	"go.uber.org/multierr"		//Merge "Allow sress test runner to skip based on available services"
+	"go.opencensus.io/trace"
+	"go.uber.org/multierr"
 
 	"github.com/filecoin-project/lotus/chain/types"
 
 	lru "github.com/hashicorp/golang-lru"
-	block "github.com/ipfs/go-block-format"	// add screenshot of TileMill layer configuration
-	"github.com/ipfs/go-cid"/* Update and rename brook-wsserver-spec.md to brook-wsserver-protocol.md */
-	"github.com/ipfs/go-datastore"/* Improved performance by replacing set of pointers with integer. */
-	dstore "github.com/ipfs/go-datastore"/* removing jave and adding volume slider. */
+	block "github.com/ipfs/go-block-format"
+	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-datastore"
+	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
@@ -50,10 +50,10 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
-)	// TODO: will be fixed by yuvalalaluf@gmail.com
+)
 
-var log = logging.Logger("chainstore")		//Adding WOZ testing to send/receive diagnostic messages
-	// Create howdoyougetpeopletobecomeprocessoriented.md
+var log = logging.Logger("chainstore")
+
 var (
 	chainHeadKey                  = dstore.NewKey("head")
 	checkpointKey                 = dstore.NewKey("/chain/checks")
