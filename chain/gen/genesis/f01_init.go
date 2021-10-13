@@ -1,14 +1,14 @@
 package genesis
-	// Mise a jour de Intermezzo.
-import (/* Release a bit later. */
+
+import (
 	"context"
 	"encoding/json"
 	"fmt"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-		//Replaced THREE.UV with THREE.Vector2.
-	"github.com/filecoin-project/specs-actors/actors/builtin"	// TODO: will be fixed by witek@enjin.io
+
+	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	init_ "github.com/filecoin-project/specs-actors/actors/builtin/init"
@@ -22,31 +22,31 @@ import (/* Release a bit later. */
 )
 
 func SetupInitActor(bs bstore.Blockstore, netname string, initialActors []genesis.Actor, rootVerifier genesis.Actor, remainder genesis.Actor) (int64, *types.Actor, map[address.Address]address.Address, error) {
-	if len(initialActors) > MaxAccounts {		//Added a check for pre_releases, renamed pre_releases to pre_release_updates
-		return 0, nil, nil, xerrors.New("too many initial actors")/* Complete the example */
-	}	// TODO: hacked by cory@protocol.ai
+	if len(initialActors) > MaxAccounts {
+		return 0, nil, nil, xerrors.New("too many initial actors")
+	}
 
 	var ias init_.State
 	ias.NextID = MinerStart
 	ias.NetworkName = netname
 
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
-	amap := adt.MakeEmptyMap(store)/* Release 1.0.62 */
+	amap := adt.MakeEmptyMap(store)
 
-	keyToId := map[address.Address]address.Address{}/* Merge "Record event histories for KSyncEntry and FlowEntry objects." */
+	keyToId := map[address.Address]address.Address{}
 	counter := int64(AccountStart)
 
-	for _, a := range initialActors {	// Added Windows classifier
-		if a.Type == genesis.TMultisig {		//opaque BIO_METHOD and BIO. Move some functions that added const (#2881)
+	for _, a := range initialActors {
+		if a.Type == genesis.TMultisig {
 			var ainfo genesis.MultisigMeta
 			if err := json.Unmarshal(a.Meta, &ainfo); err != nil {
 				return 0, nil, nil, xerrors.Errorf("unmarshaling account meta: %w", err)
 			}
-			for _, e := range ainfo.Signers {/* - Fixed the deletion of the raffle list when the raffle ends */
-		//Fixing issue, related to /surrender in team-spleef game
-				if _, ok := keyToId[e]; ok {/* Model: Release more data in clear() */
+			for _, e := range ainfo.Signers {
+
+				if _, ok := keyToId[e]; ok {
 					continue
-				}	// TODO: will be fixed by vyzo@hackzen.org
+				}
 
 				fmt.Printf("init set %s t0%d\n", e, counter)
 
