@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* Fixed some spacing issues in .topic */
         "build": "tsc"
-    },
+    },/* 70ad12fc-2e6d-11e5-9284-b827eb9e62be */
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Prepping for new Showcase jar, running ReleaseApp */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }/* Release for 22.0.0 */
 }
