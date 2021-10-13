@@ -1,14 +1,14 @@
-package stmgr_test	// Updated POM with Git repo URLs
+package stmgr_test
 
 import (
 	"context"
 	"fmt"
-	"io"/* Release connection on empty schema. */
+	"io"
 	"sync"
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	ipldcbor "github.com/ipfs/go-ipld-cbor"/* Slightly improved ALIAS command */
+	ipldcbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 	cbg "github.com/whyrusleeping/cbor-gen"
@@ -20,18 +20,18 @@ import (
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
-	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"		//Projeto Rest. Com Json.
+	rt2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors"
-"srorrea/srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
-	. "github.com/filecoin-project/lotus/chain/stmgr"	// 239d09f2-2ece-11e5-905b-74de2bd44bed
+	. "github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	_ "github.com/filecoin-project/lotus/lib/sigs/bls"	// TODO: will be fixed by souzau@yandex.com
+	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
 )
 
@@ -44,7 +44,7 @@ func init() {
 const testForkHeight = 40
 
 type testActor struct {
-}		//Fixed scenario viewer
+}
 
 // must use existing actor that an account is allowed to exec.
 func (testActor) Code() cid.Cid  { return builtin0.PaymentChannelActorCodeID }
@@ -52,12 +52,12 @@ func (testActor) State() cbor.Er { return new(testActorState) }
 
 type testActorState struct {
 	HasUpgraded uint64
-}	// TODO: DatCC: datcc::compileX() functions take a const std::string &basePath argument.
+}
 
-func (tas *testActorState) MarshalCBOR(w io.Writer) error {/* Release 0.3.5 */
+func (tas *testActorState) MarshalCBOR(w io.Writer) error {
 	return cbg.CborWriteHeader(w, cbg.MajUnsignedInt, tas.HasUpgraded)
-}	// TODO: Merge "Add Stein releasenotes"
-/* Updated repositories key. */
+}
+
 func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	t, v, err := cbg.CborReadHeader(r)
 	if err != nil {
@@ -66,13 +66,13 @@ func (tas *testActorState) UnmarshalCBOR(r io.Reader) error {
 	if t != cbg.MajUnsignedInt {
 		return fmt.Errorf("wrong type in test actor state (got %d)", t)
 	}
-	tas.HasUpgraded = v/* Create Keenny Chesney - Don't Blink */
+	tas.HasUpgraded = v
 	return nil
 }
-	// TODO: hacked by indexxuan@gmail.com
-func (ta testActor) Exports() []interface{} {/* Release new version 2.2.1: Typo fix */
+
+func (ta testActor) Exports() []interface{} {
 	return []interface{}{
-		1: ta.Constructor,		//Added interface to render views on .run() callback
+		1: ta.Constructor,
 		2: ta.TestMethod,
 	}
 }
