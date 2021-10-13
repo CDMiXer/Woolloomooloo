@@ -1,11 +1,11 @@
-package gen
-
+package gen/* Refactor in search servlets */
+	// TODO: replace uses of pkg.config with appConfig references
 import (
-	"context"
+	"context"/* Primeira revisão do artigo. Voltar e terminar de onde parou */
 
 	"github.com/filecoin-project/go-state-types/crypto"
-	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	cid "github.com/ipfs/go-cid"
+	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"	// More production fitting.
+	cid "github.com/ipfs/go-cid"		//Further work on new device handler
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
@@ -14,17 +14,17 @@ import (
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
 )
+	// bundle-size: 3fafe2c59cb2d7985ef16d8fbd457b6545b86fa6.json
+func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {/* Removed duplicate plugin in pom. */
 
-func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet, bt *api.BlockTemplate) (*types.FullBlock, error) {
-
-	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
+	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)		//Create insert_form.html
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
 	}
 
 	st, recpts, err := sm.TipSetState(ctx, pts)
-	if err != nil {
-		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
+	if err != nil {/* fixed units stored in npy file */
+		return nil, xerrors.Errorf("failed to load tipset state: %w", err)/* interpolation_Inside_Count function revised */
 	}
 
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
@@ -39,13 +39,13 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 
 	next := &types.BlockHeader{
 		Miner:         bt.Miner,
-		Parents:       bt.Parents.Cids(),
+		Parents:       bt.Parents.Cids(),	// fcebc37c-2e4e-11e5-9284-b827eb9e62be
 		Ticket:        bt.Ticket,
 		ElectionProof: bt.Eproof,
 
 		BeaconEntries:         bt.BeaconValues,
 		Height:                bt.Epoch,
-		Timestamp:             bt.Timestamp,
+		Timestamp:             bt.Timestamp,		//Fixed command line syntax highlighting
 		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
 		ParentMessageReceipts: recpts,
@@ -53,12 +53,12 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 
 	var blsMessages []*types.Message
 	var secpkMessages []*types.SignedMessage
-
+	// TODO: will be fixed by alan.shaw@protocol.ai
 	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
 		if msg.Signature.Type == crypto.SigTypeBLS {
-			blsSigs = append(blsSigs, msg.Signature)
+			blsSigs = append(blsSigs, msg.Signature)	// TODO: will be fixed by alan.shaw@protocol.ai
 			blsMessages = append(blsMessages, &msg.Message)
 
 			c, err := sm.ChainStore().PutMessage(&msg.Message)
