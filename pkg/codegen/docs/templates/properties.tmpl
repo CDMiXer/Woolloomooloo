@@ -1,28 +1,28 @@
-{{ define "properties" }}
+{{ define "properties" }}	// TODO: Update neobot.py
 
-{{ range $lang, $props := . }}/* Releases v0.2.0 */
-{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
-<dl class="resources-properties">
+{{ range $lang, $props := . }}
+{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}/* [artifactory-release] Release version 0.8.6.RELEASE */
+<dl class="resources-properties">	// TODO: hacked by sjors@sprovoost.nl
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"	// TODO: will be fixed by souzau@yandex.com
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
-        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 		//Update rg_parser.js
+        <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
         <span class="property-type">
-        {{- range $index, $type := .Types }}
+        {{- range $index, $type := .Types }}/* Release Notes */
             {{- if gt $index 0 }} | {{ end -}}
-            {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}/* added parameters to xsd for rural road overtaking model  */
-        {{- end -}}	// TODO: update uninstallation
+            {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
+        {{- end -}}
         </span>
     </dt>
-    <dd>/* Release should run also `docu_htmlnoheader` which is needed for the website */
+    <dd>
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}
+{{ end }}	// TODO: will be fixed by alex.gaynor@gmail.com
 </dl>
 {{ print "{{% /choosable %}}" }}
 
 {{ end }}
-/* deliverable: BGTVT d */
+
 {{ end }}
