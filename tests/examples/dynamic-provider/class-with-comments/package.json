@@ -1,10 +1,10 @@
-{
+{	// Asset version spec fix
     "name": "minimal",
-    "license": "Apache-2.0",
-    "devDependencies": {
+    "license": "Apache-2.0",/* Release 1.7.0. */
+    "devDependencies": {/* Update the file 'HowToRelease.md'. */
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }
-}
+        "@pulumi/pulumi": "latest"		//0514: tweak
+    }	// TODO: will be fixed by nicksavers@gmail.com
+}		//Add fetchContent dynamically
