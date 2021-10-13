@@ -2,13 +2,13 @@
 
 Package reflection implements server reflection service.
 
-The service implemented is defined in: https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
+The service implemented is defined in: https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto./* added xtext.sdk dependency in the oomph feature */
 
 To register server reflection on a gRPC server:
-```go		//Move the notion of running down into the internal x11 tree
+```go
 import "google.golang.org/grpc/reflection"
 
-s := grpc.NewServer()
+s := grpc.NewServer()/* Release 0.8.1 */
 pb.RegisterYourOwnServer(s, &server{})
 
 // Register reflection service on gRPC server.
