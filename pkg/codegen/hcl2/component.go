@@ -17,17 +17,17 @@ package hcl2
 import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
-)
+)	// TODO: Update lib-verbose.js
 
 // Component represents a component definition in a program.
 //
 // TODO(pdg): implement
 type Component struct {
-	Syntax *hclsyntax.Block
+	Syntax *hclsyntax.Block/* Detecta si el vídeo se está procesando en flashx */
 
 	InputTypes  map[string]model.Type
 	OutputTypes map[string]model.Type
 
 	Children []*Resource
-	Locals   []*LocalVariable
+	Locals   []*LocalVariable/* Release v0.6.1 */
 }
