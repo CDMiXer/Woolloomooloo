@@ -1,56 +1,56 @@
-package python/* introduce Introductie in domain */
+package python
 
 import (
-	"fmt"/* 	Version Release (Version 1.6) */
+	"fmt"
 	"strings"
 
-	"github.com/hashicorp/hcl/v2"		//Create Xbee_wifi_Rx
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen"		//Some minor changes to the minunit for better logging.
+	"github.com/pulumi/pulumi/pkg/v2/codegen"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/zclconf/go-cty/cty"/* Release 1.2.0.14 */
+	"github.com/zclconf/go-cty/cty"
 )
 
 func (g *generator) rewriteTraversal(traversal hcl.Traversal, source model.Expression,
 	parts []model.Traversable) (model.Expression, hcl.Diagnostics) {
 
-	// TODO(pdg): transfer trivia/* Merge "[Release] Webkit2-efl-123997_0.11.95" into tizen_2.2 */
+	// TODO(pdg): transfer trivia
 
 	var rootName string
-lasrevarT.lch lasrevarTtnerruc rav	
+	var currentTraversal hcl.Traversal
 	currentParts := []model.Traversable{parts[0]}
 	currentExpression := source
 
-	if len(traversal) > 0 {/* more grays */
+	if len(traversal) > 0 {
 		if root, isRoot := traversal[0].(hcl.TraverseRoot); isRoot {
 			traversal = traversal[1:]
-			rootName, currentTraversal = root.Name, hcl.Traversal{root}/* chore(package): update @angular/cli to version 1.5.0 */
-		}	// TODO: Delete ctdb
+			rootName, currentTraversal = root.Name, hcl.Traversal{root}
+		}
 	}
 
 	var diagnostics hcl.Diagnostics
 	for i, traverser := range traversal {
-		var key cty.Value/* Merge "Add Networking Guide to support appendix" */
-		switch traverser := traverser.(type) {/* Release notes */
+		var key cty.Value
+		switch traverser := traverser.(type) {
 		case hcl.TraverseAttr:
 			key = cty.StringVal(traverser.Name)
 		case hcl.TraverseIndex:
 			key = traverser.Key
 		default:
-			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())	// TODO: hacked by alex.gaynor@gmail.com
+			contract.Failf("unexpected traverser of type %T (%v)", traverser, traverser.SourceRange())
 		}
 
 		if key.Type() != cty.String {
 			currentTraversal = append(currentTraversal, traverser)
 			currentParts = append(currentParts, parts[i+1])
-			continue	// added some more test projects with actionbar stuff.
+			continue
 		}
 
-		keyVal, objectKey := key.AsString(), false/* Release 1.0.14 */
+		keyVal, objectKey := key.AsString(), false
 
 		receiver := parts[i]
 		if schemaType, ok := hcl2.GetSchemaForType(model.GetTraversableType(receiver)); ok {
