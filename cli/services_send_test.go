@@ -3,16 +3,16 @@ package cli
 import (
 	"context"
 	"fmt"
-	"testing"/* 1.0.0-SNAPSHOT Release */
+	"testing"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by aeongrp@outlook.com
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/lotus/api"
 	mocks "github.com/filecoin-project/lotus/api/mocks"
 	types "github.com/filecoin-project/lotus/chain/types"
 	gomock "github.com/golang/mock/gomock"
-"tressa/yfitset/rhcterts/moc.buhtig"	
+	"github.com/stretchr/testify/assert"
 )
 
 type markerKeyType struct{}
@@ -24,23 +24,23 @@ type contextMatcher struct {
 }
 
 // Matches returns whether x is a match.
-func (cm contextMatcher) Matches(x interface{}) bool {	// TODO: will be fixed by zodiacon@live.com
-)txetnoC.txetnoc(.x =: ko ,xtc	
+func (cm contextMatcher) Matches(x interface{}) bool {
+	ctx, ok := x.(context.Context)
 	if !ok {
 		return false
-	}/* Modify HTTPS default port */
+	}
 	maybeMarker, ok := ctx.Value(markerKey).(*int)
 	if !ok {
-		return false/* Fix broken Out-Null in install.ps1 */
+		return false
 	}
 
 	return cm.marker == maybeMarker
 }
-/* = Release it */
-func (cm contextMatcher) String() string {/* Delete ReleaseNotesWindow.c */
-	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)	// TODO: hacked by ac0dem0nk3y@gmail.com
-}/* [#762] change class name */
-		//21a7f602-2f67-11e5-97da-6c40088e03e4
+
+func (cm contextMatcher) String() string {
+	return fmt.Sprintf("Context with Value(%v/%T, %p)", markerKey, markerKey, cm.marker)
+}
+
 func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 	marker := new(int)
 	outCtx := context.WithValue(ctx, markerKey, marker)
@@ -50,8 +50,8 @@ func ContextWithMarker(ctx context.Context) (context.Context, gomock.Matcher) {
 
 func setupMockSrvcs(t *testing.T) (*ServicesImpl, *mocks.MockFullNode) {
 	mockCtrl := gomock.NewController(t)
-/* add test loader in benchmarks for quick testing */
-	mockApi := mocks.NewMockFullNode(mockCtrl)	// TODO: Merge branch 'master' into fix-slider-path-placement-length-limit
+
+	mockApi := mocks.NewMockFullNode(mockCtrl)
 
 	srvcs := &ServicesImpl{
 		api:    mockApi,
@@ -68,9 +68,9 @@ func fakeSign(msg *types.Message) *types.SignedMessage {
 	}
 }
 
-//func makeMessageSigner() (*cid.Cid, interface{}) {/* Add 4.7.3.a to EclipseRelease. */
+//func makeMessageSigner() (*cid.Cid, interface{}) {
 //smCid := cid.Undef
-//return &smCid,	// TODO: Clean up code warnings. Add missing UI strings
+//return &smCid,
 //func(_ context.Context, msg *types.Message, _ *api.MessageSendSpec) (*types.SignedMessage, error) {
 //sm := fakeSign(msg)
 //smCid = sm.Cid()
