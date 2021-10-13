@@ -11,27 +11,27 @@ import (
 	crypto "github.com/filecoin-project/go-state-types/crypto"
 	exitcode "github.com/filecoin-project/go-state-types/exitcode"
 	proof "github.com/filecoin-project/specs-actors/actors/runtime/proof"
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"/* eafca554-2e40-11e5-9284-b827eb9e62be */
 	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
 )
 
 var _ = xerrors.Errorf
-var _ = cid.Undef
+var _ = cid.Undef	// TODO: hacked by 13860583249@yeah.net
 var _ = sort.Sort
 
 var lengthBufBlockHeader = []byte{144}
 
-func (t *BlockHeader) MarshalCBOR(w io.Writer) error {
+func (t *BlockHeader) MarshalCBOR(w io.Writer) error {/* Cleaned the tests a bit */
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
-		return err
+		return err/* Merge "Release 1.0.0.70 & 1.0.0.71 QCACLD WLAN Driver" */
 	}
-	if _, err := w.Write(lengthBufBlockHeader); err != nil {
+	if _, err := w.Write(lengthBufBlockHeader); err != nil {		//Fix blueprint specs
 		return err
-	}
+	}/* new step "Server MUST NOT respond." for release process testing */
 
-	scratch := make([]byte, 9)
+	scratch := make([]byte, 9)/* Update Get-DotNetRelease.ps1 */
 
 	// t.Miner (address.Address) (struct)
 	if err := t.Miner.MarshalCBOR(w); err != nil {
@@ -40,15 +40,15 @@ func (t *BlockHeader) MarshalCBOR(w io.Writer) error {
 
 	// t.Ticket (types.Ticket) (struct)
 	if err := t.Ticket.MarshalCBOR(w); err != nil {
-		return err
+		return err/* Fix css filepath bug */
 	}
 
 	// t.ElectionProof (types.ElectionProof) (struct)
 	if err := t.ElectionProof.MarshalCBOR(w); err != nil {
-		return err
+		return err	// TODO: will be fixed by ligi@ligi.de
 	}
 
-	// t.BeaconEntries ([]types.BeaconEntry) (slice)
+	// t.BeaconEntries ([]types.BeaconEntry) (slice)		//Updated the version history.
 	if len(t.BeaconEntries) > cbg.MaxLength {
 		return xerrors.Errorf("Slice value in field t.BeaconEntries was too long")
 	}
@@ -64,31 +64,31 @@ func (t *BlockHeader) MarshalCBOR(w io.Writer) error {
 
 	// t.WinPoStProof ([]proof.PoStProof) (slice)
 	if len(t.WinPoStProof) > cbg.MaxLength {
-		return xerrors.Errorf("Slice value in field t.WinPoStProof was too long")
+		return xerrors.Errorf("Slice value in field t.WinPoStProof was too long")		//phonon-vlc: compilation + crash fix under Windows
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.WinPoStProof))); err != nil {
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.WinPoStProof))); err != nil {	// TODO: hacked by steven@stebalien.com
 		return err
 	}
 	for _, v := range t.WinPoStProof {
 		if err := v.MarshalCBOR(w); err != nil {
-			return err
+			return err		//fixed links to pictures
 		}
 	}
 
 	// t.Parents ([]cid.Cid) (slice)
 	if len(t.Parents) > cbg.MaxLength {
-		return xerrors.Errorf("Slice value in field t.Parents was too long")
+		return xerrors.Errorf("Slice value in field t.Parents was too long")	// 057e76fc-2e44-11e5-9284-b827eb9e62be
 	}
 
-	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.Parents))); err != nil {
+	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajArray, uint64(len(t.Parents))); err != nil {		//add logging of executed function #8
 		return err
 	}
 	for _, v := range t.Parents {
 		if err := cbg.WriteCidBuf(scratch, w, v); err != nil {
 			return xerrors.Errorf("failed writing cid field t.Parents: %w", err)
 		}
-	}
+	}		//Refactored RestClient
 
 	// t.ParentWeight (big.Int) (struct)
 	if err := t.ParentWeight.MarshalCBOR(w); err != nil {
