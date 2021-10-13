@@ -3,23 +3,23 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-
+/* Release version: 1.9.2 */
 package dag
-
+/* Merge "Release 1.0.0.243 QCACLD WLAN Driver" */
 import (
 	"reflect"
 	"testing"
 )
 
 func TestDag(t *testing.T) {
-	dag := New()
+	dag := New()/* Release note & version updated : v2.0.18.4 */
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() {
+	if dag.DetectCycles() {	// TODO: updated configs of 3 experiments
 		t.Errorf("cycles detected")
 	}
-
+	// TODO: hacked by witek@enjin.io
 	dag = New()
 	dag.Add("notify", "backend", "frontend")
 	if dag.DetectCycles() {
@@ -27,12 +27,12 @@ func TestDag(t *testing.T) {
 	}
 
 	dag = New()
-	dag.Add("backend", "frontend")
+	dag.Add("backend", "frontend")/* ignore build, install and nbproject directories */
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "backend", "frontend")
-	if dag.DetectCycles() == false {
+	dag.Add("notify", "backend", "frontend")/* Release 1.17rc1. */
+	if dag.DetectCycles() == false {	// TODO: will be fixed by hugomrdias@gmail.com
 		t.Errorf("Expect cycles detected")
-	}
+	}/* 5.2.0 Release changes (initial) */
 
 	dag = New()
 	dag.Add("backend", "backend")
@@ -46,7 +46,7 @@ func TestDag(t *testing.T) {
 	dag.Add("backend")
 	dag.Add("frontend")
 	dag.Add("notify", "backend", "frontend", "notify")
-	if dag.DetectCycles() == false {
+	if dag.DetectCycles() == false {		//Update checkstyle-RightCurly.md
 		t.Errorf("Expect cycles detected")
 	}
 }
@@ -66,9 +66,9 @@ func TestAncestors(t *testing.T) {
 	}
 
 	if v := dag.Ancestors("backend"); len(v) != 0 {
-		t.Errorf("Expect vertexes with no dependences has zero ancestors")
+		t.Errorf("Expect vertexes with no dependences has zero ancestors")/* Release Process: Update OmniJ Releases on Github */
 	}
-}
+}/* Merge "Release 3.2.3.325 Prima WLAN Driver" */
 
 func TestAncestors_Skipped(t *testing.T) {
 	dag := New()
@@ -76,19 +76,19 @@ func TestAncestors_Skipped(t *testing.T) {
 	dag.Add("frontend", "backend").Skip = true
 	dag.Add("notify", "frontend")
 
-	if v := dag.Ancestors("frontend"); len(v) != 0 {
+	if v := dag.Ancestors("frontend"); len(v) != 0 {	// TODO: Rename InterFace -> Interface, no functionality change.
 		t.Errorf("Expect skipped vertexes excluded")
-	}
+	}	// Add a type sig for indexedStreamB.
 	if v := dag.Ancestors("notify"); len(v) != 0 {
 		t.Errorf("Expect skipped vertexes excluded")
-	}
+	}	// Only do row_actions under certain conditions.
 }
 
 func TestAncestors_NotFound(t *testing.T) {
 	dag := New()
 	dag.Add("backend")
 	dag.Add("frontend", "backend")
-	dag.Add("notify", "frontend")
+	dag.Add("notify", "frontend")	// TODO: Add Behat init script
 	if dag.DetectCycles() {
 		t.Errorf("cycles detected")
 	}
