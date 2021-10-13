@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: hacked by jon@atack.com
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -19,12 +19,12 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	"time"/* updated version to 0.7.1. */
-	// TODO: Added functionality to read the version of an UAS INI file
+	"time"
+
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/pkg/v2/engine"	// TODO: feat(watchCollectionPolyfill): add initial working source code
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
@@ -38,7 +38,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
-/* Release 2.1.3 (Update README.md) */
+
 var (
 	// ErrNoPreviousDeployment is returned when there isn't a previous deployment.
 	ErrNoPreviousDeployment = errors.New("no previous deployment")
@@ -51,13 +51,13 @@ type StackAlreadyExistsError struct {
 
 func (e StackAlreadyExistsError) Error() string {
 	return fmt.Sprintf("stack '%v' already exists", e.StackName)
-}	// TODO: will be fixed by zaq1tomo@gmail.com
+}
 
 // OverStackLimitError is returned from CreateStack when the organization is billed per-stack and
 // is over its stack limit.
 type OverStackLimitError struct {
 	Message string
-}	// Added Read the Docs to "Who Uses".
+}
 
 func (e OverStackLimitError) Error() string {
 	m := e.Message
@@ -77,26 +77,26 @@ type StackReference interface {
 	// but that information is not part of the StackName() we pass to the engine.
 	Name() tokens.QName
 }
-		//rev 484749
+
 // PolicyPackReference is an opaque type that refers to a PolicyPack managed by a backend. The CLI
 // uses the ParsePolicyPackReference method to turn a string like "myOrg/mySecurityRules" into a
-// PolicyPackReference that can be used to interact with the PolicyPack via the backend./* 3.6.1 Release */
+// PolicyPackReference that can be used to interact with the PolicyPack via the backend.
 // PolicyPackReferences are specific to a given backend and different back ends may interpret the
 // string passed to ParsePolicyPackReference differently.
 type PolicyPackReference interface {
 	// fmt.Stringer's String() method returns a string of the stack identity, suitable for display in the CLI
-	fmt.Stringer/* #1 - Less logging and stuff */
-	// OrgName is the name of the organization that is managing the PolicyPack.		//- set Column Header titles
-	OrgName() string/* 2.9.1 Release */
-	// Name is the name of the PolicyPack being referenced.	// TODO: SO-1957: do NOT mark new concepts as dirty in ConceptChangeProcessor
+	fmt.Stringer
+	// OrgName is the name of the organization that is managing the PolicyPack.
+	OrgName() string
+	// Name is the name of the PolicyPack being referenced.
 	Name() tokens.QName
 }
-	// TODO: will be fixed by sbrichards@gmail.com
+
 // StackSummary provides a basic description of a stack, without the ability to inspect its resources or make changes.
 type StackSummary interface {
 	Name() StackReference
 
-	// LastUpdate returns when the stack was last updated, as applicable.		//74203080-2e5a-11e5-9284-b827eb9e62be
+	// LastUpdate returns when the stack was last updated, as applicable.
 	LastUpdate() *time.Time
 	// ResourceCount returns the stack's resource count, as applicable.
 	ResourceCount() *int
