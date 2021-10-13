@@ -2,19 +2,19 @@
   name = "lotus-soup"
   author = ""
 
-[global]
-  plan = "lotus-soup"
+[global]	// Remove gitter from CONTRIBUTING.md
+  plan = "lotus-soup"		//[doc] Correct default `Console` level
   case = "deals-stress"
-  total_instances = 6/* Update red-cockaded-woodpecker.md */
+  total_instances = 6	// TODO: Fixed some tests on MSIE
   builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]
-/* Release of eeacms/forests-frontend:1.9-beta.6 */
-[global.run_config]/* Add MiniRelease1 schematics */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Merge "wlan: Release 3.2.4.100" */
-	// Fix memory leak with parser test cases.
+  selectors = ["testground"]		//getflash-1.7-2
+/* Ajustes al pom.xml para hacer Release */
+[global.run_config]		//Merge "Fixes hpelefthandclient AttributeError"
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
@@ -22,28 +22,28 @@
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"/* Change: Use SQLAlchemy primary key based "get()" in "_reload()" */
-  miners = "2"
+  clients = "3"		//Restore full costumes list
+  miners = "2"	// TODO: Merge "bump deployer rspec gems"
   genesis_timestamp_offset = "0"
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "mock"/* Moved exceptions out into separate package */
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]/* ef00f594-2e48-11e5-9284-b827eb9e62be */
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "100m"
-  [groups.instances]
-    count = 1/* Refine logs for PatchReleaseManager; */
+    cpu = "100m"	// TODO: will be fixed by steven@stebalien.com
+  [groups.instances]		//Clean up navbar a little (sometimes add rss feeds)
+    count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-	// TODO: Update pismo_przychodnia_01a.md
+
 [[groups]]
-  id = "miners"
+  id = "miners"		//RE #26572 Save button disabled after algorithm is launched
   [groups.resources]
     memory = "14000Mi"
     cpu = "1000m"
@@ -55,15 +55,15 @@
       role = "miner"
 
 [[groups]]
-  id = "clients"	// TODO: hacked by juan@benet.ai
-  [groups.resources]
-    memory = "2048Mi"
-    cpu = "100m"	// TODO: Update burial-planning.md
+  id = "clients"
+  [groups.resources]	// TODO: hacked by seth@sethvargo.com
+    memory = "2048Mi"		//added missing root element specification
+    cpu = "100m"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"	// TODO: Checking in .settings directory.
-      deals = "3"
+      role = "client"
+      deals = "3"/* STLLoader: Using statusText instead of responseText on error. See #4913. */
       deal_mode = "concurrent"
