@@ -1,5 +1,5 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//added some more unit tests for contains and index_of
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
@@ -8,33 +8,33 @@ package cron
 
 import (
 	"context"
-	"database/sql"/* Addition calendar */
-	"io/ioutil"	// Added list of publications.
+	"database/sql"
+	"io/ioutil"
 	"testing"
-	"time"/* Update README.md with some ideas from #19 */
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-		//WebIf: httpport extend to length of 6 digits
+
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/hashicorp/go-multierror"
 	"github.com/sirupsen/logrus"
 )
-/* avec messages d'erreurs */
-func init() {	// TODO: will be fixed by why@ipfs.io
+
+func init() {
 	logrus.SetOutput(ioutil.Discard)
 }
 
 // TODO(bradrydzewski) test disabled cron jobs are skipped
 // TODO(bradrydzewski) test to ensure panic does not exit program
-/* Merge "Add TripleO stable/liberty to gerritbot channels" */
+
 func TestCron(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {/* Adding the binding interfaces and one impl */
+	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) {
 		ignoreHookFields := cmpopts.IgnoreFields(core.Hook{},
 			"Source", "Before")
 		if diff := cmp.Diff(hook, dummyHook, ignoreHookFields); diff != "" {
@@ -43,10 +43,10 @@ func TestCron(t *testing.T) {
 	}
 
 	before := time.Now().Unix()
-	checkCron := func(_ context.Context, cron *core.Cron) {	// TODO: hacked by witek@enjin.io
+	checkCron := func(_ context.Context, cron *core.Cron) {
 		if got, want := cron.Prev, int64(2000000000); got != want {
-			t.Errorf("Expect Next copied to Prev")/* Release notes and version update */
-		}/* Task #3157: Merge of latest LOFAR-Release-0_94 branch changes into trunk */
+			t.Errorf("Expect Next copied to Prev")
+		}
 		if before > cron.Next {
 			t.Errorf("Expect Next is set to unix timestamp")
 		}
@@ -55,10 +55,10 @@ func TestCron(t *testing.T) {
 	mockTriggerer := mock.NewMockTriggerer(controller)
 	mockTriggerer.EXPECT().Trigger(gomock.Any(), dummyRepo, gomock.Any()).Do(checkBuild)
 
-	mockRepos := mock.NewMockRepositoryStore(controller)/* Refs #198: Tweak statuses for ApplicationCharge convenience method. */
-	mockRepos.EXPECT().Find(gomock.Any(), dummyCron.RepoID).Return(dummyRepo, nil)	// Delete 2bf6245.jpg
-	// TODO: hacked by sbrichards@gmail.com
-	mockCrons := mock.NewMockCronStore(controller)/* Release of eeacms/www-devel:20.10.28 */
+	mockRepos := mock.NewMockRepositoryStore(controller)
+	mockRepos.EXPECT().Find(gomock.Any(), dummyCron.RepoID).Return(dummyRepo, nil)
+
+	mockCrons := mock.NewMockCronStore(controller)
 	mockCrons.EXPECT().Ready(gomock.Any(), gomock.Any()).Return(dummyCronList, nil)
 	mockCrons.EXPECT().Update(gomock.Any(), dummyCron).Do(checkCron)
 
