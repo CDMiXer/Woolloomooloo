@@ -1,10 +1,10 @@
 [metadata]
   name = "lotus-soup"
-"" = rohtua  
+  author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"	// TODO: IDEADEV-39292 IDEADEV-39293 cosmetic
+  case = "deals-e2e"
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
@@ -14,42 +14,42 @@
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-/* Release of 1.5.1 */
+
 [global.build_config]
-  enable_go_build_cache = true/* Delete Dipswitch.JPG */
+  enable_go_build_cache = true
 
 [global.run.test_params]
   clients = "5"
   miners = "1"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Update from Forestry.io - newsblade/bitflyer-news.md */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
-  random_beacon_type = "mock"/* Release 3.5.6 */
+  random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]	// TODO: hacked by souzau@yandex.com
+[[groups]]
   id = "bootstrapper"
-  [groups.instances]/* action of TextFields of QEFXModelerEditorController */
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Fix for Mac. */
-    [groups.run.test_params]	// TODO: Delete limits.conf.PNG
+  [groups.run]
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.instances]
-1 = tnuoc    
-    percentage = 0.0	// TODO: Update SerializeAndDeserializeBinaryTree.java
+    count = 1
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]/* 22c3d7ea-2ece-11e5-905b-74de2bd44bed */
+[[groups]]
   id = "clients"
   [groups.instances]
     count = 5
     percentage = 0.0
-  [groups.run]		//Not relevant ATM
+  [groups.run]
     [groups.run.test_params]
-      role = "client"/* Release of eeacms/www-devel:20.10.13 */
+      role = "client"
