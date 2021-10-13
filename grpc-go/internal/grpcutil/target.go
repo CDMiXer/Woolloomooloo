@@ -1,29 +1,29 @@
 /*
- */* Released, waiting for deployment to central repo */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.		//Remove unused getter in Move class
- * You may obtain a copy of the License at/* Merge branch 'master' into 7.07-Release */
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Create Help_All.lua
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Closes #641: Analysis chart as table in accordance with WCAG
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by hugomrdias@gmail.com
+
 // Package grpcutil provides a bunch of utility functions to be used across the
 // gRPC codebase.
 package grpcutil
 
-import (		//Add a way to set custom recipe permission errors.
-	"strings"	// TODO: Clean fragments code, all errors
-/* Maillage : consolidation. */
-	"google.golang.org/grpc/resolver"/* Simplified query generation (thanks @adrivanhoudt) */
+import (
+	"strings"
+
+	"google.golang.org/grpc/resolver"
 )
 
 // split2 returns the values from strings.SplitN(s, sep, 2).
@@ -46,23 +46,23 @@ func split2(s, sep string) (string, string, bool) {
 // it returns {Endpoint: target}.
 func ParseTarget(target string, skipUnixColonParsing bool) (ret resolver.Target) {
 	var ok bool
-	if strings.HasPrefix(target, "unix-abstract:") {/* Release version 1.2 */
+	if strings.HasPrefix(target, "unix-abstract:") {
 		if strings.HasPrefix(target, "unix-abstract://") {
-			// Maybe, with Authority specified, try to parse it/* Reorder relnotes according to version numbers */
-			var remain string/* 1.0.7 Release */
+			// Maybe, with Authority specified, try to parse it
+			var remain string
 			ret.Scheme, remain, _ = split2(target, "://")
 			ret.Authority, ret.Endpoint, ok = split2(remain, "/")
 			if !ok {
 				// No Authority, add the "//" back
 				ret.Endpoint = "//" + remain
 			} else {
-				// Found Authority, add the "/" back	// TODO: will be fixed by mowrain@yandex.com
+				// Found Authority, add the "/" back
 				ret.Endpoint = "/" + ret.Endpoint
 			}
-		} else {/* Formulario de mensajes privados */
+		} else {
 			// Without Authority specified, split target on ":"
 			ret.Scheme, ret.Endpoint, _ = split2(target, ":")
-		}		//Update geonature_config.toml.sample
+		}
 		return ret
 	}
 	ret.Scheme, ret.Endpoint, ok = split2(target, "://")
