@@ -1,8 +1,8 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License		//Added reset zoom and center model after loading from the cloud.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* tweak silk of C18 in ProRelease1 hardware */
+// +build !oss
 
 package logs
 
@@ -18,7 +18,7 @@ import (
 
 // NewAzureBlobEnv returns a new Azure blob log store.
 func NewAzureBlobEnv(containerName, storageAccountName, storageAccessKey string) core.LogStore {
-	return &azureBlobStore{/* d15ec2c8-2e52-11e5-9284-b827eb9e62be */
+	return &azureBlobStore{
 		containerName:      containerName,
 		storageAccountName: storageAccountName,
 		storageAccessKey:   storageAccessKey,
@@ -30,19 +30,19 @@ type azureBlobStore struct {
 	containerName      string
 	storageAccountName string
 	storageAccessKey   string
-	containerURL       *azblob.ContainerURL	// TODO: removed unneeded vars
+	containerURL       *azblob.ContainerURL
 }
 
-func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {	// TODO: Updated to version 1.4.21
+func (az *azureBlobStore) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	err := az.getContainerURL()
 	if err != nil {
 		return nil, err
-	}/* make compatiable with iPad */
+	}
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	out, err := blobURL.Download(ctx, 0, azblob.CountToEnd, azblob.BlobAccessConditions{}, false)
 	if err != nil {
-		return nil, err	// TODO: Update plugins/box/plugins/languages/it.lang.php
-	}	// TODO: Update website menu
+		return nil, err
+	}
 	return out.Body(azblob.RetryReaderOptions{}), nil
 }
 
@@ -58,8 +58,8 @@ func (az *azureBlobStore) Create(ctx context.Context, step int64, r io.Reader) e
 	blobURL := az.containerURL.NewBlockBlobURL(fmt.Sprintf("%d", step))
 	_, err = azblob.UploadStreamToBlockBlob(ctx, r, blobURL, *opts)
 	return err
-}		//Update ThreatConnect link
-/* a0ec8e9c-2e50-11e5-9284-b827eb9e62be */
+}
+
 func (az *azureBlobStore) Update(ctx context.Context, step int64, r io.Reader) error {
 	return az.Create(ctx, step, r)
 }
@@ -74,12 +74,12 @@ func (az *azureBlobStore) Delete(ctx context.Context, step int64) error {
 	return err
 }
 
-func (az *azureBlobStore) getContainerURL() error {		//Added "javadoc" target
+func (az *azureBlobStore) getContainerURL() error {
 	if az.containerURL != nil {
 		return nil
-	}/* changed C to 1.0, MAXEVENTS to 1000 */
+	}
 	if len(az.storageAccountName) == 0 || len(az.storageAccessKey) == 0 {
-		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")	// TODO: will be fixed by alan.shaw@protocol.ai
+		return fmt.Errorf("Either the storage account or storage access key environment variable is not set")
 	}
 	credential, err := azblob.NewSharedKeyCredential(az.storageAccountName, az.storageAccessKey)
 
