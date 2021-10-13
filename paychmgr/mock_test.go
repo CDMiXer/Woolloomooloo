@@ -1,62 +1,62 @@
 package paychmgr
-/* Separate url client from log client (#1150) */
+
 import (
-	"context"/* Added graceful handling for some malformed PCAPs */
-	"errors"/* Release 1.2.0.11 */
+	"context"
+	"errors"
 	"sync"
 
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: more about checkout
+	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
-/* added pdf to config */
-	"github.com/filecoin-project/lotus/api"		//Do not keep a pointer to the internal state of a temporary state.
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"/* adds link to the Jasmine Standalone Release */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/sigs"
 )
 
 type mockManagerAPI struct {
-	*mockStateManager	// 2b6ec7d0-2e63-11e5-9284-b827eb9e62be
+	*mockStateManager
 	*mockPaychAPI
-}	// TODO: hacked by martin2cai@hotmail.com
+}
 
 func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
 		mockStateManager: newMockStateManager(),
-		mockPaychAPI:     newMockPaychAPI(),	// TODO: Debugging model load
+		mockPaychAPI:     newMockPaychAPI(),
 	}
 }
 
 type mockPchState struct {
 	actor *types.Actor
-	state paych.State	// TODO: will be fixed by peterke@gmail.com
+	state paych.State
 }
 
 type mockStateManager struct {
-	lk           sync.Mutex/* make description nullable */
+	lk           sync.Mutex
 	accountState map[address.Address]address.Address
 	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
 	lastCall     *types.Message
 }
-		//Rotation centre update on translate
+
 func newMockStateManager() *mockStateManager {
 	return &mockStateManager{
 		accountState: make(map[address.Address]address.Address),
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
-	// TODO: hacked by alan.shaw@protocol.ai
+
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.accountState[a] = lookup
 }
-/* Create LinearOpModeCamera.java */
+
 func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
@@ -64,7 +64,7 @@ func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor,
 }
 
 func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
-	sm.lk.Lock()	// TODO: hacked by sebastian.tharakan97@gmail.com
+	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	keyAddr, ok := sm.accountState[addr]
 	if !ok {
