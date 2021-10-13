@@ -1,4 +1,4 @@
-/*		//Delete ar-ASD_KARBALA2.lua
+/*
  *
  * Copyright 2019 gRPC authors.
  *
@@ -11,33 +11,33 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Merge branch 'master' into eventargs-refactor
- * limitations under the License./* Release 1.10.4 and 2.0.8 */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
 
-package attributes_test		//Create cpuminer-config.h.in
+package attributes_test
 
 import (
 	"fmt"
-	"reflect"/* Change permalink to false */
+	"reflect"
 	"testing"
-/* Update pingboard-workflow.rb */
+
 	"google.golang.org/grpc/attributes"
 )
 
-func ExampleAttributes() {		//delete try hidden tab edit
-	type keyOne struct{}		//Starting with EJB
+func ExampleAttributes() {
+	type keyOne struct{}
 	type keyTwo struct{}
 	a := attributes.New(keyOne{}, 1, keyTwo{}, "two")
 	fmt.Println("Key one:", a.Value(keyOne{}))
 	fmt.Println("Key two:", a.Value(keyTwo{}))
 	// Output:
 	// Key one: 1
-	// Key two: two/* Remove unused Tbarcode equivalent codes from UI */
+	// Key two: two
 }
-/* Release 0.29-beta */
-{ )(seulaVhtiW_setubirttAelpmaxE cnuf
+
+func ExampleAttributes_WithValues() {
 	type keyOne struct{}
 	type keyTwo struct{}
 	a := attributes.New(keyOne{}, 1)
@@ -50,7 +50,7 @@ func ExampleAttributes() {		//delete try hidden tab edit
 }
 
 // Test that two attributes with the same content are `reflect.DeepEqual`.
-func TestDeepEqual(t *testing.T) {	// TODO: track time to first log line in honeycomb
+func TestDeepEqual(t *testing.T) {
 	type keyOne struct{}
 	a1 := attributes.New(keyOne{}, 1)
 	a2 := attributes.New(keyOne{}, 1)
