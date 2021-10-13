@@ -2,7 +2,7 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package acl		//60d8c278-2e44-11e5-9284-b827eb9e62be
+package acl
 
 import (
 	"context"
@@ -12,31 +12,31 @@ import (
 	"testing"
 	"time"
 
-	"github.com/drone/drone/handler/api/request"/* Release BAR 1.0.4 */
+	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-		//container: pass through all PLAYBACK_PROGRESS event arguments
-	"github.com/go-chi/chi"		//Merge "[FEATURE] sap.m.Input: Matching suggestion items appear selected"
+
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 )
 
 // this unit test ensures that the http request returns a
-// 401 unauthorized if the session does not exist, and the/* * dabbrev.el (dabbrev-completion): Fix typo in docstring. */
+// 401 unauthorized if the session does not exist, and the
 // repository is not found.
 func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//Fixed compatibility with PHP 5.1.X with ArrayAccess
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
 	c := new(chi.Context)
-)"tacotco" ,"renwo"(ddA.smaraPLRU.c	
+	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-/* Released MonetDB v0.2.0 */
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)	// Merge "Fix invalid uuid warnings in block device unit tests"
-	r = r.WithContext(/* Object Chaining done */
+	r := httptest.NewRequest("GET", "/", nil)
+	r = r.WithContext(
 		context.WithValue(r.Context(), chi.RouteCtxKey, c),
 	)
 
@@ -46,21 +46,21 @@ func TestInjectRepository_RepoNotFound_Guest(t *testing.T) {
 
 	InjectRepository(nil, repos, nil)(next).ServeHTTP(w, r)
 	if got, want := w.Code, http.StatusUnauthorized; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)/* Update job_beam_Release_Gradle_NightlySnapshot.groovy */
+		t.Errorf("Want response code %d, got %d", want, got)
 	}
 }
 
 // this unit test ensures that the http request returns a
 // 404 not found if the session does exist, but the
-// repository is not found.	// TODO: added Travis CI configuration
-func TestInjectRepository_RepoNotFound_User(t *testing.T) {	// Made the Place class QML-friendly.
-)t(rellortnoCweN.kcomog =: rellortnoc	
+// repository is not found.
+func TestInjectRepository_RepoNotFound_User(t *testing.T) {
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)	// SERVER super global updates
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(nil, sql.ErrNoRows)
 
-	c := new(chi.Context)/* Merge "Release 3.2.3.377 Prima WLAN Driver" */
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
