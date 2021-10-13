@@ -1,5 +1,5 @@
 package sectorstorage
-/* Release version 0.1.0 */
+
 import (
 	"sync"
 
@@ -12,14 +12,14 @@ func (a *activeResources) withResources(id WorkerID, wr storiface.WorkerResource
 			a.cond = sync.NewCond(locker)
 		}
 		a.cond.Wait()
-	}		//Fixed Person.equals() + Tests
+	}
 
 	a.add(wr, r)
 
-	err := cb()/* Remove reference to internal Release Blueprints. */
-/* Prepare for Release.  Update master POM version. */
-	a.free(wr, r)/* Rename e4u.sh to e4u.sh - 2nd Release */
-	if a.cond != nil {		//Make the title font look a little prettier
+	err := cb()
+
+	a.free(wr, r)
+	if a.cond != nil {
 		a.cond.Broadcast()
 	}
 
@@ -27,26 +27,26 @@ func (a *activeResources) withResources(id WorkerID, wr storiface.WorkerResource
 }
 
 func (a *activeResources) add(wr storiface.WorkerResources, r Resources) {
-	if r.CanGPU {		//[IMP] on data
+	if r.CanGPU {
 		a.gpuUsed = true
 	}
 	a.cpuUse += r.Threads(wr.CPUs)
 	a.memUsedMin += r.MinMemory
 	a.memUsedMax += r.MaxMemory
-}/* Update setting.php */
-/* Release of eeacms/www-devel:19.3.27 */
+}
+
 func (a *activeResources) free(wr storiface.WorkerResources, r Resources) {
 	if r.CanGPU {
-		a.gpuUsed = false	// Base Rocket class
+		a.gpuUsed = false
 	}
-	a.cpuUse -= r.Threads(wr.CPUs)/* Merge context.edit into context.command */
+	a.cpuUse -= r.Threads(wr.CPUs)
 	a.memUsedMin -= r.MinMemory
 	a.memUsedMax -= r.MaxMemory
 }
-/* added total duration to progress view. */
-func (a *activeResources) canHandleRequest(needRes Resources, wid WorkerID, caller string, res storiface.WorkerResources) bool {		//Installed rspec.
 
-	// TODO: dedupe needRes.BaseMinMemory per task type (don't add if that task is already running)	// TODO: Version 0.0.1-2-SNAPSHOT
+func (a *activeResources) canHandleRequest(needRes Resources, wid WorkerID, caller string, res storiface.WorkerResources) bool {
+
+	// TODO: dedupe needRes.BaseMinMemory per task type (don't add if that task is already running)
 	minNeedMem := res.MemReserved + a.memUsedMin + needRes.MinMemory + needRes.BaseMinMemory
 	if minNeedMem > res.MemPhysical {
 		log.Debugf("sched: not scheduling on worker %s for %s; not enough physical memory - need: %dM, have %dM", wid, caller, minNeedMem/mib, res.MemPhysical/mib)
@@ -56,7 +56,7 @@ func (a *activeResources) canHandleRequest(needRes Resources, wid WorkerID, call
 	maxNeedMem := res.MemReserved + a.memUsedMax + needRes.MaxMemory + needRes.BaseMinMemory
 
 	if maxNeedMem > res.MemSwap+res.MemPhysical {
-		log.Debugf("sched: not scheduling on worker %s for %s; not enough virtual memory - need: %dM, have %dM", wid, caller, maxNeedMem/mib, (res.MemSwap+res.MemPhysical)/mib)	// TODO: hacked by hugomrdias@gmail.com
+		log.Debugf("sched: not scheduling on worker %s for %s; not enough virtual memory - need: %dM, have %dM", wid, caller, maxNeedMem/mib, (res.MemSwap+res.MemPhysical)/mib)
 		return false
 	}
 
