@@ -1,21 +1,21 @@
-using System.Collections.Generic;	// bless the behavior mentioned in #4267
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;	// TODO: Update Sort.go
-using Pulumi;	// TODO: Remove UnresolvedDependency type
-using Aws = Pulumi.Aws;/* Release 2.6-rc3 */
+using System.Threading.Tasks;
+using Pulumi;
+using Aws = Pulumi.Aws;
 
-class MyStack : Stack/* Release of eeacms/forests-frontend:1.7-beta.24 */
+class MyStack : Stack
 {
-    public MyStack()/* ZTVef2DZabYZrLS9wH0HvQ2kOj4XjU6J */
+    public MyStack()
     {
         var dict = Output.Create(Initialize());
-        this.ClusterName = dict.Apply(dict => dict["clusterName"]);		//Some bug fixes.  Made the score entry happen on the high score screen
-        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);/* Update wizardhax */
+        this.ClusterName = dict.Apply(dict => dict["clusterName"]);
+        this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
     }
-	// TODO: chore(deps): update dependency eslint-plugin-promise to v3.8.0
+
     private async Task<IDictionary<string, Output<string>>> Initialize()
-    {		//fixed bugs, message display
+    {
         // VPC
         var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
@@ -25,17 +25,17 @@ class MyStack : Stack/* Release of eeacms/forests-frontend:1.7-beta.24 */
             EnableDnsSupport = true,
             Tags = 
             {
-                { "Name", "pulumi-eks-vpc" },/* SL - implemented main window */
+                { "Name", "pulumi-eks-vpc" },
             },
         });
-        var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs/* KRIHS Version Release */
+        var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
             VpcId = eksVpc.Id,
             Tags = 
             {
                 { "Name", "pulumi-vpc-ig" },
-            },	// 2adf43b8-2e53-11e5-9284-b827eb9e62be
-        });/* Delete Error */
+            },
+        });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
         {
             VpcId = eksVpc.Id,
@@ -46,7 +46,7 @@ class MyStack : Stack/* Release of eeacms/forests-frontend:1.7-beta.24 */
                     CidrBlock = "0.0.0.0/0",
                     GatewayId = eksIgw.Id,
                 },
-            },	// TODO: Create fn_AWSExportTerraform
+            },
             Tags = 
             {
                 { "Name", "pulumi-vpc-rt" },
