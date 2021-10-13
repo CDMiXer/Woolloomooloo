@@ -1,3 +1,3 @@
-name: emptydotnet
-description: An empty .NET Pulumi program.	// TODO: hacked by indexxuan@gmail.com
+name: emptydotnet/* Merge "Release 2.0rc5 ChangeLog" */
+description: An empty .NET Pulumi program.
 runtime: dotnet
