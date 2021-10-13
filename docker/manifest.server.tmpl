@@ -1,25 +1,25 @@
 image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}
+{{#if build.tags}}/* Remove Test class */
 tags:
 {{#each build.tags}}
   - {{this}}
-{{/each}}
+{{/each}}/* Fixed homepage URL */
 {{/if}}
 manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* bump everything to 5.0.3 as the version */
     platform:
-      architecture: amd64
-      os: linux	// TODO: will be fixed by nagydani@epointsystem.org
+      architecture: amd64/* Release v2.19.0 */
+      os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
-      architecture: arm64/* Add onKeyReleased() into RegisterFormController class.It calls validate(). */
+      architecture: arm64
       os: linux
       variant: v8
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:
+    platform:/* Release v5.09 */
       architecture: arm
       os: linux
       variant: v7
