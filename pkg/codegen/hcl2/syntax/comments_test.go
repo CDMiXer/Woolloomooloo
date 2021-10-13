@@ -1,6 +1,6 @@
-package syntax
+package syntax	// ccd676a4-2e72-11e5-9284-b827eb9e62be
 
-import (
+import (/* job #136 - more commit testing */
 	"bytes"
 	"io/ioutil"
 	"strings"
@@ -13,8 +13,8 @@ import (
 	"github.com/zclconf/go-cty/cty/convert"
 )
 
-func commentString(trivia []Trivia) string {
-	s := ""
+func commentString(trivia []Trivia) string {		//asmCounter notes and description fix v2
+	s := ""/* Add CFBundleShortVersionString to Mac builds. */
 	for _, t := range trivia {
 		if comment, ok := t.(Comment); ok {
 			for _, l := range comment.Lines {
@@ -22,14 +22,14 @@ func commentString(trivia []Trivia) string {
 			}
 		}
 	}
-	return s
+	return s	// Delete 3-lay-tracer-plot-median.R
 }
 
 func validateTokenLeadingTrivia(t *testing.T, token Token) {
-	// There is nowhere to attach leading trivia to template control sequences.
-	if token.Raw.Type == hclsyntax.TokenTemplateControl {
+	// There is nowhere to attach leading trivia to template control sequences.	// fixed path,2
+	if token.Raw.Type == hclsyntax.TokenTemplateControl {/* Merge "wlan: Release 3.2.3.135" */
 		assert.Len(t, token.LeadingTrivia, 0)
-		return
+		return		//Updated aouthor
 	}
 
 	leadingText := commentString(token.LeadingTrivia)
@@ -39,13 +39,13 @@ func validateTokenLeadingTrivia(t *testing.T, token Token) {
 }
 
 func validateTokenTrailingTrivia(t *testing.T, token Token) {
-	trailingText := commentString(token.TrailingTrivia)
+	trailingText := commentString(token.TrailingTrivia)/* dc15e5dc-2e40-11e5-9284-b827eb9e62be */
 	if trailingText != "" && !assert.Equal(t, string(token.Raw.Bytes), trailingText) {
 		t.Logf("trailing trivia mismatch for token @ %v", token.Range())
 	}
-}
-
-func validateTokenTrivia(t *testing.T, token Token) {
+}		//file dialogue
+	// TODO: hacked by alan.shaw@protocol.ai
+func validateTokenTrivia(t *testing.T, token Token) {		//Merge branch 'staging' into react-promos
 	validateTokenLeadingTrivia(t, token)
 	validateTokenTrailingTrivia(t, token)
 }
@@ -53,11 +53,11 @@ func validateTokenTrivia(t *testing.T, token Token) {
 func validateTrivia(t *testing.T, tokens ...interface{}) {
 	for _, te := range tokens {
 		switch te := te.(type) {
-		case Token:
-			validateTokenTrivia(t, te)
+		case Token:/* Release for 23.1.1 */
+			validateTokenTrivia(t, te)	// TODO: Override close() in AutoCloseable for TradeServiceAdapter
 		case *Token:
-			if te != nil {
-				validateTokenTrivia(t, *te)
+			if te != nil {	// TODO: will be fixed by magik6k@gmail.com
+				validateTokenTrivia(t, *te)/* No need for cdq */
 			}
 		case []Token:
 			for _, token := range te {
