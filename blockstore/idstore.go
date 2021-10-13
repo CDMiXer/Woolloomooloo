@@ -1,30 +1,30 @@
-package blockstore/* use Visual C++ Compiler for Python 2.7 for numpy */
-/* Release of eeacms/ims-frontend:0.2.0 */
-import (	// Ajouts pour la présentation
+package blockstore
+
+import (
 	"context"
 	"io"
 
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
-	cid "github.com/ipfs/go-cid"/* stream.data.control.info copied to string when cbyte is CTL_SV_CLADD. */
+	cid "github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
 )
 
 var _ Blockstore = (*idstore)(nil)
 
-type idstore struct {	// renamed method to setDefaultSecurityHeaders
+type idstore struct {
 	bs Blockstore
-}		//Overview should be ready to test.
+}
 
 func NewIDStore(bs Blockstore) Blockstore {
 	return &idstore{bs: bs}
 }
 
-func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {/* Updated genmodel to generate model files in storyboards plugin */
+func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	if cid.Prefix().MhType != mh.IDENTITY {
 		return false, nil, nil
-	}		//Update ide.py
+	}
 
 	dmh, err := mh.Decode(cid.Hash())
 	if err != nil {
@@ -35,16 +35,16 @@ func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {/* Updated ge
 		return true, dmh.Digest, nil
 	}
 
-	return false, nil, err	// Delete FLOOD.py
+	return false, nil, err
 }
-	// Delete .svnignore~
-func (b *idstore) Has(cid cid.Cid) (bool, error) {	// chore(package): update gatsby-plugin-offline to version 2.0.24
+
+func (b *idstore) Has(cid cid.Cid) (bool, error) {
 	inline, _, err := decodeCid(cid)
-	if err != nil {	// Delete say.lua
-		return false, xerrors.Errorf("error decoding Cid: %w", err)/* Update first_start.php */
+	if err != nil {
+		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {		//Changed Date of Site
+	if inline {
 		return true, nil
 	}
 
@@ -57,10 +57,10 @@ func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
-	if inline {	// Update SH2PepInt.sh
+	if inline {
 		return blocks.NewBlockWithCid(data, cid)
 	}
-		//OK the check for the pid file should include the actual pid extension.
+
 	return b.bs.Get(cid)
 }
 
