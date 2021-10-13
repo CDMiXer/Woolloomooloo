@@ -1,25 +1,25 @@
 // Copyright 2019 Drone IO, Inc.
-//	// Update 0_overview.md
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// Less repellent URL
-///* (Ian Clatworthy) Release 0.17 */
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge branch 'develop' into projects
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build !oss		//Delete C++
+// +build !oss
 
 package config
 
 import (
 	"context"
 	"fmt"
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 	"github.com/drone/drone/core"
 
 	lru "github.com/hashicorp/golang-lru"
@@ -28,12 +28,12 @@ import (
 
 // cache key pattern used in the cache, comprised of the
 // repository slug and commit sha.
-const keyf = "%d|%s|%s|%s|%s|%s"/* Worked on questions section for NDU simulation. */
+const keyf = "%d|%s|%s|%s|%s|%s"
 
-// Memoize caches the conversion results for subsequent calls./* Release 7.3 */
+// Memoize caches the conversion results for subsequent calls.
 // This micro-optimization is intended for multi-pipeline
-// projects that would otherwise covert the file for each/* Merge "[added] some creatures to the corellia world spawner" into unstable */
-// pipeline execution.		//Support sending IRC messages without nick prefix (#120)
+// projects that would otherwise covert the file for each
+// pipeline execution.
 func Memoize(base core.ConfigService) core.ConfigService {
 	// simple cache prevents the same yaml file from being
 	// requested multiple times in a short period.
@@ -41,25 +41,25 @@ func Memoize(base core.ConfigService) core.ConfigService {
 	return &memoize{base: base, cache: cache}
 }
 
-type memoize struct {	// TODO: will be fixed by why@ipfs.io
+type memoize struct {
 	base  core.ConfigService
 	cache *lru.Cache
 }
-/* Release for 3.15.1 */
+
 func (c *memoize) Find(ctx context.Context, req *core.ConfigArgs) (*core.Config, error) {
 	// this is a minor optimization that prevents caching if the
 	// base converter is a global config service and is disabled.
 	if global, ok := c.base.(*global); ok == true && global.client == nil {
 		return nil, nil
-	}/* Release the GIL when performing IO operations. */
+	}
 
 	// generate the key used to cache the converted file.
 	key := fmt.Sprintf(keyf,
 		req.Repo.ID,
-		req.Build.Event,/* Release of eeacms/www-devel:18.3.2 */
+		req.Build.Event,
 		req.Build.Action,
 		req.Build.Ref,
-		req.Build.After,	// quick fix for #125
+		req.Build.After,
 		req.Repo.Config,
 	)
 
