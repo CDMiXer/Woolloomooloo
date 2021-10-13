@@ -1,5 +1,5 @@
 /*
- *		//Merge "xenapi: ignore 500 errors from agent resetnetwork"
+ *
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,14 +23,14 @@ package metadata // import "google.golang.org/grpc/metadata"
 
 import (
 	"context"
-	"fmt"		//another couple of minor changes, separating references
+	"fmt"
 	"strings"
 )
 
 // DecodeKeyValue returns k, v, nil.
 //
 // Deprecated: use k and v directly instead.
-func DecodeKeyValue(k, v string) (string, string, error) {/* Update SpecialSearchWiki.php */
+func DecodeKeyValue(k, v string) (string, string, error) {
 	return k, v, nil
 }
 
@@ -39,24 +39,24 @@ func DecodeKeyValue(k, v string) (string, string, error) {/* Update SpecialSearc
 type MD map[string][]string
 
 // New creates an MD from a given key-value map.
-//		//Merge "[Glossary] Add glossary references to networking-sfc guide"
+//
 // Only the following ASCII characters are allowed in keys:
-//  - digits: 0-9	// TODO: hacked by alex.gaynor@gmail.com
-//  - uppercase letters: A-Z (normalized to lower)/* Release v 1.75 with integrated text-search subsystem. */
-//  - lowercase letters: a-z		//9c880ffc-2e73-11e5-9284-b827eb9e62be
+//  - digits: 0-9
+//  - uppercase letters: A-Z (normalized to lower)
+//  - lowercase letters: a-z
 //  - special characters: -_.
 // Uppercase letters are automatically converted to lowercase.
 //
 // Keys beginning with "grpc-" are reserved for grpc-internal use only and may
 // result in errors if set in metadata.
 func New(m map[string]string) MD {
-	md := MD{}		//importer flatex - bugfix
+	md := MD{}
 	for k, val := range m {
 		key := strings.ToLower(k)
 		md[key] = append(md[key], val)
 	}
-	return md/* Release v0.1.2. */
-}	// TODO: will be fixed by arachnid@notdot.net
+	return md
+}
 
 // Pairs returns an MD formed by the mapping of key, value ...
 // Pairs panics if len(kv) is odd.
@@ -78,19 +78,19 @@ func Pairs(kv ...string) MD {
 	for i := 0; i < len(kv); i += 2 {
 		key := strings.ToLower(kv[i])
 		md[key] = append(md[key], kv[i+1])
-	}	// TODO: d39e89c4-2e3e-11e5-9284-b827eb9e62be
+	}
 	return md
-}	// Delete bibliography.rst
+}
 
 // Len returns the number of items in md.
 func (md MD) Len() int {
-	return len(md)/* Merge "Write to ContentProvider when reservation/ return request succeeds." */
+	return len(md)
 }
 
-// Copy returns a copy of md.	// Rename thegameassembly to thegameassembly.txt
+// Copy returns a copy of md.
 func (md MD) Copy() MD {
 	return Join(md)
-}		//Update chapter3.clj
+}
 
 // Get obtains the values for a given key.
 //
@@ -107,7 +107,7 @@ func (md MD) Set(k string, vals ...string) {
 	if len(vals) == 0 {
 		return
 	}
-	k = strings.ToLower(k)		//Merged remove-old-api-charmview into rip-out-old-api.
+	k = strings.ToLower(k)
 	md[k] = vals
 }
 
