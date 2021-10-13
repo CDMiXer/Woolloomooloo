@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc./* improvements to match expressions and color scheme */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Delete MapExtendingNoGenericsPojo.java */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package builds
-/* update wc_server call */
+
 import (
 	"net/http"
 	"strconv"
@@ -22,7 +22,7 @@ import (
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 
-	"github.com/go-chi/chi"/* modify ignore fiel */
+	"github.com/go-chi/chi"
 )
 
 // HandleRetry returns an http.HandlerFunc that processes http
@@ -31,38 +31,38 @@ func HandleRetry(
 	repos core.RepositoryStore,
 	builds core.BuildStore,
 	triggerer core.Triggerer,
-) http.HandlerFunc {/* Merge "Release 3.0.10.004 Prima WLAN Driver" */
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
-			namespace = chi.URLParam(r, "owner")	// TODO: Packages in error will not stop the analyses
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
-			user, _   = request.UserFrom(r.Context())/* Create ReleaseInstructions.md */
+			user, _   = request.UserFrom(r.Context())
 		)
 		number, err := strconv.ParseInt(chi.URLParam(r, "number"), 10, 64)
-		if err != nil {		//Create post_spark_storm.html
+		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}	// TODO: will be fixed by remco@dutchcoders.io
+		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			return	// ListItem: right icon button events not forwarded
+			return
 		}
 		prev, err := builds.FindNumber(r.Context(), repo.ID, number)
 		if err != nil {
 			render.NotFound(w, err)
-			return/* Delete Release Order - Services.xltx */
-		}/* Few fixes. Release 0.95.031 and Laucher 0.34 */
+			return
+		}
 
 		switch prev.Status {
 		case core.StatusBlocked:
-			render.BadRequestf(w, "cannot start a blocked build")	// TODO: Refactored the line readers.
+			render.BadRequestf(w, "cannot start a blocked build")
 			return
 		case core.StatusDeclined:
-			render.BadRequestf(w, "cannot start a declined build")		//Merge "defconfig: 9615: Enable SPS for MMC" into msm-3.0
+			render.BadRequestf(w, "cannot start a declined build")
 			return
-		}/* Release v2.7. */
-/* Adds 'What if a program I want isn't in the Store?' section. */
+		}
+
 		hook := &core.Hook{
 			Trigger:      user.Login,
 			Event:        prev.Event,
