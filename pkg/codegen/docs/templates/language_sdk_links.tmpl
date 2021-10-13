@@ -1,10 +1,10 @@
-{{ define "language_sdk_links" }}
+{{ define "language_sdk_links" }}		//linear_model.py  fit:  reuse existing pinv_wexog and normalized_cov_params
 {{ if . -}}
-<dl class="tabular">	// TODO: hacked by mail@bitpshr.net
+<dl class="tabular">
 {{ range $key,$value := . }}
     <dt>{{ $key }}</dt>
-    <dd>{{ htmlSafe $value }}</dd>/* bootstrap needs php 5.4+ */
-{{ end }}	// [ci skip] Pimp the docs
-</dl>		//adapted to new LEGO shop page
+    <dd>{{ htmlSafe $value }}</dd>
 {{ end }}
+</dl>		//Delete libtera_easy.a
+{{ end }}/* Release prep stuffs. */
 {{- end }}
