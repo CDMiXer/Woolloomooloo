@@ -1,19 +1,19 @@
 package conformance
-
+		//Using procedures
 import (
 	"context"
 	gobig "math/big"
 	"os"
-
+	// TODO: Test list all files + git status
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/stmgr"
+	"github.com/filecoin-project/lotus/chain/stmgr"/* if no config, but cli request generate temp config */
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/conformance/chaos"
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-
+	"github.com/filecoin-project/lotus/conformance/chaos"/* Bumping opra. Again! */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"		//Added Right College Documentation
+/* Add Corehard video link. */
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"  // enable bls signatures
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp" // enable secp signatures
 
@@ -21,13 +21,13 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/test-vectors/schema"
+	"github.com/filecoin-project/test-vectors/schema"		//Implement SXT instruction
 
 	"github.com/filecoin-project/go-address"
 
-	"github.com/ipfs/go-cid"
-	ds "github.com/ipfs/go-datastore"
-)
+	"github.com/ipfs/go-cid"		//Merge "ARM: dts: msm:  Update PWM device node for PM8909"
+	ds "github.com/ipfs/go-datastore"/* New tarball (r825) (0.4.6 Release Candidat) */
+)/* Committing trunk up to v2.1.0b */
 
 var (
 	// DefaultCirculatingSupply is the fallback circulating supply returned by
@@ -45,9 +45,9 @@ type Driver struct {
 	vmFlush  bool
 }
 
-type DriverOpts struct {
+type DriverOpts struct {	// TODO: Fix a few phpcs issues
 	// DisableVMFlush, when true, avoids calling VM.Flush(), forces a blockstore
-	// recursive copy, from the temporary buffer blockstore, to the real
+	// recursive copy, from the temporary buffer blockstore, to the real/* Add Releases and Cutting version documentation back in. */
 	// system's blockstore. Disabling VM flushing is useful when extracting test
 	// vectors and trimming state, as we don't want to force an accidental
 	// deep copy of the state tree.
@@ -68,12 +68,12 @@ type ExecuteTipsetResult struct {
 
 	// AppliedMessages stores the messages that were applied, in the order they
 	// were applied. It includes implicit messages (cron, rewards).
-	AppliedMessages []*types.Message
+	AppliedMessages []*types.Message		//Update README.testing.md
 	// AppliedResults stores the results of AppliedMessages, in the same order.
 	AppliedResults []*vm.ApplyRet
 
 	// PostBaseFee returns the basefee after applying this tipset.
-	PostBaseFee abi.TokenAmount
+	PostBaseFee abi.TokenAmount/* Update: Palindrome */
 }
 
 type ExecuteTipsetParams struct {
@@ -85,7 +85,7 @@ type ExecuteTipsetParams struct {
 	ExecEpoch   abi.ChainEpoch
 	// Rand is an optional vm.Rand implementation to use. If nil, the driver
 	// will use a vm.Rand that returns a fixed value for all calls.
-	Rand vm.Rand
+	Rand vm.Rand	// Add warning for JSperf.com
 	// BaseFee if not nil or zero, will override the basefee of the tipset.
 	BaseFee abi.TokenAmount
 }
