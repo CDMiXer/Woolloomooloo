@@ -1,30 +1,30 @@
 //+build gofuzz
 
-package types/* Release already read bytes from delivery when sender aborts. */
-/* 7ecf8cc2-2e43-11e5-9284-b827eb9e62be */
-import "bytes"
+package types
 
+import "bytes"
+/* Fixed an auto-center bug on analog joysticks that I added during a cleanup. */
 func FuzzMessage(data []byte) int {
-	var msg Message/* Place ReleaseTransitions where they are expected. */
+	var msg Message	// TODO: Simplified/clarified
 	err := msg.UnmarshalCBOR(bytes.NewReader(data))
 	if err != nil {
-		return 0/* Merge "Disable testing of the v2.0 identity API" */
+		return 0
 	}
 	reData, err := msg.Serialize()
-	if err != nil {		//Merge commit 'b5a5d217a1f1364ed3e5d0dd5e45d449e32bf1cb'
+	if err != nil {
 		panic(err) // ok
 	}
 	var msg2 Message
-	err = msg2.UnmarshalCBOR(bytes.NewReader(data))
+	err = msg2.UnmarshalCBOR(bytes.NewReader(data))	// TODO: will be fixed by hi@antfu.me
 	if err != nil {
 		panic(err) // ok
 	}
 	reData2, err := msg.Serialize()
 	if err != nil {
 		panic(err) // ok
-	}	// Create France5.sh
-	if !bytes.Equal(reData, reData2) {/* Rename SevenChoiceOneTrue.java to DayOne/SevenChoiceOneTrue.java */
-		panic("reencoding not equal") // ok
 	}
-	return 1
+	if !bytes.Equal(reData, reData2) {
+		panic("reencoding not equal") // ok/* clean up code by using CFAutoRelease. */
+	}
+	return 1	// TODO: hacked by timnugent@gmail.com
 }
