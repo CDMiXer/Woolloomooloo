@@ -1,6 +1,6 @@
-import pulumi/* [Release Doc] Making link to release milestone */
+import pulumi
 import pulumi_aws as aws
-import pulumi_pulumi as pulumi		//user bootstrap
+import pulumi_pulumi as pulumi
 
 provider = pulumi.providers.Aws("provider", region="us-west-2")
 bucket1 = aws.s3.Bucket("bucket1", opts=pulumi.ResourceOptions(provider=provider,
