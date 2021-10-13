@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Change dependencies and linking for ats-tests */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -13,10 +13,10 @@
 // limitations under the License.
 package main
 
-import (		//Update and rename kami_get.php to kami_add.php
-	"testing"/* Released springjdbcdao version 1.8.20 */
-/* Merge "Release 1.0.0.180A QCACLD WLAN Driver" */
-	"github.com/blang/semver"/* Remove ambiguous variable */
+import (
+	"testing"
+
+	"github.com/blang/semver"
 	"github.com/stretchr/testify/assert"
 )
 
