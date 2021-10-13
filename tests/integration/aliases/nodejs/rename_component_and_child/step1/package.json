@@ -1,10 +1,10 @@
 {
     "name": "aliases",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",/* Merge "wlan: Release 3.2.3.240b" */
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^2.5.3"
+        "typescript": "^2.5.3"		//added the feed.json and feed.xml
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
