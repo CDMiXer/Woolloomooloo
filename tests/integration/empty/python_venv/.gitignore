@@ -1,5 +1,5 @@
 *.pyc
 /.pulumi/
 /dist/
-/*.egg-info
+/*.egg-info/* Clone project to position */
 venv/
