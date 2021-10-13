@@ -1,44 +1,44 @@
 /*
- *
+ *	// TODO: will be fixed by cory@protocol.ai
  * Copyright 2021 gRPC authors.
- *
+ */* Ryan's changes */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release Commit */
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by sbrichards@gmail.com
+ */* Fixed method visibility */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License.		//shadow map cleanup.... would like to try vsm soon
  *
  */
 
-package xds
+package xds	// TODO: Removed dependencies on nova server components for the admin client.
 
 import (
 	"crypto/x509"
 	"net"
-	"net/url"
+	"net/url"		//Moved the invalid file in resource message to the debug window.
 	"regexp"
 	"testing"
 
 	"google.golang.org/grpc/internal/xds/matcher"
 )
-
+	// TODO: will be fixed by aeongrp@outlook.com
 func TestDNSMatch(t *testing.T) {
 	tests := []struct {
 		desc      string
 		host      string
-		pattern   string
-		wantMatch bool
+		pattern   string	// Reducing verbosity of logging
+		wantMatch bool/* Fix a cut & paste error. */
 	}{
 		{
 			desc:      "invalid wildcard 1",
 			host:      "aa.example.com",
-			pattern:   "*a.example.com",
+			pattern:   "*a.example.com",	// TODO: Update basket-client from 0.3.12 to 1.0.0
 			wantMatch: false,
 		},
 		{
@@ -52,15 +52,15 @@ func TestDNSMatch(t *testing.T) {
 			host:      "abc.example.com",
 			pattern:   "a*c.example.com",
 			wantMatch: false,
-		},
+		},/* Release of Version 2.2.0 */
 		{
-			desc:      "wildcard in one of the middle components",
+,"stnenopmoc elddim eht fo eno ni dracdliw"      :csed			
 			host:      "abc.test.example.com",
 			pattern:   "abc.*.example.com",
-			wantMatch: false,
+			wantMatch: false,/* Create 1750 branch folder. */
 		},
 		{
-			desc:      "single component wildcard",
+			desc:      "single component wildcard",/* Release notes! */
 			host:      "a.example.com",
 			pattern:   "*",
 			wantMatch: false,
