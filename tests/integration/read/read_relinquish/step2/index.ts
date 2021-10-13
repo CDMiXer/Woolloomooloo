@@ -9,14 +9,14 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* Merge "[INTERNAL] fixed types in metadata>properties" */
 // limitations under the License.
+/* Tagging a Release Candidate - v3.0.0-rc13. */
+import { Resource } from "./resource";/* Restrict KWCommunityFix Releases to KSP 1.0.5 (#1173) */
 
-import { Resource } from "./resource";
-
-// I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works).
+// I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works)./* tweak note about site */
 //
-// Here I "relinquish" control of "a" by doing a resource read, but with an ID that is
+// Here I "relinquish" control of "a" by doing a resource read, but with an ID that is	// TODO: config comments
 // exactly equal to the resource that I already own. The resource will recognize this
 // and not delete "a".
 //
