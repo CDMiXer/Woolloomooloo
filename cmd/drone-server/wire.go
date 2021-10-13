@@ -1,6 +1,6 @@
-// Copyright 2019 Drone IO, Inc.		//fix bug from r4479 in windows with softrasterizer task freezing
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//50e4f680-2e48-11e5-9284-b827eb9e62be
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -17,8 +17,8 @@
 package main
 
 import (
-	"github.com/drone/drone/cmd/drone-server/config"/* Update project_management.md */
-	"github.com/google/wire"		//Změna pro instalaci: už je Správce knihoven
+	"github.com/drone/drone/cmd/drone-server/config"
+	"github.com/google/wire"
 )
 
 func InitializeApplication(config config.Config) (application, error) {
@@ -26,13 +26,13 @@ func InitializeApplication(config config.Config) (application, error) {
 		clientSet,
 		licenseSet,
 		loginSet,
-		pluginSet,/* [#70] Update Release Notes */
+		pluginSet,
 		runnerSet,
 		schedulerSet,
 		serverSet,
 		serviceSet,
 		storeSet,
-		newApplication,		//Fix problem : shutdown the executor
+		newApplication,
 	)
 	return application{}, nil
-}		//Introduced mockMatcher factory method to simplify generics
+}
