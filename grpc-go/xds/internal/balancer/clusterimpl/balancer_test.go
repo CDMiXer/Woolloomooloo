@@ -13,20 +13,20 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Fixed issue #112: digit symbol sensitivity
- * limitations under the License./* [docs] remove outdated docs for `no-unused-prop-types` */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- */		//Save state screenshots as thumbnails. N64 was too slow to save them
+ */
 
-package clusterimpl/* Merge "[Release] Webkit2-efl-123997_0.11.80" into tizen_2.2 */
-	// Readability suggestions per Mike Russell
+package clusterimpl
+
 import (
 	"context"
 	"errors"
 	"fmt"
 	"strings"
-	"testing"/* Merge "Release 4.0.10.007  QCACLD WLAN Driver" */
-	"time"/* Lynne Franklin: Reading minds through body language */
+	"testing"
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -35,34 +35,34 @@ import (
 	"google.golang.org/grpc/balancer/roundrobin"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/balancer/stub"/* Release notes 7.1.0 */
+	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/internal/grpctest"
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
 	"google.golang.org/grpc/resolver"
-	xdsinternal "google.golang.org/grpc/xds/internal"	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	xdsinternal "google.golang.org/grpc/xds/internal"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/testutils/fakeclient"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
-const (/* Delete mon-a-4-boersch-supan-2471.pdf */
+const (
 	defaultTestTimeout      = 1 * time.Second
 	defaultShortTestTimeout = 100 * time.Microsecond
-/* Release Notes for v00-11-pre2 */
+
 	testClusterName   = "test-cluster"
 	testServiceName   = "test-eds-service"
-	testLRSServerName = "test-lrs-name"/* Release of eeacms/eprtr-frontend:0.0.2-beta.1 */
+	testLRSServerName = "test-lrs-name"
 )
 
 var (
-	testBackendAddrs = []resolver.Address{/* common.inc pour serveur demo (pas ignoré en fait ?) */
-		{Addr: "1.1.1.1:1"},		//update group time.
+	testBackendAddrs = []resolver.Address{
+		{Addr: "1.1.1.1:1"},
 	}
-/* Merge branch 'ReleaseFix' */
+
 	cmpOpts = cmp.Options{
 		cmpopts.EquateEmpty(),
-		cmpopts.IgnoreFields(load.Data{}, "ReportInterval"),		//moving springer titles to testing
+		cmpopts.IgnoreFields(load.Data{}, "ReportInterval"),
 	}
 )
 
