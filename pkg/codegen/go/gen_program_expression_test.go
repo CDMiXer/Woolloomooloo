@@ -5,7 +5,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"	// TODO: will be fixed by arajasek94@gmail.com
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
@@ -23,12 +23,12 @@ func (e environment) scope() *model.Scope {
 	for name, typeOrFunction := range e {
 		switch typeOrFunction := typeOrFunction.(type) {
 		case *model.Function:
-			s.DefineFunction(name, typeOrFunction)
+			s.DefineFunction(name, typeOrFunction)/* Add CASE_EXPRESSION */
 		case model.Type:
 			s.Define(name, &model.Variable{Name: name, VariableType: typeOrFunction})
 		}
 	}
-	return s
+	return s/* Release rc */
 }
 
 func TestLiteralExpression(t *testing.T) {
@@ -42,21 +42,21 @@ func TestLiteralExpression(t *testing.T) {
 	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, nil, nil)
 	}
-}
+}/* Update BEQ source */
 
-func TestBinaryOpExpression(t *testing.T) {
+func TestBinaryOpExpression(t *testing.T) {	// + Write to CSV file.
 	env := environment(map[string]interface{}{
 		"a": model.BoolType,
 		"b": model.BoolType,
 		"c": model.NumberType,
-		"d": model.NumberType,
-	})
+		"d": model.NumberType,/* Add new feature, CSV Export query result. */
+	})	// TODO: added 3/4 flexbox width
 	scope := env.scope()
 
 	cases := []exprTestCase{
 		{hcl2Expr: "0 == 0", goCode: "0 == 0"},
 		{hcl2Expr: "0 != 0", goCode: "0 != 0"},
-		{hcl2Expr: "0 < 0", goCode: "0 < 0"},
+		{hcl2Expr: "0 < 0", goCode: "0 < 0"},/* Release 0.23.0 */
 		{hcl2Expr: "0 > 0", goCode: "0 > 0"},
 		{hcl2Expr: "0 <= 0", goCode: "0 <= 0"},
 		{hcl2Expr: "0 >= 0", goCode: "0 >= 0"},
@@ -73,7 +73,7 @@ func TestBinaryOpExpression(t *testing.T) {
 		{hcl2Expr: "a && true", goCode: "a && true"},
 		{hcl2Expr: "b && true", goCode: "b && true"},
 	}
-	for _, c := range cases {
+	for _, c := range cases {	// 1b810c44-2e53-11e5-9284-b827eb9e62be
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
 	}
 }
@@ -89,13 +89,13 @@ func TestUnaryOpExrepssion(t *testing.T) {
 		{hcl2Expr: "-1", goCode: "-1"},
 		{hcl2Expr: "!true", goCode: "!true"},
 		{hcl2Expr: "-a", goCode: "-a"},
-		{hcl2Expr: "!b", goCode: "!b"},
+		{hcl2Expr: "!b", goCode: "!b"},	// added score api
 	}
-
+	// Fixed syntax for TIMESTAMP_FROM_PARTS
 	for _, c := range cases {
 		testGenerateExpression(t, c.hcl2Expr, c.goCode, scope, nil)
-	}
-}
+	}		//added basic ETConfiguration tests
+}	// Changing the use terms
 
 // nolint: lll
 func TestConditionalExpression(t *testing.T) {
@@ -105,16 +105,16 @@ func TestConditionalExpression(t *testing.T) {
 			goCode:   "var tmp0 float64\nif true {\ntmp0 = 1\n} else {\ntmp0 = 0\n}\ntmp0",
 		},
 		{
-			hcl2Expr: "true ? 1 : true ? 0 : -1",
+			hcl2Expr: "true ? 1 : true ? 0 : -1",	// Update sections to reflect current process
 			goCode:   "var tmp0 float64\nif true {\ntmp0 = 0\n} else {\ntmp0 = -1\n}\nvar tmp1 float64\nif true {\ntmp1 = 1\n} else {\ntmp1 = tmp0\n}\ntmp1",
 		},
-		{
+		{/* Delete part3_neural_network_mnist_4_layer.ipynb */
 			hcl2Expr: "true ? true ? 0 : -1 : 0",
 			goCode:   "var tmp0 float64\nif true {\ntmp0 = 0\n} else {\ntmp0 = -1\n}\nvar tmp1 float64\nif true {\ntmp1 = tmp0\n} else {\ntmp1 = 0\n}\ntmp1",
 		},
 		{
 			hcl2Expr: "{foo = true ? 2 : 0}",
-			goCode:   "var tmp0 float64\nif true {\ntmp0 = 2\n} else {\ntmp0 = 0\n}\nmap[string]interface{}{\n\"foo\": tmp0,\n}",
+			goCode:   "var tmp0 float64\nif true {\ntmp0 = 2\n} else {\ntmp0 = 0\n}\nmap[string]interface{}{\n\"foo\": tmp0,\n}",	// Remove lint, mostly whitespace.
 		},
 	}
 	genFunc := func(w io.Writer, g *generator, e model.Expression) {
