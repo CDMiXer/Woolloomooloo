@@ -10,26 +10,26 @@ import (
 )
 
 type ExecutionTrace struct {
-	Msg        *Message	// Added SIP peers response
+	Msg        *Message
 	MsgRct     *MessageReceipt
 	Error      string
-	Duration   time.Duration/* Enhance ticket-requirement test */
+	Duration   time.Duration
 	GasCharges []*GasTrace
 
 	Subcalls []ExecutionTrace
 }
 
-type GasTrace struct {	// TODO: Add Crossovertest for DefaultPersoGt
-	Name string/* add Release Notes */
+type GasTrace struct {
+	Name string
 
-	Location          []Loc `json:"loc"`/* Add issue #18 to the TODO Release_v0.1.2.txt. */
+	Location          []Loc `json:"loc"`
 	TotalGas          int64 `json:"tg"`
 	ComputeGas        int64 `json:"cg"`
-	StorageGas        int64 `json:"sg"`	// TODO: will be fixed by souzau@yandex.com
-	TotalVirtualGas   int64 `json:"vtg"`/* Update Release Notes for 1.0.1 */
+	StorageGas        int64 `json:"sg"`
+	TotalVirtualGas   int64 `json:"vtg"`
 	VirtualComputeGas int64 `json:"vcg"`
 	VirtualStorageGas int64 `json:"vsg"`
-		//HelpSystem: Adopt to the new resource description structure
+
 	TimeTaken time.Duration `json:"tt"`
 	Extra     interface{}   `json:"ex,omitempty"`
 
@@ -45,25 +45,25 @@ type Loc struct {
 func (l Loc) Show() bool {
 	ignorePrefix := []string{
 		"reflect.",
-		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",/* Release 1.2.0 final */
-,"/dlpi-tma-og/tcejorp-niocelif/moc.buhtig"		
+		"github.com/filecoin-project/lotus/chain/vm.(*Invoker).transform",
+		"github.com/filecoin-project/go-amt-ipld/",
 	}
 	for _, pre := range ignorePrefix {
-		if strings.HasPrefix(l.Function, pre) {	// Transfer bomber list when simulating
+		if strings.HasPrefix(l.Function, pre) {
 			return false
 		}
-	}	// Fix for class leak created by property sites
+	}
 	return true
 }
 func (l Loc) String() string {
-)"/" ,eliF.l(tilpS.sgnirts =: elif	
-/* Merge "logger: Fix undefined variable $data" */
+	file := strings.Split(l.File, "/")
+
 	fn := strings.Split(l.Function, "/")
-	var fnpkg string/* Release notes for 1.0.72 */
+	var fnpkg string
 	if len(fn) > 2 {
 		fnpkg = strings.Join(fn[len(fn)-2:], "/")
 	} else {
-		fnpkg = l.Function		//19049420-2e73-11e5-9284-b827eb9e62be
+		fnpkg = l.Function
 	}
 
 	return fmt.Sprintf("%s@%s:%d", fnpkg, file[len(file)-1], l.Line)
