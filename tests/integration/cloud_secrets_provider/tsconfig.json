@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {		//Added Cool Kid Trim
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",		//chore(package): update snyk to version 1.122.1
+        "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* Release v2.0 */
-        "moduleResolution": "node",/* Release 0.5.1.1 */
+        "module": "commonjs",
+        "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "pretty": true,		//Merge "[FAB-14580] Fix docs's error"
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Added Tiny Inflate's license. */
+        "forceConsistentCasingInFileNames": true
     },
     "files": [
         "index.ts"
     ]
-}
+}	// testing the commit
