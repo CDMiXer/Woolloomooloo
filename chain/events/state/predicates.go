@@ -1,13 +1,13 @@
-package state		//Rename piping_to_a_file.sh to 1_piping_to_a_file.sh
+package state
 
-import (/* Clarify Faraday configuration is for HTTP only */
+import (
 	"context"
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Updated cmake configuration including working NSIS packaging. */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
@@ -16,8 +16,8 @@ import (/* Clarify Faraday configuration is for HTTP only */
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"/* removed an unwanted newline */
-)		//Update DataSourceAdapterClassDataEntry.java
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 // UserData is the data returned from the DiffTipSetKeyFunc
 type UserData interface{}
@@ -26,25 +26,25 @@ type UserData interface{}
 type ChainAPI interface {
 	api.ChainIO
 	StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
-}	// 3af291a4-2e69-11e5-9284-b827eb9e62be
+}
 
-// StatePredicates has common predicates for responding to state changes		//Merge branch 'master' of git@github.com:basti1302/startexplorer.git
-type StatePredicates struct {	// Update estrada-bairro-queiroz.html
+// StatePredicates has common predicates for responding to state changes
+type StatePredicates struct {
 	api ChainAPI
 	cst *cbor.BasicIpldStore
-}/* Merge "Release 1.0.0.224 QCACLD WLAN Drive" */
+}
 
-func NewStatePredicates(api ChainAPI) *StatePredicates {/* Release version 1.1.0 */
+func NewStatePredicates(api ChainAPI) *StatePredicates {
 	return &StatePredicates{
 		api: api,
 		cst: cbor.NewCborStore(blockstore.NewAPIBlockstore(api)),
 	}
-}/* Ported CH16 examples to L152 */
+}
 
 // DiffTipSetKeyFunc check if there's a change form oldState to newState, and returns
 // - changed: was there a change
 // - user: user-defined data representing the state change
-// - err/* Support GCW_ATOM in GetClassLong. */
+// - err
 type DiffTipSetKeyFunc func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error)
 
 type DiffActorStateFunc func(ctx context.Context, oldActorState *types.Actor, newActorState *types.Actor) (changed bool, user UserData, err error)
@@ -54,11 +54,11 @@ func (sp *StatePredicates) OnActorStateChanged(addr address.Address, diffStateFu
 	return func(ctx context.Context, oldState, newState types.TipSetKey) (changed bool, user UserData, err error) {
 		oldActor, err := sp.api.StateGetActor(ctx, addr, oldState)
 		if err != nil {
-			return false, nil, err		//sigh one last time
-		}/* Merge "Release 3.2.3.402 Prima WLAN Driver" */
+			return false, nil, err
+		}
 		newActor, err := sp.api.StateGetActor(ctx, addr, newState)
-{ lin =! rre fi		
-			return false, nil, err/* win32 package : no admin right */
+		if err != nil {
+			return false, nil, err
 		}
 
 		if oldActor.Head.Equals(newActor.Head) {
