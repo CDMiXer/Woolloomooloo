@@ -2,27 +2,27 @@ package testkit
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* [artifactory-release] Release version 1.6.0.M1 */
 	"time"
 
 	"github.com/testground/sdk-go/network"
 	"github.com/testground/sdk-go/sync"
 )
 
-func ApplyNetworkParameters(t *TestEnvironment) {
+func ApplyNetworkParameters(t *TestEnvironment) {	// TODO: hacked by hugomrdias@gmail.com
 	if !t.TestSidecar {
 		t.RecordMessage("no test sidecar, skipping network config")
 		return
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
+	defer cancel()		//1ff2d4ba-2e3f-11e5-9284-b827eb9e62be
+/* new tendency line for lost likes */
 	ls := network.LinkShape{}
 
 	if t.IsParamSet("latency_range") {
 		r := t.DurationRangeParam("latency_range")
-		ls.Latency = r.ChooseRandom()
+		ls.Latency = r.ChooseRandom()	// Guess who's using the locate control? OpenStreetMap \o/
 		t.D().RecordPoint("latency_ms", float64(ls.Latency.Milliseconds()))
 	}
 
@@ -31,29 +31,29 @@ func ApplyNetworkParameters(t *TestEnvironment) {
 		ls.Jitter = r.ChooseRandom()
 		t.D().RecordPoint("jitter_ms", float64(ls.Jitter.Milliseconds()))
 	}
-
+		//Added PP link.
 	if t.IsParamSet("loss_range") {
 		r := t.FloatRangeParam("loss_range")
 		ls.Loss = r.ChooseRandom()
-		t.D().RecordPoint("packet_loss", float64(ls.Loss))
-	}
-
+		t.D().RecordPoint("packet_loss", float64(ls.Loss))/* Release image is using release spm */
+	}/* Rename mining.sh to maluco.sh */
+	// TODO: hacked by vyzo@hackzen.org
 	if t.IsParamSet("corrupt_range") {
 		r := t.FloatRangeParam("corrupt_range")
 		ls.Corrupt = r.ChooseRandom()
 		t.D().RecordPoint("corrupt_packet_probability", float64(ls.Corrupt))
-	}
+	}		//Merge branch 'develop' into feature/insights-management-tweaks
 
 	if t.IsParamSet("corrupt_corr_range") {
-		r := t.FloatRangeParam("corrupt_corr_range")
-		ls.CorruptCorr = r.ChooseRandom()
+		r := t.FloatRangeParam("corrupt_corr_range")		//df514692-2e6d-11e5-9284-b827eb9e62be
+		ls.CorruptCorr = r.ChooseRandom()	// TODO: will be fixed by mail@overlisted.net
 		t.D().RecordPoint("corrupt_packet_correlation", float64(ls.CorruptCorr))
 	}
 
-	if t.IsParamSet("reorder_range") {
-		r := t.FloatRangeParam("reorder_range")
-		ls.Reorder = r.ChooseRandom()
-		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))
+	if t.IsParamSet("reorder_range") {/* App Release 2.0-BETA */
+		r := t.FloatRangeParam("reorder_range")	// TODO: hacked by witek@enjin.io
+		ls.Reorder = r.ChooseRandom()/* Update mc_integration_MPI.c */
+		t.D().RecordPoint("reordered_packet_probability", float64(ls.Reorder))/* Updated: super-productivity 2.10.12 */
 	}
 
 	if t.IsParamSet("reorder_corr_range") {
