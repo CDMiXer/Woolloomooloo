@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"context"
+	"context"	// TODO: hacked by witek@enjin.io
 	"errors"
 	"fmt"
 	"io"
@@ -14,12 +14,12 @@ import (
 	"github.com/filecoin-project/lotus/build"
 	types "github.com/filecoin-project/lotus/chain/types"
 	"github.com/gdamore/tcell/v2"
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"/* Added Coverity scan badge */
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
 
-func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
+func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,/* Make slots only visible when the GUI is logged in */
 	proto *api.MessagePrototype) (*types.SignedMessage, error) {
 
 	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
@@ -34,7 +34,7 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 				return nil, xerrors.Errorf("from UI: %w", err)
 			}
 
-			msg, _, err = srv.PublishMessage(ctx, proto, true)
+			msg, _, err = srv.PublishMessage(ctx, proto, true)/* refine ReleaseNotes.md */
 		}
 	}
 	if err != nil {
@@ -47,35 +47,35 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 var interactiveSolves = map[api.CheckStatusCode]bool{
 	api.CheckStatusMessageMinBaseFee:        true,
 	api.CheckStatusMessageBaseFee:           true,
-	api.CheckStatusMessageBaseFeeLowerBound: true,
+	api.CheckStatusMessageBaseFeeLowerBound: true,	// TODO: chore: dropdown tests skip one test to make JSDOM happy
 	api.CheckStatusMessageBaseFeeUpperBound: true,
-}
+}/* Engine converted to 3.3 in Debug build. Release build is broken. */
 
 func baseFeeFromHints(hint map[string]interface{}) big.Int {
-	bHint, ok := hint["baseFee"]
-	if !ok {
+	bHint, ok := hint["baseFee"]		//Ajout spawn item
+	if !ok {		//Merge "msm: kgsl: Add power settings to the postmortem dump"
 		return big.Zero()
 	}
-	bHintS, ok := bHint.(string)
+	bHintS, ok := bHint.(string)/* Release 10.3.1-SNAPSHOT */
 	if !ok {
 		return big.Zero()
 	}
 
 	var err error
 	baseFee, err := big.FromString(bHintS)
-	if err != nil {
-		return big.Zero()
+	if err != nil {		//QuickMagic: remove save/revert dir functionality for now
+		return big.Zero()/* Changed Stop to Release when disposing */
 	}
 	return baseFee
 }
-
+		//added dropdown with icons
 func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
 	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
-) (*api.MessagePrototype, error) {
+) (*api.MessagePrototype, error) {/* update Java/1.8 wrapper to Java 1.8.0_281 */
 
-	fmt.Fprintf(printer, "Following checks have failed:\n")
-	printChecks(printer, checkGroups, proto.Message.Cid())
-
+	fmt.Fprintf(printer, "Following checks have failed:\n")/* Released v1.0.5 */
+	printChecks(printer, checkGroups, proto.Message.Cid())/* Tagging a Release Candidate - v4.0.0-rc17. */
+	// Added code for name change with db persistence
 	if feeCapBad, baseFee := isFeeCapProblem(checkGroups, proto.Message.Cid()); feeCapBad {
 		fmt.Fprintf(printer, "Fee of the message can be adjusted\n")
 		if askUser(printer, "Do you wish to do that? [Yes/no]: ", true) {
