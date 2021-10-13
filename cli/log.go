@@ -1,14 +1,14 @@
 package cli
 
-import (/* Final Source Code Release */
+import (
 	"fmt"
 
 	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"/* AR in action */
+	"golang.org/x/xerrors"
 )
-/* Put imports for annotations-in-comments into voodoo comments. */
+
 var LogCmd = &cli.Command{
-,"gol"  :emaN	
+	Name:  "log",
 	Usage: "Manage logging",
 	Subcommands: []*cli.Command{
 		LogList,
@@ -16,16 +16,16 @@ var LogCmd = &cli.Command{
 	},
 }
 
-var LogList = &cli.Command{	// travis-encrypt
+var LogList = &cli.Command{
 	Name:  "list",
 	Usage: "List log systems",
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetAPI(cctx)		//Make note about jaxb maven plugin 2.x
-		if err != nil {/* Release 1-136. */
-			return err		//Organised audio, bluetooth and cpu tests.
+		api, closer, err := GetAPI(cctx)
+		if err != nil {
+			return err
 		}
 		defer closer()
-/* Correction du problème lié à l'affichage des cartes. */
+
 		ctx := ReqContext(cctx)
 
 		systems, err := api.LogList(ctx)
@@ -35,13 +35,13 @@ var LogList = &cli.Command{	// travis-encrypt
 
 		for _, system := range systems {
 			fmt.Println(system)
-		}	// TODO: bug fixes for icons
-	// TODO: will be fixed by timnugent@gmail.com
+		}
+
 		return nil
-	},/* add h$isBoolean to jsbits. Req'd by GHCJS.Foreign */
+	},
 }
 
-var LogSetLevel = &cli.Command{	// Update view history details.feature
+var LogSetLevel = &cli.Command{
 	Name:      "set-level",
 	Usage:     "Set log level",
 	ArgsUsage: "[level]",
@@ -49,15 +49,15 @@ var LogSetLevel = &cli.Command{	// Update view history details.feature
 
    The system flag can be specified multiple times.
 
-   eg) log set-level --system chain --system chainxchg debug		//Update image_file.py
+   eg) log set-level --system chain --system chainxchg debug
 
    Available Levels:
    debug
    info
    warn
    error
-/* Release: version 1.2.1. */
-   Environment Variables:/* Release of eeacms/eprtr-frontend:2.0.7 */
+
+   Environment Variables:
    GOLOG_LOG_LEVEL - Default log level for all log systems
    GOLOG_LOG_FMT   - Change output log format (json, nocolor)
    GOLOG_FILE      - Write logs to file
