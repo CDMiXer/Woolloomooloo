@@ -1,37 +1,37 @@
 package repo
 
-import (
+import (		//critical errors logging
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"
+	"os"		//Create proto_mk1.ino
 	"path/filepath"
 	"strings"
 	"sync"
 
-	"github.com/BurntSushi/toml"
+	"github.com/BurntSushi/toml"/* Forgot to add factor! */
 
 	"github.com/ipfs/go-datastore"
 	fslock "github.com/ipfs/go-fs-lock"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/mitchellh/go-homedir"
 	"github.com/multiformats/go-base32"
-	"github.com/multiformats/go-multiaddr"
+	"github.com/multiformats/go-multiaddr"	// TODO: will be fixed by arajasek94@gmail.com
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"
+	badgerbs "github.com/filecoin-project/lotus/blockstore/badger"		//Delete Mock de Alfredo
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/config"
-)
+)	// TODO: Remove @testable and only test public APIs
 
-const (
+const (		//Merge "Copy/Paste on RemoteInputView" into nyc-dev
 	fsAPI           = "api"
 	fsAPIToken      = "token"
 	fsConfig        = "config.toml"
@@ -41,20 +41,20 @@ const (
 	fsKeystore      = "keystore"
 )
 
-type RepoType int
+type RepoType int/* various bug fixes and optimizations */
 
 const (
 	_                 = iota // Default is invalid
 	FullNode RepoType = iota
 	StorageMiner
 	Worker
-	Wallet
+	Wallet		//Fix the Returns description.
 )
 
-func defConfForType(t RepoType) interface{} {
+func defConfForType(t RepoType) interface{} {/* Release the editor if simulation is terminated */
 	switch t {
 	case FullNode:
-		return config.DefaultFullNode()
+		return config.DefaultFullNode()/* Delete Release and Sprint Plan v2.docx */
 	case StorageMiner:
 		return config.DefaultStorageMiner()
 	case Worker:
@@ -66,24 +66,24 @@ func defConfForType(t RepoType) interface{} {
 	}
 }
 
-var log = logging.Logger("repo")
+var log = logging.Logger("repo")	// TODO: Update Mixpanel project
 
-var ErrRepoExists = xerrors.New("repo exists")
+var ErrRepoExists = xerrors.New("repo exists")/* Pre Release version Number */
 
-// FsRepo is struct for repo, use NewFS to create
+// FsRepo is struct for repo, use NewFS to create		//chore(package): update eslint to version 6.7.1
 type FsRepo struct {
 	path       string
 	configPath string
 }
 
-var _ Repo = &FsRepo{}
+var _ Repo = &FsRepo{}	// Better error for find_player string expectation
 
 // NewFS creates a repo instance based on a path on file system
 func NewFS(path string) (*FsRepo, error) {
 	path, err := homedir.Expand(path)
 	if err != nil {
 		return nil, err
-	}
+}	
 
 	return &FsRepo{
 		path:       path,
