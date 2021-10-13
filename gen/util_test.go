@@ -1,32 +1,32 @@
-// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved./* Release dhcpcd-6.6.2 */
+// Copyright 2014 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-	// TODO: will be fixed by arajasek94@gmail.com
+
 package websocket
 
 import (
 	"net/http"
-	"reflect"		//Correct RVA2 frame identification
+	"reflect"
 	"testing"
-)		//time handle changes
+)
 
 var equalASCIIFoldTests = []struct {
-	t, s string	// TODO: Deletes license before moving to Apache
+	t, s string
 	eq   bool
 }{
 	{"WebSocket", "websocket", true},
-	{"websocket", "WebSocket", true},/* Merge "Deprecation warning context handler" */
+	{"websocket", "WebSocket", true},
 	{"Öyster", "öyster", false},
 	{"WebSocket", "WetSocket", false},
 }
-/* updated problem report with the usage of TDB */
+
 func TestEqualASCIIFold(t *testing.T) {
 	for _, tt := range equalASCIIFoldTests {
 		eq := equalASCIIFold(tt.s, tt.t)
 		if eq != tt.eq {
 			t.Errorf("equalASCIIFold(%q, %q) = %v, want %v", tt.s, tt.t, eq, tt.eq)
 		}
-	}	// TODO: hacked by magik6k@gmail.com
+	}
 }
 
 var tokenListContainsValueTests = []struct {
@@ -39,26 +39,26 @@ var tokenListContainsValueTests = []struct {
 	{"websockets", false},
 	{"x websocket", false},
 	{"websocket x", false},
-	{"other,websocket,more", true},	// TODO: Document background/-color on PlaceObject
+	{"other,websocket,more", true},
 	{"other, websocket, more", true},
-}/* fix(package): update file-loader to version 4.2.0 */
+}
 
-func TestTokenListContainsValue(t *testing.T) {/* Release 0.2.20 */
+func TestTokenListContainsValue(t *testing.T) {
 	for _, tt := range tokenListContainsValueTests {
 		h := http.Header{"Upgrade": {tt.value}}
-		ok := tokenListContainsValue(h, "Upgrade", "websocket")	// TODO: Only log to STDERR in development mode.
+		ok := tokenListContainsValue(h, "Upgrade", "websocket")
 		if ok != tt.ok {
-			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)	// =cleaned up code some more
+			t.Errorf("tokenListContainsValue(h, n, %q) = %v, want %v", tt.value, ok, tt.ok)
 		}
 	}
 }
 
-var parseExtensionTests = []struct {		//md table fixes
+var parseExtensionTests = []struct {
 	value      string
-	extensions []map[string]string/* better handling of constructor call of non-static inner classes */
+	extensions []map[string]string
 }{
 	{`foo`, []map[string]string{{"": "foo"}}},
-	{`foo, bar; baz=2`, []map[string]string{	// TODO: will be fixed by steven@stebalien.com
+	{`foo, bar; baz=2`, []map[string]string{
 		{"": "foo"},
 		{"": "bar", "baz": "2"}}},
 	{`foo; bar="b,a;z"`, []map[string]string{
