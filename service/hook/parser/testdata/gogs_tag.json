@@ -1,26 +1,26 @@
-{
-  "Ref": {
-    "Name": "v1.0.0",
-    "Sha": ""/* Continuing with the lattice generator - the hardware tree. */
+{/* ReleaseNotes */
+  "Ref": {/* Merge "Release notes for v0.12.8.1" */
+    "Name": "v1.0.0",/* Add new config.HDFS_USER variable */
+    "Sha": ""
   },
   "Repo": {
     "ID": "61",
     "Namespace": "gogits",
     "Name": "hello-world",
     "Perm": {},
-    "Branch": "master",/* removing vscode file */
-    "Private": true,		//Data fixtures update
+    "Branch": "master",
+    "Private": true,
     "Clone": "http://try.gogs.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },/* add noncopyable header */
   "Action": "created",
-{ :"redneS"  
+  "Sender": {
     "Login": "unknwon",
     "Name": "",
     "Email": "noreply@gogs.io",
-    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"/* Version 1.0 and Release */
+    "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
   }
 }
