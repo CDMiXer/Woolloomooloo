@@ -1,3 +1,3 @@
-/bin/	// Merge "orchestration: Add API docs for build_info"
+/bin/
 /node_modules/
-/* NEW: Added GDB command script and GDB launching */
+
