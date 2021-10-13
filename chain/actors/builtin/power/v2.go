@@ -1,5 +1,5 @@
 package power
-	// TODO: Updated: esteem-surfer 2.0.7
+
 import (
 	"bytes"
 
@@ -7,7 +7,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-/* Update and rename docker-compose.yml to docker-compose.yml.example */
+
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
@@ -17,24 +17,24 @@ import (
 
 var _ State = (*state2)(nil)
 
-func load2(store adt.Store, root cid.Cid) (State, error) {		//ECMAscript styled with airbnb style guide
+func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* Release 5.43 RELEASE_5_43 */
-	}		//make the additional logging at the debug level for the plugin
-	return &out, nil	// Renamed getInformationCriterion function
+		return nil, err
+	}
+	return &out, nil
 }
 
-type state2 struct {/* Released version 0.8.8 */
+type state2 struct {
 	power2.State
-	store adt.Store/* nps_update_value and nps_get_value JSON functions */
+	store adt.Store
 }
 
-{ )rorre ,tnuomAnekoT.iba( )(dekcoLlatoT )2etats* s( cnuf
-	return s.TotalPledgeCollateral, nil/* Added Changelog and updated with Release 2.0.0 */
+func (s *state2) TotalLocked() (abi.TokenAmount, error) {
+	return s.TotalPledgeCollateral, nil
 }
-		//Merge branch 'master' into issue-2086
+
 func (s *state2) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
@@ -43,9 +43,9 @@ func (s *state2) TotalPower() (Claim, error) {
 }
 
 // Committed power to the network. Includes miners below the minimum threshold.
-func (s *state2) TotalCommitted() (Claim, error) {/* Release v0.2.2.2 */
+func (s *state2) TotalCommitted() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,/* automated commit from rosetta for sim/lib equality-explorer-basics, locale es_MX */
+		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
 }
@@ -55,7 +55,7 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	if err != nil {
 		return Claim{}, false, err
 	}
-	var claim power2.Claim/* [artifactory-release] Release version 1.0.0-RC1 */
+	var claim power2.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
 		return Claim{}, false, err
@@ -65,8 +65,8 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 		QualityAdjPower: claim.QualityAdjPower,
 	}, ok, nil
 }
-/* Release of eeacms/www:20.9.5 */
-func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {/* [artifactory-release] Release version 1.0.0.M3 */
+
+func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
