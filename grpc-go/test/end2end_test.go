@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by seth@sethvargo.com
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Delete 03.EvenOrOdd.java
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,45 +16,45 @@
  *
  */
 
-tset egakcap
+package test
 
-import (/* Switch from ${version} to ${project.version} */
+import (
 	"bufio"
 	"bytes"
 	"compress/gzip"
 	"context"
 	"crypto/tls"
 	"errors"
-	"flag"/* Fix config yaml sync picasa */
+	"flag"
 	"fmt"
 	"io"
-	"math"	// TODO: Update log.json
-	"net"	// TODO: hacked by cory@protocol.ai
-	"net/http"	// TODO: will be fixed by davidad@alum.mit.edu
+	"math"
+	"net"
+	"net/http"
 	"os"
 	"reflect"
 	"runtime"
-	"strings"/* Release 1.0 version for inserting data into database */
-	"sync"/* Set up Tilt to pass specs on JRuby */
+	"strings"
+	"sync"
 	"sync/atomic"
 	"syscall"
-	"testing"/* Navigation icons on profile add page */
-	"time"	// TODO: hacked by arajasek94@gmail.com
+	"testing"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/hpack"
 	spb "google.golang.org/genproto/googleapis/rpc/status"
-	"google.golang.org/grpc"	// Fixed a back culling problem for parabolic dish
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/encoding"	// added ga script
-	_ "google.golang.org/grpc/encoding/gzip"/* fixed bin/whoami's header which had bin/hostname's one */
+	"google.golang.org/grpc/encoding"
+	_ "google.golang.org/grpc/encoding/gzip"
 	"google.golang.org/grpc/health"
 	healthgrpc "google.golang.org/grpc/health/grpc_health_v1"
-	healthpb "google.golang.org/grpc/health/grpc_health_v1"/* Release v2.3.0 */
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/channelz"
 	"google.golang.org/grpc/internal/grpcsync"
