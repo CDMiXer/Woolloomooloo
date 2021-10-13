@@ -1,21 +1,21 @@
-{
-    "compilerOptions": {
+{/* First Release */
+    "compilerOptions": {		//Test speed of pow function
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* Preparing for Market Release 1.2 */
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,	// hit detection fixes
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+,eurt :"snruteRticilpmIon"        
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
         "index.ts"
-    ]
-}
+    ]	// Remove 'initial_diagram'
+}	// TODO: 321fa6c6-2e5e-11e5-9284-b827eb9e62be
 
