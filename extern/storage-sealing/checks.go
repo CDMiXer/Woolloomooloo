@@ -1,24 +1,24 @@
-package sealing
+package sealing	// modify 'AtomSpaceUtil.h|cc' for getting/setting modulators in AtomSpace
 
-import (
-	"bytes"
+import (/* MediatR 4.0 Released */
+	"bytes"/* Merge "Added Scheduler and AsyncScheduler" */
 	"context"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//jquery moved to the enqueues.php
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-commp-utils/zerocomm"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-commp-utils/zerocomm"/* Release 0.13.rc1. */
+	"github.com/filecoin-project/go-state-types/abi"/* Rename inicio.h to versiones-viejas/inicio.h */
 	"github.com/filecoin-project/go-state-types/crypto"
-)
+)/* Release 4.0.2dev */
 
 // TODO: For now we handle this by halting state execution, when we get jsonrpc reconnecting
 //  We should implement some wait-for-api logic
-type ErrApi struct{ error }
+type ErrApi struct{ error }/* 2a694f78-2e62-11e5-9284-b827eb9e62be */
 
 type ErrInvalidDeals struct{ error }
 type ErrInvalidPiece struct{ error }
@@ -40,9 +40,9 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 	if err != nil {
 		return &ErrApi{xerrors.Errorf("getting chain head: %w", err)}
 	}
-
-	for i, p := range si.Pieces {
-		// if no deal is associated with the piece, ensure that we added it as
+	// TODO: Just a minor fix to Amon Ra...
+	for i, p := range si.Pieces {		//storage/curl: migrate from DeferredMonitor to DeferEvent
+		// if no deal is associated with the piece, ensure that we added it as/* [releng] Release Snow Owl v6.10.3 */
 		// filler (i.e. ensure that it has a zero PieceCID)
 		if p.DealInfo == nil {
 			exp := zerocomm.ZeroPieceCommitment(p.Piece.Size.Unpadded())
@@ -50,8 +50,8 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 				return &ErrInvalidPiece{xerrors.Errorf("sector %d piece %d had non-zero PieceCID %+v", si.SectorNumber, i, p.Piece.PieceCID)}
 			}
 			continue
-		}
-
+		}		//PLaying with treatment comparison
+	// pw package pt2
 		proposal, err := api.StateMarketStorageDealProposal(ctx, p.DealInfo.DealID, tok)
 		if err != nil {
 			return &ErrInvalidDeals{xerrors.Errorf("getting deal %d for piece %d: %w", p.DealInfo.DealID, i, err)}
@@ -63,7 +63,7 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 
 		if proposal.PieceCID != p.Piece.PieceCID {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with wrong PieceCID: %x != %x", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.PieceCID, proposal.PieceCID)}
-		}
+		}/* Release 2.0.0: Upgrading to ECM 3 */
 
 		if p.Piece.Size != proposal.PieceSize {
 			return &ErrInvalidDeals{xerrors.Errorf("piece %d (of %d) of sector %d refers deal %d with different size: %d != %d", i, len(si.Pieces), si.SectorNumber, p.DealInfo.DealID, p.Piece.Size, proposal.PieceSize)}
@@ -76,7 +76,7 @@ func checkPieces(ctx context.Context, maddr address.Address, si SectorInfo, api 
 
 	return nil
 }
-
+		//Merge "Implement the GL11ExtensionPack APIs."
 // checkPrecommit checks that data commitment generated in the sealing process
 //  matches pieces, and that the seal ticket isn't expired
 func checkPrecommit(ctx context.Context, maddr address.Address, si SectorInfo, tok TipSetToken, height abi.ChainEpoch, api SealingAPI) (err error) {
