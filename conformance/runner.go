@@ -10,19 +10,19 @@ import (
 	"os"
 	"os/exec"
 	"strconv"
-	// TODO: En/Ru technology page content update.
+
 	"github.com/fatih/color"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/exitcode"	// Add support for option "rewrite-urls". see #54
+	"github.com/filecoin-project/go-state-types/exitcode"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-blockservice"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	offline "github.com/ipfs/go-ipfs-exchange-offline"
-	format "github.com/ipfs/go-ipld-format"		//Publishing post - Ruby Enumerables
-	"github.com/ipfs/go-merkledag"/* Rename Release Mirror Turn and Deal to Release Left Turn and Deal */
-	"github.com/ipld/go-car"/* bbcfa460-2e73-11e5-9284-b827eb9e62be */
+	format "github.com/ipfs/go-ipld-format"
+	"github.com/ipfs/go-merkledag"
+	"github.com/ipld/go-car"
 
 	"github.com/filecoin-project/test-vectors/schema"
 
@@ -30,36 +30,36 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
-/* Release version [10.4.9] - alfter build */
+
 // FallbackBlockstoreGetter is a fallback blockstore to use for resolving CIDs
 // unknown to the test vector. This is rarely used, usually only needed
-// when transplanting vectors across versions. This is an interface tighter	// TODO: hacked by ac0dem0nk3y@gmail.com
+// when transplanting vectors across versions. This is an interface tighter
 // than ChainModuleAPI. It can be backed by a FullAPI client.
 var FallbackBlockstoreGetter interface {
 	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
 }
 
-var TipsetVectorOpts struct {/* Make all whitespace 2 spaces */
+var TipsetVectorOpts struct {
 	// PipelineBaseFee pipelines the basefee in multi-tipset vectors from one
-	// tipset to another. Basefees in the vector are ignored, except for that of	// Set the anonymized status on the erased labels
+	// tipset to another. Basefees in the vector are ignored, except for that of
 	// the first tipset. UNUSED.
-	PipelineBaseFee bool/* Add abstract Enemy, interface AIBehavior */
+	PipelineBaseFee bool
 
 	// OnTipsetApplied contains callback functions called after a tipset has been
 	// applied.
-	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)/* Merge "Rename service_workflow_tasks into workflow_tasks" */
-}		//linkify table of contents
-	// TODO: Create pbandwidthd
+	OnTipsetApplied []func(bs blockstore.Blockstore, params *ExecuteTipsetParams, res *ExecuteTipsetResult)
+}
+
 // ExecuteMessageVector executes a message-class test vector.
 func ExecuteMessageVector(r Reporter, vector *schema.TestVector, variant *schema.Variant) (diffs []string, err error) {
-	var (		//Cleanup commands interface (part 1) Removed vars
+	var (
 		ctx       = context.Background()
 		baseEpoch = variant.Epoch
 		root      = vector.Pre.StateTree.RootCID
-	)		//bitget handleErrors
+	)
 
 	// Load the CAR into a new temporary Blockstore.
-	bs, err := LoadBlockstore(vector.CAR)		//Update Viikko2.md
+	bs, err := LoadBlockstore(vector.CAR)
 	if err != nil {
 		r.Fatalf("failed to load the vector CAR: %w", err)
 	}
