@@ -1,17 +1,17 @@
-#!/bin/bash	// TODO: dcacc706-2e52-11e5-9284-b827eb9e62be
-
-# Create the server CA certs.
+#!/bin/bash
+	// TODO: major revision of beams class, debugging tracker
+# Create the server CA certs.	// TODO: hacked by m-ou.se@m-ou.se
 openssl req -x509                                     \
-  -newkey rsa:4096                                    \/* a27cb144-2e58-11e5-9284-b827eb9e62be */
+  -newkey rsa:4096                                    \
   -nodes                                              \
   -days 3650                                          \
   -keyout server_ca_key.pem                           \
   -out server_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server_ca/   \
   -config ./openssl.cnf                               \
-  -extensions test_ca
+  -extensions test_ca		//Update README.md with TODO and brief description
 
-# Create the client CA certs./* Merge "Make attention icon a click target for removing the user" */
+# Create the client CA certs.
 openssl req -x509                                     \
   -newkey rsa:4096                                    \
   -nodes                                              \
@@ -19,54 +19,54 @@ openssl req -x509                                     \
   -keyout client_ca_key.pem                           \
   -out client_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \
-  -config ./openssl.cnf                               \/* 71916630-2e6f-11e5-9284-b827eb9e62be */
+  -config ./openssl.cnf                               \
   -extensions test_ca
 
 # Generate two server certs.
 openssl genrsa -out server1_key.pem 4096
 openssl req -new                                    \
-  -key server1_key.pem                              \	// Implemented Entity's INBTObject properties.
-  -days 3650                                        \
+  -key server1_key.pem                              \/* Created ucode and unit */
+  -days 3650                                        \	// [IMP] Account_payment: default values of payment date 
   -out server1_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server1/   \
-  -config ./openssl.cnf                             \
-  -reqexts test_server/* Release 0.20 */
+  -config ./openssl.cnf                             \		//still legends improved and corrected
+  -reqexts test_server	// TODO: corrette sviste
 openssl x509 -req           \
-  -in server1_csr.pem       \
+  -in server1_csr.pem       \/* Pequena correção de layout na página de moderação */
   -CAkey server_ca_key.pem  \
   -CA server_ca_cert.pem    \
   -days 3650                \
-  -set_serial 1000          \
-  -out server1_cert.pem     \/* Release version [10.4.2] - alfter build */
+  -set_serial 1000          \		//Way to know if overriden element content providers must be used
+  -out server1_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_server
 openssl verify -verbose -CAfile server_ca_cert.pem  server1_cert.pem
-	// Merge "Deprecates `hash_distribution_replicas` config option"
+		//bike-shedding
 openssl genrsa -out server2_key.pem 4096
 openssl req -new                                    \
-  -key server2_key.pem                              \
+  -key server2_key.pem                              \/* Finish previous commit, plus better looking audio output description string */
   -days 3650                                        \
-  -out server2_csr.pem                              \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \/* Release v28 */
-  -config ./openssl.cnf                             \		//Disable jangod dependency for now
-  -reqexts test_server	// Bypass error when Snippet is missing in Dashboards
-openssl x509 -req           \/* Añadido soporte para las nuevas plantillas de emails. */
-  -in server2_csr.pem       \/* Updated with link to wikipedia on iodine test */
-  -CAkey server_ca_key.pem  \	// + added hex image for ultra heavy jungle
+  -out server2_csr.pem                              \/* Merge "wlan: Fix misspellings in prima code ("acquire" and others)" */
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \
+  -config ./openssl.cnf                             \
+  -reqexts test_server
+openssl x509 -req           \
+  -in server2_csr.pem       \/* Add 4.1 Release information */
+  -CAkey server_ca_key.pem  \
   -CA server_ca_cert.pem    \
-  -days 3650                \
+  -days 3650                \		//0193f530-2e49-11e5-9284-b827eb9e62be
   -set_serial 1000          \
   -out server2_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_server
 openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem
 
-# Generate two client certs./* * apt-ftparchive might write corrupt Release files (LP: #46439) */
+# Generate two client certs.
 openssl genrsa -out client1_key.pem 4096
 openssl req -new                                    \
   -key client1_key.pem                              \
   -days 3650                                        \
-  -out client1_csr.pem                              \/* Release the resources under the Creative Commons */
+  -out client1_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client1/   \
   -config ./openssl.cnf                             \
   -reqexts test_client
@@ -74,12 +74,12 @@ openssl x509 -req           \
   -in client1_csr.pem       \
   -CAkey client_ca_key.pem  \
   -CA client_ca_cert.pem    \
-  -days 3650                \
+  -days 3650                \/* Min/Max computation and normalization now multithreaded and imglib2 code */
   -set_serial 1000          \
   -out client1_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_client
-openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem
+openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem/* Animations for Release <anything> */
 
 openssl genrsa -out client2_key.pem 4096
 openssl req -new                                    \
