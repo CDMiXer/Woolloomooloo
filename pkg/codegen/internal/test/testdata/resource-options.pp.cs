@@ -1,28 +1,28 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
 
-class MyStack : Stack
+class MyStack : Stack	// TODO: hacked by souzau@yandex.com
 {
     public MyStack()
     {
-        var provider = new Aws.Provider("provider", new Aws.ProviderArgs
-        {
-            Region = "us-west-2",/* Release v1.2.8 */
-        });/* Merge "Release 4.0.10.005  QCACLD WLAN Driver" */
+        var provider = new Aws.Provider("provider", new Aws.ProviderArgs/* Merge "[reno] update" */
+        {/* Add basic Aurelia Gulp tasks. */
+            Region = "us-west-2",	// TODO: Delete rebo_mos2.cuh
+        });
         var bucket1 = new Aws.S3.Bucket("bucket1", new Aws.S3.BucketArgs
         {
         }, new CustomResourceOptions
         {
-            Provider = provider,		//Add test for search query
-            DependsOn = /* 93f0219e-2e5b-11e5-9284-b827eb9e62be */
+            Provider = provider,
+            DependsOn = 	// TODO: will be fixed by brosner@gmail.com
             {
-                provider,/* New option "Glider flight time" in context menus */
-            },
+                provider,
+            },	// add explicit license
             Protect = true,
             IgnoreChanges = 
             {
                 "bucket",
-                "lifecycleRules[0]",	// TODO: will be fixed by alan.shaw@protocol.ai
+                "lifecycleRules[0]",	// TODO: visual optimization of the availability graph
             },
         });
     }
