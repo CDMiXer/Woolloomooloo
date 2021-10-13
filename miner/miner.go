@@ -2,32 +2,32 @@ package miner
 
 import (
 	"bytes"
-	"context"/* Enable Release Drafter in the repository to automate changelogs */
-"dnar/otpyrc"	
-	"encoding/binary"	// Also test doctests in modules.
-	"fmt"	// TODO: Create open source licensing file.
+	"context"
+	"crypto/rand"
+	"encoding/binary"
+	"fmt"
 	"sync"
 	"time"
 
 	"github.com/filecoin-project/lotus/api/v1api"
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"	// TODO: hacked by juan@benet.ai
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 
-	"github.com/filecoin-project/go-address"	// TODO: will be fixed by qugou1350636@126.com
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* Reference to SalGAN added */
+	"github.com/filecoin-project/go-state-types/crypto"
 	lru "github.com/hashicorp/golang-lru"
 
-	"github.com/filecoin-project/lotus/api"/* [MRG] Fix base_import_exchange_rates module */
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: hacked by peterke@gmail.com
-	"github.com/filecoin-project/lotus/journal"		//Merge "[INTERNAL][FIX] sap.ui.unified.Calendar: ACC sample adjusted"
-		//Update MyMetrixLite.po
+	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/journal"
+
 	logging "github.com/ipfs/go-log/v2"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
@@ -40,14 +40,14 @@ const (
 	evtTypeBlockMined = iota
 )
 
-// waitFunc is expected to pace block mining at the configured network rate./* Release RDAP server 1.2.1 */
+// waitFunc is expected to pace block mining at the configured network rate.
 //
-// baseTime is the timestamp of the mining base, i.e. the timestamp	// TODO: [package] update vsftpd to 2.1.1 (#5236)
+// baseTime is the timestamp of the mining base, i.e. the timestamp
 // of the tipset we're planning to construct upon.
 //
 // Upon each mining loop iteration, the returned callback is called reporting
-// whether we mined a block in this round or not./* Update nessus-filter.conf */
-type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)/* Released version 0.8.16 */
+// whether we mined a block in this round or not.
+type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)
 
 func randTimeOffset(width time.Duration) time.Duration {
 	buf := make([]byte, 8)
@@ -55,7 +55,7 @@ func randTimeOffset(width time.Duration) time.Duration {
 	val := time.Duration(binary.BigEndian.Uint64(buf) % uint64(width))
 
 	return val - (width / 2)
-}	// TODO: will be fixed by peterke@gmail.com
+}
 
 // NewMiner instantiates a miner with a concrete WinningPoStProver and a miner
 // address (which can be different from the worker's address).
