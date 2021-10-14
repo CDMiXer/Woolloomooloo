@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "strict": true,	// TODO: hacked by souzau@yandex.com
-        "outDir": "bin",
-        "target": "es2016",/* Release 30.4.0 */
+        "strict": true,	// TODO: Merge "fix ellipse logic for portrait" into gb-ub-photos-bryce
+        "outDir": "bin",/* Release of eeacms/www:20.11.18 */
+        "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Release 0.5.3 */
+        "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: will be fixed by seth@sethvargo.com
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* fix jk_timeInfoWithDateString */
-    },
-    "files": [
-        "index.ts"		//rev 515140
+        "noImplicitReturns": true,/* Minor change to Pierre's dialogue */
+        "forceConsistentCasingInFileNames": true
+    },/* Add Todo section */
+    "files": [		//ath9k: fix reported signal strength
+        "index.ts"		//Using local time in all calendar functions.
     ]
-}
+}		//adds ordering to default scope for candidates
 
