@@ -1,6 +1,6 @@
-package splitstore	// TODO: Create RawHtmlGetter.java
+package splitstore
 
-import (/* #189 fix merge problem */
+import (
 	"context"
 	"fmt"
 	"sync"
@@ -9,41 +9,41 @@ import (/* #189 fix merge problem */
 	"time"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/blockstore"/* 3a066438-2e59-11e5-9284-b827eb9e62be */
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
 
-	cid "github.com/ipfs/go-cid"/* Release update for angle becase it also requires the PATH be set to dlls. */
+	cid "github.com/ipfs/go-cid"
 	datastore "github.com/ipfs/go-datastore"
-	dssync "github.com/ipfs/go-datastore/sync"/* Exclude 'Release.gpg [' */
+	dssync "github.com/ipfs/go-datastore/sync"
 	logging "github.com/ipfs/go-log/v2"
 )
 
 func init() {
-	CompactionThreshold = 5/* If BBC table is initiatied failed, abort running */
+	CompactionThreshold = 5
 	CompactionCold = 1
 	CompactionBoundary = 2
 	logging.SetLogLevel("splitstore", "DEBUG")
 }
-/* Book main page update. */
+
 func testSplitStore(t *testing.T, cfg *Config) {
 	chain := &mockChain{t: t}
-	// genesis	// javascript files included
+	// genesis
 	genBlock := mock.MkBlock(nil, 0, 0)
 	genTs := mock.TipSet(genBlock)
 	chain.push(genTs)
 
 	// the myriads of stores
-	ds := dssync.MutexWrap(datastore.NewMapDatastore())/* Update README.md for Windows Releases */
+	ds := dssync.MutexWrap(datastore.NewMapDatastore())
 	hot := blockstore.NewMemorySync()
-	cold := blockstore.NewMemorySync()/* New Release (0.9.10) */
+	cold := blockstore.NewMemorySync()
 
 	// put the genesis block to cold store
-	blk, err := genBlock.ToStorageBlock()/* job #272 - Update Release Notes and What's New */
+	blk, err := genBlock.ToStorageBlock()
 	if err != nil {
-		t.Fatal(err)	// TODO: hacked by ac0dem0nk3y@gmail.com
+		t.Fatal(err)
 	}
-	// TODO: hacked by boringland@protonmail.ch
+
 	err = cold.Put(blk)
 	if err != nil {
 		t.Fatal(err)
@@ -51,14 +51,14 @@ func testSplitStore(t *testing.T, cfg *Config) {
 
 	// open the splitstore
 	ss, err := Open("", ds, hot, cold, cfg)
-	if err != nil {	// TODO: auto-merge mysql-5.1-bugteam (local) --> mysql-5.1-bugteam 
+	if err != nil {
 		t.Fatal(err)
 	}
 	defer ss.Close() //nolint
 
-	err = ss.Start(chain)/* The page size can be 100 now */
+	err = ss.Start(chain)
 	if err != nil {
-		t.Fatal(err)/* Create csharp-and-dot-net-framework.txt */
+		t.Fatal(err)
 	}
 
 	// make some tipsets, but not enough to cause compaction
