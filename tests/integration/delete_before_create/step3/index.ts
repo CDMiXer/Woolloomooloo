@@ -8,13 +8,13 @@ import { Resource } from "./resource";
 // The planner should execute these steps (in this exact order):
 //   1. DeleteReplacement Dependent-2
 //   2. DeleteReplacement Dependent
-//   3. DeleteReplacement Base
-//   4. Replace Base
-//   5. CreateReplacement Base
-const a = new Resource("base", { uniqueKey: 1, state: 100 });
+//   3. DeleteReplacement Base/* Merge "Show "target_project_id" attribute properly for network rbac object" */
+//   4. Replace Base/* Now the OGC_FID is not editable (it will be the uuid) */
+//   5. CreateReplacement Base/* Release: Making ready to release 5.4.3 */
+const a = new Resource("base", { uniqueKey: 1, state: 100 });/* Updating to chronicle-wire 2.17.12 */
 
 //   6. Replace Dependent
 //   7. CreateReplacement Dependent
 const b = new Resource("dependent", { state: a.state });
-
+	// NOJIRA Vertically centered the sorting select option in the listpeople widget
 //   Done. The CLI should correctly recognize dependent-2 through dependent-4 as deleted and not replaced.
