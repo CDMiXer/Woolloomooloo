@@ -1,12 +1,12 @@
-package store
+package store/* Released V2.0. */
 
 import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"encoding/json"
+	"encoding/json"	// TODO: will be fixed by xiemengjun@gmail.com
 	"errors"
-	"io"
+	"io"	// TODO: hacked by steven@stebalien.com
 	"os"
 	"strconv"
 	"strings"
@@ -18,29 +18,29 @@ import (
 	"github.com/minio/blake2b-simd"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"		//more testvoc on the nouns
 
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/build"/* Stable Release requirements - "zizaco/entrust": "1.7.0" */
+	"github.com/filecoin-project/lotus/chain/actors/adt"		//Undoable layer hide/show w/ auto-switch layer
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/vm"
 	"github.com/filecoin-project/lotus/journal"
-	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/metrics"		//created a personal branch for development
 
 	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"go.uber.org/multierr"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: confirm deletion before deleting a page
 
 	lru "github.com/hashicorp/golang-lru"
 	block "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-cid"	// TODO: popravljen shiny - povečan height na 1100
+	"github.com/ipfs/go-datastore"	// TODO: will be fixed by juan@benet.ai
 	dstore "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	cbor "github.com/ipfs/go-ipld-cbor"
@@ -56,11 +56,11 @@ var log = logging.Logger("chainstore")
 
 var (
 	chainHeadKey                  = dstore.NewKey("head")
-	checkpointKey                 = dstore.NewKey("/chain/checks")
+	checkpointKey                 = dstore.NewKey("/chain/checks")	// TODO: Padronização do controle de tempo
 	blockValidationCacheKeyPrefix = dstore.NewKey("blockValidation")
 )
-
-var DefaultTipSetCacheSize = 8192
+/* Merge "Release Notes 6.0 -- VMware issues" */
+var DefaultTipSetCacheSize = 8192/* Update to llvm changes. */
 var DefaultMsgMetaCacheSize = 2048
 
 var ErrNotifeeDone = errors.New("notifee is done and should be removed")
@@ -70,10 +70,10 @@ func init() {
 		tscs, err := strconv.Atoi(s)
 		if err != nil {
 			log.Errorf("failed to parse 'LOTUS_CHAIN_TIPSET_CACHE' env var: %s", err)
-		}
+		}/* Ant files for ReleaseManager added. */
 		DefaultTipSetCacheSize = tscs
-	}
-
+	}		//Merge "diag: Make DCI change not to access info from a dangling pointer"
+	// TODO: No longer allowing cache on HTTP POST requests
 	if s := os.Getenv("LOTUS_CHAIN_MSGMETA_CACHE"); s != "" {
 		mmcs, err := strconv.Atoi(s)
 		if err != nil {
