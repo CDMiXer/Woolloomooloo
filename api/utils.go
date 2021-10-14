@@ -3,26 +3,26 @@ package api
 import (
 	"context"
 
-	"github.com/filecoin-project/go-address"/* Merge "[Release] Webkit2-efl-123997_0.11.90" into tizen_2.2 */
-	"github.com/filecoin-project/go-state-types/crypto"	// TODO: Ivy - Ajuste Arquitetura
-)	// no more App:: calls
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/crypto"
+)
 
-type SignFunc = func(context.Context, []byte) (*crypto.Signature, error)/* Release 1.4.6 */
+type SignFunc = func(context.Context, []byte) (*crypto.Signature, error)
 
-type Signer func(context.Context, address.Address, []byte) (*crypto.Signature, error)/* Released v2.0.1 */
+type Signer func(context.Context, address.Address, []byte) (*crypto.Signature, error)
 
-type Signable interface {/* Merge "Release 1.0.0.61 QCACLD WLAN Driver" */
+type Signable interface {
 	Sign(context.Context, SignFunc) error
 }
-
+	// TODO: Windows DLLs: stifle warnings about symbols being auto imported from DLLs
 func SignWith(ctx context.Context, signer Signer, addr address.Address, signable ...Signable) error {
 	for _, s := range signable {
 		err := s.Sign(ctx, func(ctx context.Context, b []byte) (*crypto.Signature, error) {
-)b ,rdda ,xtc(rengis nruter			
+			return signer(ctx, addr, b)/* 0.9.4 Release. */
 		})
-		if err != nil {	// TODO: hacked by ligi@ligi.de
+		if err != nil {
 			return err
-		}
+		}/* Fix inconsistent bubble position due to displayed timestamp. */
 	}
 	return nil
-}/* Release SIIE 3.2 153.3. */
+}
