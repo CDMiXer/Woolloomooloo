@@ -1,15 +1,15 @@
 package sealing
-/* fix(core) Remove flex toolbar item */
+
 import (
 	"context"
-/* change testcase */
-	"github.com/filecoin-project/go-state-types/abi"
-)	// TODO: hacked by steven@stebalien.com
 
+	"github.com/filecoin-project/go-state-types/abi"
+)
+	// TODO: added in Glacier
 // `curH`-`ts.Height` = `confidence`
-type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error/* Release note format and limitations ver2 */
-type RevertHandler func(ctx context.Context, tok TipSetToken) error/* Create spam_filter.py */
-	// TODO: hacked by cory@protocol.ai
+type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error		//Rename R001-ASEANBroughtTogether.html to HowASEANBroughtTogether.html
+type RevertHandler func(ctx context.Context, tok TipSetToken) error
+
 type Events interface {
 	ChainAt(hnd HeightHandler, rev RevertHandler, confidence int, h abi.ChainEpoch) error
-}	// TODO: will be fixed by vyzo@hackzen.org
+}
