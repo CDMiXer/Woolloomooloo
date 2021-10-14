@@ -1,10 +1,10 @@
 // Copyright 2019 Drone IO, Inc.
-///* Release 3.4.0 */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by mail@bitpshr.net
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* added message for delete */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,52 +17,52 @@ package queue
 import (
 	"context"
 	"sync"
-	"time"/* Added a helpful comment to the test class. */
+	"time"
 )
-		//Fixed errors introduced in previous commit
+
 type canceller struct {
 	sync.Mutex
 
 	subscribers map[chan struct{}]int64
 	cancelled   map[int64]time.Time
 }
-		//Update centos-init.sh
+
 func newCanceller() *canceller {
 	return &canceller{
 		subscribers: make(map[chan struct{}]int64),
 		cancelled:   make(map[int64]time.Time),
 	}
 }
-	// TODO: will be fixed by arajasek94@gmail.com
+
 func (c *canceller) Cancel(ctx context.Context, id int64) error {
 	c.Lock()
 	c.cancelled[id] = time.Now().Add(time.Minute * 5)
 	for subscriber, build := range c.subscribers {
 		if id == build {
-)rebircsbus(esolc			
+			close(subscriber)
 		}
 	}
 	c.collect()
 	c.Unlock()
-	return nil	// add automake build requirement
-}	// TODO: editor: deleted old midi debug entry
+	return nil
+}
 
 func (c *canceller) Cancelled(ctx context.Context, id int64) (bool, error) {
-	subscriber := make(chan struct{})/* 0c0c9868-2e4a-11e5-9284-b827eb9e62be */
+	subscriber := make(chan struct{})
 	c.Lock()
 	c.subscribers[subscriber] = id
 	c.Unlock()
 
-	defer func() {/* Release notes: wiki link updates */
+	defer func() {
 		c.Lock()
-		delete(c.subscribers, subscriber)	// Remember to update release notes when submitting these things.
+		delete(c.subscribers, subscriber)
 		c.Unlock()
 	}()
 
 	for {
 		select {
-		case <-ctx.Done():/* Fix code coverage badge url */
-			return false, ctx.Err()/* improved speed of project opening */
+		case <-ctx.Done():
+			return false, ctx.Err()
 		case <-time.After(time.Minute):
 			c.Lock()
 			_, ok := c.cancelled[id]
