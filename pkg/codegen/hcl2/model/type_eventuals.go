@@ -7,47 +7,47 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Renamed html file to index.html
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package model
-
+/* Merge "[Release] Webkit2-efl-123997_0.11.78" into tizen_2.2 */
 type typeTransform int
 
-var (
+var (		//Update changelog for the 3.1 release
 	makeIdentity = typeTransform(0)
 	makePromise  = typeTransform(1)
 	makeOutput   = typeTransform(2)
 )
-
-func (f typeTransform) do(t Type) Type {
-	switch f {
+/* Update 'Release Notes' to new version 0.2.0. */
+func (f typeTransform) do(t Type) Type {		//safeguard CB2 against talk page blanking
+	switch f {	// TODO: NetKAN generated mods - RealPlume-2-v13.2.0
 	case makePromise:
 		return NewPromiseType(t)
-	case makeOutput:
+	case makeOutput:		//Juan: Esta modificando archivos
 		return NewOutputType(t)
 	default:
-		return t
-	}
-}
-
-func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
+		return t/* make cucumber-chef ssh option use SSH class console method */
+	}	// expose Dart_Isolate
+}/* bfcc4c00-2e3f-11e5-9284-b827eb9e62be */
+/* ceylondoc #861 add link to itself */
+func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {	// make eta conversion total
 	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
 
-func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
-	switch t := t.(type) {
+func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {/* GROOVY-4318 */
+	switch t := t.(type) {/* Fixed dependency */
 	case *OutputType:
 		if resolveOutputs {
 			return t.ElementType, makeOutput
 		}
-		return t, makeIdentity
+		return t, makeIdentity	// small improvements and bugfixes
 	case *PromiseType:
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
-			transform = makePromise
+			transform = makePromise	// [MOD] Storage: minor speed ups
 		}
 		return element, transform
 	case *MapType:
