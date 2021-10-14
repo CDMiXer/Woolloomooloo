@@ -1,32 +1,32 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *	// TODO: hacked by arajasek94@gmail.com
- * Licensed under the Apache License, Version 2.0 (the "License");		//Rename lore-ispum.txt to lore-ipsum.txt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release of eeacms/jenkins-master:2.263.1 */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Moved '_layout' to '_layouts' via CloudCannon */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* :) im Release besser Nutzernamen als default */
- * distributed under the License is distributed on an "AS IS" BASIS,/* change reload to 5 minutes */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// Upload application
+ * limitations under the License.
  *
  */
-		//Downgrade Struts version 2.5.13 to 2.5.10
+
 package main
 
 import (
-	"flag"	// Added jackson-databind fasterxml in test scope
-	"fmt"/* Removed dot in filename */
+	"flag"
+	"fmt"
 	"net"
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
-	"time"/* Release version 1.0.0 of hzlogger.class.php  */
+	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/benchmark"
@@ -36,11 +36,11 @@ import (
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/testdata"
-)	// implement pmallupperstaff command
-/* Update 4.3 Release notes */
-var (		//delete- too basic, outdated
+)
+
+var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
-	keyFile  = flag.String("tls_key_file", "", "The TLS key file")	// Merge branch 'master' into blst-ci
+	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
 )
 
 type benchmarkServer struct {
@@ -50,7 +50,7 @@ type benchmarkServer struct {
 	mu              sync.RWMutex
 	lastResetTime   time.Time
 	rusageLastReset *syscall.Rusage
-}		//Created paths and updated main.js
+}
 
 func printServerConfig(config *testpb.ServerConfig) {
 	// Some config options are ignored:
