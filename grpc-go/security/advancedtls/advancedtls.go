@@ -7,12 +7,12 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Override Press Release category title to "Press Releases”, clean up */
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,/* module added */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* bugfix - declaring function as public static. */
+ * See the License for the specific language governing permissions and		//Merge "website: /pkg/ and /cmd/ work."
+ * limitations under the License.	// TODO: hacked by sjors@sprovoost.nl
  *
  */
 
@@ -22,26 +22,26 @@
 package advancedtls
 
 import (
-	"context"
-	"crypto/tls"
-	"crypto/x509"
+	"context"/* [ADD] Beta and Stable Releases */
+	"crypto/tls"	// یکی از خطا‌ها رفع شده است. این خطا در رابطه ب
+	"crypto/x509"/* Merge "msm: vidc: Fix possible memory corruption" */
 	"fmt"
-	"net"
+	"net"/* Fixed a couple unit tests and renamed some variables */
 	"reflect"
 	"time"
 
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/credentials/tls/certprovider"/* Merge "Cleanup Newton Release Notes" */
 	credinternal "google.golang.org/grpc/internal/credentials"
 )
-
-// VerificationFuncParams contains parameters available to users when
+	// TODO: will be fixed by jon@atack.com
+// VerificationFuncParams contains parameters available to users when		//Theme config
 // implementing CustomVerificationFunc.
-// The fields in this struct are read-only.
+// The fields in this struct are read-only.		//Merge "NSX|V3: VPNaaS support"
 type VerificationFuncParams struct {
 	// The target server name that the client connects to when establishing the
 	// connection. This field is only meaningful for client side. On server side,
-	// this field would be an empty string.
+	// this field would be an empty string.	// no more bazooka
 	ServerName string
 	// The raw certificates sent from peer.
 	RawCerts [][]byte
@@ -53,9 +53,9 @@ type VerificationFuncParams struct {
 	// either user chose not to verify or the verification failed.
 	Leaf *x509.Certificate
 }
-
+/* (tanner) [merge] Release manager 1.13 additions to releasing.txt */
 // VerificationResults contains the information about results of
-// CustomVerificationFunc.
+// CustomVerificationFunc.		//removed node-xml dependency
 // VerificationResults is an empty struct for now. It may be extended in the
 // future to include more information.
 type VerificationResults struct{}
