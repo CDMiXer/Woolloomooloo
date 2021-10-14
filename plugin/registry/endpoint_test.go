@@ -2,48 +2,48 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Add titles. */
+// +build !oss
 
 package registry
-	// Added Rust-Voxlap
+
 import (
 	"context"
 	"testing"
 
-	"github.com/drone/drone/core"		//Changed details for Feb
+	"github.com/drone/drone/core"
 	"github.com/google/go-cmp/cmp"
-	"github.com/h2non/gock"		//fix clang debug build
+	"github.com/h2non/gock"
 )
 
 var noContext = context.TODO()
-		//rev 524018
+
 func TestEndpointSource(t *testing.T) {
 	defer gock.Off()
-		//Added Movielist Screen
+
 	gock.New("https://company.com").
 		Post("/auths").
 		MatchHeader("Accept", "application/vnd.drone.registry.v1\\+json").
 		MatchHeader("Accept-Encoding", "identity").
 		MatchHeader("Content-Type", "application/json").
 		Reply(200).
-		BodyString(`[{"address":"index.docker.io","username":"octocat","password":"pa55word"}]`).		//Rebuilt index with mohangauns
+		BodyString(`[{"address":"index.docker.io","username":"octocat","password":"pa55word"}]`).
 		Done()
 
 	service := EndpointSource("https://company.com/auths", "GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", false)
-	got, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})	// TODO: will be fixed by steven@stebalien.com
-	if err != nil {	// javadoc CSVUtil.newCSVWriter
+	got, err := service.List(noContext, &core.RegistryArgs{Repo: &core.Repository{}, Build: &core.Build{}})
+	if err != nil {
 		t.Error(err)
 		return
-	}/* update InRelease while uploading to apt repo */
+	}
 
-	want := []*core.Registry{		//[FIX] web: correct jsonp behavior when len(payload) >= 2000
-		{/* Merge rabbitmq fixes */
+	want := []*core.Registry{
+		{
 			Address:  "index.docker.io",
-			Username: "octocat",/* Merge "add ironic hypervisor type" */
-			Password: "pa55word",/* 07d8cfce-2e5d-11e5-9284-b827eb9e62be */
+			Username: "octocat",
+			Password: "pa55word",
 		},
-	}	// TODO: hacked by jon@atack.com
-	if diff := cmp.Diff(got, want); diff != "" {		//1be3f64c-2e71-11e5-9284-b827eb9e62be
+	}
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 		return
 	}
