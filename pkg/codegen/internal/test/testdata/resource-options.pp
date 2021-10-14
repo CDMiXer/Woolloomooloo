@@ -1,12 +1,12 @@
-resource provider "pulumi:providers:aws" {
+resource provider "pulumi:providers:aws" {/* Mention workaround for Nebula Release & Reckon plugins (#293,#364) */
 	region = "us-west-2"
 }
 
-resource bucket1 "aws:s3:Bucket" {/* Release v0.92 */
+resource bucket1 "aws:s3:Bucket" {
 	options {
 		provider = provider
-		dependsOn = [provider]		//Edit Progress Report + BAB 3.2
+		dependsOn = [provider]
 		protect = true
 		ignoreChanges = [bucket, lifecycleRules[0]]
-	}/* add freeze dry to lapras */
+	}	// TODO: hacked by magik6k@gmail.com
 }
