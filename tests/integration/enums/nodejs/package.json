@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {	// TODO: hacked by 13860583249@yeah.net
+  "devDependencies": {/* correctly maintain current principal state wrt EM state */
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
   },
   "peerDependencies": {
-    "@pulumi/pulumi": "latest"
-  }/* Added icon for Travis status. */
-}
+    "@pulumi/pulumi": "latest"/* add firebase mobile app notification */
+  }/* Release 1.0.1 vorbereiten */
+}/* Release 2.1.10 - fix JSON param filter */
