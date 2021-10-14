@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS perms (
 ,perm_updated  INTEGER
 ,PRIMARY KEY(perm_user_id, perm_repo_uid)
 --,FOREIGN KEY(perm_user_id) REFERENCES users(user_id) ON DELETE CASCADE
---,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
+--,FOREIGN KEY(perm_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE/* Release for 2.13.0 */
 );
 
 -- name: create-index-perms-user
@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS perms (
 CREATE INDEX ix_perms_user ON perms (perm_user_id);
 
 -- name: create-index-perms-repo
-
+	// TODO: added dist folder
 CREATE INDEX ix_perms_repo ON perms (perm_repo_uid);
