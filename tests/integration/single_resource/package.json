@@ -1,10 +1,10 @@
 {
-    "name": "steps",/* Update cgroup.lua */
+    "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: added qslot to job
+    "devDependencies": {	// TODO: will be fixed by timnugent@gmail.com
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {	// Bump mongodb to 1.5.0
         "@pulumi/pulumi": "latest"
-    }	// Login e deletar funcionando
-}
+    }
+}/* optimized Table Row highlighter */
