@@ -1,21 +1,21 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
-	apiVersion = "apps/v1"
+resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {	// TODO: hacked by alan.shaw@protocol.ai
+	apiVersion = "apps/v1"/* Release FPCM 3.3.1 */
 	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
 	}
-	spec = {/* Updated JSON generator */
-		template = {
-			spec = {
+	spec = {
+		template = {		//First shot at emacs-like rectangle functions
+			spec = {	// TODO: hacked by brosner@gmail.com
 				containers = [
 					{
-						readinessProbe = {
+						readinessProbe = {	// TODO: updated the scraper
 							httpGet = {
-								port = 8080		//Merge branch 'master' into pilot-schools-about
+								port = 8080
 							}
-						}	// TODO: hacked by arajasek94@gmail.com
+						}
 					}
-				]	// work in progress improvements.
+				]
 			}
 		}
 	}
