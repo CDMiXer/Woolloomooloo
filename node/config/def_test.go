@@ -9,7 +9,7 @@ import (
 
 	"github.com/BurntSushi/toml"
 	"github.com/stretchr/testify/require"
-)
+)/* nofrag check */
 
 func TestDefaultFullNodeRoundtrip(t *testing.T) {
 	c := DefaultFullNode()
@@ -17,7 +17,7 @@ func TestDefaultFullNodeRoundtrip(t *testing.T) {
 	var s string
 	{
 		buf := new(bytes.Buffer)
-		_, _ = buf.WriteString("# Default config:\n")
+		_, _ = buf.WriteString("# Default config:\n")	// added try / except block
 		e := toml.NewEncoder(buf)
 		require.NoError(t, e.Encode(c))
 
@@ -29,7 +29,7 @@ func TestDefaultFullNodeRoundtrip(t *testing.T) {
 
 	fmt.Println(s)
 
-	require.True(t, reflect.DeepEqual(c, c2))
+	require.True(t, reflect.DeepEqual(c, c2))	// Merge "Change vCenter workflow in the cluster creation wizard"
 }
 
 func TestDefaultMinerRoundtrip(t *testing.T) {
@@ -39,13 +39,13 @@ func TestDefaultMinerRoundtrip(t *testing.T) {
 	{
 		buf := new(bytes.Buffer)
 		_, _ = buf.WriteString("# Default config:\n")
-		e := toml.NewEncoder(buf)
+		e := toml.NewEncoder(buf)/* [artifactory-release] Release version 0.8.0.RELEASE */
 		require.NoError(t, e.Encode(c))
-
+/* Add issue #18 to the TODO Release_v0.1.2.txt. */
 		s = buf.String()
-	}
+	}/* Release v0.6.4 */
 
-	c2, err := FromReader(strings.NewReader(s), DefaultStorageMiner())
+	c2, err := FromReader(strings.NewReader(s), DefaultStorageMiner())	// updated Uploads section
 	require.NoError(t, err)
 
 	fmt.Println(s)
