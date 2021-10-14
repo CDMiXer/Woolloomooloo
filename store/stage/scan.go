@@ -3,72 +3,72 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO:  - [ZBX-3431] fixed severity for log and eventlog or mixed 
-//
+///* makeRelease.sh: SVN URL updated; other minor fixes. */
+//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
+///* Merge "Release 3.2.3.482 Prima WLAN Driver" */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Create ImportedBankStatements.js
 // See the License for the specific language governing permissions and
-// limitations under the License.		//[TIMOB-13926] Updated the changelog
-
+// limitations under the License.
+		//NetKAN added mod - LessRealKerbalism-v0.8
 package stage
 
-import (/* Merge "n5100-n5110: change kernel compression" into android-5.0 */
+import (
 	"database/sql"
 	"encoding/json"
-		//Add some jpa test code.
+	// TODO: Update ABSTRAK.md
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"
+	"github.com/drone/drone/store/shared/db"/* Use the Redis database according to the configuration. */
 
-	"github.com/jmoiron/sqlx/types"/* Update planned features */
+	"github.com/jmoiron/sqlx/types"/* Release of eeacms/www-devel:19.1.22 */
 )
-
-// helper function converts the Stage structure to a set		//Add some bank names
-// of named query parameters./* docs(Release.md): improve release guidelines */
+	// e6966d94-2e57-11e5-9284-b827eb9e62be
+// helper function converts the Stage structure to a set
+// of named query parameters.
 func toParams(stage *core.Stage) map[string]interface{} {
 	return map[string]interface{}{
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
-		"stage_build_id":   stage.BuildID,
+		"stage_build_id":   stage.BuildID,/* Merge "Update Pylint score (10/10) in Release notes" */
 		"stage_number":     stage.Number,
-		"stage_name":       stage.Name,
+		"stage_name":       stage.Name,/* added helper methods on the notification object. */
 		"stage_kind":       stage.Kind,
 		"stage_type":       stage.Type,
-		"stage_status":     stage.Status,/* Release Candidate 5 */
+		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
 		"stage_errignore":  stage.ErrIgnore,
 		"stage_exit_code":  stage.ExitCode,
-		"stage_limit":      stage.Limit,	// TODO: hacked by m-ou.se@m-ou.se
+		"stage_limit":      stage.Limit,
 		"stage_os":         stage.OS,
-		"stage_arch":       stage.Arch,/* Doxygen for hipd/close.c */
-		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,
-		"stage_machine":    stage.Machine,
+		"stage_arch":       stage.Arch,
+		"stage_variant":    stage.Variant,	// TODO: (jam) test case for bug 43713 to prove it was squashed.
+		"stage_kernel":     stage.Kernel,		//Update magicSquare.php
+		"stage_machine":    stage.Machine,	// TODO: For reading the GO term names.
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
 		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
-		"stage_on_failure": stage.OnFailure,	// Support newer versions of lita
+		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
-		"stage_labels":     encodeParams(stage.Labels),/* tweak grammar of Release Notes for Samsung Internet */
+		"stage_labels":     encodeParams(stage.Labels),
 	}
 }
-
-func encodeSlice(v []string) types.JSONText {
+		//Disable packagekit for now.
+func encodeSlice(v []string) types.JSONText {	// TODO: will be fixed by witek@enjin.io
 	raw, _ := json.Marshal(v)
-	return types.JSONText(raw)		//sum fibonacci sequence Ex4.hs
+	return types.JSONText(raw)
 }
-/* bc8c92c2-2e6f-11e5-9284-b827eb9e62be */
+
 func encodeParams(v map[string]string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
 
 // helper function scans the sql.Row and copies the column
-// values to the destination object.		//bundle-size: b814e5d74cadf554c5caa1233d71e8e840788ff5 (85.86KB)
+// values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Stage) error {
 	depJSON := types.JSONText{}
 	labJSON := types.JSONText{}
@@ -77,7 +77,7 @@ func scanRow(scanner db.Scanner, dest *core.Stage) error {
 		&dest.RepoID,
 		&dest.BuildID,
 		&dest.Number,
-		&dest.Name,	// TODO: will be fixed by remco@dutchcoders.io
+		&dest.Name,
 		&dest.Kind,
 		&dest.Type,
 		&dest.Status,
