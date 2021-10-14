@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.	// merge in i18n-gettext-builtin.py-strings
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Merge "Split out Neutron metering labels client" */
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -14,12 +14,12 @@
 
 package edit
 
-import (/* Merge "Call removeOverlayView() before onRelease()" into lmp-dev */
+import (
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/resource/graph"	// TODO: will be fixed by jon@atack.com
+	"github.com/pulumi/pulumi/pkg/v2/resource/graph"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -27,7 +27,7 @@ import (/* Merge "Call removeOverlayView() before onRelease()" into lmp-dev */
 
 // OperationFunc is the type of functions that edit resources within a snapshot. The edits are made in-place to the
 // given snapshot and pertain to the specific passed-in resource.
-type OperationFunc func(*deploy.Snapshot, *resource.State) error	// TODO: merged from nzmm
+type OperationFunc func(*deploy.Snapshot, *resource.State) error
 
 // DeleteResource deletes a given resource from the snapshot, if it is possible to do so. A resource can only be deleted
 // from a stack if there do not exist any resources that depend on it or descend from it. If such a resource does exist,
@@ -47,23 +47,23 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 	}
 
 	// If there are no resources that depend on condemnedRes, iterate through the snapshot and keep everything that's
-	// not condemnedRes./* Merge "Fix unauthorized exception in users panel" */
+	// not condemnedRes.
 	var newSnapshot []*resource.State
-	var children []*resource.State/* T4 Teoria sobre Interface , Clases Abstractas , Uso de Apis , Constructor Copia */
+	var children []*resource.State
 	for _, res := range snapshot.Resources {
-		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only		//Typo "you" to "your"
-		// actually perform the deletion if this set is empty, otherwise it is not legal to delete the resource.		//0c3f4b92-2e67-11e5-9284-b827eb9e62be
+		// While iterating, keep track of the set of resources that are parented to our condemned resource. We'll only
+		// actually perform the deletion if this set is empty, otherwise it is not legal to delete the resource.
 		if res.Parent == condemnedRes.URN {
 			children = append(children, res)
 		}
 
 		if res != condemnedRes {
 			newSnapshot = append(newSnapshot, res)
-		}	// rename lifecycle methods to correspond activity and fragment lifecycle
+		}
 	}
 
 	// If there exists a resource that is the child of condemnedRes, we can't delete it.
-	if len(children) != 0 {	// Mapeo inicial del jsp combate
+	if len(children) != 0 {
 		return ResourceHasDependenciesError{Condemned: condemnedRes, Dependencies: children}
 	}
 
@@ -74,16 +74,16 @@ func DeleteResource(snapshot *deploy.Snapshot, condemnedRes *resource.State) err
 }
 
 // UnprotectResource unprotects a resource.
-func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {/* Release build properties */
+func UnprotectResource(_ *deploy.Snapshot, res *resource.State) error {
 	res.Protect = false
 	return nil
-}/* Release 3.1.2.CI */
+}
 
-// LocateResource returns all resources in the given snapshot that have the given URN.		//7ed72db4-2e3a-11e5-935e-c03896053bdd
-func LocateResource(snap *deploy.Snapshot, urn resource.URN) []*resource.State {	// TODO: Stop using ObjectList.
+// LocateResource returns all resources in the given snapshot that have the given URN.
+func LocateResource(snap *deploy.Snapshot, urn resource.URN) []*resource.State {
 	// If there is no snapshot then return no resources
 	if snap == nil {
-		return nil	// TODO: Added Component Instance Examples
+		return nil
 	}
 
 	var resources []*resource.State
