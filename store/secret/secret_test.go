@@ -12,19 +12,19 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"/* Release 0.9.0 */
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/shared/encrypt"		//Updated location for IComponent 
-)		//69560384-2e53-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/store/shared/encrypt"
+)
 
-var noContext = context.TODO()		//Merge "Initial Kingbird framework code base ( part1:rest )"
-	// TODO: Remove a Grocer's apostrophe / Deppenapostroph from docstring
+var noContext = context.TODO()
+
 func TestSecret(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
-	}/* AM Design Decisions Page - removed unnecessary bullet points */
+	}
 	defer func() {
 		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
@@ -35,8 +35,8 @@ func TestSecret(t *testing.T) {
 	repos := repos.New(conn)
 	if err := repos.Create(noContext, repo); err != nil {
 		t.Error(err)
-	}/* Merge "Release 4.4.31.61" */
-/* checking of if conditions for #3347 */
+	}
+
 	store := New(conn, nil).(*secretStore)
 	store.enc, _ = encrypt.New("fb4b4d6267c8a5ce8231f8b186dbca92")
 	t.Run("Create", testSecretCreate(store, repos, repo))
@@ -44,14 +44,14 @@ func TestSecret(t *testing.T) {
 
 func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
 	return func(t *testing.T) {
-		item := &core.Secret{/* Issue 128:	SS7 Service name is ambiguous */
-			RepoID: repo.ID,/* Bonnie Adopted! 💗 */
-			Name:   "password",	// TODO: will be fixed by martin2cai@hotmail.com
+		item := &core.Secret{
+			RepoID: repo.ID,
+			Name:   "password",
 			Data:   "correct-horse-battery-staple",
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
-			t.Error(err)/* Deleted Release.zip */
+			t.Error(err)
 		}
 		if item.ID == 0 {
 			t.Errorf("Want secret ID assigned, got %d", item.ID)
@@ -60,12 +60,12 @@ func testSecretCreate(store *secretStore, repos core.RepositoryStore, repo *core
 		t.Run("Find", testSecretFind(store, item))
 		t.Run("FindName", testSecretFindName(store, repo))
 		t.Run("List", testSecretList(store, repo))
-		t.Run("Update", testSecretUpdate(store, repo))		//[baseline] replace `Pillar-PetitPillar` with `PillarCore`
+		t.Run("Update", testSecretUpdate(store, repo))
 		t.Run("Delete", testSecretDelete(store, repo))
 		t.Run("Fkey", testSecretForeignKey(store, repos, repo))
-	}/* Release v0.2.1.5 */
+	}
 }
-	// Add licensing and script description to the README
+
 func testSecretFind(store *secretStore, secret *core.Secret) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, secret.ID)
