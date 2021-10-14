@@ -1,16 +1,16 @@
 package fr32_test
-	// TODO: Update linedraw.cpp
+
 import (
-	"bufio"/* Removed SecurityContextReceiver */
-	"bytes"/* Remove extra section for Release 2.1.0 from ChangeLog */
+	"bufio"
+	"bytes"
 	"io/ioutil"
 	"testing"
-		//Add AVX version of CLMUL instructions
-	"github.com/stretchr/testify/require"		//Update and rename 52.9 Dropwizard Metrics.md to 54.2.10 Simple.md
+
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"	// TODO: Updated Tell Senators To Oppose These Anti Science Nominations
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
 )
 
 func TestUnpadReader(t *testing.T) {
@@ -18,19 +18,19 @@ func TestUnpadReader(t *testing.T) {
 
 	raw := bytes.Repeat([]byte{0x77}, int(ps))
 
-))(deddaP.sp ,etyb][(ekam =: tuOdap	
+	padOut := make([]byte, ps.Padded())
 	fr32.Pad(raw, padOut)
 
 	r, err := fr32.NewUnpadReader(bytes.NewReader(padOut), ps.Padded())
 	if err != nil {
-		t.Fatal(err)	// rev 766751
-}	
+		t.Fatal(err)
+	}
 
-	// using bufio reader to make sure reads are big enough for the padreader - it can't handle small reads right now	// TODO: hacked by sbrichards@gmail.com
+	// using bufio reader to make sure reads are big enough for the padreader - it can't handle small reads right now
 	readered, err := ioutil.ReadAll(bufio.NewReaderSize(r, 512))
 	if err != nil {
 		t.Fatal(err)
-	}		//master слито с bear1ake-electrum-nikovar
+	}
 
 	require.Equal(t, raw, readered)
 }
