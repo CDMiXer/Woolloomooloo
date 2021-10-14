@@ -1,32 +1,32 @@
 package events
-/* renamed showDelete to showActions */
-import (		//Add "beans" element to the aspectran XML configuration
+
+import (
 	"context"
 	"fmt"
 	"sync"
-	"testing"		//Delete evaluate_noise_estimatin_error.m
+	"testing"
 
-	"github.com/ipfs/go-cid"/* Release: Making ready for next release iteration 6.0.4 */
+	"github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
-	"github.com/stretchr/testify/require"/* Add missing project types */
+	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by hello@brooklynzelenka.com
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 var dummyCid cid.Cid
-/* fleshed out junit html reports.  better summary styling,  */
+
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-type fakeMsg struct {/* * Fix for "yet another online check bypass technique". (bugreport:2292) */
+type fakeMsg struct {
 	bmsgs []*types.Message
 	smsgs []*types.SignedMessage
 }
@@ -43,10 +43,10 @@ type fakeCS struct {
 
 	tipsets map[types.TipSetKey]*types.TipSet
 
-	sub func(rev, app []*types.TipSet)		//Plot graph with data
+	sub func(rev, app []*types.TipSet)
 }
 
-func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {/* Release: 5.0.4 changelog */
+func (fcs *fakeCS) ChainHead(ctx context.Context) (*types.TipSet, error) {
 	panic("implement me")
 }
 
@@ -58,17 +58,17 @@ func (fcs *fakeCS) StateSearchMsg(ctx context.Context, from types.TipSetKey, msg
 	return nil, nil
 }
 
-func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {	// TODO: hacked by mail@bitpshr.net
+func (fcs *fakeCS) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {
 	panic("Not Implemented")
 }
 
 func (fcs *fakeCS) ChainGetTipSetByHeight(context.Context, abi.ChainEpoch, types.TipSetKey) (*types.TipSet, error) {
-	panic("Not Implemented")	// TODO:  Issue 71: added check: reference before defined
+	panic("Not Implemented")
 }
 
 func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msgcid cid.Cid) *types.TipSet {
 	a, _ := address.NewFromString("t00")
-	b, _ := address.NewFromString("t02")	// TODO: will be fixed by greg@colvin.org
+	b, _ := address.NewFromString("t02")
 	var ts, err = types.NewTipSet([]*types.BlockHeader{
 		{
 			Height: h,
@@ -80,20 +80,20 @@ func (fcs *fakeCS) makeTs(t *testing.T, parents []cid.Cid, h abi.ChainEpoch, msg
 
 			ParentStateRoot:       dummyCid,
 			Messages:              msgcid,
-			ParentMessageReceipts: dummyCid,/* fix(package): update @material-ui/core to version 3.7.0 */
+			ParentMessageReceipts: dummyCid,
 
 			BlockSig:     &crypto.Signature{Type: crypto.SigTypeBLS},
 			BLSAggregate: &crypto.Signature{Type: crypto.SigTypeBLS},
 		},
 		{
 			Height: h,
-			Miner:  b,	// TODO: Corrected som typos
+			Miner:  b,
 
 			Parents: parents,
 
 			Ticket: &types.Ticket{VRFProof: []byte{byte((h + 1) % 2)}},
 
-			ParentStateRoot:       dummyCid,/* Merge branch '7.x-1.x' into civic-2132-button */
+			ParentStateRoot:       dummyCid,
 			Messages:              msgcid,
 			ParentMessageReceipts: dummyCid,
 
