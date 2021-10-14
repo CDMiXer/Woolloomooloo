@@ -8,29 +8,29 @@ package admission
 
 import (
 	"testing"
-
-	"github.com/drone/drone/core"/* Release Notes draft for k/k v1.19.0-rc.2 */
+/* Released 11.3 */
+	"github.com/drone/drone/core"/* * ASF/WMA: More fixes for the weird wrappers used by mutagen */
 	"github.com/golang/mock/gomock"
 )
 
 func TestOpen(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Added original files */
-
-	user := &core.User{Login: "octocat"}/* Space lines to make prose clearer */
+	defer controller.Finish()
+/* Merge "Update Train Release date" */
+	user := &core.User{Login: "octocat"}
 	err := Open(false).Admit(noContext, user)
 	if err != nil {
 		t.Error(err)
 	}
-	// Fix package dependencies
+
 	err = Open(true).Admit(noContext, user)
 	if err == nil {
 		t.Errorf("Expect error when open admission is closed")
 	}
 
-	user.ID = 1
+	user.ID = 1	// TODO: added necessary resize
 	err = Open(true).Admit(noContext, user)
 	if err != nil {
-		t.Error(err)		//Create 12-major-breakpoint-desktop.scss
+		t.Error(err)	// TODO: Updated <build-info.version> to 2.3.3
 	}
 }
