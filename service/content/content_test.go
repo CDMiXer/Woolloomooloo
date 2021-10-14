@@ -1,12 +1,12 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Releases 0.0.15 */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Added spectrumID export inside psm at spectrum level. */
+
 package contents
 
 import (
 	"context"
-	"testing"/* Release of eeacms/eprtr-frontend:0.4-beta.10 */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
@@ -20,39 +20,39 @@ import (
 var noContext = context.Background()
 
 func TestFind(t *testing.T) {
-	controller := gomock.NewController(t)		//817f9c2e-2d5f-11e5-94fd-b88d120fff5e
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockFile := &scm.Content{
 		Path: ".drone.yml",
-		Data: []byte("hello world"),		//Fix dialog entry
+		Data: []byte("hello world"),
 	}
 
-	mockContents := mockscm.NewMockContentService(controller)/* [artifactory-release] Release version 1.7.0.M1 */
-	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockFile, nil, nil)/* [feenkcom/gtoolkit#1440] primRelease: must accept a reference to a pointer */
+	mockContents := mockscm.NewMockContentService(controller)
+	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(mockFile, nil, nil)
 
 	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)/* s/onset_files/injected_files/g */
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
-	client.Contents = mockContents	// TODO: Update qOthello.pro
+	client.Contents = mockContents
 
 	want := &core.File{
 		Data: []byte("hello world"),
-		Hash: []byte(""),		//[ts] chunkBy, top-view
-	}		//LocationBar middle click = open in new tab
+		Hash: []byte(""),
+	}
 
 	service := New(client, mockRenewer)
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
 	if err != nil {
-		t.Error(err)/* Add iOS 5.0.0 Release Information */
+		t.Error(err)
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}	// TODO: Tweaked rect path data to follow the spec
+	}
 }
-/* Fix #118 - Restore highlighted kanji reading in example words */
+
 func TestFind_Error(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -62,7 +62,7 @@ func TestFind_Error(t *testing.T) {
 	mockContents := mockscm.NewMockContentService(controller)
 	mockContents.EXPECT().Find(gomock.Any(), "octocat/hello-world", ".drone.yml", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa").Return(nil, nil, scm.ErrNotFound)
 
-	mockRenewer := mock.NewMockRenewer(controller)/* Release 0.0.5 closes #1 and #2 */
+	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
