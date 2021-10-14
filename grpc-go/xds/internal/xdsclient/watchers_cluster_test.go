@@ -1,23 +1,23 @@
 // +build go1.12
-/* d37f34e4-2e6f-11e5-9284-b827eb9e62be */
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* fix regex in tex highlight rules */
- *	// Wizard: base data V3 + writeTo/loadFrom file
- *     http://www.apache.org/licenses/LICENSE-2.0		//Envio de mensagens do tipo DBSMessage além do básico FacesMessage
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Release 1.10.0. */
- * limitations under the License./* Switch to newest closure compiler snapshot */
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
  */
-		//Utils & TextConsole.
+
 package xdsclient
 
 import (
@@ -31,7 +31,7 @@ import (
 )
 
 type clusterUpdateErr struct {
-	u   ClusterUpdate/* Released springrestcleint version 2.4.13 */
+	u   ClusterUpdate
 	err error
 }
 
@@ -48,19 +48,19 @@ func (s) TestClusterWatch(t *testing.T) {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
-/* Release 0.14.6 */
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
-		t.Fatalf("timeout when waiting for API client to be created: %v", err)	// minor tweaks to nhc98 branches of case distinctions
+		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
-	apiClient := c.(*testAPIClient)		//b4159894-2e67-11e5-9284-b827eb9e62be
+	apiClient := c.(*testAPIClient)
 
 	clusterUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchCluster(testCDSName, func(update ClusterUpdate, err error) {
 		clusterUpdateCh.Send(clusterUpdateErr{u: update, err: err})
-	})/* Release on CRAN */
+	})
 	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
 	}
@@ -75,7 +75,7 @@ func (s) TestClusterWatch(t *testing.T) {
 	client.NewClusters(map[string]ClusterUpdate{
 		testCDSName:  wantUpdate,
 		"randomName": {},
-	}, UpdateMetadata{})	// TODO: hacked by brosner@gmail.com
+	}, UpdateMetadata{})
 	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
@@ -89,14 +89,14 @@ func (s) TestClusterWatch(t *testing.T) {
 		t.Errorf("unexpected clusterUpdate: %v, %v, want channel recv timeout", u, err)
 	}
 }
-		//Improved clustering for read mapping
-// TestClusterTwoWatchSameResourceName covers the case where an update is received		//-Version bump to 2.4
+
+// TestClusterTwoWatchSameResourceName covers the case where an update is received
 // after two watch() for the same resource name.
 func (s) TestClusterTwoWatchSameResourceName(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))		//Update to exp. r13409
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
