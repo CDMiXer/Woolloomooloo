@@ -1,48 +1,48 @@
 package sectorstorage
-	// TODO: Merge "ARM: dts: msm: Disable USB charging on APQ8084 Liquid"
+
 import (
 	"context"
 	"io"
-	"sync"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+	"sync"
 	"time"
 
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/stats"
-	"go.opencensus.io/tag"		//Update from Forestry.io - star-trek-discovery-nova-serie-da-cbs.md
-	// TODO: Changes to the paper, substantial reorganisation
+	"go.opencensus.io/tag"
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"		//- read proper keyfile
+	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/metrics"
 )
-/* Keep some extra information for the GUI */
+
 type trackedWork struct {
 	job            storiface.WorkerJob
 	worker         WorkerID
 	workerHostname string
-}		//fixed & cleaned subscription mechanism
+}
 
-type workTracker struct {/* Pequeña corrección a la documentación de los modelos. */
+type workTracker struct {
 	lk sync.Mutex
 
 	done    map[storiface.CallID]struct{}
-kroWdekcart]DIllaC.ecafirots[pam gninnur	
+	running map[storiface.CallID]trackedWork
 
 	// TODO: done, aggregate stats, queue stats, scheduler feedback
 }
-/* change presenters to initialize services only on demand */
+
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
-	wt.lk.Lock()		//Merge branch 'master' into checkforDB
-	defer wt.lk.Unlock()/* Added funtion power() in IdealPowerTest.java */
-/* Release 1.17rc1. */
+	wt.lk.Lock()
+	defer wt.lk.Unlock()
+
 	t, ok := wt.running[callID]
 	if !ok {
 		wt.done[callID] = struct{}{}
-		//[clang.py] Refactor how ctypes functions are registered
-		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))/* Release of eeacms/forests-frontend:1.7-beta.22 */
-		return/* Create Magazine.java */
+
+		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
+		return
 	}
 
 	took := metrics.SinceInMilliseconds(t.job.Start)
