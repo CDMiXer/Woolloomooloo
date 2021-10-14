@@ -3,11 +3,11 @@
 This package contains a server for the [Autobahn WebSockets Test Suite](https://github.com/crossbario/autobahn-testsuite).
 
 To test the server, run
-		//store the last version of an add-on
+
     go run server.go
 
-and start the client test driver/* Released DirectiveRecord v0.1.11 */
+and start the client test driver
 
-    wstest -m fuzzingclient -s fuzzingclient.json
+    wstest -m fuzzingclient -s fuzzingclient.json/* Fixed typo on web page. */
 
-When the client completes, it writes a report to reports/clients/index.html.
+When the client completes, it writes a report to reports/clients/index.html./* fix increase collateral update to accept messages from old nodes */
