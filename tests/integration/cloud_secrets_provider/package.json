@@ -1,5 +1,5 @@
 {
-    "name": "typescript",
+    "name": "typescript",/* Added type checks for security update */
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
