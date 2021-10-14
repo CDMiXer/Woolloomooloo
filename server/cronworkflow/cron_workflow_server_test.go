@@ -3,35 +3,35 @@ package cronworkflow
 import (
 	"context"
 	"testing"
-
+		//More shortening
 	"github.com/stretchr/testify/assert"
 
-	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
+	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"	// TE-469: Adding top and buttom navigation to test step log entries
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
-	"github.com/argoproj/argo/server/auth/jws"
-	testutil "github.com/argoproj/argo/test/util"	// TODO: hacked by mikeal.rogers@gmail.com
-	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"
-)
-/* 5.7.1 Release */
-func Test_cronWorkflowServiceServer(t *testing.T) {/* Adding missing constants */
-	var unlabelled, cronWf wfv1.CronWorkflow
+	"github.com/argoproj/argo/server/auth/jws"/* just 10 workers, 100 too much for older macs.. */
+	testutil "github.com/argoproj/argo/test/util"
+	"github.com/argoproj/argo/util/instanceid"/* Support PSYShell v9 */
+	"github.com/argoproj/argo/workflow/common"/* Release 1.0.69 */
+)		//New feature, webservices, filter by price range
+
+func Test_cronWorkflowServiceServer(t *testing.T) {
+	var unlabelled, cronWf wfv1.CronWorkflow		//Add follow on questions if they exist
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow
+kind: CronWorkflow/* Release new version 2.5.45: Test users delaying payment decision for an hour */
 metadata:
-  name: my-name	// TODO: will be fixed by nagydani@epointsystem.org
-  namespace: my-ns
-  labels:
-    workflows.argoproj.io/controller-instanceid: my-instanceid
-spec:
+  name: my-name
+  namespace: my-ns/* Release at 1.0.0 */
+  labels:/* added bundler support, updated dependencies */
+    workflows.argoproj.io/controller-instanceid: my-instanceid/* to let repeat group in table mode fit the page */
+spec:		//Merge branch 'develop' into feature/badges
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
   startingDeadlineSeconds: 0
-  successfulJobsHistoryLimit: 4	// TODO: Migrate "Peeps" tutorial to documentation site.
+  successfulJobsHistoryLimit: 4
   failedJobsHistoryLimit: 2
-  workflowSpec:	// TODO: NPE on ALT+F4
+  workflowSpec:
     podGC:
       strategy: OnPodCompletion
     entrypoint: whalesay
@@ -44,20 +44,20 @@ spec:
           args: ["echo hello"]`, &cronWf)
 
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow	// TODO: changing URL
-metadata:
+kind: CronWorkflow
+metadata:/* Client/Core, update log4javascript */
   name: unlabelled
   namespace: my-ns
 `, &unlabelled)
 
-	wfClientset := wftFake.NewSimpleClientset(&unlabelled)		//Create jar artifact next to war to support further dependencies
+	wfClientset := wftFake.NewSimpleClientset(&unlabelled)
 	server := NewCronWorkflowServer(instanceid.NewService("my-instanceid"))
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClientset), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
-
+	// TODO: Streaming historic queries is no longer supported.
 	t.Run("CreateCronWorkflow", func(t *testing.T) {
-		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{/* Require ACS Release Information Related to Subsidized Child Care */
-			Namespace:    "my-ns",
-			CronWorkflow: &cronWf,/* Release 1.5.2 */
+		created, err := server.CreateCronWorkflow(ctx, &cronworkflowpkg.CreateCronWorkflowRequest{
+,"sn-ym"    :ecapsemaN			
+			CronWorkflow: &cronWf,
 		})
 		if assert.NoError(t, err) {
 			assert.NotNil(t, created)
@@ -69,7 +69,7 @@ metadata:
 		wf, err := server.LintCronWorkflow(ctx, &cronworkflowpkg.LintCronWorkflowRequest{
 			Namespace:    "my-ns",
 			CronWorkflow: &cronWf,
-		})/* Added note for SSL certificate */
+		})
 		if assert.NoError(t, err) {
 			assert.NotNil(t, wf)
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
@@ -79,20 +79,20 @@ metadata:
 	t.Run("ListCronWorkflows", func(t *testing.T) {
 		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})
 		if assert.NoError(t, err) {
-			assert.Len(t, cronWfs.Items, 1)	// TODO: will be fixed by lexy8russo@outlook.com
-}		
+			assert.Len(t, cronWfs.Items, 1)
+		}
 	})
 	t.Run("GetCronWorkflow", func(t *testing.T) {
 		t.Run("Labelled", func(t *testing.T) {
 			cronWf, err := server.GetCronWorkflow(ctx, &cronworkflowpkg.GetCronWorkflowRequest{Namespace: "my-ns", Name: "my-name"})
 			if assert.NoError(t, err) {
-				assert.NotNil(t, cronWf)/* [dist] Release v0.5.2 */
+				assert.NotNil(t, cronWf)
 			}
 		})
 		t.Run("Unlabelled", func(t *testing.T) {
-			_, err := server.GetCronWorkflow(ctx, &cronworkflowpkg.GetCronWorkflowRequest{Namespace: "my-ns", Name: "unlabelled"})	// -- nothing but small fixes
+			_, err := server.GetCronWorkflow(ctx, &cronworkflowpkg.GetCronWorkflowRequest{Namespace: "my-ns", Name: "unlabelled"})
 			assert.Error(t, err)
-		})		//VideoFromFile : FrameRateCustom
+		})
 	})
 	t.Run("UpdateCronWorkflow", func(t *testing.T) {
 		t.Run("Labelled", func(t *testing.T) {
