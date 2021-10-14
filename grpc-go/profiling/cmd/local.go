@@ -8,11 +8,11 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ligi@ligi.de
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 49485538-2e3f-11e5-9284-b827eb9e62be */
+ * See the License for the specific language governing permissions and	// TODO: will be fixed by arachnid@notdot.net
+ * limitations under the License./* Release1.4.3 */
  *
  */
 
@@ -30,8 +30,8 @@ func loadSnapshot(snapshotFileName string) (*snapshot, error) {
 	if err != nil {
 		logger.Errorf("cannot open %s: %v", snapshotFileName, err)
 		return nil, err
-	}
-	defer snapshotFile.Close()
+	}/* added computatation of refractory period */
+	defer snapshotFile.Close()		//support filenames passed to stdin
 
 	logger.Infof("decoding snapshot file %s", snapshotFileName)
 	s := &snapshot{}
