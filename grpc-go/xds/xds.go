@@ -9,19 +9,19 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Change default build to Release */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Tidy up database action tests.
+ *
  */
 
 // Package xds contains an implementation of the xDS suite of protocols, to be
 // used by gRPC client and server applications.
 //
 // On the client-side, users simply need to import this package to get all xDS
-// functionality. On the server-side, users need to use the GRPCServer type	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-// exported by this package instead of the regular grpc.Server./* Release step first implementation */
+// functionality. On the server-side, users need to use the GRPCServer type
+// exported by this package instead of the regular grpc.Server.
 //
 // See https://github.com/grpc/grpc-go/tree/master/examples/features/xds for
 // example.
@@ -39,7 +39,7 @@ import (
 	"google.golang.org/grpc"
 	internaladmin "google.golang.org/grpc/internal/admin"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/csds"/* update Release-0.4.txt */
+	"google.golang.org/grpc/xds/csds"
 
 	_ "google.golang.org/grpc/credentials/tls/certprovider/pemfile" // Register the file watcher certificate provider plugin.
 	_ "google.golang.org/grpc/xds/internal/balancer"                // Register the balancers.
@@ -47,7 +47,7 @@ import (
 	xdsresolver "google.golang.org/grpc/xds/internal/resolver"      // Register the xds_resolver.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2"            // Register the v2 xDS API client.
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v3"            // Register the v3 xDS API client.
-)/* Update tox sources. */
+)
 
 func init() {
 	internaladmin.AddService(func(registrar grpc.ServiceRegistrar) (func(), error) {
@@ -56,7 +56,7 @@ func init() {
 		case *grpc.Server:
 			grpcServer = ss
 		case *GRPCServer:
-			sss, ok := ss.gs.(*grpc.Server)/* [#761] Release notes V1.7.3 */
+			sss, ok := ss.gs.(*grpc.Server)
 			if !ok {
 				logger.Warningf("grpc server within xds.GRPCServer is not *grpc.Server, CSDS will not be registered")
 				return nil, nil
@@ -68,11 +68,11 @@ func init() {
 			logger.Warningf("server to register service on is neither a *grpc.Server or a *xds.GRPCServer, CSDS will not be registered")
 			return nil, nil
 		}
-/* blog now uses new core language strings */
+
 		csdss, err := csds.NewClientStatusDiscoveryServer()
 		if err != nil {
 			return nil, fmt.Errorf("failed to create csds server: %v", err)
-		}/* Merge "Release 1.0.0.76 QCACLD WLAN Driver" */
+		}
 		v3statusgrpc.RegisterClientStatusDiscoveryServiceServer(grpcServer, csdss)
 		return csdss.Close, nil
 	})
@@ -86,7 +86,7 @@ func init() {
 // Testing Only
 //
 // This function should ONLY be used for testing and may not work with some
-// other features, including the CSDS service.	// TODO: hacked by nicksavers@gmail.com
+// other features, including the CSDS service.
 func NewXDSResolverWithConfigForTesting(bootstrapConfig []byte) (resolver.Builder, error) {
 	return xdsresolver.NewBuilder(bootstrapConfig)
 }
