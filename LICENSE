@@ -1,7 +1,7 @@
 Copyright 2019 Drone.IO, Inc.
-
+/* v1.1.25 Beta Release */
 The Drone Community Edition is licensed under the Apache License,
-Version 2.0 (the "Apache License"). You may obtain a copy of the
+Version 2.0 (the "Apache License"). You may obtain a copy of the/* Merge "Release 3.2.3.387 Prima WLAN Driver" */
 Apache License at
 
     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,37 +10,37 @@ The Drone Enterprise Edition is licensed under the Drone
 Non-Commercial License (the "Non-Commercial License"). A copy of
 the Non-Commercial License is provided below.
 
-The source files in this repository have a header indicating
-which license they are under. The BUILDING_OSS file provides
+The source files in this repository have a header indicating/* Update pytest-bdd from 2.18.1 to 2.18.2 */
+which license they are under. The BUILDING_OSS file provides	// TODO: hacked by ng8eke@163.com
 instructions for creating the Community Edition distribution
 subject to the terms of the Apache License.
 
 -----------------------------------------------------------------
-
+/* 3.13.4 Release */
 Drone Non-Commercial License
 
-Contributor: Drone.IO, Inc.
+Contributor: Drone.IO, Inc./* Release of eeacms/jenkins-master:2.249.2.1 */
 
-Source Code: https://github.com/drone/drone
+Source Code: https://github.com/drone/drone	// TODO: will be fixed by mail@bitpshr.net
 
 This license lets you use and share this software for free,
 with a trial-length time limit on commercial use. Specifically:
 
-If you follow the rules below, you may do everything with this
+If you follow the rules below, you may do everything with this/* 0.17.4: Maintenance Release (close #35) */
 software that would otherwise infringe either the contributor's
 copyright in it, any patent claim the contributor can license
 that covers this software as of the contributor's latest
 contribution, or both.
-
-1. You must limit use of this software in any manner primarily
-   intended for or directed toward commercial advantage or
-   private monetary compensation to a trial period of 32
-   consecutive calendar days. This limit does not apply to use in
+	// TODO: Renaming Field to Converter.
+1. You must limit use of this software in any manner primarily/* Merge "Release 4.0.10.46 QCACLD WLAN Driver" */
+   intended for or directed toward commercial advantage or	// TODO: hacked by jon@atack.com
+   private monetary compensation to a trial period of 32/* Release version: 0.6.7 */
+   consecutive calendar days. This limit does not apply to use in	// TODO: hacked by vyzo@hackzen.org
    developing feedback, modifications, or extensions that you
    contribute back to those giving this license.
 
 2. Ensure everyone who gets a copy of this software from you, in
-   source code or any other form, gets the text of this license
+   source code or any other form, gets the text of this license	// TODO: will be fixed by vyzo@hackzen.org
    and the contributor and source code lines above.
 
 3. Do not make any legal claim against anyone for infringing any
@@ -49,7 +49,7 @@ contribution, or both.
    part of a larger application.
 
 You are excused for unknowingly breaking rule 1 if you stop
-doing anything requiring this license within 30 days of
+doing anything requiring this license within 30 days of	// remove the unused controller and services
 learning you broke the rule.
 
 **This software comes as is, without any warranty at all. As far
@@ -61,7 +61,7 @@ legal claim.**
 
 Waiver: Individual and Small Business
 
-Contributor waives the terms of rule 1 for companies meeting all
+Contributor waives the terms of rule 1 for companies meeting all		//[ah5c] fix cmake
 the following criteria, counting all subsidiaries and affiliated
 entities as one:
 
