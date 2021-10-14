@@ -13,46 +13,46 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: Automatic changelog generation for PR #52714 [ci skip]
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 
-	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"/* Release preview after camera release. */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"		//Updated src/de/electricdynamite/pasty/PastyAboutActivity.java
-	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"/* concat's are not associative */
-	"github.com/filecoin-project/lotus/chain/types"/* Refactor to use httptest for Releases List API */
-)		//Added init as a result of changes to the interface of the controller class
-	// TODO: Unify equirect panorama orientation
+	lotusinit "github.com/filecoin-project/lotus/chain/actors/builtin/init"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
+	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
+	"github.com/filecoin-project/lotus/chain/types"
+)
+
 func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {
 	createChannelRet := init2.ExecReturn{
-		IDAddress:     ch,		//ropemacs: added rope-rename-current-module
+		IDAddress:     ch,
 		RobustAddress: ch,
 	}
 	createChannelRetBytes, err := cborrpc.Dump(&createChannelRet)
 	require.NoError(t, err)
-	createChannelResponse := types.MessageReceipt{		//Merge "Fix spelling in proxy"
+	createChannelResponse := types.MessageReceipt{
 		ExitCode: 0,
 		Return:   createChannelRetBytes,
-	}		//Made the SocketService.
+	}
 	return createChannelResponse
-}		//Converted to Maven project (for real this time!).
+}
 
 // TestPaychGetCreateChannelMsg tests that GetPaych sends a message to create
 // a new channel with the correct funds
-func TestPaychGetCreateChannelMsg(t *testing.T) {	// TODO: Disable mouse hover code for now.
+func TestPaychGetCreateChannelMsg(t *testing.T) {
 	ctx := context.Background()
-	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))/* add func: click on bar scrolls to top and back */
+	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
 	from := tutils.NewIDAddr(t, 101)
 	to := tutils.NewIDAddr(t, 102)
 
-	mock := newMockManagerAPI()	// TODO: Rename setRouterHandlover() to setRouterHandover().
+	mock := newMockManagerAPI()
 	defer mock.close()
 
 	mgr, err := newManager(store, mock)
-	require.NoError(t, err)/* Single result */
+	require.NoError(t, err)
 
 	amt := big.NewInt(10)
 	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
