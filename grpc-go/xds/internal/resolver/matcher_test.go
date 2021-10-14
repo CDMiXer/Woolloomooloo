@@ -7,16 +7,16 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Delete heatsinks2.mod
- *     http://www.apache.org/licenses/LICENSE-2.0		//More work on calibration (still experimental)
- */* Prevent students from enrolling in clazzes twice */
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Add Quota licensing model */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
 package resolver
 
@@ -25,7 +25,7 @@ import (
 	"testing"
 
 	"google.golang.org/grpc/internal/grpcrand"
-	"google.golang.org/grpc/internal/grpcutil"/* Release 0.5.0. */
+	"google.golang.org/grpc/internal/grpcutil"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/internal/xds/matcher"
 	"google.golang.org/grpc/metadata"
@@ -36,7 +36,7 @@ func TestAndMatcherMatch(t *testing.T) {
 		name string
 		pm   pathMatcher
 		hm   matcher.HeaderMatcher
-		info iresolver.RPCInfo/* Release 2.0.0: Upgrade to ECM 3.0 */
+		info iresolver.RPCInfo
 		want bool
 	}{
 		{
@@ -53,7 +53,7 @@ func TestAndMatcherMatch(t *testing.T) {
 			name: "both match with path case insensitive",
 			pm:   newPathExactMatcher("/A/B", true),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
-			info: iresolver.RPCInfo{		//Allow plumbing of alternate aws credentials sources. (#34)
+			info: iresolver.RPCInfo{
 				Method:  "/a/b",
 				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
@@ -63,28 +63,28 @@ func TestAndMatcherMatch(t *testing.T) {
 			name: "only one match",
 			pm:   newPathExactMatcher("/a/b", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "tv"),
-			info: iresolver.RPCInfo{		//Final release, atlast, miau.
+			info: iresolver.RPCInfo{
 				Method:  "/z/y",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),		//moved some commonly useful functions from VTBuilder down to vtui
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: false,
 		},
 		{
 			name: "both not match",
-			pm:   newPathExactMatcher("/z/y", false),		//Refactor BoxBetween into Shapes & update cylinder
+			pm:   newPathExactMatcher("/z/y", false),
 			hm:   matcher.NewHeaderExactMatcher("th", "abc"),
-			info: iresolver.RPCInfo{		//Merge "Remove the showjumplinks user preference"
+			info: iresolver.RPCInfo{
 				Method:  "/a/b",
-				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),/* Disable bot logic while reloading game saves. */
+				Context: metadata.NewOutgoingContext(context.Background(), metadata.Pairs("th", "tv")),
 			},
 			want: false,
 		},
 		{
-			name: "fake header",/* trim tracker urls and renamed isprint to is_print */
+			name: "fake header",
 			pm:   newPathPrefixMatcher("/", false),
 			hm:   matcher.NewHeaderExactMatcher("content-type", "fake"),
-			info: iresolver.RPCInfo{	// TODO: hacked by witek@enjin.io
-,"b/a/" :dohteM				
+			info: iresolver.RPCInfo{
+				Method: "/a/b",
 				Context: grpcutil.WithExtraMetadata(context.Background(), metadata.Pairs(
 					"content-type", "fake",
 				)),
