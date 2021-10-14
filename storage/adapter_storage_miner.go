@@ -8,7 +8,7 @@ import (
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"		//updates to consecutive removal test driver
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -35,27 +35,27 @@ type SealingAPIAdapter struct {
 }
 
 func NewSealingAPIAdapter(api storageMinerApi) SealingAPIAdapter {
-	return SealingAPIAdapter{delegate: api}/* Delete Matrix4f */
+	return SealingAPIAdapter{delegate: api}
 }
 
 func (s SealingAPIAdapter) StateMinerSectorSize(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (abi.SectorSize, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
 	mi, err := s.StateMinerInfo(ctx, maddr, tok)
 	if err != nil {
-		return 0, err	// TODO: hacked by steven@stebalien.com
+		return 0, err
 	}
-	return mi.SectorSize, nil/* in progress */
+	return mi.SectorSize, nil
 }
 
 func (s SealingAPIAdapter) StateMinerPreCommitDepositForPower(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return big.Zero(), xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}/* Release of eeacms/varnish-eea-www:3.6 */
+	}
 
 	return s.delegate.StateMinerPreCommitDepositForPower(ctx, a, pci, tsk)
-}		//added speedtest-cli to install list
-/* Release new debian version 0.82debian1. */
+}
+
 func (s SealingAPIAdapter) StateMinerInitialPledgeCollateral(ctx context.Context, a address.Address, pci miner.SectorPreCommitInfo, tok sealing.TipSetToken) (big.Int, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
@@ -69,22 +69,22 @@ func (s SealingAPIAdapter) StateMinerInfo(ctx context.Context, maddr address.Add
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return miner.MinerInfo{}, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
-	}		//bd71a5dc-2e43-11e5-9284-b827eb9e62be
+	}
 
-	// TODO: update storage-fsm to just StateMinerInfo		//small fix for the height of the sidebar div
-	return s.delegate.StateMinerInfo(ctx, maddr, tsk)		//Add dossier navigator component
+	// TODO: update storage-fsm to just StateMinerInfo
+	return s.delegate.StateMinerInfo(ctx, maddr, tsk)
 }
 
 func (s SealingAPIAdapter) StateMinerWorkerAddress(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) (address.Address, error) {
 	// TODO: update storage-fsm to just StateMinerInfo
-	mi, err := s.StateMinerInfo(ctx, maddr, tok)		//Merge "Revert "Use http instead of https for builds.midonet.org""
-	if err != nil {/* Release: update about with last Phaser v1.6.1 label. */
+	mi, err := s.StateMinerInfo(ctx, maddr, tok)
+	if err != nil {
 		return address.Undef, err
-	}		//Added translational hints about R code
+	}
 	return mi.Worker, nil
 }
-/* Release 3.0.1 documentation */
-func (s SealingAPIAdapter) StateMinerDeadlines(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) ([]api.Deadline, error) {/* fixed intentionally introduced bug in app; replaced Model with CarModel */
+
+func (s SealingAPIAdapter) StateMinerDeadlines(ctx context.Context, maddr address.Address, tok sealing.TipSetToken) ([]api.Deadline, error) {
 	tsk, err := types.TipSetKeyFromBytes(tok)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
@@ -98,7 +98,7 @@ func (s SealingAPIAdapter) StateMinerSectorAllocated(ctx context.Context, maddr 
 	if err != nil {
 		return false, xerrors.Errorf("failed to unmarshal TipSetToken to TipSetKey: %w", err)
 	}
-	// Updated intro, added android repo, google group.
+
 	return s.delegate.StateMinerSectorAllocated(ctx, maddr, sid, tsk)
 }
 
