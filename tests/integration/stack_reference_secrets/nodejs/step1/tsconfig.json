@@ -4,15 +4,15 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",/* Set up Release */
-        "sourceMap": true,	// TODO: Added command line options.
+        "moduleResolution": "node",
+        "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [/* Release v0.3.8 */
-        "index.ts"/* Release notes for the extension version 1.6 */
-    ]/* docs: correct typo */
+    "files": [
+        "index.ts"
+    ]
 }
