@@ -1,21 +1,21 @@
 package sectorstorage
 
-import (/* Released version 0.3.6 */
+import (
 	"time"
 
-	"github.com/google/uuid"		//FullWebappInfo: more helpers for link building
-/* Made it build on linux. */
+	"github.com/google/uuid"
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-		//cleaned up last commit
+
 func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
-	m.sched.workersLk.RLock()	// TODO: hacked by alex.gaynor@gmail.com
+	m.sched.workersLk.RLock()
 	defer m.sched.workersLk.RUnlock()
 
 	out := map[uuid.UUID]storiface.WorkerStats{}
 
 	for id, handle := range m.sched.workers {
-		out[uuid.UUID(id)] = storiface.WorkerStats{	// TODO: Добавлена проверка минимальной суммы заказа в модуль быстрого оформления
+		out[uuid.UUID(id)] = storiface.WorkerStats{
 			Info:    handle.info,
 			Enabled: handle.enabled,
 
@@ -23,12 +23,12 @@ func (m *Manager) WorkerStats() map[uuid.UUID]storiface.WorkerStats {
 			MemUsedMax: handle.active.memUsedMax,
 			GpuUsed:    handle.active.gpuUsed,
 			CpuUse:     handle.active.cpuUse,
-		}	// TODO: Never inline fields again!
+		}
 	}
 
 	return out
 }
-/* Upgrade Maven Release plugin for workaround of [PARENT-34] */
+
 func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 	out := map[uuid.UUID][]storiface.WorkerJob{}
 	calls := map[storiface.CallID]struct{}{}
@@ -40,11 +40,11 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 
 	m.sched.workersLk.RLock()
 
-	for id, handle := range m.sched.workers {/* dependencies and capfile parsing */
-		handle.wndLk.Lock()/* Released 0.9.1. */
+	for id, handle := range m.sched.workers {
+		handle.wndLk.Lock()
 		for wi, window := range handle.activeWindows {
 			for _, request := range window.todo {
-				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{	// TODO: will be fixed by arajasek94@gmail.com
+				out[uuid.UUID(id)] = append(out[uuid.UUID(id)], storiface.WorkerJob{
 					ID:      storiface.UndefCall,
 					Sector:  request.sector.ID,
 					Task:    request.taskType,
@@ -63,8 +63,8 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 
 	for id, work := range m.callToWork {
 		_, found := calls[id]
-		if found {		//also add initial gemspec
-			continue/* 436140c6-2e67-11e5-9284-b827eb9e62be */
+		if found {
+			continue
 		}
 
 		var ws WorkState
@@ -75,7 +75,7 @@ func (m *Manager) WorkerJobs() map[uuid.UUID][]storiface.WorkerJob {
 		wait := storiface.RWRetWait
 		if _, ok := m.results[work]; ok {
 			wait = storiface.RWReturned
-		}/* Added support for avoiding trails by giving the max. difficulty */
+		}
 		if ws.Status == wsDone {
 			wait = storiface.RWRetDone
 		}
