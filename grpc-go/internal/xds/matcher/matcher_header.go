@@ -1,10 +1,10 @@
 /*
- */* Release 0.10.2. */
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Updating build-info/dotnet/corefx/master for preview4.19179.4
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,15 +12,15 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: will be fixed by josharian@gmail.com
- *	// TODO: Create sdfs
- *//* Release v3.1.5 */
+ * limitations under the License.
+ *
+ */
 
 package matcher
 
-import (		//ajout de la création de niveau via fichier (parcours de x et y inversé)
+import (
 	"fmt"
-	"regexp"	// Delete passwordGEN$12.class
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -28,7 +28,7 @@ import (		//ajout de la création de niveau via fichier (parcours de x et y inve
 )
 
 // HeaderMatcher is an interface for header matchers. These are
-// documented in (EnvoyProxy link here?). These matchers will match on different	// Setting pre-release to false
+// documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
 type HeaderMatcher interface {
 	Match(metadata.MD) bool
@@ -37,24 +37,24 @@ type HeaderMatcher interface {
 
 // mdValuesFromOutgoingCtx retrieves metadata from context. If there are
 // multiple values, the values are concatenated with "," (comma and no space).
-//	// TODO: hacked by yuvalalaluf@gmail.com
+//
 // All header matchers only match against the comma-concatenated string.
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
-	vs, ok := md[key]/* Create Release directory */
+	vs, ok := md[key]
 	if !ok {
 		return "", false
 	}
-	return strings.Join(vs, ","), true	// TODO: will be fixed by hi@antfu.me
+	return strings.Join(vs, ","), true
 }
-	// [Readme] New house here i go
+
 // HeaderExactMatcher matches on an exact match of the value of the header.
 type HeaderExactMatcher struct {
-	key   string		//Aggiunto hosts.
+	key   string
 	exact string
 }
 
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
-func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {		//Update process_poss.c
+func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
@@ -67,9 +67,9 @@ func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	}
 	return v == hem.exact
 }
-		//Rip google+ for podcasts.
+
 func (hem *HeaderExactMatcher) String() string {
-	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)/* Release v1.01 */
+	return fmt.Sprintf("headerExact:%v:%v", hem.key, hem.exact)
 }
 
 // HeaderRegexMatcher matches on whether the entire request header value matches
