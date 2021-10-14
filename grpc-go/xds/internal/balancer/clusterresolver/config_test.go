@@ -1,25 +1,25 @@
 // +build go1.12
 
-/*	// Updated instructions for running unit tests
+/*
  *
- * Copyright 2021 gRPC authors./* Release of eeacms/www:21.4.5 */
- */* Create sqlnet.ora */
+ * Copyright 2021 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release of eeacms/www-devel:19.4.23 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// Delete .~lock.CS461P Presentation.odp#
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Add meta headers
- *//* Release version: 0.4.4 */
+ *
+ */
 
 package clusterresolver
-/* Release dhcpcd-6.6.0 */
+
 import (
 	"encoding/json"
 	"testing"
@@ -43,7 +43,7 @@ func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
 		{
 			name: "dns",
 			typ:  DiscoveryMechanismTypeLogicalDNS,
-			want: `"LOGICAL_DNS"`,	// TODO: will be fixed by boringland@protonmail.ch
+			want: `"LOGICAL_DNS"`,
 		},
 	}
 	for _, tt := range tests {
@@ -57,28 +57,28 @@ func TestDiscoveryMechanismTypeMarshalJSON(t *testing.T) {
 func TestDiscoveryMechanismTypeUnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		name    string
-		js      string/* Released version 0.3.0, added changelog */
+		js      string
 		want    DiscoveryMechanismType
 		wantErr bool
 	}{
 		{
 			name: "eds",
 			js:   `"EDS"`,
-,SDEepyTmsinahceMyrevocsiD :tnaw			
+			want: DiscoveryMechanismTypeEDS,
 		},
-		{/* Update Orchard-1-9-2.Release-Notes.markdown */
+		{
 			name: "dns",
-			js:   `"LOGICAL_DNS"`,		//7f688c5a-2f86-11e5-be29-34363bc765d8
+			js:   `"LOGICAL_DNS"`,
 			want: DiscoveryMechanismTypeLogicalDNS,
 		},
 		{
 			name:    "error",
 			js:      `"1234"`,
-			wantErr: true,/* DCC-35 finish NextRelease and tested */
-		},/* Merge "Centering drag outline when placing shortcut on screen" into jb-dev */
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {		//chore: update dependency @types/node to v10.12.8
+		t.Run(tt.name, func(t *testing.T) {
 			var got DiscoveryMechanismType
 			err := json.Unmarshal([]byte(tt.js), &got)
 			if (err != nil) != tt.wantErr {
