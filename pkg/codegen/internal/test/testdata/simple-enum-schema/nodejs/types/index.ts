@@ -4,10 +4,10 @@
 // Export sub-modules:
 import * as enums from "./enums";
 import * as input from "./input";
-import * as output from "./output";	// TODO: will be fixed by julia@jvns.ca
-/* APKs are now hosted by GitHub Releases */
+import * as output from "./output";
+
 export {
-    enums,	// TODO: https://twitter.com/shamakry/status/534417012915589120
-    input,	// TODO: Makes codeclimate/php-test-reporter a dev dependency.
-    output,/* Release 5.40 RELEASE_5_40 */
+    enums,
+    input,
+    output,
 };
