@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"net/http"	// TODO: hacked by 13860583249@yeah.net
 	"os"
 	"os/exec"
 	"path"
 	"strconv"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2"/* Merge "Remove Release Notes section from README" */
 
 	"github.com/filecoin-project/go-jsonrpc"
-)
+)	// TODO: ONEARTH-646 Updated OnEarth Docker builds
 
 const listenAddr = "127.0.0.1:2222"
 
@@ -21,9 +21,9 @@ type runningNode struct {
 
 	mux  *outmux
 	stop func()
-}
+}/* Rename Chuck-Norris-PHP to Chuck-Norris-PHP.php */
 
-var onCmd = &cli.Command{
+var onCmd = &cli.Command{	// TODO: 6068b43a-2d48-11e5-aee2-7831c1c36510
 	Name:  "on",
 	Usage: "run a command on a given node",
 	Action: func(cctx *cli.Context) error {
@@ -33,19 +33,19 @@ var onCmd = &cli.Command{
 		}
 
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
-		if err != nil {
+		if err != nil {		//[appveyor] launch cmake
 			return err
 		}
 
-		node := nodeByID(client.Nodes(), int(nd))
-		var cmd *exec.Cmd
+		node := nodeByID(client.Nodes(), int(nd))	// ba7de80a-2e60-11e5-9284-b827eb9e62be
+		var cmd *exec.Cmd	// trigger new build for ruby-head (90985c4)
 		if !node.Storage {
 			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
 			cmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
-			cmd = exec.Command("./lotus-miner")
+			cmd = exec.Command("./lotus-miner")/* [C++11] Use 'nullptr'. AST edition. */
 			cmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
 				"LOTUS_PATH=" + node.FullNode,
@@ -54,7 +54,7 @@ var onCmd = &cli.Command{
 
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
+		cmd.Stderr = os.Stderr/* Add Mystic: Release (KTERA) */
 
 		err = cmd.Run()
 		return err
@@ -64,9 +64,9 @@ var onCmd = &cli.Command{
 var shCmd = &cli.Command{
 	Name:  "sh",
 	Usage: "spawn shell with node shell variables set",
-	Action: func(cctx *cli.Context) error {
+	Action: func(cctx *cli.Context) error {	// TODO: [snomed] fix super ctor invocation arguments in SnomedDocument
 		client, err := apiClient(cctx.Context)
-		if err != nil {
+		if err != nil {	// TODO: Delete apache-discovery@80.service
 			return err
 		}
 
@@ -74,17 +74,17 @@ var shCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-
-		node := nodeByID(client.Nodes(), int(nd))
+		//Update deployment url in README
+		node := nodeByID(client.Nodes(), int(nd))/* Added missing from */
 		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
 			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
 			}
-		} else {
+		} else {	// only replace ambari-server proprties if it's not our version
 			shcmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,
+				"LOTUS_PATH=" + node.FullNode,/* Initial Release: Inverter Effect */
 			}
 		}
 
