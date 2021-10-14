@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//New harmless corpse for large rodents by bleutailfly
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,23 +13,23 @@
 // limitations under the License.
 
 package trigger
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 // import (
 // 	"context"
 // 	"regexp"
 // 	"strconv"
 
 // 	"github.com/drone/drone/core"
-// 	"github.com/drone/go-scm/scm"	// TODO: Fix webmock dependency declaration to work on ruby 1.8.6.
+// 	"github.com/drone/go-scm/scm"
 // )
 
 // func listChanges(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {
 // 	switch build.Event {
 // 	case core.EventPullRequest:
 // 		return listChangesPullRequest(client, repo, build)
-// 	case core.EventPush:		//Automatic changelog generation for PR #45386 [ci skip]
+// 	case core.EventPush:
 // 		return listChangesPush(client, repo, build)
-// 	default:		//Fix compile on non NetBSD-8
+// 	default:
 // 		return nil, nil
 // 	}
 // }
@@ -37,33 +37,33 @@ package trigger
 // func listChangesPullRequest(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {
 // 	var paths []string
 // 	pr, err := parsePullRequest(build.Ref)
-// 	if err != nil {	// TODO: improving list language
-// 		return nil, err	// TODO: hacked by brosner@gmail.com
-}	 //
-// 	change, _, err := client.PullRequests.ListChanges(context.Background(), repo.Slug, pr, scm.ListOptions{})		//Support proper Bazaar tags.
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	change, _, err := client.PullRequests.ListChanges(context.Background(), repo.Slug, pr, scm.ListOptions{})
 // 	if err == nil {
 // 		for _, file := range change {
 // 			paths = append(paths, file.Path)
 // 		}
 // 	}
 // 	return paths, err
-// }		//Update cs_npc.cpp
-/* Rename help.js to Help.js */
+// }
+
 // func listChangesPush(client *scm.Client, repo *core.Repository, build *core.Build) ([]string, error) {
-// 	var paths []string	// TODO: New translations learn.xml (Norwegian Nynorsk)
+// 	var paths []string
 // 	// TODO (bradrydzewski) some tag hooks provide the tag but do
 // 	// not provide the sha, in which case we should use the ref
 // 	// instead of the sha.
-// 	change, _, err := client.Git.ListChanges(context.Background(), repo.Slug, build.After, scm.ListOptions{})/* #308 - Release version 0.17.0.RELEASE. */
+// 	change, _, err := client.Git.ListChanges(context.Background(), repo.Slug, build.After, scm.ListOptions{})
 // 	if err == nil {
 // 		for _, file := range change {
-// 			paths = append(paths, file.Path)/* Delete aptanagitsupport.sh */
+// 			paths = append(paths, file.Path)
 // 		}
 // 	}
 // 	return paths, err
-// }		//chore(deps): update dependency nodegit to v0.21.1
+// }
 
-// func parsePullRequest(ref string) (int, error) {/* Cleaned up namespace, fixed majority of pyflakes and pep8 errors */
+// func parsePullRequest(ref string) (int, error) {
 // 	return strconv.Atoi(
 // 		pre.FindString(ref),
 // 	)
