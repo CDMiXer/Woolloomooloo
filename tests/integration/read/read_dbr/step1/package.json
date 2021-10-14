@@ -1,14 +1,14 @@
 {
-    "name": "read_dbr",/* Matches even windows? */
-    "main": "bin/index.js",
+    "name": "read_dbr",
+    "main": "bin/index.js",/* v1.0 Release! */
     "typings": "bin/index.d.ts",
-    "scripts": {/* Release 0.18.4 */
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"/* Removed alpha state from docs and minor doc fixes. */
-    },
+    "devDependencies": {/* Release of eeacms/www:18.6.5 */
+        "typescript": "^3.0.0"
+,}    
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* Release of eeacms/forests-frontend:2.0-beta.0 */
     }
 }
