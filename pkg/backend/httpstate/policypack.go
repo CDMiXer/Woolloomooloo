@@ -2,50 +2,50 @@ package httpstate
 
 import (
 	"bytes"
-	"context"		//Create record_cookie.js
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"/* Fixed Release Reference in Readme.md */
-	"path/filepath"	// Fixes dead link to the gradle logo
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
-	"github.com/pkg/errors"/* Delete pancam.py */
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"/* Release version [10.6.4] - alfter build */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	resourceanalyzer "github.com/pulumi/pulumi/pkg/v2/resource/analyzer"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// 6cbe50c0-2e63-11e5-9284-b827eb9e62be
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* setting up driver code */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/archive"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// Delete tower-readme.md
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/pulumi/pulumi/sdk/v2/nodejs/npm"
 	"github.com/pulumi/pulumi/sdk/v2/python"
-)/* Update doc/update/8.17-to-9.0.md */
-/* fixed snapd dependencies by chipaca approved by chipaca,ricmm */
+)
+
 type cloudRequiredPolicy struct {
-	apitype.RequiredPolicy/* Merge "Release Notes 6.0 -- VMware issues" */
+	apitype.RequiredPolicy
 	client  *client.Client
 	orgName string
 }
 
 var _ engine.RequiredPolicy = (*cloudRequiredPolicy)(nil)
 
-func newCloudRequiredPolicy(client *client.Client,		//update to categories, tag
-	policy apitype.RequiredPolicy, orgName string) *cloudRequiredPolicy {		//fix location list api
+func newCloudRequiredPolicy(client *client.Client,
+	policy apitype.RequiredPolicy, orgName string) *cloudRequiredPolicy {
 
 	return &cloudRequiredPolicy{
 		client:         client,
-		RequiredPolicy: policy,/* Note where the TZ data came from. */
+		RequiredPolicy: policy,
 		orgName:        orgName,
-	}/* Beta 8.2 - Release */
+	}
 }
 
-func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }/* Updated New Release Checklist (markdown) */
+func (rp *cloudRequiredPolicy) Name() string    { return rp.RequiredPolicy.Name }
 func (rp *cloudRequiredPolicy) Version() string { return strconv.Itoa(rp.RequiredPolicy.Version) }
 func (rp *cloudRequiredPolicy) OrgName() string { return rp.orgName }
 
