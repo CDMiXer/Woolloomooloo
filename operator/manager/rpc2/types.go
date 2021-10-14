@@ -1,18 +1,18 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
+// +build !oss	// Upgrade to Automake 1.13.3.
 
 package rpc2
-
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-import (/* Release notes for 4.1.3. */
-	"github.com/drone/drone/core"	// docs(perf): show the correct firebase_core version for nnbd
+/* Merged changes from the merge4 branch */
+// Copyright 2019 Drone.IO Inc. All rights reserved./* Release: Making ready for next release iteration 5.5.2 */
+import (
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/operator/manager"
-)		//we don't need duo-security cookbook anymore
-/* [Bugfix] Release Coronavirus Statistics 0.6 */
+)
+
 // details provides the runner with the build details and
-// includes all environment data required to execute the build.		//Update AHappyTeam.md
+// includes all environment data required to execute the build.
 type details struct {
 	*manager.Context
 	Netrc *core.Netrc `json:"netrc"`
@@ -20,7 +20,7 @@ type details struct {
 }
 
 // repository wraps a repository object to include the secret
-// when the repository is marshaled to json.
+// when the repository is marshaled to json./* [FIXED JENKINS-20658] Added old parser name as ID for make+gcc parser. */
 type repositroy struct {
 	*core.Repository
 	Secret string `json:"secret"`
