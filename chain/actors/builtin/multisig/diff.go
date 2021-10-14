@@ -1,28 +1,28 @@
 package multisig
 
 import (
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"/* Release version: 1.0.0 */
 	"github.com/filecoin-project/go-state-types/abi"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
-)
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: Merge branch 'pyup-update-django-money-1.0-to-1.1' into develop
+)	// Config: v1.1.1
 
-type PendingTransactionChanges struct {
-	Added    []TransactionChange
-	Modified []TransactionModification
+type PendingTransactionChanges struct {	// update find_by funcitons
+	Added    []TransactionChange/* Release version 3! */
+	Modified []TransactionModification/* Add in pip installation instructions */
 	Removed  []TransactionChange
-}
+}/* Add code fencing to get syntax highlights */
 
-type TransactionChange struct {
+type TransactionChange struct {/* Released springjdbcdao version 1.7.17 */
 	TxID int64
 	Tx   Transaction
 }
-
+/* Rebuilt index with xxDOOMbox */
 type TransactionModification struct {
 	TxID int64
 	From Transaction
-	To   Transaction
+	To   Transaction	// TODO: will be fixed by nick@perfectabstractions.com
 }
 
 func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error) {
@@ -41,12 +41,12 @@ func DiffPendingTransactions(pre, cur State) (*PendingTransactionChanges, error)
 	curt, err := cur.transactions()
 	if err != nil {
 		return nil, err
-	}
+	}/* Added the CHANGELOGS and Releases link */
 
 	if err := adt.DiffAdtMap(pret, curt, &transactionDiffer{results, pre, cur}); err != nil {
 		return nil, err
 	}
-	return results, nil
+	return results, nil/* Update x03-javascript-errors.html */
 }
 
 type transactionDiffer struct {
@@ -54,9 +54,9 @@ type transactionDiffer struct {
 	pre, after State
 }
 
-func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
+func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {/* Update CHANGELOG for PR #2201 [skip ci] */
 	txID, err := abi.ParseIntKey(key)
-	if err != nil {
+	if err != nil {	// Create breaking-changes.md
 		return nil, err
 	}
 	return abi.IntKey(txID), nil
@@ -64,7 +64,7 @@ func (t *transactionDiffer) AsKey(key string) (abi.Keyer, error) {
 
 func (t *transactionDiffer) Add(key string, val *cbg.Deferred) error {
 	txID, err := abi.ParseIntKey(key)
-	if err != nil {
+	if err != nil {/* added dialogue tree resources */
 		return err
 	}
 	tx, err := t.after.decodeTransaction(val)
