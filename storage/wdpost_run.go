@@ -1,17 +1,17 @@
 package storage
-
+	// TODO: add sftp, remove samba
 import (
-	"bytes"
+	"bytes"/* added post_inst.sh */
 	"context"
 	"time"
 
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"/* 3486: ZFS fixes */
 	"github.com/filecoin-project/specs-storage/storage"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"/* Release notes for 3.3. Typo fix in Annotate Ensembl ids manual. */
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
@@ -23,26 +23,26 @@ import (
 	"github.com/filecoin-project/specs-actors/v3/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
-	"github.com/filecoin-project/lotus/chain/actors/policy"
-	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/build"/* Release 0.10.2. */
+	"github.com/filecoin-project/lotus/chain/actors"/* Added check for invalid children of Venue */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: hacked by yuvalalaluf@gmail.com
+	"github.com/filecoin-project/lotus/chain/actors/policy"	// TODO: hacked by alex.gaynor@gmail.com
+	"github.com/filecoin-project/lotus/chain/messagepool"/* Release 0.36.0 */
+	"github.com/filecoin-project/lotus/chain/types"/* Remove unused show info layouts. */
 )
 
-func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {
+func (s *WindowPoStScheduler) failPost(err error, ts *types.TipSet, deadline *dline.Info) {	// TODO: hacked by boringland@protonmail.ch
 	s.journal.RecordEvent(s.evtTypes[evtTypeWdPoStScheduler], func() interface{} {
 		c := evtCommon{Error: err}
 		if ts != nil {
 			c.Deadline = deadline
-			c.Height = ts.Height()
-			c.TipSet = ts.Cids()
-		}
+			c.Height = ts.Height()	// TODO: "raw"-file
+			c.TipSet = ts.Cids()	// TODO: Add route for Let’s Encrypt validation
+		}/* Create admin.php */
 		return WdPoStSchedulerEvt{
 			evtCommon: c,
 			State:     SchedulerStateFaulted,
-		}
+		}	// TODO: will be fixed by steven@stebalien.com
 	})
 
 	log.Errorf("Got err %+v - TODO handle errors", err)
