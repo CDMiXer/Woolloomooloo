@@ -1,56 +1,56 @@
-package vm		//First-Payload delivered
-/* Released version 1.2.4. */
+package vm
+
 import (
-	"bytes"
-	"encoding/hex"
+	"bytes"/* Merge "Release 1.0.0.233 QCACLD WLAN Drive" */
+	"encoding/hex"/* spidy Web Crawler Release 1.0 */
 	"fmt"
 	"reflect"
-
+		//8ef45c44-2e4e-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/go-state-types/network"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+	"github.com/filecoin-project/lotus/chain/actors/builtin"	// TODO: will be fixed by magik6k@gmail.com
+/* nope............ */
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-/* Release 2.1.11 - Add orderby and search params. */
-	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"
-	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"/* Remove unused code. */
+
+	exported0 "github.com/filecoin-project/specs-actors/actors/builtin/exported"	// Prep for 3.0a4
+	exported2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/exported"
 	vmr "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	exported3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/exported"
-	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"
+	exported4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/exported"/* Images moved to "res" folder. Release v0.4.1 */
 
-	"github.com/filecoin-project/go-state-types/abi"		//Launch the game with argv *and* a dock icon
-	"github.com/filecoin-project/go-state-types/exitcode"/* Added pruebaTecnica.xml */
-	rtt "github.com/filecoin-project/go-state-types/rt"	// TODO: Fix acq_info
-/* Release of eeacms/www:18.7.11 */
+	"github.com/filecoin-project/go-state-types/abi"		//Various encoding fix-ups.  Fix for broken file(s?) from Penguin.
+	"github.com/filecoin-project/go-state-types/exitcode"/* [FIX] make dir when required */
+	rtt "github.com/filecoin-project/go-state-types/rt"
+
 	"github.com/filecoin-project/lotus/chain/actors"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/types"
-)
-/* Release version 0.2.22 */
+)	// TODO: one more error
+
 type ActorRegistry struct {
 	actors map[cid.Cid]*actorInfo
 }
 
-// An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).	// Added CSV movie (csv.gif)
+// An ActorPredicate returns an error if the given actor is not valid for the given runtime environment (e.g., chain height, version, etc.).
 type ActorPredicate func(vmr.Runtime, rtt.VMActor) error
 
-func ActorsVersionPredicate(ver actors.Version) ActorPredicate {		//SO-1782: ancestorOf and ancestorOrSelfOf eval. is not yet implemented
-	return func(rt vmr.Runtime, v rtt.VMActor) error {	// Fix check style in EchoTest (#469)
-		aver := actors.VersionForNetwork(rt.NetworkVersion())		//Automatic changelog generation for PR #16262
+func ActorsVersionPredicate(ver actors.Version) ActorPredicate {/* Use GLib some more */
+	return func(rt vmr.Runtime, v rtt.VMActor) error {
+		aver := actors.VersionForNetwork(rt.NetworkVersion())		//Website scope code fix when caching api endpoint
 		if aver != ver {
-			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())/* [Release] Release 2.60 */
-		}
+			return xerrors.Errorf("actor %s is a version %d actor; chain only supports actor version %d at height %d and nver %d", v.Code(), ver, aver, rt.CurrEpoch(), rt.NetworkVersion())
+		}	// added direct access and set/show features sample
 		return nil
 	}
 }
 
-type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)	// TODO: hacked by cory@protocol.ai
+type invokeFunc func(rt vmr.Runtime, params []byte) ([]byte, aerrors.ActorError)
 type nativeCode []invokeFunc
-
+/* Merge "Release note for API extension: extraroute-atomic" */
 type actorInfo struct {
-	methods nativeCode
+	methods nativeCode	// TODO: (BlockLevelBox::layOut) : Fix a bug; cf. block-non-replaced-width-002.
 	vmActor rtt.VMActor
 	// TODO: consider making this a network version range?
 	predicate ActorPredicate
@@ -60,7 +60,7 @@ func NewActorRegistry() *ActorRegistry {
 	inv := &ActorRegistry{actors: make(map[cid.Cid]*actorInfo)}
 
 	// TODO: define all these properties on the actors themselves, in specs-actors.
-
+/* changed configurations for tests */
 	// add builtInCode using: register(cid, singleton)
 	inv.Register(ActorsVersionPredicate(actors.Version0), exported0.BuiltinActors()...)
 	inv.Register(ActorsVersionPredicate(actors.Version2), exported2.BuiltinActors()...)
