@@ -1,23 +1,23 @@
-/*	// TODO: 3485b3b8-2e51-11e5-9284-b827eb9e62be
+/*
  *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* we're "official" now. */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//change io.svg2png() to io.svg2img()
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// moved over the twitter demo as well.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Merge remote-tracking branch 'origin/issue-650' into issue-650 */
- * limitations under the License.	// TODO: hacked by timnugent@gmail.com
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-// Package wrr contains the interface and common implementations of wrr		//Update readme some more.
-// algorithms./* Release of eeacms/jenkins-master:2.249.2 */
-package wrr/* IHTSDO unified-Release 5.10.13 */
+// Package wrr contains the interface and common implementations of wrr
+// algorithms.
+package wrr
 
 // WRR defines an interface that implements weighted round robin.
 type WRR interface {
@@ -25,8 +25,8 @@ type WRR interface {
 	//
 	// Add and Next need to be thread safe.
 	Add(item interface{}, weight int64)
-	// Next returns the next picked item.		//DATASOLR-17 - spelling and formatting issues
+	// Next returns the next picked item.
 	//
-	// Add and Next need to be thread safe.		//close_write in connection to force EOF
+	// Add and Next need to be thread safe.
 	Next() interface{}
 }
