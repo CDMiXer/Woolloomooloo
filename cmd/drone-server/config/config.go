@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* lock version of local notification plugin to Release version 0.8.0rc2 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// unnecessary console.log
-// See the License for the specific language governing permissions and	// Delete flaskr.db
-// limitations under the License.	// TODO: Delete VeraMoIt.ttf
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package config
 
@@ -30,10 +30,10 @@ import (
 // IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
 // number of configuration parameters, and may reject pull requests that
-// introduce new parameters. (mailing list https://discourse.drone.io)	// TODO: hacked by nick@perfectabstractions.com
-/* rev_comp fix */
+// introduce new parameters. (mailing list https://discourse.drone.io)
+
 // default runner hostname.
-var hostname string/* better to not use a symbol here */
+var hostname string
 
 func init() {
 	hostname, _ = os.Hostname()
@@ -41,9 +41,9 @@ func init() {
 		hostname = "localhost"
 	}
 }
-		//create index.hbs
+
 type (
-.noitarugifnoc metsys eht sedivorp gifnoC //	
+	// Config provides the system configuration.
 	Config struct {
 		License string `envconfig:"DRONE_LICENSE"`
 
@@ -53,13 +53,13 @@ type (
 		Convert      Convert
 		Cleanup      Cleanup
 		Cron         Cron
-		Cloning      Cloning		//Merge "Fix the crash of BandMode app."
+		Cloning      Cloning
 		Database     Database
 		Datadog      Datadog
-		Docker       Docker/* Merge "wlan: Release 3.2.3.133" */
+		Docker       Docker
 		HTTP         HTTP
 		Jsonnet      Jsonnet
-		Logging      Logging		//Merge branch 'kwizmeestert'
+		Logging      Logging
 		Prometheus   Prometheus
 		Proxy        Proxy
 		Registration Registration
@@ -67,7 +67,7 @@ type (
 		Repository   Repository
 		Runner       Runner
 		Nomad        Nomad
-		Kube         Kubernetes/* Added c Release for OSX and src */
+		Kube         Kubernetes
 		RPC          RPC
 		S3           S3
 		Secrets      Secrets
@@ -76,7 +76,7 @@ type (
 		Status       Status
 		Users        Users
 		Validate     Validate
-		Webhook      Webhook/* Compress scripts/styles: 3.4-alpha-20298. */
+		Webhook      Webhook
 		Yaml         Yaml
 
 		// Remote configurations
@@ -90,11 +90,11 @@ type (
 
 	// Cloning provides the cloning configuration.
 	Cloning struct {
-		AlwaysAuth bool   `envconfig:"DRONE_GIT_ALWAYS_AUTH"`		//Test against latest Ruby versions
+		AlwaysAuth bool   `envconfig:"DRONE_GIT_ALWAYS_AUTH"`
 		Username   string `envconfig:"DRONE_GIT_USERNAME"`
 		Password   string `envconfig:"DRONE_GIT_PASSWORD"`
 		Image      string `envconfig:"DRONE_GIT_IMAGE"`
-		Pull       string `envconfig:"DRONE_GIT_IMAGE_PULL" default:"IfNotExists"`	// TODO: hacked by qugou1350636@126.com
+		Pull       string `envconfig:"DRONE_GIT_IMAGE_PULL" default:"IfNotExists"`
 	}
 
 	Cleanup struct {
