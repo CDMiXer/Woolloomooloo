@@ -2,6 +2,6 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Merge "qcom: msm-pm: fix bug in finding whether cache is WT or WB" */
+// +build !oss		//64480330-2e5b-11e5-9284-b827eb9e62be
 
 package system
