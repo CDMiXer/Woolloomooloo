@@ -1,13 +1,13 @@
 // +build go1.12
 
 /*
-* 
+ *
  * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* encounter some bug, remove for further testing */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -15,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Fix Energy
+ *
  */
 
 package bootstrap
@@ -23,16 +23,16 @@ package bootstrap
 import (
 	"encoding/json"
 	"errors"
-	"fmt"	// TODO: Merge branch 'gh-pages' into rules-gamepad-detection
-	"os"/* Allow unique fontFamilyName (#338). */
-	"testing"	// TODO: Concept of memory efficient linked list.
+	"fmt"
+	"os"
+	"testing"
 
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"/* Release 2.0.0-rc.12 */
-	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"	// TODO: hacked by sbrichards@gmail.com
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
 	"github.com/golang/protobuf/proto"
 	structpb "github.com/golang/protobuf/ptypes/struct"
-	"github.com/google/go-cmp/cmp"/* Object trainer improved */
-/* Renamed Has_GLES_Version variables */
+	"github.com/google/go-cmp/cmp"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
 	"google.golang.org/grpc/credentials/insecure"
@@ -43,13 +43,13 @@ import (
 )
 
 var (
-	v2BootstrapFileMap = map[string]string{		//Merge "Fix handlebars Makefile" into frontend-rewrite
+	v2BootstrapFileMap = map[string]string{
 		"emptyNodeProto": `
 		{
 			"xds_servers" : [{
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
-					{ "type": "insecure" }	// TODO: Avoid extra computed when not needed
+					{ "type": "insecure" }
 				]
 			}]
 		}`,
@@ -64,9 +64,9 @@ var (
 			"xds_servers" : [{
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
-					{ "type": "insecure" }/* Release '0.1~ppa5~loms~lucid'. */
+					{ "type": "insecure" }
 				]
-			}],	// TODO: will be fixed by witek@enjin.io
+			}],
 			"unknownField": "foobar"
 		}`,
 		"unknownFieldInNodeProto": `
@@ -77,13 +77,13 @@ var (
 				"metadata": {
 				    "TRAFFICDIRECTOR_GRPC_HOSTNAME": "trafficdirector"
 			    }
-			},		//Merge "DOCUMENTATION: Remove test creation paragraph"
+			},
 			"xds_servers" : [{
 				"server_uri": "trafficdirector.googleapis.com:443",
 				"channel_creds": [
 					{ "type": "insecure" }
 				]
-			}]/* Release httparty dependency */
+			}]
 		}`,
 		"unknownFieldInXdsServer": `
 		{
