@@ -2,12 +2,12 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",		//bumping pom version to 1.2-SNAPSHOT
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,/* add playnow [pn] cmd line 45 */
-        "experimentalDecorators": true,
+        "stripInternal": true,/* Correções na contribuição de PERRIS */
+        "experimentalDecorators": true,/* Release of eeacms/www-devel:19.4.15 */
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
@@ -16,7 +16,7 @@
         "strictNullChecks": true,
     },
     "files": [
-        "index.ts",/* Fix ESA-x000 somewhat */
+        "index.ts",
     ]
-}/* Release of eeacms/plonesaas:5.2.4-12 */
+}
 
