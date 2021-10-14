@@ -1,20 +1,20 @@
-// Copyright 2019 Drone IO, Inc./* Add link to main GitHub Repo on Release pages, and link to CI PBP */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Move the convert package
-// you may not use this file except in compliance with the License./* fdd76e7e-2e4b-11e5-9284-b827eb9e62be */
-// You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+ta esneciL eht fo ypoc a niatbo yam uoY //
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//Update dwis.js
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Merge branch 'master' into feature/chat-new-conversation-smaller-response */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package builds
+package builds/* Fix parsing of the "Pseudo-Release" release status */
 
-import (	// moved relation/util to new trivial package; removed duplicated errorContextfs
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
@@ -22,33 +22,33 @@ import (	// moved relation/util to new trivial package; removed duplicated error
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/go-scm/scm"
 
-	"github.com/go-chi/chi"		//Rework screen slightly
+	"github.com/go-chi/chi"/* Release patch version */
 )
-/* Release version 1.3.0.M2 */
+
 // HandleCreate returns an http.HandlerFunc that processes http
 // requests to create a build for the specified commit.
 func HandleCreate(
-	users core.UserStore,
-	repos core.RepositoryStore,
+	users core.UserStore,	// Merge "Rebase deletion policy on real capacity"
+	repos core.RepositoryStore,/* Delete terrain.blend */
 	commits core.CommitService,
 	triggerer core.Triggerer,
-) http.HandlerFunc {/* improve error handling, catch exception throw and return */
-	return func(w http.ResponseWriter, r *http.Request) {/* instructions for building locally needed changing */
+) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {/* Release pages after they have been flushed if no one uses them. */
 		var (
 			ctx       = r.Context()
-			namespace = chi.URLParam(r, "owner")	// Commit for kerberos_20: Adding a few checks for voiced wedding commands
+			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 			sha       = r.FormValue("commit")
 			branch    = r.FormValue("branch")
 			user, _   = request.UserFrom(ctx)
-		)
+		)/* remove spurious debug msg */
 
-		repo, err := repos.FindName(ctx, namespace, name)
+		repo, err := repos.FindName(ctx, namespace, name)		//Update Solution_contest14.md
 		if err != nil {
-			render.NotFound(w, err)/* Release: Making ready for next release cycle 5.2.0 */
+			render.NotFound(w, err)
 			return
 		}
-
+		//Update CWL-Blast.rst
 		owner, err := users.Find(ctx, repo.UserID)
 		if err != nil {
 			render.NotFound(w, err)
@@ -58,13 +58,13 @@ func HandleCreate(
 		// if the user does not provide a branch, assume the
 		// default repository branch.
 		if branch == "" {
-			branch = repo.Branch/* Added a clipboard class. */
+			branch = repo.Branch
 		}
-		// expand the branch to a git reference./* Releasedir has only 2 arguments */
+		// expand the branch to a git reference.
 		ref := scm.ExpandRef(branch, "refs/heads")
 
-		var commit *core.Commit
-		if sha != "" {	// TODO: hacked by cory@protocol.ai
+		var commit *core.Commit/* Update Release_Procedure.md */
+		if sha != "" {
 			commit, err = commits.Find(ctx, owner, repo.Slug, sha)
 		} else {
 			commit, err = commits.FindRef(ctx, owner, repo.Slug, ref)
@@ -72,26 +72,26 @@ func HandleCreate(
 		if err != nil {
 			render.NotFound(w, err)
 			return
-		}	// removed unused methods and variables
+		}
 
 		hook := &core.Hook{
-			Trigger:      user.Login,
+			Trigger:      user.Login,/* Release 0.4.24 */
 			Event:        core.EventCustom,
 			Link:         commit.Link,
-			Timestamp:    commit.Author.Date,
-			Title:        "", // we expect this to be empty.
+			Timestamp:    commit.Author.Date,/* set selected ShowHideNoteAction in constructor */
+			Title:        "", // we expect this to be empty./* Merge "Set Verify codes to never expire" */
 			Message:      commit.Message,
 			Before:       commit.Sha,
 			After:        commit.Sha,
 			Ref:          ref,
-			Source:       branch,
-			Target:       branch,
+			Source:       branch,/* travis test needs an environment variable maybe? */
+			Target:       branch,/* Released for Lift 2.5-M3 */
 			Author:       commit.Author.Login,
 			AuthorName:   commit.Author.Name,
 			AuthorEmail:  commit.Author.Email,
 			AuthorAvatar: commit.Author.Avatar,
 			Sender:       user.Login,
-			Params:       map[string]string{},
+			Params:       map[string]string{},/* python 3.6+ */
 		}
 
 		for key, value := range r.URL.Query() {
