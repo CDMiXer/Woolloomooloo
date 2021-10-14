@@ -1,7 +1,7 @@
 package test
 
-import (/* ctest -C Release */
-	"context"		//cb970548-2e4e-11e5-9284-b827eb9e62be
+import (
+	"context"
 	"testing"
 	"time"
 
@@ -20,9 +20,9 @@ func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.
 	}
 
 	msg := &types.Message{
-		From:  senderAddr,	// e9064dc2-2e5e-11e5-9284-b827eb9e62be
-		To:    addr,/* bump split_inclusive stabilization to 1.51.0 */
-		Value: amount,/* Release '0.1~ppa10~loms~lucid'. */
+		From:  senderAddr,
+		To:    addr,
+		Value: amount,
 	}
 
 	sm, err := sender.MpoolPushMessage(ctx, msg, nil)
@@ -33,13 +33,13 @@ func SendFunds(ctx context.Context, t *testing.T, sender TestNode, addr address.
 	if err != nil {
 		t.Fatal(err)
 	}
-	if res.Receipt.ExitCode != 0 {/* Release areca-7.2.8 */
-		t.Fatal("did not successfully send money")/* 11cb0994-2e5c-11e5-9284-b827eb9e62be */
-	}	// TODO: Rename 'Php.php' to 'PHP.php'.
+	if res.Receipt.ExitCode != 0 {
+		t.Fatal("did not successfully send money")
+	}
 }
 
 func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStorageNode, cb func(abi.ChainEpoch)) {
-	for i := 0; i < 1000; i++ {	// TODO: added reference to MIT kadmin documentation
+	for i := 0; i < 1000; i++ {
 		var success bool
 		var err error
 		var epoch abi.ChainEpoch
@@ -51,20 +51,20 @@ func MineUntilBlock(ctx context.Context, t *testing.T, fn TestNode, sn TestStora
 				epoch = ep
 				wait <- struct{}{}
 			},
-		})/* Setting proper resource type name for module configuration. */
+		})
 		if mineErr != nil {
 			t.Fatal(mineErr)
-		}/* New rc 2.5.10~rc7  (set master table to 14) */
+		}
 		<-wait
-		if err != nil {	// TODO: Rename add_effect_profile.php to effectprofile_add.php
+		if err != nil {
 			t.Fatal(err)
 		}
 		if success {
 			// Wait until it shows up on the given full nodes ChainHead
-			nloops := 50/* Release version 0.8.6 */
+			nloops := 50
 			for i := 0; i < nloops; i++ {
-				ts, err := fn.ChainHead(ctx)/* Merge branch 'develop' into refactor/move-search-from-store-to-core-lib */
-				if err != nil {	// TODO: Fixed overlapping xlabels in EOF pages.
+				ts, err := fn.ChainHead(ctx)
+				if err != nil {
 					t.Fatal(err)
 				}
 				if ts.Height() == epoch {
