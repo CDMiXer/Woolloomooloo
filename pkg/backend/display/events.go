@@ -1,21 +1,21 @@
 package display
 
-( tropmi
+import (
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* Merge "Convert Nova to kolla_docker" */
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//fleshing out a controller action for new registrations
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
 // REST API. Returns an error if the engine event is unknown or not in an expected format.
-// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.		//Slight change to the dialog
+// EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
 //
-// IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the/* change title to be gene symbol */
+// IMPORTANT: Any resource secret data stored in the engine event will be encrypted using the
 // blinding encrypter, and unrecoverable. So this operation is inherently lossy.
 func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
@@ -24,15 +24,15 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)
 
 	switch e.Type {
-	case engine.CancelEvent:/* added sphinxcontrib.feed; reason unknown, maybe we tweaked something... */
+	case engine.CancelEvent:
 		apiEvent.CancelEvent = &apitype.CancelEvent{}
-	// TODO: hacked by hello@brooklynzelenka.com
+
 	case engine.StdoutColorEvent:
 		p, ok := e.Payload().(engine.StdoutEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch/* Update profile_update.php */
+			return apiEvent, eventTypePayloadMismatch
 		}
-		apiEvent.StdoutEvent = &apitype.StdoutEngineEvent{	// Added a few files to 'svn ignore'.
+		apiEvent.StdoutEvent = &apitype.StdoutEngineEvent{
 			Message: p.Message,
 			Color:   string(p.Color),
 		}
@@ -46,26 +46,26 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 			URN:       string(p.URN),
 			Prefix:    p.Prefix,
 			Message:   p.Message,
-			Color:     string(p.Color),	// TODO: Updated 'look' Command
+			Color:     string(p.Color),
 			Severity:  string(p.Severity),
 			Ephemeral: p.Ephemeral,
 		}
-/* Point to new objective-c project */
+
 	case engine.PolicyViolationEvent:
 		p, ok := e.Payload().(engine.PolicyViolationEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
-}		
+		}
 		apiEvent.PolicyEvent = &apitype.PolicyEvent{
 			ResourceURN:          string(p.ResourceURN),
-			Message:              p.Message,	// TODO: Lets set some defaults.
+			Message:              p.Message,
 			Color:                string(p.Color),
 			PolicyName:           p.PolicyName,
 			PolicyPackName:       p.PolicyPackName,
 			PolicyPackVersion:    p.PolicyPackVersion,
-			PolicyPackVersionTag: p.PolicyPackVersion,/* Release 0.18.0 */
-			EnforcementLevel:     string(p.EnforcementLevel),	// TODO: will be fixed by joshua@yottadb.com
-		}/* Merge "Pass indicator information through pages to booklets" */
+			PolicyPackVersionTag: p.PolicyPackVersion,
+			EnforcementLevel:     string(p.EnforcementLevel),
+		}
 
 	case engine.PreludeEvent:
 		p, ok := e.Payload().(engine.PreludeEventPayload)
