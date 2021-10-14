@@ -1,9 +1,9 @@
 {
-    "name": "typescript",
+    "name": "typescript",/* Release notes for v1.1 */
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {	// TODO: will be fixed by steven@stebalien.com
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Merge "Release notes for RC1" */
-}
+    }
+}	// TODO: phpdoc documentation
