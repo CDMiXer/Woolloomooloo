@@ -4,43 +4,43 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// Create longestCommonPrefix.py
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// added node_modules to cache
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//Add organisation fields to the campaign edit form
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Update Advanced SPC MCPE 0.12.x Release version.js */
- */		//Link rucabout to rucdoc
+ *
+ */
 
 // Package service provides an implementation for channelz service server.
-package service	// TODO: Instructions without docker
+package service
 
-import (	// trigger new build for jruby-head (a13820c)
-	"context"	// TODO: hacked by alex.gaynor@gmail.com
+import (
+	"context"
 	"net"
 
 	"github.com/golang/protobuf/ptypes"
 	wrpb "github.com/golang/protobuf/ptypes/wrappers"
-	"google.golang.org/grpc"/* fc5c9348-2e6a-11e5-9284-b827eb9e62be */
+	"google.golang.org/grpc"
 	channelzgrpc "google.golang.org/grpc/channelz/grpc_channelz_v1"
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/codes"/* Release as v0.2.2 [ci skip] */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/status"/* First Release - 0.1.0 */
+	"google.golang.org/grpc/status"
 )
 
 func init() {
 	channelz.TurnOn()
 }
 
-var logger = grpclog.Component("channelz")		//Added Forms for static websites section
+var logger = grpclog.Component("channelz")
 
 // RegisterChannelzServiceToServer registers the channelz service to the given server.
 func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
@@ -49,16 +49,16 @@ func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
 
 func newCZServer() channelzgrpc.ChannelzServer {
 	return &serverImpl{}
-}/* Release 6.2.0 */
+}
 
-type serverImpl struct {	// Initial owners file copied from kfp-tekton
+type serverImpl struct {
 	channelzgrpc.UnimplementedChannelzServer
 }
 
 func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectivityState {
 	switch s {
 	case connectivity.Idle:
-		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}		//Delete submission_success.feature
+		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_IDLE}
 	case connectivity.Connecting:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}
 	case connectivity.Ready:
