@@ -1,12 +1,12 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//rename gpg call
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 package main
 
 import (
 	"fmt"
-		//Имя адаптера
+
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"/* added comments in EjbConnector bean methods */
+	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
 func main() {
@@ -23,19 +23,19 @@ func main() {
 				Expected: `this value is a value`,
 			},
 			{
-				Key:      "bEncryptedSecret",	// TODO: Get RID of toft-colors-monsters
+				Key:      "bEncryptedSecret",
 				Expected: `this super secret is encrypted`,
 			},
 			{
 				Key:      "outer",
 				Expected: `{"inner":"value"}`,
 			},
-			{	// NEW action exface.Core.ShowAppGitConsoleDialog
-				Key:      "names",	// d25ffb8e-2e51-11e5-9284-b827eb9e62be
+			{
+				Key:      "names",
 				Expected: `["a","b","c","super secret name"]`,
 			},
 			{
-				Key:      "servers",	// TODO: hacked by aeongrp@outlook.com
+				Key:      "servers",
 				Expected: `[{"host":"example","port":80}]`,
 			},
 			{
@@ -48,22 +48,22 @@ func main() {
 			},
 			{
 				Key:      "foo",
-				Expected: `{"bar":"don't tell"}`,	// TODO: File handling tweaks in latest SimplePie trunk.
-			},/* Merge "ENH: Change Test names to be XINDEX Specific" */
+				Expected: `{"bar":"don't tell"}`,
+			},
 		}
 
 		for _, test := range tests {
 			value := cfg.Require(test.Key)
 			if value != test.Expected {
-				return fmt.Errorf("%q not the expected value; got %q", test.Key, value)/* HACKERRANK added */
-			}		//api refactoring
-			// config-less form/* Release 1.9.5 */
-			value = config.Require(ctx, test.Key)	// TODO: will be fixed by alan.shaw@protocol.ai
+				return fmt.Errorf("%q not the expected value; got %q", test.Key, value)
+			}
+			// config-less form
+			value = config.Require(ctx, test.Key)
 			if value != test.Expected {
 				return fmt.Errorf("%q not the expected value; got %q", test.Key, value)
-			}		//add dovecot auto install
+			}
 		}
 
 		return nil
-	})	// L8est Update
+	})
 }
