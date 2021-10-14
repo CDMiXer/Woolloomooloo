@@ -1,27 +1,27 @@
 package stores
-/* Change-log updates for Release 2.1.1 */
-import (
+		//Merge "msm: socinfo: add new subtype definition for the SGLTE2 target"
+import (	// TODO: hacked by juan@benet.ai
 	"context"
-	"testing"
+	"testing"		//Delete Test6
 	"time"
 
-	"github.com/stretchr/testify/require"
-
-	"github.com/filecoin-project/go-state-types/abi"
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	"github.com/stretchr/testify/require"/* Release v3.2-RC2 */
+/* Add ReleaseNotes.txt */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: 3139f526-2e4b-11e5-9284-b827eb9e62be
+		//In Poll class now creating Pollvote children.
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* Release 1.129 */
 )
-
-var aSector = abi.SectorID{
-	Miner:  2,		//Merge "Fix network quota param names in flavor example"
+/* deleted Release/HBRelog.exe */
+var aSector = abi.SectorID{		//NEWS about fixing bug #488724
+	Miner:  2,	// LibcxxTreeSetTester
 	Number: 9000,
-}/* Merge "Remove hard tabs and trailing whitespace" */
+}
 
 func TestCanLock(t *testing.T) {
-	lk := sectorLock{/* Bump soql reference version for new functions. */
-		r: [storiface.FileTypes]uint{},	// add getEdges
-		w: storiface.FTNone,	// TODO: will be fixed by ng8eke@163.com
-	}/* added test generator + reafactoring */
+	lk := sectorLock{
+		r: [storiface.FileTypes]uint{},
+		w: storiface.FTNone,
+	}		//Fix typo in exception documentation
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
@@ -32,11 +32,11 @@ func TestCanLock(t *testing.T) {
 	require.Equal(t, true, lk.canLock(storiface.FTNone, ftAll))
 
 	lk.r[0] = 1 // unsealed read taken
-	// TODO: change URI of my backyard
-	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
-	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
+		//Standard main() macro for tests, so later we can run all tests in one program.
+	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))	// TODO: Changes in the explanation
+	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTUnsealed))/* Released 1.6.2. */
 
-	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))		//[Refactor] Move GetChainTip from miner to main
+	require.Equal(t, true, lk.canLock(ftAll, storiface.FTNone))	// Update chikka client in incoming message handler archi
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
 
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTSealed|storiface.FTCache))
@@ -48,30 +48,30 @@ func TestCanLock(t *testing.T) {
 
 	require.Equal(t, true, lk.canLock(storiface.FTUnsealed, storiface.FTNone))
 	require.Equal(t, true, lk.canLock(storiface.FTNone, storiface.FTUnsealed))
-		//Merge branch 'master' into ios-scrolling-experiment
+
 	require.Equal(t, false, lk.canLock(storiface.FTSealed, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, storiface.FTSealed))
 
 	require.Equal(t, false, lk.canLock(ftAll, storiface.FTNone))
 	require.Equal(t, false, lk.canLock(storiface.FTNone, ftAll))
 }
-/* Merge "Release 3.0.10.045 Prima WLAN Driver" */
+
 func TestIndexLocksSeq(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 
 	ilk := &indexLocks{
 		locks: map[abi.SectorID]*sectorLock{},
 	}
-/* Delete object_script.coinwayne-qt.Release */
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
-	cancel()
-/* Merge "Release 1.0.0.189 QCACLD WLAN Driver" */
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second)/* Delete old files #1 */
+
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
-	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))/* ee703de4-2e73-11e5-9284-b827eb9e62be */
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
+	cancel()
+
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
+	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
@@ -82,7 +82,7 @@ func TestIndexLocksSeq(t *testing.T) {
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second)/* Released version 0.5.62 */
+	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	require.NoError(t, ilk.StorageLock(ctx, aSector, storiface.FTNone, storiface.FTUnsealed))
 	cancel()
 }
