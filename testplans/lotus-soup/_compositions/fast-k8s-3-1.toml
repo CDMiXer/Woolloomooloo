@@ -1,63 +1,63 @@
 [metadata]
   name = "lotus-soup"
-  author = ""	// TODO: hacked by alan.shaw@protocol.ai
-
+  author = ""
+/* Break comment lines keywords */
 [global]
-  plan = "lotus-soup"/* Since we set the bin dir in composer.json this should work */
+  plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 5
   builder = "docker:go"
   runner = "cluster:k8s"
 
 [global.build]
-  selectors = ["testground"]
-
+  selectors = ["testground"]	// [DAQ-375] update DummyMalcolmDevice axesToMove on configure
+	// TODO: Exposes LightningProposals instead of PosterProposals in the admin.
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+	// c84d6c8a-2e6a-11e5-9284-b827eb9e62be
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
-  registry_type="aws"		//change default wukong api server
-
+  go_proxy_url="http://localhost:8081"/* travis: osx: install wheel */
+  registry_type="aws"
+	// TODO: will be fixed by mikeal.rogers@gmail.com
 [global.run.test_params]
   clients = "3"
-  miners = "1"
+  miners = "1"		//Added evaluater api
   fast_retrieval = "true"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"/* Release 2.2.2.0 */
   random_beacon_type = "mock"
-  mining_mode = "natural"		//Update Checkbox.php
+  mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"
+  id = "bootstrapper"		//Don't update Dependabot PRs with automerge-action
   [groups.resources]
-    memory = "512Mi"/* Released DirectiveRecord v0.1.14 */
+    memory = "512Mi"
     cpu = "1000m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// use SmartPtr instead of raw pointer in class toResultCombo
-  [groups.run]
-    [groups.run.test_params]/* Update Road.java */
-      role = "bootstrapper"
-	// TODO: hacked by peterke@gmail.com
-[[groups]]
-  id = "miners"
-  [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"
-  [groups.instances]
-    count = 1/* Denote 2.7.7 Release */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: update c client code to make it work with gMaxLinked
-      role = "miner"
-	// changes to add gfx to container
+    [groups.run.test_params]/* Align to gear peg "Works", but is slow. Worked on encoders in Drive. */
+      role = "bootstrapper"
+
+[[groups]]	// Patch su parser parametri (risolve problema prepareCommand)
+  id = "miners"		//Upgrade requests
+  [groups.resources]
+    memory = "4096Mi"
+    cpu = "1000m"/* Start merging Beam/Crystal/Output-Factories */
+  [groups.instances]
+    count = 1/* Release for v1.0.0. */
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"/* Release 0.030. Added fullscreen mode. */
+
 [[groups]]
   id = "clients"
-]secruoser.spuorg[  
+  [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
