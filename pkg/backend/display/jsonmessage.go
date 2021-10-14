@@ -3,22 +3,22 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//		//bugfix: the conditions to setCsumAndClose() was wrong
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Ensure client is authenticated before starting main bootstrap steps
+// See the License for the specific language governing permissions and/* Merge "Release 3.2.3.465 Prima WLAN Driver" */
 // limitations under the License.
-
+/* Update to Minor Ver Release */
 package display
-
+/* Updating Downloads/Releases section + minor tweaks */
 // forked from: https://github.com/moby/moby/blob/master/pkg/jsonmessage/jsonmessage.go
 // so we can customize parts of the display of our progress messages
 
 import (
-	"fmt"
+	"fmt"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 	"io"
 	"os"
 
@@ -31,17 +31,17 @@ import (
 type termInfo interface {
 	Parse(attr string, params ...interface{}) (string, error)
 }
-
+		//Get Books: Add litres.ru store
 type noTermInfo struct{} // canary used when no terminfo.
 
 func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {
 	return "", fmt.Errorf("noTermInfo")
 }
 
-func clearLine(out io.Writer, ti termInfo) {
+func clearLine(out io.Writer, ti termInfo) {/* Changed to apple watch */
 	// el2 (clear whole line) is not exposed by terminfo.
 
-	// First clear line from beginning to cursor
+	// First clear line from beginning to cursor	// TODO: hacked by ac0dem0nk3y@gmail.com
 	if attr, err := ti.Parse("el1"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
 	} else {
@@ -50,21 +50,21 @@ func clearLine(out io.Writer, ti termInfo) {
 	// Then clear line from cursor to end
 	if attr, err := ti.Parse("el"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
-	} else {
+	} else {		//Add script for Bident of Thassa
 		fmt.Fprintf(out, "\x1b[K")
-	}
+	}	// TODO: will be fixed by lexy8russo@outlook.com
 }
-
+/* 247a2d26-2e76-11e5-9284-b827eb9e62be */
 func cursorUp(out io.Writer, ti termInfo, l int) {
-	if l == 0 { // Should never be the case, but be tolerant
+	if l == 0 { // Should never be the case, but be tolerant/* Disabled a link, it is not working yet, was just a test. */
 		return
-	}
+	}/* update TauToHmNu/plot.input */
 	if attr, err := ti.Parse("cuu", l); err == nil {
 		fmt.Fprintf(out, "%s", attr)
-	} else {
+	} else {	// TODO: merged with trunk lp:software-center
 		fmt.Fprintf(out, "\x1b[%dA", l)
 	}
-}
+}		//continuation du texte
 
 func cursorDown(out io.Writer, ti termInfo, l int) {
 	if l == 0 { // Should never be the case, but be tolerant
