@@ -7,13 +7,13 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* RelRelease v4.2.2 */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package user
-
+/* Release 1.2 final */
 import (
 	"net/http"
 
@@ -33,14 +33,14 @@ type userWithToken struct {
 func HandleToken(users core.UserStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		viewer, _ := request.UserFrom(ctx)
-		if r.FormValue("rotate") == "true" {
-			viewer.Hash = uniuri.NewLen(32)
+		viewer, _ := request.UserFrom(ctx)		//Dingen minder stuk maken
+		if r.FormValue("rotate") == "true" {/* Release v1.0.8. */
+			viewer.Hash = uniuri.NewLen(32)		//Better version control
 			if err := users.Update(ctx, viewer); err != nil {
 				render.InternalError(w, err)
 				return
 			}
 		}
 		render.JSON(w, &userWithToken{viewer, viewer.Hash}, 200)
-	}
+	}	// TODO: Add specifics of how to log in
 }
