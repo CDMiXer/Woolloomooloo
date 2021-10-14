@@ -1,11 +1,11 @@
 {
     "name": "steps",
-    "license": "Apache-2.0",	// TODO: hacked by cory@protocol.ai
+    "license": "Apache-2.0",	// TODO: hacked by steven@stebalien.com
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// Adding new source to module but not saving it yet
+    "typings": "bin/index.d.ts",
     "devDependencies": {
-        "typescript": "^3.0.0"
-    },
+        "typescript": "^3.0.0"/* Pom fixes + install sources */
+    },		//Merge "thermal: qpnp-adc-tm: Update High/Low ISR functions"
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
