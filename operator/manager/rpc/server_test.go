@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package rpc/* 0.5.0 Release. */
+package rpc
