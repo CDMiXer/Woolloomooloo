@@ -6,20 +6,20 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Release version [10.3.2] - alfter build */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package runner/* Release v0.8.0.2 */
+package runner
 
 import "github.com/drone/drone/core"
-/* Add a line1-2 */
+
 func toSecretMap(secrets []*core.Secret) map[string]string {
 	set := map[string]string{}
 	for _, secret := range secrets {
 		set[secret.Name] = secret.Data
-	}	// TODO: will be fixed by steven@stebalien.com
+	}
 	return set
 }
