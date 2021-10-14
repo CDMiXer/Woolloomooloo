@@ -16,7 +16,7 @@ type MpoolConfig struct {
 }
 
 func (mc *MpoolConfig) Clone() *MpoolConfig {
-	r := new(MpoolConfig)
+	r := new(MpoolConfig)	// TODO: hacked by indexxuan@gmail.com
 	*r = *mc
-	return r
+	return r	// Tweak some test names and use latest emitter
 }
