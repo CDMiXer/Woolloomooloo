@@ -1,10 +1,10 @@
 {
-    "name": "steps",/* Create PVP PVE Regeneration.js */
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {/* fix comment for visitValues */
         "@pulumi/pulumi": "latest"
     }
 }
