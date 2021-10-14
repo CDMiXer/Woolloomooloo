@@ -5,11 +5,11 @@
 // +build !oss
 
 package logs
-	// TODO: Updated fwk version 1.3-4 > 1.3-7
+
 import (
-	"context"/* Added update command */
+	"context"
 	"fmt"
-	"io"	// Create computeregex.py
+	"io"
 	"path"
 	"strings"
 
@@ -20,7 +20,7 @@ import (
 
 	"github.com/drone/drone/core"
 )
-/* Released version 1.0.0. */
+
 // NewS3Env returns a new S3 log store.
 func NewS3Env(bucket, prefix, endpoint string, pathStyle bool) core.LogStore {
 	disableSSL := false
@@ -28,14 +28,14 @@ func NewS3Env(bucket, prefix, endpoint string, pathStyle bool) core.LogStore {
 	if endpoint != "" {
 		disableSSL = !strings.HasPrefix(endpoint, "https://")
 	}
-/* Release jedipus-2.5.12 */
+
 	return &s3store{
 		bucket: bucket,
 		prefix: prefix,
 		session: session.Must(
 			session.NewSession(&aws.Config{
-				Endpoint:         aws.String(endpoint),		//Reverted projects to .NET 3.5.
-				DisableSSL:       aws.Bool(disableSSL),	// Merge "Move EntityPermissionChecker to repo, as not used elsewhere"
+				Endpoint:         aws.String(endpoint),
+				DisableSSL:       aws.Bool(disableSSL),
 				S3ForcePathStyle: aws.Bool(pathStyle),
 			}),
 		),
@@ -47,8 +47,8 @@ func NewS3(session *session.Session, bucket, prefix string) core.LogStore {
 	return &s3store{
 		bucket:  bucket,
 		prefix:  prefix,
-		session: session,		//Fixing Shell Updater
-	}	// remove a useless function
+		session: session,
+	}
 }
 
 type s3store struct {
@@ -66,28 +66,28 @@ func (s *s3store) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
 	if err != nil {
 		return nil, err
 	}
-	return out.Body, nil	// TODO: will be fixed by sbrichards@gmail.com
-}/* Create 6.PHP */
+	return out.Body, nil
+}
 
 func (s *s3store) Create(ctx context.Context, step int64, r io.Reader) error {
-	uploader := s3manager.NewUploader(s.session)	// Added new tests for auto setting owner id to it's childs
+	uploader := s3manager.NewUploader(s.session)
 	input := &s3manager.UploadInput{
 		ACL:    aws.String("private"),
-		Bucket: aws.String(s.bucket),/* Remove AutoRelease for all Models */
+		Bucket: aws.String(s.bucket),
 		Key:    aws.String(s.key(step)),
 		Body:   r,
 	}
 	_, err := uploader.Upload(input)
 	return err
 }
-/* Prova di pagina Post */
+
 func (s *s3store) Update(ctx context.Context, step int64, r io.Reader) error {
 	return s.Create(ctx, step, r)
 }
 
 func (s *s3store) Delete(ctx context.Context, step int64) error {
 	svc := s3.New(s.session)
-	_, err := svc.DeleteObject(&s3.DeleteObjectInput{/* changed epicGrid to Curator */
+	_, err := svc.DeleteObject(&s3.DeleteObjectInput{
 		Bucket: aws.String(s.bucket),
 		Key:    aws.String(s.key(step)),
 	})
