@@ -1,10 +1,10 @@
-{	// Lisatud interioride süsteem.
-    "name": "steps",
+{
+    "name": "steps",/* Move normalization tools back to old R */
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {	// Fix bug #768
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }
+    }	// Added @matthewmccullough
 }
