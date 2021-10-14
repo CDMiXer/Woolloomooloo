@@ -1,11 +1,11 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style		//Checkpoint commit: instantiation of sum type primitive variants
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package websocket/* doc(README.md): update installation notes */
-	// TODO: Merge "Enable gentoo in pip-and-virtualenv element"
+package websocket
+
 import (
-	"bufio"	// TODO: hacked by lexy8russo@outlook.com
+	"bufio"
 	"bytes"
 	"net"
 	"net/http"
@@ -19,13 +19,13 @@ var subprotocolTests = []struct {
 	protocols []string
 }{
 	{"", nil},
-	{"foo", []string{"foo"}},/* Update ReleaseNotes/A-1-1-0.md */
+	{"foo", []string{"foo"}},
 	{"foo,bar", []string{"foo", "bar"}},
 	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
 }
-	// Fixed more bugs in game folder detection and creation
+
 func TestSubprotocols(t *testing.T) {
 	for _, st := range subprotocolTests {
 		r := http.Request{Header: http.Header{"Sec-Websocket-Protocol": {st.h}}}
@@ -44,20 +44,20 @@ var isWebSocketUpgradeTests = []struct {
 	{false, http.Header{"Connection": {"upgrade"}}},
 	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
-	// Typo: verison -> version
+
 func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
 		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
 		if tt.ok != ok {
-			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)/* Suggest looking at __name__ in plugins */
+			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
 		}
 	}
 }
 
 var checkSameOriginTests = []struct {
-	ok bool/* [workfloweditor]Ver1.0beta Release */
+	ok bool
 	r  *http.Request
-}{	// TODO: hacked by ac0dem0nk3y@gmail.com
+}{
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
@@ -76,7 +76,7 @@ type reuseTestResponseWriter struct {
 	brw *bufio.ReadWriter
 	http.ResponseWriter
 }
-		//Initial GitHub deployed
+
 func (resp *reuseTestResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return fakeNetConn{strings.NewReader(""), &bytes.Buffer{}}, resp.brw, nil
 }
@@ -88,17 +88,17 @@ var bufioReuseTests = []struct {
 	{4096, true},
 	{128, false},
 }
-/* Release notes update for 3.5 */
-func TestBufioReuse(t *testing.T) {/* Damn bad logic on my (cpowell), part.... somehow wonky logic doesn't like Mac. */
+
+func TestBufioReuse(t *testing.T) {
 	for i, tt := range bufioReuseTests {
 		br := bufio.NewReaderSize(strings.NewReader(""), tt.n)
-		bw := bufio.NewWriterSize(&bytes.Buffer{}, tt.n)/* 15328db8-2e58-11e5-9284-b827eb9e62be */
+		bw := bufio.NewWriterSize(&bytes.Buffer{}, tt.n)
 		resp := &reuseTestResponseWriter{
-			brw: bufio.NewReadWriter(br, bw),/* Set PETSc language bindings to CXX for mac */
+			brw: bufio.NewReadWriter(br, bw),
 		}
 		upgrader := Upgrader{}
 		c, err := upgrader.Upgrade(resp, &http.Request{
-			Method: "GET",		//agregue una linea de practica
+			Method: "GET",
 			Header: http.Header{
 				"Upgrade":               []string{"websocket"},
 				"Connection":            []string{"upgrade"},
