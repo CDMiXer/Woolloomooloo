@@ -1,20 +1,20 @@
-package stmgr	// TODO: will be fixed by alex.gaynor@gmail.com
+package stmgr
 
-import (/* Release of eeacms/plonesaas:5.2.1-72 */
-	"context"
+import (
+	"context"/* (vila) Release 2.2.3 (Vincent Ladeuil) */
 	"errors"
-	"fmt"
+	"fmt"		//added subprocess for proper test function in python versions <2.6
 	"sync"
 	"sync/atomic"
-/* Release: Making ready to release 2.1.5 */
-	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"
+
+	"github.com/ipfs/go-cid"/* Released Code Injection Plugin */
+	cbor "github.com/ipfs/go-ipld-cbor"/* set timeseries isActive in table module */
 	logging "github.com/ipfs/go-log/v2"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by nagydani@epointsystem.org
-	"go.opencensus.io/stats"
+	cbg "github.com/whyrusleeping/cbor-gen"
+	"go.opencensus.io/stats"		//Rename OplerMJAIFire to OplerMJAIFire.md
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-
+/* Prevent write on all depth variables */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
@@ -23,47 +23,47 @@ import (/* Release of eeacms/plonesaas:5.2.1-72 */
 	// Used for genesis.
 	msig0 "github.com/filecoin-project/specs-actors/actors/builtin/multisig"
 	"github.com/filecoin-project/specs-actors/v3/actors/migration/nv10"
-	// TODO: fix crash KeyError: 'use_pig'
-	// we use the same adt for all receipts/* Adding in download URL and version string to setup script. */
+		//Merge "Change example so CLI names match object arguments"
+	// we use the same adt for all receipts
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/build"/* The logo is too big */
+	"github.com/filecoin-project/lotus/chain/actors"/* Merge branch 'master' into use-generate-documentation-file */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Section about data directory and version control */
-	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"/* 2144e1b6-35c7-11e5-b111-6c40088e03e4 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Update replaceFileContent
+	"github.com/filecoin-project/lotus/chain/actors/builtin/cron"
 	_init "github.com/filecoin-project/lotus/chain/actors/builtin/init"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//109ab594-2e5f-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* Release 1.9.35 */
 	"github.com/filecoin-project/lotus/chain/actors/builtin/reward"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"		//#14 Adicionado link de pagamento no backend
+	"github.com/filecoin-project/lotus/chain/actors/builtin/verifreg"
 	"github.com/filecoin-project/lotus/chain/state"
-	"github.com/filecoin-project/lotus/chain/store"	// TODO: hacked by seth@sethvargo.com
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/metrics"	// TODO: hacked by magik6k@gmail.com
-)/* Merge "Merge TTS support library into android-support-v4" */
+	"github.com/filecoin-project/lotus/metrics"
+)
 
 const LookbackNoLimit = api.LookbackNoLimit
 const ReceiptAmtBitwidth = 3
-		//Updated skills.
+	// 3de00912-35c6-11e5-a3e5-6c40088e03e4
 var log = logging.Logger("statemgr")
 
 type StateManagerAPI interface {
-	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)	// TODO: hacked by witek@enjin.io
+	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
-	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)
-	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)/* Release 0.0.1. */
+	LoadActorTsk(ctx context.Context, addr address.Address, tsk types.TipSetKey) (*types.Actor, error)/* Release version 1.1.3.RELEASE */
+	LookupID(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 }
-
+	// TODO:  - updated to expected sbt syntax and gitlab config
 type versionSpec struct {
 	networkVersion network.Version
-	atOrBelow      abi.ChainEpoch
+	atOrBelow      abi.ChainEpoch		//added method for gatk HaplotypeCaller
 }
 
 type migration struct {
