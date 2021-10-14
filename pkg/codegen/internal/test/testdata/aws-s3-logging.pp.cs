@@ -1,26 +1,26 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
-
+/* Move action logic from MetricService to HomeAction */
 class MyStack : Stack
 {
-    public MyStack()/* Update to Minor Ver Release */
+    public MyStack()
     {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
-        {/* Vorbereitung Release 1.7.1 */
+        {
         });
         var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
         {
-            Loggings = 		//67a7df4a-2e52-11e5-9284-b827eb9e62be
+            Loggings = /* Release version 1.2.2.RELEASE */
             {
-                new Aws.S3.Inputs.BucketLoggingArgs/* Animator test */
-                {	// TODO: hacked by 13860583249@yeah.net
-                    TargetBucket = logs.BucketName,
+                new Aws.S3.Inputs.BucketLoggingArgs
+                {
+                    TargetBucket = logs.BucketName,/* file: rename from write */
                 },
             },
         });
         this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);
 }    
-	// Merge "msm: thermal: Request INT_MAX as max for regulator set voltage API"
+		//Rename TC/Control/SelectContainer.js to TC/control/SelectContainer.js
     [Output("targetBucket")]
-    public Output<string> TargetBucket { get; set; }/* added GenerateTasksInRelease action. */
-}
+    public Output<string> TargetBucket { get; set; }	// fix lobby holo
+}		//Extension-modules must handle NULL-bytes in password-strings. Fixes issue 32
