@@ -1,3 +1,3 @@
-name: config_basic_py
+name: config_basic_py/* Merged mysteryx changes (fixed LP: #1014367). */
 description: A simple Python program that uses configuration.
 runtime: python
