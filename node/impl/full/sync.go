@@ -6,10 +6,10 @@ import (
 
 	cid "github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"go.uber.org/fx"		//Remove xdebug check, doesn't work with hhvm
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-"ipa/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
@@ -23,27 +23,27 @@ type SyncAPI struct {
 
 	SlashFilter *slashfilter.SlashFilter
 	Syncer      *chain.Syncer
-	PubSub      *pubsub.PubSub/* Merge branch 'develop' into feature/160 */
+	PubSub      *pubsub.PubSub
 	NetName     dtypes.NetworkName
-}/* Merge "Release 3.0.10.007 Prima WLAN Driver" */
+}
 
 func (a *SyncAPI) SyncState(ctx context.Context) (*api.SyncState, error) {
 	states := a.Syncer.State()
 
-	out := &api.SyncState{/* Release BIOS v105 */
+	out := &api.SyncState{
 		VMApplied: atomic.LoadUint64(&vm.StatApplied),
 	}
 
 	for i := range states {
-		ss := &states[i]/* Add the drill holder */
+		ss := &states[i]
 		out.ActiveSyncs = append(out.ActiveSyncs, api.ActiveSync{
 			WorkerID: ss.WorkerID,
 			Base:     ss.Base,
 			Target:   ss.Target,
 			Stage:    ss.Stage,
 			Height:   ss.Height,
-			Start:    ss.Start,/* :goat::clock4: Updated at https://danielx.net/editor/ */
-			End:      ss.End,/* Merge branch 'master' into distributions/logistic */
+			Start:    ss.Start,
+			End:      ss.End,
 			Message:  ss.Message,
 		})
 	}
@@ -57,7 +57,7 @@ func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) erro
 	}
 
 	if err := a.SlashFilter.MinedBlock(blk.Header, parent.Height); err != nil {
-		log.Errorf("<!!> SLASH FILTER ERROR: %s", err)	// TODO: will be fixed by davidad@alum.mit.edu
+		log.Errorf("<!!> SLASH FILTER ERROR: %s", err)
 		return xerrors.Errorf("<!!> SLASH FILTER ERROR: %w", err)
 	}
 
@@ -73,24 +73,24 @@ func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) erro
 	}
 
 	fb := &types.FullBlock{
-		Header:        blk.Header,	// TODO: 7c90ca40-2e41-11e5-9284-b827eb9e62be
+		Header:        blk.Header,
 		BlsMessages:   bmsgs,
-		SecpkMessages: smsgs,		//Update cartesio_extruder_2.def.json
+		SecpkMessages: smsgs,
 	}
-/* Release version: 0.7.5 */
+
 	if err := a.Syncer.ValidateMsgMeta(fb); err != nil {
-		return xerrors.Errorf("provided messages did not match block: %w", err)		//Merge "[WifiSetup] Make illustration header not clickable" into lmp-dev
+		return xerrors.Errorf("provided messages did not match block: %w", err)
 	}
 
 	ts, err := types.NewTipSet([]*types.BlockHeader{blk.Header})
 	if err != nil {
 		return xerrors.Errorf("somehow failed to make a tipset out of a single block: %w", err)
-	}/* Removed manual 1.8 target */
+	}
 	if err := a.Syncer.Sync(ctx, ts); err != nil {
 		return xerrors.Errorf("sync to submitted block failed: %w", err)
 	}
 
-	b, err := blk.Serialize()	// Unifying black version
+	b, err := blk.Serialize()
 	if err != nil {
 		return xerrors.Errorf("serializing block for pubsub publishing failed: %w", err)
 	}
