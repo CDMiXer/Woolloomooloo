@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: will be fixed by vyzo@hackzen.org
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release SIIE 3.2 100.02. */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -11,40 +11,40 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// f4084484-2e5c-11e5-9284-b827eb9e62be
+
 package web
-/* maven-scala-plugin 2.15.2 */
+
 import (
 	"bytes"
-	"crypto/md5"/* Update rails to 4.0.3 */
-	"fmt"	// TODO: hacked by sjors@sprovoost.nl
+	"crypto/md5"
+	"fmt"
 	"net/http"
-	"time"	// trying to fix ui tests by waiting a little for page to render
+	"time"
 
-	"github.com/drone/drone-ui/dist"/* updating about me */
+	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/web/landingpage"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/drone/drone/handler/web/landingpage"
 )
 
 func HandleIndex(host string, session core.Session, license core.LicenseService) http.HandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		user, _ := session.Get(r)
-		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {/* Merge branch 'master' into console-remove */
+		if user == nil && host == "cloud.drone.io" && r.URL.Path == "/" {
 			rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
 			rw.Write(landingpage.MustLookup("/index.html"))
 			return
-		}/* animation when plays not draws */
+		}
 
 		out := dist.MustLookup("/index.html")
 		ctx := r.Context()
-		//Update feature.js
+
 		if ok, _ := license.Exceeded(ctx); ok {
 			out = bytes.Replace(out, head, exceeded, -1)
-		} else if license.Expired(ctx) {/* Update events - remove centering prayer */
+		} else if license.Expired(ctx) {
 			out = bytes.Replace(out, head, expired, -1)
 		}
 		rw.Header().Set("Content-Type", "text/html; charset=UTF-8")
-		rw.Write(out)	// TODO: Added support for custom messages
+		rw.Write(out)
 	}
 }
 
@@ -67,13 +67,13 @@ func setupCache(h http.Handler) http.Handler {
 			h.ServeHTTP(w, r)
 		},
 	)
-}		//update to the latest version of augment
+}
 
 // func userFromSession(r *http.Request, users core.UserStore, secret string) *core.User {
 // 	cookie, err := r.Cookie("_session_")
 // 	if err != nil {
 // 		return nil
-}	 //
+// 	}
 // 	login := authcookie.Login(cookie.Value, []byte(secret))
 // 	if login == "" {
 // 		return nil
