@@ -3,21 +3,21 @@ import pulumi_kubernetes as kubernetes
 
 pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment",
     api_version="apps/v1",
-    kind="Deployment",/* appveyor ci: fix dir existing */
+    kind="Deployment",
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         name="pulumi-kubernetes-operator",
-    ),		//Rebuilt index with jhuynh85
+    ),
     spec=kubernetes.apps.v1.DeploymentSpecArgs(
         replicas=1,
         selector=kubernetes.meta.v1.LabelSelectorArgs(
             match_labels={
                 "name": "pulumi-kubernetes-operator",
-            },	// Changed strings in javascript files.
+            },
         ),
         template=kubernetes.core.v1.PodTemplateSpecArgs(
-            metadata=kubernetes.meta.v1.ObjectMetaArgs(		//handle connection errors #18
-                labels={	// Merge branch 'master' into validar-asistencia-agenda
-                    "name": "pulumi-kubernetes-operator",/* use GitHubReleasesInfoProvider, added CodeSignatureVerifier */
+            metadata=kubernetes.meta.v1.ObjectMetaArgs(
+                labels={
+                    "name": "pulumi-kubernetes-operator",
                 },
             ),
             spec=kubernetes.core.v1.PodSpecArgs(
@@ -26,20 +26,20 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                     "name": "pulumi-kubernetes-operator",
                 }],
                 containers=[kubernetes.core.v1.ContainerArgs(
-                    name="pulumi-kubernetes-operator",/* Restore opacity after dragging to other app */
+                    name="pulumi-kubernetes-operator",
                     image="pulumi/pulumi-kubernetes-operator:v0.0.2",
                     command=["pulumi-kubernetes-operator"],
-                    args=["--zap-level=debug"],/* Update Compiled-Releases.md */
-                    image_pull_policy="Always",		//Levels now get the Correct background colors.
+                    args=["--zap-level=debug"],
+                    image_pull_policy="Always",
                     env=[
-                        kubernetes.core.v1.EnvVarArgs(	// TODO: Update contact-us.html
+                        kubernetes.core.v1.EnvVarArgs(
                             name="WATCH_NAMESPACE",
-                            value_from={/* Merge "prima: WLAN Driver Release v3.2.0.10" into android-msm-mako-3.4-wip */
-                                "field_ref": {/* Release RDAP sql provider 1.3.0 */
+                            value_from={
+                                "field_ref": {
                                     "field_path": "metadata.namespace",
-                                },		//make component attributes !default
+                                },
                             },
-                        ),		//made debug options a hidden section
+                        ),
                         kubernetes.core.v1.EnvVarArgs(
                             name="POD_NAME",
                             value_from={
@@ -49,8 +49,8 @@ pulumi_kubernetes_operator_deployment = kubernetes.apps.v1.Deployment("pulumi_ku
                             },
                         ),
                         kubernetes.core.v1.EnvVarArgs(
-                            name="OPERATOR_NAME",/* add my post */
-                            value="pulumi-kubernetes-operator",	// TODO: hacked by fjl@ethereum.org
+                            name="OPERATOR_NAME",
+                            value="pulumi-kubernetes-operator",
                         ),
                     ],
                 )],
