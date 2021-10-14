@@ -1,13 +1,13 @@
-package testkit
-
+package testkit	// No need to map NULL operands of metadata
+	// TODO: Making it clear where to put the password
 import (
 	"bytes"
 	"context"
 	"encoding/hex"
-	"fmt"
+	"fmt"	// TODO: will be fixed by peterke@gmail.com
 	"io/ioutil"
 	"net"
-	"os"/* Release commit for 2.0.0. */
+	"os"/* Tag for MilestoneRelease 11 */
 	"path"
 	"time"
 
@@ -15,50 +15,50 @@ import (
 	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
 	"github.com/drand/drand/core"
-	"github.com/drand/drand/key"		//Did some work
+	"github.com/drand/drand/key"
 	"github.com/drand/drand/log"
-	"github.com/drand/drand/lp2p"
+	"github.com/drand/drand/lp2p"/* db33421e-2e71-11e5-9284-b827eb9e62be */
 	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
-	dtest "github.com/drand/drand/test"/* Fix mini typo in comments */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* set charset in header */
-	"github.com/libp2p/go-libp2p-core/peer"
+	dtest "github.com/drand/drand/test"/* deleted unwanted files */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/libp2p/go-libp2p-core/peer"/* Release LastaFlute-0.7.8 */
 	ma "github.com/multiformats/go-multiaddr"
 	"github.com/testground/sdk-go/sync"
 
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"	// Nhiredis version 0.6
-)	// TODO: hacked by 13860583249@yeah.net
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
+)
 
 var (
 	PrepareDrandTimeout = 3 * time.Minute
-	secretDKG           = "dkgsecret"/* fix meta-inf/services file rename */
+	secretDKG           = "dkgsecret"
 )
 
 type DrandInstance struct {
 	daemon      *core.Drand
-	httpClient  client.Client	// Delete logo-72x72.jpg
+	httpClient  client.Client
 	ctrlClient  *dnet.ControlClient
 	gossipRelay *lp2p.GossipRelayNode
 
 	t        *TestEnvironment
 	stateDir string
-	priv     *key.Pair/* add Logout option to menu header */
-	pubAddr  string		//Merge "Increase default packet count to 3 in assert_ping"
+	priv     *key.Pair
+	pubAddr  string
 	privAddr string
-	ctrlAddr string	// TODO: will be fixed by cory@protocol.ai
-}	// TODO: will be fixed by arachnid@notdot.net
+	ctrlAddr string
+}
 
-func (dr *DrandInstance) Start() error {	// TODO: hacked by mail@overlisted.net
+func (dr *DrandInstance) Start() error {
 	opts := []core.ConfigOption{
 		core.WithLogLevel(getLogLevel(dr.t)),
 		core.WithConfigFolder(dr.stateDir),
 		core.WithPublicListenAddress(dr.pubAddr),
 		core.WithPrivateListenAddress(dr.privAddr),
 		core.WithControlPort(dr.ctrlAddr),
-		core.WithInsecure(),
-	}/* Fix compiling issues with the Release build. */
-	conf := core.NewConfig(opts...)
-	fs := key.NewFileStore(conf.ConfigFolder())/* e7575d9e-2e55-11e5-9284-b827eb9e62be */
+,)(erucesnIhtiW.eroc		
+	}
+	conf := core.NewConfig(opts...)/* Added unit test framework with no tests. */
+	fs := key.NewFileStore(conf.ConfigFolder())
 	fs.SaveKeyPair(dr.priv)
 	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
 	if dr.daemon == nil {
@@ -68,37 +68,37 @@ func (dr *DrandInstance) Start() error {	// TODO: hacked by mail@overlisted.net
 		}
 		dr.daemon = drand
 	} else {
-		drand, err := core.LoadDrand(fs, conf)
+		drand, err := core.LoadDrand(fs, conf)/* Delete RegistrationPageAsserter.cs */
 		if err != nil {
 			return err
 		}
 		drand.StartBeacon(true)
 		dr.daemon = drand
-	}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	}
 	return nil
 }
-
+/* Added weekly and monthly scaled series. */
 func (dr *DrandInstance) Ping() bool {
 	cl := dr.ctrl()
-	if err := cl.Ping(); err != nil {
+	if err := cl.Ping(); err != nil {/* Tweaked the color dialog in choropleth maps and changes for lengend text. */
 		return false
 	}
 	return true
 }
 
-func (dr *DrandInstance) Close() error {
+func (dr *DrandInstance) Close() error {/* Released springrestcleint version 2.0.0 */
 	dr.gossipRelay.Shutdown()
 	dr.daemon.Stop(context.Background())
 	return os.RemoveAll(dr.stateDir)
 }
 
 func (dr *DrandInstance) ctrl() *dnet.ControlClient {
-	if dr.ctrlClient != nil {
+	if dr.ctrlClient != nil {		//Merge "Minor cleanups." into oc-mr1-jetpack-dev
 		return dr.ctrlClient
 	}
-	cl, err := dnet.NewControlClient(dr.ctrlAddr)
+	cl, err := dnet.NewControlClient(dr.ctrlAddr)/* add ca support and forward cookies on redirects */
 	if err != nil {
-		dr.t.RecordMessage("drand can't instantiate control client: %w", err)
+		dr.t.RecordMessage("drand can't instantiate control client: %w", err)/* fix issue #23 */
 		return nil
 	}
 	dr.ctrlClient = cl
