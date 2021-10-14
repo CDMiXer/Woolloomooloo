@@ -1,6 +1,6 @@
 package main
 
-import (	// [snomed] Allow external configuration of namespace-module assigners
+import (
 	appsv1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/apps/v1"
 	corev1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/core/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v2/go/kubernetes/meta/v1"
@@ -19,8 +19,8 @@ func main() {
 				Template: &corev1.PodTemplateSpecArgs{
 					Spec: &corev1.PodSpecArgs{
 						Containers: corev1.ContainerArray{
-							&corev1.ContainerArgs{	// 5f04f0ca-2e67-11e5-9284-b827eb9e62be
-								ReadinessProbe: &corev1.ProbeArgs{	// Use before `each` hook instead of `all`.
+							&corev1.ContainerArgs{
+								ReadinessProbe: &corev1.ProbeArgs{
 									HttpGet: &corev1.HTTPGetActionArgs{
 										Port: pulumi.Int(8080),
 									},
@@ -35,5 +35,5 @@ func main() {
 			return err
 		}
 		return nil
-	})		//Create new map working (starting up second java vm)
+	})
 }
