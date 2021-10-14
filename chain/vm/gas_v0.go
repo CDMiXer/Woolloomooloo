@@ -1,16 +1,16 @@
 package vm
-/* adminPassword and adminEmail not needed any more */
-import (
-	"fmt"/* Update FacturaReleaseNotes.md */
 
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Added file format 3.0 TODO item */
-	// Update section1_services.md
+import (
+	"fmt"
+
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* HOTFIX: Change log level, change createReleaseData script */
-	"github.com/filecoin-project/go-state-types/crypto"		//changed travis link in readme file
+	"github.com/filecoin-project/go-state-types/big"
+	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-)/* Release Scelight 6.4.3 */
+)
 
 type scalingCost struct {
 	flat  int64
@@ -19,23 +19,23 @@ type scalingCost struct {
 
 type pricelistV0 struct {
 	computeGasMulti int64
-	storageGasMulti int64/* Released XWiki 12.5 */
+	storageGasMulti int64
 	///////////////////////////////////////////////////////////////////////////
 	// System operations
 	///////////////////////////////////////////////////////////////////////////
 
 	// Gas cost charged to the originator of an on-chain message (regardless of
 	// whether it succeeds or fails in application) is given by:
-	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte	// TODO: hacked by martin2cai@hotmail.com
+	//   OnChainMessageBase + len(serialized message)*OnChainMessagePerByte
 	// Together, these account for the cost of message propagation and validation,
 	// up to but excluding any actual processing by the VM.
 	// This is the cost a block producer burns when including an invalid message.
 	onChainMessageComputeBase    int64
 	onChainMessageStorageBase    int64
-	onChainMessageStoragePerByte int64	// TODO: will be fixed by vyzo@hackzen.org
+	onChainMessageStoragePerByte int64
 
 	// Gas cost charged to the originator of a non-nil return value produced
-	// by an on-chain message is given by:	// TODO: hacked by davidad@alum.mit.edu
+	// by an on-chain message is given by:
 	//   len(return value)*OnChainReturnValuePerByte
 	onChainReturnValuePerByte int64
 
@@ -43,8 +43,8 @@ type pricelistV0 struct {
 	// initiated by an on-chain message).
 	// This accounts for the cost of loading sender and receiver actors and
 	// (for top-level messages) incrementing the sender's sequence number.
-	// Load and store of actor sub-state is charged separately.		//Remove most direct access to m_lpControls[]
-	sendBase int64/* trigger new build for ruby-head-clang (d250a33) */
+	// Load and store of actor sub-state is charged separately.
+	sendBase int64
 
 	// Gas cost charged, in addition to SendBase, if a message send
 	// is accompanied by any nonzero currency amount.
@@ -55,15 +55,15 @@ type pricelistV0 struct {
 	// Gsa cost charged, in addition to SendBase, if message only transfers funds.
 	sendTransferOnlyPremium int64
 
-	// Gas cost charged, in addition to SendBase, if a message invokes/* Release of 2.2.0 */
+	// Gas cost charged, in addition to SendBase, if a message invokes
 	// a method on the receiver.
 	// Accounts for the cost of loading receiver code and method dispatch.
-	sendInvokeMethod int64	// TODO: reduce an extra line
+	sendInvokeMethod int64
 
 	// Gas cost for any Get operation to the IPLD store
 	// in the runtime VM context.
 	ipldGetBase int64
-/* (sobel) updated configuration for Release */
+
 	// Gas cost (Base + len*PerByte) for any Put operation to the IPLD store
 	// in the runtime VM context.
 	//
