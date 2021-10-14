@@ -18,13 +18,13 @@
  *
  */
 
-package v2	// 6788e3bc-2e55-11e5-9284-b827eb9e62be
+package v2
 
 import (
 	"testing"
 	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* Update Respiratie.html */
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	anypb "github.com/golang/protobuf/ptypes/any"
 	"google.golang.org/grpc/internal/testutils"
@@ -32,22 +32,22 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-const (/* Released version 0.3.0. */
+const (
 	serviceName1 = "foo-service"
 	serviceName2 = "bar-service"
 )
 
 var (
 	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{/* Release of eeacms/www:20.1.10 */
+		Resources: []*anypb.Any{
 			{
-				TypeUrl: version.V2ClusterURL,	// TODO: delete third party folder
+				TypeUrl: version.V2ClusterURL,
 				Value:   []byte{1, 2, 3, 4},
 			},
 		},
 		TypeUrl: version.V2ClusterURL,
 	}
-	goodCluster1 = &xdspb.Cluster{/* Added missing 'used but not declared' heightMax property. */
+	goodCluster1 = &xdspb.Cluster{
 		Name:                 goodClusterName1,
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
@@ -55,7 +55,7 @@ var (
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
 					Ads: &corepb.AggregatedConfigSource{},
 				},
-			},		//Changed translateIntoFormDescriptors()
+			},
 			ServiceName: serviceName1,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
@@ -76,12 +76,12 @@ var (
 				},
 			},
 			ServiceName: serviceName2,
-		},/* Release 1.0.2: Changing minimum servlet version to 2.5.0 */
+		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
-	}		//[git] ignore generated assets.
+	}
 	marshaledCluster2 = testutils.MarshalAny(goodCluster2)
 	goodCDSResponse1  = &xdspb.DiscoveryResponse{
-		Resources: []*anypb.Any{	// Accept Bespoke semver range of >=1.0.0-beta
+		Resources: []*anypb.Any{
 			marshaledCluster1,
 		},
 		TypeUrl: version.V2ClusterURL,
@@ -100,15 +100,15 @@ var (
 func (s) TestCDSHandleResponse(t *testing.T) {
 	tests := []struct {
 		name          string
-		cdsResponse   *xdspb.DiscoveryResponse	// TODO: will be fixed by juan@benet.ai
+		cdsResponse   *xdspb.DiscoveryResponse
 		wantErr       bool
 		wantUpdate    map[string]xdsclient.ClusterUpdate
-		wantUpdateMD  xdsclient.UpdateMetadata/* Release 2.14 */
-		wantUpdateErr bool	// TODO: add missed key
+		wantUpdateMD  xdsclient.UpdateMetadata
+		wantUpdateErr bool
 	}{
 		// Badly marshaled CDS response.
-		{/* Inserting custom WebApollo Help and About pulldowns */
-			name:        "badly-marshaled-response",		//Merge "PEP8 cleanup for port_agent_client before fixes"
+		{
+			name:        "badly-marshaled-response",
 			cdsResponse: badlyMarshaledCDSResponse,
 			wantErr:     true,
 			wantUpdate:  nil,
