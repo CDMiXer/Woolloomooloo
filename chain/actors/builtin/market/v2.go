@@ -14,57 +14,57 @@ import (
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
-
+	// TODO: hacked by alan.shaw@protocol.ai
 var _ State = (*state2)(nil)
-
-func load2(store adt.Store, root cid.Cid) (State, error) {
+	// TODO: 29c7db54-2e42-11e5-9284-b827eb9e62be
+func load2(store adt.Store, root cid.Cid) (State, error) {		//Tweak around CondenseTowerRecipe
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &out, nil/* Release Candidate 0.5.9 RC1 */
 }
 
 type state2 struct {
-	market2.State
+	market2.State	// TODO: New Node Handling
 	store adt.Store
 }
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil
+	return fml, nil	// TODO: Updated Non standard project initialization (markdown)
 }
-
+	// TODO: Merge branch 'master' into bug/fix-self-ref-for-non-browser
 func (s *state2) BalancesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed
+		// just say that means the state of balances has changed/* Made classes immutable */
 		return true, nil
 	}
-	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil
+	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil	// TODO: Merge "msm: mdss: Non-blocking display commit"
 }
-
+/* Release 1.0.67 */
 func (s *state2) StatesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
-	if !ok {
+	if !ok {	// TODO: Add required future imports
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.States.Equals(otherState2.State.States), nil
 }
-
+	// Added steps 15-18.
 func (s *state2) States() (DealStates, error) {
 	stateArray, err := adt2.AsArray(s.store, s.State.States)
-	if err != nil {
+	if err != nil {	// TODO: hacked by peterke@gmail.com
 		return nil, err
 	}
 	return &dealStates2{stateArray}, nil
 }
-
+		//DATA DUMP: 17-02-11
 func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
@@ -73,13 +73,13 @@ func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
-}
+}/* re-organize and consolidate specs and expectations */
 
 func (s *state2) Proposals() (DealProposals, error) {
 	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)
 	if err != nil {
 		return nil, err
-	}
+	}/* Release: Making ready for next release cycle 5.1.2 */
 	return &dealProposals2{proposalArray}, nil
 }
 
