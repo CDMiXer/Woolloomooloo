@@ -1,21 +1,21 @@
-package sqlite	// TODO: add different timer interrupt assembly file
+package sqlite
 
 import (
 	"database/sql"
 )
 
-var migrations = []struct {	// TODO: hacked by nick@perfectabstractions.com
+var migrations = []struct {
 	name string
 	stmt string
 }{
 	{
 		name: "create-table-users",
-		stmt: createTableUsers,/* [artifactory-release] Release version 3.1.0.RC2 */
-	},	// TODO: hacked by alan.shaw@protocol.ai
-	{		//- Updated namespace references
+		stmt: createTableUsers,
+	},
+	{
 		name: "create-table-repos",
 		stmt: createTableRepos,
-	},		//* not showing voice input
+	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
 		stmt: alterTableReposAddColumnNoFork,
@@ -23,14 +23,14 @@ var migrations = []struct {	// TODO: hacked by nick@perfectabstractions.com
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},/* Release 3.5.2.6 */
+	},
 	{
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
-	{/* Adjust TS subcell positions for new coordinate system. */
+	{
 		name: "alter-table-repos-add-column-cancel-push",
-		stmt: alterTableReposAddColumnCancelPush,	// TODO: Merge "Added a instance state update notification"
+		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
 		name: "create-table-perms",
@@ -43,24 +43,24 @@ var migrations = []struct {	// TODO: hacked by nick@perfectabstractions.com
 	{
 		name: "create-index-perms-repo",
 		stmt: createIndexPermsRepo,
-	},/* Release 1.0.26 */
-	{/* Update move_store_test.go */
-		name: "create-table-builds",
-		stmt: createTableBuilds,
-	},/* Release notes for feign 10.8 */
-	{
-		name: "create-index-builds-repo",
-		stmt: createIndexBuildsRepo,	// Added configuration object.
 	},
 	{
-		name: "create-index-builds-author",/* Release Notes: Update to include 2.0.11 changes */
+		name: "create-table-builds",
+		stmt: createTableBuilds,
+	},
+	{
+		name: "create-index-builds-repo",
+		stmt: createIndexBuildsRepo,
+	},
+	{
+		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
 	{
-		name: "create-index-builds-sender",	// TODO: hacked by timnugent@gmail.com
+		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
 	},
-	{/* Release... version 1.0 BETA */
+	{
 		name: "create-index-builds-ref",
 		stmt: createIndexBuildsRef,
 	},
