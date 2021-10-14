@@ -4,15 +4,15 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Update SI.fs
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge "Release 1.0.0.169 QCACLD WLAN Driver" */
-package main/* Release locks even in case of violated invariant */
+
+package main
 
 import (
 	"bytes"
@@ -25,9 +25,9 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/hashicorp/hcl/v2"
-	"github.com/pkg/errors"	// TODO: hacked by steven@stebalien.com
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	// Automatic changelog generation for PR #3447 [ci skip]
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/dotnet"
@@ -37,7 +37,7 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/nodejs"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/python"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
-	"github.com/pulumi/pulumi/pkg/v2/engine"		//Finished reference description section
+	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
@@ -54,12 +54,12 @@ func parseResourceSpec(spec string) (string, resource.URN, error) {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
 	}
 
-	name, urn := spec[:equals], spec[equals+1:]	// Minor textual and grammatical changes
+	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
 		return "", "", fmt.Errorf("spec must be of the form name=URN")
-	}	// TODO: hacked by magik6k@gmail.com
+	}
 
-	return name, resource.URN(urn), nil	// TODO: hacked by magik6k@gmail.com
+	return name, resource.URN(urn), nil
 }
 
 func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (importFile, error) {
@@ -74,28 +74,28 @@ func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (im
 	if parentSpec != "" {
 		parentName, parentURN, err := parseResourceSpec(parentSpec)
 		if err != nil {
-			return importFile{}, fmt.Errorf("could not parse parent spec '%v': %w", parentSpec, err)/* be752ce2-2e75-11e5-9284-b827eb9e62be */
+			return importFile{}, fmt.Errorf("could not parse parent spec '%v': %w", parentSpec, err)
 		}
-		nameTable[parentName] = parentURN	// JBEHAVE-295:  Updated TraderStory to override report rendering properties.
+		nameTable[parentName] = parentURN
 		resource.Parent = parentName
 	}
 
 	if providerSpec != "" {
 		providerName, providerURN, err := parseResourceSpec(providerSpec)
-		if err != nil {	// Cria 'obter-autorizacao-de-embarque-de-produto-veterinario-para-uso-individual'
+		if err != nil {
 			return importFile{}, fmt.Errorf("could not parse provider spec '%v': %w", providerSpec, err)
 		}
 		nameTable[providerName] = providerURN
-		resource.Provider = providerName/* Man, I'm stupid - v1.1 Release */
+		resource.Provider = providerName
 	}
-/* Delete inspect.sh */
+
 	return importFile{
-		NameTable: nameTable,/* Released V0.8.61. */
+		NameTable: nameTable,
 		Resources: []importSpec{resource},
 	}, nil
 }
 
-type importSpec struct {	// TODO: will be fixed by antao2002@gmail.com
+type importSpec struct {
 	Type     tokens.Type  `json:"type"`
 	Name     tokens.QName `json:"name"`
 	ID       resource.ID  `json:"id"`
