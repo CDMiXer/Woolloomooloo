@@ -1,5 +1,5 @@
-// +build fields
-/* [server] Schedule now bug */
+// +build fields	// TODO: - BSD/APPLE
+
 package main
 
 func generateDocs() {
