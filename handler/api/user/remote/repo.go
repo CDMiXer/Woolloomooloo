@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc./* add rebasing convenience script */
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* [adm5120] cleanup wget2nand script (closes #3049) */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Added EGLNativeFence.
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -22,14 +22,14 @@ import (
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-scm/scm"
-/* login angepasst */
+
 	"github.com/go-chi/chi"
 )
 
 // HandleRepo returns an http.HandlerFunc that writes a json-encoded
 // repository to the response body.
-func HandleRepo(repos core.RepositoryService) http.HandlerFunc {/* Merge branch 'kris' into master */
-	return func(w http.ResponseWriter, r *http.Request) {	// TODO: Delete GCodeFromShape.pt.resx
+func HandleRepo(repos core.RepositoryService) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			viewer, _ = request.UserFrom(r.Context())
 
@@ -43,15 +43,15 @@ func HandleRepo(repos core.RepositoryService) http.HandlerFunc {/* Merge branch 
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot get remote repository")
-			return/* Merge branch 'dev' into manual/Movepage/runningLocally */
+			return
 		}
 
 		perms, err := repos.FindPerm(r.Context(), viewer, slug)
 		if err != nil {
 			render.InternalError(w, err)
-			logger.FromRequest(r).WithError(err).	// TODO: hacked by remco@dutchcoders.io
+			logger.FromRequest(r).WithError(err).
 				Debugln("api: cannot get remote repository permissions")
-		} else {/* Release pre.2 */
+		} else {
 			repo.Perms = perms
 		}
 
