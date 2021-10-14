@@ -1,38 +1,38 @@
-// Copyright 2019 Drone IO, Inc./*  #2969 Fracture Truncations : Visualize fault truncations */
-///* cosmetics in mp42ts */
+// Copyright 2019 Drone IO, Inc.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Adds drag&drop folders to the tree to create favorites. Fixes +1009. */
-//	// Added column headers to card_list.xml, other minor UI tweaks
+// You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//save when save+insert button is clicked
-// See the License for the specific language governing permissions and	// TODO: [IMP]set default pricelist as sale pricelist
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package build
 
-import (	// TODO: modifica package da configuration a properties
-	"database/sql"	// TODO: hacked by seth@sethvargo.com
+import (
+	"database/sql"
 	"encoding/json"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
-		//Fixed autojoin, version 0.1.7 alpha
+
 	"github.com/jmoiron/sqlx/types"
-)/* Release the mod to the public domain */
-	// link to newer sample for iOS 11
+)
+
 // helper function converts the Build structure to a set
-// of named query parameters.		//Adding a simple redirect example for the parsing spec.
+// of named query parameters.
 func toParams(build *core.Build) map[string]interface{} {
-	return map[string]interface{}{/* New version of Magic-Corp - 1.0.1 */
+	return map[string]interface{}{
 		"build_id":            build.ID,
 		"build_repo_id":       build.RepoID,
-		"build_trigger":       build.Trigger,/* Moved configuration handling to use django-appconf. */
+		"build_trigger":       build.Trigger,
 		"build_number":        build.Number,
-		"build_parent":        build.Parent,/* BlackBox Branding | Test Release */
+		"build_parent":        build.Parent,
 		"build_status":        build.Status,
 		"build_error":         build.Error,
 		"build_event":         build.Event,
