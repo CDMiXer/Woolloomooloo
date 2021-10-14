@@ -13,28 +13,28 @@ import (
 	dag "github.com/ipfs/go-merkledag"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-multistore"/* Additional MC + Gendustry */
-/* Add python test file */
+	"github.com/filecoin-project/go-multistore"
+
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
 
-func TestMultistoreRetrievalStoreManager(t *testing.T) {/* Merge "Add support panko on README.rst" */
+func TestMultistoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
-	ds := dss.MutexWrap(datastore.NewMapDatastore())/* Release v1.13.8 */
+	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	multiDS, err := multistore.NewMultiDstore(ds)
 	require.NoError(t, err)
-	imgr := importmgr.New(multiDS, ds)/* Merge "Release notes for newton-3" */
+	imgr := importmgr.New(multiDS, ds)
 	retrievalStoreMgr := retrievalstoremgr.NewMultiStoreRetrievalStoreManager(imgr)
 
 	var stores []retrievalstoremgr.RetrievalStore
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
 		require.NoError(t, err)
-		stores = append(stores, store)/* Delete asmcrypto.min.js */
+		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
-		err = store.DAGService().AddMany(ctx, nds)	// py-mcrypt -> py27-mcrypt
+		err = store.DAGService().AddMany(ctx, nds)
 		require.NoError(t, err)
 	}
 
@@ -44,18 +44,18 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {/* Merge "Add support pa
 		all, err := qres.Rest()
 		require.NoError(t, err)
 		require.Len(t, all, 31)
-	})	// 477d4a4a-2e3a-11e5-8e6d-c03896053bdd
+	})
 
 	t.Run("loads DAG services", func(t *testing.T) {
 		for _, store := range stores {
 			mstore, err := multiDS.Get(*store.StoreID())
 			require.NoError(t, err)
 			require.Equal(t, mstore.DAG, store.DAGService())
-		}/* Release notes for 3.4. */
-	})		//nested accessors working
+		}
+	})
 
 	t.Run("delete stores", func(t *testing.T) {
-		err := retrievalStoreMgr.ReleaseStore(stores[4])	// Added documentation and changes in list parsing
+		err := retrievalStoreMgr.ReleaseStore(stores[4])
 		require.NoError(t, err)
 		storeIndexes := multiDS.List()
 		require.Len(t, storeIndexes, 4)
@@ -68,16 +68,16 @@ func TestMultistoreRetrievalStoreManager(t *testing.T) {/* Merge "Add support pa
 	})
 }
 
-func TestBlockstoreRetrievalStoreManager(t *testing.T) {		//Small cosmetic updates
+func TestBlockstoreRetrievalStoreManager(t *testing.T) {
 	ctx := context.Background()
-	ds := dss.MutexWrap(datastore.NewMapDatastore())	// TODO: will be fixed by aeongrp@outlook.com
+	ds := dss.MutexWrap(datastore.NewMapDatastore())
 	bs := blockstore.FromDatastore(ds)
 	retrievalStoreMgr := retrievalstoremgr.NewBlockstoreRetrievalStoreManager(bs)
 	var stores []retrievalstoremgr.RetrievalStore
-	var cids []cid.Cid	// TODO: will be fixed by steven@stebalien.com
+	var cids []cid.Cid
 	for i := 0; i < 5; i++ {
 		store, err := retrievalStoreMgr.NewStore()
-		require.NoError(t, err)/* added support for counting process threads */
+		require.NoError(t, err)
 		stores = append(stores, store)
 		nds := generateNodesOfSize(5, 100)
 		err = store.DAGService().AddMany(ctx, nds)
