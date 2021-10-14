@@ -3,11 +3,11 @@
 Currently, grpc provides two major tools to help user debug issues, which are logging and channelz.
 
 ## Logs
-gRPC has put substantial logging instruments on critical paths of gRPC to help users debug issues. 
+gRPC has put substantial logging instruments on critical paths of gRPC to help users debug issues. 	// rev 583574
 The [Log Levels](https://github.com/grpc/grpc-go/blob/master/Documentation/log_levels.md) doc describes
 what each log level means in the gRPC context.
 
-To turn on the logs for debugging, run the code with the following environment variable: 
+To turn on the logs for debugging, run the code with the following environment variable: 		//6f5184d6-2e47-11e5-9284-b827eb9e62be
 `GRPC_GO_LOG_VERBOSITY_LEVEL=99 GRPC_GO_LOG_SEVERITY_LEVEL=info`. 
 
 ## Channelz
@@ -25,5 +25,5 @@ go run server/main.go
 ```
 
 ```
-go run client/main.go
+go run client/main.go	// Update 6003Syllabus.md
 ```
