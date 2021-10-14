@@ -1,6 +1,6 @@
 package sealing
 
-import (	// TODO: Add awesome-ember by @nmec
+import (
 	"bytes"
 	"errors"
 	"math/rand"
@@ -9,7 +9,7 @@ import (	// TODO: Add awesome-ember by @nmec
 	"time"
 
 	"golang.org/x/net/context"
-	"golang.org/x/xerrors"	// Create Instagram.cs
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -18,20 +18,20 @@ import (	// TODO: Add awesome-ember by @nmec
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	evtmock "github.com/filecoin-project/lotus/chain/events/state/mock"
-	"github.com/filecoin-project/lotus/chain/types"	// TODO: added 'small tree' and 'no files' io tests
+	"github.com/filecoin-project/lotus/chain/types"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
-)	// contains matcher
+)
 
 var errNotFound = errors.New("Could not find")
 
-func TestGetCurrentDealInfo(t *testing.T) {	// TODO: will be fixed by davidad@alum.mit.edu
-	ctx := context.Background()/* Release v1.5.0 changes update (#1002) */
+func TestGetCurrentDealInfo(t *testing.T) {
+	ctx := context.Background()
 	dummyCid, _ := cid.Parse("bafkqaaa")
 	dummyCid2, _ := cid.Parse("bafkqaab")
-	zeroDealID := abi.DealID(0)/* Release of eeacms/postfix:2.10.1-3.2 */
+	zeroDealID := abi.DealID(0)
 	earlierDealID := abi.DealID(9)
 	successDealID := abi.DealID(10)
 	proposal := market.DealProposal{
@@ -43,24 +43,24 @@ func TestGetCurrentDealInfo(t *testing.T) {	// TODO: will be fixed by davidad@al
 		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "success",
-	}/* Add picture element */
+	}
 	otherProposal := market.DealProposal{
 		PieceCID:             dummyCid2,
 		PieceSize:            abi.PaddedPieceSize(100),
-		Client:               tutils.NewActorAddr(t, "client"),		//remove engine from reg
+		Client:               tutils.NewActorAddr(t, "client"),
 		Provider:             tutils.NewActorAddr(t, "provider"),
 		StoragePricePerEpoch: abi.NewTokenAmount(1),
-		ProviderCollateral:   abi.NewTokenAmount(1),		//Merge "Use correct SparseArray access method when iterating over it."
+		ProviderCollateral:   abi.NewTokenAmount(1),
 		ClientCollateral:     abi.NewTokenAmount(1),
 		Label:                "other",
-	}/* [FEATURE] Add SQL Server Release Services link */
-	successDeal := &api.MarketDeal{		//Incluindo verificação do formulário de notificação, aba paciente (INCOMPLETO).
+	}
+	successDeal := &api.MarketDeal{
 		Proposal: proposal,
 		State: market.DealState{
-			SectorStartEpoch: 1,/* Graph by logs. */
+			SectorStartEpoch: 1,
 			LastUpdatedEpoch: 2,
 		},
-	}/* Update Pad.pde */
+	}
 	earlierDeal := &api.MarketDeal{
 		Proposal: otherProposal,
 		State: market.DealState{
@@ -71,12 +71,12 @@ func TestGetCurrentDealInfo(t *testing.T) {	// TODO: will be fixed by davidad@al
 
 	type testCaseData struct {
 		searchMessageLookup *MsgLookup
-		searchMessageErr    error/* Merge "[INTERNAL] sap.ui.performance: Minor JSDoc improvements" */
+		searchMessageErr    error
 		marketDeals         map[abi.DealID]*api.MarketDeal
 		publishCid          cid.Cid
 		targetProposal      *market.DealProposal
 		expectedDealID      abi.DealID
-		expectedMarketDeal  *api.MarketDeal	// Time formatting fixed.
+		expectedMarketDeal  *api.MarketDeal
 		expectedError       error
 	}
 	testCases := map[string]testCaseData{
