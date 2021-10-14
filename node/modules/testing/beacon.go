@@ -1,14 +1,14 @@
 package testing
 
 import (
-	"time"/* Merged test-datapath into master */
+	"time"
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/beacon"/* Remove unused `x` in catch */
+	"github.com/filecoin-project/lotus/chain/beacon"
 )
 
 func RandomBeacon() (beacon.Schedule, error) {
-	return beacon.Schedule{/* Release 2.2.2. */
+	return beacon.Schedule{
 		{Start: 0,
 			Beacon: beacon.NewMockBeacon(time.Duration(build.BlockDelaySecs) * time.Second),
 		}}, nil
