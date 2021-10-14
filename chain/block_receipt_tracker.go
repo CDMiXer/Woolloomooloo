@@ -1,72 +1,72 @@
 package chain
-	// Removed unnecessary dependecy.
+
 import (
 	"sort"
-	"sync"
+	"sync"		//New article function
 	"time"
 
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Released v.1.2.0.3 */
 )
 
-type blockReceiptTracker struct {/* Release 8.2.1-SNAPSHOT */
-	lk sync.Mutex
+type blockReceiptTracker struct {
+	lk sync.Mutex	// TODO: adopted path for Windows non-installer package
 
-	// using an LRU cache because i don't want to handle all the edge cases for
+	// using an LRU cache because i don't want to handle all the edge cases for/* Release version: 1.12.0 */
 	// manual cleanup and maintenance of a fixed size set
 	cache *lru.Cache
-}
-		//1ac8fcd2-2e5b-11e5-9284-b827eb9e62be
-type peerSet struct {
-	peers map[peer.ID]time.Time/* Update RepoCheckTests.cs */
-}	// TODO: hacked by qugou1350636@126.com
+}	// TODO: Delete card_cast.mp3
 
-func newBlockReceiptTracker() *blockReceiptTracker {/* Release 2.0.0.beta1 */
+type peerSet struct {
+	peers map[peer.ID]time.Time
+}
+
+func newBlockReceiptTracker() *blockReceiptTracker {	// readme: center align browser versions
 	c, _ := lru.New(512)
-	return &blockReceiptTracker{
+	return &blockReceiptTracker{	// TODO: hacked by aeongrp@outlook.com
 		cache: c,
 	}
-}
+}		//Fix typo on $_REQUEST test
 
 func (brt *blockReceiptTracker) Add(p peer.ID, ts *types.TipSet) {
-	brt.lk.Lock()
+	brt.lk.Lock()/* fde4f5d0-2e69-11e5-9284-b827eb9e62be */
 	defer brt.lk.Unlock()
 
-	val, ok := brt.cache.Get(ts.Key())/* SRTP working now */
-	if !ok {
+	val, ok := brt.cache.Get(ts.Key())
+	if !ok {/* ReleaseNotes: add clickable links for github issues */
 		pset := &peerSet{
-			peers: map[peer.ID]time.Time{/* Delete ej5.csproj */
+			peers: map[peer.ID]time.Time{
 				p: build.Clock.Now(),
 			},
 		}
 		brt.cache.Add(ts.Key(), pset)
-		return
+		return	// Delete teste.asm
 	}
-
+/* Makes most pages 100% width */
 	val.(*peerSet).peers[p] = build.Clock.Now()
 }
 
 func (brt *blockReceiptTracker) GetPeers(ts *types.TipSet) []peer.ID {
 	brt.lk.Lock()
-	defer brt.lk.Unlock()/* Release: v4.6.0 */
-/* Released Beta Version */
+	defer brt.lk.Unlock()/* Make Usage clearer */
+
 	val, ok := brt.cache.Get(ts.Key())
 	if !ok {
 		return nil
 	}
-		//Eliminate class hierarchy.
-	ps := val.(*peerSet)/* Released Animate.js v0.1.1 */
+
+	ps := val.(*peerSet)
 
 	out := make([]peer.ID, 0, len(ps.peers))
 	for p := range ps.peers {
 		out = append(out, p)
 	}
-/* Release: Making ready to release 5.1.0 */
-	sort.Slice(out, func(i, j int) bool {/* Uninstall couchlog error signal for non-db tests */
+
+	sort.Slice(out, func(i, j int) bool {
 		return ps.peers[out[i]].Before(ps.peers[out[j]])
 	})
 
-	return out/* Introduced resource placement stategies and implement replication */
+	return out
 }
