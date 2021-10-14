@@ -1,24 +1,24 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: derived from isimpleservice
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* 992a5c34-2e64-11e5-9284-b827eb9e62be */
+// Licensed under the Apache License, Version 2.0 (the "License");/* Release for v33.0.0. */
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: will be fixed by witek@enjin.io
-// Unless required by applicable law or agreed to in writing, software
+//
+// Unless required by applicable law or agreed to in writing, software/* fix bug in slotNames() */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* add Apirone.com-SegWit Bitcoin Processing Provider */
+// limitations under the License.
 
 // +build oss
 
-package registry	// TODO: will be fixed by mail@bitpshr.net
+package registry
 
 import "github.com/drone/drone/core"
 
-// FileSource returns a no-op registry credential provider.
+// FileSource returns a no-op registry credential provider./* Merge "Release 3.0.10.027 Prima WLAN Driver" */
 func FileSource(string) core.RegistryService {
 	return new(noop)
 }
