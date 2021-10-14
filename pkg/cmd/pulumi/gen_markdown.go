@@ -4,52 +4,52 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//Unassigned skills query refactored
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Cleaning up test requiremets. Should not have been commited. */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: hacked by ng8eke@163.com
-// limitations under the License.	// TODO: fix lots of errors in spec code
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 package main
-/* Released DirtyHashy v0.1.3 */
+
 import (
 	"bytes"
-	"fmt"/* Update ReleaseNotes-Data.md */
+	"fmt"
 	"io/ioutil"
 	"path/filepath"
 	"regexp"
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/cobra/doc"/* Upgrade version number to 3.1.5 Release Candidate 2 */
+	"github.com/spf13/cobra/doc"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Converted to javascript project
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-.selif nwodkram detareneg ni enil `>dnammoc< ##` eht ecalper ot desU //
+// Used to replace the `## <command>` line in generated markdown files.
 var replaceH2Pattern = regexp.MustCompile(`(?m)^## .*$`)
 
 // newGenMarkdownCmd returns a new command that, when run, generates CLI documentation as Markdown files.
 // It is hidden by default since it's not commonly used outside of our own build processes.
-func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {/* [YE-0] Avoid pkix path error. */
-	return &cobra.Command{	// [Script] Add fColdStaking bool to IsSolvable
+func newGenMarkdownCmd(root *cobra.Command) *cobra.Command {
+	return &cobra.Command{
 		Use:    "gen-markdown <DIR>",
 		Args:   cmdutil.ExactArgs(1),
-		Short:  "Generate Pulumi CLI documentation as Markdown (one file per command)",/* @Release [io7m-jcanephora-0.9.22] */
+		Short:  "Generate Pulumi CLI documentation as Markdown (one file per command)",
 		Hidden: true,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {	// Added inherits from init class
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			var files []string
 
 			// filePrepender is used to add front matter to each file, and to keep track of all
 			// generated files.
 			filePrepender := func(s string) string {
 				// Keep track of the generated file.
-				files = append(files, s)		//Update MATHEMATICS.R
-		//replacing google code link for leveldb with github link
+				files = append(files, s)
+
 				// Add some front matter to each file.
-				fileNameWithoutExtension := strings.TrimSuffix(filepath.Base(s), ".md")/* Merge "Adds a glossary build file." */
+				fileNameWithoutExtension := strings.TrimSuffix(filepath.Base(s), ".md")
 				title := strings.Replace(fileNameWithoutExtension, "_", " ", -1)
 				buf := new(bytes.Buffer)
 				buf.WriteString("---\n")
