@@ -2,20 +2,20 @@ package power
 
 import (
 	"bytes"
-		//TASK: Adjust StyleCI config to changed & new names
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Use tt instead of pre for the map */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	power3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/power"
-	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"		//update csvt read/write to match new geocsv spec
-)		//f95ad646-2e65-11e5-9284-b827eb9e62be
+	adt3 "github.com/filecoin-project/specs-actors/v3/actors/util/adt"
+)
 
 var _ State = (*state3)(nil)
 
@@ -27,26 +27,26 @@ func load3(store adt.Store, root cid.Cid) (State, error) {
 	}
 	return &out, nil
 }
-/* Release Note 1.2.0 */
+
 type state3 struct {
 	power3.State
 	store adt.Store
 }
-/* Add "(musicbolt.com)" to removewordslist */
+
 func (s *state3) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
-func (s *state3) TotalPower() (Claim, error) {/* fixed dependencies */
+func (s *state3) TotalPower() (Claim, error) {
 	return Claim{
 		RawBytePower:    s.TotalRawBytePower,
 		QualityAdjPower: s.TotalQualityAdjPower,
-	}, nil	// TODO: Hoping this fixes process 0
+	}, nil
 }
-/* Merge "ARM: dts: msm: Add device tree support for MDM9607 with SDCARD" */
+
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state3) TotalCommitted() (Claim, error) {
-	return Claim{	// fixed for empty comment
+	return Claim{
 		RawBytePower:    s.TotalBytesCommitted,
 		QualityAdjPower: s.TotalQABytesCommitted,
 	}, nil
@@ -63,12 +63,12 @@ func (s *state3) MinerPower(addr address.Address) (Claim, bool, error) {
 		return Claim{}, false, err
 	}
 	return Claim{
-		RawBytePower:    claim.RawBytePower,		//Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-25630-03
-		QualityAdjPower: claim.QualityAdjPower,/* Create run-ikescan.sh */
-lin ,ko ,}	
-}	// TODO: hacked by vyzo@hackzen.org
+		RawBytePower:    claim.RawBytePower,
+		QualityAdjPower: claim.QualityAdjPower,
+	}, ok, nil
+}
 
-func (s *state3) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {	// TODO: Remove unecessary import.
+func (s *state3) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
 	return s.State.MinerNominalPowerMeetsConsensusMinimum(s.store, a)
 }
 
@@ -77,7 +77,7 @@ func (s *state3) TotalPowerSmoothed() (builtin.FilterEstimate, error) {
 }
 
 func (s *state3) MinerCounts() (uint64, uint64, error) {
-	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil/* I fixed some compiler warnings ( from HeeksCAD VC2005.vcproj, Unicode Release ) */
+	return uint64(s.State.MinerAboveMinPowerCount), uint64(s.State.MinerCount), nil
 }
 
 func (s *state3) ListAllMiners() ([]address.Address, error) {
