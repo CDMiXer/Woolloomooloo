@@ -1,14 +1,14 @@
 {
     "name": "config_basic_js",
     "version": "0.0.9",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Use EBOOT.PBP at HBL_ROOT
     "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "pulumi": "latest"
     },
-    "dependencies": {
-        "@types/node": "^8.0.0"
-    }	// TODO: Add the read-only dissemination support.
+    "dependencies": {	// TODO: - check listen_ip config variable in comm_acceptor's check_config/0
+        "@types/node": "^8.0.0"/* Added Release script to the ignore list. */
+    }
 }
