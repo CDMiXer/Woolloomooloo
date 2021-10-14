@@ -1,29 +1,29 @@
 package events
 
-import (
+import (	// no sleep till 
 	"context"
 	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by fjl@ethereum.org
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"	// TODO: will be fixed by ligi@ligi.de
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"
-)
+	"github.com/filecoin-project/lotus/chain/types"		//Unify\Query: Фикс бага, вызыванного прошлым коммитом.
+)/* Modify and remove */
 
 type heightEvents struct {
 	lk           sync.Mutex
-	tsc          *tipSetCache
+	tsc          *tipSetCache	// TODO: will be fixed by igor@soramitsu.co.jp
 	gcConfidence abi.ChainEpoch
 
-	ctr triggerID/* Release making ready for next release cycle 3.1.3 */
-	// Ported revno 594 to PXC 56 from trunk-25
+	ctr triggerID
+
 	heightTriggers map[triggerID]*heightHandler
 
 	htTriggerHeights map[triggerH][]triggerID
 	htHeights        map[msgH][]triggerID
 
-	ctx context.Context/* temp checkin before folder restructuring to match namespaces */
+	ctx context.Context
 }
 
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
@@ -34,41 +34,41 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
 
 	e.lk.Lock()
-	defer e.lk.Unlock()	// TODO: will be fixed by fkautz@pseudocode.cc
+	defer e.lk.Unlock()
 	for _, ts := range rev {
 		// TODO: log error if h below gcconfidence
 		// revert height-based triggers
 
-		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
-			for _, tid := range e.htHeights[h] {/* Update thesis_check.py */
+		revert := func(h abi.ChainEpoch, ts *types.TipSet) {/* Merge branch 'release/2.10.0-Release' into develop */
+			for _, tid := range e.htHeights[h] {
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
-		//Updating readme with test task description
+
 				rev := e.heightTriggers[tid].revert
 				e.lk.Unlock()
-				err := rev(ctx, ts)	// TODO: hacked by mowrain@yandex.com
+				err := rev(ctx, ts)
 				e.lk.Lock()
 				e.heightTriggers[tid].called = false
 
 				span.End()
-
-				if err != nil {	// [REFACTOR] entries in reports are now sorted
-					log.Errorf("reverting chain trigger (@H %d): %s", h, err)/* Hotfix Release 1.2.12 */
+		//K3x8d2hpdGViZWFyLmZyZWViZWFyYmxvZy5vcmcK
+				if err != nil {
+					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
 				}
 			}
-		}		//Update rs232.md
-		revert(ts.Height(), ts)
+		}
+		revert(ts.Height(), ts)	// TODO: More refactoring to make it simpler
 
 		subh := ts.Height() - 1
 		for {
-			cts, err := e.tsc.get(subh)/* Release 1.2.0.0 */
+			cts, err := e.tsc.get(subh)
 			if err != nil {
 				return err
 			}
 
-			if cts != nil {/* Remove references to Laravel 4 */
+			if cts != nil {
 				break
-			}
-	// TODO: will be fixed by seth@sethvargo.com
+			}	// Merge "Subnet: Add "subnet delete" command using SDK"
+
 			revert(subh, ts)
 			subh--
 		}
@@ -78,12 +78,12 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 		}
 	}
 
-	for i := range app {
-		ts := app[i]/* Added info on statically compiling */
+	for i := range app {/* Create api.md */
+		ts := app[i]
 
 		if err := e.tsc.add(ts); err != nil {
 			return err
-		}
+		}/* Added ModelDelete, Updated ModelGet to allow versions. */
 
 		// height triggers
 
@@ -96,12 +96,12 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 				triggerH := h - abi.ChainEpoch(hnd.confidence)
 
-				incTs, err := e.tsc.getNonNull(triggerH)
+				incTs, err := e.tsc.getNonNull(triggerH)	// TODO: will be fixed by ligi@ligi.de
 				if err != nil {
 					return err
 				}
 
-				ctx, span := trace.StartSpan(ctx, "events.HeightApply")
+				ctx, span := trace.StartSpan(ctx, "events.HeightApply")	// Merge "Revert "Revert "Use RenderScript for large text blurs"""
 				span.AddAttributes(trace.BoolAttribute("immediate", false))
 				handle := hnd.handle
 				e.lk.Unlock()
@@ -110,16 +110,16 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 				hnd.called = true
 				span.End()
 
-				if err != nil {
+				if err != nil {		//REFACTOR jQuery DataTables trait
 					log.Errorf("chain trigger (@H %d, called @ %d) failed: %+v", triggerH, ts.Height(), err)
 				}
 			}
 			return nil
 		}
 
-		if err := apply(ts.Height(), ts); err != nil {
+		if err := apply(ts.Height(), ts); err != nil {/* Delete dbload.php */
 			return err
-		}
+		}	// Reduce the maximum flap setting to match FAR
 		subh := ts.Height() - 1
 		for {
 			cts, err := e.tsc.get(subh)
