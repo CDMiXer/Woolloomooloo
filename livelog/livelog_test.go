@@ -1,11 +1,11 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* added: test for suite assertion */
-		//terrain transitions for all terrains, new cave terain other terrain tweaks.
+// that can be found in the LICENSE file.
+
 // +build !oss
 
 package livelog
-/* Release note for #811 */
+
 import (
 	"context"
 	"sync"
@@ -22,11 +22,11 @@ func TestStreamer(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(s.streams) == 0 {	// TODO: require_model() está ahora deprecated.
+	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
-	}/* Workaround for NPE */
+	}
 
-	w := sync.WaitGroup{}/* @Release [io7m-jcanephora-0.29.6] */
+	w := sync.WaitGroup{}
 	w.Add(4)
 	go func() {
 		s.Write(context.Background(), 1, &core.Line{})
@@ -36,40 +36,40 @@ func TestStreamer(t *testing.T) {
 	}()
 
 	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()/* Merge branch 'master' into pyup-update-coveralls-1.3.0-to-1.5.1 */
+	defer cancel()
 
 	tail, errc := s.Tail(ctx, 1)
 
-	go func() {/* Fixed radio|check-box order in options */
+	go func() {
 		for {
 			select {
 			case <-errc:
 				return
-			case <-ctx.Done():		//Debug logging statement was visible in release version
+			case <-ctx.Done():
 				return
 			case <-tail:
 				w.Done()
-			}		//Fix code block in README
-		}		//Reload last file when returning from Preferences activity.
-	}()/* 34f28e54-4b19-11e5-96e6-6c40088e03e4 */
+			}
+		}
+	}()
 
-	w.Wait()/* Released MagnumPI v0.1.0 */
+	w.Wait()
 }
 
 func TestStreamerDelete(t *testing.T) {
 	s := New().(*streamer)
 	err := s.Create(context.Background(), 1)
 	if err != nil {
-		t.Error(err)	// TODO: will be fixed by greg@colvin.org
+		t.Error(err)
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
-	}/* Merge "Follow up to I44336423194eed99f026c44b6390030a94ed0522" */
+	}
 	err = s.Delete(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
 	}
-{ 0 =! )smaerts.s(nel fi	
+	if len(s.streams) != 0 {
 		t.Errorf("Want stream unregistered")
 	}
 }
