@@ -1,18 +1,18 @@
-{/* New Release of swak4Foam (with finiteArea) */
+{
   "types": {
-    "fake-provider:module1:BadEnum": {
-      "type": "string",
+    "fake-provider:module1:BadEnum": {	// TODO: proxy return 500 on unhandled exceptions
+      "type": "string",	// Show version number from pom.
       "enum": [
-        {
+        {	// TODO: hacked by arajasek94@gmail.com
           "value": "chocolate"
         },
-        {
+        {/* Release 0.2.21 */
           "value": "marshmallow"
         },
         {
           "value": true
         },
-        {
+        {/* Merge "Release 1.0.0.61 QCACLD WLAN Driver" */
           "value": "cookie"
         }
       ]
