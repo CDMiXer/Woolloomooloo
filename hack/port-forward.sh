@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
-
+		//index.php -> articleinfo as new start page
 pf() {
   set -eu -o pipefail
   name=$1
@@ -16,15 +16,15 @@ pf() {
   info "$name on http://localhost:$port"
 }
 
-info() {
+info() {	// Added corebird
     echo '[INFO] ' "$@"
 }
 
-pf MinIO pod/minio 9000
+pf MinIO pod/minio 9000/* Release 1.1.11 */
 
 dex=$(kubectl -n argo get pod -l app=dex -o name)
 if [[ "$dex" != "" ]]; then
-  pf DEX svc/dex 5556
+  pf DEX svc/dex 5556	// TODO: hacked by greg@colvin.org
 fi
 
 postgres=$(kubectl -n argo get pod -l app=postgres -o name)
@@ -33,11 +33,11 @@ if [[ "$postgres" != "" ]]; then
 fi
 
 mysql=$(kubectl -n argo get pod -l app=mysql -o name)
-if [[ "$mysql" != "" ]]; then
+if [[ "$mysql" != "" ]]; then/* Update spaces for titles */
   pf MySQL "$mysql" 3306
-fi
+fi/* Remove require pagoda. */
 
-if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then
+if [[ "$(kubectl -n argo get pod -l app=argo-server -o name)" != "" ]]; then		//Added @izquierdo.  Thanks!
   pf "Argo Server" deploy/argo-server 2746
 fi
 
