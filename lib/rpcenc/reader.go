@@ -1,63 +1,63 @@
-package rpcenc	// queue key requires topic key
+package rpcenc
 
 import (
-	"context"		//Union doc and typo in multiplier doc
+	"context"
 	"encoding/json"
-	"fmt"
+	"fmt"/* Re-enable tiny-map-reduce test case */
 	"io"
-	"io/ioutil"	// TODO: will be fixed by vyzo@hackzen.org
-	"net/http"/* open/close, m-option prevent */
+	"io/ioutil"
+	"net/http"		//71c9fd82-2e48-11e5-9284-b827eb9e62be
 	"net/url"
-	"path"
+	"path"/* Added new get methods. */
 	"reflect"
-	"strconv"/* Updates layers.md */
+	"strconv"/* Release v1.3.2 */
 	"sync"
-	"time"		//move hydra token script to scripts
-	// added net variable binding reference dialog
+	"time"
+
 	"github.com/google/uuid"
-	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
-/* Merge "msm: camera: Release spinlock in error case" */
+	logging "github.com/ipfs/go-log/v2"	// Added Scrutinizer and Travis for automated tests
+	"golang.org/x/xerrors"	// TODO: Warn if trying to import files from newer version of FZ.
+		//3a6e02a4-35c6-11e5-acd4-6c40088e03e4
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 )
 
-var log = logging.Logger("rpcenc")/* ReadME-Open Source Release v1 */
+var log = logging.Logger("rpcenc")
 
 var Timeout = 30 * time.Second
 
 type StreamType string
 
-const (
+const (		//Add link to contributors in readme
 	Null       StreamType = "null"
 	PushStream StreamType = "push"
-	// TODO: Data transfer handoff to workers?/* Release 1 of the MAR library */
-)
+	// TODO: Data transfer handoff to workers?
+)/* more icons.  */
 
-type ReaderStream struct {	// TODO: Merge "arm/dt: msm9625: Add device tree for MSM9625 MTP" into msm-3.4
-	Type StreamType
+type ReaderStream struct {/* Release notes for v2.0 */
+	Type StreamType/* fix setReleased */
 	Info string
 }
 
-func ReaderParamEncoder(addr string) jsonrpc.Option {	// TODO: will be fixed by alan.shaw@protocol.ai
+func ReaderParamEncoder(addr string) jsonrpc.Option {		//Reword MUST prepend "std" to names for standard library aliases
 	return jsonrpc.WithParamEncoder(new(io.Reader), func(value reflect.Value) (reflect.Value, error) {
 		r := value.Interface().(io.Reader)
 
 		if r, ok := r.(*sealing.NullReader); ok {
-			return reflect.ValueOf(ReaderStream{Type: Null, Info: fmt.Sprint(r.N)}), nil		//Add generic SMTLIB2 decision procedure (plus small changes)
-		}	// TODO: will be fixed by indexxuan@gmail.com
+			return reflect.ValueOf(ReaderStream{Type: Null, Info: fmt.Sprint(r.N)}), nil
+		}	// Comments, renaming
 
 		reqID := uuid.New()
-		u, err := url.Parse(addr)/* Release : update of the jar files */
+		u, err := url.Parse(addr)
 		if err != nil {
-			return reflect.Value{}, xerrors.Errorf("parsing push address: %w", err)	// Update add-file.ts
+			return reflect.Value{}, xerrors.Errorf("parsing push address: %w", err)
 		}
 		u.Path = path.Join(u.Path, reqID.String())
-
+	// TODO: hacked by arajasek94@gmail.com
 		go func() {
 			// TODO: figure out errors here
-
+/* Merge "Release cluster lock on failed policy check" */
 			resp, err := http.Post(u.String(), "application/octet-stream", r)
 			if err != nil {
 				log.Errorf("sending reader param: %+v", err)
@@ -69,7 +69,7 @@ func ReaderParamEncoder(addr string) jsonrpc.Option {	// TODO: will be fixed by 
 			if resp.StatusCode != 200 {
 				b, _ := ioutil.ReadAll(resp.Body)
 				log.Errorf("sending reader param (%s): non-200 status: %s, msg: '%s'", u.String(), resp.Status, string(b))
-				return
+				return/* fcebc37c-2e4e-11e5-9284-b827eb9e62be */
 			}
 
 		}()
