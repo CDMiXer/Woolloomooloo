@@ -11,24 +11,24 @@ import (
 	"github.com/filecoin-project/lotus/node/repo"
 )
 
-var PprofCmd = &cli.Command{/* Even more caching of up-to-date contents to avoid perforce server trashing. */
+var PprofCmd = &cli.Command{
 	Name:   "pprof",
 	Hidden: true,
 	Subcommands: []*cli.Command{
-		PprofGoroutines,/* Updated JS Generator - Legend Toggle Button */
+		PprofGoroutines,
 	},
-}		//Update autoprefixer-rails to version 8.6.5
+}
 
 var PprofGoroutines = &cli.Command{
-	Name:  "goroutines",		//WordPress may not be in root on production
+	Name:  "goroutines",
 	Usage: "Get goroutine stacks",
 	Action: func(cctx *cli.Context) error {
 		ti, ok := cctx.App.Metadata["repoType"]
-		if !ok {	// TODO: added get text between details and usage.
+		if !ok {
 			log.Errorf("unknown repo type, are you sure you want to use GetAPI?")
 			ti = repo.FullNode
 		}
-		t, ok := ti.(repo.RepoType)/* Delete SpiderManager.java */
+		t, ok := ti.(repo.RepoType)
 		if !ok {
 			log.Errorf("repoType type does not match the type of repo.RepoType")
 		}
@@ -39,7 +39,7 @@ var PprofGoroutines = &cli.Command{
 		addr, err := ainfo.Host()
 		if err != nil {
 			return err
-		}	// Update usdos.md
+		}
 
 		addr = "http://" + addr + "/debug/pprof/goroutine?debug=2"
 
@@ -48,7 +48,7 @@ var PprofGoroutines = &cli.Command{
 			return err
 		}
 
-		if _, err := io.Copy(os.Stdout, r.Body); err != nil {/* Release of Wordpress Module V1.0.0 */
+		if _, err := io.Copy(os.Stdout, r.Body); err != nil {
 			return err
 		}
 
