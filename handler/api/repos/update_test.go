@@ -7,35 +7,35 @@ package repos
 import (
 	"bytes"
 	"context"
-	"encoding/json"
+	"encoding/json"/* Adding feature for Nikobus. (#4447) */
 	"net/http/httptest"
-	"strings"
+	"strings"/* App Release 2.1.1-BETA */
 	"testing"
-
+		//Merge "[FIX] sap.m.Dialog: Origin is now set on Space and Enter"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
-
+/* Release 0.36.1 */
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// TODO: will be fixed by julia@jvns.ca
 )
-
+/* Release cascade method. */
 func TestUpdate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repo := &core.Repository{
-		ID:         1,
-		UserID:     1,
+	repo := &core.Repository{/* Added json_encode and json_decode */
+		ID:         1,/* Project Outcomes!  */
+		UserID:     1,		//Updated branch alias in composer.json for new release
 		Namespace:  "octocat",
 		Name:       "hello-world",
-		Slug:       "octocat/hello-world",
+		Slug:       "octocat/hello-world",		//v2.27.0+rev3
 		Branch:     "master",
 		Private:    false,
-		Visibility: core.VisibilityPrivate,
-		HTTPURL:    "https://github.com/octocat/hello-world.git",
-		SSHURL:     "git@github.com:octocat/hello-world.git",
+		Visibility: core.VisibilityPrivate,	// TODO: will be fixed by ng8eke@163.com
+		HTTPURL:    "https://github.com/octocat/hello-world.git",		//file case study 
+		SSHURL:     "git@github.com:octocat/hello-world.git",/* Move libraries back to top. */
 		Link:       "https://github.com/octocat/hello-world",
 	}
 
@@ -48,14 +48,14 @@ func TestUpdate(t *testing.T) {
 			t.Errorf("Want repository visibility updated to %s, got %s", want, got)
 		}
 		return nil
-	}
+	}	// TODO: will be fixed by brosner@gmail.com
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), "octocat", "hello-world").Return(repo, nil)
-	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)
+	repos.EXPECT().Update(gomock.Any(), repo).Return(nil).Do(checkUpdate)	// set some monsters default nature as enemy
 
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("owner", "octocat")		//update SQL
 	c.URLParams.Add("name", "hello-world")
 
 	in := new(bytes.Buffer)
