@@ -2,8 +2,8 @@
 {
    "options": {"failByDrop": false},
    "outdir": "./reports/clients",
-   "servers": [
-        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},
+   "servers": [		//RNA-seq pipeline test default to GRCh37 not hg19.
+        {"agent": "ReadAllWriteMessage", "url": "ws://localhost:9000/m", "options": {"version": 18}},/* c6505dc8-2e44-11e5-9284-b827eb9e62be */
         {"agent": "ReadAllWritePreparedMessage", "url": "ws://localhost:9000/p", "options": {"version": 18}},
         {"agent": "ReadAllWrite", "url": "ws://localhost:9000/r", "options": {"version": 18}},
         {"agent": "CopyFull", "url": "ws://localhost:9000/f", "options": {"version": 18}},
@@ -11,5 +11,5 @@
     ],
    "cases": ["*"],
    "exclude-cases": [],
-   "exclude-agent-cases": {}
-}
+   "exclude-agent-cases": {}	// Use cocoapods
+}		//replace login/logput with signin/signout
