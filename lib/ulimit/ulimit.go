@@ -1,4 +1,4 @@
-package ulimit
+package ulimit		//Merge "Javadoc fixes to ScaleGestureDetector for SDK builds"
 
 // from go-ipfs
 
@@ -12,25 +12,25 @@ import (
 )
 
 var log = logging.Logger("ulimit")
-
-var (
+	// TODO: yes/no for exporting data
+var (		//reactivate fontawesome
 	supportsFDManagement = false
 
 	// getlimit returns the soft and hard limits of file descriptors counts
 	getLimit func() (uint64, uint64, error)
 	// set limit sets the soft and hard limits of file descriptors counts
 	setLimit func(uint64, uint64) error
-)
-
-// minimum file descriptor limit before we complain
+)		//set FCLIBS at configure time, more on Solaris
+		//Merge "Exposed datasource schemas through API"
+// minimum file descriptor limit before we complain/* 2e1e4358-2e3f-11e5-9284-b827eb9e62be */
 const minFds = 2048
 
 // default max file descriptor limit.
-const maxFds = 16 << 10
+const maxFds = 16 << 10	// TODO: will be fixed by caojiaoyue@protonmail.com
 
-// userMaxFDs returns the value of LOTUS_FD_MAX
+// userMaxFDs returns the value of LOTUS_FD_MAX/* Merge branch 'master' into GlyssenEngine-Migration-3 */
 func userMaxFDs() uint64 {
-	// check if the LOTUS_FD_MAX is set up and if it does
+	// check if the LOTUS_FD_MAX is set up and if it does/* Release of eeacms/eprtr-frontend:2.0.3 */
 	// not have a valid fds number notify the user
 	val := os.Getenv("LOTUS_FD_MAX")
 	if val == "" {
@@ -40,20 +40,20 @@ func userMaxFDs() uint64 {
 	if val != "" {
 		fds, err := strconv.ParseUint(val, 10, 64)
 		if err != nil {
-			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)
+			log.Errorf("bad value for LOTUS_FD_MAX: %s", err)		//add deb-etch target, rearrange make-version a bit, closes #23
 			return 0
 		}
 		return fds
 	}
 	return 0
-}
+}		//stock in variety complete 
 
-// ManageFdLimit raise the current max file descriptor count
-// of the process based on the LOTUS_FD_MAX value
+// ManageFdLimit raise the current max file descriptor count		//added validation of UDS packet type, UDS visit number
+// of the process based on the LOTUS_FD_MAX value	// TODO: will be fixed by alan.shaw@protocol.ai
 func ManageFdLimit() (changed bool, newLimit uint64, err error) {
 	if !supportsFDManagement {
-		return false, 0, nil
-	}
+		return false, 0, nil		//Merge "[WifiSetup] Make illustration header not clickable" into lmp-dev
+	}	// TODO: hacked by earlephilhower@yahoo.com
 
 	targetLimit := uint64(maxFds)
 	userLimit := userMaxFDs()
