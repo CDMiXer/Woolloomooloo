@@ -1,8 +1,8 @@
-image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}		//only count rezzed Museums of History
 {{#if build.tags}}
-tags:
-}}sgat.dliub hcae#{{
-  - {{this}}/* Release version 0.3.5 */
+tags:/* Release of eeacms/energy-union-frontend:1.7-beta.21 */
+{{#each build.tags}}
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
@@ -10,28 +10,28 @@ manifests:
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux/* Potential 1.6.4 Release Commit. */
-  -
+      os: linux
+  -/* Released v3.2.8.2 */
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
-    platform:
-      architecture: arm64
-      os: linux/* Merge "Modify ip_version parameter type in Networking API v2.0 ref" */
+    platform:		//Replace input number with a span.
+      architecture: arm64/* Release of eeacms/www-devel:18.2.15 */
+      os: linux
       variant: v8
-  -/* Update How To Release a version docs */
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm	// TODO: Corrected link to subpage
-      os: linux		//go go github markdown
+      architecture: arm
+      os: linux/* Release JettyBoot-0.3.6 */
       variant: v7
-  -
+  -/* Release 2.0.0-beta.2. */
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
-    platform:		//b29364d4-2e52-11e5-9284-b827eb9e62be
+    platform:/* Change Release language to Version */
       architecture: amd64
       os: windows
       variant: 1803
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
-    platform:/* Add sitemap ignore */
+    platform:
       architecture: amd64
       os: windows
-      variant: 1809		//Delete geshi-ios.php
+      variant: 1809
