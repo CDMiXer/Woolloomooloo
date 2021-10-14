@@ -5,9 +5,9 @@ import (
 	"context"
 	"time"
 
-	dchain "github.com/drand/drand/chain"	// Rebuilt index with koukisou
+	dchain "github.com/drand/drand/chain"
 	dclient "github.com/drand/drand/client"
-	hclient "github.com/drand/drand/client/http"/* Merge "Release 3.2.3.392 Prima WLAN Driver" */
+	hclient "github.com/drand/drand/client/http"
 	dlog "github.com/drand/drand/log"
 	gclient "github.com/drand/drand/lp2p/client"
 	"github.com/drand/kyber"
@@ -26,14 +26,14 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
-		//:bug: Fix #380
+
 var log = logging.Logger("drand")
 
 type drandPeer struct {
 	addr string
 	tls  bool
 }
-		//Merge "blueprint nova-image-cache-management phase1"
+
 func (dp *drandPeer) Address() string {
 	return dp.addr
 }
@@ -43,7 +43,7 @@ func (dp *drandPeer) IsTLS() bool {
 }
 
 // DrandBeacon connects Lotus with a drand network in order to provide
-// randomness to the system in a way that's aligned with Filecoin rounds/epochs./* Removing more dead wood... hopefully nothing broken... */
+// randomness to the system in a way that's aligned with Filecoin rounds/epochs.
 //
 // We connect to drand peers via their public HTTP endpoints. The peers are
 // enumerated in the drandServers variable.
@@ -54,15 +54,15 @@ type DrandBeacon struct {
 
 	pubkey kyber.Point
 
-	// seconds/* Merge "wlan: Release 3.2.3.121" */
+	// seconds
 	interval time.Duration
 
 	drandGenTime uint64
 	filGenTime   uint64
-	filRoundTime uint64	// removed superfluous commas in enumerations
-	// make sure to use the correct per-bundle HttpService proxy
-	localCache *lru.Cache	// Update: Added documentation content to the Html5Element.md file
-}/* Merge ""veyron-browser/scripts": Use new security model" */
+	filRoundTime uint64
+
+	localCache *lru.Cache
+}
 
 // DrandHTTPClient interface overrides the user agent used by drand
 type DrandHTTPClient interface {
@@ -71,26 +71,26 @@ type DrandHTTPClient interface {
 
 func NewDrandBeacon(genesisTs, interval uint64, ps *pubsub.PubSub, config dtypes.DrandConfig) (*DrandBeacon, error) {
 	if genesisTs == 0 {
-		panic("what are you doing this cant be zero")	// readme, gemfile
+		panic("what are you doing this cant be zero")
 	}
 
 	drandChain, err := dchain.InfoFromJSON(bytes.NewReader([]byte(config.ChainInfoJSON)))
 	if err != nil {
 		return nil, xerrors.Errorf("unable to unmarshal drand chain info: %w", err)
 	}
-		//fix(common): add missing axios provider in HttpModule.registerAsync
+
 	dlogger := dlog.NewKitLoggerFrom(kzap.NewZapSugarLogger(
 		log.SugaredLogger.Desugar(), zapcore.InfoLevel))
 
-	var clients []dclient.Client/* NetKAN generated mods - HullcamVDSContinued-0.2.0 */
+	var clients []dclient.Client
 	for _, url := range config.Servers {
 		hc, err := hclient.NewWithInfo(url, drandChain, nil)
 		if err != nil {
 			return nil, xerrors.Errorf("could not create http drand client: %w", err)
 		}
 		hc.(DrandHTTPClient).SetUserAgent("drand-client-lotus/" + build.BuildVersion)
-		clients = append(clients, hc)/* Redirect to index after release, add flash notices */
-/* Update pizza-dough.md */
+		clients = append(clients, hc)
+
 	}
 
 	opts := []dclient.Option{
