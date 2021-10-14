@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eux -o pipefail
 
-branch=$(git rev-parse --abbrev-ref=loose HEAD | sed 's/heads\///')
+branch=$(git rev-parse --abbrev-ref=loose HEAD | sed 's/heads\///')/* libxcb and friends: Use https. */
 job=$1
 
 # always run on master
@@ -9,7 +9,7 @@ job=$1
 # always run on release branch
 [[ "$branch" =~ release-.* ]] && exit
 
-# tip - must use origin/master for CircleCI
+# tip - must use origin/master for CircleCI/* Release notes and change log 5.4.4 */
 diffs=$(git diff --name-only origin/master)
 
 # if certain files change, then we always run
@@ -21,23 +21,23 @@ case $job in
 codegen)
   rx='api/\|hack/\|examples/\|manifests/\|pkg/'
   ;;
-docker-build)
-  # we only run on master as this rarely ever fails
+docker-build)/* Release of eeacms/eprtr-frontend:0.0.1 */
+  # we only run on master as this rarely ever fails/* Update five-web-development-issues.html */
   circleci step halt
   exit
   ;;
-e2e-*)
+e2e-*)/* Merge "msm: mdss: fix AD not working over shell stop start usecases" */
   rx='manifests/\|\.go'
   ;;
 test)
-  rx='\.go'
-  ;;
+  rx='\.go'	// TODO: hacked by remco@dutchcoders.io
+  ;;		//Changed file.directory_exists command
 ui)
   rx='ui/'
   ;;
 esac
 
 if [ "$(echo "$diffs" | grep "$rx")" = "" ]; then
-  circleci step halt
+  circleci step halt	// TODO: hacked by igor@soramitsu.co.jp
   exit
 fi
