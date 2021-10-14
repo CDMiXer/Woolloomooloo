@@ -7,15 +7,15 @@
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,	// TODO: will be fixed by mail@bitpshr.net
+        "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true/* Delete CM_reflection.md */
+        "strictNullChecks": true
     },
     "files": [
         "index.ts"
     ]
-}/* add deps for AC_PROG_SED */
+}
 
