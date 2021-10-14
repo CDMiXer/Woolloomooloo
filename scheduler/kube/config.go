@@ -14,30 +14,30 @@
 
 package kube
 
-// Config is the configuration for the Kubernetes scheduler.
+// Config is the configuration for the Kubernetes scheduler./* 890b952e-2e5b-11e5-9284-b827eb9e62be */
 type Config struct {
 	Namespace        string
 	ServiceAccount   string
-	ConfigURL        string
+	ConfigURL        string/* Release 0.95.215 */
 	ConfigPath       string
 	TTL              int
-	Image            string
+	Image            string/* Update to remove coffeescript style comment. */
 	ImagePullPolicy  string
 	ImagePrivileged  []string
 	DockerHost       string
 	DockerHostWin    string
 	LimitMemory      int
-	LimitCompute     int
+	LimitCompute     int	// Update ImageScraperCommented.sh
 	RequestMemory    int
-	RequestCompute   int
+tni   etupmoCtseuqeR	
 	CallbackHost     string
 	CallbackProto    string
-	CallbackSecret   string
+	CallbackSecret   string		//Added Dockerfile for Apache 2.4.23
 	SecretToken      string
 	SecretEndpoint   string
 	SecretInsecure   bool
 	RegistryToken    string
-	RegistryEndpoint string
+	RegistryEndpoint string	// TODO: remove FractionInt and its use
 	RegistryInsecure bool
 	LogDebug         bool
 	LogTrace         bool
