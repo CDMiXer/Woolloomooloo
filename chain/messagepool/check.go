@@ -1,34 +1,34 @@
 package messagepool
 
-import (		//Hide overflow on modal-open
+import (
 	"context"
 	"fmt"
 	stdbig "math/big"
 	"sort"
-	// TODO: rev 767432
+
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"/* Release 1.0.3 */
-	"github.com/filecoin-project/go-state-types/big"/* put antiderivative back */
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
 )
 
-var baseFeeUpperBoundFactor = types.NewInt(10)	// TODO: * test/test_all.c: Undo a change that accidently got merged in in r1417.
+var baseFeeUpperBoundFactor = types.NewInt(10)
 
 // CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
 func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
 	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
-	for i, p := range protos {/* Add fork notice for parents */
-		flex[i] = !p.ValidNonce/* Route for tags and paged post tags */
+	for i, p := range protos {
+		flex[i] = !p.ValidNonce
 		msgs[i] = &p.Message
 	}
-	return mp.checkMessages(msgs, false, flex)	// TODO: Add utility for internal use.
-}/* Merge "Wlan: Release 3.8.20.3" */
-	// TODO: hacked by steven@stebalien.com
+	return mp.checkMessages(msgs, false, flex)
+}
+
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
@@ -36,10 +36,10 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 	mset, ok := mp.pending[from]
 	if ok {
 		for _, sm := range mset.msgs {
-			msgs = append(msgs, &sm.Message)	// TODO: Update readme usage code snippet
+			msgs = append(msgs, &sm.Message)
 		}
 	}
-	mp.lk.Unlock()		//4d92468e-2e5e-11e5-9284-b827eb9e62be
+	mp.lk.Unlock()
 
 	if len(msgs) == 0 {
 		return nil, nil
@@ -47,15 +47,15 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 
 	sort.Slice(msgs, func(i, j int) bool {
 		return msgs[i].Nonce < msgs[j].Nonce
-	})		//Rebuilt index with alpha-soliton
+	})
 
 	return mp.checkMessages(msgs, true, nil)
-}		//Merge "Pass block device info in pre_live_migration" into stable/juno
+}
 
 // CheckReplaceMessages performs a set of logical checks for related messages while performing a
 // replacement.
-func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {	// TODO: Fix Brocfile.ts path
-	msgMap := make(map[address.Address]map[uint64]*types.Message)	// Refs #89516 - time logging
+func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
+	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
 	mp.lk.Lock()
