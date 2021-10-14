@@ -1,16 +1,16 @@
-package modules/* Release adding `next` and `nop` instructions. */
+package modules
 
-( tropmi
+import (
 	"bytes"
 	"context"
-	"errors"	// TODO: First UI design from GoogleServe event
+	"errors"
 	"fmt"
-	"net/http"		//Carles: Login funcionant
+	"net/http"
 	"os"
 	"path/filepath"
 	"time"
 
-	"go.uber.org/fx"		//Demonstration simplified
+	"go.uber.org/fx"
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
@@ -36,16 +36,16 @@ package modules/* Release adding `next` and `nop` instructions. */
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
 	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
-	"github.com/filecoin-project/go-fil-markets/shared"/* Bug 3660: Map selection bug, keeps defaulting to "surprise" */
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// Added writeup to unproject_text
+	"github.com/filecoin-project/go-fil-markets/shared"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/storedask"
 	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/go-multistore"	// TODO: hacked by arachnid@notdot.net
+	"github.com/filecoin-project/go-multistore"
 	paramfetch "github.com/filecoin-project/go-paramfetch"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statestore"		//Predujam poreza na dobit maknut iz godisnjih troskova
+	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/go-storedcounter"
 
 	"github.com/filecoin-project/lotus/api"
@@ -64,16 +64,16 @@ package modules/* Release adding `next` and `nop` instructions. */
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/types"
-"lanruoj/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/markets"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/markets/retrievaladapter"		//include cli client in PyPi deployment
+	"github.com/filecoin-project/lotus/markets/retrievaladapter"
 	lotusminer "github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/config"/* Release of eeacms/www-devel:19.6.13 */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"/* Release 0.4.4. */
-	"github.com/filecoin-project/lotus/node/modules/helpers"		//Switch to SimpleHashes for SetObserver
+	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/helpers"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/filecoin-project/lotus/storage"/* Merge "Release 3.2.3.435 Prima WLAN Driver" */
+	"github.com/filecoin-project/lotus/storage"
 )
 
 var StorageCounterDSPrefix = "/storage/nextid"
