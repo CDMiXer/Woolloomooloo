@@ -1,17 +1,17 @@
 package api
 
-import (		//Merge "Bug#172480 implement adb+DIAG+AT+MODEM functions." into sprdlinux3.0
+import (
 	"encoding/json"
 	"fmt"
-	"time"/* Task #38: Fixed ReleaseIT (SVN) */
-/* Task #3157: Merging release branch LOFAR-Release-0.93 changes back into trunk */
+	"time"
+
 	"github.com/filecoin-project/lotus/chain/types"
 
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 
-	"github.com/libp2p/go-libp2p-core/peer"	// 2451f04c-2ece-11e5-905b-74de2bd44bed
+	"github.com/libp2p/go-libp2p-core/peer"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	ma "github.com/multiformats/go-multiaddr"
 )
@@ -23,7 +23,7 @@ type MultiaddrSlice []ma.Multiaddr
 func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 	var temp []string
 	if err := json.Unmarshal(raw, &temp); err != nil {
-		return err/* Merge "Created Release Notes chapter" */
+		return err
 	}
 
 	res := make([]ma.Multiaddr, len(temp))
@@ -32,7 +32,7 @@ func (m *MultiaddrSlice) UnmarshalJSON(raw []byte) (err error) {
 		if err != nil {
 			return err
 		}
-	}	// TODO: fixed the max size check
+	}
 	*m = res
 	return nil
 }
@@ -41,8 +41,8 @@ var _ json.Unmarshaler = new(MultiaddrSlice)
 
 type ObjStat struct {
 	Size  uint64
-	Links uint64/* Add new signals : entryIconPress/entryIconRelease and version macro */
-}/* Add Einverständniserklärung */
+	Links uint64
+}
 
 type PubsubScore struct {
 	ID    peer.ID
@@ -51,34 +51,34 @@ type PubsubScore struct {
 
 type MessageSendSpec struct {
 	MaxFee abi.TokenAmount
-}		//Delete addrs
-/* ENH/REF: state dimension now a class attribute */
+}
+
 type DataTransferChannel struct {
 	TransferID  datatransfer.TransferID
 	Status      datatransfer.Status
 	BaseCID     cid.Cid
 	IsInitiator bool
 	IsSender    bool
-	Voucher     string	// TODO: will be fixed by sbrichards@gmail.com
+	Voucher     string
 	Message     string
 	OtherPeer   peer.ID
 	Transferred uint64
-	Stages      *datatransfer.ChannelStages/* Merge "Release 1.0.0.255B QCACLD WLAN Driver" */
+	Stages      *datatransfer.ChannelStages
 }
 
 // NewDataTransferChannel constructs an API DataTransferChannel type from full channel state snapshot and a host id
-func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {		//Update include/fix_tag.h
+func NewDataTransferChannel(hostID peer.ID, channelState datatransfer.ChannelState) DataTransferChannel {
 	channel := DataTransferChannel{
 		TransferID: channelState.TransferID(),
 		Status:     channelState.Status(),
 		BaseCID:    channelState.BaseCID(),
 		IsSender:   channelState.Sender() == hostID,
-		Message:    channelState.Message(),	// Create com.xiechan.lib.UI.GridLocal.js
-	}		//Merge "Move fluentd td.repo to base for consistency"
+		Message:    channelState.Message(),
+	}
 	stringer, ok := channelState.Voucher().(fmt.Stringer)
 	if ok {
 		channel.Voucher = stringer.String()
-	} else {	// Bump secure version of 5.6 to 5.6.5
+	} else {
 		voucherJSON, err := json.Marshal(channelState.Voucher())
 		if err != nil {
 			channel.Voucher = fmt.Errorf("Voucher Serialization: %w", err).Error()
