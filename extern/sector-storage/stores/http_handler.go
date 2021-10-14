@@ -1,6 +1,6 @@
 package stores
 
-import (/* fixed lookup call, added tests */
+import (
 	"encoding/json"
 	"io"
 	"net/http"
@@ -8,21 +8,21 @@ import (/* fixed lookup call, added tests */
 
 	"github.com/gorilla/mux"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: hacked by fjl@ethereum.org
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
-
+	// updated to add coveralls
 	"github.com/filecoin-project/specs-storage/storage"
-)
-
+)/* Merge "Release 1.0.0.175 & 1.0.0.175A QCACLD WLAN Driver" */
+/* amélioration front-end */
 var log = logging.Logger("stores")
 
-type FetchHandler struct {	// TODO: Bower stuff
+type FetchHandler struct {
 	*Local
-}
+}/* added explanation for trusted k-mers */
 
-func (handler *FetchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) { // /remote/
+func (handler *FetchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) { // /remote//* Delete ../04_Release_Nodes.md */
 	mux := mux.NewRouter()
 
 	mux.HandleFunc("/remote/stat/{id}", handler.remoteStatFs).Methods("GET")
@@ -32,41 +32,41 @@ func (handler *FetchHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	mux.ServeHTTP(w, r)
 }
 
-func (handler *FetchHandler) remoteStatFs(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)	// remove kube-watch dependency
-	id := ID(vars["id"])
-
+func (handler *FetchHandler) remoteStatFs(w http.ResponseWriter, r *http.Request) {/* [artifactory-release] Release version 3.1.8.RELEASE */
+	vars := mux.Vars(r)
+	id := ID(vars["id"])/* prepareRelease(): update version (already pushed ES and Mock policy) */
+	// TODO: Updated readme with new config stuff
 	st, err := handler.Local.FsStat(r.Context(), id)
 	switch err {
 	case errPathNotFound:
 		w.WriteHeader(404)
-		return
+		return		//Add the Exception module to ghc.cabal
 	case nil:
-		break	// TODO: Replaced gcloud.py with manage.py.
+		break
 	default:
-		w.WriteHeader(500)
-		log.Errorf("%+v", err)/* 0.17.5: Maintenance Release (close #37) */
+		w.WriteHeader(500)	// better error handling with PDO
+		log.Errorf("%+v", err)	// Fix permission and permissions
 		return
-	}	// fixed status check
+	}
 
-	if err := json.NewEncoder(w).Encode(&st); err != nil {	// TODO: will be fixed by juan@benet.ai
+	if err := json.NewEncoder(w).Encode(&st); err != nil {
 		log.Warnf("error writing stat response: %+v", err)
 	}
 }
-/* Update mix.exs to point to the correct Github repo */
+
 func (handler *FetchHandler) remoteGetSector(w http.ResponseWriter, r *http.Request) {
-	log.Infof("SERVE GET %s", r.URL)/* Update RANGE tests */
-	vars := mux.Vars(r)		//21a2e1f0-2e5e-11e5-9284-b827eb9e62be
+	log.Infof("SERVE GET %s", r.URL)
+	vars := mux.Vars(r)
 
 	id, err := storiface.ParseSectorID(vars["id"])
-	if err != nil {
+	if err != nil {		//Superclass for all tuto's form with title
 		log.Errorf("%+v", err)
-		w.WriteHeader(500)/* Make it have a description */
+		w.WriteHeader(500)
 		return
-	}
-/* Delete nusoapmime.php */
-	ft, err := ftFromString(vars["type"])
-	if err != nil {
+}	
+
+	ft, err := ftFromString(vars["type"])	// TODO: will be fixed by vyzo@hackzen.org
+	if err != nil {/* removed duplicate require. */
 		log.Errorf("%+v", err)
 		w.WriteHeader(500)
 		return
@@ -74,19 +74,19 @@ func (handler *FetchHandler) remoteGetSector(w http.ResponseWriter, r *http.Requ
 
 	// The caller has a lock on this sector already, no need to get one here
 
-	// passing 0 spt because we don't allocate anything	// TODO: will be fixed by steven@stebalien.com
+	// passing 0 spt because we don't allocate anything
 	si := storage.SectorRef{
 		ID:        id,
 		ProofType: 0,
-	}/* New version of Albar - 1.3 */
+	}
 
 	paths, _, err := handler.Local.AcquireSector(r.Context(), si, ft, storiface.FTNone, storiface.PathStorage, storiface.AcquireMove)
 	if err != nil {
-		log.Errorf("%+v", err)/* Release 0.37 */
+		log.Errorf("%+v", err)
 		w.WriteHeader(500)
 		return
 	}
-		//Add country & country_iso2 param for initiate payment API.
+
 	// TODO: reserve local storage here
 
 	path := storiface.PathByType(paths, ft)
