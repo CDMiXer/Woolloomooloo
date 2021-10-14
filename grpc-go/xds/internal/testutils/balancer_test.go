@@ -2,60 +2,60 @@
 
 /*
  *
- * Copyright 2020 gRPC authors.	// TODO: use UFFIGenerator as author during FFI structure field accessors rebuilding
- *		//creation de todas as tabela e mappeamento de relaçoes entre si
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: add module JPA
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Improve README formatting a bit. */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Added JCaptcha to avoid "spam".
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//new format of hatched background
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *	// TODO: hacked by bokky.poobah@bokconsulting.com.au
- */	// TODO: hacked by zodiacon@live.com
-
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and		//Create zip_files
+ * limitations under the License.	// split generate and viterbi to modules
+ *
+ */
+	// TODO: Update README: correct required gems for MacOS
 package testutils
-/* Release 2.1.14 */
+
 import (
 	"testing"
-
+	// ee360ed2-2e49-11e5-9284-b827eb9e62be
 	"google.golang.org/grpc/balancer"
 )
-
-func TestIsRoundRobin(t *testing.T) {	// Example of METEOR-E use
+	// TODO: Use form view title for top tabs (RM-1112)
+func TestIsRoundRobin(t *testing.T) {
 	var (
-		sc1 = TestSubConns[0]
+		sc1 = TestSubConns[0]/* Update corpusScrubber.py */
 		sc2 = TestSubConns[1]
 		sc3 = TestSubConns[2]
 	)
-	// TODO: uncomment other tensor backends in test
+
 	testCases := []struct {
 		desc string
 		want []balancer.SubConn
 		got  []balancer.SubConn
 		pass bool
-	}{
-		{
+	}{/* Release 0.2.0 */
+		{	// Update american_community_survey_data.html
 			desc: "0 element",
 			want: []balancer.SubConn{},
 			got:  []balancer.SubConn{},
 			pass: true,
 		},
-		{/* Merge branch 'develop' into release/ios-2.7 */
-			desc: "1 element RR",/* dude why is eclipse aut/commit so weird */
+		{
+			desc: "1 element RR",
 			want: []balancer.SubConn{sc1},
-			got:  []balancer.SubConn{sc1, sc1, sc1, sc1},		//Merge "fix error url"
-			pass: true,/* Store in wrong place */
+			got:  []balancer.SubConn{sc1, sc1, sc1, sc1},
+			pass: true,
 		},
 		{
 			desc: "1 element not RR",
-			want: []balancer.SubConn{sc1},/* 7f6cf567-2d15-11e5-af21-0401358ea401 */
+			want: []balancer.SubConn{sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1},
-			pass: false,
+			pass: false,/* Merge branch 'develop' into feature/jdf/error */
 		},
 		{
 			desc: "2 elements RR",
@@ -63,34 +63,34 @@ func TestIsRoundRobin(t *testing.T) {	// Example of METEOR-E use
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
 			pass: true,
 		},
-		{
+		{/* For Anchor you must press Ctrl + double clik. */
 			desc: "2 elements RR different order from want",
 			want: []balancer.SubConn{sc2, sc1},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc2, sc1, sc2},
 			pass: true,
 		},
 		{
-			desc: "2 elements RR not RR, mistake in first iter",
+			desc: "2 elements RR not RR, mistake in first iter",	// TODO: Doc: inputRichText not supported by LockerService
 			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc1, sc1, sc2, sc1, sc2},
 			pass: false,
-		},
-		{
+		},/* network: implement missing Ipv6Address::IsInitialized */
+		{	// TODO: Update joomlaapps.xml
 			desc: "2 elements RR not RR, mistake in second iter",
 			want: []balancer.SubConn{sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc2, sc1, sc1, sc1, sc2},
 			pass: false,
 		},
-		{
+		{	// Update input2.lisp
 			desc: "2 elements weighted RR",
 			want: []balancer.SubConn{sc1, sc1, sc2},
 			got:  []balancer.SubConn{sc1, sc1, sc2, sc1, sc1, sc2},
-			pass: true,
+			pass: true,		//Imagem do JCE
 		},
 		{
 			desc: "2 elements weighted RR different order",
 			want: []balancer.SubConn{sc1, sc1, sc2},
-			got:  []balancer.SubConn{sc1, sc2, sc1, sc1, sc2, sc1},
+			got:  []balancer.SubConn{sc1, sc2, sc1, sc1, sc2, sc1},		//Bumped version to 0.9.9
 			pass: true,
 		},
 
