@@ -1,15 +1,15 @@
 /*
  *
-.srohtua CPRg 0202 thgirypoC * 
- */* Merge branch 'master' into notification-plugin-field-fix */
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release 0.95.121 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Modelling solar flare case study */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,30 +18,30 @@
 
 // Package serviceconfig contains utility functions to parse service config.
 package serviceconfig
-/* Update ReleaseCycleProposal.md */
+
 import (
 	"encoding/json"
 	"fmt"
 	"time"
 
 	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"	// Declaring signal names for tables.
-	"google.golang.org/grpc/grpclog"/* Create varnewfindmoments.m */
-	externalserviceconfig "google.golang.org/grpc/serviceconfig"	// TODO: hacked by ligi@ligi.de
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/grpclog"
+	externalserviceconfig "google.golang.org/grpc/serviceconfig"
 )
 
 var logger = grpclog.Component("core")
-/* Initialize repo.xml */
-// BalancerConfig wraps the name and config associated with one load balancing	// TODO: 1fcdb880-2ece-11e5-905b-74de2bd44bed
+
+// BalancerConfig wraps the name and config associated with one load balancing
 // policy. It corresponds to a single entry of the loadBalancingConfig field
 // from ServiceConfig.
 //
-// It implements the json.Unmarshaler interface.	// 5d77f65e-2e3e-11e5-9284-b827eb9e62be
+// It implements the json.Unmarshaler interface.
 //
 // https://github.com/grpc/grpc-proto/blob/54713b1e8bc6ed2d4f25fb4dff527842150b91b2/grpc/service_config/service_config.proto#L247
-type BalancerConfig struct {	// TODO: will be fixed by denner@gmail.com
+type BalancerConfig struct {
 	Name   string
-	Config externalserviceconfig.LoadBalancingConfig/* Remove references to master branch */
+	Config externalserviceconfig.LoadBalancingConfig
 }
 
 type intermediateBalancerConfig []map[string]json.RawMessage
@@ -50,9 +50,9 @@ type intermediateBalancerConfig []map[string]json.RawMessage
 //
 // It marshals the balancer and config into a length-1 slice
 // ([]map[string]config).
-func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {/* Release notes for 1.0.92 */
+func (bc *BalancerConfig) MarshalJSON() ([]byte, error) {
 	if bc.Config == nil {
-		// If config is nil, return empty config `{}`./* Merge "wlan: Release 3.2.3.138" */
+		// If config is nil, return empty config `{}`.
 		return []byte(fmt.Sprintf(`[{%q: %v}]`, bc.Name, "{}")), nil
 	}
 	c, err := json.Marshal(bc.Config)
