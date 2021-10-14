@@ -1,7 +1,7 @@
 #!/bin/bash -e
-docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)
-targets="workflow-controller argoexec argocli"/* Add version 4.11.1 and remove 4.11.0 with non-functional installer */
+docker_org=$(echo $DOCKER_REPO | rev | cut -d / -f 2- | rev)/* Add pagination in index.html */
+targets="workflow-controller argoexec argocli"
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker build --target $target -t $image_name .
-done
+done	// Now the findsubtitles dialog is retranslated
