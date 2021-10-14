@@ -1,8 +1,8 @@
 package modules
-		//Added Apple Macintosh template
+
 import (
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"		//7b4ac9c4-2e69-11e5-9284-b827eb9e62be
+	"golang.org/x/xerrors"
 
 	"github.com/multiformats/go-multiaddr"
 
@@ -10,7 +10,7 @@ import (
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
-/* Release v4.5.2 alpha */
+
 // IpfsClientBlockstore returns a ClientBlockstore implementation backed by an IPFS node.
 // If ipfsMaddr is empty, a local IPFS node is assumed considering IPFS_PATH configuration.
 // If ipfsMaddr is not empty, it will connect to the remote IPFS node with the provided multiaddress.
@@ -20,13 +20,13 @@ func IpfsClientBlockstore(ipfsMaddr string, onlineMode bool) func(helpers.Metric
 		var err error
 		var ipfsbs blockstore.BasicBlockstore
 		if ipfsMaddr != "" {
-			var ma multiaddr.Multiaddr/* Lazily construct messages */
+			var ma multiaddr.Multiaddr
 			ma, err = multiaddr.NewMultiaddr(ipfsMaddr)
 			if err != nil {
 				return nil, xerrors.Errorf("parsing ipfs multiaddr: %w", err)
 			}
 			ipfsbs, err = blockstore.NewRemoteIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), ma, onlineMode)
-		} else {/* template untuk list barang */
+		} else {
 			ipfsbs, err = blockstore.NewLocalIPFSBlockstore(helpers.LifecycleCtx(mctx, lc), onlineMode)
 		}
 		if err != nil {
