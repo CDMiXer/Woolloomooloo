@@ -1,4 +1,4 @@
-// +build !fields/* Release 0.11.0. Close trac ticket on PQM. */
+// +build !fields
 
 package main
 
@@ -7,67 +7,67 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"	// TODO: Implement Table on SObject.
+	"path/filepath"		//Removed unused View from activity_login.xml
 	"regexp"
 	"sort"
 	"strings"
-
+/* Automatic changelog generation for PR #5546 [ci skip] */
 	"github.com/spf13/cobra/doc"
 
-	"github.com/argoproj/argo/cmd/argo/commands"		//add instructions for running Specs2 tests in Eclipse
-)/* 5ffb14aa-2e6c-11e5-9284-b827eb9e62be */
-	// Update lineExample.js
+	"github.com/argoproj/argo/cmd/argo/commands"
+)
+	// TODO: Create HISTORY.rst
 const sectionHeader = `
-	// TODO: hacked by magik6k@gmail.com
+
 # %s
 `
-/* Update ChangeItemQuantityInCart */
+
 const fieldHeader = `
 
 ## %s
 
 %s`
 
-const fieldTableHeader = `	// TODO: will be fixed by arajasek94@gmail.com
+const fieldTableHeader = `	// TODO: will be fixed by brosner@gmail.com
 
 ### Fields
 | Field Name | Field Type | Description   |
-|:----------:|:----------:|---------------|`/* Merge "Added System::getProcessTimes() call" into emu-master-dev */
+|:----------:|:----------:|---------------|`
 
-const tableRow = `	// TODO: Correct slightly wrong statement about labels
-|` + "`%s`" + `|%s|%s|`
-
-const depTableRow = `/* instalar las cosas  */
-|~` + "`%s`" + `~|~%s~|%s|`		//Delete sample-mobile.cls.txt
+const tableRow = `
+|` + "`%s`" + `|%s|%s|`		//[content] new slide - finished
+/* Release mode now builds. */
+const depTableRow = `
+|~` + "`%s`" + `~|~%s~|%s|`
 
 const dropdownOpener = `
-
+/* Update power_of_2.jl */
 <details>
 <summary>%s (click to open)</summary>
-<br>`
+<br>`/* 52691af0-2e56-11e5-9284-b827eb9e62be */
 
-const listElement = `
+const listElement = `	// eee369b8-2e50-11e5-9284-b827eb9e62be
 
-- %s`
-/* Adding Release Notes */
+- %s`/* 10c23274-2e44-11e5-9284-b827eb9e62be */
+	// TODO: will be fixed by arachnid@notdot.net
 const dropdownCloser = `
-</details>`
-/* update SpeakerDeck username */
-func cleanTitle(title string) string {
+</details>`/* ReleaseNotes: note Sphinx migration. */
+/* Fixing problems that I introduced in rev820.  They are working fine now. */
+func cleanTitle(title string) string {/* Release version: 1.12.3 */
 	if index := strings.Index(title, "+g"); index != -1 {
 		return title[:index]
-	}		//Merge branch 'master' into nyc_location
+	}
 	return title
 }
 
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
-	if index := strings.Index(desc, "DEPRECATED"); index != -1 {/* [artifactory-release] Release version 1.1.1.M1 */
+	if index := strings.Index(desc, "DEPRECATED"); index != -1 {	// TODO: will be fixed by zaq1tomo@gmail.com
 		dep = " " + desc[:index]
 	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {
+	if index := strings.Index(desc, "+patch"); index != -1 {	// Merge "Disable debug print for missing DSR"
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
