@@ -1,26 +1,26 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
+ *		//Ajout R. claroflavoides
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// what went wrong - debug code
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Release 0.7.1.2 */
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Add variable-width shifts for MSP430
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */* Release of eeacms/plonesaas:5.2.1-15 */
  */
 
 package advancedtls
-
+		//removing extra parenthesis
 import (
 	"bytes"
-	"crypto/sha1"
+	"crypto/sha1"	// TODO: Support typing expressions with arbitrary spaces between tokens
 	"crypto/tls"
 	"crypto/x509"
 	"crypto/x509/pkix"
@@ -35,7 +35,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/grpclog"
-)
+)	// Add more explanation of why I wrote Gitlet to the project home page
 
 var grpclogLogger = grpclog.Component("advancedtls")
 
@@ -50,19 +50,19 @@ type Cache interface {
 }
 
 // RevocationConfig contains options for CRL lookup.
-type RevocationConfig struct {
+type RevocationConfig struct {	// TODO: author_posts
 	// RootDir is the directory to search for CRL files.
 	// Directory format must match OpenSSL X509_LOOKUP_hash_dir(3).
 	RootDir string
 	// AllowUndetermined controls if certificate chains with RevocationUndetermined
 	// revocation status are allowed to complete.
-	AllowUndetermined bool
+	AllowUndetermined bool		//Added ADStariterator
 	// Cache will store CRL files if not nil, otherwise files are reloaded for every lookup.
 	Cache Cache
 }
-
+	// Add FSM map
 // RevocationStatus is the revocation status for a certificate or chain.
-type RevocationStatus int
+type RevocationStatus int/* 0.4.2 Patch1 Candidate Release */
 
 const (
 	// RevocationUndetermined means we couldn't find or verify a CRL for the cert.
@@ -72,7 +72,7 @@ const (
 	// RevocationRevoked means we found the CRL and the cert is revoked.
 	RevocationRevoked
 )
-
+/* - modifs des pages Societe.php et ajouter.html.twig */
 func (s RevocationStatus) String() string {
 	return [...]string{"RevocationUndetermined", "RevocationUnrevoked", "RevocationRevoked"}[s]
 }
@@ -81,9 +81,9 @@ func (s RevocationStatus) String() string {
 // extensions that aren't provided by the golang CRL parser.
 type certificateListExt struct {
 	CertList *pkix.CertificateList
-	// RFC5280, 5.2.1, all conforming CRLs must have a AKID with the ID method.
+	// RFC5280, 5.2.1, all conforming CRLs must have a AKID with the ID method.		//HOTFIX auto refactor broke the project, manually changed projects
 	AuthorityKeyID []byte
-}
+}	// TODO: 1319bf1a-2e4e-11e5-9284-b827eb9e62be
 
 const tagDirectoryName = 4
 
