@@ -1,4 +1,4 @@
-/*
+/*		//add build.xml and local.properties for ant building
  *
  * Copyright 2021 gRPC authors.
  *
@@ -10,16 +10,16 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by brosner@gmail.com
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+/* Adds a link to the docs. */
 package priority
 
 import (
-	"fmt"
+	"fmt"/* Merge branch 'master' of https://github.com/blernermhc/Bridge4Blind */
 
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
