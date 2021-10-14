@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi/
+*.pyc	// added proto for gameLoop.
+/.pulumi/		//Merge "Fix PEP8 issues ."
 /dist/
 /*.egg-info
