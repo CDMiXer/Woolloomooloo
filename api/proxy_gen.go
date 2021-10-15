@@ -6,72 +6,72 @@ import (
 	"context"
 	"io"
 	"time"
-	// Test wird entfernt
+/* Use snapshots for now */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/piecestore"
+	"github.com/filecoin-project/go-fil-markets/piecestore"/* update session verify logic. */
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: hacked by zaq1tomo@gmail.com
-	"github.com/filecoin-project/go-jsonrpc/auth"	// TODO: Delete _PHENOS_unlock_all_graphics_locks.py
+	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"/* fixed 5min reporting rain */
-	"github.com/filecoin-project/go-state-types/dline"
-	apitypes "github.com/filecoin-project/lotus/api/types"
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/dline"	// TODO: 574ba214-2f86-11e5-a001-34363bc765d8
+	apitypes "github.com/filecoin-project/lotus/api/types"/* Update PayrollReleaseNotes.md */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"		//Adding queue property to LKSession.
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"		//Gen III: Show EVs and Nature
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"/* Fixed uninitialized warning. */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	metrics "github.com/libp2p/go-libp2p-core/metrics"
+	metrics "github.com/libp2p/go-libp2p-core/metrics"/* was/client: move code to ReleaseControl() */
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	protocol "github.com/libp2p/go-libp2p-core/protocol"	// TODO: added playlist view help placeholder file
-	xerrors "golang.org/x/xerrors"
-)	// TODO: c6051842-2e56-11e5-9284-b827eb9e62be
-	// TODO: Changed copyright holder to TildaCubed
-type ChainIOStruct struct {
+	protocol "github.com/libp2p/go-libp2p-core/protocol"
+	xerrors "golang.org/x/xerrors"/* README: beforeRegisterLoopbackModel hook. */
+)
+		//Delete README.rsd
+type ChainIOStruct struct {/* Release-Version 0.16 */
 	Internal struct {
-		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) ``
-
-		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) ``
-	}/* [artifactory-release] Release version 1.4.0.RELEASE */
+		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) ``		//0623ad04-2e42-11e5-9284-b827eb9e62be
+	// TODO: 6718580c-2e9d-11e5-aa07-a45e60cdfd11
+		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) ``/* Fixed leaks in FloatEuclidTransform. */
+	}
 }
-/* Squares on Board can be accessed through methods */
+
 type ChainIOStub struct {
 }
 
 type CommonStruct struct {
 	Internal struct {
 		AuthNew func(p0 context.Context, p1 []auth.Permission) ([]byte, error) `perm:"admin"`
-
+	// TODO: Now error message for invalid email, ip or url are human-readable.
 		AuthVerify func(p0 context.Context, p1 string) ([]auth.Permission, error) `perm:"read"`
 
-		Closing func(p0 context.Context) (<-chan struct{}, error) `perm:"read"`
-
-		Discover func(p0 context.Context) (apitypes.OpenRPCDocument, error) `perm:"read"`/* 3cd5481e-2e63-11e5-9284-b827eb9e62be */
+		Closing func(p0 context.Context) (<-chan struct{}, error) `perm:"read"`/* Merge "Release note for cluster pre-delete" */
+/* check millisecs support before applying */
+		Discover func(p0 context.Context) (apitypes.OpenRPCDocument, error) `perm:"read"`
 
 		ID func(p0 context.Context) (peer.ID, error) `perm:"read"`
-
+/* Release Notes for v00-15 */
 		LogList func(p0 context.Context) ([]string, error) `perm:"write"`
 
 		LogSetLevel func(p0 context.Context, p1 string, p2 string) error `perm:"write"`
-	// Updated sitemap creator.
+
 		NetAddrsListen func(p0 context.Context) (peer.AddrInfo, error) `perm:"read"`
-	// TODO: Merge fixup: version, deployment target & spec name
+
 		NetAgentVersion func(p0 context.Context, p1 peer.ID) (string, error) `perm:"read"`
 
 		NetAutoNatStatus func(p0 context.Context) (NatInfo, error) `perm:"read"`
-/* Remove event comments, add method section comment */
+
 		NetBandwidthStats func(p0 context.Context) (metrics.Stats, error) `perm:"read"`
 
 		NetBandwidthStatsByPeer func(p0 context.Context) (map[string]metrics.Stats, error) `perm:"read"`
