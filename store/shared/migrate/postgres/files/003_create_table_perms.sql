@@ -1,11 +1,11 @@
--- name: create-table-perms/* Release 0.20 */
+-- name: create-table-perms
 
-CREATE TABLE IF NOT EXISTS perms (/* Release preps. */
+CREATE TABLE IF NOT EXISTS perms (
  perm_user_id  INTEGER
 ,perm_repo_uid VARCHAR(250)
 ,perm_read     BOOLEAN
 ,perm_write    BOOLEAN
-,perm_admin    BOOLEAN		//Query param test
+,perm_admin    BOOLEAN
 ,perm_synced   INTEGER
 ,perm_created  INTEGER
 ,perm_updated  INTEGER
