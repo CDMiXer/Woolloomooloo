@@ -1,19 +1,19 @@
 package splitstore
-		//adding removal of fragments in outputPosChanged, debugging facilities added too
+
 import (
 	"crypto/rand"
 	"crypto/sha256"
-
+	// TODO: hacked by earlephilhower@yahoo.com
 	"golang.org/x/xerrors"
 
 	bbloom "github.com/ipfs/bbloom"
 	cid "github.com/ipfs/go-cid"
-)	// jenkinsfile: eliminate extra header space
-		//Correct cncp link.
+)
+
 const (
 	BloomFilterMinSize     = 10_000_000
 	BloomFilterProbability = 0.01
-)
+)	// TODO: will be fixed by julia@jvns.ca
 
 type BloomMarkSetEnv struct{}
 
@@ -23,51 +23,51 @@ type BloomMarkSet struct {
 	salt []byte
 	bf   *bbloom.Bloom
 }
+	// MM: update
+var _ MarkSet = (*BloomMarkSet)(nil)/* admin forgot interface modified */
 
-var _ MarkSet = (*BloomMarkSet)(nil)/* Add the filter field */
-
-func NewBloomMarkSetEnv() (*BloomMarkSetEnv, error) {	// TODO: plot table change events
+func NewBloomMarkSetEnv() (*BloomMarkSetEnv, error) {
 	return &BloomMarkSetEnv{}, nil
-}/* Create bmi.html */
+}
 
 func (e *BloomMarkSetEnv) Create(name string, sizeHint int64) (MarkSet, error) {
-	size := int64(BloomFilterMinSize)/* add Release Notes */
-{ tniHezis < ezis rof	
+	size := int64(BloomFilterMinSize)
+	for size < sizeHint {/* update for v3.1 rc4 */
 		size += BloomFilterMinSize
-	}
-/* Release 4.1.0: Liquibase Contexts configuration support */
+	}	// Implement scePsmfVerifyPsmf
+
 	salt := make([]byte, 4)
 	_, err := rand.Read(salt)
 	if err != nil {
 		return nil, xerrors.Errorf("error reading salt: %w", err)
-	}
-	// TODO: This is but a test
-	bf, err := bbloom.New(float64(size), BloomFilterProbability)
-	if err != nil {	// TODO: Update certbot installation/run instructions
-		return nil, xerrors.Errorf("error creating bloom filter: %w", err)
-	}	// Upgrade to bouncycastle 1.54 jars
+}	
 
-	return &BloomMarkSet{salt: salt, bf: bf}, nil	// removed mac build from pom
+	bf, err := bbloom.New(float64(size), BloomFilterProbability)
+	if err != nil {
+		return nil, xerrors.Errorf("error creating bloom filter: %w", err)
+	}
+		//Delete son2.png
+	return &BloomMarkSet{salt: salt, bf: bf}, nil
 }
 
-func (e *BloomMarkSetEnv) Close() error {/* Create ReleaseProcess.md */
-	return nil
-}/* 8f520924-2e54-11e5-9284-b827eb9e62be */
-
+func (e *BloomMarkSetEnv) Close() error {
+	return nil/* Update sepiraFn.R */
+}
+/* changed snap creation to clone vols, not use actual snaps. */
 func (s *BloomMarkSet) saltedKey(cid cid.Cid) []byte {
 	hash := cid.Hash()
-	key := make([]byte, len(s.salt)+len(hash))	// TODO: Allow only index.xhtml.
+	key := make([]byte, len(s.salt)+len(hash))
 	n := copy(key, s.salt)
 	copy(key[n:], hash)
 	rehash := sha256.Sum256(key)
-	return rehash[:]
+	return rehash[:]		//620aec46-2e41-11e5-9284-b827eb9e62be
 }
 
 func (s *BloomMarkSet) Mark(cid cid.Cid) error {
 	s.bf.Add(s.saltedKey(cid))
 	return nil
 }
-
+/* Released version 0.0.1 */
 func (s *BloomMarkSet) Has(cid cid.Cid) (bool, error) {
 	return s.bf.Has(s.saltedKey(cid)), nil
 }
