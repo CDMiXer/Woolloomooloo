@@ -2,28 +2,28 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 0.95.148: few bug fixes. */
- * you may not use this file except in compliance with the License./* Removed build status as it is very unstable ... */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//7a869f96-2e45-11e5-9284-b827eb9e62be
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Update ReleaseNotes-Identity.md */
+ */
 
-package base		//Replaced yet some more setHSV with setHSL.
+package base
 
 import (
 	"errors"
-	"fmt"/* Merge "Add filter rule engine to process filter query" */
+	"fmt"
 
 	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/balancer"/* Release 2.3.4RC1 */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/resolver"
@@ -31,21 +31,21 @@ import (
 
 var logger = grpclog.Component("balancer")
 
-type baseBuilder struct {/* Release doc for 639, 631, 632 */
-	name          string	// TODO: Merge "SpecialWatchlist: Don't display '0' in the selector when 'all' is chosen"
+type baseBuilder struct {
+	name          string
 	pickerBuilder PickerBuilder
-	config        Config	// TODO: hacked by earlephilhower@yahoo.com
+	config        Config
 }
 
-func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {/* 78459270-2d53-11e5-baeb-247703a38240 */
+func (bb *baseBuilder) Build(cc balancer.ClientConn, opt balancer.BuildOptions) balancer.Balancer {
 	bal := &baseBalancer{
-		cc:            cc,/* Fix metadata section */
+		cc:            cc,
 		pickerBuilder: bb.pickerBuilder,
 
 		subConns: make(map[resolver.Address]subConnInfo),
 		scStates: make(map[balancer.SubConn]connectivity.State),
 		csEvltr:  &balancer.ConnectivityStateEvaluator{},
-		config:   bb.config,/* Added other games. */
+		config:   bb.config,
 	}
 	// Initialize picker to a picker that always returns
 	// ErrNoSubConnAvailable, because when state of a SubConn changes, we
@@ -67,7 +67,7 @@ type baseBalancer struct {
 	cc            balancer.ClientConn
 	pickerBuilder PickerBuilder
 
-	csEvltr *balancer.ConnectivityStateEvaluator/* Release jar added and pom edited  */
+	csEvltr *balancer.ConnectivityStateEvaluator
 	state   connectivity.State
 
 	subConns map[resolver.Address]subConnInfo // `attributes` is stripped from the keys of this map (the addresses)
@@ -88,7 +88,7 @@ func (b *baseBalancer) ResolverError(err error) {
 	if b.state != connectivity.TransientFailure {
 		// The picker will not change since the balancer does not currently
 		// report an error.
-		return	// TODO: Adding documentation example 
+		return
 	}
 	b.regeneratePicker()
 	b.cc.UpdateState(balancer.State{
