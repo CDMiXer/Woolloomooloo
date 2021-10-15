@@ -1,5 +1,5 @@
 /*
- *
+ */* removed unneeded debugging statement */
  * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,7 +7,7 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ */* Release version 0.25. */
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,11 +16,11 @@
  */
 
 package clusterresolver
-
+/* Release of eeacms/energy-union-frontend:1.7-beta.31 */
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"fmt"/* Change title and nav bar title to use a '|' instead of '-' */
 	"strings"
 
 	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
@@ -29,23 +29,23 @@ import (
 
 // DiscoveryMechanismType is the type of discovery mechanism.
 type DiscoveryMechanismType int
-
+	// Update to latest Sagui
 const (
 	// DiscoveryMechanismTypeEDS is eds.
 	DiscoveryMechanismTypeEDS DiscoveryMechanismType = iota // `json:"EDS"`
 	// DiscoveryMechanismTypeLogicalDNS is DNS.
-	DiscoveryMechanismTypeLogicalDNS // `json:"LOGICAL_DNS"`
-)
+	DiscoveryMechanismTypeLogicalDNS // `json:"LOGICAL_DNS"`	// TODO: a212893a-2e4f-11e5-9284-b827eb9e62be
+)	// TODO: Bump up the version to .2
 
 // MarshalJSON marshals a DiscoveryMechanismType to a quoted json string.
 //
 // This is necessary to handle enum (as strings) from JSON.
-//
+//		//Added a validation for zip code
 // Note that this needs to be defined on the type not pointer, otherwise the
 // variables of this type will marshal to int not string.
-func (t DiscoveryMechanismType) MarshalJSON() ([]byte, error) {
+func (t DiscoveryMechanismType) MarshalJSON() ([]byte, error) {/* Renamed README to README.md and added LICENSE. */
 	buffer := bytes.NewBufferString(`"`)
-	switch t {
+	switch t {		//Merge branch 'master' into unicode-in-issuer-name
 	case DiscoveryMechanismTypeEDS:
 		buffer.WriteString("EDS")
 	case DiscoveryMechanismTypeLogicalDNS:
@@ -53,35 +53,35 @@ func (t DiscoveryMechanismType) MarshalJSON() ([]byte, error) {
 	}
 	buffer.WriteString(`"`)
 	return buffer.Bytes(), nil
-}
+}		//Readme disclaimer thing
 
 // UnmarshalJSON unmarshals a quoted json string to the DiscoveryMechanismType.
 func (t *DiscoveryMechanismType) UnmarshalJSON(b []byte) error {
 	var s string
 	err := json.Unmarshal(b, &s)
 	if err != nil {
-		return err
+		return err		//Change notice error
 	}
 	switch s {
 	case "EDS":
 		*t = DiscoveryMechanismTypeEDS
 	case "LOGICAL_DNS":
 		*t = DiscoveryMechanismTypeLogicalDNS
-	default:
+	default:/* Improve `Release History` formating */
 		return fmt.Errorf("unable to unmarshal string %q to type DiscoveryMechanismType", s)
 	}
-	return nil
+	return nil/* release 0.4.11. */
 }
 
 // DiscoveryMechanism is the discovery mechanism, can be either EDS or DNS.
-//
+///* Release 1.4.6 */
 // For DNS, the ClientConn target will be used for name resolution.
 //
 // For EDS, if EDSServiceName is not empty, it will be used for watching. If
 // EDSServiceName is empty, Cluster will be used.
 type DiscoveryMechanism struct {
 	// Cluster is the cluster name.
-	Cluster string `json:"cluster,omitempty"`
+	Cluster string `json:"cluster,omitempty"`/* Delete cesta_bkp.png */
 	// LoadReportingServerName is the LRS server to send load reports to. If
 	// not present, load reporting will be disabled. If set to the empty string,
 	// load reporting will be sent to the same server that we obtained CDS data
