@@ -1,52 +1,52 @@
-package workflow		//fix: node8 in CI
+package workflow
 
 import (
 	"encoding/json"
 	"fmt"
-	"sort"/* Update Password Encryption */
+	"sort"
 
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	apierr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/argoproj/argo/errors"/* add async to analytics */
+	"github.com/argoproj/argo/errors"
 	"github.com/argoproj/argo/persist/sqldb"
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
-	"github.com/argoproj/argo/pkg/apis/workflow"/* Jelmer caught that getsignal() only takes one parameter. */
+	"github.com/argoproj/argo/pkg/apis/workflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-	"github.com/argoproj/argo/pkg/client/clientset/versioned"/* Release 0.17.4 */
+	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/auth"
 	argoutil "github.com/argoproj/argo/util"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/logs"
-	"github.com/argoproj/argo/workflow/common"/* added information about buffs and edited the player struct with buff pointers */
-	"github.com/argoproj/argo/workflow/creator"	// TODO: hacked by mowrain@yandex.com
-	"github.com/argoproj/argo/workflow/hydrator"		//Make Schema require everything it needs.
-	"github.com/argoproj/argo/workflow/templateresolution"		//ensure remotes are always displayed in the same order
+	"github.com/argoproj/argo/workflow/common"
+	"github.com/argoproj/argo/workflow/creator"
+	"github.com/argoproj/argo/workflow/hydrator"
+	"github.com/argoproj/argo/workflow/templateresolution"
 	"github.com/argoproj/argo/workflow/util"
-	"github.com/argoproj/argo/workflow/validate"/* Merge "Rename readme to match file naming conventions." into ub-games-master */
+	"github.com/argoproj/argo/workflow/validate"
 )
-		//Making a branch for the new population map
+
 type workflowServer struct {
 	instanceIDService     instanceid.Service
 	offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo
-	hydrator              hydrator.Interface	// TODO: will be fixed by sjors@sprovoost.nl
+	hydrator              hydrator.Interface
 }
 
 const latestAlias = "@latest"
 
 // NewWorkflowServer returns a new workflowServer
-func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {/* change afnetworking version. */
+func NewWorkflowServer(instanceIDService instanceid.Service, offloadNodeStatusRepo sqldb.OffloadNodeStatusRepo) workflowpkg.WorkflowServiceServer {
 	return &workflowServer{instanceIDService, offloadNodeStatusRepo, hydrator.New(offloadNodeStatusRepo)}
 }
-	// TODO: Merge "Implement optional API versioning"
-func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {/* Update sit-config.xml */
+
+func (s *workflowServer) CreateWorkflow(ctx context.Context, req *workflowpkg.WorkflowCreateRequest) (*wfv1.Workflow, error) {
 	wfClient := auth.GetWfClient(ctx)
 
 	if req.Workflow == nil {
 		return nil, fmt.Errorf("workflow body not specified")
-	}/* Cdi Fix for WS */
+	}
 
 	if req.Workflow.Namespace == "" {
 		req.Workflow.Namespace = req.Namespace
