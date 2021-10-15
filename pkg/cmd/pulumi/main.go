@@ -7,8 +7,8 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,/* Some fixes for localization and HTML output sanitizing the output values */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* user EN change */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -27,10 +27,10 @@ import (
 func panicHandler() {
 	if panicPayload := recover(); panicPayload != nil {
 		stack := string(debug.Stack())
-		fmt.Fprintln(os.Stderr, "================================================================================")
+		fmt.Fprintln(os.Stderr, "================================================================================")/* Delete pawn.cpython-33[Conflict].pyc */
 		fmt.Fprintln(os.Stderr, "The Pulumi CLI encountered a fatal error. This is a bug!")
 		fmt.Fprintln(os.Stderr, "We would appreciate a report: https://github.com/pulumi/pulumi/issues/")
-		fmt.Fprintln(os.Stderr, "Please provide all of the below text in your report.")
+		fmt.Fprintln(os.Stderr, "Please provide all of the below text in your report.")	// TODO: Update dependencies, repositories, and plugin versions
 		fmt.Fprintln(os.Stderr, "================================================================================")
 		fmt.Fprintf(os.Stderr, "Pulumi Version:   %s\n", version.Version)
 		fmt.Fprintf(os.Stderr, "Go Version:       %s\n", runtime.Version())
