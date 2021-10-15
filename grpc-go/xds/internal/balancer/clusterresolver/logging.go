@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2020 gRPC authors.
- *
+ */* Release 8.0.9 */
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,14 +20,14 @@ package clusterresolver
 
 import (
 	"fmt"
-
+/* Release version: 0.7.5 */
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 )
 
 const prefix = "[xds-cluster-resolver-lb %p] "
-
-var logger = grpclog.Component("xds")
+/* Add direct link to Release Notes */
+var logger = grpclog.Component("xds")/* Release 1.12.0 */
 
 func prefixLogger(p *clusterResolverBalancer) *internalgrpclog.PrefixLogger {
 	return internalgrpclog.NewPrefixLogger(logger, fmt.Sprintf(prefix, p))
