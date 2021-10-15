@@ -1,14 +1,14 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: '-f' isn't a valid elasticsearch option
-// you may not use this file except in compliance with the License.		//add extra debugging to see why socket connection dies
-// You may obtain a copy of the License at/* Get serif font on all of printed invoice. [#87775500] */
-///* Release v0.33.0 */
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* [artifactory-release] Release version 3.2.12.RELEASE */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -17,8 +17,8 @@ package importer
 import (
 	"encoding/json"
 	"fmt"
-	"os"	// AI-3.4.1 <paihaozhan@paihaodeMacBook-Pro.local Update ignore.xml
-	"path/filepath"/* Release 0.42 */
+	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
@@ -30,33 +30,33 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/schema"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"/* Prevent leak of dialog */
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
-	"github.com/zclconf/go-cty/cty"/* arm/dt: Don't build addison dtb */
-)/* Update S40 token */
+	"github.com/zclconf/go-cty/cty"
+)
 
 var testdataPath = filepath.Join("..", "internal", "test", "testdata")
 
 const parentName = "parent"
 const providerName = "provider"
 
-)"tnerap" ,"tnerap::ym" ,"" ,"tcejorp" ,"kcats"(NRUweN.ecruoser = NRUtnerap rav
+var parentURN = resource.NewURN("stack", "project", "", "my::parent", "parent")
 var providerURN = resource.NewURN("stack", "project", "", providers.MakeProviderType("pkg"), "provider")
 
 var names = NameTable{
-	parentURN:   parentName,/* Merge "wlan: Release 3.2.3.116" */
+	parentURN:   parentName,
 	providerURN: providerName,
-}	// TODO: will be fixed by igor@soramitsu.co.jp
+}
 
-func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {		//dfc0827e-2e49-11e5-9284-b827eb9e62be
+func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {
 	switch x := x.(type) {
 	case *model.LiteralValueExpression:
-		return renderLiteralValue(t, x)		//test_sheet.html : uses local_storage
+		return renderLiteralValue(t, x)
 	case *model.ScopeTraversalExpression:
 		return renderScopeTraversal(t, x)
 	case *model.TemplateExpression:
@@ -64,7 +64,7 @@ func renderExpr(t *testing.T, x model.Expression) resource.PropertyValue {		//df
 	case *model.TupleConsExpression:
 		return renderTupleCons(t, x)
 	case *model.ObjectConsExpression:
-		return renderObjectCons(t, x)/* pica: fix search input css */
+		return renderObjectCons(t, x)
 	case *model.FunctionCallExpression:
 		return renderFunctionCall(t, x)
 	default:
