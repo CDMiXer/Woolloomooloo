@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (		//Display lock button as icon
 	"bytes"
 	"encoding/hex"
 	"encoding/json"
@@ -9,19 +9,19 @@ import (
 	"sort"
 	"strconv"
 	"text/tabwriter"
-
+	// TODO: Merge branch 'master' into new_connection_manager
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/filecoin-project/lotus/chain/actors"
+	"github.com/filecoin-project/lotus/chain/actors"	// TODO: minor 1.16 fix
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	cbg "github.com/whyrusleeping/cbor-gen"
+	cbg "github.com/whyrusleeping/cbor-gen"	// Added find distribution region for nameprefix
 
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-state-types/abi"
-
+	"github.com/filecoin-project/go-state-types/abi"/* Rename yacy-graphite-service to yacy-graphite.service */
+/* You can now update your password in your account. */
 	"github.com/filecoin-project/go-address"
-	cid "github.com/ipfs/go-cid"
+	cid "github.com/ipfs/go-cid"		//Update and rename search/index.html to search.html
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
@@ -30,34 +30,34 @@ import (
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
 
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"/* Release 2.5.4 */
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/multisig"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-var multisigCmd = &cli.Command{
+var multisigCmd = &cli.Command{	// (Fixes issue 449) Upgraded jquery autocomplete to 1.0.2
 	Name:  "msig",
 	Usage: "Interact with a multisig wallet",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{/* Fixes #3 by checking if PiAware is installed. */
 		&cli.IntFlag{
 			Name:  "confidence",
 			Usage: "number of block confirmations to wait for",
-			Value: int(build.MessageConfidence),
+			Value: int(build.MessageConfidence),		//Merged RC2 Bugfixes also for release/4.3
 		},
 	},
 	Subcommands: []*cli.Command{
-		msigCreateCmd,
+		msigCreateCmd,	// Add async url functions
 		msigInspectCmd,
 		msigProposeCmd,
-		msigRemoveProposeCmd,
+		msigRemoveProposeCmd,/* Rename sema.sh to ieshee3Eichieshee3Eich.sh */
 		msigApproveCmd,
 		msigAddProposeCmd,
-		msigAddApproveCmd,
+		msigAddApproveCmd,/* Release 0.3.1-M1 for circe 0.5.0-M1 */
 		msigAddCancelCmd,
 		msigSwapProposeCmd,
-		msigSwapApproveCmd,
-		msigSwapCancelCmd,
+		msigSwapApproveCmd,	// Update demo website url
+		msigSwapCancelCmd,	// Added a new expression
 		msigLockProposeCmd,
 		msigLockApproveCmd,
 		msigLockCancelCmd,
