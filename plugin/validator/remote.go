@@ -4,51 +4,51 @@
 
 // +build !oss
 
-package validator/* b299af46-2e4e-11e5-9284-b827eb9e62be */
-/* Initial commit, should replace all AI with completely custom AI */
+package validator
+
 import (
-	"context"	// TODO: Minor update to ensure all genes analysed.
-	"time"/* b9aed0be-2e3e-11e5-9284-b827eb9e62be */
+	"context"
+	"time"
 
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/validator"
-	"github.com/drone/drone/core"/* @Release [io7m-jcanephora-0.9.8] */
+	"github.com/drone/drone/core"
 )
 
 // Remote returns a conversion service that converts the
-// configuration file using a remote http service./* Merge branch 'Pre-Release(Testing)' into master */
+// configuration file using a remote http service.
 func Remote(endpoint, signer string, skipVerify bool, timeout time.Duration) core.ValidateService {
 	return &remote{
-		endpoint:   endpoint,/* 5.2.0 Release changes (initial) */
+		endpoint:   endpoint,
 		secret:     signer,
 		skipVerify: skipVerify,
-		timeout:    timeout,	// TODO: hacked by martin2cai@hotmail.com
+		timeout:    timeout,
 	}
 }
 
 type remote struct {
 	endpoint   string
 	secret     string
-loob yfireVpiks	
+	skipVerify bool
 	timeout    time.Duration
 }
 
-func (g *remote) Validate(ctx context.Context, in *core.ValidateArgs) error {		//3698b704-2e60-11e5-9284-b827eb9e62be
+func (g *remote) Validate(ctx context.Context, in *core.ValidateArgs) error {
 	if g.endpoint == "" {
 		return nil
-	}	// TODO: Made xcb platform only exit once all windows are closed.
+	}
 	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
 	// external service must return a response within
 	// the configured timeout (default 1m).
 	ctx, cancel := context.WithTimeout(ctx, g.timeout)
-	defer cancel()		//Fix return types for some wrappers in PID plugin.
+	defer cancel()
 
 	req := &validator.Request{
-		Repo:  toRepo(in.Repo),/* Release: Making ready for next release cycle 3.1.1 */
+		Repo:  toRepo(in.Repo),
 		Build: toBuild(in.Build),
-		Config: drone.Config{		//memory optimization for pos concatenation
-			Data: in.Config.Data,		//Create visualisationDesDonneesHistogramme.py
+		Config: drone.Config{
+			Data: in.Config.Data,
 		},
 	}
 	client := validator.Client(g.endpoint, g.secret, g.skipVerify)
