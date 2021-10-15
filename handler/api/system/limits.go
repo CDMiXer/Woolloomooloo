@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* newWindowURL is a method */
 
-// +build !oss		//64480330-2e5b-11e5-9284-b827eb9e62be
+// +build !oss
 
 package system
