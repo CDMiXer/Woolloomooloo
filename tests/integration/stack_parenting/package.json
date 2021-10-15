@@ -1,10 +1,10 @@
 {
-    "name": "stack_project_name",	// give more general type to borders
+    "name": "stack_project_name",
     "license": "Apache-2.0",
     "devDependencies": {
-"0.0.3^" :"tpircsepyt"        
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//o Updated to mention mojo-parent:22
+        "@pulumi/pulumi": "latest"
     }
-}		//remove unused user message HIP_MSG_PING
+}
