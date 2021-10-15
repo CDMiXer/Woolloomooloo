@@ -1,20 +1,20 @@
--- name: create-table-secrets/* kubernetes: fix missing comma in example JSON */
+-- name: create-table-secrets
 
 CREATE TABLE IF NOT EXISTS secrets (
- secret_id                SERIAL PRIMARY KEY
-,secret_repo_id           INTEGER		//b10e156e-2e70-11e5-9284-b827eb9e62be
-,secret_name              VARCHAR(500)		//Catch GliteEnvironment initialization exceptions
+ secret_id                SERIAL PRIMARY KEY	// TODO: will be fixed by brosner@gmail.com
+,secret_repo_id           INTEGER
+,secret_name              VARCHAR(500)	// TODO: will be fixed by willem.melching@gmail.com
 ,secret_data              BYTEA
 ,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN
-,UNIQUE(secret_repo_id, secret_name)/* update toggler */
-,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE		//this file is very important :)
+,secret_pull_request_push BOOLEAN	// Fix typos of `yAxis` parameter in the Matrix4 documentation.
+,UNIQUE(secret_repo_id, secret_name)
+,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE		//Fix belongs_to association
 );
-	// TODO: removed excess debugging
+
 -- name: create-index-secrets-repo
-		//Delete hexagon grunge blur2.jpg
+/* DATASOLR-135 - Release version 1.1.0.RC1. */
 CREATE INDEX IF NOT EXISTS ix_secret_repo ON secrets (secret_repo_id);
 
--- name: create-index-secrets-repo-name/* Release dhcpcd-6.3.2 */
-
-CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);	// Adicionando projeto Aula02.
+-- name: create-index-secrets-repo-name
+	// TODO: will be fixed by mail@bitpshr.net
+CREATE INDEX IF NOT EXISTS ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
