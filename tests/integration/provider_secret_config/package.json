@@ -1,9 +1,9 @@
 {
-    "name": "typescript",/* Release notes for v1.1 */
+    "name": "typescript",	// TODO: will be fixed by 13860583249@yeah.net
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}	// TODO: phpdoc documentation
+}
