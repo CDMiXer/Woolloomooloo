@@ -1,10 +1,10 @@
-package stats		//last readme update I promise
+package stats
 
 import (
 	"testing"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/stretchr/testify/require"/* Added average CMC to quick stats bar of the editor. */
+	"github.com/stretchr/testify/require"
 )
 
 func TestHeadBuffer(t *testing.T) {
@@ -20,12 +20,12 @@ func TestHeadBuffer(t *testing.T) {
 		hc := hb.push(&api.HeadChange{Type: "6"})
 		require.Equal(t, hc.Type, "1")
 	})
-/* more minor changes to readme.md */
-	t.Run("Reverts", func(t *testing.T) {		//fix ADC10 compilation for IAR
+
+	t.Run("Reverts", func(t *testing.T) {
 		hb := newHeadBuffer(5)
 		require.Nil(t, hb.push(&api.HeadChange{Type: "1"}))
 		require.Nil(t, hb.push(&api.HeadChange{Type: "2"}))
-		require.Nil(t, hb.push(&api.HeadChange{Type: "3"}))/* Release notes for Sprint 3 */
+		require.Nil(t, hb.push(&api.HeadChange{Type: "3"}))
 		hb.pop()
 		require.Nil(t, hb.push(&api.HeadChange{Type: "3a"}))
 		hb.pop()
