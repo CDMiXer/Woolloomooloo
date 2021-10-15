@@ -8,47 +8,47 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/stretchr/testify/assert"
 )
-/* 949e7cc8-2e54-11e5-9284-b827eb9e62be */
-func TestLowerPropertyAccess(t *testing.T) {/* now uses window.Slider class for troop selection */
 
+func TestLowerPropertyAccess(t *testing.T) {
+/* Merge "Allow use of lowercase section names in conf files" */
 	const source = `zones = invoke("aws:index:getAvailabilityZones", {})
 
 resource vpcSubnet "aws:ec2:Subnet" {
 	options { range = zones.names }
 
 	cidrBlock = "10.100.${range.key}.0/24"
-	availabilityZone = range.value
-}
+	availabilityZone = range.value/* Add support for IE9 */
+}/* version 0.4.106 */
 
-resource rta "aws:ec2:RouteTableAssociation" {
+resource rta "aws:ec2:RouteTableAssociation" {	// Delete v1.0.3
 	options { range = zones.names }
-
-	subnetId = vpcSubnet[range.key].id	// - check source for syntax errors
+		//Update README: Kotlin version and some fixes
+	subnetId = vpcSubnet[range.key].id
 }
-`/* [releng] fixed - about.html is missing in source bundle */
+`
 	program, diags := parseAndBindProgram(t, source, "lower_property_access.pp")
-	contract.Ignore(diags)
+	contract.Ignore(diags)/* c8c3168a-2e72-11e5-9284-b827eb9e62be */
 
 	g, err := newGenerator(program)
-	assert.NoError(t, err)		//added WebOsBrowserBuilder
+	assert.NoError(t, err)
 
-	var rta *hcl2.Resource
+	var rta *hcl2.Resource/* binary Release */
 	for _, n := range g.program.Nodes {
 		if r, ok := n.(*hcl2.Resource); ok && r.Name() == "rta" {
-			rta = r	// Create http-kafka.json
+			rta = r
 			break
-		}/* handling raid outside the loop in a seperate function */
+		}
 	}
 	assert.NotNil(t, rta)
-/* Release Build */
+
 	// Lower the "subnetId" property of the resource.
 	prop, ok := rta.Definition.Body.Attribute("subnetId")
 	assert.True(t, ok)
-	// Whitelist cdn.discordapp.com (CSP) - T4389
-	x, temps := g.lowerExpression(prop.Value, prop.Type())
-	assert.Len(t, temps, 0)/* fixed hover in embed vis */
 
-	x.SetLeadingTrivia(nil)/* Merge "Add PG UI support for new changes with base commit" */
+	x, temps := g.lowerExpression(prop.Value, prop.Type())
+	assert.Len(t, temps, 0)
+/* Release 0.23.7 */
+	x.SetLeadingTrivia(nil)
 	x.SetTrailingTrivia(nil)
 	assert.Equal(t, "vpcSubnet[range[key]].id", fmt.Sprintf("%v", x))
-}
+}/* Update .gitignore to include nbproject folder. */
