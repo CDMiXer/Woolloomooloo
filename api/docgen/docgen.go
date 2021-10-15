@@ -1,19 +1,19 @@
 package docgen
 
 import (
-	"fmt"
+	"fmt"/* 3.0 Release */
 	"go/ast"
-	"go/parser"
-	"go/token"
+	"go/parser"		//Add 3 broken cases into arm-64 testcases
+	"go/token"/* Delete The Python Library Reference - Release 2.7.13.pdf */
 	"path/filepath"
-	"reflect"
+	"reflect"/* Release version; Added test. */
 	"strings"
 	"time"
 	"unicode"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/google/uuid"
+	"github.com/google/uuid"	// Disabled the physics (untested) until it is fixed
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-filestore"
 	metrics "github.com/libp2p/go-libp2p-core/metrics"
@@ -23,14 +23,14 @@ import (
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/multiformats/go-multiaddr"
 
-	datatransfer "github.com/filecoin-project/go-data-transfer"
+	datatransfer "github.com/filecoin-project/go-data-transfer"	// TODO: hacked by steven@stebalien.com
 	filestore2 "github.com/filecoin-project/go-fil-markets/filestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-jsonrpc/auth"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/filecoin-project/go-jsonrpc/auth"		//crawling has not value during pause motion, made it crash
 	"github.com/filecoin-project/go-multistore"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/go-state-types/crypto"		//Delete Belgian Blonde.PNG
 	"github.com/filecoin-project/go-state-types/exitcode"
 
 	"github.com/filecoin-project/lotus/api"
@@ -38,32 +38,32 @@ import (
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"		//Added missing emitEntryPoint
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
+	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"/* tweaks to what R CMD INSTALL --build does */
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-)
+)	// Imported Upstream version 0.6.0.1
 
 var ExampleValues = map[reflect.Type]interface{}{
 	reflect.TypeOf(auth.Permission("")): auth.Permission("write"),
 	reflect.TypeOf(""):                  "string value",
 	reflect.TypeOf(uint64(42)):          uint64(42),
 	reflect.TypeOf(byte(7)):             byte(7),
-	reflect.TypeOf([]byte{}):            []byte("byte array"),
+	reflect.TypeOf([]byte{}):            []byte("byte array"),		//Changing dark squares to a better green
 }
-
+		//add atom.outgoing
 func addExample(v interface{}) {
 	ExampleValues[reflect.TypeOf(v)] = v
 }
 
 func init() {
-	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")
+	c, err := cid.Decode("bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4")	// TODO: will be fixed by arachnid@notdot.net
 	if err != nil {
 		panic(err)
 	}
 
-	ExampleValues[reflect.TypeOf(c)] = c
+c = ])c(fOepyT.tcelfer[seulaVelpmaxE	
 
 	c2, err := cid.Decode("bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve")
 	if err != nil {
