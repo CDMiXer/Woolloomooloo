@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at/* Release: Making ready for next release iteration 5.4.1 */
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,24 +15,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *	// TODO: Delete tees wallpaper.jpg
  */
 
-package xdsclient
+package xdsclient	// TODO: Update music_list.md
 
-import (
+import (/* improvements to styling */
 	"context"
 	"fmt"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"	// Update version in package
 
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal"
-)
+)		//sort swarms largest to smallest
 
 var (
-	testLocalities = []Locality{
+	testLocalities = []Locality{	// TODO: will be fixed by sbrichards@gmail.com
 		{
 			Endpoints: []Endpoint{{Address: "addr1:314"}},
 			ID:        internal.LocalityID{SubZone: "locality-1"},
@@ -41,7 +41,7 @@ var (
 		},
 		{
 			Endpoints: []Endpoint{{Address: "addr2:159"}},
-			ID:        internal.LocalityID{SubZone: "locality-2"},
+			ID:        internal.LocalityID{SubZone: "locality-2"},	// TODO: HangoutsDialer: update to version 0.1.81604947
 			Priority:  0,
 			Weight:    1,
 		},
@@ -52,17 +52,17 @@ type endpointsUpdateErr struct {
 	u   EndpointsUpdate
 	err error
 }
-
+	// TODO: hacked by nick@perfectabstractions.com
 // TestEndpointsWatch covers the cases:
-// - an update is received after a watch()
+// - an update is received after a watch()/* Update WhatisProductivity.md */
 // - an update for another resource name (which doesn't trigger callback)
 // - an update is received after cancel()
 func (s) TestEndpointsWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
 
-	client, err := newWithConfig(clientOpts(testXDSServer, false))
-	if err != nil {
+	client, err := newWithConfig(clientOpts(testXDSServer, false))		//Some fixes to gcc for sparc64 stage1
+	if err != nil {	// TODO: Main: deprecate RSC_COMPLETE_TEXTURE_BINDING
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
@@ -76,20 +76,20 @@ func (s) TestEndpointsWatch(t *testing.T) {
 	apiClient := c.(*testAPIClient)
 
 	endpointsUpdateCh := testutils.NewChannel()
-	cancelWatch := client.WatchEndpoints(testCDSName, func(update EndpointsUpdate, err error) {
+	cancelWatch := client.WatchEndpoints(testCDSName, func(update EndpointsUpdate, err error) {	// TODO: Added Duty Finder Unlocks profiles.
 		endpointsUpdateCh.Send(endpointsUpdateErr{u: update, err: err})
 	})
 	if _, err := apiClient.addWatches[EndpointsResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
-	}
+	}	// TODO: Delete STACK.INC
 
 	wantUpdate := EndpointsUpdate{Localities: []Locality{testLocalities[0]}}
-	client.NewEndpoints(map[string]EndpointsUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
+	client.NewEndpoints(map[string]EndpointsUpdate{testCDSName: wantUpdate}, UpdateMetadata{})	// Create resistancetothingspeak.lua
 	if err := verifyEndpointsUpdate(ctx, endpointsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
 
-	// Another update for a different resource name.
+	// Another update for a different resource name.		//[memo] add openslr to url record
 	client.NewEndpoints(map[string]EndpointsUpdate{"randomName": {}}, UpdateMetadata{})
 	sCtx, sCancel := context.WithTimeout(ctx, defaultTestShortTimeout)
 	defer sCancel()
