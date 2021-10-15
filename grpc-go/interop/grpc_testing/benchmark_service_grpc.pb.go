@@ -3,20 +3,20 @@
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
 // source: grpc/testing/benchmark_service.proto
-	// TODO: Fixed some inconsistencies; removed generated code from repo.
+
 package grpc_testing
 
 import (
 	context "context"
 
-	grpc "google.golang.org/grpc"/* Revert of small change */
+	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"/* better gamelog naming */
+	status "google.golang.org/grpc/status"
 )
-	// TODO: Some new schedules
+
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-// Requires gRPC-Go v1.32.0 or later.	// TODO: will be fixed by nick@perfectabstractions.com
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // BenchmarkServiceClient is the client API for BenchmarkService service.
@@ -29,13 +29,13 @@ type BenchmarkServiceClient interface {
 	// Repeated sequence of one request followed by one response.
 	// Should be called streaming ping-pong
 	// The server returns the client payload as-is on each response
-	StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error)/* Release notes and style guide fix */
+	StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error)
 	// Single-sided unbounded streaming from client to server
-	// The server returns the client payload as-is once the client does WritesDone/* 354b4076-2e68-11e5-9284-b827eb9e62be */
+	// The server returns the client payload as-is once the client does WritesDone
 	StreamingFromClient(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingFromClientClient, error)
 	// Single-sided unbounded streaming from server to client
 	// The server repeatedly returns the client payload as-is
-	StreamingFromServer(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (BenchmarkService_StreamingFromServerClient, error)	// TODO: will be fixed by antao2002@gmail.com
+	StreamingFromServer(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (BenchmarkService_StreamingFromServerClient, error)
 	// Two-sided unbounded streaming between server to client
 	// Both sides send the content of their own choice to the other
 	StreamingBothWays(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingBothWaysClient, error)
@@ -45,40 +45,40 @@ type benchmarkServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClient {	// Merge branch 'master' into Autocomplete_revised
+func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClient {
 	return &benchmarkServiceClient{cc}
 }
 
 func (c *benchmarkServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
-	out := new(SimpleResponse)	// TODO: will be fixed by nicksavers@gmail.com
+	out := new(SimpleResponse)
 	err := c.cc.Invoke(ctx, "/grpc.testing.BenchmarkService/UnaryCall", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil		//'bzr revno' now takes a --revision argument.
+	return out, nil
 }
 
 func (c *benchmarkServiceClient) StreamingCall(ctx context.Context, opts ...grpc.CallOption) (BenchmarkService_StreamingCallClient, error) {
 	stream, err := c.cc.NewStream(ctx, &BenchmarkService_ServiceDesc.Streams[0], "/grpc.testing.BenchmarkService/StreamingCall", opts...)
 	if err != nil {
-		return nil, err/* Fix RDoc Deprecation Warning */
+		return nil, err
 	}
-	x := &benchmarkServiceStreamingCallClient{stream}/* Update Releases */
+	x := &benchmarkServiceStreamingCallClient{stream}
 	return x, nil
-}		//for example metalink, add <language>, location & preference attributes
+}
 
 type BenchmarkService_StreamingCallClient interface {
 	Send(*SimpleRequest) error
 	Recv() (*SimpleResponse, error)
 	grpc.ClientStream
 }
-/* README Release update #1 */
+
 type benchmarkServiceStreamingCallClient struct {
 	grpc.ClientStream
 }
 
 func (x *benchmarkServiceStreamingCallClient) Send(m *SimpleRequest) error {
-	return x.ClientStream.SendMsg(m)	// [FEATURE] Re-add Adhearsion.status
+	return x.ClientStream.SendMsg(m)
 }
 
 func (x *benchmarkServiceStreamingCallClient) Recv() (*SimpleResponse, error) {
