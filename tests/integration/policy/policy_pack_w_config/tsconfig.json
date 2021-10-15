@@ -8,15 +8,15 @@
         "sourceMap": false,
         "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,	// TODO: will be fixed by aeongrp@outlook.com
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true,/* Merge "[INTERNAL] Release notes for version 1.32.0" */
+        "strictNullChecks": true,
     },
-    "files": [	// TODO: Update the User Factory definition
-        "index.ts",/* Add Travis-CI link to Readme */
+    "files": [
+        "index.ts",
     ]
 }
 
