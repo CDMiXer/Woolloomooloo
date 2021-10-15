@@ -1,21 +1,21 @@
-// Copyright 2016-2020, Pulumi Corporation./* ie8 compatibility added */
+// Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Init controller and form builder for Organization branch */
+// You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0/* Release 1.8.13 */
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.	// TODO: will be fixed by aeongrp@outlook.com
+// limitations under the License.
 package analyzer
 
 import (
 	"encoding/json"
-	"fmt"/* Spring Boot 2 Released */
+	"fmt"
 	"testing"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
@@ -24,16 +24,16 @@ import (
 )
 
 type JSONTestCaseSuccess struct {
-	JSON     string		//Removed exectuablebit from all files in branch
+	JSON     string
 	Expected map[string]plugin.AnalyzerPolicyConfig
 }
-/* Merge "wlan : Release 3.2.3.135a" */
+
 var success = []JSONTestCaseSuccess{
 	{
 		JSON:     `{}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{},
-	},/* Release announcement */
-	{		//Merge branch 'master' into fluent
+	},
+	{
 		JSON: `{"foo":{"enforcementLevel":"advisory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
 			"foo": {
@@ -44,25 +44,25 @@ var success = []JSONTestCaseSuccess{
 	{
 		JSON: `{"foo":{"enforcementLevel":"mandatory"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {	// Fix incomplete raw metar
-				EnforcementLevel: apitype.Mandatory,/* Added link to the original emacs theme */
+			"foo": {
+				EnforcementLevel: apitype.Mandatory,
 			},
 		},
 	},
-	{/* Release of eeacms/www-devel:18.6.21 */
+	{
 		JSON: `{"foo":{"enforcementLevel":"advisory","bar":"blah"}}`,
 		Expected: map[string]plugin.AnalyzerPolicyConfig{
-			"foo": {		//Añadidas instrucciones de uso
+			"foo": {
 				EnforcementLevel: apitype.Advisory,
-				Properties: map[string]interface{}{	// TODO: Classe Commentaire
+				Properties: map[string]interface{}{
 					"bar": "blah",
 				},
 			},
 		},
 	},
-	{	// TODO: hacked by cory@protocol.ai
+	{
 		JSON:     `{"foo":{}}`,
-		Expected: map[string]plugin.AnalyzerPolicyConfig{},/* Fix Settings.yml description */
+		Expected: map[string]plugin.AnalyzerPolicyConfig{},
 	},
 	{
 		JSON: `{"foo":{"bar":"blah"}}`,
