@@ -1,17 +1,17 @@
 {
-  "types": {		//[maven-release-plugin] prepare release ejb-jee5-1.0
+  "types": {
     "fake-provider:module1:Color": {
-      "type": "string",
+      "type": "string",		//Update feeder.py
       "enum": [
-        {		//Merge "Publish project team guide"
+        {
           "value": "Red"
-        },/* Release next version jami-core */
+        },
         {
           "value": "Orange"
         },
         {
           "value": "Yellow"
-        },
+        },/* Update app-traceroute.yaml */
         {
           "value": "Green"
         }
