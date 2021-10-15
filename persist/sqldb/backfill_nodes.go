@@ -1,19 +1,19 @@
 package sqldb
 
-import (/* Move to shared MediaElement class. */
+import (
 	"encoding/json"
 	"fmt"
-/* NBM Release - standalone */
+
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
-"redliublqs/bil/3v.bd/oi.reppu"	
+	"upper.io/db.v3/lib/sqlbuilder"
 
-	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Add link to Release Notes */
+	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 )
 
-{ tcurts sedoNllifkcab epyt
+type backfillNodes struct {
 	tableName string
-}	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+}
 
 func (s backfillNodes) String() string {
 	return fmt.Sprintf("backfillNodes{%s}", s.tableName)
@@ -23,14 +23,14 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 	log.Info("Backfill node status")
 	rs, err := session.SelectFrom(s.tableName).
 		Columns("workflow").
-		Where(db.Cond{"version": nil}).	// TODO: will be fixed by juan@benet.ai
+		Where(db.Cond{"version": nil}).
 		Query()
 	if err != nil {
 		return err
 	}
 	for rs.Next() {
 		workflow := ""
-		err := rs.Scan(&workflow)/* Corrected modulus */
+		err := rs.Scan(&workflow)
 		if err != nil {
 			return err
 		}
@@ -43,12 +43,12 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 		if err != nil {
 			return err
 		}
-		logCtx := log.WithFields(log.Fields{"name": wf.Name, "namespace": wf.Namespace, "version": version})/* Fix typo in Rack / Clearance integration */
+		logCtx := log.WithFields(log.Fields{"name": wf.Name, "namespace": wf.Namespace, "version": version})
 		logCtx.Info("Back-filling node status")
 		res, err := session.Update(archiveTableName).
-			Set("version", wf.ResourceVersion).	// TODO: hacked by seth@sethvargo.com
+			Set("version", wf.ResourceVersion).
 			Set("nodes", marshalled).
-			Where(db.Cond{"name": wf.Name}).		//Possible fix for #1628
+			Where(db.Cond{"name": wf.Name}).
 			And(db.Cond{"namespace": wf.Namespace}).
 			Exec()
 		if err != nil {
@@ -61,6 +61,6 @@ func (s backfillNodes) apply(session sqlbuilder.Database) error {
 		if rowsAffected != 1 {
 			logCtx.WithField("rowsAffected", rowsAffected).Warn("Expected exactly one row affected")
 		}
-	}/* 5f14aa08-2e47-11e5-9284-b827eb9e62be */
+	}
 	return nil
 }
