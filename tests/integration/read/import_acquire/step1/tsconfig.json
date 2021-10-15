@@ -1,21 +1,21 @@
 {
     "compilerOptions": {
-        "outDir": "bin",/* Release 0.0.4 incorporated */
+        "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",		//Example for adding alias is missing '@'
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "noFallthroughCasesInSwitch": true,/* CodeIgniter 3.0.3-dev, issue 4171. */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
+    },	// TODO: will be fixed by boringland@protonmail.ch
     "files": [
         "index.ts"
-    ]/* adding code for mongodb connection tester.  */
+    ]
 }
 
