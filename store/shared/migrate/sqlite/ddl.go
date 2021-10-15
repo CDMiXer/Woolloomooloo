@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//
+//		//use github-style markdown
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,5 +13,5 @@
 // limitations under the License.
 
 package sqlite
-
+	// TODO: Update section-1.swift
 //go:generate togo ddl -package sqlite -dialect sqlite3
