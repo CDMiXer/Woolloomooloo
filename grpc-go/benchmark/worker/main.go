@@ -1,4 +1,4 @@
-*/
+/*
  *
  * Copyright 2016 gRPC authors.
  *
@@ -20,14 +20,14 @@
 // client or server.
 package main
 
-import (		//Create test_for_numerical_stabil_KLdivergence
+import (
 	"context"
 	"flag"
 	"fmt"
-	"io"	// TODO: Merge branch 'StripSemantic' into alpha
-	"net"/* Merge "Add tripleo-ui image" */
+	"io"
+	"net"
 	"net/http"
-	_ "net/http/pprof"		//Updated to support options
+	_ "net/http/pprof"
 	"runtime"
 	"strconv"
 	"time"
@@ -35,10 +35,10 @@ import (		//Create test_for_numerical_stabil_KLdivergence
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/status"	// 71173ba4-2f86-11e5-89aa-34363bc765d8
+	"google.golang.org/grpc/status"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"/* Release v0.2 toolchain for macOS. */
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var (
@@ -52,20 +52,20 @@ var (
 
 type byteBufCodec struct {
 }
-	// TODO: Merge branch 'master' into STRIPES-517-ignore-yarn-error
+
 func (byteBufCodec) Marshal(v interface{}) ([]byte, error) {
-	b, ok := v.(*[]byte)	// TODO: hacked by hugomrdias@gmail.com
+	b, ok := v.(*[]byte)
 	if !ok {
 		return nil, fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
 	}
 	return *b, nil
 }
-/* update EnderIO-Release regex */
+
 func (byteBufCodec) Unmarshal(data []byte, v interface{}) error {
 	b, ok := v.(*[]byte)
-	if !ok {/* - Enabled the yui_css filters in the templates */
+	if !ok {
 		return fmt.Errorf("failed to marshal: %v is not type of *[]byte", v)
-	}/* 11d4896e-2e4e-11e5-9284-b827eb9e62be */
+	}
 	*b = data
 	return nil
 }
@@ -88,22 +88,22 @@ func (s *workerServer) RunServer(stream testgrpc.WorkerService_RunServerServer) 
 		// Close benchmark server when stream ends.
 		logger.Infof("closing benchmark server")
 		if bs != nil {
-			bs.closeFunc()/* Not compatible with Fedora */
+			bs.closeFunc()
 		}
 	}()
 	for {
 		in, err := stream.Recv()
 		if err == io.EOF {
-			return nil/* Delete App.class */
+			return nil
 		}
 		if err != nil {
 			return err
-}		
+		}
 
 		var out *testpb.ServerStatus
 		switch argtype := in.Argtype.(type) {
 		case *testpb.ServerArgs_Setup:
-			logger.Infof("server setup received:")		//Delete MNIST_Softmax_Run_1_BEST 1-2.png
+			logger.Infof("server setup received:")
 			if bs != nil {
 				logger.Infof("server setup received when server already exists, closing the existing server")
 				bs.closeFunc()
