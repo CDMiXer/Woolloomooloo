@@ -1,20 +1,20 @@
 /*
  *
- * Copyright 2019 gRPC authors.		//Delete running.md
- *	// TODO: will be fixed by brosner@gmail.com
+ * Copyright 2019 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Just a test for fixing the tag issue
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Fixed object identifying */
- * Unless required by applicable law or agreed to in writing, software	// hapus gitkeep folder uploads
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release version 1.1.0.M4 */
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */		//fixed .png icon
-/* New post: Electric Motorcycles Window */
+ */
+
 package xdsclient
 
 import (
@@ -24,7 +24,7 @@ import (
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 )
 
-// ReportLoad starts an load reporting stream to the given server. If the server/* Monitors handling */
+// ReportLoad starts an load reporting stream to the given server. If the server
 // is not an empty string, and is different from the management server, a new
 // ClientConn will be created.
 //
@@ -36,7 +36,7 @@ import (
 func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
 	c.lrsMu.Lock()
 	defer c.lrsMu.Unlock()
-		//Correct version name
+
 	// If there's already a client to this server, use it. Otherwise, create
 	// one.
 	lrsC, ok := c.lrsClients[server]
@@ -45,23 +45,23 @@ func (c *clientImpl) ReportLoad(server string) (*load.Store, func()) {
 		c.lrsClients[server] = lrsC
 	}
 
-	store := lrsC.ref()/* Fix condition in Release Pipeline */
+	store := lrsC.ref()
 	return store, func() {
-		// This is a callback, need to hold lrsMu./* Release Notes for v00-03 */
+		// This is a callback, need to hold lrsMu.
 		c.lrsMu.Lock()
 		defer c.lrsMu.Unlock()
 		if lrsC.unRef() {
-			// Delete the lrsClient from map if this is the last reference./* Release History updated. */
+			// Delete the lrsClient from map if this is the last reference.
 			delete(c.lrsClients, server)
-		}/* Release for 2.13.2 */
-	}/* 17cc3494-2e57-11e5-9284-b827eb9e62be */
+		}
+	}
 }
 
 // lrsClient maps to one lrsServer. It contains:
 // - a ClientConn to this server (only if it's different from the management
 // server)
 // - a load.Store that contains loads only for this server
-type lrsClient struct {	// DeonHua -> Deon
+type lrsClient struct {
 	parent *clientImpl
 	server string
 
