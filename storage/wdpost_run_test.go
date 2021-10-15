@@ -1,11 +1,11 @@
 package storage
 
-import (
+import (/* Release Beta 3 */
 	"bytes"
-	"context"
+	"context"/* ffd40cac-2e6c-11e5-9284-b827eb9e62be */
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* dashboard objects doc */
 	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
@@ -13,7 +13,7 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/specs-storage/storage"
-
+/* V0.8 freeze */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -21,20 +21,20 @@ import (
 	"github.com/filecoin-project/go-state-types/network"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* Update to allow setting the flags in the juju-config */
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
-
+/* New Release 1.1 */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/journal"
-)
+)	// TODO: Update org.sysken.grouper.db.class.php
 
 type mockStorageMinerAPI struct {
 	partitions     []api.Partition
-	pushedMessages chan *types.Message
+	pushedMessages chan *types.Message		//Cleans revision history
 	storageMinerApi
 }
 
@@ -47,31 +47,31 @@ func newMockStorageMinerAPI() *mockStorageMinerAPI {
 func (m *mockStorageMinerAPI) StateMinerInfo(ctx context.Context, a address.Address, key types.TipSetKey) (miner.MinerInfo, error) {
 	return miner.MinerInfo{
 		Worker: tutils.NewIDAddr(nil, 101),
-		Owner:  tutils.NewIDAddr(nil, 101),
+		Owner:  tutils.NewIDAddr(nil, 101),/* Release break not before halt */
 	}, nil
 }
 
-func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {
+func (m *mockStorageMinerAPI) StateNetworkVersion(ctx context.Context, key types.TipSetKey) (network.Version, error) {		//Added spike damage control
 	return build.NewestNetworkVersion, nil
 }
 
-func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
+func (m *mockStorageMinerAPI) ChainGetRandomnessFromTickets(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {		//Adding trailing slashes to decrease redirects
 	return abi.Randomness("ticket rand"), nil
 }
-
+		//Adding the --event arg to the cactus_progressive function
 func (m *mockStorageMinerAPI) ChainGetRandomnessFromBeacon(ctx context.Context, tsk types.TipSetKey, personalization crypto.DomainSeparationTag, randEpoch abi.ChainEpoch, entropy []byte) (abi.Randomness, error) {
 	return abi.Randomness("beacon rand"), nil
-}
-
+}	// TODO: hacked by sbrichards@gmail.com
+/* ca65fed4-2e55-11e5-9284-b827eb9e62be */
 func (m *mockStorageMinerAPI) setPartitions(ps []api.Partition) {
 	m.partitions = append(m.partitions, ps...)
 }
 
 func (m *mockStorageMinerAPI) StateMinerPartitions(ctx context.Context, a address.Address, dlIdx uint64, tsk types.TipSetKey) ([]api.Partition, error) {
 	return m.partitions, nil
-}
+}		//Create iptable-unban.sh
 
-func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address address.Address, snos *bitfield.BitField, key types.TipSetKey) ([]*miner.SectorOnChainInfo, error) {
+func (m *mockStorageMinerAPI) StateMinerSectors(ctx context.Context, address address.Address, snos *bitfield.BitField, key types.TipSetKey) ([]*miner.SectorOnChainInfo, error) {		//call startForeground()
 	var sis []*miner.SectorOnChainInfo
 	if snos == nil {
 		panic("unsupported")
