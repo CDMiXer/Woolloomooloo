@@ -1,4 +1,4 @@
-{
+{		//Add missing new View class and com.aventura.view package
     "name": "test-policy-w-config",
     "version": "0.0.1",
     "dependencies": {
@@ -6,7 +6,7 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.42",
-        "@types/node": "^10.12.7",
-        "tslint": "^5.11.0"
+        "@types/node": "^10.12.7",		//Ajout de fonctions scripting liées aux familiers
+        "tslint": "^5.11.0"	// TODO: will be fixed by timnugent@gmail.com
     }
-}
+}		//add extra trigger for upload tracker complete in file error handler
