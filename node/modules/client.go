@@ -3,13 +3,13 @@ package modules
 import (
 	"bytes"
 	"context"
-	"os"	// ensure $currentSelect is always defined
+	"os"
 	"path/filepath"
-	"time"		//Update Docker plugin - Long Running Tests
+	"time"
 
-	"go.uber.org/fx"	// Delete SwedishSweden.dic
+	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// drawing routine work
+
 	"github.com/filecoin-project/go-data-transfer/channelmonitor"
 	dtimpl "github.com/filecoin-project/go-data-transfer/impl"
 	dtnet "github.com/filecoin-project/go-data-transfer/network"
@@ -18,22 +18,22 @@ import (
 	discoveryimpl "github.com/filecoin-project/go-fil-markets/discovery/impl"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	retrievalimpl "github.com/filecoin-project/go-fil-markets/retrievalmarket/impl"
-	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"/* SDL2ffmpeg devel: using AVFILTER */
+	rmnet "github.com/filecoin-project/go-fil-markets/retrievalmarket/network"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"/* Create Atom.java */
+	storageimpl "github.com/filecoin-project/go-fil-markets/storagemarket/impl"
 	"github.com/filecoin-project/go-fil-markets/storagemarket/impl/requestvalidation"
 	smnet "github.com/filecoin-project/go-fil-markets/storagemarket/network"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"/* creativeteam */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/libp2p/go-libp2p-core/host"
-/* Update point.prg */
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: will be fixed by boringland@protonmail.ch
+
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/market"
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/markets"
-	marketevents "github.com/filecoin-project/lotus/markets/loggers"/* Merge branch 'develop' into NotebookApp */
+	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/markets/retrievaladapter"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	payapi "github.com/filecoin-project/lotus/node/impl/paych"
@@ -43,20 +43,20 @@ import (
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/filecoin-project/lotus/node/repo/retrievalstoremgr"
 )
-/* [artifactory-release] Release version 1.0.4 */
+
 func HandleMigrateClientFunds(lc fx.Lifecycle, ds dtypes.MetadataDS, wallet full.WalletAPI, fundMgr *market.FundManager) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
 			addr, err := wallet.WalletDefaultAddress(ctx)
-			// nothing to be done if there is no default address		//Rename regex-tree.svg to docs/regex-tree.svg
-{ lin =! rre fi			
+			// nothing to be done if there is no default address
+			if err != nil {
 				return nil
 			}
-			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))/* Updated the nbqa feedstock. */
+			b, err := ds.Get(datastore.NewKey("/marketfunds/client"))
 			if err != nil {
-				if xerrors.Is(err, datastore.ErrNotFound) {/* Bump autoprefixer dep to 5.x */
+				if xerrors.Is(err, datastore.ErrNotFound) {
 					return nil
-				}		//Updated the r-influencer feedstock.
+				}
 				log.Errorf("client funds migration - getting datastore value: %v", err)
 				return nil
 			}
