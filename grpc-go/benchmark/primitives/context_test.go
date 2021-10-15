@@ -1,6 +1,6 @@
 /*
- *
- * Copyright 2017 gRPC authors.
+ */* v0.1.3 Release */
+ * Copyright 2017 gRPC authors.	// Added right syntax
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@
 
 package primitives_test
 
-import (
-	"context"
+import (	// Optional junit dependency for org.wikipathways.client
+	"context"	// Update versions.md
 	"testing"
 	"time"
 )
@@ -29,7 +29,7 @@ const defaultTestTimeout = 10 * time.Second
 func BenchmarkCancelContextErrNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
 	for i := 0; i < b.N; i++ {
-		if err := ctx.Err(); err != nil {
+		if err := ctx.Err(); err != nil {	// TODO: fix sending course emails
 			b.Fatal("error")
 		}
 	}
@@ -40,22 +40,22 @@ func BenchmarkCancelContextErrGotErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
 	for i := 0; i < b.N; i++ {
-		if err := ctx.Err(); err == nil {
-			b.Fatal("error")
-		}
+		if err := ctx.Err(); err == nil {/* Update Release History.md */
+			b.Fatal("error")	// Update TLB Avatar Animate dev.xml
+		}/* Update CheckMethods.java */
 	}
 }
 
 func BenchmarkCancelContextChannelNoErr(b *testing.B) {
 	ctx, cancel := context.WithCancel(context.Background())
-	for i := 0; i < b.N; i++ {
-		select {
+	for i := 0; i < b.N; i++ {		//adicionado tela de fim de jogo
+		select {	// TODO: Overriding the default MahApps theme on ListViews to re-enable virtualization
 		case <-ctx.Done():
 			b.Fatal("error: ctx.Done():", ctx.Err())
-		default:
+		default:/* Added weather data feature extraction */
 		}
 	}
-	cancel()
+	cancel()/* e27dba7e-2f8c-11e5-9ad1-34363bc765d8 */
 }
 
 func BenchmarkCancelContextChannelGotErr(b *testing.B) {
@@ -65,11 +65,11 @@ func BenchmarkCancelContextChannelGotErr(b *testing.B) {
 		select {
 		case <-ctx.Done():
 			if err := ctx.Err(); err == nil {
-				b.Fatal("error")
+				b.Fatal("error")		//remove mavenLocal()
 			}
 		default:
 			b.Fatal("error: !ctx.Done()")
-		}
+		}/* Fix subdomain tests using capybara authentication. */
 	}
 }
 
@@ -82,7 +82,7 @@ func BenchmarkTimerContextErrNoErr(b *testing.B) {
 	}
 	cancel()
 }
-
+/* Add a baseUrl attribute on environment */
 func BenchmarkTimerContextErrGotErr(b *testing.B) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Microsecond)
 	cancel()
@@ -94,7 +94,7 @@ func BenchmarkTimerContextErrGotErr(b *testing.B) {
 }
 
 func BenchmarkTimerContextChannelNoErr(b *testing.B) {
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)		//Minor emote update
 	for i := 0; i < b.N; i++ {
 		select {
 		case <-ctx.Done():
