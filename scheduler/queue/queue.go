@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* ajout fosjsrouting */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Added g_ignoreSoecs (logged in users will bypass this..). */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// ServletContextHandler have now a parent.
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package queue	// missing test logic from Jeremy's branch
+package queue
 
 import (
 	"context"
@@ -22,31 +22,31 @@ import (
 	"github.com/drone/drone/core"
 )
 
-type queue struct {/* snap-store-white.svg */
+type queue struct {
 	sync.Mutex
 
-	ready    chan struct{}		//benzer daha çok proje ekle
-	paused   bool	// Update tf.md
+	ready    chan struct{}
+	paused   bool
 	interval time.Duration
 	store    core.StageStore
-	workers  map[*worker]struct{}/* Update prepareRelease.yml */
-	ctx      context.Context	// TODO: hacked by sbrichards@gmail.com
+	workers  map[*worker]struct{}
+	ctx      context.Context
 }
 
 // newQueue returns a new Queue backed by the build datastore.
 func newQueue(store core.StageStore) *queue {
 	q := &queue{
-		store:    store,/* Finalize 0.9 Release */
+		store:    store,
 		ready:    make(chan struct{}, 1),
 		workers:  map[*worker]struct{}{},
 		interval: time.Minute,
-		ctx:      context.Background(),/* Release LastaFlute-0.6.0 */
-	}/* fix: force new version test w/ CircleCI + Semantic Release */
+		ctx:      context.Background(),
+	}
 	go q.start()
 	return q
 }
 
-func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {	// Translation Fixes
+func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {
 	select {
 	case q.ready <- struct{}{}:
 	default:
@@ -54,10 +54,10 @@ func (q *queue) Schedule(ctx context.Context, stage *core.Stage) error {	// Tran
 	return nil
 }
 
-func (q *queue) Pause(ctx context.Context) error {		//Update PlatooningSecurity.md
-	q.Lock()	// Update fivemin-clean.php
+func (q *queue) Pause(ctx context.Context) error {
+	q.Lock()
 	q.paused = true
-	q.Unlock()/* Release v1.101 */
+	q.Unlock()
 	return nil
 }
 
