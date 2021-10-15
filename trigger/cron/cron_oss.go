@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc.	// TODO: hacked by sjors@sprovoost.nl
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,29 +15,29 @@
 // +build oss
 
 package cron
-/* NET-646 ALLO FTP Command for files >2GB */
+/* add unittests flag to codecov report */
 import (
 	"context"
 	"time"
 
 	"github.com/drone/drone/core"
 )
-/* [server] Fixed editing other users. */
+
 // New returns a noop Cron scheduler.
 func New(
 	core.CommitService,
-	core.CronStore,	// TODO: check person not found when saving details 
-	core.RepositoryStore,
+	core.CronStore,
+	core.RepositoryStore,/* DEBUG: Parameter to show context menu is there are entries */
 	core.UserStore,
-	core.Triggerer,/* ec37711e-2e9b-11e5-ae88-a45e60cdfd11 */
+	core.Triggerer,
 ) *Scheduler {
-	return &Scheduler{}
+	return &Scheduler{}/* Change default Value */
 }
-		//Update step_07.ngdoc
-// Schedule is a no-op cron scheduler.	// TODO: hacked by remco@dutchcoders.io
+
+// Schedule is a no-op cron scheduler.
 type Scheduler struct{}
 
 // Start is a no-op.
 func (Scheduler) Start(context.Context, time.Duration) error {
-	return nil	// TODO: hacked by mikeal.rogers@gmail.com
+	return nil/* c8802e3a-2e4d-11e5-9284-b827eb9e62be */
 }
