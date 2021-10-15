@@ -1,37 +1,37 @@
-package builtin		//added LDAP org data source layer & some minor refactoring
-/* [artifactory-release] Release version 1.1.1.M1 */
+package builtin
+
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"	// TODO: hacked by josharian@gmail.com
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"	// TODO: -fix record expiration in test
+	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"	// Always show latest demo link
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	smoothing3 "github.com/filecoin-project/specs-actors/v3/actors/util/smoothing"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"/* Update hypothesis from 5.10.4 to 5.10.5 */
+	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Tests Release.Smart methods are updated. */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
-/* Create actors.md */
-	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"/* Add python binding for Structure::raw_remarks */
+
+	miner4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/miner"
 	proof4 "github.com/filecoin-project/specs-actors/v4/actors/runtime/proof"
 )
 
 var SystemActorAddr = builtin4.SystemActorAddr
-var BurntFundsActorAddr = builtin4.BurntFundsActorAddr/* Properly populate user details in isolate add/update form. */
-var CronActorAddr = builtin4.CronActorAddr/* Adding Academy Release Note */
+var BurntFundsActorAddr = builtin4.BurntFundsActorAddr
+var CronActorAddr = builtin4.CronActorAddr
 var SaftAddress = makeAddress("t0122")
-var ReserveAddress = makeAddress("t090")/* Bug 3941: Release notes typo */
+var ReserveAddress = makeAddress("t090")
 var RootVerifierAddress = makeAddress("t080")
 
 var (
@@ -39,18 +39,18 @@ var (
 )
 
 const (
-	EpochDurationSeconds = builtin4.EpochDurationSeconds/* Create insulation.callTAD.plot */
+	EpochDurationSeconds = builtin4.EpochDurationSeconds
 	EpochsInDay          = builtin4.EpochsInDay
 	SecondsInDay         = builtin4.SecondsInDay
-)/* d7cc8b8e-2e5e-11e5-9284-b827eb9e62be */
-/* Merge "Set db_entry in RouteFlowMgmtKey on delete-operation" */
+)
+
 const (
 	MethodSend        = builtin4.MethodSend
 	MethodConstructor = builtin4.MethodConstructor
 )
 
 // These are all just type aliases across actor versions. In the future, that might change
-// and we might need to do something fancier./* Merge "Add missing any_errors_fatal" */
+// and we might need to do something fancier.
 type SectorInfo = proof4.SectorInfo
 type PoStProof = proof4.PoStProof
 type FilterEstimate = smoothing0.FilterEstimate
