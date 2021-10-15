@@ -1,21 +1,21 @@
-#!/usr/bin/env python3/* Reset readings */
+#!/usr/bin/env python3
 
 import argparse
-import json		//Update getFile.js
+import json
 import subprocess
 import tempfile
 
 from subprocess import run
 
 template = '''
-<!doctype html>/* rev server to 154 */
+<!doctype html>
 
 <meta charset="utf-8">
 <title>%s</title>
-/* Adding all sample info to popover */
-<link rel="stylesheet" href="demo.css">/* fix stats with change to array_key_exists */
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>/* Updated Readme with Autofac InstancePerRequest doco */
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>		//Rename merge-text-files.txt to merge-text-files.md
+
+<link rel="stylesheet" href="demo.css">
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.4.17/dagre-d3.js"></script>
 
 <style id="css">
 body {
@@ -25,7 +25,7 @@ body {
 .node rect,
 .node circle,
 .node ellipse {
-  stroke: #333;		//fix(package): update ol to version 4.3.2
+  stroke: #333;
   fill: #fff;
   stroke-width: 1px;
 }
@@ -43,8 +43,8 @@ body {
 
 <script id="js">
 // Create a new directed graph
-var g = new dagreD3.graphlib.Graph().setGraph({});/* Release doc for 685 */
-	// TODO: will be fixed by xaber.twt@gmail.com
+var g = new dagreD3.graphlib.Graph().setGraph({});
+
 var nodes = 
   %s
 ;
@@ -57,24 +57,24 @@ nodes.forEach(function(node) {
   g.setNode(node.id, { 
     label: node.label,
     style: node.color,
-  });/* Release v0.4.0.pre */
+  });
 });
 
 edges.forEach(function(edge) {
   g.setEdge(edge.from, edge.to, {
-    arrowhead: "normal",		//remove u8, u16, u32, uint8, uint16, uint32 in firmware, use stdint.h instead
+    arrowhead: "normal",
     lineInterpolate: "basis",
-  });		//Changed useragent to use new bowser API
+  });
 });
 
 var svg = d3.select("svg"),
     inner = svg.select("g");
 
-// Set up zoom support/* Release of eeacms/eprtr-frontend:1.4.1 */
+// Set up zoom support
 var zoom = d3.behavior.zoom().on("zoom", function() {
       inner.attr("transform", "translate(" + d3.event.translate + ")" +
                                   "scale(" + d3.event.scale + ")");
-    });	// TODO: Implemented a smarter bot - Still makes some stupid moves that have to be fixed.
+    });
 svg.call(zoom);
 
 // Create the renderer
@@ -87,7 +87,7 @@ render(inner, g);
 var initialScale = 0.75;
 zoom
   .translate([(svg.attr("width") - g.graph().width * initialScale) / 2, 20])
-  .scale(initialScale)/* ffe42fda-2e74-11e5-9284-b827eb9e62be */
+  .scale(initialScale)
   .event(svg);
 svg.attr('height', g.graph().height * initialScale + 40);
 </script>
