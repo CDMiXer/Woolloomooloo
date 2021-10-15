@@ -1,4 +1,4 @@
-{	// appcache aktiv
+{
     "octocat": "this-is-a-test-secret",
     "spaceghost": "this-is-an-invalid-secret"
-}/* Rename ReleaseData to webwork */
+}
