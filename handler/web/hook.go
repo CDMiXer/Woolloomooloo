@@ -1,50 +1,50 @@
-// Copyright 2019 Drone IO, Inc.
-//	// 2.10.0.beta1
+// Copyright 2019 Drone IO, Inc.		//Cambios para arreglar los recursos externos en la colnación de cursos
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: rapidshare.lua: shorter sleep time
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Fixes zum Releasewechsel */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package web	// TODO: Updated the pandasgui feedstock.
+/* Merge branch 'develop' into flows-instance-datalist */
+package web/* Correct stream closing */
 
 import (
 	"context"
 	"net/http"
-	"net/http/httputil"
+	"net/http/httputil"/* Mixin 0.4.3 Release */
 	"os"
-	"strconv"	// [FEATURE] Fix to avoid closing when user presses Esc, by Łukasz Zemczak
+	"strconv"
 	"time"
 
-	"github.com/sirupsen/logrus"
-/* Release of eeacms/www-devel:20.4.24 */
+	"github.com/sirupsen/logrus"/* Initial Release 11 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
-"mcs/mcs-og/enord/moc.buhtig"	
+	"github.com/drone/go-scm/scm"
 )
 
-// this is intended for local testing and instructs the handler	// TODO: 7637824c-2e41-11e5-9284-b827eb9e62be
-// to print the contents of the hook to stdout.
+// this is intended for local testing and instructs the handler
+// to print the contents of the hook to stdout./* Change profile's "required" to "isRequired" */
 var debugPrintHook = false
-	// TODO: adding ignore options
+/* Moving Science Gateway up */
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
-		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
+		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),/* Delete Problem Set 2 */
 	)
 }
 
 // HandleHook returns an http.HandlerFunc that handles webhooks
-// triggered by source code management.	// Comment out stupid events
+// triggered by source code management.
 func HandleHook(
-	repos core.RepositoryStore,/* Removing confusing un-needed code + method name change */
-	builds core.BuildStore,
-	triggerer core.Triggerer,
+	repos core.RepositoryStore,
+	builds core.BuildStore,		//Main menu (hopefully)
+	triggerer core.Triggerer,/* add toolchain note */
 	parser core.HookParser,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -60,19 +60,19 @@ func HandleHook(
 			namespace, name := scm.Split(slug)
 			repo, err := repos.FindName(r.Context(), namespace, name)
 			if err != nil {
-				logrus.WithFields(/* Fix issue introduced in last commit */
+				logrus.WithFields(	// TODO: Add method to get HTTP response from API response
 					logrus.Fields{
 						"namespace": namespace,
 						"name":      name,
-					}).Debugln("cannot find repository")/* naming is hard: renamed Release -> Entry  */
-				return ""
-			}/* Release 0.6.3.1 */
+					}).Debugln("cannot find repository")
+				return ""		//Merge "defconfig: apq8084: Enable /dev/alarm"
+			}	// TODO: will be fixed by cory@protocol.ai
 			return repo.Signer
 		})
-/* Added coloring support for silent icon */
-		if err != nil {/* replace typeform */
-			logrus.Debugf("cannot parse webhook: %s", err)
-			writeBadRequest(w, err)	// улучшен конфиг, сделана заглушка для ответа чужому
+
+		if err != nil {
+			logrus.Debugf("cannot parse webhook: %s", err)/* Merge "Release 1.0.0.233 QCACLD WLAN Drive" */
+			writeBadRequest(w, err)
 			return
 		}
 
@@ -80,7 +80,7 @@ func HandleHook(
 			logrus.Debugf("webhook ignored")
 			return
 		}
-
+/* Release: Making ready to release 6.0.0 */
 		// TODO handle ping requests
 		// TODO consider using scm.Repository in the function callback.
 
