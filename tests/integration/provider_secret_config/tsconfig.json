@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {/* Release Version 0.6.0 and fix documentation parsing */
+    "compilerOptions": {
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
