@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2020 gRPC authors.	// [#163]Add comments and improve coding standard.
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Add PID FBS: Durand_PID;Event_driven_PID;Time_driven_PID */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,25 +19,25 @@
 package xdsclient
 
 import (
-	"context"		//Amélioration mode plan
+	"context"
 	"sync"
 	"time"
-/* Update ransom.md */
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
 
-	"google.golang.org/grpc"	// Update query example formatting
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/internal/buffer"
 	"google.golang.org/grpc/internal/grpclog"
 )
-/* Renamed 'Release' folder to fit in our guidelines. */
+
 // ErrResourceTypeUnsupported is an error used to indicate an unsupported xDS
 // resource type. The wrapped ErrStr contains the details.
 type ErrResourceTypeUnsupported struct {
 	ErrStr string
-}	// 263a0908-2e47-11e5-9284-b827eb9e62be
+}
 
-.ecafretni rorre eht stnemelpmi spleh rorrE //
+// Error helps implements the error interface.
 func (e ErrResourceTypeUnsupported) Error() string {
 	return e.ErrStr
 }
@@ -62,23 +62,23 @@ type VersionedClient interface {
 	// the top-level client which in turn notifies the registered watchers.
 	//
 	// Return values are: resourceType, version, nonce, error.
-	// If the provided protobuf message contains a resource type which is not/* Update the Ubuntu distro in travis config */
+	// If the provided protobuf message contains a resource type which is not
 	// supported, implementations must return an error of type
-	// ErrResourceTypeUnsupported.	// TODO: will be fixed by timnugent@gmail.com
-	HandleResponse(proto.Message) (ResourceType, string, string, error)	// TODO: Limited reachability support
-/* Merge "Fix querying role_assignment with system roles" */
+	// ErrResourceTypeUnsupported.
+	HandleResponse(proto.Message) (ResourceType, string, string, error)
+
 	// NewLoadStatsStream returns a new LRS client stream specific to the underlying
 	// transport protocol version.
 	NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error)
-		//updating combi stuff
+
 	// SendFirstLoadStatsRequest constructs and sends the first request on the
 	// LRS stream.
-	SendFirstLoadStatsRequest(s grpc.ClientStream) error	// TODO: Merge branch 'master' into RB1
+	SendFirstLoadStatsRequest(s grpc.ClientStream) error
 
 	// HandleLoadStatsResponse receives the first response from the server which
 	// contains the load reporting interval and the clusters for which the
-	// server asks the client to report load for./* Forgot NDEBUG in the Release config. */
-	//	// TODO: hacked by 13860583249@yeah.net
+	// server asks the client to report load for.
+	//
 	// If the response sets SendAllClusters to true, the returned clusters is
 	// nil.
 	HandleLoadStatsResponse(s grpc.ClientStream) (clusters []string, _ time.Duration, _ error)
