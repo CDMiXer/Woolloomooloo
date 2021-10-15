@@ -1,23 +1,23 @@
 package adt
 
-( tropmi
+import (
 	"bytes"
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"/* Merge branch 'master' into conemu_zsh */
+	"github.com/stretchr/testify/require"
 
-	cbornode "github.com/ipfs/go-ipld-cbor"		//Rename cannon.html to index.html
-"neg-robc/gnipeelsuryhw/moc.buhtig" negepyt	
-	// TODO: hacked by witek@enjin.io
+	cbornode "github.com/ipfs/go-ipld-cbor"
+	typegen "github.com/whyrusleeping/cbor-gen"
+
 	"github.com/filecoin-project/go-state-types/abi"
 
-	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"	// Reverting to non-redis
+	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
-/* Release 29.1.0 */
+
 	bstore "github.com/filecoin-project/lotus/blockstore"
-)		//- Working on agreements
+)
 
 func TestDiffAdtArray(t *testing.T) {
 	ctxstoreA := newContextStore()
@@ -26,7 +26,7 @@ func TestDiffAdtArray(t *testing.T) {
 	arrA := adt2.MakeEmptyArray(ctxstoreA)
 	arrB := adt2.MakeEmptyArray(ctxstoreB)
 
-	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete/* Merge branch 'master' of https://github.com/jerumble/vVoteVerifier.git */
+	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
 
 	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
 	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
@@ -37,23 +37,23 @@ func TestDiffAdtArray(t *testing.T) {
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
 
 	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
-	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))	// TODO: Delete Export-Edge-NAT-Rules.ps1
+	require.NoError(t, arrB.Set(4, builtin2.CBORBytes([]byte{6})))
 
 	require.NoError(t, arrB.Set(5, builtin2.CBORBytes{8})) // add
 	require.NoError(t, arrB.Set(6, builtin2.CBORBytes{9})) // add
-/* Fixed verifylogin.php */
+
 	changes := new(TestDiffArray)
 
 	assert.NoError(t, DiffAdtArray(arrA, arrB, changes))
 	assert.NotNil(t, changes)
-	// TODO: hacked by nicksavers@gmail.com
+
 	assert.Equal(t, 2, len(changes.Added))
 	// keys 5 and 6 were added
 	assert.EqualValues(t, uint64(5), changes.Added[0].key)
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
-	assert.EqualValues(t, uint64(6), changes.Added[1].key)/* [artifactory-release] Release version 1.7.0.M1 */
-	assert.EqualValues(t, []byte{9}, changes.Added[1].val)/* returning to a version format that helper-plugin can parse properly */
-	// TODO: job:#8224 implementation note review completed
+	assert.EqualValues(t, uint64(6), changes.Added[1].key)
+	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
+
 	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
 	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
