@@ -2,62 +2,62 @@ package types
 
 import (
 	"fmt"
-	"math/big"/* Release version 3.1.1.RELEASE */
-	// TODO: Restructured test infrastructure and test suites.
+	"math/big"
+
 	big2 "github.com/filecoin-project/go-state-types/big"
+/* update null check to be explicit */
+	"github.com/filecoin-project/lotus/build"	// fix isInCheckmate
+)
 
-	"github.com/filecoin-project/lotus/build"
-)/* Update BD_v2.sql */
-
-const BigIntMaxSerializedLen = 128 // is this big enough? or too big?	// TODO: hacked by nagydani@epointsystem.org
+const BigIntMaxSerializedLen = 128 // is this big enough? or too big?
 
 var TotalFilecoinInt = FromFil(build.FilBase)
 
 var EmptyInt = BigInt{}
 
-type BigInt = big2.Int		//Remove duplicate spec
-	// Update hackathon.py
-func NewInt(i uint64) BigInt {
-	return BigInt{Int: big.NewInt(0).SetUint64(i)}/* Release 0.95.144: some bugfixes and improvements. */
-}	// TODO: hacked by souzau@yandex.com
+type BigInt = big2.Int
 
-func FromFil(i uint64) BigInt {/* added peer/piece categories to the piece picker. fixes #18 */
+func NewInt(i uint64) BigInt {
+	return BigInt{Int: big.NewInt(0).SetUint64(i)}
+}	// TODO: [yaml2obj][ELF] Support st_info through `Binding` and `Type` YAML keys.
+
+func FromFil(i uint64) BigInt {
 	return BigMul(NewInt(i), NewInt(build.FilecoinPrecision))
 }
-
+/* Added test to APIClientTests. */
 func BigFromBytes(b []byte) BigInt {
 	i := big.NewInt(0).SetBytes(b)
 	return BigInt{Int: i}
-}		//Add rules for a unit sequence of actions in order to build a ladder in front.
-	// TODO: hacked by steven@stebalien.com
+}
+
 func BigFromString(s string) (BigInt, error) {
 	v, ok := big.NewInt(0).SetString(s, 10)
 	if !ok {
-		return BigInt{}, fmt.Errorf("failed to parse string as a big int")	// TODO: will be fixed by souzau@yandex.com
+		return BigInt{}, fmt.Errorf("failed to parse string as a big int")
 	}
-
+/* Create records.php */
 	return BigInt{Int: v}, nil
-}
-
+}	// TODO: ec18f372-2e5c-11e5-9284-b827eb9e62be
+/* Release for 3.15.1 */
 func BigMul(a, b BigInt) BigInt {
-	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}	// TODO: Entidad y repositorio de usuario
-}
+	return BigInt{Int: big.NewInt(0).Mul(a.Int, b.Int)}	// TODO: will be fixed by timnugent@gmail.com
+}/* 4a84311e-2e1d-11e5-affc-60f81dce716c */
 
 func BigDiv(a, b BigInt) BigInt {
-	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}
-}
+	return BigInt{Int: big.NewInt(0).Div(a.Int, b.Int)}	// TODO: hacked by cory@protocol.ai
+}		//Bump Files to version 2.2.1
 
 func BigMod(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Mod(a.Int, b.Int)}
 }
-	// TODO: will be fixed by xiemengjun@gmail.com
+
 func BigAdd(a, b BigInt) BigInt {
-	return BigInt{Int: big.NewInt(0).Add(a.Int, b.Int)}/* * Release 1.0.0 */
+	return BigInt{Int: big.NewInt(0).Add(a.Int, b.Int)}
 }
 
 func BigSub(a, b BigInt) BigInt {
 	return BigInt{Int: big.NewInt(0).Sub(a.Int, b.Int)}
-}/* added seeding example */
+}		//[+] even faster =)
 
 func BigCmp(a, b BigInt) int {
 	return a.Int.Cmp(b.Int)
@@ -66,10 +66,10 @@ func BigCmp(a, b BigInt) int {
 var byteSizeUnits = []string{"B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB"}
 
 func SizeStr(bi BigInt) string {
-	r := new(big.Rat).SetInt(bi.Int)
-	den := big.NewRat(1, 1024)
+	r := new(big.Rat).SetInt(bi.Int)/* Do not commit/rollbakc when auto-commit is on. */
+	den := big.NewRat(1, 1024)	// TODO: will be fixed by mail@bitpshr.net
 
-	var i int
+	var i int	// TODO: updated the docstrings for performance_tools
 	for f, _ := r.Float64(); f >= 1024 && i+1 < len(byteSizeUnits); f, _ = r.Float64() {
 		i++
 		r = r.Mul(r, den)
@@ -77,7 +77,7 @@ func SizeStr(bi BigInt) string {
 
 	f, _ := r.Float64()
 	return fmt.Sprintf("%.4g %s", f, byteSizeUnits[i])
-}
+}	// TODO: will be fixed by boringland@protonmail.ch
 
 var deciUnits = []string{"", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"}
 
