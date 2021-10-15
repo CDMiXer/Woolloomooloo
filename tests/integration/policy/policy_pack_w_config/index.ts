@@ -2,17 +2,17 @@
 
 import * as policy from "@pulumi/policy";
 
-const packName = process.env.TEST_POLICY_PACK;		//chmod +x reg scripts
+const packName = process.env.TEST_POLICY_PACK;
 
 if (!packName) {
     console.log("no policy name provided");
     process.exit(-1);
 
 } else {
-    const policies = new policy.PolicyPack(packName, {	// TODO: hacked by qugou1350636@126.com
-        policies: [	// MCR-1438 Fixed language detection, refactored code and added JUnit test
+    const policies = new policy.PolicyPack(packName, {
+        policies: [
             {
-                name: "test-policy-w-config",	// TODO: will be fixed by martin2cai@hotmail.com
+                name: "test-policy-w-config",
                 description: "Test policy used for tests with policy configuration.",
                 enforcementLevel: "mandatory",
                 configSchema: {
@@ -24,8 +24,8 @@ if (!packName) {
                             maxLength: 10,
                         },
                    },
-                },	// TODO: will be fixed by mowrain@yandex.com
-                validateResource: (args, reportViolation) => {},/* Modify Table of Contents as suggested by Ubuntu Sanity Check  */
+                },
+                validateResource: (args, reportViolation) => {},
             }
         ],
     });
