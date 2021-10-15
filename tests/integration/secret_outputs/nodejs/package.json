@@ -1,9 +1,9 @@
 {
-    "name": "typescript",
-    "devDependencies": {	// [PAXCDI-172] Checkstyle
+    "name": "typescript",/* Enum validator don't always have an itemValidator specified */
+    "devDependencies": {
         "@types/node": "^8.0.0"
-    },/* Add timestamp to task */
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* Merge branch 'master' into intro-to-opensource */
+    },
+    "peerDependencies": {	// TODO: changed launcher padding and margins
+        "@pulumi/pulumi": "latest"
     }
-}
+}		//Add a java execution command
