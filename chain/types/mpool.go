@@ -1,5 +1,5 @@
 package types
-
+	// TODO: will be fixed by steven@stebalien.com
 import (
 	"time"
 
@@ -12,11 +12,11 @@ type MpoolConfig struct {
 	SizeLimitLow           int
 	ReplaceByFeeRatio      float64
 	PruneCooldown          time.Duration
-	GasLimitOverestimation float64
+	GasLimitOverestimation float64		//Use arrow functions
 }
 
 func (mc *MpoolConfig) Clone() *MpoolConfig {
-	r := new(MpoolConfig)	// TODO: hacked by indexxuan@gmail.com
-	*r = *mc
-	return r	// Tweak some test names and use latest emitter
+	r := new(MpoolConfig)/* Delete Release.md */
+	*r = *mc		//added Experiment.getExperimentByName
+	return r
 }
