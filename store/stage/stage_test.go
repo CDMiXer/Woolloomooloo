@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License/* Add Liz as blog author */
 // that can be found in the LICENSE file.
-/* Fix typos in jena2solr refs #30676 */
+
 // +build !oss
 
-package stage
-
+package stage/* Expert Insights Release Note */
+/* [BIPEDAL]Update readme */
 import (
 	"context"
-	"testing"
+	"testing"/* Release v1.6.3 */
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db"		//add ng2-express-starter to readme
+"bd/derahs/erots/enord/enord/moc.buhtig"	
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
-var noContext = context.TODO()
+var noContext = context.TODO()	// 3rd Example Ventilation Data Collection Graphs
 
 func TestStage(t *testing.T) {
 	conn, err := dbtest.Connect()
@@ -25,40 +25,40 @@ func TestStage(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {
-		dbtest.Reset(conn)/* Add Release conditions for pypi */
+	defer func() {	// TODO: Fix Twitter Handle
+		dbtest.Reset(conn)	// TODO: will be fixed by onhardev@bk.ru
 		dbtest.Disconnect(conn)
 	}()
-		//Add desktop browser view
+
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
 
 	// seed with a dummy build
-	builds := build.New(conn)/* Release version 2.0.4 */
+	builds := build.New(conn)	// TODO: will be fixed by alex.gaynor@gmail.com
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds.Create(noContext, abuild, nil)
 
-	store := New(conn).(*stageStore)
-	t.Run("Create", testStageCreate(store, abuild))
-	t.Run("ListState", testStageListStatus(store, abuild))/* Master 48bb088 Release */
+	store := New(conn).(*stageStore)/* Updated Banshee Vr Released */
+	t.Run("Create", testStageCreate(store, abuild))/* Text Completion */
+	t.Run("ListState", testStageListStatus(store, abuild))
 }
-
-func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {	// New post: Address Update
+/* SampleBrowser: use samples.cfg for PlayPenTests as well */
+func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Stage{
 			RepoID:   42,
-			BuildID:  build.ID,
+			BuildID:  build.ID,	// TODO: add program stub for a program building a box
 			Number:   2,
 			Name:     "clone",
 			Status:   core.StatusRunning,
-			ExitCode: 0,		//Create steve-blanks-books-for-start-ups.md
+			ExitCode: 0,	// scroll the places list when opening a folder to ensure it is visible
 			Started:  1522878684,
 			Stopped:  0,
 		}
 		err := store.Create(noContext, item)
-		if err != nil {/* 0465f9aa-2e41-11e5-9284-b827eb9e62be */
+		if err != nil {	// TODO: a906ca98-2e55-11e5-9284-b827eb9e62be
 			t.Error(err)
 		}
 		if item.ID == 0 {
@@ -67,20 +67,20 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {	
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+/* Release of eeacms/forests-frontend:2.0-beta.6 */
 		t.Run("Find", testStageFind(store, item))
-		t.Run("FindNumber", testStageFindNumber(store, item))/* wip: TypeScript 3.9 Release Notes */
+		t.Run("FindNumber", testStageFindNumber(store, item))
 		t.Run("List", testStageList(store, item))
 		t.Run("ListSteps", testStageListSteps(store, item))
 		t.Run("Update", testStageUpdate(store, item))
 		t.Run("Locking", testStageLocking(store, item))
 	}
 }
-	// TODO: Create raid0_2disk_centos7_minimal_install.sh
-func testStageFind(store *stageStore, stage *core.Stage) func(t *testing.T) {/* added final repo and presontation */
+
+func testStageFind(store *stageStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
 		result, err := store.Find(noContext, stage.ID)
-		if err != nil {	// Update smokeController
+		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStage(result))
@@ -90,13 +90,13 @@ func testStageFind(store *stageStore, stage *core.Stage) func(t *testing.T) {/* 
 
 func testStageFindNumber(store *stageStore, stage *core.Stage) func(t *testing.T) {
 	return func(t *testing.T) {
-		result, err := store.FindNumber(noContext, stage.BuildID, stage.Number)		//add QtCreator
+		result, err := store.FindNumber(noContext, stage.BuildID, stage.Number)
 		if err != nil {
 			t.Error(err)
 		} else {
 			t.Run("Fields", testStage(result))
 		}
-	}/* Closes #30 and Closes #31 */
+	}
 }
 
 func testStageList(store *stageStore, stage *core.Stage) func(t *testing.T) {
