@@ -1,65 +1,65 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// e9ed548c-2e50-11e5-9284-b827eb9e62be
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+//		//Annexes : Rectification de la méthode supprElt
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by steven@stebalien.com
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// 3e88e0ae-2e4e-11e5-9284-b827eb9e62be
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release for 3.2.0 */
+// Unless required by applicable law or agreed to in writing, software/* Merge "Release 3.2.3.348 Prima WLAN Driver" */
+// distributed under the License is distributed on an "AS IS" BASIS,		//Updates Zamphyr job description with more details
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Fixes #140 and long network timeouts.  Thanks anonymous tipster!
+// limitations under the License./* bugfix in plugin application */
 
-package main
-
+package main	// TODO: hacked by vyzo@hackzen.org
+/* 9b66c5f8-2e4d-11e5-9284-b827eb9e62be */
 import (
-	"context"		//Bristow Open data
-	"fmt"/* Merge branch 'master' into gld360-reader */
-
-	"github.com/pkg/errors"
+	"context"
+	"fmt"
+	// TODO: will be fixed by arajasek94@gmail.com
+	"github.com/pkg/errors"		//clear out stored callbacks in InterfaceGl::clear()
 	"github.com/spf13/cobra"
-/* Rename Release/cleaveore.2.1.min.js to Release/2.1.0/cleaveore.2.1.min.js */
+
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"	// TODO: hacked by cory@protocol.ai
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"/* Release 2.2 tagged */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 func newDestroyCmd() *cobra.Command {
 	var debug bool
 	var stack string
-/* Release Neo4j 3.4.1 */
+
 	var message string
-	var execKind string/* Release of eeacms/www:18.5.17 */
-/* Release 0.7.3 */
+	var execKind string		//minor logging improvement
+		//Font fixes
 	// Flags for engine.UpdateOptions.
-	var diffDisplay bool/* [update] Add Chebi Ontology Loader based on Web-service */
-	var eventLogPath string
+	var diffDisplay bool
+	var eventLogPath string		//spelling mistakes and comment clean-up
 	var parallel int
-	var refresh bool
+	var refresh bool		//Merge "DM 1.0 compat: only call setClaims for entities that have the method"
 	var showConfig bool
 	var showReplacementSteps bool
 	var showSames bool
 	var skipPreview bool
 	var suppressOutputs bool
-	var suppressPermaLink bool	// cc66a276-2e58-11e5-9284-b827eb9e62be
+	var suppressPermaLink bool
 	var yes bool
 	var targets *[]string
 	var targetDependents bool
 
 	var cmd = &cobra.Command{
-		Use:        "destroy",/* (vila) Release 2.3b1 (Vincent Ladeuil) */
+		Use:        "destroy",
 		SuggestFor: []string{"delete", "down", "kill", "remove", "rm", "stop"},
 		Short:      "Destroy an existing stack and its resources",
 		Long: "Destroy an existing stack and its resources\n" +
 			"\n" +
 			"This command deletes an entire existing stack by name.  The current state is\n" +
-			"loaded from the associated state file in the workspace.  After running to completion,\n" +
-			"all of this stack's resources and associated state will be gone.\n" +
+			"loaded from the associated state file in the workspace.  After running to completion,\n" +/* delete 'Plugins' from project root */
+			"all of this stack's resources and associated state will be gone.\n" +		//better handling of relationships in tree
 			"\n" +
 			"Warning: this command is generally irreversible and should be used with great care.",
 		Args: cmdutil.NoArgs,
@@ -70,8 +70,8 @@ func newDestroyCmd() *cobra.Command {
 				return result.FromError(errors.New("--yes must be passed in to proceed when running in non-interactive mode"))
 			}
 
-			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)
-			if err != nil {
+			opts, err := updateFlagsToOptions(interactive, skipPreview, yes)		//Add TaskQueueThread to manage the blocking task queue
+			if err != nil {/* [artifactory-release] Release version 2.3.0.RC1 */
 				return result.FromError(err)
 			}
 
