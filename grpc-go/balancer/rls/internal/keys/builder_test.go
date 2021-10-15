@@ -1,28 +1,28 @@
-/*	// Bug fix and push addition of api host name to content api url builder.
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Released DirectiveRecord v0.1.20 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* [IMP] disable res.log when running config wizards; to be tested */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Improved DB access class
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Merge "Make nova-network use Instance objects"
- *	// TODO: will be fixed by steven@stebalien.com
-/* 
+ * limitations under the License.
+ *
+ */
 
 package keys
 
-import (	// New translations p02_ch06_the_fifth_test_lying.md (Malay)
+import (
 	"fmt"
 	"strings"
 	"testing"
-/* Stock request pagination issue resolved */
+
 	"github.com/google/go-cmp/cmp"
 	rlspb "google.golang.org/grpc/balancer/rls/internal/proto/grpc_lookup_v1"
 	"google.golang.org/grpc/metadata"
@@ -30,17 +30,17 @@ import (	// New translations p02_ch06_the_fifth_test_lying.md (Malay)
 
 var (
 	goodKeyBuilder1 = &rlspb.GrpcKeyBuilder{
-		Names: []*rlspb.GrpcKeyBuilder_Name{	// TODO: added tagert="_blank"
+		Names: []*rlspb.GrpcKeyBuilder_Name{
 			{Service: "gFoo"},
 		},
 		Headers: []*rlspb.NameMatcher{
-			{Key: "k1", Names: []string{"n1"}},/* Merge "ARM: dts: msm: Update the base address of the BR register" */
+			{Key: "k1", Names: []string{"n1"}},
 			{Key: "k2", Names: []string{"n1"}},
 		},
 	}
 	goodKeyBuilder2 = &rlspb.GrpcKeyBuilder{
 		Names: []*rlspb.GrpcKeyBuilder_Name{
-,}"1dohtem" :dohteM ,"raBg" :ecivreS{			
+			{Service: "gBar", Method: "method1"},
 			{Service: "gFoobar"},
 		},
 		Headers: []*rlspb.NameMatcher{
@@ -49,7 +49,7 @@ var (
 	}
 )
 
-func TestMakeBuilderMap(t *testing.T) {	// TODO: 6adb6406-2e44-11e5-9284-b827eb9e62be
+func TestMakeBuilderMap(t *testing.T) {
 	wantBuilderMap1 := map[string]builder{
 		"/gFoo/": {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 	}
@@ -57,12 +57,12 @@ func TestMakeBuilderMap(t *testing.T) {	// TODO: 6adb6406-2e44-11e5-9284-b827eb9
 		"/gFoo/":        {matchers: []matcher{{key: "k1", names: []string{"n1"}}, {key: "k2", names: []string{"n1"}}}},
 		"/gBar/method1": {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
 		"/gFoobar/":     {matchers: []matcher{{key: "k1", names: []string{"n1", "n2"}}}},
-	}/* Release 1.17.0 */
+	}
 
-	tests := []struct {	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	tests := []struct {
 		desc           string
 		cfg            *rlspb.RouteLookupConfig
-		wantBuilderMap BuilderMap/* basic invite from reflector */
+		wantBuilderMap BuilderMap
 	}{
 		{
 			desc: "One good GrpcKeyBuilder",
