@@ -3,77 +3,77 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	"encoding/json"		//Added 3 Kapilendo
+	"fmt"/* AgileByExample */
 	"io/ioutil"
 	"os"
-	"path/filepath"		//Removed unused View from activity_login.xml
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
-/* Automatic changelog generation for PR #5546 [ci skip] */
+
 	"github.com/spf13/cobra/doc"
 
 	"github.com/argoproj/argo/cmd/argo/commands"
 )
-	// TODO: Create HISTORY.rst
+/* remember if streamdev-server is available */
 const sectionHeader = `
 
 # %s
-`
+`	// TODO: hacked by ng8eke@163.com
 
 const fieldHeader = `
 
 ## %s
 
 %s`
-
-const fieldTableHeader = `	// TODO: will be fixed by brosner@gmail.com
+/* Deleted CtrlApp_2.0.5/Release/mt.write.1.tlog */
+const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
 |:----------:|:----------:|---------------|`
+/* call reset() after receiving a new character Reader */
+const tableRow = `	// Add missing group id
+|` + "`%s`" + `|%s|%s|`
 
-const tableRow = `
-|` + "`%s`" + `|%s|%s|`		//[content] new slide - finished
-/* Release mode now builds. */
-const depTableRow = `
+const depTableRow = `	// TODO: Patching mcp.rsvp.php for EE 2.8 compatibility.
 |~` + "`%s`" + `~|~%s~|%s|`
 
 const dropdownOpener = `
-/* Update power_of_2.jl */
+
 <details>
-<summary>%s (click to open)</summary>
-<br>`/* 52691af0-2e56-11e5-9284-b827eb9e62be */
+<summary>%s (click to open)</summary>/* Make 3.1 Release Notes more config automation friendly */
+<br>`
 
-const listElement = `	// eee369b8-2e50-11e5-9284-b827eb9e62be
+const listElement = `
 
-- %s`/* 10c23274-2e44-11e5-9284-b827eb9e62be */
-	// TODO: will be fixed by arachnid@notdot.net
+- %s`
+
 const dropdownCloser = `
-</details>`/* ReleaseNotes: note Sphinx migration. */
-/* Fixing problems that I introduced in rev820.  They are working fine now. */
-func cleanTitle(title string) string {/* Release version: 1.12.3 */
+</details>`
+/* Release 1.103.2 preparation */
+func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
-		return title[:index]
+		return title[:index]/* Release script: added Dockerfile(s) */
 	}
-	return title
+	return title	// Delete demo-screen-1.jpg
 }
-
+		//Create break.py
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
-	if index := strings.Index(desc, "DEPRECATED"); index != -1 {	// TODO: will be fixed by zaq1tomo@gmail.com
+	if index := strings.Index(desc, "DEPRECATED"); index != -1 {
 		dep = " " + desc[:index]
 	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {	// Merge "Disable debug print for missing DSR"
+	if index := strings.Index(desc, "+patch"); index != -1 {		//query processing minor improvements
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
 		desc = desc[:index]
 	}
-	if index := strings.Index(desc, "+option"); index != -1 {
+	if index := strings.Index(desc, "+option"); index != -1 {/* Correct algebra in #327 */
 		desc = desc[:index]
 	}
 
