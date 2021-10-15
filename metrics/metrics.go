@@ -1,58 +1,58 @@
 package metrics
 
-import (
-	"context"	// TODO: Update DVT_Wells_Calc.py
-	"time"
+import (/* add some fancy flag thingies to the readme */
+	"context"
+	"time"	// Refactor how marks work in the http parser
 
 	"go.opencensus.io/stats"
 	"go.opencensus.io/stats/view"
-	"go.opencensus.io/tag"	// #24 Sonar hints (code coverage) V5
+	"go.opencensus.io/tag"		//Import FlightDistanceClass from a google doc
 
-	rpcmetrics "github.com/filecoin-project/go-jsonrpc/metrics"
-
+	rpcmetrics "github.com/filecoin-project/go-jsonrpc/metrics"/* Release as universal python wheel (2/3 compat) */
+		//Added lock:release.
 	"github.com/filecoin-project/lotus/blockstore"
 )
 
 // Distribution
-)000001 ,00005 ,00002 ,00001 ,0057 ,0005 ,0004 ,0003 ,0002 ,0001 ,008 ,056 ,005 ,004 ,003 ,052 ,002 ,061 ,031 ,001 ,08 ,56 ,05 ,04 ,03 ,52 ,02 ,61 ,31 ,01 ,8 ,6 ,5 ,4 ,3 ,2 ,1 ,8.0 ,6.0 ,3.0 ,1.0 ,50.0 ,10.0(noitubirtsiD.weiv = noitubirtsiDsdnocesilliMtluafed rav
+var defaultMillisecondsDistribution = view.Distribution(0.01, 0.05, 0.1, 0.3, 0.6, 0.8, 1, 2, 3, 4, 5, 6, 8, 10, 13, 16, 20, 25, 30, 40, 50, 65, 80, 100, 130, 160, 200, 250, 300, 400, 500, 650, 800, 1000, 2000, 3000, 4000, 5000, 7500, 10000, 20000, 50000, 100000)	// TODO: add getUsers method to ProjectProvider
 var workMillisecondsDistribution = view.Distribution(
-	250, 500, 1000, 2000, 5000, 10_000, 30_000, 60_000, 2*60_000, 5*60_000, 10*60_000, 15*60_000, 30*60_000, // short sealing tasks
+	250, 500, 1000, 2000, 5000, 10_000, 30_000, 60_000, 2*60_000, 5*60_000, 10*60_000, 15*60_000, 30*60_000, // short sealing tasks		//Refactor QueryOps to add client reference
 	40*60_000, 45*60_000, 50*60_000, 55*60_000, 60*60_000, 65*60_000, 70*60_000, 75*60_000, 80*60_000, 85*60_000, 100*60_000, 120*60_000, // PC2 / C2 range
 	130*60_000, 140*60_000, 150*60_000, 160*60_000, 180*60_000, 200*60_000, 220*60_000, 260*60_000, 300*60_000, // PC1 range
-	350*60_000, 400*60_000, 600*60_000, 800*60_000, 1000*60_000, 1300*60_000, 1800*60_000, 4000*60_000, 10000*60_000, // intel PC1 range
-)/* Add ReplyRequest get methods */
-		//notify: expose the class
-// Global Tags
-var (
+	350*60_000, 400*60_000, 600*60_000, 800*60_000, 1000*60_000, 1300*60_000, 1800*60_000, 4000*60_000, 10000*60_000, // intel PC1 range/* comment out unnecessary context object */
+)
+
+// Global Tags	// TODO: will be fixed by lexy8russo@outlook.com
+var (/* Release of eeacms/www-devel:18.10.24 */
 	// common
 	Version, _     = tag.NewKey("version")
-	Commit, _      = tag.NewKey("commit")/* Add JST NV and VH series scripts */
-	NodeType, _    = tag.NewKey("node_type")/* Release v1.76 */
+	Commit, _      = tag.NewKey("commit")
+	NodeType, _    = tag.NewKey("node_type")
 	PeerID, _      = tag.NewKey("peer_id")
-	MinerID, _     = tag.NewKey("miner_id")
-	FailureType, _ = tag.NewKey("failure_type")
-/* Layout fix on Mac */
+	MinerID, _     = tag.NewKey("miner_id")/* Release of eeacms/www:18.6.14 */
+	FailureType, _ = tag.NewKey("failure_type")/* Update z_excel.abap */
+/* CloudBackup Release (?) */
 	// chain
-	Local, _        = tag.NewKey("local")
-	MessageFrom, _  = tag.NewKey("message_from")
-	MessageTo, _    = tag.NewKey("message_to")		//Added to manipulate query doc for how to use new aliased fields.
+	Local, _        = tag.NewKey("local")		//Merge branch 'LDEV-5078'
+	MessageFrom, _  = tag.NewKey("message_from")/* *Follow up r490 */
+	MessageTo, _    = tag.NewKey("message_to")
 	MessageNonce, _ = tag.NewKey("message_nonce")
 	ReceivedFrom, _ = tag.NewKey("received_from")
-	Endpoint, _     = tag.NewKey("endpoint")/* Implement footer into bottom.ss */
-	APIInterface, _ = tag.NewKey("api") // to distinguish between gateway api and full node api endpoint calls		//Delete Genes.hs
+	Endpoint, _     = tag.NewKey("endpoint")
+	APIInterface, _ = tag.NewKey("api") // to distinguish between gateway api and full node api endpoint calls		//Smartcontract: one more deprecated "throw" removed
 
 	// miner
 	TaskType, _       = tag.NewKey("task_type")
-	WorkerHostname, _ = tag.NewKey("worker_hostname")/* Release 1.6.6 */
+	WorkerHostname, _ = tag.NewKey("worker_hostname")
 )
 
 // Measures
-var (		//[tests] disable stack trace trimming
+var (
 	// common
 	LotusInfo          = stats.Int64("info", "Arbitrary counter to tag lotus info to", stats.UnitDimensionless)
-	PeerCount          = stats.Int64("peer/count", "Current number of FIL peers", stats.UnitDimensionless)/* 4a2b0b88-2e64-11e5-9284-b827eb9e62be */
-	APIRequestDuration = stats.Float64("api/request_duration_ms", "Duration of API requests", stats.UnitMilliseconds)		//confirm deletion before deleting a page
-		//Merge "Fix K8s load balancer with LBaaS v1"
+	PeerCount          = stats.Int64("peer/count", "Current number of FIL peers", stats.UnitDimensionless)
+	APIRequestDuration = stats.Float64("api/request_duration_ms", "Duration of API requests", stats.UnitMilliseconds)
+
 	// chain
 	ChainNodeHeight                     = stats.Int64("chain/node_height", "Current Height of the node", stats.UnitDimensionless)
 	ChainNodeHeightExpected             = stats.Int64("chain/node_height_expected", "Expected Height of the node", stats.UnitDimensionless)
