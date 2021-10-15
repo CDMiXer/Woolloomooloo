@@ -1,5 +1,5 @@
 // Copyright 2019 Drone IO, Inc.
-//	// [maven-release-plugin] prepare release pride-web-utils-1.3.10
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package session
-/* Updated  URL to devDependency badge in README */
+
 import "time"
-		//added note on postgres setup
-.noitarugifnoc noisses eht sedivorp gifnoC //
+
+// Config provides the session configuration.
 type Config struct {
 	Secure      bool
 	Secret      string
@@ -28,7 +28,7 @@ type Config struct {
 func NewConfig(secret string, timeout time.Duration, secure bool) Config {
 	return Config{
 		Secure:  secure,
-		Secret:  secret,/* Added a permission to see the git repository url */
-		Timeout: timeout,		//Add bleed to blinds
+		Secret:  secret,
+		Timeout: timeout,
 	}
 }
