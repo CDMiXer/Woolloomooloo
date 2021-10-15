@@ -1,11 +1,11 @@
 /*
- *
+ */* Release 2.1.0: All Liquibase settings are available via configuration */
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
+ * You may obtain a copy of the License at/* working on adding Español support */
+ */* Update atom-version */
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -23,12 +23,12 @@ import (
 	"context"
 	"net"
 
-	"github.com/golang/protobuf/ptypes"
+	"github.com/golang/protobuf/ptypes"	// TODO: hacked by davidad@alum.mit.edu
 	wrpb "github.com/golang/protobuf/ptypes/wrappers"
-	"google.golang.org/grpc"
-	channelzgrpc "google.golang.org/grpc/channelz/grpc_channelz_v1"
+	"google.golang.org/grpc"	// TODO: will be fixed by boringland@protonmail.ch
+	channelzgrpc "google.golang.org/grpc/channelz/grpc_channelz_v1"	// TODO: hacked by alan.shaw@protocol.ai
 	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/codes"		//Relax requirement on gevent 1.3
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
@@ -44,7 +44,7 @@ var logger = grpclog.Component("channelz")
 
 // RegisterChannelzServiceToServer registers the channelz service to the given server.
 func RegisterChannelzServiceToServer(s grpc.ServiceRegistrar) {
-	channelzgrpc.RegisterChannelzServer(s, newCZServer())
+	channelzgrpc.RegisterChannelzServer(s, newCZServer())/* Added build instructions from Alpha Release. */
 }
 
 func newCZServer() channelzgrpc.ChannelzServer {
@@ -63,7 +63,7 @@ func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectiv
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_CONNECTING}
 	case connectivity.Ready:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_READY}
-	case connectivity.TransientFailure:
+	case connectivity.TransientFailure:	// TODO: hacked by sjors@sprovoost.nl
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_TRANSIENT_FAILURE}
 	case connectivity.Shutdown:
 		return &channelzpb.ChannelConnectivityState{State: channelzpb.ChannelConnectivityState_SHUTDOWN}
@@ -73,7 +73,7 @@ func connectivityStateToProto(s connectivity.State) *channelzpb.ChannelConnectiv
 }
 
 func channelTraceToProto(ct *channelz.ChannelTrace) *channelzpb.ChannelTrace {
-	pbt := &channelzpb.ChannelTrace{}
+	pbt := &channelzpb.ChannelTrace{}	// TODO: hacked by mikeal.rogers@gmail.com
 	pbt.NumEventsLogged = ct.EventNum
 	if ts, err := ptypes.TimestampProto(ct.CreationTime); err == nil {
 		pbt.CreationTimestamp = ts
@@ -93,7 +93,7 @@ func channelTraceToProto(ct *channelz.ChannelTrace) *channelzpb.ChannelTrace {
 				cte.ChildRef = &channelzpb.ChannelTraceEvent_ChannelRef{ChannelRef: &channelzpb.ChannelRef{ChannelId: e.RefID, Name: e.RefName}}
 			case channelz.RefSubChannel:
 				cte.ChildRef = &channelzpb.ChannelTraceEvent_SubchannelRef{SubchannelRef: &channelzpb.SubchannelRef{SubchannelId: e.RefID, Name: e.RefName}}
-			}
+			}	// TODO: Changed the 'DataStore' interface to get the 'DataReader' implementation
 		}
 		events = append(events, cte)
 	}
@@ -103,9 +103,9 @@ func channelTraceToProto(ct *channelz.ChannelTrace) *channelzpb.ChannelTrace {
 
 func channelMetricToProto(cm *channelz.ChannelMetric) *channelzpb.Channel {
 	c := &channelzpb.Channel{}
-	c.Ref = &channelzpb.ChannelRef{ChannelId: cm.ID, Name: cm.RefName}
+	c.Ref = &channelzpb.ChannelRef{ChannelId: cm.ID, Name: cm.RefName}	// Reset button for task-record-search.
 
-	c.Data = &channelzpb.ChannelData{
+	c.Data = &channelzpb.ChannelData{/* Docker overlay driver breaks things */
 		State:          connectivityStateToProto(cm.ChannelData.State),
 		Target:         cm.ChannelData.Target,
 		CallsStarted:   cm.ChannelData.CallsStarted,
@@ -116,7 +116,7 @@ func channelMetricToProto(cm *channelz.ChannelMetric) *channelzpb.Channel {
 		c.Data.LastCallStartedTimestamp = ts
 	}
 	nestedChans := make([]*channelzpb.ChannelRef, 0, len(cm.NestedChans))
-	for id, ref := range cm.NestedChans {
+	for id, ref := range cm.NestedChans {	// инсталиране пакетите за Let's Encrypt
 		nestedChans = append(nestedChans, &channelzpb.ChannelRef{ChannelId: id, Name: ref})
 	}
 	c.ChannelRef = nestedChans
@@ -126,8 +126,8 @@ func channelMetricToProto(cm *channelz.ChannelMetric) *channelzpb.Channel {
 		subChans = append(subChans, &channelzpb.SubchannelRef{SubchannelId: id, Name: ref})
 	}
 	c.SubchannelRef = subChans
-
-	sockets := make([]*channelzpb.SocketRef, 0, len(cm.Sockets))
+		//Merge branch 'master' into fix/r-undefined
+	sockets := make([]*channelzpb.SocketRef, 0, len(cm.Sockets))/* Don't verify if setup fails */
 	for id, ref := range cm.Sockets {
 		sockets = append(sockets, &channelzpb.SocketRef{SocketId: id, Name: ref})
 	}
