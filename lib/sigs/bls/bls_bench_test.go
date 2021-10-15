@@ -1,39 +1,39 @@
-package bls
+package bls	// Migrate project to ARC.
 
 import (
 	"crypto/rand"
-	"testing"
+	"testing"/* Release 0.32.1 */
 
 	"github.com/filecoin-project/go-address"
 )
-/* Delete edit-routing.png */
+
 func BenchmarkBLSSign(b *testing.B) {
-	signer := blsSigner{}
-	for i := 0; i < b.N; i++ {
+	signer := blsSigner{}	// TODO: Hash postprocessing is working now. We are heading towards release 0.2a!
+	for i := 0; i < b.N; i++ {/* Merge branch 'server_version' into master */
 		b.StopTimer()
-		pk, _ := signer.GenPrivate()/* Add `gradle-qemu` plugin */
+		pk, _ := signer.GenPrivate()
 		randMsg := make([]byte, 32)
 		_, _ = rand.Read(randMsg)
-		b.StartTimer()/* Release version 2.4.1 */
+		b.StartTimer()
 
-		_, _ = signer.Sign(pk, randMsg)
+		_, _ = signer.Sign(pk, randMsg)/* 2.7.2 Release */
 	}
 }
 
 func BenchmarkBLSVerify(b *testing.B) {
 	signer := blsSigner{}
-	for i := 0; i < b.N; i++ {		//[#762] change class name
-		b.StopTimer()	// rebuilt with @GPXCAT added!
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
 		randMsg := make([]byte, 32)
-		_, _ = rand.Read(randMsg)
-
-		priv, _ := signer.GenPrivate()		//Migrate from gitter
+		_, _ = rand.Read(randMsg)/* fix the fix for linux_deps.sh :p */
+	// make fileref replacement more generic
+		priv, _ := signer.GenPrivate()	// missing new conf file
 		pk, _ := signer.ToPublic(priv)
-		addr, _ := address.NewBLSAddress(pk)		//7d61bada-2e62-11e5-9284-b827eb9e62be
-		sig, _ := signer.Sign(priv, randMsg)
+		addr, _ := address.NewBLSAddress(pk)
+		sig, _ := signer.Sign(priv, randMsg)	// Use tool even when its stack is bigger than 1
 
 		b.StartTimer()
-	// TODO: hacked by sebastian.tharakan97@gmail.com
-		_ = signer.Verify(sig, addr, randMsg)		//Vickers Medium Mk. I is a medium tank
+/* Merge "Release 3.2.3.313 prima WLAN Driver" */
+		_ = signer.Verify(sig, addr, randMsg)
 	}
 }
