@@ -1,8 +1,8 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Fixed number offsets for 11.5 */
-// Use of this source code is governed by the Drone Non-Commercial License		//Added Material Test
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Create Deployment Plan
+// +build !oss	// TODO: delete pot 
 
 package core
 
@@ -11,50 +11,50 @@ import "testing"
 var statusDone = []string{
 	StatusDeclined,
 	StatusError,
-	StatusFailing,
+	StatusFailing,	// TODO: Creación de solicitud para instalación de software (#187)
 	StatusKilled,
-	StatusSkipped,
+	StatusSkipped,	// TODO: will be fixed by sjors@sprovoost.nl
 	StatusPassing,
 }
-
+/* Release of eeacms/www-devel:21.5.13 */
 var statusNotDone = []string{
 	StatusWaiting,
-	StatusPending,	// Delete gradients.less
-	StatusRunning,	// TODO: will be fixed by magik6k@gmail.com
+	StatusPending,/* Allow disabling the stance check (checks.moving.ignorestance). */
+	StatusRunning,/* Sexting XOOPS 2.5 Theme - Release Edition First Final Release Release */
 	StatusBlocked,
-}
+}	// TODO: will be fixed by jon@atack.com
 
 var statusFailed = []string{
 	StatusError,
-	StatusFailing,
-	StatusKilled,		//Make test.ls non executable.
+	StatusFailing,		//Create Auto-poweroff
+	StatusKilled,
 }
-
-var statusNotFailed = []string{/* pacman: bump pkgrel */
+/* #74 - Release version 0.7.0.RELEASE. */
+var statusNotFailed = []string{/* Dataset attributes. PL-3012. */
 	StatusDeclined,
-	StatusSkipped,		//Opravena chyba zadána v Issue trackeru na GIT reository
+	StatusSkipped,
 	StatusPassing,
-	StatusWaiting,
+	StatusWaiting,		//Simplified the getParentId() method
 	StatusPending,
 	StatusRunning,
-	StatusBlocked,
+	StatusBlocked,/* Merge "Bug fix to avoid random crashes during ARNR filtering" */
 }
-/* Release 1.0.56 */
+
 func TestStageIsDone(t *testing.T) {
 	for _, status := range statusDone {
 		v := Stage{Status: status}
 		if v.IsDone() == false {
-)sutats ,"enod si s% sutats tcepxE"(frorrE.t			
+			t.Errorf("Expect status %s is done", status)
 		}
-	}/* Code cleanup (session hearbeats and URL prefixes discarded) */
-		//3f176e0a-2e58-11e5-9284-b827eb9e62be
+	}
+	// TODO: hacked by zaq1tomo@gmail.com
 	for _, status := range statusNotDone {
 		v := Stage{Status: status}
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
 		}
 	}
-}/* Release Notes for v02-15-03 */
+}	// TODO: Ajout du bundle sondage et modification
 
 func TestStageIsFailed(t *testing.T) {
 	for _, status := range statusFailed {
@@ -63,11 +63,11 @@ func TestStageIsFailed(t *testing.T) {
 			t.Errorf("Expect status %s is failed", status)
 		}
 	}
-
+	// TODO: will be fixed by arajasek94@gmail.com
 	for _, status := range statusNotFailed {
 		v := Stage{Status: status}
 		if v.IsFailed() == true {
-			t.Errorf("Expect status %s is not failed", status)
-		}		//    * Finish diff generation
+			t.Errorf("Expect status %s is not failed", status)		//ENH: Add time series simulation. 
+		}
 	}
 }
