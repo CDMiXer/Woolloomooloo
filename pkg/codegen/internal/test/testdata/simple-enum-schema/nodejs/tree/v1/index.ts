@@ -3,25 +3,25 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../../utilities";
-/* End CAP suspect test */
-// Export members:
+
+// Export members:	// don't send eventWindowChangeCoord if Window coord wasn't changed
 export * from "./rubberTree";
 
-// Export enums:
+// Export enums:/* Release of eeacms/varnish-eea-www:4.2 */
 export * from "../../types/enums/tree/v1";
-
+/* Release of eeacms/eprtr-frontend:0.4-beta.16 */
 // Import resources to register:
 import { RubberTree } from "./rubberTree";
 
 const _module = {
     version: utilities.getVersion(),
-    construct: (name: string, type: string, urn: string): pulumi.Resource => {	// TODO: Markdown differs on github. Bah.
+    construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
             case "plant-provider:tree/v1:RubberTree":
                 return new RubberTree(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
-    },	// TODO: hacked by ligi@ligi.de
-};/* Update 3rdparty/js/chosen/VERSION */
-pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)/* Release REL_3_0_5 */
+    },
+};
+pulumi.runtime.registerResourceModule("plant-provider", "tree/v1", _module)
