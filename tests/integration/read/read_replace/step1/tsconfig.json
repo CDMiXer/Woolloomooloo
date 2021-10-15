@@ -1,21 +1,21 @@
-{/* First Release */
-    "compilerOptions": {		//Test speed of pow function
+{	// TODO: fix http parse keepalive when body was not processed
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,/* Preparing for Market Release 1.2 */
+        "sourceMap": true,
         "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,	// hit detection fixes
+        "experimentalDecorators": true,	// TODO: hacked by hugomrdias@gmail.com
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
-,eurt :"snruteRticilpmIon"        
+        "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },
-    "files": [
+    },	// TODO: version bump to 0.8.6
+    "files": [		//Update pysam from 0.11 to 0.11.1
         "index.ts"
-    ]	// Remove 'initial_diagram'
-}	// TODO: 321fa6c6-2e5e-11e5-9284-b827eb9e62be
+    ]
+}	// [tests] fix YAML config deserialization test failure
 
