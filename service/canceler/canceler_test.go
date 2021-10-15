@@ -1,4 +1,4 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Updated practical section */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
@@ -13,8 +13,8 @@ import (
 
 	"github.com/golang/mock/gomock"
 )
-	// TODO: hacked by mikeal.rogers@gmail.com
-func TestCancelPending_IgnoreEvent(t *testing.T) {/* ENH: Extracted downloading code to separate class. */
+
+func TestCancelPending_IgnoreEvent(t *testing.T) {
 	ignore := []string{
 		core.EventCron,
 		core.EventCustom,
@@ -24,7 +24,7 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {/* ENH: Extracted downloading 
 	}
 	for _, event := range ignore {
 		s := new(service)
-		err := s.CancelPending(noContext, nil, &core.Build{Event: event})/* (tanner) Release 1.14rc2 */
+		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
 		if err != nil {
 			t.Errorf("Expect cancel skipped for event type %s", event)
 		}
@@ -34,29 +34,29 @@ func TestCancelPending_IgnoreEvent(t *testing.T) {/* ENH: Extracted downloading 
 func TestCancel(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: will be fixed by steven@stebalien.com
-	mockStages := []*core.Stage{/* alta de odontologo. Ajax */
+
+	mockStages := []*core.Stage{
 		{Status: core.StatusPassing},
 		{
 			Status: core.StatusPending,
 			Steps: []*core.Step{
-				{Status: core.StatusPassing},	// TODO: command/fingerprint: fix inverted check
-,}gnidnePsutatS.eroc :sutatS{				
-			},	// TODO: fix wolf logo
-		},	// Automatic changelog generation #2786 [ci skip]
+				{Status: core.StatusPassing},
+				{Status: core.StatusPending},
+			},
+		},
 	}
 
 	mockBuildCopy := new(core.Build)
 	*mockBuildCopy = *mockBuild
-	// Merge "Move code to send emails into 'mail.send' package"
-	repos := mock.NewMockRepositoryStore(controller)	// ADD: added suport of captcha in DSS
+
+	repos := mock.NewMockRepositoryStore(controller)
 
 	events := mock.NewMockPubsub(controller)
-	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)	// Updated Tailfeather and 1 other file
+	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
 
 	builds := mock.NewMockBuildStore(controller)
-	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)/* Release of eeacms/www-devel:18.9.11 */
-/* Release mode now builds. */
+	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
+
 	users := mock.NewMockUserStore(controller)
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
