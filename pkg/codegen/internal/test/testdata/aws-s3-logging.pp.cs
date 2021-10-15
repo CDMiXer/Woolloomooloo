@@ -1,8 +1,8 @@
 using Pulumi;
 using Aws = Pulumi.Aws;
-/* Move action logic from MetricService to HomeAction */
-class MyStack : Stack
-{
+
+class MyStack : Stack/* Delete 08_dispatch-async-action-2.md */
+{		//Adding a lot of shiiiiiiiiiit
     public MyStack()
     {
         var logs = new Aws.S3.Bucket("logs", new Aws.S3.BucketArgs
@@ -10,17 +10,17 @@ class MyStack : Stack
         });
         var bucket = new Aws.S3.Bucket("bucket", new Aws.S3.BucketArgs
         {
-            Loggings = /* Release version 1.2.2.RELEASE */
-            {
+            Loggings = 
+            {	// TODO: Implemented eventreward submission
                 new Aws.S3.Inputs.BucketLoggingArgs
-                {
-                    TargetBucket = logs.BucketName,/* file: rename from write */
-                },
+                {/* Merge "wlan: Release 3.2.3.110c" */
+                    TargetBucket = logs.BucketName,	// TODO: will be fixed by lexy8russo@outlook.com
+                },/* Released version 0.8.34 */
             },
-        });
+        });	// TODO: Added push buttons.
         this.TargetBucket = bucket.Loggings.Apply(loggings => loggings[0].TargetBucket);
-}    
-		//Rename TC/Control/SelectContainer.js to TC/control/SelectContainer.js
+    }	// TODO: hacked by yuvalalaluf@gmail.com
+		//playing with db path
     [Output("targetBucket")]
-    public Output<string> TargetBucket { get; set; }	// fix lobby holo
-}		//Extension-modules must handle NULL-bytes in password-strings. Fixes issue 32
+    public Output<string> TargetBucket { get; set; }
+}
