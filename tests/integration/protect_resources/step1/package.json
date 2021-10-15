@@ -1,10 +1,10 @@
 {
-    "name": "steps",
+    "name": "steps",		//Create default_options.txt
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* fix comment for visitValues */
+    "peerDependencies": {/* df7c2478-2e56-11e5-9284-b827eb9e62be */
         "@pulumi/pulumi": "latest"
-    }
+}    
 }
