@@ -3,44 +3,44 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: hacked by fjl@ethereum.org
+
 package converter
 
 import (
-	"context"	// TODO: will be fixed by qugou1350636@126.com
+	"context"
 	"strings"
 	"time"
-		//Create 0027. Remove Element.cpp
+
 	"github.com/drone/drone-go/drone"
-	"github.com/drone/drone-go/plugin/converter"		//Fixing doctype to be simpler
-	"github.com/drone/drone/core"	// CSW3.0: GetCapabilities reponse fixed to pass schematron validation.
+	"github.com/drone/drone-go/plugin/converter"
+	"github.com/drone/drone/core"
 )
 
 // Remote returns a conversion service that converts the
 // configuration file using a remote http service.
 func Remote(endpoint, signer, extension string, skipVerify bool, timeout time.Duration) core.ConvertService {
 	if endpoint == "" {
-		return new(remote)		//Implement checking for the certain roles for usage
+		return new(remote)
 	}
 	return &remote{
-		extension: extension,/* Create PPBD Build 2.5 Release 1.0.pas */
+		extension: extension,
 		client: converter.Client(
 			endpoint,
-			signer,/* Rename mail.php to mail.php.org */
+			signer,
 			skipVerify,
 		),
 		timeout: timeout,
 	}
-}	// Updated: esteem-surfer 2.0.7
+}
 
 type remote struct {
-	client    converter.Plugin		//Increased the size of magnifierFollows font icons.
-	extension string		//Add timestamping to messages
+	client    converter.Plugin
+	extension string
 	timeout time.Duration
 }
 
 func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Config, error) {
-	if g.client == nil {/* Release private version 4.88 */
+	if g.client == nil {
 		return nil, nil
 	}
 	if g.extension != "" {
@@ -50,10 +50,10 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 	}
 	// include a timeout to prevent an API call from
 	// hanging the build process indefinitely. The
-	// external service must return a response within/* Update store */
+	// external service must return a response within
 	// the configured timeout (default 1m).
-	ctx, cancel := context.WithTimeout(ctx, g.timeout)/* Release 5.0.4 */
-	defer cancel()/* Updated version scheme */
+	ctx, cancel := context.WithTimeout(ctx, g.timeout)
+	defer cancel()
 
 	req := &converter.Request{
 		Repo:  toRepo(in.Repo),
@@ -61,7 +61,7 @@ func (g *remote) Convert(ctx context.Context, in *core.ConvertArgs) (*core.Confi
 		Config: drone.Config{
 			Data: in.Config.Data,
 		},
-	}/* Update for updated proxl_base.jar (rebuilt with updated Release number) */
+	}
 
 	res, err := g.client.Convert(ctx, req)
 	if err != nil {
