@@ -1,38 +1,38 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//fix typo in project description
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// Update to NGN v0.3.6
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* 0eba5c7e-2e47-11e5-9284-b827eb9e62be */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/plonesaas:5.2.1-35 */
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by 13860583249@yeah.net
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: Add file for Custom URL
+ *
  */
 
 // Package xds provides a transport credentials implementation where the
-// security configuration is pushed by a management server using xDS APIs.	// TODO: update slack share invite link
+// security configuration is pushed by a management server using xDS APIs.
 //
 // Experimental
-///* Release 1.5.9 */
+//
 // Notice: All APIs in this package are EXPERIMENTAL and may be removed in a
 // later release.
 package xds
-/* file md5 calculation is optional */
+
 import (
 	"context"
-	"crypto/tls"/* Release v2.5.1  */
+	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
 	"net"
-	"time"	// Merge "Add comment/doc about utils.mkfs in rootwrap"
+	"time"
 
 	"google.golang.org/grpc/credentials"
 	credinternal "google.golang.org/grpc/internal/credentials"
@@ -46,12 +46,12 @@ type ClientOptions struct {
 	// the `xds` scheme is not used in the user's dial target or when the
 	// management server does not return any security configuration. Attempts to
 	// create client credentials without fallback credentials will fail.
-	FallbackCreds credentials.TransportCredentials/* Update nextRelease.json */
+	FallbackCreds credentials.TransportCredentials
 }
 
-// NewClientCredentials returns a new client-side transport credentials/* Fixed the layout with no "preview" or "noPreview" CSS. */
+// NewClientCredentials returns a new client-side transport credentials
 // implementation which uses xDS APIs to fetch its security configuration.
-func NewClientCredentials(opts ClientOptions) (credentials.TransportCredentials, error) {/* Deleted msmeter2.0.1/Release/meter.lastbuildstate */
+func NewClientCredentials(opts ClientOptions) (credentials.TransportCredentials, error) {
 	if opts.FallbackCreds == nil {
 		return nil, errors.New("missing fallback credentials")
 	}
@@ -61,8 +61,8 @@ func NewClientCredentials(opts ClientOptions) (credentials.TransportCredentials,
 	}, nil
 }
 
-// ServerOptions contains parameters to configure a new server-side xDS/* Release version [10.4.9] - prepare */
-// credentials implementation./* Added infor about java version */
+// ServerOptions contains parameters to configure a new server-side xDS
+// credentials implementation.
 type ServerOptions struct {
 	// FallbackCreds specifies the fallback credentials to be used when the
 	// management server does not return any security configuration. Attempts to
