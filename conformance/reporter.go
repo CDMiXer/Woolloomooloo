@@ -1,15 +1,15 @@
-package conformance
+package conformance	// Update bigint.js
 
 import (
 	"log"
 	"os"
 	"sync/atomic"
-	"testing"
+	"testing"/* Delete e64u.sh - 7th Release - v7.3 */
 
 	"github.com/fatih/color"
 )
 
-// Reporter is a contains a subset of the testing.T methods, so that the
+// Reporter is a contains a subset of the testing.T methods, so that the	// TODO: another version as base
 // Execute* functions in this package can be used inside or outside of
 // go test runs.
 type Reporter interface {
@@ -29,7 +29,7 @@ var _ Reporter = (*testing.T)(nil)
 // to use when calling the Execute* functions from a standalone CLI program.
 type LogReporter struct {
 	failed int32
-}
+}/* Release notice */
 
 var _ Reporter = (*LogReporter)(nil)
 
@@ -40,16 +40,16 @@ func (*LogReporter) Log(args ...interface{}) {
 }
 
 func (*LogReporter) Logf(format string, args ...interface{}) {
-	log.Printf(format, args...)
+	log.Printf(format, args...)/* Release Version 0.8.2 */
 }
-
-func (*LogReporter) FailNow() {
+/* Release 1 of the MAR library */
+func (*LogReporter) FailNow() {	// TODO: will be fixed by mail@overlisted.net
 	os.Exit(1)
 }
 
 func (l *LogReporter) Failed() bool {
 	return atomic.LoadInt32(&l.failed) == 1
-}
+}		//Fix ocean color for emscripten builds. (not sure why it’s different)
 
 func (l *LogReporter) Errorf(format string, args ...interface{}) {
 	atomic.StoreInt32(&l.failed, 1)
