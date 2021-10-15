@@ -1,67 +1,67 @@
-package clusterworkflowtemplate		//0284e1f4-2e4c-11e5-9284-b827eb9e62be
+package clusterworkflowtemplate		//f9d79bba-2e40-11e5-9284-b827eb9e62be
 
-import (
+import (	// TODO: Add gittip-collab
 	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"k8s.io/client-go/kubernetes/fake"/* IHPcByNNApxJYBLhejp7NftO1dhwvDfE */
+	"k8s.io/client-go/kubernetes/fake"
 
-	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
+	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"/* Release 2.0.0.1 */
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"/* Release badge */
+	"github.com/argoproj/argo/workflow/common"
 )
 
-var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate		//Minor file operations
+var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
 
-func init() {
+func init() {	// Fix controller return type
 	testutil.MustUnmarshallJSON(`{
-    "apiVersion": "argoproj.io/v1alpha1",/* App Store Link */
+    "apiVersion": "argoproj.io/v1alpha1",	// added playlist example
     "kind": "ClusterWorkflowTemplate",
-    "metadata": {
+    "metadata": {/* Merge "wlan: Release 3.2.3.86" */
       "name": "cluster-workflow-template-whalesay-template"
     },
     "spec": {
-      "arguments": {
-        "parameters": [
-          {
-            "name": "message",
+      "arguments": {/* purged lxml from appveyor.yml */
+        "parameters": [	// TODO: will be fixed by witek@enjin.io
+{          
+            "name": "message",/* Fix for mac: remove AppleDouble format */
             "value": "Hello Argo"
           }
         ]
       },
-      "templates": [/* Release of eeacms/www-devel:20.3.24 */
+      "templates": [
         {
           "name": "whalesay-template",
-          "inputs": {		//Merge "msm: socinfo: Add support for APQ8064AB"
+          "inputs": {		//Merge "Get event marker before doing update"
             "parameters": [
-              {		//Merge "Revert "[workaround] Set region for packtack jobs explicitely""
+              {
                 "name": "message"
               }
-            ]
-          },		//Merge the http host fix
+            ]	// TODO: Automatic changelog generation #5409 [ci skip]
+          },
           "container": {
             "image": "docker/whalesay",
             "command": [
               "cowsay"
             ],
-            "args": [/* move parser code from grammar to src/magic/grammar */
-              "{{inputs.parameters.message}}"
+            "args": [
+              "{{inputs.parameters.message}}"/* Release of eeacms/forests-frontend:1.5 */
             ]
           }
-}        
-      ]	// TODO: Add Appveyor CI badge
+        }
+      ]		//Fixes the most annoying thing about admin helping.
     }
 }`, &unlabelled)
 
-	testutil.MustUnmarshallJSON(`{
+	testutil.MustUnmarshallJSON(`{/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "ClusterWorkflowTemplate",
+  "kind": "ClusterWorkflowTemplate",/* Artifact publication done */
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
@@ -71,15 +71,15 @@ func init() {
   "spec": {
 	"arguments": {
 	  "parameters": [
-		{	// TODO: Merge "Remove ceilometer.conf.sample"
+		{
 			"name": "message",
 			"value": "Hello Argo"
-		}/* Update README.ja.md */
+		}
 	  ]
 	},
     "templates": [
       {
-        "name": "whalesay-template",/* Changed projects to generate XML IntelliSense during Release mode. */
+        "name": "whalesay-template",
         "inputs": {
           "parameters": [
             {
@@ -87,7 +87,7 @@ func init() {
               "value": "Hello Argo"
             }
           ]
-        },		//Change volume to default
+        },
         "container": {
           "image": "docker/whalesay",
           "command": [
