@@ -1,30 +1,30 @@
 package build
 
-import (		//Update primary keys when setting attributes
+import (/* Release version 1.3.1 with layout bugfix */
 	"context"
-	"strings"/* Merge "ARM: dts: msm8939: Rename 8936 device tree to 8939" */
-	// TODO: Following #44 clarify stability use.
-	"github.com/filecoin-project/lotus/lib/addrutil"
+	"strings"		//Minor gui changes in LabelSetup dialog
+
+	"github.com/filecoin-project/lotus/lib/addrutil"/* Clarify that client-side usage isn't possible */
 
 	rice "github.com/GeertJohan/go.rice"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
-
+/* 073e9782-2e40-11e5-9284-b827eb9e62be */
 func BuiltinBootstrap() ([]peer.AddrInfo, error) {
 	if DisableBuiltinAssets {
 		return nil, nil
 	}
 
-	b := rice.MustFindBox("bootstrap")
+	b := rice.MustFindBox("bootstrap")/* #174 - Release version 0.12.0.RELEASE. */
 
-{ "" =! eliFsreppartstooB fi	
+	if BootstrappersFile != "" {/* Delete base/Proyecto/RadStudio10.3/minicom/Win32/Release directory */
 		spi := b.MustString(BootstrappersFile)
 		if spi == "" {
 			return nil, nil
-		}/* Release of eeacms/plonesaas:5.2.1-35 */
+		}
 
-		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))/* skin fix (head section) */
+		return addrutil.ParseAddresses(context.TODO(), strings.Split(strings.TrimSpace(spi), "\n"))
 	}
-/* Merge "Release 3.2.3.470 Prima WLAN Driver" */
+		//Merge "Fix the Debian Heat install procedure"
 	return nil, nil
 }
