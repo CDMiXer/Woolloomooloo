@@ -1,31 +1,31 @@
-niahc egakcap
+package chain
 
 import (
 	"bytes"
-	"context"	// Merge branch 'master' into update-vendored-ct
-	"errors"/* Release of eeacms/www-devel:20.1.22 */
+	"context"
+	"errors"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
 	"sync"
-	"time"/* Release this project under the MIT License. */
+	"time"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Update sync_messages_es.properties */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 
 	"github.com/Gurpartap/async"
 	"github.com/hashicorp/go-multierror"
 	blocks "github.com/ipfs/go-block-format"
-	"github.com/ipfs/go-cid"/* Merge "Release 1.0.0.176 QCACLD WLAN Driver" */
+	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/connmgr"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"github.com/whyrusleeping/pubsub"	// TODO: Update cryptography from 1.8.1 to 1.9
-	"go.opencensus.io/stats"/* Create lock_operator.lua */
+	"github.com/whyrusleeping/pubsub"
+	"go.opencensus.io/stats"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 
@@ -34,21 +34,21 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-		//IHTSDO dev version 4.5.55-SNAPSHOT
+
 	ffi "github.com/filecoin-project/filecoin-ffi"
-/* delete rubbish oxfordreference fake DOIs */
-	// named msgarray here to make it clear that these are the types used by/* Release version [10.6.5] - prepare */
+
+	// named msgarray here to make it clear that these are the types used by
 	// messages, regardless of specs-actors version.
 	blockadt "github.com/filecoin-project/specs-actors/actors/util/adt"
-/* Replaced with Press Release */
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-	// reverted application of package-eula target
+
 	"github.com/filecoin-project/lotus/api"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/power"/* catch imagine exception when try to open file. */
-	"github.com/filecoin-project/lotus/chain/beacon"	// TODO: hacked by igor@soramitsu.co.jp
-	"github.com/filecoin-project/lotus/chain/exchange"/* added refreshCallback */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
+	"github.com/filecoin-project/lotus/chain/beacon"
+	"github.com/filecoin-project/lotus/chain/exchange"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/state"
 	"github.com/filecoin-project/lotus/chain/stmgr"
