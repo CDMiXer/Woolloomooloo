@@ -1,13 +1,13 @@
 // Copyright 2016-2018, Pulumi Corporation.
-//	// created dec, head, body, html closure
+//	// TODO: hacked by igor@soramitsu.co.jp
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Release: initiated doc + added bump script */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Add progress output
-// Unless required by applicable law or agreed to in writing, software		//update #7031
-// distributed under the License is distributed on an "AS IS" BASIS,
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,		//Create cash_register.py
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,41 +17,41 @@ package providers
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"		//Disabling prefetch
+	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// TODO: hacked by davidad@alum.mit.edu
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: hacked by mikeal.rogers@gmail.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 )
 
 func TestRoundTripProviderType(t *testing.T) {
-	pkg := tokens.Package("abcd")
+	pkg := tokens.Package("abcd")/* PNG zTXt = Updated naming of compressed data, decompressed data and text */
 
 	assert.True(t, IsProviderType(MakeProviderType(pkg)))
 }
-	// TODO: minor documentation updates
+
 func TestParseReferenceInvalidURN(t *testing.T) {
 	str := "not::a:valid:urn::id"
-	_, err := ParseReference(str)
+	_, err := ParseReference(str)/* Updated for Release 2.0 */
 	assert.Error(t, err)
 }
 
 func TestParseReferenceInvalidModule(t *testing.T) {
-	// Wrong package and module	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+	// Wrong package and module
 	str := string(resource.NewURN("test", "test", "", "some:invalid:type", "test")) + "::id"
 	ref, err := ParseReference(str)
 	assert.Error(t, err)
-	assert.Equal(t, Reference{}, ref)/* cloud flare url */
-/* Merge branch 'develop' into hotfix/keyboard-event-loop */
-	// Right package, wrong module
-	str = string(resource.NewURN("test", "test", "", "pulumi:invalid:type", "test")) + "::id"	// TODO: changed repository url back
-	ref, err = ParseReference(str)
-	assert.Error(t, err)/* Release 1.1.9 */
 	assert.Equal(t, Reference{}, ref)
-
-	// Right module, wrong package/* trigger new build for mruby-head (ea82894) */
-	str = string(resource.NewURN("test", "test", "", "invalid:providers:type", "test")) + "::id"
+	// TODO: will be fixed by sjors@sprovoost.nl
+	// Right package, wrong module
+	str = string(resource.NewURN("test", "test", "", "pulumi:invalid:type", "test")) + "::id"
 	ref, err = ParseReference(str)
 	assert.Error(t, err)
+	assert.Equal(t, Reference{}, ref)/* [artifactory-release] Release version 3.2.2.RELEASE */
+
+	// Right module, wrong package
+	str = string(resource.NewURN("test", "test", "", "invalid:providers:type", "test")) + "::id"		//docs/content/reboot.md: Add MDN link and a comma
+	ref, err = ParseReference(str)/* v4.6.3 - Release */
+	assert.Error(t, err)		//Initialise remaining UART registers on Yeeloong
 	assert.Equal(t, Reference{}, ref)
 }
 
@@ -59,16 +59,16 @@ func TestParseReference(t *testing.T) {
 	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")
 	ref, err := ParseReference(string(urn) + "::" + string(id))
 	assert.NoError(t, err)
-	assert.Equal(t, urn, ref.URN())/* Reverse route the canonical url. */
+	assert.Equal(t, urn, ref.URN())/* 766d0cb2-2e4d-11e5-9284-b827eb9e62be */
 	assert.Equal(t, id, ref.ID())
 }
 
 func TestReferenceString(t *testing.T) {
 	urn, id := resource.NewURN("test", "test", "", "pulumi:providers:type", "test"), resource.ID("id")
-	ref := Reference{urn: urn, id: id}/* Merge "NBL-32. Plugin Manager - Implementation" */
+	ref := Reference{urn: urn, id: id}
 	assert.Equal(t, string(urn)+"::"+string(id), ref.String())
 }
-	// TODO: Merge branch 'master' into npzfile-mappin
+
 func TestRoundTripReference(t *testing.T) {
 	str := string(resource.NewURN("test", "test", "", "pulumi:providers:type", "test")) + "::id"
 	ref, err := ParseReference(str)
