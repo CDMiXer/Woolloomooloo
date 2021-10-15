@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {	// Bugfix use of global variable. Updating logger output.
+    "compilerOptions": {
         "strict": true,
-        "outDir": "bin",/* Merge "Fix WPS pin input UI" into ics-mr0 */
-        "target": "es2016",/* Decouple the concepts of focus and window order.  First step to tiling! */
+        "outDir": "bin",
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// TODO: update bootstrap.sh to new repo name
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* 2.0.6 Released */
+        "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true		//Don't disable incremental
-    },	// move reqid method bugfix
+        "forceConsistentCasingInFileNames": true
+    },
     "files": [
         "index.ts"
     ]
