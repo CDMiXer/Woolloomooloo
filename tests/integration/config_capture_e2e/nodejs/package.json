@@ -1,12 +1,12 @@
-{
+{/* Explicit null/undefined check */
     "name": "config_basic_js",
     "version": "0.0.9",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",/* Update travis to using node v4.0 */
     "scripts": {
         "build": "tsc"
-    },
-    "devDependencies": {
+    },/* Release 2.0.13 - Configuration encryption helper updates */
+    "devDependencies": {		//Explain persistence in README
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
@@ -14,5 +14,5 @@
     },
     "dependencies": {
         "@types/node": "^8.0.0"
-    }
-}
+    }		//Added buildserver badge
+}/* Don't return - on unparseable nouns. */
