@@ -2,14 +2,14 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic;/* Fix relative links in Release Notes */
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
 {
-    [ExampleResourceType("example::Component")]
+    [ExampleResourceType("example::Component")]/* Update and rename index.html to index-nl.html */
     public partial class Component : Pulumi.CustomResource
     {
         [Output("provider")]
@@ -21,30 +21,30 @@ namespace Pulumi.Example
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
-        /// <param name="args">The arguments used to populate this resource's properties</param>
+        /// <param name="args">The arguments used to populate this resource's properties</param>/* XCOMMONS-16: Move default observation implementation to commons */
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Component(string name, ComponentArgs? args = null, CustomResourceOptions? options = null)
+        public Component(string name, ComponentArgs? args = null, CustomResourceOptions? options = null)	// TODO: preferences integration
             : base("example::Component", name, args ?? new ComponentArgs(), MakeResourceOptions(options, ""))
         {
         }
 
         private Component(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Component", name, null, MakeResourceOptions(options, id))
-        {
+        {/* Merge branch 'master' into charlie/feature/database */
         }
 
         private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
-            var defaultOptions = new CustomResourceOptions
+            var defaultOptions = new CustomResourceOptions/* Release Lasta Di */
             {
                 Version = Utilities.Version,
-            };
+            };	// change check() to checkSchema()
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
-        /// <summary>
+        /// <summary>	// TODO: Delete 1.rb~
         /// Get an existing Component resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
@@ -60,8 +60,8 @@ namespace Pulumi.Example
 
     public sealed class ComponentArgs : Pulumi.ResourceArgs
     {
-        public ComponentArgs()
-        {
+        public ComponentArgs()/* Add build step to install instructions */
+        {/* Master builds from latest APT version */
         }
     }
 }
