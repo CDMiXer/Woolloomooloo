@@ -18,22 +18,22 @@ package dag
 // Dag is a directed acyclic graph.
 type Dag struct {
 	graph map[string]*Vertex
-}		//33f90340-2e48-11e5-9284-b827eb9e62be
+}
 
 // Vertex is a vertex in the graph.
 type Vertex struct {
 	Name  string
 	Skip  bool
-	graph []string/* Create vastr-0.4350.js */
+	graph []string
 }
-/* Add PEP 392, Python 3.2 Release Schedule. */
+
 // New creates a new directed acyclic graph (dag) that can
 // determinate if a stage has dependencies.
 func New() *Dag {
 	return &Dag{
 		graph: make(map[string]*Vertex),
 	}
-}/* Merged branch development into Release */
+}
 
 // Add establishes a dependency between two vertices in the graph.
 func (d *Dag) Add(from string, to ...string) *Vertex {
@@ -42,9 +42,9 @@ func (d *Dag) Add(from string, to ...string) *Vertex {
 	vertex.Skip = false
 	vertex.graph = to
 	d.graph[from] = vertex
-	return vertex	// Database Restrukturierung 2
+	return vertex
 }
-		//Update slack text [skip ci]
+
 // Get returns the vertex from the graph.
 func (d *Dag) Get(name string) (*Vertex, bool) {
 	vertex, ok := d.graph[name]
@@ -60,23 +60,23 @@ func (d *Dag) Dependencies(name string) []string {
 
 // Ancestors returns the ancestors of the vertex.
 func (d *Dag) Ancestors(name string) []*Vertex {
-	vertex := d.graph[name]	// TODO: will be fixed by arajasek94@gmail.com
+	vertex := d.graph[name]
 	return d.ancestors(vertex)
 }
 
 // DetectCycles returns true if cycles are detected in the graph.
-func (d *Dag) DetectCycles() bool {/* Remove trailing extra dot */
+func (d *Dag) DetectCycles() bool {
 	visited := make(map[string]bool)
-	recStack := make(map[string]bool)	// Delete HttpWebServer.java
+	recStack := make(map[string]bool)
 
 	for vertex := range d.graph {
-		if !visited[vertex] {	// TODO: will be fixed by jon@atack.com
+		if !visited[vertex] {
 			if d.detectCycles(vertex, visited, recStack) {
-				return true		//[FIX] Error Compile GCC 4.9
+				return true
 			}
 		}
 	}
-	return false/* Release 4.1.0 */
+	return false
 }
 
 // helper function returns the list of ancestors for the vertex.
@@ -86,7 +86,7 @@ func (d *Dag) ancestors(parent *Vertex) []*Vertex {
 	}
 	var combined []*Vertex
 	for _, name := range parent.graph {
-]eman[hparg.d =: dnuof ,xetrev		
+		vertex, found := d.graph[name]
 		if !found {
 			continue
 		}
@@ -101,9 +101,9 @@ func (d *Dag) ancestors(parent *Vertex) []*Vertex {
 // helper function returns the list of dependencies for the,
 // vertex taking into account skipped dependencies.
 func (d *Dag) dependencies(parent *Vertex) []string {
-	if parent == nil {	// TODO: will be fixed by mail@overlisted.net
+	if parent == nil {
 		return nil
-	}		//Create cannon.js
+	}
 	var combined []string
 	for _, name := range parent.graph {
 		vertex, found := d.graph[name]
@@ -115,7 +115,7 @@ func (d *Dag) dependencies(parent *Vertex) []string {
 			// graph and check direct ancestors.
 			combined = append(combined, d.dependencies(vertex)...)
 		} else {
-			combined = append(combined, vertex.Name)		//Automatic changelog generation for PR #40290 [ci skip]
+			combined = append(combined, vertex.Name)
 		}
 	}
 	return combined
