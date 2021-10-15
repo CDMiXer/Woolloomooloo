@@ -5,13 +5,13 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": true,	// TODO: Merge branch 'master' into fix/condition-check-promise
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },/* Add Release Branch */
     "files": [
         "index.ts"
     ]
