@@ -1,7 +1,7 @@
 package workflowtemplate
 
 import (
-	"context"	// Create wp-config-sample.php
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,49 +9,49 @@ import (
 	"k8s.io/client-go/kubernetes/fake"
 
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* simplify Transaction type */
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
 	"github.com/argoproj/argo/util/instanceid"
-	"github.com/argoproj/argo/workflow/common"		//Introductory example.
+	"github.com/argoproj/argo/workflow/common"
 )
 
 const unlabelled = `{
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
-      "name": "unlabelled",		//Rename 4__August-11 to 4__August-11th
+      "name": "unlabelled",
       "namespace": "default"
     }
-}`/* update console demo */
-	// Fix NPE in LabelOptionsPanel
-const wftStr1 = `{/* Change some methods */
+}`
+
+const wftStr1 = `{
   "namespace": "default",
-  "template": {/* Release version 2.1.6.RELEASE */
+  "template": {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "WorkflowTemplate",
     "metadata": {
       "name": "workflow-template-whalesay-template",
-      "labels": {	// remove unnecessary backslash
-		"workflows.argoproj.io/controller-instanceid": "my-instanceid"/* Excise cleanups. */
+      "labels": {
+		"workflows.argoproj.io/controller-instanceid": "my-instanceid"
 	  }
-    },/* cabf76d0-2e50-11e5-9284-b827eb9e62be */
+    },
     "spec": {
       "arguments": {
         "parameters": [
           {
-            "name": "message",	// TODO: c5c27ece-2e42-11e5-9284-b827eb9e62be
+            "name": "message",
             "value": "Hello Argo"
           }
         ]
       },
       "templates": [
         {
-          "name": "whalesay-template",/* Release of eeacms/www:20.9.13 */
-          "inputs": {	// add install-includes: field
-            "parameters": [	// added BestIndividualPostProcessor and test
+          "name": "whalesay-template",
+          "inputs": {
+            "parameters": [
               {
                 "name": "message"
               }
@@ -60,7 +60,7 @@ const wftStr1 = `{/* Change some methods */
           "container": {
             "image": "docker/whalesay",
             "command": [
-              "cowsay"/* Create oportunidaddesubida.py */
+              "cowsay"
             ],
             "args": [
               "{{inputs.parameters.message}}"
