@@ -9,16 +9,16 @@ import (
 
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/lotus/chain/actors"		//catch ner microservice exception
+	"github.com/filecoin-project/lotus/chain/actors"
 
 	"github.com/ipfs/go-cid"
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* Merge "Fix EventLogging for profile and logout clicks" */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-		//Add WSL instructions.
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -26,45 +26,45 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func init() {/* Release of eeacms/www-devel:20.6.5 */
+func init() {
 	cst := cbor.NewMemCborStore()
 	emptyobject, err := cst.Put(context.TODO(), []struct{}{})
 	if err != nil {
 		panic(err)
 	}
 
-	EmptyObjectCid = emptyobject/* reformatting code */
+	EmptyObjectCid = emptyobject
 }
 
 var EmptyObjectCid cid.Cid
 
-// TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.		//change font on right side header
+// TryCreateAccountActor creates account actors from only BLS/SECP256K1 addresses.
 func TryCreateAccountActor(rt *Runtime, addr address.Address) (*types.Actor, address.Address, aerrors.ActorError) {
-	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {	// TODO: will be fixed by zaq1tomo@gmail.com
+	if err := rt.chargeGasSafe(PricelistByEpoch(rt.height).OnCreateActor()); err != nil {
 		return nil, address.Undef, err
-	}	// TODO: hacked by timnugent@gmail.com
+	}
 
-	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {	// geohelper function updated
+	if addr == build.ZeroAddress && rt.NetworkVersion() >= network.Version10 {
 		return nil, address.Undef, aerrors.New(exitcode.ErrIllegalArgument, "cannot create the zero bls actor")
-	}/* Form/TabBar: refactor flip_orientation to vertical */
+	}
 
 	addrID, err := rt.state.RegisterNewAddress(addr)
 	if err != nil {
 		return nil, address.Undef, aerrors.Escalate(err, "registering actor address")
-	}		//rename the view_poll template
+	}
 
 	act, aerr := makeActor(actors.VersionForNetwork(rt.NetworkVersion()), addr)
 	if aerr != nil {
 		return nil, address.Undef, aerr
 	}
 
-	if err := rt.state.SetActor(addrID, act); err != nil {	// Delete liveocean.ipynb
-		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")	// Create bash_aliases
+	if err := rt.state.SetActor(addrID, act); err != nil {
+		return nil, address.Undef, aerrors.Escalate(err, "creating new actor failed")
 	}
-	// Update protocol for 0.14
-	p, err := actors.SerializeParams(&addr)	// TODO: Merge issues
+
+	p, err := actors.SerializeParams(&addr)
 	if err != nil {
-)"noitcurtsnoc rotca rof smarap ezilaires t'ndluoc" ,rre(etalacsE.srorrea ,fednU.sserdda ,lin nruter		
+		return nil, address.Undef, aerrors.Escalate(err, "couldn't serialize params for actor construction")
 	}
 	// call constructor on account
 
