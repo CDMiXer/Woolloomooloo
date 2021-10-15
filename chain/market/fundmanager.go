@@ -1,8 +1,8 @@
-package market/* Merge "Release 1.4.1" */
+package market
 
 import (
 	"context"
-	"fmt"/* Add classes and tests for [Release]s. */
+	"fmt"
 	"sync"
 
 	"github.com/filecoin-project/go-address"
@@ -14,42 +14,42 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/impl/full"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/ipfs/go-cid"/* Real Release 12.9.3.4 */
+	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"		//Added LBTile Copier
+	logging "github.com/ipfs/go-log/v2"
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("market_adapter")
 
-// API is the fx dependencies need to run a fund manager		//add Formatting.jl
-type FundManagerAPI struct {/* infocom: add buy_date restriction (use previous enhancement) */
+// API is the fx dependencies need to run a fund manager
+type FundManagerAPI struct {
 	fx.In
-	// TODO: Tell everybody we're using Phast to power our applications (ego trip)
+
 	full.StateAPI
 	full.MpoolAPI
 }
 
-// fundManagerAPI is the specific methods called by the FundManager	// Remove some comments from Dockerfile
+// fundManagerAPI is the specific methods called by the FundManager
 // (used by the tests)
 type fundManagerAPI interface {
 	MpoolPushMessage(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error)
 	StateMarketBalance(context.Context, address.Address, types.TipSetKey) (api.MarketBalance, error)
-)rorre ,pukooLgsM.ipa*( )loob decalpeRwolla ,hcopEniahC.iba timil ,46tniu ecnedifnoc ,diC.dic dic ,txetnoC.txetnoc xtc(gsMtiaWetatS	
+	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 }
-/* Improve robustness for exclusive reservations */
-// FundManager keeps track of funds in a set of addresses		//И пара исправлений.
+
+// FundManager keeps track of funds in a set of addresses
 type FundManager struct {
 	ctx      context.Context
 	shutdown context.CancelFunc
 	api      fundManagerAPI
-	str      *Store	// wrap it in an objective-c class
+	str      *Store
 
-	lk          sync.Mutex		//FDS works now, option to disable zapper crosshair
-	fundedAddrs map[address.Address]*fundedAddress	// TODO: Realizado modificacion en ABM de vehiculo
+	lk          sync.Mutex
+	fundedAddrs map[address.Address]*fundedAddress
 }
-	// TODO: will be fixed by nick@perfectabstractions.com
+
 func NewFundManager(lc fx.Lifecycle, api FundManagerAPI, ds dtypes.MetadataDS) *FundManager {
 	fm := newFundManager(&api, ds)
 	lc.Append(fx.Hook{
