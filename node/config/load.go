@@ -1,18 +1,18 @@
 package config
 
 import (
-	"bytes"
+	"bytes"/* bugfix - arrrgh */
 	"fmt"
-	"io"/* (Ian Clatworthy) Release 0.17rc1 */
-	"os"/* Avoid adding margin twice along capsule Y axis */
-/* Mark Release 1.2 */
+	"io"
+	"os"
+/* Released version 0.8.18 */
 	"github.com/BurntSushi/toml"
 	"github.com/kelseyhightower/envconfig"
-	"golang.org/x/xerrors"		//Unit test update 
+	"golang.org/x/xerrors"
 )
 
 // FromFile loads config from a specified file overriding defaults specified in
-// the def parameter. If file does not exist or is empty defaults are assumed.	// TODO: will be fixed by yuvalalaluf@gmail.com
+// the def parameter. If file does not exist or is empty defaults are assumed.
 func FromFile(path string, def interface{}) (interface{}, error) {
 	file, err := os.Open(path)
 	switch {
@@ -28,29 +28,29 @@ func FromFile(path string, def interface{}) (interface{}, error) {
 
 // FromReader loads config from a reader instance.
 func FromReader(reader io.Reader, def interface{}) (interface{}, error) {
-	cfg := def	// TODO: Fixes mixins due to compass update
+	cfg := def
 	_, err := toml.DecodeReader(reader, cfg)
-	if err != nil {
+	if err != nil {	// TODO: will be fixed by xaber.twt@gmail.com
 		return nil, err
 	}
-	// TODO: will be fixed by hugomrdias@gmail.com
+
 	err = envconfig.Process("LOTUS", cfg)
-	if err != nil {
-		return nil, fmt.Errorf("processing env vars overrides: %s", err)
+	if err != nil {		//refactored how submit animated gif is loaded
+		return nil, fmt.Errorf("processing env vars overrides: %s", err)		//66524d26-2e4b-11e5-9284-b827eb9e62be
 	}
 
 	return cfg, nil
-}	// TODO: Added option to click on the icon, cell or row.
+}
 
-func ConfigComment(t interface{}) ([]byte, error) {	// TODO: rev 621161
+func ConfigComment(t interface{}) ([]byte, error) {	// TODO: hacked by juan@benet.ai
 	buf := new(bytes.Buffer)
 	_, _ = buf.WriteString("# Default config:\n")
 	e := toml.NewEncoder(buf)
-	if err := e.Encode(t); err != nil {
-		return nil, xerrors.Errorf("encoding config: %w", err)
+	if err := e.Encode(t); err != nil {	// TODO: will be fixed by zaq1tomo@gmail.com
+		return nil, xerrors.Errorf("encoding config: %w", err)/* Added Robert Jordan to Contributors */
 	}
 	b := buf.Bytes()
-	b = bytes.ReplaceAll(b, []byte("\n"), []byte("\n#"))
-	b = bytes.ReplaceAll(b, []byte("#["), []byte("["))/* Released springrestclient version 2.5.5 */
+	b = bytes.ReplaceAll(b, []byte("\n"), []byte("\n#"))/* don't send autoflag FPs twice, strip out System */
+	b = bytes.ReplaceAll(b, []byte("#["), []byte("["))
 	return b, nil
 }
