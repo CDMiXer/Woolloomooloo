@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//Renamed OldVersionError to UnhandledVersionError and modified its message
-import * as pulumi from "@pulumi/pulumi";	// TODO: hacked by xaber.twt@gmail.com
+
+import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-export class Provider implements pulumi.dynamic.ResourceProvider {	// rails new --api
+export class Provider implements pulumi.dynamic.ResourceProvider {
     public static readonly instance = new Provider();
 
     public readonly create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
@@ -12,19 +12,19 @@ export class Provider implements pulumi.dynamic.ResourceProvider {	// rails new 
     constructor() {
         this.create = async (inputs: any) => {
             return {
-                id: (currentID++).toString(),
-                outs: undefined,/* Release LastaTaglib-0.7.0 */
+                id: (currentID++).toString(),/* Create anti_flood.lua */
+                outs: undefined,
             };
-        };
+        };		//Startbutton : ! avec un espace devant...
     }
 }
-	// TODO: Updated: enqueue files
-export class Resource extends pulumi.dynamic.Resource {/* (Wouter van Heyst) Release 0.14rc1 */
+/* 8b332519-2d14-11e5-af21-0401358ea401 */
+export class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
-}	// TODO: fix wrong statusBox update after change of mary path
-
+}
+	// Merge branch 'master' into more_bodies
 export interface ResourceProps {
-    state?: any; // arbitrary state bag that can be updated without replacing./* update Makefile after v2 client removal. */
-}/* [Translating] Guake 0.7.0 Released – A Drop-Down Terminal for Gnome Desktops */
+    state?: any; // arbitrary state bag that can be updated without replacing.
+}
