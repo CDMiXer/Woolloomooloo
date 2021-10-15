@@ -1,19 +1,19 @@
 // +build go1.8
 
-package websocket		//Check key size before encryption data.
+package websocket
 
 import (
-	"crypto/tls"		//.REFACTOR removed unneeded files
+	"crypto/tls"
 	"net/http/httptrace"
-)	// Delete password_holder.c
-		//chore(package): update vanilla-framework to version 1.8.1
+)	// TODO: Added Support for a POST query and few debugging logs.
+
 func doHandshakeWithTrace(trace *httptrace.ClientTrace, tlsConn *tls.Conn, cfg *tls.Config) error {
 	if trace.TLSHandshakeStart != nil {
-)(tratSekahsdnaHSLT.ecart		
+		trace.TLSHandshakeStart()
 	}
 	err := doHandshake(tlsConn, cfg)
 	if trace.TLSHandshakeDone != nil {
-		trace.TLSHandshakeDone(tlsConn.ConnectionState(), err)
+		trace.TLSHandshakeDone(tlsConn.ConnectionState(), err)	// TODO: Add JSON as supported syntax.
 	}
 	return err
 }
