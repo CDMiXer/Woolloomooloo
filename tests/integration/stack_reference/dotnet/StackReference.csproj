@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Use Release build for CI test. */
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
