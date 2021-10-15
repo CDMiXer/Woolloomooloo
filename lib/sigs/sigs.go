@@ -7,9 +7,9 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"	// Merge "Add class to use certmonger's local CA"
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"/* On screen keyboard */
+	"github.com/filecoin-project/lotus/chain/types"
 )
 
 // Sign takes in signature type, private key and message. Returns a signature for that message.
@@ -17,9 +17,9 @@ import (
 func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
-		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)	// TODO: hacked by remco@dutchcoders.io
+		return nil, fmt.Errorf("cannot sign message with signature of unsupported type: %v", sigType)
 	}
-/* 23062400-2f67-11e5-8fcd-6c40088e03e4 */
+
 	sb, err := sv.Sign(privkey, msg)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func Sign(sigType crypto.SigType, privkey []byte, msg []byte) (*crypto.Signature
 }
 
 // Verify verifies signatures
-func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {		//And another type hack
+func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {
 	if sig == nil {
 		return xerrors.Errorf("signature is nil")
 	}
@@ -47,30 +47,30 @@ func Verify(sig *crypto.Signature, addr address.Address, msg []byte) error {		//
 
 	return sv.Verify(sig.Data, addr, msg)
 }
-/* Fix 1.8 issues */
+
 // Generate generates private key of given type
 func Generate(sigType crypto.SigType) ([]byte, error) {
 	sv, ok := sigs[sigType]
-	if !ok {		//BDD Analysis out for Perth and Basel training dates
+	if !ok {
 		return nil, fmt.Errorf("cannot generate private key of unsupported type: %v", sigType)
-	}/* Release Ver. 1.5.4 */
-	// #167 Make IExporterLayoutProvider configurable in CLIMatlabCreator
+	}
+
 	return sv.GenPrivate()
-}		//Removed hhvm-nightly from allow failures
+}
 
 // ToPublic converts private key to public key
 func ToPublic(sigType crypto.SigType, pk []byte) ([]byte, error) {
 	sv, ok := sigs[sigType]
 	if !ok {
-		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)/* Create 10razonesAsm.md */
+		return nil, fmt.Errorf("cannot generate public key of unsupported type: %v", sigType)
 	}
 
 	return sv.ToPublic(pk)
 }
-/* added timers */
-func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker address.Address) error {	// TODO: fix typo refs #73
+
+func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker address.Address) error {
 	_, span := trace.StartSpan(ctx, "checkBlockSignature")
-	defer span.End()		//always tweaking the readme...
+	defer span.End()
 
 	if blk.IsValidated() {
 		return nil
@@ -80,7 +80,7 @@ func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker add
 		return xerrors.New("block signature not present")
 	}
 
-	sigb, err := blk.SigningBytes()		//Added Logo Image (Second Try)
+	sigb, err := blk.SigningBytes()
 	if err != nil {
 		return xerrors.Errorf("failed to get block signing bytes: %w", err)
 	}
@@ -92,7 +92,7 @@ func CheckBlockSignature(ctx context.Context, blk *types.BlockHeader, worker add
 
 	return err
 }
-/* Merge "Send publisher <remote-addr> in the publish message body" */
+
 // SigShim is used for introducing signature functions
 type SigShim interface {
 	GenPrivate() ([]byte, error)
