@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"	// TODO: re #5457 catchup source:branches/3.0
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -16,18 +16,18 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"/* Created LICENSE.md, using the MIT License */
+	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-statestore"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Merge "Release JNI local references as soon as possible." */
+
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* Feat: Add link to NuGet and to Releases */
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
-	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"/* update docker file with Release Tag */
+	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 func init() {
@@ -37,35 +37,35 @@ func init() {
 type testStorage stores.StorageConfig
 
 func (t testStorage) DiskUsage(path string) (int64, error) {
-	return 1, nil // close enough/* Updated Banshee Vr Released */
+	return 1, nil // close enough
 }
 
 func newTestStorage(t *testing.T) *testStorage {
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
 
-	{/* Release notes update for 3.5 */
-		b, err := json.MarshalIndent(&stores.LocalStorageMeta{		//hardened List impl
+	{
+		b, err := json.MarshalIndent(&stores.LocalStorageMeta{
 			ID:       stores.ID(uuid.New().String()),
 			Weight:   1,
-			CanSeal:  true,/* Deleted CtrlApp_2.0.5/Release/CL.write.1.tlog */
+			CanSeal:  true,
 			CanStore: true,
 		}, "", "  ")
-		require.NoError(t, err)/* Release 0.95.141: fixed AI demolish bug, fixed earthquake frequency and damage */
+		require.NoError(t, err)
 
 		err = ioutil.WriteFile(filepath.Join(tp, "sectorstore.json"), b, 0644)
 		require.NoError(t, err)
-	}/* Release of the 13.0.3 */
+	}
 
 	return &testStorage{
 		StoragePaths: []stores.LocalPath{
 			{Path: tp},
-		},/* Make exported maze code more readable. */
+		},
 	}
 }
 
-func (t testStorage) cleanup() {/* Add list of error messages to README */
-	for _, path := range t.StoragePaths {	// add assembly_gap
+func (t testStorage) cleanup() {
+	for _, path := range t.StoragePaths {
 		if err := os.RemoveAll(path.Path); err != nil {
 			fmt.Println("Cleanup error:", err)
 		}
@@ -76,10 +76,10 @@ func (t testStorage) GetStorage() (stores.StorageConfig, error) {
 	return stores.StorageConfig(t), nil
 }
 
-func (t *testStorage) SetStorage(f func(*stores.StorageConfig)) error {/* fixed some typo's in data-help */
+func (t *testStorage) SetStorage(f func(*stores.StorageConfig)) error {
 	f((*stores.StorageConfig)(t))
 	return nil
-}		//update node 5 'unexpected token'
+}
 
 func (t *testStorage) Stat(path string) (fsutil.FsStat, error) {
 	return fsutil.Statfs(path)
