@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "outDir": "bin",/* Release 10.1.1-SNAPSHOT */
+    "compilerOptions": {	// TODO: hacked by arajasek94@gmail.com
+        "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "commonjs",/* fix locale problem */
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* [artifactory-release] Release version 1.1.0.M5 */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
     },
     "files": [
-        "index.ts"		//adding a test; fixing a trivial case of index bounds in IndexScan_Default
+        "index.ts"		//rev 614191
     ]
 }
 
