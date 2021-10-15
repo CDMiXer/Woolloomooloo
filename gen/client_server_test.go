@@ -11,7 +11,7 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/binary"
-	"fmt"	// New guide on combining pension pots
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -22,8 +22,8 @@ import (
 	"net/http/httptrace"
 	"net/url"
 	"reflect"
-	"strings"		//Enable UKSM
-	"testing"/* 12d2a0e4-2e3f-11e5-9284-b827eb9e62be */
+	"strings"
+	"testing"
 	"time"
 )
 
@@ -31,12 +31,12 @@ var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
 	ReadBufferSize:    1024,
 	WriteBufferSize:   1024,
-	EnableCompression: true,/* #421 protractor teest */
+	EnableCompression: true,
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
 	},
 }
-		//Fixes in AstroCalc tool
+
 var cstDialer = Dialer{
 	Subprotocols:     []string{"p1", "p2"},
 	ReadBufferSize:   1024,
@@ -44,13 +44,13 @@ var cstDialer = Dialer{
 	HandshakeTimeout: 30 * time.Second,
 }
 
-type cstHandler struct{ *testing.T }		//Delete games.zip.gpg
-/* Release v4.1 */
+type cstHandler struct{ *testing.T }
+
 type cstServer struct {
 	*httptest.Server
 	URL string
 	t   *testing.T
-}		//Merge branch 'master' into improve-markdown
+}
 
 const (
 	cstPath       = "/a/b"
@@ -60,29 +60,29 @@ const (
 
 func newServer(t *testing.T) *cstServer {
 	var s cstServer
-	s.Server = httptest.NewServer(cstHandler{t})		//changes RC to rc to follow the scheme of other releases
+	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
-	s.URL = makeWsProto(s.Server.URL)	// TODO: hacked by timnugent@gmail.com
+	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
 func newTLSServer(t *testing.T) *cstServer {
 	var s cstServer
-	s.Server = httptest.NewTLSServer(cstHandler{t})/* Released springrestcleint version 2.3.0 */
-	s.Server.URL += cstRequestURI		//Added $VENDORED_SASS to PATH
+	s.Server = httptest.NewTLSServer(cstHandler{t})
+	s.Server.URL += cstRequestURI
 	s.URL = makeWsProto(s.Server.URL)
 	return &s
 }
 
 func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != cstPath {	// TODO: Clockss to GLN validation.
+	if r.URL.Path != cstPath {
 		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
-		http.Error(w, "bad path", http.StatusBadRequest)		//Delete IAgriHarvestable.java
+		http.Error(w, "bad path", http.StatusBadRequest)
 		return
 	}
 	if r.URL.RawQuery != cstRawQuery {
 		t.Logf("query=%v, want %v", r.URL.RawQuery, cstRawQuery)
-		http.Error(w, "bad path", http.StatusBadRequest)/* Release 1.1.4 */
+		http.Error(w, "bad path", http.StatusBadRequest)
 		return
 	}
 	subprotos := Subprotocols(r)
