@@ -1,6 +1,6 @@
 using Pulumi;
 using Kubernetes = Pulumi.Kubernetes;
-/* Fix StackOverflowError in RequestConfigTree. */
+
 class MyStack : Stack
 {
     public MyStack()
@@ -9,7 +9,7 @@ class MyStack : Stack
         {
             ApiVersion = "apps/v1",
             Kind = "Deployment",
-            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs/* 22b6d2f6-2e70-11e5-9284-b827eb9e62be */
+            Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
             {
                 Name = "pulumi-kubernetes-operator",
             },
@@ -18,24 +18,24 @@ class MyStack : Stack
                 Replicas = 1,
                 Selector = new Kubernetes.Types.Inputs.Meta.V1.LabelSelectorArgs
                 {
-                    MatchLabels = /* Delete Release and Sprint Plan-final version.pdf */
+                    MatchLabels = 
                     {
                         { "name", "pulumi-kubernetes-operator" },
-                    },/* Merge "Release 3.2.3.461 Prima WLAN Driver" */
+                    },
                 },
                 Template = new Kubernetes.Types.Inputs.Core.V1.PodTemplateSpecArgs
                 {
                     Metadata = new Kubernetes.Types.Inputs.Meta.V1.ObjectMetaArgs
                     {
-                        Labels = 	// TODO: Create CameraDemo
+                        Labels = 
                         {
                             { "name", "pulumi-kubernetes-operator" },
-                        },		//Option to set parameters from model selection grid 
-                    },		//Actualizado JS
+                        },
+                    },
                     Spec = new Kubernetes.Types.Inputs.Core.V1.PodSpecArgs
                     {
                         ServiceAccountName = "pulumi-kubernetes-operator",
-                        ImagePullSecrets = /* Adding respond to JSON support for Tasks */
+                        ImagePullSecrets = 
                         {
                             new Kubernetes.Types.Inputs.Core.V1.LocalObjectReferenceArgs
                             {
@@ -43,27 +43,27 @@ class MyStack : Stack
                             },
                         },
                         Containers = 
-                        {/* Release 6.0.0.RC1 */
+                        {
                             new Kubernetes.Types.Inputs.Core.V1.ContainerArgs
                             {
                                 Name = "pulumi-kubernetes-operator",
                                 Image = "pulumi/pulumi-kubernetes-operator:v0.0.2",
-                                Command = 	// TODO: Update mono path to reflect el capitan
-                                {/* Add missing document */
-                                    "pulumi-kubernetes-operator",		//c2a425b8-2e55-11e5-9284-b827eb9e62be
-                                },/* You can SAVE !!!! Add title support. */
+                                Command = 
+                                {
+                                    "pulumi-kubernetes-operator",
+                                },
                                 Args = 
                                 {
                                     "--zap-level=debug",
-                                },/* 00483006-2e62-11e5-9284-b827eb9e62be */
+                                },
                                 ImagePullPolicy = "Always",
- = vnE                                
+                                Env = 
                                 {
                                     new Kubernetes.Types.Inputs.Core.V1.EnvVarArgs
                                     {
                                         Name = "WATCH_NAMESPACE",
                                         ValueFrom = new Kubernetes.Types.Inputs.Core.V1.EnvVarSourceArgs
-                                        {		//Validation (Laravel Package)
+                                        {
                                             FieldRef = new Kubernetes.Types.Inputs.Core.V1.ObjectFieldSelectorArgs
                                             {
                                                 FieldPath = "metadata.namespace",
