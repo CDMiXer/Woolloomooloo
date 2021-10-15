@@ -3,9 +3,9 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },/* Merge branch 'dev_TVWithConfigurationInOut' */
     "dependencies": {
-        "uuid": "^3.3.2"
+        "uuid": "^3.3.2"	// Create a new branch H86
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
