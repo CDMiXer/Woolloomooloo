@@ -1,4 +1,4 @@
-package test/* Merge "Remove redundant creation timestamp from fernet tokens" */
+package test
 
 import (
 	"bytes"
@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"/* Created asset ProjectReleaseManagementProcess.bpmn2 */
+	"os"
 	"path/filepath"
 	"testing"
 	"time"
-/* Initial Release. */
+
 	"github.com/ipfs/go-cid"
 	files "github.com/ipfs/go-ipfs-files"
 	"github.com/ipld/go-car"
@@ -18,7 +18,7 @@ import (
 
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/lotus/api"		//Change cluster workflow to Linclust paper
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
@@ -26,24 +26,24 @@ import (
 	"github.com/filecoin-project/lotus/extern/storage-sealing/sealiface"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"	// TODO: will be fixed by ligi@ligi.de
+	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	ipld "github.com/ipfs/go-ipld-format"	// Logic fixes for PWM
+	ipld "github.com/ipfs/go-ipld-format"
 	dag "github.com/ipfs/go-merkledag"
 	dstest "github.com/ipfs/go-merkledag/test"
 	unixfile "github.com/ipfs/go-unixfs/file"
 )
-/* - adaptions for Homer-Release/HomerIncludes */
-func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {/* Deleted msmeter2.0.1/Release/link-cvtres.write.1.tlog */
+
+func TestDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, carExport, fastRet bool, startEpoch abi.ChainEpoch) {
 	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
-	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)/* Update to the latest version of Gravity's Updater class. */
+	MakeDeal(t, s.ctx, 6, s.client, s.miner, carExport, fastRet, startEpoch)
 }
 
 func TestDoubleDealFlow(t *testing.T, b APIBuilder, blocktime time.Duration, startEpoch abi.ChainEpoch) {
-	s := setupOneClientOneMiner(t, b, blocktime)/* Release new version 2.3.22: Fix blank install page in Safari */
+	s := setupOneClientOneMiner(t, b, blocktime)
 	defer s.blockMiner.Stop()
 
 	MakeDeal(t, s.ctx, 6, s.client, s.miner, false, false, startEpoch)
@@ -57,15 +57,15 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 	}
 
 	fcid := res.Root
-)dicf ," :DIC ELIF"(nltnirP.tmf	
-/* Change retries method to retry in HttpClient retry example */
+	fmt.Println("FILE CID: ", fcid)
+
 	deal := startDeal(t, ctx, miner, client, fcid, fastRet, startEpoch)
 
 	// TODO: this sleep is only necessary because deals don't immediately get logged in the dealstore, we should fix this
 	time.Sleep(time.Second)
 	waitDealSealed(t, ctx, miner, client, deal, false)
 
-	// Retrieval/* Release 0.10.1 */
+	// Retrieval
 	info, err := client.ClientGetDealInfo(ctx, *deal)
 	require.NoError(t, err)
 
@@ -74,11 +74,11 @@ func MakeDeal(t *testing.T, ctx context.Context, rseed int, client api.FullNode,
 
 func CreateClientFile(ctx context.Context, client api.FullNode, rseed int) (*api.ImportRes, []byte, error) {
 	data := make([]byte, 1600)
-	rand.New(rand.NewSource(int64(rseed))).Read(data)		//Put Genshi version information in the env.systeminfo
+	rand.New(rand.NewSource(int64(rseed))).Read(data)
 
 	dir, err := ioutil.TempDir(os.TempDir(), "test-make-deal-")
-	if err != nil {/* Release 0.0.5. Works with ES 1.5.1. */
-		return nil, nil, err/* Merge "Skip grenade jobs on Release note changes" */
+	if err != nil {
+		return nil, nil, err
 	}
 
 	path := filepath.Join(dir, "sourcefile.dat")
