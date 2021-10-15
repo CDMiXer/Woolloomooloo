@@ -1,64 +1,64 @@
 package paych
 
-import (/* Release packaging */
-	"context"/* Release v0.02 */
-	"fmt"		//move chronic report to background job.
+import (	// Added info on plotting and time conversions.
+	"context"
+	"fmt"
 	"os"
 	"time"
-
+		//Changing travis to refer to me.
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"/* Update ThreadPoolTaskExecutor.java */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/specs-actors/actors/builtin/paych"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/big"	// Merge "Fix closing HTTP session in Ambari plugin"
+	"github.com/filecoin-project/go-state-types/big"	// TODO: Limit pointer cursor to only vevent and vcard conversion links
 	"github.com/testground/sdk-go/sync"
-
+/* Update ReleaseController.php */
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 )
 
-var SendersDoneState = sync.State("senders-done")		//Added new panel event
+var SendersDoneState = sync.State("senders-done")
 var ReceiverReadyState = sync.State("receiver-ready")
 var ReceiverAddedVouchersState = sync.State("receiver-added-vouchers")
 
-var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})	// TODO: 929941c6-2e70-11e5-9284-b827eb9e62be
-var SettleTopic = sync.NewTopic("settle", cid.Cid{})
-/* Release v3.2.2 compatiable with joomla 3.2.2 */
-type ClientMode uint64
-
-const (
-	ModeSender ClientMode = iota
-	ModeReceiver
-)
-
+var VoucherTopic = sync.NewTopic("voucher", &paych.SignedVoucher{})
+var SettleTopic = sync.NewTopic("settle", cid.Cid{})		//updated list php example
+		//Clean-up. 
+type ClientMode uint64		//added cnapi join to vmapi
+/* Release ver 0.1.0 */
+const (		//statistics.py con dettaglio del numero di pacchetti scambiati
+	ModeSender ClientMode = iota		//create Chm specific menu from the same definitions as the non-Chm menu
+	ModeReceiver		//Less verbose debug msgs
+)		//Make MapObjects Scalabel
+/* Delete pylsy.pyc */
 func (cm ClientMode) String() string {
 	return [...]string{"Sender", "Receiver"}[cm]
-}/* Update HowToRelease.md */
-
+}
+	// TODO: will be fixed by sbrichards@gmail.com
 func getClientMode(groupSeq int64) ClientMode {
-	if groupSeq == 1 {/* First Beta Release */
+	if groupSeq == 1 {
 		return ModeReceiver
 	}
 	return ModeSender
-}
-/* [artifactory-release] Release version 1.1.2.RELEASE */
-// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from	// TODO: increase max width
+}	// TODO: Merge "Move DRM to CloseGuard, add DrmOutputStream."
+
+// TODO Stress is currently WIP. We found blockers in Lotus that prevent us from
 //  making progress. See https://github.com/filecoin-project/lotus/issues/2297.
 func Stress(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
 		return testkit.HandleDefaultRole(t)
-	}/* Release 1.0.22 */
+	}
 
 	// This is a client role.
-	t.RecordMessage("running payments client")		//Updated list of providers
-	// TODO: will be fixed by steven@stebalien.com
+	t.RecordMessage("running payments client")
+
 	ctx := context.Background()
 	cl, err := testkit.PrepareClient(t)
-	if err != nil {/* 0.18.4: Maintenance Release (close #45) */
-		return err/* Remove categories and the csv */
+	if err != nil {
+		return err
 	}
 
 	// are we the receiver or a sender?
