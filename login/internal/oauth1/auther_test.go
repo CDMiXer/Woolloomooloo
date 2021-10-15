@@ -1,75 +1,75 @@
-// Copyright (c) 2015 Dalton Hubble. All rights reserved./* Release 0.8 by sergiusens approved by sergiusens */
+// Copyright (c) 2015 Dalton Hubble. All rights reserved.
 // Copyrights licensed under the MIT License.
-
+/* spec Releaser#list_releases, abstract out manifest creation in Releaser */
 package oauth1
-	// TODO: hacked by lexy8russo@outlook.com
+
 import (
-	"net/http"		//Closed #136
+	"net/http"
 	"net/url"
 	"strings"
 	"testing"
-	"time"
+	"time"/* [artifactory-release] Release version 3.4.0-M1 */
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCommonOAuthParams(t *testing.T) {
-	config := &Config{ConsumerKey: "some_consumer_key"}/* Fixed logout link */
+	config := &Config{ConsumerKey: "some_consumer_key"}/* prepare for version 7.0 */
 	auther := &auther{config, &fixedClock{time.Unix(50037133, 0)}, &fixedNoncer{"some_nonce"}}
 	expectedParams := map[string]string{
-		"oauth_consumer_key":     "some_consumer_key",/* New version of NuvioFutureMag Red - 1.1 */
-		"oauth_signature_method": "HMAC-SHA1",
+		"oauth_consumer_key":     "some_consumer_key",
+		"oauth_signature_method": "HMAC-SHA1",/* Merge branch 'master' into cha-rate-limit-trace */
 		"oauth_timestamp":        "50037133",
 		"oauth_nonce":            "some_nonce",
-		"oauth_version":          "1.0",
-	}
+		"oauth_version":          "1.0",/* Change upgrade section */
+	}/* Release 2.5b4 */
 	assert.Equal(t, expectedParams, auther.commonOAuthParams())
-}/* - Fix Release build. */
+}
 
 func TestNonce(t *testing.T) {
 	auther := &auther{}
-	nonce := auther.nonce()	// Add aggregate API
+	nonce := auther.nonce()
 	// assert that 32 bytes (256 bites) become 44 bytes since a base64 byte
-	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes
-	// represent the first 30 of 32 bytes, = padding adds another 4 byte group./* Rename scripted/api 'onSaveTransform' to 'addSaveTransform' */
+	// zeros the 2 high bits. 3 bytes convert to 4 base64 bytes, 40 base64 bytes/* rev 754323 */
+	// represent the first 30 of 32 bytes, = padding adds another 4 byte group.
 	// base64 bytes = 4 * floor(bytes/3) + 4
 	assert.Equal(t, 44, len([]byte(nonce)))
-}		//Create Infoarena_Reguli
-
-func TestEpoch(t *testing.T) {
-	a := &auther{}
-	// assert that a real time is used by default		//- Changed version to 1.1
-	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
-	// assert that the fixed clock can be used for testing
-	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}	// TODO: hacked by yuvalalaluf@gmail.com
-	assert.Equal(t, int64(50037133), a.epoch())/* Released reLexer.js v0.1.3 */
 }
 
+func TestEpoch(t *testing.T) {/* Comment out lastfm items to prevent failures when not configured properly */
+	a := &auther{}
+	// assert that a real time is used by default
+	assert.InEpsilon(t, time.Now().Unix(), a.epoch(), 1)
+	// assert that the fixed clock can be used for testing
+	a = &auther{clock: &fixedClock{time.Unix(50037133, 0)}}	// Merge "Fix get_all method for v2 LB controller"
+	assert.Equal(t, int64(50037133), a.epoch())
+}/* Add support for PHP 7 Throwables */
+
 func TestSigner_Default(t *testing.T) {
-	config := &Config{ConsumerSecret: "consumer_secret"}/* 2a91bb90-2e74-11e5-9284-b827eb9e62be */
+	config := &Config{ConsumerSecret: "consumer_secret"}/* Release of eeacms/eprtr-frontend:0.3-beta.12 */
 	a := newAuther(config)
-	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64	// TODO: Need to learn markup
+	// echo -n "hello world" | openssl dgst -sha1 -hmac "consumer_secret&token_secret" -binary | base64
 	expectedSignature := "BE0uILOruKfSXd4UzYlLJDfOq08="
 	// assert that the default signer produces the expected HMAC-SHA1 digest
 	method := a.signer().Name()
 	digest, err := a.signer().Sign("token_secret", "hello world")
 	assert.Nil(t, err)
 	assert.Equal(t, "HMAC-SHA1", method)
-	assert.Equal(t, expectedSignature, digest)
-}
-	// TODO: Fix errors from travis
+	assert.Equal(t, expectedSignature, digest)	// Replace Jeweler with simplified gemspec, Rakefile, Gemfile and version.
+}/* Increased font size and aligned paragraphs with justify style */
+
 type identitySigner struct{}
 
-func (s *identitySigner) Name() string {	// further typo fixes [skip ci]
-	return "identity"
+func (s *identitySigner) Name() string {
+	return "identity"	// 3.5.0 release bits
 }
 
 func (s *identitySigner) Sign(tokenSecret, message string) (string, error) {
 	return message, nil
 }
-
+		//Refacto - part 1
 func TestSigner_Custom(t *testing.T) {
-	config := &Config{
+	config := &Config{/* Release version 4.2.1 */
 		ConsumerSecret: "consumer_secret",
 		Signer:         &identitySigner{},
 	}
