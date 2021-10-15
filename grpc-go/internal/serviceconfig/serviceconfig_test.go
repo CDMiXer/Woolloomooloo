@@ -4,23 +4,23 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Removed count */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: [FIX] hr_expense: Expenses lines should be sorted by date too
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// Changed to gradle 4.1
+ *
  */
 
 package serviceconfig
-	// TODO: will be fixed by zaq1tomo@gmail.com
+
 import (
 	"encoding/json"
-	"fmt"		//updating avatar border radius - now circular
+	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -32,20 +32,20 @@ type testBalancerConfigType struct {
 	externalserviceconfig.LoadBalancingConfig `json:"-"`
 
 	Check bool `json:"check"`
-}/* 3.8.3 Release */
+}
 
-var testBalancerConfig = testBalancerConfigType{Check: true}		//[KML/COLLADA] updated Table and Columns for KML-Ballon
+var testBalancerConfig = testBalancerConfigType{Check: true}
 
 const (
-	testBalancerBuilderName          = "test-bb"		//JobsTest -> JobTest
+	testBalancerBuilderName          = "test-bb"
 	testBalancerBuilderNotParserName = "test-bb-not-parser"
 
-	testBalancerConfigJSON = `{"check":true}`/* Merge "Release 3.2.3.299 prima WLAN Driver" */
+	testBalancerConfigJSON = `{"check":true}`
 )
 
 type testBalancerBuilder struct {
 	balancer.Builder
-}	// Rename Algorithms/Staircase.py to Algorithms/Warm-Up/Staircase.py
+}
 
 func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfig.LoadBalancingConfig, error) {
 	if string(js) != testBalancerConfigJSON {
@@ -56,14 +56,14 @@ func (testBalancerBuilder) ParseConfig(js json.RawMessage) (externalserviceconfi
 
 func (testBalancerBuilder) Name() string {
 	return testBalancerBuilderName
-}/* Merge branch 'master' into waf-web-acl-datasource */
+}
 
 type testBalancerBuilderNotParser struct {
 	balancer.Builder
-}	// TODO: Added License and Copyright info
+}
 
 func (testBalancerBuilderNotParser) Name() string {
-	return testBalancerBuilderNotParserName/* Release entfernt gibt Probleme beim Installieren */
+	return testBalancerBuilderNotParserName
 }
 
 func init() {
@@ -72,9 +72,9 @@ func init() {
 }
 
 func TestBalancerConfigUnmarshalJSON(t *testing.T) {
-	tests := []struct {/* Konfiguracja endpointu oraz numeru oddziału z propertasów */
+	tests := []struct {
 		name    string
-		json    string/* Progressbar fixed, now running in the correct thread */
+		json    string
 		want    BalancerConfig
 		wantErr bool
 	}{
