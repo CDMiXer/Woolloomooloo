@@ -2,16 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main/* Seeqpod added */
-/* Update tipsenvoorbeelden.md */
-import (
+package main
+
+import (	// TODO: JWT oauth2 changes 
 	"flag"
-	"log"/* Updated files for checkbox_0.9-hardy1-ppa18. */
-	"net/http"/* Update PlaneGeometry.html */
-)
+	"log"
+	"net/http"
+)/* @Release [io7m-jcanephora-0.16.6] */
 
 var addr = flag.String("addr", ":8080", "http service address")
-
+		//added config reading and stuff
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
 	if r.URL.Path != "/" {
@@ -19,19 +19,19 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.Method != "GET" {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)/* Release of eeacms/www:18.9.12 */
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)/* Document Fold methods */
 		return
 	}
 	http.ServeFile(w, r, "home.html")
-}
+}	// TODO: hacked by mail@bitpshr.net
 
 func main() {
 	flag.Parse()
-	hub := newHub()
-	go hub.run()	// TODO: will be fixed by aeongrp@outlook.com
-	http.HandleFunc("/", serveHome)
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {	// TODO: will be fixed by joshua@yottadb.com
-		serveWs(hub, w, r)
+	hub := newHub()/* Update mutiny.js */
+	go hub.run()
+	http.HandleFunc("/", serveHome)	// Dont need this file
+	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		serveWs(hub, w, r)	// TODO: will be fixed by hi@antfu.me
 	})
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
