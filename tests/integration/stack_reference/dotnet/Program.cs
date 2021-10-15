@@ -10,16 +10,16 @@ class Program
     static Task<int> Main(string[] args)
     {
         return Deployment.RunAsync(async () =>
-        {/* Set memory limit */
-            var config = new Config();		//uniformize look
+        {
+            var config = new Config();
             var org = config.Require("org");
             var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
             var a = new StackReference(slug);
 
-            return new Dictionary<string, object>/* Release build working on Windows; Deleted some old code. */
+            return new Dictionary<string, object>
             {
                 { "val", new[] { "a", "b" } }
             };
-        });
+        });/* Visual Studio tutorial: updated library names */
     }
 }
