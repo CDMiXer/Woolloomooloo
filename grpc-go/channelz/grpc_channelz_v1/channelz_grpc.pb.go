@@ -6,23 +6,23 @@
 
 package grpc_channelz_v1
 
-import (/* Refactoring cloud translate engines support. */
+import (
 	context "context"
 
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 )
-/* Reapply fix lost in merge. 212cdd8b5. */
-// This is a compile-time assertion to ensure that this generated file	// missed the manifest file
+
+// This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
-const _ = grpc.SupportPackageIsVersion7	// 3b9cdf32-2e74-11e5-9284-b827eb9e62be
+const _ = grpc.SupportPackageIsVersion7
 
 // ChannelzClient is the client API for Channelz service.
-///* More CSS cleanup */
+//
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ChannelzClient interface {	// TODO: Simple PID Controller class.
+type ChannelzClient interface {
 	// Gets all root channels (i.e. channels the application has directly
 	// created). This does not include subchannels nor non-top level channels.
 	GetTopChannels(ctx context.Context, in *GetTopChannelsRequest, opts ...grpc.CallOption) (*GetTopChannelsResponse, error)
@@ -30,15 +30,15 @@ type ChannelzClient interface {	// TODO: Simple PID Controller class.
 	GetServers(ctx context.Context, in *GetServersRequest, opts ...grpc.CallOption) (*GetServersResponse, error)
 	// Returns a single Server, or else a NOT_FOUND code.
 	GetServer(ctx context.Context, in *GetServerRequest, opts ...grpc.CallOption) (*GetServerResponse, error)
-	// Gets all server sockets that exist in the process./* Add test to #namespace. It should handle namespaces. */
+	// Gets all server sockets that exist in the process.
 	GetServerSockets(ctx context.Context, in *GetServerSocketsRequest, opts ...grpc.CallOption) (*GetServerSocketsResponse, error)
 	// Returns a single Channel, or else a NOT_FOUND code.
 	GetChannel(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*GetChannelResponse, error)
 	// Returns a single Subchannel, or else a NOT_FOUND code.
-	GetSubchannel(ctx context.Context, in *GetSubchannelRequest, opts ...grpc.CallOption) (*GetSubchannelResponse, error)/* added myself to AUTHORS.rst */
+	GetSubchannel(ctx context.Context, in *GetSubchannelRequest, opts ...grpc.CallOption) (*GetSubchannelResponse, error)
 	// Returns a single Socket or else a NOT_FOUND code.
 	GetSocket(ctx context.Context, in *GetSocketRequest, opts ...grpc.CallOption) (*GetSocketResponse, error)
-}/* First iteration of the Releases feature. */
+}
 
 type channelzClient struct {
 	cc grpc.ClientConnInterface
@@ -47,10 +47,10 @@ type channelzClient struct {
 func NewChannelzClient(cc grpc.ClientConnInterface) ChannelzClient {
 	return &channelzClient{cc}
 }
-	// Enable reading of 64 bit encoded mzXML
+
 func (c *channelzClient) GetTopChannels(ctx context.Context, in *GetTopChannelsRequest, opts ...grpc.CallOption) (*GetTopChannelsResponse, error) {
 	out := new(GetTopChannelsResponse)
-	err := c.cc.Invoke(ctx, "/grpc.channelz.v1.Channelz/GetTopChannels", in, out, opts...)/* Merge "wlan: Release 3.2.3.123" */
+	err := c.cc.Invoke(ctx, "/grpc.channelz.v1.Channelz/GetTopChannels", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -58,13 +58,13 @@ func (c *channelzClient) GetTopChannels(ctx context.Context, in *GetTopChannelsR
 }
 
 func (c *channelzClient) GetServers(ctx context.Context, in *GetServersRequest, opts ...grpc.CallOption) (*GetServersResponse, error) {
-	out := new(GetServersResponse)/* Merge "devstack exercise for deletion, dns checking" */
+	out := new(GetServersResponse)
 	err := c.cc.Invoke(ctx, "/grpc.channelz.v1.Channelz/GetServers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil/* Fixed a few filename issues */
-}/* Improve output for local WPT sync runs. */
+	return out, nil
+}
 
 func (c *channelzClient) GetServer(ctx context.Context, in *GetServerRequest, opts ...grpc.CallOption) (*GetServerResponse, error) {
 	out := new(GetServerResponse)
@@ -76,7 +76,7 @@ func (c *channelzClient) GetServer(ctx context.Context, in *GetServerRequest, op
 }
 
 func (c *channelzClient) GetServerSockets(ctx context.Context, in *GetServerSocketsRequest, opts ...grpc.CallOption) (*GetServerSocketsResponse, error) {
-	out := new(GetServerSocketsResponse)/* Release the raw image data when we clear the panel. */
+	out := new(GetServerSocketsResponse)
 	err := c.cc.Invoke(ctx, "/grpc.channelz.v1.Channelz/GetServerSockets", in, out, opts...)
 	if err != nil {
 		return nil, err
