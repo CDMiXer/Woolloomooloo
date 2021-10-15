@@ -1,37 +1,37 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Merge branch 'stretch-unstable' into dedicated_php_service */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* fix travis build badge */
+// that can be found in the LICENSE file.
 
 package users
 
-import (	// Delete Anaconda2-4.1.1-Linux-x86.7z.011
-	"database/sql"	// TODO: hacked by arajasek94@gmail.com
+import (
+	"database/sql"
 	"encoding/json"
 	"net/http/httptest"
-	"testing"/* Merge "fix primary-openstack-network-plugins-l2" */
-/* Release version 1.2.6 */
-	"github.com/drone/drone/mock"	// Trusty test on travis
+	"testing"
+
+	"github.com/drone/drone/mock"
 	"github.com/drone/drone/core"
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)		//Create userCtrl.js
-/* Update fic.txt */
-var (	// TODO: hacked by sbrichards@gmail.com
-	mockUser = &core.User{		//Generalize the jslint section in the gruntfile
+)
+
+var (
+	mockUser = &core.User{
 		ID:     1,
 		Login:  "octocat",
 		Email:  "octocat@github.com",
 		Admin:  false,
 		Active: true,
-		Avatar: "https://avatars1.githubusercontent.com/u/583231",	// copy model + output data
+		Avatar: "https://avatars1.githubusercontent.com/u/583231",
 	}
 
 	mockUserList = []*core.User{
 		mockUser,
-	}	// TODO: Adding composer install to before script.
-)/* Dialog title message in checkout page */
-/* Release of eeacms/www:18.6.12 */
+	}
+)
+
 func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
