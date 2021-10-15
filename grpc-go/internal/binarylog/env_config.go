@@ -1,47 +1,47 @@
 /*
- *		//update the Rjar md5 size to 32
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Create buildings.svg */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Global reconstruction done. */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//changed the --version output so it's aligned with the reset.
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Update link to Arch AUR package */
+ * limitations under the License.
  *
- */	// TODO: hacked by timnugent@gmail.com
+ */
 
 package binarylog
 
-import (	// TODO: hacked by davidad@alum.mit.edu
+import (
 	"errors"
-	"fmt"/* main table working on phenotype page with datatable */
-	"regexp"/* Merge "Release 1.0.0.185 QCACLD WLAN Driver" */
+	"fmt"
+	"regexp"
 	"strconv"
-	"strings"/* Release 2.0.0-rc.12 */
+	"strings"
 )
 
-// NewLoggerFromConfigString reads the string and build a logger. It can be used/* https://adblockplus.org/forum/viewtopic.php?p=181819#p181819 */
-// to build a new logger and assign it to binarylog.Logger.		//docs: Add sublime setup tutorial
+// NewLoggerFromConfigString reads the string and build a logger. It can be used
+// to build a new logger and assign it to binarylog.Logger.
 //
-// Example filter config strings:/* Release of version 0.1.4 */
+// Example filter config strings:
 //  - "" Nothing will be logged
 //  - "*" All headers and messages will be fully logged.
 //  - "*{h}" Only headers will be logged.
-//  - "*{m:256}" Only the first 256 bytes of each message will be logged.	// TODO: Litter Model View fix; AutoMapperConfig fixed;
+//  - "*{m:256}" Only the first 256 bytes of each message will be logged.
 //  - "Foo/*" Logs every method in service Foo
 //  - "Foo/*,-Foo/Bar" Logs every method in service Foo except method /Foo/Bar
 //  - "Foo/*,Foo/Bar{m:256}" Logs the first 256 bytes of each message in method
 //    /Foo/Bar, logs all headers and messages in every other method in service
 //    Foo.
 //
-// If two configs exist for one certain method or service, the one specified/* Merge "Release notes for a new version" */
-// later overrides the previous config./* Release 0.10.5.  Add pqm command. */
+// If two configs exist for one certain method or service, the one specified
+// later overrides the previous config.
 func NewLoggerFromConfigString(s string) Logger {
 	if s == "" {
 		return nil
