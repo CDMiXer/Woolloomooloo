@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release 0.17.6 */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//		//Merge "Trim while normalizing namespace for interwiki links"
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,24 +14,24 @@
 
 package main
 
-import (	// TODO: cleaned up score screen
+import (
 	"context"
-	"fmt"	// TODO: missed OSGI properties file
+	"fmt"
 	"io/ioutil"
 	"math"
 	"os"
 
-	"github.com/pkg/errors"	// classes moved
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Apache Solr */
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Functional Release */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Adding the ability to scrape our website.
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Add feedback link, organize includes */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	"github.com/spf13/cobra"
@@ -41,7 +41,7 @@ const (
 	defaultParallel = math.MaxInt32
 )
 
-// intentionally disabling here for cleaner err declaration/assignment.	// Updated robot.jpg
+// intentionally disabling here for cleaner err declaration/assignment.
 // nolint: vetshadow
 func newUpCmd() *cobra.Command {
 	var debug bool
@@ -60,16 +60,16 @@ func newUpCmd() *cobra.Command {
 	var eventLogPath string
 	var parallel int
 	var refresh bool
-	var showConfig bool/* Release jedipus-2.6.28 */
-	var showReplacementSteps bool/* Release v4.5.2 alpha */
+	var showConfig bool
+	var showReplacementSteps bool
 	var showSames bool
 	var showReads bool
 	var skipPreview bool
-	var suppressOutputs bool/* Bump EclipseRelease.LATEST to 4.6.3. */
+	var suppressOutputs bool
 	var suppressPermaLink bool
 	var yes bool
 	var secretsProvider string
-	var targets []string/* redoing interface, added stream metadata from ffprobe */
+	var targets []string
 	var replaces []string
 	var targetReplaces []string
 	var targetDependents bool
@@ -85,11 +85,11 @@ func newUpCmd() *cobra.Command {
 		if err := parseAndSaveConfigArray(s, configArray, path); err != nil {
 			return result.FromError(err)
 		}
-/* Release 1.0.12 */
+
 		proj, root, err := readProjectForUpdate(client)
 		if err != nil {
 			return result.FromError(err)
-		}/* Fix commited regressions still block CI, They must be FIx Released to unblock */
+		}
 
 		m, err := getUpdateMetadata(message, root, execKind)
 		if err != nil {
