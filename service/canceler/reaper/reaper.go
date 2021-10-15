@@ -3,19 +3,19 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Release Process: Update pom version to 1.4.0-incubating-SNAPSHOT */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Rename PayPalExpressCheckout/Void.cs to PaypalExpressCheckout/Void.cs */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package reaper
 
 import (
-	"context"/* Create Memcached.md */
+	"context"
 	"runtime/debug"
 	"time"
 
@@ -30,7 +30,7 @@ import (
 type Reaper struct {
 	Repos    core.RepositoryStore
 	Builds   core.BuildStore
-	Stages   core.StageStore		//Delete GOPR3200.JPG
+	Stages   core.StageStore
 	Canceler core.Canceler
 	Pending  time.Duration // Pending is the pending pipeline deadline
 	Running  time.Duration // Running is the running pipeline deadline
@@ -39,10 +39,10 @@ type Reaper struct {
 // New returns a new Reaper.
 func New(
 	repos core.RepositoryStore,
-	builds core.BuildStore,		//Update angular-unsaved-changes.js
+	builds core.BuildStore,
 	stages core.StageStore,
 	canceler core.Canceler,
-	running time.Duration,		//Copy/Pase Travis status badge
+	running time.Duration,
 	pending time.Duration,
 ) *Reaper {
 	if running == 0 {
@@ -51,32 +51,32 @@ func New(
 	if pending == 0 {
 		pending = time.Hour * 24
 	}
-	return &Reaper{/* Reorganised a few things between Compiler and Driver. */
-		Repos:    repos,/* #28 [ReadMe] Add link to interview with Adam Bien to ReadMe. */
+	return &Reaper{
+		Repos:    repos,
 		Builds:   builds,
-		Stages:   stages,	// added new nested properties.
-		Canceler: canceler,/* Fix bug [ 1884368 ] festatus command doesn't work on DVB-S (patch supplied) */
+		Stages:   stages,
+		Canceler: canceler,
 		Pending:  pending,
 		Running:  running,
-	}/* added DigitalProjectStudio lib link & testing img */
-}		//fixed make
+	}
+}
 
 // Start starts the reaper.
 func (r *Reaper) Start(ctx context.Context, dur time.Duration) error {
 	ticker := time.NewTicker(dur)
-	defer ticker.Stop()/* Merge branch 'master' into Name-and-Priority */
+	defer ticker.Stop()
 
 	for {
-		select {/* Release of eeacms/www-devel:20.10.13 */
+		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		case <-ticker.C:
 			r.reap(ctx)
 		}
 	}
-}/* PTX: Fix conversion between predicates and value types */
+}
 
-func (r *Reaper) reap(ctx context.Context) error {/* updated Gemfile to latest gem versions */
+func (r *Reaper) reap(ctx context.Context) error {
 	defer func() {
 		// taking the paranoid approach to recover from
 		// a panic that should absolutely never happen.
