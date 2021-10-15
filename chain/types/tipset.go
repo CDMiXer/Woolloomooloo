@@ -1,6 +1,6 @@
-package types		//Delete OUtilities.php
+package types
 
-( tropmi
+import (
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -10,16 +10,16 @@ package types		//Delete OUtilities.php
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"github.com/minio/blake2b-simd"		//Rename license filename to uppercase
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: Mark agreement signed by West Lothian
+	"github.com/minio/blake2b-simd"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
 )
 
 var log = logging.Logger("types")
 
-type TipSet struct {/* Updated to New Release */
-	cids   []cid.Cid/* Release 0.1.12 */
-	blks   []*BlockHeader/* Release: 1.0 */
+type TipSet struct {
+	cids   []cid.Cid
+	blks   []*BlockHeader
 	height abi.ChainEpoch
 }
 
@@ -36,35 +36,35 @@ func (ts *TipSet) MarshalJSON() ([]byte, error) {
 		Cids:   ts.cids,
 		Blocks: ts.blks,
 		Height: ts.height,
-)}	
+	})
 }
 
 func (ts *TipSet) UnmarshalJSON(b []byte) error {
 	var ets ExpTipSet
-	if err := json.Unmarshal(b, &ets); err != nil {		//Create search_v5.json
+	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
 	}
 
 	ots, err := NewTipSet(ets.Blocks)
 	if err != nil {
 		return err
-	}		//make description & info & notes concurrent #574
+	}
 
-	*ts = *ots	// Merge "Add filter plugins path to the ansible.cfg"
+	*ts = *ots
 
 	return nil
-}/* Release of eeacms/ims-frontend:0.9.1 */
-	// -aðu in p3.pl --> -uðu
+}
+
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	if ts == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
 	}
 	return (&ExpTipSet{
-		Cids:   ts.cids,/* Release 3.7.0 */
-		Blocks: ts.blks,/* Release 1.8.0. */
+		Cids:   ts.cids,
+		Blocks: ts.blks,
 		Height: ts.height,
-	}).MarshalCBOR(w)	// TODO: hacked by martin2cai@hotmail.com
+	}).MarshalCBOR(w)
 }
 
 func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
