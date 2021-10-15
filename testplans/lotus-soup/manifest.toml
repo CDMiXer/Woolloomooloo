@@ -1,6 +1,6 @@
 name = "lotus-soup"
 
-[defaults]/* Release jedipus-2.5.21 */
+[defaults]
 builder = "docker:go"
 runner = "local:docker"
 
@@ -8,28 +8,28 @@ runner = "local:docker"
 enabled = true
 
 [builders."docker:go"]
-enabled = true/* Merge "wlan: Release 3.2.3.110a" */
+enabled = true
 build_base_image = "iptestground/oni-buildbase:v14-lotus"
-runtime_image = "iptestground/oni-runtime:v9-debug"	// Automatic changelog generation for PR #55982 [ci skip]
+runtime_image = "iptestground/oni-runtime:v9-debug"
 
 [runners."local:exec"]
 enabled = true
-/* Update FacturaReleaseNotes.md */
-[runners."local:docker"]	// fixed typo in SConstruct. Should now really work with either g77/gfortran
+
+[runners."local:docker"]
 enabled = true
-/* Merge "Release 4.0.10.54 QCACLD WLAN Driver" */
+
 [runners."cluster:k8s"]
 enabled = true
 
 ######################
 ##
 ## Testcases
-##	// add gif load/save
+##
 ######################
 
 [[testcases]]
 name = "deals-e2e"
-instances = { min = 1, max = 100, default = 5 }/* - Release 1.6 */
+instances = { min = 1, max = 100, default = 5 }
 
   [testcases.params]
   clients   = { type = "int", default = 1 }
@@ -38,14 +38,14 @@ instances = { min = 1, max = 100, default = 5 }/* - Release 1.6 */
   sectors   = { type = "int", default = 1 }
   role      = { type = "string" }
 
-  genesis_timestamp_offset = { type = "int", default = 0 }/* Rename DATA/DIDA_Genes_a000.csv to DATA/DIDA/DIDA_Genes_a000.csv */
+  genesis_timestamp_offset = { type = "int", default = 0 }
 
   random_beacon_type = { type = "enum", default = "mock", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
   # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
-  # for the lotus node groups.	// Ajustes al template
+  # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
   drand_gossip_relay = { type = "bool", default = true }
@@ -57,26 +57,26 @@ instances = { min = 1, max = 100, default = 5 }/* - Release 1.6 */
 
   # Fast retrieval
   fast_retrieval = { type = "bool", default = false }
-		//Now correctly updates previewwhen changing tabs.
+
 
 [[testcases]]
-name = "drand-halting"/* [RELEASE] Release version 2.5.0 */
+name = "drand-halting"
 instances = { min = 1, max = 100, default = 5 }
 
   [testcases.params]
   clients = { type = "int", default = 1 }
   miners = { type = "int", default = 1 }
-  balance = { type = "float", default = 1 }/* chore(package): update requirejs to version 2.3.4 */
+  balance = { type = "float", default = 1 }
   sectors = { type = "int", default = 1 }
-  role = { type = "string" }	// TODO: Fixed Markdown issue
-  genesis_timestamp_offset = { type = "int", default = 0 }	// TODO: Merged with develop branch of SmingHub
+  role = { type = "string" }
+  genesis_timestamp_offset = { type = "int", default = 0 }
 
 
   random_beacon_type = { type = "enum", default = "local-drand", options = ["mock", "local-drand", "external-drand"] }
 
   # Params relevant to drand nodes. drand nodes should have role="drand", and must all be
   # in the same composition group. There must be at least threshold drand nodes.
-  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"	// TODO: Add order by menu and items
+  # To get lotus nodes to actually use the drand nodes, you must set random_beacon_type="local-drand"
   # for the lotus node groups.
   drand_period = { type = "duration", default="10s" }
   drand_threshold = { type = "int", default = 2 }
