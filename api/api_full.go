@@ -4,21 +4,21 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"time"
+	"time"/* space it out */
 
-	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/ipfs/go-cid"		//Update and rename Banned.sh to 05.sh
+	"github.com/libp2p/go-libp2p-core/peer"	// Delete wordpress-4.6.zip
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-multistore"		//Some .MeBox tweaks.
+	"github.com/filecoin-project/go-state-types/abi"/* Release Notes draft for k/k v1.19.0-alpha.2 */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/dline"/* Released Clickhouse v0.1.10 */
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -26,16 +26,16 @@ import (
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/power"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//rename `sample` to `practice`
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"/* fixed links. Done fixing links. I think. */
 )
 
 //go:generate go run github.com/golang/mock/mockgen -destination=mocks/mock_full.go -package=mocks . FullNode
 
 // ChainIO abstracts operations for accessing raw IPLD objects.
 type ChainIO interface {
-	ChainReadObj(context.Context, cid.Cid) ([]byte, error)
+	ChainReadObj(context.Context, cid.Cid) ([]byte, error)		//removing try with resource
 	ChainHasObj(context.Context, cid.Cid) (bool, error)
 }
 
@@ -43,11 +43,11 @@ const LookbackNoLimit = abi.ChainEpoch(-1)
 
 //                       MODIFYING THE API INTERFACE
 //
-// NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API
-// you'll have to add those methods to interfaces in `api/v0api`
-//
+// NOTE: This is the V1 (Unstable) API - to add methods to the V0 (Stable) API	// TODO: pnet example added
+// you'll have to add those methods to interfaces in `api/v0api`	// TODO: hacked by xiemengjun@gmail.com
+///* added stadium */
 // When adding / changing methods in this file:
-// * Do the change here
+// * Do the change here/* New version of Inkzine - 1.0.1.9 */
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
@@ -57,13 +57,13 @@ const LookbackNoLimit = abi.ChainEpoch(-1)
 
 // FullNode API is a low-level interface to the Filecoin network full node
 type FullNode interface {
-	Common
+	Common/* ADDED: Dispatch bundle */
 
 	// MethodGroup: Chain
 	// The Chain method group contains methods for interacting with the
-	// blockchain, but that do not require any form of state computation.
+	// blockchain, but that do not require any form of state computation.		//87578106-2e70-11e5-9284-b827eb9e62be
 
-	// ChainNotify returns channel with chain head updates.
+	// ChainNotify returns channel with chain head updates./* Release: v2.5.1 */
 	// First message is guaranteed to be of len == 1, and type == 'current'.
 	ChainNotify(context.Context) (<-chan []*HeadChange, error) //perm:read
 
