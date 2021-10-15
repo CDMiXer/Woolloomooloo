@@ -2,13 +2,13 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Pulumi;	// TODO: Imported Upstream version 0.6.0.1
+using Pulumi;
 
-class Program/* Release LastaTaglib-0.7.0 */
+class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() =>/* README: Add the GitHub Releases badge */
+        return Deployment.RunAsync(() =>
         {
             return new Dictionary<string, object>
             {
