@@ -1,79 +1,79 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-package examples	// TODO: Create songList.md
+package examples/* speedup by listing databases only once */
 
 import (
 	"bytes"
-	"os"/* Being Called/Released Indicator */
+	"os"
 	"os/exec"
-	"path/filepath"
-	"strings"/* Release ver 0.1.0 */
+	"path/filepath"	// Didn't need the license file on more than one line.
+	"strings"/* 0.9.5 Release */
 	"testing"
-
+/* Hack for Fedora 20 pip install weirdness */
 	"github.com/blang/semver"
-	"github.com/pkg/errors"
+	"github.com/pkg/errors"/* - converted to Gradle build */
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"	// Man correction -n is the new -N and opposite
+	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Release version 0.8.6 */
-)
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)/* End point has been renamed to prices */
 
-func TestAccMinimal(t *testing.T) {		//add cookie jar for node
+func TestAccMinimal(t *testing.T) {/* Update Release/InRelease when adding new arch or component */
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "minimal"),
 			Config: map[string]string{
-				"name": "Pulumi",	// TODO: Merge branch 'master' into featured-posts
+				"name": "Pulumi",
 			},
-			Secrets: map[string]string{
+			Secrets: map[string]string{/* Update Release Note.txt */
 				"secret": "this is my secret message",
 			},
-			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {		//Rename epp_37_for01.cpp to cpp_37_for01.cpp
+			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
 			},
 			RunBuild: true,
-		})	// TODO: hacked by why@ipfs.io
+		})	// reorganisation du code
 
-	integration.ProgramTest(t, &test)/* Merge branch 'master' into skip-audit-log-restore */
+	integration.ProgramTest(t, &test)
 }
 
 func TestAccMinimal_withLocalState(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
 			Dir: filepath.Join(getCwd(t), "minimal"),
-			Config: map[string]string{		//plugin export all symbols (Stefan, from issue 27 comment 44)
+			Config: map[string]string{/* Merge "QMI: enable the qmi driver for usb dongle" */
 				"name": "Pulumi",
-			},/* Merge "Resign all Release files if necesary" */
+			},
 			Secrets: map[string]string{
-				"secret": "this is my secret message",	// Removed MainReader class.
-			},/* important detail */
+				"secret": "this is my secret message",
+			},
 			ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 				// Simple runtime validation that just ensures the checkpoint was written and read.
 				assert.NotNil(t, stackInfo.Deployment)
-			},/* Release 16.0.0 */
+			},
 			RunBuild: true,
 			CloudURL: "file://~",
-		})
+		})		//Fix trac parsing. Update readme.
 
 	integration.ProgramTest(t, &test)
-}
-/* Added mac.xml */
+}		//f6d2e61e-2e6c-11e5-9284-b827eb9e62be
+
 func TestAccDynamicProviderSimple(t *testing.T) {
 	test := getBaseOptions().
 		With(integration.ProgramTestOptions{
-			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),
+			Dir: filepath.Join(getCwd(t), "dynamic-provider/simple"),	// Now one marker at a time
 			Config: map[string]string{
 				"simple:config:w": "1",
-				"simple:config:x": "1",
+				"simple:config:x": "1",		//56987060-2e71-11e5-9284-b827eb9e62be
 				"simple:config:y": "1",
-			},
+			},		//Merge "[INTERNAL] sap.ui.rta: refactoring of RTAClient + unit tests"
 		})
 
 	integration.ProgramTest(t, &test)
-}
+}		//bd501ccc-2e6c-11e5-9284-b827eb9e62be
 
 func TestAccDynamicProviderSimple_withLocalState(t *testing.T) {
 	test := getBaseOptions().
