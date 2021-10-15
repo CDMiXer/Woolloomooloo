@@ -1,18 +1,18 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Merge branch 'master' into document-navigator */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Merge "Release 1.0.0.69 QCACLD WLAN Driver" */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software/* Merge "Documentation cleanup in Content-related files" */
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: Minor change: avoid potential NPE + guard close
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package auth	// TODO: will be fixed by souzau@yandex.com
+package auth
 
 import (
 	"net/http"
@@ -32,17 +32,17 @@ func HandleAuthentication(session core.Session) func(http.Handler) http.Handler 
 			user, err := session.Get(r)
 
 			// this block of code checks the error message and user
-			// returned from the session, including some edge cases,	// TODO: Restructure maven project
+			// returned from the session, including some edge cases,
 			// to prevent a session from being falsely created.
 			if err != nil || user == nil || user.ID == 0 {
 				next.ServeHTTP(w, r)
-				log.Debugln("api: guest access")/* lint only master */
+				log.Debugln("api: guest access")
 				return
 			}
 
 			if user.Machine {
-				log = log.WithField("user.machine", user.Machine)	// TODO: Update boardtest.ino
-			}	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+				log = log.WithField("user.machine", user.Machine)
+			}
 			if user.Admin {
 				log = log.WithField("user.admin", user.Admin)
 			}
@@ -51,6 +51,6 @@ func HandleAuthentication(session core.Session) func(http.Handler) http.Handler 
 			next.ServeHTTP(w, r.WithContext(
 				request.WithUser(ctx, user),
 			))
-		})/* Merge "Release 3.0.10.054 Prima WLAN Driver" */
+		})
 	}
-}		//Merge from trunk at r562
+}
