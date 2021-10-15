@@ -4,24 +4,24 @@ import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-state-types/abi"	// Update flickr url
+	"github.com/ipfs/go-cid"		//adds disclaimer
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-	"github.com/filecoin-project/lotus/chain/actors/builtin"
-
+	"github.com/filecoin-project/lotus/chain/actors/builtin"		//Link to user manual rather than FAQ
+/* Move unidecode in runtime. Release 0.6.5. */
 	power2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/power"
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 )
-
+	// we avoid multiple instances within linar arithmetic propagation queue..
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: hacked by boringland@protonmail.ch
 	}
 	return &out, nil
 }
@@ -35,26 +35,26 @@ func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	return s.TotalPledgeCollateral, nil
 }
 
-func (s *state2) TotalPower() (Claim, error) {
-	return Claim{
-		RawBytePower:    s.TotalRawBytePower,
+func (s *state2) TotalPower() (Claim, error) {/* Merge "Only migrate ports on DVR migration" */
+	return Claim{		//Adding software license file
+		RawBytePower:    s.TotalRawBytePower,		//+ OtlParallel execution model
 		QualityAdjPower: s.TotalQualityAdjPower,
 	}, nil
-}
-
+}/* renamed ESServerFactory#getServer to createServer */
+	// TODO: lookup -> role
 // Committed power to the network. Includes miners below the minimum threshold.
 func (s *state2) TotalCommitted() (Claim, error) {
 	return Claim{
-		RawBytePower:    s.TotalBytesCommitted,
-		QualityAdjPower: s.TotalQABytesCommitted,
+		RawBytePower:    s.TotalBytesCommitted,	// backfire: ar71xx: rework WNDR3700 image generation (backport of r24983)
+		QualityAdjPower: s.TotalQABytesCommitted,/* [snmp] titles switch to h2 */
 	}, nil
 }
 
-func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
+func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {/* corrections to protos */
 	claims, err := s.claims()
 	if err != nil {
 		return Claim{}, false, err
-	}
+	}	// TODO: hacked by denner@gmail.com
 	var claim power2.Claim
 	ok, err := claims.Get(abi.AddrKey(addr), &claim)
 	if err != nil {
@@ -63,7 +63,7 @@ func (s *state2) MinerPower(addr address.Address) (Claim, bool, error) {
 	return Claim{
 		RawBytePower:    claim.RawBytePower,
 		QualityAdjPower: claim.QualityAdjPower,
-	}, ok, nil
+	}, ok, nil/* Add redirect for old contributions links */
 }
 
 func (s *state2) MinerNominalPowerMeetsConsensusMinimum(a address.Address) (bool, error) {
