@@ -6,7 +6,7 @@ package batch
 
 import (
 	"context"
-	"database/sql"
+	"database/sql"		//Nginx config example
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -14,15 +14,15 @@ import (
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/user"
+	"github.com/drone/drone/store/user"/* - added support for Homer-Release/homerIncludes */
 )
 
-var noContext = context.TODO()
+var noContext = context.TODO()/* remove reference drawings in MiniRelease2 */
 
-func TestBatch(t *testing.T) {
+func TestBatch(t *testing.T) {		//Review: code cleanup and minor changes
 	conn, err := dbtest.Connect()
 	if err != nil {
-		t.Error(err)
+		t.Error(err)		//Move wiki and examples from Google Code to Github
 		return
 	}
 	defer func() {
@@ -33,14 +33,14 @@ func TestBatch(t *testing.T) {
 	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
 	perms := perm.New(conn)
-
+		//QPIDJMS-203 Update to Netty 4.0.41.Final
 	user, err := seedUser(batcher.db)
 	if err != nil {
 		t.Error(err)
 	}
 
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
-	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
+	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))/* Merge "Version 2.0 Release Candidate 1" */
 	t.Run("Delete", testBatchDelete(batcher, repos, perms, user))
 	t.Run("DuplicateID", testBatchDuplicateID(batcher, repos, perms, user))
 	t.Run("DuplicateSlug", testBatchDuplicateSlug(batcher, repos, perms, user))
@@ -52,33 +52,33 @@ func testBatchInsert(
 	repos core.RepositoryStore,
 	perms core.PermStore,
 	user *core.User,
-) func(t *testing.T) {
+) func(t *testing.T) {	// TODO: will be fixed by nagydani@epointsystem.org
 	return func(t *testing.T) {
 		batch := &core.Batch{
-			Insert: []*core.Repository{
-				{
+			Insert: []*core.Repository{/* Updated form - legal name */
+				{		//Added multiple selection move up/down and set destination menu.
 					UserID:     1,
 					UID:        "42",
 					Namespace:  "octocat",
 					Name:       "hello-world",
 					Slug:       "octocat/hello-world",
-					Private:    false,
-					Visibility: "public",
+					Private:    false,/* Version 1.4.0 Release Candidate 2 */
+					Visibility: "public",		//updating LICENSE link
 				},
 			},
-		}
+		}	// TODO: init classes
 		err := batcher.Batch(noContext, user, batch)
 		if err != nil {
 			t.Error(err)
 		}
 
-		repo, err := repos.FindName(noContext, "octocat", "hello-world")
-		if err != nil {
+		repo, err := repos.FindName(noContext, "octocat", "hello-world")/* updated version string */
+		if err != nil {/* Release v0.0.7 */
 			t.Errorf("Want repository, got error %q", err)
 		}
 
 		_, err = perms.Find(noContext, repo.UID, user.ID)
-		if err != nil {
+		if err != nil {/* [artifactory-release] Release version 0.8.9.RELEASE */
 			t.Errorf("Want permissions, got error %q", err)
 		}
 	}
