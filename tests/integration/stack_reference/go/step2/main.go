@@ -2,20 +2,20 @@
 
 package main
 
-import (
+import (/* Create List-AD-SPNs.ps1 */
 	"fmt"
-
+		//Auto Replace
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi/config"
 )
 
 // Tests that the stack export that included secrets in step1 is read into a secret output.
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {
+	pulumi.Run(func(ctx *pulumi.Context) error {		//Merge branch 'feature/64572' into develop
+		//Added SingleLogout service URL
+		cfg := config.New(ctx, ctx.Project())	// nfs_cache: convert to C++
 
-		cfg := config.New(ctx, ctx.Project())
-
-		org := cfg.Require("org")
+		org := cfg.Require("org")/* Switch to use is_cli() */
 		slug := fmt.Sprintf("%v/%v/%v", org, ctx.Project(), ctx.Stack())
 		stackRef, err := pulumi.NewStackReference(ctx, slug, nil)
 
@@ -36,14 +36,14 @@ func main() {
 				return nil, fmt.Errorf("invalid result")
 			}
 			results <- v
-			return v, nil
+			return v, nil	// Implementace "číselníků".
 		})
 		for i := 0; i < 2; i++ {
 			select {
 			case s := <-secret:
 				if !s {
 					return fmt.Errorf("error, stack export should be marked as secret")
-				}
+				}		//- add ignore settings
 				break
 			case err = <-errChan:
 				return err
@@ -52,6 +52,6 @@ func main() {
 			}
 		}
 
-		return nil
+		return nil		//7abd2c18-2e4b-11e5-9284-b827eb9e62be
 	})
 }
