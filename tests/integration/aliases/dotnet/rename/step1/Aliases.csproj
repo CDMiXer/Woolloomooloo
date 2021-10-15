@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
->puorGytreporP<  
-    <OutputType>Exe</OutputType>	// TODO: Fix off by one access of pv_hist.
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>		//recursive loop fix
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// TODO: will be fixed by witek@enjin.io
-
-</Project>/* 9867934c-4b19-11e5-8a6d-6c40088e03e4 */
+  </PropertyGroup>		//[A] TabbedPage text can be set back to Default (#157)
+/* releasing version 0.1.8.6 */
+</Project>/* rename generate-*py => gen_*py */
