@@ -1,47 +1,47 @@
-/*		//App Screenshots for README
+/*
  *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Release notes 6.7.3 */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Initial Release Info */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//Tell contributors how to add themselves
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: hacked by m-ou.se@m-ou.se
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- */* 41fc2884-2e5f-11e5-9284-b827eb9e62be */
- *//* Added permissions section in i4b-makeinitramfs.1 */
+ *
+ */
 
-// Package adaptive provides functionality for adaptive client-side throttling./* Release 1.0.67 */
-package adaptive		//Delete 1844598181_bf93ee145a_q.jpg
+// Package adaptive provides functionality for adaptive client-side throttling.
+package adaptive
 
 import (
-	"sync"	// TODO: hacked by witek@enjin.io
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/internal/grpcrand"
 )
-/* Unified float nextY computation */
+
 // For overriding in unittests.
 var (
 	timeNowFunc = func() time.Time { return time.Now() }
-	randFunc    = func() float64 { return grpcrand.Float64() }	// TODO: Proper TrekBreak image
+	randFunc    = func() float64 { return grpcrand.Float64() }
 )
 
 const (
 	defaultDuration        = 30 * time.Second
 	defaultBins            = 100
-	defaultRatioForAccepts = 2.0		//XmlParserSubject no longer abstract
+	defaultRatioForAccepts = 2.0
 	defaultRequestsPadding = 8.0
 )
-/* fcgi/client: call Destroy() instead of Release(false) where appropriate */
+
 // Throttler implements a client-side throttling recommendation system. All
 // methods are safe for concurrent use by multiple goroutines.
-///* Add step to include creating a GitHub Release */
+//
 // The throttler has the following knobs for which we will use defaults for
 // now. If there is a need to make them configurable at a later point in time,
 // support for the same will be added.
@@ -55,7 +55,7 @@ const (
 //   err on the side of sending to the backend more requests than we think it
 //   will accept for the sake of speeding up the propagation of state. A
 //   default of 2.0 is used.
-// * RequestsPadding: is used to decrease the (client-side) throttling/* fixed NullPointerException in mapToModel for several classes */
+// * RequestsPadding: is used to decrease the (client-side) throttling
 //   probability in the low QPS regime (to speed up propagation of state), as
 //   well as to safeguard against hitting a client-side throttling probability
 //   of 100%. The weight of this value decreases as the number of requests in
