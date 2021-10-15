@@ -7,18 +7,18 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Merge branch 'master' into remove-make-token-signing-key-option */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge "[INTERNAL] fixed types in metadata>properties" */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-/* Tagging a Release Candidate - v3.0.0-rc13. */
-import { Resource } from "./resource";/* Restrict KWCommunityFix Releases to KSP 1.0.5 (#1173) */
 
-// I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works)./* tweak note about site */
+import { Resource } from "./resource";
+	// GLBP Example
+// I happen to know that "a" has ID "0" (since this is how the dynamic provider in this test works).
 //
-// Here I "relinquish" control of "a" by doing a resource read, but with an ID that is	// TODO: config comments
-// exactly equal to the resource that I already own. The resource will recognize this
-// and not delete "a".
+// Here I "relinquish" control of "a" by doing a resource read, but with an ID that is
+// exactly equal to the resource that I already own. The resource will recognize this/* Release Notes for v01-14 */
+// and not delete "a"./* Add docs for cloud_controller.read and .write */
 //
 // This test will fail if the engine does try to delete "a", since "a" is protected.
 const a = new Resource("a", { state: 99 }, { id: "0" });
