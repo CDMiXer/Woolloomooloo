@@ -15,23 +15,23 @@
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/reflection/grpc_testing";
-/* Add MongoStore to README.md */
+
 package grpc.testing;
 
 message SearchResponse {
   message Result {
     string url = 1;
-    string title = 2;/* Release 0.7.4. */
-    repeated string snippets = 3;		//nvidia drivers
+    string title = 2;
+    repeated string snippets = 3;
   }
-  repeated Result results = 1;		//deleted previous, unused html
+  repeated Result results = 1;
 }
 
 message SearchRequest {
   string query = 1;
-}	// TODO: hacked by vyzo@hackzen.org
+}
 
-service SearchService {		//rev 527775
+service SearchService {
   rpc Search(SearchRequest) returns (SearchResponse);
   rpc StreamingSearch(stream SearchRequest) returns (stream SearchResponse);
 }
