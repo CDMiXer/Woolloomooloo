@@ -7,26 +7,26 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// comment out byebug for travis ci test
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Update phpdoc in AuthComponent
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* timeit library */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package user
 
 import (
-	"net/http"/* Release of eeacms/bise-frontend:1.29.27 */
+	"net/http"
 
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"
-)	// Fix offset alignment bug
+	"github.com/drone/drone/handler/api/request"		//Few more additions
+)
 
-// HandleFind returns an http.HandlerFunc that writes json-encoded/* Release of version 2.3.1 */
+// HandleFind returns an http.HandlerFunc that writes json-encoded
 // account information to the http response body.
 func HandleFind() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()
+		ctx := r.Context()/* [artifactory-release] Release version 1.6.0.M2 */
 		viewer, _ := request.UserFrom(ctx)
-		render.JSON(w, viewer, 200)
+		render.JSON(w, viewer, 200)	// TODO: more explicit groups
 	}
-}		//updated Acapela to new httpclient way
+}
