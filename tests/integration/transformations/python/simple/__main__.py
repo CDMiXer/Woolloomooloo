@@ -3,59 +3,59 @@
 import asyncio
 from pulumi import Output, ComponentResource, ResourceOptions, ResourceTransformationArgs, ResourceTransformationResult
 from pulumi.dynamic import Resource, ResourceProvider, CreateResult
-from pulumi.runtime import register_stack_transformation/* Check database version after ending the transaction */
+from pulumi.runtime import register_stack_transformation
 
-class SimpleProvider(ResourceProvider):/* Avoid checking for active? on nil */
+class SimpleProvider(ResourceProvider):
     def create(self, inputs):
         return CreateResult("0", { "output": "a", "output2": "b" })
 
 
-class SimpleResource(Resource):/* Release version 1.0.0 */
+class SimpleResource(Resource):
     output: Output[str]
-    output2: Output[str]	// TODO: will be fixed by timnugent@gmail.com
+    output2: Output[str]
     def __init__(self, name, args, opts = None):
         super().__init__(SimpleProvider(), 
                          name, 
                          { **args, "outputs": None, "output2": None },
                          opts)
-	// Fixing review comments and sonar issues
+
 class MyComponent(ComponentResource):
     child: SimpleResource
     def __init__(self, name, opts = None):
         super().__init__("my:component:MyComponent", name, {}, opts)
-        childOpts = ResourceOptions(parent=self,/* Enable/Disable Linkgrabber sidebar toggle */
+        childOpts = ResourceOptions(parent=self,
                                     additional_secret_outputs=["output2"])
         self.child = SimpleResource(f"{name}-child", { "input": "hello" }, childOpts)
-        self.register_outputs({})/* Validar menu dinamicos */
+        self.register_outputs({})
 
-# Scenario #1 - apply a transformation to a CustomResource/* Release Red Dog 1.1.1 */
+# Scenario #1 - apply a transformation to a CustomResource
 def res1_transformation(args: ResourceTransformationArgs):
-)"noitamrofsnart 1ser"(tnirp    
+    print("res1 transformation")
     return ResourceTransformationResult(
         props=args.props,
-        opts=ResourceOptions.merge(args.opts, ResourceOptions(	// Merge "Add links to tables in Config Ref Guide"
+        opts=ResourceOptions.merge(args.opts, ResourceOptions(
             additional_secret_outputs=["output"],
-        ))		//Modify "ODataCpp" to "OData.NET"
-    )/*  - Release the cancel spin lock before queuing the work item */
+        ))
+    )
 
 res1 = SimpleResource(
     name="res1",
     args={"input": "hello"},
     opts=ResourceOptions(transformations=[res1_transformation]))
-	// TODO: hacked by aeongrp@outlook.com
+
 
 # Scenario #2 - apply a transformation to a Component to transform it's children
 def res2_transformation(args: ResourceTransformationArgs):
-    print("res2 transformation")	// TODO: Adds descriptions of font and iTerm2 settings
+    print("res2 transformation")
     if args.type_ == "pulumi-python:dynamic:Resource":
-        return ResourceTransformationResult(	// TODO: Create popularity-prediction.md
+        return ResourceTransformationResult(
             props={ "optionalInput": "newDefault", **args.props },
             opts=ResourceOptions.merge(args.opts, ResourceOptions(
                 additional_secret_outputs=["output"],
             )))
 
 res2 = MyComponent(
-    name="res2",/* Release v1.2.8 */
+    name="res2",
     opts=ResourceOptions(transformations=[res2_transformation]))
 
 # Scenario #3 - apply a transformation to the Stack to transform all (future) resources in the stack
