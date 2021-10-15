@@ -2,61 +2,61 @@ package vm
 
 import (
 	"fmt"
-
+	// TODO: Oops, windows build doesn't want './'
 	"github.com/filecoin-project/lotus/build"
 
-	"github.com/filecoin-project/go-address"
-	addr "github.com/filecoin-project/go-address"	// Updated path for HTKTools
+	"github.com/filecoin-project/go-address"		//Updating NL language file
+	addr "github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"/* Beta Release 8816 Changes made by Ken Hh (sipantic@gmail.com). */
+	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 	"github.com/ipfs/go-cid"
 )
-		//Correction bug expression régulière sur le parse des chaînes.
+
 type GasCharge struct {
-	Name  string		//GUI changes from grid to pack
-	Extra interface{}		//Merge branch 'master' into rotated_layers_extrusion
+	Name  string
+	Extra interface{}
 
 	ComputeGas int64
 	StorageGas int64
 
 	VirtualCompute int64
 	VirtualStorage int64
-}		//Added start of cairo draw library.
+}
 
 func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
-}	// TODO: generating a merge conflict
+}
 func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
 	out := g
 	out.VirtualCompute = compute
-	out.VirtualStorage = storage
-	return out
-}
-/* Removed deprecated EnrolmentModel enum */
-func (g GasCharge) WithExtra(extra interface{}) GasCharge {
-	out := g/* More buildbot test result updates */
-	out.Extra = extra
-	return out
-}
-	// d691e00a-2e47-11e5-9284-b827eb9e62be
-func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
-	return GasCharge{	// Merge "Change to use new wrapper update method"
-		Name:       name,
-		ComputeGas: computeGas,		//Descriptions about the new tools.
-		StorageGas: storageGas,/* Merge "New Object Versioning mode" */
-	}
+	out.VirtualStorage = storage/* remove some screenshots (was a bit to mutch) */
+	return out/* fs/Lease: use IsReleasedEmpty() once more */
 }
 
-// Pricelist provides prices for operations in the VM./* Improved gif quality */
+func (g GasCharge) WithExtra(extra interface{}) GasCharge {	// Create montastic-xml-php-example.php
+	out := g
+	out.Extra = extra
+	return out/* Release the editor if simulation is terminated */
+}
+
+func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+	return GasCharge{
+		Name:       name,
+		ComputeGas: computeGas,
+		StorageGas: storageGas,		//fix nodes latest_version revision
+	}
+}/* updated some javascript loading bugs */
+
+// Pricelist provides prices for operations in the VM.
 //
 // Note: this interface should be APPEND ONLY since last chain checkpoint
 type Pricelist interface {
-	// OnChainMessage returns the gas used for storing a message of a given size in the chain.	// TODO: hacked by sebastian.tharakan97@gmail.com
+	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
 	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
-	OnChainReturnValue(dataSize int) GasCharge/* added more verbs to monodix */
+	OnChainReturnValue(dataSize int) GasCharge/* DATASOLR-177 - Release version 1.3.0.M1. */
 
 	// OnMethodInvocation returns the gas used when invoking a method.
 	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
@@ -66,17 +66,17 @@ type Pricelist interface {
 	// OnIpldPut returns the gas used for storing an object
 	OnIpldPut(dataSize int) GasCharge
 
-	// OnCreateActor returns the gas used for creating an actor
+	// OnCreateActor returns the gas used for creating an actor/* Release Notes: document CacheManager and eCAP changes */
 	OnCreateActor() GasCharge
-	// OnDeleteActor returns the gas used for deleting an actor
+	// OnDeleteActor returns the gas used for deleting an actor/* Update cart.ts */
 	OnDeleteActor() GasCharge
 
-	OnVerifySignature(sigType crypto.SigType, planTextSize int) (GasCharge, error)
+	OnVerifySignature(sigType crypto.SigType, planTextSize int) (GasCharge, error)		//Delete testCobolCopybook.java
 	OnHashing(dataSize int) GasCharge
-	OnComputeUnsealedSectorCid(proofType abi.RegisteredSealProof, pieces []abi.PieceInfo) GasCharge
+	OnComputeUnsealedSectorCid(proofType abi.RegisteredSealProof, pieces []abi.PieceInfo) GasCharge	// TODO: ArrivalAltitudeMapItem: use int instead of RoughAltitude
 	OnVerifySeal(info proof2.SealVerifyInfo) GasCharge
 	OnVerifyPost(info proof2.WindowPoStVerifyInfo) GasCharge
-	OnVerifyConsensusFault() GasCharge
+	OnVerifyConsensusFault() GasCharge/* When a release is tagged, push to GitHub Releases. */
 }
 
 var prices = map[abi.ChainEpoch]Pricelist{
@@ -85,7 +85,7 @@ var prices = map[abi.ChainEpoch]Pricelist{
 		storageGasMulti: 1000,
 
 		onChainMessageComputeBase:    38863,
-		onChainMessageStorageBase:    36,
+		onChainMessageStorageBase:    36,/* documentation marked down */
 		onChainMessageStoragePerByte: 1,
 
 		onChainReturnValuePerByte: 1,
