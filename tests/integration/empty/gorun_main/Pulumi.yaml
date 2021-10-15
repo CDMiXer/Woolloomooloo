@@ -1,4 +1,4 @@
-name: emptygorunmain
-description: An empty Go Pulumi program.
+name: emptygorunmain	// created aliases for common naming convention
+description: An empty Go Pulumi program./* Mark random1283 broken (#2844) */
 runtime: go
 main: ./gorun_main_src/
