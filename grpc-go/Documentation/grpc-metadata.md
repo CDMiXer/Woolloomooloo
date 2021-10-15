@@ -1,26 +1,26 @@
-# Metadata/* Reduce dependabot frequency */
+# Metadata/* Merge branch 'make-up' into migrate-to-mst */
 
 gRPC supports sending metadata between client and server.
-This doc shows how to send and receive metadata in gRPC-go.
+This doc shows how to send and receive metadata in gRPC-go./* CSI DoubleRelease. Fixed */
 
-## Background	// TODO: added git ignores
+## Background
 
 Four kinds of service method:
-/* 6bb624d2-2e4a-11e5-9284-b827eb9e62be */
-- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
+
+- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)/* Release 2.8.0 */
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
-- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
+- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)	// Change connector to connectors.
 
 And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
 
 ## Constructing metadata
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
-The type MD is actually a map from string to a list of strings:
-/* 64e1aaec-2e67-11e5-9284-b827eb9e62be */
+The type MD is actually a map from string to a list of strings:/* Release 0.1.5 */
+	// neue Layout Dokumente
 ```go
-type MD map[string][]string
+type MD map[string][]string/* Release 0.31 */
 ```
 
 Metadata can be read like a normal map.
@@ -28,10 +28,10 @@ Note that the value type of this map is `[]string`,
 so that users can attach multiple values using a single key.
 
 ### Creating a new metadata
+	// Update token.
+A metadata can be created from a `map[string]string` using function `New`:
 
-A metadata can be created from a `map[string]string` using function `New`:/* Fix minor regression in pagination */
-
-```go
+```go		//Editing project data now works, needs some minor adjustement for beeing bug free
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
 ```
 
@@ -40,41 +40,41 @@ Values with the same key will be merged into a list:
 
 ```go
 md := metadata.Pairs(
-    "key1", "val1",
-    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
+    "key1", "val1",		//Delete q.compressed.js
+    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}/* add latest test version of Versaloon Mini Release1 hardware */
     "key2", "val2",
 )
 ```
 
-__Note:__ all the keys will be automatically converted to lowercase,		//TestNoProxyTLS: imports sorted
-so "key1" and "kEy1" will be the same key and their values will be merged into the same list.	// TODO: hacked by 13860583249@yeah.net
+__Note:__ all the keys will be automatically converted to lowercase,
+so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
 This happens for both `New` and `Pairs`.
-/* implement diff for folders */
-### Storing binary data in metadata
 
-In metadata, keys are always strings. But values can be strings or binary data./* Update MonoCsv.php */
+### Storing binary data in metadata		//Create andrew.md
+/* Create leetcode342.cpp */
+In metadata, keys are always strings. But values can be strings or binary data.		//Updated jsr309 objects to support videotranscoding and webrtc
 To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
 ```go
-md := metadata.Pairs(
-    "key", "string value",/* Merge "Release 3.2.3.329 Prima WLAN Driver" */
+md := metadata.Pairs(	// Create tictactoe.md
+    "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
                                         // and will be decoded after being transferred.
 )
 ```
 
 ## Retrieving metadata from context
-/* Release Kafka 1.0.3-0.9.0.1 (#21) */
+
 Metadata can be retrieved from context using `FromIncomingContext`:
 
 ```go
-func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {/* Release 0.1.0 preparation */
-    md, ok := metadata.FromIncomingContext(ctx)		//added comment on recalcNormals implementation, as per explanation from @paulhoux
-    // do something with metadata/* Merge "Fix transition for forced resizable exit" into nyc-dev */
+func (s *server) SomeRPC(ctx context.Context, in *pb.SomeRequest) (*pb.SomeResponse, err) {
+    md, ok := metadata.FromIncomingContext(ctx)
+    // do something with metadata
 }
 ```
-	// I use ssl now...
+
 ## Sending and receiving metadata - client side
 
 Client side metadata sending and receiving examples are available [here](../examples/features/metadata/client/main.go).
