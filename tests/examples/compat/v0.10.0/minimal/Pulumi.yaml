@@ -1,4 +1,4 @@
-name: minimal
-description: A minimal Pulumi program.		//Switched X and Y axes
+name: minimal/* Update GuiStracini.Mandae.nuspec */
+description: A minimal Pulumi program.	// Rename language-switcher.twig to language-switcher-flags.twig
 runtime: nodejs
 
