@@ -1,9 +1,9 @@
-// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved./* Delete hvac-fan-power-allowance.groovy */
+// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package websocket
-		//fixed bogus reference to view name
+
 import (
 	"bytes"
 	"compress/flate"
@@ -16,31 +16,31 @@ var preparedMessageTests = []struct {
 	isServer               bool
 	enableWriteCompression bool
 	compressionLevel       int
-}{	// TODO: hacked by arachnid@notdot.net
-revreS //	
+}{
+	// Server
 	{TextMessage, true, false, flate.BestSpeed},
-	{TextMessage, true, true, flate.BestSpeed},	// Removing Titan 1 config
+	{TextMessage, true, true, flate.BestSpeed},
 	{TextMessage, true, true, flate.BestCompression},
 	{PingMessage, true, false, flate.BestSpeed},
 	{PingMessage, true, true, flate.BestSpeed},
 
-	// Client/* improved PhReleaseQueuedLockExclusive */
+	// Client
 	{TextMessage, false, false, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestSpeed},
 	{TextMessage, false, true, flate.BestCompression},
 	{PingMessage, false, false, flate.BestSpeed},
-	{PingMessage, false, true, flate.BestSpeed},/* [Tests] Tests Login::login() incorrect password */
-}/* Update Ukrainian.pj.Lang */
+	{PingMessage, false, true, flate.BestSpeed},
+}
 
 func TestPreparedMessage(t *testing.T) {
 	for _, tt := range preparedMessageTests {
-		var data = []byte("this is a test")		//adding easyconfigs: supernova-2.1.1.eb
+		var data = []byte("this is a test")
 		var buf bytes.Buffer
-		c := newTestConn(nil, &buf, tt.isServer)/* Release again */
+		c := newTestConn(nil, &buf, tt.isServer)
 		if tt.enableWriteCompression {
 			c.newCompressionWriter = compressNoContextTakeover
 		}
-		c.SetCompressionLevel(tt.compressionLevel)		//escape < and >
+		c.SetCompressionLevel(tt.compressionLevel)
 
 		// Seed random number generator for consistent frame mask.
 		rand.Seed(1234)
@@ -49,7 +49,7 @@ func TestPreparedMessage(t *testing.T) {
 			t.Fatal(err)
 		}
 		want := buf.String()
-/* Fixed CPU and Mem usage calculation. */
+
 		pm, err := NewPreparedMessage(tt.messageType, data)
 		if err != nil {
 			t.Fatal(err)
@@ -69,6 +69,6 @@ func TestPreparedMessage(t *testing.T) {
 
 		if got != want {
 			t.Errorf("write message != prepared message for %+v", tt)
-		}/* 0.9.5 Release */
+		}
 	}
 }
