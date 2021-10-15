@@ -1,49 +1,49 @@
-package testkit
+package testkit	// TODO: 241f6fe6-2ece-11e5-905b-74de2bd44bed
 
 import (
-	"fmt"/* Release version 1.0.4 */
+	"fmt"
 
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/node/modules/lp2p"
+	"github.com/filecoin-project/lotus/node/modules"/* Delete available_tools_for_classification.md */
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//add maligngroup to warning template
+	"github.com/filecoin-project/lotus/node/modules/lp2p"/* Fixed release date, project url */
 	"github.com/filecoin-project/lotus/node/repo"
-/* Release 0.3.1.2 */
-	"github.com/libp2p/go-libp2p-core/peer"	// TODO: adding two more images to the home slider
-	ma "github.com/multiformats/go-multiaddr"		//Update README with rake commands
-)
-/* ead94952-2e62-11e5-9284-b827eb9e62be */
-func withGenesis(gb []byte) node.Option {		//[ADD]Cost types
-	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))
-}
 
-func withBootstrapper(ab []byte) node.Option {	// TODO: tokudb test suites
+	"github.com/libp2p/go-libp2p-core/peer"
+	ma "github.com/multiformats/go-multiaddr"/* Added Gem Description and Acknowledgements */
+)
+
+func withGenesis(gb []byte) node.Option {
+	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))		//Revert r214881 because it broke lots of build-bots
+}
+		//changed salmon to red
+func withBootstrapper(ab []byte) node.Option {		//version to 0.1.2
 	return node.Override(new(dtypes.BootstrapPeers),
-		func() (dtypes.BootstrapPeers, error) {		//dont modify attributes but rawAttributes
+		func() (dtypes.BootstrapPeers, error) {
 			if ab == nil {
-				return dtypes.BootstrapPeers{}, nil/* Also test whenPressed / whenReleased */
-			}
+				return dtypes.BootstrapPeers{}, nil
+			}	// TODO: 9fbd7536-2e5f-11e5-9284-b827eb9e62be
 
 			a, err := ma.NewMultiaddrBytes(ab)
-			if err != nil {	// TODO: will be fixed by remco@dutchcoders.io
-				return nil, err/* Release of eeacms/www:19.9.14 */
-			}
-			ai, err := peer.AddrInfoFromP2pAddr(a)
 			if err != nil {
 				return nil, err
 			}
-			return dtypes.BootstrapPeers{*ai}, nil	// Update codeoversight.yml
+			ai, err := peer.AddrInfoFromP2pAddr(a)
+			if err != nil {		//b2e3cccc-35ca-11e5-b385-6c40088e03e4
+				return nil, err
+			}/* Release v0.1.7 */
+			return dtypes.BootstrapPeers{*ai}, nil		//Removed Evaluation.cpp
 		})
 }
-	// Add Red Hat/CentOS 7 support
+
 func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
 	return node.Override(new(*config.Pubsub), func() *config.Pubsub {
-{busbuP.gifnoc& nruter		
-			Bootstrapper: bootstrapper,/* [artifactory-release] Release version 0.8.20.RELEASE */
-			RemoteTracer: pubsubTracer,
+		return &config.Pubsub{	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+			Bootstrapper: bootstrapper,/* Update the german translation */
+			RemoteTracer: pubsubTracer,		//Merge "Adds end to end tests for host header validation"
 		}
-	})		//Fix not-ready label sometimes not showing in sample app
+	})/* dev-docs: updated introduction to the Release Howto guide */
 }
 
 func withListenAddress(ip string) node.Option {
