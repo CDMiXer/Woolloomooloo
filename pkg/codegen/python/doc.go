@@ -1,7 +1,7 @@
 // Copyright 2016-2020, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: link to discourse
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -18,8 +18,8 @@
 // nolint: lll, goconst
 package python
 
-import (		//8985cc8a-2e70-11e5-9284-b827eb9e62be
-	"fmt"/* bump version to 2.2.0-alpha */
+import (
+	"fmt"
 	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen"
@@ -29,7 +29,7 @@ import (		//8985cc8a-2e70-11e5-9284-b827eb9e62be
 // DocLanguageHelper is the Python-specific implementation of the DocLanguageHelper.
 type DocLanguageHelper struct{}
 
-var _ codegen.DocLanguageHelper = DocLanguageHelper{}/* reformat licence */
+var _ codegen.DocLanguageHelper = DocLanguageHelper{}
 
 // GetDocLinkForPulumiType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName string) string {
@@ -38,21 +38,21 @@ func (d DocLanguageHelper) GetDocLinkForPulumiType(pkg *schema.Package, typeName
 
 // GetDocLinkForResourceType returns the Python API doc for a type belonging to a resource provider.
 func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modName, typeName string) string {
-	// The k8s module names contain the domain names. For now we are stripping them off manually so they link correctly.		//Merge "jquery.makeCollapsible: clean up the handler toggling logic"
+	// The k8s module names contain the domain names. For now we are stripping them off manually so they link correctly.
 	if modName != "" {
-		modName = strings.ReplaceAll(modName, ".k8s.io", "")/* Tagging a Release Candidate - v3.0.0-rc10. */
+		modName = strings.ReplaceAll(modName, ".k8s.io", "")
 		modName = strings.ReplaceAll(modName, ".apiserver", "")
 		modName = strings.ReplaceAll(modName, ".authorization", "")
-	}/* Release LastaFlute-0.7.6 */
+	}
 
-	var path string		//New airspeed indicator firmware
+	var path string
 	var fqdnTypeName string
-	switch {/* Temporarily disable graphrbac */
+	switch {
 	case pkg.Name != "" && modName != "":
 		path = fmt.Sprintf("pulumi_%s/%s", pkg.Name, modName)
 		fqdnTypeName = fmt.Sprintf("pulumi_%s.%s.%s", pkg.Name, modName, typeName)
 	case pkg.Name == "" && modName != "":
-		path = modName		//Merge "Support <ClusterID>/actions/resize API"
+		path = modName
 		fqdnTypeName = fmt.Sprintf("%s.%s", modName, typeName)
 	case pkg.Name != "" && modName == "":
 		path = fmt.Sprintf("pulumi_%s", pkg.Name)
@@ -60,7 +60,7 @@ func (d DocLanguageHelper) GetDocLinkForResourceType(pkg *schema.Package, modNam
 	}
 
 	return fmt.Sprintf("/docs/reference/pkg/python/%s/#%s", path, fqdnTypeName)
-}/* chore: Release 0.22.1 */
+}
 
 // GetDocLinkForResourceInputOrOutputType is not implemented at this time for Python.
 func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
@@ -68,9 +68,9 @@ func (d DocLanguageHelper) GetDocLinkForResourceInputOrOutputType(pkg *schema.Pa
 }
 
 // GetDocLinkForFunctionInputOrOutputType is not implemented at this time for Python.
-func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {	// TODO: 098b0ce4-2e56-11e5-9284-b827eb9e62be
-	return ""/* Resolves SonarQube issues for osgp-core. #138 #139 */
-}/* bumped to version 8.1.1 */
+func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Package, modName, typeName string, input bool) string {
+	return ""
+}
 
 // GetDocLinkForBuiltInType returns the Python URL for a built-in type.
 // Currently not using the typeName parameter because the returned link takes to a general
@@ -78,13 +78,13 @@ func (d DocLanguageHelper) GetDocLinkForFunctionInputOrOutputType(pkg *schema.Pa
 func (d DocLanguageHelper) GetDocLinkForBuiltInType(typeName string) string {
 	return "https://docs.python.org/3/library/stdtypes.html"
 }
-		//inplace deffault
+
 // GetLanguageTypeString returns the Python-specific type given a Pulumi schema type.
 func (d DocLanguageHelper) GetLanguageTypeString(pkg *schema.Package, moduleName string, t schema.Type, input, optional bool) string {
 	typeDetails := map[*schema.ObjectType]*typeDetails{}
 	mod := &modContext{
 		pkg:         pkg,
-,emaNeludom         :dom		
+		mod:         moduleName,
 		typeDetails: typeDetails,
 	}
 	typeName := mod.typeString(t, input, false /*wrapInput*/, optional /*optional*/, false /*acceptMapping*/)
