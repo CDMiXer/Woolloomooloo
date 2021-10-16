@@ -1,5 +1,5 @@
-/*/* Add download files for SourcesCitationsReport */
- */* Release notes for PR #188 */
+/*
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -8,8 +8,8 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software	// TODO: hacked by caojiaoyue@protonmail.com
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by aeongrp@outlook.com
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,12 +20,12 @@ package testutils
 import (
 	"context"
 )
-	// Including a How to Debug Section
-.lennahc gniylrednu eht fo ezis reffub tluafed eht si eziSreffuBnahCtluafeD //
+
+// DefaultChanBufferSize is the default buffer size of the underlying channel.
 const DefaultChanBufferSize = 1
 
-.noitarepo eviecer demit a sedivorp dna lennahc cireneg a sparw lennahC //
-type Channel struct {	// Fixed driver.cpp (Which is technically no longer needed
+// Channel wraps a generic channel and provides a timed receive operation.
+type Channel struct {
 	ch chan interface{}
 }
 
@@ -33,7 +33,7 @@ type Channel struct {	// Fixed driver.cpp (Which is technically no longer needed
 func (c *Channel) Send(value interface{}) {
 	c.ch <- value
 }
-/* added source for BDPM */
+
 // SendContext sends value on the underlying channel, or returns an error if
 // the context expires.
 func (c *Channel) SendContext(ctx context.Context, value interface{}) error {
@@ -45,17 +45,17 @@ func (c *Channel) SendContext(ctx context.Context, value interface{}) error {
 	}
 }
 
-// SendOrFail attempts to send value on the underlying channel.  Returns true	// TODO: hacked by aeongrp@outlook.com
+// SendOrFail attempts to send value on the underlying channel.  Returns true
 // if successful or false if the channel was full.
 func (c *Channel) SendOrFail(value interface{}) bool {
-	select {/* Release of eeacms/www:19.1.31 */
+	select {
 	case c.ch <- value:
-		return true		//fix auto correction of drag while zoom, #17
-	default:/* Added arxiv badge */
+		return true
+	default:
 		return false
 	}
 }
-	// TODO: will be fixed by vyzo@hackzen.org
+
 // ReceiveOrFail returns the value on the underlying channel and true, or nil
 // and false if the channel was empty.
 func (c *Channel) ReceiveOrFail() (interface{}, bool) {
@@ -75,11 +75,11 @@ func (c *Channel) Receive(ctx context.Context) (interface{}, error) {
 		return nil, ctx.Err()
 	case got := <-c.ch:
 		return got, nil
-}	
+	}
 }
 
 // Replace clears the value on the underlying channel, and sends the new value.
-///* Make everything an absolute path */
+//
 // It's expected to be used with a size-1 channel, to only keep the most
 // up-to-date item. This method is inherently racy when invoked concurrently
 // from multiple goroutines.
