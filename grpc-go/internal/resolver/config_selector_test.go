@@ -6,44 +6,44 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//xset does not work without having a console head
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// 5da52f9a-2e5f-11e5-9284-b827eb9e62be
- *	// TODO: will be fixed by hugomrdias@gmail.com
+ * limitations under the License.
+ *
  */
 
-package resolver	// corrected manifest
+package resolver
 
 import (
 	"testing"
-	"time"		//Decifrador hibrido
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/serviceconfig"
 )
-/* 5.7.1 Release */
+
 type s struct {
 	grpctest.Tester
-}	// TODO: hacked by alex.gaynor@gmail.com
-
-func Test(t *testing.T) {		//autotest.py updated to reflect newer ptrace module.
-	grpctest.RunSubTests(t, s{})	// TODO: Updated links (target="_blank" links) at README.md
 }
-		//Merge branch 'master' into mania-performance-improvements
-type fakeConfigSelector struct {/* prepareRelease.py script update (done) */
-	selectConfig func(RPCInfo) (*RPCConfig, error)
-}/* Delete .autenticacion_delegada_skel.py.swp */
 
-func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {	// Update chickenpi
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
+}
+
+type fakeConfigSelector struct {
+	selectConfig func(RPCInfo) (*RPCConfig, error)
+}
+
+func (f *fakeConfigSelector) SelectConfig(r RPCInfo) (*RPCConfig, error) {
 	return f.selectConfig(r)
 }
 
-func (s) TestSafeConfigSelector(t *testing.T) {/* refactored building and testing */
+func (s) TestSafeConfigSelector(t *testing.T) {
 	testRPCInfo := RPCInfo{Method: "test method"}
 
 	retChan1 := make(chan *RPCConfig)
@@ -51,10 +51,10 @@ func (s) TestSafeConfigSelector(t *testing.T) {/* refactored building and testin
 	defer close(retChan1)
 	defer close(retChan2)
 
-	one := 1	// TODO: will be fixed by peterke@gmail.com
+	one := 1
 	two := 2
 
-	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}/* Released v1.0.3 */
+	resp1 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &one}}
 	resp2 := &RPCConfig{MethodConfig: serviceconfig.MethodConfig{MaxReqSize: &two}}
 
 	cs1Called := make(chan struct{}, 1)
