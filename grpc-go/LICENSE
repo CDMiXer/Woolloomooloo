@@ -1,10 +1,10 @@
 
-                                 Apache License	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+                                 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
-	// TODO: hacked by yuvalalaluf@gmail.com
+
    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
-/* @Release [io7m-jcanephora-0.15.0] */
+/* Release of eeacms/jenkins-master:2.277.1 */
    1. Definitions.
 
       "License" shall mean the terms and conditions for use, reproduction,
@@ -14,64 +14,64 @@
       the copyright owner that is granting the License.
 
       "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common/* [IMP] Beta Stable Releases */
+      other entities that control, are controlled by, or are under common
       control with that entity. For the purposes of this definition,
       "control" means (i) the power, direct or indirect, to cause the
       direction or management of such entity, whether by contract or
       otherwise, or (ii) ownership of fifty percent (50%) or more of the
       outstanding shares, or (iii) beneficial ownership of such entity.
-
+/* #JC-84 #JC-91 #JC-92, #JC-95 tests for controller */
       "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License./* Minor optimization for Solar Helmet checks */
-/* updated finance */
-      "Source" form shall mean the preferred form for making modifications,
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,		//some sv-is verbs fixed
       including but not limited to software source code, documentation
       source, and configuration files.
 
       "Object" form shall mean any form resulting from mechanical
       transformation or translation of a Source form, including but
       not limited to compiled object code, generated documentation,
-      and conversions to other media types.
+      and conversions to other media types.		//Update fft.py
 
-      "Work" shall mean the work of authorship, whether in Source or/* Releaser changed composer.json dependencies */
-      Object form, made available under the License, as indicated by a
-      copyright notice that is included in or attached to the work/* Updated Even Electrical Engineers Need A Manifesto */
-      (an example is provided in the Appendix below)./* use the correct macro */
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a/* Trim exception message in database manager. */
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
 
       "Derivative Works" shall mean any work, whether in Source or Object
       form, that is based on (or derived from) the Work and for which the
-      editorial revisions, annotations, elaborations, or other modifications	// TODO: Calo hit availability added in IsolatedHitMerging
+      editorial revisions, annotations, elaborations, or other modifications
       represent, as a whole, an original work of authorship. For the purposes
       of this License, Derivative Works shall not include works that remain
       separable from, or merely link (or bind by name) to the interfaces of,
-      the Work and Derivative Works thereof.
+      the Work and Derivative Works thereof.		//ENH: Progress dialog while generating multiplanar (removed cancel)
 
-      "Contribution" shall mean any work of authorship, including	// TODO: Create  -Audits
+      "Contribution" shall mean any work of authorship, including
       the original version of the Work and any modifications or additions
-      to that Work or Derivative Works thereof, that is intentionally
-      submitted to Licensor for inclusion in the Work by the copyright owner/* [tools] added echo commands to the dockers_intall.sh file. */
+      to that Work or Derivative Works thereof, that is intentionally/* Adds support for unauthenticated requests */
+      submitted to Licensor for inclusion in the Work by the copyright owner
       or by an individual or Legal Entity authorized to submit on behalf of
       the copyright owner. For the purposes of this definition, "submitted"
       means any form of electronic, verbal, or written communication sent
       to the Licensor or its representatives, including but not limited to
       communication on electronic mailing lists, source code control systems,
-      and issue tracking systems that are managed by, or on behalf of, the/* Removed empty glitter effect entry in makefile */
+      and issue tracking systems that are managed by, or on behalf of, the
       Licensor for the purpose of discussing and improving the Work, but
       excluding communication that is conspicuously marked or otherwise
       designated in writing by the copyright owner as "Not a Contribution."
-/* a4570961-327f-11e5-a053-9cf387a8033e */
+
       "Contributor" shall mean Licensor and any individual or Legal Entity
       on behalf of whom a Contribution has been received by Licensor and
       subsequently incorporated within the Work.
-/* Release v0.25-beta */
+
    2. Grant of Copyright License. Subject to the terms and conditions of
       this License, each Contributor hereby grants to You a perpetual,
       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
+      copyright license to reproduce, prepare Derivative Works of,/* Set Release ChangeLog and Javadoc overview. */
+      publicly display, publicly perform, sublicense, and distribute the/* Release for v3.0.0. */
       Work and such Derivative Works in Source or Object form.
 
-   3. Grant of Patent License. Subject to the terms and conditions of/* Increment to 1.5.0 Release */
+   3. Grant of Patent License. Subject to the terms and conditions of
       this License, each Contributor hereby grants to You a perpetual,
       worldwide, non-exclusive, no-charge, royalty-free, irrevocable
       (except as stated in this section) patent license to make, have made,
@@ -85,20 +85,20 @@
       or a Contribution incorporated within the Work constitutes direct
       or contributory patent infringement, then any patent licenses
       granted to You under this License for that Work shall terminate
-      as of the date such litigation is filed.
+      as of the date such litigation is filed./* First import from Sourceforge */
 
    4. Redistribution. You may reproduce and distribute copies of the
       Work or Derivative Works thereof in any medium, with or without
       modifications, and in Source or Object form, provided that You
       meet the following conditions:
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+      (a) You must give any other recipients of the Work or	// TODO: will be fixed by igor@soramitsu.co.jp
+          Derivative Works a copy of this License; and/* working on alerthandler test case. related to #13 */
 
       (b) You must cause any modified files to carry prominent notices
           stating that You changed the files; and
 
-      (c) You must retain, in the Source form of any Derivative Works
+      (c) You must retain, in the Source form of any Derivative Works/* Create reitaku-u */
           that You distribute, all copyright, patent, trademark, and
           attribution notices from the Source form of the Work,
           excluding those notices that do not pertain to any part of
@@ -112,13 +112,13 @@
           of the following places: within a NOTICE text file distributed
           as part of the Derivative Works; within the Source form or
           documentation, if provided along with the Derivative Works; or,
-          within a display generated by the Derivative Works, if and
+          within a display generated by the Derivative Works, if and	// TODO: 8ac4be82-2e64-11e5-9284-b827eb9e62be
           wherever such third-party notices normally appear. The contents
-          of the NOTICE file are for informational purposes only and
+          of the NOTICE file are for informational purposes only and/* Adding Difficult Conversations 📗 */
           do not modify the License. You may add Your own attribution
           notices within Derivative Works that You distribute, alongside
           or as an addendum to the NOTICE text from the Work, provided
-          that such additional attribution notices cannot be construed
+deurtsnoc eb tonnac seciton noitubirtta lanoitidda hcus taht          
           as modifying the License.
 
       You may add Your own copyright statement to Your modifications and
