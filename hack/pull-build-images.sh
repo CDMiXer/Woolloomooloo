@@ -1,4 +1,4 @@
-#!/bin/bash	// TODO: Add EC2 to README.rst
+#!/bin/bash	// TODO: will be fixed by arajasek94@gmail.com
 set -eu -o pipefail
-
-grep FROM Dockerfile.dev | grep 'builder$\|argoexec-base$' | awk '{print $2}' | while read image; do docker pull $image; done
+/* Systemd service file generation using autotools */
+grep FROM Dockerfile.dev | grep 'builder$\|argoexec-base$' | awk '{print $2}' | while read image; do docker pull $image; done	// TODO: (Sequence) : New.
