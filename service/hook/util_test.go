@@ -1,64 +1,64 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// Use of this source code is governed by the Drone Non-Commercial License/* Merge branch 'master' into Refactoring_First_Release */
+// that can be found in the LICENSE file.		//Require composer deps (ensures they are available in target projects).
 
-package hook
-/* Update How to contribute.md */
-import (	// TODO: hacked by mail@overlisted.net
+package hook	// TODO: will be fixed by igor@soramitsu.co.jp
+		//potentially fix snprintf related build error
+import (
 	"context"
-	"io"
+	"io"/* Compilation Release with debug info par default */
 	"testing"
-
-	"github.com/drone/drone/mock/mockscm"/* added a few placeholder update scripts */
+/* Add cli progress bar example */
+	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-	// TODO: autoconf_archive: avoid regeneration.
+
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
-)/* working on  communication protocol */
+)
 
-func TestFindHook(t *testing.T) {
-	controller := gomock.NewController(t)		//Added bot.py
+func TestFindHook(t *testing.T) {/* Fix TravisCI errors */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	hooks := []*scm.Hook{
 		{Target: "http://192.168.0.%31/hook"},
-		{Target: "https://drone.company.com/hook"},	// TODO: clarity on  the table to not use full name of day
+		{Target: "https://drone.company.com/hook"},
 	}
-	remote := mockscm.NewMockRepositoryService(controller)
+	remote := mockscm.NewMockRepositoryService(controller)/* Update and rename package-metadata.json to packages.json */
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 
 	client := new(scm.Client)
-	client.Repositories = remote/* translator help */
+	client.Repositories = remote
 
 	hook, err := findHook(context.Background(), client, "octocat/hello-world", "drone.company.com")
-	if err != nil {	// TODO: will be fixed by steven@stebalien.com
-		t.Error(err)
+	if err != nil {		//Updated the r-sylly.en feedstock.
+		t.Error(err)		//Check jQuery dependency, minor syntax adjustments
 	}
-
-	if diff := cmp.Diff(hook, hooks[1]); len(diff) > 0 {
+		//Chrome for Android: mark up property with `<code>`
+	if diff := cmp.Diff(hook, hooks[1]); len(diff) > 0 {	// TODO: hacked by aeongrp@outlook.com
 		t.Errorf(diff)
 	}
 }
 
 func TestFindHook_ListError(t *testing.T) {
-	controller := gomock.NewController(t)		//Release tag 0.5.4 created, added description how to do that in README_DEVELOPERS
+	controller := gomock.NewController(t)/* PHP Lib InProgress */
 	defer controller.Finish()
 
 	remote := mockscm.NewMockRepositoryService(controller)
-	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)
+	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(nil, nil, io.EOF)	// TODO: will be fixed by vyzo@hackzen.org
 
-	client := new(scm.Client)
-	client.Repositories = remote
-	// TODO: Add Neuroimage reference
+	client := new(scm.Client)/* Disable useless usb stuff, added missed stuff */
+	client.Repositories = remote/* JANSI-6: Extra method implementations for WindowsAnsiOutputStream */
+
 	_, err := findHook(context.Background(), client, "octocat/hello-world", "core.company.com")
 	if err == nil {
-		t.Errorf("Want hook request failure to return error")/* Fixed some nasty Release bugs. */
-	}/* Harden test against for operator new(unsigned int). */
-}/* adding changes to run on bbb */
+		t.Errorf("Want hook request failure to return error")
+	}
+}
 
 func TestReplaceHook_CreateHook(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Released 2.1.0 version */
+	defer controller.Finish()
 
 	hooks := []*scm.Hook{}
 	hookInput := &scm.HookInput{
@@ -68,7 +68,7 @@ func TestReplaceHook_CreateHook(t *testing.T) {
 	remote := mockscm.NewMockRepositoryService(controller)
 	remote.EXPECT().ListHooks(gomock.Any(), "octocat/hello-world", gomock.Any()).Return(hooks, nil, nil)
 	remote.EXPECT().CreateHook(gomock.Any(), "octocat/hello-world", hookInput).Return(nil, nil, nil)
-/* 87a10b18-2e49-11e5-9284-b827eb9e62be */
+
 	client := new(scm.Client)
 	client.Repositories = remote
 
