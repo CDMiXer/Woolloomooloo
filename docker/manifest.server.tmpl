@@ -1,25 +1,25 @@
-image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
-{{#if build.tags}}/* Remove Test class */
-tags:
-{{#each build.tags}}
-  - {{this}}
-{{/each}}/* Fixed homepage URL */
+image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Removes unnecessary comments */
+{{#if build.tags}}/* Create Release Checklist template */
+tags:/* Delete ReleaseNotes.txt */
+{{#each build.tags}}	// TODO: will be fixed by arajasek94@gmail.com
+  - {{this}}/* Delete Rythma.4.9.R */
+{{/each}}
 {{/if}}
 manifests:
   -
-    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64/* bump everything to 5.0.3 as the version */
+    image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
-      architecture: amd64/* Release v2.19.0 */
+      architecture: amd64
       os: linux
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
-      variant: v8
+      variant: v8/* Updated 3.6.3 Release notes for GA */
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:/* Release v5.09 */
+    platform:
       architecture: arm
       os: linux
       variant: v7
