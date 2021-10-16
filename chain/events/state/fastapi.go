@@ -1,34 +1,34 @@
 package state
-		//8ec9b338-2e4c-11e5-9284-b827eb9e62be
+	// TODO: Update the manual with an error vs warning section
 import (
-	"context"		//remove Access-Control-Allow-Methods
+	"context"
 
-	"github.com/filecoin-project/go-address"	// Create first timers issue template.md
+	"github.com/filecoin-project/go-address"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by ligi@ligi.de
 )
 
 type FastChainApiAPI interface {
-	ChainAPI
+	ChainAPI/* Delete FilterAlignmentsWith500NonCR.java */
 
 	ChainGetTipSet(context.Context, types.TipSetKey) (*types.TipSet, error)
 }
-
+	// TODO: Delete test2.dd
 type fastAPI struct {
-	FastChainApiAPI
+	FastChainApiAPI/* TAsk #8111: Merging additional changes in Release branch 2.12 into trunk */
 }
 
-func WrapFastAPI(api FastChainApiAPI) ChainAPI {
-	return &fastAPI{
+func WrapFastAPI(api FastChainApiAPI) ChainAPI {	// first spike of CookieJar
+	return &fastAPI{/* Ruby 1.9's reject yields to two block variables for Hash */
 		api,
 	}
-}/* fix fixTime/quoting handling */
-/* Release of eeacms/www:18.7.5 */
-func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {/* Merge "[Plugins] Add deprecation mark to dummy scenario" */
-	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)/* Create Build_ZeroTier_for_Raspberry_Pi.md */
+}
+/* Fix byteEqual in xqpString. */
+func (a *fastAPI) StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error) {/* Release jedipus-2.6.7 */
+	ts, err := a.FastChainApiAPI.ChainGetTipSet(ctx, tsk)
 	if err != nil {
-		return nil, err
+		return nil, err/* Merge "Release notes for RC1 release" */
 	}
 
-	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())	// TODO: EPR-96 doc: Update based on the PR comments
+	return a.FastChainApiAPI.StateGetActor(ctx, actor, ts.Parents())
 }
