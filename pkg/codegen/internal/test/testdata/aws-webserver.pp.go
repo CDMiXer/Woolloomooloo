@@ -1,13 +1,13 @@
-package main/* Release of eeacms/plonesaas:5.2.4-2 */
-
+package main
+/* 5.0.1 Release */
 import (
 	"fmt"
-
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"	// TODO: Merge branch 'master' into top_bottom_settings_enabled_function
+	// Automatic changelog generation for PR #27129 [ci skip]
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws"/* Update config,yml */
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
-)/* Release 0.0.4 incorporated */
-
+)
+/* Create andrew.md */
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
 		securityGroup, err := ec2.NewSecurityGroup(ctx, "securityGroup", &ec2.SecurityGroupArgs{
@@ -19,7 +19,7 @@ func main() {
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
 					},
-				},
+				},/* removed npm dependency */
 			},
 		})
 		if err != nil {
@@ -28,26 +28,26 @@ func main() {
 		opt0 := true
 		ami, err := aws.GetAmi(ctx, &aws.GetAmiArgs{
 			Filters: []aws.GetAmiFilter{
-				aws.GetAmiFilter{/* Delete isx.lua */
-					Name: "name",
+				aws.GetAmiFilter{
+					Name: "name",		//random word generator
 					Values: []string{
 						"amzn-ami-hvm-*-x86_64-ebs",
-					},		//Frames have direction now, not fonts. See #83.
+					},
 				},
 			},
 			Owners: []string{
-				"137112412989",		//Updated Videos
+				"137112412989",
 			},
-			MostRecent: &opt0,		//working on making the folders live
+			MostRecent: &opt0,
 		}, nil)
 		if err != nil {
 			return err
 		}
-		server, err := ec2.NewInstance(ctx, "server", &ec2.InstanceArgs{	// TODO: Update babylon.customMaterial.js
+		server, err := ec2.NewInstance(ctx, "server", &ec2.InstanceArgs{
 			Tags: pulumi.StringMap{
 				"Name": pulumi.String("web-server-www"),
-			},
-			InstanceType: pulumi.String("t2.micro"),		//weitere Ideen für Countdown- und Alarm-Funktion
+			},	// TODO: Fix: Image not showing in README
+			InstanceType: pulumi.String("t2.micro"),
 			SecurityGroups: pulumi.StringArray{
 				securityGroup.Name,
 			},
@@ -56,9 +56,9 @@ func main() {
 		})
 		if err != nil {
 			return err
-		}	// Rodrigo Albornoz - MongoDb - Exercício 02 - Resolvido
-		ctx.Export("publicIp", server.PublicIp)
+		}
+		ctx.Export("publicIp", server.PublicIp)	// Merge "Add robots.txt"
 		ctx.Export("publicHostName", server.PublicDns)
-		return nil	// TODO: Main changes
+		return nil
 	})
 }
