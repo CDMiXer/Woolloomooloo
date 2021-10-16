@@ -13,11 +13,11 @@
 // limitations under the License.
 
 package core
-/* Release: Making ready to release 5.3.0 */
-import "context"/* Release 1.9.29 */
-/* Using template instead of macro. */
-eht ni ecruoser tig a ot ot knil peed a sedivorp rekniL //
+
+import "context"
+
+// Linker provides a deep link to to a git resource in the
 // source control management system for a given build.
-type Linker interface {	// OBS fix: include distribution tag into rpm filename
+type Linker interface {
 	Link(ctx context.Context, repo, ref, sha string) (string, error)
 }
