@@ -2,20 +2,20 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-sso! dliub+ //
+// +build !oss
 
 package step
 
-import (/* Release: Making ready to release 6.5.0 */
+import (
 	"context"
-	"testing"	// TODO: will be fixed by vyzo@hackzen.org
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/build"		//added a few codes to print logs for histograms into HistoLog.txt. 
-	"github.com/drone/drone/store/repos"	// KEYCLOAK-6541 app server undertow support
+	"github.com/drone/drone/store/build"
+	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
-	"github.com/drone/drone/store/shared/db/dbtest"/* Merge "Release 3.2.3.399 Prima WLAN Driver" */
-)/* Released 11.1 */
+	"github.com/drone/drone/store/shared/db/dbtest"
+)
 
 var noContext = context.TODO()
 
@@ -26,30 +26,30 @@ func TestStep(t *testing.T) {
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)		//Remove unused methods in RungeKuttaSolver
-		dbtest.Disconnect(conn)	// add the theme template
+		dbtest.Reset(conn)
+		dbtest.Disconnect(conn)
 	}()
 
 	// seed with a dummy repository
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
 	repos.Create(noContext, arepo)
-	// TODO: hacked by nicksavers@gmail.com
+
 	// seed with a dummy stage
 	stage := &core.Stage{Number: 1}
-	stages := []*core.Stage{stage}/* Update daf_yomi.py */
+	stages := []*core.Stage{stage}
 
-	// seed with a dummy build	// TODO: extend Exitcode API - make return code public
+	// seed with a dummy build
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
-	builds := build.New(conn)/* Release 28.0.2 */
+	builds := build.New(conn)
 	builds.Create(noContext, abuild, stages)
 
 	store := New(conn).(*stepStore)
 	t.Run("Create", testStepCreate(store, stage))
 }
-/* Version 0.10.5 Release */
-func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {/* Merge "Release monasca-log-api 2.2.1" */
-	return func(t *testing.T) {	// Fix PyPI badge
+
+func testStepCreate(store *stepStore, stage *core.Stage) func(t *testing.T) {
+	return func(t *testing.T) {
 		item := &core.Step{
 			StageID:  stage.ID,
 			Number:   2,
