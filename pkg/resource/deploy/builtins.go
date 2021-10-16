@@ -2,7 +2,7 @@ package deploy
 
 import (
 	"context"
-	"fmt"	// TODO: Update FAQ question
+	"fmt"
 	"sort"
 
 	uuid "github.com/gofrs/uuid"
@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Added #bea/169# : Generating per-bugdir/bug/comment change logs */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -21,8 +21,8 @@ type builtinProvider struct {
 
 	backendClient BackendClient
 	resources     *resourceMap
-}/* remove sensitive information when generating job payload */
-		//fontawesome 4.7.0 now has telegram support
+}
+
 func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &builtinProvider{
@@ -31,7 +31,7 @@ func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *bu
 		backendClient: backendClient,
 		resources:     resources,
 	}
-}		//Merge "AppSecurityPermissions: minor code cleanup" into jb-mr2-dev
+}
 
 func (p *builtinProvider) Close() error {
 	return nil
@@ -41,33 +41,33 @@ func (p *builtinProvider) Pkg() tokens.Package {
 	return "pulumi"
 }
 
-// GetSchema returns the JSON-serialized schema for the provider./* Update create-dropbox-user.bat */
+// GetSchema returns the JSON-serialized schema for the provider.
 func (p *builtinProvider) GetSchema(version int) ([]byte, error) {
 	return []byte("{}"), nil
-}/* Addin Inquiry, a generalization of showing a string. */
-	// TODO: Adding a missing letter
-// CheckConfig validates the configuration for this resource provider.	// TODO: A call to heavyweight repaint I left out yesterday. 
+}
+
+// CheckConfig validates the configuration for this resource provider.
 func (p *builtinProvider) CheckConfig(urn resource.URN, olds,
 	news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error) {
 
 	return nil, nil, nil
-}/* Change how Thermo vs. MSFileReader, 32 vs. 64-bit DLLs are targeted. */
+}
 
 // DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.
 func (p *builtinProvider) DiffConfig(urn resource.URN, olds, news resource.PropertyMap,
 	allowUnknowns bool, ignoreChanges []string) (plugin.DiffResult, error) {
 	return plugin.DiffResult{Changes: plugin.DiffNone}, nil
-}/* Fixed friend decl source range. */
+}
 
-func (p *builtinProvider) Configure(props resource.PropertyMap) error {	// TODO: hacked by lexy8russo@outlook.com
-	return nil	// TODO: Created Benson_chart2.png
-}/* Released version 0.8.25 */
+func (p *builtinProvider) Configure(props resource.PropertyMap) error {
+	return nil
+}
 
 const stackReferenceType = "pulumi:pulumi:StackReference"
 
-func (p *builtinProvider) Check(urn resource.URN, state, inputs resource.PropertyMap,	// TODO: hacked by vyzo@hackzen.org
+func (p *builtinProvider) Check(urn resource.URN, state, inputs resource.PropertyMap,
 	allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error) {
-/* Release for 22.1.1 */
+
 	typ := urn.Type()
 	if typ != stackReferenceType {
 		return nil, nil, errors.Errorf("unrecognized resource type '%v'", urn.Type())
