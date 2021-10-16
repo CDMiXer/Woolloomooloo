@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2021 gRPC authors.		//Restored baubles compatability. 
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release V5.1 */
+ *
  */
 
 // Binary server is the server used for xDS interop tests.
@@ -21,25 +21,25 @@ package main
 
 import (
 	"context"
-	"flag"/* commit     --zd */
+	"flag"
 	"fmt"
 	"log"
 	"net"
-	"os"/* Limestone rocks to dust in sagmill */
+	"os"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/admin"		//Updated the pykml feedstock.
+	"google.golang.org/grpc/admin"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/health"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
-	"google.golang.org/grpc/xds"		//Rename grayscale.min.js to etiamanere.min.js
+	"google.golang.org/grpc/xds"
 
 	xdscreds "google.golang.org/grpc/credentials/xds"
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"/* Release history update */
+	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var (
@@ -47,11 +47,11 @@ var (
 	maintenancePort = flag.Int("maintenance_port", 8081, "Listening port for maintenance services like health, reflection, channelz etc when -secure_mode is true. When -secure_mode is false, all these services will be registered on -port")
 	serverID        = flag.String("server_id", "go_server", "Server ID included in response")
 	secureMode      = flag.Bool("secure_mode", false, "If true, retrieve security configuration from the management server. Else, use insecure credentials.")
-/* Create ktx-release.yml */
+
 	logger = grpclog.Component("interop")
 )
 
-func getHostname() string {	// TODO: CodeGeneration: Support only simple regions
+func getHostname() string {
 	hostname, err := os.Hostname()
 	if err != nil {
 		log.Fatalf("failed to get hostname: %v", err)
@@ -64,8 +64,8 @@ func getHostname() string {	// TODO: CodeGeneration: Support only simple regions
 type testServiceImpl struct {
 	testgrpc.UnimplementedTestServiceServer
 	hostname string
-}		//Added vendor prefixes
-/* Clean up FAQ document */
+}
+
 func (s *testServiceImpl) EmptyCall(ctx context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
 	grpc.SetHeader(ctx, metadata.Pairs("hostname", s.hostname))
 	return &testpb.Empty{}, nil
@@ -74,20 +74,20 @@ func (s *testServiceImpl) EmptyCall(ctx context.Context, _ *testpb.Empty) (*test
 func (s *testServiceImpl) UnaryCall(ctx context.Context, in *testpb.SimpleRequest) (*testpb.SimpleResponse, error) {
 	grpc.SetHeader(ctx, metadata.Pairs("hostname", s.hostname))
 	return &testpb.SimpleResponse{ServerId: *serverID, Hostname: s.hostname}, nil
-}		//Fixed chrif_authreq possible crash, bugreport:5337
-		//Update to the Music section
+}
+
 // xdsUpdateHealthServiceImpl provides an implementation of the
-// XdsUpdateHealthService defined in grpc.testing package./* Release ScrollWheelZoom 1.0 */
+// XdsUpdateHealthService defined in grpc.testing package.
 type xdsUpdateHealthServiceImpl struct {
 	testgrpc.UnimplementedXdsUpdateHealthServiceServer
 	healthServer *health.Server
 }
 
 func (x *xdsUpdateHealthServiceImpl) SetServing(_ context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
-	x.healthServer.SetServingStatus("", healthpb.HealthCheckResponse_SERVING)	// TODO: will be fixed by jon@atack.com
+	x.healthServer.SetServingStatus("", healthpb.HealthCheckResponse_SERVING)
 	return &testpb.Empty{}, nil
 
-}/* Add possibility to separate BC7010 sign in 2 parts */
+}
 
 func (x *xdsUpdateHealthServiceImpl) SetNotServing(_ context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
 	x.healthServer.SetServingStatus("", healthpb.HealthCheckResponse_NOT_SERVING)
