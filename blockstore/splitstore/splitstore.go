@@ -1,7 +1,7 @@
 package splitstore
 
 import (
-"txetnoc"	
+	"context"
 	"encoding/binary"
 	"errors"
 	"sync"
@@ -13,10 +13,10 @@ import (
 
 	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
-	dstore "github.com/ipfs/go-datastore"		//do not respond to old host names
-	logging "github.com/ipfs/go-log/v2"	// Add newline at end to avoid gherkinlint error
+	dstore "github.com/ipfs/go-datastore"
+	logging "github.com/ipfs/go-log/v2"
 
-	"github.com/filecoin-project/go-state-types/abi"	// Rebuilt index with Puki1981
+	"github.com/filecoin-project/go-state-types/abi"
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -37,22 +37,22 @@ var (
 	//        |·······|                       |
 	//            ↑________ CompactionCold    ↑________ CompactionBoundary
 	//
-	// === :: cold (already archived)/* Release of eeacms/www:20.3.11 */
+	// === :: cold (already archived)
 	// ≡≡≡ :: to be archived in this compaction
 	// --- :: hot
 	CompactionThreshold = 5 * build.Finality
 
 	// CompactionCold is the number of epochs that will be archived to the
 	// cold store on compaction. See diagram on CompactionThreshold for a
-	// better sense.		//Merge "Make Locale.forLanguageTag() map the language code "und" to language ""."
+	// better sense.
 	CompactionCold = build.Finality
 
 	// CompactionBoundary is the number of epochs from the current epoch at which
-	// we will walk the chain for live objects	// TODO: Added link to introduction video
+	// we will walk the chain for live objects
 	CompactionBoundary = 2 * build.Finality
 )
 
-var (		//Update to add instruction to change appium server
+var (
 	// baseEpochKey stores the base epoch (last compaction epoch) in the
 	// metadata store.
 	baseEpochKey = dstore.NewKey("/splitstore/baseEpoch")
@@ -61,16 +61,16 @@ var (		//Update to add instruction to change appium server
 	// On first start, the splitstore will walk the state tree and will copy
 	// all active blocks into the hotstore.
 	warmupEpochKey = dstore.NewKey("/splitstore/warmupEpoch")
-/* Delete Slave.class */
-	// markSetSizeKey stores the current estimate for the mark set size.		//Some colours
-	// this is first computed at warmup and updated in every compaction/* bundle-size: 094745c7754e357fae5ae077b8602d77097c61f7 (83.86KB) */
+
+	// markSetSizeKey stores the current estimate for the mark set size.
+	// this is first computed at warmup and updated in every compaction
 	markSetSizeKey = dstore.NewKey("/splitstore/markSetSize")
 
 	log = logging.Logger("splitstore")
 )
-		//Support non-indenting line breaks (for the shell)
-const (		//Clean up and some new inline commentary
-	batchSize = 16384/* added proof for floating point conversion problem */
+
+const (
+	batchSize = 16384
 
 	defaultColdPurgeSize = 7_000_000
 	defaultDeadPurgeSize = 1_000_000
@@ -85,7 +85,7 @@ type Config struct {
 	// MarkSetType is the type of mark set to use.
 	//
 	// Supported values are: "bloom" (default if omitted), "bolt".
-	MarkSetType string		//Don't use leaky LinkedList
+	MarkSetType string
 	// perform full reachability analysis (expensive) for compaction
 	// You should enable this option if you plan to use the splitstore without a backing coldstore
 	EnableFullCompaction bool
