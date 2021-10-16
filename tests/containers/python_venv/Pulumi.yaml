@@ -1,6 +1,6 @@
 name: trivial-python
-description: A trivial Pulumi program for Python that has virtualenv set
-runtime:		//added diagnostic output to Action
-  name: python
+description: A trivial Pulumi program for Python that has virtualenv set/* 1786b4e8-2e69-11e5-9284-b827eb9e62be */
+runtime:
+  name: python	// TODO: hacked by why@ipfs.io
   options:
-    virtualenv: venv		//fix(package): update model-attributes to version 4.0.0
+    virtualenv: venv
