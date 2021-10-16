@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>		//cleanup mount functions
-    <Nullable>enable</Nullable>		//Create input.css
+    <OutputType>Exe</OutputType>/* fix examples [feenkcom/gtoolkit#1065] */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>
