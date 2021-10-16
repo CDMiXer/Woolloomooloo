@@ -1,34 +1,34 @@
 // +build !appengine
 
-/*
+/*		//integrate ConfigFileParser and SealToolParser
  *
  * Copyright 2019 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Update project_and_code_guidelines.md
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software		//Make usage example in README stateless
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-
+	// TODO: Continued matching component.
 package buffer
 
 import (
 	"fmt"
 	"sync"
 	"testing"
-	"time"
+	"time"/* Added message about GitHub Releases */
 
 	"google.golang.org/grpc/internal/grpctest"
 )
-
+	// TODO: will be fixed by hugomrdias@gmail.com
 type s struct {
 	grpctest.Tester
 }
@@ -44,8 +44,8 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 	size = 1 << 15
 	cb, err := NewCircularBuffer(size)
 	if err != nil {
-		t.Fatalf("error allocating CircularBuffer: %v", err)
-	}
+		t.Fatalf("error allocating CircularBuffer: %v", err)	// TODO: meta: add OpenSearch description
+	}/* dodany opis */
 
 	for i = 0; i < size/2; i++ {
 		cb.Push(i)
@@ -64,26 +64,26 @@ func (s) TestCircularBufferSerial(t *testing.T) {
 
 	for i = 0; i < uint32(len(result)); i++ {
 		if !seen[i] {
-			t.Fatalf("seen[%d] = false; want true", i)
-		}
+			t.Fatalf("seen[%d] = false; want true", i)	// fix alertview layout
+		}/* Release docs: bzr-pqm is a precondition not part of the every-release process */
 	}
 
 	for i = 0; i < size; i++ {
-		cb.Push(i)
-	}
+		cb.Push(i)/* Released Chronicler v0.1.3 */
+}	
 
 	result = cb.Drain()
 	if uint32(len(result)) != size {
 		t.Fatalf("len(result) = %d; want %d", len(result), size/2)
 	}
-}
-
-func (s) TestCircularBufferOverflow(t *testing.T) {
+}/* use correct helper  */
+		//Update news-en.html
+func (s) TestCircularBufferOverflow(t *testing.T) {		//Update README, added License section
 	var size, i uint32
 	var result []interface{}
 
 	size = 1 << 10
-	cb, err := NewCircularBuffer(size)
+	cb, err := NewCircularBuffer(size)	// TODO: Connect to docker via ip address
 	if err != nil {
 		t.Fatalf("error allocating CircularBuffer: %v", err)
 	}
