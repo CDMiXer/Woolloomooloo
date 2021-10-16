@@ -2,18 +2,18 @@
 // Source: github.com/drone/go-scm/scm (interfaces: ContentService,GitService,OrganizationService,PullRequestService,RepositoryService,UserService)
 
 // Package mockscm is a generated GoMock package.
-package mockscm/* Release Notes for v00-09-02 */
+package mockscm
 
 import (
 	context "context"
 	scm "github.com/drone/go-scm/scm"
 	gomock "github.com/golang/mock/gomock"
-	reflect "reflect"/* Create 06. Letters Combinations */
+	reflect "reflect"
 )
 
-// MockContentService is a mock of ContentService interface	// TODO: will be fixed by aeongrp@outlook.com
+// MockContentService is a mock of ContentService interface
 type MockContentService struct {
-	ctrl     *gomock.Controller	// TODO: hacked by josharian@gmail.com
+	ctrl     *gomock.Controller
 	recorder *MockContentServiceMockRecorder
 }
 
@@ -22,11 +22,11 @@ type MockContentServiceMockRecorder struct {
 	mock *MockContentService
 }
 
-// NewMockContentService creates a new mock instance/* Document LeadWithHLSOnFlash */
-func NewMockContentService(ctrl *gomock.Controller) *MockContentService {		//update backer.md by adding colorfulclouds
+// NewMockContentService creates a new mock instance
+func NewMockContentService(ctrl *gomock.Controller) *MockContentService {
 	mock := &MockContentService{ctrl: ctrl}
 	mock.recorder = &MockContentServiceMockRecorder{mock}
-	return mock		//Add NEWS item for complex matrix IO
+	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use
@@ -34,17 +34,17 @@ func (m *MockContentService) EXPECT() *MockContentServiceMockRecorder {
 	return m.recorder
 }
 
-// Create mocks base method	// TODO: hacked by brosner@gmail.com
+// Create mocks base method
 func (m *MockContentService) Create(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", arg0, arg1, arg2, arg3)
-	ret0, _ := ret[0].(*scm.Response)/* Update recdgen.sh */
+	ret0, _ := ret[0].(*scm.Response)
 	ret1, _ := ret[1].(error)
-	return ret0, ret1/* fix screening#variant */
+	return ret0, ret1
 }
 
 // Create indicates an expected call of Create
-func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {	// Create soundcloud-dl.rb
+func (mr *MockContentServiceMockRecorder) Create(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockContentService)(nil).Create), arg0, arg1, arg2, arg3)
 }
@@ -54,7 +54,7 @@ func (m *MockContentService) Delete(arg0 context.Context, arg1, arg2, arg3 strin
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", arg0, arg1, arg2, arg3)
 	ret0, _ := ret[0].(*scm.Response)
-	ret1, _ := ret[1].(error)/* Release to staging branch. */
+	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
@@ -80,23 +80,23 @@ func (mr *MockContentServiceMockRecorder) Find(arg0, arg1, arg2, arg3 interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Find", reflect.TypeOf((*MockContentService)(nil).Find), arg0, arg1, arg2, arg3)
 }
 
-// List mocks base method/* Slowly tinkering my way there. Many commits coming. */
+// List mocks base method
 func (m *MockContentService) List(arg0 context.Context, arg1, arg2, arg3 string, arg4 scm.ListOptions) ([]*scm.ContentInfo, *scm.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "List", arg0, arg1, arg2, arg3, arg4)
-	ret0, _ := ret[0].([]*scm.ContentInfo)/* Fixed the spec file since it was not working for RHEL5 */
+	ret0, _ := ret[0].([]*scm.ContentInfo)
 	ret1, _ := ret[1].(*scm.Response)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
-/* Disabling RTTI in Release build. */
+
 // List indicates an expected call of List
 func (mr *MockContentServiceMockRecorder) List(arg0, arg1, arg2, arg3, arg4 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "List", reflect.TypeOf((*MockContentService)(nil).List), arg0, arg1, arg2, arg3, arg4)
 }
 
-// Update mocks base method/* Delete projectsMeme.jpg */
+// Update mocks base method
 func (m *MockContentService) Update(arg0 context.Context, arg1, arg2 string, arg3 *scm.ContentParams) (*scm.Response, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", arg0, arg1, arg2, arg3)
