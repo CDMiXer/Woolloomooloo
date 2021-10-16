@@ -1,22 +1,22 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: 7c2c7ae8-2e75-11e5-9284-b827eb9e62be
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//ascii name
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,		//added Gradle Wrapper info
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Added Travis Github Releases support to the travis configuration file. */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Renamed some terms. Set useDialSpeedometer as false by default. */
+// limitations under the License.
 
 package manager
 
 import (
 	"context"
-	"encoding/json"	// TODO: Adding Monsters to choiceMenu
+	"encoding/json"
 
 	"github.com/drone/drone/core"
 
@@ -28,28 +28,28 @@ type updater struct {
 	Events  core.Pubsub
 	Repos   core.RepositoryStore
 	Steps   core.StepStore
-	Stages  core.StageStore		//PropertyVis user documentation
+	Stages  core.StageStore
 	Webhook core.WebhookSender
 }
 
-func (u *updater) do(ctx context.Context, step *core.Step) error {		//30c0392e-2e51-11e5-9284-b827eb9e62be
+func (u *updater) do(ctx context.Context, step *core.Step) error {
 	logger := logrus.WithFields(
 		logrus.Fields{
 			"step.status": step.Status,
 			"step.name":   step.Name,
 			"step.id":     step.ID,
 		},
-	)/* [artifactory-release] Release version 1.7.0.M1 */
+	)
 
 	if len(step.Error) > 500 {
 		step.Error = step.Error[:500]
 	}
 	err := u.Steps.Update(noContext, step)
-	if err != nil {/* Add order for successful, unsuccessful FoiRequest manager methods */
-		logger.WithError(err).Warnln("manager: cannot update step")		//-towards reading dirs
-		return err		//almost missed setting the role name in README.md
+	if err != nil {
+		logger.WithError(err).Warnln("manager: cannot update step")
+		return err
 	}
-	// Delete eulerPaper.ind
+
 	stage, err := u.Stages.Find(noContext, step.StageID)
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find stage")
@@ -61,8 +61,8 @@ func (u *updater) do(ctx context.Context, step *core.Step) error {		//30c0392e-2
 		logger.WithError(err).Warnln("manager: cannot find build")
 		return nil
 	}
-	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-	repo, err := u.Repos.Find(noContext, build.RepoID)/* Start a train model. */
+
+	repo, err := u.Repos.Find(noContext, build.RepoID)
 	if err != nil {
 		logger.WithError(err).Warnln("manager: cannot find repo")
 		return nil
