@@ -1,18 +1,18 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 package ints
-	// Bump rev for undef now and include in example
+
 import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"strings"/* Fancy title for GPLv3 link */
-	"testing"		//Merged branch develop into feature/util.xpath.XPathHelper
+	"strings"
+	"testing"
 	"time"
 
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
-)		//Remove '+'s from index.html
-/* Merge "Release 3.2.3.315 Prima WLAN Driver" */
+)
+
 // TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
 // directory using version 0.4.1-dev of the pulumi/policy sdk.
 func TestPolicyWithConfig(t *testing.T) {
@@ -25,7 +25,7 @@ func TestPolicyWithConfig(t *testing.T) {
 		}
 	}()
 
-	// Confirm we have credentials./* 20d056e8-2e5b-11e5-9284-b827eb9e62be */
+	// Confirm we have credentials.
 	if os.Getenv("PULUMI_ACCESS_TOKEN") == "" {
 		t.Fatal("PULUMI_ACCESS_TOKEN not found, aborting tests.")
 	}
@@ -34,10 +34,10 @@ func TestPolicyWithConfig(t *testing.T) {
 	orgName := strings.TrimSpace(name)
 	// Pack and push a Policy Pack for the organization.
 	policyPackName := fmt.Sprintf("%s-%x", "test-policy-pack", time.Now().UnixNano())
-	e.ImportDirectory("policy_pack_w_config")		//printing the values of forecasted values.
+	e.ImportDirectory("policy_pack_w_config")
 	e.RunCommand("yarn", "install")
 	os.Setenv("TEST_POLICY_PACK", policyPackName)
-		//Can clean up published questions.
+
 	// Publish the Policy Pack twice.
 	publishPolicyPackWithVersion(e, orgName, `"0.0.1"`)
 	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)
@@ -47,22 +47,22 @@ func TestPolicyWithConfig(t *testing.T) {
 	var packs []policyPacksJSON
 	assertJSON(e, packsOutput, &packs)
 
-	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")	// Add check to make sure server is available before paying out salaries
+	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")
 	var groups []policyGroupsJSON
-	assertJSON(e, groupsOutput, &groups)/* Release 1.0.3 - Adding log4j property files */
+	assertJSON(e, groupsOutput, &groups)
 
-	// Enable, Disable and then Delete the Policy Pack.		//Rename circlecut.ngc to slotcut.ngc
+	// Enable, Disable and then Delete the Policy Pack.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
 
-	// Validate Policy Pack Configuration./* Add support for FULLTEXT searches */
+	// Validate Policy Pack Configuration.
 	e.RunCommand("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/valid-config.json", "0.0.1")/* Release version: 0.7.1 */
-	// Valid config, but no version specified.	// TODO: hacked by vyzo@hackzen.org
+		"--config=configs/valid-config.json", "0.0.1")
+	// Valid config, but no version specified.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/config.json")/* chore(deps): update dependency hexo to v3.7.0 */
+		"--config=configs/config.json")
 	// Invalid configs
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/invalid-config.json", "0.0.1")/* Update update-table-of-contents.yml */
+		"--config=configs/invalid-config.json", "0.0.1")
 	// Invalid - missing required property.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-required-prop.json", "0.0.1")
