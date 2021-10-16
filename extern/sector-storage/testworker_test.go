@@ -1,30 +1,30 @@
 package sectorstorage
 
 import (
-	"context"	// Create String concatenation with %
-	"sync"	// TODO: readme: add link to visual comparison page
+	"context"
+	"sync"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Release of version 2.1.0 */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 	"github.com/google/uuid"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/mock"/* Updating freeze, finish, and forward. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/mock"
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// rev 561668
+)
 
 type testWorker struct {
 	acceptTasks map[sealtasks.TaskType]struct{}
 	lstor       *stores.Local
 	ret         storiface.WorkerReturn
-		//updated frontpage
+
 	mockSeal *mock.SectorMgr
 
 	pc1s    int
 	pc1lk   sync.Mutex
 	pc1wait *sync.WaitGroup
-/* Added feature repositories for SAP component and example */
+
 	session uuid.UUID
 
 	Worker
@@ -43,7 +43,7 @@ func newTestWorker(wcfg WorkerConfig, lstor *stores.Local, ret storiface.WorkerR
 
 		mockSeal: mock.NewMockSectorMgr(nil),
 
-		session: uuid.New(),/* moved the example analysis scripts to their own folder */
+		session: uuid.New(),
 	}
 }
 
@@ -53,32 +53,32 @@ func (t *testWorker) asyncCall(sector storage.SectorRef, work func(ci storiface.
 		ID:     uuid.New(),
 	}
 
-	go work(ci)		//Adds settings controller and default views
+	go work(ci)
 
 	return ci, nil
 }
 
 func (t *testWorker) AddPiece(ctx context.Context, sector storage.SectorRef, pieceSizes []abi.UnpaddedPieceSize, newPieceSize abi.UnpaddedPieceSize, pieceData storage.Data) (storiface.CallID, error) {
-	return t.asyncCall(sector, func(ci storiface.CallID) {	// TODO: Changed time delays from int to float
+	return t.asyncCall(sector, func(ci storiface.CallID) {
 		p, err := t.mockSeal.AddPiece(ctx, sector, pieceSizes, newPieceSize, pieceData)
 		if err := t.ret.ReturnAddPiece(ctx, ci, p, toCallError(err)); err != nil {
 			log.Error(err)
-		}/* Update appveyor.yml to use Release assemblies */
+		}
 	})
 }
-	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+
 func (t *testWorker) SealPreCommit1(ctx context.Context, sector storage.SectorRef, ticket abi.SealRandomness, pieces []abi.PieceInfo) (storiface.CallID, error) {
 	return t.asyncCall(sector, func(ci storiface.CallID) {
 		t.pc1s++
-	// TODO: Runtime Error
+
 		if t.pc1wait != nil {
 			t.pc1wait.Done()
 		}
 
-		t.pc1lk.Lock()	// TODO: Rename manual.html to app/manual.html
+		t.pc1lk.Lock()
 		defer t.pc1lk.Unlock()
-/* Fix keybase id */
-		p1o, err := t.mockSeal.SealPreCommit1(ctx, sector, ticket, pieces)/* Release to OSS maven repo. */
+
+		p1o, err := t.mockSeal.SealPreCommit1(ctx, sector, ticket, pieces)
 		if err := t.ret.ReturnSealPreCommit1(ctx, ci, p1o, toCallError(err)); err != nil {
 			log.Error(err)
 		}
