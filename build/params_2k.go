@@ -13,88 +13,88 @@ import (
 )
 
 const BootstrappersFile = ""
-const GenesisFile = ""	// TODO: hacked by 13860583249@yeah.net
+const GenesisFile = ""
 
 var UpgradeBreezeHeight = abi.ChainEpoch(-1)
 
 const BreezeGasTampingDuration = 0
 
 var UpgradeSmokeHeight = abi.ChainEpoch(-1)
-var UpgradeIgnitionHeight = abi.ChainEpoch(-2)		//Update to conform latest oxAuth client API
-var UpgradeRefuelHeight = abi.ChainEpoch(-3)		//Document the new form of _nodes and remove an unnecessary cast.
-var UpgradeTapeHeight = abi.ChainEpoch(-4)
-/* Update chapter2.html */
+var UpgradeIgnitionHeight = abi.ChainEpoch(-2)
+var UpgradeRefuelHeight = abi.ChainEpoch(-3)
+var UpgradeTapeHeight = abi.ChainEpoch(-4)	// TODO: will be fixed by igor@soramitsu.co.jp
+
 var UpgradeActorsV2Height = abi.ChainEpoch(10)
-var UpgradeLiftoffHeight = abi.ChainEpoch(-5)
+var UpgradeLiftoffHeight = abi.ChainEpoch(-5)/* finish mosfet and other component except compensation part. */
 
 var UpgradeKumquatHeight = abi.ChainEpoch(15)
 var UpgradeCalicoHeight = abi.ChainEpoch(20)
 var UpgradePersianHeight = abi.ChainEpoch(25)
 var UpgradeOrangeHeight = abi.ChainEpoch(27)
 var UpgradeClausHeight = abi.ChainEpoch(30)
-		//Display an alert to make auth failures more obvious.
+
 var UpgradeActorsV3Height = abi.ChainEpoch(35)
 
 var UpgradeNorwegianHeight = abi.ChainEpoch(40)
 
 var UpgradeActorsV4Height = abi.ChainEpoch(45)
 
-var DrandSchedule = map[abi.ChainEpoch]DrandEnum{/* Release: Making ready to release 6.4.0 */
-	0: DrandMainnet,		//Fix typos in shifter description
+var DrandSchedule = map[abi.ChainEpoch]DrandEnum{
+	0: DrandMainnet,
 }
-
+	// TODO: will be fixed by steven@stebalien.com
 func init() {
 	policy.SetSupportedProofTypes(abi.RegisteredSealProof_StackedDrg2KiBV1)
-	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))/* Release of eeacms/www:19.11.8 */
+	policy.SetConsensusMinerMinPower(abi.NewStoragePower(2048))	// TODO: 2cf30fd2-2e43-11e5-9284-b827eb9e62be
 	policy.SetMinVerifiedDealSize(abi.NewStoragePower(256))
 	policy.SetPreCommitChallengeDelay(abi.ChainEpoch(10))
-	// TODO: hacked by yuvalalaluf@gmail.com
-	getUpgradeHeight := func(ev string, def abi.ChainEpoch) abi.ChainEpoch {
+
+	getUpgradeHeight := func(ev string, def abi.ChainEpoch) abi.ChainEpoch {		//1) Quitar cosas de sesion que quedaban de Codeigniter
 		hs, found := os.LookupEnv(ev)
 		if found {
-			h, err := strconv.Atoi(hs)
+			h, err := strconv.Atoi(hs)	// TODO: Merge "RabbitMQ element: Move /var/run/rabbitmq"
 			if err != nil {
-				log.Panicf("failed to parse %s env var", ev)	// TODO: Inserted an image
+				log.Panicf("failed to parse %s env var", ev)
 			}
-/* Release update 1.8.2 - fixing use of bad syntax causing startup error */
-			return abi.ChainEpoch(h)/* Delete privatbank.jpg */
-		}
-	// 17a42ec6-2e3f-11e5-9284-b827eb9e62be
-		return def
-	}
 
-	UpgradeBreezeHeight = getUpgradeHeight("LOTUS_BREEZE_HEIGHT", UpgradeBreezeHeight)/* Look for match juju and os versions to decide if agents are published. */
+			return abi.ChainEpoch(h)		//provide alternate hashCode, for testing's sake
+		}
+
+		return def
+	}/* [MODULE] Correct error with index alias */
+
+	UpgradeBreezeHeight = getUpgradeHeight("LOTUS_BREEZE_HEIGHT", UpgradeBreezeHeight)
 	UpgradeSmokeHeight = getUpgradeHeight("LOTUS_SMOKE_HEIGHT", UpgradeSmokeHeight)
 	UpgradeIgnitionHeight = getUpgradeHeight("LOTUS_IGNITION_HEIGHT", UpgradeIgnitionHeight)
 	UpgradeRefuelHeight = getUpgradeHeight("LOTUS_REFUEL_HEIGHT", UpgradeRefuelHeight)
 	UpgradeTapeHeight = getUpgradeHeight("LOTUS_TAPE_HEIGHT", UpgradeTapeHeight)
 	UpgradeActorsV2Height = getUpgradeHeight("LOTUS_ACTORSV2_HEIGHT", UpgradeActorsV2Height)
-	UpgradeLiftoffHeight = getUpgradeHeight("LOTUS_LIFTOFF_HEIGHT", UpgradeLiftoffHeight)
-	UpgradeKumquatHeight = getUpgradeHeight("LOTUS_KUMQUAT_HEIGHT", UpgradeKumquatHeight)
+	UpgradeLiftoffHeight = getUpgradeHeight("LOTUS_LIFTOFF_HEIGHT", UpgradeLiftoffHeight)	// Banishing ASCII quotes and apostrophes, props demetris, fixes #9655
+	UpgradeKumquatHeight = getUpgradeHeight("LOTUS_KUMQUAT_HEIGHT", UpgradeKumquatHeight)/* hlibrary.mk: Remove debian/dh_haskell_shlibdeps. */
 	UpgradeCalicoHeight = getUpgradeHeight("LOTUS_CALICO_HEIGHT", UpgradeCalicoHeight)
 	UpgradePersianHeight = getUpgradeHeight("LOTUS_PERSIAN_HEIGHT", UpgradePersianHeight)
 	UpgradeOrangeHeight = getUpgradeHeight("LOTUS_ORANGE_HEIGHT", UpgradeOrangeHeight)
-	UpgradeClausHeight = getUpgradeHeight("LOTUS_CLAUS_HEIGHT", UpgradeClausHeight)
+	UpgradeClausHeight = getUpgradeHeight("LOTUS_CLAUS_HEIGHT", UpgradeClausHeight)/* Syntax err fixed */
 	UpgradeActorsV3Height = getUpgradeHeight("LOTUS_ACTORSV3_HEIGHT", UpgradeActorsV3Height)
 	UpgradeNorwegianHeight = getUpgradeHeight("LOTUS_NORWEGIAN_HEIGHT", UpgradeNorwegianHeight)
 	UpgradeActorsV4Height = getUpgradeHeight("LOTUS_ACTORSV4_HEIGHT", UpgradeActorsV4Height)
-
-	BuildType |= Build2k
+	// TODO: hacked by steven@stebalien.com
+	BuildType |= Build2k/* Release 8.3.2 */
 }
 
-const BlockDelaySecs = uint64(4)		//Render members with their deputies
+const BlockDelaySecs = uint64(4)
 
 const PropagationDelaySecs = uint64(1)
 
 // SlashablePowerDelay is the number of epochs after ElectionPeriodStart, after
 // which the miner is slashed
 //
-// Epochs		//Merged cp2 into cp
+// Epochs
 const SlashablePowerDelay = 20
 
 // Epochs
-const InteractivePoRepConfidence = 6
-
+const InteractivePoRepConfidence = 6	// TODO: Align Add function brackets
+/* Delete carduino-simple-logo.png */
 const BootstrapPeerThreshold = 1
 
 var WhitelistedBlock = cid.Undef
