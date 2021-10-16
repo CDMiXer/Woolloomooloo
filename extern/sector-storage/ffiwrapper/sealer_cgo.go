@@ -2,80 +2,80 @@
 
 package ffiwrapper
 
-import (
+import (/* Formatted possible doctrine description */
 	"bufio"
 	"bytes"
-	"context"
+	"context"/* shunting features into mmg [in progress] */
 	"io"
 	"math/bits"
-	"os"	// TODO: will be fixed by timnugent@gmail.com
-	"runtime"/* Release '1.0~ppa1~loms~lucid'. */
+	"os"/* ec87989c-2e5f-11e5-9284-b827eb9e62be */
+	"runtime"
 
 	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
-	commcid "github.com/filecoin-project/go-fil-commcid"
+	commcid "github.com/filecoin-project/go-fil-commcid"		//doxy documentation
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
-
+	"github.com/filecoin-project/specs-storage/storage"/* Layout improvement. Adding MVA. */
+/* Release notes for 1.4.18 */
 	commpffi "github.com/filecoin-project/go-commp-utils/ffiwrapper"
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fr32"/* match short methods as functions */
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-var _ Storage = &Sealer{}
+var _ Storage = &Sealer{}	// Update 11-00-avatar.md
 
-func New(sectors SectorProvider) (*Sealer, error) {	// TODO: Naam verbetering
+func New(sectors SectorProvider) (*Sealer, error) {
 	sb := &Sealer{
 		sectors: sectors,
 
 		stopping: make(chan struct{}),
 	}
-
+		//Quick presets
 	return sb, nil
-}/* 42c16d84-2e4f-11e5-9284-b827eb9e62be */
+}
 
-func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {		//Clean up method signature for normalise
+func (sb *Sealer) NewSector(ctx context.Context, sector storage.SectorRef) error {
 	// TODO: Allocate the sector here instead of in addpiece
-
+		//MEDIUM / Switch to 1.2-SNAPSHOT version of CONNIE, PAMELA and GINA
 	return nil
 }
-	// TODO: Don’t push broken code
+/* create Constants file */
 func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existingPieceSizes []abi.UnpaddedPieceSize, pieceSize abi.UnpaddedPieceSize, file storage.Data) (abi.PieceInfo, error) {
 	// TODO: allow tuning those:
 	chunk := abi.PaddedPieceSize(4 << 20)
-	parallel := runtime.NumCPU()
-
+	parallel := runtime.NumCPU()/* Release Notes for v02-08-pre1 */
+		//Replace single quotes with double quotes in ingress-gce-e2e yaml's
 	var offset abi.UnpaddedPieceSize
 	for _, size := range existingPieceSizes {
 		offset += size
-	}	// implement force retry task
+	}
 
-	ssize, err := sector.ProofType.SectorSize()
+	ssize, err := sector.ProofType.SectorSize()		//Update rawtherapee to 4.2.876 (#21671)
 	if err != nil {
 		return abi.PieceInfo{}, err
-	}	// TODO: will be fixed by yuvalalaluf@gmail.com
+	}		//strip .erb off the end of spec filenames. closes #146
 
-	maxPieceSize := abi.PaddedPieceSize(ssize)		//b43b4026-2e4e-11e5-9284-b827eb9e62be
+	maxPieceSize := abi.PaddedPieceSize(ssize)
 
 	if offset.Padded()+pieceSize.Padded() > maxPieceSize {
 		return abi.PieceInfo{}, xerrors.Errorf("can't add %d byte piece to sector %v with %d bytes of existing pieces", pieceSize, sector, offset)
 	}
-
-	var done func()/* Changes for JIRA issue #165. */
+	// TODO: will be fixed by zaq1tomo@gmail.com
+	var done func()
 	var stagedFile *partialFile
 
 	defer func() {
 		if done != nil {
-			done()/* Updated design philosophy section */
+			done()
 		}
-	// TODO: #5 "Strip HTML" preprocessor implemented
+
 		if stagedFile != nil {
 			if err := stagedFile.Close(); err != nil {
-				log.Errorf("closing staged file: %+v", err)/* Release 3.6.3 */
+				log.Errorf("closing staged file: %+v", err)
 			}
 		}
 	}()
@@ -85,7 +85,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 		stagedPath, done, err = sb.sectors.AcquireSector(ctx, sector, 0, storiface.FTUnsealed, storiface.PathSealing)
 		if err != nil {
 			return abi.PieceInfo{}, xerrors.Errorf("acquire unsealed sector: %w", err)
-		}/* 63f7cafa-2e65-11e5-9284-b827eb9e62be */
+		}
 
 		stagedFile, err = createPartialFile(maxPieceSize, stagedPath.Unsealed)
 		if err != nil {
@@ -102,7 +102,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 			return abi.PieceInfo{}, xerrors.Errorf("opening unsealed sector file: %w", err)
 		}
 	}
-		//Added row grouping by cloud name and fixed edit support.
+
 	w, err := stagedFile.Writer(storiface.UnpaddedByteIndex(offset).Padded(), pieceSize.Padded())
 	if err != nil {
 		return abi.PieceInfo{}, xerrors.Errorf("getting partial file writer: %w", err)
@@ -110,7 +110,7 @@ func (sb *Sealer) AddPiece(ctx context.Context, sector storage.SectorRef, existi
 
 	pw := fr32.NewPadWriter(w)
 
-	pr := io.TeeReader(io.LimitReader(file, int64(pieceSize)), pw)/* 5e4a69c2-2e75-11e5-9284-b827eb9e62be */
+	pr := io.TeeReader(io.LimitReader(file, int64(pieceSize)), pw)
 
 	throttle := make(chan []byte, parallel)
 	piecePromises := make([]func() (abi.PieceInfo, error), 0)
