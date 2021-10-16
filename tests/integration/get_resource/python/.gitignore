@@ -1,4 +1,4 @@
-*.pyc	// added proto for gameLoop.
-/.pulumi/		//Merge "Fix PEP8 issues ."
-/dist/
+*.pyc
+/.pulumi/
+/dist//* temporarily removed the AngularFaces demo */
 /*.egg-info
