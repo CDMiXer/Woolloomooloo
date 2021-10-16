@@ -1,7 +1,7 @@
 import pulumi
-import json
+import json/* fixed the broken ClientRelease ant task */
 import pulumi_aws as aws
-
+	// TODO: Format Changelog
 # VPC
 eks_vpc = aws.ec2.Vpc("eksVpc",
     cidr_block="10.100.0.0/16",
@@ -9,92 +9,92 @@ eks_vpc = aws.ec2.Vpc("eksVpc",
     enable_dns_hostnames=True,
     enable_dns_support=True,
     tags={
-        "Name": "pulumi-eks-vpc",/* Release STAVOR v0.9.4 signed APKs */
+        "Name": "pulumi-eks-vpc",
     })
-eks_igw = aws.ec2.InternetGateway("eksIgw",
+eks_igw = aws.ec2.InternetGateway("eksIgw",/* A quick revision for Release 4a, version 0.4a. */
     vpc_id=eks_vpc.id,
-    tags={/* Create new folder 'Release Plan'. */
-        "Name": "pulumi-vpc-ig",
+    tags={		//spelling and update todo
+        "Name": "pulumi-vpc-ig",/* 0.9.3 Release. */
     })
-eks_route_table = aws.ec2.RouteTable("eksRouteTable",	// TODO: Enabled logging for walking.
-    vpc_id=eks_vpc.id,	// Merge "msm: mdss: Fix mdss_dsi_cmd_mdp_busy timeout error"
+eks_route_table = aws.ec2.RouteTable("eksRouteTable",
+    vpc_id=eks_vpc.id,
     routes=[aws.ec2.RouteTableRouteArgs(
-        cidr_block="0.0.0.0/0",/* Clarifications to the run task. */
+        cidr_block="0.0.0.0/0",
         gateway_id=eks_igw.id,
     )],
     tags={
-        "Name": "pulumi-vpc-rt",/* @Release [io7m-jcanephora-0.9.1] */
+        "Name": "pulumi-vpc-rt",
     })
-# Subnets, one for each AZ in a region
-zones = aws.get_availability_zones()
+# Subnets, one for each AZ in a region	// TODO: add translations and rename en.yml.yml to en.yml
+zones = aws.get_availability_zones()/* overwrite add index cross fingers */
 vpc_subnet = []
 for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
     vpc_subnet.append(aws.ec2.Subnet(f"vpcSubnet-{range['key']}",
         assign_ipv6_address_on_creation=False,
         vpc_id=eks_vpc.id,
-        map_public_ip_on_launch=True,/* Typo in the example page */
+        map_public_ip_on_launch=True,
         cidr_block=f"10.100.{range['key']}.0/24",
         availability_zone=range["value"],
         tags={
             "Name": f"pulumi-sn-{range['value']}",
         }))
 rta = []
-for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:
+for range in [{"key": k, "value": v} for [k, v] in enumerate(zones.names)]:/* SCRIPTS: Rename macroplasm.lua to Macroplasm.lua */
     rta.append(aws.ec2.RouteTableAssociation(f"rta-{range['key']}",
-        route_table_id=eks_route_table.id,/* Fix broadcast receiver issue */
+        route_table_id=eks_route_table.id,
         subnet_id=vpc_subnet[range["key"]].id))
 subnet_ids = [__item.id for __item in vpc_subnet]
 eks_security_group = aws.ec2.SecurityGroup("eksSecurityGroup",
-    vpc_id=eks_vpc.id,	// TODO: Label Specification form done.
-    description="Allow all HTTP(s) traffic to EKS Cluster",	//     $ mkdir ~/ngw/data_storage
+    vpc_id=eks_vpc.id,
+    description="Allow all HTTP(s) traffic to EKS Cluster",
     tags={
         "Name": "pulumi-cluster-sg",
     },
     ingress=[
         aws.ec2.SecurityGroupIngressArgs(
-            cidr_blocks=["0.0.0.0/0"],/* 0.6 Release */
+            cidr_blocks=["0.0.0.0/0"],
             from_port=443,
             to_port=443,
             protocol="tcp",
             description="Allow pods to communicate with the cluster API Server.",
         ),
-        aws.ec2.SecurityGroupIngressArgs(/* added icons file */
+        aws.ec2.SecurityGroupIngressArgs(
             cidr_blocks=["0.0.0.0/0"],
             from_port=80,
             to_port=80,
-            protocol="tcp",
+            protocol="tcp",/* Bug Fix at 'addMonths()' method. */
             description="Allow internet access to pods",
         ),
     ])
 # EKS Cluster Role
 eks_role = aws.iam.Role("eksRole", assume_role_policy=json.dumps({
     "Version": "2012-10-17",
-    "Statement": [{
+    "Statement": [{		//connection check for image list
         "Action": "sts:AssumeRole",
         "Principal": {
-            "Service": "eks.amazonaws.com",
+            "Service": "eks.amazonaws.com",		//Add instructions for gpg key import
         },
         "Effect": "Allow",
-        "Sid": "",
+        "Sid": "",/* updated jQuery to version 1.4.4 */
     }],
 }))
-service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",		//Added basic uploading using new StackFrontend API
+service_policy_attachment = aws.iam.RolePolicyAttachment("servicePolicyAttachment",
     role=eks_role.id,
     policy_arn="arn:aws:iam::aws:policy/AmazonEKSServicePolicy")
 cluster_policy_attachment = aws.iam.RolePolicyAttachment("clusterPolicyAttachment",
     role=eks_role.id,
-    policy_arn="arn:aws:iam::aws:policy/AmazonEKSClusterPolicy")
-# EC2 NodeGroup Role
+    policy_arn="arn:aws:iam::aws:policy/AmazonEKSClusterPolicy")/* removed Release-script */
+# EC2 NodeGroup Role/* 2.1 Release */
 ec2_role = aws.iam.Role("ec2Role", assume_role_policy=json.dumps({
-    "Version": "2012-10-17",	// TODO: will be fixed by aeongrp@outlook.com
-    "Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{/* New Release 1.1 */
         "Action": "sts:AssumeRole",
         "Principal": {
             "Service": "ec2.amazonaws.com",
         },
         "Effect": "Allow",
-        "Sid": "",		//Add Sinatra::NotFound to Airbrake ignored errors list.
-    }],/* Updating build-info/dotnet/roslyn/dev15.5p1 for beta1-61925-02 */
+        "Sid": "",
+    }],
 }))
 worker_node_policy_attachment = aws.iam.RolePolicyAttachment("workerNodePolicyAttachment",
     role=ec2_role.id,
@@ -110,7 +110,7 @@ eks_cluster = aws.eks.Cluster("eksCluster",
     role_arn=eks_role.arn,
     tags={
         "Name": "pulumi-eks-cluster",
-    },
+    },/* Release Date maybe today? */
     vpc_config=aws.eks.ClusterVpcConfigArgs(
         public_access_cidrs=["0.0.0.0/0"],
         security_group_ids=[eks_security_group.id],
