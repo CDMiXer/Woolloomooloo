@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* [snomed] Move SnomedReleases helper class to snomed.core.domain package */
 
 import * as pulumi from "@pulumi/pulumi";
 
