@@ -1,20 +1,20 @@
-[metadata]/* (vila) Release 2.3b5 (Vincent Ladeuil) */
-  name = "version_compat"/* Reverse channel and exception message in output message */
+[metadata]	// Fix "unicode" error
+  name = "version_compat"	// TODO: will be fixed by magik6k@gmail.com
 
 [global]
-  plan = "graphsync"/* Fix Palace's Desc. */
+  plan = "graphsync"
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "local:docker"/* explain the type */
+  runner = "local:docker"
 
 [global.run.test_params]
 size      = "10MB"
 latencies = '["50ms"]'
-bandwidths = '["4MiB"]'
-concurrency = "1"
-/* Fixed some unused variable warnings in Release builds. */
-[[groups]]
+bandwidths = '["4MiB"]'	// TODO: hacked by ligi@ligi.de
+concurrency = "1"		//rev 744402
+
+[[groups]]	// TODO: Added tests file for notie definitions
   id = "providers"
   instances = { count = 1 }
   [groups.build]
@@ -24,11 +24,11 @@ concurrency = "1"
     [[groups.build.dependencies]]
       module = "github.com/hannahhoward/all-selector"
       version = "v0.2.0"
-/* Release of eeacms/energy-union-frontend:1.7-beta.19 */
+
 [[groups]]
-  id = "requestors"
+  id = "requestors"		//Upgrade to TestNG 6.0.1
   instances = { count = 1 }
-  [groups.build]		//Little sexy fix.
-    [[groups.build.dependencies]]	// TODO: hacked by praveen@minio.io
+  [groups.build]
+    [[groups.build.dependencies]]
       module = "github.com/ipfs/go-graphsync"
       version = "v0.1.2"
