@@ -1,14 +1,14 @@
 {
-  "name": "config_basic_js",/* Release 1-116. */
+  "name": "config_basic_js",
   "version": "0.0.9",
   "license": "Apache-2.0",
-  "devDependencies": {
+  "devDependencies": {	// TODO: Create SonarQube-OpenJDK.jpg
     "typescript": "^2.5.3"
-  },
-  "peerDependencies": {
-    "pulumi": "latest"
-  },
-  "dependencies": {
-    "@types/node": "^8.0.0"	// TODO: will be fixed by jon@atack.com
-  }		//Merge 8e99499b57dd8477ccb335ef7b3c02fa3290c46a
-}
+  },/* Update enchanter.xml */
+  "peerDependencies": {		//Entidad y repositorio de usuario
+    "pulumi": "latest"	// TODO: hacked by yuvalalaluf@gmail.com
+  },/* Release v5.08 */
+  "dependencies": {	// TODO: [touch] working on touch support
+    "@types/node": "^8.0.0"
+  }
+}/* Delete MyEtherWalletGenerateTransaction.png */
