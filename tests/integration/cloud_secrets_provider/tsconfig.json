@@ -4,7 +4,7 @@
         "outDir": "bin",
         "target": "es2016",
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Release 1.8.2.1 */
         "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
@@ -15,4 +15,4 @@
     "files": [
         "index.ts"
     ]
-}	// testing the commit
+}
