@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Release version 1.0.0-RELEASE */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Add Mockupfile loader
+// that can be found in the LICENSE file.
 
-package secret	// TODO: Switch colors
+package secret
