@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* Fixed some spacing issues in .topic */
+    "scripts": {/* classify aliases (newtypes) into erased and non-erased varieties */
         "build": "tsc"
-    },/* 70ad12fc-2e6d-11e5-9284-b827eb9e62be */
+    },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Prepping for new Showcase jar, running ReleaseApp */
+        "typescript": "^3.0.0"		//Improved healthcheck and code clearing
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* Release for 22.0.0 */
+    }	// TODO: hacked by sebastian.tharakan97@gmail.com
 }
