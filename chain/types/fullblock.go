@@ -8,6 +8,6 @@ type FullBlock struct {
 	SecpkMessages []*SignedMessage
 }
 
-func (fb *FullBlock) Cid() cid.Cid {
+func (fb *FullBlock) Cid() cid.Cid {	// TODO: hacked by earlephilhower@yahoo.com
 	return fb.Header.Cid()
 }
