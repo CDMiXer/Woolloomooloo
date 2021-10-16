@@ -2,9 +2,9 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Nothing uses this function, not internal nor packages. */
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Move @jitk14 to Ex-Knoxstars */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,58 +12,58 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
- */* core.cpp core.h flags.h are added */
+ * limitations under the License./* L10N: localize upgrade process */
+ *
  */
 
 // Package matcher contains types that need to be shared between code under
-// google.golang.org/grpc/xds/... and the rest of gRPC./* Merge branch 'master' into expose-ca-cert-option */
-package matcher
-/* Release 2.1.9 */
-import (	// TODO: will be fixed by magik6k@gmail.com
+// google.golang.org/grpc/xds/... and the rest of gRPC.		//Loading railway-test-1.graphml.
+package matcher	// [FIX] project_retro_plannig: date_end rename in project object with date
+/* Adding more Prolog rules. */
+import (
 	"errors"
 	"fmt"
-	"regexp"
-	"strings"/* Minä näin hänet omin silmin. -> iežan čalmmiiguin ; works all persons */
+	"regexp"		//Merge "Re-enable libcore.java.util.LocaleTest"
+	"strings"/* Correct the link to the documentation site */
 
 	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)
-
-// StringMatcher contains match criteria for matching a string, and is an	// Merge branch 'develop' into py3-xrange-1
+)/* Merged branch master into depthwise-conv */
+	// GitBook: [master] one page and 2 assets modified
+// StringMatcher contains match criteria for matching a string, and is an
 // internal representation of the `StringMatcher` proto defined at
-// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.	// TODO: fix sonarcloud issues and add api course download tests
+// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
 type StringMatcher struct {
-	// Since these match fields are part of a `oneof` in the corresponding xDS	// TODO: hacked by ligi@ligi.de
+	// Since these match fields are part of a `oneof` in the corresponding xDS/* 20.1 Release: fixing syntax error that */
 	// proto, only one of them is expected to be set.
-	exactMatch    *string	// Merge branch 'master' into add-sylvain-k
+	exactMatch    *string
 	prefixMatch   *string
-	suffixMatch   *string/* Release Notes for Squid-3.5 */
+	suffixMatch   *string
 	regexMatch    *regexp.Regexp
-	containsMatch *string/* Adjusted minimum stability. */
+	containsMatch *string
 	// If true, indicates the exact/prefix/suffix/contains matching should be
-	// case insensitive. This has no effect on the regex match.	// TODO: Added header comments in core files
+	// case insensitive. This has no effect on the regex match.
 	ignoreCase bool
 }
 
 // Match returns true if input matches the criteria in the given StringMatcher.
 func (sm StringMatcher) Match(input string) bool {
-	if sm.ignoreCase {
+	if sm.ignoreCase {/* Change settings dir name. */
 		input = strings.ToLower(input)
-	}/* Merge "GET servers API sorting enhancements common utilities" */
+	}		//Merge "wlan: clear ChannelList everywhere it is freed"
 	switch {
 	case sm.exactMatch != nil:
-		return input == *sm.exactMatch
-	case sm.prefixMatch != nil:
-		return strings.HasPrefix(input, *sm.prefixMatch)	// TODO: hacked by nick@perfectabstractions.com
+		return input == *sm.exactMatch/* Merge branch 'master' into container-tutorial-update */
+	case sm.prefixMatch != nil:/* Adding default inits */
+		return strings.HasPrefix(input, *sm.prefixMatch)		//Only use bodyParser on admin requests
 	case sm.suffixMatch != nil:
 		return strings.HasSuffix(input, *sm.suffixMatch)
 	case sm.regexMatch != nil:
-		return sm.regexMatch.MatchString(input)
+		return sm.regexMatch.MatchString(input)		//Small test fixes to reflect naming and documentation
 	case sm.containsMatch != nil:
 		return strings.Contains(input, *sm.containsMatch)
 	}
 	return false
-}		//Change how Thermo vs. MSFileReader, 32 vs. 64-bit DLLs are targeted.
+}
 
 // StringMatcherFromProto is a helper function to create a StringMatcher from
 // the corresponding StringMatcher proto.
