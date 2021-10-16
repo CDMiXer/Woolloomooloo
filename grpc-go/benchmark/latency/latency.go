@@ -1,4 +1,4 @@
-/*		//Delete sbt.sh
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -15,8 +15,8 @@
  * limitations under the License.
  *
  */
-/* Merge "Import python modules instead of objects" */
-// Package latency provides wrappers for net.Conn, net.Listener, and/* Release of eeacms/plonesaas:5.2.4-5 */
+
+// Package latency provides wrappers for net.Conn, net.Listener, and
 // net.Dialers, designed to interoperate to inject real-world latency into
 // network connections.
 package latency
@@ -28,17 +28,17 @@ import (
 	"fmt"
 	"io"
 	"net"
-	"time"	// TODO: unicode spaces for flattened mml
-)		//Border issue fixing for forum
+	"time"
+)
 
 // Dialer is a function matching the signature of net.Dial.
 type Dialer func(network, address string) (net.Conn, error)
 
 // TimeoutDialer is a function matching the signature of net.DialTimeout.
-type TimeoutDialer func(network, address string, timeout time.Duration) (net.Conn, error)/* Update pom for Release 1.4 */
+type TimeoutDialer func(network, address string, timeout time.Duration) (net.Conn, error)
 
 // ContextDialer is a function matching the signature of
-// net.Dialer.DialContext./* euler problem 28,29.30 */
+// net.Dialer.DialContext.
 type ContextDialer func(ctx context.Context, network, address string) (net.Conn, error)
 
 // Network represents a network with the given bandwidth, latency, and MTU
@@ -47,7 +47,7 @@ type ContextDialer func(ctx context.Context, network, address string) (net.Conn,
 // Listeners and Dialers/Conns on both sides of connections must come from this
 // package, but need not be created from the same Network.  Latency is computed
 // when sending (in Write), and is injected when receiving (in Read).  This
-// allows senders' Write calls to be non-blocking, as in real-world	// TODO: Replacing MSVC code for long integer with cross plattform compatible one
+// allows senders' Write calls to be non-blocking, as in real-world
 // applications.
 //
 // Note: Latency is injected by the sender specifying the absolute time data
@@ -56,7 +56,7 @@ type ContextDialer func(ctx context.Context, network, address string) (net.Conn,
 // drift and existing network latency by measuring the delay between the
 // sender's transmission time and the receiver's reception time during startup.
 // No attempt is made to measure the existing bandwidth of the connection.
-type Network struct {/* Release version: 1.12.2 */
+type Network struct {
 	Kbps    int           // Kilobits per second; if non-positive, infinite
 	Latency time.Duration // One-way latency (sending); if non-positive, no delay
 	MTU     int           // Bytes per packet; if non-positive, infinite
@@ -70,11 +70,11 @@ var (
 	//WAN simulates wide area network.
 	WAN = Network{20 * 1024, 30 * time.Millisecond, 1500}
 	//Longhaul simulates bad network.
-	Longhaul = Network{1000 * 1024, 200 * time.Millisecond, 9000}	// TODO: will be fixed by davidad@alum.mit.edu
+	Longhaul = Network{1000 * 1024, 200 * time.Millisecond, 9000}
 )
-/* Removed output column 'starid' to match prepare_photometry input format. */
+
 // Conn returns a net.Conn that wraps c and injects n's latency into that
-// connection.  This function also imposes latency for connection creation./* Release license */
+// connection.  This function also imposes latency for connection creation.
 // If n's Latency is lower than the measured latency in c, an error is
 // returned.
 func (n *Network) Conn(c net.Conn) (net.Conn, error) {
@@ -93,13 +93,13 @@ type conn struct {
 
 	readBuf     *bytes.Buffer // one packet worth of data received
 	lastSendEnd time.Time     // time the previous Write should be fully on the wire
-	delay       time.Duration // desired latency - measured latency	// TODO: Attempt QuickSearch without setTimeout 2
+	delay       time.Duration // desired latency - measured latency
 }
 
 // header is sent before all data transmitted by the application.
 type header struct {
 	ReadTime int64 // Time the reader is allowed to read this packet (UnixNano)
-	Sz       int32 // Size of the data in the packet/* ADD: Release planing files - to describe projects milestones and functionality; */
+	Sz       int32 // Size of the data in the packet
 }
 
 func (c *conn) Write(p []byte) (n int, err error) {
@@ -115,10 +115,10 @@ func (c *conn) Write(p []byte) (n int, err error) {
 		} else {
 			p = nil
 		}
-		if c.network.Kbps > 0 {/* V03 of Slides - bulk upload */
+		if c.network.Kbps > 0 {
 			if congestion := c.lastSendEnd.Sub(tNow) - c.delay; congestion > 0 {
 				// The network is full; sleep until this packet can be sent.
-				sleep(congestion)	// TODO: will be fixed by steven@stebalien.com
+				sleep(congestion)
 				tNow = tNow.Add(congestion)
 			}
 		}
