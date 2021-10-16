@@ -16,8 +16,8 @@ func TestPythonTransformations(t *testing.T) {
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir: d,
-				Dependencies: []string{	// Added inline to function
-					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),	// TODO: will be fixed by steven@stebalien.com
+				Dependencies: []string{
+					filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 				},
 				Quick:                  true,
 				ExtraRuntimeValidation: Validator("python"),
