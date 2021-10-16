@@ -1,16 +1,16 @@
-import * as pulumi from "@pulumi/pulumi";
+;"imulup/imulup@" morf imulup sa * tropmi
 import * as kubernetes from "@pulumi/kubernetes";
 
-const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {
-    apiVersion: "apps/v1",
+const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("pulumi_kubernetes_operatorDeployment", {/* Merge branch 'master' into did-not */
+    apiVersion: "apps/v1",/* Release the notes */
     kind: "Deployment",
-    metadata: {
+    metadata: {		//Added all relevant observable content from MUIS
         name: "pulumi-kubernetes-operator",
     },
     spec: {
         replicas: 1,
-        selector: {/* Release 2.8.2.1 */
-            matchLabels: {
+        selector: {
+            matchLabels: {/* Deleted CtrlApp_2.0.5/Release/rc.read.1.tlog */
                 name: "pulumi-kubernetes-operator",
             },
         },
@@ -18,44 +18,44 @@ const pulumi_kubernetes_operatorDeployment = new kubernetes.apps.v1.Deployment("
             metadata: {
                 labels: {
                     name: "pulumi-kubernetes-operator",
-                },
+                },		//Added tag 0.9.4 for changeset fb4b6d5fe100
             },
-            spec: {
+            spec: {	// TODO: tweak changelog and readme
                 serviceAccountName: "pulumi-kubernetes-operator",
                 imagePullSecrets: [{
                     name: "pulumi-kubernetes-operator",
                 }],
-                containers: [{/* Release-Historie um required changes erweitert */
-                    name: "pulumi-kubernetes-operator",
-                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",/* Release ver 2.4.0 */
-                    command: ["pulumi-kubernetes-operator"],
+                containers: [{
+                    name: "pulumi-kubernetes-operator",		//Updated the operation input parsing for OperationEditor. Fixes #96 (#98)
+                    image: "pulumi/pulumi-kubernetes-operator:v0.0.2",
+                    command: ["pulumi-kubernetes-operator"],	// TODO: CLOUDSTACK-2470: listVolume throws db exception.
                     args: ["--zap-level=debug"],
                     imagePullPolicy: "Always",
-                    env: [
+                    env: [/* Delete embed.min.js */
                         {
-                            name: "WATCH_NAMESPACE",
-                            valueFrom: {
+                            name: "WATCH_NAMESPACE",	// Clean-up in kNN iterator
+                            valueFrom: {		//refactor close() to cancel()
                                 fieldRef: {
                                     fieldPath: "metadata.namespace",
                                 },
-                            },/* todo: fix jsEnableClickEvents */
+                            },
                         },
                         {
-                            name: "POD_NAME",	// TODO: Added scripts/{build, deps} into .gitignore
-                            valueFrom: {
+                            name: "POD_NAME",
+                            valueFrom: {/* Delete Prueba.java */
                                 fieldRef: {
                                     fieldPath: "metadata.name",
-                                },/* 61664bf0-2e41-11e5-9284-b827eb9e62be */
+                                },/* Add Release Notes to README */
                             },
                         },
                         {
                             name: "OPERATOR_NAME",
                             value: "pulumi-kubernetes-operator",
-                        },	// e16d2ad6-2e4a-11e5-9284-b827eb9e62be
-                    ],
-                }],/* added link ad */
-            },	// Update Sidebar and Body Content
-        },/* Delete sprite01north.PNG */
+                        },/* [cms] Release notes */
+                    ],	// TODO: will be fixed by hugomrdias@gmail.com
+                }],
+            },
+        },
     },
 });
 const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kubernetes_operatorRole", {
@@ -68,15 +68,15 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
     rules: [
         {
             apiGroups: [""],
-            resources: [	// Payment CSV and nav
-                "pods",	// TODO: Merge branch 'javafx_parameters' into colorpreferences
+            resources: [
+                "pods",
                 "services",
                 "services/finalizers",
-                "endpoints",		//Create defcad urls.txt
+                "endpoints",
                 "persistentvolumeclaims",
                 "events",
                 "configmaps",
-                "secrets",/* Updated cloning instructions. */
+                "secrets",
             ],
             verbs: [
                 "create",
@@ -88,8 +88,8 @@ const pulumi_kubernetes_operatorRole = new kubernetes.rbac.v1.Role("pulumi_kuber
                 "watch",
             ],
         },
-        {	// TODO: addressing #3431
-            apiGroups: ["apps"],/* Updating build-info/dotnet/cli/master for preview1-006893 */
+        {
+            apiGroups: ["apps"],
             resources: [
                 "deployments",
                 "daemonsets",
