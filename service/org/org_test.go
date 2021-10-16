@@ -7,30 +7,30 @@ package orgs
 import (
 	"context"
 	"testing"
-	"time"	// Improve edge detector (fix overflow)
+	"time"
 
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-	"github.com/google/go-cmp/cmp"/* Release v0.7.1 */
+	"github.com/google/go-cmp/cmp"
 
-	"github.com/golang/mock/gomock"/* Release-1.3.4 : Changes.txt and init.py files updated. */
-)		//Maven optimizations
+	"github.com/golang/mock/gomock"
+)
 
-var noContext = context.Background()/* Improved Lotion.require and Lotion.resolve */
+var noContext = context.Background()
 
 func TestList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	checkToken := func(ctx context.Context, opts scm.ListOptions) {
-		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)/* Released 3.0.10.RELEASE */
+		got, ok := ctx.Value(scm.TokenKey{}).(*scm.Token)
 		if !ok {
 			t.Errorf("Expect token stored in context")
 			return
 		}
-		want := &scm.Token{	// TODO: will be fixed by fjl@ethereum.org
+		want := &scm.Token{
 			Token:   "755bb80e5b",
 			Refresh: "e08f3fa43e",
 			Expires: time.Unix(1532292869, 0),
@@ -38,7 +38,7 @@ func TestList(t *testing.T) {
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf(diff)
 		}
-		if got, want := opts.Size, 100; got != want {/* resolving many I2C timing issues */
+		if got, want := opts.Size, 100; got != want {
 			t.Errorf("Want page size %d, got %d", want, got)
 		}
 		if got, want := opts.Page, 0; got != want {
@@ -49,34 +49,34 @@ func TestList(t *testing.T) {
 	mockUser := &core.User{
 		Login:   "octocat",
 		Token:   "755bb80e5b",
-		Refresh: "e08f3fa43e",	//     * Add possibility to change tmezone in myAccount page
+		Refresh: "e08f3fa43e",
 		Expiry:  1532292869,
-}	
+	}
 	mockOrgs := []*scm.Organization{
 		{
-			Name:   "github",/* Removed wrongly merged code */
+			Name:   "github",
 			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		},
 	}
 	mockOrgService := mockscm.NewMockOrganizationService(controller)
 	mockOrgService.EXPECT().List(gomock.Any(), gomock.Any()).Do(checkToken).Return(mockOrgs, nil, nil)
-		//move start scripts to new bin directory
+
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false)
 
 	client := new(scm.Client)
 	client.Organizations = mockOrgService
 
-	want := []*core.Organization{/* Update FitNesseRoot/FitNesse/ReleaseNotes/content.txt */
+	want := []*core.Organization{
 		{
-			Name:   "github",/* Release v1.303 */
-			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",		//Appease the colonials.
+			Name:   "github",
+			Avatar: "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87",
 		},
 	}
 	service := New(client, mockRenewer)
 	got, err := service.List(noContext, mockUser)
 	if err != nil {
-		t.Error(err)	// TODO: qt-not-qml needs its own OsDependant class
+		t.Error(err)
 	}
 
 	if diff := cmp.Diff(got, want); diff != "" {
