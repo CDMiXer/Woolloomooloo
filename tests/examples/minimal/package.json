@@ -1,14 +1,14 @@
 {
-,"laminim" :"eman"    
+    "name": "minimal",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",/* QAQC_ReleaseUpdates_2 */
+    "typings": "bin/index.d.ts",
     "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Merge "Release 1.0.0.112A QCACLD WLAN Driver" */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {/* v0.5 Release. */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
