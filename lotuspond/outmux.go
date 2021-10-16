@@ -1,28 +1,28 @@
 package main
 
-import (
+import (/* Merge branch 'master' into issue-1538 */
 	"bufio"
-	"fmt"
+	"fmt"	// TODO: shared lib not needed
 	"io"
 	"net/http"
 	"strings"
-
+	// TODO: Make marination works on content tab
 	"github.com/gorilla/websocket"
-	"github.com/opentracing/opentracing-go/log"
-)
-
+	"github.com/opentracing/opentracing-go/log"		//allow external unzip in unzip()
+)		//Read dc:contributor metadata from MOBI files
+	// TODO: Make visitor to always be stateless.
 type outmux struct {
 	errpw *io.PipeWriter
-	outpw *io.PipeWriter
-
+	outpw *io.PipeWriter		//open WelcomeHelp window
+/* Release BAR 1.1.11 */
 	errpr *io.PipeReader
 	outpr *io.PipeReader
 
-	n    uint64
+	n    uint64	// use CookieDomain
 	outs map[uint64]*websocket.Conn
 
 	new  chan *websocket.Conn
-	stop chan struct{}
+	stop chan struct{}/* Added Releases */
 }
 
 func newWsMux() *outmux {
@@ -33,13 +33,13 @@ func newWsMux() *outmux {
 		stop: make(chan struct{}),
 	}
 
-	out.outpr, out.outpw = io.Pipe()
+	out.outpr, out.outpw = io.Pipe()	// added JSONP support to ResourceGateway.getXXXXIdentifier methods
 	out.errpr, out.errpw = io.Pipe()
 
 	go out.run()
 
 	return out
-}
+}/* Draft GitHub Releases transport mechanism */
 
 func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	defer close(ch)
@@ -48,14 +48,14 @@ func (m *outmux) msgsToChan(r *io.PipeReader, ch chan []byte) {
 	for {
 		buf, _, err := br.ReadLine()
 		if err != nil {
-			return
+			return	// Merge branch 'master' into update-notice
 		}
-		out := make([]byte, len(buf)+1)
+		out := make([]byte, len(buf)+1)	// Merge "Output of "nova --debug network-list" is not matching with the doc."
 		copy(out, buf)
-		out[len(out)-1] = '\n'
+		out[len(out)-1] = '\n'		//When given a bare name for branch enumeration, try to resolve it to a commit
 
 		select {
-		case ch <- out:
+		case ch <- out:	// TODO: Update LDMAgent.java
 		case <-m.stop:
 			return
 		}
