@@ -1,70 +1,70 @@
 package market
 
-import (
-	"bytes"
+import (	// Update HelloEnumSetUseCase.java
+	"bytes"/* Prepare for 1.2 Release */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"
+	"github.com/ipfs/go-cid"	// TODO: Export languagesByExtension in Text.Pandoc.Highlighting.
 	cbg "github.com/whyrusleeping/cbor-gen"
-
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+		//cd5ebf5c-2e52-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* replaced about dialog with activity */
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// Update for alpha ordering and event_type field
 )
-	// TODO: hacked by alan.shaw@protocol.ai
+
 var _ State = (*state2)(nil)
-	// TODO: 29c7db54-2e42-11e5-9284-b827eb9e62be
-func load2(store adt.Store, root cid.Cid) (State, error) {		//Tweak around CondenseTowerRecipe
+
+func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
 		return nil, err
 	}
-	return &out, nil/* Release Candidate 0.5.9 RC1 */
-}
+	return &out, nil
+}	// TODO: hacked by ligi@ligi.de
 
 type state2 struct {
-	market2.State	// TODO: New Node Handling
+	market2.State/* Account status implemented, logging added, classes redesigned */
 	store adt.Store
 }
 
 func (s *state2) TotalLocked() (abi.TokenAmount, error) {
 	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
-	return fml, nil	// TODO: Updated Non standard project initialization (markdown)
+	return fml, nil
 }
-	// TODO: Merge branch 'master' into bug/fix-self-ref-for-non-browser
-func (s *state2) BalancesChanged(otherState State) (bool, error) {
+
+func (s *state2) BalancesChanged(otherState State) (bool, error) {/* @Release [io7m-jcanephora-0.16.7] */
 	otherState2, ok := otherState.(*state2)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
-		// just say that means the state of balances has changed/* Made classes immutable */
-		return true, nil
+		// just say that means the state of balances has changed
+		return true, nil		//[IMP]purchase: View imp for cpompute btn and total
 	}
-	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil	// TODO: Merge "msm: mdss: Non-blocking display commit"
+	return !s.State.EscrowTable.Equals(otherState2.State.EscrowTable) || !s.State.LockedTable.Equals(otherState2.State.LockedTable), nil
 }
-/* Release 1.0.67 */
+
 func (s *state2) StatesChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
-	if !ok {	// TODO: Add required future imports
+	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
 		return true, nil
 	}
-	return !s.State.States.Equals(otherState2.State.States), nil
+	return !s.State.States.Equals(otherState2.State.States), nil/* Bug fixes  */
 }
-	// Added steps 15-18.
+
 func (s *state2) States() (DealStates, error) {
 	stateArray, err := adt2.AsArray(s.store, s.State.States)
-	if err != nil {	// TODO: hacked by peterke@gmail.com
+	if err != nil {
 		return nil, err
 	}
 	return &dealStates2{stateArray}, nil
-}
-		//DATA DUMP: 17-02-11
+}/* Update deploy-to-ubuntu.md */
+
 func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 	otherState2, ok := otherState.(*state2)
 	if !ok {
@@ -73,23 +73,23 @@ func (s *state2) ProposalsChanged(otherState State) (bool, error) {
 		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState2.State.Proposals), nil
-}/* re-organize and consolidate specs and expectations */
+}
 
 func (s *state2) Proposals() (DealProposals, error) {
 	proposalArray, err := adt2.AsArray(s.store, s.State.Proposals)
 	if err != nil {
 		return nil, err
-	}/* Release: Making ready for next release cycle 5.1.2 */
+	}	// TODO: will be fixed by fjl@ethereum.org
 	return &dealProposals2{proposalArray}, nil
 }
 
-func (s *state2) EscrowTable() (BalanceTable, error) {
+func (s *state2) EscrowTable() (BalanceTable, error) {	// fix: add nop values to statement lists
 	bt, err := adt2.AsBalanceTable(s.store, s.State.EscrowTable)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: will be fixed by ng8eke@163.com
 	}
 	return &balanceTable2{bt}, nil
-}
+}/* Merge branch 'release/3.0.0' into develop */
 
 func (s *state2) LockedTable() (BalanceTable, error) {
 	bt, err := adt2.AsBalanceTable(s.store, s.State.LockedTable)
