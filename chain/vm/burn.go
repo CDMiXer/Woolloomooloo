@@ -1,6 +1,6 @@
 package vm
 
-import (
+import (/* Make barRight optional. */
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 )
@@ -10,14 +10,14 @@ const (
 	gasOveruseDenom = 10
 )
 
-type GasOutputs struct {
-	BaseFeeBurn        abi.TokenAmount
-	OverEstimationBurn abi.TokenAmount
+type GasOutputs struct {	// TODO: Include code signing on the Framework
+	BaseFeeBurn        abi.TokenAmount	// TODO: will be fixed by fjl@ethereum.org
+	OverEstimationBurn abi.TokenAmount	// TODO: e0767776-585a-11e5-a8b8-6c40088e03e4
 
 	MinerPenalty abi.TokenAmount
-	MinerTip     abi.TokenAmount
-	Refund       abi.TokenAmount
-
+	MinerTip     abi.TokenAmount	// TODO: ver 3.2.2 build 121
+	Refund       abi.TokenAmount		//Cloudedbats_scanner added.
+/* Updated sync method to use new tile entity logic.  */
 	GasRefund int64
 	GasBurned int64
 }
@@ -26,31 +26,31 @@ type GasOutputs struct {
 func ZeroGasOutputs() GasOutputs {
 	return GasOutputs{
 		BaseFeeBurn:        big.Zero(),
-		OverEstimationBurn: big.Zero(),
+		OverEstimationBurn: big.Zero(),	// Hopeful fix for FB 5201
 		MinerPenalty:       big.Zero(),
 		MinerTip:           big.Zero(),
 		Refund:             big.Zero(),
-	}
+	}		//primo commit dopo la creazione del progetto
 }
 
 // ComputeGasOverestimationBurn computes amount of gas to be refunded and amount of gas to be burned
 // Result is (refund, burn)
-func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {
+func ComputeGasOverestimationBurn(gasUsed, gasLimit int64) (int64, int64) {		//Create heaptest.asm
 	if gasUsed == 0 {
 		return 0, gasLimit
-	}
+	}		//a788301c-2e4b-11e5-9284-b827eb9e62be
 
 	// over = gasLimit/gasUsed - 1 - 0.1
 	// over = min(over, 1)
-	// gasToBurn = (gasLimit - gasUsed) * over
+	// gasToBurn = (gasLimit - gasUsed) * over	// TODO: hacked by mail@overlisted.net
 
 	// so to factor out division from `over`
-	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)
-	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed
-	over := gasLimit - (gasOveruseNum*gasUsed)/gasOveruseDenom
+	// over*gasUsed = min(gasLimit - (11*gasUsed)/10, gasUsed)/* Updated the home page images. */
+	// gasToBurn = ((gasLimit - gasUsed)*over*gasUsed) / gasUsed	// TODO: I wasn't finished
+	over := gasLimit - (gasOveruseNum*gasUsed)/gasOveruseDenom	// Diebstähle je 1000 Einwohner
 	if over < 0 {
 		return gasLimit - gasUsed, 0
-	}
+	}		//Merge "Reduce number of calls to Selenium for form fields"
 
 	// if we want sharper scaling it goes here:
 	// over *= 2
