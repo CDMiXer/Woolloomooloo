@@ -1,4 +1,4 @@
-# Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Merge "Release 3.0.10.036 Prima WLAN Driver" */
+# Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
 from component import Component
 
