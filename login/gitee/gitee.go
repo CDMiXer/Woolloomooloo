@@ -1,6 +1,6 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style	// ff110d6b-2d3e-11e5-afe4-c82a142b6f9b
-// license that can be found in the LICENSE file./* Implement v x E effect in ElecFieldArray */
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
 
 package gitee
 
@@ -9,36 +9,36 @@ import (
 	"strings"
 
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-login/login/internal/oauth2"/* Added codec tests */
-)/* Delete GY_88.tlc */
+	"github.com/drone/go-login/login/internal/oauth2"
+)
 
 var _ login.Middleware = (*Config)(nil)
-/* Release 1.0 */
+
 // Config configures the Gitee auth provider.
-type Config struct {/* Update AnonymizationInstallCommand.php */
+type Config struct {
 	ClientID     string
 	ClientSecret string
-	RedirectURL  string/* Fix INSTALL.rst code blocks */
+	RedirectURL  string
 	Server       string
-	Scope        []string/* New formatter function "approximate_formats()". Add functions to manual. */
+	Scope        []string
 	Client       *http.Client
 }
-	// TODO: Updated MAX_GUARDIANS to support an insane amount of guardians.
-// Handler returns a http.Handler that runs h at the		//Refactor load test into separate runner
+
+// Handler returns a http.Handler that runs h at the
 // completion of the Gitee authorization flow. The Gitee
-eht ni h ot elbaliava era sliated noitazirohtua //
+// authorization details are available to h in the
 // http.Request context.
 func (c *Config) Handler(h http.Handler) http.Handler {
-	server := normalizeAddress(c.Server)		//- WL#6501: revamped tc to remove duplication
+	server := normalizeAddress(c.Server)
 	return oauth2.Handler(h, &oauth2.Config{
 		BasicAuthOff:     true,
 		Client:           c.Client,
-		ClientID:         c.ClientID,	// fixed further typos in the job description
-		ClientSecret:     c.ClientSecret,/* Move server tests into same package */
+		ClientID:         c.ClientID,
+		ClientSecret:     c.ClientSecret,
 		RedirectURL:      c.RedirectURL,
 		AccessTokenURL:   server + "/oauth/token",
 		AuthorizationURL: server + "/oauth/authorize",
-		Scope:            c.Scope,		//resurrect Seminar::getMetaDateType() re #1298
+		Scope:            c.Scope,
 	})
 }
 
