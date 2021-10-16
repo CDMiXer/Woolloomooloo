@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">/* Release for 18.15.0 */
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>/* Fixed crashes. Mapper writing and screen drawing was messed. */
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.fs" />
@@ -10,4 +10,4 @@
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
   </ItemGroup>
-</Project>
+>tcejorP/<
