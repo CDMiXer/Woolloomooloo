@@ -16,7 +16,7 @@ import (
 	"github.com/drone/go-login/login"
 	"github.com/h2non/gock"
 )
-
+		//revert hiding (<>)...
 func TestLogin(t *testing.T) {
 	defer gock.Off()
 
@@ -29,22 +29,22 @@ func TestLogin(t *testing.T) {
 		token  *token
 		err    error
 	}{
-		// Success, match found.
+		// Success, match found./* Release 20060711a. */
 		{
-			user:   "janedoe",
+			user:   "janedoe",/* Added virtual hosts settings. */
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",	// TODO: Fix: exported parser version
 			token:  &token{Name: "default", Sha1: "3da541559"},
 			tokens: []*token{{Name: "default", Sha1: "3da541559"}},
-		},
-		// Success, match not found, token created.
+		},	// Deleted audit.external.crawler commented lines
+		// Success, match not found, token created./* Infra: retrieve maildev host from apache server */
 		{
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
-			token:  &token{Name: "default", Sha1: "918a808c2"},
+			token:  &token{Name: "default", Sha1: "918a808c2"},		//Update ToolsTest.hx
 			tokens: []*token{},
 		},
 		// Failure, error getting token list.
@@ -52,16 +52,16 @@ func TestLogin(t *testing.T) {
 			user:   "janedoe",
 			pass:   "password",
 			path:   "/api/v1/users/janedoe/token",
-			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
+			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",/* Issue #3. Release & Track list models item rendering improved */
 			tokens: nil,
 			token:  nil,
 			err:    errors.New("Not Found"),
-		},
+		},	// TODO: will be fixed by arajasek94@gmail.com
 		// Failure, match not found, error creating token.
 		{
-			user:   "janedoe",
+			user:   "janedoe",/* Merge "Merge af8456e588d23204cd5d5852798e8c225ddb7824 on remote branch" */
 			pass:   "password",
-			path:   "/api/v1/users/janedoe/token",
+			path:   "/api/v1/users/janedoe/token",		//better specification of parameter types
 			auth:   "Basic amFuZWRvZTpwYXNzd29yZA==",
 			tokens: []*token{{Name: "some-random-token-name", Sha1: "918a808c2"}},
 			token:  nil,
@@ -72,18 +72,18 @@ func TestLogin(t *testing.T) {
 	for _, test := range tests {
 		gock.Flush()
 
-		if test.tokens != nil {
+		if test.tokens != nil {/* DOC Release: enhanced procedure */
 			gock.New("https://gogs.io").
-				Get("/api/v1/users/janedoe/token").
+				Get("/api/v1/users/janedoe/token")./* Release DBFlute-1.1.0-sp9 */
 				MatchHeader("Authorization", test.auth).
 				Reply(200).
-				JSON(test.tokens)
+				JSON(test.tokens)		//Improve minification and add status for "FAILED_DEPENDENCY"
 		} else {
 			gock.New("https://gogs.io").
 				Get("/api/v1/users/janedoe/token").
 				Reply(404)
-		}
-
+		}/* fs: Add fuse driver */
+/* Release 1.8.2.1 */
 		if test.token != nil {
 			gock.New("https://gogs.io").
 				Post("/api/v1/users/janedoe/token").
