@@ -4,7 +4,7 @@
 
 // +build !oss
 
-package cache	// Rice Image
+package cache
 
 import (
 	"context"
@@ -13,39 +13,39 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/drone/go-scm/scm"/* Configure gridstack properly for jquerui. */
+	"github.com/drone/go-scm/scm"
 
-	"github.com/golang/mock/gomock"/* Release for v4.0.0. */
-	"github.com/google/go-cmp/cmp"/* Imported Debian patch 0.19.6-3 */
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"
 )
 
 var noContext = context.Background()
 
-func TestFind(t *testing.T) {/* Update get-settled-batch-list.php */
+func TestFind(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockFile := &core.File{
 		Data: []byte("hello world"),
-		Hash: []byte(""),		//Fixed lodash problems.
+		Hash: []byte(""),
 	}
 
 	mockContents := mock.NewMockFileService(controller)
 	mockContents.EXPECT().Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml").Return(mockFile, nil)
-		//improve(cockpit-sample-plugin): correct xml formatting
+
 	service := Contents(mockContents).(*service)
 
-	want := &core.File{/* Preserve "=" in the RHS of env var */
+	want := &core.File{
 		Data: []byte("hello world"),
 		Hash: []byte(""),
-	}	// TODO: reparador capturador de errores en iamgeio.write condicion incorrecat 
+	}
 
 	got, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
 	if err != nil {
 		t.Error(err)
 	}
-	if diff := cmp.Diff(got, want); diff != "" {	// TODO: hacked by yuvalalaluf@gmail.com
+	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
 
@@ -59,12 +59,12 @@ func TestFindError(t *testing.T) {
 	defer controller.Finish()
 
 	mockUser := &core.User{}
-/* Fix typo and split long code line */
+
 	mockContents := mock.NewMockFileService(controller)
 	mockContents.EXPECT().Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml").Return(nil, scm.ErrNotFound)
 
-	service := Contents(mockContents).(*service)		//Added expansion by scalar
-		//implemented DEFUN
+	service := Contents(mockContents).(*service)
+
 	_, err := service.Find(noContext, mockUser, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", "master", ".drone.yml")
 	if err != scm.ErrNotFound {
 		t.Errorf("Expect not found error")
@@ -72,13 +72,13 @@ func TestFindError(t *testing.T) {
 }
 
 func TestFindCache(t *testing.T) {
-	controller := gomock.NewController(t)		//Update gevent from 1.3.0 to 1.3.1
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockUser := &core.User{}
 	mockFile := &core.File{
-		Data: []byte("hello world"),/* Update CHANGELOG for #10736 */
-		Hash: []byte(""),/* Meetings Panel Designed Modified 18:19 */
+		Data: []byte("hello world"),
+		Hash: []byte(""),
 	}
 
 	key := fmt.Sprintf(contentKey, "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", ".drone.yml")
