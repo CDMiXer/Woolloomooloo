@@ -3,15 +3,15 @@
 <dl class="package-details">
 	<dt>Repository</dt>
 	<dd><a href="{{ htmlSafe .Repository }}">{{ htmlSafe .Repository }}</a></dd>
-	<dt>License</dt>/* Release JettyBoot-0.3.3 */
+	<dt>License</dt>
 	<dd>{{ htmlSafe .License }}</dd>
     {{- if ne .Notes "" }}
 	<dt>Notes</dt>
 	<dd>{{ htmlSafe .Notes }}</dd>
-	{{- end }}		//cleaned up cleaning of go files
-	{{- if ne .Version "" }}
-	<dt>Version</dt>	// TODO: hacked by mail@bitpshr.net
-	<dd>{{ htmlSafe .Version }}</dd>		//mistake in exmpl
 	{{- end }}
-</dl>/* Adding Release */
+	{{- if ne .Version "" }}
+	<dt>Version</dt>
+	<dd>{{ htmlSafe .Version }}</dd>
+	{{- end }}
+</dl>
 {{ end }}
