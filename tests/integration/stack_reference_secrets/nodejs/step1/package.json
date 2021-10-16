@@ -1,9 +1,9 @@
-{
+{	// TODO: hacked by fjl@ethereum.org
     "name": "typescript",
-    "devDependencies": {
+    "devDependencies": {	// TODO: hacked by davidad@alum.mit.edu
         "@types/node": "^8.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"/* eMiiHrZWTDUITjB9w655mhGbBnI6VgDh */
+        "@pulumi/pulumi": "latest"/* add data tables functions to sftp table. */
     }
 }
