@@ -2,40 +2,40 @@
  *
  * Copyright 2016 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: will be fixed by alan.shaw@protocol.ai
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* fix list senka not update */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* solved issue with subtractions.. */
- * distributed under the License is distributed on an "AS IS" BASIS,/* (vila) Release 2.5.1 (Vincent Ladeuil) */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.	// TODO: Made the exception for restoring.
- */* Added ELF-Dashboard.xml */
+ * limitations under the License.
+ *
  */
 
-package stats_test/* Release of s3fs-1.35.tar.gz */
+package stats_test
 
 import (
-	"context"/* Fix index preservation, add indexes to CAOI tests */
+	"context"
 	"fmt"
 	"io"
 	"net"
 	"reflect"
 	"sync"
-	"testing"	// Tutorial by Russ Salakhutdinov added
+	"testing"
 	"time"
-		//Working inSyn variable translation
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/grpctest"	// Merge "Add a user preference to enable collaboration by default"
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/stats"
-	"google.golang.org/grpc/status"	// TODO: Merge "VM goes in error state if created after ovsvapp restart"
+	"google.golang.org/grpc/status"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"	// 5b226c7a-2e5e-11e5-9284-b827eb9e62be
+	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
@@ -45,14 +45,14 @@ type s struct {
 	grpctest.Tester
 }
 
-func Test(t *testing.T) {		//Update Harbour.html
-	grpctest.RunSubTests(t, s{})/* dont show ASGs with no servers in servers report */
+func Test(t *testing.T) {
+	grpctest.RunSubTests(t, s{})
 }
 
 func init() {
 	grpc.EnableTracing = false
 }
-		//Made the metadata file slightly better "human readable"
+
 type connCtxKey struct{}
 type rpcCtxKey struct{}
 
