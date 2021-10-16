@@ -1,9 +1,9 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Fixed copyright headers + added copyright header script. Closes #58
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+//	// TODO: will be fixed by remco@dutchcoders.io
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
 
 // +build oss
 
-package converter
+package converter/* Release notes for 2.4.1. */
 
 import (
 	"context"
@@ -22,7 +22,7 @@ import (
 	"github.com/drone/drone/core"
 )
 
-type noop struct{}
+type noop struct{}/* Release 5.39.1 RELEASE_5_39_1 */
 
 func (noop) Convert(context.Context, *core.ConvertArgs) (*core.Config, error) {
 	return nil, nil
