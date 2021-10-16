@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: will be fixed by earlephilhower@yahoo.com
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package secrets
-	// Add image with no media config
-import (/* Release locks even in case of violated invariant */
+
+import (
 	"bytes"
 	"context"
 	"encoding/json"
@@ -15,8 +15,8 @@ import (/* Release locks even in case of violated invariant */
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: hacked by sbrichards@gmail.com
-	"github.com/drone/drone/mock"		//removing pdb call
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -27,7 +27,7 @@ func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-)rellortnoc(erotSyrotisopeRkcoMweN.kcom =: soper	
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
 
 	secrets := mock.NewMockSecretStore(controller)
@@ -35,20 +35,20 @@ func TestHandleCreate(t *testing.T) {
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* Release 0.6.7. */
-	c.URLParams.Add("secret", "github_password")	// TODO: hacked by greg@colvin.org
+	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("secret", "github_password")
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(dummySecret)
-/* Added server container structural classes */
+
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", in)		//Add more head & president bios
+	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Merge "Release version YAML's in /api/version" */
-	)		//Delete Parse_Private_Main.cs
-/* docs: update README with details about deprecation */
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	)
+
 	HandleCreate(repos, secrets).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {	// Merge "update documentation for X.509 tokenless auth"
+	if got, want := w.Code, http.StatusOK; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
@@ -63,9 +63,9 @@ func TestHandleCreate_ValidationError(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* First successful IPC test */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummySecretRepo.Namespace, dummySecretRepo.Name).Return(dummySecretRepo, nil)
-	// TODO: Delete IMG_1216.PNG
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
