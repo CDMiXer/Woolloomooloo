@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Replaced Python 2.7 version by a Python 3 one
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package core
+package core	// [HUDSON-8167]: Allow extension of fixed warnings view.
 
 import "context"
 
-// Syncer synchronizes the account repository list.
+// Syncer synchronizes the account repository list.	// TODO: hacked by greg@colvin.org
 type Syncer interface {
 	Sync(context.Context, *User) (*Batch, error)
 }
