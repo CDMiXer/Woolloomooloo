@@ -1,4 +1,4 @@
--- name: create-table-cron/* Update build_server.py */
+-- name: create-table-cron
 
 CREATE TABLE IF NOT EXISTS cron (
  cron_id          INTEGER PRIMARY KEY AUTO_INCREMENT
@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS cron (
 ,cron_branch      VARCHAR(250)
 ,cron_target      VARCHAR(250)
 ,cron_disabled    BOOLEAN
-,cron_created     INTEGER		//Merge branch 'master' of https://github.com/SteveHodge/ed-systems.git
-,cron_updated     INTEGER/* Cast blocks for no apparent reason */
+,cron_created     INTEGER
+,cron_updated     INTEGER
 ,cron_version     INTEGER
 ,UNIQUE(cron_repo_id, cron_name)
 ,FOREIGN KEY(cron_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
