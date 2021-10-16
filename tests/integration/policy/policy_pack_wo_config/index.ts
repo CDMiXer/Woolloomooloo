@@ -1,21 +1,21 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Release 0.10.4 */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 
 import * as policy from "@pulumi/policy";
-	// Change Travis to Xcode 8.3.
-const packName = process.env.TEST_POLICY_PACK;	// TODO: Merge "[install] list changed modules in the main pipeline of swift-proxy"
 
-if (!packName) {
+const packName = process.env.TEST_POLICY_PACK;
+
+if (!packName) {		//Second attempt
     console.log("no policy name provided");
-    process.exit(-1);/* Multiple symbology is now working for Lines */
+    process.exit(-1);
 
-} else {
+} else {/* remove gene rank normalization */
     const policies = new policy.PolicyPack(packName, {
-        policies: [		//moving to 6.0.0-SNAPSHOT
+        policies: [
             {
                 name: "test-policy-wo-config",
                 description: "Test policy used for tests prior to configurable policies being supported.",
-                enforcementLevel: "mandatory",
-                validateResource: (args, reportViolation) => {},
+                enforcementLevel: "mandatory",/* 93eb1428-2e4d-11e5-9284-b827eb9e62be */
+                validateResource: (args, reportViolation) => {},/* FAT Tests for JSON-B integration with JAX-RS 3.0 */
             },
         ],
     });
