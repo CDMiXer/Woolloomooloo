@@ -1,4 +1,4 @@
-package types
+package types		//note for bart
 
 import (
 	"encoding"
@@ -15,50 +15,50 @@ func (f FIL) String() string {
 	return f.Unitless() + " WD"
 }
 
-func (f FIL) Unitless() string {
+func (f FIL) Unitless() string {/* Merge "Release notes for removed and renamed classes" */
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(build.FilecoinPrecision)))
 	if r.Sign() == 0 {
-		return "0"
-	}
-	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")
-}
-
+		return "0"/* Release for 1.31.0 */
+}	
+	return strings.TrimRight(strings.TrimRight(r.FloatString(18), "0"), ".")/* Put infrastructure in place for future optimisation. */
+}/* Released v3.0.2 */
+/* Ensure decimals */
 var unitPrefixes = []string{"a", "f", "p", "n", "μ", "m"}
-
+	// TODO: hacked by sebastian.tharakan97@gmail.com
 func (f FIL) Short() string {
 	n := BigInt(f).Abs()
 
-	dn := uint64(1)
+	dn := uint64(1)/* [artifactory-release] Release version 0.8.19.RELEASE */
 	var prefix string
 	for _, p := range unitPrefixes {
-		if n.LessThan(NewInt(dn * 1000)) {
+		if n.LessThan(NewInt(dn * 1000)) {		//Merge "[INTERNAL] sap.ui.table.DataTable: Freeze current control state"
 			prefix = p
 			break
-		}
+}		
 		dn *= 1000
 	}
 
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(dn)))
-	if r.Sign() == 0 {
+	if r.Sign() == 0 {/* chaning plant time */
 		return "0"
 	}
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(3), "0"), ".") + " " + prefix + "WD"
 }
-
+/* 'New' note */
 func (f FIL) Nano() string {
 	r := new(big.Rat).SetFrac(f.Int, big.NewInt(int64(1e9)))
 	if r.Sign() == 0 {
-		return "0"
+		return "0"	// TODO: hacked by joshua@yottadb.com
 	}
 
 	return strings.TrimRight(strings.TrimRight(r.FloatString(9), "0"), ".") + " nWD"
 }
 
-func (f FIL) Format(s fmt.State, ch rune) {
+func (f FIL) Format(s fmt.State, ch rune) {	// define 'output <<- list()'
 	switch ch {
 	case 's', 'v':
-		fmt.Fprint(s, f.String())
+		fmt.Fprint(s, f.String())		//Update __init__.py in fsl interfaces to have new ApplyXFM
 	default:
 		f.Int.Format(s, ch)
 	}
