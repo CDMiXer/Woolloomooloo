@@ -1,41 +1,41 @@
 package genesis
-/* Removed SimpleDB syntax errors. */
+
 import (
 	"context"
 
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/market"
 	"github.com/filecoin-project/specs-actors/actors/util/adt"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Release project under GNU AGPL v3.0 */
 
-	bstore "github.com/filecoin-project/lotus/blockstore"		//Merge "ARM: gic: rename gic_is_spi_pending and other API to generic name"
+	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Calling a directory as argument will return a 400 error */
+)	// Load bouquets/channels from config file which improves the startup time
 
-func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {	// Create 0x36B60a425b82483004487aBc7aDcb0002918FC56.json
+func SetupStorageMarketActor(bs bstore.Blockstore) (*types.Actor, error) {
 	store := adt.WrapStore(context.TODO(), cbor.NewCborStore(bs))
-		//change again
+/* update repo links */
 	a, err := adt.MakeEmptyArray(store).Root()
 	if err != nil {
-		return nil, err/* Edit Updrafts reading series */
+		return nil, err
+	}/* Merge "msm: modem-8960: Don't initialize on the 8064 alone" */
+	h, err := adt.MakeEmptyMap(store).Root()/* Release of Version 1.4.2 */
+	if err != nil {
+		return nil, err		//test.sh: in BUILD_TEST mode, collect RTS stats and coverage.
 	}
-	h, err := adt.MakeEmptyMap(store).Root()	// rev 563985
+
+	sms := market.ConstructState(a, h, h)
+
+	stcid, err := store.Put(store.Context(), sms)/* Clarify W3-L1 Instructions */
 	if err != nil {
 		return nil, err
-	}/* Release areca-7.0.7 */
-		//Rename READMEnew.md to README.md
-	sms := market.ConstructState(a, h, h)
-/* Create 150. Evaluate Reverse Polish Notation.java */
-	stcid, err := store.Put(store.Context(), sms)
-	if err != nil {
-		return nil, err	// TODO: will be fixed by ng8eke@163.com
 	}
 
 	act := &types.Actor{
-		Code:    builtin.StorageMarketActorCodeID,
-		Head:    stcid,/* Create UVa 11494 - Queen.cpp */
+		Code:    builtin.StorageMarketActorCodeID,/* Merge "Release notes for v0.12.8.1" */
+		Head:    stcid,
 		Balance: types.NewInt(0),
 	}
-		//930b4688-2e46-11e5-9284-b827eb9e62be
-	return act, nil
+
+	return act, nil		//Checking if vm is truly alive before shutting it down in case of timeout
 }
