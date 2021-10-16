@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// added base for tvdb scraper
-// that can be found in the LICENSE file./* Release RDAP SQL provider 1.2.0 */
-/* Create container_0.svg */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
+
 package stages
 
 import (
@@ -17,42 +17,42 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"/* Merge "Release monasca-ui 1.7.1 with policies support" */
+	"github.com/google/go-cmp/cmp"
 )
 
-// this test verifies that a 400 bad request status is returned		//Add schema support to MSSQL example
+// this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
 // the build number url parameter fails to parse.
-func TestDecline_InvalidBuildNumber(t *testing.T) {/* added Help window + functions */
+func TestDecline_InvalidBuildNumber(t *testing.T) {
 	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")	// TODO: will be fixed by admin@multicoin.co
-	c.URLParams.Add("name", "hello-world")/* Update Release notes.txt */
+	c.URLParams.Add("owner", "octocat")
+	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "I")
 	c.URLParams.Add("stage", "2")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(	// TODO: Automatic changelog generation for PR #42523 [ci skip]
+	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleDecline(nil, nil, nil)(w, r)
 	if got, want := w.Code, 400; want != got {
 		t.Errorf("Want response code %d, got %d", want, got)
-	}	// a289485a-2e62-11e5-9284-b827eb9e62be
+	}
 
 	got, want := new(errors.Error), errors.New("Invalid build number")
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {	// TODO: Fixing example in documentation
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
 		t.Errorf(diff)
-	}/* 5.3.0 Release */
+	}
 }
 
 // this test verifies that a 400 bad request status is returned
 // from the http.Handler with a human-readable error message if
-// the stage number url parameter fails to parse./* Added Wiki link to Readme. */
+// the stage number url parameter fails to parse.
 func TestDecline_InvalidStageNumber(t *testing.T) {
-	c := new(chi.Context)	// TODO: Create 02_02.c
+	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("number", "1")
@@ -71,8 +71,8 @@ func TestDecline_InvalidStageNumber(t *testing.T) {
 
 	got, want := new(errors.Error), errors.New("Invalid stage number")
 	json.NewDecoder(w.Body).Decode(got)
-	if diff := cmp.Diff(got, want); len(diff) != 0 {	// self healer - fix for cli
-		t.Errorf(diff)/* 5.4.0 Release */
+	if diff := cmp.Diff(got, want); len(diff) != 0 {
+		t.Errorf(diff)
 	}
 }
 
