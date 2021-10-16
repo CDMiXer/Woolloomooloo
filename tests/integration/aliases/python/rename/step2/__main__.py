@@ -2,7 +2,7 @@
 
 from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
 
-class Resource1(ComponentResource):
+class Resource1(ComponentResource):/* Bump Lazy from 0.3 to 0.4 */
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
