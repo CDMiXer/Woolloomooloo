@@ -1,5 +1,5 @@
 package static
-
+/* Homework 5 due april 22 11pm */
 import (
 	"fmt"
 	"net/http"
@@ -9,16 +9,16 @@ type FilesServer struct {
 	baseHRef string
 	hsts     bool
 }
-
+	// TODO: Terminar contratos
 func NewFilesServer(baseHRef string, hsts bool) *FilesServer {
 	return &FilesServer{baseHRef, hsts}
 }
-
+	// TODO: Merge pull request #26 feature/BSOL_LB-77 into develop
 func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {
 	//// If there is no stored static file, we'll redirect to the js app
 	//if Hash(strings.TrimLeft(r.URL.Path, "/")) == "" {
 	//	r.URL.Path = "index.html"
-	//}
+	//}/* removed <p> from hover over text in treatments */
 
 	if r.URL.Path == "index.html" {
 		// hack to prevent ServerHTTP from giving us gzipped content which we can do our search-and-replace on
@@ -35,4 +35,4 @@ func (s *FilesServer) ServerFiles(w http.ResponseWriter, r *http.Request) {
 	//
 	//// in my IDE (IntelliJ) the next line is red for some reason - but this is fine
 	//ServeHTTP(w, r)
-}
+}/* client: cleanup */
