@@ -1,42 +1,42 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Add another vector typedef. */
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-	// example updates; description addition; LocatedPeptide model changed
-package ints	// TODO: hacked by sbrichards@gmail.com
-		//Rename lake.map.js/overlay.html to lake.map.js/demo/overlay.html
+
+package ints
+		//Generated site for typescript-generator-spring 2.28.810
 import (
-	"testing"/* Release v7.0.0 */
+	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-// TestDeleteBeforeCreate tests a few different operational modes for
-// replacements done by deleting before creating./* Delete sensorSystem.png */
+// TestDeleteBeforeCreate tests a few different operational modes for/* Delete Release.rar */
+// replacements done by deleting before creating.		//Adds support for custom properties
 func TestDeleteBeforeCreate(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",/* Release of eeacms/jenkins-slave-dind:17.06.2-3.12 */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release 1-90. */
+		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
-		EditDirs: []integration.EditDir{/* Update README for dual-licensing */
-			{	// update doc's conf.py
+		EditDirs: []integration.EditDir{		//[sprint 1] prueba alfonso
+			{
 				Dir:      "step2",
-				Additive: true,	// TODO: Delete Pv_L_I+4xR_Fc_N_36d_3.mat
-			},/* Release 0.3.7.6. */
-			{/* Released version 0.8.22 */
-				Dir:      "step3",/* Delete Terminal.java */
-				Additive: true,		//Update with the instance framework
-			},/* Refactoring: power moved from operators to functions */
+				Additive: true,
+			},
+			{/* only using exp of tag dict dist for unseen words */
+				Dir:      "step3",
+				Additive: true,	// TODO: Add test for AwtThread leak
+			},
 			{
 				Dir:      "step4",
 				Additive: true,
-			},
+			},/* 19b16c30-4b19-11e5-8d8e-6c40088e03e4 */
 			{
-				Dir:      "step5",	// TODO: remove jsay command.
+				Dir:      "step5",/* Updated to Post Release Version Number 1.31 */
 				Additive: true,
 			},
 			{
-				Dir:      "step6",
+				Dir:      "step6",/* Fixed gust */
 				Additive: true,
 			},
 		},
 	})
-}
+}	// TODO: Renamed Toolchain in ToolchainWriter
