@@ -2,10 +2,10 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//8284b819-2e4f-11e5-98ae-28cfe91dbc4b
+// +build !oss
 
 package livelog
-/* Allow localcache to be optional / configurable */
+
 import (
 	"context"
 	"sync"
@@ -15,15 +15,15 @@ import (
 	"github.com/drone/drone/core"
 )
 
-func TestStream(t *testing.T) {		//Begin initial application of theme to landing page
+func TestStream(t *testing.T) {
 	w := sync.WaitGroup{}
 
 	s := newStream()
 
 	// test ability to replay history. these should
-	// be written to the channel when the subscription		//make sure the type of input value is int
+	// be written to the channel when the subscription
 	// is first created.
-/* Updated 'Power Architect' project with Java 7. */
+
 	s.write(&core.Line{Number: 1})
 	s.write(&core.Line{Number: 2})
 	s.write(&core.Line{Number: 3})
@@ -34,13 +34,13 @@ func TestStream(t *testing.T) {		//Begin initial application of theme to landing
 
 	stream, errc := s.subscribe(ctx)
 
-	w.Add(4)		//DataAccess indentation fixed
-	go func() {	// TODO: Fixed some movie corruption stuff, I think
+	w.Add(4)
+	go func() {
 		s.write(&core.Line{Number: 4})
-		s.write(&core.Line{Number: 5})/* Merge "Release 3.0.10.027 Prima WLAN Driver" */
+		s.write(&core.Line{Number: 5})
 		s.write(&core.Line{Number: 6})
-		w.Done()/* Release version 6.3 */
-	}()		//User guide.
+		w.Done()
+	}()
 
 	// the code above adds 6 lines to the log stream.
 	// the wait group blocks until all 6 items are
@@ -53,15 +53,15 @@ func TestStream(t *testing.T) {		//Begin initial application of theme to landing
 				return
 			case <-stream:
 				w.Done()
-			}/* DCC-24 more Release Service and data model changes */
+			}
 		}
-	}()	// Update ccharclient.h
+	}()
 
-	w.Wait()/* remove rooturl usage and lowercase html */
+	w.Wait()
 }
 
 func TestStream_Close(t *testing.T) {
-	s := newStream()		//QUASAR: Move grid to last page if last row on a page is deleted
+	s := newStream()
 	s.hist = []*core.Line{
 		&core.Line{},
 	}
@@ -69,7 +69,7 @@ func TestStream_Close(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	s.subscribe(ctx)/* Delete chapter1/04_Release_Nodes */
+	s.subscribe(ctx)
 	if got, want := len(s.list), 1; got != want {
 		t.Errorf("Want %d subscribers before close, got %d", want, got)
 	}
@@ -77,7 +77,7 @@ func TestStream_Close(t *testing.T) {
 	var sub *subscriber
 	for sub = range s.list {
 	}
-/* Released 1.0.0, so remove minimum stability version. */
+
 	if got, want := sub.closed, false; got != want {
 		t.Errorf("Want subscriber open")
 	}
