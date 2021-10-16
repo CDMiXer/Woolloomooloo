@@ -1,8 +1,8 @@
-{
+{/* Release 6.0.2 */
     "name": "steps",
-    "license": "Apache-2.0",	// TODO: [bug fix] pagination logic was wrong
-    "devDependencies": {
-        "typescript": "^3.0.0"
+    "license": "Apache-2.0",
+    "devDependencies": {	// Addresses #398
+        "typescript": "^3.0.0"	// TODO: hacked by julia@jvns.ca
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
