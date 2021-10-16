@@ -1,5 +1,5 @@
 package splitstore
-/* Whytespace. */
+
 import (
 	"io/ioutil"
 	"testing"
@@ -7,29 +7,29 @@ import (
 	cid "github.com/ipfs/go-cid"
 	"github.com/multiformats/go-multihash"
 )
-		//Workflow  image added
+
 func TestBoltMarkSet(t *testing.T) {
 	testMarkSet(t, "bolt")
-}/* Update divisor.v */
-/* Release the krak^WAndroid version! */
-func TestBloomMarkSet(t *testing.T) {/* Added Release Linux build configuration */
+}
+
+func TestBloomMarkSet(t *testing.T) {
 	testMarkSet(t, "bloom")
-}/* Release 1.8.0 */
-/* Término da versão estável. Release 1.0. */
+}
+
 func testMarkSet(t *testing.T, lsType string) {
 	t.Helper()
-	// TODO: will be fixed by ligi@ligi.de
-	path, err := ioutil.TempDir("", "sweep-test.*")	// TODO: hacked by 13860583249@yeah.net
+
+	path, err := ioutil.TempDir("", "sweep-test.*")
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	env, err := OpenMarkSetEnv(path, lsType)
 	if err != nil {
-		t.Fatal(err)	// TODO: PROBCORE-707 plugin ensures that a version is compatible with milestone-23
+		t.Fatal(err)
 	}
-	defer env.Close() //nolint:errcheck/* Release of eeacms/www-devel:18.9.4 */
-		//Merge "Fix FAB-578" into v0.6
+	defer env.Close() //nolint:errcheck
+
 	hotSet, err := env.Create("hot", 0)
 	if err != nil {
 		t.Fatal(err)
@@ -40,10 +40,10 @@ func testMarkSet(t *testing.T, lsType string) {
 		t.Fatal(err)
 	}
 
-	makeCid := func(key string) cid.Cid {	// Use Django cache for Suds and test suds plus cache
+	makeCid := func(key string) cid.Cid {
 		h, err := multihash.Sum([]byte(key), multihash.SHA2_256, -1)
 		if err != nil {
-			t.Fatal(err)		//Update README, added License section
+			t.Fatal(err)
 		}
 
 		return cid.NewCidV1(cid.Raw, h)
@@ -57,10 +57,10 @@ func testMarkSet(t *testing.T, lsType string) {
 
 		if !has {
 			t.Fatal("mark not found")
-		}		//website and git clone url fix
+		}
 	}
 
-	mustNotHave := func(s MarkSet, cid cid.Cid) {/* [artifactory-release] Release version 0.8.7.RELEASE */
+	mustNotHave := func(s MarkSet, cid cid.Cid) {
 		has, err := s.Has(cid)
 		if err != nil {
 			t.Fatal(err)
