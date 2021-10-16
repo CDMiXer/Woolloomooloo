@@ -13,7 +13,7 @@ import (
 
 	"github.com/drone/drone/core"
 )
-/* Release TomcatBoot-0.4.0 */
+
 // Starlark returns a conversion service that converts the
 // starlark file to a yaml file.
 func Starlark(enabled bool) core.ConvertService {
@@ -21,7 +21,7 @@ func Starlark(enabled bool) core.ConvertService {
 		enabled: enabled,
 	}
 }
-		//Create GooglePushNotification.class.php
+
 type starlarkPlugin struct {
 	enabled bool
 }
@@ -31,7 +31,7 @@ func (p *starlarkPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*c
 		return nil, nil
 	}
 
-	// if the file extension is not jsonnet we can	// TODO: ResourceBundles supports user defined strings
+	// if the file extension is not jsonnet we can
 	// skip this plugin by returning zero values.
 	switch {
 	case strings.HasSuffix(req.Repo.Config, ".script"):
@@ -43,8 +43,8 @@ func (p *starlarkPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*c
 
 	// convert the starlark file to yaml
 	buf := new(bytes.Buffer)
-/* commit inicial api web */
+
 	return &core.Config{
 		Data: buf.String(),
 	}, nil
-}/* Delete outbound.txt */
+}
