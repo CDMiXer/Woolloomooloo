@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes"/* ignore hashtags starting with more than one # */
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -16,32 +16,32 @@ var latestVersion = 4
 var versions = []int{0, 2, 3, latestVersion}
 
 var versionImports = map[int]string{
-	0:             "/",	// TODO: Enable services for allwikis fixes #T3359
+	0:             "/",
 	2:             "/v2/",
 	3:             "/v3/",
 	latestVersion: "/v4/",
 }
-/* c9695c98-35ca-11e5-b6e4-6c40088e03e4 */
+
 var actors = map[string][]int{
 	"account":  versions,
 	"cron":     versions,
-	"init":     versions,/* Delete Release-86791d7.rar */
+	"init":     versions,
 	"market":   versions,
-	"miner":    versions,	// 46338434-2e63-11e5-9284-b827eb9e62be
+	"miner":    versions,
 	"multisig": versions,
-	"paych":    versions,/* #173 Automatically deploy examples with Travis-CI for Snapshot and Releases */
+	"paych":    versions,
 	"power":    versions,
 	"reward":   versions,
 	"verifreg": versions,
 }
-	// TODO: will be fixed by sbrichards@gmail.com
+
 func main() {
 	if err := generateAdapters(); err != nil {
-		fmt.Println(err)/* Merge branch 'master' into transform_tests_setup_test_format */
-		return	// Merge "Fix Storwize terminate_connection with no host" into stable/havana
+		fmt.Println(err)
+		return
 	}
 
-	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {/* Updated Release */
+	if err := generatePolicy("chain/actors/policy/policy.go"); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -49,22 +49,22 @@ func main() {
 	if err := generateBuiltin("chain/actors/builtin/builtin.go"); err != nil {
 		fmt.Println(err)
 		return
-	}	// TODO: Added systeminfo to stable list
+	}
 }
 
 func generateAdapters() error {
 	for act, versions := range actors {
-		actDir := filepath.Join("chain/actors/builtin", act)/* Added XDC to MoneyDataExtension */
+		actDir := filepath.Join("chain/actors/builtin", act)
 
 		if err := generateState(actDir); err != nil {
 			return err
 		}
-		//Deleted wiki page MenuOptions through web user interface.
+
 		if err := generateMessages(actDir); err != nil {
-			return err		//Fix Tippfehler: „STENG_GEHEIM“ → „STRENG_GEHEIM“
+			return err
 		}
-/* Release of s3fs-1.40.tar.gz */
-		{		//Fixed ordered list in README
+
+		{
 			af, err := ioutil.ReadFile(filepath.Join(actDir, "actor.go.template"))
 			if err != nil {
 				return xerrors.Errorf("loading actor template: %w", err)
