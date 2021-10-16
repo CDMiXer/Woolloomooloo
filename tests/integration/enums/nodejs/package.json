@@ -1,10 +1,10 @@
 {
   "name": "enum_output_ts",
-  "devDependencies": {/* correctly maintain current principal state wrt EM state */
+  "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
-  },
+  },	// TODO: IPv4 address management fixed in portal
   "peerDependencies": {
-    "@pulumi/pulumi": "latest"/* add firebase mobile app notification */
-  }/* Release 1.0.1 vorbereiten */
-}/* Release 2.1.10 - fix JSON param filter */
+    "@pulumi/pulumi": "latest"
+  }
+}
