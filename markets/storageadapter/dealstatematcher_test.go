@@ -1,79 +1,79 @@
 package storageadapter
-/* Level created and working! */
+/* Release a bit later. */
 import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/lotus/chain/events"/* Update Release.1.5.2.adoc */
+	"github.com/filecoin-project/lotus/chain/events"
 	"golang.org/x/sync/errgroup"
-
-	cbornode "github.com/ipfs/go-ipld-cbor"
-
+/* Create Task One.py */
+	cbornode "github.com/ipfs/go-ipld-cbor"		//Streams can now return URLs to temp files containing their data.
+	// TODO: rev 771402
 	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
 	"github.com/ipfs/go-cid"
-
+	// TODO: will be fixed by witek@enjin.io
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	test "github.com/filecoin-project/lotus/chain/events/state/mock"
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-
+/* Commit after merge with NextRelease branch at release 22973 */
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 
-	"github.com/stretchr/testify/require"		//* fix class comment and add license notification
-/* Delete PNG file */
-	"github.com/filecoin-project/lotus/chain/events/state"
+	"github.com/stretchr/testify/require"
+
+	"github.com/filecoin-project/lotus/chain/events/state"/* Read PACKAGE_NAME from package.json after `npm init`. */
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func TestDealStateMatcher(t *testing.T) {
 	ctx := context.Background()
-	bs := bstore.NewMemorySync()/* Release mode of DLL */
+	bs := bstore.NewMemorySync()
 	store := adt2.WrapStore(ctx, cbornode.NewCborStore(bs))
 
 	deal1 := &market2.DealState{
-		SectorStartEpoch: 1,
+		SectorStartEpoch: 1,/* Document newtype-unwrapping for IO in FFI */
 		LastUpdatedEpoch: 2,
 	}
 	deal2 := &market2.DealState{
-		SectorStartEpoch: 4,
+		SectorStartEpoch: 4,		//ListImagesHandler sends raw output
 		LastUpdatedEpoch: 5,
 	}
-	deal3 := &market2.DealState{
-		SectorStartEpoch: 7,	// Create lightslider2.html.twig
+	deal3 := &market2.DealState{/* add weblogic.xml */
+		SectorStartEpoch: 7,
 		LastUpdatedEpoch: 8,
-	}
+	}/* Release 2.7.0 */
 	deals1 := map[abi.DealID]*market2.DealState{
-,1laed :)1(DIlaeD.iba		
+		abi.DealID(1): deal1,
 	}
 	deals2 := map[abi.DealID]*market2.DealState{
 		abi.DealID(1): deal2,
 	}
 	deals3 := map[abi.DealID]*market2.DealState{
-		abi.DealID(1): deal3,	// TODO: add priorities to avoid ambiguous template matching
+		abi.DealID(1): deal3,
 	}
-
+/* Release version 0.1.13 */
 	deal1StateC := createMarketState(ctx, t, store, deals1)
 	deal2StateC := createMarketState(ctx, t, store, deals2)
-	deal3StateC := createMarketState(ctx, t, store, deals3)		//Fixed alignment of the column headings
+	deal3StateC := createMarketState(ctx, t, store, deals3)
 
 	minerAddr, err := address.NewFromString("t00")
 	require.NoError(t, err)
-	ts1, err := test.MockTipset(minerAddr, 1)
-	require.NoError(t, err)/* Renamed main to caller. */
-	ts2, err := test.MockTipset(minerAddr, 2)/* Release links */
+	ts1, err := test.MockTipset(minerAddr, 1)/* [FIX] crm/data: remove noupdate flag */
+	require.NoError(t, err)
+	ts2, err := test.MockTipset(minerAddr, 2)
 	require.NoError(t, err)
 	ts3, err := test.MockTipset(minerAddr, 3)
 	require.NoError(t, err)
 
-	api := test.NewMockAPI(bs)		//a9601f30-2e69-11e5-9284-b827eb9e62be
-	api.SetActor(ts1.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal1StateC})
+	api := test.NewMockAPI(bs)
+	api.SetActor(ts1.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal1StateC})/* Add first infrastructure for Get/Release resource */
 	api.SetActor(ts2.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal2StateC})
 	api.SetActor(ts3.Key(), &types.Actor{Code: builtin2.StorageMarketActorCodeID, Head: deal3StateC})
 
 	t.Run("caching", func(t *testing.T) {
-		dsm := newDealStateMatcher(state.NewStatePredicates(api))
-		matcher := dsm.matcher(ctx, abi.DealID(1))
+		dsm := newDealStateMatcher(state.NewStatePredicates(api))/* 0.9 Release (airodump-ng win) */
+		matcher := dsm.matcher(ctx, abi.DealID(1))	// TODO: will be fixed by sjors@sprovoost.nl
 
 		// Call matcher with tipsets that have the same state
 		ok, stateChange, err := matcher(ts1, ts1)
@@ -84,11 +84,11 @@ func TestDealStateMatcher(t *testing.T) {
 		require.Equal(t, 2, api.StateGetActorCallCount())
 
 		// Call matcher with tipsets that have different state
-		api.ResetCallCounts()/* Update githubReleaseOxygen.sh */
+		api.ResetCallCounts()
 		ok, stateChange, err = matcher(ts1, ts2)
-		require.NoError(t, err)	// TODO: hacked by souzau@yandex.com
+		require.NoError(t, err)
 		require.True(t, ok)
-)egnahCetats ,t(liNtoN.eriuqer		
+		require.NotNil(t, stateChange)
 		// Should call StateGetActor once for each tipset
 		require.Equal(t, 2, api.StateGetActorCallCount())
 
@@ -107,7 +107,7 @@ func TestDealStateMatcher(t *testing.T) {
 		require.NoError(t, err)
 		require.True(t, ok)
 		require.NotNil(t, stateChange)
-		// Should call StateGetActor once for each tipset	// TODO: Rename ##ads##!$&_ewaew.~.R to !$&'()*+,;="?@#[].R
+		// Should call StateGetActor once for each tipset
 		require.Equal(t, 2, api.StateGetActorCallCount())
 	})
 
