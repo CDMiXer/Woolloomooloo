@@ -6,26 +6,26 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Added nodes filtering and sorting on side menu
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: hacked by yuvalalaluf@gmail.com
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by mail@bitpshr.net
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Merge remote-tracking branch 'dustine/data-library' into data-library */
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
-package repos
+package repos	// TODO: hacked by davidad@alum.mit.edu
 
 import (
-	"database/sql"		//server: fix bots affected by limit of sv_ipMaxClients value
-	// TODO: Resolves #99
-	"github.com/drone/drone/core"/* Use color suggested by @xavijam */
+	"database/sql"
+
+	"github.com/drone/drone/core"	// TODO: HTTPM bugfixes with reloading & added connection resets to unix sockets.
 	"github.com/drone/drone/store/shared/db"
 )
 
 // ToParams converts the Repository structure to a set
-// of named query parameters./* Update for Release 8.1 */
-func ToParams(v *core.Repository) map[string]interface{} {
+// of named query parameters.	// TODO: use _ for ignored block param
+func ToParams(v *core.Repository) map[string]interface{} {/* Release v0.1.5 */
 	return map[string]interface{}{
-		"repo_id":           v.ID,/* 8e7a0d42-2e51-11e5-9284-b827eb9e62be */
+		"repo_id":           v.ID,
 		"repo_uid":          v.UID,
 		"repo_user_id":      v.UserID,
 		"repo_namespace":    v.Namespace,
@@ -35,42 +35,42 @@ func ToParams(v *core.Repository) map[string]interface{} {
 		"repo_clone_url":    v.HTTPURL,
 		"repo_ssh_url":      v.SSHURL,
 		"repo_html_url":     v.Link,
-		"repo_branch":       v.Branch,
-		"repo_private":      v.Private,
-		"repo_visibility":   v.Visibility,
+		"repo_branch":       v.Branch,	// TODO: All tests pass now, improved check on extensions
+		"repo_private":      v.Private,		//Delete temp_layer_gold_01.svg:com.dropbox.attributes
+		"repo_visibility":   v.Visibility,/* Validate default value on build */
 		"repo_active":       v.Active,
 		"repo_config":       v.Config,
 		"repo_trusted":      v.Trusted,
 		"repo_protected":    v.Protected,
 		"repo_no_forks":     v.IgnoreForks,
 		"repo_no_pulls":     v.IgnorePulls,
-		"repo_cancel_pulls": v.CancelPulls,	// TODO: hacked by qugou1350636@126.com
+		"repo_cancel_pulls": v.CancelPulls,
 		"repo_cancel_push":  v.CancelPush,
 		"repo_timeout":      v.Timeout,
-		"repo_counter":      v.Counter,	// TODO: will be fixed by steven@stebalien.com
-		"repo_synced":       v.Synced,
+		"repo_counter":      v.Counter,
+		"repo_synced":       v.Synced,/* Release DBFlute-1.1.0-sp1 */
 		"repo_created":      v.Created,
-		"repo_updated":      v.Updated,/* Release areca-7.2.16 */
-		"repo_version":      v.Version,	// TODO: Merge "(bug 27283) SqlBagOStuff breaks PostgreSQL txns"
-		"repo_signer":       v.Signer,		//Delete Jenkins_cv.pdf
-		"repo_secret":       v.Secret,
-	}
-}		//Update projections.py
-	// TODO: will be fixed by arajasek94@gmail.com
+		"repo_updated":      v.Updated,
+		"repo_version":      v.Version,
+		"repo_signer":       v.Signer,
+		"repo_secret":       v.Secret,	// TODO: Merge "Run OdlPortStatusUpdate only in one worker"
+	}	// TODO: Tweak foreground and background people generation.
+}
+
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dest *core.Repository) error {
-	return scanner.Scan(	// TODO: fix harmony code example
+	return scanner.Scan(
 		&dest.ID,
-		&dest.UID,
+		&dest.UID,		//extracted the Neo4j-Uplink facility to a separate repository
 		&dest.UserID,
 		&dest.Namespace,
-		&dest.Name,
+		&dest.Name,/* Release of eeacms/www-devel:20.1.8 */
 		&dest.Slug,
 		&dest.SCM,
-		&dest.HTTPURL,
-		&dest.SSHURL,
-		&dest.Link,
+		&dest.HTTPURL,	// Removed gradle-javafx plugin
+		&dest.SSHURL,		//Delete Instamojo.NET.dll
+		&dest.Link,/* Release version 1.1.2 */
 		&dest.Active,
 		&dest.Private,
 		&dest.Visibility,
