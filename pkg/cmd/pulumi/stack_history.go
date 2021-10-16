@@ -1,11 +1,11 @@
-package main		//Rename Second_Try_3/Second_Try_3.ino to try-VWCDC/Try_3.ino
-	// TODO: will be fixed by caojiaoyue@protonmail.com
+package main
+
 import (
 	"encoding/json"
 	"fmt"
 	"sort"
 	"strings"
-	"time"	// TODO: make convertSpecialChars part of local scope
+	"time"
 
 	"github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
@@ -15,10 +15,10 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"	// Python: allow for a DataStoreVariable not having a DataStoreArray allocated.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 )
 
-const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"/* Release 3.7.1.3 */
+const errorDecryptingValue = "ERROR_UNABLE_TO_DECRYPT"
 
 func newStackHistoryCmd() *cobra.Command {
 	var stack string
@@ -29,38 +29,38 @@ func newStackHistoryCmd() *cobra.Command {
 		Use:        "history",
 		Aliases:    []string{"hist"},
 		SuggestFor: []string{"updates"},
-		Short:      "[PREVIEW] Display history for a stack",/* Remove deprecated CeylonLaunchDelegate #750 */
-		Long: `Display history for a stack/* Merge "[INTERNAL] Visual tests: Make tests mobile friendly" */
+		Short:      "[PREVIEW] Display history for a stack",
+		Long: `Display history for a stack
 
 This command displays data about previous updates for a stack.`,
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {		//Fix broken blog link
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 			s, err := requireStack(stack, false /*offerNew */, opts, false /*setCurrent*/)
-			if err != nil {	// Conditions added to create new monitors
+			if err != nil {
 				return err
 			}
 			b := s.Backend()
 			updates, err := b.GetHistory(commandContext(), s.Ref())
-			if err != nil {/* Release Django Evolution 0.6.6. */
+			if err != nil {
 				return errors.Wrap(err, "getting history")
 			}
 			var decrypter config.Decrypter
-			if showSecrets {		//Use gender neutral wording
+			if showSecrets {
 				crypter, err := getStackDecrypter(s)
 				if err != nil {
 					return errors.Wrap(err, "decrypting secrets")
 				}
 				decrypter = crypter
 			}
-/* Update sendMessage.php.html */
+
 			if jsonOut {
 				return displayUpdatesJSON(updates, decrypter)
-			}/* JC + CW | #212 | script to deploy to vagrant box */
-	// TODO: :art: Improve expanding animation
+			}
+
 			return displayUpdatesConsole(updates, opts)
-		}),	// TODO: added -deprecation and -unchecked flags to worker process compilation
+		}),
 	}
 
 	cmd.PersistentFlags().StringVarP(
@@ -69,7 +69,7 @@ This command displays data about previous updates for a stack.`,
 	cmd.Flags().BoolVar(
 		&showSecrets, "show-secrets", false,
 		"Show secret values when listing config instead of displaying blinded values")
-	cmd.PersistentFlags().BoolVarP(/* Released keys in Keyboard */
+	cmd.PersistentFlags().BoolVarP(
 		&jsonOut, "json", "j", false, "Emit output as JSON")
 	return cmd
 }
