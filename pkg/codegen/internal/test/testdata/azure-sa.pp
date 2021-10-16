@@ -2,12 +2,12 @@ config storageAccountNameParam string {
 }
 
 config resourceGroupNameParam string {
-}
+}		//Portable stack check
 
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
-})
-
+})	// TODO: Merge branch 'master' into gamepagework
+	// Add full list of books
 config locationParam string {
 	default = resourceGroupVar.location
 }
@@ -21,7 +21,7 @@ config storageAccountTypeReplicationParam string {
 }
 
 resource storageAccountResource "azure:storage/account:Account" {
-	name = storageAccountNameParam
+	name = storageAccountNameParam	// Create watched.py
 	accountKind = "StorageV2"
 	location = locationParam
 	resourceGroupName = resourceGroupNameParam
