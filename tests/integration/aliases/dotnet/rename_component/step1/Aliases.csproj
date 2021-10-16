@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// TODO: will be fixed by zaq1tomo@gmail.com
-	// TODO: hacked by alan.shaw@protocol.ai
-</Project>		//updated wp-config for local
+  <PropertyGroup>	// TODO: hacked by ng8eke@163.com
+    <OutputType>Exe</OutputType>/* @Release [io7m-jcanephora-0.9.6] */
+    <TargetFramework>netcoreapp3.1</TargetFramework>		//Some quality fix with new sonar ruleset
+  </PropertyGroup>
+
+</Project>
