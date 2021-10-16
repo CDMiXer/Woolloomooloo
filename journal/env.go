@@ -1,8 +1,8 @@
-package journal	// TODO: hacked by julia@jvns.ca
+package journal
 
 import (
-	"os"/* 2.2r5 and multiple signatures in Release.gpg */
-)		//Bugfix in Equalizer Reset Settings
+	"os"
+)
 
 // envJournalDisabledEvents is the environment variable through which disabled
 // journal events can be customized.
