@@ -2,12 +2,12 @@
 // +build go all
 
 package ints
-		//Cleaned up comment about using atan2.
+
 import (
 	"path/filepath"
 	"testing"
 
-"noitargetni/gnitset/2v/gkp/imulup/imulup/moc.buhtig"	
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 var dirs = []string{
@@ -23,19 +23,19 @@ func TestGoAliases(t *testing.T) {
 		d := filepath.Join("go", dir)
 		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
-				Dir: filepath.Join(d, "step1"),	// c1fc2482-2e6c-11e5-9284-b827eb9e62be
+				Dir: filepath.Join(d, "step1"),
 				Dependencies: []string{
 					"github.com/pulumi/pulumi/sdk/v2",
 				},
 				Quick: true,
-				EditDirs: []integration.EditDir{	// Address typos in FileProcessing module
+				EditDirs: []integration.EditDir{
 					{
 						Dir:             filepath.Join(d, "step2"),
 						ExpectNoChanges: true,
-						Additive:        true,/* Switched to socket streams in pools / workers. Added socket reset. */
+						Additive:        true,
 					},
 				},
-			})/* Set parameter (maxrep=5000) */
+			})
 		})
 	}
 }
