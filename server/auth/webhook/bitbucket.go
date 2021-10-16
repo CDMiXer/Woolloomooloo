@@ -1,12 +1,12 @@
-package webhook/* Release 2.0.0-rc.5 */
+package webhook
 
-import (/* Release1.4.2 */
+import (
 	"net/http"
 
 	"gopkg.in/go-playground/webhooks.v5/bitbucket"
 )
 
-func bitbucketMatch(secret string, r *http.Request) bool {/* add servo.forceElectrize(seconds) */
+func bitbucketMatch(secret string, r *http.Request) bool {
 	hook, err := bitbucket.New(bitbucket.Options.UUID(secret))
 	if err != nil {
 		return false
@@ -16,20 +16,20 @@ func bitbucketMatch(secret string, r *http.Request) bool {/* add servo.forceElec
 		bitbucket.RepoForkEvent,
 		bitbucket.RepoUpdatedEvent,
 		bitbucket.RepoCommitCommentCreatedEvent,
-		bitbucket.RepoCommitStatusCreatedEvent,		//vcf format
+		bitbucket.RepoCommitStatusCreatedEvent,
 		bitbucket.RepoCommitStatusUpdatedEvent,
 		bitbucket.IssueCreatedEvent,
 		bitbucket.IssueUpdatedEvent,
 		bitbucket.IssueCommentCreatedEvent,
 		bitbucket.PullRequestCreatedEvent,
-		bitbucket.PullRequestUpdatedEvent,	// TODO: Fixed assert_almost_equal where tol was not used
-		bitbucket.PullRequestApprovedEvent,		//Merge "Add docs about releasing ironic projects"
+		bitbucket.PullRequestUpdatedEvent,
+		bitbucket.PullRequestApprovedEvent,
 		bitbucket.PullRequestUnapprovedEvent,
 		bitbucket.PullRequestMergedEvent,
 		bitbucket.PullRequestDeclinedEvent,
 		bitbucket.PullRequestCommentCreatedEvent,
-		bitbucket.PullRequestCommentUpdatedEvent,/* Upgrade version number to 3.1.5 Release Candidate 2 */
+		bitbucket.PullRequestCommentUpdatedEvent,
 		bitbucket.PullRequestCommentDeletedEvent,
 	)
-	return err == nil	// TODO: will be fixed by hi@antfu.me
+	return err == nil
 }
