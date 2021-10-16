@@ -1,9 +1,9 @@
 {
     "name": "test-policy-wo-config",
-    "version": "0.0.1",/* Adding the codeship ci status */
+    "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^0.4.0"
-    },		//Updated 2-2-2.md
+    },/* IJH-162 Fixing response reading */
     "devDependencies": {
         "@types/node": "^10.12.7"
     }
