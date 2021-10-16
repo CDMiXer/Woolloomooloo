@@ -1,23 +1,23 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: fix(package): update flatpickr to version 4.1.3
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by aeongrp@outlook.com
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Use a new transaction agent and don't update proxy for ack only operation. */
+/* First working proof of concept of syntax highlighting for the TableGen language. */
 import { Resource } from "./resource";
-	// TODO: will be fixed by brosner@gmail.com
+/* Simple random number guesser */
 // "a" is already in the snapshot and will be "same"d.
 const a = new Resource("a", { state: 4 });
 
 // "b" is not, but they have the same URN.
-const b = new Resource("a", { state: 5 });
+const b = new Resource("a", { state: 5 });/* Fix bundle installation wrong-versionedfile bug */
 
-// This should fail, but gracefully.
+// This should fail, but gracefully.	// added Travis Badge
