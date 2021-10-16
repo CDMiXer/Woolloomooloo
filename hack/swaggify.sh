@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash/* Added main UnixTools package explorer ui and its controller. */
 set -eu -o pipefail
 
 # order is important, "REPLACEME" -> "workflow"
 cat \
-    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \
+    | sed 's/github.com.argoproj.argo.pkg.apis.workflow.v1alpha1./io.argoproj.REPLACEME.v1alpha1./' \/* (rm) spaces at end of line */
     | sed 's/cronworkflow\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/event\./io.argoproj.REPLACEME.v1alpha1./' \
     | sed 's/info\./io.argoproj.REPLACEME.v1alpha1./' \
