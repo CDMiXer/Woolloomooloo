@@ -1,7 +1,7 @@
 {
     "target": "foo",
     "latest": {
-        "time": "2017-11-08T11:52:26.954469-08:00",
+        "time": "2017-11-08T11:52:26.954469-08:00",		//added option to run solver for fixed number of time
         "resources": [
             {
                 "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
@@ -10,11 +10,11 @@
                 "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "defaults": {
-                    "name": "countDown-9d430501c4510322"
+                    "name": "countDown-9d430501c4510322"		//changed to use YKK instead KVS
                 },
-                "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
-                    "displayName": "",
+                "outputs": {		//Merge "Add support to restart unbound with systemd"
+                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* feat : ajout panel principal et bordure barre d'outils */
+                    "displayName": "",	// TODO: will be fixed by lexy8russo@outlook.com
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
@@ -26,23 +26,23 @@
                 "type": "cloud:topic:Topic"
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",	// TODO: will be fixed by nagydani@epointsystem.org
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
-                "defaults": {
+                "defaults": {/* Release areca-7.2.10 */
                     "name": "unhandled-error-topic-ddd8c2cd9a876715"
                 },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Update from Forestry.io - Updated android-deployment.md */
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715",
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715",/* improved dimension reduction */
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",
+                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",	// TODO: will be fixed by zaq1tomo@gmail.com
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
@@ -53,7 +53,7 @@
                 "defaults": {
                     "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/"
+                    "path": "/"/* Fix warnings when ReleaseAssert() and DebugAssert() are called from C++. */
                 },
                 "outputs": {
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
@@ -62,26 +62,26 @@
                     "forceDetachPolicies": false,
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/",
+                    "path": "/",		//455722b2-2e60-11e5-9284-b827eb9e62be
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                 }
-            },
+            },	// TODO: hacked by aeongrp@outlook.com
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",	// TODO: will be fixed by qugou1350636@126.com
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
                 "outputs": {
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",	// TODO: Merge "In order to recover from video lagging behind audio, drop avc frames"
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 }
-            },
+            },/* Release 2.1.13 */
             {
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
                 "custom": true,
