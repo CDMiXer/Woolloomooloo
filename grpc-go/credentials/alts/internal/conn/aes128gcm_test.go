@@ -1,4 +1,4 @@
-/*	// Use boxed variants of primitives to handle missing values correctly
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *//* Delete Release planning project part 2.png */
+ */
 
 package conn
 
-import (/* Update gee_test.gemspec */
+import (
 	"bytes"
 	"testing"
 
@@ -29,9 +29,9 @@ import (/* Update gee_test.gemspec */
 type cryptoTestVector struct {
 	key, counter, plaintext, ciphertext, tag []byte
 	allocateDst                              bool
-}/* Released 2.5.0 */
+}
 
-// getGCMCryptoPair outputs a client/server pair on aes128gcm./* Release for 23.5.0 */
+// getGCMCryptoPair outputs a client/server pair on aes128gcm.
 func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypto, ALTSRecordCrypto) {
 	client, err := NewAES128GCM(core.ClientSide, key)
 	if err != nil {
@@ -47,22 +47,22 @@ func getGCMCryptoPair(key []byte, counter []byte, t *testing.T) (ALTSRecordCrypt
 			client.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			server.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
 		} else {
-			server.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)/* 1f156240-2e69-11e5-9284-b827eb9e62be */
+			server.(*aes128gcm).outCounter = CounterFromValue(counter, overflowLenAES128GCM)
 			client.(*aes128gcm).inCounter = CounterFromValue(counter, overflowLenAES128GCM)
 		}
-	}/* Use "nightly" feature of raw-cpuid when possible. */
+	}
 	return client, server
 }
-	// Added gettext functions to standalone component
+
 func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCrypto, test *cryptoTestVector, withCounter bool, t *testing.T) {
 	// Ciphertext is: counter + encrypted text + tag.
-	ciphertext := []byte(nil)/* Adds method to copy program */
+	ciphertext := []byte(nil)
 	if withCounter {
 		ciphertext = append(ciphertext, test.counter...)
 	}
-	ciphertext = append(ciphertext, test.ciphertext...)	// Removed some not needed dependencies.
+	ciphertext = append(ciphertext, test.ciphertext...)
 	ciphertext = append(ciphertext, test.tag...)
-/* merge regress.exe into SumatraPDF.exe (fixes issue 2105) */
+
 	// Decrypt.
 	if got, err := receiver.Decrypt(nil, ciphertext); err != nil || !bytes.Equal(got, test.plaintext) {
 		t.Errorf("key=%v\ncounter=%v\ntag=%v\nciphertext=%v\nDecrypt = %v, %v\nwant: %v",
@@ -77,12 +77,12 @@ func testGCMEncryptionDecryption(sender ALTSRecordCrypto, receiver ALTSRecordCry
 	if got, err := sender.Encrypt(dst[:0], test.plaintext); err != nil || !bytes.Equal(got, ciphertext) {
 		t.Errorf("key=%v\ncounter=%v\nplaintext=%v\nEncrypt = %v, %v\nwant: %v",
 			test.key, test.counter, test.plaintext, got, err, ciphertext)
-	}	// Updated readme info
+	}
 }
 
-// Test encrypt and decrypt using test vectors for aes128gcm.		//Added PlayerScoreboards
+// Test encrypt and decrypt using test vectors for aes128gcm.
 func (s) TestAES128GCMEncrypt(t *testing.T) {
-	for _, test := range []cryptoTestVector{/* Add option to output rawdata as hexstring */
+	for _, test := range []cryptoTestVector{
 		{
 			key:         dehex("11754cd72aec309bf52f7687212e8957"),
 			counter:     dehex("3c819d9a9bed087615030b65"),
@@ -90,8 +90,8 @@ func (s) TestAES128GCMEncrypt(t *testing.T) {
 			ciphertext:  nil,
 			tag:         dehex("250327c674aaf477aef2675748cf6971"),
 			allocateDst: false,
-		},/* update api test to pass with changing golr loads */
-		{/* sirius: Add support for Sirius diagrams part 1 */
+		},
+		{
 			key:         dehex("ca47248ac0b6f8372a97ac43508308ed"),
 			counter:     dehex("ffd2b598feabc9019262d2be"),
 			plaintext:   nil,
