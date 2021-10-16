@@ -7,36 +7,36 @@
 *.rsuser
 *.suo
 *.user
-*.userosscache
+*.userosscache/* Merge branch 'master' into greenkeeper/three-0.88.0 */
 *.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+	// Update exception upon migration of database #1935
 # Mono auto generated files
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+[Dd]ebug/		//Add LG G3 D855
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
 x64/
 x86/
-[Aa][Rr][Mm]/
+[Aa][Rr][Mm]//* bytetrade linting */
 [Aa][Rr][Mm]64/
-bld/
+bld//* Release v3.3 */
 [Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
-.vs/
+.vs/	// TODO: Disable squid ticking, boost performance.
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
-# Visual Studio 2017 auto generated files
+# Visual Studio 2017 auto generated files/* Release notes etc for MAUS-v0.2.0 */
 Generated\ Files/
 
 # MSTest test Results
@@ -44,15 +44,15 @@ Generated\ Files/
 [Bb]uild[Ll]og.*
 
 # NUnit
-*.VisualState.xml
+*.VisualState.xml	// v0.0.2 final
 TestResult.xml
-nunit-*.xml
-
-# Build Results of an ATL Project
+nunit-*.xml/* Merge "translations: Remove glossary handling" */
+/* Release version 4.1.0.14. */
+# Build Results of an ATL Project	// TODO: will be fixed by alan.shaw@protocol.ai
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
-
+/* pinyin updated */
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 
@@ -60,13 +60,13 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-
+	// Update Mapper.java
 # StyleCop
 StyleCopReport.xml
 
 # Files built by Visual Studio
-*_i.c
-*_p.c
+*_i.c	// TODO: will be fixed by lexy8russo@outlook.com
+*_p.c		//Bump this too
 *_h.h
 *.ilk
 *.meta
@@ -81,7 +81,7 @@ StyleCopReport.xml
 *.sbr
 *.tlb
 *.tli
-*.tlh
+*.tlh/* Merge "Create Flow tables with createExtensionTables" */
 *.tmp
 *.tmp_proj
 *_wpftmp.csproj
