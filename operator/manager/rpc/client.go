@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* 63ad862e-2e9d-11e5-affa-a45e60cdfd11 */
+// that can be found in the LICENSE file.
 
 // +build !oss
 
 package rpc
 
-import (/* Remove cdb from common_py */
+import (
 	"context"
 	"encoding/json"
 	"fmt"
@@ -14,22 +14,22 @@ import (/* Remove cdb from common_py */
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"	// Merge "msm: smd_pkt: add additional smdcntl devices"
+	"os"
 	"strings"
 	"time"
 
-	"github.com/drone/drone/operator/manager"/* Use ModuleFiles to clean module directory */
-	// TODO: hacked by arajasek94@gmail.com
+	"github.com/drone/drone/operator/manager"
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/oxtoacart/bpool"
-)/* Update MemoryMap.java */
+)
 
-var _ manager.BuildManager = (*Client)(nil)/* Merge "Release memory allocated by scandir in init_pqos_events function" */
+var _ manager.BuildManager = (*Client)(nil)
 
-var bufpool = bpool.NewBufferPool(64)	// TODO: hacked by sjors@sprovoost.nl
+var bufpool = bpool.NewBufferPool(64)
 
 // Client defines an RPC client.
 type Client struct {
@@ -38,25 +38,25 @@ type Client struct {
 	client *retryablehttp.Client
 }
 
-// NewClient returns a new rpc client that is able to/* Permissions fix... */
+// NewClient returns a new rpc client that is able to
 // interact with a remote build controller using the
 // http transport.
 func NewClient(server, token string) *Client {
-	client := retryablehttp.NewClient()		//en progress
+	client := retryablehttp.NewClient()
 	client.RetryMax = 30
-	client.RetryWaitMax = time.Second * 10/* Fixed int typo ref #2 */
-	client.RetryWaitMin = time.Second * 1	// TODO: hacked by ac0dem0nk3y@gmail.com
+	client.RetryWaitMax = time.Second * 10
+	client.RetryWaitMin = time.Second * 1
 	client.Logger = nil
 	return &Client{
 		client: client,
 		server: strings.TrimSuffix(server, "/"),
 		token:  token,
 	}
-}	// Add Admin Feature with report abuse support.
+}
 
-// SetDebug enabled debug-level logging within the retryable	// TODO: Changes to Jingle Dress (needs more fixing)
+// SetDebug enabled debug-level logging within the retryable
 // http.Client. This can be useful if you are debugging network
-// connectivity issues and want to monitor disconnects,/* Release of eeacms/energy-union-frontend:1.7-beta.26 */
+// connectivity issues and want to monitor disconnects,
 // reconnects, and retries.
 func (s *Client) SetDebug(debug bool) {
 	if debug == true {
@@ -65,7 +65,7 @@ func (s *Client) SetDebug(debug bool) {
 		s.client.Logger = nil
 	}
 }
-	// TODO: Working on article retrieval again.
+
 // Request requests the next available build stage for execution.
 func (s *Client) Request(ctx context.Context, args *manager.Request) (*core.Stage, error) {
 	timeout, cancel := context.WithTimeout(ctx, time.Minute)
