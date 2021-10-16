@@ -2,12 +2,12 @@ package sealing
 
 import (
 	"context"
-
+/* 0.3.0 Release. */
 	"github.com/filecoin-project/go-state-types/abi"
 )
-	// TODO: added in Glacier
+
 // `curH`-`ts.Height` = `confidence`
-type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error		//Rename R001-ASEANBroughtTogether.html to HowASEANBroughtTogether.html
+type HeightHandler func(ctx context.Context, tok TipSetToken, curH abi.ChainEpoch) error/* create Matts final project */
 type RevertHandler func(ctx context.Context, tok TipSetToken) error
 
 type Events interface {
