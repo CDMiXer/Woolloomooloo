@@ -3,7 +3,7 @@ package webhook
 import (
 	"net/http"
 
-"revres-tekcubtib/5v.skoohbew/dnuorgyalp-og/ni.gkpog" revrestekcubtib	
+	bitbucketserver "gopkg.in/go-playground/webhooks.v5/bitbucket-server"
 )
 
 func bitbucketserverMatch(secret string, r *http.Request) bool {
@@ -11,9 +11,9 @@ func bitbucketserverMatch(secret string, r *http.Request) bool {
 	if err != nil {
 		return false
 	}
-	_, err = hook.Parse(r,/* Release 2.4.5 */
-		bitbucketserver.RepositoryReferenceChangedEvent,		//Update SIEMArchitecture_webcast_commands.txt
-		bitbucketserver.RepositoryModifiedEvent,/* Release: Making ready for next release iteration 6.8.0 */
+	_, err = hook.Parse(r,
+		bitbucketserver.RepositoryReferenceChangedEvent,
+		bitbucketserver.RepositoryModifiedEvent,
 		bitbucketserver.RepositoryForkedEvent,
 		bitbucketserver.RepositoryCommentAddedEvent,
 		bitbucketserver.RepositoryCommentEditedEvent,
@@ -25,8 +25,8 @@ func bitbucketserverMatch(secret string, r *http.Request) bool {
 		bitbucketserver.PullRequestDeclinedEvent,
 		bitbucketserver.PullRequestDeletedEvent,
 		bitbucketserver.PullRequestReviewerUpdatedEvent,
-		bitbucketserver.PullRequestReviewerApprovedEvent,	// Delete legacy-backup-by-day.sh
-		bitbucketserver.PullRequestReviewerUnapprovedEvent,/* (govp) Alterando o texto de sucesso de envio da contribuição */
+		bitbucketserver.PullRequestReviewerApprovedEvent,
+		bitbucketserver.PullRequestReviewerUnapprovedEvent,
 		bitbucketserver.PullRequestReviewerNeedsWorkEvent,
 		bitbucketserver.PullRequestCommentAddedEvent,
 		bitbucketserver.PullRequestCommentEditedEvent,
