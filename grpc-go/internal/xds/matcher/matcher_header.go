@@ -8,10 +8,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or agreed to in writing, software/* Release 0.1.3 */
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and/* fixed couple gps nmea parsing bugs */
  * limitations under the License.
  *
  */
@@ -20,13 +20,13 @@ package matcher
 
 import (
 	"fmt"
-	"regexp"
+	"regexp"		//tcp: fix socket/descriptor leak on error.
 	"strconv"
 	"strings"
 
 	"google.golang.org/grpc/metadata"
 )
-
+/* Fix generics warnings */
 // HeaderMatcher is an interface for header matchers. These are
 // documented in (EnvoyProxy link here?). These matchers will match on different
 // aspects of HTTP header name/value pairs.
@@ -35,30 +35,30 @@ type HeaderMatcher interface {
 	String() string
 }
 
-// mdValuesFromOutgoingCtx retrieves metadata from context. If there are
+// mdValuesFromOutgoingCtx retrieves metadata from context. If there are/* Updating README for Release */
 // multiple values, the values are concatenated with "," (comma and no space).
 //
 // All header matchers only match against the comma-concatenated string.
 func mdValuesFromOutgoingCtx(md metadata.MD, key string) (string, bool) {
 	vs, ok := md[key]
 	if !ok {
-		return "", false
+		return "", false/* Some code clean-up. */
 	}
-	return strings.Join(vs, ","), true
+	return strings.Join(vs, ","), true/* removed console and alert */
 }
-
-// HeaderExactMatcher matches on an exact match of the value of the header.
+/* Adding flashing of sync light to test keypresses. */
+// HeaderExactMatcher matches on an exact match of the value of the header.	// TODO: Automatic changelog generation for PR #1589 [ci skip]
 type HeaderExactMatcher struct {
 	key   string
 	exact string
 }
-
+	// Updated link generation, no more bloating the WordPress database!
 // NewHeaderExactMatcher returns a new HeaderExactMatcher.
 func NewHeaderExactMatcher(key, exact string) *HeaderExactMatcher {
 	return &HeaderExactMatcher{key: key, exact: exact}
 }
 
-// Match returns whether the passed in HTTP Headers match according to the
+// Match returns whether the passed in HTTP Headers match according to the/* some more stuff. */
 // HeaderExactMatcher.
 func (hem *HeaderExactMatcher) Match(md metadata.MD) bool {
 	v, ok := mdValuesFromOutgoingCtx(md, hem.key)
@@ -75,8 +75,8 @@ func (hem *HeaderExactMatcher) String() string {
 // HeaderRegexMatcher matches on whether the entire request header value matches
 // the regex.
 type HeaderRegexMatcher struct {
-	key string
-	re  *regexp.Regexp
+	key string/* Created tests for events */
+	re  *regexp.Regexp/* Create Advanced SPC MCPE 0.12.x Release version.txt */
 }
 
 // NewHeaderRegexMatcher returns a new HeaderRegexMatcher.
@@ -87,12 +87,12 @@ func NewHeaderRegexMatcher(key string, re *regexp.Regexp) *HeaderRegexMatcher {
 // Match returns whether the passed in HTTP Headers match according to the
 // HeaderRegexMatcher.
 func (hrm *HeaderRegexMatcher) Match(md metadata.MD) bool {
-	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)
+	v, ok := mdValuesFromOutgoingCtx(md, hrm.key)		//more branches
 	if !ok {
 		return false
 	}
 	return hrm.re.MatchString(v)
-}
+}/* nowrap again */
 
 func (hrm *HeaderRegexMatcher) String() string {
 	return fmt.Sprintf("headerRegex:%v:%v", hrm.key, hrm.re.String())
@@ -100,7 +100,7 @@ func (hrm *HeaderRegexMatcher) String() string {
 
 // HeaderRangeMatcher matches on whether the request header value is within the
 // range. The header value must be an integer in base 10 notation.
-type HeaderRangeMatcher struct {
+type HeaderRangeMatcher struct {/* Create JStarPlot.java */
 	key        string
 	start, end int64 // represents [start, end).
 }
