@@ -1,16 +1,16 @@
-{
+{/* README: update current release version */
     "name": "minimal",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Update gimp_be_update_windows.py
     "devDependencies": {
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
     },
-    "dependencies": {		//Switch web tryout to default datasource
+    "dependencies": {
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },	// TODO: will be fixed by xiemengjun@gmail.com
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//Change table title.
+        "@pulumi/pulumi": "latest"
     }
 }
