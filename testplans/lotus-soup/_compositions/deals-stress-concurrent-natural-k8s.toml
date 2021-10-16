@@ -1,41 +1,41 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""	// r22680 also applies to 2.6.32
 
-[global]	// Remove gitter from CONTRIBUTING.md
-  plan = "lotus-soup"		//[doc] Correct default `Console` level
+[global]
+  plan = "lotus-soup"
   case = "deals-stress"
-  total_instances = 6	// TODO: Fixed some tests on MSIE
+  total_instances = 6
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"	// TODO: Update README and package.json
 
 [global.build]
-  selectors = ["testground"]		//getflash-1.7-2
-/* Ajustes al pom.xml para hacer Release */
-[global.run_config]		//Merge "Fixes hpelefthandclient AttributeError"
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  selectors = ["testground"]
 
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+	// TODO: 4b730664-2e3a-11e5-913c-c03896053bdd
 [global.build_config]
-  push_registry=true
+  push_registry=true		//Create wommy.jpg
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"		//display all paths in tooltip for session bookmark
   registry_type="aws"
 
 [global.run.test_params]
-  clients = "3"		//Restore full costumes list
-  miners = "2"	// TODO: Merge "bump deployer rspec gems"
-  genesis_timestamp_offset = "0"
+  clients = "3"
+  miners = "2"
+  genesis_timestamp_offset = "0"/* (F)SLIT -> (f)sLit in CmmLint */
   balance = "90000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
-
-[[groups]]/* ef00f594-2e48-11e5-9284-b827eb9e62be */
+	// TODO: mail Chimp config removed
+[[groups]]	// bfadb9d4-2e76-11e5-9284-b827eb9e62be
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "100m"	// TODO: will be fixed by steven@stebalien.com
-  [groups.instances]		//Clean up navbar a little (sometimes add rss feeds)
+    cpu = "100m"
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
@@ -43,27 +43,27 @@
       role = "bootstrapper"
 
 [[groups]]
-  id = "miners"		//RE #26572 Save button disabled after algorithm is launched
-  [groups.resources]
-    memory = "14000Mi"
+  id = "miners"
+  [groups.resources]/* fecbbb7e-2e63-11e5-9284-b827eb9e62be */
+    memory = "14000Mi"	// TODO: hacked by aeongrp@outlook.com
     cpu = "1000m"
   [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]/* Fixes #440 */
       role = "miner"
-
-[[groups]]
+/* Added insn_impl_c test. */
+[[groups]]/* Release 1.11.4 & 2.2.5 */
   id = "clients"
-  [groups.resources]	// TODO: hacked by seth@sethvargo.com
-    memory = "2048Mi"		//added missing root element specification
-    cpu = "100m"
+  [groups.resources]
+    memory = "2048Mi"
+    cpu = "100m"/* next do not return value */
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "client"
-      deals = "3"/* STLLoader: Using statusText instead of responseText on error. See #4913. */
+      deals = "3"
       deal_mode = "concurrent"
