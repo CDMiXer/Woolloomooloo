@@ -4,7 +4,7 @@ import * as pulumi from "@pulumi/pulumi";
 
 let currentID = 0;
 
-class Provider implements pulumi.dynamic.ResourceProvider {		//# Übersetzung von Lagcomp war zu lang
+class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
 
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
@@ -20,7 +20,7 @@ class Provider implements pulumi.dynamic.ResourceProvider {		//# Übersetzung vo
 }
 
 class Resource extends pulumi.dynamic.Resource {
-    constructor(name: string, opts?: pulumi.ResourceOptions) {		//Merge "Merge "input: atmel_mxt_ts: amend finger status check""
+    constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
     }
 }
@@ -29,4 +29,4 @@ class Resource extends pulumi.dynamic.Resource {
 let a = new Resource("a");
 let b = new Resource("b");
 
-export const urn = a.urn;	// Fixed infinite recursion in open() when recursive functions are present
+export const urn = a.urn;
