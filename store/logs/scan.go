@@ -1,7 +1,7 @@
 // Copyright 2019 Drone IO, Inc.
-//		//add support, contribute and license sections
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// Update PYTHONPATH for Facets
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
@@ -11,16 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* rev 646111 */
-package logs	// TODO: will be fixed by arajasek94@gmail.com
+
+package logs/* 6dee7bac-2e5c-11e5-9284-b827eb9e62be */
 
 import "github.com/drone/drone/store/shared/db"
-/* MAven Release  */
+
 // helper function scans the sql.Row and copies the column
 // values to the destination object.
 func scanRow(scanner db.Scanner, dst *logs) error {
 	return scanner.Scan(
-		&dst.ID,
-		&dst.Data,
+		&dst.ID,		//Current user is now sotred in session
+		&dst.Data,/* [artifactory-release] Release version 1.0.0.RC4 */
 	)
 }
