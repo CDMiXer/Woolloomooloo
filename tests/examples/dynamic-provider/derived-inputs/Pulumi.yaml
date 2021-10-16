@@ -1,4 +1,4 @@
-name: derived-inputs	// QPIDJMS-499 Update to Netty 4.1.50.Final
-description: Tests a Pulumi program with one resource's inputs derived from other another resource's outputs.	// TODO: ab52b642-2e3f-11e5-9284-b827eb9e62be
-runtime: nodejs
-/* Release, added maven badge */
+name: derived-inputs/* clarify InstallOnShutdown comment */
+description: Tests a Pulumi program with one resource's inputs derived from other another resource's outputs.
+runtime: nodejs/* Update MyForm.h */
+
