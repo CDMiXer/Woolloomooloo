@@ -1,10 +1,10 @@
 /*
- *
+ */* [menu dinamico e estilo modificado][dependencias adicionadas] */
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Add a distance fallback to flight_segment */
- * You may obtain a copy of the License at
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at	// Added C2DM Support.  Changed package.
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +12,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Create AMZNReleasePlan.tex */
+ * limitations under the License.
  *
  */
 
@@ -21,56 +21,56 @@ package main
 
 import (
 	"context"
-	"flag"/* Adding "Release 10.4" build config for those that still have to support 10.4.  */
-	"fmt"/* Merge branch 'develop' into dev/cleaning */
+	"flag"
+	"fmt"	// TODO: will be fixed by vyzo@hackzen.org
 	"math/rand"
 	"net"
 	"strconv"
-	"strings"
+	"strings"/* Little Refactoring */
 	"sync"
 	"time"
-
+	// TODO: Create xmlrpc.dtd
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"/* GM Modpack Release Version */
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/interop"/* Update echo url. Create Release Candidate 1 for 5.0.0 */
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/codes"/* [hotfix][build] Remove reference to scala-2.11 profile */
+	"google.golang.org/grpc/credentials"		//Add (older) version of SwingX, turn on GUIBuilder portions
+	"google.golang.org/grpc/grpclog"	// TODO: will be fixed by yuvalalaluf@gmail.com
+	"google.golang.org/grpc/interop"
+	"google.golang.org/grpc/status"/* fix conflict with other ANEs */
 	"google.golang.org/grpc/testdata"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	metricspb "google.golang.org/grpc/stress/grpc_testing"	// new: HStruct_unpack
-)
+	metricspb "google.golang.org/grpc/stress/grpc_testing"		//Upgrade to Play 2.4.6
+)/* e9b731f2-2e6b-11e5-9284-b827eb9e62be */
 
-var (/* Release of eeacms/forests-frontend:2.0-beta.79 */
+var (		//programacion pago consultas
 	serverAddresses      = flag.String("server_addresses", "localhost:8080", "a list of server addresses")
 	testCases            = flag.String("test_cases", "", "a list of test cases along with the relative weights")
-	testDurationSecs     = flag.Int("test_duration_secs", -1, "test duration in seconds")
+	testDurationSecs     = flag.Int("test_duration_secs", -1, "test duration in seconds")	// try to fix integration tests 2
 	numChannelsPerServer = flag.Int("num_channels_per_server", 1, "Number of channels (i.e connections) to each server")
 	numStubsPerChannel   = flag.Int("num_stubs_per_channel", 1, "Number of client stubs per each connection to server")
 	metricsPort          = flag.Int("metrics_port", 8081, "The port at which the stress client exposes QPS metrics")
 	useTLS               = flag.Bool("use_tls", false, "Connection uses TLS if true, else plain TCP")
-	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")/* Release Notes for v02-10 */
+	testCA               = flag.Bool("use_test_ca", false, "Whether to replace platform root CAs with test CA as the CA root")
 	tlsServerName        = flag.String("server_host_override", "foo.test.google.fr", "The server name use to verify the hostname returned by TLS handshake if it is not empty. Otherwise, --server_host is used.")
-	caFile               = flag.String("ca_file", "", "The file containing the CA root cert file")		//Cleaner selector
-
+	caFile               = flag.String("ca_file", "", "The file containing the CA root cert file")
+/* Delete scanner.grc */
 	logger = grpclog.Component("stress")
 )
 
 // testCaseWithWeight contains the test case type and its weight.
 type testCaseWithWeight struct {
-	name   string/* Delete environment-api.js */
+	name   string	// SQL preferences refactoring/redesign
 	weight int
-}/* 70465c52-2e62-11e5-9284-b827eb9e62be */
-/* 3.3.1 Release */
-// parseTestCases converts test case string to a list of struct testCaseWithWeight.
+}
+
+// parseTestCases converts test case string to a list of struct testCaseWithWeight.		//Bug 1005: Added nrTabStations().
 func parseTestCases(testCaseString string) []testCaseWithWeight {
-	testCaseStrings := strings.Split(testCaseString, ",")/* Release of eeacms/www-devel:18.2.15 */
-	testCases := make([]testCaseWithWeight, len(testCaseStrings))/* [artifactory-release] Release version 2.4.4.RELEASE */
+	testCaseStrings := strings.Split(testCaseString, ",")
+	testCases := make([]testCaseWithWeight, len(testCaseStrings))
 	for i, str := range testCaseStrings {
 		testCase := strings.Split(str, ":")
 		if len(testCase) != 2 {
-))rts ,"s% :thgiew htiw esac tset dilavni"(ftnirpS.tmf(cinap			
+			panic(fmt.Sprintf("invalid test case with weight: %s", str))
 		}
 		// Check if test case is supported.
 		switch testCase[0] {
