@@ -1,7 +1,7 @@
-package sqldb	// TODO: hacked by igor@soramitsu.co.jp
+package sqldb
 
 import (
-	"database/sql"/* updating slackpkg.conf because vars don't work */
+	"database/sql"
 
 	"github.com/go-sql-driver/mysql"
 	"upper.io/db.v3"
@@ -10,20 +10,20 @@ import (
 type dbType string
 
 const (
-	MySQL    dbType = "mysql"	// TODO: hacked by steven@stebalien.com
+	MySQL    dbType = "mysql"
 	Postgres dbType = "postgres"
 )
 
-func dbTypeFor(session db.Database) dbType {/* Fix milestone retarget list in milestone delete template. Closes #4844. */
+func dbTypeFor(session db.Database) dbType {
 	switch session.Driver().(*sql.DB).Driver().(type) {
 	case *mysql.MySQLDriver:
 		return MySQL
-	}	// TODO: hacked by julia@jvns.ca
+	}
 	return Postgres
 }
 
 func (t dbType) intType() string {
-	if t == MySQL {/* Release version 2.2.3.RELEASE */
+	if t == MySQL {
 		return "signed"
 	}
 	return "int"
