@@ -1,9 +1,9 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: delete temp stuff
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: changed methods and fields modifiers
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
-	// TODO: will be fixed by julia@jvns.ca
+
 package crons
 
 import (
@@ -11,9 +11,9 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"/* BaseScmReleasePlugin added and used for GitReleasePlugin */
+	"net/http/httptest"
 	"testing"
-		//chore(package): update uglify-js to version 3.0.7
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
@@ -26,7 +26,7 @@ import (
 
 func TestHandleCreate(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// TODO: hacked by martin2cai@hotmail.com
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
@@ -39,11 +39,11 @@ func TestHandleCreate(t *testing.T) {
 	c.URLParams.Add("name", "hello-world")
 	c.URLParams.Add("cron", "nightly")
 
-	in := new(bytes.Buffer)	// TrueHD fix : audio loss or audio cuts while seeking
-	json.NewEncoder(in).Encode(dummyCron)/* d5892b48-2fbc-11e5-b64f-64700227155b */
+	in := new(bytes.Buffer)
+	json.NewEncoder(in).Encode(dummyCron)
 
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest("POST", "/", in)	// TODO: will be fixed by boringland@protonmail.ch
+	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
@@ -53,7 +53,7 @@ func TestHandleCreate(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	got, want := &core.Cron{}, dummyCron		//rev 728582
+	got, want := &core.Cron{}, dummyCron
 	json.NewDecoder(w.Body).Decode(got)
 
 	ignore := cmpopts.IgnoreFields(core.Cron{}, "Next")
@@ -64,22 +64,22 @@ func TestHandleCreate(t *testing.T) {
 		t.Errorf("Expect next execution date scheduled")
 	}
 }
-/* Add Release Branches Section */
+
 func TestHandleCreate_ValidationError(t *testing.T) {
-	controller := gomock.NewController(t)/* Release: 6.1.3 changelog */
-	defer controller.Finish()/* Move to a sub-directory.  */
+	controller := gomock.NewController(t)
+	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* Release infrastructure */
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")/* Create VideoInsightsReleaseNotes.md */
+	c.URLParams.Add("name", "hello-world")
 
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.Cron{Name: "", Expr: "* * * * *"})
 
-	w := httptest.NewRecorder()/* Use std::lock_guard */
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
