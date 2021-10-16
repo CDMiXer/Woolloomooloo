@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation./* Release only .dist config files */
+// Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";		//Remove unuseful file.
+import { Resource } from "./resource";
 
 // Step 2: the resource from the setup is imported, and is now managed by Pulumi.
-const a = new Resource("a", { state: 42 }, { import: "0" });/* HTTP_ACCESS_TOKEN */
+const a = new Resource("a", { state: 42 }, { import: "0" });
