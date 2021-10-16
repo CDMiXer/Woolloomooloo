@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Merge branch 'master' into Large-Titles */
+	// TODO: hacked by davidad@alum.mit.edu
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>	// TODO: Update .gitignore, basics.md, and 3 more files...
+  </PropertyGroup>
 
 </Project>
