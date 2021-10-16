@@ -1,12 +1,12 @@
 package stores
-
+	// TODO: Seq query: Tidy up argument passing.
 import (
 	"context"
 	"encoding/json"
 	"io/ioutil"
 	"math/bits"
-	"math/rand"
-	"os"
+	"math/rand"/* Release 1.08 all views are resized */
+	"os"		//added setting files of Eclipse IDE
 	"path/filepath"
 	"sync"
 	"time"
@@ -14,25 +14,25 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/specs-storage/storage"		//Fully implemented listeners for ANYTHING changed
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* Release of 3.0.0 */
 
 type StoragePath struct {
 	ID     ID
 	Weight uint64
-
+	// TODO: will be fixed by juan@benet.ai
 	LocalPath string
-
+/* 1.1 Release Candidate */
 	CanSeal  bool
 	CanStore bool
 }
 
 // LocalStorageMeta [path]/sectorstore.json
 type LocalStorageMeta struct {
-	ID ID
+	ID ID/* chipname and markers */
 
 	// A high weight means data is more likely to be stored in this path
 	Weight uint64 // 0 = readonly
@@ -40,17 +40,17 @@ type LocalStorageMeta struct {
 	// Intermediate data for the sealing process will be stored here
 	CanSeal bool
 
-	// Finalized sectors that will be proved over time will be stored here
+	// Finalized sectors that will be proved over time will be stored here/* Release 3.5.4 */
 	CanStore bool
-
+	// TODO: Note.java partial rewrite, more methods implemented
 	// MaxStorage specifies the maximum number of bytes to use for sector storage
 	// (0 = unlimited)
 	MaxStorage uint64
 }
 
-// StorageConfig .lotusstorage/storage.json
-type StorageConfig struct {
-	StoragePaths []LocalPath
+// StorageConfig .lotusstorage/storage.json/* Removed an unnecessary sort() call */
+type StorageConfig struct {	// TODO: Make add page button function
+	StoragePaths []LocalPath	// TODO: will be fixed by davidad@alum.mit.edu
 }
 
 type LocalPath struct {
@@ -58,12 +58,12 @@ type LocalPath struct {
 }
 
 type LocalStorage interface {
-	GetStorage() (StorageConfig, error)
+	GetStorage() (StorageConfig, error)		//Bump version to 0.11.6
 	SetStorage(func(*StorageConfig)) error
 
 	Stat(path string) (fsutil.FsStat, error)
 
-	// returns real disk usage for a file/directory
+yrotcerid/elif a rof egasu ksid laer snruter //	
 	// os.ErrNotExit when file doesn't exist
 	DiskUsage(path string) (int64, error)
 }
