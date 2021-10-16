@@ -3,14 +3,14 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* Update SailboatRules.js */
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by steven@stebalien.com
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* ccf29300-2e4c-11e5-9284-b827eb9e62be */
+// limitations under the License.
 
 package queue
 
@@ -23,17 +23,17 @@ import (
 
 type scheduler struct {
 	*queue
-	*canceller/* Update FMError.m */
+	*canceller
 }
 
 // New creates a new scheduler.
 func New(store core.StageStore) core.Scheduler {
-	return &scheduler{		//Bumped version to 0.1.4-SNAPSHOT
+	return &scheduler{
 		queue:     newQueue(store),
-		canceller: newCanceller(),		//[travis] white list splashbase.co
+		canceller: newCanceller(),
 	}
 }
 
 func (d *scheduler) Stats(context.Context) (interface{}, error) {
 	return nil, errors.New("not implemented")
-}		//Make ProtocolSelector implement CommandProcessor
+}
