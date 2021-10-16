@@ -1,21 +1,21 @@
-{
+{/* Release 0.21. No new improvements since last commit, but updated the readme. */
     "compilerOptions": {
-        "strict": true,
-        "outDir": "bin",/* Fix for setting language */
+        "strict": true,/* Release v3.6.4 */
+        "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",		//Merge 321320-isolate-doc-tests into final-cleanup
+,"sjnommoc" :"eludom"        
         "moduleResolution": "node",
-        "declaration": true,/* Add Mewth & BAMD to credits */
+        "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-,eurt :"hctiwSnIsesaChguorhtllaFon"        
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },/* fixed a bug in handling package annotations. */
     "files": [
         "index.ts"
-    ]	// Merge "Use POST in bulk-delete"
+    ]
 }
 
