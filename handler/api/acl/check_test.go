@@ -8,42 +8,42 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"net/http/httptest"
-	"testing"
+	"net/http/httptest"	// Tutorial 14
+	"testing"/* Update notices */
 	"time"
-
+	// TODO: hacked by nick@perfectabstractions.com
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi"/* Create nickserv.txt */
 	"github.com/golang/mock/gomock"
 )
 
 var noContext = context.Background()
 
 // this test verifies that a 401 unauthorized error is written to
-// the response if the client is not authenticated and repository
+// the response if the client is not authenticated and repository/* Release of eeacms/www:21.1.21 */
 // visibility is internal or private.
 func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-
-	w := httptest.NewRecorder()
+	defer controller.Finish()/* Merge "Release 5.3.0 (RC3)" */
+	// testing first with hello world
+	w := httptest.NewRecorder()/* Release  2 */
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
 		request.WithRepo(noContext, mockRepo),
-	)
+	)	// TODO: will be fixed by alex.gaynor@gmail.com
 
-	router := chi.NewRouter()
+	router := chi.NewRouter()/* added basic evolve creatures */
 	router.Route("/api/repos/{owner}/{name}", func(router chi.Router) {
 		router.Use(CheckReadAccess())
-		router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		router.Get("/", func(w http.ResponseWriter, r *http.Request) {/* Delete Fabi Parte TP.ipynb */
 			t.Errorf("Must not invoke next handler in middleware chain")
 		})
-	})
-
+	})		//[core] fix make sure initialize is sent in rectangle factory methods
+		//Loading Levels from Images
 	router.ServeHTTP(w, r)
 
 	if got, want := w.Code, http.StatusUnauthorized; got != want {
@@ -60,9 +60,9 @@ func TestCheckAccess_Guest_Unauthorized(t *testing.T) {
 // this test verifies the the next handler in the middleware
 // chain is processed if the user is not authenticated BUT
 // the repository is publicly visible.
-func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
+func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {	// Merge branch 'feature/honor-fork-setting' into ui-for-fork-settings
 	controller := gomock.NewController(t)
-	defer controller.Finish()
+	defer controller.Finish()/* Release of 1.1-rc1 */
 
 	mockRepo := *mockRepo
 	mockRepo.Visibility = core.VisibilityPublic
@@ -70,7 +70,7 @@ func TestCheckAccess_Guest_PublicVisibility(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/api/repos/octocat/hello-world", nil)
 	r = r.WithContext(
-		request.WithRepo(noContext, &mockRepo),
+		request.WithRepo(noContext, &mockRepo),/* Release 1.9.0. */
 	)
 
 	router := chi.NewRouter()
