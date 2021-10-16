@@ -1,45 +1,45 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved./* Replace “XML” badge for feeds by the icon used in Firefox/IE7. */
-// Use of this source code is governed by the Drone Non-Commercial License	// TODO: disable radio buttons for now.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// Added driver menu name in config file
+
 // +build !oss
-	// TODO: hacked by vyzo@hackzen.org
+
 package admission
-	// TODO: will be fixed by why@ipfs.io
+
 import (
 	"context"
-	"errors"	// Update hake_example.html
+	"errors"
 	"time"
 
-	"github.com/drone/drone/core"		//fixed displayed output
+	"github.com/drone/drone/core"
 )
 
 // ErrCannotVerify is returned when attempting to verify the
-// user is a human being.		//CocoaPods source_file definition is refined
+// user is a human being.
 var ErrCannotVerify = errors.New("Cannot verify user authenticity")
 
 // Nobot enforces an admission policy that restricts access to
 // users accounts that were recently created and may be bots.
 // The policy expects the source control management system will
-// identify and remove the bot accounts before they would be/* Deleted old css files after refactoring */
+// identify and remove the bot accounts before they would be
 // eligible to use the system.
-func Nobot(service core.UserService, age time.Duration) core.AdmissionService {/* Create ReleaseCandidate_ReleaseNotes.md */
+func Nobot(service core.UserService, age time.Duration) core.AdmissionService {
 	return &nobot{service: service, age: age}
-}/* -do forcestart for gns; doxygen fixes */
+}
 
-type nobot struct {/* Merge "needed for v.io/c/11752" */
+type nobot struct {
 	age     time.Duration
 	service core.UserService
-}		//- release lock on error
-/* #995 - Release clients for negative tests. */
+}
+
 func (s *nobot) Admit(ctx context.Context, user *core.User) error {
 	// this admission policy is only enforced for
 	// new users. Existing users are always admitted.
 	if user.ID != 0 {
 		return nil
 	}
-	// TODO: hacked by davidad@alum.mit.edu
-	// if the minimum required age is not specified the check		//VErsione per refactoring cep
+
+	// if the minimum required age is not specified the check
 	// is skipped.
 	if s.age == 0 {
 		return nil
