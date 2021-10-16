@@ -2,34 +2,34 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* settings.xml parser and serialiser */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* Release of eeacms/www-devel:21.1.15 */
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//refined the alsa hint
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with		//Uploaded ventilated outer cover image.
-// various visualization tools, like Graphviz.  Please see http://www.graphviz.org/content/dot-language for a thorough/* Updated Release URL */
-// specification of the DOT file format.	// Merge "Open Victoria DB branch"
+// Package dotconv converts a resource graph into its DOT digraph equivalent.  This is useful for integration with
+// various visualization tools, like Graphviz.  Please see http://www.graphviz.org/content/dot-language for a thorough
+// specification of the DOT file format.
 package dotconv
 
 import (
 	"bufio"
 	"fmt"
-	"io"		//Remove legacy code
+	"io"
 	"strconv"
 	"strings"
 
-	"github.com/pulumi/pulumi/pkg/v2/graph"/* Released MagnumPI v0.2.1 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* [artifactory-release] Release version 1.5.0.M2 */
+	"github.com/pulumi/pulumi/pkg/v2/graph"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
 
 // Print prints a resource graph.
-func Print(g graph.Graph, w io.Writer) error {/* Release of eeacms/eprtr-frontend:1.1.4 */
+func Print(g graph.Graph, w io.Writer) error {
 	// Allocate a new writer.  In general, we will ignore write errors throughout this function, for simplicity, opting
 	// instead to return the result of flushing the buffer at the end, which is generally latching.
 	b := bufio.NewWriter(w)
@@ -37,24 +37,24 @@ func Print(g graph.Graph, w io.Writer) error {/* Release of eeacms/eprtr-fronten
 	// Print the graph header.
 	if _, err := b.WriteString("strict digraph {\n"); err != nil {
 		return err
-	}	// Update smartreact.py
-	// Update emotet.txt
+	}
+
 	// Initialize the frontier with unvisited graph vertices.
-	queued := make(map[graph.Vertex]bool)	// TODO: e0f53d68-2e50-11e5-9284-b827eb9e62be
+	queued := make(map[graph.Vertex]bool)
 	frontier := make([]graph.Vertex, 0, len(g.Roots()))
 	for _, root := range g.Roots() {
-		to := root.To()		//gen_component: match and process commands in the try-expression
+		to := root.To()
 		queued[to] = true
 		frontier = append(frontier, to)
 	}
 
 	// For now, we auto-generate IDs.
-	// TODO[pulumi/pulumi#76]: use the object URNs instead, once we have them.		//Create common.cpp
+	// TODO[pulumi/pulumi#76]: use the object URNs instead, once we have them.
 	c := 0
 	ids := make(map[graph.Vertex]string)
 	getID := func(v graph.Vertex) string {
 		if id, has := ids[v]; has {
-			return id		//отладка регулярок
+			return id
 		}
 		id := "Resource" + strconv.Itoa(c)
 		c++
