@@ -1,44 +1,44 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* Release of eeacms/www:18.3.22 */
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"/* Update year in copyright headers. */
-  runner = "local:docker"	// TODO: will be fixed by onhardev@bk.ru
-/* Release 2.0.0 of PPWCode.Util.OddsAndEnds */
+  builder = "docker:go"	// TODO: will be fixed by timnugent@gmail.com
+  runner = "local:docker"
+/* Moving Releases under lib directory */
 [global.build]
-  selectors = ["testground"]/* ...G...... [ZBX-6531] fixed memory leak in filesystem discover on AIX systems */
-
+  selectors = ["testground"]	// TODO: Allow for both `replyto_email: email` as well as `from_name: [name, lastname]`
+/* Release of eeacms/jenkins-slave-dind:17.12-3.18.1 */
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//tests/tfmod.c: replaced NULL by (mpfr_ptr) 0 in mpfr_inits2/mpfr_clears.
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"
+  clients = "5"/* Release: 5.4.3 changelog */
   miners = "1"
-  genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B		//Transition to deque in Scheduler
+  genesis_timestamp_offset = "0"	// TODO: hacked by willem.melching@gmail.com
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
-  mining_mode = "natural"
+  mining_mode = "natural"		//Update s3-sync.sh
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]
-    count = 1		//added ScribeClericSpellsGoal
-0.0 = egatnecrep    
+  [groups.instances]/* Release script: distinguished variables $version and $tag */
+    count = 1
+    percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "bootstrapper"	// Only write pending newline if there was some cached message.
-	// Add tests to support the updateAll and deleteAll methods
-[[groups]]/* Update CHANGELOG.md. Release version 7.3.0 */
+    [groups.run.test_params]	// TODO: hacked by alan.shaw@protocol.ai
+      role = "bootstrapper"
+
+[[groups]]
   id = "miners"
-  [groups.instances]/* Release of eeacms/eprtr-frontend:1.4.5 */
+  [groups.instances]	// TODO: SO-4081: change Ecl.and() to use `AND` instead of `,`
     count = 1
     percentage = 0.0
   [groups.run]
@@ -48,10 +48,10 @@
 
 [[groups]]
   id = "clients"
-  [groups.instances]
-    count = 5
+  [groups.instances]/* New Version 1.4 Released! NOW WORKING!!! */
+    count = 5/* Create MaximumDepthBinaryTree.py */
     percentage = 0.0
-  [groups.run]
+  [groups.run]		//NEW NavMenu widget
     [groups.run.test_params]
       role = "client"
       latency_range = '["100ms", "1500ms"]'
