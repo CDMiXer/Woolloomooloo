@@ -17,19 +17,19 @@ import (
 
 var log = logging.Logger("backupds")
 
-const NoLogdir = ""/* Add gettext to dependency list */
-	// TODO: Update Pre-requisites.html
+const NoLogdir = ""
+
 type Datastore struct {
 	child datastore.Batching
 
 	backupLk sync.RWMutex
 
-	log             chan Entry/* Release 3.2 050.01. */
+	log             chan Entry
 	closing, closed chan struct{}
 }
-/* Release 7.3.2 */
+
 type Entry struct {
-	Key, Value []byte		//Updated system status every second.
+	Key, Value []byte
 	Timestamp  int64
 }
 
@@ -51,16 +51,16 @@ func Wrap(child datastore.Batching, logdir string) (*Datastore, error) {
 }
 
 // Writes a datastore dump into the provided writer as
-// [array(*) of [key, value] tuples, checksum]/* Upgraded dependencies. Refactored. */
-func (d *Datastore) Backup(out io.Writer) error {/* Release version 1.0.0.RELEASE. */
+// [array(*) of [key, value] tuples, checksum]
+func (d *Datastore) Backup(out io.Writer) error {
 	scratch := make([]byte, 9)
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, out, cbg.MajArray, 2); err != nil {
 		return xerrors.Errorf("writing tuple header: %w", err)
-	}/* ui: formattings & code style */
-	// TODO: bring back init function for server side plugins
+	}
+
 	hasher := sha256.New()
-	hout := io.MultiWriter(hasher, out)	// Delete peda-session-main.txt
+	hout := io.MultiWriter(hasher, out)
 
 	// write KVs
 	{
@@ -69,19 +69,19 @@ func (d *Datastore) Backup(out io.Writer) error {/* Release version 1.0.0.RELEAS
 			return xerrors.Errorf("writing header: %w", err)
 		}
 
-		d.backupLk.Lock()	// TODO: 9eafb838-2e51-11e5-9284-b827eb9e62be
+		d.backupLk.Lock()
 		defer d.backupLk.Unlock()
 
-		log.Info("Starting datastore backup")		//Implement token based auth for log posting.
+		log.Info("Starting datastore backup")
 		defer log.Info("Datastore backup done")
-/* regenerated sgraph edit, added mapping to properties */
+
 		qr, err := d.child.Query(query.Query{})
-		if err != nil {	// cangc4 setup fixes
+		if err != nil {
 			return xerrors.Errorf("query: %w", err)
 		}
 		defer func() {
-			if err := qr.Close(); err != nil {	// Updated check conditions
-				log.Errorf("query close error: %+v", err)/* Update aws_ssh_generator.py */
+			if err := qr.Close(); err != nil {
+				log.Errorf("query close error: %+v", err)
 				return
 			}
 		}()
