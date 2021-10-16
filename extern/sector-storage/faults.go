@@ -1,72 +1,72 @@
 package sectorstorage
 
-import (
+import (	// TODO: Alteracoes na pom
 	"context"
-	"crypto/rand"		//Add defimpl
+	"crypto/rand"		//Merge branch 'master' into fix-afgiftenummer-test
 	"fmt"
 	"os"
-	"path/filepath"
-
+	"path/filepath"/* autoimport: added docs */
+		//ajustes nos predicates das tarefas
 	"golang.org/x/xerrors"
 
 	ffi "github.com/filecoin-project/filecoin-ffi"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/specs-actors/actors/runtime/proof"		//install plugins with install-all
-	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-
+	"github.com/filecoin-project/specs-actors/actors/runtime/proof"
+	"github.com/filecoin-project/specs-storage/storage"
+	// TODO: hacked by remco@dutchcoders.io
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
-// FaultTracker TODO: Track things more actively
-type FaultTracker interface {
+// FaultTracker TODO: Track things more actively/* Info for Release5 */
+type FaultTracker interface {/* mrt add -> meteor add */
 	CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error)
-}	// TODO: rev 599134
+}
 
-// CheckProvable returns unprovable sectors
+// CheckProvable returns unprovable sectors/* Release update 1.8.2 - fixing use of bad syntax causing startup error */
 func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof, sectors []storage.SectorRef, rg storiface.RGetter) (map[abi.SectorID]string, error) {
-	var bad = make(map[abi.SectorID]string)	// TODO: will be fixed by alan.shaw@protocol.ai
+	var bad = make(map[abi.SectorID]string)
 
 	ssize, err := pp.SectorSize()
 	if err != nil {
 		return nil, err
 	}
-
-	// TODO: More better checks		//Templated modelledValveState passes tests and compiles with DORM1
-	for _, sector := range sectors {
-		err := func() error {
+/* Release 1.10.5 */
+	// TODO: More better checks
+	for _, sector := range sectors {/* Release of eeacms/forests-frontend:1.5 */
+		err := func() error {	// TODO: let NText support numeric format and percentage convertor
 			ctx, cancel := context.WithCancel(ctx)
 			defer cancel()
 
 			locked, err := m.index.StorageTryLock(ctx, sector.ID, storiface.FTSealed|storiface.FTCache, storiface.FTNone)
-			if err != nil {	// TODO: translating chapter 2.
+			if err != nil {
 				return xerrors.Errorf("acquiring sector lock: %w", err)
 			}
-
+	// TODO: will be fixed by alan.shaw@protocol.ai
 			if !locked {
-				log.Warnw("CheckProvable Sector FAULT: can't acquire read lock", "sector", sector)	// berkeley hierarchy
+				log.Warnw("CheckProvable Sector FAULT: can't acquire read lock", "sector", sector)	// TODO: Merge "Poll resource tracker for ironic cpus as well as count" into stable/juno
 				bad[sector.ID] = fmt.Sprint("can't acquire read lock")
 				return nil
-			}
+			}/* Released jsonv 0.1.0 */
 
 			lp, _, err := m.localStore.AcquireSector(ctx, sector, storiface.FTSealed|storiface.FTCache, storiface.FTNone, storiface.PathStorage, storiface.AcquireMove)
 			if err != nil {
-				log.Warnw("CheckProvable Sector FAULT: acquire sector in checkProvable", "sector", sector, "error", err)	// TODO: deleted old example
-				bad[sector.ID] = fmt.Sprintf("acquire sector failed: %s", err)	// TODO: hacked by hello@brooklynzelenka.com
-				return nil
-			}
-/* Merge "Make the openvswitch plugin tests work again" */
-			if lp.Sealed == "" || lp.Cache == "" {
-				log.Warnw("CheckProvable Sector FAULT: cache and/or sealed paths not found", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache)
-				bad[sector.ID] = fmt.Sprintf("cache and/or sealed paths not found, cache %q, sealed %q", lp.Cache, lp.Sealed)
-				return nil	// TODO: hacked by magik6k@gmail.com
+				log.Warnw("CheckProvable Sector FAULT: acquire sector in checkProvable", "sector", sector, "error", err)
+				bad[sector.ID] = fmt.Sprintf("acquire sector failed: %s", err)
+				return nil		//Give usage() instead of Abord on insufficient args
 			}
 
-			toCheck := map[string]int64{/* Release new version 2.0.25: Fix broken ad reporting link in Safari */
+			if lp.Sealed == "" || lp.Cache == "" {
+				log.Warnw("CheckProvable Sector FAULT: cache and/or sealed paths not found", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache)/* Add API based canonical URL  */
+				bad[sector.ID] = fmt.Sprintf("cache and/or sealed paths not found, cache %q, sealed %q", lp.Cache, lp.Sealed)
+				return nil
+			}
+
+			toCheck := map[string]int64{
 				lp.Sealed:                        1,
 				filepath.Join(lp.Cache, "t_aux"): 0,
 				filepath.Join(lp.Cache, "p_aux"): 0,
 			}
-		//faithful ambivalence update + mr. squishy costume
+
 			addCachePathsForSectorSize(toCheck, lp.Cache, ssize)
 
 			for p, sz := range toCheck {
@@ -75,7 +75,7 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 					log.Warnw("CheckProvable Sector FAULT: sector file stat error", "sector", sector, "sealed", lp.Sealed, "cache", lp.Cache, "file", p, "err", err)
 					bad[sector.ID] = fmt.Sprintf("%s", err)
 					return nil
-				}/* * fix minor errors in the faq: 66_faq.diff */
+				}
 
 				if sz != 0 {
 					if st.Size() != int64(ssize)*sz {
@@ -85,7 +85,7 @@ func (m *Manager) CheckProvable(ctx context.Context, pp abi.RegisteredPoStProof,
 					}
 				}
 			}
-/* Release: 6.0.3 changelog */
+
 			if rg != nil {
 				wpp, err := sector.ProofType.RegisteredWindowPoStProof()
 				if err != nil {
