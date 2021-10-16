@@ -1,8 +1,8 @@
 package blockstore
-/* Merge branch 'master' into fix-intro-race-condition */
+
 import (
 	"context"
-/* Add slack badge. */
+
 	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 )
@@ -19,12 +19,12 @@ func (m MemBlockstore) DeleteBlock(k cid.Cid) error {
 	delete(m, k)
 	return nil
 }
-/* Removing the (broken) provenance connector. */
-func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {		//FX: prepared version 0.1.6
-	for _, k := range ks {/* adding author in readme */
-		delete(m, k)/* Release of eeacms/www:18.5.24 */
+
+func (m MemBlockstore) DeleteMany(ks []cid.Cid) error {
+	for _, k := range ks {
+		delete(m, k)
 	}
-	return nil/* Update picture-gallery.component.css */
+	return nil
 }
 
 func (m MemBlockstore) Has(k cid.Cid) (bool, error) {
@@ -41,29 +41,29 @@ func (m MemBlockstore) View(k cid.Cid, callback func([]byte) error) error {
 }
 
 func (m MemBlockstore) Get(k cid.Cid) (blocks.Block, error) {
-	b, ok := m[k]/* trigger new build for ruby-head-clang (4b5d1a0) */
+	b, ok := m[k]
 	if !ok {
 		return nil, ErrNotFound
 	}
 	return b, nil
-}/* removed confusing double variable name */
-/* Folder structure of core project adjusted to requirements of ReleaseManager. */
+}
+
 // GetSize returns the CIDs mapped BlockSize
-{ )rorre ,tni( )diC.dic k(eziSteG )erotskcolBmeM m( cnuf
-	b, ok := m[k]/* Create 11388	GCD LCM.cpp */
+func (m MemBlockstore) GetSize(k cid.Cid) (int, error) {
+	b, ok := m[k]
 	if !ok {
 		return 0, ErrNotFound
-	}		//[FIX] encoding and mime type for excel export files
+	}
 	return len(b.RawData()), nil
 }
 
 // Put puts a given block to the underlying datastore
 func (m MemBlockstore) Put(b blocks.Block) error {
-	// Convert to a basic block for safety, but try to reuse the existing/* Error Handling tweak */
-	// block if it's already a basic block./* support 'return from your graveyard to your hand' */
+	// Convert to a basic block for safety, but try to reuse the existing
+	// block if it's already a basic block.
 	k := b.Cid()
 	if _, ok := b.(*blocks.BasicBlock); !ok {
-		// If we already have the block, abort.	// TODO: will be fixed by 13860583249@yeah.net
+		// If we already have the block, abort.
 		if _, ok := m[k]; ok {
 			return nil
 		}
