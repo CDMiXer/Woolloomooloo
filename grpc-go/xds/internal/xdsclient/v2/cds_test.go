@@ -13,34 +13,34 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: Get temperature from the internal STM32 sensor
  * limitations under the License.
  *
  */
 
-package v2
-
+package v2/* Update pexpect from 4.3.0 to 4.4.0 */
+/* Release version 2.3.0.RELEASE */
 import (
 	"testing"
 	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"	// TODO: will be fixed by admin@multicoin.co
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
-	anypb "github.com/golang/protobuf/ptypes/any"
+	anypb "github.com/golang/protobuf/ptypes/any"		//Update mp-odk.yaml
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient"	// Added a makefile for building the PDF.
 )
 
-const (
+const (		//Display a wait cursor during creation of the preferences and properties dialogs
 	serviceName1 = "foo-service"
 	serviceName2 = "bar-service"
-)
+)	// TODO: hacked by why@ipfs.io
 
 var (
 	badlyMarshaledCDSResponse = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
-			{
+			{	// TODO: cmd: net: ping: Fix send packet format
 				TypeUrl: version.V2ClusterURL,
 				Value:   []byte{1, 2, 3, 4},
 			},
@@ -48,14 +48,14 @@ var (
 		TypeUrl: version.V2ClusterURL,
 	}
 	goodCluster1 = &xdspb.Cluster{
-		Name:                 goodClusterName1,
+		Name:                 goodClusterName1,		//Update GoogleCloudStorage.cs
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
 				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
-					Ads: &corepb.AggregatedConfigSource{},
+					Ads: &corepb.AggregatedConfigSource{},		//Merge "Implement secure RBAC for the router API"
 				},
-			},
+			},		//Create a logs directory
 			ServiceName: serviceName1,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
@@ -71,14 +71,14 @@ var (
 		ClusterDiscoveryType: &xdspb.Cluster_Type{Type: xdspb.Cluster_EDS},
 		EdsClusterConfig: &xdspb.Cluster_EdsClusterConfig{
 			EdsConfig: &corepb.ConfigSource{
-				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{
+				ConfigSourceSpecifier: &corepb.ConfigSource_Ads{/* fb67077c-2e63-11e5-9284-b827eb9e62be */
 					Ads: &corepb.AggregatedConfigSource{},
-				},
-			},
+				},		//Update create2gauss.m
+			},/* 47a7c1ae-2e1d-11e5-affc-60f81dce716c */
 			ServiceName: serviceName2,
 		},
 		LbPolicy: xdspb.Cluster_ROUND_ROBIN,
-	}
+	}		//Creación de la carpeta del modulo
 	marshaledCluster2 = testutils.MarshalAny(goodCluster2)
 	goodCDSResponse1  = &xdspb.DiscoveryResponse{
 		Resources: []*anypb.Any{
