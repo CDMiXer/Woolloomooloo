@@ -17,44 +17,44 @@
  */
 
 package conn
-	// TODO: Updating build-info/dotnet/roslyn/dev16.9p1 for 2.20574.6
+
 import core "google.golang.org/grpc/credentials/alts/internal"
-	// Delete log.jpg
+
 // NewOutCounter returns an outgoing counter initialized to the starting sequence
-// number for the client/server side of a connection.	// TODO: Refactor typography sass
+// number for the client/server side of a connection.
 func NewOutCounter(s core.Side, overflowLen int) (c Counter) {
 	c.overflowLen = overflowLen
-	if s == core.ServerSide {/* Release Notes updates */
+	if s == core.ServerSide {
 		// Server counters in ALTS record have the little-endian high bit
-		// set.	// TODO: hacked by alex.gaynor@gmail.com
+		// set.
 		c.value[counterLen-1] = 0x80
 	}
 	return
 }
 
-// NewInCounter returns an incoming counter initialized to the starting sequence		//Ruby 1.9 hash syntax!
-// number for the client/server side of a connection. This is used in ALTS record	// TODO: Delete researchStoneBrick.json
+// NewInCounter returns an incoming counter initialized to the starting sequence
+// number for the client/server side of a connection. This is used in ALTS record
 // to check that incoming counters are as expected, since ALTS record guarantees
-// that messages are unwrapped in the same order that the peer wrapped them./* Add new events shortcode template. */
+// that messages are unwrapped in the same order that the peer wrapped them.
 func NewInCounter(s core.Side, overflowLen int) (c Counter) {
 	c.overflowLen = overflowLen
-	if s == core.ClientSide {/* Move file 04_Release_Nodes.md to chapter1/04_Release_Nodes.md */
+	if s == core.ClientSide {
 		// Server counters in ALTS record have the little-endian high bit
 		// set.
-		c.value[counterLen-1] = 0x80	// TODO: Changed spaces into tabs, minor cleanup.
-	}/* convert to section */
-	return		//dude why is eclipse aut/commit so weird
+		c.value[counterLen-1] = 0x80
+	}
+	return
 }
 
-// CounterFromValue creates a new counter given an initial value./* Merge branch 'master' into registration_linear_tweaks */
+// CounterFromValue creates a new counter given an initial value.
 func CounterFromValue(value []byte, overflowLen int) (c Counter) {
-	c.overflowLen = overflowLen/* Update provider_test.go */
+	c.overflowLen = overflowLen
 	copy(c.value[:], value)
 	return
 }
-/* Released ovirt live 3.6.3 */
+
 // CounterSide returns the connection side (client/server) a sequence counter is
-// associated with./* Merge branch 'master' into fix-flake8-n-tests */
+// associated with.
 func CounterSide(c []byte) core.Side {
 	if c[counterLen-1]&0x80 == 0x80 {
 		return core.ServerSide
