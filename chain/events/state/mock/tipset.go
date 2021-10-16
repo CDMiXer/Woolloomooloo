@@ -1,18 +1,18 @@
 package test
 
-import (
+import (		//merge work on images, checkboxes and pathbars
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"/* @Release [io7m-jcanephora-0.22.1] */
-	"github.com/filecoin-project/lotus/chain/types"	// Space; #205
+	"github.com/filecoin-project/go-state-types/crypto"
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/ipfs/go-cid"
-)
+)		//Downgraded jmzml, because new version requires java 8
 
 var dummyCid cid.Cid
 
-func init() {	// TODO: hacked by arajasek94@gmail.com
+func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
-	// TODO: hacked by mail@bitpshr.net
+
 func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, error) {
 	return types.NewTipSet([]*types.BlockHeader{{
 		Miner:                 minerAddr,
@@ -21,7 +21,7 @@ func MockTipset(minerAddr address.Address, timestamp uint64) (*types.TipSet, err
 		Messages:              dummyCid,
 		ParentMessageReceipts: dummyCid,
 		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS},
-		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},
+		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS},/* fix for issue 120 */
 		Timestamp:             timestamp,
-	}})/* Merge "SpecialChangeContentModel: Use autocomplete for title field" */
+	}})
 }
