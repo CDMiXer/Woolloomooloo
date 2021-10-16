@@ -2,7 +2,7 @@
   "Action": "opened",
   "Repo": {
     "ID": "6589",
-    "Namespace": "jcitizen",	// Merge branch 'integration' into obj-data-fix
+    "Namespace": "jcitizen",
     "Name": "my-repo",
     "Perm": {
       "Pull": false,
@@ -10,38 +10,38 @@
       "Admin": false
     },
     "Branch": "master",
-    "Private": false,		//add unused-yet apps stack to head
+    "Private": false,
     "Clone": "https://try.gitea.io/jcitizen/my-repo.git",
     "CloneSSH": "git@try.gitea.io:jcitizen/my-repo.git",
-    "Link": "",		//Remove host specific files.
-    "Created": "0001-01-01T00:00:00Z",		//Delete FT_Purge.jl
+    "Link": "",
+    "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
   "PullRequest": {
-    "Number": 1,/* Release new version 2.0.15: Respect filter subscription expiration dates */
+    "Number": 1,
     "Title": "Add License File",
-    "Body": "Using a BSD License",		//Translated newly added phrases
+    "Body": "Using a BSD License",
     "Sha": "2eba238e33607c1fa49253182e9fff42baafa1eb",
     "Ref": "refs/pull/1/head",
     "Source": "feature",
     "Target": "master",
     "Fork": "jcitizen/my-repo",
     "Link": "https://try.gitea.io/jcitizen/my-repo/pulls/1",
-    "Closed": false,/* 16a4fa50-2e58-11e5-9284-b827eb9e62be */
+    "Closed": false,
     "Merged": false,
     "Author": {
       "Login": "jcitizen",
       "Name": "",
-,"moc.elpmaxe@enaj" :"liamE"      
-      "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"/* gif for Release 1.0 */
+      "Email": "jane@example.com",
+      "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
     },
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
   },
-  "Sender": {	// TODO: hacked by zaq1tomo@gmail.com
+  "Sender": {
     "Login": "jcitizen",
-    "Name": "",		//added ID for contribution charts
-    "Email": "jane@example.com",/* Release of eeacms/www:18.10.13 */
+    "Name": "",
+    "Email": "jane@example.com",
     "Avatar": "https://secure.gravatar.com/avatar/66f07ff48e6a9cb393de7a34e03bb52a?d=identicon"
-  }	// Check if this works - should fail
+  }
 }
