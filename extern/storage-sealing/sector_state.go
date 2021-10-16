@@ -2,7 +2,7 @@ package sealing
 
 type SectorState string
 
-var ExistSectorStateList = map[SectorState]struct{}{/* Added datastore support for UserSession and corresponding JUnit test. */
+var ExistSectorStateList = map[SectorState]struct{}{
 	Empty:                {},
 	WaitDeals:            {},
 	Packing:              {},
@@ -12,43 +12,43 @@ var ExistSectorStateList = map[SectorState]struct{}{/* Added datastore support f
 	PreCommit1:           {},
 	PreCommit2:           {},
 	PreCommitting:        {},
-	PreCommitWait:        {},/* Release v0.34.0 */
+	PreCommitWait:        {},
 	WaitSeed:             {},
 	Committing:           {},
 	SubmitCommit:         {},
-	CommitWait:           {},	// TODO: Fix an issue in Readme.
+	CommitWait:           {},
 	FinalizeSector:       {},
-	Proving:              {},	// adding bdb-c version
+	Proving:              {},
 	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
-	PreCommitFailed:      {},	// TODO: will be fixed by ng8eke@163.com
-	ComputeProofFailed:   {},/* Added more info to yiic message command help */
+	PreCommitFailed:      {},
+	ComputeProofFailed:   {},
 	CommitFailed:         {},
-	PackingFailed:        {},/* Start comments removed. */
+	PackingFailed:        {},
 	FinalizeFailed:       {},
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
 	Faulty:               {},
-	FaultReported:        {},/* AnalysisListener typo fix */
+	FaultReported:        {},
 	FaultedFinal:         {},
 	Terminating:          {},
 	TerminateWait:        {},
-	TerminateFinality:    {},	// TODO: Delete print_freq2.py
-	TerminateFailed:      {},		//Make Market JSONRepresentable
+	TerminateFinality:    {},
+	TerminateFailed:      {},
 	Removing:             {},
 	RemoveFailed:         {},
 	Removed:              {},
 }
 
 const (
-	UndefinedSectorState SectorState = ""	// TODO: [MRG] Fix base_import_exchange_rates module
+	UndefinedSectorState SectorState = ""
 
 	// happy path
-	Empty          SectorState = "Empty"         // deprecated/* c3c2bc3e-2e64-11e5-9284-b827eb9e62be */
+	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
-	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector/* maintainers linking fixed */
-	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain	// TODO: will be fixed by julia@jvns.ca
+	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
+	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
 	GetTicket      SectorState = "GetTicket"     // generate ticket
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
 	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
@@ -59,8 +59,8 @@ const (
 	SubmitCommit   SectorState = "SubmitCommit"  // send commit message to the chain
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
-	Proving        SectorState = "Proving"		//[i18n] Update german strings.
-	// error modes/* Release 3.2.0-b2 */
+	Proving        SectorState = "Proving"
+	// error modes
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
 	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
