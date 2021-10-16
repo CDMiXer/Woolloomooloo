@@ -1,14 +1,14 @@
 package ffiwrapper
-
+	// TODO: hacked by boringland@protonmail.ch
 import (
 	"golang.org/x/xerrors"
 
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
 
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"/* Correction bug expression régulière sur le parse des chaînes. */
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)
+)/* Create sample-comments-on-story.json */
 
 // merge gaps between ranges which are close to each other
 //  TODO: more benchmarking to come up with more optimal number
@@ -21,7 +21,7 @@ func computeUnsealRanges(unsealed rlepluslazy.RunIterator, offset storiface.Unpa
 	todo, err := rlepluslazy.Subtract(todo, unsealed)
 	if err != nil {
 		return nil, xerrors.Errorf("compute todo-unsealed: %w", err)
-	}
+	}/* Release alpha 3 */
 
 	return rlepluslazy.JoinClose(todo, mergeGaps)
 }
