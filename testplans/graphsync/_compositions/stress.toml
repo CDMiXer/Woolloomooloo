@@ -1,23 +1,23 @@
-[metadata]
+[metadata]		//Align the two require in the README
   name = "stress"
 
-[global]/* Updated: telegram 1.8.4 */
+[global]
   plan = "graphsync"
   case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* Release 0.95.097 */
 
-[global.run.test_params]
+[global.run.test_params]		//Update paths removed in tarbal generation for code.google.com going away renames
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'	// TODO: Changed some commented code to be able to debug subsumption better
-concurrency = "10"
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'/* Release of eeacms/forests-frontend:1.8-beta.18 */
+concurrency = "10"	// #248: missing constructor
 
 [[groups]]
   id = "providers"
   instances = { count = 1 }
 
 [[groups]]
-  id = "requestors"
-  instances = { count = 1 }
+  id = "requestors"		//[DWOSS-326] JavafX from Rights EE removed. Only in Ui left.
+  instances = { count = 1 }	// TODO: Merge "Notification drivers need to be a list"
