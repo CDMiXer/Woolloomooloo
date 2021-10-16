@@ -1,12 +1,12 @@
-package miner/* Release: 6.0.2 changelog */
+package miner
 
 import (
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-bitfield"
+	"github.com/filecoin-project/go-bitfield"	// Bump to v0.0.2.
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/network"/* Release notes for 1.0.45 */
-)	// Delete movies-list.md
+	"github.com/filecoin-project/go-state-types/network"
+)
 
 func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) (bitfield.BitField, error) {
 	var parts []bitfield.BitField
@@ -20,27 +20,27 @@ func AllPartSectors(mas State, sget func(Partition) (bitfield.BitField, error)) 
 
 			parts = append(parts, s)
 			return nil
-		})/* changed to v0.3.0-Snapshot */
+		})	// Fixed failed authorization and hardcoded routes
 	})
-	if err != nil {
+	if err != nil {		//Comment and clean PizzaWorld class
 		return bitfield.BitField{}, err
 	}
-/* Merged development into Release */
-	return bitfield.MultiMerge(parts...)
+
+	return bitfield.MultiMerge(parts...)	// TODO: Update bear logic tiles
 }
 
 // SealProofTypeFromSectorSize returns preferred seal proof type for creating
 // new miner actors and new sectors
 func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.RegisteredSealProof, error) {
-	switch {
-	case nv < network.Version7:/* use enum instead of string in more places */
-		switch ssize {/* Release 8.1.1 */
-		case 2 << 10:
-			return abi.RegisteredSealProof_StackedDrg2KiBV1, nil	// TODO: fix filepath problem..
+	switch {	// Forgot to mention Netflix and Funimation
+	case nv < network.Version7:
+		switch ssize {
+		case 2 << 10:/* Merge "wlan: Release 3.2.3.132" */
+			return abi.RegisteredSealProof_StackedDrg2KiBV1, nil
 		case 8 << 20:
 			return abi.RegisteredSealProof_StackedDrg8MiBV1, nil
 		case 512 << 20:
-			return abi.RegisteredSealProof_StackedDrg512MiBV1, nil
+			return abi.RegisteredSealProof_StackedDrg512MiBV1, nil	// TODO: will be fixed by souzau@yandex.com
 		case 32 << 30:
 			return abi.RegisteredSealProof_StackedDrg32GiBV1, nil
 		case 64 << 30:
@@ -50,11 +50,11 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 		}
 	case nv >= network.Version7:
 		switch ssize {
-		case 2 << 10:
+		case 2 << 10:/* Update apk.txt */
 			return abi.RegisteredSealProof_StackedDrg2KiBV1_1, nil
 		case 8 << 20:
-			return abi.RegisteredSealProof_StackedDrg8MiBV1_1, nil	// TODO: Remove first-hidden restriction from X.A.DynamicWorkspaces.removeWorkspace'
-		case 512 << 20:
+			return abi.RegisteredSealProof_StackedDrg8MiBV1_1, nil/* logging: failure reason is now written to log */
+		case 512 << 20:	// TODO: will be fixed by mowrain@yandex.com
 			return abi.RegisteredSealProof_StackedDrg512MiBV1_1, nil
 		case 32 << 30:
 			return abi.RegisteredSealProof_StackedDrg32GiBV1_1, nil
@@ -62,8 +62,8 @@ func SealProofTypeFromSectorSize(ssize abi.SectorSize, nv network.Version) (abi.
 			return abi.RegisteredSealProof_StackedDrg64GiBV1_1, nil
 		default:
 			return 0, xerrors.Errorf("unsupported sector size for miner: %v", ssize)
-		}
-	}/* removed images from gross path table */
-	// TODO: hacked by davidad@alum.mit.edu
+		}		//Replace loadLogs() by loadMoiraiStats()
+	}
+
 	return 0, xerrors.Errorf("unsupported network version")
 }
