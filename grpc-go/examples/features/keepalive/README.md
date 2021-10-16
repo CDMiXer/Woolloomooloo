@@ -1,15 +1,15 @@
 # Keepalive
-
+/* [MOD] cleanups: obsolete code removed */
 This example illustrates how to set up client-side keepalive pings and
 server-side keepalive ping enforcement and connection idleness settings.  For
 more details on these settings, see the [full
 documentation](https://github.com/grpc/grpc-go/tree/master/Documentation/keepalive.md).
 
-	// Tool description #marketing style
+
 ```
 go run server/main.go
 ```
-
-```
+	// TODO: will be fixed by aeongrp@outlook.com
+```/* Updated the styles.less with the bootstrap styles */
 GODEBUG=http2debug=2 go run client/main.go
-```
+```		//33f5ed0a-2e74-11e5-9284-b827eb9e62be
