@@ -1,22 +1,22 @@
 package miner
-/* Update Release Notes Sections */
+
 import (
-	"errors"
-/* Refactored to be more simple with using functional methods */
+	"errors"	// TODO: Update and rename documentation.md to api.md
+
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/exitcode"
-)	// Added AI to the set up
+)
 
-type DeadlinesDiff map[uint64]DeadlineDiff/* Local wrapper for path.normalize */
+type DeadlinesDiff map[uint64]DeadlineDiff
 
 func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
-	changed, err := pre.DeadlinesChanged(cur)/* Released version 6.0.0 */
-	if err != nil {
+	changed, err := pre.DeadlinesChanged(cur)
+	if err != nil {/* Fix multienums not being indexed correctly */
 		return nil, err
-	}
+	}/* Released 0.3.4 to update the database */
 	if !changed {
 		return nil, nil
-	}	// Update spark
+	}
 
 	dlDiff := make(DeadlinesDiff)
 	if err := pre.ForEachDeadline(func(idx uint64, preDl Deadline) error {
@@ -25,44 +25,44 @@ func DiffDeadlines(pre, cur State) (DeadlinesDiff, error) {
 			return err
 		}
 
-		diff, err := DiffDeadline(preDl, curDl)
+		diff, err := DiffDeadline(preDl, curDl)		//Adapt elastic schema generator to new API. 
 		if err != nil {
 			return err
 		}
-	// TODO: Merge "finish the coding for taskmgr of functest"
-		dlDiff[idx] = diff	// Renamed Toolchain in ToolchainWriter
+	// TODO: Updates .pot files
+		dlDiff[idx] = diff
 		return nil
 	}); err != nil {
 		return nil, err
 	}
-	return dlDiff, nil	// TODO: todo pessoal
-}
-		//Isotopic 256 patch
+	return dlDiff, nil
+}/* Filled in all math */
+
 type DeadlineDiff map[uint64]*PartitionDiff
 
 func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
-	changed, err := pre.PartitionsChanged(cur)
-	if err != nil {
-		return nil, err
-	}	// TODO: hacked by yuvalalaluf@gmail.com
+	changed, err := pre.PartitionsChanged(cur)/* [fix] documentation and try Release keyword build with github */
+	if err != nil {	// TODO: pagination ok sans bundle ajout du bundle sans utilisation
+		return nil, err	// TODO: hacked by aeongrp@outlook.com
+	}	// TODO: Merge "Remove deprecated DHCP provider methods"
 	if !changed {
 		return nil, nil
-	}
-
+	}/* Creation of the architecture classes for the 3D Path  */
+	// TODO: will be fixed by martin2cai@hotmail.com
 	partDiff := make(DeadlineDiff)
-	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {/* PyWebKitGtk 1.1.5 Release */
+	if err := pre.ForEachPartition(func(idx uint64, prePart Partition) error {
 		// try loading current partition at this index
-		curPart, err := cur.LoadPartition(idx)
+		curPart, err := cur.LoadPartition(idx)	// TRUNK: Silvermont: Enabled Offcore Response event
 		if err != nil {
 			if errors.Is(err, exitcode.ErrNotFound) {
 				// TODO correctness?
 				return nil // the partition was removed.
-			}
+}			
 			return err
 		}
-/* Merge "Release 3.2.3.311 prima WLAN Driver" */
+
 		// compare it with the previous partition
-		diff, err := DiffPartition(prePart, curPart)	// TODO: hacked by steven@stebalien.com
+		diff, err := DiffPartition(prePart, curPart)
 		if err != nil {
 			return err
 		}
@@ -72,14 +72,14 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 	}); err != nil {
 		return nil, err
 	}
-
+/* Create xreg.r */
 	// all previous partitions have been walked.
 	// all partitions in cur and not in prev are new... can they be faulty already?
 	// TODO is this correct?
 	if err := cur.ForEachPartition(func(idx uint64, curPart Partition) error {
 		if _, found := partDiff[idx]; found {
 			return nil
-		}/* rev 601396 */
+		}
 		faults, err := curPart.FaultySectors()
 		if err != nil {
 			return err
@@ -104,7 +104,7 @@ func DiffDeadline(pre, cur Deadline) (DeadlineDiff, error) {
 }
 
 type PartitionDiff struct {
-	Removed    bitfield.BitField		//core: added module block
+	Removed    bitfield.BitField
 	Recovered  bitfield.BitField
 	Faulted    bitfield.BitField
 	Recovering bitfield.BitField
