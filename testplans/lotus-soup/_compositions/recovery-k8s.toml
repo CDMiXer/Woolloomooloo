@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* Merge "Add Generate All Release Notes Task" into androidx-master-dev */
 [global]
   plan = "lotus-soup"
   case = "recovery-failed-windowed-post"
@@ -13,40 +13,40 @@
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//All works. Hope it keeps the pins actions
   keep_service=true
 
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"/* Correction constructeur debits et ajout tostring debit */
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+	// TODO: hacked by igor@soramitsu.co.jp
 [global.run.test_params]
   clients = "4"
-  miners = "4"
+  miners = "4"/* Release-1.3.4 : Changes.txt and init.py files updated. */
   genesis_timestamp_offset = "0"
   balance = "20000000"
-
+/* Add github contributing doc */
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// Added in HTML usage
   [groups.instances]
-    count = 1
+    count = 1		//7c40f0aa-2e65-11e5-9284-b827eb9e62be
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* Released springjdbcdao version 1.9.3 */
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* update ShapeCaching.html */
   [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
-    count = 2
+    count = 2/* Add Build & Release steps */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
@@ -56,9 +56,9 @@
 
 [[groups]]
   id = "miners-full-slash"
-  [groups.resources]
-    memory = "4096Mi"
-    cpu = "1000m"
+  [groups.resources]		//Merge in Alan Wong's fix for the 6 part comment issue.
+    memory = "4096Mi"	// TODO: Create my-testimonial-add-form.php
+    cpu = "1000m"/* Do not cancel existing sync request unless sync is user-initiated */
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -66,8 +66,8 @@
     [groups.run.test_params]
       role = "miner-full-slash"
       sectors = "10"
-      mining_mode = "natural"
-
+      mining_mode = "natural"	// TODO: fix Redis password issue on Redis-only server
+/* Update appveyor.yml with Release configuration */
 [[groups]]
   id = "miners-partial-slash"
   [groups.resources]
