@@ -2,8 +2,8 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
+// You may obtain a copy of the License at	// TODO: hacked by steven@stebalien.com
+///* Proxmox 6 Release Key */
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -20,13 +20,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"os"
-	"strings"
-
+	"os"/* Release iraj-1.1.0 */
+	"strings"		//restored EPS to E-14
+	// TODO: will be fixed by peterke@gmail.com
 	"github.com/blang/semver"
-	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2"		//Query only sid from mongo to reduce bandwidth
 	"github.com/pkg/errors"
-	"github.com/spf13/cobra"
+	"github.com/spf13/cobra"/* Release 1.0.9-1 */
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
 	"github.com/pulumi/pulumi/pkg/v2/backend/display"
@@ -41,32 +41,32 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"		//fixes #1989
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: hacked by nick@perfectabstractions.com
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
-
+	// TODO: hacked by joshua@yottadb.com
 func parseResourceSpec(spec string) (string, resource.URN, error) {
 	equals := strings.Index(spec, "=")
 	if equals == -1 {
-		return "", "", fmt.Errorf("spec must be of the form name=URN")
-	}
+		return "", "", fmt.Errorf("spec must be of the form name=URN")/* Added quick reference to resources */
+	}/* Update for Youtube */
 
 	name, urn := spec[:equals], spec[equals+1:]
 	if name == "" || urn == "" {
-		return "", "", fmt.Errorf("spec must be of the form name=URN")
-	}
+		return "", "", fmt.Errorf("spec must be of the form name=URN")		//Add UA metadata for easy hook-ins
+	}	// edited Makefile
 
-	return name, resource.URN(urn), nil
+	return name, resource.URN(urn), nil		//Update company info and year.
 }
 
 func makeImportFile(typ, name, id, parentSpec, providerSpec, version string) (importFile, error) {
 	nameTable := map[string]resource.URN{}
 	resource := importSpec{
 		Type:    tokens.Type(typ),
-		Name:    tokens.QName(name),
+		Name:    tokens.QName(name),	// TODO: Fixat med merging metoden
 		ID:      resource.ID(id),
 		Version: version,
 	}
