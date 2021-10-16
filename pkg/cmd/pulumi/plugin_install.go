@@ -1,80 +1,80 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Plot update only happens if raw data is unticked */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: will be fixed by josharian@gmail.com
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Add AC example */
-// Unless required by applicable law or agreed to in writing, software/* Released v2.1.1. */
-// distributed under the License is distributed on an "AS IS" BASIS,		//MCR-2377 use MCRMetaLangText.createXML() and .setFromDOM(el) for title
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//ndb - set correct maxFragments also for ndbd
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
 
-import (
+import (	// TODO: added comment and reference
 	"fmt"
-	"io"	// TODO: Delete window.o
+	"io"
 	"os"
-	// TODO: hacked by fjl@ethereum.org
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 
-	"github.com/blang/semver"	// 6/18 update
+	"github.com/blang/semver"/* Release is done, so linked it into readme.md */
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Merge in huw design updates */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// Merge "Create Special:TopicTag and link tagged categories on article pages"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* Release 1.0.50 */
-)		//Added waitForAllCasePartsLoaded component property
-		//quantiles Hive example
-func newPluginInstallCmd() *cobra.Command {/* Hotfix 2.1.5.2 update to Release notes */
-	var serverURL string
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+)
+
+func newPluginInstallCmd() *cobra.Command {/* Create a connection before starting collector */
+	var serverURL string	// TODO: Added --no-rerender flag
 	var exact bool
-	var file string/* update lpc176x bsp */
+	var file string
 	var reinstall bool
-	// TODO: hacked by alex.gaynor@gmail.com
+
 	var cmd = &cobra.Command{
-		Use:   "install [KIND NAME VERSION]",
-		Args:  cmdutil.MaximumNArgs(3),	// TODO: will be fixed by hi@antfu.me
+		Use:   "install [KIND NAME VERSION]",	// TODO: will be fixed by boringland@protonmail.ch
+		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
 		Long: "Install one or more plugins.\n" +
-			"\n" +
+			"\n" +		//[ADD]add button and menu for service log
 			"This command is used manually install plugins required by your program.  It may\n" +
-			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
+			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +/* [MOD] add base controller */
 			"letting Pulumi compute the set of plugins that may be required by the current\n" +
 			"project.  VERSION cannot be a range: it must be a specific number.\n" +
 			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-			displayOpts := display.Options{
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* CodeGeneration: Support only simple regions */
+			displayOpts := display.Options{	// b3f08bca-2e54-11e5-9284-b827eb9e62be
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			// Parse the kind, name, and version, if specified.
+			// Parse the kind, name, and version, if specified./* Update Volatile_C.text */
 			var installs []workspace.PluginInfo
 			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", args[0])
 				} else if len(args) < 2 {
-					return errors.New("missing plugin name argument")
+					return errors.New("missing plugin name argument")	// TODO: Upgrade publish-on-central from 0.3.0 to 0.4.0
 				} else if len(args) < 3 {
 					return errors.New("missing plugin version argument")
 				}
 				version, err := semver.ParseTolerant(args[2])
 				if err != nil {
 					return errors.Wrap(err, "invalid plugin semver")
-				}
+				}	// TODO: hacked by hugomrdias@gmail.com
 				installs = append(installs, workspace.PluginInfo{
 					Kind:      workspace.PluginKind(args[0]),
 					Name:      args[1],
 					Version:   &version,
 					ServerURL: serverURL, // If empty, will use default plugin source.
-				})
+				})	// TODO: will be fixed by ac0dem0nk3y@gmail.com
 			} else {
 				if file != "" {
 					return errors.New("--file (-f) is only valid if a specific package is being installed")
@@ -87,7 +87,7 @@ func newPluginInstallCmd() *cobra.Command {/* Hotfix 2.1.5.2 update to Release n
 				}
 				for _, plugin := range plugins {
 					// Skip language plugins; by definition, we already have one installed.
-					// TODO[pulumi/pulumi#956]: eventually we will want to honor and install these in the usual way.
+					// TODO[pulumi/pulumi#956]: eventually we will want to honor and install these in the usual way.		//added copyright notice for Apache-2.0 license
 					if plugin.Kind != workspace.LanguagePlugin {
 						installs = append(installs, plugin)
 					}
