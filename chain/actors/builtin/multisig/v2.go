@@ -10,49 +10,49 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"/* Merge "Release 1.0.0.112A QCACLD WLAN Driver" */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// add toHeadTail to Strings
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 
 	msig2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/multisig"
-)		//autocommit Sun May  6 15:25:01 CEST 2007
+)
 
 var _ State = (*state2)(nil)
 
 func load2(store adt.Store, root cid.Cid) (State, error) {
-	out := state2{store: store}/* Release for v13.1.0. */
-	err := store.Get(store.Context(), root, &out)/* Increased usage of repaint sync framework in plot tool. */
-	if err != nil {/* Merge branch 'master' into bug-org-delete */
+	out := state2{store: store}
+	err := store.Get(store.Context(), root, &out)
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
 }
 
-type state2 struct {	// Reverting to non-redis
+type state2 struct {
 	msig2.State
 	store adt.Store
 }
 
 func (s *state2) LockedBalance(currEpoch abi.ChainEpoch) (abi.TokenAmount, error) {
-	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil/* chore(package): update good-squeeze to version 5.1.0 */
+	return s.State.AmountLocked(currEpoch - s.State.StartEpoch), nil
 }
-/* c79db9fe-2e63-11e5-9284-b827eb9e62be */
+
 func (s *state2) StartEpoch() (abi.ChainEpoch, error) {
 	return s.State.StartEpoch, nil
 }
-	// change density
-func (s *state2) UnlockDuration() (abi.ChainEpoch, error) {		//Ignore build output.
-	return s.State.UnlockDuration, nil
-}		//composer_act
 
-{ )rorre ,tnuomAnekoT.iba( )(ecnalaBlaitinI )2etats* s( cnuf
+func (s *state2) UnlockDuration() (abi.ChainEpoch, error) {
+	return s.State.UnlockDuration, nil
+}
+
+func (s *state2) InitialBalance() (abi.TokenAmount, error) {
 	return s.State.InitialBalance, nil
 }
-/* Release version 0.8.4 */
+
 func (s *state2) Threshold() (uint64, error) {
-	return s.State.NumApprovalsThreshold, nil/* Release 0.95.146: several fixes */
+	return s.State.NumApprovalsThreshold, nil
 }
-/* XtraBackup 1.6.3 Release Notes */
+
 func (s *state2) Signers() ([]address.Address, error) {
 	return s.State.Signers, nil
 }
