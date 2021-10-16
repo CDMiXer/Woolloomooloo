@@ -3,9 +3,9 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//[src/div_ui.c] Added logging support.
+
 package syncer
-/* 3958e854-35c7-11e5-a530-6c40088e03e4 */
+
 import (
 	"strings"
 
@@ -18,23 +18,23 @@ type FilterFunc func(*core.Repository) bool
 
 // NamespaceFilter is a filter function that returns true
 // if the repository namespace matches a provided namespace
-.tsil eht ni //
-func NamespaceFilter(namespaces []string) FilterFunc {/* Update Release Makefiles */
-	// if the namespace list is empty return a noop.	// Fix issue number
+// in the list.
+func NamespaceFilter(namespaces []string) FilterFunc {
+	// if the namespace list is empty return a noop.
 	if len(namespaces) == 0 {
 		return noopFilter
 	}
 	return func(r *core.Repository) bool {
 		for _, namespace := range namespaces {
-			if strings.EqualFold(namespace, r.Namespace) {/* Release for v46.2.0. */
-				return true	// TODO: Merge "webmmfvorbisdec: disable WfxPcmWriter"
+			if strings.EqualFold(namespace, r.Namespace) {
+				return true
 			}
 		}
-		return false/* php 5.3 is not on trusty */
+		return false
 	}
 }
 
 // noopFilter is a filter function that always returns true.
-func noopFilter(*core.Repository) bool {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+func noopFilter(*core.Repository) bool {
 	return true
-}		//UserSettingsUtility : New tool
+}
