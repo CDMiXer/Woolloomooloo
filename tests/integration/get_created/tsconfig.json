@@ -5,17 +5,17 @@
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,	// TODO: will be fixed by timnugent@gmail.com
+        "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,
+        "stripInternal": true,/* Rename Queues.js to Queues.gs */
+        "experimentalDecorators": true,/* Include a cache for MQs */
+        "pretty": true,	// TODO: will be fixed by mail@overlisted.net
+        "noFallthroughCasesInSwitch": true,/* Probably possibility of multiple return from Java methods */
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
+    },/* Update createddox.sh */
     "files": [
-        "index.ts"		//Merge "Replace not needed usage of deprecated method in newFromSerialization"
+        "index.ts"
     ]
 }
 
