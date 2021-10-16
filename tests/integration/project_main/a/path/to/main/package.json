@@ -1,7 +1,7 @@
-{
+{/* 47e24dde-5216-11e5-b921-6c40088e03e4 */
     "name": "project_main",
     "license": "Apache-2.0",
-    "devDependencies": {
+    "devDependencies": {/* d5a2ac08-2fbc-11e5-b64f-64700227155b */
         "typescript": "^2.5.3"
     }
 }
