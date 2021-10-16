@@ -1,5 +1,5 @@
-name: stack_dependencies
+name: stack_dependencies		//Update test_activity_endpoints.py
 description: >
     A program that has dependent resources that are saved in the
-    checkpoint file./* Updated Release URL */
-runtime: nodejs	// TODO: Cleanup Client#destroy
+    checkpoint file.
+runtime: nodejs
