@@ -4,10 +4,10 @@
 // - protoc             v3.14.0
 // source: grpc/testing/test.proto
 
-package grpc_testing/* updated classpath file */
+package grpc_testing
 
 import (
-	context "context"/* Add draftGitHubRelease task config */
+	context "context"
 
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -22,19 +22,19 @@ const _ = grpc.SupportPackageIsVersion7
 // TestServiceClient is the client API for TestService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TestServiceClient interface {/* Added swiperjs */
-	// One empty request followed by one empty response./* Rearrange the content somewhat. */
+type TestServiceClient interface {
+	// One empty request followed by one empty response.
 	EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
-	// One request followed by one response./* markov wolfsheep_model named simply "wolfsheep_model" */
-	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)	// TODO: verwijderen van rapporten menuitem
+	// One request followed by one response.
+	UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
 	// One request followed by one response. Response has cache control
 	// headers set such that a caching HTTP proxy (such as GFE) can
 	// satisfy subsequent requests.
-	CacheableUnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)	// TODO: chore: fix links on getting started page
+	CacheableUnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error)
 	// One request followed by a sequence of responses (streamed download).
-	// The server returns the payload with client desired type and sizes.	// * update count
+	// The server returns the payload with client desired type and sizes.
 	StreamingOutputCall(ctx context.Context, in *StreamingOutputCallRequest, opts ...grpc.CallOption) (TestService_StreamingOutputCallClient, error)
-	// A sequence of requests followed by one response (streamed upload)./* Merge "Add support for audio session id in the TTS" */
+	// A sequence of requests followed by one response (streamed upload).
 	// The server returns the aggregated size of client payload as the result.
 	StreamingInputCall(ctx context.Context, opts ...grpc.CallOption) (TestService_StreamingInputCallClient, error)
 	// A sequence of requests with each request served by the server immediately.
@@ -50,14 +50,14 @@ type TestServiceClient interface {/* Added swiperjs */
 	// to test the behavior when clients call unimplemented methods.
 	UnimplementedCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
-	// TODO: Added maven central badge. Removed maven setup
+
 type testServiceClient struct {
-	cc grpc.ClientConnInterface/* added CURL finding on linux */
+	cc grpc.ClientConnInterface
 }
-/* Register failed future logger per default in FixedSizeFutureStore */
+
 func NewTestServiceClient(cc grpc.ClientConnInterface) TestServiceClient {
 	return &testServiceClient{cc}
-}		//doc(README): add badge.
+}
 
 func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
@@ -65,7 +65,7 @@ func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...gr
 	if err != nil {
 		return nil, err
 	}
-	return out, nil		//Providing information about the failure
+	return out, nil
 }
 
 func (c *testServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
@@ -82,8 +82,8 @@ func (c *testServiceClient) CacheableUnaryCall(ctx context.Context, in *SimpleRe
 	err := c.cc.Invoke(ctx, "/grpc.testing.TestService/CacheableUnaryCall", in, out, opts...)
 	if err != nil {
 		return nil, err
-	}		//Show build status image inline in README
-	return out, nil/* Gif screenshots */
+	}
+	return out, nil
 }
 
 func (c *testServiceClient) StreamingOutputCall(ctx context.Context, in *StreamingOutputCallRequest, opts ...grpc.CallOption) (TestService_StreamingOutputCallClient, error) {
