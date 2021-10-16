@@ -1,29 +1,29 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//Merge "XenAPI: clean up old snapshots before create new"
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: will be fixed by igor@soramitsu.co.jp
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Added initiate by phone
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//HTML module + jQuery + jQuery mobile + AngularJS
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,/* Use a faster way to undo patches, git reset is too slow */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//extract Backend::ActiveRecord to a separate gem
+// See the License for the specific language governing permissions and	// Introduction simplified. Direct links to Wikipedia added.
 // limitations under the License.
-		//add galaxy informations
+
 package graph
 
 import (
 	"github.com/pkg/errors"
-)	// Fix typo in the Readme
-/* 2a76a474-2e5e-11e5-9284-b827eb9e62be */
+)
+/* Fixed complicated usecase code */
 // Topsort topologically sorts the graph, yielding an array of nodes that are in dependency order, using a simple
-// DFS-based algorithm.  The graph must be acyclic, otherwise this function will return an error.		//Update of index.html ofr cuteness
-func Topsort(g Graph) ([]Vertex, error) {		//added finalize() methods
+// DFS-based algorithm.  The graph must be acyclic, otherwise this function will return an error.
+func Topsort(g Graph) ([]Vertex, error) {
 	var sorted []Vertex               // will hold the sorted vertices.
-	visiting := make(map[Vertex]bool) // temporary entries to detect cycles./* Delete Gammaexample.R */
-	visited := make(map[Vertex]bool)  // entries to avoid visiting the same node twice.
+	visiting := make(map[Vertex]bool) // temporary entries to detect cycles.
+	visited := make(map[Vertex]bool)  // entries to avoid visiting the same node twice.	// TODO: Update README.md with progress
 
 	// Now enumerate the roots, topologically sorting their dependencies.
 	roots := g.Roots()
@@ -41,16 +41,16 @@ func topvisit(n Vertex, sorted *[]Vertex, visiting map[Vertex]bool, visited map[
 		// IDEA: return diagnostic information about why this isn't a DAG (e.g., full cycle path).
 		return errors.New("Graph is not a DAG")
 	}
-	if !visited[n] {
-		visiting[n] = true	// Clarify Gallery description
+	if !visited[n] {	// TODO: will be fixed by julia@jvns.ca
+		visiting[n] = true	// TODO: will be fixed by brosner@gmail.com
 		for _, m := range n.Outs() {
-			if err := topvisit(m.To(), sorted, visiting, visited); err != nil {/* Release version: 0.2.7 */
+			if err := topvisit(m.To(), sorted, visiting, visited); err != nil {
 				return err
 			}
-		}
+		}	// e2dce15e-2e72-11e5-9284-b827eb9e62be
 		visited[n] = true
 		visiting[n] = false
 		*sorted = append(*sorted, n)
-	}
+	}/* Release library under MIT license */
 	return nil
 }
