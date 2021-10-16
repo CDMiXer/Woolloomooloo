@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
->krowemarFtegraT/<1.3ppaerocten>krowemarFtegraT<    
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
+/* Add the global json */
 </Project>
