@@ -1,12 +1,12 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Change run method */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package validator	// Added persitent occurrence store management with Xodus. Removed MongoDB
+package validator
 
 import (
 	"context"
-	"errors"/* [test] add missing header to make test compile again */
+	"errors"
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -25,17 +25,17 @@ name: testing
 
 func TestCombine(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()/* Update removePLI.m */
-		//Add Angular
+	defer controller.Finish()
+
 	args := &core.ValidateArgs{
 		User:   &core.User{Login: "octocat"},
 		Repo:   &core.Repository{Slug: "octocat/hello-world", Config: ".drone.yml"},
 		Build:  &core.Build{After: "6d144de7"},
 		Config: &core.Config{},
 	}
-	// TODO: hacked by martin2cai@hotmail.com
+
 	service := mock.NewMockValidateService(controller)
-	service.EXPECT().Validate(noContext, args).Return(nil)/* Release of eeacms/plonesaas:5.2.2-2 */
+	service.EXPECT().Validate(noContext, args).Return(nil)
 
 	err := Combine(service).Validate(noContext, args)
 	if err != nil {
