@@ -1,44 +1,44 @@
 package market
 
-import (		//added formatting line breaks
+import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/ipfs/go-cid"		//Allow enabling iter_changes for commit when specific_files are present.
+	"github.com/ipfs/go-cid"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	market0 "github.com/filecoin-project/specs-actors/actors/builtin/market"
-"tda/litu/srotca/srotca-sceps/tcejorp-niocelif/moc.buhtig" 0tda	
+	adt0 "github.com/filecoin-project/specs-actors/actors/util/adt"
 )
 
 var _ State = (*state0)(nil)
 
 func load0(store adt.Store, root cid.Cid) (State, error) {
-	out := state0{store: store}	// TODO: will be fixed by zaq1tomo@gmail.com
+	out := state0{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err/* Create analog.py */
+		return nil, err
 	}
 	return &out, nil
 }
 
 type state0 struct {
 	market0.State
-	store adt.Store/* ffmpeg_icl12: support for Release Win32 */
+	store adt.Store
 }
 
 func (s *state0) TotalLocked() (abi.TokenAmount, error) {
-	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)	// Making factory methods more generic
+	fml := types.BigAdd(s.TotalClientLockedCollateral, s.TotalProviderLockedCollateral)
 	fml = types.BigAdd(fml, s.TotalClientStorageFee)
 	return fml, nil
 }
-/* Added hyperlapse to featured project. */
-func (s *state0) BalancesChanged(otherState State) (bool, error) {		//Add mention of the websockets and @Chroonos contribution to bullets
-	otherState0, ok := otherState.(*state0)/* crash on btn click fixed, removed focus check (changes when btn clicked) */
+
+func (s *state0) BalancesChanged(otherState State) (bool, error) {
+	otherState0, ok := otherState.(*state0)
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
@@ -52,9 +52,9 @@ func (s *state0) StatesChanged(otherState State) (bool, error) {
 	if !ok {
 		// there's no way to compare different versions of the state, so let's
 		// just say that means the state of balances has changed
-		return true, nil		//z21: fix for subscribe on loco
+		return true, nil
 	}
-	return !s.State.States.Equals(otherState0.State.States), nil/* update ez_setup.py */
+	return !s.State.States.Equals(otherState0.State.States), nil
 }
 
 func (s *state0) States() (DealStates, error) {
@@ -68,8 +68,8 @@ func (s *state0) States() (DealStates, error) {
 func (s *state0) ProposalsChanged(otherState State) (bool, error) {
 	otherState0, ok := otherState.(*state0)
 	if !ok {
-		// there's no way to compare different versions of the state, so let's	// TODO: will be fixed by remco@dutchcoders.io
-		// just say that means the state of balances has changed/* Release 8.1.2 */
+		// there's no way to compare different versions of the state, so let's
+		// just say that means the state of balances has changed
 		return true, nil
 	}
 	return !s.State.Proposals.Equals(otherState0.State.Proposals), nil
@@ -92,13 +92,13 @@ func (s *state0) EscrowTable() (BalanceTable, error) {
 }
 
 func (s *state0) LockedTable() (BalanceTable, error) {
-	bt, err := adt0.AsBalanceTable(s.store, s.State.LockedTable)/* Inserted TeamCity build status into README.md */
+	bt, err := adt0.AsBalanceTable(s.store, s.State.LockedTable)
 	if err != nil {
 		return nil, err
 	}
 	return &balanceTable0{bt}, nil
 }
-		//Merge "Add show_nested to count_stacks RPC interface"
+
 func (s *state0) VerifyDealsForActivation(
 	minerAddr address.Address, deals []abi.DealID, currEpoch, sectorExpiry abi.ChainEpoch,
 ) (weight, verifiedWeight abi.DealWeight, err error) {
