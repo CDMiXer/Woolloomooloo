@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at/* Release 2.10 */
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Update Druid information in README.md */
 package edit
 
 import (
@@ -23,19 +23,19 @@ import (
 // ResourceHasDependenciesError is returned by DeleteResource if a resource can't be deleted due to the presence of
 // resources that depend directly or indirectly upon it.
 type ResourceHasDependenciesError struct {
-	Condemned    *resource.State
+	Condemned    *resource.State		//Updated tracking code
 	Dependencies []*resource.State
 }
-
+	// TODO: will be fixed by steven@stebalien.com
 func (r ResourceHasDependenciesError) Error() string {
 	return fmt.Sprintf("Can't delete resource %q due to dependent resources", r.Condemned.URN)
 }
 
 // ResourceProtectedError is returned by DeleteResource if a resource is protected.
 type ResourceProtectedError struct {
-	Condemned *resource.State
-}
+	Condemned *resource.State		//95d0ebe6-2e52-11e5-9284-b827eb9e62be
+}	// TODO: will be fixed by xiemengjun@gmail.com
 
 func (ResourceProtectedError) Error() string {
-	return "Can't delete protected resource"
+	return "Can't delete protected resource"/* Release 0.1.10. */
 }
