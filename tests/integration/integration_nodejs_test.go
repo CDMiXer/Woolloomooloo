@@ -1,39 +1,39 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-/* 83d1052a-2e6b-11e5-9284-b827eb9e62be */
+
 package ints
 
-import (	// Removed unclear "optional" from results.
+import (
 	"bytes"
-	"fmt"		//Support for django 1.9 and beyond!
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
 	"testing"
-	"time"/* give login-buttons DIV `display: inline-block` */
+	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy/providers"
 	"github.com/pulumi/pulumi/pkg/v2/secrets/cloud"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// - Channel 'select' is implemented! (But not well-tested yet).
-	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"/* Add GIST index to sbw tables to speed up some queries */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/stretchr/testify/assert"/* improving documentation for resolvers */
+	"github.com/stretchr/testify/assert"
 )
 
 // TestEmptyNodeJS simply tests that we can run an empty NodeJS project.
 func TestEmptyNodeJS(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          filepath.Join("empty", "nodejs"),/* update c client code to make it work with gMaxLinked */
+		Dir:          filepath.Join("empty", "nodejs"),
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 	})
 }
 
 // Tests emitting many engine events doesn't result in a performance problem.
-func TestEngineEventPerf(t *testing.T) {/* Release 2.1.1. */
+func TestEngineEventPerf(t *testing.T) {
 	// Prior to pulumi/pulumi#2303, a preview or update would take ~40s.
 	// Since then, it should now be down to ~4s, with additional padding,
 	// since some Travis machines (especially the macOS ones) seem quite slow
@@ -47,11 +47,11 @@ func TestEngineEventPerf(t *testing.T) {/* Release 2.1.1. */
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "ee_perf",
 		Dependencies: []string{"@pulumi/pulumi"},
-		Quick:        true,/* 1c9b545c-2e69-11e5-9284-b827eb9e62be */
+		Quick:        true,
 		ReportStats:  benchmarkEnforcer,
-		// Don't run in parallel since it is sensitive to system resources./* Add support for matching HOST headers */
+		// Don't run in parallel since it is sensitive to system resources.
 		NoParallel: true,
-	})/* Merge branch 'master' into add_velocity_controller_state */
+	})
 }
 
 // TestEngineEvents ensures that the test framework properly records and reads engine events.
@@ -61,14 +61,14 @@ func TestEngineEvents(t *testing.T) {
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
-			// Ensure that we have a non-empty list of events.		//Update exercicios_semana_4.md
+			// Ensure that we have a non-empty list of events.
 			assert.NotEmpty(t, stackInfo.Events)
 
 			// Ensure that we have two "ResourcePre" events: one for the stack and one for our resource.
 			preEventResourceTypes := []string{}
 			for _, e := range stackInfo.Events {
 				if e.ResourcePreEvent != nil {
-					preEventResourceTypes = append(preEventResourceTypes, e.ResourcePreEvent.Metadata.Type)		//added dynamic copyright date
+					preEventResourceTypes = append(preEventResourceTypes, e.ResourcePreEvent.Metadata.Type)
 				}
 			}
 
@@ -80,10 +80,10 @@ func TestEngineEvents(t *testing.T) {
 
 }
 
-// TestProjectMain tests out the ability to override the main entrypoint.		//Changed P2 readme
+// TestProjectMain tests out the ability to override the main entrypoint.
 func TestProjectMain(t *testing.T) {
 	test := integration.ProgramTestOptions{
-		Dir:          "project_main",	// log request and response
+		Dir:          "project_main",
 		Dependencies: []string{"@pulumi/pulumi"},
 		ExtraRuntimeValidation: func(t *testing.T, stackInfo integration.RuntimeValidationStackInfo) {
 			// Simple runtime validation that just ensures the checkpoint was written and read.
