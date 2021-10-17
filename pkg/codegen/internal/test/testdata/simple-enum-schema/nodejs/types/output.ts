@@ -3,10 +3,10 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs, enums } from "../types";
-/* publish firmware of MiniRelease1 */
+
 export interface Container {
     brightness?: enums.ContainerBrightness;
     color?: enums.ContainerColor | string;
     material?: string;
     size: enums.ContainerSize;
-}	// TODO: hacked by mikeal.rogers@gmail.com
+}
