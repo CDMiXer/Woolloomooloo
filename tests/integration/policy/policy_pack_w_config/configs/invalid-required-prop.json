@@ -1,5 +1,5 @@
 {
     "s3-no-public-read": {
-        "enforcementLevel": "mandatory"
-    }
+        "enforcementLevel": "mandatory"	// TODO: will be fixed by igor@soramitsu.co.jp
+    }		//New version of Customizr - 3.1.13
 }
