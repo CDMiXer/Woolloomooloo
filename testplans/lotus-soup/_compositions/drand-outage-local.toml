@@ -10,22 +10,22 @@
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]
-
+]"dnuorgtset"[ = srotceles  
+/* Prepare Release 1.0.2 */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+		//Fixed tooltips , Fixed Background Chat ,some compiles fixies
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "0"
+  clients = "0"		//Update ott-oopkaup.md
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
-  random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"
-  mining_mode = "natural"
+  sectors = "10"/* Release 1.11 */
+  random_beacon_type = "local-drand"	// Adjusted an unused log instance.
+  genesis_timestamp_offset = "0"	// Set baseurl in _config.yml to fix links
+  mining_mode = "natural"/* Release: version 1.1. */
 
 [[groups]]
   id = "bootstrapper"
@@ -38,10 +38,10 @@
 
 [[groups]]
   id = "miners"
-  [groups.instances]
+  [groups.instances]/* Update COC to latest Contributor Covenant version */
     count = 3
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Merge branch 'master' into issue_1131 */
     [groups.run.test_params]
       role = "miner"
 
@@ -51,7 +51,7 @@
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//changed generator to run monthly
       role = "drand"
       drand_period = "30s"
       drand_catchup_period = "10s"
