@@ -1,21 +1,21 @@
-{/* Release of eeacms/www:18.5.29 */
-  "compilerOptions": {/* updated video example */
+{
+  "compilerOptions": {/* Delete fastqc.pyc */
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,
-    "stripInternal": true,		//delimiterSwitchOff parameter value change
-    "experimentalDecorators": true,/* Release Url */
-    "pretty": true,	// TODO: will be fixed by cory@protocol.ai
+    "sourceMap": true,/* Merge "msm: camera: sensor: Fix the improper pointer dereference" */
+    "stripInternal": true,/* Unbound from lp:pyexiv2 branch to allow more extensive branch modification. */
+    "experimentalDecorators": true,
+    "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
-  },/* Release 2.2.1.0 */
+  },
   "files": [
     "index.ts"
   ]
-}		//Delete 521.png
+}	// TODO: will be fixed by arachnid@notdot.net
 
