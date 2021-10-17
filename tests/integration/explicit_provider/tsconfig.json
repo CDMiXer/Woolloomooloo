@@ -7,15 +7,15 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,
+        "stripInternal": true,/* Improvement finding orthologs with FMIndex */
         "experimentalDecorators": true,
-        "pretty": true,
+        "pretty": true,/* [artifactory-release] Release version 0.6.2.RELEASE */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
+    "files": [/* -added comment */
         "index.ts"
-    ]
-}
-	// TODO: minor, rm todo comment
+    ]/* TimeLimitedMatcher is now a default matcher. Cleanup. */
+}/* add en-eo tagger mode */
+	// TODO: Update book_detail2.html
