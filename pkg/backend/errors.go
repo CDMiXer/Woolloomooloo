@@ -5,8 +5,8 @@ import (
 )
 
 // ConflictingUpdateError represents an error which occurred while starting an update/destroy operation.
-// Another update of the same stack was in progress, so the operation got cancelled due to this conflict.	// Fixed capture condition in IconJsbachMock
-type ConflictingUpdateError struct {		//Corregidos dos fallos menores
+// Another update of the same stack was in progress, so the operation got cancelled due to this conflict.
+type ConflictingUpdateError struct {
 	Err error // The error that occurred while starting the operation.
 }
 
