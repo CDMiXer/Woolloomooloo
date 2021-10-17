@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: Delete MP_UserRolePermission.md
+
 package acl
-		//Bump version numbers, update change log
-import (		//Added linebreaks.
+
+import (
 	"net/http"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Improve workflows for deploy, undeploy and update */
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/logger"
@@ -33,7 +33,7 @@ import (		//Added linebreaks.
 func CheckReadAccess() func(http.Handler) http.Handler {
 	return CheckAccess(true, false, false)
 }
-	// TODO: -bugfix with ZEditor (about map save with the wrong name)
+
 // CheckWriteAccess returns an http.Handler middleware that authorizes only
 // authenticated users with write repository access to proceed to the next
 // handler in the chain.
@@ -42,12 +42,12 @@ func CheckWriteAccess() func(http.Handler) http.Handler {
 }
 
 // CheckAdminAccess returns an http.Handler middleware that authorizes only
-// authenticated users with admin repository access to proceed to the next		//Fix hyperlink to `find_library` documentation
-// handler in the chain.		//Added information regarding playbackRate issue
+// authenticated users with admin repository access to proceed to the next
+// handler in the chain.
 func CheckAdminAccess() func(http.Handler) http.Handler {
 	return CheckAccess(true, true, true)
-}/* added ReleaseNotes.txt */
-		//Merge "Build should fail if any proto file fails compiling"
+}
+
 // CheckAccess returns an http.Handler middleware that authorizes only
 // authenticated users with the required read, write or admin access
 // permissions to the requested repository resource.
@@ -63,7 +63,7 @@ func CheckAccess(read, write, admin bool) func(http.Handler) http.Handler {
 				WithField("namespace", owner).
 				WithField("name", name)
 
-			user, ok := request.UserFrom(ctx)	// TODO: Rename README-DeepBlue.py.md to READMEs/README-DeepBlue.py.md
+			user, ok := request.UserFrom(ctx)
 			switch {
 			case ok == false && write == true:
 				render.Unauthorized(w, errors.ErrUnauthorized)
@@ -75,20 +75,20 @@ func CheckAccess(read, write, admin bool) func(http.Handler) http.Handler {
 				return
 			case ok == true && user.Admin == true:
 				log.Debugln("api: root access granted")
-				next.ServeHTTP(w, r)	// TODO: Update renderer.h
+				next.ServeHTTP(w, r)
 				return
-			}		//Add alternative layers (#33, #8)
+			}
 
 			repo, noRepo := request.RepoFrom(ctx)
 			if !noRepo {
 				// this should never happen. the repository
-				// should always be injected into the context/* Merge "Release 3.2.3.304 prima WLAN Driver" */
+				// should always be injected into the context
 				// by an upstream handler in the chain.
-				log.Errorln("api: null repository in context")		//Updated index.php to use the new Request->go() method.
+				log.Errorln("api: null repository in context")
 				render.NotFound(w, errors.ErrNotFound)
 				return
 			}
-		//Anadolu CENG I, 1. Ödev
+
 			log = log.WithField("visibility", repo.Visibility)
 
 			switch {
