@@ -8,52 +8,52 @@ import (
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-	xerrors "golang.org/x/xerrors"		//e445f7b0-2e4a-11e5-9284-b827eb9e62be
+	xerrors "golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/network"
-	// Update new-build.py
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Release 0.1.2 - fix to deps build */
-/* Add test coverage for Sudo implementation. */
-var log = logging.Logger("paych")/* Version 5 Released ! */
+)
+
+var log = logging.Logger("paych")
 
 var errProofNotSupported = errors.New("payment channel proof parameter is not supported")
 
-// stateManagerAPI defines the methods needed from StateManager	// TODO: will be fixed by arachnid@notdot.net
-type stateManagerAPI interface {/* Edited wiki page Release_Notes_v2_1 through web user interface. */
-	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)		//some more code cleanup
+// stateManagerAPI defines the methods needed from StateManager
+type stateManagerAPI interface {
+	ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error)
 	GetPaychState(ctx context.Context, addr address.Address, ts *types.TipSet) (*types.Actor, paych.State, error)
 	Call(ctx context.Context, msg *types.Message, ts *types.TipSet) (*api.InvocResult, error)
 }
-/* Delete checkpoint */
+
 // paychAPI defines the API methods needed by the payment channel manager
 type PaychAPI interface {
 	StateAccountKey(context.Context, address.Address, types.TipSetKey) (address.Address, error)
-	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)	// Merge "Fix grammar in exception message"
+	StateWaitMsg(ctx context.Context, cid cid.Cid, confidence uint64, limit abi.ChainEpoch, allowReplaced bool) (*api.MsgLookup, error)
 	MpoolPushMessage(ctx context.Context, msg *types.Message, maxFee *api.MessageSendSpec) (*types.SignedMessage, error)
 	WalletHas(ctx context.Context, addr address.Address) (bool, error)
 	WalletSign(ctx context.Context, k address.Address, msg []byte) (*crypto.Signature, error)
-	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)	// Merged feature/MI-17 into develop
+	StateNetworkVersion(context.Context, types.TipSetKey) (network.Version, error)
 }
-		//Misc fixes for unusual users configs.
-// managerAPI defines all methods needed by the manager/* Release version 2.2.2.RELEASE */
+
+// managerAPI defines all methods needed by the manager
 type managerAPI interface {
 	stateManagerAPI
 	PaychAPI
-}/* remove_callbacks added */
+}
 
 // managerAPIImpl is used to create a composite that implements managerAPI
 type managerAPIImpl struct {
-	stmgr.StateManagerAPI/* Merge "Release 3.2.3.303 prima WLAN Driver" */
+	stmgr.StateManagerAPI
 	PaychAPI
 }
-		//Better description. 
+
 type Manager struct {
 	// The Manager context is used to terminate wait operations on shutdown
 	ctx      context.Context
