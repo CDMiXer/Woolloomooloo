@@ -1,16 +1,16 @@
-<!-- linkify_param is used to wrap constructor/function params in an anchor tag. -->
-{{ define "linkify_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}/* 7459eb06-2e58-11e5-9284-b827eb9e62be */
+<!-- linkify_param is used to wrap constructor/function params in an anchor tag. -->	// TODO: hacked by davidad@alum.mit.edu
+{{ define "linkify_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
 
-<!-- linkify_go_param is used to wrap constructor/function params in an anchor tag specifically for go constuctors. We are treating this as a snowflake for now. -->
+<!-- linkify_go_param is used to wrap constructor/function params in an anchor tag specifically for go constuctors. We are treating this as a snowflake for now. -->	// TODO: will be fixed by alex.gaynor@gmail.com
 {{ define "linkify_go_param" }}<span class="nx">{{ if ne .Link "" }}<a href="{{ .Link }}">{{ end }}New{{ if ne .DisplayName "" }}{{ .DisplayName }}{{ else }}{{ .Name }}{{ end }}{{ if ne .Link "" }}</a>{{ end }}</span>{{ end }}
 
 <!-- linkify wraps any propertyType instance in an anchor tag. The display name/name is rendered as-is by passing it through the htmlSafe function
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify" }}<a href="{{ .Link }}">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>{{ end }}
-		//Bumping version to 1.2.2.
-<!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by/* rev 512451 */
-passing it through the htmlSafe function/* Update syntax/purpose_meaning.md */
+
+<!-- linkify_wo_style an wraps a propertyType with an anchor tag but retains parent styling. The display name/name is rendered as-is by
+passing it through the htmlSafe function
 to avoid double-encoding html characters, which is typical of properties type names. -->
 {{ define "linkify_wo_style" }}
 <a href="{{ .Link }}" style="color: inherit; text-decoration: inherit;">{{ if ne .DisplayName "" }}{{ htmlSafe .DisplayName }}{{ else }}{{ htmlSafe .Name }}{{ end }}</a>
-{{ end }}
+{{ end }}		//Rename DNNSwift/dnnSwift/Validator.py to dnnSwift/Validator.py
