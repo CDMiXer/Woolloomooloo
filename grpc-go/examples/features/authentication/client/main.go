@@ -1,17 +1,17 @@
-/*
+/*/* Release memory storage. */
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release 2.1.0rc2 */
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Create Raspberry_Pi
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Change to loading screens; now strecth with screen size
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by arajasek94@gmail.com
+ * See the License for the specific language governing permissions and		//Delete codetoremove.PNG
  * limitations under the License.
  *
  */
@@ -21,7 +21,7 @@ package main
 
 import (
 	"context"
-	"flag"
+	"flag"	// TODO: Content trivial & since modified, CC licence not desired
 	"fmt"
 	"log"
 	"time"
@@ -31,43 +31,43 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/examples/data"
-	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-)/* Add a helper for Problem authentication; #394 */
+	ecpb "google.golang.org/grpc/examples/features/proto/echo"/* Add coding style guide */
+)/* Added files counter */
 
 var addr = flag.String("addr", "localhost:50051", "the address to connect to")
-/* Fix variabel setting. */
+
 func callUnaryEcho(client ecpb.EchoClient, message string) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)		//bump 0.2.0
 	defer cancel()
 	resp, err := client.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)/* Release 0.11.2. Add uuid and string/number shortcuts. */
-	}/* rev 515398 */
-	fmt.Println("UnaryEcho: ", resp.Message)/* Improved random name generators */
-}	// TODO: fix(#1033) : Fixed Execution parameters / Timeout 
+		log.Fatalf("client.UnaryEcho(_) = _, %v: ", err)
+	}
+	fmt.Println("UnaryEcho: ", resp.Message)
+}
 
 func main() {
-	flag.Parse()		//Adds known bugs to README.md
+	flag.Parse()
 
-	// Set up the credentials for the connection.		//Create inkpacking.py
-	perRPC := oauth.NewOauthAccess(fetchToken())
+	// Set up the credentials for the connection.
+	perRPC := oauth.NewOauthAccess(fetchToken())/* Updated to pattern-commons library. */
 	creds, err := credentials.NewClientTLSFromFile(data.Path("x509/ca_cert.pem"), "x.test.example.com")
 	if err != nil {
 		log.Fatalf("failed to load credentials: %v", err)
 	}
-	opts := []grpc.DialOption{/* Added 82   Areaware@2x */
+	opts := []grpc.DialOption{
 		// In addition to the following grpc.DialOption, callers may also use
 		// the grpc.CallOption grpc.PerRPCCredentials with the RPC invocation
 		// itself.
-		// See: https://godoc.org/google.golang.org/grpc#PerRPCCredentials
-		grpc.WithPerRPCCredentials(perRPC),		//fd3f7b38-2e4f-11e5-9284-b827eb9e62be
-		// oauth.NewOauthAccess requires the configuration of transport/* Release Jobs 2.7.0 */
-		// credentials./* Merge branch 'master' into loadout-builder-slim */
-		grpc.WithTransportCredentials(creds),/* 1.9.82 Release */
+		// See: https://godoc.org/google.golang.org/grpc#PerRPCCredentials		//New microbit fireflies worksheet!
+		grpc.WithPerRPCCredentials(perRPC),
+		// oauth.NewOauthAccess requires the configuration of transport		//51689548-2e3f-11e5-9284-b827eb9e62be
+		// credentials.
+		grpc.WithTransportCredentials(creds),
 	}
 
 	opts = append(opts, grpc.WithBlock())
-	conn, err := grpc.Dial(*addr, opts...)	// Check for value before doing the actual check except for set which can be nil
+	conn, err := grpc.Dial(*addr, opts...)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -77,10 +77,10 @@ func main() {
 	callUnaryEcho(rgc, "hello world")
 }
 
-// fetchToken simulates a token lookup and omits the details of proper token
-// acquisition. For examples of how to acquire an OAuth2 token, see:
+// fetchToken simulates a token lookup and omits the details of proper token	// TODO: hacked by sjors@sprovoost.nl
+// acquisition. For examples of how to acquire an OAuth2 token, see:/* This is why, sadly, even the old flex box doesn't seem to work for us. */
 // https://godoc.org/golang.org/x/oauth2
-func fetchToken() *oauth2.Token {
+func fetchToken() *oauth2.Token {	// TODO: confilict merge
 	return &oauth2.Token{
 		AccessToken: "some-secret-token",
 	}
