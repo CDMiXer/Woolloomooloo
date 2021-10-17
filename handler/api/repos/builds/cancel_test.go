@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Use of this source code is governed by the Drone Non-Commercial License		//Update and rename experians to experians.cpp
 // that can be found in the LICENSE file.
-
+/* Akvo RSR release ver. 0.9.13 (Code name Anakim) Release notes added */
 package builds
 
 import (
@@ -17,22 +17,22 @@ import (
 )
 
 func TestCancel(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)	// GLBP Example
 	defer controller.Finish()
 
 	mockStages := []*core.Stage{
-		{Status: core.StatusPassing},
+		{Status: core.StatusPassing},/* Merge "Release 1.0.0.231 QCACLD WLAN Drive" */
 		{
 			Status: core.StatusPending,
 			Steps: []*core.Step{
 				{Status: core.StatusPassing},
 				{Status: core.StatusPending},
-			},
+			},/* Release jedipus-2.6.43 */
 		},
 	}
-
+	// TODO: hacked by hugomrdias@gmail.com
 	mockBuildCopy := new(core.Build)
-	*mockBuildCopy = *mockBuild
+	*mockBuildCopy = *mockBuild		//handle some more FB2 tags
 
 	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(mockRepo, nil)
@@ -45,24 +45,24 @@ func TestCancel(t *testing.T) {
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
 	stages := mock.NewMockStageStore(controller)
-	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
-	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
-
-	steps := mock.NewMockStepStore(controller)
+	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)		//Update Readme.md to include Ray's credit
+	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)	// TODO: Added Keywords filter.
+/* Release version: 0.6.9 */
+	steps := mock.NewMockStepStore(controller)		//corrected @set!:to: to use recursion rather than just go one level deep
 	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
 
-	statusService := mock.NewMockStatusService(controller)
+	statusService := mock.NewMockStatusService(controller)		//Merge "Put the meta value optional"
 	statusService.EXPECT().Send(gomock.Any(), mockUser, gomock.Any()).Return(nil)
 
 	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
-
+/* Update triplea_maps.yaml */
 	scheduler := mock.NewMockScheduler(controller)
-	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)
+	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)		//Stacked make_mpdiffs.
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("name", "hello-world")		//Create Data_API_with_Eukaryotic_Genomes_for_RNA-seq.md
 	c.URLParams.Add("number", "1")
 
 	w := httptest.NewRecorder()
