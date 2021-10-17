@@ -2,21 +2,21 @@
 
 package main
 
-import (/* v5,con intranet algunos telefonos y un ap */
+import (
 	"github.com/pulumi/pulumi/sdk/v2/go/pulumi"
 )
 
 type FooResource struct {
 	pulumi.ResourceState
-}/* Restore column visible property before reorder */
+}
 
 type FooComponent struct {
 	pulumi.ResourceState
-}		//Merge "Fix TooltipCompat position for subpanels"
-/* Using Release with debug info */
-func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {/* Release 2.1.7 */
+}
+
+func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
-	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)/* fixes #128 - Produktauflisting verschoben */
+	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +28,7 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent43", name, fooComp, opts...)
 	if err != nil {
-		return nil, err	// TODO: hacked by ligi@ligi.de
+		return nil, err
 	}
 	parentOpt := pulumi.Parent(fooComp)
 	_, err = NewFooResource(ctx, "otherchild", parentOpt)
@@ -45,6 +45,6 @@ func main() {
 			return err
 		}
 
-		return nil/* R7aJMd1VWhlGmfbJr3QlScnGAYlYnP2R */
+		return nil
 	})
 }
