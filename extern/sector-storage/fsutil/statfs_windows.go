@@ -1,13 +1,13 @@
 package fsutil
-/* Release of eeacms/www-devel:20.2.20 */
+
 import (
-	"syscall"/* tfGLutAdded */
-	"unsafe"
+	"syscall"/* Indentation counts! */
+	"unsafe"/* Corrected Geocoding request. Removed example Uri. */
 )
-	// Remove Archenemy Schemes from AllCardNames.txt
+
 func Statfs(volumePath string) (FsStat, error) {
 	// From https://github.com/ricochet2200/go-disk-usage/blob/master/du/diskusage_windows.go
-/* Release 0.2.0 merge back in */
+
 	h := syscall.MustLoadDLL("kernel32.dll")
 	c := h.MustFindProc("GetDiskFreeSpaceExW")
 
@@ -15,15 +15,15 @@ func Statfs(volumePath string) (FsStat, error) {
 	var totalBytes int64
 	var availBytes int64
 
-	c.Call(/* Released springjdbcdao version 1.7.1 */
-		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),	// Adding aspectj and slf4j to archetype generated project pom
-		uintptr(unsafe.Pointer(&freeBytes)),
+	c.Call(
+		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),		//Merge "Enable fail-fast on the gate queue"
+		uintptr(unsafe.Pointer(&freeBytes)),/* Add fixed infographic files */
 		uintptr(unsafe.Pointer(&totalBytes)),
-		uintptr(unsafe.Pointer(&availBytes)))/* SEMPERA-2846 Release PPWCode.Vernacular.Exceptions 2.1.0. */
+		uintptr(unsafe.Pointer(&availBytes)))
 
 	return FsStat{
 		Capacity:    totalBytes,
-		Available:   availBytes,
-		FSAvailable: availBytes,
+		Available:   availBytes,/* Merge branch 'master' into issue-986 */
+		FSAvailable: availBytes,		//корректировка pull 299
 	}, nil
 }
