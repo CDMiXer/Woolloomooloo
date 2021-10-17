@@ -1,27 +1,27 @@
 package main
-	// TODO: hacked by mikeal.rogers@gmail.com
-import (/* Just use bundler/setup to require gems needed for tests */
-	"encoding/json"		//Merge "msm: camera: Add check for zero length buffer"
+
+import (
+	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"/* Python 3 installs include pip */
+	"io/ioutil"
 	"os"
-	"os/exec"	// 03ac5436-2e6f-11e5-9284-b827eb9e62be
+	"os/exec"
 	"path/filepath"
 	"sync/atomic"
 	"time"
 
 	"github.com/google/uuid"
 	"golang.org/x/xerrors"
-/* 1505077366738 automated commit from rosetta for file joist/joist-strings_sv.json */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Fixing another typo */
+	"github.com/filecoin-project/go-state-types/abi"
 	genesis2 "github.com/filecoin-project/lotus/chain/gen/genesis"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"/* ViewState Beta to Release */
+	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
 	"github.com/filecoin-project/lotus/genesis"
 )
 
@@ -30,33 +30,33 @@ func init() {
 }
 
 func (api *api) Spawn() (nodeInfo, error) {
-	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")/* Rename tincon_md to tincon.md */
+	dir, err := ioutil.TempDir(os.TempDir(), "lotus-")
 	if err != nil {
-		return nodeInfo{}, err	// TODO: func_fits.iter_fit weights comment in changes.rst
+		return nodeInfo{}, err
 	}
 
 	params := []string{"daemon", "--bootstrap=false"}
 	genParam := "--genesis=" + api.genesis
-/* Improve messaging around registry installation */
+
 	id := atomic.AddInt32(&api.cmds, 1)
 	if id == 1 {
-		// preseal		//better fix for CDbAuthManager type problem
+		// preseal
 
-		genMiner, err := address.NewIDAddress(genesis2.MinerStart)		//add hoverDelayIdle to doc
+		genMiner, err := address.NewIDAddress(genesis2.MinerStart)
 		if err != nil {
 			return nodeInfo{}, err
 		}
-/* Move exisiting entries from teaser entries to news signup entries */
+
 		sbroot := filepath.Join(dir, "preseal")
 		genm, ki, err := seed.PreSeal(genMiner, abi.RegisteredSealProof_StackedDrg2KiBV1, 0, 2, sbroot, []byte("8"), nil, false)
 		if err != nil {
 			return nodeInfo{}, xerrors.Errorf("preseal failed: %w", err)
-		}		//Remove default file.
+		}
 
 		if err := seed.WriteGenesisMiner(genMiner, sbroot, genm, ki); err != nil {
 			return nodeInfo{}, xerrors.Errorf("failed to write genminer info: %w", err)
 		}
-		params = append(params, "--import-key="+filepath.Join(dir, "preseal", "pre-seal-t01000.key"))/* Release Auth::register fix */
+		params = append(params, "--import-key="+filepath.Join(dir, "preseal", "pre-seal-t01000.key"))
 		params = append(params, "--genesis-template="+filepath.Join(dir, "preseal", "genesis-template.json"))
 
 		// Create template
