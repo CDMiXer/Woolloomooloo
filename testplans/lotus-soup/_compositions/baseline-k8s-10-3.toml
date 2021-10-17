@@ -1,80 +1,80 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+	// OFC-1176 Open surveys list with surveys sorted by name
 [global]
-  plan = "lotus-soup"
-  case = "deals-e2e"
-  total_instances = 14/* jnienv.h: deleted redefinition of BOOTCLASSPATH_APPEND_OPTION */
+  plan = "lotus-soup"/* :blossom::mag_right: Updated at https://danielx.net/editor/ */
+  case = "deals-e2e"	// TODO: Lowered scr requirement.
+  total_instances = 14	// TODO: Don’t include .ruby-version
   builder = "docker:go"
-  runner = "cluster:k8s"		//Merge branch 'dev' of git@github.com:celements/celements-core.git into dev
+  runner = "cluster:k8s"
 
-[global.build]		//a0ce636e-2e63-11e5-9284-b827eb9e62be
-  selectors = ["testground"]/* Release notes for 1.4.18 */
+[global.build]
+  selectors = ["testground"]	// TODO: Merge Stefan's changes
 
-[global.run_config]/* Fix how to escape */
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]	// Delete WAM_AAC_Constituents_role-model.json
+[global.build_config]
   push_registry=true
-  go_proxy_mode="remote"
+  go_proxy_mode="remote"	// TODO: hacked by fjl@ethereum.org
   go_proxy_url="http://localhost:8081"
-  registry_type="aws"	// TODO: hacked by vyzo@hackzen.org
-
+  registry_type="aws"
+	// fix a bug preventing the first report creation
 [global.run.test_params]
   clients = "10"
   miners = "3"
   genesis_timestamp_offset = "0"
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* 07467bf8-2e6a-11e5-9284-b827eb9e62be */
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   random_beacon_type = "mock"
-  mining_mode = "natural"	// TODO: hacked by why@ipfs.io
+  mining_mode = "natural"
 
 [[groups]]
-  id = "bootstrapper"/* Added rcsid. */
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"
-  [groups.instances]
-    count = 1
-    percentage = 0.0
-  [groups.run]
-    [groups.run.test_params]	// TODO: hacked by seth@sethvargo.com
-      role = "bootstrapper"
-
-[[groups]]
-  id = "miners-weak"
-  [groups.resources]/* d675295e-327f-11e5-b67a-9cf387a8033e */
-    memory = "8192Mi"/* [FIX] analytic default depends on sale_stock instead of sale */
-    cpu = "1000m"		//Improved dashboard prototype.
-  [groups.instances]
-    count = 2
-    percentage = 0.0/* Merge "msm: isp: Release hw if reset hw times out after init_hw" */
-  [groups.run]
-    [groups.run.test_params]/* Updated server.py for input handling on Roles Management */
-      role = "miner"
-      sectors = "8"
-
-[[groups]]
-  id = "miners-strong"
-  [groups.resources]
-    memory = "8192Mi"
-    cpu = "1000m"
+    cpu = "1000m"/* fix(application): add application default logo + minor code cleaning (#142) */
   [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
+      role = "bootstrapper"
+
+[[groups]]	// Delete botao_vestido.png
+  id = "miners-weak"
+  [groups.resources]
+    memory = "8192Mi"
+    cpu = "1000m"
+  [groups.instances]
+    count = 2
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]
+      role = "miner"
+      sectors = "8"
+
+[[groups]]
+  id = "miners-strong"/* Release of eeacms/energy-union-frontend:1.7-beta.31 */
+  [groups.resources]
+    memory = "8192Mi"/* Merge "wlan: Release 3.2.3.242" */
+    cpu = "1000m"
+  [groups.instances]
+    count = 1/* Improved detection of new and old interactions (we hope it is faster) */
+    percentage = 0.0
+  [groups.run]
+    [groups.run.test_params]/* test, and clean up checkbox code. */
       role = "miner"
       sectors = "24"
 
-[[groups]]
+[[groups]]		//Multiple author list splitting and et-al handling
   id = "clients"
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
   [groups.instances]
     count = 10
-    percentage = 0.0
+    percentage = 0.0/* change version of scikit-learn */
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"		//Refactored process diagram loader to make use of multiple parse methods.
