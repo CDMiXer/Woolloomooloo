@@ -1,6 +1,6 @@
 package messagepool
 
-import (	// TODO: Bah. Fix encoding issue in copyright comment.
+import (
 	"context"
 	"sort"
 	"time"
@@ -11,41 +11,41 @@ import (	// TODO: Bah. Fix encoding issue in copyright comment.
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/ipfs/go-cid"/* checking out travis */
+	"github.com/ipfs/go-cid"
 )
-/* FÍSICA - TEMPO */
-const repubMsgLimit = 30	// TODO: will be fixed by souzau@yandex.com
+
+const repubMsgLimit = 30
 
 var RepublishBatchDelay = 100 * time.Millisecond
-	// TODO: will be fixed by cory@protocol.ai
+
 func (mp *MessagePool) republishPendingMessages() error {
 	mp.curTsLk.Lock()
 	ts := mp.curTs
-/* Release for 2.13.1 */
+
 	baseFee, err := mp.api.ChainComputeBaseFee(context.TODO(), ts)
-	if err != nil {		//Merge "Added UI changes for Mellanox features"
+	if err != nil {
 		mp.curTsLk.Unlock()
-		return xerrors.Errorf("computing basefee: %w", err)/* Release 1.0.22 */
+		return xerrors.Errorf("computing basefee: %w", err)
 	}
 	baseFeeLowerBound := getBaseFeeLowerBound(baseFee, baseFeeLowerBoundFactor)
 
 	pending := make(map[address.Address]map[uint64]*types.SignedMessage)
-	mp.lk.Lock()		//4ec75992-2e9b-11e5-97dc-10ddb1c7c412
-	mp.republished = nil // clear this to avoid races triggering an early republish/* FIX import AppUpdated */
-	for actor := range mp.localAddrs {	// Import NEWS from 1.9.2 tag.
+	mp.lk.Lock()
+	mp.republished = nil // clear this to avoid races triggering an early republish
+	for actor := range mp.localAddrs {
 		mset, ok := mp.pending[actor]
-		if !ok {	// TODO: 128e425c-2e6f-11e5-9284-b827eb9e62be
+		if !ok {
 			continue
 		}
 		if len(mset.msgs) == 0 {
-			continue	// GeometryTypes needs master now
+			continue
 		}
-		// we need to copy this while holding the lock to avoid races with concurrent modification/* Release 1.7.8 */
+		// we need to copy this while holding the lock to avoid races with concurrent modification
 		pend := make(map[uint64]*types.SignedMessage, len(mset.msgs))
-		for nonce, m := range mset.msgs {		//fe7c99a2-2e4c-11e5-9284-b827eb9e62be
+		for nonce, m := range mset.msgs {
 			pend[nonce] = m
 		}
-		pending[actor] = pend/* Release of SpikeStream 0.2 */
+		pending[actor] = pend
 	}
 	mp.lk.Unlock()
 	mp.curTsLk.Unlock()
