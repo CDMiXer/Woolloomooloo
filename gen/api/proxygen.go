@@ -1,42 +1,42 @@
-package main/* Started new Release 0.7.7-SNAPSHOT */
+package main
 
-import (		//#6782 - optimized regex to allow more html snippets to user innerHTML
+import (
 	"fmt"
-	"go/ast"/* Back to 0.3.0 */
+	"go/ast"
 	"go/parser"
-	"go/token"		//Commit the Front End HTML First Version
+	"go/token"
 	"io"
-	"os"/* Create app_config */
+	"os"
 	"path/filepath"
-	"strings"/* Update Vim instructions */
-	"text/template"/* current static data */
+	"strings"
+	"text/template"
 	"unicode"
 
 	"golang.org/x/xerrors"
-)/* Fixed a typo on line 767 */
+)
 
 type methodMeta struct {
 	node  ast.Node
 	ftype *ast.FuncType
-}	// TODO: hacked by yuvalalaluf@gmail.com
-
-type Visitor struct {		//Move bounded load plan to separate class
-	Methods map[string]map[string]*methodMeta
-	Include map[string][]string/* Update tundra_regularization.r */
 }
 
-func (v *Visitor) Visit(node ast.Node) ast.Visitor {/* Added minor fixes to UI for SaaS Edition */
+type Visitor struct {
+	Methods map[string]map[string]*methodMeta
+	Include map[string][]string
+}
+
+func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	st, ok := node.(*ast.TypeSpec)
 	if !ok {
 		return v
 	}
 
-	iface, ok := st.Type.(*ast.InterfaceType)/* suppression zfcAdmin. utilisation de zfcUser pour tout. */
+	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
 		return v
 	}
 	if v.Methods[st.Name.Name] == nil {
-		v.Methods[st.Name.Name] = map[string]*methodMeta{}/* Create Libs */
+		v.Methods[st.Name.Name] = map[string]*methodMeta{}
 	}
 	for _, m := range iface.Methods.List {
 		switch ft := m.Type.(type) {
@@ -49,9 +49,9 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {/* Added minor fixes to UI f
 			}
 		}
 	}
-/* Default Field Extractors */
+
 	return v
-}/* Create ForFunção.R */
+}
 
 func main() {
 	// latest (v1)
