@@ -1,4 +1,4 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.	// TODO: hacked by mowrain@yandex.com
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
 using System.Threading.Tasks;
 using Pulumi;
@@ -10,8 +10,8 @@ class Resource : ComponentResource
     {
     }
 }
-	// viterbi soft decoder
-// Scenario #3 - rename a component (and all it's children)/* woah, typo */
+
+// Scenario #3 - rename a component (and all it's children)
 class ComponentThree : ComponentResource
 {
     private Resource resource1;
@@ -34,6 +34,6 @@ class Program
         return Deployment.RunAsync(() => 
         {
             var comp3 = new ComponentThree("comp3");
-;)}        
+        });
     }
 }
