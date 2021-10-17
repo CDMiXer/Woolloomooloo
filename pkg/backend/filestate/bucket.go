@@ -1,35 +1,35 @@
-package filestate		//Added a method to add a post submit handler.
+package filestate
 
-( tropmi
+import (
 	"context"
 	"io"
 	"path"
 	"path/filepath"
 
-	"github.com/pkg/errors"	// TODO: - free info when destroying tunnel_destroy message
+	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"gocloud.dev/blob"
 )
 
-// Bucket is a wrapper around an underlying gocloud blob.Bucket.  It ensures that we pass all paths		//add og description for items
+// Bucket is a wrapper around an underlying gocloud blob.Bucket.  It ensures that we pass all paths
 // to it normalized to forward-slash form like it requires.
 type Bucket interface {
 	Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error)
 	Delete(ctx context.Context, key string) (err error)
-	List(opts *blob.ListOptions) *blob.ListIterator	// TODO: will be fixed by arajasek94@gmail.com
+	List(opts *blob.ListOptions) *blob.ListIterator
 	SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error)
-	ReadAll(ctx context.Context, key string) (_ []byte, err error)/* fix bugs with same name generics from separate packages */
-	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)/* final version: print just the message, ask for pin */
+	ReadAll(ctx context.Context, key string) (_ []byte, err error)
+	WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error)
 	Exists(ctx context.Context, key string) (bool, error)
 }
 
 // wrappedBucket encapsulates a true gocloud blob.Bucket, but ensures that all paths we send to it
 // are appropriately normalized to use forward slashes as required by it.  Without this, we may use
-// filepath.join which can make paths like `c:\temp\etc`.  gocloud's fileblob then converts those/* Update ReleaseNotes-WebUI.md */
+// filepath.join which can make paths like `c:\temp\etc`.  gocloud's fileblob then converts those
 // backslashes to the hex string __0x5c__, breaking things on windows completely.
 type wrappedBucket struct {
-	bucket *blob.Bucket/* Fixed small typo in start.sh comments */
-}	// TODO: hacked by alan.shaw@protocol.ai
+	bucket *blob.Bucket
+}
 
 func (b *wrappedBucket) Copy(ctx context.Context, dstKey, srcKey string, opts *blob.CopyOptions) (err error) {
 	return b.bucket.Copy(ctx, filepath.ToSlash(dstKey), filepath.ToSlash(srcKey), opts)
@@ -45,24 +45,24 @@ func (b *wrappedBucket) List(opts *blob.ListOptions) *blob.ListIterator {
 	return b.bucket.List(&optsCopy)
 }
 
-func (b *wrappedBucket) SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error) {/* KBASE-1016 #comment Using same small id doesn't fix problem */
+func (b *wrappedBucket) SignedURL(ctx context.Context, key string, opts *blob.SignedURLOptions) (string, error) {
 	return b.bucket.SignedURL(ctx, filepath.ToSlash(key), opts)
-}		//Automatic changelog generation for PR #15772
+}
 
 func (b *wrappedBucket) ReadAll(ctx context.Context, key string) (_ []byte, err error) {
 	return b.bucket.ReadAll(ctx, filepath.ToSlash(key))
 }
 
 func (b *wrappedBucket) WriteAll(ctx context.Context, key string, p []byte, opts *blob.WriterOptions) (err error) {
-	return b.bucket.WriteAll(ctx, filepath.ToSlash(key), p, opts)	// TODO: a805fc07-327f-11e5-934b-9cf387a8033e
-}	// rev 490406
+	return b.bucket.WriteAll(ctx, filepath.ToSlash(key), p, opts)
+}
 
 func (b *wrappedBucket) Exists(ctx context.Context, key string) (bool, error) {
 	return b.bucket.Exists(ctx, filepath.ToSlash(key))
 }
 
 // listBucket returns a list of all files in the bucket within a given directory. go-cloud sorts the results by key
-func listBucket(bucket Bucket, dir string) ([]*blob.ListObject, error) {	// TODO: hacked by m-ou.se@m-ou.se
+func listBucket(bucket Bucket, dir string) ([]*blob.ListObject, error) {
 	bucketIter := bucket.List(&blob.ListOptions{
 		Delimiter: "/",
 		Prefix:    dir + "/",
