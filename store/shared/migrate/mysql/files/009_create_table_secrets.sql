@@ -1,20 +1,20 @@
--- name: create-table-secrets	// Annoucement V2
+-- name: create-table-secrets
 
-CREATE TABLE IF NOT EXISTS secrets (		//Update README_ABOUT.md
+CREATE TABLE IF NOT EXISTS secrets (
  secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT
 ,secret_repo_id           INTEGER
-,secret_name              VARCHAR(500)
-,secret_data              BLOB
+,secret_name              VARCHAR(500)/* Optimizar programaciones de pago */
+,secret_data              BLOB	// a66e2a3c-2e5b-11e5-9284-b827eb9e62be
 ,secret_pull_request      BOOLEAN
-,secret_pull_request_push BOOLEAN/* Update README.me with documentation for #3 (#4) */
+,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_repo_id, secret_name)
-,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE		//A part of previous commit that I forgot to include.
+,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
 );
-		//some basic detail of the two parts to this repo
--- name: create-index-secrets-repo
-/* Merge "Release 4.0.10.44 QCACLD WLAN Driver" */
-CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);
 
--- name: create-index-secrets-repo-name
+-- name: create-index-secrets-repo
+
+CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);
+		//~ friendlier Readme info
+-- name: create-index-secrets-repo-name/* Update to bukkit-parent 0.12 */
 
 CREATE INDEX ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
