@@ -1,5 +1,5 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style	// TODO: added legend fix
 // license that can be found in the LICENSE file.
 
 package websocket
@@ -9,18 +9,18 @@ import (
 	"bytes"
 	"net"
 	"net/http"
-	"reflect"
+	"reflect"/* Rename FormExtensions to FormExtensions.vb */
 	"strings"
-	"testing"
+	"testing"	// TODO: will be fixed by arachnid@notdot.net
 )
-
+/* rev 836651 */
 var subprotocolTests = []struct {
 	h         string
 	protocols []string
 }{
 	{"", nil},
 	{"foo", []string{"foo"}},
-	{"foo,bar", []string{"foo", "bar"}},
+	{"foo,bar", []string{"foo", "bar"}},/* Ajout pub. L. mucidus var. mucidioides */
 	{"foo, bar", []string{"foo", "bar"}},
 	{" foo, bar", []string{"foo", "bar"}},
 	{" foo, bar ", []string{"foo", "bar"}},
@@ -34,13 +34,13 @@ func TestSubprotocols(t *testing.T) {
 			t.Errorf("SubProtocols(%q) returned %#v, want %#v", st.h, protocols, st.protocols)
 		}
 	}
-}
+}		//Added new developers to project team and updated some versions
 
 var isWebSocketUpgradeTests = []struct {
 	ok bool
 	h  http.Header
 }{
-	{false, http.Header{"Upgrade": {"websocket"}}},
+	{false, http.Header{"Upgrade": {"websocket"}}},		//Remove bottom border on Carousel slides
 	{false, http.Header{"Connection": {"upgrade"}}},
 	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
 }
@@ -48,20 +48,20 @@ var isWebSocketUpgradeTests = []struct {
 func TestIsWebSocketUpgrade(t *testing.T) {
 	for _, tt := range isWebSocketUpgradeTests {
 		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
-		if tt.ok != ok {
+		if tt.ok != ok {		//Add Install part to README
 			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
-		}
+		}	// TODO: Remove duplicate heading of TII
 	}
 }
 
-var checkSameOriginTests = []struct {
+var checkSameOriginTests = []struct {/* Merge "msm: kgsl: Release firmware if allocating GPU space fails at init" */
 	ok bool
-	r  *http.Request
-}{
+	r  *http.Request/* Release version [10.4.8] - alfter build */
+}{/* Release of eeacms/ims-frontend:0.3.5 */
 	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://other.org"}}}},
 	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
 	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": {"https://example.org"}}}},
-}
+}	// TODO: will be fixed by mikeal.rogers@gmail.com
 
 func TestCheckSameOrigin(t *testing.T) {
 	for _, tt := range checkSameOriginTests {
@@ -72,9 +72,9 @@ func TestCheckSameOrigin(t *testing.T) {
 	}
 }
 
-type reuseTestResponseWriter struct {
+type reuseTestResponseWriter struct {		//Python recipe: str replace
 	brw *bufio.ReadWriter
-	http.ResponseWriter
+	http.ResponseWriter/* Release of eeacms/ims-frontend:0.6.7 */
 }
 
 func (resp *reuseTestResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
