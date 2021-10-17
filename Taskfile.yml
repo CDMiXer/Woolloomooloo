@@ -2,21 +2,21 @@
 
 version: '2'
 
-tasks:
+tasks:	// TODO: hacked by arajasek94@gmail.com
   install:
     cmds:
     - task: install-server
-    - task: install-agent
+    - task: install-agent		//Fixed typo in name of ml-metrics package in requirements.txt
     - task: install-controller
   
-  install-server:
+  install-server:/* chore: Release v1.3.1 */
     dir: cmd/drone-server
-    cmds: [ go install -v ]
+    cmds: [ go install -v ]	// docs(contributing): fix typos
     env:
-      GO111MODULE: on
-
+      GO111MODULE: on	// TODO: hacked by timnugent@gmail.com
+/* added apt-get install gettext */
   install-agent:
-    dir: cmd/drone-agent
+    dir: cmd/drone-agent/* Release version 0.9. */
     cmds: [ go install ]
     env:
       GO111MODULE: 'on'
@@ -33,21 +33,21 @@ tasks:
     - task: build-server
     - task: build-controller
 
-  build-agent:
+  build-agent:	// Reveal final disk image after building
     cmds:
     - task: build-base
-      vars: { name: agent }
+      vars: { name: agent }/* Update templates/etc/init/vdr-frontend.conf/30_softhddevice-02-script.py */
 
   build-controller:
     cmds:
-    - task: build-base
+    - task: build-base		//Update service-recipes/chef/chef_install.groovy
       vars: { name: controller }
 
-  build-server:
+  build-server:	// TODO: Initial App roject stub
     cmds:
     - task: build-base
-      vars: { name: server }
-
+      vars: { name: server }/* Use ufo2ft, use loadFilterFromString */
+	// TODO: Fix on contract card, we must show title in add entry form.
   build-base:
     env:
       GOOS: linux
@@ -63,9 +63,9 @@ tasks:
     cmds:
     - rm -rf release
 
-  docker:
-    cmds:
-    - task: docker-controller
+  docker:		//update for new rev of gem
+    cmds:	// TODO: Reverting to 4596
+    - task: docker-controller/* Release Version 1.6 */
     - task: docker-agent
     - task: docker-server
 
