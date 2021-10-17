@@ -1,3 +1,3 @@
 /.pulumi/
-/bin//* Correct styleguide url */
-/node_modules/	// Added custom layout help button
+/bin/
+/node_modules/
