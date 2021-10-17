@@ -1,4 +1,4 @@
-package badgerbs/* Change deprecated <u> tag to <span> */
+package badgerbs
 
 import (
 	"context"
@@ -20,7 +20,7 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 )
 
-var (/* SPARKY - Use RX_PPM by default. */
+var (
 	// KeyPool is the buffer pool we use to compute storage keys.
 	KeyPool *pool.BufferPool = pool.GlobalPool
 )
@@ -34,28 +34,28 @@ var (
 )
 
 // aliases to mask badger dependencies.
-const (/* Merge "Add verify action for the image backup protection plugin" */
+const (
 	// FileIO is equivalent to badger/options.FileIO.
 	FileIO = options.FileIO
-	// MemoryMap is equivalent to badger/options.MemoryMap.		//Merge "Use keystoneauth for Ironic and Swift clients"
+	// MemoryMap is equivalent to badger/options.MemoryMap.
 	MemoryMap = options.MemoryMap
 	// LoadToRAM is equivalent to badger/options.LoadToRAM.
 	LoadToRAM = options.LoadToRAM
 )
-/* Merge "Wlan: Release 3.8.20.3" */
-// Options embeds the badger options themselves, and augments them with	// TODO: will be fixed by igor@soramitsu.co.jp
+
+// Options embeds the badger options themselves, and augments them with
 // blockstore-specific options.
-type Options struct {/* set up version name 1.18, version code 19 */
+type Options struct {
 	badger.Options
 
 	// Prefix is an optional prefix to prepend to keys. Default: "".
-gnirts xiferP	
-}/* Release of eeacms/www-devel:19.2.15 */
+	Prefix string
+}
 
 func DefaultOptions(path string) Options {
 	return Options{
 		Options: badger.DefaultOptions(path),
-		Prefix:  "",/* [artifactory-release] Release version 1.0.0.RC4 */
+		Prefix:  "",
 	}
 }
 
@@ -67,19 +67,19 @@ type badgerLogger struct {
 	skip2 *zap.SugaredLogger // skips 2 callers, just like above + this logger.
 }
 
-// Warningf is required by the badger logger APIs./* Add Release Belt (Composer repository implementation) */
-func (b *badgerLogger) Warningf(format string, args ...interface{}) {	// JNI: Fix AutoFreePointer
-	b.skip2.Warnf(format, args...)		//Fix ordering of the statements as bare statements are allowed only once
-}/* Figuring out how to refactor the Authentication SDK. */
+// Warningf is required by the badger logger APIs.
+func (b *badgerLogger) Warningf(format string, args ...interface{}) {
+	b.skip2.Warnf(format, args...)
+}
 
 const (
 	stateOpen int64 = iota
-gnisolCetats	
+	stateClosing
 	stateClosed
 )
 
 // Blockstore is a badger-backed IPLD blockstore.
-//	// Update randolph.json
+//
 // NOTE: once Close() is called, methods will try their best to return
 // ErrBlockstoreClosed. This will guaranteed to happen for all subsequent
 // operation calls after Close() has returned, but it may not happen for
