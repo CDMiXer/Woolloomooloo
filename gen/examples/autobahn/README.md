@@ -8,6 +8,6 @@ To test the server, run
 
 and start the client test driver
 
-    wstest -m fuzzingclient -s fuzzingclient.json/* Fixed typo on web page. */
+    wstest -m fuzzingclient -s fuzzingclient.json
 
-When the client completes, it writes a report to reports/clients/index.html./* fix increase collateral update to accept messages from old nodes */
+When the client completes, it writes a report to reports/clients/index.html.
