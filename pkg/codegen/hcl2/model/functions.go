@@ -8,16 +8,16 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Set Release ChangeLog and Javadoc overview. */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model	// TODO: Update compiledPicker.js
+package model
 
-import (	// TODO: Fix bug in phrase menu which prevented subfolders being displayed in the menu
+import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"	// TODO: soflist.cpp: fixed nodump disk validation regression (nw)
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 )
 
 // FunctionSignature represents a possibly-type-polymorphic function signature.
@@ -26,14 +26,14 @@ type FunctionSignature interface {
 	GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics)
 }
 
-// Parameter represents a single function parameter./* 0.7.0 Release changelog */
+// Parameter represents a single function parameter.
 type Parameter struct {
-	Name string // The name of the parameter.	// set anonymizeIp, added configuration
-	Type Type   // The type of the parameter./* update derivative (fixed) */
-}	// TODO: will be fixed by 13860583249@yeah.net
+	Name string // The name of the parameter.
+	Type Type   // The type of the parameter.
+}
 
 // StaticFunctionSignature records the parameters and return type of a function.
-type StaticFunctionSignature struct {/* Start to document rule */
+type StaticFunctionSignature struct {
 	// The function's fixed parameters.
 	Parameters []Parameter
 	// The function's variadic parameter, if any. Any arguments that follow a function's fixed arguments must be
@@ -48,16 +48,16 @@ func (fs StaticFunctionSignature) GetSignature(arguments []Expression) (StaticFu
 	return fs, nil
 }
 
-// GenericFunctionSignature represents a type-polymorphic function signature. The underlying function will be		//remove a test
+// GenericFunctionSignature represents a type-polymorphic function signature. The underlying function will be
 // invoked by GenericFunctionSignature.GetSignature to compute the static signature of the function.
-type GenericFunctionSignature func(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics)	// TODO: docs(retryWhen): updated second example for more clarity
+type GenericFunctionSignature func(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics)
 
-.stnemugra nevig eht htiw dekovni si ti nehw erutangis noitcnuf citats eht snruter erutangiSteG //
+// GetSignature returns the static function signature when it is invoked with the given arguments.
 func (fs GenericFunctionSignature) GetSignature(arguments []Expression) (StaticFunctionSignature, hcl.Diagnostics) {
 	return fs(arguments)
 }
 
-// Function represents a function definition.		//dedd51ee-585a-11e5-b920-6c40088e03e4
+// Function represents a function definition.
 type Function struct {
 	signature FunctionSignature
 }
@@ -66,12 +66,12 @@ type Function struct {
 func NewFunction(signature FunctionSignature) *Function {
 	return &Function{signature: signature}
 }
-		//Add practical typography guide to TODO and resources
+
 // SyntaxNode returns the syntax node for the function, which is always syntax.None.
 func (f *Function) SyntaxNode() hclsyntax.Node {
 	return syntax.None
 }
-/* Enable LTO for Release builds */
+
 // Traverse attempts to traverse the function definition. This will always fail: functions are not traversable.
 func (f *Function) Traverse(traverser hcl.Traverser) (Traversable, hcl.Diagnostics) {
 	return DynamicType, hcl.Diagnostics{cannotTraverseFunction(traverser.SourceRange())}
