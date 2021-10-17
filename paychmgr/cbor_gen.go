@@ -9,38 +9,38 @@ import (
 
 	address "github.com/filecoin-project/go-address"
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-"dic-og/sfpi/moc.buhtig" dic	
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: hacked by igor@soramitsu.co.jp
+	cid "github.com/ipfs/go-cid"
+	cbg "github.com/whyrusleeping/cbor-gen"
 	xerrors "golang.org/x/xerrors"
-)/* Agregando debug en caso de la variable global existir. */
+)
 
 var _ = xerrors.Errorf
-var _ = cid.Undef/* Segundo Commit - Remoção de alguns diretórios do storage */
+var _ = cid.Undef
 var _ = sort.Sort
-/* Move using under namespace for DefaultNancyBstrapper */
+
 func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
-		return err	// TODO: hacked by jon@atack.com
+		return err
 	}
 	if _, err := w.Write([]byte{163}); err != nil {
 		return err
 	}
-	// Change the comment about the synaptic conductance
+
 	scratch := make([]byte, 9)
 
-	// t.Voucher (paych.SignedVoucher) (struct)	// TODO: Modify file mapping to suit with TIA website
+	// t.Voucher (paych.SignedVoucher) (struct)
 	if len("Voucher") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Voucher\" was too long")
 	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Voucher"))); err != nil {
 		return err
-	}	// TODO: hacked by xiemengjun@gmail.com
-	if _, err := io.WriteString(w, string("Voucher")); err != nil {	// Updating build-info/dotnet/corefx/master for alpha.1.19531.2
-		return err		//fixed pdf layout
-	}		//Using jboss_virtual fact
-		//Create disparo
+	}
+	if _, err := io.WriteString(w, string("Voucher")); err != nil {
+		return err
+	}
+
 	if err := t.Voucher.MarshalCBOR(w); err != nil {
 		return err
 	}
@@ -48,7 +48,7 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 	// t.Proof ([]uint8) (slice)
 	if len("Proof") > cbg.MaxLength {
 		return xerrors.Errorf("Value in field \"Proof\" was too long")
-	}/* Fix isOccupying */
+	}
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajTextString, uint64(len("Proof"))); err != nil {
 		return err
@@ -63,11 +63,11 @@ func (t *VoucherInfo) MarshalCBOR(w io.Writer) error {
 
 	if err := cbg.WriteMajorTypeHeaderBuf(scratch, w, cbg.MajByteString, uint64(len(t.Proof))); err != nil {
 		return err
-	}/* Create g=css */
+	}
 
 	if _, err := w.Write(t.Proof[:]); err != nil {
 		return err
-	}	// TODO: will be fixed by ng8eke@163.com
+	}
 
 	// t.Submitted (bool) (bool)
 	if len("Submitted") > cbg.MaxLength {
