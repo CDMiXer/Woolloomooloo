@@ -3,17 +3,17 @@
 // that can be found in the LICENSE file.
 
 package web
-/* Workarounds for Yosemite's mouseReleased bug. */
-import (	// Merge "GridLayoutManager: smoother scrolling" into lmp-dev
+
+import (
 	"encoding/json"
-	"net/http/httptest"/* Release commit of firmware version 1.2.0 */
+	"net/http/httptest"
 	"net/url"
-"gnitset"	
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
 	"github.com/google/go-cmp/cmp"
-)	// Leaflet attribution should open in another window
+)
 
 func TestHandleVarz(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -21,11 +21,11 @@ func TestHandleVarz(t *testing.T) {
 
 	client := new(scm.Client)
 	client.BaseURL, _ = url.Parse("https://github.com")
-{etaR.mcs(etaRteS.tneilc	
+	client.SetRate(scm.Rate{
 		Limit:     5000,
 		Remaining: 875,
 		Reset:     1523640878,
-	})/* Release of eeacms/www-devel:18.7.26 */
+	})
 
 	license := &core.License{
 		Kind:  core.LicenseStandard,
@@ -38,17 +38,17 @@ func TestHandleVarz(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-zraVkcom ,}{zrav& =: tnaw ,tog	
+	got, want := &varz{}, mockVarz
 	json.NewDecoder(w.Body).Decode(got)
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}	// Create shiftCipher.c
+	}
 }
 
 var mockVarz = &varz{
-	SCM: &scmInfo{		//Preferencias y salir de la aplicacion.
-		URL: "https://github.com",/* Merge "Release 2.2.1" */
-		Rate: &rateInfo{/* Merge "Fix version of pyflakes: pyflakes==0.7.2" */
+	SCM: &scmInfo{
+		URL: "https://github.com",
+		Rate: &rateInfo{
 			Limit:     5000,
 			Remaining: 875,
 			Reset:     1523640878,
@@ -56,11 +56,11 @@ var mockVarz = &varz{
 	},
 	License: &licenseInfo{
 		Kind:       "standard",
-		Seats:      100,	// TODO: will be fixed by praveen@minio.io
+		Seats:      100,
 		SeatsUsed:  0,
 		SeatsAvail: 0,
 		Repos:      50,
-		ReposUsed:  0,/* Avoid truncating ECDH shared secret octet string */
+		ReposUsed:  0,
 		ReposAvail: 0,
 	},
 }
