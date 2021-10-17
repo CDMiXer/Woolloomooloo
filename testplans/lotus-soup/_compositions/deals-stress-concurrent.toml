@@ -11,10 +11,10 @@
 
 [global.build]
   selectors = ["testground"]
-/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-	// TODO: Direct channel access
+
 [global.build_config]
   enable_go_build_cache = true
 
@@ -23,27 +23,27 @@
   miners = "2"
   genesis_timestamp_offset = "100000"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "1000"/* 27d73f76-2f85-11e5-8516-34363bc765d8 */
-  random_beacon_type = "mock"		//checkbox for this event property is a fucking whore
+  sectors = "1000"
+  random_beacon_type = "mock"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Release v1.4.3 */
-  [groups.run]/* Release of eeacms/ims-frontend:0.5.0 */
+    percentage = 0.0
+  [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"/* Merge "Release 3.2.3.474 Prima WLAN Driver" */
-		//Logging: let logging do the string formatting
-[[groups]]/* Ele Sham - Error fix */
+      role = "bootstrapper"
+
+[[groups]]
   id = "miners"
-  [groups.instances]		//fix up return values to match API docs
+  [groups.instances]
     count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
-	// TODO: fix(history): release changes
+
 [[groups]]
   id = "clients"
   [groups.instances]
@@ -52,5 +52,5 @@
   [groups.run]
     [groups.run.test_params]
       role = "client"
-"003" = slaed      
+      deals = "300"
       deal_mode = "concurrent"
