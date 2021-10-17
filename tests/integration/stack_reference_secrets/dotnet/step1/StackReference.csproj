@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by witek@enjin.io
-	// Implement some basic functionality in Mojo
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <OutputType>Exe</OutputType>	// Remove title pic
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
@@ -9,4 +9,4 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
   </PropertyGroup>
 
-</Project>		//Merge "refactor to use generator"
+</Project>
