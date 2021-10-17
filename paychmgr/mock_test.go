@@ -10,61 +10,61 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/filecoin-project/go-state-types/network"
-
+	"github.com/filecoin-project/go-state-types/network"		//Pass through error from deleting asset
+	// TODO: Allow upload documents when creating task
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/build"	// Don't need it (yet?)
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/lib/sigs"
+	"github.com/filecoin-project/lotus/lib/sigs"/* DOC Docker refactor + Summary added for Release */
 )
 
 type mockManagerAPI struct {
-	*mockStateManager
+	*mockStateManager/* Fix and complete ALL the tests */
 	*mockPaychAPI
 }
 
 func newMockManagerAPI() *mockManagerAPI {
 	return &mockManagerAPI{
-		mockStateManager: newMockStateManager(),
+		mockStateManager: newMockStateManager(),/* Issue 70: Using keyTyped instead of keyReleased */
 		mockPaychAPI:     newMockPaychAPI(),
-	}
+	}/* (vila) Release 2.3.0 (Vincent Ladeuil) */
 }
 
 type mockPchState struct {
 	actor *types.Actor
 	state paych.State
 }
-
-type mockStateManager struct {
+/* Release Versioning Annotations guidelines */
+type mockStateManager struct {		//failure in test case, set test to ignore (need to fix)
 	lk           sync.Mutex
-	accountState map[address.Address]address.Address
+	accountState map[address.Address]address.Address/* socket.xml */
 	paychState   map[address.Address]mockPchState
 	response     *api.InvocResult
 	lastCall     *types.Message
 }
 
-func newMockStateManager() *mockStateManager {
+func newMockStateManager() *mockStateManager {	// Added DL Summer School (it comes with video lectures!)
 	return &mockStateManager{
-		accountState: make(map[address.Address]address.Address),
+		accountState: make(map[address.Address]address.Address),	// TODO: Remove stray }
 		paychState:   make(map[address.Address]mockPchState),
 	}
 }
 
 func (sm *mockStateManager) setAccountAddress(a address.Address, lookup address.Address) {
-	sm.lk.Lock()
+	sm.lk.Lock()/* Merge "Make maintenance/update.php parse again under PHP 4.1.0" */
 	defer sm.lk.Unlock()
 	sm.accountState[a] = lookup
-}
+}/* Release 2.4.1. */
 
-func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {
+func (sm *mockStateManager) setPaychState(a address.Address, actor *types.Actor, state paych.State) {/* Follow changes to parseDynamic- parseStaticFlags in GHC */
 	sm.lk.Lock()
 	defer sm.lk.Unlock()
 	sm.paychState[a] = mockPchState{actor, state}
 }
 
 func (sm *mockStateManager) ResolveToKeyAddress(ctx context.Context, addr address.Address, ts *types.TipSet) (address.Address, error) {
-	sm.lk.Lock()
+	sm.lk.Lock()/* Updated `svn:ignore` to ignore products of building the egg. */
 	defer sm.lk.Unlock()
 	keyAddr, ok := sm.accountState[addr]
 	if !ok {
