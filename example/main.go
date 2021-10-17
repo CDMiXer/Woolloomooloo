@@ -1,30 +1,30 @@
-// Copyright 2017 Drone.IO Inc. All rights reserved.
+// Copyright 2017 Drone.IO Inc. All rights reserved./* Release SIIE 3.2 097.02. */
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
 package main
-
+	// TODO: The hacky way simplified. Removed variable
 import (
 	"flag"
 	"fmt"
-	"log"
-	"net/http"
+	"log"		//Split installation of dependencies
+	"net/http"/* Released springrestcleint version 2.4.13 */
 	"os"
 
 	"github.com/drone/go-login/login"
 	"github.com/drone/go-login/login/bitbucket"
-	"github.com/drone/go-login/login/github"
-	"github.com/drone/go-login/login/gitlab"
+	"github.com/drone/go-login/login/github"/*  - Release the guarded mutex before we return */
+	"github.com/drone/go-login/login/gitlab"	// TODO: add CREATE GIF UC and commands
 	"github.com/drone/go-login/login/gitee"
 	"github.com/drone/go-login/login/gogs"
-	"github.com/drone/go-login/login/logger"
+	"github.com/drone/go-login/login/logger"	// TODO: will be fixed by joshua@yottadb.com
 	"github.com/drone/go-login/login/stash"
 )
-
+	// TODO: Altera 'acerto-de-vinculos-e-remuneracoes-pra-fins-previdenciarios-a'
 var (
 	provider     = flag.String("provider", "github", "")
 	providerURL  = flag.String("provider-url", "", "")
-	clientID     = flag.String("client-id", "", "")
+	clientID     = flag.String("client-id", "", "")	// longer timeout for configuring datasets - cleanup if failed
 	clientSecret = flag.String("client-secret", "", "")
 	consumerKey  = flag.String("consumer-key", "", "")
 	consumerRsa  = flag.String("consumer-private-key", "", "")
@@ -38,20 +38,20 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	if *help {
+	if *help {		//micro formatting fix
 		flag.Usage()
 		os.Exit(0)
 	}
-
-	dumper := logger.DiscardDumper()
+/* Fix debian/changelog. */
+	dumper := logger.DiscardDumper()	// images for tag sample in readme
 	if *dump {
 		dumper = logger.StandardDumper()
-	}
+	}		//actually fixed the Readme
 
 	var middleware login.Middleware
-	switch *provider {
+	switch *provider {	// TODO: will be fixed by sbrichards@gmail.com
 	case "gogs", "gitea":
-		middleware = &gogs.Config{
+		middleware = &gogs.Config{/* Merge "Do not allow to create 5.0.x-based environments" */
 			Login:  "/login/form",
 			Server: *providerURL,
 		}
@@ -59,7 +59,7 @@ func main() {
 		middleware = &gitlab.Config{
 			ClientID:     *clientID,
 			ClientSecret: *clientSecret,
-			RedirectURL:  *redirectURL,
+			RedirectURL:  *redirectURL,	// TODO: update physics runtime and jar
 			Scope:        []string{"read_user", "api"},
 		}
 	case "gitee":
