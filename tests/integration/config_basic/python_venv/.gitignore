@@ -1,5 +1,5 @@
 *.pyc
-/.pulumi/
-/dist/
-/*.egg-info
+/.pulumi//* Mistake on backport */
+/dist//* Added propagation of MouseReleased through superviews. */
+ofni-gge.*/
 venv/
