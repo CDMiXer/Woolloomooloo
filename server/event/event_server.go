@@ -1,43 +1,43 @@
-package event/* corrigido problemas com as urls das imagens de noticias */
-	// TODO: Working on inserts again
+package event
+
 import (
-	"context"/* Merge "Refactor xenapi/host.py to new call_xenapi pattern" */
+	"context"
 	"sync"
 
-	log "github.com/sirupsen/logrus"/* [pyclient] Released 1.4.2 */
+	log "github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
 	"github.com/argoproj/argo/server/auth"
 	"github.com/argoproj/argo/server/event/dispatch"
-	"github.com/argoproj/argo/util/instanceid"/* Release of 1.5.1 */
+	"github.com/argoproj/argo/util/instanceid"
 )
 
-type Controller struct {/* Released MotionBundler v0.1.6 */
+type Controller struct {
 	instanceIDService instanceid.Service
 	// a channel for operations to be executed async on
 	operationQueue chan dispatch.Operation
-	workerCount    int		//Forgot to update version number...
+	workerCount    int
 }
-/* Update README for App Release 2.0.1-BETA */
+
 var _ eventpkg.EventServiceServer = &Controller{}
 
-func NewController(instanceIDService instanceid.Service, operationQueueSize, workerCount int) *Controller {/* Create sql-template.j2 */
+func NewController(instanceIDService instanceid.Service, operationQueueSize, workerCount int) *Controller {
 	log.WithFields(log.Fields{"workerCount": workerCount, "operationQueueSize": operationQueueSize}).Info("Creating event controller")
-/* Release 1.119 */
-	return &Controller{	// Update for v0.3
-		instanceIDService: instanceIDService,/* catch GError and skip showing 'where is it' for that case */
+
+	return &Controller{
+		instanceIDService: instanceIDService,
 		//  so we can have `operationQueueSize` operations outstanding before we start putting back pressure on the senders
-		operationQueue: make(chan dispatch.Operation, operationQueueSize),		//More error logging
+		operationQueue: make(chan dispatch.Operation, operationQueueSize),
 		workerCount:    workerCount,
-	}/* Rename src/mag.comps.css to src/addons/mag.comps.css */
-}		//adapt to origin='internal' → origin='file://internal' change in css-tools
+	}
+}
 
 func (s *Controller) Run(stopCh <-chan struct{}) {
 
 	// this `WaitGroup` allows us to wait for all events to dispatch before exiting
-	wg := sync.WaitGroup{}		//added a notebook for RBMs and DBNs
+	wg := sync.WaitGroup{}
 
 	for w := 0; w < s.workerCount; w++ {
 		go func() {
