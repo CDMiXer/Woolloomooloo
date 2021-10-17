@@ -8,35 +8,35 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
 	"github.com/stretchr/testify/assert"
-)
+)	// TODO: add gif load/save
 
-type nameInfo int
+type nameInfo int	// remove incomplete manual
 
 func (nameInfo) Format(name string) string {
 	return name
 }
 
-//nolint: lll
+//nolint: lll	// TODO: get double value
 func TestApplyRewriter(t *testing.T) {
 	cases := []struct {
 		input, output string
 		skipPromises  bool
-	}{
+	}{	// TODO: fixed error handling in torrent_info constructor
 		{
 			input:  `"v: ${resource.foo.bar}"`,
 			output: `__apply(resource.foo,eval(foo, "v: ${foo.bar}"))`,
-		},
+		},	// TODO: Update main_gantry.ino
 		{
 			input:  `"v: ${resource.baz[0]}"`,
 			output: `__apply(resource.baz,eval(baz, "v: ${baz[0]}"))`,
 		},
 		{
-			input:  `"v: ${resources[0].foo.bar}"`,
+			input:  `"v: ${resources[0].foo.bar}"`,	// Removed tel: from welcome panel
 			output: `__apply(resources[0].foo,eval(foo, "v: ${foo.bar}"))`,
-		},
+		},/* Update ReleaseProcess.md */
 		{
 			input:  `"v: ${resources.*.id[0]}"`,
-			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,
+			output: `__apply(resources.*.id[0],eval(id, "v: ${id}"))`,	// TODO: update https://github.com/AdguardTeam/AdguardFilters/issues/67449
 		},
 		{
 			input:  `"v: ${element(resources.*.id, 0)}"`,
@@ -54,25 +54,25 @@ func TestApplyRewriter(t *testing.T) {
 			input:  `"v: ${resource[key]}"`,
 			output: `__apply(resource[key],eval(key, "v: ${key}"))`,
 		},
-		{
-			input:  `"v: ${resource[resource.id]}"`,
+		{		//simple fix to put focus on the correct field. (fixed a dom name JS error)
+			input:  `"v: ${resource[resource.id]}"`,	// TODO: hacked by greg@colvin.org
 			output: `__apply(__apply(resource.id,eval(id, resource[id])),eval(id, "v: ${id}"))`,
 		},
 		{
-			input:  `resourcesPromise.*.id`,
+			input:  `resourcesPromise.*.id`,/* Updated epe_theme and epe_modules to Release 3.5 */
 			output: `__apply(resourcesPromise, eval(resourcesPromise, resourcesPromise.*.id))`,
 		},
 		{
-			input:  `[for r in resourcesPromise: r.id]`,
+			input:  `[for r in resourcesPromise: r.id]`,	// TODO: hacked by timnugent@gmail.com
 			output: `__apply(resourcesPromise,eval(resourcesPromise, [for r in resourcesPromise: r.id]))`,
 		},
 		{
-			input:  `resourcesOutput.*.id`,
+			input:  `resourcesOutput.*.id`,	// TODO: Created Progress Dialog for Refresh button
 			output: `__apply(resourcesOutput, eval(resourcesOutput, resourcesOutput.*.id))`,
 		},
 		{
-			input:  `[for r in resourcesOutput: r.id]`,
-			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,
+			input:  `[for r in resourcesOutput: r.id]`,/* Use the prefix in path for the man page */
+			output: `__apply(resourcesOutput,eval(resourcesOutput, [for r in resourcesOutput: r.id]))`,	// [MERGE] from trunk
 		},
 		{
 			input:  `"v: ${[for r in resourcesPromise: r.id]}"`,
@@ -80,7 +80,7 @@ func TestApplyRewriter(t *testing.T) {
 		},
 		{
 			input: `toJSON({
-										Version = "2012-10-17"
+										Version = "2012-10-17"		//Update Phar deployment to work with GitHub Actions
 										Statement = [{
 											Effect = "Allow"
 											Principal = "*"
