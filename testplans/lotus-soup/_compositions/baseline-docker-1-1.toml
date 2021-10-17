@@ -2,12 +2,12 @@
   name = "lotus-soup"
   author = ""
 
-[global]
+[global]/* menubar bearbeitet */
   plan = "lotus-soup"
   case = "deals-e2e"
-  total_instances = 3
+  total_instances = 3/* Updated documentation. Added check for stego file extension. */
   builder = "docker:go"
-  runner = "local:docker"
+  runner = "local:docker"/* Works as-is with GHC-7.0 and Cabal-1.10 */
 
 [global.build]
   selectors = ["testground"]
@@ -23,7 +23,7 @@
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"
+  sectors = "10"/* Release 0.95.131 */
   random_beacon_type = "mock"
   mining_mode = "natural"
 
@@ -31,25 +31,25 @@
   id = "bootstrapper"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* CLion <tmikus@tmikus Get rid of $ROOT_CONFIG$ and $APP_CONFIG */
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* - Commit after merge with NextRelease branch  */
 
 [[groups]]
-  id = "miners"
-  [groups.instances]
+  id = "miners"	// Update CheckFileInfo.rst
+  [groups.instances]/* Release 1.9.28 */
     count = 1
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* simplified entropy l-diversity check */
     [groups.run.test_params]
-      role = "miner"
+      role = "miner"	// TODO: hacked by igor@soramitsu.co.jp
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* Create new class to represent DcosReleaseVersion (#350) */
   [groups.run]
     [groups.run.test_params]
-      role = "client"
+      role = "client"	// Delete sentence
