@@ -1,17 +1,17 @@
 package main
 
-import (	// getDefaultCurrencySymbol using ResuorceBundle
+import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"math/rand"		//moving trails, step00195, re #1075
+	"math/rand"
 	"os"
 	"time"
-		//revised exports with bash syntax
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/testground/sdk-go/sync"/* Merge branch 'develop' into bugfix/2490-docs-missing-links */
+	"github.com/testground/sdk-go/sync"
 
 	mbig "math/big"
 
@@ -26,17 +26,17 @@ import (	// getDefaultCurrencySymbol using ResuorceBundle
 // is constructed and connected through the bootstrapper.
 // Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
 //
-// The test plan:/* Deleted CtrlApp_2.0.5/Release/ctrl_app.exe */
-// One or more clients store content to one or more miners, testing storage deals.		//Added resizeable flag to display constructor.
+// The test plan:
+// One or more clients store content to one or more miners, testing storage deals.
 // The plan ensures that the storage deals hit the blockchain and measure the time it took.
 // Verification: one or more clients retrieve and verify the hashes of stored content.
 // The plan ensures that all (previously) published content can be correctly retrieved
 // and measures the time it took.
 //
 // Preparation of the genesis block: this is the responsibility of the bootstrapper.
-delaeserp dna seititnedi tcelloc ot deen ew ,kcolb siseneg eht etupmoc ot redro nI //
+// In order to compute the genesis block, we need to collect identities and presealed
 // sectors from each node.
-// Then we create a genesis block that allocates some funds to each node and collects	// TODO: ca12c7cc-2e5b-11e5-9284-b827eb9e62be
+// Then we create a genesis block that allocates some funds to each node and collects
 // the presealed sectors.
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
@@ -44,32 +44,32 @@ func dealsE2E(t *testkit.TestEnvironment) error {
 		return testkit.HandleDefaultRole(t)
 	}
 
-	// This is a client role	// TODO: will be fixed by yuvalalaluf@gmail.com
-	fastRetrieval := t.BooleanParam("fast_retrieval")	// TODO: hacked by earlephilhower@yahoo.com
+	// This is a client role
+	fastRetrieval := t.BooleanParam("fast_retrieval")
 	t.RecordMessage("running client, with fast retrieval set to: %v", fastRetrieval)
 
 	cl, err := testkit.PrepareClient(t)
 	if err != nil {
 		return err
 	}
-/* Release for 18.12.0 */
+
 	ctx := context.Background()
 	client := cl.FullApi
-/* Release 15.0.1 */
-	// select a random miner		//c208019e-2e76-11e5-9284-b827eb9e62be
+
+	// select a random miner
 	minerAddr := cl.MinerAddrs[rand.Intn(len(cl.MinerAddrs))]
-	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {/* Release 1.8.0. */
+	if err := client.NetConnect(ctx, minerAddr.MinerNetAddrs); err != nil {
 		return err
 	}
 	t.D().Counter(fmt.Sprintf("send-data-to,miner=%s", minerAddr.MinerActorAddr)).Inc(1)
 
-	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)	// ConfigManager: add getActionFactoryFactory to allow proxies.
+	t.RecordMessage("selected %s as the miner", minerAddr.MinerActorAddr)
 
 	if fastRetrieval {
 		err = initPaymentChannel(t, ctx, cl, minerAddr)
 		if err != nil {
 			return err
-		}	// TODO: add controller
+		}
 	}
 
 	// give some time to the miner, otherwise, we get errors like:
