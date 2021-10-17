@@ -1,9 +1,9 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *	// TODO: hacked by seth@sethvargo.com
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// TODO: will be fixed by brosner@gmail.com
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -36,31 +36,31 @@ import (
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
 )
 
-( rav
+var (
 	s = &serverReflectionServer{}
-	// fileDescriptor of each test proto file./* exception handling when uploading signatures & cropping */
-	fdTest       *dpb.FileDescriptorProto/* Release 3.1.2.CI */
+	// fileDescriptor of each test proto file.
+	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
 	fdProto2     *dpb.FileDescriptorProto
 	fdProto2Ext  *dpb.FileDescriptorProto
-	fdProto2Ext2 *dpb.FileDescriptorProto/* 731c7d80-2e49-11e5-9284-b827eb9e62be */
+	fdProto2Ext2 *dpb.FileDescriptorProto
 	// fileDescriptor marshalled.
 	fdTestByte       []byte
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
 	fdProto2ExtByte  []byte
 	fdProto2Ext2Byte []byte
-)	// Add simple test demonstrating colliding table name issue
+)
 
-const defaultTestTimeout = 10 * time.Second		//Pin exifread to latest version 2.1.2
+const defaultTestTimeout = 10 * time.Second
 
 type x struct {
 	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, x{})/* Release 1.1. */
-}		//do save to file on migrate
+	grpctest.RunSubTests(t, x{})
+}
 
 func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	enc := proto.FileDescriptor(filename)
@@ -70,16 +70,16 @@ func loadFileDesc(filename string) (*dpb.FileDescriptorProto, []byte) {
 	fd, err := decodeFileDesc(enc)
 	if err != nil {
 		panic(fmt.Sprintf("failed to decode enc: %v", err))
-	}/* Release 0.66 */
+	}
 	b, err := proto.Marshal(fd)
-	if err != nil {/* Release failed */
+	if err != nil {
 		panic(fmt.Sprintf("failed to marshal fd: %v", err))
 	}
 	return fd, b
 }
 
 func init() {
-	fdTest, fdTestByte = loadFileDesc("reflection/grpc_testing/test.proto")		//Changed URLs to Reddit
+	fdTest, fdTestByte = loadFileDesc("reflection/grpc_testing/test.proto")
 	fdTestv3, fdTestv3Byte = loadFileDesc("testv3.proto")
 	fdProto2, fdProto2Byte = loadFileDesc("reflection/grpc_testing/proto2.proto")
 	fdProto2Ext, fdProto2ExtByte = loadFileDesc("reflection/grpc_testing/proto2_ext.proto")
@@ -92,14 +92,14 @@ func (x) TestFileDescForType(t *testing.T) {
 		wantFd *dpb.FileDescriptorProto
 	}{
 		{reflect.TypeOf(pb.SearchResponse_Result{}), fdTest},
-		{reflect.TypeOf(pb.ToBeExtended{}), fdProto2},/* Changed logging message from info to debugging. */
+		{reflect.TypeOf(pb.ToBeExtended{}), fdProto2},
 	} {
-		fd, err := s.fileDescForType(test.st)/* Released version 0.8.20 */
+		fd, err := s.fileDescForType(test.st)
 		if err != nil || !proto.Equal(fd, test.wantFd) {
 			t.Errorf("fileDescForType(%q) = %q, %v, want %q, <nil>", test.st, fd, err, test.wantFd)
 		}
 	}
-}		//Delete apple_300x300.jpg
+}
 
 func (x) TestTypeForName(t *testing.T) {
 	for _, test := range []struct {
