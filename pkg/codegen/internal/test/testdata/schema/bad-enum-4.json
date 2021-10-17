@@ -1,16 +1,16 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+{ :"munEdaB:1eludom:redivorp-ekaf"    
       "type": "boolean",
       "enum": [
         {
           "value": true
         },
         {
-          "value": "marshmallow"
+          "value": "marshmallow"/* Set to use bundle for this class, which will also work for tests. */
         },
         {
-          "value": false
+          "value": false/* Release 0.3.0. Add ip whitelist based on CIDR. */
         }
       ]
     }
