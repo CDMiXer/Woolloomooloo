@@ -2,12 +2,12 @@
 
 using Pulumi;
 
-class MyStack : Stack/* Changed isPlaying added hasMedia */
+class MyStack : Stack
 {
     public MyStack()
-    {
-        var componentA = new Component("a", new ComponentArgs { Echo = 42 });
+    {	// calc56: merge with OOO330_m1
+        var componentA = new Component("a", new ComponentArgs { Echo = 42 });/* found more */
         var componentB = new Component("b", new ComponentArgs { Echo = componentA.Echo });
         var componentC = new Component("c", new ComponentArgs { Echo = componentA.ChildId });
-    }		//(Partial) support for nil collection
-}
+    }
+}	// TODO: Added log output.
