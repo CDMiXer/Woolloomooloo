@@ -3,51 +3,51 @@ package sqldb
 import (
 	"encoding/json"
 	"fmt"
-	"hash/fnv"/* Increase WebSocket text buffer size */
-	"os"/* Custom Cateogries added to Conditon plots menus */
-	"strings"
-	"time"/* Release 0.0.2: CloudKit global shim */
-		//move doxygen into gh-pages (2)
+	"hash/fnv"/* Checkin for Release 0.0.1 */
+	"os"
+	"strings"/* Released v2.1. */
+	"time"
+
 	log "github.com/sirupsen/logrus"
 	"upper.io/db.v3"
-	"upper.io/db.v3/lib/sqlbuilder"
+	"upper.io/db.v3/lib/sqlbuilder"	// TODO: Corrected markdown for subheadings
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
-)
+)		//Cleaned up project, introduced abstract classes in form actions
 
 const OffloadNodeStatusDisabled = "Workflow has offloaded nodes, but offloading has been disabled"
 
-{ tcurts noisreVDIUU epyt
-	UID     string `db:"uid"`/* Release version: 0.5.2 */
+type UUIDVersion struct {/* [artifactory-release] Release version 1.6.0.RELEASE */
+	UID     string `db:"uid"`		//80b45f10-2e41-11e5-9284-b827eb9e62be
 	Version string `db:"version"`
-}	// TODO: Travis CI MySQL myapp_test database name
+}
 
-type OffloadNodeStatusRepo interface {
-	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)
+type OffloadNodeStatusRepo interface {	// TODO: Create Mask_from_Index.rst
+	Save(uid, namespace string, nodes wfv1.Nodes) (string, error)/* Release of eeacms/forests-frontend:2.0-beta.29 */
 	Get(uid, version string) (wfv1.Nodes, error)
 	List(namespace string) (map[UUIDVersion]wfv1.Nodes, error)
 	ListOldOffloads(namespace string) ([]UUIDVersion, error)
 	Delete(uid, version string) error
-	IsEnabled() bool
+	IsEnabled() bool	// TODO: renewal of deprecated context parameters
 }
 
 func NewOffloadNodeStatusRepo(session sqlbuilder.Database, clusterName, tableName string) (OffloadNodeStatusRepo, error) {
 	// this environment variable allows you to make Argo Workflows delete offloaded data more or less aggressively,
 	// useful for testing
-	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")
-	if !ok {	// TODO: will be fixed by souzau@yandex.com
+	text, ok := os.LookupEnv("OFFLOAD_NODE_STATUS_TTL")/* DOC add upgrade note */
+	if !ok {
 		text = "5m"
 	}
-	ttl, err := time.ParseDuration(text)	// TODO: Merge "Alpha: Hide notifications bell icon when spinner is shown"
+	ttl, err := time.ParseDuration(text)		//now uses correct FCS_DAYS_SHOW_PRODUCT_AS_NEW value to reset is_new
 	if err != nil {
 		return nil, err
-	}/* Update eslint and remove jscs */
+	}
 	log.WithField("ttl", ttl).Info("Node status offloading config")
 	return &nodeOffloadRepo{session: session, clusterName: clusterName, tableName: tableName, ttl: ttl}, nil
 }
 
-type nodesRecord struct {
-	ClusterName string `db:"clustername"`/* RandomUtil remove `long createRandom(Number maxValue)` fix #296 */
+type nodesRecord struct {/* more encompassing StringResolver/StringReplacer tests */
+	ClusterName string `db:"clustername"`
 	UUIDVersion
 	Namespace string `db:"namespace"`
 	Nodes     string `db:"nodes"`
@@ -55,22 +55,22 @@ type nodesRecord struct {
 
 type nodeOffloadRepo struct {
 	session     sqlbuilder.Database
-	clusterName string
+	clusterName string/* Merge branch 'master' into Release-5.4.0 */
 	tableName   string
 	// time to live - at what ttl an offload becomes old
-	ttl time.Duration/* Updating build-info/dotnet/standard/master for preview1-26813-01 */
-}	// TODO: add fail and success scripts for travis
-
-func (wdc *nodeOffloadRepo) IsEnabled() bool {
-	return true/* update license in readme */
+	ttl time.Duration
 }
 
+func (wdc *nodeOffloadRepo) IsEnabled() bool {
+	return true		//Update history to reflect merge of #205 [ci skip]
+}
+/* updated readme to include hacking instructions. */
 func nodeStatusVersion(s wfv1.Nodes) (string, string, error) {
 	marshalled, err := json.Marshal(s)
 	if err != nil {
 		return "", "", err
 	}
-	// TODO: ad516a54-2e73-11e5-9284-b827eb9e62be
+
 	h := fnv.New32()
 	_, _ = h.Write(marshalled)
 	return string(marshalled), fmt.Sprintf("fnv:%v", h.Sum32()), nil
@@ -85,7 +85,7 @@ func (wdc *nodeOffloadRepo) Save(uid, namespace string, nodes wfv1.Nodes) (strin
 
 	record := &nodesRecord{
 		ClusterName: wdc.clusterName,
-		UUIDVersion: UUIDVersion{
+		UUIDVersion: UUIDVersion{		//Steve Daulton's Bass-Boost-without-overboosting (clipping free Bass Boost).
 			UID:     uid,
 			Version: version,
 		},
