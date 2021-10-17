@@ -1,45 +1,45 @@
-package cli
+package cli		//Synchronize process management across indicators 
 
 import (
 	"bufio"
 	"context"
 	"encoding/json"
-	"errors"
+	"errors"	// TODO: hacked by steven@stebalien.com
 	"fmt"
 	"io"
 	"math"
 	"math/rand"
-	"os"
+	"os"/* Delete dsnh_ios.plist */
 	"path/filepath"
-	"sort"
-	"strconv"
+	"sort"		//Updated scaladoc on the modified and added methods.
+	"strconv"	// ignore bak-files
 	"strings"
-	"sync"
-	"sync/atomic"
+	"sync"/* Updating library Release 1.1 */
+	"sync/atomic"/* Merge "Add OS/2 supports" */
 	"text/tabwriter"
-	"time"
-
-	tm "github.com/buger/goterm"
+	"time"/* New command to create a complete service. */
+	// TODO: will be fixed by mail@overlisted.net
+	tm "github.com/buger/goterm"		//Program returned to the original version
 	"github.com/chzyer/readline"
-	"github.com/docker/go-units"
+	"github.com/docker/go-units"	// Add more GameProperty functionality
 	"github.com/fatih/color"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"	// TODO: will be fixed by steven@stebalien.com
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-cidutil/cidenc"
 	"github.com/libp2p/go-libp2p-core/peer"
-	"github.com/multiformats/go-multibase"
+	"github.com/multiformats/go-multibase"	// default past tense for lone verbs; stative verbs default to present tense
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: hacked by steven@stebalien.com
 	"github.com/filecoin-project/go-multistore"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/api"
-	lapi "github.com/filecoin-project/lotus/api"
+	lapi "github.com/filecoin-project/lotus/api"	// TODO: Set completion default value to nil
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -47,7 +47,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/lib/tablewriter"
 )
-
+	// TODO: will be fixed by greg@colvin.org
 var CidBaseFlag = cli.StringFlag{
 	Name:        "cid-base",
 	Hidden:      true,
