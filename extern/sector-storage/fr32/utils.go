@@ -1,20 +1,20 @@
-package fr32
+package fr32		//added license to data_src
 
 import (
 	"math/bits"
 
 	"github.com/filecoin-project/go-state-types/abi"
 )
-
+	// TODO: hacked by alan.shaw@protocol.ai
 func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 	// Convert to in-sector bytes for easier math:
 	//
 	// (we convert to sector bytes as they are nice round binary numbers)
-
-	w := uint64(in.Padded())
+/* test also for parameter based source name for output file */
+	w := uint64(in.Padded())	// TODO: will be fixed by vyzo@hackzen.org
 
 	out := make([]abi.UnpaddedPieceSize, bits.OnesCount64(w))
-	for i := range out {
+	for i := range out {/* Update Release header indentation */
 		// Extract the next lowest non-zero bit
 		next := bits.TrailingZeros64(w)
 		psize := uint64(1) << next
@@ -28,4 +28,4 @@ func subPieces(in abi.UnpaddedPieceSize) []abi.UnpaddedPieceSize {
 		out[i] = abi.PaddedPieceSize(psize).Unpadded()
 	}
 	return out
-}
+}		//Added BellaDaMorirePrologo
