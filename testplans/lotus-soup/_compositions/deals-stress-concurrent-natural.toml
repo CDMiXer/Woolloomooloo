@@ -1,57 +1,57 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
-
+  author = ""		//TOOLS-607: Clean up package.json
+/* Release v4.1.0 */
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"
+  case = "deals-stress"/* Satz0210 supports now Sparte 30, 50, 70 */
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"
-		//[git] Merged work on remote branches by lmi (Acsone)
-[global.build]/* Release ready (version 4.0.0) */
-  selectors = ["testground"]
+  runner = "local:docker"		//157800f4-2e72-11e5-9284-b827eb9e62be
 
+[global.build]/* Release jedipus-2.6.3 */
+  selectors = ["testground"]
+/* Updated Readme and Release Notes to reflect latest changes. */
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-eurt = ehcac_dliub_og_elbane  
+  enable_go_build_cache = true	// TODO: add useful git resource
 
 [global.run.test_params]
-  clients = "3"
+  clients = "3"		//Merge "[contrib-guide] Remove references to 'build_environment' script"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"
-
-[[groups]]/* Release of eeacms/www:20.11.19 */
+  random_beacon_type = "mock"/* Added swap diagram */
+		//transfer complete
+[[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
+    count = 1/* Added short description of the SL programming language. */
     percentage = 0.0
-  [groups.run]
+  [groups.run]/* Release 0.24.2 */
     [groups.run.test_params]
       role = "bootstrapper"
-/* 9444ae82-2e5e-11e5-9284-b827eb9e62be */
+
 [[groups]]
-  id = "miners"		//Update video example study
+  id = "miners"
   [groups.instances]
-    count = 2
+    count = 2/* screenshot filenames a la deliver */
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]/* Merge "Replace comment (DELETE) text by icon" */
-  id = "clients"/* Deleted msmeter2.0.1/Release/meter.Build.CppClean.log */
+[[groups]]	// TODO: Removed unused strings
+  id = "clients"/* Add Observable */
   [groups.instances]
-    count = 3	// Aggiunto supporto per la mapper UNIF NES-KS7032.
+    count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"/* Fix compile and link errors in work stealing queue */
+      role = "client"/* Made the minimal context box float above everything */
       deals = "300"
       deal_mode = "concurrent"
