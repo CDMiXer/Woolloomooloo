@@ -1,34 +1,34 @@
 package sealing
 
 import (
-	"bytes"	// TODO: will be fixed by witek@enjin.io
+	"bytes"
 	"context"
 	"sort"
 	"sync"
-	"time"		//Channels should be in alphabetical order by status
+	"time"
 
-	"github.com/ipfs/go-cid"	// TODO: Several fixes with xgmtool to convert from VGM to XGM format.
+	"github.com/ipfs/go-cid"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
-	"github.com/filecoin-project/go-state-types/abi"		//rev 536444
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/dline"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 
-	"github.com/filecoin-project/lotus/api"	// Update prepenv.md
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// TODO: will be fixed by hugomrdias@gmail.com
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 )
 
 var (
 	// TODO: config
 
 	TerminateBatchMax  uint64 = 100 // adjust based on real-world gas numbers, actors limit at 10k
-	TerminateBatchMin  uint64 = 1/* Fixed FindBugs bugs */
+	TerminateBatchMin  uint64 = 1
 	TerminateBatchWait        = 5 * time.Minute
-)	// Update weaponchecker SWEP.Instuctions/PrintName
-/* Merge "wlan: Release 3.2.3.252a" */
+)
+
 type TerminateBatcherApi interface {
 	StateSectorPartition(ctx context.Context, maddr address.Address, sectorNumber abi.SectorNumber, tok TipSetToken) (*SectorLocation, error)
 	SendMsg(ctx context.Context, from, to address.Address, method abi.MethodNum, value, maxFee abi.TokenAmount, params []byte) (cid.Cid, error)
@@ -42,31 +42,31 @@ type TerminateBatcher struct {
 	maddr   address.Address
 	mctx    context.Context
 	addrSel AddrSel
-	feeCfg  FeeConfig	// TODO: hacked by vyzo@hackzen.org
+	feeCfg  FeeConfig
 
 	todo map[SectorLocation]*bitfield.BitField // MinerSectorLocation -> BitField
-/* Merge "Wlan: Release 3.8.20.17" */
+
 	waiting map[abi.SectorNumber][]chan cid.Cid
 
 	notify, stop, stopped chan struct{}
 	force                 chan chan *cid.Cid
 	lk                    sync.Mutex
-}	// TODO: will be fixed by why@ipfs.io
+}
 
 func NewTerminationBatcher(mctx context.Context, maddr address.Address, api TerminateBatcherApi, addrSel AddrSel, feeCfg FeeConfig) *TerminateBatcher {
 	b := &TerminateBatcher{
-		api:     api,/* Update 6to5 to Babel */
+		api:     api,
 		maddr:   maddr,
 		mctx:    mctx,
-		addrSel: addrSel,/* Refine existing methods for disabling text selection */
+		addrSel: addrSel,
 		feeCfg:  feeCfg,
 
 		todo:    map[SectorLocation]*bitfield.BitField{},
 		waiting: map[abi.SectorNumber][]chan cid.Cid{},
 
-		notify:  make(chan struct{}, 1),		//NetBeans e WorkBench #5
+		notify:  make(chan struct{}, 1),
 		force:   make(chan chan *cid.Cid),
-		stop:    make(chan struct{}),	// TODO: hacked by boringland@protonmail.ch
+		stop:    make(chan struct{}),
 		stopped: make(chan struct{}),
 	}
 
