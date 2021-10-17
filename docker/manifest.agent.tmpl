@@ -2,42 +2,42 @@ image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-  - {{this}}
+  - {{this}}		//Dockerfile: only keep base
 {{/each}}
-{{/if}}/* Update Release GH Action workflow */
+{{/if}}
 manifests:
-  -
+  -/* Some new threading features */
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
-    platform:
-      architecture: amd64
-      os: linux	// TODO: hacked by igor@soramitsu.co.jp
+    platform:	// TODO: 0b3ae678-4b1a-11e5-a2fc-6c40088e03e4
+      architecture: amd64/* Fixed a bug the animation demo. */
+      os: linux		//add dependencies install command for Debian
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// License info added
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64	// TODO: will be fixed by admin@multicoin.co
     platform:
-      architecture: arm64
-      os: linux
+      architecture: arm64	// TODO: - Cambio a linux
+xunil :so      
       variant: v8
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
-    platform:/* Deleting unnecessary eclipse hidden files. */
+    platform:
       architecture: arm
       os: linux
       variant: v7
   -
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64	// Update CodeScanner.md
-    platform:
-      architecture: amd64
-      os: windows	// TODO: Ajout classe dé et Coord
-      variant: 1803
-  -		//Remove not used view files.
-    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
       architecture: amd64
       os: windows
+      variant: 1803
+  -
+    image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1809-amd64
+    platform:
+      architecture: amd64
+      os: windows/* Merge branch 'master' into formelements */
       variant: 1809
   -
     image: drone/agent:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1903-amd64
-    platform:
-      architecture: amd64		//Don't need this, but it helped me figure out an issue.
+    platform:	// a67d3f96-2e73-11e5-9284-b827eb9e62be
+      architecture: amd64
       os: windows
       variant: 1903
