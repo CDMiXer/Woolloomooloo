@@ -1,16 +1,16 @@
-{	// Bugfix dataset loading
+{		//trying to fix a weird update problem
   "types": {
-    "fake-provider:module1:BadEnum": {		//Updated readme file (placeholder)
+    "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
-        {
+        {	// TODO: will be fixed by alan.shaw@protocol.ai
           "value": 1
         },
         {
           "value": 2
-        },
+        },/* [Docs] fix sitemap */
         {
-          "value": 3
+          "value": 3/* waitq: waitq and sched_switch refactoring */
         },
         {
           "value": 9.1
@@ -18,4 +18,4 @@
       ]
     }
   }
-}
+}/* JPA Archetype Release */
