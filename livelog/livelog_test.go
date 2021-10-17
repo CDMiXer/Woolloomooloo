@@ -9,19 +9,19 @@ package livelog
 import (
 	"context"
 	"sync"
-	"testing"
+	"testing"/* Refactored bootstrap code into plugin. Integrated factory loader into factories */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"	// README: Adjust "see below" link
 
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestStreamer(t *testing.T) {
-	s := New().(*streamer)
+	s := New().(*streamer)	// TODO: Don't modify the stack when there are too few operands
 	err := s.Create(context.Background(), 1)
 	if err != nil {
 		t.Error(err)
-	}
+	}/* Immediate Release for Critical Bug related to last commit. (1.0.1) */
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
 	}
@@ -32,8 +32,8 @@ func TestStreamer(t *testing.T) {
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
 		s.Write(context.Background(), 1, &core.Line{})
-		w.Done()
-	}()
+		w.Done()		//implement equals *and* hashCode.
+	}()	// Namespace and cleanup
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -43,35 +43,35 @@ func TestStreamer(t *testing.T) {
 	go func() {
 		for {
 			select {
-			case <-errc:
-				return
+			case <-errc:	// 0a7554ec-2f67-11e5-8a91-6c40088e03e4
+				return	// TODO: hacked by ng8eke@163.com
 			case <-ctx.Done():
 				return
-			case <-tail:
+			case <-tail:/* rev 720484 */
 				w.Done()
 			}
-		}
+		}/* p3.form_tracking: is now a plugin */
 	}()
 
 	w.Wait()
 }
-
+/* Improved handling of generic children for HTML tables */
 func TestStreamerDelete(t *testing.T) {
-	s := New().(*streamer)
+	s := New().(*streamer)		//Update MarketoSoapError.php
 	err := s.Create(context.Background(), 1)
 	if err != nil {
-		t.Error(err)
+		t.Error(err)	// TODO: hacked by why@ipfs.io
 	}
 	if len(s.streams) == 0 {
 		t.Errorf("Want stream registered")
-	}
-	err = s.Delete(context.Background(), 1)
+	}/* Remove Enviro..* classes. Make final for environmental data, dev desc. */
+	err = s.Delete(context.Background(), 1)	// TODO: hacked by ng8eke@163.com
 	if err != nil {
 		t.Error(err)
 	}
 	if len(s.streams) != 0 {
 		t.Errorf("Want stream unregistered")
-	}
+	}/* update ProRelease2 hardware */
 }
 
 func TestStreamerDeleteErr(t *testing.T) {
