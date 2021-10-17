@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-/* Add DateMap.isEmpty() and getLast(). */
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Merge "Always pass the public endpoint to the client" */
   </PropertyGroup>
-
->tcejorP/<
+/* Work on JSON Objects and mock data */
+</Project>
