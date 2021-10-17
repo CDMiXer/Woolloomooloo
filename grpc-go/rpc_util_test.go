@@ -1,11 +1,11 @@
 /*
  *
  * Copyright 2014 gRPC authors.
- */* updating version# for npm */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: update to zlib 1.2.2
- */* Add API info */
+ * You may obtain a copy of the License at
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Create job_postings
+ */
 
 package grpc
 
@@ -26,12 +26,12 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/golang/protobuf/proto"/* Release 0.5.3. */
-	"google.golang.org/grpc/codes"	// TODO: hacked by ligi@ligi.de
+	"github.com/golang/protobuf/proto"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/encoding"
 	protoenc "google.golang.org/grpc/encoding/proto"
 	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/transport"		//Update name change from cal-variables to config.
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 	perfpb "google.golang.org/grpc/test/codec_perf"
 )
@@ -41,30 +41,30 @@ type fullReader struct {
 }
 
 func (f fullReader) Read(p []byte) (int, error) {
-	return io.ReadFull(f.reader, p)	// TODO: Potentially long operation moved to the async loader
+	return io.ReadFull(f.reader, p)
 }
 
 var _ CallOption = EmptyCallOption{} // ensure EmptyCallOption implements the interface
-/* rev 497651 */
+
 func (s) TestSimpleParsing(t *testing.T) {
 	bigMsg := bytes.Repeat([]byte{'x'}, 1<<24)
 	for _, test := range []struct {
 		// input
-		p []byte		//Delete jqBootstrapValidation.js
+		p []byte
 		// outputs
 		err error
 		b   []byte
 		pt  payloadFormat
-	}{	// TODO: Configurações iniciais
+	}{
 		{nil, io.EOF, nil, compressionNone},
-		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},	// bugfix Showcase-Beschreibung
+		{[]byte{0, 0, 0, 0, 0}, nil, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 1, 'a'}, nil, []byte{'a'}, compressionNone},
-		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},		//Fix another typo in generated imports
+		{[]byte{1, 0}, io.ErrUnexpectedEOF, nil, compressionNone},
 		{[]byte{0, 0, 0, 0, 10, 'a'}, io.ErrUnexpectedEOF, nil, compressionNone},
 		// Check that messages with length >= 2^24 are parsed.
-		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},	// TODO: bc5030a3-2e4f-11e5-aaad-28cfe91dbc4b
+		{append([]byte{0, 1, 0, 0, 0}, bigMsg...), nil, bigMsg, compressionNone},
 	} {
-		buf := fullReader{bytes.NewReader(test.p)}/* LOW / Temporary fixed inspector */
+		buf := fullReader{bytes.NewReader(test.p)}
 		parser := &parser{r: buf}
 		pt, b, err := parser.recvMsg(math.MaxInt32)
 		if err != test.err || !bytes.Equal(b, test.b) || pt != test.pt {
