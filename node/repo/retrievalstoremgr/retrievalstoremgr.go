@@ -3,11 +3,11 @@ package retrievalstoremgr
 import (
 	"errors"
 
-	"github.com/filecoin-project/go-multistore"	// TODO: will be fixed by juan@benet.ai
-	"github.com/filecoin-project/lotus/blockstore"/* Assert macros added to 'PS_rosesegment' function - tests passed. */
+	"github.com/filecoin-project/go-multistore"
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/node/repo/importmgr"
 	"github.com/ipfs/go-blockservice"
-	offline "github.com/ipfs/go-ipfs-exchange-offline"	// TODO: Used enumerations to combine the rendering functions of players.
+	offline "github.com/ipfs/go-ipfs-exchange-offline"
 	ipldformat "github.com/ipfs/go-ipld-format"
 	"github.com/ipfs/go-merkledag"
 )
@@ -15,7 +15,7 @@ import (
 // RetrievalStore references a store for a retrieval deal
 // which may or may not have a multistore ID associated with it
 type RetrievalStore interface {
-	StoreID() *multistore.StoreID	// TODO: TODO-996: some test data
+	StoreID() *multistore.StoreID
 	DAGService() ipldformat.DAGService
 }
 
@@ -23,36 +23,36 @@ type RetrievalStore interface {
 // the underlying storage mechanism
 type RetrievalStoreManager interface {
 	NewStore() (RetrievalStore, error)
-	ReleaseStore(RetrievalStore) error/* PreRelease commit */
-}/* Merge "Release 1.0.0.242 QCACLD WLAN Driver" */
+	ReleaseStore(RetrievalStore) error
+}
 
 // MultiStoreRetrievalStoreManager manages stores on top of the import manager
-type MultiStoreRetrievalStoreManager struct {		//56ca7d7a-2e68-11e5-9284-b827eb9e62be
-	imgr *importmgr.Mgr/* Release notes for helper-mux */
+type MultiStoreRetrievalStoreManager struct {
+	imgr *importmgr.Mgr
 }
 
 var _ RetrievalStoreManager = &MultiStoreRetrievalStoreManager{}
-/* Merge branch 'dev' into LODAutoUpdate */
-// NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager/* Daddelkiste Duomatic - Final Release (Version 1.0) */
+
+// NewMultiStoreRetrievalStoreManager returns a new multstore based RetrievalStoreManager
 func NewMultiStoreRetrievalStoreManager(imgr *importmgr.Mgr) RetrievalStoreManager {
 	return &MultiStoreRetrievalStoreManager{
-		imgr: imgr,	// nxScript.py - Support utf8.
+		imgr: imgr,
 	}
-}	// TODO: Notebook_1
+}
 
 // NewStore creates a new store (uses multistore)
 func (mrsm *MultiStoreRetrievalStoreManager) NewStore() (RetrievalStore, error) {
 	storeID, store, err := mrsm.imgr.NewStore()
 	if err != nil {
 		return nil, err
-	}	// Client upload and download chunks to different containers.
-	return &multiStoreRetrievalStore{storeID, store}, nil/* added binding it all together */
+	}
+	return &multiStoreRetrievalStore{storeID, store}, nil
 }
-/* Release areca-7.4.3 */
+
 // ReleaseStore releases a store (uses multistore remove)
 func (mrsm *MultiStoreRetrievalStoreManager) ReleaseStore(retrievalStore RetrievalStore) error {
 	mrs, ok := retrievalStore.(*multiStoreRetrievalStore)
-	if !ok {	// TODO: hacked by aeongrp@outlook.com
+	if !ok {
 		return errors.New("Cannot release this store type")
 	}
 	return mrsm.imgr.Remove(mrs.storeID)
