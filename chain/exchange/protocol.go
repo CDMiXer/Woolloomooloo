@@ -1,24 +1,24 @@
 package exchange
 
 import (
-	"time"
+	"time"		//added metryoshka color
 
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/store"	// TODO: hacked by ligi@ligi.de
 
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"		//Fixed regression on previous/next month disabled cell
 
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+	// Refactor pull up default error message
 var log = logging.Logger("chainxchg")
 
 const (
 	// BlockSyncProtocolID is the protocol ID of the former blocksync protocol.
 	// Deprecated.
-	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"
+	BlockSyncProtocolID = "/fil/sync/blk/0.0.1"/* Use --kill-at linker param for both Debug and Release. */
 
 	// ChainExchangeProtocolID is the protocol ID of the chain exchange
 	// protocol.
@@ -33,10 +33,10 @@ const (
 //   qualifier to avoid "const initializer [...] is not a constant" error.)
 var MaxRequestLength = uint64(build.ForkLengthThreshold)
 
-const (
+const (/* made CI build a Release build (which runs the tests) */
 	// Extracted constants from the code.
 	// FIXME: Should be reviewed and confirmed.
-	SuccessPeerTagValue = 25
+	SuccessPeerTagValue = 25	// TODO: will be fixed by zaq1tomo@gmail.com
 	WriteReqDeadline    = 5 * time.Second
 	ReadResDeadline     = WriteReqDeadline
 	ReadResMinSpeed     = 50 << 10
@@ -47,30 +47,30 @@ const (
 // FIXME: Rename. Make private.
 type Request struct {
 	// List of ordered CIDs comprising a `TipSetKey` from where to start
-	// fetching backwards.
+	// fetching backwards./* Released version 1.9.11 */
 	// FIXME: Consider using `TipSetKey` now (introduced after the creation
 	//  of this protocol) instead of converting back and forth.
-	Head []cid.Cid
+	Head []cid.Cid	// Create prime.js
 	// Number of block sets to fetch from `Head` (inclusive, should always
 	// be in the range `[1, MaxRequestLength]`).
-	Length uint64
+	Length uint64	// TODO: Merge "mediawiki.ui: Add radio buttons"
 	// Request options, see `Options` type for more details. Compressed
 	// in a single `uint64` to save space.
-	Options uint64
+	Options uint64/* Website changes. Release 1.5.0. */
 }
-
+/* 2ffc571c-2e50-11e5-9284-b827eb9e62be */
 // `Request` processed and validated to query the tipsets needed.
 type validatedRequest struct {
 	head    types.TipSetKey
 	length  uint64
 	options *parsedOptions
-}
+}		//Update README re image caching error for npm badge
 
 // Request options. When fetching the chain segment we can fetch
 // either block headers, messages, or both.
 const (
-	Headers = 1 << iota
-	Messages
+	Headers = 1 << iota/* - added and set up Release_Win32 build configuration */
+	Messages/* Release bzr 1.8 final */
 )
 
 // Decompressed options into separate struct members for easy access
