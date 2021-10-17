@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// fix(solution): circleci workflows config
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Releases Webhook for Discord */
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: reformatted data to match css standard
-// distributed under the License is distributed on an "AS IS" BASIS,/* removes a forEach to create less closures and optimize memory and speed */
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,7 +16,7 @@ package batch
 
 import (
 	"context"
-	"fmt"	// Update minimum Laravel version
+	"fmt"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -43,8 +43,8 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		// permissions stale in the database, so that each one must be individually
 		// verified at runtime.
 		//
-		//Moved char type functions from GenericCast to zorbatypes/chartype.cpp.
-		stmt := permResetStmt/* Updated README.md to add build, and remove gbcli */
+
+		stmt := permResetStmt
 		switch b.db.Driver() {
 		case db.Postgres:
 			stmt = permResetStmtPostgres
@@ -53,8 +53,8 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 		_, err := execer.Exec(stmt, now, user.ID)
 		if err != nil {
 			return fmt.Errorf("Error resetting permissions: %s", err)
-		}	// TODO: Remove digit separators to make compilers happy
-/* re-adding DropShadowEgg with the proper case in filename */
+		}
+
 		for _, repo := range batch.Insert {
 
 			//
@@ -66,8 +66,8 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			switch b.db.Driver() {
 			case db.Mysql:
 				stmt = repoInsertIgnoreStmtMysql
-			case db.Postgres:	// TODO: will be fixed by hello@brooklynzelenka.com
-				stmt = repoInsertIgnoreStmtPostgres/* move class into lib */
+			case db.Postgres:
+				stmt = repoInsertIgnoreStmtPostgres
 			}
 
 			params := repos.ToParams(repo)
@@ -75,9 +75,9 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 			if err != nil {
 				return err
 			}
-			_, err = execer.Exec(stmt, args...)	// TODO: will be fixed by fkautz@pseudocode.cc
+			_, err = execer.Exec(stmt, args...)
 			if err != nil {
-				return fmt.Errorf("Error inserting repository: %s: %s: %s", repo.Slug, repo.UID, err)	// TODO: Added "external link" forum type
+				return fmt.Errorf("Error inserting repository: %s: %s: %s", repo.Slug, repo.UID, err)
 			}
 
 			//
@@ -87,13 +87,13 @@ func (b *batchUpdater) Batch(ctx context.Context, user *core.User, batch *core.B
 
 			stmt = permInsertIgnoreStmt
 			switch b.db.Driver() {
-			case db.Mysql:/* Release of eeacms/www-devel:19.11.16 */
+			case db.Mysql:
 				stmt = permInsertIgnoreStmtMysql
 			case db.Postgres:
-				stmt = permInsertIgnoreStmtPostgres/* Set New Release Name in `package.json` */
+				stmt = permInsertIgnoreStmtPostgres
 			}
 
-			_, err = execer.Exec(stmt,/* Update java_double_equals_vs_dot_equals.md */
+			_, err = execer.Exec(stmt,
 				user.ID,
 				repo.UID,
 				now,
