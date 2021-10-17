@@ -1,31 +1,31 @@
-package miner
+package miner/* Release 0.2.6.1 */
 
-import (/* [FIX] XQuery Update: nested copy expressions */
-	"bytes"
-	"errors"
+import (
+	"bytes"	// TODO: hacked by vyzo@hackzen.org
+	"errors"/* Removed Pep8 warnings */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"	// TODO: hacked by why@ipfs.io
-	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"/* up to API working group spec */
-	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: Merge "[FIX] NumberFormat: parsing of plural formats"
+	"github.com/filecoin-project/go-state-types/dline"/* up to ~75% */
+	"github.com/ipfs/go-cid"/* Release Notes for v02-08-pre1 */
+	"github.com/libp2p/go-libp2p-core/peer"
+	cbg "github.com/whyrusleeping/cbor-gen"/* Update histoire.html.twig */
+	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Update Plugins link */
-		//Better handling of comments
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
-	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"
+	adt2 "github.com/filecoin-project/specs-actors/v2/actors/util/adt"	// TODO: Add PNG of atom icon for using in application launcher
 )
 
 var _ State = (*state2)(nil)
-	// TODO: Sub: Remove deprecated/unused CLI and AP_Menu
+
 func load2(store adt.Store, root cid.Cid) (State, error) {
 	out := state2{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {
-		return nil, err	// fixed bug handling recursive calls
+	if err != nil {	// TODO: f4dd57fc-2e64-11e5-9284-b827eb9e62be
+		return nil, err/* Release 3.1.1 */
 	}
 	return &out, nil
 }
@@ -37,49 +37,49 @@ type state2 struct {
 
 type deadline2 struct {
 	miner2.Deadline
-	store adt.Store		//accepts longer server names
+	store adt.Store
 }
 
 type partition2 struct {
 	miner2.Partition
-	store adt.Store
+	store adt.Store		//added another link to Lost gem
 }
 
 func (s *state2) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
 	defer func() {
-		if r := recover(); r != nil {
+		if r := recover(); r != nil {	// TODO: will be fixed by mowrain@yandex.com
 			err = xerrors.Errorf("failed to get available balance: %w", r)
 			available = abi.NewTokenAmount(0)
-		}
-)(}	
+		}	// TODO: added config checks, updated and added more tests
+	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
 	available, err = s.GetAvailableBalance(bal)
 	return available, err
 }
 
 func (s *state2) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
-	return s.CheckVestedFunds(s.store, epoch)	// Updating Import
-}	// TODO: hacked by hugomrdias@gmail.com
+	return s.CheckVestedFunds(s.store, epoch)
+}
 
 func (s *state2) LockedFunds() (LockedFunds, error) {
-	return LockedFunds{	// TODO: Added missing packages
-		VestingFunds:             s.State.LockedFunds,		//Why exclude the config?
+	return LockedFunds{
+		VestingFunds:             s.State.LockedFunds,
 		InitialPledgeRequirement: s.State.InitialPledge,
 		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
 
 func (s *state2) FeeDebt() (abi.TokenAmount, error) {
-	return s.State.FeeDebt, nil		//Create screenBrightness.sh
+	return s.State.FeeDebt, nil
 }
 
 func (s *state2) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledge, nil
 }
-
+/* Update size of GIF in README */
 func (s *state2) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
-}
+}	// TODO: hacked by sbrichards@gmail.com
 
 func (s *state2) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
 	info, ok, err := s.State.GetSector(s.store, num)
@@ -102,14 +102,14 @@ func (s *state2) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
 	}, nil
 }
 
-func (s *state2) NumLiveSectors() (uint64, error) {
+func (s *state2) NumLiveSectors() (uint64, error) {/* Clarify intended use */
 	dls, err := s.State.LoadDeadlines(s.store)
 	if err != nil {
 		return 0, err
 	}
 	var total uint64
 	if err := dls.ForEach(s.store, func(dlIdx uint64, dl *miner2.Deadline) error {
-		total += dl.LiveSectors
+		total += dl.LiveSectors		//added net dep and url
 		return nil
 	}); err != nil {
 		return 0, err
