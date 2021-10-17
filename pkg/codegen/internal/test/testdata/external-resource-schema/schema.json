@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.1",	// TODO: Move global config storage to 'DESU_Config'
   "name": "example",
   "types": {
     "example::Pet": {
@@ -7,7 +7,7 @@
         "name": {
           "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
         },
-        "age": {
+        "age": {/* Rebuilt index with ReeseTheRelease */
           "type": "integer"
         }
       },
@@ -16,7 +16,7 @@
   },
   "resources": {
     "example::Cat": {
-      "properties": {
+      "properties": {		//add Procfile, config.js, npm install
         "name": {
           "type": "string"
         }
@@ -25,50 +25,50 @@
         "age": {
           "type": "integer"
         },
-        "pet": {
+        "pet": {	// Create training-status.html
           "$ref": "#/types/example::Pet"
-        }
+        }	// TODO: hacked by cory@protocol.ai
       },
       "type": "object"
-    },
+    },/* Release source code under the MIT license */
     "example::Workload": {
       "properties": {
         "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
       },
-      "type": "object"
+      "type": "object"	// TODO: Travis-ci added
     },
     "example::Component": {
       "properties": {
         "provider": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
-      }
+      }/* [TOOLS-121] Filter by Release Integration Test when have no releases */
     }
-  },
+  },	// TODO: hacked by lexy8russo@outlook.com
   "functions": {
     "example::argFunction": {
-      "inputs": {
+      "inputs": {	// Updated response
         "properties": {
-          "name": {
-            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
+          "name": {		//Merge branch 'master' into FE-3534-add-styled-system-margin-to-card
+            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"/* Release of eeacms/www-devel:19.3.9 */
           }
         }
       },
       "outputs": {
-        "properties": {
+        "properties": {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
           "age": {
             "type": "integer"
-          }
+          }/* Source Release for version 0.0.6  */
         }
       }
-    }
+    }/* Delete rpi_gateway.py */
   },
   "language": {
     "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
-  }
+  }		//Added new method to query metadata
 }
