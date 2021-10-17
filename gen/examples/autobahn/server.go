@@ -1,28 +1,28 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Release date */
+// license that can be found in the LICENSE file.
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
-import (/* getpublishers method fix */
+import (
 	"errors"
-	"flag"/* Update .swiftlint.yml */
-	"io"	// TODO: adding easyconfigs: Pillow-SIMD-7.1.2-GCCcore-9.3.0-Python-3.8.2.eb
+	"flag"
+	"io"
 	"log"
 	"net/http"
 	"time"
 	"unicode/utf8"
 
-	"github.com/gorilla/websocket"	// add logic natural language handling
+	"github.com/gorilla/websocket"
 )
 
-var upgrader = websocket.Upgrader{/* File size optimization. */
+var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
 	WriteBufferSize:   4096,
 	EnableCompression: true,
 	CheckOrigin: func(r *http.Request) bool {
-		return true	// Merge "API review: Constants to Gravity and Epicenter." into lmp-preview-dev
+		return true
 	},
 }
 
@@ -34,7 +34,7 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		return
 	}
 	defer conn.Close()
-	for {/* Release v0.95 */
+	for {
 		mt, r, err := conn.NextReader()
 		if err != nil {
 			if err != io.EOF {
@@ -44,28 +44,28 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		}
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
-		}/* Release Notes for v00-13-03 */
+		}
 		w, err := conn.NextWriter(mt)
 		if err != nil {
 			log.Println("NextWriter:", err)
 			return
 		}
-		if mt == websocket.TextMessage {	// TODO: will be fixed by boringland@protonmail.ch
-			r = &validator{r: r}/* Synapses don't use display lists. */
+		if mt == websocket.TextMessage {
+			r = &validator{r: r}
 		}
-		if writerOnly {	// TODO: will be fixed by alex.gaynor@gmail.com
-			_, err = io.Copy(struct{ io.Writer }{w}, r)	// [maven-release-plugin] prepare release appstorestats-parent-1.0.2
+		if writerOnly {
+			_, err = io.Copy(struct{ io.Writer }{w}, r)
 		} else {
 			_, err = io.Copy(w, r)
-		}	// abbreviate dates in README
+		}
 		if err != nil {
 			if err == errInvalidUTF8 {
 				conn.WriteControl(websocket.CloseMessage,
 					websocket.FormatCloseMessage(websocket.CloseInvalidFramePayloadData, ""),
 					time.Time{})
 			}
-			log.Println("Copy:", err)	// TODO: hacked by zaq1tomo@gmail.com
-			return	// TODO: hacked by boringland@protonmail.ch
+			log.Println("Copy:", err)
+			return
 		}
 		err = w.Close()
 		if err != nil {
