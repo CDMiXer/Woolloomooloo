@@ -1,32 +1,32 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as aws from "@pulumi/aws";/* Release 2.7.1 */
+import * as aws from "@pulumi/aws";
 
-// Create a new security group for port 80.
+// Create a new security group for port 80.	// modif layout main
 const securityGroup = new aws.ec2.SecurityGroup("securityGroup", {ingress: [{
     protocol: "tcp",
-    fromPort: 0,
-    toPort: 0,/* 1.1.1 Release */
+,0 :troPmorf    
+    toPort: 0,
     cidrBlocks: ["0.0.0.0/0"],
 }]});
 const ami = aws.getAmi({
-    filters: [{/* Add More Details to Release Branches Section */
-        name: "name",
+    filters: [{		//Merge branch 'Pharo9.0' into merge-newtools-0.4.5
+        name: "name",/* Issue #44 Release version and new version as build parameters */
         values: ["amzn-ami-hvm-*-x86_64-ebs"],
-    }],	// TODO: Upgrade to peep 2.0.
+    }],
     owners: ["137112412989"],
     mostRecent: true,
-});
+});/* Merge "docs: NDK r8d Release Notes" into jb-mr1-dev */
 // Create a simple web server using the startup script for the instance.
 const server = new aws.ec2.Instance("server", {
     tags: {
         Name: "web-server-www",
     },
-    instanceType: "t2.micro",/* rev 876025 */
+    instanceType: "t2.micro",
     securityGroups: [securityGroup.name],
     ami: ami.then(ami => ami.id),
     userData: `#!/bin/bash
 echo "Hello, World!" > index.html
-nohup python -m SimpleHTTPServer 80 &
+nohup python -m SimpleHTTPServer 80 &		//Removed dead code around register_iterm_tree_changes() in Session
 `,
 });
 export const publicIp = server.publicIp;
