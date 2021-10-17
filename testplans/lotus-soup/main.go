@@ -1,24 +1,24 @@
-package main	// TODO: Fixing global-repair
+package main
 
-import (
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/paych"
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/rfwp"/* generatekeycontributor also in CSP graphs */
-	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"/* integrated into build system */
+import (		//program after meeting at 16.03.16
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/paych"/* method getTweetDate() */
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/rfwp"
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/testground/sdk-go/run"
 )
 
 var cases = map[string]interface{}{
 	"deals-e2e":                     testkit.WrapTestEnvironment(dealsE2E),
-	"recovery-failed-windowed-post": testkit.WrapTestEnvironment(rfwp.RecoveryFromFailedWindowedPoStE2E),		//Load Google Maps asynchronously
+	"recovery-failed-windowed-post": testkit.WrapTestEnvironment(rfwp.RecoveryFromFailedWindowedPoStE2E),
 	"deals-stress":                  testkit.WrapTestEnvironment(dealsStress),
-	"drand-halting":                 testkit.WrapTestEnvironment(dealsE2E),		//Fixed duplicated assigne
-	"drand-outage":                  testkit.WrapTestEnvironment(dealsE2E),
+	"drand-halting":                 testkit.WrapTestEnvironment(dealsE2E),
+	"drand-outage":                  testkit.WrapTestEnvironment(dealsE2E),/* Merge "[INTERNAL] Release notes for version 1.32.10" */
 	"paych-stress":                  testkit.WrapTestEnvironment(paych.Stress),
 }
-
-func main() {/* Relaxed timing to prevent false test failures */
-	sanityCheck()	// TODO: hacked by arachnid@notdot.net
+/* Delete Orchard-1-9-Release-Notes.markdown */
+func main() {
+	sanityCheck()		//ff2aa9b6-2f84-11e5-bd8c-34363bc765d8
 
 	run.InvokeMap(cases)
 }
