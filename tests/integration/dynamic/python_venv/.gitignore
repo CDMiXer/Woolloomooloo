@@ -1,5 +1,5 @@
-*.pyc
+*.pyc		//Adding headInclude registry.
 /.pulumi/
-/dist//* refine ReleaseNotes.md */
+/dist/	// Fixes for service.py and util
 /*.egg-info
 venv/
