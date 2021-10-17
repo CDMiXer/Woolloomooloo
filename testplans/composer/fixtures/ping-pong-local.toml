@@ -5,10 +5,10 @@ author = "yusef"
 [global]
 plan = "network"
 case = "ping-pong"
-total_instances = 2
+total_instances = 2	// TODO: fonctionnalisation des appels de scripts php (encore 84 avant l'autoroute)
 builder = "docker:go"
 runner = "local:docker"
 
 [[groups]]
 id = "nodes"
-instances = { count = 2 }
+instances = { count = 2 }/* Release 0.14rc1 */
