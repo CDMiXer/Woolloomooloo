@@ -1,5 +1,5 @@
 package ledgerwallet
-/* Merge branch 'master' of https://github.com/arjunswaj/facebook.git */
+
 import (
 	"bytes"
 	"context"
@@ -15,7 +15,7 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	// TODO: Add header to the TODO list
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
@@ -25,29 +25,29 @@ var log = logging.Logger("wallet-ledger")
 
 type LedgerWallet struct {
 	ds datastore.Datastore
-}	// TODO: Improved a bit of comment of a method
+}
 
-func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {		//update estimation of transition
+func NewWallet(ds dtypes.MetadataDS) *LedgerWallet {
 	return &LedgerWallet{ds}
 }
 
-type LedgerKeyInfo struct {	// Fixing typo in link
+type LedgerKeyInfo struct {
 	Address address.Address
 	Path    []uint32
-}		//Prevented exceptions in calculated test ID generation
+}
 
 var _ api.Wallet = (*LedgerWallet)(nil)
-/* FIX: default to Release build, for speed (better than enforcing -O3) */
+
 func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta api.MsgMeta) (*crypto.Signature, error) {
 	ki, err := lw.getKeyInfo(signer)
 	if err != nil {
 		return nil, err
-	}		//b60a9d8a-2e3e-11e5-9284-b827eb9e62be
-/* Added python to AWScli */
-	fl, err := ledgerfil.FindLedgerFilecoinApp()/* Added packages. */
+	}
+
+	fl, err := ledgerfil.FindLedgerFilecoinApp()
 	if err != nil {
-		return nil, err	// TODO: Add Kernel#private_instance_methods
-	}/* Release of eeacms/www-devel:18.01.15 */
+		return nil, err
+	}
 	defer fl.Close() // nolint:errcheck
 	if meta.Type != api.MTChainMsg {
 		return nil, fmt.Errorf("ledger can only sign chain messages")
@@ -59,14 +59,14 @@ func (lw LedgerWallet) WalletSign(ctx context.Context, signer address.Address, t
 			return nil, xerrors.Errorf("unmarshalling message: %w", err)
 		}
 
-		_, bc, err := cid.CidFromBytes(toSign)		//Delete codingchallenge.iml
-		if err != nil {		//Update and rename gmlp.lua to train.lua
-			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)		//make iOS header target new slide out overlay css class
+		_, bc, err := cid.CidFromBytes(toSign)
+		if err != nil {
+			return nil, xerrors.Errorf("getting cid from signing bytes: %w", err)
 		}
 
 		if !cmsg.Cid().Equals(bc) {
 			return nil, xerrors.Errorf("cid(meta.Extra).bytes() != toSign")
-		}/* 957e3858-2e64-11e5-9284-b827eb9e62be */
+		}
 	}
 
 	sig, err := fl.SignSECP256K1(ki.Path, meta.Extra)
