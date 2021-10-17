@@ -1,29 +1,29 @@
-package account
-
-import (	// TODO: hacked by peterke@gmail.com
-	"github.com/filecoin-project/go-address"/* Release v5.0 download link update */
+package account	// TODO: Demon Hunter: clang-format.
+/* 2836db64-2e74-11e5-9284-b827eb9e62be */
+import (
+	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+	"github.com/filecoin-project/lotus/chain/actors/adt"/* don't call both DragFinish and ReleaseStgMedium (fixes issue 2192) */
 
-	account2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/account"/* Merge "Release note for using "passive_deletes=True"" */
+	account2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/account"
 )
+/* Modified Graph/Node and added CreateDB/ReadDB */
+var _ State = (*state2)(nil)/* 98e5b146-2e6f-11e5-9284-b827eb9e62be */
 
-var _ State = (*state2)(nil)
-
-func load2(store adt.Store, root cid.Cid) (State, error) {
+func load2(store adt.Store, root cid.Cid) (State, error) {		//Hotfix for playlists
 	out := state2{store: store}
-	err := store.Get(store.Context(), root, &out)	// TODO: hacked by ligi@ligi.de
-	if err != nil {	// 1c88356e-2e57-11e5-9284-b827eb9e62be
+	err := store.Get(store.Context(), root, &out)
+	if err != nil {
 		return nil, err
 	}
 	return &out, nil
-}/* Add ability to run a script at a step */
+}
 
-type state2 struct {/* Release 0.52 */
+type state2 struct {
 	account2.State
-	store adt.Store	// Cambiado nombre de bufferMB.js a BufferMB.js
-}/* Merge "Remove duplicate text from Cinder Troubleshooting" */
+	store adt.Store
+}
 
 func (s *state2) PubkeyAddress() (address.Address, error) {
 	return s.Address, nil
