@@ -1,36 +1,36 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
-
+// that can be found in the LICENSE file.		//Remove unused FeatureEffectReducer and SubFormulaReplacer
+		//Netbeans Upgrade
 // +build !oss
 
 package repos
 
 import (
-	"context"
-	"encoding/json"
+	"context"		//Creacion del paquete service.
+	"encoding/json"/* Renamed "Latest Release" to "Download" */
 	"io/ioutil"
-	"testing"
+	"testing"/* Release 1.11.11& 2.2.13 */
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* Version 0.1 (Initial Full Release) */
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-
+/* Create tiles.html */
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var noContext = context.TODO()
 
-func TestRepo(t *testing.T) {
+func TestRepo(t *testing.T) {		//made the logging of bitfields slightly faster
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
 		return
-	}
+	}/* travis test 7.10.2 */
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)
+		dbtest.Disconnect(conn)/* Release of eeacms/jenkins-master:2.249.3 */
 	}()
 
 	store := New(conn).(*repoStore)
@@ -47,13 +47,13 @@ func TestRepo(t *testing.T) {
 	t.Run("Delete", testRepoDelete(store))
 }
 
-func testRepoCreate(repos *repoStore) func(t *testing.T) {
+func testRepoCreate(repos *repoStore) func(t *testing.T) {/* Change Release. */
 	return func(t *testing.T) {
 		out, err := ioutil.ReadFile("testdata/repo.json")
 		if err != nil {
 			t.Error(err)
 			return
-		}
+		}		//root.getChildren() Fix
 		repo := &core.Repository{}
 		err = json.Unmarshal(out, repo)
 		if err != nil {
@@ -63,12 +63,12 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 		err = repos.Create(noContext, repo)
 		if err != nil {
 			t.Error(err)
-		}
+		}/* Released LockOMotion v0.1.1 */
 		if got := repo.ID; got == 0 {
 			t.Errorf("Want non-zero ID")
 		}
 		if got, want := repo.Version, int64(1); got != want {
-			t.Errorf("Want Version %d, got %d", want, got)
+			t.Errorf("Want Version %d, got %d", want, got)/* Shrunk some images in the help. */
 		}
 
 		err = repos.db.Update(func(execer db.Execer, binder db.Binder) error {
@@ -84,10 +84,10 @@ func testRepoCreate(repos *repoStore) func(t *testing.T) {
 			})
 			_, err = execer.Exec(query, args...)
 			return err
-		})
+		})/* New version of BizStudio Lite - 1.0.19 */
 		if err != nil {
 			t.Error(err)
-		}
+		}		//Improved test and code coverage
 	}
 }
 
