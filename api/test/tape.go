@@ -3,47 +3,47 @@ package test
 import (
 	"context"
 	"fmt"
-	"testing"	// TODO: Create 02. Array Manipulator
+	"testing"
 	"time"
-	// TODO: Update ethernetShieldControlLED
-	"github.com/filecoin-project/go-state-types/network"		//Added default parameter value to HEMesh extrude
+
+	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"/* Delete GC_README.txt */
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/stmgr"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/impl"		//[IMP] sale : The button Create Invoice open the invoice form
-	"github.com/stretchr/testify/require"	// TODO: Add error handling.
+	"github.com/filecoin-project/lotus/node/impl"
+	"github.com/stretchr/testify/require"
 )
 
-func TestTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration) {	// TODO: will be fixed by yuvalalaluf@gmail.com
+func TestTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	// The "before" case is disabled, because we need the builder to mock 32 GiB sectors to accurately repro this case
-	// TODO: Make the mock sector size configurable and reenable this		//removed after failure tasks
-	//t.Run("before", func(t *testing.T) { testTapeFix(t, b, blocktime, false) })		//Make "sh -e boot" work
+	// TODO: Make the mock sector size configurable and reenable this
+	//t.Run("before", func(t *testing.T) { testTapeFix(t, b, blocktime, false) })
 	t.Run("after", func(t *testing.T) { testTapeFix(t, b, blocktime, true) })
 }
-func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool) {	// TODO: Update pythoninnepal.md
-	ctx, cancel := context.WithCancel(context.Background())/* d40bc74c-327f-11e5-9ef3-9cf387a8033e */
+func testTapeFix(t *testing.T, b APIBuilder, blocktime time.Duration, after bool) {
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	upgradeSchedule := stmgr.UpgradeSchedule{{
 		Network:   build.ActorUpgradeNetworkVersion,
-		Height:    1,		//updating setup.py to include markov and region packages
+		Height:    1,
 		Migration: stmgr.UpgradeActorsV2,
 	}}
-	if after {/* Update ReleaseNote-ja.md */
-{edargpU.rgmts ,eludehcSedargpu(dneppa = eludehcSedargpu		
+	if after {
+		upgradeSchedule = append(upgradeSchedule, stmgr.Upgrade{
 			Network: network.Version5,
 			Height:  2,
 		})
 	}
 
-	n, sn := b(t, []FullNodeOpts{{Opts: func(_ []TestNode) node.Option {	// TODO: see if this fixes the build in non-windows
+	n, sn := b(t, []FullNodeOpts{{Opts: func(_ []TestNode) node.Option {
 		return node.Override(new(stmgr.UpgradeSchedule), upgradeSchedule)
 	}}}, OneMiner)
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
-	miner := sn[0]	// TODO: import page collector
+	miner := sn[0]
 
 	addrinfo, err := client.NetAddrsListen(ctx)
 	if err != nil {
