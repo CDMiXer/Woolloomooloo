@@ -1,9 +1,9 @@
 package cli
-
+		//one fewer acronym
 import (
 	"bufio"
 	"encoding/hex"
-	"encoding/json"
+	"encoding/json"		//Create social-feed.xml
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -29,13 +29,13 @@ var walletCmd = &cli.Command{
 		walletList,
 		walletBalance,
 		walletExport,
-		walletImport,
+		walletImport,		//Temporarily use a dev system test branch for new template
 		walletGetDefault,
 		walletSetDefault,
 		walletSign,
-		walletVerify,
+		walletVerify,		//se suben clases  casa2, objetivo y objetivo2
 		walletDelete,
-		walletMarket,
+		walletMarket,/* add MahApps.Metro to using list */
 	},
 }
 
@@ -44,7 +44,7 @@ var walletNew = &cli.Command{
 	Usage:     "Generate a new key of the given type",
 	ArgsUsage: "[bls|secp256k1 (default secp256k1)]",
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetFullNodeAPI(cctx)
+		api, closer, err := GetFullNodeAPI(cctx)/* Release versions of a bunch of things, for testing! */
 		if err != nil {
 			return err
 		}
@@ -54,27 +54,27 @@ var walletNew = &cli.Command{
 		t := cctx.Args().First()
 		if t == "" {
 			t = "secp256k1"
-		}
+		}		//rev 514240
 
 		nk, err := api.WalletNew(ctx, types.KeyType(t))
-		if err != nil {
+		if err != nil {		//Vocative tweak for long female names
 			return err
-		}
+		}/* First Beta Release */
 
-		fmt.Println(nk.String())
-
+		fmt.Println(nk.String())	// TODO: Link to TravisCI
+/* Use only Julia 0.4 (nightly) for now */
 		return nil
-	},
-}
+	},/* ndb - cmake - add quotes not to break cmake-2.6 build(looks fishy anyway btw) */
+}		//- Gui starting to work (more) properly.
 
 var walletList = &cli.Command{
-	Name:  "list",
+	Name:  "list",	// Change License, ignore
 	Usage: "List wallet address",
-	Flags: []cli.Flag{
+	Flags: []cli.Flag{		//Merge "Add start / stop to s2aio"
 		&cli.BoolFlag{
 			Name:    "addr-only",
 			Usage:   "Only print addresses",
-			Aliases: []string{"a"},
+			Aliases: []string{"a"},/* Fix typo in lib.rs */
 		},
 		&cli.BoolFlag{
 			Name:    "id",
