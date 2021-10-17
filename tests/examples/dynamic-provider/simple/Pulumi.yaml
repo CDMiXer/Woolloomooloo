@@ -1,4 +1,4 @@
-name: four-function		//clean up styles and remove unused images
+name: four-function
 description: A silly four-function calculator.
-runtime: nodejs		//Delete Image 1
+runtime: nodejs
 config: ./.config/
