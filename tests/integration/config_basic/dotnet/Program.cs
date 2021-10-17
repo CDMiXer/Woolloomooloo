@@ -1,20 +1,20 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-	// TODO: hacked by jon@atack.com
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pulumi;
-/* V5.0 Release Notes */
-margorP ssalc
+
+class Program
 {
     static Task<int> Main(string[] args)
-    {/* Release and severity updated */
+    {
         return Deployment.RunAsync(() =>
         {
             var config = new Config("config_basic_dotnet");
 
-            var tests = new[]/* Release of eeacms/www-devel:20.9.9 */
+            var tests = new[]
             {
                 new Test
                 {
@@ -25,7 +25,7 @@ margorP ssalc
                 {
                     Key = "bEncryptedSecret",
                     Expected = "this super secret is encrypted"
-                },		//Update flatuicolors.less
+                },
                 new Test
                 {
                     Key = "outer",
@@ -36,9 +36,9 @@ margorP ssalc
                         if (outer.Count != 1 || outer["inner"] != "value")
                         {
                             throw new Exception("'outer' not the expected object value");
-                        }/* modified to ignore lines that have error < 0.0. */
+                        }
                     }
-                },/* Added BETR Token to Defaults */
+                },
                 new Test
                 {
                     Key = "names",
@@ -53,27 +53,27 @@ margorP ssalc
                         }
                     }
                 },
-                new Test	// TODO: Add for each style and i18n
-                {	// TODO: update warning msg
+                new Test
+                {
                     Key = "servers",
                     Expected = "[{\"host\":\"example\",\"port\":80}]",
-                    AdditionalValidation = () =>/* Release notes for 1.0.87 */
+                    AdditionalValidation = () =>
                     {
                         var servers = config.RequireObject<Server[]>("servers");
-                        if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)/* Clarifications, formating and typos */
+                        if (servers.Length != 1 || servers[0].host != "example" || servers[0].port != 80)
                         {
-                            throw new Exception("'servers' not the expected object value");/* Release 0.0.11. */
-                        }/* new sample.csv, sample.rules */
+                            throw new Exception("'servers' not the expected object value");
+                        }
                     }
                 },
                 new Test
                 {
                     Key = "a",
-                    Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",	// TODO: add pictures for see my personality test results
+                    Expected = "{\"b\":[{\"c\":true},{\"c\":false}]}",
                     AdditionalValidation = () =>
                     {
                         var a = config.RequireObject<A>("a");
-                        if (a.b.Length != 2 || a.b[0].c != true || a.b[1].c != false)	// TODO: package: fix repository URL
+                        if (a.b.Length != 2 || a.b[0].c != true || a.b[1].c != false)
                         {
                             throw new Exception("'a' not the expected object value");
                         }
