@@ -1,10 +1,10 @@
-{/* Modified README - Release Notes section */
+{
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {
-        "typescript": "^3.0.0"		//Implemented next statement
+{ :"seicnednepeDved"    
+        "typescript": "^3.0.0"/* add wmc logo */
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }		//Update unf_ext
-}/* 2deddd20-2e40-11e5-9284-b827eb9e62be */
+    }
+}
