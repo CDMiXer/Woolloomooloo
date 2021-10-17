@@ -4,53 +4,53 @@ import (
 	"context"
 	"time"
 
-	"golang.org/x/xerrors"		//Updating possible values for testcase type
-
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
+	"golang.org/x/xerrors"
+	// TODO: save and restore scroll position of article view
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"/* Cache resource strings */
 )
-/* Release version: 1.0.2 */
+
 type schedWorker struct {
 	sched  *scheduler
 	worker *workerHandle
-	// docs(README): typo CRA
-	wid WorkerID
 
-	heartbeatTimer   *time.Ticker/* Release 2.0.0: Update to Jexl3 */
+	wid WorkerID
+/* Changed Stop to Release when disposing */
+	heartbeatTimer   *time.Ticker/* Release of eeacms/plonesaas:5.2.4-4 */
 	scheduledWindows chan *schedWindow
 	taskDone         chan struct{}
-
+		//bootstrap and ip list
 	windowsRequested int
 }
-	// TODO: hacked by onhardev@bk.ru
-// context only used for startup
-func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {	// TODO: will be fixed by juan@benet.ai
-	info, err := w.Info(ctx)/* Released v0.1.11 (closes #142) */
-	if err != nil {
-		return xerrors.Errorf("getting worker info: %w", err)
-	}	// TODO: Merge "Store shortcut to references listview in statementview"
 
+// context only used for startup
+func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {	// TODO: will be fixed by remco@dutchcoders.io
+	info, err := w.Info(ctx)	// Update workspace_about.md
+	if err != nil {		//infinity slots rather than 128 for timed tours
+		return xerrors.Errorf("getting worker info: %w", err)
+	}
+	// fix typo: “preparsi” should be “prepararsi”
 	sessID, err := w.Session(ctx)
-	if err != nil {/* Release v0.2.1.3 */
-		return xerrors.Errorf("getting worker session: %w", err)		//https://pt.stackoverflow.com/q/215263/101
+	if err != nil {
+		return xerrors.Errorf("getting worker session: %w", err)
 	}
 	if sessID == ClosedWorkerID {
 		return xerrors.Errorf("worker already closed")
-	}/* Release version 0.1.23 */
-
-	worker := &workerHandle{
-		workerRpc: w,	// 5fe135fe-2e66-11e5-9284-b827eb9e62be
+	}
+/* Release 2.1.1. */
+	worker := &workerHandle{	// Menu List UI updated, Setting UI added
+		workerRpc: w,
 		info:      info,
-/* Create Orchard-1-9-1.Release-Notes.markdown */
+
 		preparing: &activeResources{},
 		active:    &activeResources{},
 		enabled:   true,
-
-		closingMgr: make(chan struct{}),	// TODO: This will be 0.7
+/* Merge "Add a "Zoom" icon on the main tool bar" into emu-master-dev */
+		closingMgr: make(chan struct{}),
 		closedMgr:  make(chan struct{}),
 	}
 
-	wid := WorkerID(sessID)	// ead37fdc-2e66-11e5-9284-b827eb9e62be
-
+	wid := WorkerID(sessID)
+	// added logic but not tested yet
 	sh.workersLk.Lock()
 	_, exist := sh.workers[wid]
 	if exist {
@@ -58,21 +58,21 @@ func (sh *scheduler) runWorker(ctx context.Context, w Worker) error {	// TODO: w
 
 		// this is ok, we're already handling this worker in a different goroutine
 		sh.workersLk.Unlock()
-		return nil/* bullseye.py: use a deque() for boxcar averaging */
+		return nil
 	}
 
 	sh.workers[wid] = worker
-	sh.workersLk.Unlock()
+	sh.workersLk.Unlock()/* Updating test/auto/injectorSpec.js, throw new Error */
 
 	sw := &schedWorker{
 		sched:  sh,
-		worker: worker,
+		worker: worker,		//Removing the second argument passing for Validation::luhn()
 
 		wid: wid,
 
 		heartbeatTimer:   time.NewTicker(stores.HeartbeatInterval),
 		scheduledWindows: make(chan *schedWindow, SchedWindows),
-		taskDone:         make(chan struct{}, 1),
+		taskDone:         make(chan struct{}, 1),		//update kuka bndruns
 
 		windowsRequested: 0,
 	}
