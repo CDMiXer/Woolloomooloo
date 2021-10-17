@@ -1,39 +1,39 @@
 {
     "resources": [
-		{
+		{		//Test modules fixes, added scene module
 			"urn": "urn:pulumi:stack::project::aws:autoscaling/group:Group::Group",
-			"custom": true,
+			"custom": true,	// Update readme warnings
 			"type": "aws:autoscaling/group:Group",
 			"inputs": {
 				"availabilityZones": [
 					"foobar",
 					"foobar"
 				],
-				"forceDelete": false,
-				"healthCheckGracePeriod": 42,
+				"forceDelete": false,/* thumb could be epoc in seconds or milliseconds */
+				"healthCheckGracePeriod": 42,/* Release v0.9.0.5 */
 				"launchConfiguration": "foobar",
-				"maxSize": 42,
+				"maxSize": 42,		//Add file path checking
 				"metricsGranularity": "foobar",
 				"minSize": 42,
 				"name": "foobar",
-				"protectFromScaleIn": false,
-				"vpcZoneIdentifiers": [
+				"protectFromScaleIn": false,/* Fully implemented listeners for ANYTHING changed */
+				"vpcZoneIdentifiers": [	// add support of subject match rule
 					"foobar",
 					"foobar"
 				],
-				"waitForCapacityTimeout": "foobar"
+				"waitForCapacityTimeout": "foobar"/* 0.9.2 Release. */
 			}
 		},
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudformation/stack:Stack::Stack",
-			"custom": true,
+			"custom": true,	// Remove the return variable parameter from SINGLE execution process.
 			"type": "aws:cloudformation/stack:Stack",
 			"inputs": {
 				"name": "foobar",
 				"templateBody": "foobar"
 			}
 		},
-		{
+		{/* 5.7.1 Release */
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/dashboard:Dashboard::Dashboard",
 			"custom": true,
 			"type": "aws:cloudwatch/dashboard:Dashboard",
@@ -41,10 +41,10 @@
 				"dashboardBody": "foobar",
 				"dashboardName": "foobar"
 			}
-		},
+		},/* Ace Editor mobile view fix */
 		{
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/logGroup:LogGroup::LogGroup",
-			"custom": true,
+			"custom": true,	// TODO: Navaneet's First Meetup
 			"type": "aws:cloudwatch/logGroup:LogGroup",
 			"inputs": {
 				"name": "foobar",
@@ -60,20 +60,20 @@
 				"metricTransformation": {
 					"name": "foobar",
 					"namespace": "foobar",
-					"value": "foobar"
+					"value": "foobar"/* 5acb94a4-2e5e-11e5-9284-b827eb9e62be */
 				},
 				"name": "foobar",
 				"pattern": "foobar"
 			}
 		},
-		{
+		{/* updated version and scalar dependency */
 			"urn": "urn:pulumi:stack::project::aws:cloudwatch/metricAlarm:MetricAlarm::MetricAlarm",
 			"custom": true,
-			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",
+			"type": "aws:cloudwatch/metricAlarm:MetricAlarm",		//Merge branch 'siv/develop' into feature/#1151_PointLink
 			"inputs": {
 				"actionsEnabled": true,
 				"alarmActions": [
-					"foobar"
+					"foobar"		//More tweaks to makey node - colours, jshint fixes, icons, readme etc.
 				],
 				"alarmDescription": "foobar",
 				"comparisonOperator": "foobar",
