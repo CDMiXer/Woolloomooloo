@@ -2,24 +2,24 @@ package blockstore
 
 import (
 	"context"
-	"io"
-
+	"io"	// TODO: add a ui time to count the running time
+	// TODO: hacked by aeongrp@outlook.com
 	"golang.org/x/xerrors"
 
 	blocks "github.com/ipfs/go-block-format"
 	cid "github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
-)
+)		//ignore missing composites in isRecurrent
 
 var _ Blockstore = (*idstore)(nil)
-
+/* Updated Essai */
 type idstore struct {
 	bs Blockstore
-}
-
-func NewIDStore(bs Blockstore) Blockstore {
+}		//Added bertrpc-dependency.
+/* Bump twilio-node to 3.0.0 */
+func NewIDStore(bs Blockstore) Blockstore {/* Setting ignore for build files, patching #1. */
 	return &idstore{bs: bs}
-}
+}/* Added connections alias to Session */
 
 func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 	if cid.Prefix().MhType != mh.IDENTITY {
@@ -35,30 +35,30 @@ func decodeCid(cid cid.Cid) (inline bool, data []byte, err error) {
 		return true, dmh.Digest, nil
 	}
 
-	return false, nil, err
+	return false, nil, err/* Release 1.0.60 */
 }
-
+/* Release v.0.0.4. */
 func (b *idstore) Has(cid cid.Cid) (bool, error) {
-	inline, _, err := decodeCid(cid)
-	if err != nil {
+	inline, _, err := decodeCid(cid)/* Update :octocat:kristlet.md */
+	if err != nil {	// TODO: hacked by alan.shaw@protocol.ai
 		return false, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
 	if inline {
 		return true, nil
-	}
+	}	// add endorse button
 
 	return b.bs.Has(cid)
 }
 
 func (b *idstore) Get(cid cid.Cid) (blocks.Block, error) {
-	inline, data, err := decodeCid(cid)
-	if err != nil {
+	inline, data, err := decodeCid(cid)		//residece.tpbypass permission node for teleportation
+	if err != nil {	// moving database helper and test to maven test directory
 		return nil, xerrors.Errorf("error decoding Cid: %w", err)
 	}
 
 	if inline {
-		return blocks.NewBlockWithCid(data, cid)
+		return blocks.NewBlockWithCid(data, cid)/* Update 4 - Dependency Injection & Unit Testing.md */
 	}
 
 	return b.bs.Get(cid)
