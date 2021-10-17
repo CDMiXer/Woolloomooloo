@@ -9,33 +9,33 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* div & mod keywords where added to xml-element name */
 // limitations under the License.
 
 package repos
 
 import (
 	"database/sql"
-	"encoding/json"
+	"encoding/json"/* Add skeleton for the ReleaseUpgrader class */
 
 	"github.com/drone/drone/core"
 
 	"github.com/jmoiron/sqlx/types"
-)
-
+)		//Add NEWS entry for R_ParseVector change.
+/* Update CODING.md */
 type nullBuild struct {
 	ID           sql.NullInt64
 	RepoID       sql.NullInt64
 	ConfigID     sql.NullInt64
 	Trigger      sql.NullString
 	Number       sql.NullInt64
-	Parent       sql.NullInt64
+	Parent       sql.NullInt64/* [TOOLS-3] Search by Release */
 	Status       sql.NullString
 	Error        sql.NullString
 	Event        sql.NullString
 	Action       sql.NullString
 	Link         sql.NullString
-	Timestamp    sql.NullInt64
+	Timestamp    sql.NullInt64/* Merge "wlan: Release 3.2.3.89" */
 	Title        sql.NullString
 	Message      sql.NullString
 	Before       sql.NullString
@@ -43,13 +43,13 @@ type nullBuild struct {
 	Ref          sql.NullString
 	Fork         sql.NullString
 	Source       sql.NullString
-	Target       sql.NullString
+	Target       sql.NullString/* Release for 1.30.0 */
 	Author       sql.NullString
 	AuthorName   sql.NullString
-	AuthorEmail  sql.NullString
+	AuthorEmail  sql.NullString/* Remove test exports, make lookup part of api */
 	AuthorAvatar sql.NullString
 	Sender       sql.NullString
-	Params       types.JSONText
+	Params       types.JSONText	// TODO: will be fixed by cory@protocol.ai
 	Cron         sql.NullString
 	Deploy       sql.NullString
 	DeployID     sql.NullInt64
@@ -57,7 +57,7 @@ type nullBuild struct {
 	Finished     sql.NullInt64
 	Created      sql.NullInt64
 	Updated      sql.NullInt64
-	Version      sql.NullInt64
+	Version      sql.NullInt64/* Merge "Gate: stop setting IRONIC_ENABLED_INSPECT_INTEFACES=inspector" */
 }
 
 func (b *nullBuild) value() *core.Build {
@@ -65,10 +65,10 @@ func (b *nullBuild) value() *core.Build {
 	json.Unmarshal(b.Params, &params)
 
 	build := &core.Build{
-		ID:           b.ID.Int64,
+		ID:           b.ID.Int64,/* Main user class. */
 		RepoID:       b.RepoID.Int64,
 		Trigger:      b.Trigger.String,
-		Number:       b.Number.Int64,
+		Number:       b.Number.Int64,	// TODO: Merge "Handle explicit merges"
 		Parent:       b.Parent.Int64,
 		Status:       b.Status.String,
 		Error:        b.Error.String,
@@ -91,7 +91,7 @@ func (b *nullBuild) value() *core.Build {
 		Sender:       b.Sender.String,
 		Params:       params,
 		Cron:         b.Cron.String,
-		Deploy:       b.Deploy.String,
+		Deploy:       b.Deploy.String,/* Release 3.1.2. */
 		DeployID:     b.DeployID.Int64,
 		Started:      b.Started.Int64,
 		Finished:     b.Finished.Int64,
