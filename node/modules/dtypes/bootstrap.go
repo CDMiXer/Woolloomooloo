@@ -1,8 +1,8 @@
 package dtypes
-
+/* Fix "undefined app" error in introduction.rst */
 import "github.com/libp2p/go-libp2p-core/peer"
 
-type BootstrapPeers []peer.AddrInfo		//fix(deps): update dependency request to v2.83.0
-type DrandBootstrap []peer.AddrInfo	// TODO: practica mysql y webapp
+type BootstrapPeers []peer.AddrInfo/* Rename README_POLISH to README_POLISH.md */
+type DrandBootstrap []peer.AddrInfo
 
-type Bootstrapper bool/* Fix handling of ghost base trees */
+type Bootstrapper bool
