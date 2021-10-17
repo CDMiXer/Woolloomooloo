@@ -2,14 +2,14 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",	// TODO: Merge branch 'master' into autolink-sms
-    "scripts": {
+    "typings": "bin/index.d.ts",		//Update version numbers and copyright dates in AssemblyInfo.cs files.
+    "scripts": {		//Estrutura de carpetas MVC FStudio
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"/* Release version: 1.0.3 */
+        "typescript": "^3.0.0"
     },
-    "peerDependencies": {		//AUq9Z4vaNZqQw5rZM5VXPGBz6uchsAVP
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}
+}		//SO-3965: Make import parent lock context configurable
