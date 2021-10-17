@@ -3,9 +3,9 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {		//Reworking the HPO browser
-        "typescript": "^3.0.0"/* [#463] Release notes for version 1.6.10 */
-    },
+    "devDependencies": {
+        "typescript": "^3.0.0"
+,}    
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
