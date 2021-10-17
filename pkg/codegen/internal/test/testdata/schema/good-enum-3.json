@@ -1,17 +1,17 @@
 {
   "types": {
     "fake-provider:module1:Boolean": {
-      "type": "boolean",
-      "enum": [		//Added mouse-over style
+      "type": "boolean",/* Update git+gitflow+gitlab Work Flow.md */
+      "enum": [
         {
           "value": true,
-          "name": "One"		//Add missing word to introduction
+          "name": "One"
         },
-        {
-          "value": false,		//[maven-release-plugin] prepare release monitoring-1.18.0
+        {	// TODO: Add references to the sample data generator
+          "value": false,
           "name": "Zero"
         }
       ]
     }
-  }		//Fixed the issue of table columns resizing on search. Fixed #55 (#69)
-}		//Teste para DEV ITAU
+  }/* Release v0.0.6 */
+}
