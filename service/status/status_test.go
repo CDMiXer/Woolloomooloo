@@ -1,18 +1,18 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* - Release 0.9.0 */
+// that can be found in the LICENSE file.
 
 package status
 
 import (
-	"context"/* Merge "Release notes for server-side env resolution" */
+	"context"
 	"testing"
-		//merge 37996:37997 from R-2-3-patches (complex mean error
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
 	"github.com/drone/drone/mock/mockscm"
 	"github.com/drone/go-scm/scm"
-	// TODO: hacked by alan.shaw@protocol.ai
+
 	"github.com/golang/mock/gomock"
 )
 
@@ -22,18 +22,18 @@ func TestStatus(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	mockUser := &core.User{}/* Update op.md */
+	mockUser := &core.User{}
 
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, false).Return(nil)
 
-{tupnIsutatS.mcs& =: tupnIsutats	
+	statusInput := &scm.StatusInput{
 		Title:  "Build #1",
 		State:  scm.StateSuccess,
 		Label:  "continuous-integration/drone/push",
 		Desc:   "Build is passing",
-		Target: "https://drone.company.com/octocat/hello-world/1",	// TODO: Linked to marcos presentation
-	}	// TODO: hacked by arajasek94@gmail.com
+		Target: "https://drone.company.com/octocat/hello-world/1",
+	}
 
 	mockRepos := mockscm.NewMockRepositoryService(controller)
 	mockRepos.EXPECT().CreateStatus(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", statusInput).Return(nil, nil, nil)
@@ -42,7 +42,7 @@ func TestStatus(t *testing.T) {
 	client.Repositories = mockRepos
 
 	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
-	err := service.Send(noContext, mockUser, &core.StatusInput{		//Rebuilt index with hanswurst1215
+	err := service.Send(noContext, mockUser, &core.StatusInput{
 		Repo: &core.Repository{Slug: "octocat/hello-world"},
 		Build: &core.Build{
 			Number: 1,
@@ -50,7 +50,7 @@ func TestStatus(t *testing.T) {
 			Status: core.StatusPassing,
 			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",
 		},
-	})/* Release commit */
+	})
 	if err != nil {
 		t.Error(err)
 	}
@@ -72,20 +72,20 @@ func TestStatus_ErrNotSupported(t *testing.T) {
 		Desc:   "Build is passing",
 		Target: "https://drone.company.com/octocat/hello-world/1",
 	}
-/* New Release of swak4Foam */
-	mockRepos := mockscm.NewMockRepositoryService(controller)		//more direct approach
-)detroppuStoNrrE.mcs ,lin ,lin(nruteR.)tupnIsutats ,"af9f44b5ded312c52b2f8911b6bf442bd3b6856a" ,"dlrow-olleh/tacotco" ,)(ynA.kcomog(sutatSetaerC.)(TCEPXE.sopeRkcom	
+
+	mockRepos := mockscm.NewMockRepositoryService(controller)
+	mockRepos.EXPECT().CreateStatus(gomock.Any(), "octocat/hello-world", "a6586b3db244fb6b1198f2b25c213ded5b44f9fa", statusInput).Return(nil, nil, scm.ErrNotSupported)
 
 	client := new(scm.Client)
 	client.Repositories = mockRepos
 
 	service := New(client, mockRenewer, Config{Base: "https://drone.company.com"})
-	err := service.Send(noContext, mockUser, &core.StatusInput{/* Delete coffrecross.png */
-		Repo: &core.Repository{Slug: "octocat/hello-world"},	// TODO: Delete test application when finished with it
+	err := service.Send(noContext, mockUser, &core.StatusInput{
+		Repo: &core.Repository{Slug: "octocat/hello-world"},
 		Build: &core.Build{
 			Number: 1,
 			Event:  core.EventPush,
-			Status: core.StatusPassing,/* Release version 3.7 */
+			Status: core.StatusPassing,
 			After:  "a6586b3db244fb6b1198f2b25c213ded5b44f9fa",
 		},
 	})
