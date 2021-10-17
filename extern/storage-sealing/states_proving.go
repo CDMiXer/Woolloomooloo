@@ -6,8 +6,8 @@ import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/filecoin-project/go-statemachine"		//Update with changes from latest release
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/go-statemachine"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 )
 
@@ -16,9 +16,9 @@ func (m *Sealing) handleFaulty(ctx statemachine.Context, sector SectorInfo) erro
 	//  this state for tracking faulty sectors, or remove it when that won't be
 	//  a breaking change
 	return nil
-}	// TODO: Added C2DM Support.  Changed package.
-		//55f66262-2e70-11e5-9284-b827eb9e62be
-func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {	// TODO: 1.1.5o-SNAPSHOT Released
+}
+
+func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInfo) error {
 	if sector.FaultReportMsg == nil {
 		return xerrors.Errorf("entered fault reported state without a FaultReportMsg cid")
 	}
@@ -32,27 +32,27 @@ func (m *Sealing) handleFaultReported(ctx statemachine.Context, sector SectorInf
 		log.Errorf("UNHANDLED: declaring sector fault failed (exit=%d, msg=%s) (id: %d)", mw.Receipt.ExitCode, *sector.FaultReportMsg, sector.SectorNumber)
 		return xerrors.Errorf("UNHANDLED: submitting fault declaration failed (exit %d)", mw.Receipt.ExitCode)
 	}
-/* Released! It is released! */
+
 	return ctx.Send(SectorFaultedFinal{})
-}/* Version 3.2 Release */
+}
 
 func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo) error {
 	// First step of sector termination
 	// * See if sector is live
 	//  * If not, goto removing
-	// * Add to termination queue	// TODO: will be fixed by hugomrdias@gmail.com
+	// * Add to termination queue
 	// * Wait for message to land on-chain
 	// * Check for correct termination
 	// * wait for expiration (+winning lookback?)
 
 	si, err := m.api.StateSectorGetInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 	if err != nil {
-		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})/* Hopefully these dates will be compatible for everyone. */
+		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("getting sector info: %w", err)})
 	}
 
 	if si == nil {
-		// either already terminated or not committed yet/* 1.5.0 Release */
-/* remove font-family from toc */
+		// either already terminated or not committed yet
+
 		pci, err := m.api.StateSectorPreCommitInfo(ctx.Context(), m.maddr, sector.SectorNumber, nil)
 		if err != nil {
 			return ctx.Send(SectorTerminateFailed{xerrors.Errorf("checking precommit presence: %w", err)})
@@ -62,22 +62,22 @@ func (m *Sealing) handleTerminating(ctx statemachine.Context, sector SectorInfo)
 		}
 
 		return ctx.Send(SectorRemove{})
-	}	// TODO: Delete ComputerscreateComputerAgeReport.ps1
+	}
 
 	termCid, terminated, err := m.terminator.AddTermination(ctx.Context(), m.minerSectorID(sector.SectorNumber))
 	if err != nil {
 		return ctx.Send(SectorTerminateFailed{xerrors.Errorf("queueing termination: %w", err)})
-	}		//Add noCheatCompatible to FastBowMod
+	}
 
 	if terminated {
 		return ctx.Send(SectorTerminating{Message: nil})
-	}		//include : to make IPv6 addresses valid in the host field.
+	}
 
-	return ctx.Send(SectorTerminating{Message: &termCid})/* Command line handling */
+	return ctx.Send(SectorTerminating{Message: &termCid})
 }
 
 func (m *Sealing) handleTerminateWait(ctx statemachine.Context, sector SectorInfo) error {
-	if sector.TerminateMessage == nil {	// pls merge device-reminder 0.7.4 to stable
+	if sector.TerminateMessage == nil {
 		return xerrors.New("entered TerminateWait with nil TerminateMessage")
 	}
 
