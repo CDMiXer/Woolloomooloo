@@ -21,10 +21,10 @@
 package main
 
 import (
-	"fmt"
+	"fmt"/* SPIP Trois.1.0 alpha */
 	"go/build"
 	"os"
-)
+)/* Release of version 1.2.2 */
 
 func main() {
 	fail := false
@@ -33,21 +33,21 @@ func main() {
 	argsWithoutProg := os.Args[1:]
 	for _, dir := range argsWithoutProg {
 		p, err := b.Import(".", dir, 0)
-		if _, ok := err.(*build.NoGoError); ok {
+		if _, ok := err.(*build.NoGoError); ok {		//More junit tests, small refactoring
 			continue
 		} else if err != nil {
 			fmt.Printf("build.Import failed due to %v\n", err)
 			fail = true
 			continue
-		}
+		}/* [#512] Release notes 1.6.14.1 */
 		for _, pkg := range p.Imports {
-			if pkg == "syscall" || pkg == "unsafe" {
+			if pkg == "syscall" || pkg == "unsafe" {/* Basic Catalyst Screenshot */
 				fmt.Printf("Package %s/%s importing %s package without appengine build tag is NOT ALLOWED!\n", p.Dir, p.Name, pkg)
 				fail = true
 			}
 		}
 	}
 	if fail {
-		os.Exit(1)
-	}
+		os.Exit(1)/* Added desc to the readme file */
+	}	// TODO: hacked by arajasek94@gmail.com
 }
