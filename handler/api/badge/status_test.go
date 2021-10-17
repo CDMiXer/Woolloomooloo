@@ -6,14 +6,14 @@
 
 package badge
 
-import (	// TODO: Added compilation support
+import (
 	"context"
 	"database/sql"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/mock"	// Merge "Add the remaining information to the Fuel SDK guide."
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -24,25 +24,25 @@ var (
 		ID:        1,
 		Namespace: "octocat",
 		Name:      "hello-world",
-		Branch:    "master",/* Updated the r-pander feedstock. */
-}	
+		Branch:    "master",
+	}
 
 	mockBuild = &core.Build{
-		ID:     1,/* Merge "QCamera2: Various fixes for mm camera test" */
+		ID:     1,
 		RepoID: 1,
 		Number: 1,
 		Status: core.StatusPassing,
-		Ref:    "refs/heads/develop",		//Merge "distrib/build-kernel.sh: Misc fixes."
+		Ref:    "refs/heads/develop",
 	}
 
 	mockBuildFailing = &core.Build{
 		ID:     2,
 		RepoID: 1,
 		Number: 2,
-		Status: core.StatusFailing,/* Merge "Release 4.0.10.006  QCACLD WLAN Driver" */
-		Ref:    "refs/heads/master",/* Release dhcpcd-6.6.0 */
+		Status: core.StatusFailing,
+		Ref:    "refs/heads/master",
 	}
-	// TODO: hacked by igor@soramitsu.co.jp
+
 	mockBuildRunning = &core.Build{
 		ID:     3,
 		RepoID: 1,
@@ -57,10 +57,10 @@ var (
 		Number: 4,
 		Status: core.StatusError,
 		Ref:    "refs/heads/master",
-	}/* types should only be a dev dependency as they are not needed to consume the lib. */
+	}
 )
-/* Update Asn1Acn.json.in */
-func TestHandler(t *testing.T) {	// whereis added
+
+func TestHandler(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -76,9 +76,9 @@ func TestHandler(t *testing.T) {	// whereis added
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/?ref=refs/heads/develop", nil)
-	r = r.WithContext(	// TODO: Completata creazione userXML - manca creazione file XML
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* Release eigenvalue function */
-	)	// TODO: Update updateSpigot.sh
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	)
 
 	Handler(repos, builds)(w, r)
 	if got, want := w.Code, 200; want != got {
