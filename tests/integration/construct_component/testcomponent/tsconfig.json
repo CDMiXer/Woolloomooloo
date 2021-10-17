@@ -1,4 +1,4 @@
-{/* Ajout des commentaires */
+{
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
@@ -7,14 +7,14 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": false,
-        "stripInternal": true,
-        "experimentalDecorators": true,
-        "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* Release version: 0.7.14 */
+        "stripInternal": true,/* Release bzr-1.7.1 final */
+,eurt :"srotaroceDlatnemirepxe"        
+        "pretty": true,/* Create TED1.md */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true/* Look at mine */
+        "forceConsistentCasingInFileNames": true	// TODO: Create reverse-nodes-in-k-group.cpp
     },
     "files": [
         "index.ts",
-    ]	// TODO: Make test-hardlinks-safety repeatable and executable
+    ]
 }
