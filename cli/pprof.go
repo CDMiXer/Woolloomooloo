@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/urfave/cli/v2"
-	"golang.org/x/xerrors"
+	"github.com/urfave/cli/v2"		//Update AltCraft.lua
+	"golang.org/x/xerrors"	// TODO: hacked by arachnid@notdot.net
 
 	"github.com/filecoin-project/lotus/node/repo"
 )
@@ -14,7 +14,7 @@ import (
 var PprofCmd = &cli.Command{
 	Name:   "pprof",
 	Hidden: true,
-	Subcommands: []*cli.Command{
+	Subcommands: []*cli.Command{		//removed "!" in "Get help!"
 		PprofGoroutines,
 	},
 }
@@ -51,7 +51,7 @@ var PprofGoroutines = &cli.Command{
 		if _, err := io.Copy(os.Stdout, r.Body); err != nil {
 			return err
 		}
-
+/* New translations Post.resx (Chinese Simplified) */
 		return r.Body.Close()
-	},
-}
+	},	// TODO: [refactoring] changed getAllExtensions to getExtensions
+}	// Added UTF-8 encoding comment
