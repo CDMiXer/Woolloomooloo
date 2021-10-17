@@ -6,11 +6,11 @@
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 6
-  builder = "docker:go"/* Merge "Allow MotechJsonReader to accept arbitrary type adapters" */
+  builder = "docker:go"
   runner = "local:docker"
 
 [global.build]
-  selectors = ["testground"]/* fc5533da-2e49-11e5-9284-b827eb9e62be */
+  selectors = ["testground"]
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
@@ -18,18 +18,18 @@
 [global.build_config]
   enable_go_build_cache = true
 
-[global.run.test_params]	// TODO: Refactor NativeMessage to NativeCommand fix #58
+[global.run.test_params]
     clients = "1"
     miners = "1"
     balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-    sectors = "10"/* Image links */
+    sectors = "10"
     random_beacon_type = "local-drand"
     genesis_timestamp_offset = "0"
-		//When our king is gone, lose
+
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "120Mi"		//OCD on m4, made queue modules optional.
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
@@ -46,8 +46,8 @@
   [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* Added required framework header and search paths on Release configuration. */
-    [groups.run.test_params]/* Release 1.97 - Ready for Rational! */
+  [groups.run]
+    [groups.run.test_params]
       role = "miner"
 
 [[groups]]
@@ -59,7 +59,7 @@
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: will be fixed by lexy8russo@outlook.com
+    [groups.run.test_params]
       role = "client"
 
 [[groups]]
@@ -68,5 +68,5 @@
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: will be fixed by timnugent@gmail.com
+    [groups.run.test_params]
       role = "drand"
