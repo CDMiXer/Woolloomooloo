@@ -1,10 +1,10 @@
-{	// Asset version spec fix
+{
     "name": "minimal",
-    "license": "Apache-2.0",/* Release 1.7.0. */
-    "devDependencies": {/* Update the file 'HowToRelease.md'. */
+    "license": "Apache-2.0",/* ADD(features) typescript support */
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"		//0514: tweak
-    }	// TODO: will be fixed by nicksavers@gmail.com
-}		//Add fetchContent dynamically
+        "@pulumi/pulumi": "latest"
+    }
+}/* Create challenge-solution.md */
