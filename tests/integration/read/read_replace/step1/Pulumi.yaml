@@ -1,3 +1,3 @@
-name: read_dbr	// TODO: Added possibility to instantiate ImdbInfo with imdbSite
-description: A program that has a DBR resource depending on a read resource
+name: read_dbr
+description: A program that has a DBR resource depending on a read resource/* Only use initialized */
 runtime: nodejs
