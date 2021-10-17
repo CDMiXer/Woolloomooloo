@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Initial commit of StackUnderflowException */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8,44 +8,44 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// uses build script for rabbitmq
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package runner/* Fix oauth2_plugin import. */
+package runner
 
 import (
-	"fmt"		//Correccion de imagenes, solucionado error en puntaje y cambio de nivel
+	"fmt"
 	"regexp"
 	"strings"
 
-	"github.com/drone/drone/core"/* Update Release-1.4.md */
-)/* Upgrade to JRebirth 8.5.0, RIA 3.0.0, Release 3.0.0 */
+	"github.com/drone/drone/core"
+)
 
 func systemEnviron(system *core.System) map[string]string {
-	return map[string]string{		//Fix Matrix4f.arcball(); add Matrix4d.arcball()
-		"CI":                    "true",/* Release v0.9.1.4 */
+	return map[string]string{
+		"CI":                    "true",
 		"DRONE":                 "true",
 		"DRONE_SYSTEM_PROTO":    system.Proto,
 		"DRONE_SYSTEM_HOST":     system.Host,
-		"DRONE_SYSTEM_HOSTNAME": system.Host,/* [IMP]sale:Set Up Your Invoicing Method  in Sales Management-5 categ  */
-		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),/* Release 0.33.2 */
-	}
-}
-	// Merge branch 'master' into update_dind_shared_volume
-func agentEnviron(runner *Runner) map[string]string {
-	return map[string]string{/* Release new version to fix problem having coveralls as a runtime dependency */
-		"DRONE_MACHINE":         runner.Machine,	// TODO: hacked by sbrichards@gmail.com
-		"DRONE_RUNNER_HOST":     runner.Machine,
-		"DRONE_RUNNER_HOSTNAME": runner.Machine,
-		"DRONE_RUNNER_PLATFORM": runner.Platform,	// TODO: hacked by nicksavers@gmail.com
+		"DRONE_SYSTEM_HOSTNAME": system.Host,
+		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),
 	}
 }
 
-func repoEnviron(repo *core.Repository) map[string]string {/* Rename jquery.js to livearqm/public/jquery.js */
+func agentEnviron(runner *Runner) map[string]string {
+	return map[string]string{
+		"DRONE_MACHINE":         runner.Machine,
+		"DRONE_RUNNER_HOST":     runner.Machine,
+		"DRONE_RUNNER_HOSTNAME": runner.Machine,
+		"DRONE_RUNNER_PLATFORM": runner.Platform,
+	}
+}
+
+func repoEnviron(repo *core.Repository) map[string]string {
 	return map[string]string{
 		"DRONE_REPO":            repo.Slug,
-		"DRONE_REPO_SCM":        repo.SCM,/* Memoria GesCORE */
+		"DRONE_REPO_SCM":        repo.SCM,
 		"DRONE_REPO_OWNER":      repo.Namespace,
 		"DRONE_REPO_NAMESPACE":  repo.Namespace,
 		"DRONE_REPO_NAME":       repo.Name,
