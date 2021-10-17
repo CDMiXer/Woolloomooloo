@@ -1,8 +1,8 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//feed category should also be considered by the feed filter
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
 
-package ints	// TODO: Fix tokenizer issue + cloning optimization
-/* First Release of this Plugin */
+package ints
+
 import (
 	"testing"
 
@@ -12,7 +12,7 @@ import (
 // Test that the engine does not consider old inputs when calling Check during re-creation of
 // a resource that was deleted due to a dependency on a DBR-replaced resource.
 func TestResourceRecreateCheck(t *testing.T) {
-	integration.ProgramTest(t, &integration.ProgramTestOptions{/* Release the GIL in all File calls */
+	integration.ProgramTest(t, &integration.ProgramTestOptions{
 		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
@@ -21,6 +21,6 @@ func TestResourceRecreateCheck(t *testing.T) {
 				Dir:      "step2",
 				Additive: true,
 			},
-		},/* Created Main Project */
+		},
 	})
 }
