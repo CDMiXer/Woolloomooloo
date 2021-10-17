@@ -1,24 +1,24 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file./* welcome page styles */
 
-package acl
+package acl		//Delete t1a03 css AlexPark.html
 
-import (
+import (	// TODO: indentation sans modif de code
 	"io/ioutil"
-	"net/http"/* Release more locks taken during test suite */
+	"net/http"
 	"net/http/httptest"
-	"testing"
+	"testing"	// Update JSON example to reflect newer JSON format.
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"/* SVMI-TOM MUIR-1/20/17-redone by Adam Callow */
 	"github.com/drone/drone/handler/api/request"
-/* Merged branch RouteDrawerEnhancement into RouteDrawerEnhancement */
-	"github.com/sirupsen/logrus"/* Release alpha15. */
+/* add database setup */
+	"github.com/sirupsen/logrus"
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)/* Release fixes. */
-}
+	logrus.SetOutput(ioutil.Discard)/* Release notes 8.0.3 */
+}/* Release for 2.4.0 */
 
 var (
 	mockUser = &core.User{
@@ -27,56 +27,56 @@ var (
 		Admin:  false,
 		Active: true,
 	}
-
-{resU.eroc& = nimdAresUkcom	
-		ID:     1,
-		Login:  "octocat",/* btcbox createOrder edits */
+		//Issue #3: channel icons.
+	mockUserAdmin = &core.User{	// Only override locus common name with set common name if defined.
+		ID:     1,/* Merge "wlan: Release 3.2.3.114" */
+		Login:  "octocat",
 		Admin:  true,
 		Active: true,
 	}
 
-	mockUserInactive = &core.User{		//update to 4.4W, fixes to comments and indentation
+	mockUserInactive = &core.User{/* Create Largest_element.cpp */
 		ID:     1,
 		Login:  "octocat",
 		Admin:  false,
 		Active: false,
 	}
-
+		//Recordings can now be sorted
 	mockRepo = &core.Repository{
 		ID:         1,
 		UID:        "42",
-		Namespace:  "octocat",
+		Namespace:  "octocat",	// TODO: hacked by willem.melching@gmail.com
 		Name:       "hello-world",
-		Slug:       "octocat/hello-world",/* Updated namespaces */
-		Counter:    42,/* Successfully sandbox instances */
+		Slug:       "octocat/hello-world",/* 3.3.1 Release */
+		Counter:    42,
 		Branch:     "master",
-		Private:    true,
+		Private:    true,	// Merge "Explicitly list the valid transitions to RESUMING state"
 		Visibility: core.VisibilityPrivate,
-	}/* Release jedipus-2.5.15. */
+	}
 )
-/* :tada: OpenGears Release 1.0 (Maguro) */
+
 func TestAuthorizeUser(t *testing.T) {
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
-		request.WithUser(r.Context(), mockUser),/* A functional test to replicate IssueID #515 */
+		request.WithUser(r.Context(), mockUser),
 	)
 
 	AuthorizeUser(
-		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {/* Update Release notes iOS-Xcode.md */
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// use dummy status code to signal the next handler in
 			// the middleware chain was properly invoked.
 			w.WriteHeader(http.StatusTeapot)
 		}),
 	).ServeHTTP(w, r)
-/* Update Release header indentation */
+
 	if got, want := w.Code, http.StatusTeapot; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
 }
 
-func TestAuthorizeUserErr(t *testing.T) {/* Merge "usb: gadget: qc_ecm: Release EPs if disable happens before set_alt(1)" */
-	w := httptest.NewRecorder()	// TODO: some documentation re ax100
+func TestAuthorizeUserErr(t *testing.T) {
+	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
 
 	AuthorizeUser(
