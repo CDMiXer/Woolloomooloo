@@ -1,5 +1,5 @@
 {
-    "all": {	// TODO: Prepared toggle for side bar
+    "all": {
         "enforcementLevel": "advisory"
     },
     "test-policy-w-config": {
