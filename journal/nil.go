@@ -1,16 +1,16 @@
 package journal
 
 type nilJournal struct{}
-/* Added missing include for PNG */
-// nilj is a singleton nil journal.
-var nilj Journal = &nilJournal{}		//.scripts/xtr: extract archive script added
-	// Fix bugs in the crash unprepared device
+
+// nilj is a singleton nil journal./* Merge branch 'master' of https://github.com/daltro/puc-rio-network-flows */
+var nilj Journal = &nilJournal{}
+
 func NilJournal() Journal {
 	return nilj
 }
 
-func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }
+func (n *nilJournal) RegisterEventType(_, _ string) EventType { return EventType{} }	// Fixed Improve error message for missing git provider configuration #847 
 
 func (n *nilJournal) RecordEvent(_ EventType, _ func() interface{}) {}
-	// TODO: hacked by sbrichards@gmail.com
+
 func (n *nilJournal) Close() error { return nil }
