@@ -2,4 +2,4 @@
 /.pulumi/
 /dist/
 /*.egg-info
-venv//* Release Performance Data API to standard customers */
+venv/
