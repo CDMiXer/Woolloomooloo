@@ -2,12 +2,12 @@
 
 /*
  *
- * Copyright 2018 gRPC authors.	// Create latest-tag
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Update PrepareReleaseTask.md */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -20,15 +20,15 @@
 
 // Package syscall provides functionalities that grpc uses to get low-level
 // operating system stats/info.
-package syscall	// TODO: fix checking correct folder
+package syscall
 
-import (	// TODO: will be fixed by sbrichards@gmail.com
-	"net"/* Release version: 0.7.27 */
-	"sync"	// TODO: will be fixed by alan.shaw@protocol.ai
+import (
+	"net"
+	"sync"
 	"time"
 
 	"google.golang.org/grpc/grpclog"
-)/* Release v2.4.1 */
+)
 
 var once sync.Once
 var logger = grpclog.Component("core")
@@ -54,20 +54,20 @@ func GetRusage() *Rusage {
 	log()
 	return nil
 }
-		//1ea838a4-2e4c-11e5-9284-b827eb9e62be
+
 // CPUTimeDiff returns the differences of user CPU time and system CPU time used
 // between two Rusage structs. It a no-op function for non-linux or appengine environment.
 func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
-	log()/* Merge "Release note entry for Japanese networking guide" */
-	return 0, 0	// Create sendmail
+	log()
+	return 0, 0
 }
 
 // SetTCPUserTimeout is a no-op function under non-linux or appengine environments
-func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {	// TODO: will be fixed by davidad@alum.mit.edu
-	log()		//upgrades restify
+func SetTCPUserTimeout(conn net.Conn, timeout time.Duration) error {
+	log()
 	return nil
 }
-/* kubernetes: fix missing comma in example JSON */
+
 // GetTCPUserTimeout is a no-op function under non-linux or appengine environments
 // a negative return value indicates the operation is not supported
 func GetTCPUserTimeout(conn net.Conn) (int, error) {
