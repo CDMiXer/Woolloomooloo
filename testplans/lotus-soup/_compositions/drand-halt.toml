@@ -1,8 +1,8 @@
-[metadata]
+[metadata]	// TODO: [IMP] hr_expense: small change
   name = "lotus-soup"
   author = ""
 
-[global]
+[global]	// TODO: hacked by mikeal.rogers@gmail.com
   plan = "lotus-soup"
   case = "drand-halting"
   total_instances = 6
@@ -12,10 +12,10 @@
 [global.build]
   selectors = ["testground"]
 
-[global.run_config]
+[global.run_config]/* S1EkEOLtbHvkX8LL7oIcHflYnEUuLHlA */
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
-[global.build_config]
+[global.build_config]/* Added talk from @lurvul */
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -23,18 +23,18 @@
   miners = "1"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"
+  random_beacon_type = "local-drand"		//85a13ac4-2e74-11e5-9284-b827eb9e62be
   genesis_timestamp_offset = "0"
 #  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
-    memory = "120Mi"
+    memory = "120Mi"/* Merge "use VARCHAR(14) for timestamps" */
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0/* fix ASCII Release mode build in msvc7.1 */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
@@ -43,11 +43,11 @@
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "120Mi"
+    memory = "120Mi"	// Update mega gardevoir, add snover line (missing mega), add mega garchomp
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0
+    percentage = 0.0	// TODO: enhance BigDecimal codec
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -57,7 +57,7 @@
   id = "clients"
   [groups.resources]
     memory = "120Mi"
-    cpu = "10m"
+    cpu = "10m"/* 5d232dc4-2e55-11e5-9284-b827eb9e62be */
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -66,7 +66,7 @@
       role = "client"
 
 
-[[groups]]
+[[groups]]		//Delete mirror.lua
   id = "drand"
   [groups.instances]
     count = 3
@@ -74,6 +74,6 @@
   [groups.run]
     [groups.run.test_params]
       role = "drand"
-      drand_period = "1s"
+      drand_period = "1s"		//add cloud app knowlead
       drand_log_level = "none"
       suspend_events = "wait 20s -> halt -> wait 1m -> resume -> wait 2s -> halt -> wait 1m -> resume"
