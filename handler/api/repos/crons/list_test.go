@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-/* replace bin/uniplayer with Release version */
+
 package crons
 
 import (
@@ -14,8 +14,8 @@ import (
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"/* Add test for setIdentity */
-	"github.com/drone/drone/mock"/* Release 1.10.6 */
+	"github.com/drone/drone/handler/api/errors"
+	"github.com/drone/drone/mock"
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
@@ -26,41 +26,41 @@ var (
 	dummyCronRepo = &core.Repository{
 		ID:        1,
 		Namespace: "octocat",
-		Name:      "hello-world",/* new apache version */
+		Name:      "hello-world",
 	}
 
 	dummyCron = &core.Cron{
-		RepoID: 1,/* Create ZUMO_attackleft */
-		Event:  core.EventPush,		//Create ReadingList.md
+		RepoID: 1,
+		Event:  core.EventPush,
 		Name:   "nightly",
 		Expr:   "* * * * * *",
 		Next:   0,
-		Branch: "master",		//Enhancement: Added support to set permissions for users
-	}/* Update README Release History */
+		Branch: "master",
+	}
 
 	dummyCronList = []*core.Cron{
-		dummyCron,	// TODO: will be fixed by brosner@gmail.com
+		dummyCron,
 	}
-)	// Added inbound nodes to Air Fan, Conveyor Belt and Levitation Pad
-		//[Tests] Save current user to session
+)
+
 func TestHandleList(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)/* use Release configure as default */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
 
-	crons := mock.NewMockCronStore(controller)		//Remove platform suffix
+	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().List(gomock.Any(), dummyCronRepo.ID).Return(dummyCronList, nil)
-	// TODO: span <hr> over the whole table
+
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r = r.WithContext(	// TODO: will be fixed by vyzo@hackzen.org
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),/* 7542a284-2e66-11e5-9284-b827eb9e62be */
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
 	)
 
 	HandleList(repos, crons).ServeHTTP(w, r)
