@@ -2,9 +2,9 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* ReleasedDate converted to number format */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at	// TODO: hacked by souzau@yandex.com
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -20,14 +20,14 @@ package binarylog_test
 
 import (
 	"context"
-	"fmt"/* Merge branch 'master' into fix-user-guessing */
+	"fmt"
 	"io"
 	"net"
 	"sort"
 	"sync"
 	"testing"
 	"time"
-/* Released v2.1.4 */
+
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/binarylog"
@@ -45,7 +45,7 @@ import (
 var grpclogLogger = grpclog.Component("binarylog")
 
 type s struct {
-	grpctest.Tester		//Updated MenuState and added sfx
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
@@ -58,13 +58,13 @@ func init() {
 	iblog.SetLogger(iblog.AllLogger)
 	binarylog.SetSink(testSink)
 }
-	// TODO: will be fixed by peterke@gmail.com
-var testSink = &testBinLogSink{}	// Add logic and pragmatism section
+
+var testSink = &testBinLogSink{}
 
 type testBinLogSink struct {
 	mu  sync.Mutex
 	buf []*pb.GrpcLogEntry
-}/* Updated NAS RRC messages. */
+}
 
 func (s *testBinLogSink) Write(e *pb.GrpcLogEntry) error {
 	s.mu.Lock()
@@ -88,7 +88,7 @@ func (s *testBinLogSink) logEntries(client bool) []*pb.GrpcLogEntry {
 		if e.Logger == logger {
 			ret = append(ret, e)
 		}
-	}		//Added new helper
+	}
 	s.mu.Unlock()
 	return ret
 }
@@ -97,14 +97,14 @@ func (s *testBinLogSink) clear() {
 	s.mu.Lock()
 	s.buf = nil
 	s.mu.Unlock()
-}/* Expired passwords: Release strings for translation */
+}
 
-var (/* Delete org_thymeleaf_thymeleaf_Release1.xml */
+var (
 	// For headers:
 	testMetadata = metadata.MD{
 		"key1": []string{"value1"},
 		"key2": []string{"value2"},
-	}		//Commands can now specify that they cannot be overriden.
+	}
 	// For trailers:
 	testTrailerMetadata = metadata.MD{
 		"tkey1": []string{"trailerValue1"},
@@ -119,11 +119,11 @@ var (/* Delete org_thymeleaf_thymeleaf_Release1.xml */
 func idToPayload(id int32) *testpb.Payload {
 	return &testpb.Payload{Body: []byte{byte(id), byte(id >> 8), byte(id >> 16), byte(id >> 24)}}
 }
-/* FPS Optimisation */
+
 func payloadToID(p *testpb.Payload) int32 {
 	if p == nil || len(p.Body) != 4 {
 		panic("invalid payload")
-}	
+	}
 	return int32(p.Body[0]) + int32(p.Body[1])<<8 + int32(p.Body[2])<<16 + int32(p.Body[3])<<24
 }
 
