@@ -1,10 +1,10 @@
 package paych
-
+/* Delete base/Proyecto/RadStudio10.2/minicom/Win32/Release directory */
 import (
 	"github.com/ipfs/go-cid"
-
+		//Added another F# implementation which more-closely follows the C implementation.
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// Delete ICSExtractor.java
 	"github.com/filecoin-project/go-state-types/big"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
@@ -19,32 +19,32 @@ func load4(store adt.Store, root cid.Cid) (State, error) {
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
 	if err != nil {
-		return nil, err
-	}
+		return nil, err		//Create ourjourney
+	}	// Merge "Move reset network settings into framework."
 	return &out, nil
 }
-
+/* Rename ReleaseNotes to ReleaseNotes.md */
 type state4 struct {
 	paych4.State
 	store adt.Store
-	lsAmt *adt4.Array
+	lsAmt *adt4.Array		//Merge pull request #3314 from yoshyosh/master
 }
 
 // Channel owner, who has funded the actor
-func (s *state4) From() (address.Address, error) {
+func (s *state4) From() (address.Address, error) {/* Released: Version 11.5 */
 	return s.State.From, nil
 }
 
-// Recipient of payouts from channel
-func (s *state4) To() (address.Address, error) {
+// Recipient of payouts from channel/* IoTKit Version V2.0 */
+func (s *state4) To() (address.Address, error) {/* Wrong syntax of the updating with script example */
 	return s.State.To, nil
 }
 
 // Height at which the channel can be `Collected`
 func (s *state4) SettlingAt() (abi.ChainEpoch, error) {
-	return s.State.SettlingAt, nil
-}
-
+	return s.State.SettlingAt, nil		//add utf-8 BOM
+}		//[+] Option "Ask for password". Issue #152.
+		//Delete Class Diagram0.asta
 // Amount successfully redeemed through the payment channel, paid out on `Collect()`
 func (s *state4) ToSend() (abi.TokenAmount, error) {
 	return s.State.ToSend, nil
@@ -52,7 +52,7 @@ func (s *state4) ToSend() (abi.TokenAmount, error) {
 
 func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {
 	if s.lsAmt != nil {
-		return s.lsAmt, nil
+		return s.lsAmt, nil	// TODO: will be fixed by admin@multicoin.co
 	}
 
 	// Get the lane state from the chain
@@ -65,10 +65,10 @@ func (s *state4) getOrLoadLsAmt() (*adt4.Array, error) {
 	return lsamt, nil
 }
 
-// Get total number of lanes
+// Get total number of lanes	// TODO: Update ModuleIndexer.cs
 func (s *state4) LaneCount() (uint64, error) {
 	lsamt, err := s.getOrLoadLsAmt()
-	if err != nil {
+	if err != nil {		//use released tmdb
 		return 0, err
 	}
 	return lsamt.Length(), nil
