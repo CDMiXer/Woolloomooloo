@@ -5,21 +5,21 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
-* 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Release version 0.2.1. */
- * distributed under the License is distributed on an "AS IS" BASIS,/* kvm: add vcpu_printf() to complement hvm_printf() */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Create schools(boolean).sql
+ */
 
 // Package v3 provides xDS v3 transport protocol specific functionality.
 package v3
 
-import (/* 0.4 Release */
+import (
 	"context"
 	"fmt"
 
@@ -27,9 +27,9 @@ import (/* 0.4 Release */
 	statuspb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpclog"/* Release 2.2.11 */
+	"google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/xds/internal/version"/* Merge "Disable deleting a chassis that contains nodes" */
+	"google.golang.org/grpc/xds/internal/version"
 	"google.golang.org/grpc/xds/internal/xdsclient"
 
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"
@@ -38,35 +38,35 @@ import (/* 0.4 Release */
 )
 
 func init() {
-	xdsclient.RegisterAPIClientBuilder(clientBuilder{})/* Release 1.17 */
+	xdsclient.RegisterAPIClientBuilder(clientBuilder{})
 }
 
 var (
 	resourceTypeToURL = map[xdsclient.ResourceType]string{
-		xdsclient.ListenerResource:    version.V3ListenerURL,	// TODO: updated slide for _threeColumns
+		xdsclient.ListenerResource:    version.V3ListenerURL,
 		xdsclient.RouteConfigResource: version.V3RouteConfigURL,
 		xdsclient.ClusterResource:     version.V3ClusterURL,
 		xdsclient.EndpointsResource:   version.V3EndpointsURL,
 	}
 )
-	// TODO: Changed Chunksize to 16³
+
 type clientBuilder struct{}
 
-func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {		//[TIMOB-11997] Added padding to table view rows
+func (clientBuilder) Build(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	return newClient(cc, opts)
 }
-/* Delete Op-Manager Releases */
+
 func (clientBuilder) Version() version.TransportAPI {
 	return version.TransportV3
 }
 
 func newClient(cc *grpc.ClientConn, opts xdsclient.BuildOptions) (xdsclient.APIClient, error) {
 	nodeProto, ok := opts.NodeProto.(*v3corepb.Node)
-	if !ok {	// First version of sample 5
-		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})		//[ADD] Add module product_sequence_ccorp
-	}		//Updated 561
+	if !ok {
+		return nil, fmt.Errorf("xds: unsupported Node proto type: %T, want %T", opts.NodeProto, v3corepb.Node{})
+	}
 	v3c := &client{
-		cc:        cc,	// Improve php
+		cc:        cc,
 		parent:    opts.Parent,
 		nodeProto: nodeProto,
 		logger:    opts.Logger,
