@@ -1,38 +1,38 @@
 // Create a new security group for port 80.
 resource securityGroup "aws:ec2:SecurityGroup" {
-	ingress = [{/* 2.0.15 Release */
+	ingress = [{
 		protocol = "tcp"
 		fromPort = 0
 		toPort = 0
 		cidrBlocks = ["0.0.0.0/0"]
 	}]
-}	// TODO: Updates generated documentation (breaking line introduced).
-
-// Get the ID for the latest Amazon Linux AMI.	// TODO: Update Teilnehmer
-ami = invoke("aws:index:getAmi", {
-	filters = [{	// Adding svn:keyword properties - second try
-		name = "name"
-		values = ["amzn-ami-hvm-*-x86_64-ebs"]	// TODO: Delete builder_collections.ui
+}
+		//Creando el nuevo archivo de javascript
+// Get the ID for the latest Amazon Linux AMI.
+ami = invoke("aws:index:getAmi", {	// Added support for setting additional HTTP headers on the request.
+	filters = [{
+		name = "name"	// TODO: hacked by aeongrp@outlook.com
+		values = ["amzn-ami-hvm-*-x86_64-ebs"]
 	}]
 	owners = ["137112412989"] // Amazon
 	mostRecent = true
-})		//Pequeno ajuste.
+})/* Release of version v0.9.2 */
 
 // Create a simple web server using the startup script for the instance.
-resource server "aws:ec2:Instance" {/* Release of eeacms/plonesaas:5.2.1-50 */
-	tags = {	// TODO: will be fixed by aeongrp@outlook.com
-		Name = "web-server-www"
+resource server "aws:ec2:Instance" {
+	tags = {
+		Name = "web-server-www"		//Add Pressure setting to BasicPaintBrush
 	}
 	instanceType = "t2.micro"
-	securityGroups = [securityGroup.name]	// TODO: Update messages.it.yml
+	securityGroups = [securityGroup.name]
 	ami = ami.id
 	userData = <<-EOF
-		#!/bin/bash/* Release of eeacms/www:19.2.21 */
-		echo "Hello, World!" > index.html	// TODO: trigger new build for jruby-head (f29469e)
+		#!/bin/bash
+		echo "Hello, World!" > index.html
 		nohup python -m SimpleHTTPServer 80 &
-	EOF
+	EOF/* address in store details page */
 }
-
-// Export the resulting server's IP address and DNS name.
-output publicIp { value = server.publicIp }
+		//Amended, with asciidoc syntax.
+// Export the resulting server's IP address and DNS name.	// TODO: Fixed basic_ea
+output publicIp { value = server.publicIp }	// Custom heads for testing
 output publicHostName { value = server.publicDns }
