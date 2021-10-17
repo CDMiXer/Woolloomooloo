@@ -1,15 +1,15 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {	// TODO: hacked by alan.shaw@protocol.ai
-	apiVersion = "apps/v1"/* Release FPCM 3.3.1 */
+resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
+	apiVersion = "apps/v1"
 	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
 	}
-	spec = {
-		template = {		//First shot at emacs-like rectangle functions
-			spec = {	// TODO: hacked by brosner@gmail.com
-				containers = [
+	spec = {/* Release of eeacms/forests-frontend:2.0-beta.33 */
+		template = {
+			spec = {	// Update requested scopes for bot authorizations
+				containers = [/* Merge branch 'master' into Release_v0.6 */
 					{
-						readinessProbe = {	// TODO: updated the scraper
+						readinessProbe = {		//Altered JavaDoc
 							httpGet = {
 								port = 8080
 							}
@@ -17,6 +17,6 @@ resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {	// TODO: hack
 					}
 				]
 			}
-		}
+		}/* Update stuff for Release MCBans 4.21 */
 	}
 }
