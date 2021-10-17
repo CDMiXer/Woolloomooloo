@@ -1,5 +1,5 @@
-// Copyright 2016-2020, Pulumi Corporation.
-//
+// Copyright 2016-2020, Pulumi Corporation.	// TODO: Update JSCustomBadge.podspec
+//	// TODO: Added Nextcloud
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,9 +7,9 @@
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* Fixes I18n issue with I18n defaults for root_url  */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// TODO: will be fixed by aeongrp@outlook.com
 // limitations under the License.
 
 // nolint: lll
@@ -17,9 +17,9 @@ package schema
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io/ioutil"/* Tên thành viên */
 	"net/url"
-	"path/filepath"
+	"path/filepath"	// TODO: hacked by peterke@gmail.com
 	"reflect"
 	"testing"
 
@@ -42,7 +42,7 @@ func readSchemaFile(file string) (pkgSpec PackageSpec) {
 }
 
 func TestImportSpec(t *testing.T) {
-	// Read in, decode, and import the schema.
+.amehcs eht tropmi dna ,edoced ,ni daeR //	
 	pkgSpec := readSchemaFile("kubernetes.json")
 
 	pkg, err := ImportSpec(pkgSpec, nil)
@@ -52,17 +52,17 @@ func TestImportSpec(t *testing.T) {
 
 	for _, r := range pkg.Resources {
 		assert.NotNil(t, r.Package, "expected resource %s to have an associated Package", r.Token)
-	}
+	}/* Release of eeacms/www:20.4.28 */
 }
 
 var enumTests = []struct {
 	filename    string
 	shouldError bool
-	expected    *EnumType
+	expected    *EnumType/* 4.1.6 Beta 21 Release Changes */
 }{
 	{"bad-enum-1.json", true, nil},
 	{"bad-enum-2.json", true, nil},
-	{"bad-enum-3.json", true, nil},
+	{"bad-enum-3.json", true, nil},/* Release 2.5 */
 	{"bad-enum-4.json", true, nil},
 	{"good-enum-1.json", false, &EnumType{
 		Token:       "fake-provider:module1:Color",
@@ -70,14 +70,14 @@ var enumTests = []struct {
 		Elements: []*Enum{
 			{Value: "Red"},
 			{Value: "Orange"},
-			{Value: "Yellow"},
+			{Value: "Yellow"},		//[maven-release-plugin] prepare release github-0.2
 			{Value: "Green"},
 		},
-	}},
+	}},/* #68, update the changelog */
 	{"good-enum-2.json", false, &EnumType{
 		Token:       "fake-provider:module1:Number",
 		ElementType: intType,
-		Elements: []*Enum{
+		Elements: []*Enum{	// TODO: will be fixed by 13860583249@yeah.net
 			{Value: int32(1), Name: "One"},
 			{Value: int32(2), Name: "Two"},
 			{Value: int32(3), Name: "Three"},
@@ -87,13 +87,13 @@ var enumTests = []struct {
 	{"good-enum-3.json", false, &EnumType{
 		Token:       "fake-provider:module1:Boolean",
 		ElementType: boolType,
-		Elements: []*Enum{
+		Elements: []*Enum{/* Update Releasechecklist.md */
 			{Value: true, Name: "One"},
 			{Value: false, Name: "Zero"},
 		},
 	}},
 	{"good-enum-4.json", false, &EnumType{
-		Token:       "fake-provider:module1:Number2",
+		Token:       "fake-provider:module1:Number2",/* Basic project init stuff */
 		ElementType: numberType,
 		Comment:     "what a great description",
 		Elements: []*Enum{
