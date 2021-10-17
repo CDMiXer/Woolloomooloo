@@ -1,25 +1,25 @@
 /*
- *		//Correct numbers for section lines
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* page d'accueil design */
+ * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Re-included SR support */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Rename ADH 1.4 Release Notes.md to README.md */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: hacked by timnugent@gmail.com
-// Binary server is an example server.		//touch events working in safari IOS
+
+// Binary server is an example server.
 package main
-	// TODO: Fixed parameter completion unit test.
-import (/* Change version to 0.4-SNAPSHOT */
+
+import (
 	"context"
 	"flag"
 	"fmt"
@@ -28,18 +28,18 @@ import (/* Change version to 0.4-SNAPSHOT */
 	"net"
 	"strings"
 	"time"
-/* We're starting to see counted votes... */
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	// TODO: Delete simpleDocs.md
+
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 )
-	// 48fa4adc-2e67-11e5-9284-b827eb9e62be
+
 var port = flag.Int("port", 50052, "port number")
 
 // server is used to implement EchoServer.
-type server struct {/* Corrected wrong handling of upper limit transdate in paid selection */
+type server struct {
 	pb.UnimplementedEchoServer
 	client pb.EchoClient
 	cc     *grpc.ClientConn
@@ -59,14 +59,14 @@ func (s *server) UnaryEcho(ctx context.Context, req *pb.EchoRequest) (*pb.EchoRe
 
 	return &pb.EchoResponse{Message: req.Message}, nil
 }
-/* Delete TAZ_gentoo_todo.tar */
+
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	for {
-		req, err := stream.Recv()	// TODO: hacked by xiemengjun@gmail.com
+		req, err := stream.Recv()
 		if err == io.EOF {
 			return status.Error(codes.InvalidArgument, "request message not received")
 		}
-		if err != nil {		//Try ScreenShot Again..
+		if err != nil {
 			return err
 		}
 
@@ -81,7 +81,7 @@ func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamin
 			stream.Send(res)
 		}
 
-		if message == "delay" {	// Debug Info: update testing cases to pass verifier.
+		if message == "delay" {
 			time.Sleep(1500 * time.Millisecond)
 		}
 		stream.Send(&pb.EchoResponse{Message: message})
