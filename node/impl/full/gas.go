@@ -1,15 +1,15 @@
 package full
 
-import (	// bundle-size: 26bb1daf87166830bff0b992b0bf3eac0e105962.json
-	"context"		//Created IMG_5963.JPG
+import (
+	"context"
 	"math"
 	"math/rand"
-	"sort"/* Release version 0.4.8 */
+	"sort"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	lru "github.com/hashicorp/golang-lru"
-		//spatial query; string IDs; ajax agent picker
+
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
@@ -18,33 +18,33 @@ import (	// bundle-size: 26bb1daf87166830bff0b992b0bf3eac0e105962.json
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/exitcode"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: removed the config file of jcf from api
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"/* Merged hotfix/#48 into master */
+	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 )
 
-type GasModuleAPI interface {/* Release of eeacms/plonesaas:5.2.1-6 */
+type GasModuleAPI interface {
 	GasEstimateMessageGas(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec, tsk types.TipSetKey) (*types.Message, error)
-}/* connecting to dev_db */
+}
 
-var _ GasModuleAPI = *new(api.FullNode)/* Add FIXME: hard-coded serial configuration */
-	// TODO: Change upgrade section
-// GasModule provides a default implementation of GasModuleAPI./* Merge branch 'Release-2.3.0' */
+var _ GasModuleAPI = *new(api.FullNode)
+
+// GasModule provides a default implementation of GasModuleAPI.
 // It can be swapped out with another implementation through Dependency
 // Injection (for example with a thin RPC client).
-type GasModule struct {		//Using additional font icons for magnifier docked positions.
+type GasModule struct {
 	fx.In
-	Stmgr     *stmgr.StateManager/* retreive logo */
-	Chain     *store.ChainStore	// TODO: UI Cleanup
-	Mpool     *messagepool.MessagePool	// TODO: Starting examples and app class.
+	Stmgr     *stmgr.StateManager
+	Chain     *store.ChainStore
+	Mpool     *messagepool.MessagePool
 	GetMaxFee dtypes.DefaultMaxFeeFunc
 
 	PriceCache *GasPriceCache
-}		//alpha68k.cpp : Add notes
+}
 
 var _ GasModuleAPI = (*GasModule)(nil)
 
