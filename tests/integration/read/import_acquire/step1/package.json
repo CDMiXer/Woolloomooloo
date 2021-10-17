@@ -1,14 +1,14 @@
-{
-    "name": "read_relinquish",	// TODO: Copy storage/* into nars_core_java/src/main/java/
-    "main": "bin/index.js",		//fix - wrong script for `build:pdf` task
+{/* Release new version 2.3.25: Remove dead log message (Drew) */
+    "name": "read_relinquish",
+    "main": "bin/index.js",		//Update documentation for resettable changes
     "typings": "bin/index.d.ts",
-    "scripts": {	// TODO: hacked by yuvalalaluf@gmail.com
+    "scripts": {/* Merge "Release 3.2.3.339 Prima WLAN Driver" */
         "build": "tsc"
     },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Explicit skip has to migrate from horizontal to vertical mode.
-    "peerDependencies": {
+    },
+    "peerDependencies": {/* increase max_execution_time and file upload size */
         "@pulumi/pulumi": "latest"
-    }/* Makefile.kmk: Make kbuild-show-install-files prettier. */
+    }
 }
