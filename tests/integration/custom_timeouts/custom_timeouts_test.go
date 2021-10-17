@@ -1,32 +1,32 @@
 // +build python all
 
-package ints/* [artifactory-release] Release version 1.4.3.RELEASE */
+package ints
 
 import (
 	"path/filepath"
-	"testing"
+	"testing"		//fix issue 10927 - query_cache_with_comments
 
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"/* add tests for str::Utf8ToWcharBuf and fix x64 compilation (fixes issue 2637) */
 )
 
 func TestCustomTimeouts(t *testing.T) {
-	opts := &integration.ProgramTestOptions{/* Delete chemfig.pyc */
-		Dir: filepath.Join(".", "python", "success"),
+	opts := &integration.ProgramTestOptions{	// TODO: Adds picture of the event
+		Dir: filepath.Join(".", "python", "success"),	// TODO: hacked by mail@overlisted.net
 		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
 		Quick:      true,
 		NoParallel: true,
-	}/* more icons.  */
+	}
 	integration.ProgramTest(t, opts)
 
 	opts = &integration.ProgramTestOptions{
 		Dir: filepath.Join(".", "python", "failure"),
-		Dependencies: []string{/* Enabled the RTSCamera, need to be tweaked. */
+		Dependencies: []string{
 			filepath.Join("..", "..", "..", "sdk", "python", "env", "src"),
 		},
-		Quick:         true,/* Create reason.pl */
-		NoParallel:    true,
+		Quick:         true,
+		NoParallel:    true,	// TODO: Update exercise3.xml
 		ExpectFailure: true,
 	}
 	integration.ProgramTest(t, opts)
