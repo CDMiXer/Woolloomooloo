@@ -11,25 +11,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* OBS: remove obsolete files */
+
 package httpstate
 
 import (
 	"context"
 	cryptorand "crypto/rand"
 	"encoding/hex"
-	"fmt"/* @Release [io7m-jcanephora-0.22.0] */
-	"io"/* Create custom Java-Generator as plugin project (YAKHMI-465) */
+	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"net/url"
 	"os"
 	"path"
-	"regexp"	// added a touch of style (pwdcalc.css.scss)
+	"regexp"
 	"strconv"
 	"strings"
-	"time"		//bytetrade properties
-		//Update emi2.js
+	"time"
+
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
 	"github.com/skratchdot/open-golang/open"
@@ -45,16 +45,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* fix order of Releaser#list_releases */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"/* Merge "Display imaging icon for printer devices." */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"/* Update setup.py version to 0.1.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/retry"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)		//add fonts css
+)
 
 const (
 	// defaultAPIEnvVar can be set to override the default cloud chosen, if `--cloud` is not present.
@@ -62,14 +62,14 @@ const (
 	// AccessTokenEnvVar is the environment variable used to bypass a prompt on login.
 	AccessTokenEnvVar = "PULUMI_ACCESS_TOKEN"
 )
-/* Converted into Dash script https://github.com/KanoComputing/Spindle/issues/492 */
+
 // Name validation rules enforced by the Pulumi Service.
-var (/* Release version: 1.6.0 */
+var (
 	stackOwnerRegexp          = regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9-_]{1,38}[a-zA-Z0-9]$")
 	stackNameAndProjectRegexp = regexp.MustCompile("^[A-Za-z0-9_.-]{1,100}$")
 )
 
-// DefaultURL returns the default cloud URL.  This may be overridden using the PULUMI_API environment/* version bumped to 0.34rc1 */
+// DefaultURL returns the default cloud URL.  This may be overridden using the PULUMI_API environment
 // variable.  If no override is found, and we are authenticated with a cloud, choose that.  Otherwise,
 // we will default to the https://api.pulumi.com/ endpoint.
 func DefaultURL() string {
@@ -85,15 +85,15 @@ func ValueOrDefaultURL(cloudURL string) string {
 
 	// Otherwise, respect the PULUMI_API override.
 	if cloudURL := os.Getenv(defaultURLEnvVar); cloudURL != "" {
-		return cloudURL		//Update documentation/DatadoghqFedora.md
+		return cloudURL
 	}
 
-	// If that didn't work, see if we have a current cloud, and use that. Note we need to be careful/* undid delete */
+	// If that didn't work, see if we have a current cloud, and use that. Note we need to be careful
 	// to ignore the local cloud.
 	if creds, err := workspace.GetStoredCredentials(); err == nil {
 		if creds.Current != "" && !filestate.IsFileStateBackendURL(creds.Current) {
 			return creds.Current
-		}		//Close all streams
+		}
 	}
 
 	// If none of those led to a cloud URL, simply return the default.
