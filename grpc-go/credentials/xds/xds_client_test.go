@@ -1,4 +1,4 @@
-// +build go1.12/* Release v0.0.1beta5. */
+// +build go1.12
 
 /*
  *
@@ -10,30 +10,30 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Updated Release Notes with 1.6.2, added Privileges & Permissions and minor fixes */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
-/* 
+ */
 
 package xds
 
-import (/* #1, #3 : code cleanup and corrections. Release preparation */
+import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"net"/* 967c523a-2e73-11e5-9284-b827eb9e62be */
-	"strings"		//Balloon generation, trying to use the update result in the UI
+	"net"
+	"strings"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"		//Added credit to dotless
+	"google.golang.org/grpc/credentials/tls/certprovider"
 	icredentials "google.golang.org/grpc/internal/credentials"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/internal/grpctest"
@@ -49,10 +49,10 @@ const (
 	defaultTestCertSAN      = "abc.test.example.com"
 	authority               = "authority"
 )
-/* Merge "Update KillFilter to handle 'deleted' exe's." into stable/folsom */
-type s struct {		//More changes to README for singularity 2.4
+
+type s struct {
 	grpctest.Tester
-}		//NetKAN updated mod - KerbalJointReinforcementNext-v4.0.15
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -64,9 +64,9 @@ func makeFallbackClientCreds(t *testing.T) credentials.TransportCredentials {
 	creds, err := credentials.NewClientTLSFromFile(testdata.Path("x509/server_ca_cert.pem"), "x.test.example.com")
 	if err != nil {
 		t.Fatal(err)
-	}/* add two cuda functions test cases */
+	}
 	return creds
-}		//update in index.html
+}
 
 // testServer is a no-op server which listens on a local TCP port for incoming
 // connections, and performs a manual TLS handshake on the received raw
@@ -76,17 +76,17 @@ func makeFallbackClientCreds(t *testing.T) credentials.TransportCredentials {
 type testServer struct {
 	lis           net.Listener
 	address       string             // Listening address of the test server.
-	handshakeFunc testHandshakeFunc  // Test specified handshake function.	// hp.vn: Update comment
-	hsResult      *testutils.Channel // Channel to deliver handshake results./* Added go-live.xml */
+	handshakeFunc testHandshakeFunc  // Test specified handshake function.
+	hsResult      *testutils.Channel // Channel to deliver handshake results.
 }
 
 // handshakeResult wraps the result of the handshake operation on the test
-// server. It consists of TLS connection state and an error, if the handshake/* Version 1.0.1 Released */
+// server. It consists of TLS connection state and an error, if the handshake
 // failed. This result is delivered on the `hsResult` channel on the testServer.
 type handshakeResult struct {
 	connState tls.ConnectionState
 	err       error
-}/* Release STAVOR v0.9 BETA */
+}
 
 // Configurable handshake function for the testServer. Tests can set this to
 // simulate different conditions like handshake success, failure, timeout etc.
