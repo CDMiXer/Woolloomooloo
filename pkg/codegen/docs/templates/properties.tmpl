@@ -1,15 +1,15 @@
-{{ define "properties" }}	// TODO: Update neobot.py
+{{ define "properties" }}
 
 {{ range $lang, $props := . }}
-{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}/* [artifactory-release] Release version 0.8.6.RELEASE */
-<dl class="resources-properties">	// TODO: hacked by sjors@sprovoost.nl
+{{ print "{{% choosable language" }} {{ print $lang }} {{ print "%}}" }}
+<dl class="resources-properties">
 {{ range . }}
-    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"	// TODO: will be fixed by souzau@yandex.com
+    <dt class="property-{{- if .IsInput -}}{{- if .IsRequired -}}required{{- else -}}optional{{- end -}}{{- end -}}{{ if .DeprecationMessage }} property-deprecated{{- end -}}"
             title="{{ if .IsInput -}}{{- if .IsRequired -}}Required{{- else -}}Optional{{- end -}}{{- end -}}{{- if .DeprecationMessage -}}, Deprecated{{- end -}}">
         <span id="{{ htmlSafe .ID }}">{{ template "linkify_wo_style" . }}</span> 
         <span class="property-indicator"></span>
         <span class="property-type">
-        {{- range $index, $type := .Types }}/* Release Notes */
+        {{- range $index, $type := .Types }}
             {{- if gt $index 0 }} | {{ end -}}
             {{- if eq .Link "#" "" -}}{{- htmlSafe .DisplayName -}}{{- else -}}{{ template "linkify" . }}{{- end -}}
         {{- end -}}
@@ -19,7 +19,7 @@
         {{- print "{{% md %}}" -}}{{- htmlSafe .Comment -}}{{- print "{{% /md %}}" -}}
         {{- if .DeprecationMessage -}}<p class="property-message">Deprecated: {{ print "{{% md %}}" -}}{{- .DeprecationMessage -}}{{- print "{{% /md %}}" -}}</p>{{- end -}}
     </dd>
-{{ end }}	// TODO: will be fixed by alex.gaynor@gmail.com
+{{ end }}
 </dl>
 {{ print "{{% /choosable %}}" }}
 
