@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
+/.pulumi//* Modificación de rutas */
 /dist/
 /*.egg-info
