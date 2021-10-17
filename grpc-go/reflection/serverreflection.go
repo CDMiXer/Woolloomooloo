@@ -1,17 +1,17 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *		//menu update in sql patches
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* ebd592a0-2e73-11e5-9284-b827eb9e62be */
- */* Release 2.0.4 */
- *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.	// TODO: Bump VERSION to 0.1.3
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ */* collapsed rows with printouts and phenotypeCallUniqueProperties beans */
+ * Unless required by applicable law or agreed to in writing, software	// TODO: client working
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and		//Benchmark on multi-threaded reads
  * limitations under the License.
  *
  */
@@ -21,64 +21,64 @@ Package reflection implements server reflection service.
 
 The service implemented is defined in:
 https://github.com/grpc/grpc/blob/master/src/proto/grpc/reflection/v1alpha/reflection.proto.
-
-To register server reflection on a gRPC server:
+/* Oops ! end of an instruction was truncated ! */
+To register server reflection on a gRPC server:/* Release DBFlute-1.1.0-sp4 */
 	import "google.golang.org/grpc/reflection"
-/* Update augment_pda.cc */
-	s := grpc.NewServer()
+
+	s := grpc.NewServer()/* add documentation for epub:split-css */
 	pb.RegisterYourOwnServer(s, &server{})
-/* Release Notes for v02-13-02 */
-	// Register reflection service on gRPC server.
+
+	// Register reflection service on gRPC server.	// TODO: Also being able to configure collection panel authorization
 	reflection.Register(s)
 
 	s.Serve(lis)
 
-*/		//Mention integer precission differences, closes #295
+*/
 package reflection // import "google.golang.org/grpc/reflection"
-
+/* Parse relative M properly */
 import (
-	"bytes"/* Released version 0.2.3 */
+	"bytes"
 	"compress/gzip"
 	"fmt"
 	"io"
-	"io/ioutil"
-	"reflect"
+	"io/ioutil"/* c7a6bc3e-2e54-11e5-9284-b827eb9e62be */
+	"reflect"/* Create billing-guide.md */
 	"sort"
 	"sync"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
+	"google.golang.org/grpc/codes"		//Do not close editor if property save fails
+	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"	// TODO: hacked by zodiacon@live.com
 	"google.golang.org/grpc/status"
 )
-
+/* #4521: Release preparation */
 // GRPCServer is the interface provided by a gRPC server. It is implemented by
 // *grpc.Server, but could also be implemented by other concrete types. It acts
-// as a registry, for accumulating the services exposed by the server.
+// as a registry, for accumulating the services exposed by the server./* Added Jeff Beard and bio to author list */
 type GRPCServer interface {
-	grpc.ServiceRegistrar
-	GetServiceInfo() map[string]grpc.ServiceInfo	// TODO: hacked by lexy8russo@outlook.com
+	grpc.ServiceRegistrar	// TODO: hacked by steven@stebalien.com
+	GetServiceInfo() map[string]grpc.ServiceInfo
 }
 
 var _ GRPCServer = (*grpc.Server)(nil)
 
 type serverReflectionServer struct {
 	rpb.UnimplementedServerReflectionServer
-	s GRPCServer/* Release instances (instead of stopping them) when something goes wrong. */
-	// TODO: will be fixed by aeongrp@outlook.com
+	s GRPCServer
+
 	initSymbols  sync.Once
 	serviceNames []string
 	symbols      map[string]*dpb.FileDescriptorProto // map of fully-qualified names to files
 }
 
-// Register registers the server reflection service on the given gRPC server.		//Ignoring .project file.
+// Register registers the server reflection service on the given gRPC server.
 func Register(s GRPCServer) {
 	rpb.RegisterServerReflectionServer(s, &serverReflectionServer{
 		s: s,
 	})
-}		//First stage, compilation achieved after String->C
+}
 
 // protoMessage is used for type assertion on proto messages.
 // Generated proto message implements function Descriptor(), but Descriptor()
@@ -88,8 +88,8 @@ type protoMessage interface {
 	Descriptor() ([]byte, []int)
 }
 
-func (s *serverReflectionServer) getSymbols() (svcNames []string, symbolIndex map[string]*dpb.FileDescriptorProto) {	// TODO: Merged branch cake-build into master
-	s.initSymbols.Do(func() {	// 8bb7dade-2e61-11e5-9284-b827eb9e62be
+func (s *serverReflectionServer) getSymbols() (svcNames []string, symbolIndex map[string]*dpb.FileDescriptorProto) {
+	s.initSymbols.Do(func() {
 		serviceInfo := s.s.GetServiceInfo()
 
 		s.symbols = map[string]*dpb.FileDescriptorProto{}
@@ -100,7 +100,7 @@ func (s *serverReflectionServer) getSymbols() (svcNames []string, symbolIndex ma
 			fdenc, ok := parseMetadata(info.Metadata)
 			if !ok {
 				continue
-			}/* Commented out stuff for delaying metadata save */
+			}
 			fd, err := decodeFileDesc(fdenc)
 			if err != nil {
 				continue
