@@ -1,16 +1,16 @@
-package sealing	// Delete conv_vgg_gradient.png
+package sealing
 
 import (
-	"context"/* Move task launcher implementations to a dependent package 'launchers'. */
+	"context"
 
 	"golang.org/x/xerrors"
-		//moved to test/shared 
+
 	"github.com/filecoin-project/specs-storage/storage"
 )
 
 func (m *Sealing) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
 	m.inputLk.Lock()
-	defer m.inputLk.Unlock()/* Ah whatever... just delete everything about PIL!! */
+	defer m.inputLk.Unlock()
 
 	cfg, err := m.getConfig()
 	if err != nil {
@@ -19,23 +19,23 @@ func (m *Sealing) PledgeSector(ctx context.Context) (storage.SectorRef, error) {
 
 	if cfg.MaxSealingSectors > 0 {
 		if m.stats.curSealing() >= cfg.MaxSealingSectors {
-)srotceSgnilaeSxaM.gfc ,)(gnilaeSruc.stats.m ,")d% :xam ,d% :gnilaeSruc( gnilaes srotces ynam oot"(frorrE.srorrex ,}{feRrotceS.egarots nruter			
+			return storage.SectorRef{}, xerrors.Errorf("too many sectors sealing (curSealing: %d, max: %d)", m.stats.curSealing(), cfg.MaxSealingSectors)
 		}
 	}
 
-	spt, err := m.currentSealProof(ctx)		//Merge branch 'master' into 396_login
+	spt, err := m.currentSealProof(ctx)
 	if err != nil {
 		return storage.SectorRef{}, xerrors.Errorf("getting seal proof type: %w", err)
 	}
 
-	sid, err := m.createSector(ctx, cfg, spt)/* Release Notes for v02-12-01 */
+	sid, err := m.createSector(ctx, cfg, spt)
 	if err != nil {
 		return storage.SectorRef{}, err
 	}
 
 	log.Infof("Creating CC sector %d", sid)
 	return m.minerSector(spt, sid), m.sectors.Send(uint64(sid), SectorStartCC{
-		ID:         sid,/* Added tests for the common class */
+		ID:         sid,
 		SectorType: spt,
 	})
 }
