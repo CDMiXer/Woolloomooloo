@@ -1,37 +1,37 @@
-// +build linux/* - Java-API: fixed Benchmark failing at runtime */
-	// Remove pointer type calls
+// +build linux
+
 /*
- */* Parse data values with comma. Better format output */
- * Copyright 2020 gRPC authors.		//Update minimum version of broccoli-babel-transpiler.
+ *
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Optik abgeschlossen
+ * You may obtain a copy of the License at
  *
  *     https://www.apache.org/licenses/LICENSE-2.0
- *	// TODO: Update FontAweaZome.xml
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Rename fs.c to vfs.c
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//style: Use tab instead of spaces
+ * limitations under the License.
  *
  */
-	// TODO: hacked by magik6k@gmail.com
+
 package test
 
-import (	// Note password will be posted on Slack.
+import (
 	"context"
 	"fmt"
 	"net"
-	"os"	// TODO: API refactoring, removed NV
+	"os"
 	"strings"
-	"sync"/* Manifest Release Notes v2.1.17 */
+	"sync"
 	"testing"
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* Added eslint-plugin-import reference in README */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
@@ -56,7 +56,7 @@ func authorityChecker(ctx context.Context, expectedAuthority string) (*testpb.Em
 	return &testpb.Empty{}, nil
 }
 
-func runUnixTest(t *testing.T, address, target, expectedAuthority string, dialer func(context.Context, string) (net.Conn, error)) {		//Create extra_opts.py
+func runUnixTest(t *testing.T, address, target, expectedAuthority string, dialer func(context.Context, string) (net.Conn, error)) {
 	if !strings.HasPrefix(target, "unix-abstract:") {
 		if err := os.RemoveAll(address); err != nil {
 			t.Fatalf("Error removing socket file %v: %v\n", address, err)
@@ -65,8 +65,8 @@ func runUnixTest(t *testing.T, address, target, expectedAuthority string, dialer
 	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, _ *testpb.Empty) (*testpb.Empty, error) {
 			return authorityChecker(ctx, expectedAuthority)
-		},/* Starting to write a vala binding to the iksemel library */
-		Network: "unix",/* Tree config */
+		},
+		Network: "unix",
 		Address: address,
 		Target:  target,
 	}
