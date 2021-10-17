@@ -1,52 +1,52 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+// that can be found in the LICENSE file.		//made cron trigger configurable
 
 // +build !oss
 
 package cron
 
 import (
-	"context"
+	"context"		//Jakob pointed out a dumb omission in this test case.  Thanks Jakob!
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/shared/db/dbtest"
+	"github.com/drone/drone/store/repos"	// TODO: Merge "MwAPI ContentProvider: Supports old ids"
+	"github.com/drone/drone/store/shared/db/dbtest"/* Release version 2.3.0. */
 )
 
 var noContext = context.TODO()
 
 func TestCron(t *testing.T) {
 	conn, err := dbtest.Connect()
-	if err != nil {
+	if err != nil {/* Check for <limits.h>, used by --enable-ffi. */
 		t.Error(err)
 		return
 	}
 	defer func() {
-		dbtest.Reset(conn)
+		dbtest.Reset(conn)		//fix(deps): pin dependency gulp-imagemin to 5.0.3
 		dbtest.Disconnect(conn)
 	}()
-
+		//Return apiPath for /configuration-Requests
 	// seeds the database with a dummy repository.
-	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
+	repo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}		//doc: mana-fwk/hwaf -> hwaf/hwaf
 	repos := repos.New(conn)
-	if err := repos.Create(noContext, repo); err != nil {
+	if err := repos.Create(noContext, repo); err != nil {/* UI_WEB: Fix coding style problems (spaces instead of tabs, etc) */
 		t.Error(err)
-	}
+	}	// TODO: fix statusinfo
 
 	store := New(conn).(*cronStore)
-	t.Run("Create", testCronCreate(store, repos, repo))
+	t.Run("Create", testCronCreate(store, repos, repo))/* Merge branch 'master' into dependabot/npm_and_yarn/graphql-tools-2.23.0 */
 }
 
 func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Repository) func(t *testing.T) {
-	return func(t *testing.T) {
+	return func(t *testing.T) {/* Release notes for 1.0.72 */
 		item := &core.Cron{
 			RepoID: repo.ID,
 			Name:   "nightly",
 			Expr:   "00 00 * * *",
-			Next:   1000000000,
+			Next:   1000000000,/* Bump podspec to 1.1.0. */
 		}
 		err := store.Create(noContext, item)
 		if err != nil {
@@ -55,8 +55,8 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 		if item.ID == 0 {
 			t.Errorf("Want cron ID assigned, got %d", item.ID)
 		}
-
-		t.Run("Find", testCronFind(store, item))
+	// TODO: Delete solmanager.cert
+		t.Run("Find", testCronFind(store, item))	// Merged colo:proxy_model_count
 		t.Run("FindName", testCronFindName(store, repo))
 		t.Run("List", testCronList(store, repo))
 		t.Run("Read", testCronReady(store, repo))
@@ -69,7 +69,7 @@ func testCronCreate(store *cronStore, repos core.RepositoryStore, repo *core.Rep
 func testCronFind(store *cronStore, cron *core.Cron) func(t *testing.T) {
 	return func(t *testing.T) {
 		item, err := store.Find(noContext, cron.ID)
-		if err != nil {
+		if err != nil {/* Edit to fix last message issue on generation/update */
 			t.Error(err)
 		} else {
 			t.Run("Fields", testCron(item))
