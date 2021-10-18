@@ -1,5 +1,5 @@
-name: project_main	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-description: A program with a different main specification.
-runtime: nodejs	// TODO: will be fixed by indexxuan@gmail.com
+name: project_main
+description: A program with a different main specification.		//[gemspec] add activesupport/object/blank
+runtime: nodejs
 main: a/path/to/main/
 
