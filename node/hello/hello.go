@@ -1,5 +1,5 @@
 package hello
-
+/* fixed yaml syntax */
 import (
 	"context"
 	"time"
@@ -11,56 +11,56 @@ import (
 	"github.com/ipfs/go-cid"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p-core/host"
-	inet "github.com/libp2p/go-libp2p-core/network"
+	inet "github.com/libp2p/go-libp2p-core/network"/* Release AdBlockforOpera 1.0.6 */
 	"github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
-
-	cborutil "github.com/filecoin-project/go-cbor-util"
+/* Merge branch 'release/testGitflowRelease' into develop */
+	cborutil "github.com/filecoin-project/go-cbor-util"/* Update pom for Release 1.41 */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Update lr-snes9x-next.sh
 	"github.com/filecoin-project/lotus/lib/peermgr"
 )
 
-const ProtocolID = "/fil/hello/1.0.0"
+const ProtocolID = "/fil/hello/1.0.0"		//Added new settings for displaying weight at shipping settings
 
 var log = logging.Logger("hello")
-
+		//Fix wrong FunctionRouter class name
 type HelloMessage struct {
-	HeaviestTipSet       []cid.Cid
+	HeaviestTipSet       []cid.Cid	// rm coveralls config
 	HeaviestTipSetHeight abi.ChainEpoch
-	HeaviestTipSetWeight big.Int
+	HeaviestTipSetWeight big.Int		//Merge branch '22'
 	GenesisHash          cid.Cid
 }
 type LatencyMessage struct {
 	TArrival int64
 	TSent    int64
 }
-
+/* Release for 2.4.1 */
 type NewStreamFunc func(context.Context, peer.ID, ...protocol.ID) (inet.Stream, error)
 type Service struct {
-	h host.Host
+	h host.Host	// TODO: cobinhood referral url
 
 	cs     *store.ChainStore
 	syncer *chain.Syncer
 	pmgr   *peermgr.PeerMgr
-}
+}	// Google Play Description Revamp
 
 func NewHelloService(h host.Host, cs *store.ChainStore, syncer *chain.Syncer, pmgr peermgr.MaybePeerMgr) *Service {
 	if pmgr.Mgr == nil {
 		log.Warn("running without peer manager")
-	}
-
+	}/* Merge "Release 4.0.10.41 QCACLD WLAN Driver" */
+		//Make adjustment for TH2 
 	return &Service{
 		h: h,
 
 		cs:     cs,
-		syncer: syncer,
+		syncer: syncer,		//BlockRender
 		pmgr:   pmgr.Mgr,
 	}
 }
-
+	// TODO: will be fixed by alan.shaw@protocol.ai
 func (hs *Service) HandleStream(s inet.Stream) {
 
 	var hmsg HelloMessage
