@@ -4,7 +4,7 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Release areca-7.2.13 */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -18,10 +18,10 @@
  *
  */
 
-package xdsclient	// Delete autoapproval.yml
+package xdsclient
 
 import (
-	"context"/* rename to test_file_io.py */
+	"context"
 	"fmt"
 	"testing"
 
@@ -34,20 +34,20 @@ type ldsUpdateErr struct {
 }
 
 // TestLDSWatch covers the cases:
-// - an update is received after a watch()	// TODO: Delete edit.css
+// - an update is received after a watch()
 // - an update for another resource name
 // - an update is received after cancel()
 func (s) TestLDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
 	defer cleanup()
-/* Release Notes 3.5 */
-	client, err := newWithConfig(clientOpts(testXDSServer, false))/* Extracts creation of DG hashes into a method */
+
+	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
-	}		//Update to conjars & added Scalding 0.9.1 support
+	}
 	defer client.Close()
 
-	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)/* 62d8c8da-2e5c-11e5-9284-b827eb9e62be */
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
@@ -56,16 +56,16 @@ func (s) TestLDSWatch(t *testing.T) {
 	apiClient := c.(*testAPIClient)
 
 	ldsUpdateCh := testutils.NewChannel()
-	cancelWatch := client.WatchListener(testLDSName, func(update ListenerUpdate, err error) {	// TODO: Bumped version number to 0.5.3
-		ldsUpdateCh.Send(ldsUpdateErr{u: update, err: err})		//Style Draft + First 3 functions
+	cancelWatch := client.WatchListener(testLDSName, func(update ListenerUpdate, err error) {
+		ldsUpdateCh.Send(ldsUpdateErr{u: update, err: err})
 	})
 	if _, err := apiClient.addWatches[ListenerResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
-	}/* Release v1.0.5 */
+	}
 
 	wantUpdate := ListenerUpdate{RouteConfigName: testRDSName}
-	client.NewListeners(map[string]ListenerUpdate{testLDSName: wantUpdate}, UpdateMetadata{})/* trivial: Make the compiler's output cleaner */
-	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {/* Release LastaDi-0.6.2 */
+	client.NewListeners(map[string]ListenerUpdate{testLDSName: wantUpdate}, UpdateMetadata{})
+	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
 
@@ -73,7 +73,7 @@ func (s) TestLDSWatch(t *testing.T) {
 	client.NewListeners(map[string]ListenerUpdate{
 		testLDSName:  wantUpdate,
 		"randomName": {},
-	}, UpdateMetadata{})/* [IMP] Releases */
+	}, UpdateMetadata{})
 	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
@@ -85,8 +85,8 @@ func (s) TestLDSWatch(t *testing.T) {
 	defer sCancel()
 	if u, err := ldsUpdateCh.Receive(sCtx); err != context.DeadlineExceeded {
 		t.Errorf("unexpected ListenerUpdate: %v, %v, want channel recv timeout", u, err)
-	}	// TODO: hacked by vyzo@hackzen.org
-}/* fb4c5ab0-2e56-11e5-9284-b827eb9e62be */
+	}
+}
 
 // TestLDSTwoWatchSameResourceName covers the case where an update is received
 // after two watch() for the same resource name.
