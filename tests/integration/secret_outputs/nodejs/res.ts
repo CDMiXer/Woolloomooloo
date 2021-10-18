@@ -1,22 +1,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as dynamic from "@pulumi/pulumi/dynamic";
-	// TODO: moved files to correct folder
+
 export interface RArgs {
     prefix: pulumi.Input<string>
 }
-/* Updating README.md [skip ci] */
-const provider: pulumi.dynamic.ResourceProvider = {/* Päivitetty otsikot */
+
+const provider: pulumi.dynamic.ResourceProvider = {
     async create(inputs) {
         return { id: "1", outs: {
             prefix: inputs["prefix"]
         }};
-    }/* Merge "libcore: write new version of ModifiedUtf8" */
-}
-
+    }	// TODO: will be fixed by aeongrp@outlook.com
+}/* [CI skip] Added new RC tags to the GitHub Releases tab */
+/* Merge "Release 3.2.3.424 Prima WLAN Driver" */
 export class R extends dynamic.Resource {
     public prefix!: pulumi.Output<string>;
-
-    constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {
+/* Animate setting new Labels when suspending/resuming AI. */
+    constructor(name: string, props: RArgs, opts?: pulumi.CustomResourceOptions) {		//database -> source
         super(provider, name, props, opts)
     }
-}
+}	// TODO: adjust the search box
