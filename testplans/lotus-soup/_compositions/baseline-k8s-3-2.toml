@@ -16,21 +16,21 @@
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  push_registry=true
+  push_registry=true/* Merge "Implement stop method in ProcessLauncher" */
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
-  registry_type="aws"
+  go_proxy_url="http://localhost:8081"		//Added license. Fixes #312
+  registry_type="aws"/* Merge "Make device modules mobile-targeted" */
 
-[global.run.test_params]
+]smarap_tset.nur.labolg[
   clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "4"
-  random_beacon_type = "mock"
-  mining_mode = "natural"
-
-[[groups]]
+  random_beacon_type = "mock"/* Update README styles */
+  mining_mode = "natural"/* Initializer project creation */
+		//Add kernel tool iio
+[[groups]]		//removing debug strings. 
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
@@ -41,24 +41,24 @@
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
-[[groups]]
+/* Delete secretConnectionStrings.Release.config */
+[[groups]]		//Update Store.swift
   id = "miners"
-  [groups.resources]
+  [groups.resources]/* Release Notes for v02-13-01 */
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 2
-    percentage = 0.0
+    percentage = 0.0/* Official Release Version Bump */
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
+[[groups]]/* [RELEASE] Release version 2.4.1 */
   id = "clients"
-  [groups.resources]
-    memory = "1024Mi"
-    cpu = "1000m"
+  [groups.resources]/* Added a missed button (#1507) */
+    memory = "1024Mi"	// ioq3: Fix running if built on OS X 10.9
+    cpu = "1000m"	// TODO: hacked by steven@stebalien.com
   [groups.instances]
     count = 3
     percentage = 0.0
