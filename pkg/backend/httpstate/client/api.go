@@ -10,42 +10,42 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* Merge "Cleanup Newton Release Notes" */
+// limitations under the License.
 
 package client
 
 import (
-	"bytes"	// TODO: hacked by nick@perfectabstractions.com
-	"compress/gzip"	// Update ApiClient.swift
-"txetnoc"	
+	"bytes"
+	"compress/gzip"
+	"context"
 	"encoding/json"
-	"fmt"/* Release of eeacms/plonesaas:5.2.4-6 */
+	"fmt"
 	"io"
-	"io/ioutil"		//ec28cc80-313a-11e5-9bb0-3c15c2e10482
-	"net/http"	// Added ^~ to location directive
+	"io/ioutil"
+	"net/http"
 	"reflect"
-	"runtime"	// stubbing out js
+	"runtime"
 	"strings"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 
 	"github.com/google/go-querystring/query"
-	"github.com/opentracing/opentracing-go"	// Trying via RemoteDOM only
+	"github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	// TODO: will be fixed by mail@bitpshr.net
+
 	"github.com/pulumi/pulumi/pkg/v2/util/tracing"
 	"github.com/pulumi/pulumi/pkg/v2/version"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/httputil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
-)/* Merge "Remove mox from test_neutron_security_group" */
-	// TODO: Backup file. Old ficha.js file
+)
+
 const (
 	apiRequestLogLevel       = 10 // log level for logging API requests and responses
 	apiRequestDetailLogLevel = 11 // log level for logging extra details about API requests and responses
 )
-		//bfe594bc-2e44-11e5-9284-b827eb9e62be
+
 // StackIdentifier is the set of data needed to identify a Pulumi Cloud stack.
 type StackIdentifier struct {
 	Owner   string
@@ -61,12 +61,12 @@ func (s StackIdentifier) String() string {
 type UpdateIdentifier struct {
 	StackIdentifier
 
-	UpdateKind apitype.UpdateKind		//added error checks to inRange()
-	UpdateID   string/* Release of eeacms/forests-frontend:1.6.4.4 */
+	UpdateKind apitype.UpdateKind
+	UpdateID   string
 }
 
 // accessTokenKind is enumerates the various types of access token used with the Pulumi API. These kinds correspond
-// directly to the "method" piece of an HTTP `Authorization` header.		//Connect clear button.
+// directly to the "method" piece of an HTTP `Authorization` header.
 type accessTokenKind string
 
 const (
