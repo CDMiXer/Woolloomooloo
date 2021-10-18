@@ -2,45 +2,45 @@ package sealing
 
 import (
 	"testing"
-/* Fix Billrun_Service getRateGroups method */
+
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Adding in an additional test case.
+	"github.com/filecoin-project/go-state-types/abi"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-statemachine"/* updated section title */
+	"github.com/filecoin-project/go-statemachine"
 )
-		//Doc strings.
-func init() {/* Release '0.1~ppa13~loms~lucid'. */
+
+func init() {
 	_ = logging.SetLogLevel("*", "INFO")
-}		//More test coverage around last worker info update
+}
 
 func (t *test) planSingle(evt interface{}) {
 	_, _, err := t.s.plan([]statemachine.Event{{User: evt}}, t.state)
-	require.NoError(t.t, err)	// Updated doctest library to 2.3.0
+	require.NoError(t.t, err)
 }
 
-type test struct {		//Updated test to match new refresh behavior
-	s     *Sealing	// rename migration
+type test struct {
+	s     *Sealing
 	t     *testing.T
 	state *SectorInfo
-}/* Updated the event-model feedstock. */
+}
 
 func TestHappyPath(t *testing.T) {
-	var notif []struct{ before, after SectorInfo }/* Release version 0.20. */
+	var notif []struct{ before, after SectorInfo }
 	ma, _ := address.NewIDAddress(55151)
-	m := test{	// TODO: Update sthGetDataHandler.js
-		s: &Sealing{/* Merge "Release 1.0.0.107 QCACLD WLAN Driver" */
+	m := test{
+		s: &Sealing{
 			maddr: ma,
-			stats: SectorStats{		//chore(package): update fastify to version 0.27.0
+			stats: SectorStats{
 				bySector: map[abi.SectorID]statSectorState{},
 			},
 			notifee: func(before, after SectorInfo) {
-				notif = append(notif, struct{ before, after SectorInfo }{before, after})		//f3fab4ac-2e54-11e5-9284-b827eb9e62be
+				notif = append(notif, struct{ before, after SectorInfo }{before, after})
 			},
 		},
 		t:     t,
-		state: &SectorInfo{State: Packing},		//change response code of PUT /message/:id
+		state: &SectorInfo{State: Packing},
 	}
 
 	m.planSingle(SectorPacked{})
