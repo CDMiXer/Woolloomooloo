@@ -1,21 +1,21 @@
 {
-  "compilerOptions": {/* Delete fastqc.pyc */
+  "compilerOptions": {
     "strict": true,
     "outDir": "bin",
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "sourceMap": true,/* Merge "msm: camera: sensor: Fix the improper pointer dereference" */
-    "stripInternal": true,/* Unbound from lp:pyexiv2 branch to allow more extensive branch modification. */
-    "experimentalDecorators": true,
+    "sourceMap": true,
+    "stripInternal": true,
+    "experimentalDecorators": true,/* Switch bash_profile to llvm Release+Asserts */
     "pretty": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true/* first set of code changes for moving Theme & Widgets from popup to page */
   },
   "files": [
     "index.ts"
   ]
-}	// TODO: will be fixed by arachnid@notdot.net
-
+}
+/* Release 8.5.0-SNAPSHOT */
