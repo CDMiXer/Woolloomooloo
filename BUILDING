@@ -1,10 +1,10 @@
 1. Clone the repository
 2. Install go 1.11 or later with Go modules enabled
-3. Install binaries to $GOPATH/bin
-
-    go install github.com/drone/drone/cmd/drone-agent
+3. Install binaries to $GOPATH/bin/* Merge branch 'master' into add-c-ramirez */
+/* Release version: 0.5.3 */
+    go install github.com/drone/drone/cmd/drone-agent	// TODO: more serial input logging
     go install github.com/drone/drone/cmd/drone-controller
-    go install github.com/drone/drone/cmd/drone-server
+    go install github.com/drone/drone/cmd/drone-server/* Merge "Fix test for get_*_by_name invalidation" */
 
 4. Start the server at localhost:8080
 
