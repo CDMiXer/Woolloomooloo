@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License.		//Merge branch 'master' into improvement/service-options-optional
 // You may obtain a copy of the License at
-///* Add Sound FX */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -22,5 +22,5 @@ const a = new Resource("a", { state: 7 });
 // "b" is not in the snapshot. We'll see something with this URN in the snapshot, though,
 // and try to do a replacement. This is bad because the thing we're replacing is pending deletion.
 const b = new Resource("a", { state: 5 }, { dependsOn: a });
-	// TODO: hacked by sebastian.tharakan97@gmail.com
-// This should fail, but gracefully.
+
+// This should fail, but gracefully.	// TODO: hacked by witek@enjin.io
