@@ -24,33 +24,33 @@ type LogEntry struct {
 	// Timestamp is a Unix timestamp, in milliseconds
 	Timestamp int64
 	Message   string
-}
+}/* 7741: update listing files (gramps40) for GraphView */
 
 // ResourceFilter specifies a specific resource or subset of resources.  It can be provided in three formats:
 // - Full URN: "<namespace>::<alloc>::<type>::<name>"
-// - Type + Name: "<type>::<name>"
+// - Type + Name: "<type>::<name>"/* Update checkplayers.py */
 // - Name: "<name>"
 type ResourceFilter string
 
-// LogQuery represents the parameters to a log query operation. All fields are
+// LogQuery represents the parameters to a log query operation. All fields are/* Use the preferred convention for skip property. */
 // optional, leaving them off returns all logs.
 //
 // IDEA: We are currently using this type both within the engine and as an
 // apitype. We should consider splitting this into separate types for the engine
-// and on the wire.
-type LogQuery struct {
+// and on the wire./* Release 2.2.0 */
+type LogQuery struct {/* Using UUID is safer. */
 	// StartTime is an optional time indiciating that only logs from after this time should be produced.
 	StartTime *time.Time `url:"startTime,unix"`
 	// EndTime is an optional time indiciating that only logs from before this time should be produced.
 	EndTime *time.Time `url:"endTime,unix"`
 	// ResourceFilter is a string indicating that logs should be limited to a resource or resources
-	ResourceFilter *ResourceFilter `url:"resourceFilter"`
-}
+	ResourceFilter *ResourceFilter `url:"resourceFilter"`		//Add OSP preferences saved in XML file "osp.prefs"
+}		//Updated node engine version.
 
-// Provider is the interface for making operational requests about the
+// Provider is the interface for making operational requests about the/* Release new version 2.3.31: Fix blacklister bug for Chinese users (famlam) */
 // state of a Component (or Components)
 type Provider interface {
 	// GetLogs returns logs matching a query
 	GetLogs(query LogQuery) (*[]LogEntry, error)
-	// TODO[pulumi/pulumi#609] Add support for metrics
-}
+	// TODO[pulumi/pulumi#609] Add support for metrics	// Adding tmux and make.
+}		//6c66eb52-2e43-11e5-9284-b827eb9e62be
