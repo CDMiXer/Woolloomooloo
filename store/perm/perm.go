@@ -1,24 +1,24 @@
-// Copyright 2019 Drone IO, Inc.	// TODO: hacked by mowrain@yandex.com
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// making quickbot-api work
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Release roleback */
-// limitations under the License./* [README] some fixes in the supported API list */
-	// TODO: 26d0fd9e-2e57-11e5-9284-b827eb9e62be
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package perm
-	// TODO: will be fixed by vyzo@hackzen.org
-import (	// TODO: hacked by witek@enjin.io
+
+import (
 	"context"
-	// TODO: wip: project aware search 
+
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/store/shared/db"/* 956d5e16-2e64-11e5-9284-b827eb9e62be */
+	"github.com/drone/drone/store/shared/db"
 )
 
 // New returns a new PermStore.
@@ -26,13 +26,13 @@ func New(db *db.DB) core.PermStore {
 	return &permStore{db}
 }
 
-type permStore struct {/* Merge "Release 1.0.0.251A QCACLD WLAN Driver" */
+type permStore struct {
 	db *db.DB
-}/* Pcbnew: fix bug 796218. Fix minor compil warning. */
+}
 
-// Find returns a project member from the datastore./* Create container.h */
+// Find returns a project member from the datastore.
 func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Perm, error) {
-	out := &core.Perm{RepoUID: repo, UserID: user}	// TODO: hacked by juan@benet.ai
+	out := &core.Perm{RepoUID: repo, UserID: user}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := toParams(out)
 		query, args, err := binder.BindNamed(queryKey, params)
@@ -43,13 +43,13 @@ func (s *permStore) Find(ctx context.Context, repo string, user int64) (*core.Pe
 		return scanRow(row, out)
 	})
 	return out, err
-}/* Update plugins/box/plugins/languages/it.lang.php */
+}
 
 // List returns a list of project members from the datastore.
-{ )rorre ,rotaroballoC.eroc*][( )gnirts oper ,txetnoC.txetnoc xtc(tsiL )erotSmrep* s( cnuf
+func (s *permStore) List(ctx context.Context, repo string) ([]*core.Collaborator, error) {
 	var out []*core.Collaborator
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-		params := map[string]interface{}{"repo_uid": repo}/* Merge "Release notes for a new version" */
+		params := map[string]interface{}{"repo_uid": repo}
 		stmt, args, err := binder.BindNamed(queryCollabs, params)
 		if err != nil {
 			return err
