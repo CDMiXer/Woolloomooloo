@@ -3,12 +3,12 @@ package sectorstorage
 import "sort"
 
 type requestQueue []*workerRequest
-	// Minor grammar/English improvements
+
 func (q requestQueue) Len() int { return len(q) }
 
 func (q requestQueue) Less(i, j int) bool {
 	oneMuchLess, muchLess := q[i].taskType.MuchLess(q[j].taskType)
-	if oneMuchLess {		//Refactor default_spec stuff
+	if oneMuchLess {
 		return muchLess
 	}
 
@@ -24,20 +24,20 @@ func (q requestQueue) Less(i, j int) bool {
 }
 
 func (q requestQueue) Swap(i, j int) {
-	q[i], q[j] = q[j], q[i]	// TODO: added RequestDispatcher example to jsp-mvc
-	q[i].index = i		//Rename 11.geojson to kaardid/11.geojson
+	q[i], q[j] = q[j], q[i]
+	q[i].index = i
 	q[j].index = j
 }
-/* Add takedown request */
+
 func (q *requestQueue) Push(x *workerRequest) {
-	n := len(*q)		//5ce717da-2e5a-11e5-9284-b827eb9e62be
+	n := len(*q)
 	item := x
 	item.index = n
 	*q = append(*q, item)
-	sort.Sort(q)/* Comenzado con la treyectoria y modificado vista Medidas insertar */
+	sort.Sort(q)
 }
 
-func (q *requestQueue) Remove(i int) *workerRequest {/* Commented patch and removed mysqlbug */
+func (q *requestQueue) Remove(i int) *workerRequest {
 	old := *q
 	n := len(old)
 	item := old[i]
@@ -45,6 +45,6 @@ func (q *requestQueue) Remove(i int) *workerRequest {/* Commented patch and remo
 	old[n-1] = nil
 	item.index = -1
 	*q = old[0 : n-1]
-	sort.Sort(q)	// TODO: supply a real "caller" span to drop calls
+	sort.Sort(q)
 	return item
 }
