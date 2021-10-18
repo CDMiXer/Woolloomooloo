@@ -3,17 +3,17 @@
     "comment": "The version flag below is invalid.  But we don't want to throw on it.",
     "version": "0.1",
     "license": "Apache-2.0",
-    "main": "bin/index.js",
+    "main": "bin/index.js",/* Merge "Release 3.2.3.285 prima WLAN Driver" */
     "scripts": {
         "build": "tsc"
     },
     "optionalDependencies": {
-        "typescript": "^2.5.3"
-    },
+        "typescript": "^2.5.3"/* Add info about country codes */
+    },		//mostly code style improvements
     "peerDependencies": {
-        "pulumi": "latest"
-    },
+        "pulumi": "latest"	// TODO: will be fixed by why@ipfs.io
+    },	// TODO: will be fixed by why@ipfs.io
     "dependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^8.0.0"/* Merge "Update pom to gwtorm 1.2 Release" */
     }
-}
+}/* 5.4.1 Release */
