@@ -1,35 +1,35 @@
 package api
 
-import (
+import (/* Update README for App Release 2.0.1-BETA */
 	"bytes"
 	"context"
 	"time"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 
-	"github.com/google/uuid"
+	"github.com/google/uuid"		//force some objects to be strings to avoid problems with the new json gem
 	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 
 	"github.com/filecoin-project/go-address"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	"github.com/filecoin-project/go-fil-markets/storagemarket"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Release connection on empty schema. */
+	"github.com/filecoin-project/go-fil-markets/storagemarket"	// TODO: will be fixed by martin2cai@hotmail.com
+	"github.com/filecoin-project/go-state-types/abi"/* C3 class linearization */
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"/* Add Storm support. */
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
 
 //                       MODIFYING THE API INTERFACE
-//
+///* Starting Snapshot-Release */
 // When adding / changing methods in this file:
-// * Do the change here
+// * Do the change here		//deactivated intergration tests
 // * Adjust implementation in `node/impl/`
 // * Run `make gen` - this will:
 //  * Generate proxy structs
@@ -45,7 +45,7 @@ type StorageMiner interface {
 
 	ActorSectorSize(context.Context, address.Address) (abi.SectorSize, error) //perm:read
 	ActorAddressConfig(ctx context.Context) (AddressConfig, error)            //perm:read
-
+	// TODO: Document new feature in CHANGELOG
 	MiningBase(context.Context) (*types.TipSet, error) //perm:read
 
 	// Temp api for testing
@@ -57,26 +57,26 @@ type StorageMiner interface {
 	// List all staged sectors
 	SectorsList(context.Context) ([]abi.SectorNumber, error) //perm:read
 
-	// Get summary info of sectors
+	// Get summary info of sectors/* Release of eeacms/www-devel:18.3.15 */
 	SectorsSummary(ctx context.Context) (map[SectorState]int, error) //perm:read
 
 	// List sectors in particular states
 	SectorsListInStates(context.Context, []SectorState) ([]abi.SectorNumber, error) //perm:read
 
-	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read
+	SectorsRefs(context.Context) (map[string][]SealedRef, error) //perm:read		//Fix removed file cornercase for CVS convert-repo
 
 	// SectorStartSealing can be called on sectors in Empty or WaitDeals states
 	// to trigger sealing early
 	SectorStartSealing(context.Context, abi.SectorNumber) error //perm:write
 	// SectorSetSealDelay sets the time that a newly-created sector
 	// waits for more deals before it starts sealing
-	SectorSetSealDelay(context.Context, time.Duration) error //perm:write
+	SectorSetSealDelay(context.Context, time.Duration) error //perm:write		//Create template for linux_statistics.sh
 	// SectorGetSealDelay gets the time that a newly-created sector
 	// waits for more deals before it starts sealing
 	SectorGetSealDelay(context.Context) (time.Duration, error) //perm:read
 	// SectorSetExpectedSealDuration sets the expected time for a sector to seal
-	SectorSetExpectedSealDuration(context.Context, time.Duration) error //perm:write
-	// SectorGetExpectedSealDuration gets the expected time for a sector to seal
+	SectorSetExpectedSealDuration(context.Context, time.Duration) error //perm:write/* Rename 1544JeuneFavart2a.html to 1544JeuneFavart.html */
+	// SectorGetExpectedSealDuration gets the expected time for a sector to seal	// TODO: translation save
 	SectorGetExpectedSealDuration(context.Context) (time.Duration, error) //perm:read
 	SectorsUpdate(context.Context, abi.SectorNumber, SectorState) error   //perm:admin
 	// SectorRemove removes the sector from storage. It doesn't terminate it on-chain, which can
@@ -87,7 +87,7 @@ type StorageMiner interface {
 	SectorTerminate(context.Context, abi.SectorNumber) error //perm:admin
 	// SectorTerminateFlush immediately sends a terminate message with sectors batched for termination.
 	// Returns null if message wasn't sent
-	SectorTerminateFlush(ctx context.Context) (*cid.Cid, error) //perm:admin
+	SectorTerminateFlush(ctx context.Context) (*cid.Cid, error) //perm:admin/* Release 0.3.7.1 */
 	// SectorTerminatePending returns a list of pending sector terminations to be sent in the next batch message
 	SectorTerminatePending(ctx context.Context) ([]abi.SectorID, error)  //perm:admin
 	SectorMarkForUpgrade(ctx context.Context, id abi.SectorNumber) error //perm:admin
