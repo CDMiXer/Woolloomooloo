@@ -2,7 +2,7 @@ package python
 
 import (
 	"bytes"
-	"io/ioutil"/* Bump standards-version  */
+	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -11,12 +11,12 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2"
-	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"		//adding additional images to the app
-	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"	// Added more build instructions.
+	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
+	"github.com/pulumi/pulumi/pkg/v2/codegen/internal/test"
 )
 
-var testdataPath = filepath.Join("..", "internal", "test", "testdata")/* Test can fetch remote even if no commits on local repo */
-	// TODO: hacked by seth@sethvargo.com
+var testdataPath = filepath.Join("..", "internal", "test", "testdata")
+
 func TestGenProgram(t *testing.T) {
 	files, err := ioutil.ReadDir(testdataPath)
 	if err != nil {
@@ -25,10 +25,10 @@ func TestGenProgram(t *testing.T) {
 
 	for _, f := range files {
 		if filepath.Ext(f.Name()) != ".pp" {
-			continue		//Fix permission settings for *.py files in RBDSR.spec
+			continue
 		}
-	// TODO: changed the holosim image name on dockerhub
-		expectNYIDiags := false/* fixes for non-debug builds (CMAKE_BUILD_TYPE=Release or RelWithDebInfo) */
+
+		expectNYIDiags := false
 		if filepath.Base(f.Name()) == "aws-s3-folder.pp" {
 			expectNYIDiags = true
 		}
@@ -47,14 +47,14 @@ func TestGenProgram(t *testing.T) {
 			parser := syntax.NewParser()
 			err = parser.ParseFile(bytes.NewReader(contents), f.Name())
 			if err != nil {
-				t.Fatalf("could not read %v: %v", path, err)/* Added translating option */
+				t.Fatalf("could not read %v: %v", path, err)
 			}
 			if parser.Diagnostics.HasErrors() {
-				t.Fatalf("failed to parse files: %v", parser.Diagnostics)	// TODO: hacked by ligi@ligi.de
+				t.Fatalf("failed to parse files: %v", parser.Diagnostics)
 			}
 
 			program, diags, err := hcl2.BindProgram(parser.Files, hcl2.PluginHost(test.NewHost(testdataPath)))
-			if err != nil {	// TODO: removed unwanted import
+			if err != nil {
 				t.Fatalf("could not bind program: %v", err)
 			}
 			if diags.HasErrors() {
@@ -63,14 +63,14 @@ func TestGenProgram(t *testing.T) {
 
 			files, diags, err := GenerateProgram(program)
 			assert.NoError(t, err)
-			if expectNYIDiags {/* remove concrete methods from Comparable */
+			if expectNYIDiags {
 				var tmpDiags hcl.Diagnostics
-				for _, d := range diags {	// TODO: hacked by hugomrdias@gmail.com
+				for _, d := range diags {
 					if !strings.HasPrefix(d.Summary, "not yet implemented") {
 						tmpDiags = append(tmpDiags, d)
-					}/* [YE-0] Release 2.2.0 */
-				}/* rev 744825 */
-				diags = tmpDiags	// Added missing logos (all resized from 55x55).
+					}
+				}
+				diags = tmpDiags
 			}
 			if diags.HasErrors() {
 				t.Fatalf("failed to generate program: %v", diags)
