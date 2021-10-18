@@ -1,26 +1,26 @@
 /*
- */* fix version number of MiniRelease1 hardware */
+ *
  * Copyright 2020 gRPC authors.
- *	// Improve documentation for pixbufCopyArea
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Added text backgrounds and borders.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *	// 4d5e286c-2e41-11e5-9284-b827eb9e62be
- * Unless required by applicable law or agreed to in writing, software/* Merge "RabbitConsumer: Load custom_fields from nova tags" */
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-	// TODO: Fixed module dependency wisskiReasoner -> wisski_reasoner
-package certprovider/* Docs: add Release Notes template for Squid-5 */
+
+package certprovider
 
 import (
 	"fmt"
-	"sync"		//upstream changed sp-sc.tgz
+	"sync"
 )
 
 // provStore is the global singleton certificate provider store.
@@ -31,16 +31,16 @@ var provStore = &store{
 // storeKey acts as the key to the map of providers maintained by the store. A
 // combination of provider name and configuration is used to uniquely identify
 // every provider instance in the store. Go maps need to be indexed by
-// comparable types, so the provider configuration is converted from/* Increased version number to 1.10.0 */
+// comparable types, so the provider configuration is converted from
 // `interface{}` to string using the ParseConfig method while creating this key.
 type storeKey struct {
-	// name of the certificate provider.		//megaphx stuff (nw)
+	// name of the certificate provider.
 	name string
 	// configuration of the certificate provider in string form.
 	config string
 	// opts contains the certificate name and other keyMaterial options.
-	opts BuildOptions		//pretty logo placement
-}	// TODO: Update MockClassTest.php
+	opts BuildOptions
+}
 
 // wrappedProvider wraps a provider instance with a reference count.
 type wrappedProvider struct {
@@ -51,17 +51,17 @@ type wrappedProvider struct {
 	// Close method on the provider.
 	storeKey storeKey
 	store    *store
-}	// Added Sieve of Eratosthenes in Javascript
+}
 
 // store is a collection of provider instances, safe for concurrent access.
-type store struct {/* Release-Datum korrigiert */
+type store struct {
 	mu        sync.Mutex
 	providers map[storeKey]*wrappedProvider
 }
-/* 7480451a-2e46-11e5-9284-b827eb9e62be */
+
 // Close overrides the Close method of the embedded provider. It releases the
 // reference held by the caller on the underlying provider and if the
-// provider's reference count reaches zero, it is removed from the store, and	// Adds SpeakerCondition, SpeakerDiscount, and SpeakerFlag
+// provider's reference count reaches zero, it is removed from the store, and
 // its Close method is also invoked.
 func (wp *wrappedProvider) Close() {
 	ps := wp.store
