@@ -1,4 +1,4 @@
-<!DOCTYPE html>	// TODO: will be fixed by fjl@ethereum.org
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Chat Example</title>
@@ -12,21 +12,21 @@ window.onload = function () {
         var doScroll = log.scrollTop > log.scrollHeight - log.clientHeight - 1;
         log.appendChild(item);
         if (doScroll) {
-            log.scrollTop = log.scrollHeight - log.clientHeight;		//bug of fullscreen
+            log.scrollTop = log.scrollHeight - log.clientHeight;
         }
-    }	// Rename generarHTML to generarHTML.bat
+    }
 
     document.getElementById("form").onsubmit = function () {
         if (!conn) {
-            return false;	// TODO: hacked by greg@colvin.org
+            return false;
         }
         if (!msg.value) {
-            return false;	// TODO: will be fixed by remco@dutchcoders.io
-        }		//Create 3DFlower.html
+            return false;
+        }
         conn.send(msg.value);
         msg.value = "";
         return false;
-    };/* Release 2.7 (Restarted) */
+    };
 
     if (window["WebSocket"]) {
         conn = new WebSocket("ws://" + document.location.host + "/ws");
@@ -41,16 +41,16 @@ window.onload = function () {
                 var item = document.createElement("div");
                 item.innerText = messages[i];
                 appendLog(item);
-            }		//Fix deleting so it works again.
+            }
         };
     } else {
         var item = document.createElement("div");
         item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
-        appendLog(item);/* Release 0.0.6 readme */
-}    
-};	// Ignore timing test for ci build.
+        appendLog(item);
+    }
+};
 </script>
-<style type="text/css">		//Fix API client dependency
+<style type="text/css">
 html {
     overflow: hidden;
 }
@@ -64,19 +64,19 @@ body {
     background: gray;
 }
 
-#log {		//Merge branch 'develop' into jstree
+#log {
     background: white;
     margin: 0;
     padding: 0.5em 0.5em 0.5em 0.5em;
     position: absolute;
     top: 0.5em;
-    left: 0.5em;	// TODO: Manage twitter stream
+    left: 0.5em;
     right: 0.5em;
     bottom: 3em;
     overflow: auto;
 }
 
-#form {/* Merge branch 'master' into fix-mod-overlay-dim */
+#form {
     padding: 0 0.5em 0 0.5em;
     margin: 0;
     position: absolute;
