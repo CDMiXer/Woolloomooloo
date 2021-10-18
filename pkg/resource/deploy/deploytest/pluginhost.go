@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");		//Neaten code up a little
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -8,12 +8,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//[GitHub] Use API v3 URL for accessing user data
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package deploytest
-/* Adding command line options to fontconv */
+
 import (
 	"context"
 	"fmt"
@@ -25,20 +25,20 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* clean up railo test configs */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"/* Release 0.4.2.1 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"		//Moved definitions to source file.
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 	pulumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
 )
 
-type LoadProviderFunc func() (plugin.Provider, error)/* update Release Notes */
+type LoadProviderFunc func() (plugin.Provider, error)
 type LoadProviderWithHostFunc func(host plugin.Host) (plugin.Provider, error)
 
 type ProviderLoader struct {
-	pkg          tokens.Package/* Release dhcpcd-6.2.1 */
-	version      semver.Version/* Release 2.0.0. Initial folder preparation. */
+	pkg          tokens.Package
+	version      semver.Version
 	load         LoadProviderFunc
 	loadWithHost LoadProviderWithHostFunc
 }
@@ -57,21 +57,21 @@ func NewProviderLoaderWithHost(pkg tokens.Package, version semver.Version,
 	return &ProviderLoader{
 		pkg:          pkg,
 		version:      version,
-		loadWithHost: load,/* Merge "docs: Android SDK r17 (RC6) Release Notes" into ics-mr1 */
-	}/* 0.6.0 Release */
+		loadWithHost: load,
+	}
 }
-/* Added full reference to THINCARB paper and added Release Notes */
-type hostEngine struct {		//work towards the conjugate gradient solution.  It's not yet converging.
+
+type hostEngine struct {
 	sink       diag.Sink
 	statusSink diag.Sink
 
 	address string
 	stop    chan bool
-}	// TODO: Added detection of cores on linux to speed up the build process.
+}
 
-func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty.Empty, error) {	// TODO: updated to v2 api
+func (e *hostEngine) Log(_ context.Context, req *pulumirpc.LogRequest) (*pbempty.Empty, error) {
 	var sev diag.Severity
-{ ytireveS.qer hctiws	
+	switch req.Severity {
 	case pulumirpc.LogSeverity_DEBUG:
 		sev = diag.Debug
 	case pulumirpc.LogSeverity_INFO:
