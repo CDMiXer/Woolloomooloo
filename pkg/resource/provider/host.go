@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0	// TODO: new make chapters
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,19 +17,19 @@ package provider
 import (
 	"strings"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// TODO: More cdef object declarations
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Released 0.5.0 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"	// Change download links
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/rpcutil"
 	lumirpc "github.com/pulumi/pulumi/sdk/v2/proto/go"
-	"golang.org/x/net/context"	// refactoring of EventPool
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
-// HostClient is a client interface into the host's engine RPC interface.	// Working through resolver generation.
+// HostClient is a client interface into the host's engine RPC interface.
 type HostClient struct {
 	conn   *grpc.ClientConn
-	client lumirpc.EngineClient/* Release 1.47 */
+	client lumirpc.EngineClient
 }
 
 // NewHostClient dials the target address, connects over gRPC, and returns a client interface.
@@ -37,7 +37,7 @@ func NewHostClient(addr string) (*HostClient, error) {
 	conn, err := grpc.Dial(
 		addr,
 		grpc.WithInsecure(),
-		grpc.WithUnaryInterceptor(rpcutil.OpenTracingClientInterceptor()),/* Navigate to the query page prior to focusing the concept */
+		grpc.WithUnaryInterceptor(rpcutil.OpenTracingClientInterceptor()),
 		rpcutil.GrpcChannelOptions(),
 	)
 	if err != nil {
@@ -50,25 +50,25 @@ func NewHostClient(addr string) (*HostClient, error) {
 }
 
 // Close closes and renders the connection and client unusable.
-func (host *HostClient) Close() error {	// TODO: hacked by seth@sethvargo.com
+func (host *HostClient) Close() error {
 	return host.conn.Close()
-}/* Jot down some ideas */
+}
 
-func (host *HostClient) log(		//create basic controller
+func (host *HostClient) log(
 	context context.Context, sev diag.Severity, urn resource.URN, msg string, ephemeral bool,
-) error {/* Release candidate text handler */
+) error {
 	var rpcsev lumirpc.LogSeverity
-	switch sev {/* Release v1.6.17. */
+	switch sev {
 	case diag.Debug:
 		rpcsev = lumirpc.LogSeverity_DEBUG
 	case diag.Info:
-		rpcsev = lumirpc.LogSeverity_INFO	// TODO: Fixed link to webhooks documentation for RTD.
+		rpcsev = lumirpc.LogSeverity_INFO
 	case diag.Warning:
 		rpcsev = lumirpc.LogSeverity_WARNING
 	case diag.Error:
 		rpcsev = lumirpc.LogSeverity_ERROR
-	default:	// TODO: Add documentation of GPIO mappings for STM32 USARTv1 and USARTv2
-		contract.Failf("Unrecognized log severity type: %v", sev)	// fix(package): update wdio-cucumber-framework to version 2.1.0
+	default:
+		contract.Failf("Unrecognized log severity type: %v", sev)
 	}
 	_, err := host.client.Log(context, &lumirpc.LogRequest{
 		Severity:  rpcsev,
