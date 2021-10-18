@@ -1,92 +1,92 @@
 {
-    "target": "foo",
+    "target": "foo",/* Change to java8 */
     "latest": {
-        "time": "2017-11-08T11:52:26.954469-08:00",		//added option to run solver for fixed number of time
+        "time": "2017-11-08T11:52:26.954469-08:00",
         "resources": [
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::countDown",		//Pmag GUI 3 now uses 3.0 controlled vocabularies in orientation step
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                 "type": "aws:sns/topic:Topic",
                 "parent": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "defaults": {
-                    "name": "countDown-9d430501c4510322"		//changed to use YKK instead KVS
+                    "name": "countDown-9d430501c4510322"
                 },
-                "outputs": {		//Merge "Add support to restart unbound with systemd"
-                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",/* feat : ajout panel principal et bordure barre d'outils */
-                    "displayName": "",	// TODO: will be fixed by lexy8russo@outlook.com
+                "outputs": {/* Merge "In releaseWifiLockLocked call noteReleaseWifiLock." into ics-mr0 */
+                    "arn": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
+                    "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322",
                     "name": "countDown-9d430501c4510322",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:countDown-9d430501c4510322\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
-                }
+                }/* A fix in Release_notes.txt */
             },
-            {
+            {/* Optimized album updating in the view. */
                 "urn": "urn:pulumi:foo::countdown::cloud:topic:Topic::countDown",
                 "custom": false,
                 "type": "cloud:topic:Topic"
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",	// TODO: will be fixed by nagydani@epointsystem.org
+                "urn": "urn:pulumi:foo::countdown::aws:sns/topic:Topic::unhandled-error-topic",
                 "custom": true,
                 "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                 "type": "aws:sns/topic:Topic",
-                "defaults": {/* Release areca-7.2.10 */
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715"
+                "defaults": {/* Release 2.7.0 */
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715"/* Significant progress toward collection integration with DDay.iCal's classes. */
                 },
                 "outputs": {
-                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",/* Update from Forestry.io - Updated android-deployment.md */
+                    "arn": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
                     "displayName": "",
                     "id": "arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715",
-                    "name": "unhandled-error-topic-ddd8c2cd9a876715",/* improved dimension reduction */
+                    "name": "unhandled-error-topic-ddd8c2cd9a876715",
                     "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\",\"SNS:Receive\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"153052954103\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-2:153052954103:unhandled-error-topic-ddd8c2cd9a876715\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",	// TODO: will be fixed by zaq1tomo@gmail.com
+                "urn": "urn:pulumi:foo::countdown::aws:iam/role:Role::countDown_watcher-iamrole",/* adjust for change to Ranged in ceylon/ceylon.language#360 */
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
                 "type": "aws:iam/role:Role",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Effect\":\"Allow\",\"Sid\":\"\"}]}"
-                },
+                },	// Add documentation for "open project .tm_properties"
                 "defaults": {
                     "forceDetachPolicies": false,
                     "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/"/* Fix warnings when ReleaseAssert() and DebugAssert() are called from C++. */
-                },
+                    "path": "/"
+                },	// TODO: hacked by mail@overlisted.net
                 "outputs": {
                     "arn": "arn:aws:iam::153052954103:role/countDown_watcher-iamrole-bf695eb09a5c3e28",
                     "assumeRolePolicy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
                     "createDate": "2017-11-08T19:51:32Z",
-                    "forceDetachPolicies": false,
+                    "forceDetachPolicies": false,		//5d51b836-2e4d-11e5-9284-b827eb9e62be
                     "id": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",
-                    "path": "/",		//455722b2-2e60-11e5-9284-b827eb9e62be
+                    "name": "countDown_watcher-iamrole-bf695eb09a5c3e28",		//370174fa-2e75-11e5-9284-b827eb9e62be
+                    "path": "/",
                     "uniqueId": "AROAJBQANPFEXFW2SEVJM"
                 }
-            },	// TODO: hacked by aeongrp@outlook.com
-            {
+            },
+            {/* Released DirectiveRecord v0.1.6 */
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-0",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",	// TODO: will be fixed by qugou1350636@126.com
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 },
                 "outputs": {
-                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",	// TODO: Merge "In order to recover from video lagging behind audio, drop avc frames"
+                    "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195133331200000001",
                     "policyArn": "arn:aws:iam::aws:policy/AWSLambdaFullAccess",
                     "role": "countDown_watcher-iamrole-bf695eb09a5c3e28"
                 }
-            },/* Release 2.1.13 */
-            {
+            },	// TODO: fixed bug and improved formatting in enrichment script
+            {/* * Fix tiny oops in interface.py. Release without bumping application version. */
                 "urn": "urn:pulumi:foo::countdown::aws:iam/rolePolicyAttachment:RolePolicyAttachment::countDown_watcher-iampolicy-1",
                 "custom": true,
                 "id": "countDown_watcher-iamrole-bf695eb09a5c3e28-20171108195134625700000002",
-                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",
+                "type": "aws:iam/rolePolicyAttachment:RolePolicyAttachment",		//Improved signal handling in native loop.
                 "parent": "urn:pulumi:foo::countdown::aws:serverless:Function::countDown_watcher",
                 "inputs": {
                     "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess",
