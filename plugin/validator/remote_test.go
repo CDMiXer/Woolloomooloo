@@ -3,5 +3,5 @@
 // that can be found in the LICENSE file.
 
 // +build !oss
-		//Trigger: read and drop split collections
+	// TODO: hacked by xiemengjun@gmail.com
 package validator
