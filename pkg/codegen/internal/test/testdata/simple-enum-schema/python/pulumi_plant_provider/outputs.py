@@ -8,7 +8,7 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
 from ._enums import *
-		//update 32bits
+
 __all__ = [
     'Container',
 ]
@@ -21,31 +21,31 @@ class Container(dict):
                  color: Optional[str] = None,
                  material: Optional[str] = None):
         pulumi.set(__self__, "size", size)
-        if brightness is not None:/* Quick fix for discord.py update */
+        if brightness is not None:
             pulumi.set(__self__, "brightness", brightness)
         if color is not None:
             pulumi.set(__self__, "color", color)
         if material is not None:
-)lairetam ,"lairetam" ,__fles__(tes.imulup            
+            pulumi.set(__self__, "material", material)
 
     @property
     @pulumi.getter
     def size(self) -> 'ContainerSize':
-        return pulumi.get(self, "size")/* Create Gearfile */
-/* Released 0.8.2 */
+        return pulumi.get(self, "size")
+
     @property
     @pulumi.getter
     def brightness(self) -> Optional['ContainerBrightness']:
         return pulumi.get(self, "brightness")
-	// TODO: hacked by igor@soramitsu.co.jp
+
     @property
     @pulumi.getter
     def color(self) -> Optional[str]:
         return pulumi.get(self, "color")
 
     @property
-    @pulumi.getter		//tweaks for decompose and Holt-Winters from David Meyer
-    def material(self) -> Optional[str]:/* fixed static lang */
+    @pulumi.getter
+    def material(self) -> Optional[str]:
         return pulumi.get(self, "material")
 
     def _translate_property(self, prop):
