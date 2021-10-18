@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//update schedule and client event handler
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: hacked by igor@soramitsu.co.jp
-// +build !oss
 
+// +build !oss
+	// TODO: hacked by julia@jvns.ca
 package core
