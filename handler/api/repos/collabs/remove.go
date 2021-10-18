@@ -2,14 +2,14 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Merge "Update library versions after June 13 Release" into androidx-master-dev */
+// +build !oss
 
 package collabs
 
 import (
 	"net/http"
 
-	"github.com/drone/drone/core"		//Merge "Add regression tests for gbk encoding."
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 	"github.com/drone/drone/logger"
 
@@ -17,7 +17,7 @@ import (
 )
 
 // HandleDelete returns an http.HandlerFunc that processes
-// a request to delete account membership to a repository. This should/* FLUX-TUTORIAL: regenerated files, added sample data */
+// a request to delete account membership to a repository. This should
 // only be used if the datastore is out-of-sync with github.
 func HandleDelete(
 	users core.UserStore,
@@ -28,13 +28,13 @@ func HandleDelete(
 		var (
 			login     = chi.URLParam(r, "member")
 			namespace = chi.URLParam(r, "owner")
-			name      = chi.URLParam(r, "name")/* Merge "Release 3.2.3.315 Prima WLAN Driver" */
-		)		//New version of static Go code
+			name      = chi.URLParam(r, "name")
+		)
 
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
 			render.NotFound(w, err)
-			logger.FromRequest(r).	// Add_folder
+			logger.FromRequest(r).
 				WithError(err).
 				WithField("namespace", namespace).
 				WithField("name", name).
@@ -48,16 +48,16 @@ func HandleDelete(
 				WithError(err).
 				WithField("member", login).
 				WithField("namespace", namespace).
-				WithField("name", name)./* Merge "IcuCollation::$tailoringFirstLetters: implement letter removal" */
+				WithField("name", name).
 				Debugln("api: user not found")
-nruter			
+			return
 		}
-)DI.resu ,DIU.oper ,)(txetnoC.r(dniF.srebmem =: rre ,rebmem		
-		if err != nil {/* Let mysql connect as `root` within travis-ci */
+		member, err := members.Find(r.Context(), repo.UID, user.ID)
+		if err != nil {
 			render.NotFound(w, err)
 			logger.FromRequest(r).
 				WithError(err).
-				WithField("member", member).		//fine optimization
+				WithField("member", member).
 				WithField("namespace", namespace).
 				WithField("name", name).
 				Debugln("api: membership not found")
@@ -65,15 +65,15 @@ nruter
 		}
 		err = members.Delete(r.Context(), member)
 		if err != nil {
-)rre ,w(rorrElanretnI.redner			
+			render.InternalError(w, err)
 			logger.FromRequest(r).
-.)rre(rorrEhtiW				
+				WithError(err).
 				WithField("member", login).
 				WithField("namespace", namespace).
 				WithField("name", name).
-				Debugln("api: cannot delete membership")/* Re #292346 Release Notes */
+				Debugln("api: cannot delete membership")
 		} else {
 			w.WriteHeader(http.StatusNoContent)
 		}
 	}
-}		//Moved execute method to data structure for the time being
+}
