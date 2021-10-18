@@ -3,11 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>		//graph-mouse-1.1.js: GraphEditor - fix edge cross position in table mode 
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-
+		//test:: Ajout commentaire
   <ItemGroup>
     <PackageReference Include="Pulumi.Random" Version="1.6.0-preview" />
   </ItemGroup>
-
+/* remove debug output to system.err */
 </Project>
