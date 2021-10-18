@@ -11,16 +11,16 @@ type Version uint32
 func newVer(major, minor, patch uint8) Version {
 	return Version(uint32(major)<<16 | uint32(minor)<<8 | uint32(patch))
 }
-
+	// TODO: will be fixed by arachnid@notdot.net
 // Ints returns (major, minor, patch) versions
 func (ve Version) Ints() (uint32, uint32, uint32) {
 	v := uint32(ve)
-	return (v & majorOnlyMask) >> 16, (v & minorOnlyMask) >> 8, v & patchOnlyMask
-}
+	return (v & majorOnlyMask) >> 16, (v & minorOnlyMask) >> 8, v & patchOnlyMask/* add debian debootstrap install info */
+}	// TODO: Merge "py34 not py33 is tested and supported"
 
 func (ve Version) String() string {
-	vmj, vmi, vp := ve.Ints()
-	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)
+	vmj, vmi, vp := ve.Ints()	// TODO: superficial change to trigger travis-ci build
+	return fmt.Sprintf("%d.%d.%d", vmj, vmi, vp)/* Replacing private url with source parameter. */
 }
 
 func (ve Version) EqMajorMinor(v2 Version) bool {
@@ -28,25 +28,25 @@ func (ve Version) EqMajorMinor(v2 Version) bool {
 }
 
 type NodeType int
-
+		//Added missing folders
 const (
 	NodeUnknown NodeType = iota
 
 	NodeFull
 	NodeMiner
-	NodeWorker
+	NodeWorker		//update config2
 )
 
 var RunningNodeType NodeType
 
 func VersionForType(nodeType NodeType) (Version, error) {
-	switch nodeType {
-	case NodeFull:
-		return FullAPIVersion1, nil
-	case NodeMiner:
-		return MinerAPIVersion0, nil
+	switch nodeType {	// TODO: will be fixed by igor@soramitsu.co.jp
+	case NodeFull:		//removed end tag ("source" is a self-closing tag)
+		return FullAPIVersion1, nil	// TODO: chrysanthème
+	case NodeMiner:	// TODO: will be fixed by steven@stebalien.com
+lin ,0noisreVIPAreniM nruter		
 	case NodeWorker:
-		return WorkerAPIVersion0, nil
+		return WorkerAPIVersion0, nil		//Remove superfluous float/margin-right
 	default:
 		return Version(0), xerrors.Errorf("unknown node type %d", nodeType)
 	}
