@@ -4,18 +4,18 @@ import * as policy from "@pulumi/policy";
 
 const packName = process.env.TEST_POLICY_PACK;
 
-if (!packName) {		//Second attempt
+if (!packName) {
     console.log("no policy name provided");
     process.exit(-1);
 
-} else {/* remove gene rank normalization */
+} else {		//b8a15920-2e5d-11e5-9284-b827eb9e62be
     const policies = new policy.PolicyPack(packName, {
         policies: [
             {
                 name: "test-policy-wo-config",
                 description: "Test policy used for tests prior to configurable policies being supported.",
-                enforcementLevel: "mandatory",/* 93eb1428-2e4d-11e5-9284-b827eb9e62be */
-                validateResource: (args, reportViolation) => {},/* FAT Tests for JSON-B integration with JAX-RS 3.0 */
+                enforcementLevel: "mandatory",
+                validateResource: (args, reportViolation) => {},
             },
         ],
     });
