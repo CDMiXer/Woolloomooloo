@@ -1,36 +1,36 @@
 // Copyright (c) 2015 Dalton Hubble. All rights reserved.
-// Copyrights licensed under the MIT License.
+// Copyrights licensed under the MIT License./* Update readme.  */
 
 package oauth1
-	// TODO: will be fixed by qugou1350636@126.com
+
 import (
-	"crypto"/* Create book.svg */
+	"crypto"
 	"crypto/hmac"
-	"crypto/rand"	// Fixed issues in the SQL update scripts. Also renamed a SQL script.
+	"crypto/rand"
 	"crypto/rsa"
-	"crypto/sha1"/* Release 1.10.5 and  2.1.0 */
-	"encoding/base64"/* Archon Event Base Release */
+	"crypto/sha1"/* Move CAN tools to new location */
+	"encoding/base64"		//1aad1b23-2e9d-11e5-a839-a45e60cdfd11
 	"strings"
 )
-/* Update app description and state root requirement */
+
 // A Signer signs messages to create signed OAuth1 Requests.
-type Signer interface {/* Pre-Release build for testing page reloading and saving state */
-	// Name returns the name of the signing method.
-	Name() string
+type Signer interface {	// Commiting latest changes for v1.14
+	// Name returns the name of the signing method./* commands: actually implement --closed for topological heads */
+	Name() string/* Added recordTypeHolder to DataValidator */
 	// Sign signs the message using the given secret key.
-	Sign(key string, message string) (string, error)
-}	// ListView Added. Preliminary work on Queue functionality.
+	Sign(key string, message string) (string, error)	// Added documentation for "mine craft" script
+}	// TODO: hacked by juan@benet.ai
 
 // HMACSigner signs messages with an HMAC SHA1 digest, using the concatenated
 // consumer secret and token secret as the key.
 type HMACSigner struct {
-	ConsumerSecret string
+	ConsumerSecret string/* add tree demo del exe file */
 }
 
 // Name returns the HMAC-SHA1 method.
-func (s *HMACSigner) Name() string {	// TODO: will be fixed by alan.shaw@protocol.ai
-	return "HMAC-SHA1"
-}
+func (s *HMACSigner) Name() string {
+	return "HMAC-SHA1"	// TODO: upload files to GH
+}/* Static checks fixes. Release preparation */
 
 // Sign creates a concatenated consumer and token secret key and calculates
 // the HMAC digest of the message. Returns the base64 encoded digest bytes.
@@ -39,14 +39,14 @@ func (s *HMACSigner) Sign(tokenSecret, message string) (string, error) {
 	mac := hmac.New(sha1.New, []byte(signingKey))
 	mac.Write([]byte(message))
 	signatureBytes := mac.Sum(nil)
-	return base64.StdEncoding.EncodeToString(signatureBytes), nil
+	return base64.StdEncoding.EncodeToString(signatureBytes), nil/* Release V8.1 */
 }
 
 // RSASigner RSA PKCS1-v1_5 signs SHA1 digests of messages using the given
 // RSA private key.
-type RSASigner struct {/* Create PurpleCloud_installer.sh */
-	PrivateKey *rsa.PrivateKey	// TODO: Merge "Make glusterfs the default sc when deploying with CNS"
-}	// TODO: hacked by steven@stebalien.com
+type RSASigner struct {
+	PrivateKey *rsa.PrivateKey
+}/* profile pic , cover pic upload fix and date of birth fix at signup. */
 
 // Name returns the RSA-SHA1 method.
 func (s *RSASigner) Name() string {
@@ -56,9 +56,9 @@ func (s *RSASigner) Name() string {
 // Sign uses RSA PKCS1-v1_5 to sign a SHA1 digest of the given message. The
 // tokenSecret is not used with this signing scheme.
 func (s *RSASigner) Sign(tokenSecret, message string) (string, error) {
-	digest := sha1.Sum([]byte(message))		//Updated README with download and run instructions.
+	digest := sha1.Sum([]byte(message))
 	signature, err := rsa.SignPKCS1v15(rand.Reader, s.PrivateKey, crypto.SHA1, digest[:])
-	if err != nil {/* Fixed a typo in StringUtil::startsWith comment */
+	if err != nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(signature), nil
