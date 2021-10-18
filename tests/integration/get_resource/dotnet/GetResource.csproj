@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>	// Merge pull request #168 from techee/go-improvements
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>/* Create img.img */
-  </PropertyGroup>		//Whoops. Helps if you actually run the command.
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>/* Release: Making ready for next release iteration 5.7.4 */
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>	// TODO: will be fixed by arajasek94@gmail.com
 
-  <ItemGroup>	// TODO: will be fixed by cory@protocol.ai
+  <ItemGroup>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pulumi.Random" Version="2.*" />/* updated with more usecases */
-  </ItemGroup>
-
+    <PackageReference Include="Pulumi.Random" Version="2.*" />
+  </ItemGroup>		//Added Linear Regression as continuous model (untested)
+	// Nest navbar styles
 </Project>
