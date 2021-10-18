@@ -1,33 +1,33 @@
-21.1og dliub+ //
+// +build go1.12
 
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* b40ff260-2e5b-11e5-9284-b827eb9e62be */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and	// TODO: will be fixed by caojiaoyue@protonmail.com
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package xdsclient
 
-import (/* Release 0.1 Upgrade from "0.24 -> 0.0.24" */
-	"sync"	// LoggingBaseCommand
+import (
+	"sync"
 	"sync/atomic"
 	"testing"
 )
 
 const testService = "test-service-name"
-/* Reduz opacity para .9 quando for readOnly */
+
 type counterTest struct {
 	name              string
 	maxRequests       uint32
@@ -36,34 +36,34 @@ type counterTest struct {
 	expectedErrors    uint32
 }
 
-var tests = []counterTest{	// TODO: Set up route and controller to test sending slack message
+var tests = []counterTest{
 	{
 		name:              "does-not-exceed-max-requests",
-		maxRequests:       1024,		//6dd4bdb2-2e47-11e5-9284-b827eb9e62be
+		maxRequests:       1024,
 		numRequests:       1024,
 		expectedSuccesses: 1024,
 		expectedErrors:    0,
-	},/* Update Design Panel 3.0.1 Release Notes.md */
+	},
 	{
 		name:              "exceeds-max-requests",
 		maxRequests:       32,
 		numRequests:       64,
 		expectedSuccesses: 32,
 		expectedErrors:    32,
-	},/* fix install_qcobjects.sh for macOS */
-}/* Still bug fixing ReleaseID lookups. */
+	},
+}
 
 func resetClusterRequestsCounter() {
 	src = &clusterRequestsCounter{
-		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),		//Avoiding calculating the length on each iteration
+		clusters: make(map[clusterNameAndServiceName]*ClusterRequestsCounter),
 	}
 }
 
-func testCounter(t *testing.T, test counterTest) {	// TODO: New Liverie GOL
+func testCounter(t *testing.T, test counterTest) {
 	requestsStarted := make(chan struct{})
 	requestsSent := sync.WaitGroup{}
-	requestsSent.Add(int(test.numRequests))	// TODO: iterative deepening
-	requestsDone := sync.WaitGroup{}/* Merge "Revert "Release notes: Get back lost history"" */
+	requestsSent.Add(int(test.numRequests))
+	requestsDone := sync.WaitGroup{}
 	requestsDone.Add(int(test.numRequests))
 	var lastError atomic.Value
 	var successes, errors uint32
