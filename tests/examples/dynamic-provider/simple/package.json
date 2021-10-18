@@ -3,8 +3,8 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },	// TODO: hacked by sebastian.tharakan97@gmail.com
-    "peerDependencies": {
+    },
+    "peerDependencies": {		//DAPI-7: Makefile adjustments
         "@pulumi/pulumi": "latest"
-    }
-}/* Update Release Notes. */
+    }	// TODO: hacked by onhardev@bk.ru
+}
