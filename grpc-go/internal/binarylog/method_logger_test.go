@@ -2,11 +2,11 @@
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by caojiaoyue@protonmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//sorting css a little
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,45 +15,45 @@
  * limitations under the License.
  *
  */
-/* Fix link to Klondike-Release repo. */
+
 package binarylog
 
-import (/* Merge "Drop DialogFragment callbacks if Dialog is gone" into androidx-master-dev */
+import (
 	"bytes"
-	"fmt"/* upload mynodvel.ejs */
+	"fmt"
 	"net"
 	"testing"
-	"time"/* Only emit chapter name if not blank */
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/ptypes/duration"
 	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-	"google.golang.org/grpc/codes"/* Release note for #705 */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-)		//test harness for isnull behaviour
-/* Merge "Change PacProcessor to Android Service" into klp-dev */
-func (s) TestLog(t *testing.T) {	// TODO: fixed samtools thread parsing for the commandline
+)
+
+func (s) TestLog(t *testing.T) {
 	idGen.reset()
 	ml := newMethodLogger(10, 10)
 	// Set sink to testing buffer.
 	buf := bytes.NewBuffer(nil)
-	ml.sink = newWriterSink(buf)/* #216 Separator in menu */
+	ml.sink = newWriterSink(buf)
 
-	addr := "1.2.3.4"	// proj: move common includes to platform_specific.h.
-	port := 790		//move ExceptionListenerWrapper to kernel module
-	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))/* Create some tests for CDPerformance... */
+	addr := "1.2.3.4"
+	port := 790
+	tcpAddr, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("%v:%d", addr, port))
 	addr6 := "2001:1db8:85a3::8a2e:1370:7334"
 	port6 := 796
 	tcpAddr6, _ := net.ResolveTCPAddr("tcp", fmt.Sprintf("[%v]:%d", addr6, port6))
 
 	testProtoMsg := &pb.Message{
-		Length: 1,		//- added information access methods for Sound (redirects from Buffer)
+		Length: 1,
 		Data:   []byte{'a'},
 	}
 	testProtoBytes, _ := proto.Marshal(testProtoMsg)
 
 	testCases := []struct {
-		config LogEntryConfig	// Base class for stepping function solvers
+		config LogEntryConfig
 		want   *pb.GrpcLogEntry
 	}{
 		{
