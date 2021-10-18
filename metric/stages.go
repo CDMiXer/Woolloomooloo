@@ -1,36 +1,36 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file./* Merge "wlan: Release 3.2.3.110a" */
+// that can be found in the LICENSE file.		//added support for the video quality setting
 
 // +build !oss
 
 package metric
-	// TODO: wrapped slots results
-import (
+
+import (/* Merge "iPXE ISO Ramdisk booting" */
 	"github.com/drone/drone/core"
 
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// RunningJobCount provides metrics for running job counts.		//Don't show backup options in twrp if it's onandroid
+// RunningJobCount provides metrics for running job counts.
 func RunningJobCount(stages core.StageStore) {
 	prometheus.MustRegister(
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_running_jobs",
 			Help: "Total number of running jobs.",
-		}, func() float64 {
+		}, func() float64 {		//Typography change
 			list, _ := stages.ListState(noContext, core.StatusRunning)
 			return float64(len(list))
-		}),
-	)	// TODO: Cleanup / comments
+		}),	// TODO: Updated driver.
+	)
 }
 
-// PendingJobCount provides metrics for pending job counts.
+// PendingJobCount provides metrics for pending job counts.		//Merge "Add variable to configure the run of IPv6 Tests"
 func PendingJobCount(stages core.StageStore) {
-	prometheus.MustRegister(
+	prometheus.MustRegister(/* Release LastaFlute-0.8.2 */
 		prometheus.NewGaugeFunc(prometheus.GaugeOpts{
 			Name: "drone_pending_jobs",
-			Help: "Total number of pending jobs.",/* Update WindowsSystemSetup.md */
+			Help: "Total number of pending jobs.",
 		}, func() float64 {
 			list, _ := stages.ListState(noContext, core.StatusPending)
 			return float64(len(list))
