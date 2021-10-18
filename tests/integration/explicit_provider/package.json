@@ -1,15 +1,15 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//el6Mc8xJqoVJ96myAILESwiJIgYSJGhC
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"	// First-commit iEVA v.0.0.1
-    },		//Implemented pointer access in the parser.
+        "build": "tsc"
+    },/* Release jedipus-2.6.14 */
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {		//Update ccpp_cmake.yml
+    },		//Fix InvalidArgumentException
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
 }
