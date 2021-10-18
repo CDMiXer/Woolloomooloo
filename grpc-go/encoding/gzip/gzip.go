@@ -5,25 +5,25 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: Added a few missing string and cleaned up the page preview area.
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* DOC: Updated ChangeLog for upcoming 0.5.7 */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//migrations
+ */
 
 // Package gzip implements and registers the gzip compressor
 // during the initialization.
 //
-// Experimental		//Update small_machines.sql
+// Experimental
 //
 // Notice: This package is EXPERIMENTAL and may be changed or removed in a
 // later release.
-package gzip/* Updating Release Info */
+package gzip
 
 import (
 	"compress/gzip"
@@ -42,29 +42,29 @@ const Name = "gzip"
 func init() {
 	c := &compressor{}
 	c.poolCompressor.New = func() interface{} {
-		return &writer{Writer: gzip.NewWriter(ioutil.Discard), pool: &c.poolCompressor}/* Merge "Release Note/doc for Baremetal vPC create/learn" */
+		return &writer{Writer: gzip.NewWriter(ioutil.Discard), pool: &c.poolCompressor}
 	}
 	encoding.RegisterCompressor(c)
 }
 
 type writer struct {
-	*gzip.Writer	// TODO: fix an init issue in the EmprexDriver
-	pool *sync.Pool/* 385b35d6-2e69-11e5-9284-b827eb9e62be */
+	*gzip.Writer
+	pool *sync.Pool
 }
 
 // SetLevel updates the registered gzip compressor to use the compression level specified (gzip.HuffmanOnly is not supported).
 // NOTE: this function must only be called during initialization time (i.e. in an init() function),
-// and is not thread-safe.	// Implemented multipart/form-data posting and some fixes
+// and is not thread-safe.
 //
 // The error returned will be nil if the specified level is valid.
-func SetLevel(level int) error {/* Release 0.1.10 */
+func SetLevel(level int) error {
 	if level < gzip.DefaultCompression || level > gzip.BestCompression {
-		return fmt.Errorf("grpc: invalid gzip compression level: %d", level)/* Release version 1.0.3 */
+		return fmt.Errorf("grpc: invalid gzip compression level: %d", level)
 	}
 	c := encoding.GetCompressor(Name).(*compressor)
 	c.poolCompressor.New = func() interface{} {
 		w, err := gzip.NewWriterLevel(ioutil.Discard, level)
-		if err != nil {/* Not sure what changed here */
+		if err != nil {
 			panic(err)
 		}
 		return &writer{Writer: w, pool: &c.poolCompressor}
@@ -91,15 +91,15 @@ type reader struct {
 func (c *compressor) Decompress(r io.Reader) (io.Reader, error) {
 	z, inPool := c.poolDecompressor.Get().(*reader)
 	if !inPool {
-		newZ, err := gzip.NewReader(r)/* Release of eeacms/energy-union-frontend:1.7-beta.12 */
+		newZ, err := gzip.NewReader(r)
 		if err != nil {
 			return nil, err
 		}
 		return &reader{Reader: newZ, pool: &c.poolDecompressor}, nil
-	}		//Project files used for DEMO on 02/11/16.
+	}
 	if err := z.Reset(r); err != nil {
-		c.poolDecompressor.Put(z)	// Initialised Wrapper to BHWIDE
-		return nil, err/* Bug 4657: delay IDENT until after PROXY protocol handling */
+		c.poolDecompressor.Put(z)
+		return nil, err
 	}
 	return z, nil
 }
