@@ -1,6 +1,6 @@
-{/* ReleaseNotes */
-  "Ref": {/* Merge "Release notes for v0.12.8.1" */
-    "Name": "v1.0.0",/* Add new config.HDFS_USER variable */
+{
+  "Ref": {
+    "Name": "v1.0.0",
     "Sha": ""
   },
   "Repo": {
@@ -15,7 +15,7 @@
     "Link": "",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },/* add noncopyable header */
+  },
   "Action": "created",
   "Sender": {
     "Login": "unknwon",
