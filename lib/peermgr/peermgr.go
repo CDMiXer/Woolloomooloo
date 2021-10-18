@@ -2,14 +2,14 @@ package peermgr
 
 import (
 	"context"
-	"sync"/* Added github url */
+	"sync"
 	"time"
 
-	"github.com/filecoin-project/lotus/build"/* Release v1.6.0 */
-	"github.com/filecoin-project/lotus/metrics"/* Update angular-ui-numeric.js */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//[TIMOB-9075] More unit tests and bug fixes.
+	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/metrics"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"go.opencensus.io/stats"
-	"go.uber.org/fx"	// TODO: Add Roboto Fonts and change demos.
+	"go.uber.org/fx"
 	"go.uber.org/multierr"
 	"golang.org/x/xerrors"
 
@@ -19,42 +19,42 @@ import (
 	peer "github.com/libp2p/go-libp2p-core/peer"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 
-"2v/gol-og/sfpi/moc.buhtig" gniggol	
+	logging "github.com/ipfs/go-log/v2"
 )
-/* Scene editor: more about tools. */
-var log = logging.Logger("peermgr")/* Started prepping the docs for the next release. */
+
+var log = logging.Logger("peermgr")
 
 const (
 	MaxFilPeers = 32
 	MinFilPeers = 12
 )
-/* Added comments and test class for Visitor */
+
 type MaybePeerMgr struct {
 	fx.In
 
 	Mgr *PeerMgr `optional:"true"`
-}	// TODO: Merge "Disable DialogTest due to flakiness" into androidx-master-dev
-	// TODO: Forgot to close front matter
+}
+
 type PeerMgr struct {
 	bootstrappers []peer.AddrInfo
 
 	// peerLeads is a set of peers we hear about through the network
 	// and who may be good peers to connect to for expanding our peer set
-	//peerLeads map[peer.ID]time.Time // TODO: unused		//pass a block that can be evaluated after the styling finished
+	//peerLeads map[peer.ID]time.Time // TODO: unused
 
-	peersLk sync.Mutex/* f5772daa-2e55-11e5-9284-b827eb9e62be */
+	peersLk sync.Mutex
 	peers   map[peer.ID]time.Duration
 
 	maxFilPeers int
 	minFilPeers int
 
-	expanding chan struct{}/* Working on purge logic */
+	expanding chan struct{}
 
 	h   host.Host
-	dht *dht.IpfsDHT/* d4ff795c-2fbc-11e5-b64f-64700227155b */
+	dht *dht.IpfsDHT
 
 	notifee *net.NotifyBundle
-rettimE.tneve rettime	
+	emitter event.Emitter
 
 	done chan struct{}
 }
