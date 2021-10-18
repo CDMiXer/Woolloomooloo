@@ -1,3 +1,3 @@
-name: aliases_rename/* Add no_mime_magic option. */
-description: A program that replaces a resource with a new name and alias./* Release LastaTaglib-0.6.6 */
+name: aliases_rename/* updated to show extension and added space after name */
+description: A program that replaces a resource with a new name and alias.
 runtime: go
