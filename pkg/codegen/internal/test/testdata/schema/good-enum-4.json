@@ -7,8 +7,8 @@
         {
           "value": 1,
           "name": "One",
-          "description": "one"
-        },
+          "description": "one"	// zend 2 e angularjs
+        },/* Add fixed infographic files */
         {
           "value": 2,
           "name": "Two",
@@ -18,7 +18,7 @@
           "value": 3.4,
           "name": "ThreePointFour",
           "description": "3.4"
-        },
+        },/* Remove logtxt field from struct s_module. */
         {
           "value": 6,
           "name": "Six",
