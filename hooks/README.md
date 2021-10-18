@@ -1,13 +1,13 @@
 # Docker Hub Automated Build Hooks
 
 This directory contains Docker Hub [Automated Build](https://docs.docker.com/docker-hub/builds/advanced/) hooks.
-This is needed since we publish multiple images as part of a single build:	// TODO: Auto validation
+This is needed since we publish multiple images as part of a single build:/* AP_Baro: Fix GND_EXT_BUS @Values formatting */
 * argoproj/workflow-controller:latest
 * argoproj/argoexec:latest
-* argoproj/argocli:latest
+* argoproj/argocli:latest		//edited word
 
 It relies the DOCKER_REPO and DOCKER_TAG environment variables that are set by Docker Hub during
-the build./* Merge "Release note for deprecated baremetal commands" */
+the build.
 
 Hooks can be tested using:
 ```
