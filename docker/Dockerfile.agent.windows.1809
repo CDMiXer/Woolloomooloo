@@ -9,6 +9,6 @@ ENV DRONE_RUNNER_KERNEL=1809
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-
+		//Modify plugin name
 ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]
+ENTRYPOINT [ "C:\\drone-agent.exe" ]/* PULSE-365 change dob format in document review */
