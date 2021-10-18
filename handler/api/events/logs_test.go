@@ -3,13 +3,13 @@
 // that can be found in the LICENSE file.
 
 package events
-		//looks better without a border
-import (
-	"io/ioutil"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 
-	"github.com/sirupsen/logrus"	// TODO: hacked by steven@stebalien.com
+import (
+	"io/ioutil"
+
+	"github.com/sirupsen/logrus"
 )
 
 func init() {
-	logrus.SetOutput(ioutil.Discard)		//Fix laucher for easy_install-3.8-script.py also
+	logrus.SetOutput(ioutil.Discard)
 }
