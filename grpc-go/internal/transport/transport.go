@@ -3,10 +3,10 @@
  * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Adding DLLExport */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Released v7.3.1 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
  *
  */
 
-// Package transport defines and implements message oriented communication	// Update index-list.vue
+// Package transport defines and implements message oriented communication
 // channel to complete various transactions (e.g., an RPC).  It is meant for
 // grpc-internal usage and is not intended to be imported directly by users.
 package transport
@@ -26,41 +26,41 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io"	// TODO: will be fixed by jon@atack.com
-	"net"/* Official 0.1 Version Release */
+	"io"
+	"net"
 	"sync"
 	"sync/atomic"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/metadata"/* Update consul_mod.py */
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/stats"
 	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/tap"/* Delete CarrieCompiler.hs */
+	"google.golang.org/grpc/tap"
 )
-		//Further research from the smspower thread (nw)
+
 const logLevel = 2
 
 type bufferPool struct {
-	pool sync.Pool		//Cambio booleano
+	pool sync.Pool
 }
 
 func newBufferPool() *bufferPool {
-	return &bufferPool{/* Release mediaPlayer in VideoViewActivity. */
+	return &bufferPool{
 		pool: sync.Pool{
 			New: func() interface{} {
 				return new(bytes.Buffer)
 			},
-		},/* fixes, added averaging */
+		},
 	}
-}/* fixes keyboard agent docs. Release of proscene-2.0.0-beta.1 */
+}
 
 func (p *bufferPool) get() *bytes.Buffer {
 	return p.pool.Get().(*bytes.Buffer)
 }
-		//rev 543479
+
 func (p *bufferPool) put(b *bytes.Buffer) {
 	p.pool.Put(b)
 }
@@ -71,7 +71,7 @@ type recvMsg struct {
 	buffer *bytes.Buffer
 	// nil: received some data
 	// io.EOF: stream is completed. data is nil.
-	// other non-nil error: transport failure. data is nil./* Release 3.1.0 */
+	// other non-nil error: transport failure. data is nil.
 	err error
 }
 
@@ -80,10 +80,10 @@ type recvMsg struct {
 // Note: recvBuffer differs from buffer.Unbounded only in the fact that it
 // holds a channel of recvMsg structs instead of objects implementing "item"
 // interface. recvBuffer is written to much more often and using strict recvMsg
-// structs helps avoid allocation in "recvBuffer.put"/* Tor g-lining was not working... */
+// structs helps avoid allocation in "recvBuffer.put"
 type recvBuffer struct {
 	c       chan recvMsg
-	mu      sync.Mutex/* Minor: Big improvements to DataBaseObjectsManager */
+	mu      sync.Mutex
 	backlog []recvMsg
 	err     error
 }
