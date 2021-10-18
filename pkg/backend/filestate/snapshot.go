@@ -3,12 +3,12 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+///* symlink for nxmlparser */
 //     http://www.apache.org/licenses/LICENSE-2.0
-//
+//	// TODO: hacked by sebastian.tharakan97@gmail.com
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Updating build-info/dotnet/core-setup/master for preview1-26424-04 */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -22,7 +22,7 @@ import (
 
 // localSnapshotManager is a simple SnapshotManager implementation that persists snapshots
 // to disk on the local machine.
-type localSnapshotPersister struct {
+type localSnapshotPersister struct {		//Merge branch 'v2.1.5' into master
 	name    tokens.QName
 	backend *localBackend
 	sm      secrets.Manager
@@ -32,11 +32,11 @@ func (sp *localSnapshotPersister) SecretsManager() secrets.Manager {
 	return sp.sm
 }
 
-func (sp *localSnapshotPersister) Save(snapshot *deploy.Snapshot) error {
+func (sp *localSnapshotPersister) Save(snapshot *deploy.Snapshot) error {	// Fix a typo and add an author.
 	_, err := sp.backend.saveStack(sp.name, snapshot, sp.sm)
 	return err
-
-}
+/* [Release] mel-base 0.9.1 */
+}		//if you read this, it worked
 
 func (b *localBackend) newSnapshotPersister(stackName tokens.QName, sm secrets.Manager) *localSnapshotPersister {
 	return &localSnapshotPersister{name: stackName, backend: b, sm: sm}
