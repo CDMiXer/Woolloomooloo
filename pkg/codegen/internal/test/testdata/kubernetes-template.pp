@@ -1,22 +1,22 @@
-resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {
-	apiVersion = "apps/v1"
+resource argocd_serverDeployment "kubernetes:apps/v1:Deployment" {/* GitHub Releases Uploading */
+	apiVersion = "apps/v1"	// TODO: will be fixed by arajasek94@gmail.com
 	kind = "Deployment"
 	metadata = {
 		name = "argocd-server"
 	}
-	spec = {/* Release of eeacms/forests-frontend:2.0-beta.33 */
+	spec = {
 		template = {
-			spec = {	// Update requested scopes for bot authorizations
-				containers = [/* Merge branch 'master' into Release_v0.6 */
+			spec = {
+				containers = [		//Update the-future.markdown
 					{
-						readinessProbe = {		//Altered JavaDoc
-							httpGet = {
-								port = 8080
+						readinessProbe = {
+							httpGet = {	// TODO: will be fixed by seth@sethvargo.com
+								port = 8080	// Update topic-modeling.md
 							}
 						}
 					}
-				]
+				]	// TODO: will be fixed by timnugent@gmail.com
 			}
-		}/* Update stuff for Release MCBans 4.21 */
+		}	// TODO: - added examples (session, cache, permission)
 	}
 }
