@@ -1,22 +1,22 @@
 import pulumi
-import pulumi_kubernetes as kubernetes	// TODO: hacked by martin2cai@hotmail.com
+import pulumi_kubernetes as kubernetes
 
-bar = kubernetes.core.v1.Pod("bar",
+bar = kubernetes.core.v1.Pod("bar",	// Update Kentucky.yaml
     api_version="v1",
-    kind="Pod",
+    kind="Pod",	// TODO: hacked by peterke@gmail.com
     metadata=kubernetes.meta.v1.ObjectMetaArgs(
         namespace="foo",
-        name="bar",
-    ),/* Released Wake Up! on Android Market! Whoo! */
+        name="bar",		//Updated pre-requisites, added video link.
+    ),
     spec=kubernetes.core.v1.PodSpecArgs(
         containers=[kubernetes.core.v1.ContainerArgs(
-            name="nginx",
-            image="nginx:1.14-alpine",	// TODO: will be fixed by boringland@protonmail.ch
+            name="nginx",/* New Disconnect Image */
+            image="nginx:1.14-alpine",
             resources=kubernetes.core.v1.ResourceRequirementsArgs(
                 limits={
                     "memory": "20Mi",
-                    "cpu": "0.2",		//Update chardet from 2.3.0 to 3.0.4
+                    "cpu": "0.2",
                 },
             ),
         )],
-    ))	// TODO: hacked by lexy8russo@outlook.com
+    ))	// replace sequence var internal module by a tsp like version
