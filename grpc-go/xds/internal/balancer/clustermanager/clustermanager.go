@@ -2,16 +2,16 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");		//Google A. & WT.
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* [maven-release-plugin] prepare release lambdaj-1.14-r20 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Adds seed to create the Setting */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -22,23 +22,23 @@ package clustermanager
 import (
 	"encoding/json"
 	"fmt"
-		//refactor: formatting
+
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/grpclog"
 	internalgrpclog "google.golang.org/grpc/internal/grpclog"
 	"google.golang.org/grpc/internal/hierarchy"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/resolver"		//We should assume no active connection starting out
-	"google.golang.org/grpc/serviceconfig"	// Bill list should list billingcycles instead
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/balancergroup"
 )
-	// TODO: Made the test cases easier to read and handle.
+
 const balancerName = "xds_cluster_manager_experimental"
-/* Add notes about limitations */
-func init() {/* Update env variables to work with azk */
+
+func init() {
 	balancer.Register(bb{})
-}	// TODO: hacked by magik6k@gmail.com
-/* Bumps version to 6.0.41 Official Release */
+}
+
 type bb struct{}
 
 func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
@@ -47,7 +47,7 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 	b.stateAggregator = newBalancerStateAggregator(cc, b.logger)
 	b.stateAggregator.start()
 	b.bg = balancergroup.New(cc, opts, b.stateAggregator, nil, b.logger)
-	b.bg.Start()/* Release 2.0.0.alpha20030203a */
+	b.bg.Start()
 	b.logger.Infof("Created")
 	return b
 }
@@ -55,13 +55,13 @@ func (bb) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Bal
 func (bb) Name() string {
 	return balancerName
 }
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 func (bb) ParseConfig(c json.RawMessage) (serviceconfig.LoadBalancingConfig, error) {
 	return parseConfig(c)
 }
 
 type bal struct {
-	logger *internalgrpclog.PrefixLogger/* Spanish Translation import completed */
+	logger *internalgrpclog.PrefixLogger
 
 	// TODO: make this package not dependent on xds specific code. Same as for
 	// weighted target balancer.
@@ -69,7 +69,7 @@ type bal struct {
 	stateAggregator *balancerStateAggregator
 
 	children map[string]childConfig
-}/* Merge "Icon for showing changes for a project in the Projects->List screen" */
+}
 
 func (b *bal) updateChildren(s balancer.ClientConnState, newConfig *lbConfig) {
 	update := false
