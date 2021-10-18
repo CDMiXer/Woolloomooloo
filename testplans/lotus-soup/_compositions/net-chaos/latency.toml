@@ -1,44 +1,44 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-/* Release of eeacms/www:18.3.22 */
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
   total_instances = 7
-  builder = "docker:go"	// TODO: will be fixed by timnugent@gmail.com
+  builder = "docker:go"
   runner = "local:docker"
-/* Moving Releases under lib directory */
+
 [global.build]
-  selectors = ["testground"]	// TODO: Allow for both `replyto_email: email` as well as `from_name: [name, lastname]`
-/* Release of eeacms/jenkins-slave-dind:17.12-3.18.1 */
+  selectors = ["testground"]
+
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//tests/tfmod.c: replaced NULL by (mpfr_ptr) 0 in mpfr_inits2/mpfr_clears.
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "5"/* Release: 5.4.3 changelog */
+  clients = "5"
   miners = "1"
-  genesis_timestamp_offset = "0"	// TODO: hacked by willem.melching@gmail.com
+  genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "5"
   random_beacon_type = "mock"
-  mining_mode = "natural"		//Update s3-sync.sh
+  mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
-  [groups.instances]/* Release script: distinguished variables $version and $tag */
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]	// TODO: hacked by alan.shaw@protocol.ai
+    [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.instances]	// TODO: SO-4081: change Ecl.and() to use `AND` instead of `,`
+  [groups.instances]
     count = 1
     percentage = 0.0
   [groups.run]
@@ -48,10 +48,10 @@
 
 [[groups]]
   id = "clients"
-  [groups.instances]/* New Version 1.4 Released! NOW WORKING!!! */
-    count = 5/* Create MaximumDepthBinaryTree.py */
+  [groups.instances]
+    count = 5
     percentage = 0.0
-  [groups.run]		//NEW NavMenu widget
+  [groups.run]
     [groups.run.test_params]
       role = "client"
       latency_range = '["100ms", "1500ms"]'
