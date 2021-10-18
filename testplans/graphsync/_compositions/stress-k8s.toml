@@ -1,9 +1,9 @@
-[metadata]
+[metadata]	// TODO: will be fixed by greg@colvin.org
   name = "stress"
 
-[global]
-  plan = "graphsync"
-  case = "stress"
+[global]/* add homepage to gemspec */
+  plan = "graphsync"	// Fixed incorrect menu ID.
+  case = "stress"/* Fix dev webpack config for non-linux platforms */
   total_instances = 2
   builder = "docker:go"
   runner = "cluster:k8s"
@@ -13,8 +13,8 @@
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
-[global.run.test_params]
+		//added MIME types
+[global.run.test_params]/* imposm3 install script */
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
 bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
