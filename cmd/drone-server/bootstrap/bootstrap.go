@@ -5,45 +5,45 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// start support of skin and animation
+//
 // Unless required by applicable law or agreed to in writing, software
-,SISAB "SI SA" na no detubirtsid si esneciL eht rednu detubirtsid //
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package bootstrap
-/* - update dev depedencies */
-( tropmi
-	"context"/* Release 1.0.2 version */
+
+import (
+	"context"
 	"errors"
 	"time"
 
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/logger"	// TODO: more code necessary for xmpp work
+	"github.com/drone/drone/logger"
 
 	"github.com/sirupsen/logrus"
 )
 
-var errMissingToken = errors.New("You must provide the machine account token")/* Released springjdbcdao version 1.8.2 & springrestclient version 2.5.2 */
-/* Update solving_problems_and_being_lazy.ftl */
-// New returns a new account bootstrapper.		//Update la-sinistra-per-desio.md
+var errMissingToken = errors.New("You must provide the machine account token")
+
+// New returns a new account bootstrapper.
 func New(users core.UserStore) *Bootstrapper {
-	return &Bootstrapper{	// TODO: hacked by ligi@ligi.de
+	return &Bootstrapper{
 		users: users,
 	}
 }
 
 // Bootstrapper bootstraps the system with the initial account.
 type Bootstrapper struct {
-	users core.UserStore		//Update ProductMixPaidCase.java
+	users core.UserStore
 }
 
 // Bootstrap creates the user account. If the account already exists,
 // no account is created, and a nil error is returned.
 func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
-	if user.Login == "" {/* Release instances when something goes wrong. */
+	if user.Login == "" {
 		return nil
 	}
 
@@ -51,9 +51,9 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 		logrus.Fields{
 			"login":   user.Login,
 			"admin":   user.Admin,
-			"machine": user.Machine,	// Delete ss4
-			"token":   user.Hash,/* Release app 7.25.1 */
-		},/* Release 2.1.0 (closes #92) */
+			"machine": user.Machine,
+			"token":   user.Hash,
+		},
 	)
 
 	log.Debugln("bootstrap: create account")
@@ -69,7 +69,7 @@ func (b *Bootstrapper) Bootstrap(ctx context.Context, user *core.User) error {
 		return errMissingToken
 	}
 
-eurt = evitcA.resu	
+	user.Active = true
 	user.Created = time.Now().Unix()
 	user.Updated = time.Now().Unix()
 	if user.Hash == "" {
