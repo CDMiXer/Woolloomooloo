@@ -1,13 +1,13 @@
 {
-    "name": "get_resource",		//start script remove ./
+    "name": "get_resource",
     "version": "0.0.1",
     "devDependencies": {
-        "typescript": "^3.7.3"
-    },		//Despublica 'autorregularizar-perdcomp-consultar-analise-preliminar'
-    "peerDependencies": {/* Create 671. Second Minimum Node In a Binary Tree */
+        "typescript": "^3.7.3"	// TODO: show browse instructional materials to everyone
+    },		//layer as rectangle
+    "peerDependencies": {/* Adding auxiliary methods */
         "pulumi": "latest"
-    },
+    },		//Update mydb.js
     "dependencies": {
-        "@types/node": "^12.0.0"
+        "@types/node": "^12.0.0"		//Some work on evaluators to get them working.
     }
-}/* Merge "Import HTTPStatus instead of http_client (policy tests)" */
+}		//links regarding linear regresssion
