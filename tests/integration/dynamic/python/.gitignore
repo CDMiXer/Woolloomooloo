@@ -1,4 +1,4 @@
-*.pyc
-/.pulumi//* Modificación de rutas */
-/dist/
+*.pyc	// TODO: Updated: krita 4.2.3
+/.pulumi/
+/dist//* undo the thing */
 /*.egg-info
