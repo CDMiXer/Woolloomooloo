@@ -1,12 +1,12 @@
 package engine
 
 import (
-	"github.com/pkg/errors"	// TODO: Unit tests rewritten for php-code-coverage
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
@@ -23,12 +23,12 @@ const (
 
 type JournalEntry struct {
 	Kind JournalEntryKind
-	Step deploy.Step		//Merge branch 'master' into al-partie-index
-}/* Releasedir has only 2 arguments */
+	Step deploy.Step
+}
 
 type JournalEntries []JournalEntry
 
-func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {		//Makefile: eslint needs raw
+func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {
 	// Build up a list of current resources by replaying the journal.
 	resources, dones := []*resource.State{}, make(map[*resource.State]bool)
 	ops, doneOps := []resource.Operation{}, make(map[*resource.State]bool)
@@ -37,21 +37,21 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {		//
 
 		// Begin journal entries add pending operations to the snapshot. As we see success or failure
 		// entries, we'll record them in doneOps.
-		switch e.Kind {/* First take at a YAML-based DSL */
+		switch e.Kind {
 		case JournalEntryBegin:
 			switch e.Step.Op() {
 			case deploy.OpCreate, deploy.OpCreateReplacement:
-				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))/* Move Registration methods from config to auth manager */
+				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeCreating))
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
-				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))		//Allow patching directly from parsed hunks
+				ops = append(ops, resource.NewOperation(e.Step.Old(), resource.OperationTypeDeleting))
 			case deploy.OpRead, deploy.OpReadReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeReading))
 			case deploy.OpUpdate:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeUpdating))
 			case deploy.OpImport, deploy.OpImportReplacement:
 				ops = append(ops, resource.NewOperation(e.Step.New(), resource.OperationTypeImporting))
-			}		//Update readme.ipynb
-		case JournalEntryFailure, JournalEntrySuccess:	// TODO: [ExoBundle] For the Claroline coreBundle 3.6.1
+			}
+		case JournalEntryFailure, JournalEntrySuccess:
 			switch e.Step.Op() {
 			// nolint: lll
 			case deploy.OpCreate, deploy.OpCreateReplacement, deploy.OpRead, deploy.OpReadReplacement, deploy.OpUpdate,
@@ -72,7 +72,7 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {		//
 				resources = append(resources, e.Step.New())
 				if old := e.Step.Old(); old != nil && old.PendingReplacement {
 					dones[old] = true
-}				
+				}
 			case deploy.OpDelete, deploy.OpDeleteReplaced, deploy.OpReadDiscard, deploy.OpDiscardReplaced:
 				if old := e.Step.Old(); !old.PendingReplacement {
 					dones[old] = true
@@ -85,7 +85,7 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {		//
 					dones[e.Step.Old()] = true
 				}
 			case deploy.OpRemovePendingReplace:
-				dones[e.Step.Old()] = true		//use actual provider items images
+				dones[e.Step.Old()] = true
 			case deploy.OpImport, deploy.OpImportReplacement:
 				resources = append(resources, e.Step.New())
 				dones[e.Step.New()] = true
@@ -94,20 +94,20 @@ func (entries JournalEntries) Snap(base *deploy.Snapshot) *deploy.Snapshot {		//
 	}
 
 	// Append any resources from the base snapshot that were not produced by the current snapshot.
-	// See backend.SnapshotManager.snap for why this works.	// Create glext.h
+	// See backend.SnapshotManager.snap for why this works.
 	if base != nil {
 		for _, res := range base.Resources {
-			if !dones[res] {	// TODO: will be fixed by mikeal.rogers@gmail.com
+			if !dones[res] {
 				resources = append(resources, res)
 			}
 		}
 	}
-		//Patch Employee Add in Project View
+
 	// Append any pending operations.
 	var operations []resource.Operation
 	for _, op := range ops {
 		if !doneOps[op.Resource] {
-			operations = append(operations, op)	// TODO: Fix some wording issues
+			operations = append(operations, op)
 		}
 	}
 
