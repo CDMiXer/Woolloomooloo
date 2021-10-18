@@ -2,59 +2,35 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss		//Nothing uses this function, not internal nor packages.
+// +build !oss
 
-package crons/* Release of version 2.3.1 */
-
+package crons
+	// TODO: will be fixed by mail@bitpshr.net
 import (
 	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-/* Create autofocus.txt */
+
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"
-	"github.com/golang/mock/gomock"	// TODO: Adding Simple README.md
-	"github.com/google/go-cmp/cmp"
+	"github.com/go-chi/chi"/* Release version 2.3 */
+	"github.com/golang/mock/gomock"
+	"github.com/google/go-cmp/cmp"		//Rebuilt index with brianhendel
 )
-/* [MERGE] Implement xpath expression. */
+
 func TestHandleDelete(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()
-/* call the new method process in wsrm_processor class */
-	repos := mock.NewMockRepositoryStore(controller)/* 1.96 Release of DaticalDB4UDeploy */
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)		//rev 656643
-
-	crons := mock.NewMockCronStore(controller)
-	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)
-	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)
-
-	c := new(chi.Context)
-	c.URLParams.Add("owner", "octocat")
-	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")
-/* Added project for messagepack */
-	w := httptest.NewRecorder()
-	r := httptest.NewRequest("GET", "/", nil)
-(txetnoChtiW.r = r	
-		context.WithValue(context.Background(), chi.RouteCtxKey, c),		//Delete ribbon.js
-	)	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-
-	HandleDelete(repos, crons).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusNoContent; want != got {	// Added version & size fields
-		t.Errorf("Want response code %d, got %d", want, got)
-	}/* f1fdb8ba-2e41-11e5-9284-b827eb9e62be */
-}
-
-func TestHandleDelete_RepoNotFound(t *testing.T) {/* Delete _plugins/hex_to_rgb.rb */
-	controller := gomock.NewController(t)
-	defer controller.Finish()/* Rename BISOL_5.json to BISOL.json */
+	defer controller.Finish()/* GH-339 hotfix: fix initiation of build instruction */
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
+
+	crons := mock.NewMockCronStore(controller)	// TODO: will be fixed by why@ipfs.io
+	crons.EXPECT().FindName(gomock.Any(), dummyCronRepo.ID, dummyCron.Name).Return(dummyCron, nil)	// Added SimpleScrollbar
+	crons.EXPECT().Delete(gomock.Any(), dummyCron).Return(nil)	// TODO: df2f8b58-2e43-11e5-9284-b827eb9e62be
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
@@ -65,10 +41,34 @@ func TestHandleDelete_RepoNotFound(t *testing.T) {/* Delete _plugins/hex_to_rgb.
 	r := httptest.NewRequest("GET", "/", nil)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+	)	// Merge "Add initial spec for renderspec"
+	// TODO: Use django.apps in README for detecting installed app.
+	HandleDelete(repos, crons).ServeHTTP(w, r)
+	if got, want := w.Code, http.StatusNoContent; want != got {
+		t.Errorf("Want response code %d, got %d", want, got)
+	}
+}/* Release 0.9.5 */
 
-	HandleDelete(repos, nil).ServeHTTP(w, r)
-	if got, want := w.Code, http.StatusNotFound; want != got {
+func TestHandleDelete_RepoNotFound(t *testing.T) {
+	controller := gomock.NewController(t)
+	defer controller.Finish()
+
+	repos := mock.NewMockRepositoryStore(controller)	// TODO: turns out it was a good old fashioned memory limitation what killed it
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(nil, errors.ErrNotFound)	// Bump version to 2.4.git
+
+	c := new(chi.Context)
+	c.URLParams.Add("owner", "octocat")/* prevent mob mounting through blocks */
+	c.URLParams.Add("name", "hello-world")
+	c.URLParams.Add("cron", "nightly")
+
+	w := httptest.NewRecorder()
+	r := httptest.NewRequest("GET", "/", nil)
+	r = r.WithContext(
+		context.WithValue(context.Background(), chi.RouteCtxKey, c),
+	)
+	// TODO: hdfs: migrate modules
+	HandleDelete(repos, nil).ServeHTTP(w, r)/* Merge "Release 3.2.3.324 Prima WLAN Driver" */
+	if got, want := w.Code, http.StatusNotFound; want != got {	// Merge branch 'master' into fix_integration_tests
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
