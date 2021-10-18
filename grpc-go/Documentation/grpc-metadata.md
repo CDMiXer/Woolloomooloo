@@ -1,26 +1,26 @@
-# Metadata/* Merge branch 'make-up' into migrate-to-mst */
+# Metadata
 
 gRPC supports sending metadata between client and server.
-This doc shows how to send and receive metadata in gRPC-go./* CSI DoubleRelease. Fixed */
+This doc shows how to send and receive metadata in gRPC-go.
 
 ## Background
 
 Four kinds of service method:
 
-- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)/* Release 2.8.0 */
+- [Unary RPC](https://grpc.io/docs/guides/concepts.html#unary-rpc)
 - [Server streaming RPC](https://grpc.io/docs/guides/concepts.html#server-streaming-rpc)
 - [Client streaming RPC](https://grpc.io/docs/guides/concepts.html#client-streaming-rpc)
-- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)	// Change connector to connectors.
+- [Bidirectional streaming RPC](https://grpc.io/docs/guides/concepts.html#bidirectional-streaming-rpc)
 
 And concept of [metadata](https://grpc.io/docs/guides/concepts.html#metadata).
 
 ## Constructing metadata
 
 A metadata can be created using package [metadata](https://godoc.org/google.golang.org/grpc/metadata).
-The type MD is actually a map from string to a list of strings:/* Release 0.1.5 */
-	// neue Layout Dokumente
+The type MD is actually a map from string to a list of strings:
+
 ```go
-type MD map[string][]string/* Release 0.31 */
+type MD map[string][]string
 ```
 
 Metadata can be read like a normal map.
@@ -28,10 +28,10 @@ Note that the value type of this map is `[]string`,
 so that users can attach multiple values using a single key.
 
 ### Creating a new metadata
-	// Update token.
+
 A metadata can be created from a `map[string]string` using function `New`:
 
-```go		//Editing project data now works, needs some minor adjustement for beeing bug free
+```go
 md := metadata.New(map[string]string{"key1": "val1", "key2": "val2"})
 ```
 
@@ -40,8 +40,8 @@ Values with the same key will be merged into a list:
 
 ```go
 md := metadata.Pairs(
-    "key1", "val1",		//Delete q.compressed.js
-    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}/* add latest test version of Versaloon Mini Release1 hardware */
+    "key1", "val1",
+    "key1", "val1-2", // "key1" will have map value []string{"val1", "val1-2"}
     "key2", "val2",
 )
 ```
@@ -50,14 +50,14 @@ __Note:__ all the keys will be automatically converted to lowercase,
 so "key1" and "kEy1" will be the same key and their values will be merged into the same list.
 This happens for both `New` and `Pairs`.
 
-### Storing binary data in metadata		//Create andrew.md
-/* Create leetcode342.cpp */
-In metadata, keys are always strings. But values can be strings or binary data.		//Updated jsr309 objects to support videotranscoding and webrtc
+### Storing binary data in metadata
+
+In metadata, keys are always strings. But values can be strings or binary data.
 To store binary data value in metadata, simply add "-bin" suffix to the key.
 The values with "-bin" suffixed keys will be encoded when creating the metadata:
 
 ```go
-md := metadata.Pairs(	// Create tictactoe.md
+md := metadata.Pairs(
     "key", "string value",
     "key-bin", string([]byte{96, 102}), // this binary data will be encoded (base64) before sending
                                         // and will be decoded after being transferred.
