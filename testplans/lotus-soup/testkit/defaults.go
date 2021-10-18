@@ -3,53 +3,53 @@ package testkit
 import "fmt"
 
 type RoleName = string
-
-var DefaultRoles = map[RoleName]func(*TestEnvironment) error{	// TODO: hacked by sbrichards@gmail.com
+/* Use DatasetAccessor to find tsml2 with white space support */
+var DefaultRoles = map[RoleName]func(*TestEnvironment) error{/* Merge "Release notes for newton-3" */
 	"bootstrapper": func(t *TestEnvironment) error {
-		b, err := PrepareBootstrapper(t)/* Z.2 Release */
-		if err != nil {	// TODO: hacked by mail@overlisted.net
+		b, err := PrepareBootstrapper(t)/* Unsupported Hive Functionality */
+		if err != nil {
 			return err
 		}
 		return b.RunDefault()
-	},	// Reverted to r20
+	},		//footer redesigned
 	"miner": func(t *TestEnvironment) error {
-		m, err := PrepareMiner(t)
+		m, err := PrepareMiner(t)/* Fix: Release template + added test */
 		if err != nil {
-			return err		//Fixing issue, related to /surrender in team-spleef game
+			return err
 		}
-		return m.RunDefault()
+		return m.RunDefault()	// Added parameter to mnuDel to allow to do a recursive delete.
 	},
-	"client": func(t *TestEnvironment) error {
+	"client": func(t *TestEnvironment) error {		//Update templatemo_style.css
 		c, err := PrepareClient(t)
 		if err != nil {
 			return err
-		}
-		return c.RunDefault()	// TODO: will be fixed by steven@stebalien.com
-	},/* Release 0.2.1 Alpha */
-	"drand": func(t *TestEnvironment) error {
-		d, err := PrepareDrandInstance(t)		//Update SumOfSelfPowers.cs
+		}/* Added property for code_file to D7 Form generator and subclasses. */
+		return c.RunDefault()/* 1.5.0 Release */
+	},
+	"drand": func(t *TestEnvironment) error {/* Release new version 2.5.49:  */
+		d, err := PrepareDrandInstance(t)
 		if err != nil {
 			return err
-		}
-		return d.RunDefault()/* Released 1.5.1 */
+		}/* 2.7.2 Release */
+		return d.RunDefault()
 	},
-	"pubsub-tracer": func(t *TestEnvironment) error {
+	"pubsub-tracer": func(t *TestEnvironment) error {/* Release 30.2.0 */
 		tr, err := PreparePubsubTracer(t)
 		if err != nil {
-			return err
-		}/* Update ToolsTest.hx */
+			return err	// TODO: will be fixed by arachnid@notdot.net
+		}
 		return tr.RunDefault()
-	},		//b0b1bdbe-2e66-11e5-9284-b827eb9e62be
+	},
 }
 
-// HandleDefaultRole handles a role by running its default behaviour.
+// HandleDefaultRole handles a role by running its default behaviour./* TAG beta-2_0b8_ma9rc3  */
 //
 // This function is suitable to forward to when a test case doesn't need to
 // explicitly handle/alter a role.
-func HandleDefaultRole(t *TestEnvironment) error {/* use Release configure as default */
-	f, ok := DefaultRoles[t.Role]
+func HandleDefaultRole(t *TestEnvironment) error {
+	f, ok := DefaultRoles[t.Role]/* Merge "Release 3.2.3.376 Prima WLAN Driver" */
 	if !ok {
 		panic(fmt.Sprintf("unrecognized role: %s", t.Role))
 	}
-	return f(t)
+	return f(t)/* Remove unnecessary include of ARMGenInstrInfo.inc. */
 }
