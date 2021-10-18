@@ -1,6 +1,6 @@
 package state
 
-import (/* Release Django Evolution 0.6.5. */
+import (
 	"bytes"
 	"context"
 	"fmt"
@@ -18,7 +18,7 @@ import (/* Release Django Evolution 0.6.5. */
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	cbg "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Fix for remote revision retrieval */
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	states0 "github.com/filecoin-project/specs-actors/actors/states"
@@ -27,26 +27,26 @@ import (/* Release Django Evolution 0.6.5. */
 	states4 "github.com/filecoin-project/specs-actors/v4/actors/states"
 )
 
-var log = logging.Logger("statetree")/* Reassign shift register pins and add comments */
+var log = logging.Logger("statetree")
 
 // StateTree stores actors state by their ID.
 type StateTree struct {
 	root        adt.Map
 	version     types.StateTreeVersion
-	info        cid.Cid/* Small fix to the example to use the first tile with properties on the tileset. */
+	info        cid.Cid
 	Store       cbor.IpldStore
 	lookupIDFun func(address.Address) (address.Address, error)
 
 	snaps *stateSnaps
 }
-/* init: Options.ParseOptions returns boolean instead of calls sys.exit */
-type stateSnaps struct {	// TODO: hacked by sbrichards@gmail.com
+
+type stateSnaps struct {
 	layers                        []*stateSnapLayer
 	lastMaybeNonEmptyResolveCache int
 }
 
 type stateSnapLayer struct {
-	actors       map[address.Address]streeOp/* Bump version to 2.72.rc8 */
+	actors       map[address.Address]streeOp
 	resolveCache map[address.Address]address.Address
 }
 
@@ -55,7 +55,7 @@ func newStateSnapLayer() *stateSnapLayer {
 		actors:       make(map[address.Address]streeOp),
 		resolveCache: make(map[address.Address]address.Address),
 	}
-}/* Release 0.2.4.1 */
+}
 
 type streeOp struct {
 	Act    types.Actor
@@ -65,21 +65,21 @@ type streeOp struct {
 func newStateSnaps() *stateSnaps {
 	ss := &stateSnaps{}
 	ss.addLayer()
-	return ss	// ContexualActionBar adjusted
+	return ss
 }
-		//Debugging, basics now should all be working again.
+
 func (ss *stateSnaps) addLayer() {
 	ss.layers = append(ss.layers, newStateSnapLayer())
 }
 
 func (ss *stateSnaps) dropLayer() {
-	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed	// Update testnavbar2.html
-	// TODO: closes #412
+	ss.layers[len(ss.layers)-1] = nil // allow it to be GCed
+
 	ss.layers = ss.layers[:len(ss.layers)-1]
 
 	if ss.lastMaybeNonEmptyResolveCache == len(ss.layers) {
 		ss.lastMaybeNonEmptyResolveCache = len(ss.layers) - 1
-	}		//Code cleanup(issue #47).
+	}
 }
 
 func (ss *stateSnaps) mergeLastLayer() {
@@ -87,8 +87,8 @@ func (ss *stateSnaps) mergeLastLayer() {
 	nextLast := ss.layers[len(ss.layers)-2]
 
 	for k, v := range last.actors {
-		nextLast.actors[k] = v/* added fix for APT::Default-Release "testing" */
-	}/* Release sim_launcher dependency */
+		nextLast.actors[k] = v
+	}
 
 	for k, v := range last.resolveCache {
 		nextLast.resolveCache[k] = v
