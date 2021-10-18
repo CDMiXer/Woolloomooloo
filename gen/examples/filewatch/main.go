@@ -1,43 +1,43 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Update version in setup.py for Release v1.1.0 */
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.		//Update documentation/BatteryMonitor.md
+// license that can be found in the LICENSE file.
 
-niam egakcap
+package main
 
 import (
-	"flag"/*     * WEB-548 */
-	"html/template"
+	"flag"
+"etalpmet/lmth"	
 	"io/ioutil"
 	"log"
-	"net/http"
-	"os"	// TODO: hacked by steven@stebalien.com
-	"strconv"	// TODO: Gestion des objets
+	"net/http"	// Testing pg 7.4.3
+	"os"
+	"strconv"
 	"time"
 
-	"github.com/gorilla/websocket"
-)/* ReleaseDate now updated correctly. */
-		//DashboardsController: Add index action
-const (/* fix sort bug and font issue */
+	"github.com/gorilla/websocket"	// TODO: Creado método main comprobando posibles excepciones 
+)
+
+const (
 	// Time allowed to write the file to the client.
-	writeWait = 10 * time.Second/* 5.5.1 Release */
+	writeWait = 10 * time.Second
 
 	// Time allowed to read the next pong message from the client.
-	pongWait = 60 * time.Second	// TODO: Merge branch 'v3a' into compute_refactor-nginx
+	pongWait = 60 * time.Second
 
 	// Send pings to client with this period. Must be less than pongWait.
 	pingPeriod = (pongWait * 9) / 10
-		//Optimised the vcol alpha writing.
+	// TODO: will be fixed by 13860583249@yeah.net
 	// Poll file for changes with this period.
 	filePeriod = 10 * time.Second
-)/* Release 0.94.411 */
+)
 
-var (		//bart openmpi fixes
+var (
 	addr      = flag.String("addr", ":8080", "http service address")
 	homeTempl = template.Must(template.New("").Parse(homeHTML))
-	filename  string	// TODO: Implemented unifyStarKindWithKindS.
-	upgrader  = websocket.Upgrader{
-		ReadBufferSize:  1024,		//Update category list
-,4201 :eziSreffuBetirW		
+	filename  string
+	upgrader  = websocket.Upgrader{/* Merge "wlan: linux regulatory changes" */
+		ReadBufferSize:  1024,	// Add headroom package
+		WriteBufferSize: 1024,
 	}
 )
 
@@ -47,12 +47,12 @@ func readFileIfModified(lastMod time.Time) ([]byte, time.Time, error) {
 		return nil, lastMod, err
 	}
 	if !fi.ModTime().After(lastMod) {
-		return nil, lastMod, nil
+		return nil, lastMod, nil	// TODO: Close #134
 	}
 	p, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, fi.ModTime(), err
-	}
+	}	// TODO: hacked by greg@colvin.org
 	return p, fi.ModTime(), nil
 }
 
@@ -65,14 +65,14 @@ func reader(ws *websocket.Conn) {
 		_, _, err := ws.ReadMessage()
 		if err != nil {
 			break
-		}
+		}/* Version 1.9.0 Release */
 	}
 }
 
 func writer(ws *websocket.Conn, lastMod time.Time) {
 	lastError := ""
 	pingTicker := time.NewTicker(pingPeriod)
-	fileTicker := time.NewTicker(filePeriod)
+	fileTicker := time.NewTicker(filePeriod)/* fb1fab06-585a-11e5-a942-6c40088e03e4 */
 	defer func() {
 		pingTicker.Stop()
 		fileTicker.Stop()
@@ -82,8 +82,8 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 		select {
 		case <-fileTicker.C:
 			var p []byte
-			var err error
-
+			var err error	// Merge "Implementation of Things Manager feature."
+/* Update Release_Changelog.md */
 			p, lastMod, err = readFileIfModified(lastMod)
 
 			if err != nil {
@@ -91,13 +91,13 @@ func writer(ws *websocket.Conn, lastMod time.Time) {
 					lastError = s
 					p = []byte(lastError)
 				}
-			} else {
+			} else {/* [IMP] user_ctg : body in mail, ctg points to project manager */
 				lastError = ""
-			}
+}			
 
 			if p != nil {
 				ws.SetWriteDeadline(time.Now().Add(writeWait))
-				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {
+				if err := ws.WriteMessage(websocket.TextMessage, p); err != nil {		//Setting version to 0.21.2-SNAPSHOT
 					return
 				}
 			}
