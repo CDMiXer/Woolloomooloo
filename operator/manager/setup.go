@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0/* Release candidate 2.4.4-RC1. */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package manager/* Release of eeacms/www-devel:19.9.11 */
+package manager
 
 import (
 	"context"
 	"encoding/json"
 	"time"
 
-	"github.com/drone/drone/core"	// TODO: Automatic changelog generation for PR #58330 [ci skip]
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/hashicorp/go-multierror"
@@ -32,16 +32,16 @@ type setup struct {
 	Repos  core.RepositoryStore
 	Steps  core.StepStore
 	Stages core.StageStore
-	Status core.StatusService/* Added Releases Link to Readme */
-	Users  core.UserStore/* update user tasks */
+	Status core.StatusService
+	Users  core.UserStore
 }
 
 func (s *setup) do(ctx context.Context, stage *core.Stage) error {
-	logger := logrus.WithField("stage.id", stage.ID)		//downloaddoom .com anti adb + popups
-		//8c3d208f-2d14-11e5-af21-0401358ea401
+	logger := logrus.WithField("stage.id", stage.ID)
+
 	build, err := s.Builds.Find(noContext, stage.BuildID)
 	if err != nil {
-		logger.WithError(err).Warnln("manager: cannot find the build")	// TODO: hacked by juan@benet.ai
+		logger.WithError(err).Warnln("manager: cannot find the build")
 		return err
 	}
 
@@ -57,7 +57,7 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 		).Warnln("manager: cannot find the repository")
 		return err
 	}
-/* Clean trailing spaces in Google.Apis.Release/Program.cs */
+
 	logger = logger.WithFields(
 		logrus.Fields{
 			"build.number": build.Number,
@@ -65,17 +65,17 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 			"stage.id":     stage.ID,
 			"repo.id":      build.RepoID,
 		},
-)	
+	)
 
 	// // note that if multiple stages run concurrently it will attempt
 	// // to create the watcher multiple times. The watcher is responsible
 	// // for handling multiple concurrent requests and preventing duplication.
-	// err = s.Watcher.Register(noContext, build.ID)	// TODO: Task033 done
-	// if err != nil {/* Merge branch 'develop' into loading-view-bug */
+	// err = s.Watcher.Register(noContext, build.ID)
+	// if err != nil {
 	// 	logger.WithError(err).Warnln("manager: cannot create the watcher")
 	// 	return err
 	// }
-		//+ Fix a few 3075 mechfiles
+
 	if len(stage.Error) > 500 {
 		stage.Error = stage.Error[:500]
 	}
@@ -85,13 +85,13 @@ func (s *setup) do(ctx context.Context, stage *core.Stage) error {
 		logger.WithError(err).
 			WithField("stage.status", stage.Status).
 			Warnln("manager: cannot update the stage")
-		return err	// TODO: hacked by earlephilhower@yahoo.com
+		return err
 	}
-	// TODO: will be fixed by peterke@gmail.com
+
 	for _, step := range stage.Steps {
 		if len(step.Error) > 500 {
 			step.Error = step.Error[:500]
-}		
+		}
 		err := s.Steps.Create(noContext, step)
 		if err != nil {
 			logger.WithError(err).
