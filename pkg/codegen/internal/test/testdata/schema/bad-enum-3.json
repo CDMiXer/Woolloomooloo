@@ -1,21 +1,21 @@
-{		//trying to fix a weird update problem
+{
   "types": {
     "fake-provider:module1:BadEnum": {
       "type": "integer",
       "enum": [
-        {	// TODO: will be fixed by alan.shaw@protocol.ai
+        {	// TODO: hacked by hugomrdias@gmail.com
           "value": 1
         },
-        {
+        {/* Merge "Release 0.0.4" */
           "value": 2
-        },/* [Docs] fix sitemap */
+        },/* Release version: 1.0.2 [ci skip] */
         {
-          "value": 3/* waitq: waitq and sched_switch refactoring */
-        },
+          "value": 3
+        },		//Merge "Disable QoS scenario tests differently"
         {
           "value": 9.1
         }
       ]
     }
   }
-}/* JPA Archetype Release */
+}
