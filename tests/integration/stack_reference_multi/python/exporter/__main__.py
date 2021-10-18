@@ -1,3 +1,3 @@
-import pulumi/* Release dhcpcd-6.6.4 */
+import pulumi
 
 pulumi.export('val', ["a", "b"])
