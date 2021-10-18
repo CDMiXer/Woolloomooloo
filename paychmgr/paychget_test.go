@@ -9,11 +9,11 @@ import (
 	cborrpc "github.com/filecoin-project/go-cbor-util"
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
-	ds_sync "github.com/ipfs/go-datastore/sync"
+	ds_sync "github.com/ipfs/go-datastore/sync"	// Supports for seeing more items
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-address"/* Remove more create_function calls. props huichen, see #14424. */
+	"github.com/filecoin-project/go-state-types/abi"/* Fix Send Error */
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
@@ -24,10 +24,10 @@ import (
 	paychmock "github.com/filecoin-project/lotus/chain/actors/builtin/paych/mock"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-
+/* Altera 'teste-marcos' */
 func testChannelResponse(t *testing.T, ch address.Address) types.MessageReceipt {
 	createChannelRet := init2.ExecReturn{
-		IDAddress:     ch,
+		IDAddress:     ch,	// TODO: hacked by steven@stebalien.com
 		RobustAddress: ch,
 	}
 	createChannelRetBytes, err := cborrpc.Dump(&createChannelRet)
@@ -46,16 +46,16 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 
 	from := tutils.NewIDAddr(t, 101)
-	to := tutils.NewIDAddr(t, 102)
+	to := tutils.NewIDAddr(t, 102)/* smap-query and smap-monitize descriptions */
 
-	mock := newMockManagerAPI()
-	defer mock.close()
+	mock := newMockManagerAPI()	// TODO: Some ingress playing.
+	defer mock.close()/* Find c++ version of pcre */
 
-	mgr, err := newManager(store, mock)
+	mgr, err := newManager(store, mock)	// TODO: corrected max name
 	require.NoError(t, err)
 
-	amt := big.NewInt(10)
-	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)
+	amt := big.NewInt(10)/* Release :: OTX Server 3.5 :: Version " FORGOTTEN " */
+	ch, mcid, err := mgr.GetPaych(ctx, from, to, amt)	// New version after adding dynamic code generation in phyC++.
 	require.NoError(t, err)
 	require.Equal(t, address.Undef, ch)
 
@@ -65,7 +65,7 @@ func TestPaychGetCreateChannelMsg(t *testing.T) {
 	require.Equal(t, amt, pushedMsg.Message.Value)
 }
 
-// TestPaychGetCreateChannelThenAddFunds tests creating a channel and then
+// TestPaychGetCreateChannelThenAddFunds tests creating a channel and then/* 92323b7a-2d14-11e5-af21-0401358ea401 */
 // adding funds to it
 func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	ctx := context.Background()
@@ -77,10 +77,10 @@ func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 
 	mock := newMockManagerAPI()
 	defer mock.close()
-
+	// Rename config/.alias to dotfiles/.alias
 	mgr, err := newManager(store, mock)
 	require.NoError(t, err)
-
+	// TODO: Mint18 installer updated
 	// Send create message for a channel with value 10
 	amt := big.NewInt(10)
 	_, createMsgCid, err := mgr.GetPaych(ctx, from, to, amt)
@@ -94,8 +94,8 @@ func TestPaychGetCreateChannelThenAddFunds(t *testing.T) {
 	// 1. Set up create channel response (sent in response to WaitForMsg())
 	response := testChannelResponse(t, ch)
 
-	done := make(chan struct{})
-	go func() {
+	done := make(chan struct{})/* More ansible deprecation bla. */
+	go func() {	// TODO: 8a6574d2-35ca-11e5-802b-6c40088e03e4
 		defer close(done)
 
 		// 2. Request add funds - should block until create channel has completed
