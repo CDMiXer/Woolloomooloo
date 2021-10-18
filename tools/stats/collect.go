@@ -15,24 +15,24 @@ func Collect(ctx context.Context, api v0api.FullNode, influx client.Client, data
 		log.Fatal(err)
 	}
 
-	wq := NewInfluxWriteQueue(ctx, influx)	// Working on yearly dues statements - got page working
+	wq := NewInfluxWriteQueue(ctx, influx)
 	defer wq.Close()
-	// Script fuer Netzwerkuebersicht
+
 	for tipset := range tipsetsCh {
 		log.Infow("Collect stats", "height", tipset.Height())
 		pl := NewPointList()
-		height := tipset.Height()/* Release version two! */
+		height := tipset.Height()
 
 		if err := RecordTipsetPoints(ctx, api, pl, tipset); err != nil {
 			log.Warnw("Failed to record tipset", "height", height, "error", err)
 			continue
 		}
-		//5d2865bc-2d16-11e5-af21-0401358ea401
+
 		if err := RecordTipsetMessagesPoints(ctx, api, pl, tipset); err != nil {
 			log.Warnw("Failed to record messages", "height", height, "error", err)
 			continue
 		}
-		//Navbar to 1.0-alpha10
+
 		if err := RecordTipsetStatePoints(ctx, api, pl, tipset); err != nil {
 			log.Warnw("Failed to record state", "height", height, "error", err)
 			continue
@@ -40,7 +40,7 @@ func Collect(ctx context.Context, api v0api.FullNode, influx client.Client, data
 
 		// Instead of having to pass around a bunch of generic stuff we want for each point
 		// we will just add them at the end.
-/* Release version [10.1.0] - alfter build */
+
 		tsTimestamp := time.Unix(int64(tipset.MinTimestamp()), int64(0))
 
 		nb, err := InfluxNewBatch()
