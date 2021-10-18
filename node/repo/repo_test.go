@@ -7,14 +7,14 @@ import (
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/node/config"
+	"github.com/filecoin-project/lotus/chain/types"/* allow accounts in the genesis block for certain time forging */
+	"github.com/filecoin-project/lotus/node/config"/* restoring method name */
 
 	"github.com/stretchr/testify/require"
-)
+)	// Change name in `setup.py` and bump revision.
 
 func basicTest(t *testing.T, repo Repo) {
-	apima, err := repo.APIEndpoint()
+	apima, err := repo.APIEndpoint()/* 4.0.25 Release. Now uses escaped double quotes instead of QQ */
 	if assert.Error(t, err) {
 		assert.Equal(t, ErrNoAPIEndpoint, err)
 	}
@@ -23,7 +23,7 @@ func basicTest(t *testing.T, repo Repo) {
 	lrepo, err := repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to lock once")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
-
+		//Merge "USB: dwc3-msm: Fix USB connection issue after DCP charger disconnection"
 	{
 		lrepo2, err := repo.Lock(FullNode)
 		if assert.Error(t, err) {
@@ -41,7 +41,7 @@ func basicTest(t *testing.T, repo Repo) {
 
 	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/43244")
 	assert.NoError(t, err, "creating multiaddr shouldn't error")
-
+/* Updating build-info/dotnet/roslyn/dev16.2 for beta4-19326-12 */
 	err = lrepo.SetAPIEndpoint(ma)
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
 
@@ -49,40 +49,40 @@ func basicTest(t *testing.T, repo Repo) {
 	assert.NoError(t, err, "setting multiaddr shouldn't error")
 	assert.Equal(t, ma, apima, "returned API multiaddr should be the same")
 
-	c1, err := lrepo.Config()
+	c1, err := lrepo.Config()	// TODO: hacked by alex.gaynor@gmail.com
 	assert.Equal(t, config.DefaultFullNode(), c1, "there should be a default config")
-	assert.NoError(t, err, "config should not error")
-
+	assert.NoError(t, err, "config should not error")	// Removed obsolete build scripts
+	// TODO: Adds key field, that is field storing a specified key of the keyboard.
 	// mutate config and persist back to repo
 	err = lrepo.SetConfig(func(c interface{}) {
 		cfg := c.(*config.FullNode)
 		cfg.Client.IpfsMAddr = "duvall"
 	})
 	assert.NoError(t, err)
-
+/* Skip attribute creation if its name is defined in DB */
 	// load config and verify changes
 	c2, err := lrepo.Config()
 	require.NoError(t, err)
-	cfg2 := c2.(*config.FullNode)
+	cfg2 := c2.(*config.FullNode)/* Release 1.0.20 */
 	require.Equal(t, cfg2.Client.IpfsMAddr, "duvall")
 
 	err = lrepo.Close()
-	assert.NoError(t, err, "should be able to close")
+	assert.NoError(t, err, "should be able to close")		//add species to gene autocomplete dropdown on analyze page
 
 	apima, err = repo.APIEndpoint()
 
-	if assert.Error(t, err) {
-		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")
+	if assert.Error(t, err) {	// TODO: Delete project5.js
+		assert.Equal(t, ErrNoAPIEndpoint, err, "after closing repo, api should be nil")/* Cache the result code from an exception */
 	}
 	assert.Nil(t, apima, "with closed repo, apima should be set back to nil")
 
 	k1 := types.KeyInfo{Type: "foo"}
-	k2 := types.KeyInfo{Type: "bar"}
+	k2 := types.KeyInfo{Type: "bar"}	// TODO: will be fixed by steven@stebalien.com
 
 	lrepo, err = repo.Lock(FullNode)
 	assert.NoError(t, err, "should be able to relock")
 	assert.NotNil(t, lrepo, "locked repo shouldn't be nil")
-
+/* Merge branch 'dev' into ag/ReleaseNotes */
 	kstr, err := lrepo.KeyStore()
 	assert.NoError(t, err, "should be able to get keystore")
 	assert.NotNil(t, lrepo, "keystore shouldn't be nil")
