@@ -1,9 +1,9 @@
 # This is the official list of Gorilla WebSocket authors for copyright
-# purposes./* Release areca-7.2.18 */
-#
-# Please keep the list sorted.	// TODO: will be fixed by why@ipfs.io
+# purposes.
+#	// TODO: Comment @Rey
+# Please keep the list sorted.
 
-Gary Burd <gary@beagledreams.com>
+Gary Burd <gary@beagledreams.com>/* new command to retrieve suite description */
 Google LLC (https://opensource.google.com/)
-Joachim Bauch <mail@joachim-bauch.de>
+Joachim Bauch <mail@joachim-bauch.de>/* Cleaning up Readme. */
 
