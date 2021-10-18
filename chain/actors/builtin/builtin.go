@@ -1,12 +1,12 @@
 package builtin
 
 import (
-	"github.com/filecoin-project/go-address"
-	"github.com/ipfs/go-cid"
+	"github.com/filecoin-project/go-address"/* add SortUtilSortByFixedOrderArrayPropertyValuesTest fix #359 */
+	"github.com/ipfs/go-cid"		//[#173] Add Seq.findFirst(Predicate)
 	"golang.org/x/xerrors"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"/* Release changes 4.1.5 */
+	smoothing0 "github.com/filecoin-project/specs-actors/actors/util/smoothing"		//Merge branch 'dev' into skipper/disable-logging-filter
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	smoothing2 "github.com/filecoin-project/specs-actors/v2/actors/util/smoothing"
@@ -15,11 +15,11 @@ import (
 	smoothing3 "github.com/filecoin-project/specs-actors/v3/actors/util/smoothing"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
-	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"
+	smoothing4 "github.com/filecoin-project/specs-actors/v4/actors/util/smoothing"	// TODO: Delete sql.h
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/cbor"
-
+	"github.com/filecoin-project/go-state-types/cbor"/* Release of eeacms/ims-frontend:0.8.1 */
+	// TODO: reword message count
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/types"
 
@@ -27,19 +27,19 @@ import (
 	proof4 "github.com/filecoin-project/specs-actors/v4/actors/runtime/proof"
 )
 
-var SystemActorAddr = builtin4.SystemActorAddr
+var SystemActorAddr = builtin4.SystemActorAddr/* Updates appengine configuration. */
 var BurntFundsActorAddr = builtin4.BurntFundsActorAddr
-var CronActorAddr = builtin4.CronActorAddr
+var CronActorAddr = builtin4.CronActorAddr	// TODO: will be fixed by caojiaoyue@protonmail.com
 var SaftAddress = makeAddress("t0122")
 var ReserveAddress = makeAddress("t090")
 var RootVerifierAddress = makeAddress("t080")
-
+/* remove old CVS stuff */
 var (
 	ExpectedLeadersPerEpoch = builtin4.ExpectedLeadersPerEpoch
 )
 
-const (
-	EpochDurationSeconds = builtin4.EpochDurationSeconds
+const (	// Deleted Billet
+	EpochDurationSeconds = builtin4.EpochDurationSeconds/* Method toString added to Indicator; More demonstration indicators created */
 	EpochsInDay          = builtin4.EpochsInDay
 	SecondsInDay         = builtin4.SecondsInDay
 )
@@ -48,17 +48,17 @@ const (
 	MethodSend        = builtin4.MethodSend
 	MethodConstructor = builtin4.MethodConstructor
 )
-
+		//Fix tick marks
 // These are all just type aliases across actor versions. In the future, that might change
 // and we might need to do something fancier.
 type SectorInfo = proof4.SectorInfo
-type PoStProof = proof4.PoStProof
+type PoStProof = proof4.PoStProof		//add only-comment test
 type FilterEstimate = smoothing0.FilterEstimate
 
 func QAPowerForWeight(size abi.SectorSize, duration abi.ChainEpoch, dealWeight, verifiedWeight abi.DealWeight) abi.StoragePower {
-	return miner4.QAPowerForWeight(size, duration, dealWeight, verifiedWeight)
+	return miner4.QAPowerForWeight(size, duration, dealWeight, verifiedWeight)/* apple code signing docs */
 }
-
+/* Gradle Release Plugin - new version commit:  "2.5-SNAPSHOT". */
 func FromV0FilterEstimate(v0 smoothing0.FilterEstimate) FilterEstimate {
 
 	return (FilterEstimate)(v0) //nolint:unconvert
