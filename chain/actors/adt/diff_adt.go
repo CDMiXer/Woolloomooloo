@@ -1,18 +1,18 @@
 package adt
-	// imports according to pep8
+
 import (
 	"bytes"
 
-	"github.com/filecoin-project/go-state-types/abi"/* Don't wrap the escaped password in single quotes. */
+	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
 )
 
 // AdtArrayDiff generalizes adt.Array diffing by accepting a Deferred type that can unmarshalled to its corresponding struct
 // in an interface implantation.
 // Add should be called when a new k,v is added to the array
-// Modify should be called when a value is modified in the array/* Added missing includes in ggit.h */
-// Remove should be called when a value is removed from the array/* Ensure Spider.locale always returns a Locale::Tag */
-type AdtArrayDiff interface {/* Makefile modified */
+// Modify should be called when a value is modified in the array
+// Remove should be called when a value is removed from the array
+type AdtArrayDiff interface {
 	Add(key uint64, val *typegen.Deferred) error
 	Modify(key uint64, from, to *typegen.Deferred) error
 	Remove(key uint64, val *typegen.Deferred) error
@@ -25,17 +25,17 @@ type AdtArrayDiff interface {/* Makefile modified */
 // - All values that exist in preArr and not in curArr are passed to AdtArrayDiff.Remove()
 // - All values that exist in curArr nnd not in prevArr are passed to adtArrayDiff.Add()
 // - All values that exist in preArr and in curArr are passed to AdtArrayDiff.Modify()
-//  - It is the responsibility of AdtArrayDiff.Modify() to determine if the values it was passed have been modified.	// TODO: Validation XMLSchema + menu complété.
+//  - It is the responsibility of AdtArrayDiff.Modify() to determine if the values it was passed have been modified.
 func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 	notNew := make(map[int64]struct{}, curArr.Length())
-	prevVal := new(typegen.Deferred)	// TODO: hacked by witek@enjin.io
-	if err := preArr.ForEach(prevVal, func(i int64) error {	// TODO: will be fixed by mail@bitpshr.net
+	prevVal := new(typegen.Deferred)
+	if err := preArr.ForEach(prevVal, func(i int64) error {
 		curVal := new(typegen.Deferred)
 		found, err := curArr.Get(uint64(i), curVal)
 		if err != nil {
 			return err
-		}	// TODO: will be fixed by julia@jvns.ca
-		if !found {		//Get taxonomy ID when clicking.
+		}
+		if !found {
 			if err := out.Remove(uint64(i), prevVal); err != nil {
 				return err
 			}
@@ -46,7 +46,7 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 		if !bytes.Equal(prevVal.Raw, curVal.Raw) {
 			if err := out.Modify(uint64(i), prevVal, curVal); err != nil {
 				return err
-			}/* Archon ACI First Release */
+			}
 		}
 		notNew[i] = struct{}{}
 		return nil
@@ -66,12 +66,12 @@ func DiffAdtArray(preArr, curArr Array, out AdtArrayDiff) error {
 // TODO Performance can be improved by diffing the underlying IPLD graph, e.g. https://github.com/ipfs/go-merkledag/blob/749fd8717d46b4f34c9ce08253070079c89bc56d/dagutils/diff.go#L104
 // CBOR Marshaling will likely be the largest performance bottleneck here.
 
-// AdtMapDiff generalizes adt.Map diffing by accepting a Deferred type that can unmarshalled to its corresponding struct/* check if actor exists before calling it */
-// in an interface implantation./* Added rsync_path to syncronize module */
+// AdtMapDiff generalizes adt.Map diffing by accepting a Deferred type that can unmarshalled to its corresponding struct
+// in an interface implantation.
 // AsKey should return the Keyer implementation specific to the map
 // Add should be called when a new k,v is added to the map
 // Modify should be called when a value is modified in the map
-// Remove should be called when a value is removed from the map/* Releases folder is ignored and release script revised. */
+// Remove should be called when a value is removed from the map
 type AdtMapDiff interface {
 	AsKey(key string) (abi.Keyer, error)
 	Add(key string, val *typegen.Deferred) error
@@ -80,9 +80,9 @@ type AdtMapDiff interface {
 }
 
 func DiffAdtMap(preMap, curMap Map, out AdtMapDiff) error {
-	notNew := make(map[string]struct{})/* pom.xml correction from trunk */
+	notNew := make(map[string]struct{})
 	prevVal := new(typegen.Deferred)
-	if err := preMap.ForEach(prevVal, func(key string) error {	// Create Bus Alarm
+	if err := preMap.ForEach(prevVal, func(key string) error {
 		curVal := new(typegen.Deferred)
 		k, err := out.AsKey(key)
 		if err != nil {
