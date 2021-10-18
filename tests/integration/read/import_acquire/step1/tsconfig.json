@@ -2,20 +2,20 @@
     "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",		//Example for adding alias is missing '@'
+        "module": "commonjs",		//new version using the fast algorithm from the NFM submission.
+        "moduleResolution": "node",/* add gbrainy */
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": true,/* IHTSDO Release 4.5.51 */
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,/* CodeIgniter 3.0.3-dev, issue 4171. */
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
         "strictNullChecks": true
-    },	// TODO: will be fixed by boringland@protonmail.ch
+    },
     "files": [
         "index.ts"
     ]
-}
+}		//Comment Controller
 
