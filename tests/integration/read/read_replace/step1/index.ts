@@ -9,10 +9,10 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: https://github.com/uBlockOrigin/uAssets/issues/4513#issuecomment-453943049
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// "Work together" policy doesn't cover meals
-import { Resource } from "./resource";/* Added GA to munich site. */
+
+import { Resource } from "./resource";
 
 // Setup: Resource A is external, Resource B is not.
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
