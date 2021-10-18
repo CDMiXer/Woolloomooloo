@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
+    "name": "aliases",		//labster styling: links and borders
     "license": "Apache-2.0",
-    "main": "bin/index.js",/* Delete object_script.bitmxittz-qt.Release */
-    "typings": "bin/index.d.ts",/* Beta Build 1217 : Global, join updated, GCM bug fixed */
-    "devDependencies": {
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",
+    "devDependencies": {/* Merge "net: core: Release neigh lock when neigh_probe is enabled" */
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-}    
+        "@pulumi/pulumi": "latest"	// Merge "vdl: Ensure types cannot be used implicitly without typeobject()"
+    }
 }
