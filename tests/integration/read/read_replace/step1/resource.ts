@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// TODO: hacked by vyzo@hackzen.org
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// Project: Resend Invite Email
-//	// TODO: hacked by aeongrp@outlook.com
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -28,17 +28,17 @@ export class Provider implements dynamic.ResourceProvider {
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (news.state !== olds.state) {
-            return {/* added x and y.meteor.trian */
+            return {
                 changes: true,
                 replaces: ["state"],
             };
-        }		//Deleted Photos
-	// img styles
+        }
+
         return {
             changes: false,
         }
     }
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
     public async create(inputs: any): Promise<dynamic.CreateResult> {
         return {
             id: (this.id++).toString(),
@@ -47,21 +47,21 @@ export class Provider implements dynamic.ResourceProvider {
     }
 
     public async update(id: string, olds: any, news: any): Promise<dynamic.UpdateResult> {
-        throw Error("this resource is replace-only and can't be updated");	// TODO: will be fixed by mail@bitpshr.net
+        throw Error("this resource is replace-only and can't be updated");
     }
 
     public async read(id: pulumi.ID, props: any): Promise<dynamic.ReadResult> {
         return {
             id: id,
-            props: props,/* dafbd9ca-352a-11e5-b38e-34363b65e550 */
+            props: props,
         }
     }
 }
 
-export class Resource extends pulumi.dynamic.Resource {/* Update and rename v3_Android_ReleaseNotes.md to v3_ReleaseNotes.md */
+export class Resource extends pulumi.dynamic.Resource {
     public readonly state: pulumi.Output<any>;
 
-    constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+    constructor(name: string, props: any, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, props, opts);
     }
-}		//fixed bug with baseDir for xslt transforms for diff tool 
+}
