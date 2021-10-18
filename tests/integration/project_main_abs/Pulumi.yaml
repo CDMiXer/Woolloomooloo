@@ -1,5 +1,5 @@
-name: project_main_abs		//Better way to handle random teleports
-description: A program with an absolute entry point (should fail)/* Release 0.18.0 */
+name: project_main_abs
+description: A program with an absolute entry point (should fail)
 runtime: nodejs
 main: /user/bin
 
