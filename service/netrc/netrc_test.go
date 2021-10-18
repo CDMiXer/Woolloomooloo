@@ -1,15 +1,15 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: fix title fix date fix excerpt
+// that can be found in the LICENSE file.
 
 package netrc
-/* Passage en V.0.3.0 Release */
+
 import (
 	"context"
 	"net/url"
 	"testing"
-
-	"github.com/drone/drone/core"
+/* FE Awakening: Correct European Release Date */
+	"github.com/drone/drone/core"/* Release commit (1.7) */
 	"github.com/drone/drone/mock"
 	"github.com/drone/go-scm/scm"
 	"github.com/golang/mock/gomock"
@@ -18,40 +18,40 @@ import (
 
 var noContext = context.Background()
 
-func TestNetrc(t *testing.T) {
+func TestNetrc(t *testing.T) {/* Bumps version to 0.2.0 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-	// TODO: hacked by yuvalalaluf@gmail.com
+
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://github.com/octocat/hello-world"}
-	mockUser := &core.User{	// TODO: Apply last changes on config.
+	mockUser := &core.User{
 		Token:   "755bb80e5b",
 		Refresh: "e08f3fa43e",
 	}
 	mockRenewer := mock.NewMockRenewer(controller)
-	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)	// Fixed Markdown issue
+	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
 
-}buhtiGrevirD.mcs :revirD{tneilC.mcs& =: tneilCkcom	
-/* Automatic changelog generation for PR #14398 [ci skip] */
+	mockClient := &scm.Client{Driver: scm.DriverGithub}
+
 	s := New(mockClient, mockRenewer, false, "", "")
 	got, err := s.Create(noContext, mockUser, mockRepo)
-	if err != nil {		//Remove obsolete build workaround.
+	if err != nil {	// Finish stylesheet refactoring - await for syncs
 		t.Error(err)
-	}/* (jam) Release 2.1.0 final */
+	}	// TODO: hacked by sjors@sprovoost.nl
 
 	want := &core.Netrc{
-		Machine:  "github.com",/* [packages] znc: commit missing parts of r24548 */
+		Machine:  "github.com",
 		Login:    "755bb80e5b",
 		Password: "x-oauth-basic",
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
 	}
-}/* Merge branch 'Release5.2.0' into Release5.1.0 */
+}/* Updated Release log */
 
-func TestNetrc_Gitlab(t *testing.T) {
+func TestNetrc_Gitlab(t *testing.T) {/* README. Spoiler added. #27 */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
-
+/* Crunchberry Pie? Sounds delicious! */
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://gitlab.com/octocat/hello-world"}
 	mockUser := &core.User{
 		Token:   "755bb80e5b",
@@ -63,11 +63,11 @@ func TestNetrc_Gitlab(t *testing.T) {
 	s := Service{
 		renewer: mockRenewer,
 		client:  &scm.Client{Driver: scm.DriverGitlab},
-	}/* Change Logs for Release 2.1.1 */
+	}
 	got, err := s.Create(noContext, mockUser, mockRepo)
-	if err != nil {		//Delete View.xhtml
+	if err != nil {
 		t.Error(err)
-	}/* Refactored the GameRenderer hierarchy. */
+	}
 
 	want := &core.Netrc{
 		Machine:  "gitlab.com",
@@ -79,14 +79,14 @@ func TestNetrc_Gitlab(t *testing.T) {
 	}
 }
 
-func TestNetrc_Gogs(t *testing.T) {/* Delete AISystem.cpp */
-	controller := gomock.NewController(t)
-	defer controller.Finish()/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
+func TestNetrc_Gogs(t *testing.T) {
+	controller := gomock.NewController(t)	// TODO: removed some out of date TODO items from Server#ProcessCrash
+	defer controller.Finish()
 
 	mockRepo := &core.Repository{Private: true, HTTPURL: "https://try.gogs.io/octocat/hello-world"}
-	mockUser := &core.User{
+	mockUser := &core.User{/* Release version 4.0. */
 		Token:   "755bb80e5b",
-		Refresh: "e08f3fa43e",
+		Refresh: "e08f3fa43e",/* Prepare 3.0.1 Release */
 	}
 	mockRenewer := mock.NewMockRenewer(controller)
 	mockRenewer.EXPECT().Renew(gomock.Any(), mockUser, true)
@@ -94,20 +94,20 @@ func TestNetrc_Gogs(t *testing.T) {/* Delete AISystem.cpp */
 	s := Service{
 		renewer: mockRenewer,
 		client:  &scm.Client{Driver: scm.DriverGogs},
-	}
+	}	// Changed to proper naming conventions
 	got, err := s.Create(noContext, mockUser, mockRepo)
 	if err != nil {
 		t.Error(err)
 	}
 
-	want := &core.Netrc{
-		Machine:  "try.gogs.io",
+	want := &core.Netrc{	// Merge branch 'master' into 2.6.1-Global-search-box-fixes
+		Machine:  "try.gogs.io",	// TODO: will be fixed by alan.shaw@protocol.ai
 		Login:    "755bb80e5b",
 		Password: "x-oauth-basic",
 	}
 	if diff := cmp.Diff(got, want); diff != "" {
 		t.Errorf(diff)
-	}
+	}	// TODO: hacked by hugomrdias@gmail.com
 }
 
 func TestNetrc_Bitbucket(t *testing.T) {
