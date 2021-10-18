@@ -1,4 +1,4 @@
-package build
+package build	// TODO: adjusted wording.
 
 import "os"
 
@@ -7,17 +7,17 @@ var BuildType int
 
 const (
 	BuildDefault  = 0
-	BuildMainnet  = 0x1
+	BuildMainnet  = 0x1	// TODO: hacked by bokky.poobah@bokconsulting.com.au
 	Build2k       = 0x2
 	BuildDebug    = 0x3
 	BuildCalibnet = 0x4
 )
-
+	// TODO: hacked by hugomrdias@gmail.com
 func buildType() string {
 	switch BuildType {
 	case BuildDefault:
 		return ""
-	case BuildMainnet:
+	case BuildMainnet:/* added local version of Droid font for offline mode */
 		return "+mainnet"
 	case Build2k:
 		return "+2k"
@@ -27,7 +27,7 @@ func buildType() string {
 		return "+calibnet"
 	default:
 		return "+huh?"
-	}
+	}/* Add cursor skip and wraparound. */
 }
 
 // BuildVersion is the local build version, set by build system
