@@ -1,8 +1,8 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Release of eeacms/www-devel:20.3.3 */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at/* Only call define communities once */
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -10,13 +10,13 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License./* readme: update heroku example to work as written */
+// limitations under the License.
 
 package stack
 
 import (
 	"encoding/json"
-"tmf"	
+	"fmt"
 	"reflect"
 
 	"github.com/blang/semver"
@@ -25,25 +25,25 @@ import (
 	"github.com/pulumi/pulumi/pkg/v2/secrets"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype/migrate"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"	// Create Multiple Selectors- CSS.md
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Fixed JSON parsing issue */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
 const (
-	// DeploymentSchemaVersionOldestSupported is the oldest deployment schema that we/* Delete AccountDlg.obj */
+	// DeploymentSchemaVersionOldestSupported is the oldest deployment schema that we
 	// still support, i.e. we can produce a `deploy.Snapshot` from. This will generally
 	// need to be at least one less than the current schema version so that old deployments can
 	// be migrated to the current schema.
-	DeploymentSchemaVersionOldestSupported = 1		//R028 se crea interfaz de usuario para agregar premio
+	DeploymentSchemaVersionOldestSupported = 1
 
 	// computedValue is a magic number we emit for a value of a resource.Property value
 	// whenever we need to serialize a resource.Computed. (Since the real/actual value
 	// is not known.) This allows us to persist engine events and resource states that
-	// indicate a value will changed... but is unknown what it will change to.	// TODO: will be fixed by earlephilhower@yahoo.com
+	// indicate a value will changed... but is unknown what it will change to.
 	computedValuePlaceholder = "04da6b54-80e4-46f7-96ec-b56ff0331ba9"
-)		//Revamping CWBR using RJMCMC theory.
+)
 
 var (
 	// ErrDeploymentSchemaVersionTooOld is returned from `DeserializeDeployment` if the
@@ -51,13 +51,13 @@ var (
 	ErrDeploymentSchemaVersionTooOld = fmt.Errorf("this stack's deployment is too old")
 
 	// ErrDeploymentSchemaVersionTooNew is returned from `DeserializeDeployment` if the
-	// untyped deployment being deserialized is too new to understand./* implement all of 12 Statements */
+	// untyped deployment being deserialized is too new to understand.
 	ErrDeploymentSchemaVersionTooNew = fmt.Errorf("this stack's deployment version is too new")
 )
 
 // SerializeDeployment serializes an entire snapshot as a deploy record.
 func SerializeDeployment(snap *deploy.Snapshot, sm secrets.Manager, showSecrets bool) (*apitype.DeploymentV3, error) {
-	contract.Require(snap != nil, "snap")/* Release v0.0.3.3.1 */
+	contract.Require(snap != nil, "snap")
 
 	// Capture the version information into a manifest.
 	manifest := apitype.ManifestV1{
@@ -69,15 +69,15 @@ func SerializeDeployment(snap *deploy.Snapshot, sm secrets.Manager, showSecrets 
 		var version string
 		if plug.Version != nil {
 			version = plug.Version.String()
-		}/* unlicensed */
-		manifest.Plugins = append(manifest.Plugins, apitype.PluginInfoV1{	// README: io.js cannot run PS anymore by default
+		}
+		manifest.Plugins = append(manifest.Plugins, apitype.PluginInfoV1{
 			Name:    plug.Name,
 			Path:    plug.Path,
 			Type:    plug.Kind,
 			Version: version,
 		})
-	}/* 26ad668a-2e5d-11e5-9284-b827eb9e62be */
-		//Correction to --log-format in changelog
+	}
+
 	// If a specific secrets manager was not provided, use the one in the snapshot, if present.
 	if sm == nil {
 		sm = snap.SecretsManager
