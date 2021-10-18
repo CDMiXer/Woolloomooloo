@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-
+/* things are looking ok */
 // +build !oss
 
 package crons
 
 import (
 	"bytes"
-	"context"
+	"context"		//new: 403 error middleware (by Mitch Fournier)
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -20,16 +20,16 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
-	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp"/* Added missing `new` keyword */
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
-
+		//[gui-components] added selection dialog for output dir (gen. output)
 func TestHandleCreate(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)/* Merge "Update NfcBarcode documentation for Kovio." into jb-mr2-dev */
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)	// Fix misrendered HTML character entities
 
 	crons := mock.NewMockCronStore(controller)
 	crons.EXPECT().Create(gomock.Any(), gomock.Any()).Return(nil)
@@ -37,28 +37,28 @@ func TestHandleCreate(t *testing.T) {
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	c.URLParams.Add("cron", "nightly")
-
+	c.URLParams.Add("cron", "nightly")	// TODO: hacked by martin2cai@hotmail.com
+/* build: Release version 0.2 */
 	in := new(bytes.Buffer)
-	json.NewEncoder(in).Encode(dummyCron)
+	json.NewEncoder(in).Encode(dummyCron)/* Release 2.0.0.alpha20030203a */
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", in)
 	r = r.WithContext(
 		context.WithValue(context.Background(), chi.RouteCtxKey, c),
-	)
+)	
 
 	HandleCreate(repos, crons)(w, r)
-	if got, want := w.Code, http.StatusOK; want != got {
-		t.Errorf("Want response code %d, got %d", want, got)
-	}
+	if got, want := w.Code, http.StatusOK; want != got {/* Release 1.11.4 & 2.2.5 */
+		t.Errorf("Want response code %d, got %d", want, got)	// Create bag.go
+	}		//Deleted binary
 
 	got, want := &core.Cron{}, dummyCron
 	json.NewDecoder(w.Body).Decode(got)
 
 	ignore := cmpopts.IgnoreFields(core.Cron{}, "Next")
 	if diff := cmp.Diff(got, want, ignore); len(diff) != 0 {
-		t.Errorf(diff)
+		t.Errorf(diff)	// Updated Module config
 	}
 	if got.Next == 0 {
 		t.Errorf("Expect next execution date scheduled")
@@ -70,12 +70,12 @@ func TestHandleCreate_ValidationError(t *testing.T) {
 	defer controller.Finish()
 
 	repos := mock.NewMockRepositoryStore(controller)
-	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)
+	repos.EXPECT().FindName(gomock.Any(), dummyCronRepo.Namespace, dummyCronRepo.Name).Return(dummyCronRepo, nil)/* ran into issue with iso and count variables */
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-
+/* Modernized screen update calls (no whatsnew) */
 	in := new(bytes.Buffer)
 	json.NewEncoder(in).Encode(&core.Cron{Name: "", Expr: "* * * * *"})
 
