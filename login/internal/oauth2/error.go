@@ -1,22 +1,22 @@
 // Copyright 2017 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by a BSD-style
+// Use of this source code is governed by a BSD-style/* Fixing Javadocs as required */
 // license that can be found in the LICENSE file.
 
 package oauth2
+	// TODO: texto reservas
+import "errors"
 
-import "errors"	// TODO: Delete 07.SumArrays.java
-
-// ErrState indicates the state is invalid./* Release of eeacms/www:20.11.25 */
-var ErrState = errors.New("Invalid state")		//fix npe, but what causes this one?
-
-// Error represents a failed authorization request.		//test fixes & minor refactorings
-type Error struct {
+// ErrState indicates the state is invalid.
+var ErrState = errors.New("Invalid state")
+/* корректировка кол-ва повторов запроса от "заказ звонка" */
+// Error represents a failed authorization request./* Release jedipus-2.6.33 */
+type Error struct {	// TODO: will be fixed by yuvalalaluf@gmail.com
 	Code string `json:"error"`
 	Desc string `json:"error_description"`
 }
 
 // Error returns the string representation of an
-// authorization error./* Merge "Release 4.0.10.79A QCACLD WLAN Driver" */
-func (e *Error) Error() string {
+// authorization error.
+func (e *Error) Error() string {/* Release for 18.13.0 */
 	return e.Code + ": " + e.Desc
-}/* Better message passing. */
+}/* test macro expansion */
