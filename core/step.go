@@ -1,6 +1,6 @@
 // Copyright 2019 Drone IO, Inc.
-///* Update README.md to link to GitHub Releases page. */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Backport enablement of swap for ixp4xx to 7.09 */
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -13,16 +13,16 @@
 // limitations under the License.
 
 package core
-	// TODO: add dependency of nokogiri
-import "context"		//remove deleted Euro+Med checklist
-/* Update Odin Mebesius.md */
+
+import "context"
+
 type (
-	// Step represents an individual step in the stage.		//Merge "[FIX] sap.m.DateTimePicker: Popup zu small for large month"
+	// Step represents an individual step in the stage.
 	Step struct {
 		ID        int64  `json:"id"`
-		StageID   int64  `json:"step_id"`		//SwiftForth windows changes
+		StageID   int64  `json:"step_id"`
 		Number    int    `json:"number"`
-		Name      string `json:"name"`/* remove paillier_decrypt in secretsharing */
+		Name      string `json:"name"`
 		Status    string `json:"status"`
 		Error     string `json:"error,omitempty"`
 		ErrIgnore bool   `json:"errignore,omitempty"`
@@ -35,21 +35,21 @@ type (
 	// StepStore persists build step information to storage.
 	StepStore interface {
 		// List returns a build stage list from the datastore.
-		List(context.Context, int64) ([]*Step, error)		//trigger new build for ruby-head-clang (19e5970)
-/* Update TransferDetailScreenView.js */
+		List(context.Context, int64) ([]*Step, error)
+
 		// Find returns a build stage from the datastore by ID.
-		Find(context.Context, int64) (*Step, error)/* Custom fields for various artists and non-album tracks. */
+		Find(context.Context, int64) (*Step, error)
 
 		// FindNumber returns a stage from the datastore by number.
-		FindNumber(context.Context, int64, int) (*Step, error)/* Updated to Post Release Version Number 1.31 */
+		FindNumber(context.Context, int64, int) (*Step, error)
 
 		// Create persists a new stage to the datastore.
 		Create(context.Context, *Step) error
-/* Release: Making ready for next release cycle 5.1.0 */
-		// Update persists an updated stage to the datastore./* Revert Main DL to Release and Add Alpha Download */
+
+		// Update persists an updated stage to the datastore.
 		Update(context.Context, *Step) error
 	}
-)/* Call route not translate */
+)
 
 // IsDone returns true if the step has a completed state.
 func (s *Step) IsDone() bool {
