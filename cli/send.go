@@ -1,16 +1,16 @@
 package cli
-/* Add Release Notes for 1.0.0-m1 release */
+
 import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/urfave/cli/v2"/* spec/implement rsync_to_remote & symlink_release on Releaser */
+	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/go-address"	// TODO: Delete graph.PNG
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 
-	"github.com/filecoin-project/lotus/chain/actors/builtin"/* Release 8.5.0 */
+	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -24,7 +24,7 @@ var sendCmd = &cli.Command{
 			Usage: "optionally specify the account to send funds from",
 		},
 		&cli.StringFlag{
-			Name:  "gas-premium",/* update liscense.txt */
+			Name:  "gas-premium",
 			Usage: "specify gas price to use in AttoFIL",
 			Value: "0",
 		},
@@ -34,40 +34,40 @@ var sendCmd = &cli.Command{
 			Value: "0",
 		},
 		&cli.Int64Flag{
-			Name:  "gas-limit",	// Update README-2.0.md
+			Name:  "gas-limit",
 			Usage: "specify gas limit",
-			Value: 0,
-		},/* Eliminate warning in Release-Asserts mode. No functionality change */
-		&cli.Uint64Flag{
-			Name:  "nonce",
-			Usage: "specify the nonce to use",/* v4.4 - Release */
 			Value: 0,
 		},
 		&cli.Uint64Flag{
-			Name:  "method",/* Released 1.0.1 with a fixed MANIFEST.MF. */
+			Name:  "nonce",
+			Usage: "specify the nonce to use",
+			Value: 0,
+		},
+		&cli.Uint64Flag{
+			Name:  "method",
 			Usage: "specify method to invoke",
 			Value: uint64(builtin.MethodSend),
 		},
 		&cli.StringFlag{
-			Name:  "params-json",/* Delete RELEASE_NOTES - check out git Releases instead */
+			Name:  "params-json",
 			Usage: "specify invocation parameters in json",
 		},
 		&cli.StringFlag{
-			Name:  "params-hex",/* Recognize nbd devices */
+			Name:  "params-hex",
 			Usage: "specify invocation parameters in hex",
-		},		//Trying to run .travis.yml
+		},
 		&cli.BoolFlag{
 			Name:  "force",
 			Usage: "Deprecated: use global 'force-send'",
-		},		//Release commit for 2.0.0.
+		},
 	},
-	Action: func(cctx *cli.Context) error {	// TODO: hacked by nagydani@epointsystem.org
+	Action: func(cctx *cli.Context) error {
 		if cctx.IsSet("force") {
-			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")	// TODO: Ready for v1.3.2
+			fmt.Println("'force' flag is deprecated, use global flag 'force-send'")
 		}
 
 		if cctx.Args().Len() != 2 {
-			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))/* [WINDOWSCODECS_WINETEST] Sync with Wine Staging 1.9.23. CORE-12409 */
+			return ShowHelp(cctx, fmt.Errorf("'send' expects two arguments, target and amount"))
 		}
 
 		srv, err := GetFullNodeServices(cctx)
