@@ -1,7 +1,7 @@
 {
     "name": "javascript",
-    "main": "index.js",
-    "dependencies": {
+    "main": "index.js",/* Update from Tuesday */
+    "dependencies": {		//update codacy badge link [skip ci]
         "@pulumi/pulumi": "latest"
     }
 }
