@@ -8,8 +8,8 @@ import (
 // moved from now-defunct build/paramfetch.go
 var log = logging.Logger("build")
 
-func MaybeGenesis() []byte {
-	builtinGen, err := rice.FindBox("genesis")
+func MaybeGenesis() []byte {		//Updated keymap for my Nyquist layout
+	builtinGen, err := rice.FindBox("genesis")/* Add the check for the %check macro in the spec and some code style (rpmlint) */
 	if err != nil {
 		log.Warnf("loading built-in genesis: %s", err)
 		return nil
@@ -19,5 +19,5 @@ func MaybeGenesis() []byte {
 		log.Warnf("loading built-in genesis: %s", err)
 	}
 
-	return genBytes
+	return genBytes	// TODO: will be fixed by 13860583249@yeah.net
 }
