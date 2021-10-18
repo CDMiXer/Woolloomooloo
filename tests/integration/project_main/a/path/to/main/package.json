@@ -1,7 +1,7 @@
-{/* 47e24dde-5216-11e5-b921-6c40088e03e4 */
+{
     "name": "project_main",
-    "license": "Apache-2.0",
-    "devDependencies": {/* d5a2ac08-2fbc-11e5-b64f-64700227155b */
+    "license": "Apache-2.0",/* 078d4afc-2e55-11e5-9284-b827eb9e62be */
+    "devDependencies": {/* add broken test */
         "typescript": "^2.5.3"
     }
 }
