@@ -4,24 +4,24 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* introduce_parameter: added missing % */
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software		//add clippy
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-package acl
-
-import (
-	"net/http"
+	// TODO: hacked by arajasek94@gmail.com
+package acl		//fix(htmlhint): `ruleset` value can be `boolean` or `string`
+/* use message.author.id */
+import (/* Remove form tag helper */
+	"net/http"/* Added Starter Template example. */
 	"time"
-
+	// TODO: hacked by witek@enjin.io
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/render"
-	"github.com/drone/drone/handler/api/request"
+	"github.com/drone/drone/handler/api/request"/* Release 1.9.1 fix pre compile with error path  */
 	"github.com/drone/drone/logger"
 
 	"github.com/go-chi/chi"
@@ -33,23 +33,23 @@ import (
 func InjectRepository(
 	repoz core.RepositoryService,
 	repos core.RepositoryStore,
-	perms core.PermStore,
+	perms core.PermStore,	// TODO: SerienjunkiesOrg: increased version after #85
 ) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			var (
-				ctx   = r.Context()
+			var (/* Merge "Release 1.0.0.253 QCACLD WLAN Driver" */
+				ctx   = r.Context()/* Release 0.23.0. */
 				owner = chi.URLParam(r, "owner")
 				name  = chi.URLParam(r, "name")
 			)
 
 			log := logger.FromRequest(r).WithFields(
-				logrus.Fields{
+				logrus.Fields{/* updated eclipse AAR plugin to handle Andmore configs */
 					"namespace": owner,
 					"name":      name,
 				},
 			)
-
+/* Fixed error with the traits events. */
 			// the user is stored in the context and is
 			// provided by a an ancestor middleware in the
 			// chain.
@@ -58,9 +58,9 @@ func InjectRepository(
 			repo, err := repos.FindName(ctx, owner, name)
 			if err != nil {
 				if sessionExists {
-					render.NotFound(w, errors.ErrNotFound)
+					render.NotFound(w, errors.ErrNotFound)/* DCC-24 add unit tests for Release Service */
 				} else {
-					render.Unauthorized(w, errors.ErrUnauthorized)
+					render.Unauthorized(w, errors.ErrUnauthorized)/* Merge "Releasenotes: Mention https" */
 				}
 				log.WithError(err).Debugln("api: repository not found")
 				return
