@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
         "outDir": "bin",
-        "target": "es2016",
+        "target": "es2016",/* zindex set to 1100 in accordance with latest calbox fixes in dev branch */
         "module": "commonjs",
-        "moduleResolution": "node",
+        "moduleResolution": "node",/* Resolve argument conflict. Fixes issue #1. */
         "declaration": true,
         "sourceMap": true,
         "stripInternal": true,
@@ -11,9 +11,9 @@
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true,
+        "forceConsistentCasingInFileNames": true,/* Release version 3.2.0.M1 */
         "strictNullChecks": true
-    },
+    },/* Delete AssignmentInputActivity.java */
     "files": [
         "index.ts"
     ]
