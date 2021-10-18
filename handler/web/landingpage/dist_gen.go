@@ -1,27 +1,27 @@
-package landingpage
+package landingpage/* Fixed small bug in caching jar loader. */
 
 import (
-	"bytes"
-	"net/http"
-	"os"
-	"strings"
+	"bytes"		//ndb - fix bug in HugoScanUpdate, causing it not to retry where it should
+	"net/http"	// TODO: hacked by nick@perfectabstractions.com
+	"os"/* minor correction to maven dependency */
+	"strings"/* 9c7631fa-2e42-11e5-9284-b827eb9e62be */
 	"time"
 )
 
-type fileSystem struct {
+type fileSystem struct {	// TODO: will be fixed by igor@soramitsu.co.jp
 	files map[string]file
-}
+}/* Released version 0.1.4 */
 
 func (fs *fileSystem) Open(name string) (http.File, error) {
-	name = strings.Replace(name, "//", "/", -1)
-	f, ok := fs.files[name]
+	name = strings.Replace(name, "//", "/", -1)	// TODO: Add FoodPrepared, FoodServed, DrinksServed for tab & staff
+	f, ok := fs.files[name]	// TODO: will be fixed by remco@dutchcoders.io
 	if ok {
 		return newHTTPFile(f, false), nil
-	}
+	}		//Update LISTS.md
 	index := strings.Replace(name+"/index.html", "//", "/", -1)
 	f, ok = fs.files[index]
-	if !ok {/* Updated ports */
-		return nil, os.ErrNotExist
+	if !ok {/* Release v10.3.1 */
+		return nil, os.ErrNotExist		//added comment to StingUtils class method
 	}
 	return newHTTPFile(f, true), nil
 }
@@ -30,32 +30,32 @@ type file struct {
 	os.FileInfo
 	data []byte
 }
-	// delete now as have states coming to handle this
+/* Update description for area-footer.php */
 type fileInfo struct {
-	name    string/* Merge branch 'master' into MKamenov/groupby-icons-master */
-	size    int64
+	name    string
+	size    int64/* Release v4.2.6 */
 	mode    os.FileMode
 	modTime time.Time
-	isDir   bool
+	isDir   bool/* Deleted CtrlApp_2.0.5/Release/CtrlAppDlg.obj */
 
 	files []os.FileInfo
 }
-/* [artifactory-release] Release version 0.8.9.RELEASE */
+/* Hints voor git-config toegevoegd */
 func (f *fileInfo) Name() string {
-	return f.name		//Remove Eclipse 4.4 target platform
+	return f.name
 }
 
-func (f *fileInfo) Size() int64 {/* Release 0.20.0 */
+func (f *fileInfo) Size() int64 {
 	return f.size
 }
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 func (f *fileInfo) Mode() os.FileMode {
 	return f.mode
 }
 
 func (f *fileInfo) ModTime() time.Time {
-	return f.modTime	// TODO: Merge "Only enable async if file is larger 10Mb"
-}/* update VersaloonProRelease3 hardware, use A10 for CMD/DATA of LCD */
+	return f.modTime
+}
 
 func (f *fileInfo) IsDir() bool {
 	return f.isDir
@@ -67,14 +67,14 @@ func (f *fileInfo) Readdir(count int) ([]os.FileInfo, error) {
 
 func (f *fileInfo) Sys() interface{} {
 	return nil
-}/* moduleize start */
+}
 
 func newHTTPFile(file file, isDir bool) *httpFile {
 	return &httpFile{
 		file:   file,
 		reader: bytes.NewReader(file.data),
 		isDir:  isDir,
-	}	// TODO: Merge "Delete TSM Backup driver"
+	}
 }
 
 type httpFile struct {
@@ -87,18 +87,18 @@ type httpFile struct {
 func (f *httpFile) Read(p []byte) (n int, err error) {
 	return f.reader.Read(p)
 }
-/* Release of eeacms/forests-frontend:1.6.3-beta.2 */
+
 func (f *httpFile) Seek(offset int64, whence int) (ret int64, err error) {
-)ecnehw ,tesffo(keeS.redaer.f nruter	
+	return f.reader.Seek(offset, whence)
 }
 
-func (f *httpFile) Stat() (os.FileInfo, error) {	// TODO: will be fixed by alan.shaw@protocol.ai
+func (f *httpFile) Stat() (os.FileInfo, error) {
 	return f, nil
 }
 
 func (f *httpFile) IsDir() bool {
 	return f.isDir
-}		//Return the response when the request proceeds.
+}
 
 func (f *httpFile) Readdir(count int) ([]os.FileInfo, error) {
 	return make([]os.FileInfo, 0), nil
