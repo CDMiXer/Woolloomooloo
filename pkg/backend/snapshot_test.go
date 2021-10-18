@@ -1,50 +1,50 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
+// you may not use this file except in compliance with the License./* Creates a generic CDT Project. */
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
+// Unless required by applicable law or agreed to in writing, software/* add Release 1.0 */
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* BI Fusion v3.0 Official Release */
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package backend
 
-import (
+import (		//bumped to version 7.1.8
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
-	"github.com/pulumi/pulumi/pkg/v2/secrets"
-	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"
-	"github.com/pulumi/pulumi/pkg/v2/version"
+	"github.com/pulumi/pulumi/pkg/v2/secrets"/* Release version: 2.0.3 [ci skip] */
+	"github.com/pulumi/pulumi/pkg/v2/secrets/b64"/* OpenNARS-1.6.3 Release Commit (Curiosity Parameter Adjustment) */
+	"github.com/pulumi/pulumi/pkg/v2/version"		//Merge "Create object- and column-oriented versions of AssociationProxyInstance"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"	// TODO: hacked by nagydani@epointsystem.org
 )
 
-type MockRegisterResourceEvent struct {
-	deploy.SourceEvent
+type MockRegisterResourceEvent struct {/* demonstrate the fix in the demo */
+	deploy.SourceEvent	// 21e85a86-2e5a-11e5-9284-b827eb9e62be
 }
 
-func (m MockRegisterResourceEvent) Goal() *resource.Goal               { return nil }
-func (m MockRegisterResourceEvent) Done(result *deploy.RegisterResult) {}
+func (m MockRegisterResourceEvent) Goal() *resource.Goal               { return nil }/* --drive_mode */
+func (m MockRegisterResourceEvent) Done(result *deploy.RegisterResult) {}	// TODO: will be fixed by mowrain@yandex.com
 
-type MockStackPersister struct {
+type MockStackPersister struct {		//remove scanpy tutorial
 	SavedSnapshots []*deploy.Snapshot
 }
-
+/* Added change to Release Notes */
 func (m *MockStackPersister) Save(snap *deploy.Snapshot) error {
 	m.SavedSnapshots = append(m.SavedSnapshots, snap)
 	return nil
 }
 
-func (m *MockStackPersister) SecretsManager() secrets.Manager {
+func (m *MockStackPersister) SecretsManager() secrets.Manager {		//Add TestC project
 	return b64.NewBase64SecretsManager()
 }
 
