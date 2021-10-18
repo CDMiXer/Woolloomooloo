@@ -7,8 +7,8 @@
 *.rsuser
 *.suo
 *.user
-*.userosscache/* Fix reference to FTPServer, forgotten in the previous renaming */
-*.sln.docstates/* Update BigQueryTableSearchReleaseNotes - add Access filter */
+*.userosscache
+*.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -17,10 +17,10 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/	// dialogs moved to tk
-[Dd]ebugPublic/		//need higher scope iteration
+[Dd]ebug/
+[Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases//* Release 2.1.8 - Change logging to debug for encoding */
+[Rr]eleases/
 x64/
 x86/
 [Aa][Rr][Mm]/
@@ -28,29 +28,29 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-[Ll]og//* Released v0.2.2 */
+[Ll]og/
 [Ll]ogs/
-		//adding Project factory
-# Visual Studio 2015/2017 cache/options directory/* Release alpha 1 */
-.vs/	// TODO: will be fixed by jon@atack.com
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
-# MSTest test Results	// Remove broken link to TRT pdf
+# MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-# NUnit		//Fix newlines in C# files.
+# NUnit
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
-[Rr]eleasePS/	// bug fixes on Monarch priorititser and fixed display issues with best matches
+[Rr]eleasePS/
 dlldata.c
 
 # Benchmark Results
@@ -64,7 +64,7 @@ artifacts/
 # StyleCop
 StyleCopReport.xml
 
-# Files built by Visual Studio/* 866b89d6-2e75-11e5-9284-b827eb9e62be */
+# Files built by Visual Studio
 *_i.c
 *_p.c
 *_h.h
@@ -76,10 +76,10 @@ StyleCopReport.xml
 *.pdb
 *.ipdb
 *.pgc
-*.pgd	// TODO: will be fixed by sjors@sprovoost.nl
-*.rsp		//fixed how we load the default images from the bundle 
+*.pgd
+*.rsp
 *.sbr
-*.tlb/* User agent en curl */
+*.tlb
 *.tli
 *.tlh
 *.tmp
