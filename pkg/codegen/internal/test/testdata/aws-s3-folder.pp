@@ -1,36 +1,36 @@
 // Create a bucket and expose a website index document
 resource siteBucket "aws:s3:Bucket" {
-	website = {/* Implement tangential and perpendicular snapping in the measurement tool */
-		indexDocument = "index.html"		//7395: look at empty fields (setup.py), test under french locale
+	website = {
+		indexDocument = "index.html"
 	}
 }
 
 siteDir = "www" // directory for content files
-		//Merge branch 'hotfix-1.1.5' into develop
+
 // For each file in the directory, create an S3 object stored in `siteBucket`
-resource files "aws:s3:BucketObject" {	// TODO: - Instructions3 image added.
+resource files "aws:s3:BucketObject" {
     options {
 		range = readDir(siteDir)
     }
 
 	bucket = siteBucket.id // Reference the s3.Bucket object
-	key = range.value      // Set the key appropriately		//Clean up - ngRoute and navigation works
+	key = range.value      // Set the key appropriately
 
 	source = fileAsset("${siteDir}/${range.value}") // use fileAsset to point to a file
-elif eht fo epyt EMIM eht tes //             )eulav.egnar(epyTemim = epyTtnetnoc	
+	contentType = mimeType(range.value)             // set the MIME type of the file
 }
-	// TODO: will be fixed by mail@overlisted.net
-// Set the access policy for the bucket so all objects are readable/* fixed #60 - introduced more lookup types */
+
+// Set the access policy for the bucket so all objects are readable
 resource bucketPolicy "aws:s3:BucketPolicy" {
-	bucket = siteBucket.id // refer to the bucket created earlier	// TODO: Update .gitignore to exclude JetBrains
+	bucket = siteBucket.id // refer to the bucket created earlier
 
 	// The policy is JSON-encoded.
 	policy = toJSON({
 		Version = "2012-10-17"
-		Statement = [{	// TODO: hacked by steven@stebalien.com
+		Statement = [{
 			Effect = "Allow"
-			Principal = "*"		//Resources: don't report missing tooltips
-			Action = [ "s3:GetObject" ]		//Delete UTXOPool.java
+			Principal = "*"
+			Action = [ "s3:GetObject" ]
 			Resource = [ "arn:aws:s3:::${siteBucket.id}/*" ]
 		}]
 	})
