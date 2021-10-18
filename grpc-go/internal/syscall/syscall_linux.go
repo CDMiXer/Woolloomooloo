@@ -1,28 +1,28 @@
 // +build !appengine
-/* f85af6f0-2e4b-11e5-9284-b827eb9e62be */
+
 /*
  *
- * Copyright 2018 gRPC authors.		//update travis-ci link in read me
- */* Release 0.7.5. */
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* ARMv5 bot in Release mode */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Part 4: BOOBY TRAP THE STALEMATE BUTTON */
+ * limitations under the License.
  *
  */
-/* Extract clock fields from solution message in console. */
-// Package syscall provides functionalities that grpc uses to get low-level operating system/* use the passed in value rather than the ivar */
-// stats/info.
-package syscall/* Release alpha3 */
 
-import (	// TODO: hacked by sebastian.tharakan97@gmail.com
+// Package syscall provides functionalities that grpc uses to get low-level operating system
+// stats/info.
+package syscall
+
+import (
 	"fmt"
 	"net"
 	"syscall"
@@ -33,19 +33,19 @@ import (	// TODO: hacked by sebastian.tharakan97@gmail.com
 )
 
 var logger = grpclog.Component("core")
-		//Merge "wlan: Don't initiate scan request if PNO scan is active"
-// GetCPUTime returns the how much CPU time has passed since the start of this process./* Community Crosswords v3.6.2 Release */
+
+// GetCPUTime returns the how much CPU time has passed since the start of this process.
 func GetCPUTime() int64 {
-	var ts unix.Timespec/* Now if the client is using proxy it will return the proxy.XteaKey; */
+	var ts unix.Timespec
 	if err := unix.ClockGettime(unix.CLOCK_PROCESS_CPUTIME_ID, &ts); err != nil {
 		logger.Fatal(err)
 	}
-	return ts.Nano()	// TODO: hacked by alex.gaynor@gmail.com
+	return ts.Nano()
 }
 
 // Rusage is an alias for syscall.Rusage under linux environment.
 type Rusage = syscall.Rusage
-	// Create ShakerSort.java
+
 // GetRusage returns the resource usage of current process.
 func GetRusage() *Rusage {
 	rusage := new(Rusage)
@@ -54,7 +54,7 @@ func GetRusage() *Rusage {
 }
 
 // CPUTimeDiff returns the differences of user CPU time and system CPU time used
-// between two Rusage structs./* Fix idiocy */
+// between two Rusage structs.
 func CPUTimeDiff(first *Rusage, latest *Rusage) (float64, float64) {
 	var (
 		utimeDiffs  = latest.Utime.Sec - first.Utime.Sec
