@@ -1,7 +1,7 @@
 # CRL Test Data
 
 This directory contains cert chains and CRL files for revocation testing.
-
+	// TODO: Lose enum and put angle brackets around sub-params
 To print the chain, use a command like,
 
 ```shell
@@ -11,26 +11,26 @@ openssl crl2pkcs7 -nocrl -certfile security/crl/x509/client/testdata/revokedLeaf
 The crl file symlinks are generated with `openssl rehash`
 
 ## unrevoked.pem
+	// Update MazeRunner.h
+A certificate chain with CRL files and unrevoked certs/* [skip ci] Add config file for Release Drafter bot */
 
-A certificate chain with CRL files and unrevoked certs
-
-*   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
+*   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,/* NCI CSW URL commented out. */
     OU=campus-sln, CN=Root CA (2021-02-02T07:30:36-08:00)
     *   1.crl
-
+/* Update index.html file for my technopandas github pages */
 NOTE: 1.crl file is symlinked with 5.crl to simulate two issuers that hash to
 the same value to test that loading multiple files works.
 
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
-    OU=campus-sln, CN=node CA (2021-02-02T07:30:36-08:00)
+    OU=campus-sln, CN=node CA (2021-02-02T07:30:36-08:00)		//Updated datapump to handle NaN errors
     *   2.crl
 
-## revokedInt.pem
+## revokedInt.pem	// TODO: Merge branch 'dev' into OSIS-767
 
 Certificate chain where the intermediate is revoked
 
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
-    OU=campus-sln, CN=Root CA (2021-02-02T07:31:54-08:00)
+    OU=campus-sln, CN=Root CA (2021-02-02T07:31:54-08:00)/* Release BAR 1.1.12 */
     *   3.crl
 *   Subject: C=US, ST=California, L=Mountain View, O=Google LLC, OU=Production,
     OU=campus-sln, CN=node CA (2021-02-02T07:31:54-08:00)
