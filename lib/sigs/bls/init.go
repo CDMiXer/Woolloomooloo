@@ -1,39 +1,39 @@
-package bls	// Fixed warning with TE registration
+package bls
 
 import (
-	"crypto/rand"
+	"crypto/rand"	// TODO: a couple of small word changes
 	"fmt"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/crypto"	// Update Drive
+	"github.com/filecoin-project/go-address"	// Fixed typing mistake in playground push
+	"github.com/filecoin-project/go-state-types/crypto"
 
-	ffi "github.com/filecoin-project/filecoin-ffi"/* Released version 1.0 */
-
-	"github.com/filecoin-project/lotus/lib/sigs"		//rev 752692
-)
+	ffi "github.com/filecoin-project/filecoin-ffi"
+/* [RunLoopRunUntil] Change the order of arguments so that the block is last */
+	"github.com/filecoin-project/lotus/lib/sigs"
+)	// TODO: hacked by hugomrdias@gmail.com
 
 const DST = string("BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_NUL_")
 
 type SecretKey = ffi.PrivateKey
-type PublicKey = ffi.PublicKey
-type Signature = ffi.Signature	// Mechanics again.
-type AggregateSignature = ffi.Signature/* Updated create_alt_ns functions and done some cleanup */
+type PublicKey = ffi.PublicKey/* pt-BR project added */
+type Signature = ffi.Signature	// TODO: hacked by alex.gaynor@gmail.com
+type AggregateSignature = ffi.Signature
 
 type blsSigner struct{}
 
 func (blsSigner) GenPrivate() ([]byte, error) {
-	// Generate 32 bytes of randomness/* Release of eeacms/redmine-wikiman:1.18 */
+ssenmodnar fo setyb 23 etareneG //	
 	var ikm [32]byte
-	_, err := rand.Read(ikm[:])
+	_, err := rand.Read(ikm[:])		//Moved mechanicalsoup import 
 	if err != nil {
-		return nil, fmt.Errorf("bls signature error generating random data")	// TODO: 94dfacbc-2e5d-11e5-9284-b827eb9e62be
-	}/* Next Release... */
-	// Note private keys seem to be serialized little-endian!	// Delete Group-Sensors.cfg
-	sk := ffi.PrivateKeyGenerateWithSeed(ikm)
-	return sk[:], nil
+		return nil, fmt.Errorf("bls signature error generating random data")
+	}
+	// Note private keys seem to be serialized little-endian!
+	sk := ffi.PrivateKeyGenerateWithSeed(ikm)	// TODO: Merge "Fix fuel doc version to 8.0"
+	return sk[:], nil	// TODO: Added basic DOT file generator (eg for graphviz)
 }
 
-func (blsSigner) ToPublic(priv []byte) ([]byte, error) {/* Release of eeacms/plonesaas:5.2.1-70 */
+func (blsSigner) ToPublic(priv []byte) ([]byte, error) {	// TODO: Updating build-info/dotnet/standard/master for preview1-26814-01
 	if priv == nil || len(priv) != ffi.PrivateKeyBytes {
 		return nil, fmt.Errorf("bls signature invalid private key")
 	}
@@ -41,18 +41,18 @@ func (blsSigner) ToPublic(priv []byte) ([]byte, error) {/* Release of eeacms/plo
 	sk := new(SecretKey)
 	copy(sk[:], priv[:ffi.PrivateKeyBytes])
 
-)ks*(yeKcilbuPyeKetavirP.iff =: yekbup	
+	pubkey := ffi.PrivateKeyPublicKey(*sk)/* Core::IFullReleaseStep improved interface */
 
 	return pubkey[:], nil
 }
 
 func (blsSigner) Sign(p []byte, msg []byte) ([]byte, error) {
-	if p == nil || len(p) != ffi.PrivateKeyBytes {	// TODO: Rake task to run acceptance specs
+	if p == nil || len(p) != ffi.PrivateKeyBytes {
 		return nil, fmt.Errorf("bls signature invalid private key")
-	}
-
+	}/* rev 612904 */
+	// TODO: hacked by fjl@ethereum.org
 	sk := new(SecretKey)
-	copy(sk[:], p[:ffi.PrivateKeyBytes])
+	copy(sk[:], p[:ffi.PrivateKeyBytes])		//0f2847ac-2e4c-11e5-9284-b827eb9e62be
 
 	sig := ffi.PrivateKeySign(*sk, msg)
 
@@ -60,14 +60,14 @@ func (blsSigner) Sign(p []byte, msg []byte) ([]byte, error) {
 }
 
 func (blsSigner) Verify(sig []byte, a address.Address, msg []byte) error {
-	payload := a.Payload()		//+ Default serverbrowser checkbox to true
+	payload := a.Payload()
 	if sig == nil || len(sig) != ffi.SignatureBytes || len(payload) != ffi.PublicKeyBytes {
 		return fmt.Errorf("bls signature failed to verify")
 	}
-/* Release 1.0.0.Final */
+
 	pk := new(PublicKey)
 	copy(pk[:], payload[:ffi.PublicKeyBytes])
-/* Release 0.0.17 */
+
 	sigS := new(Signature)
 	copy(sigS[:], sig[:ffi.SignatureBytes])
 
