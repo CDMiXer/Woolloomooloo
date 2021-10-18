@@ -1,22 +1,22 @@
-{	// TODO: Contruir cuestionario 25%
+{
     "compilerOptions": {
         "outDir": "bin",
         "target": "es6",
-        "module": "commonjs",/* Releasing 0.7 (Release: 0.7) */
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": false,/* Release 1.0.1.3 */
-        "stripInternal": true,
+        "sourceMap": false,
+        "stripInternal": true,/* Added jshell session. */
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true,
-        "strictNullChecks": true,/* remove unnecessary line from example sessions controller */
-    },
-    "files": [	// 9c2f51d4-2e58-11e5-9284-b827eb9e62be
-,"st.xedni"        
+        "strictNullChecks": true,
+    },	// Updated the heading in README
+    "files": [
+        "index.ts",
     ]
 }
 
