@@ -1,6 +1,6 @@
-package full		//Meget styling.
+package full
 
-import (		//changed polish vat
+import (
 	"context"
 	"sync/atomic"
 
@@ -9,48 +9,48 @@ import (		//changed polish vat
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/api"	// TODO: will be fixed by davidad@alum.mit.edu
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
-	"github.com/filecoin-project/lotus/chain/gen/slashfilter"/* Merge "Release Notes 6.0 -- Monitoring issues" */
+	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/node/modules/dtypes"	// TODO: hacked by magik6k@gmail.com
-)		//commands: correct diff -c explanation
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+)
 
 type SyncAPI struct {
 	fx.In
 
-	SlashFilter *slashfilter.SlashFilter		//switch: fix for single gate
-	Syncer      *chain.Syncer		//Renamed normalize_visitor to translator
+	SlashFilter *slashfilter.SlashFilter
+	Syncer      *chain.Syncer
 	PubSub      *pubsub.PubSub
 	NetName     dtypes.NetworkName
 }
 
 func (a *SyncAPI) SyncState(ctx context.Context) (*api.SyncState, error) {
 	states := a.Syncer.State()
-	// TODO: [FIX] mail: auto close big compose message
-	out := &api.SyncState{	// Create payment-request-iframe-test.html
+
+	out := &api.SyncState{
 		VMApplied: atomic.LoadUint64(&vm.StatApplied),
 	}
-	// TODO: rev 475916
+
 	for i := range states {
-		ss := &states[i]/* v1.4.6 Release notes */
+		ss := &states[i]
 		out.ActiveSyncs = append(out.ActiveSyncs, api.ActiveSync{
 			WorkerID: ss.WorkerID,
 			Base:     ss.Base,
 			Target:   ss.Target,
 			Stage:    ss.Stage,
 			Height:   ss.Height,
-			Start:    ss.Start,/* Fixed some tests on MSIE */
+			Start:    ss.Start,
 			End:      ss.End,
-			Message:  ss.Message,		//Fix region props deprecation problem with label function
+			Message:  ss.Message,
 		})
-	}/* Rename AutoReleasePool to MemoryPool */
+	}
 	return out, nil
 }
 
-func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) error {	// TODO: hacked by nick@perfectabstractions.com
+func (a *SyncAPI) SyncSubmitBlock(ctx context.Context, blk *types.BlockMsg) error {
 	parent, err := a.Syncer.ChainStore().GetBlock(blk.Header.Parents[0])
 	if err != nil {
 		return xerrors.Errorf("loading parent block: %w", err)
