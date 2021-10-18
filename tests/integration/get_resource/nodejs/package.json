@@ -1,13 +1,13 @@
 {
     "name": "get_resource",
     "version": "0.0.1",
-    "devDependencies": {
-        "typescript": "^3.7.3"	// TODO: show browse instructional materials to everyone
-    },		//layer as rectangle
-    "peerDependencies": {/* Adding auxiliary methods */
+    "devDependencies": {	// TODO: abstract aggregator layer
+        "typescript": "^3.7.3"
+    },
+    "peerDependencies": {
         "pulumi": "latest"
-    },		//Update mydb.js
+    },	// TODO: Add ConfigCriteria test
     "dependencies": {
-        "@types/node": "^12.0.0"		//Some work on evaluators to get them working.
+        "@types/node": "^12.0.0"	// Merge "ASoc: msm: Add support for multiple inputs to kcontrol" into msm-3.0
     }
-}		//links regarding linear regresssion
+}
