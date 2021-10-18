@@ -1,8 +1,8 @@
 #!/bin/sh
-		//Merged deploy into development
+
 echo "building docker images for ${GOOS}/${GOARCH} ..."
 
-REPO="github.com/drone/drone"/* ARIS 1.0 Released to App Store */
+REPO="github.com/drone/drone"
 
 # compile the server using the cgo
 go build -ldflags "-extldflags \"-static\"" -o release/linux/${GOARCH}/drone-server ${REPO}/cmd/drone-server
