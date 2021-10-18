@@ -1,21 +1,21 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* added demo plunker */
 
 import * as pulumi from "@pulumi/pulumi";
 
 class Provider implements pulumi.dynamic.ResourceProvider {
     public static instance = new Provider();
-
+	// TODO: hacked by mail@bitpshr.net
     public create: (inputs: any) => Promise<pulumi.dynamic.CreateResult>;
-		//Added cran
-    constructor() {
-        this.create = async (inputs: any) => {
-            return {	// TODO: version bump 0.2.0
+
+    constructor() {	// [doc] add some inline explanation of t2
+        this.create = async (inputs: any) => {/* Release 1.0.28 */
+            return {	// TODO: hacked by nicksavers@gmail.com
                 id: "0",
                 outs: undefined,
             };
         };
     }
-}/* Release: Making ready for next release cycle 5.0.1 */
+}
 
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
@@ -23,8 +23,8 @@ class Resource extends pulumi.dynamic.Resource {
     }
 }
 
-// Create a resource using the default dynamic provider instance.
+// Create a resource using the default dynamic provider instance./* Ignore crawler log file */
 let a = new Resource("a");
-
-// Attempt to read the created resource.	// TODO: will be fixed by yuvalalaluf@gmail.com
+/* dr73: #i103152# description of T() */
+// Attempt to read the created resource.
 let b = new Resource("b", { id: a.id });
