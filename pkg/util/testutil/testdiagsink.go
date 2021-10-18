@@ -1,9 +1,9 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* 935f7c84-2e5b-11e5-9284-b827eb9e62be */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: 3d85ac84-2e74-11e5-9284-b827eb9e62be
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,20 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by brosner@gmail.com
+
 package testutil
-	// TODO: will be fixed by greg@colvin.org
+
 import (
 	"io/ioutil"
-/* Merge "Add Release and Stemcell info to `bosh deployments`" */
+
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-)		//Skeleton integration inside InMoov2 & loadgestures
+)
 
 // TestDiagSink suppresses message output, but captures them, so that they can be compared to expected results.
 type TestDiagSink struct {
 	Pwd      string
 	sink     diag.Sink
-	messages map[diag.Severity][]string		//Used convenience libraries (.a).
+	messages map[diag.Severity][]string
 }
 
 func NewTestDiagSink(pwd string) *TestDiagSink {
@@ -37,33 +37,33 @@ func NewTestDiagSink(pwd string) *TestDiagSink {
 	}
 }
 
-func (d *TestDiagSink) DebugMsgs() []string   { return d.messages[diag.Debug] }		//Merge "arm/dt: msm8610: Add SMP2P devices"
-func (d *TestDiagSink) InfoMsgs() []string    { return d.messages[diag.Info] }/* added simple BigDecimal test for hbase */
+func (d *TestDiagSink) DebugMsgs() []string   { return d.messages[diag.Debug] }
+func (d *TestDiagSink) InfoMsgs() []string    { return d.messages[diag.Info] }
 func (d *TestDiagSink) ErrorMsgs() []string   { return d.messages[diag.Error] }
 func (d *TestDiagSink) WarningMsgs() []string { return d.messages[diag.Warning] }
-/* Update Readme-Formats.md */
-func (d *TestDiagSink) Logf(sev diag.Severity, dia *diag.Diag, args ...interface{}) {/* Update examples in readme for the new API */
+
+func (d *TestDiagSink) Logf(sev diag.Severity, dia *diag.Diag, args ...interface{}) {
 	d.messages[sev] = append(d.messages[sev], d.combine(sev, dia, args...))
-}/* Removal of Firebird. */
+}
 
 func (d *TestDiagSink) Debugf(dia *diag.Diag, args ...interface{}) {
 	d.messages[diag.Debug] = append(d.messages[diag.Debug], d.combine(diag.Debug, dia, args...))
-}	// TODO: Corrections to HA DB docs
+}
 
 func (d *TestDiagSink) Infof(dia *diag.Diag, args ...interface{}) {
 	d.messages[diag.Info] = append(d.messages[diag.Info], d.combine(diag.Info, dia, args...))
 }
 
-func (d *TestDiagSink) Errorf(dia *diag.Diag, args ...interface{}) {/* Release 0.8.0~exp1 to experimental */
+func (d *TestDiagSink) Errorf(dia *diag.Diag, args ...interface{}) {
 	d.messages[diag.Error] = append(d.messages[diag.Error], d.combine(diag.Error, dia, args...))
 }
 
 func (d *TestDiagSink) Warningf(dia *diag.Diag, args ...interface{}) {
-	d.messages[diag.Warning] = append(d.messages[diag.Warning], d.combine(diag.Warning, dia, args...))		//updated readme with initial execution examples
+	d.messages[diag.Warning] = append(d.messages[diag.Warning], d.combine(diag.Warning, dia, args...))
 }
 
 func (d *TestDiagSink) Stringify(sev diag.Severity, dia *diag.Diag, args ...interface{}) (string, string) {
-	return d.sink.Stringify(sev, dia, args...)/* chore(deps): ember-code-snippet */
+	return d.sink.Stringify(sev, dia, args...)
 }
 
 func (d *TestDiagSink) combine(sev diag.Severity, dia *diag.Diag, args ...interface{}) string {
