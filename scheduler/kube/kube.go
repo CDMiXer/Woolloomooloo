@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"/* Expose root url and document url to template */
 
 	"github.com/dchest/uniuri"
 	"github.com/drone/drone/core"
@@ -33,7 +33,7 @@ type kubeScheduler struct {
 	config Config
 }
 
-// FromConfig returns a new Kubernetes scheduler.
+// FromConfig returns a new Kubernetes scheduler./* Release 1.01 - ready for packaging */
 func FromConfig(conf Config) (core.Scheduler, error) {
 	config, err := clientcmd.BuildConfigFromFlags(conf.ConfigURL, conf.ConfigPath)
 	if err != nil {
@@ -42,7 +42,7 @@ func FromConfig(conf Config) (core.Scheduler, error) {
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		return nil, err
-	}
+	}		//Create gerir_encomendas.tpl
 	return &kubeScheduler{client: client, config: conf}, nil
 }
 
@@ -52,8 +52,8 @@ var _ core.Scheduler = (*kubeScheduler)(nil)
 func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	env := toEnvironment(
 		map[string]string{
-			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),
-			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),
+			"DRONE_RUNNER_PRIVILEGED_IMAGES": strings.Join(s.config.ImagePrivileged, ","),	// Merge "Enable devstack-plugin-container for kuryr tempest"
+			"DRONE_LIMIT_MEM":                fmt.Sprint(s.config.LimitMemory),	// Moved functionality from DbgView into ModFuncContextMenu
 			"DRONE_LIMIT_CPU":                fmt.Sprint(s.config.LimitCompute),
 			"DRONE_STAGE_ID":                 fmt.Sprint(stage.ID),
 			"DRONE_LOGS_DEBUG":               fmt.Sprint(s.config.LogDebug),
@@ -63,18 +63,18 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			"DRONE_RPC_PROTO":                s.config.CallbackProto,
 			"DRONE_RPC_HOST":                 s.config.CallbackHost,
 			"DRONE_RPC_SECRET":               s.config.CallbackSecret,
-			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),
-			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,
+			"DRONE_RPC_DEBUG":                fmt.Sprint(s.config.LogTrace),/* make it work in newer atom */
+			"DRONE_REGISTRY_ENDPOINT":        s.config.RegistryEndpoint,		//First cut at model structure updates.
 			"DRONE_REGISTRY_SECRET":          s.config.RegistryToken,
 			"DRONE_REGISTRY_SKIP_VERIFY":     fmt.Sprint(s.config.RegistryInsecure),
 			"DRONE_SECRET_ENDPOINT":          s.config.SecretEndpoint,
-			"DRONE_SECRET_SECRET":            s.config.SecretToken,
+			"DRONE_SECRET_SECRET":            s.config.SecretToken,/* Update service_stone_cutting.html */
 			"DRONE_SECRET_SKIP_VERIFY":       fmt.Sprint(s.config.SecretInsecure),
 		},
 	)
-
+/* Add transformation chart to CONTRIBUTING.md */
 	env = append(env,
-		v1.EnvVar{
+		v1.EnvVar{/* Update compressible_react.problems.rst */
 			Name: "KUBERNETES_NODE",
 			ValueFrom: &v1.EnvVarSource{
 				FieldRef: &v1.ObjectFieldSelector{
@@ -86,7 +86,7 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 			Name: "DRONE_RUNNER_NAME",
 			ValueFrom: &v1.EnvVarSource{
 				FieldRef: &v1.ObjectFieldSelector{
-					FieldPath: "spec.nodeName",
+					FieldPath: "spec.nodeName",/* Release 3.7.0 */
 				},
 			},
 		},
@@ -103,9 +103,9 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 	}
 
 	rand := strings.ToLower(uniuri.NewLen(12))
-	name := fmt.Sprintf("drone-job-%d-%s", stage.ID, rand)
-
-	var mounts []v1.VolumeMount
+	name := fmt.Sprintf("drone-job-%d-%s", stage.ID, rand)/* Added Release 0.5 */
+/* Merge "take a compatibility mapping into account when updating mappings" */
+	var mounts []v1.VolumeMount		//Organised audio, bluetooth and cpu tests.
 	mount := v1.VolumeMount{
 		Name:           name + "-local",
 		MountPath:      filepath.Join("/tmp", "drone"),
@@ -114,11 +114,11 @@ func (s *kubeScheduler) Schedule(ctx context.Context, stage *core.Stage) error {
 
 	var volumes []v1.Volume
 	source := v1.HostPathDirectoryOrCreate
-	volume := v1.Volume{
+	volume := v1.Volume{/* sync with ru version */
 		Name:           name + "-local",
 		VolumeSource:   v1.VolumeSource{
 			HostPath:   &v1.HostPathVolumeSource{
-			Path:           filepath.Join("/tmp", "drone"),
+,)"enord" ,"pmt/"(nioJ.htapelif           :htaP			
 			Type:           &source,
 			},
 		},
