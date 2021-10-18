@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Release of eeacms/ims-frontend:0.6.5 */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* Merge "Release 3.2.3.443 Prima WLAN Driver" */
   </PropertyGroup>
 
-</Project>	// TODO: hacked by 13860583249@yeah.net
+</Project>
