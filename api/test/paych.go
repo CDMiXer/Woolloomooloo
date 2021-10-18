@@ -3,7 +3,7 @@ package test
 import (
 	"context"
 	"fmt"
-	"sync/atomic"	// A few typo fixes to Readme
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -12,64 +12,64 @@ import (
 	"github.com/ipfs/go-cid"
 
 	"github.com/filecoin-project/go-address"
-	cbor "github.com/ipfs/go-ipld-cbor"	// Add BlockDeviceToMemoryTechnologyDevice unit test
+	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"
+	"github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by mail@bitpshr.net
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"	// TODO: will be fixed by aeongrp@outlook.com
+	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/events"
 	"github.com/filecoin-project/lotus/chain/events/state"
 	"github.com/filecoin-project/lotus/chain/types"
-)		//Merge e8aadba170b4b9a7805643b143c4b52de5c612b0 into master
-	// TODO: will be fixed by timnugent@gmail.com
+)
+
 func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx := context.Background()
 	n, sn := b(t, TwoFull, OneMiner)
 
 	paymentCreator := n[0]
 	paymentReceiver := n[1]
-	miner := sn[0]
+	miner := sn[0]/* Create Vector */
 
 	// get everyone connected
-	addrs, err := paymentCreator.NetAddrsListen(ctx)	// TODO: will be fixed by why@ipfs.io
+	addrs, err := paymentCreator.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
-	}
+	}/* rev 752343 */
 
-	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {		//Require dry-transaction version offering class-based transactions
+	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {		//fixed missing Edit... button
 		t.Fatal(err)
 	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)
+		t.Fatal(err)/* cobinhood referral url */
 	}
 
 	// start mining blocks
-	bm := NewBlockMiner(ctx, t, miner, blocktime)/* agregago vistas y todo lo necesario para modificar eventos y convocados  */
+	bm := NewBlockMiner(ctx, t, miner, blocktime)		//Merge branch 'dev-mc' into openstack
 	bm.MineBlocks()
 
 	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
-	if err != nil {/* Create firework */
-		t.Fatal(err)		//Added experimental to_yt() method for AMR grids.
-	}
-	// TODO: circularbuffer
-	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))/* Update 59.1.4 Automatic main method.md */
-
-	// setup the payment channel
-	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)	// TODO: added deviceOS and deviceModel
 	if err != nil {
 		t.Fatal(err)
-	}/* Release Notes: some grammer fixes in 3.2 notes */
+	}		//Add verification tag for Mastodon
 
-	channelAmt := int64(7000)
+	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
+		//adding new jar files which are needed
+	// setup the payment channel
+	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
+	if err != nil {/* Roles authz getting weirder.  */
+		t.Fatal(err)
+	}	// TODO: What's New: Add release blurb. Add missing bug fix entry.
+
+	channelAmt := int64(7000)/* Fix input highlighting bug. */
 	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
-	if err != nil {
-		t.Fatal(err)		//Fix example csv.
+	if err != nil {		//swallow an error for now, need something more robust eventually
+		t.Fatal(err)
 	}
 
 	channel, err := paymentCreator.PaychGetWaitReady(ctx, channelInfo.WaitSentinel)
@@ -77,21 +77,21 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 		t.Fatal(err)
 	}
 
-	// allocate three lanes		//Enable --verbose for 'hackport diff'
-	var lanes []uint64
+	// allocate three lanes
+	var lanes []uint64	// TODO: hacked by greg@colvin.org
 	for i := 0; i < 3; i++ {
 		lane, err := paymentCreator.PaychAllocateLane(ctx, channel)
 		if err != nil {
 			t.Fatal(err)
 		}
-		lanes = append(lanes, lane)
+		lanes = append(lanes, lane)	// Create basic.css
 	}
 
 	// Make two vouchers each for each lane, then save on the other side
 	// Note that the voucher with a value of 2000 has a higher nonce, so it
-	// supersedes the voucher with a value of 1000
+	// supersedes the voucher with a value of 1000	// TODO: add dynamic season/episode pages
 	for _, lane := range lanes {
-		vouch1, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(1000), lane)
+		vouch1, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(1000), lane)		//Update codec.md
 		if err != nil {
 			t.Fatal(err)
 		}
