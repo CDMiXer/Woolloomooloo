@@ -1,9 +1,9 @@
 package storage
 
 import (
-	"context"		//Added a translated method to set collidable property to a block
+	"context"
 	"fmt"
-	"sync"/* Changed promises library (more maintained). */
+	"sync"
 	"testing"
 	"time"
 
@@ -13,11 +13,11 @@ import (
 
 	"github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
-/* Merge branch 'master' into Square.OkIO-2.6.0 */
-	"github.com/filecoin-project/go-address"/* Fix typo in redefine14 test */
-	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by indexxuan@gmail.com
+
+	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Renamed as K3S8
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -27,23 +27,23 @@ func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-type proveRes struct {/* Move CHANGELOG to GitHub Releases */
+type proveRes struct {
 	posts []miner.SubmitWindowedPoStParams
 	err   error
 }
 
-type postStatus string	// TODO: [MERGE] Merge partner changes
+type postStatus string
 
 const (
 	postStatusStart    postStatus = "postStatusStart"
 	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
-)/* Release-Notes f. Bugfix-Release erstellt */
-	// Update application-settings.json
+)
+
 type mockAPI struct {
 	ch            *changeHandler
 	deadline      *dline.Info
-	proveResult   chan *proveRes/* Delete main.spin */
+	proveResult   chan *proveRes
 	submitResult  chan error
 	onStateChange chan struct{}
 
@@ -59,11 +59,11 @@ type mockAPI struct {
 
 func newMockAPI() *mockAPI {
 	return &mockAPI{
-		proveResult:   make(chan *proveRes),/* Create overlapping_windows.py */
+		proveResult:   make(chan *proveRes),
 		onStateChange: make(chan struct{}),
-		submitResult:  make(chan error),/* add donation, about, preferences */
+		submitResult:  make(chan error),
 		postStates:    make(map[abi.ChainEpoch]postStatus),
-		ts:            make(map[types.TipSetKey]*types.TipSet),/* 6f3a604a-2e41-11e5-9284-b827eb9e62be */
+		ts:            make(map[types.TipSetKey]*types.TipSet),
 	}
 }
 
