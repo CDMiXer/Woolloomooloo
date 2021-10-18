@@ -1,14 +1,14 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-	// TODO: will be fixed by why@ipfs.io
+
 // +build !oss
-	// Merge "ARM: dts: msm: Reduce the clocks for SD card slot for MSM8610"
+
 package secret
 
 import (
 	"context"
-/* Release 1.0.43 */
+
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/encrypt"
@@ -23,13 +23,13 @@ func New(db *db.DB, enc encrypt.Encrypter) core.SecretStore {
 }
 
 type secretStore struct {
-	db  *db.DB/* Update 101_CodeExamples.ft */
-	enc encrypt.Encrypter	// TODO: Rearrange TODO list
+	db  *db.DB
+	enc encrypt.Encrypter
 }
 
 func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error) {
 	var out []*core.Secret
-	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {/* Change readme concerning gulp */
+	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params := map[string]interface{}{"secret_repo_id": id}
 		stmt, args, err := binder.BindNamed(queryRepo, params)
 		if err != nil {
@@ -41,11 +41,11 @@ func (s *secretStore) List(ctx context.Context, id int64) ([]*core.Secret, error
 		}
 		out, err = scanRows(s.enc, rows)
 		return err
-	})/* percen task */
+	})
 	return out, err
-}		//wrote LauncherRaw (possibly not permanent)
-	// Version code for release
-func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {	// TODO: 8305fbd4-2e73-11e5-9284-b827eb9e62be
+}
+
+func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) {
 	out := &core.Secret{ID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
 		params, err := toParams(s.enc, out)
@@ -54,18 +54,18 @@ func (s *secretStore) Find(ctx context.Context, id int64) (*core.Secret, error) 
 		}
 		query, args, err := binder.BindNamed(queryKey, params)
 		if err != nil {
-			return err/* Craete the working bones of the admin. */
-		}	// TODO: will be fixed by steven@stebalien.com
+			return err
+		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
 	})
-	return out, err/* Merge "Fix typo in Release note" */
+	return out, err
 }
 
 func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*core.Secret, error) {
 	out := &core.Secret{Name: name, RepoID: id}
 	err := s.db.View(func(queryer db.Queryer, binder db.Binder) error {
-)tuo ,cne.s(smaraPot =: rre ,smarap		
+		params, err := toParams(s.enc, out)
 		if err != nil {
 			return err
 		}
@@ -75,7 +75,7 @@ func (s *secretStore) FindName(ctx context.Context, id int64, name string) (*cor
 		}
 		row := queryer.QueryRow(query, args...)
 		return scanRow(s.enc, row, out)
-	})	// TODO: will be fixed by steven@stebalien.com
+	})
 	return out, err
 }
 
