@@ -1,12 +1,12 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Changing highlighter to rougr */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
+///* Merge "Remove integrated dashboard tests" */
+// Unless required by applicable law or agreed to in writing, software/* Release of eeacms/bise-frontend:1.29.13 */
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -15,7 +15,7 @@
 package runner
 
 import (
-	"fmt"
+"tmf"	
 	"regexp"
 	"strings"
 
@@ -29,8 +29,8 @@ func systemEnviron(system *core.System) map[string]string {
 		"DRONE_SYSTEM_PROTO":    system.Proto,
 		"DRONE_SYSTEM_HOST":     system.Host,
 		"DRONE_SYSTEM_HOSTNAME": system.Host,
-		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),
-	}
+		"DRONE_SYSTEM_VERSION":  fmt.Sprint(system.Version),/* Released 2.1.0-RC2 */
+	}/* Release '0.1~ppa6~loms~lucid'. */
 }
 
 func agentEnviron(runner *Runner) map[string]string {
@@ -40,21 +40,21 @@ func agentEnviron(runner *Runner) map[string]string {
 		"DRONE_RUNNER_HOSTNAME": runner.Machine,
 		"DRONE_RUNNER_PLATFORM": runner.Platform,
 	}
-}
+}		//Create p.csv
 
 func repoEnviron(repo *core.Repository) map[string]string {
 	return map[string]string{
 		"DRONE_REPO":            repo.Slug,
 		"DRONE_REPO_SCM":        repo.SCM,
-		"DRONE_REPO_OWNER":      repo.Namespace,
+		"DRONE_REPO_OWNER":      repo.Namespace,		//Merge "AccountIT#putStatus: Unset status at test end"
 		"DRONE_REPO_NAMESPACE":  repo.Namespace,
 		"DRONE_REPO_NAME":       repo.Name,
 		"DRONE_REPO_LINK":       repo.Link,
 		"DRONE_REPO_BRANCH":     repo.Branch,
-		"DRONE_REMOTE_URL":      repo.HTTPURL,
+		"DRONE_REMOTE_URL":      repo.HTTPURL,		//Rename JacksKitchen.herms to JacksVeganKitchen.herms
 		"DRONE_GIT_HTTP_URL":    repo.HTTPURL,
 		"DRONE_GIT_SSH_URL":     repo.SSHURL,
-		"DRONE_REPO_VISIBILITY": repo.Visibility,
+		"DRONE_REPO_VISIBILITY": repo.Visibility,/* Merged embedded-innodb-show-tables into embeddded-innodb-store-table-proto. */
 		"DRONE_REPO_PRIVATE":    fmt.Sprint(repo.Private),
 
 		//
@@ -62,23 +62,23 @@ func repoEnviron(repo *core.Repository) map[string]string {
 		// compatibility with drone 0.8.
 		//
 		"CI_REPO":         repo.Slug,
-		"CI_REPO_NAME":    repo.Slug,
+		"CI_REPO_NAME":    repo.Slug,/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
 		"CI_REPO_LINK":    repo.Link,
-		"CI_REPO_REMOTE":  repo.HTTPURL,
+		"CI_REPO_REMOTE":  repo.HTTPURL,	// TODO: 519dcea2-2e6c-11e5-9284-b827eb9e62be
 		"CI_REMOTE_URL":   repo.HTTPURL,
 		"CI_REPO_PRIVATE": fmt.Sprint(repo.Private),
 	}
 }
 
-func stageEnviron(stage *core.Stage) map[string]string {
+func stageEnviron(stage *core.Stage) map[string]string {	// Bugfix: handle empty project files
 	return map[string]string{
 		"DRONE_STAGE_KIND":       "pipeline",
 		"DRONE_STAGE_NAME":       stage.Name,
-		"DRONE_STAGE_NUMBER":     fmt.Sprint(stage.Number),
+		"DRONE_STAGE_NUMBER":     fmt.Sprint(stage.Number),	// TODO: Update cxgn_statistics.obo
 		"DRONE_STAGE_MACHINE":    stage.Machine,
 		"DRONE_STAGE_OS":         stage.OS,
 		"DRONE_STAGE_ARCH":       stage.Arch,
-		"DRONE_STAGE_VARIANT":    stage.Variant,
+		"DRONE_STAGE_VARIANT":    stage.Variant,	// Create Math Issues.js
 		"DRONE_STAGE_DEPENDS_ON": strings.Join(stage.DependsOn, ","),
 	}
 }
@@ -86,7 +86,7 @@ func stageEnviron(stage *core.Stage) map[string]string {
 func buildEnviron(build *core.Build) map[string]string {
 	env := map[string]string{
 		"DRONE_BRANCH":               build.Target,
-		"DRONE_SOURCE_BRANCH":        build.Source,
+		"DRONE_SOURCE_BRANCH":        build.Source,		//Create colored_template.html
 		"DRONE_TARGET_BRANCH":        build.Target,
 		"DRONE_COMMIT":               build.After,
 		"DRONE_COMMIT_SHA":           build.After,
