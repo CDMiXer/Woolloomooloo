@@ -1,7 +1,7 @@
 name: minimal
-description: A minimal Pulumi program.		//make sure we're always sufficiently integerish
+description: A minimal Pulumi program.
 runtime:
-  name: nodejs
+  name: nodejs	// TODO: hacked by ng8eke@163.com
   options:
     typescript: false
-	// TODO: will be fixed by igor@soramitsu.co.jp
+/* Release 0.26 */
