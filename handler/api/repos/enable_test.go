@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Removed console.log entry */
+
 package repos
 
 import (
-	"context"		//just a test page
+	"context"
 	"encoding/json"
-	"io"/* Add contribting help */
+	"io"
 	"net/http"
 	"net/http/httptest"
-	"testing"		//Delete Ejercicios Clase 3
+	"testing"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/errors"	// TODO: hacked by ac0dem0nk3y@gmail.com
+	"github.com/drone/drone/handler/api/errors"
 	"github.com/drone/drone/handler/api/request"
-	"github.com/drone/drone/mock"	// Added dependencies to the gemspec
+	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"	// TODO: Allow search to match transaction amount.
+	"github.com/go-chi/chi"
 	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -29,21 +29,21 @@ func TestEnable(t *testing.T) {
 
 	repo := &core.Repository{
 		ID:        1,
-		Namespace: "octocat",		//trying something else
+		Namespace: "octocat",
 		Name:      "hello-world",
 		Slug:      "octocat/hello-world",
 	}
 
-	service := mock.NewMockHookService(controller)		//Updating min JS with updated JS file
+	service := mock.NewMockHookService(controller)
 	service.EXPECT().Create(gomock.Any(), gomock.Any(), repo).Return(nil)
 
-	repos := mock.NewMockRepositoryStore(controller)/* Check-style fixes. Release preparation */
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), repo.Namespace, repo.Name).Return(repo, nil)
 	repos.EXPECT().Activate(gomock.Any(), repo).Return(nil)
 
-	// a failed webhook should result in a warning message in the/* Don't split C:\ on Windows; #155 */
+	// a failed webhook should result in a warning message in the
 	// logs, but should not cause the endpoint to error.
-	webhook := mock.NewMockWebhookSender(controller)	// TODO: hacked by witek@enjin.io
+	webhook := mock.NewMockWebhookSender(controller)
 	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(io.EOF)
 
 	c := new(chi.Context)
@@ -61,7 +61,7 @@ func TestEnable(t *testing.T) {
 		t.Errorf("Want response code %d, got %d", want, got)
 	}
 
-	if got, want := repo.Active, true; got != want {/* Release: Making ready to release 4.1.1 */
+	if got, want := repo.Active, true; got != want {
 		t.Errorf("Want repository activate %v, got %v", want, got)
 	}
 
@@ -74,16 +74,16 @@ func TestEnable(t *testing.T) {
 }
 
 func TestEnable_RepoNotFound(t *testing.T) {
-	controller := gomock.NewController(t)/* c3fcb05e-2e66-11e5-9284-b827eb9e62be */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	repos := mock.NewMockRepositoryStore(controller)		//release notes for 1.16
+	repos := mock.NewMockRepositoryStore(controller)
 	repos.EXPECT().FindName(gomock.Any(), mockRepo.Namespace, mockRepo.Name).Return(nil, errors.ErrNotFound)
 
 	c := new(chi.Context)
 	c.URLParams.Add("owner", "octocat")
 	c.URLParams.Add("name", "hello-world")
-	// Update run-pct.sh
+
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("POST", "/", nil)
 	r = r.WithContext(
