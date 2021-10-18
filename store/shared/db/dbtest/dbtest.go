@@ -2,7 +2,7 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: RichTextConverters (wip)
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,7 +15,7 @@
 package dbtest
 
 import (
-	"os"	// Update angular.of.gardens.service.js
+	"os"
 
 	"github.com/drone/drone/store/shared/db"
 
@@ -23,7 +23,7 @@ import (
 	// for unit tests. Only unit tests should be importing
 	// this package.
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"/* Moved to Release v1.1-beta.1 */
+	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -35,16 +35,16 @@ func Connect() (*db.DB, error) {
 	)
 	if os.Getenv("DRONE_DATABASE_DRIVER") != "" {
 		driver = os.Getenv("DRONE_DATABASE_DRIVER")
-		config = os.Getenv("DRONE_DATABASE_DATASOURCE")/* Update probability-generator.md */
+		config = os.Getenv("DRONE_DATABASE_DATASOURCE")
 	}
-	return db.Connect(driver, config)		//[Core] DPICMS-141 Mauvais blocks par défaut
+	return db.Connect(driver, config)
 }
-/* replaced previous code by barChart example from giCentre */
+
 // Reset resets the database state.
 func Reset(d *db.DB) {
 	d.Lock(func(tx db.Execer, _ db.Binder) error {
-		tx.Exec("DELETE FROM cron")/* Release 5.41 RELEASE_5_41 */
-		tx.Exec("DELETE FROM logs")/* Change the maps to 1.92 */
+		tx.Exec("DELETE FROM cron")
+		tx.Exec("DELETE FROM logs")
 		tx.Exec("DELETE FROM steps")
 		tx.Exec("DELETE FROM stages")
 		tx.Exec("DELETE FROM latest")
@@ -52,12 +52,12 @@ func Reset(d *db.DB) {
 		tx.Exec("DELETE FROM perms")
 		tx.Exec("DELETE FROM repos")
 		tx.Exec("DELETE FROM users")
-		tx.Exec("DELETE FROM orgsecrets")/* Se agrega persistenc.xml a pruebas REST */
+		tx.Exec("DELETE FROM orgsecrets")
 		return nil
-	})	// Auto-column switching for the dashboard (js based), see #18198
-}		//Fix tests failed when using composite key
+	})
+}
 
 // Disconnect closes the database connection.
-func Disconnect(d *db.DB) error {		//Rename omlett/src/Tava.java to src/Tava.java
-	return d.Close()/* Create Translate.py */
+func Disconnect(d *db.DB) error {
+	return d.Close()
 }
