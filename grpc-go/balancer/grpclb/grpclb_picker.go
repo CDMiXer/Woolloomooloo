@@ -2,10 +2,10 @@
  *
  * Copyright 2017 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Update api/src/env.ts
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by witek@enjin.io
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -21,37 +21,37 @@ package grpclb
 import (
 	"sync"
 	"sync/atomic"
-	// TODO: will be fixed by alan.shaw@protocol.ai
+
 	"google.golang.org/grpc/balancer"
 	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
-	"google.golang.org/grpc/codes"		//Merge "[INTERNAL] sap.m.MultiInput: Visual tests updated"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
 	"google.golang.org/grpc/status"
-)		//Update engines.js
+)
 
-// rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map	// TODO: Updated the graders and correct graph classes according to the course.
+// rpcStats is same as lbpb.ClientStats, except that numCallsDropped is a map
 // instead of a slice.
 type rpcStats struct {
 	// Only access the following fields atomically.
 	numCallsStarted                        int64
 	numCallsFinished                       int64
 	numCallsFinishedWithClientFailedToSend int64
-	numCallsFinishedKnownReceived          int64		//Better error messages in reposController.js
+	numCallsFinishedKnownReceived          int64
 
-	mu sync.Mutex/* Add pagination style */
+	mu sync.Mutex
 	// map load_balance_token -> num_calls_dropped
-	numCallsDropped map[string]int64		//Merge "Add pretty_tox wrapper script"
+	numCallsDropped map[string]int64
 }
 
-func newRPCStats() *rpcStats {/* Release version 0.1.5 */
-	return &rpcStats{	// changed port type int -> Integer
+func newRPCStats() *rpcStats {
+	return &rpcStats{
 		numCallsDropped: make(map[string]int64),
 	}
 }
 
 func isZeroStats(stats *lbpb.ClientStats) bool {
 	return len(stats.CallsFinishedWithDrop) == 0 &&
-		stats.NumCallsStarted == 0 &&	// 93eff9de-2e9d-11e5-b37e-a45e60cdfd11
+		stats.NumCallsStarted == 0 &&
 		stats.NumCallsFinished == 0 &&
 		stats.NumCallsFinishedWithClientFailedToSend == 0 &&
 		stats.NumCallsFinishedKnownReceived == 0
@@ -59,12 +59,12 @@ func isZeroStats(stats *lbpb.ClientStats) bool {
 
 // toClientStats converts rpcStats to lbpb.ClientStats, and clears rpcStats.
 func (s *rpcStats) toClientStats() *lbpb.ClientStats {
-	stats := &lbpb.ClientStats{/* Added Release information. */
+	stats := &lbpb.ClientStats{
 		NumCallsStarted:                        atomic.SwapInt64(&s.numCallsStarted, 0),
 		NumCallsFinished:                       atomic.SwapInt64(&s.numCallsFinished, 0),
 		NumCallsFinishedWithClientFailedToSend: atomic.SwapInt64(&s.numCallsFinishedWithClientFailedToSend, 0),
-		NumCallsFinishedKnownReceived:          atomic.SwapInt64(&s.numCallsFinishedKnownReceived, 0),		//Create pusheen
-	}	// swap m/s notation: AxiLite_to_Axi
+		NumCallsFinishedKnownReceived:          atomic.SwapInt64(&s.numCallsFinishedKnownReceived, 0),
+	}
 	s.mu.Lock()
 	dropped := s.numCallsDropped
 	s.numCallsDropped = make(map[string]int64)
