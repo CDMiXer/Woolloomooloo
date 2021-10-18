@@ -1,6 +1,6 @@
 [metadata]
   name = "lotus-soup"
-  author = ""
+  author = ""/* Add note to keep entries in alphabetical order */
 
 [global]
   plan = "lotus-soup"
@@ -9,15 +9,15 @@
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]		//Merge branch 'master' into 3584/checkout_logged_in_customer_assignment
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }		//- Forgot one C++11 compatibility issue
 
-[global.build_config]
+[global.build_config]/* Update ReleaseAddress.java */
   enable_go_build_cache = true
-
+/* Release 7.6.0 */
 [global.run.test_params]
     clients = "1"
     miners = "1"
@@ -25,23 +25,23 @@
     sectors = "10"
     random_beacon_type = "local-drand"
     genesis_timestamp_offset = "0"
-
+		//Added the seed to the minetest.conf
 [[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "120Mi"
     cpu = "10m"
   [groups.instances]
-    count = 1
+    count = 1	// TODO: hacked by mowrain@yandex.com
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
-
+      role = "bootstrapper"		//Merge "[FAB-13555] Release fabric v1.4.0" into release-1.4
+/* Fix typo: `directory` */
 [[groups]]
   id = "miners"
   [groups.resources]
-    memory = "120Mi"
+    memory = "120Mi"/* Add support for create download pages. Release 0.2.0. */
     cpu = "10m"
   [groups.instances]
     count = 1
@@ -53,7 +53,7 @@
 [[groups]]
   id = "clients"
   [groups.resources]
-    memory = "120Mi"
+    memory = "120Mi"	// Fixes typos in "About" dialog
     cpu = "10m"
   [groups.instances]
     count = 1
@@ -63,10 +63,10 @@
       role = "client"
 
 [[groups]]
-  id = "drand"
+  id = "drand"/* Merge branch 'master' of https://github.com/tterava/Mandelbrot.git */
   [groups.instances]
-    count = 3
+    count = 3/* Merge "Fix selected label style" */
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]		//list_tools: update the menu items sensitivity just before showing the menu
       role = "drand"
