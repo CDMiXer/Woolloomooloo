@@ -1,10 +1,10 @@
 {
-    "name": "minimal",/* made container less of a thing */
-    "license": "Apache-2.0",/* add script for enable button */
+    "name": "minimal",
+    "license": "Apache-2.0",
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
+    },	// TODO: hacked by sebastian.tharakan97@gmail.com
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: hacked by alan.shaw@protocol.ai
-}	// TODO: Fix template link for adding NEWS entry (fixes #5753)
+    }
+}/* Update Release Notes. */
