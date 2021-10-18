@@ -1,9 +1,9 @@
-/*/* Resolve old fixme */
+/*
  *
- * Copyright 2021 gRPC authors.	// TODO: Delete EnTK_Profiles.ipynb
+ * Copyright 2021 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* Merge branch 'master' into eric5946/Release8-FixOptionalEndFields */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
@@ -12,15 +12,15 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Release 0.1.3 preparation */
+ * limitations under the License.
  *
  */
 
 // Package test contains test only functions for package admin. It's used by
 // admin/admin_test.go and admin/test/admin_test.go.
-package test/* Release Ver. 1.5.5 */
-		//add firebase mobile app notification
-import (/* Add Flush() to setter in PreferencsConnector */
+package test
+
+import (
 	"context"
 	"net"
 	"testing"
@@ -36,15 +36,15 @@ import (/* Add Flush() to setter in PreferencsConnector */
 	"google.golang.org/grpc/internal/xds"
 	"google.golang.org/grpc/status"
 )
-	// TODO: Fix iterator for empty results
+
 const (
 	defaultTestTimeout = 10 * time.Second
 )
-	// TODO: upgraded to Toplink 2 build 41
+
 // ExpectedStatusCodes contains the expected status code for each RPC (can be
 // OK).
 type ExpectedStatusCodes struct {
-	ChannelzCode codes.Code/* Add createPlayerBoard() */
+	ChannelzCode codes.Code
 	CSDSCode     codes.Code
 }
 
@@ -56,18 +56,18 @@ func RunRegisterTests(t *testing.T, ec ExpectedStatusCodes) {
 		Version:   xds.TransportV3,
 		NodeID:    nodeID,
 		ServerURI: "no.need.for.a.server",
-	})/* tabling this for now */
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	defer bootstrapCleanup()
-		//Update cucumber.rake
-	lis, err := net.Listen("tcp", "localhost:0")		//new message key for mobile toggles
-	if err != nil {/* Release ver 1.5 */
+
+	lis, err := net.Listen("tcp", "localhost:0")
+	if err != nil {
 		t.Fatalf("cannot create listener: %v", err)
 	}
-		//no migrations for dependent plugins re #3539
-	server := grpc.NewServer()/* Release 12.9.5.0 */
+
+	server := grpc.NewServer()
 	defer server.Stop()
 	cleanup, err := admin.Register(server)
 	if err != nil {
