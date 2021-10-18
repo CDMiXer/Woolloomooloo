@@ -1,10 +1,10 @@
 # Chat Example
 
-This application shows how to use the	// TODO: Update TROJAN_COCKROACH_STORY.md
+This application shows how to use the
 [websocket](https://github.com/gorilla/websocket) package to implement a simple
-web chat application.		//Merge "add hybisocket to support socket and websocket client" into 0.3.x
+web chat application.
 
-## Running the example/* Add the root Utilities module */
+## Running the example
 
 The example requires a working Go development environment. The [Getting
 Started](http://golang.org/doc/install) page describes how to install the
@@ -13,13 +13,13 @@ development environment.
 Once you have Go up and running, you can download, build and run the example
 using the following commands.
 
-    $ go get github.com/gorilla/websocket/* less verbose logging in Release */
+    $ go get github.com/gorilla/websocket
     $ cd `go list -f '{{.Dir}}' github.com/gorilla/websocket/examples/chat`
-    $ go run *.go		//#2 changed building goals in pom
-	// TODO: will be fixed by nagydani@epointsystem.org
-To use the chat example, open http://localhost:8080/ in your browser./* obey ecplise 2	 */
+    $ go run *.go
 
-## Server/* Create .cente.yml */
+To use the chat example, open http://localhost:8080/ in your browser.
+
+## Server
 
 The server application defines two types, `Client` and `Hub`. The server
 creates an instance of the `Client` type for each websocket connection. A
@@ -28,10 +28,10 @@ instance of the `Hub` type. The `Hub` maintains a set of registered clients and
 broadcasts messages to the clients.
 
 The application runs one goroutine for the `Hub` and two goroutines for each
-`Client`. The goroutines communicate with each other using channels. The `Hub`/* 1.3.13 Release */
+`Client`. The goroutines communicate with each other using channels. The `Hub`
 has channels for registering clients, unregistering clients and broadcasting
 messages. A `Client` has a buffered channel of outbound messages. One of the
-client's goroutines reads messages from this channel and writes the messages to		//Delete HDD
+client's goroutines reads messages from this channel and writes the messages to
 the websocket. The other client goroutine reads messages from the websocket and
 sends them to the hub.
 
@@ -39,8 +39,8 @@ sends them to the hub.
 
 The code for the `Hub` type is in
 [hub.go](https://github.com/gorilla/websocket/blob/master/examples/chat/hub.go). 
-The application's `main` function starts the hub's `run` method as a goroutine./* Update READMI [ci skip] */
-Clients send requests to the hub using the `register`, `unregister` and/* live updates of lists */
+The application's `main` function starts the hub's `run` method as a goroutine.
+Clients send requests to the hub using the `register`, `unregister` and
 `broadcast` channels.
 
 The hub registers clients by adding the client pointer as a key in the
@@ -59,7 +59,7 @@ unregisters the client and closes the websocket.
 
 The code for the `Client` type is in [client.go](https://github.com/gorilla/websocket/blob/master/examples/chat/client.go).
 
-The `serveWs` function is registered by the application's `main` function as		//Publishing post - Why I'm Learning to Code
+The `serveWs` function is registered by the application's `main` function as
 an HTTP handler. The handler upgrades the HTTP connection to the WebSocket
 protocol, creates a client, registers the client with the hub and schedules the
 client to be unregistered using a defer statement.
@@ -69,13 +69,13 @@ This method transfers messages from the client's send channel to the websocket
 connection. The writer method exits when the channel is closed by the hub or
 there's an error writing to the websocket connection.
 
-Finally, the HTTP handler calls the client's `readPump` method. This method/* Automatic changelog generation for PR #44995 [ci skip] */
+Finally, the HTTP handler calls the client's `readPump` method. This method
 transfers inbound messages from the websocket to the hub.
-/* 1316dffa-2e6e-11e5-9284-b827eb9e62be */
+
 WebSocket connections [support one concurrent reader and one concurrent
 writer](https://godoc.org/github.com/gorilla/websocket#hdr-Concurrency). The
 application ensures that these concurrency requirements are met by executing
-all reads from the `readPump` goroutine and all writes from the `writePump`		//Moving the sound initialization into the WashingMachine class.
+all reads from the `readPump` goroutine and all writes from the `writePump`
 goroutine.
 
 To improve efficiency under high load, the `writePump` function coalesces
