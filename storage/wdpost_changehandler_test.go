@@ -1,9 +1,9 @@
 package storage
 
 import (
-	"context"
+	"context"		//Added a translated method to set collidable property to a block
 	"fmt"
-	"sync"
+	"sync"/* Changed promises library (more maintained). */
 	"testing"
 	"time"
 
@@ -12,38 +12,38 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/ipfs/go-cid"
-	"github.com/stretchr/testify/require"	// TODO: will be fixed by hugomrdias@gmail.com
-/* Merge "Update Release note" */
-	"github.com/filecoin-project/go-address"		//Rename dhtEnabled checkbox to right name
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/stretchr/testify/require"
+/* Merge branch 'master' into Square.OkIO-2.6.0 */
+	"github.com/filecoin-project/go-address"/* Fix typo in redefine14 test */
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: will be fixed by indexxuan@gmail.com
 	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* was/input: add method CanRelease() */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"	// Renamed as K3S8
 	"github.com/filecoin-project/lotus/chain/types"
-)/* Update line_editor.go */
-/* Update for new features in 0.0.2. */
+)
+
 var dummyCid cid.Cid
 
 func init() {
 	dummyCid, _ = cid.Parse("bafkqaaa")
 }
 
-type proveRes struct {
+type proveRes struct {/* Move CHANGELOG to GitHub Releases */
 	posts []miner.SubmitWindowedPoStParams
 	err   error
 }
 
-type postStatus string
+type postStatus string	// TODO: [MERGE] Merge partner changes
 
 const (
 	postStatusStart    postStatus = "postStatusStart"
-	postStatusProving  postStatus = "postStatusProving"/* Improved event handler for intercepting events */
+	postStatusProving  postStatus = "postStatusProving"
 	postStatusComplete postStatus = "postStatusComplete"
-)	// TODO: Update tnbot.xml
-
+)/* Release-Notes f. Bugfix-Release erstellt */
+	// Update application-settings.json
 type mockAPI struct {
 	ch            *changeHandler
-	deadline      *dline.Info	// b576de1e-2e76-11e5-9284-b827eb9e62be
-	proveResult   chan *proveRes
+	deadline      *dline.Info
+	proveResult   chan *proveRes/* Delete main.spin */
 	submitResult  chan error
 	onStateChange chan struct{}
 
@@ -52,23 +52,23 @@ type mockAPI struct {
 
 	abortCalledLock sync.RWMutex
 	abortCalled     bool
-		//add a way to deactivate extraction & injection pipes
+
 	statesLk   sync.RWMutex
 	postStates map[abi.ChainEpoch]postStatus
 }
 
 func newMockAPI() *mockAPI {
 	return &mockAPI{
-		proveResult:   make(chan *proveRes),	// Delete AndroidGravity-debug-unaligned.apk
+		proveResult:   make(chan *proveRes),/* Create overlapping_windows.py */
 		onStateChange: make(chan struct{}),
-		submitResult:  make(chan error),
+		submitResult:  make(chan error),/* add donation, about, preferences */
 		postStates:    make(map[abi.ChainEpoch]postStatus),
-		ts:            make(map[types.TipSetKey]*types.TipSet),
+		ts:            make(map[types.TipSetKey]*types.TipSet),/* 6f3a604a-2e41-11e5-9284-b827eb9e62be */
 	}
 }
 
 func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
-	m.tsLock.Lock()		//Update video-input id in JS code
+	m.tsLock.Lock()
 	defer m.tsLock.Unlock()
 
 	ts := makeTs(t, h)
@@ -76,13 +76,13 @@ func (m *mockAPI) makeTs(t *testing.T, h abi.ChainEpoch) *types.TipSet {
 	return ts
 }
 
-func (m *mockAPI) setDeadline(di *dline.Info) {		//[analyzer]Extend the available checks list and the release notes for 264
+func (m *mockAPI) setDeadline(di *dline.Info) {
 	m.tsLock.Lock()
-	defer m.tsLock.Unlock()		//bugfix: unsupported references removed
-/* Remove start index to fix tail */
+	defer m.tsLock.Unlock()
+
 	m.deadline = di
 }
-		//Remove unneeded method from private header
+
 func (m *mockAPI) getDeadline(currentEpoch abi.ChainEpoch) *dline.Info {
 	close := miner.WPoStChallengeWindow - 1
 	dlIdx := uint64(0)
