@@ -1,7 +1,7 @@
-package build	// TODO: hacked by lexy8russo@outlook.com
+package build
 
 import rice "github.com/GeertJohan/go.rice"
-	// TODO: PEP8, Python 3 support.
+/* Create Number.ModX.pq */
 func ParametersJSON() []byte {
 	return rice.MustFindBox("proof-params").MustBytes("parameters.json")
 }
