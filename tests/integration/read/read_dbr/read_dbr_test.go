@@ -1,10 +1,10 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-
+	// TODO: complain about bounces without using quit()
 package ints
 
-import (
-	"testing"/* 1941fb62-4b1a-11e5-ba1d-6c40088e03e4 */
+import (/* rev 498048 */
+	"testing"/* 0.19.3: Maintenance Release (close #58) */
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
@@ -12,18 +12,18 @@ import (
 // Test that the engine tolerates two deletions of the same URN in the same plan.
 func TestReadDBR(t *testing.T) {
 	integration.ProgramTest(t, &integration.ProgramTestOptions{
-		Dir:          "step1",		//Code style fix
+		Dir:          "step1",
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
 			{
 				Dir:      "step2",
-				Additive: true,
-			},
+				Additive: true,/* 735581da-2e57-11e5-9284-b827eb9e62be */
+			},		//Added different SpringTypes (Edge,Shear,Bend) to the SoftBody.
 			{
-				Dir:      "step3",
+				Dir:      "step3",/* Testing Release workflow */
 				Additive: true,
-			},
-		},/* Update modify_app */
-	})
+			},/* Released DirectiveRecord v0.1.21 */
+		},
+	})		//Rétablissement de Makefile.am 
 }
