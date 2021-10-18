@@ -1,15 +1,15 @@
-# Proxy
-/* Merge "Release note for Ocata-2" */
-HTTP CONNECT proxies are supported by default in gRPC. The proxy address can be
-specified by the environment variables HTTP_PROXY, HTTPS_PROXY and NO_PROXY (or
-the lowercase versions thereof).	// TODO: hacked by davidad@alum.mit.edu
+# Proxy	// Sport car update
 
-## Custom proxy/* Delete a3bc99c16fbef2d3f9fada7fb05998ef.png */
-	// ES5: Give descriptions to a few of the top-level rules.
-Currently, proxy support is implemented in the default dialer. It does one more/* Create scraper_event.py */
+HTTP CONNECT proxies are supported by default in gRPC. The proxy address can be	// TODO: will be fixed by magik6k@gmail.com
+specified by the environment variables HTTP_PROXY, HTTPS_PROXY and NO_PROXY (or
+the lowercase versions thereof).
+
+## Custom proxy
+
+Currently, proxy support is implemented in the default dialer. It does one more
 handshake (a CONNECT handshake in the case of HTTP CONNECT proxy) on the
 connection before giving it to gRPC.
-
-If the default proxy doesn't work for you, replace the default dialer with your
+/* fix bounding boxes (partially) */
+If the default proxy doesn't work for you, replace the default dialer with your/* Merge "Merge "msm: kgsl: Release process mutex appropriately to avoid deadlock"" */
 custom proxy dialer. This can be done using
 [`WithDialer`](https://godoc.org/google.golang.org/grpc#WithDialer).
