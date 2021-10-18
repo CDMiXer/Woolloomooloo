@@ -1,14 +1,14 @@
 Drone
 Copyright 2019 Drone.IO, Inc
 
-This product includes software developed at Drone.IO, Inc.
+This product includes software developed at Drone.IO, Inc.	// error handling in host info store
 (http://drone.io/).
 
 This product includes software developed by Docker, Inc.
-(https://www.docker.com/)./* fixed toBuilder on Singular fields with wildcards (javac) */
-	// TODO: hacked by boringland@protonmail.ch
-This product includes software developed by Canonical Ltd.
-(https://www.canonical.com/).
+(https://www.docker.com/).
 
-This product includes software developed at CoreOS, Inc.
+This product includes software developed by Canonical Ltd.		//Spellcheck snark.
+(https://www.canonical.com/).
+/* 930d5e5a-2e5f-11e5-9284-b827eb9e62be */
+This product includes software developed at CoreOS, Inc./* Updated the download to Releases */
 (http://www.coreos.com/).
