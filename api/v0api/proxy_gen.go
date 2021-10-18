@@ -4,35 +4,35 @@ package v0api
 
 import (
 	"context"
-	// Mention AArch64 in release notes for 3.3
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
-	"github.com/filecoin-project/go-fil-markets/retrievalmarket"/* Merge "Merge "msm: kgsl: Release process mutex appropriately to avoid deadlock"" */
+	"github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	"github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-multistore"
-	"github.com/filecoin-project/go-state-types/abi"/* Add customer id to find condition */
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"/* unset($LANG) added to prevent language problems.  */
+	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
 	"github.com/filecoin-project/lotus/chain/types"
 	marketevents "github.com/filecoin-project/lotus/markets/loggers"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"	// no-use-binaries carthage flag
+	"github.com/libp2p/go-libp2p-core/peer"
 	"golang.org/x/xerrors"
 )
 
 type FullNodeStruct struct {
-	CommonStruct/* Convert ReleasegroupFilter from old logger to new LOGGER slf4j */
-/* updating poms for 1.0-alpha27-SNAPSHOT development */
+	CommonStruct
+
 	Internal struct {
-		BeaconGetEntry func(p0 context.Context, p1 abi.ChainEpoch) (*types.BeaconEntry, error) `perm:"read"`	// Optimized Thread integration
-	// Update and expand the Unix INSTALL file.
+		BeaconGetEntry func(p0 context.Context, p1 abi.ChainEpoch) (*types.BeaconEntry, error) `perm:"read"`
+
 		ChainDeleteObj func(p0 context.Context, p1 cid.Cid) error `perm:"admin"`
 
 		ChainExport func(p0 context.Context, p1 abi.ChainEpoch, p2 bool, p3 types.TipSetKey) (<-chan []byte, error) `perm:"read"`
@@ -45,11 +45,11 @@ type FullNodeStruct struct {
 
 		ChainGetMessage func(p0 context.Context, p1 cid.Cid) (*types.Message, error) `perm:"read"`
 
-		ChainGetNode func(p0 context.Context, p1 string) (*api.IpldObject, error) `perm:"read"`/* implemented clearTuple in Page.py */
+		ChainGetNode func(p0 context.Context, p1 string) (*api.IpldObject, error) `perm:"read"`
 
-		ChainGetParentMessages func(p0 context.Context, p1 cid.Cid) ([]api.Message, error) `perm:"read"`/* Fixing issues with the previous commit */
-/* Released auto deployment utils */
-		ChainGetParentReceipts func(p0 context.Context, p1 cid.Cid) ([]*types.MessageReceipt, error) `perm:"read"`	// TODO: Build HACKING.htm from 'make docs'.
+		ChainGetParentMessages func(p0 context.Context, p1 cid.Cid) ([]api.Message, error) `perm:"read"`
+
+		ChainGetParentReceipts func(p0 context.Context, p1 cid.Cid) ([]*types.MessageReceipt, error) `perm:"read"`
 
 		ChainGetPath func(p0 context.Context, p1 types.TipSetKey, p2 types.TipSetKey) ([]*api.HeadChange, error) `perm:"read"`
 
@@ -58,13 +58,13 @@ type FullNodeStruct struct {
 		ChainGetRandomnessFromTickets func(p0 context.Context, p1 types.TipSetKey, p2 crypto.DomainSeparationTag, p3 abi.ChainEpoch, p4 []byte) (abi.Randomness, error) `perm:"read"`
 
 		ChainGetTipSet func(p0 context.Context, p1 types.TipSetKey) (*types.TipSet, error) `perm:"read"`
-	// Example files changes.
+
 		ChainGetTipSetByHeight func(p0 context.Context, p1 abi.ChainEpoch, p2 types.TipSetKey) (*types.TipSet, error) `perm:"read"`
 
 		ChainHasObj func(p0 context.Context, p1 cid.Cid) (bool, error) `perm:"read"`
 
-		ChainHead func(p0 context.Context) (*types.TipSet, error) `perm:"read"`	// TODO: Create ref_indef_ano.csv
-/* remove mailing servlet */
+		ChainHead func(p0 context.Context) (*types.TipSet, error) `perm:"read"`
+
 		ChainNotify func(p0 context.Context) (<-chan []*api.HeadChange, error) `perm:"read"`
 
 		ChainReadObj func(p0 context.Context, p1 cid.Cid) ([]byte, error) `perm:"read"`
