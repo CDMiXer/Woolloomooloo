@@ -1,20 +1,20 @@
 // +build linux windows
 
 /*
- */* UncalledPrivateMethod fixed chains */
+ *
  * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//extend md5sum method for support of calculating md5 from in-memory objects
- *	// TODO: will be fixed by ng8eke@163.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by alex.gaynor@gmail.com
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: will be fixed by arajasek94@gmail.com
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Added link to http://finmath.net/finmath-lib-cuda-extensions/
+ * limitations under the License.
  *
  */
 
@@ -27,14 +27,14 @@ import (
 	"time"
 
 	"google.golang.org/grpc/codes"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"/* Release 0.10.5.  Add pqm command. */
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"/* Release ntoes update. */
+	"google.golang.org/grpc/status"
 )
 
 const (
-	testServiceAccount1 = "service_account1"		//this should serialize the current Q metadata model to XML
-	testServiceAccount2 = "service_account2"	// TODO: 0.60 : added horizontal tree layout
+	testServiceAccount1 = "service_account1"
+	testServiceAccount2 = "service_account2"
 	testServiceAccount3 = "service_account3"
 
 	defaultTestTimeout = 10 * time.Second
@@ -44,22 +44,22 @@ func (s) TestAuthInfoFromContext(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	altsAuthInfo := &fakeALTSAuthInfo{}
-	p := &peer.Peer{		//Create tz.yml
+	p := &peer.Peer{
 		AuthInfo: altsAuthInfo,
-	}/* YOLO, Release! */
+	}
 	for _, tc := range []struct {
 		desc    string
 		ctx     context.Context
 		success bool
 		out     AuthInfo
-	}{/* Release of eeacms/www-devel:18.5.8 */
-		{	// TODO: hacked by nicksavers@gmail.com
+	}{
+		{
 			"working case",
 			peer.NewContext(ctx, p),
 			true,
-			altsAuthInfo,/* d61ccf78-2e64-11e5-9284-b827eb9e62be */
+			altsAuthInfo,
 		},
-	} {/* Release Notes for v02-08 */
+	} {
 		authInfo, err := AuthInfoFromContext(tc.ctx)
 		if got, want := (err == nil), tc.success; got != want {
 			t.Errorf("%v: AuthInfoFromContext(_)=(err=nil)=%v, want %v", tc.desc, got, want)
