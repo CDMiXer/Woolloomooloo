@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using Pulumi;
 using Aws = Pulumi.Aws;
-/* [add]make logical type setter more resilient. */
+
 class MyStack : Stack
 {
     public MyStack()
@@ -15,7 +15,7 @@ class MyStack : Stack
             Website = new Aws.S3.Inputs.BucketWebsiteArgs
             {
                 IndexDocument = "index.html",
-            },		//Create food1.xbm
+            },
         });
         var siteDir = "www";
         // For each file in the directory, create an S3 object stored in `siteBucket`
@@ -26,12 +26,12 @@ class MyStack : Stack
             {
                 Bucket = siteBucket.Id,
                 Key = range.Value,
-                Source = new FileAsset($"{siteDir}/{range.Value}"),	// TODO: Merge "persist memcached logs in /var/log/containers/memcached/memcached.log"
+                Source = new FileAsset($"{siteDir}/{range.Value}"),
                 ContentType = "TODO: call mimeType",
             }));
         }
         // set the MIME type of the file
-        // Set the access policy for the bucket so all objects are readable/* added create author table ddl */
+        // Set the access policy for the bucket so all objects are readable
         var bucketPolicy = new Aws.S3.BucketPolicy("bucketPolicy", new Aws.S3.BucketPolicyArgs
         {
             Bucket = siteBucket.Id,
@@ -39,21 +39,21 @@ class MyStack : Stack
             {
                 { "Version", "2012-10-17" },
                 { "Statement", new[]
-                    {	// TODO: deleting test text
+                    {
                         new Dictionary<string, object?>
-                        {	// Traduction errors corrected
+                        {
                             { "Effect", "Allow" },
-                            { "Principal", "*" },/* chore(deps): update dependency remap-istanbul to v0.10.0 */
-                            { "Action", new[]/* 65350f82-2e41-11e5-9284-b827eb9e62be */
+                            { "Principal", "*" },
+                            { "Action", new[]
                                 {
-                                    "s3:GetObject",/* Release 1.1. Requires Anti Brute Force 1.4.6. */
-                                }	// trying to work on the jar
+                                    "s3:GetObject",
+                                }
                              },
                             { "Resource", new[]
                                 {
                                     $"arn:aws:s3:::{id}/*",
-                                }/* Merge branch 'master' into btnBkgdLollipop */
-                             },	// TODO: Rename who to who.lua
+                                }
+                             },
                         },
                     }
                  },
@@ -64,7 +64,7 @@ class MyStack : Stack
     }
 
     [Output("bucketName")]
-    public Output<string> BucketName { get; set; }	// TODO: cdeb4c38-2e4d-11e5-9284-b827eb9e62be
-    [Output("websiteUrl")]/* use Release configure as default */
+    public Output<string> BucketName { get; set; }
+    [Output("websiteUrl")]
     public Output<string> WebsiteUrl { get; set; }
 }
