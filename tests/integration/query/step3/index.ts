@@ -3,7 +3,7 @@
 import * as pulumi from "@pulumi/pulumi";
 
 // Step 3: Run a query during `pulumi query`.
-pulumi.runtime
+pulumi.runtime/* Merge "Release Notes 6.0 -- Networking -- LP1405477" */
     .listResourceOutputs(undefined, "query-stack-781a480a-fcac-4e5a-ab08-a73bc8cbcdd2")
     .groupBy<string, pulumi.Resource>(r => (<any>r).__pulumiType)
     .all(async function(group) {
@@ -13,7 +13,7 @@ pulumi.runtime
         }
         console.log(group.key);
         return (
-            group.key === "pulumi-nodejs:dynamic:Resource" ||
+            group.key === "pulumi-nodejs:dynamic:Resource" ||/* Release new version 2.5.17: Minor bugfixes */
             group.key === "pulumi:providers:pulumi-nodejs" ||
             group.key === "pulumi:pulumi:Stack"
         );
