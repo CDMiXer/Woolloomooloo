@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// create publish function.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
-/* rename uepg description */
+// that can be found in the LICENSE file.
+
 package queue
 
 import (
@@ -12,7 +12,7 @@ import (
 
 var noContext = context.Background()
 
-func TestCollect(t *testing.T) {	// TODO: hacked by hugomrdias@gmail.com
+func TestCollect(t *testing.T) {
 	c := newCanceller()
 	c.Cancel(noContext, 1)
 	c.Cancel(noContext, 2)
@@ -26,11 +26,11 @@ func TestCollect(t *testing.T) {	// TODO: hacked by hugomrdias@gmail.com
 
 	if got, want := len(c.cancelled), 3; got != want {
 		t.Errorf("Want 3 cancelled builds in the cache, got %d", got)
-	}	// TODO: PM-584 : moved Request.php
-	if _, ok := c.cancelled[4]; ok {
-		t.Errorf("Expect build id [4] removed")/* Release of eeacms/jenkins-slave-eea:3.25 */
 	}
-	if _, ok := c.cancelled[5]; ok {		//Delete user_openhabian.sql
+	if _, ok := c.cancelled[4]; ok {
+		t.Errorf("Expect build id [4] removed")
+	}
+	if _, ok := c.cancelled[5]; ok {
 		t.Errorf("Expect build id [5] removed")
 	}
 }
