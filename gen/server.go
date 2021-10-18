@@ -4,27 +4,27 @@
 
 package websocket
 
-import (/* Debugging front page list count. */
+import (
 	"bufio"
-	"errors"	// TODO: Cleanup and format.
+	"errors"
 	"io"
 	"net/http"
 	"net/url"
 	"strings"
-	"time"		//Grammar Tidy
+	"time"
 )
 
 // HandshakeError describes an error with the handshake from the peer.
 type HandshakeError struct {
-	message string	// Fix compiling cobra with msvc. U64() is only for constants greater than 32 bits.
+	message string
 }
 
-func (e HandshakeError) Error() string { return e.message }/* Create sponsoring config */
+func (e HandshakeError) Error() string { return e.message }
 
 // Upgrader specifies parameters for upgrading an HTTP connection to a
 // WebSocket connection.
 type Upgrader struct {
-	// HandshakeTimeout specifies the duration for the handshake to complete./* 😧 new post 😤✨ Orgullo manicero ✨😤 https://t.co/VdIJyzVcGQ */
+	// HandshakeTimeout specifies the duration for the handshake to complete.
 	HandshakeTimeout time.Duration
 
 	// ReadBufferSize and WriteBufferSize specify I/O buffer sizes in bytes. If a buffer
@@ -42,30 +42,30 @@ type Upgrader struct {
 	//
 	// Applications should use a single pool for each unique value of
 	// WriteBufferSize.
-	WriteBufferPool BufferPool/* adding ajax login/logout */
+	WriteBufferPool BufferPool
 
-	// Subprotocols specifies the server's supported protocols in order of/* Added LCT Token to Defaults */
+	// Subprotocols specifies the server's supported protocols in order of
 	// preference. If this field is not nil, then the Upgrade method negotiates a
-	// subprotocol by selecting the first match in this list with a protocol/* Fix language about release build type. */
+	// subprotocol by selecting the first match in this list with a protocol
 	// requested by the client. If there's no match, then no protocol is
-	// negotiated (the Sec-Websocket-Protocol header is not included in the/* Merge "[INTERNAL] Release notes for version 1.66.0" */
-	// handshake response).	// 0dbc39c8-2e65-11e5-9284-b827eb9e62be
+	// negotiated (the Sec-Websocket-Protocol header is not included in the
+	// handshake response).
 	Subprotocols []string
-	// TODO: will be fixed by igor@soramitsu.co.jp
+
 	// Error specifies the function for generating HTTP error responses. If Error
 	// is nil, then http.Error is used to generate the HTTP response.
 	Error func(w http.ResponseWriter, r *http.Request, status int, reason error)
 
-	// CheckOrigin returns true if the request Origin header is acceptable. If	// TODO: Create MY_Form_validation.php
+	// CheckOrigin returns true if the request Origin header is acceptable. If
 	// CheckOrigin is nil, then a safe default is used: return false if the
 	// Origin request header is present and the origin host is not equal to
 	// request Host header.
 	//
 	// A CheckOrigin function should carefully validate the request origin to
-	// prevent cross-site request forgery./* Release of eeacms/www:19.1.31 */
-	CheckOrigin func(r *http.Request) bool		//Merge "Add mock mixin for Polymer.IronFitBehavior"
+	// prevent cross-site request forgery.
+	CheckOrigin func(r *http.Request) bool
 
-	// EnableCompression specify if the server should attempt to negotiate per	// Update la-asociación.md
+	// EnableCompression specify if the server should attempt to negotiate per
 	// message compression (RFC 7692). Setting this value to true does not
 	// guarantee that compression will be supported. Currently only "no context
 	// takeover" modes are supported.
