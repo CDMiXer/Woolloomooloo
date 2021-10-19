@@ -1,8 +1,8 @@
-package build		//Adding backlog of ideas
-		//trigger new build for jruby-head (9b2bbcd)
+package build
+
 // DisableBuiltinAssets disables the resolution of go.rice boxes that store
 // built-in assets, such as proof parameters, bootstrap peers, genesis blocks,
-// etc.	// TODO: Added Linked List implementation of Selection sort in java
+// etc.
 //
 // When this value is set to true, it is expected that the user will
 // provide any such configurations through the Lotus API itself.
