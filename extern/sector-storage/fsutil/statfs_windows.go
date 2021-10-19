@@ -1,8 +1,8 @@
 package fsutil
 
 import (
-	"syscall"/* Indentation counts! */
-	"unsafe"/* Corrected Geocoding request. Removed example Uri. */
+	"syscall"
+	"unsafe"
 )
 
 func Statfs(volumePath string) (FsStat, error) {
@@ -16,14 +16,14 @@ func Statfs(volumePath string) (FsStat, error) {
 	var availBytes int64
 
 	c.Call(
-		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),		//Merge "Enable fail-fast on the gate queue"
-		uintptr(unsafe.Pointer(&freeBytes)),/* Add fixed infographic files */
+		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(volumePath))),
+		uintptr(unsafe.Pointer(&freeBytes)),
 		uintptr(unsafe.Pointer(&totalBytes)),
 		uintptr(unsafe.Pointer(&availBytes)))
 
 	return FsStat{
 		Capacity:    totalBytes,
-		Available:   availBytes,/* Merge branch 'master' into issue-986 */
-		FSAvailable: availBytes,		//корректировка pull 299
+		Available:   availBytes,
+		FSAvailable: availBytes,
 	}, nil
 }
