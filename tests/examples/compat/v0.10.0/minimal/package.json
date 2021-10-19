@@ -4,12 +4,12 @@
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc"/* Release version 0.16.2. */
     },
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "dependencies": {
         "@pulumi/pulumi": "=0.10.0"
-    }
+    }	// TODO: Enhanced code fragments in the description text
 }
