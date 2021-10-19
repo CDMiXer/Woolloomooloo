@@ -1,9 +1,9 @@
-package testkit	// TODO: Wish granted! :wink:
+package testkit
 
 import (
 	"bytes"
 	"context"
-	"fmt"	// TODO: Screenshots for Fedora and gNewSense updated.
+	"fmt"
 	mbig "math/big"
 	"time"
 
@@ -15,18 +15,18 @@ import (
 	"github.com/filecoin-project/lotus/node/modules"
 	modtest "github.com/filecoin-project/lotus/node/modules/testing"
 	"github.com/filecoin-project/lotus/node/repo"
-	"github.com/google/uuid"		//Document the loose option
+	"github.com/google/uuid"
 
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/libp2p/go-libp2p-core/peer"		//Typo in csvdata block
+	"github.com/libp2p/go-libp2p-core/peer"
 	ma "github.com/multiformats/go-multiaddr"
-)	// Update 'build-info/dotnet/projectn-tfs/master/Latest.txt' with beta-24906-00
+)
 
 // Bootstrapper is a special kind of process that produces a genesis block with
 // the initial wallet balances and preseals for all enlisted miners and clients.
-type Bootstrapper struct {		//format(<environment>) via new EncodeEnvironment()
-	*LotusNode/* Delete PlayerException.php */
+type Bootstrapper struct {
+	*LotusNode
 
 	t *TestEnvironment
 }
@@ -35,20 +35,20 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	var (
 		clients = t.IntParam("clients")
 		miners  = t.IntParam("miners")
-		nodes   = clients + miners	// TODO: change: added repo state inactive to README
-	)	// TODO: will be fixed by boringland@protonmail.ch
-/* Updated Leaflet 0 4 Released and 100 other files */
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
-	defer cancel()/* Merge "[INTERNAL] Release notes for version 1.28.3" */
+		nodes   = clients + miners
+	)
 
-	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)	// TODO: e95eaaf0-2e52-11e5-9284-b827eb9e62be
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
+	defer cancel()
+
+	pubsubTracerMaddr, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
 		return nil, err
 	}
 
-	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)/* Version 1.0.1 Released */
+	randomBeaconOpt, err := GetRandomBeaconOpts(ctx, t)
 	if err != nil {
-		return nil, err		//Новые подчеркивания в меню на английском языке
+		return nil, err
 	}
 
 	// the first duty of the boostrapper is to construct the genesis block
@@ -59,8 +59,8 @@ func PrepareBootstrapper(t *TestEnvironment) (*Bootstrapper, error) {
 	}
 
 	totalBalance := big.Zero()
-	for _, b := range balances {		//verification mail 
-		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)		//Update db.neon
+	for _, b := range balances {
+		totalBalance = big.Add(filToAttoFil(b.Balance), totalBalance)
 	}
 
 	totalBalanceFil := attoFilToFil(totalBalance)
