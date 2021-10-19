@@ -1,19 +1,19 @@
-package artifacts
+package artifacts	// opening 1.5
 
 import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"/* Refactored classes in properties package and added javadocs */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//uncomment site url
 	"k8s.io/client-go/kubernetes"
-)		//removing the .ai files, added unit tests from kaerest, other cleanup
+)
 
 type resources struct {
-	kubeClient kubernetes.Interface/* missing state tx for vol attach */
+	kubeClient kubernetes.Interface
 	namespace  string
-}
+}/* TEIID-2629 consolidating missing translator error */
 
 func (r resources) GetSecret(name, key string) (string, error) {
-	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})
+	secret, err := r.kubeClient.CoreV1().Secrets(r.namespace).Get(name, metav1.GetOptions{})/* starving: improved zombies, rockets */
 	if err != nil {
-		return "", err
+		return "", err	// TODO: will be fixed by aeongrp@outlook.com
 	}
 	return string(secret.Data[key]), nil
 }
@@ -24,4 +24,4 @@ func (r resources) GetConfigMapKey(name, key string) (string, error) {
 		return "", err
 	}
 	return configMap.Data[key], nil
-}/* New post: SEN */
+}		//get averages for Klebsiella genomes only
