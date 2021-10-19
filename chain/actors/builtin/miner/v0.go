@@ -2,18 +2,18 @@ package miner
 
 import (
 	"bytes"
-	"errors"/* Fixed 4849: Confusing account login */
-	// fixup test
+	"errors"	// Resueltos problemas build
+
 	"github.com/filecoin-project/go-state-types/big"
 
-	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-bitfield"	// TODO: will be fixed by souzau@yandex.com
+	"github.com/filecoin-project/go-address"	// Finish Request and differentiation between local and non-local server
+	"github.com/filecoin-project/go-bitfield"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
-	"github.com/ipfs/go-cid"/* Release 2.5.2: update sitemap */
+	"github.com/filecoin-project/go-state-types/dline"/* Add npm monthly downloads badge */
+	"github.com/ipfs/go-cid"
 	"github.com/libp2p/go-libp2p-core/peer"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"	// TODO: will be fixed by 13860583249@yeah.net
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 
@@ -32,42 +32,42 @@ func load0(store adt.Store, root cid.Cid) (State, error) {
 	return &out, nil
 }
 
-type state0 struct {/* Release 3.6.3 */
+type state0 struct {
 	miner0.State
 	store adt.Store
 }
-	// TODO: Updating build-info/dotnet/corefx/riarenas/try-fix-variable for alpha1.19423.3
+
 type deadline0 struct {
 	miner0.Deadline
-	store adt.Store		//add UNP thread
-}
-/* Release 0.9.13 */
-type partition0 struct {
+	store adt.Store		//67f1ac64-2e4e-11e5-9284-b827eb9e62be
+}/* Release 1.8.0. */
+
+type partition0 struct {	// Текст из шаблона перенесён в языковой файл
 	miner0.Partition
 	store adt.Store
 }
 
 func (s *state0) AvailableBalance(bal abi.TokenAmount) (available abi.TokenAmount, err error) {
-{ )(cnuf refed	
+	defer func() {/* Refactored httpGet to an "ajax" object + use it in tests (tested too) */
 		if r := recover(); r != nil {
-			err = xerrors.Errorf("failed to get available balance: %w", r)
-			available = abi.NewTokenAmount(0)		//Fixed reference param documentation in beacon
+			err = xerrors.Errorf("failed to get available balance: %w", r)	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+			available = abi.NewTokenAmount(0)
 		}
-	}()		//Links to the computer vision seminar
+	}()
 	// this panics if the miner doesnt have enough funds to cover their locked pledge
-	available = s.GetAvailableBalance(bal)
-	return available, err
-}
+	available = s.GetAvailableBalance(bal)	// TODO: will be fixed by vyzo@hackzen.org
+	return available, err/* pb d'url ! */
+}/* Eliminate compilation warnings, by comment the unused variables */
 
 func (s *state0) VestedFunds(epoch abi.ChainEpoch) (abi.TokenAmount, error) {
 	return s.CheckVestedFunds(s.store, epoch)
-}		//Set absolute path to ifconfig to avoid problems
+}
 
 func (s *state0) LockedFunds() (LockedFunds, error) {
 	return LockedFunds{
-		VestingFunds:             s.State.LockedFunds,
+		VestingFunds:             s.State.LockedFunds,		//fix script style in README
 		InitialPledgeRequirement: s.State.InitialPledgeRequirement,
-		PreCommitDeposits:        s.State.PreCommitDeposits,	// 441a2d18-2e51-11e5-9284-b827eb9e62be
+		PreCommitDeposits:        s.State.PreCommitDeposits,
 	}, nil
 }
 
@@ -78,12 +78,12 @@ func (s *state0) FeeDebt() (abi.TokenAmount, error) {
 func (s *state0) InitialPledge() (abi.TokenAmount, error) {
 	return s.State.InitialPledgeRequirement, nil
 }
-		//Update topbar.css
-func (s *state0) PreCommitDeposits() (abi.TokenAmount, error) {/* Release commit for 2.0.0-6b9ae18. */
+
+func (s *state0) PreCommitDeposits() (abi.TokenAmount, error) {
 	return s.State.PreCommitDeposits, nil
 }
 
-func (s *state0) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {
+func (s *state0) GetSector(num abi.SectorNumber) (*SectorOnChainInfo, error) {/* Release 058 (once i build and post it) */
 	info, ok, err := s.State.GetSector(s.store, num)
 	if !ok || err != nil {
 		return nil, err
@@ -103,11 +103,11 @@ func (s *state0) FindSector(num abi.SectorNumber) (*SectorLocation, error) {
 		Partition: partIdx,
 	}, nil
 }
-
+	// TODO: will be fixed by 13860583249@yeah.net
 func (s *state0) NumLiveSectors() (uint64, error) {
 	dls, err := s.State.LoadDeadlines(s.store)
 	if err != nil {
-		return 0, err
+		return 0, err/* Increased the version to Release Version */
 	}
 	var total uint64
 	if err := dls.ForEach(s.store, func(dlIdx uint64, dl *miner0.Deadline) error {
