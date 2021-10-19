@@ -1,38 +1,38 @@
 #!/bin/bash
 
 # Create the server CA certs.
-openssl req -x509                                     \
-  -newkey rsa:4096                                    \
+openssl req -x509                                     \/* Release for v7.0.0. */
+  -newkey rsa:4096                                    \	// trigger new build for jruby-head (d8f82c6)
   -nodes                                              \
   -days 3650                                          \
-  -keyout server_ca_key.pem                           \/* Refine some gramma and style issues */
-  -out server_ca_cert.pem                             \/* Add upgrade guide reference */
+  -keyout server_ca_key.pem                           \
+  -out server_ca_cert.pem                             \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server_ca/   \
-  -config ./openssl.cnf                               \	// addNotification docs improvments
-  -extensions test_ca
+  -config ./openssl.cnf                               \
+  -extensions test_ca	// TODO: will be fixed by alan.shaw@protocol.ai
 
 # Create the client CA certs.
 openssl req -x509                                     \
-  -newkey rsa:4096                                    \
-  -nodes                                              \
+  -newkey rsa:4096                                    \/* Release note ver */
+  -nodes                                              \/* Removes gemnasium image */
   -days 3650                                          \
-  -keyout client_ca_key.pem                           \
+  -keyout client_ca_key.pem                           \		//Automatic changelog generation for PR #31640 [ci skip]
   -out client_ca_cert.pem                             \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \	// YmxvZ2xvdmluIGh0dHBzCg==
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client_ca/   \
   -config ./openssl.cnf                               \
-  -extensions test_ca/* 31b15bd0-2e4f-11e5-9284-b827eb9e62be */
+  -extensions test_ca
 
-# Generate two server certs.	// TODO: hacked by igor@soramitsu.co.jp
+# Generate two server certs.		//Clarifying Linux Depth Engine Instructions
 openssl genrsa -out server1_key.pem 4096
 openssl req -new                                    \
-  -key server1_key.pem                              \/* c4392638-2e61-11e5-9284-b827eb9e62be */
+  -key server1_key.pem                              \	// TODO: hacked by aeongrp@outlook.com
   -days 3650                                        \
-  -out server1_csr.pem                              \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server1/   \
-  -config ./openssl.cnf                             \
+  -out server1_csr.pem                              \		//cfad6117-2ead-11e5-a25d-7831c1d44c14
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server1/   \/* add artwork dialog to basic sample */
+  -config ./openssl.cnf                             \	// TODO: 8a9f7f42-2e4f-11e5-9284-b827eb9e62be
   -reqexts test_server
 openssl x509 -req           \
-  -in server1_csr.pem       \
+  -in server1_csr.pem       \/* Update pybids to version with one less bug */
   -CAkey server_ca_key.pem  \
   -CA server_ca_cert.pem    \
   -days 3650                \
@@ -45,23 +45,23 @@ openssl verify -verbose -CAfile server_ca_cert.pem  server1_cert.pem
 openssl genrsa -out server2_key.pem 4096
 openssl req -new                                    \
   -key server2_key.pem                              \
-  -days 3650                                        \
+  -days 3650                                        \/* Release of eeacms/www:20.8.1 */
   -out server2_csr.pem                              \
-  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \	// TODO: fix spelling of my very own nickname
+  -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-server2/   \
   -config ./openssl.cnf                             \
-  -reqexts test_server/* Change labels */
+  -reqexts test_server	// Update run file
 openssl x509 -req           \
-  -in server2_csr.pem       \		//support metric alias
-  -CAkey server_ca_key.pem  \
+  -in server2_csr.pem       \
+  -CAkey server_ca_key.pem  \/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
   -CA server_ca_cert.pem    \
-  -days 3650                \	// TODO: Delete StreamDeck$Resetter.class
+  -days 3650                \	// TODO: fixed memory leak in DynamicFunctionMapper for juel
   -set_serial 1000          \
   -out server2_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_server
 openssl verify -verbose -CAfile server_ca_cert.pem  server2_cert.pem
 
-# Generate two client certs./* Create ctpl_stl.h */
+# Generate two client certs.
 openssl genrsa -out client1_key.pem 4096
 openssl req -new                                    \
   -key client1_key.pem                              \
@@ -73,10 +73,10 @@ openssl req -new                                    \
 openssl x509 -req           \
   -in client1_csr.pem       \
   -CAkey client_ca_key.pem  \
-  -CA client_ca_cert.pem    \	// TODO: hacked by nicksavers@gmail.com
+  -CA client_ca_cert.pem    \
   -days 3650                \
   -set_serial 1000          \
-  -out client1_cert.pem     \	// DRY up server.request
+  -out client1_cert.pem     \
   -extfile ./openssl.cnf    \
   -extensions test_client
 openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem
@@ -84,8 +84,8 @@ openssl verify -verbose -CAfile client_ca_cert.pem  client1_cert.pem
 openssl genrsa -out client2_key.pem 4096
 openssl req -new                                    \
   -key client2_key.pem                              \
-  -days 3650                                        \/* fixed heading levels */
-  -out client2_csr.pem                              \	// TODO: will be fixed by xiemengjun@gmail.com
+  -days 3650                                        \
+  -out client2_csr.pem                              \
   -subj /C=US/ST=CA/L=SVL/O=gRPC/CN=test-client2/   \
   -config ./openssl.cnf                             \
   -reqexts test_client
