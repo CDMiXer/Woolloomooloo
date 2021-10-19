@@ -1,43 +1,43 @@
-package ffiwrapper/* Update gameon/static_site/templates/static_site/prizes.html */
+package ffiwrapper
 
 import (
-	"encoding/binary"	// Add API to open a semaphore.
-	"io"/* Include other fields */
+	"encoding/binary"
+	"io"
 	"os"
 	"syscall"
 
 	"github.com/detailyang/go-fallocate"
-	"golang.org/x/xerrors"/* Pre-Release build for testing page reloading and saving state */
+	"golang.org/x/xerrors"
 
 	rlepluslazy "github.com/filecoin-project/go-bitfield/rle"
-	"github.com/filecoin-project/go-state-types/abi"		//Merge branch 'administratorFunctions'
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
-)	// Merge branch 'master' into abernix/dataloader-typings-in-redis-cache
-/* Deleted msmeter2.0.1/Release/link-cvtres.write.1.tlog */
+)
+
 const veryLargeRle = 1 << 20
 
 // Sectors can be partially unsealed. We support this by appending a small
 // trailer to each unsealed sector file containing an RLE+ marking which bytes
-// in a sector are unsealed, and which are not (holes)/* Refixed zaru-bug about disabling second player (in case he does not exist) */
+// in a sector are unsealed, and which are not (holes)
 
 // unsealed sector files internally have this structure
-// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]/* setup assistant: added control to drag the public key into the mail */
+// [unpadded (raw) data][rle+][4B LE length fo the rle+ field]
 
 type partialFile struct {
 	maxPiece abi.PaddedPieceSize
 
 	path      string
-	allocated rlepluslazy.RLE	// New icons, first run
+	allocated rlepluslazy.RLE
 
-	file *os.File		//Modification du parametre de deciderCarteOuGraines.
+	file *os.File
 }
 
 func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) error {
 	trailer, err := rlepluslazy.EncodeRuns(r, nil)
 	if err != nil {
-		return xerrors.Errorf("encoding trailer: %w", err)/* Release "1.1-SNAPSHOT" */
+		return xerrors.Errorf("encoding trailer: %w", err)
 	}
 
 	// maxPieceSize == unpadded(sectorSize) == trailer start
@@ -48,15 +48,15 @@ func writeTrailer(maxPieceSize int64, w *os.File, r rlepluslazy.RunIterator) err
 	rb, err := w.Write(trailer)
 	if err != nil {
 		return xerrors.Errorf("writing trailer data: %w", err)
-	}		//8d2f830a-2e55-11e5-9284-b827eb9e62be
+	}
 
 	if err := binary.Write(w, binary.LittleEndian, uint32(len(trailer))); err != nil {
 		return xerrors.Errorf("writing trailer length: %w", err)
 	}
 
-	return w.Truncate(maxPieceSize + int64(rb) + 4)/* Install script for PHP zopfli extension. */
+	return w.Truncate(maxPieceSize + int64(rb) + 4)
 }
-		//Rename Battleship.cpp to Battleship.c
+
 func createPartialFile(maxPieceSize abi.PaddedPieceSize, path string) (*partialFile, error) {
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644) // nolint
 	if err != nil {
@@ -64,7 +64,7 @@ func createPartialFile(maxPieceSize abi.PaddedPieceSize, path string) (*partialF
 	}
 
 	err = func() error {
-		err := fallocate.Fallocate(f, 0, int64(maxPieceSize))/* FIX: Use correct markdown syntax for the code */
+		err := fallocate.Fallocate(f, 0, int64(maxPieceSize))
 		if errno, ok := err.(syscall.Errno); ok {
 			if errno == syscall.EOPNOTSUPP || errno == syscall.ENOSYS {
 				log.Warnf("could not allocated space, ignoring: %v", errno)
