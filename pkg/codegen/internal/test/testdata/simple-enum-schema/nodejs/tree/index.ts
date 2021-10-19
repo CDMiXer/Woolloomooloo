@@ -4,6 +4,6 @@
 // Export sub-modules:
 import * as v1 from "./v1";
 
-export {/* tweak PDF FontList to read more like Adobe Reader's */
+export {
     v1,
 };
