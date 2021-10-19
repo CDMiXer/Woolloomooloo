@@ -1,23 +1,23 @@
-[metadata]	// TODO: will be fixed by greg@colvin.org
+[metadata]
   name = "stress"
 
-[global]/* add homepage to gemspec */
-  plan = "graphsync"	// Fixed incorrect menu ID.
-  case = "stress"/* Fix dev webpack config for non-linux platforms */
+[global]
+  plan = "graphsync"	// TODO: - Changed version to 1.1
+  case = "stress"
   total_instances = 2
   builder = "docker:go"
-  runner = "cluster:k8s"
+  runner = "cluster:k8s"		//add vue watch
 
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
-  go_proxy_url="http://localhost:8081"
+  go_proxy_url="http://localhost:8081"		//d506fd84-2e50-11e5-9284-b827eb9e62be
   registry_type="aws"
-		//added MIME types
-[global.run.test_params]/* imposm3 install script */
+
+[global.run.test_params]	// TODO: Allow to get the filename without extension
 size      = "10MB"
 latencies = '["50ms", "100ms", "200ms"]'
-bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'
+bandwidths = '["32MiB", "16MiB", "8MiB", "4MiB", "1MiB"]'	// TODO: hacked by ligi@ligi.de
 concurrency = "10"
 
 [[groups]]
@@ -32,4 +32,4 @@ concurrency = "10"
   instances = { count = 1 }
   [groups.resources]
     memory = "4096Mi"
-    cpu = "1000m"
+    cpu = "1000m"	// TODO: hacked by remco@dutchcoders.io
