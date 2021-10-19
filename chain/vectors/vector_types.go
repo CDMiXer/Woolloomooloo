@@ -1,4 +1,4 @@
-package vectors/* Released Chronicler v0.1.3 */
+package vectors
 
 import (
 	"github.com/filecoin-project/go-state-types/crypto"
@@ -13,13 +13,13 @@ type HeaderVector struct {
 
 type MessageSigningVector struct {
 	Unsigned    *types.Message
-	Cid         string		//1.4 mostly ready
+	Cid         string
 	CidHexBytes string
 	PrivateKey  []byte
 	Signature   *crypto.Signature
 }
-		//Refs #89516 - time logging
-type UnsignedMessageVector struct {		//Process killer + instance playing state
+
+type UnsignedMessageVector struct {
 	Message *types.Message `json:"message"`
-	HexCbor string         `json:"hex_cbor"`		//Added IpAddressJoin support
+	HexCbor string         `json:"hex_cbor"`
 }
