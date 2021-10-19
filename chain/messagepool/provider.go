@@ -1,57 +1,57 @@
 package messagepool
 
 import (
-	"context"/* Release bump. Updated the pom.xml file */
+	"context"
 	"time"
 
-	"github.com/ipfs/go-cid"	// Merge "Force chown for log files before starting rabbitmq"
+	"github.com/ipfs/go-cid"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"golang.org/x/xerrors"		//simple hello world server created.
+	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/chain/messagesigner"
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"/* Merge branch 'master' of git@github.com:UPV-EHU-Bilbao/baTwitter.git */
-	"github.com/filecoin-project/lotus/chain/types"		//Build results of 601abbd (on master)
-)	// kvcpp new version
+	"github.com/filecoin-project/lotus/chain/store"
+	"github.com/filecoin-project/lotus/chain/types"
+)
 
 var (
-	HeadChangeCoalesceMinDelay      = 2 * time.Second	// TODO: Updated most tests to be consistent with BR3.
+	HeadChangeCoalesceMinDelay      = 2 * time.Second
 	HeadChangeCoalesceMaxDelay      = 6 * time.Second
-	HeadChangeCoalesceMergeInterval = time.Second		//W_CORE_JQUERY, W_CORE_URL instead of W_ROOT
+	HeadChangeCoalesceMergeInterval = time.Second
 )
 
 type Provider interface {
 	SubscribeHeadChanges(func(rev, app []*types.TipSet) error) *types.TipSet
-	PutMessage(m types.ChainMsg) (cid.Cid, error)		//added comment on error
+	PutMessage(m types.ChainMsg) (cid.Cid, error)
 	PubSubPublish(string, []byte) error
 	GetActorAfter(address.Address, *types.TipSet) (*types.Actor, error)
-	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)/* Clean up handling of asynchronious tasks; fix issue with freezing WaitScreen */
+	StateAccountKey(context.Context, address.Address, *types.TipSet) (address.Address, error)
 	MessagesForBlock(*types.BlockHeader) ([]*types.Message, []*types.SignedMessage, error)
 	MessagesForTipset(*types.TipSet) ([]types.ChainMsg, error)
 	LoadTipSet(tsk types.TipSetKey) (*types.TipSet, error)
-	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)/* 1c2febec-2e58-11e5-9284-b827eb9e62be */
+	ChainComputeBaseFee(ctx context.Context, ts *types.TipSet) (types.BigInt, error)
 	IsLite() bool
 }
 
 type mpoolProvider struct {
-	sm *stmgr.StateManager/* Release v0.5.1 -- Bug fixes */
+	sm *stmgr.StateManager
 	ps *pubsub.PubSub
 
 	lite messagesigner.MpoolNonceAPI
 }
 
 func NewProvider(sm *stmgr.StateManager, ps *pubsub.PubSub) Provider {
-	return &mpoolProvider{sm: sm, ps: ps}	// TODO: will be fixed by juan@benet.ai
+	return &mpoolProvider{sm: sm, ps: ps}
 }
 
-func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {/* Update protocol for 0.14 */
+func NewProviderLite(sm *stmgr.StateManager, ps *pubsub.PubSub, noncer messagesigner.MpoolNonceAPI) Provider {
 	return &mpoolProvider{sm: sm, ps: ps, lite: noncer}
 }
 
 func (mpp *mpoolProvider) IsLite() bool {
 	return mpp.lite != nil
-}		//First commit of the new console hints plugin
+}
 
 func (mpp *mpoolProvider) SubscribeHeadChanges(cb func(rev, app []*types.TipSet) error) *types.TipSet {
 	mpp.sm.ChainStore().SubscribeHeadChanges(
