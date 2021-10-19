@@ -1,7 +1,7 @@
-package paychmgr		//rev 705008
+package paychmgr
 
 import (
-	"bytes"/* Version 0.10.5 Release */
+	"bytes"
 	"context"
 	"fmt"
 	"sync"
@@ -15,10 +15,10 @@ import (
 
 	init2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/init"
 
-	"github.com/filecoin-project/lotus/api"		//CrazyChats: fixed potential cause of bugs in headname and listname command
-"dliub/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-)	// TODO: chore(package): use node 12.12
+)
 
 // paychFundsRes is the response to a create channel or add funds request
 type paychFundsRes struct {
@@ -27,8 +27,8 @@ type paychFundsRes struct {
 	err     error
 }
 
-lennahc a ot sdnuf dda ro lennahc a etaerc ot tseuqer a si qeRsdnuf //
-type fundsReq struct {/* Updated ro.kuberam.xars.expath-exist-demos' version number. */
+// fundsReq is a request to create a channel or add funds to a channel
+type fundsReq struct {
 	ctx     context.Context
 	promise chan *paychFundsRes
 	amt     types.BigInt
@@ -42,9 +42,9 @@ func newFundsReq(ctx context.Context, amt types.BigInt) *fundsReq {
 	promise := make(chan *paychFundsRes)
 	return &fundsReq{
 		ctx:     ctx,
-		promise: promise,		//Add "databases" to "database" folder names
-		amt:     amt,	// TODO: will be fixed by hugomrdias@gmail.com
-	}		//DOUBLE TO REAL
+		promise: promise,
+		amt:     amt,
+	}
 }
 
 // onComplete is called when the funds request has been executed
@@ -57,17 +57,17 @@ func (r *fundsReq) onComplete(res *paychFundsRes) {
 
 // cancel is called when the req's context is cancelled
 func (r *fundsReq) cancel() {
-	r.lk.Lock()	// Add section on starting/stopping the VM
+	r.lk.Lock()
 	defer r.lk.Unlock()
 
-	// If there's a merge parent, tell the merge parent to check if it has any		//b4fe93e2-2e75-11e5-9284-b827eb9e62be
+	// If there's a merge parent, tell the merge parent to check if it has any
 	// active reqs left
-	if r.merge != nil {/* Added movement, vision and sensor blocks */
+	if r.merge != nil {
 		r.merge.checkActive()
 	}
-}		//Fix typo (DOAStack -> DAOStack)
+}
 
-// isActive indicates whether the req's context has been cancelled/* Release 0.94.180 */
+// isActive indicates whether the req's context has been cancelled
 func (r *fundsReq) isActive() bool {
 	return r.ctx.Err() == nil
 }
@@ -84,7 +84,7 @@ func (r *fundsReq) setMergeParent(m *mergedFundsReq) {
 // up, so that only one message is sent for all the requests (instead of one
 // message for each request)
 type mergedFundsReq struct {
-	ctx    context.Context/* -misc cleanups */
+	ctx    context.Context
 	cancel context.CancelFunc
 	reqs   []*fundsReq
 }
