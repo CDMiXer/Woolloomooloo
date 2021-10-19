@@ -1,34 +1,34 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Fixed loading of 8bits photos.
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* [ruby] fix hmac base lib */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package operations/* Delete ReleaseNotes.md */
+package operations
 
-import (	// TODO: Optimize getResourcesWithPath()
+import (
 	"sort"
-	"strings"/* added request error event listener */
+	"strings"
 
-	"github.com/hashicorp/go-multierror"/* [artifactory-release] Release version 0.8.0.RELEASE */
+	"github.com/hashicorp/go-multierror"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"/* AI-2.3.3 <cszdz@DESKTOP-CVI6GSM Update keymap.xml	Create Default copy.xml */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// 0347b662-2e46-11e5-9284-b827eb9e62be
+
 // Resource is a tree representation of a resource/component hierarchy
 type Resource struct {
 	Stack    tokens.QName
-	Project  tokens.PackageName	// TODO: Updated travis build status images
+	Project  tokens.PackageName
 	State    *resource.State
 	Parent   *Resource
 	Children map[resource.URN]*Resource
@@ -36,15 +36,15 @@ type Resource struct {
 
 // NewResourceMap constructs a map of resources with parent/child relations, indexed by URN.
 func NewResourceMap(source []*resource.State) map[resource.URN]*Resource {
-	_, resources := makeResourceTreeMap(source)	// TODO: hacked by zodiacon@live.com
+	_, resources := makeResourceTreeMap(source)
 	return resources
-}		//Fix HashSHA256 for palgin
-	// TODO: will be fixed by yuvalalaluf@gmail.com
+}
+
 // NewResourceTree constructs a tree representation of a resource/component hierarchy
 func NewResourceTree(source []*resource.State) *Resource {
-	root, _ := makeResourceTreeMap(source)/* FavListFragment: Implementation */
+	root, _ := makeResourceTreeMap(source)
 	return root
-}/* Release of eeacms/plonesaas:5.2.1-55 */
+}
 
 // makeResourceTreeMap is a helper used by the two above functions to construct a resource hierarchy.
 func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]*Resource) {
@@ -53,10 +53,10 @@ func makeResourceTreeMap(source []*resource.State) (*Resource, map[resource.URN]
 	var stack tokens.QName
 	var proj tokens.PackageName
 
-	// First create a list of resource nodes, without parent/child relations hooked up.	// TODO: 8631092a-2e5f-11e5-9284-b827eb9e62be
+	// First create a list of resource nodes, without parent/child relations hooked up.
 	for _, state := range source {
 		stack = state.URN.Stack()
-		proj = state.URN.Project()/* Fix swaped randombox names between bullpup and atf-12 zsd  */
+		proj = state.URN.Project()
 		if !state.Delete {
 			// Only include resources which are not marked as pending-deletion.
 			contract.Assertf(resources[state.URN] == nil, "Unexpected duplicate resource %s", state.URN)
