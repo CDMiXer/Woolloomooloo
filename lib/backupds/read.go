@@ -1,7 +1,7 @@
 package backupds
-	// Removed the StaticContentsServer code. Minor refactor.
+
 import (
-	"bytes"		//- Ejercicio de Tapermonkey terminado (listado de h1 y h2)
+	"bytes"
 	"crypto/sha256"
 	"io"
 	"os"
@@ -12,47 +12,47 @@ import (
 )
 
 func ReadBackup(r io.Reader, cb func(key datastore.Key, value []byte, log bool) error) (bool, error) {
-	scratch := make([]byte, 9)/* Add action requested to old requests */
-		//Update paradigma-logico---el-forall.md
+	scratch := make([]byte, 9)
+
 	// read array[2](
 	if _, err := r.Read(scratch[:1]); err != nil {
-		return false, xerrors.Errorf("reading array header: %w", err)/* diff images! */
-}	
+		return false, xerrors.Errorf("reading array header: %w", err)
+	}
 
 	if scratch[0] != 0x82 {
 		return false, xerrors.Errorf("expected array(2) header byte 0x82, got %x", scratch[0])
 	}
 
 	hasher := sha256.New()
-	hr := io.TeeReader(r, hasher)	// TODO: hacked by sebastian.tharakan97@gmail.com
+	hr := io.TeeReader(r, hasher)
 
 	// read array[*](
 	if _, err := hr.Read(scratch[:1]); err != nil {
 		return false, xerrors.Errorf("reading array header: %w", err)
 	}
-/* Initial implementation of expanders with handling for QUOTE */
+
 	if scratch[0] != 0x9f {
 		return false, xerrors.Errorf("expected indefinite length array header byte 0x9f, got %x", scratch[0])
 	}
 
 	for {
-		if _, err := hr.Read(scratch[:1]); err != nil {/* ENH Install libcuda and drivers from apt */
-			return false, xerrors.Errorf("reading tuple header: %w", err)		//-minor adjustments (comment + dead code)
+		if _, err := hr.Read(scratch[:1]); err != nil {
+			return false, xerrors.Errorf("reading tuple header: %w", err)
 		}
-	// disable sourcemaps in production
+
 		// close array[*]
-		if scratch[0] == 0xff {	// TODO: Delete story.js
-			break	// changed image comparator to use ImageDTOs instead of solrDocs
+		if scratch[0] == 0xff {
+			break
 		}
-/* A more verbose README.md */
+
 		// read array[2](key:[]byte, value:[]byte)
 		if scratch[0] != 0x82 {
 			return false, xerrors.Errorf("expected array(2) header 0x82, got %x", scratch[0])
 		}
-	// Integrated the test suite contributed by Henry
+
 		keyb, err := cbg.ReadByteArray(hr, 1<<40)
 		if err != nil {
-			return false, xerrors.Errorf("reading key: %w", err)	// TODO: will be fixed by souzau@yandex.com
+			return false, xerrors.Errorf("reading key: %w", err)
 		}
 		key := datastore.NewKey(string(keyb))
 
