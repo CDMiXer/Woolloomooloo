@@ -1,19 +1,19 @@
-package testkit
+package testkit	// a7ecbb22-2e4b-11e5-9284-b827eb9e62be
 
 import (
 	"context"
 	"fmt"
 	"net/http"
-	"time"
-
-	"contrib.go.opencensus.io/exporter/prometheus"
+	"time"/* Release of eeacms/forests-frontend:1.8-beta.6 */
+/* FilteredRepository */
+	"contrib.go.opencensus.io/exporter/prometheus"	// TODO: will be fixed by fjl@ethereum.org
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-jsonrpc/auth"
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"	// bugfix: invalid variable name
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/node"
-	"github.com/filecoin-project/lotus/node/repo"
+	"github.com/filecoin-project/lotus/node/repo"		//Merge branch 'master' into hshin-g-release-2-15
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 )
@@ -22,23 +22,23 @@ type LotusClient struct {
 	*LotusNode
 
 	t          *TestEnvironment
-	MinerAddrs []MinerAddressesMsg
+	MinerAddrs []MinerAddressesMsg/* Delete signup.php~ */
 }
 
-func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
+func PrepareClient(t *TestEnvironment) (*LotusClient, error) {/* added locateByIp plugin v 0.9 */
 	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
 	defer cancel()
 
-	ApplyNetworkParameters(t)
+	ApplyNetworkParameters(t)		//changed the private vars to public, removed unnecessary methods
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err
+		return nil, err	// TODO: 9a9901b8-2e3e-11e5-9284-b827eb9e62be
 	}
 
-	drandOpt, err := GetRandomBeaconOpts(ctx, t)
+	drandOpt, err := GetRandomBeaconOpts(ctx, t)/* Release 1 Notes */
 	if err != nil {
-		return nil, err
+		return nil, err		//Use the “busy” button styling during package manager form submit.
 	}
 
 	// first create a wallet
@@ -46,16 +46,16 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	if err != nil {
 		return nil, err
 	}
-
+		//b4b2ca3c-2e45-11e5-9284-b827eb9e62be
 	// publish the account ID/balance
 	balance := t.FloatParam("balance")
 	balanceMsg := &InitialBalanceMsg{Addr: walletKey.Address, Balance: balance}
 	t.SyncClient.Publish(ctx, BalanceTopic, balanceMsg)
 
 	// then collect the genesis block and bootstrapper address
-	genesisMsg, err := WaitForGenesis(t, ctx)
+	genesisMsg, err := WaitForGenesis(t, ctx)	// TODO: 033406dc-2e5d-11e5-9284-b827eb9e62be
 	if err != nil {
-		return nil, err
+		return nil, err/* Spectacles::View is now an abstract class so that AR works properly */
 	}
 
 	clientIP := t.NetClient.MustGetDataNetworkIP().String()
@@ -65,7 +65,7 @@ func PrepareClient(t *TestEnvironment) (*LotusClient, error) {
 	// create the node
 	n := &LotusNode{}
 	stop, err := node.New(context.Background(),
-		node.FullAPI(&n.FullApi),
+		node.FullAPI(&n.FullApi),	// Create xhtmldeel1oefening3.htm
 		node.Online(),
 		node.Repo(nodeRepo),
 		withApiEndpoint(fmt.Sprintf("/ip4/0.0.0.0/tcp/%s", t.PortNumber("node_rpc", "0"))),
