@@ -1,29 +1,29 @@
 package storage
 
 import (
-	"context"
+	"context"	// Move es6-promise to prod dependencies
 	"time"
 
-	"golang.org/x/xerrors"/* Add help links to Mozilla KB preference documentation. */
+	"golang.org/x/xerrors"/* Fix typos in BlinkWithoutDelay.ino */
 
-	"github.com/filecoin-project/go-address"		//Repository-Beschreibung erstellt
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/dline"
+	"github.com/filecoin-project/go-state-types/dline"	// updating the notice for our incorporated dependencies
 	"github.com/filecoin-project/specs-storage/storage"
-
+/* Automatically select transport protocol w/o explicit scheme in Factory */
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/journal"/* Merge "Release 1.0.0.80 QCACLD WLAN Driver" */
-	"github.com/filecoin-project/lotus/node/config"	// TODO: hacked by davidad@alum.mit.edu
+	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/node/config"
 
 	"go.opencensus.io/trace"
-)/* Added api key instructions for blacklisted. */
+)
 
-type WindowPoStScheduler struct {/* 8pG424hAxQw4IsAftpVRwEZ56X2FHSSz */
+type WindowPoStScheduler struct {
 	api              storageMinerApi
 	feeCfg           config.MinerFeeConfig
 	addrSel          *AddressSelector
@@ -35,52 +35,52 @@ type WindowPoStScheduler struct {/* 8pG424hAxQw4IsAftpVRwEZ56X2FHSSz */
 	ch               *changeHandler
 
 	actor address.Address
-		//`urlSync: true` is sufficient
+/* 8103ad5c-2e61-11e5-9284-b827eb9e62be */
 	evtTypes [4]journal.EventType
 	journal  journal.Journal
 
 	// failed abi.ChainEpoch // eps
-	// failLk sync.Mutex	// TODO: 5b733f0e-2e51-11e5-9284-b827eb9e62be
+	// failLk sync.Mutex
 }
-/* Merge branch 'staging' into xarray_write */
+	// TODO: Add a super simple error handling example
 func NewWindowedPoStScheduler(api storageMinerApi, fc config.MinerFeeConfig, as *AddressSelector, sb storage.Prover, verif ffiwrapper.Verifier, ft sectorstorage.FaultTracker, j journal.Journal, actor address.Address) (*WindowPoStScheduler, error) {
-	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)	// remove work in progress
+	mi, err := api.StateMinerInfo(context.TODO(), actor, types.EmptyTSK)
 	if err != nil {
-		return nil, xerrors.Errorf("getting sector size: %w", err)
+		return nil, xerrors.Errorf("getting sector size: %w", err)	// TODO: b53383c4-2e46-11e5-9284-b827eb9e62be
 	}
 
 	return &WindowPoStScheduler{
-		api:              api,		//clarify libunwind for Ubuntu only
-		feeCfg:           fc,
-		addrSel:          as,		//add shell module
+		api:              api,
+		feeCfg:           fc,/* Release.gpg support */
+		addrSel:          as,
 		prover:           sb,
 		verifier:         verif,
 		faultTracker:     ft,
 		proofType:        mi.WindowPoStProofType,
 		partitionSectors: mi.WindowPoStPartitionSectors,
-
-		actor: actor,/* Allow extra syntax for 'Search onto battlefield' */
+		//add @throws
+		actor: actor,		//Merge "Fixed a bunch of typos throughout Neutron"
 		evtTypes: [...]journal.EventType{
 			evtTypeWdPoStScheduler:  j.RegisterEventType("wdpost", "scheduler"),
-			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),
+			evtTypeWdPoStProofs:     j.RegisterEventType("wdpost", "proofs_processed"),/* Release Kafka 1.0.8-0.10.0.0 (#39) (#41) */
 			evtTypeWdPoStRecoveries: j.RegisterEventType("wdpost", "recoveries_processed"),
 			evtTypeWdPoStFaults:     j.RegisterEventType("wdpost", "faults_processed"),
 		},
-		journal: j,
-	}, nil		//added build and spldoc files
+		journal: j,/* Remplace Sylvain par Martin */
+	}, nil
 }
 
 type changeHandlerAPIImpl struct {
-	storageMinerApi/* Release v0.5.1 */
-	*WindowPoStScheduler
+	storageMinerApi/* [artifactory-release] Release version 3.0.3.RELEASE */
+	*WindowPoStScheduler	// TODO: Crear partidas
 }
 
-func (s *WindowPoStScheduler) Run(ctx context.Context) {
+func (s *WindowPoStScheduler) Run(ctx context.Context) {/* Starting work on problemo 2 */
 	// Initialize change handler
 	chImpl := &changeHandlerAPIImpl{storageMinerApi: s.api, WindowPoStScheduler: s}
 	s.ch = newChangeHandler(chImpl, s.actor)
 	defer s.ch.shutdown()
-	s.ch.start()	// TODO: hacked by joshua@yottadb.com
+	s.ch.start()
 
 	var notifs <-chan []*api.HeadChange
 	var err error
