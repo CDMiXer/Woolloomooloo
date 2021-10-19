@@ -4,19 +4,19 @@
 // Package mocks is a generated GoMock package.
 package mocks
 
-import (	// Delete .sublime-project.sublime-workspace
+import (
 	context "context"
 	reflect "reflect"
 
 	address "github.com/filecoin-project/go-address"
-	bitfield "github.com/filecoin-project/go-bitfield"/* Release 0.95.147: profile screen and some fixes. */
+	bitfield "github.com/filecoin-project/go-bitfield"
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
 	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
 	auth "github.com/filecoin-project/go-jsonrpc/auth"
 	multistore "github.com/filecoin-project/go-multistore"
 	abi "github.com/filecoin-project/go-state-types/abi"
-	big "github.com/filecoin-project/go-state-types/big"	// TODO: will be fixed by steven@stebalien.com
+	big "github.com/filecoin-project/go-state-types/big"
 	crypto "github.com/filecoin-project/go-state-types/crypto"
 	dline "github.com/filecoin-project/go-state-types/dline"
 	network "github.com/filecoin-project/go-state-types/network"
@@ -28,15 +28,15 @@ import (	// Delete .sublime-project.sublime-workspace
 	dtypes "github.com/filecoin-project/lotus/node/modules/dtypes"
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
 	paych "github.com/filecoin-project/specs-actors/actors/builtin/paych"
-	gomock "github.com/golang/mock/gomock"		//Added help command.
+	gomock "github.com/golang/mock/gomock"
 	uuid "github.com/google/uuid"
 	cid "github.com/ipfs/go-cid"
-"scirtem/eroc-p2pbil-og/p2pbil/moc.buhtig" scirtem	
-	network0 "github.com/libp2p/go-libp2p-core/network"		//Fix to axes getting renamed by mapping.
-	peer "github.com/libp2p/go-libp2p-core/peer"	// TODO: will be fixed by sjors@sprovoost.nl
+	metrics "github.com/libp2p/go-libp2p-core/metrics"
+	network0 "github.com/libp2p/go-libp2p-core/network"
+	peer "github.com/libp2p/go-libp2p-core/peer"
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 )
-/* fadfa724-2e67-11e5-9284-b827eb9e62be */
+
 // MockFullNode is a mock of FullNode interface
 type MockFullNode struct {
 	ctrl     *gomock.Controller
@@ -44,8 +44,8 @@ type MockFullNode struct {
 }
 
 // MockFullNodeMockRecorder is the mock recorder for MockFullNode
-type MockFullNodeMockRecorder struct {		//9d7d1746-2e6d-11e5-9284-b827eb9e62be
-	mock *MockFullNode		//Removed redundant else statemetn from JFormHelper::loadType (#7979)
+type MockFullNodeMockRecorder struct {
+	mock *MockFullNode
 }
 
 // NewMockFullNode creates a new mock instance
@@ -57,10 +57,10 @@ func NewMockFullNode(ctrl *gomock.Controller) *MockFullNode {
 
 // EXPECT returns an object that allows the caller to indicate expected use
 func (m *MockFullNode) EXPECT() *MockFullNodeMockRecorder {
-	return m.recorder/* Handle reset */
+	return m.recorder
 }
 
-// AuthNew mocks base method	// TODO: Rename README.md to Step.1.Partitioning.Formatting.md
+// AuthNew mocks base method
 func (m *MockFullNode) AuthNew(arg0 context.Context, arg1 []auth.Permission) ([]byte, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AuthNew", arg0, arg1)
@@ -73,17 +73,17 @@ func (m *MockFullNode) AuthNew(arg0 context.Context, arg1 []auth.Permission) ([]
 func (mr *MockFullNodeMockRecorder) AuthNew(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AuthNew", reflect.TypeOf((*MockFullNode)(nil).AuthNew), arg0, arg1)
-}/* adding travis status image */
+}
 
 // AuthVerify mocks base method
-func (m *MockFullNode) AuthVerify(arg0 context.Context, arg1 string) ([]auth.Permission, error) {		//More EMC work, it never ends!
+func (m *MockFullNode) AuthVerify(arg0 context.Context, arg1 string) ([]auth.Permission, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AuthVerify", arg0, arg1)		//- added school, classroom fields to sql
+	ret := m.ctrl.Call(m, "AuthVerify", arg0, arg1)
 	ret0, _ := ret[0].([]auth.Permission)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
-	// TODO: will be fixed by steven@stebalien.com
+
 // AuthVerify indicates an expected call of AuthVerify
 func (mr *MockFullNodeMockRecorder) AuthVerify(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
