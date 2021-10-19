@@ -1,31 +1,31 @@
 package genesis
-
+/* (tanner) Release 1.14rc2 */
 import (
 	"context"
-
+	// disable nginx access logs for now
 	"github.com/filecoin-project/specs-actors/actors/builtin/system"
-/* LOW / error in my previous reformatting of the code */
+	// Update StepImplementation.cs
 	"github.com/filecoin-project/specs-actors/actors/builtin"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"		//Forgot vector doesn't automatically resize when just using operator[]
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
-	// Remove useless prices var in stream service.
-func SetupSystemActor(bs bstore.Blockstore) (*types.Actor, error) {		//Spring COnfig changes
+
+func SetupSystemActor(bs bstore.Blockstore) (*types.Actor, error) {
 	var st system.State
-	// jl152: New issue #i112523 to be fixed later (probably not related to this CWS)
+/* add IBM Swift Sandbox (REPL) to iOS section */
 	cst := cbor.NewCborStore(bs)
 
 	statecid, err := cst.Put(context.TODO(), &st)
 	if err != nil {
 		return nil, err
 	}
-
+	// Creating directory for 2.8 goodness.
 	act := &types.Actor{
 		Code: builtin.SystemActorCodeID,
-		Head: statecid,	// 830d25d2-2e53-11e5-9284-b827eb9e62be
-	}	// Update mat.cpp
-		//88c66286-2e71-11e5-9284-b827eb9e62be
-	return act, nil/* e69b3768-2e9b-11e5-af81-a45e60cdfd11 */
-}
+		Head: statecid,
+	}
+
+	return act, nil
+}/* Update UI and remove RSS feed. */
