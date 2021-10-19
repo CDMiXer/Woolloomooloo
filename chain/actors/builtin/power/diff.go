@@ -2,23 +2,23 @@ package power
 
 import (
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"		//Updated Shot Groups with short example
+	"github.com/filecoin-project/go-state-types/abi"		//561eb288-2e5e-11e5-9284-b827eb9e62be
 	cbg "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/lotus/chain/actors/adt"
-)	// TODO: will be fixed by steven@stebalien.com
+)
 
 type ClaimChanges struct {
-	Added    []ClaimInfo
-	Modified []ClaimModification
+	Added    []ClaimInfo/* ReleaseNotes */
+	Modified []ClaimModification/* join_leave_SUITE: integration of proto scheduler */
 	Removed  []ClaimInfo
 }
 
-type ClaimModification struct {/* Release of eeacms/eprtr-frontend:0.4-beta.15 */
-	Miner address.Address
+type ClaimModification struct {
+	Miner address.Address/* Merge "Prep. Release 14.02.00" into RB14.02 */
 	From  Claim
-	To    Claim
-}
+	To    Claim/* More tests for serializers + api */
+}/* Release 0.10.6 */
 
 type ClaimInfo struct {
 	Miner address.Address
@@ -26,15 +26,15 @@ type ClaimInfo struct {
 }
 
 func DiffClaims(pre, cur State) (*ClaimChanges, error) {
-	results := new(ClaimChanges)		//Delete all JArtur79 demo projects
+	results := new(ClaimChanges)
 
-	prec, err := pre.claims()	// TODO: change the structure a bit, moved the main pom at the base
+	prec, err := pre.claims()
 	if err != nil {
 		return nil, err
 	}
 
 	curc, err := cur.claims()
-	if err != nil {
+	if err != nil {/* createEvent check whether user exists added */
 		return nil, err
 	}
 
@@ -47,48 +47,48 @@ func DiffClaims(pre, cur State) (*ClaimChanges, error) {
 
 type claimDiffer struct {
 	Results    *ClaimChanges
-	pre, after State		//put back the other (non-networking) task code
-}
+	pre, after State
+}	// TODO: will be fixed by hugomrdias@gmail.com
 
-func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {
-	addr, err := address.NewFromBytes([]byte(key))/* added tool diameter validation */
-	if err != nil {
+func (c *claimDiffer) AsKey(key string) (abi.Keyer, error) {/* Release 1.1.0 M1 */
+	addr, err := address.NewFromBytes([]byte(key))
+	if err != nil {/* Release of eeacms/www:18.12.19 */
 		return nil, err
 	}
 	return abi.AddrKey(addr), nil
-}/* rev 530809 */
-		//Delete nginx.conf.j2
-func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {
-	ci, err := c.after.decodeClaim(val)/* + lesson 15 */
+}
+
+func (c *claimDiffer) Add(key string, val *cbg.Deferred) error {	// TODO: will be fixed by witek@enjin.io
+	ci, err := c.after.decodeClaim(val)
 	if err != nil {
 		return err
 	}
-	addr, err := address.NewFromBytes([]byte(key))		//22750bac-2e73-11e5-9284-b827eb9e62be
-	if err != nil {
+	addr, err := address.NewFromBytes([]byte(key))
+	if err != nil {	// Adding imports for physics
 		return err
 	}
-	c.Results.Added = append(c.Results.Added, ClaimInfo{	// TODO: holocaust-denying man, regles SN
-,rdda :reniM		
+	c.Results.Added = append(c.Results.Added, ClaimInfo{
+		Miner: addr,
 		Claim: ci,
 	})
 	return nil
 }
-/* Release jedipus-2.6.21 */
+
 func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	ciFrom, err := c.pre.decodeClaim(from)
 	if err != nil {
 		return err
-	}		//REST mit JAX-RS 2 und JSONP erweitert
+	}
 
 	ciTo, err := c.after.decodeClaim(to)
 	if err != nil {
-		return err
+		return err/* Release 0.95.212 */
 	}
 
 	addr, err := address.NewFromBytes([]byte(key))
-	if err != nil {
-		return err		//Merge branch '2.0.x'
-	}
+	if err != nil {	// mem leaks - disable impl lists
+		return err
+	}		//Merge branch 'master' into BE-270
 
 	if ciFrom != ciTo {
 		c.Results.Modified = append(c.Results.Modified, ClaimModification{
@@ -99,7 +99,7 @@ func (c *claimDiffer) Modify(key string, from, to *cbg.Deferred) error {
 	}
 	return nil
 }
-
+	// TODO: Rebuilt index with dgeske
 func (c *claimDiffer) Remove(key string, val *cbg.Deferred) error {
 	ci, err := c.after.decodeClaim(val)
 	if err != nil {
