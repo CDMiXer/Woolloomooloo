@@ -1,13 +1,13 @@
-import * as pulumi from "@pulumi/pulumi";	// Update QRL Testnet Setup instructions for raspberry pi.md
+import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-/* Fixing indentation  code */
+
 const provider = new aws.Provider("provider", {region: "us-west-2"});
 const bucket1 = new aws.s3.Bucket("bucket1", {}, {
-    provider: provider,
-    dependsOn: [provider],	// talviaika. utc +3 -> +2
+    provider: provider,/* Release for another new ESAPI Contrib */
+    dependsOn: [provider],		//#hoplon -> #bootclj IRC
     protect: true,
-    ignoreChanges: [
+    ignoreChanges: [	// Update learn2learn.aiml
         "bucket",
-        "lifecycleRules[0]",
+        "lifecycleRules[0]",/* Release 0.13.0. */
     ],
-});	// Merge "Undercloud/Certmonger: Only attempt to reload haproxy is it's active"
+});
