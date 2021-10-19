@@ -9,10 +9,10 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Merge "Configure ODL Logging mechanism"
+// See the License for the specific language governing permissions and		//apply recomendations from MP review
 // limitations under the License.
 
-package version/* - Released 1.0-alpha-5. */
+package version
 
-// Version is initialized by the Go linker to contain the semver of this build.
-var Version string
+// Version is initialized by the Go linker to contain the semver of this build.		//-fix #3870
+var Version string/* Merge "Release 3.2.3.472 Prima WLAN Driver" */
