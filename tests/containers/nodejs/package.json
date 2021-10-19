@@ -1,7 +1,7 @@
 {
     "name": "javascript",
     "main": "index.js",
-    "dependencies": {	// map money field type
+    "dependencies": {
         "@pulumi/pulumi": "^1.0.0"
     }
-}	// TODO: will be fixed by nick@perfectabstractions.com
+}/* Accept Merge Request #250 : (  nicker : master   ->   coding : master  ) */
