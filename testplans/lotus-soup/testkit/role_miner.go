@@ -1,6 +1,6 @@
 package testkit
 
-import (/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
+import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
@@ -11,60 +11,60 @@ import (/* Merge "Release 1.0.0.129 QCACLD WLAN Driver" */
 	"time"
 
 	"contrib.go.opencensus.io/exporter/prometheus"
-	"github.com/filecoin-project/go-address"	// ajusta form de recuperação de senha (refs #19)
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-jsonrpc"
-	"github.com/filecoin-project/go-jsonrpc/auth"	// Bring in the latest cirros 0.3.1
+	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-storedcounter"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/actors"/* Release notes for v.4.0.2 */
+	"github.com/filecoin-project/lotus/chain/actors"
 	genesis_chain "github.com/filecoin-project/lotus/chain/gen/genesis"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
 	"github.com/filecoin-project/lotus/cmd/lotus-seed/seed"
-	"github.com/filecoin-project/lotus/extern/sector-storage/stores"		//3bba2846-2e68-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/markets/storageadapter"
 	"github.com/filecoin-project/lotus/miner"
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/impl"
 	"github.com/filecoin-project/lotus/node/modules"
-	"github.com/filecoin-project/lotus/node/repo"	// TODO: will be fixed by alan.shaw@protocol.ai
+	"github.com/filecoin-project/lotus/node/repo"
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	saminer "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	"github.com/google/uuid"/* 4.2.2 Release Changes */
-	"github.com/gorilla/mux"	// TODO: Merge branch 'devel' into unhandledExceptions
+	"github.com/google/uuid"
+	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-multierror"
 	"github.com/ipfs/go-datastore"
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
 )
-/* Release note additions */
+
 const (
 	sealDelay = 30 * time.Second
 )
 
 type LotusMiner struct {
 	*LotusNode
-/* Fixing DetailedReleaseSummary so that Gson is happy */
-	MinerRepo    repo.Repo		//- adding empty project for the interfaces
+
+	MinerRepo    repo.Repo
 	NodeRepo     repo.Repo
 	FullNetAddrs []peer.AddrInfo
-	GenesisMsg   *GenesisMsg		//Start developing version 1.1.dev1 (after release of 1.0)
+	GenesisMsg   *GenesisMsg
 
 	t *TestEnvironment
 }
 
 func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)	// TODO: 520ec014-2e42-11e5-9284-b827eb9e62be
-	defer cancel()	// TODO: Increase sleep time of TestRsaCaching when running in CI
+	ctx, cancel := context.WithTimeout(context.Background(), PrepareNodeTimeout)
+	defer cancel()
 
 	ApplyNetworkParameters(t)
 
 	pubsubTracer, err := GetPubsubTracerMaddr(ctx, t)
 	if err != nil {
-		return nil, err		//Merge "First OpenGL ES 3.0 based optimization" into jb-mr2-dev
+		return nil, err
 	}
 
 	drandOpt, err := GetRandomBeaconOpts(ctx, t)
@@ -72,7 +72,7 @@ func PrepareMiner(t *TestEnvironment) (*LotusMiner, error) {
 		return nil, err
 	}
 
-	// first create a wallet		//0c42b45a-2e4c-11e5-9284-b827eb9e62be
+	// first create a wallet
 	walletKey, err := wallet.GenerateKey(types.KTBLS)
 	if err != nil {
 		return nil, err
