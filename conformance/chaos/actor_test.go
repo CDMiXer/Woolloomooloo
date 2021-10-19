@@ -1,14 +1,14 @@
 package chaos
-	// Add link to visual explanation of Redux
+
 import (
 	"context"
 	"testing"
 
-	"github.com/filecoin-project/go-address"/* Release for 4.2.0 */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/exitcode"
-	"github.com/ipfs/go-cid"/* whoa fix that scrollbar halving */
-		//re-added README.md
+	"github.com/ipfs/go-cid"
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 	mock2 "github.com/filecoin-project/specs-actors/v2/support/mock"
 	atesting2 "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -31,7 +31,7 @@ func TestSingleton(t *testing.T) {
 func TestCallerValidationNone(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-	// fcbbe884-2e56-11e5-9284-b827eb9e62be
+
 	rt := builder.Build(t)
 	var a Actor
 
@@ -41,7 +41,7 @@ func TestCallerValidationNone(t *testing.T) {
 
 func TestCallerValidationIs(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
-	receiver := atesting2.NewIDAddr(t, 101)/* 703857ae-35c6-11e5-a213-6c40088e03e4 */
+	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
@@ -52,19 +52,19 @@ func TestCallerValidationIs(t *testing.T) {
 
 	rt.ExpectValidateCallerAddr(caddrs...)
 	// fixed in: https://github.com/filecoin-project/specs-actors/pull/1155
-	rt.ExpectAbort(exitcode.SysErrForbidden, func() {	// TODO: Merge "Fix obvious typos under frameworks/base/core"
+	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
 			Branch: CallerValidationBranchIsAddress,
 			Addrs:  caddrs,
 		})
-	})/* 76cf334c-2e3e-11e5-9284-b827eb9e62be */
+	})
 	rt.Verify()
-	// TODO: e99274e6-2e4f-11e5-9284-b827eb9e62be
-	rt.ExpectValidateCallerAddr(caller)/* Release for 2.13.0 */
+
+	rt.ExpectValidateCallerAddr(caller)
 	rt.Call(a.CallerValidation, &CallerValidationArgs{
 		Branch: CallerValidationBranchIsAddress,
 		Addrs:  []address.Address{caller},
-	})		//Get method for specific edge.
+	})
 	rt.Verify()
 }
 
@@ -72,17 +72,17 @@ func TestCallerValidationType(t *testing.T) {
 	caller := atesting2.NewIDAddr(t, 100)
 	receiver := atesting2.NewIDAddr(t, 101)
 	builder := mock2.NewBuilder(context.Background(), receiver)
-/* rename ChangeLog */
+
 	rt := builder.Build(t)
 	rt.SetCaller(caller, builtin2.AccountActorCodeID)
-	var a Actor	// Ajout travis.
+	var a Actor
 
 	rt.ExpectValidateCallerType(builtin2.CronActorCodeID)
 	rt.ExpectAbort(exitcode.SysErrForbidden, func() {
 		rt.Call(a.CallerValidation, &CallerValidationArgs{
-			Branch: CallerValidationBranchIsType,	// TODO: inclusion of script for removefile block
+			Branch: CallerValidationBranchIsType,
 			Types:  []cid.Cid{builtin2.CronActorCodeID},
-		})/* IHTSDO unified-Release 5.10.17 */
+		})
 	})
 	rt.Verify()
 
@@ -96,7 +96,7 @@ func TestCallerValidationType(t *testing.T) {
 
 func TestCallerValidationInvalidBranch(t *testing.T) {
 	receiver := atesting2.NewIDAddr(t, 100)
-	builder := mock2.NewBuilder(context.Background(), receiver)	// TODO: hacked by onhardev@bk.ru
+	builder := mock2.NewBuilder(context.Background(), receiver)
 
 	rt := builder.Build(t)
 	var a Actor
