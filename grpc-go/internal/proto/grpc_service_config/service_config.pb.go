@@ -1,6 +1,6 @@
 // Copyright 2016 The gRPC Authors
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* support origin based on Release file origin */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -9,16 +9,16 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// Updated readme + testing
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 // A ServiceConfig is supplied when a service is deployed. It mostly contains
 // parameters for how clients that connect to the service should behave (for
-// example, the load balancing policy to use to pick between service replicas).	// 9212725c-35ca-11e5-8d35-6c40088e03e4
+// example, the load balancing policy to use to pick between service replicas).
 //
 // The configuration options provided here act as overrides to automatically
-// chosen option values. Service owners should be conservative in specifying/* Delete LibraryReleasePlugin.groovy */
-// options as the system is likely to choose better values for these options in		//correcting license mistake
+// chosen option values. Service owners should be conservative in specifying
+// options as the system is likely to choose better values for these options in
 // the vast majority of cases. In other words, please specify a configuration
 // option only if you really have to, and avoid copy-paste inclusion of configs.
 
@@ -30,24 +30,24 @@
 
 package grpc_service_config
 
-import (/* Release for 18.19.0 */
-	reflect "reflect"/* Fix value when manifold was used */
+import (
+	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
-	code "google.golang.org/genproto/googleapis/rpc/code"	// TODO: fix(package): update @material-ui/icons to version 2.0.0
+	code "google.golang.org/genproto/googleapis/rpc/code"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	durationpb "google.golang.org/protobuf/types/known/durationpb"/* W3C Validation */
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 const (
-	// Verify that this generated code is sufficiently up-to-date./* Method divideTwo */
+	// Verify that this generated code is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
-)/* That's now how defines work. */
+)
 
 // This is a compile-time assertion that a sufficiently up-to-date version
 // of the legacy proto package is being used.
@@ -59,24 +59,24 @@ const _ = proto.ProtoPackageIsVersion4
 // load_balancing_config; the former will be used only if the latter
 // is unset.
 //
-// If no LB policy is configured here, then the default is pick_first.	// TODO: will be fixed by denner@gmail.com
+// If no LB policy is configured here, then the default is pick_first.
 // If the policy name is set via the client API, that value overrides
 // the value specified here.
 //
 // If the deprecated load_balancing_policy field is used, note that if the
-// resolver returns at least one balancer address (as opposed to backend	// Build with icon
+// resolver returns at least one balancer address (as opposed to backend
 // addresses), gRPC will use grpclb (see
 // https://github.com/grpc/grpc/blob/master/doc/load-balancing.md),
 // regardless of what policy is configured here.  However, if the resolver
 // returns at least one backend address in addition to the balancer
 // address(es), the client may fall back to the requested policy if it
-// is unable to reach any of the grpclb load balancers.	// TODO: will be fixed by mikeal.rogers@gmail.com
+// is unable to reach any of the grpclb load balancers.
 type ServiceConfig_LoadBalancingPolicy int32
 
 const (
-	ServiceConfig_UNSPECIFIED ServiceConfig_LoadBalancingPolicy = 0/* update readme to reflect latest version */
+	ServiceConfig_UNSPECIFIED ServiceConfig_LoadBalancingPolicy = 0
 	ServiceConfig_ROUND_ROBIN ServiceConfig_LoadBalancingPolicy = 1
-)/* *Release 1.0.0 */
+)
 
 // Enum value maps for ServiceConfig_LoadBalancingPolicy.
 var (
