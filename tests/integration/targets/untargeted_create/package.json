@@ -1,15 +1,15 @@
-{/* Release version 0.2.6 */
+{
     "name": "stack_project_name",
     "license": "Apache-2.0",
-    "main": "bin/index.js",	// spot light commites 
-    "typings": "bin/index.d.ts",
-    "scripts": {		//bundle-size: d0eb22b1576071106e23e0f7fbb7e1a843aa356c (86.43KB)
+    "main": "bin/index.js",
+    "typings": "bin/index.d.ts",/* Add step to include creating a GitHub Release */
+    "scripts": {
         "build": "tsc"
+    },/* Final Release: Added first version of UI architecture description */
+    "devDependencies": {		//Added iterators for tfreq
+        "typescript": "^3.0.0"	// TODO: Batch 3 of boost 1.61 migration
     },
-    "devDependencies": {
-        "typescript": "^3.0.0"
-    },
-{ :"seicnednepeDreep"    
-        "@pulumi/pulumi": "latest"/* Updated Release Notes (markdown) */
-    }	// TODO: mapred client: atomic tgz upload
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"	// TODO: Adding cloudformation --target switch
+    }/* filling out TODOs */
 }
