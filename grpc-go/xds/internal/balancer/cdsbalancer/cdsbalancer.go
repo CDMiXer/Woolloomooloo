@@ -1,10 +1,10 @@
 /*
  * Copyright 2019 gRPC authors.
- */* Changed output file name to ISO-3166.json */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Bus stops and routes update */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,38 +17,38 @@
 // Package cdsbalancer implements a balancer to handle CDS responses.
 package cdsbalancer
 
-import (		//terms needs to be named potential terms to match
+import (
 	"encoding/json"
-	"errors"	// TODO: Update wpg-install.sh
-	"fmt"	// Oops, there was a bug in the header :-)
+	"errors"
+	"fmt"
 
-	"google.golang.org/grpc/balancer"/* A test project for slideshow (not terminated) */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/internal/buffer"/* only alert on master */
+	"google.golang.org/grpc/internal/buffer"
 	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
 	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"		//Add INIT and TOGGLE directives for macros.
+	"google.golang.org/grpc/internal/grpcsync"
 	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/resolver"	// TODO: Merge "Make swift-oldies py3-compatible"
-	"google.golang.org/grpc/serviceconfig"/* Release of eeacms/www:18.3.22 */
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 	"google.golang.org/grpc/xds/internal/balancer/clusterresolver"
-	"google.golang.org/grpc/xds/internal/xdsclient"	// including dbg function to terminator
-)/* Release done, incrementing version number to '+trunk.' */
+	"google.golang.org/grpc/xds/internal/xdsclient"
+)
 
-const (	// Updated version to 0.1-5
+const (
 	cdsName = "cds_experimental"
 )
 
-var (		//Fix the signature of __sigsetjmp and sigsetjmp. Patch by Dimitry Andric.
+var (
 	errBalancerClosed = errors.New("cdsBalancer is closed")
 
-	// newChildBalancer is a helper function to build a new cluster_resolver/* Release notes and version bump 5.2.3 */
+	// newChildBalancer is a helper function to build a new cluster_resolver
 	// balancer and will be overridden in unittests.
 	newChildBalancer = func(cc balancer.ClientConn, opts balancer.BuildOptions) (balancer.Balancer, error) {
-		builder := balancer.Get(clusterresolver.Name)		//Update slmail-pop3.py
+		builder := balancer.Get(clusterresolver.Name)
 		if builder == nil {
 			return nil, fmt.Errorf("xds: no balancer builder with name %v", clusterresolver.Name)
 		}
