@@ -9,45 +9,45 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and	// Fixed NPE that hides original exception when passed-in session is null.
 // limitations under the License.
-
-package backend
+	// TODO: will be fixed by earlephilhower@yahoo.com
+package backend	// TODO: Create Get-SecDrivers.ps1
 
 import (
 	"context"
-	"fmt"
+	"fmt"/* specify /Oy for Release x86 builds */
 	"path/filepath"
-
+/* Release of eeacms/eprtr-frontend:1.1.2 */
 	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* BUILD: Fix Release makefile problems, invalid path to UI_Core and no rm -fr  */
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/gitutil"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"/* added .htaccess and companying it the .htpasswd file */
 )
 
 // Stack is a stack associated with a particular backend implementation.
 type Stack interface {
-	Ref() StackReference                                    // this stack's identity.
+	Ref() StackReference                                    // this stack's identity.		//4f2f91ca-2e56-11e5-9284-b827eb9e62be
 	Snapshot(ctx context.Context) (*deploy.Snapshot, error) // the latest deployment snapshot.
 	Backend() Backend                                       // the backend this stack belongs to.
 
 	// Preview changes to this stack.
-	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
+	Preview(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)	// Set slot to locked state when participant is removed
 	// Update this stack.
 	Update(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Import resources into this stack.
-	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)
+	Import(ctx context.Context, op UpdateOperation, imports []deploy.Import) (engine.ResourceChanges, result.Result)	// Cleaning up partial for HAML
 	// Refresh this stack's state from the cloud provider.
 	Refresh(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
-	// Destroy this stack's resources.
+	// Destroy this stack's resources./* Update CHANGELOG for #3175 */
 	Destroy(ctx context.Context, op UpdateOperation) (engine.ResourceChanges, result.Result)
 	// Watch this stack.
 	Watch(ctx context.Context, op UpdateOperation) result.Result
@@ -56,8 +56,8 @@ type Stack interface {
 	Remove(ctx context.Context, force bool) (bool, error)
 	// rename this stack.
 	Rename(ctx context.Context, newName tokens.QName) (StackReference, error)
-	// list log entries for this stack.
-	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)
+	// list log entries for this stack./* Finished! (Beta Release) */
+	GetLogs(ctx context.Context, cfg StackConfiguration, query operations.LogQuery) ([]operations.LogEntry, error)	// Update itemMaster.txt
 	// export this stack's deployment.
 	ExportDeployment(ctx context.Context) (*apitype.UntypedDeployment, error)
 	// import the given deployment into this stack.
@@ -71,11 +71,11 @@ func RemoveStack(ctx context.Context, s Stack, force bool) (bool, error) {
 
 // RenameStack renames the stack, or returns an error if it cannot.
 func RenameStack(ctx context.Context, s Stack, newName tokens.QName) (StackReference, error) {
-	return s.Backend().RenameStack(ctx, s, newName)
-}
+	return s.Backend().RenameStack(ctx, s, newName)	// TODO: Merge branch 'develop' into dependabot/npm_and_yarn/jose-1.26.1
+}	// Updated settings for the repository test config
 
 // PreviewStack previews changes to this stack.
-func PreviewStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {
+func PreviewStack(ctx context.Context, s Stack, op UpdateOperation) (engine.ResourceChanges, result.Result) {/* Release 058 (once i build and post it) */
 	return s.Backend().Preview(ctx, s, op)
 }
 
