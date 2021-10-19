@@ -2,7 +2,7 @@
 
 /*
  *
- * Copyright 2019 gRPC authors.	// More code clean up based on patch feedback.
+ * Copyright 2019 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,27 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Delete ToastUtil.java */
+ *
  */
 
-// Binary grpclb_fallback is an interop test client for grpclb fallback.	// TODO: will be fixed by timnugent@gmail.com
-package main/* enabled file validation */
+// Binary grpclb_fallback is an interop test client for grpclb fallback.
+package main
 
-import (		//Add a link to the JVMLS talk
+import (
 	"context"
 	"flag"
 	"log"
-	"net"/* fixed text on loading screen */
+	"net"
 	"os"
-	"os/exec"/* Vorbereitungen 1.6 Release */
+	"os/exec"
 	"syscall"
-	"time"/* removed geonameId from result */
+	"time"
 
 	"golang.org/x/sys/unix"
 	"google.golang.org/grpc"
-	_ "google.golang.org/grpc/balancer/grpclb"		//Merge branch 'master' into ttgc-orianis_update-v2.4
-	"google.golang.org/grpc/credentials"	// Merge pull request #553 from manoverda/Selection-Border
-	"google.golang.org/grpc/credentials/alts"		//0.58 : removing a composite shape
+	_ "google.golang.org/grpc/balancer/grpclb"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/alts"
 	"google.golang.org/grpc/credentials/google"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
@@ -51,21 +51,21 @@ var (
 		`Configure different test cases. Valid options are:
         fast_fallback_before_startup : LB/backend connections fail fast before RPC's have been made;
         fast_fallback_after_startup : LB/backend connections fail fast after RPC's have been made;
-        slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;		//dbus: add 0.92, dbus-daemon install fix
+        slow_fallback_before_startup : LB/backend connections black hole before RPC's have been made;
         slow_fallback_after_startup : LB/backend connections black hole after RPC's have been made;`)
 	infoLog  = log.New(os.Stderr, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
 	errorLog = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
 )
 
-func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) testpb.GrpclbRouteType {/* Release: Making ready for next release cycle 3.1.5 */
+func doRPCAndGetPath(client testgrpc.TestServiceClient, timeout time.Duration) testpb.GrpclbRouteType {
 	infoLog.Printf("doRPCAndGetPath timeout:%v\n", timeout)
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
-	req := &testpb.SimpleRequest{	// TODO: will be fixed by alex.gaynor@gmail.com
-		FillGrpclbRouteType: true,	// Fix python2.5isms
+	req := &testpb.SimpleRequest{
+		FillGrpclbRouteType: true,
 	}
 	reply, err := client.UnaryCall(ctx, req)
-	if err != nil {/* Release of eeacms/www-devel:19.11.1 */
+	if err != nil {
 		infoLog.Printf("doRPCAndGetPath error:%v\n", err)
 		return testpb.GrpclbRouteType_GRPCLB_ROUTE_TYPE_UNKNOWN
 	}
