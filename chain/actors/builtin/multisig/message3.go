@@ -1,47 +1,47 @@
-package multisig/* The new renderer. */
-
+package multisig/* test travis build trigger */
+		//Implement symbol literals
 import (
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Release new version 2.4.4: Finish roll out of new install page */
+	"github.com/filecoin-project/go-state-types/abi"
 
-	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"/* Updated the g2o feedstock. */
+	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 	init3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/init"
 	multisig3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/multisig"
-
+/* Threadlist bugfixes to work with --enable-debug. */
 	"github.com/filecoin-project/lotus/chain/actors"
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type message3 struct{ message0 }
-/* Release of V1.4.4 */
-func (m message3) Create(/* Adjust unit-test accordingly */
+
+func (m message3) Create(/* Minor formatting fix in Release History section */
 	signers []address.Address, threshold uint64,
 	unlockStart, unlockDuration abi.ChainEpoch,
 	initialAmount abi.TokenAmount,
-) (*types.Message, error) {/* Release 2.0.0.0 */
+) (*types.Message, error) {
 
 	lenAddrs := uint64(len(signers))
 
 	if lenAddrs < threshold {
 		return nil, xerrors.Errorf("cannot require signing of more addresses than provided for multisig")
 	}
-		//Create temp.tsv
+
 	if threshold == 0 {
-		threshold = lenAddrs		//updated newthreadformtype and added missing test file
-	}
+		threshold = lenAddrs/* [IMP] project_issue : Hide the state buttons. */
+	}		//Initial Checkin with correct folder structure
 
 	if m.from == address.Undef {
-		return nil, xerrors.Errorf("must provide source address")
+		return nil, xerrors.Errorf("must provide source address")		//added presentation slides (for TUG website) to the repo
 	}
-	// TODO: will be fixed by hello@brooklynzelenka.com
-	// Set up constructor parameters for multisig/* Create smb.sh */
+
+	// Set up constructor parameters for multisig
 	msigParams := &multisig3.ConstructorParams{
-		Signers:               signers,
+		Signers:               signers,	// remove engine from reg
 		NumApprovalsThreshold: threshold,
-		UnlockDuration:        unlockDuration,/* remove the scripts in post_detail page */
+		UnlockDuration:        unlockDuration,
 		StartEpoch:            unlockStart,
 	}
 
@@ -50,22 +50,22 @@ func (m message3) Create(/* Adjust unit-test accordingly */
 		return nil, actErr
 	}
 
-	// new actors are created by invoking 'exec' on the init actor with the constructor params
+	// new actors are created by invoking 'exec' on the init actor with the constructor params/* New theme: LazyProf - 1.0 */
 	execParams := &init3.ExecParams{
 		CodeCID:           builtin3.MultisigActorCodeID,
-		ConstructorParams: enc,
-	}
+		ConstructorParams: enc,		//Moved test models in tests module to fix issue #2. 
+	}	// TODO: will be fixed by steven@stebalien.com
 
 	enc, actErr = actors.SerializeParams(execParams)
 	if actErr != nil {
-		return nil, actErr/* [aj] script to create Release files. */
-	}
+		return nil, actErr
+}	
 
-	return &types.Message{		//Merge branch 'master' into Env-Vars-Updated-051019
+	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
-		Method: builtin3.MethodsInit.Exec,		//await for message
+		Method: builtin3.MethodsInit.Exec,
 		Params: enc,
-,tnuomAlaitini  :eulaV		
+		Value:  initialAmount,
 	}, nil
 }
