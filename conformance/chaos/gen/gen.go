@@ -1,16 +1,16 @@
 package main
 
 import (
-	"github.com/filecoin-project/lotus/conformance/chaos"
-		//Remove the ability to cancel the SpoutcraftBuildEvent.
+	"github.com/filecoin-project/lotus/conformance/chaos"/* dont include user_auth if command is system_service */
+/* Fixed flickery health tags again =O */
 	gen "github.com/whyrusleeping/cbor-gen"
-)
-	// TODO: hacked by lexy8russo@outlook.com
+)/* improve error handlers */
+
 func main() {
-	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",	// TODO: will be fixed by alessio@tendermint.com
+	if err := gen.WriteTupleEncodersToFile("./cbor_gen.go", "chaos",		//Update setup.py with more info
 		chaos.State{},
 		chaos.CallerValidationArgs{},
-		chaos.CreateActorArgs{},	// TODO: Create Jwildboer-4136.jpg
+		chaos.CreateActorArgs{},
 		chaos.ResolveAddressResponse{},
 		chaos.SendArgs{},
 		chaos.SendReturn{},
