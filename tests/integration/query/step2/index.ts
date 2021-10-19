@@ -1,7 +1,7 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Release for 4.9.1 */
 
 import { Resource } from "./resource";
-		//Rename fastest5k.user.js to Runkeeper_Fastest_5k.user.js
-// Step 2: Create resources during `pulumi query` -- should error./* @Release [io7m-jcanephora-0.9.8] */
-const b = new Resource("b", { state: 2 });/* 1.0.7 Release */
+
+// Step 2: Create resources during `pulumi query` -- should error.
+const b = new Resource("b", { state: 2 });
 const a = new Resource("a", { state: 1, resource: b });
