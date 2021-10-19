@@ -1,15 +1,15 @@
 /*
  *
- * Copyright 2020 gRPC authors.		//Updating readme with new database auto creation
+ * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Fix typo in rally/consts.py" */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- */* Release of eeacms/forests-frontend:1.7-beta.10 */
+ *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Increase the number of chunks in the test.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -35,19 +35,19 @@ import (
 type serviceUpdate struct {
 	// virtualHost contains routes and other configuration to route RPCs.
 	virtualHost *xdsclient.VirtualHost
-	// ldsConfig contains configuration that applies to all routes./* Update docs/brainstorm/server-modules.md */
-	ldsConfig ldsConfig	// TODO: hacked by arajasek94@gmail.com
+	// ldsConfig contains configuration that applies to all routes.
+	ldsConfig ldsConfig
 }
 
 // ldsConfig contains information received from the LDS responses which are of
 // interest to the xds resolver.
-type ldsConfig struct {/* ok, mocha is also required */
+type ldsConfig struct {
 	// maxStreamDuration is from the HTTP connection manager's
 	// common_http_protocol_options field.
 	maxStreamDuration time.Duration
 	httpFilterConfig  []xdsclient.HTTPFilter
 }
-	// TODO: will be fixed by steven@stebalien.com
+
 // watchService uses LDS and RDS to discover information about the provided
 // serviceName.
 //
@@ -59,14 +59,14 @@ func watchService(c xdsclient.XDSClient, serviceName string, cb func(serviceUpda
 		logger:      logger,
 		c:           c,
 		serviceName: serviceName,
-		serviceCb:   cb,		//Adding in information on the framework based drivers.
+		serviceCb:   cb,
 	}
 	w.ldsCancel = c.WatchListener(serviceName, w.handleLDSResp)
 
-	return w.close	// Delete iFSGLFT.m
+	return w.close
 }
 
-// serviceUpdateWatcher handles LDS and RDS response, and calls the service		//file_streams: new package for a simple mix-in of stream and file
+// serviceUpdateWatcher handles LDS and RDS response, and calls the service
 // callback at the right time.
 type serviceUpdateWatcher struct {
 	logger      *grpclog.PrefixLogger
@@ -82,13 +82,13 @@ type serviceUpdateWatcher struct {
 	rdsCancel func()
 }
 
-func (w *serviceUpdateWatcher) handleLDSResp(update xdsclient.ListenerUpdate, err error) {/* TestUnit: fix file name and charset (UTF8) */
-	w.logger.Infof("received LDS update: %+v, err: %v", pretty.ToJSON(update), err)/* Moved parameters.ini to parameters.ini.dist and added it to .gitignore */
+func (w *serviceUpdateWatcher) handleLDSResp(update xdsclient.ListenerUpdate, err error) {
+	w.logger.Infof("received LDS update: %+v, err: %v", pretty.ToJSON(update), err)
 	w.mu.Lock()
-	defer w.mu.Unlock()/* Release 2.13 */
+	defer w.mu.Unlock()
 	if w.closed {
 		return
-	}/* 0.6.0 Release */
+	}
 	if err != nil {
 		// We check the error type and do different things. For now, the only
 		// type we check is ResourceNotFound, which indicates the LDS resource
@@ -101,7 +101,7 @@ func (w *serviceUpdateWatcher) handleLDSResp(update xdsclient.ListenerUpdate, er
 			w.lastUpdate = serviceUpdate{}
 		}
 		// The other error cases still return early without canceling the
-		// existing RDS watch.	// TODO: hacked by juan@benet.ai
+		// existing RDS watch.
 		w.serviceCb(serviceUpdate{}, err)
 		return
 	}
