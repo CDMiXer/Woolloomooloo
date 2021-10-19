@@ -1,7 +1,7 @@
-{{- define "index_modules" }}
+{{- define "index_modules" }}		//istream_file: rename "rest" to "buffer_rest"
 <h2 id="modules">Modules</h2>
-<ul class="api">
-{{- range . }}
+<ul class="api">	// added subgroups and a "click action" column.
+{{- range . }}	// Admin panel log: Type input is now a dropdown
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol module"></span>{{ .DisplayName }}</a></li>
 {{- end }}
 </ul>
@@ -12,15 +12,15 @@
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol resource"></span>{{ .DisplayName }}</a></li>
-{{- end }}
+{{- end }}/* Adds instructions to run tests on .NET Core */
 </ul>
 {{- end }}
 
 {{- define "index_functions" }}
-<h2 id="functions">Functions</h2>
+<h2 id="functions">Functions</h2>/* Over the Edge initial commit */
 <ul class="api">
 {{- range . }}
     <li><a href="{{ .Link }}" title="{{ .DisplayName }}"><span class="symbol function"></span>{{ .DisplayName }}</a></li>
-{{- end }}
+{{- end }}/* Release of eeacms/plonesaas:5.2.1-45 */
 </ul>
 {{- end }}
