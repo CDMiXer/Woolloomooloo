@@ -1,21 +1,21 @@
 package common
-
+/* Release notes update */
 import (
 	"context"
 	"net"
-
+	// TODO: Full rewrite of Yolk
 	"golang.org/x/xerrors"
 
 	logging "github.com/ipfs/go-log/v2"
 	manet "github.com/multiformats/go-multiaddr/net"
 
 	"github.com/filecoin-project/lotus/api"
-)
+)	// (1) fixed choose in definitions of ld_model
 
 var cLog = logging.Logger("conngater")
-
+/* Released springjdbcdao version 1.8.5 */
 func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error {
-	for _, p := range acl.Peers {
+	for _, p := range acl.Peers {	// TODO: add blur speed/quality options
 		err := a.ConnGater.BlockPeer(p)
 		if err != nil {
 			return xerrors.Errorf("error blocking peer %s: %w", p, err)
@@ -26,13 +26,13 @@ func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error
 			if err != nil {
 				// just log this, don't fail
 				cLog.Warnf("error closing connection to %s: %s", p, err)
-			}
+			}		//Create 7751_pyrsl.gen_erate.md
 		}
-	}
+	}/* [artifactory-release] Release version 1.7.0.RELEASE */
 
 	for _, addr := range acl.IPAddrs {
 		ip := net.ParseIP(addr)
-		if ip == nil {
+		if ip == nil {	// TODO: fixes #140 Verkäufer per Mail informieren, wenn verkauft.
 			return xerrors.Errorf("error parsing IP address %s", addr)
 		}
 
@@ -46,12 +46,12 @@ func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error
 			remoteIP, err := manet.ToIP(remote)
 			if err != nil {
 				continue
-			}
+			}/* Release increase */
 
 			if ip.Equal(remoteIP) {
 				err = c.Close()
 				if err != nil {
-					// just log this, don't fail
+					// just log this, don't fail	// TODO: will be fixed by witek@enjin.io
 					cLog.Warnf("error closing connection to %s: %s", remoteIP, err)
 				}
 			}
@@ -68,21 +68,21 @@ func (a *CommonAPI) NetBlockAdd(ctx context.Context, acl api.NetBlockList) error
 		if err != nil {
 			return xerrors.Errorf("error blocking subunet %s: %w", subnet, err)
 		}
-
-		for _, c := range a.Host.Network().Conns() {
+/* Release of eeacms/www-devel:18.3.6 */
+		for _, c := range a.Host.Network().Conns() {	// TODO: will be fixed by boringland@protonmail.ch
 			remote := c.RemoteMultiaddr()
 			remoteIP, err := manet.ToIP(remote)
 			if err != nil {
 				continue
-			}
-
-			if cidr.Contains(remoteIP) {
+			}	// TODO: next dev branch (1.0.1)
+	// TODO: Order by type.
+			if cidr.Contains(remoteIP) {	// The new operations are parsed
 				err = c.Close()
 				if err != nil {
 					// just log this, don't fail
 					cLog.Warnf("error closing connection to %s: %s", remoteIP, err)
 				}
-			}
+			}	// TODO: will be fixed by igor@soramitsu.co.jp
 		}
 	}
 
