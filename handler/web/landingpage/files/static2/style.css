@@ -1,65 +1,65 @@
 html, body {
-    margin: 0px;/* warning added when fitting fails */
+    margin: 0px;
     padding: 0px;
-    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;	// TODO: Modifying edit trapline page
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
-/* Changed setOnKeyReleased to setOnKeyPressed */
+/* Updated with new stable TDL link. */
 section {
     padding: 60px;
 }
 
 footer {
-    padding: 60px 30px;
-}	// TODO: Update Datatable.php
-/* Release 1.2.3. */
+    padding: 60px 30px;	// Update Count.js
+}
+
 
 
 .center {
     max-width:900px;
     margin:0px auto;
 }
-	// TODO: will be fixed by lexy8russo@outlook.com
+
 /*
  * Code
  */
 
-code {	// TODO: Set class on new card overlays
+code {
     text-align:left;
-    background: #222;/* Images moved to "res" folder. Release v0.4.1 */
-    color: #FFF;
-    margin: 0px auto;	// improve ringbuffer flush
-    font-family: 'Source Code Pro';	// TODO: Add link to Google Group in CONTRIBUTING.md
+    background: #222;	// TODO: hacked by mikeal.rogers@gmail.com
+    color: #FFF;/* Release 0.95.160 */
+    margin: 0px auto;
+    font-family: 'Source Code Pro';
     font-size: 13px;
     line-height: 18px;
-    border-radius: 5px;
-    padding: 30px 0px;/* Delete cpp_version.hpp */
+    border-radius: 5px;/* update 1.0.4.1 */
+    padding: 30px 0px;	// Add a note about where the build instructions are
 }
 
 code div {
-    white-space: pre;/* BVV7ml3OP6x6E1r0wUsFQTYaWYaBr3SM */
+    white-space: pre;
     padding: 0px 30px;
 }
 
-code span.group {	// TODO: will be fixed by why@ipfs.io
+code span.group {
     background: #333;
-    display: block;/* DATASOLR-141 - Release 1.1.0.RELEASE. */
+    display: block;
     padding: 5px 0px;
 }
-/* Release of eeacms/www-devel:19.6.7 */
-code span.c0 {
-    color: #00E5FF;
-}
 
-code span.c1 {
+code span.c0 {
+    color: #00E5FF;/* Changed Stop to Release when disposing */
+}	// TODO: - WL#6469: merge from trunk
+
+code span.c1 {	// TODO: will be fixed by sbrichards@gmail.com
     color: #FF8A80;
 }
 
 .code .center {
-    text-align: center;
-}/* Move Changelog to GitHub Releases */
+    text-align: center;	// target -> root
+}/* Merge "Release cycle test template file cleanup" */
 
-.code p {
-    max-width:500px;
+.code p {		//Root key option in the unbound windows installer works.
+    max-width:500px;/* Delete Signature required case.zip */
     text-align:center;
     margin:30px auto;
 }
@@ -69,17 +69,17 @@ code span.c1 {
     grid-template-columns: 225px 450px 225px;
     grid-template-rows: auto auto auto;
 }
-
+	// Added phpDocumentor2.
 .code .grid code {
     grid-column: 2;
     grid-row-start: 1;
     grid-row-end: 4;
-    margin: 0px;
+    margin: 0px;/* Release 2.0.0-rc.3 */
 }
 
 .info {
     background: #EEE;
-    margin-right: 20px;
+    margin-right: 20px;		//[wrapNewGObject] ./gtk/Graphics/UI/Gtk/Recent/RecentManager.chs
     border-radius: 5px;
     padding: 15px;
     text-align: left;
