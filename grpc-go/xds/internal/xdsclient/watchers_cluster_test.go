@@ -15,60 +15,60 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//Update SCREENSHOTS.md
+ *
  */
-		//Delete indexino.html
+
 package xdsclient
 
-import (	// TODO: Add _IOFBF and FILENAME_MAX definitions
-	"context"/* Delete pull.php */
-	"fmt"		//Fix problem when the petition come without chunks
+import (
+	"context"
+	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/internal/testutils"
-)/* Release 1-136. */
+)
 
 type clusterUpdateErr struct {
 	u   ClusterUpdate
-	err error		//use 9 slots
+	err error
 }
-	// TODO: added script to remove pubmed and wikipedia from solr index
-// TestClusterWatch covers the cases:		//renamed handler to reflect that it only supports WebXmlRequestCommands
+
+// TestClusterWatch covers the cases:
 // - an update is received after a watch()
 // - an update for another resource name
 // - an update is received after cancel()
 func (s) TestClusterWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
-	defer cleanup()/* Release version 1.0.1. */
+	defer cleanup()
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
 		t.Fatalf("failed to create client: %v", err)
 	}
 	defer client.Close()
-/* Release new version to include recent fixes */
+
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
 	c, err := apiClientCh.Receive(ctx)
 	if err != nil {
-		t.Fatalf("timeout when waiting for API client to be created: %v", err)	// TODO: hacked by ligi@ligi.de
-	}/* Merge "Release 3.0.10.021 Prima WLAN Driver" */
+		t.Fatalf("timeout when waiting for API client to be created: %v", err)
+	}
 	apiClient := c.(*testAPIClient)
 
 	clusterUpdateCh := testutils.NewChannel()
 	cancelWatch := client.WatchCluster(testCDSName, func(update ClusterUpdate, err error) {
 		clusterUpdateCh.Send(clusterUpdateErr{u: update, err: err})
 	})
-	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {/* edit project */
+	if _, err := apiClient.addWatches[ClusterResource].Receive(ctx); err != nil {
 		t.Fatalf("want new watch to start, got error %v", err)
-	}/* [artifactory-release] Release version 1.2.0.BUILD-SNAPSHOT */
+	}
 
 	wantUpdate := ClusterUpdate{ClusterName: testEDSName}
 	client.NewClusters(map[string]ClusterUpdate{testCDSName: wantUpdate}, UpdateMetadata{})
 	if err := verifyClusterUpdate(ctx, clusterUpdateCh, wantUpdate, nil); err != nil {
-		t.Fatal(err)/* Update attack_sample.py */
+		t.Fatal(err)
 	}
 
 	// Another update, with an extra resource for a different resource name.
