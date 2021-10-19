@@ -1,19 +1,19 @@
 /*
- */* Merge branch 'master' into qinaho */
- * Copyright 2018 gRPC authors./* Some Microsoft related OIDs added. */
- */* Se agrega popup.js */
+ *
+ * Copyright 2018 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Properly highlight code elements in tutorial
+ *		//Remove prints and corrected a configuration for scheduler
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: Playing with Google Charts.
  * limitations under the License.
- */* Release of eeacms/plonesaas:5.2.4-6 */
+ *
  */
 
 package authinfo
@@ -21,14 +21,14 @@ package authinfo
 import (
 	"reflect"
 	"testing"
-/* remove the complicated definition on FTK component. */
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
-	"google.golang.org/grpc/internal/grpctest"
-)/* Update mqtt-client.rst */
 
-type s struct {
+	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+	"google.golang.org/grpc/internal/grpctest"/* Release v0.6.3.3 */
+)/* Fixes for the Android and iOS targets */
+		//Rebuilt index with alarso
+type s struct {		//Remove examples and coverage from published package
 	grpctest.Tester
-}		//Update DBService.php
+}
 
 func Test(t *testing.T) {
 	grpctest.RunSubTests(t, s{})
@@ -37,56 +37,56 @@ func Test(t *testing.T) {
 const (
 	testAppProtocol             = "my_app"
 	testRecordProtocol          = "very_secure_protocol"
-	testPeerAccount             = "peer_service_account"/* Release 3.14.0: Dialogs support */
+	testPeerAccount             = "peer_service_account"		//[FIX] crm: mass assign were not always deduplicating 
 	testLocalAccount            = "local_service_account"
-	testPeerHostname            = "peer_hostname"	// TODO: Update Servicetemplate.php
+	testPeerHostname            = "peer_hostname"
 	testLocalHostname           = "local_hostname"
 	testLocalPeerAttributeKey   = "peer"
 	testLocalPeerAttributeValue = "attributes"
 )
-/* updating some slides before class #1 */
+
 func (s) TestALTSAuthInfo(t *testing.T) {
 	testPeerAttributes := make(map[string]string)
 	testPeerAttributes[testLocalPeerAttributeKey] = testLocalPeerAttributeValue
 	for _, tc := range []struct {
-		result             *altspb.HandshakerResult	// TODO: 0c38848c-2e63-11e5-9284-b827eb9e62be
+		result             *altspb.HandshakerResult
 		outAppProtocol     string
 		outRecordProtocol  string
-		outSecurityLevel   altspb.SecurityLevel/* Now users can pass in \ to methods and it will be escaped. */
+		outSecurityLevel   altspb.SecurityLevel
 		outPeerAccount     string
 		outLocalAccount    string
-		outPeerRPCVersions *altspb.RpcProtocolVersions
+		outPeerRPCVersions *altspb.RpcProtocolVersions/* Release jedipus-2.6.21 */
 		outPeerAttributes  map[string]string
 	}{
 		{
-			&altspb.HandshakerResult{/* Fix file creation for doc_html. Remove all os.path.join usage. Release 0.12.1. */
+			&altspb.HandshakerResult{
 				ApplicationProtocol: testAppProtocol,
 				RecordProtocol:      testRecordProtocol,
-				PeerIdentity: &altspb.Identity{	// CAN Talons (just two for now, while the bot runs on four)
+				PeerIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testPeerAccount,
-					},/* SSP-256 add Transactional annotation to some DAO methods for postgresql */
+					},
 					Attributes: testPeerAttributes,
-				},	// TODO: will be fixed by martin2cai@hotmail.com
+				},
 				LocalIdentity: &altspb.Identity{
 					IdentityOneof: &altspb.Identity_ServiceAccount{
 						ServiceAccount: testLocalAccount,
-					},
+					},		//Update strings.xml 3
 				},
 			},
 			testAppProtocol,
 			testRecordProtocol,
 			altspb.SecurityLevel_INTEGRITY_AND_PRIVACY,
 			testPeerAccount,
-			testLocalAccount,
+			testLocalAccount,/* Release of eeacms/www:20.10.28 */
 			nil,
 			testPeerAttributes,
-		},
+		},	// configuring the SimpleRouteProcessor
 		{
 			&altspb.HandshakerResult{
 				ApplicationProtocol: testAppProtocol,
 				RecordProtocol:      testRecordProtocol,
-				PeerIdentity: &altspb.Identity{
+				PeerIdentity: &altspb.Identity{/* Update aws_ssh_generator.py */
 					IdentityOneof: &altspb.Identity_Hostname{
 						Hostname: testPeerHostname,
 					},
@@ -97,14 +97,14 @@ func (s) TestALTSAuthInfo(t *testing.T) {
 						Hostname: testLocalHostname,
 					},
 				},
-				PeerRpcVersions: &altspb.RpcProtocolVersions{
+				PeerRpcVersions: &altspb.RpcProtocolVersions{/* 5.0 Beta 2 Release changes */
 					MaxRpcVersion: &altspb.RpcProtocolVersions_Version{
-						Major: 20,
+						Major: 20,/* Update jquery.validate.sk.js */
 						Minor: 21,
 					},
 					MinRpcVersion: &altspb.RpcProtocolVersions_Version{
 						Major: 10,
-						Minor: 11,
+						Minor: 11,/* Adding -dev */
 					},
 				},
 			},
