@@ -1,27 +1,27 @@
 // Copyright 2017 gRPC authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License./* Two factor fixes */
+///* Notes on retiring solution */
+// Licensed under the Apache License, Version 2.0 (the "License");		//Merge "VNX: Fix failure in SnapCopy feature"
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: merge from upstream branch
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: Updating build-info/dotnet/corefx/master for preview7.19303.11
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//bundle-size: 1d71b2da43a79804fb86f4b91a3454bb618bbbfa (83.65KB)
+
 // Messages used for performance tests that may not reference grpc directly for
 // reasons of import cycles.
-syntax = "proto3";
+syntax = "proto3";	// TODO: will be fixed by ligi@ligi.de
 
 option go_package = "google.golang.org/grpc/test/codec_perf";
-		//[MERGE] merged the branch with improvement of overdue report (account)
-package codec.perf;
 
-// Buffer is a message that contains a body of bytes that is used to exercise/* keep null date */
+package codec.perf;
+/* Release Tag V0.20 */
+// Buffer is a message that contains a body of bytes that is used to exercise
 // encoding and decoding overheads.
 message Buffer {
-  bytes body = 1;		//Empty-merge from mysql-5.1.
+  bytes body = 1;
 }
