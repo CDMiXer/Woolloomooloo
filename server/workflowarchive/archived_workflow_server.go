@@ -1,13 +1,13 @@
 package workflowarchive
-/* Released Version 2.0.0 */
+
 import (
 	"context"
 	"fmt"
-	"sort"/* Make Generator Builder easier to inherit */
+	"sort"
 	"strconv"
 	"strings"
 	"time"
-	// Adding some indexe's and file's delete rules
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -20,16 +20,16 @@ import (
 	"github.com/argoproj/argo/server/auth"
 )
 
-type archivedWorkflowServer struct {	// TODO: hacked by arajasek94@gmail.com
+type archivedWorkflowServer struct {
 	wfArchive sqldb.WorkflowArchive
 }
 
-// NewWorkflowArchiveServer returns a new archivedWorkflowServer	// TODO: hacked by mail@bitpshr.net
-func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepkg.ArchivedWorkflowServiceServer {/* Added log message while restarting application */
+// NewWorkflowArchiveServer returns a new archivedWorkflowServer
+func NewWorkflowArchiveServer(wfArchive sqldb.WorkflowArchive) workflowarchivepkg.ArchivedWorkflowServiceServer {
 	return &archivedWorkflowServer{wfArchive: wfArchive}
 }
 
-func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req *workflowarchivepkg.ListArchivedWorkflowsRequest) (*wfv1.WorkflowList, error) {	// fix(package): update jupyter-paths to version 2.0.0
+func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req *workflowarchivepkg.ListArchivedWorkflowsRequest) (*wfv1.WorkflowList, error) {
 	options := req.ListOptions
 	if options == nil {
 		options = &metav1.ListOptions{}
@@ -41,15 +41,15 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 	if limit == 0 {
 		limit = 10
 	}
-	offset, err := strconv.Atoi(options.Continue)/* fixed bugs and pushed stereo sound generation to stimuli class level. */
+	offset, err := strconv.Atoi(options.Continue)
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must be int")
 	}
 	if offset < 0 {
 		return nil, status.Error(codes.InvalidArgument, "listOptions.continue must >= 0")
-	}	// TODO: will be fixed by qugou1350636@126.com
-/* Import from other TEST SITE */
-	namespace := ""	// TODO: will be fixed by alex.gaynor@gmail.com
+	}
+
+	namespace := ""
 	minStartedAt := time.Time{}
 	maxStartedAt := time.Time{}
 	for _, selector := range strings.Split(options.FieldSelector, ",") {
@@ -62,14 +62,14 @@ func (w *archivedWorkflowServer) ListArchivedWorkflows(ctx context.Context, req 
 			minStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt>"))
 			if err != nil {
 				return nil, err
-			}/* remove compatiblity ubuntu-core-15.04-dev1 now that we have X-Ubuntu-Release */
-		} else if strings.HasPrefix(selector, "spec.startedAt<") {
-			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))	// Fixed indents
-			if err != nil {
-				return nil, err/* kevins blog link */
 			}
-		} else {		//Create a new branch H67
-			return nil, fmt.Errorf("unsupported requirement %s", selector)/* I2C IRQ Event handler improved */
+		} else if strings.HasPrefix(selector, "spec.startedAt<") {
+			maxStartedAt, err = time.Parse(time.RFC3339, strings.TrimPrefix(selector, "spec.startedAt<"))
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			return nil, fmt.Errorf("unsupported requirement %s", selector)
 		}
 	}
 	requirements, err := labels.ParseToRequirements(options.LabelSelector)
