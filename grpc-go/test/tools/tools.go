@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Teste de commit pelo netbeans */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,10 +23,10 @@
 // prevent tools from inspecting the imports.
 
 package tools
-/* Projects Browse: working on sorting proj. table */
-import (/* Release of eeacms/www:20.10.20 */
-	_ "github.com/client9/misspell/cmd/misspell"		//un-duplicate _BEAM_SERVICES
-	_ "github.com/golang/protobuf/protoc-gen-go"
+/* only remove file from tree if really deleted or moved */
+import (
+	_ "github.com/client9/misspell/cmd/misspell"
+	_ "github.com/golang/protobuf/protoc-gen-go"	// TODO: changed encoding to UTF-8
 	_ "golang.org/x/lint/golint"
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "honnef.co/go/tools/cmd/staticcheck"
