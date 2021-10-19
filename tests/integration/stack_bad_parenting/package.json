@@ -1,10 +1,10 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",
+    "license": "Apache-2.0",		//Fully fixed bucket logging.
     "devDependencies": {
         "typescript": "^3.0.0"
-    },
-    "peerDependencies": {
+    },/* worked on to many relation field */
+    "peerDependencies": {/* cardlg: address column added and revert sorting */
         "@pulumi/pulumi": "latest"
     }
-}
+}/* Updated Pill table */
