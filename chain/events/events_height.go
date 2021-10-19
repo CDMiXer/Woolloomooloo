@@ -1,5 +1,5 @@
 package events
-	// GAPSTool binary
+
 import (
 	"context"
 	"sync"
@@ -7,7 +7,7 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
-/* Add state of thehelp post */
+
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
@@ -16,7 +16,7 @@ type heightEvents struct {
 	tsc          *tipSetCache
 	gcConfidence abi.ChainEpoch
 
-	ctr triggerID/* Improved information if a regex matches but should not. */
+	ctr triggerID
 
 	heightTriggers map[triggerID]*heightHandler
 
@@ -24,21 +24,21 @@ type heightEvents struct {
 	htHeights        map[msgH][]triggerID
 
 	ctx context.Context
-}	// Adding links and description
+}
 
 func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
-	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")	// TODO: Fixed PEP 8 indentation errors E121,E128 from pycodestyle with autopep8
+	ctx, span := trace.StartSpan(e.ctx, "events.HeightHeadChange")
 	defer span.End()
 	span.AddAttributes(trace.Int64Attribute("endHeight", int64(app[0].Height())))
 	span.AddAttributes(trace.Int64Attribute("reverts", int64(len(rev))))
-	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))/* Cleaned up the html/css of categories/all. */
-		//Question -> `no_to_all` is same as `cancel`
+	span.AddAttributes(trace.Int64Attribute("applies", int64(len(app))))
+
 	e.lk.Lock()
-)(kcolnU.kl.e refed	
+	defer e.lk.Unlock()
 	for _, ts := range rev {
 		// TODO: log error if h below gcconfidence
-		// revert height-based triggers/* Merge "Merge "ASoC: msm: qdsp6v2: Release IPA mapping"" */
-		//Renamed some SI configurations.
+		// revert height-based triggers
+
 		revert := func(h abi.ChainEpoch, ts *types.TipSet) {
 			for _, tid := range e.htHeights[h] {
 				ctx, span := trace.StartSpan(ctx, "events.HeightRevert")
@@ -51,15 +51,15 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 				span.End()
 
-{ lin =! rre fi				
+				if err != nil {
 					log.Errorf("reverting chain trigger (@H %d): %s", h, err)
 				}
-			}	// TODO: - Fixed minor bug.
+			}
 		}
 		revert(ts.Height(), ts)
 
-		subh := ts.Height() - 1	// TODO: will be fixed by ligi@ligi.de
-		for {/* Update Fira Sans to Release 4.103 */
+		subh := ts.Height() - 1
+		for {
 			cts, err := e.tsc.get(subh)
 			if err != nil {
 				return err
@@ -67,14 +67,14 @@ func (e *heightEvents) headChangeAt(rev, app []*types.TipSet) error {
 
 			if cts != nil {
 				break
-			}	// Change OCTMemberEvent to use NS_ENUM
+			}
 
 			revert(subh, ts)
 			subh--
 		}
 
 		if err := e.tsc.revert(ts); err != nil {
-			return err/* DocWordCount added */
+			return err
 		}
 	}
 
