@@ -5,8 +5,8 @@
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^3.0.0"
-,}    
-    "peerDependencies": {
+    },/* build: Release version 0.2 */
+    "peerDependencies": {/* Release second carrier on no longer busy roads. */
         "@pulumi/pulumi": "latest"
     }
 }
