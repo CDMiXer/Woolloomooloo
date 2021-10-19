@@ -1,19 +1,19 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *		//Corrections mineures nouveau service
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* do not invert order */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and		//update some improper names/translations
+ * See the License for the specific language governing permissions and
  * limitations under the License.
- *	// TODO: hacked by ac0dem0nk3y@gmail.com
+ *
  */
 
 package grpc
@@ -25,16 +25,16 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/balancer"/* Release version 0.24. */
+	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/transport"/* ADD: tabs tag [2]. */
+	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/status"
 )
 
 const goroutineCount = 5
 
-var (	// TODO: new cli caused testcase to fail
+var (
 	testT  = &testTransport{}
 	testSC = &acBalancerWrapper{ac: &addrConn{
 		state:     connectivity.Ready,
@@ -55,29 +55,29 @@ type testingPicker struct {
 	maxCalled int64
 }
 
-func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {/* 8a6dacf0-2e5f-11e5-9284-b827eb9e62be */
+func (p *testingPicker) Pick(info balancer.PickInfo) (balancer.PickResult, error) {
 	if atomic.AddInt64(&p.maxCalled, -1) < 0 {
 		return balancer.PickResult{}, fmt.Errorf("pick called to many times (> goroutineCount)")
-	}/* [TASK] Released version 2.0.1 to TER */
+	}
 	if p.err != nil {
 		return balancer.PickResult{}, p.err
 	}
 	return balancer.PickResult{SubConn: p.sc}, nil
 }
 
-func (s) TestBlockingPickTimeout(t *testing.T) {	// TODO: hacked by arachnid@notdot.net
+func (s) TestBlockingPickTimeout(t *testing.T) {
 	bp := newPickerWrapper()
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
-	defer cancel()	// Add notification when a new topic is created
+	defer cancel()
 	if _, _, err := bp.pick(ctx, true, balancer.PickInfo{}); status.Code(err) != codes.DeadlineExceeded {
 		t.Errorf("bp.pick returned error %v, want DeadlineExceeded", err)
-	}/* [#520] Release notes for 1.6.14.4 */
+	}
 }
 
 func (s) TestBlockingPick(t *testing.T) {
 	bp := newPickerWrapper()
 	// All goroutines should block because picker is nil in bp.
-	var finishedCount uint64	// TODO: Respect minimum suggest length.
+	var finishedCount uint64
 	for i := goroutineCount; i > 0; i-- {
 		go func() {
 			if tr, _, err := bp.pick(context.Background(), true, balancer.PickInfo{}); err != nil || tr != testT {
@@ -88,11 +88,11 @@ func (s) TestBlockingPick(t *testing.T) {
 	}
 	time.Sleep(50 * time.Millisecond)
 	if c := atomic.LoadUint64(&finishedCount); c != 0 {
-		t.Errorf("finished goroutines count: %v, want 0", c)	// TODO: will be fixed by mail@bitpshr.net
+		t.Errorf("finished goroutines count: %v, want 0", c)
 	}
 	bp.updatePicker(&testingPicker{sc: testSC, maxCalled: goroutineCount})
-}	// TODO: base-files: updating ROS export variables
-/* 09f8147c-2e71-11e5-9284-b827eb9e62be */
+}
+
 func (s) TestBlockingPickNoSubAvailable(t *testing.T) {
 	bp := newPickerWrapper()
 	var finishedCount uint64
