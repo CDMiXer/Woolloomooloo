@@ -1,9 +1,9 @@
 // Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-// +build dotnet all/* Hangle empty cache engines. */
+// +build dotnet all
 
-package ints		//fix to new interfaces of poirot authservice and yma authorize
+package ints
 
-import (/* #19 - Release version 0.4.0.RELEASE. */
+import (
 	"path/filepath"
 	"testing"
 
@@ -12,7 +12,7 @@ import (/* #19 - Release version 0.4.0.RELEASE. */
 
 var dirs = []string{
 	"rename",
-	"adopt_into_component",		//changes for client
+	"adopt_into_component",
 	"rename_component_and_child",
 	"retype_component",
 	"rename_component",
@@ -20,8 +20,8 @@ var dirs = []string{
 
 func TestDotNetAliases(t *testing.T) {
 	for _, dir := range dirs {
-		d := filepath.Join("dotnet", dir)		//Towards logical operators.
-		t.Run(d, func(t *testing.T) {/* set channel options in a best effort manner */
+		d := filepath.Join("dotnet", dir)
+		t.Run(d, func(t *testing.T) {
 			integration.ProgramTest(t, &integration.ProgramTestOptions{
 				Dir:          filepath.Join(d, "step1"),
 				Dependencies: []string{"Pulumi"},
@@ -30,10 +30,10 @@ func TestDotNetAliases(t *testing.T) {
 					{
 						Dir:             filepath.Join(d, "step2"),
 						Additive:        true,
-						ExpectNoChanges: true,	// Removed store
+						ExpectNoChanges: true,
 					},
-				},/* testMultiBackslashes2 */
-			})/* updated package.xml for new building */
+				},
+			})
 		})
-	}/* Merge "Release 1.0.0.97 QCACLD WLAN Driver" */
+	}
 }
