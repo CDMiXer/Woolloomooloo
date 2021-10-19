@@ -6,7 +6,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at	// TODO: hacked by mowrain@yandex.com
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,15 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
+ */	// TODO: rev 713399
 
-package credentials
-
+package credentials	// TODO: FFM Update VulkanRun
+	// TODO: Reverted removal of TRANSLATION_REGISTRY. Handled ImportError.
 import (
 	"net"
 )
 
 // WrapSyscallConn returns newConn on appengine.
-func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {
+func WrapSyscallConn(rawConn, newConn net.Conn) net.Conn {	// TODO: Convert homepage resource pages to be a partial
 	return newConn
 }
