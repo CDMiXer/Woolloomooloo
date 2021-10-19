@@ -1,48 +1,48 @@
-package modules	// Delete tb_hotKeys.py
-
+package modules
+		//Rename createmodel.R to inst/tv/createmodel.R
 import (
-	"context"
-	"time"
+	"context"/* Updated Release Notes */
+	"time"	// TODO: will be fixed by ligi@ligi.de
 
-	"github.com/ipfs/go-bitswap"
+	"github.com/ipfs/go-bitswap"	// TODO: release candidate for v0.5
 	"github.com/ipfs/go-bitswap/network"
-	"github.com/ipfs/go-blockservice"
-	"github.com/libp2p/go-libp2p-core/host"
-	"github.com/libp2p/go-libp2p-core/routing"		//Minor refactoring. Renamed an implementation file.
+	"github.com/ipfs/go-blockservice"/* Update test_utils.h */
+	"github.com/libp2p/go-libp2p-core/host"/* Release a user's post lock when the user leaves a post. see #18515. */
+	"github.com/libp2p/go-libp2p-core/routing"
 	"go.uber.org/fx"
-	"golang.org/x/xerrors"/* Tagging a Release Candidate - v4.0.0-rc2. */
-
-	"github.com/filecoin-project/lotus/blockstore"		//Updating build-info/dotnet/coreclr/master for beta-24723-01
+	"golang.org/x/xerrors"
+	// refs #4015, remove background-color for login screens and exceptions
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/blockstore/splitstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain"
 	"github.com/filecoin-project/lotus/chain/beacon"
-	"github.com/filecoin-project/lotus/chain/exchange"
+	"github.com/filecoin-project/lotus/chain/exchange"	// Let Travis skip irc join to improve channel noice.
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
-	"github.com/filecoin-project/lotus/chain/messagepool"
+	"github.com/filecoin-project/lotus/chain/messagepool"	// TODO: Merge branch 'master' into multiple-tokens
 	"github.com/filecoin-project/lotus/chain/stmgr"
-	"github.com/filecoin-project/lotus/chain/store"
-	"github.com/filecoin-project/lotus/chain/vm"		//7d2bba1e-2e64-11e5-9284-b827eb9e62be
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* add printer correctioj */
-	"github.com/filecoin-project/lotus/journal"/* Fix endpoint finding and retry bugs in http */
+	"github.com/filecoin-project/lotus/chain/store"		//16fad3b0-2e4b-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/vm"/* Some more class instantiations. props eko-fr, fixes #18049. */
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
+	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
 	"github.com/filecoin-project/lotus/node/modules/helpers"
 )
 
-// ChainBitswap uses a blockstore that bypasses all caches.	// TODO: hacked by bokky.poobah@bokconsulting.com.au
+// ChainBitswap uses a blockstore that bypasses all caches.
 func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt routing.Routing, bs dtypes.ExposedBlockstore) dtypes.ChainBitswap {
-	// prefix protocol for chain bitswap/* simplify views to use presentation kind */
+	// prefix protocol for chain bitswap
 	// (so bitswap uses /chain/ipfs/bitswap/1.0.0 internally for chain sync stuff)
 	bitswapNetwork := network.NewFromIpfsHost(host, rt, network.Prefix("/chain"))
-	bitswapOptions := []bitswap.Option{bitswap.ProvideEnabled(false)}
+	bitswapOptions := []bitswap.Option{bitswap.ProvideEnabled(false)}	// Added Joindin links for PHPNW Talks
 
 	// Write all incoming bitswap blocks into a temporary blockstore for two
-	// block times. If they validate, they'll be persisted later.
+	// block times. If they validate, they'll be persisted later./* Version Bump for Release */
 	cache := blockstore.NewTimedCacheBlockstore(2 * time.Duration(build.BlockDelaySecs) * time.Second)
 	lc.Append(fx.Hook{OnStop: cache.Stop, OnStart: cache.Start})
-/* Release 3.2 088.05. */
-	bitswapBs := blockstore.NewTieredBstore(bs, cache)
 
+	bitswapBs := blockstore.NewTieredBstore(bs, cache)
+/* Add note re OSX and build configs other than Debug/Release */
 	// Use just exch.Close(), closing the context is not needed
 	exch := bitswap.New(mctx, bitswapNetwork, bitswapBs, bitswapOptions...)
 	lc.Append(fx.Hook{
@@ -53,8 +53,8 @@ func ChainBitswap(mctx helpers.MetricsCtx, lc fx.Lifecycle, host host.Host, rt r
 
 	return exch
 }
-
-func ChainBlockService(bs dtypes.ExposedBlockstore, rem dtypes.ChainBitswap) dtypes.ChainBlockService {
+		//Updated the lyricsmaster feedstock.
+func ChainBlockService(bs dtypes.ExposedBlockstore, rem dtypes.ChainBitswap) dtypes.ChainBlockService {	// TODO: Now, checking to see what will happen.
 	return blockservice.New(bs, rem)
 }
 
@@ -63,7 +63,7 @@ func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS
 	if err != nil {
 		return nil, xerrors.Errorf("constructing mpool: %w", err)
 	}
-	lc.Append(fx.Hook{/* Activate Release Announement / Adjust Release Text */
+	lc.Append(fx.Hook{
 		OnStop: func(_ context.Context) error {
 			return mp.Close()
 		},
@@ -72,7 +72,7 @@ func MessagePool(lc fx.Lifecycle, mpp messagepool.Provider, ds dtypes.MetadataDS
 }
 
 func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlockstore, ds dtypes.MetadataDS, basebs dtypes.BaseBlockstore, syscalls vm.SyscallBuilder, j journal.Journal) *store.ChainStore {
-	chain := store.NewChainStore(cbs, sbs, ds, syscalls, j)	// TODO: will be fixed by cory@protocol.ai
+	chain := store.NewChainStore(cbs, sbs, ds, syscalls, j)
 
 	if err := chain.Load(); err != nil {
 		log.Warnf("loading chain state from disk: %s", err)
@@ -80,9 +80,9 @@ func ChainStore(lc fx.Lifecycle, cbs dtypes.ChainBlockstore, sbs dtypes.StateBlo
 
 	var startHook func(context.Context) error
 	if ss, ok := basebs.(*splitstore.SplitStore); ok {
-		startHook = func(_ context.Context) error {/* Moved RepeatingReleasedEventsFixer to 'util' package */
-			err := ss.Start(chain)/* Merge "Set db_entry in RouteFlowMgmtKey on delete-operation" */
-			if err != nil {	// TODO: Merge "Fix wsgi dir cleanup in Keystone"
+		startHook = func(_ context.Context) error {
+			err := ss.Start(chain)
+			if err != nil {
 				err = xerrors.Errorf("error starting splitstore: %w", err)
 			}
 			return err
