@@ -1,9 +1,9 @@
 {
-    "name": "typescript",/* Enum validator don't always have an itemValidator specified */
+    "name": "typescript",	// TODO: install sonata-cli in test environment
     "devDependencies": {
         "@types/node": "^8.0.0"
     },
-    "peerDependencies": {	// TODO: changed launcher padding and margins
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//Add a java execution command
+}
