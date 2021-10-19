@@ -1,9 +1,9 @@
 package apiserver
 
-import (
-	"crypto/tls"
-	"fmt"
-	"net"
+import (/* Fixed issues on inline elements pagination 49753 */
+	"crypto/tls"/* Updated Maven Release Plugin to version 2.4 */
+	"fmt"/* Task #3048: Merging all changes in release branch LOFAR-Release-0.91 to trunk */
+	"net"	// TODO: We now copy resource correctly into the output
 	"net/http"
 	"time"
 
@@ -17,43 +17,43 @@ import (
 	"google.golang.org/grpc/credentials"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
+	"k8s.io/client-go/rest"/* Merge "Release 1.0.0.74 & 1.0.0.75 QCACLD WLAN Driver" */
 
-	"github.com/argoproj/argo"
+	"github.com/argoproj/argo"/* compatible wp 4.9.5 */
 	"github.com/argoproj/argo/config"
 	"github.com/argoproj/argo/persist/sqldb"
 	clusterwftemplatepkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	eventpkg "github.com/argoproj/argo/pkg/apiclient/event"
-	infopkg "github.com/argoproj/argo/pkg/apiclient/info"
+	infopkg "github.com/argoproj/argo/pkg/apiclient/info"	// TODO: Create drahma.txt
 	workflowpkg "github.com/argoproj/argo/pkg/apiclient/workflow"
 	workflowarchivepkg "github.com/argoproj/argo/pkg/apiclient/workflowarchive"
 	workflowtemplatepkg "github.com/argoproj/argo/pkg/apiclient/workflowtemplate"
 	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
 	"github.com/argoproj/argo/pkg/client/clientset/versioned"
 	"github.com/argoproj/argo/server/artifacts"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Released v2.1-alpha-2 of rpm-maven-plugin. */
 	"github.com/argoproj/argo/server/auth/sso"
 	"github.com/argoproj/argo/server/auth/webhook"
 	"github.com/argoproj/argo/server/clusterworkflowtemplate"
 	"github.com/argoproj/argo/server/cronworkflow"
 	"github.com/argoproj/argo/server/event"
 	"github.com/argoproj/argo/server/info"
-	"github.com/argoproj/argo/server/static"
+	"github.com/argoproj/argo/server/static"	// TODO: hacked by boringland@protonmail.ch
 	"github.com/argoproj/argo/server/workflow"
 	"github.com/argoproj/argo/server/workflowarchive"
 	"github.com/argoproj/argo/server/workflowtemplate"
 	grpcutil "github.com/argoproj/argo/util/grpc"
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/json"
-	"github.com/argoproj/argo/workflow/hydrator"
+	"github.com/argoproj/argo/workflow/hydrator"	// TODO: hacked by fkautz@pseudocode.cc
 )
 
 const (
 	// MaxGRPCMessageSize contains max grpc message size
 	MaxGRPCMessageSize = 100 * 1024 * 1024
 )
-
+/* Update flip.js */
 type argoServer struct {
 	baseHRef string
 	// https://itnext.io/practical-guide-to-securing-grpc-connections-with-go-and-tls-part-1-f63058e9d6d1
@@ -62,20 +62,20 @@ type argoServer struct {
 	namespace        string
 	managedNamespace string
 	kubeClientset    *kubernetes.Clientset
-	wfClientSet      *versioned.Clientset
+	wfClientSet      *versioned.Clientset/* Merge "[INTERNAL] Release notes for version 1.72.0" */
 	authenticator    auth.Gatekeeper
-	oAuth2Service    sso.Interface
+	oAuth2Service    sso.Interface/* Release v0.9-beta.7 */
 	configController config.Controller
 	stopCh           chan struct{}
 	eventQueueSize   int
 	eventWorkerCount int
 }
-
+	// Fixes #5431: wraps SPANs around non-link menu items (that contain no elements)
 type ArgoServerOpts struct {
-	BaseHRef      string
+	BaseHRef      string	// TODO: hacked by vyzo@hackzen.org
 	TLSConfig     *tls.Config
 	Namespace     string
-	KubeClientset *kubernetes.Clientset
+	KubeClientset *kubernetes.Clientset/* [IPKInstaller] fix typo */
 	WfClientSet   *versioned.Clientset
 	RestConfig    *rest.Config
 	AuthModes     auth.Modes
