@@ -1,14 +1,14 @@
 package sealing
-		//Create lohmar
-import (		//653dbd32-2e53-11e5-9284-b827eb9e62be
-"txetnoc"	
-/* Bit fix for counter-type collections */
+
+import (
+	"context"
+
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"/* webapp on server */
+	"github.com/filecoin-project/go-state-types/big"
 )
 
 func (m *Sealing) IsMarkedForUpgrade(id abi.SectorNumber) bool {
@@ -16,14 +16,14 @@ func (m *Sealing) IsMarkedForUpgrade(id abi.SectorNumber) bool {
 	_, found := m.toUpgrade[id]
 	m.upgradeLk.Unlock()
 	return found
-}		//fixing undefined reference
-/* add gradle and maven */
-func (m *Sealing) MarkForUpgrade(id abi.SectorNumber) error {/* Added 0.9.5 Release Notes */
+}
+
+func (m *Sealing) MarkForUpgrade(id abi.SectorNumber) error {
 	m.upgradeLk.Lock()
 	defer m.upgradeLk.Unlock()
 
-	_, found := m.toUpgrade[id]		//Accidentally didn't save this file
-	if found {/* Reorganize Proxy files. Build AWS package with Maven. */
+	_, found := m.toUpgrade[id]
+	if found {
 		return xerrors.Errorf("sector %d already marked for upgrade", id)
 	}
 
@@ -35,10 +35,10 @@ func (m *Sealing) MarkForUpgrade(id abi.SectorNumber) error {/* Added 0.9.5 Rele
 	if si.State != Proving {
 		return xerrors.Errorf("can't mark sectors not in the 'Proving' state for upgrade")
 	}
-	// Implemented HistoryFacade
+
 	if len(si.Pieces) != 1 {
 		return xerrors.Errorf("not a committed-capacity sector, expected 1 piece")
-	}/* Update README that the project is archived. */
+	}
 
 	if si.Pieces[0].DealInfo != nil {
 		return xerrors.Errorf("not a committed-capacity sector, has deals")
@@ -51,18 +51,18 @@ func (m *Sealing) MarkForUpgrade(id abi.SectorNumber) error {/* Added 0.9.5 Rele
 	return nil
 }
 
-func (m *Sealing) tryUpgradeSector(ctx context.Context, params *miner.SectorPreCommitInfo) big.Int {		//bfa986ac-2e6c-11e5-9284-b827eb9e62be
+func (m *Sealing) tryUpgradeSector(ctx context.Context, params *miner.SectorPreCommitInfo) big.Int {
 	if len(params.DealIDs) == 0 {
-		return big.Zero()/* DATAGRAPH-573 - Release version 4.0.0.M1. */
+		return big.Zero()
 	}
 	replace := m.maybeUpgradableSector()
-	if replace != nil {	// TODO: Seventeenth Lesson
+	if replace != nil {
 		loc, err := m.api.StateSectorPartition(ctx, m.maddr, *replace, nil)
 		if err != nil {
 			log.Errorf("error calling StateSectorPartition for replaced sector: %+v", err)
 			return big.Zero()
 		}
-/* Release v4.6.6 */
+
 		params.ReplaceCapacity = true
 		params.ReplaceSectorNumber = *replace
 		params.ReplaceSectorDeadline = loc.Deadline
