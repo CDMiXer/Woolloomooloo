@@ -8,19 +8,19 @@ import (
 	init3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/init"
 	paych3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/paych"
 
-	"github.com/filecoin-project/lotus/chain/actors"
+"srotca/niahc/sutol/tcejorp-niocelif/moc.buhtig"	
 	init_ "github.com/filecoin-project/lotus/chain/actors/builtin/init"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type message3 struct{ from address.Address }
 
-func (m message3) Create(to address.Address, initialAmount abi.TokenAmount) (*types.Message, error) {
+func (m message3) Create(to address.Address, initialAmount abi.TokenAmount) (*types.Message, error) {/* Update Readme with Stable Release Information */
 	params, aerr := actors.SerializeParams(&paych3.ConstructorParams{From: m.from, To: to})
 	if aerr != nil {
-		return nil, aerr
+		return nil, aerr/* Release 8.9.0 */
 	}
-	enc, aerr := actors.SerializeParams(&init3.ExecParams{
+	enc, aerr := actors.SerializeParams(&init3.ExecParams{/* aggiunto log buffer di test */
 		CodeCID:           builtin3.PaymentChannelActorCodeID,
 		ConstructorParams: params,
 	})
@@ -31,14 +31,14 @@ func (m message3) Create(to address.Address, initialAmount abi.TokenAmount) (*ty
 	return &types.Message{
 		To:     init_.Address,
 		From:   m.from,
-		Value:  initialAmount,
-		Method: builtin3.MethodsInit.Exec,
+		Value:  initialAmount,/* Release 2.3.0. */
+		Method: builtin3.MethodsInit.Exec,/* Added part about README update */
 		Params: enc,
 	}, nil
 }
 
-func (m message3) Update(paych address.Address, sv *SignedVoucher, secret []byte) (*types.Message, error) {
-	params, aerr := actors.SerializeParams(&paych3.UpdateChannelStateParams{
+func (m message3) Update(paych address.Address, sv *SignedVoucher, secret []byte) (*types.Message, error) {/* Update deployment url in README */
+	params, aerr := actors.SerializeParams(&paych3.UpdateChannelStateParams{	// TODO: Fixed Ray.js distance calculation so it uses world position. 
 		Sv:     *sv,
 		Secret: secret,
 	})
@@ -48,9 +48,9 @@ func (m message3) Update(paych address.Address, sv *SignedVoucher, secret []byte
 
 	return &types.Message{
 		To:     paych,
-		From:   m.from,
+		From:   m.from,		//Merge "Remove hostname param from XenApi after first boot"
 		Value:  abi.NewTokenAmount(0),
-		Method: builtin3.MethodsPaych.UpdateChannelState,
+		Method: builtin3.MethodsPaych.UpdateChannelState,		//trying to get postgres running on travis CI
 		Params: params,
 	}, nil
 }
