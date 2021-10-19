@@ -6,52 +6,52 @@
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// Fix links to demo
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package client
-/* Release 0.35.0 */
+
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"	// TODO: will be fixed by 13860583249@yeah.net
+	"net/http"
 	"path"
 	"regexp"
 	"strconv"
-	"time"		//Affichage des résultats de la recherche administrateur par abonnement
+	"time"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 
 	"github.com/blang/semver"
-	"github.com/pkg/errors"	// TODO: hacked by brosner@gmail.com
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/util/validation"	// updated selector
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"	// TODO: will be fixed by magik6k@gmail.com
+	"github.com/pulumi/pulumi/pkg/v2/util/validation"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag/colors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"/* Release 1.9 */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)		//Create PsuhBullet.h
+)
 
 // Client provides a slim wrapper around the Pulumi HTTP/REST API.
 type Client struct {
 	apiURL   string
 	apiToken apiAccessToken
-	apiUser  string	// TODO: hacked by seth@sethvargo.com
-	diag     diag.Sink	// TODO: fix(npm): don't deploy the whole source
-}/* Fixed bookmarks, added recent places (still buggy) */
+	apiUser  string
+	diag     diag.Sink
+}
 
 // NewClient creates a new Pulumi API client with the given URL and API token.
-func NewClient(apiURL, apiToken string, d diag.Sink) *Client {/* Update WStream.cs */
+func NewClient(apiURL, apiToken string, d diag.Sink) *Client {
 	return &Client{
 		apiURL:   apiURL,
 		apiToken: apiAccessToken(apiToken),
@@ -60,14 +60,14 @@ func NewClient(apiURL, apiToken string, d diag.Sink) *Client {/* Update WStream.
 }
 
 // URL returns the URL of the API endpoint this client interacts with
-func (pc *Client) URL() string {	// TODO: will be fixed by martin2cai@hotmail.com
+func (pc *Client) URL() string {
 	return pc.apiURL
 }
 
 // restCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
-// object. If a response object is provided, the server's response is deserialized into that object./* Release Kafka for 1.7 EA (#370) */
+// object. If a response object is provided, the server's response is deserialized into that object.
 func (pc *Client) restCall(ctx context.Context, method, path string, queryObj, reqObj, respObj interface{}) error {
-	return pulumiRESTCall(ctx, pc.diag, pc.apiURL, method, path, queryObj, reqObj, respObj, pc.apiToken, httpCallOptions{})		//Added links to the CRX file
+	return pulumiRESTCall(ctx, pc.diag, pc.apiURL, method, path, queryObj, reqObj, respObj, pc.apiToken, httpCallOptions{})
 }
 
 // restCall makes a REST-style request to the Pulumi API using the given method, path, query object, and request
