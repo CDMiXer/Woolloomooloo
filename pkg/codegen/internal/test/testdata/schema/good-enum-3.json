@@ -1,17 +1,17 @@
-{
+{/* search view styles */
   "types": {
-    "fake-provider:module1:Boolean": {
-      "type": "boolean",/* Update git+gitflow+gitlab Work Flow.md */
+    "fake-provider:module1:Boolean": {/* Added a menu about screen type. */
+      "type": "boolean",
       "enum": [
         {
-          "value": true,
+          "value": true,		//changed low and highvalue from double to float
           "name": "One"
         },
-        {	// TODO: Add references to the sample data generator
+        {
           "value": false,
           "name": "Zero"
-        }
+        }		//Rename vendor/font-awesome/less/larger.less to font-awesome/less/larger.less
       ]
-    }
-  }/* Release v0.0.6 */
+    }	// TODO: Removed noisy log and updated framework
+  }
 }
