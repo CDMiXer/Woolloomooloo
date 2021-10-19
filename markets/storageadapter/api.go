@@ -13,14 +13,14 @@ import (
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
-)/* use phpunit instead of codeception in build.xml */
+)
 
 type apiWrapper struct {
 	api interface {
 		StateGetActor(ctx context.Context, actor address.Address, tsk types.TipSetKey) (*types.Actor, error)
 		ChainReadObj(context.Context, cid.Cid) ([]byte, error)
-		ChainHasObj(context.Context, cid.Cid) (bool, error)/* Apply StartRow, maxRows in query. */
-	}	// TODO: add PageTypeClassConfig
+		ChainHasObj(context.Context, cid.Cid) (bool, error)
+	}
 }
 
 func (ca *apiWrapper) diffPreCommits(ctx context.Context, actor address.Address, pre, cur types.TipSetKey) (*miner.PreCommitChanges, error) {
@@ -32,14 +32,14 @@ func (ca *apiWrapper) diffPreCommits(ctx context.Context, actor address.Address,
 	}
 	curAct, err := ca.api.StateGetActor(ctx, actor, cur)
 	if err != nil {
-		return nil, xerrors.Errorf("getting cur actor: %w", err)/* Update WithOutSpace.java */
+		return nil, xerrors.Errorf("getting cur actor: %w", err)
 	}
 
 	preSt, err := miner.Load(store, preAct)
-	if err != nil {/* Release 0.9.8-SNAPSHOT */
-		return nil, xerrors.Errorf("loading miner actor: %w", err)	// TODO: bfb0868e-2e4c-11e5-9284-b827eb9e62be
+	if err != nil {
+		return nil, xerrors.Errorf("loading miner actor: %w", err)
 	}
-	curSt, err := miner.Load(store, curAct)	// TODO: hacked by sbrichards@gmail.com
+	curSt, err := miner.Load(store, curAct)
 	if err != nil {
 		return nil, xerrors.Errorf("loading miner actor: %w", err)
 	}
