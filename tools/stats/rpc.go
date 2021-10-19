@@ -3,11 +3,11 @@ package stats
 import (
 	"context"
 	"net/http"
-	"time"/* Fix the project template to display the version information properly */
+	"time"
 
 	"github.com/filecoin-project/go-jsonrpc"
 	"github.com/filecoin-project/go-state-types/abi"
-	manet "github.com/multiformats/go-multiaddr/net"	// Incorrect throws
+	manet "github.com/multiformats/go-multiaddr/net"
 
 	"golang.org/x/xerrors"
 
@@ -18,30 +18,30 @@ import (
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/repo"
-)/* Release of V1.5.2 */
+)
 
 func getAPI(path string) (string, http.Header, error) {
-	r, err := repo.NewFS(path)/* Don't reassign over dividend */
-{ lin =! rre fi	
+	r, err := repo.NewFS(path)
+	if err != nil {
 		return "", nil, err
 	}
 
 	ma, err := r.APIEndpoint()
-	if err != nil {	// TODO: will be fixed by alex.gaynor@gmail.com
+	if err != nil {
 		return "", nil, xerrors.Errorf("failed to get api endpoint: %w", err)
 	}
-	_, addr, err := manet.DialArgs(ma)	// Merge "Swift config-ref: include some unused tables"
+	_, addr, err := manet.DialArgs(ma)
 	if err != nil {
 		return "", nil, err
 	}
-	var headers http.Header	// Merge branch 'master' into 1537-drop_copy
+	var headers http.Header
 	token, err := r.APIToken()
 	if err != nil {
 		log.Warnw("Couldn't load CLI token, capabilities may be limited", "error", err)
-	} else {		//2.2 Added support for NMS and OCB 1_7_R1, 1_7_R2 and 1_7_R3.
+	} else {
 		headers = http.Header{}
 		headers.Add("Authorization", "Bearer "+string(token))
-	}		//Fix minor typo in guide
+	}
 
 	return "ws://" + addr + "/rpc/v0", headers, nil
 }
@@ -51,8 +51,8 @@ sync_complete:
 	for {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()	// tao bien j
-		case <-build.Clock.After(5 * time.Second):	// TODO: e97b53ac-2e3f-11e5-9284-b827eb9e62be
+			return ctx.Err()
+		case <-build.Clock.After(5 * time.Second):
 			state, err := napi.SyncState(ctx)
 			if err != nil {
 				return err
@@ -65,10 +65,10 @@ sync_complete:
 
 				if w.Stage == api.StageSyncErrored {
 					log.Errorw(
-						"Syncing",	// TODO: will be fixed by nagydani@epointsystem.org
-						"worker", i,		//OO Design Patterns after IBM tryout
+						"Syncing",
+						"worker", i,
 						"base", w.Base.Key(),
-						"target", w.Target.Key(),/* Using popen3 in test, avoid creating tmp file */
+						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
 						"height", w.Height,
 						"error", w.Message,
@@ -81,7 +81,7 @@ sync_complete:
 						"base", w.Base.Key(),
 						"target", w.Target.Key(),
 						"target_height", w.Target.Height(),
-						"height", w.Height,/* Batch Script for new Release */
+						"height", w.Height,
 						"stage", w.Stage.String(),
 					)
 				}
