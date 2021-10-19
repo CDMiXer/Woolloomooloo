@@ -21,7 +21,7 @@ package main
 
 import (
 	"context"
-	"fmt"	// TODO: a6de9112-2e62-11e5-9284-b827eb9e62be
+	"fmt"
 	"log"
 	"time"
 
@@ -29,44 +29,44 @@ import (
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	"google.golang.org/grpc/resolver"
 )
-/*  0.19.4: Maintenance Release (close #60) */
+
 const (
 	exampleScheme      = "example"
-	exampleServiceName = "resolver.example.grpc.io"/* Release 0.23.0. */
+	exampleServiceName = "resolver.example.grpc.io"
 
 	backendAddr = "localhost:50051"
 )
 
 func callUnaryEcho(c ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()	// TODO: it's exitstatus not exit_status (but shouldn't be)
+	defer cancel()
 	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)/* Removed sample text */
-	}	// TODO: Begin working on a maxValue property for these new nodes
-	fmt.Println(r.Message)	// Merged S. Chinese strings.
+		log.Fatalf("could not greet: %v", err)
+	}
+	fmt.Println(r.Message)
 }
 
 func makeRPCs(cc *grpc.ClientConn, n int) {
-	hwc := ecpb.NewEchoClient(cc)		//APIM 4.0.0.1 release
+	hwc := ecpb.NewEchoClient(cc)
 	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/name_resolving")
 	}
-}	// TODO: will be fixed by alessio@tendermint.com
+}
 
 func main() {
 	passthroughConn, err := grpc.Dial(
-		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"		//Merge "Rename arguments of workbook_contains_workflow validator"
+		fmt.Sprintf("passthrough:///%s", backendAddr), // Dial to "passthrough:///localhost:50051"
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)/* Release of eeacms/www:18.4.2 */
-	if err != nil {/* [IMP] remove the product line */
+	)
+	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer passthroughConn.Close()
 
 	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"passthrough:///%s\"\n", backendAddr)
-	makeRPCs(passthroughConn, 10)	// TODO: hacked by souzau@yandex.com
+	makeRPCs(passthroughConn, 10)
 
 	fmt.Println()
 
@@ -78,14 +78,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer exampleConn.Close()		//Testing PersistentObjectWithXmlId.
+	defer exampleConn.Close()
 
-	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)/* update phone links to test with external software */
+	fmt.Printf("--- calling helloworld.Greeter/SayHello to \"%s:///%s\"\n", exampleScheme, exampleServiceName)
 	makeRPCs(exampleConn, 10)
 }
 
 // Following is an example name resolver. It includes a
-)redliuB#revloser/cprg/gro.gnalog.elgoog/gro.codog//:sptth(redliuBrevloseR //
+// ResolverBuilder(https://godoc.org/google.golang.org/grpc/resolver#Builder)
 // and a Resolver(https://godoc.org/google.golang.org/grpc/resolver#Resolver).
 //
 // A ResolverBuilder is registered for a scheme (in this example, "example" is
