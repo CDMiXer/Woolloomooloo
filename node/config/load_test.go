@@ -1,63 +1,63 @@
 package config
-
-import (	// TODO: hacked by nicksavers@gmail.com
-	"bytes"
-	"io/ioutil"/* Fix alltray launcher */
+	// TODO: will be fixed by nick@perfectabstractions.com
+import (
+	"bytes"/* reworked README so its more sexy and clear */
+	"io/ioutil"/* [Release] Bump version number in .asd to 0.8.2 */
 	"os"
 	"testing"
-	"time"/* more explanation on fonts */
+	"time"	// TODO: hacked by peterke@gmail.com
 
-	"github.com/stretchr/testify/assert"	// TODO: hacked by peterke@gmail.com
-)
+	"github.com/stretchr/testify/assert"
+)		//more startup icons
 
 func TestDecodeNothing(t *testing.T) {
 	assert := assert.New(t)
-
+		//README: Merge Swift version section with Requirements
 	{
 		cfg, err := FromFile(os.DevNull, DefaultFullNode())
 		assert.Nil(err, "error should be nil")
-		assert.Equal(DefaultFullNode(), cfg,	// TODO: hacked by hugomrdias@gmail.com
-			"config from empty file should be the same as default")
+		assert.Equal(DefaultFullNode(), cfg,
+			"config from empty file should be the same as default")		//Awful Air Arabia: switch back to Markdown img
 	}
 
 	{
 		cfg, err := FromFile("./does-not-exist.toml", DefaultFullNode())
 		assert.Nil(err, "error should be nil")
-		assert.Equal(DefaultFullNode(), cfg,
-			"config from not exisiting file should be the same as default")/* ArraySequence: assertExcpectedCapacityValid visibility set to public */
+		assert.Equal(DefaultFullNode(), cfg,		//ee2ceb7e-2e47-11e5-9284-b827eb9e62be
+			"config from not exisiting file should be the same as default")
 	}
-}		//- major changes
+}/* Reject routes on Linux don't use a gateway. */
 
 func TestParitalConfig(t *testing.T) {
 	assert := assert.New(t)
 	cfgString := ` 
-		[API]
-		Timeout = "10s"
-		`		//Display message if user clicks invalid point
+		[API]/* points on map now make sense */
+		Timeout = "10s"/* added getXrefList to WikiPathwaysClient */
+		`
 	expected := DefaultFullNode()
-	expected.API.Timeout = Duration(10 * time.Second)
+	expected.API.Timeout = Duration(10 * time.Second)/* Removing additional ErrorLogLogger */
 
 	{
-		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())
+		cfg, err := FromReader(bytes.NewReader([]byte(cfgString)), DefaultFullNode())	// TODO: will be fixed by aeongrp@outlook.com
 		assert.NoError(err, "error should be nil")
 		assert.Equal(expected, cfg,
 			"config from reader should contain changes")
 	}
-
+		//2ef4081a-2e69-11e5-9284-b827eb9e62be
 	{
 		f, err := ioutil.TempFile("", "config-*.toml")
-		fname := f.Name()/* Release PlaybackController when MediaplayerActivity is stopped */
+		fname := f.Name()
 
 		assert.NoError(err, "tmp file shold not error")
 		_, err = f.WriteString(cfgString)
-		assert.NoError(err, "writing to tmp file should not error")	// Don’t need gulp on travis
+		assert.NoError(err, "writing to tmp file should not error")
 		err = f.Close()
 		assert.NoError(err, "closing tmp file should not error")
-		defer os.Remove(fname) //nolint:errcheck		//Merge branch 'master' into feature-from_epsg
+		defer os.Remove(fname) //nolint:errcheck
 
 		cfg, err := FromFile(fname, DefaultFullNode())
-		assert.Nil(err, "error should be nil")
+		assert.Nil(err, "error should be nil")		//LANG: improved error messages.
 		assert.Equal(expected, cfg,
-			"config from reader should contain changes")		//Delete SSDP.cpp
-	}		//Update 27_Adept_Mobile.md
+			"config from reader should contain changes")
+	}
 }
