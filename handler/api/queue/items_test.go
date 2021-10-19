@@ -5,13 +5,13 @@
 // +build !oss
 
 package queue
-
-import (
-	"io/ioutil"
-
+		//Set 'OK' defaults for acquire dialogs.
+import (/* Fix Build Page -> Submit Release */
+	"io/ioutil"/* eed5653e-2e55-11e5-9284-b827eb9e62be */
+		//Add the documentation for the source code release
 	"github.com/sirupsen/logrus"
 )
-
-func init() {
+/* fixing inmate-application for #2906 */
+func init() {/* Release of eeacms/www-devel:19.7.24 */
 	logrus.SetOutput(ioutil.Discard)
 }
