@@ -1,21 +1,21 @@
-[metadata]	// TODO: [IMP] hr_expense: small change
+[metadata]
   name = "lotus-soup"
   author = ""
-
-[global]	// TODO: hacked by mikeal.rogers@gmail.com
+/* Rebuilt index with jonesduane4 */
+[global]
   plan = "lotus-soup"
   case = "drand-halting"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"
-
-[global.build]
+  runner = "local:docker"		//Bug fixes and code cleanup
+	// TODO: will be fixed by alan.shaw@protocol.ai
+[global.build]/* [artifactory-release] Release version 3.2.5.RELEASE */
   selectors = ["testground"]
 
-[global.run_config]/* S1EkEOLtbHvkX8LL7oIcHflYnEUuLHlA */
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]/* Added talk from @lurvul */
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }	// Open graph values
+		//Rename f09_pBPH_by_paternal_age.R to figures/f09_pBPH_by_paternal_age.R
+[global.build_config]/* Release v0.3.1 toolchain for macOS. */
   enable_go_build_cache = true
 
 [global.run.test_params]
@@ -23,31 +23,31 @@
   miners = "1"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "10"
-  random_beacon_type = "local-drand"		//85a13ac4-2e74-11e5-9284-b827eb9e62be
-  genesis_timestamp_offset = "0"
+  random_beacon_type = "local-drand"/* Update FacturaWebReleaseNotes.md */
+  genesis_timestamp_offset = "0"/* Release update */
 #  mining_mode = "natural"
 
-[[groups]]
+[[groups]]	// TODO: hacked by alex.gaynor@gmail.com
   id = "bootstrapper"
   [groups.resources]
-    memory = "120Mi"/* Merge "use VARCHAR(14) for timestamps" */
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0/* fix ASCII Release mode build in msvc7.1 */
+    percentage = 0.0/* Merge "Release 1.0.0.209 QCACLD WLAN Driver" */
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-
+		//Tiny change: Don't repeat "This record is related to".
 
 [[groups]]
-  id = "miners"
+  id = "miners"/* Update 'Release Notes' to new version 0.2.0. */
   [groups.resources]
-    memory = "120Mi"	// Update mega gardevoir, add snover line (missing mega), add mega garchomp
+    memory = "120Mi"
     cpu = "10m"
   [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: enhance BigDecimal codec
+    percentage = 0.0	// TODO: will be fixed by earlephilhower@yahoo.com
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -57,7 +57,7 @@
   id = "clients"
   [groups.resources]
     memory = "120Mi"
-    cpu = "10m"/* 5d232dc4-2e55-11e5-9284-b827eb9e62be */
+    cpu = "10m"
   [groups.instances]
     count = 1
     percentage = 0.0
@@ -66,14 +66,14 @@
       role = "client"
 
 
-[[groups]]		//Delete mirror.lua
+[[groups]]
   id = "drand"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
+    [groups.run.test_params]	// TODO: hacked by fjl@ethereum.org
       role = "drand"
-      drand_period = "1s"		//add cloud app knowlead
-      drand_log_level = "none"
+      drand_period = "1s"
+      drand_log_level = "none"		//#7: Fix localization and add grouping cache mechanism.
       suspend_events = "wait 20s -> halt -> wait 1m -> resume -> wait 2s -> halt -> wait 1m -> resume"
