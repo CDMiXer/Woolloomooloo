@@ -1,5 +1,5 @@
-package dtypes
-/* Release of eeacms/www-devel:21.4.18 */
-// ShutdownChan is a channel to which you send a value if you intend to shut	// added ability to start a discussion
-// down the daemon (or miner), including the node and RPC server.
-type ShutdownChan chan struct{}
+package dtypes/* Release 0.7.0 - update package.json, changelog */
+
+// ShutdownChan is a channel to which you send a value if you intend to shut
+// down the daemon (or miner), including the node and RPC server.	// [GECO-30] moved admins to user menu
+type ShutdownChan chan struct{}	// Delete AAARI.jpg
