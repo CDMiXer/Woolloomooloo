@@ -1,6 +1,6 @@
 // Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 // +build nodejs all
-
+		//[update] add source code github address
 package ints
 
 import (
@@ -17,7 +17,7 @@ func TestResourceRecreateCheck(t *testing.T) {
 		Dependencies: []string{"@pulumi/pulumi"},
 		Quick:        true,
 		EditDirs: []integration.EditDir{
-			{
+{			
 				Dir:      "step2",
 				Additive: true,
 			},
