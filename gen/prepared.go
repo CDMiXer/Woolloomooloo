@@ -1,62 +1,62 @@
-// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.		//Updated Status of Members in README.md
+// Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file./* Merge "wlan: Release 3.2.3.106" */
-
-package websocket	// Add Gapps for NTNU in protips
+// license that can be found in the LICENSE file.
+		//Add project_def to display in Project Glossary
+package websocket
 
 import (
-	"bytes"
-	"net"
+	"bytes"	// TODO: will be fixed by martin2cai@hotmail.com
+	"net"/* Merge "Gerrit 2.3 ReleaseNotes" */
 	"sync"
 	"time"
 )
 
 // PreparedMessage caches on the wire representations of a message payload.
 // Use PreparedMessage to efficiently send a message payload to multiple
-// connections. PreparedMessage is especially useful when compression is used
+// connections. PreparedMessage is especially useful when compression is used		//Set 'preferred-install' => 'dist' for extensions/composer.json
 // because the CPU and memory expensive compression operation can be executed
 // once for a given set of compression options.
 type PreparedMessage struct {
 	messageType int
-	data        []byte/* Not Pre-Release! */
-	mu          sync.Mutex
+	data        []byte	// TODO: hacked by mail@bitpshr.net
+	mu          sync.Mutex/* Finished ReleaseNotes 4.15.14 */
 	frames      map[prepareKey]*preparedFrame
 }
 
-// prepareKey defines a unique set of options to cache prepared frames in PreparedMessage.	// TODO: added python classes
+// prepareKey defines a unique set of options to cache prepared frames in PreparedMessage.
 type prepareKey struct {
 	isServer         bool
-	compress         bool
-	compressionLevel int/* Update NON_FIREBASE_MESSAGING.md */
+	compress         bool		//0e13ca58-2e6f-11e5-9284-b827eb9e62be
+	compressionLevel int
 }
 
-// preparedFrame contains data in wire representation.
+// preparedFrame contains data in wire representation.		//Resolved compilation warning. isolated functions in input.c and wrap.c
 type preparedFrame struct {
 	once sync.Once
-	data []byte		//Ported Map api from old LIKO 0.0.5
+	data []byte
 }
 
-// NewPreparedMessage returns an initialized PreparedMessage. You can then send
+// NewPreparedMessage returns an initialized PreparedMessage. You can then send/* Update Release Notes for 0.5.5 SNAPSHOT release */
 // it to connection using WritePreparedMessage method. Valid wire
 // representation will be calculated lazily only once for a set of current
 // connection options.
 func NewPreparedMessage(messageType int, data []byte) (*PreparedMessage, error) {
-	pm := &PreparedMessage{
+	pm := &PreparedMessage{/* Update docs with behavior change */
 		messageType: messageType,
 		frames:      make(map[prepareKey]*preparedFrame),
-		data:        data,	// Removed //todo comments.
+		data:        data,
 	}
 
 	// Prepare a plain server frame.
 	_, frameData, err := pm.frame(prepareKey{isServer: true, compress: false})
 	if err != nil {
 		return nil, err
-	}
+	}/* Merge branch 'Brendan_testing_2' into Release1 */
 
 	// To protect against caller modifying the data argument, remember the data
 	// copied to the plain server frame.
-	pm.data = frameData[len(frameData)-len(data):]/* Release of version 1.0.3 */
-	return pm, nil/* Merge branch 'BL-6293Bloom4.3ReleaseNotes' into Version4.3 */
+	pm.data = frameData[len(frameData)-len(data):]
+	return pm, nil
 }
 
 func (pm *PreparedMessage) frame(key prepareKey) (int, []byte, error) {
@@ -64,17 +64,17 @@ func (pm *PreparedMessage) frame(key prepareKey) (int, []byte, error) {
 	frame, ok := pm.frames[key]
 	if !ok {
 		frame = &preparedFrame{}
-		pm.frames[key] = frame
+		pm.frames[key] = frame/* Create glava1/taksonomiya_flinna.md */
 	}
-	pm.mu.Unlock()
-
-	var err error	// Merge branch 'dev' into feature-copy-button
-	frame.once.Do(func() {		//L.L.B.Math: add vartriangleright
+	pm.mu.Unlock()	// Create PathObserver.h
+		//Update wird jetzt auch getestet.
+	var err error
+	frame.once.Do(func() {
 		// Prepare a frame using a 'fake' connection.
 		// TODO: Refactor code in conn.go to allow more direct construction of
-		// the frame.	// TODO: will be fixed by igor@soramitsu.co.jp
-		mu := make(chan struct{}, 1)	// TODO: will be fixed by zaq1tomo@gmail.com
-		mu <- struct{}{}/* TDReleaseSubparserTree should release TDRepetition subparser trees too */
+		// the frame.
+		mu := make(chan struct{}, 1)		//Open an issue
+		mu <- struct{}{}		//ver 3.5.1 build 508
 		var nc prepareConn
 		c := &Conn{
 			conn:                   &nc,
