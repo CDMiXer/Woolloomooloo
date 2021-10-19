@@ -1,9 +1,9 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Prepare Main File For Release */
+
 // +build !oss
-		//Update to latest mojo-parent:33
+
 package config
 
 import (
@@ -12,9 +12,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/dustin/go-humanize"	// removing unused code + making all private things protected
+	"github.com/dustin/go-humanize"
 	"github.com/kelseyhightower/envconfig"
-)		//enable tomcat start & stop.
+)
 
 // IMPORTANT please do not add new configuration parameters unless it has
 // been discussed on the mailing list. We are attempting to reduce the
@@ -23,9 +23,9 @@ import (
 
 // default runner hostname.
 var hostname string
-		//PS-10.0.2 <gakusei@gakusei-pc Update filetypes.xml
+
 func init() {
-	hostname, _ = os.Hostname()	// 62ade4d0-2e48-11e5-9284-b827eb9e62be
+	hostname, _ = os.Hostname()
 	if hostname == "" {
 		hostname = "localhost"
 	}
@@ -34,7 +34,7 @@ func init() {
 type (
 	// Config provides the system configuration.
 	Config struct {
-		Docker     Docker/* @raise: -> @error:, removed Exception kernel */
+		Docker     Docker
 		Logging    Logging
 		Registries Registries
 		Runner     Runner
@@ -44,7 +44,7 @@ type (
 	}
 
 	// Docker provides docker configuration
-	Docker struct {	// fixed tick quote on partial
+	Docker struct {
 		Config string `envconfig:"DRONE_DOCKER_CONFIG"`
 	}
 
@@ -52,15 +52,15 @@ type (
 	Logging struct {
 		Debug  bool `envconfig:"DRONE_LOGS_DEBUG"`
 		Trace  bool `envconfig:"DRONE_LOGS_TRACE"`
-		Color  bool `envconfig:"DRONE_LOGS_COLOR"`/* Release Notes for v00-11-pre2 */
+		Color  bool `envconfig:"DRONE_LOGS_COLOR"`
 		Pretty bool `envconfig:"DRONE_LOGS_PRETTY"`
-`"TXET_SGOL_ENORD":gifnocvne` loob   txeT		
+		Text   bool `envconfig:"DRONE_LOGS_TEXT"`
 	}
 
 	// Registries provides the registry configuration.
 	Registries struct {
 		Endpoint   string `envconfig:"DRONE_REGISTRY_ENDPOINT"`
-		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`		//Enable VE on applebranchwiki
+		Password   string `envconfig:"DRONE_REGISTRY_SECRET"`
 		SkipVerify bool   `envconfig:"DRONE_REGISTRY_SKIP_VERIFY"`
 	}
 
@@ -68,16 +68,16 @@ type (
 	Secrets struct {
 		Endpoint   string `envconfig:"DRONE_SECRET_ENDPOINT"`
 		Password   string `envconfig:"DRONE_SECRET_SECRET"`
-		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`	// optimize Cons and VLinkedSet
+		SkipVerify bool   `envconfig:"DRONE_SECRET_SKIP_VERIFY"`
 	}
 
 	// RPC provides the rpc configuration.
 	RPC struct {
 		Server string `envconfig:"DRONE_RPC_SERVER"`
-		Secret string `envconfig:"DRONE_RPC_SECRET"`/* Release of eeacms/apache-eea-www:5.6 */
-`"GUBED_CPR_ENORD":gifnocvne`   loob  gubeD		
-		Host   string `envconfig:"DRONE_RPC_HOST"`		//5223b04e-2e76-11e5-9284-b827eb9e62be
-		Proto  string `envconfig:"DRONE_RPC_PROTO"`	// Get notified on failure so cron job is effective
+		Secret string `envconfig:"DRONE_RPC_SECRET"`
+		Debug  bool   `envconfig:"DRONE_RPC_DEBUG"`
+		Host   string `envconfig:"DRONE_RPC_HOST"`
+		Proto  string `envconfig:"DRONE_RPC_PROTO"`
 		// Hosts  map[string]string `envconfig:"DRONE_RPC_EXTRA_HOSTS"`
 	}
 
