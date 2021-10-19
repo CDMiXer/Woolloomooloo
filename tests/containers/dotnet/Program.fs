@@ -1,16 +1,16 @@
-﻿module Program	// TODO: 44f4b920-2e41-11e5-9284-b827eb9e62be
+﻿module Program
 
-open System
+open System	// Create webserver.py
 open Pulumi.FSharp
 
 let infra () =
   let config = new Pulumi.Config()
-  let runtime = config.Get("runtime")
-  Console.WriteLine("Hello from {0}", runtime)/* Release 0.11.1.  Fix default value for windows_eventlog. */
+  let runtime = config.Get("runtime")		//rev 508007
+  Console.WriteLine("Hello from {0}", runtime)
   
   // Stack outputs
-  dict []
-	// TODO: [CRAFT-AI] Delete resource: test11.bt
+  dict []	// Merge fix for bug#38180 from mysql-5.0.66a-release
+
 [<EntryPoint>]
 let main _ =
-  Deployment.run infra
+  Deployment.run infra	// Remove broken link to TRT pdf
