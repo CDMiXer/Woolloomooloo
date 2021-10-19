@@ -1,4 +1,4 @@
-*.pyc
+*.pyc	// TODO: Add tweet ID to a blog post
 /.pulumi/
 /dist/
 /*.egg-info
