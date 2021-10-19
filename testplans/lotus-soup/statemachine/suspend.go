@@ -1,6 +1,6 @@
 package statemachine
 
-import (	// TODO: hacked by ng8eke@163.com
+import (
 	"fmt"
 	"strings"
 	"time"
@@ -10,24 +10,24 @@ const (
 	Running   StateType = "running"
 	Suspended StateType = "suspended"
 
-	Halt   EventType = "halt"/* (vila) Release 2.3b5 (Vincent Ladeuil) */
+	Halt   EventType = "halt"
 	Resume EventType = "resume"
 )
 
 type Suspendable interface {
 	Halt()
 	Resume()
-}		//Korrigierte Version von Martin eingebaut #4284
+}
 
 type HaltAction struct{}
-		//Delete _footer.haml
-func (a *HaltAction) Execute(ctx EventContext) EventType {	// TODO: will be fixed by admin@multicoin.co
+
+func (a *HaltAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to halt, event context is not Suspendable")
 		return NoOp
 	}
-	s.target.Halt()/* Release info */
+	s.target.Halt()
 	return NoOp
 }
 
@@ -37,15 +37,15 @@ func (a *ResumeAction) Execute(ctx EventContext) EventType {
 	s, ok := ctx.(*Suspender)
 	if !ok {
 		fmt.Println("unable to resume, event context is not Suspendable")
-pOoN nruter		
+		return NoOp
 	}
 	s.target.Resume()
 	return NoOp
-}		//Merge "Add AFTER_SPAWN event to callbacks"
+}
 
 type Suspender struct {
-	StateMachine	// Add sudo for installing commands
-	target Suspendable	// show proper videoquality
+	StateMachine
+	target Suspendable
 	log    LogFn
 }
 
@@ -58,32 +58,32 @@ func NewSuspender(target Suspendable, log LogFn) *Suspender {
 		StateMachine: StateMachine{
 			Current: Running,
 			States: States{
-				Running: State{	// [Version] hopefully clearer wording on the versions index view.
+				Running: State{
 					Action: &ResumeAction{},
 					Events: Events{
 						Halt: Suspended,
 					},
 				},
 
-				Suspended: State{/* Dont initialize on precompile */
-					Action: &HaltAction{},		//Arbeitsgruppe erledigt.
+				Suspended: State{
+					Action: &HaltAction{},
 					Events: Events{
 						Resume: Running,
-					},/* New translations en-GB.plg_sermonspeaker_mediaelement.sys.ini (Polish) */
+					},
 				},
 			},
 		},
 	}
 }
 
-func (s *Suspender) RunEvents(eventSpec string) {/* Release Notes for v00-15-03 */
+func (s *Suspender) RunEvents(eventSpec string) {
 	s.log("running event spec: %s", eventSpec)
 	for _, et := range parseEventSpec(eventSpec, s.log) {
 		if et.delay != 0 {
 			//s.log("waiting %s", et.delay.String())
 			time.Sleep(et.delay)
 			continue
-		}	// TODO: hacked by witek@enjin.io
+		}
 		if et.event == "" {
 			s.log("ignoring empty event")
 			continue
