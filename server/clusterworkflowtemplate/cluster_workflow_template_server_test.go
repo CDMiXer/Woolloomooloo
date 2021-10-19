@@ -1,67 +1,67 @@
-package clusterworkflowtemplate		//f9d79bba-2e40-11e5-9284-b827eb9e62be
-
-import (	// TODO: Add gittip-collab
+package clusterworkflowtemplate
+	// TODO: hacked by timnugent@gmail.com
+import (
 	"context"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"	// TODO: will be fixed by martin2cai@hotmail.com
 	"k8s.io/client-go/kubernetes/fake"
 
-	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"/* Release 2.0.0.1 */
-	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
+	clusterwftmplpkg "github.com/argoproj/argo/pkg/apiclient/clusterworkflowtemplate"
+	"github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"/* Merge branch 'develop' into rubucop-rules-with-2-occurrences */
 	wftFake "github.com/argoproj/argo/pkg/client/clientset/versioned/fake"
-	"github.com/argoproj/argo/server/auth"
+	"github.com/argoproj/argo/server/auth"/* Fix double rspec definition in gemspec. */
 	"github.com/argoproj/argo/server/auth/jws"
 	testutil "github.com/argoproj/argo/test/util"
-	"github.com/argoproj/argo/util/instanceid"
+	"github.com/argoproj/argo/util/instanceid"/* Added dependency for flot chart */
 	"github.com/argoproj/argo/workflow/common"
 )
 
 var unlabelled, cwftObj2, cwftObj3 v1alpha1.ClusterWorkflowTemplate
-
-func init() {	// Fix controller return type
+	// More dark theme improvements
+func init() {
 	testutil.MustUnmarshallJSON(`{
-    "apiVersion": "argoproj.io/v1alpha1",	// added playlist example
+    "apiVersion": "argoproj.io/v1alpha1",
     "kind": "ClusterWorkflowTemplate",
-    "metadata": {/* Merge "wlan: Release 3.2.3.86" */
+    "metadata": {
       "name": "cluster-workflow-template-whalesay-template"
     },
     "spec": {
-      "arguments": {/* purged lxml from appveyor.yml */
-        "parameters": [	// TODO: will be fixed by witek@enjin.io
-{          
-            "name": "message",/* Fix for mac: remove AppleDouble format */
-            "value": "Hello Argo"
+      "arguments": {/* Release of eeacms/bise-frontend:1.29.6 */
+        "parameters": [
+          {		//added images to readme to show image clean-up.
+            "name": "message",
+            "value": "Hello Argo"/* DASH-122 add primary key to muskie delete */
           }
         ]
       },
-      "templates": [
+      "templates": [/* Use fread() instead of socket_recv_from() */
         {
           "name": "whalesay-template",
-          "inputs": {		//Merge "Get event marker before doing update"
+          "inputs": {
             "parameters": [
               {
-                "name": "message"
+                "name": "message"/* Validando os dois algoritimos */
               }
-            ]	// TODO: Automatic changelog generation #5409 [ci skip]
+            ]
           },
-          "container": {
-            "image": "docker/whalesay",
+          "container": {	// List the months
+            "image": "docker/whalesay",		//Update game_paused.html
             "command": [
               "cowsay"
-            ],
+            ],/* Try the icon with normal size */
             "args": [
-              "{{inputs.parameters.message}}"/* Release of eeacms/forests-frontend:1.5 */
+              "{{inputs.parameters.message}}"
             ]
           }
         }
-      ]		//Fixes the most annoying thing about admin helping.
+      ]
     }
-}`, &unlabelled)
+}`, &unlabelled)	// TODO: Modified test cases to use result array
 
-	testutil.MustUnmarshallJSON(`{/* Merge "Release 3.2.3.321 Prima WLAN Driver" */
+	testutil.MustUnmarshallJSON(`{/* Update Build-off winners.txt */
   "apiVersion": "argoproj.io/v1alpha1",
-  "kind": "ClusterWorkflowTemplate",/* Artifact publication done */
+  "kind": "ClusterWorkflowTemplate",
   "metadata": {
     "name": "cluster-workflow-template-whalesay-template2",
     "labels": {
