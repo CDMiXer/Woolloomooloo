@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	// TODO: [builder] rebuild dependent resources when referenced java types change
   <PropertyGroup>
-    <OutputType>Exe</OutputType>/* fix examples [feenkcom/gtoolkit#1065] */
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
