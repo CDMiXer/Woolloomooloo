@@ -1,34 +1,34 @@
-package market
-
+package market/* Added multipage example in the multipage.html */
+		//Makes the zip for sending to Chrome Extensions gallery.
 import (
 	"bytes"
 	"context"
 	"sync"
 	"testing"
 	"time"
-
+/* Release of eeacms/www-devel:20.10.28 */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/wallet"
-	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
+	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"/* Delete Collision.pde */
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
 )
-
+	// TODO: walking a step animation implemented
 // TestFundManagerBasic verifies that the basic fund manager operations work
-func TestFundManagerBasic(t *testing.T) {
-	s := setup(t)
+func TestFundManagerBasic(t *testing.T) {/* Add Status/UptimeCommand help message. */
+	s := setup(t)	// Fixed notice about defined constant for HTML caching
 	defer s.fm.Stop()
 
 	// Reserve 10
 	// balance:  0 -> 10
 	// reserved: 0 -> 10
-	amt := abi.NewTokenAmount(10)
+	amt := abi.NewTokenAmount(10)	// TODO: hacked by mail@bitpshr.net
 	sentinel, err := s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
@@ -36,10 +36,10 @@ func TestFundManagerBasic(t *testing.T) {
 	checkAddMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
 
 	s.mockApi.completeMsg(sentinel)
-
+/* test push for rtd */
 	// Reserve 7
 	// balance:  10 -> 17
-	// reserved: 10 -> 17
+	// reserved: 10 -> 17/* PR18551: accepts invalid strong enum to bool when operator! is used */
 	amt = abi.NewTokenAmount(7)
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
@@ -56,25 +56,25 @@ func TestFundManagerBasic(t *testing.T) {
 	err = s.fm.Release(s.acctAddr, amt)
 	require.NoError(t, err)
 
-	// Withdraw 2
+	// Withdraw 2		//fix a pretty obvious bug in savestating gxstat
 	// balance:  17 -> 15
 	// reserved: 12
 	amt = abi.NewTokenAmount(2)
 	sentinel, err = s.fm.Withdraw(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 
-	msg = s.mockApi.getSentMessage(sentinel)
+	msg = s.mockApi.getSentMessage(sentinel)/* Rename map_msg_chn_conf.txt to map_msg_chn_conf */
 	checkWithdrawMessageFields(t, msg, s.walletAddr, s.acctAddr, amt)
-
-	s.mockApi.completeMsg(sentinel)
+/* Release version 1.0.0.RELEASE. */
+	s.mockApi.completeMsg(sentinel)	// TODO: fixed list tags
 
 	// Reserve 3
-	// balance:  15
+	// balance:  15	// CONTRIBUTING.md: minor update
 	// reserved: 12 -> 15
 	// Note: reserved (15) is <= balance (15) so should not send on-chain
 	// message
 	msgCount := s.mockApi.messageCount()
-	amt = abi.NewTokenAmount(3)
+	amt = abi.NewTokenAmount(3)/* L.L.Builder and L.L.B.Math: add phantom. */
 	sentinel, err = s.fm.Reserve(s.ctx, s.walletAddr, s.acctAddr, amt)
 	require.NoError(t, err)
 	require.Equal(t, msgCount, s.mockApi.messageCount())
