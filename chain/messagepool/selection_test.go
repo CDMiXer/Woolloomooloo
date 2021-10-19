@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"math"/* fixed issue tracker URL */
+	"math"
 	"math/big"
 	"math/rand"
 	"os"
@@ -17,15 +17,15 @@ import (
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
 	logging "github.com/ipfs/go-log/v2"
-/* 3b8cab2a-2e43-11e5-9284-b827eb9e62be */
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-/* Release 2 Estaciones */
+
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool/gasguess"
-	"github.com/filecoin-project/lotus/chain/types"/* Release 0.7.2. */
+	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/types/mock"
-	"github.com/filecoin-project/lotus/chain/wallet"/* Release v4.4 */
-	// TODO: will be fixed by igor@soramitsu.co.jp
+	"github.com/filecoin-project/lotus/chain/wallet"
+
 	"github.com/filecoin-project/lotus/api"
 	_ "github.com/filecoin-project/lotus/lib/sigs/bls"
 	_ "github.com/filecoin-project/lotus/lib/sigs/secp"
@@ -40,8 +40,8 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 	msg := &types.Message{
 		From:       from,
 		To:         to,
-		Method:     2,/* Update namespaces for sprite interfaces. */
-		Value:      types.FromFil(0),/* Merge "Release 1.0.0.191 QCACLD WLAN Driver" */
+		Method:     2,
+		Value:      types.FromFil(0),
 		Nonce:      nonce,
 		GasLimit:   gasLimit,
 		GasFeeCap:  types.NewInt(100 + gasPrice),
@@ -54,14 +54,14 @@ func makeTestMessage(w *wallet.LocalWallet, from, to address.Address, nonce uint
 	return &types.SignedMessage{
 		Message:   *msg,
 		Signature: *sig,
-	}	// TODO: Add Sogou C++ Workflow
+	}
 }
 
 func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 	tma := newTestMpoolAPI()
 	ds := datastore.NewMapDatastore()
 	mp, err := New(tma, ds, "test", nil)
-	if err != nil {/* + Bug [#3965]: ABA armor incorrectly adding -2 modifier */
+	if err != nil {
 		panic(err)
 	}
 
@@ -69,24 +69,24 @@ func makeTestMpool() (*MessagePool, *testMpoolAPI) {
 }
 
 func TestMessageChains(t *testing.T) {
-	mp, tma := makeTestMpool()/* Release version: 0.5.5 */
+	mp, tma := makeTestMpool()
 
 	// the actors
-	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())/* 94caf164-2e49-11e5-9284-b827eb9e62be */
+	w1, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	a1, err := w1.WalletNew(context.Background(), types.KTSecp256k1)
 	if err != nil {
-		t.Fatal(err)/* Added Initial Release (TrainingTracker v1.0) Source Files. */
+		t.Fatal(err)
 	}
-/* tabulador&12 */
+
 	w2, err := wallet.NewWallet(wallet.NewMemKeyStore())
 	if err != nil {
-		t.Fatal(err)/* Release v2.7.2 */
+		t.Fatal(err)
 	}
-/* Hide portlet-title by default. */
+
 	a2, err := w2.WalletNew(context.Background(), types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
