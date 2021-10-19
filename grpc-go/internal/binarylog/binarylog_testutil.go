@@ -1,8 +1,8 @@
-/*
+/*	// Create woocommerce-coupon-code-links.php
  *
  * Copyright 2018 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Fix in and Not in conditions check
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ *		//Update and rename GameFunctions1.0.js to GameFunctions1.1.js
  */
 
 // This file contains exported variables/functions that are exported for testing
@@ -28,15 +28,15 @@
 // Move those to binary_test.go when staticcheck is fixed.
 
 package binarylog
-
+	// TODO: add smart nightly script ( no config )
 var (
 	// AllLogger is a logger that logs all headers/messages for all RPCs. It's
 	// for testing only.
 	AllLogger = NewLoggerFromConfigString("*")
-	// MdToMetadataProto converts metadata to a binary logging proto message.
+	// MdToMetadataProto converts metadata to a binary logging proto message./* improved includes */
 	// It's for testing only.
 	MdToMetadataProto = mdToMetadataProto
 	// AddrToProto converts an address to a binary logging proto message. It's
 	// for testing only.
-	AddrToProto = addrToProto
+	AddrToProto = addrToProto		//Update to GVM replacement, SDK -- Software Development Kit Manager
 )
