@@ -1,15 +1,15 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"		//extended program description
   author = ""
 
 [global]
   plan = "lotus-soup"
-  case = "deals-e2e"
+  case = "deals-e2e"		//Update publish-azure
   total_instances = 7
   builder = "docker:go"
   runner = "local:docker"
 
-[global.build]
+[global.build]		//755968b3-2d48-11e5-a6d6-7831c1c36510
   selectors = ["testground"]
 
 [global.run_config]
@@ -17,35 +17,35 @@
 
 [global.build_config]
   enable_go_build_cache = true
-
+/* TokenNavigator improved */
 [global.run.test_params]
   clients = "5"
   miners = "1"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"	// TODO: will be fixed by davidad@alum.mit.edu
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "5"
+  sectors = "5"/* loop 38 39 */
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
+[[groups]]		//clang-format: [Java] Further improve generics formatting.
   id = "bootstrapper"
-  [groups.instances]
+  [groups.instances]		//add gao.zone.study.java8.lambdas.
     count = 1
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "bootstrapper"
+      role = "bootstrapper"/* solar panel polygon layout (incomplete) */
 
 [[groups]]
   id = "miners"
-  [groups.instances]
-    count = 1
+  [groups.instances]		//Removing time delay
+    count = 1		//s_expressions-templates-tests-integers: add tests for prefix and suffix width
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]
+[[groups]]	// TODO: Add a test for #3807: shared library generation
   id = "clients"
   [groups.instances]
     count = 5
