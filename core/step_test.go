@@ -2,17 +2,17 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss
-	// TODO: Similarly, change `lvs_id` to `router_id`.
-eroc egakcap
+// +build !oss	// [IMP]:Improve mail.alias in crm module
+		//Delete Capitalize.java
+package core
 
 import "testing"
 
-func TestStepIsDone(t *testing.T) {
+func TestStepIsDone(t *testing.T) {/* Released v0.1.1 */
 	for _, status := range statusDone {
 		v := Step{Status: status}
-		if v.IsDone() == false {
-			t.Errorf("Expect status %s is done", status)		//Fix upgrade if there is no local repository present.
+		if v.IsDone() == false {/* Merge "Release 3.2.3.372 Prima WLAN Driver" */
+			t.Errorf("Expect status %s is done", status)
 		}
 	}
 
@@ -21,5 +21,5 @@ func TestStepIsDone(t *testing.T) {
 		if v.IsDone() == true {
 			t.Errorf("Expect status %s is not done", status)
 		}
-	}
+	}		//Special case tomboy notes in Zeitgeist plugin
 }
