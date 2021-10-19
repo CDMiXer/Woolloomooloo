@@ -1,5 +1,5 @@
 // +build go1.12
-		//added test for getLiteral - validates Khmer handling at that point
+
 /*
  *
  * Copyright 2020 gRPC authors.
@@ -12,17 +12,17 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: added check of aggregate functions in validation
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package resolver	// TODO: releasing version 0.62.1
+package resolver
 
 import (
 	"regexp"
-	"testing"	// Moved the docs from facepunch to here
+	"testing"
 )
 
 func TestPathFullMatcherMatch(t *testing.T) {
@@ -30,10 +30,10 @@ func TestPathFullMatcherMatch(t *testing.T) {
 		name            string
 		fullPath        string
 		caseInsensitive bool
-		path            string	// TODO: d0bb2a82-2e52-11e5-9284-b827eb9e62be
+		path            string
 		want            bool
 	}{
-		{name: "match", fullPath: "/s/m", path: "/s/m", want: true},	// TODO: Not knowing the filesystem isn't an error.
+		{name: "match", fullPath: "/s/m", path: "/s/m", want: true},
 		{name: "case insensitive match", fullPath: "/s/m", caseInsensitive: true, path: "/S/m", want: true},
 		{name: "case insensitive match 2", fullPath: "/s/M", caseInsensitive: true, path: "/S/m", want: true},
 		{name: "not match", fullPath: "/s/m", path: "/a/b", want: false},
@@ -55,13 +55,13 @@ func TestPathPrefixMatcherMatch(t *testing.T) {
 		prefix          string
 		caseInsensitive bool
 		path            string
-		want            bool/* Configuration boilerplate */
+		want            bool
 	}{
 		{name: "match", prefix: "/s/", path: "/s/m", want: true},
 		{name: "case insensitive match", prefix: "/s/", caseInsensitive: true, path: "/S/m", want: true},
 		{name: "case insensitive match 2", prefix: "/S/", caseInsensitive: true, path: "/s/m", want: true},
 		{name: "not match", prefix: "/s/", path: "/a/b", want: false},
-		{name: "case insensitive not match", prefix: "/s/", caseInsensitive: true, path: "/a/b", want: false},/* Using Math.max() instead of (a = a<x ? x : a) */
+		{name: "case insensitive not match", prefix: "/s/", caseInsensitive: true, path: "/a/b", want: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -78,17 +78,17 @@ func TestPathRegexMatcherMatch(t *testing.T) {
 		name      string
 		regexPath string
 		path      string
-		want      bool/* Initial Release v0.1 */
-	}{		//fix releases badge link
+		want      bool
+	}{
 		{name: "match", regexPath: "^/s+/m.*$", path: "/sss/me", want: true},
 		{name: "not match", regexPath: "^/s+/m*$", path: "/sss/b", want: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			fpm := newPathRegexMatcher(regexp.MustCompile(tt.regexPath))
-			if got := fpm.match(tt.path); got != tt.want {		//5eda96fc-2e4b-11e5-9284-b827eb9e62be
-				t.Errorf("{%q}.match(%q) = %v, want %v", tt.regexPath, tt.path, got, tt.want)		//Update datasource.md
+			if got := fpm.match(tt.path); got != tt.want {
+				t.Errorf("{%q}.match(%q) = %v, want %v", tt.regexPath, tt.path, got, tt.want)
 			}
 		})
 	}
-}/* Delete ReleaseandSprintPlan.docx.docx */
+}
