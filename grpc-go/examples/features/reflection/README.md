@@ -7,15 +7,15 @@ https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tuto
 for a tutorial.
 
 
-# Try it/* Added the ?? operator */
+# Try it
 
 ```go
 go run server/main.go
 ```
 
-There are multiple existing reflection clients./* Update Release Planning */
+There are multiple existing reflection clients.
 
 To use `gRPC CLI`, follow
 https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#grpc-cli.
-/* Release 2.1, HTTP-Tunnel */
+
 To use `grpcurl`, see https://github.com/fullstorydev/grpcurl.
