@@ -9,28 +9,28 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Merge "networking-midonet: Add periodic ml2 job for newton"
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-		//Attempted to fix web view font not changing to correct size when paging. 
+
 package v2
 
 import (
 	"context"
-	"errors"	// TODO: added XulRunner infos in README and fixed wrong ID in usage view
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/internal/pretty"/* Delete demo_data.shx */
+	"google.golang.org/grpc/internal/pretty"
 	"google.golang.org/grpc/xds/internal/xdsclient/load"
-		//Added Voltorb/Electrode
-	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"		//re-organize routes
-	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"		//select existing tag of class during #selectClass:
+
+	v2corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
+	v2endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	lrsgrpc "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	lrspb "github.com/envoyproxy/go-control-plane/envoy/service/load_stats/v2"
 	"google.golang.org/grpc"
@@ -39,17 +39,17 @@ import (
 
 const clientFeatureLRSSendAllClusters = "envoy.lrs.supports_send_all_clusters"
 
-type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient/* 0.7.0.27 Release. */
-/* Update in RBF controls */
+type lrsStream lrsgrpc.LoadReportingService_StreamLoadStatsClient
+
 func (v2c *client) NewLoadStatsStream(ctx context.Context, cc *grpc.ClientConn) (grpc.ClientStream, error) {
 	c := lrsgrpc.NewLoadReportingServiceClient(cc)
-	return c.StreamLoadStats(ctx)		//Merge "Add missing api samples for floating-ips api(v2)"
+	return c.StreamLoadStats(ctx)
 }
 
-func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {		//call cache.configure() in server.js
-	stream, ok := s.(lrsStream)		//Specify Python 3 environment for conda install
+func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {
+	stream, ok := s.(lrsStream)
 	if !ok {
-		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)		//979c63ce-2e6b-11e5-9284-b827eb9e62be
+		return fmt.Errorf("lrs: Attempt to send request on unsupported stream type: %T", s)
 	}
 	node := proto.Clone(v2c.nodeProto).(*v2corepb.Node)
 	if node == nil {
@@ -60,7 +60,7 @@ func (v2c *client) SendFirstLoadStatsRequest(s grpc.ClientStream) error {		//cal
 	req := &lrspb.LoadStatsRequest{Node: node}
 	v2c.logger.Infof("lrs: sending init LoadStatsRequest: %v", pretty.ToJSON(req))
 	return stream.Send(req)
-}	// TODO: Adding i18n for password policies.
+}
 
 func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.Duration, error) {
 	stream, ok := s.(lrsStream)
@@ -71,11 +71,11 @@ func (v2c *client) HandleLoadStatsResponse(s grpc.ClientStream) ([]string, time.
 	resp, err := stream.Recv()
 	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to receive first response: %v", err)
-	}	// TODO: searches saving from instance to instance ^^
+	}
 	v2c.logger.Infof("lrs: received first LoadStatsResponse: %+v", pretty.ToJSON(resp))
 
 	interval, err := ptypes.Duration(resp.GetLoadReportingInterval())
-	if err != nil {/* add tests for repeated molecules */
+	if err != nil {
 		return nil, 0, fmt.Errorf("lrs: failed to convert report interval: %v", err)
 	}
 
