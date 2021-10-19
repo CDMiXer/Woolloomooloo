@@ -1,9 +1,9 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-		//Merge "connection_infos are not found under analytics contrail-database-nodemgr"
-import { Resource } from "./resource";		//Added analytics to public folder
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved./* Released Animate.js v0.1.2 */
 
-// Step 2: Reverse the dependency graph./* Atari: fixed sprites related bugs. */
+import { Resource } from "./resource";
+
+// Step 2: Reverse the dependency graph./* Release version [9.7.15] - prepare */
 // Checkpoint dependency graph: b -> a
-const b = new Resource("b", { state: 2 })	// TODO: hacked by caojiaoyue@protonmail.com
-const a = new Resource("a", { state: 1, resource: b })
+const b = new Resource("b", { state: 2 })		//Merge "Hide DPDK section if experimental is turned off"
+const a = new Resource("a", { state: 1, resource: b })/* updates the archetype dependency */
 // Dependency graph: a -> b
