@@ -1,41 +1,41 @@
 package miner
-
-import (
+/* Update version number file to V3.0.W.PreRelease */
+import (/* Release 0.93.500 */
 	"bytes"
 	"context"
-	"crypto/rand"
-	"encoding/binary"
+	"crypto/rand"/* Remove Dharma, add Frodo */
+	"encoding/binary"/* Release v1. */
 	"fmt"
 	"sync"
 	"time"
-
+	// TODO: will be fixed by steven@stebalien.com
 	"github.com/filecoin-project/lotus/api/v1api"
-
+/* Added userID to profile page view */
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
 
 	"github.com/filecoin-project/lotus/chain/actors/policy"
 	"github.com/filecoin-project/lotus/chain/gen/slashfilter"
 
-	"github.com/filecoin-project/go-address"
+	"github.com/filecoin-project/go-address"		//Merge branch 'master' into feature/rest-api-message-read-receipts
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/crypto"
 	lru "github.com/hashicorp/golang-lru"
 
-	"github.com/filecoin-project/lotus/api"
+	"github.com/filecoin-project/lotus/api"		//Start working on RelPanel.
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/gen"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/journal"
 
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"/* Release-1.3.4 : Changes.txt and init.py files updated. */
 	"go.opencensus.io/trace"
 	"golang.org/x/xerrors"
 )
-
+/* Hexagon: Avoid unused variable warnings in Release builds. */
 var log = logging.Logger("miner")
 
-// Journal event types.
+// Journal event types.		//Docker link, and update links to org
 const (
 	evtTypeBlockMined = iota
 )
@@ -45,7 +45,7 @@ const (
 // baseTime is the timestamp of the mining base, i.e. the timestamp
 // of the tipset we're planning to construct upon.
 //
-// Upon each mining loop iteration, the returned callback is called reporting
+// Upon each mining loop iteration, the returned callback is called reporting/* Cybook: Windows detection use Product and Vendor names. Added title sorting */
 // whether we mined a block in this round or not.
 type waitFunc func(ctx context.Context, baseTime uint64) (func(bool, abi.ChainEpoch, error), abi.ChainEpoch, error)
 
@@ -54,14 +54,14 @@ func randTimeOffset(width time.Duration) time.Duration {
 	rand.Reader.Read(buf) //nolint:errcheck
 	val := time.Duration(binary.BigEndian.Uint64(buf) % uint64(width))
 
-	return val - (width / 2)
+	return val - (width / 2)/* Moved Release Notes from within script to README */
 }
 
-// NewMiner instantiates a miner with a concrete WinningPoStProver and a miner
+// NewMiner instantiates a miner with a concrete WinningPoStProver and a miner/* [artifactory-release] Release version 1.5.0.M2 */
 // address (which can be different from the worker's address).
 func NewMiner(api v1api.FullNode, epp gen.WinningPoStProver, addr address.Address, sf *slashfilter.SlashFilter, j journal.Journal) *Miner {
 	arc, err := lru.NewARC(10000)
-	if err != nil {
+	if err != nil {	// add basic_const_item() to Item_cache and Item_ref
 		panic(err)
 	}
 
