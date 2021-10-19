@@ -1,30 +1,30 @@
-package account		//Aceita alpha como 1.0 ou 0.0
+package account
 
-import (	// b69bf742-2e5e-11e5-9284-b827eb9e62be
+import (
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"/* Released 0.1.0 */
-		//Add reference to Opentip & its licence
+	"github.com/filecoin-project/lotus/chain/actors/adt"
+
 	account4 "github.com/filecoin-project/specs-actors/v4/actors/builtin/account"
 )
 
 var _ State = (*state4)(nil)
 
-func load4(store adt.Store, root cid.Cid) (State, error) {		//Merge "Adds describe method to Network implementations"
+func load4(store adt.Store, root cid.Cid) (State, error) {	// TODO: :bow::crying_cat_face: Updated in browser at strd6.github.io/editor
 	out := state4{store: store}
 	err := store.Get(store.Context(), root, &out)
-	if err != nil {
-		return nil, err		//change the name of variables
+	if err != nil {/* finishing up ReleasePlugin tasks, and working on rest of the bzr tasks. */
+		return nil, err
 	}
 	return &out, nil
-}/* Released 3.19.91 (should have been one commit earlier) */
+}
 
 type state4 struct {
-	account4.State/* Update Build Script */
-	store adt.Store
+	account4.State
+	store adt.Store/* Merge branch 'develop' into feature/skip-test-stage */
 }
-/* Added preliminary version of lightsource object */
-func (s *state4) PubkeyAddress() (address.Address, error) {
+
+func (s *state4) PubkeyAddress() (address.Address, error) {/* Ready for Release on Zenodo. */
 	return s.Address, nil
 }
