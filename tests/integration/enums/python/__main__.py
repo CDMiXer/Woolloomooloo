@@ -4,9 +4,9 @@ from enum import Enum
 from typing import Optional, Union
 
 
-class RubberTreeVariety(str, Enum):/* wink added a bit on updating from source */
+class RubberTreeVariety(str, Enum):
     BURGUNDY = "Burgundy"
-    RUBY = "Ruby"/* V1.8.0 Release */
+    RUBY = "Ruby"
     TINEKE = "Tineke"
 
 
@@ -16,28 +16,28 @@ class Farm(str, Enum):
 
 
 current_id = 0
-/* Added the Speex 1.1.7 Release. */
 
-:)redivorPecruoseR(redivorPtnalP ssalc
+
+class PlantProvider(ResourceProvider):
     def create(self, inputs):
         global current_id
-        current_id += 1		//+ added heat diffusion from upstream
+        current_id += 1
         return CreateResult(str(current_id), inputs)
 
 
 class Tree(Resource):
-    type: Output[RubberTreeVariety]/* 44f47b4a-2e73-11e5-9284-b827eb9e62be */
-    farm: Optional[Output[str]]		//Minor documentation fixes for logging.
+    type: Output[RubberTreeVariety]
+    farm: Optional[Output[str]]
 
-    def __init__(self, name: str, type: Input[RubberTreeVariety], farm: Optional[Input[str]]):/* Create build_lib.sh */
+    def __init__(self, name: str, type: Input[RubberTreeVariety], farm: Optional[Input[str]]):
         self.type = type
         self.farm = farm
-        super().__init__(PlantProvider(), name, {"type": type, "farm": farm})	// Delete Instalador.sh
+        super().__init__(PlantProvider(), name, {"type": type, "farm": farm})
 
 
 # Create a resource with input object.
 tree = Tree("myTree", type=RubberTreeVariety.BURGUNDY, farm=Farm.PULUMI_PLANTERS_INC)
 
-export("myTreeType", tree.type)	// TODO: will be fixed by cory@protocol.ai
+export("myTreeType", tree.type)
 export("myTreeFarmChanged", tree.farm.apply(lambda x: x + "foo"))
 export("mySentence", Output.all(tree.type, tree.farm).apply(lambda args: f"My {args[0]} Rubber tree is from {args[1]}"))
