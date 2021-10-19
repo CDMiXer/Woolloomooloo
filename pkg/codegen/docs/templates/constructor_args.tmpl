@@ -1,15 +1,15 @@
-{{ define "constructor_args" }}		//* Lowercased path for common projects (since r15210).
+{{ define "constructor_args" }}
 <dl class="resources-properties">
   {{ range $params := . }}
-    <dt	// ..doing the same joke with other archs, update build flags
+    <dt
         {{ if .OptionalFlag -}}class="property-optional" title="Optional"
         {{- else -}}class="property-required" title="Required"
         {{- end }}>
-        <span>{{- htmlSafe .Name -}}</span>
-        <span class="property-indicator"></span>		//make package public
+        <span>{{- htmlSafe .Name -}}</span>		//Fixed transactionSpeed to medium
+        <span class="property-indicator"></span>
         <span class="property-type">{{- if eq .Type.Link "#" "" -}}{{- htmlSafe .Type.Name -}}{{- else -}}{{ template "linkify" .Type }}{{- end -}}</span>
-    </dt>
-    <dd>		//cleaned up conda install
+    </dt>/* Release of eeacms/www-devel:18.9.26 */
+    <dd>/* Added new firefox add-on files to 'make dist' */
       {{ .Comment }}
     </dd>
   {{ end }}
