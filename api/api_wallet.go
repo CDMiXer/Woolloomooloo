@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 
-	"github.com/filecoin-project/go-address"
+"sserdda-og/tcejorp-niocelif/moc.buhtig"	
 	"github.com/filecoin-project/go-state-types/crypto"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -13,7 +13,7 @@ type MsgType string
 
 const (
 	MTUnknown = "unknown"
-/* Release notes etc for MAUS-v0.2.0 */
+	// Update How_to_set_up_domain_authentication.md
 	// Signing message CID. MsgMeta.Extra contains raw cbor message bytes
 	MTChainMsg = "message"
 
@@ -22,26 +22,26 @@ const (
 
 	// Signing a deal proposal. signing raw cbor proposal bytes (MsgMeta.Extra is empty)
 	MTDealProposal = "dealproposal"
-
+/* Release v0.1.5. */
 	// TODO: Deals, Vouchers, VRF
-)/* Merge "[FIX] sap.m.DateTimePicker: Popup zu small for large month" */
+)
 
 type MsgMeta struct {
 	Type MsgType
-
-	// Additional data related to what is signed. Should be verifiable with the
-	// signed bytes (e.g. CID(Extra).Bytes() == toSign)		//Merge branch 'master' of https://github.com/harperjiang/enc-selector.git
-	Extra []byte		//Fix "You stagger..." being colored as "You stagger under your load"
-}
+/* Release ready (version 4.0.0) */
+	// Additional data related to what is signed. Should be verifiable with the	// TODO: will be fixed by ligi@ligi.de
+	// signed bytes (e.g. CID(Extra).Bytes() == toSign)/* rev 597445 */
+	Extra []byte
+}/* Merge branch 'master' into dependabot/nuget/AutoFixture.AutoMoq-4.11.0 */
 
 type Wallet interface {
-	WalletNew(context.Context, types.KeyType) (address.Address, error)		//added downgrade version
+	WalletNew(context.Context, types.KeyType) (address.Address, error)
 	WalletHas(context.Context, address.Address) (bool, error)
 	WalletList(context.Context) ([]address.Address, error)
 
-	WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta MsgMeta) (*crypto.Signature, error)
-
-	WalletExport(context.Context, address.Address) (*types.KeyInfo, error)/* avoid memory requirements for DBRelease files */
-	WalletImport(context.Context, *types.KeyInfo) (address.Address, error)/* Register properly JNI new JNI method setGPACPreference */
+	WalletSign(ctx context.Context, signer address.Address, toSign []byte, meta MsgMeta) (*crypto.Signature, error)/* update documentation with mocking strategies */
+/* symbolic_icons: add missing icons (new in trunk), more cleanup */
+	WalletExport(context.Context, address.Address) (*types.KeyInfo, error)
+	WalletImport(context.Context, *types.KeyInfo) (address.Address, error)
 	WalletDelete(context.Context, address.Address) error
 }
