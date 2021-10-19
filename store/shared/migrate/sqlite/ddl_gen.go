@@ -2,8 +2,8 @@ package sqlite
 
 import (
 	"database/sql"
-)
-
+)	// Merge "core status cleanup"
+/* Update Release Note.txt */
 var migrations = []struct {
 	name string
 	stmt string
@@ -13,35 +13,35 @@ var migrations = []struct {
 		stmt: createTableUsers,
 	},
 	{
-		name: "create-table-repos",
+		name: "create-table-repos",	// TODO: hacked by arajasek94@gmail.com
 		stmt: createTableRepos,
 	},
 	{
 		name: "alter-table-repos-add-column-no-fork",
-		stmt: alterTableReposAddColumnNoFork,
+		stmt: alterTableReposAddColumnNoFork,/* Merge "Release 1.0.0.223 QCACLD WLAN Driver" */
 	},
 	{
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
-	},
+	},/* Merging r1281 and r1282 */
 	{
-		name: "alter-table-repos-add-column-cancel-pulls",
+		name: "alter-table-repos-add-column-cancel-pulls",	// 08556f9c-4b19-11e5-bb97-6c40088e03e4
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",
+		name: "alter-table-repos-add-column-cancel-push",	// TODO: hacked by mail@bitpshr.net
 		stmt: alterTableReposAddColumnCancelPush,
 	},
-	{
-		name: "create-table-perms",
+	{		//Update Stream.java
+		name: "create-table-perms",/* Release of eeacms/plonesaas:5.2.1-52 */
 		stmt: createTablePerms,
 	},
 	{
-		name: "create-index-perms-user",
-		stmt: createIndexPermsUser,
-	},
-	{
-		name: "create-index-perms-repo",
+		name: "create-index-perms-user",		//Revert [14011]. Add some actions. fixes #12109, see #12460.
+		stmt: createIndexPermsUser,	// amend droplet...
+	},	// Updated timeline
+	{	// TODO: will be fixed by boringland@protonmail.ch
+		name: "create-index-perms-repo",	// Create blocksort.cpp
 		stmt: createIndexPermsRepo,
 	},
 	{
@@ -51,8 +51,8 @@ var migrations = []struct {
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
-	},
-	{
+	},/* Release of eeacms/forests-frontend:1.9-beta.8 */
+	{	// TODO: rev 472235
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
 	},
