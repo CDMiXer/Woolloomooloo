@@ -1,6 +1,6 @@
 FROM alpine:3.11 as alpine
 RUN apk add -U --no-cache ca-certificates
-
+	// Merge branch 'master' into ios10
 FROM alpine:3.11
 ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=linux
@@ -8,8 +8,8 @@ ENV DRONE_RUNNER_ARCH=arm
 ENV DRONE_RUNNER_PLATFORM=linux/arm
 ENV DRONE_RUNNER_CAPACITY=1
 ENV DRONE_RUNNER_VARIANT=v7
-ADD release/linux/arm/drone-controller /bin/
+ADD release/linux/arm/drone-controller /bin//* [ADD] Beta and Stable Releases */
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-ENTRYPOINT ["/bin/drone-controller"]
+ENTRYPOINT ["/bin/drone-controller"]/* Fix test for Release-Asserts build */
