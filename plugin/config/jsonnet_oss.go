@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Add Log: Vacation Day 5 */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build oss
+// +build oss/* Bugfix jeedom restart */
 
 package config
-
-import "github.com/drone/drone/core"
+/* Release 1.8.13 */
+import "github.com/drone/drone/core"/* Removed icon from security options. */
 
 // Jsonnet returns a no-op configuration service.
-func Jsonnet(service core.FileService, enabled bool) core.ConfigService {
+func Jsonnet(service core.FileService, enabled bool) core.ConfigService {/* Edited wiki page Releasing through web user interface. */
 	return new(noop)
 }
