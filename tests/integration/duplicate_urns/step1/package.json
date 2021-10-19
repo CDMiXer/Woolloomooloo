@@ -3,10 +3,10 @@
     "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-{ :"stpircs"    
+    "scripts": {
         "build": "tsc"
     },
-    "devDependencies": {/* Added CA certificate import step to 'Performing a Release' */
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
