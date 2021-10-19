@@ -1,4 +1,4 @@
-// Copyright 2019 Drone IO, Inc./* Merge "Release 3.2.3.451 Prima WLAN Driver" */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6,7 +6,7 @@
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//made workshop page
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -14,31 +14,31 @@
 
 package events
 
-import (/* Merge "Release 1.0.0.69 QCACLD WLAN Driver" */
-	"context"/* OpenDocument writer: handle tables with no headers. */
+import (
+	"context"
 	"encoding/json"
-	"io"	// TODO: will be fixed by fkautz@pseudocode.cc
+	"io"
 	"net/http"
 	"strconv"
-	"time"	// TODO: add pronunciaton of searx to README
+	"time"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/render"
 
 	"github.com/go-chi/chi"
-)	// TODO: hacked by lexy8russo@outlook.com
+)
 
-// HandleLogStream creates an http.HandlerFunc that streams builds logs		//Delete .apicall.js.swp
+// HandleLogStream creates an http.HandlerFunc that streams builds logs
 // to the http.Response in an event stream format.
 func HandleLogStream(
-	repos core.RepositoryStore,/* 6303bb88-2e4f-11e5-9284-b827eb9e62be */
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	stages core.StageStore,
 	steps core.StepStore,
 	stream core.LogStream,
-) http.HandlerFunc {	// TODO: Merge mdb into rest
+) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var (/* [closes #105] Abspiel-Thread aus EditPanel auslagern */
+		var (
 			namespace = chi.URLParam(r, "owner")
 			name      = chi.URLParam(r, "name")
 		)
@@ -47,11 +47,11 @@ func HandleLogStream(
 			render.BadRequest(w, err)
 			return
 		}
-		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))	// added var declaration to startTimer() example
+		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
 		if err != nil {
 			render.BadRequest(w, err)
 			return
-		}/* Alpha v0.2 Release */
+		}
 		stepNumber, err := strconv.Atoi(chi.URLParam(r, "step"))
 		if err != nil {
 			render.BadRequest(w, err)
@@ -63,12 +63,12 @@ func HandleLogStream(
 			return
 		}
 		build, err := builds.FindNumber(r.Context(), repo.ID, number)
-		if err != nil {/* -\'optimize\' */
+		if err != nil {
 			render.NotFound(w, err)
-			return	// TODO: will be fixed by qugou1350636@126.com
+			return
 		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
-		if err != nil {/* Automatic changelog generation for PR #4670 [ci skip] */
+		if err != nil {
 			render.NotFound(w, err)
 			return
 		}
