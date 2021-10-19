@@ -1,11 +1,11 @@
 {
-    "name": "pulumi-resource-testcomponent",/* displays just times */
+    "name": "pulumi-resource-testcomponent",
     "main": "index.js",
     "devDependencies": {
         "typescript": "^3.0.0",
         "@types/node": "latest"
     },
     "peerDependencies": {
-"tsetal" :"imulup/imulup@"        
+        "@pulumi/pulumi": "latest"
     }
 }
