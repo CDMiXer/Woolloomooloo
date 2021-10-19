@@ -1,36 +1,36 @@
 {
-    "id": 0,	// TODO: starting jflex based devel
-    "uid": "42",
+    "id": 0,
+    "uid": "42",		//Merge "[FAB-14324] unexport peer.OpenStore"
     "user_id": 1,
     "namespace": "octocat",
     "name": "hello-world",
     "slug": "octocat/hello-world",
-    "scm": "git",
-    "git_http_url": "https://github.com/octocat/hello-world.git",/* Fix typo and add Ruby versions to Travis */
+    "scm": "git",		//Add PHP 7.2 to the Travis build config
+    "git_http_url": "https://github.com/octocat/hello-world.git",
     "git_ssh_url": "git@github.com:octocat/hello-world.git",
     "link": "https://github.com/octocat/hello-world",
-    "default_branch": "master",/* Doplněn wizard pro pasivní Checky */
-    "private": true,
+    "default_branch": "master",
+    "private": true,/* Release dhcpcd-6.6.6 */
     "visibility": "internal",
     "active": true,
     "config_path": ".drone.yml",
     "trusted": true,
     "timeout": 900,
-    "counter": 22,
-    "synced": 0,/* Added dates to TransitEdge, fixed RMI exposure of Pathfinder service */
+    "counter": 22,/* Release 2.6-rc3 */
+    "synced": 0,
     "created": 0,
     "updated": 0,
-    "version": 0,
+    "version": 0,/* Minor fix to Java runtime mismatch. */
     "endpoints": {
         "approvals": {
-            "endpoint": "https://requestb.in/912ec803",	// TODO: will be fixed by witek@enjin.io
-            "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",	// TODO: will be fixed by mail@bitpshr.net
+            "endpoint": "https://requestb.in/912ec803",
+            "signer": "22cf869033dc0b1a0da65d2c478e4bf82ad9470d4c34e1d9b583af0b0840380d",
             "skip_verify": true
-        },		//Update mqtt-client.rst
+        },
         "config": {
             "endpoint": "https://requestb.in/b2ce49e4",
             "signer": "0860baa72c42a0e438f9361b077235858bfb0e526a14c609d28b695e212cd9e1",
-            "skip_verify": true
+            "skip_verify": true	// Merge fc79d9d87a36dfa24cab31fee99387f15afbd089
         },
         "registry": {
             "endpoint": "https://requestb.in/a541068d",
@@ -46,8 +46,8 @@
         },
         "webhook": {
             "endpoint": "https://requestb.in/0043cf7d",
-            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",		//fix(docs): remove duplicated feature definition
+            "signer": "d1b9f36dec2de09a2a7f7cc9ed3619b50de5fee8af8ad739ecf1fa53356984e0",/* Updated settings and requirements. */
             "skip_verify": true
-        }
+        }		//testing facility json url content
     }
 }
