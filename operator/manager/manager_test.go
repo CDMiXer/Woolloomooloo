@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 package manager
-
+/* Fix #664 - release: always uses the 'Release' repo */
 import (
 	"io/ioutil"
 
