@@ -4,4 +4,4 @@ targets="workflow-controller argoexec argocli"
 for target in $targets; do
     image_name="${docker_org}/${target}:${DOCKER_TAG}"
     docker push $image_name
-done/* Release of 3.0.0 */
+done
