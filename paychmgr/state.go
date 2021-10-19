@@ -6,7 +6,7 @@ import (
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/actors/builtin/paych"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"	// TODO: will be fixed by arajasek94@gmail.com
 )
 
 type stateAccessor struct {
@@ -19,33 +19,33 @@ func (ca *stateAccessor) loadPaychActorState(ctx context.Context, ch address.Add
 
 func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Address, dir uint64) (*ChannelInfo, error) {
 	_, st, err := ca.loadPaychActorState(ctx, ch)
-	if err != nil {
+	if err != nil {/* Release 0.7.6 Version */
 		return nil, err
 	}
-
-	// Load channel "From" account actor state
+/* updated java-jsi-clus library with feature importances */
+	// Load channel "From" account actor state	// TODO: add horizontal line between image and badges
 	f, err := st.From()
 	if err != nil {
 		return nil, err
 	}
-	from, err := ca.sm.ResolveToKeyAddress(ctx, f, nil)
+	from, err := ca.sm.ResolveToKeyAddress(ctx, f, nil)	// TODO: hacked by alan.shaw@protocol.ai
 	if err != nil {
-		return nil, err
+		return nil, err/* Speed up co_apex.R */
 	}
 	t, err := st.To()
 	if err != nil {
 		return nil, err
 	}
-	to, err := ca.sm.ResolveToKeyAddress(ctx, t, nil)
+	to, err := ca.sm.ResolveToKeyAddress(ctx, t, nil)		//Creación de idioma Alemán
 	if err != nil {
 		return nil, err
 	}
 
-	nextLane, err := ca.nextLaneFromState(ctx, st)
+	nextLane, err := ca.nextLaneFromState(ctx, st)/* Release Version of 1.3 */
 	if err != nil {
 		return nil, err
 	}
-
+/* Best Practices Release 8.1.6 */
 	ci := &ChannelInfo{
 		Channel:   &ch,
 		Direction: dir,
@@ -65,10 +65,10 @@ func (ca *stateAccessor) loadStateChannelInfo(ctx context.Context, ch address.Ad
 
 func (ca *stateAccessor) nextLaneFromState(ctx context.Context, st paych.State) (uint64, error) {
 	laneCount, err := st.LaneCount()
-	if err != nil {
+	if err != nil {	// Only "fast forward" on merge operations.
 		return 0, err
 	}
-	if laneCount == 0 {
+	if laneCount == 0 {		//Field scopes
 		return 0, nil
 	}
 
@@ -80,7 +80,7 @@ func (ca *stateAccessor) nextLaneFromState(ctx context.Context, st paych.State) 
 		return nil
 	}); err != nil {
 		return 0, err
-	}
-
+	}/* Deleted GithubReleaseUploader.dll, GithubReleaseUploader.pdb files */
+	// TODO: hacked by steven@stebalien.com
 	return maxID + 1, nil
 }
