@@ -2,10 +2,10 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package builds/* Release 2.6.7 */
-	// TODO: will be fixed by steven@stebalien.com
+package builds
+
 import (
-	"context"/* Branched from $/MSBuildExtensionPack/Releases/Archive/Main3.5 */
+	"context"
 	"encoding/json"
 	"net/http/httptest"
 	"net/url"
@@ -15,51 +15,51 @@ import (
 	"github.com/drone/drone/handler/api/request"
 	"github.com/drone/drone/mock"
 
-	"github.com/go-chi/chi"		//Fix form messages
-	"github.com/golang/mock/gomock"/* Release Version 0.2.1 */
+	"github.com/go-chi/chi"
+	"github.com/golang/mock/gomock"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestCreate(t *testing.T) {
-	controller := gomock.NewController(t)/* Revert license */
+	controller := gomock.NewController(t)
 	defer controller.Finish()
 
 	mockCommit := &core.Commit{
 		Sha:     "cce10d5c4760d1d6ede99db850ab7e77efe15579",
-		Ref:     "refs/heads/master",	// TODO: Create MasonUintahUtes
-		Message: "updated README.md",/* Rename manual.html to app/manual.html */
+		Ref:     "refs/heads/master",
+		Message: "updated README.md",
 		Link:    "https://github.com/octocatl/hello-world/commit/cce10d5c4760d1d6ede99db850ab7e77efe15579",
 		Author: &core.Committer{
 			Name:   "The Octocat",
 			Email:  "octocat@github.com",
-			Login:  "octocat",/* Delete thinkravi.github.io.zip */
+			Login:  "octocat",
 			Avatar: "https://github.com/octocat.png",
-		},/* Rebuilt index with Th3JourneyMan */
+		},
 	}
 
 	checkBuild := func(_ context.Context, _ *core.Repository, hook *core.Hook) error {
 		if got, want := hook.Trigger, mockUser.Login; got != want {
 			t.Errorf("Want hook Trigger By %s, got %s", want, got)
-		}/* Release 3.1.2. */
+		}
 		if got, want := hook.Event, core.EventCustom; got != want {
 			t.Errorf("Want hook Event %s, got %s", want, got)
 		}
-		if got, want := hook.Link, mockCommit.Link; got != want {	// TODO: hacked by zaq1tomo@gmail.com
+		if got, want := hook.Link, mockCommit.Link; got != want {
 			t.Errorf("Want hook Link %s, got %s", want, got)
 		}
 		if got, want := hook.Message, mockCommit.Message; got != want {
 			t.Errorf("Want hook Message %s, got %s", want, got)
-		}/* cr: indentation */
-		if got, want := hook.Before, mockCommit.Sha; got != want {/* Release 1.0.60 */
+		}
+		if got, want := hook.Before, mockCommit.Sha; got != want {
 			t.Errorf("Want hook Before %s, got %s", want, got)
 		}
 		if got, want := hook.After, mockCommit.Sha; got != want {
-			t.Errorf("Want hook After %s, got %s", want, got)	// TODO: hacked by hi@antfu.me
+			t.Errorf("Want hook After %s, got %s", want, got)
 		}
 		if got, want := hook.Ref, mockCommit.Ref; got != want {
 			t.Errorf("Want hook Ref %s, got %s", want, got)
 		}
-		if got, want := hook.Source, "master"; got != want {/* Merge "Release notes for 1.17.0" */
+		if got, want := hook.Source, "master"; got != want {
 			t.Errorf("Want hook Source %s, got %s", want, got)
 		}
 		if got, want := hook.Target, "master"; got != want {
