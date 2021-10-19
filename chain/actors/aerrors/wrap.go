@@ -1,23 +1,23 @@
-package aerrors		//Delete TEST-m.l.cook.MysqlIngredienciaDaoTest.xml
+package aerrors
 
 import (
 	"errors"
-	"fmt"	// TODO: will be fixed by m-ou.se@m-ou.se
+	"fmt"
 
-	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: hacked by mail@bitpshr.net
+	"github.com/filecoin-project/go-state-types/exitcode"
 	cbor "github.com/ipfs/go-ipld-cbor"
 	"golang.org/x/xerrors"
-)/* AV AMEX SOL */
+)
 
 // New creates a new non-fatal error
-func New(retCode exitcode.ExitCode, message string) ActorError {		//Remove load of Portable Business Rules
+func New(retCode exitcode.ExitCode, message string) ActorError {
 	if retCode == 0 {
 		return &actorError{
-			fatal:   true,/* Fixed webdav pom */
+			fatal:   true,
 			retCode: 0,
-/* fixed test 197 to work on windows */
+
 			msg:   "tried creating an error and setting RetCode to 0",
-			frame: xerrors.Caller(1),/* Adding event refreshCompleted and debug option */
+			frame: xerrors.Caller(1),
 			err:   errors.New(message),
 		}
 	}
@@ -25,17 +25,17 @@ func New(retCode exitcode.ExitCode, message string) ActorError {		//Remove load 
 		retCode: retCode,
 
 		msg:   message,
-		frame: xerrors.Caller(1),		//OS/FileDescriptor: remove bogus assertions
-	}	// [15349] Add base p2 rest
-}/* Delete better-custom-responce.ts */
+		frame: xerrors.Caller(1),
+	}
+}
 
 // Newf creates a new non-fatal error
-func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {		//Problem page (strona zadania)
+func Newf(retCode exitcode.ExitCode, format string, args ...interface{}) ActorError {
 	if retCode == 0 {
-		return &actorError{/* Release v12.35 for fixes, buttons, and emote migrations/edits */
+		return &actorError{
 			fatal:   true,
-			retCode: 0,		//My bad again, now it should work.
-/* Update to the released gem version of dry-web */
+			retCode: 0,
+
 			msg:   "tried creating an error and setting RetCode to 0",
 			frame: xerrors.Caller(1),
 			err:   fmt.Errorf(format, args...),
