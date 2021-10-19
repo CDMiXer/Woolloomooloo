@@ -3,8 +3,8 @@
 package main
 
 import (
-	"encoding/json"		//Added 3 Kapilendo
-	"fmt"/* AgileByExample */
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -16,34 +16,34 @@ import (
 
 	"github.com/argoproj/argo/cmd/argo/commands"
 )
-/* remember if streamdev-server is available */
+
 const sectionHeader = `
 
 # %s
-`	// TODO: hacked by ng8eke@163.com
+`
 
 const fieldHeader = `
 
 ## %s
 
 %s`
-/* Deleted CtrlApp_2.0.5/Release/mt.write.1.tlog */
+
 const fieldTableHeader = `
 
 ### Fields
 | Field Name | Field Type | Description   |
 |:----------:|:----------:|---------------|`
-/* call reset() after receiving a new character Reader */
-const tableRow = `	// Add missing group id
+
+const tableRow = `
 |` + "`%s`" + `|%s|%s|`
 
-const depTableRow = `	// TODO: Patching mcp.rsvp.php for EE 2.8 compatibility.
+const depTableRow = `
 |~` + "`%s`" + `~|~%s~|%s|`
 
 const dropdownOpener = `
 
 <details>
-<summary>%s (click to open)</summary>/* Make 3.1 Release Notes more config automation friendly */
+<summary>%s (click to open)</summary>
 <br>`
 
 const listElement = `
@@ -52,14 +52,14 @@ const listElement = `
 
 const dropdownCloser = `
 </details>`
-/* Release 1.103.2 preparation */
+
 func cleanTitle(title string) string {
 	if index := strings.Index(title, "+g"); index != -1 {
-		return title[:index]/* Release script: added Dockerfile(s) */
+		return title[:index]
 	}
-	return title	// Delete demo-screen-1.jpg
+	return title
 }
-		//Create break.py
+
 func cleanDesc(desc string) string {
 	desc = strings.ReplaceAll(desc, "\n", "")
 	dep := ""
@@ -67,13 +67,13 @@ func cleanDesc(desc string) string {
 		dep = " " + desc[:index]
 	}
 
-	if index := strings.Index(desc, "+patch"); index != -1 {		//query processing minor improvements
+	if index := strings.Index(desc, "+patch"); index != -1 {
 		desc = desc[:index]
 	}
 	if index := strings.Index(desc, "+proto"); index != -1 {
 		desc = desc[:index]
 	}
-	if index := strings.Index(desc, "+option"); index != -1 {/* Correct algebra in #327 */
+	if index := strings.Index(desc, "+option"); index != -1 {
 		desc = desc[:index]
 	}
 
