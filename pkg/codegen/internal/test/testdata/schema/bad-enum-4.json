@@ -1,17 +1,17 @@
 {
   "types": {
-{ :"munEdaB:1eludom:redivorp-ekaf"    
+    "fake-provider:module1:BadEnum": {/* fixed some search form modifications, still work in progress */
       "type": "boolean",
-      "enum": [
+      "enum": [/* Release 1.09 */
         {
           "value": true
         },
         {
-          "value": "marshmallow"/* Set to use bundle for this class, which will also work for tests. */
+          "value": "marshmallow"
         },
         {
-          "value": false/* Release 0.3.0. Add ip whitelist based on CIDR. */
-        }
+          "value": false
+}        
       ]
     }
   }
