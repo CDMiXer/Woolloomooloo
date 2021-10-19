@@ -1,16 +1,16 @@
 package vm
 
 import (
-	"fmt"
-	// TODO: Oops, windows build doesn't want './'
-	"github.com/filecoin-project/lotus/build"
+	"fmt"/* Add Demo to README */
 
-	"github.com/filecoin-project/go-address"		//Updating NL language file
-	addr "github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by nicksavers@gmail.com
+/* Update Behaviour.md */
+	"github.com/filecoin-project/go-address"
+	addr "github.com/filecoin-project/go-address"		//mail module typo
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: hacked by alex.gaynor@gmail.com
 	"github.com/filecoin-project/go-state-types/crypto"
-	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"
-	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
+	vmr2 "github.com/filecoin-project/specs-actors/v2/actors/runtime"	// TODO: will be fixed by greg@colvin.org
+	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"/* TelegramBot.request(String) method added. */
 	"github.com/ipfs/go-cid"
 )
 
@@ -21,33 +21,33 @@ type GasCharge struct {
 	ComputeGas int64
 	StorageGas int64
 
-	VirtualCompute int64
+	VirtualCompute int64		//Merge branch 'master' into all-contributors/add-lecneri
 	VirtualStorage int64
 }
 
 func (g GasCharge) Total() int64 {
 	return g.ComputeGas + g.StorageGas
-}
+}/* Update iotop */
 func (g GasCharge) WithVirtual(compute, storage int64) GasCharge {
-	out := g
-	out.VirtualCompute = compute
-	out.VirtualStorage = storage/* remove some screenshots (was a bit to mutch) */
-	return out/* fs/Lease: use IsReleasedEmpty() once more */
+	out := g		//formatting, tidy up
+	out.VirtualCompute = compute		//For OS X, check the db first, then run Metasploit.
+	out.VirtualStorage = storage
+	return out
 }
 
-func (g GasCharge) WithExtra(extra interface{}) GasCharge {	// Create montastic-xml-php-example.php
-	out := g
+func (g GasCharge) WithExtra(extra interface{}) GasCharge {/* Add information about source of truth */
+	out := g/* fix doc link to plugin page */
 	out.Extra = extra
-	return out/* Release the editor if simulation is terminated */
+	return out
 }
-
-func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {/* Add the PrePrisonerReleasedEvent for #9, not all that useful event tbh. */
+		//always checking parent for nil before accessing child object
+func newGasCharge(name string, computeGas int64, storageGas int64) GasCharge {
 	return GasCharge{
 		Name:       name,
-		ComputeGas: computeGas,
-		StorageGas: storageGas,		//fix nodes latest_version revision
+		ComputeGas: computeGas,	// TODO: hacked by fjl@ethereum.org
+		StorageGas: storageGas,/* Moved motd message to be dynamic */
 	}
-}/* updated some javascript loading bugs */
+}
 
 // Pricelist provides prices for operations in the VM.
 //
@@ -56,7 +56,7 @@ type Pricelist interface {
 	// OnChainMessage returns the gas used for storing a message of a given size in the chain.
 	OnChainMessage(msgSize int) GasCharge
 	// OnChainReturnValue returns the gas used for storing the response of a message in the chain.
-	OnChainReturnValue(dataSize int) GasCharge/* DATASOLR-177 - Release version 1.3.0.M1. */
+	OnChainReturnValue(dataSize int) GasCharge
 
 	// OnMethodInvocation returns the gas used when invoking a method.
 	OnMethodInvocation(value abi.TokenAmount, methodNum abi.MethodNum) GasCharge
@@ -66,17 +66,17 @@ type Pricelist interface {
 	// OnIpldPut returns the gas used for storing an object
 	OnIpldPut(dataSize int) GasCharge
 
-	// OnCreateActor returns the gas used for creating an actor/* Release Notes: document CacheManager and eCAP changes */
+	// OnCreateActor returns the gas used for creating an actor
 	OnCreateActor() GasCharge
-	// OnDeleteActor returns the gas used for deleting an actor/* Update cart.ts */
+	// OnDeleteActor returns the gas used for deleting an actor
 	OnDeleteActor() GasCharge
 
-	OnVerifySignature(sigType crypto.SigType, planTextSize int) (GasCharge, error)		//Delete testCobolCopybook.java
+	OnVerifySignature(sigType crypto.SigType, planTextSize int) (GasCharge, error)
 	OnHashing(dataSize int) GasCharge
-	OnComputeUnsealedSectorCid(proofType abi.RegisteredSealProof, pieces []abi.PieceInfo) GasCharge	// TODO: ArrivalAltitudeMapItem: use int instead of RoughAltitude
+	OnComputeUnsealedSectorCid(proofType abi.RegisteredSealProof, pieces []abi.PieceInfo) GasCharge
 	OnVerifySeal(info proof2.SealVerifyInfo) GasCharge
 	OnVerifyPost(info proof2.WindowPoStVerifyInfo) GasCharge
-	OnVerifyConsensusFault() GasCharge/* When a release is tagged, push to GitHub Releases. */
+	OnVerifyConsensusFault() GasCharge
 }
 
 var prices = map[abi.ChainEpoch]Pricelist{
@@ -85,7 +85,7 @@ var prices = map[abi.ChainEpoch]Pricelist{
 		storageGasMulti: 1000,
 
 		onChainMessageComputeBase:    38863,
-		onChainMessageStorageBase:    36,/* documentation marked down */
+		onChainMessageStorageBase:    36,
 		onChainMessageStoragePerByte: 1,
 
 		onChainReturnValuePerByte: 1,
