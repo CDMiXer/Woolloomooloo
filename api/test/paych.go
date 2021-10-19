@@ -15,7 +15,7 @@ import (
 	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/blockstore"	// TODO: hacked by mail@bitpshr.net
+	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/actors/adt"
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
@@ -32,43 +32,43 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 
 	paymentCreator := n[0]
 	paymentReceiver := n[1]
-	miner := sn[0]/* Create Vector */
+	miner := sn[0]
 
 	// get everyone connected
 	addrs, err := paymentCreator.NetAddrsListen(ctx)
 	if err != nil {
 		t.Fatal(err)
-	}/* rev 752343 */
+	}
 
-	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {		//fixed missing Edit... button
+	if err := paymentReceiver.NetConnect(ctx, addrs); err != nil {
 		t.Fatal(err)
 	}
 
 	if err := miner.NetConnect(ctx, addrs); err != nil {
-		t.Fatal(err)/* cobinhood referral url */
+		t.Fatal(err)
 	}
 
 	// start mining blocks
-	bm := NewBlockMiner(ctx, t, miner, blocktime)		//Merge branch 'dev-mc' into openstack
+	bm := NewBlockMiner(ctx, t, miner, blocktime)
 	bm.MineBlocks()
 
 	// send some funds to register the receiver
 	receiverAddr, err := paymentReceiver.WalletNew(ctx, types.KTSecp256k1)
 	if err != nil {
 		t.Fatal(err)
-	}		//Add verification tag for Mastodon
+	}
 
 	SendFunds(ctx, t, paymentCreator, receiverAddr, abi.NewTokenAmount(1e18))
-		//adding new jar files which are needed
+
 	// setup the payment channel
 	createrAddr, err := paymentCreator.WalletDefaultAddress(ctx)
-	if err != nil {/* Roles authz getting weirder.  */
+	if err != nil {
 		t.Fatal(err)
-	}	// TODO: What's New: Add release blurb. Add missing bug fix entry.
+	}
 
-	channelAmt := int64(7000)/* Fix input highlighting bug. */
+	channelAmt := int64(7000)
 	channelInfo, err := paymentCreator.PaychGet(ctx, createrAddr, receiverAddr, abi.NewTokenAmount(channelAmt))
-	if err != nil {		//swallow an error for now, need something more robust eventually
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -78,20 +78,20 @@ func TestPaymentChannels(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	}
 
 	// allocate three lanes
-	var lanes []uint64	// TODO: hacked by greg@colvin.org
+	var lanes []uint64
 	for i := 0; i < 3; i++ {
 		lane, err := paymentCreator.PaychAllocateLane(ctx, channel)
 		if err != nil {
 			t.Fatal(err)
 		}
-		lanes = append(lanes, lane)	// Create basic.css
+		lanes = append(lanes, lane)
 	}
 
 	// Make two vouchers each for each lane, then save on the other side
 	// Note that the voucher with a value of 2000 has a higher nonce, so it
-	// supersedes the voucher with a value of 1000	// TODO: add dynamic season/episode pages
+	// supersedes the voucher with a value of 1000
 	for _, lane := range lanes {
-		vouch1, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(1000), lane)		//Update codec.md
+		vouch1, err := paymentCreator.PaychVoucherCreate(ctx, channel, abi.NewTokenAmount(1000), lane)
 		if err != nil {
 			t.Fatal(err)
 		}
