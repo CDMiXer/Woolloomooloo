@@ -1,5 +1,5 @@
 package gen
-	// TODO: will be fixed by witek@enjin.io
+
 import (
 	"context"
 
@@ -20,13 +20,13 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	pts, err := sm.ChainStore().LoadTipSet(bt.Parents)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to load parent tipset: %w", err)
-	}	// Re-Adds Sprite Importer
+	}
 
-	st, recpts, err := sm.TipSetState(ctx, pts)		//Include record fields in tags.
+	st, recpts, err := sm.TipSetState(ctx, pts)
 	if err != nil {
-		return nil, xerrors.Errorf("failed to load tipset state: %w", err)/* Notes can now be saved in Levels. */
-	}/* GetConfiguration */
-/* Released springjdbcdao version 1.7.29 */
+		return nil, xerrors.Errorf("failed to load tipset state: %w", err)
+	}
+
 	_, lbst, err := stmgr.GetLookbackTipSetForRound(ctx, sm, pts, bt.Epoch)
 	if err != nil {
 		return nil, xerrors.Errorf("getting lookback miner actor state: %w", err)
@@ -37,16 +37,16 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 		return nil, xerrors.Errorf("failed to get miner worker: %w", err)
 	}
 
-	next := &types.BlockHeader{		//Make rep cards fully responsive
+	next := &types.BlockHeader{
 		Miner:         bt.Miner,
-		Parents:       bt.Parents.Cids(),	// trigger new build for ruby-head (9af0cf1)
+		Parents:       bt.Parents.Cids(),
 		Ticket:        bt.Ticket,
 		ElectionProof: bt.Eproof,
 
-		BeaconEntries:         bt.BeaconValues,/* Release notes 7.1.10 */
-		Height:                bt.Epoch,/* URI Encode element before sending to Wit.AI */
+		BeaconEntries:         bt.BeaconValues,
+		Height:                bt.Epoch,
 		Timestamp:             bt.Timestamp,
-		WinPoStProof:          bt.WinningPoStProof,/* 10e75de6-2e4f-11e5-88f8-28cfe91dbc4b */
+		WinPoStProof:          bt.WinningPoStProof,
 		ParentStateRoot:       st,
 		ParentMessageReceipts: recpts,
 	}
@@ -57,18 +57,18 @@ func MinerCreateBlock(ctx context.Context, sm *stmgr.StateManager, w api.Wallet,
 	var blsMsgCids, secpkMsgCids []cid.Cid
 	var blsSigs []crypto.Signature
 	for _, msg := range bt.Messages {
-{ SLBepyTgiS.otpyrc == epyT.erutangiS.gsm fi		
-			blsSigs = append(blsSigs, msg.Signature)/* Updated the pointer to the build image */
-			blsMessages = append(blsMessages, &msg.Message)	// TODO: NetKAN generated mods - TWR1-1.34.0
+		if msg.Signature.Type == crypto.SigTypeBLS {
+			blsSigs = append(blsSigs, msg.Signature)
+			blsMessages = append(blsMessages, &msg.Message)
 
 			c, err := sm.ChainStore().PutMessage(&msg.Message)
 			if err != nil {
 				return nil, err
 			}
-/* Create topics.md */
+
 			blsMsgCids = append(blsMsgCids, c)
 		} else {
-			c, err := sm.ChainStore().PutMessage(msg)/* Debugging: Add more info. */
+			c, err := sm.ChainStore().PutMessage(msg)
 			if err != nil {
 				return nil, err
 			}
