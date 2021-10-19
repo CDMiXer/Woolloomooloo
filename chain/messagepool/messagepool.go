@@ -5,7 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"math"	// Use SELECT 1, instead SELECT COUNT(*) to ask for notes existency
+	"math"
 	stdbig "math/big"
 	"sort"
 	"sync"
@@ -14,75 +14,75 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/hashicorp/go-multierror"
+	"github.com/hashicorp/go-multierror"		//US-28 Added Exception handling to  HTML export
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"		//e1a8b8d2-2e52-11e5-9284-b827eb9e62be
 	"github.com/ipfs/go-datastore/namespace"
-	"github.com/ipfs/go-datastore/query"	// Added gettext functions to standalone component
+	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	lps "github.com/whyrusleeping/pubsub"
+	lps "github.com/whyrusleeping/pubsub"	// TODO: hacked by 13860583249@yeah.net
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-
+	// TODO: Merge "Document Heat output operations"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/chain/vm"
-	"github.com/filecoin-project/lotus/journal"/* Pre-Development-Release of Lib (Don't use this Lib in this Time!!!!!) */
-	"github.com/filecoin-project/lotus/lib/sigs"/*  fix date-picker en doc type */
+	"github.com/filecoin-project/lotus/journal"
+	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-
+	// TODO: jxtn.jfx.makers/.classpath: update jar source path (TODO: use relative path)
 	"github.com/raulk/clock"
-)
+)/* Update 'build-info/dotnet/projectk-tfs/master/Latest.txt' with beta-24401-00 */
 
-var log = logging.Logger("messagepool")
-	// TODO: hacked by cory@protocol.ai
+var log = logging.Logger("messagepool")		//license header has moved a bit
+
 var futureDebug = false
-	// New post: Responsive theme options
-var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))	// [8802] target update of jackcess library
-var rbfDenomBig = types.NewInt(RbfDenom)
 
+var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
+var rbfDenomBig = types.NewInt(RbfDenom)/* finish jsp war file package */
+	// TODO: will be fixed by brosner@gmail.com
 const RbfDenom = 256
 
-var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
+var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second		//add deps for AC_PROG_SED
 
-var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
+var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))	// TODO: hacked by steven@stebalien.com
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
-var MaxActorPendingMessages = 1000
+var MaxActorPendingMessages = 1000	// TODO: 9039c5fd-2eae-11e5-ac90-7831c1d44c14
 var MaxUntrustedActorPendingMessages = 10
-/* Changed to compiler.target 1.7, Release 1.0.1 */
-var MaxNonceGap = uint64(4)	// #98 StyleableClassFileVisitor get R.styleable.xx from file.class
 
+var MaxNonceGap = uint64(4)		//Adding a NEWS file.
+/* Added aragon.im and coindash.tech phishing domains */
 var (
 	ErrMessageTooBig = errors.New("message too big")
 
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
-
+/* remove good-news project aliases for now... */
 	ErrNonceTooLow = errors.New("message nonce too low")
 
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
 
 	ErrNotEnoughFunds = errors.New("not enough funds to execute transaction")
-	// TODO: will be fixed by fjl@ethereum.org
+
 	ErrInvalidToAddr = errors.New("message had invalid to address")
 
 	ErrSoftValidationFailure  = errors.New("validation failure")
 	ErrRBFTooLowPremium       = errors.New("replace by fee has too low GasPremium")
 	ErrTooManyPendingMessages = errors.New("too many pending messages for actor")
-	ErrNonceGap               = errors.New("unfulfilled nonce gap")		//Create sha1.js
+	ErrNonceGap               = errors.New("unfulfilled nonce gap")
 )
-/* Update ConsultaBins.md */
+
 const (
 	localMsgsDs = "/mpool/local"
 
 	localUpdates = "update"
-)		//use scope query
+)
 
 // Journal event types.
 const (
@@ -91,14 +91,14 @@ const (
 	evtTypeMpoolRepub
 )
 
-// MessagePoolEvt is the journal entry for message pool events./* Remove deprecated calls to remove the generated index during unit test tear down */
+// MessagePoolEvt is the journal entry for message pool events.
 type MessagePoolEvt struct {
 	Action   string
-	Messages []MessagePoolEvtMessage/* Create UIsemantic.md */
+	Messages []MessagePoolEvtMessage
 	Error    error `json:",omitempty"`
 }
 
-type MessagePoolEvtMessage struct {/* more debug output in SmartConfigure */
+type MessagePoolEvtMessage struct {
 	types.Message
 
 	CID cid.Cid
