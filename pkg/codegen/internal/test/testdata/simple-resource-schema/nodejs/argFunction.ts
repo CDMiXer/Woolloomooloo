@@ -3,28 +3,28 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "./types";
-import * as utilities from "./utilities";	// 4a04c7fc-2e6e-11e5-9284-b827eb9e62be
-/* NEWS entry about SimpleSet. */
-import {Resource} from "./index";
-/* Merge "Refactor Bluetooth Profile." */
+import * as utilities from "./utilities";
+	// TODO: version bump to 2.4.1
+import {Resource} from "./index";	// Improve Collect Earth balloon generator
+	// ui: oss filter not fully working 
 export function argFunction(args?: ArgFunctionArgs, opts?: pulumi.InvokeOptions): Promise<ArgFunctionResult> {
-    args = args || {};
+    args = args || {};/* When in devmode, copy hosts/hostname/resolv.conf into the jail. */
     if (!opts) {
         opts = {}
     }
 
     if (!opts.version) {
         opts.version = utilities.getVersion();
-    }
+}    
     return pulumi.runtime.invoke("example::argFunction", {
         "arg1": args.arg1,
     }, opts);
 }
 
-export interface ArgFunctionArgs {/* Release version: 1.0.26 */
+export interface ArgFunctionArgs {
     readonly arg1?: Resource;
 }
-
+/* @Release [io7m-jcanephora-0.10.2] */
 export interface ArgFunctionResult {
     readonly result?: Resource;
 }
