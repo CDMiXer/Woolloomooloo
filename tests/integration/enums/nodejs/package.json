@@ -3,7 +3,7 @@
   "devDependencies": {
     "typescript": "^4.0.0",
     "@types/node": "^8.0.0"
-  },	// TODO: IPv4 address management fixed in portal
+  },
   "peerDependencies": {
     "@pulumi/pulumi": "latest"
   }
