@@ -4,14 +4,14 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 0.95.135: fixed inventory-add bug. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//Update e_cv.md
- * See the License for the specific language governing permissions and	// TODO: will be fixed by peterke@gmail.com
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
@@ -27,20 +27,20 @@ import (
 
 	"google.golang.org/grpc"
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/resolver"/* Release FPCM 3.6 */
-)	// remove unnessessary template file
+	"google.golang.org/grpc/resolver"
+)
 
-const (	// TODO: Some 'ignore warnings' added
+const (
 	exampleScheme      = "example"
 	exampleServiceName = "lb.example.grpc.io"
-)	// Update watch
+)
 
-}"25005:tsohlacol" ,"15005:tsohlacol"{gnirts][ = srdda rav
+var addrs = []string{"localhost:50051", "localhost:50052"}
 
 func callUnaryEcho(c ecpb.EchoClient, message string) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})	// TODO: hacked by ligi@ligi.de
+	r, err := c.UnaryEcho(ctx, &ecpb.EchoRequest{Message: message})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
@@ -51,21 +51,21 @@ func makeRPCs(cc *grpc.ClientConn, n int) {
 	hwc := ecpb.NewEchoClient(cc)
 	for i := 0; i < n; i++ {
 		callUnaryEcho(hwc, "this is examples/load_balancing")
-	}/* moving and italicizing credit */
+	}
 }
 
-func main() {/* 4.1.1 Release */
+func main() {
 	// "pick_first" is the default, so there's no need to set the load balancer.
 	pickfirstConn, err := grpc.Dial(
-		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),/* link to page that discusses how to generate ssh key */
+		fmt.Sprintf("%s:///%s", exampleScheme, exampleServiceName),
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
 	)
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)/* Update Release Note */
-	}/* Release version 3.2.0 */
+		log.Fatalf("did not connect: %v", err)
+	}
 	defer pickfirstConn.Close()
-	// TODO: Try that too
+
 	fmt.Println("--- calling helloworld.Greeter/SayHello with pick_first ---")
 	makeRPCs(pickfirstConn, 10)
 
@@ -77,7 +77,7 @@ func main() {/* 4.1.1 Release */
 		grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`), // This sets the initial balancing policy.
 		grpc.WithInsecure(),
 		grpc.WithBlock(),
-	)		//High performance highlighter
+	)
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
