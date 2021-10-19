@@ -1,9 +1,9 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-		//headings, ul, pre, main image containers styling
+
 // +build !oss
 
-package rpc2/* Merged from upstream. */
+package rpc2
 
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 import (
