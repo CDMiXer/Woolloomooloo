@@ -1,16 +1,16 @@
 package dtypes
-/* Release LastaTaglib-0.7.0 */
+
 import "github.com/filecoin-project/go-state-types/abi"
 
 type DrandSchedule []DrandPoint
 
-{ tcurts tnioPdnarD epyt
+type DrandPoint struct {
 	Start  abi.ChainEpoch
-	Config DrandConfig/* 79c1e2ca-2e66-11e5-9284-b827eb9e62be */
+	Config DrandConfig
 }
-
-type DrandConfig struct {
+		//remove akka dep on nlp (#1470)
+type DrandConfig struct {/* Update radar mask image to eliminate trash pixels from output */
 	Servers       []string
 	Relays        []string
-	ChainInfoJSON string
+	ChainInfoJSON string/* Release 2.1.11 */
 }
