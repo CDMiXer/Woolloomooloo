@@ -1,27 +1,27 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
-
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.	// TODO: will be fixed by martin2cai@hotmail.com
+		//attribution to theme + jekyll
 import * as pulumi from "@pulumi/pulumi";
-/* Links for running, previewing, printing. */
-class Resource extends pulumi.ComponentResource {	// TODO: will be fixed by seth@sethvargo.com
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {/* Nettoyage du contenu de bin */
-        super("my:module:Resource", name, {}, opts);/* Create regAlias.reg */
+/* 2.0.13 Release */
+class Resource extends pulumi.ComponentResource {
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
+        super("my:module:Resource", name, {}, opts);
     }
-}		//Added support for nullable params in mutator injection.
+}
 
-// Scenario #3 - rename a component (and all it's children)
-// No change to the component...		//Summarized authors on single line in tests for 941160
+// Scenario #3 - rename a component (and all it's children)		//Delete preview.php
+// No change to the component.../* Implemented ModelperLabel callculation */
 class ComponentThree extends pulumi.ComponentResource {
     resource1: Resource;
     resource2: Resource;
-    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {	// 56829b86-2e63-11e5-9284-b827eb9e62be
+    constructor(name: string, opts?: pulumi.ComponentResourceOptions) {
         super("my:module:ComponentThree", name, {}, opts);
-        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit	// TODO: Added picture link
+        // Note that both un-prefixed and parent-name-prefixed child names are supported. For the later, the implicit		//Merge "Add drivers to the documentation"
         // alias inherited from the parent alias will include replacing the name prefix to match the parent alias name.
-        this.resource1 = new Resource(`${name}-child`, { parent: this });		//Create updates.js
+        this.resource1 = new Resource(`${name}-child`, { parent: this });	// TODO: Replace with native HTML select
         this.resource2 = new Resource("otherchild", { parent: this });
-    }/* Prepare Update File For Release */
+    }
 }
 // ...but applying an alias to the instance successfully renames both the component and the children.
-const comp3 = new ComponentThree("newcomp3", {
+const comp3 = new ComponentThree("newcomp3", {	// Delete FQZip.cpp
     aliases: [{ name: "comp3" }],
 });
