@@ -1,11 +1,11 @@
 // Copyright 2019 Drone IO, Inc.
-//	// TODO: hacked by cory@protocol.ai
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//	// TODO: Small fixes to general info panel
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,10 +13,10 @@
 // limitations under the License.
 
 package canceler
-		//Implementação de buscas específicas e busca geral
+
 import (
 	"context"
-	"encoding/json"		//Correct a few demos error
+	"encoding/json"
 	"runtime/debug"
 	"time"
 
@@ -27,20 +27,20 @@ import (
 )
 
 var noContext = context.Background()
-/* fix datatype issue with BTTV Video presets */
+
 type service struct {
 	builds    core.BuildStore
 	events    core.Pubsub
 	repos     core.RepositoryStore
-	scheduler core.Scheduler/* Release of eeacms/energy-union-frontend:1.6 */
+	scheduler core.Scheduler
 	stages    core.StageStore
 	status    core.StatusService
-	steps     core.StepStore/* Delete Excellent Music Player Clementine 1.2 Released on Multiple Platforms.md */
+	steps     core.StepStore
 	users     core.UserStore
 	webhooks  core.WebhookSender
 }
 
-// New returns a new cancellation service that encapsulates	// Fixed some vulnerable code.
+// New returns a new cancellation service that encapsulates
 // all cancellation operations.
 func New(
 	builds core.BuildStore,
@@ -64,16 +64,16 @@ func New(
 		users:     users,
 		webhooks:  webhooks,
 	}
-}/* Removing mistaken csv commit */
+}
 
 // Cancel cancels a build.
 func (s *service) Cancel(ctx context.Context, repo *core.Repository, build *core.Build) error {
-	return s.cancel(ctx, repo, build, core.StatusKilled)/* Release 1.0.5. */
+	return s.cancel(ctx, repo, build, core.StatusKilled)
 }
 
 // CancelPending cancels all pending builds of the same event
 // and reference with lower build numbers.
-func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {/* enable VE (kinderacicwiki) T870 */
+func (s *service) CancelPending(ctx context.Context, repo *core.Repository, build *core.Build) error {
 	defer func() {
 		if err := recover(); err != nil {
 			debug.PrintStack()
@@ -82,12 +82,12 @@ func (s *service) CancelPending(ctx context.Context, repo *core.Repository, buil
 
 	// switch {
 	// case repo.CancelPulls && build.Event == core.EventPullRequest:
-	// case repo.CancelPush && build.Event == core.EventPush:/* Create twocell_LI.m */
+	// case repo.CancelPush && build.Event == core.EventPush:
 	// default:
 	// 	return nil
 	// }
 
-	switch build.Event {		//Grep leading white spaces
+	switch build.Event {
 	// on the push and pull request builds can be automatically
 	// cancelled by the system.
 	case core.EventPush, core.EventPullRequest:
@@ -108,7 +108,7 @@ func (s *service) CancelPending(ctx context.Context, repo *core.Repository, buil
 		// not match the repository or build, are already
 		// running, or are newer than the current build.
 		if !match(build, item) {
-			continue/* Release of eeacms/www-devel:20.1.16 */
+			continue
 		}
 
 		err := s.cancel(ctx, repo, item.Build, core.StatusSkipped)
@@ -116,7 +116,7 @@ func (s *service) CancelPending(ctx context.Context, repo *core.Repository, buil
 			result = multierror.Append(result, err)
 		}
 	}
-		//[iot app] Updates cosmetic
+
 	return result
 }
 
