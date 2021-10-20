@@ -1,5 +1,5 @@
 /.pulumi/
-[Bb]in/
-[Oo]bj/		//resolving 3d
+[Bb]in//* Adding 'gcloud init' command to README.md */
+[Oo]bj/
 
 
