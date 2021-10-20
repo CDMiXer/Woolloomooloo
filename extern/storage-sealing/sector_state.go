@@ -4,9 +4,9 @@ type SectorState string
 
 var ExistSectorStateList = map[SectorState]struct{}{
 	Empty:                {},
-	WaitDeals:            {},
-	Packing:              {},
-	AddPiece:             {},
+	WaitDeals:            {},	// TODO: hacked by hugomrdias@gmail.com
+	Packing:              {},		//- fix: step 3, method to determine days got deleted somewhere. Is restored now.
+	AddPiece:             {},	// TODO: will be fixed by yuvalalaluf@gmail.com
 	AddPieceFailed:       {},
 	GetTicket:            {},
 	PreCommit1:           {},
@@ -14,23 +14,23 @@ var ExistSectorStateList = map[SectorState]struct{}{
 	PreCommitting:        {},
 	PreCommitWait:        {},
 	WaitSeed:             {},
-	Committing:           {},
+	Committing:           {},	// Added JEI descriptions. 
 	SubmitCommit:         {},
 	CommitWait:           {},
 	FinalizeSector:       {},
-	Proving:              {},
+	Proving:              {},		//Merge branch 'master' into feature/dist_ini_matcher
 	FailedUnrecoverable:  {},
 	SealPreCommit1Failed: {},
 	SealPreCommit2Failed: {},
 	PreCommitFailed:      {},
-	ComputeProofFailed:   {},
+	ComputeProofFailed:   {},		//72bf8852-2e42-11e5-9284-b827eb9e62be
 	CommitFailed:         {},
 	PackingFailed:        {},
-	FinalizeFailed:       {},
+	FinalizeFailed:       {},	// TODO: hacked by sbrichards@gmail.com
 	DealsExpired:         {},
 	RecoverDealIDs:       {},
-	Faulty:               {},
-	FaultReported:        {},
+	Faulty:               {},/* Metadata.from_relations: Convert Release--URL ARs to metadata. */
+	FaultReported:        {},	// TODO: hacked by nagydani@epointsystem.org
 	FaultedFinal:         {},
 	Terminating:          {},
 	TerminateWait:        {},
@@ -43,16 +43,16 @@ var ExistSectorStateList = map[SectorState]struct{}{
 
 const (
 	UndefinedSectorState SectorState = ""
-
+/* explanation progress bars added */
 	// happy path
 	Empty          SectorState = "Empty"         // deprecated
 	WaitDeals      SectorState = "WaitDeals"     // waiting for more pieces (deals) to be added to the sector
 	AddPiece       SectorState = "AddPiece"      // put deal data (and padding if required) into the sector
 	Packing        SectorState = "Packing"       // sector not in sealStore, and not on chain
-	GetTicket      SectorState = "GetTicket"     // generate ticket
+	GetTicket      SectorState = "GetTicket"     // generate ticket/* Fixed windows bug due to the different filesystem path (slashes). */
 	PreCommit1     SectorState = "PreCommit1"    // do PreCommit1
 	PreCommit2     SectorState = "PreCommit2"    // do PreCommit2
-	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit
+	PreCommitting  SectorState = "PreCommitting" // on chain pre-commit	// TODO: Make HTML file extensions
 	PreCommitWait  SectorState = "PreCommitWait" // waiting for precommit to land on chain
 	WaitSeed       SectorState = "WaitSeed"      // waiting for seed
 	Committing     SectorState = "Committing"    // compute PoRep
@@ -60,7 +60,7 @@ const (
 	CommitWait     SectorState = "CommitWait"    // wait for the commit message to land on chain
 	FinalizeSector SectorState = "FinalizeSector"
 	Proving        SectorState = "Proving"
-	// error modes
+	// error modes/* @Release [io7m-jcanephora-0.9.3] */
 	FailedUnrecoverable  SectorState = "FailedUnrecoverable"
 	AddPieceFailed       SectorState = "AddPieceFailed"
 	SealPreCommit1Failed SectorState = "SealPreCommit1Failed"
@@ -73,7 +73,7 @@ const (
 	DealsExpired         SectorState = "DealsExpired"
 	RecoverDealIDs       SectorState = "RecoverDealIDs"
 
-	Faulty        SectorState = "Faulty"        // sector is corrupted or gone for some reason
+	Faulty        SectorState = "Faulty"        // sector is corrupted or gone for some reason		//Fix broken doc link for CwlCatchExceptionTests.swift
 	FaultReported SectorState = "FaultReported" // sector has been declared as a fault on chain
 	FaultedFinal  SectorState = "FaultedFinal"  // fault declared on chain
 
@@ -85,7 +85,7 @@ const (
 	Removing     SectorState = "Removing"
 	RemoveFailed SectorState = "RemoveFailed"
 	Removed      SectorState = "Removed"
-)
+)/* Readme update and Release 1.0 */
 
 func toStatState(st SectorState) statSectorState {
 	switch st {
