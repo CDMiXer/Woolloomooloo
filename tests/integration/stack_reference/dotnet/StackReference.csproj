@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">/* Use Release build for CI test. */
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>	// TODO: hacked by lexy8russo@outlook.com
+    <TargetFramework>netcoreapp3.1</TargetFramework>/* ZAPI-317: vmapi returning image_uuid: null */
   </PropertyGroup>
 
   <PropertyGroup>
-    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);step*\**</DefaultItemExcludes>/* Basic evolution from tanks game to quake 3 */
   </PropertyGroup>
 
 </Project>
