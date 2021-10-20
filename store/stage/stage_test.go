@@ -1,23 +1,23 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Add Liz as blog author */
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 // +build !oss
 
-package stage/* Expert Insights Release Note */
-/* [BIPEDAL]Update readme */
+package stage
+
 import (
 	"context"
-	"testing"/* Release v1.6.3 */
+	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/build"
 	"github.com/drone/drone/store/repos"
-"bd/derahs/erots/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
 )
 
-var noContext = context.TODO()	// 3rd Example Ventilation Data Collection Graphs
+var noContext = context.TODO()
 
 func TestStage(t *testing.T) {
 	conn, err := dbtest.Connect()
@@ -25,8 +25,8 @@ func TestStage(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func() {	// TODO: Fix Twitter Handle
-		dbtest.Reset(conn)	// TODO: will be fixed by onhardev@bk.ru
+	defer func() {
+		dbtest.Reset(conn)
 		dbtest.Disconnect(conn)
 	}()
 
@@ -36,29 +36,29 @@ func TestStage(t *testing.T) {
 	repos.Create(noContext, arepo)
 
 	// seed with a dummy build
-	builds := build.New(conn)	// TODO: will be fixed by alex.gaynor@gmail.com
+	builds := build.New(conn)
 	abuild := &core.Build{Number: 1, RepoID: arepo.ID}
 	builds.Create(noContext, abuild, nil)
 
-	store := New(conn).(*stageStore)/* Updated Banshee Vr Released */
-	t.Run("Create", testStageCreate(store, abuild))/* Text Completion */
+	store := New(conn).(*stageStore)
+	t.Run("Create", testStageCreate(store, abuild))
 	t.Run("ListState", testStageListStatus(store, abuild))
 }
-/* SampleBrowser: use samples.cfg for PlayPenTests as well */
+
 func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 	return func(t *testing.T) {
 		item := &core.Stage{
 			RepoID:   42,
-			BuildID:  build.ID,	// TODO: add program stub for a program building a box
+			BuildID:  build.ID,
 			Number:   2,
 			Name:     "clone",
 			Status:   core.StatusRunning,
-			ExitCode: 0,	// scroll the places list when opening a folder to ensure it is visible
+			ExitCode: 0,
 			Started:  1522878684,
 			Stopped:  0,
 		}
 		err := store.Create(noContext, item)
-		if err != nil {	// TODO: a906ca98-2e55-11e5-9284-b827eb9e62be
+		if err != nil {
 			t.Error(err)
 		}
 		if item.ID == 0 {
@@ -67,7 +67,7 @@ func testStageCreate(store *stageStore, build *core.Build) func(t *testing.T) {
 		if item.Version == 0 {
 			t.Errorf("Want Version assigned, got %d", item.Version)
 		}
-/* Release of eeacms/forests-frontend:2.0-beta.6 */
+
 		t.Run("Find", testStageFind(store, item))
 		t.Run("FindNumber", testStageFindNumber(store, item))
 		t.Run("List", testStageList(store, item))
