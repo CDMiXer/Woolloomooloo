@@ -1,57 +1,57 @@
 [metadata]
   name = "lotus-soup"
-  author = ""		//TOOLS-607: Clean up package.json
-/* Release v4.1.0 */
+  author = ""
+
 [global]
   plan = "lotus-soup"
-  case = "deals-stress"/* Satz0210 supports now Sparte 30, 50, 70 */
+  case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"		//157800f4-2e72-11e5-9284-b827eb9e62be
+  runner = "local:docker"
 
-[global.build]/* Release jedipus-2.6.3 */
+[global.build]
   selectors = ["testground"]
-/* Updated Readme and Release Notes to reflect latest changes. */
+
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
-  enable_go_build_cache = true	// TODO: add useful git resource
+  enable_go_build_cache = true
 
 [global.run.test_params]
-  clients = "3"		//Merge "[contrib-guide] Remove references to 'build_environment' script"
+  clients = "3"
   miners = "2"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "1000"
-  random_beacon_type = "mock"/* Added swap diagram */
-		//transfer complete
+  random_beacon_type = "mock"
+
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1/* Added short description of the SL programming language. */
+    count = 1
     percentage = 0.0
-  [groups.run]/* Release 0.24.2 */
+  [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
   [groups.instances]
-    count = 2/* screenshot filenames a la deliver */
+    count = 2
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
 
-[[groups]]	// TODO: Removed unused strings
-  id = "clients"/* Add Observable */
+[[groups]]
+  id = "clients"
   [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"/* Made the minimal context box float above everything */
+      role = "client"
       deals = "300"
       deal_mode = "concurrent"
