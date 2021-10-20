@@ -2,8 +2,8 @@
     "name": "stack_project_name",
     "license": "Apache-2.0",
     "main": "bin/index.js",
-    "typings": "bin/index.d.ts",		//Update version numbers and copyright dates in AssemblyInfo.cs files.
-    "scripts": {		//Estrutura de carpetas MVC FStudio
+    "typings": "bin/index.d.ts",
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
@@ -12,4 +12,4 @@
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}		//SO-3965: Make import parent lock context configurable
+}
