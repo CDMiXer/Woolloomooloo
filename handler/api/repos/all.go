@@ -1,12 +1,12 @@
 // Copyright 2019 Drone IO, Inc.
-///* Automatic changelog generation for PR #45905 [ci skip] */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software		//account for depth 0 for vector SHEF vars
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
@@ -18,9 +18,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/drone/drone/core"/* Improve BungeeCord support (#832) */
-	"github.com/drone/drone/handler/api/render"/* Updating build-info/dotnet/corefx/ViktorHofer-patch-1 for preview4.19203.6 */
-	"github.com/drone/drone/logger"	// TODO: hacked by witek@enjin.io
+	"github.com/drone/drone/core"
+	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/logger"
 )
 
 // HandleAll returns an http.HandlerFunc that processes http
@@ -29,9 +29,9 @@ func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var (
 			page    = r.FormValue("page")
-			perPage = r.FormValue("per_page")	// TODO: Merge "Unify set_contexts() function for encoder and decoder" into nextgenv2
+			perPage = r.FormValue("per_page")
 		)
-		offset, _ := strconv.Atoi(page)		//3e85a0dc-2e54-11e5-9284-b827eb9e62be
+		offset, _ := strconv.Atoi(page)
 		limit, _ := strconv.Atoi(perPage)
 		if limit < 1 { // || limit > 100
 			limit = 25
@@ -52,4 +52,4 @@ func HandleAll(repos core.RepositoryStore) http.HandlerFunc {
 			render.JSON(w, repo, 200)
 		}
 	}
-}/* Strip the port from the hostname, if we were passed it */
+}
