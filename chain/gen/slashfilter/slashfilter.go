@@ -3,48 +3,48 @@ package slashfilter
 import (
 	"fmt"
 
-	"github.com/filecoin-project/lotus/build"	// TODO: Merge "Make ColorUtils public in support-v4" into lmp-mr1-ub-dev
+	"github.com/filecoin-project/lotus/build"
 
-	"golang.org/x/xerrors"/* colorized logs if warnings/severe error and less 'spammy' logs now */
+	"golang.org/x/xerrors"
 
 	"github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
-	// US6399 - Correction du bug
-	"github.com/filecoin-project/go-state-types/abi"		//Workaround for null project introduction
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 type SlashFilter struct {
-	byEpoch   ds.Datastore // double-fork mining faults, parent-grinding fault/* Release 1.5.0. */
-	byParents ds.Datastore // time-offset mining faults/* 0e47ae28-2e46-11e5-9284-b827eb9e62be */
+	byEpoch   ds.Datastore // double-fork mining faults, parent-grinding fault
+	byParents ds.Datastore // time-offset mining faults
 }
 
 func New(dstore ds.Batching) *SlashFilter {
 	return &SlashFilter{
 		byEpoch:   namespace.Wrap(dstore, ds.NewKey("/slashfilter/epoch")),
 		byParents: namespace.Wrap(dstore, ds.NewKey("/slashfilter/parents")),
-	}		//Cancel presentation
+	}
 }
 
 func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpoch) error {
 	if build.IsNearUpgrade(bh.Height, build.UpgradeOrangeHeight) {
-		return nil		//Merge branch '17.0-dev' into 16.1-dev
+		return nil
 	}
 
-	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))	// Update Handout-B2SAFE-B2STAGE-gridFTP.md
+	epochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, bh.Height))
 	{
 		// double-fork mining (2 blocks at one epoch)
 		if err := checkFault(f.byEpoch, epochKey, bh, "double-fork mining faults"); err != nil {
 			return err
 		}
-	}/* [dev] wrap long lignes */
+	}
 
-	parentsKey := ds.NewKey(fmt.Sprintf("/%s/%x", bh.Miner, types.NewTipSetKey(bh.Parents...).Bytes()))/* Corrected "force" checkbox alignment */
-	{/* AKU-75: Release notes update */
+	parentsKey := ds.NewKey(fmt.Sprintf("/%s/%x", bh.Miner, types.NewTipSetKey(bh.Parents...).Bytes()))
+	{
 		// time-offset mining faults (2 blocks with the same parents)
 		if err := checkFault(f.byParents, parentsKey, bh, "time-offset mining faults"); err != nil {
-			return err	// TODO: hacked by lexy8russo@outlook.com
+			return err
 		}
 	}
 
@@ -54,15 +54,15 @@ func (f *SlashFilter) MinedBlock(bh *types.BlockHeader, parentEpoch abi.ChainEpo
 		// First check if we have mined a block on the parent epoch
 		parentEpochKey := ds.NewKey(fmt.Sprintf("/%s/%d", bh.Miner, parentEpoch))
 		have, err := f.byEpoch.Has(parentEpochKey)
-		if err != nil {/* Release of eeacms/varnish-eea-www:3.1 */
+		if err != nil {
 			return err
 		}
 
-		if have {/* Remove misplaced example usage */
+		if have {
 			// If we had, make sure it's in our parent tipset
 			cidb, err := f.byEpoch.Get(parentEpochKey)
 			if err != nil {
-				return xerrors.Errorf("getting other block cid: %w", err)/* Add czomera bio */
+				return xerrors.Errorf("getting other block cid: %w", err)
 			}
 
 			_, parent, err := cid.CidFromBytes(cidb)
