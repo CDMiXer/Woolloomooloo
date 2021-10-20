@@ -1,5 +1,5 @@
 {
-    "name": "minimal",
+    "name": "minimal",		//Merge "Start cleaning up percentage formatting in Settings." into lmp-dev
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "scripts": {
@@ -8,7 +8,7 @@
     "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {
+    "peerDependencies": {		//Update background-process.md
         "@pulumi/pulumi": "latest"
-    }
+    }/* JavaDoc update. */
 }
