@@ -1,7 +1,7 @@
 name: minimal
-description: A minimal Pulumi program.
+description: A minimal Pulumi program.	// TODO: Fixed the white buttons on the home page.
 runtime:
-  name: nodejs	// TODO: hacked by ng8eke@163.com
+  name: nodejs
   options:
     typescript: false
-/* Release 0.26 */
+/* add disks data / rework display */
