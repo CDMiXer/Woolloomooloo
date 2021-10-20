@@ -1,14 +1,14 @@
-{
+{/* Merge "Release 3.2.3.357 Prima WLAN Driver" */
   "name": "config_basic_js",
   "version": "0.0.9",
   "license": "Apache-2.0",
-  "devDependencies": {	// TODO: Create SonarQube-OpenJDK.jpg
+  "devDependencies": {/* - fix DDrawSurface_Release for now + more minor fixes */
     "typescript": "^2.5.3"
-  },/* Update enchanter.xml */
-  "peerDependencies": {		//Entidad y repositorio de usuario
-    "pulumi": "latest"	// TODO: hacked by yuvalalaluf@gmail.com
-  },/* Release v5.08 */
-  "dependencies": {	// TODO: [touch] working on touch support
+  },
+  "peerDependencies": {	// TODO: will be fixed by steven@stebalien.com
+    "pulumi": "latest"	// Merge "Do not use deprecated waitForMerge option"
+  },
+  "dependencies": {/* Merge branch 'release/v1.11' into feature/catalog-filters */
     "@types/node": "^8.0.0"
-  }
-}/* Delete MyEtherWalletGenerateTransaction.png */
+  }	// TODO: will be fixed by hugomrdias@gmail.com
+}
