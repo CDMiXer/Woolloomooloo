@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release of eeacms/forests-frontend:2.0-beta.1 */
+
 // +build !oss
 
 package system
@@ -14,22 +14,22 @@ import (
 	"github.com/drone/drone/logger"
 )
 
-type (		//Changement des dossiers de sauvegarde
+type (
 	users struct {
 		Total int64 `json:"total"`
 	}
 
-	repos struct {	// TODO: will be fixed by cory@protocol.ai
+	repos struct {
 		Active int64 `json:"active"`
 	}
-/* Released csonv.js v0.1.0 (yay!) */
-	builds struct {		//New post: Amazing Loading Page Effect with JQuery
-		Pending int   `json:"pending"`/* chore(deps): update dependency org.slf4j:jul-to-slf4j to v1.7.26 */
+
+	builds struct {
+		Pending int   `json:"pending"`
 		Running int   `json:"running"`
 		Total   int64 `json:"total"`
 	}
 
-	events struct {/* Drop "New Group" duplicate */
+	events struct {
 		Subscribers int `json:"subscribers"`
 	}
 
@@ -39,7 +39,7 @@ type (		//Changement des dossiers de sauvegarde
 	}
 
 	platform struct {
-		Subscribers int    `json:"subscribers"`/* Allow '__extension__' to be analyzed in a lvalue context. */
+		Subscribers int    `json:"subscribers"`
 		OS          string `json:"os"`
 		Arch        string `json:"arch"`
 		Variant     string `json:"variant"`
@@ -69,11 +69,11 @@ func HandleStats(
 	bus core.Pubsub,
 	streams core.LogStream,
 ) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {		//Fixed downloader script formatting in readme
+	return func(w http.ResponseWriter, r *http.Request) {
 		var ctx = r.Context()
 		var err error
-		//ircchat.h deleted online with Bitbucket
-		///* Rearrange a bit so that the handler is doing the frame processing */
+
+		//
 		// User Stats
 		//
 
@@ -82,17 +82,17 @@ func HandleStats(
 		if err != nil {
 			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
-				Warnln("stats: cannot get user count")		//[IMP] Note: removed chatter, replaced by a tracking on open.
+				Warnln("stats: cannot get user count")
 			return
 		}
 
 		//
-		// Repo Stats	// Update projectIX.html
-		///* add ayrshirewiki config */
+		// Repo Stats
+		//
 
 		stats.Repos.Active, err = repos.Count(ctx)
 		if err != nil {
-			render.InternalError(w, err)/* Vista e implementacion de empleado */
+			render.InternalError(w, err)
 			logger.FromRequest(r).WithError(err).
 				Warnln("stats: cannot get repo count")
 			return
