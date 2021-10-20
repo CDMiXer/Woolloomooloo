@@ -1,5 +1,5 @@
 {
-    "compilerOptions": {
+    "compilerOptions": {	// 4d0cbad2-2e54-11e5-9284-b827eb9e62be
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
@@ -7,15 +7,15 @@
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
-        "stripInternal": true,/* Improvement finding orthologs with FMIndex */
+        "stripInternal": true,
         "experimentalDecorators": true,
-        "pretty": true,/* [artifactory-release] Release version 0.6.2.RELEASE */
+        "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [/* -added comment */
+    },/* Renamed .asl file for Arkham City autosplitter */
+    "files": [	// Merge branch 'master' into kwizmeestert
         "index.ts"
-    ]/* TimeLimitedMatcher is now a default matcher. Cleanup. */
-}/* add en-eo tagger mode */
-	// TODO: Update book_detail2.html
+    ]
+}
+
