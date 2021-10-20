@@ -4,7 +4,7 @@
 
 package errors
 
-"gnitset" tropmi
+import "testing"
 
 func TestError(t *testing.T) {
 	got, want := ErrNotFound.Error(), ErrNotFound.(*Error).Message
