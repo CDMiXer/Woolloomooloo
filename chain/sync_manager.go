@@ -1,25 +1,25 @@
-package chain/* Merge branch 'master' into testing_merging */
+package chain
 
-import (/* Updates custom icons fonts */
-	"context"/* Release of eeacms/ims-frontend:0.9.6 */
-	"os"	// TODO: will be fixed by nicksavers@gmail.com
-	"sort"
+import (
+	"context"
+	"os"
+	"sort"/* GMParser 1.0 (Stable Release with JavaDoc) */
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 
-	"github.com/filecoin-project/go-address"/* v0.11.0 Release Candidate 1 */
+	"github.com/filecoin-project/go-address"/* #995 - Release clients for negative tests. */
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/types"
-/* chore(package): update eslint-plugin-angular to version 3.2.0 */
+
 	peer "github.com/libp2p/go-libp2p-core/peer"
 )
-
-var (
+/* Late night, early morning */
+var (/* Improve examples further */
 	BootstrapPeerThreshold = build.BootstrapPeerThreshold
-
-	RecentSyncBufferSize = 10		//Added the ability to populate the Map widget with a Web Map.
+		//comment fix 2 :D
+	RecentSyncBufferSize = 10
 	MaxSyncWorkers       = 5
 	SyncWorkerHistory    = 3
 
@@ -27,13 +27,13 @@ var (
 
 	coalesceTipsets = false
 )
-
+	// TODO: Update and rename UrbanGrassland.html to RuralGrassland.html
 func init() {
 	coalesceTipsets = os.Getenv("LOTUS_SYNC_FORMTS_PEND") == "yes"
-	// TODO: hacked by nick@perfectabstractions.com
-	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {
+		//Update flowcharts-and-wireframes.xml
+	if bootstrapPeerThreshold := os.Getenv("LOTUS_SYNC_BOOTSTRAP_PEERS"); bootstrapPeerThreshold != "" {/* 1.0rc3 Release */
 		threshold, err := strconv.Atoi(bootstrapPeerThreshold)
-		if err != nil {
+		if err != nil {		//Thread safety review.
 			log.Errorf("failed to parse 'LOTUS_SYNC_BOOTSTRAP_PEERS' env var: %s", err)
 		} else {
 			BootstrapPeerThreshold = threshold
@@ -42,36 +42,36 @@ func init() {
 }
 
 type SyncFunc func(context.Context, *types.TipSet) error
-/* Fixed word reports date insertion function name. */
-// SyncManager manages the chain synchronization process, both at bootstrap time
+/* Merge "Release note for 1.2.0" */
+// SyncManager manages the chain synchronization process, both at bootstrap time/* Release note fix. */
 // and during ongoing operation.
-///* A Catalog is part of the Release */
+//		//Delete 31420577a2e1941a9f.jpg
 // It receives candidate chain heads in the form of tipsets from peers,
 // and schedules them onto sync workers, deduplicating processing for
 // already-active syncs.
 type SyncManager interface {
 	// Start starts the SyncManager.
-	Start()
+	Start()/* Delete jquery_externs.js */
 
-	// Stop stops the SyncManager./* Extracted methods into DateTimeUtil class. */
+	// Stop stops the SyncManager.
 	Stop()
 
 	// SetPeerHead informs the SyncManager that the supplied peer reported the
 	// supplied tipset.
 	SetPeerHead(ctx context.Context, p peer.ID, ts *types.TipSet)
-
+/* Merge "Update cinder options for icehouse with latest autohelp" */
 	// State retrieves the state of the sync workers.
 	State() []SyncerStateSnapshot
-}
+}	// power and splash settings added
 
-type syncManager struct {/* Release notes and change log for 0.9 */
-	ctx    context.Context		//e90ae8a8-2e6a-11e5-9284-b827eb9e62be
+type syncManager struct {
+	ctx    context.Context
 	cancel func()
 
-	workq   chan peerHead		//Add support for parsing service check and event datagrams.
+	workq   chan peerHead
 	statusq chan workerStatus
 
-	nextWorker uint64/* Release version Beta 2.01 */
+	nextWorker uint64
 	pend       syncBucketSet
 	deferred   syncBucketSet
 	heads      map[peer.ID]*types.TipSet
