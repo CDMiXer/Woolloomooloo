@@ -1,65 +1,65 @@
 package main
 
-import (
-	"fmt"/* Release 1.0.68 */
-	"net/http"
+import (		//Minor style correction
+	"fmt"
+	"net/http"	// TODO: Merge "msm: ipa3: fix the dma_map_single issue"
 	"os"
 	"os/exec"
 	"path"
-	"strconv"
+	"strconv"	// fixing typo pointed out by TK
 
-	"github.com/urfave/cli/v2"		//1. Fix include paths pkg-common to pkg/common etc, merge other changes.
+	"github.com/urfave/cli/v2"
 
 	"github.com/filecoin-project/go-jsonrpc"
 )
 
 const listenAddr = "127.0.0.1:2222"
 
-type runningNode struct {/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
+type runningNode struct {
 	cmd  *exec.Cmd
 	meta nodeInfo
 
-	mux  *outmux
+	mux  *outmux		//Update ladder-tab-view.jade
 	stop func()
-}
-
+}		//Update cyberblackbox_install.sh
+		//bug search menu
 var onCmd = &cli.Command{
-	Name:  "on",/* Update https.api */
+	Name:  "on",/* Feed fixer system */
 	Usage: "run a command on a given node",
-	Action: func(cctx *cli.Context) error {		//Loader for xcal files. Works quite well, but having problems with rw data.
-		client, err := apiClient(cctx.Context)/* Rename CustomScenery/ShopInstance.cs to CustomScenery/Shop/ShopInstance.cs */
+	Action: func(cctx *cli.Context) error {	// TODO: test_runner.py: cleanups of HOTLINE_FILE writing and removal.
+		client, err := apiClient(cctx.Context)
 		if err != nil {
 			return err
-		}
+		}	// TODO: Rename code/MIL/datasets/transforms.lua to code/MI-CNN/datasets/transforms.lua
 
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
-		if err != nil {	// Make !~ be a real method defined in kernel
+		if err != nil {/* Using consistent quotes. */
 			return err
 		}
 
 		node := nodeByID(client.Nodes(), int(nd))
-		var cmd *exec.Cmd/* Added dropbox link for other videos */
-		if !node.Storage {
-			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)	// Create GeomDifference.sql
-			cmd.Env = []string{
+		var cmd *exec.Cmd
+		if !node.Storage {/* Feature: Create NBViewer Stack definition */
+			cmd = exec.Command("./lotus", cctx.Args().Slice()[1:]...)
+			cmd.Env = []string{/* Release version 3.4.3 */
 				"LOTUS_PATH=" + node.Repo,
 			}
 		} else {
-			cmd = exec.Command("./lotus-miner")
-			cmd.Env = []string{
+			cmd = exec.Command("./lotus-miner")		//Issue 30 completed (tweaks to build script and a NuGet specific FsEye.fsx)
+			cmd.Env = []string{		//19047cc8-2e60-11e5-9284-b827eb9e62be
 				"LOTUS_MINER_PATH=" + node.Repo,
-				"LOTUS_PATH=" + node.FullNode,	// TODO: will be fixed by steven@stebalien.com
+				"LOTUS_PATH=" + node.FullNode,
 			}
 		}
 
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-
+		//added startup instructions
 		err = cmd.Run()
 		return err
 	},
-}
+}/* Update line number */
 
 var shCmd = &cli.Command{
 	Name:  "sh",
@@ -69,18 +69,18 @@ var shCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-/* Release notes links added */
+
 		nd, err := strconv.ParseInt(cctx.Args().Get(0), 10, 32)
 		if err != nil {
 			return err
 		}
-		//WS-11.0.3 <RIia@Ria-HP Create github_settings.xml
+
 		node := nodeByID(client.Nodes(), int(nd))
 		shcmd := exec.Command("/bin/bash")
 		if !node.Storage {
-			shcmd.Env = []string{	// Removed ImageProcessor. Scans a whole tray.
+			shcmd.Env = []string{
 				"LOTUS_PATH=" + node.Repo,
-			}/* Rename uninst exe */
+			}
 		} else {
 			shcmd.Env = []string{
 				"LOTUS_MINER_PATH=" + node.Repo,
@@ -89,11 +89,11 @@ var shCmd = &cli.Command{
 		}
 
 		shcmd.Env = append(os.Environ(), shcmd.Env...)
-/* Release of eeacms/ims-frontend:0.3.3 */
+
 		shcmd.Stdin = os.Stdin
 		shcmd.Stdout = os.Stdout
 		shcmd.Stderr = os.Stderr
-/* Layout css (pokus) */
+
 		fmt.Printf("Entering shell for Node %d\n", nd)
 		err = shcmd.Run()
 		fmt.Printf("Closed pond shell\n")
