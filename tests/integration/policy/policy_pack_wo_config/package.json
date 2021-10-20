@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "dependencies": {
         "@pulumi/policy": "^0.4.0"
-    },/* IJH-162 Fixing response reading */
+    },
     "devDependencies": {
         "@types/node": "^10.12.7"
     }
