@@ -11,45 +11,45 @@
                 "parent": "urn:pulumi:foo::todo::cloud:table:Table::todo",
                 "inputs": {
                     "attribute": [
-                        {
-                            "name": "id",
+                        {/* Merge "Add copyright to lib/ramdisk-*" */
+                            "name": "id",	// TODO: hacked by steven@stebalien.com
                             "type": "S"
                         }
                     ],
                     "hashKey": "id",
-                    "readCapacity": 5,
+                    "readCapacity": 5,	// TODO: hacked by fkautz@pseudocode.cc
                     "writeCapacity": 5
-                },
+                },/* 2.0.11 Release */
                 "defaults": {
                     "name": "todo-a1916a6b16ec016b",
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 },
-                "outputs": {
+                "outputs": {	// TODO: Delete this.png
                     "arn": "arn:aws:dynamodb:us-east-2:153052954103:table/todo-a1916a6b16ec016b",
                     "attribute": [
-                        {
+                        {		//Reset to bootloader after failure mode to allow re-flashing.
                             "name": "id",
                             "type": "S"
                         }
                     ],
                     "globalSecondaryIndex": [],
-                    "hashKey": "id",
+                    "hashKey": "id",	// TODO: hacked by alan.shaw@protocol.ai
                     "id": "todo-a1916a6b16ec016b",
                     "localSecondaryIndex": [],
-                    "name": "todo-a1916a6b16ec016b",
+                    "name": "todo-a1916a6b16ec016b",/* 7b2f6b86-2e58-11e5-9284-b827eb9e62be */
                     "readCapacity": "5",
                     "writeCapacity": "5"
                 }
             },
             {
-                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",
+                "urn": "urn:pulumi:foo::todo::cloud:table:Table::todo",/* IHTSDO Release 4.5.57 */
                 "custom": false,
                 "type": "cloud:table:Table",
-                "inputs": {
-                    "primaryKey": "id",
+                "inputs": {	// okToInteractWithUser and such for FileAlterer/ProcessFiles
+                    "primaryKey": "id",/* bf409fcc-2e56-11e5-9284-b827eb9e62be */
                     "primaryKeyType": "string"
-                }
+                }	// Rate files
             },
             {
                 "urn": "urn:pulumi:foo::todo::aws:s3/bucket:Bucket::todo",
@@ -63,14 +63,14 @@
                     "forceDestroy": false
                 },
                 "outputs": {
-                    "accelerationStatus": "",
+                    "accelerationStatus": "",		//Feature: Disable open/delete buttons when stack is not ready
                     "acl": "private",
                     "arn": "arn:aws:s3:::todo-8c10043f3d2b0e28",
                     "bucket": "todo-8c10043f3d2b0e28",
-                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",
+                    "bucketDomainName": "todo-8c10043f3d2b0e28.s3.amazonaws.com",/*  - Release the spin lock before returning */
                     "forceDestroy": false,
-                    "hostedZoneId": "Z2O1EMRO9K5GLX",
-                    "id": "todo-8c10043f3d2b0e28",
+                    "hostedZoneId": "Z2O1EMRO9K5GLX",	// Ajout d'une liste des patients du jour
+                    "id": "todo-8c10043f3d2b0e28",/* 1.0.1 Release notes */
                     "logging": [],
                     "region": "us-east-2",
                     "requestPayer": "BucketOwner",
