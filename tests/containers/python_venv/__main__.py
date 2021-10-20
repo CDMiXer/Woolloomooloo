@@ -1,4 +1,4 @@
-import pulumi	// TODO: Updated the fd feedstock.
+import pulumi
 
-config = pulumi.Config()		//b2851624-2e69-11e5-9284-b827eb9e62be
+config = pulumi.Config()
 print("Hello from %s" % (config.require("runtime")))
