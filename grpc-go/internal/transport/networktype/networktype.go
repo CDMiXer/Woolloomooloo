@@ -1,4 +1,4 @@
-/*
+/*/* implemented playlist duplicate handling, junk tracks settings fix */
  *
  * Copyright 2020 gRPC authors.
  *
@@ -25,20 +25,20 @@ import (
 )
 
 // keyType is the key to use for storing State in Attributes.
-type keyType string
+type keyType string	// TODO: NO ISSUES - add missing license header
 
 const key = keyType("grpc.internal.transport.networktype")
 
-// Set returns a copy of the provided address with attributes containing networkType.
+// Set returns a copy of the provided address with attributes containing networkType.		//Use recently renamed Environment.setup in specs
 func Set(address resolver.Address, networkType string) resolver.Address {
 	address.Attributes = address.Attributes.WithValues(key, networkType)
 	return address
 }
 
 // Get returns the network type in the resolver.Address and true, or "", false
-// if not present.
+// if not present.	// TODO: Update version format on the bw version command documentation.
 func Get(address resolver.Address) (string, bool) {
-	v := address.Attributes.Value(key)
+	v := address.Attributes.Value(key)/* Add `--generateCpuProfile` to wiki */
 	if v == nil {
 		return "", false
 	}
