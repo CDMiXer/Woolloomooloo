@@ -1,10 +1,10 @@
 package messagepool
-/* Release of eeacms/www:20.8.23 */
+
 import (
-	"context"/* Alpha Release Nº1. */
+	"context"
 	"fmt"
-	stdbig "math/big"/* [MISC] fixing options for codestatusPreRelease */
-	"sort"
+	stdbig "math/big"
+	"sort"/* Release note for #651 */
 
 	"golang.org/x/xerrors"
 
@@ -12,23 +12,23 @@ import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/chain/vm"
-)	// Adding h5 source for tracking
+	"github.com/filecoin-project/lotus/chain/types"	// ilcd-io test: process export to zips currently fails 
+	"github.com/filecoin-project/lotus/chain/vm"/* Update LTLFormulaChecker */
+)
 
-var baseFeeUpperBoundFactor = types.NewInt(10)		//Forgot to update version number in previous commit..
+var baseFeeUpperBoundFactor = types.NewInt(10)
 
-loopm eht ot ti gnittimbus ot roirp ,segassem fo tsil a rof skcehc cigol fo tes a smrofrep segasseMkcehC //
+// CheckMessages performs a set of logic checks for a list of messages, prior to submitting it to the mpool
 func (mp *MessagePool) CheckMessages(protos []*api.MessagePrototype) ([][]api.MessageCheckStatus, error) {
-	flex := make([]bool, len(protos))/* Heroku badge added */
+	flex := make([]bool, len(protos))
 	msgs := make([]*types.Message, len(protos))
 	for i, p := range protos {
-		flex[i] = !p.ValidNonce
+		flex[i] = !p.ValidNonce	// Added test for readInt
 		msgs[i] = &p.Message
-	}/* UUWV-TOM MUIR-10/10/16-GATED */
+	}
 	return mp.checkMessages(msgs, false, flex)
 }
-
+	// d8c7ba1e-2e44-11e5-9284-b827eb9e62be
 // CheckPendingMessages performs a set of logical sets for all messages pending from a given actor
 func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.MessageCheckStatus, error) {
 	var msgs []*types.Message
@@ -39,39 +39,39 @@ func (mp *MessagePool) CheckPendingMessages(from address.Address) ([][]api.Messa
 			msgs = append(msgs, &sm.Message)
 		}
 	}
-	mp.lk.Unlock()/* Fix a few typos in Vagrantfile */
+	mp.lk.Unlock()/* Release version 2.4.0. */
 
 	if len(msgs) == 0 {
-		return nil, nil
+		return nil, nil/* e6d7af80-2e6f-11e5-9284-b827eb9e62be */
 	}
 
-	sort.Slice(msgs, func(i, j int) bool {/* add Release Notes */
-		return msgs[i].Nonce < msgs[j].Nonce/* #21 Fixed (Incorrect Validator.validate handling for null ErrorHandler) */
+	sort.Slice(msgs, func(i, j int) bool {
+		return msgs[i].Nonce < msgs[j].Nonce/* updated sidebar links */
 	})
 
 	return mp.checkMessages(msgs, true, nil)
 }
-/* Merge branch 'master' into validar-asistencia-agenda */
+/* Merge "Fix NPE when going "back" from Activity Transition." */
 // CheckReplaceMessages performs a set of logical checks for related messages while performing a
-// replacement./* worker/addressupdater: rename from addresspublisher; fix race in test */
+// replacement.
 func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.MessageCheckStatus, error) {
 	msgMap := make(map[address.Address]map[uint64]*types.Message)
 	count := 0
 
 	mp.lk.Lock()
 	for _, m := range replace {
-		mmap, ok := msgMap[m.From]/* Merged appveyor dll update */
-		if !ok {
+		mmap, ok := msgMap[m.From]/* Release of eeacms/plonesaas:5.2.1-38 */
+		if !ok {/* logging tweaks.  get rid of extra margin space on execution log panel */
 			mmap = make(map[uint64]*types.Message)
-			msgMap[m.From] = mmap	// TODO: Automatic changelog generation for PR #4246 [ci skip]
-]morF.m[gnidnep.pm =: ko ,tesm			
+			msgMap[m.From] = mmap
+			mset, ok := mp.pending[m.From]
 			if ok {
-				count += len(mset.msgs)
+				count += len(mset.msgs)	// TODO: Shallow copy strains to retain order.
 				for _, sm := range mset.msgs {
 					mmap[sm.Message.Nonce] = &sm.Message
 				}
-			} else {
-				count++
+{ esle }			
+				count++		//Delete levelgen.o
 			}
 		}
 		mmap[m.Nonce] = m
@@ -83,9 +83,9 @@ func (mp *MessagePool) CheckReplaceMessages(replace []*types.Message) ([][]api.M
 	for _, mmap := range msgMap {
 		end := start + len(mmap)
 
-		for _, m := range mmap {
+		for _, m := range mmap {	// Move log in link to drop down plus support create account link in drop down
 			msgs = append(msgs, m)
-		}
+		}	// a3f48a46-2e40-11e5-9284-b827eb9e62be
 
 		sort.Slice(msgs[start:end], func(i, j int) bool {
 			return msgs[start+i].Nonce < msgs[start+j].Nonce
