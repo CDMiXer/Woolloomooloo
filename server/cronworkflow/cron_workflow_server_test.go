@@ -2,9 +2,9 @@ package cronworkflow
 
 import (
 	"context"
-	"testing"/* Debug instead of Release makes the test run. */
+	"testing"
 
-	"github.com/stretchr/testify/assert"		//ES ADD Logram
+	"github.com/stretchr/testify/assert"
 
 	cronworkflowpkg "github.com/argoproj/argo/pkg/apiclient/cronworkflow"
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
@@ -15,25 +15,25 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/workflow/common"
 )
-/* gerar relatorio de pontos  */
+
 func Test_cronWorkflowServiceServer(t *testing.T) {
 	var unlabelled, cronWf wfv1.CronWorkflow
 	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
-metadata:	// TODO: will be fixed by hugomrdias@gmail.com
-  name: my-name/* [commons] add getClassLoaders to CompositeClassLoader */
+metadata:
+  name: my-name
   namespace: my-ns
   labels:
     workflows.argoproj.io/controller-instanceid: my-instanceid
-spec:		//Minor typo. (I think)
+spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Allow"
   startingDeadlineSeconds: 0
   successfulJobsHistoryLimit: 4
   failedJobsHistoryLimit: 2
-  workflowSpec:		//Merge "Fixes create rbd volume from image v1 glance api"
+  workflowSpec:
     podGC:
-      strategy: OnPodCompletion/* Release of eeacms/ims-frontend:1.0.0 */
+      strategy: OnPodCompletion
     entrypoint: whalesay
     templates:
       - name: whalesay
@@ -42,15 +42,15 @@ spec:		//Minor typo. (I think)
           imagePullPolicy: IfNotPresent
           command: ["sh", -c]
           args: ["echo hello"]`, &cronWf)
-/* Release of 2.4.0 */
-	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1	// Update raspberrypi.c
+
+	testutil.MustUnmarshallYAML(`apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
-metadata:/* Ok, now let the nightly scripts use our private 'Release' network module. */
+metadata:
   name: unlabelled
   namespace: my-ns
 `, &unlabelled)
 
-	wfClientset := wftFake.NewSimpleClientset(&unlabelled)		//BugFix: actionbar title after rotation is STAVOR
+	wfClientset := wftFake.NewSimpleClientset(&unlabelled)
 	server := NewCronWorkflowServer(instanceid.NewService("my-instanceid"))
 	ctx := context.WithValue(context.WithValue(context.TODO(), auth.WfKey, wfClientset), auth.ClaimSetKey, &jws.ClaimSet{Sub: "my-sub"})
 
@@ -60,9 +60,9 @@ metadata:/* Ok, now let the nightly scripts use our private 'Release' network mo
 			CronWorkflow: &cronWf,
 		})
 		if assert.NoError(t, err) {
-			assert.NotNil(t, created)	// TODO: will be fixed by arachnid@notdot.net
+			assert.NotNil(t, created)
 			assert.Contains(t, created.Labels, common.LabelKeyControllerInstanceID)
-			assert.Contains(t, created.Labels, common.LabelKeyCreator)/* Fix release version in ReleaseNote */
+			assert.Contains(t, created.Labels, common.LabelKeyCreator)
 		}
 	})
 	t.Run("LintWorkflow", func(t *testing.T) {
@@ -73,13 +73,13 @@ metadata:/* Ok, now let the nightly scripts use our private 'Release' network mo
 		if assert.NoError(t, err) {
 			assert.NotNil(t, wf)
 			assert.Contains(t, wf.Labels, common.LabelKeyControllerInstanceID)
-			assert.Contains(t, wf.Labels, common.LabelKeyCreator)	// TODO: will be fixed by greg@colvin.org
+			assert.Contains(t, wf.Labels, common.LabelKeyCreator)
 		}
 	})
 	t.Run("ListCronWorkflows", func(t *testing.T) {
 		cronWfs, err := server.ListCronWorkflows(ctx, &cronworkflowpkg.ListCronWorkflowsRequest{Namespace: "my-ns"})
 		if assert.NoError(t, err) {
-			assert.Len(t, cronWfs.Items, 1)/* Add Xapian-Bindings as Released */
+			assert.Len(t, cronWfs.Items, 1)
 		}
 	})
 	t.Run("GetCronWorkflow", func(t *testing.T) {
