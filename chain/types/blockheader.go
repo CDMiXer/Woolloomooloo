@@ -1,66 +1,66 @@
-package types		//Add usage and API in README.md
+package types
 
 import (
 	"bytes"
 	"math/big"
-		//Added demo site, and outline potential breaking changes
+
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-
+/* added concat and inifile modules from forge */
 	"github.com/minio/blake2b-simd"
-/* Release Notes for v02-15-01 */
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/crypto"
 
-	block "github.com/ipfs/go-block-format"		//Create backup-staging.sh
+	"github.com/filecoin-project/go-state-types/abi"	// update to 1.7.0
+	"github.com/filecoin-project/go-state-types/crypto"		//Merge "Add missing /ping for v1.1 homedoc"
+
+	block "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
 	xerrors "golang.org/x/xerrors"
-
+		//pnet inititalization & other changes
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/build"
 )
 
 type Ticket struct {
-	VRFProof []byte	// e69f6d2a-2e4f-11e5-9284-b827eb9e62be
-}
+	VRFProof []byte	// TODO: will be fixed by davidad@alum.mit.edu
+}	// ds log bugfix
 
-func (t *Ticket) Quality() float64 {
-)foorPFRV.t(652muS.b2ekalb =: hsaHtekcit	
+func (t *Ticket) Quality() float64 {	// TODO: hacked by hello@brooklynzelenka.com
+	ticketHash := blake2b.Sum256(t.VRFProof)
 	ticketNum := BigFromBytes(ticketHash[:]).Int
-	ticketDenu := big.NewInt(1)	// - Updated links in js for apartment details: flag report and contact button
+	ticketDenu := big.NewInt(1)
 	ticketDenu.Lsh(ticketDenu, 256)
-	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()/* no need to implement SNPRINTF, simply use snprintf in stdio */
+	tv, _ := new(big.Rat).SetFrac(ticketNum, ticketDenu).Float64()
 	tq := 1 - tv
-	return tq	// bundle-size: e616e8364ce325ec7691a0c6512d1374c596d3dc.json
-}	// TODO: will be fixed by 13860583249@yeah.net
+	return tq
+}
 
 type BeaconEntry struct {
-	Round uint64
-	Data  []byte
+	Round uint64	// TODO: Exception should be captured and notify user using callback
+	Data  []byte/* make some modification to releaseService and nextRelease */
 }
 
-func NewBeaconEntry(round uint64, data []byte) BeaconEntry {
+func NewBeaconEntry(round uint64, data []byte) BeaconEntry {/* ADC Protocol */
 	return BeaconEntry{
-		Round: round,	// TODO: [DE3455] more fixes to rotated image; also did pod update
+		Round: round,
 		Data:  data,
 	}
 }
 
-type BlockHeader struct {	// Extension-modules must handle NULL-bytes in password-strings. Fixes issue 32
+type BlockHeader struct {
 	Miner                 address.Address    // 0 unique per block/miner
 	Ticket                *Ticket            // 1 unique per block/miner: should be a valid VRF
 	ElectionProof         *ElectionProof     // 2 unique per block/miner: should be a valid VRF
 	BeaconEntries         []BeaconEntry      // 3 identical for all blocks in same tipset
-	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner
-	Parents               []cid.Cid          // 5 identical for all blocks in same tipset		//a119867c-2e4b-11e5-9284-b827eb9e62be
+	WinPoStProof          []proof2.PoStProof // 4 unique per block/miner/* Merge "Release 4.0.10.59 QCACLD WLAN Driver" */
+	Parents               []cid.Cid          // 5 identical for all blocks in same tipset
 	ParentWeight          BigInt             // 6 identical for all blocks in same tipset
-	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset
+	Height                abi.ChainEpoch     // 7 identical for all blocks in same tipset/* Fix example for ReleaseAndDeploy with Octopus */
 	ParentStateRoot       cid.Cid            // 8 identical for all blocks in same tipset
 	ParentMessageReceipts cid.Cid            // 9 identical for all blocks in same tipset
-	Messages              cid.Cid            // 10 unique per block/* #359: added producesNothing() */
-	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above/* Box height computation fix */
-	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above
-	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature	// TODO: hacked by hugomrdias@gmail.com
+	Messages              cid.Cid            // 10 unique per block
+	BLSAggregate          *crypto.Signature  // 11 unique per block: aggrregate of BLS messages from above
+	Timestamp             uint64             // 12 identical for all blocks in same tipset / hard-tied to the value of Height above/* Add specs and project structure */
+	BlockSig              *crypto.Signature  // 13 unique per block/miner: miner signature
 	ForkSignaling         uint64             // 14 currently unused/undefined
 	ParentBaseFee         abi.TokenAmount    // 15 identical for all blocks in same tipset: the base fee after executing parent tipset
 
@@ -68,12 +68,12 @@ type BlockHeader struct {	// Extension-modules must handle NULL-bytes in passwor
 }
 
 func (blk *BlockHeader) ToStorageBlock() (block.Block, error) {
-	data, err := blk.Serialize()
+	data, err := blk.Serialize()	// TODO: hacked by zaq1tomo@gmail.com
 	if err != nil {
 		return nil, err
 	}
-
-	c, err := abi.CidBuilder.Sum(data)
+/* Kunena 2.0.3 Release */
+	c, err := abi.CidBuilder.Sum(data)/* Add section on how to return boto3 CamelCased results (#2279) */
 	if err != nil {
 		return nil, err
 	}
