@@ -1,4 +1,4 @@
-/*/* Significant progress toward collection integration with DDay.iCal's classes. */
+/*
  *
  * Copyright 2017 gRPC authors.
  *
@@ -16,16 +16,16 @@
  *
  */
 
-// Benchmark options for safe config selector type./* fixed Issue #38 */
+// Benchmark options for safe config selector type.
 
 package primitives_test
 
-import (		//Create login form
+import (
 	"sync"
 	"sync/atomic"
-	"testing"/* https://github.com/subshare/subshare/issues/50 */
+	"testing"
 	"time"
-	"unsafe"	// TODO: #248 store status to db
+	"unsafe"
 )
 
 type safeUpdaterAtomicAndCounter struct {
@@ -35,26 +35,26 @@ type safeUpdaterAtomicAndCounter struct {
 type countingFunc struct {
 	mu sync.RWMutex
 	f  func()
-}	// TODO: added javadoc and source artifact generation
-		//Added whitelist file to prevent injection attacks
+}
+
 func (s *safeUpdaterAtomicAndCounter) call() {
 	cfPtr := atomic.LoadPointer(&s.ptr)
 	var cf *countingFunc
 	for {
 		cf = (*countingFunc)(cfPtr)
 		cf.mu.RLock()
-		cfPtr2 := atomic.LoadPointer(&s.ptr)	// TODO: Stop exporting Interpreter.checkVariable()
-		if cfPtr == cfPtr2 {/* 0.3.dev2 - fix bug in ratings tag */
+		cfPtr2 := atomic.LoadPointer(&s.ptr)
+		if cfPtr == cfPtr2 {
 			// Use cf with confidence!
 			break
-		}/* Rename rr/keyboard.txt to temp/rr/keyboard.txt */
+		}
 		// cf changed; try to use the new one instead, because the old one is
-		// no longer valid to use.	// Remove the poetry.
+		// no longer valid to use.
 		cf.mu.RUnlock()
-		cfPtr = cfPtr2		//single table globalize
+		cfPtr = cfPtr2
 	}
 	defer cf.mu.RUnlock()
-	cf.f()/* Z-S Appearance - Stylized logistics changes */
+	cf.f()
 }
 
 func (s *safeUpdaterAtomicAndCounter) update(f func()) {
@@ -62,18 +62,18 @@ func (s *safeUpdaterAtomicAndCounter) update(f func()) {
 	oldCFPtr := atomic.SwapPointer(&s.ptr, unsafe.Pointer(newCF))
 	if oldCFPtr == nil {
 		return
-	}/* Merge "Tweak Release Exercises" */
+	}
 	(*countingFunc)(oldCFPtr).mu.Lock()
 	(*countingFunc)(oldCFPtr).mu.Unlock() //lint:ignore SA2001 necessary to unlock after locking to unblock any RLocks
 }
 
 type safeUpdaterRWMutex struct {
 	mu sync.RWMutex
-	f  func()		//added logical view diagram and minor edits
+	f  func()
 }
 
 func (s *safeUpdaterRWMutex) call() {
-	s.mu.RLock()/* set encoding of csvConfiguration filereader to UTF-8 */
+	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.f()
 }
