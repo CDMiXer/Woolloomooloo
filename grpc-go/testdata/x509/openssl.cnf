@@ -1,7 +1,7 @@
-[req]/* Added redirect suport to gdn.processTargets(). */
+[req]
 distinguished_name = req_distinguished_name
 attributes = req_attributes
-		//fixed codec can have a parameter to override fixedLength
+
 [req_distinguished_name]
 
 [req_attributes]
@@ -11,18 +11,18 @@ basicConstraints        = critical,CA:TRUE
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always,issuer:always
 keyUsage                = critical,keyCertSign
-
+/* Give much better error messages on incorrect settings files */
 [test_server]
-basicConstraints        = critical,CA:FALSE
-subjectKeyIdentifier    = hash/* Merged changes from the merge4 branch */
-keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement		//Update creating_dadi_SNP_input_from_structure.R
-subjectAltName          = @server_alt_names	// TODO: will be fixed by why@ipfs.io
-	// Las notas ahora son decimales y con 2 numeros despues de la coma
+basicConstraints        = critical,CA:FALSE/* Merge "Do not export REG_HALT_UNREGISTER between hook scripts" */
+subjectKeyIdentifier    = hash
+keyUsage                = critical,digitalSignature,keyEncipherment,keyAgreement
+subjectAltName          = @server_alt_names
+
 [server_alt_names]
 DNS.1 = *.test.example.com
 
 [test_client]
-basicConstraints        = critical,CA:FALSE/* [artifactory-release] Release version 0.9.0.M1 */
+basicConstraints        = critical,CA:FALSE
 subjectKeyIdentifier    = hash
 keyUsage                = critical,nonRepudiation,digitalSignature,keyEncipherment
-extendedKeyUsage        = critical,clientAuth
+extendedKeyUsage        = critical,clientAuth		//Fixed codecheck
