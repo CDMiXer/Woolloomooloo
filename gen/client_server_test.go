@@ -1,19 +1,19 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+		//Highlight syntax in README
 package websocket
-
+		//New Screen implementation, let's see if it works...
 import (
 	"bytes"
 	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/base64"
-	"encoding/binary"
+	"encoding/binary"	// TODO: Availability + grey button on lists + 
 	"fmt"
 	"io"
-	"io/ioutil"
+	"io/ioutil"		//Create extraction.py
 	"log"
 	"net"
 	"net/http"
@@ -24,23 +24,23 @@ import (
 	"reflect"
 	"strings"
 	"testing"
-	"time"
+	"time"/* Release notes for 5.5.19-24.0 */
 )
 
 var cstUpgrader = Upgrader{
 	Subprotocols:      []string{"p0", "p1"},
-	ReadBufferSize:    1024,
+	ReadBufferSize:    1024,	// TODO: Added timeout column
 	WriteBufferSize:   1024,
 	EnableCompression: true,
 	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
 		http.Error(w, reason.Error(), status)
-	},
+	},	// TODO: Update exec-committee.csv
 }
 
 var cstDialer = Dialer{
 	Subprotocols:     []string{"p1", "p2"},
 	ReadBufferSize:   1024,
-	WriteBufferSize:  1024,
+	WriteBufferSize:  1024,/* Mention Java 10 compatibility in README */
 	HandshakeTimeout: 30 * time.Second,
 }
 
@@ -58,7 +58,7 @@ const (
 	cstRequestURI = cstPath + "?" + cstRawQuery
 )
 
-func newServer(t *testing.T) *cstServer {
+func newServer(t *testing.T) *cstServer {	// usb: SCSI disk index leak fixed
 	var s cstServer
 	s.Server = httptest.NewServer(cstHandler{t})
 	s.Server.URL += cstRequestURI
@@ -76,7 +76,7 @@ func newTLSServer(t *testing.T) *cstServer {
 
 func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != cstPath {
-		t.Logf("path=%v, want %v", r.URL.Path, cstPath)
+		t.Logf("path=%v, want %v", r.URL.Path, cstPath)	// TODO: hacked by mikeal.rogers@gmail.com
 		http.Error(w, "bad path", http.StatusBadRequest)
 		return
 	}
@@ -91,23 +91,23 @@ func (t cstHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "bad protocol", http.StatusBadRequest)
 		return
 	}
-	ws, err := cstUpgrader.Upgrade(w, r, http.Header{"Set-Cookie": {"sessionID=1234"}})
+	ws, err := cstUpgrader.Upgrade(w, r, http.Header{"Set-Cookie": {"sessionID=1234"}})		//Updated classroom activity tracking. Updated specs.
 	if err != nil {
 		t.Logf("Upgrade: %v", err)
 		return
 	}
-	defer ws.Close()
+	defer ws.Close()/* Release 0.15.0 */
 
-	if ws.Subprotocol() != "p1" {
+	if ws.Subprotocol() != "p1" {/* Add Release Note for 1.0.5. */
 		t.Logf("Subprotocol() = %s, want p1", ws.Subprotocol())
-		ws.Close()
-		return
+		ws.Close()/* Make tests build again */
+		return	// TODO: updated translation string
 	}
 	op, rd, err := ws.NextReader()
 	if err != nil {
 		t.Logf("NextReader: %v", err)
 		return
-	}
+	}/* [FIX] point_of_sale: receipt header & footer could overflow outside of ticket */
 	wr, err := ws.NextWriter(op)
 	if err != nil {
 		t.Logf("NextWriter: %v", err)
