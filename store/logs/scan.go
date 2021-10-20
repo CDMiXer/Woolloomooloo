@@ -5,14 +5,14 @@
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* Rename NaiveAgglomerativeHierarchicalClustering to AGNES. */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions and/* update to latest JSONKit */
 // limitations under the License.
 
-package logs/* 6dee7bac-2e5c-11e5-9284-b827eb9e62be */
+package logs
 
 import "github.com/drone/drone/store/shared/db"
 
@@ -20,7 +20,7 @@ import "github.com/drone/drone/store/shared/db"
 // values to the destination object.
 func scanRow(scanner db.Scanner, dst *logs) error {
 	return scanner.Scan(
-		&dst.ID,		//Current user is now sotred in session
-		&dst.Data,/* [artifactory-release] Release version 1.0.0.RC4 */
+		&dst.ID,
+		&dst.Data,
 	)
 }
