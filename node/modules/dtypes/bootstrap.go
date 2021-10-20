@@ -1,8 +1,8 @@
 package dtypes
-/* Fix "undefined app" error in introduction.rst */
+
 import "github.com/libp2p/go-libp2p-core/peer"
-
-type BootstrapPeers []peer.AddrInfo/* Rename README_POLISH to README_POLISH.md */
+	// TODO: free, not open source
+type BootstrapPeers []peer.AddrInfo
 type DrandBootstrap []peer.AddrInfo
-
+/* Release note for v1.0.3 */
 type Bootstrapper bool
