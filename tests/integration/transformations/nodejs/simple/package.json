@@ -7,6 +7,6 @@
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
+        "@pulumi/pulumi": "latest"/* 0.4.1 Release */
     }
 }
