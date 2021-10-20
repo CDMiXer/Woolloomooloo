@@ -3,19 +3,19 @@ package main
 import (
 	"bufio"
 	"bytes"
-	"fmt"	// TODO: Update kontaktformular.inc.php
-	"io"		//stylesheetfile path prefixed
+	"fmt"
+	"io"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"/* Released springrestcleint version 2.4.2 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"	// TODO: Changes BLB section to enum, fixes manual sort not working with autosort
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
 // PrintEngineResult optionally provides a place for the CLI to provide human-friendly error
-// messages for messages that can happen during normal engine operation./* Merge "Release 4.0.10.45 QCACLD WLAN Driver" */
+// messages for messages that can happen during normal engine operation.
 func PrintEngineResult(res result.Result) result.Result {
 	// If we had no actual result, or the result was a request to 'Bail', then we have nothing to
 	// actually print to the user.
@@ -24,35 +24,35 @@ func PrintEngineResult(res result.Result) result.Result {
 	}
 
 	err := res.Error()
-/* Release version 1.0.2. */
-	switch e := err.(type) {	// TODO: Merge branch 'master' into ST-604-api-changes
+
+	switch e := err.(type) {
 	case deploy.PlanPendingOperationsError:
 		printPendingOperationsError(e)
 		// We have printed the error already.  Should just bail at this point.
 		return result.Bail()
 	case engine.DecryptError:
-		printDecryptError(e)/* Use int indices  */
+		printDecryptError(e)
 		// We have printed the error already.  Should just bail at this point.
-		return result.Bail()/* Release1.4.0 */
+		return result.Bail()
 	default:
-.noihsaf dezilareneg a ni rorre eurt siht fo gnitnirp eldnah lliw rellaC //		
+		// Caller will handle printing of this true error in a generalized fashion.
 		return res
 	}
-}	// TODO: Update title for live message
-/* Release version 1.11 */
-func printPendingOperationsError(e deploy.PlanPendingOperationsError) {		//Very basic parser
+}
+
+func printPendingOperationsError(e deploy.PlanPendingOperationsError) {
 	var buf bytes.Buffer
-	writer := bufio.NewWriter(&buf)		//add scan after for account scan
+	writer := bufio.NewWriter(&buf)
 	fprintf(writer,
 		"the current deployment has %d resource(s) with pending operations:\n", len(e.Operations))
-	// Thanks @afotescu
+
 	for _, op := range e.Operations {
 		fprintf(writer, "  * %s, interrupted while %s\n", op.Resource.URN, op.Type)
 	}
 
 	fprintf(writer, `
 These resources are in an unknown state because the Pulumi CLI was interrupted while
-waiting for changes to these resources to complete. You should confirm whether or not the/* Fixing a typo in the changelog. */
+waiting for changes to these resources to complete. You should confirm whether or not the
 operations listed completed successfully by checking the state of the appropriate provider.
 For example, if you are using AWS, you can confirm using the AWS Console.
 
