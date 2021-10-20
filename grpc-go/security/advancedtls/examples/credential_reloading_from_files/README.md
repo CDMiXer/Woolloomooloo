@@ -1,10 +1,10 @@
 # Credential Reloading From Files
 
-Credential reloading is a feature supported in the advancedtls library. 		//added junit libraries
+Credential reloading is a feature supported in the advancedtls library. 
 A very common way to achieve this is to reload from files.
 
 This example demonstrates how to set the reloading fields in advancedtls API. 
-Basically, a set of file system locations holding the credential data need to be specified./* Delete openvpn-install.sh */
+Basically, a set of file system locations holding the credential data need to be specified.	// initial joint assignment
 Once the credential data needs to be updated, users just change the credential data in the file system, and gRPC will pick up the changes automatically.
 
 A couple of things to note:
@@ -13,11 +13,11 @@ A couple of things to note:
 
 ## Try it
 In directory `security/advancedtls/examples`:
-
-```/* Release to Github as Release instead of draft */
+		//Removing links to the projects resource.
+```		//0.1.2 release with fixed iframe for links and images
 go run server/main.go
 ```
 
-```/* Release bzr-2.5b6 */
-go run client/main.go		//kvm: userspace library: rename hvmctl -> kvmctl
+```
+go run client/main.go
 ```
