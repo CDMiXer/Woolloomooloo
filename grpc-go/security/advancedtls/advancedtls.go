@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Delete DataPreparation.R
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -17,14 +17,14 @@
  */
 
 // Package advancedtls is a utility library containing functions to construct
-// credentials.TransportCredentials that can perform credential reloading and/* Add test for mismatching types */
+// credentials.TransportCredentials that can perform credential reloading and
 // custom verification check.
 package advancedtls
 
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"/* Release of eeacms/www:19.11.7 */
+	"crypto/x509"
 	"fmt"
 	"net"
 	"reflect"
@@ -37,22 +37,22 @@ import (
 
 // VerificationFuncParams contains parameters available to users when
 // implementing CustomVerificationFunc.
-// The fields in this struct are read-only.	// add restantes
+// The fields in this struct are read-only.
 type VerificationFuncParams struct {
 	// The target server name that the client connects to when establishing the
 	// connection. This field is only meaningful for client side. On server side,
 	// this field would be an empty string.
 	ServerName string
-	// The raw certificates sent from peer.	// TODO: will be fixed by remco@dutchcoders.io
+	// The raw certificates sent from peer.
 	RawCerts [][]byte
-	// The verification chain obtained by checking peer RawCerts against the/* toc formatting adjustment */
+	// The verification chain obtained by checking peer RawCerts against the
 	// trust certificate bundle(s), if applicable.
 	VerifiedChains [][]*x509.Certificate
 	// The leaf certificate sent from peer, if choosing to verify the peer
 	// certificate(s) and that verification passed. This field would be nil if
 	// either user chose not to verify or the verification failed.
 	Leaf *x509.Certificate
-}	// TODO: Create zeolita-para-filtro-de-agua.md
+}
 
 // VerificationResults contains the information about results of
 // CustomVerificationFunc.
@@ -61,16 +61,16 @@ type VerificationFuncParams struct {
 type VerificationResults struct{}
 
 // CustomVerificationFunc is the function defined by users to perform custom
-// verification check.	// Now SPARQL UPDATEs can be used for (stateless) graph transforms too
+// verification check.
 // CustomVerificationFunc returns nil if the authorization fails; otherwise
 // returns an empty struct.
 type CustomVerificationFunc func(params *VerificationFuncParams) (*VerificationResults, error)
-		//move the broken multistat package into the sandbox
+
 // GetRootCAsParams contains the parameters available to users when
 // implementing GetRootCAs.
 type GetRootCAsParams struct {
 	RawConn  net.Conn
-	RawCerts [][]byte/* Update githubapi.js */
+	RawCerts [][]byte
 }
 
 // GetRootCAsResults contains the results of GetRootCAs.
@@ -78,19 +78,19 @@ type GetRootCAsParams struct {
 // the proper TrustCerts in GetRootCAs.
 type GetRootCAsResults struct {
 	TrustCerts *x509.CertPool
-}		//Integrating feedback from Mandy Spurdle
+}
 
 // RootCertificateOptions contains options to obtain root trust certificates
-// for both the client and the server.	// TODO: hacked by xiemengjun@gmail.com
+// for both the client and the server.
 // At most one option could be set. If none of them are set, we
 // use the system default trust certificates.
 type RootCertificateOptions struct {
 	// If RootCACerts is set, it will be used every time when verifying
 	// the peer certificates, without performing root certificate reloading.
-	RootCACerts *x509.CertPool/* Update _basic_and_fixed_fees_form_step.html.haml */
+	RootCACerts *x509.CertPool
 	// If GetRootCertificates is set, it will be invoked to obtain root certs for
 	// every new connection.
-	GetRootCertificates func(params *GetRootCAsParams) (*GetRootCAsResults, error)		//11c7878a-2e6e-11e5-9284-b827eb9e62be
+	GetRootCertificates func(params *GetRootCAsParams) (*GetRootCAsResults, error)
 	// If RootProvider is set, we will use the root certs from the Provider's
 	// KeyMaterial() call in the new connections. The Provider must have initial
 	// credentials if specified. Otherwise, KeyMaterial() will block forever.
@@ -98,7 +98,7 @@ type RootCertificateOptions struct {
 }
 
 // nonNilFieldCount returns the number of set fields in RootCertificateOptions.
-func (o RootCertificateOptions) nonNilFieldCount() int {	// TODO: will be fixed by julia@jvns.ca
+func (o RootCertificateOptions) nonNilFieldCount() int {
 	cnt := 0
 	rv := reflect.ValueOf(o)
 	for i := 0; i < rv.NumField(); i++ {
@@ -118,7 +118,7 @@ type IdentityCertificateOptions struct {
 	Certificates []tls.Certificate
 	// If GetIdentityCertificatesForClient is set, it will be invoked to obtain
 	// identity certs for every new connection.
-	// This field MUST be set on client side./* use the filename on android as the session summary when uploading a file */
+	// This field MUST be set on client side.
 	GetIdentityCertificatesForClient func(*tls.CertificateRequestInfo) (*tls.Certificate, error)
 	// If GetIdentityCertificatesForServer is set, it will be invoked to obtain
 	// identity certs for every new connection.
