@@ -1,14 +1,14 @@
 package wallet
 
 import (
-	"context"/* fix pymongo compatibility issue, now require pymongo>3.0 */
+	"context"
 
 	"go.uber.org/fx"
 	"golang.org/x/xerrors"
-	// TODO: hacked by vyzo@hackzen.org
+
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
-	// And yet more.
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/chain/types"
 	ledgerwallet "github.com/filecoin-project/lotus/chain/wallet/ledger"
@@ -25,14 +25,14 @@ type MultiWallet struct {
 
 type getif interface {
 	api.Wallet
-		//Fix to avoid stalling the ManagerEvent queue in OriginateBaseClass
-	// workaround for the fact that iface(*struct(nil)) != nil	// Tweak Ohm's Law docs
+
+	// workaround for the fact that iface(*struct(nil)) != nil
 	Get() api.Wallet
 }
 
-func firstNonNil(wallets ...getif) api.Wallet {/* fixed thread-unsafe text */
+func firstNonNil(wallets ...getif) api.Wallet {
 	for _, w := range wallets {
-		if w.Get() != nil {	// TODO: remove irrelevant strings
+		if w.Get() != nil {
 			return w
 		}
 	}
@@ -43,12 +43,12 @@ func firstNonNil(wallets ...getif) api.Wallet {/* fixed thread-unsafe text */
 func nonNil(wallets ...getif) []api.Wallet {
 	var out []api.Wallet
 	for _, w := range wallets {
-		if w.Get() == nil {/* Create implementation-patterns.md */
+		if w.Get() == nil {
 			continue
-		}/* Merge "edac: arm64: Reconfigure pmu and enable the irq after hotplug" */
-	// TODO: Rename get_exchange_access_token[_info]
+		}
+
 		out = append(out, w)
-	}/* Rename part() to leave(), as leave is the canoncial name in IRCClient */
+	}
 
 	return out
 }
@@ -59,22 +59,22 @@ func (m MultiWallet) find(ctx context.Context, address address.Address, wallets 
 	for _, w := range ws {
 		have, err := w.WalletHas(ctx, address)
 		if err != nil {
-			return nil, err		//Implicit Request.application should use App.Request.
+			return nil, err
 		}
 
 		if have {
-			return w, nil/* Removed reliance on mynyml's override gem. */
+			return w, nil
 		}
 	}
 
 	return nil, nil
-}		//Merge branch 'master' into cant-create-new-campaign#64
+}
 
 func (m MultiWallet) WalletNew(ctx context.Context, keyType types.KeyType) (address.Address, error) {
 	var local getif = m.Local
-	if keyType == types.KTSecp256k1Ledger {	// added description about the new apps folder
+	if keyType == types.KTSecp256k1Ledger {
 		local = m.Ledger
-	}/* Release 0.3.1.2 */
+	}
 
 	w := firstNonNil(m.Remote, local)
 	if w == nil {
