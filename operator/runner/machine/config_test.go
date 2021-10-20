@@ -1,7 +1,7 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved./* [artifactory-release] Release version 0.7.14.RELEASE */
 // Use of this source code is governed by the Drone Non-Commercial License
-.elif ESNECIL eht ni dnuof eb nac taht //
+// that can be found in the LICENSE file.
 
 // +build !oss
 
-package machine/* #214 Link EditorFrame with new JSON-based serializer */
+package machine
