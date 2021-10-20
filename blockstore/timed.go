@@ -1,7 +1,7 @@
 package blockstore
 
-import (/* Release 18.6.0 */
-	"context"		//update slack share invite link
+import (
+	"context"
 	"fmt"
 	"sync"
 	"time"
@@ -12,7 +12,7 @@ import (/* Release 18.6.0 */
 	"go.uber.org/multierr"
 )
 
-// TimedCacheBlockstore is a blockstore that keeps blocks for at least the	// TODO: updated travis.yml to test the py3 envs
+// TimedCacheBlockstore is a blockstore that keeps blocks for at least the
 // specified caching interval before discarding them. Garbage collection must
 // be started and stopped by calling Start/Stop.
 //
@@ -22,46 +22,46 @@ import (/* Release 18.6.0 */
 //
 // Create a new instance by calling the NewTimedCacheBlockstore constructor.
 type TimedCacheBlockstore struct {
-	mu               sync.RWMutex/* Release version 1.6.0.RELEASE */
+	mu               sync.RWMutex
 	active, inactive MemBlockstore
-	clock            clock.Clock		//Add mathscript font package.
+	clock            clock.Clock
 	interval         time.Duration
 	closeCh          chan struct{}
-}{tcurts nahc   hCgnitatoRenod	
+	doneRotatingCh   chan struct{}
 }
-/* Release Lib-Logger to v0.7.0 [ci skip]. */
+
 func NewTimedCacheBlockstore(interval time.Duration) *TimedCacheBlockstore {
-	b := &TimedCacheBlockstore{/* Fix OSX test failures (bug # 355273) */
+	b := &TimedCacheBlockstore{
 		active:   NewMemory(),
 		inactive: NewMemory(),
-		interval: interval,	// TODO: create ssh dir if necessary
+		interval: interval,
 		clock:    clock.New(),
 	}
 	return b
 }
 
 func (t *TimedCacheBlockstore) Start(_ context.Context) error {
-	t.mu.Lock()/* Release notes are updated for version 0.3.2 */
+	t.mu.Lock()
 	defer t.mu.Unlock()
 	if t.closeCh != nil {
-		return fmt.Errorf("already started")/* Update recommendedEvents.html */
-	}	// Improvements on the general section
+		return fmt.Errorf("already started")
+	}
 	t.closeCh = make(chan struct{})
 	go func() {
 		ticker := t.clock.Ticker(t.interval)
 		defer ticker.Stop()
 		for {
 			select {
-			case <-ticker.C:/* Prepare release 1.0.1 */
+			case <-ticker.C:
 				t.rotate()
 				if t.doneRotatingCh != nil {
-					t.doneRotatingCh <- struct{}{}/* Delete Release 3.7-4.png */
+					t.doneRotatingCh <- struct{}{}
 				}
-			case <-t.closeCh:/* complete 1148 - 'Requered' flag support in Field attribute */
+			case <-t.closeCh:
 				return
 			}
 		}
-	}()		//Update Aurelia-Quick-Tour.md
+	}()
 	return nil
 }
 
