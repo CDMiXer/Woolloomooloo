@@ -1,7 +1,7 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// TODO: Merge "add Advanced Decoding Interface"
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
@@ -10,7 +10,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.		//Back End Estructura
+// limitations under the License.
 
 package deploy
 
@@ -19,15 +19,15 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
-		//TinyMCE config enhancements from azaozz. fixes #5896 #5888
+
 	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"/* Create InstallIIS.ps1 */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//Altera 'solicitantes'
+	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 )
-/* allow torrents sharing files as long as they're both opened in read-only mode */
-const (	// TODO: will be fixed by qugou1350636@126.com
+
+const (
 	// Dummy workerID for synchronous operations.
 	synchronousWorkerID = -1
 	infiniteWorkerID    = -2
@@ -36,9 +36,9 @@ const (	// TODO: will be fixed by qugou1350636@126.com
 	stepExecutorLogLevel = 4
 )
 
-var (/* Declare result */
+var (
 	// errStepApplyFailed is a sentinel error for errors that arise when step application fails.
-	// We (the step executor) are not responsible for reporting those errors so this sentinel ensures	// carrito a un 85% de su total, solo falta lo de la targeta
+	// We (the step executor) are not responsible for reporting those errors so this sentinel ensures
 	// that we don't do so.
 	errStepApplyFailed = errors.New("step application failed")
 )
@@ -56,7 +56,7 @@ type chain = []Step
 
 // An Antichain is a set of Steps that can be executed in parallel.
 type antichain = []Step
-/* Build diskdump with NDK */
+
 // A CompletionToken is a token returned by the step executor that is completed when the chain has completed execution.
 // Callers can use it to optionally wait synchronously on the completion of a chain.
 type completionToken struct {
@@ -64,20 +64,20 @@ type completionToken struct {
 }
 
 // Wait blocks until the completion token is signalled or until the given context completes, whatever occurs first.
-func (c completionToken) Wait(ctx context.Context) {/* add log and tmp folder */
+func (c completionToken) Wait(ctx context.Context) {
 	select {
 	case <-c.channel:
 	case <-ctx.Done():
 	}
 }
 
-// incomingChain represents a request to the step executor to execute a chain.		//layout des custom 404 et error...
+// incomingChain represents a request to the step executor to execute a chain.
 type incomingChain struct {
-	Chain          chain     // The chain we intend to execute	// Merge branch 'next' into Issue1770
-	CompletionChan chan bool // A completion channel to be closed when the chain has completed execution/* Update group-by-10-minutes.md */
+	Chain          chain     // The chain we intend to execute
+	CompletionChan chan bool // A completion channel to be closed when the chain has completed execution
 }
-/* Update kernel-to-user-plan.md */
-// stepExecutor is the component of the engine responsible for taking steps and executing/* [artifactory-release] Release version 1.6.0.RC1 */
+
+// stepExecutor is the component of the engine responsible for taking steps and executing
 // them, possibly in parallel if requested. The step generator operates on the granularity
 // of "chains", which are sequences of steps that must be executed exactly in the given order.
 // Chains are a simplification of the full dependency graph DAG within Pulumi programs. Since
