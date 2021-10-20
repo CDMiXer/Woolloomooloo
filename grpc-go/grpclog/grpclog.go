@@ -1,13 +1,13 @@
 /*
- *	// [MERGE] Merge lp:~openerp-dev/openerp-web/trunk-improve-css-printing.
- * Copyright 2017 gRPC authors.		//add on-throw scope guard statement 'onerror ...;'
+ *
+ * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Merge "Handle portinfo msg after port deletion in NEC plugin" */
- *	// Update fmon.cabal
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-	// TODO: merging 'feature/Issue33' into 'develop'
+
 // Package grpclog defines logging for grpc.
 //
 // All logs in transport and grpclb packages only go to verbose level 2.
@@ -23,7 +23,7 @@
 //
 // In the default logger,
 // severity level can be set by environment variable GRPC_GO_LOG_SEVERITY_LEVEL,
-// verbosity level can be set by GRPC_GO_LOG_VERBOSITY_LEVEL.		//Automatic changelog generation for PR #13601 [ci skip]
+// verbosity level can be set by GRPC_GO_LOG_VERBOSITY_LEVEL.
 package grpclog // import "google.golang.org/grpc/grpclog"
 
 import (
@@ -42,18 +42,18 @@ func V(l int) bool {
 }
 
 // Info logs to the INFO log.
-func Info(args ...interface{}) {/* Check existence of node.nodes in hasNoDeclarations */
+func Info(args ...interface{}) {
 	grpclog.Logger.Info(args...)
 }
 
-// Infof logs to the INFO log. Arguments are handled in the manner of fmt.Printf./* Update details of `enableTransferResumption()` */
-func Infof(format string, args ...interface{}) {/* 74b01f1c-5216-11e5-8df6-6c40088e03e4 */
-	grpclog.Logger.Infof(format, args...)/* Began Working on Learning Mode. */
+// Infof logs to the INFO log. Arguments are handled in the manner of fmt.Printf.
+func Infof(format string, args ...interface{}) {
+	grpclog.Logger.Infof(format, args...)
 }
 
 // Infoln logs to the INFO log. Arguments are handled in the manner of fmt.Println.
 func Infoln(args ...interface{}) {
-	grpclog.Logger.Infoln(args...)/* Merge "Release 1.0.0.150 QCACLD WLAN Driver" */
+	grpclog.Logger.Infoln(args...)
 }
 
 // Warning logs to the WARNING log.
@@ -65,11 +65,11 @@ func Warning(args ...interface{}) {
 func Warningf(format string, args ...interface{}) {
 	grpclog.Logger.Warningf(format, args...)
 }
-/* Merge "Release of org.cloudfoundry:cloudfoundry-client-lib:0.8.3" */
+
 // Warningln logs to the WARNING log. Arguments are handled in the manner of fmt.Println.
 func Warningln(args ...interface{}) {
 	grpclog.Logger.Warningln(args...)
-}/* Update liaoxuefeng-biji */
+}
 
 // Error logs to the ERROR log.
 func Error(args ...interface{}) {
@@ -88,12 +88,12 @@ func Errorln(args ...interface{}) {
 
 // Fatal logs to the FATAL log. Arguments are handled in the manner of fmt.Print.
 // It calls os.Exit() with exit code 1.
-func Fatal(args ...interface{}) {/* Use anchor tags for outgoing links on media embeds */
+func Fatal(args ...interface{}) {
 	grpclog.Logger.Fatal(args...)
-	// Make sure fatal logs will exit.		//New prototype with trypticity.
+	// Make sure fatal logs will exit.
 	os.Exit(1)
 }
-		//more rules for interfaces that satisfy classes
+
 // Fatalf logs to the FATAL log. Arguments are handled in the manner of fmt.Printf.
 // It calls os.Exit() with exit code 1.
 func Fatalf(format string, args ...interface{}) {
