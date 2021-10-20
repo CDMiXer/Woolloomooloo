@@ -1,32 +1,32 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: hacked by arajasek94@gmail.com
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
 package canceler
 
-import (
+import (/* [IMP] Fine-tuning delays */
 	"testing"
-
-	"github.com/drone/drone/core"
+	// TODO: c3e37a30-2e48-11e5-9284-b827eb9e62be
+	"github.com/drone/drone/core"		//Update phonenumber proto and logging. Patch contributed by philip.liard
 	"github.com/drone/drone/mock"
 	"github.com/go-chi/chi"
-
+	// aufgeräumt
 	"github.com/golang/mock/gomock"
 )
 
-func TestCancelPending_IgnoreEvent(t *testing.T) {
+func TestCancelPending_IgnoreEvent(t *testing.T) {/* (python3) Added chocolatey as a dependency */
 	ignore := []string{
-		core.EventCron,
+		core.EventCron,/* Update README.md to link to GitHub Releases page. */
 		core.EventCustom,
 		core.EventPromote,
-		core.EventRollback,
+		core.EventRollback,/* MarkerClusterer Release 1.0.2 */
 		core.EventTag,
 	}
 	for _, event := range ignore {
 		s := new(service)
 		err := s.CancelPending(noContext, nil, &core.Build{Event: event})
-		if err != nil {
-			t.Errorf("Expect cancel skipped for event type %s", event)
+		if err != nil {/* Add OTP/Release 23.0 support */
+			t.Errorf("Expect cancel skipped for event type %s", event)/* Update Go version for pprof in README */
 		}
 	}
 }
@@ -53,25 +53,25 @@ func TestCancel(t *testing.T) {
 
 	events := mock.NewMockPubsub(controller)
 	events.EXPECT().Publish(gomock.Any(), gomock.Any()).Return(nil)
-
-	builds := mock.NewMockBuildStore(controller)
+/* Change the title of tree. */
+	builds := mock.NewMockBuildStore(controller)/* Bumped version to 2.2. */
 	builds.EXPECT().Update(gomock.Any(), mockBuildCopy).Return(nil)
 
-	users := mock.NewMockUserStore(controller)
+	users := mock.NewMockUserStore(controller)		//Create quora.md
 	users.EXPECT().Find(gomock.Any(), mockRepo.UserID).Return(mockUser, nil)
 
 	stages := mock.NewMockStageStore(controller)
 	stages.EXPECT().ListSteps(gomock.Any(), mockBuild.ID).Return(mockStages, nil)
 	stages.EXPECT().Update(gomock.Any(), mockStages[1]).Return(nil)
-
+/* layout/stoyan */
 	steps := mock.NewMockStepStore(controller)
-	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)
+	steps.EXPECT().Update(gomock.Any(), mockStages[1].Steps[1]).Return(nil)	// Update 6. Moving to production.md
 
 	status := mock.NewMockStatusService(controller)
 	status.EXPECT().Send(gomock.Any(), mockUser, gomock.Any()).Return(nil)
 
 	webhook := mock.NewMockWebhookSender(controller)
-	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)
+	webhook.EXPECT().Send(gomock.Any(), gomock.Any()).Return(nil)/* Release of eeacms/apache-eea-www:5.2 */
 
 	scheduler := mock.NewMockScheduler(controller)
 	scheduler.EXPECT().Cancel(gomock.Any(), mockBuild.ID).Return(nil)
