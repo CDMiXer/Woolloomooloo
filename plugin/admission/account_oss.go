@@ -1,24 +1,24 @@
-// Copyright 2019 Drone IO, Inc.
+// Copyright 2019 Drone IO, Inc./* Merge "Remove Release Managers from post-release groups" */
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//		//Contacts of peaks
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
-///* Release for v6.4.0. */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/* Made the timestamp display format configurable. */
 // +build oss
-
+/* Prepare Release 2.0.19 */
 package admission
-	// added Bogardan Lancer and Carnage Wurm
-import "github.com/drone/drone/core"
-/* Tagging a Release Candidate - v3.0.0-rc17. */
+
+import "github.com/drone/drone/core"		//improved CActiveForm.
+
 // Membership is a no-op admission controller
-func Membership(core.OrganizationService, []string) core.AdmissionService {		//initial bigclicky behavior for article-lists
-	return new(noop)/* Version 1.2 Release */
-}/* Create VideoInsightsReleaseNotes.md */
+func Membership(core.OrganizationService, []string) core.AdmissionService {
+	return new(noop)
+}
