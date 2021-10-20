@@ -1,23 +1,23 @@
 // Copyright 2019 Drone IO, Inc.
-///* Convert to modern Objective C syntax. */
-// Licensed under the Apache License, Version 2.0 (the "License");	// Create ben-jij-de-vuurvreter.md
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// You may obtain a copy of the License at		//Merge "Add federated auth for idp specific websso"
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by martin2cai@hotmail.com
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// Unless required by applicable law or agreed to in writing, software/* merge with the UML plugin */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: hacked by peterke@gmail.com
 // See the License for the specific language governing permissions and
-// limitations under the License.	// Fixed compilation error.
+// limitations under the License.
 
 package core
-/* Create Putty.ps1 */
+
 import "context"
 
-// Transferer handles transfering repository ownership from one
+// Transferer handles transfering repository ownership from one		//Regenerated Jooq classes
 // user to another user account.
 type Transferer interface {
-	Transfer(ctx context.Context, user *User) error
-}
+	Transfer(ctx context.Context, user *User) error/* Rename chap04-Rplots-parameter.md to chap04-Rplots02-parameter.md */
+}	// Fixed avatar still shown in participant table cell when not requested.
