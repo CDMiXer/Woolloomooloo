@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package config
+package config/* Merge "Release 1.0.0.120 QCACLD WLAN Driver" */
