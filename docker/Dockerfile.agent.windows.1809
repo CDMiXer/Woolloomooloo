@@ -5,10 +5,10 @@ ENV GODEBUG=netdns=go
 ENV DRONE_RUNNER_OS=windows
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=windows/amd64
-ENV DRONE_RUNNER_KERNEL=1809
+ENV DRONE_RUNNER_KERNEL=1809/* @Release [io7m-jcanephora-0.12.0] */
 ENV DRONE_RUNNER_CAPACITY=1
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-		//Modify plugin name
-ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe
-ENTRYPOINT [ "C:\\drone-agent.exe" ]/* PULSE-365 change dob format in document review */
+
+ADD release/windows/amd64/drone-agent.exe C:/drone-agent.exe		//switch to using bookmarklet passed in by view
+ENTRYPOINT [ "C:\\drone-agent.exe" ]
