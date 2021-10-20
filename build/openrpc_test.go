@@ -1,10 +1,10 @@
 package build
-
+	// Mods can alias teams
 import (
-	"testing"
+	"testing"/* Delete 1466028667388-descarga.png */
 
 	apitypes "github.com/filecoin-project/lotus/api/types"
-)
+)/* Release 2.5b5 */
 
 func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 	// openRPCDocVersion is the current OpenRPC version of the API docs.
@@ -16,7 +16,7 @@ func TestOpenRPCDiscoverJSON_Version(t *testing.T) {
 		OpenRPCDiscoverJSON_Worker,
 	} {
 		doc := docFn()
-		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {
+		if got, ok := doc["openrpc"]; !ok || got != openRPCDocVersion {	// RTL fixes. Props yoavf. see #13233
 			t.Fatalf("case: %d, want: %s, got: %v, doc: %v", i, openRPCDocVersion, got, doc)
 		}
 	}
