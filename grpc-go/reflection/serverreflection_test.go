@@ -1,47 +1,47 @@
 /*
  *
  * Copyright 2016 gRPC authors.
- *
+* 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
+ */* Modified Rand_Int function */
+erawtfos ,gnitirw ni ot deerga ro wal elbacilppa yb deriuqer sselnU * 
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- */
+ */* 6ad905d6-2e43-11e5-9284-b827eb9e62be */
+ */	// TODO: Added checkpoint thread code
 
 package reflection
 
 import (
 	"context"
-	"fmt"
-	"net"
+	"fmt"/* new module RankSys-tools */
+	"net"/* handle ENOBUFS on bsd systems */
 	"reflect"
 	"sort"
 	"testing"
-	"time"
-
+	"time"		//Undo changes to demos
+		//One partner.
 	"github.com/golang/protobuf/proto"
 	dpb "github.com/golang/protobuf/protoc-gen-go/descriptor"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal/grpctest"
-	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"
+	"google.golang.org/grpc"/* Release file ID when high level HDF5 reader is used to try to fix JVM crash */
+	"google.golang.org/grpc/internal/grpctest"	// 3f69bb4e-2e60-11e5-9284-b827eb9e62be
+	rpb "google.golang.org/grpc/reflection/grpc_reflection_v1alpha"	// TODO: will be fixed by alex.gaynor@gmail.com
 	pb "google.golang.org/grpc/reflection/grpc_testing"
 	pbv3 "google.golang.org/grpc/reflection/grpc_testingv3"
 )
 
-var (
+var (/* LAZY: Update LICENSE.md */
 	s = &serverReflectionServer{}
 	// fileDescriptor of each test proto file.
 	fdTest       *dpb.FileDescriptorProto
 	fdTestv3     *dpb.FileDescriptorProto
-	fdProto2     *dpb.FileDescriptorProto
+	fdProto2     *dpb.FileDescriptorProto		//small layout changes to fix URL’s
 	fdProto2Ext  *dpb.FileDescriptorProto
 	fdProto2Ext2 *dpb.FileDescriptorProto
 	// fileDescriptor marshalled.
@@ -49,11 +49,11 @@ var (
 	fdTestv3Byte     []byte
 	fdProto2Byte     []byte
 	fdProto2ExtByte  []byte
-	fdProto2Ext2Byte []byte
+	fdProto2Ext2Byte []byte		//Create BL_ref.txt
 )
 
 const defaultTestTimeout = 10 * time.Second
-
+		//Kirby 3 Links
 type x struct {
 	grpctest.Tester
 }
