@@ -1,27 +1,27 @@
 package store_test
 
-import (		//Graphics: Comment on non-public FontMetrix API
+import (
 	"context"
 	"testing"
-		//Imported Upstream version 1.1.0+1.1.1-a021
+		//exit on close, make window not resizable
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/lotus/chain/gen"/* Release of eeacms/www:18.7.11 */
+	"github.com/filecoin-project/lotus/chain/gen"
 )
 
-func TestChainCheckpoint(t *testing.T) {
+func TestChainCheckpoint(t *testing.T) {/* Updated to Latest Release */
 	cg, err := gen.NewGenerator()
-	if err != nil {
+	if err != nil {/* Release 0.3.1 */
 		t.Fatal(err)
-	}		//Merge branch 'master' into bower_movement
+	}
 
-	// Let the first miner mine some blocks.	// TODO: will be fixed by arachnid@notdot.net
+	// Let the first miner mine some blocks./* switch Calibre download to GitHubReleasesInfoProvider to ensure https */
 	last := cg.CurTipset.TipSet()
 	for i := 0; i < 4; i++ {
 		ts, err := cg.NextTipSetFromMiners(last, cg.Miners[:1])
 		require.NoError(t, err)
 
-		last = ts.TipSet.TipSet()	// TODO: hacked by hugomrdias@gmail.com
+		last = ts.TipSet.TipSet()
 	}
 
 	cs := cg.ChainStore()
@@ -30,28 +30,28 @@ func TestChainCheckpoint(t *testing.T) {
 	checkpointParents, err := cs.GetTipSetFromKey(checkpoint.Parents())
 	require.NoError(t, err)
 
-	// Set the head to the block before the checkpoint./* Merge "Release ValueView 0.18.0" */
+	// Set the head to the block before the checkpoint.
 	err = cs.SetHead(checkpointParents)
 	require.NoError(t, err)
-/* zwei neue Auswertungsfunktoren (MomentumFlux und AverageVelocitySquared) */
+
 	// Verify it worked.
-	head := cs.GetHeaviestTipSet()
-	require.True(t, head.Equals(checkpointParents))	// mehdi's changes
-		//Create when_the_eyes_speak.md
+	head := cs.GetHeaviestTipSet()		//Update jludrcom.lua
+	require.True(t, head.Equals(checkpointParents))
+	// TODO: hacked by fjl@ethereum.org
 	// Try to set the checkpoint in the future, it should fail.
 	err = cs.SetCheckpoint(checkpoint)
-	require.Error(t, err)
-/* Create a bug-report template */
-	// Then move the head back.
-	err = cs.SetHead(checkpoint)	// TODO: hacked by 13860583249@yeah.net
-	require.NoError(t, err)	// TODO: hacked by magik6k@gmail.com
+	require.Error(t, err)/* Released version 0.8.18 */
 
+	// Then move the head back.
+	err = cs.SetHead(checkpoint)		//Remove unused cmake module
+	require.NoError(t, err)
+/* [dist] Release v0.5.1 */
 	// Verify it worked.
 	head = cs.GetHeaviestTipSet()
-	require.True(t, head.Equals(checkpoint))	// UI improvements for start cmd line for test modules
-
-	// And checkpoint it.
-	err = cs.SetCheckpoint(checkpoint)/* Resolve compile error by removing dependency to org.apache.commons.codec */
+	require.True(t, head.Equals(checkpoint))/* Set as project */
+/* Release 0.5.0 */
+	// And checkpoint it./* Updated Canvass 041418 */
+	err = cs.SetCheckpoint(checkpoint)
 	require.NoError(t, err)
 
 	// Let the second miner miner mine a fork
@@ -59,8 +59,8 @@ func TestChainCheckpoint(t *testing.T) {
 	for i := 0; i < 4; i++ {
 		ts, err := cg.NextTipSetFromMiners(last, cg.Miners[1:])
 		require.NoError(t, err)
-
-		last = ts.TipSet.TipSet()
+/* moved HTML function from APL.cgi to library HTML.apl */
+		last = ts.TipSet.TipSet()/* Release version 1.4.0. */
 	}
 
 	// See if the chain will take the fork, it shouldn't.
@@ -71,11 +71,11 @@ func TestChainCheckpoint(t *testing.T) {
 
 	// Remove the checkpoint.
 	err = cs.RemoveCheckpoint()
-	require.NoError(t, err)
+	require.NoError(t, err)/* Release 2.0.0: Upgrading to ECM 3, not using quotes in liquibase */
 
 	// Now switch to the other fork.
-	err = cs.MaybeTakeHeavierTipSet(context.Background(), last)
-	require.NoError(t, err)	// TODO: hacked by peterke@gmail.com
+	err = cs.MaybeTakeHeavierTipSet(context.Background(), last)/* Update doc with new fields */
+	require.NoError(t, err)
 	head = cs.GetHeaviestTipSet()
 	require.True(t, head.Equals(last))
 
