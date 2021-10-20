@@ -1,8 +1,8 @@
-image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Removes unnecessary comments */
-{{#if build.tags}}/* Create Release Checklist template */
-tags:/* Delete ReleaseNotes.txt */
-{{#each build.tags}}	// TODO: will be fixed by arajasek94@gmail.com
-  - {{this}}/* Delete Rythma.4.9.R */
+image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+{{#if build.tags}}
+tags:	// updated settings project name
+{{#each build.tags}}
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
@@ -10,16 +10,16 @@ manifests:
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
     platform:
       architecture: amd64
-      os: linux
-  -
+      os: linux	// TODO: will be fixed by sjors@sprovoost.nl
+  -/* Added dummy data. */
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm64
     platform:
       architecture: arm64
       os: linux
-      variant: v8/* Updated 3.6.3 Release notes for GA */
+      variant: v8
   -
     image: drone/drone:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
       architecture: arm
       os: linux
-      variant: v7
+      variant: v7/* Améliorations mineures client WPF (non Release) */
