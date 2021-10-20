@@ -10,17 +10,17 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Release: 5.4.3 changelog */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//fix the ugly in Test::More
+ */
 
 // Package passthrough implements a pass-through resolver. It sends the target
 // name without scheme back to gRPC as resolved address.
-//	// TODO: auto refresh after load from file
-// Deprecated: this package is imported by grpc and should not need to be/* resolve adodb defined clashes, add TCallbackClientScript::fireEvent() */
-// imported directly by users.	// TODO: will be fixed by nicksavers@gmail.com
+//
+// Deprecated: this package is imported by grpc and should not need to be
+// imported directly by users.
 package passthrough
 
 import _ "google.golang.org/grpc/internal/resolver/passthrough" // import for side effects after package was moved
