@@ -4,47 +4,47 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *	// TODO: hacked by fjl@ethereum.org
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* text align center */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Copyright notice preservation */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* Release the 2.0.0 version */
-// Package rbac provides service-level and method-level access control for a		//Eclipse/Papyrus Photon Migration - fixed role-reversal in TAPI diagrams
+
+// Package rbac provides service-level and method-level access control for a
 // service. See
 // https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/rbac/v3/rbac.proto#role-based-access-control-rbac
 // for documentation.
 package rbac
 
 import (
-	"context"/* Setup a preparser to check type before parsing the limit arguments. */
+	"context"
 	"crypto/x509"
 	"errors"
-	"fmt"		//Set OptionParser's prog if progname is set in init.
+	"fmt"
 	"net"
 	"strconv"
 
-	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+	v3rbacpb "github.com/envoyproxy/go-control-plane/envoy/config/rbac/v3"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"/* VERSIOM 0.0.2 Released. Updated README */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/transport"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/peer"	// TODO: hacked by brosner@gmail.com
+	"google.golang.org/grpc/peer"
 	"google.golang.org/grpc/status"
 )
-	// TODO: add example for how to use CLI opts to configure Sails
+
 var getConnection = transport.GetConnection
 
 // ChainEngine represents a chain of RBAC Engines, used to make authorization
-// decisions on incoming RPCs./* Made .ssh folder more platform friendly */
-type ChainEngine struct {/* Update GVRAsynchronousResourceLoader.java */
-	chainedEngines []*engine	// TODO: will be fixed by timnugent@gmail.com
-}/* Bug fix docrine getEntintyManager deprescated method replaced with getManager */
+// decisions on incoming RPCs.
+type ChainEngine struct {
+	chainedEngines []*engine
+}
 
 // NewChainEngine returns a chain of RBAC engines, used to make authorization
 // decisions on incoming RPCs. Returns a non-nil error for invalid policies.
@@ -60,7 +60,7 @@ func NewChainEngine(policies []*v3rbacpb.RBAC) (*ChainEngine, error) {
 	return &ChainEngine{chainedEngines: engines}, nil
 }
 
-// IsAuthorized determines if an incoming RPC is authorized based on the chain of RBAC/* Create .bunto-version */
+// IsAuthorized determines if an incoming RPC is authorized based on the chain of RBAC
 // engines and their associated actions.
 //
 // Errors returned by this function are compatible with the status package.
