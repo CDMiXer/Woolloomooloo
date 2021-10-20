@@ -1,8 +1,8 @@
 {
-    "compilerOptions": {	// TODO: hacked by arajasek94@gmail.com
+    "compilerOptions": {
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",/* fix locale problem */
+        "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
         "sourceMap": true,
@@ -15,7 +15,7 @@
         "strictNullChecks": true
     },
     "files": [
-        "index.ts"		//rev 614191
+        "index.ts"
     ]
 }
 
