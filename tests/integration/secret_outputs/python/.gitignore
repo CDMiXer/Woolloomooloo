@@ -1,5 +1,5 @@
-*.pyc/* - add keyckloak client library */
+*.pyc
 /.pulumi/
 /dist/
-/*.egg-info		//1bd89a54-2e4e-11e5-9284-b827eb9e62be
-venv/
+/*.egg-info
+venv//* Release 3.2 180.1*. */
