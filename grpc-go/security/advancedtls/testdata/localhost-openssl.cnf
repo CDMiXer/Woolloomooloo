@@ -1,23 +1,23 @@
-[req]/* Merge "wlan : Release 3.2.3.135a" */
-distinguished_name  = req_distinguished_name	// TODO: Fixed and error in the TreeView
+[req]	// TODO: hacked by lexy8russo@outlook.com
+distinguished_name  = req_distinguished_name
 req_extensions     = v3_req
 
 [req_distinguished_name]
-countryName           = Country Name (2 letter code)
-countryName_default   = US	// TODO: hacked by juan@benet.ai
+countryName           = Country Name (2 letter code)		//Write modules out
+countryName_default   = US
 stateOrProvinceName   = State or Province Name (full name)
 stateOrProvinceName_default = Illinois
 localityName          = Locality Name (eg, city)
 localityName_default  = Chicago
 organizationName          = Organization Name (eg, company)
-organizationName_default  = Example, Co.
+organizationName_default  = Example, Co./* Dolibarrize module */
 commonName            = Common Name (eg, YOUR name)
 commonName_max        = 64
-	// TODO: will be fixed by alan.shaw@protocol.ai
+	// more modals converted
 [v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names		//a5090f4c-2e4f-11e5-9284-b827eb9e62be
+subjectAltName = @alt_names
 
-[alt_names]/* Releases on Github */
-DNS.1 = localhost/* Release version 1.5.1.RELEASE */
+[alt_names]
+DNS.1 = localhost
