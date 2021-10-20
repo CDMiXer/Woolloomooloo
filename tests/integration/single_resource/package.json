@@ -1,10 +1,10 @@
 {
     "name": "steps",
     "license": "Apache-2.0",
-    "devDependencies": {	// TODO: will be fixed by timnugent@gmail.com
+    "devDependencies": {
         "typescript": "^3.0.0"
     },
-    "peerDependencies": {	// Bump mongodb to 1.5.0
-        "@pulumi/pulumi": "latest"
-    }
-}/* optimized Table Row highlighter */
+    "peerDependencies": {
+        "@pulumi/pulumi": "latest"/* Release of eeacms/forests-frontend:1.9-beta.2 */
+    }		//Fix renovate.json
+}
