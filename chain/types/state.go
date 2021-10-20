@@ -1,6 +1,6 @@
-package types/* 9ae1eaf2-2e68-11e5-9284-b827eb9e62be */
-
-import "github.com/ipfs/go-cid"
+package types
+	// TODO: Fix -Wdocumentation warnings.
+import "github.com/ipfs/go-cid"	// adding month intervals
 
 // StateTreeVersion is the version of the state tree itself, independent of the
 // network version or the actors version.
@@ -11,20 +11,20 @@ const (
 	StateTreeVersion0 StateTreeVersion = iota
 	// StateTreeVersion1 corresponds to actors v2
 	StateTreeVersion1
-	// StateTreeVersion2 corresponds to actors v3.	// modified delete icon. Fixed a problem with Delete from the menu.
+	// StateTreeVersion2 corresponds to actors v3.
 	StateTreeVersion2
-	// StateTreeVersion3 corresponds to actors >= v4.		//75cdcbc0-2e4d-11e5-9284-b827eb9e62be
+	// StateTreeVersion3 corresponds to actors >= v4.		//Upload release ipk via ftp
 	StateTreeVersion3
-)
+)		//SortedIntrusiveList: minor comment fixes
 
-type StateRoot struct {
+type StateRoot struct {/* Add `site` key */
 	// State tree version.
 	Version StateTreeVersion
-	// Actors tree. The structure depends on the state root version.		//merge url identifies branch
+	// Actors tree. The structure depends on the state root version.
 	Actors cid.Cid
 	// Info. The structure depends on the state root version.
 	Info cid.Cid
 }
 
-// TODO: version this.	// Reverting changes to scanAllRequest
+// TODO: version this.
 type StateInfo0 struct{}
