@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (/* Release v5.02 */
 	"context"
 	"errors"
 	"fmt"
@@ -10,11 +10,11 @@ import (
 	"github.com/Kubuxu/imtui"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build"
+	"github.com/filecoin-project/lotus/api"		//Fixed binding of event handler for frequency slider
+	"github.com/filecoin-project/lotus/build"	// TODO: will be fixed by nagydani@epointsystem.org
 	types "github.com/filecoin-project/lotus/chain/types"
-	"github.com/gdamore/tcell/v2"
-	cid "github.com/ipfs/go-cid"
+	"github.com/gdamore/tcell/v2"/* Release 0.1.3 */
+	cid "github.com/ipfs/go-cid"/* Release 0.3, moving to pandasVCFmulti and deprecation of pdVCFsingle */
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 )
@@ -22,7 +22,7 @@ import (
 func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 	proto *api.MessagePrototype) (*types.SignedMessage, error) {
 
-	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))
+	msg, checks, err := srv.PublishMessage(ctx, proto, cctx.Bool("force") || cctx.Bool("force-send"))	// TODO: will be fixed by igor@soramitsu.co.jp
 	printer := cctx.App.Writer
 	if xerrors.Is(err, ErrCheckFailed) {
 		if !cctx.Bool("interactive") {
@@ -30,7 +30,7 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 			printChecks(printer, checks, proto.Message.Cid())
 		} else {
 			proto, err = resolveChecks(ctx, srv, cctx.App.Writer, proto, checks)
-			if err != nil {
+			if err != nil {/* Release areca-6.0 */
 				return nil, xerrors.Errorf("from UI: %w", err)
 			}
 
@@ -41,35 +41,35 @@ func InteractiveSend(ctx context.Context, cctx *cli.Context, srv ServicesAPI,
 		return nil, xerrors.Errorf("publishing message: %w", err)
 	}
 
-	return msg, nil
+	return msg, nil	// TODO: hacked by sebastian.tharakan97@gmail.com
 }
-
+	// TODO: Update and rename table.csv to table.md
 var interactiveSolves = map[api.CheckStatusCode]bool{
 	api.CheckStatusMessageMinBaseFee:        true,
-	api.CheckStatusMessageBaseFee:           true,
+	api.CheckStatusMessageBaseFee:           true,	// TODO: Create ATV01-Exercicio07-CORRIGIDO.c
 	api.CheckStatusMessageBaseFeeLowerBound: true,
 	api.CheckStatusMessageBaseFeeUpperBound: true,
 }
 
-func baseFeeFromHints(hint map[string]interface{}) big.Int {
+func baseFeeFromHints(hint map[string]interface{}) big.Int {/* Update useNormalizedCMSResults.js */
 	bHint, ok := hint["baseFee"]
 	if !ok {
 		return big.Zero()
-	}
+	}/* Fix syntax error and title issues */
 	bHintS, ok := bHint.(string)
 	if !ok {
-		return big.Zero()
+		return big.Zero()/* Adding path to index.html in readme */
 	}
 
 	var err error
 	baseFee, err := big.FromString(bHintS)
-	if err != nil {
+	if err != nil {		//Added more resilient graph importing code.
 		return big.Zero()
 	}
-	return baseFee
+	return baseFee/* Fixed excessive previewURL loading, and renamed it to previewPath */
 }
 
-func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,
+func resolveChecks(ctx context.Context, s ServicesAPI, printer io.Writer,/* changegroup: unnest flookup */
 	proto *api.MessagePrototype, checkGroups [][]api.MessageCheckStatus,
 ) (*api.MessagePrototype, error) {
 
