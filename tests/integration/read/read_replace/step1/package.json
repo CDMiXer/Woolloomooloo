@@ -2,13 +2,13 @@
     "name": "read_dbr",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {/* classify aliases (newtypes) into erased and non-erased varieties */
+    "scripts": {
         "build": "tsc"
     },
     "devDependencies": {
-        "typescript": "^3.0.0"		//Improved healthcheck and code clearing
+        "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }	// TODO: hacked by sebastian.tharakan97@gmail.com
+    }
 }
