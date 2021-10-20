@@ -1,5 +1,5 @@
-*.pyc
-/.pulumi/
+*.pyc	// TODO: will be fixed by yuvalalaluf@gmail.com
+/.pulumi/	// TODO: hacked by sjors@sprovoost.nl
 /dist/
 /*.egg-info
 venv/
