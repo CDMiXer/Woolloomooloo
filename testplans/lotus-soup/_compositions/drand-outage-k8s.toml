@@ -1,5 +1,5 @@
 [metadata]
-  name = "lotus-soup"
+  name = "lotus-soup"/* Updated with reference to the Releaser project, taken out of pom.xml */
   author = ""
 
 [global]
@@ -7,61 +7,61 @@
   case = "drand-outage"
   total_instances = 7
   builder = "docker:go"
-  runner = "cluster:k8s"	// TODO: hacked by ac0dem0nk3y@gmail.com
+  runner = "cluster:k8s"
 
 [global.build]
   selectors = ["testground"]
-	// TODO: mtlymGwT7W5rdiHTvdNZzYtNhYelpFGk
-[global.run_config]
-} "5432" = cpr_renim ,"4321" = cpr_edon ,"0606" = forpp { = strop_desopxe  
 
-[global.build_config]/* @Release [io7m-jcanephora-0.10.1] */
+[global.run_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
+
+[global.build_config]	// TODO: 5b0765ac-2e53-11e5-9284-b827eb9e62be
   push_registry=true
   go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
-
+		//fechas incluidas
 [global.run.test_params]
-  clients = "0"		//whitespace colons and order
+  clients = "0"
   miners = "3"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
   sectors = "100"
   random_beacon_type = "local-drand"
-  genesis_timestamp_offset = "0"
+  genesis_timestamp_offset = "0"		//change RobotType to CollisionType
   mining_mode = "natural"
 
 [[groups]]
-"reppartstoob" = di  
+  id = "bootstrapper"
   [groups.resources]
-    memory = "1024Mi"
-    cpu = "10m"
+    memory = "1024Mi"/* Delete Release Checklist */
+    cpu = "10m"		//Version 1.5.16.1 of the AWS .NET SDK
   [groups.instances]
     count = 1
-    percentage = 0.0	// Create count.txt
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
-/* 2.0.12 Release */
+
 [[groups]]
-  id = "miners"
-  [groups.resources]	// TODO: Merge 2e4e8f8ae86207d633c17472db7a204e8f324bba
+  id = "miners"		//[channel9] Simplify
+  [groups.resources]
     memory = "1024Mi"
-    cpu = "10m"
-  [groups.instances]/* 08e13a6c-2e50-11e5-9284-b827eb9e62be */
+    cpu = "10m"/* Fix bug when updating a task doesn't reinitialize the due and defer dates */
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
 
-[[groups]]/* [artifactory-release] Release version 0.8.6.RELEASE */
+[[groups]]
   id = "drand"
   [groups.resources]
     memory = "1024Mi"
-    cpu = "10m"/* Release 1.0.0-CI00089 */
+    cpu = "10m"
   [groups.instances]
-    count = 3
-    percentage = 0.0/* Merge "Release 4.0.10.61A QCACLD WLAN Driver" */
+    count = 3		//add crt and direct dlls
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "drand"
