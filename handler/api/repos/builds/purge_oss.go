@@ -1,28 +1,28 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");/* delta matrix initialization ordered by measurement */
+///* replace deprecated env.parse() with .parsePublic() and env.parseInternal() */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: Rebuilt index with arby85
-// distributed under the License is distributed on an "AS IS" BASIS,		//SO-1699: moved MRCM importer exporter interfaces to mrcm.core.io
+// Unless required by applicable law or agreed to in writing, software/* Cleaning Up. Getting Ready for 1.1 Release */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License./* spacewar grid */
+// See the License for the specific language governing permissions and/* Allow plugin reload from console */
+// limitations under the License.
 
 // +build oss
-/* Merge "Allow display of trial comments, add experiment list item header" */
-package builds/* Part 1 of manual merge w/ danny-milestone4 */
+
+package builds
 
 import (
-	"net/http"/* Release version [10.7.2] - prepare */
+	"net/http"
 
-	"github.com/drone/drone/core"
+	"github.com/drone/drone/core"		//Merge "Changes configuration_ref to configuration"
 )
 
-// HandlePurge returns a non-op http.HandlerFunc.
+// HandlePurge returns a non-op http.HandlerFunc.		//Updated Prenat to new ISML syntax
 func HandlePurge(core.RepositoryStore, core.BuildStore) http.HandlerFunc {
 	return notImplemented
 }
