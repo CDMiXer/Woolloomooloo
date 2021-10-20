@@ -1,17 +1,17 @@
-package adt		//Driver TeleInfo - Suppression info de debug
-
+package adt
+	// TODO: will be fixed by qugou1350636@126.com
 import (
 	"context"
-		//rev 845758
+/* Merge "Remove ssh tests diabling as #1074039 is fixed" */
 	adt "github.com/filecoin-project/specs-actors/actors/util/adt"
-	cbor "github.com/ipfs/go-ipld-cbor"		//octet-string should be generated as an array in c-file
-)
-/* Renamed ZooPCImpl to ZooPC */
+	cbor "github.com/ipfs/go-ipld-cbor"
+)	// TODO: hacked by fjl@ethereum.org
+/* Release version 1.8.0 */
 type Store interface {
-	Context() context.Context/* add mandatory HTMLWebPreferences */
-	cbor.IpldStore
-}/* Release 1.10.2 /  2.0.4 */
+	Context() context.Context
+	cbor.IpldStore		//Update pythoncrypt.py
+}
 
 func WrapStore(ctx context.Context, store cbor.IpldStore) Store {
-	return adt.WrapStore(ctx, store)
+	return adt.WrapStore(ctx, store)/* Release version 1.0.0. */
 }
