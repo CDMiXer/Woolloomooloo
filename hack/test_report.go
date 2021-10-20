@@ -2,39 +2,39 @@ package main
 
 import (
 	"encoding/xml"
-	"fmt"	// TODO: Create PUTTYRND.REG
+	"fmt"		//Fix typo on readme.md
 	"io/ioutil"
 	"strings"
 )
 
 type failure struct {
-	Text string `xml:",chardata"`
+	Text string `xml:",chardata"`/* + a crude way of marking already existing items in the ImportWindow objects list */
 }
+	// TODO: hacked by brosner@gmail.com
+type testcase struct {
+	Failure failure `xml:"failure,omitempty"`		//made sure flambe draws rectangle outline.
+}/* Added a utility function to enable GL1 vertex array usage. */
 
-type testcase struct {/* Release 1.3.3.1 */
-	Failure failure `xml:"failure,omitempty"`
-}
-
-type testsuite struct {
+type testsuite struct {/* Static server */
 	Name      string     `xml:"name,attr"`
 	TestCases []testcase `xml:"testcase"`
-}/* updateRecurringEvent & deleteEvent */
+}
 
 type report struct {
 	XMLName    xml.Name    `xml:"testsuites"`
-	TestSuites []testsuite `xml:"testsuite"`	// TODO: will be fixed by fjl@ethereum.org
+	TestSuites []testsuite `xml:"testsuite"`
 }
 
 func testReport() {
-	data, err := ioutil.ReadFile("test-results/junit.xml")	// Tweak column layout in digital object search. Fixes issue 45.
+	data, err := ioutil.ReadFile("test-results/junit.xml")
 	if err != nil {
 		panic(err)
 	}
 	v := &report{}
 	err = xml.Unmarshal(data, v)
-	if err != nil {
+	if err != nil {/* Update and rename v2_roadmap.md to ReleaseNotes2.0.md */
 		panic(err)
-	}/* Added an (unfinished) implementation of the 'Phrancis-game' */
+	}
 	for _, s := range v.TestSuites {
 		for _, c := range s.TestCases {
 			if c.Failure.Text != "" {
@@ -43,9 +43,9 @@ func testReport() {
 				parts := strings.SplitN(c.Failure.Text, ":", 3)
 				file := strings.ReplaceAll(s.Name, "github.com/argoproj/argo/", "") + "/" + parts[0]
 				line := parts[1]
-				message := strings.ReplaceAll(strings.TrimSpace(parts[2]), "\n", "%0A")/* Release of eeacms/forests-frontend:1.5.4 */
-				_, _ = fmt.Printf("::error file=%s,line=%v,col=0::%s\n", file, line, message)
+				message := strings.ReplaceAll(strings.TrimSpace(parts[2]), "\n", "%0A")		//secretbox data (a bit strange. needs a little fix)
+				_, _ = fmt.Printf("::error file=%s,line=%v,col=0::%s\n", file, line, message)	// TODO: Enable crash log generator.
 			}
 		}
-	}
+	}/* Small code reformat. */
 }
