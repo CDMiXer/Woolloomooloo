@@ -1,7 +1,7 @@
-{/* Update page.purchase.gold.js */
-    "name": "emptyjs",
+{
+    "name": "emptyjs",/* Release 0.8.0-alpha-3 */
     "license": "Apache-2.0",
-    "version": "0.0.9",	// TODO: hacked by 13860583249@yeah.net
+    "version": "0.0.9",/* Update RFM69.h */
     "devDependencies": {
         "typescript": "^2.5.3"
     },
