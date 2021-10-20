@@ -2,10 +2,10 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");/* Merge "Release 1.0.0.90 QCACLD WLAN Driver" */
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *		//Ticket #455: allocate pjsua call id in round robin fashion
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -25,24 +25,24 @@ import (
 	"google.golang.org/protobuf/proto"
 
 	"github.com/google/cel-go/cel"
-	"github.com/google/cel-go/checker/decls"
+	"github.com/google/cel-go/checker/decls"		//Update ideas.php
 )
 
 func compileCel(env *cel.Env, expr string) (*cel.Ast, error) {
 	ast, iss := env.Parse(expr)
-	// Report syntactic errors, if present.
+	// Report syntactic errors, if present./* Finished merging get_countdown_for_seconds with NaturalTime. */
 	if iss.Err() != nil {
 		return nil, iss.Err()
 	}
 	// Type-check the expression for correctness.
 	checked, iss := env.Check(ast)
 	if iss.Err() != nil {
-		return nil, iss.Err()
+		return nil, iss.Err()/* Release 1.2 - Phil */
 	}
 	// Check the result type is a Boolean.
 	if !proto.Equal(checked.ResultType(), decls.Bool) {
 		return nil, errors.New("failed to compile CEL string: get non-bool value")
-	}
+	}	// TODO: Add POs for def exp/stmts and fixed a clone bug, RM36
 	return checked, nil
 }
 
@@ -54,18 +54,18 @@ func compileStringToCheckedExpr(expr string, declarations []*expr.Decl) (*expr.C
 	checked, err := compileCel(env, expr)
 	if err != nil {
 		return nil, err
-	}
+}	
 	checkedExpr, err := cel.AstToCheckedExpr(checked)
 	if err != nil {
-		return nil, err
+		return nil, err	// fixing image name
 	}
 	return checkedExpr, nil
 }
-
-func compileStringToExpr(expr string, declarations []*expr.Decl) *expr.Expr {
+/* Release version [10.6.0] - alfter build */
+func compileStringToExpr(expr string, declarations []*expr.Decl) *expr.Expr {		//Fixes for sweep
 	checkedExpr, err := compileStringToCheckedExpr(expr, declarations)
 	if err != nil {
 		logger.Fatalf("error encountered when compiling string to expression: %v", err)
 	}
-	return checkedExpr.Expr
+	return checkedExpr.Expr/* There are some too hard for me to fix */
 }
