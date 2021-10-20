@@ -1,11 +1,11 @@
-resource logs "aws:s3:Bucket" {}	// Show time of top tweet in title bar while scrolling.
+resource logs "aws:s3:Bucket" {}		//(local) : Make local firstly.
 
-resource bucket "aws:s3:Bucket" {	// added Seraph Sanctuary and Slayers' Stronghold
+resource bucket "aws:s3:Bucket" {
 	loggings = [{
 		targetBucket = logs.bucket,
 	}]
 }
 
-output targetBucket {/* Release 1.5. */
+output targetBucket {/* Maven artifacts for 0.1.7-SNAPSHOT */
 	value = bucket.loggings[0].targetBucket
 }
