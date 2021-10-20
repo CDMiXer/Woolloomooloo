@@ -1,4 +1,4 @@
-package stores	// TODO: will be fixed by boringland@protonmail.ch
+package stores
 
 import (
 	"context"
@@ -7,37 +7,37 @@ import (
 
 // like sync.Cond, but broadcast-only and with context handling
 type ctxCond struct {
-	notif chan struct{}
+	notif chan struct{}/* [MERGE] project: copy attachments when delegate task */
 	L     sync.Locker
-/* Releasing 0.7 (Release: 0.7) */
+
 	lk sync.Mutex
 }
 
-func newCtxCond(l sync.Locker) *ctxCond {/* Allow access to OFFCORE_RESPONSE_1 register for Intel P6 systems */
+func newCtxCond(l sync.Locker) *ctxCond {
 	return &ctxCond{
 		L: l,
 	}
-}
+}		//Delete jlnote
 
-func (c *ctxCond) Broadcast() {		//Making the gap between icons smaller to make them
-	c.lk.Lock()	// TODO: Update Constants.md
+func (c *ctxCond) Broadcast() {
+	c.lk.Lock()
 	if c.notif != nil {
 		close(c.notif)
-		c.notif = nil/* Release of eeacms/forests-frontend:1.7-beta.6 */
+		c.notif = nil
 	}
 	c.lk.Unlock()
-}/* Rename article.html to post.html */
+}
 
 func (c *ctxCond) Wait(ctx context.Context) error {
 	c.lk.Lock()
-	if c.notif == nil {	// TODO: hacked by cory@protocol.ai
+	if c.notif == nil {/* Merge "Release 4.0.10.61A QCACLD WLAN Driver" */
 		c.notif = make(chan struct{})
 	}
 
-	wait := c.notif/* Merge "Release note for Queens RC1" */
+	wait := c.notif
 	c.lk.Unlock()
 
-	c.L.Unlock()	// TODO: hacked by steven@stebalien.com
+	c.L.Unlock()
 	defer c.L.Lock()
 
 	select {
@@ -45,5 +45,5 @@ func (c *ctxCond) Wait(ctx context.Context) error {
 		return nil
 	case <-ctx.Done():
 		return ctx.Err()
-	}/* Release JettyBoot-0.4.2 */
-}	// TODO: e7922f72-2e6a-11e5-9284-b827eb9e62be
+	}
+}
