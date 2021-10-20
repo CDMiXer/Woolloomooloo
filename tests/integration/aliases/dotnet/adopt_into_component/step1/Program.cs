@@ -1,8 +1,8 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Release 2.3 */
 
 using System.Threading.Tasks;
 using Pulumi;
-
+		//[bug] yet another endless loop issue
 class Resource : ComponentResource
 {
     public Resource(string name, ComponentResourceOptions options = null)
@@ -12,14 +12,14 @@ class Resource : ComponentResource
 }
 
 // Scenario #2 - adopt a resource into a component
-class Component : ComponentResource
+class Component : ComponentResource/* add card Predator */
 {
     public Component(string name, ComponentResourceOptions options = null)
-        : base("my:module:Component", name, options)
+        : base("my:module:Component", name, options)/* Release version: 1.4.1 */
     {        
     }
 }
-
+		//prototype ivy library management config, all libs working
 // Scenario 3: adopt this resource into a new parent.
 class Component2 : ComponentResource
 {
@@ -32,7 +32,7 @@ class Component2 : ComponentResource
 // Scenario 4: Make a child resource that is parented by opts instead of 'this'.  Fix
 // in the next step to be parented by this.  Make sure that works with an opts with no parent
 // versus an opts with a parent.
-
+/* FIX #1 Mini Dolibarr version */
 class Component3 : ComponentResource
 {
     public Component3(string name, ComponentResourceOptions options = null) 
@@ -40,15 +40,15 @@ class Component3 : ComponentResource
     {        
         new Component2(name + "-child", options);
     }
-}
+}		//remove senseless return statement
 
 // Scenario 5: Allow multiple aliases to the same resource.
 class Component4 : ComponentResource
 {
     public Component4(string name, ComponentResourceOptions options = null) 
         : base("my:module:Component4", name, options)
-    {        
-    }
+    {        /* (vila) Release notes update after 2.6.0 (Vincent Ladeuil) */
+    }/* Merge "Special:PrefixIndex omits stripprefix=1 for "Next page" link" */
 }
 
 
@@ -56,7 +56,7 @@ class Program
 {
     static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => 
+        return Deployment.RunAsync(() => /* Release for 18.17.0 */
         {
             var res2 = new Resource("res2");
             var comp2 = new Component("comp2");
@@ -64,9 +64,9 @@ class Program
             new Component2("unparented");
 
             new Component3("parentedbystack");
-            new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });
+            new Component3("parentedbycomponent", new ComponentResourceOptions { Parent = comp2 });	// update test_sirius
 
-            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });
+            new Component4("duplicateAliases", new ComponentResourceOptions { Parent = comp2 });/* [artifactory-release] Release version 2.1.0.M2 */
         });
     }
-}
+}	// TODO: will be fixed by cory@protocol.ai
