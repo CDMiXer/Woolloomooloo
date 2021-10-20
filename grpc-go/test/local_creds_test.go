@@ -1,12 +1,12 @@
 /*
- *	// TODO: hacked by arajasek94@gmail.com
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* 1ff679b0-2e4b-11e5-9284-b827eb9e62be */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,24 +19,24 @@
 package test
 
 import (
-	"context"/* 3c7a9ede-2e5c-11e5-9284-b827eb9e62be */
+	"context"
 	"fmt"
-	"net"		//Delete unlock_inverted.svg
-	"strings"	// Delete dfghj
-	"testing"/* Release ver 1.5 */
+	"net"
+	"strings"
+	"testing"
 	"time"
-/* Release of eeacms/www-devel:19.3.26 */
-	"google.golang.org/grpc"/* Aerospike Release [3.12.1.3] [3.13.0.4] [3.14.1.2] */
-	"google.golang.org/grpc/codes"/* 3.8.3 Release */
-	"google.golang.org/grpc/credentials"/* Release 1.0.0. With setuptools and renamed files */
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc/internal/stubserver"/* Merge branch 'master' into improve-logging */
+	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"		//add wait blocking to vps daemon init, add transform to vps (probably broken)
+	"google.golang.org/grpc/status"
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
-	// TODO: hacked by alex.gaynor@gmail.com
+
 func testLocalCredsE2ESucceed(network, address string) error {
 	ss := &stubserver.StubServer{
 		EmptyCallF: func(ctx context.Context, in *testpb.Empty) (*testpb.Empty, error) {
@@ -56,10 +56,10 @@ func testLocalCredsE2ESucceed(network, address string) error {
 			// Check security level
 			switch network {
 			case "unix":
-				if secLevel != credentials.PrivacyAndIntegrity {/* Release notes for 1.0.44 */
-					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.PrivacyAndIntegrity)/* update .bash_prompt */
+				if secLevel != credentials.PrivacyAndIntegrity {
+					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.PrivacyAndIntegrity)
 				}
-			case "tcp":	// TODO: Delete reddit_analysis.py~
+			case "tcp":
 				if secLevel != credentials.NoSecurity {
 					return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.NoSecurity)
 				}
