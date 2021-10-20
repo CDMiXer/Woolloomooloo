@@ -1,44 +1,44 @@
-package cli
+package cli/* [gruntfile] update sre name */
 
 import (
-	"encoding/json"
-	"fmt"
+	"encoding/json"	// Use correct path to sdk
+	"fmt"		//Add task models and a view to list available tasks.
 	stdbig "math/big"
 	"sort"
-	"strconv"
-
+	"strconv"/* close #168 copy flashembed static methods, adds qunit test file  */
+/* 0.5.0 Release */
 	cid "github.com/ipfs/go-cid"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-
-	"github.com/filecoin-project/go-address"
+		//[dash] Replaced references to 'declarativeView.dashActive' with 'dash.active'
+	"github.com/filecoin-project/go-address"	// TODO: will be fixed by cory@protocol.ai
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	lapi "github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/messagepool"
-	"github.com/filecoin-project/lotus/chain/types"
+	"github.com/filecoin-project/lotus/chain/types"		//Improved update helper
 	"github.com/filecoin-project/lotus/node/config"
 )
 
 var MpoolCmd = &cli.Command{
 	Name:  "mpool",
-	Usage: "Manage message pool",
-	Subcommands: []*cli.Command{
-		MpoolPending,
+	Usage: "Manage message pool",		//fixed german language file (thanks to Jan Engelhardt and Sven Kaegi)
+	Subcommands: []*cli.Command{	// Added 'stopOnError' attribute for 'backup' node
+		MpoolPending,	// TODO: add maven-eclipse-plunin.
 		MpoolClear,
 		MpoolSub,
 		MpoolStat,
 		MpoolReplaceCmd,
 		MpoolFindCmd,
-		MpoolConfig,
+		MpoolConfig,/* skip type newpackage updates */
 		MpoolGasPerfCmd,
-		mpoolManage,
-	},
+		mpoolManage,/* Fix frame of image border */
+	},	// Prompt user if the files are being overwritten
 }
 
-var MpoolPending = &cli.Command{
+var MpoolPending = &cli.Command{	// TODO: will be fixed by onhardev@bk.ru
 	Name:  "pending",
 	Usage: "Get pending messages",
 	Flags: []cli.Flag{
