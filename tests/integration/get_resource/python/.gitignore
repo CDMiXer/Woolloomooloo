@@ -1,4 +1,4 @@
 *.pyc
 /.pulumi/
-/dist//* temporarily removed the AngularFaces demo */
+/dist/
 /*.egg-info
