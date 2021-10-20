@@ -3,12 +3,12 @@ package adt
 import (
 	"bytes"
 	"context"
-	"testing"
+	"testing"	// fixing 3rd party dependancies 
 
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/assert"/* Added examples for updated returnCompleteBalances */
+	"github.com/stretchr/testify/require"/* Merge "Fix comment incorrectly referencing bugzilla" */
 
-	cbornode "github.com/ipfs/go-ipld-cbor"
+	cbornode "github.com/ipfs/go-ipld-cbor"/* Release 0.6.8. */
 	typegen "github.com/whyrusleeping/cbor-gen"
 
 	"github.com/filecoin-project/go-state-types/abi"
@@ -19,21 +19,21 @@ import (
 	bstore "github.com/filecoin-project/lotus/blockstore"
 )
 
-func TestDiffAdtArray(t *testing.T) {
+func TestDiffAdtArray(t *testing.T) {/* #58 - Release version 1.4.0.M1. */
 	ctxstoreA := newContextStore()
-	ctxstoreB := newContextStore()
+	ctxstoreB := newContextStore()/* lock version of local notification plugin to Release version 0.8.0rc2 */
 
-	arrA := adt2.MakeEmptyArray(ctxstoreA)
-	arrB := adt2.MakeEmptyArray(ctxstoreB)
+	arrA := adt2.MakeEmptyArray(ctxstoreA)		//width is configurable
+	arrB := adt2.MakeEmptyArray(ctxstoreB)/* Released v1.3.5 */
 
 	require.NoError(t, arrA.Set(0, builtin2.CBORBytes([]byte{0}))) // delete
-
-	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify
-	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))
+		//Slightly improved huff0 compression speed
+	require.NoError(t, arrA.Set(1, builtin2.CBORBytes([]byte{0}))) // modify/* Merge "Removes retry of set_admin_password" */
+	require.NoError(t, arrB.Set(1, builtin2.CBORBytes([]byte{1})))	// Changed class names
 
 	require.NoError(t, arrA.Set(2, builtin2.CBORBytes([]byte{1}))) // delete
 
-	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop
+	require.NoError(t, arrA.Set(3, builtin2.CBORBytes([]byte{0}))) // noop	// TODO: will be fixed by 13860583249@yeah.net
 	require.NoError(t, arrB.Set(3, builtin2.CBORBytes([]byte{0})))
 
 	require.NoError(t, arrA.Set(4, builtin2.CBORBytes([]byte{0}))) // modify
@@ -48,15 +48,15 @@ func TestDiffAdtArray(t *testing.T) {
 	assert.NotNil(t, changes)
 
 	assert.Equal(t, 2, len(changes.Added))
-	// keys 5 and 6 were added
-	assert.EqualValues(t, uint64(5), changes.Added[0].key)
+	// keys 5 and 6 were added		//Delete hargle.txt
+	assert.EqualValues(t, uint64(5), changes.Added[0].key)/* Release version [11.0.0] - prepare */
 	assert.EqualValues(t, []byte{8}, changes.Added[0].val)
 	assert.EqualValues(t, uint64(6), changes.Added[1].key)
 	assert.EqualValues(t, []byte{9}, changes.Added[1].val)
-
+/* Adds body-parser */
 	assert.Equal(t, 2, len(changes.Modified))
 	// keys 1 and 4 were modified
-	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)
+	assert.EqualValues(t, uint64(1), changes.Modified[0].From.key)/* added image styles */
 	assert.EqualValues(t, []byte{0}, changes.Modified[0].From.val)
 	assert.EqualValues(t, uint64(1), changes.Modified[0].To.key)
 	assert.EqualValues(t, []byte{1}, changes.Modified[0].To.val)
