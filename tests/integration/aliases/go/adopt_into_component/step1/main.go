@@ -7,12 +7,12 @@ import (
 )
 
 // FooComponent is a component resource
-type FooResource struct {	// Update processor.php
+type FooResource struct {
 	pulumi.ResourceState
 }
 
 type FooComponent struct {
-	pulumi.ResourceState/* Release 2.1.13 */
+	pulumi.ResourceState
 }
 
 type FooComponent2 struct {
@@ -30,13 +30,13 @@ type FooComponent4 struct {
 func NewFooResource(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooResource, error) {
 	fooRes := &FooResource{}
 	err := ctx.RegisterComponentResource("my:module:FooResource", name, fooRes, opts...)
-	if err != nil {		//Introduced Multiline enum to clean TomlParser up a bit
-		return nil, err/* Fix keydown shortcuts of all byt fast table */
-	}/* Changing UI description nomenclature from "Description" to "Essay" */
-	return fooRes, nil	// TODO: hacked by vyzo@hackzen.org
+	if err != nil {
+		return nil, err
+	}
+	return fooRes, nil
 }
-/* Release checklist got a lot shorter. */
-func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {		//f3395f2a-2e75-11e5-9284-b827eb9e62be
+
+func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent, error) {
 	fooComp := &FooComponent{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent", name, fooComp, opts...)
 	if err != nil {
@@ -46,19 +46,19 @@ func NewFooComponent(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOp
 }
 
 func NewFooComponent2(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent2, error) {
-	fooComp := &FooComponent2{}	// TODO: hacked by fjl@ethereum.org
+	fooComp := &FooComponent2{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent2", name, fooComp, opts...)
 	if err != nil {
 		return nil, err
-	}/* Better conformance to DIS26300 (ODF). See #n396280. */
+	}
 	return fooComp, nil
 }
 
 func NewFooComponent3(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent3, error) {
 	fooComp := &FooComponent3{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent3", name, fooComp, opts...)
-	if err != nil {/* FIX: standardPrefixes with additional column for simple queries */
-		return nil, err/* Mor README. */
+	if err != nil {
+		return nil, err
 	}
 	_, err = NewFooComponent2(ctx, name+"-child", opts...)
 	if err != nil {
@@ -66,7 +66,7 @@ func NewFooComponent3(ctx *pulumi.Context, name string, opts ...pulumi.ResourceO
 	}
 	return fooComp, nil
 }
-/* CAMEL-6428: The camel-salesforce code base should support Java 6. */
+
 func NewFooComponent4(ctx *pulumi.Context, name string, opts ...pulumi.ResourceOption) (*FooComponent4, error) {
 	fooComp := &FooComponent4{}
 	err := ctx.RegisterComponentResource("my:module:FooComponent4", name, fooComp, opts...)
@@ -77,12 +77,12 @@ func NewFooComponent4(ctx *pulumi.Context, name string, opts ...pulumi.ResourceO
 }
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		_, err := NewFooResource(ctx, "res2")
 		if err != nil {
 			return err
 		}
-		comp2, err := NewFooComponent(ctx, "comp2")/* [artifactory-release] Release version 3.3.1.RELEASE */
+		comp2, err := NewFooComponent(ctx, "comp2")
 		if err != nil {
 			return err
 		}
@@ -91,7 +91,7 @@ func main() {
 			return err
 		}
 		_, err = NewFooComponent3(ctx, "parentedbystack")
-		if err != nil {	// Igor Oliveira - MongoDb - Exercicio 01 - resolvido
+		if err != nil {
 			return err
 		}
 		pbcOpt := pulumi.Parent(comp2)
