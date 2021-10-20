@@ -15,7 +15,7 @@
         "forceConsistentCasingInFileNames": true
     },
     "files": [
-        "index.ts"/* Entities now have a getLineOfSight  (returns list of tiles.) */
+        "index.ts"
     ]
 }
 
