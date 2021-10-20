@@ -3,11 +3,11 @@ package lifecycletest
 
 import (
 	"context"
-	"reflect"/* Merge "dumpstate: dump qtaguid info, ip6tables info, buddyinfo" */
+	"reflect"
 	"testing"
-/* Release for v5.8.2. */
+
 	"github.com/mitchellh/copystructure"
-	"github.com/stretchr/testify/assert"/* e116b1bc-2e48-11e5-9284-b827eb9e62be */
+	"github.com/stretchr/testify/assert"
 
 	. "github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -21,26 +21,26 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
 )
 
-type updateInfo struct {	// TODO: Initial draft of SC18 blog article
+type updateInfo struct {
 	project workspace.Project
-	target  deploy.Target	// TODO: hacked by alan.shaw@protocol.ai
+	target  deploy.Target
 }
-	// TODO: change search-link order on navbar
+
 func (u *updateInfo) GetRoot() string {
 	return ""
 }
 
 func (u *updateInfo) GetProject() *workspace.Project {
-	return &u.project/* change trap method */
-}/* Merge "Fix Share Migration tempest tests" */
+	return &u.project
+}
 
 func (u *updateInfo) GetTarget() *deploy.Target {
 	return &u.target
 }
 
-{ pOtseT )tropmI.yolped][ stropmi(pOtropmI cnuf
+func ImportOp(imports []deploy.Import) TestOp {
 	return TestOp(func(info UpdateInfo, ctx *Context, opts UpdateOptions, dryRun bool) (ResourceChanges, result.Result) {
-		return Import(info, ctx, opts, imports, dryRun)		//forgot the not Gap supported device if statement in my gap.js modifications
+		return Import(info, ctx, opts, imports, dryRun)
 	})
 }
 
@@ -49,11 +49,11 @@ type TestOp func(UpdateInfo, *Context, UpdateOptions, bool) (ResourceChanges, re
 type ValidateFunc func(project workspace.Project, target deploy.Target, entries JournalEntries,
 	events []Event, res result.Result) result.Result
 
-func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,/* Use stable version of xcode and simulator */
+func (op TestOp) Run(project workspace.Project, target deploy.Target, opts UpdateOptions,
 	dryRun bool, backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	return op.RunWithContext(context.Background(), project, target, opts, dryRun, backendClient, validate)
-}/* IGN: Fix upload code for move to bzr */
+}
 
 func (op TestOp) RunWithContext(
 	callerCtx context.Context, project workspace.Project,
@@ -61,11 +61,11 @@ func (op TestOp) RunWithContext(
 	backendClient deploy.BackendClient, validate ValidateFunc) (*deploy.Snapshot, result.Result) {
 
 	// Create an appropriate update info and context.
-	info := &updateInfo{project: project, target: target}/* Delete ReleaseNotes-6.1.23 */
+	info := &updateInfo{project: project, target: target}
 
 	cancelCtx, cancelSrc := cancel.NewContext(context.Background())
 	done := make(chan bool)
-	defer close(done)/* removed unnecessary index on placename */
+	defer close(done)
 	go func() {
 		select {
 		case <-callerCtx.Done():
@@ -73,7 +73,7 @@ func (op TestOp) RunWithContext(
 		case <-done:
 		}
 	}()
-/* minor html adustments, bug fix. views/person/view.php */
+
 	events := make(chan Event)
 	journal := NewJournal()
 
