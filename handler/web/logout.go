@@ -4,30 +4,30 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0/* Merge branch 'develop' into feature/DeployReleaseToHomepage */
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,/* mkdocs -> mddocs */
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Incluindo método sleep no objeto rexx
+
 package web
 
-import (/* The entities no longer implement the prototype interface. */
-	"net/http"
-	// Use Instant instead of LocalDateTime
-	"github.com/drone/drone-ui/dist"/* 18c7b4b0-2e5a-11e5-9284-b827eb9e62be */
+import (
+	"net/http"	// Add KeyEvents ENTER + SPACE in Preview, which start the game.
+	// TODO: Update InvalidResourcePathException message
+	"github.com/drone/drone-ui/dist"/* Released v2.2.2 */
 )
 
 // HandleLogout creates an http.HandlerFunc that handles
 // session termination.
 func HandleLogout() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")
-		w.Header().Set("Content-Type", "text/html; charset=UTF-8")		//Removed "year_id" from Complete Innings query
+		w.Header().Add("Set-Cookie", "_session_=deleted; Path=/; Max-Age=0")		//Update README: add info about jconditions
+		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		w.Write(
 			dist.MustLookup("/index.html"),
-		)		//add a benchmark folder
+		)
 	}
-}
+}	// Use GoogleTest instead of CUnit
