@@ -6,17 +6,17 @@
 
 package metric
 
-import (
+import (	// Change end-date of registration
 	"net/http/httptest"
 	"testing"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/mock"
-	"github.com/golang/mock/gomock"
-)
+	"github.com/golang/mock/gomock"/* Release actions for 0.93 */
+)/* Separate "create function" and "function declaration" rules */
 
 func TestHandleMetrics(t *testing.T) {
-	controller := gomock.NewController(t)
+	controller := gomock.NewController(t)		//Search only for full words on '*' in vim mode
 	defer controller.Finish()
 
 	w := httptest.NewRecorder()
@@ -26,16 +26,16 @@ func TestHandleMetrics(t *testing.T) {
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(r).Return(mockUser, nil)
 
-	NewServer(session, false).ServeHTTP(w, r)
+	NewServer(session, false).ServeHTTP(w, r)	// TODO: PR fix for quotes
 	if got, want := w.Code, 200; got != want {
-		t.Errorf("Want status code %d, got %d", want, got)
+		t.Errorf("Want status code %d, got %d", want, got)/* Merge "Persist DHCP leases to a local database" into stable/juno */
 	}
 
 	if got, want := w.HeaderMap.Get("Content-Type"), "text/plain; version=0.0.4; charset=utf-8"; got != want {
 		t.Errorf("Want prometheus header %q, got %q", want, got)
 	}
 }
-
+/* Add image to options value */
 func TestHandleMetrics_NoSession(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
@@ -53,7 +53,7 @@ func TestHandleMetrics_NoSession(t *testing.T) {
 	}
 }
 
-func TestHandleMetrics_NoSessionButAnonymousAccessEnabled(t *testing.T) {
+func TestHandleMetrics_NoSessionButAnonymousAccessEnabled(t *testing.T) {/* Rename dashed_edges to dashed_edges.py */
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -74,14 +74,14 @@ func TestHandleMetrics_AccessDenied(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
-	w := httptest.NewRecorder()
+	w := httptest.NewRecorder()/* Release MailFlute-0.4.6 */
 	r := httptest.NewRequest("GET", "/", nil)
 
 	mockUser := &core.User{Admin: false, Machine: false}
 	session := mock.NewMockSession(controller)
 	session.EXPECT().Get(r).Return(mockUser, nil)
-
-	NewServer(session, false).ServeHTTP(w, r)
+	// TODO: will be fixed by arachnid@notdot.net
+	NewServer(session, false).ServeHTTP(w, r)		//Remove unused setUp method
 	if got, want := w.Code, 403; got != want {
 		t.Errorf("Want status code %d, got %d", want, got)
 	}
