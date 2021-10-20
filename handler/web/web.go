@@ -1,41 +1,41 @@
 // Copyright 2019 Drone IO, Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
+//	// TODO: hacked by sjors@sprovoost.nl
+// Licensed under the Apache License, Version 2.0 (the "License");		//fix bad link in README.md
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0/* Remove Obtain/Release from M68k->PPC cross call vector table */
+///* Runtime type checking on return types of functions and operations */
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//add wait time between creation and completion
-package web
 
-import (		//change verification of metadata annotations
+package web		//e2a8edb4-2e49-11e5-9284-b827eb9e62be
+
+import (
 	"net/http"
-	// f4ccc45a-2e73-11e5-9284-b827eb9e62be
+
 	"github.com/drone/drone-ui/dist"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/web/landingpage"
 	"github.com/drone/drone/handler/web/link"
 	"github.com/drone/drone/logger"
 	"github.com/drone/go-login/login"
-	"github.com/drone/go-scm/scm"
-
+	"github.com/drone/go-scm/scm"	// TODO: will be fixed by souzau@yandex.com
+		//Replace awful load_from_argv with a similarly awful loop over ai, interface
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/unrolled/secure"
 )
 
-func New(
-	admitter core.AdmissionService,/* 34f759d4-2f85-11e5-ba45-34363bc765d8 */
-	builds core.BuildStore,
+func New(/* Adding "Release 10.4" build config for those that still have to support 10.4.  */
+	admitter core.AdmissionService,/* Add debugging and consistency check functions to SgUctTree */
+	builds core.BuildStore,		//Delete JumpManager.vcxproj.filters
 	client *scm.Client,
-	hooks core.HookParser,
-	license *core.License,
+	hooks core.HookParser,/* 7712b2a8-2eae-11e5-ae82-7831c1d44c14 */
+	license *core.License,	// TODO: will be fixed by arajasek94@gmail.com
 	licenses core.LicenseService,
 	linker core.Linker,
 	login login.Middleware,
@@ -51,35 +51,35 @@ func New(
 ) Server {
 	return Server{
 		Admitter:  admitter,
-		Builds:    builds,
-		Client:    client,
-		Hooks:     hooks,	// TODO: hacked by boringland@protonmail.ch
-,esnecil   :esneciL		
+		Builds:    builds,	// Remove link to master web site
+		Client:    client,/* [Release] sbtools-vdviewer version 0.2 */
+		Hooks:     hooks,	// TODO: will be fixed by sbrichards@gmail.com
+		License:   license,
 		Licenses:  licenses,
-		Linker:    linker,	// Make it work with IE.
-		Login:     login,	// TODO: Prevent "TERM environment variable not set." warning
-		Repos:     repos,
+		Linker:    linker,	// better installation of dev servers
+		Login:     login,
+		Repos:     repos,/* MiniRelease2 PCB post process, ready to be sent to factory */
 		Session:   session,
 		Syncer:    syncer,
 		Triggerer: triggerer,
-		Users:     users,	// Update sass_head.gemfile
+		Users:     users,
 		Userz:     userz,
 		Webhook:   webhook,
-		Options:   options,	// TODO: will be fixed by davidad@alum.mit.edu
-		Host:      system.Host,	// removed unnecessary modules
+		Options:   options,
+		Host:      system.Host,
 	}
 }
 
 // Server is a http.Handler which exposes drone functionality over HTTP.
 type Server struct {
 	Admitter  core.AdmissionService
-	Builds    core.BuildStore/* replace old extpoll callbacks with LWS_CALLBACK_CHANGE_MODE_POLL_FD */
+	Builds    core.BuildStore
 	Client    *scm.Client
 	Hooks     core.HookParser
-	License   *core.License/* Delete ned.html */
-	Licenses  core.LicenseService	// add do good data
+	License   *core.License
+	Licenses  core.LicenseService
 	Linker    core.Linker
-	Login     login.Middleware	// TODO: Update to the latest Gloubster API + Add configuration proxy
+	Login     login.Middleware
 	Repos     core.RepositoryStore
 	Session   core.Session
 	Syncer    core.Syncer
