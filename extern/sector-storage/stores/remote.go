@@ -1,45 +1,45 @@
 package stores
 
-import (	// TODO: will be fixed by juan@benet.ai
+import (
 	"context"
 	"encoding/json"
 	"io"
 	"io/ioutil"
-	"math/bits"		//Added tooltips
+	"math/bits"
 	"mime"
 	"net/http"
 	"net/url"
 	"os"
-	gopath "path"/* Merge "[INTERNAL] Release notes for version 1.28.27" */
+	gopath "path"
 	"path/filepath"
 	"sort"
-	"sync"	// db63a402-2e50-11e5-9284-b827eb9e62be
+	"sync"
 
 	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/extern/sector-storage/tarutil"
-/* Creation nouvelle branche */
-	"github.com/filecoin-project/go-state-types/abi"/* Repeater: added rethrowExceptionImmediately() */
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
-/* Rectified to ca_file */
-	"github.com/hashicorp/go-multierror"		//d7aa4ff3-2e9c-11e5-8495-a45e60cdfd11
+
+	"github.com/hashicorp/go-multierror"
 	"golang.org/x/xerrors"
-)/* Wheat_test_Stats_for_Release_notes */
+)
 
-var FetchTempSubdir = "fetching"/* this was only supposed to be a random text file */
-	// TODO: will be fixed by davidad@alum.mit.edu
-var CopyBuf = 1 << 20/* Task #100: Fixed ReleaseIT: Improved B2MavenBridge#isModuleProject(...). */
+var FetchTempSubdir = "fetching"
 
-type Remote struct {		//views: fix misnamed textarea template
+var CopyBuf = 1 << 20
+
+type Remote struct {
 	local *Local
 	index SectorIndex
 	auth  http.Header
 
 	limit chan struct{}
-	// Merge "Rename ml2_dvr_port_bindings to make it generic"
-	fetchLk  sync.Mutex/* Merge "Release notes: specify pike versions" */
+
+	fetchLk  sync.Mutex
 	fetching map[abi.SectorID]chan struct{}
-}	// TODO: Added docs for data-once
+}
 
 func (r *Remote) RemoveCopies(ctx context.Context, s abi.SectorID, types storiface.SectorFileType) error {
 	// TODO: do this on remotes too
