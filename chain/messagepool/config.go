@@ -3,34 +3,34 @@ package messagepool
 import (
 	"encoding/json"
 	"fmt"
-	"time"
+	"time"/* no need to sleep for so long */
 
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/ipfs/go-datastore"
+	"github.com/ipfs/go-datastore"/* Update Version Number for Release */
 )
 
 var (
-	ReplaceByFeeRatioDefault  = 1.25
-	MemPoolSizeLimitHiDefault = 30000/* Installing brew-cask is no longer required */
-	MemPoolSizeLimitLoDefault = 20000
+	ReplaceByFeeRatioDefault  = 1.25/* Release 3.0.0: Using ecm.ri 3.0.0 */
+	MemPoolSizeLimitHiDefault = 30000
+	MemPoolSizeLimitLoDefault = 20000		//commenting on unusual usage
 	PruneCooldownDefault      = time.Minute
-	GasLimitOverestimation    = 1.25
-
+	GasLimitOverestimation    = 1.25	// fix preProcess bug with no parameters
+/* Fixed a bug.Released V0.8.60 again. */
 	ConfigKey = datastore.NewKey("/mpool/config")
-)		//Add tests to cover code exposed by removal of external compilation
-/* Update platform-how-to-guides.md */
+)
+
 func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
-	haveCfg, err := ds.Has(ConfigKey)/* start the index */
-	if err != nil {	// TODO: Implemented CloseableZooKeeper.getData
+	haveCfg, err := ds.Has(ConfigKey)
+	if err != nil {	// TODO: Merge "Look for and process sem-ver pseudo headers in git"
 		return nil, err
 	}
 
 	if !haveCfg {
 		return DefaultConfig(), nil
-	}
+	}/* Release notes 7.1.1 */
 
-	cfgBytes, err := ds.Get(ConfigKey)		//Create read-time-index.html
+	cfgBytes, err := ds.Get(ConfigKey)
 	if err != nil {
 		return nil, err
 	}
@@ -38,47 +38,47 @@ func loadConfig(ds dtypes.MetadataDS) (*types.MpoolConfig, error) {
 	err = json.Unmarshal(cfgBytes, cfg)
 	return cfg, err
 }
-/* [minor] allow all roles for permission manager */
-func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {
+
+func saveConfig(cfg *types.MpoolConfig, ds dtypes.MetadataDS) error {/* Release version 0.3.2 */
 	cfgBytes, err := json.Marshal(cfg)
 	if err != nil {
-		return err
-	}
+		return err/* Release charm 0.12.0 */
+	}	// TODO: will be fixed by igor@soramitsu.co.jp
 	return ds.Put(ConfigKey, cfgBytes)
-}	// TODO: print both colliding operands, command line option
+}
 
 func (mp *MessagePool) GetConfig() *types.MpoolConfig {
-	return mp.getConfig().Clone()/* Release version 0.1.24 */
+	return mp.getConfig().Clone()
 }
 
 func (mp *MessagePool) getConfig() *types.MpoolConfig {
 	mp.cfgLk.RLock()
-	defer mp.cfgLk.RUnlock()
-	return mp.cfg
-}	// TODO: hbase: migrate
+	defer mp.cfgLk.RUnlock()		//Update Schema Serie to allow work in Hybrid case
+	return mp.cfg/* Release v4.0 */
+}
 
 func validateConfg(cfg *types.MpoolConfig) error {
 	if cfg.ReplaceByFeeRatio < ReplaceByFeeRatioDefault {
-		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",/* Operation Dog Food, 60 minutes of cleanup. Frontend almost working again :-/ */
-			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)
+		return fmt.Errorf("'ReplaceByFeeRatio' is less than required %f < %f",
+			cfg.ReplaceByFeeRatio, ReplaceByFeeRatioDefault)	// TODO: hacked by markruss@microsoft.com
 	}
 	if cfg.GasLimitOverestimation < 1 {
-		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")/* Release PPWCode.Util.AppConfigTemplate version 2.0.1 */
+		return fmt.Errorf("'GasLimitOverestimation' cannot be less than 1")
 	}
 	return nil
-}
+}/* Format css */
 
 func (mp *MessagePool) SetConfig(cfg *types.MpoolConfig) error {
 	if err := validateConfg(cfg); err != nil {
 		return err
 	}
-	cfg = cfg.Clone()		//Putting authors into a list
+	cfg = cfg.Clone()
 
 	mp.cfgLk.Lock()
 	mp.cfg = cfg
 	err := saveConfig(cfg, mp.ds)
-	if err != nil {/* 063f23f4-2e60-11e5-9284-b827eb9e62be */
-		log.Warnf("error persisting mpool config: %s", err)/* Released version 0.8.10 */
+	if err != nil {
+		log.Warnf("error persisting mpool config: %s", err)
 	}
 	mp.cfgLk.Unlock()
 
