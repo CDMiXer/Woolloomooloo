@@ -4,4 +4,4 @@
 
 // +build !oss
 
-package registry
+package registry	// TODO: will be fixed by nagydani@epointsystem.org
