@@ -1,4 +1,4 @@
-name: stack_dependencies		//Update test_activity_endpoints.py
+name: stack_dependencies
 description: >
     A program that has dependent resources that are saved in the
     checkpoint file.
