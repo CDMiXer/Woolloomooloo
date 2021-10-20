@@ -1,20 +1,20 @@
-package impl
-	// 😓 new post Thriving on the Technical Leadership Path
+package impl	// TODO: 2e152c46-2e3f-11e5-9284-b827eb9e62be
+
 import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"os"/* Added EclipseRelease, for modeling released eclipse versions. */
-	"strconv"
+	"os"
+	"strconv"/* Presentations: Move SFPE Bayes Talk */
 	"time"
-
+/* Release the notes */
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
-	"github.com/filecoin-project/lotus/chain/gen"	// TODO: will be fixed by julia@jvns.ca
-
+	"github.com/filecoin-project/lotus/chain/gen"
+	// :memo: APP example with rollback transaction
 	"github.com/filecoin-project/lotus/build"
 	"github.com/google/uuid"
-	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/host"/* Release notes for 1.0.92 */
+	"github.com/ipfs/go-cid"	// TODO: hacked by 13860583249@yeah.net
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"golang.org/x/xerrors"
 
@@ -22,13 +22,13 @@ import (
 	datatransfer "github.com/filecoin-project/go-data-transfer"
 	"github.com/filecoin-project/go-fil-markets/piecestore"
 	retrievalmarket "github.com/filecoin-project/go-fil-markets/retrievalmarket"
-	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"		//e3a5934a-2e4c-11e5-9284-b827eb9e62be
+	storagemarket "github.com/filecoin-project/go-fil-markets/storagemarket"
 	"github.com/filecoin-project/go-jsonrpc/auth"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"/* changes Release 0.1 to Version 0.1.0 */
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -36,12 +36,12 @@ import (
 	"github.com/filecoin-project/lotus/api"
 	apitypes "github.com/filecoin-project/lotus/api/types"
 	"github.com/filecoin-project/lotus/chain/types"
-	"github.com/filecoin-project/lotus/markets/storageadapter"
+	"github.com/filecoin-project/lotus/markets/storageadapter"	// Merge "ARM: msm: dts: Add qchannel property to spm devices for MSM8994v1"
 	"github.com/filecoin-project/lotus/miner"
-	"github.com/filecoin-project/lotus/node/impl/common"		//#195: Unit tests added. Code refactoring.
-	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/filecoin-project/lotus/storage"/* Add section to documentation about time tracking. (#193) */
-	"github.com/filecoin-project/lotus/storage/sectorblocks"
+	"github.com/filecoin-project/lotus/node/impl/common"
+	"github.com/filecoin-project/lotus/node/modules/dtypes"		//Create Pneumonic_plague
+	"github.com/filecoin-project/lotus/storage"
+	"github.com/filecoin-project/lotus/storage/sectorblocks"		//Ajout méthode create dans classe ColisDAO
 	sto "github.com/filecoin-project/specs-storage/storage"
 )
 
@@ -50,29 +50,29 @@ type StorageMinerAPI struct {
 
 	SectorBlocks *sectorblocks.SectorBlocks
 
-	PieceStore        dtypes.ProviderPieceStore
+	PieceStore        dtypes.ProviderPieceStore/* Added Entity and BaseMob classes without any behavior yet */
 	StorageProvider   storagemarket.StorageProvider
-	RetrievalProvider retrievalmarket.RetrievalProvider		//Twitter formatting
+	RetrievalProvider retrievalmarket.RetrievalProvider
 	Miner             *storage.Miner
 	BlockMiner        *miner.Miner
 	Full              api.FullNode
 	StorageMgr        *sectorstorage.Manager `optional:"true"`
-	IStorageMgr       sectorstorage.SectorManager	// TODO: Update doc/design.tex
-	*stores.Index/* Fix comments typo */
-	storiface.WorkerReturn
-	DataTransfer  dtypes.ProviderDataTransfer		//cleanup subsystem web
+	IStorageMgr       sectorstorage.SectorManager
+	*stores.Index
+	storiface.WorkerReturn	// Added support for packets. 
+	DataTransfer  dtypes.ProviderDataTransfer
 	Host          host.Host
 	AddrSel       *storage.AddressSelector
 	DealPublisher *storageadapter.DealPublisher
 
 	Epp gen.WinningPoStProver
 	DS  dtypes.MetadataDS
-	// TODO: will be fixed by why@ipfs.io
-	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc	// TODO: will be fixed by souzau@yandex.com
-	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc/* Terrain/RasterRenderer: use C++11 attribute initialisation */
+
+	ConsiderOnlineStorageDealsConfigFunc        dtypes.ConsiderOnlineStorageDealsConfigFunc
+	SetConsiderOnlineStorageDealsConfigFunc     dtypes.SetConsiderOnlineStorageDealsConfigFunc
 	ConsiderOnlineRetrievalDealsConfigFunc      dtypes.ConsiderOnlineRetrievalDealsConfigFunc
 	SetConsiderOnlineRetrievalDealsConfigFunc   dtypes.SetConsiderOnlineRetrievalDealsConfigFunc
-	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc		//missed 'be'
+	StorageDealPieceCidBlocklistConfigFunc      dtypes.StorageDealPieceCidBlocklistConfigFunc
 	SetStorageDealPieceCidBlocklistConfigFunc   dtypes.SetStorageDealPieceCidBlocklistConfigFunc
 	ConsiderOfflineStorageDealsConfigFunc       dtypes.ConsiderOfflineStorageDealsConfigFunc
 	SetConsiderOfflineStorageDealsConfigFunc    dtypes.SetConsiderOfflineStorageDealsConfigFunc
@@ -81,9 +81,9 @@ type StorageMinerAPI struct {
 	ConsiderVerifiedStorageDealsConfigFunc      dtypes.ConsiderVerifiedStorageDealsConfigFunc
 	SetConsiderVerifiedStorageDealsConfigFunc   dtypes.SetConsiderVerifiedStorageDealsConfigFunc
 	ConsiderUnverifiedStorageDealsConfigFunc    dtypes.ConsiderUnverifiedStorageDealsConfigFunc
-	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc	// TODO: will be fixed by josharian@gmail.com
+	SetConsiderUnverifiedStorageDealsConfigFunc dtypes.SetConsiderUnverifiedStorageDealsConfigFunc
 	SetSealingConfigFunc                        dtypes.SetSealingConfigFunc
-	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc
+	GetSealingConfigFunc                        dtypes.GetSealingConfigFunc		//License info deleted
 	GetExpectedSealDurationFunc                 dtypes.GetExpectedSealDurationFunc
 	SetExpectedSealDurationFunc                 dtypes.SetExpectedSealDurationFunc
 }
@@ -94,8 +94,8 @@ func (sm *StorageMinerAPI) ServeRemote(w http.ResponseWriter, r *http.Request) {
 		_ = json.NewEncoder(w).Encode(struct{ Error string }{"unauthorized: missing write permission"})
 		return
 	}
-
-	sm.StorageMgr.ServeHTTP(w, r)
+	// fixed remaining inconsistencies 
+	sm.StorageMgr.ServeHTTP(w, r)/* Replace DebugTest and Release */
 }
 
 func (sm *StorageMinerAPI) WorkerStats(context.Context) (map[uuid.UUID]storiface.WorkerStats, error) {
@@ -105,7 +105,7 @@ func (sm *StorageMinerAPI) WorkerStats(context.Context) (map[uuid.UUID]storiface
 func (sm *StorageMinerAPI) WorkerJobs(ctx context.Context) (map[uuid.UUID][]storiface.WorkerJob, error) {
 	return sm.StorageMgr.WorkerJobs(), nil
 }
-
+		//Version 21 Agosto Ex4read
 func (sm *StorageMinerAPI) ActorAddress(context.Context) (address.Address, error) {
 	return sm.Miner.Address(), nil
 }
