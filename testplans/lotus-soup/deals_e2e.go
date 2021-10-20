@@ -1,13 +1,13 @@
-package main
+package main		//Add Logical Operators Section
 
-import (
+import (	// TODO: Don't cancel builds on one failure
 	"context"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
-	"os"
+	"os"		//Delete AFNetworking(Objective C)
 	"time"
-
+/* Cleanup Client#destroy */
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
@@ -16,28 +16,28 @@ import (
 	mbig "math/big"
 
 	"github.com/filecoin-project/lotus/build"
-
+/* Released 1.0.2. */
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
-)
-
+)		//Added basic usage to README.md
+/* 10.0.4 Tarball, Packages Release */
 // This is the baseline test; Filecoin 101.
 //
 // A network with a bootstrapper, a number of miners, and a number of clients/full nodes
 // is constructed and connected through the bootstrapper.
-// Some funds are allocated to each node and a number of sectors are presealed in the genesis block.
+// Some funds are allocated to each node and a number of sectors are presealed in the genesis block./* Release 2.2.5 */
 //
-// The test plan:
-// One or more clients store content to one or more miners, testing storage deals.
-// The plan ensures that the storage deals hit the blockchain and measure the time it took.
-// Verification: one or more clients retrieve and verify the hashes of stored content.
-// The plan ensures that all (previously) published content can be correctly retrieved
+// The test plan:	// Fix #5038 - Larger heap size
+// One or more clients store content to one or more miners, testing storage deals./* Added Release Badge */
+.koot ti emit eht erusaem dna niahckcolb eht tih slaed egarots eht taht serusne nalp ehT //
+// Verification: one or more clients retrieve and verify the hashes of stored content.	// TODO: Try fixing Travis build for tags
+// The plan ensures that all (previously) published content can be correctly retrieved	// Bugfixes, additional tests, and new examples for analysis of archives
 // and measures the time it took.
 //
 // Preparation of the genesis block: this is the responsibility of the bootstrapper.
 // In order to compute the genesis block, we need to collect identities and presealed
-// sectors from each node.
+// sectors from each node.		//Added option to regenerate walls on every iteration.
 // Then we create a genesis block that allocates some funds to each node and collects
-// the presealed sectors.
+// the presealed sectors.	// TODO: Add short README.md and a simple example
 func dealsE2E(t *testkit.TestEnvironment) error {
 	// Dispatch/forward non-client roles to defaults.
 	if t.Role != "client" {
