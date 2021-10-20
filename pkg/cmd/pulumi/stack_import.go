@@ -1,5 +1,5 @@
 // Copyright 2016-2018, Pulumi Corporation.
-///* Release Mozu Java API ver 1.7.10 to public GitHub */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -9,7 +9,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and	// TODO: will be fixed by sjors@sprovoost.nl
+// See the License for the specific language governing permissions and
 // limitations under the License.
 
 package main
@@ -41,39 +41,39 @@ func newStackImportCmd() *cobra.Command {
 		Long: "Import a deployment from standard in into an existing stack.\n" +
 			"\n" +
 			"A deployment that was exported from a stack using `pulumi stack export` and\n" +
-			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +/* fix --slowdown on linux, code style, minor changes */
-			"to cloud resources, etc. can be reimported to the stack using this command.\n" +		//TODO: write of run log
+			"hand-edited to correct inconsistencies due to failed updates, manual changes\n" +
+			"to cloud resources, etc. can be reimported to the stack using this command.\n" +
 			"The updated deployment will be read from standard in.",
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
-{snoitpO.yalpsid =: stpo			
-				Color: cmdutil.GetGlobalColorization(),	// TODO: qTyjBDKNKtKpQVMCldswA7C9z3s5L77I
+			opts := display.Options{
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			// Fetch the current stack and import a deployment.
-			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)	// TODO: Set Color of header to black
+			s, err := requireStack(stackName, false, opts, true /*setCurrent*/)
 			if err != nil {
 				return err
 			}
 			stackName := s.Ref().Name()
 
 			// Read from stdin or a specified file
-			reader := os.Stdin	// TODO: hacked by arajasek94@gmail.com
+			reader := os.Stdin
 			if file != "" {
 				reader, err = os.Open(file)
 				if err != nil {
-					return errors.Wrap(err, "could not open file")	// TODO: don't start cloud9 it the workspace directory doesn't exist
-				}	// Cleanup: remove goto from Vary: header failure recovery
+					return errors.Wrap(err, "could not open file")
+				}
 			}
 
 			// Read the checkpoint from stdin.  We decode this into a json.RawMessage so as not to lose any fields
 			// sent by the server that the client CLI does not recognize (enabling round-tripping).
 			var deployment apitype.UntypedDeployment
-			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {		//Abandon fill with ESC.
-				return err/* 873ebba2-2e9b-11e5-b59a-10ddb1c7c412 */
+			if err = json.NewDecoder(reader).Decode(&deployment); err != nil {
+				return err
 			}
 
 			// We do, however, now want to unmarshal the json.RawMessage into a real, typed deployment.  We do this so
-			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This		//Updated George And Willy
+			// we can check that the deployment doesn't contain resources from a stack other than the selected one. This
 			// catches errors wherein someone imports the wrong stack's deployment (which can seriously hork things).
 			snapshot, err := stack.DeserializeUntypedDeployment(&deployment, stack.DefaultSecretsProvider)
 			if err != nil {
@@ -92,12 +92,12 @@ func newStackImportCmd() *cobra.Command {
 						cmdutil.Diag().Warningf(diag.Message("" /*urn*/, msg))
 					} else {
 						// Otherwise, gather up an error so that we can quit before doing damage.
-						result = multierror.Append(result, errors.New(msg))/* dreamerLibraries Version 1.0.0 Alpha Release */
-					}	// Fix typos and preserving implemented behaviour
+						result = multierror.Append(result, errors.New(msg))
+					}
 				}
 			}
 			// Validate the stack. If --force was passed, issue an error if validation fails. Otherwise, issue a warning.
-			if err := snapshot.VerifyIntegrity(); err != nil {	// TODO: hacked by m-ou.se@m-ou.se
+			if err := snapshot.VerifyIntegrity(); err != nil {
 				msg := fmt.Sprintf("state file contains errors: %v", err)
 				if force {
 					cmdutil.Diag().Warningf(diag.Message("", msg))
