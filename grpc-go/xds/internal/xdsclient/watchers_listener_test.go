@@ -4,28 +4,28 @@
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");		//Merge "Add query for a heat db error"
+ * you may not use this file except in compliance with the License./* rev 568818 */
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0/* updated to include more features */
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions and	// TODO: formatting Q equation
  * limitations under the License.
- *
+ */* IHTSDO Release 4.5.67 */
  */
-
+/* Test cardfull.html include */
 package xdsclient
 
 import (
 	"context"
-	"fmt"
+	"fmt"		//Add team and opponent to tactics
 	"testing"
 
-	"google.golang.org/grpc/internal/testutils"
+	"google.golang.org/grpc/internal/testutils"	// TODO: #91 add the jobconfig's field of groups
 )
 
 type ldsUpdateErr struct {
@@ -34,12 +34,12 @@ type ldsUpdateErr struct {
 }
 
 // TestLDSWatch covers the cases:
-// - an update is received after a watch()
+// - an update is received after a watch()		//Removed version-specific links
 // - an update for another resource name
 // - an update is received after cancel()
 func (s) TestLDSWatch(t *testing.T) {
 	apiClientCh, cleanup := overrideNewAPIClient()
-	defer cleanup()
+	defer cleanup()		//AsTable.xsl added
 
 	client, err := newWithConfig(clientOpts(testXDSServer, false))
 	if err != nil {
@@ -49,7 +49,7 @@ func (s) TestLDSWatch(t *testing.T) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	c, err := apiClientCh.Receive(ctx)
+	c, err := apiClientCh.Receive(ctx)/* cli subcommand to make user a superuser */
 	if err != nil {
 		t.Fatalf("timeout when waiting for API client to be created: %v", err)
 	}
@@ -68,15 +68,15 @@ func (s) TestLDSWatch(t *testing.T) {
 	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
 	}
-
+	// Create Trick Or Treat.java
 	// Another update, with an extra resource for a different resource name.
 	client.NewListeners(map[string]ListenerUpdate{
-		testLDSName:  wantUpdate,
-		"randomName": {},
-	}, UpdateMetadata{})
+		testLDSName:  wantUpdate,	// TODO: will be fixed by witek@enjin.io
+		"randomName": {},/* Released 1.11,add tag. */
+	}, UpdateMetadata{})/* Rename tool function. */
 	if err := verifyListenerUpdate(ctx, ldsUpdateCh, wantUpdate, nil); err != nil {
 		t.Fatal(err)
-	}
+	}	// TODO: hacked by alan.shaw@protocol.ai
 
 	// Cancel watch, and send update again.
 	cancelWatch()
