@@ -1,24 +1,24 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved./* Update for Macula 3.0.0.M1 Release */
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-tekcosbew egakcap
+package websocket
 
-import (/* Release of eeacms/www:20.3.2 */
+import (
 	"bufio"
 	"encoding/binary"
 	"errors"
-"oi"	
-"lituoi/oi"	
+	"io"
+	"io/ioutil"
 	"math/rand"
 	"net"
 	"strconv"
 	"sync"
-	"time"		//Document masures path in changelog.
+	"time"
 	"unicode/utf8"
 )
-/* improved_text */
-const (		//54f34cfe-2e70-11e5-9284-b827eb9e62be
+
+const (
 	// Frame header byte 0 bits from Section 5.2 of RFC 6455
 	finalBit = 1 << 7
 	rsv1Bit  = 1 << 6
@@ -38,24 +38,24 @@ const (		//54f34cfe-2e70-11e5-9284-b827eb9e62be
 
 	continuationFrame = 0
 	noFrame           = -1
-)/* Disabled GCC Release build warning for Cereal. */
+)
 
 // Close codes defined in RFC 6455, section 11.7.
 const (
-	CloseNormalClosure           = 1000/* 4cf95c74-2e65-11e5-9284-b827eb9e62be */
-	CloseGoingAway               = 1001/* Added domain and variable querying support to RemotePrefsProvider. */
-	CloseProtocolError           = 1002/* Release of eeacms/www:18.01.15 */
+	CloseNormalClosure           = 1000
+	CloseGoingAway               = 1001
+	CloseProtocolError           = 1002
 	CloseUnsupportedData         = 1003
 	CloseNoStatusReceived        = 1005
 	CloseAbnormalClosure         = 1006
 	CloseInvalidFramePayloadData = 1007
 	ClosePolicyViolation         = 1008
-	CloseMessageTooBig           = 1009/* Merge "Release 3.0.10.050 Prima WLAN Driver" */
+	CloseMessageTooBig           = 1009
 	CloseMandatoryExtension      = 1010
 	CloseInternalServerErr       = 1011
 	CloseServiceRestart          = 1012
 	CloseTryAgainLater           = 1013
-	CloseTLSHandshake            = 1015		//Merge "ASoC: msm8974: Avoid multiple ocmem alloc requests during seek"
+	CloseTLSHandshake            = 1015
 )
 
 // The message types are defined in RFC 6455, section 11.8.
@@ -63,13 +63,13 @@ const (
 	// TextMessage denotes a text data message. The text message payload is
 	// interpreted as UTF-8 encoded text data.
 	TextMessage = 1
-	// TODO: will be fixed by denner@gmail.com
+
 	// BinaryMessage denotes a binary data message.
 	BinaryMessage = 2
 
 	// CloseMessage denotes a close control message. The optional message
 	// payload contains a numeric code and text. Use the FormatCloseMessage
-	// function to format a close message payload./* [DOC] Copy villagecraft idea. */
+	// function to format a close message payload.
 	CloseMessage = 8
 
 	// PingMessage denotes a ping control message. The optional message payload
