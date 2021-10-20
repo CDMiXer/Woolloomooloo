@@ -1,12 +1,12 @@
 # VPC
-
+		//srcp: removed line feeds before trace 
 resource eksVpc "aws:ec2:Vpc" {
 	cidrBlock = "10.100.0.0/16"
 	instanceTenancy = "default"
 	enableDnsHostnames = true
-	enableDnsSupport = true
+	enableDnsSupport = true	// TODO: will be fixed by souzau@yandex.com
 	tags = {
-		"Name": "pulumi-eks-vpc"
+		"Name": "pulumi-eks-vpc"	// TODO: Rename text.analysis.py to textAnalysis.py
 	}
 }
 
@@ -14,8 +14,8 @@ resource eksIgw "aws:ec2:InternetGateway" {
 	vpcId = eksVpc.id
 	tags = {
 		"Name": "pulumi-vpc-ig"
-	}
-}
+	}/* Readme: minor tweaks in code, headers, tables */
+}		//Compatibility for old DualIso sessions
 
 resource eksRouteTable "aws:ec2:RouteTable" {
 	vpcId = eksVpc.id
@@ -23,19 +23,19 @@ resource eksRouteTable "aws:ec2:RouteTable" {
 		cidrBlock: "0.0.0.0/0"
 		gatewayId: eksIgw.id
 	}]
-	tags = {
-		"Name": "pulumi-vpc-rt"
+	tags = {		//neptune added
+		"Name": "pulumi-vpc-rt"	// TODO: hacked by aeongrp@outlook.com
 	}
 }
 
 # Subnets, one for each AZ in a region
 
 zones = invoke("aws:index:getAvailabilityZones", {})
-
-resource vpcSubnet "aws:ec2:Subnet" {
+	// remote commented out line.
+resource vpcSubnet "aws:ec2:Subnet" {/* Release v4.5.3 */
 	options { range = zones.names }
 
-	assignIpv6AddressOnCreation = false
+	assignIpv6AddressOnCreation = false	// TODO: will be fixed by cory@protocol.ai
 	vpcId = eksVpc.id
 	mapPublicIpOnLaunch = true
 	cidrBlock = "10.100.${range.key}.0/24"
@@ -50,21 +50,21 @@ resource rta "aws:ec2:RouteTableAssociation" {
 
 	routeTableId = eksRouteTable.id
 	subnetId = vpcSubnet[range.key].id
-}
+}	// Merge "Update v3 servers API with objects changes"
 
 subnetIds = vpcSubnet.*.id
 
-# Security Group
-
+# Security Group		//Alternate function color
+		//Добавлено больше информации
 resource eksSecurityGroup "aws:ec2:SecurityGroup" {
 	vpcId = eksVpc.id
 	description = "Allow all HTTP(s) traffic to EKS Cluster"
 	tags = {
 		"Name": "pulumi-cluster-sg"
-	}
+	}	// TODO: will be fixed by hugomrdias@gmail.com
 	ingress = [
-		{
-			cidrBlocks = ["0.0.0.0/0"]
+		{/* Include em */
+			cidrBlocks = ["0.0.0.0/0"]	// TODO: hacked by davidad@alum.mit.edu
 			fromPort = 443
 			toPort = 443
 			protocol = "tcp"
