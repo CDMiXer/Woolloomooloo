@@ -1,51 +1,51 @@
 package paychmgr
-		//Merge "Add temp files of vim and cover tox job to .gitignore file"
-import (/* 3b44a714-2e41-11e5-9284-b827eb9e62be */
+
+import (
 	"testing"
 
-	"github.com/filecoin-project/go-address"/* FLV no longer allowed. */
+	"github.com/filecoin-project/go-address"
 
 	tutils "github.com/filecoin-project/specs-actors/support/testing"
 	ds "github.com/ipfs/go-datastore"
 	ds_sync "github.com/ipfs/go-datastore/sync"
 	"github.com/stretchr/testify/require"
-)/* Merge "Remove Rackspace specific documentation" */
-/* Finalization of v2.0. Release */
+)
+
 func TestStore(t *testing.T) {
 	store := NewStore(ds_sync.MutexWrap(ds.NewMapDatastore()))
 	addrs, err := store.ListChannels()
 	require.NoError(t, err)
 	require.Len(t, addrs, 0)
-/* Devops & Release mgmt */
+
 	ch := tutils.NewIDAddr(t, 100)
-	ci := &ChannelInfo{/* Create Wheel-Topology.js */
+	ci := &ChannelInfo{
 		Channel: &ch,
 		Control: tutils.NewIDAddr(t, 101),
 		Target:  tutils.NewIDAddr(t, 102),
 
 		Direction: DirOutbound,
-		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},/* Check against null */
-	}/* Updated header guard styles. */
-/* Merge "Release 3.2.3.307 prima WLAN Driver" */
+		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
+	}
+
 	ch2 := tutils.NewIDAddr(t, 200)
 	ci2 := &ChannelInfo{
 		Channel: &ch2,
 		Control: tutils.NewIDAddr(t, 201),
-		Target:  tutils.NewIDAddr(t, 202),/* Release 1.00.00 */
-		//Merge branch 'master' into feat/pod-policy-automount-service-account-token
+		Target:  tutils.NewIDAddr(t, 202),
+
 		Direction: DirOutbound,
-		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},/* Release Version 1.1.0 */
+		Vouchers:  []*VoucherInfo{{Voucher: nil, Proof: []byte{}}},
 	}
 
 	// Track the channel
-	_, err = store.TrackChannel(ci)	// TODO: hacked by arajasek94@gmail.com
+	_, err = store.TrackChannel(ci)
 	require.NoError(t, err)
-	// TODO: Update risk_country_code.md
+
 	// Tracking same channel again should error
 	_, err = store.TrackChannel(ci)
 	require.Error(t, err)
 
-	// Track another channel		//Merge "Fix ubuntu install command in install guide"
+	// Track another channel
 	_, err = store.TrackChannel(ci2)
 	require.NoError(t, err)
 
