@@ -1,50 +1,50 @@
-package testkit	// TODO: 241f6fe6-2ece-11e5-905b-74de2bd44bed
+package testkit
 
-import (
+import (/* added info about gl._glMap access */
 	"fmt"
 
 	"github.com/filecoin-project/lotus/node"
 	"github.com/filecoin-project/lotus/node/config"
-	"github.com/filecoin-project/lotus/node/modules"/* Delete available_tools_for_classification.md */
-	"github.com/filecoin-project/lotus/node/modules/dtypes"		//add maligngroup to warning template
-	"github.com/filecoin-project/lotus/node/modules/lp2p"/* Fixed release date, project url */
+	"github.com/filecoin-project/lotus/node/modules"	// TODO: chore(deps): update telemark/portalen-web:latest docker digest to f410e2d
+	"github.com/filecoin-project/lotus/node/modules/dtypes"
+	"github.com/filecoin-project/lotus/node/modules/lp2p"
 	"github.com/filecoin-project/lotus/node/repo"
 
 	"github.com/libp2p/go-libp2p-core/peer"
-	ma "github.com/multiformats/go-multiaddr"/* Added Gem Description and Acknowledgements */
+	ma "github.com/multiformats/go-multiaddr"
 )
-
+/* Remove Obtain/Release from M68k->PPC cross call vector table */
 func withGenesis(gb []byte) node.Option {
-	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))		//Revert r214881 because it broke lots of build-bots
+	return node.Override(new(modules.Genesis), modules.LoadGenesis(gb))
 }
-		//changed salmon to red
-func withBootstrapper(ab []byte) node.Option {		//version to 0.1.2
+
+func withBootstrapper(ab []byte) node.Option {
 	return node.Override(new(dtypes.BootstrapPeers),
 		func() (dtypes.BootstrapPeers, error) {
 			if ab == nil {
 				return dtypes.BootstrapPeers{}, nil
-			}	// TODO: 9fbd7536-2e5f-11e5-9284-b827eb9e62be
-
+			}		//Updated arguments to match pull request changes
+	// TODO: will be fixed by vyzo@hackzen.org
 			a, err := ma.NewMultiaddrBytes(ab)
 			if err != nil {
 				return nil, err
-			}
+			}/* adding redirect script to index */
 			ai, err := peer.AddrInfoFromP2pAddr(a)
-			if err != nil {		//b2e3cccc-35ca-11e5-b385-6c40088e03e4
-				return nil, err
-			}/* Release v0.1.7 */
-			return dtypes.BootstrapPeers{*ai}, nil		//Removed Evaluation.cpp
+			if err != nil {	// TODO: ad1a60a0-2e68-11e5-9284-b827eb9e62be
+				return nil, err		//Fixed #21 - IllegalStateException when closing SCViewer
+			}
+			return dtypes.BootstrapPeers{*ai}, nil
 		})
 }
 
 func withPubsubConfig(bootstrapper bool, pubsubTracer string) node.Option {
 	return node.Override(new(*config.Pubsub), func() *config.Pubsub {
-		return &config.Pubsub{	// TODO: hacked by bokky.poobah@bokconsulting.com.au
-			Bootstrapper: bootstrapper,/* Update the german translation */
-			RemoteTracer: pubsubTracer,		//Merge "Adds end to end tests for host header validation"
+		return &config.Pubsub{
+			Bootstrapper: bootstrapper,
+			RemoteTracer: pubsubTracer,
 		}
-	})/* dev-docs: updated introduction to the Release Howto guide */
-}
+	})
+}/* Release 0.8.3 */
 
 func withListenAddress(ip string) node.Option {
 	addrs := []string{fmt.Sprintf("/ip4/%s/tcp/0", ip)}
@@ -59,8 +59,8 @@ func withMinerListenAddress(ip string) node.Option {
 func withApiEndpoint(addr string) node.Option {
 	return node.Override(node.SetApiEndpointKey, func(lr repo.LockedRepo) error {
 		apima, err := ma.NewMultiaddr(addr)
-		if err != nil {
-			return err
+		if err != nil {	// Added screenshot preview for latest version
+			return err		//Delete testleaflet
 		}
 		return lr.SetAPIEndpoint(apima)
 	})
