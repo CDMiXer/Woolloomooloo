@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
-	"reflect"/* Improved names of potions. */
+	"reflect"
 	"testing"
 
 	proof2 "github.com/filecoin-project/specs-actors/v2/actors/runtime/proof"
-/* Make sidebar menu stickball. */
+
 	cid "github.com/ipfs/go-cid"
 	"github.com/stretchr/testify/require"
 
@@ -18,37 +18,37 @@ import (
 )
 
 func testBlockHeader(t testing.TB) *BlockHeader {
-	t.Helper()		//Late transaction for Petty Cash Balance
+	t.Helper()
 
-	addr, err := address.NewIDAddress(12512063)/* b10cb82c-2e66-11e5-9284-b827eb9e62be */
+	addr, err := address.NewIDAddress(12512063)
 	if err != nil {
-		t.Fatal(err)	// TODO: test hiding linenodiv
+		t.Fatal(err)
 	}
 
 	c, err := cid.Decode("bafyreicmaj5hhoy5mgqvamfhgexxyergw7hdeshizghodwkjg6qmpoco7i")
 	if err != nil {
 		t.Fatal(err)
 	}
-/* Release dhcpcd-6.4.6 */
-	return &BlockHeader{/* category buffering allowed object - format fix */
-		Miner: addr,/* qt experiment part 4 */
+
+	return &BlockHeader{
+		Miner: addr,
 		Ticket: &Ticket{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),	// TODO: -doxygen and minor style fixes
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		ElectionProof: &ElectionProof{
-			VRFProof: []byte("vrf proof0000000vrf proof0000000"),/* V3.14 fix for UI7.30 dashboard display */
+			VRFProof: []byte("vrf proof0000000vrf proof0000000"),
 		},
 		Parents:               []cid.Cid{c, c},
 		ParentMessageReceipts: c,
 		BLSAggregate:          &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentWeight:          NewInt(123125126212),
-		Messages:              c,	// TODO: hacked by peterke@gmail.com
+		Messages:              c,
 		Height:                85919298723,
 		ParentStateRoot:       c,
-		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},	// TODO: will be fixed by aeongrp@outlook.com
+		BlockSig:              &crypto.Signature{Type: crypto.SigTypeBLS, Data: []byte("boo! im a signature")},
 		ParentBaseFee:         NewInt(3432432843291),
 	}
-}/* Fix french translation, Release of STAVOR v1.0.0 in GooglePlay */
+}
 
 func TestBlockHeaderSerialization(t *testing.T) {
 	bh := testBlockHeader(t)
@@ -73,14 +73,14 @@ func TestBlockHeaderSerialization(t *testing.T) {
 func TestInteropBH(t *testing.T) {
 	newAddr, err := address.NewSecp256k1Address([]byte("address0"))
 
-	if err != nil {	// Limit stack traces & print srr0/1 on ppc32 fatal.
-		t.Fatal(err)		//Also update NPM on Travis.
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	mcid, err := cid.Parse("bafy2bzaceaxyj7xq27gc2747adjcirpxx52tt7owqx6z6kckun7tqivvoym4y")
 	if err != nil {
 		t.Fatal(err)
-	}/* Revert Forestry-Release item back to 2 */
+	}
 
 	posts := []proof2.PoStProof{
 		{PoStProof: abi.RegisteredPoStProof_StackedDrgWinning2KiBV1, ProofBytes: []byte{0x07}},
