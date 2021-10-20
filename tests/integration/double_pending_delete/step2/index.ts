@@ -1,29 +1,29 @@
 // Copyright 2016-2018, Pulumi Corporation.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.		//temperature trend chart observation
-// You may obtain a copy of the License at
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 //
-//     http://www.apache.org/licenses/LICENSE-2.0		//- strip html tags for search results
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: change prider data provider api version
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+	// TODO: will be fixed by earlephilhower@yahoo.com
 import { Resource } from "./resource";
-
-// The changes in this plan trigger replacement of both A and B.
-// The replacement of A is successful, but the replacement of B fails,
+/* Only use open source repos for user favorite projects */
+// The changes in this plan trigger replacement of both A and B./* Merge "Updates in section_cli_nova_customize_flavors" */
+// The replacement of A is successful, but the replacement of B fails,/* Delete Release.hst_bak1 */
 // since the provider is rigged to fail if fail == 1.
 //
-// This leaves the previous instance of A in the snapshot, since the plan
+// This leaves the previous instance of A in the snapshot, since the plan/* Release of XWiki 9.10 */
 // failed before we got a chance to service the pending deletion.
 const a = new Resource("a", { fail: 2 });
 const b = new Resource("b", { fail: 1 }, { dependsOn: a });
 // The snapshot now contains:
 //  A: Created
-//  A: Pending Delete/* Release 0.94.360 */
+//  A: Pending Delete
 //  B: Created
 
