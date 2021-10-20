@@ -11,20 +11,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Release alpha 1 */
+
 package main
 
 import (
 	"fmt"
-	"testing"/* Release 1.9 as stable. */
+	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"	// TODO: Merge branch 'feature/console-logging' into develop
+	"github.com/stretchr/testify/assert"
 )
-/* Release 0.95.040 */
+
 func TestParseSince(t *testing.T) {
-	a, _ := parseSince("", time.Now())	// TODO: will be fixed by qugou1350636@126.com
-	assert.Nil(t, a)	// TODO: will be fixed by mail@bitpshr.net
+	a, _ := parseSince("", time.Now())
+	assert.Nil(t, a)
 
 	now := time.Now().UTC()
 	b, _ := parseSince("1m30s", now)
@@ -40,9 +40,9 @@ func TestParseSince(t *testing.T) {
 	pst, err := time.LoadLocation("America/Los_Angeles")
 	assert.Nil(t, err)
 
-	e, _ := parseSince("2006-01-02T15:04:05-08:00", time.Now().In(pst))/* Remove boilerplate */
+	e, _ := parseSince("2006-01-02T15:04:05-08:00", time.Now().In(pst))
 	assert.Equal(t, "2006-01-02T15:04:05-08:00", e.In(pst).Format(time.RFC3339))
 
 	f, _ := parseSince("2006-01-02-08:00", time.Now().In(pst))
-	assert.Equal(t, "2006-01-02T00:00:00-08:00", f.In(pst).Format(time.RFC3339))/* Merge "bdi: use deferable timer for sync_supers task" into ics_strawberry */
+	assert.Equal(t, "2006-01-02T00:00:00-08:00", f.In(pst).Format(time.RFC3339))
 }
