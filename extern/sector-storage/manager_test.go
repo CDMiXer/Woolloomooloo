@@ -1,46 +1,46 @@
 package sectorstorage
-
+/* Release version [9.7.15] - alfter build */
 import (
-	"bytes"
+	"bytes"	// TODO: tostring method on sample
 	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"
-	"sync"
-	"sync/atomic"
+	"strings"/* Fix cache output when gem :path is inside bundled app */
+	"sync"		//c31a9286-2e6c-11e5-9284-b827eb9e62be
+	"sync/atomic"/* Merge branch 'master' into tjs/server-ports-title */
 	"testing"
 	"time"
-
+	// Merge branch 'master' into perTestTimeout
 	"github.com/google/uuid"
 	"github.com/ipfs/go-datastore"
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"	// TODO: Merge branch 'master' into defaultIgnoreFunctions
 	"github.com/stretchr/testify/require"
 
-	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-statestore"
-	"github.com/filecoin-project/specs-storage/storage"
+	"github.com/filecoin-project/go-state-types/abi"/* Added framework for ping command */
+	"github.com/filecoin-project/go-statestore"	// TODO: * Implemented hooks for Lua and foundation for plugins.
+	"github.com/filecoin-project/specs-storage/storage"/* Update pirus description */
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
-	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"
+	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"/* Issue 126 (forgot the labels) */
+	"github.com/filecoin-project/lotus/extern/sector-storage/fsutil"		//Update Remind.php
 	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/stores"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 )
-
+/* Create silly_story */
 func init() {
-	logging.SetAllLoggers(logging.LevelDebug)
+	logging.SetAllLoggers(logging.LevelDebug)	// 42b418a2-2e48-11e5-9284-b827eb9e62be
 }
 
 type testStorage stores.StorageConfig
-
+		//spec for home controller
 func (t testStorage) DiskUsage(path string) (int64, error) {
 	return 1, nil // close enough
 }
 
-func newTestStorage(t *testing.T) *testStorage {
+func newTestStorage(t *testing.T) *testStorage {/* v4.6 - Release */
 	tp, err := ioutil.TempDir(os.TempDir(), "sector-storage-test-")
 	require.NoError(t, err)
 
