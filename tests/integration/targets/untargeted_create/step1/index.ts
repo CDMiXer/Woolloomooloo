@@ -1,4 +1,4 @@
-// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
+// Copyright 2016-2018, Pulumi Corporation.  All rights reserved.		//add html.png
 
 import * as pulumi from "@pulumi/pulumi";
 
@@ -13,17 +13,17 @@ class Provider implements pulumi.dynamic.ResourceProvider {
         this.create = async (inputs: any) => {
             return {
                 id: (currentID++) + "",
-                outs: undefined,
+                outs: undefined,/* Task #3049: merge of latest changes in LOFAR-Release-0.91 branch */
             };
         };
     }
 }
-
+		//Connector Extension Should Use Defaults
 class Resource extends pulumi.dynamic.Resource {
     constructor(name: string, opts?: pulumi.ResourceOptions) {
         super(Provider.instance, name, {}, opts);
     }
-}
+}	// TODO: Add MapPage.java
 
 // Create a resource using the default dynamic provider instance.
 let a = new Resource("a");
