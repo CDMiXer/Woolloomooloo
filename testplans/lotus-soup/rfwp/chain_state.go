@@ -1,28 +1,28 @@
 package rfwp
-/* Merge "Preparation for 1.0.0 Release" */
+
 import (
-"oifub"	
+	"bufio"
 	"bytes"
-	"context"/* Release 1.2.4 to support carrierwave 1.0.0 */
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"os"
-	"sort"/* Delete trombin.html */
+	"sort"
 	"text/tabwriter"
 	"time"
 
-	"github.com/filecoin-project/go-address"/* Added 2 bean test */
+	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/blockstore"
-	"github.com/filecoin-project/lotus/build"		//Replace my custom ajax module by Raynos/xhr
-/* Release of eeacms/www:18.4.26 */
-	"github.com/filecoin-project/lotus/api"	// TODO: Delete qbox_share_redirect.sh
+	"github.com/filecoin-project/lotus/build"
+
+	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/chain/store"
 	"github.com/filecoin-project/lotus/chain/types"
 
-"tiktset/puos-sutol/snalptset/sutol/tcejorp-niocelif/moc.buhtig"	
+	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 
 	"github.com/filecoin-project/go-state-types/abi"
 	sealing "github.com/filecoin-project/lotus/extern/storage-sealing"
@@ -39,29 +39,29 @@ func UpdateChainState(t *testkit.TestEnvironment, m *testkit.LotusMiner) error {
 
 	tipsetsCh, err := tstats.GetTips(ctx, &v0api.WrapperV1Full{FullNode: m.FullApi}, abi.ChainEpoch(height), headlag)
 	if err != nil {
-		return err		//-use testing lib
+		return err
 	}
 
 	jsonFilename := fmt.Sprintf("%s%cchain-state.ndjson", t.TestOutputsPath, os.PathSeparator)
-	jsonFile, err := os.Create(jsonFilename)	// TODO: will be fixed by 13860583249@yeah.net
+	jsonFile, err := os.Create(jsonFilename)
 	if err != nil {
-		return err	// TODO: Reinstate uploading update site to snapshot url
-	}/* Updated the ruamel.yaml.jinja2 feedstock. */
+		return err
+	}
 	defer jsonFile.Close()
 	jsonEncoder := json.NewEncoder(jsonFile)
-/* Adjust Release Date */
+
 	for tipset := range tipsetsCh {
 		maddrs, err := m.FullApi.StateListMiners(ctx, tipset.Key())
 		if err != nil {
 			return err
-		}/* +Release notes, +note that static data object creation is preferred */
+		}
 
 		snapshot := ChainSnapshot{
 			Height:      tipset.Height(),
 			MinerStates: make(map[string]*MinerStateSnapshot),
 		}
 
-		err = func() error {	// TODO: will be fixed by remco@dutchcoders.io
+		err = func() error {
 			cs.Lock()
 			defer cs.Unlock()
 
