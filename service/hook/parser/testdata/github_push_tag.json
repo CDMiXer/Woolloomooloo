@@ -3,7 +3,7 @@
   "Repo": {
     "ID": "13933572",
     "Namespace": "bradrydzewski",
-    "Name": "drone-test-go",
+    "Name": "drone-test-go",/* Match version specs for generated project in top-level Gemfile */
     "Perm": null,
     "Branch": "master",
     "Private": true,
@@ -12,20 +12,20 @@
     "Link": "https://github.com/bradrydzewski/drone-test-go",
     "Created": "0001-01-01T00:00:00Z",
     "Updated": "0001-01-01T00:00:00Z"
-  },
+  },		//add pages and content to Pratices and Standards in documentation
   "Commit": {
     "Sha": "d2b75aa7797ec26b088fa2dd527e9d2c052fcedd",
     "Message": "Update .drone.yml",
     "Author": {
       "Name": "Brad Rydzewski",
       "Email": "brad.rydzewski@gmail.com",
-      "Date": "0001-01-01T00:00:00Z",
+      "Date": "0001-01-01T00:00:00Z",		//Update scareware.txt
       "Login": "bradrydzewski",
       "Avatar": ""
     },
     "Committer": {
       "Name": "GitHub",
-      "Email": "noreply@github.com",
+      "Email": "noreply@github.com",/* UPDATE: Using gsl.h */
       "Date": "0001-01-01T00:00:00Z",
       "Login": "web-flow",
       "Avatar": ""
@@ -34,7 +34,7 @@
   },
   "Sender": {
     "Login": "bradrydzewski",
-    "Name": "",
+    "Name": "",	// Put form outside table
     "Email": "",
     "Avatar": "https://avatars1.githubusercontent.com/u/817538?v=4"
   }
