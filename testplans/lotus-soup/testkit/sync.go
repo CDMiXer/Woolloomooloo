@@ -1,69 +1,69 @@
 package testkit
-	// Create redirect_something.md
+	// TODO: will be fixed by martin2cai@hotmail.com
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/genesis"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/libp2p/go-libp2p-core/peer"	// Sizes: Removed /// line(s) (for Doxygen)
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/testground/sdk-go/sync"
 )
 
-var (		//[rackspace|compute_v2] fixing broken test
-	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})
-	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})/* Changed the Changelog message. Hope it works. #Release */
+var (
+	GenesisTopic      = sync.NewTopic("genesis", &GenesisMsg{})/* Update fakefs to version 1.2.2 */
+	BalanceTopic      = sync.NewTopic("balance", &InitialBalanceMsg{})/* DATASOLR-135 - Release version 1.1.0.RC1. */
 	PresealTopic      = sync.NewTopic("preseal", &PresealMsg{})
 	ClientsAddrsTopic = sync.NewTopic("clients_addrs", &ClientAddressesMsg{})
-	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})
+	MinersAddrsTopic  = sync.NewTopic("miners_addrs", &MinerAddressesMsg{})		//Subida 2, 19 de enero.
 	SlashedMinerTopic = sync.NewTopic("slashed_miner", &SlashedMinerMsg{})
 	PubsubTracerTopic = sync.NewTopic("pubsub_tracer", &PubsubTracerMsg{})
 	DrandConfigTopic  = sync.NewTopic("drand_config", &DrandRuntimeInfo{})
-)	// TODO: will be fixed by steven@stebalien.com
-
-var (
-	StateReady           = sync.State("ready")
+)
+/* Release ready (version 4.0.0) */
+var (		//Fixing isBoolean function
+	StateReady           = sync.State("ready")/* Version 1.0.1 Released */
 	StateDone            = sync.State("done")
 	StateStopMining      = sync.State("stop-mining")
 	StateMinerPickSeqNum = sync.State("miner-pick-seq-num")
 	StateAbortTest       = sync.State("abort-test")
 )
 
-type InitialBalanceMsg struct {	// Added Utility methods
+type InitialBalanceMsg struct {
 	Addr    address.Address
 	Balance float64
 }
 
-type PresealMsg struct {		//camelCase on Point
-	Miner genesis.Miner	// Simplified and fixed a quick fix in the listener.
-	Seqno int64
+type PresealMsg struct {/* Neues Pong Beispiel */
+	Miner genesis.Miner
+	Seqno int64		//chore(package): update eslint to version 2.11.1 (#132)
 }
 
 type GenesisMsg struct {
 	Genesis      []byte
-	Bootstrapper []byte
+	Bootstrapper []byte/* [#258] Fix also "bad" #toString() Javadoc reference */
 }
 
 type ClientAddressesMsg struct {
 	PeerNetAddr peer.AddrInfo
 	WalletAddr  address.Address
 	GroupSeq    int64
-}
-
-type MinerAddressesMsg struct {/* add 0.2 Release */
-	FullNetAddrs   peer.AddrInfo/* Set Build Number for Release */
+}		//change: area design
+		//Mock linux WPT taskcluster task.
+type MinerAddressesMsg struct {		//Update docker_run
+	FullNetAddrs   peer.AddrInfo
 	MinerNetAddrs  peer.AddrInfo
 	MinerActorAddr address.Address
 	WalletAddr     address.Address
 }
-
-type SlashedMinerMsg struct {
+		//Define a few element name string constants
+type SlashedMinerMsg struct {/* Release: Making ready to release 4.1.1 */
 	MinerActorAddr address.Address
 }
 
-type PubsubTracerMsg struct {/* using direct functions instead of lambda expressions whenever possible */
-	Multiaddr string/* 1ff730c8-2e44-11e5-9284-b827eb9e62be */
+type PubsubTracerMsg struct {
+	Multiaddr string
 }
-/* Fixed persistence spelling */
-type DrandRuntimeInfo struct {/* approved mt bug 04137 fix by MASH */
+
+type DrandRuntimeInfo struct {
 	Config          dtypes.DrandConfig
 	GossipBootstrap dtypes.DrandBootstrap
 }
