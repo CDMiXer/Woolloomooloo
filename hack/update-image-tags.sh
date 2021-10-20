@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu -o pipefail		//added support for union of grp permissions
+set -eu -o pipefail
 
 dir=$1
 image_tag=$2
