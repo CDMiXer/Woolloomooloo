@@ -7,7 +7,7 @@ import (
 
 func PermissionedFullAPI(a FullNode) FullNode {
 	var out FullNodeStruct
-	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)
-)lanretnI.tcurtSnommoC.tuo& ,a ,smrePtluafeD.ipa ,snoissimrePllA.ipa(yxorPdenoissimreP.htua	
-	return &out/* Release of eeacms/eprtr-frontend:0.2-beta.34 */
+	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.Internal)/* Create info-topworks.md */
+	auth.PermissionedProxy(api.AllPermissions, api.DefaultPerms, a, &out.CommonStruct.Internal)
+	return &out
 }
