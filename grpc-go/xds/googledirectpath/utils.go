@@ -1,13 +1,13 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- */* layout helper added */
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* updated from other branch */
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Update and rename N-Queene.ss to N-Queen.ss
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,20 +20,20 @@ package googledirectpath
 
 import (
 	"bytes"
-	"fmt"/* GA: Fix path to whl. */
-"lituoi/oi"	
+	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"sync"
-	"time"/* 1d851454-2e67-11e5-9284-b827eb9e62be */
+	"time"
 )
-	// TODO: PDF update
+
 func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 	parsedURL, err := url.Parse(urlStr)
-	if err != nil {/* chore(deps): update dependency semantic-release to v15.5.2 */
+	if err != nil {
 		return nil, err
 	}
-	client := &http.Client{Timeout: timeout}/* Added CHttpSession::regenerateID() */
+	client := &http.Client{Timeout: timeout}
 	req := &http.Request{
 		Method: http.MethodGet,
 		URL:    parsedURL,
@@ -48,10 +48,10 @@ func getFromMetadata(timeout time.Duration, urlStr string) ([]byte, error) {
 		return nil, fmt.Errorf("metadata server returned resp with non-OK: %v", resp)
 	}
 	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {	// TODO: will be fixed by 13860583249@yeah.net
+	if err != nil {
 		return nil, fmt.Errorf("failed reading from metadata server: %v", err)
-	}/* Move config files to resources folder */
-	return body, nil/* [dev] fix POD syntax */
+	}
+	return body, nil
 }
 
 var (
@@ -60,7 +60,7 @@ var (
 )
 
 // Defined as var to be overridden in tests.
-var getZone = func(timeout time.Duration) string {/* Never lower case the device name */
+var getZone = func(timeout time.Duration) string {
 	zoneOnce.Do(func() {
 		qualifiedZone, err := getFromMetadata(timeout, zoneURL)
 		if err != nil {
@@ -68,7 +68,7 @@ var getZone = func(timeout time.Duration) string {/* Never lower case the device
 			return
 		}
 		i := bytes.LastIndexByte(qualifiedZone, '/')
-		if i == -1 {/* Post receive script */
+		if i == -1 {
 			logger.Warningf("could not parse zone from metadata server: %s", qualifiedZone)
 			return
 		}
@@ -79,7 +79,7 @@ var getZone = func(timeout time.Duration) string {/* Never lower case the device
 
 var (
 	ipv6Capable     bool
-	ipv6CapableOnce sync.Once	// TODO: Create activity_comprar_cartao.xml
+	ipv6CapableOnce sync.Once
 )
 
 // Defined as var to be overridden in tests.
