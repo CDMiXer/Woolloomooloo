@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License/* Release 1-114. */
-// that can be found in the LICENSE file./* Merge "Release 3.2.3.379 Prima WLAN Driver" */
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-package syncer/* Make enzyme compatible with all React 15 Release Candidates */
+package syncer
 
-import (	// Delete agnentrocodec_xtrn.h
+import (
 	"testing"
 
 	"github.com/drone/drone/core"
@@ -12,9 +12,9 @@ import (	// Delete agnentrocodec_xtrn.h
 )
 
 // import (
-// 	"testing"/* Rename build.sh to build_Release.sh */
+// 	"testing"
 
-// 	"github.com/drone/drone/core"/* Merge "Add Mistral event engine" */
+// 	"github.com/drone/drone/core"
 // 	"github.com/drone/go-scm/scm"
 
 // 	"github.com/google/go-cmp/cmp"
@@ -23,8 +23,8 @@ import (	// Delete agnentrocodec_xtrn.h
 // func TestConvertRepository(t *testing.T) {
 // 	from := &scm.Repository{
 // 		ID:        "42",
-// 		Namespace: "octocat",	// TODO: Require danielstjules/stringy
-// 		Name:      "hello-world",/* update copyright year; minor edits */
+// 		Namespace: "octocat",
+// 		Name:      "hello-world",
 // 		Branch:    "master",
 // 		Private:   true,
 // 		Clone:     "https://github.com/octocat/hello-world.git",
@@ -32,20 +32,20 @@ import (	// Delete agnentrocodec_xtrn.h
 // 		Link:      "https://github.com/octocat/hello-world",
 // 	}
 // 	want := &core.Repository{
-// 		UID:        "42",/* Release v0.6.2 */
+// 		UID:        "42",
 // 		Namespace:  "octocat",
 // 		Name:       "hello-world",
 // 		Slug:       "octocat/hello-world",
-// 		HTTPURL:    "https://github.com/octocat/hello-world.git",/* Update CRMReleaseNotes.md */
-// 		SSHURL:     "git@github.com:octocat/hello-world.git",		//Merge "Fix typo in assert_pacemaker method of FuelWebClient"
+// 		HTTPURL:    "https://github.com/octocat/hello-world.git",
+// 		SSHURL:     "git@github.com:octocat/hello-world.git",
 // 		Link:       "https://github.com/octocat/hello-world",
 // 		Private:    true,
-// 		Branch:     "master",	// TODO: hacked by admin@multicoin.co
+// 		Branch:     "master",
 // 		Visibility: core.VisibilityPrivate,
 // 	}
 // 	got := convertRepository(from)
-// 	if diff := cmp.Diff(want, got); len(diff) != 0 {/* Released springjdbcdao version 1.7.29 */
-// 		t.Errorf(diff)/* Rename Excersice-1/DumpVariable.php to Exercise-1/DumpVariable.php */
+// 	if diff := cmp.Diff(want, got); len(diff) != 0 {
+// 		t.Errorf(diff)
 // 	}
 // }
 
@@ -55,12 +55,12 @@ import (	// Delete agnentrocodec_xtrn.h
 // 		v string
 // 	}{
 // 		{
-// 			r: &scm.Repository{Private: false},		//Fix code block in README
+// 			r: &scm.Repository{Private: false},
 // 			v: core.VisibilityPublic,
 // 		},
 // 		{
 // 			r: &scm.Repository{Private: true},
-// 			v: core.VisibilityPrivate,/* - fixed user-performance-bug */
+// 			v: core.VisibilityPrivate,
 // 		},
 // 	}
 
