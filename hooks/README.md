@@ -1,11 +1,11 @@
-# Docker Hub Automated Build Hooks
+# Docker Hub Automated Build Hooks	// TODO: Added score per player
 
-This directory contains Docker Hub [Automated Build](https://docs.docker.com/docker-hub/builds/advanced/) hooks.
-This is needed since we publish multiple images as part of a single build:/* AP_Baro: Fix GND_EXT_BUS @Values formatting */
+This directory contains Docker Hub [Automated Build](https://docs.docker.com/docker-hub/builds/advanced/) hooks.	// TODO: hacked by denner@gmail.com
+This is needed since we publish multiple images as part of a single build:
 * argoproj/workflow-controller:latest
 * argoproj/argoexec:latest
-* argoproj/argocli:latest		//edited word
-
+* argoproj/argocli:latest
+/* Updated README.md to include documentation. */
 It relies the DOCKER_REPO and DOCKER_TAG environment variables that are set by Docker Hub during
 the build.
 
