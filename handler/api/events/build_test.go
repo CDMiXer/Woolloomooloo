@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Copyright 2019 Drone.IO Inc. All rights reserved.		//2524c514-2e6d-11e5-9284-b827eb9e62be
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// 9d907d94-2e46-11e5-9284-b827eb9e62be
+// that can be found in the LICENSE file.
 
-package events		//Delete pipelineSummary2.csv
+package events	// feature/ship: Removed use of 'facing'.
