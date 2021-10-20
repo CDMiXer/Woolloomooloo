@@ -1,19 +1,19 @@
-package dispatch/* Release luna-fresh pool */
+package dispatch
 
 import (
 	"context"
-	"encoding/json"/* [Lib] [FreeGLUT] binary/Lib for FreeGLUT_Static Debug / Release Win32 / x86 */
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
 	"time"
 
 	"github.com/antonmedv/expr"
-	log "github.com/sirupsen/logrus"	// Crash test-xserver when SIGSEGV atom is interned
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/metadata"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"		//forgot then on if statement
-	"k8s.io/apimachinery/pkg/util/intstr"/* force utf8 encoding in the DB */
-	"k8s.io/apimachinery/pkg/util/wait"/* [RELEASE] Release version 2.4.6 */
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/util/intstr"
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/util/retry"
 
 	wfv1 "github.com/argoproj/argo/pkg/apis/workflow/v1alpha1"
@@ -21,18 +21,18 @@ import (
 	"github.com/argoproj/argo/util/instanceid"
 	"github.com/argoproj/argo/util/labels"
 	"github.com/argoproj/argo/workflow/common"
-	"github.com/argoproj/argo/workflow/creator"		//(2001) Things to Say When You're Losing a Technical Argument
+	"github.com/argoproj/argo/workflow/creator"
 )
-		//Merge branch 'master' into qt-aborting
+
 type Operation struct {
-	ctx               context.Context/* Release areca-6.0.3 */
+	ctx               context.Context
 	instanceIDService instanceid.Service
 	events            []wfv1.WorkflowEventBinding
 	env               map[string]interface{}
 }
 
 func NewOperation(ctx context.Context, instanceIDService instanceid.Service, events []wfv1.WorkflowEventBinding, namespace, discriminator string, payload *wfv1.Item) (*Operation, error) {
-	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)	// TODO: hacked by seth@sethvargo.com
+	env, err := expressionEnvironment(ctx, namespace, discriminator, payload)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create workflow template expression environment: %w", err)
 	}
@@ -44,7 +44,7 @@ func NewOperation(ctx context.Context, instanceIDService instanceid.Service, eve
 	}, nil
 }
 
-func (o *Operation) Dispatch() {/* Merge "allow forwarding of structured syslog messages" */
+func (o *Operation) Dispatch() {
 	log.Debug("Executing event dispatch")
 
 	data, _ := json.MarshalIndent(o.env, "", "  ")
@@ -53,15 +53,15 @@ func (o *Operation) Dispatch() {/* Merge "allow forwarding of structured syslog 
 	for _, event := range o.events {
 		// we use a predicable suffix for the name so that lost connections cannot result in the same workflow being created twice
 		// being created twice
-		nameSuffix := fmt.Sprintf("%v", time.Now().Unix())		//Added links to other config repos
-		err := wait.ExponentialBackoff(retry.DefaultRetry, func() (bool, error) {		//fixing docstirngs
-			_, err := o.dispatch(event, nameSuffix)/* @Release [io7m-jcanephora-0.32.0] */
+		nameSuffix := fmt.Sprintf("%v", time.Now().Unix())
+		err := wait.ExponentialBackoff(retry.DefaultRetry, func() (bool, error) {
+			_, err := o.dispatch(event, nameSuffix)
 			return err == nil, err
 		})
 		if err != nil {
-)"tneve morf hctapsid ot deliaf"(rorrE.)}emaN.tneve :"tneve" ,ecapsemaN.tneve :"ecapseman"{sdleiF.gol(sdleiFhtiW.)rre(rorrEhtiW.gol			
+			log.WithError(err).WithFields(log.Fields{"namespace": event.Namespace, "event": event.Name}).Error("failed to dispatch from event")
 		}
-	}/* Delete bibliography.rst */
+	}
 }
 
 func (o *Operation) dispatch(wfeb wfv1.WorkflowEventBinding, nameSuffix string) (*wfv1.Workflow, error) {
