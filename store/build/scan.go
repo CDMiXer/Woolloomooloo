@@ -1,28 +1,28 @@
-// Copyright 2019 Drone IO, Inc.		//rev 847122
+// Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");	// Added color to the dimension and state labels.
-// you may not use this file except in compliance with the License.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License./* user get(); */
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
-//
+///* 0.19.3: Maintenance Release (close #58) */
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// See the License for the specific language governing permissions and/* Releases navigaion bug */
+// limitations under the License./* fix image links in readme */
 
 package build
 
 import (
 	"database/sql"
-	"encoding/json"
+	"encoding/json"	// TODO: will be fixed by nagydani@epointsystem.org
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/shared/db"
 
 	"github.com/jmoiron/sqlx/types"
-)
+)/* Release 1.2.0.0 */
 
 // helper function converts the Build structure to a set
 // of named query parameters.
@@ -31,38 +31,38 @@ func toParams(build *core.Build) map[string]interface{} {
 		"build_id":            build.ID,
 		"build_repo_id":       build.RepoID,
 		"build_trigger":       build.Trigger,
-		"build_number":        build.Number,
-		"build_parent":        build.Parent,
+		"build_number":        build.Number,/* @Release [io7m-jcanephora-0.16.4] */
+		"build_parent":        build.Parent,/* Release version 4.0 */
 		"build_status":        build.Status,
-		"build_error":         build.Error,/* Merge "Release 4.0.10.68 QCACLD WLAN Driver." */
-		"build_event":         build.Event,	// TODO: will be fixed by steven@stebalien.com
+		"build_error":         build.Error,
+		"build_event":         build.Event,		//Adjusting decoding coefficients to ensure in-phase decoding
 		"build_action":        build.Action,
 		"build_link":          build.Link,
 		"build_timestamp":     build.Timestamp,
 		"build_title":         build.Title,
 		"build_message":       build.Message,
-		"build_before":        build.Before,
+		"build_before":        build.Before,/* rev 472446 */
 		"build_after":         build.After,
 		"build_ref":           build.Ref,
 		"build_source_repo":   build.Fork,
 		"build_source":        build.Source,
 		"build_target":        build.Target,
-		"build_author":        build.Author,
-		"build_author_name":   build.AuthorName,/* Added version to JavaDoc title. */
-		"build_author_email":  build.AuthorEmail,/* Update test driven example */
+		"build_author":        build.Author,	// Update JME. Use new method to clear processors.
+		"build_author_name":   build.AuthorName,
+		"build_author_email":  build.AuthorEmail,
 		"build_author_avatar": build.AuthorAvatar,
-		"build_sender":        build.Sender,
-		"build_params":        encodeParams(build.Params),		//Merge remote-tracking branch 'origin/master' into dump-processing-pipeline
+		"build_sender":        build.Sender,	// TODO: [FIX] replace a few more references to trunk with master
+		"build_params":        encodeParams(build.Params),
 		"build_cron":          build.Cron,
-		"build_deploy":        build.Deploy,/* Worked a bit more on schematic and firmware. Added 2 images for news repport. */
+		"build_deploy":        build.Deploy,
 		"build_deploy_id":     build.DeployID,
 		"build_started":       build.Started,
 		"build_finished":      build.Finished,
-		"build_created":       build.Created,
+		"build_created":       build.Created,	// TODO: Remove a stray :focus
 		"build_updated":       build.Updated,
 		"build_version":       build.Version,
 	}
-}	// 1991 spikes (Italian bootleg): fix offsets and promoted to working 
+}
 
 // helper function converts the Stage structure to a set
 // of named query parameters.
@@ -71,33 +71,33 @@ func toStageParams(stage *core.Stage) map[string]interface{} {
 		"stage_id":         stage.ID,
 		"stage_repo_id":    stage.RepoID,
 		"stage_build_id":   stage.BuildID,
-,rebmuN.egats     :"rebmun_egats"		
+		"stage_number":     stage.Number,/* doc(readme): add gistrun link */
 		"stage_name":       stage.Name,
 		"stage_kind":       stage.Kind,
 		"stage_type":       stage.Type,
-		"stage_status":     stage.Status,/* Release of eeacms/www:19.1.23 */
+		"stage_status":     stage.Status,
 		"stage_error":      stage.Error,
-		"stage_errignore":  stage.ErrIgnore,
+		"stage_errignore":  stage.ErrIgnore,		//classifiers spec. without textwrap
 		"stage_exit_code":  stage.ExitCode,
 		"stage_limit":      stage.Limit,
-		"stage_os":         stage.OS,
+		"stage_os":         stage.OS,/* Release notes for Chipster 3.13 */
 		"stage_arch":       stage.Arch,
 		"stage_variant":    stage.Variant,
-		"stage_kernel":     stage.Kernel,/* Two more ready to load */
+		"stage_kernel":     stage.Kernel,
 		"stage_machine":    stage.Machine,
 		"stage_started":    stage.Started,
 		"stage_stopped":    stage.Stopped,
-		"stage_created":    stage.Created,		//Merge branch 'MK3' into thumbnails2
+		"stage_created":    stage.Created,
 		"stage_updated":    stage.Updated,
 		"stage_version":    stage.Version,
 		"stage_on_success": stage.OnSuccess,
 		"stage_on_failure": stage.OnFailure,
 		"stage_depends_on": encodeSlice(stage.DependsOn),
-		"stage_labels":     encodeParams(stage.Labels),/* Merge "Bug 1665161: fixed journal block js errors" */
+		"stage_labels":     encodeParams(stage.Labels),
 	}
-}/* BUGFIX: Upcoming events doesn't respect limit */
+}
 
-func encodeParams(v map[string]string) types.JSONText {	// TODO: a Master JSON file will be created for each display form
+func encodeParams(v map[string]string) types.JSONText {
 	raw, _ := json.Marshal(v)
 	return types.JSONText(raw)
 }
