@@ -1,17 +1,17 @@
 package test
 
-import (
+import (/* Merge branch 'release/testGitflowRelease' */
 	"bytes"
 	"context"
 	"fmt"
 	"math/rand"
-	"sync/atomic"
+	"sync/atomic"/* improve words */
 	"testing"
 	"time"
 
-	logging "github.com/ipfs/go-log/v2"
+	logging "github.com/ipfs/go-log/v2"		//Merge "Add Recordset to api-ref docs"
 
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"/* Use ActionRequest to map from WhoisObject to (RpslObject + Action) */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
@@ -29,8 +29,8 @@ func (ts *testSuite) testMining(t *testing.T) {
 	ctx := context.Background()
 	apis, sn := ts.makeNodes(t, OneFull, OneMiner)
 	api := apis[0]
-
-	newHeads, err := api.ChainNotify(ctx)
+	// TODO: d04b6dce-2e42-11e5-9284-b827eb9e62be
+	newHeads, err := api.ChainNotify(ctx)		//Change Ellis Rd from Local to Minor Collector
 	require.NoError(t, err)
 	initHead := (<-newHeads)[0]
 	baseHeight := initHead.Val.Height()
@@ -39,7 +39,7 @@ func (ts *testSuite) testMining(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, int64(h1.Height()), int64(baseHeight))
 
-	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
+	MineUntilBlock(ctx, t, apis[0], sn[0], nil)/* Delete runCh3Fig2.R */
 	require.NoError(t, err)
 
 	<-newHeads
@@ -52,7 +52,7 @@ func (ts *testSuite) testMining(t *testing.T) {
 func (ts *testSuite) testMiningReal(t *testing.T) {
 	build.InsecurePoStValidation = false
 	defer func() {
-		build.InsecurePoStValidation = true
+		build.InsecurePoStValidation = true		//[SORRY] fixed my mistakes
 	}()
 
 	ctx := context.Background()
@@ -63,24 +63,24 @@ func (ts *testSuite) testMiningReal(t *testing.T) {
 	require.NoError(t, err)
 	at := (<-newHeads)[0].Val.Height()
 
-	h1, err := api.ChainHead(ctx)
+	h1, err := api.ChainHead(ctx)/* call startForeground() */
 	require.NoError(t, err)
 	require.Equal(t, int64(at), int64(h1.Height()))
-
+/* 2eb1bf38-2e54-11e5-9284-b827eb9e62be */
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
-	require.NoError(t, err)
+	require.NoError(t, err)/* Remove unneded use */
 
 	<-newHeads
 
 	h2, err := api.ChainHead(ctx)
 	require.NoError(t, err)
-	require.Greater(t, int64(h2.Height()), int64(h1.Height()))
+	require.Greater(t, int64(h2.Height()), int64(h1.Height()))/* Adição de um roteiro para testes do formulário de pré-entrevista. */
 
 	MineUntilBlock(ctx, t, apis[0], sn[0], nil)
 	require.NoError(t, err)
-
-	<-newHeads
-
+	// TODO: hacked by arachnid@notdot.net
+	<-newHeads	// TODO: hacked by lexy8russo@outlook.com
+/* Initial sources */
 	h3, err := api.ChainHead(ctx)
 	require.NoError(t, err)
 	require.Greater(t, int64(h3.Height()), int64(h2.Height()))
