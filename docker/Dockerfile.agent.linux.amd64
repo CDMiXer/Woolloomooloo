@@ -6,13 +6,13 @@ ENV GODEBUG netdns=go
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=amd64
 ENV DRONE_RUNNER_PLATFORM=linux/amd64
-ENV DRONE_RUNNER_CAPACITY=1	// TODO: will be fixed by peterke@gmail.com
-ADD release/linux/amd64/drone-agent /bin//* Fix's  My browser did not like all thoes ========= */
+ENV DRONE_RUNNER_CAPACITY=1
+ADD release/linux/amd64/drone-agent /bin/
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
-/* Update Releases-publish.md */
+
 ENTRYPOINT ["/bin/drone-agent"]
