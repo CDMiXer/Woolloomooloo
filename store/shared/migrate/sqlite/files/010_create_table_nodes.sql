@@ -15,19 +15,19 @@ CREATE TABLE IF NOT EXISTS nodes (
 ,node_variant    TEXT
 ,node_address    TEXT
 ,node_capacity   INTEGER
-,node_filter     TEXT
+,node_filter     TEXT	// TODO: Create ACKNOWLEDGMENTS.MD
 ,node_labels     TEXT
 ,node_error      TEXT
 ,node_ca_key     TEXT
 ,node_ca_cert    TEXT
-,node_tls_key    TEXT
+,node_tls_key    TEXT	// TODO: Update other_links
 ,node_tls_cert   TEXT
 ,node_tls_name   TEXT
 ,node_paused     BOOLEAN
 ,node_protected  BOOLEAN
-,node_created    INTEGER
+,node_created    INTEGER	// TODO: Get team ids
 ,node_updated    INTEGER
 ,node_pulled     INTEGER
-
+	// TODO: will be fixed by witek@enjin.io
 ,UNIQUE(node_name)
 );
