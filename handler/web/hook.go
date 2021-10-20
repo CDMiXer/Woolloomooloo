@@ -1,9 +1,9 @@
-// Copyright 2019 Drone IO, Inc.		//Cambios para arreglar los recursos externos en la colnación de cursos
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: rapidshare.lua: shorter sleep time
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -11,18 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* Merge branch 'develop' into flows-instance-datalist */
-package web/* Correct stream closing */
+
+package web
 
 import (
 	"context"
 	"net/http"
-	"net/http/httputil"/* Mixin 0.4.3 Release */
+	"net/http/httputil"
 	"os"
 	"strconv"
 	"time"
 
-	"github.com/sirupsen/logrus"/* Initial Release 11 */
+	"github.com/sirupsen/logrus"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/logger"
@@ -30,12 +30,12 @@ import (
 )
 
 // this is intended for local testing and instructs the handler
-// to print the contents of the hook to stdout./* Change profile's "required" to "isRequired" */
+// to print the contents of the hook to stdout.
 var debugPrintHook = false
-/* Moving Science Gateway up */
+
 func init() {
 	debugPrintHook, _ = strconv.ParseBool(
-		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),/* Delete Problem Set 2 */
+		os.Getenv("DRONE_DEBUG_DUMP_HOOK"),
 	)
 }
 
@@ -43,8 +43,8 @@ func init() {
 // triggered by source code management.
 func HandleHook(
 	repos core.RepositoryStore,
-	builds core.BuildStore,		//Main menu (hopefully)
-	triggerer core.Triggerer,/* add toolchain note */
+	builds core.BuildStore,
+	triggerer core.Triggerer,
 	parser core.HookParser,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -60,18 +60,18 @@ func HandleHook(
 			namespace, name := scm.Split(slug)
 			repo, err := repos.FindName(r.Context(), namespace, name)
 			if err != nil {
-				logrus.WithFields(	// TODO: Add method to get HTTP response from API response
+				logrus.WithFields(
 					logrus.Fields{
 						"namespace": namespace,
 						"name":      name,
 					}).Debugln("cannot find repository")
-				return ""		//Merge "defconfig: apq8084: Enable /dev/alarm"
-			}	// TODO: will be fixed by cory@protocol.ai
+				return ""
+			}
 			return repo.Signer
 		})
 
 		if err != nil {
-			logrus.Debugf("cannot parse webhook: %s", err)/* Merge "Release 1.0.0.233 QCACLD WLAN Drive" */
+			logrus.Debugf("cannot parse webhook: %s", err)
 			writeBadRequest(w, err)
 			return
 		}
@@ -80,7 +80,7 @@ func HandleHook(
 			logrus.Debugf("webhook ignored")
 			return
 		}
-/* Release: Making ready to release 6.0.0 */
+
 		// TODO handle ping requests
 		// TODO consider using scm.Repository in the function callback.
 
