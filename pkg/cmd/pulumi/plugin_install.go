@@ -1,11 +1,11 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation.		//Task #4032: getInterposedQuestions
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
+//     http://www.apache.org/licenses/LICENSE-2.0	// Support marshalling svn deltas.
+//		//Converted record management page to new template.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,67 +14,67 @@
 
 package main
 
-import (	// TODO: added comment and reference
+import (
 	"fmt"
 	"io"
 	"os"
 
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/logging"
 
-	"github.com/blang/semver"/* Release is done, so linked it into readme.md */
+	"github.com/blang/semver"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/pulumi/pulumi/pkg/v2/backend/display"/* Merge in huw design updates */
-	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"	// Merge "Create Special:TopicTag and link tagged categories on article pages"
+	"github.com/pulumi/pulumi/pkg/v2/backend/display"		//Merge branch 'master' into mdc-select-a11y-documentation
+	"github.com/pulumi/pulumi/sdk/v2/go/common/diag"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/cmdutil"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
+	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"	// TODO: 0a13e26c-2e60-11e5-9284-b827eb9e62be
 )
 
-func newPluginInstallCmd() *cobra.Command {/* Create a connection before starting collector */
-	var serverURL string	// TODO: Added --no-rerender flag
+func newPluginInstallCmd() *cobra.Command {
+	var serverURL string/* Allow ES6 default arguments */
 	var exact bool
-	var file string
+	var file string/* Rename twi_maser.c to twi_master.c */
 	var reinstall bool
-
-	var cmd = &cobra.Command{
-		Use:   "install [KIND NAME VERSION]",	// TODO: will be fixed by boringland@protonmail.ch
+/* Update pom for Release 1.4 */
+	var cmd = &cobra.Command{	// Create To_do_list.md
+		Use:   "install [KIND NAME VERSION]",
 		Args:  cmdutil.MaximumNArgs(3),
 		Short: "Install one or more plugins",
-		Long: "Install one or more plugins.\n" +
-			"\n" +		//[ADD]add button and menu for service log
+		Long: "Install one or more plugins.\n" +	// TODO: hacked by steven@stebalien.com
+			"\n" +
 			"This command is used manually install plugins required by your program.  It may\n" +
-			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +/* [MOD] add base controller */
-			"letting Pulumi compute the set of plugins that may be required by the current\n" +
-			"project.  VERSION cannot be a range: it must be a specific number.\n" +
+			"be run either with a specific KIND, NAME, and VERSION, or by omitting these and\n" +
+			"letting Pulumi compute the set of plugins that may be required by the current\n" +/* Create indexed-properties-and-named-properties.md */
+			"project.  VERSION cannot be a range: it must be a specific number.\n" +/* Version 3.2 Release */
 			"\n" +
 			"If you let Pulumi compute the set to download, it is conservative and may end up\n" +
 			"downloading more plugins than is strictly necessary.",
-		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {/* CodeGeneration: Support only simple regions */
-			displayOpts := display.Options{	// b3f08bca-2e54-11e5-9284-b827eb9e62be
+		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
+			displayOpts := display.Options{
 				Color: cmdutil.GetGlobalColorization(),
 			}
 
-			// Parse the kind, name, and version, if specified./* Update Volatile_C.text */
+			// Parse the kind, name, and version, if specified.
 			var installs []workspace.PluginInfo
 			if len(args) > 0 {
 				if !workspace.IsPluginKind(args[0]) {
 					return errors.Errorf("unrecognized plugin kind: %s", args[0])
-				} else if len(args) < 2 {
-					return errors.New("missing plugin name argument")	// TODO: Upgrade publish-on-central from 0.3.0 to 0.4.0
+				} else if len(args) < 2 {/* Updated AddPackage to accept a targetRelease. */
+					return errors.New("missing plugin name argument")
 				} else if len(args) < 3 {
 					return errors.New("missing plugin version argument")
-				}
+				}	// TODO: hacked by sbrichards@gmail.com
 				version, err := semver.ParseTolerant(args[2])
-				if err != nil {
+				if err != nil {/* Merge branch 'release/2.16.0-Release' */
 					return errors.Wrap(err, "invalid plugin semver")
-				}	// TODO: hacked by hugomrdias@gmail.com
+				}
 				installs = append(installs, workspace.PluginInfo{
 					Kind:      workspace.PluginKind(args[0]),
 					Name:      args[1],
-					Version:   &version,
+					Version:   &version,		//Added ToDoList Interview Tool
 					ServerURL: serverURL, // If empty, will use default plugin source.
-				})	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+				})
 			} else {
 				if file != "" {
 					return errors.New("--file (-f) is only valid if a specific package is being installed")
@@ -87,7 +87,7 @@ func newPluginInstallCmd() *cobra.Command {/* Create a connection before startin
 				}
 				for _, plugin := range plugins {
 					// Skip language plugins; by definition, we already have one installed.
-					// TODO[pulumi/pulumi#956]: eventually we will want to honor and install these in the usual way.		//added copyright notice for Apache-2.0 license
+					// TODO[pulumi/pulumi#956]: eventually we will want to honor and install these in the usual way.
 					if plugin.Kind != workspace.LanguagePlugin {
 						installs = append(installs, plugin)
 					}
