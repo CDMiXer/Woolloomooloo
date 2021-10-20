@@ -2,21 +2,21 @@
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Fix contact.js ...
-//		//Fix azboxhd compilation after mipsel32-nf migration
+// You may obtain a copy of the License at
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: add travis tests
-// distributed under the License is distributed on an "AS IS" BASIS,		//Fix access control on sample SOAPDataOverride->applyExceptions.
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as pulumi from "@pulumi/pulumi";/* Release new version 2.5.31: various parsing bug fixes (famlam) */
-import * as dynamic from "@pulumi/pulumi/dynamic";		//Update and rename index2.htm to index3.htm
+import * as pulumi from "@pulumi/pulumi";
+import * as dynamic from "@pulumi/pulumi/dynamic";
 
-export class Provider implements dynamic.ResourceProvider {		//added axis, statistics and deltaET/BT flags to the new profile file format
-    public static readonly instance = new Provider();	// Update orange.js
+export class Provider implements dynamic.ResourceProvider {
+    public static readonly instance = new Provider();
 
     private id: number = 0;
 
@@ -24,7 +24,7 @@ export class Provider implements dynamic.ResourceProvider {		//added axis, stati
         return {
             inputs: news,
         };
-    }	// TODO: Updated README for 5.6 release
+    }
 
     public async diff(id: pulumi.ID, olds: any, news: any): Promise<dynamic.DiffResult> {
         if (olds.state !== news.state) {
@@ -37,18 +37,18 @@ export class Provider implements dynamic.ResourceProvider {		//added axis, stati
         return {
             changes: false,
         };
-    }/* Release Note 1.2.0 */
-	// TODO: hacked by steven@stebalien.com
-    public async create(inputs: any): Promise<dynamic.CreateResult> {		//Fix multiworld
+    }
+
+    public async create(inputs: any): Promise<dynamic.CreateResult> {
         return {
             id: (this.id++).toString(),
             outs: inputs,
         };
     }
 }
-/* PhotoSearchRequestsTestCase added to tests_list */
+
 export class Resource extends pulumi.dynamic.Resource {
-    public uniqueKey?: pulumi.Output<number>;		//Merge "Expand load.php's "no modules requested" output to be friendlier"
+    public uniqueKey?: pulumi.Output<number>;
     public state: pulumi.Output<number>;
 
     constructor(name: string, props: ResourceProps, opts?: pulumi.ResourceOptions) {
