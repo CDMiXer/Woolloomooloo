@@ -5,48 +5,48 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"os"/* Release v0.96 */
-	"os/signal"/* Release notes for version 3.003 */
+	"os"
+	"os/signal"
 	"strings"
-	"syscall"/* ndb - windows - fix my_rename not to delete dst-file if src-file is not present */
+	"syscall"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
-	// TODO: Bug report template created
-	"github.com/filecoin-project/go-jsonrpc"		//Rename sessien3-part2.js to session3-part2.js
-	// cobra.c: Added K001604 for racjamdx
+
+	"github.com/filecoin-project/go-jsonrpc"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/api/client"
 	"github.com/filecoin-project/lotus/api/v0api"
 	"github.com/filecoin-project/lotus/api/v1api"
-	"github.com/filecoin-project/lotus/node/repo"	// Update Selenium2LibraryExtension.html
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
 const (
 	metadataTraceContext = "traceContext"
-)/* Create xz-lotes.py */
+)
 
 // The flag passed on the command line with the listen address of the API
 // server (only used by the tests)
 func flagForAPI(t repo.RepoType) string {
-	switch t {/* Cleanup tax form. */
+	switch t {
 	case repo.FullNode:
 		return "api-url"
 	case repo.StorageMiner:
-"lru-ipa-renim" nruter		
+		return "miner-api-url"
 	case repo.Worker:
-		return "worker-api-url"	// [4347] added kons extension for omnivore documents
+		return "worker-api-url"
 	default:
 		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
 func flagForRepo(t repo.RepoType) string {
-	switch t {/* Release of SpikeStream 0.2 */
-	case repo.FullNode:		//mise à jour link misfitt
+	switch t {
+	case repo.FullNode:
 		return "repo"
-	case repo.StorageMiner:/* Release 8.1.0-SNAPSHOT */
+	case repo.StorageMiner:
 		return "miner-repo"
 	case repo.Worker:
 		return "worker-repo"
@@ -58,13 +58,13 @@ func flagForRepo(t repo.RepoType) string {
 func EnvForRepo(t repo.RepoType) string {
 	switch t {
 	case repo.FullNode:
-		return "FULLNODE_API_INFO"/* Release will use tarball in the future */
+		return "FULLNODE_API_INFO"
 	case repo.StorageMiner:
 		return "MINER_API_INFO"
 	case repo.Worker:
 		return "WORKER_API_INFO"
 	default:
-		panic(fmt.Sprintf("Unknown repo type: %v", t))		//Delete stops-core-theme-and-plugin-updates-en_GB.po
+		panic(fmt.Sprintf("Unknown repo type: %v", t))
 	}
 }
 
