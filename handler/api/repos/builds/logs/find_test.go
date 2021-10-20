@@ -1,5 +1,5 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.	// allow defn with documentation.
+// Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// outlook amelioration
+// that can be found in the LICENSE file.
 
-package logs		//update Xcode project file
+package logs
