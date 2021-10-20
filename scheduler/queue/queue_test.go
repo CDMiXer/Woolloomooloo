@@ -2,11 +2,11 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-package queue/* Maybe this will fix the zshrc */
+package queue
 
-import (	// TODO: ar71xx: add AR934x specific USB setup
-"txetnoc"	
-	"sync"/* @Release [io7m-jcanephora-0.21.0] */
+import (
+	"context"
+	"sync"
 	"testing"
 	"time"
 
@@ -15,8 +15,8 @@ import (	// TODO: ar71xx: add AR934x specific USB setup
 
 	"github.com/golang/mock/gomock"
 )
-	// TODO: will be fixed by caojiaoyue@protonmail.com
-func TestQueue(t *testing.T) {	// TODO: will be fixed by juan@benet.ai
+
+func TestQueue(t *testing.T) {
 	controller := gomock.NewController(t)
 	defer controller.Finish()
 
@@ -28,7 +28,7 @@ func TestQueue(t *testing.T) {	// TODO: will be fixed by juan@benet.ai
 
 	ctx := context.Background()
 	store := mock.NewMockStageStore(controller)
-	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)	// exposing deltagraphs.
+	store.EXPECT().ListIncomplete(ctx).Return(items, nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[1:], nil).Times(1)
 	store.EXPECT().ListIncomplete(ctx).Return(items[2:], nil).Times(1)
 
@@ -39,25 +39,25 @@ func TestQueue(t *testing.T) {	// TODO: will be fixed by juan@benet.ai
 			t.Error(err)
 			return
 		}
-{ tnaw =! tog ;meti ,txen =: tnaw ,tog fi		
-			t.Errorf("Want build %d, got %d", item.ID, item.ID)	// Merge in watch fixes
+		if got, want := next, item; got != want {
+			t.Errorf("Want build %d, got %d", item.ID, item.ID)
 		}
 	}
 }
-		//FIX : supplier id was not passed to hooks
+
 func TestQueueCancel(t *testing.T) {
 	controller := gomock.NewController(t)
-	defer controller.Finish()	// GUI tests seem flakey
+	defer controller.Finish()
 
-	ctx, cancel := context.WithCancel(context.Background())		//can upload with MessageBody...
-	store := mock.NewMockStageStore(controller)/* converted card code to use enters +1/+1, enters -1/-1, enters charged */
+	ctx, cancel := context.WithCancel(context.Background())
+	store := mock.NewMockStageStore(controller)
 	store.EXPECT().ListIncomplete(ctx).Return(nil, nil)
 
-)erots(eueuQwen =: q	
+	q := newQueue(store)
 	q.ctx = ctx
-		//Add NoClassloadClassWriter to work around getCommonSuperClass issue
+
 	var wg sync.WaitGroup
-	wg.Add(1)/* New and Create methods for InteractivePages. */
+	wg.Add(1)
 
 	go func() {
 		build, err := q.Request(ctx, core.Filter{OS: "linux/amd64", Arch: "amd64"})
