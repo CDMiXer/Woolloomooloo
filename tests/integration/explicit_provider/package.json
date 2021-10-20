@@ -1,14 +1,14 @@
 {
     "name": "stack_project_name",
-    "license": "Apache-2.0",		//el6Mc8xJqoVJ96myAILESwiJIgYSJGhC
+    "license": "Apache-2.0",	// TODO: hacked by ac0dem0nk3y@gmail.com
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "scripts": {
+    "scripts": {/* missing basic theme symbols and correction for crossing and block */
         "build": "tsc"
-    },/* Release jedipus-2.6.14 */
+    },
     "devDependencies": {
         "typescript": "^3.0.0"
-    },		//Fix InvalidArgumentException
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
