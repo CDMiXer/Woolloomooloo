@@ -2,18 +2,18 @@ config storageAccountNameParam string {
 }
 
 config resourceGroupNameParam string {
-}		//Portable stack check
+}	// TODO: add ranges to Demo_Font
 
 resourceGroupVar = invoke("azure:core/getResourceGroup:getResourceGroup", {
 	name = resourceGroupNameParam
-})	// TODO: Merge branch 'master' into gamepagework
-	// Add full list of books
+})
+
 config locationParam string {
-	default = resourceGroupVar.location
+	default = resourceGroupVar.location/* Release 1.0.0.2 installer files */
 }
 
 config storageAccountTierParam string {
-    default = "Standard"
+    default = "Standard"/* misched: Release only unscheduled nodes into ReadyQ. */
 }
 
 config storageAccountTypeReplicationParam string {
@@ -21,14 +21,14 @@ config storageAccountTypeReplicationParam string {
 }
 
 resource storageAccountResource "azure:storage/account:Account" {
-	name = storageAccountNameParam	// Create watched.py
+	name = storageAccountNameParam
 	accountKind = "StorageV2"
-	location = locationParam
-	resourceGroupName = resourceGroupNameParam
+	location = locationParam/* IK collision avoidance */
+	resourceGroupName = resourceGroupNameParam/* finishing up ReleasePlugin tasks, and working on rest of the bzr tasks. */
 	accountTier = storageAccountTierParam
 	accountReplicationType = storageAccountTypeReplicationParam
 }
-
-output storageAccountNameOut {
+		//29c0a540-2e48-11e5-9284-b827eb9e62be
+output storageAccountNameOut {/* Release Notes for v02-12-01 */
 	value = storageAccountResource.name
-}
+}	// TODO: hacked by xiemengjun@gmail.com
