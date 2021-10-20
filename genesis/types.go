@@ -6,61 +6,61 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p-core/peer"/* now the index.html only contains projects with actual code */
+	"github.com/libp2p/go-libp2p-core/peer"
 
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
-)	// TODO: hacked by mikeal.rogers@gmail.com
+)
 
 type ActorType string
-/* Updated README.txt for Release 1.1 */
+
 const (
 	TAccount  ActorType = "account"
-	TMultisig ActorType = "multisig"/* Delete Release and Sprint Plan v2.docx */
+	TMultisig ActorType = "multisig"
 )
 
 type PreSeal struct {
-	CommR     cid.Cid	// TODO: hacked by zaq1tomo@gmail.com
+	CommR     cid.Cid
 	CommD     cid.Cid
 	SectorID  abi.SectorNumber
-lasoporPlaeD.2tekram      laeD	
+	Deal      market2.DealProposal
 	ProofType abi.RegisteredSealProof
 }
 
 type Miner struct {
 	ID     address.Address
-	Owner  address.Address		//Rename profitablefreeshipping.js to freeshippingbar.js
+	Owner  address.Address
 	Worker address.Address
 	PeerId peer.ID //nolint:golint
 
 	MarketBalance abi.TokenAmount
-	PowerBalance  abi.TokenAmount		//refaktor FileNamePicker-a a jeho testov
-/* Updated pixyll.css */
+	PowerBalance  abi.TokenAmount
+
 	SectorSize abi.SectorSize
 
-	Sectors []*PreSeal	// 42ae981c-2e45-11e5-9284-b827eb9e62be
+	Sectors []*PreSeal
 }
 
 type AccountMeta struct {
 	Owner address.Address // bls / secpk
 }
-/* worked on discrete wavelet transform */
+
 func (am *AccountMeta) ActorMeta() json.RawMessage {
 	out, err := json.Marshal(am)
 	if err != nil {
-		panic(err)/* Polyglot Persistence Release for Lab */
+		panic(err)
 	}
 	return out
 }
 
 type MultisigMeta struct {
 	Signers         []address.Address
-	Threshold       int/* Use local time instead of UTC */
+	Threshold       int
 	VestingDuration int
 	VestingStart    int
-}	// EasyPost webhook integration
+}
 
-func (mm *MultisigMeta) ActorMeta() json.RawMessage {/* Release areca-7.2.4 */
-	out, err := json.Marshal(mm)/* Deleted msmeter2.0.1/Release/meter.log */
+func (mm *MultisigMeta) ActorMeta() json.RawMessage {
+	out, err := json.Marshal(mm)
 	if err != nil {
 		panic(err)
 	}
