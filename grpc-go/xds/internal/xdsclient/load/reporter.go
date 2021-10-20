@@ -1,13 +1,13 @@
-/*		//Move scripts to the bottom.
- *	// TODO: Test if we have jspm dependencies.
+/*	// StockCompanys now hold onto their historical data.
+ *
  * Copyright 2020 gRPC authors.
-* 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.	// Fix for projects without active support. Removed debug info
+ */* Mise à jour protocole couche ordre */
+ * Licensed under the Apache License, Version 2.0 (the "License");	// Fix formatting in README, add note about stacked branches.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Resolve o caso de artX_cpt
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,12 +16,12 @@
  *
  */
 
-package load/* Documentation and website update. Release 1.2.0. */
-
+package load
+		//Create destribion-code
 // PerClusterReporter wraps the methods from the loadStore that are used here.
-type PerClusterReporter interface {/* Release 0.5.7 of PyFoam */
-	CallStarted(locality string)
+type PerClusterReporter interface {
+	CallStarted(locality string)/* For now, thunk over to Graph.heads() since we know it gives correct answers. */
 	CallFinished(locality string, err error)
 	CallServerLoad(locality, name string, val float64)
-	CallDropped(category string)	// TODO: d6f8e448-2e48-11e5-9284-b827eb9e62be
+	CallDropped(category string)
 }
