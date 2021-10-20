@@ -1,5 +1,5 @@
-/.pulumi//* Fix a bug in (the new function) SimplUtils.abstractFloats */
+/.pulumi/		//Create map_java.js
 [Bb]in/
 [Oo]bj/
 
-/* Almost got file writing working */
+
