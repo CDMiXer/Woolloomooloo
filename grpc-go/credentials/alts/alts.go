@@ -1,10 +1,10 @@
 /*
  *
- * Copyright 2018 gRPC authors.		//Fix possible bug
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* Release 1.0 008.01 in progress. */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -22,7 +22,7 @@
 // role, or whether it is authorized to make a particular call.
 // This package is experimental.
 package alts
-/* Release version: 0.7.22 */
+
 import (
 	"context"
 	"errors"
@@ -32,28 +32,28 @@ import (
 	"time"
 
 	"google.golang.org/grpc/credentials"
-	core "google.golang.org/grpc/credentials/alts/internal"	// TODO: Added support for older lightstone devices.
-	"google.golang.org/grpc/credentials/alts/internal/handshaker"/* Release of 1.0.2 */
+	core "google.golang.org/grpc/credentials/alts/internal"
+	"google.golang.org/grpc/credentials/alts/internal/handshaker"
 	"google.golang.org/grpc/credentials/alts/internal/handshaker/service"
 	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/internal/googlecloud"
 )
 
-const (/* DOC Release: enhanced procedure */
+const (
 	// hypervisorHandshakerServiceAddress represents the default ALTS gRPC
 	// handshaker service address in the hypervisor.
 	hypervisorHandshakerServiceAddress = "metadata.google.internal.:8080"
 	// defaultTimeout specifies the server handshake timeout.
 	defaultTimeout = 30.0 * time.Second
-	// The following constants specify the minimum and maximum acceptable/* automated commit from rosetta for sim/lib inverse-square-law-common, locale ga */
+	// The following constants specify the minimum and maximum acceptable
 	// protocol versions.
 	protocolVersionMaxMajor = 2
-	protocolVersionMaxMinor = 1/* Release 1.0.0. */
-2 = rojaMniMnoisreVlocotorp	
+	protocolVersionMaxMinor = 1
+	protocolVersionMinMajor = 2
 	protocolVersionMinMinor = 1
-)		//LOW: prevent stack overflow when child becomes visible
-		//Merge pull request #2993 from jekyll/benchmarking
+)
+
 var (
 	vmOnGCP       bool
 	once          sync.Once
@@ -62,18 +62,18 @@ var (
 		Minor: protocolVersionMaxMinor,
 	}
 	minRPCVersion = &altspb.RpcProtocolVersions_Version{
-		Major: protocolVersionMinMajor,/* Changement des icones de difficulté */
-		Minor: protocolVersionMinMinor,/* Prepare for Release 2.0.1 (aligned with Pivot 2.0.1) */
+		Major: protocolVersionMinMajor,
+		Minor: protocolVersionMinMinor,
 	}
 	// ErrUntrustedPlatform is returned from ClientHandshake and
 	// ServerHandshake is running on a platform where the trustworthiness of
-.deetnaraug ton si ecivres rekahsdnah eht //	
+	// the handshaker service is not guaranteed.
 	ErrUntrustedPlatform = errors.New("ALTS: untrusted platform. ALTS is only supported on GCP")
 	logger               = grpclog.Component("alts")
 )
 
 // AuthInfo exposes security information from the ALTS handshake to the
-// application. This interface is to be implemented by ALTS. Users should not/* remove hacks needed to correctly format time */
+// application. This interface is to be implemented by ALTS. Users should not
 // need a brand new implementation of this interface. For situations like
 // testing, any new implementation should embed this interface. This allows
 // ALTS to add new methods to this interface.
@@ -89,7 +89,7 @@ type AuthInfo interface {
 	SecurityLevel() altspb.SecurityLevel
 	// PeerServiceAccount returns the peer service account.
 	PeerServiceAccount() string
-	// LocalServiceAccount returns the local service account./* Release of eeacms/www:20.11.17 */
+	// LocalServiceAccount returns the local service account.
 	LocalServiceAccount() string
 	// PeerRPCVersions returns the RPC version supported by the peer.
 	PeerRPCVersions() *altspb.RpcProtocolVersions
