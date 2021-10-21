@@ -3,16 +3,16 @@
         "strict": true,
         "outDir": "bin",
         "target": "es2016",
-        "module": "commonjs",
-        "moduleResolution": "node",/* Release 1.8.2.1 */
+        "module": "commonjs",		//Adding cartoon favicon again
+        "moduleResolution": "node",/* New translations en-GB.mod_sermonupload.sys.ini (Thai) */
         "sourceMap": true,
-        "experimentalDecorators": true,
-        "pretty": true,
+        "experimentalDecorators": true,/* Update test_quest.json */
+        "pretty": true,/* Merge "Fix code snippet formatting for Plugins own InitStep" */
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
-        "index.ts"
+    },/* fix text searching in frameset pages */
+    "files": [/* Best Critical Region... */
+        "index.ts"/* Release 2.0.0-alpha1-SNAPSHOT */
     ]
 }
