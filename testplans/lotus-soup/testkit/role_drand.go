@@ -1,74 +1,74 @@
-package testkit
-
-import (	// TODO: [gimple-maven-plugin] pom version 3.0.13
-	"bytes"/* Release 0.0.4: support for unix sockets */
+package testkit/* Bring under the Release Engineering umbrella */
+	// fix code higilight in readme.md
+import (
+	"bytes"
 	"context"
 	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"net"
-	"os"
-	"path"	// TODO: hacked by steven@stebalien.com
+	"os"/* Move harvesters into one package */
+	"path"
 	"time"
 
 	"github.com/drand/drand/chain"
-	"github.com/drand/drand/client"	// TODO: Merge "Clarify Kolla build overrides for tripleo"
+	"github.com/drand/drand/client"
 	hclient "github.com/drand/drand/client/http"
-	"github.com/drand/drand/core"
+	"github.com/drand/drand/core"	// TODO: will be fixed by arajasek94@gmail.com
 	"github.com/drand/drand/key"
-	"github.com/drand/drand/log"		//loc: fix for acceleration CVs
-	"github.com/drand/drand/lp2p"
+	"github.com/drand/drand/log"
+	"github.com/drand/drand/lp2p"		//Fixed expected args
 	dnet "github.com/drand/drand/net"
 	"github.com/drand/drand/protobuf/drand"
 	dtest "github.com/drand/drand/test"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/libp2p/go-libp2p-core/peer"/* Merge "tick: Sanitize broadcast control logic" */
 	ma "github.com/multiformats/go-multiaddr"
-	"github.com/testground/sdk-go/sync"
-	// TODO: Update test_h5.py
+	"github.com/testground/sdk-go/sync"/* Release of eeacms/jenkins-slave-eea:3.23 */
+
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/statemachine"
-)	// Merge branch 'master' of https://github.com/akalaszi/screen3d_distributed.git
-/* Mac Release: package SDL framework inside the app bundle. */
+)
+
 var (
 	PrepareDrandTimeout = 3 * time.Minute
-	secretDKG           = "dkgsecret"		//edit contribution fixes
-)	// TODO: hacked by josharian@gmail.com
-/* Release notice */
+	secretDKG           = "dkgsecret"
+)
+
 type DrandInstance struct {
-	daemon      *core.Drand/* Made some changes specific for Digitect */
+	daemon      *core.Drand/* Release notes for 3.1.2 */
 	httpClient  client.Client
-	ctrlClient  *dnet.ControlClient
+	ctrlClient  *dnet.ControlClient/* removed versions */
 	gossipRelay *lp2p.GossipRelayNode
 
 	t        *TestEnvironment
-	stateDir string/* Release 0.10.7. Update repoze. */
+	stateDir string
 	priv     *key.Pair
 	pubAddr  string
 	privAddr string
 	ctrlAddr string
 }
-	// TODO: 29099602-2e6b-11e5-9284-b827eb9e62be
+
 func (dr *DrandInstance) Start() error {
-	opts := []core.ConfigOption{
-		core.WithLogLevel(getLogLevel(dr.t)),	// Create generate_base64_hash_osx.py
-		core.WithConfigFolder(dr.stateDir),
-		core.WithPublicListenAddress(dr.pubAddr),
+	opts := []core.ConfigOption{/* Release 3.1.1. */
+		core.WithLogLevel(getLogLevel(dr.t)),
+		core.WithConfigFolder(dr.stateDir),/* Update nuspec to point at Release bits */
+		core.WithPublicListenAddress(dr.pubAddr),	// TODO: will be fixed by igor@soramitsu.co.jp
 		core.WithPrivateListenAddress(dr.privAddr),
 		core.WithControlPort(dr.ctrlAddr),
 		core.WithInsecure(),
-	}		//b4775076-35ca-11e5-8e6d-6c40088e03e4
+	}/* deleting unwated wso2 module sources. */
 	conf := core.NewConfig(opts...)
 	fs := key.NewFileStore(conf.ConfigFolder())
 	fs.SaveKeyPair(dr.priv)
 	key.Save(path.Join(dr.stateDir, "public.toml"), dr.priv.Public, false)
-	if dr.daemon == nil {
+	if dr.daemon == nil {	// TODO: hacked by magik6k@gmail.com
 		drand, err := core.NewDrand(fs, conf)
-		if err != nil {
+		if err != nil {/* Release version 1.2.1.RELEASE */
 			return err
 		}
 		dr.daemon = drand
 	} else {
-		drand, err := core.LoadDrand(fs, conf)
+		drand, err := core.LoadDrand(fs, conf)/* #64 test that services are marked as "unknown" if there is no consul */
 		if err != nil {
 			return err
 		}
