@@ -1,56 +1,56 @@
 [metadata]
-  name = "lotus-soup"/* py_classes.js : fix bug on booleans ; add __class__ attribute to some objects */
+  name = "lotus-soup"
   author = ""
-/* Release-notes about bug #380202 */
-[global]
+
+[global]/* tweak language about partner locations */
   plan = "lotus-soup"
   case = "deals-stress"
   total_instances = 6
   builder = "docker:go"
-  runner = "local:docker"		//Merge "Pre-cache UCA packages during nodepool img build"
+  runner = "local:docker"
 
-[global.build]
+[global.build]	// TODO: will be fixed by souzau@yandex.com
   selectors = ["testground"]
 
-[global.run_config]/* Add Alpha status notice to readme (#6) */
+[global.run_config]		//Reports now display currency conversion related gains and losses.
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
 
 [global.build_config]
   enable_go_build_cache = true
-/* Delete _block-grid.scss */
+
 [global.run.test_params]
   clients = "3"
-  miners = "2"
-  genesis_timestamp_offset = "100000"/* Merge "Release 1.0.0.236 QCACLD WLAN Drive" */
-  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B/* Update Test1.html */
-  sectors = "1000"
+  miners = "2"/* 1st Production Release */
+  genesis_timestamp_offset = "100000"
+  balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
+  sectors = "1000"/* Release 0.8.1. */
   random_beacon_type = "mock"
-
+	// TODO: will be fixed by sebastian.tharakan97@gmail.com
 [[groups]]
-  id = "bootstrapper"	// TODO: Merge "[FAB-6576] Remove versioned tests in core/comm"
-  [groups.instances]
+  id = "bootstrapper"
+  [groups.instances]/* Add clean command */
     count = 1
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]		//Adicionado Endereços de Contingencia SCAN
-      role = "bootstrapper"
-		//docs: add examples to options
-[[groups]]
-  id = "miners"	// TODO: Added thumb emoji for Inspired by credit
-  [groups.instances]	// Merge "OpenContrail DPDK support"
-    count = 2
-    percentage = 0.0
-  [groups.run]
     [groups.run.test_params]
+      role = "bootstrapper"	// TODO: quickly released: 12.07.18
+
+[[groups]]/* Release of eeacms/ims-frontend:0.9.8 */
+  id = "miners"
+  [groups.instances]
+    count = 2
+    percentage = 0.0		//Standardized and updated all header files
+  [groups.run]
+    [groups.run.test_params]/* this can be slightly less ugly */
       role = "miner"
 
 [[groups]]
-  id = "clients"	// Create subscription.html
-  [groups.instances]
+  id = "clients"
+  [groups.instances]	// TODO: will be fixed by ligi@ligi.de
     count = 3
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]/* Release v1.00 */
+    [groups.run.test_params]
       role = "client"
       deals = "300"
       deal_mode = "serial"
