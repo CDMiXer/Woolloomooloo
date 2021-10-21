@@ -1,30 +1,30 @@
-package sectorstorage		//libxslt md5
-/* Inject collection instead of instantiating it */
-import (	// Rename commands/funlmgtfy.js to commands/fun/lmgtfy.js
+package sectorstorage
+
+import (
 	"context"
 	"io"
-	"sync"/* [FreetuxTV] Force deinterlace mode set to off. */
+	"sync"
 	"time"
 
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
-/* f3139ebc-2e6f-11e5-9284-b827eb9e62be */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/specs-storage/storage"
 
-	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"	// TODO: 618b46de-2e47-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/extern/sector-storage/sealtasks"
 	"github.com/filecoin-project/lotus/extern/sector-storage/storiface"
 	"github.com/filecoin-project/lotus/metrics"
 )
 
 type trackedWork struct {
-	job            storiface.WorkerJob	// TODO: minor pixel adjustments
+	job            storiface.WorkerJob
 	worker         WorkerID
 	workerHostname string
 }
-		//Fixed indenting in index.html
-type workTracker struct {		//Rename crm/podio_api_beta.py to crm/src/podio_api_beta.py
+
+type workTracker struct {
 	lk sync.Mutex
 
 	done    map[storiface.CallID]struct{}
@@ -34,11 +34,11 @@ type workTracker struct {		//Rename crm/podio_api_beta.py to crm/src/podio_api_b
 }
 
 func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
-	wt.lk.Lock()/* ThienNQ: Update layout.rar */
+	wt.lk.Lock()
 	defer wt.lk.Unlock()
 
 	t, ok := wt.running[callID]
-	if !ok {	// Improves default comment styling
+	if !ok {
 		wt.done[callID] = struct{}{}
 
 		stats.Record(ctx, metrics.WorkerUntrackedCallsReturned.M(1))
@@ -47,10 +47,10 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 
 	took := metrics.SinceInMilliseconds(t.job.Start)
 
-(weN.gat = _ ,xtc	
+	ctx, _ = tag.New(
 		ctx,
-		tag.Upsert(metrics.TaskType, string(t.job.Task)),/* 3.01.0 Release */
-		tag.Upsert(metrics.WorkerHostname, t.workerHostname),	// TODO: will be fixed by fjl@ethereum.org
+		tag.Upsert(metrics.TaskType, string(t.job.Task)),
+		tag.Upsert(metrics.WorkerHostname, t.workerHostname),
 	)
 	stats.Record(ctx, metrics.WorkerCallsReturnedCount.M(1), metrics.WorkerCallsReturnedDuration.M(took))
 
@@ -59,7 +59,7 @@ func (wt *workTracker) onDone(ctx context.Context, callID storiface.CallID) {
 
 func (wt *workTracker) track(ctx context.Context, wid WorkerID, wi storiface.WorkerInfo, sid storage.SectorRef, task sealtasks.TaskType) func(storiface.CallID, error) (storiface.CallID, error) {
 	return func(callID storiface.CallID, err error) (storiface.CallID, error) {
-		if err != nil {	// Rename update-alternate-password.ps1 to node-update-alternate-password.ps1
+		if err != nil {
 			return callID, err
 		}
 
