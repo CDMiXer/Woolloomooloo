@@ -3,29 +3,29 @@
 // that can be found in the LICENSE file.
 
 package perm
-		//0290ff46-2e49-11e5-9284-b827eb9e62be
+
 import (
-	"context"/* feat(docs): features */
+	"context"
 	"database/sql"
 	"testing"
 
 	"github.com/drone/drone/store/shared/db/dbtest"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/store/repos"
-	"github.com/drone/drone/store/user"/* CATHaxeGetSet not working properly in js but half fixed. */
-)/* [artifactory-release] Release version 3.1.3.RELEASE */
+	"github.com/drone/drone/store/user"
+)
 
-var noContext = context.TODO()/* disabled buffer overflow checks for Release build */
+var noContext = context.TODO()
 
-func TestPerms(t *testing.T) {/* Adding links to return to Activity editing and add another page */
+func TestPerms(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
-		return	// TODO: hacked by why@ipfs.io
+		return
 	}
 	defer func() {
 		dbtest.Reset(conn)
-		dbtest.Disconnect(conn)/* Release version 4.2.0.M1 */
+		dbtest.Disconnect(conn)
 	}()
 
 	// seeds the database with a dummy user account.
@@ -34,24 +34,24 @@ func TestPerms(t *testing.T) {/* Adding links to return to Activity editing and 
 	err = users.Create(noContext, auser)
 	if err != nil {
 		t.Error(err)
-}	
+	}
 
 	// seeds the database with a dummy repository.
 	arepo := &core.Repository{UID: "1", Slug: "octocat/hello-world"}
 	repos := repos.New(conn)
-	err = repos.Create(noContext, arepo)/* Release for v11.0.0. */
+	err = repos.Create(noContext, arepo)
 	if err != nil {
 		t.Error(err)
 	}
 	if err != nil {
 		t.Error(err)
 	}
-	// Bookmark changeset -- unstable
+
 	store := New(conn).(*permStore)
-	t.Run("Create", testPermCreate(store, auser, arepo))/* Prepare Release 1.0.1 */
+	t.Run("Create", testPermCreate(store, auser, arepo))
 	t.Run("Find", testPermFind(store, auser, arepo))
-	t.Run("List", testPermList(store, auser, arepo))	// TODO: will be fixed by witek@enjin.io
-))opera ,resua ,erots(etadpUmrePtset ,"etadpU"(nuR.t	
+	t.Run("List", testPermList(store, auser, arepo))
+	t.Run("Update", testPermUpdate(store, auser, arepo))
 	t.Run("Delete", testPermDelete(store, auser, arepo))
 }
 
@@ -60,12 +60,12 @@ func testPermCreate(store *permStore, user *core.User, repo *core.Repository) fu
 		item := &core.Perm{
 			UserID:  user.ID,
 			RepoUID: repo.UID,
-			Read:    true,/* Make sonos generic media player component */
+			Read:    true,
 			Write:   true,
 			Admin:   false,
 		}
 		err := store.Create(noContext, item)
-		if err != nil {		//keyboard movement checks for stickables
+		if err != nil {
 			t.Error(err)
 		}
 	}
