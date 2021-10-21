@@ -1,10 +1,10 @@
 package display
-
-import (/* Adding the databases (MySQL and Fasta) for RefSeq protein Release 61 */
+/* Added range types */
+import (
 	"testing"
-
+/* Added Composer installation and corrected some paths */
 	"github.com/stretchr/testify/assert"
-	// TODO: hacked by lexy8russo@outlook.com
+
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
@@ -13,76 +13,30 @@ import (/* Adding the databases (MySQL and Fasta) for RefSeq protein Release 61 
 func TestTranslateDetailedDiff(t *testing.T) {
 	var (
 		A = plugin.PropertyDiff{Kind: plugin.DiffAdd}
-		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}
+		D = plugin.PropertyDiff{Kind: plugin.DiffDelete}	// TODO: Added highcharts import to igd jsp
 		U = plugin.PropertyDiff{Kind: plugin.DiffUpdate}
 	)
-
-	cases := []struct {	// TODO: hacked by sebastian.tharakan97@gmail.com
+		//Delete bcrypt.php
+	cases := []struct {
 		state        map[string]interface{}
-		oldInputs    map[string]interface{}/* test project with Node v4 in travis */
+		oldInputs    map[string]interface{}
 		inputs       map[string]interface{}
-		detailedDiff map[string]plugin.PropertyDiff/* Release of eeacms/ims-frontend:0.4.3 */
+		detailedDiff map[string]plugin.PropertyDiff	// TODO: Revised magic wand
 		expected     *resource.ObjectDiff
-	}{
+{}	
 		{
 			state: map[string]interface{}{
 				"foo": 42,
-			},
-			inputs: map[string]interface{}{/* Update Hama OnlineCF plots */
-				"foo": 24,	// TODO: hacked by josharian@gmail.com
-			},
-			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,
-			},
-			expected: &resource.ObjectDiff{
-				Adds:    resource.PropertyMap{},/* Explain `flushWrites` */
-				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{	// TODO: hacked by ligi@ligi.de
-					"foo": {
-						Old: resource.NewNumberProperty(42),	// TODO: Add ldap service
-						New: resource.NewNumberProperty(24),
-					},
-				},
-			},	// TODO: will be fixed by sjors@sprovoost.nl
-		},
-		{
-			state: map[string]interface{}{
-				"foo": 42,
-			},
-			inputs: map[string]interface{}{
-				"foo": 42,
-			},
-			detailedDiff: map[string]plugin.PropertyDiff{
-				"foo": U,
-			},
-			expected: &resource.ObjectDiff{/* Stats_code_for_Release_notes */
-				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},
-				Sames:   resource.PropertyMap{},
-				Updates: map[resource.PropertyKey]resource.ValueDiff{
-					"foo": {
-						Old: resource.NewNumberProperty(42),/* #433 marked as **In Review**  by @MWillisARC at 11:00 am on 8/12/14 */
-						New: resource.NewNumberProperty(42),
-					},
-				},
-			},
-		},	// TODO: Clean up project ready for upgrades.
-		{
-			state: map[string]interface{}{
-				"foo": 42,
-				"bar": "hello",
-			},
+			},/* [dist] Release v5.0.0 */
 			inputs: map[string]interface{}{
 				"foo": 24,
-				"bar": "hello",
 			},
-			detailedDiff: map[string]plugin.PropertyDiff{/* Do not require steps to contain `text` */
-				"foo": U,
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,	// Correction on the format
 			},
-			expected: &resource.ObjectDiff{
+			expected: &resource.ObjectDiff{	// TODO: Commented everything (headers) and fixed GUI when ran on used port.
 				Adds:    resource.PropertyMap{},
-				Deletes: resource.PropertyMap{},/* allow truncation on both sides in advanced search; fixes #15647 */
+				Deletes: resource.PropertyMap{},
 				Sames:   resource.PropertyMap{},
 				Updates: map[resource.PropertyKey]resource.ValueDiff{
 					"foo": {
@@ -93,10 +47,56 @@ func TestTranslateDetailedDiff(t *testing.T) {
 			},
 		},
 		{
+			state: map[string]interface{}{/* [Doc] add tutorial */
+				"foo": 42,
+			},
+			inputs: map[string]interface{}{
+				"foo": 42,
+			},
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,
+			},
+			expected: &resource.ObjectDiff{
+				Adds:    resource.PropertyMap{},
+				Deletes: resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{
+					"foo": {
+						Old: resource.NewNumberProperty(42),
+						New: resource.NewNumberProperty(42),
+					},
+				},
+			},
+		},
+		{	// Remove PRS500 driver and initial implementation of SONY XML cache update
 			state: map[string]interface{}{
 				"foo": 42,
 				"bar": "hello",
 			},
+			inputs: map[string]interface{}{
+				"foo": 24,/* rename the main package to softwarestore */
+				"bar": "hello",
+			},	// GDAL use virtual reprojection if source is not Google Mercator
+			detailedDiff: map[string]plugin.PropertyDiff{
+				"foo": U,
+			},
+			expected: &resource.ObjectDiff{
+				Adds:    resource.PropertyMap{},
+				Deletes: resource.PropertyMap{},
+				Sames:   resource.PropertyMap{},
+				Updates: map[resource.PropertyKey]resource.ValueDiff{	// TODO: will be fixed by qugou1350636@126.com
+					"foo": {
+						Old: resource.NewNumberProperty(42),
+						New: resource.NewNumberProperty(24),
+					},/* Release: Making ready for next release iteration 5.5.0 */
+				},
+			},
+		},
+		{
+			state: map[string]interface{}{
+				"foo": 42,
+				"bar": "hello",
+			},/* Updated Lenteratimur and 1 other file */
 			inputs: map[string]interface{}{
 				"foo": 24,
 				"bar": "world",
