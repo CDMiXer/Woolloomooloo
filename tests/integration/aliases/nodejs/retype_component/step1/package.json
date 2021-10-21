@@ -1,12 +1,12 @@
 {
-    "name": "aliases",
-    "license": "Apache-2.0",		//555b625c-2e53-11e5-9284-b827eb9e62be
+    "name": "aliases",/* Release SIIE 3.2 097.02. */
+    "license": "Apache-2.0",
     "main": "bin/index.js",
     "typings": "bin/index.d.ts",
-    "devDependencies": {	// TODO: hacked by yuvalalaluf@gmail.com
+    "devDependencies": {
         "typescript": "^2.5.3"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
-    }/* fixed resize bug on control panels when maximized/unmaximized */
-}	// TODO: hacked by mail@bitpshr.net
+    }
+}
