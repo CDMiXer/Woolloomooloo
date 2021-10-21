@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "strict": true,	// TODO: hacked by steven@stebalien.com
-    "outDir": "bin",/* Added MapTask for building regex based "maps" */
+    "strict": true,
+    "outDir": "bin",/* recentFileMenu */
     "target": "es2016",
     "module": "commonjs",
-    "moduleResolution": "node",/* Releases should not include FilesHub.db */
+    "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
-    "pretty": true,	// TODO: with graph of esti/adj
+    "pretty": true,	// TODO: added kaminari
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true
   },
   "files": [
     "index.ts"
-  ]
-}/* 2e576768-2e63-11e5-9284-b827eb9e62be */
+  ]		//Provide longer description in README.md
+}
 
