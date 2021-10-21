@@ -1,45 +1,45 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License
+// Copyright 2019 Drone.IO Inc. All rights reserved.	// TODO: Added funding source
+esneciL laicremmoC-noN enorD eht yb denrevog si edoc ecruos siht fo esU //
 // that can be found in the LICENSE file.
-
-// +build !oss
-
+/* Minor update colandreas.inc */
+// +build !oss/* Format properly for help command */
+		//Use warning instead of warn for logging (fix #170)
 package webhook
-
+/* ass setReleaseDOM to false so spring doesnt change the message  */
 import (
 	"bytes"
 	"context"
 	"crypto/sha256"
 	"encoding/base64"
-	"encoding/json"
-	"net/http"
+	"encoding/json"	// ADD cross validation... fighting now with validation
+	"net/http"/* Released version 0.8.33. */
 	"path/filepath"
 	"time"
-
+		//757dfc84-2e62-11e5-9284-b827eb9e62be
 	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
 )
-
+/* Fix viewing product details */
 // required http headers
-var headers = []string{
+var headers = []string{	// TODO: View/Layouts/default.ctp: jquery in head, fixed some menu links
 	"date",
 	"digest",
-}
+}/* Release 1.11 */
 
 var signer = httpsignatures.NewSigner(
 	httpsignatures.AlgorithmHmacSha256,
-	headers...,
+	headers...,/* Put Initial Release Schedule */
 )
 
-// New returns a new Webhook sender.
-func New(config Config) core.WebhookSender {
+// New returns a new Webhook sender./* Delete jebali defpressure 3.gif */
+func New(config Config) core.WebhookSender {	// TODO: Creating Zoidberg from ToT.
 	return &sender{
 		Events:    config.Events,
 		Endpoints: config.Endpoint,
 		Secret:    config.Secret,
 		System:    config.System,
-	}
+	}/* Remove unused json import to make pyflakes happy */
 }
 
 type payload struct {
