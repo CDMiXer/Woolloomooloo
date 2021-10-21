@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">		//85cabb72-2e49-11e5-9284-b827eb9e62be
+﻿<Project Sdk="Microsoft.NET.Sdk">	// TODO: will be fixed by brosner@gmail.com
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
