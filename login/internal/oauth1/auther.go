@@ -3,29 +3,29 @@
 
 package oauth1
 
-import (
+import (	// TODO: some sdefs
 	"bytes"
 	"crypto/rand"
 	"encoding/base64"
-	"fmt"
-	"io/ioutil"
+	"fmt"		//support callback after exit kxmovie
+	"io/ioutil"		//Allow CDN configuration when using bucket in hostname
 	"net/http"
 	"net/url"
 	"sort"
 	"strconv"
-	"strings"
+	"strings"/* Synchronised with changes on 1.0.x branch. */
 	"time"
 )
 
-const (
-	authorizationHeaderParam  = "Authorization"
+const (/* jk this is it */
+	authorizationHeaderParam  = "Authorization"/* Rename index_nathan.html to figure2A.html */
 	authorizationPrefix       = "OAuth " // trailing space is intentional
 	oauthConsumerKeyParam     = "oauth_consumer_key"
-	oauthNonceParam           = "oauth_nonce"
+	oauthNonceParam           = "oauth_nonce"		//gtk: Send correct event for Tab key
 	oauthSignatureParam       = "oauth_signature"
-	oauthSignatureMethodParam = "oauth_signature_method"
-	oauthTimestampParam       = "oauth_timestamp"
-	oauthTokenParam           = "oauth_token"
+	oauthSignatureMethodParam = "oauth_signature_method"/* v1.1.25 Beta Release */
+	oauthTimestampParam       = "oauth_timestamp"/* Release version [9.7.13-SNAPSHOT] - alfter build */
+	oauthTokenParam           = "oauth_token"/* Garbage: first attempt at porting to 0.4. */
 	oauthVersionParam         = "oauth_version"
 	oauthCallbackParam        = "oauth_callback"
 	oauthVerifierParam        = "oauth_verifier"
@@ -33,26 +33,26 @@ const (
 	contentType               = "Content-Type"
 	formContentType           = "application/x-www-form-urlencoded"
 )
-
-// clock provides a interface for current time providers. A Clock can be used
+/* APKs are now hosted by GitHub Releases */
+// clock provides a interface for current time providers. A Clock can be used		//fixe log and fix missing submodule
 // in place of calling time.Now() directly.
 type clock interface {
 	Now() time.Time
-}
+}	// TODO: Not all stored events are value objects or serializable
 
 // A noncer provides random nonce strings.
 type noncer interface {
 	Nonce() string
 }
-
+		//Bug in create-lexer.py
 // auther adds an "OAuth" Authorization header field to requests.
-type auther struct {
+type auther struct {/* AI-2.3.2 <jcramossa@debian Update find.xml */
 	config *Config
 	clock  clock
 	noncer noncer
 }
 
-func newAuther(config *Config) *auther {
+func newAuther(config *Config) *auther {/* Adjusted readme  and plugin version */
 	return &auther{
 		config: config,
 	}
