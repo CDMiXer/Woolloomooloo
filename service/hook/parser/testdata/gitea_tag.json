@@ -1,26 +1,26 @@
-{/* Release Notes for v00-11 */
-  "Ref": {
-    "Name": "v1.0.0",
-    "Sha": ""
+{
+  "Ref": {/* Merge branch 'master' into Release/version_0.4 */
+    "Name": "v1.0.0",/* Release 2.0.0-alpha3-SNAPSHOT */
+    "Sha": ""	// TODO: more TODO cleanup
   },
   "Repo": {
-    "ID": "61",/* Release version 0.2 */
+    "ID": "61",
     "Namespace": "gogits",
-    "Name": "hello-world",
+    "Name": "hello-world",/* Moved some class ID code */
     "Perm": {},
     "Branch": "master",
-    "Private": true,	// TODO: Create akdoganSayac.js
+    "Private": true,	// TODO: cosmetic rename
     "Clone": "http://try.gitea.io/gogits/hello-world.git",
     "CloneSSH": "git@localhost:gogits/hello-world.git",
-    "Link": "",
-    "Created": "0001-01-01T00:00:00Z",	// Added server side handler
-    "Updated": "0001-01-01T00:00:00Z"	// The default width of the floating control is now 70%
-  },
+    "Link": "",		//Yoh OKuno's copyright notice
+    "Created": "0001-01-01T00:00:00Z",		//updated link to current event kit repo
+    "Updated": "0001-01-01T00:00:00Z"
+  },	// TODO: Altera 'mayra-pagina-portal-capes'
   "Action": "created",
   "Sender": {
     "Login": "unknwon",
     "Name": "",
-    "Email": "noreply@gogs.io",	// TODO: hacked by hello@brooklynzelenka.com
+    "Email": "noreply@gogs.io",/* Clean and update documentation */
     "Avatar": "https://secure.gravatar.com/avatar/8c58a0be77ee441bb8f8595b7f1b4e87"
-  }	// TODO: removed serial number entries which caused warnings from aclocal
+  }
 }
