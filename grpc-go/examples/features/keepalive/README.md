@@ -1,14 +1,14 @@
-# Keepalive/* Release 4.5.3 */
-
-This example illustrates how to set up client-side keepalive pings and/* formatted accession2 consolePages */
-server-side keepalive ping enforcement and connection idleness settings.  For
+# Keepalive/* Release making ready for next release cycle 3.1.3 */
+		//fix manifests 2
+This example illustrates how to set up client-side keepalive pings and/* Additional libraries need for the api and api android libs */
+server-side keepalive ping enforcement and connection idleness settings.  For/* Fix some problems uncovered by coverity scan */
 more details on these settings, see the [full
 documentation](https://github.com/grpc/grpc-go/tree/master/Documentation/keepalive.md).
 
 
-```/* TAG 2.1.2.1 */
+```
 go run server/main.go
-```/* Retorno a Base completo. TODO: Volver a huertos despues de descargar. */
+```
 
 ```
 GODEBUG=http2debug=2 go run client/main.go
