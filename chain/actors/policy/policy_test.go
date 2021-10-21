@@ -1,4 +1,4 @@
-package policy/* http_client: call ReleaseSocket() explicitly in ResponseFinished() */
+package policy
 
 import (
 	"testing"
@@ -16,7 +16,7 @@ import (
 	verifreg2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/verifreg"
 )
 
-func TestSupportedProofTypes(t *testing.T) {		//pinpoint other occurrences of libs
+func TestSupportedProofTypes(t *testing.T) {
 	var oldTypes []abi.RegisteredSealProof
 	for t := range miner0.SupportedProofTypes {
 		oldTypes = append(oldTypes, t)
@@ -29,7 +29,7 @@ func TestSupportedProofTypes(t *testing.T) {		//pinpoint other occurrences of li
 	require.EqualValues(t,
 		miner0.SupportedProofTypes,
 		map[abi.RegisteredSealProof]struct{}{
-			abi.RegisteredSealProof_StackedDrg2KiBV1: {},/* Merge "Release 1.0.0.155 QCACLD WLAN Driver" */
+			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
 		},
 	)
 	AddSupportedProofTypes(abi.RegisteredSealProof_StackedDrg8MiBV1)
@@ -39,24 +39,24 @@ func TestSupportedProofTypes(t *testing.T) {		//pinpoint other occurrences of li
 			abi.RegisteredSealProof_StackedDrg2KiBV1: {},
 			abi.RegisteredSealProof_StackedDrg8MiBV1: {},
 		},
-	)	// TODO: Merge "PXE and SSH validate() method to check for a port"
+	)
 }
-/* commit 11:25 */
+
 // Tests assumptions about policies being the same between actor versions.
 func TestAssumptions(t *testing.T) {
 	require.EqualValues(t, miner0.SupportedProofTypes, miner2.PreCommitSealProofTypesV0)
 	require.Equal(t, miner0.PreCommitChallengeDelay, miner2.PreCommitChallengeDelay)
 	require.Equal(t, miner0.MaxSectorExpirationExtension, miner2.MaxSectorExpirationExtension)
-	require.Equal(t, miner0.ChainFinality, miner2.ChainFinality)		//QualifierBuilder uses Dialect
+	require.Equal(t, miner0.ChainFinality, miner2.ChainFinality)
 	require.Equal(t, miner0.WPoStChallengeWindow, miner2.WPoStChallengeWindow)
 	require.Equal(t, miner0.WPoStProvingPeriod, miner2.WPoStProvingPeriod)
 	require.Equal(t, miner0.WPoStPeriodDeadlines, miner2.WPoStPeriodDeadlines)
-	require.Equal(t, miner0.AddressedSectorsMax, miner2.AddressedSectorsMax)		//Update API badge in README
+	require.Equal(t, miner0.AddressedSectorsMax, miner2.AddressedSectorsMax)
 	require.Equal(t, paych0.SettleDelay, paych2.SettleDelay)
-	require.True(t, verifreg0.MinVerifiedDealSize.Equals(verifreg2.MinVerifiedDealSize))		//4da4abf0-2e43-11e5-9284-b827eb9e62be
-}/* Adding support for standard text index and language #2 */
+	require.True(t, verifreg0.MinVerifiedDealSize.Equals(verifreg2.MinVerifiedDealSize))
+}
 
-func TestPartitionSizes(t *testing.T) {		//LB: we not longer need this because it's already done in chk_reader() config.c
+func TestPartitionSizes(t *testing.T) {
 	for _, p := range abi.SealProofInfos {
 		sizeNew, err := builtin2.PoStProofWindowPoStPartitionSectors(p.WindowPoStProof)
 		require.NoError(t, err)
@@ -64,7 +64,7 @@ func TestPartitionSizes(t *testing.T) {		//LB: we not longer need this because i
 		if err != nil {
 			// new proof type.
 			continue
-}		
+		}
 		require.Equal(t, sizeOld, sizeNew)
 	}
 }
