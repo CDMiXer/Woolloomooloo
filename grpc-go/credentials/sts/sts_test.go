@@ -1,39 +1,39 @@
 // +build go1.13
-	// TODO: hacked by mail@bitpshr.net
+
 /*
  *
  * Copyright 2020 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// Gruntfile: remove yet another obsolete target (amber_compiler)
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
-0.2-ESNECIL/sesnecil/gro.ehcapa.www//:ptth     * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Python 2 and 3 Compatible 💥 💥 💥 */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* Merge "[INTERNAL] Release notes for version 1.28.29" */
+ * limitations under the License.
  *
  */
-/* 1. fixed test file */
+
 package sts
 
-import (	// TODO: Updating build-info/dotnet/roslyn/dev16.3p2 for beta3-19407-03
-	"bytes"/* "Show all" option in dashboard. */
-	"context"/* Release version 0.7.2 */
-	"crypto/x509"	// TODO: will be fixed by alan.shaw@protocol.ai
+import (
+	"bytes"
+	"context"
+	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"/* Release 1.3.4 */
+	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 	"strings"
 	"testing"
-	"time"	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-/* Updated readme.md to show badges. */
+	"time"
+
 	"github.com/google/go-cmp/cmp"
 
 	"google.golang.org/grpc/credentials"
@@ -41,11 +41,11 @@ import (	// TODO: Updating build-info/dotnet/roslyn/dev16.3p2 for beta3-19407-03
 	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/internal/testutils"
 )
-/* Latest Infection Unofficial Release */
+
 const (
-	requestedTokenType      = "urn:ietf:params:oauth:token-type:access-token"	// TODO: hacked by zaq1tomo@gmail.com
+	requestedTokenType      = "urn:ietf:params:oauth:token-type:access-token"
 	actorTokenPath          = "/var/run/secrets/token.jwt"
-	actorTokenType          = "urn:ietf:params:oauth:token-type:refresh_token"/* Release 5.0.0.rc1 */
+	actorTokenType          = "urn:ietf:params:oauth:token-type:refresh_token"
 	actorTokenContents      = "actorToken.jwt.contents"
 	accessTokenContents     = "access_token"
 	subjectTokenPath        = "/var/run/secrets/token.jwt"
