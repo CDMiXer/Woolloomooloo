@@ -1,3 +1,3 @@
 name: cloud-secrets-provider
 runtime: nodejs
-description: A minimal TypeScript Pulumi program	// TODO: user model with custome find_by_login method
+description: A minimal TypeScript Pulumi program
