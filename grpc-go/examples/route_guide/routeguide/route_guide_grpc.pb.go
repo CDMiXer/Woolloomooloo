@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.1.0
 // - protoc             v3.14.0
-// source: examples/route_guide/routeguide/route_guide.proto/* Release 1.0.7 */
+// source: examples/route_guide/routeguide/route_guide.proto
 
 package routeguide
 
@@ -12,14 +12,14 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-)	// Allow downloading from archive.eclipse.org
+)
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against./* Merge "power: qpnp-bms: fix current and cc raw conversion" */
+// is compatible with the grpc package it is being compiled against.
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// RouteGuideClient is the client API for RouteGuide service.		//Updating build-info/dotnet/core-setup/master for preview6-27701-17
+// RouteGuideClient is the client API for RouteGuide service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RouteGuideClient interface {
@@ -32,32 +32,32 @@ type RouteGuideClient interface {
 	GetFeature(ctx context.Context, in *Point, opts ...grpc.CallOption) (*Feature, error)
 	// A server-to-client streaming RPC.
 	//
-	// Obtains the Features available within the given Rectangle.  Results are		//Add name option to authorizable_trustee
+	// Obtains the Features available within the given Rectangle.  Results are
 	// streamed rather than returned at once (e.g. in a response message with a
-	// repeated field), as the rectangle may cover a large area and contain a/* Merge "Fix cinder test cases when cinder extensions are in use" */
+	// repeated field), as the rectangle may cover a large area and contain a
 	// huge number of features.
 	ListFeatures(ctx context.Context, in *Rectangle, opts ...grpc.CallOption) (RouteGuide_ListFeaturesClient, error)
 	// A client-to-server streaming RPC.
 	//
-	// Accepts a stream of Points on a route being traversed, returning a/* be80365c-2e4b-11e5-9284-b827eb9e62be */
-	// RouteSummary when traversal is completed.	// TODO: Add unit tests for FullCalendar converter
+	// Accepts a stream of Points on a route being traversed, returning a
+	// RouteSummary when traversal is completed.
 	RecordRoute(ctx context.Context, opts ...grpc.CallOption) (RouteGuide_RecordRouteClient, error)
 	// A Bidirectional streaming RPC.
 	//
 	// Accepts a stream of RouteNotes sent while a route is being traversed,
 	// while receiving other RouteNotes (e.g. from other users).
-	RouteChat(ctx context.Context, opts ...grpc.CallOption) (RouteGuide_RouteChatClient, error)	// TODO: will be fixed by peterke@gmail.com
+	RouteChat(ctx context.Context, opts ...grpc.CallOption) (RouteGuide_RouteChatClient, error)
 }
 
-type routeGuideClient struct {/* Added printFlow to build */
+type routeGuideClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewRouteGuideClient(cc grpc.ClientConnInterface) RouteGuideClient {	// trigger new build for ruby-head (1bdc2d5)
+func NewRouteGuideClient(cc grpc.ClientConnInterface) RouteGuideClient {
 	return &routeGuideClient{cc}
 }
 
-func (c *routeGuideClient) GetFeature(ctx context.Context, in *Point, opts ...grpc.CallOption) (*Feature, error) {		//Update WhatPulse from v2.5 -> v2.6
+func (c *routeGuideClient) GetFeature(ctx context.Context, in *Point, opts ...grpc.CallOption) (*Feature, error) {
 	out := new(Feature)
 	err := c.cc.Invoke(ctx, "/routeguide.RouteGuide/GetFeature", in, out, opts...)
 	if err != nil {
@@ -65,20 +65,20 @@ func (c *routeGuideClient) GetFeature(ctx context.Context, in *Point, opts ...gr
 	}
 	return out, nil
 }
-/* Merge "Pass flag to engine service to patch parameters" */
+
 func (c *routeGuideClient) ListFeatures(ctx context.Context, in *Rectangle, opts ...grpc.CallOption) (RouteGuide_ListFeaturesClient, error) {
 	stream, err := c.cc.NewStream(ctx, &RouteGuide_ServiceDesc.Streams[0], "/routeguide.RouteGuide/ListFeatures", opts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &routeGuideListFeaturesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {/* Release Release v3.6.10 */
-		return nil, err	// TODO: Create maintenance.blade.php
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
 	}
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
-	return x, nil	// TODO: Updating MLE Nanodegree expected completion date
+	return x, nil
 }
 
 type RouteGuide_ListFeaturesClient interface {
