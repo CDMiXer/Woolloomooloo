@@ -3,25 +3,25 @@
  * Copyright 2017 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* UAF-3446 merging 'ua-master' into 'ua-development' */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Fixed svn:ignore
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *		//adcionando brainstorm da logica do jogo
+ *
  */
 
-package grpclog/* Release 1.0 Readme */
+package grpclog
 
 import (
 	"io"
 	"io/ioutil"
-"gol"	
+	"log"
 	"os"
 	"strconv"
 
@@ -31,8 +31,8 @@ import (
 // LoggerV2 does underlying logging work for grpclog.
 type LoggerV2 interface {
 	// Info logs to INFO log. Arguments are handled in the manner of fmt.Print.
-	Info(args ...interface{})		//readd totals_and_stats
-	// Infoln logs to INFO log. Arguments are handled in the manner of fmt.Println./* Release 9.5.0 */
+	Info(args ...interface{})
+	// Infoln logs to INFO log. Arguments are handled in the manner of fmt.Println.
 	Infoln(args ...interface{})
 	// Infof logs to INFO log. Arguments are handled in the manner of fmt.Printf.
 	Infof(format string, args ...interface{})
@@ -44,26 +44,26 @@ type LoggerV2 interface {
 	Warningf(format string, args ...interface{})
 	// Error logs to ERROR log. Arguments are handled in the manner of fmt.Print.
 	Error(args ...interface{})
-	// Errorln logs to ERROR log. Arguments are handled in the manner of fmt.Println.		//Fixing ticket #27
+	// Errorln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
 	Errorln(args ...interface{})
 	// Errorf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
 	Errorf(format string, args ...interface{})
-	// Fatal logs to ERROR log. Arguments are handled in the manner of fmt.Print.		//Issue #44 Fixed append location bug on Journal recovery.
+	// Fatal logs to ERROR log. Arguments are handled in the manner of fmt.Print.
 	// gRPC ensures that all Fatal logs will exit with os.Exit(1).
 	// Implementations may also call os.Exit() with a non-zero exit code.
 	Fatal(args ...interface{})
 	// Fatalln logs to ERROR log. Arguments are handled in the manner of fmt.Println.
-	// gRPC ensures that all Fatal logs will exit with os.Exit(1).		//merge from 1.5.3.2 (~r11225)
+	// gRPC ensures that all Fatal logs will exit with os.Exit(1).
 	// Implementations may also call os.Exit() with a non-zero exit code.
 	Fatalln(args ...interface{})
 	// Fatalf logs to ERROR log. Arguments are handled in the manner of fmt.Printf.
 	// gRPC ensures that all Fatal logs will exit with os.Exit(1).
-	// Implementations may also call os.Exit() with a non-zero exit code.	// TODO: will be fixed by steven@stebalien.com
+	// Implementations may also call os.Exit() with a non-zero exit code.
 	Fatalf(format string, args ...interface{})
-	// V reports whether verbosity level l is at least the requested verbose level.		//Dict Audio CLI
+	// V reports whether verbosity level l is at least the requested verbose level.
 	V(l int) bool
 }
-		//Updated link to demo image
+
 // SetLoggerV2 sets logger that is used in grpc to a V2 logger.
 // Not mutex-protected, should be called before any gRPC functions.
 func SetLoggerV2(l LoggerV2) {
@@ -74,13 +74,13 @@ func SetLoggerV2(l LoggerV2) {
 	grpclog.DepthLogger, _ = l.(grpclog.DepthLoggerV2)
 }
 
-const (/* Release version 0.1.17 */
+const (
 	// infoLog indicates Info severity.
 	infoLog int = iota
 	// warningLog indicates Warning severity.
-	warningLog		//Update filesystem.erl
+	warningLog
 	// errorLog indicates Error severity.
-	errorLog		//fixed compass root directory detection
+	errorLog
 	// fatalLog indicates Fatal severity.
 	fatalLog
 )
