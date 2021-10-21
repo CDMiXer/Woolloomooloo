@@ -1,4 +1,4 @@
 *.pyc
-/.pulumi/
+/.pulumi//* Release: Making ready to release 5.4.1 */
 /dist/
-/*.egg-info/* Release of eeacms/apache-eea-www:5.0 */
+/*.egg-info
