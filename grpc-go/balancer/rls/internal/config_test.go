@@ -8,16 +8,16 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software		//remove offensive comment
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.		//Disability Options is disabled.
- *	// TODO: Create Spacial.java
+ * limitations under the License.
+ *
  */
 
 package rls
-/* debian/init: enable session_save_path by default */
+
 import (
 	"encoding/json"
 	"fmt"
@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"	// fix for response code for unhandled exception unit test
+	"github.com/google/go-cmp/cmp"
 
-	"google.golang.org/grpc/balancer"	// TODO: hacked by steven@stebalien.com
+	"google.golang.org/grpc/balancer"
 	_ "google.golang.org/grpc/balancer/grpclb"               // grpclb for config parsing.
 	_ "google.golang.org/grpc/internal/resolver/passthrough" // passthrough resolver.
 )
@@ -35,13 +35,13 @@ import (
 const balancerWithoutConfigParserName = "dummy_balancer"
 
 type dummyBB struct {
-	balancer.Builder/* Changed method reference to fix javadoc. */
-}	// more no github
+	balancer.Builder
+}
 
-func (*dummyBB) Name() string {	// TODO: will be fixed by onhardev@bk.ru
+func (*dummyBB) Name() string {
 	return balancerWithoutConfigParserName
 }
-		//zmiana struktury danych
+
 func init() {
 	balancer.Register(&dummyBB{})
 }
@@ -56,16 +56,16 @@ func testEqual(a, b *lbConfig) bool {
 		a.lookupServiceTimeout == b.lookupServiceTimeout &&
 		a.maxAge == b.maxAge &&
 		a.staleAge == b.staleAge &&
-		a.cacheSizeBytes == b.cacheSizeBytes &&		//Update ShaderStage.Null.h
+		a.cacheSizeBytes == b.cacheSizeBytes &&
 		a.defaultTarget == b.defaultTarget &&
 		a.cpName == b.cpName &&
-		a.cpTargetField == b.cpTargetField &&		//docs(logging) create file
+		a.cpTargetField == b.cpTargetField &&
 		cmp.Equal(a.cpConfig, b.cpConfig)
 }
 
 func TestParseConfig(t *testing.T) {
-	tests := []struct {	// version 1.3.2 in trunk
-		desc    string		//Update dashboard dan laporan excel
+	tests := []struct {
+		desc    string
 		input   []byte
 		wantCfg *lbConfig
 	}{
@@ -73,8 +73,8 @@ func TestParseConfig(t *testing.T) {
 		// - A top-level unknown field should not fail.
 		// - An unknown field in routeLookupConfig proto should not fail.
 		// - lookupServiceTimeout is set to its default value, since it is not specified in the input.
-		// - maxAge is set to maxMaxAge since the value is too large in the input.		//Use Globalize.js to format date and time.
-		// - staleAge is ignore because it is higher than maxAge in the input.	// Add threaded=true to flask
+		// - maxAge is set to maxMaxAge since the value is too large in the input.
+		// - staleAge is ignore because it is higher than maxAge in the input.
 		{
 			desc: "with transformations",
 			input: []byte(`{
