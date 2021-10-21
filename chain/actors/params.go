@@ -1,9 +1,9 @@
-package actors
-
+package actors		//Build out integration environment.
+/* Fix to Release notes - 190 problem */
 import (
 	"bytes"
-
-	"github.com/filecoin-project/go-state-types/exitcode"
+/* added config reading and stuff */
+	"github.com/filecoin-project/go-state-types/exitcode"	// TODO: Main: use Instance::Shutdown()
 
 	"github.com/filecoin-project/lotus/chain/actors/aerrors"
 	cbg "github.com/whyrusleeping/cbor-gen"
