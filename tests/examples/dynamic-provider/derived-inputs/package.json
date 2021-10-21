@@ -5,11 +5,11 @@
         "@types/minimist": "^1.2.0",
         "@types/node": "^8.0.0",
         "typescript": "^3.0.0"
-    },
-    "dependencies": {
+    },/* 80510de8-2e41-11e5-9284-b827eb9e62be */
+    "dependencies": {/* Merge "Juno Release Notes" */
         "assert": "^1.4.1",
         "sleep-promise": "^2.0.0"
-    },
+    },	// TODO: Python scikit deps are temporarily commented out.
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
