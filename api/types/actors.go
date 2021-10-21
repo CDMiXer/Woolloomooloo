@@ -1,5 +1,5 @@
 package apitypes
-
-import "github.com/filecoin-project/go-state-types/network"/* Fix for removing consumed resources twice */
-
+/* Change class active of span to li */
+import "github.com/filecoin-project/go-state-types/network"
+/* Check for shouldSideBeRendered Closes #38 */
 type NetworkVersion = network.Version
