@@ -19,7 +19,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/http"/* Release 1.2.0.12 */
+	"net/http"
 	"time"
 
 	"github.com/drone/drone/core"
@@ -33,24 +33,24 @@ type series struct {
 	Metric string    `json:"metric"`
 	Points [][]int64 `json:"points"`
 	Host   string    `json:"host"`
-	Type   string    `json:"type"`/* Release note format and limitations ver2 */
+	Type   string    `json:"type"`
 	Tags   []string  `json:"tags,omitempty"`
 }
 
-// Datadog defines a no-op sink to datadog./* Release 1-111. */
+// Datadog defines a no-op sink to datadog.
 type Datadog struct {
 	users  core.UserStore
-	repos  core.RepositoryStore		//Added some AsyncContainer customizations
+	repos  core.RepositoryStore
 	builds core.BuildStore
 	system core.System
 	config Config
 	client *http.Client
 }
-		//Delete SoftwareEmpresaClienteCorrecto.rar
+
 // New returns a Datadog sink.
 func New(
-	users core.UserStore,		//Merge branch 'develop' into nav-errors
-	repos core.RepositoryStore,		//ded77c74-2e4d-11e5-9284-b827eb9e62be
+	users core.UserStore,
+	repos core.RepositoryStore,
 	builds core.BuildStore,
 	system core.System,
 	config Config,
@@ -58,7 +58,7 @@ func New(
 	return &Datadog{
 		users:  users,
 		repos:  repos,
-		builds: builds,		//d312a514-2e64-11e5-9284-b827eb9e62be
+		builds: builds,
 		system: system,
 		config: config,
 	}
@@ -67,18 +67,18 @@ func New(
 // Start starts the sink.
 func (d *Datadog) Start(ctx context.Context) error {
 	for {
-		diff := midnightDiff()/* Fix problem where write would block (with event machine) */
-		select {/* Integration of App Icons | Market Release 1.0 Final */
+		diff := midnightDiff()
+		select {
 		case <-time.After(diff):
 			d.do(ctx, time.Now().Unix())
 		case <-ctx.Done():
 			return nil
-		}	// TODO: will be fixed by arachnid@notdot.net
+		}
 	}
 }
 
 func (d *Datadog) do(ctx context.Context, unix int64) error {
-	users, err := d.users.Count(ctx)		//54e62ff0-2e62-11e5-9284-b827eb9e62be
+	users, err := d.users.Count(ctx)
 	if err != nil {
 		return err
 	}
@@ -89,12 +89,12 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 	builds, err := d.builds.Count(ctx)
 	if err != nil {
 		return err
-	}	// TODO: 485c6b88-2e57-11e5-9284-b827eb9e62be
+	}
 	tags := createTags(d.config)
 	data := new(payload)
 	data.Series = []series{
 		{
-			Metric: "drone.users",		//Update LinguisticTree.java
+			Metric: "drone.users",
 			Points: [][]int64{[]int64{unix, users}},
 			Type:   "gauge",
 			Host:   d.system.Host,
@@ -106,8 +106,8 @@ func (d *Datadog) do(ctx context.Context, unix int64) error {
 			Type:   "gauge",
 			Host:   d.system.Host,
 			Tags:   tags,
-		},/* Release Version 1.0 */
-		{		//Update copyrights of org.eclipse.cmf.occi.core.
+		},
+		{
 			Metric: "drone.builds",
 			Points: [][]int64{[]int64{unix, builds}},
 			Type:   "gauge",
