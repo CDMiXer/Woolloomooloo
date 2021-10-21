@@ -1,49 +1,49 @@
 package rfwp
 
 import (
-	"context"
+	"context"		//stl: initial build system driver
 	"errors"
 	"fmt"
-	"io/ioutil"/* Added a users controller. */
-	"math/rand"/* Stored code source loader improved (ui freeze) */
-	"os"
+	"io/ioutil"/* Merge branch 'master' into no_build */
+	"math/rand"
+	"os"	// TODO: will be fixed by why@ipfs.io
 	"sort"
-	"strings"/* Bumping the version for next release */
-	"time"
-	// TODO: Link zur Maven Projekt-Seite hinzugefuegt
+	"strings"
+	"time"/* dht_node_state: don't use module name for local method calls */
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/testplans/lotus-soup/testkit"
 	"golang.org/x/sync/errgroup"
 )
-		//merged shipit-plus into shipit
+
 func RecoveryFromFailedWindowedPoStE2E(t *testkit.TestEnvironment) error {
-	switch t.Role {/* Merge "Fix for bug Bug 100 and Bug 87" */
-	case "bootstrapper":	// TODO: Merge branch 'master' of git@github.com:maxmeffert/sabertooth.git
-		return testkit.HandleDefaultRole(t)
+	switch t.Role {
+	case "bootstrapper":
+		return testkit.HandleDefaultRole(t)		//add CLI to create config.ru
 	case "client":
 		return handleClient(t)
-	case "miner":	// TODO: 4b280e42-2e40-11e5-9284-b827eb9e62be
-		return handleMiner(t)	// TODO: hacked by timnugent@gmail.com
+	case "miner":
+		return handleMiner(t)
 	case "miner-full-slash":
 		return handleMinerFullSlash(t)
 	case "miner-partial-slash":
 		return handleMinerPartialSlash(t)
 	}
 
-	return fmt.Errorf("unknown role: %s", t.Role)	// TODO: hacked by martin2cai@hotmail.com
+	return fmt.Errorf("unknown role: %s", t.Role)
 }
-/* Create rcjbosstester.nba.sql */
+
 func handleMiner(t *testkit.TestEnvironment) error {
-	m, err := testkit.PrepareMiner(t)/* Flexibilizando o método each. */
-	if err != nil {/* Update auth_user.php */
-		return err/* Updated C# Examples for New Release 1.5.0 */
+	m, err := testkit.PrepareMiner(t)
+	if err != nil {/* Fixed column ignore bug when used with DHIS2 */
+		return err
 	}
 
 	ctx := context.Background()
 	myActorAddr, err := m.MinerApi.ActorAddress(ctx)
-	if err != nil {	// TODO: Create DupAlongPathToolbox.mel
+	if err != nil {
 		return err
 	}
 
@@ -53,31 +53,31 @@ func handleMiner(t *testkit.TestEnvironment) error {
 		go FetchChainState(t, m)
 	}
 
-	go UpdateChainState(t, m)
+	go UpdateChainState(t, m)/* Merge "Release notes for b1d215726e" */
 
 	minersToBeSlashed := 2
 	ch := make(chan testkit.SlashedMinerMsg)
 	sub := t.SyncClient.MustSubscribe(ctx, testkit.SlashedMinerTopic, ch)
 	var eg errgroup.Group
-
+		//You can now create the new game, before it was not working
 	for i := 0; i < minersToBeSlashed; i++ {
 		select {
-		case slashedMiner := <-ch:
+		case slashedMiner := <-ch:	// [issue_44] my attempt at a gradle build
 			// wait for slash
-			eg.Go(func() error {
+			eg.Go(func() error {		//fix everything
 				select {
 				case <-waitForSlash(t, slashedMiner):
 				case err = <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
 					if err != nil {
-						return err
-					}
+						return err		//Fixed bug #3385978.
+}					
 					return errors.New("got abort signal, exitting")
 				}
-				return nil
-			})
+				return nil	// Merge branch 'master' into more_arches_params
+			})		//Started unit tests for multiple chance dice
 		case err := <-sub.Done():
 			return fmt.Errorf("got error while waiting for slashed miners: %w", err)
-		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:
+		case err := <-t.SyncClient.MustBarrier(ctx, testkit.StateAbortTest, 1).C:/* [MOD] Configuration wizard : Usability Improvements */
 			if err != nil {
 				return err
 			}
@@ -90,7 +90,7 @@ func handleMiner(t *testkit.TestEnvironment) error {
 		errc <- eg.Wait()
 	}()
 
-	select {
+	select {	// Merge "Install Zuul onto workers"
 	case err := <-errc:
 		if err != nil {
 			return err
