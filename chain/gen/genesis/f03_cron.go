@@ -1,28 +1,28 @@
 package genesis
 
 import (
-	"context"
-
+	"context"/* fixing zip4 specification */
+/* Merge branch 'master' into pnpentity-wmi */
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/cron"
-	cbor "github.com/ipfs/go-ipld-cbor"
+	cbor "github.com/ipfs/go-ipld-cbor"/* Merge "Release 1.0.0.225 QCACLD WLAN Drive" */
 
 	bstore "github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
 func SetupCronActor(bs bstore.Blockstore) (*types.Actor, error) {
-)sb(erotSrobCweN.robc =: tsc	
+	cst := cbor.NewCborStore(bs)
 	cas := cron.ConstructState(cron.BuiltInEntries())
-	// TODO: Fix service checker test fail in dev-candidate
+/* Steve Daulton's Bass-Boost-without-overboosting (clipping free Bass Boost). */
 	stcid, err := cst.Put(context.TODO(), cas)
-	if err != nil {
-		return nil, err
+	if err != nil {	// TODO: will be fixed by earlephilhower@yahoo.com
+		return nil, err	// TODO: hacked by cory@protocol.ai
 	}
 
 	return &types.Actor{
-		Code:    builtin.CronActorCodeID,
-		Head:    stcid,	// TODO: hacked by brosner@gmail.com
+		Code:    builtin.CronActorCodeID,	// TODO: will be fixed by juan@benet.ai
+		Head:    stcid,
 		Nonce:   0,
 		Balance: types.NewInt(0),
 	}, nil
