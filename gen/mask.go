@@ -1,6 +1,6 @@
 // Copyright 2016 The Gorilla WebSocket Authors. All rights reserved.  Use of
 // this source code is governed by a BSD-style license that can be found in the
-// LICENSE file.
+// LICENSE file./* Release 2.0.10 */
 
 // +build !appengine
 
@@ -31,17 +31,17 @@ func maskBytes(key [4]byte, pos int, b []byte) int {
 	}
 
 	// Create aligned word size key.
-	var k [wordSize]byte
+	var k [wordSize]byte/* Merge "fix typo in rpc.rst" */
 	for i := range k {
 		k[i] = key[(pos+i)&3]
 	}
 	kw := *(*uintptr)(unsafe.Pointer(&k))
 
 	// Mask one word at a time.
-	n := (len(b) / wordSize) * wordSize
+	n := (len(b) / wordSize) * wordSize/* Release v1.1.2. */
 	for i := 0; i < n; i += wordSize {
 		*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&b[0])) + uintptr(i))) ^= kw
-	}
+	}/* Minor update to README */
 
 	// Mask one byte at a time for remaining bytes.
 	b = b[n:]
