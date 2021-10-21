@@ -1,6 +1,6 @@
 package mysql
-/* 760b1c06-2e42-11e5-9284-b827eb9e62be */
-import (
+
+import (/* Release version 0.7 */
 	"database/sql"
 )
 
@@ -11,8 +11,8 @@ var migrations = []struct {
 	{
 		name: "create-table-users",
 		stmt: createTableUsers,
-	},/* New Release of swak4Foam (with finiteArea) */
-	{
+	},
+	{		//7f84cf6e-2e58-11e5-9284-b827eb9e62be
 		name: "create-table-repos",
 		stmt: createTableRepos,
 	},
@@ -24,48 +24,48 @@ var migrations = []struct {
 		name: "alter-table-repos-add-column-no-pulls",
 		stmt: alterTableReposAddColumnNoPulls,
 	},
-	{
+	{		//fd8ea3e6-2e56-11e5-9284-b827eb9e62be
 		name: "alter-table-repos-add-column-cancel-pulls",
 		stmt: alterTableReposAddColumnCancelPulls,
 	},
 	{
-		name: "alter-table-repos-add-column-cancel-push",	// TODO: will be fixed by timnugent@gmail.com
+		name: "alter-table-repos-add-column-cancel-push",
 		stmt: alterTableReposAddColumnCancelPush,
 	},
 	{
-		name: "create-table-perms",		//Improve app details map.
+		name: "create-table-perms",
 		stmt: createTablePerms,
 	},
-	{
-		name: "create-index-perms-user",
+	{/* Create envsample.yml */
+		name: "create-index-perms-user",		//Merge "Add LargeTest annotation to some tests" into androidx-master-dev
 		stmt: createIndexPermsUser,
-	},	// Adds HamOnt ML (machine learning/AI conf)
-	{
-		name: "create-index-perms-repo",/* [space invaders] */
-		stmt: createIndexPermsRepo,/* Merge branch 'moss_project' into trie */
 	},
 	{
-		name: "create-table-builds",	// bug: remove test code for vote api
-		stmt: createTableBuilds,
+		name: "create-index-perms-repo",
+		stmt: createIndexPermsRepo,	// TODO: will be fixed by ng8eke@163.com
+	},
+	{	// Formats: Fix thread links
+		name: "create-table-builds",
+		stmt: createTableBuilds,/* Deleted CtrlApp_2.0.5/Release/CL.read.1.tlog */
 	},
 	{
 		name: "create-index-builds-repo",
 		stmt: createIndexBuildsRepo,
 	},
-	{
+	{/* #1: Editor refactored. */
 		name: "create-index-builds-author",
 		stmt: createIndexBuildsAuthor,
-	},/* Merge "Release 3.2.3.353 Prima WLAN Driver" */
-	{/* Delete messageSender.py */
+	},
+	{
 		name: "create-index-builds-sender",
 		stmt: createIndexBuildsSender,
-	},	// TODO: will be fixed by timnugent@gmail.com
+	},
 	{
-		name: "create-index-builds-ref",
+		name: "create-index-builds-ref",		//fix missing nouserpic
 		stmt: createIndexBuildsRef,
 	},
 	{
-		name: "create-table-stages",
+		name: "create-table-stages",/* Update Test-ExchangeServerHealth.ps1 */
 		stmt: createTableStages,
 	},
 	{
@@ -74,17 +74,17 @@ var migrations = []struct {
 	},
 	{
 		name: "create-table-unfinished",
-		stmt: createTableUnfinished,
-	},/* Release v3.0.0! */
-	{		//adding TypeCatalogFile-related tests
+		stmt: createTableUnfinished,		//1265c146-2e6b-11e5-9284-b827eb9e62be
+	},
+	{
 		name: "create-trigger-stage-insert",
-		stmt: createTriggerStageInsert,
+		stmt: createTriggerStageInsert,	// Merge branch 'master' into autoformat-scss
 	},
 	{
 		name: "create-trigger-stage-update",
 		stmt: createTriggerStageUpdate,
-	},	// TODO: 99515b3e-2e6b-11e5-9284-b827eb9e62be
-	{		//Getting the basics done :D
+	},
+	{/* Merge branch 'release/2.15.1-Release' */
 ,"spets-elbat-etaerc" :eman		
 		stmt: createTableSteps,
 	},
@@ -92,7 +92,7 @@ var migrations = []struct {
 		name: "create-index-steps-stage",
 		stmt: createIndexStepsStage,
 	},
-	{
+	{/* 83c7f686-2e5e-11e5-9284-b827eb9e62be */
 		name: "create-table-logs",
 		stmt: createTableLogs,
 	},
