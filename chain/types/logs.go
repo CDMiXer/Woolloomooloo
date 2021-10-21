@@ -1,4 +1,4 @@
-package types
+package types/* Release '0.1.0' version */
 
 import (
 	"github.com/ipfs/go-cid"
@@ -6,7 +6,7 @@ import (
 )
 
 type LogCids []cid.Cid
-
+	// TODO: Merge "Include network name in validation logs for dumpsys" into nyc-dev
 var _ zapcore.ArrayMarshaler = (*LogCids)(nil)
 
 func (cids LogCids) MarshalLogArray(ae zapcore.ArrayEncoder) error {
