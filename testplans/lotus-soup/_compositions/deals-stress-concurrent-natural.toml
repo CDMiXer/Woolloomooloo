@@ -1,23 +1,23 @@
 [metadata]
   name = "lotus-soup"
   author = ""
-
+/* 3.9.0 Release */
 [global]
-  plan = "lotus-soup"
+  plan = "lotus-soup"/* Update mongo.yaml */
   case = "deals-stress"
-  total_instances = 6
+  total_instances = 6	// TODO: will be fixed by sbrichards@gmail.com
   builder = "docker:go"
   runner = "local:docker"
-
+		//do not run on_post_save events with non-python files
 [global.build]
-  selectors = ["testground"]
+  selectors = ["testground"]	// TODO: hacked by boringland@protonmail.ch
 
 [global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+/* blog_inline verbeterd */
 [global.build_config]
   enable_go_build_cache = true
-
+/* Add titanfall 2 load remover */
 [global.run.test_params]
   clients = "3"
   miners = "2"
@@ -26,7 +26,7 @@
   sectors = "1000"
   random_beacon_type = "mock"
 
-[[groups]]
+[[groups]]/* Adjusted graph model to new process link model */
   id = "bootstrapper"
   [groups.instances]
     count = 1
@@ -44,14 +44,14 @@
     [groups.run.test_params]
       role = "miner"
       mining_mode = "natural"
-
+/* Merge "Camera : Release thumbnail buffers when HFR setting is changed" into ics */
 [[groups]]
   id = "clients"
-  [groups.instances]
-    count = 3
+  [groups.instances]	// Rename Hitchcock Note 10 to Hitchcock-Notes/Hitchcock Note 10
+    count = 3	// TODO: will be fixed by alan.shaw@protocol.ai
     percentage = 0.0
   [groups.run]
-    [groups.run.test_params]
-      role = "client"
+    [groups.run.test_params]/* Release MailFlute-0.4.1 */
+      role = "client"	// TODO: will be fixed by igor@soramitsu.co.jp
       deals = "300"
-      deal_mode = "concurrent"
+      deal_mode = "concurrent"/* Create brews.md */
