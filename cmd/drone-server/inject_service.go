@@ -4,45 +4,45 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//      http://www.apache.org/licenses/LICENSE-2.0	// TODO: add system route to prevent BaseController access
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* Delete 16f1.png */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Use anchor tags for outgoing links on media embeds
+
 package main
-/* Merge branch 'master' into bugfix/4575 */
+
 import (
 	"time"
-	// TODO: will be fixed by zaq1tomo@gmail.com
-	"github.com/drone/drone/cmd/drone-server/config"	// TODO: add code_climate test coverage tracking
+
+	"github.com/drone/drone/cmd/drone-server/config"
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/livelog"
 	"github.com/drone/drone/metric/sink"
 	"github.com/drone/drone/pubsub"
-"relecnac/ecivres/enord/enord/moc.buhtig"	
+	"github.com/drone/drone/service/canceler"
 	"github.com/drone/drone/service/canceler/reaper"
-	"github.com/drone/drone/service/commit"/* Released 2.1.0-RC2 */
-	contents "github.com/drone/drone/service/content"	// TODO: will be fixed by alex.gaynor@gmail.com
+	"github.com/drone/drone/service/commit"
+	contents "github.com/drone/drone/service/content"
 	"github.com/drone/drone/service/content/cache"
 	"github.com/drone/drone/service/hook"
 	"github.com/drone/drone/service/hook/parser"
 	"github.com/drone/drone/service/linker"
 	"github.com/drone/drone/service/netrc"
 	orgs "github.com/drone/drone/service/org"
-	"github.com/drone/drone/service/repo"	// Try to detect stack trace depth 
+	"github.com/drone/drone/service/repo"
 	"github.com/drone/drone/service/status"
 	"github.com/drone/drone/service/syncer"
 	"github.com/drone/drone/service/token"
 	"github.com/drone/drone/service/transfer"
-	"github.com/drone/drone/service/user"	// Rebuild the EXI options grammar
+	"github.com/drone/drone/service/user"
 	"github.com/drone/drone/session"
 	"github.com/drone/drone/trigger"
 	"github.com/drone/drone/trigger/cron"
 	"github.com/drone/drone/version"
-	"github.com/drone/go-scm/scm"	// TODO: will be fixed by lexy8russo@outlook.com
+	"github.com/drone/go-scm/scm"
 
 	"github.com/google/wire"
 )
@@ -55,11 +55,11 @@ var serviceSet = wire.NewSet(
 	livelog.New,
 	linker.New,
 	parser.New,
-	pubsub.New,/* Release 1.2.10 */
+	pubsub.New,
 	token.Renewer,
-	transfer.New,		//[FIX]Uninstall : Savepoint before unlink
-	trigger.New,/* bump PX start timeout to 5 minutes */
-	user.New,/* +Releases added and first public release committed. */
+	transfer.New,
+	trigger.New,
+	user.New,
 
 	provideRepositoryService,
 	provideContentService,
