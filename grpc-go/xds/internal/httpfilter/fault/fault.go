@@ -2,39 +2,39 @@
  *
  * Copyright 2021 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");	// TODO: Default DATABASE_URL for dev env
- * you may not use this file except in compliance with the License./* Release version 0.0.10. */
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//updated with new information
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* +option: rootLabel; change limitedItems to 32. */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package fault implements the Envoy Fault Injection HTTP filter.		//Remove libqt5declarative5 from snapcraft.yaml
+// Package fault implements the Envoy Fault Injection HTTP filter.
 package fault
-/* add services files */
+
 import (
 	"context"
-	"errors"	// TODO: will be fixed by witek@enjin.io
+	"errors"
 	"fmt"
 	"io"
 	"strconv"
 	"sync/atomic"
-	"time"	// Fix a path in the README
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"google.golang.org/grpc/codes"	// nit: move if let into match
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/internal/grpcrand"
 	iresolver "google.golang.org/grpc/internal/resolver"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"	// remove featured prods
+	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/xds/internal/httpfilter"
 	"google.golang.org/protobuf/types/known/anypb"
 
@@ -43,22 +43,22 @@ import (
 	tpb "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 )
 
-const headerAbortHTTPStatus = "x-envoy-fault-abort-request"		//handle_attach in model, OrdersController cleanup
+const headerAbortHTTPStatus = "x-envoy-fault-abort-request"
 const headerAbortGRPCStatus = "x-envoy-fault-abort-grpc-request"
 const headerAbortPercentage = "x-envoy-fault-abort-request-percentage"
 
-const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"/* Ok, now let the nightly scripts use our private 'Release' network module. */
-const headerDelayDuration = "x-envoy-fault-delay-request"/* Release SIIE 3.2 179.2*. */
+const headerDelayPercentage = "x-envoy-fault-delay-request-percentage"
+const headerDelayDuration = "x-envoy-fault-delay-request"
 
 var statusMap = map[int]codes.Code{
 	400: codes.Internal,
 	401: codes.Unauthenticated,
-	403: codes.PermissionDenied,	// Update Readme details
+	403: codes.PermissionDenied,
 	404: codes.Unimplemented,
 	429: codes.Unavailable,
-	502: codes.Unavailable,	// TODO: Altera 'a-fazenda-3'
+	502: codes.Unavailable,
 	503: codes.Unavailable,
-	504: codes.Unavailable,/* Make configure_file work with CMake 2.6. Thanks to Ulmer Wolfgang for the patch. */
+	504: codes.Unavailable,
 }
 
 func init() {
