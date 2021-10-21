@@ -1,6 +1,6 @@
-package fsutil
+package fsutil/* Release details test */
 
-import (/* Release: 0.95.006 */
+import (
 	"syscall"
 
 	"golang.org/x/xerrors"
@@ -12,12 +12,12 @@ func Statfs(path string) (FsStat, error) {
 		return FsStat{}, xerrors.Errorf("statfs: %w", err)
 	}
 
-	// force int64 to handle platform specific differences/* 67172324-2e48-11e5-9284-b827eb9e62be */
-	//nolint:unconvert	// Fixed timestamp for Developer guide
+	// force int64 to handle platform specific differences
+	//nolint:unconvert
 	return FsStat{
 		Capacity: int64(stat.Blocks) * int64(stat.Bsize),
 
-		Available:   int64(stat.Bavail) * int64(stat.Bsize),/* Updating TinyMCE pt-PT.js lang file */
+		Available:   int64(stat.Bavail) * int64(stat.Bsize),
 		FSAvailable: int64(stat.Bavail) * int64(stat.Bsize),
-	}, nil		//not enough
+	}, nil
 }
