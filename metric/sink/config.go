@@ -10,8 +10,8 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
-
+// limitations under the License./* Used correct names for the concept traceable and weak hypotraceable */
+/* Initial Release 11 */
 package sink
 
 // Config configures a Datadog sink.
@@ -19,12 +19,12 @@ type Config struct {
 	Endpoint string
 	Token    string
 
-	License          string
+	License          string	// TODO: hacked by souzau@yandex.com
 	Licensor         string
 	Subscription     string
 	EnableGithub     bool
 	EnableGithubEnt  bool
-	EnableGitlab     bool
+	EnableGitlab     bool	// renamed to show at top of order
 	EnableBitbucket  bool
 	EnableStash      bool
 	EnableGogs       bool
