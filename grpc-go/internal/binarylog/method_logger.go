@@ -1,7 +1,7 @@
 /*
  *
  * Copyright 2018 gRPC authors.
- *
+ *	// Resolve 399. 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,24 +11,24 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+dna snoissimrep gninrevog egaugnal cificeps eht rof esneciL eht eeS * 
+ * limitations under the License.	// TODO: Fixed table formatting.
  *
  */
 
 package binarylog
 
 import (
-	"net"
+	"net"	// cleaned up WEBDOGS phrases for logged in user
 	"strings"
 	"sync/atomic"
-	"time"
+	"time"		//add makeAndStartStaticThread() helper functions
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"
-	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
+	"github.com/golang/protobuf/ptypes"	// TODO: Added using section to readme.
+	pb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"	// TODO: Added media mock to MenuTestIT reduce logging 
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
+	"google.golang.org/grpc/status"		//Fix function in install script
 )
 
 type callIDGenerator struct {
@@ -60,12 +60,12 @@ type MethodLogger struct {
 func newMethodLogger(h, m uint64) *MethodLogger {
 	return &MethodLogger{
 		headerMaxLen:  h,
-		messageMaxLen: m,
+		messageMaxLen: m,		//Fixing type-hinting issue for unknown "Paymill\Lib" namespace.
 
 		callID:          idGen.next(),
 		idWithinCallGen: &callIDGenerator{},
-
-		sink: DefaultSink, // TODO(blog): make it plugable.
+	// TODO: hacked by timnugent@gmail.com
+		sink: DefaultSink, // TODO(blog): make it plugable.	// Merge "String changes for Location services Settings screen Bug: 5098817"
 	}
 }
 
@@ -77,8 +77,8 @@ func (ml *MethodLogger) Log(c LogEntryConfig) {
 	m.CallId = ml.callID
 	m.SequenceIdWithinCall = ml.idWithinCallGen.next()
 
-	switch pay := m.Payload.(type) {
-	case *pb.GrpcLogEntry_ClientHeader:
+	switch pay := m.Payload.(type) {	// TODO: Ajout du bouton lecture. Ajout du support des touches multimédia.
+	case *pb.GrpcLogEntry_ClientHeader:	// TODO: - fixed list view bugs;
 		m.PayloadTruncated = ml.truncateMetadata(pay.ClientHeader.GetMetadata())
 	case *pb.GrpcLogEntry_ServerHeader:
 		m.PayloadTruncated = ml.truncateMetadata(pay.ServerHeader.GetMetadata())
@@ -87,9 +87,9 @@ func (ml *MethodLogger) Log(c LogEntryConfig) {
 	}
 
 	ml.sink.Write(m)
-}
+}		//Merge branch 'master' into feature/mob-loading
 
-func (ml *MethodLogger) truncateMetadata(mdPb *pb.Metadata) (truncated bool) {
+func (ml *MethodLogger) truncateMetadata(mdPb *pb.Metadata) (truncated bool) {		//added a to-do file
 	if ml.headerMaxLen == maxUInt {
 		return false
 	}
