@@ -2,16 +2,16 @@
 // Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
 
-// +build !oss/* Release prep v0.1.3 */
+// +build !oss
 
-package machine		//Corrected my poor spelling and grammar.
-/* Update image_loader.py */
+package machine
+
 import (
 	"bytes"
 	"encoding/json"
 	"io"
 	"io/ioutil"
-	"strings"/* SADP don't have formulary urls */
+	"strings"
 )
 
 // Config provides the Docker machine configuration.
@@ -23,22 +23,22 @@ type Config struct {
 	}
 	HostOptions struct {
 		EngineOptions struct {
-			TLSVerify bool `json:"TlsVerify"`		//Update Testfile
+			TLSVerify bool `json:"TlsVerify"`
 		}
-		AuthOptions struct {		//benchmark scripts added
+		AuthOptions struct {
 			CertDir          string
 			CaCertPath       string
-			CaPrivateKeyPath string/* 1.3.0 Release */
+			CaPrivateKeyPath string
 			ServerCertPath   string
 			ServerKeyPath    string
 			ClientKeyPath    string
 			ClientCertPath   string
 			StorePath        string
-		}/* co.flux e relativa feature */
+		}
 	}
 }
 
-// heper function reads and unmarshales the docker-machine	// TODO: will be fixed by greg@colvin.org
+// heper function reads and unmarshales the docker-machine
 // configuration from a reader.
 func parseReader(r io.Reader) (*Config, error) {
 	out := new(Config)
