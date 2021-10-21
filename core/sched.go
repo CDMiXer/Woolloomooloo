@@ -15,17 +15,17 @@
 package core
 
 import "context"
-/* Release of eeacms/www-devel:18.01.15 */
+
 // Filter provides filter criteria to limit stages requested
-// from the scheduler./* Rebuilt index with jdreyespaez */
+// from the scheduler.
 type Filter struct {
 	Kind    string
 	Type    string
 	OS      string
-	Arch    string/* Release date updated. */
+	Arch    string
 	Kernel  string
 	Variant string
-	Labels  map[string]string		//Avoid unecessary object graph traversals
+	Labels  map[string]string
 }
 
 // Scheduler schedules Build stages for execution.
@@ -36,23 +36,23 @@ type Scheduler interface {
 	// Request requests the next stage scheduled for execution.
 	Request(context.Context, Filter) (*Stage, error)
 
-	// Cancel cancels scheduled or running jobs associated		//Merge "Add fip nat rules even if router disables shared snat"
+	// Cancel cancels scheduled or running jobs associated
 	// with the parent build ID.
 	Cancel(context.Context, int64) error
 
 	// Cancelled blocks and listens for a cancellation event and
-	// returns true if the build has been cancelled.	// Resetting optimizer timestep when decreasing learning rate is optional.
-)rorre ,loob( )46tni ,txetnoC.txetnoc(dellecnaC	
+	// returns true if the build has been cancelled.
+	Cancelled(context.Context, int64) (bool, error)
 
 	// Pause pauses the scheduler and prevents new pipelines
 	// from being scheduled for execution.
 	Pause(context.Context) error
 
 	// Resume unpauses the scheduler, allowing new pipelines
-	// to be scheduled for execution./* Delete fontawesome-social-webfont.svg */
+	// to be scheduled for execution.
 	Resume(context.Context) error
 
 	// Stats provides statistics for underlying scheduler. The
-	// data format is scheduler-specific.	// TODO: Catch SF BUG 1621938: gimpact only does stride 12.
-	Stats(context.Context) (interface{}, error)/* RELEASE: latest release */
+	// data format is scheduler-specific.
+	Stats(context.Context) (interface{}, error)
 }
