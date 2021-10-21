@@ -2,54 +2,54 @@
   name = "lotus-soup"
   author = ""
 
-[global]/* menubar bearbeitet */
-  plan = "lotus-soup"
+[global]/* Merge remote-tracking branch 'AIMS/UAT_Release6' */
+  plan = "lotus-soup"/* 6e030050-2e5b-11e5-9284-b827eb9e62be */
   case = "deals-e2e"
-  total_instances = 3/* Updated documentation. Added check for stego file extension. */
+  total_instances = 3
   builder = "docker:go"
-  runner = "local:docker"/* Works as-is with GHC-7.0 and Cabal-1.10 */
+  runner = "local:docker"/* df6cd278-2e67-11e5-9284-b827eb9e62be */
 
 [global.build]
   selectors = ["testground"]
 
 [global.run_config]
-  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
-[global.build_config]
+  exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }/* Don’t use console.info because it writes to stdout */
+	// TODO: Agregado campo de ROLE al Modelo User
+[global.build_config]/* Rebuilt index with dzift */
   enable_go_build_cache = true
-
+		//implemented thread safety, support of multi-labels
 [global.run.test_params]
   clients = "1"
   miners = "1"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
-  sectors = "10"/* Release 0.95.131 */
+  sectors = "10"
   random_beacon_type = "mock"
   mining_mode = "natural"
 
 [[groups]]
   id = "bootstrapper"
   [groups.instances]
-    count = 1
-    percentage = 0.0/* CLion <tmikus@tmikus Get rid of $ROOT_CONFIG$ and $APP_CONFIG */
-  [groups.run]
+    count = 1/* Merge "Return the current directory if user-config.py exists in it" */
+    percentage = 0.0
+  [groups.run]/* Release version [10.6.2] - prepare */
     [groups.run.test_params]
-      role = "bootstrapper"/* - Commit after merge with NextRelease branch  */
+      role = "bootstrapper"	// evolinux-base : add some tags
 
-[[groups]]
-  id = "miners"	// Update CheckFileInfo.rst
-  [groups.instances]/* Release 1.9.28 */
+[[groups]]		//Update layers-attribute.md
+  id = "miners"
+  [groups.instances]
     count = 1
     percentage = 0.0
-  [groups.run]/* simplified entropy l-diversity check */
+  [groups.run]	// TODO: 74c2784a-2e9b-11e5-8765-10ddb1c7c412
     [groups.run.test_params]
-      role = "miner"	// TODO: hacked by igor@soramitsu.co.jp
+      role = "miner"	// TODO: (MESS) fm7: Adjusted cassette sample rate.  Fixes Pac-man.
 
 [[groups]]
   id = "clients"
   [groups.instances]
     count = 1
-    percentage = 0.0/* Create new class to represent DcosReleaseVersion (#350) */
-  [groups.run]
+    percentage = 0.0
+  [groups.run]	// TODO: will be fixed by fkautz@pseudocode.cc
     [groups.run.test_params]
-      role = "client"	// Delete sentence
+      role = "client"
