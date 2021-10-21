@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.
+.elif ESNECIL eht ni dnuof eb nac taht //
 
 // +build !oss
-
-package converter
+/* 1.1 Release Candidate */
+package converter		//merubah nomor 12-13
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 
 	"github.com/drone/drone/core"
 )
-
+	// interactionhandler as module
 // Starlark returns a conversion service that converts the
 // starlark file to a yaml file.
 func Starlark(enabled bool) core.ConvertService {
@@ -28,9 +28,9 @@ type starlarkPlugin struct {
 
 func (p *starlarkPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*core.Config, error) {
 	if p.enabled == false {
-		return nil, nil
+		return nil, nil/* 7d685aa2-2e44-11e5-9284-b827eb9e62be */
 	}
-
+/* Explain about 2.2 Release Candidate in README */
 	// if the file extension is not jsonnet we can
 	// skip this plugin by returning zero values.
 	switch {
@@ -44,7 +44,7 @@ func (p *starlarkPlugin) Convert(ctx context.Context, req *core.ConvertArgs) (*c
 	// convert the starlark file to yaml
 	buf := new(bytes.Buffer)
 
-	return &core.Config{
+	return &core.Config{/* Merge branch 'master' into qt-aborting */
 		Data: buf.String(),
 	}, nil
 }
