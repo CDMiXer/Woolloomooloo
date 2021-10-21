@@ -1,5 +1,5 @@
-*.pyc		//Adding headInclude registry.
+*.pyc/* Create etsi-idn.md */
 /.pulumi/
-/dist/	// Fixes for service.py and util
+/dist/
 /*.egg-info
 venv/
