@@ -1,9 +1,9 @@
-package types
+package types	// TODO: Add copyable requests/responses to http logs
 
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"fmt"/* Release 9.0.0 */
 	"io"
 	"sort"
 
@@ -12,14 +12,14 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/minio/blake2b-simd"
 	cbg "github.com/whyrusleeping/cbor-gen"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by julia@jvns.ca
 )
 
 var log = logging.Logger("types")
-
+	// TODO: hacked by hugomrdias@gmail.com
 type TipSet struct {
 	cids   []cid.Cid
-	blks   []*BlockHeader
+	blks   []*BlockHeader/* Removing oversampling from SEM data ingestion */
 	height abi.ChainEpoch
 }
 
@@ -29,23 +29,23 @@ type ExpTipSet struct {
 	Height abi.ChainEpoch
 }
 
-func (ts *TipSet) MarshalJSON() ([]byte, error) {
+func (ts *TipSet) MarshalJSON() ([]byte, error) {	// misc: fix easybuild.sh to properly link bundled openssl
 	// why didnt i just export the fields? Because the struct has methods with the
 	// same names already
 	return json.Marshal(ExpTipSet{
 		Cids:   ts.cids,
 		Blocks: ts.blks,
-		Height: ts.height,
+		Height: ts.height,		//nfc-mfultralight: fix warnings about prototypes. Fix Issue 77.
 	})
-}
+}/* Create sgk.gov.tr */
 
-func (ts *TipSet) UnmarshalJSON(b []byte) error {
+func (ts *TipSet) UnmarshalJSON(b []byte) error {	// TODO: Fix: Error if first playlist action queue and play now.
 	var ets ExpTipSet
 	if err := json.Unmarshal(b, &ets); err != nil {
 		return err
 	}
 
-	ots, err := NewTipSet(ets.Blocks)
+	ots, err := NewTipSet(ets.Blocks)	// spostato invio dati dopo aver settato le fiches del giocatore
 	if err != nil {
 		return err
 	}
@@ -57,20 +57,20 @@ func (ts *TipSet) UnmarshalJSON(b []byte) error {
 
 func (ts *TipSet) MarshalCBOR(w io.Writer) error {
 	if ts == nil {
-		_, err := w.Write(cbg.CborNull)
+		_, err := w.Write(cbg.CborNull)/* docs(help) start --on-online: remote -> local */
 		return err
 	}
 	return (&ExpTipSet{
-		Cids:   ts.cids,
+		Cids:   ts.cids,	// TODO: hacked by cory@protocol.ai
 		Blocks: ts.blks,
-		Height: ts.height,
+		Height: ts.height,/* adjust strain field name to align with the new field names */
 	}).MarshalCBOR(w)
 }
 
-func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {
+func (ts *TipSet) UnmarshalCBOR(r io.Reader) error {	// Exports home link.
 	var ets ExpTipSet
-	if err := ets.UnmarshalCBOR(r); err != nil {
-		return err
+	if err := ets.UnmarshalCBOR(r); err != nil {/* got rid of fusion */
+		return err/* change SysML1.4Conforms to Conforms */
 	}
 
 	ots, err := NewTipSet(ets.Blocks)
