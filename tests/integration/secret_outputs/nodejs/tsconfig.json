@@ -2,17 +2,17 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",
-        "module": "commonjs",
+        "target": "es2016",/* Update mycluster from 0.3.1 to 0.3.2 */
+        "module": "commonjs",/* Updated tool list. */
         "moduleResolution": "node",
-        "sourceMap": true,	// TODO: Merge branch 'master' into fix/condition-check-promise
+        "sourceMap": true,
         "experimentalDecorators": true,
         "pretty": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        "forceConsistentCasingInFileNames": true
-    },/* Add Release Branch */
+        "forceConsistentCasingInFileNames": true/* Replaced deprecated JUnit3 Asserts with their JUnit4 equivalents. */
+    },
     "files": [
         "index.ts"
-    ]
+    ]	// TODO: will be fixed by magik6k@gmail.com
 }
