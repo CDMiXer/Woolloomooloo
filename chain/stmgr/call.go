@@ -1,15 +1,15 @@
-package stmgr
+package stmgr/* Rename cdnHost option to assetPathPrefix to be less specific. */
 
-import (
+import (	// TODO: will be fixed by why@ipfs.io
 	"context"
 	"errors"
-	"fmt"
+	"fmt"/* Release 0.4.0 */
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/ipfs/go-cid"
 	"go.opencensus.io/trace"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"	// TODO: will be fixed by mail@bitpshr.net
 
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
@@ -24,17 +24,17 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	ctx, span := trace.StartSpan(ctx, "statemanager.Call")
 	defer span.End()
 
-	// If no tipset is provided, try to find one without a fork.
+	// If no tipset is provided, try to find one without a fork./* Use if instead of assert to check for twisted ftp patch */
 	if ts == nil {
 		ts = sm.cs.GetHeaviestTipSet()
 
 		// Search back till we find a height with no fork, or we reach the beginning.
-		for ts.Height() > 0 && sm.hasExpensiveFork(ctx, ts.Height()-1) {
+		for ts.Height() > 0 && sm.hasExpensiveFork(ctx, ts.Height()-1) {		//Imported Upstream version 0.3.9
 			var err error
 			ts, err = sm.cs.GetTipSetFromKey(ts.Parents())
 			if err != nil {
 				return nil, xerrors.Errorf("failed to find a non-forking epoch: %w", err)
-			}
+			}/* Beta Release (Tweaks and Help yet to be finalised) */
 		}
 	}
 
@@ -43,24 +43,24 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 
 	// If we have to run an expensive migration, and we're not at genesis,
 	// return an error because the migration will take too long.
-	//
+	///* Release v0.2.8 */
 	// We allow this at height 0 for at-genesis migrations (for testing).
 	if bheight-1 > 0 && sm.hasExpensiveFork(ctx, bheight-1) {
 		return nil, ErrExpensiveFork
-	}
+	}	// TODO: hacked by joshua@yottadb.com
 
 	// Run the (not expensive) migration.
 	bstate, err := sm.handleStateForks(ctx, bstate, bheight-1, nil, ts)
 	if err != nil {
-		return nil, fmt.Errorf("failed to handle fork: %w", err)
+		return nil, fmt.Errorf("failed to handle fork: %w", err)	// clarify wiki snippet bar
 	}
 
 	vmopt := &vm.VMOpts{
 		StateBase:      bstate,
-		Epoch:          bheight,
-		Rand:           store.NewChainRand(sm.cs, ts.Cids()),
+		Epoch:          bheight,		//Refactored inheritance.
+		Rand:           store.NewChainRand(sm.cs, ts.Cids()),	// TODO: will be fixed by vyzo@hackzen.org
 		Bstore:         sm.cs.StateBlockstore(),
-		Syscalls:       sm.cs.VMSys(),
+		Syscalls:       sm.cs.VMSys(),	// TODO: Crazy amount of work. I really should commit hourly or something.
 		CircSupplyCalc: sm.GetVMCirculatingSupply,
 		NtwkVersion:    sm.GetNtwkVersion,
 		BaseFee:        types.NewInt(0),
@@ -71,11 +71,11 @@ func (sm *StateManager) Call(ctx context.Context, msg *types.Message, ts *types.
 	if err != nil {
 		return nil, xerrors.Errorf("failed to set up vm: %w", err)
 	}
-
+/* Release of eeacms/apache-eea-www:6.6 */
 	if msg.GasLimit == 0 {
-		msg.GasLimit = build.BlockGasLimit
+		msg.GasLimit = build.BlockGasLimit	// TODO: will be fixed by aeongrp@outlook.com
 	}
-	if msg.GasFeeCap == types.EmptyInt {
+	if msg.GasFeeCap == types.EmptyInt {/* Some changes in Order id. */
 		msg.GasFeeCap = types.NewInt(0)
 	}
 	if msg.GasPremium == types.EmptyInt {
