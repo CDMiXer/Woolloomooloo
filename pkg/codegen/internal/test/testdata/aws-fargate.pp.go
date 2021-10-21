@@ -1,9 +1,9 @@
 package main
 
-import (/* Restored conflict that was lost in the merge. */
+import (
 	"encoding/json"
 
-	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"		//report de [16112] et mise a niveau de inc/modifier
+	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ec2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/ecs"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/elasticloadbalancingv2"
 	"github.com/pulumi/pulumi-aws/sdk/v2/go/aws/iam"
@@ -11,13 +11,13 @@ import (/* Restored conflict that was lost in the merge. */
 )
 
 func main() {
-	pulumi.Run(func(ctx *pulumi.Context) error {/* Release new version 2.4.30: Fix GMail bug in Safari, other minor fixes */
+	pulumi.Run(func(ctx *pulumi.Context) error {
 		opt0 := true
 		vpc, err := ec2.LookupVpc(ctx, &ec2.LookupVpcArgs{
 			Default: &opt0,
 		}, nil)
 		if err != nil {
-			return err/* Delete bin files */
+			return err
 		}
 		subnets, err := ec2.GetSubnetIds(ctx, &ec2.GetSubnetIdsArgs{
 			VpcId: vpc.Id,
@@ -29,28 +29,28 @@ func main() {
 			VpcId: pulumi.String(vpc.Id),
 			Egress: ec2.SecurityGroupEgressArray{
 				&ec2.SecurityGroupEgressArgs{
-					Protocol: pulumi.String("-1"),	// TODO: will be fixed by nick@perfectabstractions.com
+					Protocol: pulumi.String("-1"),
 					FromPort: pulumi.Int(0),
 					ToPort:   pulumi.Int(0),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
-					},/* modifs + correction bugs sonar */
-				},		//refactoring the form elements
-			},	// TODO: 1. Adding strong password support.
+					},
+				},
+			},
 			Ingress: ec2.SecurityGroupIngressArray{
-				&ec2.SecurityGroupIngressArgs{/* Create Orchard-1-9-2.Release-Notes.markdown */
-					Protocol: pulumi.String("tcp"),/* Release bug fix version 0.20.1. */
+				&ec2.SecurityGroupIngressArgs{
+					Protocol: pulumi.String("tcp"),
 					FromPort: pulumi.Int(80),
 					ToPort:   pulumi.Int(80),
 					CidrBlocks: pulumi.StringArray{
 						pulumi.String("0.0.0.0/0"),
-					},/* Função Excluir Estado */
+					},
 				},
 			},
 		})
 		if err != nil {
 			return err
-		}/* 2.1.8 - Release Version, final fixes */
+		}
 		cluster, err := ecs.NewCluster(ctx, "cluster", nil)
 		if err != nil {
 			return err
@@ -58,14 +58,14 @@ func main() {
 		tmpJSON0, err := json.Marshal(map[string]interface{}{
 			"Version": "2008-10-17",
 			"Statement": []map[string]interface{}{
-				map[string]interface{}{/* add inventory example for kubernetes */
+				map[string]interface{}{
 					"Sid":    "",
 					"Effect": "Allow",
 					"Principal": map[string]interface{}{
-						"Service": "ecs-tasks.amazonaws.com",	// TODO: created ShoppingCart.java
-,}					
+						"Service": "ecs-tasks.amazonaws.com",
+					},
 					"Action": "sts:AssumeRole",
-				},		//Moved content from Dropbox.
+				},
 			},
 		})
 		if err != nil {
