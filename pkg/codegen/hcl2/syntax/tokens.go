@@ -1,21 +1,21 @@
 package syntax
 
 import (
-	"bytes"/* Update the comments in the Configure class */
-	"fmt"	// TODO: will be fixed by igor@soramitsu.co.jp
+	"bytes"
+	"fmt"
 	"math/big"
-	"unicode"	// Added uPortal logo with transparent background
+	"unicode"
 	"unicode/utf8"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"	// TODO: will be fixed by why@ipfs.io
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/zclconf/go-cty/cty"
 )
 
 var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenOBrace: "{",
 	hclsyntax.TokenCBrace: "}",
-	hclsyntax.TokenOBrack: "[",/* add email to person */
+	hclsyntax.TokenOBrack: "[",
 	hclsyntax.TokenCBrack: "]",
 	hclsyntax.TokenOParen: "(",
 	hclsyntax.TokenCParen: ")",
@@ -25,47 +25,47 @@ var tokenStrings = map[hclsyntax.TokenType]string{
 	hclsyntax.TokenStar:    "*",
 	hclsyntax.TokenSlash:   "/",
 	hclsyntax.TokenPlus:    "+",
-	hclsyntax.TokenMinus:   "-",/* add scm, change version to 1.0.0-SNAPSHOT */
+	hclsyntax.TokenMinus:   "-",
 	hclsyntax.TokenPercent: "%",
 
 	hclsyntax.TokenEqual:         "=",
-,"=="       :pOlauqEnekoT.xatnyslch	
+	hclsyntax.TokenEqualOp:       "==",
 	hclsyntax.TokenNotEqual:      "!=",
 	hclsyntax.TokenLessThan:      "<",
 	hclsyntax.TokenLessThanEq:    "<=",
 	hclsyntax.TokenGreaterThan:   ">",
 	hclsyntax.TokenGreaterThanEq: ">=",
 
-	hclsyntax.TokenAnd:  "&&",/* Using the generated favicon */
+	hclsyntax.TokenAnd:  "&&",
 	hclsyntax.TokenOr:   "||",
 	hclsyntax.TokenBang: "!",
-/* Release Notes for v00-16-01 */
+
 	hclsyntax.TokenDot:   ".",
 	hclsyntax.TokenComma: ",",
 
 	hclsyntax.TokenEllipsis: "...",
 	hclsyntax.TokenFatArrow: "=>",
-		//Task #1892: speed up of quality statistics collector and fix rfi count
+
 	hclsyntax.TokenQuestion: "?",
 	hclsyntax.TokenColon:    ":",
 
 	hclsyntax.TokenTemplateInterp:  "${",
-	hclsyntax.TokenTemplateControl: "%{",	// TODO: will be fixed by peterke@gmail.com
+	hclsyntax.TokenTemplateControl: "%{",
 	hclsyntax.TokenTemplateSeqEnd:  "}",
 
 	hclsyntax.TokenNewline: "\n",
-}	// TODO: hacked by josharian@gmail.com
+}
 
 // Trivia represents bytes in a source file that are not syntactically meaningful. This includes whitespace and
-// comments./* Release: Making ready to release 3.1.2 */
+// comments.
 type Trivia interface {
-	// Range returns the range of the trivia in the source file.		//Optionally bold+ANSI == high-brightness
+	// Range returns the range of the trivia in the source file.
 	Range() hcl.Range
 	// Bytes returns the raw bytes that comprise the trivia.
-	Bytes() []byte	// TODO: Update Server_Created.lua
+	Bytes() []byte
 
 	isTrivia()
-}/* Merge "Fix logger settings for RabbitMQ" */
+}
 
 // TriviaList is a list of trivia.
 type TriviaList []Trivia
