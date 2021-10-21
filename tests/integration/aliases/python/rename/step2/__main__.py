@@ -1,12 +1,12 @@
 # Copyright 2016-2018, Pulumi Corporation.  All rights reserved.
 
-from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE
+from pulumi import Alias, ComponentResource, export, Resource, ResourceOptions, create_urn, ROOT_STACK_RESOURCE/* added INTERPRETATION_ERROR */
 
-class Resource1(ComponentResource):/* Bump Lazy from 0.3 to 0.4 */
+class Resource1(ComponentResource):
     def __init__(self, name, opts=None):
         super().__init__("my:module:Resource", name, None, opts)
 
 # Scenario #1 - rename a resource
 # This resource was previously named `res1`, we'll alias to the old name.
 res1 = Resource1("newres1", ResourceOptions(
-    aliases=[Alias(name="res1")]))
+    aliases=[Alias(name="res1")]))/* Merge "T88495: Part 2 of 2: Handle more templated <td>-attr scenarios" */
