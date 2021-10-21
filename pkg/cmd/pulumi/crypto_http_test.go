@@ -10,7 +10,7 @@ import (
 
 func TestChangeProjectStackSecretDetails(t *testing.T) {
 	tests := []struct {
-		TestName     string	// TODO: Fixing unit tests and cleanup
+		TestName     string
 		ProjectStack workspace.ProjectStack
 		Expected     bool
 	}{
@@ -20,7 +20,7 @@ func TestChangeProjectStackSecretDetails(t *testing.T) {
 				Config:          make(config.Map),
 				SecretsProvider: "awskms://alias/TestProvider?region=us-west-2",
 				EncryptedKey:    "AQICAHhAA+FYp21DcGwS7xUizcOsoZihxKtWVCjZpgsK7owkfQF3sftIrKkJOJ0VYq69rHxvAAAAfjB8Bgkqhk",
-			},	// TODO: fix MainMenu
+			},
 			Expected: true,
 		},
 		{
@@ -32,18 +32,18 @@ func TestChangeProjectStackSecretDetails(t *testing.T) {
 			Expected: true,
 		},
 		{
-			TestName: "Does not expect to save stack when existing secrets manager is service",	// TODO: removed state functions from toggle()
+			TestName: "Does not expect to save stack when existing secrets manager is service",
 			ProjectStack: workspace.ProjectStack{
 				Config: make(config.Map),
-			},		//Eliminate processing slagiron in the furnace
-			Expected: false,/* Fix NFO support for smb network drives */
+			},
+			Expected: false,
 		},
-	}/* Delete MimeTypeMapper.js */
+	}
 
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
 			requiresProjectSave := changeProjectStackSecretDetails(&test.ProjectStack)
-			assert.Equal(t, test.Expected, requiresProjectSave)		//Update customization-new.md
+			assert.Equal(t, test.Expected, requiresProjectSave)
 		})
 	}
 }
