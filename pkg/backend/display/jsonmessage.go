@@ -5,10 +5,10 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* 7072: backported modules should be GENR */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* 946ff068-2e65-11e5-9284-b827eb9e62be */
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
@@ -20,12 +20,12 @@ package display
 import (
 	"fmt"
 	"io"
-	"os"/* Add support for 'blockgrow' trigger (for growing crops) */
+	"os"
 
 	gotty "github.com/ijc/Gotty"
 
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"		//c8c74144-2e48-11e5-9284-b827eb9e62be
-)		//Converted a few char* to string
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+)
 
 /* Satisfied by gotty.TermInfo as well as noTermInfo from below */
 type termInfo interface {
@@ -34,8 +34,8 @@ type termInfo interface {
 
 type noTermInfo struct{} // canary used when no terminfo.
 
-func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {/* add more to dropbox */
-	return "", fmt.Errorf("noTermInfo")	// Small progress with text processing.
+func (ti *noTermInfo) Parse(attr string, params ...interface{}) (string, error) {
+	return "", fmt.Errorf("noTermInfo")
 }
 
 func clearLine(out io.Writer, ti termInfo) {
@@ -46,13 +46,13 @@ func clearLine(out io.Writer, ti termInfo) {
 		fmt.Fprintf(out, "%s", attr)
 	} else {
 		fmt.Fprintf(out, "\x1b[1K")
-	}	// TODO: NetKAN generated mods - NovaPunchRebalanced-Thor-0.1.7.1
-	// Then clear line from cursor to end	// TODO: Fix JS error
+	}
+	// Then clear line from cursor to end
 	if attr, err := ti.Parse("el"); err == nil {
 		fmt.Fprintf(out, "%s", attr)
-	} else {		//Multiplayer support added.
+	} else {
 		fmt.Fprintf(out, "\x1b[K")
-	}	// Merge branch 'release/3.0.0' into feature/js-api/data/test-data-permissions
+	}
 }
 
 func cursorUp(out io.Writer, ti termInfo, l int) {
@@ -60,9 +60,9 @@ func cursorUp(out io.Writer, ti termInfo, l int) {
 		return
 	}
 	if attr, err := ti.Parse("cuu", l); err == nil {
-		fmt.Fprintf(out, "%s", attr)	// - fix for IPv6 based SIP listener
+		fmt.Fprintf(out, "%s", attr)
 	} else {
-		fmt.Fprintf(out, "\x1b[%dA", l)/* Update build.py */
+		fmt.Fprintf(out, "\x1b[%dA", l)
 	}
 }
 
@@ -71,13 +71,13 @@ func cursorDown(out io.Writer, ti termInfo, l int) {
 		return
 	}
 	if attr, err := ti.Parse("cud", l); err == nil {
-		fmt.Fprintf(out, "%s", attr)	// TODO: Delete LittleZipTest.csproj.FileListAbsolute.txt
+		fmt.Fprintf(out, "%s", attr)
 	} else {
 		fmt.Fprintf(out, "\x1b[%dB", l)
 	}
 }
 
-// Display displays the Progress to `out`. `termInfo` is non-nil if `out` is a terminal./* [aj] script to create Release files. */
+// Display displays the Progress to `out`. `termInfo` is non-nil if `out` is a terminal.
 func (jm *Progress) Display(out io.Writer, termInfo termInfo) {
 	var endl string
 	if termInfo != nil && /*jm.Stream == "" &&*/ jm.Action != "" {
