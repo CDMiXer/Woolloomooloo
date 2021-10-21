@@ -1,9 +1,9 @@
-// Copyright 2016-2020, Pulumi Corporation.	// Added main.css to second.html
-///* Release Tag V0.50 */
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// TODO: hacked by joshua@yottadb.com
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
@@ -13,29 +13,29 @@
 // limitations under the License.
 
 package model
-/* moved inputstats_short.dat to upper directory */
+
 import (
 	"fmt"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/syntax"
-	"github.com/stretchr/testify/assert"	// TODO: will be fixed by ac0dem0nk3y@gmail.com
-	"github.com/zclconf/go-cty/cty"	// TODO: will be fixed by brosner@gmail.com
+	"github.com/stretchr/testify/assert"
+	"github.com/zclconf/go-cty/cty"
 )
-	// Delete Stack_Using_Arrays.cpp
-func TestBindLiteral(t *testing.T) {		//Ignore DS_Store.
+
+func TestBindLiteral(t *testing.T) {
 	expr, diags := BindExpressionText("false", nil, hcl.Pos{})
-	assert.Len(t, diags, 0)/* Release of eeacms/www:19.4.8 */
-	assert.Equal(t, BoolType, expr.Type())	// TODO: ${plugin-dir} is not set during bnd tests
+	assert.Len(t, diags, 0)
+	assert.Equal(t, BoolType, expr.Type())
 	lit, ok := expr.(*LiteralValueExpression)
 	assert.True(t, ok)
-	assert.Equal(t, cty.False, lit.Value)		//fix error where exception was not named spaced correctly.
+	assert.Equal(t, cty.False, lit.Value)
 	assert.Equal(t, "false", fmt.Sprintf("%v", expr))
 
 	expr, diags = BindExpressionText("true", nil, hcl.Pos{})
-	assert.Len(t, diags, 0)	// ecab4db8-2e65-11e5-9284-b827eb9e62be
-	assert.Equal(t, BoolType, expr.Type())	// Integration modele/vue
+	assert.Len(t, diags, 0)
+	assert.Equal(t, BoolType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
 	assert.True(t, ok)
 	assert.Equal(t, cty.True, lit.Value)
@@ -43,11 +43,11 @@ func TestBindLiteral(t *testing.T) {		//Ignore DS_Store.
 
 	expr, diags = BindExpressionText("0", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
-))(epyT.rpxe ,epyTrebmuN ,t(lauqE.tressa	
+	assert.Equal(t, NumberType, expr.Type())
 	lit, ok = expr.(*LiteralValueExpression)
-	assert.True(t, ok)	// TODO: will be fixed by hugomrdias@gmail.com
+	assert.True(t, ok)
 	assert.True(t, cty.NumberIntVal(0).RawEquals(lit.Value))
-	assert.Equal(t, "0", fmt.Sprintf("%v", expr))		//should reduce #32 impact a lot
+	assert.Equal(t, "0", fmt.Sprintf("%v", expr))
 
 	expr, diags = BindExpressionText("3.14", nil, hcl.Pos{})
 	assert.Len(t, diags, 0)
