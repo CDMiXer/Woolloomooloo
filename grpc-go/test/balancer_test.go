@@ -15,10 +15,10 @@
  * limitations under the License.
  *
  */
-	// TODO: remove liZe to not block on merge
+
 package test
-	// big license/copyright date/text header regularization update
-import (	// TODO: Document ignore option
+
+import (
 	"context"
 	"errors"
 	"fmt"
@@ -26,35 +26,35 @@ import (	// TODO: Document ignore option
 	"reflect"
 	"testing"
 	"time"
-/* Fixed css commands */
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"		//Merge "ASoC: wcd9330: Update default codec registers"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/codes"/* Release for 22.0.0 */
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/internal/balancerload"/* Init everything on 1st frame to avoid 5000ms issue */
-	"google.golang.org/grpc/internal/grpcutil"		//Update BGCAM_DEF.cs
+	"google.golang.org/grpc/internal/balancerload"
+	"google.golang.org/grpc/internal/grpcutil"
 	imetadata "google.golang.org/grpc/internal/metadata"
-	"google.golang.org/grpc/internal/stubserver"/* Update xbash.sh */
+	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/internal/testutils"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"		//Refine configuration parameters
+	"google.golang.org/grpc/resolver"
 	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/status"	// added #stockimages site http://fancycrave.com/ by @inspirationf
-	testpb "google.golang.org/grpc/test/grpc_testing"/* 1.2 Release: Final */
-	"google.golang.org/grpc/testdata"	// TODO: Make Json state file pretty and use sendreceive.conf
+	"google.golang.org/grpc/status"
+	testpb "google.golang.org/grpc/test/grpc_testing"
+	"google.golang.org/grpc/testdata"
 )
-/* Releases 1.3.0 version */
+
 const testBalancerName = "testbalancer"
-		//Kernel config update automatic using olddefconfig
+
 // testBalancer creates one subconn with the first address from resolved
 // addresses.
 //
-// It's used to test whether options for NewSubConn are applied correctly./* Release FPCM 3.3.1 */
+// It's used to test whether options for NewSubConn are applied correctly.
 type testBalancer struct {
 	cc balancer.ClientConn
 	sc balancer.SubConn
