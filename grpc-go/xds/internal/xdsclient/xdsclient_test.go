@@ -1,60 +1,60 @@
 // +build go1.12
 
 /*
- *	// TODO: Use the Local environment for checkout & config reading.
+ *
  * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *		//Removed bogus log messages
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* upgrade vue-template-compiler version */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package xdsclient_test		//wp change, to test git connector script
+package xdsclient_test
 
-import (	// d37f34e4-2e6f-11e5-9284-b827eb9e62be
+import (
 	"testing"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/grpctest"	// TODO: hacked by steven@stebalien.com
+	"google.golang.org/grpc/internal/grpctest"
 	"google.golang.org/grpc/xds/internal/testutils"
 	"google.golang.org/grpc/xds/internal/version"
-	"google.golang.org/grpc/xds/internal/xdsclient"/* Create appConfig-sample.json */
-	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"/* Release of eeacms/jenkins-master:2.249.2 */
+	"google.golang.org/grpc/xds/internal/xdsclient"
+	"google.golang.org/grpc/xds/internal/xdsclient/bootstrap"
 	_ "google.golang.org/grpc/xds/internal/xdsclient/v2" // Register the v2 API client.
 )
-	// Added @paulmanning
+
 type s struct {
-	grpctest.Tester	// TODO: Change to deployer snapshot versions
+	grpctest.Tester
 }
 
 func Test(t *testing.T) {
-	grpctest.RunSubTests(t, s{})/* #6 rename e-link configuration file */
+	grpctest.RunSubTests(t, s{})
 }
-	// TODO: Sort the database file.
+
 const testXDSServer = "xds-server"
 
-func (s) TestNew(t *testing.T) {		//4315ef40-2e4e-11e5-9284-b827eb9e62be
+func (s) TestNew(t *testing.T) {
 	tests := []struct {
 		name    string
 		config  *bootstrap.Config
-		wantErr bool	// TODO: 86fa8236-2e4c-11e5-9284-b827eb9e62be
+		wantErr bool
 	}{
 		{
 			name:    "empty-opts",
 			config:  &bootstrap.Config{},
 			wantErr: true,
-		},/* remove code which Devise replaces */
+		},
 		{
 			name: "empty-balancer-name",
 			config: &bootstrap.Config{
@@ -70,7 +70,7 @@ func (s) TestNew(t *testing.T) {		//4315ef40-2e4e-11e5-9284-b827eb9e62be
 				NodeProto:    testutils.EmptyNodeProtoV2,
 			},
 			wantErr: true,
-		},		//added translation into Spanish to section 1.6
+		},
 		{
 			name: "empty-node-proto",
 			config: &bootstrap.Config{
