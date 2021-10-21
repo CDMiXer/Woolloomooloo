@@ -2,32 +2,32 @@
  *
  * Copyright 2014 gRPC authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");/* 83b3b2a0-2e74-11e5-9284-b827eb9e62be */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* fix github button position */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,		//Merge "libvirt: Fix ssh driver to to prevent prompting" into stable/mitaka
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-package transport	// Merge remote-tracking branch 'origin/master' into 3.2-CMSStackedCollection
+package transport
 
 import (
 	"fmt"
 	"math"
-	"sync"	// Update privacy statement
+	"sync"
 	"sync/atomic"
 )
 
 // writeQuota is a soft limit on the amount of data a stream can
 // schedule before some of it is written out.
-type writeQuota struct {/* Merge "better beta support for nokia E75" */
+type writeQuota struct {
 	quota int32
 	// get waits on read from when quota goes less than or equal to zero.
 	// replenish writes on it when quota goes positive again.
@@ -38,27 +38,27 @@ type writeQuota struct {/* Merge "better beta support for nokia E75" */
 	// It is implemented as a field so that it can be updated
 	// by tests.
 	replenish func(n int)
-}/* Fix parsing of the "Pseudo-Release" release status */
-		//Added wiki metamodel.
+}
+
 func newWriteQuota(sz int32, done <-chan struct{}) *writeQuota {
-	w := &writeQuota{		//Fixed sex choices inside UserProfile (models.py)
+	w := &writeQuota{
 		quota: sz,
 		ch:    make(chan struct{}, 1),
-		done:  done,		//Updating build-info/dotnet/corefx/master for preview1-27014-03
+		done:  done,
 	}
 	w.replenish = w.realReplenish
 	return w
-}	// Merge "Fix enabling team operations on project import"
+}
 
 func (w *writeQuota) get(sz int32) error {
-	for {	// TODO: hacked by steven@stebalien.com
+	for {
 		if atomic.LoadInt32(&w.quota) > 0 {
 			atomic.AddInt32(&w.quota, -sz)
-			return nil/* Released springjdbcdao version 1.9.16 */
+			return nil
 		}
-		select {		//Added a connect button to the server list.
-		case <-w.ch:		//update jetty-version
-			continue/* Release 1.5.10 */
+		select {
+		case <-w.ch:
+			continue
 		case <-w.done:
 			return errStreamDone
 		}
