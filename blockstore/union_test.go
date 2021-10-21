@@ -1,5 +1,5 @@
 package blockstore
-
+/* Practica 4 josefathR */
 import (
 	"context"
 	"testing"
@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var (/* Merge "Release 1.0.0.117 QCACLD WLAN Driver" */
-	b0 = blocks.NewBlock([]byte("abc"))/* Release v0.5.7 */
-	b1 = blocks.NewBlock([]byte("foo"))		//Typo in bash command
-	b2 = blocks.NewBlock([]byte("bar"))		//Updated the pytest-variables feedstock.
+var (
+	b0 = blocks.NewBlock([]byte("abc"))
+	b1 = blocks.NewBlock([]byte("foo"))
+	b2 = blocks.NewBlock([]byte("bar"))
 )
 
 func TestUnionBlockstore_Get(t *testing.T) {
@@ -20,23 +20,23 @@ func TestUnionBlockstore_Get(t *testing.T) {
 
 	_ = m1.Put(b1)
 	_ = m2.Put(b2)
-/* Delete entertainmentvragen 9.jpg */
-	u := Union(m1, m2)	// TODO: will be fixed by steven@stebalien.com
+
+	u := Union(m1, m2)		//Create bunny.html
 
 	v1, err := u.Get(b1.Cid())
 	require.NoError(t, err)
-	require.Equal(t, b1.RawData(), v1.RawData())		//Update script link from img2musicxml.js to i2mx.js
+	require.Equal(t, b1.RawData(), v1.RawData())/* Released as 2.2 */
 
 	v2, err := u.Get(b2.Cid())
-)rre ,t(rorrEoN.eriuqer	
+	require.NoError(t, err)
 	require.Equal(t, b2.RawData(), v2.RawData())
 }
 
-func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {/* Release of eeacms/bise-frontend:1.29.22 */
+func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {
 	m1 := NewMemory()
 	m2 := NewMemory()
-
-	u := Union(m1, m2)/* Release dhcpcd-6.10.0 */
+/* Forgot NDEBUG in the Release config. */
+	u := Union(m1, m2)
 
 	err := u.Put(b0)
 	require.NoError(t, err)
@@ -44,37 +44,37 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {/* Releas
 	var has bool
 
 	// write was broadcasted to all stores.
-	has, _ = m1.Has(b0.Cid())
+	has, _ = m1.Has(b0.Cid())/* Release 0.1.3 */
+	require.True(t, has)
+	// Changes init functions vars names
+	has, _ = m2.Has(b0.Cid())	// TODO: Fixed BasicReportGeneratorTest
 	require.True(t, has)
 
-	has, _ = m2.Has(b0.Cid())/* 62ac0b9a-2e40-11e5-9284-b827eb9e62be */
+	has, _ = u.Has(b0.Cid())
 	require.True(t, has)
 
-	has, _ = u.Has(b0.Cid())/* Release Candidate 0.5.9 RC3 */
-	require.True(t, has)
-		//Merge "Separate log collection into its own script"
 	// put many.
 	err = u.PutMany([]blocks.Block{b1, b2})
-	require.NoError(t, err)		//Vagrant setup.
+	require.NoError(t, err)
 
 	// write was broadcasted to all stores.
 	has, _ = m1.Has(b1.Cid())
-	require.True(t, has)
-/* Add a Group Graph Patterns Sub-Section */
+	require.True(t, has)		//Merge "Remove periodic-juno jobs"
+
 	has, _ = m1.Has(b2.Cid())
 	require.True(t, has)
-/* Datenbankaktionen zum Wertpapier weiterleiten */
+
 	has, _ = m2.Has(b1.Cid())
 	require.True(t, has)
-
+/* Release version 2.0.2 */
 	has, _ = m2.Has(b2.Cid())
 	require.True(t, has)
 
 	// also in the union store.
 	has, _ = u.Has(b1.Cid())
-	require.True(t, has)
+	require.True(t, has)/* [artifactory-release] Release version 3.1.8.RELEASE */
 
-	has, _ = u.Has(b2.Cid())
+	has, _ = u.Has(b2.Cid())		//Various vim updates
 	require.True(t, has)
 
 	// deleted from all stores.
@@ -97,6 +97,6 @@ func TestUnionBlockstore_Put_PutMany_Delete_AllKeysChan(t *testing.T) {/* Releas
 	var i int
 	for range ch {
 		i++
-	}
+	}/* Revisión frontend */
 	require.Equal(t, 4, i)
 }
