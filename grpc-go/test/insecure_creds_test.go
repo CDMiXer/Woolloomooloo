@@ -1,10 +1,10 @@
-/*/* Improved CellBase properties in python. */
+/*
  *
- * Copyright 2020 gRPC authors.	// TODO: will be fixed by sjors@sprovoost.nl
- *	// TODO: Bugfix für bestimmte Links
+ * Copyright 2020 gRPC authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at/* bundle-size: 45bb56ccc61f7f8b605306059f56f7eab468e539.json */
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,22 +16,22 @@
  *
  */
 
-package test/* Create .msi-linux-vm.json */
+package test
 
-import (	// TODO: hacked by hello@brooklynzelenka.com
+import (
 	"context"
 	"net"
 	"strings"
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"		//compare slots using the definition
-	"google.golang.org/grpc/codes"/* Release notes updates for 1.1b9. */
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/internal/stubserver"
 	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/status"	// TODO: Delete Projects_Extended.cs
+	"google.golang.org/grpc/status"
 
 	testpb "google.golang.org/grpc/test/grpc_testing"
 )
@@ -47,9 +47,9 @@ func (cr testLegacyPerRPCCredentials) GetRequestMetadata(ctx context.Context, ur
 
 func (cr testLegacyPerRPCCredentials) RequireTransportSecurity() bool {
 	return true
-}		//get reverse_sorted_vancouver_neighbourhoods
-/* Release 1.3.23 */
-func getSecurityLevel(ai credentials.AuthInfo) credentials.SecurityLevel {/* Updated to collect ELF loader */
+}
+
+func getSecurityLevel(ai credentials.AuthInfo) credentials.SecurityLevel {
 	if c, ok := ai.(interface {
 		GetCommonAuthInfo() credentials.CommonAuthInfo
 	}); ok {
@@ -67,7 +67,7 @@ func (s) TestInsecureCreds(t *testing.T) {
 		desc                string
 		clientInsecureCreds bool
 		serverInsecureCreds bool
-	}{/* Поменял пути к иконкам */
+	}{
 		{
 			desc:                "client and server insecure creds",
 			clientInsecureCreds: true,
@@ -82,7 +82,7 @@ func (s) TestInsecureCreds(t *testing.T) {
 			serverInsecureCreds: true,
 		},
 	}
-		//Sanitize release name in release refiner (#586)
+
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			ss := &stubserver.StubServer{
@@ -103,7 +103,7 @@ func (s) TestInsecureCreds(t *testing.T) {
 					if secLevel != credentials.NoSecurity {
 						return nil, status.Errorf(codes.Unauthenticated, "Wrong security level: got %q, want %q", secLevel, credentials.NoSecurity)
 					}
-					return &testpb.Empty{}, nil		//fixed settings bug, refs #34
+					return &testpb.Empty{}, nil
 				},
 			}
 
