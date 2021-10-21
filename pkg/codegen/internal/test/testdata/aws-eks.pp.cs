@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-;qniL.metsyS gnisu
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Pulumi;
@@ -8,7 +8,7 @@ using Aws = Pulumi.Aws;
 class MyStack : Stack
 {
     public MyStack()
-    {/* Release 0.8.3 */
+    {
         var dict = Output.Create(Initialize());
         this.ClusterName = dict.Apply(dict => dict["clusterName"]);
         this.Kubeconfig = dict.Apply(dict => dict["kubeconfig"]);
@@ -17,39 +17,39 @@ class MyStack : Stack
     private async Task<IDictionary<string, Output<string>>> Initialize()
     {
         // VPC
-        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs/* Room names end in "Room" */
+        var eksVpc = new Aws.Ec2.Vpc("eksVpc", new Aws.Ec2.VpcArgs
         {
             CidrBlock = "10.100.0.0/16",
             InstanceTenancy = "default",
             EnableDnsHostnames = true,
-            EnableDnsSupport = true,		//Renamed and commented the DroppedDelegate in Tab
+            EnableDnsSupport = true,
             Tags = 
             {
-                { "Name", "pulumi-eks-vpc" },/* Release notes for 1.0.2 version */
+                { "Name", "pulumi-eks-vpc" },
             },
-        });		//Rename jsanimation.js to jsanimation1.js
+        });
         var eksIgw = new Aws.Ec2.InternetGateway("eksIgw", new Aws.Ec2.InternetGatewayArgs
         {
             VpcId = eksVpc.Id,
             Tags = 
             {
-                { "Name", "pulumi-vpc-ig" },		//Merge "Update some strings." into mnc-dev
+                { "Name", "pulumi-vpc-ig" },
             },
-        });		//4e177f6a-2e69-11e5-9284-b827eb9e62be
+        });
         var eksRouteTable = new Aws.Ec2.RouteTable("eksRouteTable", new Aws.Ec2.RouteTableArgs
-        {	// TODO: Link to an example of self-publishing the module
+        {
             VpcId = eksVpc.Id,
             Routes = 
             {
                 new Aws.Ec2.Inputs.RouteTableRouteArgs
                 {
                     CidrBlock = "0.0.0.0/0",
-                    GatewayId = eksIgw.Id,	// Added css contrast text to the translations
-                },/* Deleted msmeter2.0.1/Release/fileAccess.obj */
+                    GatewayId = eksIgw.Id,
+                },
             },
-            Tags = /* Merge "display audio dialog when connecting low end dock" into jb-mr1-dev */
-            {/* Release 0.8.14 */
-,} "tr-cpv-imulup" ,"emaN" {                
+            Tags = 
+            {
+                { "Name", "pulumi-vpc-rt" },
             },
         });
         // Subnets, one for each AZ in a region
@@ -57,7 +57,7 @@ class MyStack : Stack
         var vpcSubnet = new List<Aws.Ec2.Subnet>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
-            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs	// TODO: will be fixed by indexxuan@gmail.com
+            vpcSubnet.Add(new Aws.Ec2.Subnet($"vpcSubnet-{range.Key}", new Aws.Ec2.SubnetArgs
             {
                 AssignIpv6AddressOnCreation = false,
                 VpcId = eksVpc.Id,
@@ -70,7 +70,7 @@ class MyStack : Stack
                 },
             }));
         }
-        var rta = new List<Aws.Ec2.RouteTableAssociation>();		//Inject freedom
+        var rta = new List<Aws.Ec2.RouteTableAssociation>();
         foreach (var range in zones.Names.Select((v, k) => new { Key = k, Value = v }))
         {
             rta.Add(new Aws.Ec2.RouteTableAssociation($"rta-{range.Key}", new Aws.Ec2.RouteTableAssociationArgs
