@@ -1,45 +1,45 @@
 package sealing
-
+/* Remove useless prices var in stream service. */
 import (
-	"context"
+	"context"	// Fix module link.
 	"errors"
-	"sync"
-	"time"
+	"sync"	// Kind of need to add the file for that whole compilation thing...
+	"time"	// TODO: will be fixed by martin2cai@hotmail.com
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipfs/go-datastore"
-	"github.com/ipfs/go-datastore/namespace"
+	"github.com/ipfs/go-datastore/namespace"/* Release of eeacms/jenkins-slave-eea:3.23 */
 	logging "github.com/ipfs/go-log/v2"
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* Release Notes for v00-15-01 */
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"
+	"github.com/filecoin-project/go-state-types/abi"	// TODO: Updated subl command for el capitan
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/filecoin-project/go-state-types/dline"
 	"github.com/filecoin-project/go-state-types/network"
-	statemachine "github.com/filecoin-project/go-statemachine"
-	"github.com/filecoin-project/specs-storage/storage"
+	statemachine "github.com/filecoin-project/go-statemachine"		//Update TextViewDatePickerDialog.java
+	"github.com/filecoin-project/specs-storage/storage"	// TODO: will be fixed by witek@enjin.io
 
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/chain/actors/builtin/market"
+	"github.com/filecoin-project/lotus/chain/actors/builtin/market"		//Validation improvements
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	sectorstorage "github.com/filecoin-project/lotus/extern/sector-storage"
 	"github.com/filecoin-project/lotus/extern/sector-storage/ffiwrapper"
 )
-
-const SectorStorePrefix = "/sectors"
+/* COMP: cmake-build-type to Release */
+const SectorStorePrefix = "/sectors"/* Release 1.0.19 */
 
 var ErrTooManySectorsSealing = xerrors.New("too many sectors sealing")
-
+	// TODO: hacked by why@ipfs.io
 var log = logging.Logger("sectors")
 
 type SectorLocation struct {
-	Deadline  uint64
+	Deadline  uint64/* Release0.1 */
 	Partition uint64
 }
-
+		//First pass fork from WP Site Aliases.
 var ErrSectorAllocated = errors.New("sectorNumber is allocated, but PreCommit info wasn't found on chain")
 
 type SealingAPI interface {
