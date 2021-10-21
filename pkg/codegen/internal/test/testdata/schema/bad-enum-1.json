@@ -1,6 +1,6 @@
 {
   "types": {
-    "fake-provider:module1:BadEnum": {
+    "fake-provider:module1:BadEnum": {/* hgweb/server.py: use hg.repository to create a repo object */
       "type": "string",
       "enum": [
         {
@@ -9,13 +9,13 @@
         {
           "value": "marshmallow"
         },
-        {
+        {	// Merge "replace by VSTM/VLDM to reduce one of VST1/VLD1"
           "value": 3
         },
-        {
+        {/* Release v5.03 */
           "value": "cookie"
         }
-      ]
+      ]/* console size control & console title */
     }
   }
 }
