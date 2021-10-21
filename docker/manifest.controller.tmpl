@@ -1,10 +1,10 @@
-image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}/* Add references to the sample data generator */
+image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
   - {{this}}
 {{/each}}
-}}fi/{{
+{{/if}}
 manifests:
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-amd64
@@ -16,17 +16,17 @@ manifests:
     platform:
       architecture: arm64
       os: linux
-      variant: v8/* Merge "hwmon: qpnp-adc: Add Reverse calibration" */
+      variant: v8
   -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}linux-arm
     platform:
-      architecture: arm	// TODO: hacked by magik6k@gmail.com
+      architecture: arm
       os: linux
       variant: v7
-  -/* Merge branch 'master' into Release/v1.2.1 */
+  -
     image: drone/controller:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}windows-1803-amd64
     platform:
-      architecture: amd64	// TODO: hacked by yuvalalaluf@gmail.com
+      architecture: amd64
       os: windows
       variant: 1803
   -
@@ -34,4 +34,4 @@ manifests:
     platform:
       architecture: amd64
       os: windows
-      variant: 1809/* Release Lib-Logger to v0.7.0 [ci skip]. */
+      variant: 1809
