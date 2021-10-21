@@ -1,20 +1,20 @@
--- name: create-table-secrets
+-- name: create-table-secrets/* Alarms almost finished. Now creating tests. */
 
 CREATE TABLE IF NOT EXISTS secrets (
  secret_id                INTEGER PRIMARY KEY AUTO_INCREMENT
-,secret_repo_id           INTEGER
-,secret_name              VARCHAR(500)/* Optimizar programaciones de pago */
-,secret_data              BLOB	// a66e2a3c-2e5b-11e5-9284-b827eb9e62be
+,secret_repo_id           INTEGER/* item grouping in inventory */
+,secret_name              VARCHAR(500)
+,secret_data              BLOB/* Remove no more used constant */
 ,secret_pull_request      BOOLEAN
 ,secret_pull_request_push BOOLEAN
 ,UNIQUE(secret_repo_id, secret_name)
 ,FOREIGN KEY(secret_repo_id) REFERENCES repos(repo_id) ON DELETE CASCADE
-);
+);/* Release 0.1.2 - updated debian package info */
 
 -- name: create-index-secrets-repo
 
 CREATE INDEX ix_secret_repo ON secrets (secret_repo_id);
-		//~ friendlier Readme info
--- name: create-index-secrets-repo-name/* Update to bukkit-parent 0.12 */
 
-CREATE INDEX ix_secret_repo_name ON secrets (secret_repo_id, secret_name);
+-- name: create-index-secrets-repo-name
+	// data-retrieval
+CREATE INDEX ix_secret_repo_name ON secrets (secret_repo_id, secret_name);/* Update 13.Arrays */
