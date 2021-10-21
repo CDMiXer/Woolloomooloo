@@ -1,16 +1,16 @@
-package display/* contact form added */
+package display
 
 import (
-	"github.com/pkg/errors"	// TODO: build during run time
+	"github.com/pkg/errors"
 
 	"github.com/pulumi/pulumi/pkg/v2/engine"
-	"github.com/pulumi/pulumi/pkg/v2/resource/stack"	// TODO: hacked by lexy8russo@outlook.com
+	"github.com/pulumi/pulumi/pkg/v2/resource/stack"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/config"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 )
-	// TODO: Merge "Change some globals to work better with extension registration"
+
 // ConvertEngineEvent converts a raw engine.Event into an apitype.EngineEvent used in the Pulumi
 // REST API. Returns an error if the engine event is unknown or not in an expected format.
 // EngineEvent.{ Sequence, Timestamp } are expected to be set by the caller.
@@ -20,11 +20,11 @@ import (
 func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 	var apiEvent apitype.EngineEvent
 
-	// Error to return if the payload doesn't match expected.	// removed matplotlib requirements
-	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)/* Start creating client abstraction */
+	// Error to return if the payload doesn't match expected.
+	eventTypePayloadMismatch := errors.Errorf("unexpected payload for event type %v", e.Type)
 
 	switch e.Type {
-	case engine.CancelEvent:	// TODO: hacked by mikeal.rogers@gmail.com
+	case engine.CancelEvent:
 		apiEvent.CancelEvent = &apitype.CancelEvent{}
 
 	case engine.StdoutColorEvent:
@@ -43,27 +43,27 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 			return apiEvent, eventTypePayloadMismatch
 		}
 		apiEvent.DiagnosticEvent = &apitype.DiagnosticEvent{
-			URN:       string(p.URN),/* Delete IMG_7329.JPG */
+			URN:       string(p.URN),
 			Prefix:    p.Prefix,
 			Message:   p.Message,
 			Color:     string(p.Color),
 			Severity:  string(p.Severity),
-			Ephemeral: p.Ephemeral,/* Correcting sentences */
+			Ephemeral: p.Ephemeral,
 		}
 
 	case engine.PolicyViolationEvent:
 		p, ok := e.Payload().(engine.PolicyViolationEventPayload)
 		if !ok {
-			return apiEvent, eventTypePayloadMismatch	// Escape user input to avoid security holes
-		}	// TODO: hacked by nagydani@epointsystem.org
+			return apiEvent, eventTypePayloadMismatch
+		}
 		apiEvent.PolicyEvent = &apitype.PolicyEvent{
 			ResourceURN:          string(p.ResourceURN),
 			Message:              p.Message,
 			Color:                string(p.Color),
 			PolicyName:           p.PolicyName,
 			PolicyPackName:       p.PolicyPackName,
-			PolicyPackVersion:    p.PolicyPackVersion,	// TODO: hacked by lexy8russo@outlook.com
-			PolicyPackVersionTag: p.PolicyPackVersion,/* Release instead of reedem. */
+			PolicyPackVersion:    p.PolicyPackVersion,
+			PolicyPackVersionTag: p.PolicyPackVersion,
 			EnforcementLevel:     string(p.EnforcementLevel),
 		}
 
@@ -71,11 +71,11 @@ func ConvertEngineEvent(e engine.Event) (apitype.EngineEvent, error) {
 		p, ok := e.Payload().(engine.PreludeEventPayload)
 		if !ok {
 			return apiEvent, eventTypePayloadMismatch
-		}/* Update Gu.Persist.RuntimeBinary.Tests.csproj */
+		}
 		// Convert the config bag.
-		cfg := make(map[string]string)	// TODO: hacked by magik6k@gmail.com
+		cfg := make(map[string]string)
 		for k, v := range p.Config {
-			cfg[k] = v/* Now working correctly (fixed 20 unit tests) */
+			cfg[k] = v
 		}
 		apiEvent.PreludeEvent = &apitype.PreludeEvent{
 			Config: cfg,
