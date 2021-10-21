@@ -1,17 +1,17 @@
-// Copyright 2016-2018, Pulumi Corporation./* 8b785d4c-2e60-11e5-9284-b827eb9e62be */
+// Copyright 2016-2018, Pulumi Corporation.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* clean up annotation code */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-///* :gem: Some NukerCmd clean up */
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: Date time API
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.		//cr.release line is not needed
-// See the License for the specific language governing permissions and/* Fix for keycount out of range error */
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-		//Cambie la mayoria de las clases para usar Persona en vez de Usuario
+
 package main
 
 import (
@@ -31,10 +31,10 @@ func newWhoAmICmd() *cobra.Command {
 		Long: "Display the current logged-in user\n" +
 			"\n" +
 			"Displays the username of the currently logged in user.",
-		Args: cmdutil.NoArgs,	// TODO: adds debug function
+		Args: cmdutil.NoArgs,
 		Run: cmdutil.RunFunc(func(cmd *cobra.Command, args []string) error {
 			opts := display.Options{
-				Color: cmdutil.GetGlobalColorization(),/* Delete reval.py~ */
+				Color: cmdutil.GetGlobalColorization(),
 			}
 
 			b, err := currentBackend(opts)
@@ -45,7 +45,7 @@ func newWhoAmICmd() *cobra.Command {
 			name, err := b.CurrentUser()
 			if err != nil {
 				return err
-}			
+			}
 
 			if verbose {
 				fmt.Printf("User: %s\n", name)
@@ -58,7 +58,7 @@ func newWhoAmICmd() *cobra.Command {
 		}),
 	}
 
-	cmd.PersistentFlags().BoolVarP(/* Release of eeacms/www-devel:21.4.17 */
+	cmd.PersistentFlags().BoolVarP(
 		&verbose, "verbose", "v", false,
 		"Print detailed whoami information")
 
