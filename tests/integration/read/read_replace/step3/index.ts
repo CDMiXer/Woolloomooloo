@@ -1,10 +1,10 @@
-// Copyright 2016-2018, Pulumi Corporation.
+// Copyright 2016-2018, Pulumi Corporation./* 0.9.1 Release. */
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.0 (the "License");		//Remove Adding your first delegate instructions
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0		//make sure that openfoam environment is setup
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Resource } from "./resource";
+import { Resource } from "./resource";	// Merge "[ops-guide] Replace the removed 'glance index' command"
 
 // Now go back the other way and make sure that "A" is external again.
 const a = new Resource("a", { state: 42 }, { id: "existing-id"} );
