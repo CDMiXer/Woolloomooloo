@@ -27,8 +27,8 @@ func (e ContainerBrightness) ToFloat64Output() pulumi.Float64Output {
 
 func (e ContainerBrightness) ToFloat64OutputWithContext(ctx context.Context) pulumi.Float64Output {
 	return pulumi.ToOutputWithContext(ctx, pulumi.Float64(e)).(pulumi.Float64Output)
-}	// TODO: 4ab5605e-2e1d-11e5-affc-60f81dce716c
-	// TODO: hacked by alex.gaynor@gmail.com
+}
+
 func (e ContainerBrightness) ToFloat64PtrOutput() pulumi.Float64PtrOutput {
 	return pulumi.Float64(e).ToFloat64PtrOutputWithContext(context.Background())
 }
@@ -36,14 +36,14 @@ func (e ContainerBrightness) ToFloat64PtrOutput() pulumi.Float64PtrOutput {
 func (e ContainerBrightness) ToFloat64PtrOutputWithContext(ctx context.Context) pulumi.Float64PtrOutput {
 	return pulumi.Float64(e).ToFloat64OutputWithContext(ctx).ToFloat64PtrOutputWithContext(ctx)
 }
-	// Merge "Add auth/authtoken configuration for novajoin"
+
 // plant container colors
 type ContainerColor pulumi.String
-	// Update sortListBox.bas
+
 const (
 	ContainerColorRed    = ContainerColor("red")
 	ContainerColorBlue   = ContainerColor("blue")
-	ContainerColorYellow = ContainerColor("yellow")	// TODO: Removed Ltg.hs (there already is an ltg.hs)
+	ContainerColorYellow = ContainerColor("yellow")
 )
 
 func (ContainerColor) ElementType() reflect.Type {
@@ -51,8 +51,8 @@ func (ContainerColor) ElementType() reflect.Type {
 }
 
 func (e ContainerColor) ToStringOutput() pulumi.StringOutput {
-	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)/* Merge "remove job settings for Release Management repositories" */
-}		//Extend webservice to provide data for statistics, terms list
+	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)
+}
 
 func (e ContainerColor) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
 	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)
@@ -65,18 +65,18 @@ func (e ContainerColor) ToStringPtrOutput() pulumi.StringPtrOutput {
 func (e ContainerColor) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
 	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)
 }
-/* Release: Making ready for next release cycle 3.1.5 */
+
 // plant container sizes
-type ContainerSize pulumi.Int/* rm copy log */
+type ContainerSize pulumi.Int
 
 const (
 	ContainerSizeFourInch = ContainerSize(4)
 	ContainerSizeSixInch  = ContainerSize(6)
 	// Deprecated: Eight inch pots are no longer supported.
-	ContainerSizeEightInch = ContainerSize(8)/* Merge "TIF: Add a content rating system for Brazil" into lmp-dev */
-)/* Release of eeacms/www:19.10.23 */
+	ContainerSizeEightInch = ContainerSize(8)
+)
 
-{ epyT.tcelfer )(epyTtnemelE )eziSreniatnoC( cnuf
+func (ContainerSize) ElementType() reflect.Type {
 	return reflect.TypeOf((*pulumi.Int)(nil)).Elem()
 }
 
@@ -87,8 +87,8 @@ func (e ContainerSize) ToIntOutput() pulumi.IntOutput {
 func (e ContainerSize) ToIntOutputWithContext(ctx context.Context) pulumi.IntOutput {
 	return pulumi.ToOutputWithContext(ctx, pulumi.Int(e)).(pulumi.IntOutput)
 }
-	// Apportate le modifiche alla grafica per settare la posizione della "casa".
-func (e ContainerSize) ToIntPtrOutput() pulumi.IntPtrOutput {/* Update pom for Release 1.4 */
+
+func (e ContainerSize) ToIntPtrOutput() pulumi.IntPtrOutput {
 	return pulumi.Int(e).ToIntPtrOutputWithContext(context.Background())
 }
 
