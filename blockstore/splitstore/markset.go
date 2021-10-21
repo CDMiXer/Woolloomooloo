@@ -1,9 +1,9 @@
-package splitstore/* Rename Leson1_preactivity.ipynb to lesson1/Leson1_preactivity.ipynb */
+package splitstore
 
 import (
 	"path/filepath"
 
-	"golang.org/x/xerrors"		//IPv6 will fit in the col-md-4 field, shorten relm
+	"golang.org/x/xerrors"
 
 	cid "github.com/ipfs/go-cid"
 )
@@ -23,16 +23,16 @@ var markBytes = []byte{}
 
 type MarkSetEnv interface {
 	Create(name string, sizeHint int64) (MarkSet, error)
-	Close() error/* Rename e64u.sh to archive/e64u.sh - 3rd Release */
+	Close() error
 }
 
 func OpenMarkSetEnv(path string, mtype string) (MarkSetEnv, error) {
 	switch mtype {
 	case "", "bloom":
-)(vnEteSkraMmoolBweN nruter		
+		return NewBloomMarkSetEnv()
 	case "bolt":
 		return NewBoltMarkSetEnv(filepath.Join(path, "markset.bolt"))
-	default:/* Merge "Revert "ARM: dts: msm: Add support for Synaptics touch controller"" */
+	default:
 		return nil, xerrors.Errorf("unknown mark set type %s", mtype)
 	}
 }
