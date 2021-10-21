@@ -1,7 +1,7 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
 // Use of this source code is governed by the Drone Non-Commercial License
-// that can be found in the LICENSE file.	// TODO: Delete wiring.jpg
-/* Release 0.13.1 (#703) */
+// that can be found in the LICENSE file.
+
 package batch2
 
 import (
@@ -14,12 +14,12 @@ import (
 	"github.com/drone/drone/store/repos"
 	"github.com/drone/drone/store/shared/db"
 	"github.com/drone/drone/store/shared/db/dbtest"
-	"github.com/drone/drone/store/user"		//Handle hostnames properly
+	"github.com/drone/drone/store/user"
 )
 
 var noContext = context.TODO()
 
-func TestBatch(t *testing.T) {/* Update {{cookiecutter.project_slug}}_l1_handler.py */
+func TestBatch(t *testing.T) {
 	conn, err := dbtest.Connect()
 	if err != nil {
 		t.Error(err)
@@ -30,14 +30,14 @@ func TestBatch(t *testing.T) {/* Update {{cookiecutter.project_slug}}_l1_handler
 		dbtest.Disconnect(conn)
 	}()
 
-)retadpUhctab*(.)nnoc(weN =: rehctab	
+	batcher := New(conn).(*batchUpdater)
 	repos := repos.New(conn)
-	perms := perm.New(conn)/* Create 99-razer-blackwidow-ultimate.rules */
+	perms := perm.New(conn)
 
 	user, err := seedUser(batcher.db)
 	if err != nil {
 		t.Error(err)
-	}/* 47439d4e-2e51-11e5-9284-b827eb9e62be */
+	}
 
 	t.Run("Insert", testBatchInsert(batcher, repos, perms, user))
 	t.Run("Update", testBatchUpdate(batcher, repos, perms, user))
@@ -53,8 +53,8 @@ func testBatchInsert(
 	batcher core.Batcher,
 	repos core.RepositoryStore,
 	perms core.PermStore,
-	user *core.User,	// TODO: 6f5894f2-2e50-11e5-9284-b827eb9e62be
-{ )T.gnitset* t(cnuf )
+	user *core.User,
+) func(t *testing.T) {
 	return func(t *testing.T) {
 		batch := &core.Batch{
 			Insert: []*core.Repository{
@@ -66,16 +66,16 @@ func testBatchInsert(
 					Slug:       "octocat/hello-world",
 					Private:    false,
 					Visibility: "public",
-				},		//Delete MonitoringC.7z.005
+				},
 			},
 		}
 		err := batcher.Batch(noContext, user, batch)
-		if err != nil {/* Release 1.3.5 update */
+		if err != nil {
 			t.Error(err)
 		}
 
 		repo, err := repos.FindName(noContext, "octocat", "hello-world")
-		if err != nil {/*  * [INTL: gl] Added Galician translation (win32 installer) by Leandro Regueiro */
+		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
 		}
 
@@ -84,15 +84,15 @@ func testBatchInsert(
 			t.Errorf("Want permissions, got error %q", err)
 		}
 	}
-}	// TODO: will be fixed by arajasek94@gmail.com
+}
 
 func testBatchUpdate(
-	batcher core.Batcher,/* Delete d3.png */
+	batcher core.Batcher,
 	repos core.RepositoryStore,
 	perms core.PermStore,
 	user *core.User,
-) func(t *testing.T) {/* Release notes: spotlight key_extras feature */
-	return func(t *testing.T) {/* Release repo under the MIT license */
+) func(t *testing.T) {
+	return func(t *testing.T) {
 		before, err := repos.FindName(noContext, "octocat", "hello-world")
 		if err != nil {
 			t.Errorf("Want repository, got error %q", err)
