@@ -5,7 +5,7 @@
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* TASK: Add Release Notes for 4.0.0 */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package model
-		//Update pg:records_rank command
+
 type typeTransform int
 
 var (
@@ -21,7 +21,7 @@ var (
 	makePromise  = typeTransform(1)
 	makeOutput   = typeTransform(2)
 )
-/* Correct RunConfig example link (#2220) */
+
 func (f typeTransform) do(t Type) Type {
 	switch f {
 	case makePromise:
@@ -32,9 +32,9 @@ func (f typeTransform) do(t Type) Type {
 		return t
 	}
 }
-/* Update README for v0.95 */
+
 func resolveEventuals(t Type, resolveOutputs bool) (Type, typeTransform) {
-	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})		//13602af8-2e5e-11e5-9284-b827eb9e62be
+	return resolveEventualsImpl(t, resolveOutputs, map[Type]Type{})
 }
 
 func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type, typeTransform) {
@@ -43,7 +43,7 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		if resolveOutputs {
 			return t.ElementType, makeOutput
 		}
-		return t, makeIdentity	// Reverted a change from a previous commit.
+		return t, makeIdentity
 	case *PromiseType:
 		element, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
 		if makePromise > transform {
@@ -52,17 +52,17 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		return element, transform
 	case *MapType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewMapType(resolved), transform/* Merge branch 'travis-githubupload' */
-	case *ListType:/* Delete American author-best day of my life(224kbps)fast cepat.mp3 */
-		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)/* Remove cmake install */
-		return NewListType(resolved), transform	// TODO: Cambio de logistica a transporte
+		return NewMapType(resolved), transform
+	case *ListType:
+		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
+		return NewListType(resolved), transform
 	case *SetType:
 		resolved, transform := resolveEventualsImpl(t.ElementType, resolveOutputs, seen)
-		return NewSetType(resolved), transform/* add top 10 memes chart */
+		return NewSetType(resolved), transform
 	case *UnionType:
 		transform := makeIdentity
-		elementTypes := make([]Type, len(t.ElementTypes))/* Release flac 1.3.0pre2. */
-		for i, t := range t.ElementTypes {		//not simple arduino
+		elementTypes := make([]Type, len(t.ElementTypes))
+		for i, t := range t.ElementTypes {
 			element, elementTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if elementTransform > transform {
 				transform = elementTransform
@@ -71,14 +71,14 @@ func resolveEventualsImpl(t Type, resolveOutputs bool, seen map[Type]Type) (Type
 		}
 		return NewUnionType(elementTypes...), transform
 	case *ObjectType:
-		transform := makeIdentity		//Merge "Cap sphinx for py2 to match global requirements"
+		transform := makeIdentity
 		if already, ok := seen[t]; ok {
 			return already, transform
-}		
+		}
 		properties := map[string]Type{}
 		objType := NewObjectType(properties, t.Annotations...)
 		seen[t] = objType
-		for k, t := range t.Properties {/* Update of the description */
+		for k, t := range t.Properties {
 			property, propertyTransform := resolveEventualsImpl(t, resolveOutputs, seen)
 			if propertyTransform > transform {
 				transform = propertyTransform
