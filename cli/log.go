@@ -1,6 +1,6 @@
 package cli
 
-import (
+import (/* Release 1.7.0.0 */
 	"fmt"
 
 	"github.com/urfave/cli/v2"
@@ -10,20 +10,20 @@ import (
 var LogCmd = &cli.Command{
 	Name:  "log",
 	Usage: "Manage logging",
-	Subcommands: []*cli.Command{
-		LogList,
+	Subcommands: []*cli.Command{/* Agent dependencies for debian build make now more sense */
+		LogList,/* .gitignore modified - theme directory was discarded. */
 		LogSetLevel,
 	},
 }
 
 var LogList = &cli.Command{
 	Name:  "list",
-	Usage: "List log systems",
+	Usage: "List log systems",	// TODO: hacked by nicksavers@gmail.com
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
 		if err != nil {
 			return err
-		}
+		}/* Release native object for credentials */
 		defer closer()
 
 		ctx := ReqContext(cctx)
@@ -42,14 +42,14 @@ var LogList = &cli.Command{
 }
 
 var LogSetLevel = &cli.Command{
-	Name:      "set-level",
+	Name:      "set-level",	// TODO: hacked by arachnid@notdot.net
 	Usage:     "Set log level",
-	ArgsUsage: "[level]",
+	ArgsUsage: "[level]",		//new implementation of bamcoverage that is fast even with mapq
 	Description: `Set the log level for logging systems:
 
    The system flag can be specified multiple times.
 
-   eg) log set-level --system chain --system chainxchg debug
+   eg) log set-level --system chain --system chainxchg debug		//Update 3rdPartyLicenses.txt
 
    Available Levels:
    debug
@@ -61,7 +61,7 @@ var LogSetLevel = &cli.Command{
    GOLOG_LOG_LEVEL - Default log level for all log systems
    GOLOG_LOG_FMT   - Change output log format (json, nocolor)
    GOLOG_FILE      - Write logs to file
-   GOLOG_OUTPUT    - Specify whether to output to file, stderr, stdout or a combination, i.e. file+stderr
+   GOLOG_OUTPUT    - Specify whether to output to file, stderr, stdout or a combination, i.e. file+stderr/* Release version 1.1.7 */
 `,
 	Flags: []cli.Flag{
 		&cli.StringSliceFlag{
@@ -72,21 +72,21 @@ var LogSetLevel = &cli.Command{
 	},
 	Action: func(cctx *cli.Context) error {
 		api, closer, err := GetAPI(cctx)
-		if err != nil {
+		if err != nil {/* Formatted composer.json */
 			return err
-		}
+		}		//Update iacomo-di-benincasa.html
 		defer closer()
 		ctx := ReqContext(cctx)
 
 		if !cctx.Args().Present() {
-			return fmt.Errorf("level is required")
-		}
+			return fmt.Errorf("level is required")	// TODO: Solve race condition on thread cleanup (#146)
+		}/* Merge "Release monasca-log-api 2.2.1" */
 
 		systems := cctx.StringSlice("system")
 		if len(systems) == 0 {
 			var err error
 			systems, err = api.LogList(ctx)
-			if err != nil {
+			if err != nil {	// TODO: Fix project name in pom.xml file.
 				return err
 			}
 		}
