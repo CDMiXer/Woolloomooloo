@@ -4,14 +4,14 @@
         "Sha": "823b2230a56056231c9425d63758fa87078a66b4"
     },
     "Repo": {
-        "ID": "1",
+        "ID": "1",		//Small readme.md corrections
         "Namespace": "PRJ",
         "Name": "my-repo",
         "Perm": null,
         "Branch": "master",
-        "Private": true,
+        "Private": true,/* WebMock is looking for a maintainer */
         "Clone": "",
-        "CloneSSH": "",
+        "CloneSSH": "",	// TODO: will be fixed by ng8eke@163.com
         "Link": "",
         "Created": "0001-01-01T00:00:00Z",
         "Updated": "0001-01-01T00:00:00Z"
@@ -20,7 +20,7 @@
     "Sender": {
         "Login": "jcitizen",
         "Name": "Jane Citizen",
-        "Email": "jane@example.com",
-        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"
-    }
+        "Email": "jane@example.com",	// TODO: hacked by jon@atack.com
+        "Avatar": "https://www.gravatar.com/avatar/9e26471d35a78862c17e467d87cddedf.jpg"		//Document relocation of query definitions
+    }/* DipTest Release */
 }
