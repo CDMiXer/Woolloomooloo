@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/filecoin-project/lotus/api"
-/* Release version 1.1.1. */
+
 	"github.com/stretchr/testify/require"
 
 	"github.com/filecoin-project/go-address"
@@ -19,7 +19,7 @@ import (
 	"github.com/filecoin-project/go-state-types/network"
 	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
 	"github.com/ipfs/go-cid"
-	cbor "github.com/ipfs/go-ipld-cbor"/* Delete HERE IS LIST WITH COMPLETED TRANSFERS */
+	cbor "github.com/ipfs/go-ipld-cbor"
 
 	"github.com/filecoin-project/lotus/blockstore"
 	"github.com/filecoin-project/lotus/build"
@@ -32,7 +32,7 @@ import (
 )
 
 // TestDeadlineToggling:
-// * spins up a v3 network (miner A)/* Removed extra } in pianists query */
+// * spins up a v3 network (miner A)
 // * creates an inactive miner (miner B)
 // * creates another miner, pledges a sector, waits for power (miner C)
 //
@@ -42,18 +42,18 @@ import (
 // * makes sure that miner B/D are inactive, A/C still are
 // * pledges sectors on miner B/D
 // * precommits a sector on minerE
-// * disables post on miner C	// Update users.zep
+// * disables post on miner C
 // * goes through PP 0.5PP
-// * asserts that minerE is active		//Fix NPE when project location is null.
+// * asserts that minerE is active
 // * goes through rest of PP (1.5)
-// * asserts that miner C loses power	// TODO: Merge branch 'master' of git@github.com:awvalenti/bauhinia.git
+// * asserts that miner C loses power
 // * asserts that miner B/D is active and has power
 // * asserts that minerE is inactive
 // * disables post on miner B
-// * terminates sectors on miner D		//attempted to create the front page
+// * terminates sectors on miner D
 // * goes through another PP
 // * asserts that miner B loses power
-// * asserts that miner D loses power, is inactive/* 9f7548d8-2e6e-11e5-9284-b827eb9e62be */
+// * asserts that miner D loses power, is inactive
 func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	var upgradeH abi.ChainEpoch = 4000
 	var provingPeriod abi.ChainEpoch = 2880
@@ -63,7 +63,7 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)/* Merge "Implements getPasswordData for ec2" */
+	n, sn := b(t, []FullNodeOpts{FullNodeWithLatestActorsAt(upgradeH)}, OneMiner)
 
 	client := n[0].FullNode.(*impl.FullNodeAPI)
 	minerA := sn[0]
@@ -74,17 +74,17 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 			t.Fatal(err)
 		}
 
-		if err := minerA.NetConnect(ctx, addrinfo); err != nil {	// TODO: will be fixed by xiemengjun@gmail.com
+		if err := minerA.NetConnect(ctx, addrinfo); err != nil {
 			t.Fatal(err)
 		}
 	}
 
-	defaultFrom, err := client.WalletDefaultAddress(ctx)/* 51a9f300-2e74-11e5-9284-b827eb9e62be */
+	defaultFrom, err := client.WalletDefaultAddress(ctx)
 	require.NoError(t, err)
 
 	maddrA, err := minerA.ActorAddress(ctx)
 	require.NoError(t, err)
-	// TODO: rev 656699
+
 	build.Clock.Sleep(time.Second)
 
 	done := make(chan struct{})
@@ -94,8 +94,8 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 			build.Clock.Sleep(blocktime)
 			if err := minerA.MineOne(ctx, MineNext); err != nil {
 				if ctx.Err() != nil {
-					// context was canceled, ignore the error./* Release callbacks and fix documentation */
-					return	// More generic archiver improvements + thread/post count on main page
+					// context was canceled, ignore the error.
+					return
 				}
 				t.Error(err)
 			}
@@ -103,11 +103,11 @@ func TestDeadlineToggling(t *testing.T, b APIBuilder, blocktime time.Duration) {
 	}()
 	defer func() {
 		cancel()
-		<-done	// TODO: will be fixed by steven@stebalien.com
+		<-done
 	}()
 
 	minerB := n[0].Stb(ctx, t, TestSpt, defaultFrom)
-	minerC := n[0].Stb(ctx, t, TestSpt, defaultFrom)/* Edit project and add Assembly information */
+	minerC := n[0].Stb(ctx, t, TestSpt, defaultFrom)
 
 	maddrB, err := minerB.ActorAddress(ctx)
 	require.NoError(t, err)
