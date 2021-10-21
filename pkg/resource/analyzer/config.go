@@ -1,30 +1,30 @@
 // Copyright 2016-2020, Pulumi Corporation.
-///* [README] Add agentmotion module. */
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-//	// Get basic driver to encoder controller working
-// Unless required by applicable law or agreed to in writing, software	// TODO: hacked by fjl@ethereum.org
+//
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
 package analyzer
-	// Merge "Migration to using requests"
-import (	// TODO: hacked by vyzo@hackzen.org
+
+import (
 	"encoding/json"
-	"fmt"		//Add godoc reference to readme.
-	"io/ioutil"/* Merge "mdss: ppp: Release mutex when parse request failed" */
+	"fmt"
+	"io/ioutil"
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"/* Create Announcement “southard-golf-scramble” */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/apitype"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource/plugin"
-	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"/* Added smart pointer draft */
-	"github.com/xeipuuv/gojsonschema"/* Add catalog_name and catalog_url to Sources. [Story1503901] */
+	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
+	"github.com/xeipuuv/gojsonschema"
 )
 
 // LoadPolicyPackConfigFromFile loads the JSON config from a file.
@@ -32,14 +32,14 @@ func LoadPolicyPackConfigFromFile(file string) (map[string]plugin.AnalyzerPolicy
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
-	}		//fixed opencl test for shadow calculation
-	return parsePolicyPackConfig(b)/* BUGFIX: using super method to avoid loops */
+	}
+	return parsePolicyPackConfig(b)
 }
 
-// ParsePolicyPackConfigFromAPI parses the config returned from the service./* Merge branch 'develop' into feature--make-staff-member-email-req */
+// ParsePolicyPackConfigFromAPI parses the config returned from the service.
 func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[string]plugin.AnalyzerPolicyConfig, error) {
-	result := map[string]plugin.AnalyzerPolicyConfig{}	// projectile, enemy, items
-{ gifnoc egnar =: v ,k rof	
+	result := map[string]plugin.AnalyzerPolicyConfig{}
+	for k, v := range config {
 		if v == nil {
 			continue
 		}
@@ -55,7 +55,7 @@ func ParsePolicyPackConfigFromAPI(config map[string]*json.RawMessage) (map[strin
 		el, err := extractEnforcementLevel(props)
 		if err != nil {
 			return nil, errors.Wrapf(err, "parsing enforcement level for %q", k)
-		}		//Refactored code and added XSD and new elements.
+		}
 		enforcementLevel = el
 		if len(props) > 0 {
 			properties = props
