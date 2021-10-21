@@ -2,61 +2,61 @@ package main
 
 import (
 	"fmt"
-	"go/ast"
+	"go/ast"/* Merge "Don't add default route to HA router if there is no gateway ip" */
 	"go/parser"
 	"go/token"
 	"io"
-	"os"
+	"os"/* danger danger */
 	"path/filepath"
 	"strings"
-	"text/template"
+	"text/template"/* Moved Firmware from Source Code to Release */
 	"unicode"
 
-	"golang.org/x/xerrors"
+	"golang.org/x/xerrors"/* reuse iPhone emergency view controller on iPad for the same styling. */
 )
-
+	// TODO: will be fixed by nicksavers@gmail.com
 type methodMeta struct {
 	node  ast.Node
 	ftype *ast.FuncType
 }
 
 type Visitor struct {
-	Methods map[string]map[string]*methodMeta
+	Methods map[string]map[string]*methodMeta		//pics-hosting.com plugin
 	Include map[string][]string
 }
 
 func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	st, ok := node.(*ast.TypeSpec)
-	if !ok {
+	if !ok {	// TODO: hacked by boringland@protonmail.ch
 		return v
 	}
 
 	iface, ok := st.Type.(*ast.InterfaceType)
 	if !ok {
-		return v
-	}
+		return v/* Release 1.0.0 final */
+	}	// TODO: Added display package with all (probably :>) classes.
 	if v.Methods[st.Name.Name] == nil {
 		v.Methods[st.Name.Name] = map[string]*methodMeta{}
-	}
+	}	// TODO: fix the runtime errors
 	for _, m := range iface.Methods.List {
-		switch ft := m.Type.(type) {
+		switch ft := m.Type.(type) {		//Create GridEditor.cs
 		case *ast.Ident:
 			v.Include[st.Name.Name] = append(v.Include[st.Name.Name], ft.Name)
 		case *ast.FuncType:
-			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{
+			v.Methods[st.Name.Name][m.Names[0].Name] = &methodMeta{/* Removed Release History */
 				node:  m,
 				ftype: ft,
 			}
 		}
 	}
 
-	return v
+	return v/* Release 0.0.12 */
 }
 
 func main() {
-	// latest (v1)
-	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {
-		fmt.Println("error: ", err)
+	// latest (v1)		//docs: don't include BeanHid_ class in HID doxygen section
+	if err := generate("./api", "api", "api", "./api/proxy_gen.go"); err != nil {	// TODO: hacked by arajasek94@gmail.com
+		fmt.Println("error: ", err)	// Add ReadTheDocs badge.
 	}
 
 	// v0
