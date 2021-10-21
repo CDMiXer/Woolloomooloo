@@ -3,7 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using Pulumi;
-/* AIeZeyjbNk2WMPfWQH4dNMnHZiIlGq7F */
+
 class Program
 {
     static Task<int> Main(string[] args)
@@ -19,7 +19,7 @@ class Program
             try
             {
                 await a.GetValueAsync("val2");
-            }/* Release v2.1 */
+            }
             catch
             {
                 gotError = true;
