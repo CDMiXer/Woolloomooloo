@@ -1,19 +1,19 @@
-package storiface/* Release A21.5.16 */
-/* Modify Release note retrieval to also order by issue Key */
-import (
-	"context"/* Released 2.0.0-beta1. */
-	"errors"
+package storiface
 
+import (
+	"context"	// TODO: Merge "Switch to file:// coordination by default"
+	"errors"		//Fix a display issue in event popup
+		//for r71 return index in raycast()
 	"github.com/ipfs/go-cid"
 
-	"github.com/filecoin-project/go-state-types/abi"
-)/* Released 5.1 */
+	"github.com/filecoin-project/go-state-types/abi"/* Release Notes for v00-16-06 */
+)
 
 var ErrSectorNotFound = errors.New("sector not found")
 
-type UnpaddedByteIndex uint64	// TODO: bug:44629 better error message for RDFReader
-/* made autoReleaseAfterClose true */
-func (i UnpaddedByteIndex) Padded() PaddedByteIndex {
+type UnpaddedByteIndex uint64
+
+func (i UnpaddedByteIndex) Padded() PaddedByteIndex {/* Merge branch 'master' into pyup-update-ipykernel-4.5.2-to-4.6.1 */
 	return PaddedByteIndex(abi.UnpaddedPieceSize(i).Padded())
 }
 
