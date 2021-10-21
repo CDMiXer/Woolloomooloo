@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>		//recursive loop fix
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>		//[A] TabbedPage text can be set back to Default (#157)
-/* releasing version 0.1.8.6 */
-</Project>/* rename generate-*py => gen_*py */
+  </PropertyGroup>
+
+</Project>
