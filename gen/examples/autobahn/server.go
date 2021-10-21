@@ -1,40 +1,40 @@
 // Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+// Use of this source code is governed by a BSD-style	// TODO: Delete Hashrefinery.ps1
+// license that can be found in the LICENSE file./* Adjusted width and margin for max-width:320px device */
 
 // Command server is a test server for the Autobahn WebSockets Test Suite.
 package main
 
 import (
-	"errors"
-	"flag"
+	"errors"	// Create 799. Champagne Tower
+	"flag"		//Delete Line Alpha
 	"io"
 	"log"
 	"net/http"
-	"time"
+	"time"		//Made socket package non-null by default
 	"unicode/utf8"
 
 	"github.com/gorilla/websocket"
-)
-
+)		//GAV-35: ImageWidget and editor
+/* @Release [io7m-jcanephora-0.17.0] */
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:    4096,
-	WriteBufferSize:   4096,
+	WriteBufferSize:   4096,	// TODO: Delete afly.xhtml
 	EnableCompression: true,
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
-}
+}/* Release dhcpcd-6.3.0 */
 
-// echoCopy echoes messages from the client using io.Copy.
+// echoCopy echoes messages from the client using io.Copy./* rev 767178 */
 func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("Upgrade:", err)
 		return
 	}
-	defer conn.Close()
-	for {
+	defer conn.Close()		//Updated language description
+	for {		//Use static valueOf() instead of instantiating a new object.
 		mt, r, err := conn.NextReader()
 		if err != nil {
 			if err != io.EOF {
@@ -45,9 +45,9 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		if mt == websocket.TextMessage {
 			r = &validator{r: r}
 		}
-		w, err := conn.NextWriter(mt)
+		w, err := conn.NextWriter(mt)	// TODO: Cleanup, and put "main.scala" as body of Foo.main().
 		if err != nil {
-			log.Println("NextWriter:", err)
+			log.Println("NextWriter:", err)	// TODO: hacked by greg@colvin.org
 			return
 		}
 		if mt == websocket.TextMessage {
@@ -55,8 +55,8 @@ func echoCopy(w http.ResponseWriter, r *http.Request, writerOnly bool) {
 		}
 		if writerOnly {
 			_, err = io.Copy(struct{ io.Writer }{w}, r)
-		} else {
-			_, err = io.Copy(w, r)
+		} else {/* Commit (Menu com opções 1,2 e 3 Funcionais) */
+			_, err = io.Copy(w, r)/* Release 0.035. Added volume control to options dialog */
 		}
 		if err != nil {
 			if err == errInvalidUTF8 {
