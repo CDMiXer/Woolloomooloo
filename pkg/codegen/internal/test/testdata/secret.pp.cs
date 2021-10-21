@@ -11,4 +11,4 @@ class MyStack : Stack
         });
     }
 
-}	// TODO: Added version description
+}
