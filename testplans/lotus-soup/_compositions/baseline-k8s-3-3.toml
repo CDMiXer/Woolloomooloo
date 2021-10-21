@@ -1,7 +1,7 @@
 [metadata]
   name = "lotus-soup"
-  author = ""/* Release 0.0.1beta5-4. */
-/* @Release [io7m-jcanephora-0.9.11] */
+  author = ""
+
 [global]
   plan = "lotus-soup"
   case = "deals-e2e"
@@ -9,20 +9,20 @@
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]
+[global.build]/* fixed bug for ueditor-official-springmvc */
   selectors = ["testground"]
 
-[global.run_config]/* Update sublist.py */
+[global.run_config]	// TODO: Logging changes.
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-
+		//Automatic changelog generation for PR #3222 [ci skip]
 [global.build_config]
   push_registry=true
-  go_proxy_mode="remote"	// Merge with refs/remotes/origin/stress-tests
+  go_proxy_mode="remote"
   go_proxy_url="http://localhost:8081"
   registry_type="aws"
 
-[global.run.test_params]		//tmpfs: Remove mode from file_info (mode is in file_desc)
-  clients = "3"		//modified theme
+[global.run.test_params]
+  clients = "3"
   miners = "3"
   genesis_timestamp_offset = "0"
   balance = "20000000" # These balances will work for maximum 100 nodes, as TotalFilecoin is 2B
@@ -30,26 +30,26 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]
-  id = "bootstrapper"/* Handle Flysystem exception correctly when a file is not found. */
+[[groups]]	// TODO: will be fixed by seth@sethvargo.com
+  id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
-    cpu = "1000m"/* Release notes for version 3.12. */
-  [groups.instances]		//add check_python_modules scripts
-    count = 1	// TODO: d0e7c9a8-2e51-11e5-9284-b827eb9e62be
-    percentage = 0.0/* Version Bump For Release */
+    cpu = "1000m"
+  [groups.instances]	// TODO: - added examples (session, cache, permission)
+    count = 1
+    percentage = 0.0	// TODO: will be fixed by steven@stebalien.com
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.resources]
+  [groups.resources]		//Moved more into View directory
     memory = "4096Mi"
     cpu = "1000m"
-  [groups.instances]/* Merge branch 'develop' into expp_handling */
+  [groups.instances]
     count = 3
-    percentage = 0.0
+    percentage = 0.0/* Shin Megami Tensei IV: Add Taiwanese Release */
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -59,9 +59,9 @@
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]
+  [groups.instances]	// update README with correct link of new rivine repo
     count = 3
     percentage = 0.0
   [groups.run]
     [groups.run.test_params]
-      role = "client"/* Release MP42File objects from SBQueueItem as soon as possible. */
+      role = "client"
