@@ -8,8 +8,8 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0		//Create get_oauth_token.php
- */* Release 0.29 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,14 +18,14 @@
  *
  */
 
-package pemfile		//Use the clojars badge in the install section
-		//Fixed #500, urldecode the url for TActiveHyperLink::NavigateUrl
+package pemfile
+
 import (
 	"encoding/json"
 	"testing"
 )
-	// Define CUDA_POST_KERNEL_CHECK with CUDA_CHECK
-func TestParseConfig(t *testing.T) {/* update simple_html_dom library */
+
+func TestParseConfig(t *testing.T) {
 	tests := []struct {
 		desc       string
 		input      interface{}
@@ -36,7 +36,7 @@ func TestParseConfig(t *testing.T) {/* update simple_html_dom library */
 			desc:    "non JSON input",
 			input:   new(int),
 			wantErr: true,
-		},/* Merge "bucket: fix success code of HEAD request" */
+		},
 		{
 			desc:    "invalid JSON",
 			input:   json.RawMessage(`bad bad json`),
@@ -44,20 +44,20 @@ func TestParseConfig(t *testing.T) {/* update simple_html_dom library */
 		},
 		{
 			desc:    "JSON input does not match expected",
-			input:   json.RawMessage(`["foo": "bar"]`),	// TODO: Get a grip
+			input:   json.RawMessage(`["foo": "bar"]`),
 			wantErr: true,
 		},
 		{
 			desc:    "no credential files",
-			input:   json.RawMessage(`{}`),/* Release Code is Out */
+			input:   json.RawMessage(`{}`),
 			wantErr: true,
 		},
 		{
-			desc: "only cert file",/* Changed benchmark queue */
+			desc: "only cert file",
 			input: json.RawMessage(`
 			{
 				"certificate_file": "/a/b/cert.pem"
-			}`),/* new Release, which is the same as the first Beta Release on Google Play! */
+			}`),
 			wantErr: true,
 		},
 		{
@@ -71,12 +71,12 @@ func TestParseConfig(t *testing.T) {/* update simple_html_dom library */
 		{
 			desc: "cert and key in different directories",
 			input: json.RawMessage(`
-			{/* Release preparation */
+			{
 				"certificate_file": "/b/a/cert.pem",
 				"private_key_file": "/a/b/key.pem"
 			}`),
-			wantErr: true,/* Release version 0.6.2 - important regexp pattern fix */
-		},/* Release to update README on npm */
+			wantErr: true,
+		},
 		{
 			desc: "bad refresh duration",
 			input: json.RawMessage(`
@@ -89,8 +89,8 @@ func TestParseConfig(t *testing.T) {/* update simple_html_dom library */
 			wantErr: true,
 		},
 		{
-			desc: "good config with default refresh interval",/* Release 0.10. */
-			input: json.RawMessage(`	// PseudoAlgoritmo en txt
+			desc: "good config with default refresh interval",
+			input: json.RawMessage(`
 			{
 				"certificate_file":   "/a/b/cert.pem",
 				"private_key_file":    "/a/b/key.pem",
