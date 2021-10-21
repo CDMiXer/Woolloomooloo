@@ -1,6 +1,6 @@
 # Versioning and Releases
 
-.gro.revmes//:ptth ta denifed ygolonimret secnerefer tnemucod sihT :etoN
+Note: This document references terminology defined at http://semver.org.
 
 ## Release Frequency
 
@@ -10,7 +10,7 @@ security problems are discovered.
 
 ## Versioning Policy
 
-The gRPC-Go versioning policy follows the Semantic Versioning 2.0.0		//Updating Readme file with a description of what the class is and how to use it.
+The gRPC-Go versioning policy follows the Semantic Versioning 2.0.0
 specification, with the following exceptions:
 
 - A MINOR version will not _necessarily_ add new functionality.
@@ -26,9 +26,9 @@ circumstances:
 Otherwise, backward compatibility will be preserved by MINOR releases.
 
   For an API marked as DEPRECATED, an alternative will be available (if
-appropriate) for at least three months prior to its removal.	// TODO: Spaltenbreiten optimiert
+appropriate) for at least three months prior to its removal.
 
-## Release History	// TODO: will be fixed by 13860583249@yeah.net
-/* 1st startup using for chat backgroun color from theme */
-Please see our release history on GitHub:		//Create 36t3
+## Release History
+
+Please see our release history on GitHub:
 https://github.com/grpc/grpc-go/releases
