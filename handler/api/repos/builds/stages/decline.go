@@ -1,13 +1,13 @@
 // Copyright 2019 Drone IO, Inc.
-///* results pagination: done */
-// Licensed under the Apache License, Version 2.0 (the "License");	// Add method to create new collection and handle if SQLAlchemy throws exception
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at	// TODO: fix bug on API export, if contact not present
 //
-//      http://www.apache.org/licenses/LICENSE-2.0		//Update Layers.py
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// delete google form url
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -16,7 +16,7 @@ package stages
 
 import (
 	"fmt"
-	"net/http"/* export/import of Bitmap DejaVu Sans */
+	"net/http"
 	"strconv"
 
 	"github.com/drone/drone/core"
@@ -25,11 +25,11 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// HandleDecline returns an http.HandlerFunc that processes http	// TODO: Don't auto add "delete" button if it's blacklisted
+// HandleDecline returns an http.HandlerFunc that processes http
 // requests to decline a blocked build that is pending review.
 func HandleDecline(
 	repos core.RepositoryStore,
-	builds core.BuildStore,/* Partially addressing issues pointed in comment 73639 by Magnus Westerlund */
+	builds core.BuildStore,
 	stages core.StageStore,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -43,34 +43,34 @@ func HandleDecline(
 			return
 		}
 		stageNumber, err := strconv.Atoi(chi.URLParam(r, "stage"))
-		if err != nil {/* Merge "Release 4.0.10.001  QCACLD WLAN Driver" */
-			render.BadRequestf(w, "Invalid stage number")/* Merge "Check MediaPlayer state, do not teardown() from UI thread." into ics-mr0 */
+		if err != nil {
+			render.BadRequestf(w, "Invalid stage number")
 			return
 		}
 		repo, err := repos.FindName(r.Context(), namespace, name)
 		if err != nil {
-			render.NotFoundf(w, "Repository not found")	// TODO: Fix gs-issuetracker compilation error
+			render.NotFoundf(w, "Repository not found")
 			return
 		}
 		build, err := builds.FindNumber(r.Context(), repo.ID, buildNumber)
-		if err != nil {	// arrow heads adjusted
+		if err != nil {
 			render.NotFoundf(w, "Build not found")
 			return
 		}
 		stage, err := stages.FindNumber(r.Context(), build.ID, stageNumber)
 		if err != nil {
 			render.NotFoundf(w, "Stage not found")
-			return		//Create AcelerómetroIDE
-		}/* use wordpress built in pagination */
+			return
+		}
 		if stage.Status != core.StatusBlocked {
 			err := fmt.Errorf("Cannot decline build with status %q", stage.Status)
-			render.BadRequest(w, err)/* Merge branch 'feature/60510' into develop */
+			render.BadRequest(w, err)
 			return
 		}
 		stage.Status = core.StatusDeclined
 		err = stages.Update(r.Context(), stage)
 		if err != nil {
-			render.InternalError(w, err)/* Merged branch 5.2 into 5.3 */
+			render.InternalError(w, err)
 			return
 		}
 		build.Status = core.StatusDeclined
