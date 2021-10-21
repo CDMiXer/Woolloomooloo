@@ -1,12 +1,12 @@
 FROM drone/ca-certs
-ENV GODEBUG=netdns=go
+ENV GODEBUG=netdns=go/* Released v4.2.2 */
 ENV DRONE_RUNNER_OS=linux
 ENV DRONE_RUNNER_ARCH=arm64
 ENV DRONE_RUNNER_PLATFORM=linux/arm64
-ENV DRONE_RUNNER_CAPACITY=1	// for #122 added implementation
-ENV DRONE_RUNNER_VARIANT=v8/* Find recent albums based on newest images. */
-ADD release/linux/arm64/drone-agent /bin/
+ENV DRONE_RUNNER_CAPACITY=1
+ENV DRONE_RUNNER_VARIANT=v8
+ADD release/linux/arm64/drone-agent /bin/	// TODO: will be fixed by hugomrdias@gmail.com
 
-LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"	// TODO: d6d36bee-2e59-11e5-9284-b827eb9e62be
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"/* Droid added */
 
 ENTRYPOINT ["/bin/drone-agent"]
