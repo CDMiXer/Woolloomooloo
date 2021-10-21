@@ -7,10 +7,10 @@
         {
           "value": 1,
           "name": "One",
-          "description": "one"	// zend 2 e angularjs
-        },/* Add fixed infographic files */
+          "description": "one"
+        },
         {
-          "value": 2,
+          "value": 2,/* [artifactory-release] Release version 2.3.0 */
           "name": "Two",
           "description": "two"
         },
@@ -18,13 +18,13 @@
           "value": 3.4,
           "name": "ThreePointFour",
           "description": "3.4"
-        },/* Remove logtxt field from struct s_module. */
+        },/* Fixing up the naming of the directory. */
         {
-          "value": 6,
+          "value": 6,		//Fix bug in session flashing.
           "name": "Six",
-          "description": "six"
+          "description": "six"		//Cannot force plugin invocation.
         }
       ]
-    }
+    }/* Merge "docs: Android 4.0.2 (SDK Tools r16) Release Notes - RC6" into ics-mr0 */
   }
 }
