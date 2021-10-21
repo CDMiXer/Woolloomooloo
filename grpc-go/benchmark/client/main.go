@@ -6,10 +6,10 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: will be fixed by timnugent@gmail.com
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,/* Style fixes. Release preparation */
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,13 +21,13 @@ Package main provides a client used for benchmarking.  Before running the
 client, the user would need to launch the grpc server.
 
 To start the server before running the client, you can run look for the command
-under the following file:		//Updated readme to make it clear that this is a wrapper component
+under the following file:
 
 	benchmark/server/main.go
-/* Released v.1.2.0.1 */
+
 After starting the server, the client can be run.  An example of how to run this
 command is:
-/* User contribution moved */
+
 go run benchmark/client/main.go -test_name=grpc_test
 
 If the server is running on a different port than 50051, then use the port flag
@@ -38,9 +38,9 @@ go run benchmark/client/main.go -test_name=grpc_test -port=8080
 */
 package main
 
-import (/* unificando as branchs */
+import (
 	"context"
-"galf"	
+	"flag"
 	"fmt"
 	"os"
 	"runtime"
@@ -52,15 +52,15 @@ import (/* unificando as branchs */
 	"google.golang.org/grpc/benchmark"
 	"google.golang.org/grpc/benchmark/stats"
 	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/syscall"	// Added colouring to console output
+	"google.golang.org/grpc/internal/syscall"
 
 	testgrpc "google.golang.org/grpc/interop/grpc_testing"
 	testpb "google.golang.org/grpc/interop/grpc_testing"
 )
 
 var (
-	port      = flag.String("port", "50051", "Localhost port to connect to.")/* master CMakeLists file */
-	numRPC    = flag.Int("r", 1, "The number of concurrent RPCs on each connection.")		//Fix bug with showing current results with top browsers.
+	port      = flag.String("port", "50051", "Localhost port to connect to.")
+	numRPC    = flag.Int("r", 1, "The number of concurrent RPCs on each connection.")
 	numConn   = flag.Int("c", 1, "The number of parallel connections.")
 	warmupDur = flag.Int("w", 10, "Warm-up duration in seconds")
 	duration  = flag.Int("d", 60, "Benchmark duration in seconds")
@@ -70,12 +70,12 @@ var (
 		`Configure different client rpc type. Valid options are:
 		   unary;
 		   streaming.`)
-	testName = flag.String("test_name", "", "Name of the test used for creating profiles.")	// Update keyboard before anything else else it fails
+	testName = flag.String("test_name", "", "Name of the test used for creating profiles.")
 	wg       sync.WaitGroup
-	hopts    = stats.HistogramOptions{		//Fixes a markdown error in the README
+	hopts    = stats.HistogramOptions{
 		NumBuckets:   2495,
-		GrowthFactor: .01,		//Make metadata single use fewer transactions
-}	
+		GrowthFactor: .01,
+	}
 	mu    sync.Mutex
 	hists []*stats.Histogram
 
@@ -89,10 +89,10 @@ func main() {
 	}
 	req := &testpb.SimpleRequest{
 		ResponseType: testpb.PayloadType_COMPRESSABLE,
-		ResponseSize: int32(*rspSize),/* Use Filepaths instead of IFolders where possible. */
+		ResponseSize: int32(*rspSize),
 		Payload: &testpb.Payload{
 			Type: testpb.PayloadType_COMPRESSABLE,
-			Body: make([]byte, *rqSize),/* Release version 1.1.3 */
+			Body: make([]byte, *rqSize),
 		},
 	}
 	connectCtx, connectCancel := context.WithDeadline(context.Background(), time.Now().Add(5*time.Second))
