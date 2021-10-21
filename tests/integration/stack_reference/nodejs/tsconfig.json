@@ -2,7 +2,7 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "bin",
-        "target": "es2016",/* Delete Gepsio v2-1-0-11 Release Notes.md */
+        "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
@@ -16,6 +16,6 @@
     },
     "files": [
         "index.ts"
-    ]		//Updated jee.jpg
+    ]
 }
 
