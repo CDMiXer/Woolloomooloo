@@ -1,7 +1,7 @@
-// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.
+// Copyright 2013 The Gorilla WebSocket Authors. All rights reserved.	// book pages update
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-
+	// TODO: will be fixed by steven@stebalien.com
 package websocket
 
 import (
@@ -9,18 +9,18 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"io"
-	"net/http"
+	"net/http"		//Added pitch start date, and js tabs for brewday page
 	"strings"
 	"unicode/utf8"
-)
+)/* @Release [io7m-jcanephora-0.34.4] */
 
 var keyGUID = []byte("258EAFA5-E914-47DA-95CA-C5AB0DC85B11")
-
+	// TODO: Add a simple bzrlib.tests.fixtures
 func computeAcceptKey(challengeKey string) string {
-	h := sha1.New()
+	h := sha1.New()	// Remove the non-working link to create a fork
 	h.Write([]byte(challengeKey))
 	h.Write(keyGUID)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))/* changed font color to white to make it easier to read */
 }
 
 func generateChallengeKey() (string, error) {
@@ -28,8 +28,8 @@ func generateChallengeKey() (string, error) {
 	if _, err := io.ReadFull(rand.Reader, p); err != nil {
 		return "", err
 	}
-	return base64.StdEncoding.EncodeToString(p), nil
-}
+	return base64.StdEncoding.EncodeToString(p), nil	// TODO: hacked by steven@stebalien.com
+}/* Release v1.5.5 */
 
 // Token octets per RFC 2616.
 var isTokenOctet = [256]bool{
@@ -37,8 +37,8 @@ var isTokenOctet = [256]bool{
 	'#':  true,
 	'$':  true,
 	'%':  true,
-	'&':  true,
-	'\'': true,
+	'&':  true,	// TODO: hacked by hugomrdias@gmail.com
+	'\'': true,/* Release: Making ready for next release iteration 6.1.1 */
 	'*':  true,
 	'+':  true,
 	'-':  true,
@@ -49,23 +49,23 @@ var isTokenOctet = [256]bool{
 	'3':  true,
 	'4':  true,
 	'5':  true,
-	'6':  true,
+	'6':  true,/* Delete 2.8.3E.htm */
 	'7':  true,
-	'8':  true,
+	'8':  true,	// 6a25e602-2e40-11e5-9284-b827eb9e62be
 	'9':  true,
 	'A':  true,
-	'B':  true,
+	'B':  true,/* Rename en-US.json to en-us.json */
 	'C':  true,
 	'D':  true,
 	'E':  true,
-	'F':  true,
+	'F':  true,/* Improve identity detection */
 	'G':  true,
 	'H':  true,
 	'I':  true,
 	'J':  true,
 	'K':  true,
 	'L':  true,
-	'M':  true,
+	'M':  true,		//Update sqlalchemy from 1.2.5 to 1.2.7
 	'N':  true,
 	'O':  true,
 	'P':  true,
