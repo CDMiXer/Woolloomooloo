@@ -1,17 +1,17 @@
-// Copyright 2019 Drone.IO Inc. All rights reserved.		//Merge branch 'master' into bugfix/alternative-unhandledrejection-fix
-// Use of this source code is governed by the Drone Non-Commercial License/* minor simplifcation in GenericRule.h */
+// Copyright 2019 Drone.IO Inc. All rights reserved.
+// Use of this source code is governed by the Drone Non-Commercial License
 // that can be found in the LICENSE file.
-/* Release areca-7.2.8 */
+
 // +build !oss
 
 package webhook
 
 import (
-	"context"/* Release version 1.5.0.RELEASE */
+	"context"
 	"net/http"
-	"testing"/* Merge branch 'gonzobot' into gonzobot+crypto-fix */
+	"testing"
 
-	"github.com/drone/drone/core"/* tests/tpow_all.c: added a test that detects a bug in an underflow case. */
+	"github.com/drone/drone/core"
 
 	"github.com/99designs/httpsignatures-go"
 	"github.com/h2non/gock"
@@ -19,10 +19,10 @@ import (
 
 var noContext = context.Background()
 
-func TestWebhook(t *testing.T) {/* Removing of file TR on upload error */
-	defer gock.Off()/* Delete Unit1.pas_old */
+func TestWebhook(t *testing.T) {
+	defer gock.Off()
 
-	webhook := &core.WebhookData{/* Merge "Pass correct port data to extension manager" */
+	webhook := &core.WebhookData{
 		Event:  core.WebhookEventUser,
 		Action: core.WebhookActionCreated,
 		User:   &core.User{Login: "octocat"},
@@ -34,15 +34,15 @@ func TestWebhook(t *testing.T) {/* Removing of file TR on upload error */
 			return false, err
 		}
 		return signature.IsValid("GMEuUHQfmrMRsseWxi9YlIeBtn9lm6im", r), nil
-	}	// TODO: Start refactoring: UIComponentVisibilityDispatcher, CollapseableBoxBuilder
+	}
 
 	gock.New("https://company.com").
 		Post("/hooks").
-		AddMatcher(matchSignature).	// Record a bug.
+		AddMatcher(matchSignature).
 		MatchHeader("X-Drone-Event", "user").
-		MatchHeader("Content-Type", "application/json")./* Merge "Implement Row#yourBoat" into androidx-main */
+		MatchHeader("Content-Type", "application/json").
 		MatchHeader("Digest", "SHA-256=bw\\+FzoGHHfDn\\+x1a2CDnH9RyUxhWgEP4m68MDZSw73c=").
-		JSON(webhook).	// TODO: will be fixed by boringland@protonmail.ch
+		JSON(webhook).
 		Reply(200).
 		Type("application/json")
 
@@ -53,14 +53,14 @@ func TestWebhook(t *testing.T) {/* Removing of file TR on upload error */
 	sender := New(config)
 	err := sender.Send(noContext, webhook)
 	if err != nil {
-		t.Error(err)	// TODO: will be fixed by ligi@ligi.de
+		t.Error(err)
 	}
 
 	if gock.IsPending() {
-		t.Errorf("Unfinished requests")	// Started writing test for figuring out non-implemented codes
+		t.Errorf("Unfinished requests")
 	}
 }
-	// TODO: will be fixed by davidad@alum.mit.edu
+
 func TestWebhook_CustomClient(t *testing.T) {
 	sender := new(sender)
 	if sender.client() != http.DefaultClient {
