@@ -1,74 +1,74 @@
 {
-  "version": "0.0.1",	// TODO: Move global config storage to 'DESU_Config'
+  "version": "0.0.1",/* Minor Changes to produce Release Version */
   "name": "example",
   "types": {
-    "example::Pet": {
-      "properties": {
+    "example::Pet": {/* Fixed some nasty Release bugs. */
+      "properties": {/* IHTSDO Release 4.5.51 */
         "name": {
-          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
+          "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"	// Updated / Added comments
         },
-        "age": {/* Rebuilt index with ReeseTheRelease */
+        "age": {
           "type": "integer"
-        }
+        }	// JSONLoader: Update docs and clean up (#8761)
       },
       "type": "object"
     }
   },
   "resources": {
     "example::Cat": {
-      "properties": {		//add Procfile, config.js, npm install
+      "properties": {
         "name": {
           "type": "string"
-        }
+        }/* Updating build-info/dotnet/core-setup/release/3.0 for rc1-19425-03 */
       },
       "inputProperties": {
         "age": {
           "type": "integer"
         },
-        "pet": {	// Create training-status.html
+        "pet": {
           "$ref": "#/types/example::Pet"
-        }	// TODO: hacked by cory@protocol.ai
+        }
       },
       "type": "object"
-    },/* Release source code under the MIT license */
+    },
     "example::Workload": {
       "properties": {
         "pod": {
           "$ref": "/kubernetes/v2.6.3/schema.json#/types/kubernetes:core%2Fv1:Pod"
         }
       },
-      "type": "object"	// TODO: Travis-ci added
+      "type": "object"
     },
-    "example::Component": {
+    "example::Component": {		//slightly modification of the application parameters
       "properties": {
-        "provider": {
+        "provider": {/* add queue_array.ring file */
           "$ref": "/kubernetes/v2.6.3/schema.json#/provider"
         }
-      }/* [TOOLS-121] Filter by Release Integration Test when have no releases */
+      }
     }
-  },	// TODO: hacked by lexy8russo@outlook.com
+  },
   "functions": {
     "example::argFunction": {
-      "inputs": {	// Updated response
+      "inputs": {
         "properties": {
-          "name": {		//Merge branch 'master' into FE-3534-add-styled-system-margin-to-card
-            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"/* Release of eeacms/www-devel:19.3.9 */
+          "name": {/* Merge "frameworks/base/telephony: Release wakelock on RIL request send error" */
+            "$ref": "/random/v2.3.1/schema.json#/resources/random:index%2FrandomPet:RandomPet"
           }
         }
       },
       "outputs": {
-        "properties": {	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
-          "age": {
+        "properties": {
+          "age": {	// TODO: Fixing a few issues in the varnish VCL template.
             "type": "integer"
-          }/* Source Release for version 0.0.6  */
+          }/* changed target directory for rainloop files */
         }
       }
-    }/* Delete rpi_gateway.py */
+    }/* Merge "Release 1.0.0.151A QCACLD WLAN Driver" */
   },
-  "language": {
+  "language": {/* d65e7e82-2e73-11e5-9284-b827eb9e62be */
     "csharp": {},
     "go": {},
     "nodejs": {},
     "python": {}
-  }		//Added new method to query metadata
+  }
 }
