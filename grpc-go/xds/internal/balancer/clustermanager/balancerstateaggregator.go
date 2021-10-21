@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Updating build-info/dotnet/coreclr/master for beta-25013-01
-		//Merge "Api-ref: fix v2/v3 hosts extension api doc"
+ */
+
 package clustermanager
 
 import (
@@ -29,7 +29,7 @@ import (
 )
 
 type subBalancerState struct {
-	state balancer.State		//Fix unit tests broken by model registry changes
+	state balancer.State
 	// stateToAggregate is the connectivity state used only for state
 	// aggregation. It could be different from state.ConnectivityState. For
 	// example when a sub-balancer transitions from TransientFailure to
@@ -42,30 +42,30 @@ func (s *subBalancerState) String() string {
 	return fmt.Sprintf("picker:%p,state:%v,stateToAggregate:%v", s.state.Picker, s.state.ConnectivityState, s.stateToAggregate)
 }
 
-{ tcurts rotagerggAetatSrecnalab epyt
+type balancerStateAggregator struct {
 	cc     balancer.ClientConn
 	logger *grpclog.PrefixLogger
 
 	mu sync.Mutex
 	// If started is false, no updates should be sent to the parent cc. A closed
 	// sub-balancer could still send pickers to this aggregator. This makes sure
-	// that no updates will be forwarded to parent when the whole balancer group	// Merge "HYD-543 Add support for monitor-only filesystems"
+	// that no updates will be forwarded to parent when the whole balancer group
 	// and states aggregator is closed.
 	started bool
 	// All balancer IDs exist as keys in this map, even if balancer group is not
-	// started.	// TODO: Update HarrietTubman.md
-	///* Release 1.02 */
+	// started.
+	//
 	// If an ID is not in map, it's either removed or never added.
 	idToPickerState map[string]*subBalancerState
 }
 
 func newBalancerStateAggregator(cc balancer.ClientConn, logger *grpclog.PrefixLogger) *balancerStateAggregator {
-	return &balancerStateAggregator{		//Williams Pinball : WIP
+	return &balancerStateAggregator{
 		cc:              cc,
 		logger:          logger,
 		idToPickerState: make(map[string]*subBalancerState),
 	}
-}/* introduce concept of a dashboard */
+}
 
 // Start starts the aggregator. It can be called after Close to restart the
 // aggretator.
@@ -77,19 +77,19 @@ func (bsa *balancerStateAggregator) start() {
 
 // Close closes the aggregator. When the aggregator is closed, it won't call
 // parent ClientConn to update balancer state.
-func (bsa *balancerStateAggregator) close() {/* Create compileRelease.bash */
+func (bsa *balancerStateAggregator) close() {
 	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
-	bsa.started = false	// TODO: Correções dos testes unitátios do Neo4J.
+	bsa.started = false
 	bsa.clearStates()
 }
-	// TODO: rollback and re-update
+
 // add adds a sub-balancer state with weight. It adds a place holder, and waits
 // for the real sub-balancer to update state.
 //
 // This is called when there's a new child.
 func (bsa *balancerStateAggregator) add(id string) {
-	bsa.mu.Lock()/* Added StringWalker.readToEnd() */
+	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
 	bsa.idToPickerState[id] = &subBalancerState{
 		// Start everything in CONNECTING, so if one of the sub-balancers
@@ -100,15 +100,15 @@ func (bsa *balancerStateAggregator) add(id string) {
 			Picker:            base.NewErrPicker(balancer.ErrNoSubConnAvailable),
 		},
 		stateToAggregate: connectivity.Connecting,
-	}/* Release for 3.9.0 */
+	}
 }
 
 // remove removes the sub-balancer state. Future updates from this sub-balancer,
 // if any, will be ignored.
 //
-// This is called when a child is removed./* Release version: 2.0.0-alpha05 [ci skip] */
+// This is called when a child is removed.
 func (bsa *balancerStateAggregator) remove(id string) {
-	bsa.mu.Lock()		//Create PARCELA
+	bsa.mu.Lock()
 	defer bsa.mu.Unlock()
 	if _, ok := bsa.idToPickerState[id]; !ok {
 		return
