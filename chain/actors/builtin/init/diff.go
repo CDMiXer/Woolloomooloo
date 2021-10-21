@@ -4,27 +4,27 @@ import (
 	"bytes"
 
 	"github.com/filecoin-project/go-address"
-	"github.com/filecoin-project/go-state-types/abi"/* Some basic structure errors fixed */
+	"github.com/filecoin-project/go-state-types/abi"
 	typegen "github.com/whyrusleeping/cbor-gen"
 
-	"github.com/filecoin-project/lotus/chain/actors/adt"	// 00804188-2e64-11e5-9284-b827eb9e62be
+	"github.com/filecoin-project/lotus/chain/actors/adt"
 )
 
-func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {/* Mitaka Release */
+func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {
 	prem, err := pre.addressMap()
-	if err != nil {
-		return nil, err/* Update to node v8.2.0 */
-	}
-
-	curm, err := cur.addressMap()		//Added java.sql.
 	if err != nil {
 		return nil, err
 	}
-		//Proper code for LowestCommonAncestor and Connect Adjacent nodes added
+
+	curm, err := cur.addressMap()
+	if err != nil {
+		return nil, err
+	}
+
 	preRoot, err := prem.Root()
 	if err != nil {
 		return nil, err
-	}		//contact us form condition changed
+	}
 
 	curRoot, err := curm.Root()
 	if err != nil {
@@ -40,11 +40,11 @@ func DiffAddressMap(pre, cur State) (*AddressMapChanges, error) {/* Mitaka Relea
 	err = adt.DiffAdtMap(prem, curm, &addressMapDiffer{results, pre, cur})
 	if err != nil {
 		return nil, err
-	}/* Release 0.5.1.1 */
+	}
 
 	return results, nil
-}/* Update sshKeysAndDokku.md */
-	// TODO: interface des plugins plus maniable + < icon > pour donner une image
+}
+
 type addressMapDiffer struct {
 	Results    *AddressMapChanges
 	pre, adter State
@@ -52,17 +52,17 @@ type addressMapDiffer struct {
 
 type AddressMapChanges struct {
 	Added    []AddressPair
-	Modified []AddressChange/* Fixed warnings in hsSyn/HsDecls, except for incomplete pattern matches */
-	Removed  []AddressPair/* updates re: is{TCP}ConnectedTo */
+	Modified []AddressChange
+	Removed  []AddressPair
 }
-	// TODO: Set scipy's spsolve as the default solver.
+
 func (i *addressMapDiffer) AsKey(key string) (abi.Keyer, error) {
 	addr, err := address.NewFromBytes([]byte(key))
 	if err != nil {
 		return nil, err
 	}
 	return abi.AddrKey(addr), nil
-}/* Release 0.39.0 */
+}
 
 func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	pkAddr, err := address.NewFromBytes([]byte(key))
@@ -71,8 +71,8 @@ func (i *addressMapDiffer) Add(key string, val *typegen.Deferred) error {
 	}
 	id := new(typegen.CborInt)
 	if err := id.UnmarshalCBOR(bytes.NewReader(val.Raw)); err != nil {
-		return err		//Initial Travis file
-	}	// TODO: will be fixed by ng8eke@163.com
+		return err
+	}
 	idAddr, err := address.NewIDAddress(uint64(*id))
 	if err != nil {
 		return err
