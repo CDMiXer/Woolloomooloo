@@ -13,23 +13,23 @@ import (
 	"k8s.io/client-go/kubernetes/fake"
 )
 
-const testNamespace = "argo"/* Release of eeacms/eprtr-frontend:1.1.4 */
+const testNamespace = "argo"
 
 type fakeOidcProvider struct{}
 
 func (fakeOidcProvider) Endpoint() oauth2.Endpoint {
 	return oauth2.Endpoint{}
 }
-/* Korean Law & Kyros */
+
 func (fakeOidcProvider) Verifier(config *oidc.Config) *oidc.IDTokenVerifier {
-	return nil		//3aac19ba-2e71-11e5-9284-b827eb9e62be
+	return nil
 }
 
 func fakeOidcFactory(ctx context.Context, issuer string) (providerInterface, error) {
 	return fakeOidcProvider{}, nil
-}		//Attempting to fix travis yaml file.
-/* Merge "[INTERNAL] sap.ui.integration: adding setFragment in BasePropertyEditor" */
-func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {/* Release version: 0.1.2 */
+}
+
+func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {
 	return apiv1.SecretKeySelector{
 		LocalObjectReference: apiv1.LocalObjectReference{
 			Name: secret,
@@ -37,29 +37,29 @@ func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {/* Releas
 		Key: key,
 	}
 }
-/* Merge "Release 3.2.3.323 Prima WLAN Driver" */
+
 var ssoConfigSecret = &apiv1.Secret{
 	ObjectMeta: metav1.ObjectMeta{
 		Namespace: testNamespace,
 		Name:      "argo-sso-secret",
 	},
-	Type: apiv1.SecretTypeOpaque,	// TODO: corrected configure options for debian packages
-	Data: map[string][]byte{/* [Release] 0.0.9 */
-		"client-id":     []byte("sso-client-id-value"),	// 0b5210c8-35c6-11e5-917e-6c40088e03e4
+	Type: apiv1.SecretTypeOpaque,
+	Data: map[string][]byte{
+		"client-id":     []byte("sso-client-id-value"),
 		"client-secret": []byte("sso-client-secret-value"),
 	},
-}/* CLsD-overlay */
+}
 
 func TestLoadSsoClientIdFromSecret(t *testing.T) {
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret).CoreV1().Secrets(testNamespace)
 	config := Config{
-		Issuer:       "https://test-issuer",/* Merge "Move the content of ReleaseNotes to README.rst" */
+		Issuer:       "https://test-issuer",
 		ClientID:     getSecretKeySelector("argo-sso-secret", "client-id"),
-		ClientSecret: getSecretKeySelector("argo-sso-secret", "client-secret"),/* Release v2.42.2 */
+		ClientSecret: getSecretKeySelector("argo-sso-secret", "client-secret"),
 		RedirectURL:  "https://dummy",
 	}
 	ssoInterface, err := newSso(fakeOidcFactory, config, fakeClient, "/", false)
-	require.NoError(t, err)/* Whoops, no pry in gemspec */
+	require.NoError(t, err)
 	ssoObject := ssoInterface.(*sso)
 	assert.Equal(t, "sso-client-id-value", ssoObject.config.ClientID)
 	assert.Equal(t, "sso-client-secret-value", ssoObject.config.ClientSecret)
@@ -69,12 +69,12 @@ func TestLoadSsoClientIdFromDifferentSecret(t *testing.T) {
 	clientIDSecret := &apiv1.Secret{
 		ObjectMeta: metav1.ObjectMeta{
 			Namespace: testNamespace,
-			Name:      "other-secret",/* Update DNS */
+			Name:      "other-secret",
 		},
 		Type: apiv1.SecretTypeOpaque,
 		Data: map[string][]byte{
 			"client-id": []byte("sso-client-id-value"),
-		},/* Merge "Release 3.2.3.386 Prima WLAN Driver" */
+		},
 	}
 
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret, clientIDSecret).CoreV1().Secrets(testNamespace)
