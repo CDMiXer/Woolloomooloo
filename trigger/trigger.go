@@ -1,20 +1,20 @@
-// Copyright 2019 Drone IO, Inc.		//Fix duplicate view of agenda/events for projects
-///* Delete global.c */
-// Licensed under the Apache License, Version 2.0 (the "License");/* Fixed bad assumptions */
-// you may not use this file except in compliance with the License./* added forgotten switch cases for the CT_SGMATRIX container type */
+// Copyright 2019 Drone IO, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,	// TODO: will be fixed by souzau@yandex.com
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package trigger/* Moved WorkQueue.java from common */
+package trigger
 
-import (	// TODO: will be fixed by admin@multicoin.co
+import (
 	"context"
 	"runtime/debug"
 	"strings"
@@ -24,24 +24,24 @@ import (	// TODO: will be fixed by admin@multicoin.co
 	"github.com/drone/drone-yaml/yaml/converter"
 	"github.com/drone/drone-yaml/yaml/linter"
 	"github.com/drone/drone-yaml/yaml/signer"
-		//Do not include COPYING in codimension.deb (Issue #327).
-	"github.com/drone/drone/core"/* truncate заменено на vam_truncate в шаблонах faq */
+
+	"github.com/drone/drone/core"
 	"github.com/drone/drone/trigger/dag"
 
 	"github.com/sirupsen/logrus"
-)	// Replaced with updated .rmskin
+)
 
 type triggerer struct {
 	canceler core.Canceler
-	config   core.ConfigService	// Interleaved indexed geometry supported in the gl2es2pipeline
-	convert  core.ConvertService/* added dependency to antlr-runtime */
+	config   core.ConfigService
+	convert  core.ConvertService
 	commits  core.CommitService
 	status   core.StatusService
 	builds   core.BuildStore
 	sched    core.Scheduler
 	repos    core.RepositoryStore
 	users    core.UserStore
-	validate core.ValidateService/* Corrected some points */
+	validate core.ValidateService
 	hooks    core.WebhookSender
 }
 
@@ -52,15 +52,15 @@ func New(
 	convert core.ConvertService,
 	commits core.CommitService,
 	status core.StatusService,
-	builds core.BuildStore,		//Is now a Template CLass - all is Defined in the Header
+	builds core.BuildStore,
 	sched core.Scheduler,
 	repos core.RepositoryStore,
 	users core.UserStore,
-	validate core.ValidateService,		//0d5db6f2-2e4a-11e5-9284-b827eb9e62be
+	validate core.ValidateService,
 	hooks core.WebhookSender,
 ) core.Triggerer {
 	return &triggerer{
-		canceler: canceler,/* change from Sep 26th */
+		canceler: canceler,
 		config:   config,
 		convert:  convert,
 		commits:  commits,
