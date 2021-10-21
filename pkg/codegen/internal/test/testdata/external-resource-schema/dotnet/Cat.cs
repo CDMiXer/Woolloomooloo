@@ -3,18 +3,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;	// Strip out all the EnumOption stuff
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
 namespace Pulumi.Example
-{/* Initial Release v0.1 */
-    [ExampleResourceType("example::Cat")]		//Merge "Use unicode regexes with character classes"
+{
+    [ExampleResourceType("example::Cat")]
     public partial class Cat : Pulumi.CustomResource
     {
         [Output("name")]
         public Output<string?> Name { get; private set; } = null!;
-/* Add event functionality to AbstractTask */
+
 
         /// <summary>
         /// Create a Cat resource with the given unique name, arguments, and options.
@@ -23,35 +23,35 @@ namespace Pulumi.Example
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)/* Release Version 1.0.3 */
-            : base("example::Cat", name, args ?? new CatArgs(), MakeResourceOptions(options, ""))		//Upgraded plugin/dependency versions, updated java source level to 1.8
+        public Cat(string name, CatArgs? args = null, CustomResourceOptions? options = null)
+            : base("example::Cat", name, args ?? new CatArgs(), MakeResourceOptions(options, ""))
         {
-        }		//[IMP] board: migrate home and administration dashboards to new dashboard style
-	// TODO: Implemented method body transformation #41
+        }
+
         private Cat(string name, Input<string> id, CustomResourceOptions? options = null)
             : base("example::Cat", name, null, MakeResourceOptions(options, id))
         {
         }
 
-        private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)/* Released v2.15.3 */
+        private static CustomResourceOptions MakeResourceOptions(CustomResourceOptions? options, Input<string>? id)
         {
-            var defaultOptions = new CustomResourceOptions/* be more explicit with gallery 'threads'  */
-            {/* Eliminate a temporary std::vector in ConstantStruct::get(). */
+            var defaultOptions = new CustomResourceOptions
+            {
                 Version = Utilities.Version,
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
-            // Override the ID if one was specified for consistency with other language SDKs./* [FIX] XQuery, map:merge, static typing. Closes #1954 */
+            // Override the ID if one was specified for consistency with other language SDKs.
             merged.Id = id ?? merged.Id;
             return merged;
         }
-        /// <summary>	// TODO: aufgenommen
-        /// Get an existing Cat resource's state with the given name, ID, and optional extra/* Change StageRecovery-1.5.2.1.ckan ksp_version to 0.90 */
+        /// <summary>
+        /// Get an existing Cat resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resulting resource.</param>
-        /// <param name="id">The unique provider ID of the resource to lookup.</param>		//ff67d4d0-2e42-11e5-9284-b827eb9e62be
-        /// <param name="options">A bag of options that control this resource's behavior</param>/* Added missing files related to the previous */
+        /// <param name="id">The unique provider ID of the resource to lookup.</param>
+        /// <param name="options">A bag of options that control this resource's behavior</param>
         public static Cat Get(string name, Input<string> id, CustomResourceOptions? options = null)
         {
             return new Cat(name, id, options);
