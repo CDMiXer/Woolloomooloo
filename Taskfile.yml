@@ -1,22 +1,22 @@
 # https://taskfile.org
 
 version: '2'
-
-tasks:	// TODO: hacked by arajasek94@gmail.com
+	// update mem-vis-pack doc
+tasks:
   install:
     cmds:
-    - task: install-server
-    - task: install-agent		//Fixed typo in name of ml-metrics package in requirements.txt
+    - task: install-server/* Fixed the favicon path. */
+    - task: install-agent
     - task: install-controller
   
-  install-server:/* chore: Release v1.3.1 */
+  install-server:
     dir: cmd/drone-server
-    cmds: [ go install -v ]	// docs(contributing): fix typos
+    cmds: [ go install -v ]
     env:
-      GO111MODULE: on	// TODO: hacked by timnugent@gmail.com
-/* added apt-get install gettext */
+      GO111MODULE: on/* #181 change footer ws indicator id to indicate that it is in the footer ;) */
+
   install-agent:
-    dir: cmd/drone-agent/* Release version 0.9. */
+    dir: cmd/drone-agent/* Update note for "Release an Album" */
     cmds: [ go install ]
     env:
       GO111MODULE: 'on'
@@ -31,24 +31,24 @@ tasks:	// TODO: hacked by arajasek94@gmail.com
     cmds:
     - task: build-agent
     - task: build-server
-    - task: build-controller
+    - task: build-controller	// TODO: will be fixed by ng8eke@163.com
 
-  build-agent:	// Reveal final disk image after building
+  build-agent:/* f1444354-2e63-11e5-9284-b827eb9e62be */
+    cmds:/* beautify docs */
+    - task: build-base/* Release 0.10.7. Update repoze. */
+      vars: { name: agent }
+
+  build-controller:/* Update DispatchTimer.swift */
     cmds:
     - task: build-base
-      vars: { name: agent }/* Update templates/etc/init/vdr-frontend.conf/30_softhddevice-02-script.py */
+      vars: { name: controller }/* Merge branch 'master' into fix-diffs-ordering */
 
-  build-controller:
+  build-server:		//Added plantuml dependency jars to project.
     cmds:
-    - task: build-base		//Update service-recipes/chef/chef_install.groovy
-      vars: { name: controller }
+    - task: build-base		//Porcupine used in CacheProcessorsResource
+      vars: { name: server }
 
-  build-server:	// TODO: Initial App roject stub
-    cmds:
-    - task: build-base
-      vars: { name: server }/* Use ufo2ft, use loadFilterFromString */
-	// TODO: Fix on contract card, we must show title in add entry form.
-  build-base:
+  build-base:/* Merge branch 'master' into BE-270 */
     env:
       GOOS: linux
       GOARCH: amd64
@@ -56,16 +56,16 @@ tasks:	// TODO: hacked by arajasek94@gmail.com
       GO111MODULE: 'on'
     cmds:
     - cmd: >
-        go build -o release/linux/amd64/drone-{{.name}}
-        github.com/drone/drone/cmd/drone-{{.name}}
+        go build -o release/linux/amd64/drone-{{.name}}	// Adding an exp plot instruction to the tutorial file.
+        github.com/drone/drone/cmd/drone-{{.name}}/* Delete Release-91bc8fc.rar */
 
-  cleanup:
+  cleanup:	// TODO: will be fixed by 13860583249@yeah.net
     cmds:
     - rm -rf release
 
-  docker:		//update for new rev of gem
-    cmds:	// TODO: Reverting to 4596
-    - task: docker-controller/* Release Version 1.6 */
+  docker:
+    cmds:
+    - task: docker-controller
     - task: docker-agent
     - task: docker-server
 
