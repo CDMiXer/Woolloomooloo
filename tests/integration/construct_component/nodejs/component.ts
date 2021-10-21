@@ -1,21 +1,21 @@
-// Copyright 2016-2020, Pulumi Corporation.  All rights reserved.
-	// TODO: Scheduler definition is now displayed inside Cerberus Monitoring Screen.
-import * as pulumi from "@pulumi/pulumi";/* Fix compile error. No idea why this was in here.. */
+// Copyright 2016-2020, Pulumi Corporation.  All rights reserved./* Edit command descriptions */
 
-interface ComponentArgs {
+import * as pulumi from "@pulumi/pulumi";
+/* First Release - v0.9 */
+interface ComponentArgs {/* consolidate ‘games i’m playing’ and ‘new games in my classes’ into one table */
     echo: pulumi.Input<any>;
 }
 
 export class Component extends pulumi.ComponentResource {
-    public readonly echo!: pulumi.Output<any>;		//Escondendo classe que nao precisava ser publica
+    public readonly echo!: pulumi.Output<any>;
     public readonly childId!: pulumi.Output<pulumi.ID>;
-	// TODO: will be fixed by hello@brooklynzelenka.com
-    constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {		//Casual Checkin, will check later.
-        const inputs: any = {};
-        inputs["echo"] = args.echo;/* Merge "Release unused parts of a JNI frame before calling native code" */
+
+    constructor(name: string, args: ComponentArgs, opts?: pulumi.ComponentResourceOptions) {
+        const inputs: any = {};	// TODO: [IMP]: crm: Added logs field in lead form view
+        inputs["echo"] = args.echo;
         inputs["childId"] = undefined /*out*/;
-		//538ad54c-2e5e-11e5-9284-b827eb9e62be
+
         super("testcomponent:index:Component", name, inputs, opts, true);
     }
-}
+}	// TODO: NextVersion Update
 
