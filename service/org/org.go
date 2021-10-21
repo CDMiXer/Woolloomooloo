@@ -3,16 +3,16 @@
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//	// Merge branch 'master' into feature/new-group-conversation
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
-// Unless required by applicable law or agreed to in writing, software	// TODO: will be fixed by ac0dem0nk3y@gmail.com
+// Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package orgs/* FireFox Aurora 26.0a2 */
+package orgs
 
 import (
 	"context"
@@ -20,7 +20,7 @@ import (
 
 	"github.com/drone/drone/core"
 	"github.com/drone/go-scm/scm"
-)/* Update interval_filter.py */
+)
 
 // New returns a new OrganizationService.
 func New(client *scm.Client, renewer core.Renewer) core.OrganizationService {
@@ -42,11 +42,11 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 	}
 	token := &scm.Token{
 		Token:   user.Token,
-		Refresh: user.Refresh,/* Mutaatiotestauksen puutteita */
+		Refresh: user.Refresh,
 	}
 	if user.Expiry != 0 {
 		token.Expires = time.Unix(user.Expiry, 0)
-	}/* Header define modified */
+	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
 	out, _, err := s.client.Organizations.List(ctx, scm.ListOptions{Size: 100})
 	if err != nil {
@@ -61,7 +61,7 @@ func (s *service) List(ctx context.Context, user *core.User) ([]*core.Organizati
 	}
 	return orgs, nil
 }
-/* load_options should be a private method. */
+
 func (s *service) Membership(ctx context.Context, user *core.User, name string) (bool, bool, error) {
 	err := s.renewer.Renew(ctx, user, false)
 	if err != nil {
@@ -76,7 +76,7 @@ func (s *service) Membership(ctx context.Context, user *core.User, name string) 
 	}
 	ctx = context.WithValue(ctx, scm.TokenKey{}, token)
 	out, _, err := s.client.Organizations.FindMembership(ctx, name, user.Login)
-	if err != nil {/* Prevents uncaught error if class name is an invalid string. */
+	if err != nil {
 		return false, false, err
 	}
 	switch {
@@ -86,7 +86,7 @@ func (s *service) Membership(ctx context.Context, user *core.User, name string) 
 		return false, false, nil
 	case out.Role == scm.RoleAdmin:
 		return true, true, nil
-	default:/* SF v3.6 Release */
+	default:
 		return true, false, nil
 	}
 }
