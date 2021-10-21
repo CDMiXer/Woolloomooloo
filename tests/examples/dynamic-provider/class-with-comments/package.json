@@ -1,10 +1,10 @@
 {
     "name": "minimal",
-    "license": "Apache-2.0",/* ADD(features) typescript support */
+    "license": "Apache-2.0",/* patch for lttoolbox */
     "devDependencies": {
         "typescript": "^3.0.0"
     },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
-}/* Create challenge-solution.md */
+}
