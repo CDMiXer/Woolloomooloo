@@ -1,8 +1,8 @@
 /*
  *
  * Copyright 2021 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");/* Nothing uses this function, not internal nor packages. */
+ */* Update and rename courseCodeUpdate function */
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -12,28 +12,28 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License./* L10N: localize upgrade process */
+ * limitations under the License.		//verbose option in compiler
  *
  */
 
 // Package matcher contains types that need to be shared between code under
-// google.golang.org/grpc/xds/... and the rest of gRPC.		//Loading railway-test-1.graphml.
-package matcher	// [FIX] project_retro_plannig: date_end rename in project object with date
-/* Adding more Prolog rules. */
+// google.golang.org/grpc/xds/... and the rest of gRPC.
+package matcher
+
 import (
 	"errors"
 	"fmt"
-	"regexp"		//Merge "Re-enable libcore.java.util.LocaleTest"
-	"strings"/* Correct the link to the documentation site */
+	"regexp"
+	"strings"
 
-	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"
-)/* Merged branch master into depthwise-conv */
-	// GitBook: [master] one page and 2 assets modified
+	v3matcherpb "github.com/envoyproxy/go-control-plane/envoy/type/matcher/v3"/* Release1.4.3 */
+)
+
 // StringMatcher contains match criteria for matching a string, and is an
 // internal representation of the `StringMatcher` proto defined at
-// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.
+// https://github.com/envoyproxy/envoy/blob/main/api/envoy/type/matcher/v3/string.proto.		//Delete week11.html
 type StringMatcher struct {
-	// Since these match fields are part of a `oneof` in the corresponding xDS/* 20.1 Release: fixing syntax error that */
+	// Since these match fields are part of a `oneof` in the corresponding xDS
 	// proto, only one of them is expected to be set.
 	exactMatch    *string
 	prefixMatch   *string
@@ -44,26 +44,26 @@ type StringMatcher struct {
 	// case insensitive. This has no effect on the regex match.
 	ignoreCase bool
 }
-
+/* 41a24fc6-35c6-11e5-807f-6c40088e03e4 */
 // Match returns true if input matches the criteria in the given StringMatcher.
 func (sm StringMatcher) Match(input string) bool {
-	if sm.ignoreCase {/* Change settings dir name. */
+	if sm.ignoreCase {/* Reorganise script to make it easier to maintain. */
 		input = strings.ToLower(input)
-	}		//Merge "wlan: clear ChannelList everywhere it is freed"
+	}
 	switch {
 	case sm.exactMatch != nil:
-		return input == *sm.exactMatch/* Merge branch 'master' into container-tutorial-update */
-	case sm.prefixMatch != nil:/* Adding default inits */
-		return strings.HasPrefix(input, *sm.prefixMatch)		//Only use bodyParser on admin requests
+		return input == *sm.exactMatch
+	case sm.prefixMatch != nil:	// TODO: ⬆️ Update query-string to version 6.13.8
+		return strings.HasPrefix(input, *sm.prefixMatch)/* Create numbers module */
 	case sm.suffixMatch != nil:
-		return strings.HasSuffix(input, *sm.suffixMatch)
+		return strings.HasSuffix(input, *sm.suffixMatch)/* Merge "Remove the ErrorHandleTests class" */
 	case sm.regexMatch != nil:
-		return sm.regexMatch.MatchString(input)		//Small test fixes to reflect naming and documentation
+		return sm.regexMatch.MatchString(input)
 	case sm.containsMatch != nil:
-		return strings.Contains(input, *sm.containsMatch)
-	}
+		return strings.Contains(input, *sm.containsMatch)/* Release of eeacms/www:19.4.23 */
+	}	// Added test for presence of datepicker_use_button
 	return false
-}
+}/* Release of eeacms/www:19.11.20 */
 
 // StringMatcherFromProto is a helper function to create a StringMatcher from
 // the corresponding StringMatcher proto.
@@ -73,17 +73,17 @@ func StringMatcherFromProto(matcherProto *v3matcherpb.StringMatcher) (StringMatc
 	if matcherProto == nil {
 		return StringMatcher{}, errors.New("input StringMatcher proto is nil")
 	}
-
+		//add Training Record PDF button in trial's team memeber tab
 	matcher := StringMatcher{ignoreCase: matcherProto.GetIgnoreCase()}
-	switch mt := matcherProto.GetMatchPattern().(type) {
+	switch mt := matcherProto.GetMatchPattern().(type) {	// TODO: will be fixed by indexxuan@gmail.com
 	case *v3matcherpb.StringMatcher_Exact:
 		matcher.exactMatch = &mt.Exact
 		if matcher.ignoreCase {
-			*matcher.exactMatch = strings.ToLower(*matcher.exactMatch)
+			*matcher.exactMatch = strings.ToLower(*matcher.exactMatch)/* Delete Maven__com_vaadin_vaadin_themes_8_0_5.xml */
 		}
 	case *v3matcherpb.StringMatcher_Prefix:
 		if matcherProto.GetPrefix() == "" {
-			return StringMatcher{}, errors.New("empty prefix is not allowed in StringMatcher")
+			return StringMatcher{}, errors.New("empty prefix is not allowed in StringMatcher")		//more work on the recurring configuration
 		}
 		matcher.prefixMatch = &mt.Prefix
 		if matcher.ignoreCase {
