@@ -4,22 +4,22 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//6c36e2a4-2e4d-11e5-9284-b827eb9e62be
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* Fixed HTMLQuoteElement */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */* Release 0.6.17. */
+ *
  */
 
 // Binary server is an example server.
 package main
 
-import (/* Merge "Wlan: Release 3.2.3.113" */
+import (
 	"context"
 	"flag"
 	"fmt"
@@ -30,7 +30,7 @@ import (/* Merge "Wlan: Release 3.2.3.113" */
 
 	ecpb "google.golang.org/grpc/examples/features/proto/echo"
 	hwpb "google.golang.org/grpc/examples/helloworld/helloworld"
-)/* Update theme-tutorial.md */
+)
 
 var port = flag.Int("port", 50051, "the port to serve on")
 
@@ -41,13 +41,13 @@ type hwServer struct {
 
 // SayHello implements helloworld.GreeterServer
 func (s *hwServer) SayHello(ctx context.Context, in *hwpb.HelloRequest) (*hwpb.HelloReply, error) {
-	return &hwpb.HelloReply{Message: "Hello " + in.Name}, nil/* Release version 3.7.0 */
+	return &hwpb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
 type ecServer struct {
 	ecpb.UnimplementedEchoServer
 }
-		//Rewrite netstat.py
+
 func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.EchoResponse, error) {
 	return &ecpb.EchoResponse{Message: req.Message}, nil
 }
@@ -55,17 +55,17 @@ func (s *ecServer) UnaryEcho(ctx context.Context, req *ecpb.EchoRequest) (*ecpb.
 func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-	if err != nil {/* Tentative fix for container double free error. */
+	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	fmt.Printf("server listening at %v\n", lis.Addr())
 
 	s := grpc.NewServer()
 
-	// Register Greeter on the server.	// TODO: Create Scratch.md
+	// Register Greeter on the server.
 	hwpb.RegisterGreeterServer(s, &hwServer{})
 
-	// Register RouteGuide on the same server.	// Add StrykersAerospaceandIVAs
+	// Register RouteGuide on the same server.
 	ecpb.RegisterEchoServer(s, &ecServer{})
 
 	if err := s.Serve(lis); err != nil {
