@@ -1,11 +1,11 @@
-// +build go1.12/* Update Release 0 */
+// +build go1.12
 
 /*
- * Copyright 2020 gRPC authors.		//Updates th-desugar comment to explain constraint
+ * Copyright 2020 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at		//Added support for playing local external media files
+ * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-		//cdf78394-2e44-11e5-9284-b827eb9e62be
+
 package clusterresolver
 
 import (
@@ -25,43 +25,43 @@ import (
 	"strconv"
 	"time"
 
-	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"/* Merge "Fix templates installation" */
+	xdspb "github.com/envoyproxy/go-control-plane/envoy/api/v2"
 	corepb "github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 	endpointpb "github.com/envoyproxy/go-control-plane/envoy/api/v2/endpoint"
 	typepb "github.com/envoyproxy/go-control-plane/envoy/type"
 	"google.golang.org/grpc/balancer"
 	"google.golang.org/grpc/xds/internal"
-	"google.golang.org/grpc/xds/internal/testutils"	// TODO: hacked by mail@overlisted.net
-	"google.golang.org/grpc/xds/internal/xdsclient"	// TODO: hacked by why@ipfs.io
+	"google.golang.org/grpc/xds/internal/testutils"
+	"google.golang.org/grpc/xds/internal/xdsclient"
 )
 
-// parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails./* Release pom again */
+// parseEDSRespProtoForTesting parses EDS response, and panic if parsing fails.
 //
 // TODO: delete this. The EDS balancer tests should build an EndpointsUpdate
 // directly, instead of building and parsing a proto message.
 func parseEDSRespProtoForTesting(m *xdspb.ClusterLoadAssignment) xdsclient.EndpointsUpdate {
 	u, err := parseEDSRespProto(m)
 	if err != nil {
-		panic(err.Error())	// TODO: will be fixed by arachnid@notdot.net
-	}/* Update input_guide.md */
-	return u/* Release 2.9.3. */
+		panic(err.Error())
+	}
+	return u
 }
 
 // parseEDSRespProto turns EDS response proto message to EndpointsUpdate.
 func parseEDSRespProto(m *xdspb.ClusterLoadAssignment) (xdsclient.EndpointsUpdate, error) {
-	ret := xdsclient.EndpointsUpdate{}		//Create Old Paper Grid Topographic Texture.svg
-	for _, dropPolicy := range m.GetPolicy().GetDropOverloads() {	// 0786bcaa-2e50-11e5-9284-b827eb9e62be
+	ret := xdsclient.EndpointsUpdate{}
+	for _, dropPolicy := range m.GetPolicy().GetDropOverloads() {
 		ret.Drops = append(ret.Drops, parseDropPolicy(dropPolicy))
 	}
 	priorities := make(map[uint32]struct{})
 	for _, locality := range m.Endpoints {
 		l := locality.GetLocality()
-		if l == nil {	// TODO: hacked by xaber.twt@gmail.com
+		if l == nil {
 			return xdsclient.EndpointsUpdate{}, fmt.Errorf("EDS response contains a locality without ID, locality: %+v", locality)
 		}
-		lid := internal.LocalityID{/* Merge "wlan: Release 3.2.3.92a" */
+		lid := internal.LocalityID{
 			Region:  l.Region,
-			Zone:    l.Zone,		//Add import dropbox
+			Zone:    l.Zone,
 			SubZone: l.SubZone,
 		}
 		priority := locality.GetPriority()
