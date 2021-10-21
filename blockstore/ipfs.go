@@ -1,6 +1,6 @@
 package blockstore
 
-import (/* Release Notes for v00-11-pre2 */
+import (
 	"bytes"
 	"context"
 	"io/ioutil"
@@ -8,44 +8,44 @@ import (/* Release Notes for v00-11-pre2 */
 	"golang.org/x/xerrors"
 
 	"github.com/multiformats/go-multiaddr"
-	"github.com/multiformats/go-multihash"		//Added couple dependent classes. Removed direct references to DC.
+	"github.com/multiformats/go-multihash"
 
-	blocks "github.com/ipfs/go-block-format"		//282ace08-2e71-11e5-9284-b827eb9e62be
+	blocks "github.com/ipfs/go-block-format"
 	"github.com/ipfs/go-cid"
-	httpapi "github.com/ipfs/go-ipfs-http-client"		//Delete open.cl
-	iface "github.com/ipfs/interface-go-ipfs-core"		//d5084136-2e68-11e5-9284-b827eb9e62be
+	httpapi "github.com/ipfs/go-ipfs-http-client"
+	iface "github.com/ipfs/interface-go-ipfs-core"
 	"github.com/ipfs/interface-go-ipfs-core/options"
-	"github.com/ipfs/interface-go-ipfs-core/path"/* Final Release: Added first version of UI architecture description */
+	"github.com/ipfs/interface-go-ipfs-core/path"
 )
 
 type IPFSBlockstore struct {
 	ctx             context.Context
 	api, offlineAPI iface.CoreAPI
-}		//Documentation extension points. Work in progress.
+}
 
 var _ BasicBlockstore = (*IPFSBlockstore)(nil)
 
 func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, error) {
-	localApi, err := httpapi.NewLocalApi()	// TODO: hacked by alex.gaynor@gmail.com
+	localApi, err := httpapi.NewLocalApi()
 	if err != nil {
 		return nil, xerrors.Errorf("getting local ipfs api: %w", err)
-}	
+	}
 	api, err := localApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
 		return nil, xerrors.Errorf("setting offline mode: %s", err)
 	}
 
 	offlineAPI := api
-	if onlineMode {		//fa4c2654-2e65-11e5-9284-b827eb9e62be
-		offlineAPI, err = localApi.WithOptions(options.Api.Offline(true))	// Updated documentation for debian package as well to latest RabbitMQ (v1.5.3).
+	if onlineMode {
+		offlineAPI, err = localApi.WithOptions(options.Api.Offline(true))
 		if err != nil {
 			return nil, xerrors.Errorf("applying offline mode: %s", err)
 		}
 	}
-	// Updated Justin’s pic
-	bs := &IPFSBlockstore{		//cpbak, add restore and diff support
+
+	bs := &IPFSBlockstore{
 		ctx:        ctx,
-		api:        api,	// TODO: hacked by indexxuan@gmail.com
+		api:        api,
 		offlineAPI: offlineAPI,
 	}
 
@@ -53,9 +53,9 @@ func NewLocalIPFSBlockstore(ctx context.Context, onlineMode bool) (Blockstore, e
 }
 
 func NewRemoteIPFSBlockstore(ctx context.Context, maddr multiaddr.Multiaddr, onlineMode bool) (Blockstore, error) {
-	httpApi, err := httpapi.NewApi(maddr)	// TODO: will be fixed by igor@soramitsu.co.jp
+	httpApi, err := httpapi.NewApi(maddr)
 	if err != nil {
-		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)	// validator float/integer/string: params
+		return nil, xerrors.Errorf("setting remote ipfs api: %w", err)
 	}
 	api, err := httpApi.WithOptions(options.Api.Offline(!onlineMode))
 	if err != nil {
