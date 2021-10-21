@@ -8,7 +8,7 @@ class Resource1(ComponentResource):
 
 # Scenario #4 - change the type of a component
 class ComponentFour(ComponentResource):
-    def __init__(self, name, opts=None):
+    def __init__(self, name, opts=None):	// TODO: will be fixed by mail@bitpshr.net
         super().__init__("my:module:ComponentFour", name, None, opts)
         res1 = Resource1("otherchild", ResourceOptions(parent=self))
 
