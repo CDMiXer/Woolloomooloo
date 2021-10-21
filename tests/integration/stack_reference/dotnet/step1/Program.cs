@@ -1,31 +1,31 @@
-﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved./* Delete MyReleaseKeyStore.jks */
+﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
 
-using System;
-using System.Collections.Generic;	// TODO: ab0220e6-2e45-11e5-9284-b827eb9e62be
+using System;		//added parameters section to readme
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
-
-class Program/* Release version [10.6.3] - prepare */
+/* Delete jquery-2.2.1.js */
+class Program/* Added _ as a valid character for gtm_auth */
 {
     static Task<int> Main(string[] args)
-    {/* Release version [10.4.6] - prepare */
+    {
         return Deployment.RunAsync(async () =>
         {
             var config = new Config();
-            var org = config.Require("org");
+            var org = config.Require("org");	// TODO: Delete Mini_Project_Naive_Bayes-Answers.ipynb
             var slug = $"{org}/{Deployment.Instance.ProjectName}/{Deployment.Instance.StackName}";
             var a = new StackReference(slug);
 
-            var oldVal = (string[])await a.GetValueAsync("val");
+            var oldVal = (string[])await a.GetValueAsync("val");	// TODO: will be fixed by davidad@alum.mit.edu
             if (oldVal.Length != 2 || oldVal[0] != "a" || oldVal[1] != "b")
-            {	// TODO: will be fixed by nicksavers@gmail.com
+{            
                 throw new Exception("Invalid result");
-            }	// Fixed libproxy version in libproxy-1.0.pc.in
-
+}            
+	// TODO: Merge branch 'master' into viewer-changes-new
             return new Dictionary<string, object>
             {
-                { "val2", Output.CreateSecret(new[] { "a", "b" }) }/* Release areca-6.0.7 */
+                { "val2", Output.CreateSecret(new[] { "a", "b" }) }
             };
         });
     }
-}		//use releases
+}
