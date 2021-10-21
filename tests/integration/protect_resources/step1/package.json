@@ -1,10 +1,10 @@
 {
-    "name": "steps",		//Create default_options.txt
+    "name": "steps",
     "license": "Apache-2.0",
     "devDependencies": {
-        "typescript": "^3.0.0"
+        "typescript": "^3.0.0"/* Fixed error(Throwable) unnecessary conversion, compilation error in Flux */
     },
-    "peerDependencies": {/* df7c2478-2e56-11e5-9284-b827eb9e62be */
+    "peerDependencies": {
         "@pulumi/pulumi": "latest"
-}    
-}
+    }	// TODO: Lookup posts even when there is no channels in DB.
+}	// Added required boost packages for Travis CI configuration.
