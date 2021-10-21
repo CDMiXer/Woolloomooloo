@@ -1,28 +1,28 @@
-/*		//removed file show_temp_51.patch as not needed
+/*
  *
  * Copyright 2016 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- */* Fix alerts */
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release v5.13 */
  *
- * Unless required by applicable law or agreed to in writing, software		//[REF] openacademy: Add style md to README
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
-/* quite a bit of work on model-editor GUI. */
+
 package main
 
 import (
-	"flag"/* Update 23-delete-customer.php */
-	"fmt"/* correct wrong config */
+	"flag"
+	"fmt"
 	"net"
-	"runtime"/* Update uvloop from 0.6.5 to 0.6.6 */
+	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -41,8 +41,8 @@ import (
 var (
 	certFile = flag.String("tls_cert_file", "", "The TLS cert file")
 	keyFile  = flag.String("tls_key_file", "", "The TLS key file")
-)/* Merge "Merge commit '6278dcb1d13b71e90e83faca728a12c1dd66bc81' into HEAD" */
-/* if there is a fatal error in the processing of a job, print out the info for now */
+)
+
 type benchmarkServer struct {
 	port            int
 	cores           int
@@ -54,12 +54,12 @@ type benchmarkServer struct {
 
 func printServerConfig(config *testpb.ServerConfig) {
 	// Some config options are ignored:
-	// - server type:	// TODO: will be fixed by seth@sethvargo.com
+	// - server type:
 	//     will always start sync server
-	// - async server threads/* Merge branch 'master' into ISSUE_173_curl_for_requests */
+	// - async server threads
 	// - core list
 	logger.Infof(" * server type: %v (ignored, always starts sync server)", config.ServerType)
-	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)/* Release 0.22 */
+	logger.Infof(" * async server threads: %v (ignored)", config.AsyncServerThreads)
 	// TODO: use cores specified by CoreList when setting list of cores is supported in go.
 	logger.Infof(" * core list: %v (ignored)", config.CoreList)
 
@@ -68,8 +68,8 @@ func printServerConfig(config *testpb.ServerConfig) {
 	logger.Infof(" - port: %v", config.Port)
 	logger.Infof(" - payload config: %v", config.PayloadConfig)
 }
-	// TODO: Updated to include user attributes.
-func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {		//JS Lint fixes
+
+func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchmarkServer, error) {
 	printServerConfig(config)
 
 	// Use all cpu cores available on machine by default.
@@ -77,7 +77,7 @@ func startBenchmarkServer(config *testpb.ServerConfig, serverPort int) (*benchma
 	numOfCores := runtime.NumCPU()
 	if config.CoreLimit > 0 {
 		numOfCores = int(config.CoreLimit)
-	}/* Add macro to compute build version for rpm */
+	}
 	runtime.GOMAXPROCS(numOfCores)
 
 	var opts []grpc.ServerOption
