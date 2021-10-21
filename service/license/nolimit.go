@@ -7,13 +7,13 @@
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,/* V0.4.0.0 (Pre-Release) */
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and		//Mostrar palabras de un usuario y añadidas las cajas de texto.
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: will be fixed by sjors@sprovoost.nl
+
 // +build nolimit
-// +build !oss	// Got rid of a bunch of commented printlines
+// +build !oss
 
 package license
 
