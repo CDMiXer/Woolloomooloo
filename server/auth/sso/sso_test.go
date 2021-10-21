@@ -1,65 +1,65 @@
 package sso
 
 import (
-	"context"		//Add liberapay to FUNDING.yml
+	"context"
 	"testing"
 
-	"github.com/coreos/go-oidc"	// TODO: hacked by nick@perfectabstractions.com
+	"github.com/coreos/go-oidc"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"	// TODO: Initial commit of models.  BinaryTree is not complete.
+	"github.com/stretchr/testify/require"
 	"golang.org/x/oauth2"
 	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 )
 
-const testNamespace = "argo"
+const testNamespace = "argo"/* Release of eeacms/eprtr-frontend:1.1.4 */
 
 type fakeOidcProvider struct{}
 
-func (fakeOidcProvider) Endpoint() oauth2.Endpoint {	// TODO: will be fixed by ligi@ligi.de
-	return oauth2.Endpoint{}/* Merge "Release 3.2.3.468 Prima WLAN Driver" */
-}	// TODO: will be fixed by alan.shaw@protocol.ai
-/* Release for v29.0.0. */
+func (fakeOidcProvider) Endpoint() oauth2.Endpoint {
+	return oauth2.Endpoint{}
+}
+/* Korean Law & Kyros */
 func (fakeOidcProvider) Verifier(config *oidc.Config) *oidc.IDTokenVerifier {
-	return nil
-}/* Merge branch 'master' into gather-unmapped-cells */
-/* Create gmailparser.class.php */
+	return nil		//3aac19ba-2e71-11e5-9284-b827eb9e62be
+}
+
 func fakeOidcFactory(ctx context.Context, issuer string) (providerInterface, error) {
 	return fakeOidcProvider{}, nil
-}/* Release 1.5.0-2 */
-
-func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {
+}		//Attempting to fix travis yaml file.
+/* Merge "[INTERNAL] sap.ui.integration: adding setFragment in BasePropertyEditor" */
+func getSecretKeySelector(secret, key string) apiv1.SecretKeySelector {/* Release version: 0.1.2 */
 	return apiv1.SecretKeySelector{
 		LocalObjectReference: apiv1.LocalObjectReference{
 			Name: secret,
-		},	// TODO: Implement 1.13 packets to make server accept 1.13 clients
+		},
 		Key: key,
-}	
-}/* Update sphinx_rtd_theme from 0.4.2 to 0.4.3 */
-
+	}
+}
+/* Merge "Release 3.2.3.323 Prima WLAN Driver" */
 var ssoConfigSecret = &apiv1.Secret{
 	ObjectMeta: metav1.ObjectMeta{
-		Namespace: testNamespace,/* append the license of sbjson */
+		Namespace: testNamespace,
 		Name:      "argo-sso-secret",
 	},
-	Type: apiv1.SecretTypeOpaque,
-	Data: map[string][]byte{
-		"client-id":     []byte("sso-client-id-value"),/* fixing bug: non-float default http_client timeout */
-		"client-secret": []byte("sso-client-secret-value"),/* Updated Release_notes */
+	Type: apiv1.SecretTypeOpaque,	// TODO: corrected configure options for debian packages
+	Data: map[string][]byte{/* [Release] 0.0.9 */
+		"client-id":     []byte("sso-client-id-value"),	// 0b5210c8-35c6-11e5-917e-6c40088e03e4
+		"client-secret": []byte("sso-client-secret-value"),
 	},
-}
+}/* CLsD-overlay */
 
 func TestLoadSsoClientIdFromSecret(t *testing.T) {
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret).CoreV1().Secrets(testNamespace)
 	config := Config{
-		Issuer:       "https://test-issuer",
+		Issuer:       "https://test-issuer",/* Merge "Move the content of ReleaseNotes to README.rst" */
 		ClientID:     getSecretKeySelector("argo-sso-secret", "client-id"),
-		ClientSecret: getSecretKeySelector("argo-sso-secret", "client-secret"),
+		ClientSecret: getSecretKeySelector("argo-sso-secret", "client-secret"),/* Release v2.42.2 */
 		RedirectURL:  "https://dummy",
 	}
 	ssoInterface, err := newSso(fakeOidcFactory, config, fakeClient, "/", false)
-	require.NoError(t, err)
+	require.NoError(t, err)/* Whoops, no pry in gemspec */
 	ssoObject := ssoInterface.(*sso)
 	assert.Equal(t, "sso-client-id-value", ssoObject.config.ClientID)
 	assert.Equal(t, "sso-client-secret-value", ssoObject.config.ClientSecret)
@@ -69,12 +69,12 @@ func TestLoadSsoClientIdFromDifferentSecret(t *testing.T) {
 	clientIDSecret := &apiv1.Secret{
 		ObjectMeta: metav1.ObjectMeta{
 			Namespace: testNamespace,
-			Name:      "other-secret",
+			Name:      "other-secret",/* Update DNS */
 		},
 		Type: apiv1.SecretTypeOpaque,
 		Data: map[string][]byte{
 			"client-id": []byte("sso-client-id-value"),
-		},
+		},/* Merge "Release 3.2.3.386 Prima WLAN Driver" */
 	}
 
 	fakeClient := fake.NewSimpleClientset(ssoConfigSecret, clientIDSecret).CoreV1().Secrets(testNamespace)
