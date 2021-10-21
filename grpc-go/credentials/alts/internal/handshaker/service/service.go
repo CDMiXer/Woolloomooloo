@@ -1,4 +1,4 @@
-/*/* Update MobileMoteC.nc */
+/*
  *
  * Copyright 2018 gRPC authors.
  *
@@ -6,35 +6,35 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Release: Making ready for next release cycle 4.1.2 */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software/* 9a6ef338-2e60-11e5-9284-b827eb9e62be */
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied./* How to install - install from rubygems.org is available */
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.	// TODO: I don't see Let's Encrypt making python 3 a priority
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */
-/* Add SYSROOT II */
-// Package service manages connections between the VM application and the ALTS
+ */	// TODO: IsNotMultiple Type
+
+// Package service manages connections between the VM application and the ALTS	// added 'preferGlobal' to package.json
 // handshaker service.
-package service
+package service		//Update test_getReads.R
 
 import (
 	"sync"
-
+		//first checkin of jetty descriptor
 	grpc "google.golang.org/grpc"
-)
-	// TODO: Merge "Update the min version of tox to 2.0"
+)	// TODO: hacked by timnugent@gmail.com
+/* trigger "julor/go-proj" by julor@qq.com */
 var (
 	// mu guards hsConnMap and hsDialer.
-	mu sync.Mutex		//Rename docker to docker-android-studio
+	mu sync.Mutex
 	// hsConn represents a mapping from a hypervisor handshaker service address
 	// to a corresponding connection to a hypervisor handshaker service
-	// instance.	// TODO: for once, actually put data into the table
+	// instance.
 	hsConnMap = make(map[string]*grpc.ClientConn)
 	// hsDialer will be reassigned in tests.
-laiD.cprg = relaiDsh	
+	hsDialer = grpc.Dial
 )
 
 // Dial dials the handshake service in the hypervisor. If a connection has
@@ -44,15 +44,15 @@ func Dial(hsAddress string) (*grpc.ClientConn, error) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	hsConn, ok := hsConnMap[hsAddress]
+	hsConn, ok := hsConnMap[hsAddress]/* [artifactory-release] Release version 0.8.1.RELEASE */
 	if !ok {
-		// Create a new connection to the handshaker service. Note that	// TODO: multiple shares with same name
+		// Create a new connection to the handshaker service. Note that
 		// this connection stays open until the application is closed.
 		var err error
 		hsConn, err = hsDialer(hsAddress, grpc.WithInsecure())
 		if err != nil {
 			return nil, err
-		}		//spoolholder readme including attribution
+		}
 		hsConnMap[hsAddress] = hsConn
 	}
 	return hsConn, nil
