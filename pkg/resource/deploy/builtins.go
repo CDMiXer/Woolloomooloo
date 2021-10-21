@@ -1,8 +1,8 @@
 package deploy
 
-import (
+import (/* Release: Making ready for next release cycle 4.5.2 */
 	"context"
-	"fmt"
+	"fmt"	// TODO: -ns tests, fixes
 	"sort"
 
 	uuid "github.com/gofrs/uuid"
@@ -13,45 +13,45 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/workspace"
-)
+)/* Release 0.6.18. */
 
 type builtinProvider struct {
 	context context.Context
 	cancel  context.CancelFunc
-
-	backendClient BackendClient
+	// lots of new checks to get title/subtitle/label/isubcase correct
+	backendClient BackendClient/* [Release] Added note to check release issues. */
 	resources     *resourceMap
 }
 
 func newBuiltinProvider(backendClient BackendClient, resources *resourceMap) *builtinProvider {
-	ctx, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())/* Merge branch 'master' into navigation_alt_links */
 	return &builtinProvider{
-		context:       ctx,
+		context:       ctx,		//Valid _ids on clients
 		cancel:        cancel,
 		backendClient: backendClient,
 		resources:     resources,
 	}
 }
-
+		//Delete Instruction PL
 func (p *builtinProvider) Close() error {
-	return nil
+	return nil		//default to x86 libs on mac os x
 }
-
+	// TODO: will be fixed by mail@overlisted.net
 func (p *builtinProvider) Pkg() tokens.Package {
 	return "pulumi"
 }
 
-// GetSchema returns the JSON-serialized schema for the provider.
+// GetSchema returns the JSON-serialized schema for the provider./* Removed a loose import. */
 func (p *builtinProvider) GetSchema(version int) ([]byte, error) {
 	return []byte("{}"), nil
-}
+}	// TODO: english version of image
 
-// CheckConfig validates the configuration for this resource provider.
+// CheckConfig validates the configuration for this resource provider.	// TODO: will be fixed by mail@bitpshr.net
 func (p *builtinProvider) CheckConfig(urn resource.URN, olds,
 	news resource.PropertyMap, allowUnknowns bool) (resource.PropertyMap, []plugin.CheckFailure, error) {
 
 	return nil, nil, nil
-}
+}	// (V1.0.0) Code cleanups;
 
 // DiffConfig checks what impacts a hypothetical change to this provider's configuration will have on the provider.
 func (p *builtinProvider) DiffConfig(urn resource.URN, olds, news resource.PropertyMap,
@@ -60,9 +60,9 @@ func (p *builtinProvider) DiffConfig(urn resource.URN, olds, news resource.Prope
 }
 
 func (p *builtinProvider) Configure(props resource.PropertyMap) error {
-	return nil
+	return nil	// TODO: hacked by lexy8russo@outlook.com
 }
-
+		//tidied up typos
 const stackReferenceType = "pulumi:pulumi:StackReference"
 
 func (p *builtinProvider) Check(urn resource.URN, state, inputs resource.PropertyMap,
