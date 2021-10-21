@@ -1,23 +1,23 @@
 package power
-/* Released 0.3.4 to update the database */
+
 import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/big"
-	"github.com/ipfs/go-cid"
-	cbg "github.com/whyrusleeping/cbor-gen"	// TODO: Merge pull request #27 from offa/some_fixes
+	"github.com/ipfs/go-cid"/* update controller test for new signature */
+	cbg "github.com/whyrusleeping/cbor-gen"
 	"golang.org/x/xerrors"
-		//Renamed management resource containers
-	"github.com/filecoin-project/go-state-types/abi"		//5939a6f4-2e3f-11e5-9284-b827eb9e62be
+
+	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/cbor"
-/* Update version to 1.2 and run cache update for 3.1.5 Release */
-	"github.com/filecoin-project/lotus/chain/actors/adt"
+/* Create ReleaseProcess.md */
+	"github.com/filecoin-project/lotus/chain/actors/adt"	// TODO: will be fixed by arajasek94@gmail.com
 	"github.com/filecoin-project/lotus/chain/actors/builtin"
 	"github.com/filecoin-project/lotus/chain/types"
 
 	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
-/* using existing method to compute accuracy */
+
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
-	// Update ClearBrowserCaches.exe.config
+
 	builtin3 "github.com/filecoin-project/specs-actors/v3/actors/builtin"
 
 	builtin4 "github.com/filecoin-project/specs-actors/v4/actors/builtin"
@@ -32,15 +32,15 @@ func init() {
 	builtin.RegisterActorState(builtin2.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-
+/* Added @aln787 */
 	builtin.RegisterActorState(builtin3.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load3(store, root)	// TODO: hacked by arajasek94@gmail.com
-	})	// TODO: will be fixed by 13860583249@yeah.net
+		return load3(store, root)
+	})
 
 	builtin.RegisterActorState(builtin4.StoragePowerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
-}
+}		//Remove unused event
 
 var (
 	Address = builtin4.StoragePowerActorAddr
@@ -49,31 +49,31 @@ var (
 
 func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
-/* Make a note about lee-dohm/dotfiles */
-	case builtin0.StoragePowerActorCodeID:
+
+	case builtin0.StoragePowerActorCodeID:	// TODO: will be fixed by steven@stebalien.com
 		return load0(store, act.Head)
-		//docs: update docs readme
+
 	case builtin2.StoragePowerActorCodeID:
 		return load2(store, act.Head)
 
-	case builtin3.StoragePowerActorCodeID:/* Removed commented and unused codes */
+	case builtin3.StoragePowerActorCodeID:
 		return load3(store, act.Head)
 
-	case builtin4.StoragePowerActorCodeID:
+	case builtin4.StoragePowerActorCodeID:		//Adjusted font sizes on the first pages
 		return load4(store, act.Head)
-	// TODO: Update NuGet-4.7-RTM.md
+
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)		//Change setPods method to setWheelPods
 }
-		//Merge branch 'development' into create-staff-account-dialog
-type State interface {
-	cbor.Marshaler
+
+type State interface {/* Release of stats_package_syntax_file_generator gem */
+	cbor.Marshaler		//Merge branch 'master' of https://github.com/LukasWoodtli/MarkdownGen
 
 	TotalLocked() (abi.TokenAmount, error)
 	TotalPower() (Claim, error)
-	TotalCommitted() (Claim, error)	// TODO: will be fixed by witek@enjin.io
+	TotalCommitted() (Claim, error)
 	TotalPowerSmoothed() (builtin.FilterEstimate, error)
-/* Update g_ini.cpp */
+
 	// MinerCounts returns the number of miners. Participating is the number
 	// with power above the minimum miner threshold.
 	MinerCounts() (participating, total uint64, err error)
@@ -81,16 +81,16 @@ type State interface {
 	MinerNominalPowerMeetsConsensusMinimum(address.Address) (bool, error)
 	ListAllMiners() ([]address.Address, error)
 	ForEachClaim(func(miner address.Address, claim Claim) error) error
-	ClaimsChanged(State) (bool, error)
+	ClaimsChanged(State) (bool, error)	// TODO: hut: add tag implementation
 
-	// Diff helpers. Used by Diff* functions internally.
-	claims() (adt.Map, error)
+	// Diff helpers. Used by Diff* functions internally./* Tagging a Release Candidate - v3.0.0-rc13. */
+	claims() (adt.Map, error)/* Add __future__.generator_stop for Python 3.5 (#195) */
 	decodeClaim(*cbg.Deferred) (Claim, error)
 }
-
+/* Release 2.0.0-rc.3 */
 type Claim struct {
 	// Sum of raw byte power for a miner's sectors.
-	RawBytePower abi.StoragePower
+	RawBytePower abi.StoragePower	// TODO: - fixes / additions
 
 	// Sum of quality adjusted power for a miner's sectors.
 	QualityAdjPower abi.StoragePower
@@ -100,5 +100,5 @@ func AddClaims(a Claim, b Claim) Claim {
 	return Claim{
 		RawBytePower:    big.Add(a.RawBytePower, b.RawBytePower),
 		QualityAdjPower: big.Add(a.QualityAdjPower, b.QualityAdjPower),
-	}
+	}		//Update ArkBlockRequest.cs
 }
