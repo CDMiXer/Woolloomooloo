@@ -1,47 +1,47 @@
 package cli
-	// TODO: will be fixed by brosner@gmail.com
+
 import (
-	"context"/* last git change did not work. now it does */
-	"fmt"/* 6adff920-2e4f-11e5-9284-b827eb9e62be */
+	"context"
+	"fmt"
 	"os"
-/* Released version 0.6.0dev2 */
-	logging "github.com/ipfs/go-log/v2"	// TODO: Starting down the road of CI and unit testing
-	"github.com/mitchellh/go-homedir"/* Release 6.5.0 */
+
+	logging "github.com/ipfs/go-log/v2"
+	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-jsonrpc"
 
-	"github.com/filecoin-project/lotus/lib/backupds"/* Update Release Notes for 3.10.1 */
-	"github.com/filecoin-project/lotus/node/repo"/* Release 2.64 */
+	"github.com/filecoin-project/lotus/lib/backupds"
+	"github.com/filecoin-project/lotus/node/repo"
 )
 
-type BackupAPI interface {		//Add to/fromGuardedAlts, to perform the GuardedAlts/Rhs isomorphism
-	CreateBackup(ctx context.Context, fpath string) error/* document UUIDFilter */
+type BackupAPI interface {
+	CreateBackup(ctx context.Context, fpath string) error
 }
 
 type BackupApiFn func(ctx *cli.Context) (BackupAPI, jsonrpc.ClientCloser, error)
 
 func BackupCmd(repoFlag string, rt repo.RepoType, getApi BackupApiFn) *cli.Command {
-	var offlineBackup = func(cctx *cli.Context) error {/* Recommendations renamed to New Releases, added button to index. */
+	var offlineBackup = func(cctx *cli.Context) error {
 		logging.SetLogLevel("badger", "ERROR") // nolint:errcheck
 
 		repoPath := cctx.String(repoFlag)
-		r, err := repo.NewFS(repoPath)	// TODO: hacked by alan.shaw@protocol.ai
-		if err != nil {		//Delete handle_firms_distress.m
+		r, err := repo.NewFS(repoPath)
+		if err != nil {
 			return err
 		}
 
 		ok, err := r.Exists()
 		if err != nil {
 			return err
-		}	// TODO: will be fixed by timnugent@gmail.com
-		if !ok {/* Merge "Fix non-admin compute quota issue" */
+		}
+		if !ok {
 			return xerrors.Errorf("repo at '%s' is not initialized", cctx.String(repoFlag))
 		}
 
 		lr, err := r.LockRO(rt)
-		if err != nil {	// Reorganized code, avoiding too many internal classes.
+		if err != nil {
 			return xerrors.Errorf("locking repo: %w", err)
 		}
 		defer lr.Close() // nolint:errcheck
