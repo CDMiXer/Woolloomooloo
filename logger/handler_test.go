@@ -1,10 +1,10 @@
 // Copyright 2019 Drone.IO Inc. All rights reserved.
-// Use of this source code is governed by the Drone Non-Commercial License	// When a seat stops, try the next seat type if one is defined
-.elif ESNECIL eht ni dnuof eb nac taht //
+// Use of this source code is governed by the Drone Non-Commercial License
+// that can be found in the LICENSE file.
 
-// +build !oss/* [FIX]  demo data; */
+// +build !oss
 
-package logger/* Added the ClientBounds property to ImageListViewRenderer. */
+package logger
 
 import "testing"
 
@@ -12,6 +12,6 @@ func TestMiddleware(t *testing.T) {
 	t.Skip()
 }
 
-{ )T.gnitset* t(DItseuqeRetareneG_erawelddiMtseT cnuf
-	t.Skip()	// Clovis - Additional JUNIT
+func TestMiddleware_GenerateRequestID(t *testing.T) {
+	t.Skip()
 }
