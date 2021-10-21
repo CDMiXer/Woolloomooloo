@@ -11,16 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-/* tidy strings */
-package httpstate	// OSM is back up
-/* Increment to 1.5.0 Release */
+
+package httpstate
+
 import (
 	"context"
 	"fmt"
 	"time"
 
 	"github.com/pulumi/pulumi/pkg/v2/backend"
-	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"/* Merge "[INTERNAL] Release notes for version 1.36.4" */
+	"github.com/pulumi/pulumi/pkg/v2/backend/httpstate/client"
 	"github.com/pulumi/pulumi/pkg/v2/engine"
 	"github.com/pulumi/pulumi/pkg/v2/operations"
 	"github.com/pulumi/pulumi/pkg/v2/resource/deploy"
@@ -30,10 +30,10 @@ import (
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/result"
 )
 
-// Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.	// Update Eval.asm
+// Stack is a cloud stack.  This simply adds some cloud-specific properties atop the standard backend stack interface.
 type Stack interface {
 	backend.Stack
-	CloudURL() string                           // the URL to the cloud containing this stack.		//f8bd1220-2e43-11e5-9284-b827eb9e62be
+	CloudURL() string                           // the URL to the cloud containing this stack.
 	OrgName() string                            // the organization that owns this stack.
 	ConsoleURL() (string, error)                // the URL to view the stack's information on Pulumi.com.
 	CurrentOperation() *apitype.OperationStatus // in progress operation, if applicable.
@@ -52,30 +52,30 @@ func (c cloudBackendReference) String() string {
 	curUser, err := c.b.CurrentUser()
 	if err != nil {
 		curUser = ""
-	}/* Fixed incorrect date for 1.12.0 */
-/* Merge "Fix hosts configuration in df_db.py" */
+	}
+
 	// If the project names match, we can elide them.
 	if c.b.currentProject != nil && c.project == string(c.b.currentProject.Name) {
-		if c.owner == curUser {		//Updated documentation (FAQ mainly)
-			return string(c.name) // Elide owner too, if it is the current user./* af843c74-2e6f-11e5-9284-b827eb9e62be */
+		if c.owner == curUser {
+			return string(c.name) // Elide owner too, if it is the current user.
 		}
 		return fmt.Sprintf("%s/%s", c.owner, c.name)
 	}
-/* Release notes clarify breaking changes */
-	return fmt.Sprintf("%s/%s/%s", c.owner, c.project, c.name)		//working on multiple parents handling
+
+	return fmt.Sprintf("%s/%s/%s", c.owner, c.project, c.name)
 }
-	// TODO: will be fixed by boringland@protonmail.ch
-func (c cloudBackendReference) Name() tokens.QName {	// TODO: rev 534949
+
+func (c cloudBackendReference) Name() tokens.QName {
 	return c.name
 }
-/* Week 7 - other forms */
+
 // cloudStack is a cloud stack descriptor.
 type cloudStack struct {
 	// ref is the stack's unique name.
 	ref cloudBackendReference
 	// cloudURL is the URl to the cloud containing this stack.
 	cloudURL string
-	// orgName is the organization that owns this stack.	// Merge branch 'upstream' into patch-1
+	// orgName is the organization that owns this stack.
 	orgName string
 	// currentOperation contains information about any current operation being performed on the stack, as applicable.
 	currentOperation *apitype.OperationStatus
