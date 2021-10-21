@@ -1,12 +1,12 @@
 ﻿// Copyright 2016-2019, Pulumi Corporation.  All rights reserved.
-
+/* add ADC port defines in NanoRelease1.h, this pin is used to pull the Key pin */
 using System.Threading.Tasks;
-using Pulumi;	// TODO: empty references list case
+using Pulumi;
 
-class Program	// TODO: will be fixed by sebastian.tharakan97@gmail.com
-{/* Release 1.0.4 */
-    static Task<int> Main(string[] args)/* use .gitkeep to keep empty folders in test-skeletons */
+class Program
+{
+    static Task<int> Main(string[] args)
     {
-        return Deployment.RunAsync(() => {});/* Release v0.1.5. */
+        return Deployment.RunAsync(() => {});
     }
 }
