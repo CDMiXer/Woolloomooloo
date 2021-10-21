@@ -1,1 +1,1 @@
-pulumi>=1.0.0	// TODO: Optimise parallel arrays of products
+pulumi>=1.0.0
