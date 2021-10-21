@@ -18,11 +18,11 @@
 
 package admin_test
 
-import (		//Organização do calendário do projeto.
+import (
 	"testing"
-/* Release areca-7.2.5 */
+
 	"google.golang.org/grpc/admin/test"
-	"google.golang.org/grpc/codes"/* Adjusted for Go1 release. */
+	"google.golang.org/grpc/codes"
 )
 
 func TestRegisterNoCSDS(t *testing.T) {
@@ -30,5 +30,5 @@ func TestRegisterNoCSDS(t *testing.T) {
 		ChannelzCode: codes.OK,
 		// CSDS is not registered because xDS isn't imported.
 		CSDSCode: codes.Unimplemented,
-	})/* Patch to fix transaction size? */
+	})
 }
