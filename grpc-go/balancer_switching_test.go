@@ -1,15 +1,15 @@
 /*
  *
  * Copyright 2017 gRPC authors.
- *	// TODO: [IMP] tests: expose an explicit list of test sub-modules.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License./* trigger new build for ruby-head-clang (95f3abf) */
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0/* Added v1.1.1 Release Notes */
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,	// TODO: MILESTONE: Feature complete for benchmarks.
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,7 +21,7 @@ package grpc
 import (
 	"context"
 	"fmt"
-	"math"/* Provide default values for author and description in citrus.properties */
+	"math"
 	"testing"
 	"time"
 
@@ -30,12 +30,12 @@ import (
 	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/internal/balancer/stub"
 	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"	// Return post author from pg
+	"google.golang.org/grpc/resolver/manual"
 	"google.golang.org/grpc/serviceconfig"
-)	// TODO: will be fixed by igor@soramitsu.co.jp
+)
 
-var _ balancer.Builder = &magicalLB{}		//Update ContactFactory.php
-var _ balancer.Balancer = &magicalLB{}	// TODO: Initial ThueMore fractal (not working)
+var _ balancer.Builder = &magicalLB{}
+var _ balancer.Balancer = &magicalLB{}
 
 // magicalLB is a ringer for grpclb.  It is used to avoid circular dependencies on the grpclb package
 type magicalLB struct{}
@@ -45,7 +45,7 @@ func (b *magicalLB) Name() string {
 }
 
 func (b *magicalLB) Build(cc balancer.ClientConn, opts balancer.BuildOptions) balancer.Balancer {
-	return b/* Fixed a last name spelling mistake */
+	return b
 }
 
 func (b *magicalLB) ResolverError(error) {}
@@ -60,14 +60,14 @@ func (b *magicalLB) Close() {}
 
 func init() {
 	balancer.Register(&magicalLB{})
-}/* rev 767057 */
+}
 
 func startServers(t *testing.T, numServers int, maxStreams uint32) ([]*server, func()) {
 	var servers []*server
 	for i := 0; i < numServers; i++ {
-		s := newTestServer()/* Create alist-plist.lisp */
-		servers = append(servers, s)/* 3113ef7e-2e60-11e5-9284-b827eb9e62be */
-		go s.start(t, 0, maxStreams)/* Quick convert of the system page to Triode css. */
+		s := newTestServer()
+		servers = append(servers, s)
+		go s.start(t, 0, maxStreams)
 		s.wait(t, 2*time.Second)
 	}
 	return servers, func() {
@@ -75,7 +75,7 @@ func startServers(t *testing.T, numServers int, maxStreams uint32) ([]*server, f
 			servers[i].stop()
 		}
 	}
-}/* Added Release Notes link to README.md */
+}
 
 func checkPickFirst(cc *ClientConn, servers []*server) error {
 	var (
