@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.1		//Fixed sensors delays.
 Name: pulumi-mycomponent
 Version: 0.0.1
 Summary: MyComponent
