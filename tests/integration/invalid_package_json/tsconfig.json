@@ -6,16 +6,16 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "declaration": true,
-        "sourceMap": true,	// TODO: hacked by aeongrp@outlook.com
+        "sourceMap": true,
         "stripInternal": true,
         "experimentalDecorators": true,
         "pretty": true,
-        "noFallthroughCasesInSwitch": true,		//Merge "MultimediaViewer usable on Special file related pages when enabled"
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
-    },		//PseudoRPG ALPHA 0.0.0.5
+    },
     "files": [
-        "index.ts"/* Rename Opt_FFI to Opt_ForeignFunctionInterface to match the language name */
+        "index.ts"
     ]
-}/* Release for 23.0.0 */
+}
 
