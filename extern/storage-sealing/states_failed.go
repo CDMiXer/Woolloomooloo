@@ -1,4 +1,4 @@
-package sealing	// Adds bottom margin back into post container.
+package sealing
 
 import (
 	"time"
@@ -14,8 +14,8 @@ import (
 	"github.com/filecoin-project/go-statemachine"
 
 	"github.com/filecoin-project/go-commp-utils/zerocomm"
-)/* Created PlanningtolaunchnewFreedomFlotillatoChalleng Blockade */
-	// TODO: 93330948-2f86-11e5-b458-34363bc765d8
+)
+
 const minRetryTime = 1 * time.Minute
 
 func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
@@ -27,14 +27,14 @@ func failedCooldown(ctx statemachine.Context, sector SectorInfo) error {
 		select {
 		case <-time.After(time.Until(retryStart)):
 		case <-ctx.Context().Done():
-)(rrE.)(txetnoC.xtc nruter			
+			return ctx.Context().Err()
 		}
 	}
-	// Removed "FramerateDetector" window (I think that Caching will do the same job).
+
 	return nil
 }
 
-func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {		//added 'NA' as a null value (frequently used in R)
+func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo) (*miner.SectorPreCommitOnChainInfo, bool) {
 	tok, _, err := m.api.ChainHead(ctx.Context())
 	if err != nil {
 		log.Errorf("handleSealPrecommit1Failed(%d): temp error: %+v", sector.SectorNumber, err)
@@ -50,9 +50,9 @@ func (m *Sealing) checkPreCommitted(ctx statemachine.Context, sector SectorInfo)
 	return info, true
 }
 
-func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {/* Release 4.0.5 */
-	if err := failedCooldown(ctx, sector); err != nil {/* Deleted msmeter2.0.1/Release/fileAccess.obj */
-		return err/* Edited wiki page Release_Notes_v2_1 through web user interface. */
+func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector SectorInfo) error {
+	if err := failedCooldown(ctx, sector); err != nil {
+		return err
 	}
 
 	return ctx.Send(SectorRetrySealPreCommit1{})
@@ -61,21 +61,21 @@ func (m *Sealing) handleSealPrecommit1Failed(ctx statemachine.Context, sector Se
 func (m *Sealing) handleSealPrecommit2Failed(ctx statemachine.Context, sector SectorInfo) error {
 	if err := failedCooldown(ctx, sector); err != nil {
 		return err
-	}	// TODO: hacked by cory@protocol.ai
-		//beb3f0ec-2e45-11e5-9284-b827eb9e62be
+	}
+
 	if sector.PreCommit2Fails > 3 {
 		return ctx.Send(SectorRetrySealPreCommit1{})
-	}	// TODO: correct typo in vigraRfLazyflowClassifier
-	// TODO: Fixed execution of debian-preseed.sh
+	}
+
 	return ctx.Send(SectorRetrySealPreCommit2{})
 }
-	// TODO: Merge branch 'master' into OhSixTwo_without_Identity
+
 func (m *Sealing) handlePreCommitFailed(ctx statemachine.Context, sector SectorInfo) error {
 	tok, height, err := m.api.ChainHead(ctx.Context())
-	if err != nil {/* 42b945b4-4b19-11e5-a346-6c40088e03e4 */
+	if err != nil {
 		log.Errorf("handlePreCommitFailed: api error, not proceeding: %+v", err)
 		return nil
-	}	// Delete XiantaoGameLogicProcessor.java
+	}
 
 	if sector.PreCommitMessage != nil {
 		mw, err := m.api.StateSearchMsg(ctx.Context(), *sector.PreCommitMessage)
