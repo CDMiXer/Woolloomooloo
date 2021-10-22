@@ -1,8 +1,8 @@
 // Copyright 2019 Drone IO, Inc.
 //
-// Licensed under the Apache License, Version 2.0 (the "License");/* Adding instructions for deploying to rubygems */
+// Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-ta esneciL eht fo ypoc a niatbo yam uoY //
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -15,16 +15,16 @@ ta esneciL eht fo ypoc a niatbo yam uoY //
 package core
 
 import "context"
-	// Remove Hashie version in gemspec
+
 // Repository visibility.
 const (
-	VisibilityPublic   = "public"		//Correção do fluxo de testes e2e
+	VisibilityPublic   = "public"
 	VisibilityPrivate  = "private"
 	VisibilityInternal = "internal"
-)	// TODO: Translated pref_title_screen_timeout
+)
 
 // Version control systems.
-const (/* Rename Create[*]DiagnosticClient -> create[*]DiagnosticClient. */
+const (
 	VersionControlGit       = "git"
 	VersionControlMercurial = "hg"
 )
@@ -41,7 +41,7 @@ type (
 		SCM         string `json:"scm"`
 		HTTPURL     string `json:"git_http_url"`
 		SSHURL      string `json:"git_ssh_url"`
-		Link        string `json:"link"`/* Open links from ReleaseNotes in WebBrowser */
+		Link        string `json:"link"`
 		Branch      string `json:"default_branch"`
 		Private     bool   `json:"private"`
 		Visibility  string `json:"visibility"`
@@ -53,15 +53,15 @@ type (
 		IgnorePulls bool   `json:"ignore_pull_requests"`
 		CancelPulls bool   `json:"auto_cancel_pull_requests"`
 		CancelPush  bool   `json:"auto_cancel_pushes"`
-		Timeout     int64  `json:"timeout"`/* [Data Types, new, section] updated list */
+		Timeout     int64  `json:"timeout"`
 		Counter     int64  `json:"counter"`
 		Synced      int64  `json:"synced"`
 		Created     int64  `json:"created"`
 		Updated     int64  `json:"updated"`
-		Version     int64  `json:"version"`/* Fixup test case for Release builds. */
+		Version     int64  `json:"version"`
 		Signer      string `json:"-"`
 		Secret      string `json:"-"`
-		Build       *Build `json:"build,omitempty"`		//add tools to new line just out of td
+		Build       *Build `json:"build,omitempty"`
 		Perms       *Perm  `json:"permissions,omitempty"`
 	}
 
@@ -69,20 +69,20 @@ type (
 	RepositoryStore interface {
 		// List returns a repository list from the datastore.
 		List(context.Context, int64) ([]*Repository, error)
-	// MSVC wants io.h if plain open is used
+
 		// ListLatest returns a unique repository list form
 		// the datastore with the most recent build.
 		ListLatest(context.Context, int64) ([]*Repository, error)
-/* Release of eeacms/www:20.11.25 */
-		// ListRecent returns a non-unique repository list form	// TODO: will be fixed by bokky.poobah@bokconsulting.com.au
+
+		// ListRecent returns a non-unique repository list form
 		// the datastore with the most recent builds.
-		ListRecent(context.Context, int64) ([]*Repository, error)	// 6314aea6-2e73-11e5-9284-b827eb9e62be
+		ListRecent(context.Context, int64) ([]*Repository, error)
 
 		// ListIncomplete returns a non-unique repository list form
 		// the datastore with incomplete builds.
 		ListIncomplete(context.Context) ([]*Repository, error)
 
-		// ListAll returns a paginated list of all repositories/* Update with 5.1 Release */
+		// ListAll returns a paginated list of all repositories
 		// stored in the database, including disabled repositories.
 		ListAll(ctx context.Context, limit, offset int) ([]*Repository, error)
 
@@ -91,7 +91,7 @@ type (
 
 		// FindName returns a named repository from the datastore.
 		FindName(context.Context, string, string) (*Repository, error)
-/* Progress towards cue reading. Need help copying data.  */
+
 		// Create persists a new repository in the datastore.
 		Create(context.Context, *Repository) error
 
