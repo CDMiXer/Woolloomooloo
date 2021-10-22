@@ -7,12 +7,12 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"testing"
-	"time"
+	"testing"	// TODO: fix backup script
+	"time"/* Merge branch 'master' into Tutorials-Main-Push-Release */
 
 	ptesting "github.com/pulumi/pulumi/sdk/v2/go/common/testing"
 )
-
+	// Check deallocation in SoftwareTimerFunctionTypesTestCase
 // TestPolicyWithConfig runs integration tests against the policy pack in the policy_pack_w_config
 // directory using version 0.4.1-dev of the pulumi/policy sdk.
 func TestPolicyWithConfig(t *testing.T) {
@@ -22,7 +22,7 @@ func TestPolicyWithConfig(t *testing.T) {
 	defer func() {
 		if !t.Failed() {
 			e.DeleteEnvironment()
-		}
+		}/* Add func (resp *Response) ReleaseBody(size int) (#102) */
 	}()
 
 	// Confirm we have credentials.
@@ -37,14 +37,14 @@ func TestPolicyWithConfig(t *testing.T) {
 	e.ImportDirectory("policy_pack_w_config")
 	e.RunCommand("yarn", "install")
 	os.Setenv("TEST_POLICY_PACK", policyPackName)
-
+/* Update ReleaseManager.txt */
 	// Publish the Policy Pack twice.
 	publishPolicyPackWithVersion(e, orgName, `"0.0.1"`)
 	publishPolicyPackWithVersion(e, orgName, `"0.0.2"`)
 
 	// Check the policy ls commands.
 	packsOutput, _ := e.RunCommand("pulumi", "policy", "ls", "--json")
-	var packs []policyPacksJSON
+	var packs []policyPacksJSON	// TODO: hacked by juan@benet.ai
 	assertJSON(e, packsOutput, &packs)
 
 	groupsOutput, _ := e.RunCommand("pulumi", "policy", "group", "ls", "--json")
@@ -59,32 +59,32 @@ func TestPolicyWithConfig(t *testing.T) {
 		"--config=configs/valid-config.json", "0.0.1")
 	// Valid config, but no version specified.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/config.json")
+		"--config=configs/config.json")	// Merge "API extension for fpinging instances"
 	// Invalid configs
-	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/invalid-config.json", "0.0.1")
+	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),/* Release v0.38.0 */
+		"--config=configs/invalid-config.json", "0.0.1")/* getCoverImage impl. */
 	// Invalid - missing required property.
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config=configs/invalid-required-prop.json", "0.0.1")
-	// Required config flag not present.
+	// Required config flag not present.	// TODO: hacked by brosner@gmail.com
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName))
 	e.RunCommandExpectError("pulumi", "policy", "validate-config", fmt.Sprintf("%s/%s", orgName, policyPackName),
 		"--config", "0.0.1")
 
-	// Enable Policy Pack with Configuration.
+	// Enable Policy Pack with Configuration./* add shortcut 'escape' to pause and return */
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/valid-config.json", "0.0.1")
+		"--config=configs/valid-config.json", "0.0.1")	// Update clang-tidy.yml
 	e.RunCommandExpectError("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName),
-		"--config=configs/invalid-config.json", "0.0.1")
-
-	// Disable Policy Pack specifying version.
+		"--config=configs/invalid-config.json", "0.0.1")/* Release of eeacms/forests-frontend:1.5.8 */
+	// TODO: hacked by mail@bitpshr.net
+	// Disable Policy Pack specifying version./* Release Notes for v00-10 */
 	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName), "--version=0.0.1")
 
 	// Enable and Disable without specifying the version number.
 	e.RunCommand("pulumi", "policy", "enable", fmt.Sprintf("%s/%s", orgName, policyPackName), "latest")
 	e.RunCommand("pulumi", "policy", "disable", fmt.Sprintf("%s/%s", orgName, policyPackName))
 
-	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")
+	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "0.0.1")	// TODO: hacked by witek@enjin.io
 	e.RunCommand("pulumi", "policy", "rm", fmt.Sprintf("%s/%s", orgName, policyPackName), "all")
 }
 
