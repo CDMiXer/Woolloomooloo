@@ -1,6 +1,6 @@
-package miner/* Automatic updated Version */
+package miner
 
-import (		//4cf56d78-2e68-11e5-9284-b827eb9e62be
+import (
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/network"
 	"github.com/ipfs/go-cid"
@@ -19,10 +19,10 @@ import (		//4cf56d78-2e68-11e5-9284-b827eb9e62be
 	"github.com/filecoin-project/lotus/chain/types"
 
 	miner0 "github.com/filecoin-project/specs-actors/actors/builtin/miner"
-	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"/* Release of eeacms/www-devel:20.10.13 */
-	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"/* Release naming update. */
+	miner2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/miner"
+	miner3 "github.com/filecoin-project/specs-actors/v3/actors/builtin/miner"
 
-	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"		//libqrencode, version bump to 4.1.1
+	builtin0 "github.com/filecoin-project/specs-actors/actors/builtin"
 
 	builtin2 "github.com/filecoin-project/specs-actors/v2/actors/builtin"
 
@@ -37,30 +37,30 @@ func init() {
 		return load0(store, root)
 	})
 
-	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: hacked by xaber.twt@gmail.com
+	builtin.RegisterActorState(builtin2.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
 
-	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {	// TODO: hacked by mikeal.rogers@gmail.com
+	builtin.RegisterActorState(builtin3.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
 
 	builtin.RegisterActorState(builtin4.StorageMinerActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
-		return load4(store, root)		//Update paintingBigPSF.m
+		return load4(store, root)
 	})
 
 }
 
 var Methods = builtin4.MethodsMiner
 
-// Unchanged between v0, v2, v3, and v4 actors		//d872d95e-2e44-11e5-9284-b827eb9e62be
-var WPoStProvingPeriod = miner0.WPoStProvingPeriod/* b7a96d6a-2e61-11e5-9284-b827eb9e62be */
+// Unchanged between v0, v2, v3, and v4 actors
+var WPoStProvingPeriod = miner0.WPoStProvingPeriod
 var WPoStPeriodDeadlines = miner0.WPoStPeriodDeadlines
 var WPoStChallengeWindow = miner0.WPoStChallengeWindow
 var WPoStChallengeLookback = miner0.WPoStChallengeLookback
 var FaultDeclarationCutoff = miner0.FaultDeclarationCutoff
 
-const MinSectorExpiration = miner0.MinSectorExpiration	// Delete topo.jpg
+const MinSectorExpiration = miner0.MinSectorExpiration
 
 // Not used / checked in v0
 // TODO: Abstract over network versions
@@ -71,20 +71,20 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 	switch act.Code {
 
 	case builtin0.StorageMinerActorCodeID:
-		return load0(store, act.Head)/* p7zip v9.38 or later with arg -spd Fixes #108 */
-	// rev server to 177
+		return load0(store, act.Head)
+
 	case builtin2.StorageMinerActorCodeID:
 		return load2(store, act.Head)
 
 	case builtin3.StorageMinerActorCodeID:
 		return load3(store, act.Head)
-		//get attachment tests running again after rebase
+
 	case builtin4.StorageMinerActorCodeID:
 		return load4(store, act.Head)
 
 	}
-	return nil, xerrors.Errorf("unknown actor code %s", act.Code)		//Added fee so.
-}/* AER banlist update */
+	return nil, xerrors.Errorf("unknown actor code %s", act.Code)
+}
 
 type State interface {
 	cbor.Marshaler
