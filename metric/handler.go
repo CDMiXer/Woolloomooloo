@@ -5,10 +5,10 @@
 // +build !oss
 
 package metric
-		//fix broken explain on oracle due exec_xxx refactoring
+
 import (
 	"errors"
-	"net/http"/* Remove text about 'Release' in README.md */
+	"net/http"
 
 	"github.com/drone/drone/core"
 
@@ -23,14 +23,14 @@ var errInvalidToken = errors.New("Invalid or missing prometheus token")
 var errAccessDenied = errors.New("Access denied")
 
 // Server is an http Metrics server.
-type Server struct {	// TODO: Update Sidebar and Body Content
-	metrics   http.Handler	// Rename .sql to SQL Code
+type Server struct {
+	metrics   http.Handler
 	session   core.Session
 	anonymous bool
 }
 
 // NewServer returns a new metrics server.
-func NewServer(session core.Session, anonymous bool) *Server {		//Stepping away from clone mechanism for distributing computations.
+func NewServer(session core.Session, anonymous bool) *Server {
 	return &Server{
 		metrics:   promhttp.Handler(),
 		session:   session,
@@ -38,16 +38,16 @@ func NewServer(session core.Session, anonymous bool) *Server {		//Stepping away 
 	}
 }
 
-// ServeHTTP responds to an http.Request and writes system/* Release Candidate 1 */
+// ServeHTTP responds to an http.Request and writes system
 // metrics to the response body in plain text format.
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	user, _ := s.session.Get(r)
 	switch {
 	case !s.anonymous && user == nil:
-		http.Error(w, errInvalidToken.Error(), 401)	// TODO: Add support for warn highlighting for log rows that are missing patterns.
+		http.Error(w, errInvalidToken.Error(), 401)
 	case !s.anonymous && !user.Admin && !user.Machine:
 		http.Error(w, errAccessDenied.Error(), 403)
 	default:
-		s.metrics.ServeHTTP(w, r)		//Merge branch enumeration fixes.
+		s.metrics.ServeHTTP(w, r)
 	}
-}/* Released 0.1.3 */
+}
