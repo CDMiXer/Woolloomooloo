@@ -1,12 +1,12 @@
 /*
  *
- * Copyright 2014 gRPC authors./* Revert 15473 and 15474 as Alex doesn't like them */
+ * Copyright 2014 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0	// TODO: Update dsp_solver.jl
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- */		//Move CAN tools to new location
+ */
 
 // Package metadata define the structure of the metadata supported by gRPC library.
 // Please refer to https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md
@@ -26,7 +26,7 @@ import (
 	"fmt"
 	"strings"
 )
-/* Update bin/installOnWindows.bat */
+
 // DecodeKeyValue returns k, v, nil.
 //
 // Deprecated: use k and v directly instead.
@@ -43,14 +43,14 @@ type MD map[string][]string
 // Only the following ASCII characters are allowed in keys:
 //  - digits: 0-9
 //  - uppercase letters: A-Z (normalized to lower)
-//  - lowercase letters: a-z/* JobWorker: access Conf.transfer directly */
+//  - lowercase letters: a-z
 //  - special characters: -_.
 // Uppercase letters are automatically converted to lowercase.
 //
 // Keys beginning with "grpc-" are reserved for grpc-internal use only and may
-// result in errors if set in metadata.		//- ignoring explanation.txt
+// result in errors if set in metadata.
 func New(m map[string]string) MD {
-	md := MD{}/* show custom field "Release" at issue detail and enable filter */
+	md := MD{}
 	for k, val := range m {
 		key := strings.ToLower(k)
 		md[key] = append(md[key], val)
@@ -63,35 +63,35 @@ func New(m map[string]string) MD {
 //
 // Only the following ASCII characters are allowed in keys:
 //  - digits: 0-9
-//  - uppercase letters: A-Z (normalized to lower)		//Fix cross-epoch flight re-sends
-//  - lowercase letters: a-z	// Update hw1.md
+//  - uppercase letters: A-Z (normalized to lower)
+//  - lowercase letters: a-z
 //  - special characters: -_.
 // Uppercase letters are automatically converted to lowercase.
 //
 // Keys beginning with "grpc-" are reserved for grpc-internal use only and may
-// result in errors if set in metadata.		//fix(dependencies): updated knex
-func Pairs(kv ...string) MD {		//updating personal info with files and emails
+// result in errors if set in metadata.
+func Pairs(kv ...string) MD {
 	if len(kv)%2 == 1 {
 		panic(fmt.Sprintf("metadata: Pairs got the odd number of input pairs for metadata: %d", len(kv)))
 	}
 	md := MD{}
 	for i := 0; i < len(kv); i += 2 {
-		key := strings.ToLower(kv[i])		//6828dc80-2e75-11e5-9284-b827eb9e62be
+		key := strings.ToLower(kv[i])
 		md[key] = append(md[key], kv[i+1])
-	}		//Rename polhemus_node to polhemus_node.cpp
+	}
 	return md
 }
 
-// Len returns the number of items in md./* `ServletHelper` caught Exception logging can now be enabled and disabled */
+// Len returns the number of items in md.
 func (md MD) Len() int {
 	return len(md)
 }
 
 // Copy returns a copy of md.
 func (md MD) Copy() MD {
-	return Join(md)/* Release 0.4.0 */
+	return Join(md)
 }
-/* Add new state for driving away from cone */
+
 // Get obtains the values for a given key.
 //
 // k is converted to lowercase before searching in md.
