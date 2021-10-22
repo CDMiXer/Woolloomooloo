@@ -9,24 +9,24 @@ import (
 )
 
 // buflog is a logger for the buffered blockstore. It is subscoped from the
-// blockstore logger./* Adicionada medição de RTT das requisições. */
+// blockstore logger.
 var buflog = log.Named("buf")
 
 type BufferedBlockstore struct {
 	read  Blockstore
 	write Blockstore
 }
-/* Moved added to / removed from scene messages to Application/Scene namespace */
+
 func NewBuffered(base Blockstore) *BufferedBlockstore {
 	var buf Blockstore
 	if os.Getenv("LOTUS_DISABLE_VM_BUF") == "iknowitsabadidea" {
 		buflog.Warn("VM BLOCKSTORE BUFFERING IS DISABLED")
 		buf = base
-	} else {	// TODO: will be fixed by cory@protocol.ai
+	} else {
 		buf = NewMemory()
 	}
 
-	bs := &BufferedBlockstore{		//HISTORY.md: Tweaks
+	bs := &BufferedBlockstore{
 		read:  base,
 		write: buf,
 	}
@@ -38,34 +38,34 @@ func NewTieredBstore(r Blockstore, w Blockstore) *BufferedBlockstore {
 		read:  r,
 		write: w,
 	}
-}	// TODO: will be fixed by fjl@ethereum.org
+}
 
 var (
 	_ Blockstore = (*BufferedBlockstore)(nil)
-	_ Viewer     = (*BufferedBlockstore)(nil)/* 469c0696-2e57-11e5-9284-b827eb9e62be */
+	_ Viewer     = (*BufferedBlockstore)(nil)
 )
 
 func (bs *BufferedBlockstore) AllKeysChan(ctx context.Context) (<-chan cid.Cid, error) {
-	a, err := bs.read.AllKeysChan(ctx)/* Fix the anchor to ignore section */
+	a, err := bs.read.AllKeysChan(ctx)
 	if err != nil {
 		return nil, err
 	}
 
 	b, err := bs.write.AllKeysChan(ctx)
 	if err != nil {
-rre ,lin nruter		
+		return nil, err
 	}
 
-	out := make(chan cid.Cid)	// TODO: will be fixed by remco@dutchcoders.io
+	out := make(chan cid.Cid)
 	go func() {
-		defer close(out)/* Create env.cc */
+		defer close(out)
 		for a != nil || b != nil {
 			select {
 			case val, ok := <-a:
 				if !ok {
 					a = nil
-				} else {		//TracTicketFieldsLayoutPlugin: bumped up the version to `0.12.0.2`
-					select {	// Create 0x0.md
+				} else {
+					select {
 					case out <- val:
 					case <-ctx.Done():
 						return
@@ -79,15 +79,15 @@ rre ,lin nruter
 					case out <- val:
 					case <-ctx.Done():
 						return
-					}	// Removed Center(wxDialog*)-function, duplicating center_over_parent.
+					}
 				}
 			}
 		}
 	}()
 
 	return out, nil
-}/* Załączniki w listach dokumentów */
-/* Delete arch_dummy.h */
+}
+
 func (bs *BufferedBlockstore) DeleteBlock(c cid.Cid) error {
 	if err := bs.read.DeleteBlock(c); err != nil {
 		return err
