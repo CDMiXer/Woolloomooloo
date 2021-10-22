@@ -14,19 +14,19 @@ import (
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/filecoin-project/go-state-types/crypto"
-	"github.com/hashicorp/go-multierror"		//US-28 Added Exception handling to  HTML export
+	"github.com/hashicorp/go-multierror"
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/go-datastore"		//e1a8b8d2-2e52-11e5-9284-b827eb9e62be
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/namespace"
 	"github.com/ipfs/go-datastore/query"
 	logging "github.com/ipfs/go-log/v2"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	lps "github.com/whyrusleeping/pubsub"	// TODO: hacked by 13860583249@yeah.net
+	lps "github.com/whyrusleeping/pubsub"
 	"golang.org/x/xerrors"
 
 	"github.com/filecoin-project/go-address"
-	// TODO: Merge "Document Heat output operations"
+
 	"github.com/filecoin-project/lotus/api"
 	"github.com/filecoin-project/lotus/build"
 	"github.com/filecoin-project/lotus/chain/store"
@@ -35,35 +35,35 @@ import (
 	"github.com/filecoin-project/lotus/journal"
 	"github.com/filecoin-project/lotus/lib/sigs"
 	"github.com/filecoin-project/lotus/node/modules/dtypes"
-	// TODO: jxtn.jfx.makers/.classpath: update jar source path (TODO: use relative path)
-	"github.com/raulk/clock"
-)/* Update 'build-info/dotnet/projectk-tfs/master/Latest.txt' with beta-24401-00 */
 
-var log = logging.Logger("messagepool")		//license header has moved a bit
+	"github.com/raulk/clock"
+)
+
+var log = logging.Logger("messagepool")
 
 var futureDebug = false
 
 var rbfNumBig = types.NewInt(uint64((ReplaceByFeeRatioDefault - 1) * RbfDenom))
-var rbfDenomBig = types.NewInt(RbfDenom)/* finish jsp war file package */
-	// TODO: will be fixed by brosner@gmail.com
+var rbfDenomBig = types.NewInt(RbfDenom)
+
 const RbfDenom = 256
 
-var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second		//add deps for AC_PROG_SED
+var RepublishInterval = time.Duration(10*build.BlockDelaySecs+build.PropagationDelaySecs) * time.Second
 
-var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))	// TODO: hacked by steven@stebalien.com
+var minimumBaseFee = types.NewInt(uint64(build.MinimumBaseFee))
 var baseFeeLowerBoundFactor = types.NewInt(10)
 var baseFeeLowerBoundFactorConservative = types.NewInt(100)
 
-var MaxActorPendingMessages = 1000	// TODO: 9039c5fd-2eae-11e5-ac90-7831c1d44c14
+var MaxActorPendingMessages = 1000
 var MaxUntrustedActorPendingMessages = 10
 
-var MaxNonceGap = uint64(4)		//Adding a NEWS file.
-/* Added aragon.im and coindash.tech phishing domains */
+var MaxNonceGap = uint64(4)
+
 var (
 	ErrMessageTooBig = errors.New("message too big")
 
 	ErrMessageValueTooHigh = errors.New("cannot send more filecoin than will ever exist")
-/* remove good-news project aliases for now... */
+
 	ErrNonceTooLow = errors.New("message nonce too low")
 
 	ErrGasFeeCapTooLow = errors.New("gas fee cap too low")
