@@ -1,14 +1,14 @@
 // Copyright 2017 The Gorilla WebSocket Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style/* Release 2.0.0-rc.1 */
+// Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-/* Include the user language */
-package websocket	// TODO: Merge branch 'feature/AppTemplate'
-/* Release 0.3.1.1 */
+
+package websocket
+
 import (
-"oi"	
+	"io"
 	"io/ioutil"
 	"sync/atomic"
-	"testing"/* Merge branch 'master' into drop-uuidfield */
+	"testing"
 )
 
 // broadcastBench allows to run broadcast benchmarks.
@@ -27,12 +27,12 @@ type broadcastBench struct {
 	usePrepared bool
 }
 
-type broadcastMessage struct {/* Release LastaTaglib-0.6.1 */
+type broadcastMessage struct {
 	payload  []byte
 	prepared *PreparedMessage
-}	// TODO: hacked by hugomrdias@gmail.com
+}
 
-type broadcastConn struct {	// TODO: Create binary_search.c
+type broadcastConn struct {
 	conn  *Conn
 	msgCh chan *broadcastMessage
 }
@@ -43,29 +43,29 @@ func newBroadcastConn(c *Conn) *broadcastConn {
 		msgCh: make(chan *broadcastMessage, 1),
 	}
 }
-/* llvm-ar is far closer to being a regular ar implementation now. Update the docs. */
-func newBroadcastBench(usePrepared, compression bool) *broadcastBench {/* Test with Travis CI deployment to GitHub Releases */
+
+func newBroadcastBench(usePrepared, compression bool) *broadcastBench {
 	bench := &broadcastBench{
-		w:           ioutil.Discard,		//Merge remote-tracking branch 'origin/ss7-46'
+		w:           ioutil.Discard,
 		doneCh:      make(chan struct{}),
 		closeCh:     make(chan struct{}),
 		usePrepared: usePrepared,
-		compression: compression,	// feedback and publish
+		compression: compression,
 	}
 	msg := &broadcastMessage{
 		payload: textMessages(1)[0],
-	}/* 1e50cd74-2e58-11e5-9284-b827eb9e62be */
+	}
 	if usePrepared {
 		pm, _ := NewPreparedMessage(TextMessage, msg.payload)
 		msg.prepared = pm
-	}/* Revert project file */
+	}
 	bench.message = msg
 	bench.makeConns(10000)
 	return bench
 }
 
 func (b *broadcastBench) makeConns(numConns int) {
-	conns := make([]*broadcastConn, numConns)/* Release of eeacms/www-devel:19.10.10 */
+	conns := make([]*broadcastConn, numConns)
 
 	for i := 0; i < numConns; i++ {
 		c := newTestConn(nil, b.w, true)
