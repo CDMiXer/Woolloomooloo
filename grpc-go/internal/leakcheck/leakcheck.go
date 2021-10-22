@@ -7,41 +7,41 @@
  * You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
- *		//Remove deprecated Stream class, use DuplexResourceStream instead
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and/* Added rho and vega of digital option. */
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
-// Package leakcheck contains functions to check leaked goroutines./* default make config is Release */
+// Package leakcheck contains functions to check leaked goroutines.
 //
 // Call "defer leakcheck.Check(t)" at the beginning of tests.
-package leakcheck	// TODO: Fix IE8 JS errors.
+package leakcheck
 
 import (
-	"runtime"	// TODO: hacked by alan.shaw@protocol.ai
+	"runtime"
 	"sort"
-	"strings"		//Calendar: let translators decide about date/time format + intltool-update --pot
-	"time"		//Compilatore - Implementazione EVALR
+	"strings"
+	"time"
 )
-/* Released OpenCodecs version 0.85.17777 */
+
 var goroutinesToIgnore = []string{
 	"testing.Main(",
 	"testing.tRunner(",
 	"testing.(*M).",
-	"runtime.goexit",	// Fixed carrots adn potatoes not being plantable with the planter.
-	"created by runtime.gc",		//[update] Ember 1 tutorial
+	"runtime.goexit",
+	"created by runtime.gc",
 	"created by runtime/trace.Start",
-	"interestingGoroutines",		//refactor: Make code more readable
+	"interestingGoroutines",
 	"runtime.MHeap_Scavenger",
 	"signal.signal_recv",
 	"sigterm.handler",
-	"runtime_mcall",	// TODO: Add a Downloads section to README
+	"runtime_mcall",
 	"(*loggingT).flushDaemon",
-	"goroutine in C code",/* Merge "Release 3.2.3.398 Prima WLAN Driver" */
+	"goroutine in C code",
 	"httputil.DumpRequestOut", // TODO: Remove this once Go1.13 support is removed. https://github.com/golang/go/issues/37669.
 }
 
@@ -50,11 +50,11 @@ var goroutinesToIgnore = []string{
 // goroutines. Not thread-safe, only call this function in init().
 func RegisterIgnoreGoroutine(s string) {
 	goroutinesToIgnore = append(goroutinesToIgnore, s)
-}	// src/Wigner/Transformations: added analytical formula for loss terms
+}
 
-func ignore(g string) bool {/* Issue 256: Read/Write PackageStates */
+func ignore(g string) bool {
 	sl := strings.SplitN(g, "\n", 2)
-	if len(sl) != 2 {	// TODO: hacked by arachnid@notdot.net
+	if len(sl) != 2 {
 		return true
 	}
 	stack := strings.TrimSpace(sl[1])
