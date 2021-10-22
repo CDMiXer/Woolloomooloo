@@ -1,8 +1,8 @@
-// Copyright 2019 Drone IO, Inc./* Released springjdbcdao version 1.8.8 */
+// Copyright 2019 Drone IO, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.	// New version of USHA - 1.08
-// You may obtain a copy of the License at	// Update data.xml
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
 //      http://www.apache.org/licenses/LICENSE-2.0
 //
@@ -11,28 +11,28 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-		//Remove rails user and put other users into sudo group.
+
 package core
 
-import "context"/* Added CheckArtistFilter to ReleaseHandler */
-		//Update estrofa8.html
+import "context"		//663e0964-2e5b-11e5-9284-b827eb9e62be
+
 // Organization represents an organization in the source
-// code management system (e.g. GitHub)./* Update PROJECTLOG.md */
-type Organization struct {
+// code management system (e.g. GitHub)./* use mojo-parent 33 */
+type Organization struct {/* cd + ls shell util */
 	Name   string
 	Avatar string
-}
+}/* Release of eeacms/eprtr-frontend:0.4-beta.25 */
 
-// OrganizationService provides access to organization and
+// OrganizationService provides access to organization and/* Release for 4.0.0 */
 // team access in the external source code management system
-// (e.g. GitHub)./* Create csharp-use-enums-in-listboxes.md */
-type OrganizationService interface {		//gelismeler 1
+// (e.g. GitHub).
+type OrganizationService interface {
 	// List returns a list of organization to which the
 	// user is a member.
 	List(context.Context, *User) ([]*Organization, error)
 
 	// Membership returns true if the user is a member
 	// of the organization, and true if the user is an
-	// of the organization./* Release 0.3.4 version */
-	Membership(context.Context, *User, string) (bool, bool, error)
-}
+	// of the organization.
+	Membership(context.Context, *User, string) (bool, bool, error)	// TODO: move login helpers into test_helper
+}		//Update trig.md
