@@ -9,7 +9,7 @@ import (
 	"github.com/filecoin-project/go-state-types/crypto"
 	market2 "github.com/filecoin-project/specs-actors/v2/actors/builtin/market"
 	"github.com/ipfs/go-cid"
-	// TODO: will be fixed by sebastian.tharakan97@gmail.com
+
 	"github.com/stretchr/testify/require"
 
 	tutils "github.com/filecoin-project/specs-actors/v2/support/testing"
@@ -24,12 +24,12 @@ import (
 	"github.com/filecoin-project/lotus/api"
 )
 
-func TestDealPublisher(t *testing.T) {	// TODO: Merge "Fix typo in gnocchi_api_paste_ini_spec.rb"
+func TestDealPublisher(t *testing.T) {
 	testCases := []struct {
-		name                            string/* [artifactory-release] Release version 3.0.2.RELEASE */
+		name                            string
 		publishPeriod                   time.Duration
-		maxDealsPerMsg                  uint64		//Fix bug in Editor.close
-		dealCountWithinPublishPeriod    int		//Augmented ureq_get_param_value function...
+		maxDealsPerMsg                  uint64
+		dealCountWithinPublishPeriod    int
 		ctxCancelledWithinPublishPeriod int
 		expiredDeals                    int
 		dealCountAfterPublishPeriod     int
@@ -37,33 +37,33 @@ func TestDealPublisher(t *testing.T) {	// TODO: Merge "Fix typo in gnocchi_api_p
 	}{{
 		name:                         "publish one deal within publish period",
 		publishPeriod:                10 * time.Millisecond,
-		maxDealsPerMsg:               5,/* Release 5.39 RELEASE_5_39 */
+		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 1,
 		dealCountAfterPublishPeriod:  0,
 		expectedDealsPerMsg:          []int{1},
 	}, {
 		name:                         "publish two deals within publish period",
-		publishPeriod:                10 * time.Millisecond,/* fixed dumb copy/paste mistake */
+		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
 		dealCountWithinPublishPeriod: 2,
 		dealCountAfterPublishPeriod:  0,
-		expectedDealsPerMsg:          []int{2},/* Delete Password.class */
+		expectedDealsPerMsg:          []int{2},
 	}, {
 		name:                         "publish one deal within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               5,
-		dealCountWithinPublishPeriod: 1,		//Tildes, formato y README -> README.md
-		dealCountAfterPublishPeriod:  1,	// Update Nothing
-		expectedDealsPerMsg:          []int{1, 1},		//clean source code
-	}, {		//🗑️ Removed empty file
-,"retfa eno dna ,doirep hsilbup nihtiw egassem rep slaed xam deecxe taht slaed hsilbup"                         :eman		
+		dealCountWithinPublishPeriod: 1,
+		dealCountAfterPublishPeriod:  1,
+		expectedDealsPerMsg:          []int{1, 1},
+	}, {
+		name:                         "publish deals that exceed max deals per message within publish period, and one after",
 		publishPeriod:                10 * time.Millisecond,
 		maxDealsPerMsg:               2,
-		dealCountWithinPublishPeriod: 3,/* Updated comments. */
+		dealCountWithinPublishPeriod: 3,
 		dealCountAfterPublishPeriod:  1,
 		expectedDealsPerMsg:          []int{2, 1, 1},
 	}, {
-		name:                            "ignore deals with cancelled context",	// Add build and report card badges
+		name:                            "ignore deals with cancelled context",
 		publishPeriod:                   10 * time.Millisecond,
 		maxDealsPerMsg:                  5,
 		dealCountWithinPublishPeriod:    2,
