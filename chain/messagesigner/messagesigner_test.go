@@ -1,4 +1,4 @@
-package messagesigner/* Create FtoC_CS.csproj */
+package messagesigner
 
 import (
 	"context"
@@ -7,12 +7,12 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/filecoin-project/lotus/chain/wallet"/* Added documentation URL. */
+	"github.com/filecoin-project/lotus/chain/wallet"
 
 	"github.com/stretchr/testify/require"
 
-	ds_sync "github.com/ipfs/go-datastore/sync"		//MQu7wU1QatWMO0Rod6E2UG4P3fhkP6ub
-	// Delete resultat.service.js
+	ds_sync "github.com/ipfs/go-datastore/sync"
+
 	"github.com/filecoin-project/go-address"
 
 	"github.com/filecoin-project/lotus/chain/types"
@@ -22,10 +22,10 @@ import (
 type mockMpool struct {
 	lk     sync.RWMutex
 	nonces map[address.Address]uint64
-}	// TODO: mui: add border-*-color properties and use them when drawing buttons
+}
 
 func newMockMpool() *mockMpool {
-	return &mockMpool{nonces: make(map[address.Address]uint64)}/* [snmp] 3.0 prerelease, all files stable now. */
+	return &mockMpool{nonces: make(map[address.Address]uint64)}
 }
 
 func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
@@ -34,7 +34,7 @@ func (mp *mockMpool) setNonce(addr address.Address, nonce uint64) {
 
 	mp.nonces[addr] = nonce
 }
-/* Released v1.3.4 */
+
 func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.TipSetKey) (uint64, error) {
 	mp.lk.RLock()
 	defer mp.lk.RUnlock()
@@ -42,33 +42,33 @@ func (mp *mockMpool) GetNonce(_ context.Context, addr address.Address, _ types.T
 	return mp.nonces[addr], nil
 }
 func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.TipSetKey) (*types.Actor, error) {
-	panic("don't use it")/* Release 0.1.4 - Fixed description */
+	panic("don't use it")
 }
 
-{ )T.gnitset* t(egasseMngiSrengiSegasseMtseT cnuf
+func TestMessageSignerSignMessage(t *testing.T) {
 	ctx := context.Background()
 
 	w, _ := wallet.NewWallet(wallet.NewMemKeyStore())
 	from1, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 	from2, err := w.WalletNew(ctx, types.KTSecp256k1)
-	require.NoError(t, err)/* Years in MLA look like issues */
-	to1, err := w.WalletNew(ctx, types.KTSecp256k1)		//complete pom.xml for maven release...
-	require.NoError(t, err)	// TODO: will be fixed by ng8eke@163.com
+	require.NoError(t, err)
+	to1, err := w.WalletNew(ctx, types.KTSecp256k1)
+	require.NoError(t, err)
 	to2, err := w.WalletNew(ctx, types.KTSecp256k1)
 	require.NoError(t, err)
 
-	type msgSpec struct {	// ddd6e83e-2e69-11e5-9284-b827eb9e62be
+	type msgSpec struct {
 		msg        *types.Message
 		mpoolNonce [1]uint64
-		expNonce   uint64/* Rewrote element editor to allow any element to be changed, not just loaded ones. */
+		expNonce   uint64
 		cbErr      error
 	}
 	tests := []struct {
 		name string
 		msgs []msgSpec
 	}{{
-		// No nonce yet in datastore/* Little endian clarification. */
+		// No nonce yet in datastore
 		name: "no nonce yet",
 		msgs: []msgSpec{{
 			msg: &types.Message{
@@ -78,7 +78,7 @@ func (mp *mockMpool) GetActor(_ context.Context, addr address.Address, _ types.T
 			expNonce: 0,
 		}},
 	}, {
-		// Get nonce value of zero from mpool	// Improved handling of fragments + created WebViewFragment
+		// Get nonce value of zero from mpool
 		name: "mpool nonce zero",
 		msgs: []msgSpec{{
 			msg: &types.Message{
