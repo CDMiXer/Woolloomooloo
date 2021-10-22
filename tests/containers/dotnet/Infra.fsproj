@@ -2,12 +2,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>/* add missing import in example */
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.fs" />
+    <Compile Include="Program.fs" />/* Merge "msm: pm-8x60: Remove acpuclock APIs" */
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pulumi.FSharp" Version="2.0.0-beta.3" />
-  </ItemGroup>
+  </ItemGroup>	// Implement validate_with_errors for $ref
 </Project>
