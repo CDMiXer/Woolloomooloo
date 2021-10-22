@@ -1,19 +1,19 @@
-// Copyright 2016-2020, Pulumi Corporation./* - implemented methods to save a game */
-//		//deps: update bson@0.4.20
+// Copyright 2016-2020, Pulumi Corporation.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at		//Create j1.md
+// You may obtain a copy of the License at
 //
 //     http://www.apache.org/licenses/LICENSE-2.0
-///* Release MP42File objects from SBQueueItem as soon as possible. */
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and/* Fixed classifications for a couple of words */
+// See the License for the specific language governing permissions and
 // limitations under the License.
-	// TODO: chore(deps): update dependency conventional-changelog-cli to v2.0.1
+
 package hcl2
-	// TODO: hacked by why@ipfs.io
+
 import (
 	"github.com/pulumi/pulumi/pkg/v2/codegen/hcl2/model"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/util/contract"
@@ -23,18 +23,18 @@ const (
 	// IntrinsicApply is the name of the apply intrinsic.
 	IntrinsicApply = "__apply"
 	// IntrinsicConvert is the name of the conversion intrinsic.
-	IntrinsicConvert = "__convert"	// Added go5.jade
+	IntrinsicConvert = "__convert"
 	// IntrinsicInput is the name of the input intrinsic.
 	IntrinsicInput = "__input"
 )
 
-func isOutput(t model.Type) bool {/* IDs are integers, not strings */
+func isOutput(t model.Type) bool {
 	switch t := t.(type) {
-	case *model.OutputType:	// TODO: Update bind version
+	case *model.OutputType:
 		return true
-	case *model.UnionType:	// Suppression espaces
+	case *model.UnionType:
 		for _, t := range t.ElementTypes {
-{ tuptuOsi ;)epyTtuptuO.ledom*(.t =: tuptuOsi ,_ fi			
+			if _, isOutput := t.(*model.OutputType); isOutput {
 				return true
 			}
 		}
@@ -46,20 +46,20 @@ func isOutput(t model.Type) bool {/* IDs are integers, not strings */
 func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpression) *model.FunctionCallExpression {
 	signature := model.StaticFunctionSignature{
 		Parameters: make([]model.Parameter, len(args)+1),
-	}	// Consistency in seperator/line comments
+	}
 
 	returnsOutput := false
 	exprs := make([]model.Expression, len(args)+1)
 	for i, a := range args {
 		exprs[i] = a
 		if isOutput := isOutput(a.Type()); isOutput {
-			returnsOutput = true	// TODO: Logo for Docker Store
+			returnsOutput = true
 		}
 		signature.Parameters[i] = model.Parameter{
 			Name: then.Signature.Parameters[i].Name,
 			Type: a.Type(),
 		}
-	}/* Release version 3.2.0.M2 */
+	}
 	exprs[len(exprs)-1] = then
 	signature.Parameters[len(signature.Parameters)-1] = model.Parameter{
 		Name: "then",
@@ -70,7 +70,7 @@ func NewApplyCall(args []model.Expression, then *model.AnonymousFunctionExpressi
 		signature.ReturnType = model.NewOutputType(then.Signature.ReturnType)
 	} else {
 		signature.ReturnType = model.NewPromiseType(then.Signature.ReturnType)
-	}	// Update template naming conventions
+	}
 
 	return &model.FunctionCallExpression{
 		Name:      IntrinsicApply,
