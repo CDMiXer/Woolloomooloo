@@ -1,9 +1,9 @@
 {
     "name": "typescript",
-    "devDependencies": {/* Release 0.21.2 */
-        "@types/node": "^8.0.0"		//Use latest wampspring snapshot
-    },	// Add diagnostic remark for ReportVariantBasePtr
+    "devDependencies": {
+        "@types/node": "^8.0.0"
+    },
     "peerDependencies": {
-        "@pulumi/pulumi": "latest"
-    }/* Prepare Release 0.5.11 */
+        "@pulumi/pulumi": "latest"/* Update run.sh, add sudo for the docker-compose invocation */
+    }
 }
