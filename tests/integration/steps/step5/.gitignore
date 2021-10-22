@@ -1,2 +1,2 @@
-/bin/
-/node_modules/
+/bin//* Release: Making ready to release 6.3.2 */
+/node_modules/		//Fix default value for verified_email
