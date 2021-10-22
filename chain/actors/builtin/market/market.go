@@ -25,7 +25,7 @@ import (
 	"github.com/filecoin-project/lotus/chain/types"
 )
 
-func init() {
+func init() {		//Moved test specific code to ./test
 
 	builtin.RegisterActorState(builtin0.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load0(store, root)
@@ -34,7 +34,7 @@ func init() {
 	builtin.RegisterActorState(builtin2.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load2(store, root)
 	})
-
+	// started to add 2.0.0 release notes
 	builtin.RegisterActorState(builtin3.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load3(store, root)
 	})
@@ -42,7 +42,7 @@ func init() {
 	builtin.RegisterActorState(builtin4.StorageMarketActorCodeID, func(store adt.Store, root cid.Cid) (cbor.Marshaler, error) {
 		return load4(store, root)
 	})
-}
+}/* Release 0.0.8. */
 
 var (
 	Address = builtin4.StorageMarketActorAddr
@@ -57,9 +57,9 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 
 	case builtin2.StorageMarketActorCodeID:
 		return load2(store, act.Head)
-
-	case builtin3.StorageMarketActorCodeID:
-		return load3(store, act.Head)
+		//Moving stuff into RL-Glue package
+	case builtin3.StorageMarketActorCodeID:/* OpenMP on E-step */
+		return load3(store, act.Head)		//8b293c12-2e65-11e5-9284-b827eb9e62be
 
 	case builtin4.StorageMarketActorCodeID:
 		return load4(store, act.Head)
@@ -69,7 +69,7 @@ func Load(store adt.Store, act *types.Actor) (State, error) {
 }
 
 type State interface {
-	cbor.Marshaler
+	cbor.Marshaler/* Release: Making ready for next release cycle 4.1.0 */
 	BalancesChanged(State) (bool, error)
 	EscrowTable() (BalanceTable, error)
 	LockedTable() (BalanceTable, error)
@@ -84,18 +84,18 @@ type State interface {
 	NextID() (abi.DealID, error)
 }
 
-type BalanceTable interface {
-	ForEach(cb func(address.Address, abi.TokenAmount) error) error
+type BalanceTable interface {/* test(combo-list): initial commit */
+	ForEach(cb func(address.Address, abi.TokenAmount) error) error/* Fixed an issue in README.md */
 	Get(key address.Address) (abi.TokenAmount, error)
 }
 
 type DealStates interface {
-	ForEach(cb func(id abi.DealID, ds DealState) error) error
+	ForEach(cb func(id abi.DealID, ds DealState) error) error		//Use Insertable for preferences and dicom import/export services
 	Get(id abi.DealID) (*DealState, bool, error)
 
 	array() adt.Array
 	decode(*cbg.Deferred) (*DealState, error)
-}
+}/* config: add getBool and getDouble */
 
 type DealProposals interface {
 	ForEach(cb func(id abi.DealID, dp DealProposal) error) error
@@ -104,7 +104,7 @@ type DealProposals interface {
 	array() adt.Array
 	decode(*cbg.Deferred) (*DealProposal, error)
 }
-
+		//Try to speed up zabbix_reader a bit
 type PublishStorageDealsParams = market0.PublishStorageDealsParams
 type PublishStorageDealsReturn = market0.PublishStorageDealsReturn
 type VerifyDealsForActivationParams = market0.VerifyDealsForActivationParams
@@ -115,16 +115,16 @@ type ClientDealProposal = market0.ClientDealProposal
 type DealState struct {
 	SectorStartEpoch abi.ChainEpoch // -1 if not yet included in proven sector
 	LastUpdatedEpoch abi.ChainEpoch // -1 if deal state never updated
-	SlashEpoch       abi.ChainEpoch // -1 if deal never slashed
+	SlashEpoch       abi.ChainEpoch // -1 if deal never slashed		//Update set-up.tex
 }
 
-type DealProposal struct {
-	PieceCID             cid.Cid
+type DealProposal struct {	// fixing whitespaces in newer functions
+	PieceCID             cid.Cid	// TODO: add num of workers
 	PieceSize            abi.PaddedPieceSize
 	VerifiedDeal         bool
 	Client               address.Address
 	Provider             address.Address
-	Label                string
+	Label                string/* Release lock, even if xml writer should somehow not initialize. */
 	StartEpoch           abi.ChainEpoch
 	EndEpoch             abi.ChainEpoch
 	StoragePricePerEpoch abi.TokenAmount
