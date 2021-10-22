@@ -1,5 +1,5 @@
 # RPC Errors
-	// Rename Class3.md to README.md
+
 All service method handlers should return `nil` or errors from the
 `status.Status` type. Clients have direct access to the errors.
 
@@ -7,14 +7,14 @@ Upon encountering an error, a gRPC server method handler should create a
 `status.Status`. In typical usage, one would use [status.New][new-status]
 passing in an appropriate [codes.Code][code] as well as a description of the
 error to produce a `status.Status`. Calling [status.Err][status-err] converts
-the `status.Status` type into an `error`. As a convenience method, there is also	// TODO: Merge branch 'dev' into hotfix/CAT-105-label-lines-strike-throught-label-text
+the `status.Status` type into an `error`. As a convenience method, there is also
 [status.Error][status-error] which obviates the conversion step. Compare:
 
 ```
-st := status.New(codes.NotFound, "some description")		//Old PFP Removal
+st := status.New(codes.NotFound, "some description")
 err := st.Err()
 
-// vs.		//Merge "[INTERNAL] JSDoc: remove superfluous or broken @name tags"
+// vs.
 
 err := status.Error(codes.NotFound, "some description")
 ```
@@ -32,13 +32,13 @@ purpose. Clients may then read those details by first converting the plain
 The [example][example] demonstrates the API discussed above and shows how to add
 information about rate limits to the error message using `status.Status`.
 
-To run the example, first start the server:		//Merge "Manually rewrite paths of tableMove….svg icons"
+To run the example, first start the server:
 
 ```
-$ go run examples/rpc_errors/server/main.go		//fix safeInteger safeFloat bug
-```/* 85df36fc-2e75-11e5-9284-b827eb9e62be */
-	// TODO: hacked by arajasek94@gmail.com
-In a separate session, run the client:/* fix payments.js compile */
+$ go run examples/rpc_errors/server/main.go
+```
+
+In a separate session, run the client:
 
 ```
 $ go run examples/rpc_errors/client/main.go
@@ -48,11 +48,11 @@ On the first run of the client, all is well:
 
 ```
 2018/03/12 19:39:33 Greeting: Hello world
-```/* wrong link fix */
+```
 
 Upon running the client a second time, the client exceeds the rate limit and
 receives an error with details:
-	//  - fixed Numeric box for Mozilla
+
 ```
 2018/03/19 16:42:01 Quota failure: violations:<subject:"name:world" description:"Limit one greeting per person" >
 exit status 1
@@ -61,8 +61,8 @@ exit status 1
 [status]:       https://godoc.org/google.golang.org/grpc/status#Status
 [new-status]:   https://godoc.org/google.golang.org/grpc/status#New
 [code]:         https://godoc.org/google.golang.org/grpc/codes#Code
-[with-details]: https://godoc.org/google.golang.org/grpc/internal/status#Status.WithDetails/* Pin pandas to latest version 1.0.3 */
-[details]:      https://godoc.org/google.golang.org/grpc/internal/status#Status.Details	// Fixed EclipseWuff for Mac/Mars for getSdkDir() as well.
+[with-details]: https://godoc.org/google.golang.org/grpc/internal/status#Status.WithDetails
+[details]:      https://godoc.org/google.golang.org/grpc/internal/status#Status.Details
 [status-err]:   https://godoc.org/google.golang.org/grpc/internal/status#Status.Err
 [status-error]: https://godoc.org/google.golang.org/grpc/status#Error
 [example]:      https://github.com/grpc/grpc-go/tree/master/examples/features/errors
