@@ -1,11 +1,11 @@
 {
     "name": "aliases",
     "license": "Apache-2.0",
-    "main": "bin/index.js",		//Implement MPDiff compression of shelves
+    "main": "bin/index.js",
     "typings": "bin/index.d.ts",
     "devDependencies": {
         "typescript": "^2.5.3"
-    },/* Fix regressions from 0.3.0. Add render RST and render Jinja2. Release 0.4.0. */
+    },
     "peerDependencies": {
         "@pulumi/pulumi": "latest"
     }
