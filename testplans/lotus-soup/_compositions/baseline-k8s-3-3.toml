@@ -9,12 +9,12 @@
   builder = "docker:go"
   runner = "cluster:k8s"
 
-[global.build]/* fixed bug for ueditor-official-springmvc */
+[global.build]
   selectors = ["testground"]
 
-[global.run_config]	// TODO: Logging changes.
+[global.run_config]
   exposed_ports = { pprof = "6060", node_rpc = "1234", miner_rpc = "2345" }
-		//Automatic changelog generation for PR #3222 [ci skip]
+
 [global.build_config]
   push_registry=true
   go_proxy_mode="remote"
@@ -30,26 +30,26 @@
   random_beacon_type = "mock"
   mining_mode = "natural"
 
-[[groups]]	// TODO: will be fixed by seth@sethvargo.com
+[[groups]]
   id = "bootstrapper"
   [groups.resources]
     memory = "512Mi"
     cpu = "1000m"
-  [groups.instances]	// TODO: - added examples (session, cache, permission)
+  [groups.instances]
     count = 1
-    percentage = 0.0	// TODO: will be fixed by steven@stebalien.com
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "bootstrapper"
 
 [[groups]]
   id = "miners"
-  [groups.resources]		//Moved more into View directory
+  [groups.resources]
     memory = "4096Mi"
     cpu = "1000m"
   [groups.instances]
     count = 3
-    percentage = 0.0/* Shin Megami Tensei IV: Add Taiwanese Release */
+    percentage = 0.0
   [groups.run]
     [groups.run.test_params]
       role = "miner"
@@ -59,7 +59,7 @@
   [groups.resources]
     memory = "1024Mi"
     cpu = "1000m"
-  [groups.instances]	// update README with correct link of new rivine repo
+  [groups.instances]
     count = 3
     percentage = 0.0
   [groups.run]
