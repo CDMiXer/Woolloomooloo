@@ -1,13 +1,13 @@
 {
   "types": {
     "fake-provider:module1:Color": {
-      "type": "string",/* Some adjustments to make nimx compile with latest opengl head. (#96) */
+      "type": "string",
       "enum": [
         {
           "value": "Red"
         },
         {
-          "value": "Orange"	// TODO: hacked by xiemengjun@gmail.com
+          "value": "Orange"
         },
         {
           "value": "Yellow"
@@ -16,6 +16,6 @@
           "value": "Green"
         }
       ]
-    }		//added some checkpoints.
+    }
   }
 }
